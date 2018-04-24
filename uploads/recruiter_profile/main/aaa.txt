@@ -1,0 +1,19 @@
+Name:  Firstname Lastname 
+
+Emailaddress : 
+
+Address : Country State City 
+
+Mobile Number : optional 
+
+Education : Dropdown 
+		
+	   + Add more education
+
+Skills:  
+
+
+Work experience :  Fresher Experience (tab)
+
+
+Make A resume  :  optional 
