@@ -594,14 +594,12 @@
                                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
                                             </a>
                                         </div>
-                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                            <div class="post-img" ng-if="contact.user_image == ''">
-                                                <div class="post-img-mainuser">
-                                                    {{contact.first_name| limitTo:1 | uppercase}}{{contact.last_name| limitTo:1 | uppercase}}
-                                                </div>
-                                            
-                                            </div>
-                                        </a>
+                                        <div class="post-img" ng-if="contact.user_image == ''">
+                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                                <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
+                                        </div>
                                         <div class="user-list-detail">
                                             <p class="contact-name"><a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)"></a></p>
                                             <p class="contact-designation">
