@@ -1,4 +1,3 @@
-
 app.directive('ddTextCollapse', ['$compile', function($compile) {
 
     return {
@@ -123,6 +122,12 @@ app.directive('pTextCollapse', ['$compile', function($compile) {
 app.filter('wordFirstCase', function () {
     return function (text) {
         return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
+app.filter('removeLastCharacter', function () {
+    return function (text) {
+        return text.substr(0, text.lastIndexOf(".") + 1);
+        //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
 });
 app.filter('slugify', function () {
@@ -296,26 +301,74 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }
     });
 
-    $(document)  
-      .on('show.bs.modal', '.modal', function(event) {
+    $(document)
+    .on('show.bs.modal', '.modal', function(event) {
         $(this).appendTo($('body'));
-      })
-      .on('shown.bs.modal', '.modal.in', function(event) {
+    })
+    .on('shown.bs.modal', '.modal.in', function(event) {
         setModalsAndBackdropsOrder();
-      })
-      .on('hidden.bs.modal', '.modal', function(event) {
+    })
+    .on('hidden.bs.modal', '.modal', function(event) {
         setModalsAndBackdropsOrder();
-      });
+    });
 
     function setModalsAndBackdropsOrder() {  
-      var modalZIndex = 1040;
-      $('.modal.in').each(function(index) {
-        var $modal = $(this);
-        modalZIndex++;
-        $modal.css('zIndex', modalZIndex);
-        $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
-    });
-      $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
+        var modalZIndex = 1040;
+        $('.modal.in').each(function(index) {
+            var $modal = $(this);
+            modalZIndex++;
+            $modal.css('zIndex', modalZIndex);
+            $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
+        });
+        $('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
+    }
+
+    $scope.openModal2 = function(myModal2Id) {        
+        document.getElementById(myModal2Id).style.display = "block";
+        $("body").addClass("modal-open");
+    };
+    $scope.closeModal2 = function(myModal2Id) {    
+        document.getElementById(myModal2Id).style.display = "none";
+        $("body").removeClass("modal-open");
+    };
+    $scope.plusSlides2 = function(n,myModal2Id) {    
+        showSlides2(slideIndex += n,myModal2Id);
+    };
+    $scope.currentSlide2 = function(n,myModal2Id) {    
+        showSlides2(slideIndex = n,myModal2Id);
+    };
+    function showSlides2(n,myModal2Id) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides2"+myModal2Id);
+        //var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        var elem = $("#element_load_"+slideIndex);
+        $("#myModal"+myModal2Id+" #all_image_loader").hide();
+
+        if (!elem.prop('complete')) {
+            $("#myModal"+myModal2Id+" #all_image_loader").show();
+            elem.on('load', function() {
+                $("#myModal"+myModal2Id+" #all_image_loader").hide();
+                // console.log("Loaded!");
+                // console.log(this.complete);
+            });
+        } 
+        /*for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }*/
+        slides[slideIndex - 1].style.display = "block";
+        //dots[slideIndex - 1].className += " active";
+        //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 
     $(document).on('keydown', function (e) {
@@ -705,7 +758,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 isLoadingData = true;
             }
 
-            $('video,audio').mediaelementplayer(/* Options */);
+            //$('video,audio').mediaelementplayer(/* Options */);
         }, function (error) {});
     }
 
@@ -747,7 +800,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 isLoadingData = true;
             }
 
-            $('video,audio').mediaelementplayer(/* Options */);
+            //$('video,audio').mediaelementplayer(/* Options */);
         }, function (error) {});
     }
 
@@ -1652,7 +1705,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                     }
                     else
                     {
-                        if(pdfExt == true && description == '')
+                        if(pdfExt == true && (description == '' || description == undefined || description == ' '))
                         {
                             $('.biderror .mes').html("<div class='pop_content'>Please Enter PDF Title.");
                             $('#posterrormodal').modal('show');
@@ -1687,8 +1740,6 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         return false;
                     }
                 }
-
-
 
                 for (var i = 0; i < fileCountSim; i++)
                 {
@@ -2150,7 +2201,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $("div[id^=ask-que-]").show();
         $("div[id^=edit-ask-que-]").hide();
         $("div[id^=main-post-]  .post-images").show();
-        
+
         $("#main-post-"+post_id+ " .post-images").hide();
         if(post_for == "simple")
         {
@@ -2382,12 +2433,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    if (data.message == '1') {
-                        $scope.postData.splice(index, 1);
-                    }
-                });
+        .then(function (success) {
+            data = success.data;
+            if (data.message == '1') {
+                //$scope.postData.splice(index, 1);
+                getUserPost();
+            }
+        });
     }
 
 //    function check_no_post_data() {
