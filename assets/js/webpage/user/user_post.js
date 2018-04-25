@@ -2157,10 +2157,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         {
             var edit_location = [];
             var edit_jobtitle = [];
-            var opportunity = $scope.postData[index].opportunity_data.opportunity//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
+            var opportunity = $scope.postData[index].opportunity_data.opportunity;//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
             var job_title = $('#opp-post-opportunity-for-' + post_id).html().split(",");
             var city_names = $('#opp-post-location-' + post_id).html().split(",");
-            var field = $('#opp-post-field-' + post_id).html()
+            var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html();
             if(opportunity != "" && opportunity != undefined)
             {
                 //$("#description_edit_" + post_id).val(opportunity.replace(/(<([^>]+)>)/ig,""));
@@ -2199,6 +2199,19 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $("#edit-opp-post-"+post_id).show();
             $('#post-opp-detail-' + post_id).hide();   
 
+        }
+    }
+
+    $scope.cancelPostEditNew = function (post_id, post_for, index) {
+        if(post_for == "simple")
+        {
+            $("#edit-simple-post-"+post_id).hide();
+            $('#simple-post-description-' + post_id).show();
+        }
+        else if(post_for == "opportunity")
+        {
+            $("#edit-opp-post-"+post_id).hide();
+            $('#post-opp-detail-' + post_id).show();
         }
     }
 
