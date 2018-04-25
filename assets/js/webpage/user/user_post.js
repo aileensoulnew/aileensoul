@@ -1138,11 +1138,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $scope.opp.field = '';
                                 $scope.opp.postfiles = '';
                                 document.getElementById('fileInput').value = '';
-                                $('#job_title').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-                                $('#job_title').css('width', '100%');
+                                $('#job_title .input').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
+                                $('#job_title .input').css('width', '100%');
 
-                                $('#location').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-                                $('#location').css('width', '100%');
+                                $('#location .input').attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
+                                $('#location .input').css('width', '100%');
 
 
                                 $("#post_opportunity")[0].reset();
