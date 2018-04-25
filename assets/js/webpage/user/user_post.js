@@ -1235,17 +1235,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $("#post_opportunity_edit")[0].reset();
 
                                 $("#edit-opp-post-"+post_id).hide();
-                                $('#post-opp-detail-' + post_id).show();   
-                                // $('#opp-post-opportunity-for-' + post_id).html(success.data.opp_opportunity_for);
-                                // $('#opp-post-location-' + post_id).html(success.data.opp_location);
-                                // $('#opp-post-field-' + post_id).html(success.data.opp_field);
-                                // $('#opp-post-opportunity-' + post_id).html(success.data.opportunity);
-
-                                //                                $scope.opp.description = '';
-                                //                                $scope.opp.job_title = '';
-                                //                                $scope.opp.location = '';
-                                //                                $scope.opp.field = '';
-                                //                                $scope.opp.postfiles = '';
+                                $('#post-opp-detail-' + post_id).show();
+                                $("#main-post-"+post_id+ " .post-images").show();
                             }
 
                         });
@@ -1280,10 +1271,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }
 
 
-    $scope.ask_question_check = function (event) {
+    $scope.ask_question_check = function (event,postIndex = -1) {
 
-        if (document.getElementById("ask_edit_post_id")) {
-            var post_id = document.getElementById("ask_edit_post_id").value;
+        if (document.getElementById("ask_edit_post_id_"+postIndex)) {
+            var post_id = document.getElementById("ask_edit_post_id_"+postIndex).value;
         } else {
             var post_id = 0;
         }
@@ -1437,11 +1428,33 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             }
 
         } else {
+            var ask_que = document.getElementById("ask_que_"+post_id).value;
+            var ask_que = ask_que.trim();
 
-            var field = document.getElementById("ask_field").value;
-            var description = document.getElementById("ask_que").value;
-            var description = description.trim();
-            if ((field == '') || (description == ''))
+            if($scope.IsVisible == true)
+            {                
+                var ask_web_link = $("#ask_web_link_"+post_id).val();
+            }
+            else
+            {
+                var ask_web_link = "";
+            }
+            var ask_que_desc = $('#ask_que_desc_' + post_id).val();
+            /*ask_que_desc = ask_que_desc.replace(/&nbsp;/gi, " ");
+            ask_que_desc = ask_que_desc.replace(/<br>$/, '');
+            ask_que_desc = ask_que_desc.replace(/&gt;/gi, ">");
+            ask_que_desc = ask_que_desc.replace(/&/g, "%26");*/
+            ask_que_desc = ask_que_desc.trim();
+            var related_category_edit = $scope.ask.related_category_edit;
+            var edit_fields = $("#ask_field_"+post_id).val();  
+            if(edit_fields == 0)
+                var ask_other = $("#ask_other_"+post_id).val();
+            else
+                var ask_other = "";
+
+            var ask_is_anonymously = ($("#ask_is_anonymously"+post_id+":checked").length > 0 ? 1 : 0);            
+            
+            if ((edit_fields == '') || (ask_que == ''))
             {
                 $('#post .mes').html("<div class='pop_content'>Ask question and Field is required.");
                 $('#post').modal('show');
@@ -1451,21 +1464,21 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         $('.modal-post').show();
                     }
                 });
-                event.preventDefault();
+                //event.preventDefault();
                 return false;
             } else {
 
 
                 var form_data = new FormData();
 
-                form_data.append('question', $scope.ask.ask_que);
-                form_data.append('description', $scope.ask.ask_description);
-                form_data.append('field', $scope.ask.ask_field);
-                form_data.append('other_field', $scope.ask.otherField);
-                form_data.append('category', JSON.stringify($scope.ask.related_category));
-                form_data.append('weblink', $scope.ask.web_link);
-                form_data.append('post_for', $scope.ask.post_for);
-                form_data.append('is_anonymously', $scope.ask.is_anonymously);
+                form_data.append('question', ask_que);
+                form_data.append('description', ask_que_desc);
+                form_data.append('field', edit_fields);
+                form_data.append('other_field', ask_other);
+                form_data.append('category', JSON.stringify(related_category_edit));
+                form_data.append('weblink', ask_web_link);
+                form_data.append('post_for', "question");
+                form_data.append('is_anonymously', ask_is_anonymously);
                 form_data.append('post_id', post_id);
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
@@ -1478,32 +1491,19 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         })
                         .then(function (success) {
                             if (success) {
-                                if (success.data.response == 1) {
+                                $("#edit-ask-que-"+post_id).hide();
+                                $("#ask-que-"+post_id).show();
+                                $("#main-post-"+post_id+ " .post-images").show();                                
+                                $scope.postData[postIndex].question_data = success.data.question_data;
+                                //$scope.getQuestions();
+                                /*if (success.data.response == 1) {
                                     $('#ask-post-question-' + post_id).html(success.data.ask_question);
                                     $('#ask-post-description-' + post_id).html(success.data.ask_description);
                                     //   $('#ask-post-link-' + post_id).html(success.data.opp_field);
                                     $('#ask-post-category-' + post_id).html(success.data.ask_category);
                                     $('#ask-post-field-' + post_id).html(success.data.ask_field);
-                                }
-                                $scope.opp.description = '';
-                                $scope.opp.job_title = '';
-                                $scope.opp.location = '';
-                                $scope.opp.field = '';
-                                $scope.opp.postfiles = '';
-                                document.getElementById('fileInput').value = '';
-
-                                $scope.ask.postfiles = '';
-                                $scope.ask.ask_que = '';
-                                $scope.ask.ask_description = '';
-                                $scope.ask.ask_field = '';
-                                $scope.ask.otherField = '';
-                                $scope.ask.related_category = '';
-                                $scope.ask.web_link = '';
-                                $scope.ask.post_for = '';
-                                $scope.ask.is_anonymously = '';
-
-                                $scope.postData.splice(0, 0, success.data[0]);
-                                $('video, audio').mediaelementplayer();
+                                }*/
+                                
                             }
                         });
             }
@@ -1959,7 +1959,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                             //$('#simple-post-description-' + post_id).attr("dd-text-collapse-text",success.data.sim_description);
                             $('#edit-simple-post-' + post_id).hide();
                             $('#simple-post-description-' + post_id).show();
-                            
+                            $("#main-post-"+post_id+ " .post-images").show();
                         }
                     }
                 });
@@ -2142,6 +2142,16 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }
 
     $scope.EditPostNew = function (post_id, post_for, index) {
+
+        $("span[id^=simple-post-description-]").show();
+        $("div[id^=edit-simple-post-]").hide();
+        $("div[id^=post-opp-detail-]").show();
+        $("div[id^=edit-opp-post-]").hide();
+        $("div[id^=ask-que-]").show();
+        $("div[id^=edit-ask-que-]").hide();
+        $("div[id^=main-post-]  .post-images").show();
+        
+        $("#main-post-"+post_id+ " .post-images").hide();
         if(post_for == "simple")
         {
             $("#edit-simple-post-"+post_id).show();
@@ -2196,9 +2206,86 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 //$('#description_edit_' + post_id).focus();                
                 setCursotToEnd(document.getElementById('description_edit_' + post_id));
             },100);
-            $("#edit-opp-post-"+post_id).show();
-            $('#post-opp-detail-' + post_id).hide();   
 
+            $("#edit-opp-post-"+post_id).show();
+            $('#post-opp-detail-' + post_id).hide();
+        }
+        else if(post_for == "question")
+        {
+            $('#ask-que-' + post_id).hide();
+            $("#edit-ask-que-"+post_id).show();
+            $("#ask_que_"+post_id).val($scope.postData[index].question_data.question);
+            $("#ask_que_desc_"+post_id).val($scope.postData[index].question_data.description);
+            if($scope.postData[index].question_data.link != "")
+            {                
+                $scope.IsVisible = true;
+                $("#ask_web_link_"+post_id).val($scope.postData[index].question_data.link);                
+            }
+            else
+            {
+                $("#ask_web_link_"+post_id).val("");  
+            }
+            var related_category = [];
+            var rel_category = $scope.postData[index].question_data.category.split(",");            
+            rel_category.forEach(function(element,catArrIndex) {
+              related_category[catArrIndex] = {"name":element};
+            });
+            $scope.ask.related_category_edit = related_category;
+            if(rel_category.length > 0)
+            {
+                $('#ask_related_category_edit'+post_id+' .input').attr('placeholder', '');
+                $('#ask_related_category_edit'+post_id+' .input').css('width', '200px');
+            }
+            $(document).on('focusin','#ask_related_category_edit'+post_id+' .input',function () {
+                if($('#ask_related_category_edit'+post_id+' ul li').length > 0)
+                {            
+                    $(this).attr('placeholder', '');
+                    $(this).css('width', '200px');
+                }
+            });
+            $(document).on('focusout','#ask_related_category_edit'+post_id+' .input',function () {
+                if($('#ask_related_category_edit'+post_id+' ul li').length > 0)
+                {             
+                    $(this).attr('placeholder', '');
+                    $(this).css('width', '200px');
+                }
+                if($('#ask_related_category_edit'+post_id+' ul li').length == 0)
+                {            
+                    $(this).attr('placeholder', 'Related Category');
+                    $(this).css('width', '200px');
+                }         
+            });
+
+            //$("#ask_related_category_edit"+post_id).val(related_category);
+
+            var ask_field = $scope.postData[index].question_data.field;
+
+            if(ask_field != null)
+            {                
+                $('[id=ask_field_'+post_id+'] option').filter(function() { 
+                    return ($(this).text() == ask_field);
+                }).prop('selected', true);
+            }
+            else
+            {                
+                $scope.ask.ask_field_edit = 0
+                var ask_other = $scope.postData[index].question_data.others_field;                
+                setTimeout(function(){                    
+                    $('[id=ask_field_'+post_id+'] option').filter(function() { 
+                        return ($(this).text() == 'Other');
+                    }).prop('selected', true);
+                    $("#ask_other_"+post_id).val(ask_other);
+                },100)
+            }
+
+            
+            // var editContent = $('#simple-post-description-' + post_id).attr("dd-text-collapse-text");
+            // $('#editPostTexBox-' + post_id).html(editContent);
+            // setTimeout(function(){
+            //     //$('#editPostTexBox-' + post_id).focus();
+            //     setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
+            // },100);
+            
         }
     }
 
