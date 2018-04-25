@@ -86,6 +86,7 @@
 .post-box-bottom ul{padding:5px 0 0; margin:0; float:left;}
 .post-box-bottom ul li{list-style-type:none; display:inline-block;}
 .post-box-bottom ul li a{color:#5c5c5c;}
+.post-box-bottom ul li a img{width:24px;}
 .post-box-bottom ul li a span{display: inline-block; vertical-align: middle; padding-left:10px;}
 .post-box-bottom ul li a span span{padding-left:0;}
 .post-box-bottom ul li a span span.none-479{padding-right: 1px;}
