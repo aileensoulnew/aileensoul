@@ -427,9 +427,7 @@ class User_post extends MY_Controller {
 
         $error = '';
         if ($post_for == 'opportunity') {
-            if ($description == '') {
-                $error = 1;
-            } elseif ($field <= -1) {
+            if ($field <= -1) {
                 $error = 1;
             } elseif ($job_title[0]['name'] == '') {
                 $error = 1;
@@ -454,6 +452,7 @@ class User_post extends MY_Controller {
 
         if ($error != '1') {
             if ($post_for == 'opportunity') {
+                $job_title_id = "";
                 foreach ($job_title as $title) {
                     $designation = $this->data_model->findJobTitle($title['name']);
                     if ($designation['title_id'] != '') {
@@ -470,6 +469,7 @@ class User_post extends MY_Controller {
                     $job_title_id .= $jobTitleId . ',';
                 }
                 $job_title_id = trim($job_title_id, ',');
+                $city_id = "";
                 foreach ($location as $loc) {
                     $city = $this->data_model->findCityList($loc['city_name']);
                     if ($city['city_id'] != '') {

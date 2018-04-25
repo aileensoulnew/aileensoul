@@ -170,8 +170,8 @@
                                     <div class="post-right-dropdown dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="javascript:void(0);" ng-click="EditPost(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
-                                            <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
+                                            <li ng-if="live_slug == post.user_data.user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="EditPost(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
+                                            <li><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -784,9 +784,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script>
                                 var base_url = '<?php echo base_url(); ?>';
-                                var slug = '<?php echo $slugid; ?>';
+                                /*var slug = '<?php //echo $slugid; ?>';*/
                                 var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
                                 var title = '<?php echo $title; ?>';
+                                var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
                                 var no_user_post_html = '<?php echo $no_user_post_html; ?>';
                                 var header_all_profile = '<?php echo $header_all_profile; ?>';
                                 var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize']);

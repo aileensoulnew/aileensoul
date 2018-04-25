@@ -323,66 +323,86 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             $('.modal-close').click();            
         }
     });
+    $(document).on('keydown','#job_title .input',function () {
+        if($('#job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
 
     $(document).on('focusin','#job_title .input',function () {
         if($('#job_title ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
     });
     $(document).on('focusout','#job_title .input',function () {
         if($('#job_title ul li').length > 0)
         {             
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
         if($('#job_title ul li').length == 0)
         {            
             $(this).attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-            $(this).css('width', '200px');
+            $(this).css('width', '100%');
         }         
     });
 
+    $(document).on('keydown','#location .input',function () {
+        if($('#location ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
     $(document).on('focusin','#location .input',function () {
         if($('#location ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
     });
     $(document).on('focusout','#location .input',function () {
         if($('#location ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
         if($('#location ul li').length == 0)
         {            
             $(this).attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
-            $(this).css('width', '200px');
-        }
-         /*$(this).attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-         $(this).css('width', '100%');*/
+            $(this).css('width', '100%');
+        }         
     });
 
+
+    $(document).on('keydown','#ask_related_category .input',function () {
+        if($('#ask_related_category ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
     $(document).on('focusin','#ask_related_category .input',function () {
         if($('#ask_related_category ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
     });
     $(document).on('focusout','#ask_related_category .input',function () {
         if($('#ask_related_category ul li').length > 0)
         {             
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
         if($('#ask_related_category ul li').length == 0)
         {            
             $(this).attr('placeholder', 'Related Category');
-            $(this).css('width', '200px');
+            $(this).css('width', '100%');
         }         
     });
 
@@ -393,6 +413,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     $scope.opp.post_for = 'opportunity';
     $scope.sim.post_for = 'simple';
     $scope.ask.post_for = 'question';
+    $scope.live_slug = live_slug;
 
 
     var cntImgSim = 0;
@@ -1109,15 +1130,22 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         })
                         .then(function (success) {
 
-                            if (success) {
-                                $("#post_opportunity")[0].reset();
+                            if (success) {                                
                                 $('.post_loader').hide();
-                                $scope.opp.description = ' ';
+                                $scope.opp.description = '';
                                 $scope.opp.job_title = '';
                                 $scope.opp.location = '';
                                 $scope.opp.field = '';
                                 $scope.opp.postfiles = '';
                                 document.getElementById('fileInput').value = '';
+                                $('#job_title').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
+                                $('#job_title').css('width', '100%');
+
+                                $('#location').attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
+                                $('#location').css('width', '100%');
+
+
+                                $("#post_opportunity")[0].reset();
 
                                 $('.file-preview-thumbnails').html('');
                                 //$scope.postData.splice(0, 0, success.data[0]);

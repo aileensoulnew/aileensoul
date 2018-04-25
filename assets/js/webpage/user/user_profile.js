@@ -903,65 +903,86 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }
     });
 
+    $(document).on('keydown','#job_title .input',function () {
+        if($('#job_title ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
+
     $(document).on('focusin','#job_title .input',function () {
         if($('#job_title ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
     });
     $(document).on('focusout','#job_title .input',function () {
         if($('#job_title ul li').length > 0)
         {             
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
         if($('#job_title ul li').length == 0)
         {            
             $(this).attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-            $(this).css('width', '200px');
+            $(this).css('width', '100%');
         }         
     });
 
+    $(document).on('keydown','#location .input',function () {
+        if($('#location ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
     $(document).on('focusin','#location .input',function () {
         if($('#location ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
     });
     $(document).on('focusout','#location .input',function () {
         if($('#location ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
         if($('#location ul li').length == 0)
         {            
             $(this).attr('placeholder', 'Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai....');
-            $(this).css('width', '200px');
-        }
-         /*$(this).attr('placeholder', 'Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer....');
-         $(this).css('width', '100%');*/
+            $(this).css('width', '100%');
+        }         
     });
 
+
+    $(document).on('keydown','#ask_related_category .input',function () {
+        if($('#ask_related_category ul li').length > 0)
+        {            
+            $(this).attr('placeholder', '');
+            $(this).css('width', '100%');
+        }
+    });
     $(document).on('focusin','#ask_related_category .input',function () {
         if($('#ask_related_category ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
     });
     $(document).on('focusout','#ask_related_category .input',function () {
         if($('#ask_related_category ul li').length > 0)
         {             
             $(this).attr('placeholder', '');
-            $(this).css('width', '200px');
+            $(this).css('width', '10px');
         }
         if($('#ask_related_category ul li').length == 0)
         {            
             $(this).attr('placeholder', 'Related Category');
-            $(this).css('width', '200px');
+            $(this).css('width', '100%');
         }         
     });
 
