@@ -467,6 +467,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     $scope.sim.post_for = 'simple';
     $scope.ask.post_for = 'question';
     $scope.live_slug = live_slug;
+    $scope.user_id = user_id;
 
 
     var cntImgSim = 0;
@@ -758,7 +759,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 isLoadingData = true;
             }
 
-            //$('video,audio').mediaelementplayer(/* Options */);
+            $('video,audio').mediaelementplayer(/* Options */);
         }, function (error) {});
     }
 
@@ -800,7 +801,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 isLoadingData = true;
             }
 
-            //$('video,audio').mediaelementplayer(/* Options */);
+            $('video,audio').mediaelementplayer(/* Options */);
         }, function (error) {});
     }
 
@@ -2186,10 +2187,31 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
+       /* var editContent = $('#comment-dis-inner-' + comment_id).html();
+        $('#edit-comment-' + comment_id).show();
+        $('#editCommentTaxBox-' + comment_id).html(editContent);
+        $('#comment-dis-inner-' + comment_id).hide();*/
+        $(".comment-for-post-"+post_id+" .edit-comment").hide();
+        $(".comment-for-post-"+post_id+" .comment-dis-inner").show();
+        $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
+        $(".comment-for-post-"+post_id+" li[id^=cancel-comment-li-]").hide();
         var editContent = $('#comment-dis-inner-' + comment_id).html();
         $('#edit-comment-' + comment_id).show();
         $('#editCommentTaxBox-' + comment_id).html(editContent);
         $('#comment-dis-inner-' + comment_id).hide();
+        $('#edit-comment-li-' + comment_id).hide();
+        $('#cancel-comment-li-' + comment_id).show();
+        $(".new-comment-"+post_id).hide();
+    }
+
+    $scope.cancelPostComment = function (comment_id, post_id, parent_index, index) {
+        
+        $('#edit-comment-' + comment_id).hide();
+        
+        $('#comment-dis-inner-' + comment_id).show();
+        $('#edit-comment-li-' + comment_id).show();
+        $('#cancel-comment-li-' + comment_id).hide();
+        $(".new-comment-"+post_id).show();
     }
 
     $scope.EditPostNew = function (post_id, post_for, index) {
@@ -2393,7 +2415,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
     }
 
-    $scope.sendEditComment = function (comment_id) {
+    $scope.sendEditComment = function (comment_id,post_id) {
         var comment = $('#editCommentTaxBox-' + comment_id).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
@@ -2407,15 +2429,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 data: 'comment=' + comment + '&comment_id=' + comment_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-                    .then(function (success) {
-                        data = success.data;
-                        if (data.message == '1') {
-                            $('#comment-dis-inner-' + comment_id).show();
-                            $('#comment-dis-inner-' + comment_id).html(comment);
-                            $('#edit-comment-' + comment_id).html();
-                            $('#edit-comment-' + comment_id).hide();
-                        }
-                    });
+            .then(function (success) {
+                data = success.data;
+                if (data.message == '1') {
+                    $('#comment-dis-inner-' + comment_id).show();
+                    $('#comment-dis-inner-' + comment_id).html(comment);
+                    $('#edit-comment-' + comment_id).html();
+                    $('#edit-comment-' + comment_id).hide();
+                    $('#edit-comment-li-' + comment_id).show();
+                    $('#cancel-comment-li-' + comment_id).hide();
+                    $('.new-comment-'+post_id).show();
+                }
+            });
         } else {
             $scope.isMsgBoxEmpty = true;
         }
