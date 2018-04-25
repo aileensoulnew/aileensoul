@@ -1405,6 +1405,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $scope.ask.post_for = 'question';
                                 $scope.ask.is_anonymously = '';
 
+                                $('#ask_related_category .input').attr('placeholder', 'Related Category');
+                                $('#ask_related_category .input').css('width', '100%');
+
                                 //$scope.postData.splice(0, 0, success.data[0]);
                                 getUserPost(pg);
 
