@@ -1425,14 +1425,18 @@ max-width: inherit;
     .search-mob-block{width:76%;}
 }
 @media screen and (max-width: 479px) {
+	.fw-479{width:100%; float:left;}
 	.none-479{display:none !important;}
+	.left-header{text-align:center;}
+	.no-login-right{text-align:center;}
+	.left-header.fw-479 h2.logo{float:none; padding-bottom:10px;}
 	.search-mob-block{width:67%;}
 	.bus-only .none-sub-menu{display:none;}
 	.mobile-header .sub-header.bus-only .sub-menu li{width:20%;}
 	.mobile-header .sub-header.bus-only .sub-menu li:first-child{width:40%;}
 	.modal-content .post-field label{font-size:12px;}	
-        #upload-demo .cr-boundary{height: 200px !important;}
-        #upload-demo .cr-viewport{height: 200px !important;}
+    #upload-demo .cr-boundary{height: 200px !important;}
+    #upload-demo .cr-viewport{height: 200px !important;}
 
 }
 @media screen and (max-width: 359px) {

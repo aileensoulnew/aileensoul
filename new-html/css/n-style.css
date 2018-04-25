@@ -1232,7 +1232,7 @@ header.profile-header .logo a{color:#5c5c5c;}
  .right-header .dropdown.business_popup .dropdown-menu{width:260px;}
  .custom-width-box{width:80%; margin:0 auto;}
  .custom-width-box .content-img img{width:100%;}
- .all-detail-box .tab-pane ul{padding:0 0 25px; width:100%; float:left;}
+ .all-detail-box .tab-pane ul{padding:0; width:100%; float:left;}
  .all-detail-box .tab-pane ul li{list-style-type:none; text-align:center; width:20%; float:left; padding:10px;}
  .all-detail-box .tab-pane ul li a{color:#5c5c5c;}
  .all-detail-box .tab-pane ul li a span{color:#999;}
@@ -1630,6 +1630,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 /*** end  browse job  ***/
 /*** job cat, skill, company page  ***/
 .all-detail-box{border:1px solid #d2d2d2; border-top:0; width:100%; float:left;}
+.list-box-custom .nav-tabs > li > a{color:#5c5c5c;}
 /*** end job cat, skill, company page  ***/
 .bs-example .sr-only{
     position: inherit;
@@ -1865,6 +1866,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
     .cover-pic{width: 100%; float:left;}
     .post-box-bottom ul li:nth-child(2){display: none;}
 	.update-browser{display:none;}
+	.all-detail-box .tab-pane ul li{width:25%;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -1978,20 +1980,20 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
     .middle-part{width: 100%;}
     .container.main-dashboard{padding: 0;}
     .container.main-dashboard .middle-part .add-post{border-top: 0px;}
-        .middle-part .add-post, .all-post-box {border-left: 0px; border-right: 0px; border-radius: 0;}
-        .middle-section.custom-mob-pd{padding: 60px 0 50px;}
-        body.questions{position:relative;}
-        .mob-pd0{padding: 0;}
-        .list-box-custom{border:0px; border-bottom: 1px solid #d2d2d2; border-radius: 0;}
+    .middle-part .add-post, .all-post-box {border-left: 0px; border-right: 0px; border-radius: 0;}
+    .middle-section.custom-mob-pd{padding: 60px 0 50px;}
+    body.questions{position:relative;}
+    .mob-pd0{padding: 0;}
+    .list-box-custom{border:0px; border-radius: 0;}
         
-        .media-pages-tablet{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 0 0 8px; margin-bottom: 15px;}
-        .media-tab .tab-content{padding: 20px 10px;}
-        .full-box{border: 0;}
-        .contacts-page .custom-user-box{border: 0px; padding: 0;}
-        .upload-profile a{font-size: 0; display: block; margin-bottom: 0; height: 50px;}
-        .cover-pic .btn{margin-top: -10px;}
-        .modal-dialog{margin-bottom: 55px;}
-        .custom-popup .modal-body .mes img{width: 300px;}
+    .media-pages-tablet{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 0 0 8px; margin-bottom: 15px;}
+    .media-tab .tab-content{padding: 20px 10px;}
+    .full-box{border: 0;}
+    .contacts-page .custom-user-box{border: 0px; padding: 0;}
+    .upload-profile a{font-size: 0; display: block; margin-bottom: 0; height: 50px;}
+    .cover-pic .btn{margin-top: -10px;}
+    .modal-dialog{margin-bottom: 55px;}
+    .custom-popup .modal-body .mes img{width: 300px;}
 	.comment-box .add-comment{Position:relative;}
 	.comment-box .add-comment .post-img{display:none;}
 	.comment-box .add-comment .comment-input{width:100%;}
@@ -2026,7 +2028,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
         font-size:26px
     }
 	#bus-popup .modal-content{width:100%;}
-	
+	.all-detail-box .tab-pane ul li{width:33.3333%;}
 	
 	
 
@@ -2171,12 +2173,10 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.post-discription .post-field label{font-size:14px;}
 	.btn1{font-size: 14px; padding: 3px 15px;}
 	.like-popup .like-detail{width:73%;}
-	.btn-4{
-        font-size:12px;
-    }
-	.btn-4,.btns .btn-4{
-        padding:5px 20px;
-    }
+	.btn-4{font-size:12px;}
+	.btn-4,.btns .btn-4{padding:5px 20px;}
+	.all-detail-box .tab-pane ul li{width:50%;}
+	.list-box-custom .nav-tabs > li > a{padding:9px;}
 }
 @media screen and (max-width: 359px) {
 	.all-job-bottom{text-align:center;}
@@ -2205,6 +2205,8 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.por_content ul li .pro-text{font-size:12px;}
 	.por_content ul li .pro-text .count{width: 14px;}
 	.por_content ul li img{margin-right: 3px; float: left; width: 40px; height: 40px;}
+	.list-box-custom .nav-tabs > li > a{font-size:13px;}
+	.all-detail-box .tab-pane ul li{font-size:13px;}
 }
 @media screen and (max-width: 320px) {
 
