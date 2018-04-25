@@ -720,7 +720,7 @@ border-bottom: 0px;}
 
 /***  contacts followers following notification page  ***/
 .custom-user-list{width:905px; float:left;}
-.list-box-custom{border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left; margin-bottom:15px;}
+.list-box-custom{border-radius:4px; width:100%; float:left; margin-bottom:15px;}
 .list-box-custom .no-data-box{border:0px;}
 .custom-user-list h3{margin:0; padding:10px; border-bottom:1px solid #d2d2d2; text-align:center;}
 .custom-user-box{border:1px solid #d2d2d2; border-radius:4px; padding:10px; width:100%; float:left; margin-bottom:10px;}
@@ -1232,11 +1232,11 @@ header.profile-header .logo a{color:#5c5c5c;}
  .right-header .dropdown.business_popup .dropdown-menu{width:260px;}
  .custom-width-box{width:80%; margin:0 auto;}
  .custom-width-box .content-img img{width:100%;}
- .cat-box ul{padding:0 0 25px; width:100%; float:left;}
- .cat-box ul li{list-style-type:none; text-align:center; width:20%; float:left; padding:10px;}
- .cat-box ul li a{color:#5c5c5c;}
- .cat-box ul li a span{color:#999;}
- .cat-box ul li span{display:block;}
+ .all-detail-box .tab-pane ul{padding:0 0 25px; width:100%; float:left;}
+ .all-detail-box .tab-pane ul li{list-style-type:none; text-align:center; width:20%; float:left; padding:10px;}
+ .all-detail-box .tab-pane ul li a{color:#5c5c5c;}
+ .all-detail-box .tab-pane ul li a span{color:#999;}
+ .all-detail-box .tab-pane ul li span{display:block;}
  .search-business-top{padding:4px; width:100%; float:left; border-bottom:1px solid #d2d2d2;}
  .search-business-top .bus-cover{max-height:150px; width:100%; overflow:hidden; border-radius:4px;}
  .search-business-top .bus-cover img{border-radius:4px; min-height:150px; width:100%;}
@@ -1628,6 +1628,9 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .browse-box ul li a:hover{color:#1b8ab9;}
 
 /*** end  browse job  ***/
+/*** job cat, skill, company page  ***/
+.all-detail-box{border:1px solid #d2d2d2; border-top:0; width:100%; float:left;}
+/*** end job cat, skill, company page  ***/
 .bs-example .sr-only{
     position: inherit;
     width:45px;
@@ -1764,6 +1767,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .like-count{margin-left:-10px;}
 .question-page .like-count{margin-left:-5px;}
 .modal-open .mob-bottom-menu{z-index:9;}
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
