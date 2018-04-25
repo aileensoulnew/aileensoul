@@ -178,17 +178,17 @@
                 <ul>
                     <li>
                         <a href="#"  class="opportunity-modal" data-target="#opportunity-popup" data-toggle="modal" id="opportunity-modal">
-                            <img src="<?php echo base_url('assets/n-images/post-op.png') ?>"><span><span class="none-479">Post</span> <span>Opportunity</span></span>
+                            <img src="<?php echo base_url('assets/n-images/document.svg') ?>"><span><span class="none-479">Post</span> <span>Opportunity</span></span>
                         </a>
                     </li>
                     <li class="pl15">
                         <a href="article.html">
-                            <img src="<?php echo base_url('assets/n-images/article.png') ?>"><span><span class="none-479">Post</span> <span>Article</span></span>
+                            <img src="<?php echo base_url('assets/n-images/survey.png') ?>"><span><span class="none-479">Post</span> <span>Article</span></span>
                         </a>
                     </li>
                     <li class="pl15">
                         <a href="#"  class="ask-question-modal" data-target="#ask-question" data-toggle="modal" id="ask-question-modal">
-                            <img src="<?php echo base_url('assets/n-images/ask-qustion.png') ?>"><span>Ask Question</span>
+                            <img src="<?php echo base_url('assets/n-images/question-mark.svg') ?>"><span>Ask Question</span>
                         </a>
                     </li>
                 </ul>
