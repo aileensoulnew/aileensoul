@@ -138,23 +138,27 @@
                             <div class="all-post-top">
                                 <div class="post-head">
                                     <div class="post-img" ng-if="post.post_data.post_for == 'question'">
-                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
-                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                        <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="
+                                            post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                        </a>
                                     </div>
                                     <div class="post-img" ng-if="post.post_data.post_for != 'question'">
-                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != ''">
-                                        <span class="no-img-post" ng-bind="(post.user_data.first_name| limitTo:1 | uppercase) + (post.user_data.last_name | limitTo:1 | uppercase)"  ng-if="post.user_data.user_image == ''"></span>
-                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                        <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != ''">                                            
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                        </a>
                                     </div>
                                     <div class="post-detail">
                                         <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                             <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a><span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                            <a ng-href="<?php echo base_url('profiles/') ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                         </div>
                                         <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                            <a ng-href="<?php echo base_url('profiles/') ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                         </div>
                                         <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                             <span class="post-designation" ng-if="post.user_data.title_name != '' && post.question_data.is_anonymously == '0'" ng-bind="post.user_data.title_name"></span>
@@ -494,15 +498,19 @@
                                     <div class="post-comment" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
                                         <div class="post-img">
                                             <div ng-if="comment.user_image != ''">
-                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
+                                                <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                    <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
+                                                </a>
                                             </div>
                                             <div class="post-img" ng-if="comment.user_image == ''">
-                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                    <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="comment-dis">
-                                            <div class="comment-name"><a ng-bind="comment.username"></a></div>
+                                            <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
                                             <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}" ng-bind-html="comment.comment"></div>
                                             <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
                                                 <div class="comment-input">
@@ -582,11 +590,11 @@
                                 <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="post-img" ng-if="contact.user_image != ''">
-                                            <a href="profiles/{{contact.user_slug}}" >
+                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
                                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
                                             </a>
                                         </div>
-                                        <a href="profiles/{{contact.user_slug}}" >
+                                        <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
                                             <div class="post-img" ng-if="contact.user_image == ''">
                                                 <div class="post-img-mainuser">
                                                     {{contact.first_name| limitTo:1 | uppercase}}{{contact.last_name| limitTo:1 | uppercase}}
@@ -595,11 +603,11 @@
                                             </div>
                                         </a>
                                         <div class="user-list-detail">
-                                            <p class="contact-name"><a href="profiles/{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)"></a></p>
+                                            <p class="contact-name"><a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)"></a></p>
                                             <p class="contact-designation">
-                                                <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
-                                                <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name == ''">{{contact.degree_name| uppercase}}</a>
-                                                <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == ''">{{contact.degree_name| uppercase}}</a>
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
                                             </p>
                                         </div>
                                         <button class="follow-btn" ng-click="addToContact(contact.user_id, contact)">Add to contact</button>
@@ -957,14 +965,14 @@
                                 
                                 
                                 <li class="like-img" ng-repeat="userlist in get_like_user_list">
-                                    <a class="ripple" href="<?php echo base_url('profiles/'); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != null">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != null">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                                     </a>
-                                      <a class="ripple" href="<?php echo base_url('profiles/'); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == null">
+                                      <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == null">
                                         <div class="post-img-mainuser">{{userlist.first_name| limitTo:1 | uppercase}}{{userlist.last_name| limitTo:1 | uppercase}}</div>
                                     </a>
                                     <div class="like-detail">
-                                        <h4><a href="<?php echo base_url('profiles/'); ?>{{userlist.user_slug}}">{{userlist.fullname}}</a></h4>
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{userlist.fullname}}</a></h4>
                                         <p ng-if="userlist.title_name == ''">{{userlist.degree_name}}</p>
                                         <p ng-if="userlist.title_name != null">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
