@@ -796,6 +796,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         });
     };
 
+    $scope.removeViewMore = function(mainId,removeViewMore) {    
+        $("#"+mainId).removeClass("view-more-expand");
+        $("#"+removeViewMore).remove();
+    };
+
     $scope.postFiles = function () {
         var a = document.getElementById('description').value;
         var b = $('job_title').val();
@@ -2136,6 +2141,67 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $('#comment-dis-inner-' + comment_id).hide();
     }
 
+    $scope.EditPostNew = function (post_id, post_for, index) {
+        if(post_for == "simple")
+        {
+            $("#edit-simple-post-"+post_id).show();
+            var editContent = $scope.postData[index].simple_data.description//$('#simple-post-description-' + post_id).attr("ng-bind-html");
+            $('#editPostTexBox-' + post_id).html(editContent.replace(/(<([^>]+)>)/ig,""));
+            setTimeout(function(){
+                //$('#editPostTexBox-' + post_id).focus();
+                setCursotToEnd(document.getElementById('editPostTexBox-' + post_id));
+            },100);            
+            $('#simple-post-description-' + post_id).hide();            
+        }
+        else if(post_for == "opportunity")
+        {
+            var edit_location = [];
+            var edit_jobtitle = [];
+            var opportunity = $scope.postData[index].opportunity_data.opportunity//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
+            var job_title = $('#opp-post-opportunity-for-' + post_id).html().split(",");
+            var city_names = $('#opp-post-location-' + post_id).html().split(",");
+            var field = $('#opp-post-field-' + post_id).html()
+            if(opportunity != "" && opportunity != undefined)
+            {
+                //$("#description_edit_" + post_id).val(opportunity.replace(/(<([^>]+)>)/ig,""));
+                $("#description_edit_" + post_id).html(opportunity.replace(/(<([^>]+)>)/ig,""));
+            }
+            city_names.forEach(function(element,cityArrIndex) {
+              edit_location[cityArrIndex] = {"city_name":element};
+            });
+            $scope.opp.location_edit = edit_location;
+
+            job_title.forEach(function(element,jobArrIndex) {
+              edit_jobtitle[jobArrIndex] = {"name":element};
+            });
+            $scope.opp.job_title_edit = edit_jobtitle;
+
+            if(city_names.length > 0)
+            {
+                $('#location .input').attr('placeholder', '');
+                $('#location .input').css('width', '200px');
+            }
+            if(job_title.length > 0)
+            {
+                $('#job_title .input').attr('placeholder', '');
+                $('#job_title .input').css('width', '200px');
+            }
+
+            $('[id=field_edit'+post_id+'] option').filter(function() { 
+                return ($(this).text() == field); //To select Blue
+            }).prop('selected', true);
+
+            $("#description_edit_" + post_id).focus();
+            setTimeout(function(){
+                //$('#description_edit_' + post_id).focus();                
+                setCursotToEnd(document.getElementById('description_edit_' + post_id));
+            },100);
+            $("#edit-opp-post-"+post_id).show();
+            $('#post-opp-detail-' + post_id).hide();   
+
+        }
+    }
+
     $scope.EditPost = function (post_id, post_for, index) {
         $scope.is_edit = 1;
 
@@ -2315,3 +2381,21 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
+function setCursotToEnd(el)
+{
+    el.focus();
+    if (typeof window.getSelection != "undefined"
+            && typeof document.createRange != "undefined") {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    } else if (typeof document.body.createTextRange != "undefined") {
+        var textRange = document.body.createTextRange();
+        textRange.moveToElementText(el);
+        textRange.collapse(false);
+        textRange.select();
+    }
+}
