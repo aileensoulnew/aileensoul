@@ -186,7 +186,7 @@
                     </li>
                 </ul>
             </div> -->
-            <div class="left-search-box list-type-bullet">
+            <div class="left-search-box list-type-bullet hidden">
                 <div class="">
                     <h3>Categories</h3>
                 </div>
@@ -216,7 +216,7 @@
                 </ul>
                 <p class="text-right p10"><a href="#">More Categories</a></p>
             </div>
-            <div class="left-search-box list-type-bullet">
+            <div class="left-search-box list-type-bullet hidden">
                 <div class="">
                     <h3>Top Cities</h3>
                 </div>
@@ -426,10 +426,10 @@
             var textarea = document.getElementById("textarea");
              var no_artistic_post_html = '<?php echo $no_artistic_post_html ?>';
         </script>
-            <script>
-                 var header_all_profile = '<?php echo $header_all_profile; ?>';
-            </script>
-            <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+        <script>
+             var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <?php
             if (IS_ART_JS_MINIFY == '0') { ?>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/home.js?ver='.time()); ?>"></script>

@@ -28,8 +28,8 @@ class Artist_live extends MY_Controller {
     }
 
     public function index() {
-        if($this->artist_profile_set ==1){
-            redirect( $this->artist_profile_link);
+        if($this->artist_profile_set==1){
+            redirect($this->artist_profile_link);
         }
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -296,4 +296,298 @@ class Artist_live extends MY_Controller {
 
         return $artistic_name = ucfirst($artdata[0]['art_name']) . ' ' . ucwords($artdata[0]['art_lastname']);
     }
+
+    // Art dashboard
+    public function art_manage_post($id = "") {
+
+        $userid = $this->session->userdata('aileenuser');
+        //if user deactive profile then redirect to artist/index untill active profile start
+        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+        $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
+
+        if ($artistic_deactive) {
+            redirect('artist');
+        }
+        //if user deactive profile then redirect to artist/index untill active profile End
+        $user_name = $this->session->userdata('user_name');
+
+        $segment3 = explode('-', $this->uri->segment(3));
+        $slugdata = array_reverse($segment3);
+        $regid = $slugdata[0];
+        $artisticslug = $this->db->select('art_id')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_id;
+        $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
+        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_step,user_id,art_user_image,art_name,art_lastname,designation,slug,art_id,art_skill,art_yourart,art_desc_art,art_email,art_city,art_country,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->data['artid'] = $this->data['artisticdata'][0]['user_id'];
+        $this->data['get_url'] = $get_url = $this->get_url($this->data['artisticdata'][0]['user_id']);
+
+        $artistic_name = $this->get_artistic_name($this->data['artid']);
+        $this->data['title'] = $artistic_name . ' | Dashboard' . '- Artistic Profile' . TITLEPOSTFIX;
+
+        if ($userid) {
+
+            if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
+                $this->load->view('artist/notavalible');
+            } else if ($this->data['artisticdata'][0]['art_step'] != '4') {
+                redirect('artist');
+            } else {
+                $this->data['artistic_common'] = $this->load->view('artist/artistic_common', $this->data, true);
+                if ($get_url == $this->uri->segment(3)) {
+                    $this->load->view('artist_live/art_manage_post', $this->data);
+                } else {
+                    redirect('artist/dashboard/' . $get_url, refresh);
+                }
+            }
+        } else {
+
+
+            if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
+                $this->load->view('artist/notavalible');
+            } else {
+
+                include ('artistic_include.php');
+                $this->data['artistic_common_profile'] = $this->load->view('artist/artistic_common_profile', $this->data, true);
+                if ($get_url == $this->uri->segment(3)) {
+                    $this->load->view('artist_live/art_dashboard_live', $this->data);
+                } else {
+                    redirect('artist/dashboard/' . $get_url, refresh);
+                }
+            }
+        }
+    }
+
+    // ARTIST PROFILE DETAIL
+    public function artistic_profile($id = "") {
+        $userid = $this->session->userdata('aileenuser');
+
+        //if user deactive profile then redirect to artist/index untill active profile start
+        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+
+        $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+        if ($artistic_deactive) {
+            redirect('artist');
+        }
+        //if user deactive profile then redirect to artist/index untill active profile End
+        $segment3 = explode('-', $this->uri->segment(3));
+        $slugdata = array_reverse($segment3);
+        $regid = $slugdata[0];
+
+        $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
+        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_email,art_phnno,art_country,art_state,art_city,art_pincode,art_address,art_yourart,art_skill,art_desc_art,art_inspire,art_bestofmine,art_portfolio,user_id,art_step,art_user_image,profile_background,designation,slug,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $this->data['get_url'] = $this->get_url($this->data['artisticdata'][0]['user_id']);
+
+        $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
+        $this->data['title'] = $this->data['title'] = $artistic_name . ' | Details' . '- Artistic Profile' . TITLEPOSTFIX;
+
+        if ($userid) {
+            if ($this->data['artisticdata']) {
+
+                $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
+                $this->load->view('artist_live/artistic_profile', $this->data);
+            } else if (!$this->data['artisticdata'] && $id != $userid) {
+                $this->load->view('artist_LIVE/notavalible');
+            } else if (!$this->data['artisticdata'] && ($id == $userid || $id == "")) {
+                redirect('artist');
+            }
+        } else {
+
+            include ('artistic_include.php');
+            $this->data['artistic_common_profile'] = $this->load->view('artist_live/artistic_common_profile', $this->data, true);
+            $this->load->view('artist_live/art_profile_live', $this->data);
+        }
+    }
+
+    // ARTIST PTHOTO
+    public function art_photos($id = "") {
+
+        $userid = $this->session->userdata('aileenuser');
+
+        //if user deactive profile then redirect to artist/index untill active profile start
+        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+
+        $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+        if ($artistic_deactive) {
+            redirect('artist');
+        }
+        //if user deactive profile then redirect to artist/index untill active profile End
+
+        $segment3 = explode('-', $this->uri->segment(3));
+        $slugdata = array_reverse($segment3);
+        $regid = $slugdata[0];
+
+        $contition_array = array('art_id' => $regid, 'status' => '1');
+
+        $artisticdata = $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('user_id' => $artisticdata[0]['user_id'], 'is_delete' => '0');
+
+        $artisticpost = $this->data['artisticdatapost'] = $this->common->select_data_by_condition('art_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        foreach ($artisticpost as $value) {
+
+
+            $contition_array = array('insert_profile' => '1', 'is_deleted' => '1', 'post_id' => $value['art_post_id']);
+
+            $art_data = $this->common->select_data_by_condition('post_files', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $a_d[] = $art_data;
+        }
+
+        foreach ($a_d as $key_ad => $value_ad) {
+            foreach ($value_ad as $art_fn => $v) {
+
+                $art_data[] = $v;
+            }
+        }
+
+        $art_data = array_unique($art_data, SORT_REGULAR);
+
+        $this->data['get_url'] = $this->get_url($artisticdata[0]['user_id']);
+
+
+        $this->data['artistic_data'] = $art_data;
+
+        if ($this->data['artisticdata']) {
+            $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
+            $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
+            $this->data['title'] = $artistic_name . ' | Photos' . ' | Artistic Profile' . TITLEPOSTFIX;
+            $this->load->view('artist_live/art_photos', $this->data);
+        } else if (!$this->data['artisticdata'] && $id != $userid) {
+
+            $this->load->view('artist_live/notavalible');
+        } else if (!$this->data['artisticdata'] && ($id == $userid || $id == "")) {
+            redirect('find-artist');
+        }
+    }
+
+    // ARTIST VIDEO
+    public function art_videos($id) {
+
+        $userid = $this->session->userdata('aileenuser');
+
+        //if user deactive profile then redirect to artist/index untill active profile start
+        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+
+        $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+        if ($artistic_deactive) {
+            redirect('artist');
+        }
+        //if user deactive profile then redirect to artist/index untill active profile End
+
+        $segment3 = explode('-', $this->uri->segment(3));
+        $slugdata = array_reverse($segment3);
+        $regid = $slugdata[0];
+
+        $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
+        $artisticdata = $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $this->data['get_url'] = $this->get_url($artisticdata[0]['user_id']);
+
+
+        if ($this->data['artisticdata']) {
+            $this->data['artistic_common'] = $this->load->view('artist/artistic_common', $this->data, true);
+            $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
+            $this->data['title'] = $artistic_name . ' | Video' . '- Artistic Profile' . TITLEPOSTFIX;
+            $this->load->view('artist_live/art_videos', $this->data);
+        } else if (!$this->data['artisticdata'] && $id != $userid) {
+
+            $this->load->view('artist_live/notavalible');
+        } else if (!$this->data['artisticdata'] && ($id == $userid || $id == "")) {
+            redirect('artist');
+        }
+    }
+
+//multiple videos for user end 
+//multiple audios for user start
+
+//  ARTIST AUDIO
+public function art_audios($id) {
+
+    $userid = $this->session->userdata('aileenuser');
+
+    //if user deactive profile then redirect to artist/index untill active profile start
+    $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+
+    $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+    if ($artistic_deactive) {
+        redirect('artist');
+    }
+    //if user deactive profile then redirect to artist/index untill active profile End
+
+    $segment3 = explode('-', $this->uri->segment(3));
+    $slugdata = array_reverse($segment3);
+    $regid = $slugdata[0];
+
+    $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
+    $artisticdata = $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+    $contition_array = array('user_id' => $artisticdata[0]['user_id'], 'status' => '1', 'is_delete' => '0');
+
+    $this->data['artistic_data'] = $this->common->select_data_by_condition('art_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+    $this->data['get_url'] = $this->get_url($artisticdata[0]['user_id']);
+
+
+    if ($this->data['artisticdata']) {
+        $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
+        $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
+        $this->data['title'] = $artistic_name . ' | Audio' . ' | Artistic Profile' . TITLEPOSTFIX;
+        $this->load->view('artist_live/art_audios', $this->data);
+    } else if (!$this->data['artisticdata'] && $id != $userid) {
+
+        $this->load->view('artist_live/notavalible');
+    } else if (!$this->data['artisticdata'] && ($id == $userid || $id == "")) {
+        redirect('artist');
+    }
+}
+
+//multiple audios for user end  
+//multiple pdf for user start
+
+// ARTIST PDF  
+public function art_pdf($id) {
+
+    $userid = $this->session->userdata('aileenuser');
+
+    //if user deactive profile then redirect to artist/index untill active profile start
+    $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+
+    $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+    if ($artistic_deactive) {
+        redirect('artist');
+    }
+    //if user deactive profile then redirect to artist/index untill active profile End
+
+    $segment3 = explode('-', $this->uri->segment(3));
+    $slugdata = array_reverse($segment3);
+    $regid = $slugdata[0];
+
+
+    $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
+    $artisticdata = $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+    $contition_array = array('user_id' => $artisticdata[0]['user_id'], 'status' => '1', 'is_delete' => '0');
+
+    $this->data['artistic_data'] = $this->common->select_data_by_condition('art_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+    $this->data['get_url'] = $this->get_url($artisticdata[0]['user_id']);
+
+
+    if ($this->data['artisticdata']) {
+        $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
+        $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
+        $this->data['title'] = $artistic_name . ' | PDF' . ' | Artistic Profile' . TITLEPOSTFIX;
+        $this->load->view('artist_live/art_pdf', $this->data);
+    } else if (!$this->data['artisticdata'] && $id != $userid) {
+
+        $this->load->view('artist_live/notavalible');
+    } else if (!$this->data['artisticdata'] && ($id == $userid || $id == "")) {
+        redirect('artist');
+    }
+}
+
 }
