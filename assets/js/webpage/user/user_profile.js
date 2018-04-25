@@ -2386,7 +2386,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     }
                     else
                     {
-                        if(pdfExt == true && description == '')
+                        if(pdfExt == true && (description == '' || description == undefined || description == ' '))
                         {
                             $('.biderror .mes').html("<div class='pop_content'>Please Enter PDF Title.");
                             $('#posterrormodal').modal('show');

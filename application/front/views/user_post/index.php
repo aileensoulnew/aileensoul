@@ -280,10 +280,33 @@
                                     <!-- Edit Simple Post End -->
                                 </div>
                                 <div class="post-discription" ng-if="post.post_data.post_for == 'profile_update'">
-                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.profile_update.data_value}}">
+                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
                                 </div>
                                 <div class="post-discription" ng-if="post.post_data.post_for == 'cover_update'">
-                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" ng-if="post.cover_update.data_value != ''">
+                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" ng-if="post.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
+                                </div>
+                                <div ng-if="post.post_data.post_for == 'profile_update' || post.post_data.post_for == 'cover_update'" id="myModalCoverPic{{post.post_data.id}}" class="modal modal2" style="display: none;">
+                                    <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModalCoverPic'+post.post_data.id)">×</button>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                            </div>
+                                            <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                            <div class="mySlides mySlides2{{post.post_data.id}}">
+                                                <div class="numbertext"></div>
+                                                <div class="slider_img_p" ng-if="post.post_data.post_for == 'cover_update'">
+                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" alt="Cover Image" id="cover{{post.post_data.id}}">
+                                                </div>
+                                                <div class="slider_img_p" ng-if="post.post_data.post_for == 'profile_update'">
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" alt="Profile Image" id="cover{{post.post_data.id}}">
+                                                </div>
+                                            </div>                                
+                                        </div>
+                                        <div class="caption-container">
+                                            <p id="caption"></p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="post-discription" ng-if="post.post_data.post_for == 'question'">
                                     <div id="ask-que-{{post.post_data.id}}" class="post-des-detail">
@@ -369,9 +392,11 @@
                                 </div>
                                 <div class="post-images" ng-if="post.post_data.total_post_files == '1'">
                                     <div class="one-img" ng-repeat="post_file in post.post_file_data" ng-init="$last ? loadMediaElement() : false">
-                                        <a href="#" ng-if="post_file.file_type == 'image'"><img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}"></a>
-                                        <span  ng-if="post_file.file_type == 'video'"> 
-                                            <video controls width = "100%" height = "350" preload="metadata" >
+                                        <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
+                                            <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
+                                        </a>
+                                        <span ng-if="post_file.file_type == 'video'"> 
+                                            <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
                                                 <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="video/mp4">
                                             </video>
                                             <!--<video controls poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
@@ -395,29 +420,50 @@
                                 </div>
                                 <div class="post-images" ng-if="post.post_data.total_post_files == '2'">
                                     <div class="two-img" ng-repeat="post_file in post.post_file_data">
-                                        <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                     </div>
                                 </div>
                                 <div class="post-images" ng-if="post.post_data.total_post_files == '3'">
                                     <span ng-repeat="post_file in post.post_file_data">
                                         <div class="three-img-top" ng-if="$index == '0'">
-                                            <a href="#"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                            <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                         </div>
                                         <div class="two-img" ng-if="$index == '1'">
-                                            <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                            <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                         </div>
                                         <div class="two-img" ng-if="$index == '2'">
-                                            <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                            <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                         </div>
                                     </span>
                                 </div>
                                 <div class="post-images four-img" ng-if="post.post_data.total_post_files >= '4'">
                                     <div class="two-img" ng-repeat="post_file in post.post_file_data| limitTo:4">
-                                        <a href="#"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
-                                        <div class="view-more-img" ng-if="$index == '3' && post.post_data.total_post_files > '4'">
-                                            <span>View All (+4)</span>
+                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
+                                        <div class="view-more-img" ng-if="$index == 3 && post.post_data.total_post_files > 4">
+                                            <span><a href="javascript:void(0);" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">View All ({{post.post_data.total_post_files - 4}})</a></span>
                                         </div>
                                     </div>
+                                </div>
+                                <div id="myModal{{post.post_data.id}}" class="modal modal2" style="display: none;">
+                                    <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModal'+post.post_data.id)">×</button>
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                            </div>
+                                            <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                            <div class="mySlides mySlides2{{post.post_data.id}}" ng-repeat="_photoData in post.post_file_data">
+                                                <div class="numbertext">{{$index + 1}} / {{post.post_data.total_post_files}}</div>
+                                                <div class="slider_img_p">
+                                                    <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                </div>
+                                            </div>                                
+                                        </div>
+                                        <div class="caption-container">
+                                            <p id="caption"></p>
+                                        </div>
+                                    </div> 
+                                    <a ng-if="post.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,post.post_data.id)">&#10094;</a>
+                                    <a ng-if="post.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.post_data.id)">&#10095;</a>
                                 </div>
                                 <div class="post-bottom">
                                     <div class="row">
