@@ -2934,10 +2934,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         {
             var edit_location = [];
             var edit_jobtitle = [];
-            var opportunity = $scope.postData[index].opportunity_data.opportunity//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
+            var opportunity = $scope.postData[index].opportunity_data.opportunity;//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
             var job_title = $('#opp-post-opportunity-for-' + post_id).html().split(",");
             var city_names = $('#opp-post-location-' + post_id).html().split(",");
-            var field = $('#opp-post-field-' + post_id).html()
+            var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html()
             if(opportunity != "" && opportunity != undefined)
             {
                 //$("#description_edit_" + post_id).val(opportunity.replace(/(<([^>]+)>)/ig,""));

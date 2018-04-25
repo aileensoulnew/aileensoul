@@ -176,12 +176,77 @@
                                     </div>
                                 </div>
                                 <div class="post-discription" ng-if="post.post_data.post_for == 'opportunity'">
-                                    <h5 class="post-title">
-                                        <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
-                                        <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
-                                        <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
-                                    </h5>
-                                    <div class="post-des-detail" ng-if="post.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.opportunity_data.opportunity" id="opp-post-opportunity-{{post.post_data.id}}"></span></div>
+                                    <div id="edit-opp-post-{{post.post_data.id}}" style="display: none;">
+                                        <form id="post_opportunity_edit" name="post_opportunity_edit" ng-submit="post_opportunity_check(event,postIndex)">
+                                            <div class="post-box">                        
+                                                <div class="post-text">
+                                                    <!-- <textarea name="description" id="description_edit_{{post.post_data.id}}" class="title-text-area" placeholder="Post Opportunity"></textarea> -->
+                                                    <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Post Opportunity..." id="description_edit_{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                                </div>                        
+                                            </div>
+                                            <div class="post-field">
+                                                <div id="content" class="form-group">
+                                                    <label>For whom this opportunity?<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></span></label>
+                                                    <tags-input id="job_title" ng-model="opp.job_title_edit" display-property="name" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer...." replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
+                                                        <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                                    </tags-input>
+                                                    <script type="text/ng-template" id="title-template">
+                                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                                    </script>
+                                                    <script type="text/ng-template" id="title-autocomplete-template">
+                                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                                    </script>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>For which location?<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
+                                                    <tags-input id="location" ng-model="opp.location_edit" display-property="city_name" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
+                                                        <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
+                                                    </tags-input>
+                                                    <script type="text/ng-template" id="location-template">
+                                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                                    </script>
+                                                    <script type="text/ng-template" id="location-autocomplete-template">
+                                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                                    </script>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>For which field?<span class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></span></label>
+                                                    <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
+                                                    <span class="select-field-custom">
+                                                        <select name="field" ng-model="opp.field" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
+                                                            <option value="" selected="selected">Select your field</option>
+                                                            <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
+                                                            <option value="0">Other</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
+                                                <div class="form-group" ng-if="field == '0'">
+                                                    <input type="text" class="form-control" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                                </div>
+                                                <input type="hidden" name="post_for" class="form-control" value="">
+                                                <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
+                                            </div>
+                                            <div class="text-right fw pb10">
+                                                <button type="submit" class="btn1"  value="Submit">Save</button>                                    
+                                            </div>
+                                            <?php // echo form_close(); ?>
+                                        </form>
+                                    </div>
+                                    <div id="post-opp-detail-{{post.post_data.id}}">
+                                        <h5 class="post-title">
+                                            <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
+                                            <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
+                                            <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
+                                        </h5>
+                                        <div class="post-des-detail" ng-if="post.opportunity_data.opportunity">
+                                            <div id="opp-post-opportunity-{{post.post_data.id}}" ng-class="post.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
+                                                <b>Opportunity:</b>
+                                                <span ng-bind-html="post.opportunity_data.opportunity"></span>
+                                                <a id="remove-view-more{{post.post_data.id}}" ng-if="post.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="post-discription" ng-if="post.post_data.post_for == 'simple'">
                                     <div ng-init="limit = 250; moreShown = false">
