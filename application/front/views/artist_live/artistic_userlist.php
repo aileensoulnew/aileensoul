@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/artistic.css?ver='.time()); ?>">
   <?php } ?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 <body   class="page-container-bg-solid page-boxed">
 <?php echo $header; ?>
 <?php echo $artistic_header2; ?>
@@ -179,8 +179,10 @@ var data1 = <?php echo json_encode($city_data); ?>;
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/userlist.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 <?php }else{?>
+
 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/userlist.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
+
 <?php }?>
 <script>
      var header_all_profile = '<?php echo $header_all_profile; ?>';

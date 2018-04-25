@@ -1969,7 +1969,7 @@ class Artist extends MY_Controller {
         $this->data['get_url'] = $this->get_url($artisticdata[0]['user_id']);
 
         if ($this->data['artdata']) {
-            $this->data['left_artistic'] = $this->load->view('artist/left_artistic', $this->data, true);
+            $this->data['left_artistic'] = $this->load->view('artist_live/left_artistic', $this->data, true);
             $artistic_name = $this->get_artistic_name($artisticdata[0]['user_id']);
             $this->data['title'] = $artistic_name . ' | Userlist' . '- Artistic Profile' . TITLEPOSTFIX;
             $this->load->view('artist/artistic_userlist', $this->data);
