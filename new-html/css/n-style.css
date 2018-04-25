@@ -133,7 +133,7 @@ padding: 5px;}
 .post-time{font-size:12px; color:#91949d; float:left; line-height:1.83; position:relative;padding-left:3px;}
 .post-time:before{position:absolute; width:2px; height:2px; background:#c5c5c5; top:10px; left:-5px; display:block; content:"";}
 .post-designation{font-size:13px; color:#91949d;}
-.post-discription{padding:10px 0; width:100%; float:left; word-wrap: break-word; text-align: center;}
+.post-discription{padding:10px 0 0; width:100%; float:left; word-wrap: break-word; text-align: center; position:relative; margin-bottom:5px;}
 .post-discription div{text-align: left;}
 .post-discription div.text-right{text-align: right;}
 .post-discription img{max-width: 100%; cursor: pointer;}
@@ -1750,9 +1750,9 @@ tags-input .tags .tag-item .remove-button{font-size: 12px; font-weight: normal;}
 tags-input .tags .input{font-size: 13px; color:#7a7a7a;}
 .tag-template .right-panel{line-height: 1.9;}
 tags-input .tags .tag-item{font-size: 13px;}
-.view-more-expand{max-height: 70px !important; overflow: hidden; float: left; width: 100%; line-height: 1.7;}
+.view-more-expand{max-height: 70px !important; overflow: hidden; float: left; width: 100%; line-height: 1.7; font-size:13px;}
 span.view-more-expand{line-height: 1.8;}
-.read-more-post{position: absolute; bottom: 0; background: #fff; padding: 0px 0; right: 0; color: #5c5c5c; cursor: pointer; font-weight: bold;}
+.read-more-post{position: absolute; bottom: 0; background: #fff; padding: 0px 0; right: 0; color: #5c5c5c; cursor: pointer; font-weight: bold; font-size:13px;}
 .read-more-post:hover{color:#1b8ab9;}
 .post-field label .pull-right img{width: 80%; float: right;}
 #likeusermodal .modal-content h3{color:#1b8ab9; border-bottom: 1px solid #d2d2d2;}
