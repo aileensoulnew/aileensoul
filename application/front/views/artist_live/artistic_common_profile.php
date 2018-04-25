@@ -181,7 +181,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                        
                         ?>
-                        <li <?php if ($this->uri->segment(1) == 'artistic' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="login_profile();">Following <br>  (<?php echo $countfo; ?>)</a>
+                        <li <?php if ($this->uri->segment(1) == 'artistic' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="login_profile();">Following <br>  (<?php echo isset($countfo) ? $countfo : 0; ?>)</a>
                         </li> 
                 </ul>
 

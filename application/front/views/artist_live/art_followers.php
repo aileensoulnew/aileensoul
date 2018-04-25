@@ -21,6 +21,7 @@
 <body  class="page-container-bg-solid page-boxed botton_footer">
 <?php echo $header; ?>
 <?php echo $artistic_header2; ?>
+
    <section class="custom-row">
       <?php echo $artistic_common; ?>
        <div class="user-midd-section art-inner">

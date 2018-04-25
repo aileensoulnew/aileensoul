@@ -3667,13 +3667,13 @@ class Artist extends MY_Controller {
                 $geturl = $this->get_url($artaval[0]['user_id']);
                 if ($artaval) {
                     $return_html .= '
-    <div class = "profile-job-post-detail clearfix" id = "removefollow' . $user['follow_to'] . '">
-        <div class = "profile-job-post-title-inside clearfix">
-            <div class = "profile-job-post-location-name">
-                <div class = "user_lst">
-                    <ul>
-                        <li class = "fl padding_les_left rsp"">
-                            <div class = "follow-img">';
+                        <div class = "profile-job-post-detail clearfix" id = "removefollow' . $user['follow_to'] . '">
+                            <div class = "profile-job-post-title-inside clearfix">
+                                <div class = "profile-job-post-location-name">
+                                    <div class = "user_lst">
+                                        <ul>
+                                            <li class = "fl padding_les_left rsp"">
+                                                <div class = "follow-img">';
 
 
                     $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($artaval[0]['art_name'])) . ' ' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '">';
