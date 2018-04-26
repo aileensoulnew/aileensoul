@@ -93,7 +93,7 @@
         </div>
         <div class="media-box latest_pdf">
             <div class="dash-left-title">
-                <h3><a href="{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article coming soon</a></h3>
+                <h3><a href="{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article</a></h3>
             </div>
             <div class="media-display" >
                 
