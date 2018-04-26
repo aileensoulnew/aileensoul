@@ -4041,6 +4041,9 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
+$(document).click(function(){
+    $('.right-header ul.dropdown-menu').hide();
+});
 function setCursotToEnd(el)
 {
     el.focus();
