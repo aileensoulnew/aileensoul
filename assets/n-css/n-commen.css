@@ -1351,9 +1351,9 @@ max-width: inherit;
 .no-login-right{text-align:right;}
 .no-login-right a{margin-left:5px;}
 
-.dash-left-title h3 i{width:20px; height:20px; background-size:100% !important;}
-.dash-left-title h3 .fa:before{display:none;}
-.fa.fa-info-circle{background:url('../images/info.png'); font-size:0; }
+
+
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
     .container {
