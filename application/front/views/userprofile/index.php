@@ -220,9 +220,13 @@
     	
             jQuery(document).ready(function($) {
                 $("li.user-id label").click(function(e){
+                    $(".dropdown").removeClass("open");
                     $(this).next('ul.dropdown-menu').toggle();
                     e.stopPropagation();
-                    });
+                });
+                $(".right-header ul li.dropdown a").click(function(e){                          
+                    $('.right-header ul.dropdown-menu').hide();
+                });
             });
         </script>
     </body>
