@@ -22,16 +22,19 @@
      </div>
     </header> -->
     <div class="container">
+      <div class="text-right pt20">
+          <a class="btn5" href="<?php echo $artist_profile_link ?>">Create Artist Profile</a>
+      </div>
      <div class="row">
       <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
        <div class="search-bnr-text">
-        <h1>Find best job options and connect with recruiters</h1>
+        <h1>Find The Artist That Fits Your Life</h1>
        </div>
        <div class="search-box">
-        <form>
+        <form ng-submit="searchSubmit()">
          <div class="pb20 search-input">
-          <input type="text" placeholder="Keywords, Title, Or Company">
-          <input class="city-input" type="text" placeholder="City, State or Country">
+          <input type="text" ng-model="keyword" id="q" name="q" placeholder="Company, Cat, Products" autocomplete="off">
+          <input ng-model="city" id="l" name="l" placeholder="Location" autocomplete="off">
           
          </div>
          <div class="pt5 fw pb20">
@@ -57,7 +60,7 @@
           </ul>
          </div>
          <div class="fw pt20">
-          <a href="#" class="btn1">Find Jobs</a>
+          <a href="#" class="btn1">Find Artist</a>
          </div>
         </form>
        </div>

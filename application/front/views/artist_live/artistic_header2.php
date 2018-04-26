@@ -12,127 +12,16 @@ $userid = $this->session->userdata('aileenuser');
                             <a href="<?php echo base_url('artist/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Artist Profile</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i> Message
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true" onclick="return getmsgNotification()"></i> Message
                                 <span class="noti-box">1</span>
                             </a>
                             <div class="dropdown-menu">
                                 <div class="dropdown-title">
-                                    Messages <a href="#" class="pull-right">See All</a>
+                                    Messages <a href="#" class="pull-right see_link" id="seemsg">See All</a>
                                 </div>
                                 <div class="content custom-scroll">
-                                    <ul class="dropdown-data msg-dropdown">
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
+                                    <ul class="dropdown-data msg-dropdown notification_data_in_h2">
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -291,3 +180,71 @@ $userid = $this->session->userdata('aileenuser');
         </ul>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    
+     var segment = '<?php echo "" . $this->uri->segment(1) . "" ?>';
+     if (segment != "chat") {
+         chatmsg();
+     }
+     ;
+    });  // khyati chnages  start
+    function chatmsg()
+    {
+     // khyati chnages  start
+    
+     $.ajax({
+         type: 'POST',
+         url: '<?php echo base_url() . "chat/userajax/6/6" ?>',
+         dataType: 'json',
+         data: '',
+    
+         success: function (data) {
+    
+             $('#userlist').html(data.leftbar);
+            $('.notification_data_in_h2').html(data.headertwo);
+             $('#seemsg').html(data.seeall);
+             setTimeout(
+                     chatmsg,
+                     100000
+                     );
+         },
+         error: function (XMLHttpRequest, textStatus, errorThrown) {
+         }
+     });
+    
+    };
+    
+    
+    
+    function getmsgNotification() {
+        msgNotification();
+    }
+    
+    function msgNotification() {
+    
+     $.ajax({
+         url: "<?php echo base_url(); ?>notification/update_msg_noti/3",
+         type: "POST",
+         
+         success: function (data) {
+             data = JSON.parse(data);
+         }
+     });
+    }
+    function msgheader()
+    {
+    
+     $.ajax({
+         type: 'POST',
+         url: '<?php echo base_url() . "notification/msg_header/" . $this->uri->segment(3) . "" ?>',
+         data: 'message_from_profile=6&message_to_profile=6',
+         success: function (data) {
+    
+         }
+     });
+    
+    }
+</script>
