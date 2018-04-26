@@ -211,7 +211,7 @@ padding: 5px;}
 .edit-comment .comment-submit{width:80px; position: absolute; bottom: 0; right: 0;}
 .post-comment{width:100%; float:left; padding-bottom:10px; border-bottom:1px solid #d2d2d2; margin-bottom:15px;}
 .post-comment .post-img{}
-.all-post-box .all-post-bottom{padding:15px; background:#e8f3f8; width:100%; float:left;}
+.all-post-box .all-post-bottom{padding:15px; background:#f6f6f6; width:100%; float:left;}
 .all-post-box .all-post-bottom .comment-box{padding: 0; border-bottom: 0;}
 .comment-dis{width:92%; float:left; padding-left:15px;}
 .comment-dis .comment-name a{color:#1b8ab9; font-weight:600; font-size:13px; text-transform: capitalize;}
@@ -1784,6 +1784,14 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .question-page .like-count{margin-left:-5px;}
 .modal-open .mob-bottom-menu{z-index:9;}
 .no-profile-pic{margin-left:-6px;}
+.comment-submit .btn2{
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9)); 
+	background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
+	background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+	background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
+	background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9',GradientType=0 );
+}
 
 
 /***  media query  ***/
@@ -1923,12 +1931,13 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.post-popup-box .post-box .post-img{margin-left:15px;}
 	.post-popup-box .all-upload label{margin-bottom:0; float: none; width: 100%;}
     #ask_question .all-upload label{width: auto;}
-	.post-popup-box .all-upload label i{width:100%; border-bottom:1px solid #d2d2d2;}
+	.post-popup-box .all-upload label i{width:100%; /*border-bottom:1px solid #d2d2d2;*/}
 	.post-popup-box .all-upload .upload_icon{padding:10px 15px; margin:0;}
 	.post-popup-box .all-upload .upload_icon:hover{background:none; border-radius:0;}
 	.post-popup-box .post-box-bottom{border-top:0px; padding:0;}
 	.post-popup-box .post-box-bottom ul {padding:0; width:100%;}
 	.post-popup-box .post-box-bottom ul li{width:100%; padding:5px 15px; border-bottom:1px solid #d2d2d2;}
+	.post-popup-box .post-box-bottom ul li:first-child{border-top:1px solid #d2d2d2;}
 	.post-popup-box .all-upload .upload_icon{font-size:15px;}
 	.post-popup-box .all-upload .upload_icon .upload_span_icon{font-size:14px; padding-left:9px;}
 	.post-popup-box .post-box-bottom ul li a img{height:16px;}
@@ -2046,7 +2055,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
     }
 	#bus-popup .modal-content{width:100%;}
 	.all-detail-box .tab-pane ul li{width:33.3333%;}
-	
+	.all-upload label{margin-left:0;}
 	
 
 }
@@ -2064,7 +2073,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.main-banner{max-height:260px;}
 	.post-box .post-text{width:85%;}
 	.add-comment .comment-input{width:73%;}
-	.post-box-bottom ul li a{font-size:14px;}
+	.post-box-bottom ul li a{/*font-size:14px;*/}
 	.all-upload .upload_icon{margin:0 2px;}
 	.user-btns a.btn3{width:32%; margin:0;}
 	.media-pages-tablet ul li{padding:0 10px;}
@@ -2123,7 +2132,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.user-photo-name .profile-img{width:110px; height:110px; margin-top:-80px;}
 	.upload-profile{width:100px; height:100px; font-size:0; padding:15px 15px;}
 	.user-photo-name h3 a{font-size:20px;}
-	.user-photo-name p{font-size:16px;}
+	.user-photo-name p{font-size:16px; word-wrap: break-word;}
 	.post-box .post-text{width:78%;}
 	.post-detail{width:80%;}
 	.comment-dis{width:87%;}
@@ -2133,9 +2142,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.all-upload .upload_icon{font-size:12px;}
 	/*.post-box-bottom ul li:last-child{padding-left:0; padding-top:5px;}*/
 	.post-box .post-text{font-size:16px;}
-	.post-box-bottom ul li a span{padding-left:5px;}
 	.media-pages-tablet ul li a{font-size:11px;}
-	.post-box-bottom ul li a{font-size:12px;}
 	.add-with-us .add-form{width:100%;}
 	.add-with-us .left-header{width:100%; float:left; text-align:center;}
 	.add-with-us .right-header{width:100%; float:left; text-align:center; padding-top:10px;}
@@ -2185,7 +2192,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
     .cover-pic{left: -3px; right: auto;}
     .user-photo-name .profile-img{padding: 3px;}
     .post-popup-box .all-upload .upload_icon .upload_span_icon{padding-left: 2px;}
-    .post-popup-box .all-upload .upload_icon{padding: 10px 5px 10px 12px;}
+    .post-popup-box .all-upload .upload_icon{padding: 10px 5px 10px 15px;}
     .cover-pic .btn{float: left !important; }
 	.post-discription .post-field label{font-size:14px;}
 	.btn1{font-size: 14px; padding: 3px 15px;}
@@ -2206,8 +2213,8 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.comment-dis{width:85%;}
 	.post-box .post-text{font-size:14px;}
 	.media-pages-tablet ul li{padding:0 8px;}
-	.post-box-bottom ul li a img{width:12px;}
-        .modal .post-box-bottom ul li a img{width:16px;}
+	.post-box-bottom ul li a img{/*width:12px;*/}
+    .modal .post-box-bottom ul li a img{width:16px;}
 	.comment-action li{padding:0 5px;}
 	.all-contact .all-user-list .owl-nav{top:130px;}
 	.all-noti .custom-user-box .custom-user-detail{width:83%;}
