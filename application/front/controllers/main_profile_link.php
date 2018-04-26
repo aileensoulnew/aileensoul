@@ -1,6 +1,7 @@
  <?php 
- $userid = $this->session->userdata('aileenuser');
-        
+ $userid = $this->session->userdata('aileenuser'); 
+ // print_r($userid);
+ // exit;
         /*code for business profile link start */
 
         $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
@@ -14,6 +15,7 @@
         /*code for Artis profile link start */
             $contition_array = array('user_id' => $userid);
             $artist_profile_count = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
         /*Code for artist profile link ends*/ 
 
         /*code for Job profile link start */
@@ -36,7 +38,7 @@
         /*Code for freelance aply link ends*/
 
             $this->business_profile_link = base_url("business-profile/");
-            $this->artist_profile_link = base_url("artist/home/");
+            $this->artist_profile_link = base_url("find-artist");
             $this->job_profile_link = base_url("job/");
             $this->recruiter_profile_link = base_url("recruiter/");
             $this->freelance_hire_profile_link = base_url("freelance/");
@@ -52,7 +54,7 @@
                 $this->business_profile_link = base_url("business-profile/home");
                  $this->business_profile_set = 1;
             }
-            if(!empty($artist_profile_count) &&  count($artist_profile_count)>1){
+            if(!empty($artist_profile_count) &&  count($artist_profile_count)>0){
                 $this->artist_profile_link = base_url("artist/home");
                 $this->artist_profile_set = 1;
             }

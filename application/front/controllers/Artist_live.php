@@ -50,7 +50,6 @@ class Artist_live extends MY_Controller {
         $this->load->view('artist_live/index', $this->data);
     }
 
-    
     public function category() {
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -100,6 +99,7 @@ class Artist_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];
+        $this->data['is_artist_profile_set'] = $this->artist_profile_set;
         $this->load->view('artist_live/search', $this->data);
     }
 
