@@ -108,7 +108,7 @@
 .edit-question-form .all-upload .add-link{margin-left:-5px;}
 .post-popup-box .post-area textarea{min-height:100px; font-size: 15px !important;}
 .all-upload{width:100%; float:left;}
-.all-upload label{float:left;}
+.all-upload label{float:left; margin-left:-5px;}
 .all-upload .add-link{float:left;}
 .all-upload .upload_icon{margin: 0 8px; cursor: pointer;  margin-left: 4px; font-size: 14px; color: #616060;
 padding: 5px;}
@@ -1768,6 +1768,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .like-count{margin-left:-10px;}
 .question-page .like-count{margin-left:-5px;}
 .modal-open .mob-bottom-menu{z-index:9;}
+
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
