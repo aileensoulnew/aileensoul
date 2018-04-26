@@ -151,7 +151,7 @@ $userid = $this->session->userdata('aileenuser');
                 </div>
                 <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
                     <div class="job-search-box1 clearfix">
-                        <form action="https://www.aileensoul.com/search/business_search" method="get">
+                        <form action="<?php echo base_url('artist/search'); ?>" method="get">
                             <fieldset class="sec_h2">
                                 <input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
                             </fieldset>
