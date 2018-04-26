@@ -320,6 +320,10 @@
                             <ul class="dropdown-menu"> 
                                 <li ng-if="live_slug == user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="javascript:void(0);" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, postIndex)">Edit Post</a></li>
                                 <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
+                                <li>
+                                    <a ng-if="post.post_data.post_for != 'question'" href="<?php echo base_url(); ?>post-detail/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in New Tab</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
