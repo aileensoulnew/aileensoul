@@ -114,6 +114,11 @@ app.controller('searchController', function ($scope, $http) {
         }, function (error) {});
     }
 
+    $scope.removeViewMore = function(mainId,removeViewMore) {    
+        $("#"+mainId).removeClass("view-more-expand");
+        $("#"+removeViewMore).remove();
+    };
+
     $scope.addToContact = function (user_id) {
         $http({
             method: 'POST',
