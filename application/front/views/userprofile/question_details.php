@@ -285,9 +285,19 @@
                                     <div class="post-img">
                                         <?php if ($leftbox_data['user_image'] != '') { ?> 
                                             <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '?ver=' . time() ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
-                                        <?php } else { ?>
-                                            <img ng-src="<?php echo base_url(NOBUSIMAGE . '?ver=' . time()) ?>" alt="<?php echo $leftbox_data['first_name'] ?>">
-                                        <?php } ?>
+                                        <?php } else { 
+                                            if($leftbox_data['user_gender'] == "M")
+                                            {?>                                
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <?php
+                                            }
+                                            if($leftbox_data['user_gender'] == "F")
+                                            {
+                                            ?>
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <?php
+                                            }
+                                         } ?>
 
                                     </div>
                                     <div class="comment-input">
