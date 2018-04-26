@@ -38,7 +38,7 @@
 .left-part .user-profile-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px; padding:6px;}
 .user-profile-box .user-cover-img{width:100%; height:110px;}
 .user-profile-box .user-cover-img img{width:100%; height:110px;}
-.user-profile-box .user-detail{padding:7px 0px 7px 7px; width:100%; float:left; position:relative; background:#e8f3f8;}
+.user-profile-box .user-detail{padding:7px 0px 7px 7px; width:100%; float:left; position:relative; background:#fffffff;}
 .user-profile-box .user-detail:after{width:100%; position:absolute; height:1px; background:#d2d2d2; bottom:38px; content:""; left:0;}
 .user-profile-box .user-detail .user-img{width:80px; border:1px solid #d2d2d2; padding:3px; height:80px; float:left; position:relative; z-index:1; background:#fff;}
 .user-profile-box .user-detail .user-img img{width:100%;}
@@ -74,7 +74,7 @@
 .post-img{width:50px; height:50px; float:left; }
 .modal .post-img{width:40px; height:40px;}
 .post-img img{width:100%;}
-.post-box .post-text{width:90%; float:left; padding:14px 10px; font-size:22px; color:#999;}
+.post-box .post-text{width:90%; float:left; padding:14px 10px; font-size:22px; color:#7b7b7b;}
 #ask_question.edit-question-form .post-box .post-text{width:100%; padding:0;}
 #ask_question.edit-question-form .post-box .post-text textarea{padding:5px 0;}
 .edit-question-form .post-box .post-text textarea{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0;}
@@ -110,7 +110,7 @@
 .all-upload{width:100%; float:left;}
 .all-upload label{float:left; margin-left:-5px;}
 .all-upload .add-link{float:left;}
-.all-upload .upload_icon{margin: 0 8px; cursor: pointer;  margin-left: 4px; font-size: 14px; color: #616060;
+.all-upload .upload_icon{margin: 0 8px; cursor: pointer;  margin-left: 4px; font-size: 14px; color: #7b7b7b;
 padding: 5px;}
 .all-upload .upload_icon:first-child{margin-left: 0;}
 .all-upload .upload_span_icon{font-family: 'arial'; padding-left: 2px; cursor: pointer;}
@@ -229,7 +229,7 @@ padding: 5px;}
     outline: 0;
     padding: 6.5px 15px;
     color: #000;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     border-radius: 4px;
     resize: none;
@@ -1084,13 +1084,20 @@ header.profile-header .logo a{color:#5c5c5c;}
 .like-popup .modal-body{padding:0;}
 /***  end article page  ***/
 .gradient-bg{
-    background:#fff;
-    background-image:-ms-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:-moz-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:-o-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:-webkit-gradient(radial,center center,0,center center,286,color-stop(30,#FCFCFF),color-stop(100,#d5ebfd));
-    background-image:-webkit-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:radial-gradient(ellipse farthest-corner at center,#FCFCFF 30%,#d5ebfd 100%)
+    /*background:#fff;
+    background-image:-ms-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#e8f3f8 100%);
+    background-image:-moz-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#e8f3f8 100%);
+    background-image:-o-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#e8f3f8 100%);
+    background-image:-webkit-gradient(radial,center center,0,center center,286,color-stop(30,#FCFCFF),color-stop(100,#e8f3f8));
+    background-image:-webkit-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#e8f3f8 100%);
+    background-image:radial-gradient(ellipse farthest-corner at center,#FCFCFF 30%,#e8f3f8 100%)*/
+
+	background: #f6f6f6; 
+	background: -moz-linear-gradient(top, #f6f6f6 0%, #ffffff 100%);
+	background: -webkit-linear-gradient(top, #f6f6f6 0%,#ffffff 100%);
+	background: linear-gradient(to bottom, #f6f6f6 0%,#ffffff 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0 ); 
+
 }
 .sticky-container.right-profile{display:none;}
 .custom-dediter{padding:20px 0 60px; border-bottom:1px solid #d2d2d2; min-height:300px; position:relative;}
