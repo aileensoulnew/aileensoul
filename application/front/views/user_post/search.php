@@ -54,9 +54,8 @@
                                 <span ng-if="searchProfile.city">{{searchProfile.city}}, {{searchProfile.country}}</span>
                             </div>
                             <div class="profile-btns">                                
-                                <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="!searchProfile.follow_status" class="btn1" title="Follow">Follow</a>
-                                <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="searchProfile.follow_status == '1'" class="btn1" title="Following">Following</a>
-                                <a ng-href="<?php echo base_url('message') ?>" class="btn3" title="Message">Message</a>
+                                <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="!searchProfile.follow_status" class="btn3" title="Follow">Follow</a>
+                                <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="searchProfile.follow_status == '1'" class="btn1" title="Following">Following</a>                                
                             </div>
                         </div>
                     </div>
@@ -69,13 +68,17 @@
                                 <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
                                 <div class="all-post-top">
                                     <div class="post-head">
-                                        <div class="post-img" ng-if="post.post_data.post_for == 'question'">
+                                        <div class="post-img" ng-if="post.post_data.post_for == 'question' && post.user_data.user_image !=''">
                                             <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
+                                        </div>
+                                        <div class="post-img" ng-if="post.post_data.post_for == 'question' && post.user_data.user_image == ''">
                                             <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                             <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         </div>
-                                        <div class="post-img" ng-if="post.post_data.post_for != 'question'">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != ''">
+                                        <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image != ''">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}">
+                                        </div>
+                                        <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image == ''">
                                             <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                             <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         </div>
