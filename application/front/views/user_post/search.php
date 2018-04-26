@@ -38,13 +38,14 @@
                         <h3>Profiles </h3>
                         <div class="search-profiles" ng-repeat="searchProfile in searchProfileData">
                             <div class="profile-img post-img">
-                                <a href="#">
-                                    <img src="<?php echo USER_THUMB_UPLOAD_URL ?>{{searchProfile.user_image}}" alt="{{searchProfile.fullname}}" ng-if="searchProfile.user_image">
-                                    <span ng-if="!searchProfile.user_image" ng-bind="(searchProfile.first_name| limitTo:1 | uppercase) + (searchProfile.last_name | limitTo:1 | uppercase)"></span>
+                                <a href="<?php echo base_url() ?>{{searchProfile.user_slug}}">
+                                    <img src="<?php echo USER_THUMB_UPLOAD_URL ?>{{searchProfile.user_image}}" alt="{{searchProfile.fullname}}" ng-if="searchProfile.user_image">                                    
+                                    <img ng-if="!searchProfile.user_image && searchProfile.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                    <img ng-if="!searchProfile.user_image && searchProfile.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                 </a>
                             </div>
                             <div class="profile-data">
-                                <p><a href="<?php echo base_url('profiles/') ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize"></a></p>
+                                <p><a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize"></a></p>
                                 <span ng-bind="searchProfile.title_name" ng-if="searchProfile.title_name"></span>
                                 <span ng-bind="searchProfile.degree_name" ng-if="searchProfile.degree_name"></span>
                                 <span ng-if="(searchProfile.degree_name == 'null' || searchProfile.degree_name == '') && (searchProfile.title_name == 'null' || searchProfile.title_name == '')">CURRENT WORK</span>
@@ -52,9 +53,7 @@
                                 <span ng-bind="searchProfile.university_name" ng-if="searchProfile.university_name"></span>
                                 <span ng-if="searchProfile.city">{{searchProfile.city}}, {{searchProfile.country}}</span>
                             </div>
-                            <div class="profile-btns">
-                                <a href="javascript:void(0);" id="search-profile-contact-{{searchProfile.user_id}}" ng-click="addToContactSearch(searchProfile.user_id)" ng-if="!searchProfile.contact_status" class="btn1" title="Add to contact">Add to contact</a>
-                                <a href="javascript:void(0);" id="search-profile-contact-{{searchProfile.user_id}}" ng-click="addToContactSearch(searchProfile.user_id)" ng-if="searchProfile.contact_status == 'pending'" class="btn1" title="Request Send">Request Send</a>
+                            <div class="profile-btns">                                
                                 <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="!searchProfile.follow_status" class="btn1" title="Follow">Follow</a>
                                 <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="searchProfile.follow_status == '1'" class="btn1" title="Following">Following</a>
                                 <a ng-href="<?php echo base_url('message') ?>" class="btn3" title="Message">Message</a>
@@ -72,19 +71,21 @@
                                     <div class="post-head">
                                         <div class="post-img" ng-if="post.post_data.post_for == 'question'">
                                             <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
-                                            <span class="no-img-post"  ng-if="post.user_data.user_image == '' || post.question_data.is_anonymously == '1'">A</span>
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         </div>
                                         <div class="post-img" ng-if="post.post_data.post_for != 'question'">
                                             <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != ''">
-                                            <span class="no-img-post" ng-bind="(post.user_data.first_name| limitTo:1 | uppercase) + (post.user_data.last_name | limitTo:1 | uppercase)"  ng-if="post.user_data.user_image == ''"></span>
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         </div>
                                         <div class="post-detail">
                                             <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                                 <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a><span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                                <a ng-href="<?php echo base_url('profiles/') ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'"></a><span class="post-time" ng-if="post.question_data.is_anonymously == '0'">7 hours ago</span>
+                                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'"></a><span class="post-time" ng-if="post.question_data.is_anonymously == '0'">{{post.post_data.time_string}}</span>
                                             </div>
                                             <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                                <a ng-href="<?php echo base_url('profiles/') ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a><span class="post-time">7 hours ago</span>
+                                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                             </div>
                                             <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                                 <span class="post-designation" ng-if="post.user_data.title_name != '' && post.question_data.is_anonymously == '0'" ng-bind="post.user_data.title_name"></span>
@@ -100,8 +101,12 @@
                                         <div class="post-right-dropdown dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="javascript:void(0);" ng-click="EditPost(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
+                                                <!-- <li><a href="javascript:void(0);" ng-click="EditPost(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li> -->
                                                 <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
+                                                <li>
+                                                    <a ng-if="post.post_data.post_for != 'question'" href="<?php echo base_url(); ?>post-detail/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                                    <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in New Tab</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -305,152 +310,7 @@
                 </div>
             </div>
         </div>
-        <!--  poup modal  -->
-        <div style="display:none;" class="modal fade" id="post-popup1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <div class="post-popup-box">
-                        <form>
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <img src="img/user-pic.jpg">
-                                </div>
-                                <div class="post-text">
-                                    <textarea class="title-text-area" placeholder="Post Opportunity"></textarea>
-                                </div>
-                                <div class="all-upload">
-                                    <label for="file-1">
-                                        <i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Photo </span></i>
-                                        <i class="fa fa-video-camera upload_icon"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon"> <span class="upload_span_icon">  Audio </span> </i>
-                                        <i class="fa fa-file-pdf-o upload_icon"><span class="upload_span_icon"> PDF </span></i>
-                                    </label>
-                                </div>
-                                <div class="post-box-bottom">
-                                    <ul>
-                                        <li>
-                                            <a href="" data-target="#post-popup" data-toggle="modal">
-                                                <img src="img/post-op.png"><span>Post Opportunity</span>
-                                            </a>
-                                        </li>
-                                        <li class="pl15">
-                                            <a href="article.html">
-                                                <img src="img/article.png"><span>Post Article</span>
-                                            </a>
-                                        </li>
-                                        <li class="pl15">
-                                            <a href="" data-target="#ask-question" data-toggle="modal">
-                                                <img src="img/ask-qustion.png"><span>Ask Quastion</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <p class="pull-right">
-                                        <button type="submit" class="btn1" value="Submit">Post</button>
-                                    </p>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="display:none;" class="modal fade" id="post-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <div class="post-popup-box">
-                        <form>
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <img src="img/user-pic.jpg">
-                                </div>
-                                <div class="post-text">
-                                    <textarea class="title-text-area" placeholder="Post Opportunity"></textarea>
-                                </div>
-                                <div class="all-upload">
-                                    <label for="file-1">
-                                        <i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Photo </span></i>
-                                        <i class="fa fa-video-camera upload_icon"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon"> <span class="upload_span_icon">  Audio </span> </i>
-                                        <i class="fa fa-file-pdf-o upload_icon"><span class="upload_span_icon"> PDF </span></i>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="post-field">
-                                <div id="content" class="form-group">
-                                    <label>FOR WHOM THIS OPPORTUNITY ?<span class="pull-right"><img src="img/tooltip.png"></span></label>
-                                    <textarea rows="1" max-rows="5" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, PHP Developer, HR, BDE, CA, Doctor, Freelancer.." cols="10" style="resize:none"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>WHICH LOCATION?<span class="pull-right"><img src="img/tooltip.png"></span></label>
-                                    <textarea type="text" class="" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai, Moscow, Paris, Tokyo.. "></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>What is your field?<span class="pull-right"><img src="img/tooltip.png"></span></label>
-                                    <select>
-                                        <option>What is your field</option>
-                                        <option>IT</option>
-                                        <option>Teacher</option>
-                                        <option>Sports</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="text-right fw pt10 pb20 pr15">
-                                <button type="submit" class="btn1"  value="Submit">Post</button> 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="display:none;" class="modal fade" id="ask-question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <div class="post-popup-box">
-                        <form>
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <img src="img/user-pic.jpg">
-                                </div>
-                                <div class="post-text">
-                                    <textarea class="title-text-area" placeholder="Ask Quastion"></textarea>
-                                </div>
-                                <div class="all-upload">
-                                    <label for="file-1">
-                                        <i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Add Screenshot </span></i>
-                                        <i class="fa fa fa-link upload_icon"><span class="upload_span_icon"> Add Link</span>  </i> 
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="post-field">
-                                <div class="form-group">
-                                    <label>Add Description<span class="pull-right"><img src="img/tooltip.png"></span></label>
-                                    <textarea rows="1" max-rows="5" placeholder="Add Description" cols="10" style="resize:none"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Related Categories<span class="pull-right"><img src="img/tooltip.png"></span></label>
-                                    <input type="text" class="" placeholder="Related Categories">
-                                </div>
-                                <div class="form-group">
-                                    <label>From which field the Question asked?<span class="pull-right"><img src="img/tooltip.png"></span></label>
-                                    <select>
-                                        <option>What is your field</option>
-                                        <option>IT</option>
-                                        <option>Teacher</option>
-                                        <option>Sports</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="text-right fw pt10 pb20 pr15">
-                                <button type="submit" class="btn1"  value="Submit">Post</button> 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--  poup modal  -->        
         <div class="modal fade message-box" id="delete_post_model" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">

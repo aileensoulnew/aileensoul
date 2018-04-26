@@ -828,7 +828,7 @@ class User_post_model extends CI_Model {
             $keywordDegreeList = $checkKeywordDegreeList['degree_id'];
         }
 
-        $this->db->select("u.user_id,u.first_name,u.last_name,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image,jt.name as title_name,d.degree_name,it.industry_name,up.city as profession_city,us.city as student_city,d.degree_name,un.university_name")->from("user u");
+        $this->db->select("u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image,jt.name as title_name,d.degree_name,it.industry_name,up.city as profession_city,us.city as student_city,d.degree_name,un.university_name")->from("user u");
         $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
         $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
         $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
@@ -889,7 +889,7 @@ class User_post_model extends CI_Model {
         $searchPostData = array();
         $getDeleteUserPost = $this->deletePostUser($userid);
 
-        $this->db->select("up.id,up.user_id,up.post_for,UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date,up.post_id")->from("user_post up");
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");
         $this->db->join('user_opportunity uo', 'uo.post_id = up.id', 'left');
         $this->db->join('user_simple_post usp', 'usp.post_id = up.id', 'left');
         $this->db->join('user_ask_question uaq', 'uaq.post_id = up.id', 'left');
@@ -919,6 +919,7 @@ class User_post_model extends CI_Model {
           $user_post = $query->result_array();
          */
         foreach ($user_post as $key => $value) {
+            $user_post[$key]['time_string'] = $this->common->time_elapsed_string($value['created_date']);
             $searchPostData[$key]['post_data'] = $user_post[$key];
 
             $this->db->select("count(*) as file_count")->from("user_post_file upf");
@@ -927,7 +928,7 @@ class User_post_model extends CI_Model {
             $total_post_files = $query->row_array('file_count');
             $searchPostData[$key]['post_data']['total_post_files'] = $total_post_files['file_count'];
 
-            $this->db->select("u.user_id,u.user_slug,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
+            $this->db->select("u.user_id,u.user_slug,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,ui.user_image,jt.name as title_name,d.degree_name")->from("user u");
             $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
             $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
             $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
