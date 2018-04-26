@@ -5,7 +5,7 @@
                 <?php
                 if($leftbox_data['profile_background'] != '')
                 { ?>
-                    <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL.$leftbox_data['profile_background'] ?>" alt="<?php echo $leftbox_data['first_name'] ?>" class="bgImage">
+                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL.$leftbox_data['profile_background'] ?>" alt="<?php echo $leftbox_data['first_name'] ?>" class="bgImage">
                 <?php
                 }
                 else
