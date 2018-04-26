@@ -1768,6 +1768,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .like-count{margin-left:-10px;}
 .question-page .like-count{margin-left:-5px;}
 .modal-open .mob-bottom-menu{z-index:9;}
+.no-profile-pic{margin-left:-6px;}
 
 
 /***  media query  ***/
