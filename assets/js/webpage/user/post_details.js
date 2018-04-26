@@ -163,6 +163,60 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         $("#"+removeViewMore).remove();
     };
 
+    $scope.openModal2 = function(myModal2Id) {        
+        document.getElementById(myModal2Id).style.display = "block";
+        $("body").addClass("modal-open");
+    };
+    $scope.closeModal2 = function(myModal2Id) {    
+        document.getElementById(myModal2Id).style.display = "none";
+        $("body").removeClass("modal-open");
+    };
+    $scope.plusSlides2 = function(n,myModal2Id) {    
+        showSlides2(slideIndex += n,myModal2Id);
+    };
+    $scope.currentSlide2 = function(n,myModal2Id) {    
+        showSlides2(slideIndex = n,myModal2Id);
+    };
+    function showSlides2(n,myModal2Id) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides2"+myModal2Id);
+        //var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        var elem = $("#element_load_"+slideIndex);
+        $("#myModal"+myModal2Id+" #all_image_loader").hide();
+
+        if (!elem.prop('complete')) {
+            $("#myModal"+myModal2Id+" #all_image_loader").show();
+            elem.on('load', function() {
+                $("#myModal"+myModal2Id+" #all_image_loader").hide();
+                // console.log("Loaded!");
+                // console.log(this.complete);
+            });
+        } 
+        /*for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }*/
+        slides[slideIndex - 1].style.display = "block";
+        //dots[slideIndex - 1].className += " active";
+        //captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+    $(document).on('keydown', function (e) {
+        if (e.keyCode === 27) {
+            $('.modal-close').click();            
+        }
+    });
+
     $scope.post_like = function (post_id) {
         $http({
             method: 'POST',
