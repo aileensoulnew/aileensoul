@@ -40,9 +40,9 @@ if($browser == "Firefox")
                     <?php
                         $first_segment = $this->uri->segment(1);
                     ?>
-                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-profile' || ($first_segment != 'artist' || $first_segment != 'find-artist'))) { ?>
+                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-profile' && ($first_segment != 'artist' && $first_segment != 'find-artist'))) { ?>
                         <form ng-submit="search_submit" action="<?php echo base_url('searchh') ?>">
-                            <input type="text" name="q12" placeholder="Search.." id="search">
+                            <input type="text" name="q" placeholder="Search.." id="search">
                         </form>
                     <?php } ?>
                 </div>
