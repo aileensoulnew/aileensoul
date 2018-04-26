@@ -1064,8 +1064,8 @@
 	                        $(this).next('ul.dropdown-menu').toggle();
 	                        e.stopPropagation();
 	                    });
-	                    $("li.dropdown a").click(function(e){                        	
-	                        $('ul.dropdown-menu').hide();	                        
+	                    $(".right-header ul li.dropdown a").click(function(e){                        	
+	                        $('.right-header ul.dropdown-menu').hide();
 	                    });
                     });
                    

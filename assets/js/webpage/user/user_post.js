@@ -2222,9 +2222,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $("div[id^=edit-opp-post-]").hide();
         $("div[id^=ask-que-]").show();
         $("div[id^=edit-ask-que-]").hide();
-        $("div[id^=main-post-]  .post-images").show();
-
-        $("#main-post-"+post_id+ " .post-images").hide();
+        //$("div[id^=main-post-]  .post-images").show();
+        //$("#main-post-"+post_id+ " .post-images").hide();
         if(post_for == "simple")
         {
             $("#edit-simple-post-"+post_id).show();
@@ -2552,7 +2551,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 //     $('#post-popup').modal('toggle');
 // });
 $(document).click(function(){
-    $('ul.dropdown-menu').hide(); 
+    $('.right-header ul.dropdown-menu').hide();
 });
 
 $(window).on("load", function () {
