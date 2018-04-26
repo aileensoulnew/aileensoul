@@ -1065,8 +1065,7 @@
 	                        e.stopPropagation();
 	                    });
 	                    $("li.dropdown a").click(function(e){                        	
-	                        $('ul.dropdown-menu').hide();
-	                        e.stopPropagation();
+	                        $('ul.dropdown-menu').hide();	                        
 	                    });
                     });
                    
