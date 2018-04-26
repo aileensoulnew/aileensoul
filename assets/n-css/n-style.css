@@ -195,7 +195,7 @@ padding: 5px;}
 .add-comment .comment-input{width:426px; padding:0 15px; float:left;}
 .edit-comment .comment-input{width:415px; padding:0 15px 0 0; float:left;}
 .question-page .add-comment .comment-input{width:85%;}
-.custom-user-list.question-page h3{border-bottom:0;}
+.custom-user-list.question-page h3{/*border-bottom:0;*/}
 .question-page .edit-comment .comment-input{width:83%;}
 .add-comment .comment-input input{height:36px;}
 .comment-submit{width:90px; position: absolute; right: 0; bottom: 0;}
@@ -721,7 +721,7 @@ border-bottom: 0px;}
 
 /***  contacts followers following notification page  ***/
 .custom-user-list{width:905px; float:left;}
-.list-box-custom{border-radius:4px; width:100%; float:left; margin-bottom:15px;}
+.list-box-custom{border-radius:4px; width:100%; float:left; margin-bottom:15px; border:1px solid #d2d2d2;}
 .list-box-custom .no-data-box{border:0px;}
 .custom-user-list h3{margin:0; padding:10px; border-bottom:1px solid #d2d2d2; text-align:center;}
 .custom-user-box{border:1px solid #d2d2d2; border-radius:4px; padding:10px; width:100%; float:left; margin-bottom:10px;}
@@ -1191,7 +1191,6 @@ header.profile-header .logo a{color:#5c5c5c;}
 .content-bnr .content-bnt-text{position:absolute; text-align:center; width:100%; padding:100px 0; color:#fff; top:0px;}
 .content-bnr h1{padding-bottom:55px;}
 .it-works-img img{width:100%;}
-.custom-user-list.question-page h3{/*border-bottom:0px;*/}
 .question-page .post-des-detail p{padding-bottom:5px;}
 .question-page .post-des-detail p:last-child{padding-bottom:0px;}
 .post-des-detail p a{color:#5c5c5c;}
