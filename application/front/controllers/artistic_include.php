@@ -12,6 +12,7 @@ $this->data['artdata'] = $this->artistic_model->getArtUserData($userid);
  $segment3 = explode('-', $this->uri->segment(3));
  $slugdata = array_reverse($segment3);
  $regid = $slugdata[0];
+ 
 //echo "<pre>"; print_r($regid); die();
 $contition_array = array('art_id' => $regid, 'is_delete' => '0', 'status' => '1');
 $this->data['meta_des'] = $meta_des = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_city,art_country,art_skill,other_skill,user_id,status,is_delete,art_step,art_user_image,profile_background,designation,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -45,8 +46,6 @@ $art_othercategory = $this->db->select('other_category')->get_where('art_other_c
                                    else{ 
                                      $this->data['keyskill_meta'] = ucwords($art_othercategory);  
                                   }
-
-
 
 $contition_array = array('not_read' => '2', 'not_to_id' => $userid, 'not_type !=' => '1', 'not_type !=' => '2');
 $result = $this->common->select_data_by_condition('notification', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -90,6 +89,8 @@ $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
 $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
 $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
 $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
+
+$this->data['arturl'] = $this->get_url($userid);
 $this->data['artistic_header2'] = $this->load->view('artist_live/artistic_header2', $this->data, true);
 // Start - code needed for new header
 

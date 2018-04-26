@@ -590,7 +590,6 @@ class Artist_live extends MY_Controller {
         }
     }
 
-
     public function followers($id = "") {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 
