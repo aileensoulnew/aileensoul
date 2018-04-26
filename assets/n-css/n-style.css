@@ -38,9 +38,17 @@
 .left-part .user-profile-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px; padding:6px;}
 .user-profile-box .user-cover-img{width:100%; height:110px;}
 .user-profile-box .user-cover-img img{width:100%; height:110px;}
-.user-profile-box .user-detail{padding:7px 0px 7px 7px; width:100%; float:left; position:relative; background:#fffffff;}
+.user-profile-box .user-detail{padding:7px 0px 7px 7px; width:100%; float:left; position:relative; 
+	background: #ffffff; 
+	background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 48%, #ffffff 57%, #f6f6f6 100%);
+	background: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 48%,#ffffff 57%,#f6f6f6 100%); 
+	background: linear-gradient(to bottom, #ffffff 0%,#ffffff 48%,#ffffff 57%,#f6f6f6 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
+}
 .user-profile-box .user-detail:after{width:100%; position:absolute; height:1px; background:#d2d2d2; bottom:38px; content:""; left:0;}
-.user-profile-box .user-detail .user-img{width:80px; border:1px solid #d2d2d2; padding:3px; height:80px; float:left; position:relative; z-index:1; background:#fff;}
+.user-profile-box .user-detail .user-img{width:80px; border:1px solid #d2d2d2; padding:3px; height:80px; float:left; position:relative; z-index:1; background:#fff;
+	
+}
 .user-profile-box .user-detail .user-img img{width:100%;}
 .user-profile-box .user-detail-right{float:left; width:206px;}
 .user-profile-box .user-detail-right .user-detail-top{padding-left:5px; padding-right:7px;}
