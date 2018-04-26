@@ -2551,6 +2551,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 // $(document).on('click','.post-opportunity-modal, .post-ask-question-modal', function(){
 //     $('#post-popup').modal('toggle');
 // });
+$(document).click(function(){
+    $('ul.dropdown-menu').hide(); 
+});
 
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({

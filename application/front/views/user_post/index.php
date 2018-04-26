@@ -68,10 +68,15 @@
                 <div class="middle-part">
                     <div class="add-post">
                         <div class="post-box">
-                            <div class="post-img">
                                 <?php if ($leftbox_data['user_image'] != '') { ?> 
+	                            <div class="post-img">
                                     <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
-                                <?php } else { if($leftbox_data['user_gender'] == "M")
+                                </div>
+                                <?php } else { 
+                                	
+                                echo '<div class="post-img no-profile-pic">';
+                                	
+                                		if($leftbox_data['user_gender'] == "M")
                                         {?>                                
                                             <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                         <?php
@@ -82,8 +87,9 @@
                                             <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         <?php
                                         }
+								echo "</div>";
                                     } ?>
-                            </div>
+                            	
                             <div class="post-text" data-target="#post-popup" data-toggle="modal" onclick="void(0)">
                                 Share an opportunity, Article
                             </div>
@@ -145,12 +151,14 @@
                                             <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         </a>
                                     </div>
-                                    <div class="post-img" ng-if="post.post_data.post_for != 'question'">
+                                    <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image != ''">
                                         <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != ''">                                            
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}">
                                         </a>
+                                    </div>
+                                    <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image == ''">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </div>
                                     <div class="post-detail">
                                         <div class="fw" ng-if="post.post_data.post_for == 'question'">
@@ -564,7 +572,7 @@
                                             <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="handlePaste($event)"></div>
                                         </div>
                                         <div class="mob-comment">
-                                            <button ng-click="sendEditComment(comment.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
+                                            <button ng-click="sendComment(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
                                         </div>
                                         <div class="comment-submit hidden-mob">
                                             <button class="btn2" ng-click="sendComment(post.post_data.id, $index, post)">Comment</button>
@@ -955,19 +963,19 @@
         <div class="modal fade message-box like-popup" id="likeusermodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
-                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <h3>{{count_likeUser}} Likes</h3>
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <h3 ng-if="count_likeUser > 0 && count_likeUser < 2">{{count_likeUser}} Like</h3>
+            		<h3 ng-if="count_likeUser > 1">{{count_likeUser}} Likes</h3>
                     <div class="modal-body padding_less_right">
                         <div class="">
                             <ul>
-                                
-                                
                                 <li class="like-img" ng-repeat="userlist in get_like_user_list">
-                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != null">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                                     </a>
-                                      <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == null">
-                                        <div class="post-img-mainuser">{{userlist.first_name| limitTo:1 | uppercase}}{{userlist.last_name| limitTo:1 | uppercase}}</div>
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null">
+                                    	<img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                    	<img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                     <div class="like-detail">
                                         <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{userlist.fullname}}</a></h4>
@@ -1052,9 +1060,14 @@
                 <script>
                     jQuery(document).ready(function($) {
                         $("li.user-id label").click(function(e){
-                            $(this).next('ul.dropdown-menu').toggle();
-                            e.stopPropagation();
-                            });
+                        	$(".dropdown").removeClass("open");
+	                        $(this).next('ul.dropdown-menu').toggle();
+	                        e.stopPropagation();
+	                    });
+	                    $("li.dropdown a").click(function(e){                        	
+	                        $('ul.dropdown-menu').hide();
+	                        e.stopPropagation();
+	                    });
                     });
                    
                 </script>
