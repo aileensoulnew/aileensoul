@@ -507,7 +507,7 @@
                             </div>
                             <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
                                 <div class="comment-box">
-                                    <div class="post-comment" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
+                                    <div class="post-comment" nf-if="post.post_comment_data.length > 0" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
                                         <div class="post-img">
                                             <div ng-if="comment.user_image != ''">
                                                 <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">

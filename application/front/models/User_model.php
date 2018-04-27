@@ -376,6 +376,7 @@ class User_model extends CI_Model {
         if($table_name == 'user_ask_question'){
             $this->db->where(' category REGEXP "[[:<:]]('.$search_srt.')[[:>:]]"',false,false);
         }
+        $this->db->order_by("post_id","desc");
         $query = $this->db->get();
         $result_array = $query->row_array();
         return $result_array;
