@@ -94,17 +94,24 @@ app.controller('EditorController', ['$scope', function ($scope) {
         };
     }]);
 app.controller('searchController', function ($scope, $http) {
+    $scope.user_id = user_id;
     searchData();
     getContactSuggetion();
     function searchData() {
+        //$(".post_loader").show();
         $http({
             method: 'POST',
             url: base_url + 'user_post/searchData',
             data: 'searchKeyword=' + searchKeyword,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
+            $(".post_loader").hide();
             $scope.searchProfileData = success.data.profile;
             $scope.postData = success.data.post;
+            setTimeout(function(){
+                $('video,audio').mediaelementplayer(/* Options */);
+            },300);
+            
         });
     }
 
@@ -204,22 +211,22 @@ app.controller('searchController', function ($scope, $http) {
                 data: 'comment=' + comment + '&post_id=' + post_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-                    .then(function (success) {
-                        data = success.data;
-                        if (data.message == '1') {
-                            console.log(data.comment_data);
-                            if (commentClassName == 'last-comment') {
-                                $scope.postData[index].post_comment_data.splice(0, 1);
-                                $scope.postData[index].post_comment_data.push(data.comment_data[0]);
-                                $('.post-comment-count-' + post_id).html(data.comment_count);
-                                $('.editable_text').html('');
-                            } else {
-                                $scope.postData[index].post_comment_data.push(data.comment_data[0]);
-                                $('.post-comment-count-' + post_id).html(data.comment_count);
-                                $('.editable_text').html('');
-                            }
-                        }
-                    });
+            .then(function (success) {
+                data = success.data;
+                if (data.message == '1') {
+                    console.log(data.comment_data);
+                    if (commentClassName == 'last-comment') {
+                        $scope.postData[index].post_comment_data.splice(0, 1);
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    } else {
+                        $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                        $('.post-comment-count-' + post_id).html(data.comment_count);
+                        $('.editable_text').html('');
+                    }
+                }
+            });
         } else {
             $scope.isMsgBoxEmpty = true;
         }
@@ -232,10 +239,10 @@ app.controller('searchController', function ($scope, $http) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    $scope.postData[index].post_comment_data = data.all_comment_data;
-                });
+        .then(function (success) {
+            data = success.data;
+            $scope.postData[index].post_comment_data = data.all_comment_data;
+        });
 
     }
 
@@ -246,10 +253,10 @@ app.controller('searchController', function ($scope, $http) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    $scope.postData[index].post_comment_data = data.comment_data;
-                });
+        .then(function (success) {
+            data = success.data;
+            $scope.postData[index].post_comment_data = data.comment_data;
+        });
 
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {
@@ -270,19 +277,19 @@ app.controller('searchController', function ($scope, $http) {
             data: 'comment_id=' + comment_id + '&post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    if (commentClassName == 'last-comment') {
-                        $scope.postData[parent_index].post_comment_data.splice(0, 1);
-                        $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
-                        $('.post-comment-count-' + post_id).html(data.comment_count);
-                        $('.editable_text').html('');
-                    } else {
-                        $scope.postData[parent_index].post_comment_data.splice(index, 1);
-                        $('.post-comment-count-' + post_id).html(data.comment_count);
-                        $('.editable_text').html('');
-                    }
-                });
+        .then(function (success) {
+            data = success.data;
+            if (commentClassName == 'last-comment') {
+                $scope.postData[parent_index].post_comment_data.splice(0, 1);
+                $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            } else {
+                $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            }
+        });
     }
 
     $scope.likePostComment = function (comment_id, post_id) {
@@ -292,25 +299,42 @@ app.controller('searchController', function ($scope, $http) {
             data: 'comment_id=' + comment_id + '&post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    if (data.message == '1') {
-                        if (data.is_newLike == 1) {
-                            $('#post-comment-like-' + comment_id).parent('a').addClass('like');
-                            $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
-                        } else if (data.is_oldLike == 1) {
-                            $('#post-comment-like-' + comment_id).parent('a').removeClass('like');
-                            $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
-                        }
+        .then(function (success) {
+            data = success.data;
+            if (data.message == '1') {
+                if (data.is_newLike == 1) {
+                    $('#post-comment-like-' + comment_id).parent('a').addClass('like');
+                    $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
+                } else if (data.is_oldLike == 1) {
+                    $('#post-comment-like-' + comment_id).parent('a').removeClass('like');
+                    $('#post-comment-like-' + comment_id).html(data.commentLikeCount);
+                }
 
-                    }
-                });
+            }
+        });
     }
     $scope.editPostComment = function (comment_id, post_id, parent_index, index) {
+        $(".comment-for-post-"+post_id+" .edit-comment").hide();
+        $(".comment-for-post-"+post_id+" .comment-dis-inner").show();
+        $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
+        $(".comment-for-post-"+post_id+" li[id^=cancel-comment-li-]").hide();
         var editContent = $('#comment-dis-inner-' + comment_id).html();
         $('#edit-comment-' + comment_id).show();
         $('#editCommentTaxBox-' + comment_id).html(editContent);
         $('#comment-dis-inner-' + comment_id).hide();
+        $('#edit-comment-li-' + comment_id).hide();
+        $('#cancel-comment-li-' + comment_id).show();
+        $(".new-comment-"+post_id).hide();
+    }
+
+    $scope.cancelPostComment = function (comment_id, post_id, parent_index, index) {
+        
+        $('#edit-comment-' + comment_id).hide();
+        
+        $('#comment-dis-inner-' + comment_id).show();
+        $('#edit-comment-li-' + comment_id).show();
+        $('#cancel-comment-li-' + comment_id).hide();
+        $(".new-comment-"+post_id).show();
     }
 
     $scope.EditPost = function (post_id, post_for, index) {
@@ -353,7 +377,7 @@ app.controller('searchController', function ($scope, $http) {
 
     }
 
-    $scope.sendEditComment = function (comment_id) {
+    $scope.sendEditComment = function (comment_id,post_id) {
         var comment = $('#editCommentTaxBox-' + comment_id).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
@@ -367,15 +391,18 @@ app.controller('searchController', function ($scope, $http) {
                 data: 'comment=' + comment + '&comment_id=' + comment_id,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-                    .then(function (success) {
-                        data = success.data;
-                        if (data.message == '1') {
-                            $('#comment-dis-inner-' + comment_id).show();
-                            $('#comment-dis-inner-' + comment_id).html(comment);
-                            $('#edit-comment-' + comment_id).html();
-                            $('#edit-comment-' + comment_id).hide();
-                        }
-                    });
+            .then(function (success) {
+                data = success.data;
+                if (data.message == '1') {
+                    $('#comment-dis-inner-' + comment_id).show();
+                    $('#comment-dis-inner-' + comment_id).html(comment);
+                    $('#edit-comment-' + comment_id).html();
+                    $('#edit-comment-' + comment_id).hide();
+                    $('#edit-comment-li-' + comment_id).show();
+                    $('#cancel-comment-li-' + comment_id).hide();
+                    $('.new-comment-'+post_id).show();
+                }
+            });
         } else {
             $scope.isMsgBoxEmpty = true;
         }
@@ -393,12 +420,27 @@ app.controller('searchController', function ($scope, $http) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    if (data.message == '1') {
-                        $scope.postData.splice(index, 1);
-                    }
-                });
+        .then(function (success) {
+            data = success.data;
+            if (data.message == '1') {
+                $scope.postData.splice(index, 1);
+            }
+        });
+    }
+
+    $scope.like_user_list = function (post_id) {
+        $http({
+            method: 'POST',
+            url: base_url + "user_post/likeuserlist",
+            data: 'post_id=' + post_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $scope.count_likeUser = success.data.countlike;
+            $scope.get_like_user_list = success.data.likeuserlist;
+            $('#likeusermodal').modal('show');
+
+        });
     }
 });
 

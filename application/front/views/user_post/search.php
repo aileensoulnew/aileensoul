@@ -12,6 +12,19 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css?ver=' . time()); ?>">
+        <style type="text/css">
+            .mejs__overlay-button {
+                background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
+            }
+            .mejs__overlay-loading-bg-img {
+                background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
+            }
+            .mejs__button > button {
+                background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
+            }
+        </style>
     </head>
     <body class="search-page">
         <?php echo $header_profile ?>
@@ -33,9 +46,12 @@
                     </div>
                     <div class="availabel-data-box" ng-if="searchProfileData.length != '0' && postData.length != '0'">
                         <h3 class="border-bottom-none">Search result of "<?php echo $search_keyword ?>" </h3>
-                    </div>
+                    </div>                    
                     <div class="availabel-data-box" ng-if="searchProfileData.length != '0'">
                         <h3>Profiles </h3>
+                        <div class="post_loader" style="text-align:center;">
+                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                        </div>
                         <div class="search-profiles" ng-repeat="searchProfile in searchProfileData">
                             <div class="profile-img post-img">
                                 <a href="<?php echo base_url() ?>{{searchProfile.user_slug}}">
@@ -46,12 +62,15 @@
                             </div>
                             <div class="profile-data">
                                 <p><a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize"></a></p>
-                                <span ng-bind="searchProfile.title_name" ng-if="searchProfile.title_name"></span>
+                                <span ng-if="searchProfile.degree_name != ''">{{searchProfile.title_name}}</span>
+                                <span ng-if="searchProfile.degree_name == ''">{{searchProfile.degree_name}}</span>
+                                <span ng-if="searchProfile.degree_name == null && searchProfile.title_name == null">Current work</span>
+                                <!-- <span ng-bind="searchProfile.title_name" ng-if="searchProfile.title_name"></span>
                                 <span ng-bind="searchProfile.degree_name" ng-if="searchProfile.degree_name"></span>
                                 <span ng-if="(searchProfile.degree_name == 'null' || searchProfile.degree_name == '') && (searchProfile.title_name == 'null' || searchProfile.title_name == '')">CURRENT WORK</span>
                                 <span ng-bind="searchProfile.industry_name" ng-if="searchProfile.industry_name"></span>
                                 <span ng-bind="searchProfile.university_name" ng-if="searchProfile.university_name"></span>
-                                <span ng-if="searchProfile.city">{{searchProfile.city}}, {{searchProfile.country}}</span>
+                                <span ng-if="searchProfile.city">{{searchProfile.city}}, {{searchProfile.country}}</span> -->
                             </div>
                             <div class="profile-btns">                                
                                 <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="!searchProfile.follow_status" class="btn3" title="Follow">Follow</a>
@@ -61,26 +80,42 @@
                     </div>
                     <div class="availabel-data-box" ng-if="postData.length != '0'">
                         <h3>Posts </h3>
+<<<<<<< HEAD
                         <div class="p10 mobp0">
                             <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData">
+=======
+                        <div class="post_loader" style="text-align:center;">
+                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                        </div>
+                        <div class="p10">
+                            <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData" ng-init="postIndex=$index">
+>>>>>>> 3567939286475374aef75ae30af9c89c6ba4db72
                                 <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
                                 <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
                                 <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
                                 <div class="all-post-top">
                                     <div class="post-head">
                                         <div class="post-img" ng-if="post.post_data.post_for == 'question' && post.user_data.user_image !=''">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
+                                            </a>
                                         </div>
                                         <div class="post-img" ng-if="post.post_data.post_for == 'question' && post.user_data.user_image == ''">
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
                                         </div>
                                         <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image != ''">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}">
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}">
+                                            </a>
                                         </div>
                                         <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image == ''">
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
                                         </div>
                                         <div class="post-detail">
                                             <div class="fw" ng-if="post.post_data.post_for == 'question'">
@@ -158,7 +193,7 @@
                                     <div class="post-images" ng-if="post.post_data.total_post_files == '1'">
                                         <div class="one-img" ng-repeat="post_file in post.post_file_data" ng-init="$last ? loadMediaElement() : false">
                                             <a href="#" ng-if="post_file.file_type == 'image'">
-                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" />
+                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}"  ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)" />
                                             </a>
                                             <span  ng-if="post_file.file_type == 'video'"> 
                                                 <video controls width = "100%" height = "350">
@@ -185,27 +220,27 @@
                                     </div>
                                     <div class="post-images" ng-if="post.post_data.total_post_files == '2'">
                                         <div class="two-img" ng-repeat="post_file in post.post_file_data">
-                                            <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                            <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                         </div>
                                     </div>
                                     <div class="post-images" ng-if="post.post_data.total_post_files == '3'">
                                         <span ng-repeat="post_file in post.post_file_data">
                                             <div class="three-img-top" ng-if="$index == '0'">
-                                                <a href="#"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                                <a href="#"><img ng-src="<?php echo USER_POST_RESIZE4_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                             </div>
                                             <div class="two-img" ng-if="$index == '1'">
-                                                <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                                <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                             </div>
                                             <div class="two-img" ng-if="$index == '2'">
-                                                <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                                <a href="#"><img ng-src="<?php echo USER_POST_RESIZE1_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                             </div>
                                         </span>
                                     </div>
                                     <div class="post-images four-img" ng-if="post.post_data.total_post_files >= '4'">
                                         <div class="two-img" ng-repeat="post_file in post.post_file_data| limitTo:4">
-                                            <a href="#"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"></a>
+                                            <a href="#"><img ng-src="<?php echo USER_POST_RESIZE2_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                             <div class="view-more-img" ng-if="$index == '3' && post.post_data.total_post_files > '4'">
-                                                <span>View All (+4)</span>
+                                                <span><a href="javascript:void(0);" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">View All ({{post.post_data.total_post_files - 4}})</a></span>
                                             </div>
                                         </div>
                                     </div>
@@ -230,55 +265,83 @@
                                         </div>
                                     </div>
                                     <div class="like-other-box">
-                                        <a href="#" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
+                                        <a href="#" ng-click="like_user_list(post.post_data.id);" ng-bind="post.post_like_data" id="post-other-like-{{post.post_data.id}}"></a>
                                     </div>
                                 </div>
-                                <div class="all-post-bottom">
+                                <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
                                     <div class="comment-box">
-                                        <div class="post-comment" ng-repeat="comment in post.post_comment_data">
+                                        <div class="post-comment" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
                                             <div class="post-img">
-                                                <div class="post-img" ng-if="comment.user_image != ''">
-                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
+                                                <div ng-if="comment.user_image != ''">
+                                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                        <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
+                                                    </a>
                                                 </div>
                                                 <div class="post-img" ng-if="comment.user_image == ''">
-                                                    <div class="post-img-mainuser">{{comment.first_name| limitTo:1 | uppercase}}{{comment.last_name| limitTo:1 | uppercase}}</div>
+                                                    <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                        <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                        <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="comment-dis">
-                                                <div class="comment-name"><a ng-bind="comment.username"></a></div>
+                                                <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
                                                 <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}" ng-bind-html="comment.comment"></div>
                                                 <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
                                                     <div class="comment-input">
                                                         <!--<div contenteditable data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}},$index,post)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" onpaste="OnPaste_StripFormatting(event);"></div>-->
-                                                        <div contenteditable data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}},$index,post)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                                        <div contenteditable="true" data-directive ng-model="editComment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendEditComment({{comment.comment_id}}, post.post_data.id)" id="editCommentTaxBox-{{comment.comment_id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
                                                     </div>
-                                                    <div class="comment-submit">
-                                                        <button class="btn2" ng-click="sendEditComment(comment.comment_id)">Comment</button>
+                                                    <div class="mob-comment">
+                                                        <button ng-click="sendEditComment(comment.comment_id, post.post_data.id)"><img ng-src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
+                                                    </div>
+                                                    
+                                                    <div class="comment-submit hidden-mob">
+                                                        <button class="btn2" ng-click="sendEditComment(comment.comment_id, post.post_data.id)">Save</button>
                                                     </div>
                                                 </div>
                                                 <ul class="comment-action">
-                                                    <li><a href="javascript:void(0);" ng-click="likePostComment(comment.comment_id, post.post_data.id)" ng-if="comment.is_userlikePostComment == '1'" class="like"><i class="fa fa-thumbs-up"></i><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span></a></li>
-                                                    <li><a href="javascript:void(0);" ng-click="likePostComment(comment.comment_id, post.post_data.id)" ng-if="comment.is_userlikePostComment == '0'"><i class="fa fa-thumbs-up"></i><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span></a></li>
-                                                    <li><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Edit</a></li> 
-                                                    <li><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, $parent.$index, $index, post)">Delete</a></li>
-                                                    <li><a href="javascript:void(0);" ng-bind="comment.created_date"></a></li>
+                                                    <li ng-if="comment.is_userlikePostComment == '1'"><a href="javascript:void(0);" ng-click="likePostComment(comment.comment_id, post.post_data.id)" class="like"><i class="fa fa-thumbs-up"></i><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span></a></li>
+                                                    <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" ng-click="likePostComment(comment.comment_id, post.post_data.id)"><i class="fa fa-thumbs-up"></i><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span></a></li>
+                                                    <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Edit</a></li> 
+                                                    <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancelPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Cancel</a></li> 
+                                                    <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)">Delete</a></li>
+                                                    <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
                                                 </ul>
                                             </div>
                                         </div>
 
-                                        <div class="add-comment">
+                                        <div class="add-comment new-comment-{{post.post_data.id}}">
                                             <div class="post-img">
-                                                <?php if ($leftbox_data['user_image'] != '') { ?> 
-                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '?ver=' . time() ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
-                                                <?php } else { ?>
-                                                    <img ng-src="<?php echo base_url(NOBUSIMAGE . '?ver=' . time()) ?>" alt="<?php echo $leftbox_data['first_name'] ?>">
-                                                <?php } ?>
+                                                <?php 
+                                                if ($leftbox_data['user_image'] != '')
+                                                { ?> 
+                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '?ver=' . time() ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                                <?php
+                                                }
+                                                else
+                                                { 
+                                                    if($leftbox_data['user_gender'] == "M")
+                                                    {?>                                
+                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <?php
+                                                    }
+                                                    if($leftbox_data['user_gender'] == "F")
+                                                    {
+                                                    ?>
+                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                    <?php
+                                                    }                                
+                                                } ?>
 
                                             </div>
                                             <div class="comment-input">
-                                                <div contenteditable data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="handlePaste($event)"></div>
+                                                <div contenteditable="true" data-directive ng-model="comment" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Add a Comment ..." ng-enter="sendComment({{post.post_data.id}},$index,post)" id="commentTaxBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" ng-paste="handlePaste($event)"></div>
                                             </div>
-                                            <div class="comment-submit">
+                                            <div class="mob-comment">
+                                                <button ng-click="sendComment(post.post_data.id, $index, post)"><img ng-src="<?php echo base_url('assets/img/send.png') ?>"></button>
+                                            </div>
+                                            <div class="comment-submit hidden-mob">
                                                 <button class="btn2" ng-click="sendComment(post.post_data.id, $index, post)">Comment</button>
                                             </div>
                                         </div>
@@ -287,6 +350,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="right-part">
                     <div class="add-box">
@@ -299,15 +363,22 @@
                                 <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="post-img" ng-if="contact.user_image != ''">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
+                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self" >
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
+                                            </a>
                                         </div>
                                         <div class="post-img" ng-if="contact.user_image == ''">
-                                            <div class="post-img-mainuser">{{contact.first_name| limitTo:1 | uppercase}}{{contact.last_name| limitTo:1 | uppercase}}</div>
+                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self" >
+                                                <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
                                         </div>
                                         <div class="user-list-detail">
-                                            <p class="contact-name"><a href="profiles/{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)"></a></p>
+                                            <p class="contact-name">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                            </p>
                                             <p class="contact-designation">
-                                                <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
                                                 <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name == ''">{{contact.degree_name| uppercase}}</a>
                                                 <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
                                             </p>
@@ -322,9 +393,11 @@
                                                 <img ng-src="<?php echo base_url('assets/n-images/view-all.png?ver=' . time()) ?>">
                                             </div>
                                             <div class="user-list-detail">
-                                                <p class="contact-name"><a href="#">Find More Contacts</a></p>
+                                                <p class="contact-name">
+                                                    <a href="<?php echo base_url(); ?>contact-request" target="_self">Find More Contacts</a>
+                                                </p>
                                             </div>
-                                            <button class="follow-btn">View More</button>
+                                            <button class="follow-btn"><a href="<?php echo base_url(); ?>contact-request" target="_self">View More</a></button>
                                         </div>
                                     </a>
                                 </div>
@@ -347,6 +420,53 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade message-box" id="delete_model" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="postedit" data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class="pop_content">Do you want to delete this comment?<div class="model_ok_cancel"><a class="okbtn btn1" ng-click="deleteComment(c_d_comment_id, c_d_post_id, c_d_parent_index, c_d_index, c_d_post)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade message-box like-popup" id="likeusermodal" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>            
+                    <h3 ng-if="count_likeUser > 0 && count_likeUser < 2">{{count_likeUser}} Like</h3>
+                    <h3 ng-if="count_likeUser > 1">{{count_likeUser}} Likes</h3>
+                    <div class="modal-body padding_less_right">
+                        <div class="">
+                            <ul>
+                                <li class="like-img" ng-repeat="userlist in get_like_user_list">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''">
+                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
+                                    </a>
+                                      <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null">
+                                        <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                        <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                    </a>
+                                    <div class="like-detail">
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{userlist.fullname}}</a></h4>
+                                        <p ng-if="userlist.title_name == ''">{{userlist.degree_name}}</p>
+                                        <p ng-if="userlist.title_name != null">{{userlist.title_name}}</p>
+                                        <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Popup Model -->
+
         <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
@@ -356,6 +476,8 @@
                                 $(this).height(0).height(this.scrollHeight);
                                 }).find('textarea').change();
         </script>
+        <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>

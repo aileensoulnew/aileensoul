@@ -613,7 +613,7 @@
                                             </a>
                                         </div>
                                         <div class="user-list-detail">
-                                            <p class="contact-name"><a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)"></a></p>
+                                            <p class="contact-name"><a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a></p>
                                             <p class="contact-designation">
                                                 <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
                                                 <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == ''">{{contact.degree_name| uppercase}}</a>
@@ -630,9 +630,9 @@
                                                 <img ng-src="<?php echo base_url('assets/n-images/view-all.png?ver=' . time()) ?>">
                                             </div>
                                             <div class="user-list-detail">
-                                                <p class="contact-name"><a href="#">Find More Contacts</a></p>
+                                                <p class="contact-name"><a href="<?php echo base_url(); ?>contact-request" target="_self">Find More Contacts</a></p>
                                             </div>
-                                            <button class="follow-btn">View More</button>
+                                            <button class="follow-btn"><a href="<?php echo base_url(); ?>contact-request" target="_self">View More</a></button> 
                                         </div>
                                     </a>
                                 </div>
