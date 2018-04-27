@@ -157,6 +157,7 @@ padding: 5px;}
 .post-discription img{max-width: 100%; cursor: pointer;}
 .post-discription h5{margin:0; line-height:1.5; text-align: left;}
 .post-discription h5 p{padding-bottom:10px; font-size:13px;}
+.post-discription .post-des-detail h5 p{padding-bottom:2px; margin-top:-2px; width:100%; float:left;}
 .post-discription h5 p b{font-size:15px; padding-right: 5px;}
 .post-des-detail{font-size:13px; position: relative; width: 100%; float: left;}
 .post-des-detail b{font-size:14px; padding-right: 5px;}
@@ -2069,6 +2070,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.custom-user-box .custom-user-detail{width:67%;}
 	.custom-user-box{margin-bottom:0;}
 	.custom-user-list h3{font-size:20px;}
+	.table-responsive.content td a{font-size:14px;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
@@ -2244,7 +2246,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.por_content ul li img{margin-right: 3px; float: left; width: 40px; height: 40px;}
 	.list-box-custom .nav-tabs > li > a{font-size:13px;}
 	.all-detail-box .tab-pane ul li{font-size:13px;}
-	.custom-user-btn a{width:75px;}.
+	.custom-user-btn a{width:75px;}
 	
 }
 @media screen and (max-width: 320px) {
