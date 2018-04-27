@@ -100,6 +100,12 @@ app.filter('slugify', function () {
         return slug;
     };
 });
+app.filter('removeLastCharacter', function () {
+    return function (text) {
+        return text.substr(0, text.lastIndexOf(".") + 1);
+        //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
 app.controller('EditorController', ['$scope', function ($scope) {
         $scope.handlePaste = function (e) {
             e.preventDefault();
@@ -119,6 +125,7 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         $http.get(base_url + "user_post/post_data/?post_id=" + post_id).then(function (success) {
             $('#loader').hide();
             $scope.postData = success.data;
+            setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);
         }, function (error) {});
     }
 
