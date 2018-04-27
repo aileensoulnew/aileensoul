@@ -886,7 +886,7 @@ border-bottom: 0px;}
 
 .request-noti{border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left; margin-bottom:10px;}
 .request-noti .no-data-box{border:0px;}
-.right-title{padding:10px;  border-bottom:1px solid #d2d2d2; font-size:17px;}
+.right-title{padding:12px 10px;  border-bottom:1px solid #d2d2d2; font-size:18px;}
 .request-list{padding:0; width:100%; float:left; margin:0;}
 .request-list li{list-style-type:none;}
 .request-list li a{padding:10px 10px; border-bottom:1px solid #d2d2d2; width:100%; float:left;  display: -webkit-flex; /* Safari */
@@ -899,8 +899,9 @@ border-bottom: 0px;}
    flex: 1; color:#5c5c5c;}
 .request-list .post-img{max-width:50px;}
 .request-detail{padding-left:10px; float:left; width:244px;}
-.request-detail h6{font-size:15px; margin:0;}
-.request-detail p{font-size:13px;}
+.request-detail h6{font-size:14px; margin:0; color:#7c7c7c;}
+.request-detail h6 b{font-size:15px; color:#5c5c5c;}
+.request-detail p{font-size:12px; line-height:1; padding-top:5px; color:#7c7c7c;}
 .request-noti .content{height:283px;}
 /***  end all contact list  ***/
 
