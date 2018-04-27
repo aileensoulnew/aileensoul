@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
 
@@ -489,5 +490,50 @@
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_search.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
+        <script>
+            var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+                showRight = document.getElementById( 'showRight' ),
+                body = document.body;
+
+            showRight.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                disableOther( 'showRight' );
+            };
+        
+            function disableOther( button ) {
+                
+                if( button !== 'showRight' ) {
+                    classie.toggle( showRight, 'disabled' );
+                }
+            }
+            
+            $(function () {
+                $('a[href="#search"]').on('click', function (event) {
+                    event.preventDefault();
+                    $('#search').addClass('open');
+                    $('#search > form > input[type="search"]').focus();
+                });
+                $('#search, #search button.close-new').on('click keyup', function (event) {
+                    if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                        $(this).removeClass('open');
+                    }
+                });
+            });
+        </script>
+        <script>
+            jQuery(document).ready(function($) {
+                $("li.user-id label").click(function(e){
+                    $(".dropdown").removeClass("open");
+                    $(this).next('ul.dropdown-menu').toggle();
+                    e.stopPropagation();
+                });
+                $(".right-header ul li.dropdown a").click(function(e){                          
+                    $('.right-header ul.dropdown-menu').hide();
+                });
+            });
+           
+        </script>
     </body>
 </html>
