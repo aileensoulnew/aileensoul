@@ -2868,7 +2868,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 setTimeout(function(){
                     $(".comment-for-post-"+post_id+" .post-comment").remove();
                 },100);
-                
+                $(".new-comment-"+post_id).show();                
             }
         });
     }
