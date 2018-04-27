@@ -306,15 +306,22 @@
                                 <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="post-img" ng-if="contact.user_image != ''">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
+                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self" >
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
+                                            </a>
                                         </div>
                                         <div class="post-img" ng-if="contact.user_image == ''">
-                                            <div class="post-img-mainuser">{{contact.first_name| limitTo:1 | uppercase}}{{contact.last_name| limitTo:1 | uppercase}}</div>
+                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self" >
+                                                <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
                                         </div>
                                         <div class="user-list-detail">
-                                            <p class="contact-name"><a href="profiles/{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)"></a></p>
+                                            <p class="contact-name">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a>
+                                            </p>
                                             <p class="contact-designation">
-                                                <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
                                                 <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name == ''">{{contact.degree_name| uppercase}}</a>
                                                 <a href="profiles/{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
                                             </p>
@@ -329,9 +336,11 @@
                                                 <img ng-src="<?php echo base_url('assets/n-images/view-all.png?ver=' . time()) ?>">
                                             </div>
                                             <div class="user-list-detail">
-                                                <p class="contact-name"><a href="#">Find More Contacts</a></p>
+                                                <p class="contact-name">
+                                                    <a href="<?php echo base_url(); ?>contact-request" target="_self">Find More Contacts</a>
+                                                </p>
                                             </div>
-                                            <button class="follow-btn">View More</button>
+                                            <button class="follow-btn"><a href="<?php echo base_url(); ?>contact-request" target="_self">View More</a></button>
                                         </div>
                                     </a>
                                 </div>
