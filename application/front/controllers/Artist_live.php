@@ -28,26 +28,34 @@ class Artist_live extends MY_Controller {
     }
 
     public function index() {
-        if($this->artist_profile_set==1){
-            redirect($this->artist_profile_link);
-        }
         $userid = $this->session->userdata('aileenuser');
-        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
-        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $contition_array = array('user_id' => $userid, 'status' => '0');
+        $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+         // print_r($contition_array);
+         // exit;
+        //echo "<pre>"; print_r($artresult); die();
+        if ($artresult) {
+            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+            $this->load->view('artist_live/reactivate', $this->data);
+        } else {
+            if($this->artist_profile_set==1){
+                redirect($this->artist_profile_link);
+            }
+            $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+            $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+            $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+            $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+            $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+            $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+            $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+            $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Artist Profile | Aileensoul";
-    
-
-        $this->load->view('artist_live/index', $this->data);
+            $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+            $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+            $this->data['title'] = "Artist Profile | Aileensoul";
+            $this->load->view('artist_live/index', $this->data);
+        }
     }
 
     public function category() {
@@ -1508,4 +1516,27 @@ class Artist_live extends MY_Controller {
         echo $return_html;
     }
 
+    // DEACTIVATE ARTIST PROFILE
+    public function deactivate() {
+        $id = $_POST['id'];
+        $data = array(
+            'status' => '0'
+        );
+        $update = $this->common->update_data($data, 'art_reg', 'user_id', $id);
+    }
+
+    // REACTIVATE ARTIST PROFILE
+    public function reactivate() {
+        $userid = $this->session->userdata('aileenuser');
+        $data = array(
+            'status' => '1',
+            'modified_date' => date('y-m-d h:i:s')
+        );
+        $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+        if ($updatdata) {
+            redirect('artist/home', refresh);
+        } else {
+            redirect('artist/reactivate', refresh);
+        }
+    }
 }
