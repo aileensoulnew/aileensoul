@@ -34,7 +34,7 @@ class User_post_model extends CI_Model {
             $this->db->where('u.user_id !=', $user_id);
             $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
             $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
-            $condition = '(up.designation = (select up.designation from ailee_user_profession where user_id=' . $user_id . ') OR up.city = (select up.city from ailee_user_profession where user_id=' . $user_id . ') OR up.field = (select up.field from ailee_user_profession where user_id=' . $user_id . '))';
+            $condition = '(up.designation IN (select up.designation from ailee_user_profession where user_id=' . $user_id . ') OR up.city = (select up.city from ailee_user_profession where user_id=' . $user_id . ') OR up.field = (select up.field from ailee_user_profession where user_id=' . $user_id . '))';
             $this->db->where($condition);
             $this->db->group_by("u.user_id");
             $this->db->order_by('up.designation', 'asc');
@@ -321,21 +321,106 @@ class User_post_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'field');
-        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'current_study');
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,city');
 
         $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field']);
+        $getSameJobTitleProUser = $this->user_model->getJobTitleCityProUser($getUserProfessionData['designation']);
+        $getSameCityProUser = $this->user_model->getJobTitleCityProUser('',$getUserProfessionData['city']);
+        
+        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name');
         $getSameFieldStdUser = $this->user_model->getSameFieldStdUser($getUserStudentData['current_study']);
+        $getUnivetsityStdUser = $this->user_model->getUnivetsityCityStdUser($getUserStudentData['university_name']);
+        $getSameCityStdUser = $this->user_model->getUnivetsityCityStdUser('',$getUserStudentData['city']);
+        
+        $job_name = $this->user_model->getAnyJobTitle($getUserProfessionData['designation']);
+        $job_name = explode(" ", $job_name['job_name']);
+        $job_sql = "";
+        foreach ($job_name as $key => $value) {
+            $job_sql .= " name LIKE '%".$value."%' OR";
+        }
+        $job_sql = trim($job_sql," OR");
+        $jobsData = $this->user_model->getAnyJobIds($job_sql);
+        $oppPostIds = $this->user_model->getPostIdsForOppQue('user_opportunity',$jobsData['jobs_id']);
+        $quePostIds = $this->user_model->getPostIdsForOppQue('user_ask_question',$jobsData['jobs_id']);
+       /* print_r($quePostIds);
+        print_r($oppPostIds);
+        die;*/
+
+        $getInContactData = $this->user_model->getIncontactData($user_id);
+
+        $followersData = $this->user_model->getFollowersData($user_id);
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
 
-        $result_array = array();
-        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
-        if ($getUserProfessionData && $getSameFieldProUser) {
-            $this->db->where('up.user_id IN (' . $getSameFieldProUser . ')');
-        } elseif ($getUserStudentData && $getSameFieldStdUser) {
-            $this->db->where('up.user_id IN (' . $getSameFieldStdUser . ')');
+        
+        $proSqlIn = "";
+        $stdSqlIn = "";
+        if ($getUserProfessionData && $getSameFieldProUser)
+        {
+            //$this->db->where('up.user_id IN (' . $getSameFieldProUser . ')');
+            $proSqlIn .= 'up.user_id IN (' . $getSameFieldProUser . ')';
         }
+        elseif ($getUserStudentData && $getSameFieldStdUser)
+        {
+            //$this->db->where('up.user_id IN (' . $getSameFieldStdUser . ')');
+            $stdSqlIn .= 'up.user_id IN (' . $getSameFieldStdUser . ')';
+        }
+
+        if($getUserProfessionData && $getSameJobTitleProUser != "")
+        {
+            //$this->db->where('up.user_id IN (' . $getSameJobTitleProUser . ')');
+            $proSqlIn .= ($proSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $getSameJobTitleProUser . ')';
+        }
+        elseif($getUserStudentData && $getUnivetsityStdUser != "")
+        {
+            //$this->db->where('up.user_id IN (' . $getUnivetsityStdUser . ')');
+            $stdSqlIn .= ($stdSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $getUnivetsityStdUser . ')';
+        }
+
+        if($getUserProfessionData && $getSameCityProUser != "")
+        {
+            //$this->db->where('up.user_id IN (' . $getSameCityProUser . ')');
+            $proSqlIn .= ($proSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $getSameCityProUser . ')';
+        }
+        elseif($getUserStudentData && $getSameCityStdUser != "")
+        {
+            //$this->db->where('up.user_id IN (' . $getSameCityStdUser . ')');
+            $stdSqlIn .= ($stdSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $getSameCityStdUser . ')';
+        }
+
+        if($getUserProfessionData && $getInContactData['group_user'] != "")
+        {
+            $proSqlIn .= ($proSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $getInContactData['group_user'] . ')';   
+        }
+        elseif($getUserStudentData && $getInContactData['group_user'] != "")
+        {
+            $stdSqlIn .= ($stdSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $getInContactData['group_user'] . ')';
+        }
+
+        if($getUserProfessionData && $followersData['follower_user'] != "")
+        {
+            $proSqlIn .= ($proSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $followersData['follower_user']. ')';   
+        }
+        elseif($getUserStudentData && $followersData['follower_user'] != "")
+        {
+            $stdSqlIn .= ($stdSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $followersData['follower_user'] . ')';
+        }
+
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+
+        if($proSqlIn != "")
+        {
+            $this->db->where('('.$proSqlIn.')');   
+        }
+        elseif($stdSqlIn != "")
+        {
+            $this->db->where('('.$stdSqlIn.')');   
+        }
+        if($oppPostIds != "")
+        {
+            $this->db->where('(up.id IN (' . $oppPostIds['post_id'] . ') OR up.id IN('.$quePostIds['post_id'].'))');
+        }
+
         if ($getDeleteUserPost) {
             $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
         }
@@ -345,8 +430,7 @@ class User_post_model extends CI_Model {
         if ($limit != '') {
             $this->db->limit($limit,$start);
         }
-        $query = $this->db->get();
-        //echo $this->db->last_query();exit;
+        $query = $this->db->get();        
         $user_post = $query->result_array();
 
         foreach ($user_post as $key => $value) {
