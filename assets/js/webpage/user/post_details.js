@@ -334,19 +334,26 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
             data: 'comment_id=' + comment_id + '&post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    if (commentClassName == 'last-comment') {
-                        $scope.postData[parent_index].post_comment_data.splice(0, 1);
-                        $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
-                        $('.post-comment-count-' + post_id).html(data.comment_count);
-                        $('.editable_text').html('');
-                    } else {
-                        $scope.postData[parent_index].post_comment_data.splice(index, 1);
-                        $('.post-comment-count-' + post_id).html(data.comment_count);
-                        $('.editable_text').html('');
-                    }
-                });
+        .then(function (success) {
+            data = success.data;
+            if (commentClassName == 'last-comment') {
+                $scope.postData[parent_index].post_comment_data.splice(0, 1);
+                $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            } else {
+                $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                $('.post-comment-count-' + post_id).html(data.comment_count);
+                $('.editable_text').html('');
+            }
+            if(data.comment_count <= 0)
+            {
+                setTimeout(function(){
+                    $(".comment-for-post-"+post_id+" .post-comment").remove();
+                },100);
+                $(".new-comment-"+post_id).show();                
+            }
+        });
     }
 
     $scope.likePostComment = function (comment_id, post_id) {
