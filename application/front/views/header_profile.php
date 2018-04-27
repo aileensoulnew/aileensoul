@@ -216,13 +216,11 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <?php
-                        }                        
-                        ?>
-                            <li class="dropdown all">
-                                <a href="javascript:void(0);" title="All Profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_all_profile()"><img ng-src="<?php echo base_url('assets/n-images/all.png') ?>" alt="All Profile"></a>
-                                <div class="dropdown-menu"></div>
-                            </li>
+                        
+                        <li class="dropdown all">
+                            <a href="javascript:void(0);" title="All Profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_all_profile()"><img ng-src="<?php echo base_url('assets/n-images/all.png') ?>" alt="All Profile"></a>
+                            <div class="dropdown-menu"></div>
+                        </li>
                         <li class="dropdown user-id">
                             <label title="<?php echo $session_user['aileenuser_firstname']; ?>" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?php
@@ -265,6 +263,9 @@ if($browser == "Firefox")
                                 <li><a href="<?php echo base_url('dashboard/logout') ?>" title="Logout"><i class="fa fa-power-off"></i> Logout</a></li>
                             </ul>
                         </li>
+                        <?php
+                        }                        
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -278,6 +279,7 @@ if($browser == "Firefox")
             <div class="container">
                 <div class="left-header">
                     <h2 class="logo"><a href="#"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png?ver=' . time()) ?>"></a></h2>
+                    <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
 					<div class="search-mob-block">
 						<div class="">
 							<a href="#search">
@@ -345,6 +347,7 @@ if($browser == "Firefox")
 							</li>
 						</ul>
 					</div>
+                    <?php } ?>
                 </div>
 				
                
@@ -357,6 +360,7 @@ if($browser == "Firefox")
 			<li>
 				<a href="<?php echo base_url() ?>" title="Opportunity" target="_self""><img ng-src="<?php echo base_url('assets/n-images/op-bottom.png?ver=' . time()) ?>" ></a>
 			</li>
+            <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
 			<li id="add-contact" class="dropdown">
 				<a href="<?php echo base_url('contact-request') ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/add-contact-bottom.png?ver=' . time()) ?>">
 					<span class="noti-box">1</span>
@@ -375,6 +379,7 @@ if($browser == "Firefox")
 			<li>
 				<button id="showRight"><img ng-src="<?php echo base_url('assets/n-images/mob-menu.png?ver=' . time()) ?>"></button>
 			</li>
+            <?php } ?>
 		</ul>
 	</div>
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
