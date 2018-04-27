@@ -138,115 +138,115 @@
                 <div class="fw" id="loader_post" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
             </div>
             </div>
-             <div class="right_middle_side_posrt animated fadeInRightBig fixed_right_display" id="hideuserlist" >
-            <!-- <div class="all-profile-box">
-                <div class="all-pro-head">
-                    <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All">All</a></h4>
+            <div class="right_middle_side_posrt animated fadeInRightBig fixed_right_display" id="hideuserlist" >
+                <div class="left-search-box list-type-bullet hidden">
+                    <div class="">
+                        <h3>Categories</h3>
+                    </div>
+                    <ul class="search-listing">
+                        <li>
+                            <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        
+                    </ul>
+                    <p class="text-right p10"><a href="#">More Categories</a></p>
                 </div>
-                <ul class="all-pr-list">
-                    <li>
-                        <a href="<?php echo base_url('job'); ?>" title="Job Profile">
-                            <div class="all-pr-img">
-                                <img src="<?php echo base_url('assets/img/i1.jpg'); ?>" alt="<?php echo 'i1.jpg';?>">
-                            </div>
-                            <span>Job Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('recruiter'); ?>" title="Recruiter Profile">
-                            <div class="all-pr-img">
-                                <img src="<?php echo base_url('assets/img/i2.jpg'); ?>" alt="<?php echo 'i2.jpg';?>">
-                            </div>
-                            <span>Recruiter Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('freelance'); ?>" title="Freelance Profile">
-                            <div class="all-pr-img">
-                                <img src="<?php echo base_url('assets/img/i3.jpg'); ?>" alt="<?php echo 'i3.jpg';?>">
-                            </div>
-                            <span>Freelance Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('business-profile'); ?>" title="Business Profile">
-                            <div class="all-pr-img">
-                                <img src="<?php echo base_url('assets/img/i4.jpg'); ?>" alt="<?php echo 'i4.jpg';?>">
-                            </div>
-                            <span>Business Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url('artist'); ?>" title="Artistic Profile">
-                            <div class="all-pr-img">
-                                <img src="<?php echo base_url('assets/img/i5.jpg'); ?>" alt="<?php echo 'i5.jpg';?>">
-                            </div>
-                            <span>Artistic Profile</span>
-                        </a>
-                    </li>
-                </ul>
-            </div> -->
-            <div class="left-search-box list-type-bullet hidden">
-                <div class="">
-                    <h3>Categories</h3>
+                <div class="left-search-box list-type-bullet hidden">
+                    <div class="">
+                        <h3>Top Cities</h3>
+                    </div>
+                    <ul class="search-listing">
+                        <li>
+                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        <li>
+                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
+                        </li>
+                        
+                    </ul>
+                    <p class="text-right p10"><a href="#">More Categories</a></p>
                 </div>
-                <ul class="search-listing">
-                    <li>
-                        <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    
-                </ul>
-                <p class="text-right p10"><a href="#">More Categories</a></p>
+                <div class="all-profile-box">
+                    <div class="all-pro-head">
+                        <h4>Profiles<a href="<?php echo base_url('/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All">All</a></h4>
+                    </div>
+                    <ul class="all-pr-list">
+                        <li>
+                            <a href="<?php echo base_url('job'); ?>" title="Job Profile">
+                                <div class="all-pr-img">
+                                    <img src="<?php echo base_url('assets/img/i1.jpg'); ?>" alt="<?php echo "i1.jpg"; ?>">
+                                </div>
+                                <span>Job Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('recruiter'); ?>" title="Recruiter Profile">
+                                <div class="all-pr-img">
+                                    <img src="<?php echo base_url('assets/img/i2.jpg'); ?>" alt="<?php echo "i2.jpg"; ?>">
+                                </div>
+                                <span>Recruiter Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('freelance'); ?>" title="Freelance Profile">
+                                <div class="all-pr-img">
+                                    <img src="<?php echo base_url('assets/img/i3.jpg'); ?>" alt="<?php echo "i3.jpg"; ?>">
+                                </div>
+                                <span>Freelance Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('business-profile'); ?>" title="Business Profile">
+                                <div class="all-pr-img">
+                                    <img src="<?php echo base_url('assets/img/i4.jpg'); ?>" alt="<?php echo "i4.jpg"; ?>">
+                                </div>
+                                <span>Business Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url('find-artist'); ?>" title="Artistic Profile">
+                                <div class="all-pr-img">
+                                    <img src="<?php echo base_url('assets/img/i5.jpg'); ?>" alt="<?php echo "i5.jpg"; ?>">
+                                </div>
+                                <span>Artistic Profile</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="left-search-box list-type-bullet hidden">
-                <div class="">
-                    <h3>Top Cities</h3>
-                </div>
-                <ul class="search-listing">
-                    <li>
-                        <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    <li>
-                        <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                    </li>
-                    
-                </ul>
-                <p class="text-right p10"><a href="#">More Categories</a></p>
-            </div>
-        </div>
         <!-- Bid-modal  -->
         <div class="modal fade message-box biderror" id="bidmodal-limit" role="dialog">
             <div class="modal-dialog modal-lm deactive">

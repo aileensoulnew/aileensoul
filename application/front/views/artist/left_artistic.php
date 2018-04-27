@@ -77,7 +77,7 @@
                         </li>
                         <li <?php if ($this->uri->segment(1) == 'artistic' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="<?php echo base_url('artist/followers/'.$get_url); ?>">Followers <br>(<?php echo $flucount; ?>)</a>
                         </li>
-                        <li <?php if ($this->uri->segment(1) == 'artistic' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a class="padding_less_right"  title="Following" href="<?php echo base_url('artist/following/'.$get_url); ?>">Following<br><div id="countfollow">(<?php echo $countfr; ?>)</div></a>
+                        <li <?php if ($this->uri->segment(1) == 'artistic' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a class="padding_less_right"  title="Following" href="<?php echo base_url('artist/following/'.$get_url); ?>">Following<br><div id="countfollow">(<?php echo isset($countfr) ? $countfr : 0; ?>)</div></a>
                         </li>
                      </ul>
                   </div>
