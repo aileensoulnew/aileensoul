@@ -16,7 +16,7 @@
     <body class="search-page">
         <?php echo $header_profile ?>
         <div class="middle-section">
-            <div class="container">
+            <div class="container mobp0">
                 <?php echo $n_leftbar; ?>
                 <div class="middle-part">
                     <div class="no-data-box" ng-if="searchProfileData.length == '0' && postData.length == '0'">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="availabel-data-box" ng-if="postData.length != '0'">
                         <h3>Posts </h3>
-                        <div class="p10">
+                        <div class="p10 mobp0">
                             <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData">
                                 <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
                                 <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
