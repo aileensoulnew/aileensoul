@@ -161,6 +161,7 @@ class User_model extends CI_Model {
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
         $this->db->where("us.user_id =" . $user_id);
         $query = $this->db->get();
+        //echo $this->db->last_query();exit;
         $result_array = $query->row_array();
         return $result_array;
     }
@@ -292,5 +293,93 @@ class User_model extends CI_Model {
         $this->db->where('status', 'confirm');
         $result_array1 = $this->db->update('user_contact', $data1);
     }
+
+    public function getJobTitleCityProUser($designation = '',$city = '') {
+        $this->db->select("GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user")->from("user_profession up");
+        if($designation != '')
+        {
+            $this->db->where("up.designation =" . $designation);
+        }
+        if($city != '')
+        {            
+            $this->db->where("up.city =" . $city);
+        }
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['group_user'];
+    }
+
+    public function getUnivetsityCityStdUser($university_name = '',$city = '') {
+        $this->db->select("GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user")->from("user_student us");
+        if($university_name != "")
+        {            
+            $this->db->where("us.university_name =" . $university_name);
+        }
+
+        if($city != "")
+        {
+            $this->db->where("us.city =" . $city);
+        }
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['group_user'];
+    }
+
+    public function getIncontactData($user_id = "")
+    {
+        $where = "((from_id = '" . $user_id . "' OR to_id = '" . $user_id . "'))";
+
+        $this->db->select("GROUP_CONCAT(CONCAT('''', u.user_id, '''' )) AS group_user")->from("user_contact  uc");
+        $this->db->join('user u', 'u.user_id = (CASE WHEN uc.from_id=' . $user_id . ' THEN uc.to_id ELSE uc.from_id END)', 'left');
+        $this->db->where('u.user_id !=', $user_id);
+        $this->db->where('uc.status', 'confirm');
+        $this->db->where($where);        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function getFollowersData($user_id = "")
+    {
+        $this->db->select("GROUP_CONCAT(CONCAT('''', uf.follow_from, '''' )) AS follower_user")->from("user_follow  uf");
+        $this->db->where('uf.status', '1');
+        $this->db->where("uf.follow_to",$user_id);
+
+        $query = $this->db->get();
+
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    function getAnyJobTitle($title_id = '') {
+        $this->db->select('jt.name as job_name')->from('job_title jt');
+        $this->db->where('jt.title_id', $title_id);        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    function getAnyJobIds($title_name = '') {
+        $this->db->select("GROUP_CONCAT(jt.title_id) AS jobs_id")->from('job_title jt');
+        $this->db->where($title_name);        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    function getPostIdsForOppQue($table_name = '',$search_srt = '') {
+        $this->db->select("GROUP_CONCAT(CONCAT('''', post_id, '''' )) AS post_id")->from($table_name);
+        $search_srt = str_replace(",", "|", $search_srt);
+        if($table_name == 'user_opportunity'){
+            $this->db->where('opportunity_for REGEXP "[[:<:]]('.$search_srt.')[[:>:]]"',false,false);
+        }
+        if($table_name == 'user_ask_question'){
+            $this->db->where(' category REGEXP "[[:<:]]('.$search_srt.')[[:>:]]"',false,false);
+        }
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
 
 }

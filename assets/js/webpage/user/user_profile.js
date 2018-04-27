@@ -1554,7 +1554,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             {
                 var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
                 var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
-                var allowesaudio = ['mp3'];
+                var allowesaudio = ['mp3','mpeg'];
                 var allowespdf = ['pdf'];
                 var imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
 
@@ -2279,7 +2279,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
                 var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF', 'psd', 'PSD', 'bmp', 'BMP', 'tiff', 'TIFF', 'iff', 'IFF', 'xbm', 'XBM', 'webp', 'WebP', 'HEIF', 'heif', 'BAT', 'bat', 'BPG', 'bpg', 'SVG', 'svg'];
                 var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
-                var allowesaudio = ['mp3'];
+                var allowesaudio = ['mp3','mpeg'];
                 var allowespdf = ['pdf'];
                 var imgExt = false,videoExt = false,audioExt = false,pdfExt = false;
 
