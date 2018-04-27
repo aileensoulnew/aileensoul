@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
 
@@ -29,7 +30,7 @@
     <body class="search-page">
         <?php echo $header_profile ?>
         <div class="middle-section">
-            <div class="container">
+            <div class="container mobp0">
                 <?php echo $n_leftbar; ?>
                 <div class="middle-part">
                     <div class="no-data-box" ng-if="searchProfileData.length == '0' && postData.length == '0'">
@@ -83,7 +84,7 @@
                         <div class="post_loader" style="text-align:center;">
                             <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
                         </div>
-                        <div class="p10">
+                        <div class="p10 mobp0">
                             <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData" ng-init="postIndex=$index">
                                 <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
                                 <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
@@ -489,5 +490,50 @@
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_search.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
+        <script>
+            var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+                showRight = document.getElementById( 'showRight' ),
+                body = document.body;
+
+            showRight.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                disableOther( 'showRight' );
+            };
+        
+            function disableOther( button ) {
+                
+                if( button !== 'showRight' ) {
+                    classie.toggle( showRight, 'disabled' );
+                }
+            }
+            
+            $(function () {
+                $('a[href="#search"]').on('click', function (event) {
+                    event.preventDefault();
+                    $('#search').addClass('open');
+                    $('#search > form > input[type="search"]').focus();
+                });
+                $('#search, #search button.close-new').on('click keyup', function (event) {
+                    if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                        $(this).removeClass('open');
+                    }
+                });
+            });
+        </script>
+        <script>
+            jQuery(document).ready(function($) {
+                $("li.user-id label").click(function(e){
+                    $(".dropdown").removeClass("open");
+                    $(this).next('ul.dropdown-menu').toggle();
+                    e.stopPropagation();
+                });
+                $(".right-header ul li.dropdown a").click(function(e){                          
+                    $('.right-header ul.dropdown-menu').hide();
+                });
+            });
+           
+        </script>
     </body>
 </html>

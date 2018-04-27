@@ -853,7 +853,7 @@ class User_post_model extends CI_Model {
 //            $this->db->or_like('u.first_name', $searchKeyword);
 //            $this->db->or_like('u.last_name', $searchKeyword);
 //        }
-
+        $this->db->where("u.user_id != ",$userid);
 
         $this->db->where("u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%' OR up.city = '$keywordCity' OR us.city = '$keywordCity' OR up.designation = '$keywordJobTitle'"
                 . " OR up.field = '$keywordFieldList' OR us.university_name = '$keywordUniversityList' OR us.current_study = '$keywordDegreeList'");
@@ -975,22 +975,22 @@ class User_post_model extends CI_Model {
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
             $searchPostData[$key]['post_like_count'] = $post_like_count;
-            $searchPostData[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            $searchPostData[$key]['is_userlikePost'] = $this->is_userlikePost($userid, $value['id']);
             if ($post_like_count > 1) {
                 $searchPostData[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
                 $searchPostData[$key]['post_like_data'] = $post_like_data['username'];
             }
             $searchPostData[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            $searchPostData[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
+            $searchPostData[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$userid);
 
             foreach ($postCommentData as $key1 => $value1) {
-                $searchPostData[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
+                $searchPostData[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($userid, $value1['comment_id']);
                 $searchPostData[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
             }
 
             $searchPostData[$key]['page_data']['page'] = $page;
-            $searchPostData[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
+            $searchPostData[$key]['page_data']['total_record'] = $this->userPostCount($userid);
             $searchPostData[$key]['page_data']['perpage_record'] = $limit;
         }
 
