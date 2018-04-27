@@ -98,7 +98,7 @@
                     <img src="<?php echo base_url('assets/n-images/img2.jpg') ?>">
                     <div class="content-bnt-text">
                         <h1>Lorem Ipsum is a dummy text</h1>
-                        <p><a href="#" class="btn5">Create Business Profile</a></p>
+                        <p><a href="<?php echo $business_profile_link ?>" class="btn5">Create Business Profile</a></p>
                     </div>
                 </div>
             </div>
