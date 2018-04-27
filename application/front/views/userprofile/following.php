@@ -29,7 +29,7 @@
 
                     </div>
                     <div ng-if="follow.user_id != user_id" class="custom-user-btn"  id="{{follow.user_id}}">
-                        <a ng-if="follow.follow_status == 1" class="btn3 following" ng-click="unfollow_user(follow.user_id)">Following</a>
+                        <a ng-if="follow.follow_status == 1" class="btn1 following" ng-click="unfollow_user(follow.user_id)">Following</a>
                         <a ng-if="follow.follow_status == 0" class="btn3 follow" ng-click="follow_user(follow.user_id)">Follow</a>
                     </div>
 
