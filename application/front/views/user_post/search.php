@@ -33,9 +33,12 @@
                     </div>
                     <div class="availabel-data-box" ng-if="searchProfileData.length != '0' && postData.length != '0'">
                         <h3 class="border-bottom-none">Search result of "<?php echo $search_keyword ?>" </h3>
-                    </div>
+                    </div>                    
                     <div class="availabel-data-box" ng-if="searchProfileData.length != '0'">
                         <h3>Profiles </h3>
+                        <div class="post_loader" style="text-align:center;">
+                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                        </div>
                         <div class="search-profiles" ng-repeat="searchProfile in searchProfileData">
                             <div class="profile-img post-img">
                                 <a href="<?php echo base_url() ?>{{searchProfile.user_slug}}">
@@ -61,6 +64,9 @@
                     </div>
                     <div class="availabel-data-box" ng-if="postData.length != '0'">
                         <h3>Posts </h3>
+                        <div class="post_loader" style="text-align:center;">
+                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                        </div>
                         <div class="p10">
                             <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData">
                                 <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
@@ -287,6 +293,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="right-part">
                     <div class="add-box">

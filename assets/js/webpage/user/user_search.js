@@ -97,12 +97,14 @@ app.controller('searchController', function ($scope, $http) {
     searchData();
     getContactSuggetion();
     function searchData() {
+        //$(".post_loader").show();
         $http({
             method: 'POST',
             url: base_url + 'user_post/searchData',
             data: 'searchKeyword=' + searchKeyword,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
+            $(".post_loader").hide();
             $scope.searchProfileData = success.data.profile;
             $scope.postData = success.data.post;
         });
