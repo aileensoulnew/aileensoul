@@ -406,7 +406,7 @@ class User_post_model extends CI_Model {
             $stdSqlIn .= ($stdSqlIn!= '' ? ' OR ' : '').'up.user_id IN (' . $followersData['follower_user'] . ')';
         }
 
-        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        /*$this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
 
         if($proSqlIn != "")
         {
@@ -415,13 +415,13 @@ class User_post_model extends CI_Model {
         elseif($stdSqlIn != "")
         {
             $this->db->where('('.$stdSqlIn.')');   
-        }
-        if($oppPostIds != "")
+        }*/
+        /*if($oppPostIds != "")
         {
             $this->db->where('(up.id IN (' . $oppPostIds['post_id'] . ') OR up.id IN('.$quePostIds['post_id'].'))');
-        }
+        }*/
 
-        if ($getDeleteUserPost) {
+        /*if ($getDeleteUserPost) {
             $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
         }
         $this->db->where('up.status', 'publish');
@@ -429,8 +429,52 @@ class User_post_model extends CI_Model {
         $this->db->order_by('up.id', 'desc');
         if ($limit != '') {
             $this->db->limit($limit,$start);
+        }*/
+        $sql = "SELECT main.* FROM (
+                SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id FROM ailee_user_post up                
+                WHERE up.status = 'publish' AND up.is_delete = '0'";
+        if($proSqlIn != "")
+        {
+            $sql .= ' AND ('.$proSqlIn.')';
         }
-        $query = $this->db->get();        
+        elseif($stdSqlIn != "")
+        {
+            $sql .= ' AND ('.$stdSqlIn.')';   
+        }
+
+        $sql .= " UNION
+                SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id FROM ailee_user_post up                
+                WHERE up.status = 'publish' AND up.is_delete = '0' ";
+        if($oppPostIds['post_id'] != "" || $quePostIds['post_id'] != "")
+        {
+            $sql .= 'AND (';
+            if($oppPostIds['post_id'] != "")
+            {
+                $sql .= 'up.id IN (' . $oppPostIds['post_id'] . ')';
+            }
+            if($oppPostIds['post_id'] != "" && $quePostIds['post_id'] != "")
+            {
+                $sql .= ' OR ';
+            }
+            if($quePostIds['post_id'] != "")
+            {
+                $sql .= 'up.id IN('.$quePostIds['post_id'].')';
+            }
+            $sql .= ')';
+        }        
+        $sql .= ") as main WHERE main.post_for != '' ";
+        if ($getDeleteUserPost) {
+            $sql .= "AND main.id NOT IN ($getDeleteUserPost) ";
+        }
+        $sql .= "ORDER BY main.id DESC";
+        
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+
+        $query = $this->db->query($sql);
+        //$query = $this->db->get();
+        //echo $this->db->last_query();exit;
         $user_post = $query->result_array();
 
         foreach ($user_post as $key => $value) {

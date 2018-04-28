@@ -759,7 +759,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 isLoadingData = true;
             }
 
-            $('video,audio').mediaelementplayer(/* Options */);
+            setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);
         }, function (error) {});
     }
 
@@ -801,7 +801,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 isLoadingData = true;
             }
 
-            $('video,audio').mediaelementplayer(/* Options */);
+            setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);
         }, function (error) {});
     }
 

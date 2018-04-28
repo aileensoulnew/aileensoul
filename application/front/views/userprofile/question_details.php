@@ -56,7 +56,7 @@
                                 <div class="post-right-dropdown dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="javascript:void(0);" ng-click="EditPostQuestion(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
+                                        <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="javascript:void(0);" ng-click="EditPostQuestion(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
                                         <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                     </ul>
                                 </div>
