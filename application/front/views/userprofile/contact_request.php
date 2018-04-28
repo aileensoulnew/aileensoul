@@ -22,8 +22,8 @@
                     <div class="list-box-custom">
                         <h3>Pending Contact Request</h3>
                         <div class="all-list">
-                            <div class="fw post_loader" style="text-align:center; display: none;">
-                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                            <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
+                                <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                             </div>
                             <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
                                 <div class="no-data-content">
@@ -71,8 +71,8 @@
                     <div class="list-box-custom suggestion">
                         <h3>Suggestion</h3>
                         <div class="all-list">
-                            <div class="fw post_loader" style="text-align:center; display: none;">
-                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                            <div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
+                                <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
                             </div>
                             <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
                                 <div class="no-data-content">

@@ -5,7 +5,7 @@ app.controller('contactRequestController', function ($scope, $http) {
     getContactSuggetion(offset);
     contactRequestNotification();
     function getContactSuggetion(start) {
-        $(".post_loader").show();
+        $(".sugg_post_load").show();
 
         // $http.get(base_url + "user_post/getContactAllSuggetion").then(function (success) {
         //     $scope.contactSuggetion = success.data;
@@ -18,7 +18,7 @@ app.controller('contactRequestController', function ($scope, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             $("#suggestionlist").show();
-            $(".post_loader").hide();
+            $(".sugg_post_load").hide();
 
             if (success.data) {
  
@@ -33,13 +33,13 @@ app.controller('contactRequestController', function ($scope, $http) {
         });
     }
     function pending_contact_request() {
-        $(".post_loader").show();
+        $(".req_post_load").show();
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/pending_contact_request',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            $(".post_loader").hide();
+            $(".req_post_load").hide();
             $("#contactlist").show();
             pending_contact_request = success.data;
             $scope.pending_contact_request_data = pending_contact_request;
