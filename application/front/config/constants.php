@@ -40,7 +40,7 @@ define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
-    define('BASEURL', 'http://localhost/aileensoul_nf/newcode/');
+    define('BASEURL', 'http://localhost/aileensoulnew/aileensoul/');
     define('IMAGEPATHFROM', 'upload'); //upload,s3bucket 
     error_reporting(0);
 } else {
@@ -50,7 +50,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 }
 
 
-define('SITEPATH', $_SERVER['DOCUMENT_ROOT'] . '/aileensoul_nf/newcode/');
+define('SITEPATH', $_SERVER['DOCUMENT_ROOT'] . '/aileensoulnew/aileensoul/');
 define('TITLEPOSTFIX', ' - Aileensoul');
 
 define('NOIMAGE', 'uploads/avatar.png');
