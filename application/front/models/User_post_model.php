@@ -333,13 +333,15 @@ class User_post_model extends CI_Model {
         $getSameCityStdUser = $this->user_model->getUnivetsityCityStdUser('',$getUserStudentData['city']);
         
 
-        $job_name = $this->user_model->getAnyJobTitle($getUserProfessionData['designation']);        
+        $job_name = $this->user_model->getAnyJobTitle($getUserProfessionData['designation']);
+
         $job_sql = "";
-        if($job_name != ""){            
+        if(!empty($job_name) && isset($job_name['job_name']) && $job_name['job_name'] != ""){
             $job_name = explode(" ", $job_name['job_name']);
             foreach ($job_name as $key => $value) {
                 $job_sql .= " name LIKE '%".$value."%' OR";
             }
+            $job_sql = trim($job_sql," OR");
         }
         
         $oppPostIds = "";
