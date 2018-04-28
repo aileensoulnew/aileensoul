@@ -185,7 +185,11 @@
                                             <li ng-if="live_slug == post.user_data.user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
                                             <li><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                             <li>
-                                                <a ng-if="post.post_data.post_for != 'question'" href="<?php echo base_url(); ?>post-detail/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                                <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/post/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                                <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photo/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                                <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'video'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/video/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                                <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'audio'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/audio/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                                <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
                                                 <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in New Tab</a>
                                             </li>
                                         </ul>

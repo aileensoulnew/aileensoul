@@ -31,7 +31,7 @@
         </div>
         <div class="media-box latest_photos">
             <div class="dash-left-title" liveslug="{{live_slug}}" userslug="{{user_slug}}">
-                <h3><a href="{{user_slug}}/photos" ng-click='makeActive("dashboard")'><i class="fa fa-camera"></i> Photos</a></h3>
+                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/photos" ng-click='makeActive("dashboard")'><i class="fa fa-camera"></i> Photos</a></h3>
             </div>
             <div class="media-display">
                 <div class="all-meda" ng-repeat="imageData in postImageData">                    
@@ -43,7 +43,7 @@
         </div>
         <div class="media-box latest_video">
             <div class="dash-left-title">
-                <h3><a href="{{user_slug}}/videos" ng-click='makeActive("dashboard")'><i class="fa fa-video-camera"></i> Video</a></h3>
+                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/videos" ng-click='makeActive("dashboard")'><i class="fa fa-video-camera"></i> Video</a></h3>
             </div>
             <div class="media-display">
                 <div class="all-meda" ng-repeat="videoData in postVideoData">
@@ -55,7 +55,7 @@
         </div>
         <div class="media-box latest_audio">
             <div class="dash-left-title">
-                <h3><a href="{{user_slug}}/audios" ng-click='makeActive("dashboard")'><i class="fa fa-music"></i> Audio</a></h3>
+                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/audios" ng-click='makeActive("dashboard")'><i class="fa fa-music"></i> Audio</a></h3>
             </div>
             <div class="media-display">
                 <div class="all-meda" ng-repeat="audioData in postAudioData">
@@ -93,7 +93,7 @@
         </div>
         <div class="media-box latest_pdf">
             <div class="dash-left-title">
-                <h3><a href="{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article</a></h3>
+                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article</a></h3>
             </div>
             <div class="media-display" >
                 
@@ -321,7 +321,12 @@
                                 <li ng-if="live_slug == user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="javascript:void(0);" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, postIndex)">Edit Post</a></li>
                                 <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                 <li>
-                                    <a ng-if="post.post_data.post_for != 'question'" href="<?php echo base_url(); ?>post-detail/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/post/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photo/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'video'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/video/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'audio'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/audio/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+
                                     <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in New Tab</a>
                                 </li>
                             </ul>
