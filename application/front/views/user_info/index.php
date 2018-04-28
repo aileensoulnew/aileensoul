@@ -116,166 +116,164 @@
             }
 
             $scope.basicInfoValidate = {
-            rules: {
-            jobTitle: {
-            required: true,
-            },
+                rules: {
+                    jobTitle: {
+                        required: true,
+                    },
                     city: {
-                    required: true,
+                        required: true,
                     },
                     field: {
-                    required: true,
+                        required: true,
                     }
-            },
-                    messages: {
+                },
+                messages: {
                     jobTitle: {
-                    required: "Job title is required.",
+                        required: "Job title is required.",
                     },
-                            city: {
-                            required: "City is required.",
-                            },
-                            field: {
-                            required: "Field id is required.",
-                            }
+                    city: {
+                        required: "City is required.",
+                    },
+                    field: {
+                        required: "Field id is required.",
                     }
+                }
             };
             $scope.submitBasicInfoForm = function () {
             if ($scope.basicinfo.validate()) {
-            angular.element('#basicinfo #submit').addClass("form_submit");
-            $('#basic_info_ajax_load').show();
-            $http({
-            method: 'POST',
-                    url: base_url + 'user_info/ng_basic_info_insert',
-                    data: $scope.user,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-
-
-                    .then(function (success){
+                angular.element('#basicinfo #submit').addClass("form_submit");
+                $('#basic_info_ajax_load').show();
+                $http({
+                method: 'POST',
+                        url: base_url + 'user_info/ng_basic_info_insert',
+                        data: $scope.user,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .then(function (success){
                     if (success.data.errors) {
-                    $scope.errorjobTitle = success.data.errors.jobTitle;
-                    $scope.errorcityList = success.data.errors.cityList;
-                    $scope.errorfield = success.data.errors.field;
-                    $scope.errorotherField = success.data.errors.otherField;
+                        $scope.errorjobTitle = success.data.errors.jobTitle;
+                        $scope.errorcityList = success.data.errors.cityList;
+                        $scope.errorfield = success.data.errors.field;
+                        $scope.errorotherField = success.data.errors.otherField;
                     } else {
-                    if (success.data.is_success == '1') {
-                    angular.element('#basicinfo #submit').removeClass("form_submit");
-                    $('#basic_info_ajax_load').hide();
-                    window.location = base_url + 'opportunities/'
-                    } else {
-                    return false;
+                        if (success.data.is_success == '1') {
+                            angular.element('#basicinfo #submit').removeClass("form_submit");
+                            $('#basic_info_ajax_load').hide();
+                            window.location = base_url;
+                        } else {
+                            return false;
+                        }
                     }
-                    }
-                    }, function (error){
+                }, function (error){
 
-                    });
-            } else {
-            return false;
+                });
+            }
+            else {
+                return false;
             }
 
             };
-            $scope.goMainLink = function(path){
-            location.href = path;
-            }
+                $scope.goMainLink = function(path){
+                    location.href = path;
+                }
             });
             app.controller('studentInfoController', function ($scope, $http) {
-            $scope.user = {};
-            $('#student_info_ajax_load').hide();
-            // STUDENT DATA
+                $scope.user = {};
+                $('#student_info_ajax_load').hide();                
 
-            $scope.currentStudy = function () {
-            $http({
-            method: 'POST',
-                    url: base_url + 'general_data/degreeList',
-                    data: 'q=' + $scope.user.currentStudy,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
+                $scope.currentStudy = function () {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'general_data/degreeList',
+                        data: 'q=' + $scope.user.currentStudy,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
                     .then(function (success) {
-                    data = success.data;
-                    $scope.degreeSearchResult = data;
+                        data = success.data;
+                        $scope.degreeSearchResult = data;
                     });
-            }
+                }
 
-            $scope.cityList = function () {
-            $http({
-            method: 'POST',
-                    url: base_url + 'general_data/searchCityList',
-                    data: 'q=' + $scope.user.cityList,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
+                $scope.cityList = function () {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'general_data/searchCityList',
+                        data: 'q=' + $scope.user.cityList,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
                     .then(function (success) {
-                    data = success.data;
-                    $scope.citySearchResult = data;
+                        data = success.data;
+                        $scope.citySearchResult = data;
                     });
-            }
+                }
 
-            $scope.universityList = function () {
-            $http({
-            method: 'POST',
-                    url: base_url + 'general_data/searchUniversityList',
-                    data: 'q=' + $scope.user.universityName,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
+                $scope.universityList = function () {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'general_data/searchUniversityList',
+                        data: 'q=' + $scope.user.universityName,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
                     .then(function (success) {
-                    data = success.data;
-                    $scope.universitySearchResult = data;
+                        data = success.data;
+                        $scope.universitySearchResult = data;
                     });
-            }
+                }
 
-            $scope.studentInfoValidate = {
-            rules: {
-            currentStudy: {
-            required: true,
-            },
-                    city: {
-                    required: true,
+                $scope.studentInfoValidate = {
+                    rules: {
+                        currentStudy: {
+                            required: true,
+                        },
+                        city: {
+                            required: true,
+                        },
+                        university: {
+                            required: true,
+                        }
                     },
-                    university: {
-                    required: true,
-                    }
-            },
                     messages: {
-                    currentStudy: {
-                    required: "Current study is required.",
-                    },
-                            city: {
+                        currentStudy: {
+                            required: "Current study is required.",
+                        },
+                        city: {
                             required: "City is required.",
-                            },
-                            university: {
+                        },
+                        university: {
                             required: "University name is required.",
+                        }
+                    }
+                };
+                $scope.submitStudentInfoForm = function () {
+                    if ($scope.studentinfo.validate()) {
+                        angular.element('#studentinfo #submit').addClass("form_submit");
+                        $('#student_info_ajax_load').show();
+                        $http({
+                             method: 'POST',
+                            url: base_url + 'user_info/ng_student_info_insert',
+                            data: $scope.user,
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        })
+                        .then(function (success) {
+                            if (success.data.errors) {
+                                $scope.errorcurrentStudy = success.data.errors.currentStudy;
+                                $scope.errorcityList = success.data.errors.cityList;
+                                $scope.erroruniversityName = success.data.errors.universityName;
+                            } else {
+                            if (success.data.is_success == '1') {
+                                    angular.element('#studentinfo #submit').removeClass("form_submit");
+                                    $('#student_info_ajax_load').hide();
+                                    window.location = base_url;
+                                } else {
+                                    return false;
+                                }
                             }
+                        });
                     }
-            };
-            $scope.submitStudentInfoForm = function () {
-            if ($scope.studentinfo.validate()) {
-            angular.element('#studentinfo #submit').addClass("form_submit");
-            $('#student_info_ajax_load').show();
-            $http({
-            method: 'POST',
-                    url: base_url + 'user_info/ng_student_info_insert',
-                    data: $scope.user,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-                    .success(function (data) {
-                    if (data.errors) {
-                    $scope.errorcurrentStudy = data.errors.currentStudy;
-                    $scope.errorcityList = data.errors.cityList;
-                    $scope.erroruniversityName = data.errors.universityName;
-                    } else {
-                    if (data.is_success == '1') {
-                    angular.element('#studentinfo #submit').removeClass("form_submit");
-                    $('#student_info_ajax_load').hide();
-                    window.location = base_url + 'profiles/'
-                    } else {
-                    return false;
+                    else {
+                        return false;
                     }
-                    }
-                    });
-            } else {
-            return false;
-            }
-
-            };
+                };
             });
         </script>
         <script>

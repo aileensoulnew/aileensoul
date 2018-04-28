@@ -322,29 +322,34 @@ class User_post_model extends CI_Model {
             $start = 0;
 
         $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,city');
-
         $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field']);
         $getSameJobTitleProUser = $this->user_model->getJobTitleCityProUser($getUserProfessionData['designation']);
-        $getSameCityProUser = $this->user_model->getJobTitleCityProUser('',$getUserProfessionData['city']);
+        $getSameCityProUser = $this->user_model->getJobTitleCityProUser('',$getUserProfessionData['city']);        
         
         $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name');
+        
         $getSameFieldStdUser = $this->user_model->getSameFieldStdUser($getUserStudentData['current_study']);
         $getUnivetsityStdUser = $this->user_model->getUnivetsityCityStdUser($getUserStudentData['university_name']);
         $getSameCityStdUser = $this->user_model->getUnivetsityCityStdUser('',$getUserStudentData['city']);
         
-        $job_name = $this->user_model->getAnyJobTitle($getUserProfessionData['designation']);
-        $job_name = explode(" ", $job_name['job_name']);
+
+        $job_name = $this->user_model->getAnyJobTitle($getUserProfessionData['designation']);        
         $job_sql = "";
-        foreach ($job_name as $key => $value) {
-            $job_sql .= " name LIKE '%".$value."%' OR";
+        if($job_name != ""){            
+            $job_name = explode(" ", $job_name['job_name']);
+            foreach ($job_name as $key => $value) {
+                $job_sql .= " name LIKE '%".$value."%' OR";
+            }
         }
-        $job_sql = trim($job_sql," OR");
-        $jobsData = $this->user_model->getAnyJobIds($job_sql);
-        $oppPostIds = $this->user_model->getPostIdsForOppQue('user_opportunity',$jobsData['jobs_id']);
-        $quePostIds = $this->user_model->getPostIdsForOppQue('user_ask_question',$jobsData['jobs_id']);
-       /* print_r($quePostIds);
-        print_r($oppPostIds);
-        die;*/
+        
+        $oppPostIds = "";
+        $quePostIds = "";
+        if($job_sql != "")
+        {
+            $jobsData = $this->user_model->getAnyJobIds($job_sql);            
+            $oppPostIds = $this->user_model->getPostIdsForOppQue('user_opportunity',$jobsData['jobs_id']);
+            $quePostIds = $this->user_model->getPostIdsForOppQue('user_ask_question',$jobsData['jobs_id']);
+        }
 
         $getInContactData = $this->user_model->getIncontactData($user_id);
 
@@ -442,11 +447,11 @@ class User_post_model extends CI_Model {
             $sql .= ' AND ('.$stdSqlIn.')';   
         }
 
-        $sql .= " UNION
-                SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id FROM ailee_user_post up                
-                WHERE up.status = 'publish' AND up.is_delete = '0' ";
         if($oppPostIds['post_id'] != "" || $quePostIds['post_id'] != "")
         {
+            $sql .= " UNION
+                SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id FROM ailee_user_post up                
+                WHERE up.status = 'publish' AND up.is_delete = '0' ";        
             $sql .= 'AND (';
             if($oppPostIds['post_id'] != "")
             {

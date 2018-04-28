@@ -125,7 +125,7 @@
                     </div>
                     <!-- Repeated Class Start -->
                     <div class="all_user_post">
-                        <div class="user_no_post_avl" ng-if="postData.length == 0"><h3>Feed</h3><div class="user-img-nn">
+                        <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Feed</h3><div class="user-img-nn">
                                 <div class="user_no_post_img">
                                     <img src="<?php echo base_url('assets/img/bui-no.png?ver=' . time()); ?>" alt="bui-no.png">
                                 </div>
