@@ -1232,11 +1232,15 @@ header.profile-header .logo a{color:#5c5c5c;}
  .right-header .dropdown.business_popup .dropdown-menu{width:260px;}
  .custom-width-box{width:80%; margin:0 auto;}
  .custom-width-box .content-img img{width:100%;}
- .all-detail-box .tab-pane ul{padding:0; width:100%; float:left;}
+ .all-detail-box .tab-pane ul{padding:10px; width:100%; float:left;}
  .all-detail-box .tab-pane ul li{list-style-type:none; text-align:center; width:20%; float:left; padding:10px;}
- .all-detail-box .tab-pane ul li a{color:#5c5c5c;}
+ .all-detail-box .tab-pane ul li a{color:#5c5c5c; display:block; font-size:15px;}
  .all-detail-box .tab-pane ul li a span{color:#999;}
  .all-detail-box .tab-pane ul li span{display:block;}
+ .all-detail-box .tab-pane ul li a p{min-height: 80px; padding-top: 10px; color:#999;}
+ .all-detail-box .tab-pane ul li a img{width:40px; height: 40px;}
+ .all-detail-box ul li a{background:#f6f6f6; padding-top:15px; padding-left:10px; padding-right:10px; padding-bottom:10px;}
+			.all-detail-box ul li a:hover{background:#e7e7e7;}
  .search-business-top{padding:4px; width:100%; float:left; border-bottom:1px solid #d2d2d2;}
  .search-business-top .bus-cover{max-height:150px; width:100%; overflow:hidden; border-radius:4px;}
  .search-business-top .bus-cover img{border-radius:4px; min-height:150px; width:100%;}
