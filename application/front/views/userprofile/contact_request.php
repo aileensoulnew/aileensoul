@@ -22,13 +22,16 @@
                     <div class="list-box-custom">
                         <h3>Pending Contact Request</h3>
                         <div class="all-list">
+                            <div class="fw post_loader" style="text-align:center; display: none;">
+                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                            </div>
                             <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
                                 <div class="no-data-content">
                                     <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
                                     <p class="pt20">No Pending Contact Request Available</p>
                                 </div>
                             </div>
-                            <ul id="contactlist">
+                            <ul id="contactlist" style="display: none;" ng-if="pending_contact_request_data.length == '0'">
                                 <li ng-repeat="contact in pending_contact_request_data">
                                     <div class="list-box">
                                         <div class="profile-img">
@@ -68,13 +71,16 @@
                     <div class="list-box-custom suggestion">
                         <h3>Suggestion</h3>
                         <div class="all-list">
+                            <div class="fw post_loader" style="text-align:center; display: none;">
+                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                            </div>
                             <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
                                 <div class="no-data-content">
                                     <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
                                     <p class="pt20">No Suggestion Contact Request Available</p>
                                 </div>
                             </div>
-                            <ul id="contactlist">
+                            <ul id="suggestionlist" style="display: none;">
                                 <li ng-repeat="suggest in contactSuggetion">
                                     <div class="list-box">
                                         <div class="profile-img">
