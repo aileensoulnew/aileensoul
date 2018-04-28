@@ -24,8 +24,8 @@ class Business_live extends MY_Controller {
 
     public function index() {
 
-        if($this->businees_profile_set==1){
-            return redirect($this->businees_profile_link); 
+        if($this->business_profile_set==1){
+            return redirect($this->business_profile_link); 
         }
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -36,7 +36,7 @@ class Business_live extends MY_Controller {
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['business_profile_link'] =  ($this->business_profile_set == 1)?$this->business_profile_link:base_url('business-profile/registration/business-information');
+        $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
        
 
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
@@ -59,6 +59,7 @@ class Business_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Categories - Business Profile | Aileensoul";
+        $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/category', $this->data);
     }
 
@@ -77,6 +78,7 @@ class Business_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
         $this->data['category_id'] = $category_id['industry_id'];
+        $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/categoryBusinessList', $this->data);
     }
 
@@ -97,6 +99,7 @@ class Business_live extends MY_Controller {
         $this->data['category_id'] = $category_id['industry_id'];
         $this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];
+        $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/search', $this->data);
     }
 

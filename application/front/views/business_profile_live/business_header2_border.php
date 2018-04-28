@@ -322,7 +322,7 @@ $userid = $this->session->userdata('aileenuser');
             url: '<?php echo base_url() . "business_profile/deactivate" ?>',
             data: 'id=' + clicked_id,
             success: function (data) {
-                window.location = "<?php echo base_url() ?>dashboard";
+                window.location = "<?php echo base_url() ?>";
             }
         });
     }

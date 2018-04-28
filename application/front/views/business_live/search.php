@@ -16,7 +16,7 @@
     <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
-            <?php echo $search_banner; ?>
+            <?php if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
             <div class="container">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">

@@ -11,313 +11,54 @@ $userid = $this->session->userdata('aileenuser');
                         <li>
                             <a href="<?php echo base_url('business-profile/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Business Profile</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i> Message
-                                <span class="noti-box">1</span>
+                        <li class="dropdown" id="Inbox_link">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true" onclick="return getmsgNotification()"></i> Message
+                                <span class="noti-box" id="message_count"></span>
                             </a>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu InboxContainer">
                                 <div class="dropdown-title">
-                                    Messages <a href="#" class="pull-right">See All</a>
+                                    Messages <a href="#" class="pull-right" id="seemsg">See All</a>
                                 </div>
                                 <div class="content custom-scroll">
-                                    <ul class="dropdown-data msg-dropdown">
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>" alt="No Business Image">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <h6><b>Atosa Ahmedabad</b></h6>
-                                                        <div class="msg-discription">Hello how are you</div>
-
-                                                        <span class="day-text">1 month ago</span>
-
-                                                    </div> 
-                                                </div>
-                                            </a> 
-                                        </li>
+                                    <ul class="dropdown-data msg-dropdown notification_data_in_h2">
+                                        
                                     </ul>
                                 </div>
                             </div>
                         </li>
-                        
                         <li id="add-contact" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Contact
-                                <span class="noti-box">1</span>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return Notification_contact()"><i class="fa fa-users" aria-hidden="true"></i> Contact
+                                <span class="noti-box" id="addcontactLink">1</span>
                             </a>
 
                             <div class="dropdown-menu">
                                 <div class="dropdown-title">
-                                    Contact Request <a href="all-contact.html" class="pull-right">See All</a>
+                                    Contact Request
+                                    <a href="contact-list" class="pull-right" id="seecontact">See All</a>
+                                    <!-- <a href="all-contact.html" class="pull-right" id="seecontact">See All</a> -->
                                 </div>
                                 <div class="content custom-scroll">
-                                    <ul class="dropdown-data add-dropdown">
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <div class="user-name">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">IT Sector</div>
-                                                        </div>
-
-                                                    </div> 
-
-                                                </div>
-                                            </a> 
-                                            <div class="user-request">
-                                                <a href="#" class="add-left-true">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" class="add-right-true">
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <div class="user-name">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">IT Sector</div>
-                                                        </div>
-
-                                                    </div> 
-
-                                                </div>
-                                            </a> 
-                                            <div class="user-request">
-                                                <a href="#" class="add-left-true">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" class="add-right-true">
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <div class="user-name">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">IT Sector</div>
-                                                        </div>
-
-                                                    </div> 
-
-                                                </div>
-                                            </a> 
-                                            <div class="user-request">
-                                                <a href="#" class="add-left-true">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" class="add-right-true">
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <div class="user-name">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">IT Sector</div>
-                                                        </div>
-
-                                                    </div> 
-
-                                                </div>
-                                            </a> 
-                                            <div class="user-request">
-                                                <a href="#" class="add-left-true">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" class="add-right-true">
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <div class="user-name">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">IT Sector</div>
-                                                        </div>
-
-                                                    </div> 
-
-                                                </div>
-                                            </a> 
-                                            <div class="user-request">
-                                                <a href="#" class="add-left-true">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" class="add-right-true">
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="">
-                                            <a href="#">
-                                                <div class="dropdown-database">
-                                                    <div class="post-img">
-                                                        <img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>">
-                                                    </div>
-                                                    <div class="dropdown-user-detail">
-                                                        <div class="user-name">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">IT Sector</div>
-                                                        </div>
-
-                                                    </div> 
-
-                                                </div>
-                                            </a> 
-                                            <div class="user-request">
-                                                <a href="#" class="add-left-true">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="#" class="add-right-true">
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </li>
+                                    <ul class="dropdown-data add-dropdown notification_data_in_con">
+                                      
                                     </ul>
                                 </div>
                             </div>
                         </li>
-			<li class="dropdown user-id">
+			            <li class="dropdown user-id">
                             <a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span class="pr-name">Account</span></a>
 
                             <ul class="dropdown-menu account">
                                 <li>Account</li>
                                 <li><a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                 <li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
-                                <li><a href="#"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
+                                <li><a onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
                     <div class="job-search-box1 clearfix">
-                        <form action="https://www.aileensoul.com/search/business_search" method="get">
+                        <form action="search" method="get">
                             <fieldset class="sec_h2">
                                 <input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
                             </fieldset>
@@ -457,3 +198,238 @@ $userid = $this->session->userdata('aileenuser');
         </ul>
     </div>
 </div>
+
+<div class="modal fade message-box biderror" id="bidmodal" role="dialog">
+    <div class="modal-dialog modal-lm deactive">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
+            <div class="modal-body">
+                <span class="mes"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function deactivate(clicked_id) {
+        $('.biderror .mes').html("<div class='pop_content'> Are you sure you want to deactive your business profile?<div class='model_ok_cancel'><a class='okbtn' id=" + clicked_id + " onClick='deactivate_profile(" + clicked_id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+        $('#bidmodal').modal('show');
+    }
+    function deactivate_profile(clicked_id) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "business_profile/deactivate" ?>',
+            data: 'id=' + clicked_id,
+            success: function (data) {
+                window.location = "<?php echo base_url() ?>";
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function Notification_contact() {
+        contactperson();
+        update_contact_count();
+    }
+    function contactperson() {
+        $.ajax({
+            url: "<?php echo base_url(); ?>business_profile/contact_notification",
+            type: "POST",
+            dataType: 'json',
+            data: '',
+            success: function (data) {
+                $('.notification_data_in_con').html(data.contactdata);
+                $('#seecontact').html(data.seeall);
+            }
+        });
+    }
+    function update_contact_count() {
+        $.ajax({
+            url: "<?php echo base_url(); ?>business_profile/update_contact_count",
+            type: "POST",
+            success: function (data) {
+                $('span[id^=addcontact_count]').html('');
+                $('span[id^=addcontact_count]').css({
+                    "background-color": "",
+                    "padding": "0px"
+                });
+                $('#addcontactLink').removeClass('contact_notification_available');
+            }
+        });
+    }
+    function contactapprove(toid, status) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>business_profile/contact_approve",
+            type: "POST",
+            data: 'toid=' + toid + '&status=' + status,
+            dataType: "json",
+            success: function (data) {
+                //$('.mCS_no_scrollbar').html(data.contactdata);
+                $('.mCustomScrollbar').html(data.contactdata);
+                $('.contactcount').html(data.contactcount);
+                var segment = '<?php echo $this->uri->segment(2); ?>';
+                if (segment == 'contacts') {
+                    var slug = '<?php echo $slug_id; ?>';
+                    $('.art-img-nn').hide();
+                    business_contacts_header(slug);
+                }
+                var not_contact_count = $('.addcontact-left').length;
+                if (not_contact_count == 0) {
+                    var data_html = "<li><div class='art-img-nn' id='art-blank'><div class='art_no_post_img'><img src='<?php echo base_url('img/No_Contact_Request.png?ver=' . time()); ?>' alt='No Contact Request'></div><div class='art_no_post_text'>No Contact Request Available.</div></div></li>";
+                    $('#notification_main_in').html(data_html);
+                    $('#seecontact').hide();
+                }
+                if (data.co_notification.co_notification_count != 0) {
+                    var co_notification_count = data.co_notification.co_notification_count;
+                    var co_to_id = data.co_notification.co_to_id;
+                    show_contact_notification(co_notification_count, co_to_id);
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    $(document).on('keydown', function (e) {
+        if (e.keyCode === 27) {
+            $('#bidmodal').modal('hide');
+        }
+    });
+    $(document).on('keydown', function (e) {
+        if (e.keyCode === 27) {
+            $("#dropdown-content_hover").hide();
+        }
+    });
+</script>
+<script type="text/javascript" charset="utf-8">
+    function addmsg1(type, msg)
+    {
+        if (msg == 0)
+        {
+            $("#message_count").html('');
+            $("#message_count").removeAttr("style");
+            $('#message_count').removeClass('count_add');
+            $('#InboxLink').removeClass('msg_notification_available');
+            document.getElementById('message_count').style.display = "none";
+        } else
+        {
+            $('#message_count').html(msg);
+            $('#InboxLink').addClass('msg_notification_available');
+            $('#message_count').addClass('count_add');
+            document.getElementById('message_count').style.display = "block";
+        }
+    }
+    function waitForMsg1()
+    {
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url(); ?>notification/select_msg_noti/6",
+            async: true,
+            cache: false,
+            timeout: 50000,
+            success: function (data) {
+                addmsg1("new", data);
+                setTimeout(
+                        waitForMsg1,
+                        10000
+                        );
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+    ;
+    $(document).ready(function () {
+        waitForMsg1();
+    });
+    $(document).ready(function () {
+        $menuLeft = $('.pushmenu-left');
+        $nav_list = $('#nav_list');
+        $nav_list.click(function () {
+            $(this).toggleClass('active');
+            $('.pushmenu-push').toggleClass('pushmenu-push-toright');
+            $menuLeft.toggleClass('pushmenu-open');
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var InboxContainer = $('#InboxContainer').attr('class');
+        if (InboxContainer == 'dropdown2_content show') {
+            var segment = '<?php echo "" . $this->uri->segment(1) . "" ?>';
+            if (segment != "chat") {
+                chatmsg();
+            }
+        }
+        $('#Inbox_link').on('click', function () {
+            chatmsg();
+        });
+    });
+    function chatmsg()
+    {
+        /*$.ajax({
+         type: 'POST',
+         url: '<?php //echo base_url() . "chat/userajax/5/5" ?>',
+         dataType: 'json',
+         data: '',
+         success: function (data) {
+         
+         $('#userlist').html(data.leftbar);
+         $('.notification_data_in_h2').html(data.headertwo);
+         $('#seemsg').html(data.seeall);
+         setTimeout(
+         chatmsg,
+         25000
+         );
+         },
+         error: function (XMLHttpRequest, textStatus, errorThrown) {
+         }
+         });*/
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "chat/userajax/5/5" ?>',
+            dataType: 'json',
+            data: '',
+            success: function (data) {
+                $('#userlist').html(data.leftbar);
+                $('.notification_data_in_h2').html(data.headertwo);
+                $('#seemsg').html(data.seeall);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+
+    }
+    ;
+    function getmsgNotification() {
+        msgNotification();
+    }
+
+    function msgNotification() {
+        $.ajax({
+            url: "<?php echo base_url(); ?>notification/update_msg_noti/6",
+            type: "POST",
+            success: function (data) {
+                data = JSON.parse(data);
+            }
+        });
+    }
+    function msgheader()
+    {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "notification/msg_header/" . $this->uri->segment(3) . "" ?>',
+            data: 'message_from_profile=5&message_to_profile=5',
+            success: function (data) {
+                $('#' + 'notificationsmsgBody').html(data);
+            }
+        });
+
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        document.getElementById('tags1').value = null;
+        document.getElementById('searchplace1').value = null;
+    });
+</script>

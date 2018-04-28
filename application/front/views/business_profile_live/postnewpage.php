@@ -18,6 +18,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/business.css?ver=' . time()); ?>">
         <?php } ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
         <script>
             $(document).ready(function ()
             {
@@ -87,7 +89,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $header; ?>
-        <?php echo $business_header2_border; ?>
+        <?php echo $business_header2; ?>
         <section>
             <div class="user-midd-section bui_art_left_box" id="paddingtop_fixed">
                 <div class="container art_container padding-360">
@@ -760,7 +762,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                         <div class="all-profile-box">
                             <div class="all-pro-head">
-                                <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
+                                <h4>Profiles<a href="<?php echo base_url('/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
                             </div>
                             <ul class="all-pr-list">
                                 <li>

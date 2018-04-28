@@ -227,10 +227,8 @@ $userid = $this->session->userdata('aileenuser');
 		 error: function (XMLHttpRequest, textStatus, errorThrown) {
 		 }
 	 });
-	
 	};
-	
-	   
+		   
 	function getmsgNotification() {
 		msgNotification();
 	}
@@ -239,8 +237,7 @@ $userid = $this->session->userdata('aileenuser');
 	
 	 $.ajax({
 		 url: "<?php echo base_url(); ?>notification/update_msg_noti/3",
-		 type: "POST",
-		 
+		 type: "POST",		 
 		 success: function (data) {
 			 data = JSON.parse(data);
 		 }
@@ -254,7 +251,6 @@ $userid = $this->session->userdata('aileenuser');
 		 url: '<?php echo base_url() . "notification/msg_header/" . $this->uri->segment(3) . "" ?>',
 		 data: 'message_from_profile=6&message_to_profile=6',
 		 success: function (data) {
-	
 		 }
 	 });
 	

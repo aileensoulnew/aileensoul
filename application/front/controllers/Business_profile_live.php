@@ -45,19 +45,19 @@ class Business_profile_live extends MY_Controller {
         $businessdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id,business_slug,company_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if ($businessdata) {
             $this->data['title'] = ucwords($businessdata[0]['company_name']) . ' | Reactive | ' . ' Business Profile - Aileensoul';
-            $this->load->view('business_profile/reactivate', $this->data);
+            $this->load->view('business_profile_live/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
-// GET BUSINESS PROFILE DATA
+        // GET BUSINESS PROFILE DATA
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
             $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET COUNTRY DATA
+        // GET COUNTRY DATA
             $contition_array = array('status' => '1');
             $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET STATE DATA
+        // GET STATE DATA
             $contition_array = array('status' => '1');
             $this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = 'state_id,state_name,country_id', $sortby = 'state_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET CITY DATA
+        // GET CITY DATA
             $contition_array = array('status' => '1');
             $this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name,state_id', $sortby = 'city_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
             if (count($userdata) > 0) {
@@ -183,9 +183,9 @@ class Business_profile_live extends MY_Controller {
         /* COUNT FOR USER THREE LIST IN FOLLOW SUGGEST BOX */
 
         $this->data['title'] = 'Home | Business Profile' . TITLEPOSTFIX;
-        $this->data['business_left'] = $this->load->view('business_profile/business_left', $this->data, true);
+        $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, true);
 
-        $this->load->view('business_profile/business_profile_post', $this->data);
+        $this->load->view('business_profile_live/business_profile_post', $this->data);
     }
 
     public function business_profile_manage_post($id = "") {
@@ -457,9 +457,9 @@ class Business_profile_live extends MY_Controller {
                 'posted_user_id' => $userid
             );
         }
-//CHECK IF IMAGE POST THEN NAME AND DESCRIPTION IS BLANK THAT TIME POST NOT INSERT AT A TIME.
+        //CHECK IF IMAGE POST THEN NAME AND DESCRIPTION IS BLANK THAT TIME POST NOT INSERT AT A TIME.
         if ($_FILES['postattach']['name'][0] != '') {
-// CHECK FILE IS PROPER 
+        // CHECK FILE IS PROPER 
             if ($_FILES['postattach']['error'][0] != '1') {
                 $insert_id = $this->common->insert_data_getid($data, 'business_profile_post');
             }
@@ -2160,7 +2160,7 @@ Your browser does not support the audio tag.
         $compnay_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($compnay_name) . ' | All User' . ' | Business Profile ' . TITLEPOSTFIX;
         $this->data['business_left'] = $this->load->view('business_profile/business_left', $this->data, TRUE);
-        $this->load->view('business_profile/business_userlist', $this->data);
+        $this->load->view('business_profile_live/business_userlist', $this->data);
     }
 
     public function ajax_userlist() {
@@ -5111,10 +5111,10 @@ Your browser does not support the audio tag.
 
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($company_name) . ' | Post Detail' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->data['business_left'] = $this->load->view('business_profile/business_left', $this->data, true);
+        $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, true);
         include ('business_profile_include.php');
 
-        $this->load->view('business_profile/postnewpage', $this->data);
+        $this->load->view('business_profile_live/postnewpage', $this->data);
     }
 
 // click on post after post open on new page end 
@@ -5176,7 +5176,7 @@ Your browser does not support the audio tag.
             redirect('business-profile/home', refresh);
         } else {
             $this->data['title'] = 'Reactive | ' . ' Business Profile' . TITLEPOSTFIX;
-            $this->load->view('business_profile/reactivate', $this->data);
+            $this->load->view('business_profile_live/reactivate', $this->data);
         }
     }
 
@@ -7962,7 +7962,7 @@ Your browser does not support the audio tag.
 
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($bussdata[0]['company_name']) . ' | Contact Request' . ' | Business Profile' . TITLEPOSTFIX;
-        $this->load->view('business_profile/contact_list', $this->data);
+        $this->load->view('business_profile_live/contact_list', $this->data);
     }
 
     public function ajax_contact_list() {
