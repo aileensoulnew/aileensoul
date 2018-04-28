@@ -2130,7 +2130,7 @@ class Freelancer extends MY_Controller {
         }
 
         $this->data['title'] = ucfirst($apply_data[0]['freelancer_post_fullname']) . " " . ucfirst($apply_data[0]['freelancer_post_username']) . " | Details | Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_profile', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_profile', $this->data);
     }
 
 //FREELANCER_APPLY PROFILE PAGE END
