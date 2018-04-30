@@ -33,11 +33,14 @@
    <!-- END HEAD -->
    <!-- Start HEADER -->
    <?php 
-      echo $header_inner_profile;//$header; 
-      echo $job_header2_border;  
+      // echo $header; //$header_inner_profile;
+      // echo $job_header2_border;  
       ?>
    <!-- END HEADER -->
    <body class="page-container-bg-solid page-boxed botton_footer">
+    <?php 
+      echo $job_header2;//$job_header2_border; 
+    ?>
       <section>
          <div class="user-midd-section" id="paddingtop_fixed_job">
          <div class="common-form1">

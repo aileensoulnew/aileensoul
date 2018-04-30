@@ -29,8 +29,9 @@
 
    <body class="page-container-bg-solid page-boxed botton_footer">
      <?php 
-      echo $header_inner_profile;// $header; 
-      echo $job_header2_border;  
+      // echo $header;
+      // echo $job_header2_border;  
+      echo $job_header2;//$job_header2_border;
       ?>
       <section>
          <div class="user-midd-section" id="paddingtop_fixed_job">

@@ -38,8 +38,9 @@
 <body class="page-container-bg-solid page-boxed botton_footer cus-mod-edu">
   <!-- Start HEADER -->
 <?php 
-      echo $header_inner_profile; // $header; 
-      echo $job_header2_border;  
+      // echo $header_inner_profile; // $header; 
+      // echo $job_header2_border;  
+      echo $job_header2;//$job_header2_border;
       $userid = $this->session->userdata('aileenuser');
 ?>
 <!-- END HEADER -->

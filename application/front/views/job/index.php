@@ -27,12 +27,17 @@
     <!-- END HEAD -->
     <!-- start header -->
     <?php
-    echo $header_inner_profile;
-    echo $job_header2_border;
+    // echo $header;
+    // echo $job_header2_border;
     ?>
     <!-- END HEADER -->
     <div class="js">
-        <body class="page-container-bg-solid page-boxed botton_footer">
+        <!-- <body class="page-container-bg-solid page-boxed botton_footer"> -->
+            <body class="page-container-bg-solid page-boxed pushmenu-push" style="overflow-x: hidden;">
+            <?php
+            //echo $header;
+            echo $job_header2;//$job_header2_border;
+            ?>
             <section>
                 <div class="user-midd-section " id="paddingtop_fixed_job">
                     <div class="common-form1 ">
