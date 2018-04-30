@@ -19,14 +19,21 @@
 
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
       <!-- This Css is used for call popup -->
-      <link rel="stylesheet" href="<?php echo base_url('assets/css_min/jquery.fancybox.css?ver='.time()); ?>" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/css_min/jquery.fancybox.css?ver='.time()); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css_min/jquery.fancybox.css?ver='.time()); ?>" />
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
     <?php }?>
    </head>
    <!-- END HEAD -->
    <!-- Start HEADER -->
    <?php 
-      echo $header; 
+      echo $header_inner_profile;//$header; 
       echo $job_header2_border;  
       ?>
    <!-- END HEADER -->
@@ -500,6 +507,7 @@
 <script>
     var base_url = '<?php echo base_url(); ?>';
     var clone_mathod_count='<?php echo $clone_mathod_count; ?>';
+    var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_work_exp.js?ver='.time()); ?>"></script>
 <?php

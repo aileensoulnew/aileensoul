@@ -17,12 +17,19 @@
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
      <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
 
- <?php }?>    
+ <?php }?>
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+
    </head>
 
    <body class="page-container-bg-solid page-boxed botton_footer">
      <?php 
-      echo $header; 
+      echo $header_inner_profile;// $header; 
       echo $job_header2_border;  
       ?>
       <section>
@@ -121,6 +128,7 @@
 <?php }?>
 <script>
     var base_url = '<?php echo base_url(); ?>';
+    var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
 
 <?php
