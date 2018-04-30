@@ -344,13 +344,13 @@
 
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
 
-            <script  src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>">
+            <!-- <script  src="<?php // echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"> -->
             </script>
             <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>">
             </script>
         <?php } else { ?>
-            <script  src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>">
+            <!-- <script  src="<?php // echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"> -->
             </script>
             <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>">

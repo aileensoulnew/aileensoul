@@ -18,7 +18,7 @@
     <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
-            <?php echo $search_banner; ?>
+            <?php if($freelance_apply_profile_set == 0 || $freelance_apply_profile_set == '0'){ echo $search_banner; } ?>
             <div class="container">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">

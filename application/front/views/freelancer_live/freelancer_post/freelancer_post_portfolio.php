@@ -12,7 +12,8 @@
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
         <?php } ?>
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
 
         <style type="text/css">
             /* img{display: none;}*/
@@ -24,7 +25,7 @@
         <?php echo $header; ?>
         <?php
         if ($freepostdata['user_id'] && $freepostdata['free_post_step'] == '7') {
-            echo $freelancer_post_header2_border;
+            echo $freelancer_post_header2;
         }
         ?>
         <section class="custom-row">
@@ -146,15 +147,21 @@
     <?php
     if (IS_APPLY_JS_MINIFY == '0') {
         ?>
+        <!-- <script  src="<?php // echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> -->
+        <script  src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_portfolio.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
         <?php
     } else {
         ?>
+        <!-- <script  src="<?php // echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> -->
+        <script  src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_portfolio.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
     <?php } ?>
-
+    <script type="text/javascript">
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
+    </script>
 
 </body>
 

@@ -16,6 +16,8 @@
         <?php if (!$this->session->userdata('aileenuser')) { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
         <?php } ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
         <body class="page-container-bg-solid page-boxed botton_footer no-login">
@@ -1422,7 +1424,7 @@
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
             <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
-            <script  src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+            <!-- <script  src="<?php //echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> -->
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>">
             </script>
@@ -1430,7 +1432,7 @@
         } else {
             ?>
             <script  src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
-            <script  src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
+            <!-- <script  src="<?php //echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> -->
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>">
             </script>
@@ -1448,13 +1450,13 @@
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
-                                        <!--<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_profile.js?ver=' . time()); ?>"></script>-->
+                                        <!--<script  type="text/javascript" src="<?php //echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_profile.js?ver=' . time()); ?>"></script>-->
             <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
             <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
             <?php
         } else {
             ?>
-            <!--<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_post_profile.js?ver=' . time()); ?>"></script>-->
+            <!--<script  type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_post_profile.js?ver=' . time()); ?>"></script>-->
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
             <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
         <?php } ?>

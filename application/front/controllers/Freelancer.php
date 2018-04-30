@@ -19,8 +19,6 @@ class Freelancer extends MY_Controller {
         include ('main_profile_link.php');
         include ('freelancer_include.php');
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
-
-       
     }
 
     public function index() {
@@ -31,18 +29,17 @@ class Freelancer extends MY_Controller {
         $this->data['freelance_apply_profile_link'] = $this->freelance_hire_profile_link ;
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->load->view('freelancer/freelancer_main', $this->data);
+        $this->load->view('freelancer_live/freelancer_main', $this->data);
     }
 
     public function freelancer_post() {
-
         $userid = $this->session->userdata('aileenuser');
 
         $contition_array = array('user_id' => $userid, 'status' => '0');
         $freelancerpostdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        if ($freelancerpostdata) {
 
-            $this->load->view('freelancer/freelancer_post/reactivate', $this->data);
+        if ($freelancerpostdata) {
+            $this->load->view('freelancer_live/freelancer_post/reactivate', $this->data);
         } else {
 
             $userid = $this->session->userdata('aileenuser');
@@ -97,7 +94,7 @@ class Freelancer extends MY_Controller {
         }
 
         $this->data['title'] = "Basic Information | Edit Profile - Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_basic_information', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_basic_information', $this->data);
     }
 
 
@@ -319,7 +316,7 @@ class Freelancer extends MY_Controller {
             }
         }
         $this->data['title'] = "Address Information | Edit Profile - Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_address_information', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_address_information', $this->data);
     }
 
 //FREELANCER_APPLY ADDRESS PAGE END
@@ -491,7 +488,7 @@ class Freelancer extends MY_Controller {
             }
         }
         $this->data['title'] = "Professional Information | Edit Profile - Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_professional_information', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_professional_information', $this->data);
     }
 
 //FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION PAGE START
@@ -615,7 +612,7 @@ class Freelancer extends MY_Controller {
             }
         }
         $this->data['title'] = "Rate | Edit Profile - Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_rate', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_rate', $this->data);
     }
 
 //FREELANCER_APPLY RATE PAGE END
@@ -706,7 +703,7 @@ class Freelancer extends MY_Controller {
             }
         }
         $this->data['title'] = "Avability | Edit Profile - Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_avability', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_avability', $this->data);
     }
 
 //FREELANCER_APPLY AVABILITY PAGE END
@@ -762,8 +759,8 @@ class Freelancer extends MY_Controller {
       //  }
     }
 
-//FREELANCER_APPLY AVABILITY PAGE DATA INSERT END
-//FREELANCER_APPLY EDUCATION PAGE START
+    //FREELANCER_APPLY AVABILITY PAGE DATA INSERT END
+    //FREELANCER_APPLY EDUCATION PAGE START
     public function freelancer_post_education($postid = '') {
 
         if ($postid != '') {
@@ -771,10 +768,10 @@ class Freelancer extends MY_Controller {
         }
 
         $userid = $this->session->userdata('aileenuser');
-//code for check user deactivate start
+        //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
-// code for display page start
+        // code for display page start
         $this->freelancer_apply_check();
         // code for display page end
         //for getting degree data Strat
@@ -817,7 +814,7 @@ class Freelancer extends MY_Controller {
             }
         }
         $this->data['title'] = "Eduction | Edit Profile - Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_education', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_education', $this->data);
     }
 
 //FREELANCER_APPLY EDUCATION PAGE END
@@ -953,7 +950,7 @@ class Freelancer extends MY_Controller {
             }
         }
         $this->data['title'] = "Portfolio | Edit Profile - Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_post_portfolio', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_post_portfolio', $this->data);
     }
 
 //FREELANCER_APPLY PORTFOLIO PAGE END
@@ -1103,7 +1100,7 @@ class Freelancer extends MY_Controller {
         $freelancerdata = $this->data['freelancerdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         $this->data['title'] = 'Home | Freelancer Profile' . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/post_apply', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/post_apply', $this->data);
     }
 
 //FREELANCER_APPLY HOME PAGE END
@@ -1524,7 +1521,7 @@ class Freelancer extends MY_Controller {
         $postdata = $this->data['postdata'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data = 'freelancer_post.*, freelancer_apply.app_id, freelancer_apply.user_id as userid, freelancer_apply.modify_date, freelancer_apply.created_date ', $sortby = 'freelancer_apply.modify_date', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
         $this->data['title'] = ucfirst($jobdata[0]['freelancer_post_fullname']) . " " . ucfirst($jobdata[0]['freelancer_post_username']) . " | Applied Projects | Freelancer Profile" . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_applied_post', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_applied_post', $this->data);
     }
 
 //FREELANCER_APPLY APPLIED ON POST(PROJECTS) START
@@ -1817,7 +1814,7 @@ class Freelancer extends MY_Controller {
         $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname,freelancer_post_username', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         $this->data['title'] = ucfirst($jobdata[0]['freelancer_post_fullname']) . " " . ucfirst($jobdata[0]['freelancer_post_username']) . " | Saved Projects | Freelancer Profile " . TITLEPOSTFIX;
-        $this->load->view('freelancer/freelancer_post/freelancer_save_post', $this->data);
+        $this->load->view('freelancer_live/freelancer_post/freelancer_save_post', $this->data);
     }
 
 //FREELANCER_APPLY SAVE POST(PROJECT) END
@@ -2805,6 +2802,7 @@ class Freelancer extends MY_Controller {
         $contition_array = array('status' => '1', 'type' => '1');
         $this->data['skill1'] = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = 'skill', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $this->data['title'] = "Registration | Freelancer Profile" . TITLEPOSTFIX;
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         if ($this->session->userdata('aileenuser')) {
             $userid = $this->session->userdata('aileenuser');
             $hireuser = $this->db->select('user_id')->get_where('freelancer_post_reg', array('user_id' => $userid))->row()->user_id;
@@ -2812,7 +2810,7 @@ class Freelancer extends MY_Controller {
         if ($hireuser) {
             redirect('freelance-work/home', refresh);
         } else {
-            $this->load->view('freelancer/freelancer_post/registation', $this->data);
+            $this->load->view('freelancer_live/freelancer_post/registation', $this->data);
         }
     }
 

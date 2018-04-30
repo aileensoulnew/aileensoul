@@ -14,7 +14,7 @@
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $header; ?>
-        <?php echo $freelancer_hire_header2 ?>
+        <?php echo $freelancer_hire_header2; ?>
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container padding-360">
@@ -292,7 +292,7 @@
 
                             <div class="all-profile-box">
                                 <div class="all-pro-head">
-                                    <h4>Profiles<a title="All" href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
+                                    <h4>Profiles<a title="All" href="<?php echo base_url('/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
                                 </div>
                                 <ul class="all-pr-list">
                                     <li>
@@ -328,7 +328,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a title="Artistic Profile" href="<?php echo base_url('artist'); ?>">
+                                        <a title="Artistic Profile" href="<?php echo base_url('find-artist'); ?>">
                                             <div class="all-pr-img">
                                                 <img alt="Artistic Profile" src="<?php echo base_url('assets/img/i5.jpg'); ?>">
                                             </div>
@@ -378,11 +378,11 @@
         <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>
         <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
 
-         <script>
+        <!-- <script>
              var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-
+        <script src="<?php //echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+ -->
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
                           <!--<script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>-->
                         <!--<script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
@@ -390,6 +390,5 @@
                            <!--<script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>-->
                         <!--<script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
         <?php } ?>
-<script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver='.time()); ?>"></script>
     </body>
 </html>

@@ -18,7 +18,7 @@
             minLength: 2,
             source: function( request, response ) { 
                 // delegate back to autocomplete, but extract the last term
-                $.getJSON(base_url + "freelancer/freelancer_hire_search_keyword", { term : extractLast( request.term )},response);
+                $.getJSON(base_url + "freelancer_hire/freelancer_hire_search_keyword", { term : extractLast( request.term )},response);
             },
             focus: function() {
                 // prevent value inserted on focus

@@ -11,7 +11,7 @@ app.controller('freeapplypostController', function ($scope, $http) {
 
     freelancerapplypost();
 
-    function freelancerCategory() {alert(222);
+    function freelancerCategory() {
         $http.get(base_url + "freelancer_apply_live/freelancerCategory?limit=25").then(function (success) {
             $scope.freelancerCategory = success.data;
         }, function (error) {});

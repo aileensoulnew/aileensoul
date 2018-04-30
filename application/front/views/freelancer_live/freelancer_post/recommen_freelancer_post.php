@@ -12,11 +12,12 @@
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
         <?php } ?>
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
     </head>
     <body>
         <?php echo $header; ?>
-        <?php echo $freelancer_post_header2_border; ?>
+        <?php echo $freelancer_post_header2; ?>
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container padding-360">

@@ -33,14 +33,14 @@ $userid = $this->session->userdata('aileenuser');
                                 <li>Account</li>
                                 <li><a href="<?php echo base_url('freelance-hire/employer-details'); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                 <li><a href="<?php echo base_url('freelance-hire/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
-                                <li><a href="#"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
+                                <li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
                     <div class="job-search-box1 clearfix">
-                        <form action="search/business_search" method="get">
+                        <form action="<?php echo base_url('freelance-hire/search'); ?>" method="get">
                             <fieldset class="sec_h2">
                                 <input id="tags" class="tags ui-autocomplete-input skill_keyword" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
                             </fieldset>
@@ -193,23 +193,21 @@ $userid = $this->session->userdata('aileenuser');
 <!-- Model Popup Close -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>" ></script>
 <script type="text/javascript">
-                                                function deactivate(clicked_id) {
-                                                   
-                                                    $('.biderror .mes').html("<div class='pop_content'> Are you sure you want to deactive your Freelancer Hire profile?<div class='model_ok_cancel'><a title='yes' class='okbtn' id=" + clicked_id + " onClick='deactivate_profile(" + clicked_id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a title='No' class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
-                                                    $('#bidmodal').modal('show');
-                                                }
-                                                function deactivate_profile(clicked_id) {
+    function deactivate(clicked_id) {
+        $('.biderror .mes').html("<div class='pop_content'> Are you sure you want to deactive your Freelancer Hire profile?<div class='model_ok_cancel'><a title='yes' class='okbtn' id=" + clicked_id + " onClick='deactivate_profile(" + clicked_id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a title='No' class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+        $('#bidmodal').modal('show');
+    }
+    function deactivate_profile(clicked_id) {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "freelance-hire/deactivate" ?>',
+            data: 'id=' + clicked_id,
+            success: function (data) {
+                window.location = "<?php echo base_url() ?>";
 
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: '<?php echo base_url() . "freelance-hire/deactivate" ?>',
-                                                        data: 'id=' + clicked_id,
-                                                        success: function (data) {
-                                                            window.location = "<?php echo base_url() ?>dashboard";
-
-                                                        }
-                                                    });
-                                                }
+            }
+        });
+    }
 </script>
 
 

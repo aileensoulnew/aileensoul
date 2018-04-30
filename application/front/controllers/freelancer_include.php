@@ -25,6 +25,8 @@ $this->data['freelancer_post_search'] = $this->load->view('freelancer/freelancer
 $this->data['freelancer_hire_search'] = $this->load->view('freelancer/freelancer_hire/freelancer_hire_search', $this->data, true);
 $this->data['freelancer_hire_header2_border'] = $this->load->view('freelancer/freelancer_hire/freelancer_hire_header2_border', $this->data, true);
 //$this->data['freelancer_post_header2_border'] = $this->load->view('freelancer/freelancer_post/freelancer_post_header2_border', $this->data, true);
+$this->data['freelancer_hire_header2'] = $this->load->view('freelancer_live/freelancer_hire/freelancer_hire_header2_new', $this->data, true);
+$this->data['freelancer_post_header2'] = $this->load->view('freelancer_live/freelancer_post/freelancer_post_header2_new', $this->data, true);
 
 // Start - code needed for new header
 $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -33,7 +35,7 @@ $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
 $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
 $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
 $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
-$this->data['freelancer_post_header2'] = $this->load->view('freelancer/freelancer_post/freelancer_post_header2_new', $this->data, true);
+$this->data['freelancer_post_header2'] = $this->load->view('freelancer_live/freelancer_post/freelancer_post_header2_new', $this->data, true);
 // Start - code needed for new header
 
 

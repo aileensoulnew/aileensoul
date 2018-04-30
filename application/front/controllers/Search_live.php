@@ -13,6 +13,7 @@ class Search_live extends MY_Controller {
         $this->lang->load('message', 'english');
         $this->load->library('S3');
         $this->load->model('common');
+       
 
         include ('include.php');
         include ('business_include.php');
@@ -87,7 +88,7 @@ class Search_live extends MY_Controller {
             $join_str[1]['from_table_id'] = 'business_profile.user_id';
             $join_str[1]['join_type'] = '';
 
-//   echo $search_condition; 
+            //   echo $search_condition; 
             $business_profile = $this->data['results'] = $this->common->select_data_by_search('business_profile', $search_condition, $condition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
 
@@ -158,17 +159,17 @@ class Search_live extends MY_Controller {
 
 
 
-//THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA START
+        //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA START
         if ($this->session->userdata('aileenuser')) {
             $this->load->view('business_profile/recommen_business', $this->data);
         } else {
 
             $this->load->view('business_profile/business_search_login', $this->data);
         }
-//THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA END
+        //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA END
     }
 
-       public function ajax_business_search() {
+    public function ajax_business_search() {
 
 
         // $perpage = 4;
@@ -1122,7 +1123,7 @@ Your browser does not support the audio tag.
                 $searchplace == '';
             }
             if ($searchplace == "" && $searchkeyword == "") {
-                redirect('freelancer/recommen_candidate', refresh);
+                redirect('freelancer_live/recommen_candidate', refresh);
             }
         }
         $search_skill = $searchkeyword;

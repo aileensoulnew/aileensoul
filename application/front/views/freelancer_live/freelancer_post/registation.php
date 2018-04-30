@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="freelancerApp">
     <head>
         <!-- start head -->
         <?php echo $head; ?>
@@ -24,14 +24,15 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
 
         <?php } ?>     
-
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <!-- END HEAD -->
 
     <!-- start header -->
     <?php
     if ($this->session->userdata('aileenuser')) {
-        echo $header;
+        echo $header_profile;
     } else {
         ?>
         <header>
@@ -530,33 +531,43 @@
 
 
         <!-- model for forgot password end -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
         <!-- <footer>        -->
         <?php echo $login_footer ?> 
         <?php echo $footer; ?>
         <!-- </footer> -->
-        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
+       
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-            <!--<script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>-->
+            <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
 
             <?php
         } else {
             ?>
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
-            <!--<script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>-->
+            <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
 
         <?php } ?>
 
 
         <script>
-                                                var base_url = '<?php echo base_url(); ?>';
-                                                var site = '<?php echo base_url(); ?>';
-                                                var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var site = '<?php echo base_url(); ?>';
+            var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
         </script>
+
+        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
+        <script>
+            var app = angular.module('freelancerApp', ['ui.bootstrap']);
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     </body>
 </html>

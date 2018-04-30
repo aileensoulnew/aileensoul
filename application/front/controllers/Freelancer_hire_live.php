@@ -24,31 +24,37 @@ class Freelancer_hire_live extends MY_Controller {
 	public function freelancer_hire() {
 	   
 		$userid = $this->session->userdata('aileenuser');
-		$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
-		$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-		$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-		$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-		$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-		$contition_array = array('status' => '1');
-		$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
-		$this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
 
-		// FETCH STATE DATA  
-		$contition_array = array('status' => '1', 'country_id' => $this->data['recdata']['re_comp_country']);
-		$this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = '*', $sortby = 'state_id,state_name,country_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+		if ($freelancerhiredata) {
+			$this->load->view('freelancer_live/freelancer_hire/reactivate', $this->data);
+		} else {
+			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
+			$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+			$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+			$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+			$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+			$contition_array = array('status' => '1');
+			$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+			$this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-		// FETCH CITY DATA
-		$contition_array = array('status' => '1', 'state_id' => $this->data['recdata']['re_comp_state']);
-		$this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+			// FETCH STATE DATA  
+			$contition_array = array('status' => '1', 'country_id' => $this->data['recdata']['re_comp_country']);
+			$this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = '*', $sortby = 'state_id,state_name,country_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-		$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-		$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-		$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-		$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-		$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
-		$this->data['title'] = "Recruiter Profile | Aileensoul";
-		
-		$this->load->view('freelancer_hire_live/index', $this->data);
+			// FETCH CITY DATA
+			$contition_array = array('status' => '1', 'state_id' => $this->data['recdata']['re_comp_state']);
+			$this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+			$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+			$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
+			$this->data['title'] = "Recruiter Profile | Aileensoul";
+			
+			$this->load->view('freelancer_hire_live/index', $this->data);
+		}
 	}
 	
 	public function freelancer_hire_old() {
@@ -107,7 +113,7 @@ class Freelancer_hire_live extends MY_Controller {
 		   $this->data['title'] = "Opportunities | Aileensoul";
 		   $this->load->view('freelancer_hire_live/index', $this->data);
 	   }
-   }
+    }
 
 	//FREELANCER HIRE NEW REGISTRATION PROFILE END
    public function hire_registation_insert() {
@@ -241,7 +247,7 @@ public function freelancer_hire_basic_info() {
 	$this->freelancer_hire_search();
 //for search end
 	$this->data['title'] = "Basic Information | Employer Profile" . TITLEPOSTFIX;
-	$this->load->view('freelancer/freelancer_hire/freelancer_hire_basic_info', $this->data);
+	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_basic_info', $this->data);
 }
 
 public function freelancer_hire_basic_info_insert() {
@@ -415,7 +421,7 @@ public function freelancer_hire_address_info() {
 	$this->freelancer_hire_search();
 // code for search end
 	$this->data['title'] = "Address information | Employer Profile" . TITLEPOSTFIX;
-	$this->load->view('freelancer/freelancer_hire/freelancer_hire_address_info', $this->data);
+	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_address_info', $this->data);
 }
 
 public function ajax_data() {
@@ -607,7 +613,7 @@ public function freelancer_hire_professional_info() {
 	$this->freelancer_hire_search();
 	// code for search end
 	$this->data['title'] = "Professional Information | Employer Profile" . TITLEPOSTFIX;
-	$this->load->view('freelancer/freelancer_hire/freelancer_hire_professional_info', $this->data);
+	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_professional_info', $this->data);
 }
 
 public function freelancer_hire_professional_info_insert() {
@@ -2276,16 +2282,16 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$this->data['title'] = $segment3 . TITLEPOSTFIX;
 
 	if ($this->session->userdata('aileenuser')) {
-		$this->load->view('freelancer/freelancer_post/hire_project', $this->data);
+		$this->load->view('freelancer_live/freelancer_post/hire_project', $this->data);
 	} else {
 		if ($postname == $original) {
-			$this->load->view('freelancer/freelancer_post/hire_project_live', $this->data);
+			$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);
 		} else {
 			if ($this->data['postdata']) {
 				redirect('freelance-hire/project/' . $url, refresh);
 			} else {
 				$this->data['title'] = 'Content Not Avaible - Aileensoul';
-				$this->load->view('freelancer/freelancer_post/hire_project_live', $this->data);
+				$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);
 			}
 		}
 	}

@@ -65,13 +65,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         } else if ($message_from_profile == 2) {
             echo $recruiter_header2_border;
         } else if ($message_from_profile == 3) {
-            echo $freelancer_hire_header2_border;
+            echo $freelancer_hire_header2;
         } else if ($message_from_profile == 4) {
             echo $freelancer_post_header2_border;
         } else if ($message_from_profile == 5) {
-            echo $business_header2_border;
+            echo $business_header2;
         } else if ($message_from_profile == 6) {
-            echo $art_header2_border;
+            echo $artistic_header2;
         }
         ?>
         <div class="container">

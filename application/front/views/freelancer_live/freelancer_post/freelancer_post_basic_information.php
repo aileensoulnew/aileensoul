@@ -12,14 +12,14 @@
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
         <?php } ?>
-
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
     </head>
     <body class="botton_footer">
         <?php echo $header; ?>
         <?php
         if ($freepostdata['user_id'] && $freepostdata['free_post_step'] == '7') {
-            echo $freelancer_post_header2_border;
+            echo $freelancer_post_header2;
         }
         ?>
         <section>
@@ -205,18 +205,20 @@
 
 
         <script>
-                                            var base_url = '<?php echo base_url(); ?>';
-                                            var site = '<?php echo site_url(); ?>';
-
+            var base_url = '<?php echo base_url(); ?>';
+            var site = '<?php echo site_url(); ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
+            <!-- <script src="<?php //echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script> -->
             <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_basic_information.js?ver=' . time()); ?>"></script>    
             <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
             <?php
         } else {
             ?>
+            <!-- <script src="<?php //echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()) ?>"></script> -->
             <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_basic_information.js?ver=' . time()); ?>"></script>    
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
         <?php } ?>

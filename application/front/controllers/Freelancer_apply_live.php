@@ -44,8 +44,8 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Search Freelance | Aileensoul";
+        $this->data['freelance_apply_profile_set'] = $this->freelance_apply_profile_set;
     
-
         $this->load->view('freelancer_apply_live/freelancer_apply_live', $this->data);
     }
 

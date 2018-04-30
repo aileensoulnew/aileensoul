@@ -46,11 +46,11 @@ if (IS_MSG_CSS_MINIFY == '0') {
 <?php
 if (IS_MSG_JS_MINIFY == '0') {
     ?>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+            <!-- <script src="<?php //echo base_url('assets/js/bootstrap.min.js'); ?>"></script> -->
             <?php
         } else {
             ?>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
+            <!-- <script src="<?php //echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script> -->
         <?php } ?>
         
 
@@ -83,23 +83,24 @@ if (IS_MSG_JS_MINIFY == '0') {
             .msg_left_data:hover .messagedelete{ visibility: visible;opacity: 1;}
             .msg_left_data .messagedelete{ visibility: hidden;  cursor: pointer; width:25px; float:left;}
         </style>
-
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     <body>
 <?php
 echo $header;
 
 if ($message_from_profile == 1) {
-    echo $job_header2_border;
+    echo $job_header2;
 } else if ($message_from_profile == 2) {
-    echo $recruiter_header2_border;
+    echo $recruiter_header2;
 } else if ($message_from_profile == 3) {
-    echo $freelancer_hire_header2_border;
+    echo $freelancer_hire_header2; 
 } else if ($message_from_profile == 4) {
-    echo $freelancer_post_header2_border;
+    echo $freelancer_post_header2;
 } else if ($message_from_profile == 5) {
-    echo $business_header2_border;
+    echo $business_header2;
 } else if ($message_from_profile == 6) {
-    echo $art_header2_border;
+    echo $artistic_header2;
 }
 ?>
         <div class="container">
@@ -133,9 +134,9 @@ $lstusrdata = $this->common->select_data_by_id('user', 'user_id', $toid, $data =
 
 if ($lstusrdata) {
     ?>
-                            <div class="chat" id="chat"  style="display:block;">
+    <div class="chat" id="chat"  style="display:block;">
 
-                                <div class="chat-header clearfix border_btm">
+        <div class="chat-header clearfix border_btm">
 
     <?php
     if ($message_from_profile == 1) {
@@ -167,12 +168,12 @@ if ($lstusrdata) {
         $profile_url = base_url() . 'artist/art_manage_post/' . $id;
     }
     ?>
-                                    <a href="<?php echo $profile_url; ?>">
-                                <?php if ($last_user_image) { ?>                             
+        <a href="<?php echo $profile_url; ?>">
+        <?php if ($last_user_image) { ?>                             
 
-                                                <div class="chat_heae_img">
-                                                    <img src="<?php echo $last_user_image; ?>" alt="<?php echo $last_user_image; ?>" height="50px" weight="50px">
-                                                </div>
+            <div class="chat_heae_img">
+                <img src="<?php echo $last_user_image; ?>" alt="<?php echo $last_user_image; ?>" height="50px" weight="50px">
+            </div>
         <?php
     } else if($message_from_profile == 5){ ?>
 

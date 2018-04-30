@@ -12,11 +12,12 @@
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
         <?php } ?>
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
     </head>
     <body class="page-container-bg-solid page-boxed botton_footer">
         <?php echo $header; ?>
-        <?php echo $freelancer_post_header2_border; ?>
+        <?php echo $freelancer_post_header2; ?>
         <section class="custom-row">
             <div class="container" id="paddingtop_fixed">
                 <div class="row" id="row1" style="display:none;">
@@ -320,7 +321,7 @@
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
-
+            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
             <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>">
@@ -328,6 +329,7 @@
             <?php
         } else {
             ?>
+            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()) ?>"></script>
             <script src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>">

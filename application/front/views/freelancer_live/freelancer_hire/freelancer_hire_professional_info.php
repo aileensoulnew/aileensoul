@@ -8,13 +8,15 @@
         <?php } else {?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
         <?php } ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
  
     <body class="botton_footer">
         <?php echo $header; ?>
         <?php
         if ($freehiredata['free_hire_step'] == '3') {
-            echo $freelancer_hire_header2_border;
+            echo $freelancer_hire_header2;
         }
         ?>
         <section>

@@ -54,7 +54,7 @@ function freelancerhire_save(pagenum)
     isProcessing = true;
     $.ajax({
         type: 'POST',
-        url: base_url + "freelancer/ajax_freelancer_save?page=" + pagenum,
+        url: base_url + "freelancer_hire/ajax_freelancer_save?page=" + pagenum,
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {

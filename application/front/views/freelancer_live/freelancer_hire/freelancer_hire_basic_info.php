@@ -8,6 +8,8 @@
         <?php } else { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
         <?php } ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
 
     <body class="pushmenu-push botton_footer">
@@ -15,7 +17,7 @@
         <?php echo $header; ?>
         <?php
         if ($freehiredata['free_hire_step'] == '3') {
-            echo $freelancer_hire_header2_border;
+            echo $freelancer_hire_header2;
         }
         ?>
         <section>
@@ -162,9 +164,11 @@
         </script>
 
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
+            <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_basic_info.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php } else { ?>
+            <script src="<?php echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_basic_info.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php } ?>

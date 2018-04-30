@@ -12,8 +12,8 @@
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-apply.css?ver=' . time()); ?>">
         <?php } ?>
-
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
     </head>
 
     <body class="botton_footer">
@@ -21,7 +21,7 @@
         <?php echo $header; ?>
         <?php
         if ($freepostdata['user_id'] && $freepostdata['free_post_step'] == '7') {
-            echo $freelancer_post_header2_border;
+            echo $freelancer_post_header2;
         }
         ?>
         <section>
@@ -167,18 +167,17 @@
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
+            <script  src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <?php
         } else {
             ?>
+            <script  src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <?php } ?>
-
-
-
         <script>
-                                            var base_url = '<?php echo base_url(); ?>';
-
+            var base_url = '<?php echo base_url(); ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_rate.js?ver=' . time()); ?>"></script>
         <?php
