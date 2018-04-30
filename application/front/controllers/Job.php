@@ -3088,6 +3088,7 @@ class Job extends MY_Controller {
         if ($jobuser) {
             redirect('job/home', refresh);
         } else {
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             $this->load->view('job/job_reg', $this->data);
         }
     }
