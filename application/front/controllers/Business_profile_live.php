@@ -8200,9 +8200,9 @@ Your browser does not support the audio tag.
         $company_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($company_name) . ' | Contacts' . ' | Business Profile' . TITLEPOSTFIX;
         if ($company_name == '') {
-            $this->load->view('business_profile/notavalible');
+            $this->load->view('business_profile_live/notavalible');
         } else {
-            $this->load->view('business_profile/bus_contact', $this->data);
+            $this->load->view('business_profile_live/bus_contact', $this->data);
         }
     }
 
