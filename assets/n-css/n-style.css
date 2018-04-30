@@ -56,21 +56,23 @@
 	
 }
 .user-profile-box .user-detail .user-img img{width:100%;}
-.user-profile-box .user-detail-right{float:left; width:206px;}
+.user-profile-box .user-detail-right{float:left; width:219px;}
 .user-profile-box .user-detail-right .user-detail-top{padding-left:5px; padding-right:7px;}
 .user-profile-box .user-detail-top h4{margin:0; padding-top:3px; max-width:100%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
 .user-profile-box .user-detail-top p{max-width:100%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
-.user-profile-box .user-detail-top a{font-size:16px; font-weight:600; color:#5c5c5c;}
+.user-profile-box .user-detail-top a{font-size:16px; font-weight:600; color:#5c5c5c; letter-spacing:1px;}
 .user-profile-box .user-detail-top a:hover{color:#1b8ab9;}{font-size:16px; font-weight:600; color:#5c5c5c;}
-.user-profile-box .user-detail-top p a{font-size:14px; font-weight:500;}
-.user-profile-box .user-detail-bottom ul{padding:8px 0 0 5px; margin:0; width:100%; float:left;}
+.user-profile-box .user-detail-top p a{font-size:14px; font-weight:500; letter-spacing:1px;}
+.user-profile-box .user-detail-bottom ul{padding:8px 5px 0 5px; margin:0; width:100%; float:left;}
 .user-profile-box .user-detail-bottom ul li{text-align:center; float:left; list-style-type:none; width:33.33%;}
-.user-profile-box .user-detail-bottom ul li a{font-size:13px; color:#5c5c5c;}
+.user-profile-box .user-detail-bottom ul li:first-child{text-align:left;}
+.user-profile-box .user-detail-bottom ul li:last-child{text-align:right;}
+.user-profile-box .user-detail-bottom ul li a{font-size:13px; color:#5c5c5c; letter-spacing:1px;}
 .user-profile-box .user-detail-bottom ul li a:hover{color:#1b8ab9;}
 
 .all-profile-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px;}
 .all-profile-box .all-pro-head{padding:5px 10px; border-bottom:1px solid #d2d2d2;}
-.all-profile-box .all-pro-head h4{margin:0;}
+.all-profile-box .all-pro-head h4{margin:0; letter-spacing:1px;}
 .all-profile-box .all-pro-head h4 a{color:#5c5c5c;}
 .all-profile-box .all-pro-head h4 a:hover{color:#1b8ab9; text-decoration:underline;}
 .all-profile-box ul{padding:0; width:100%; float:left; margin:0;}
@@ -79,7 +81,7 @@
 .all-profile-box ul li:last-child{border-bottom:0;}
 .all-profile-box ul li .all-pr-img{width:40px; height:40px; float:left; border:1px solid #d2d2d2;}
 .all-profile-box ul li .all-pr-img img{width:100%;}
-.all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:18px; padding:9px 0 0 15px;}
+.all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:17px; padding:9px 0 0 15px; letter-spacing:1px;}
 
 
 /***  end left part  ***/
@@ -118,7 +120,8 @@
 	font-size: 15px !important;
 	resize: none;
 	border: none;
-	line-height:1.5;}
+	line-height:1.5;
+	letter-spacing:1px;}
 .post-popup-box	.post-box .post-text{width:498px;}
 .post-popup-box .post-area{padding:10px; background:#fff; width:100%; float:left;}
 #ask_question.edit-question-form .all-upload{margin-bottom:10px;}
@@ -130,7 +133,7 @@
 .all-upload .upload_icon{margin: 0 8px; cursor: pointer;  margin-left: 4px; font-size: 14px; color: #7b7b7b;
 padding: 5px;}
 .all-upload .upload_icon:first-child{margin-left: 0;}
-.all-upload .upload_span_icon{font-family: 'arial'; padding-left: 2px; cursor: pointer;}
+.all-upload .upload_span_icon{font-family: 'arial'; padding-left: 2px; cursor: pointer; letter-spacing:1px;}
 .all-upload .upload_icon:hover{padding: 5px; background: #d9d9d9; border-radius: 5px;}
 .all-post-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px;}
 .all-post-box .all-post-top{padding:15px 15px 7px; width:100%; float:left;}
@@ -142,7 +145,8 @@ padding: 5px;}
 .post-head{width:100%; float:left; position:relative;}
 .post-head .post-img .no-img-post{padding:13px 0; display:inline-block;}
 .post-detail{width:85%; float:left; padding-left:10px;}
-.post-detail .post-name{font-size:15px; color:#1b8ab9; font-weight:600; float:left; padding-right:10px; text-transform: capitalize; max-width:86%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
+.post-detail .post-name{font-size:15px; color:#5c5c5c; font-weight:600; float:left; padding-right:10px; text-transform: capitalize; max-width:86%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
+.post-detail .post-name:hover{color:#1b8ab9; text-decoration:underline;}
 .post-right-dropdown{width:26px; float:right; margin-right: -10px;}
 .post-right-dropdown > a{padding: 5px 10px 8px; display: block;}
 .post-right-dropdown > a:hover{background: #eee; }
@@ -224,7 +228,8 @@ padding: 5px;}
 .all-post-box .all-post-bottom{padding:15px; background:#f6f6f6; width:100%; float:left;}
 .all-post-box .all-post-bottom .comment-box{padding: 0; border-bottom: 0;}
 .comment-dis{width:92%; float:left; padding-left:15px;}
-.comment-dis .comment-name a{color:#1b8ab9; font-weight:600; font-size:13px; text-transform: capitalize;}
+.comment-dis .comment-name a{color:#5c5c5c; font-weight:600; font-size:13px; text-transform: capitalize;}
+.comment-dis .comment-name a:hover{color:#1b8ab9; text-decoration:underline; }
 .comment-dis .comment-dis-inner{font-size:13px; word-wrap: break-word;}
 .comment-action{padding:0; width:100%; float:left; margin:0;}
 .comment-action li{float:left; list-style-type:none; padding:0 10px; position:relative;}
@@ -296,7 +301,7 @@ font-size: 14px;}
 
 /***  all follow part  ***/
 .all-contact{border:1px solid #d2d2d2; border-radius:4px; margin-bottom:10px; width:100%; float:left;}
-.all-contact h4{border-bottom:1px solid #d2d2d2; padding:10px; margin:0;}
+.all-contact h4{border-bottom:1px solid #d2d2d2; padding:10px; margin:0; letter-spacing:1px;}
 .all-contact h4 a{color:#5c5c5c;}
 .all-contact h4 a:hover{color:#1b8ab9; text-decoration:underline;}
 .all-user-list{padding:10px; width:100%; float:left;}
@@ -462,7 +467,7 @@ border-bottom: 1px solid #d2d2d2;}
 .main-dashboard .right-part{position:absolute;}
 .left-info-box{width:100%; float:left; border:1px solid #d2d2d2; border-radius:4px; padding:10px; margin-bottom:10px; font-size:14px;}
 .dash-left-title h3{margin:0; padding:5px; text-align:center; color:#5c5c5c;}
-.dash-left-title h3 a{color:#5c5c5c; width:110px; display:inline-block; padding:5px 10px;}
+.dash-left-title h3 a{color:#5c5c5c; width:120px; display:inline-block; padding:5px 10px; letter-spacing:1px;}
 .dash-left-title h3 a i{float:left;}
 .dash-left-title h3 a:hover{background: #e9ebee; padding: 5px 10px; border-radius: 3px;}
 .left-info-box table td{padding:3px; color:#5c5c5c;}
