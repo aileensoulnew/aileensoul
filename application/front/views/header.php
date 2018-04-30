@@ -93,7 +93,12 @@
                                             </span>
                                         <?php
                                         } ?>
-                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            <span class="u2 username username-hide-on-mobile hidden-xs"> <?php
+                                                if (isset($userdata['first_name'])) {
+                                                    echo $userdata['first_name'];
+                                                }
+                                                ?> </span>
+                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown2_content" role="menu" aria-labelledby="menu1" id="myDropdown">
                                             <li class="my_account">
