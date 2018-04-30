@@ -1,13 +1,37 @@
+<?php
+$session_user = $this->session->userdata();
+$userData = $this->user_model->getUserData($session_user['aileenuser']);
+$browser = $this->agent->browser();
+$browserVersion = $this->agent->version();
+if($browser == "Internet Explorer")
+{
+    if(explode(".", $browserVersion)[0] < 11)
+    {
+        echo "<div class='update-browser'>For a better experience, update your browser.</div>";
+    }
+}
+if($browser == "Chrome")
+{            
+    if(explode(".", $browserVersion)[0] < 65)
+    {
+        echo "<div class='update-browser'>For a better experience, update your browser.</div>";
+    }
+}
+if($browser == "Firefox")
+{            
+    if(explode(".", $browserVersion)[0] < 55)
+    {
+        echo "<div class='update-browser'>For a better experience, update your browser.</div>";
+    }
+}
+?>
 <header ng-controller="headerCtrl" ng-app="headerApp">
     <div class="animated fadeInDownBig">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-sm-6 left-header">
-                    <!--<h2 class="logo"><a ng-click="goMainLink('<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>');" title="Aileensoul"><img ng-src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a></h2>-->
+                <div class="col-md-6 col-sm-6 left-header">                    
                     <h2 class="logo">
                         <a ng-href="<?php echo base_url('/') ?>" title="Aileensoul" target="_self"><img ng-src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a>
-
-                        <!-- <a ng-href="<?php //echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" title="Aileensoul" target="_self"><img ng-src="<?php //echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a> -->
                     </h2>
                     <?php
                     $first_segment = $this->uri->segment(1);
@@ -69,6 +93,12 @@
                                                     <a href="javascript:void(0);" class="add-right-true" ng-click="rejectContactRequest(contact_request.from_id, $index)">
                                                         <i class="fa fa-times" aria-hidden="true"></i>
                                                     </a>
+                                                </div>
+                                            </li>
+                                            <li ng-if="contact_request_data.length == 0">
+                                                <div class="no-data-content">
+                                                    <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png');?>"></p>
+                                                    <p class="pt20">No Contact Notification</p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -180,7 +210,33 @@
                             </li>
                         <li class="dropdown user-id">
                             <a href="#" title="<?php echo $session_user['aileenuser_firstname']; ?>" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="usr-img"><?php if ($session_user['aileenuser_userimage'] != '') { ?><img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $session_user['aileenuser_userimage'] ?>" alt="<?php echo $session_user['aileenuser_firstname'] ?>"><?php } else { ?><div class="custom-user"><?php echo ucfirst(strtolower(substr($session_user['aileenuser_firstname'], 0, 1))); ?></div><?php } ?></span>
+                                <?php
+                                    if ($session_user['aileenuser_userimage'] != '')
+                                    {?>
+                                        <span class="usr-img profile-brd" id="header-main-profile-pic">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $session_user['aileenuser_userimage'] ?>" alt="<?php echo $session_user['aileenuser_firstname'] ?>">
+                                        </span>
+                                    <?php
+                                    }
+                                    else
+                                    {?>                                        
+                                        <span class="usr-img" id="header-main-profile-pic">
+                                    <?php
+                                            if($userData['user_gender'] == "M")
+                                            {?>
+                                                <img ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <?php
+                                            }
+                                            if($userData['user_gender'] == "F")
+                                            {
+                                            ?>
+                                                <img ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <?php
+                                            }
+                                    ?>
+                                        </span>
+                                        <?php
+                                    } ?>
                                 <span class="pr-name"><?php
                                     if (isset($session_user['aileenuser_firstname'])) {
                                         echo ucfirst($session_user['aileenuser_firstname']);
