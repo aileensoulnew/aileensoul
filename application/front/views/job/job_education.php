@@ -21,6 +21,13 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css_min/jquery.fancybox.css?ver='.time()); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
 
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+
 <?php }?>
 </head>
 <!-- END HEAD -->
@@ -31,7 +38,7 @@
 <body class="page-container-bg-solid page-boxed botton_footer cus-mod-edu">
   <!-- Start HEADER -->
 <?php 
-      echo $header; 
+      echo $header_inner_profile; // $header; 
       echo $job_header2_border;  
       $userid = $this->session->userdata('aileenuser');
 ?>
@@ -1029,7 +1036,7 @@
 <script>
     var base_url = '<?php echo base_url(); ?>';
     var predefine_data =' <?php echo $predefine_data; ?>';
-
+    var header_all_profile = '<?php echo $header_all_profile; ?>';
     var html = '<h2>Add Degree</h2><input type="text" name="other_degree" id="other_degree"><h2>Add Stream</h2><select name="other_stream" id="other_stream" class="other_stream">  <option value="" Selected option disabled>Select your Stream</option><?php foreach ($stream_alldata1 as $stream){?><option value="<?php echo $stream['stream_id']; ?>"><?php echo $stream['stream_name']; ?></option><?php } ?>  <option value="<?php echo $stream_otherdata[0]['stream_id']; ?> "><?php echo $stream_otherdata[0]['stream_name']; ?></option> </select><a id="univer" class="btn" title="Ok">OK</a>';
 
    

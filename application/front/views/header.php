@@ -66,24 +66,33 @@
                                     <li class="dropdown dropdown-user">
                                         <a class="dropbtn action-button shadow animate dropbtn_common" href="javascript:void(0)" type="button" id="menu1" data-toggle="dropdown" >
                                             <!-- <div id="hi" class="notifications"> -->
-                                            <?php if ($userdata['user_image'] != '') { ?>
-                                                <div id="profile-photohead" class="profile-head">
-                                                    <img alt="<?php echo $userdata['first_name'] ?>" class="img-circle" src="<?php echo USER_THUMB_UPLOAD_URL . $userdata['user_image'] . '?ver='.time(); ?>" height="50" width="50" alt="Smiley face" />
-                                                </div>
-
+                                        <?php if ($userdata['user_image'] != '')
+                                        { ?>
+                                            <div id="profile-photohead" class="profile-head profile-brd">
+                                                <img alt="<?php echo $userdata['first_name'] ?>" class="img-circle" src="<?php echo USER_THUMB_UPLOAD_URL . $userdata['user_image'] . '?ver='.time(); ?>" height="50" width="50"/>
+                                            </div>
+                                        <?php
+                                        }
+                                        else
+                                        {
+                                            ?>
+                                            <span id="profile-photohead" class="profile-head usr-img">
+                                            <?php
+                                                if($userdata['user_gender'] == "M")
+                                                {?>
+                                                    <img width="20" src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                 <?php
-                                            } else {
-
-                                                $a = $userdata['first_name'];
-                                                $acr = substr($a, 0, 1);
+                                                }
+                                                if($userdata['user_gender'] == "F")
+                                                {
                                                 ?>
-                                                <div id="profile-photohead" class="profile-head">
-                                                    <div class="custom-user">
-                                                        <?php echo ucfirst(strtolower($acr)); ?>
-                                                    </div>
-
-                                                </div>
-                                            <?php } ?>
+                                                    <img width="20" src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                <?php
+                                                }
+                                            ?>
+                                            </span>
+                                        <?php
+                                        } ?>
                                             <span class="u2 username username-hide-on-mobile hidden-xs"> <?php
                                                 if (isset($userdata['first_name'])) {
                                                     echo $userdata['first_name'];

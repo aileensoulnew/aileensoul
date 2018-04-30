@@ -1,43 +1,43 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="jobApp">
    <head>
 <!-- start head -->
-<?php echo $head; ?>
+<?php //echo $head; ?>
 <!-- Calender Css Start-->
 
  <title><?php echo $title; ?></title>
 
 <!-- Calender Css End-->
-
-<?php
-        if (IS_JOB_CSS_MINIFY == '0') {
-            ?>
+ 
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver='.time()); ?>">
-
-<?php }else{?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
-<?php }?>
-<!-- This Css is used for call popup -->
-    
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time());?>">
 
-</head>
-<!-- END HEAD -->
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+<style type="text/css">
+  .ui-autocomplete {
+    background: #fff;
+}
+</style>
 </head>
 <!-- END HEAD -->
 
 <!-- start header -->
-<?php echo $header; ?>
 <!-- END HEADER -->
 <?php if(!$userid){ ?>
 <body class="cus-login botton_footer cus-error no-login">
 <?php }else{ ?>
 <body class="cus-login botton_footer cus-error">
 <?php } ?>
+<?php echo $header_profile; ?>
 
   <?php 
       $userid = $this->session->userdata('aileenuser');
@@ -187,7 +187,7 @@
                            <div class="job_reg">
                         
                               <!-- <input title="Register" type="submit" id="submit" name="" value="Register" tabindex="12"> -->
-                              <button id="submit" name="" class="cus_btn_sub" onclick="return profile_reg();" tabindex="12">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                              <button id="submit" name="" class="cus_btn_sub" tabindex="12">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                            </div>
                         </fieldset>
                         <?php echo form_close();?>
@@ -434,8 +434,11 @@
 
 
 <?php echo $login_footer ?> 
-<?php echo $footer;  ?>
-
+<?php //echo $footer;  ?>
+<script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
+<script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()); ?>"></script>
+<script src="<?php echo base_url('node_modules/socket.io/node_modules/socket.io-client/socket.io.js?ver='.time());  ?>"></script>
+<script src="<?php echo base_url('assets/js/classie.js?ver='.time());  ?>"></script>
  <?php
         if (IS_JOB_JS_MINIFY == '0') {
             ?>
@@ -446,7 +449,10 @@
 <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver='.time()) ?>"></script>
    <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver='.time()); ?>"></script>
 
-<?php }?>  
+<?php }?> 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script> 
 <!-- This Js is used for call popup -->
 
 <!-- This Js is used for call popup -->
@@ -495,10 +501,13 @@ function expmonth_click(){
 }
 
        $(".alert").delay(3200).fadeOut(300);
-     var base_url = '<?php echo base_url(); ?>';
-      var profile_login = '<?php echo $profile_login; ?>';
-     var user_id = '<?php echo $this->session->userdata('aileenuser');?>';
+  var base_url = '<?php echo base_url(); ?>';
+  var profile_login = '<?php echo $profile_login; ?>';
+  var user_id = '<?php echo $this->session->userdata('aileenuser');?>';
+  var header_all_profile = '<?php echo $header_all_profile; ?>';
+  var app = angular.module('jobApp', ['ui.bootstrap']);
   </script>
+  <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
   <script src="<?php echo base_url('assets/js/backdetect.jquery.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_reg.js?ver='.time()); ?>"></script>
 <?php
@@ -511,7 +520,21 @@ function expmonth_click(){
 
  <!--<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/job_reg.js?ver='.time()); ?>"></script>-->
   <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
-  
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
+                $("li.user-id label").click(function(e){
+                    $(".dropdown").removeClass("open");
+                    $(this).next('ul.dropdown-menu').toggle();
+                    e.stopPropagation();
+                });
+                $(".right-header ul li.dropdown a").click(function(e){                          
+                    $('.right-header ul.dropdown-menu').hide();
+                });
+            });
+    $(document).click(function(){
+        $('.right-header ul.dropdown-menu').hide();
+    });
+  </script>
 <?php }?>
 </body>
 </html>

@@ -66,9 +66,9 @@
                 </div>
                 <div class="user-detail-bottom">
                     <ul>
+                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/profiles') ?>">Profile</a></li>
                         <li><a href="<?php echo base_url($leftbox_data['user_slug']) ?>">Dashboard</a></li>
                         <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/details') ?>">Detail</a></li>
-                        <li><a href="<?php echo base_url($leftbox_data['user_slug'].'/followers') ?>">Followers</a></li>
                     </ul>
                 </div>
             </div>
