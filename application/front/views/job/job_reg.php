@@ -1,35 +1,30 @@
 
 <!DOCTYPE html>
 <html>
-   <head>
-<!-- start head -->
-<?php echo $head; ?>
-<!-- Calender Css Start-->
+  <head>
+  <!-- start head -->
+  <?php echo $head; ?>
+  <!-- Calender Css Start-->
 
- <title><?php echo $title; ?></title>
+  <title><?php echo $title; ?></title>
 
-<!-- Calender Css End-->
+  <!-- Calender Css End-->
 
-<?php
-        if (IS_JOB_CSS_MINIFY == '0') {
-            ?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver='.time()); ?>">
+  <?php
+  if (IS_JOB_CSS_MINIFY == '0') {
+  ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver='.time()); ?>">
 
-<?php }else{?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
-<?php }?>
-<!-- This Css is used for call popup -->
-    
-
+  <?php }else{?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
+  <?php }?>
+  <!-- This Css is used for call popup -->  
 </head>
 <!-- END HEAD -->
-</head>
-<!-- END HEAD -->
-
 <!-- start header -->
 <?php echo $header; ?>
 <!-- END HEADER -->
@@ -502,7 +497,7 @@ function expmonth_click(){
   <script src="<?php echo base_url('assets/js/backdetect.jquery.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_reg.js?ver='.time()); ?>"></script>
 <?php
-        if (IS_JOB_JS_MINIFY == '0') {
+if (IS_JOB_JS_MINIFY == '0') {
             ?>
   <!--<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_reg.js?ver='.time()); ?>"></script>-->
   <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
