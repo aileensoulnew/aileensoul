@@ -177,8 +177,23 @@
                     location.href = path;
                 }
             });
+
             app.controller('studentInfoController', function ($scope, $http) {
                 $scope.user = {};
+
+                $scope.jobTitle = function () {
+                    $http({
+                        method: 'POST',
+                        url: base_url + 'general_data/searchJobTitle',
+                        data: 'q=' + $scope.user.jobTitle,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    })
+                    .then(function (success) {
+                        data = success.data;
+                        $scope.titleSearchResult = data;
+                    });
+                }
+
                 $('#student_info_ajax_load').hide();                
 
                 $scope.currentStudy = function () {
@@ -230,6 +245,9 @@
                         },
                         university: {
                             required: true,
+                        },
+                        jobTitle: {
+                            required: true,
                         }
                     },
                     messages: {
@@ -241,6 +259,9 @@
                         },
                         university: {
                             required: "University name is required.",
+                        },
+                        jobTitle: {
+                            required:  "Interested field is required.",
                         }
                     }
                 };

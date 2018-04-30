@@ -121,6 +121,9 @@ class User_info extends MY_Controller {
 
         $_POST = json_decode(file_get_contents('php://input'), true);
         
+        if (empty($_POST['jobTitle']))
+            $errors['jobTitle'] = 'Interested field is required.';
+
         if (empty($_POST['currentStudy']))
             $errors['currentStudy'] = 'Current study is required.';
 
@@ -133,6 +136,26 @@ class User_info extends MY_Controller {
         if (!empty($errors)) {
             $data['errors'] = $errors;
         } else {
+
+            if (is_array($_POST['jobTitle']))
+            {
+                $jobTitleId = $_POST['jobTitle']['title_id'];
+            }
+            else
+            {
+                $interested_field = $this->data_model->findJobTitle($_POST['jobTitle']);
+                if ($interested_field['title_id'] != '') {
+                    $jobTitleId = $interested_field['title_id'];
+                } else {
+                    $data = array();
+                    $data['name'] = $_POST['jobTitle'];
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = 'draft';
+                    $data['slug'] = $this->common->clean($_POST['jobTitle']);
+                    $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+                }
+            }
             if (is_array($_POST['currentStudy'])) {
                 $degreeId = $_POST['currentStudy']['degree_id'];
             } else {
@@ -190,6 +213,7 @@ class User_info extends MY_Controller {
             $data['current_study'] = $degreeId;
             $data['city'] = $cityId;
             $data['university_name'] = $universityId;
+            $data['interested_fields'] = $jobTitleId;
 
             $insert_id = $this->common->insert_data_getid($data, 'user_student');
             if ($insert_id) {
