@@ -1996,6 +1996,14 @@ footer ul li a:hover{
 .cameraButton #upload{
     display:none
 }
+#profile-photohead {
+    width: 25px;
+    height: 25px;
+	margin-right:5px;
+	display:inline-block;
+}
+#profile-photohead  img{width:100%; border-radius:100%;}
+
 @media screen and (min-width:1300px){
     .container{
         width:1280px
