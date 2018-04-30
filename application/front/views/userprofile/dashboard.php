@@ -11,11 +11,20 @@
                 </tr>
                 <tr>
                     <td><img src = "<?php echo base_url('assets/n-images/designation.png?ver=' . time()) ?>"></td>
-                    <td>{{details_data.Designation}}</td>
+                    <td ng-if="details_data.Designation !==undefined">
+                        {{details_data.Designation}}
+                    </td>
+                    <td ng-if="details_data.Degree !==undefined">
+                        {{details_data.Degree}}
+                    </td>
+
                 </tr>
                 <tr>
                     <td><img src = "<?php echo base_url('assets/n-images/industry.png?ver=' . time()) ?>"></td>
-                    <td>{{details_data.Industry}}</td>
+                    <td>
+                        <span ng-if="details_data.Industry !==undefined">{{details_data.Industry}}</span>
+                        <span ng-if="details_data.University !==undefined">{{details_data.University}}</span>
+                    </td>
                 </tr>
                 <tr>
                     <td><img src = "<?php echo base_url('assets/n-images/location-lb.png?ver=' . time()) ?>"></td>
