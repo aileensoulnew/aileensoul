@@ -330,13 +330,13 @@
                                 <li ng-if="live_slug == user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="javascript:void(0);" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, postIndex)">Edit Post</a></li>
                                 <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                 <li>
-                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/post/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
-                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photo/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
-                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'video'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/video/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
-                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'audio'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/audio/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
-                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/post/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photo/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'video'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/video/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'audio'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/audio/{{post.post_data.id}}" target="_blank">Show in new tab</a>
+                                    <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a>
 
-                                    <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in New Tab</a>
+                                    <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
                                 </li>
                             </ul>
                         </div>
@@ -427,7 +427,7 @@
                                 <form  id="post_something_edit" name="post_something_edit" ng-submit="post_something_check(event,postIndex)" enctype="multipart/form-data">
                                     <div class="post-box">        
                                         <div class="post-text">
-                                            <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share opportunities, articles and questions..." id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
+                                            <div contenteditable="true" data-directive ng-model="sim.description_edit" ng-class="{'form-control': false, 'has-error':isMsgBoxEmpty}" ng-change="isMsgBoxEmpty = false" class="editable_text" placeholder="Share opportunities, articles and questions" id="editPostTexBox-{{post.post_data.id}}" ng-focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true" ng-paste="handlePaste($event)"></div>
 
                                             <!-- <textarea name="description" ng-model="sim.description_edit" id="editPostTexBox-{{post.post_data.id}}" class="title-text-area hide" placeholder="Write something here..."></textarea> -->
                                         </div>                        
@@ -744,7 +744,7 @@
                             } ?>
                         </div>
                         <div class="post-text">
-                            <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share opportunities, articles and questions..."></textarea>
+                            <textarea name="description" ng-model="sim.description" id="description" class="title-text-area" placeholder="Share opportunities, articles and questions"></textarea>
                         </div>
                         <div class="all-upload" ng-if="is_edit != 1">
                             <div class="form-group">
