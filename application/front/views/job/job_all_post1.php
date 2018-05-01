@@ -161,7 +161,7 @@
                             
                         
                      <div class="contact-frnd-post">
-                        <div class="job-contact-frnd1">
+                        <div class="job-contact-frnd">
 
                             <div id="loader"><p style="text-align:center;"><img class="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="LOADERIMAGE"/></p></div>
                         </div>

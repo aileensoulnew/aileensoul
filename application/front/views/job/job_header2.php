@@ -9,11 +9,11 @@ $userid = $this->session->userdata('aileenuser');
                 <div class="col-md-6 mob-p0">
                     <ul class="sub-menu">
                         <li>
-                            <a href="<?php echo base_url('artist/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Job Profile</a>
+                            <a href="<?php echo base_url('job/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Job Profile</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();"><i class="fa fa-envelope" aria-hidden="true"></i> Message
-                                <span id="message_count" class="noti-box">1</span>
+                                <span id="message_count"></span>
                             </a>
                             <div class="dropdown-menu">
                                 <div class="dropdown-title">
@@ -236,7 +236,7 @@ $userid = $this->session->userdata('aileenuser');
         {
             $('#message_count').html(msg);
             $('#InboxLink').addClass('msg_notification_available');
-            $('#message_count').addClass('count_add');
+            $('#message_count').addClass('count_add noti-box');
             document.getElementById('message_count').style.display = "block";
             //alert("welcome");
         }

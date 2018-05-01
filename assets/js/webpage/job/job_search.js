@@ -71,10 +71,10 @@ function job_search(pagenum)
 //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER END
 
 //Search textbox highlight Start
- var text = document.getElementById("search").value;
+ /*var text = document.getElementById("search").value;
    $(".search").highlite({
        text: text
-   });
+   });*/
 //Search textbox highlight End
 
 //Tooltip Start
