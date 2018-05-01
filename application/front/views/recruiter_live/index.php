@@ -17,7 +17,7 @@
     <body class="profile-main-page recruiter-main">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
-            <?php echo $search_banner; ?>
+            <?php if($recruiter_profile_set == 0 || $recruiter_profile_set == '0') echo $search_banner; ?>
             <div class="sub-fix-head">
                 <div class="container">
                     <p><span>Lorem ipzum is a dummy text.</span><a class="pull-right btn-1" href="#">Post a job</a></p>
@@ -331,11 +331,7 @@
             var q = '';
             var l = '';
             var app = angular.module('artistApp', ['ui.bootstrap']);
-                
-  
-                                     
-                                     
-                                        var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
         
   </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

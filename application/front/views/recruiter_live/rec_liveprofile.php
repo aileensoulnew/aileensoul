@@ -6,7 +6,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
     <head>
         <title><?php echo $title; ?></title>
         <?php echo $head; ?>  
-        <?php
+         <?php
         if (IS_REC_CSS_MINIFY == '0') {
             ?>
              <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
@@ -14,26 +14,29 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />      
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">         
-        <?php
-            } else {
-        ?>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_main/style-main.css'); ?>">         
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">         
+   <?php
+        } else {
+            ?>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_main/style-main.css'); ?>">         
+              <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
             <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()); ?>" media="all" rel="stylesheet" type="text/css"/>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />      
         <?php } ?>
+         
+     
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
-
         <style type="text/css">
             .two-images, .three-image, .four-image{
                 height: auto !important;
             }
         </style>
+    
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer no-login">
+
         <header>
             <div class="container">
                 <div class="row">

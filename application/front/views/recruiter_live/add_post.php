@@ -16,7 +16,7 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/jquery.fancybox.css'); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
         <?php } ?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer freeh3">
@@ -285,7 +285,7 @@
                                         <div class="p15 fw">
                                             <fieldset class="fw" <?php if ($country) { ?> class="error-msg" <?php } ?>>
                                                 <label >Country:<span style="color:red">*</span></label>
-                                                <select style="cursor:pointer;" name="country" id="country1" tabindex="21">
+                                                <select style="cursor:pointer;" name="country" id="country" tabindex="21">
                                                     <option value="" selected option disabled>Select Country</option>
                                                     <?php
                                                     if (count($countries) > 0) {
@@ -446,10 +446,7 @@
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/add_post.js'); ?>"></script>
         <?php } ?>
 
-        <script>
-            var header_all_profile = '<?php echo $header_all_profile; ?>';
-        </script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+
 
         <style type="text/css">
 

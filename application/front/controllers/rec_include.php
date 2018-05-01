@@ -32,7 +32,7 @@ $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
 $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
 $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
 $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
-$this->data['recruiter_header2'] = $this->load->view('recruiter/recruiter_header2', $this->data, true);
+$this->data['recruiter_header2'] = $this->load->view('recruiter_live/recruiter_header2', $this->data, true);
 // Start - code needed for new header
 // recruiter detail
 // Start Job

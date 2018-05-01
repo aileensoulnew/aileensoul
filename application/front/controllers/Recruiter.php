@@ -24,6 +24,7 @@ class Recruiter extends MY_Controller {
     }
 
     public function index() {
+        echo "string";
         $userid = $this->session->userdata('aileenuser');
 //  CHECK HOW MUCH STEP FILL UP BY USE IN RECRUITER PROFILE START  
         // $this->recruiter_apply_check();
@@ -57,11 +58,11 @@ class Recruiter extends MY_Controller {
 
         $userid = $this->session->userdata('aileenuser');
 
-// REDIRECT USER TO REMAIN PROFILE START
+        // REDIRECT USER TO REMAIN PROFILE START
         $contition_array = array('user_id' => $userid, 're_status' => '1', 'is_delete' => '0');
         $apply_step = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 're_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// REDIRECT USER TO REMAIN PROFILE END
+        // REDIRECT USER TO REMAIN PROFILE END
 
         if (count($apply_step) >= 0) {
             if ($apply_step[0]['re_step'] == 1) {
@@ -524,24 +525,21 @@ class Recruiter extends MY_Controller {
         }
     }
 
-// RECRUITER CHECK EMAIL COMAPNY FUNCTION END   
-// RECRUITER RECOMMANDED FUNCTION START
+    // RECRUITER CHECK EMAIL COMAPNY FUNCTION END   
+    // RECRUITER RECOMMANDED FUNCTION START
     public function recommen_candidate() {
         
         $this->data['title'] = 'Home | Recruiter Profile - Aileensoul';
         $userid = $this->session->userdata('aileenuser');
         $this->recruiter_apply_check();
-
-
-//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
+        //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
         $contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
         $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
         if ($recruiter_deactive) {
             redirect('recruiter/');
         }
-//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
-//FETCH RECRUITER DATA
-
+        //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
+        //FETCH RECRUITER DATA
         $this->load->view('recruiter/recommen_candidate', $this->data);
     }
 
@@ -556,13 +554,13 @@ class Recruiter extends MY_Controller {
 
             $userid = $this->session->userdata('aileenuser');
 
-//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
+            //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
             $contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
             $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
             if ($recruiter_deactive) {
                 redirect('recruiter/');
             }
-//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
+            //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
 
             $contition_array = array('status' => '1');
@@ -814,13 +812,13 @@ class Recruiter extends MY_Controller {
         $recruiterdata = $this->common->select_data_by_id('recruiter', 'user_id', $userid, $data = 'user_id,designation,rec_firstname,rec_lastname', $join_str = array());
         $this->data['title'] = $this->data['recdata']['rec_firstname'] . ' ' . $this->data['recdata']['rec_lastname'] . ' | Post | Recruiter Profile - Aileensoul';
 
-//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
+        //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
         $contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
         $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
         if ($recruiter_deactive) {
             redirect('recruiter/');
         }
-//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
+        //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 
         if ($id == $userid || $id == '') {
 
@@ -1191,7 +1189,7 @@ class Recruiter extends MY_Controller {
         $this->data['title'] = $recruiterdata[0]['rec_firstname'] . ' ' . $recruiterdata[0]['rec_lastname'] . ' | Saved Candidate | Recruiter Profile - Aileensoul';
 
 
-//if user deactive profile then redirect to recruiter/index untill active profile start
+        //if user deactive profile then redirect to recruiter/index untill active profile start
         $contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
         $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
@@ -3049,7 +3047,7 @@ class Recruiter extends MY_Controller {
         echo json_encode($cdata);
     }
 
-// RECRUITER GET LOCATION END
+    // RECRUITER GET LOCATION END
     public function get_job_tile($id = "") {
         $userid = $this->session->userdata('aileenuser');
         //get search term
@@ -3057,29 +3055,29 @@ class Recruiter extends MY_Controller {
 
         if (!empty($searchTerm)) {
 
-// JOB REGISTRATION DATA START (designation)
+            // JOB REGISTRATION DATA START (designation)
             $contition_array = array('status' => '1', 'is_delete' => '0');
             $search_condition = "(designation LIKE '" . trim($searchTerm) . "%')";
             $designation = $this->common->select_data_by_search('job_reg', $search_condition, $contition_array, $data = 'designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'designation');
-// JOB REGISTRATION DATA END  (designation)
-// DEGREE DATA START
+            // JOB REGISTRATION DATA END  (designation)
+            // DEGREE DATA START
             $contition_array = array('status' => '1');
             $search_condition = "(degree_name LIKE '" . trim($searchTerm) . "%')";
             $degreedata = $this->common->select_data_by_search('degree', $search_condition, $contition_array, $data = 'degree_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'degree_name');
-// DEGREE DATA END
-// STREAM DATA START
+            // DEGREE DATA END
+            // STREAM DATA START
             $contition_array = array('status' => '1');
             $search_condition = "(stream_name LIKE '" . trim($searchTerm) . "%')";
             $streamdata = $this->common->select_data_by_search('stream', $search_condition, $contition_array, $data = 'stream_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'stream_name');
-// STREAM DATA END
-// SKILL DATA START
+            // STREAM DATA END
+            // SKILL DATA START
             $contition_array = array('status' => '1', 'type' => '1');
             $search_condition = "(skill LIKE '" . trim($searchTerm) . "%')";
             $skilldata = $this->common->select_data_by_search('skill', $search_condition, $contition_array, $data = 'skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'skill');
-// SKILL DATA END
-//MERGE DATA START
+            // SKILL DATA END
+            //MERGE DATA START
             $uni = array_merge($designation, $degreedata, $streamdata, $skilldata);
-//MERGE DATA END
+            //MERGE DATA END
         }
         foreach ($uni as $key => $value) {
             foreach ($value as $ke => $val) {
