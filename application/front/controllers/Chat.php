@@ -19,6 +19,7 @@ class Chat extends MY_Controller {
         //AWS access info end
 
         include('include.php');
+        include ('main_profile_link.php'); 
     }
 
     public function index($message_from_profile = '', $message_to_profile = '') {

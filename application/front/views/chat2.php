@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <?php if ($message_from_profile == 1) { ?>
                <title>Messages  | Job Profile - Aileensoul</title>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <?php } else if ($message_from_profile == 2) { ?>
                <title>Messages | Recruiter Profile - Aileensoul</title>
         <?php } else if ($message_from_profile == 3) { ?>
@@ -87,7 +88,7 @@ if (IS_MSG_JS_MINIFY == '0') {
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     <body>
 <?php
-echo $header;
+//echo $header;
 
 if ($message_from_profile == 1) {
     echo $job_header2;
@@ -320,9 +321,11 @@ if ($lstusrdata) {
                     </div>
                 </div>
                 <!-- Model Popup Close -->
-                <!------  commen script khyati 15-7  ---------------->
+                <!-- commen script khyati 15-7 -->
 
                 <script type="text/javascript">
+                    var header_all_profile = '<?php echo $header_all_profile; ?>';
+                    var base_url = "<?php echo base_url(); ?>";
                     var request_timestamp = 0;
                     var setCookie = function (key, value) {
                     var expires = new Date();
@@ -670,6 +673,23 @@ if ($lstusrdata) {
                 <!-- user search list  20-4  start  -->
 
                 <script type="text/javascript">
+
+
+                        function getmsgNotification() {
+                            msgNotification();
+                        }
+
+                        function msgNotification() {
+                            $.ajax({
+                               url: base_url + "notification/update_msg_noti/1",
+                               type: "POST",
+                               success: function (data) {
+                                   data = JSON.parse(data);
+                               }
+                            });
+                        }
+
+                    
 
                     $(document).ready(function () {
 
