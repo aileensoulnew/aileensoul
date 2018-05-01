@@ -205,10 +205,9 @@ $userid = $this->session->userdata('aileenuser');
 		$('#bidmodal').modal('show');
 	}
 	function deactivate_profile(clicked_id) {
-
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo base_url() . "freelance-hire/deactivate" ?>',
+			url: '<?php echo base_url() . "freelance-work/deactivate" ?>',
 			data: 'id=' + clicked_id,
 			success: function (data) {
 				window.location = "<?php echo base_url() ?>";
