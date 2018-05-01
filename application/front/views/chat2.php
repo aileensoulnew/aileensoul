@@ -674,6 +674,23 @@ if ($lstusrdata) {
 
                 <script type="text/javascript">
 
+
+                        function getmsgNotification() {
+                            msgNotification();
+                        }
+
+                        function msgNotification() {
+                            $.ajax({
+                               url: base_url + "notification/update_msg_noti/1",
+                               type: "POST",
+                               success: function (data) {
+                                   data = JSON.parse(data);
+                               }
+                            });
+                        }
+
+                    
+
                     $(document).ready(function () {
 
 
