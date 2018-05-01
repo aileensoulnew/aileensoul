@@ -17,11 +17,13 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/jquery.fancybox.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
         <?php } ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
         <?php echo $header; ?>
         <?php if ($recdata['re_step'] == 3) { ?>
-            <?php echo $recruiter_header2_border; ?>
+            <?php echo $recruiter_header2; ?>
         <?php } ?>
         <div id="preloader"></div>
         <!-- START CONTAINER -->
@@ -500,10 +502,12 @@
         
         </script> 
         <!-- FIELD VALIDATION JS END -->
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <?php
         if (IS_REC_JS_MINIFY == '0') {
             ?>
          <!-- FIELD VALIDATION JS START -->
+
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.fancybox.js'); ?>"></script>
         <!-- THIS SCRIPT ALWAYS PUT UNDER FANCYBOX JS-->
@@ -525,7 +529,10 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/edit_post.js'); ?>"></script>
         <?php } ?>
        
-
+        <script type="text/javascript">
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 
         <style type="text/css">
 

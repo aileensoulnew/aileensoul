@@ -285,7 +285,7 @@
                                         <div class="p15 fw">
                                             <fieldset class="fw" <?php if ($country) { ?> class="error-msg" <?php } ?>>
                                                 <label >Country:<span style="color:red">*</span></label>
-                                                <select style="cursor:pointer;" name="country" id="country1" tabindex="21">
+                                                <select style="cursor:pointer;" name="country" id="country" tabindex="21">
                                                     <option value="" selected option disabled>Select Country</option>
                                                     <?php
                                                     if (count($countries) > 0) {
