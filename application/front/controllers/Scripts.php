@@ -84,7 +84,7 @@ class Scripts extends CI_Controller {
 
     public function get_lastest_jobtitle_post()
     {
-        if($_SERVER['REMOTE_ADDR'] == '203.88.134.32' || $_SERVER['REMOTE_ADDR'] == ':00:1'):
+        if($_SERVER['REMOTE_ADDR'] == '203.88.134.32' || $_SERVER['REMOTE_ADDR'] == '::1'):
             echo "<table><tr><th>Post Count</th>";
             echo "<th>Job Id</th>";
             echo "<th>Job Name</th>";
