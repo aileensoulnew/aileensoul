@@ -14,7 +14,8 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
         <?php } ?>
-
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer cus_post_profile">
         <?php echo $header; ?>
@@ -23,7 +24,7 @@
         if ($postdataone[0]['user_id'] != $userid) {
             echo $job_header2_border;
         } elseif ($recdata['re_step'] == 3) {
-            echo $recruiter_header2_border;
+            echo $recruiter_header2;
         } elseif ($returnpage == 'notification') {
             
         }

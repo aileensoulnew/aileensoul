@@ -52,7 +52,8 @@ function rec_post(pagenum) {
         },
         success: function (data) {
             $('.loader').remove();
-            $('.job-contact-frnd').append(data);
+            var res = JSON.parse(data);
+            $('.job-contact-frnd').append(res.postdata);
 
             // second header class add for scroll
             var nb = $('.post-design-box').length;

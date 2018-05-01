@@ -250,7 +250,7 @@
                     <div class="page-title">
                         <h3>Post</h3>
                     </div>
-                    <div class="job-contact-frnd1" id="nodataavl">
+                    <div class="job-contact-frnd" id="nodataavl">
 
 
                     </div>

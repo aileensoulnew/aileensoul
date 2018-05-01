@@ -28,9 +28,7 @@ class Freelancer_apply_live extends MY_Controller {
     }
 
     public function index() {
-    
-
-            $userid = $this->session->userdata('aileenuser');
+        $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);

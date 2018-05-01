@@ -14,11 +14,13 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
         <?php } ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $header; ?>
         <?php if ($recdata['re_step'] == 3) { ?>
-            <?php echo $recruiter_header2_border; ?>
+            <?php echo $recruiter_header2; ?>
         <?php } ?>
         <div id="preloader"></div>
         <!-- START CONTAINER -->
@@ -762,7 +764,10 @@ if (IS_REC_JS_MINIFY == '0') {
 
             }
         </script>
-
+        <script type="text/javascript">
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <style type="text/css">
 
             .keyskill_border_active {

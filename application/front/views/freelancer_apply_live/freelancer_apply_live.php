@@ -228,7 +228,6 @@
                         <img src="<?php echo base_url('assets/n-images/add.jpg?ver=' . time()) ?>">
                     </div>
                 </div>
-
             </div>
 
         </div>
