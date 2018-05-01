@@ -18,15 +18,23 @@
          <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver=' . time()); ?>">
         <?php }?>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
     </head>
     <!-- END HEAD -->
     <!-- Start HEADER -->
     <?php
-    echo $header;
-    echo $job_header2_border;
+    // echo $header;
+    // echo $job_header2_border;
     ?>
     <!-- END HEADER -->
     <body  class="page-container-bg-solid page-boxed custom-border botton_footer">
+        <?php
+            echo $job_header2;
+        ?>
         <section class="custom-row">
             <div class="container" id="paddingtop_fixed_job">
                 <div class="row" id="row1" style="display:none;">
@@ -323,6 +331,7 @@
                                 var base_url = '<?php echo base_url(); ?>';
                                 var count_profile_value = '<?php echo $count_profile_value; ?>';
                                 var count_profile = '<?php echo $count_profile; ?>';
+                                var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
 
 <?php

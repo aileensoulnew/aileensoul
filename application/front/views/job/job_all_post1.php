@@ -18,15 +18,24 @@
          <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver=' . time()); ?>">
         <?php }?>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
     </head>
     <!-- END HEAD -->
     <!-- Start HEADER -->
     <?php
-    echo $header;
-    echo $job_header2_border;
+    // echo $header;
+    // echo $job_header2_border;
     ?>
     <!-- END HEADER -->
     <body class="page-container-bg-solid page-boxed">
+        <?php
+            echo $job_header2;
+        ?>
         <div class="user-midd-section" id="paddingtop_fixed">
             <div class="container padding-360">
                 <div class="row4">
@@ -292,14 +301,15 @@
 
 <?php }?>
                     <script>
-                                                                                                var base_url = '<?php echo base_url(); ?>';
-                                                                                                var skill = '<?php echo $keyword; ?>';
-                                                                                                
-                                                                                                var place = '<?php echo $keyword1; ?>';
-                                                                                             
+                            var base_url = '<?php echo base_url(); ?>';
+                            var skill = '<?php echo $keyword; ?>';
+                            
+                            var place = '<?php echo $keyword1; ?>';
+                         
 
-                                                                                                var csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
-                                                                                                var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                            var csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+                            var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                            var header_all_profile = '<?php echo $header_all_profile; ?>';
                     </script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_search.js?ver=' . time()); ?>"></script>
 <?php
