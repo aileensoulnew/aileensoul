@@ -23,6 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                <title>Messages | Business Profile - Aileensoul</title>
         <?php } else if ($message_from_profile == 6) { ?>
                <title>Messages | Artistic Profile - Aileensoul</title>
+                <script src="<?php echo base_url(); ?>assets/js_min/bootstrap.min.js?ver=1525257747"></script>
+
         <?php }
         ?>
 

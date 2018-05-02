@@ -32,6 +32,7 @@ public function __construct()
          $this->paging = $this->config->item('paging');
      
         include('include.php');
+        include ('main_profile_link.php');
 
 }
 

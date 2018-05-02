@@ -382,5 +382,48 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
+    public function get_art_url($userid) {
+
+        $contition_array = array('user_id' => $userid, 'status' => '1');
+        $arturl = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_city,art_skill,other_skill,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+
+        $city_url = $this->db->select('city_name')->get_where('cities', array('city_id' => $arturl[0]['art_city'], 'status' => '1'))->row()->city_name;
+
+        $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $arturl[0]['other_skill']))->row()->other_category;
+
+        $category = $arturl[0]['art_skill'];
+        $category = explode(',', $category);
+
+        foreach ($category as $catkey => $catval) {
+            $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
+            $categorylist[] = $art_category;
+        }
+
+        $listfinal1 = array_diff($categorylist, array('other'));
+        $listFinal = implode('-', $listfinal1);
+
+        if (!in_array(26, $category)) {
+            $category_url = $this->common->clean($listFinal);
+        } else if ($arturl[0]['art_skill'] && $arturl[0]['other_skill']) {
+
+            $trimdata = $this->common->clean($listFinal) . '-' . $this->common->clean($art_othercategory);
+            $category_url = trim($trimdata, '-');
+        } else {
+            $category_url = $this->common->clean($art_othercategory);
+        }
+
+        $city_get = $this->common->clean($city_url);
+
+        if (!$city_get) {
+            $url = $arturl[0]['slug'] . '-' . $category_url . '-' . $arturl[0]['art_id'];
+        } else if (!$category_url) {
+            $url = $arturl[0]['slug'] . '-' . $city_get . '-' . $arturl[0]['art_id'];
+        } else if ($city_get && $category_url) {
+            $url = $arturl[0]['slug'] . '-' . $category_url . '-' . $city_get . '-' . $arturl[0]['art_id'];
+        }
+        return $url;
+    }
+
 
 }
