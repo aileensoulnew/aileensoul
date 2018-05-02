@@ -28,7 +28,7 @@ $userid = $this->session->userdata('aileenuser');
                         </li>
                         <li id="add-contact" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return Notification_contact()"><i class="fa fa-users" aria-hidden="true"></i> Contact
-                                <span class="noti-box" id="addcontactLink">1</span>
+                                <span class="<?php echo ($bus_con_request != '' && $bus_con_request > 0 ? 'noti-box' : '' ); ?>" id="addcontactLink"><?php echo $bus_con_request; ?></span>
                             </a>
 
                             <div class="dropdown-menu">
@@ -247,12 +247,16 @@ $userid = $this->session->userdata('aileenuser');
             url: "<?php echo base_url(); ?>business_profile/update_contact_count",
             type: "POST",
             success: function (data) {
-                $('span[id^=addcontact_count]').html('');
+                /*$('span[id^=addcontact_count]').html('');
                 $('span[id^=addcontact_count]').css({
                     "background-color": "",
                     "padding": "0px"
-                });
-                $('#addcontactLink').removeClass('contact_notification_available');
+                });*/
+                $('#addcontactLink').html("");
+                if (parseInt(data) > 0) {                    
+                    $('#addcontactLink').html(data);
+                }
+                $('#addcontactLink').removeClass('noti-box');
             }
         });
     }

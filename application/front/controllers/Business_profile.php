@@ -8535,8 +8535,8 @@ No Contacts Available.
         foreach ($result as $cnt) {
             $updatedata = $this->common->update_data($data, 'contact_person', 'contact_id', $cnt['contact_id']);
         }
-        $count = count($updatedata);
-        echo $count;
+        //$count = count($updatedata);
+        echo "";// $count;
     }
 
 //contact request count end

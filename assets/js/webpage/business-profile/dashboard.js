@@ -119,7 +119,7 @@ function business_dashboard_post(slug, pagenum) {
     isProcessing = true;
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/business_dashboard_post/" + slug + "?page=" + pagenum,
+        url: base_url + "business_profile/ajax_business_dashboard_post/" + slug + "?page=" + pagenum,
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
@@ -1237,10 +1237,18 @@ function followuser_two(clicked_id)
 {
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/follow_two",
+        url: base_url + "business_profile_live/follow_two",
         data: 'follow_to=' + clicked_id,
         success: function (data) {
-            $('.' + 'fr' + clicked_id).html(data);
+            res = JSON.parse(data);
+            if(res.status == "success")
+            {                
+                $('.' + 'fr' + clicked_id).html(res.follow_html);
+                $('.contactcount').html(res.contacts_count);
+                $('#countfollower').html("("+res.follower_count+")");
+                $('#countfollow').html("("+res.following_count+")");
+            }
+            
         }
     });
 }
@@ -1255,10 +1263,14 @@ function unfollowuser_two(clicked_id)
 {
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/unfollow_two",
+        url: base_url + "business_profile_live/unfollow_two",
         data: 'follow_to=' + clicked_id,
         success: function (data) {
-            $('.' + 'fr' + clicked_id).html(data);
+            res = JSON.parse(data);
+            $('.' + 'fr' + clicked_id).html(res.unfollow_html);
+            $('.contactcount').html(res.uncontacts_count);
+            $('#countfollower').html("("+res.unfollower_count+")");
+            $('#countfollow').html("("+res.unfollowing_count+")");
         }
     });
 }
@@ -1742,7 +1754,8 @@ function contact_person(clicked_id) {
         url: base_url + "business_profile/contact_person",
         data: 'toid=' + clicked_id,
         success: function (data) {
-            $('#contact_per').html(data);
+            res = JSON.parse(data);
+            $('#contact_per').html(res.return_html);
         }
     });
 }

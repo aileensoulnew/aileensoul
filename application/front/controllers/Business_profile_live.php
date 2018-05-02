@@ -3128,9 +3128,9 @@ Your browser does not support the audio tag.
             if ($insert) {
                 $follow_html .= '<div class="user_btn follow_btn_' . $business_id . '" id="unfollowdiv">';
                 if ($is_listing == '1') {
-                    $follow_html .= '<button class="bg_following" id="unfollow' . $business_id . '" onClick="unfollowuser_list_two(' . $business_id . ')"><span>Following</span></button>';
+                    $follow_html .= '<button class="bg_following fr'. $business_id .'" id="unfollow' . $business_id . '" onClick="unfollowuser_list_two(' . $business_id . ')"><span>Following</span></button>';
                 } else {
-                    $follow_html .= '<button class="bg_following" id="unfollow' . $business_id . '" onClick="unfollowuser_two(' . $business_id . ')"><span>Following</span></button>';
+                    $follow_html .= '<button class="bg_following fr'. $business_id .'" id="unfollow' . $business_id . '" onClick="unfollowuser_two(' . $business_id . ')"><span>Following</span></button>';
                 }
 
                 $follow .= '</div>';
@@ -3188,11 +3188,11 @@ Your browser does not support the audio tag.
             $unfollow = '';
             if ($update) {
 
-                $unfollow .= '<div class="user_btn follow_btn_' . $business_id . '" id="followdiv">';
+                $unfollow .= '<div class="user_btn follow_btn_' . $business_id . ' fr'. $business_id .'" id="followdiv">';
                 if ($is_listing == 1) {
-                    $unfollow .= '<button class="follow' . $business_id . '" onClick="followuser_list_two(' . $business_id . ')"><span>Follow</span></button>';
+                    $unfollow .= '<button class="follow' . $business_id . ' fr'. $business_id .'" onClick="followuser_list_two(' . $business_id . ')"><span>Follow</span></button>';
                 } else {
-                    $unfollow .= '<button class="follow' . $business_id . '" onClick="followuser_two(' . $business_id . ')"><span>Follow</span></button>';
+                    $unfollow .= '<button class="follow' . $business_id . ' fr'. $business_id .'" onClick="followuser_two(' . $business_id . ')"><span>Follow</span></button>';
                 }
                 $unfollow .= '</div>';
             }
