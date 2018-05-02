@@ -3448,7 +3448,7 @@ class Job extends MY_Controller {
     public function ajax_recommen_job() {
         
         $page = 1;
-        $perpage = 3;
+        $perpage = 5;
 
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
