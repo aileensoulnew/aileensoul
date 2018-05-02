@@ -30,7 +30,7 @@ $userid = $this->session->userdata('aileenuser');
 
                             <ul class="dropdown-menu account">
                                 <li>Account</li>
-                                <li><a href="<?php echo base_url('job/resume/'.$slugdata[0]['slug']); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+                                <li><a href="<?php echo base_url('job/resume/'.$jobdata[0]['slug']); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                 <li><a href="<?php echo base_url('job/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
                                  <li><a href="#"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
                             </ul>

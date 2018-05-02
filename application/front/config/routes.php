@@ -63,6 +63,8 @@ $route['educational-information'] = 'user_info';
 $route['dashboard/logout'] = 'dashboard/logout';
 $route['dashboard/image'] = 'dashboard/image';
 $route['dashboard/photos/(:any)'] = 'Userprofile';
+$route['dashboard/header_all_dropdown_list'] = 'dashboard/header_all_dropdown_list';
+
 $route['dashboard/(:any)'] = 'Userprofile';
 $route['profiles/(:any)'] = 'Userprofile';
 $route['details/(:any)'] = 'Userprofile';
