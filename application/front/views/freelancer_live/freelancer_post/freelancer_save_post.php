@@ -158,7 +158,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="middle-part container">
+                <div class="container">
                     <div class="job-menu-profile mob-none pt20">
                         <a href="javascript:void(0);"> <h3> <?php echo ucwords($freepostdata['freelancer_post_fullname']) . ' ' . ucwords($freepostdata['freelancer_post_username']); ?></h3></a>
                         <div class="profile-text">

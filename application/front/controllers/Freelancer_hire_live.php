@@ -27,7 +27,8 @@ class Freelancer_hire_live extends MY_Controller {
 		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
 
 		if ($freelancerhiredata) {
-			$this->load->view('freelancer_live/freelancer_hire/reactivate', $this->data);
+			redirect('freelance-hire/registration');
+			// $this->load->view('freelancer_live/freelancer_hire/reactivate', $this->data);
 		} else {
 			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
 			$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
@@ -96,22 +97,27 @@ class Freelancer_hire_live extends MY_Controller {
 			$userid = $this->session->userdata('aileenuser');
 			$hireuser = $this->db->select('user_id')->get_where('freelancer_hire_reg', array('user_id' => $userid))->row()->user_id;
 		}
-
-		if ($hireuser) {
+		$this->data['isfreelancerhireactivate'] = false;
+		// Check Freelancer Hire is activate or not
+		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
+		if ($freelancerhiredata) {
+			$this->data['isfreelancerhireactivate'] = true;			
+		}
+		if ($hireuser && !$this->data['isfreelancerhireactivate']) {
 			redirect('freelance-hire/home', refresh);
 		} else {
-		   $userid = $this->session->userdata('aileenuser');
-		   $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-		   $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-		   $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-		   $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-		   $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-		   $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-		   $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-		   $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-		   $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-		   $this->data['title'] = "Opportunities | Aileensoul";
-		   $this->load->view('freelancer_hire_live/index', $this->data);
+			$userid = $this->session->userdata('aileenuser');
+			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+			$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+			$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+			$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+			$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+			$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+			$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+			$this->data['title'] = "Opportunities | Aileensoul";
+			$this->load->view('freelancer_hire_live/index', $this->data);
 	   }
     }
 
@@ -699,7 +705,6 @@ public function reactivate() {
 	$updatdata = $this->common->update_data($data, 'freelancer_hire_reg', 'user_id', $userid);
 	$update = $this->common->update_data($data1, 'freelancer_post', 'user_id', $userid);
 	if ($update && $updatdata) {
-
 		redirect('freelance-hire/home', refresh);
 	} else {
 
@@ -2993,5 +2998,41 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 
 	$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);
 }
+	// Open Reactivate freelancer hire view or home 
+	public function reactivatefreelancerhire() {
+	   
+		$userid = $this->session->userdata('aileenuser');
+		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
+
+		if ($freelancerhiredata) {
+			$this->load->view('freelancer_live/freelancer_hire/reactivate', $this->data);
+		} else {
+			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
+			$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+			$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+			$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+			$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+			$contition_array = array('status' => '1');
+			$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+			$this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+			// FETCH STATE DATA  
+			$contition_array = array('status' => '1', 'country_id' => $this->data['recdata']['re_comp_country']);
+			$this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = '*', $sortby = 'state_id,state_name,country_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+			// FETCH CITY DATA
+			$contition_array = array('status' => '1', 'state_id' => $this->data['recdata']['re_comp_state']);
+			$this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+			$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+			$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
+			$this->data['title'] = "Recruiter Profile | Aileensoul";
+			
+			$this->load->view('freelancer_hire_live/index', $this->data);
+		}
+	}
 
 }

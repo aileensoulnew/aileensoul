@@ -303,7 +303,7 @@
                     </div>
                 </div>
             </div>
-            <div class="middle-part container pt10">
+            <div class="container pt10">
                 <div class="job-menu-profile mob-none pt-20">
                     <a title="<?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?></h3></a>
                     <div class="profile-text pt5">
@@ -1460,7 +1460,9 @@
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
             <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
         <?php } ?>
-
-
+        <script>
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>               
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     </body>
 </html>

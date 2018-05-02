@@ -19,6 +19,8 @@
        <?php echo $header_profile; ?>
         
         <div class="middle-section middle-section-banner">
+            <!-- If not Register then Registration form display else reactivate div display -->
+            <?php if(!$isfreelancerhireactivate){ ?>
             <div class="search-banner">
                 <div class="container">
                     <div class="row banner-main-div">
@@ -162,6 +164,14 @@
                     <p><span>Lorem ipzum is a dummy text.</span><a class="pull-right btn-1" href="#">Post a Project</a></p>
                 </div>
             </div>
+            <?php } else{ ?>
+                <div class="sub-fix-head">
+                    <div class="container">
+                        <p><span>Do you want to reactivare ? </span><a class="pull-right btn-1" href="<?php echo base_url('freelance-hire/reactivateacc'); ?>">Reactivate</a></p>
+                    </div>
+                </div>
+            <?php } ?>
+            
             <div class="container pt20">
                 <div class="pt20 pb20">
                     <div class="center-title">
@@ -215,10 +225,17 @@
             <div class="content-bnr">
                 <div class="bnr-box">
                     <img src="n-images/img2.jpg">
+                    <?php if(!$isfreelancerhireactivate){ ?>
                     <div class="content-bnt-text">
                         <h1>Lorem Ipsum is a dummy text</h1>
                         <p><a href="#" class="btn5">Create Recruiter Profile</a></p>
                     </div>
+                    <?php } else{ ?>
+                    <div class="content-bnt-text">
+                        <h1>Lorem Ipsum is a dummy text</h1>
+                        <p><a href="<?php echo base_url('freelance-hire/reactivateacc'); ?>" class="btn5">Reactive Recruiter Profile</a></p>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <div class="container pt20">

@@ -164,7 +164,7 @@
                     </div>
                 </div>
             </div>
-            <div class="middle-part container padding_set_res">
+            <div class="container padding_set_res">
                 <div class="job-menu-profile mob-none pt20">
                     <a title="<?php echo ucwords($freepostdata['freelancer_post_fullname']) . ' ' . ucwords($freepostdata['freelancer_post_username']); ?>" href="javascript:void(0);">
                         <h3> <?php echo ucwords($freepostdata['freelancer_post_fullname']) . ' ' . ucwords($freepostdata['freelancer_post_username']); ?></h3>
