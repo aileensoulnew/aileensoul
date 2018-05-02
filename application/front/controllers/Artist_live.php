@@ -34,11 +34,14 @@ class Artist_live extends MY_Controller {
          // print_r($contition_array);
          // exit;
         //echo "<pre>"; print_r($artresult); die();
+        $this->data['isartistactivate'] = false;
         if ($artresult) {
             $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
-            $this->load->view('artist_live/reactivate', $this->data);
-        } else {
-            if($this->artist_profile_set==1){
+            $this->data['isartistactivate'] = true;
+            // $this->load->view('artist_live/reactivate', $this->data);
+        } 
+        // else {
+            if($this->artist_profile_set==1 && !$artresult){
                 redirect($this->artist_profile_link);
             }
             $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -55,7 +58,7 @@ class Artist_live extends MY_Controller {
             $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
             $this->data['title'] = "Artist Profile | Aileensoul";
             $this->load->view('artist_live/index', $this->data);
-        }
+        // }
     }
 
     public function category() {
@@ -1571,6 +1574,24 @@ class Artist_live extends MY_Controller {
             $this->load->view('artist_live/postnewpage', $this->data);
         } else {
             redirect('find-artist');
+        }
+    }
+
+    public function reactivateacc() {
+        $userid = $this->session->userdata('aileenuser');
+        $contition_array = array('user_id' => $userid, 'status' => '0');
+        $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+         // print_r($contition_array);
+         // exit;
+        //echo "<pre>"; print_r($artresult); die();
+        if ($artresult) {
+            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+            $this->load->view('artist_live/reactivate', $this->data);
+        } 
+        else {
+            if($this->artist_profile_set==1 && !$artresult){
+                redirect($this->artist_profile_link);
+            }
         }
     }
 

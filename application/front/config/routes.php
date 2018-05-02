@@ -338,6 +338,7 @@ $route['artist/creat-pdf'] = "artist/creat_pdf";
 
 
 $route['artist/reactivate'] = "artist_live/reactivate";
+$route['artist/reactivateacc'] = "artist_live/reactivateacc";
 
 //BLOG ROUTES SETTINGS
 //$route['blog/popular'] = "blog/popular";
