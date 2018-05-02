@@ -411,7 +411,8 @@ if (IS_JOB_JS_MINIFY == '0') {
 
 <?php } else { ?>
 
-                        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/job_all_post.js?ver=' . time()); ?>"></script>
+                        <!-- <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/job/job_all_post.js?ver=' . time()); ?>"></script> -->
+                        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_all_post.js?ver=' . time()); ?>"></script>
                         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>
                         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
 
