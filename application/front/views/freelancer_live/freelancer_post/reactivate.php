@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <a href="<?php echo base_url('freelance-work/reactivate'); ?>">Yes</a>
                         </div>
                         <div class="reactivate_btn_n">
-                            <a href="<?php echo base_url('dashboard'); ?>">No</a>
+                            <a href="<?php echo base_url('/'); ?>">No</a>
                         </div>
                     </div>
                 </center>
