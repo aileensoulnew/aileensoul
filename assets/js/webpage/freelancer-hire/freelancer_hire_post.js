@@ -53,12 +53,12 @@ function freelancerhire_project(user_id, returnpage, pagenum)
     isProcessing = true;
     $.ajax({
         type: 'POST',
-        url: base_url + "freelancer/ajax_freelancer_hire_post/" + user_id + '/' + returnpage + '?page=' + pagenum,
+        url: base_url + "freelancer_hire_live/ajax_freelancer_hire_post/" + user_id + '/' + returnpage + '?page=' + pagenum,
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
             if (pagenum == 'undefined') {
-                $(".contact-frnd-post").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+                $(".job-contact-frnd1").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
             } else {
                 $('#loader').show();
             }
@@ -68,7 +68,7 @@ function freelancerhire_project(user_id, returnpage, pagenum)
         },
         success: function (data) {
             $('.loader').remove();
-            $('.contact-frnd-post').append(data);
+            $('.job-contact-frnd1').append(data);
             // second header class add for scroll
             var nb = $('.post-design-box').length;
             if (nb == 0) {

@@ -16,12 +16,13 @@
 
             }
         </style>
-
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
 
     <body class="page-container-bg-solid page-boxed botton_footer freeh3">
         <?php echo $header; ?>
-        <?php echo $freelancer_hire_header2_border; ?>
+        <?php echo $freelancer_hire_header2; ?>
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container">
@@ -251,10 +252,12 @@
             <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script  src="<?php echo base_url('assets/js/jquery.date-dropdowns.js?ver=' . time()); ?>">
             </script>
+            <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <?php } else { ?>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script  src="<?php echo base_url('assets/js_min/jquery.date-dropdowns.js?ver=' . time()); ?>">
             </script>
+            <script src="<?php echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script>
         <?php } ?>
 
         <script>
@@ -384,7 +387,9 @@
             var strLength = SearchTextarea.val().length;
             SearchTextarea[0].setSelectionRange(strLength, strLength);
         </script>
-
-
+        <script>
+             var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     </body>
 </html>

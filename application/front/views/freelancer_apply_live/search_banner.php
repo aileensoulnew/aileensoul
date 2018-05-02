@@ -1,7 +1,11 @@
 <div class="search-banner" ng-controller="searchFreelancerApplyController">
     <div class="container">
         <div class="text-right pt20">
-            <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
+            <?php if($isdeactivatefreelancer){ ?>
+                <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Create Freelance Apply Profile</a>
+            <?php }else{ ?>
+                <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
+            <?php } ?>
         </div>
         <div class="search-bnr-text">
             <h1>Lorem Ipsum the dummy text</h1>

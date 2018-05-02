@@ -9,10 +9,12 @@
         <?php } else { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
         <?php } ?>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="page-container-bg-solid page-boxed">
         <?php echo $header; ?>
-        <?php echo $freelancer_hire_header2_border; ?>
+        <?php echo $freelancer_hire_header2; ?>
 
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
@@ -272,47 +274,49 @@
         <!-- Model Popup Close -->
 
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>  
+            <!-- <script src="<?php //echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>   -->
         <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
+            <!-- <script src="<?php //echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> -->
         <?php } ?>
         <script>
-                                                                                var base_url = '<?php echo base_url(); ?>';
+            var base_url = '<?php echo base_url(); ?>';
         </script>
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
+            <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_apply_list.js?ver=' . time()); ?>"></script>
             <script   type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php } else { ?>
+            <script src="<?php echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_apply_list.js?ver=' . time()); ?>"></script>
             <script   type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php } ?>
 
         <script>
-                                                                                function inviteuserpopup(abc) {
+            function inviteuserpopup(abc) {
 
-                                                                                    $('.biderror .mes').html("<div class='pop_content'>Do you want to select this freelancer for your project?<div class='model_ok_cancel'><a title='Yes' class='okbtn' id=" + abc + " onClick='inviteuser(" + abc + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a title='No' class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
-                                                                                    $('#bidmodal').modal('show');
-                                                                                }
-                                                                                function inviteuser(clicked_id)
-                                                                                {
-                                                                                    var post_id = "<?php echo $postid; ?>";
+                $('.biderror .mes').html("<div class='pop_content'>Do you want to select this freelancer for your project?<div class='model_ok_cancel'><a title='Yes' class='okbtn' id=" + abc + " onClick='inviteuser(" + abc + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a title='No' class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+                $('#bidmodal').modal('show');
+            }
+            function inviteuser(clicked_id)
+            {
+                var post_id = "<?php echo $postid; ?>";
 
-                                                                                    $.ajax({
-                                                                                        type: 'POST',
-                                                                                        url: '<?php echo base_url() . "freelancer_hire/free_invite_user" ?>',
-                                                                                        data: 'post_id=' + post_id + '&invited_user=' + clicked_id,
-                                                                                        dataType: 'json',
-                                                                                        success: function (data) { //alert(data);
-                                                                                            $('#' + 'invited' + clicked_id).html(data).addClass('button invited').removeClass('invite_border').removeAttr("onclick");
-                                                                                            $('#' + 'invited' + clicked_id).css('cursor', 'default');
-                                                                                            if (data.notification.notification_count != 0) {
-                                                                                                var notification_count = data.notification.notification_count;
-                                                                                                var to_id = data.notification.to_id;
-                                                                                                show_header_notification(notification_count, to_id);
-                                                                                            }
-                                                                                        }
-                                                                                    });
-                                                                                }
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url() . "freelancer_hire/free_invite_user" ?>',
+                    data: 'post_id=' + post_id + '&invited_user=' + clicked_id,
+                    dataType: 'json',
+                    success: function (data) { //alert(data);
+                        $('#' + 'invited' + clicked_id).html(data).addClass('button invited').removeClass('invite_border').removeAttr("onclick");
+                        $('#' + 'invited' + clicked_id).css('cursor', 'default');
+                        if (data.notification.notification_count != 0) {
+                            var notification_count = data.notification.notification_count;
+                            var to_id = data.notification.to_id;
+                            show_header_notification(notification_count, to_id);
+                        }
+                    }
+                });
+            }
         </script>
     </body>
 </html>

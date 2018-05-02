@@ -1,111 +1,100 @@
 
 $(function () {
-    $("#tags").autocomplete({
-        source: function (request, response) {
-            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-            response($.grep(data, function (item) {
-                return matcher.test(item.label);
-            }));
-        },
-        minLength: 1,
-        select: function (event, ui) {
-            event.preventDefault();
-            $("#tags").val(ui.item.label);
-            $("#selected-tag").val(ui.item.label);
-            // window.location.href = ui.item.value;
-        }
-        ,
-        focus: function (event, ui) {
-            event.preventDefault();
-            $("#tags").val(ui.item.label);
-        }
+        // alert('hi');
+        $("#searchplace").autocomplete({
+            source: function (request, response) {
+                var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
+                response($.grep(data1, function (item) {
+                    return matcher.test(item.label);
+                }));
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                event.preventDefault();
+                $("#searchplace").val(ui.item.label);
+                $("#selected-tag").val(ui.item.label);
+                // window.location.href = ui.item.value;
+            }
+            ,
+            focus: function (event, ui) {
+                event.preventDefault();
+                $("#searchplace").val(ui.item.label);
+            }
+        });
     });
-});
-
 
 $(function () {
-// alert('hi');
-    $("#searchplace").autocomplete({
-        source: function (request, response) {
-            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-            response($.grep(data1, function (item) {
-                return matcher.test(item.label);
-            }));
-        },
-        minLength: 1,
-        select: function (event, ui) {
-            event.preventDefault();
-            $("#searchplace").val(ui.item.label);
-            $("#selected-tag").val(ui.item.label);
-            // window.location.href = ui.item.value;
-        }
-        ,
-        focus: function (event, ui) {
-            event.preventDefault();
-            $("#searchplace").val(ui.item.label);
-        }
-    });
-});
+                // alert('hi');
+                $("#tags").autocomplete({
+                    source: function (request, response) {
+                        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
+                        response($.grep(data, function (item) {
+                            return matcher.test(item.label);
+                        }));
+                    },
+                    minLength: 1,
+                    select: function (event, ui) {
+                        event.preventDefault();
+                        $("#tags").val(ui.item.label);
+                        $("#selected-tag").val(ui.item.label);
+                        // window.location.href = ui.item.value;
+                    }
+                    ,
+                    focus: function (event, ui) {
+                        event.preventDefault();
+                        $("#tags").val(ui.item.label);
+                    }
+                });
+            });
 
 $(function () {
-
-    $("#tags1").autocomplete({
-        source: function (request, response) {
-            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-            response($.grep(data, function (item) {
-                return matcher.test(item.label);
-            }));
-        },
-        minLength: 1,
-        select: function (event, ui) {
-            event.preventDefault();
-            $("#tags1").val(ui.item.label);
-            $("#selected-tag").val(ui.item.label);
-            // window.location.href = ui.item.value;
-        }
-        ,
-        focus: function (event, ui) {
-            event.preventDefault();
-            $("#tags1").val(ui.item.label);
-        }
-    });
-});
+                        // alert('hi');
+                        $("#searchplace1").autocomplete({
+                            source: function (request, response) {
+                                var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
+                                response($.grep(data1, function (item) {
+                                    return matcher.test(item.label);
+                                }));
+                            },
+                            minLength: 1,
+                            select: function (event, ui) {
+                                event.preventDefault();
+                                $("#searchplace1").val(ui.item.label);
+                                $("#selected-tag").val(ui.item.label);
+                                // window.location.href = ui.item.value;
+                            }
+                            ,
+                            focus: function (event, ui) {
+                                event.preventDefault();
+                                $("#searchplace1").val(ui.item.label);
+                            }
+                        });
+                    });
 
 $(function () {
+                                // alert('hi');
+                                $("#tags1").autocomplete({
+                                    source: function (request, response) {
+                                        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
+                                        response($.grep(data, function (item) {
+                                            return matcher.test(item.label);
+                                        }));
+                                    },
+                                    minLength: 1,
+                                    select: function (event, ui) {
+                                        event.preventDefault();
+                                        $("#tags1").val(ui.item.label);
+                                        $("#selected-tag").val(ui.item.label);
+                                        // window.location.href = ui.item.value;
+                                    }
+                                    ,
+                                    focus: function (event, ui) {
+                                        event.preventDefault();
+                                        $("#tags1").val(ui.item.label);
+                                    }
+                                });
+                            });
 
-    $("#searchplace1").autocomplete({
-        source: function (request, response) {
-            var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(request.term), "i");
-            response($.grep(data1, function (item) {
-                return matcher.test(item.label);
-            }));
-        },
-        minLength: 1,
-        select: function (event, ui) {
-            event.preventDefault();
-            $("#searchplace1").val(ui.item.label);
-            $("#selected-tag").val(ui.item.label);
-            // window.location.href = ui.item.value;
-        }
-        ,
-        focus: function (event, ui) {
-            event.preventDefault();
-            $("#searchplace1").val(ui.item.label);
-        }
-    });
-});
-
-
-function checkvalue() {
-    var searchkeyword = $.trim(document.getElementById('rec_search_title').value);
-    var searchplace = $.trim(document.getElementById('rec_search_loc').value);
-    // alert(searchkeyword);
-    // alert(searchplace);
-    if (searchkeyword == "" && searchplace == "") {
-        //    alert('Please enter Keyword');
-        return false;
-    }
-}
 
 function check() {
     var keyword = $.trim(document.getElementById('tags1').value);
@@ -115,176 +104,144 @@ function check() {
     }
 }
 
-//select2 autocomplete start for skill
-//$('#searchskills').select2({
-//    placeholder: 'Find Your Skills',
-//    ajax: {
-//        url: "<?php echo base_url(); ?>recruiter/keyskill",
-//        dataType: 'json',
-//        delay: 250,
-//        processResults: function (data) {
-//            return {
-//                //alert(data);
-//                results: data
-//            };
-//        },
-//        cache: true
-//    }
-//});
-//select2 autocomplete End for skill
-//select2 autocomplete start for Location
-//$('#searchplace').select2({
-//    placeholder: 'Find Your Location',
-//    maximumSelectionLength: 1,
-//    ajax: {
-//        url: "<?php echo base_url(); ?>recruiter/location",
-//        dataType: 'json',
-//        delay: 250,
-//        processResults: function (data) { //alert(data);
-//            return {
-//
-//                results: data
-//            };
-//        },
-//        cache: true
-//    }
-//});
-//select2 autocomplete End for Location
-// Get the modal
-//var modal = document.getElementById('myModal');
-// Get the button that opens the modal
-//var btn = document.getElementById("myBtn");
-// Get the <span> element that closes the modal
-//var span = document.getElementsByClassName("close")[0];
-// When the user clicks the button, open the modal 
-//btn.onclick = function () {
-//   modal.style.display = "block";
-//}
-// When the user clicks on <span> (x), close the modal
-//span.onclick = function () {
-//    modal.style.display = "none";
-//}
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function (event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+function checkvalue(){ 
+                                        //alert("hi");
+                                        var searchkeyword = $.trim(document.getElementById('tags').value);
+                                        var searchplace = $.trim(document.getElementById('searchplace').value);
+                                        // alert(searchkeyword);
+                                        // alert(searchplace);
+                                        if (searchkeyword == "" && searchplace == ""){
+                                //alert('Please enter Keyword');
+                                return false;
+                            }
+                        }
 
+// recruiter search header 2  start
+// recruiter search header 2 location start
 
-$(document).ready(function ()
-{
-    /* Uploading Profile BackGround Image */
-    $('body').on('change', '#bgphotoimg', function ()
-    {
-        $("#bgimageform").ajaxForm({target: '#timelineBackground',
-            beforeSubmit: function () {},
-            success: function () {
-                $("#timelineShade").hide();
-                $("#bgimageform").hide();
-            },
-            error: function () {
-            }}).submit();
-    });
-    /* Banner position drag */
-    $("body").on('mouseover', '.headerimage', function ()
-    {
-        var y1 = $('#timelineBackground').height();
-        var y2 = $('.headerimage').height();
-        $(this).draggable({
-            scroll: false,
-            axis: "y",
-            drag: function (event, ui) {
-                if (ui.position.top >= 0)
-                {
-                    ui.position.top = 0;
-                } else if (ui.position.top <= y1 - y2)
-                {
-                    ui.position.top = y1 - y2;
-                }
-            },
-            stop: function (event, ui)
-            {
-            }
-        });
-    });
-    /* Bannert Position Save*/
-    $("body").on('click', '.bgSave', function ()
-    {
-        var id = $(this).attr("id");
-        var p = $("#timelineBGload").attr("style");
-        var Y = p.split("top:");
-        var Z = Y[1].split(";");
-        var dataString = 'position=' + Z[0];
-        $.ajax({
-            type: "POST",
-            url: base_url +"recruiter/image_saveBG_ajax",
-            data: dataString,
-            cache: false,
-            beforeSend: function () { },
-            success: function (html)
-            {
-                if (html)
-                {
-                    window.location.reload();
-                    $(".bgImage").fadeOut('slow');
-                    $(".bgSave").fadeOut('slow');
-                    $("#timelineShade").fadeIn("slow");
-                    $("#timelineBGload").removeClass("headerimage");
-                    $("#timelineBGload").css({'margin-top': html});
+$(function () { 
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+    $(".rec_search_loc").bind("keydown", function (event) { 
+        if (event.keyCode === $.ui.keyCode.TAB &&
+            $(this).autocomplete("instance").menu.active) {
+            event.preventDefault();
+    }
+})
+    .autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    $.getJSON(base_url + "recruiter/get_location", {term: extractLast(request.term)}, response);
+                },
+                focus: function () {
+                    // prevent value inserted on focus
                     return false;
-                }
-            }
-        });
-        return false;
-    });
+                },
+                select: function (event, ui) {
+
+                    var text = this.value;
+                    var terms = split(this.value);
+
+                    text = text == null || text == undefined ? "" : text;
+                    var checked = (text.indexOf(ui.item.value + ', ') > -1 ? 'checked' : '');
+                    if (checked == 'checked') {
+
+                        terms.push(ui.item.value);
+                        this.value = terms.split("");
+                    }//if end
+
+                    else {
+                        if (terms.length <= 1) {
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push(ui.item.value);
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push("");
+                            this.value = terms.join("");
+                            return false;
+                        } else {
+                            var last = terms.pop();
+                            $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                            $(this).effect("highlight", {}, 1000);
+                            $(this).attr("style", "border: solid 1px red;");
+                            return false;
+                        }
+                    }
+                }//end else
+            });
 });
 
-
-function savepopup(abc)
-{
-
-    var saveid = document.getElementById("hideenuser" + abc);
-
-    $.ajax({
-        type: 'POST',
-        url: base_url +'recruiter/save_search_user',
-        data: 'user_id=' + abc + '&save_id=' + saveid.value,
-        success: function (data) {
-            $('.' + 'saveduser' + abc).html(data).addClass('saved');
-            $('.biderror .mes').html("<div class='pop_content'>Candidate successfully saved.");
-            $('#bidmodal').modal('show');
-        }
-    });
-}
-
-
-// function savepopup(id) {
-
-//     save_user(id);
-
-    
-// }
-
-$(document).on('keydown', function (e) {
-    if (e.keyCode === 27) {
-        //$( "#bidmodal" ).hide();
-        $('#bidmodal').modal('hide');
+// recruiter searc location end
+// recruiter searc title start
+$(function () { 
+    function split(val) {
+        return val.split(/,\s*/);
     }
-});
-
-
-$(document).ready(function () {
-
-    var nb = $('div.profile-job-post-title').length;
-
-    //alert(nb);
-    if (nb == 0) {
-        $("#dropdownclass").addClass("no-post-h2");
-
+    function extractLast(term) {
+        return split(term).pop();
     }
 
+    $(".rec_search_title").bind("keydown", function (event) { 
+        if (event.keyCode === $.ui.keyCode.TAB &&
+            $(this).autocomplete("instance").menu.active) {
+            event.preventDefault();
+    }
+})
+    .autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+                    // delegate back to autocomplete, but extract the last term
+                    $.getJSON(base_url + "recruiter/get_job_tile", {term: extractLast(request.term)}, response);
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+
+                    var text = this.value;
+                    var terms = split(this.value);
+
+                    text = text == null || text == undefined ? "" : text;
+                    var checked = (text.indexOf(ui.item.value + ', ') > -1 ? 'checked' : '');
+                    if (checked == 'checked') {
+
+                        terms.push(ui.item.value);
+                        this.value = terms.split("");
+                    }//if end
+
+                    else {
+                        if (terms.length <= 1) {
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push(ui.item.value);
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push("");
+                            this.value = terms.join("");
+                            return false;
+                        } else {
+                            var last = terms.pop();
+                            $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
+                            $(this).effect("highlight", {}, 1000);
+                            $(this).attr("style", "border: solid 1px red;");
+                            return false;
+                        }
+                    }
+                }//end else
+            });
 });
+
+// recruiter searc title end
+// recruiter search end
+
 //AJAX DATA LOAD BY LAZZY LOADER START
 $(document).ready(function () {
     recommen_candidate_post();
@@ -352,6 +309,21 @@ function recommen_candidate_post(pagenum) {
         }
     });
 }
-//AJAX DATA LOAD BY LAZZY LOADER END
 
-                    
+
+function savepopup(abc)
+{
+
+    var saveid = document.getElementById("hideenuser" + abc);
+
+    $.ajax({
+        type: 'POST',
+        url: base_url +'recruiter/save_search_user',
+        data: 'user_id=' + abc + '&save_id=' + saveid.value,
+        success: function (data) {
+            $('.' + 'saveduser' + abc).html(data).addClass('saved');
+            $('.biderror .mes').html("<div class='pop_content'>Candidate successfully saved.");
+            $('#bidmodal').modal('show');
+        }
+    });
+}

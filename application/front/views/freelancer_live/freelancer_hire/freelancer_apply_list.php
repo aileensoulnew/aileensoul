@@ -8,10 +8,12 @@
         <?php } else { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
         <?php } ?>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="page-container-bg-solid page-boxed">
         <?php echo $header; ?>
-        <?php echo $freelancer_hire_header2_border; ?>
+        <?php echo $freelancer_hire_header2; ?>
 
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
@@ -291,10 +293,10 @@
         </div>
         <!-- Model Popup Close -->
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>">
+            <!-- <script src="<?php // echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"> -->
             </script>
         <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>">
+            <!-- <script src="<?php // echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"> -->
             </script>
         <?php } ?>
         <script>
@@ -302,9 +304,11 @@
         </script>
 
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
+            <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_apply_list.js?ver=' . time()); ?>"></script>
             <script   type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php } else { ?>
+            <script src="<?php echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_apply_list.js?ver=' . time()); ?>"></script>
             <script   type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php } ?>
@@ -334,5 +338,10 @@
                 });
             }
         </script>
+
+        <script>
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>               
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     </body>
 </html>

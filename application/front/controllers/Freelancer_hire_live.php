@@ -2050,7 +2050,7 @@ public function freelancer_edit_post($id) {
 	$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . TITLEPOSTFIX;
 
-	$this->load->view('freelancer/freelancer_hire/freelancer_edit_post', $this->data);
+	$this->load->view('freelancer_live/freelancer_hire/freelancer_edit_post', $this->data);
 }
 
 //FREELANCER_HIRE EDIT POST(PROJECT) PAGE END
@@ -2203,7 +2203,7 @@ public function freelancer_apply_list($id) {
 	$postdata = $this->data['postdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data, $sortby = 'freelancer_apply.modify_date', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
 	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " | Applied Freelancers | Employer Profile" . TITLEPOSTFIX;
-	$this->load->view('freelancer/freelancer_hire/freelancer_apply_list', $this->data);
+	$this->load->view('freelancer_live/freelancer_hire/freelancer_apply_list', $this->data);
 }
 
 //FREELANCER_HIRE APPLIED POERSON LIST END
@@ -2328,7 +2328,7 @@ public function freelancer_shortlist_list($post_id = '') {
 	$shortlist = $this->data['shortlist'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data, $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
 	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " | Shortlisted Freelancers | Employer Profile" . TITLEPOSTFIX;
-	$this->load->view('freelancer/freelancer_hire/freelancer_shortlist', $this->data);
+	$this->load->view('freelancer_live/freelancer_hire/freelancer_shortlist', $this->data);
 }
 
 	// FREELANCER HIRE SHORTLISTED CANDIDATE PAGE END

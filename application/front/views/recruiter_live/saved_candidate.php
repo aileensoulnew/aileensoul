@@ -283,6 +283,18 @@
             </div>
          </div>
       </div>
+
+      <!-- Remove Popup -->
+    <div class="modal fade message-box biderror" id="bidmodal" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lm deactive">
+            <div class="modal-content message">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>       
+                <div class="modal-body">
+                    <span class="mes"><div class="pop_content">Do you want to remove this candidate?<div class="model_ok_cancel"><a class="okbtn" id="982" onclick="remove_user(<?php echo $userid;?>)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn" href="javascript:void(0);" data-dismiss="modal">No</a></div></div></span>
+                </div>
+            </div>
+        </div>
+    </div>
      <!--PROFILE PIC MODEL END-->
         <!-- BEGIN FOOTER -->
         <?php echo $login_footer ?>

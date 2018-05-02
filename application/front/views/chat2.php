@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <?php } else if ($message_from_profile == 2) { ?>
                <title>Messages | Recruiter Profile - Aileensoul</title>
+               <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <?php } else if ($message_from_profile == 3) { ?>
                <title>Messages | Employer Profile - Aileensoul</title>
         <?php } else if ($message_from_profile == 4) { ?>

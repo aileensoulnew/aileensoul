@@ -2819,10 +2819,6 @@ class Freelancer extends MY_Controller {
 
     public function registation_insert($postliveid = '') {
          //echo $postliveid;die();
-
-
-
-
         $userid = $this->session->userdata('aileenuser');
         $skill1 = $this->input->post('skills');
         $skills = explode(',', $skill1);
