@@ -543,11 +543,40 @@ $(document).ready(function () {
     }
 });
 
-function updateprofilepopup(id) {
-    document.getElementById('upload-demo-one').style.display = 'none';
-    document.getElementById('profi_loader').style.display = 'none';
-    document.getElementById('upload-one').value = null;
-    $('#bidmodal-2').modal('show');
+function upload_company_logo(id) {
+    $('#bidmodal-com-logo').show();
 }
-
-//CODE FOR PROFILE PIC UPLOAD WITH CROP END
+$("#comlogo").on('submit', (function (e) {
+    var fd = new FormData();
+    fd.append("image", $("#upload-complogo")[0].files[0]);
+  
+   
+    files = this.files;
+  //  fd.append('portfolio', portfolio);
+  //  fd.append('image_hidden_portfolio', image_hidden_portfolio);
+     e.preventDefault();
+    $.ajax({
+        url: base_url + "recruiter/company_logo",
+        type: "POST",
+        data:new FormData(this),
+        beforeSend: function () {  
+                    $(".modal-content").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'assets/images/loading.gif"/></p>');
+                },
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data) {
+           $('.loader').remove();
+             $(".post-img").html(data);
+            $('#bidmodal-com-logo').hide();
+            document.getElementById("upload-complogo").value = '';
+           // $('upload-complogo').value('');
+            //  $(".user-pic").html(data);
+        },
+        error: function () {}
+    });
+}));
+$('.modal-close').on('click', function (){
+    $('#bidmodal-com-logo').hide();
+    document.getElementById("upload-complogo").value = '';
+});

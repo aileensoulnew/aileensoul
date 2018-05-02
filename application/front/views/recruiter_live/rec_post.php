@@ -213,7 +213,7 @@
                     <a class="btn btn-3 btn-3b" id="rec_post_job2" href="<?php echo base_url('recruiter/add-post'); ?>" title="Post a Job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
 <?php } ?>
             </div>
-            <div class="middle-part container rec_res">
+            <div class="container rec_res">
                 <div class="job-menu-profile mob-none  ">
                     <a href="javascript:void(0);" title="<?php echo $postdataone[0]['rec_firstname'] . ' ' . $postdataone[0]['rec_lastname']; ?>"><h3><?php echo $postdataone[0]['rec_firstname'] . ' ' . $postdataone[0]['rec_lastname']; ?></h3></a>
                     <!-- text head start -->
@@ -331,53 +331,56 @@
         <!-- FIELD VALIDATION JS START -->
         
 
-        <script>
-                                var base_url = '<?php echo base_url(); ?>';
-                                var data1 = <?php echo json_encode($de); ?>;
-                                var data = <?php echo json_encode($demo); ?>;
-                                var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
-                                var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
-                                var id = '<?php echo $this->uri->segment(3); ?>';
-                                var return_page = '<?php echo $_GET['page']; ?>';
-        </script>
-        <script>
-            var header_all_profile = '<?php echo $header_all_profile; ?>';
-        </script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+    <script>
+    var base_url = '<?php echo base_url(); ?>';
+    var data1 = <?php echo json_encode($de); ?>;
+    var data = <?php echo json_encode($demo); ?>;
+    var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+    var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+    var id = '<?php echo $this->uri->segment(3); ?>';
+    var return_page = '<?php echo $_GET['page']; ?>';
+    var header_all_profile = '<?php echo $header_all_profile; ?>';
+    </script>
+    <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 
-        <!-- FIELD VALIDATION JS END -->
+    <!-- FIELD VALIDATION JS END -->    
+    <?php
+    if (IS_REC_JS_MINIFY == '0') { ?>
+        <!-- <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script> -->
+
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+
+
         <?php
-        if (IS_REC_JS_MINIFY == '0') { ?>
-  <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
+        if($this->uri->segment(3) != $userid)
+        {?>
+            <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
+        <?php
+        }
+        else
+        { ?>
+            <script src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+        <?php 
+        } ?>
 
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-            <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
-             <script src="<?php echo base_url('assets/js/webpage/recruiter/rec_post.js'); ?>"></script>
-
-         <?php if($this->uri->segment(3) != $userid){   ?>
-<script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
-<?php }else{ ?>
- <script src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
-<?php } ?>
-           
-            <?php
-        } else {
-            ?>
-            <script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script>  
-
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
-            <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
-             <script src="<?php echo base_url('assets/js_min/webpage/recruiter/rec_post.js'); ?>"></script>
-
-         <?php if($this->uri->segment(3) != $userid){   ?>
-<script src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
-<?php }else{ ?>
- <script src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
-<?php } ?>
-<?php } ?>
-        <script>
-            var header_all_profile = '<?php echo $header_all_profile; ?>';
-        </script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+    <?php
+    }
+    else
+    {
+    ?>
+        <!-- <script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script> -->
+        <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php echo base_url('assets/js_min/webpage/recruiter/rec_post.js'); ?>"></script> -->
+        <?php if($this->uri->segment(3) != $userid){   ?>
+            <script src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
+        <?php }else{ ?>
+            <script src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
+        <?php } ?>
+    <?php 
+    } ?>    
+    <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
+    <script src="<?php echo base_url('assets/js/webpage/recruiter/rec_post.js'); ?>"></script>
     </body>
 </html>
