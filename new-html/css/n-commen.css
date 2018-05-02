@@ -553,12 +553,12 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
     background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); height: 100%;}
-.right-header .pr-name{line-height:2; float:left; font-size: 16px; color: #fff;}
+.right-header .pr-name{line-height:2; float:left; font-size: 16px; color: #fff; letter-spacing:1px;}
 .right-header .pr-name span{display:block; font-size:14px;}
 .right-header .dropdown.open .dropdown-menu{right:0; top:40px; left:auto; margin:0;}
 .right-header .dropdown.open .dropdown-menu li{width:100%; border-right:0;}
 .right-header .dropdown.open .dropdown-menu li a{color:#777;}
-.right-header .dropdown.user-id .dropdown-menu{right:0; top:40px; left:auto; margin:0;}
+.right-header .dropdown.user-id .dropdown-menu{right:0; top:40px; left:auto; margin:3px 0 0; padding-bottom:10px;}
 .right-header .dropdown.user-id .dropdown-menu li{width:100%; border-right:0;}
 .right-header .dropdown.user-id .dropdown-menu li a{color:#777;}
 
@@ -598,6 +598,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 }
 .right-header .dropdown-menu ul{width:100%; float:left;}
 .right-header .dropdown-menu ul li{border-bottom:1px solid #d9d9d9;}
+.right-header .dropdown-menu ul li:last-child{border-bottom:0;}
 .dropdown-title{
 	position: relative;
 	z-index: 1000;
@@ -611,6 +612,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 	width: 100%;
 	border-bottom: 1px solid #dddddd;
 	color:#5c5c5c;
+	letter-spacing:1px;
 }
 li.dropdown .dropdown-menu:before{
     position:absolute;
@@ -673,7 +675,8 @@ header ul li #abody ul li a .text-all {
     width: 160px;
     float: left;
     padding: 16px 6px;
-	font-size:18px;
+	font-size:17px;
+	letter-spacing:1px;
 }
 header ul li #abody ul li:last-child {
     border: none;
@@ -1117,7 +1120,7 @@ footer ul li a:hover{
 .upload-result-one.btn1{width:auto; float:right; margin-top:15px;}
 /***  end upload banner image  ***/
 /*** center title  ***/
-.center-title{position:relative; text-align:center; margin-bottom:60px;}
+.center-title{position:relative; text-align:center; margin-bottom:60px; letter-spacing:1px;}
 .center-title:after{width:250px; height:1px; position:absolute; margin:0 auto; display:inline-block; content:""; left:0; right:0; bottom:-10px; background:#d2d2d2;}
 
 /***  end center title  ***/
