@@ -17,12 +17,20 @@
     <body class="profile-main-page recruiter-main">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
+            <?php if(!$isrecruiteractivate){ ?>
             <?php if($recruiter_profile_set == 0 || $recruiter_profile_set == '0') echo $search_banner; ?>
             <div class="sub-fix-head">
                 <div class="container">
                     <p><span>Lorem ipzum is a dummy text.</span><a class="pull-right btn-1" href="#">Post a job</a></p>
                 </div>
             </div>
+            <?php } else{ ?>
+                <div class="sub-fix-head">
+                    <div class="container">
+                        <p><span>Do you want to reactive ? </span><a class="pull-right btn-1" href="<?php echo base_url('recruiter/reactivateacc'); ?>">Reactivate </a></p>
+                    </div>
+                </div>
+            <?php } ?>
             <div class="container pt20">
                 <div class="pt20 pb20">
                     <div class="center-title">
@@ -81,10 +89,17 @@
             <div class="content-bnr">
                 <div class="bnr-box">
                     <img src="n-images/img2.jpg">
+                    <?php if(!$isrecruiteractivate){ ?>
                     <div class="content-bnt-text">
                         <h1>Lorem Ipsum is a dummy text</h1>
                         <p><a href="#" class="btn5">Create Recruiter Profile</a></p>
                     </div>
+                    <?php } else{ ?>
+                    <div class="content-bnt-text">
+                        <h1>Lorem Ipsum is a dummy text</h1>
+                        <p><a href="<?php echo base_url('recruiter/reactivateacc'); ?>" class="btn5">Reactivate Recruiter Profile</a></p>
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <div class="container pt20">

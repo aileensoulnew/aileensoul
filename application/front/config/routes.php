@@ -364,7 +364,7 @@ $route['recruiter/city/(:any)'] = "recruiter_live/city/$1";
 $route['recruiter/skill/(:any)'] = "recruiter_live/skill/$1";
 $route['recruiter/company/(:any)'] = "recruiter_live/company/$1";
 $route['recruiter/search'] = "recruiter_live/job_search";
-
+$route['recruiter/reactivateacc'] = "recruiter_live/reactivatefreelancerhire";
 
 $route['job/home'] = "job/job_all_post";
 $route['job/home/live-post'] = "job/job_all_post/$1";
@@ -407,6 +407,7 @@ $route['recruiter/basic-information'] = "recruiter/rec_basic_information";
 $route['recruiter/company-information'] = "recruiter/company_info_form";
 
 $route['recruiter/home'] = "recruiter_live/recommen_candidate";
+$route['recruiter/reactivateacc'] = "recruiter_live/reactivateacc";
 //$route['recruiter/add-post-live'] = "recruiter/add_post_login";
 
 

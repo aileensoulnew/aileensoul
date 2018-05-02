@@ -27,16 +27,19 @@ class Recruiter_live extends MY_Controller {
     }
 
     public function index() {
-
         $userid = $this->session->userdata('aileenuser');
+        $this->data['isrecruiteractivate'] = false;
         $contition_array = array('user_id' => $userid, 're_status' => '0');
         $reactivate = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        
         // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
         if ($reactivate) {
-            $this->load->view('recruiter/reactivate', $this->data);
-        } else {
-            if($this->recruiter_profile_set ==1){
+            // Fetch data for reg.
+            $this->data['isrecruiteractivate'] = true;
+        
+            // $this->load->view('recruiter/reactivate', $this->data);
+        } 
+        // else {
+            if($this->recruiter_profile_set ==1 && !$reactivate){
                 redirect( $this->recruiter_profile_link);
             }
             $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
@@ -70,7 +73,7 @@ class Recruiter_live extends MY_Controller {
             $this->data['search_banner'] = $this->load->view('recruiter_live/search_banner', $this->data, TRUE);
             $this->data['title'] = "Recruiter Profile | Aileensoul";
             $this->load->view('recruiter_live/index', $this->data);
-        }
+        // }
     }
 
     /*public function category() {
@@ -611,4 +614,21 @@ class Recruiter_live extends MY_Controller {
         $this->data['savedata'] = $new;
         $this->load->view('recruiter_live/saved_candidate', $this->data);
     }
+
+    public function reactivateacc() {
+        $userid = $this->session->userdata('aileenuser');
+        $contition_array = array('user_id' => $userid, 're_status' => '0');
+        $reactivate = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
+        if ($reactivate) {
+            // Fetch data for reg.
+            $this->load->view('recruiter/reactivate', $this->data);
+        } 
+        else {
+            if($this->recruiter_profile_set ==1 && !$reactivate){
+                redirect( $this->recruiter_profile_link);
+            }
+        }
+    }
+
 }
