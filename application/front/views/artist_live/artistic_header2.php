@@ -12,8 +12,8 @@ $userid = $this->session->userdata('aileenuser');
 							<a href="<?php echo base_url('artist/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Artist Profile</a>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true" onclick="return getmsgNotification()"></i> Message
-								<span class="noti-box">1</span>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();"><i class="fa fa-envelope"></i> Message
+								<span id="message_count"></span>
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
@@ -119,7 +119,7 @@ $userid = $this->session->userdata('aileenuser');
 						<a href="#"><i class="fa fa-home" aria-hidden="true"></i> Artistic Profile</a>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i><span class="none-sub-menu"> Message</span>
+						<a href="#" onclick="return getmsgNotification();" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i><span class="none-sub-menu"> Message</span>
 							<span class="noti-box">1</span>
 						</a>
 
@@ -216,7 +216,7 @@ $userid = $this->session->userdata('aileenuser');
 	
 		 success: function (data) {
 	
-			 $('#userlist').html(data.leftbar);
+			$('#userlist').html(data.leftbar);
 			$('.notification_data_in_h2').html(data.headertwo);
 			 $('#seemsg').html(data.seeall);
 			 setTimeout(
@@ -272,5 +272,64 @@ $userid = $this->session->userdata('aileenuser');
 			}
 		});
 	}
+
+</script>
+<script type="text/javascript" charset="utf-8">
+
+    function addmsg1(type, msg)
+    {
+        if (msg == 0)
+        { 
+            $("#message_count").html('');
+            $("#message_count").removeAttr("style");
+            $('#InboxLink').removeClass('msg_notification_available');
+            document.getElementById('message_count').style.display = "none";
+        } else
+        {
+            $('#message_count').html(msg);
+            $('#InboxLink').addClass('msg_notification_available');
+            $('#message_count').addClass('count_add noti-box');
+            document.getElementById('message_count').style.display = "block";
+            //alert("welcome");
+        }
+    }
+
+    function waitForMsg1()
+    {
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url(); ?>notification/select_msg_noti/3",
+
+            async: true,
+            cache: false,
+            timeout: 50000,
+
+            success: function (data) {
+                addmsg1("new", data);
+                setTimeout(
+                        waitForMsg1,
+                        10000
+                        );
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+    ;
+
+    $(document).ready(function () {
+        waitForMsg1();
+
+    });
+    $(document).ready(function () {
+        $menuLeft = $('.pushmenu-left');
+        $nav_list = $('#nav_list');
+
+        $nav_list.click(function () {
+            $(this).toggleClass('active');
+            $('.pushmenu-push').toggleClass('pushmenu-push-toright');
+            $menuLeft.toggleClass('pushmenu-open');
+        });
+    });
 
 </script>
