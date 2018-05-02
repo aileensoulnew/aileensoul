@@ -177,7 +177,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
 <?php echo $job_menubar; ?>   
                 </div>
             </div>
-            <div class="middle-part container res-job-print  ">
+            <div class="container res-job-print">
                 <div class="job-menu-profile job_edit_menu mob-none">
                     <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
                         <h3 class="profile-head-text">
@@ -1626,6 +1626,7 @@ if (IS_JOB_JS_MINIFY == '0') {
                 var count_profile_value = '<?php echo $count_profile_value; ?>';
                 var count_profile = '<?php echo $count_profile; ?>';
                 var header_all_profile = '<?php echo $header_all_profile; ?>';
+                var profile_pic = "";
         </script>
 
 <?php

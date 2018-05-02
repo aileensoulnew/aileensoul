@@ -1725,8 +1725,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 }
                 else
                 {
-                    /*if(description == '' || description == undefined || description == ' ')
-                    {*/
+                    if(description == '' || description == undefined || description == ' ')
+                    {
                         $('.biderror .mes').html("<div class='pop_content'>You cannot upload more than 10 files at a time.");
                         $('#posterrormodal').modal('show');
                         //$("#post_something")[0].reset();
@@ -1739,7 +1739,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         });
                         //event.preventDefault();
                         return false;
-                    //}
+                    }
                 }
 
                 for (var i = 0; i < fileCountSim; i++)

@@ -2405,8 +2405,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 }
                 else
                 {
-                    /*if(description == '' || description == undefined || description == ' ')
-                    {*/
+                    if(description == '' || description == undefined || description == ' ')
+                    {
                         $('.biderror .mes').html("<div class='pop_content'>You cannot upload more than 10 files at a time.");
                         $('#posterrormodal').modal('show');
                         $("#post_something")[0].reset();
@@ -2419,7 +2419,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         });
                         //event.preventDefault();
                         return false;
-                    //}
+                    }
                 }
 
 

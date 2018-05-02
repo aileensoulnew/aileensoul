@@ -135,7 +135,7 @@
                     <?php echo $job_menubar; ?>   
                 </div>
             </div>
-            <div class="middle-part container padding_set_res ">
+            <div class="container padding_set_res">
                 <div class="job-menu-profile job_edit_menu mob-none" >
                     <a  href="javascript:void(0);" title="<?php echo $jobdata[0]['fname'] . ' ' . $jobdata[0]['lname']; ?>">
                         <h3 class="profile-head-text"> <?php echo $jobdata[0]['fname'] . ' ' . $jobdata[0]['lname']; ?></h3>
@@ -332,6 +332,7 @@
                                 var count_profile_value = '<?php echo $count_profile_value; ?>';
                                 var count_profile = '<?php echo $count_profile; ?>';
                                 var header_all_profile = '<?php echo $header_all_profile; ?>';
+                                var profile_pic = "";
 </script>
 
 <?php
