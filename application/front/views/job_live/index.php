@@ -17,7 +17,7 @@
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php if(!$isjobactivate){ ?>
-                <?php if($job_profile_set){ echo $search_banner; } ?>
+                <?php if($job_profile_set == 0 || $job_profile_set == '0'){ echo $search_banner; } ?>
             <?php } else {  ?>
                 <div class="sub-fix-head">
                     <div class="container">
