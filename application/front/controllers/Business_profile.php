@@ -10616,6 +10616,18 @@ Your browser does not support the audio tag.
 </div></div>';
             }
         }
+        else if($page == 1)
+        {
+            $return_html .='<div class="user_no_post_avl" ng-if="postData.length == 0">
+                <h3>Post</h3>
+                <div class="user-img-nn">
+                    <div class="user_no_post_img">
+                        <img src="'.base_url('assets/img/no-post.png?ver=' . time()).'" alt="bui-no.png">
+                    </div>
+                    <div class="art_no_post_text">No Post Available.</div>
+                </div>
+            </div>';
+        }
 
         echo $return_html;
     }
