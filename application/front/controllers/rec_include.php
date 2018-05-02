@@ -16,6 +16,8 @@ $contition_array = array('not_read' => '2', 'not_to_id' => $userid, 'not_type !=
 $result = $this->common->select_data_by_condition('notification', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 $this->data['user_notification_count'] = $count = $result[0]['total'];
 
+$contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
+$this->data['jobdata'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
 $this->data['header'] = $this->load->view('header', $this->data, true);
 $this->data['head_message'] = $this->load->view('head_message', $this->data, true);

@@ -25,19 +25,24 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
 
         <?php }?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push freeh3 cust-job-width paddnone">
-        <?php echo $header; ?>
+        <?php //echo $recruiter_header2; ?>
         <?php
-        $returnpage = $_GET['page'];
+        //$returnpage = $_GET['page'];
         if ($this->session->userdata('aileenuser') != $recliveid) {
-            echo $job_header2_border;
-        } elseif ($recdata[0]['re_step'] == 3) {
+            echo $job_header2;
+        }
+        else{
+            echo $recruiter_header2;
+        } /*elseif ($recdata[0]['re_step'] == 3) {
             echo $recruiter_header2_border;
         } elseif ($returnpage == 'notification') {
             
-        }
+        }*/
         ?>
         <div id="preloader"></div>
         <!-- START CONTAINER -->
@@ -704,105 +709,106 @@
         
         <?php }?>
         <script>
-                                                                    var base_url = '<?php echo base_url(); ?>';
-                                                                    var data1 = <?php echo json_encode($de); ?>;
-                                                                    var data = <?php echo json_encode($demo); ?>;
-                                                                    var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
-                                                                    var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
-                                                                    var id = '<?php echo $this->uri->segment(3); ?>';
-                                                                    var return_page = '<?php echo $_GET['page']; ?>';
+        var base_url = '<?php echo base_url(); ?>';
+        var data1 = <?php echo json_encode($de); ?>;
+        var data = <?php echo json_encode($demo); ?>;
+        var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+        var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+        var id = '<?php echo $this->uri->segment(3); ?>';
+        var return_page = '<?php echo $_GET['page']; ?>';
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
 
 
 
 
-                                                                    function removepopup(id)
-                                                                    {
-                                                                        $('.biderror .mes').html("<div class='pop_content'>Do you want to remove this post?<div class='model_ok_cancel'><a class='okbtn' id=" + id + " onClick='remove_post(" + id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
-                                                                        $('#bidmodal').modal('show');
-                                                                    }
+        function removepopup(id)
+        {
+            $('.biderror .mes').html("<div class='pop_content'>Do you want to remove this post?<div class='model_ok_cancel'><a class='okbtn' id=" + id + " onClick='remove_post(" + id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+            $('#bidmodal').modal('show');
+        }
 
-//remove post start
-
-
-                                                                    function remove_post(abc)
-                                                                    {
+        //remove post start
 
 
-                                                                        $.ajax({
-                                                                            type: 'POST',
-                                                                            url: base_url + 'recruiter/remove_post',
-                                                                            data: 'post_id=' + abc,
-                                                                            success: function (data) {
-
-                                                                                $('#' + 'removepost' + abc).html(data);
-                                                                                $('#' + 'removepost' + abc).removeClass();
-                                                                                var numItems = $('.contact-frnd-post .job-contact-frnd .profile-job-post-detail').length;
-
-                                                                                if (numItems == '0') {
-
-                                                                                    var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='" + base_url + "img/job-no.png' alt='nojobimage'/></div><div class='art_no_post_text'> No Post Available.</div></div>";
-                                                                                    $('.contact-frnd-post').html(nodataHtml);
-                                                                                }
-
-                                                                            }
-                                                                        });
-
-                                                                    }
+        function remove_post(abc)
+        {
 
 
-                                                                    //apply post start
-                                                                    function applypopup(postid, userid)
-                                                                    {
-                                                                        $('.biderror .mes').html("<div class='pop_content'>Are you sure want to apply this  jobpost?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
-                                                                        $('#bidmodal').modal('show');
-                                                                    }
+            $.ajax({
+                type: 'POST',
+                url: base_url + 'recruiter/remove_post',
+                data: 'post_id=' + abc,
+                success: function (data) {
 
-                                                                    function apply_post(abc, xyz) {
-                                                                        var alldata = 'all';
-                                                                        var user = xyz;
+                    $('#' + 'removepost' + abc).html(data);
+                    $('#' + 'removepost' + abc).removeClass();
+                    var numItems = $('.contact-frnd-post .job-contact-frnd .profile-job-post-detail').length;
 
-                                                                        $.ajax({
-                                                                            type: 'POST',
-                                                                            url: base_url + 'job/job_apply_post',
-                                                                            data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
-                                                                            dataType: 'json',
-                                                                            success: function (data) { 
-                                                                                $('.savedpost' + abc).hide();
-                                                                                $('.applypost' + abc).html(data.status);
-                                                                                $('.applypost' + abc).attr('disabled', 'disabled');
-                                                                                $('.applypost' + abc).attr('onclick', 'myFunction()');
-                                                                                $('.applypost' + abc).addClass('applied');
+                    if (numItems == '0') {
 
-                                                                                if (data.notification.notification_count != 0) {
-                                                                                    var notification_count = data.notification.notification_count;
-                                                                                    var to_id = data.notification.to_id;
-                                                                                    show_header_notification(notification_count, to_id);
-                                                                                }
+                        var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='" + base_url + "img/job-no.png' alt='nojobimage'/></div><div class='art_no_post_text'> No Post Available.</div></div>";
+                        $('.contact-frnd-post').html(nodataHtml);
+                    }
 
-                                                                            }
-                                                                        });
-                                                                    }
-//apply post end
+                }
+            });
 
-//save post start 
-                                                                    function savepopup(id) {
-                                                                        save_post(id);
-                                                                        $('.biderror .mes').html("<div class='pop_content cus-pop-mes'>Jobpost successfully saved.");
-                                                                        $('#bidmodal').modal('show');
-                                                                    }
+        }
 
-                                                                    function save_post(abc)
-                                                                    {
-                                                                        $.ajax({
-                                                                            type: 'POST',
-                                                                            url: base_url + 'job/job_save',
-                                                                            data: 'post_id=' + abc,
-                                                                            success: function (data) {
-                                                                                $('.' + 'savedpost' + abc).html(data).addClass('saved');
-                                                                            }
-                                                                        });
 
-                                                                    }
+        //apply post start
+        function applypopup(postid, userid)
+        {
+            $('.biderror .mes').html("<div class='pop_content'>Are you sure want to apply this  jobpost?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+            $('#bidmodal').modal('show');
+        }
+
+        function apply_post(abc, xyz) {
+            var alldata = 'all';
+            var user = xyz;
+
+            $.ajax({
+                type: 'POST',
+                url: base_url + 'job/job_apply_post',
+                data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
+                dataType: 'json',
+                success: function (data) { 
+                    $('.savedpost' + abc).hide();
+                    $('.applypost' + abc).html(data.status);
+                    $('.applypost' + abc).attr('disabled', 'disabled');
+                    $('.applypost' + abc).attr('onclick', 'myFunction()');
+                    $('.applypost' + abc).addClass('applied');
+
+                    if (data.notification.notification_count != 0) {
+                        var notification_count = data.notification.notification_count;
+                        var to_id = data.notification.to_id;
+                        show_header_notification(notification_count, to_id);
+                    }
+
+                }
+            });
+        }
+        //apply post end
+
+        //save post start 
+        function savepopup(id) {
+            save_post(id);
+            $('.biderror .mes').html("<div class='pop_content cus-pop-mes'>Jobpost successfully saved.");
+            $('#bidmodal').modal('show');
+        }
+
+        function save_post(abc)
+        {
+            $.ajax({
+                type: 'POST',
+                url: base_url + 'job/job_save',
+                data: 'post_id=' + abc,
+                success: function (data) {
+                    $('.' + 'savedpost' + abc).html(data).addClass('saved');
+                }
+            });
+
+        }
 //save post End
         </script>
 
