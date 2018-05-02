@@ -314,5 +314,46 @@ class Job_model extends CI_Model {
         $result_array = $query->result_array();
         return $result_array;
     }
+    public function get_recommen_job($userid,$page = "",$limit = '5')
+    {        
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
 
+        $sql = "SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+UNION
+SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+UNION
+SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.industry_type = jr.work_job_industry AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+UNION
+SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.work_job_title AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1' ORDER BY `post_id` DESC";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+
+        $query = $this->db->query($sql);        
+        //echo $this->db->last_query();exit;
+        $recommen_post = $query->result_array();
+        return $recommen_post;
+
+    }
+
+    public function get_recommen_job_total_record($userid)
+    {       
+
+        $sql = "SELECT COUNT(*) as total_record FROM(SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+UNION
+SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+UNION
+SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.industry_type = jr.work_job_industry AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+UNION
+SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.work_job_title AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1') as recommen_post ORDER BY recommen_post.post_id DESC";
+        
+
+        $query = $this->db->query($sql);        
+        //echo $this->db->last_query();exit;
+        $recommen_total_rec = $query->row_array();
+        return $recommen_total_rec;
+
+    }
 }

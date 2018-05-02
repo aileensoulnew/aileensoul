@@ -29,12 +29,13 @@
 //Validation End
 
 //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER START
+var isProcessing = false;
 $(document).ready(function () {
     job_home();
-
-    $(window).scroll(function () {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7) {
-            var page = $(".page_number:last").val();
+    
+    $(window).scroll(function () {      
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) && isProcessing == false) {          
+            var page = $(".page_number").val();
             var total_record = $(".total_record").val();
             var perpage_record = $(".perpage_record").val();
             if (parseInt(perpage_record) <= parseInt(total_record)) {
@@ -54,7 +55,6 @@ $(document).ready(function () {
     });
     
 });
-var isProcessing = false;
 function job_home(pagenum)
 {
     if (isProcessing) {
@@ -83,7 +83,7 @@ function job_home(pagenum)
         },
         success: function (data) {
             $('.loader').remove();
-            $('.job-contact-frnd ').append(data);
+            $('.job-contact-frnd1 ').append(data);
             // second header class add for scroll
             var nb = $('.post-design-box').length;
             if (nb == 0) {

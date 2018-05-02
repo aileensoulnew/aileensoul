@@ -3446,21 +3446,19 @@ class Job extends MY_Controller {
 //Get Job Seeker Name for title End
 //GET JOB ALL POST DATA WITH AJAX START
     public function ajax_recommen_job() {
-
-        $perpage = 5;
+        
         $page = 1;
+        $perpage = 5;
 
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
         }
-
-        $start = ($page - 1) * $perpage;
-
-        if ($start < 0)
-            $start = 0;
+        
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
-
-// job seeker detail
+        $postdetail = $this->job_model->get_recommen_job($userid,$page,$perpage);
+        $totalrecord = $this->job_model->get_recommen_job_total_record($userid);        
+        $total_record = $totalrecord['total_record'];
+        /*// job seeker detail
 
         $contition_array = array(
             'user_id' => $userid,
@@ -3469,7 +3467,7 @@ class Job extends MY_Controller {
         );
         $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// post detail
+        // post detail
 
         $contition_array = array(
             'is_delete' => '0',
@@ -3477,7 +3475,7 @@ class Job extends MY_Controller {
         );
         $postdata = $this->data['postdata'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data = '*', $sortby = 'post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// for getting data from rec_post table for keyskill
+        // for getting data from rec_post table for keyskill
 
         $work_job_skill = $jobdata[0]['keyskill'];
         $work_skill = explode(',', $work_job_skill);
@@ -3492,7 +3490,7 @@ class Job extends MY_Controller {
         }
 
 
-// Retrieve data according to city match start
+        // Retrieve data according to city match start
 
         $work_job_city = $jobdata[0]['work_job_city'];
         $work_city = explode(',', $work_job_city);
@@ -3508,11 +3506,11 @@ class Job extends MY_Controller {
             $recommendata_city[] = $data1;
         }
 
-// Retrieve data according to city match End
-// Retrieve data according to industry match start
+        // Retrieve data according to city match End
+        // Retrieve data according to industry match start
 
         $work_job_industry = $jobdata[0]['work_job_industry'];
-//        foreach ($postdata as $post) {
+        //foreach ($postdata as $post) {
         $data = '*';
         $contition_array = array(
             'industry_type' => $work_job_industry,
@@ -3521,9 +3519,9 @@ class Job extends MY_Controller {
         );
         $data1 = $this->data['data'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = 'post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $recommendata_industry[] = $data1;
-//        }
-// Retrieve data according to industry match End
-// Retrieve data according to Job Title match start
+        //        }
+        // Retrieve data according to industry match End
+        // Retrieve data according to Job Title match start
 
         $work_job_title = $jobdata[0]['work_job_title'];
 
@@ -3543,7 +3541,7 @@ class Job extends MY_Controller {
         $recindustry = count(array_filter($recommendata_industry));
         $rectitle = count(array_filter($recommendata_title));
 
-// Retrieve data according to  Job Title match End
+        // Retrieve data according to  Job Title match End
 
         if ($recskill != 0 && $reccity == 0 && $recindustry == 0 && $rectitle == 0) {
 
@@ -3584,15 +3582,15 @@ class Job extends MY_Controller {
 
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($postdetail);
-        }
+        }*/
 
         $return_html = '';
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
-        $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
+        $return_html .= '<input type = "hidden" class = "total_record" value = "' . $total_record . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
         if (count($postdetail) > 0) {
-            foreach ($postdetail1 as $post) {
+            foreach ($postdetail as $post) {
                 $return_html .= '<div class="all-job-box" id="applypost' . $post['app_id'] . '">
                                     <div class="all-job-top">';
 
