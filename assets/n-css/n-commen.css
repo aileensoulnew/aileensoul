@@ -1120,7 +1120,7 @@ footer ul li a:hover{
 .upload-result-one.btn1{width:auto; float:right; margin-top:15px;}
 /***  end upload banner image  ***/
 /*** center title  ***/
-.center-title{position:relative; text-align:center; margin-bottom:60px;}
+.center-title{position:relative; text-align:center; margin-bottom:60px; letter-spacing:1px;}
 .center-title:after{width:250px; height:1px; position:absolute; margin:0 auto; display:inline-block; content:""; left:0; right:0; bottom:-10px; background:#d2d2d2;}
 
 /***  end center title  ***/
