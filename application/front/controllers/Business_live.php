@@ -104,8 +104,8 @@ class Business_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
         $this->data['category_id'] = $category_id['industry_id'];
-        $this->data['q'] = $_GET['q'];
-        $this->data['l'] = $_GET['l'];
+        $this->data['q'] = $_GET['skills'];
+        $this->data['l'] = $_GET['searchplace'];
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/search', $this->data);
     }
