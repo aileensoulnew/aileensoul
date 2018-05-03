@@ -798,7 +798,6 @@ function checkvalue(val)
 
 $(document).ready(function () {
     $('#country').on('change', function () {
-        alert();
         var countryID = $(this).val();
         if (countryID) {
             $.ajax({
