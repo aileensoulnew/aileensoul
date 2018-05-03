@@ -12,7 +12,7 @@ $userid = $this->session->userdata('aileenuser');
                             <a href="<?php echo base_url('business-profile/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Business Profile</a>
                         </li>
                         <li class="dropdown" id="Inbox_link">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true" onclick="return getmsgNotification()"></i> Message
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()"><i class="fa fa-envelope" aria-hidden="true"></i> Message
                                 <span class="noti-box" id="message_count"></span>
                             </a>
                             <div class="dropdown-menu InboxContainer">
@@ -403,8 +403,7 @@ $userid = $this->session->userdata('aileenuser');
             }
         });
 
-    }
-    ;
+    };
     function getmsgNotification() {
         msgNotification();
     }

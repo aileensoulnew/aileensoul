@@ -11,16 +11,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <?php if ($message_from_profile == 1) { ?>
                <title>Messages  | Job Profile - Aileensoul</title>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                <script src="<?php echo base_url(); ?>assets/js_min/bootstrap.min.js?ver=1525257747"></script>
         <?php } else if ($message_from_profile == 2) { ?>
                <title>Messages | Recruiter Profile - Aileensoul</title>
-               <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+               <script src="<?php echo base_url(); ?>assets/js_min/bootstrap.min.js?ver=1525257747"></script>
         <?php } else if ($message_from_profile == 3) { ?>
                <title>Messages | Employer Profile - Aileensoul</title>
         <?php } else if ($message_from_profile == 4) { ?>
                 <title>Messages | Freelancer Profile - Aileensoul</title>
         <?php } else if ($message_from_profile == 5) { ?>
                <title>Messages | Business Profile - Aileensoul</title>
+               <script src="<?php echo base_url(); ?>assets/js_min/bootstrap.min.js?ver=1525257747"></script>
         <?php } else if ($message_from_profile == 6) { ?>
                <title>Messages | Artistic Profile - Aileensoul</title>
                 <script src="<?php echo base_url(); ?>assets/js_min/bootstrap.min.js?ver=1525257747"></script>
@@ -678,7 +679,7 @@ if ($lstusrdata) {
                 <script type="text/javascript">
 
 
-                        function getmsgNotification() {
+                        /*function getmsgNotification() {
                             msgNotification();
                         }
 
@@ -690,7 +691,7 @@ if ($lstusrdata) {
                                    data = JSON.parse(data);
                                }
                             });
-                        }
+                        }*/
 
                     
 

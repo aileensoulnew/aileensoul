@@ -43,7 +43,7 @@ $mobile_agent = $this->agent->mobile;
         </style>
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
         <?php echo $business_header2; ?>
         <?php // echo $business_header2_border; ?>
         <section>
