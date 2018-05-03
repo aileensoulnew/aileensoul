@@ -10968,4 +10968,19 @@ Your browser does not support the audio tag.
         $this->load->view('business_profile/bus_pdf', $this->data);
     }
 
+    public function reactivateacc() {
+        // Check if business deactivate or not.
+        $userid = $this->session->userdata('aileenuser');
+        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_deleted' => '0');
+        $business_deactive = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+        if ($business_deactive) {
+            $this->data['title'] = 'Reactive | ' . ' Business Profile' . TITLEPOSTFIX;
+            $this->load->view('business_profile_live/reactivate', $this->data);
+        }
+        else{
+            if($this->business_profile_set==1 && !$business_deactive){
+                return redirect($this->business_profile_link); 
+            }
+        }
+    }
 }

@@ -122,6 +122,7 @@ $route['business-profile/search'] = "business_live/business_search";
 
 
 $route['business-profile/reactivate'] = "business_profile/reactivate";
+$route['business/reactivateacc'] = "business_profile/reactivateacc";
 
 //$route['business-profile/business-information'] = "business_profile/business_information";
 //$route['business-profile/business-information-insert'] = "business_profile/business_information_insert";

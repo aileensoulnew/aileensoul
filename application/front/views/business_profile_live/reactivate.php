@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <a href="<?php echo base_url('business_profile/reactivate'); ?>">Yes</a>
                         </div>
                         <div class="reactivate_btn_n">
-                            <a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>">No</a>
+                            <a href="<?php echo base_url('/') . $this->session->userdata('aileenuser_slug'); ?>">No</a>
                         </div>
                     </div>
                 </center>

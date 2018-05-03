@@ -16,7 +16,15 @@
     <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
-            <?php echo $search_banner; ?>
+            <?php if($isbusinessactivate){ ?>
+                <?php if(!$business_profile_set){ echo $search_banner; } ?>
+            <?php } else { ?>
+                <div class="sub-fix-head">
+                    <div class="container">
+                        <p><span>Do you want to reactive ? </span><a class="pull-right btn-1" href="<?php echo base_url('business/reactivateacc'); ?>">Reactivate </a></p>
+                    </div>
+                </div>
+            <?php } ?>
             <div class="container pt20">
                 <div class="custom-width-box">
                     <div class="pt20 pb20">

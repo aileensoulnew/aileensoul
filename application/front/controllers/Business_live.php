@@ -23,8 +23,15 @@ class Business_live extends MY_Controller {
     }
 
     public function index() {
-
-        if($this->business_profile_set==1){
+        // Check if business deactivate or not.
+        $this->data['isbusinessactivate'] = false;
+        $contition_array = array('user_id' => $userid, 'status' => '0', 'is_deleted' => '0');
+        $business_deactive = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+        if ($business_deactive) {
+            // redirect('business_profile/');
+            $this->data['isbusinessactivate'] = true;
+        }
+        if($this->business_profile_set==1 && !$business_deactive){
             return redirect($this->business_profile_link); 
         }
         $userid = $this->session->userdata('aileenuser');
@@ -38,11 +45,11 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
        
-
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Business Profile | Aileensoul";
+        $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/index', $this->data);
     }
 
@@ -142,5 +149,5 @@ class Business_live extends MY_Controller {
         }
         echo "yes";
     }
-
+    
 }
