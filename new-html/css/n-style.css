@@ -1296,7 +1296,8 @@ header.profile-header .logo a{color:#5c5c5c;}
  .all-detail-box .tab-pane ul li a{color:#5c5c5c; display:block; font-size:15px;}
  .all-detail-box .tab-pane ul li a span{color:#999;}
  .all-detail-box .tab-pane ul li span{display:block;}
- .all-detail-box .tab-pane ul li a p{min-height: 80px; padding-top: 10px; color:#999;}
+ .cus-job .all-detail-box .tab-pane ul li a p{min-height: 80px; padding-top: 10px; color:#999;}
+ .all-detail-box .tab-pane ul li a p{min-height: 60px; padding-top: 10px; color:#999;}
  .all-detail-box .tab-pane ul li a img{height: 40px;}
  .all-detail-box ul li a{background:#f6f6f6; padding-top:15px; padding-left:10px; padding-right:10px; padding-bottom:10px;}
 	.all-detail-box ul li a:hover{background:#e7e7e7;}
@@ -1849,6 +1850,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .how-about-profile{padding-top:125px;}
 .how-about-profile p{padding-bottom:10px; line-height:2; letter-spacing:0.5px;}
 .how-about-profile .pull-right img{width:100%;}
+.border-none{border:0px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
