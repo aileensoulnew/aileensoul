@@ -14,6 +14,9 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/business.css?ver=' . time()); ?>">
         <?php } ?>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <style type="text/css">
             span.error{
                 background: none;
@@ -305,12 +308,15 @@
         </section>
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
+        <!-- <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>  
         <?php
         if (IS_BUSINESS_JS_MINIFY == '0') {
             ?>
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>                                                                                                                                    <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <?php } else {
             ?>
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
@@ -318,21 +324,23 @@
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/angular-validate.min.js?ver=' . time()) ?>"></script>
         <?php }
         ?>
+        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
         <script>
-                                                                            var base_url = '<?php echo base_url(); ?>';
-                                                                            var slug = '<?php echo $slugid; ?>';
-                                                                            var reg_uri = '<?php echo $reg_uri ?>';
-                                                                            var company_name_validation = '<?php echo $this->lang->line('company_name_validation') ?>';
-                                                                            var country_validation = '<?php echo $this->lang->line('country_validation') ?>';
-                                                                            var state_validation = '<?php echo $this->lang->line('state_validation') ?>';
-                                                                            var address_validation = '<?php echo $this->lang->line('address_validation') ?>';
-                                                                            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                                                            var profile_login = '<?php echo $profile_login; ?>';
+        var base_url = '<?php echo base_url(); ?>';
+        var slug = '<?php echo $slugid; ?>';
+        var reg_uri = '<?php echo $reg_uri ?>';
+        var company_name_validation = '<?php echo $this->lang->line('company_name_validation') ?>';
+        var country_validation = '<?php echo $this->lang->line('country_validation') ?>';
+        var state_validation = '<?php echo $this->lang->line('state_validation') ?>';
+        var address_validation = '<?php echo $this->lang->line('address_validation') ?>';
+        var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+        var profile_login = '<?php echo $profile_login; ?>';
+        var app = angular.module('busRegApp', ['ngValidate','ngRoute','ngTagsInput']);
         </script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script>
                     // Defining angularjs application.
-                    var busRegApp = angular.module('busRegApp', ['ngValidate']);
-                    busRegApp.directive("fileInput", function ($parse) {
+                    app.directive("fileInput", function ($parse) {
                         return{
                             link: function ($scope, element, attrs) {
                                 element.on("change", function (event) {
@@ -343,7 +351,7 @@
                             }
                         }
                     });
-                    busRegApp.controller('busRegController', function ($scope, $http) {
+                    app.controller('busRegController', function ($scope, $http) {
                         $scope.user = {};
                         $scope.countryList = undefined;
                         $scope.stateList = undefined;
@@ -438,8 +446,8 @@
                                 method: 'GET',
                                 url: base_url + 'business_profile_registration/getCountry',
                                 headers: {'Content-Type': 'application/json'},
-                            }).success(function (data) {
-                                $scope.countryList = data;
+                            }).then(function (data) {
+                                $scope.countryList = data.data;
                             });
                         }
                         $scope.getCountry = function () {
@@ -459,8 +467,8 @@
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getStateByCountryId',
                                 data: {countryId: country_id}
-                            }).success(function (data) {
-                                $scope.stateList = data;
+                            }).then(function (data) {
+                                $scope.stateList = data.data;
                                 $("#state").find("option").eq(0).remove();
                                 select_color_change();
                             });
@@ -470,12 +478,12 @@
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getStateByCountryId',
                                 data: {countryId: country_id}
-                            }).success(function (data) {
+                            }).then(function (data) {
                                 if (angular.isDefined($scope.user.state_id)) {
                                     delete $scope.user.state_id;
                                 }
                                 $scope.user.state_id = "";
-                                $scope.stateList = data;
+                                $scope.stateList = data.data;
                                 select_color_change();
                             });
                         }
@@ -490,8 +498,8 @@
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getCityByStateId',
                                 data: {stateId: state_id}
-                            }).success(function (data) {
-                                $scope.cityList = data;
+                            }).then(function (data) {
+                                $scope.cityList = data.data;
                             });
                         }
                         function onStateChange1(state_id = '') {
@@ -499,11 +507,11 @@
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getCityByStateId',
                                 data: {stateId: state_id}
-                            }).success(function (data) {
+                            }).then(function (data) {
                                 if (angular.isDefined($scope.user.city_id)) {
                                     delete $scope.user.city_id;
                                 }
-                                $scope.cityList = data;
+                                $scope.cityList = data.data;
                             });
                         }
 
@@ -516,7 +524,8 @@
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getBusinessInformation',
                                 headers: {'Content-Type': 'application/json'},
-                            }).success(function (data) {
+                            }).then(function (data) {
+                                data = data.data;
                                 if (data[0]) {
                                     onCountryChange(data[0].country);
                                     onStateChange(data[0].state);
@@ -539,7 +548,8 @@
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getContactInformation',
                                 headers: {'Content-Type': 'application/json'},
-                            }).success(function (data) {
+                            }).then(function (data) {
+                                data = data.data;
                                 if (data[0]) {
                                     $scope.user.contactname = data[0].contact_person;
                                     $scope.user.contactmobile = data[0].contact_mobile;
@@ -561,7 +571,8 @@
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getDescription',
                                 headers: {'Content-Type': 'application/json'},
-                            }).success(function (data) {
+                            }).then(function (data) {                                
+                                data = data.data;
                                 if (data['userdata'][0]) {
                                     if (data['userdata'][0].business_step >= '2') {
                                         $scope.user.business_type = data['userdata'][0].business_type;
@@ -593,9 +604,10 @@
                             $http({
                                 method: 'POST',
                                 url: base_url + 'business_profile_registration/getImage',
-                            }).success(function (data) {
+                            }).then(function (data) {
+                                data = data.data;                                
                                 if (data.business_step >= '3') {
-                                    $('.bus_image_prev').html(data['busImageDetail']);
+                                    $('.bus_image_prev').html(data.busImageDetail);
                                 } else if (data.business_step == '2') {
                                     $scope.tab_active(3);
                                     activeDescription();
@@ -672,7 +684,8 @@
                                     data: $scope.user, //forms user object
                                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                 })
-                                        .success(function (data) {
+                                        .then(function (data) {
+                                            data = data.data;                                            
                                             if (data.errors) {
                                                 // Showing errors.
                                                 $scope.errorCompanyName = data.errors.companyname;
@@ -752,7 +765,8 @@
                                     data: $scope.user, //forms user object
                                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                 })
-                                        .success(function (data) {
+                                        .then(function (data) {
+                                            data = data.data;
                                             if (data.errors) {
                                                 // Showing errors.
                                                 $scope.errorContactName = data.errors.contactname;
@@ -816,7 +830,8 @@
                                     data: $scope.user, //forms user object
                                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                 })
-                                        .success(function (data) {
+                                        .then(function (data) {
+                                            data = data.data;
                                             if (data.errors) {
                                                 $scope.errorBusinessType = data.errors.business_type;
                                                 $scope.errorCategory = data.errors.industriyal;
@@ -855,7 +870,8 @@
                                     {
                                         transformRequest: angular.identity,
                                         headers: {'Content-Type': undefined, 'Process-Data': false}
-                                    }).success(function (data) {
+                                    }).then(function (data) {
+                                        data = data.data;
                                 if (data.errors) {
                                     // Showing errors.
                                     $scope.errorImage = data.errors.image1;
@@ -903,13 +919,12 @@
         if (IS_BUSINESS_JS_MINIFY == '0') {
             ?>
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.js?ver=' . time()); ?>"></script>
-             <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>                                                                                                                                                                                                                                                                                                                                                                                                                           <!--            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/information.js?ver=' . time()); ?>"></script>
-                                                                                                                                                                                                            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>-->
+             <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <?php } else {
             ?>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/information.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <?php }
-        ?>
+        ?>        
     </body>
 </html>

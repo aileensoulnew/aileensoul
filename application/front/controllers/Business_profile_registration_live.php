@@ -23,7 +23,7 @@ class Business_profile_registration_live extends MY_Controller {
         //AWS access info end
 
         $userid = $this->session->userdata('aileenuser');
-            include ('business_include.php');
+        include ('business_include.php');
 
         // FIX BUSINESS PROFILE NO POST DATA
 
