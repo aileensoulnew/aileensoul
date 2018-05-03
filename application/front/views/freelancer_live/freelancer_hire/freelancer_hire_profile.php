@@ -285,7 +285,7 @@
 
                     </div>
                 <?php } ?>
-                <div class="middle-part">          
+                <div>          
                     <div class="job-menu-profile mob-none pt20">
                         <a title="<?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?>" href="javascript:void(0);">
                             <h3> <?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?></h3>
