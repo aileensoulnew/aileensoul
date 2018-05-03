@@ -225,7 +225,7 @@ $route['freelance-hire/project/(:any)'] = "freelancer_hire_live/live_post/$1";
 $route['freelance-hire/freelancer-shortlisted/(:any)'] = "freelancer_hire_live/freelancer_shortlist_list/$1";
 $route['freelance-hire/registration'] = "freelancer_hire_live/hire_registation";
 $route['freelance-hire/registration/live-post'] = "freelancer_hire/hire_registation";
-$route['freelance-hire/reactivateacc'] = "freelancer_hire_live/reactivatefreelancerhire";
+$route['freelance-hire/reactivateacc'] = "freelancer_hire_live/reactivateacc";
 
 $route['freelancer/ajax_recommen_candidate'] = "freelancer/ajax_recommen_candidate";
 //$route['freelance-hire'] = "freelancer_hire/freelancer_hire/freelancer_hire_basic_info";
