@@ -210,7 +210,7 @@
 						<?php } ?>
 					</div>
 					<!-- menubar --> 
-					<div class="middle-part container rec_res">
+					<div class="container rec_res">
 						<div class="job-menu-profile  mob-none ">
 							<a href="javascript:void(0);" title="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>"><h3><?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?></h3></a>
 							<!-- text head start -->
