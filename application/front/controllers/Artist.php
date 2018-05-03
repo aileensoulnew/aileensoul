@@ -112,7 +112,7 @@ class Artist extends MY_Controller {
             $userid = $this->session->userdata('aileenuser');
             $recuser = $this->db->select('user_id')->get_where('art_reg', array('user_id' => $userid))->row()->user_id;
         }
-         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         if ($recuser) {
             redirect('artist/home', refresh);
         } else {

@@ -621,6 +621,7 @@ class Recruiter_live extends MY_Controller {
         $reactivate = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
         if ($reactivate) {
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             // Fetch data for reg.
             $this->load->view('recruiter/reactivate', $this->data);
         } 

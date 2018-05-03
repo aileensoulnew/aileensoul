@@ -3004,14 +3004,15 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 		$userid = $this->session->userdata('aileenuser');
 		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
 
+		$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+		$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+		$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+		$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
 		if ($freelancerhiredata) {
 			$this->load->view('freelancer_live/freelancer_hire/reactivate', $this->data);
 		} else {
 			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
 			$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-			$this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-			$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-			$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
 			$contition_array = array('status' => '1');
 			$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
 			$this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -3023,8 +3024,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 			// FETCH CITY DATA
 			$contition_array = array('status' => '1', 'state_id' => $this->data['recdata']['re_comp_state']);
 			$this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-			$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+	
 			$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
 			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);

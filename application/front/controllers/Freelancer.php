@@ -39,6 +39,7 @@ class Freelancer extends MY_Controller {
         $freelancerpostdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         if ($freelancerpostdata) {
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             $this->load->view('freelancer_live/freelancer_post/reactivate', $this->data);
         } else {
 

@@ -16,7 +16,7 @@
     <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
-            <?php if($isbusinessactivate){ ?>
+            <?php if(!$isbusinessactivate){ ?>
                 <?php if(!$business_profile_set){ echo $search_banner; } ?>
             <?php } else { ?>
                 <div class="sub-fix-head">

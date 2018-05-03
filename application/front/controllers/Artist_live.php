@@ -1586,6 +1586,7 @@ class Artist_live extends MY_Controller {
         //echo "<pre>"; print_r($artresult); die();
         if ($artresult) {
             $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             $this->load->view('artist_live/reactivate', $this->data);
         } 
         else {

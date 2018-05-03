@@ -10928,6 +10928,7 @@ Your browser does not support the audio tag.
         $business_deactive = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
         if ($business_deactive) {
             $this->data['title'] = 'Reactive | ' . ' Business Profile' . TITLEPOSTFIX;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             $this->load->view('business_profile_live/reactivate', $this->data);
         }
         else{

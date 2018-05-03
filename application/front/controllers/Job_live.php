@@ -228,10 +228,15 @@ class Job_live extends MY_Controller {
     public function reactivateacc() {
         // check job is active or not.
         $userid = $this->session->userdata('aileenuser');
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        
         $contition_array = array('user_id' => $userid, 'status' => '0');
         $reactivate = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
         if ($reactivate) {
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             // Fetch data for reg.
             $this->load->view('job/reactivate', $this->data);
         } 
