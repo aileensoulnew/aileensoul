@@ -280,7 +280,7 @@ class Artist extends MY_Controller {
         }
     }
 
-//check mail start
+    //check mail start
     public function check_email() {
         $email = $this->input->post('email');
         $userid = $this->session->userdata('aileenuser');
@@ -306,7 +306,7 @@ class Artist extends MY_Controller {
         }
     }
 
-//check mail end
+    //check mail end
     public function art_address() {
         $userid = $this->session->userdata('aileenuser');
         //if user deactive profile then redirect to artist/index untill active profile start
@@ -1044,7 +1044,7 @@ class Artist extends MY_Controller {
             }
         }
 
-//new code end
+        //new code end
 
         $contition_array = array('art_post_id' => $insert_id);
         $art_insertpost = $this->common->select_data_by_condition('art_post', $contition_array, $data = 'art_post_id,art_post,art_description,user_id,art_likes_count,art_like_user,created_date,posted_user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1283,11 +1283,11 @@ class Artist extends MY_Controller {
             } elseif (in_array($ext, $allowespdf)) {
 
                 $return_html .= '<div>
-<a title = "click to open" href = "' . base_url('artist/pdf-view/' . $row['art_post_id']) . '" target="_blank"><div class = "pdf_img">
-    <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF.jpg">
-</div>
-</a>
-</div>';
+                <a title = "click to open" href = "' . base_url('artist/pdf-view/' . $row['art_post_id']) . '" target="_blank"><div class = "pdf_img">
+                    <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF.jpg">
+                </div>
+                </a>
+                </div>';
             } elseif (in_array($ext, $allowesvideo)) {
 
                 $post_poster = $artmultiimage[0]['file_name'];
@@ -1951,8 +1951,8 @@ class Artist extends MY_Controller {
         echo json_encode($tolist);
     }
 
-//location automatic retrieve cobtroller End
-// user list of artistic users
+    //location automatic retrieve cobtroller End
+    // user list of artistic users
     public function userlist() {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
         //if user deactive profile then redirect to artist/index untill active profile start
@@ -2478,7 +2478,7 @@ class Artist extends MY_Controller {
 
         $userlistview = $this->common->select_data_by_search('art_reg', $search_condition, $contition_array, $data = 'art_id, art_name, art_lastname, art_user_image, art_skill, art_city, art_state, user_id, slug', $sortby = 'CASE WHEN (art_city = ' . $city . ') THEN art_id END, CASE WHEN (art_state = ' . $state . ') THEN art_id END', $orderby = 'DESC', $limit = '', $offset = '', $join_str_contact = array(), $groupby = '');
 
-//echo '<pre>'; print_r($userlistview); 
+        //echo '<pre>'; print_r($userlistview); 
 
 
 
@@ -3585,7 +3585,7 @@ class Artist extends MY_Controller {
         }
     }
 
-// end of user lidt
+    // end of user lidt
 
 
     public function ajax_following($id = "") {
@@ -3789,8 +3789,8 @@ class Artist extends MY_Controller {
         $update = $this->common->update_data($data, 'art_reg', 'user_id', $id);
     }
 
-// deactivate user end
-//enter designation start
+    // deactivate user end
+    //enter designation start
 
     public function art_designation() {
 
@@ -3833,8 +3833,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//designation end
-// Artistic comments like start
+    //designation end
+    // Artistic comments like start
     public function like_comment() {
         $userid = $this->session->userdata('aileenuser');
         //if user deactive profile then redirect to artist/index untill active profile start
@@ -4305,8 +4305,8 @@ class Artist extends MY_Controller {
         }
     }
 
-// Artistic comment like end 
-//Artistic comment delete start
+    // Artistic comment like end 
+    //Artistic comment delete start
     public function delete_comment() {
         $userid = $this->session->userdata('aileenuser');
         //if user deactive profile then redirect to artist/index untill active profile start
@@ -4525,7 +4525,7 @@ class Artist extends MY_Controller {
         $contition_array = array('art_post_id' => $_POST["post_delete"], 'status' => '1');
         $allcomnt = $this->data['allcomnt'] = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = 'artistic_post_comment_id', $sortby = 'artistic_post_comment_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// khyati changes start
+        // khyati changes start
         if (count($artdata) > 0) {
             foreach ($artdata as $art) {
 
@@ -4716,7 +4716,7 @@ class Artist extends MY_Controller {
 
             $contition_array = array('art_post_id' => $post_delete, 'status' => '1');
             $artdata = $this->data['artdata'] = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = 'art_post_id,user_id,comments,artistic_post_comment_id,artistic_comment_likes_count,artistic_comment_like_user,created_date', $sortby = 'artistic_post_comment_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// khyati changes start
+            // khyati changes start
             if (count($artdata) > 0) {
                 foreach ($artdata as $art) {
 
@@ -5010,8 +5010,8 @@ class Artist extends MY_Controller {
                     "commentcount" => $cntinsert));
     }
 
-//Artistic comment delete end
-// artistics post like start
+    //Artistic comment delete end
+    // artistics post like start
 
     public function like_post() {
 
@@ -5369,8 +5369,8 @@ class Artist extends MY_Controller {
         }
     }
 
-// artistics post  like end
-//artistic comment insert start
+    // artistics post  like end
+    //artistic comment insert start
 
     public function insert_comment() {
         $userid = $this->session->userdata('aileenuser');
@@ -5510,7 +5510,7 @@ class Artist extends MY_Controller {
             $contition_array = array('art_post_id' => $_POST["post_id"], 'status' => '1');
             $artdata = $this->data['artdata'] = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = 'user_id,artistic_post_comment_id,art_post_id,comments,artistic_comment_likes_count,artistic_comment_like_user,created_date', $sortby = 'artistic_post_comment_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// khyati changes start
+            // khyati changes start
             $cmtinsert = '<div  class="hidebottombordertwo insertcommenttwo' . $post_id . '">';
             foreach ($artdata as $art) {
 
@@ -6032,7 +6032,7 @@ class Artist extends MY_Controller {
 
             $contition_array = array('art_post_id' => $_POST["post_id"], 'status' => '1');
             $allcomnt = $this->data['allcomnt'] = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = '*', $sortby = 'artistic_post_comment_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// khyati changes start
+        // khyati changes start
 
             foreach ($artdata as $art) {
 
@@ -6180,8 +6180,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//artistic comment insert end  
-//artistic comment edit start
+    //artistic comment insert end  
+    //artistic comment edit start
     public function edit_comment_insert() {
 
         $userid = $this->session->userdata('aileenuser');
@@ -6253,8 +6253,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//artistic comment edit end 
-// cover pic controller
+    //artistic comment edit end 
+    // cover pic controller
 
     public function ajaxpro() {
         $userid = $this->session->userdata('aileenuser');
@@ -6267,7 +6267,7 @@ class Artist extends MY_Controller {
             redirect('artist');
         }
 
-// REMOVE OLD IMAGE FROM FOLDER
+        // REMOVE OLD IMAGE FROM FOLDER
         $contition_array = array('user_id' => $userid);
         $user_reg_data = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'profile_background,profile_background_main', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -6363,7 +6363,7 @@ class Artist extends MY_Controller {
     }
 
     // // cover pic end
-// click on post after post open on new page start
+    // click on post after post open on new page start
     public function postnewpage($id = '') {
         $userid = $this->session->userdata('aileenuser');
 
@@ -6397,8 +6397,8 @@ class Artist extends MY_Controller {
         }
     }
 
-// click on post after post open on new page end
-//edit post start
+    // click on post after post open on new page end
+    //edit post start
 
     public function edit_post_insert() {
 
@@ -6498,8 +6498,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//edit post end
-//reactivate account start
+    //edit post end
+    //reactivate account start
 
     public function reactivate() {
 
@@ -6520,8 +6520,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//reactivate accont end 
-//delete post particular user start
+    //reactivate accont end 
+    //delete post particular user start
     public function del_particular_userpost() {
 
         $userid = $this->session->userdata('aileenuser');
@@ -6583,8 +6583,8 @@ class Artist extends MY_Controller {
             $followerabc[] = $this->data['art_data'];
         }
 
-//data fatch using follower end
-//data fatch using skill start
+        //data fatch using follower end
+        //data fatch using skill start
 
         $userselectskill = $this->data['artisticdata'][0]['art_skill'];
         //echo  $userselectskill; die();
@@ -6601,8 +6601,8 @@ class Artist extends MY_Controller {
         }
 
 
-//data fatch using skill end
-//data fatch using login user last post start
+        //data fatch using skill end
+        //data fatch using login user last post start
         $contition_array = array('art_post.user_id' => $userid, 'art_post.status' => '1', 'art_post.is_delete' => '0');
 
         $art_userdata = $this->data['art_userdata'] = $this->common->select_data_by_condition('art_post', $contition_array, $data = '*', $sortby = 'art_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -6706,8 +6706,8 @@ class Artist extends MY_Controller {
         ));
     }
 
-//delete post particular user end  
-//multiple images for user start
+    //delete post particular user end  
+    //multiple images for user start
 
 
     public function art_photos($id = "") {
@@ -6772,8 +6772,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//multiple images for user end   
-//multiple videos for user start
+    //multiple images for user end   
+    //multiple videos for user start
 
 
     public function art_videos($id) {
@@ -6813,8 +6813,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//multiple videos for user end 
-//multiple audios for user start
+    //multiple videos for user end 
+    //multiple audios for user start
 
 
     public function art_audios($id) {
@@ -6858,8 +6858,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//multiple audios for user end  
-//multiple pdf for user start
+    //multiple audios for user end  
+    //multiple pdf for user start
 
     public function art_pdf($id) {
 
@@ -6903,7 +6903,7 @@ class Artist extends MY_Controller {
         }
     }
 
-//multiple pdf for user end    
+    //multiple pdf for user end    
     // khyati 9-5 multiple images like start
     public function like_postimg() { //echo "hii"; die();
         //$id = $_POST['save_id'];
@@ -7343,8 +7343,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//multiple iamges like end 
-//multiple 9-5 images comment strat
+    //multiple iamges like end 
+    //multiple 9-5 images comment strat
 
     public function insert_commentthreeimg() {
 
@@ -7732,7 +7732,7 @@ class Artist extends MY_Controller {
 
         $contition_array = array('art_post_id' => $_POST["post_id"], 'status' => '1');
         $allcomnt = $this->data['allcomnt'] = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = '*', $sortby = 'artistic_post_comment_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// khyati changes start
+        // khyati changes start
 
         foreach ($artdata as $art) {
 
@@ -8117,8 +8117,8 @@ class Artist extends MY_Controller {
         echo $cmtinsert;
     }
 
-//multiple images comment end 
-//multiple 9-5 images comment like start
+    //multiple images comment end 
+    //multiple 9-5 images comment like start
     public function like_commentimg1() {
 
         $userid = $this->session->userdata('aileenuser');
@@ -8652,8 +8652,8 @@ class Artist extends MY_Controller {
         }
     }
 
-//multiple images comemnt like end
-//business_profile 9-5 comment edit start
+    //multiple images comemnt like end
+    //business_profile 9-5 comment edit start
     public function edit_comment_insertimg() {
 
         $userid = $this->session->userdata('aileenuser');
@@ -8689,7 +8689,7 @@ class Artist extends MY_Controller {
         }
     }
 
-//business_profile comment edit end
+    //business_profile comment edit end
     //multiple images 9-5  commnet delete start
     public function delete_commentimg() {
         $userid = $this->session->userdata('aileenuser');
@@ -8780,9 +8780,9 @@ class Artist extends MY_Controller {
             $cmtinsert .= $art_comment['comment'];
             $cmtinsert .= '</div>';
             $cmtinsert .= '<div class="edit-comment-box"><div class ="inputtype-edit-comment"><div contenteditable="true"   class="editable_text" name="' . $art_comment['post_image_comment_id'] . '" id="editcommentimg' . $art_comment['post_image_comment_id'] . '"style="display:none;    width: 81%;
-    min-height: 37px !important;
-    margin-top: 0px !important;
-    margin-left: 1.5% !important;" onkeyup="commenteditimg(' . $art_comment['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
+                min-height: 37px !important;
+                margin-top: 0px !important;
+                margin-left: 1.5% !important;" onkeyup="commenteditimg(' . $art_comment['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
 
             $cmtinsert .= '' . $this->common->make_links($art_comment['comment']) . '';
             $cmtinsert .= '</div>';
@@ -8890,7 +8890,7 @@ class Artist extends MY_Controller {
         ));
     }
 
-// changes done 9-5
+    // changes done 9-5
     public function delete_commenttwoimg() {
         $userid = $this->session->userdata('aileenuser');
 
@@ -8972,9 +8972,9 @@ class Artist extends MY_Controller {
                 $cmtinsert .= $this->common->make_links($art_comment['comment']);
                 $cmtinsert .= '</div>';
                 $cmtinsert .= '<div class="edit-comment-box"><div class ="inputtype-edit-comment"><div contenteditable="true" class="editable_text" name="' . $art_comment['post_image_comment_id'] . '" id="editcommentimgtwo' . $art_comment['post_image_comment_id'] . '"style="display:none;    width: 81%;
-    min-height: 37px !important;
-    margin-top: 0px !important;
-    margin-left: 1.5% !important; margin-right10px;" onkeyup="commenteditimgtwo(' . $art_comment['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
+                min-height: 37px !important;
+                margin-top: 0px !important;
+                margin-left: 1.5% !important; margin-right10px;" onkeyup="commenteditimgtwo(' . $art_comment['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
 
                 $cmtinsert .= '' . $art_comment['comment'] . '';
                 $cmtinsert .= '</div>';
@@ -9349,9 +9349,9 @@ class Artist extends MY_Controller {
             $fourdata .= '' . $this->common->make_links($rowdata['comment']) . '</br></div>';
 
             $fourdata .= '<div class="edit-comment-box"><div class ="inputtype-edit-comment"><div contenteditable="true" class="editable_text" name="' . $rowdata['post_image_comment_id'] . '" id="editcommentimgtwo' . $rowdata['post_image_comment_id'] . '" style="display:none  ;  width: 81%;
-    min-height: 37px !important;
-    margin-top: 0px !important;
-    margin-left: 1.5% !important; margin-right10px;"  onClick="commenteditimgtwo(' . $rowdata['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
+            min-height: 37px !important;
+            margin-top: 0px !important;
+            margin-left: 1.5% !important; margin-right10px;"  onClick="commenteditimgtwo(' . $rowdata['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
 
             $fourdata .= '' . $rowdata['comment'] . '';
             $fourdata .= '</div>';
@@ -9797,9 +9797,9 @@ class Artist extends MY_Controller {
             $cmtinsert .= $this->common->make_links($art_comment['comment']);
             $cmtinsert .= '</div>';
             $cmtinsert .= '<div class="edit-comment-box"><div class ="inputtype-edit-comment"><div contenteditable="true" class="editable_text" name="' . $art_comment['post_image_comment_id'] . '" id="editcommentimgtwo' . $art_comment['post_image_comment_id'] . '"style="display:none;    width: 81%;
-    min-height: 37px !important;
-    margin-top: 0px !important;
-    margin-left: 1.5% !important ;" onkeyup="commenteditimgtwo(' . $art_comment['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
+            min-height: 37px !important;
+            margin-top: 0px !important;
+            margin-left: 1.5% !important ;" onkeyup="commenteditimgtwo(' . $art_comment['post_image_comment_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);">';
 
             $cmtinsert .= '' . $art_comment['comment'] . '';
             $cmtinsert .= '</div>';
@@ -9972,7 +9972,7 @@ class Artist extends MY_Controller {
             $lstusr = $this->data['lstusr'] = $lastuser[0]['message_from'];
         }
 
-// last user first name last name
+        // last user first name last name
         if ($lstusr) {
             $lastuser = $this->common->select_data_by_id('user', 'user_id', $lstusr, $data = 'first_name,last_name');
 
@@ -10017,7 +10017,7 @@ class Artist extends MY_Controller {
         $selectuser = $this->aasort($selectuser, "id");
 
 
-// replace name of message_to in user_id in select user
+        // replace name of message_to in user_id in select user
 
         $return_arraysel = array();
         $i = 0;
@@ -10061,7 +10061,7 @@ class Artist extends MY_Controller {
         $search_condition = "((message_from = '$userid') && (message_to != '$lstusr'))";
 
         $tolist = $this->common->select_data_by_search('user', $search_condition, $contition_array, $data = 'messages.id,message_to,first_name,user_image,message', $sortby = 'messages.id', $orderby = 'DESC', $limit = '', $offset = '', $join_str3, $groupby = '');
-// uniq array of tolist  
+        // uniq array of tolist  
         foreach ($tolist as $k => $v) {
             foreach ($tolist as $key => $value) {
                 if ($k != $key && $v['message_to'] == $value['message_to']) {
@@ -10112,7 +10112,7 @@ class Artist extends MY_Controller {
             }
         }
 
-// replace name of message_to in user_id
+        // replace name of message_to in user_id
 
         $return_arrayfrom = array();
 
@@ -10144,10 +10144,10 @@ class Artist extends MY_Controller {
         $userlist = $this->aasort($userlist, "id");
         $this->data['userlist'] = array_merge($return_arraysel, $userlist);
         // khyati changes end 20-4
-// smily start
+        // smily start
         $smileys = _get_smiley_array();
         $this->data['smiley_table'] = $smileys;
-// smily end
+        // smily end
 
         $this->load->view('artist/art_chat', $this->data);
     }
@@ -11434,11 +11434,17 @@ class Artist extends MY_Controller {
         /* SKILL WISE DATA START */
         $userselectskill = $this->data['artisticdata'][0]['art_skill'];
         $condition_array = array('art_reg.is_delete' => '0', 'art_reg.status' => '1', 'art_reg.art_step' => '4');
-        $search_condition = "(art_skill IN ('$userselectskill'))";
-        $data = "GROUP_CONCAT(user_id) as skilldata_userlist";
-        $skilldata = $this->common->select_data_by_search('art_reg', $search_condition, $condition_array, $data, $sortby = '', $orderby = 'DESC', $limit = '', $offset = '', $join_str_contact = array(), $groupby = '');
-        $skill_list = $skilldata[0]['skilldata_userlist'];
-        $skill_list = explode(',', $skill_list);
+        $skilldata = array();
+        if($userselectskill != ''){
+            $search_condition = "(art_skill IN ($userselectskill))";
+            // $data = "GROUP_CONCAT(CONCAT('''', user_id, '''' )) AS skilldata_userlist";
+            $data = "GROUP_CONCAT(user_id) as skilldata_userlist";
+            $skilldata = $this->common->select_data_by_search('art_reg', $search_condition, $condition_array, $data, $sortby = '', $orderby = 'DESC', $limit = '', $offset = '', $join_str_contact = array(), $groupby = '');
+                $skill_list = $skilldata[0]['skilldata_userlist'];
+                $skill_list = explode(',', $skill_list);
+
+        }
+
         /* SKILL WISE DATA END */
         $total_user_list = array_merge($self_list, $follower_list, $skill_list);
         $total_user_list = array_unique($total_user_list, SORT_REGULAR);
@@ -11461,6 +11467,7 @@ class Artist extends MY_Controller {
         $data = "art_reg.art_user_image,art_reg.art_name,art_reg.art_lastname,art_reg.art_skill,art_reg.slug,art_post.art_post_id,art_post.art_post,art_post.art_description,art_post.art_likes_count,art_post.art_like_user,art_post.created_date,art_post.posted_user_id,art_reg.user_id";
         $artistic_post = $this->common->select_data_by_search('art_post', $search_condition, $condition_array, $data, $sortby = 'art_post_id', $orderby = 'DESC', $limit = $perpage, $offset = $start, $join_str, $groupby = '');
         $artistic_post1 = $this->common->select_data_by_search('art_post', $search_condition, $condition_array, $data, $sortby = 'art_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
+
 
         $return_html = '';
         if (empty($_GET["total_record"])) {
