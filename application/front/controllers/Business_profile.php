@@ -8572,10 +8572,6 @@ No Contacts Available.
             $page = $_GET["page"];
         }
 
-        $start = ($page - 1) * $perpage;
-        if ($start < 0)
-            $start = 0;
-
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
 
@@ -8590,66 +8586,23 @@ No Contacts Available.
         $industriyal = $this->data['business_common_data'][0]['industriyal'];
         $other_industrial = $this->data['business_common_data'][0]['other_industrial'];
 
-        /* SELF USER LIST START */
-        $self_list = array($userid);
-        /* SELF USER LIST END */
-
-        /* FOLLOWER USER LIST START */
-        $condition_array = array('follow_from' => $business_profile_id, 'follow_status' => '1', 'follow_type' => '2');
-        $join_str[0]['table'] = 'business_profile';
-        $join_str[0]['join_table_id'] = 'business_profile.business_profile_id';
-        $join_str[0]['from_table_id'] = 'follow.follow_to';
-        $join_str[0]['join_type'] = '';
-        $followerdata = $this->data['followerdata'] = $this->common->select_data_by_condition('follow', $condition_array, $data = 'GROUP_CONCAT(user_id) as follow_list', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-        $follower_list = $followerdata[0]['follow_list'];
-        $follower_list = explode(',', $follower_list);
-        /* FOLLOWER USER LIST END */
-
-        /* INDUSTRIAL AND CITY WISE DATA START */
-        $condition_array = array('business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
-        $search_condition = "(business_profile.industriyal = '$industriyal' AND business_profile.industriyal != 0) AND (business_profile.other_industrial = '$other_industrial' AND business_profile.other_industrial != '') OR (business_profile.city = '$city' AND business_profile.industriyal = '$industriyal')";
-        $data = "GROUP_CONCAT(user_id) as industry_city_user_list";
-        $industrial_city_data = $this->common->select_data_by_search('business_profile', $search_condition, $condition_array, $data, $sortby = '', $orderby = 'DESC', $limit = '', $offset = '', $join_str_contact = array(), $groupby = '');
-        $industrial_city_list = $industrial_city_data[0]['industry_city_user_list'];
-        $industrial_city_list = explode(',', $industrial_city_list);
-        /* INDUSTRIAL AND CITY WISE DATA END */
-
-        $total_user_list = array_merge($self_list, $follower_list, $industrial_city_list);
-        $total_user_list = array_unique($total_user_list, SORT_REGULAR);
-        $total_user_list = implode(',', $total_user_list);
-        $total_user_list = str_replace(",", "','", $total_user_list);
-
-        $condition_array = array('business_profile_post.is_delete' => '0', 'business_profile_post.status' => '1', 'FIND_IN_SET ("' . $user_id . '", delete_post) !=' => '0');
-        $delete_postdata = $this->common->select_data_by_condition('business_profile_post', $condition_array, $data = 'GROUP_CONCAT(business_profile_post_id) as delete_post_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        $delete_post_id = $delete_postdata[0]['delete_post_id'];
-        $delete_post_id = str_replace(",", "','", $delete_post_id);
-
-        $condition_array = array('business_profile_post.is_delete' => '0', 'business_profile_post.status' => '1', 'user_login.is_delete' => '0', 'user_login.status' => '1');
-        $search_condition = "`business_profile_post_id` NOT IN ('$delete_post_id') AND (business_profile_post.user_id IN ('$total_user_list')) OR (business_profile_post.posted_user_id ='$user_id' AND business_profile_post.is_delete=0)";
-        $join_str[0]['table'] = 'business_profile';
-        $join_str[0]['join_table_id'] = 'business_profile.user_id';
-        $join_str[0]['from_table_id'] = 'business_profile_post.user_id';
-        $join_str[0]['join_type'] = '';
-        $join_str[1]['table'] = 'user_login';
-        $join_str[1]['join_table_id'] = 'user_login.user_id';
-        $join_str[1]['from_table_id'] = 'business_profile.user_id';
-        $join_str[1]['join_type'] = '';
-        $data = "business_profile.business_user_image,business_profile.company_name,business_profile.industriyal,business_profile.business_slug,business_profile.other_industrial,business_profile.business_slug,business_profile_post.business_profile_post_id,business_profile_post.product_name,business_profile_post.product_description,business_profile_post.business_likes_count,business_profile_post.business_like_user,business_profile_post.created_date,business_profile_post.posted_user_id,business_profile.user_id";
-        $business_profile_post = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = $perpage, $offset = $start, $join_str, $groupby = '');
-        $business_profile_post1 = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
+        $business_profile_post = $this->business_model->get_business_home_post($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid,$page,$perpage);
+        $business_profile_post_total_rec = $this->business_model->business_home_post_total_rec($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid);
+        // print_r($business_profile_post);
+        // print_r($business_profile_post_total_rec);
+        // exit;
 
         $return_html = '';
 
-        if (empty($_GET["total_record"])) {
+        /*if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($business_profile_post1);
-        }
+        }*/
 
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
-        $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
+        $return_html .= '<input type = "hidden" class = "total_record" value = "' . $business_profile_post_total_rec. '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
-        if (count($business_profile_post1) > 0) {
+        if ($business_profile_post_total_rec > 0) {
             foreach ($business_profile_post as $row) {
 
                 $post_business_user_image = $row['business_user_image'];
