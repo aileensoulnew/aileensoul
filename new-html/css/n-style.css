@@ -1150,14 +1150,18 @@ header.profile-header .logo a{color:#5c5c5c;}
 .article-all-comment .comment-dis{width:92%;}
 
 /***  search banner  ***/
-.search-banner{background:url("../n-images/search-bnr-job.jpg"); padding-bottom:30px; background-size:100%;}
+.search-banner{background:url("../n-images/search-bnr-job.jpg"); padding:60px 0; background-size:100%;}
+.new-ld-page .search-banner{padding:0;}
+.new-ld-page .search-banner header{padding:15px 0;}
+.new-ld-page .search-banner header .container{padding:0;}
+.new-ld-page .search-banner .container{padding:60px 0;}
 .recruiter-main .search-banner{background:url("../n-images/bnr-rec.jpg"); margin-bottom:20px; padding:25px 0; background-size:cover;}
 .search-box{}
 .search-box .search-input input{width:48%; margin-right:2%; height:50px; font-size:17px; font-style:italic; color:#7b7b7b;}
 .search-box .search-input input.city-input{margin-right:0;}
 .search-box .btn1{font-size:22px; padding:12px 21px;}
 .search-box .search-input input.btn1{width:120px; margin-right:0;}
-.search-bnr-text{padding:70px 0 40px; letter-spacing:1px;}
+.search-bnr-text{padding:50px 0 40px; letter-spacing:1px;}
 .search-bnr-text h1{font-size:26px; color:#5c5c5c; line-height:1.5; letter-spacing:1px; }
 .work-timing{padding-left:0;}
 .work-timing li{list-style-type:none; float:left; padding:0 20px;}
