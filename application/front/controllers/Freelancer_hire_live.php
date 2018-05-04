@@ -2999,7 +2999,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 	$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);
 }
 	// Open Reactivate freelancer hire view or home 
-	public function reactivatefreelancerhire() {
+	public function reactivateacc() {
 	   
 		$userid = $this->session->userdata('aileenuser');
 		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);

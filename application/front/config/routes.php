@@ -296,8 +296,8 @@ $route['artist/followers'] = "artist_live/followers";
 $route['artist/following'] = "artist_live/userlist";
 
 $route['artist/category'] = "artist_live/category";
-$route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
-// $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
+// $route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
+$route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
 $route['artist/search'] = "artist_live/artist_search";
 
 $route['artist/artistic-basic-information-insert'] = "artist_live/art_basic_information_insert";

@@ -39,7 +39,6 @@
          <div class="pb20 search-input">
           <input type="text" ng-model="keyword" id="q" name="q" placeholder="Company, Cat, Products" autocomplete="off">
           <input ng-model="city" id="l" name="l" placeholder="Location" autocomplete="off">
-          
          </div>
          <div class="pt5 fw pb20">
           <ul class="work-timing fw">
