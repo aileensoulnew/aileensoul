@@ -191,4 +191,117 @@ class Artistic_model extends CI_Model {
         return $url;
     }
 
+    // Get data of artistic post 
+    function get_artist_home_post($login_userid,$page,$limit = '4'){
+        // Get artistic data
+        $artregid = "";
+        $artskill = "";
+        $artistsql = "SELECT * FROM `ailee_art_reg` WHERE `user_id` = '" . $login_userid ."' AND `status` = '1'";
+        // print_r($artdata);
+        $artquery = $this->db->query($artistsql);
+        $artdata = $artquery->result_array();
+        if(count($artdata) > 0){
+            $artregid = $artdata[0]['art_id'];
+            $artskill = $artdata[0]['art_skill'];
+        }
+
+        // Start limit
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $sql = "SELECT `ailee_art_reg`.`art_user_image`, `ailee_art_reg`.`art_name`, `ailee_art_reg`.`art_lastname`, `ailee_art_reg`.`art_skill`, `ailee_art_reg`.`slug`, `ailee_art_post`.`art_post_id`, `ailee_art_post`.`art_post`, `ailee_art_post`.`art_description`, `ailee_art_post`.`art_likes_count`, `ailee_art_post`.`art_like_user`, `ailee_art_post`.`created_date`, `ailee_art_post`.`posted_user_id`, `ailee_art_reg`.`user_id` 
+            FROM `ailee_art_post` 
+            JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
+            WHERE `ailee_art_post`.`is_delete` = '0' 
+            AND `ailee_art_post`.`status` = '1' AND 
+            `art_post_id` NOT IN (
+                SELECT art_post_id FROM `ailee_art_post` 
+                WHERE `ailee_art_post`.`is_delete` = '0' AND `ailee_art_post`.`status` = '1' 
+                AND FIND_IN_SET ('". $login_userid  ."', delete_post) != '0'
+            ) AND (
+             `ailee_art_post`.`user_id` 
+                = '". $login_userid ."'
+                OR
+                `ailee_art_post`.`user_id` 
+                IN (
+                    SELECT user_id FROM `ailee_follow` 
+                    JOIN `ailee_art_reg` ON `ailee_art_reg`.`art_id`=`ailee_follow`.`follow_to` 
+                    WHERE `follow_from` = '". $artregid ."' AND `follow_status` = '1' AND `follow_type` = '1' 
+                    AND `ailee_art_reg`.`status` = '1' AND `ailee_art_reg`.`is_delete` = '0'
+                ) 
+                OR
+              `ailee_art_post`.`user_id` 
+                IN (      
+                    SELECT user_id FROM `ailee_art_reg` 
+                    WHERE `ailee_art_reg`.`is_delete` = '0' AND `ailee_art_reg`.`status` = '1' 
+                    AND `ailee_art_reg`.`art_step` = '4' AND (
+                        `art_skill` IN (
+                                   ". $artskill ."
+                                )
+                        )
+                    )
+            ) 
+            ORDER BY `art_post_id` DESC";
+            if($limit != '') {
+                $sql .= " LIMIT $start,$limit";
+            }
+
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
+            return $result_array;
+    } 
+
+    // Get count of artistic post data 
+    function get_artist_home_post_count($login_userid){
+        $artregid = "";
+        $artskill = "";
+        $artistsql = "SELECT * FROM `ailee_art_reg` WHERE `user_id` = '" . $login_userid ."' AND `status` = '1'";
+        $artquery = $this->db->query($artistsql);
+        $artdata = $artquery->result_array();
+        if(count($artdata) > 0){
+            $artregid = $artdata[0]['art_id'];
+            $artskill = $artdata[0]['art_skill'];
+        }
+
+        $sql = "SELECT count(*) as total_record
+            FROM `ailee_art_post` 
+            JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
+            WHERE `ailee_art_post`.`is_delete` = '0' 
+            AND `ailee_art_post`.`status` = '1' AND 
+            `art_post_id` NOT IN (
+                SELECT art_post_id FROM `ailee_art_post` 
+                WHERE `ailee_art_post`.`is_delete` = '0' AND `ailee_art_post`.`status` = '1' 
+                AND FIND_IN_SET ('". $login_userid  ."', delete_post) != '0'
+            ) AND (
+             `ailee_art_post`.`user_id` 
+                = '". $login_userid ."'
+                OR
+                `ailee_art_post`.`user_id` 
+                IN (
+                    SELECT user_id FROM `ailee_follow` 
+                    JOIN `ailee_art_reg` ON `ailee_art_reg`.`art_id`=`ailee_follow`.`follow_to` 
+                    WHERE `follow_from` = '". $artregid ."' AND `follow_status` = '1' AND `follow_type` = '1' 
+                    AND `ailee_art_reg`.`status` = '1' AND `ailee_art_reg`.`is_delete` = '0'
+                ) 
+                OR
+              `ailee_art_post`.`user_id` 
+                IN (      
+                    SELECT user_id FROM `ailee_art_reg` 
+                    WHERE `ailee_art_reg`.`is_delete` = '0' AND `ailee_art_reg`.`status` = '1' 
+                    AND `ailee_art_reg`.`art_step` = '4' AND (
+                        `art_skill` IN (
+                                   ". $artskill ."
+                                )
+                        )
+                    )
+            ) 
+            ORDER BY `art_post_id` DESC";
+            if($limit != '') {
+                $sql .= " LIMIT $start,$limit";
+            }
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+    
 }
