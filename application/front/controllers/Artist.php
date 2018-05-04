@@ -11,6 +11,7 @@ class Artist extends MY_Controller {
         $this->load->library('form_validation');
         $this->load->model('email_model');
         $this->load->model('user_model');
+        $this->load->model('artistic_model');
         $this->data['title'] = "Aileensoul";
         $this->load->helper('smiley');
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
@@ -10360,10 +10361,10 @@ class Artist extends MY_Controller {
         }
         $this->data['userlist'] = array_merge($return_arraysel, $userlist);
 
-// smily start
+        // smily start
         $smileys = _get_smiley_array();
         $this->data['smiley_table'] = $smileys;
-// smily end
+        // smily end
 
         $this->load->view('artist/art_chat_user', $this->data);
     }
@@ -10434,7 +10435,7 @@ class Artist extends MY_Controller {
                 }
             }
 
-// replace name of message_to in user_id
+            // replace name of message_to in user_id
 
             $return_arrayfrom = array();
 
@@ -10515,7 +10516,7 @@ class Artist extends MY_Controller {
                 $lstusr = $this->data['lstusr'] = $lastuser[0]['message_from'];
             }
 
-// last user first name last name
+            // last user first name last name
             if ($lstusr) {
                 $lastuser = $this->common->select_data_by_id('user', 'user_id', $lstusr, $data = 'first_name,last_name');
 
@@ -10560,7 +10561,7 @@ class Artist extends MY_Controller {
             $selectuser = $this->aasort($selectuser, "id");
 
 
-// replace name of message_to in user_id in select user
+            // replace name of message_to in user_id in select user
 
             $return_arraysel = array();
             $i = 0;
@@ -10609,7 +10610,7 @@ class Artist extends MY_Controller {
 
 
 
-// uniq array of tolist  
+                // uniq array of tolist  
             foreach ($tolist as $k => $v) {
                 foreach ($tolist as $key => $value) {
                     if ($k != $key && $v['message_to'] == $value['message_to']) {
@@ -10660,7 +10661,7 @@ class Artist extends MY_Controller {
                 }
             }
 
-// replace name of message_to in user_id
+            // replace name of message_to in user_id
 
             $return_arrayfrom = array();
 
@@ -10717,10 +10718,10 @@ class Artist extends MY_Controller {
                     $usrsrch .= '<div class="name">';
                     $usrsrch .= '' . $user['first_name'] . ' ' . $user['last_name'] . '<br> </div>';
                     $usrsrch .= '<div class="status' . $user['user_id'] . '" style=" width: 145px;    max-height: 19px;
-    color: #003;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; ">';
+            color: #003;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; ">';
                     $usrsrch .= '' . $user['message'] . '';
                     $usrsrch .= '</div>';
                     $usrsrch .= '</div>';
@@ -10806,7 +10807,7 @@ class Artist extends MY_Controller {
                 }
             }
 
-// replace name of message_to in user_id
+        // replace name of message_to in user_id
 
             $return_arrayfrom = array();
 
@@ -10907,7 +10908,7 @@ class Artist extends MY_Controller {
                 $lstusr = $this->data['lstusr'] = $lastuser[0]['message_from'];
             }
 
-// last user first name last name
+        // last user first name last name
             if ($lstusr) {
                 $lastuser = $this->common->select_data_by_id('user', 'user_id', $lstusr, $data = 'first_name,last_name');
 
@@ -10953,7 +10954,7 @@ class Artist extends MY_Controller {
             $selectuser = $this->aasort($selectuser, "id");
 
 
-// replace name of message_to in user_id in select user
+        // replace name of message_to in user_id in select user
 
             $return_arraysel = array();
             $i = 0;
@@ -11049,7 +11050,7 @@ class Artist extends MY_Controller {
                 }
             }
 
-// replace name of message_to in user_id
+            // replace name of message_to in user_id
 
             $return_arrayfrom = array();
 
@@ -11110,11 +11111,11 @@ class Artist extends MY_Controller {
                     $usrsrch .= '<div class="name">';
                     $usrsrch .= '<a href="' . base_url() . 'chat/abc/' . $user['user_id'] . '">' . $user['first_name'] . ' ' . $user['last_name'] . '<br></a> </div>';
                     $usrsrch .= '<div class="status' . $user['user_id'] . '" style=" width: 145px;    max-height: 25px;
-    color: #003;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-">';
+                color: #003;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            ">';
                     $usrsrch .= '' . $user['message'] . '';
                     $usrsrch .= '</div>';
                     $usrsrch .= '</div>';
@@ -11146,11 +11147,11 @@ class Artist extends MY_Controller {
                     $usrsrch .= '<div class="name">';
                     $usrsrch .= '<a href="' . base_url() . 'chat/abc/' . $lstusrdata[0]['user_id'] . '">' . $lstusrdata[0]['first_name'] . ' ' . $lstusrdata[0]['last_name'] . '<br></a> </div>';
                     $usrsrch .= '<div class="status' . $lstusrdata[0]['user_id'] . '" style=" width: 145px;    max-height: 25px;
-    color: #003;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-">';
+                color: #003;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            ">';
                     $search_condition = "((message_from = '$userid' AND message_to = '$toid') OR (message_to = '$userid' AND message_from = '$toid'))";
                     $contition_array = array('id !=' => '');
                     $messages = $this->common->select_data_by_search('messages', $search_condition, $contition_array, $data = '*', $sortby = 'id', $orderby = 'DESC', $limit = '1', $offset = '', $join_str = '', $groupby = '');
@@ -11184,11 +11185,11 @@ class Artist extends MY_Controller {
                         $usrsrch .= '<div class="name">';
                         $usrsrch .= '' . $user['first_name'] . ' ' . $user['last_name'] . '<br></div>';
                         $usrsrch .= '<div class="status' . $user['user_id'] . '" style=" width: 145px;
-    color: #003;    max-height: 25px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-">';
+                color: #003;    max-height: 25px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            ">';
                         $usrsrch .= '' . $user['message'] . '';
                         $usrsrch .= '</div>';
                         $usrsrch .= '</div>';
@@ -11398,6 +11399,7 @@ class Artist extends MY_Controller {
         echo $return_html;
     }
 
+    // Artistic Post 
     public function art_home_post() {
 
         $perpage = 4;
@@ -11406,68 +11408,10 @@ class Artist extends MY_Controller {
             $page = $_GET["page"];
         }
 
-        $start = ($page - 1) * $perpage;
-        if ($start < 0)
-            $start = 0;
-
         $userid = $this->session->userdata('aileenuser');
-        $contition_array = array('user_id' => $userid, 'status' => '1');
-        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        /* SELF USER LIST START */
-        $self_list = array($userid);
-        /* SELF USER LIST END */
-
-        /* FOLLOWER USER LIST START */
-        $artregid = $this->data['artisticdata'][0]['art_id'];
-        $condition_array = array('follow_from' => $artregid, 'follow_status' => '1', 'follow_type' => '1', 'art_reg.status' => '1', 'art_reg.is_delete' => '0');
-        $join_str[0]['table'] = 'art_reg';
-        $join_str[0]['join_table_id'] = 'art_reg.art_id';
-        $join_str[0]['from_table_id'] = 'follow.follow_to';
-        $join_str[0]['join_type'] = '';
-        $followerdata = $this->data['followerdata'] = $this->common->select_data_by_condition('follow', $condition_array, $data = 'GROUP_CONCAT(user_id) as follow_list', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-        $follower_list = $followerdata[0]['follow_list'];
-        $follower_list = explode(',', $follower_list);
-        // echo "<prer>"; print_r($follower_list); die();
-        /* FOLLOWER USER LIST END */
-
-        /* SKILL WISE DATA START */
-        $userselectskill = $this->data['artisticdata'][0]['art_skill'];
-        $condition_array = array('art_reg.is_delete' => '0', 'art_reg.status' => '1', 'art_reg.art_step' => '4');
-        $skilldata = array();
-        if($userselectskill != ''){
-            $search_condition = "(art_skill IN ($userselectskill))";
-            // $data = "GROUP_CONCAT(CONCAT('''', user_id, '''' )) AS skilldata_userlist";
-            $data = "GROUP_CONCAT(user_id) as skilldata_userlist";
-            $skilldata = $this->common->select_data_by_search('art_reg', $search_condition, $condition_array, $data, $sortby = '', $orderby = 'DESC', $limit = '', $offset = '', $join_str_contact = array(), $groupby = '');
-                $skill_list = $skilldata[0]['skilldata_userlist'];
-                $skill_list = explode(',', $skill_list);
-
-        }
-
-        /* SKILL WISE DATA END */
-        $total_user_list = array_merge($self_list, $follower_list, $skill_list);
-        $total_user_list = array_unique($total_user_list, SORT_REGULAR);
-        $total_user_list = implode(',', $total_user_list);
-        $total_user_list = str_replace(",", "','", $total_user_list);
-
-        $condition_array = array('art_post.is_delete' => '0', 'art_post.status' => '1', 'FIND_IN_SET ("' . $user_id . '", delete_post) !=' => '0');
-        $delete_postdata = $this->common->select_data_by_condition('art_post', $condition_array, $data = 'GROUP_CONCAT(art_post_id) as delete_post_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-        $delete_post_id = $delete_postdata[0]['delete_post_id'];
-        $delete_post_id = str_replace(",", "','", $delete_post_id);
-
-
-        $condition_array = array('art_post.is_delete' => '0', 'art_post.status' => '1');
-        $search_condition = "`art_post_id` NOT IN ('$delete_post_id') AND (art_post.user_id IN ('$total_user_list'))";
-        $join_str[0]['table'] = 'art_reg';
-        $join_str[0]['join_table_id'] = 'art_reg.user_id';
-        $join_str[0]['from_table_id'] = 'art_post.user_id';
-        $join_str[0]['join_type'] = '';
-        $data = "art_reg.art_user_image,art_reg.art_name,art_reg.art_lastname,art_reg.art_skill,art_reg.slug,art_post.art_post_id,art_post.art_post,art_post.art_description,art_post.art_likes_count,art_post.art_like_user,art_post.created_date,art_post.posted_user_id,art_reg.user_id";
-        $artistic_post = $this->common->select_data_by_search('art_post', $search_condition, $condition_array, $data, $sortby = 'art_post_id', $orderby = 'DESC', $limit = $perpage, $offset = $start, $join_str, $groupby = '');
-        $artistic_post1 = $this->common->select_data_by_search('art_post', $search_condition, $condition_array, $data, $sortby = 'art_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
-
+        $artistic_post = $this->artistic_model->get_artist_home_post($userid,$page,$perpage);
+        
+        $artistic_post1 = $this->artistic_model->get_artist_home_post_count($userid);
 
         $return_html = '';
         if (empty($_GET["total_record"])) {
@@ -11834,21 +11778,21 @@ class Artist extends MY_Controller {
                     } elseif (count($artmultiimage) == 3) {
 
                         $return_html .= '<div class = "three-image-top" >
-<a href = "' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
-<img class = "three-columns" src = "' . ART_POST_RESIZE4_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" alt="' . $artmultiimage[0]['file_name'] . '">
-</a>
-</div>
-<div class = "three-image" >
+            <a href = "' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
+            <img class = "three-columns" src = "' . ART_POST_RESIZE4_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" alt="' . $artmultiimage[0]['file_name'] . '">
+            </a>
+            </div>
+            <div class = "three-image" >
 
-<a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
-<img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[1]['file_name'] . '" alt="' . $artmultiimage[1]['file_name'] . '">
-</a>
-</div>
-<div class = "three-image" >
-<a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
-<img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[2]['file_name'] . '" alt="' . $artmultiimage[2]['file_name'] . '">
-</a>
-</div>';
+            <a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
+            <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[1]['file_name'] . '" alt="' . $artmultiimage[1]['file_name'] . '">
+            </a>
+            </div>
+            <div class = "three-image" >
+            <a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
+            <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[2]['file_name'] . '" alt="' . $artmultiimage[2]['file_name'] . '">
+            </a>
+            </div>';
                     } elseif (count($artmultiimage) == 4) {
 
                         foreach ($artmultiimage as $multiimage) {
@@ -12295,8 +12239,8 @@ class Artist extends MY_Controller {
 
         echo $return_html;
     }
-
-//photos video audio pdf fatch using ajax art_manage_post start
+    
+    //photos video audio pdf fatch using ajax art_manage_post start
 
 
     public function artistic_photos() {
