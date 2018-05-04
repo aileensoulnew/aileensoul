@@ -1152,9 +1152,10 @@ header.profile-header .logo a{color:#5c5c5c;}
 /***  search banner  ***/
 .search-banner{background:url("../n-images/search-bnr-job.jpg"); padding:60px 0; background-size:100%;}
 .new-ld-page .search-banner{padding:0;}
-.new-ld-page .search-banner header{padding:15px 0;}
-.new-ld-page .search-banner header .container{padding:0;}
-.new-ld-page .search-banner .container{padding:60px 0;}
+.new-ld-page .search-banner header .container{padding:0 15px;}
+.search-banner.cus-search-bnr{padding-top:0;}
+.new-ld-page .search-banner .container{padding:60px 15px;}
+.new-ld-page .search-banner.cus-search-bnr .container{padding-top:0;}
 .recruiter-main .search-banner{background:url("../n-images/bnr-rec.jpg"); margin-bottom:20px; padding:25px 0; background-size:cover;}
 .search-box{}
 .search-box .search-input input{width:48%; margin-right:2%; height:50px; font-size:17px; font-style:italic; color:#7b7b7b;}
@@ -1271,8 +1272,8 @@ header.profile-header .logo a{color:#5c5c5c;}
  /** reg form **/
  .reg-form-box{ padding:30px 0 0; border-radius:4px;}
  .reg-form{border-radius:4px; padding-left:80px;}
- .reg-form h3{text-align:left; font-size:22px; padding:10px 0 20px; letter-spacing:1px;}
- .reg-form form{}
+ .reg-form h3{text-align:left; font-size:20px; padding:10px 0 20px; letter-spacing:1px;}
+ .reg-form h3 span{font-size:14px;}
  .reg-form-box .reg-form .form-group{margin-bottom:0px;}
  .reg-form-box .reg-form .form-group input, .reg-form-box .reg-form .form-group select, .reg-form-box .reg-form .form-group textarea {border-bottom:1px solid #d2d2d2;  padding:5px 10px; margin-bottom:20px; height:40px;}
  .reg-form-box .reg-form .form-group textarea{height:73px;}
