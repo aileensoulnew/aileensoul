@@ -1274,6 +1274,7 @@ header.profile-header .logo a{color:#5c5c5c;}
  .reg-form{border-radius:4px; padding-left:80px;}
  .reg-form h3{text-align:left; font-size:20px; padding:10px 0 20px; letter-spacing:1px;}
  .reg-form h3 span{font-size:14px;}
+ .reg-form h3 span.db{display:block; padding-top:5px;}
  .reg-form-box .reg-form .form-group{margin-bottom:0px;}
  .reg-form-box .reg-form .form-group input, .reg-form-box .reg-form .form-group select, .reg-form-box .reg-form .form-group textarea {border-bottom:1px solid #d2d2d2;  padding:5px 10px; margin-bottom:20px; height:40px;}
  .reg-form-box .reg-form .form-group textarea{height:73px;}
@@ -1830,6 +1831,11 @@ tags-input .tags.focused{box-shadow: none; -webkit-box-shadow:none; -moz-box-sha
 .select-field-custom{position: relative;}
 .select-field-custom:after{content: "\f0d7"; font-family: FontAwesome; font-size: 16px; color: #aaa; right: 15px; top: 0; padding: 0 0 2px;
 position: absolute; pointer-events: none;}
+.select-field-custom select {
+  color: #777; 
+ }
+
+
 tags-input .tags .tag-item{background: -moz-linear-gradient(bottom,#e9e9e9 5%,#f9f9f9 100%);
     background: -webkit-linear-gradient(bottom,#e9e9e9 5%,#f9f9f9 100%);
     background: -o-linear-gradient(bottom,#e9e9e9 5%,#f9f9f9 100%);
