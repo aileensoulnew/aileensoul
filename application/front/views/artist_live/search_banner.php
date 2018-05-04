@@ -23,7 +23,11 @@
     </header> -->
     <div class="container">
       <div class="text-right pt20">
+        <?php if(!$isartistactivate || $isartistactivate == false){ ?>
           <a class="btn5" href="<?php echo $artist_profile_link ?>">Create Artist Profile</a>
+        <?php } else{ ?>
+          <a class="btn5" href="<?php echo base_url('artist/reactivateacc'); ?>">Reactivate Artist Profile</a>
+        <?php } ?>
       </div>
      <div class="row">
       <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">

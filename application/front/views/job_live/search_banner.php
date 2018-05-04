@@ -1,7 +1,14 @@
 <div class="search-banner" ng-controller="searchJobController">
     <div class="container">
         <div class="text-right pt20">
-            <a class="btn5" href="<?php echo $job_profile_link ?>">Create Job Profile</a>
+            <!--  -->
+            <?php if(!$isjobdeactivate || $isjobdeactivate == false) { ?>
+            <p>asdd</p>
+                <a class="btn5" href="<?php echo $job_profile_link; ?>">Create Job Profile</a>
+            <?php } else{ ?>
+            <p>shasasdd</p>
+                <a class="btn5" href="<?php echo base_url('job/reactivateacc'); ?>">Reactivate Job Profile</a>
+            <?php } ?>
         </div>
         <div class="search-bnr-text">
             <h1>Find The Job That Fits Your Life</h1>

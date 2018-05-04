@@ -2,7 +2,7 @@
     <div class="container">
         <div class="text-right pt20">
             <?php if($isdeactivatefreelancer){ ?>
-                <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Create Freelance Apply Profile</a>
+                <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a>
             <?php }else{ ?>
                 <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
             <?php } ?>

@@ -1,7 +1,11 @@
 <div class="search-banner hidden" ng-controller="searchBusinessController">
     <div class="container">
         <div class="text-right pt20">
-            <a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+            <?php if($isbusinessdeactivate == false){ ?>
+              <a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+            <?php }else{ ?>
+              <a class="btn5" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
+            <?php } ?>
         </div>
         <div class="search-bnr-text">
             <h1>Find The Business That Fits Your Life</h1>
@@ -43,9 +47,14 @@
       </div>
      </div>
     </header> -->
+   
     <div class="container">
       <div class="text-right pt20">
-          <a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+          <?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
+            <a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+          <?php }else{ ?>
+            <a class="btn5" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
+          <?php } ?>
       </div>
      <div class="row">
       <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">

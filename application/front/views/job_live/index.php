@@ -16,15 +16,16 @@
     <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
-            <?php if(!$isjobactivate){ ?>
-                <?php if($job_profile_set == 0 || $job_profile_set == '0'){ echo $search_banner; } ?>
-            <?php } else {  ?>
-                <div class="sub-fix-head">
+            <?php echo $search_banner; ?>
+            <?php //if(!$isjobactivate){ ?>
+                <?php //if($job_profile_set == 0 || $job_profile_set == '0'){ echo $search_banner; } ?>
+            <?php //} else {  ?>
+                <!-- <div class="sub-fix-head">
                     <div class="container">
-                        <p><span>Do you want to reactive ? </span><a class="pull-right btn-1" href="<?php echo base_url('job/reactivateacc'); ?>">Reactivate </a></p>
+                        <p><span>Do you want to reactive ? </span><a class="pull-right btn-1" href="<?php //echo base_url('job/reactivateacc'); ?>">Reactivate </a></p>
                     </div>
-                </div>
-            <?php } ?>
+                </div> -->
+            <?php //} ?>
             <div class="container">
                 <div class="left-part">
                     <form name="job-filter" id="job-filter">
