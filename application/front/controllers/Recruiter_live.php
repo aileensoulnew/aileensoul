@@ -39,7 +39,7 @@ class Recruiter_live extends MY_Controller {
             // $this->load->view('recruiter/reactivate', $this->data);
         } 
         // else {
-            if($this->recruiter_profile_set ==1 && !$reactivate){
+            if($this->recruiter_profile_set == 1 && !$reactivate){
                 redirect( $this->recruiter_profile_link);
             }
             $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
