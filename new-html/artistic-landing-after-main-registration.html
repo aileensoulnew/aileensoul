@@ -926,52 +926,7 @@
         <script src="js/aos.js"></script>
         <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script>
-            jQuery(document).ready(function ($) {
-                var owl = $('.owl-carousel');
-                owl.on('initialize.owl.carousel initialized.owl.carousel ' +
-                        'initialize.owl.carousel initialize.owl.carousel ' +
-                        'resize.owl.carousel resized.owl.carousel ' +
-                        'refresh.owl.carousel refreshed.owl.carousel ' +
-                        'update.owl.carousel updated.owl.carousel ' +
-                        'drag.owl.carousel dragged.owl.carousel ' +
-                        'translate.owl.carousel translated.owl.carousel ' +
-                        'to.owl.carousel changed.owl.carousel',
-                        function (e) {
-                            $('.' + e.type)
-                                    .removeClass('secondary')
-                                    .addClass('success');
-                            window.setTimeout(function () {
-                                $('.' + e.type)
-                                        .removeClass('success')
-                                        .addClass('secondary');
-                            }, 500);
-                        });
-                owl.owlCarousel({
-                    loop: true,
-                    nav: true,
-                    lazyLoad: true,
-                    margin: 0,
-                    video: true,
-                    responsive: {
-                        0: {
-                            items: 1
-                        },
-                        600: {
-                            items: 2
-                        },
-                        960: {
-                            items: 2,
-                        },
-                        1200: {
-                            items: 2
-                        }
-                    }
-                });
-				
-
-				
-            });
-
+            
             // mcustom scroll bar
             (function ($) {
                 $(window).on("load", function () {
@@ -988,8 +943,6 @@
 				$(this).height(0).height(this.scrollHeight);
 			}).find( 'textarea' ).change();
 			
-			
-
         </script>
 		<script>
 		  AOS.init({
