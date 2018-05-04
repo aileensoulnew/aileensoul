@@ -1704,7 +1704,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 /*** end  upload box  ***/
 /*** browse job  ***/
 .browse-jobs{max-width:915px; margin:0 auto; padding-top:105px;}
-.browse-box h4{font-size:20px;}
+.browse-box h3{font-size:20px;}
 .browse-box ul{padding-left:0;}
 .browse-box ul li{list-style-type:none; padding:4px 0; text-align:center;}
 .browse-box ul li:last-child{padding-top:30px;}
@@ -1874,6 +1874,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .email-cus{position:relative;}
 .email-cus .email-tooltip{display:block; position:absolute; right:23px; top:7px; width:20px; height:20px;}
 .email-cus .email-tooltip img{width:100%;}
+.post-design-desc{word-wrap:break-word;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
