@@ -19,19 +19,254 @@
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php if($freelance_apply_profile_set == 0 || $freelance_apply_profile_set == '0'){ echo $search_banner; } ?>
-            <div class="container">
+            
+            <div class="container pt20">
+                <!-- LEFT SIDE FILTER -->
                 <div class="left-part">
-                    <div class="left-search-box list-type-bullet">
+                    <!-- TOP CATEGORIES -->
+                    <div class="left-search-box">
                         <div class="">
                             <h3>Top Categories</h3>
                         </div>
                         <ul class="search-listing custom-scroll">
-                           
                             <li ng-repeat="category in freelancerCategory">
-                               <label class=""><a href="<?php echo base_url('freelance-work/category/') ?>{{category.industry_slug}}"><span ng-bind="category.industry_name | capitalize"></span><span class="pull-right" ng-bind="'(' + category.count + ')'"></span></a></label>
+                                <label class="control control--checkbox">
+                                    <!-- <a href="<?php// echo base_url('freelance-work/category/') ?>{{category.industry_slug}}"> -->
+                                        <span ng-bind="category.industry_name | capitalize"></span>
+                                        <span class="pull-right" ng-bind="'(' + category.count + ')'"></span>
+                                    <!-- </a> -->
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                        </ul>
+                        <p class="text-right p10"><a href="#">More Categories</a></p>
+                    </div>
+
+                    <!-- WORK TYPE -->
+                    <div class="left-search-box work-type">
+                        <div class="">
+                            <h3>Work Type</h3>
+                        </div>
+                        <ul class="search-listing pb10 fw">
+                            <li>
+                                <label class="control control--checkbox">Hourly
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--checkbox">Fixed
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                        </ul>       
+                    </div>
+
+                    <!-- POSTING PERIOD -->
+                    <div class="left-search-box">
+                        <div class="">
+                            <h3>Posting Period</h3>
+                        </div>
+                        <ul class="search-listing">
+                            <li>
+                                <label class="control control--checkbox">Today
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--checkbox">Last 7 day
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--checkbox">Last 15 day
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--checkbox">Last 45 day
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--checkbox">More than 45 days
+                                    <input type="checkbox"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>   
+                        </ul>
+                    </div>
+
+                    <!-- REQUIRED EXPERIENCE -->
+                    <div class="left-search-box">
+                        <div class="">
+                            <h3>Required Experience</h3>
+                        </div>
+                        <ul class="search-listing">
+                            <li>
+                                <label class="control control--radio">0 to 1 year
+                                    <input type="radio" name="radio" checked="checked"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">1 to 2 year
+                                    <input type="radio" name="radio" checked="checked"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">2 to 3 year
+                                    <input type="radio" name="radio" checked="checked"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">3 to 4 year
+                                    <input type="radio" name="radio" checked="checked"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">4 to 5 year
+                                    <input type="radio" name="radio" checked="checked"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="control control--radio">More than 5 year
+                                    <input type="radio" name="radio" checked="checked"/>
+                                    <div class="control__indicator"></div>
+                                </label>
+                            </li>
+                        </ul>       
+                    </div>
+
+                    <!-- LEFT SIDE SMALL FOOTER -->
+                    <div class="custom_footer_left fw">
+                        <div class="">
+                            <ul>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <span class="custom_footer_dot"> · </span> About Us 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <span class="custom_footer_dot"> · </span> Contact Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <span class="custom_footer_dot"> · </span> Blogs 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <span class="custom_footer_dot"> · </span> Privacy Policy 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <span class="custom_footer_dot"> · </span> Terms &amp; Condition
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <span class="custom_footer_dot"> · </span> Send Us Feedback
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MIDDLE PART FOR POST -->
+                <div class="middle-part">   
+                    <div class="page-title">
+                        <h3>Recommended Projects</h3>
+                    </div>
+                    <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
+                        <div class="all-job-top">
+                            <div class="job-top-detail">
+                                <h5><a href="#">{{applypost.post_name}}(project title) <span>(6 days left)</span></a></h5>
+                                <p><a href="#">Vivek Panday</a></p>
+                                <p>Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
+                            </div>
+                        </div>
+                        <div class="all-job-middle">
+                            <p class="pb5">
+                                <span class="location" ng-if="applypost.city || applypost.country">
+                                    <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
+                                    <span ng-if="applypost.city && applypost.country">
+                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
+                                    </span>
+                                    <!-- IF ONLY CITY AVAILABLE -->
+                                    <span ng-if="applypost.city && !applypost.country">
+                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
+                                    </span>
+                                    <!-- IF ONLY COUNTRY AVAILABLE -->
+                                    <span ng-if="!applypost.city && applypost.country">
+                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
+                                    </span>
+                                </span>
+                                <span class="exp">
+                                    <span><img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">Skils: {{applypost.post_skill}} etc..</span>
+                                </span>
+                            </p>
+                            <p>
+                                {{applypost.post_description}} ...<a href="#">Read more</a>
+                            </p>
+                            <p>
+                                Categories : <span>It software development</span>
+                            </p>
+                        </div>
+                        <div class="all-job-bottom">
+                            <span>Applied Persons: {{applypost.ShortListedCount}}</span>
+                            <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
+                            <p class="pull-right">
+                                <a href="#" class="btn4">Save</a>
+                                <a href="#" class="btn4">Apply</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE AD IMG -->
+                <div class="right-part">
+                    <div class="add-box">
+                        <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container hidden">
+                <div class="left-part">
+                    <!-- TOP CATEGORIES -->
+                    <div class="left-search-box list-type-bullet">
+                        <div class="">
+                            <h3>Top Categories</h3>
+                        </div>
+                        <ul class="search-listing custom-scroll">                           
+                            <li ng-repeat="category in freelancerCategory">
+                                <label class="">
+                                    <a href="<?php echo base_url('freelance-work/category/') ?>{{category.industry_slug}}">
+                                        <span ng-bind="category.industry_name | capitalize"></span>
+                                        <span class="pull-right" ng-bind="'(' + category.count + ')'"></span>
+                                    </a>
+                                </label>
                             </li>
                         </ul>
                     </div>
+
+                    <!-- WORK TYPE -->
                     <div class="left-search-box work-type">
                         <div class="">
                             <h3>Work Type</h3>
@@ -50,8 +285,9 @@
                                 </label>
                             </li>
                         </ul>
-
                     </div>
+
+                    <!-- POSTING PERIOD -->
                     <div class="left-search-box">
                         <div class="">
                             <h3>Posting Period</h3>
@@ -90,7 +326,6 @@
 
 
                         </ul>
-
                     </div>
                     <div class="left-search-box">
                         <div class="">
@@ -137,11 +372,7 @@
 
 
                         </ul>
-
                     </div>
-
-
-
                     <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
@@ -220,7 +451,6 @@
 
                         </div>
                     </div>
-
                 </div>
 
                 <div class="right-part">

@@ -21,145 +21,8 @@
         <div class="middle-section middle-section-banner">
             <!-- If not Register then Registration form display else reactivate div display -->
             <?php if(!$isfreelancerhireactivate){ ?>
-            <div class="search-banner">
-                <div class="container">
-                    <div class="row banner-main-div">
-                        <div class="col-md-6 col-sm-6 banner-left">
-                            <h1 class="pb15">Startup India is a revolutionary initiative started</h1><p>Startup India is a revolutionary initiative started</p>
-                        </div>
-                        <div class="col-md-6 col-sm-6 banner-right">
-                            <div class="reg-form-box">
-                                <div class="reg-form">
-                                    <h3>Welcome in Freelance hire Profile</h3>
-                                    <?php echo form_open(base_url('freelancer_hire/hire_registation_insert'), array('id' => 'freelancerhire_regform', 'name' => 'freelancerhire_regform', 'class' => 'clearfix')); ?>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    
-                                                     <input type="text" name="firstname" id="firstname" tabindex="1" placeholder="First Name" style="text-transform: capitalize;" onfocus="var temp_value = this.value; this.value = ''; this.value = temp_value" value="<?php echo $userdata['first_name']; ?>" maxlength="35">
-                                                    <?php echo form_error('firstname'); ?>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input type="text" name="lastname" id="lastname" tabindex="2" placeholder="Last name" style="text-transform: capitalize;" onfocus="this.value = this.value;" value="<?php echo $userdata['last_name']; ?>" maxlength="35">
-                                                        <?php echo form_error('lastname'); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <input type="email" name="email_reg1" id="email_reg1" tabindex="3" placeholder="Enter email address" value="<?php echo $userdata['email']; ?>" maxlength="255">
-                                                    <?php echo form_error('email_reg1'); ?>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                
-                                                <div class="col-md-6">
-                                                    <input type="text" placeholder="Company Number">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <select name="country" id="country" tabindex="5">
-                                                        <option value="">Select country</option>
-                                                        <?php
-                                                        if (count($countries) > 0) {
-                                                            foreach ($countries as $cnt) {
-                                                                ?>
-                                                                <option value="<?php echo $cnt['country_id']; ?>"><?php echo $cnt['country_name']; ?></option>
-                                                                <?php
-                                                            }
-                                                        }
-                                                        ?>
-                                                    </select><span id="country-error"></span>
-                                                    <?php echo form_error('country'); ?>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <select name="state" id="state" tabindex="6">
-                                                        <?php
-                                                        if ($state1) {
-                                                            foreach ($states as $cnt) {
-                                                                ?>
-                                                                <option value="<?php echo $cnt['state_id']; ?>" <?php if ($cnt['state_id'] == $state1) echo 'selected'; ?>><?php echo $cnt['state_name']; ?></option>
-                                                                <?php
-                                                            }
-                                                        }
-                                                        else {
-                                                            ?>
-                                                            <option value="">Select country first</option>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </select><span id="state-error"></span>
-                                                    <?php echo form_error('state'); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <select name="city" id="city" tabindex="7">
-                                                        <?php
-                                                        if ($city1) {
-                                                            foreach ($cities as $cnt) {
-                                                                ?>
-                                                                <option value="<?php echo $cnt['city_id']; ?>" <?php if ($cnt['city_id'] == $city1) echo 'selected'; ?>><?php echo $cnt['city_name']; ?></option>
-                                                                <?php
-                                                            }
-                                                        }
-                                                        else if ($state1) {
-                                                            ?>
-                                                            <option value="">Select city</option>
-                                                            <?php
-                                                            foreach ($cities as $cnt) {
-                                                                ?>
-                                                                <option value="<?php echo $cnt['city_id']; ?>"><?php echo $cnt['city_name']; ?></option>
-                                                                <?php
-                                                            }
-                                                        } else {
-                                                            ?>
-                                                            <option value="">Select state first</option>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </select><span id="city-error"></span>
-                                                    <?php echo form_error('city'); ?>
-                                                </div>
-                                        
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <textarea placeholder="Professional Information"></textarea>
-                                                </div>
-                                        
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-12 text-right">
-                                                    <button class="btn1" id="submit" name="submit" tabindex="9" onclick="return validate();" class="cus_btn_sub">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
-                                                </div>
-                                        
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="sub-fix-head">
+                <?php echo $search_banner; ?>
+            <div class="sub-fix-head hidden">
                 <div class="container">
                     <p><span>Lorem ipzum is a dummy text.</span><a class="pull-right btn-1" href="#">Post a Project</a></p>
                 </div>
@@ -172,7 +35,136 @@
                 </div>
             <?php } ?>
             
-            <div class="container pt20">
+            <!-- NEW DESIGN -->
+            <!-- POST PROJECT -->
+            <div class="sub-fix-head">
+                <div class="container">
+                    <h2>
+                        <span>Get the Job Done</span>
+                        <a class="pull-right btn-1" href="#">Post a Project</a>
+                    </h2>
+                </div>
+            </div>
+
+            <!-- HOW ABOUT PROFILE -->
+            <div class="how-about-profile">
+                <div class="container">
+                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <h2>How Can Aileensoul Freelance Profile Help in Hiring Remote Talent?</h2>
+                    </div>
+                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-md-6 col-sm-6 pull-right">
+                            <img src="<?php echo base_url('assets/n-images/free-hire-img.jpg') ?>">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <p>Freelancing is no longer an uncommon word, with a vast number of population involved. Penetration of technology and easy access to internet has made freelancing a more preferred choice. </p>
+                            <p>A distinct Freelance profile is offered by Aileensoulfor free which allows the users to both hire and get freelance work from the web portal. </p>
+                            <p>Freelance Hire profile is especially for freelance recruiters looking out for hiring talented candidates with a hassle-free process. </p>
+                            <p>Furthermore, the freelance recruiter can easily put in the skills he/she is requiring for the work and get options as per one’s requirement.The profile also gives the client an option to communicate freely with the candidates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CREATE OR REACTIVATE -->
+            <div class="content-bnr">
+                <div class="bnr-box">                    
+                    <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
+                        <h2>Grow Your Business with a Remote Team</h2>
+                        <p>
+                            <?php if(!$isfreelancerhireactivate){ ?>
+                                <a href="#" class="btn5">Create Freelance Employer Profile</a>
+                            <?php } else{ ?>
+                                <a href="<?php echo base_url('freelance-hire/reactivateacc'); ?>" class="btn5">Reactive Freelance Employer Profile</a>
+                            <?php } ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOW IT WORKS -->
+            <div class="how-it-work">
+                <div class="container">
+                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <h2>How it Works</h2>
+                    </div>
+                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-md-3">
+                            <div class="hiw-box">
+                                <img src="<?php echo base_url('assets/n-images/reg.png') ?>">
+                                <p>Register</p>
+                                <span>Sign up for freelance hire profile for free and connect with great talent from all over the world.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="hiw-box">
+                                <img src="<?php echo base_url('assets/n-images/post-project.png') ?>">
+                                <p>Post Project</p>
+                                <span>Post freelance projects details, budget, and skills required for the job. </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="hiw-box">
+                                <img src="<?php echo base_url('assets/n-images/short-list.png') ?>">
+                                <p>Hire Freelancer</p>
+                                <span>Search or select from the recommended candidates provided by us or shortlist from applied freelancers.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="hiw-box last-child">
+                                <img src="<?php echo base_url('assets/n-images/pay.png') ?>">
+                                <p>Pay</p>
+                                <span>Pay as per your convenient.</span>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- RELATED ARTICLE -->
+            <div class="related-article">
+                <div class="container">
+                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <h3>Related Articles</h3>
+                    </div>
+                    <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>                           
+                    </div>
+                </div>
+            </div>
+
+            <div class="container pt20 hidden">
                 <div class="pt20 pb20">
                     <div class="center-title">
                         <h3>What is freelance hire </h3>
@@ -222,7 +214,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content-bnr">
+            <div class="content-bnr hidden">
                 <div class="bnr-box">
                     <img src="n-images/img2.jpg">
                     <?php if(!$isfreelancerhireactivate){ ?>
@@ -238,7 +230,7 @@
                     <?php } ?>
                 </div>
             </div>
-            <div class="container pt20">
+            <div class="container pt20 hidden">
                 <div class="pt20 pb20">
                     <div class="center-title">
                         <h3>How it works </h3>
@@ -247,40 +239,38 @@
                 </div>
                 <div class="it-works-img pt20 pb20">
                     <img src="n-images/img3.jpg">
-                </div>
-                
+                </div>                
                 <div class="related-article pt20">
-                        <div class="center-title">
-                            <h3>Related Article</h3>
-                            
+                    <div class="center-title">
+                        <h3>Related Article</h3>                            
+                    </div>
+                    <div class="row pt10">
+                        <div class="col-md-4">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">Article Name</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row pt10">
-                            <div class="col-md-4">
-                                <div class="rel-art-box">
-                                    <img src="img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">Article Name</a>
-                                    </div>
+                        <div class="col-md-4">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">Article Name</a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="rel-art-box">
-                                    <img src="img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">Article Name</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="rel-art-box">
-                                    <img src="img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">Article Name</a>
-                                    </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">Article Name</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <!--  poup modal  -->
