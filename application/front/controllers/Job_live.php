@@ -29,19 +29,11 @@ class Job_live extends MY_Controller {
         // check job is active or not.
         $userid = $this->session->userdata('aileenuser');
         $this->data['isjobdeactivate'] = false;
-        $contition_array = array('user_id' => $userid, 'status' => '0');
-        $reactivate = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
-        if ($reactivate) {
-            // Fetch data for reg.
-            $this->data['isjobdeactivate'] = true;
-            // $this->load->view('job/reactivate', $this->data);
-        } ;
+        $this->checkisjobdeactivate();
 
         if($this->job_profile_set == 1 && !$reactivate){
             redirect( $this->job_profile_link);
         }
-        $this->data['job_profile_set'] = $this->job_profile_set;
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -50,8 +42,7 @@ class Job_live extends MY_Controller {
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['job_profile_link'] =  $this->job_profile_link;
-        // $this->data['job_profile_link'] =  ($this->job_profile_set == 1)?$this->job_profile_link:base_url('job/registration');
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Job Profile | Aileensoul";
@@ -60,6 +51,7 @@ class Job_live extends MY_Controller {
 
     public function category($category_slug = '') {
         $userid = $this->session->userdata('aileenuser');
+        $this->checkisjobdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -78,6 +70,7 @@ class Job_live extends MY_Controller {
     
     public function skill($skill_slug = '') {
         $userid = $this->session->userdata('aileenuser');
+        $this->checkisjobdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -96,6 +89,7 @@ class Job_live extends MY_Controller {
     
     public function company($company_id = '') {
         $userid = $this->session->userdata('aileenuser');
+        $this->checkisjobdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -113,6 +107,7 @@ class Job_live extends MY_Controller {
     
     public function city($city_slug = '') {
         $userid = $this->session->userdata('aileenuser');
+        $this->checkisjobdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -131,6 +126,7 @@ class Job_live extends MY_Controller {
 
     public function job_search() {
         $userid = $this->session->userdata('aileenuser');
+        $this->checkisjobdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -244,5 +240,19 @@ class Job_live extends MY_Controller {
         if($this->job_profile_set == 1 && !$reactivate){
             redirect( $this->job_profile_link);
         }
+    }
+
+    // CHECK IS JOB DEACTIVATE OR NOT AND SET LINK VARIABLE FOR REDIRECT FROM SEARCH BANNER PAGE
+    function checkisjobdeactivate(){
+        $contition_array = array('user_id' => $userid, 'status' => '0');
+        $reactivate = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
+        if ($reactivate) {
+            // Fetch data for reg.
+            $this->data['isjobdeactivate'] = true;
+            // $this->load->view('job/reactivate', $this->data);
+        };
+        $this->data['job_profile_set'] = $this->job_profile_set;
+        $this->data['job_profile_link'] =  ($this->job_profile_set == 1)?$this->job_profile_link:base_url('job/registration');
     }
 }

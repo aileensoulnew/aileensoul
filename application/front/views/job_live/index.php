@@ -17,16 +17,7 @@
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php echo $search_banner; ?>
-            <?php //if(!$isjobactivate){ ?>
-                <?php //if($job_profile_set == 0 || $job_profile_set == '0'){ echo $search_banner; } ?>
-            <?php //} else {  ?>
-                <!-- <div class="sub-fix-head">
-                    <div class="container">
-                        <p><span>Do you want to reactive ? </span><a class="pull-right btn-1" href="<?php //echo base_url('job/reactivateacc'); ?>">Reactivate </a></p>
-                    </div>
-                </div> -->
-            <?php //} ?>
-            <div class="container">
+            <div class="container pt20">
                 <div class="left-part">
                     <form name="job-filter" id="job-filter">
                     <div class="left-search-box list-type-bullet">
@@ -38,7 +29,6 @@
                                 <label class=""><a href="<?php echo base_url('job/category/') ?>{{category.industry_slug}}"><span ng-bind="category.industry_name | capitalize"></span><span class="pull-right" ng-bind="'(' + category.count + ')'"></span></a></label>
                             </li>
                         </ul>
-<!--                        <p class="text-right p10"><a href="#">More Categories</a></p>-->
                     </div>
                     <div class="left-search-box list-type-bullet">
                         <div class="">
@@ -263,14 +253,14 @@
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
-                                    var base_url = '<?php echo base_url(); ?>';
-                                    var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                    var title = '<?php echo $title; ?>';
-                                    var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                    var q = '';
-                                    var l = '';
-                                    var w = '';
-                                    var app = angular.module('jobApp', ['ui.bootstrap']);
+            var base_url = '<?php echo base_url(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var title = '<?php echo $title; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var q = '';
+            var l = '';
+            var w = '';
+            var app = angular.module('jobApp', ['ui.bootstrap']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
