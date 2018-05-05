@@ -27,53 +27,41 @@ class Recruiter_live extends MY_Controller {
     }
 
     public function index() {
+        $reactivate = $this->checkisreacruiterdeactivate();
         $userid = $this->session->userdata('aileenuser');
-        $this->data['isrecruiteractivate'] = false;
-        $contition_array = array('user_id' => $userid, 're_status' => '0');
-        $reactivate = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
-        if ($reactivate) {
-            // Fetch data for reg.
-            $this->data['isrecruiteractivate'] = true;
         
-            // $this->load->view('recruiter/reactivate', $this->data);
-        } 
-        // else {
-            if($this->recruiter_profile_set == 1 && !$reactivate){
-                redirect( $this->recruiter_profile_link);
-            }
-            $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
-            $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-            $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-            $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-            $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-            $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-            $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-            $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-            $this->data['recruiter_profile_link'] = $this->recruiter_profile_link;
-            $this->data['recruiter_profile_set'] = $this->recruiter_profile_set;
+        if($this->recruiter_profile_set == 1 && !$reactivate){
+            redirect( $this->recruiter_profile_link);
+        }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        
+        // FETCH COUNTRY DATA    
+        $contition_array = array('status' => '1');
+        $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-            // FETCH COUNTRY DATA    
-            $contition_array = array('status' => '1');
-            $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        // FETCH STATE DATA  
+        $contition_array = array('status' => '1', 'country_id' => $this->data['recdata']['re_comp_country']);
+        $this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = '*', $sortby = 'state_id,state_name,country_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-            // FETCH STATE DATA  
-            $contition_array = array('status' => '1', 'country_id' => $this->data['recdata']['re_comp_country']);
-            $this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = '*', $sortby = 'state_id,state_name,country_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        // FETCH CITY DATA
+        $contition_array = array('status' => '1', 'state_id' => $this->data['recdata']['re_comp_state']);
+        $this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-            // FETCH CITY DATA
-            $contition_array = array('status' => '1', 'state_id' => $this->data['recdata']['re_comp_state']);
-            $this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-            if ($this->session->userdata('aileenuser')) {
-                $userid = $this->session->userdata('aileenuser');
-                $recuser = $this->db->select('user_id')->get_where('recruiter', array('user_id' => $userid))->row()->user_id;
-            }
-            $this->data['search_banner'] = $this->load->view('recruiter_live/search_banner', $this->data, TRUE);
-            $this->data['title'] = "Recruiter Profile | Aileensoul";
-            $this->load->view('recruiter_live/index', $this->data);
-        // }
+        if ($this->session->userdata('aileenuser')) {
+            $userid = $this->session->userdata('aileenuser');
+            $recuser = $this->db->select('user_id')->get_where('recruiter', array('user_id' => $userid))->row()->user_id;
+        }
+        $this->data['search_banner'] = $this->load->view('recruiter_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Recruiter Profile | Aileensoul";
+        $this->load->view('recruiter_live/index', $this->data);
     }
 
     /*public function category() {
@@ -632,4 +620,19 @@ class Recruiter_live extends MY_Controller {
         }
     }
 
+    function checkisreacruiterdeactivate(){
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isrecruiteractivate'] = false;
+        $contition_array = array('user_id' => $userid, 're_status' => '0');
+        $reactivate = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
+        if ($reactivate) {
+            // Fetch data for reg.
+            $this->data['isrecruiteractivate'] = true;
+            // $this->load->view('recruiter/reactivate', $this->data);
+        } 
+        $this->data['recruiter_profile_link'] = $this->recruiter_profile_link;
+        $this->data['recruiter_profile_set'] = $this->recruiter_profile_set;
+        return $reactivate;
+    }
 }
