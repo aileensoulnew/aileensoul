@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
@@ -14,14 +15,14 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
-    <body class="profile-main-page recruiter-main">
+    <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php if(!$isrecruiteractivate){ ?>
             <?php if($recruiter_profile_set == 0 || $recruiter_profile_set == '0') echo $search_banner; ?>
             <div class="sub-fix-head">
                 <div class="container">
-                    <p><span>Lorem ipzum is a dummy text.</span><a class="pull-right btn-1" href="#">Post a job</a></p>
+                    <h2><span>Hire the Right Candidates</span><a class="pull-right btn-1" href="#">Post a Job</a></h2>
                 </div>
             </div>
             <?php } else{ ?>
@@ -31,7 +32,128 @@
                     </div>
                 </div>
             <?php } ?>
-            <div class="container pt20">
+
+            <!-- NEW HTML DESIGN -->
+            <!-- STATIC TEXT OF HOW ABOUT PROFILE -->
+            <div class="how-about-profile">
+                <div class="container">
+                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <h2>How Can Aileensoul Recruiter Profile Help in Hiring Relevant Candidate?</h2>
+                    </div>
+                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-md-6 col-sm-6 pull-right">
+                            <img src="<?php echo base_url('assets/n-images/img4.jpg') ?>">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <p>With a lot of job portals popping up nowadays, it has given an edge to the job seeker’s by providing them with lot of opportunities. But the recruiters are often put on the disadvantageous side as the portals charge them for putting up their posts. </p>
+                            <p>Here, at Aileensoul the Recruiter profile is free for all, letting the employer post as many job requirements as they need. Recruiters can hire from the large number of job seekers available in Aileensoul.</p>
+                            <p>A good number of filters and options help recruiters find the exact kind of candidate he/she is seeking.Also, the chat option feature helps the employer directly connect with job seekers and ask questions before making any hiring decision.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CREATE OR REACTIVATE RECRUITER PROFILE -->
+            <div class="content-bnr">
+                <div class="bnr-box">
+                    
+                    <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
+                        <h2>Put a Full Stop at Your Employee Hunting Process</h2>
+                        <p>
+                            <?php if(!$isrecruiteractivate){ ?>
+                                <a href="#" class="btn5">Create Recruiter Profile</a></p>
+                            <?php } else{ ?>
+                                <a href="<?php echo base_url('recruiter/reactivateacc'); ?>" class="btn5">Reactivate Recruiter Profile</a>
+                            <?php } ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOW IT WORKS STATIC TEXT -->
+            <div class="how-it-work">
+                <div class="container">
+                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <h2>How it Works</h2>
+                    </div>
+                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-md-3">
+                            <div class="hiw-box">
+                                <img src="<?php echo base_url('assets/n-images/reg.png') ?>">
+                                <p>Register</p>
+                                <span>Sign up for free and enter your details.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="hiw-box">
+                                <img src="<?php echo base_url('assets/n-images/post-project.png') ?>">
+                                <p>Post Job</p>
+                                <span>Post your requirement and the skills that you are looking for candidates. </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="hiw-box">
+                                <img src="<?php echo base_url('assets/n-images/find-job.png') ?>">
+                                <p>Find Job-Seeker</p>
+                                <span>Search or shortlist candidates from the recommendation we provide for your requirement.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="hiw-box last-child">
+                                <img src="<?php echo base_url('assets/n-images/hire.png') ?>">
+                                <p>Hire</p>
+                                <span>Select and Invite candidates for an interview.</span>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- RELATED ARTICLES -->
+            <div class="related-article">
+                <div class="container">
+                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <h3>Related Articles</h3>
+                    </div>
+                    <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rel-art-box">
+                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <div class="rel-art-name">
+                                    <a href="#">See the world in your language with Google Translate</a>
+                                </div>
+                            </div>
+                        </div>                           
+                    </div>
+                </div>
+            </div>
+
+            <!-- OLD HTML DESIGN -->
+            <div class="container pt20 hidden">
                 <div class="pt20 pb20">
                     <div class="center-title">
                         <h3>What is Recruiter </h3>
@@ -41,7 +163,7 @@
                 <div class="row pt20 pb20">
                     <div class="col-md-6 col-sm-6 pull-right">
                         <div class="content-img text-center">
-                            <img src="n-images/img1.jpg">
+                            <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">
                             
                         </div>
                     </div>
@@ -56,8 +178,7 @@
                 <div class="row pt20 pb20">
                     <div class="col-md-6 col-sm-6">
                         <div class="content-img text-center">
-                            <img src="n-images/img1.jpg">
-                            
+                            <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">                            
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -71,8 +192,7 @@
                 <div class="row pt20 pb20">
                     <div class="col-md-6 col-sm-6 pull-right">
                         <div class="content-img text-center">
-                            <img src="n-images/img1.jpg">
-                            
+                            <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">                            
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -86,7 +206,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content-bnr">
+            <div class="content-bnr hidden">
                 <div class="bnr-box">
                     <img src="n-images/img2.jpg">
                     <?php if(!$isrecruiteractivate){ ?>
@@ -102,7 +222,7 @@
                     <?php } ?>
                 </div>
             </div>
-            <div class="container pt20">
+            <div class="container pt20 hidden">
                 <div class="pt20 pb20">
                     <div class="center-title">
                         <h3>How it works </h3>
@@ -332,6 +452,7 @@
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
 
@@ -347,8 +468,7 @@
             var l = '';
             var app = angular.module('artistApp', ['ui.bootstrap']);
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
-        
-  </script>
+        </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script>

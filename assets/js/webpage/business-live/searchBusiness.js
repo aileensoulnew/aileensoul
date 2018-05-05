@@ -17,3 +17,26 @@ app.controller('searchBusinessController', function ($scope, $window) {
         }
     }
 });
+
+
+// NEW HTML SCRIPTS
+$('#content').on( 'change keyup keydown paste cut', 'textarea', function (){
+    $(this).height(0).height(this.scrollHeight);
+}).find( 'textarea' ).change();
+
+AOS.init({
+  easing: 'ease-in-out-sine'
+});
+setInterval(addItem, 100);
+var itemsCounter = 1;
+var container = document.getElementById('aos-demo');
+
+function addItem () {
+  if (itemsCounter > 42) return;
+  var item = document.createElement('div');
+  item.classList.add('aos-item');
+  item.setAttribute('data-aos', 'fade-up');
+  item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
+  // container.appendChild(item);
+  itemsCounter++;
+}

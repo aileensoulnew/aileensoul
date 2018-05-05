@@ -39,6 +39,6 @@ app.controller('searchArtistController', function ($scope, $window) {
         item.classList.add('aos-item');
         item.setAttribute('data-aos', 'fade-up');
         item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
-        container.appendChild(item);
+        // container.appendChild(item);
         itemsCounter++;
   }
