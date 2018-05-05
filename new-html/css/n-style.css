@@ -1214,8 +1214,8 @@ header.profile-header .logo a{color:#5c5c5c;}
 	-o-transform:      translate(-50%, -50%);
   
 }	
-.all-cat-box p{font-size:18px; padding:10px 0 0; color:#5c5c5c; /*min-height:64px;*/ letter-spacing:1px;}		
-.all-cat-box span{font-size:14px; padding:5px 10px; color:#5c5c5c; background:rgba(217,217,217,0.6); border-radius:5px;}		
+.all-cat-box p{font-size:18px; padding:10px 0 0; color:#5c5c5c; line-height:1; letter-spacing:1px;}		
+.all-cat-box span{font-size:14px; padding:5px 10px; color:#5c5c5c; background:rgba(217,217,217,0.6); border-radius:5px; margin-top:5px; display:inline-block;}		
 .job-cat-lp{padding-top:125px;}		
 .how-it-work{padding-top:125px; letter-spacing:1px}
 .hiw-box{text-align:center; padding:20px; position:relative;}		
@@ -1320,7 +1320,7 @@ header.profile-header .logo a{color:#5c5c5c;}
  }
  .all-detail-box .tab-pane ul li a span{color:#999;}
  .all-detail-box .tab-pane ul li span{display:block;}
- .cus-job .all-detail-box .tab-pane ul li a p{min-height: 80px; padding-top: 10px; color:#999;}
+ .cus-job .all-detail-box .tab-pane ul li a p{padding-top: 10px; color:#999;}
  .all-detail-box .tab-pane ul li a p{padding-top: 5px; color:#999;}
  .all-detail-box .tab-pane ul li a img{height: 40px;}
  .all-detail-box ul li a{background:#f6f6f6; padding-top:15px; padding-left:10px; padding-right:10px; padding-bottom:10px; -webkit-transition: all 200ms ease-in;
