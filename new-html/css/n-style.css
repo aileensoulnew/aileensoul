@@ -1156,7 +1156,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-banner.cus-search-bnr{padding-top:0;}
 .new-ld-page .search-banner .container{padding:60px 15px;}
 .new-ld-page .search-banner.cus-search-bnr .container{padding-top:0;}
-.recruiter-main .search-banner{background:url("../n-images/bnr-rec.jpg"); margin-bottom:20px; padding:25px 0; background-size:cover;}
+.recruiter-main .search-banner{/*background:url("../n-images/bnr-rec.jpg"); margin-bottom:20px; padding:25px 0; background-size:cover;*/}
 .search-box{}
 .search-box .search-input input{width:48%; margin-right:2%; height:50px; font-size:17px; font-style:italic; color:#7b7b7b;}
 .search-box .search-input input.city-input{margin-right:0;}
