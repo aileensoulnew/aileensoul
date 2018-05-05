@@ -6,7 +6,7 @@
         <meta name="robots" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/css/aos.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
@@ -164,9 +164,10 @@
                         <div class="col-md-3" ng-repeat="category in artistCategory">
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url('artist/') ?>{{category.category_slug}}"">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p ng-bind="category.art_category | capitalize">Actor</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p ng-bind="category.art_category | capitalize">Actor</p>
+                                    </div>
                                 </a>
                             </div>
                         </div>
@@ -187,72 +188,80 @@
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Ahmedabad</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Ahmedabad</p>
+                                    </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Delhi</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Delhi</p>
+                                    </div>                                    
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Mumbai</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Mumbai</p>
+                                    </div>                                    
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Bangalore</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Bangalore</p>
+                                    </div>                                    
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Mohali</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Mohali</p>
+                                    </div>                                    
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Punjab</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Punjab</p>
+                                    </div>                                    
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Rajkot</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Rajkot</p>
+                                    </div>                                    
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="all-cat-box">
                                 <a href="#">
-                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                    <p class="">Surat</p>
-                                    
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                        <p class="">Surat</p>
+                                    </div>                                    
                                 </a>
                             </div>
                         </div>

@@ -28,3 +28,4 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
+

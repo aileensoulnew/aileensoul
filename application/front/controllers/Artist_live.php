@@ -29,17 +29,8 @@ class Artist_live extends MY_Controller {
 
     public function index() {
         $userid = $this->session->userdata('aileenuser');
-        $contition_array = array('user_id' => $userid, 'status' => '0');
-        $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-         // print_r($contition_array);
-         // exit;
-        //echo "<pre>"; print_r($artresult); die();
-        $this->data['isartistactivate'] = false;
-        if ($artresult) {
-            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
-            $this->data['isartistactivate'] = true;
-            // $this->load->view('artist_live/reactivate', $this->data);
-        } 
+        $artresult = $this->checkisartistdeactivate();
+        
         // else {
             if($this->artist_profile_set==1 && !$artresult){
                 redirect($this->artist_profile_link);
@@ -49,7 +40,6 @@ class Artist_live extends MY_Controller {
             $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
             $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
             $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-            $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
             $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
@@ -63,6 +53,7 @@ class Artist_live extends MY_Controller {
 
     public function category() {
         $userid = $this->session->userdata('aileenuser');
+        $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -79,6 +70,7 @@ class Artist_live extends MY_Controller {
 
     public function categoryArtistList($category = '') {
         $userid = $this->session->userdata('aileenuser');
+        $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -97,6 +89,7 @@ class Artist_live extends MY_Controller {
 
     public function artist_search() {
         $userid = $this->session->userdata('aileenuser');
+        $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -1596,4 +1589,18 @@ class Artist_live extends MY_Controller {
         }
     }
 
+    // Check artistic is active or not..
+    function checkisartistdeactivate(){
+        $userid = $this->session->userdata('aileenuser');
+        $contition_array = array('user_id' => $userid, 'status' => '0');
+        $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->data['isartistactivate'] = false;
+        if ($artresult) {
+            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+            $this->data['isartistactivate'] = true;
+            // $this->load->view('artist_live/reactivate', $this->data);
+        } 
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        return $artresult;
+    }
 }
