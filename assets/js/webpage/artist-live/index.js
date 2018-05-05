@@ -3,7 +3,7 @@ app.controller('artistController', function ($scope, $http) {
     $scope.artistCategory = {};
     
     function artistCategory(){
-        $http.get(base_url + "artist_live/artistCategory?limit=9").then(function (success) {
+        $http.get(base_url + "artist_live/artistCategory?limit=8").then(function (success) {
             $scope.artistCategory = success.data;
         }, function (error) {});
     }
