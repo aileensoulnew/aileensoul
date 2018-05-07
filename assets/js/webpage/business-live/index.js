@@ -1,6 +1,7 @@
 app.controller('businessController', function ($scope, $http) {
     $scope.title = title;
     $scope.businessCategory = {};
+    $scope.locationCategory = {};
     
     function businessCategory(){
         $http.get(base_url + "business_live/businessCategory?limit=8").then(function (success) {
@@ -14,6 +15,14 @@ app.controller('businessController', function ($scope, $http) {
         }, function (error) {});
     }
     otherCategoryCount();
+   
+    //  GET ALL LOCATION OF BUSINESS
+    function businessLocation(){
+        $http.get(base_url + "business_live/businessLocation?limit=8").then(function (success) {
+            $scope.businessLocation = success.data;
+        }, function (error) {});
+    }
+    businessLocation();
 });
 
 $(window).on("load", function () {

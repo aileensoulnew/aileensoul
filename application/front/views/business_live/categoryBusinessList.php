@@ -14,6 +14,10 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="profile-main-page">
+        <!-- SET BLANK VALUE IF VAR. NOT SET FROM CONTROLLER -->
+        <?php $location_id = (isset($location_id)) ? $location_id : ''; ?>
+        <?php $category_id = (isset($category_id)) ? $category_id : ''; ?>
+
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php if($business_profile_set == 0 && $business_profile_set == '0'){ echo $search_banner; } ?>
@@ -27,10 +31,20 @@
                             <li ng-repeat="category in businessCategory">
                                 <label class=""><a href="<?php echo base_url('business-profile/category/') ?>{{category.industry_slug}}">{{category.industry_name}}<span class="pull-right">({{category.count}})</span></a></label>
                             </li>
-                            <li>
-                                <label class=""><a href="<?php echo base_url('business-profile/category/other') ?>">Other<span class="pull-right">({{otherCategoryCount}})</span></a></label>
+                        </ul>
+                        <p class="text-right p10"><a href="<?php echo base_url('business-profile/category') ?>">More Categories</a></p>
+                    </div>
+                    <!-- TOP Location -->
+                    <div class="left-search-box list-type-bullet">
+                        <div class="">
+                            <h3>Top Location</h3>
+                        </div>
+                        <ul class="search-listing custom-scroll">
+                            <li ng-repeat="location in businessLocation">
+                                <label class=""><a href="<?php echo base_url('business-profile/location/') ?>{{location.slug}}">{{location.city_name}}<span class="pull-right">({{location.count}})</span></a></label>
                             </li>
                         </ul>
+                        <p class="text-right p10"><a href="<?php echo base_url('business-profile/location') ?>">More Location</a></p>
                     </div>
 
                     <div class="custom_footer_left fw">
@@ -117,14 +131,15 @@
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
-                                    var base_url = '<?php echo base_url(); ?>';
-                                    var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                    var title = '<?php echo $title; ?>';
-                                    var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                    var category_id = '<?php echo $category_id; ?>';
-                                    var q = '';
-                                    var l = '';
-                                    var app = angular.module('businessListApp', ['ui.bootstrap']);
+            var base_url = '<?php echo base_url(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var title = '<?php echo $title; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var category_id = '<?php echo $category_id; ?>';
+            var location_id = '<?php echo $location_id; ?>';
+            var q = '';
+            var l = '';
+            var app = angular.module('businessListApp', ['ui.bootstrap']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>

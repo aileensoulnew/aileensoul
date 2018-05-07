@@ -303,4 +303,45 @@ class Business_model extends CI_Model {
         return $result_array;        
     }
 
+    // Get city id form city name
+    function getlocationdatafromname($location = ''){
+        $sql = "SELECT group_concat(city_id) as city_id FROM `ailee_cities` WHERE `city_name` = '". $location ."'";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    // Get all location of business
+    function businessLocation($limit = '') {
+        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug 
+                FROM ailee_cities ac 
+                LEFT JOIN ailee_business_profile bp ON bp.city = ac.city_id
+                WHERE ac.status = '1' AND bp.status = '1' AND bp.is_deleted = '0' 
+                AND bp.business_step = '4' 
+                GROUP BY bp.city 
+                ORDER BY count DESC"; 
+
+        if($limit != ''){
+            $sql .= " LIMIT ". $limit;
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    // Get Location List based on city id
+    function businessListByLocation($id = '0') {
+        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.business_slug, bp.other_industrial, 
+            bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, 
+            cr.country_name as country 
+            FROM ailee_business_profile bp 
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4' and
+            bp.city = '" . $id ."'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
 }

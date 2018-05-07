@@ -191,6 +191,9 @@ $route['business-profile/signup/edit/image'] = "business_profile_registration/im
 
 $route['business_profile/reactivate'] = "business_profile_live/reactivate";
 
+$route['business-profile/location'] = "business_live/location";
+$route['business-profile/location/(:any)'] = "business_live/locationBusinessList/$1";
+
 
 $route['message/b/(:any)'] = "message/business_profile/$1";
 $route['message/rj/(:any)'] = "recmessage/recjob/$1";

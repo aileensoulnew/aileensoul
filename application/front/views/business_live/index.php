@@ -58,89 +58,19 @@
                         <h2>Business by Location</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3" ng-repeat="location in businessLocation">
                             <div class="all-cat-box">
-                                <a href="#">
+                                <a ng-href="<?php echo base_url('business-profile/location/') ?>{{location.slug}}">
                                     <div class="cus-cat-middle">
                                         <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Ahmedabad</p>
+                                        <p ng-bind="location.city_name"></p>
                                     </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Delhi</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Mumbai</p>      
-                                    </div>                              
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Bangalore</p>   
-                                    </div>                                 
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Mohali</p>     
-                                    </div>                               
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Punjab</p>     
-                                    </div>                               
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Rajkot</p>     
-                                    </div>                               
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
-                                        <p class="">Surat</p>      
-                                    </div>                              
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
-                        <p class="p20 text-center"><a href="#" class="btn-1">View More</a></p>
+                        <p class="p20 text-center"><a ng-href="<?php echo base_url('business-profile/location') ?>" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>
