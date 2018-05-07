@@ -424,21 +424,19 @@
             var data1 = <?php echo json_encode($city_data); ?>;
             var complex = <?php echo json_encode($selectdata); ?>;
             var textarea = document.getElementById("textarea");
-             var no_artistic_post_html = '<?php echo $no_artistic_post_html ?>';
+            var no_artistic_post_html = '<?php echo $no_artistic_post_html ?>';
         </script>
         <script>
-             var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <?php
             if (IS_ART_JS_MINIFY == '0') { ?>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/home.js?ver='.time()); ?>"></script>
+        <!-- <script type="text/javascript" src="<?php // echo base_url('assets/js/webpage/artist/home.js?ver='.time()); ?>"></script> -->
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
         <?php }else{?>
-
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/home.js?ver='.time()); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
         <?php }?>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/home.js?ver='.time()); ?>"></script>
     </body>
 </html>
 

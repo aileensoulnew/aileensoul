@@ -91,23 +91,23 @@
                         <fieldset>
                            <label >First Name <font  color="red">*</font> :</label>                          
                            <input type="text" name="firstname" id="firstname" tabindex="1" placeholder="Enter first name" style="text-transform: capitalize;" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value" value="<?php echo $userdata['first_name']; ?>" maxlength="35">
-                           <?php echo form_error('firstname');; ?>
+                           <?php echo form_error('firstname'); ?>
                         </fieldset>
                         <fieldset>
                            <label >Last Name <font  color="red">*</font>:</label>
                            <input type="text" name="lastname" id="lastname" tabindex="2" placeholder="Enter last name" style="text-transform: capitalize;" onfocus="this.value = this.value;" value="<?php echo $userdata['last_name']; ?>" maxlength="35">
-                           <?php echo form_error('lastname');; ?>
+                           <?php echo form_error('lastname'); ?>
                         </fieldset>
                         <fieldset class="vali_er">
                            <label >Email Address <font  color="red">*</font> :</label>
                            <input type="email" name="email" id="email" tabindex="3" placeholder="Enter email address" value="<?php echo $userdata['email'];?>" maxlength="255">
                             <span class="email_note"><b>Note:-</b> Related notification email will be send on provided email address kindly use regular  email address.<div></div></span>
-                           <?php echo form_error('email');; ?>
+                           <?php echo form_error('email'); ?>
                         </fieldset>
                         <fieldset>
                            <label >Phone number:</label>
                            <input type="text" name="phoneno" id="phoneno" tabindex="4" placeholder="Enter phone number" value="<?php echo $job[0]['user_email'];?>" maxlength="255">
-                           <?php echo form_error('phoneno');; ?>
+                           <?php echo form_error('phoneno'); ?>
                         </fieldset>
 
 

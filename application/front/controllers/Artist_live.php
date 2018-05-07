@@ -851,7 +851,7 @@ class Artist_live extends MY_Controller {
         }
     }
 
-// end of user lidt
+    // end of user lidt
 
 
     public function ajax_following($id = "") {
@@ -1603,4 +1603,69 @@ class Artist_live extends MY_Controller {
         $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
         return $artresult;
     }
+
+    // GET TOP LOCATION OF ARTIST 
+    public function gettoploactionofartist(){
+        $limitstart = $_POST['limitstart'];
+        $limit = $_POST['limit'];
+        $result = $this->artistic_model->gettoplocationsofartist($limitstart,$limit);
+        echo json_encode($result);
+    }
+
+    // OPEN ALL LOCATION VIEW
+    public function location() {
+        $userid = $this->session->userdata('aileenuser');
+        $artresult = $this->checkisartistdeactivate();
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Categories - Artist Profile | Aileensoul";
+        $this->data['page'] = "location";
+
+        $this->load->view('artist_live/category', $this->data);
+    }
+
+    // GET RESULT OF PERTICULAR LOCATION ARTIST LIST
+    public function locationArtistList($location = '') {
+        $userid = $this->session->userdata('aileenuser');
+        $artresult = $this->checkisartistdeactivate();
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+        // echo $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
+        $locationdata = $this->artistic_model->getidfromnameoflocation($location);
+
+        // echo $locationdata['city_id'];
+        
+        $this->data['location_id'] = $locationdata['city_id'];
+        $this->load->view('artist_live/categoryArtistList', $this->data);
+    }
+
+    // GET ARTIST LIST BASED ON LOCATION
+    public function artistListByLocation($id = '0') {
+        $artistListByLocation = $this->artistic_model->artistListByLocation($id);
+        echo json_encode($artistListByLocation);
+    }
+
+    public function artistAllLocation() {
+        $limit = $_GET['limit'];
+        $artistAllLocation = $this->artistic_model->artistAllLocation($limit);
+        echo json_encode($artistAllLocation);
+    }
+
 }

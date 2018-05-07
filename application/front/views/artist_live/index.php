@@ -163,7 +163,7 @@
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
                         <div class="col-md-3" ng-repeat="category in artistCategory">
                             <div class="all-cat-box">
-                                <a href="<?php echo base_url('artist/') ?>{{category.category_slug}}"">
+                                <a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">
                                     <div class="cus-cat-middle">
                                         <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                         <p ng-bind="category.art_category | capitalize">Actor</p>
@@ -185,89 +185,19 @@
                         <h2>Artist by Location</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3" ng-repeat="location in topLocationData">
                             <div class="all-cat-box">
-                                <a href="#">
+                                <a href="<?php echo base_url('artist/location/') ?>{{location.city_name}}">
                                     <div class="cus-cat-middle">
                                         <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Ahmedabad</p>
+                                        <p ng-bind="location.city_name | capitalize"></p>
                                     </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Delhi</p>
-                                    </div>                                    
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Mumbai</p>
-                                    </div>                                    
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Bangalore</p>
-                                    </div>                                    
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Mohali</p>
-                                    </div>                                    
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Punjab</p>
-                                    </div>                                    
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Rajkot</p>
-                                    </div>                                    
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                        <p class="">Surat</p>
-                                    </div>                                    
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
-                        <p class="p20 text-center"><a href="#" class="btn-1">View More</a></p>
+                        <p class="p20 text-center"><a href="<?php echo base_url('artist/location') ?>" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>

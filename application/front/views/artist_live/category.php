@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="profile-main-page">
+        <?php $page = (isset($page)) ? $page : ''; ?>
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php echo $search_banner; ?>
@@ -26,17 +27,17 @@
                         <div class="">
                             <div class="">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#artist-categories" data-toggle="tab"><span class="hidden-xs">Artist by</span> Categories</a></li>
-                                    <li><a href="#artist-location" data-toggle="tab"><span class="hidden-xs">Artist by</span> Location</a></li>
+                                    <li class="<?php if($page == '' || !$page) echo 'active'; ?>"><a href="#artist-categories" data-toggle="tab"><span class="hidden-xs">Artist by</span> Categories</a></li>
+                                    <li class="<?php if($page == 'location') echo 'active'; ?>"><a href="#artist-location" data-toggle="tab"><span class="hidden-xs">Artist by</span> Location</a></li>
                                 </ul>
                             </div>
                             <div class="all-detail-box">
                                 <div class="tab-content">
-                                    <div class="tab-pane fade in active" id="artist-categories">
+                                    <div class="tab-pane fade in <?php if($page == '' || !$page) echo 'active'; ?>" id="artist-categories">
                                         <div class="cat-box">
                                             <ul data-aos="fade-up" data-aos-duration="1000">
                                                 <li ng-repeat="category in artistAllCategory">
-                                                    <a href="<?php echo base_url('artist/') ?>{{category.category_slug}}">
+                                                    <a href="<?php echo base_url('artist/category') ?>{{category.category_slug}}">
                                                         <div class="cus-cat-middle">
                                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                                             <p ng-bind="category.art_category | capitalize"></p>
@@ -54,31 +55,15 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade in " id="artist-location">
+                                    <div class="tab-pane fade in <?php if($page == 'location') echo 'active'; ?>" id="artist-location">
                                         <div class="location-box">
                                             <ul data-aos="fade-up" data-aos-duration="1000">
-                                                <li>
-                                                    <a href="">
-                                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                                        <p>Ahmedabad</p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="">
-                                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                                        <p>Indore</p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="">
-                                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                                        <p>Mumbai</p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="">
-                                                        <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                                        <p>Bangalore</p>
+                                                <li ng-repeat="location in artistAllLocation">
+                                                    <a href="<?php echo base_url('artist/location/') ?>{{location.location_slug}}">
+                                                        <div class="cus-cat-middle">
+                                                            <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                                            <p ng-bind="location.art_location | capitalize"></p>
+                                                        </div>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -104,7 +89,7 @@
                         <div class="cat-box">
                             <ul>
                                 <li ng-repeat="category in artistAllCategory">
-                                    <a href="<?php echo base_url('artist/') ?>{{category.category_slug}}">
+                                    <a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">
                                         <img src="<?php echo base_url('assets/n-images/car.png') ?>">
                                         <p><span ng-bind="category.art_category | capitalize"></span><span ng-bind="'(' + category.count + ')'"></span><p>
 

@@ -304,4 +304,60 @@ class Artistic_model extends CI_Model {
         return $result_array;
     }
     
+    // GET TOP LOCATION OF ARTIST
+    public function gettoplocationsofartist($limitstart, $limit){
+        $limitstart = ($limitstart) ? $limitstart : 0;
+        $limit = ($limit) ? $limit : 8;
+        $sql = "select count(*) as count, ac.city_name 
+                    from ailee_art_reg as ar
+                    left join ailee_cities as ac on ac.city_id = ar.art_city
+                    where city_name IS NOT NULL and ar.status = 1 
+                    group by art_city
+                    order by count desc LIMIT ". $limitstart .",". $limit;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    // GET ID OF LOCATION ARTIST
+    public function getidfromnameoflocation($city_name = ''){
+        $sql = "SELECT group_concat(city_id) as city_id FROM `ailee_cities` WHERE `city_name` = '". $city_name ."'";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    function artistListByLocation($id = '') {
+        $sql = "SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, 
+                CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, ar.art_desc_art, 
+                ar.user_id, ct.city_id, ct.city_name as city, cr.country_name as country 
+                FROM ailee_art_reg as ar  
+                LEFT JOIN ailee_cities as ct ON ct.city_id = ar.art_city 
+                LEFT JOIN ailee_countries as cr ON cr.country_id = ar.art_country 
+                WHERE ar.art_city IN ($id) AND ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'";
+        
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        // foreach ($result_array as $key => $value) {
+        //     $user_id = $value['user_id'];
+        //     $new_slug = $this->get_artistic_slug($user_id);
+        //     $result_array[$key]['slug'] = $new_slug;
+        // }
+        return $result_array;
+    }
+
+    function artistAllLocation($limit = '') {
+
+        $sql = "select ar.art_city as location_id,ac.city_name as art_location,ac.slug as location_slug, count(ar.art_id) as total
+            from ailee_art_reg as ar
+            left join ailee_cities as ac on ac.city_id = ar.art_city
+            where ar.status = 1 and ar.art_step = 4 and ar.is_delete = '0' and ac.city_name IS NOT NULL 
+            group by ar.art_city order by total desc";
+        if($limit != ''){
+            $sql .= " LIMIT " . $limit;
+        }
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
 }

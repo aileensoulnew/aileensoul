@@ -11228,7 +11228,6 @@ class Artist extends MY_Controller {
 
 // userlist fatch using ajax start
     public function art_home_three_user_list() {
-
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
 

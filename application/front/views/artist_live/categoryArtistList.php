@@ -16,23 +16,37 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="profile-main-page">
+        <!-- SET BLANK IF VAR NOT DECLARE FROM CONTROLLER -->
+        <?php $location_id = (isset($location_id)) ? $location_id : '' ?>
+        <?php $category_id = (isset($category_id)) ? $category_id : '' ?>
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php echo $search_banner; ?>
-            <div class="container">
+            <div class="container pt20">
                 <div class="left-part">
+                    <!-- TOP CATEGORIES FILTER -->
                     <div class="left-search-box list-type-bullet">
                         <div class="">
                             <h3>Top Categories</h3>
                         </div>
                         <ul class="search-listing">
                             <li ng-repeat="category in artistCategory">
-                                <label class=""><a href="<?php echo base_url('artist/') ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
-                            </li>
-                            <li>
-                                <label class=""><a href="<?php echo base_url('artist/other') ?>">Other<span class="pull-right">({{otherCategoryCount}})</span></a></label>
+                                <label class=""><a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
                             </li>
                         </ul>
+                        <p class="text-right p10"><a href="<?php echo base_url('artist/category') ?>">More Categories</a></p>
+                    </div>
+
+                    <div class="left-search-box list-type-bullet">
+                        <div class="">
+                            <h3>Top Locations</h3>
+                        </div>
+                        <ul class="search-listing">
+                            <li ng-repeat="location in artistLocation">
+                                <label class=""><a href="<?php echo base_url('artist/location/') ?>{{location.location_slug}}">{{location.art_location | capitalize}}<span class="pull-right">({{location.total}})</span></a></label>
+                            </li>
+                        </ul>
+                        <p class="text-right p10"><a href="<?php echo base_url('artist/location') ?>">More Categories</a></p>
                     </div>
 
                     <div class="custom_footer_left fw">
@@ -118,14 +132,15 @@
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
-                                    var base_url = '<?php echo base_url(); ?>';
-                                    var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                    var title = '<?php echo $title; ?>';
-                                    var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                    var category_id = '<?php echo $category_id; ?>';
-                                    var q = '';
-                                    var l = '';
-                                    var app = angular.module('artistListApp', ['ui.bootstrap']);
+            var base_url = '<?php echo base_url(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var title = '<?php echo $title; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var category_id = '<?php echo $category_id; ?>';
+            var location_id = '<?php echo $location_id; ?>';
+            var q = '';
+            var l = '';
+            var app = angular.module('artistListApp', ['ui.bootstrap']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>

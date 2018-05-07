@@ -297,7 +297,7 @@ $route['artist/following'] = "artist_live/userlist";
 
 $route['artist/category'] = "artist_live/category";
 // $route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
-$route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
+$route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
 $route['artist/search'] = "artist_live/artist_search";
 
 $route['artist/artistic-basic-information-insert'] = "artist_live/art_basic_information_insert";
@@ -340,6 +340,11 @@ $route['artist/creat-pdf'] = "artist/creat_pdf";
 
 $route['artist/reactivate'] = "artist_live/reactivate";
 $route['artist/reactivateacc'] = "artist_live/reactivateacc";
+
+
+$route['artist/location'] = "artist_live/location";
+$route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";
+
 
 //BLOG ROUTES SETTINGS
 //$route['blog/popular'] = "blog/popular";

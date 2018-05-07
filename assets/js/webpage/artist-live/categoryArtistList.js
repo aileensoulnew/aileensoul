@@ -1,8 +1,9 @@
 app.controller('artistListController', function ($scope, $http) {
     $scope.title = title;
     $scope.artistCategory = {};
+    $scope.artistLocation = {};
     function artistCategory(){
-        $http.get(base_url + "artist_live/artistCategory?limit=24").then(function (success) {
+        $http.get(base_url + "artist_live/artistCategory?limit=5").then(function (success) {
             $scope.artistCategory = success.data;
         }, function (error) {});
     }
@@ -13,13 +14,33 @@ app.controller('artistListController', function ($scope, $http) {
         }, function (error) {});
     }
     otherCategoryCount();
+
+    // ARTIST CITY FILTER
+    function artistLocation(){
+        $http.get(base_url + "artist_live/artistAllLocation?limit=5").then(function (success) {
+            $scope.artistLocation = success.data;
+        }, function (error) {});
+    }
+    artistLocation();
+    // Category wise artist list
     function categoryArtistList(){
         $http.get(base_url + "artist_live/artistListByCategory/" + category_id).then(function (success) {
             $scope.ArtistList = success.data;
         }, function (error) {});
     }
-    categoryArtistList();
-    
+
+    // Location  artist list
+    function locationwiseArtistList(){
+        $http.get(base_url + "artist_live/artistListByLocation/" + location_id).then(function (success) {
+            $scope.ArtistList = success.data;
+        }, function (error) {});
+    }
+
+    if(location_id == "" || !location_id){
+        categoryArtistList();
+    }else{
+        locationwiseArtistList();
+    }
 });
 
 $(window).on("load", function () {
