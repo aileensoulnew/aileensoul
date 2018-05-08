@@ -37,7 +37,7 @@
                                         <div class="cat-box">
                                             <ul data-aos="fade-up" data-aos-duration="1000">
                                                 <li ng-repeat="category in artistAllCategory">
-                                                    <a href="<?php echo base_url('artist/category') ?>{{category.category_slug}}">
+                                                    <a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">
                                                         <div class="cus-cat-middle">
                                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                                             <p ng-bind="category.art_category | capitalize"></p>

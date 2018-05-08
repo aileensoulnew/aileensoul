@@ -5,7 +5,7 @@
 //});
 app.filter('capitalize', function () {
     return function (str) {
-        if (str === undefined) {
+        if (str === undefined || !str || str == null) {
             return false;
         }
         return str.split(" ").map(function (input) {

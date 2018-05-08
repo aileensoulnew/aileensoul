@@ -31,7 +31,15 @@
                         </div>
                         <ul class="search-listing">
                             <li ng-repeat="category in artistCategory">
-                                <label class=""><a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
+                                <label class="">
+                                    <!-- <a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}"> -->
+                                    <p class="pull-left" style="width: 45px;">
+                                        <input class="categorycheckbox" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                    </p>
+                                    <p class="pull-left">{{category.art_category | capitalize}}</p>
+                                    <p class="pull-right">({{category.count}})</p>
+                                    <!-- </a> -->
+                                </label>
                             </li>
                         </ul>
                         <p class="text-right p10"><a href="<?php echo base_url('artist/category') ?>">More Categories</a></p>
@@ -40,10 +48,18 @@
                     <div class="left-search-box list-type-bullet">
                         <div class="">
                             <h3>Top Locations</h3>
-                        </div>
-                        <ul class="search-listing">
+                        </div>                        
+                        <ul class="search-listing" style="list-style: none;">
                             <li ng-repeat="location in artistLocation">
-                                <label class=""><a href="<?php echo base_url('artist/location/') ?>{{location.location_slug}}">{{location.art_location | capitalize}}<span class="pull-right">({{location.total}})</span></a></label>
+                                <label class="pointer">
+                                    <p class="pull-left" style="width: 45px;">
+                                        <input class="locationcheckbox" type="checkbox" name="{{location.art_location}}" value="{{location.location_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+                                    </p>
+                                    <p class="pull-left">
+                                        {{location.art_location | capitalize}}
+                                    </p>
+                                    <p class="pull-right">({{location.total}})</p>
+                                </label>
                             </li>
                         </ul>
                         <p class="text-right p10"><a href="<?php echo base_url('artist/location') ?>">More Categories</a></p>
@@ -146,4 +162,4 @@
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/categoryArtistList.js?ver=' . time()) ?>"></script>
     </body>
-</html>
+</html> 

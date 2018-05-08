@@ -1668,4 +1668,11 @@ class Artist_live extends MY_Controller {
         echo json_encode($artistAllLocation);
     }
 
+    public function artistListByFilter() {
+        $category_id = $_POST['category_id'];
+        $location_id = $_POST['location_id'];
+        $artistListByFilter = $this->artistic_model->artistListByFilter($category_id,$location_id);
+        echo json_encode($artistListByFilter);
+    }
+
 }

@@ -360,4 +360,29 @@ class Artistic_model extends CI_Model {
         $result = $query->result_array();
         return $result;
     }
+
+    function artistListByFilter($category_id = '', $location_id = '', $limit = '') {
+        // $limit = ($limit == '') ? 5 : $limit;
+        $sql = "SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, ac.art_category, CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, ar.art_desc_art, 
+                ar.user_id, ct.city_id, ct.city_name as city, cr.country_name as country 
+                FROM ailee_art_reg as ar 
+                LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill  
+                LEFT JOIN ailee_cities as ct ON ct.city_id = ar.art_city 
+                LEFT JOIN ailee_countries as cr ON cr.country_id = ar.art_country 
+                WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'";
+        if($category_id != ''){
+            $sql .= " AND ar.art_skill IN (". $category_id .")";
+        }   
+        
+        if($location_id != ''){
+            $sql .= " AND ar.art_city IN (". $location_id .")";
+        }
+        if($limit){
+            $sql .= " Limit ". $limit;   
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+
+        return $result_array;
+    }
 }
