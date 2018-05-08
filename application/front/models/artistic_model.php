@@ -116,7 +116,7 @@ class Artistic_model extends CI_Model {
         return $result_array['category_id'];
     }
 
-    function searchArtistData($keyword = '', $location = '') {
+    function searchArtistData2($keyword = '', $location = '') {
         $keyword = str_replace('%20', ' ', $keyword);
         $location = str_replace('%20', ' ', $location);
 
@@ -142,6 +142,8 @@ class Artistic_model extends CI_Model {
 
         $query = $this->db->get();
         $result_array = $query->result_array();
+        echo $this->db->last_query();
+        exit;
         foreach ($result_array as $key => $value) {
             $user_id = $value['user_id'];
             $new_slug = $this->get_artistic_slug($user_id);
@@ -384,5 +386,43 @@ class Artistic_model extends CI_Model {
         $result_array = $query->result_array();
 
         return $result_array;
+    }
+
+
+    function searchArtistData($keyword = '', $location = ''){
+        $keyword = str_replace('%20', ' ', $keyword);
+        $location = str_replace('%20', ' ', $location);
+        $limit = 10;
+        $sql = " SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, 
+            CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, 
+            ar.art_desc_art, ar.user_id, ac.art_category, 
+             ct.city_name as city, cr.country_name as country
+            FROM ailee_art_reg ar
+            LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill
+            LEFT JOIN ailee_cities ct ON ct.city_id = ar.art_city
+            LEFT JOIN ailee_countries cr ON cr.country_id = ar.art_country
+            LEFT JOIN ailee_states s ON s.state_name = ar.art_state
+            WHERE 
+            ar.status = '1'
+            AND ar.is_delete = '0'
+            AND ar.art_step = '4'";    
+
+            if($keyword != ""){
+                $sql .= " AND (ac.art_category LIKE 'act%' OR
+                    ar.other_skill LIKE '" . $keyword ."%')";     
+            }
+
+            if($location != ""){
+                $sql .= " AND (ct.city_name LIKE '". $location ."%'
+                    OR cr.country_name LIKE '". $location ."%'
+                    OR s.state_name LIKE '". $location ."%')";     
+            }
+            if($limit){
+                $sql .= " LIMIT ". $limit;
+            }
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
+            return $result_array;
+
     }
 }

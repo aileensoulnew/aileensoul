@@ -303,6 +303,8 @@ $route['artist/category'] = "artist_live/category";
 $route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
 $route['artist/search'] = "artist_live/artist_search";
 
+$route['artist/search/(:any)'] = "artist_live/artist_search/$1";
+
 $route['artist/artistic-basic-information-insert'] = "artist_live/art_basic_information_insert";
 $route['artist/artistic-information-update'] = "artist_live/art_basic_information_update";
 

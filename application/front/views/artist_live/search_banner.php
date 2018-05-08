@@ -53,7 +53,7 @@
 
 
 
-	<div class="search-banner" >
+	<div class="search-banner" ng-controller="searchArtistController">
 
 		<div class="container">
 			<div class="text-right pt20">
@@ -69,13 +69,14 @@
 						<h1>Search and Connect with the Best Talented Artist from All over the World</h1>
 					</div>
 					<div class="search-box">
-						<form>
+						<form ng-submit="searchSubmit()">
 							<div class="pb20 search-input">
 								<input type="text" ng-model="keyword" id="q" name="q" placeholder="Search by Category and Keyword" autocomplete="off">
 								<input type="text" ng-model="city" id="l" name="l" placeholder="City, State or Country" autocomplete="off" class="city-input">
 							</div>
 							<div class="fw pt20">
-								<a href="#" class="btn1">Search</a>
+								<input type="submit" name="searchSubmit" class="btn1" value="Search" id="btnSubmit"/>
+								<!-- <a href="#" class="btn1">Search</a> -->
 							</div>
 						</form>
 					</div>

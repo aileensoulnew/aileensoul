@@ -111,6 +111,7 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -122,7 +123,7 @@
             var title = '<?php echo $title; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var q = '<?php echo $q; ?>';
-            var l = '<?php echo $l; ?>';
+            var l = '<?php echo $l; ?>';         
             var app = angular.module('artistSearchListApp', ['ui.bootstrap']);
         </script>   
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

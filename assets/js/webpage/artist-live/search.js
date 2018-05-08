@@ -20,7 +20,7 @@ app.controller('artistSearchListController', function ($scope, $http) {
         } else if (q == '' && l != '') {
             search_data_url = base_url + 'artist_live/searchArtistData?l=' + l;
         } else {
-            search_data_url = base_url + 'artist_live/searchArtistData?q=' + q + '&l=' + l;
+            search_data_url = base_url + 'artist_live/searchArtistData?q=' + q + '&l' + l;
         }
         
         $http.get(search_data_url).then(function (success) {

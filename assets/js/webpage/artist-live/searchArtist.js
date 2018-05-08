@@ -2,7 +2,7 @@ app.controller('searchArtistController', function ($scope, $window) {
     $scope.keyword = q;
     $scope.city = l;
     $scope.searchSubmit = function () {
-
+        
         var keyword = $scope.keyword.toLowerCase().split(' ').join('+');
         var city = $scope.city.toLowerCase().split(' ').join('+');
 
@@ -13,7 +13,7 @@ app.controller('searchArtistController', function ($scope, $window) {
         } else if (keyword == '' && city != '') {
             $window.location.href = base_url + 'artist/search?l=' + city;
         } else {
-            $window.location.href = base_url + 'artist/search?q=' + keyword + '&l=' + city;
+            $window.location.href = base_url + 'artist/search/' + keyword + '-in-' + city;
         }
     }
 });
