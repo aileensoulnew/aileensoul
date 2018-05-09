@@ -1260,7 +1260,8 @@ header.profile-header .logo a{color:#5c5c5c;}
 .job-top-detail h5 a span{font-weight:normal;}
 .job-top-detail h5 a:hover{border-bottom:none;}
 .content-img img{width:80%;}
-.content-bnr{max-height:350px; overflow:hidden; margin:90px 0 0; background:url('../n-images/img2.jpg'); background-attachment:fixed; height:350px;}
+.content-bnr{max-height:350px; overflow:hidden; margin:90px 0 0; background:url('../n-images/img2.jpg'); background-attachment:fixed; height:350px; background-size:100%;}
+.content-bnr.art-bnr-prlx{background:url('../n-images/art-img.jpg'); background-attachment:fixed; background-size:100%;}
 .content-bnr img{width:100%;}
 .content-bnr .bnr-box{position:relative;}
 .content-bnr .content-bnt-text{position:absolute; text-align:center; width:100%; padding:100px 0; color:#fff; top:0px;}
@@ -1364,7 +1365,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 }
 .right-bnr {text-align:center;}
-.right-bnr img{/*width:100%;*/}
+.right-bnr img{width:70%; margin-left:70px;}
 .banner-left img{/*width:100%;*/}
  
 /***  end profile main page  ***/
