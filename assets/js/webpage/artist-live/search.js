@@ -25,8 +25,9 @@ app.controller('artistSearchListController', function ($scope, $http) {
         } else {
             search_data_url = base_url + 'artist_live/searchArtistData?q=' + q + '&l=' + l;
         }
-        
+        $("#loader").removeClass("hidden");
         $http.get(search_data_url).then(function (success) {
+            $("#loader").addClass("hidden");
             $scope.artistList = success.data;
         }, function (error) {});
     }

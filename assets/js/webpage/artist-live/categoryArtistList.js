@@ -38,6 +38,7 @@ app.controller('artistListController', function ($scope, $http) {
     function categoryArtistList(){
         $http.get(base_url + "artist_live/artistListByCategory/" + category_id).then(function (success) {
             $scope.ArtistList = success.data;
+            $("#loader").addClass("hidden");
         }, function (error) {});
     }
 
@@ -45,12 +46,15 @@ app.controller('artistListController', function ($scope, $http) {
     function locationwiseArtistList(){
         $http.get(base_url + "artist_live/artistListByLocation/" + location_id).then(function (success) {
             $scope.ArtistList = success.data;
+            $("#loader").addClass("hidden");
         }, function (error) {});
     }
 
     if(location_id == "" || !location_id){
+        $("#loader").removeClass("hidden");
         categoryArtistList();
     }else{
+        $("#loader").removeClass("hidden");
         locationwiseArtistList();
     }
     $scope.getfilterartistdata = function(){
@@ -81,13 +85,14 @@ app.controller('artistListController', function ($scope, $http) {
         var datavalue = new FormData();
         datavalue.append('category_id', category);
         datavalue.append('location_id', location);
-
+        $("#loader").removeClass("hidden");
         filterajax = $http.post(base_url + "artist_live/artistListByFilter/", datavalue,
             {
                             transformRequest: angular.identity,
 
                             headers: {'Content-Type': undefined, 'Process-Data': false}
             }).then(function (success) {
+            $("#loader").addClass("hidden");
             $scope.ArtistList = success.data;
         }, function (error) {}
         , function (complete) { filterajax = false; });

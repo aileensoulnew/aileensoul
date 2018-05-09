@@ -111,8 +111,10 @@
                         </div>
                         <div class="art_no_post_text">No Result Found..</div>
                     </div>
-                    <div id="loader" style="display: none;" class="hidden">
-                        <p style="text-align:center;"><img alt="loader" class="loader" src="http://35.165.1.109:81/assets/images/loading.gif"></p>
+                    <div id="loader" class="hidden">
+                        <p style="text-align:center;">
+                            <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
+                        </p>
                     </div>
                 </div>
                 <div class="right-part">
