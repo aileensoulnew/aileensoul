@@ -142,8 +142,7 @@ class Artistic_model extends CI_Model {
 
         $query = $this->db->get();
         $result_array = $query->result_array();
-        echo $this->db->last_query();
-        exit;
+        
         foreach ($result_array as $key => $value) {
             $user_id = $value['user_id'];
             $new_slug = $this->get_artistic_slug($user_id);
@@ -349,7 +348,6 @@ class Artistic_model extends CI_Model {
     }
 
     function artistAllLocation($limit = '') {
-
         $sql = "select ar.art_city as location_id,ac.city_name as art_location,ac.slug as location_slug, count(ar.art_id) as total
             from ailee_art_reg as ar
             left join ailee_cities as ac on ac.city_id = ar.art_city
@@ -388,41 +386,88 @@ class Artistic_model extends CI_Model {
         return $result_array;
     }
 
-
+    // new artist search result
     function searchArtistData($keyword = '', $location = ''){
-        $keyword = str_replace('%20', ' ', $keyword);
-        $location = str_replace('%20', ' ', $location);
-        $limit = 10;
-        $sql = " SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, 
-            CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, 
-            ar.art_desc_art, ar.user_id, ac.art_category, 
-             ct.city_name as city, cr.country_name as country
-            FROM ailee_art_reg ar
-            LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill
-            LEFT JOIN ailee_cities ct ON ct.city_id = ar.art_city
-            LEFT JOIN ailee_countries cr ON cr.country_id = ar.art_country
-            LEFT JOIN ailee_states s ON s.state_name = ar.art_state
-            WHERE 
-            ar.status = '1'
-            AND ar.is_delete = '0'
-            AND ar.art_step = '4'";    
-
-            if($keyword != ""){
-                $sql .= " AND (ac.art_category LIKE 'act%' OR
-                    ar.other_skill LIKE '" . $keyword ."%')";     
+        // $keyword = str_replace('%20', ' ', $keyword);
+        $keyword = urldecode($keyword);
+        // $location = str_replace('%20', ' ', $location);
+        $location = urldecode($location);
+        $sqlkeyword = "";
+        $sqllocation = "";
+        // If Category search
+        if($keyword != ""){
+            $keyworddata = explode(',', $keyword);
+            $sqlkeyword = " AND (";
+            foreach($keyworddata as $key => $val){
+                $val = $val.'%';
+                $sqlkeyword .= ($key == 0) ? "" : " OR ";
+                $sqlkeyword .= " ar.art_name LIKE '". $val ."' OR ar.art_lastname LIKE '". $val ."' OR CONCAT(ar.art_name, ' ',ar.art_lastname) LIKE '". $val ."' OR ac.art_category LIKE '". $val ."' OR
+                    ar.other_skill LIKE '" . $val ."'";
             }
+            $sqlkeyword .= ")";
+        }
 
-            if($location != ""){
-                $sql .= " AND (ct.city_name LIKE '". $location ."%'
-                    OR cr.country_name LIKE '". $location ."%'
-                    OR s.state_name LIKE '". $location ."%')";     
+        // IF LOCATION SEARCH
+        if($location != ""){
+            $locationdata = explode(',', $location);
+            $sqllocation = " AND (";
+            foreach($locationdata as $key => $val){
+                $val = $val.'%';
+                $sqllocation .= ($key == 0) ? "" : " OR ";
+                $sqllocation .= " ct.city_name LIKE '". $val ."'
+                    OR cr.country_name LIKE '". $val ."'
+                    OR s.state_name LIKE '". $val ."'";
             }
+            $sqllocation .= ")";
+        }
+
+        $limit = '';
+        $sql = "SELECT ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill,
+                CONCAT(ar.art_name,' ',ar.art_lastname) as fullname,ar.art_country,ar.art_city,
+                ar.art_desc_art,ar.user_id,ac.art_category,ct.city_name as city,cr.country_name as country
+                from ailee_art_reg ar
+                LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill 
+                LEFT JOIN ailee_art_other_category oc ON oc.other_category_id = ar.other_skill 
+                LEFT JOIN ailee_cities ct ON ct.city_id = ar.art_city 
+                LEFT JOIN ailee_countries cr ON cr.country_id = ar.art_country 
+                LEFT JOIN ailee_states s ON s.state_id = ar.art_state 
+                WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'"
+                . $sqlkeyword . $sqllocation;    
+
             if($limit){
                 $sql .= " LIMIT ". $limit;
             }
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
-            return $result_array;
 
+            foreach ($result_array as $key => $value) {
+                $user_id = $value['user_id'];
+                $new_slug = $this->get_artistic_slug($user_id);
+                $result_array[$key]['slug'] = $new_slug;
+            }
+            return $result_array;
     }
+
+     // new artist search suggetion
+    function artistic_search_keyword($keyword = '', $location = ''){
+        $keyword = urldecode($keyword) . '%';
+        $sql = "SELECT art_category as value FROM ailee_art_category 
+                WHERE status = '1' AND (art_category LIKE '". $keyword ."') 
+                GROUP BY art_category 
+                Union all
+                SELECT other_category as value FROM ailee_art_other_category 
+                WHERE status = '1' AND (other_category LIKE '". $keyword ."') 
+                GROUP BY other_category 
+                Union all
+                SELECT CONCAT(art_name, ' ',art_lastname) as value 
+                FROM ailee_art_reg 
+                WHERE status = '1' AND art_name LIKE '". $keyword ."' OR art_lastname LIKE '". $keyword ."' OR 
+                CONCAT(art_name, ' ',art_lastname) LIKE '". $keyword ."' 
+                GROUP BY CONCAT(art_name, ' ',art_lastname) 
+                ORDER BY value DESC";
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
+            return $result_array;
+    }
+
 }

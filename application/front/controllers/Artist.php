@@ -13667,7 +13667,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
     // for search function start
 
-    public function artistic_search_keyword($id = "") {
+    public function artistic_search_keywordasdsa($id = "") {
 
         $searchTerm = $_GET['term'];
         if (!empty($searchTerm)) {
@@ -13677,16 +13677,15 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
             $search_condition = "(art_name LIKE '" . trim($searchTerm) . "%' OR art_lastname LIKE '" . trim($searchTerm) . "%' OR designation LIKE '" . trim($searchTerm) . "%'OR other_skill LIKE '" . trim($searchTerm) . "%')";
             $artistic_postdata = $this->common->select_data_by_search('art_reg', $search_condition, $contition_array, $data = 'art_name,art_lastname,designation,other_skill', $sortby = 'art_name,art_lastname,designation,other_skill', $orderby = 'desc', $limit = '', $offset = '', $join_str5 = '', $groupby = 'art_name,art_lastname,designation,other_skill');
 
-
             $contition_array = array('status' => '1',);
             $search_condition = "(art_category LIKE '" . trim($searchTerm) . "%')";
             $skill = $this->common->select_data_by_search('art_category', $search_condition, $contition_array, $data = 'art_category', $sortby = 'art_category', $orderby = 'desc', $limit = '', $offset = '', $join_str5 = '', $groupby = 'art_category');
+
         }
 
         $contition_array = array('status' => '1');
         $search_condition = "(other_category LIKE '" . trim($searchTerm) . "%')";
         $other_category = $this->common->select_data_by_search('art_other_category', $search_condition, $contition_array, $data = 'other_category', $sortby = 'other_category', $orderby = 'desc', $limit = '', $offset = '', $join_str5 = '', $groupby = 'other_category');
-
 
         $unique = array_merge($skill, $other_category, $artistic_postdata);
         foreach ($unique as $key => $value) {
@@ -13702,7 +13701,6 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $result1 = array_values($result1);
 
         $result1 = array_unique($result1);
-
         echo json_encode($result1);
     }
 
@@ -13849,7 +13847,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $searchskill = trim($this->input->get('skills'));
         $this->data['keyword'] = $searchskill;
         $search_place = trim($this->input->get('searchplace'));
-//insert search keyword into data base code start
+        //insert search keyword into data base code start
         $cache_time = $this->db->select('city_id')->get_where('cities', array('city_name' => $search_place))->row()->city_id;
         $this->data['keyword1'] = $search_place;
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
@@ -13867,7 +13865,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
             $insert_id = $this->common->insert_data_getid($data, 'search_info');
         }
-//insert search keyword into data base code end
+        //insert search keyword into data base code end
         if ($searchskill == "") {
             $contition_array = array('art_city' => $cache_time, 'status' => '1', 'art_step' => '4');
             $new = $this->data['results'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -14027,7 +14025,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $searchskill = strtolower(trim($this->input->get('skills')));
         $this->data['keyword'] = $searchskill;
         $search_place = trim($this->input->get('searchplace'));
-//insert search keyword into data base code start
+            //insert search keyword into data base code start
 
         $cache_time = $this->db->select('city_id')->get_where('cities', array('city_name' => $search_place))->row()->city_id;
 
@@ -14046,7 +14044,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         );
 
         $insert_id = $this->common->insert_data_getid($data, 'search_info');
-//insert search keyword into data base code end
+        //insert search keyword into data base code end
 
         if ($searchskill == "") {
             $contition_array = array('art_city' => $cache_time, 'status' => '1', 'art_step' => '4');
@@ -14500,11 +14498,11 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
           </div>';
                     } elseif (in_array($ext, $allowespdf)) {
                         $return_html .= '<div>
-<a title = "click to open" href = "' . base_url('artist/pdf_display/' . $key['art_post_id']) . '" target="_blank" alt="' . $artmultiimage[0]['file_name'] . '"><div class = "pdf_img">
-    <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
-</div>
-</a>
-</div>';
+            <a title = "click to open" href = "' . base_url('artist/pdf_display/' . $key['art_post_id']) . '" target="_blank" alt="' . $artmultiimage[0]['file_name'] . '"><div class = "pdf_img">
+                <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
+            </div>
+            </a>
+            </div>';
                     } elseif (in_array($ext, $allowesvideo)) {
 
                         $post_poster = $artmultiimage[0]['file_name'];
@@ -15023,7 +15021,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $searchskill = trim($this->input->get('skills'));
         $this->data['keyword'] = $searchskill;
         $search_place = trim($this->input->get('searchplace'));
-//insert search keyword into data base code start
+        //insert search keyword into data base code start
 
         $cache_time = $this->db->select('city_id')->get_where('cities', array('city_name' => $search_place))->row()->city_id;
 
@@ -15032,7 +15030,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $this->data['city'] = $city = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_city', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-//insert search keyword into data base code end
+        //insert search keyword into data base code end
 
         if ($searchskill == "") {
             $contition_array = array('art_city' => $cache_time, 'status' => '1', 'art_step' => '4');
@@ -15535,18 +15533,18 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                         if ($userid) {
 
                             $return_html .= '<div>
-<a title = "click to open"  href="' . base_url('artist') . '" alt="' . $artmultiimage[0]['file_name'] . '"><div class = "pdf_img">
-    <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
-</div>
-</a>
-</div>';
+            <a title = "click to open"  href="' . base_url('artist') . '" alt="' . $artmultiimage[0]['file_name'] . '"><div class = "pdf_img">
+                <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
+            </div>
+            </a>
+            </div>';
                         } else {
                             $return_html .= '<div>
-<a title = "click to open"  href = "javascript:void(0)" target="_blank" onclick="register_profile();" alt="' . $artmultiimage[0]['file_name'] . '"><div class = "pdf_img">
-    <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
-</div>
-</a>
-</div>';
+            <a title = "click to open"  href = "javascript:void(0)" target="_blank" onclick="register_profile();" alt="' . $artmultiimage[0]['file_name'] . '"><div class = "pdf_img">
+                <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
+            </div>
+            </a>
+            </div>';
                         }
                     } elseif (in_array($ext, $allowesvideo)) {
 
@@ -16136,6 +16134,12 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $this->data['art_data'] = $art_data = $this->common->select_data_by_condition('post_files', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         //echo "<pre>"; print_r($this->data['title']); die();
         $this->load->view('artist/artist_pdf', $this->data);
+    }
+
+    public function artistic_search_keyword($id = "") {
+        $searchTerm = $_GET['term'];
+        $result1 = $this->artistic_model->artistic_search_keyword($searchTerm);
+        echo json_encode($result1);
     }
 
 }

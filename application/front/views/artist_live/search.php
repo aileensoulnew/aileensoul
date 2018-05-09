@@ -18,7 +18,7 @@
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php if($is_artist_profile_set == 0 || $is_artist_profile_set == '0'){ echo $search_banner; } ?>
-            <div class="container">
+            <div class="container pt20">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
                         <div class="">
@@ -26,11 +26,11 @@
                         </div>
                         <ul class="search-listing">
                             <li ng-repeat="category in artistCategory">
-                                <label class=""><a href="<?php echo base_url('artist/') ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
+                                <label class=""><a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
                             </li>
-                            <li>
-                                <label class=""><a href="<?php echo base_url('artist/other') ?>">Other<span class="pull-right">({{otherCategoryCount}})</span></a></label>
-                            </li>
+                            <!-- <li>
+                                <label class=""><a href="<?php //echo base_url('artist/other') ?>">Other<span class="pull-right">({{otherCategoryCount}})</span></a></label>
+                            </li> -->
                         </ul>
                     </div>
 
@@ -73,13 +73,17 @@
                 </div>
                 <div class="middle-part">
                     <div class="page-title">
-                        <h3>Search Result</h3>
+                        <h3>Search Result {{ searchtitle }} </h3>
                     </div>
                     <div class="all-job-box search-business" ng-repeat="artist in artistList">
                         <div class="search-business-top">
                             <div class="bus-cover no-cover-upload">
-                                <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="artist.profile_background"><img ng-src="<?php echo ART_BG_MAIN_UPLOAD_URL ?>{{artist.profile_background}}"></a>
-                                <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="!artist.profile_background"><img ng-src="<?php echo BASEURL . WHITEIMAGE ?>"></a>
+                                <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="artist.profile_background">
+                                    <img ng-src="<?php echo ART_BG_MAIN_UPLOAD_URL ?>{{artist.profile_background}}">
+                                </a>
+                                <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="!artist.profile_background">
+                                    <img ng-src="<?php echo BASEURL . WHITEIMAGE ?>">
+                                </a>
                             </div>
                             <div class="all-job-top">
                                 <div class="post-img">
@@ -100,6 +104,16 @@
                             </ul>
                         </div>
                     </div>
+                    <!-- NO RESULT FOUND DIV -->
+                    <div class="art-img-nn" ng-if="artistList.length <= 0">
+                        <div class="art_no_post_img">
+                            <img alt="No Saved freelancer" src="<?php echo base_url('assets/img/free-no1.png') ?>">
+                        </div>
+                        <div class="art_no_post_text">No Result Found..</div>
+                    </div>
+                    <div id="loader" style="display: none;" class="hidden">
+                        <p style="text-align:center;"><img alt="loader" class="loader" src="http://35.165.1.109:81/assets/images/loading.gif"></p>
+                    </div>
                 </div>
                 <div class="right-part">
                     <div class="add-box">
@@ -113,7 +127,7 @@
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-
+        <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         
@@ -122,8 +136,8 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var title = '<?php echo $title; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
-            var q = '<?php echo $q; ?>';
-            var l = '<?php echo $l; ?>';         
+            var q = '<?php echo urldecode($q); ?>';
+            var l = '<?php echo urldecode($l); ?>';         
             var app = angular.module('artistSearchListApp', ['ui.bootstrap']);
         </script>   
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

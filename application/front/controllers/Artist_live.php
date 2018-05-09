@@ -102,30 +102,20 @@ class Artist_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
-        
-        $search_category = explode("-in-", $searchquery);
-        $this->data['q'] = '';
-        $this->data['l'] = '';
-        if(count($search_category) > 0){
-            $this->data['q'] = $search_category[0];
-            $this->data['l'] = $search_category[1];
+        if($searchquery != ''){
+            $search_category = explode("-in-", $searchquery);
+            $this->data['q'] = '';
+            $this->data['l'] = '';
+            if(count($search_category) > 0){
+                $this->data['q'] = $search_category[0];
+                $this->data['l'] = $search_category[1];
+            }
         }
-        // print_r($search_category);
-        // print_r($this->data['q']);
-        // print_r($this->data['l']);
-        // exit;
-        // if ($searchvalue == 'jobs') {
-        //     // $this->all_post();
-        //     $search_job = '';
-        //     $search_place = '';
-        // } else {
-        //     $skill = explode('jobs', $searchvalue);
-        //     $location = explode('in-', $searchvalue);
-        //     $search_job = trim($skill[0]);
-        //     $search_job = trim($skill[0], '-');
-        //     $search_place = $location[1];
-        // }
-
+        else{
+            $this->data['q'] = $_GET['q'];
+            $this->data['l'] = $_GET['l'];
+        }
+        
         $this->data['is_artist_profile_set'] = $this->artist_profile_set;
         $this->load->view('artist_live/search', $this->data);
     }

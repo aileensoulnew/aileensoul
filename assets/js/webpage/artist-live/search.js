@@ -1,8 +1,11 @@
 app.controller('artistSearchListController', function ($scope, $http) {
     $scope.title = title;
     $scope.artistCategory = {};
+    $scope.searchtitle = '';
+    $scope.categorysearch = '';
+    $scope.locationsearch = '';
     function artistCategory() {
-        $http.get(base_url + "artist_live/artistCategory?limit=24").then(function (success) {
+        $http.get(base_url + "artist_live/artistCategory?limit=5").then(function (success) {
             $scope.artistCategory = success.data;
         }, function (error) {});
     }
@@ -20,7 +23,7 @@ app.controller('artistSearchListController', function ($scope, $http) {
         } else if (q == '' && l != '') {
             search_data_url = base_url + 'artist_live/searchArtistData?l=' + l;
         } else {
-            search_data_url = base_url + 'artist_live/searchArtistData?q=' + q + '&l' + l;
+            search_data_url = base_url + 'artist_live/searchArtistData?q=' + q + '&l=' + l;
         }
         
         $http.get(search_data_url).then(function (success) {
@@ -29,6 +32,13 @@ app.controller('artistSearchListController', function ($scope, $http) {
     }
     searchArtist();
 
+    // Search result text
+    function searchResultText(){
+        $scope.categorysearch = q.replace(/,/gi,' And ');
+        $scope.locationsearch = l.replace(/,/gi,' And ');
+        $scope.searchtitle = ($scope.categorysearch && $scope.locationsearch) ? (' for ' + $scope.categorysearch + ' and ' + $scope.locationsearch) : (($scope.categorysearch) ? $scope.categorysearch : $scope.locationsearch); 
+    }
+    searchResultText();
 });
 
 $(window).on("load", function () {
