@@ -2,6 +2,7 @@
 <html ng-app="busRegApp" ng-controller="busRegController">
     <head>
         <title ng-bind="title"></title>
+        <base href="<?php echo base_url(); ?>business-profile/registration/">
         <?php echo $head_profile_reg; ?>  
         <?php
         if (IS_BUSINESS_CSS_MINIFY == '0') {
@@ -54,8 +55,8 @@
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push reg-form botton_footer">
         <?php echo $header; ?>
+        <?php echo $business_header2; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>
-            <?php echo $business_header2; ?>
         <?php } ?>
         <section>
             <?php
@@ -82,13 +83,13 @@
                                         <ul class="left-form-each-ul">
                                             <input ng-model="busRegStep" type="hidden" value="" id="busRegStep">
                                             <li id="left-form-each-li-1">
-                                                <a href="#business_information" ng-click="tab_active(1)" data-toggle="tab">
+                                                <a href="#" ng-click="tab_active(1)" data-toggle="tab">
                                                     <span class="edit-pro-box"><img src="<?php echo base_url('assets/img/basic-info.png'); ?>" alt="Business Information"></span><span class="edit-form-name">Business Information</span>
                                                 </a>
                                             </li>
                                             <?php if ($business_common_data[0]['business_step'] >= '1' && $business_common_data[0]['business_step'] != '') { ?>
                                                 <li id="left-form-each-li-2">
-                                                    <a href="#contact_information" ng-click="tab_active(2);" data-toggle="tab">
+                                                    <a href="#" ng-click="submitbusinessinfoForm();" data-toggle="tab">
                                                         <span class="edit-pro-box"><img src="<?php echo base_url('assets/img/contact-info.png'); ?>" alt="Contact Information"></span><span class="edit-form-name">Contact Information</span>
                                                     </a>
                                                 </li>
@@ -100,7 +101,7 @@
                                             <?php } ?>
                                             <?php if ($business_common_data[0]['business_step'] > '1' && $business_common_data[0]['business_step'] != '') { ?>
                                                 <li id="left-form-each-li-3">
-                                                    <a href="#description" ng-click="tab_active(3)" data-toggle="tab">
+                                                    <a href="#" ng-click="submitcontactinfoForm();" data-toggle="tab">
                                                         <span class="edit-pro-box"><img src="<?php echo base_url('assets/img/discription.png'); ?>" alt="Description"></span><span class="edit-form-name">Description</span>
                                                     </a>
                                                 </li>
@@ -113,7 +114,7 @@
                                             <?php } ?>
                                             <?php if ($business_common_data[0]['business_step'] > '2' && $business_common_data[0]['business_step'] != '') { ?>    
                                                 <li id="left-form-each-li-4">
-                                                    <a href="#business_image" ng-click="tab_active(4)" data-toggle="tab">
+                                                    <a href="#" ng-click="submitdescriptionForm();" data-toggle="tab">
                                                         <span class="edit-pro-box"><img src="<?php echo base_url('assets/img/upload-img.png'); ?>" alt="Business Images"></span><span class="edit-form-name">Business Images</span>
                                                     </a>
                                                 </li>
@@ -306,24 +307,128 @@
                     </div>
                 </div>
         </section>
-        <?php echo $login_footer ?>
+         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
+        <div class="all-profile-box content custom-scroll">
+            <ul class="all-pr-list">
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
+                        </div>
+                        <span>Job Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i2.jpg?ver=1517557803" alt="Recruiter Profile">
+                        </div>
+                        <span>Recruiter Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i3.jpg?ver=1517557803" alt="Freelance Profile">
+                        </div>
+                        <span>Freelance Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i4.jpg?ver=1517557803" alt="Business Profile">
+                        </div>
+                        <span>Business Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+        <?php echo $login_footer ?>        
         <?php echo $footer; ?>
         <!-- <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script> -->
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>  
         <?php
         if (IS_BUSINESS_JS_MINIFY == '0') {
             ?>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+            
             <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
             <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <?php } else {
             ?>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
+            
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/angular-validate.min.js?ver=' . time()) ?>"></script>
         <?php }
         ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
         <script>
         var base_url = '<?php echo base_url(); ?>';
@@ -335,7 +440,7 @@
         var address_validation = '<?php echo $this->lang->line('address_validation') ?>';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var profile_login = '<?php echo $profile_login; ?>';
-        var app = angular.module('busRegApp', ['ngValidate','ngRoute','ngTagsInput']);
+        var app = angular.module('busRegApp', ['ngValidate','ngRoute','ngTagsInput','ngSanitize']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script>
@@ -351,7 +456,37 @@
                             }
                         }
                     });
+                    app.config(function ($routeProvider, $locationProvider) {
+                        $routeProvider
+                                .when("/business-profile/registration/business-information", {
+                                    templateUrl: base_url + "business-profile/registration/contact-information",
+                                    controller: 'busRegController'
+                                })
+                                .when("/business-profile/registration/contact-information", {
+                                    templateUrl: base_url + "business-profile/registration/contact-information",
+                                    controller: 'busRegController'
+                                })
+                                .when("/business-profile/registration/description", {
+                                    templateUrl: base_url + "business-profile/registration/description",
+                                    controller: 'busRegController'
+                                })
+                                .when("/business-profile/registration/image", {
+                                    templateUrl: base_url + "business-profile/registration/image",
+                                    controller: 'busRegController'
+                                })
+                                /*.otherwise({
+                                    templateUrl: base_url + "userprofile_page/dashboard",
+                                    controller: 'dashboardController'
+                                });*/
+                                
+                        $locationProvider.html5Mode(true);
+                    });
                     app.controller('busRegController', function ($scope, $http) {
+                        $scope.br = {};
+                        $scope.br.basic = "";
+                        $scope.br.contact = "";
+                        $scope.br.description = "";
+                        $scope.br.business_image = "";
                         $scope.user = {};
                         $scope.countryList = undefined;
                         $scope.stateList = undefined;
@@ -392,6 +527,10 @@
                             $scope.title = 'Business Information | Business Profile - Aileensoul';
                             getCountry();
                             getBusinessInformation();
+                            $scope.br.basic = "basic";
+                            $scope.br.contact = "";
+                            $scope.br.description = "";
+                            $scope.br.business_image = "";
                         }
                         function activeContactInformation() {
                             $('.progress-line-filled').removeClass('step1 step2 step3 step4');
@@ -402,6 +541,10 @@
                             $('.tab-content .tab-pane').removeClass('active');
                             $('.tab-content .tab-pane:nth-child(2)').addClass('active');
                             $scope.title = 'Contact Information | Business profile - Aileensoul';
+                            $scope.br.basic = "basic";
+                            $scope.br.contact = "contact";
+                            $scope.br.description = "";
+                            $scope.br.business_image = "";
                             getContactInformation();
                         }
                         function activeDescription() {
@@ -414,6 +557,10 @@
                             $('.tab-content .tab-pane').removeClass('active');
                             $('.tab-content .tab-pane:nth-child(3)').addClass('active');
                             $scope.title = 'Description | Business profile - Aileensoul';
+                            $scope.br.basic = "basic";
+                            $scope.br.contact = "contact";
+                            $scope.br.description = "description";
+                            $scope.br.business_image = "";
                             getDescription();
                         }
                         function activeImage() {
@@ -427,6 +574,10 @@
                             $('.tab-content .tab-pane').removeClass('active');
                             $('.tab-content .tab-pane:nth-child(4)').addClass('active');
                             $scope.title = 'Business Image | Business Profile - Aileensoul';
+                            $scope.br.basic = "basic";
+                            $scope.br.contact = "contact";
+                            $scope.br.description = "description";
+                            $scope.br.business_image = "image";
                             getImage();
                         }
                         if (reg_uri == 'business-information') {

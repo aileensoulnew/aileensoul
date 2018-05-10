@@ -1,8 +1,35 @@
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <?php
 $userid = $this->session->userdata('aileenuser');
+$session_user = $this->session->userdata();
+$userData = $this->user_model->getUserData($session_user['aileenuser']);
+$browser = $this->agent->browser();
+$browserVersion = $this->agent->version();
+if($browser == "Internet Explorer")
+{
+    if(explode(".", $browserVersion)[0] < 11)
+    {
+        echo "<div class='update-browser'>For a better experience, update your browser.</div>";
+    }
+}
+if($browser == "Chrome")
+{            
+    if(explode(".", $browserVersion)[0] < 65)
+    {
+        echo "<div class='update-browser'>For a better experience, update your browser.</div>";
+    }
+}
+if($browser == "Firefox")
+{            
+    if(explode(".", $browserVersion)[0] < 55)
+    {
+        echo "<div class='update-browser'>For a better experience, update your browser.</div>";
+    }
+}
 ?>
 <div class="web-header">
     <?php echo $header_inner_profile ?>
+    <?php if ($business_common_data[0]['business_step'] == 4) { ?>
     <div class="sub-header">
         <div class="container">
             <div class="row">
@@ -76,6 +103,7 @@ $userid = $this->session->userdata('aileenuser');
         </div>
 
     </div>
+     <?php } ?>
 </div>
 <div class="mobile-header">
     <header class="">
@@ -108,7 +136,35 @@ $userid = $this->session->userdata('aileenuser');
                     <div class="right-header">
                         <ul>
                             <li class="dropdown user-id">
-                                <a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="usr-img"><img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>"></span><span class="pr-name"></span></a>
+                                <a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <?php
+                                        if ($session_user['aileenuser_userimage'] != '')
+                                        { ?>
+                                            <span class="usr-img profile-brd" id="header-main-profile-pic">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $session_user['aileenuser_userimage'] ?>" alt="<?php echo $session_user['aileenuser_firstname'] ?>">
+                                            </span>
+                                        <?php
+                                        }
+                                        else
+                                        { ?>
+                                            <span class="usr-img">
+                                            <?php
+                                            if($userData['user_gender'] == "M")
+                                            {?>
+                                                <img ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <?php
+                                            }
+                                            if($userData['user_gender'] == "F")
+                                            {
+                                            ?>
+                                                <img ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <?php
+                                            }?>
+                                            </span>
+                                            <?php
+                                        } ?>
+                                    <span class="pr-name"></span>
+                                </a>
 
                                 <ul class="dropdown-menu profile-dropdown">
                                     <li>Account</li>
@@ -126,7 +182,7 @@ $userid = $this->session->userdata('aileenuser');
 
     </header>
 
-
+    <?php if ($business_common_data[0]['business_step'] == 4) { ?>
     <div class="sub-header bus-only">
         <div class="container">
             <div class="row">
@@ -134,7 +190,7 @@ $userid = $this->session->userdata('aileenuser');
                 <ul class="sub-menu">
 
                     <li>
-                        <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Artistic Profile</a>
+                        <a href="<?php echo base_url('business-profile/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Business Profile</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i><span class="none-sub-menu"> Message</span>
@@ -167,13 +223,13 @@ $userid = $this->session->userdata('aileenuser');
 
     </div>
 
-
+    <?php } ?>
 
 
     <div class="mob-bottom-menu">
         <ul>
             <li>
-                <a href="opportunities.html"><img src="<?php echo base_url('assets/n-images/op-bottom.png?ver=' . time()) ?>"></a>
+                <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/n-images/op-bottom.png?ver=' . time()) ?>"></a>
             </li>
             <li id="add-contact" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url('assets/n-images/add-contact-bottom.png?ver=' . time()) ?>">
@@ -193,10 +249,110 @@ $userid = $this->session->userdata('aileenuser');
             <li>
                 <button id="showRight"><img src="<?php echo base_url('assets/n-images/mob-menu.png?ver=' . time()) ?>"></button>
             </li>
-
-
         </ul>
     </div>
+     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
+        <div class="all-profile-box content custom-scroll">
+            <ul class="all-pr-list">
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
+                        </div>
+                        <span>Job Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i2.jpg?ver=1517557803" alt="Recruiter Profile">
+                        </div>
+                        <span>Recruiter Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i3.jpg?ver=1517557803" alt="Freelance Profile">
+                        </div>
+                        <span>Freelance Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i4.jpg?ver=1517557803" alt="Business Profile">
+                        </div>
+                        <span>Business Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="all-pr-img">
+                            <img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+                        </div>
+                        <span>Artistic Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
@@ -436,3 +592,4 @@ $userid = $this->session->userdata('aileenuser');
         document.getElementById('searchplace1').value = null;
     });
 </script>
+<script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
