@@ -1913,6 +1913,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .email-cus .email-tooltip{display:block; position:absolute; right:23px; top:7px; width:20px; height:20px;}
 .email-cus .email-tooltip img{width:100%;}
 .post-design-desc{word-wrap:break-word;}
+.content-bnr .btn5{letter-spacing:1px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
