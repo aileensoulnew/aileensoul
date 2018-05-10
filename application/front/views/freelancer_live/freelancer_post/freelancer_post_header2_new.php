@@ -12,8 +12,8 @@ $userid = $this->session->userdata('aileenuser');
 							<a href="<?php echo base_url('freelance-work/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Freelance Profile</a>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true" onclick="return getmsgNotification()"></i> Message
-								<span class="noti-box" id="message_count">1</span>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()"><i class="fa fa-envelope" aria-hidden="true"></i> Message
+								<span class="noti-box" id="message_count"></span>
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
@@ -258,7 +258,7 @@ $userid = $this->session->userdata('aileenuser');
 	{
 		$.ajax({
 			type: "GET",
-			url: "<?php echo base_url(); ?>notification/select_msg_noti/4",
+			url: "<?php echo base_url(); ?>notification/select_msg_noti/5",
 
 			async: true,
 			cache: false,
@@ -309,7 +309,7 @@ $userid = $this->session->userdata('aileenuser');
 			 
 			 $.ajax({
 				type: 'POST',
-				url: '<?php echo base_url() . "chat/userajax/3/4" ?>',
+				url: '<?php echo base_url() . "chat/userajax/4/3" ?>',
 				dataType: 'json',
 				data: '',
 				success: function (data) { //alert(data);
@@ -336,7 +336,7 @@ $userid = $this->session->userdata('aileenuser');
 	function msgNotification() {
 		// first click alert('here'); 
 		$.ajax({
-			url: "<?php echo base_url(); ?>notification/update_msg_noti/4",
+			url: "<?php echo base_url(); ?>notification/update_msg_noti/5",
 			type: "POST",
 			//data: {uid: 12341234}, //this sends the user-id to php as a post variable, in php it can be accessed as $_POST['uid']
 			success: function (data) {

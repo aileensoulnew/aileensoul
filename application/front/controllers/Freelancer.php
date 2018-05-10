@@ -2102,7 +2102,7 @@ class Freelancer extends MY_Controller {
 //FREELANCER_APPLY PORTFOLIO UPLOAD PDF END
 
 //FREELANCER_APPLY PROFILE PAGE START
-    public function freelancer_post_profile($id) {
+    public function freelancer_post_profile($id = "") {
         if (is_numeric($id)) {
             
         } else {
