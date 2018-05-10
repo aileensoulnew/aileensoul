@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <?php
 $userid = $this->session->userdata('aileenuser');
 $session_user = $this->session->userdata();
@@ -189,7 +190,7 @@ if($browser == "Firefox")
                 <ul class="sub-menu">
 
                     <li>
-                        <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Artistic Profile</a>
+                        <a href="<?php echo base_url('business-profile/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Business Profile</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i><span class="none-sub-menu"> Message</span>
@@ -591,3 +592,4 @@ if($browser == "Firefox")
         document.getElementById('searchplace1').value = null;
     });
 </script>
+<script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
