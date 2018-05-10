@@ -22,6 +22,7 @@
         <?php }?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()); ?>" />
         <style type="text/css">
             .two-images, .three-image, .four-image{
             height: auto !important;
@@ -54,7 +55,7 @@
                     <div class="common-form">
                         <h3 class="user_list_head">User List</h3>
                         <div class="seeall">
-                            <a href="<?php echo base_url('artist/userlist'); ?>" title="View all">View all</a>
+                            <a href="<?php echo artist_userlist; ?>" title="View all">View all</a>
                         </div>
                         <div class="profile-boxProfileCard_follow fw  module">
                             <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
@@ -122,7 +123,7 @@
                         <div class="common-form">
                             <h3 class="user_list_head">User List</h3>
                             <div class="seeall">
-                                <a href="<?php echo base_url('artist/userlist'); ?>" title="View all">View all</a>
+                                <a href="<?php echo artist_userlist; ?>" title="View all">View all</a>
                             </div>
                             <div class="profile-boxProfileCard_follow fw  module">
                                 <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
@@ -324,7 +325,7 @@
             <div class="modal-content-post">
                 <span class="close1">&times;</span>
                 <div class="post-editor col-md-12 post-edit-popup" id="close">
-                    <?php echo form_open_multipart(base_url('artist/art_post_insert/'), array('id' => 'artpostform', 'name' => 'artpostform', 'class' => 'clearfix upload-image-form', 'onsubmit' => "return imgval(event)")); ?>
+                    <?php echo form_open_multipart(artist_art_post_insert, array('id' => 'artpostform', 'name' => 'artpostform', 'class' => 'clearfix upload-image-form', 'onsubmit' => "return imgval(event)")); ?>
                     <div class="main-text-area " >
                         <div class="popup-img-in "> 
                             <?php 

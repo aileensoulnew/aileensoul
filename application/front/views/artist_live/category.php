@@ -37,7 +37,7 @@
                                         <div class="cat-box">
                                             <ul data-aos="fade-up" data-aos-duration="1000">
                                                 <li ng-repeat="category in artistAllCategory">
-                                                    <a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">
+                                                    <a href="<?php echo artist_category ?>{{category.category_slug}}">
                                                         <div class="cus-cat-middle">
                                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                                             <p ng-bind="category.art_category | capitalize"></p>
@@ -45,7 +45,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="<?php echo base_url('artist/other') ?>">
+                                                    <a href="<?php echo artist_other_category; ?>">
                                                         <div class="cus-cat-middle">
                                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                                             <p>Other</p>
@@ -59,7 +59,7 @@
                                         <div class="location-box">
                                             <ul data-aos="fade-up" data-aos-duration="1000">
                                                 <li ng-repeat="location in artistAllLocation">
-                                                    <a href="<?php echo base_url('artist/location/') ?>{{location.location_slug}}">
+                                                    <a href="<?php echo artist_location ?>{{location.location_slug}}">
                                                         <div class="cus-cat-middle">
                                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                                             <p ng-bind="location.art_location | capitalize"></p>
@@ -78,37 +78,6 @@
                 <div class="right-part">
                     <div class="add-box">
                         <img src="<?php echo base_url('assets/img/add.jpg') ?>">
-                    </div>
-                </div>
-            </div>
-
-            <div class="container hidden">
-                <div class="custom-user-list">
-                    <div class="list-box-custom">
-                        <h3>All Categories</h3>
-                        <div class="cat-box">
-                            <ul>
-                                <li ng-repeat="category in artistAllCategory">
-                                    <a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">
-                                        <img src="<?php echo base_url('assets/n-images/car.png') ?>">
-                                        <p><span ng-bind="category.art_category | capitalize"></span><span ng-bind="'(' + category.count + ')'"></span><p>
-
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('artist/other') ?>">
-                                        <img src="<?php echo base_url('assets/n-images/car.png?ver=' . time()) ?>">
-                                        <p>Other<span ng-bind="'(' + otherCategoryCount + ')'"></span><p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="right-part">
-                    <div class="add-box">
-                        <img src="<?php echo base_url('assets/n-images/add.jpg') ?>">
                     </div>
                 </div>
             </div>

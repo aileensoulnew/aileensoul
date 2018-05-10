@@ -4,13 +4,24 @@ app.controller('searchArtistController', function ($scope, $window) {
     $scope.searchSubmit = function () {
         var keyword = $scope.keyword.toLowerCase().split(' ').join('+');
         var city = $scope.city.toLowerCase().split(' ').join('+');
+        // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+        var keyworddata = [];
+        if(keyword != ""){
+            keyworddata = keyword.split(",");
+            // remove in from array
+            console.log(keyworddata.indexOf("in"));
+            if(keyworddata.indexOf("in") > -1 && city != ""){
+                keyworddata.splice(keyworddata.indexOf("in"),1);
+            }
+            keyword = keyworddata.join('-').toString();
+        }
 
         if (keyword == '' && city == '') {
             return false;
         } else if (keyword != '' && city == '') {
-            $window.location.href = base_url + 'artist/search?q=' + keyword;
+            $window.location.href = base_url + 'artist/search/' + keyword;
         } else if (keyword == '' && city != '') {
-            $window.location.href = base_url + 'artist/search?l=' + city;
+            $window.location.href = base_url + 'artist-in-' + city;
         } else {
             $window.location.href = base_url + 'artist/search/' + keyword + '-in-' + city;
         }
@@ -75,7 +86,6 @@ $(function() {
 
 
 //SCRIPT FOR CITY AUTOFILL OF SEARCH START
-
 $(function() {
     function split( val ) {
         return val.split( /,\s*/ );
@@ -102,14 +112,18 @@ $(function() {
         select: function( event, ui ) {
            
             var terms = split( this.value );
-            if(terms.length <= 1) {
+            var termslength = terms.length; 
+            if(terms.length <= 4) {
                 // remove the current input
                 terms.pop();
+                // terms.push("");
                 // add the selected item
-                terms.push( ui.item.value );
-                // add placeholder to get the comma-and-space at the end
-                terms.push( "" );
-                this.value = terms.join( "" );
+                terms.push((ui.item.value).trim());
+                if(termslength <= 1){
+                    this.value = terms.join("");
+                }else{
+                    this.value = terms.join(",");
+                }
                 return false;
             }else{
                 var last = terms.pop();

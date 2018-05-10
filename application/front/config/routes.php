@@ -119,7 +119,7 @@ $route['business-profile'] = "business_live/index";
 $route['business-profile/category'] = "business_live/category";
 $route['business-profile/category/(:any)'] = "business_live/categoryBusinessList/$1";
 $route['business-profile/search'] = "business_live/business_search";
-
+$route['business-profile/search/(:any)'] = "business_live/business_search/$1";
 
 $route['business-profile/reactivate'] = "business_profile/reactivate";
 $route['business/reactivateacc'] = "business_profile/reactivateacc";
@@ -294,16 +294,13 @@ $route['find-artist'] = "artist_live/index";
 $route['artist/registration'] = "artist_live/registration";
 $route['artist/ajax_data'] = "artist_live/ajax_data";
 
-$route['artist/home'] = "artist_live/art_post";
+
 $route['artist/followers'] = "artist_live/followers";
 $route['artist/following'] = "artist_live/userlist";
 
 $route['artist/category'] = "artist_live/category";
 // $route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
-$route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
 $route['artist/search'] = "artist_live/artist_search";
-
-$route['artist/search/(:any)'] = "artist_live/artist_search/$1";
 
 $route['artist/artistic-basic-information-insert'] = "artist_live/art_basic_information_insert";
 $route['artist/artistic-information-update'] = "artist_live/art_basic_information_update";
@@ -348,7 +345,9 @@ $route['artist/reactivateacc'] = "artist_live/reactivateacc";
 
 
 $route['artist/location'] = "artist_live/location";
-$route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";
+// $route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";
+
+$route['artist/profile_insert'] = "artist/profile_insert";
 
 
 //BLOG ROUTES SETTINGS
@@ -481,4 +480,16 @@ $route['(:any)/videos'] = 'Userprofile';
 $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
+$route['artist-in-(:any)'] = "artist_live/artist_search/$1";
 $route['(:any)'] = 'Userprofile';
+
+
+// ARTIST SEARCH 
+$route['artist/home'] = "artist_live/art_post"; 
+$route['artist/art_home_post'] = "artist/art_home_post"; 
+$route['artist/art_home_three_user_list'] = "artist/art_home_three_user_list"; 
+$route['artist/art_post_insert'] = "artist/art_post_insert/"; 
+
+$route['artist/search/(:any)'] = "artist_live/artist_search/$1";
+$route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1";
+$route['artist/(:any)'] = "artist_live/categoryArtistList/$1";

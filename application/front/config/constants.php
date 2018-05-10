@@ -567,3 +567,20 @@ define('SMTP_USER', 'noreply@aileensoul.com');
 define('SMTP_PASS', 'aileensoul@123');
 define('CHARSET', 'utf-8');
 define('MAILTYPE', 'html');
+
+
+// Define Artist Path
+
+define('artist_registration', BASEURL. 'artist/registration'); 
+define('artist_dashboard', BASEURL. 'artist/dashboard/'); 
+define('artist_reactivateacc', BASEURL. 'artist/reactivateacc'); 
+define('artist_category', BASEURL. 'artist/'); 
+define('artist_other_category', BASEURL. 'artist/other'); 
+define('artist_category_list', BASEURL. 'artist/category'); 
+define('artist_location', BASEURL. 'artist-in-'); 
+define('artist_location_list', BASEURL. 'artist/location'); 
+define('artist_information_update', BASEURL. 'artist/artistic-information-update'); 
+define('artist_information', BASEURL. 'artist/artistic-information'); 
+define('artist_art_address_insert', BASEURL. 'artist/art_address_insert'); 
+define('artist_userlist', BASEURL. 'artist/userlist'); 
+define('artist_art_post_insert', BASEURL. 'artist/art_post_insert/'); 

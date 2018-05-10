@@ -104,18 +104,30 @@ class Artist_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         if($searchquery != ''){
             $search_category = explode("-in-", $searchquery);
+            $search_location = explode("artist-in-", $searchquery);
             $this->data['q'] = '';
             $this->data['l'] = '';
-            if(count($search_category) > 0){
+            
+            if(count($search_location) > 0){
+                $this->data['q'] = '';
+                $this->data['l'] = $search_location[0];
+            }
+            else if(count($search_category) > 1){
                 $this->data['q'] = $search_category[0];
                 $this->data['l'] = $search_category[1];
+            }else{
+                $this->data['q'] = $search_category[0];
             }
         }
         else{
             $this->data['q'] = $_GET['q'];
             $this->data['l'] = $_GET['l'];
         }
-        
+
+        // Replace - with ,
+        $this->data['q'] = str_replace("-",",",$this->data['q']);
+        $this->data['l'] = str_replace("-",",",$this->data['l']);
+
         $this->data['is_artist_profile_set'] = $this->artist_profile_set;
         $this->load->view('artist_live/search', $this->data);
     }

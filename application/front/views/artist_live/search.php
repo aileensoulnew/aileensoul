@@ -26,7 +26,7 @@
                         </div>
                         <ul class="search-listing">
                             <li ng-repeat="category in artistCategory">
-                                <label class=""><a href="<?php echo base_url('artist/category/') ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
+                                <label class=""><a href="<?php echo artist_category ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
                             </li>
                             <!-- <li>
                                 <label class=""><a href="<?php //echo base_url('artist/other') ?>">Other<span class="pull-right">({{otherCategoryCount}})</span></a></label>
@@ -78,29 +78,29 @@
                     <div class="all-job-box search-business" ng-repeat="artist in artistList">
                         <div class="search-business-top">
                             <div class="bus-cover no-cover-upload">
-                                <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="artist.profile_background">
+                                <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="artist.profile_background">
                                     <img ng-src="<?php echo ART_BG_MAIN_UPLOAD_URL ?>{{artist.profile_background}}">
                                 </a>
-                                <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="!artist.profile_background">
+                                <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="!artist.profile_background">
                                     <img ng-src="<?php echo BASEURL . WHITEIMAGE ?>">
                                 </a>
                             </div>
                             <div class="all-job-top">
                                 <div class="post-img">
-                                    <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="artist.art_user_image"><img ng-src="<?php echo ART_PROFILE_THUMB_UPLOAD_URL ?>{{artist.art_user_image}}"></a>
-                                    <a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-if="!artist.art_user_image"><img ng-src="<?php echo BASEURL . NOARTIMAGE ?>"></a>
+                                    <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="artist.art_user_image"><img ng-src="<?php echo ART_PROFILE_THUMB_UPLOAD_URL ?>{{artist.art_user_image}}"></a>
+                                    <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="!artist.art_user_image"><img ng-src="<?php echo BASEURL . NOARTIMAGE ?>"></a>
                                 </div>
                                 <div class="job-top-detail">
-                                    <h5><a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-bind="artist.fullname | capitalize"></a></h5>
-                                    <h5 ng-if="artist.art_category"><a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-bind="artist.art_category | capitalize"></a></h5>
-                                    <h5 ng-if="!artist.art_category"><a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}" ng-bind="artist.other_skill | capitalize"></a></h5>
+                                    <h5><a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-bind="artist.fullname | capitalize"></a></h5>
+                                    <h5 ng-if="artist.art_category"><a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-bind="artist.art_category | capitalize"></a></h5>
+                                    <h5 ng-if="!artist.art_category"><a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-bind="artist.other_skill | capitalize"></a></h5>
                                 </div>
                             </div>
                         </div>
                         <div class="all-job-middle">
                             <ul class="search-detail">
                                 <li><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/location.png') ?>"></span> <p class="detail-content"><span ng-bind="artist.city"></span><span ng-if="artist.city">,(</span><span ng-bind="artist.country"></span><span ng-if="artist.city">)</span></p></li>
-                                <li ng-if="artist.art_desc_art"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{artist.art_desc_art| limitTo:110}}...<a href="<?php echo BASEURL ?>artist/dashboard/{{artist.slug}}"> Read more</a></p></li>
+                                <li ng-if="artist.art_desc_art"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{artist.art_desc_art| limitTo:110}}...<a href="<?php echo artist_dashboard ?>{{artist.slug}}"> Read more</a></p></li>
                             </ul>
                         </div>
                     </div>
@@ -138,8 +138,8 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var title = '<?php echo $title; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
-            var q = '<?php echo urldecode($q); ?>';
-            var l = '<?php echo urldecode($l); ?>';         
+            var q = '<?php echo $q; ?>';
+            var l = '<?php echo $l; ?>';         
             var app = angular.module('artistSearchListApp', ['ui.bootstrap']);
         </script>   
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

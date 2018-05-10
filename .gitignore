@@ -55,3 +55,6 @@ application/front/config/config.php
 application/front/config/config.php
 application/front/views/user_info/index.php
 application/front/config/routes.php
+application/front/controllers/Business_profile.php
+application/front/controllers/Business_profile.php
+application/front/controllers/Business_profile_live.php

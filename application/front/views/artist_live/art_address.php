@@ -57,9 +57,9 @@
                     <div class="col-md-3 col-sm-4">
                         <div class="left-side-bar">
                             <ul class="left-form-each">
-                                <li class="custom-none"><a href="<?php echo base_url('artist/artistic-information-update'); ?>" title="Basic Information">Basic Information</a></li>
+                                <li class="custom-none"><a href="<?php echo artist_information_update; ?>" title="Basic Information">Basic Information</a></li>
                                 <li <?php if($this->uri->segment(1) == 'artist'){?> class="active init" <?php } ?>><a href="javascript:void(0);" title="Address">Address</a></li>
-                                <li class="custom-none <?php if($artdata[0]['art_step'] < '2'){echo "khyati";}?>"><a href="<?php echo base_url('artist/artistic-information'); ?>" title="Art Information">Art Information</a></li>
+                                <li class="custom-none <?php if($artdata[0]['art_step'] < '2'){echo "khyati";}?>"><a href="<?php echo artist_information; ?>" title="Art Information">Art Information</a></li>
                               
                             </ul>
                         </div>
@@ -73,7 +73,7 @@
                          <h3>
                            Address
                         </h3>                       
-                            <?php echo form_open(base_url('artist/art_address_insert'), array('id' => 'address','name' => 'address', 'class' => 'clearfix')); ?>
+                            <?php echo form_open(artist_art_address_insert, array('id' => 'address','name' => 'address', 'class' => 'clearfix')); ?>
                             <?php
                              $country =  form_error('country');
                              $state =  form_error('state');

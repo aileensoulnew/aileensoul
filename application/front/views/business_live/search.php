@@ -110,6 +110,8 @@
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
 
@@ -117,14 +119,14 @@
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         
         <script>
-                                    var base_url = '<?php echo base_url(); ?>';
-                                    var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                    var title = '<?php echo $title; ?>';
-                                    var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                    var category_id = '<?php echo $category_id; ?>';
-                                    var q = '<?php echo $q; ?>';
-                                    var l = '<?php echo $l; ?>';
-                                    var app = angular.module('businessSearchListApp', ['ui.bootstrap']);
+            var base_url = '<?php echo base_url(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var title = '<?php echo $title; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var category_id = '<?php echo $category_id; ?>';
+            var q = '<?php echo $q; ?>';
+            var l = '<?php echo $l; ?>';
+            var app = angular.module('businessSearchListApp', ['ui.bootstrap']);
         </script>   
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
