@@ -209,10 +209,8 @@
                         <h2>How Aileensoul Artistic Profile Can Help Artist Reach Their Career Goals?</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-6 col-sm-6 pull-right">
-                            <img src="<?php echo base_url('assets/n-images/img4.jpg') ?>">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
+                        
+                        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2 text-center ">
                             <p>Artistic Profile is one of the unique feature that Aileensoul offers to its users. The profile is created solely to provide a magnificent platform for the artists as well as for the art lovers.</p>
                             <p>This profile is an effort to build a bridge between the artists and the layman. Any person with artistic skills can make a profile here for free and showcase their abilities to the viewers. </p>
                             <p>The most Interesting thing about the profile is that, it is not constrained to a particular field but is open to every field.</p>
@@ -225,7 +223,7 @@
             </div>
             
             <!-- STATIC TEXT OF HOW ABOUT PROFILE -->
-            <div class="content-bnr">
+            <div class="content-bnr art-bnr-prlx">
                 <div class="bnr-box">
                     
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
