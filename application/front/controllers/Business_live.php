@@ -46,8 +46,8 @@ class Business_live extends MY_Controller {
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['business_profile_set'] =  $this->business_profile_set;
-        $this->data['business_profile_link'] = $this->business_profile_link;
-        // $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
+        // $this->data['business_profile_link'] = $this->business_profile_link;
+        $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
        
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
@@ -96,7 +96,7 @@ class Business_live extends MY_Controller {
         $this->load->view('business_live/categoryBusinessList', $this->data);
     }
 
-    public function business_search() {
+    public function business_search($searchquery = '') {
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
@@ -111,8 +111,23 @@ class Business_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
         $this->data['category_id'] = $category_id['industry_id'];
-        $this->data['q'] = $_GET['skills'];
-        $this->data['l'] = $_GET['searchplace'];
+
+        if($searchquery != ''){
+            $search_category = explode("-in-", $searchquery);
+            $this->data['q'] = '';
+            $this->data['l'] = '';
+            if(count($search_category) > 0){
+                $this->data['q'] = $search_category[0];
+                $this->data['l'] = $search_category[1];
+            }
+        }
+        else{
+            $this->data['q'] = $_GET['q'];
+            $this->data['l'] = $_GET['l'];
+        }
+
+        // $this->data['q'] = $_GET['skills'];
+        // $this->data['l'] = $_GET['searchplace'];
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/search', $this->data);
     }
