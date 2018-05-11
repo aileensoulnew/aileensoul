@@ -347,8 +347,31 @@ $route['artist/reactivateacc'] = "artist_live/reactivateacc";
 $route['artist/location'] = "artist_live/location";
 // $route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";
 
+$route['artist/home'] = "artist_live/art_post"; 
 $route['artist/profile_insert'] = "artist/profile_insert";
-
+$route['artist/edit_post_insert'] = "artist/edit_post_insert";
+$route['artist/art_delete_post'] = "artist/art_delete_post";
+$route['artist/showuser'] = "artist/showuser";
+$route['artist/follow_home'] = "artist/follow_home";
+$route['artist/artistic_home_follow_ignore'] = "artist/artistic_home_follow_ignore";
+$route['artist/follow_home'] = "artist/follow_home";
+$route['artist/art_home_post'] = "artist/art_home_post";
+$route['artist/art_home_three_user_list'] = "artist/art_home_three_user_list"; 
+$route['artist/art_post_insert'] = "artist/art_post_insert/"; 
+$route['artist/like_post'] = "artist/like_post"; 
+$route['artist/like_comment'] = "artist/like_comment"; 
+$route['artist/like_comment1'] = "artist/like_comment1"; 
+$route['artist/delete_comment'] = "artist/delete_comment"; 
+$route['artist/delete_commenttwo'] = "artist/delete_commenttwo"; 
+$route['artist/insert_commentthree'] = "artist/insert_commentthree"; 
+$route['artist/insert_comment'] = "artist/insert_comment";  
+$route['artist/edit_comment_insert'] = "artist/edit_comment_insert"; 
+$route['artist/fourcomment'] = "artist/fourcomment"; 
+$route['artist/artistic_save'] = "artist/artistic_save"; 
+$route['artist/del_particular_userpost'] = "artist/del_particular_userpost"; 
+$route['artist/likeuserlist'] = "artist/likeuserlist"; 
+$route['artist/edit_more_insert'] = "artist/edit_more_insert"; 
+$route['artist/art_designation'] = "artist/art_designation"; 
 
 //BLOG ROUTES SETTINGS
 //$route['blog/popular'] = "blog/popular";
@@ -480,16 +503,13 @@ $route['(:any)/videos'] = 'Userprofile';
 $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
-$route['artist-in-(:any)'] = "artist_live/artist_search/$1";
+$route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['(:any)'] = 'Userprofile';
 
 
 // ARTIST SEARCH 
-$route['artist/home'] = "artist_live/art_post"; 
-$route['artist/art_home_post'] = "artist/art_home_post"; 
-$route['artist/art_home_three_user_list'] = "artist/art_home_three_user_list"; 
-$route['artist/art_post_insert'] = "artist/art_post_insert/"; 
+
 
 $route['artist/search/(:any)'] = "artist_live/artist_search/$1";
-$route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1";
+$route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
