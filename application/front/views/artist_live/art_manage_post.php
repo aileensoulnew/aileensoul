@@ -57,7 +57,7 @@
 <?php echo $artistic_common; ?>
 <div class="text-center tab-block">
     <div class="container mob-inner-page">
-       <a href="<?php echo base_url('artist/photos/' . $get_url) ?>" title="Photo">
+       <a href="<?php echo base_url(artist_photos . $get_url) ?>" title="Photo">
             Photo
         </a>
        <a href="<?php echo base_url('artist/videos/' . $get_url) ?>" title="Video">
@@ -230,11 +230,11 @@ $loginuser = $userdata[0]['art_id'];
                     <div class="main-text-area col-md-12">
                         <div class="popup-img"> 
                             <a href="<?php echo base_url('artist/dashboard/' . $get_url) ?>">
-                             <?php
-                                                    $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
-                                                    $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
-                                                    ?>
-                                                    <?php ?>
+                            <?php
+                                    $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
+                                    $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
+                                    ?>
+                            <?php ?>
                                                             
                 
                  <?php 

@@ -1,29 +1,29 @@
 // curreent work upload div script
 
 function divClicked() {
-                var divHtml = $(this).html();
-                 divHtml = divHtml.trim();
-                var editableText = $("<textarea />");
-                editableText.val(divHtml);
-                $(this).replaceWith(editableText);
-                editableText.focus();
-                // setup the blur event for this new textarea
-                editableText.blur(editableTextBlurred);
-            }
+    var divHtml = $(this).html();
+    divHtml = divHtml.trim();
+    var editableText = $("<textarea />");
+    editableText.val(divHtml);
+    $(this).replaceWith(editableText);
+    editableText.focus();
+        // setup the blur event for this new textarea
+        editableText.blur(editableTextBlurred);
+    }
 
-            function capitalize(s){
-             return s[0].toUpperCase() + s.slice(1);
-            }
+    function capitalize(s){
+       return s[0].toUpperCase() + s.slice(1);
+   }
 
-            function editableTextBlurred() {
-                var html = $(this).val();
-                 html = html.trim();
-                var viewableText = $("<a>");
-                if (html.match(/^\s*$/) || html == '') {
-                    html = "Current Work";
-                }
-                viewableText.html(capitalize(html));
-                $(this).replaceWith(viewableText);
+   function editableTextBlurred() {
+    var html = $(this).val();
+    html = html.trim();
+    var viewableText = $("<a>");
+    if (html.match(/^\s*$/) || html == '') {
+        html = "Current Work";
+    }
+    viewableText.html(capitalize(html));
+    $(this).replaceWith(viewableText);
                 // setup the click event for this new div
                 viewableText.click(divClicked);
 
@@ -46,23 +46,23 @@ function divClicked() {
 
 
 //SCRIPT FOR AUTOFILL OF SEARCH KEYWORD START
-    $(function() {
-        function split( val ) {
-            return val.split( /,\s*/ );
-        }
-        function extractLast( term ) { 
-            return split( term ).pop();
-        }
-        $( "#tags" ).bind( "keydown", function( event ) {
-            if ( event.keyCode === $.ui.keyCode.TAB &&
-                $( this ).autocomplete( "instance" ).menu.active ) {
-                event.preventDefault();
-            }
-        })
-        .autocomplete({
-           
-            minLength: 2,
-            source: function( request, response ) { 
+$(function() {
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) { 
+        return split( term ).pop();
+    }
+    $( "#tags" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+    }
+})
+    .autocomplete({
+     
+        minLength: 2,
+        source: function( request, response ) { 
                 // delegate back to autocomplete, but extract the last term
                 $.getJSON(base_url + "artist/artistic_search_keyword", { term : extractLast( request.term )},response);
             },
@@ -71,7 +71,7 @@ function divClicked() {
                 return false;
             },
             select: function( event, ui ) {
-               
+             
                 var terms = split( this.value );
                 if(terms.length <= 1) {
                     // remove the current input
@@ -83,7 +83,7 @@ function divClicked() {
                     this.value = terms.join( "" );
                     return false;
                 }else{
-                   
+                 
                     var last = terms.pop();
                     $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
                     $(this).effect("highlight", {}, 1000);
@@ -92,29 +92,29 @@ function divClicked() {
                 }
             }
         });
-    });
+});
 
 //SCRIPT FOR AUTOFILL OF SEARCH KEYWORD END
 
 
 //SCRIPT FOR CITY AUTOFILL OF SEARCH START
 
-    $(function() {
-        function split( val ) {
-            return val.split( /,\s*/ );
-        }
-        function extractLast( term ) { 
-            return split( term ).pop();
-        }
-        $( "#searchplace" ).bind( "keydown", function( event ) {
-            if ( event.keyCode === $.ui.keyCode.TAB &&
-                $( this ).autocomplete( "instance" ).menu.active ) {
-                event.preventDefault();
-            }
-        })
-        .autocomplete({
-            minLength: 2,
-            source: function( request, response ) { 
+$(function() {
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) { 
+        return split( term ).pop();
+    }
+    $( "#searchplace" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+    }
+})
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
                 // delegate back to autocomplete, but extract the last term
                 $.getJSON(base_url + "artist/artistic_search_city", { term : extractLast( request.term )},response);
             },
@@ -123,7 +123,7 @@ function divClicked() {
                 return false;
             },
             select: function( event, ui ) {
-               
+             
                 var terms = split( this.value );
                 if(terms.length <= 1) {
                     // remove the current input
@@ -143,30 +143,30 @@ function divClicked() {
                 }
             }
         });
-    });
+});
 
 //SCRIPT FOR CITY AUTOFILL OF SEARCH END
 
 
 //SCRIPT FOR AUTOFILL OF SEARCH KEYWORD START
 
-    $(function() {
-        function split( val ) {
-            return val.split( /,\s*/ );
-        }
-        function extractLast( term ) { 
-            return split( term ).pop();
-        }
-        $( "#tags1" ).bind( "keydown", function( event ) {
-            if ( event.keyCode === $.ui.keyCode.TAB &&
-                $( this ).autocomplete( "instance" ).menu.active ) {
-                event.preventDefault();
-            }
-        })
-        .autocomplete({
-           
-            minLength: 2,
-            source: function( request, response ) { 
+$(function() {
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) { 
+        return split( term ).pop();
+    }
+    $( "#tags1" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+    }
+})
+    .autocomplete({
+     
+        minLength: 2,
+        source: function( request, response ) { 
                 // delegate back to autocomplete, but extract the last term
                 $.getJSON(base_url + "artist/artistic_search_keyword", { term : extractLast( request.term )},response);
             },
@@ -175,7 +175,7 @@ function divClicked() {
                 return false;
             },
             select: function( event, ui ) {
-               
+             
                 var terms = split( this.value );
                 if(terms.length <= 1) {
                     // remove the current input
@@ -187,7 +187,7 @@ function divClicked() {
                     this.value = terms.join( "" );
                     return false;
                 }else{
-                   
+                 
                     var last = terms.pop();
                     $(this).val(this.value.substr(0, this.value.length - last.length - 2)); // removes text from input
                     $(this).effect("highlight", {}, 1000);
@@ -196,28 +196,28 @@ function divClicked() {
                 }
             }
         });
-    });
+});
 
 //SCRIPT FOR AUTOFILL OF SEARCH KEYWORD END
 
 //SCRIPT FOR CITY AUTOFILL OF SEARCH START
 
-    $(function() {
-        function split( val ) {
-            return val.split( /,\s*/ );
-        }
-        function extractLast( term ) { 
-            return split( term ).pop();
-        }
-        $( "#searchplace1" ).bind( "keydown", function( event ) {
-            if ( event.keyCode === $.ui.keyCode.TAB &&
-                $( this ).autocomplete( "instance" ).menu.active ) {
-                event.preventDefault();
-            }
-        })
-        .autocomplete({
-            minLength: 2,
-            source: function( request, response ) { 
+$(function() {
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) { 
+        return split( term ).pop();
+    }
+    $( "#searchplace1" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+    }
+})
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
                 // delegate back to autocomplete, but extract the last term
                 $.getJSON(base_url + "artist/artistic_search_city", { term : extractLast( request.term )},response);
             },
@@ -226,7 +226,7 @@ function divClicked() {
                 return false;
             },
             select: function( event, ui ) {
-               
+             
                 var terms = split( this.value );
                 if(terms.length <= 1) {
                     // remove the current input
@@ -246,15 +246,15 @@ function divClicked() {
                 }
             }
         });
-    });
+});
 
 //SCRIPT FOR CITY AUTOFILL OF SEARCH END
 
- $('.modal-close').on('click', function () {
-   document.getElementById('upload-demo-one').style.display = 'none';
-    document.getElementById('upload-one').value = null;
-   $('.cr-image').attr('src', '#');
-    });
+$('.modal-close').on('click', function () {
+ document.getElementById('upload-demo-one').style.display = 'none';
+ document.getElementById('upload-one').value = null;
+ $('.cr-image').attr('src', '#');
+});
 
 
 $( document ).on( 'keydown', function ( e ) {
@@ -267,7 +267,7 @@ $( document ).on( 'keydown', function ( e ) {
 
 jQuery(document).ready(function($) {  
 // site preloader -- also uncomment the div in the header and the css style for #preloader
- $(window).on('load', function(){
+$(window).on('load', function(){
   $('#preloader').fadeOut('slow',function(){$(this).remove();});
 });
 });
@@ -289,51 +289,51 @@ $uploadCrop1 = $('#upload-demo-one').croppie({
     }
 });
 
-    $('#upload-one').on('change', function () {
-        document.getElementById('upload-demo-one').style.display = 'block';
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $uploadCrop1.croppie('bind', {
-                url: e.target.result
-            }).then(function () {
-                console.log('jQuery bind complete');
-            });
+$('#upload-one').on('change', function () {
+    document.getElementById('upload-demo-one').style.display = 'block';
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $uploadCrop1.croppie('bind', {
+            url: e.target.result
+        }).then(function () {
+            console.log('jQuery bind complete');
+        });
 
-        }
-        reader.readAsDataURL(this.files[0]);
+    }
+    reader.readAsDataURL(this.files[0]);
+});
+
+$(document).ready(function () { 
+
+    $("#userimage").validate({ 
+
+        rules: {
+
+            profilepic: {
+
+                required: true,
+
+            },
+
+        },
+
+        messages: {
+
+            profilepic: {
+
+                required: "Image Required",
+
+            },
+
+        },
+
+        submitHandler: profile_pic
+
     });
 
-            $(document).ready(function () { 
+    function profile_pic(){
 
-                $("#userimage").validate({ 
-
-                    rules: {
-
-                        profilepic: {
-
-                            required: true,
-
-                        },
-
-                    },
-
-                    messages: {
-
-                        profilepic: {
-
-                            required: "Image Required",
-
-                        },
-
-                    },
-
-                     submitHandler: profile_pic
-
-                });
-
- function profile_pic(){
-
-    $uploadCrop1.croppie('result', {
+        $uploadCrop1.croppie('result', {
             type: 'canvas',
             size: 'viewport'
         }).then(function (resp) {
@@ -341,50 +341,50 @@ $uploadCrop1 = $('#upload-demo-one').croppie({
                 //url: "/ajaxpro.php", user_image_insert
                // url: "<?php echo base_url(); ?>freelancer/ajaxpro_test",
                url: base_url + "artist/profilepic",
-                type: "POST",
-                data: {"image": resp},
+               type: "POST",
+               data: {"image": resp},
 
-                 beforeSend: function () {
+               beforeSend: function () {
 
-                        $('#loaderfollow').show();
+                $('#loaderfollow').show();
                         //$(".art_photos").html('<p style="text-align:center;"><img src = "<?php echo base_url('assets/images/loading.gif?ver='.time()) ?>" class = "loader" /></p>');
                         //$(".user_profile").html('<p style="text-align:center;"><img src = "'+ base_url + 'images/loading.gif" class = "loader" /></p>');
                     },
-                success: function (data) {
-                  $('#bidmodal-2').modal('hide');
-                    $(".user-pic").html(data);
-                    document.getElementById('upload-one').value = null;
-                    document.getElementById('upload-demo-one').style.display = 'none';
-                     $('.fw').remove();
+                    success: function (data) {
+                      $('#bidmodal-2').modal('hide');
+                      $(".user-pic").html(data);
+                      document.getElementById('upload-one').value = null;
+                      document.getElementById('upload-demo-one').style.display = 'none';
+                      $('.fw').remove();
                    //$('.cr-image').attr('src', '#');
                    
-                }
-            });
+               }
+           });
         });
 
     }
 
-            });
+});
 
 
     // script for profile pic strat
 
-            $("#profilepic").change(function () {
-                profile = this.files;
+    $("#profilepic").change(function () {
+        profile = this.files;
                    //alert(profile);
-                      if (!profile[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
+                   if (!profile[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
                        //alert('not an image');
-                  $('#profilepic').val('');
-                   picpopup();
-                     return false;
+                       $('#profilepic').val('');
+                       picpopup();
+                       return false;
                    }else{
                       readURL(this);}
-            });
+                  });
 
 
 
 
-function showDiv() {
+    function showDiv() {
         document.getElementById('row1').style.display = "block";
         document.getElementById('row2').style.display = "none";
         $(".cr-image").attr("src","");
@@ -415,18 +415,18 @@ function showDiv() {
         }).then(function (resp) {
 
 
-        var aa = resp.length;
-        if (aa == 11350) {
-            document.getElementById('row2').style.display = "block";
-            document.getElementById('row1').style.display = "none";
-            document.getElementById('message1').style.display = "none";
-            document.getElementById("upload-demo").style.visibility = "visible";
-            document.getElementById("upload-demo-i").style.visibility = "visible";
-            return false;
-        } else {
+            var aa = resp.length;
+            if (aa == 11350) {
+                document.getElementById('row2').style.display = "block";
+                document.getElementById('row1').style.display = "none";
+                document.getElementById('message1').style.display = "none";
+                document.getElementById("upload-demo").style.visibility = "visible";
+                document.getElementById("upload-demo-i").style.visibility = "visible";
+                return false;
+            } else {
 
-           $.ajax({
-                            url: base_url + "artist/ajaxpro",
+             $.ajax({
+                url: base_url + "artist/ajaxpro",
                             //url: "<?php echo base_url() ?>artist/ajaxpro",
                             type: "POST",
                             data: {"image": resp},
@@ -441,7 +441,7 @@ function showDiv() {
                             }
                         });
          }
-        });
+     });
     }); 
     $('.cancel-result').on('click', function (ev) {
 
@@ -471,15 +471,15 @@ function showDiv() {
         fd.append("image", $("#upload")[0].files[0]);
         files = this.files;
         size = files[0].size;
-if (!files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){ 
-    picpopup();
-    document.getElementById('row1').style.display = "none";
-    document.getElementById('row2').style.display = "block";
-   $("#upload").val('');
-    return false;
-  }
+        if (!files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){ 
+            picpopup();
+            document.getElementById('row1').style.display = "none";
+            document.getElementById('row2').style.display = "block";
+            $("#upload").val('');
+            return false;
+        }
 
-  if (size > 10485760)
+        if (size > 10485760)
         {
             alert("Allowed file size exceeded. (Max. 10 MB)")
             document.getElementById('row1').style.display = "none";
@@ -499,18 +499,18 @@ if (!files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
         // });
     });
 
-$('#upload').click(function(){
-   var input = document.getElementsByTagName('#upload')[0];
-    this.value = null;
-});
+    $('#upload').click(function(){
+     var input = document.getElementsByTagName('#upload')[0];
+     this.value = null;
+ });
     
 
 
     $( document ).on( 'keydown', function ( e ) {
-    if ( e.keyCode === 27 ) {
+        if ( e.keyCode === 27 ) {
         //$( "#bidmodal" ).hide();
         $('#bidmodal-2').modal('hide');
     }
 });
 
- 
+    
