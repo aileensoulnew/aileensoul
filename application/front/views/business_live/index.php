@@ -82,10 +82,8 @@
                         <h2>How Can Aileensoul Business Profile Help You in Growing Network?</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-6 col-sm-6 pull-right">
-                            <img src="<?php echo base_url('assets/n-images/bus-1.jpg?ver='.time()) ?>">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
+                       
+                        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2 text-center ">
                             <p>In the emerging phase of start-ups and entrepreneurship more and more people are getting inclined towards having his/her own business venture. </p>
                             <p>Aileensoul recognises the need of time and offers a discreetly designed Business profile which allows the users to increase their business contacts as well as smoothly promote their new established business. </p>
                             <p>Digital marketing is on spur and hence Aileensoul through its business profile helps the users by freely providing a platform to enrich their business through various means. One can upload images, audios, pdf files and videos in this profile. The notification bar of business profile keeps the users aware of all the ongoing trends and details of his/her arena. Hence, keeping people connected to each other.</p>
@@ -95,7 +93,7 @@
             </div>
 
             <!-- CREATE BUSINESS OR REACTIVE -->
-            <div class="content-bnr">
+            <div class="content-bnr bus-bnr-prlx">
                 <div class="bnr-box">
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Grow Business Network Plus Be Found at Any Time by Listing Your Business Online</h2>
