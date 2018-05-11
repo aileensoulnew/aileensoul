@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="col-md-6 right-bnr">
-                <img src="n-images/job-bnr.png">
+                <img src="<?php echo base_url('assets/n-images/job-bnr.png'); ?>">
             </div>
         </div>
     </div>

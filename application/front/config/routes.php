@@ -426,7 +426,10 @@ $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";
  $route['jobs'] = "job/job_search";
  $route['jobs/(:any)'] = "job/job_search/$1";
 //$route['(:any)'] = "job/job_search";
-$route['(:any)-jobs'] = "job/job_search";
+//$route['(:any)-jobs'] = "job/job_search";//old
+$route['(:any)-jobs'] = "job/job_search_new/$1";//Pratik Job By Job Title,Job by Category,Job by Skills
+
+
 $route['jobs-in-(:any)'] = "job/job_search";
 $route['(:any)-jobs-in-(:any)'] = "job/job_search";
 

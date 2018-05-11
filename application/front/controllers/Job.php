@@ -3374,7 +3374,6 @@ class Job extends MY_Controller {
 
 
         $searchvalue = $this->uri->segment(1);
-        // echo $searchvalue;die();
 
         if ($searchvalue == 'jobs') {
             // $this->all_post();
@@ -5799,6 +5798,43 @@ class Job extends MY_Controller {
         $postdetail = $this->data['postdetail'] = $qbc;
 
         $this->load->view('job/job_new_page', $this->data);
+    }
+
+    public function job_search_new($search)
+    {
+     //   echo $search;exit;
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+
+        // search keyword insert into database start
+
+        $this->data['keyword'] = $search;
+
+        $title = $search;        
+
+        $this->data['title'] = $title . " - Job Profile - Aileensoul";
+        $this->data['head'] = $this->load->view('head', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+
+        //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA START
+        if ($this->session->userdata('aileenuser')) {
+            $contition_array = array('user_id' => $this->session->userdata('aileenuser'), 'status' => '1', 'is_delete' => '0');
+            $jobdata = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            if ($jobdata) {
+                $this->load->view('job/job_all_post_new_search', $this->data);
+            } else {
+                $this->load->view('job/job_search_login_new_search', $this->data);
+            }
+        } else {
+            $this->load->view('job/job_search_login', $this->data);
+        }
+        //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA END
+    }
+
+    public function ajax_job_search_new()
+    {
+        print_r($_POST);
+        print_r($_GET);
+
     }
 
 }

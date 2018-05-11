@@ -192,6 +192,12 @@ class Job_live extends MY_Controller {
         echo json_encode($latestJob);
     }
 
+    public function get_jobtitle() {
+        $limit = $_GET['limit'];
+        $job_title = $this->job_model->get_jobtitle($limit);
+        echo json_encode($job_title);
+    }
+
     public function applyJobFilter() {
         $posting_period = implode(',', $_POST['posting_period']);
         $experience = implode(',', $_POST['experience']);

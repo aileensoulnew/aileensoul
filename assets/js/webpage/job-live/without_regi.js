@@ -1,3 +1,20 @@
+app.filter('slugify', function () {
+    return function (input) {
+        if (!input)
+            return;
+
+        // make lower case and trim
+        var slug = input.toLowerCase().trim();
+
+        // replace invalid chars with spaces
+        slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
+
+        // replace multiple spaces or hyphens with a single hyphen
+        slug = slug.replace(/[\s-]+/g, '-');
+
+        return slug;
+    };
+});
 app.controller('noRegJobController', function ($scope, $http) {
     $scope.title = title;
     $scope.jobCategory = {};
@@ -31,6 +48,13 @@ app.controller('noRegJobController', function ($scope, $http) {
         }, function (error) {});
     }
     jobSkill(8);
+
+    function jobTitle(limit) {
+        $http.get(base_url + "job_live/get_jobtitle?limit="+limit).then(function (success) {
+            $scope.jobDesignation = success.data;
+        }, function (error) {});
+    }
+    jobTitle(8);
 
     function latestJob() {
         $http({
