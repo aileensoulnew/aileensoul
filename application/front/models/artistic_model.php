@@ -387,13 +387,16 @@ class Artistic_model extends CI_Model {
     }
 
     // new artist search result
-    function searchArtistData($keyword = '', $location = ''){
+    function searchArtistData($keyword = '', $location = '',  $category_id = '',$location_id = ''){
         // $keyword = str_replace('%20', ' ', $keyword);
         $keyword = urldecode($keyword);
         // $location = str_replace('%20', ' ', $location);
         $location = urldecode($location);
         $sqlkeyword = "";
         $sqllocation = "";
+        $sqlfilter = "";
+        $sqlcategoryfilter = "";
+        $sqllocationfilter = "";
         // If Category search
         if($keyword != ""){
             $keyworddata = explode(',', $keyword);
@@ -404,9 +407,17 @@ class Artistic_model extends CI_Model {
                 $sqlkeyword .= " ar.art_name LIKE '". $val ."' OR ar.art_lastname LIKE '". $val ."' OR CONCAT(ar.art_name, ' ',ar.art_lastname) LIKE '". $val ."' OR ac.art_category LIKE '". $val ."' OR
                     ar.other_skill LIKE '" . $val ."'";
             }
-            $sqlkeyword .= ")";
         }
 
+        if($category_id != ""){
+            $sqlcategoryfilter = ($sqlkeyword == "") ? " AND " : " OR ";
+            $sqlcategoryfilter .= "ac.category_id IN (". $category_id .")";
+            $sqlcategoryfilter .= ($sqlkeyword != "") ? ")" : "";
+        }else{
+            $sqlcategoryfilter = ($sqlkeyword != "") ? ")" : "";
+        }
+
+            
         // IF LOCATION SEARCH
         if($location != ""){
             $locationdata = explode(',', $location);
@@ -418,8 +429,31 @@ class Artistic_model extends CI_Model {
                     OR cr.country_name LIKE '". $val ."'
                     OR s.state_name LIKE '". $val ."'";
             }
-            $sqllocation .= ")";
+            // $sqllocation .= ")";
         }
+
+        // If category and location id selected in filter
+        /*if($category_id != "" && $location_id != ""){
+            $sqlfilter = " OR (ac.category_id IN (". $category_id .") AND ct.city_id IN (". $location_id ."))";
+        }else if($category_id != ""){
+            $sqlfilter = " OR ac.category_id IN (". $category_id .")";
+        }else if($location_id != ""){
+            $sqlfilter = " OR ct.city_id IN (". $location_id .")";
+        }else{
+            $sqlfilter = "";
+        }*/
+
+        
+        if($location_id != ""){
+            $sqllocationfilter = ($sqllocation == "") ? " AND " : " OR ";
+            $sqllocationfilter .= "ct.city_id IN (". $location_id .")";  
+            $sqllocationfilter .= ($sqllocation != "") ? ")" : ""; 
+        }else{
+            $sqllocationfilter = ($sqllocation != "") ? ")" : ""; 
+
+        }
+
+
 
         $limit = '';
         $sql = "SELECT ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill,
@@ -432,14 +466,15 @@ class Artistic_model extends CI_Model {
                 LEFT JOIN ailee_countries cr ON cr.country_id = ar.art_country 
                 LEFT JOIN ailee_states s ON s.state_id = ar.art_state 
                 WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'"
-                . $sqlkeyword . $sqllocation;    
+                . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;    
 
             if($limit){
                 $sql .= " LIMIT ". $limit;
             }
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
-
+            // echo $this->db->last_query();
+            // exit;
             foreach ($result_array as $key => $value) {
                 $user_id = $value['user_id'];
                 $new_slug = $this->get_artistic_slug($user_id);

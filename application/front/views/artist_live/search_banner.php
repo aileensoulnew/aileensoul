@@ -7,7 +7,7 @@
 			<?php if(!$isartistactivate || $isartistactivate == false){ ?>
 				<a class="btn5" href="<?php echo $artist_profile_link ?>">Create Artist Profile</a>
 			<?php } else{ ?>
-				<a class="btn5" href="<?php artist_reactivateacc; ?>">Reactivate Artist Profile</a>
+				<a class="btn5" href="<?php echo artist_reactivateacc; ?>">Reactivate Artist Profile</a>
 			<?php } ?>
 		</div>
 		<div class="row">

@@ -6,13 +6,10 @@ app.controller('artistListController', function ($scope, $http) {
     $scope.urllocation_id = location_id;
     var filterajax = false;
     function artistCategory(){
-        $http.get(base_url + "artist_live/artistCategory?limit=5").then(function (success) {
+        $http.get(base_url + "artist_live/artistCategory?q=" + q + "&limit=5").then(function (success) {
             $scope.artistCategory = success.data;
             $($scope.artistCategory).each(function(i,d){
                 d.isselected = false;
-                if(category_id == d.category_id){
-                    d.isselected = true;
-                }
             });
         }, function (error) {});
     }

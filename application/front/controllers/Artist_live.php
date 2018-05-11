@@ -103,16 +103,19 @@ class Artist_live extends MY_Controller {
         $this->data['title'] = "Opportunities | Aileensoul";
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         if($searchquery != ''){
+            $isloacationsearch = false;
+            $search_location;
+            if (substr($searchquery, 0, strlen("artist-in-")) === "artist-in-") {
+                $search_location = explode("artist-in-", $searchquery);
+            }
             $search_category = explode("-in-", $searchquery);
-            $search_location = explode("artist-in-", $searchquery);
             $this->data['q'] = '';
             $this->data['l'] = '';
-            
             if(count($search_location) > 0){
                 $this->data['q'] = '';
-                $this->data['l'] = $search_location[0];
+                $this->data['l'] = $search_location[1];
             }
-            else if(count($search_category) > 1){
+            else if(count($search_category) > 0){
                 $this->data['q'] = $search_category[0];
                 $this->data['l'] = $search_category[1];
             }else{
@@ -156,16 +159,10 @@ class Artist_live extends MY_Controller {
     public function searchArtistData() {
         $keyword = $_GET['q'];
         $city = $_GET['l'];
+        $category_id = $_GET['category_id'];
+        $location_id = $_GET['location_id'];
 
-        $searchArtistData = $this->artistic_model->searchArtistData($keyword, $city);
-        echo json_encode($searchArtistData);
-    }
-
-    public function searchArtistDataold() {
-        $keyword = $_GET['q'];
-        $city = $_GET['l'];
-
-        $searchArtistData = $this->artistic_model->searchArtistData($keyword, $city);
+        $searchArtistData = $this->artistic_model->searchArtistData($keyword, $city, $category_id,$location_id);
         echo json_encode($searchArtistData);
     }
 
@@ -1628,7 +1625,7 @@ class Artist_live extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'status' => '0');
         $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $this->data['isartistactivate'] = false;
-        if ($artresult) {
+        if (count($artresult) > 0) {
             $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
             $this->data['isartistactivate'] = true;
             // $this->load->view('artist_live/reactivate', $this->data);

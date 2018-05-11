@@ -61,7 +61,7 @@
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10"><a href="<?php echo artist_location_list ?>">More Categories</a></p>
+                        <p class="text-right p10"><a href="<?php echo artist_location_list ?>">More Locations</a></p>
                     </div>
 
                     <div class="custom_footer_left fw">

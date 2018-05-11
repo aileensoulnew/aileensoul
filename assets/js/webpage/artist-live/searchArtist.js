@@ -9,11 +9,19 @@ app.controller('searchArtistController', function ($scope, $window) {
         if(keyword != ""){
             keyworddata = keyword.split(",");
             // remove in from array
-            console.log(keyworddata.indexOf("in"));
             if(keyworddata.indexOf("in") > -1 && city != ""){
                 keyworddata.splice(keyworddata.indexOf("in"),1);
             }
             keyword = keyworddata.join('-').toString();
+        }
+        var citydata = [];
+        if(city != ""){
+            citydata = city.split(",");
+            // remove in from array
+            // if(citydata.indexOf("in") > -1 && city != ""){
+            //     citydata.splice(citydata.indexOf("in"),1);
+            // }
+            city = citydata.join('-').toString();
         }
 
         if (keyword == '' && city == '') {
@@ -21,7 +29,7 @@ app.controller('searchArtistController', function ($scope, $window) {
         } else if (keyword != '' && city == '') {
             $window.location.href = base_url + 'artist/search/' + keyword;
         } else if (keyword == '' && city != '') {
-            $window.location.href = base_url + 'artist-in-' + city;
+            $window.location.href = base_url + 'artist/search/artist-in-' + city;
         } else {
             $window.location.href = base_url + 'artist/search/' + keyword + '-in-' + city;
         }

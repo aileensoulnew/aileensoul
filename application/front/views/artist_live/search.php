@@ -17,7 +17,8 @@
     <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
-            <?php if($is_artist_profile_set == 0 || $is_artist_profile_set == '0'){ echo $search_banner; } ?>
+            <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ echo $search_banner; } 
+                ?>
             <div class="container pt20">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
@@ -26,12 +27,36 @@
                         </div>
                         <ul class="search-listing">
                             <li ng-repeat="category in artistCategory">
-                                <label class=""><a href="<?php echo artist_category ?>{{category.category_slug}}">{{category.art_category | capitalize}}<span class="pull-right">({{category.count}})</span></a></label>
+                                <label class="">
+                                     <p class="pull-left" style="width: 45px;">
+                                        <input class="categorycheckbox" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                    </p>
+                                    <p class="pull-left">{{category.art_category | capitalize}}</p>
+                                    <p class="pull-right">({{category.count}})</p>
+                                </label>
                             </li>
-                            <!-- <li>
-                                <label class=""><a href="<?php //echo base_url('artist/other') ?>">Other<span class="pull-right">({{otherCategoryCount}})</span></a></label>
-                            </li> -->
                         </ul>
+                        <p class="text-right p10"><a href="<?php echo artist_category_list ?>">More Categories</a></p>
+                    </div>
+
+                    <div class="left-search-box list-type-bullet">
+                        <div class="">
+                            <h3>Top Locations</h3>
+                        </div>                        
+                        <ul class="search-listing" style="list-style: none;">
+                            <li ng-repeat="location in artistLocation">
+                                <label class="pointer">
+                                    <p class="pull-left" style="width: 45px;">
+                                        <input class="locationcheckbox" type="checkbox" name="{{location.art_location}}" value="{{location.location_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+                                    </p>
+                                    <p class="pull-left">
+                                        {{location.art_location | capitalize}}
+                                    </p>
+                                    <p class="pull-right">({{location.total}})</p>
+                                </label>
+                            </li>
+                        </ul>
+                        <p class="text-right p10"><a href="<?php echo artist_location_list ?>">More Locations</a></p>
                     </div>
 
                     <div class="custom_footer_left fw">
@@ -138,6 +163,8 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var title = '<?php echo $title; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var category_id = '<?php echo $category_id; ?>';
+            var location_id = '<?php echo $location_id; ?>';
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';         
             var app = angular.module('artistSearchListApp', ['ui.bootstrap']);
