@@ -29,11 +29,11 @@ class Job_live extends MY_Controller {
         // check job is active or not.
         $userid = $this->session->userdata('aileenuser');
         $this->data['isjobdeactivate'] = false;
-        $deactivate = $this->checkisjobdeactivate();
-
-        if($this->job_profile_set == 1 && !$reactivate){
-            redirect( $this->job_profile_link);
-        }
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -46,7 +46,11 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Job Profile | Aileensoul";
-        $this->load->view('job_live/index', $this->data);
+        //$this->load->view('job_live/index', $this->data);
+        if($this->job_profile_set == 1)
+            $this->load->view('job_live/index', $this->data);
+        else
+            $this->load->view('job_live/without_register', $this->data);
     }
 
     public function category($category_slug = '') {
@@ -243,9 +247,10 @@ class Job_live extends MY_Controller {
     }
 
     // CHECK IS JOB DEACTIVATE OR NOT AND SET LINK VARIABLE FOR REDIRECT FROM SEARCH BANNER PAGE
-    function checkisjobdeactivate(){
+    function checkisjobdeactivate($userid = ""){
         $contition_array = array('user_id' => $userid, 'status' => '0');
         $deactivate = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        
         // IF USER IS RELOGIN AFTER DEACTIVATE PROFILE IN RECRUITER THEN REACTIVATE PROFIEL CODE END    
         if ($deactivate) {
             // Fetch data for reg.
