@@ -1361,8 +1361,9 @@ class Recruiter extends MY_Controller {
         }
 //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
 //FETCH RECRUITER DATA
-// FETCH RECRUITER POST    
-        $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
+// FETCH RECRUITER POST
+
+        /*$contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $recpostdata = $this->data['recpostdata'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data = 'post_id,post_skill,post_name,industry_type', $sortby = 'post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         foreach ($recpostdata as $postdata) {
 
@@ -1429,13 +1430,16 @@ class Recruiter extends MY_Controller {
         $candidatejob1 = array_slice($candidatejob, $start, $perpage);
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($candidatejob);
-        }
+        }*/
+
+        $candidatejob1 = $this->recruiter_model->get_recommen_candidate_post($userid,$page,$perpage);
+        $recommen_candid_totrec = $this->recruiter_model->get_recommen_candidate_post_total($userid);
 
         $postdata .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
-        $postdata .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
+        $postdata .= '<input type = "hidden" class = "total_record" value = "' . $recommen_candid_totrec["total_record"] . '" />';
         $postdata .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
-        if ($candidatejob) {
+        if (isset($candidatejob1) && !empty($candidatejob1)) {
             foreach ($candidatejob1 as $row) {
 
                 $postdata .= '<div class="profile-job-post-detail clearfix">';
@@ -1877,7 +1881,7 @@ class Recruiter extends MY_Controller {
                 $postdata .= '</div>';
                 $postdata .= '</div>';
             }
-        } elseif ($recpostdata == NULL) {
+        } elseif ($recommen_candid_totrec == 0) {
             $postdata .= '<div class="text-center rio" style="border: none;">';
             $postdata .= '<div class="no-post-title">';
             $postdata .= '<h4 class="page-heading  product-listing" style="border:0px;">Lets create your job post.</h4>';
