@@ -23,7 +23,6 @@
 						</div>
 						<div class="fw pt20">
 							<input type="submit" name="searchSubmit" class="btn1" value="Search" id="btnSubmit"/>
-							<!-- <a href="#" class="btn1">Search</a> -->
 						</div>
 					</form>
 				</div>

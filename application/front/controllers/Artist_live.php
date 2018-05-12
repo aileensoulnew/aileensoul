@@ -356,7 +356,6 @@ class Artist_live extends MY_Controller {
 
         $artistic_name = $this->get_artistic_name($this->data['artid']);
         $this->data['title'] = $artistic_name . ' | Dashboard' . '- Artistic Profile' . TITLEPOSTFIX;
-
         if ($userid) {
 
             if (!$this->data['artisticdata'] && !$this->data['artsdata']) {

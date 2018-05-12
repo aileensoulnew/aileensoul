@@ -17,7 +17,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/artistic.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />  
-
             <?php }else{?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
@@ -25,7 +24,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver=' . time()); ?>" />
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/artistic.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />  
-
             <?php }?>    
         <style type="text/css">
             .two-images, .three-image, .four-image{
@@ -528,10 +526,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 <?php }?>
         <!-- POST BOX JAVASCRIPT END --> 
         <script>
-                                            var base_url = '<?php echo base_url(); ?>';
-                                            var slug = '<?php echo $artid; ?>';
-                                            var site_url = '<?php echo $get_url; ?>';
-
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $artid; ?>';
+            var site_url = '<?php echo $get_url; ?>';
         </script>
         <!-- script for login  user valoidtaion start -->
         <script>
@@ -634,9 +631,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             if (response.data == "ok") { 
                                 $("#btn1").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="<?php echo "btn-ajax-loader.gif"; ?>"/> &nbsp; Login');
                                 if (response.is_artistic == '1') { 
-                                    window.location = "<?php echo base_url() ?>artist/dashboard/" + site_url;
+                                    window.location = "<?php echo artist_dashboard ?>" + site_url;
                                 } else { 
-                                    window.location = "<?php echo base_url() ?>artist";
+                                    window.location = "<?php echo find_artist; ?>";
                                 }
                             } else if (response.data == "password") {
                                 $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');

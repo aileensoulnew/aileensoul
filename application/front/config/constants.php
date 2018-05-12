@@ -571,6 +571,7 @@ define('MAILTYPE', 'html');
 
 // Define Artist Path
 
+define('base_url', BASEURL); 
 define('artist_registration', BASEURL. 'artist/registration'); 
 define('artist_dashboard', BASEURL. 'artist/dashboard/'); 
 define('artist_reactivateacc', BASEURL. 'artist/reactivateacc'); 
@@ -585,3 +586,8 @@ define('artist_art_address_insert', BASEURL. 'artist/art_address_insert');
 define('artist_userlist', BASEURL. 'artist/userlist'); 
 define('artist_art_post_insert', BASEURL. 'artist/art_post_insert/'); 
 define('artist_photos', BASEURL. 'artist/photos/'); 
+define('find_artist', BASEURL. 'find-artist/'); 
+define('profiles', BASEURL. 'profiles/'); 
+define('job', BASEURL. 'job/'); 
+define('recruiter', BASEURL. 'recruiter/'); 
+define('freelance', BASEURL. 'freelance/'); 

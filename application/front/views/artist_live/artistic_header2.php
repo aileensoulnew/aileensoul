@@ -40,7 +40,7 @@ $userid = $this->session->userdata('aileenuser');
 				</div>
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
 					<div class="job-search-box1 clearfix">
-						<form action="<?php echo base_url('artist/search'); ?>" method="get">
+						<form onsubmit="artistsearchSubmit()" action="javascript:void(0)" method="get">
 							<fieldset class="sec_h2">
 								<input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
 							</fieldset>
@@ -332,4 +332,37 @@ $userid = $this->session->userdata('aileenuser');
         });
     });
 
+    function artistsearchSubmit(){
+    	var keyword = $("#tags").val().toLowerCase().split(' ').join('+');
+    	var city = $("#searchplace").val().toLowerCase().split(' ').join('+');
+    	// REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+    	var keyworddata = [];
+    	if(keyword != ""){
+    	    keyworddata = keyword.split(",");
+    	    // remove in from array
+    	    if(keyworddata.indexOf("in") > -1 && city != ""){
+    	        keyworddata.splice(keyworddata.indexOf("in"),1);
+    	    }
+    	    keyword = keyworddata.join('-').toString();
+    	}
+    	var citydata = [];
+    	if(city != ""){
+    	    citydata = city.split(",");
+    	    // remove in from array
+    	    // if(citydata.indexOf("in") > -1 && city != ""){
+    	    //     citydata.splice(citydata.indexOf("in"),1);
+    	    // }
+    	    city = citydata.join('-').toString();
+    	}
+
+    	if (keyword == '' && city == '') {
+    	    return false;
+    	} else if (keyword != '' && city == '') {
+    	    window.location.href = base_url + 'artist/search/' + keyword;
+    	} else if (keyword == '' && city != '') {
+    	    window.location.href = base_url + 'artist/search/artist-in-' + city;
+    	} else {
+    	    window.location.href = base_url + 'artist/search/' + keyword + '-in-' + city;
+    	}
+    }
 </script>

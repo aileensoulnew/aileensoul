@@ -15,10 +15,16 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="profile-main-page">
-        <?php echo $header_profile; ?>
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){
+            echo $header_profile; 
+        } ?>
         <div class="middle-section middle-section-banner">
             <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ echo $search_banner; } 
-                ?>
+                else{
+                    echo $artistic_header2;
+                }
+            ?>
             <div class="container pt20">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
@@ -149,7 +155,7 @@
                 </div>
             </div>
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
