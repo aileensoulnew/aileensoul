@@ -53,10 +53,8 @@
                         <h2>How Can Aileensoul Freelance Profile Help in Hiring Remote Talent?</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-6 col-sm-6 pull-right">
-                            <img src="<?php echo base_url('assets/n-images/free-hire-img.jpg') ?>">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
+                       
+                        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2 text-center">
                             <p>Freelancing is no longer an uncommon word, with a vast number of population involved. Penetration of technology and easy access to internet has made freelancing a more preferred choice. </p>
                             <p>A distinct Freelance profile is offered by Aileensoulfor free which allows the users to both hire and get freelance work from the web portal. </p>
                             <p>Freelance Hire profile is especially for freelance recruiters looking out for hiring talented candidates with a hassle-free process. </p>
@@ -67,7 +65,7 @@
             </div>
 
             <!-- CREATE OR REACTIVATE -->
-            <div class="content-bnr">
+            <div class="content-bnr free-hire-bnr-prlx">
                 <div class="bnr-box">                    
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Grow Your Business with a Remote Team</h2>

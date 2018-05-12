@@ -54,47 +54,19 @@
                         </div>
                     </div>
                     <div class="row pt20 pb20">
-                        <div class="col-md-6 col-sm-6 pull-right">
-                            <div class="content-img text-center">
-                                <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
+                       
+                        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2 text-center">
                             <p>Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
                             <p>
                                 <br>
                                 Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
                         </div>
                     </div>
-                    <div class="row pt20 pb20">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="content-img text-center">
-                                <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <p>Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
-                            <p>
-                                <br>
-                                Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
-                        </div>
-                    </div>
-                    <div class="row pt20 pb20">
-                        <div class="col-md-6 col-sm-6 pull-right">
-                            <div class="content-img text-center">
-                                <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <p>Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
-                            <p>
-                                <br>
-                                Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
             </div>
-            <div class="content-bnr">
+            <div class="content-bnr free-apply-bnr-prlx">
                 <div class="bnr-box">
                     <img src="<?php echo base_url('assets/n-images/img2.jpg') ?>">
                     <div class="content-bnt-text">
