@@ -526,15 +526,13 @@ $route['(:any)/videos'] = 'Userprofile';
 $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
-$route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
-$route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 // $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
+$route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
+$route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['(:any)'] = 'Userprofile';
 
 
 // ARTIST SEARCH 
-
-
 $route['artist/search/(:any)'] = "artist_live/artist_search/$1";
 $route['artist/search/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 // $route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";

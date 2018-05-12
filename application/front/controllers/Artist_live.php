@@ -88,7 +88,6 @@ class Artist_live extends MY_Controller {
     }
 
     public function artist_search($searchquery = '') {
-       
         $userid = $this->session->userdata('aileenuser');
         $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -130,7 +129,6 @@ class Artist_live extends MY_Controller {
         // Replace - with ,
         $this->data['q'] = str_replace("-",",",$this->data['q']);
         $this->data['l'] = str_replace("-",",",$this->data['l']);
-
         $this->data['is_artist_profile_set'] = $this->artist_profile_set;
         $this->load->view('artist_live/search', $this->data);
     }
@@ -339,9 +337,9 @@ class Artist_live extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
-        if ($artistic_deactive) {
-            redirect('find-artist');
-        }
+        // if ($artistic_deactive) {
+        //     redirect('find-artist');
+        // }
         //if user deactive profile then redirect to artist/index untill active profile End
         $user_name = $this->session->userdata('user_name');
 
