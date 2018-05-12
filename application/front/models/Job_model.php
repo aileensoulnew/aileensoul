@@ -22,7 +22,8 @@ class Job_model extends CI_Model {
         $this->db->where('rp.is_delete', '0');
         $this->db->group_by('rp.industry_type');
         $this->db->order_by('count', 'desc');
-        $this->db->limit($limit);
+        if($limit != "")
+            $this->db->limit($limit);
         $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;
@@ -36,7 +37,24 @@ class Job_model extends CI_Model {
         $this->db->where('rp.is_delete', '0');
         $this->db->group_by('rp.city');
         $this->db->order_by('count', 'desc');
-        $this->db->limit($limit);
+        if($limit != "")
+            $this->db->limit($limit);
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_jobtitle($limit = '') {
+
+        $this->db->select('count(jt.title_id) as count,jt.title_id,jt.name as job_title,jt.slug as job_slug')->from('job_title jt');
+        $this->db->join('rec_post rp', 'rp.post_name = jt.title_id', 'left');
+        $this->db->where('jt.status', 'publish');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('jt.title_id');
+        $this->db->order_by('count', 'desc');
+        if($limit != "")
+            $this->db->limit($limit);
         $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;
@@ -50,7 +68,8 @@ class Job_model extends CI_Model {
         $this->db->where('rp.is_delete', '0');
         $this->db->group_by('rp.user_id');
         $this->db->order_by('count', 'desc');
-        $this->db->limit($limit);
+        if($limit != "")
+            $this->db->limit($limit);
         $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;
@@ -94,7 +113,8 @@ class Job_model extends CI_Model {
             array_push($return_array, $return);
         }
         array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
-        array_splice($return_array, $limit);
+        if($limit != "")
+            array_splice($return_array, $limit);
 
         return $return_array;
     }
