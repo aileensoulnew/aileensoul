@@ -63,7 +63,7 @@
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="company in jobCompany">                                   
                                     <label class="control control--checkbox"><span ng-bind="company.company_name | capitalize"></span>
-                                        <input type="checkbox" ng-model="jobcompany" name="jobcompany[]" ng-value="{{company.rec_id}}" ng-change="applyJobCompanyFilter()"/>
+                                        <input type="checkbox" class="company-filter" ng-model="jobcompany" name="jobcompany[]" ng-value="{{company.rec_id}}" ng-change="applyJobFilter()"/>
                                         <div class="control__indicator"></div>
                                     </label>
                                 </li>                                
@@ -76,7 +76,7 @@
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="category in jobCategory">
                                     <label class="control control--checkbox"><span ng-bind="category.industry_name | capitalize"></span>
-                                        <input type="checkbox" ng-model="categories" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
+                                        <input type="checkbox" class="category-filter" ng-model="categories" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
                                         <div class="control__indicator"></div>
                                     </label>
                                 </li>
@@ -89,7 +89,7 @@
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="city in jobCity">
                                     <label class="control control--checkbox"><span ng-bind="city.city_name | capitalize"></span>
-                                        <input type="checkbox" ng-model="location" name="location[]" ng-value="{{city.city_id}}" ng-change="applyJobFilter()"/>
+                                        <input type="checkbox" class="location-filter" ng-model="location" name="location[]" ng-value="{{city.city_id}}" ng-change="applyJobFilter()"/>
                                         <div class="control__indicator"></div>
                                     </label>
                                 </li>
@@ -102,7 +102,7 @@
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="skill in jobSkill">
                                     <label class="control control--checkbox"><span ng-bind="skill.skill | capitalize"></span>
-                                        <input type="checkbox" ng-model="skills" name="skill[]" ng-value="{{skill.skill_id}}" ng-change="applyJobFilter()"/>
+                                        <input type="checkbox" class="skills-filter" ng-model="skills" name="skill[]" ng-value="{{skill.skill_id}}" ng-change="applyJobFilter()"/>
                                         <div class="control__indicator"></div>
                                     </label>
                                 </li>
@@ -115,7 +115,7 @@
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="jd in jobDesignation">
                                     <label class="control control--checkbox"><span ng-bind="jd.job_title | capitalize"></span>
-                                        <input type="checkbox" ng-model="jd" name="jd[]" ng-value="{{jd.title_id}}" ng-change="applyDesignationFilter()"/>
+                                        <input type="checkbox" class="jds-filter" ng-model="jds" name="jds[]" ng-value="{{jd.title_id}}" ng-change="applyJobFilter()"/>
                                         <div class="control__indicator"></div>
                                     </label>
                                 </li>
@@ -131,31 +131,31 @@
                                     <ul class="search-listing">
                                         <li>
                                             <label class="control control--checkbox">Today
-                                                <input type="checkbox" name="posting_period[]" value="1"/>
+                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="1" ng-model="post_period1" ng-change="applyJobFilter()"/>
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="control control--checkbox">Last 7 Days
-                                                <input type="checkbox" name="posting_period[]" value="2"/>
+                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="2" ng-model="post_period2" ng-change="applyJobFilter()"/>
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="control control--checkbox">Last 15 Days
-                                                <input type="checkbox" name="posting_period[]" value="3"/>
+                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="3" ng-model="post_period3" ng-change="applyJobFilter()"/>
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="control control--checkbox">Last 45 Days
-                                                <input type="checkbox" name="posting_period[]" value="4"/>
+                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="4" ng-model="post_period4" ng-change="applyJobFilter()"/>
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="control control--checkbox">More than 45 Days
-                                                <input type="checkbox" name="posting_period[]" value="5"/>
+                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="5" ng-model="post_period5" ng-change="applyJobFilter()"/>
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>
@@ -176,37 +176,37 @@
                                         <ul class="search-listing">
                                             <li>
                                                 <label class="control control--checkbox">0 to 1 year
-                                                    <input type="checkbox" name="experience[]" value="1"/>
+                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="1" ng-model="exp1" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="control control--checkbox">1 to 2 year
-                                                    <input type="checkbox" name="experience[]" value="2"/>
+                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="2" ng-model="exp2" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="control control--checkbox">2 to 3 year
-                                                    <input type="checkbox" name="experience[]" value="3"/>
+                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="3" ng-model="exp3" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="control control--checkbox">3 to 4 year
-                                                    <input type="checkbox" name="experience[]" value="4"/>
+                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="4" ng-model="exp4" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="control control--checkbox">4 to 5 year
-                                                    <input type="checkbox" name="experience[]" value="5"/>
+                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="5" ng-model="exp5" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
                                                 <label class="control control--checkbox">More than 5 year
-                                                    <input type="checkbox" name="experience[]" value="6"/>
+                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="6" ng-model="exp6" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
@@ -282,6 +282,43 @@
 
                                 <div class="contact-frnd-post">
                                     <div class="job-contact-frnd ">
+                                        <div class="all-job-box" ng-repeat="job in searchJob">
+                                            <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="jobs.page_number" ng-value="{{jobs.page_number}}">
+                                            <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="jobs.total_record" ng-value="{{jobs.total_record}}">
+                                            <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
+                                            <div class="all-job-top">
+                                                <div class="post-img">
+                                                    <a href="#" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
+                                                    <a href="#" ng-if="!job.comp_logo"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
+                                                </div>
+                                                <div class="job-top-detail">
+                                                    <h5><a href="#" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
+                                                    <h5><a href="#" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
+                                                    <p><a href="#" ng-bind="job.re_comp_name"></a></p>
+                                                    <p><a href="#" ng-bind="job.fullname"></a></p>
+                                                </div>
+                                            </div>
+                                            <div class="all-job-middle">
+                                                <p class="pb5">
+                                                    <span class="location">
+                                                        <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png') ?>">{{job.city_name}},({{job.country_name}})</span>
+                                                    </span>
+                                                    <span class="exp">
+                                                        <span><img class="pr5" src="<?php echo base_url('assets/n-images/exp.png') ?>">{{job.min_year}} year - {{job.max_year}} year <span ng-if="job.fresher == '1'">(freshers can also apply)</span></span>
+                                                    </span>
+                                                </p>
+                                                <p ng-bind="(job.post_description | limitTo:175) + '.....'"></p>
+
+                                            </div>
+                                            <div class="all-job-bottom">
+                                                <span class="job-post-date"><b>Posted on:</b><span ng-bind="job.created_date"></span></span>
+                                                <p class="pull-right">
+                                                    <a href="#" class="btn4">Save</a>
+                                                    <a href="#" class="btn4">Apply</a>
+                                                </p>
+
+                                            </div>
+                                        </div>
                                         <!--.........AJAX DATA......-->           
                                     </div>
                                     <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="loaderimage"/></div>
@@ -782,10 +819,10 @@
         var base_url = '<?php echo base_url(); ?>';
 
         var skill = '<?php echo $keyword; ?>';
-        var skill = skill.replace('-', ' ');
+        //var skill = skill.replace(/\-/g, ' ');
 
         var place = '<?php echo $keyword1; ?>';
-        var place = place.replace('-', ' ');
+        //var place = place.replace(/\-/g, ' ');
 
         var csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
         var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';

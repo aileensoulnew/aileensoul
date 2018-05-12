@@ -5832,9 +5832,56 @@ class Job extends MY_Controller {
 
     public function ajax_job_search_new()
     {
-        print_r($_POST);
-        print_r($_GET);
+        $userid = $this->session->userdata('aileenuser');
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 5;
+        $keyword = trim($_GET['search']);
+        $job_skills = $this->job_model->is_job_skills($keyword);
+        $job_category = $this->job_model->is_job_category($keyword);
+        $job_designation = $this->job_model->is_job_designation($keyword);
+        // print_r($job_skills);
+        // print_r($job_category);
+        // print_r($job_designation);
+        $searchJob = $this->job_model->ajax_job_search_new($userid,$job_skills,$job_category,$job_designation,$page,$limit);
+        echo json_encode($searchJob);
+    }
 
+    public function ajax_job_search_new_filter()
+    {
+        //print_r($_POST);exit;
+        $userid = $this->session->userdata('aileenuser');
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $company_id = (isset($_POST['company_id']) && !empty($_POST['company_id']) ? $_POST['company_id'] : "");
+        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");
+        $location_id = (isset($_POST['location_id']) && !empty($_POST['location_id']) ? $_POST['location_id'] : "");
+        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $job_desc = (isset($_POST['job_desc']) && !empty($_POST['job_desc']) ? $_POST['job_desc'] : "");
+        $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
+        $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
+
+        $limit = 5;
+        $keyword = trim($_GET['search']);
+        $job_skills = $this->job_model->is_job_skills($keyword);
+        $job_category = $this->job_model->is_job_category($keyword);
+        $job_designation = $this->job_model->is_job_designation($keyword);
+        // print_r($job_skills);
+        // print_r($job_category);
+        // print_r($job_designation);
+        $searchJob = $this->job_model->ajax_job_search_new_filter($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$page,$limit);
+
+        echo json_encode($searchJob);
     }
 
 }

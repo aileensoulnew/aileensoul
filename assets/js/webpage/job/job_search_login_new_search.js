@@ -9,56 +9,63 @@ app.filter('capitalize', function () {
 
     }
 });
-app.controller('jobSearchController', function ($scope, $http) {
-
+app.controller('jobSearchController', function ($scope, $http,$window) {
+    $scope.showLoadmore = true;
     $scope.jobCategory = {};
     $scope.jobCity = {};
     $scope.jobCompany = {};
     $scope.jobSkill = {};
-    $scope.latestJob = {};
+    $scope.searchJob = {};
+    $scope.jobs = {};
+    $scope.jds = "";
+    $scope.mainKeyword = "";
+    //$scope.jobcompany = "";
+    var fil_limit = 10;
+    job_search(1);
 
     function jobCategory(limit = "") {
         $http.get(base_url + "job_live/jobCategory?limit="+limit).then(function (success) {
             $scope.jobCategory = success.data;
         }, function (error) {});
     }
-    jobCategory();
+    jobCategory(fil_limit);
 
     function jobCity(limit = "") {
         $http.get(base_url + "job_live/jobCity?limit="+limit).then(function (success) {
             $scope.jobCity = success.data;
         }, function (error) {});
     }
-    jobCity();
+    jobCity(fil_limit);
     function jobCompany(limit = "") {
         $http.get(base_url + "job_live/jobCompany?limit="+limit).then(function (success) {
             $scope.jobCompany = success.data;
         }, function (error) {});
     }
-    jobCompany();
+    jobCompany(fil_limit);
     function jobSkill(limit = "") {
         $http.get(base_url + "job_live/jobSkill?limit="+limit).then(function (success) {
             $scope.jobSkill = success.data;
         }, function (error) {});
     }
-    jobSkill();
+    jobSkill(fil_limit);
 
     function jobTitle(limit = "") {
         $http.get(base_url + "job_live/get_jobtitle?limit="+limit).then(function (success) {
             $scope.jobDesignation = success.data;
         }, function (error) {});
     }
-    jobTitle();
+    jobTitle(fil_limit);
 
     //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER START
+    var isProcessing = false;
     
-    job_search();
-    $(window).scroll(function() {
+    angular.element($window).bind("scroll", function (e) {        
         if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
-            var page = $(".page_number:last").val();
-            var total_record = $(".total_record").val();
-            var perpage_record = $(".perpage_record").val();
-            if (parseInt(perpage_record) <= parseInt(total_record)) {
+            isLoadingData = true;
+            var page = $scope.jobs.page_number;
+            var total_record = $scope.jobs.total_record;
+            var perpage_record = $scope.jobs.perpage_record;            
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
                 var available_page = total_record / perpage_record;
                 available_page = parseInt(available_page, 10);
                 var mod_page = total_record % perpage_record;
@@ -66,14 +73,12 @@ app.controller('jobSearchController', function ($scope, $http) {
                     available_page = available_page + 1;
                 }
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum = parseInt($(".page_number:last").val()) + 1;
+                    var pagenum =  $scope.jobs.page_number + 1;
                     job_search(pagenum);
                 }
             }
         }
     });
-    
-    var isProcessing = false;
 
     function job_search(pagenum) {
         if (isProcessing) {
@@ -85,34 +90,154 @@ app.controller('jobSearchController', function ($scope, $http) {
             return;
         }
         isProcessing = true;
-        $.ajax({
-            type: 'POST',
-            url: base_url + "job/ajax_job_search_new?page=" + pagenum + "&skill=" + encodeURIComponent(skill),
+        $('#loader').show();
+        $http({
+            method: 'POST',
+            url: base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill),
             data: { "total_record": $("#total_record").val(), },
-            dataType: "html",
-            beforeSend: function() {
-                if (pagenum == 'undefined') {
-                    $(".job-contact-frnd ").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
-                } else {
-                    $('#loader').show();
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $('#loader').hide();
+            if(success.data.jobData.length > 0)
+            {
+                $scope.mainKeyword = skill;
+                if(pagenum > 1)
+                {
+                    for (var i in success.data.jobData) {
+                        $scope.searchJob.push(success.data.jobData[i]);
+                    }                
                 }
-            },
-            complete: function() {
-                $('#loader').hide();
-            },
-            success: function(data) {
-                $('.loader').remove();
-                $('.job-contact-frnd ').append(data);
-                // second header class add for scroll
-                var nb = $('.post-design-box').length;
-                if (nb == 0) {
-                    $("#dropdownclass").addClass("no-post-h2");
-                } else {
-                    $("#dropdownclass").removeClass("no-post-h2");
+                else
+                {
+                    $scope.searchJob = success.data.jobData;
                 }
+                //$scope.searchJob = success.data.jobData;
+                $scope.jobs.page_number = pagenum;
+                $scope.jobs.total_record = success.data.total_record;
+                $scope.jobs.perpage_record = 5;            
                 isProcessing = false;
             }
-        });
+            else
+            {
+                $scope.showLoadmore = false;                
+            }
+
+        });        
     }
     //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER END
+
+    $scope.applyJobFilter = function() {        
+        var cmp_fil = "";
+        $('.company-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                cmp_fil += (cmp_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(cmp_fil);
+
+        var cat_fil = "";
+        $('.category-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                cat_fil += (cat_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(cat_fil);
+
+        var loc_fil = "";
+        $('.location-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                loc_fil += (loc_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(loc_fil);
+
+        var skills_fil = "";
+        $('.skills-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                skills_fil += (skills_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(skills_fil);
+
+        var jd_fil = "";
+        $('.jds-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                jd_fil += (jd_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(jd_fil);
+
+        var per_fil = "";
+        $('.period-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                per_fil += (per_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(per_fil);
+
+        var exp_fil = "";
+        $('.exp-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                exp_fil += (exp_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(exp_fil);
+        pagenum = 1;
+
+        //$("#loader").show();
+        $scope.searchJob = {};
+
+        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill), {"company_id": cmp_fil, "category_id" : cat_fil, "location_id": loc_fil, "skill_id": skills_fil, "job_desc": jd_fil, "period_filter": per_fil, "exp_fil": exp_fil},
+            function(success){
+                data = JSON.parse(success);
+                $scope.searchJob = data.jobData;
+                // setTimeout(function(){
+                // },100);
+            }
+        );
+
+        // $http({
+        //     method: 'POST',
+        //     url: base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill),
+            /*data: "company_id=" + cmp_fil + "category_id" + cat_fil + "location_id" + loc_fil + "skill_id" + skills_fil + "job_desc" + jd_fil + "period_filter" + per_fil + "exp_fil" + exp_fil,*/
+        //     data: {"company_id": cmp_fil, "category_id" : cat_fil, "location_id": loc_fil, "skill_id": skills_fil, "job_desc": jd_fil, "period_filter": per_fil, "exp_fil": exp_fil},
+        //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        //     dataType : "json"
+        // })
+        // .then(function (success) {
+        //     $('#loader').hide();
+            /*if(success.data.jobData.length > 0)
+            {
+                $scope.mainKeyword = skill;
+                if(pagenum > 1)
+                {
+                    for (var i in success.data.jobData) {
+                        $scope.searchJob.push(success.data.jobData[i]);
+                    }                
+                }
+                else
+                {
+                    $scope.searchJob = success.data.jobData;
+                }
+                //$scope.searchJob = success.data.jobData;
+                $scope.jobs.page_number = pagenum;
+                $scope.jobs.total_record = success.data.total_record;
+                $scope.jobs.perpage_record = 5;            
+                isProcessing = false;
+            }
+            else
+            {
+                $scope.showLoadmore = false;                
+            }*/
+
+        //}); 
+    };
 });  
