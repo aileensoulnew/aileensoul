@@ -79,6 +79,7 @@ foreach ($followingdata as $followkey) {
   }
 
   $this->data['countfr'] = $countfr = count($countlfu);
+  
 //$this->data['art_header2_border'] = $this->load->view('artist/art_header2_border', $this->data, true);
 
 }

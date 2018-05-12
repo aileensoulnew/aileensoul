@@ -57,16 +57,16 @@
 <?php echo $artistic_common; ?>
 <div class="text-center tab-block">
     <div class="container mob-inner-page">
-       <a href="<?php echo base_url(artist_photos . $get_url) ?>" title="Photo">
+       <a href="<?php echo artist_photos . $get_url; ?>" title="Photo">
             Photo
         </a>
-       <a href="<?php echo base_url('artist/videos/' . $get_url) ?>" title="Video">
+       <a href="<?php echo artist_videos . $get_url; ?>" title="Video">
             Video
         </a>
-       <a href="<?php echo base_url('artist/audios/' . $get_url) ?>" title="Audio">
+       <a href="<?php echo artist_audios . $get_url; ?>" title="Audio">
             Audio
         </a>
-        <a href="<?php echo base_url('artist/pdf/' . $get_url) ?>" title="Pdf">
+        <a href="<?php echo artist_pdf . $get_url; ?>" title="Pdf">
             PDf
         </a>
     </div>
@@ -79,7 +79,7 @@
                     <div class="profile-boxProfileCard  module">
                        <div class="head_details1">
                             <span>
-                                  <a href="<?php echo base_url('artist/details/' . $this->uri->segment(3)) ?>" title="Information">
+                                  <a href="<?php echo artist_details . $this->uri->segment(3) ?>" title="Information">
                                       <h5><i class="fa fa-info-circle" aria-hidden="true"></i>
                                     Information  
                                    </h5>
@@ -156,7 +156,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="<?php echo base_url('artist/photos/' . $get_url) ?>" title="Photos">
+                <a href="<?php echo artist_photos . $get_url; ?>" title="Photos">
                 <div class="full-box-module business_data" id="autorefresh">
                     <div class="profile-boxProfileCard  module buisness_he_module" style="">
                         <div class="head_details">
@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 </a>
-                <a href="<?php echo base_url('artist/videos/' . $get_url) ?>" title="Video">
+                <a href="<?php echo artist_videos. $get_url; ?>" title="Video">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
@@ -186,7 +186,7 @@
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
-                             <a href="<?php echo base_url('artist/audios/' . $get_url) ?>"> 
+                             <a href="<?php echo artist_audios . $get_url; ?>"> 
                             <div class="head_details">
                                  <h5><i class="fa fa-music" aria-hidden="true"></i>  Audio</h5>
                             </div>
@@ -198,7 +198,7 @@
                     </div>
                 </div>
              
-                <a href="<?php echo base_url('artist/pdf/' . $get_url) ?>" title="Pdf">
+                <a href="<?php echo artist_pdf . $get_url; ?>" title="Pdf">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module pdf_box">
                         <table class="business_data_table">
@@ -229,7 +229,7 @@ $loginuser = $userdata[0]['art_id'];
                 <div class="post-editor col-md-12">
                     <div class="main-text-area col-md-12">
                         <div class="popup-img"> 
-                            <a href="<?php echo base_url('artist/dashboard/' . $get_url) ?>">
+                            <a href="<?php echo artist_dashboard . $get_url; ?>">
                             <?php
                                     $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
                                     $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;

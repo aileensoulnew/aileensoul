@@ -57,7 +57,7 @@ function divClicked() {
         })
         .autocomplete({
            
-            minLength: 2,
+            minLength: 1,
             source: function( request, response ) { 
                 // delegate back to autocomplete, but extract the last term
                 $.getJSON(base_url + "artistic/artistic_search_keyword", { term : extractLast( request.term )},response);
@@ -109,7 +109,7 @@ function divClicked() {
             }
         })
         .autocomplete({
-            minLength: 2,
+            minLength: 1,
             source: function( request, response ) { 
                 // delegate back to autocomplete, but extract the last term
                 $.getJSON(base_url + "artistic/artistic_search_city", { term : extractLast( request.term )},response);

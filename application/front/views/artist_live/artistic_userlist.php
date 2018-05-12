@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="userListApp" ng-controller="userController">
 <head>
     <title><?php echo $title; ?></title>
     <?php echo $head; ?>
@@ -26,6 +26,46 @@
                         <div class="container">
                             <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt" >
                                 <?php echo $left_artistic; ?>
+
+                                <div class="left-search-box list-type-bullet">
+                                    <div class="">
+                                        <h3>Top Categories</h3>
+                                    </div>
+                                    <ul class="search-listing">
+                                        <li ng-repeat="category in artistCategory">
+                                            <label class="">
+                                                 <p class="pull-left" style="width: 45px;">
+                                                    <input class="categorycheckbox" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                                </p>
+                                                <p class="pull-left">{{category.art_category | capitalize}}</p>
+                                                <p class="pull-right">({{category.count}})</p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <p class="text-right p10"><a href="<?php echo artist_category_list ?>">More Categories</a></p>
+                                </div>
+
+                                <div class="left-search-box list-type-bullet">
+                                    <div class="">
+                                        <h3>Top Locations</h3>
+                                    </div>                        
+                                    <ul class="search-listing" style="list-style: none;">
+                                        <li ng-repeat="location in artistLocation">
+                                            <label class="pointer">
+                                                <p class="pull-left" style="width: 45px;">
+                                                    <input class="locationcheckbox" type="checkbox" name="{{location.art_location}}" value="{{location.location_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+                                                </p>
+                                                <p class="pull-left">
+                                                    {{location.art_location | capitalize}}
+                                                </p>
+                                                <p class="pull-right">({{location.total}})</p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <p class="text-right p10"><a href="<?php echo artist_location_list ?>">More Locations</a></p>
+                                </div>
+
+
                                 <?php echo $left_footer; ?> 
                             </div>
 
@@ -58,8 +98,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 
                                 <div class="all-profile-box">
@@ -153,17 +191,17 @@
                 <!-- Model Popup Close -->
 
                 <?php echo $footer; ?>
-
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+                <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        
                 <?php
                 if (IS_ART_JS_MINIFY == '0') { ?>
                     <script  src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
                     <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
-
                     <?php }else{?>
-
                         <script  src="<?php echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script>
                         <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver='.time()); ?>"></script>
-
                         <?php }?>
                         <script type="text/javascript">
                             var base_url = '<?php echo base_url(); ?>';   
@@ -171,6 +209,7 @@
                             var data1 = <?php echo json_encode($de); ?>;
                             var data= <?php echo json_encode($demo); ?>;
                             var data1 = <?php echo json_encode($city_data); ?>;
+                           var app = angular.module('userListApp', ['ui.bootstrap']);
                         </script>
 
                         <?php
@@ -179,7 +218,7 @@
                             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
                             <?php }else{?>
 
-                                <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/userlist.js?ver='.time()); ?>"></script>
+                                <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/userlist.js?ver='.time()); ?>"></script>
                                 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 
                                 <?php }?>

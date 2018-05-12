@@ -1991,11 +1991,38 @@ class Artist extends MY_Controller {
             $start = 0;
         $userid = $this->session->userdata('aileenuser');
         $artisticdata = $this->data['artisticdata'] = $this->common->select_data_by_id('art_reg', 'user_id', $userid, $data = 'art_name,art_lastname,profile_background,art_user_image,designation,slug,art_id');
-
+        // echo $this->db->last_query();
+        // exit;
         $limit = $perpage;
         $offset = $start;
         $contition_array = array('art_step' => '4', 'is_delete' => '0', 'status' => '1', 'user_id !=' => $userid);
-        $userlist = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_name,art_lastname,art_user_image,designation,slug,user_id,art_id', $sortby = 'art_id', $orderby = 'DESC', $limit, $offset, $join_str = array(), $groupby = '');
+        // $userlist = $this->common->select_data_by_condition('art_reg', $contition_array, $data =     'art_name,art_lastname,art_user_image,designation,slug,user_id,art_id', $sortby = 'art_id', $orderby = 'DESC', $limit, $offset, $join_str = array(), $groupby = '');
+
+        // New query for user list with filter
+        $sql = "SELECT ar.art_name, ar.art_lastname, ar.art_user_image, ar.designation, 
+                    ar.slug, ar.user_id, ar.art_id, ac.art_category, ct.city_name
+                    FROM ailee_art_reg ar
+                    LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill 
+                    LEFT JOIN ailee_art_other_category oc ON oc.other_category_id = ar.other_skill 
+                    LEFT JOIN ailee_cities ct ON ct.city_id = ar.art_city 
+                    LEFT JOIN ailee_countries cr ON cr.country_id = ar.art_country 
+                    LEFT JOIN ailee_states s ON s.state_id = ar.art_state 
+                    WHERE ar.art_step = '4' AND ar.is_delete = '0' 
+                    AND ar.status = '1' 
+                    AND ar.user_id != '". $userid ."'";
+            
+        if(isset($_GET["category_id"]) && $_GET["category_id"] != ""){
+            $sql .= " AND ac.category_id IN (". $_GET["category_id"] .")";
+        }
+
+        if(isset($_GET["location_id"]) && $_GET["location_id"] != ""){
+            $sql .= " AND ct.city_id IN (". $_GET["location_id"] .")";
+        }
+
+        $sql .= "ORDER BY art_id DESC LIMIT " . $offset . "," .$limit;
+        $query = $this->db->query($sql);
+        $userlist = $query->result_array();
+
         $userlist1 = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = 'art_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         if (empty($_GET["total_record"])) {
@@ -2007,12 +2034,12 @@ class Artist extends MY_Controller {
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
         foreach ($userlist as $user) {
             $return_html .= '
-                                                <div class="profile-job-post-detail clearfix">
-                                                    <div class="profile-job-post-title-inside clearfix">
-                                                        <div class="profile-job-post-location-name">
-                                                            <div class="user_lst"><ul>
-                                                                <li class="fl padding_less_left">
-                                                                        <div class="follow-img">';
+            <div class="profile-job-post-detail clearfix">
+                <div class="profile-job-post-title-inside clearfix">
+                    <div class="profile-job-post-location-name">
+                        <div class="user_lst"><ul>
+                            <li class="fl padding_less_left">
+                                    <div class="follow-img">';
 
             $geturl = $this->get_url($user['user_id']);
 
@@ -2053,11 +2080,12 @@ class Artist extends MY_Controller {
                                                                             </div>
                                                                             <div>';
             $return_html .= '<a>';
-            if ($user['designation']) {
-                $return_html .= ucfirst(strtolower($user['designation']));
-            } else {
-                $return_html .= 'Current Work';
-            }
+                $return_html .= ucfirst(strtolower($user['art_category'])) . " ";
+            // if ($user['designation']) {
+            //     $return_html .= ucfirst(strtolower($user['designation']));
+            // } else {
+            //     $return_html .= 'Current Work';
+            // }
             $return_html .= '</a>
                                                                             </div>
                                                                     </li>
@@ -2066,9 +2094,9 @@ class Artist extends MY_Controller {
             $status = $this->db->select('follow_status')->get_where('follow', array('follow_type' => '1', 'follow_from' => $artisticdata[0]['art_id'], 'follow_to' => $user['art_id']))->row()->follow_status;
             if ($status == 0 || $status == " ") {
                 $return_html .= '<div id= "followdiv " class="user_btn">
-                                                                                <button id="follow' . $user['art_id'] . '" onClick="followuser(' . $user['art_id'] . ')">
-                                                                                  <span> Follow </span>
-                                                                                </button></div>';
+                                    <button id="follow' . $user['art_id'] . '" onClick="followuser(' . $user['art_id'] . ')">
+                                      <span> Follow </span>
+                                    </button></div>';
             } elseif ($status == 1) {
                 $return_html .= '<div id= "unfollowdiv"  class="user_btn" > 
                                                                                 <button class="bg_following" id="unfollow' . $user['art_id'] . '" onClick="unfollowuser(' . $user['art_id'] . ')">

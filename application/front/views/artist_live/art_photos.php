@@ -31,10 +31,10 @@
                <div class="padding_less main_art" >
                   <div class="top-tab">
                      <ul class="nav nav-tabs tabs-left remove_tab">
-                        <li class="active"> <a href="<?php echo base_url('artist/photos/' . $get_url) ?>" title="Photos"><i class="fa fa-camera" aria-hidden="true" title="Photos"></i>   Photos</a></li>
-                        <li> <a href="<?php echo base_url('artist/videos/' . $get_url) ?>" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i>  Video</a></li>
-                        <li><a href="<?php echo base_url('artist/audios/' . $get_url) ?>" title="Audio"><i class="fa fa-music" aria-hidden="true"></i>  Audio</a></li>
-                        <li><a href="<?php echo base_url('artist/pdf/' . $get_url) ?>" title="Pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Pdf</a></li>
+                        <li class="active"> <a href="<?php echo artist_photos . $get_url; ?>" title="Photos"><i class="fa fa-camera" aria-hidden="true" title="Photos"></i>   Photos</a></li>
+                        <li> <a href="<?php echo artist_videos . $get_url; ?>" title="Video"><i class="fa fa-video-camera" aria-hidden="true"></i>  Video</a></li>
+                        <li><a href="<?php echo artist_audios . $get_url; ?>" title="Audio"><i class="fa fa-music" aria-hidden="true"></i>  Audio</a></li>
+                        <li><a href="<?php echo artist_pdf . $get_url; ?>" title="Pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Pdf</a></li>
                      </ul>
                   </div>
                   <!-- Tab panes -->

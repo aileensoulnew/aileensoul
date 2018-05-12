@@ -611,7 +611,7 @@ class Artist_live extends MY_Controller {
 
 
         if ($this->data['artisticdata']) {
-            $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
+            $this->data['artistic_common'] = $this->load->view('artist/artistic_common', $this->data, true);
             $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
             $this->data['title'] = $artistic_name . ' | PDF' . ' | Artistic Profile' . TITLEPOSTFIX;
             $this->load->view('artist_live/art_pdf', $this->data);

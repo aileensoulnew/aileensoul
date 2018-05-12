@@ -496,7 +496,7 @@ class Artistic_model extends CI_Model {
                 Union all
                 SELECT CONCAT(art_name, ' ',art_lastname) as value 
                 FROM ailee_art_reg 
-                WHERE status = '1' AND art_name LIKE '". $keyword ."' OR art_lastname LIKE '". $keyword ."' OR 
+                WHERE status = '1' AND art_name LIKE '". $keyword . "' OR 
                 CONCAT(art_name, ' ',art_lastname) LIKE '". $keyword ."' 
                 GROUP BY CONCAT(art_name, ' ',art_lastname) 
                 ORDER BY value DESC";

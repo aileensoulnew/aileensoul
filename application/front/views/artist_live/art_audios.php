@@ -32,10 +32,10 @@
                     <div class="padding_less main_art" >
                     <div class="top-tab">
                       <ul class="nav nav-tabs tabs-left remove_tab">
-                          <li> <a href="<?php echo base_url('artist/photos/'.$get_url) ?>" ><i class="fa fa-camera" aria-hidden="true"></i>   Photos</a></li>
-                          <li> <a href="<?php echo base_url('artist/videos/'.$get_url) ?>" ><i class="fa fa-video-camera" aria-hidden="true"></i>  Video</a></li>
-                          <li class="active"><a href="<?php echo base_url('artist/audios/'.$get_url) ?>"><i class="fa fa-music" aria-hidden="true"></i>  Audio</a></li>
-                          <li>    <a href="<?php echo base_url('artist/pdf/'.$get_url) ?>" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Pdf</a></li>
+                          <li> <a href="<?php echo artist_photos . $get_url; ?>" ><i class="fa fa-camera" aria-hidden="true"></i>   Photos</a></li>
+                          <li> <a href="<?php echo artist_videos . $get_url; ?>" ><i class="fa fa-video-camera" aria-hidden="true"></i>  Video</a></li>
+                          <li class="active"><a href="<?php echo artist_audios . $get_url; ?>"><i class="fa fa-music" aria-hidden="true"></i>  Audio</a></li>
+                          <li>    <a href="<?php echo artist_pdf . $get_url; ?>" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Pdf</a></li>
                         </ul>
                     </div>
           <!-- Tab panes -->

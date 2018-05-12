@@ -1,3 +1,39 @@
+app.controller('userController', function ($scope, $http) {
+    $scope.artistCategory = {};
+    $scope.artistLocation = {};
+    function artistCategory() {
+        $http.get(base_url + "artist_live/artistCategory?limit=5").then(function (success) {
+            $scope.artistCategory = success.data;
+            $($scope.artistCategory).each(function(i,d){
+                d.isselected = false;
+            });
+        }, function (error) {});
+    }
+    artistCategory();
+    function otherCategoryCount() {
+        $http.get(base_url + "artist_live/otherCategoryCount").then(function (success) {
+            $scope.otherCategoryCount = success.data;
+        }, function (error) {});
+    }
+    otherCategoryCount();
+    // ARTIST CITY FILTER
+    function artistLocation(){
+        $http.get(base_url + "artist_live/artistAllLocation?limit=5").then(function (success) {
+            $(success.data).each(function(i,d){
+                d.isselected = false;
+            });
+            $scope.artistLocation = success.data;
+        }, function (error) {});
+    }
+    artistLocation();
+
+    $scope.getfilterartistdata = function(){
+        artistic_userlist(0, "filter");        
+    }
+
+});
+
+
 $(document).ready(function () {
     artistic_userlist();
     $(window).scroll(function () {
@@ -25,7 +61,7 @@ $(document).ready(function () {
 });
 
 var isProcessing = false;
-function artistic_userlist(pagenum) {
+function artistic_userlist(pagenum, from = '') {
     if (isProcessing) {
         /*
          *This won't go past this condition while
@@ -35,9 +71,11 @@ function artistic_userlist(pagenum) {
         return;
     }
     isProcessing = true;
+    var reqdata = getLocationCategoryId();
+    var userlist_url = base_url + "artist/ajax_userlist/?page=" + pagenum + reqdata;
     $.ajax({
         type: 'POST',
-        url: base_url + "artist/ajax_userlist/?page=" + pagenum,
+        url: userlist_url,
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
@@ -52,7 +90,10 @@ function artistic_userlist(pagenum) {
         },
         success: function (data) {
             $('.loader').remove();
-            $('.job-contact-frnd ').append(data);
+            if(from == "filter"){
+                $('.job-contact-frnd').html("");
+            }
+            $('.job-contact-frnd').append(data);
             // second header class add for scroll
             var nb = $('.post-design-box').length;
             if (nb == 0) {
@@ -125,13 +166,13 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
-btn.onclick = function () {
-    modal.style.display = "block";
-}
+// btn.onclick = function () {
+//     modal.style.display = "block";
+// }
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-    modal.style.display = "none";
-}
+// span.onclick = function () {
+//     modal.style.display = "none";
+// }
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
@@ -310,3 +351,34 @@ $(document).on('keydown', function (e) {
         $('#bidmodal-2').modal('hide');
     }
 });
+
+
+// change location
+$(document).on('change','.locationcheckbox,.categorycheckbox',function(){
+    var self = this;
+    // self.setAttribute('checked',(this.checked));
+    angular.element(self).scope().getfilterartistdata();
+});
+
+
+function getLocationCategoryId(){
+    var location = "";
+    // Get Checked Category of filter and make data value for ajax call
+    var category = "";
+    $('.categorycheckbox').each(function(){
+        if(this.checked){
+            var currentid = $(this).val();
+            category += (category == "") ? currentid : "," + currentid;
+        }
+    });
+    // Get Checked Location of filter and make data value for ajax call
+    $('.locationcheckbox').each(function(){
+        if(this.checked){
+            var currentid = $(this).val();
+            location += (location == "") ? currentid : "," + currentid;
+        }
+    });
+    var result = (category != "") ? ("&category_id=" + category) : "";
+    result += (location != "") ? ("&location_id=" + location) : "";
+    return result;
+}

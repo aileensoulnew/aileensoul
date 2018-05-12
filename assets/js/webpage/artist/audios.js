@@ -76,3 +76,18 @@ $(document).ready(function () {
     $('html,body').animate({scrollTop: 265}, 100);
 });
 
+function unfollowuser(clicked_id)
+{
+
+    $.ajax({
+        type: 'POST',
+        url: base_url + "artist/unfollow_two",
+        //url: '<?php echo base_url() . "artist/unfollow_two" ?>',
+        data: 'follow_to=' + clicked_id,
+        success: function (data) {
+
+            $('.' + 'fruser' + clicked_id).html(data);
+
+        }
+    });
+}

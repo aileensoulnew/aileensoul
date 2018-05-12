@@ -13,18 +13,27 @@
 
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <?php if(($is_artist_profile_set == 1 || $is_artist_profile_set == '1') || $isartistactivate == 0){ 
+        ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
+        <?php } ?>
     </head>
     <body class="profile-main-page">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){
             echo $header_profile; 
-        } ?>
-        <div class="middle-section middle-section-banner">
-            <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ echo $search_banner; } 
-                else{
-                    echo $artistic_header2;
-                }
+        } else{
+            echo $artistic_header2;
+        }?>
+            <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ 
             ?>
+            <div class="middle-section middle-section-banner">
+            <?php
+                echo $search_banner; 
+            } else{
+            ?>
+                <div class="middle-section">
+            <?php } ?>
             <div class="container pt20">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
@@ -157,12 +166,18 @@
         </div>
         
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <?php if(($is_artist_profile_set == 1 || $is_artist_profile_set == '1') || $isartistactivate == 0){ 
+            ?>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
+        <?php } ?>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         
         <script>
             var base_url = '<?php echo base_url(); ?>';
@@ -178,5 +193,6 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/search.js?ver=' . time()) ?>"></script>
+         
     </body>
 </html>
