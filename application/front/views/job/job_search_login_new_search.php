@@ -122,102 +122,102 @@
                             </ul>
                         </div>
                         <div class="left-search-box">
-                        <div class="accordion" id="accordion2">
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Posting Period</a></h3>
-                                </div>
-                                <div id="collapseOne" class="accordion-body collapse">
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class="control control--checkbox">Today
-                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="1" ng-model="post_period1" ng-change="applyJobFilter()"/>
-                                                <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="control control--checkbox">Last 7 Days
-                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="2" ng-model="post_period2" ng-change="applyJobFilter()"/>
-                                                <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="control control--checkbox">Last 15 Days
-                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="3" ng-model="post_period3" ng-change="applyJobFilter()"/>
-                                                <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="control control--checkbox">Last 45 Days
-                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="4" ng-model="post_period4" ng-change="applyJobFilter()"/>
-                                                <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="control control--checkbox">More than 45 Days
-                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="5" ng-model="post_period5" ng-change="applyJobFilter()"/>
-                                                <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="left-search-box">
-                        <div class="accordion" id="accordion3">
-                            <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo">Experience</a></h3>
-                                </div>
-                                <div id="collapsetwo" class="accordion-body collapse">
-                                    <div class="accordion-inner">
+                            <div class="accordion" id="accordion2">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Posting Period</a></h3>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-body collapse">
                                         <ul class="search-listing">
                                             <li>
-                                                <label class="control control--checkbox">0 to 1 year
-                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="1" ng-model="exp1" ng-change="applyJobFilter()"/>
+                                                <label class="control control--checkbox">Today
+                                                    <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="1" ng-model="post_period1" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
-                                                <label class="control control--checkbox">1 to 2 year
-                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="2" ng-model="exp2" ng-change="applyJobFilter()"/>
+                                                <label class="control control--checkbox">Last 7 Days
+                                                    <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="2" ng-model="post_period2" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
-                                                <label class="control control--checkbox">2 to 3 year
-                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="3" ng-model="exp3" ng-change="applyJobFilter()"/>
+                                                <label class="control control--checkbox">Last 15 Days
+                                                    <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="3" ng-model="post_period3" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
-                                                <label class="control control--checkbox">3 to 4 year
-                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="4" ng-model="exp4" ng-change="applyJobFilter()"/>
+                                                <label class="control control--checkbox">Last 45 Days
+                                                    <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="4" ng-model="post_period4" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                             <li>
-                                                <label class="control control--checkbox">4 to 5 year
-                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="5" ng-model="exp5" ng-change="applyJobFilter()"/>
-                                                    <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="control control--checkbox">More than 5 year
-                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="6" ng-model="exp6" ng-change="applyJobFilter()"/>
+                                                <label class="control control--checkbox">More than 45 Days
+                                                    <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="5" ng-model="post_period5" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
                                         </ul>
-
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
+                        <div class="left-search-box">
+                            <div class="accordion" id="accordion3">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo">Experience</a></h3>
+                                    </div>
+                                    <div id="collapsetwo" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="search-listing">
+                                                <li>
+                                                    <label class="control control--checkbox">0 to 1 year
+                                                        <input class="exp-filter" type="checkbox" name="experience[]" ng-value="1" ng-model="exp1" ng-change="applyJobFilter()"/>
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="control control--checkbox">1 to 2 year
+                                                        <input class="exp-filter" type="checkbox" name="experience[]" ng-value="2" ng-model="exp2" ng-change="applyJobFilter()"/>
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="control control--checkbox">2 to 3 year
+                                                        <input class="exp-filter" type="checkbox" name="experience[]" ng-value="3" ng-model="exp3" ng-change="applyJobFilter()"/>
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="control control--checkbox">3 to 4 year
+                                                        <input class="exp-filter" type="checkbox" name="experience[]" ng-value="4" ng-model="exp4" ng-change="applyJobFilter()"/>
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="control control--checkbox">4 to 5 year
+                                                        <input class="exp-filter" type="checkbox" name="experience[]" ng-value="5" ng-model="exp5" ng-change="applyJobFilter()"/>
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="control control--checkbox">More than 5 year
+                                                        <input class="exp-filter" type="checkbox" name="experience[]" ng-value="6" ng-model="exp6" ng-change="applyJobFilter()"/>
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </form>
                     <div class="custom_footer_left fw">
                         <div class="">
