@@ -49,8 +49,10 @@ class Job_live extends MY_Controller {
         //$this->load->view('job_live/index', $this->data);
         if($this->job_profile_set == 1)
             $this->load->view('job_live/index', $this->data);
+        else if($userid != "")
+            $this->load->view('job_live/without_job_register', $this->data);
         else
-            $this->load->view('job_live/without_register', $this->data);
+            $this->load->view('job_live/without_main_register', $this->data);
     }
 
     public function category($category_slug = '') {
