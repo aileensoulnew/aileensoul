@@ -454,10 +454,12 @@ $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";
 //$route['(:any)'] = "job/job_search";
 //$route['(:any)-jobs'] = "job/job_search";//old
 $route['(:any)-jobs'] = "job/job_search_new/$1";//Pratik Job By Job Title,Job by Category,Job by Skills
+$route['jobs-opening-at-(:any)'] = "job/job_search_new/$1";
+$route['jobs-in-(:any)'] = "job/job_search_new/$1";
+$route['(:any)-jobs-in-(:any)'] = "job/job_search_new/$1/$2";
 
-
-$route['jobs-in-(:any)'] = "job/job_search";
-$route['(:any)-jobs-in-(:any)'] = "job/job_search";
+/*$route['jobs-in-(:any)'] = "job/job_search";
+$route['(:any)-jobs-in-(:any)'] = "job/job_search";*/
 
 $route['job/post-(:any)/(:any)'] = "job/post/$1/$2";
 $route['job/recruiter-profile/(:any)'] = "job/rec_profile/$1";
