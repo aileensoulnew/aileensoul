@@ -13737,7 +13737,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         if (!empty($searchTerm)) {
             $contition_array = array('status' => '1', 'state_id !=' => '0');
             $search_condition = "(city_name LIKE '" . trim($searchTerm) . "%')";
-            $location_list = $this->common->select_data_by_search('cities', $search_condition, $contition_array, $data = 'city_name', $sortby = 'city_name', $orderby = 'desc', $limit = '', $offset = '', $join_str5 = '', $groupby = 'city_name');
+            $location_list = $this->common->select_data_by_search('cities', $search_condition, $contition_array, $data = 'city_name', $sortby = 'city_name', $orderby = '', $limit = '5', $offset = '', $join_str5 = '', $groupby = 'city_name');
             foreach ($location_list as $key1 => $value) {
                 foreach ($value as $ke1 => $val1) {
                     $location[] = $val1;

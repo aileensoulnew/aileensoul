@@ -19,7 +19,13 @@
         <!-- SET BLANK IF VAR NOT DECLARE FROM CONTROLLER -->
         <?php $location_id = (isset($location_id)) ? $location_id : '' ?>
         <?php $category_id = (isset($category_id)) ? $category_id : '' ?>
-        <?php echo $header_profile; ?>
+        <?php
+            if ($ismainregister == false) {
+                $this->load->view('artist_live/login_header');
+            }else{
+                echo $header_profile;
+            }
+        ?>
         <div class="middle-section middle-section-banner">
             <?php echo $search_banner; ?>
             <div class="container pt20">

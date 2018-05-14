@@ -345,6 +345,7 @@ $route['artist/reactivateacc'] = "artist_live/reactivateacc";
 
 
 $route['artist/location'] = "artist_live/location";
+$route['artist_live/artistCategory'] = "artist_live/artistCategory";
 // $route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";
 
 $route['artist/home'] = "artist_live/art_post"; 

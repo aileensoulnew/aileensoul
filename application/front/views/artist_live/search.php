@@ -20,11 +20,16 @@
     </head>
     <body class="profile-main-page">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
-        <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){
-            echo $header_profile; 
-        } else{
-            echo $artistic_header2;
-        }?>
+        <?php if($ismainregister == true){ ?>
+            <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){
+                echo $header_profile; 
+            } else{
+                echo $artistic_header2;
+            }?>
+       <?php } else{
+                    $this->load->view('artist_live/login_header');
+                }
+       ?>
             <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ 
             ?>
             <div class="middle-section middle-section-banner">
@@ -189,6 +194,7 @@
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';         
             var app = angular.module('artistSearchListApp', ['ui.bootstrap']);
+            var a = '<?php  echo $ismainregister; ?>';
         </script>   
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>

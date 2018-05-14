@@ -30,7 +30,6 @@ class Artistic_model extends CI_Model {
             $this->db->where('ar.is_delete', '0');
             $query = $this->db->get();
             $cat_count = $query->row_array();
-
             $return['count'] = $cat_count['count'];
             $return['category_id'] = $value['category_id'];
             $return['art_category'] = $value['art_category'];
