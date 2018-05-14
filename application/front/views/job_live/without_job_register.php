@@ -325,11 +325,6 @@
                 </div>
 
             </div>
-            
-            
-            
-        
-            
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
