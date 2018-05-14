@@ -5800,7 +5800,7 @@ class Job extends MY_Controller {
         $this->load->view('job/job_new_page', $this->data);
     }
 
-    public function job_search_new($search)
+    public function job_search_new($search = "",$ser_location = "")
     {
      //   echo $search;exit;
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
@@ -5808,6 +5808,7 @@ class Job extends MY_Controller {
         // search keyword insert into database start
 
         $this->data['keyword'] = $search;
+        $this->data['search_location'] = $ser_location;
 
         $title = $search;        
 
@@ -5822,10 +5823,13 @@ class Job extends MY_Controller {
             if ($jobdata) {
                 $this->load->view('job/job_all_post_new_search', $this->data);
             } else {
+                //main site registartion
                 $this->load->view('job/job_search_login_new_search', $this->data);
             }
         } else {
-            $this->load->view('job/job_search_login', $this->data);
+            //$this->load->view('job/job_search_login', $this->data);
+            //without main site registartion
+            $this->load->view('job/job_search_login_new_search', $this->data);
         }
         //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA END
     }
@@ -5873,13 +5877,20 @@ class Job extends MY_Controller {
 
         $limit = 5;
         $keyword = trim($_GET['search']);
+        $search_location = trim($_GET['search_location']);
         $job_skills = $this->job_model->is_job_skills($keyword);
         $job_category = $this->job_model->is_job_category($keyword);
         $job_designation = $this->job_model->is_job_designation($keyword);
+        $job_city = $this->job_model->is_job_location($keyword);
+        $search_location_arr = array();
+        if($search_location != "")
+        {
+            $search_location_arr = $this->job_model->is_job_location($search_location);
+        }
         // print_r($job_skills);
         // print_r($job_category);
         // print_r($job_designation);
-        $searchJob = $this->job_model->ajax_job_search_new_filter($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$page,$limit);
+        $searchJob = $this->job_model->ajax_job_search_new_filter($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$page,$limit,$job_city,explode("-", $keyword),$search_location_arr);
 
         echo json_encode($searchJob);
     }
