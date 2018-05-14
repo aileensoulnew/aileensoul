@@ -60,8 +60,8 @@
                     <div class="col-md-3 col-sm-4">
                         <div class="left-side-bar">
                             <ul class="left-form-each">
-                                <li class="custom-none"><a href="<?php echo base_url('artist/artistic-information-update'); ?>" title="Basic Information">Basic Information</a></li>
-                                <li class="custom-none"><a href="<?php echo base_url('artist/artistic-address'); ?>" title="Address">Address</a></li>
+                                <li class="custom-none"><a href="<?php echo artist_edit_profile; ?>" title="Basic Information">Basic Information</a></li>
+                                <li class="custom-none"><a href="<?php echo artistic_address; ?>" title="Address">Address</a></li>
                                 <li <?php if($this->uri->segment(1) == 'artist'){?> class="active init" <?php } ?> title="Art Information"><a href="javascript:void(0);">Art Information</a></li>
                             </ul>
                         </div>

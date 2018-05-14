@@ -9,7 +9,7 @@ app.filter('capitalize', function () {
 
     }
 });
-app.controller('jobSearchController', function ($scope, $http,$window) {
+app.controller('jobSearchNRController', function ($scope, $http,$window) {
     $scope.showLoadmore = true;
     $scope.jobCategory = {};
     $scope.jobCity = {};

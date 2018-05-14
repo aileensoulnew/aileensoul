@@ -17,7 +17,13 @@
     </head>
     <body class="profile-main-page">
         <?php $page = (isset($page)) ? $page : ''; ?>
-        <?php echo $header_profile; ?>
+        <?php
+            if ($ismainregister == false) {
+                $this->load->view('artist_live/login_header');
+            }else{
+                echo $header_profile;
+            }
+        ?>
         <div class="middle-section middle-section-banner">
             <?php echo $search_banner; ?>
 
