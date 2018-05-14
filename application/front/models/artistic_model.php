@@ -484,22 +484,17 @@ class Artistic_model extends CI_Model {
     }
 
      // new artist search suggetion
-    function artistic_search_keyword($keyword = '', $location = ''){
+    function artistic_search_keyword($keyword = ''){
         $keyword = urldecode($keyword) . '%';
         $sql = "SELECT art_category as value FROM ailee_art_category 
                 WHERE status = '1' AND (art_category LIKE '". $keyword ."') 
                 GROUP BY art_category 
                 Union all
-                SELECT other_category as value FROM ailee_art_other_category 
-                WHERE status = '1' AND (other_category LIKE '". $keyword ."') 
-                GROUP BY other_category 
-                Union all
                 SELECT CONCAT(art_name, ' ',art_lastname) as value 
                 FROM ailee_art_reg 
                 WHERE status = '1' AND art_name LIKE '". $keyword . "' OR 
                 CONCAT(art_name, ' ',art_lastname) LIKE '". $keyword ."' 
-                GROUP BY CONCAT(art_name, ' ',art_lastname) 
-                ORDER BY value DESC";
+                GROUP BY CONCAT(art_name, ' ',art_lastname)";
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
             return $result_array;

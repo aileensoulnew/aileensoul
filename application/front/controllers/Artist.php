@@ -639,7 +639,7 @@ class Artist extends MY_Controller {
             if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
                 $this->load->view('artist/notavalible');
             } else if ($this->data['artisticdata'][0]['art_step'] != '4') {
-                redirect('artist');
+                redirect('find-artist');
             } else {
                 $this->data['artistic_common'] = $this->load->view('artist/artistic_common', $this->data, true);
                 if ($get_url == $this->uri->segment(3)) {

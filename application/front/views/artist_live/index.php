@@ -22,7 +22,7 @@
             <div class="job-cat-lp" >
                 <div class="container" >
                     <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
-                        <h2>Artist by Category sad</h2>
+                        <h2>Artist by Category</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
                         <div class="col-md-3" ng-repeat="category in artistCategory">
