@@ -5829,7 +5829,7 @@ class Job extends MY_Controller {
         } else {
             //$this->load->view('job/job_search_login', $this->data);
             //without main site registartion
-            $this->load->view('job/job_search_login_new_search', $this->data);
+            $this->load->view('job/job_search_login_new_search_no_regi_site', $this->data);
         }
         //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA END
     }
