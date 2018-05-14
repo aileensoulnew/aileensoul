@@ -19,6 +19,14 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
     $scope.jobs = {};
     $scope.jds = "";
     $scope.mainKeyword = "";
+
+    $scope.cmp_fil = "";
+    $scope.cat_fil = "";
+    $scope.loc_fil = "";
+    $scope.skills_fil = "";
+    $scope.jd_fil = "";
+    $scope.per_fil = "";
+    $scope.exp_fil = "";
     //$scope.jobcompany = "";
     var fil_limit = 10;
     job_search(1);
@@ -91,7 +99,41 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         }
         isProcessing = true;
         $('#loader').show();
-        $http({
+        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
+            function(success){
+                $('#loader').hide();
+                data = JSON.parse(success);
+                if(data.jobData.length > 0)
+                {
+                    $scope.mainKeyword = skill;
+                    if(pagenum > 1)
+                    {
+                        for (var i in data.jobData) {
+                            console.log(data.jobData[i]);
+                            //$scope.searchJob.push(data.jobData[i]);
+                            $scope.$apply(function () {
+                                $scope.searchJob.push(data.jobData[i]);
+                            });
+                        }
+                    }
+                    else
+                    {
+                        $scope.searchJob = data.jobData;
+                    }
+                    //$scope.searchJob = success.data.jobData;
+                    $scope.jobs.page_number = pagenum;
+                    $scope.jobs.total_record = data.total_record;
+                    $scope.jobs.perpage_record = 5;            
+                    isProcessing = false;
+                }
+                else
+                {
+                    $scope.showLoadmore = false;                
+                }
+
+            }
+        );
+        /*$http({
             method: 'POST',
             url: base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill),
             data: { "total_record": $("#total_record").val(), },
@@ -123,87 +165,87 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
                 $scope.showLoadmore = false;                
             }
 
-        });        
+        });*/        
     }
     //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER END
 
-    $scope.applyJobFilter = function() {        
-        var cmp_fil = "";
+    $scope.applyJobFilter = function() {
+        $scope.cmp_fil = "";
         $('.company-filter').each(function(){
             if(this.checked){
                 var currentid = $(this).val();
-                cmp_fil += (cmp_fil == "") ? currentid : "," + currentid;
+                $scope.cmp_fil += ($scope.cmp_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(cmp_fil);
 
-        var cat_fil = "";
+        $scope.cat_fil = "";
         $('.category-filter').each(function(){
             if(this.checked){
                 var currentid = $(this).val();
-                cat_fil += (cat_fil == "") ? currentid : "," + currentid;
+                $scope.cat_fil += ($scope.cat_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(cat_fil);
 
-        var loc_fil = "";
+        $scope.loc_fil = "";
         $('.location-filter').each(function(){
             if(this.checked){
                 var currentid = $(this).val();
-                loc_fil += (loc_fil == "") ? currentid : "," + currentid;
+                $scope.loc_fil += ($scope.loc_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(loc_fil);
 
-        var skills_fil = "";
+        $scope.skills_fil = "";
         $('.skills-filter').each(function(){
             if(this.checked){
                 var currentid = $(this).val();
-                skills_fil += (skills_fil == "") ? currentid : "," + currentid;
+                $scope.skills_fil += ($scope.skills_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(skills_fil);
 
-        var jd_fil = "";
+        $scope.jd_fil = "";
         $('.jds-filter').each(function(){
             if(this.checked){
                 var currentid = $(this).val();
-                jd_fil += (jd_fil == "") ? currentid : "," + currentid;
+                $scope.jd_fil += ($scope.jd_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(jd_fil);
 
-        var per_fil = "";
+        $scope.per_fil = "";
         $('.period-filter').each(function(){
             if(this.checked){
                 var currentid = $(this).val();
-                per_fil += (per_fil == "") ? currentid : "," + currentid;
+                $scope.per_fil += ($scope.per_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(per_fil);
-
-        var exp_fil = "";
+        
+        $scope.exp_fil = "";
         $('.exp-filter').each(function(){
             if(this.checked){
                 var currentid = $(this).val();
-                exp_fil += (exp_fil == "") ? currentid : "," + currentid;
+                $scope.exp_fil += ($scope.exp_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(exp_fil);
         pagenum = 1;
 
         //$("#loader").show();
-        $scope.searchJob = {};
 
-        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill), {"company_id": cmp_fil, "category_id" : cat_fil, "location_id": loc_fil, "skill_id": skills_fil, "job_desc": jd_fil, "period_filter": per_fil, "exp_fil": exp_fil},
+        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
+                $scope.searchJob = {};
                 data = JSON.parse(success);
-                $scope.searchJob = data.jobData;
-                // setTimeout(function(){
-                // },100);
+                $scope.$apply(function () {
+                    $scope.searchJob = data.jobData;
+                });
             }
         );
-
+        
         // $http({
         //     method: 'POST',
         //     url: base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill),

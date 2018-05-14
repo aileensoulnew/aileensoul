@@ -411,7 +411,17 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         return $result_array;        
     }
 
-    function ajax_job_search_new_filter($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5') {
+    function is_job_location($keyword = "")
+    {
+        $this->db->select('c.city_id,c.city_name ,c.slug as city_slug')->from('cities c');
+        $this->db->where('c.status', 1);
+        $this->db->where('c.slug LIKE BINARY "'.$keyword.'"');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;        
+    }
+
+    function ajax_job_search_new_filter($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5',$job_city = array(),$job_company_id = array(),$search_location_arr = array()) {
 
         $start = ($page - 1) * $limit;
         if ($start < 0)
@@ -428,15 +438,30 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
             $skills_id = $job_skills['skill_id'];
             $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skills_id . ')');
         }
-        if(isset($job_category) && !empty($job_category))
+        else if(isset($job_category) && !empty($job_category))
         {
             $industry_id = $job_category['industry_id'];
             $this->db->where('rp.industry_type',$industry_id);
         }
-        if(isset($job_designation) && !empty($job_designation))
+        else if(isset($job_designation) && !empty($job_designation))
         {
             $title_id = $job_designation['title_id'];
             $this->db->where('rp.post_name',$title_id);
+        }
+        else if(isset($job_city) && !empty($job_city))
+        {
+            $city_id = $job_city['city_id'];
+            $this->db->where('rp.city',$city_id);
+        }
+        else if(count($job_company_id) > 0 && is_numeric($job_company_id[count($job_company_id) - 1]))
+        {
+            $job_company_id = $job_company_id[count($job_company_id) - 1];
+            $this->db->where('r.rec_id',$job_company_id);
+        }
+        if(isset($search_location_arr) && !empty($search_location_arr))
+        {
+            $city_id_2 = $search_location_arr['city_id'];
+            $this->db->where('rp.city',$city_id_2);
         }
         $sql = "";
         if($company_id != "")
@@ -510,11 +535,11 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         //echo $this->db->last_query();exit;
         $result_array = $query->result_array();        
         $retur_arr['jobData'] = $result_array;
-        $retur_arr['total_record'] = $this->ajax_job_search_new_filter_total_rec($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil);
+        $retur_arr['total_record'] = $this->ajax_job_search_new_filter_total_rec($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$job_city,$job_company_id,$search_location_arr);
         return $retur_arr;
     }
 
-    function ajax_job_search_new_filter_total_rec($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "") {
+    function ajax_job_search_new_filter_total_rec($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$search_location_arr = array()) {
 
         $this->db->select("COUNT(*) as total_record")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
@@ -528,15 +553,30 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
             $skills_id = $job_skills['skill_id'];
             $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skills_id . ')');
         }
-        if(isset($job_category) && !empty($job_category))
+        else if(isset($job_category) && !empty($job_category))
         {
             $industry_id = $job_category['industry_id'];
             $this->db->where('rp.industry_type',$industry_id);
         }
-        if(isset($job_designation) && !empty($job_designation))
+        else if(isset($job_designation) && !empty($job_designation))
         {
             $title_id = $job_designation['title_id'];
             $this->db->where('rp.post_name',$title_id);
+        }
+        else if(isset($job_city) && !empty($job_city))
+        {
+            $city_id = $job_city['city_id'];
+            $this->db->where('rp.city',$city_id);
+        }
+        else if(count($job_company_id) > 0 && is_numeric($job_company_id[count($job_company_id) - 1]))
+        {
+            $job_company_id = $job_company_id[count($job_company_id) - 1];
+            $this->db->where('r.rec_id',$job_company_id);
+        }
+        if(isset($search_location_arr) && !empty($search_location_arr))
+        {
+            $city_id_2 = $search_location_arr['city_id'];
+            $this->db->where('rp.city',$city_id_2);
         }
         $sql = "";
         if($company_id != "")

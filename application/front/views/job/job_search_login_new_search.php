@@ -282,6 +282,14 @@
 
                                 <div class="contact-frnd-post">
                                     <div class="job-contact-frnd ">
+                                        <div class="user_no_post_avl ng-scope" ng-if="searchJob.length == 0">
+                                            <div class="user-img-nn">
+                                                <div class="user_no_post_img">
+                                                    <img src="<?php echo base_url('assets/img/no-post.png?ver=time()');?>" alt="bui-no.png">
+                                                </div>
+                                                <div class="art_no_post_text">No Jobs Available.</div>
+                                            </div>
+                                        </div>
                                         <div class="all-job-box" ng-repeat="job in searchJob">
                                             <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="jobs.page_number" ng-value="{{jobs.page_number}}">
                                             <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="jobs.total_record" ng-value="{{jobs.total_record}}">
@@ -821,7 +829,7 @@
         var skill = '<?php echo $keyword; ?>';
         //var skill = skill.replace(/\-/g, ' ');
 
-        var place = '<?php echo $keyword1; ?>';
+        var search_location = '<?php echo $search_location; ?>';
         //var place = place.replace(/\-/g, ' ');
 
         var csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
