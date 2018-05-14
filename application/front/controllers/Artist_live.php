@@ -22,10 +22,8 @@ class Artist_live extends MY_Controller {
         $this->data['no_user_post_html'] = '<div class="user_no_post_avl"><h3>Feed</h3><div class="user-img-nn"><div class="user_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Feed Available.</div></div></div>';
         $this->data['no_user_contact_html'] = '<div class="art-img-nn"><div class="art_no_post_img"><img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '"></div><div class="art_no_post_text">No Contacts Available.</div></div>';
         // $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="profile.html" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
-
         include ('main_profile_link.php');
         include ('artistic_include.php');
-
     }
 
     public function index() {
@@ -294,8 +292,7 @@ class Artist_live extends MY_Controller {
 
         $contition_array = array('user_id' => $userid, 'status' => '1');
         $arturl = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_city,art_skill,other_skill,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-
+        return $arturl[0]['slug'];
         $city_url = $this->db->select('city_name')->get_where('cities', array('city_id' => $arturl[0]['art_city'], 'status' => '1'))->row()->city_name;
 
         $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $arturl[0]['other_skill']))->row()->other_category;
@@ -345,14 +342,15 @@ class Artist_live extends MY_Controller {
     }
 
     // Art dashboard
-    public function art_manage_post($id = "") {
+    public function art_manage_post($slugname = "") {
         $userid = $this->session->userdata('aileenuser');
-        $this->data['slugid'] = $id;
-        if ($id == '' && $userid == '') {
+        // $this->data['slugid'] = $id;
+        if ($slugname == '' && $userid == '') {
             redirect('login');
-        } elseif ($id == '' && $userid != '') {
+        } elseif ($slugname == '' && $userid != '') {
             redirect('find-artist');
         }
+        
         //if user deactive profile then redirect to artist/index untill active profile start
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
@@ -362,18 +360,21 @@ class Artist_live extends MY_Controller {
         // }
         //if user deactive profile then redirect to artist/index untill active profile End
         $user_name = $this->session->userdata('user_name');
-
-        $segment3 = explode('-', $this->uri->segment(3));
-        $slugdata = array_reverse($segment3);
-        $regid = $slugdata[0];
+      
+        // $segment3 = explode('-', $this->uri->segment(2));
+        $slugdata = $this->getdatafromslug($slugname);
+        $regid = $slugdata['art_id'];
+        // $regid = $slugdata[0];
         $artisticslug = $this->db->select('art_id')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_id;
+
         $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
         $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_step,user_id,art_user_image,art_name,art_lastname,designation,slug,art_id,art_skill,art_yourart,art_desc_art,art_email,art_city,art_country,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        
         $this->data['artid'] = $this->data['artisticdata'][0]['user_id'];
         $this->data['get_url'] = $get_url = $this->get_url($this->data['artisticdata'][0]['user_id']);
-
         $artistic_name = $this->get_artistic_name($this->data['artid']);
         $this->data['title'] = $artistic_name . ' | Dashboard' . '- Artistic Profile' . TITLEPOSTFIX;
+        
         if ($userid) {
             if (!$this->data['artisticdata'] && !$this->data['artsdata']) {
                 $this->load->view('artist/notavalible');
@@ -381,10 +382,10 @@ class Artist_live extends MY_Controller {
                 redirect('find-artist');
             } else {
                 $this->data['artistic_common'] = $this->load->view('artist/artistic_common', $this->data, true);
-                if ($get_url == $this->uri->segment(3)) {
+                if ($get_url == $slugname) {
                     $this->load->view('artist_live/art_manage_post', $this->data);
                 } else {
-                    redirect('artist/dashboard/' . $get_url, refresh);
+                    redirect('artist/'. $get_url .'/dashboard', refresh);
                 }
             }
         } else {
@@ -393,17 +394,17 @@ class Artist_live extends MY_Controller {
             } else {
                 include ('artistic_include.php');
                 $this->data['artistic_common_profile'] = $this->load->view('artist/artistic_common_profile', $this->data, true);
-                if ($get_url == $this->uri->segment(3)) {
+                if ($get_url == $slugname) {
                     $this->load->view('artist_live/art_dashboard_live', $this->data);
                 } else {
-                    redirect('artist/dashboard/' . $get_url, refresh);
+                    redirect('artist/'. $get_url .'/dashboard', refresh);
                 }
             }
         }
     }
 
     // ARTIST PROFILE DETAIL
-    public function artistic_profile($id = "") {
+    public function artistic_profile($slugname = "") {
         $userid = $this->session->userdata('aileenuser');
 
         //if user deactive profile then redirect to artist/index untill active profile start
@@ -415,9 +416,11 @@ class Artist_live extends MY_Controller {
             redirect('find-artist');
         }
         //if user deactive profile then redirect to artist/index untill active profile End
-        $segment3 = explode('-', $this->uri->segment(3));
-        $slugdata = array_reverse($segment3);
-        $regid = $slugdata[0];
+        // $segment3 = explode('-', $this->uri->segment(3));
+        // $slugdata = array_reverse($segment3);
+        // $regid = $slugdata[0];
+        $slugdata = $this->getdatafromslug($slugname);
+        $regid = $slugdata['art_id'];
 
         $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
         $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_email,art_phnno,art_country,art_state,art_city,art_pincode,art_address,art_yourart,art_skill,art_desc_art,art_inspire,art_bestofmine,art_portfolio,user_id,art_step,art_user_image,profile_background,designation,slug,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -446,7 +449,7 @@ class Artist_live extends MY_Controller {
     }
 
     // ARTIST PTHOTO
-    public function art_photos($id = "") {
+    public function art_photos($slugname = "") {
 
         $userid = $this->session->userdata('aileenuser');
 
@@ -460,9 +463,11 @@ class Artist_live extends MY_Controller {
         }
         //if user deactive profile then redirect to artist/index untill active profile End
 
-        $segment3 = explode('-', $this->uri->segment(3));
-        $slugdata = array_reverse($segment3);
-        $regid = $slugdata[0];
+        // $segment3 = explode('-', $this->uri->segment(3));
+        // $slugdata = array_reverse($segment3);
+        // $regid = $slugdata[0];
+        $slugdata = $this->getdatafromslug($slugname);
+        $regid = $slugdata['art_id'];
 
         $contition_array = array('art_id' => $regid, 'status' => '1');
 
@@ -474,10 +479,10 @@ class Artist_live extends MY_Controller {
 
         foreach ($artisticpost as $value) {
 
-
             $contition_array = array('insert_profile' => '1', 'is_deleted' => '1', 'post_id' => $value['art_post_id']);
 
             $art_data = $this->common->select_data_by_condition('post_files', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            
             $a_d[] = $art_data;
         }
 
@@ -523,10 +528,12 @@ class Artist_live extends MY_Controller {
         }
         //if user deactive profile then redirect to artist/index untill active profile End
 
-        $segment3 = explode('-', $this->uri->segment(3));
-        $slugdata = array_reverse($segment3);
-        $regid = $slugdata[0];
-
+        // $segment3 = explode('-', $this->uri->segment(3));
+        // $slugdata = array_reverse($segment3);
+        // $regid = $slugdata[0];
+        $slugdata = $this->getdatafromslug($slugname);
+        $regid = $slugdata['art_id'];
+        
         $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
         $artisticdata = $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -637,7 +644,7 @@ class Artist_live extends MY_Controller {
         }
     }
 
-    public function followers($id = "") {
+    public function followers($slugname = "") {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 
         //if user deactive profile then redirect to artist/index untill active profile start
@@ -650,11 +657,12 @@ class Artist_live extends MY_Controller {
         }
         //if user deactive profile then redirect to artist/index untill active profile End
 
-        $segment3 = explode('-', $this->uri->segment(3));
-        $slugdata = array_reverse($segment3);
-        $regid = $slugdata[0];
-
-
+        // $segment3 = explode('-', $this->uri->segment(3));
+        // $slugdata = array_reverse($segment3);
+        // $regid = $slugdata[0];
+        $slugdata = $this->getdatafromslug($slugname);
+        $regid = $slugdata['art_id'];
+        
         $contition_array = array('art_id' => $regid, 'status' => '1', 'is_delete' => '0', 'art_step' => '4');
         $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_skill,user_id,art_step,art_user_image,profile_background,designation,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -855,7 +863,7 @@ class Artist_live extends MY_Controller {
         echo $return_html;
     }
 
-    public function following($id = "") {
+    public function following($slugname = "") {
 
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 
@@ -869,9 +877,11 @@ class Artist_live extends MY_Controller {
         }
         //if user deactive profile then redirect to artist/index untill active profile End
 
-        $segment3 = explode('-', $this->uri->segment(3));
-        $slugdata = array_reverse($segment3);
-        $regid = $slugdata[0];
+        // $segment3 = explode('-', $this->uri->segment(3));
+        // $slugdata = array_reverse($segment3);
+        // $regid = $slugdata[0];
+        $slugdata = $this->getdatafromslug($slugname);
+        $regid = $slugdata['art_id'];
 
         $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
         $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_skill,user_id,art_step,art_user_image,profile_background,designation,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1718,4 +1728,10 @@ class Artist_live extends MY_Controller {
         echo json_encode($artistListByFilter);
     }
 
+    function getdatafromslug($slug){
+        $sql = "SELECT * FROM ailee_art_reg WHERE slug = '". $slug ."' AND status = '1'";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
 }

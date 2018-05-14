@@ -585,11 +585,14 @@ define('artist_information', BASEURL. 'artist/artistic-information');
 define('artist_art_address_insert', BASEURL. 'artist/art_address_insert'); 
 define('artist_userlist', BASEURL. 'artist/userlist'); 
 define('artist_art_post_insert', BASEURL. 'artist/art_post_insert/'); 
-define('artist_photos', BASEURL. 'artist/photos/'); 
 define('artist_videos', BASEURL. 'artist/videos/'); 
 define('artist_audios', BASEURL. 'artist/audios/'); 
 define('artist_pdf', BASEURL. 'artist/pdf/'); 
 define('artist_details', BASEURL. 'artist/details/'); 
+define('artist_followers', BASEURL. 'artist/followers/'); 
+define('artist_following', BASEURL. 'artist/following/'); 
+define('artist_edit_profile', BASEURL. 'artist/edit-information/'); 
+define('artistic_address', BASEURL. 'artist/artistic-address/'); 
 
 define('find_artist', BASEURL. 'find-artist/'); 
 define('profiles', BASEURL. 'profiles/'); 

@@ -626,7 +626,7 @@ if ($artisticdata[0]['art_bestofmine']) {
                             if (response.data == "ok") { 
                                 $("#btn1").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" /> &nbsp; Login');
                                 if (response.is_artistic == '1') {
-                                    window.location = "<?php echo base_url() ?>artist/details/" + site_url;
+                                    window.location = "<?php echo base_url() ?>artist/" + site_url + '/details';
                                 } else {
                                     window.location = "<?php echo base_url() ?>artist";
                                 }

@@ -11,7 +11,7 @@
 
  <?php echo $header; ?>
 
- <?php echo $art_header2_border; ?>
+ <?php echo $artistic_header2; ?>
  <div class="user-midd-section" id="paddingtop_fixed">    <div class="container" id="paddingtop_fixed">
     	<div class="row">
     		<div class="col-md-12">

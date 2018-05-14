@@ -120,7 +120,7 @@
             <div class="business-profile-right">
                 <div class="bui-menu-profile">
                     <div class="profile-left">
-                        <h4 class="profile-head-text"><a href="<?php echo site_url('artist/dashboard/' . $get_url); ?>" title=" <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>">
+                        <h4 class="profile-head-text"><a href="<?php echo site_url('artist/' . $get_url . '/dashboard'); ?>" title=" <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>">
                             <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?></a>
                         </h4>
                         <!-- text head start -->
@@ -157,9 +157,9 @@
                         <?php }else{?>
                         <ul class="pro-fw4">
                             <?php } ?>  
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" href="<?php echo base_url('artist/dashboard/' . $get_url); ?>"> Dashboard</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" href="<?php echo base_url('artist/' . $get_url . '/dashboard'); ?>"> Dashboard</a>
                             </li>
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'details') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('artist/details/' . $get_url); ?>"> Details</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'details') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('artist/' . $get_url . '/details'); ?>"> Details</a>
                             </li>
                             <?php
                                 $userid = $this->session->userdata('aileenuser');

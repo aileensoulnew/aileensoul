@@ -2,8 +2,7 @@
 <html>
     <head> 
         <title><?php echo $title; ?></title>
-        <?php echo $head; ?> 
-
+        <?php echo $head; ?>         
          <?php
         if (IS_ART_CSS_MINIFY == '0') {
             ?>
@@ -57,16 +56,16 @@
 <?php echo $artistic_common; ?>
 <div class="text-center tab-block">
     <div class="container mob-inner-page">
-       <a href="<?php echo artist_photos . $get_url; ?>" title="Photo">
+       <a href="<?php echo site_url('artist/' . $get_url . '/photos'); ?>" title="Photo">
             Photo
         </a>
-       <a href="<?php echo artist_videos . $get_url; ?>" title="Video">
+       <a href="<?php echo site_url('artist/' . $get_url . '/videos'); ?>" title="Video">
             Video
         </a>
-       <a href="<?php echo artist_audios . $get_url; ?>" title="Audio">
+       <a href="<?php echo site_url('artist/' . $get_url . '/audios'); ?>" title="Audio">
             Audio
         </a>
-        <a href="<?php echo artist_pdf . $get_url; ?>" title="Pdf">
+        <a href="<?php echo site_url('artist/' . $get_url . '/pdf') ?>" title="Pdf">
             PDf
         </a>
     </div>
@@ -156,7 +155,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="<?php echo artist_photos . $get_url; ?>" title="Photos">
+                <a href="<?php echo site_url('artist/' . $get_url . '/photos'); ?>" title="Photos">
                 <div class="full-box-module business_data" id="autorefresh">
                     <div class="profile-boxProfileCard  module buisness_he_module" style="">
                         <div class="head_details">
@@ -168,7 +167,7 @@
                     </div>
                 </div>
                 </a>
-                <a href="<?php echo artist_videos. $get_url; ?>" title="Video">
+                <a href="<?php echo site_url('artist/' . $get_url . '/videos'); ?>" title="Video">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
@@ -186,7 +185,7 @@
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
-                             <a href="<?php echo artist_audios . $get_url; ?>"> 
+                             <a href="<?php echo site_url('artist/' . $get_url . '/audios'); ?>"> 
                             <div class="head_details">
                                  <h5><i class="fa fa-music" aria-hidden="true"></i>  Audio</h5>
                             </div>
@@ -198,7 +197,7 @@
                     </div>
                 </div>
              
-                <a href="<?php echo artist_pdf . $get_url; ?>" title="Pdf">
+                <a href="<?php echo site_url('artist/' . $get_url . '/pdf') ?>" title="Pdf">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module pdf_box">
                         <table class="business_data_table">
