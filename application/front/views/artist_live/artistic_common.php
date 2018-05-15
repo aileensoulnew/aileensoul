@@ -120,7 +120,7 @@
             <div class="business-profile-right">
                 <div class="bui-menu-profile">
                     <div class="profile-left">
-                        <h4 class="profile-head-text"><a href="<?php echo site_url('artist/' . $get_url . '/dashboard'); ?>" title=" <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>">
+                        <h4 class="profile-head-text"><a href="<?php echo artist_dashboard. $get_url; ?>" title=" <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>">
                             <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?></a>
                         </h4>
                         <!-- text head start -->
@@ -157,9 +157,9 @@
                         <?php }else{?>
                         <ul class="pro-fw4">
                             <?php } ?>  
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" href="<?php echo base_url('artist/' . $get_url . '/dashboard'); ?>"> Dashboard</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" href="<?php echo artist_dashboard. $get_url; ?>"> Dashboard</a>
                             </li>
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'details') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('artist/' . $get_url .'/details'); ?>"> Details</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'details') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('artist/p/' . $get_url .'/details'); ?>"> Details</a>
                             </li>
                             <?php
                                 $userid = $this->session->userdata('aileenuser');
@@ -170,7 +170,7 @@
                                 $userid = $this->session->userdata('aileenuser');
                                 if ($artisticdata[0]['user_id'] == $userid) {
                                     ?>
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="<?php echo base_url('artist/'.$get_url .'/followers'); ?>">Followers <br> (<?php echo $flucount; ?>)</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="<?php echo base_url('artist/p/'.$get_url .'/followers'); ?>">Followers <br> (<?php echo $flucount; ?>)</a>
                             </li>
                             <?php
                                 } else {
@@ -193,14 +193,14 @@
                                 
                                 
                                     ?> 
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a  title="Followers" href="<?php echo base_url('artist/' . $get_url.'/followers'); ?>">Followers <br> (<?php echo ($count); ?>)</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a  title="Followers" href="<?php echo base_url('artist/p/' . $get_url.'/followers'); ?>">Followers <br> (<?php echo ($count); ?>)</a>
                             </li>
                             <?php } ?> 
                             <?php
                                 if ($artisticdata[0]['user_id'] == $userid) {
                                     ?>        
                             <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>>
-                                <a title="Following" href="<?php echo base_url('artist/'. $get_url .'/following'); ?>">
+                                <a title="Following" href="<?php echo base_url('artist/p/'. $get_url .'/following'); ?>">
                                     Following <br> 
                                     <div id="countfollow">(<?php echo isset($countfr) ? $countfo : 0; ?>)</div>
                                 </a>
@@ -225,7 +225,7 @@
                                 
                                    
                                     ?>
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="<?php echo base_url('artist/' . $get_url .'/following'); ?>">Following <br>  (<?php echo isset($countfo) ? $countfo : 0; ?>)</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="<?php echo base_url('artist/p/' . $get_url .'/following'); ?>">Following <br>  (<?php echo isset($countfo) ? $countfo : 0; ?>)</a>
                             </li>
                             <?php } ?>  
                         </ul>

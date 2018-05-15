@@ -32,10 +32,10 @@
                     <div class="padding_less main_art" >
                     <div class="top-tab">
                       <ul class="nav nav-tabs tabs-left remove_tab">
-                          <li> <a href="<?php echo site_url('artist/' . $get_url . '/photos'); ?>" ><i class="fa fa-camera" aria-hidden="true"></i>   Photos</a></li>
-                          <li> <a href="<?php echo site_url('artist/' . $get_url . '/videos'); ?>" ><i class="fa fa-video-camera" aria-hidden="true"></i>  Video</a></li>
-                          <li class="active"><a href="<?php echo site_url('artist/' . $get_url . '/audios'); ?>"><i class="fa fa-music" aria-hidden="true"></i>  Audio</a></li>
-                          <li>    <a href="<?php echo site_url('artist/' . $get_url . '/pdf') ?>" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Pdf</a></li>
+                          <li> <a href="<?php echo site_url('artist/p/' . $get_url . '/photos'); ?>" ><i class="fa fa-camera" aria-hidden="true"></i>   Photos</a></li>
+                          <li> <a href="<?php echo site_url('artist/p/' . $get_url . '/videos'); ?>" ><i class="fa fa-video-camera" aria-hidden="true"></i>  Video</a></li>
+                          <li class="active"><a href="<?php echo site_url('artist/p/' . $get_url . '/audios'); ?>"><i class="fa fa-music" aria-hidden="true"></i>  Audio</a></li>
+                          <li>    <a href="<?php echo site_url('artist/p/' . $get_url . '/pdf') ?>" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  Pdf</a></li>
                         </ul>
                     </div>
           <!-- Tab panes -->

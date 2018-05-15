@@ -31,7 +31,7 @@ $userid = $this->session->userdata('aileenuser');
 
 							<ul class="dropdown-menu account">
 								<li>Account</li>
-								<li><a href="<?php echo site_url('artist/'.$arturl . '/dashboard'); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+								<li><a href="<?php echo artist_dashboard. $arturl; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 								<li><a href="<?php echo artist_edit_profile; ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 								 <li><a onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
 							</ul>

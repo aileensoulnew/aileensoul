@@ -315,28 +315,27 @@ $route['artist/artistic-portfolio'] = "artist/art_portfolio";
 $route['artist/artistic-portfolio-insert'] = "artist/art_portfolio_insert";
 
 $route['artist/dashboard'] = "artist_live/art_manage_post";
-$route['artist/(:any)/dashboard'] = "artist_live/art_manage_post/$1";
 // $route['artist/dashboard/(:any)'] = "artist_live/art_manage_post/$1";
 
 
 // $route['artist/details/(:any)'] = "artist_live/artistic_profile/$1";
-$route['artist/(:any)/details'] = "artist_live/artistic_profile/$1";
+$route['artist/p/(:any)/details'] = "artist_live/artistic_profile/$1";
 $route['artist/details'] = "artist_live/artistic_profile";
 
 $route['artist/photos'] = "artist_live/art_photos";
-$route['artist/(:any)/photos'] = "artist_live/art_photos/$1";
+$route['artist/p/(:any)/photos'] = "artist_live/art_photos/$1";
 // $route['artist/photos/(:any)'] = "artist_live/art_photos/$1";
 
 $route['artist/videos'] = "artist_live/art_videos";
-$route['artist/(:any)/videos/'] = "artist_live/art_videos/$1";
+$route['artist/p/(:any)/videos'] = "artist_live/art_videos/$1";
 // $route['artist/videos/(:any)'] = "artist_live/art_videos/$1";
 
 $route['artist/audios'] = "artist_live/art_audios";
-$route['artist/(:any)/audios'] = "artist_live/art_audios/$1";
+$route['artist/p/(:any)/audios'] = "artist_live/art_audios/$1";
 
 
 $route['artist/pdf'] = "artist_live/art_pdf";
-$route['artist/(:any)/pdf/'] = "artist_live/art_pdf/$1";
+$route['artist/p/(:any)/pdf'] = "artist_live/art_pdf/$1";
 
 $route['artist/post-detail'] = "artist_live/postnewpage";
 $route['artist/post-detail/(:any)'] = "artist_live/postnewpage/$1";
@@ -350,8 +349,8 @@ $route['artist/reactivateacc'] = "artist_live/reactivateacc";
 
 $route['artist/location'] = "artist_live/location";
 $route['artist_live/artistCategory'] = "artist_live/artistCategory";
-$route['artist/(:any)/following'] = "artist_live/following/$1";
-$route['artist/(:any)/followers'] = "artist_live/followers/$1";
+$route['artist/p/(:any)/following'] = "artist_live/following/$1";
+$route['artist/p/(:any)/followers'] = "artist_live/followers/$1";
 // $route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";
 
 $route['artist/home'] = "artist_live/art_post"; 
@@ -536,6 +535,7 @@ $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
 // $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
+$route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";
 $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['(:any)'] = 'Userprofile';

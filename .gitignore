@@ -58,3 +58,4 @@ application/front/config/routes.php
 application/front/controllers/Business_profile.php
 application/front/controllers/Business_profile.php
 application/front/controllers/Business_profile_live.php
+application/front/controllers/Business_profile_live.php

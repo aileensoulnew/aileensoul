@@ -631,7 +631,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             if (response.data == "ok") { 
                                 $("#btn1").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="<?php echo "btn-ajax-loader.gif"; ?>"/> &nbsp; Login');
                                 if (response.is_artistic == '1') { 
-                                    window.location = "<?php echo artist_dashboard ?>" + site_url;
+                                    window.location = "<?php echo base_url(). $get_url . 'dashboard' ?>" + site_url;
                                 } else { 
                                     window.location = "<?php echo find_artist; ?>";
                                 }

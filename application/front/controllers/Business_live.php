@@ -73,7 +73,6 @@ class Business_live extends MY_Controller {
         $this->data['title'] = "Categories - Business Profile | Aileensoul";
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->data['page'] = '';
-
         $this->load->view('business_live/category', $this->data);
     }
 
@@ -222,5 +221,13 @@ class Business_live extends MY_Controller {
     public function businessListByLocation($id = '0') {
         $businessListByLocation = $this->business_model->businessListByLocation($id);
         echo json_encode($businessListByLocation);
+    }
+
+    // Get Business list from city id or location id
+    public function businessListByFilter() {
+        $category_id = $_POST['category_id'];
+        $location_id = $_POST['location_id'];
+        $artistListByFilter = $this->business_model->businessListByFilter($category_id,$location_id);
+        echo json_encode($artistListByFilter);
     }
 }

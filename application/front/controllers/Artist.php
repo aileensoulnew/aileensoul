@@ -1069,7 +1069,7 @@ class Artist extends MY_Controller {
 
             $geturl = $this->get_url($row['posted_user_id']);
 
-            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
             if (IMAGEPATHFROM == 'upload') {
 
@@ -1100,7 +1100,7 @@ class Artist extends MY_Controller {
 
             $geturl = $this->get_url($row['user_id']);
 
-            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
             if (IMAGEPATHFROM == 'upload') {
 
                 if ($artdata[0]['art_user_image']) {
@@ -1142,7 +1142,7 @@ class Artist extends MY_Controller {
             $return_html .= '<li>
                                                 <div class="else_post_d">
                                                     <div class="post-design-product">
-                                                        <a class="post_dot" href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($artdataposted[0]['art_name'])) . ' ' . ucfirst(strtolower($artdataposted[0]['art_lastname'])) . '</a>
+                                                        <a class="post_dot" href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($artdataposted[0]['art_name'])) . ' ' . ucfirst(strtolower($artdataposted[0]['art_lastname'])) . '</a>
                                                         <p class="posted_with" > Posted With</p> <a class="post_dot1 padding_less_left"  href="' . base_url('artist/dashboard/' . $geturl_user) . '">' . ucfirst(strtolower($artdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artdata[0]['art_lastname'])) . '</a>
                                                         <span role="presentation" aria-hidden="true"> · </span> <span class="ctre_date">
                                         ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '  
@@ -1154,7 +1154,7 @@ class Artist extends MY_Controller {
 
             $return_html .= '<li>
                                                 <div class="post-design-product">
-                                                    <a class="post_dot"  href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($artdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artdata[0]['art_lastname'])) . '">
+                                                    <a class="post_dot"  href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($artdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artdata[0]['art_lastname'])) . '">
                     ' . ucfirst(strtolower($artdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artdata[0]['art_lastname'])) . '</a>
                                                     <span role="presentation" aria-hidden="true"> · </span>
                                                     <div class="datespan"> <span class="ctre_date" > 
@@ -1573,7 +1573,7 @@ class Artist extends MY_Controller {
 
             $return_html .= '<div class="all-comment-comment-box">
                                             <div class="post-design-pro-comment-img">';
-            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
             $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->art_user_image;
 
 
@@ -1607,7 +1607,7 @@ class Artist extends MY_Controller {
 
             $return_html .= '</div>
                                             <div class="comment-name">';
-            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">
+            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">
                                                 <b title="' . ucfirst(strtolower($artname)) . ' ' . ucfirst(strtolower($artlastname)) . '">';
             $return_html .= $artname;
             $return_html .= ' ';
@@ -1703,7 +1703,7 @@ class Artist extends MY_Controller {
                         <div class="post-design-proo-img hidden-mob">';
 
         $geturl = $this->get_url($artdata[0]['user_id']);
-        $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+        $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
         if (IMAGEPATHFROM == 'upload') {
 
@@ -2043,7 +2043,7 @@ class Artist extends MY_Controller {
 
             $geturl = $this->get_url($user['user_id']);
 
-            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
             if (IMAGEPATHFROM == 'upload') {
                 if ($user['art_user_image']) {
@@ -2076,7 +2076,7 @@ class Artist extends MY_Controller {
                                                 <li class="folle_text">
                                                      <div class="">
                                                      <div class="follow-li-text " style="padding: 0;">
-                                                <a title="' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '" href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '</a>
+                                                <a title="' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '" href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '</a>
                                                                             </div>
                                                                             <div>';
             $return_html .= '<a>';
@@ -2528,7 +2528,7 @@ class Artist extends MY_Controller {
                                                                     <div class=" col-md-12 follow_left_box_main">                   
                                                                         <div class="post-design-pro-img_follow">';
 
-                $third_user_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ucfirst(strtolower($userlist['art_lastname'])) . '">';
+                $third_user_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ucfirst(strtolower($userlist['art_lastname'])) . '">';
 
 
                 if (IMAGEPATHFROM == 'upload') {
@@ -2565,7 +2565,7 @@ class Artist extends MY_Controller {
                                 <div class="post-design-name_follow fl">
                                      <ul><li>
                                     <div class="post-design-product_follow">';
-                $third_user_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                $third_user_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ucfirst(strtolower($userlist['art_lastname'])) . '">
                             <h6>' . ucfirst(strtolower($userlist['art_name'])) . ucfirst(strtolower($userlist['art_lastname'])) . '</h6>
                             </a> 
                             </div>
@@ -2573,7 +2573,7 @@ class Artist extends MY_Controller {
 
                 $third_user_html .= '<li>
                         <div class="post-design-product_follow_main" style="display:block;">
-                           <a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                           <a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
                     <p>';
                 if ($userlist['designation']) {
                     $third_user_html .= $userlist['designation'];
@@ -2655,7 +2655,7 @@ class Artist extends MY_Controller {
                                                                         <div class="post-design-pro-img_follow">';
 
 
-                    $third_user_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">';
+                    $third_user_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
                         if ($userlist['art_user_image']) {
@@ -2691,7 +2691,7 @@ class Artist extends MY_Controller {
                                 <div class="post-design-name_follow fl">
                                      <ul><li>
                                     <div class="post-design-product_follow">';
-                    $third_user_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                    $third_user_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
                             <h6>' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '</h6>
                             </a> 
                             </div>
@@ -2699,7 +2699,7 @@ class Artist extends MY_Controller {
 
                     $third_user_html .= '<li>
                         <div class="post-design-product_follow_main" style="display:block;">
-                           <a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                           <a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
                     <p>';
                     if ($userlist['designation']) {
                         $third_user_html .= $userlist['designation'];
@@ -2798,7 +2798,7 @@ class Artist extends MY_Controller {
                                                                         <div class="post-design-pro-img_follow">';
 
 
-                    $third_user_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">';
+                    $third_user_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">';
 
 
                     if (IMAGEPATHFROM == 'upload') {
@@ -2833,7 +2833,7 @@ class Artist extends MY_Controller {
                                 <div class="post-design-name_follow fl">
                                      <ul><li>
                                     <div class="post-design-product_follow">';
-                    $third_user_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                    $third_user_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
                             <h6>' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '</h6>
                             </a> 
                             </div>
@@ -2841,7 +2841,7 @@ class Artist extends MY_Controller {
 
                     $third_user_html .= '<li>
                         <div class="post-design-product_follow_main" style="display:block;">
-                           <a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                           <a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
                     <p>';
                     if ($userlist['designation']) {
                         $third_user_html .= $userlist['designation'];
@@ -3486,7 +3486,7 @@ class Artist extends MY_Controller {
                                                                             <div class="follow-img">';
 
 
-                    $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                    $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
                         if ($artaval[0]['art_user_image']) {
@@ -3518,7 +3518,7 @@ class Artist extends MY_Controller {
                                      <li class="folle_text">
                                         <div class="">
                                             <div class="follow-li-text " style="padding: 0;">
-                                                <a href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
+                                                <a href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
                                         <div>';
                     $return_html .= '<a>';
                     if ($artaval[0]['designation']) {
@@ -3705,7 +3705,7 @@ class Artist extends MY_Controller {
                                                 <div class = "follow-img">';
 
 
-                    $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($artaval[0]['art_name'])) . ' ' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '">';
+                    $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($artaval[0]['art_name'])) . ' ' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
                         if ($artaval[0]['art_user_image']) {
@@ -3737,7 +3737,7 @@ class Artist extends MY_Controller {
                                     <li class="folle_text">
                                         <div class="">
                                             <div class="follow-li-text" style="padding: 0;">
-                                                <a title="' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '" href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
+                                                <a title="' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '" href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
                                             <div>';
 
                     $return_html .= '<a>';
@@ -9597,7 +9597,7 @@ class Artist extends MY_Controller {
 
             $modal .= '<li>';
             $modal .= '<div class="like_user_listq">';
-            $modal .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($art_name1)) . ' ' . ucfirst(strtolower($art_lastname)) . '" class="head_main_name" >';
+            $modal .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($art_name1)) . ' ' . ucfirst(strtolower($art_lastname)) . '" class="head_main_name" >';
             $modal .= '<div class="like_user_list_img">';
 
             if (IMAGEPATHFROM == 'upload') {
@@ -11307,7 +11307,7 @@ class Artist extends MY_Controller {
                                                                         <div class="post-design-pro-img_follow">';
 
 
-                    $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">';
+                    $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">';
 
 
                     if (IMAGEPATHFROM == 'upload') {
@@ -11341,7 +11341,7 @@ class Artist extends MY_Controller {
                                 <div class="post-design-name_follow fl">
                                      <ul><li>
                                     <div class="post-design-product_follow">';
-                    $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                    $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
                             <h6>' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '</h6>
                             </a> 
                             </div>
@@ -11349,7 +11349,7 @@ class Artist extends MY_Controller {
 
                     $return_html .= '<li>
                         <div class="post-design-product_follow_main" style="display:block;">
-                           <a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
+                           <a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($userlist['art_name'])) . ' ' . ucfirst(strtolower($userlist['art_lastname'])) . '">
                     <p>';
                     if ($userlist['designation']) {
                         $return_html .= $userlist['designation'];
@@ -11487,7 +11487,7 @@ class Artist extends MY_Controller {
 
                         $geturl = $this->get_url($row['posted_user_id']);
 
-                        $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                        $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
                         if (IMAGEPATHFROM == 'upload') {
                             if ($userimageposted) {
@@ -11516,7 +11516,7 @@ class Artist extends MY_Controller {
                         $return_html .= '</a>';
                     } else {
                         $geturl = $this->get_url($row['user_id']);
-                        $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                        $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
                         if (IMAGEPATHFROM == 'upload') {
                             if ($art_userimage) {
@@ -11585,7 +11585,7 @@ class Artist extends MY_Controller {
                                                 <div class="else_post_d">
                                                     <div class="post-design-product">
                                                         <a class="post_dot" href="' . base_url('artist/dashboard/' . $geturl_post) . '">' . ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)) . '</a>
-                                                        <p class="posted_with" > Posted With</p> <a class="post_dot1 padding_less_left"  href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '</a>
+                                                        <p class="posted_with" > Posted With</p> <a class="post_dot1 padding_less_left"  href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '</a>
                                                         <span role="presentation" aria-hidden="true"> · </span> <span class="ctre_date">
                                         ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '  
                                                         </span> </div></div>
@@ -11593,7 +11593,7 @@ class Artist extends MY_Controller {
                     } else {
                         $return_html .= '<li>
                                                 <div class="post-design-product">
-                                                    <a class="post_dot"  href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '">
+                                                    <a class="post_dot"  href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '">
                     ' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '</a>
                                                     <span role="presentation" aria-hidden="true"> · </span>
                                                     <div class="datespan"> <span class="ctre_date" > 
@@ -12068,7 +12068,7 @@ class Artist extends MY_Controller {
 
                             $return_html .= '<div class="all-comment-comment-box">
                                             <div class="post-design-pro-comment-img">';
-                            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
                             $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->art_user_image;
 
                             if (IMAGEPATHFROM == 'upload') {
@@ -12099,7 +12099,7 @@ class Artist extends MY_Controller {
                             $return_html .= '</a>';
                             $return_html .= '</div>
                                             <div class="comment-name">';
-                            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">
+                            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">
 
                                                 <b title="' . ucfirst(strtolower($artname)) . ' ' . ucfirst(strtolower($artlastname)) . '">';
                             $return_html .= ucfirst(strtolower($artname));
@@ -12208,7 +12208,7 @@ class Artist extends MY_Controller {
 
                     $art_slug = $this->db->select('slug')->get_where('art_reg', array('user_id' => $userid, 'status' => '1'))->row()->slug;
 
-                    $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                    $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
                     $userid = $this->session->userdata('aileenuser');
                     $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $userid, 'status' => '1'))->row()->art_user_image;
@@ -12921,14 +12921,14 @@ class Artist extends MY_Controller {
 
                         if ($info) {
 
-                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '" href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '" href="' . base_url('artist/p/' . $geturl) . '">';
 
                             $return_html .= '<img src = "' . ART_PROFILE_THUMB_UPLOAD_URL . $userimage . '" name = "image_src" id = "image_src" alt="' . $userimage . '"/>';
 
                             $return_html .= '</a>';
                         } else {
 
-                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '" href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '" href="' . base_url('artist/p/' . $geturl) . '">';
                             $return_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE">';
 
                             $return_html .= '</a>';
@@ -12962,7 +12962,7 @@ class Artist extends MY_Controller {
 </div></div>
 </li>';
                 } else {
-                    $return_html .= '<li><div class = "post-design-product"><a class = "post_dot" title = "' . ucfirst(strtolower($firstname)) . '&nbsp;' . ucfirst(strtolower($lastname)) . '" href = "' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '</a>
+                    $return_html .= '<li><div class = "post-design-product"><a class = "post_dot" title = "' . ucfirst(strtolower($firstname)) . '&nbsp;' . ucfirst(strtolower($lastname)) . '" href = "' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '</a>
 <span role = "presentation" aria-hidden = "true"> · </span>
 <div class = "datespan">
 <span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
@@ -13479,7 +13479,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 $geturl = $this->get_url($userid);
 
 
-                $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
                 $userid = $this->session->userdata('aileenuser');
                 $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $userid, 'status' => '1'))->row()->art_user_image;
@@ -14977,7 +14977,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 $geturl = $this->get_url($userid);
 
 
-                $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
                 if (IMAGEPATHFROM == 'upload') {
                     if ($art_userimage) {
@@ -16109,7 +16109,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
         $contition_array = array('user_id' => $userid, 'status' => '1');
         $arturl = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_city,art_skill,other_skill,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
+        return $arturl[0]['slug'];
 
         $city_url = $this->db->select('city_name')->get_where('cities', array('city_id' => $arturl[0]['art_city'], 'status' => '1'))->row()->city_name;
 

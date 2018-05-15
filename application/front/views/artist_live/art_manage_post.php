@@ -56,16 +56,16 @@
 <?php echo $artistic_common; ?>
 <div class="text-center tab-block">
     <div class="container mob-inner-page">
-       <a href="<?php echo site_url('artist/' . $get_url . '/photos'); ?>" title="Photo">
+       <a href="<?php echo site_url('artist/p/' . $get_url . '/photos'); ?>" title="Photo">
             Photo
         </a>
-       <a href="<?php echo site_url('artist/' . $get_url . '/videos'); ?>" title="Video">
+       <a href="<?php echo site_url('artist/p/' . $get_url . '/videos'); ?>" title="Video">
             Video
         </a>
-       <a href="<?php echo site_url('artist/' . $get_url . '/audios'); ?>" title="Audio">
+       <a href="<?php echo site_url('artist/p/' . $get_url . '/audios'); ?>" title="Audio">
             Audio
         </a>
-        <a href="<?php echo site_url('artist/' . $get_url . '/pdf') ?>" title="Pdf">
+        <a href="<?php echo site_url('artist/p/' . $get_url . '/pdf') ?>" title="Pdf">
             PDf
         </a>
     </div>
@@ -78,7 +78,7 @@
                     <div class="profile-boxProfileCard  module">
                        <div class="head_details1">
                             <span>
-                                  <a href="<?php echo artist_details . $this->uri->segment(3) ?>" title="Information">
+                                  <a href="<?php echo base_url('artist/p/' . $this->uri->segment(3) .'/details'); ?>" title="Information">
                                       <h5><i class="fa fa-info-circle" aria-hidden="true"></i>
                                     Information  
                                    </h5>
@@ -155,7 +155,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="<?php echo site_url('artist/' . $get_url . '/photos'); ?>" title="Photos">
+                <a href="<?php echo site_url('artist/p/' . $get_url . '/photos'); ?>" title="Photos">
                 <div class="full-box-module business_data" id="autorefresh">
                     <div class="profile-boxProfileCard  module buisness_he_module" style="">
                         <div class="head_details">
@@ -167,7 +167,7 @@
                     </div>
                 </div>
                 </a>
-                <a href="<?php echo site_url('artist/' . $get_url . '/videos'); ?>" title="Video">
+                <a href="<?php echo site_url('artist/p/' . $get_url . '/videos'); ?>" title="Video">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
@@ -185,7 +185,7 @@
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
                         <table class="business_data_table">
-                             <a href="<?php echo site_url('artist/' . $get_url . '/audios'); ?>"> 
+                             <a href="<?php echo site_url('artist/p/' . $get_url . '/audios'); ?>"> 
                             <div class="head_details">
                                  <h5><i class="fa fa-music" aria-hidden="true"></i>  Audio</h5>
                             </div>
@@ -197,7 +197,7 @@
                     </div>
                 </div>
              
-                <a href="<?php echo site_url('artist/' . $get_url . '/pdf') ?>" title="Pdf">
+                <a href="<?php echo site_url('artist/p/' . $get_url . '/pdf') ?>" title="Pdf">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module pdf_box">
                         <table class="business_data_table">

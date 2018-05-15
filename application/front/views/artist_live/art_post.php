@@ -71,7 +71,7 @@
                 <div class="post-editor col-md-12">
                     <div class="main-text-area col-md-12">
                         <div class="popup-img">
-                            <a href="<?php echo base_url('artist/' .$get_url . '/dashboard') ?>" title="<?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>">
+                            <a href="<?php echo artist_dashboard. $get_url; ?>" title="<?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>">
                             <?php
                                 $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
                                 $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;

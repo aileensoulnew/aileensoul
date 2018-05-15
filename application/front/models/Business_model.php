@@ -97,9 +97,9 @@ class Business_model extends CI_Model {
         $this->db->join('countries cr', 'cr.country_id = bp.country', 'left');
         $this->db->join('states s', 's.state_name = bp.state', 'left');
         if ($keyword != '' && $busCat == '') {
-            $this->db->where("(bp.company_name LIKE '%$keyword%' OR bp.address LIKE '%$keyword%' OR bp.contact_person LIKE '%$keyword%' OR bp.contact_mobile LIKE '%$keyword%' OR bp.contact_email LIKE '%$keyword%' OR bp.contact_website LIKE '%$keyword%' OR bp.details LIKE '%$keyword%' OR bp.business_slug LIKE '%$keyword%' OR bp.other_business_type LIKE '%$keyword%' OR bp.other_industrial LIKE '%$keyword%')");
+            $this->db->where("(bp.company_name LIKE '%$keyword%' OR bp.address LIKE '%$keyword%' OR bp.contact_person LIKE '%$keyword%' OR bp.contact_mobile LIKE '%$keyword%' OR bp.details LIKE '%$keyword%' OR bp.business_slug LIKE '%$keyword%' OR bp.other_business_type LIKE '%$keyword%' OR bp.other_industrial LIKE '%$keyword%')");
         }elseif ($keyword != '' && $busCat != '') {
-            $this->db->where("(bp.company_name LIKE '%$keyword%' OR bp.address LIKE '%$keyword%' OR bp.contact_person LIKE '%$keyword%' OR bp.contact_mobile LIKE '%$keyword%' OR bp.contact_email LIKE '%$keyword%' OR bp.contact_website LIKE '%$keyword%' OR bp.details LIKE '%$keyword%' OR bp.business_slug LIKE '%$keyword%' OR bp.other_business_type LIKE '%$keyword%' OR bp.other_industrial LIKE '%$keyword%' OR bp.industriyal = '$busCat')");
+            $this->db->where("(bp.company_name LIKE '%$keyword%' OR bp.address LIKE '%$keyword%' OR bp.contact_person LIKE '%$keyword%' OR bp.contact_mobile LIKE '%$keyword%' OR bp.details LIKE '%$keyword%' OR bp.business_slug LIKE '%$keyword%' OR bp.other_business_type LIKE '%$keyword%' OR bp.other_industrial LIKE '%$keyword%' OR bp.industriyal = '$busCat')");
         }
         if ($location != '') {
             $this->db->where("(ct.city_name = '$location' OR cr.country_name = '$location' OR s.state_name = '$location')");
@@ -109,6 +109,8 @@ class Business_model extends CI_Model {
         $this->db->where('bp.business_step', '4');
         $query = $this->db->get();
         $result_array = $query->result_array();
+        echo $this->db->last_query();
+        exit;
         return $result_array;
     }
 
@@ -340,6 +342,32 @@ class Business_model extends CI_Model {
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
             WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4' and
             bp.city = '" . $id ."'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    // Get Location List based on city id
+    function businessListByFilter($category_id = '', $location_id = '', $limit = '') {
+        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
+            ct.city_name as city, 
+            cr.country_name as country 
+            FROM ailee_business_profile bp 
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'";
+
+            if($category_id != ''){
+                $sql .= " AND bp.industriyal IN (". $category_id .")";
+            }   
+            
+            if($location_id != ''){
+                $sql .= " AND bp.city IN (". $location_id .")";
+            }
+            if($limit){
+                $sql .= " Limit ". $limit;   
+            }
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;

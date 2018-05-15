@@ -43,6 +43,10 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('BASEURL', 'http://localhost/aileensoulnew/aileensoul/');
     define('IMAGEPATHFROM', 'upload'); //upload,s3bucket 
     error_reporting(0);
+}else if ($_SERVER['HTTP_HOST'] == '35.165.1.109:81' || $_SERVER['SERVER_ADDR'] == '35.165.1.109') {
+    define('BASEURL', 'http://35.165.1.109:81/');
+    define('IMAGEPATHFROM', 'upload'); //upload,s3bucket 
+    error_reporting(0);
 } else {
     define('BASEURL', 'https://www.aileensoul.com/');
     define('IMAGEPATHFROM', 's3bucket'); //upload,s3bucket 
@@ -573,7 +577,7 @@ define('MAILTYPE', 'html');
 
 define('base_url', BASEURL); 
 define('artist_registration', BASEURL. 'artist/registration'); 
-define('artist_dashboard', BASEURL. 'artist/dashboard/'); 
+define('artist_dashboard', BASEURL. 'artist/p/'); 
 define('artist_reactivateacc', BASEURL. 'artist/reactivateacc'); 
 define('artist_category', BASEURL. 'artist/'); 
 define('artist_other_category', BASEURL. 'artist/other'); 

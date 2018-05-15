@@ -40,6 +40,46 @@ app.controller('businessListController', function ($scope, $http) {
         locationBusinessList();
     }
     
+    $scope.getfilterartistdata = function(){
+        var location = location_id;
+        // Get Checked Location of filter and make data value for ajax call
+        $('.locationcheckbox').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                var urllocation_id = location_id.split(",");
+                if (urllocation_id.indexOf(currentid) === -1) {
+                    location += (location == "") ? currentid : "," + currentid;
+                }
+            }
+        });
+
+        // Get Checked Category of filter and make data value for ajax call
+        var category = category_id;
+        $('.categorycheckbox').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                var urlcategory_id = category_id.split(",");
+                if (urlcategory_id.indexOf(currentid) === -1) {
+                    category += (category == "") ? currentid : "," + currentid;
+                }
+            }
+        });
+
+        var datavalue = new FormData();
+        datavalue.append('category_id', category);
+        datavalue.append('location_id', location);
+        $("#loader").removeClass("hidden");
+        filterajax = $http.post(base_url + "business_live/businessListByFilter/", datavalue,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false}
+            }).then(function (success) {
+                $("#loader").addClass("hidden");
+                $scope.businessList = success.data;
+        }, function (error) {}
+        , function (complete) { filterajax = false; });
+    }
+
 });
 
 $(window).on("load", function () {
@@ -49,3 +89,9 @@ $(window).on("load", function () {
     });
 });
 
+// change location
+$(document).on('change','.locationcheckbox,.categorycheckbox',function(){
+    var self = this;
+    // self.setAttribute('checked',(this.checked));
+    angular.element(self).scope().getfilterartistdata();
+});

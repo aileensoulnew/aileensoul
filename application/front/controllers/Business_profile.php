@@ -10679,25 +10679,28 @@ Your browser does not support the audio tag.
         return $company_name = $businessdata;
     }
 
-    public function ajax_business_skill() {
+   /* public function ajax_business_skill() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $term = $_GET['term'];
         $contition_array = array('status' => '1', 'is_deleted' => '0', 'business_step' => '4');
         $search_condition = "(company_name LIKE '" . trim($term) . "%' OR other_industrial LIKE '" . trim($term) . "%' OR other_business_type LIKE '" . trim($term) . "%')";
         $businessdata = $this->data['results'] = $this->common->select_data_by_search('business_profile', $search_condition, $contition_array, $data = 'company_name,other_industrial,other_business_type', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET BUSINESS TYPE
+
+        // GET BUSINESS TYPE
         $contition_array = array('status' => '1', 'is_delete' => '0');
         $search_condition = "(business_name LIKE '" . trim($term) . "%' )";
         $businesstype = $this->data['results'] = $this->common->select_data_by_search('business_type', $search_condition, $contition_array, $data = 'business_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET INDUSTRIAL TYPE
+       
+        // GET INDUSTRIAL TYPE
         $contition_array = array('status' => '1', 'is_delete' => '0');
         $search_condition = "(industry_name LIKE '" . trim($term) . "%' )";
         $industrytype = $this->data['results'] = $this->common->select_data_by_search('industry_type', $search_condition, $contition_array, $data = 'industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET PRODUCT
+        
+        // GET PRODUCT
         $contition_array = array('status' => '1', 'is_delete' => '0');
         $search_condition = "(product_name LIKE '" . trim($term) . "%' OR product_description LIKE '" . trim($term) . "%')";
         $productdata = $this->data['results'] = $this->common->select_data_by_search('business_profile_post', $search_condition, $contition_array, $data = 'product_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
+        
         $unique = array_merge($businessdata, $businesstype, $industrytype, $productdata);
         foreach ($unique as $key => $value) {
             foreach ($value as $ke => $val) {
@@ -10706,14 +10709,12 @@ Your browser does not support the audio tag.
                 }
             }
         }
-
         $results = array_unique($result);
         foreach ($results as $key => $value) {
             $result1[$key]['value'] = $value;
         }
-
         echo json_encode($result1);
-    }
+    }*/
 
     public function ajax_location_data() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -10721,7 +10722,7 @@ Your browser does not support the audio tag.
         if (!empty($term)) {
             $contition_array = array('status' => '1', 'state_id !=' => '0');
             $search_condition = "(city_name LIKE '" . trim($term) . "%')";
-            $location_list = $this->common->select_data_by_search('cities', $search_condition, $contition_array, $data = 'city_name', $sortby = 'city_name', $orderby = 'desc', $limit = '', $offset = '', $join_str5 = '', $groupby = 'city_name');
+            $location_list = $this->common->select_data_by_search('cities', $search_condition, $contition_array, $data = 'city_name', $sortby = 'city_name', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'city_name');
             foreach ($location_list as $key1 => $value) {
                 foreach ($value as $ke1 => $val1) {
                     $location[] = $val1;
@@ -10936,5 +10937,28 @@ Your browser does not support the audio tag.
                 return redirect($this->business_profile_link); 
             }
         }
+    }
+
+    public function ajax_business_skill(){
+        $term = $_GET['term'];
+        if($term != "")
+            $term = $term . '%' ;
+        $sql = "SELECT company_name as value
+                FROM ailee_business_profile 
+                WHERE status = '1' AND is_deleted = '0' AND business_step = '4' 
+                AND (company_name LIKE '". $term ."')
+                UNION all
+                SELECT business_name as value
+                FROM ailee_business_type 
+                WHERE status = '1' AND is_delete = '0' AND (business_name LIKE '". $term ."' )
+                UNION all
+                SELECT industry_name as value
+                FROM ailee_industry_type 
+                WHERE status = '1' AND is_delete = '0' 
+                AND (industry_name LIKE '". $term ."' )";
+
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        echo json_encode($result_array);
     }
 }
