@@ -1908,7 +1908,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 
 .custom-user-btn a{width:90px; padding:6px 0; cursor:pointer;}
 .custom-user-btn a.btn1{border:1px solid #1b8ab9 !important;}
-#nocontact .custom-user-btn a{width:120px;}
+#nocontact .custom-user-btn a{width:120px; font-weight:normal;}
 
 .how-about-profile{padding-top:125px;}
 .how-about-profile p{padding-bottom:10px; line-height:2; letter-spacing:0.5px;}
@@ -2137,7 +2137,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
     .media-pages-tablet{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 0 0 8px; margin-bottom: 15px;}
     .media-tab .tab-content{padding: 20px 10px;}
     .full-box{border: 0;}
-    .contacts-page .custom-user-box{border: 0px; padding: 0;}
+    .contacts-page .custom-user-box{}
     .upload-profile a{font-size: 0; display: block; margin-bottom: 0; height: 50px;}
     .cover-pic .btn{margin-top: -10px;}
     .modal-dialog{margin-bottom: 55px;}
@@ -2170,10 +2170,12 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	#bus-popup .modal-content{width:100%;}
 	.all-detail-box .tab-pane ul li{width:33.3333%;}
 	.all-upload label{margin-left:0;}
-	.custom-user-box .custom-user-detail{width:67%;}
+	.custom-user-box .custom-user-detail{width:60%;}
 	.custom-user-box{margin-bottom:0;}
 	.custom-user-list h3{font-size:20px;}
 	.table-responsive.content td a{font-size:14px;}
+	.detail-box{border:0;}
+	.detail-box h4{display:none;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
@@ -2317,7 +2319,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.btn-4,.btns .btn-4{padding:5px 20px;}
 	.all-detail-box .tab-pane ul li{width:50%;}
 	.list-box-custom .nav-tabs > li > a{padding:9px;}
-	.custom-user-box .custom-user-detail{width:61%;}
+	.custom-user-box .custom-user-detail{width:52%;}
 	.no-data-available .art-img-nn{width:100%;}
 	.post-popup-box textarea{font-size:12px !important; letter-spacing:0.5px;}
 	.post-popup-box .all-upload .upload_icon .upload_span_icon{font-size:12px;}
@@ -2355,7 +2357,9 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.post-img{width:40px; height:40px;}
 	.post-popup-box textarea{letter-spacing:0;}
 	.post-box .post-text{padding:9px 0 9px 7px; letter-spacing:0;}
-	
+	#nocontact .custom-user-btn a{width: 105px;}
+	.custom-user-box .custom-user-btn .btn3{padding: 5px 5px;}
+	.custom-user-box .custom-user-detail{width:51%;}
 }
 @media screen and (max-width: 320px) {
 

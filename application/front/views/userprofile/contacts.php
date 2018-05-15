@@ -2,7 +2,7 @@
     <div class="custom-user-list">
         <div class="list-box-custom">
             <h3>Contacts</h3>
-            <div class="p15 fw" id="nocontact">
+            <div class="p15 fw mobp0" id="nocontact">
               <!--   <input name="page_number" class="page_number"  ng-model="page_number" ng-value="pagecntctData.pagedata.page">
                 <input name="total_record" class="total_record"  ng-model="total_record" ng-value="pagecntctData.pagedata.total_record">
                 <input name="perpage_record" class="perpage_record"  ng-model="perpage_record" ng-value="pagecntctData.pagedata.perpage_record"> -->

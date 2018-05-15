@@ -2,7 +2,7 @@
     <div class="custom-user-list">
         <div class="list-box-custom">
             <h3>Details</h3>
-            <div class="p15 fw">
+            <div class="p15 mobp0 fw">
                 <div class="detail-box">
                     <h4>Basic Information</h4>
                     <ul>
