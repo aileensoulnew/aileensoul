@@ -113,7 +113,7 @@ function insert_comment(clicked_id)
     if (x.style.display === 'block' && y.style.display === 'none') {
         $.ajax({
             type: 'POST',
-            url: base_url + "business_profile/pninsert_commentthree",
+            url: base_url + "business_profile/insert_commentthree",
             data: 'post_id=' + clicked_id + '&comment=' + encodeURIComponent(txt),
             dataType: "json",
             success: function (data) {
@@ -128,7 +128,7 @@ function insert_comment(clicked_id)
 
         $.ajax({
             type: 'POST',
-            url: base_url + "business_profile/pninsert_comment",
+            url: base_url + "business_profile/insert_comment",
             data: 'post_id=' + clicked_id + '&comment=' + encodeURIComponent(txt),
             dataType: "json",
             success: function (data) {
@@ -176,7 +176,7 @@ function entercomment(clicked_id)
             if (x.style.display === 'block' && y.style.display === 'none') {
                 $.ajax({
                     type: 'POST',
-                    url: base_url + "business_profile/pninsert_commentthree",
+                    url: base_url + "business_profile/insert_commentthree",
                     data: 'post_id=' + clicked_id + '&comment=' + encodeURIComponent(txt),
                     dataType: "json",
                     success: function (data) {
@@ -264,7 +264,7 @@ function comment_deleted(clicked_id)
     var post_delete = document.getElementById("post_delete" + clicked_id);
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/pndelete_comment",
+        url: base_url + "business_profile/delete_comment",
         data: 'post_id=' + clicked_id + '&post_delete=' + post_delete.value,
         dataType: "json",
         success: function (data) {
@@ -290,7 +290,7 @@ function comment_deletedtwo(clicked_id)
     var post_delete1 = document.getElementById("post_deletetwo" + clicked_id);
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/pndelete_commenttwo",
+        url: base_url + "business_profile/delete_commenttwo",
         data: 'post_id=' + clicked_id + '&post_delete=' + post_delete1.value,
         dataType: "json",
         success: function (data) {

@@ -32,10 +32,16 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             $userid = $this->session->userdata('aileenuser');
             if ($this->uri->segment(3) == $userid) {
                 $user_id = $userid;
+                print_r($this->uri->segment(3));
+                // exit;
             } elseif ($this->uri->segment(3) == "") {
+                print_r($user_id);
+                // exit;
                 $user_id = $userid;
             } else {
                 $user_id = $this->db->get_where('business_profile', array('business_slug' => $this->uri->segment(3)))->row()->user_id;
+                print_r($user_id);
+                // exit;
             }
 
             $contition_array = array('user_id' => $user_id, 'is_deleted' => '0', 'status' => '1');

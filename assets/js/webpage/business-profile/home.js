@@ -847,6 +847,38 @@ function save_post(abc)
 }
 /* SAVEPOST END */
 /* FOLLOW USER SCRIPT START */
+function followuser(clicked_id)
+{
+    var follow_index = $('.follow_left_box_main_btn').index();
+    document.getElementById('followdiv' + clicked_id).removeAttribute("onclick");
+    document.getElementById('Follow_close' + clicked_id).removeAttribute("onclick");
+    $.ajax({
+        type: 'POST',
+        url: base_url + "business_profile/home_three_follow",
+        data: 'follow_to=' + clicked_id,
+        dataType: 'json',
+        success: function (data) {
+            $('.' + 'fr' + clicked_id).html(data.follow);
+            $('ul.home_three_follow_ul').append(data.third_user);
+
+            $('.left_box_following_count').html('(' + data.following_count + ')')
+            $.when($('.fad' + clicked_id).fadeOut(2000))
+                    .done(function () {
+                        $('.fad' + clicked_id).remove();
+                        var liCount = $("ul.home_three_follow_ul li.follow_box_ul_li").length;
+                        if (liCount == 0) {
+                            $('.full-box-module_follow').hide();
+                        }
+                    });
+            if (data.notification.notification_count != 0) {
+                var notification_count = data.notification.notification_count;
+                var to_id = data.notification.to_id;
+                show_header_notification(notification_count, to_id);
+            }
+        }
+    });
+}
+/* FOLLOW USER SCRIPT START */
 function followuser_two(clicked_id)
 {
     $.ajax({

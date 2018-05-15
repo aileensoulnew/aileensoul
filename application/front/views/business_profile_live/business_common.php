@@ -44,7 +44,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             $image_ori = $image[0]['profile_background'];
             if ($image_ori) {
                 ?>
-                                                                                                <!--<img src="<?php echo base_url($this->config->item('bus_bg_main_upload_path') . $image[0]['profile_background']); ?>" name="image_src" id="image_src" />-->
             <img src="<?php echo BUS_BG_MAIN_UPLOAD_URL . $image[0]['profile_background'] ?>" name="image_src" id="image_src" alt="<?php echo BUS_BG_MAIN_UPLOAD_URL . $image[0]['profile_background'] ?>" />
                 <?php
             } else {

@@ -14,10 +14,21 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="profile-main-page">
-        <?php echo $header_profile; ?>
+        <?php 
+            /*if($ismainregister == true){ 
+                if(($business_profile_set == 0 || $business_profile_set == '0') || $isbusinessdeactivate == false){
+                    echo $header_profile; 
+                } else{
+                    echo $business_header2;
+                }
+            } else{
+                $this->load->view('business_live/login_header');
+            }*/
+            echo $header_profile; 
+       ?>
         <div class="middle-section middle-section-banner">
             <?php if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
-            <div class="container">
+            <div class="container pt20">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
                         <div class="">
@@ -25,14 +36,35 @@
                         </div>
                         <ul class="search-listing custom-scroll">
                             <li ng-repeat="category in businessCategory">
-                                <label class=""><a href="<?php echo base_url('business-profile/category/') ?>{{category.industry_slug}}">{{category.industry_name}}<span class="pull-right">({{category.count}})</span></a></label>
-                            </li>
-                            <li>
-                                <label class=""><a href="<?php echo base_url('business-profile/category/other') ?>">Other<span class="pull-right">({{otherCategoryCount}})</span></a></label>
+                                <label class="">
+                                    <p class="pull-left" style="width: 45px;">
+                                        <input class="categorycheckbox" type="checkbox" name="{{category.industry_name}}" value="{{category.industry_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                    </p>
+                                    <p class="pull-left">{{category.industry_name | capitalize}}</p>
+                                    <p class="pull-right">({{category.count}})</p>
+                                </label>
                             </li>
                         </ul>
                     </div>
-
+                    <div class="left-search-box list-type-bullet">
+                        <div class="">
+                            <h3>Top Locations</h3>
+                        </div>                        
+                        <ul class="search-listing" style="list-style: none;">
+                            <li ng-repeat="location in businessLocation">
+                                <label class="pointer">
+                                    <p class="pull-left" style="width: 45px;">
+                                        <input class="locationcheckbox" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+                                    </p>
+                                    <p class="pull-left">
+                                        {{location.city_name | capitalize}}
+                                    </p>
+                                    <p class="pull-right">({{location.count}})</p>
+                                </label>
+                            </li>
+                        </ul>
+                        <p class="text-right p10"><a href="<?php echo artist_location_list ?>">More Locations</a></p>
+                    </div>
                     <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
@@ -99,6 +131,19 @@
                                 <li ng-if="business.details"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{business.details | limitTo:110}}...<a href="<?php echo BASEURL ?>business-profile/dashboard/{{business.business_slug}}"> Read more</a></p></li>
                             </ul>
                         </div>
+                    </div>
+                    <!-- NO RESULT FOUND DIV -->
+                    <div class="job-contact-frnd" ng-if="businessList.length <= 0">
+                        <!-- AJAX DATA... -->
+                        <div class="text-center rio">
+                            <h1 class="page-heading  product-listing" style="border:0px;margin-bottom: 11px;">Oops No Data Found.</h1>
+                            <p style="text-transform:none !important;border:0px;margin-left:4%;">We couldn't find what you were looking for.</p>
+                        </div>
+                    </div>
+                    <div id="loader" class="hidden">
+                        <p style="text-align:center;">
+                            <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
+                        </p>
                     </div>
                 </div>
                 <div class="right-part">

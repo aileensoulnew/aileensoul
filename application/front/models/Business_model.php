@@ -85,7 +85,7 @@ class Business_model extends CI_Model {
         return $result_array['industry_id'];
     }
     
-    function searchBusinessData($keyword = '', $location = '') {
+    /*function searchBusinessData($keyword = '', $location = '') {
         $keyword = str_replace('%20', ' ', $keyword);
         $location = str_replace('%20', ' ', $location);
         
@@ -109,9 +109,82 @@ class Business_model extends CI_Model {
         $this->db->where('bp.business_step', '4');
         $query = $this->db->get();
         $result_array = $query->result_array();
-        echo $this->db->last_query();
-        exit;
         return $result_array;
+    }*/
+
+    function searchBusinessData($keyword = '', $location = '',  $category_id = '',$location_id = '') {
+         // $keyword = str_replace('%20', ' ', $keyword);
+        $keyword = urldecode($keyword);
+        // $location = str_replace('%20', ' ', $location);
+        $location = urldecode($location);
+        $sqlkeyword = "";
+        $sqllocation = "";
+        $sqlfilter = "";
+        $sqlcategoryfilter = "";
+        $sqllocationfilter = "";
+        
+        // If Category search
+        if($keyword != ""){
+            $keyworddata = explode(',', $keyword);
+            $sqlkeyword = " AND (";
+            foreach($keyworddata as $key => $val){
+                $val = $val.'%';
+                $sqlkeyword .= ($key == 0) ? "" : " OR ";
+                $sqlkeyword .= " (bp.company_name LIKE '". $val ."' OR bp.address LIKE '". $val ."' 
+                OR bp.contact_person LIKE '". $val ."' OR bp.contact_mobile LIKE '". $val ."' 
+                OR bp.details LIKE '". $val ."' OR bp.business_slug LIKE '". $val ."' 
+                OR bp.other_business_type LIKE '". $val ."' OR bp.other_industrial LIKE '". $val ."' 
+                OR it.industry_name LIKE '". $val ."') ";
+            }
+        } 
+
+        if($category_id != ""){
+            $sqlcategoryfilter = ($sqlkeyword == "") ? " AND " : " OR ";
+            $sqlcategoryfilter .= "bp.industriyal IN (". $category_id .")";
+            $sqlcategoryfilter .= ($sqlkeyword != "") ? ")" : "";
+        }else{
+            $sqlcategoryfilter = ($sqlkeyword != "") ? ")" : "";
+        }
+
+        // IF LOCATION SEARCH
+        if($location != ""){
+            $locationdata = explode(',', $location);
+            $sqllocation = " AND (";
+            foreach($locationdata as $key => $val){
+                $val = $val.'%';
+                $sqllocation .= ($key == 0) ? "" : " OR ";
+                $sqllocation .= " ct.city_name LIKE '". $val ."'
+                    OR cr.country_name LIKE '". $val ."'
+                    OR s.state_name LIKE '". $val ."'";
+            }
+        }
+        
+        if($location_id != ""){
+            $sqllocationfilter = ($sqllocation == "") ? " AND " : " OR ";
+            $sqllocationfilter .= "ct.city_id IN (". $location_id .")";  
+            $sqllocationfilter .= ($sqllocation != "") ? ")" : ""; 
+        }else{
+            $sqllocationfilter = ($sqllocation != "") ? ")" : ""; 
+        }
+
+
+        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.business_slug, 
+                bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, cr.country_name as country 
+                FROM ailee_business_profile bp 
+                LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
+                LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+                LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+                LEFT JOIN ailee_states s ON s.state_name = bp.state 
+                WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'"
+                . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;
+
+
+            if($limit){
+                $sql .= " LIMIT ". $limit;
+            }
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
+            return $result_array;
     }
 
     function business_followers($follow_to = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
