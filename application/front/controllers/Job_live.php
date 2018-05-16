@@ -382,7 +382,25 @@ class Job_live extends MY_Controller {
             $page = 1;
         }
         $limit = 15;
-        $jobDesc = $this->job_model->get_jobs_by_companies($page,$limit);
-        echo json_encode($jobDesc);
+        $jobComp = $this->job_model->get_jobs_by_companies($page,$limit);
+        echo json_encode($jobComp);
+    }
+
+    public function jobs_by_categories()
+    {
+        $this->load->view('job_live/jobs_by_category', $this->data);
+    }
+    public function jobs_by_categories_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
+        echo json_encode($jobCat);
     }
 }
