@@ -68,16 +68,12 @@ app.controller('jobByLocationController', function ($scope, $http, $location, $w
                 {
                     for (var i in data.job_city) {                            
                         $scope.jobByLocation.push(data.job_city[i]);
-                        // $scope.$apply(function () {
-                        //     $scope.jobByLocation.push(data.job_city[i]);
-                        // });
                     }
                 }
                 else
                 {
                     $scope.jobByLocation = data.job_city;
                 }
-                //$scope.searchJob = success.data.job_city;
                 $scope.jobs.page_number = pagenum;
                 $scope.jobs.total_record = data.total_record;
                 $scope.jobs.perpage_record = 5;            
@@ -86,13 +82,10 @@ app.controller('jobByLocationController', function ($scope, $http, $location, $w
             else
             {
                 $scope.showLoadmore = false;                
-            }
-            //$scope.jobByLocation = success.data;
+            }            
         }, function (error) {});
     }
-    jobCity(1);
-
-   
+    jobCity(1);  
     
     angular.element($window).bind("scroll", function (e) {        
         if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {            
