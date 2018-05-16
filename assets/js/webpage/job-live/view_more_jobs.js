@@ -171,6 +171,66 @@ app.controller('jobsBySkillsController', function ($scope, $http, $location, $wi
     
 });
 
+app.controller('jobsByDescController', function ($scope, $http, $location, $window) {
+    $scope.title = "Job By Designation, Job Profile | Aileensoul";    
+    $scope.jobByDesc = {};
+    $scope.jobs = {};
+    var isProcessing = false;
+    function jobDesignation(pagenum = "") {
+        if (isProcessing) {            
+            return;
+        }
+        $('#loader').show();
+        isProcessing = true;
+        $http.get(base_url + "job_live/jobs_by_designations_ajax?page=" + pagenum).then(function (success) {
+            data = success.data;
+            if(data.job_desc.length > 0)
+            {                    
+                if(pagenum > 1)
+                {
+                    for (var i in data.job_desc) {                            
+                        $scope.jobByDesc.push(data.job_desc[i]);
+                    }
+                }
+                else
+                {
+                    $scope.jobByDesc = data.job_desc;
+                }
+                $scope.jobs.page_number = pagenum;
+                $scope.jobs.total_record = data.total_record;
+                $scope.jobs.perpage_record = 5;            
+                isProcessing = false;
+            }
+            else
+            {
+                $scope.showLoadmore = false;                
+            }            
+        }, function (error) {});
+    }
+    jobDesignation(1);  
+    
+    angular.element($window).bind("scroll", function (e) {        
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {            
+            isLoadingData = true;
+            var page = $scope.jobs.page_number;
+            var total_record = $scope.jobs.total_record;
+            var perpage_record = $scope.jobs.perpage_record;            
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum =  $scope.jobs.page_number + 1;
+                    jobDesignation(pagenum);
+                }
+            }
+        }
+    });
+    
+});
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({
         autoHideScrollbar: true,

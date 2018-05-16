@@ -349,4 +349,22 @@ class Job_live extends MY_Controller {
         $jobSkill = $this->job_model->get_job_skills($page,$limit);
         echo json_encode($jobSkill);
     }
+
+    public function jobs_by_designations()
+    {
+        $this->load->view('job_live/jobs_by_designation', $this->data);
+    }
+    public function jobs_by_designations_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobDesc = $this->job_model->get_job_designations($page,$limit);
+        echo json_encode($jobDesc);
+    }
 }

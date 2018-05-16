@@ -928,4 +928,47 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
         return count($return_array);
     }
+
+    public function get_job_designations($page = 0,$limit = '') {
+
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('count(jt.title_id) as count,jt.title_id,jt.name as job_title,jt.slug as job_slug, jt.job_title_img')->from('job_title jt');
+        $this->db->join('rec_post rp', 'rp.post_name = jt.title_id', 'left');
+        $this->db->where('jt.status', 'publish');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('jt.title_id');
+        $this->db->order_by('count', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        $jobDesc = $query->result_array();
+        foreach ($jobDesc as $k => $v) {
+            if(!file_exists(DESIGNATION_IMG_PATH."/".$jobDesc[$k]['job_title_img']))
+            {
+                $jobDesc[$k]['job_title_img'] = "designation_default.png";
+            }
+        }
+        $result_array['job_desc'] = $jobDesc;
+        $result_array['total_record'] = $this->get_job_designations_rec();
+        return $result_array;
+    }
+
+    function get_job_designations_rec() {        
+
+        $this->db->select('count(jt.title_id) as count,jt.title_id,jt.name as job_title,jt.slug as job_slug, jt.job_title_img')->from('job_title jt');
+        $this->db->join('rec_post rp', 'rp.post_name = jt.title_id', 'left');
+        $this->db->where('jt.status', 'publish');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('jt.title_id');
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
 }
