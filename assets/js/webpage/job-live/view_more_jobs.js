@@ -148,7 +148,7 @@ app.controller('jobsBySkillsController', function ($scope, $http, $location, $wi
     }
     jobSkill(1);  
     
-    /*angular.element($window).bind("scroll", function (e) {        
+    angular.element($window).bind("scroll", function (e) {        
         if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {            
             isLoadingData = true;
             var page = $scope.jobs.page_number;
@@ -167,7 +167,7 @@ app.controller('jobsBySkillsController', function ($scope, $http, $location, $wi
                 }
             }
         }
-    });*/
+    });
     
 });
 

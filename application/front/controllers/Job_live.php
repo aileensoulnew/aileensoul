@@ -345,7 +345,7 @@ class Job_live extends MY_Controller {
         {
             $page = 1;
         }
-        $limit = '';
+        $limit = 15;
         $jobSkill = $this->job_model->get_job_skills($page,$limit);
         echo json_encode($jobSkill);
     }

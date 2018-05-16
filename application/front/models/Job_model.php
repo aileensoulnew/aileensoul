@@ -846,86 +846,33 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         if ($start < 0)
             $start = 0;
 
-        $this->db->select('s.skill_id,s.skill,s.skill_slug,s.skill_image')->from('skill s');
-        $this->db->where('s.status', '1');
-        $this->db->where('s.type', '1');
-        $query = $this->db->get();
-        $art_category = $query->result_array();
-        $return_array = array();
-        foreach ($art_category as $key => $value) {
-            $return = array();
-            $skill_id = $value['skill_id'];
-            $this->db->select('count(post_id) as count')->from('rec_post rp');
-            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skill_id . ')');
-            $this->db->where('rp.status', '1');
-            $this->db->where('rp.is_delete', '0');
-            $query = $this->db->get();
-            $cat_count = $query->row_array();
 
-            if($cat_count['count'] > 0)
-            {
-                $return['count'] = $cat_count['count'];
-                $return['skill_id'] = $value['skill_id'];
-                $return['skill'] = $value['skill'];
-                $return['skill_slug'] = $value['skill_slug'];
-                if(!file_exists(SKILLS_IMG_PATH."/".$value['skill_image']))
-                {
-                    $return['skill_image'] = "skills_default.png";
-                }
-                else
-                {
-                    $return['skill_image'] = $value['skill_image'];
-                }
-
-                array_push($return_array, $return);
-            }            
+        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE  rp.post_skill REGEXP concat('[[:<:]](', s.skill_id, ')[[:>:]]') AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY rp.post_id ORDER BY count DESC";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
         }
-        array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
-        if($limit != "")
-            array_splice($return_array, $limit);
+
+        $query = $this->db->query($sql);
+
+        $jobSkills = $query->result_array();
+        foreach ($jobSkills as $k => $v) {
+            if(!file_exists(SKILLS_IMG_PATH."/".$jobSkills[$k]['skill_image']))
+            {
+                $jobSkills[$k]['skill_image'] = "skills_default.png";
+            }
+        }
         
-        $ret_array['job_skills'] = $return_array;
+        $ret_array['job_skills'] = $jobSkills;
         $ret_array['total_record'] = $this->get_job_skills_total_rec();
         return $ret_array;
     }
 
     function get_job_skills_total_rec() {        
 
-        $this->db->select('s.skill_id,s.skill,s.skill_slug,s.skill_image')->from('skill s');
-        $this->db->where('s.status', '1');
-        $this->db->where('s.type', '1');
-        $query = $this->db->get();
-        $art_category = $query->result_array();
-        $return_array = array();
-        foreach ($art_category as $key => $value) {
-            $return = array();
-            $skill_id = $value['skill_id'];
-            $this->db->select('count(post_id) as count')->from('rec_post rp');
-            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skill_id . ')');
-            $this->db->where('rp.status', '1');
-            $this->db->where('rp.is_delete', '0');
-            $query = $this->db->get();
-            $cat_count = $query->row_array();
+        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE  rp.post_skill REGEXP concat('[[:<:]](', s.skill_id, ')[[:>:]]') AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY rp.post_id ORDER BY count DESC";
 
-            if($cat_count['count'] > 0)
-            {
-                $return['count'] = $cat_count['count'];
-                $return['skill_id'] = $value['skill_id'];
-                $return['skill'] = $value['skill'];
-                $return['skill_slug'] = $value['skill_slug'];
-                if(!file_exists(SKILLS_IMG_PATH."/".$value['skill_image']))
-                {
-                    $return['skill_image'] = "skills_default.png";
-                }
-                else
-                {
-                    $return['skill_image'] = $value['skill_image'];
-                }
-
-                array_push($return_array, $return);
-            }            
-        }
-        array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
+        $query = $this->db->query($sql);
+        $return_array = $query->result_array();
         return count($return_array);
     }
 
