@@ -586,7 +586,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         if(isset($job_skills) && !empty($job_skills))
         {
             $skills_id = $job_skills['skill_id'];
-            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skills_id . ')');
+            $this->db->where('FIND_IN_SET(' . $skills_id . ',rp.post_skill) > 0');
         }
         else if(isset($job_category) && !empty($job_category))
         {
@@ -701,7 +701,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         if(isset($job_skills) && !empty($job_skills))
         {
             $skills_id = $job_skills['skill_id'];
-            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skills_id . ')');
+            $this->db->where('FIND_IN_SET(' . $skills_id . ',rp.post_skill) > 0');
         }
         else if(isset($job_category) && !empty($job_category))
         {
@@ -847,7 +847,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
             $start = 0;
 
 
-        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE  rp.post_skill REGEXP concat('[[:<:]](', s.skill_id, ')[[:>:]]') AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY rp.post_id ORDER BY count DESC";
+        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
         }
@@ -869,7 +869,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
 
     function get_job_skills_total_rec() {        
 
-        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE  rp.post_skill REGEXP concat('[[:<:]](', s.skill_id, ')[[:>:]]') AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY rp.post_id ORDER BY count DESC";
+        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
 
         $query = $this->db->query($sql);
         $return_array = $query->result_array();

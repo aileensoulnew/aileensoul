@@ -5889,7 +5889,7 @@ class Job extends MY_Controller {
         }
         // print_r($job_skills);
         // print_r($job_category);
-        // print_r($job_designation);
+        // print_r($job_designation);exit;
         $searchJob = $this->job_model->ajax_job_search_new_filter($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$page,$limit,$job_city,explode("-", $keyword),$search_location_arr);
 
         echo json_encode($searchJob);
