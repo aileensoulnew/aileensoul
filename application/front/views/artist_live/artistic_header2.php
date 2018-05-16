@@ -11,7 +11,7 @@ $userid = $this->session->userdata('aileenuser');
 						<li>
 							<a href="<?php echo base_url('artist/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Artist Profile </a>
 						</li>
-						<?php if(!isset($isartistactivate) || count($isartistactivate) < 0){ ?>
+						<?php if($isartistactivate == true &&  $artist_isregister == true){ ?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();"><i class="fa fa-envelope"></i> Message
 								<span id="message_count"></span>

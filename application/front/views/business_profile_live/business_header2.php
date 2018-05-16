@@ -38,49 +38,51 @@ if($browser == "Firefox")
                         <li>
                             <a href="<?php echo base_url('business-profile/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Business Profile</a>
                         </li>
-                        <li class="dropdown" id="Inbox_link">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()"><i class="fa fa-envelope" aria-hidden="true"></i> Message
-                                <span class="noti-box" id="message_count"></span>
-                            </a>
-                            <div class="dropdown-menu InboxContainer">
-                                <div class="dropdown-title">
-                                    Messages <a href="#" class="pull-right" id="seemsg">See All</a>
+                        <?php if($isbusiness_deactive == false){ ?>
+                            <li class="dropdown" id="Inbox_link">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()"><i class="fa fa-envelope" aria-hidden="true"></i> Message
+                                    <span class="noti-box" id="message_count"></span>
+                                </a>
+                                <div class="dropdown-menu InboxContainer">
+                                    <div class="dropdown-title">
+                                        Messages <a href="#" class="pull-right" id="seemsg">See All</a>
+                                    </div>
+                                    <div class="content custom-scroll">
+                                        <ul class="dropdown-data msg-dropdown notification_data_in_h2">
+                                            
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="content custom-scroll">
-                                    <ul class="dropdown-data msg-dropdown notification_data_in_h2">
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li id="add-contact" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return Notification_contact()"><i class="fa fa-users" aria-hidden="true"></i> Contact
-                                <span class="<?php echo ($bus_con_request != '' && $bus_con_request > 0 ? 'noti-box' : '' ); ?>" id="addcontactLink"><?php echo $bus_con_request; ?></span>
-                            </a>
+                            </li>
+                            <li id="add-contact" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return Notification_contact()"><i class="fa fa-users" aria-hidden="true"></i> Contact
+                                    <span class="<?php echo ($bus_con_request != '' && $bus_con_request > 0 ? 'noti-box' : '' ); ?>" id="addcontactLink"><?php echo $bus_con_request; ?></span>
+                                </a>
 
-                            <div class="dropdown-menu">
-                                <div class="dropdown-title">
-                                    Contact Request
-                                    <a href="contact-list" class="pull-right" id="seecontact">See All</a>
-                                    <!-- <a href="all-contact.html" class="pull-right" id="seecontact">See All</a> -->
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-title">
+                                        Contact Request
+                                        <a href="contact-list" class="pull-right" id="seecontact">See All</a>
+                                        <!-- <a href="all-contact.html" class="pull-right" id="seecontact">See All</a> -->
+                                    </div>
+                                    <div class="content custom-scroll">
+                                        <ul class="dropdown-data add-dropdown notification_data_in_con">
+                                          
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="content custom-scroll">
-                                    <ul class="dropdown-data add-dropdown notification_data_in_con">
-                                      
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-			            <li class="dropdown user-id">
-                            <a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span class="pr-name">Account</span></a>
+                            </li>
+    			            <li class="dropdown user-id">
+                                <a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span class="pr-name">Account</span></a>
 
-                            <ul class="dropdown-menu account">
-                                <li>Account</li>
-                                <li><a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
-                                <li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
-                                <li><a onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
-                            </ul>
-                        </li>
+                                <ul class="dropdown-menu account">
+                                    <li>Account</li>
+                                    <li><a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+                                    <li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
+                                    <li><a onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
+                                </ul>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">

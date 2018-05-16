@@ -5,6 +5,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 <html>
     <head>
         <title><?php echo $title; ?></title>
+         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
         <?php echo $head; ?>  
 
              <?php
@@ -25,6 +26,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/artistic.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />  
             <?php }?>    
+            <?php if($this->session->userdata('aileenuser')){ ?>
+                <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+                <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+            <?php } ?>
         <style type="text/css">
             .two-images, .three-image, .four-image{
                 height: auto !important;
@@ -39,7 +44,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
         </style>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
+       
         <style type="text/css">
             .two-images, .three-image, .four-image{
                 height: auto !important;
@@ -50,21 +55,25 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push no-login">
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-3 left-header text-center fw-479">
-                        <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver='.time()) ?>" alt="logo"></a>
-                    </div>
-                    <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
-                        <div class="btn-right pull-right">
-                            <a href="javascript:void(0);" onclick="login_data();" class="btn2" title="Login">Login</a>
-                            <a href="javascript:void(0);" onclick="register_profile();" class="btn3" title="Create an account">Create an account</a>
+        <?php if($this->session->userdata('aileenuser')){ 
+            echo $artistic_header2;
+        }else{ ?>
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-3 left-header text-center fw-479">
+                            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver='.time()) ?>" alt="logo"></a>
+                        </div>
+                        <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
+                            <div class="btn-right pull-right">
+                                <a href="javascript:void(0);" onclick="login_data();" class="btn2" title="Login">Login</a>
+                                <a href="javascript:void(0);" onclick="register_profile();" class="btn3" title="Create an account">Create an account</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        <?php } ?>
         <section>
             <?php echo $artistic_common_profile; ?>
             <div class="text-center tab-block">
@@ -382,113 +391,114 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <!-- model for forgot password end -->
 
         <!-- register -->
-
-        <div class="modal fade login register-model" id="register" role="dialog" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content inner-form1">
-                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
-                    <div class="modal-body">
-                        <div class="clearfix">
-                            <div class=" ">
-                                <div class="title"><h1 class="tlh1">Sign up First and Register in Artistic Profile</h1></div>
-                                <form role="form" name="register_form" id="register_form" method="post">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-6">
-                                            <div class="form-group">
-                                                <input tabindex="101" autofocus="" type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+        <?php if(!$this->session->userdata('aileenuser')){ ?>
+            <div class="modal fade login register-model" id="register" role="dialog" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content inner-form1">
+                        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+                        <div class="modal-body">
+                            <div class="clearfix">
+                                <div class=" ">
+                                    <div class="title"><h1 class="tlh1">Sign up First and Register in Artistic Profile</h1></div>
+                                    <form role="form" name="register_form" id="register_form" method="post">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <input tabindex="101" autofocus="" type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <input tabindex="102" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 col-md-6">
-                                            <div class="form-group">
-                                                <input tabindex="102" type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
-                                            </div>
+
+                                        <div class="form-group">
+                                            <input tabindex="103" type="text" name="email_reg" id="email_reg" class="form-control input-sm" placeholder="Email Address" autocomplete="new-email">
                                         </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input tabindex="103" type="text" name="email_reg" id="email_reg" class="form-control input-sm" placeholder="Email Address" autocomplete="new-email">
-                                    </div>
-                                    <div class="form-group">
-                                        <input tabindex="104" type="password" name="password_reg" id="password_reg" class="form-control input-sm" placeholder="Password" autocomplete="new-password">
-                                    </div>
-                                    <div class="form-group dob">
-                                        <label class="d_o_b"> Date Of Birth :</label>
-                                        <span>
-                                        <select tabindex="105" class="day" name="selday" id="selday">
-                                            <option value="" disabled selected value>Day</option>
-                                            <?php
-                                            for ($i = 1; $i <= 31; $i++) {
+                                        <div class="form-group">
+                                            <input tabindex="104" type="password" name="password_reg" id="password_reg" class="form-control input-sm" placeholder="Password" autocomplete="new-password">
+                                        </div>
+                                        <div class="form-group dob">
+                                            <label class="d_o_b"> Date Of Birth :</label>
+                                            <span>
+                                            <select tabindex="105" class="day" name="selday" id="selday">
+                                                <option value="" disabled selected value>Day</option>
+                                                <?php
+                                                for ($i = 1; $i <= 31; $i++) {
+                                                    ?>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                <?php
+                                                    }
                                                 ?>
-                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-    <?php
-}
-?>
-                                        </select></span>
-                                        <span>
-                                        <select tabindex="106" class="month" name="selmonth" id="selmonth">
-                                            <option value="" disabled selected value>Month</option>
-                                           
-             
+                                            </select></span>
+                                            <span>
+                                            <select tabindex="106" class="month" name="selmonth" id="selmonth">
+                                                <option value="" disabled selected value>Month</option>
+                                               
+                 
 
-                                            <option value="1">Jan</option>
-                                            <option value="2">Feb</option>
-                                            <option value="3">Mar</option>
-                                            <option value="4">Apr</option>
-                                            <option value="5">May</option>
-                                            <option value="6">Jun</option>
-                                            <option value="7">Jul</option>
-                                            <option value="8">Aug</option>
-                                            <option value="9">Sep</option>
-                                            <option value="10">Oct</option>
-                                            <option value="11">Nov</option>
-                                            <option value="12">Dec</option>
-                                        
-                                        </select></span>
-                                        <span>
-                                        <select tabindex="107" class="year" name="selyear" id="selyear">
-                                            <option value="" disabled selected value>Year</option>
-                                            <?php
-                                            for ($i = date('Y'); $i >= 1900; $i--) {
-                                                ?>
-                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-    <?php
-}
-?>
+                                                <option value="1">Jan</option>
+                                                <option value="2">Feb</option>
+                                                <option value="3">Mar</option>
+                                                <option value="4">Apr</option>
+                                                <option value="5">May</option>
+                                                <option value="6">Jun</option>
+                                                <option value="7">Jul</option>
+                                                <option value="8">Aug</option>
+                                                <option value="9">Sep</option>
+                                                <option value="10">Oct</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Dec</option>
+                                            
+                                            </select></span>
+                                            <span>
+                                            <select tabindex="107" class="year" name="selyear" id="selyear">
+                                                <option value="" disabled selected value>Year</option>
+                                                <?php
+                                                for ($i = date('Y'); $i >= 1900; $i--) {
+                                                    ?>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
 
-                                        </select>
-                                        </span>
-                                    </div>
-                                    <div class="dateerror" style="color:#f00; display: block;"></div>
+                                            </select>
+                                            </span>
+                                        </div>
+                                        <div class="dateerror" style="color:#f00; display: block;"></div>
 
-                                    <div class="form-group gender-custom">
-                                        <span><select tabindex="108" class="gender"  onchange="changeMe(this)" name="selgen" id="selgen">
-                                            <option value="" disabled selected value>Gender</option>
-                                            <option value="M">Male</option>
-                                            <option value="F">Female</option>
-                                        </select>
-                                        </span>
-                                    </div>
+                                        <div class="form-group gender-custom">
+                                            <span><select tabindex="108" class="gender"  onchange="changeMe(this)" name="selgen" id="selgen">
+                                                <option value="" disabled selected value>Gender</option>
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
+                                            </select>
+                                            </span>
+                                        </div>
 
-                                    <p class="form-text" style="margin-bottom: 10px;">
-                                        By Clicking on create an account button you agree our
-                                        <a tabindex="109" href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition">Terms and Condition</a> and <a tabindex="110" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy">Privacy policy</a>.
-                                    </p>
-                                    <p>
-                                        <button tabindex="111" class="btn1">Create an account</button>
-                                    </p>
-                                    <div class="sign_in pt10">
-                                        <p>
-                                            Already have an account ? <a tabindex="112" onclick="login_data();" href="javascript:void(0);" title="Log In"> Log In </a>
+                                        <p class="form-text" style="margin-bottom: 10px;">
+                                            By Clicking on create an account button you agree our
+                                            <a tabindex="109" href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition">Terms and Condition</a> and <a tabindex="110" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy">Privacy policy</a>.
                                         </p>
-                                    </div>
-                                </form>
+                                        <p>
+                                            <button tabindex="111" class="btn1">Create an account</button>
+                                        </p>
+                                        <div class="sign_in pt10">
+                                            <p>
+                                                Already have an account ? <a tabindex="112" onclick="login_data();" href="javascript:void(0);" title="Log In"> Log In </a>
+                                            </p>
+                                        </div>
+                                    </form>
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
         <!-- Bid-modal for this modal appear or not  Popup Close -->
 
 <?php echo $footer; ?>
@@ -910,12 +920,12 @@ function submitforgotForm()
         
         <?php
   if (IS_ART_JS_MINIFY == '0') { ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/artist/common.js?ver=' . time()); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
+    <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/artist/common.js?ver=' . time()); ?>"></script>
 
  <?php }else{?>
  
-     <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script>
 
  <?php }?>           
@@ -933,11 +943,21 @@ function submitforgotForm()
                 });
             });
             $(document).ready(function () {
-                setTimeout(function () {
-                    $('#register').modal('show');
-                }, 2000);
+                if(typeof session_userid === 'undefined'){
+                    setTimeout(function () {
+                        $('#register').modal('show');
+                    }, 2000);
+                }
             });
+            var session_userid = "<?php echo $this->session->userdata('aileenuser');?>";
         </script>
+        <?php if($this->session->userdata('aileenuser')){ ?>
+            <script>
+                var header_all_profile = '<?php echo $header_all_profile; ?>';
+            </script>               
+            <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 
+        <?php } ?>
     </body>
 </html>

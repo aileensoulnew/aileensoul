@@ -20,16 +20,27 @@
     </head>
     <body class="profile-main-page">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
-        <?php if($ismainregister == true){ ?>
-            <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){
-                echo $header_profile; 
-            } else{
-                echo $artistic_header2;
-            }?>
-       <?php } else{
-                    $this->load->view('artist_live/login_header');
-                }
+        <?php //if($ismainregister == true){ ?>
+            <?php //if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){
+            //     echo $header_profile; 
+            // } else{
+            //     echo $artistic_header2;
+            // }
+            ?>
+        <?php// } else{
+                //     $this->load->view('artist_live/login_header');
+                // }
        ?>
+
+        <?php if ($ismainregister == false) {
+                $this->load->view('artist_live/login_header');
+            }else if($isartistactivate == true && $artist_isregister){
+                echo $artistic_header2;
+            }else{
+                echo $header_profile;
+            }
+         ?>
+
             <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ 
             ?>
             <div class="middle-section middle-section-banner">

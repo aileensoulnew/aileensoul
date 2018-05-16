@@ -1,3 +1,4 @@
+
 <div class="container" id="paddingtop_fixed_art">
     <div class="row" id="row1" style="display:none;">
         <div class="col-md-12 text-center padding_less_left">
@@ -67,12 +68,12 @@
 <?php
     $userid = $this->session->userdata('aileenuser');
     if ($artisticdata[0]['user_id'] == $userid) {
-        ?>   
-<div class="upload-img">
-    <label class="cameraButton"> <span class="tooltiptext">Upload Cover Photo</span> <i class="fa fa-camera" aria-hidden="true"></i>
-    <input type="file" id="upload" name="upload" accept="image/*;capture=camera" onclick="showDiv()">
-    </label>
-</div>
+?>   
+        <div class="upload-img">
+            <label class="cameraButton"> <span class="tooltiptext">Upload Cover Photo</span> <i class="fa fa-camera" aria-hidden="true"></i>
+            <input type="file" id="upload" name="upload" accept="image/*;capture=camera" onclick="showDiv()">
+            </label>
+        </div>
 <?php } ?>
 <div class="profile-photo">
     <?php
@@ -157,9 +158,9 @@
                         <?php }else{?>
                         <ul class="pro-fw4">
                             <?php } ?>  
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" href="<?php echo artist_dashboard. $get_url; ?>"> Dashboard</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'p' && $this->uri->segment(4) == '') { ?> class="active" <?php } ?>><a title="Dashboard" href="<?php echo artist_dashboard. $get_url; ?>"> Dashboard</a>
                             </li>
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'details') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('artist/p/' . $get_url .'/details'); ?>"> Details</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'p' && $this->uri->segment(4) == 'details') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('artist/p/' . $get_url .'/details'); ?>"> Details</a>
                             </li>
                             <?php
                                 $userid = $this->session->userdata('aileenuser');
@@ -170,7 +171,7 @@
                                 $userid = $this->session->userdata('aileenuser');
                                 if ($artisticdata[0]['user_id'] == $userid) {
                                     ?>
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="<?php echo base_url('artist/p/'.$get_url .'/followers'); ?>">Followers <br> (<?php echo $flucount; ?>)</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'p' && $this->uri->segment(4) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="<?php echo base_url('artist/p/'.$get_url .'/followers'); ?>">Followers <br> (<?php echo $flucount; ?>)</a>
                             </li>
                             <?php
                                 } else {
@@ -193,13 +194,13 @@
                                 
                                 
                                     ?> 
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a  title="Followers" href="<?php echo base_url('artist/p/' . $get_url.'/followers'); ?>">Followers <br> (<?php echo ($count); ?>)</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'p' && $this->uri->segment(4) == 'followers') { ?> class="active" <?php } ?>><a  title="Followers" href="<?php echo base_url('artist/p/' . $get_url.'/followers'); ?>">Followers <br> (<?php echo ($count); ?>)</a>
                             </li>
                             <?php } ?> 
                             <?php
                                 if ($artisticdata[0]['user_id'] == $userid) {
                                     ?>        
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'p' && $this->uri->segment(4) == 'following') { ?> class="active" <?php } ?>>
                                 <a title="Following" href="<?php echo base_url('artist/p/'. $get_url .'/following'); ?>">
                                     Following <br> 
                                     <div id="countfollow">(<?php echo isset($countfr) ? $countfo : 0; ?>)</div>
@@ -225,7 +226,7 @@
                                 
                                    
                                     ?>
-                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="<?php echo base_url('artist/p/' . $get_url .'/following'); ?>">Following <br>  (<?php echo isset($countfo) ? $countfo : 0; ?>)</a>
+                            <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'p' && $this->uri->segment(4) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="<?php echo base_url('artist/p/' . $get_url .'/following'); ?>">Following <br>  (<?php echo isset($countfo) ? $countfo : 0; ?>)</a>
                             </li>
                             <?php } ?>  
                         </ul>
@@ -235,8 +236,7 @@
                                 ?>
                         <div class="flw_msg_btn fr">
                             <ul>
-                                <?php if(count($this->data['artistic_deactive']) < 0){ ?>
-                                    <li class="<?php echo "fruser" . $artisticdata[0]['art_id']; ?>">
+                                <li class="<?php echo "fruser" . $artisticdata[0]['art_id']; ?>">
                                         <?php
                                             $userid = $this->session->userdata('aileenuser');
                                             
@@ -244,8 +244,7 @@
                                             
                                             $bup_id = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                                             
-                                            $status = $this->db->select('follow_status')->get_where('follow', array('follow_type' => '1', 'follow_from' => $bup_id[0]['art_id'], 'follow_to' => $artisticdata[0]['art_id']))->row()->follow_status;
-                                            
+                                            $status = $this->db->select('follow_status')->get_where('follow', array('follow_type' => '1', 'follow_from' => $bup_id[0]['art_id'], 'follow_to' => $artisticdata[0]['art_id']))->row()->follow_status;                                           
                                             
                                             if ($status == 0 || $status == " ") {
                                                 ?>
@@ -265,7 +264,6 @@
                                                 ?>
                                     <li> <a href="<?php echo base_url('chat/abc/6/6/' . $artisticdata[0]['user_id']); ?>">Message</a> </li>
                                     <?php } ?>
-                                <?php } ?>
                             </ul>
                         </div>
                         <?php } ?>
@@ -276,3 +274,4 @@
         </div>
     </div>
 </div>
+

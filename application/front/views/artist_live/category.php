@@ -17,15 +17,21 @@
     </head>
     <body class="profile-main-page">
         <?php $page = (isset($page)) ? $page : ''; ?>
+        <?php $session_user_id = $this->session->userdata('aileenuser'); ?>
         <?php
             if ($ismainregister == false) {
                 $this->load->view('artist_live/login_header');
+            }else if($isartistactivate == true && $artist_isregister){
+                echo $artistic_header2;
             }else{
                 echo $header_profile;
             }
         ?>
         <div class="middle-section middle-section-banner">
-            <?php echo $search_banner; ?>
+                <?php if($isartistactivate == false || $artist_isregister == false || !$session_user_id){    echo $search_banner; 
+                }
+
+            ?>
 
             <div class="container pt20">
                 <div class="custom-user-list">

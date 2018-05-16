@@ -90,9 +90,16 @@ $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
 $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
 $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
 $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
-if(method_exists($this->checkisartistdeactivate())){ 
-  $this->checkisartistdeactivate();
-}
+$userid = $this->session->userdata('aileenuser');
+$contition_array = array('user_id' => $userid, 'status' => '0');
+$artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+$this->data['isartistactivate'] = true;
+if (count($artresult) > 0) {
+    $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+    $this->data['isartistactivate'] = false;
+    // $this->load->view('artist_live/reactivate', $this->data);
+} 
+
 $this->data['arturl'] = $this->user_model->get_art_url($userid);
 $this->data['artistic_header2'] = $this->load->view('artist_live/artistic_header2', $this->data, true);
 // Start - code needed for new header

@@ -71,8 +71,7 @@
     </div>
 </div>
 <div class="user-midd-section">
-    <div class="container art_container padding-360 manage-post-custom">
-        
+    <div class="container art_container padding-360 manage-post-custom">        
             <div class="profile-box-custom left_side_posrt">
                 <div class="full-box-module business_data">
                     <div class="profile-boxProfileCard  module">
@@ -397,16 +396,16 @@ if ($info) { ?>
                 </div>
             </div>
         </div>
-                    <div class="modal fade message-box biderror" id="bidmodal-limit" role="dialog">
-                        <div class="modal-dialog modal-lm deactive">
-                            <div class="modal-content">
-                                <button type="button" class="modal-close" data-dismiss="modal" id="common-limit">&times;</button>       
-                                <div class="modal-body">
-                                    <span class="mes"></span>
-                                </div>
-                            </div>
-                        </div>
+        <div class="modal fade message-box biderror" id="bidmodal-limit" role="dialog">
+            <div class="modal-dialog modal-lm deactive">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal" id="common-limit">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes"></span>
                     </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade message-box biderror" id="profileimage" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
@@ -439,38 +438,37 @@ if ($info) { ?>
                 </div>
             </div>
         </div>
-            <div class="modal fade message-box" id="post" role="dialog">
-                <div class="modal-dialog modal-lm">
-                    <div class="modal-content">
-                        <button type="button" class="modal-close" id="post" data-dismiss="modal">&times;</button>     <div class="modal-body">
-                            <span class="mes">
-                            </span>
-                        </div>
+        <div class="modal fade message-box" id="post" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="post" data-dismiss="modal">&times;</button>     <div class="modal-body">
+                        <span class="mes">
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="modal fade message-box" id="image" role="dialog">
-                <div class="modal-dialog modal-lm">
-                    <div class="modal-content">
-                        <button type="button" class="modal-close" id="image" data-dismiss="modal">&times;</button>       
-                        <div class="modal-body">
-                            <span class="mes">
-                            </span>
-                        </div>
+        </div>
+        <div class="modal fade message-box" id="image" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="image" data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">
+                        </span>
                     </div>
                 </div>
-            </div>  
-
-             <div class="modal fade message-box biderror" id="bidmodaleditpost" role="dialog"  >
-         <div class="modal-dialog modal-lm" >
-            <div class="modal-content">
-               <button type="button" class="modal-close editpost" data-dismiss="modal">&times;</button>       
-               <div class="modal-body">
-                  <span class="mes"></span>
-               </div>
             </div>
-         </div>
-      </div>
+        </div>  
+        <div class="modal fade message-box biderror" id="bidmodaleditpost" role="dialog"  >
+            <div class="modal-dialog modal-lm" >
+                <div class="modal-content">
+                   <button type="button" class="modal-close editpost" data-dismiss="modal">&times;</button>       
+                   <div class="modal-body">
+                      <span class="mes"></span>
+                   </div>
+                </div>
+             </div>
+        </div>
 
       
 
@@ -508,6 +506,7 @@ if ($info) { ?>
 <?php }?>
 <script type="text/javascript">
 var base_url = '<?php echo base_url(); ?>';   
+var isdeactive = '<?php echo $isartistactivate; ?>';   
 var data= <?php echo json_encode($demo); ?>;
 var data1 = <?php echo json_encode($city_data); ?>;
 var complex = <?php echo json_encode($selectdata); ?>;
@@ -523,7 +522,7 @@ var slug = '<?php echo $artid; ?>';
 
 <?php }else{?>
 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/dashboard.js?ver='.time()); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/dashboard.js?ver='.time()); ?>"></script>
 <?php }?>
  </body>
 </html>

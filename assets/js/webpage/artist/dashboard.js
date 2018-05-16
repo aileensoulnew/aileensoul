@@ -8,9 +8,11 @@ $(document).ready(function () {
 });
 
 $('body').on("click", "*", function (e) {
-    var classNames = $(e.target).attr("class").toString().split(' ').pop();
-    if (classNames != 'fa-ellipsis-v') {
-        $('div[id^=myDropdown]').hide().removeClass('show');
+    if($(e.target).attr("class")){
+        var classNames = $(e.target).attr("class").toString().split(' ').pop();
+        if (classNames != 'fa-ellipsis-v') {
+            $('div[id^=myDropdown]').hide().removeClass('show');
+        }
     }
 });
 

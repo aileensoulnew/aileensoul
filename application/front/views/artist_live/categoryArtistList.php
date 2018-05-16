@@ -15,6 +15,10 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
+    <?php $isartistactivate; ?>
+    <?php echo $isartistactivate; ?>
+    <?php echo $session_user_id; ?>
+    <?php echo "asdggh"; ?>
     <body class="profile-main-page">
         <!-- SET BLANK IF VAR NOT DECLARE FROM CONTROLLER -->
         <?php $location_id = (isset($location_id)) ? $location_id : '' ?>
@@ -22,12 +26,15 @@
         <?php
             if ($ismainregister == false) {
                 $this->load->view('artist_live/login_header');
+            }else if($isartistactivate == true || $artist_isregister == true){
+                echo $artistic_header2;
             }else{
                 echo $header_profile;
             }
         ?>
         <div class="middle-section middle-section-banner">
-            <?php echo $search_banner; ?>
+            <?php if($isartistactivate == false || $artist_isregister == false || !$session_user_id){    echo $search_banner; 
+                } ?>
             <div class="container pt20">
                 <div class="left-part">
                     <!-- TOP CATEGORIES FILTER -->
