@@ -27,9 +27,11 @@
             //     echo $artistic_header2;
             // }
             ?>
-        <?php// } else{
-                //     $this->load->view('artist_live/login_header');
-                // }
+        <?php
+
+            echo $ismainregister;
+            echo $isartistactivate;
+            echo $artist_isregister;
        ?>
 
         <?php if ($ismainregister == false) {

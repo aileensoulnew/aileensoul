@@ -98,6 +98,7 @@ class Artist_live extends MY_Controller {
     }
 
     public function artist_search($searchquery = '') {
+        $userid = $this->session->userdata('aileenuser');
         // $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
@@ -1674,7 +1675,11 @@ class Artist_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Categories - Artist Profile | Aileensoul";
         $this->data['page'] = "location";
-
+        $this->data['ismainregister'] = false;
+        if($userid){
+            $this->data['ismainregister'] = true;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        }
         $this->load->view('artist_live/category', $this->data);
     }
 
@@ -1697,7 +1702,10 @@ class Artist_live extends MY_Controller {
         $locationdata = $this->artistic_model->getidfromnameoflocation($location);
 
         // echo $locationdata['city_id'];
-        
+        if($userid){
+            $this->data['ismainregister'] = true;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        }
         $this->data['location_id'] = $locationdata['city_id'];
         $this->load->view('artist_live/categoryArtistList', $this->data);
     }
