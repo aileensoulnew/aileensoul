@@ -603,3 +603,8 @@ define('profiles', BASEURL. 'profiles/');
 define('job', BASEURL. 'job/'); 
 define('recruiter', BASEURL. 'recruiter/'); 
 define('freelance', BASEURL. 'freelance/'); 
+
+define('CITY_IMG_PATH', BASEURL. 'uploads/city_image/');
+define('DESIGNATION_IMG_PATH', BASEURL. 'uploads/designation_image/');
+define('JOB_INDUSTRY_IMG_PATH', BASEURL. 'uploads/job_industry_image/');
+define('SKILLS_IMG_PATH', BASEURL. 'uploads/skills_image/');

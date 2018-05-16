@@ -119,20 +119,6 @@ class Job_model extends CI_Model {
         return $return_array;
     }
 
-    function latestJob() {
-        $this->db->select("rp.post_id,rp.post_name,jt.name as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo")->from('rec_post rp');
-        $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
-        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
-        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
-        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
-        $this->db->where('rp.status', '1');
-        $this->db->where('rp.is_delete', '0');
-        $this->db->order_by('rp.post_id', 'desc');
-        $query = $this->db->get();
-        $result_array = $query->result_array();
-        return $result_array;
-    }
-
     function applyJobFilter($posting_period = '', $experience = '', $category = '', $location = '', $company = '', $skill = '') {
 //        echo $posting_period;
 //        echo '<br>';
@@ -421,6 +407,170 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         return $result_array;        
     }
 
+    function latestJob($userid = "",$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;$sql = "";
+        if($company_id != "")
+        {
+            $sql .= "r.rec_id IN (".$company_id.") OR ";
+        }
+        if($category_id != "")
+        {
+            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+        }
+        if($location_id != "")
+        {
+            $sql .= "rp.city IN (".$location_id.") OR ";
+        }
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+
+        if($job_desc != "")
+        {
+            $sql .= "rp.post_name IN (".$job_desc.") OR";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(rp.max_year >= 1 AND rp.max_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(rp.max_year >= 2 AND rp.max_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(rp.max_year >= 3 AND rp.max_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(rp.max_year >= 4 AND rp.max_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(rp.max_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+        
+        $this->db->select("rp.post_id,rp.post_name,jt.name as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo")->from('rec_post rp');
+        $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
+        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $this->db->order_by('rp.post_id', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        $retur_arr['latestJobs'] = $result_array;
+        $retur_arr['total_record'] = $this->latestJob_total_rec($userid,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil);
+        return $retur_arr;
+    }
+
+    function latestJob_total_rec($userid = "",$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "") {        
+        if($company_id != "")
+        {
+            $sql .= "r.rec_id IN (".$company_id.") OR ";
+        }
+        if($category_id != "")
+        {
+            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+        }
+        if($location_id != "")
+        {
+            $sql .= "rp.city IN (".$location_id.") OR ";
+        }
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+
+        if($job_desc != "")
+        {
+            $sql .= "rp.post_name IN (".$job_desc.") OR";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(rp.max_year >= 1 AND rp.max_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(rp.max_year >= 2 AND rp.max_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(rp.max_year >= 3 AND rp.max_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(rp.max_year >= 4 AND rp.max_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(rp.max_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+        
+        $this->db->select("COUNT(*) as total_record")->from('rec_post rp');
+        $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
+        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $this->db->order_by('rp.post_id', 'desc');        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['total_record'];
+    }
+
     function ajax_job_search_new_filter($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5',$job_city = array(),$job_company_id = array(),$search_location_arr = array()) {
 
         $start = ($page - 1) * $limit;
@@ -648,5 +798,259 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         //echo $this->db->last_query();exit;
         $result_array = $query->row_array();
         return $result_array['total_record'];
+    }
+
+    function get_job_city($page = "",$limit = '5') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('count(rp.post_id) as count,c.city_id,c.city_name,c.slug,c.city_image')->from('cities c');
+        $this->db->join('rec_post rp', 'rp.city = c.city_id', 'left');
+        $this->db->where('c.status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.city');        
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();
+        $jobCity = $query->result_array();
+        foreach ($jobCity as $k => $v) {
+            if(!file_exists(CITY_IMG_PATH."/".$jobCity[$k]['city_image']))
+            {
+                $jobCity[$k]['city_image'] = "default_city.png";
+            }
+        }
+        $result_array['job_city'] = $jobCity;
+        $result_array['total_record'] = $this->get_job_city_total_rec();
+        return $result_array;
+    }
+
+    function get_job_city_total_rec() {        
+
+        $this->db->select('count(rp.post_id) as count,c.city_id,c.city_name,c.slug,c.city_image')->from('cities c');
+        $this->db->join('rec_post rp', 'rp.city = c.city_id', 'left');
+        $this->db->where('c.status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.city');
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
+
+    function get_job_skills($page = "",$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('s.skill_id,s.skill,s.skill_slug,s.skill_image')->from('skill s');
+        $this->db->where('s.status', '1');
+        $this->db->where('s.type', '1');
+        $query = $this->db->get();
+        $art_category = $query->result_array();
+        $return_array = array();
+        foreach ($art_category as $key => $value) {
+            $return = array();
+            $skill_id = $value['skill_id'];
+            $this->db->select('count(post_id) as count')->from('rec_post rp');
+            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skill_id . ')');
+            $this->db->where('rp.status', '1');
+            $this->db->where('rp.is_delete', '0');
+            $query = $this->db->get();
+            $cat_count = $query->row_array();
+
+            if($cat_count['count'] > 0)
+            {
+                $return['count'] = $cat_count['count'];
+                $return['skill_id'] = $value['skill_id'];
+                $return['skill'] = $value['skill'];
+                $return['skill_slug'] = $value['skill_slug'];
+                if(!file_exists(SKILLS_IMG_PATH."/".$value['skill_image']))
+                {
+                    $return['skill_image'] = "skills_default.png";
+                }
+                else
+                {
+                    $return['skill_image'] = $value['skill_image'];
+                }
+
+                array_push($return_array, $return);
+            }            
+        }
+        array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
+        if($limit != "")
+            array_splice($return_array, $limit);
+        
+        $ret_array['job_skills'] = $return_array;
+        $ret_array['total_record'] = $this->get_job_skills_total_rec();
+        return $ret_array;
+    }
+
+    function get_job_skills_total_rec() {        
+
+        $this->db->select('s.skill_id,s.skill,s.skill_slug,s.skill_image')->from('skill s');
+        $this->db->where('s.status', '1');
+        $this->db->where('s.type', '1');
+        $query = $this->db->get();
+        $art_category = $query->result_array();
+        $return_array = array();
+        foreach ($art_category as $key => $value) {
+            $return = array();
+            $skill_id = $value['skill_id'];
+            $this->db->select('count(post_id) as count')->from('rec_post rp');
+            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skill_id . ')');
+            $this->db->where('rp.status', '1');
+            $this->db->where('rp.is_delete', '0');
+            $query = $this->db->get();
+            $cat_count = $query->row_array();
+
+            if($cat_count['count'] > 0)
+            {
+                $return['count'] = $cat_count['count'];
+                $return['skill_id'] = $value['skill_id'];
+                $return['skill'] = $value['skill'];
+                $return['skill_slug'] = $value['skill_slug'];
+                if(!file_exists(SKILLS_IMG_PATH."/".$value['skill_image']))
+                {
+                    $return['skill_image'] = "skills_default.png";
+                }
+                else
+                {
+                    $return['skill_image'] = $value['skill_image'];
+                }
+
+                array_push($return_array, $return);
+            }            
+        }
+        array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
+        return count($return_array);
+    }
+
+    public function get_job_designations($page = 0,$limit = '') {
+
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('count(jt.title_id) as count,jt.title_id,jt.name as job_title,jt.slug as job_slug, jt.job_title_img')->from('job_title jt');
+        $this->db->join('rec_post rp', 'rp.post_name = jt.title_id', 'left');
+        $this->db->where('jt.status', 'publish');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('jt.title_id');
+        $this->db->order_by('count', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        $jobDesc = $query->result_array();
+        foreach ($jobDesc as $k => $v) {
+            if(!file_exists(DESIGNATION_IMG_PATH."/".$jobDesc[$k]['job_title_img']))
+            {
+                $jobDesc[$k]['job_title_img'] = "designation_default.png";
+            }
+        }
+        $result_array['job_desc'] = $jobDesc;
+        $result_array['total_record'] = $this->get_job_designations_rec();
+        return $result_array;
+    }
+
+    function get_job_designations_rec() {        
+
+        $this->db->select('count(jt.title_id) as count,jt.title_id,jt.name as job_title,jt.slug as job_slug, jt.job_title_img')->from('job_title jt');
+        $this->db->join('rec_post rp', 'rp.post_name = jt.title_id', 'left');
+        $this->db->where('jt.status', 'publish');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('jt.title_id');
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
+
+    function get_jobs_by_companies($page = 0,$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name,r.comp_logo')->from('recruiter r');
+        $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.user_id');
+        $this->db->order_by('count', 'desc');        
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        
+        $jobComp = $query->result_array();        
+        $result_array['job_company'] = $jobComp;
+        $result_array['total_record'] = $this->get_jobs_by_companies_total_rec();
+        return $result_array;
+    }
+
+    function get_jobs_by_companies_total_rec() {
+        $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name,r.comp_logo')->from('recruiter r');
+        $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.user_id');
+        $this->db->order_by('count', 'desc');
+        
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
+
+    function get_jobs_by_categories($page = 0,$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('count(rp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug, ji.industry_image')->from('job_industry ji');
+        $this->db->join('rec_post rp', 'rp.industry_type = ji.industry_id', 'left');
+        $this->db->where('ji.status', '1');
+        $this->db->where('ji.is_delete', '0');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.industry_type');
+        $this->db->order_by('count', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        $jobCat = $query->result_array();
+        foreach ($jobCat as $k => $v) {
+            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$jobCat[$k]['industry_image']))
+            {
+                $jobCat[$k]['industry_image'] = "job_industry_image_default.png";
+            }
+        }
+        $result_array['job_cat'] = $jobCat;
+        $result_array['total_record'] = $this->get_jobs_by_categories_rec();
+
+        return $result_array;
+    }
+
+    function get_jobs_by_categories_rec() {
+        $this->db->select('count(rp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug')->from('job_industry ji');
+        $this->db->join('rec_post rp', 'rp.industry_type = ji.industry_id', 'left');
+        $this->db->where('ji.status', '1');
+        $this->db->where('ji.is_delete', '0');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.industry_type');
+        $this->db->order_by('count', 'desc');        
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return count($result_array);
     }
 }

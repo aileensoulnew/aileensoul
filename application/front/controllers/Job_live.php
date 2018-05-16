@@ -191,7 +191,24 @@ class Job_live extends MY_Controller {
     }
 
     public function latestJob() {
-        $latestJob = $this->job_model->latestJob();
+        $userid = $this->session->userdata('aileenuser');
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $company_id = (isset($_POST['company_id']) && !empty($_POST['company_id']) ? $_POST['company_id'] : "");
+        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");
+        $location_id = (isset($_POST['location_id']) && !empty($_POST['location_id']) ? $_POST['location_id'] : "");
+        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $job_desc = (isset($_POST['job_desc']) && !empty($_POST['job_desc']) ? $_POST['job_desc'] : "");
+        $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
+        $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
+
+        $limit = 5;        
+        $latestJob = $this->job_model->latestJob($userid,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$page,$limit);
         echo json_encode($latestJob);
     }
 
@@ -269,5 +286,121 @@ class Job_live extends MY_Controller {
         $this->data['job_profile_set'] = $this->job_profile_set;
         $this->data['job_profile_link'] =  ($this->job_profile_set == 1)?$this->job_profile_link:base_url('job/registration');
         return $deactivate;
+    }
+
+    public function view_more_jobs()
+    {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Job Profile | Aileensoul";
+
+        $this->load->view('job_live/view_more_jobs', $this->data);
+    }
+
+    public function jobs_by_location()
+    {
+        $this->load->view('job_live/jobs_by_location', $this->data);
+    }
+    public function jobs_by_location_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobCity = $this->job_model->get_job_city($page,$limit);
+        echo json_encode($jobCity);
+    }
+
+    public function jobs_by_skills()
+    {
+        $this->load->view('job_live/jobs_by_skills', $this->data);
+    }
+    public function jobs_by_skills_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = '';
+        $jobSkill = $this->job_model->get_job_skills($page,$limit);
+        echo json_encode($jobSkill);
+    }
+
+    public function jobs_by_designations()
+    {
+        $this->load->view('job_live/jobs_by_designation', $this->data);
+    }
+    public function jobs_by_designations_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobDesc = $this->job_model->get_job_designations($page,$limit);
+        echo json_encode($jobDesc);
+    }
+
+    public function jobs_by_companies()
+    {
+        $this->load->view('job_live/jobs_by_company', $this->data);
+    }
+    public function jobs_by_companies_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobComp = $this->job_model->get_jobs_by_companies($page,$limit);
+        echo json_encode($jobComp);
+    }
+
+    public function jobs_by_categories()
+    {
+        $this->load->view('job_live/jobs_by_category', $this->data);
+    }
+    public function jobs_by_categories_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
+        echo json_encode($jobCat);
     }
 }
