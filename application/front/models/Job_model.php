@@ -971,4 +971,41 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $result_array = $query->result_array();
         return count($result_array);
     }
+
+    function get_jobs_by_companies($page = 0,$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name,r.comp_logo')->from('recruiter r');
+        $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.user_id');
+        $this->db->order_by('count', 'desc');        
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+
+        $query = $this->db->get();
+        
+        $jobComp = $query->result_array();        
+        $result_array['job_company'] = $jobComp;
+        $result_array['total_record'] = $this->get_jobs_by_companies_total_rec();
+        return $result_array;
+    }
+
+    function get_jobs_by_companies_total_rec($limit = '') {
+        $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name,r.comp_logo')->from('recruiter r');
+        $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.user_id');
+        $this->db->order_by('count', 'desc');
+        
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
 }
