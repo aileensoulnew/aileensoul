@@ -772,7 +772,7 @@ min-height: 15px;}
 .no-data{padding:50px 0; text-align:center; }
 .no-data .no-data-text{padding-top:20px;}
 .noti-box{width: 17px; height: 17px; background: red; display: inline-block; text-align: center; 
-border-radius: 50%;font-size: 10px;line-height: 1.6;position: absolute;right: 8px; top:-5px;}
+border-radius: 50%;font-size: 10px;line-height: 1.6;position: absolute;right: -5px; top:-5px; color:#fff;}
 /***  end register header  ***/
 /***  no data content div search page ***/
 .no-data-box, .availabel-data-box{border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left; margin-bottom:10px;}
@@ -1172,7 +1172,7 @@ footer ul li a:hover{
 .mob-bottom-menu ul{padding:0;width:100%; float:left; margin:0;}
 .mob-bottom-menu li{float:left; list-style-type:none; width:20%; text-align:center; margin-bottom:0;}
 .mob-bottom-menu li > a{position:relative;}
-.mob-bottom-menu li > a .noti-box{right:2px; top:-10px; color:#fff;}
+.mob-bottom-menu li > a .noti-box{right:-5px; top:-8px; color:#fff;}
 .mobile-header .sub-header .sub-menu li{padding:0 5px; width:33.33%; text-align:center;}
 .mobile-header .sub-header.bus-only .sub-menu li{width:25%;}
 .mobile-header .sub-header .sub-menu li > a i{padding-right:0px;}
@@ -1360,7 +1360,53 @@ max-width: inherit;
 .no-login-right a{margin-left:5px;}
 
 
+/***  mobile bottom menu sprite image  ***/
+.mob-bottom-menu li a{width: 25px; height: 25px; display:block; margin:0 auto; position:relative;}
+.mob-bottom-menu li a .on-hover{display:none;}
+.mob-bottom-menu li a:hover .not-hover{display:none}
+.mob-bottom-menu li a:hover .on-hover{display:block;}
 
+.mob-bottom-menu li a.bg-home {
+    
+    background-position: -5px -5px;
+}
+.mob-bottom-menu li a.bg-home:hover {
+    
+    background-position:-40px -5px;
+}
+.bg-menu {
+    width: 25px; height: 25px; display:block; margin:0 auto;
+		
+}
+
+.mob-bottom-menu li a.bg-message {
+   
+    background-position:-110px -5px;
+}
+.mob-bottom-menu li a.bg-message:hover {
+    
+    background-position:-145px -5px;
+}
+.mob-bottom-menu li a.bg-noti {
+    
+    background-position:-180px -5px;
+}
+.mob-bottom-menu li a.bg-noti:hover {
+    
+    background-position:-215px -5px;
+}
+.mob-bottom-menu li a.bg-user {
+   
+    background-position:-250px -5px;
+}
+.mob-bottom-menu li a.bg-user:hover {
+    
+    background-position:-285px -5px;
+}
+
+svg path{
+	fill: #5c5c5c;
+}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
