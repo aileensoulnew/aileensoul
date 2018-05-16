@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="noRegJob" ng-controller="noRegJobController">
+<html lang="en" ng-app="noJobReg" ng-controller="noJobRegController">
     <head>
         <title ng-bind="title"></title>
         <meta name="robots" content="noindex, nofollow">
@@ -283,38 +283,49 @@
                     <div class="page-title">
                         <h3>Latest Job</h3>
                     </div>
-                    <div class="all-job-box">
+                    <div class="user_no_post_avl ng-scope" ng-if="latestJob.length == 0">
+                        <div class="user-img-nn">
+                            <div class="user_no_post_img">
+                                <img src="<?php echo base_url('assets/img/no-post.png?ver=time()');?>" alt="bui-no.png">
+                            </div>
+                            <div class="art_no_post_text">No Jobs Available.</div>
+                        </div>
+                    </div>
+                    <div class="all-job-box" ng-repeat="job in latestJob">
+                        <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="jobs.page_number" ng-value="{{jobs.page_number}}">
+                        <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="jobs.total_record" ng-value="{{jobs.total_record}}">
+                        <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
                         <div class="all-job-top">
                             <div class="post-img">
-                                <a href="#"><img src="<?php echo base_url('assets/img/commen-img.png?ver=' . time()) ?>"></a>
+                                <a href="#" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
+                                <a href="#" ng-if="!job.comp_logo"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
                             </div>
                             <div class="job-top-detail">
-                                <h5><a href="#">UI Developer/Front End Developer</a></h5>
-                                <p><a href="#">Enterprise Solution Inc</a></p>
-                                <p><a href="#">Vivek Panday</a></p>
+                                <h5><a href="#" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
+                                <h5><a href="#" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
+                                <p><a href="#" ng-bind="job.re_comp_name"></a></p>
+                                <p><a href="#" ng-bind="job.fullname"></a></p>
                             </div>
                         </div>
                         <div class="all-job-middle">
                             <p class="pb5">
                                 <span class="location">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">Ahmedabad,(India)</span>
+                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png') ?>">{{job.city_name}},({{job.country_name}})</span>
                                 </span>
                                 <span class="exp">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">3 year - 7 year (freshers can also apply)</span>
+                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/exp.png') ?>">{{job.min_year}} year - {{job.max_year}} year <span ng-if="job.fresher == '1'">(freshers can also apply)</span></span>
                                 </span>
                             </p>
-                            <p>
-                                5+ years experience desired Proficiency with one or more of the modern front end frameworks (Angular, React, Vue)  Advanced knowledge of web basics (Javascript, HTML, CSS, Ajax, JSON) ........
-                            </p>
-                            
+                            <p ng-bind="(job.post_description | limitTo:175) + '.....'"></p>
+
                         </div>
                         <div class="all-job-bottom">
-                            <span class="job-post-date"><b>Posted on:</b>12-Nov-2017</span>
+                            <span class="job-post-date"><b>Posted on:</b><span ng-bind="job.created_date"></span></span>
                             <p class="pull-right">
                                 <a href="#" class="btn4">Save</a>
                                 <a href="#" class="btn4">Apply</a>
                             </p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -343,10 +354,10 @@
             var q = '';
             var l = '';
             var w = '';
-            var app = angular.module('noRegJob', ['ui.bootstrap']);
+            var app = angular.module('noJobReg', ['ui.bootstrap']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/job-live/without_regi.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/job-live/without_job_regi.js?ver=' . time()) ?>"></script>
     </body>
 </html>
