@@ -235,34 +235,36 @@
                                 ?>
                         <div class="flw_msg_btn fr">
                             <ul>
-                                <li class="<?php echo "fruser" . $artisticdata[0]['art_id']; ?>">
-                                    <?php
-                                        $userid = $this->session->userdata('aileenuser');
-                                        
-                                        $contition_array = array('user_id' => $userid, 'status' => '1');
-                                        
-                                        $bup_id = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-                                        
-                                        $status = $this->db->select('follow_status')->get_where('follow', array('follow_type' => '1', 'follow_from' => $bup_id[0]['art_id'], 'follow_to' => $artisticdata[0]['art_id']))->row()->follow_status;
-                                        
-                                        
-                                        if ($status == 0 || $status == " ") {
-                                            ?>
-                                    <div id= "followdiv">
-                                        <button id="<?php echo "follow" . $artisticdata[0]['art_id']; ?>" onClick="followuser(<?php echo $artisticdata[0]['art_id']; ?>)">Follow</button>
-                                    </div>
-                                    <?php } elseif ($status == 1) { ?>
-                                    <div id= "unfollowdiv">
-                                        <button class="bg_following" id="<?php echo "unfollow" . $artisticdata[0]['art_id']; ?>" onClick="unfollowuser(<?php echo $artisticdata[0]['art_id']; ?>)"> Following</button>
-                                    </div>
+                                <?php if(count($this->data['artistic_deactive']) < 0){ ?>
+                                    <li class="<?php echo "fruser" . $artisticdata[0]['art_id']; ?>">
+                                        <?php
+                                            $userid = $this->session->userdata('aileenuser');
+                                            
+                                            $contition_array = array('user_id' => $userid, 'status' => '1');
+                                            
+                                            $bup_id = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                                            
+                                            $status = $this->db->select('follow_status')->get_where('follow', array('follow_type' => '1', 'follow_from' => $bup_id[0]['art_id'], 'follow_to' => $artisticdata[0]['art_id']))->row()->follow_status;
+                                            
+                                            
+                                            if ($status == 0 || $status == " ") {
+                                                ?>
+                                        <div id= "followdiv">
+                                            <button id="<?php echo "follow" . $artisticdata[0]['art_id']; ?>" onClick="followuser(<?php echo $artisticdata[0]['art_id']; ?>)">Follow</button>
+                                        </div>
+                                        <?php } elseif ($status == 1) { ?>
+                                        <div id= "unfollowdiv">
+                                            <button class="bg_following" id="<?php echo "unfollow" . $artisticdata[0]['art_id']; ?>" onClick="unfollowuser(<?php echo $artisticdata[0]['art_id']; ?>)"> Following</button>
+                                        </div>
+                                        <?php } ?>
+                                    </li>
+                                    <li>
+                                        <?php
+                                            $userid = $this->session->userdata('aileenuser');
+                                            if ($userid != $artisticdata[0]['user_id']) {
+                                                ?>
+                                    <li> <a href="<?php echo base_url('chat/abc/6/6/' . $artisticdata[0]['user_id']); ?>">Message</a> </li>
                                     <?php } ?>
-                                </li>
-                                <li>
-                                    <?php
-                                        $userid = $this->session->userdata('aileenuser');
-                                        if ($userid != $artisticdata[0]['user_id']) {
-                                            ?>
-                                <li> <a href="<?php echo base_url('chat/abc/6/6/' . $artisticdata[0]['user_id']); ?>">Message</a> </li>
                                 <?php } ?>
                             </ul>
                         </div>

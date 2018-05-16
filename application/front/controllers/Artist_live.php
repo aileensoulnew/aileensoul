@@ -142,6 +142,8 @@ class Artist_live extends MY_Controller {
         // Replace - with ,
         $this->data['q'] = str_replace("-",",",$this->data['q']);
         $this->data['l'] = str_replace("-",",",$this->data['l']);
+        $this->data['q'] = str_replace("+"," ",$this->data['q']);
+        $this->data['l'] = str_replace("+"," ",$this->data['l']);
         $this->data['is_artist_profile_set'] = $this->artist_profile_set;
         $this->load->view('artist_live/search', $this->data);
     }
@@ -354,7 +356,7 @@ class Artist_live extends MY_Controller {
         //if user deactive profile then redirect to artist/index untill active profile start
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
-
+        
         // if ($artistic_deactive) {
         //     redirect('find-artist');
         // }
@@ -381,7 +383,7 @@ class Artist_live extends MY_Controller {
             } else if ($this->data['artisticdata'][0]['art_step'] != '4') {
                 redirect('find-artist');
             } else {
-                $this->data['artistic_common'] = $this->load->view('artist/artistic_common', $this->data, true);
+                $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
                 if ($get_url == $slugname) {
                     $this->load->view('artist_live/art_manage_post', $this->data);
                 } else {
@@ -412,8 +414,6 @@ class Artist_live extends MY_Controller {
 
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
         if ($artistic_deactive) {
-            print_r($artistic_deactive);
-            exit;
             redirect('find-artist');
         }
         //if user deactive profile then redirect to artist/index untill active profile End
@@ -631,7 +631,7 @@ class Artist_live extends MY_Controller {
 
 
         if ($this->data['artisticdata']) {
-            $this->data['artistic_common'] = $this->load->view('artist/artistic_common', $this->data, true);
+            $this->data['artistic_common'] = $this->load->view('artist_live/artistic_common', $this->data, true);
             $artistic_name = $this->get_artistic_name($this->data['artisticdata'][0]['user_id']);
             $this->data['title'] = $artistic_name . ' | PDF' . ' | Artistic Profile' . TITLEPOSTFIX;
             $this->load->view('artist_live/art_pdf', $this->data);
@@ -1641,21 +1641,6 @@ class Artist_live extends MY_Controller {
         }
     }
 
-    // Check artistic is active or not..
-    function checkisartistdeactivate(){
-        $userid = $this->session->userdata('aileenuser');
-        $contition_array = array('user_id' => $userid, 'status' => '0');
-        $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        $this->data['isartistactivate'] = false;
-        if (count($artresult) > 0) {
-            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
-            $this->data['isartistactivate'] = true;
-            // $this->load->view('artist_live/reactivate', $this->data);
-        } 
-        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
-        return $artresult;
-    }
-
     // GET TOP LOCATION OF ARTIST 
     public function gettoploactionofartist(){
         $limitstart = $_POST['limitstart'];
@@ -1732,5 +1717,19 @@ class Artist_live extends MY_Controller {
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
         return $result_array;
+    }
+
+    public function checkisartistdeactivate(){
+        $userid = $this->session->userdata('aileenuser');
+        $contition_array = array('user_id' => $userid, 'status' => '0');
+        $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->data['isartistactivate'] = false;
+        if (count($artresult) > 0) {
+            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+            $this->data['isartistactivate'] = true;
+            // $this->load->view('artist_live/reactivate', $this->data);
+        } 
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        return $artresult;
     }
 }

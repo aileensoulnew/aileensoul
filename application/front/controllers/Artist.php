@@ -16170,4 +16170,17 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         echo json_encode($result1);
     }
 
+    public function checkisartistdeactivate(){
+        $userid = $this->session->userdata('aileenuser');
+        $contition_array = array('user_id' => $userid, 'status' => '0');
+        $artresult = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->data['isartistactivate'] = false;
+        if (count($artresult) > 0) {
+            $this->data['artistic_name'] = ucwords($artresult[0]['art_name']) . ' ' . ucwords($artresult[0]['art_lastname']);
+            $this->data['isartistactivate'] = true;
+            // $this->load->view('artist_live/reactivate', $this->data);
+        } 
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        return $artresult;
+    }
 }

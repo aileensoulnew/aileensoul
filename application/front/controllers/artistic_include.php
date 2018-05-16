@@ -90,10 +90,13 @@ $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
 $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
 $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
 $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
-
+if(method_exists($this->checkisartistdeactivate())){ 
+  $this->checkisartistdeactivate();
+}
 $this->data['arturl'] = $this->user_model->get_art_url($userid);
 $this->data['artistic_header2'] = $this->load->view('artist_live/artistic_header2', $this->data, true);
 // Start - code needed for new header
 
 $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+
 ?>
