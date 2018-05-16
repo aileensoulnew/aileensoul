@@ -456,6 +456,11 @@ $route['(:any)-jobs'] = "job/job_search_new/$1";//Pratik Job By Job Title,Job by
 $route['jobs-opening-at-(:any)'] = "job/job_search_new/$1";
 $route['jobs-in-(:any)'] = "job/job_search_new/$1";
 $route['(:any)-jobs-in-(:any)'] = "job/job_search_new/$1/$2";
+$route['jobs-by-location'] = "job_live/view_more_jobs";
+$route['jobs-by-skills'] = "job_live/view_more_jobs";
+$route['jobs-by-designations'] = "job_live/view_more_jobs";
+$route['jobs-by-companies'] = "job_live/view_more_jobs";
+$route['jobs-by-categories'] = "job_live/view_more_jobs";
 
 /*$route['jobs-in-(:any)'] = "job/job_search";
 $route['(:any)-jobs-in-(:any)'] = "job/job_search";*/

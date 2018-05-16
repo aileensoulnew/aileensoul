@@ -287,4 +287,48 @@ class Job_live extends MY_Controller {
         $this->data['job_profile_link'] =  ($this->job_profile_set == 1)?$this->job_profile_link:base_url('job/registration');
         return $deactivate;
     }
+
+    public function view_more_jobs()
+    {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Job Profile | Aileensoul";
+
+        $this->load->view('job_live/view_more_jobs', $this->data);
+    }
+
+    public function jobs_by_location()
+    {
+        $this->load->view('job_live/jobs_by_location', $this->data);
+    }
+    public function jobs_by_location_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobCity = $this->job_model->get_job_city($page,$limit);
+        echo json_encode($jobCity);
+    }
 }

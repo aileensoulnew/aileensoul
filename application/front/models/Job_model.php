@@ -799,4 +799,45 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $result_array = $query->row_array();
         return $result_array['total_record'];
     }
+
+    function get_job_city($page = "",$limit = '5') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('count(rp.post_id) as count,c.city_id,c.city_name,c.slug,c.city_image')->from('cities c');
+        $this->db->join('rec_post rp', 'rp.city = c.city_id', 'left');
+        $this->db->where('c.status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.city');        
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();
+        $jobCity = $query->result_array();
+        foreach ($jobCity as $k => $v) {
+            if(!file_exists(CITY_IMG_PATH."/".$jobCity[$k]['city_image']))
+            {
+                $jobCity[$k]['city_image'] = "default_city.png";
+            }
+        }
+        $result_array['job_city'] = $jobCity;
+        $result_array['total_record'] = $this->get_job_city_total_rec();
+        return $result_array;
+    }
+
+    function get_job_city_total_rec($page = "",$limit = '') {        
+
+        $this->db->select('count(rp.post_id) as count,c.city_id,c.city_name,c.slug,c.city_image')->from('cities c');
+        $this->db->join('rec_post rp', 'rp.city = c.city_id', 'left');
+        $this->db->where('c.status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.city');
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
 }
