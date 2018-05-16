@@ -68,6 +68,7 @@
                                     </label>
                                 </li>                                
                             </ul>
+                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-companies">More Companies</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -81,6 +82,7 @@
                                     </label>
                                 </li>
                             </ul>
+                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-categories">More Categories</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -94,6 +96,7 @@
                                     </label>
                                 </li>
                             </ul>
+                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-location">More Cities</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -107,6 +110,7 @@
                                     </label>
                                 </li>
                             </ul>
+                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-skills">More Skills</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -120,6 +124,7 @@
                                     </label>
                                 </li>
                             </ul>
+                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-designations">More Designation</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="accordion" id="accordion2">
