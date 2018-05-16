@@ -49,8 +49,8 @@ app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 });
 
-app.controller('jobByLocationController', function ($scope, $http, $location, $window) {    
-    $scope.title = title;    
+app.controller('jobByLocationController', function ($scope, $http, $location, $window) {
+    $scope.title = "Job By Location, Job Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -107,6 +107,67 @@ app.controller('jobByLocationController', function ($scope, $http, $location, $w
             }
         }
     });
+    
+});
+
+app.controller('jobsBySkillsController', function ($scope, $http, $location, $window) {
+    $scope.title = "Job By Skills, Job Profile | Aileensoul";    
+    $scope.jobByLocation = {};
+    $scope.jobs = {};
+    var isProcessing = false;
+    function jobSkill(pagenum = "") {
+        if (isProcessing) {            
+            return;
+        }
+        $('#loader').show();
+        isProcessing = true;
+        $http.get(base_url + "job_live/jobs_by_skills_ajax?page=" + pagenum).then(function (success) {
+            data = success.data;
+            if(data.job_skills.length > 0)
+            {                    
+                if(pagenum > 1)
+                {
+                    for (var i in data.job_skills) {                            
+                        $scope.jobBySkills.push(data.job_skills[i]);
+                    }
+                }
+                else
+                {
+                    $scope.jobBySkills = data.job_skills;
+                }
+                $scope.jobs.page_number = pagenum;
+                $scope.jobs.total_record = data.total_record;
+                $scope.jobs.perpage_record = 5;            
+                isProcessing = false;
+            }
+            else
+            {
+                $scope.showLoadmore = false;                
+            }            
+        }, function (error) {});
+    }
+    jobSkill(1);  
+    
+    /*angular.element($window).bind("scroll", function (e) {        
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {            
+            isLoadingData = true;
+            var page = $scope.jobs.page_number;
+            var total_record = $scope.jobs.total_record;
+            var perpage_record = $scope.jobs.perpage_record;            
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum =  $scope.jobs.page_number + 1;
+                    jobSkill(pagenum);
+                }
+            }
+        }
+    });*/
     
 });
 

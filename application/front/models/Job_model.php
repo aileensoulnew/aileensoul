@@ -828,7 +828,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         return $result_array;
     }
 
-    function get_job_city_total_rec($page = "",$limit = '') {        
+    function get_job_city_total_rec() {        
 
         $this->db->select('count(rp.post_id) as count,c.city_id,c.city_name,c.slug,c.city_image')->from('cities c');
         $this->db->join('rec_post rp', 'rp.city = c.city_id', 'left');
@@ -839,5 +839,93 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $query = $this->db->get();        
         $result_array = $query->result_array();
         return count($result_array);
+    }
+
+    function get_job_skills($page = "",$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->select('s.skill_id,s.skill,s.skill_slug,s.skill_image')->from('skill s');
+        $this->db->where('s.status', '1');
+        $this->db->where('s.type', '1');
+        $query = $this->db->get();
+        $art_category = $query->result_array();
+        $return_array = array();
+        foreach ($art_category as $key => $value) {
+            $return = array();
+            $skill_id = $value['skill_id'];
+            $this->db->select('count(post_id) as count')->from('rec_post rp');
+            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skill_id . ')');
+            $this->db->where('rp.status', '1');
+            $this->db->where('rp.is_delete', '0');
+            $query = $this->db->get();
+            $cat_count = $query->row_array();
+
+            if($cat_count['count'] > 0)
+            {
+                $return['count'] = $cat_count['count'];
+                $return['skill_id'] = $value['skill_id'];
+                $return['skill'] = $value['skill'];
+                $return['skill_slug'] = $value['skill_slug'];
+                if(!file_exists(SKILLS_IMG_PATH."/".$value['skill_image']))
+                {
+                    $return['skill_image'] = "skills_default.png";
+                }
+                else
+                {
+                    $return['skill_image'] = $value['skill_image'];
+                }
+
+                array_push($return_array, $return);
+            }            
+        }
+        array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
+        if($limit != "")
+            array_splice($return_array, $limit);
+        
+        $ret_array['job_skills'] = $return_array;
+        $ret_array['total_record'] = $this->get_job_skills_total_rec();
+        return $ret_array;
+    }
+
+    function get_job_skills_total_rec() {        
+
+        $this->db->select('s.skill_id,s.skill,s.skill_slug,s.skill_image')->from('skill s');
+        $this->db->where('s.status', '1');
+        $this->db->where('s.type', '1');
+        $query = $this->db->get();
+        $art_category = $query->result_array();
+        $return_array = array();
+        foreach ($art_category as $key => $value) {
+            $return = array();
+            $skill_id = $value['skill_id'];
+            $this->db->select('count(post_id) as count')->from('rec_post rp');
+            $this->db->where('FIND_IN_SET(rp.post_skill, ' . $skill_id . ')');
+            $this->db->where('rp.status', '1');
+            $this->db->where('rp.is_delete', '0');
+            $query = $this->db->get();
+            $cat_count = $query->row_array();
+
+            if($cat_count['count'] > 0)
+            {
+                $return['count'] = $cat_count['count'];
+                $return['skill_id'] = $value['skill_id'];
+                $return['skill'] = $value['skill'];
+                $return['skill_slug'] = $value['skill_slug'];
+                if(!file_exists(SKILLS_IMG_PATH."/".$value['skill_image']))
+                {
+                    $return['skill_image'] = "skills_default.png";
+                }
+                else
+                {
+                    $return['skill_image'] = $value['skill_image'];
+                }
+
+                array_push($return_array, $return);
+            }            
+        }
+        array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
+        return count($return_array);
     }
 }
