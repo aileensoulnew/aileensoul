@@ -48,16 +48,16 @@ class Business_profile extends MY_Controller {
             $this->load->view('business_profile/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
-// GET BUSINESS PROFILE DATA
+            // GET BUSINESS PROFILE DATA
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
             $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET COUNTRY DATA
+            // GET COUNTRY DATA
             $contition_array = array('status' => '1');
             $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET STATE DATA
+            // GET STATE DATA
             $contition_array = array('status' => '1');
             $this->data['states'] = $this->common->select_data_by_condition('states', $contition_array, $data = 'state_id,state_name,country_id', $sortby = 'state_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// GET CITY DATA
+            // GET CITY DATA
             $contition_array = array('status' => '1');
             $this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name,state_id', $sortby = 'city_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
             if (count($userdata) > 0) {
@@ -189,6 +189,8 @@ class Business_profile extends MY_Controller {
     }
 
     public function business_profile_manage_post($id = "") {
+        echo "string";
+        exit;
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $this->data['slugid'] = $id;
         $userid = $this->session->userdata('aileenuser');
@@ -10718,19 +10720,12 @@ Your browser does not support the audio tag.
 
     public function ajax_location_data() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
-        $term = $_GET['term'];
+        $term = ($_GET['term']) ? $_GET['term'].'%' : '' ;
+        $limit = ($_GET['limit']) ? $_GET['limit'] : 5 ;
         if (!empty($term)) {
-            $contition_array = array('status' => '1', 'state_id !=' => '0');
-            $search_condition = "(city_name LIKE '" . trim($term) . "%')";
-            $location_list = $this->common->select_data_by_search('cities', $search_condition, $contition_array, $data = 'city_name', $sortby = 'city_name', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'city_name');
-            foreach ($location_list as $key1 => $value) {
-                foreach ($value as $ke1 => $val1) {
-                    $location[] = $val1;
-                }
-            }
-            foreach ($location as $key => $value) {
-                $city_data[$key]['value'] = $value;
-            }
+            $sql = "SELECT city_name FROM ailee_cities WHERE status = '1' AND state_id != '0' AND (city_name LIKE '". $term ."') GROUP BY city_name LIMIT " . $limit;
+            $query = $this->db->query($sql);
+            $city_data = $query->result_array();
             echo json_encode($city_data);
         }
     }
@@ -10941,6 +10936,7 @@ Your browser does not support the audio tag.
 
     public function ajax_business_skill(){
         $term = $_GET['term'];
+        $limit = ($_GET['limit']) ? $_GET['limit'] : 5;
         if($term != "")
             $term = $term . '%' ;
         $sql = "SELECT company_name as value
@@ -10956,7 +10952,6 @@ Your browser does not support the audio tag.
                 FROM ailee_industry_type 
                 WHERE status = '1' AND is_delete = '0' 
                 AND (industry_name LIKE '". $term ."' )";
-
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         echo json_encode($result_array);

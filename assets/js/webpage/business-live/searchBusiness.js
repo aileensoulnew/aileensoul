@@ -2,22 +2,16 @@ app.controller('searchBusinessController', function ($scope, $window) {
     $scope.keyword = q;
     $scope.city = l;
     $scope.searchSubmit = function () {
-        alert(7);
         var keyword = $scope.keyword.toLowerCase().split(' ').join('+');
         var city = $scope.city.toLowerCase().split(' ').join('+');
-        console.log(q);
-        console.log(l);
         if (keyword == '' && city == '') {
             return false;
         } else if (keyword != '' && city == '') {
-            alert(1);
-            $window.location.href = base_url + 'business-profile/search?q=' + keyword;
+            $window.location.href = base_url + 'business/search/' + keyword;
         } else if (keyword == '' && city != '') {
-            alert(4);
-            $window.location.href = base_url + 'business-profile/search?l=' + city;
+            $window.location.href = base_url + 'business/search/' + city;
         } else {
-            alert(5);
-            $window.location.href = base_url + 'business-profile/search?q=' + keyword + '-in-&l=' + city;
+            $window.location.href = base_url + 'business/search/' + keyword + '-in-' + city;
         }
     }
 });

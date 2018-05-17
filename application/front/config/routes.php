@@ -118,10 +118,10 @@ $route['profiles/opportunities/(:any)'] = "user_opportunities";
 $route['business-search'] = "business_live/index";
 $route['business-profile/category'] = "business_live/category";
 $route['business-profile/category/(:any)'] = "business_live/categoryBusinessList/$1";
-$route['business-profile/search'] = "business_live/business_search";
-$route['business-profile/search/(:any)'] = "business_live/business_search/$1";
+$route['business/search'] = "business_live/business_search";
 
-$route['business-profile/reactivate'] = "business_profile/reactivate";
+
+// $route['business-profile/reactivate'] = "business_profile/reactivate";
 $route['business/reactivateacc'] = "business_profile/reactivateacc";
 
 //$route['business-profile/business-information'] = "business_profile/business_information";
@@ -189,7 +189,7 @@ $route['business-profile/signup/edit/description'] = "business_profile_registrat
 $route['business-profile/signup/edit/image'] = "business_profile_registration/image_edit";
 //$route['business-profile/signup/business-registration'] = "business_profile_registration/business_registration";
 
-$route['business_profile/reactivate'] = "business_profile_live/reactivate";
+// $route['business_profile/reactivate'] = "business_profile_live/reactivate";
 
 $route['business-profile/location'] = "business_live/location";
 $route['business-profile/location/(:any)'] = "business_live/locationBusinessList/$1";
@@ -547,6 +547,7 @@ $route['(:any)/article'] = 'Userprofile';
 // $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";
 $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
+$route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['(:any)'] = 'Userprofile';
 
@@ -556,3 +557,7 @@ $route['artist/search/(:any)'] = "artist_live/artist_search/$1";
 $route['artist/search/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 // $route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
+
+
+$route['business/search/(:any)'] = "business_live/business_search/$1";
+$route['business/search/(:any)-in-(:any)'] = "business_live/business_search/$1-in-$2";

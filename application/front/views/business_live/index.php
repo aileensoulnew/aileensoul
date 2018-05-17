@@ -14,7 +14,18 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
     <body class="profile-main-page">
-        <?php echo $header_profile; ?>
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
+        <?php 
+            if($ismainregister == false){
+                $this->load->view('business_live/login_header');
+            }else if($isbusiness_register == true && $isbusiness_deactive){
+                echo $business_header2;
+            }else{
+                echo $header_profile; 
+            }
+        ?>
         <div class="middle-section middle-section-banner">
             <!-- SEARCH BANNER for BUSINESS -->
             <?php if(!$isbusinessactivate){ ?>
@@ -324,7 +335,6 @@
                 </div>
             </div>
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>

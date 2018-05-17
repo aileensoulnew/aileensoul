@@ -20,7 +20,13 @@ class Business_live extends MY_Controller {
         $this->load->library('S3');
         
         include ('main_profile_link.php');
-        // include ('business_include.php');
+        include ('business_include.php');
+
+        $this->data['ismainregister'] = false;
+        if($userid){
+            $this->data['ismainregister'] = true;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        }
     }
 
     public function index() {
@@ -52,7 +58,6 @@ class Business_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Business Profile | Aileensoul";
         $this->data['business_profile_set'] = $this->business_profile_set;
-
         $this->load->view('business_live/index', $this->data);
     }
 
@@ -76,6 +81,7 @@ class Business_live extends MY_Controller {
 
     public function categoryBusinessList($category = '') {
         $userid = $this->session->userdata('aileenuser');
+        $businessresult = $this->checkbusinessdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -119,7 +125,7 @@ class Business_live extends MY_Controller {
             if (substr($searchquery, 0, strlen("business-in-")) === "business-in-") {
                 $search_location = explode("business-in-", $searchquery);
             }
-            $search_category = explode("-business-in-", $searchquery);
+            $search_category = explode("-in-", $searchquery);
             $this->data['q'] = '';
             $this->data['l'] = '';
             if(count($search_location) > 0){

@@ -20,6 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">        
     </head>
     <body>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <?php echo $header_profile; ?>
         <div class="container" id="paddingtop_fixed">
             <div class="row">
@@ -39,7 +40,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
         <?php echo $footer; ?>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>

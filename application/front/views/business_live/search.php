@@ -12,23 +12,27 @@
 
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <?php if($isbusiness_register == true && !$isbusiness_deactive){ ?>
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
+        <?php } ?>
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page">        
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
         <?php 
-            /*if($ismainregister == true){ 
-                if(($business_profile_set == 0 || $business_profile_set == '0') || $isbusinessdeactivate == false){
-                    echo $header_profile; 
-                } else{
-                    echo $business_header2;
-                }
-            } else{
+            if($ismainregister == false){
                 $this->load->view('business_live/login_header');
-            }*/
-            echo $header_profile; 
-       ?>
+            }else if($isbusiness_register == true && !$isbusiness_deactive){
+                echo $business_header2;
+            }else{
+                echo $header_profile; 
+            }
+       ?>            
         <div class="middle-section middle-section-banner">
-            <?php if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
-            <div class="container pt20">
+            <?php if($ismainregister == false || $isbusiness_deactive == true || $isbusiness_register == false){ echo $search_banner; }  ?>
+            <?php //if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
+            <div class="container pt20 searchcontainer">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
                         <div class="">
@@ -45,6 +49,9 @@
                                 </label>
                             </li>
                         </ul>
+                        <p class="text-right p10">
+                            <a href="<?php echo business_category_list; ?>">More Categories</a>
+                        </p>
                     </div>
                     <div class="left-search-box list-type-bullet">
                         <div class="">
@@ -63,7 +70,9 @@
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10"><a href="<?php echo artist_location_list ?>">More Locations</a></p>
+                        <p class="text-right p10">
+                            <a href="<?php echo business_location_list; ?>">More Locations</a>
+                        </p>
                     </div>
                     <div class="custom_footer_left fw">
                         <div class="">
@@ -153,13 +162,13 @@
                 </div>
             </div>
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+
+
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>        
         <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         
@@ -176,5 +185,6 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/search.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()) ?>"></script>
     </body>
 </html>

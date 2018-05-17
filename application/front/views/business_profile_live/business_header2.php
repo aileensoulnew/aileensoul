@@ -62,7 +62,7 @@ if($browser == "Firefox")
 								</div>
 							</a>
                         </li>
-                        <?php if($isbusiness_deactive == false){ ?>
+                        <?php if($isbusiness_deactive == false && $isbusiness_register == true){ ?>
                             <li class="dropdown" id="Inbox_link">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()">
 									<div class="sub-menu-icon">

@@ -119,3 +119,4 @@ $(document).on('change','.locationcheckbox,.categorycheckbox',function(){
     // self.setAttribute('checked',(this.checked));
     angular.element(self).scope().getfilterbusinessdata();
 });
+

@@ -63,13 +63,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         if ($business_common_data[0]['user_id'] == $userid) {
             ?>  
             <div class="buisness-menu">
-                <?php
-            } else {
-                ?>
+            <?php
+                } else {
+            ?>
                 <div class="buisness-menu other-profile-menu">
-                    <?php
+            <?php
                 }
-                ?>
+            ?>
                 <div class="profile-pho-bui">
                     <div class="user-pic padd_img">
                         <?php if ($business_common_data[0]['business_user_image'] != '') { ?>
