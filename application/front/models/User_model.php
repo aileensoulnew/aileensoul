@@ -382,11 +382,13 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
-    public function get_art_url($userid) {
+    public function get_art_url($userid, $from = "") {
 
         $contition_array = array('user_id' => $userid, 'status' => '1');
         $arturl = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_city,art_skill,other_skill,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
+        if($from == "artist"){
+            return $arturl[0]['slug'];
+        }
 
         $city_url = $this->db->select('city_name')->get_where('cities', array('city_id' => $arturl[0]['art_city'], 'status' => '1'))->row()->city_name;
 

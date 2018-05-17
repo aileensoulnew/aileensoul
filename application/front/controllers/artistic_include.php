@@ -100,7 +100,7 @@ if (count($artresult) > 0) {
     // $this->load->view('artist_live/reactivate', $this->data);
 } 
 
-$this->data['arturl'] = $this->user_model->get_art_url($userid);
+$this->data['arturl'] = $this->user_model->get_art_url($userid,"artist");
 $this->data['artistic_header2'] = $this->load->view('artist_live/artistic_header2', $this->data, true);
 // Start - code needed for new header
 

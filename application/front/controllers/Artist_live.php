@@ -214,7 +214,7 @@ class Artist_live extends MY_Controller {
         }
         $this->data['head'] = $this->load->view('head', $this->data, TRUE);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        if ($recuser) {
+        if (count($recuser) > 0) {
             redirect('artist/home', refresh);
         } else {
             $this->load->view('artist_live/profile', $this->data);

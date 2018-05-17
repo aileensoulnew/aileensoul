@@ -3405,7 +3405,6 @@ class Artist extends MY_Controller {
         if ($start < 0)
             $start = 0;
 
-
         if ($id == $userid || $id == '') {
 
             $artdata = $this->common->select_data_by_id('art_reg', 'user_id', $userid, $data = 'art_id');
@@ -3431,14 +3430,12 @@ class Artist extends MY_Controller {
                 }
             }
         } else {
-
             $artdata = $this->common->select_data_by_id('art_reg', 'user_id', $id, $data = 'art_id');
-
             $join_str[0]['table'] = 'follow';
             $join_str[0]['join_table_id'] = 'follow.follow_to';
             $join_str[0]['from_table_id'] = 'art_reg.art_id';
             $join_str[0]['join_type'] = '';
-
+            
             $limit = $perpage;
             $offset = $start;
 
@@ -3451,6 +3448,7 @@ class Artist extends MY_Controller {
             foreach ($followerdata as $followkey) {
                 $contition_array = array('art_id' => $followkey['follow_from'], 'status' => '1');
                 $artaval = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                
                 if ($artaval) {
 
                     $userlist1[] = $artaval;
@@ -3468,7 +3466,6 @@ class Artist extends MY_Controller {
 
         if (count($userlist1) > 0) {
             foreach ($userlist as $user) {
-
 
                 $contition_array = array('art_id' => $user['follow_from'], 'status' => '1');
                 $artaval = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -3533,12 +3530,12 @@ class Artist extends MY_Controller {
                                 <li class="fr" id ="frfollow' . $user['follow_from'] . '">';
                     $contition_array = array('user_id' => $userid, 'status' => '1');
                     $artisticdatauser = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-
+                   // echo $this->db->last_query();
+                   // exit;
                     $contition_array = array('follow_from' => $artisticdatauser[0]['art_id'], 'follow_status' => '1', 'follow_type' => '1', 'follow_to' => $user['follow_from']);
                     $status_list = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_status', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-
-                    //echo "<pre>"; print_r($status_list); die();
+                     
+                    // echo "<pre>"; print_r($status_list); die();
 
                     if (($status_list[0]['follow_status'] == '0' || $status_list[0]['follow_status'] == ' ' ) && $user['follow_from'] != $artisticdatauser[0]['art_id']) {
 
@@ -3547,9 +3544,14 @@ class Artist extends MY_Controller {
                                                                                 </div>';
                     } else if ($user['follow_from'] == $artisticdatauser[0]['art_id']) {
                         
-                    } else {
-                        $return_html .= '<div class="user_btn follow_btn_' . $user['follow_from'] . '" id= "unfollowdiv">
+                    } else if (($status_list[0]['follow_status'] == '1') && $user['follow_from'] != $artisticdatauser[0]['art_id']) {
+                         $return_html .= '<div class="user_btn follow_btn_' . $user['follow_from'] . '" id= "unfollowdiv">
                                         <button class="bg_following" id="unfollow' . $user['follow_from'] . '" onClick="unfollowuser_two(' . $user['follow_from'] . ')"><span>Following</span></button>
+                                                                                </div>';
+                        
+                    } else {
+                        $return_html .= '<div class="user_btn follow_btn_' . $user['follow_from'] . '" id= "followdiv">
+                                <button id="follow' . $user['follow_from'] . '" onClick="followuser_two(' . $user['follow_from'] . ')"><span>Follow</span></button>
                                                                                 </div>';
                     }
                     $return_html .= '</li>

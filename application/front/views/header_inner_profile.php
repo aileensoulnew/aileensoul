@@ -34,9 +34,12 @@ if($browser == "Firefox")
                         <a ng-href="<?php echo base_url('/') ?>" title="Aileensoul" target="_self"><img ng-src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a>
                     </h2>
                     <?php
-                    $first_segment = $this->uri->segment(1);
+                        $first_segment = $this->uri->segment(1);
+                        $isartist_segment = strpos($first_segment, 'artist');
+                        // echo $isartist_segment === FALSE;
+                        // exit;
                     ?>
-                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && $first_segment != 'business-profile' || ($first_segment != 'find-artist')) { ?>
+                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && $first_segment != 'business-profile' && ($first_segment != 'find-artist') && ($first_segment != 'artist') && $isartist_segment === FALSE) { ?>
                         <form ng-submit="search_submit" action="<?php echo base_url('searchh') ?>">
                             <input type="text" name="q" placeholder="Search.." id="search">
                         </form>
