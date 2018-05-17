@@ -115,7 +115,7 @@ $route['profiles/opportunities/(:any)'] = "user_opportunities";
 
 
 //$route['business-profile'] = "business_profile/index";
-$route['business-profile'] = "business_live/index";
+$route['business-search'] = "business_live/index";
 $route['business-profile/category'] = "business_live/category";
 $route['business-profile/category/(:any)'] = "business_live/categoryBusinessList/$1";
 $route['business-profile/search'] = "business_live/business_search";

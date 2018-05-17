@@ -203,7 +203,7 @@
                             <li <?php if ($this->uri->segment(1) == 'artist' && $this->uri->segment(2) == 'p' && $this->uri->segment(4) == 'following') { ?> class="active" <?php } ?>>
                                 <a title="Following" href="<?php echo base_url('artist/p/'. $get_url .'/following'); ?>">
                                     Following <br> 
-                                    <div id="countfollow">(<?php echo isset($countfr) ? $countfo : 0; ?>)</div>
+                                    <div id="countfollow">(<?php echo isset($countfr) ? $countfr : 0; ?>)</div>
                                 </a>
                             </li>
                             <?php

@@ -2080,7 +2080,7 @@ class Artist extends MY_Controller {
                                                                             </div>
                                                                             <div>';
             $return_html .= '<a>';
-                $return_html .= ucfirst(strtolower($user['art_category'])) . " ";
+                $return_html .= ucfirst(strtolower($user['art_category'])) . " " . "( " . ucfirst(strtolower($user['city_name'])) . " )";
             // if ($user['designation']) {
             //     $return_html .= ucfirst(strtolower($user['designation']));
             // } else {

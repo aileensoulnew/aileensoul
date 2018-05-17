@@ -105,7 +105,7 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo base_url('business-profile/') ?>" title="Business Profile">
+                <a href="<?php echo base_url('business-search/') ?>" title="Business Profile">
                     <div class="all-pr-img">
                         <img ng-src="<?php echo base_url('assets/n-images/i4.jpg?ver='.time()) ?>" alt="Business Profile">
                     </div>

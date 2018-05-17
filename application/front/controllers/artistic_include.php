@@ -70,6 +70,8 @@ foreach ($followerdata as $followkey) {
 $this->data['flucount'] = $flucount = count($countlu);
 $contition_array = array('follow_from' => $artregid, 'follow_status' => '1', 'follow_type' => '1');
 $followingdata = $this->data['followingdata'] = $this->common->select_data_by_condition('follow', $contition_array, $data = 'follow_id,follow_type,follow_from,follow_to,follow_status', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+// echo $this->db->last_query();
+// exit;
 foreach ($followingdata as $followkey) {
   $contition_array = array('art_id' => $followkey['follow_to'], 'status' => '1');
   $artaval = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_name,art_lastname,art_skill,user_id,status,is_delete,art_step,art_user_image,profile_background,designation,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -77,8 +79,8 @@ foreach ($followingdata as $followkey) {
 
 	$countlfu[] = $artaval;
   }
-
   $this->data['countfr'] = $countfr = count($countlfu);
+  
   
 //$this->data['art_header2_border'] = $this->load->view('artist/art_header2_border', $this->data, true);
 

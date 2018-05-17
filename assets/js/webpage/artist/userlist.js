@@ -38,8 +38,8 @@ $(document).ready(function () {
     artistic_userlist();
     $(window).scroll(function () {
         //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-
+            var cardheight = $(".profile-job-post-detail").height() * 4;
+        if ($(window).scrollTop() + $(window).height() + cardheight >= $(document).height()) {
             var page = $(".page_number:last").val();
             var total_record = $(".total_record").val();
             var perpage_record = $(".perpage_record").val();

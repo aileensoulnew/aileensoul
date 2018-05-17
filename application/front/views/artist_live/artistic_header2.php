@@ -9,7 +9,7 @@ $userid = $this->session->userdata('aileenuser');
 				<div class="col-md-6 mob-p0">
 					<ul class="sub-menu">
 						<li>
-							<a href="<?php echo base_url('artist/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Artist Profile </a>
+							<a href="<?php echo base_url('artist/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Artistic Profile </a>
 						</li>
 						<?php if($isartistactivate == true &&  $artist_isregister == true){ ?>
 						<li class="dropdown">
