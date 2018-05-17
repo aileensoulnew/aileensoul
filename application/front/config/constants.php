@@ -608,3 +608,7 @@ define('CITY_IMG_PATH', BASEURL. 'uploads/city_image/');
 define('DESIGNATION_IMG_PATH', BASEURL. 'uploads/designation_image/');
 define('JOB_INDUSTRY_IMG_PATH', BASEURL. 'uploads/job_industry_image/');
 define('SKILLS_IMG_PATH', BASEURL. 'uploads/skills_image/');
+
+// BUSINESS PROFILE
+define('business_category_list', BASEURL. 'business-profile/category');
+define('business_location_list', BASEURL. 'business-profile/location');
