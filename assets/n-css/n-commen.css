@@ -772,7 +772,8 @@ min-height: 15px;}
 .no-data{padding:50px 0; text-align:center; }
 .no-data .no-data-text{padding-top:20px;}
 .noti-box{width: 17px; height: 17px; background: red; display: inline-block; text-align: center; 
-border-radius: 50%;font-size: 10px;line-height: 1.6;position: absolute;right: -5px; top:-5px; color:#fff;}
+border-radius: 50%;font-size: 10px;line-height: 1.6;position: absolute; right: 7px; top:-5px; color:#fff;}
+.mob-btm-icon .noti-box{right:-5px;}
 /***  end register header  ***/
 /***  no data content div search page ***/
 .no-data-box, .availabel-data-box{border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left; margin-bottom:10px;}
@@ -1126,7 +1127,7 @@ footer ul li a:hover{
 
 /***  end center title  ***/
 /***  sub header  ***/
-.sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding-top:55px; position:fixed; background:#fff; z-index:99;}
+.sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding-top:54px; position:fixed; background:#fff; z-index:99;}
 .sub-header .sub-menu{padding:10px 0; margin:0; width:100%; float:left;}
 .sub-header .sub-menu li{list-style-type:none; float:left; padding:0px 25px; margin-bottom:0;}
 .sub-header .sub-menu li:first-child{padding-left:0;}
@@ -1135,10 +1136,10 @@ footer ul li a:hover{
 .sub-header .sub-menu li > a i{padding-right:10px; font-size:16px;}
 .sub-header .sub-menu li a .fa{font-size:16px;}
 .sub-menu .user-id .user-id-custom::after{margin-top:0; position:relative; top:-3px; display: none;}
-.sub-menu .noti-box{left:32px; color:#fff; top:-5px;}
+.sub-menu .noti-box{left:35px; color:#fff; top:-8px;}
 .sub-header .dropdown .dropdown-menu{}
 .sub-header .dropdown.open .dropdown-menu{width:360px; border:1px solid #d2d2d2;}
-.sub-header .dropdown.open .dropdown-menu{left:0 !important; top:32px; margin:0;}
+.sub-header .dropdown.open .dropdown-menu{left:0 !important; top:31px; margin:0;}
 .sub-header .dropdown.open .dropdown-menu li{width:100%; border-right:0; padding:0;}
 .sub-header .dropdown.open .dropdown-menu li a{color:#777;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover{background: #1b8ab9; color: #fff;}
@@ -1160,7 +1161,7 @@ footer ul li a:hover{
 .sub-header .dropdown.open .dropdown-menu.account{width:180px; padding-top:0;}
 .sub-header .dropdown.open .dropdown-menu.account li:first-child{padding:10px; border-bottom:1px solid #d2d2d2; font-size:16px;}
 .sub-header .job-search-box1{float:right;}
-.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:1px 10px 0 0; }
+.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:3px 10px 0 0; }
 .sub-header .job-search-box1 fieldset.sec_h2 input{border:1px solid #c0c0c0;}
 .sub-header .new-search-btn{float:left; width:28px; height:28px; margin-top:6px; border:1px solid #c0c0c0; border-radius:4px; padding:0;}
 .sub-header .new-search-btn label i{background:none; padding:3px 4px 4px 5px;}
@@ -1176,8 +1177,9 @@ footer ul li a:hover{
 .mobile-header .sub-header .sub-menu li{padding:0 5px; width:33.33%; text-align:center;}
 .mobile-header .sub-header.bus-only .sub-menu li{width:25%;}
 .mobile-header .sub-header .sub-menu li > a i{padding-right:0px;}
-.mobile-header .sub-header .sub-menu li a{font-size:14px; position:relative;}
-.mobile-header .sub-header .sub-menu{padding:7px 0 2px;}
+.mobile-header .sub-header .sub-menu li a{font-size:14px; position:relative; display:inline-block; padding-top:5px; letter-spacing:1px;}
+.mobile-header .sub-header .sub-menu li:first-child{padding-top:0;}
+.mobile-header .sub-header .sub-menu{padding:3px 0 4px;}
 .cbp-spmenu{background:#ede9e9;}
 .cbp-spmenu-vertical{height:90%;}
 .mob-side-menu .content{height:100%;}
@@ -1317,8 +1319,9 @@ footer ul li a:hover{
 .mobile-header .sub-header .dropdown.open .dropdown-menu{left:auto; top:25px; margin:0; right:10px;}
 .mobile-header{display:none;}
 .mobile-header .sub-header{padding-top:48px;}
-.mobile-header .sub-menu .noti-box{left:7px; color:#fff; top:-10px;}
+.mobile-header .sub-menu .noti-box{left:0px; color:#fff; top:-3px; position:inherit;}
 .mobile-header #search .new-search-input{height:inherit;}
+.mobile-header .bus-only .sub-menu .noti-box{position:absolute; top:-10px; top:-2px; left:10px;}
 /*** end mob search  ***/
 
 #paddingtop_fixed{padding-top:95px !important;}
@@ -1365,44 +1368,16 @@ max-width: inherit;
 .mob-bottom-menu li a .on-hover{display:none;}
 .mob-bottom-menu li a:hover .not-hover{display:none}
 .mob-bottom-menu li a:hover .on-hover{display:block;}
+.bg-menu {width: 25px; height: 25px; display:block; margin:0 auto;}
 
-.mob-bottom-menu li a.bg-home {
-    
-    background-position: -5px -5px;
-}
-.mob-bottom-menu li a.bg-home:hover {
-    
-    background-position:-40px -5px;
-}
-.bg-menu {
-    width: 25px; height: 25px; display:block; margin:0 auto;
-		
-}
+.sub-menu li{line-height:1.3;}
+.sub-menu li a .on-hover{display:none;}
+.sub-menu li a:hover .not-hover{display:none}
+.sub-menu li a:hover .on-hover{display:inline-block;}
+.sub-menu li a svg{float:left;}
+.sub-menu li a svg{margin-right:10px;}
 
-.mob-bottom-menu li a.bg-message {
-   
-    background-position:-110px -5px;
-}
-.mob-bottom-menu li a.bg-message:hover {
-    
-    background-position:-145px -5px;
-}
-.mob-bottom-menu li a.bg-noti {
-    
-    background-position:-180px -5px;
-}
-.mob-bottom-menu li a.bg-noti:hover {
-    
-    background-position:-215px -5px;
-}
-.mob-bottom-menu li a.bg-user {
-   
-    background-position:-250px -5px;
-}
-.mob-bottom-menu li a.bg-user:hover {
-    
-    background-position:-285px -5px;
-}
+
 
 svg path{
 	fill: #5c5c5c;
@@ -1490,18 +1465,19 @@ svg path{
 	.left-header.fw-479 h2.logo{float:none; padding-bottom:10px;}
 	.search-mob-block{width:67%;}
 	.bus-only .none-sub-menu{display:none;}
-	.mobile-header .sub-header.bus-only .sub-menu li{width:20%;}
-	.mobile-header .sub-header.bus-only .sub-menu li:first-child{width:40%;}
+	.mobile-header .sub-header.bus-only .sub-menu li{width:17%;}
+	.mobile-header .sub-header.bus-only .sub-menu li:first-child{width:48%;}
 	.modal-content .post-field label{font-size:12px;}	
     #upload-demo .cr-boundary{height: 200px !important;}
     #upload-demo .cr-viewport{height: 200px !important;}
-
+	.none-sub-menu{display:none;}
+	.mobile-header .sub-header .sub-menu li{width:30%;}
+	.mobile-header .sub-header .sub-menu li:first-child{width:40%;}	
 }
 @media screen and (max-width: 359px) {
 	.search-mob-block{width:63%;}
-	.none-sub-menu{display:none;}
-	.mobile-header .sub-header .sub-menu li{width:27%;}
-	.mobile-header .sub-header .sub-menu li:first-child{width:45%;}	
+	
+	
 }
 @media screen and (max-width: 320px) {
 

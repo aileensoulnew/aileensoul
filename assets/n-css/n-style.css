@@ -2176,6 +2176,8 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 	.table-responsive.content td a{font-size:14px;}
 	.detail-box{border:0;}
 	.detail-box h4{display:none;}
+	
+	
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
