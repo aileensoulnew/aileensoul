@@ -2,11 +2,11 @@
 <!-- NEW HTML DESIGN -->
 <div class="search-banner" ng-controller="searchBusinessController">
 	<div class="container">
-		<div class="text-right pt20">
+		<div class="text-right pt20 create-profile-btn">
 			<?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
-			<a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+			<a class="btn3" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
 			<?php }else{ ?>
-			<a class="btn5" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
+			<a class="btn3" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
 			<?php } ?>
 		</div>
 		<div class="row">

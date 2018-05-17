@@ -1158,9 +1158,10 @@ header.profile-header .logo a{color:#5c5c5c;}
 .new-ld-page .search-banner.cus-search-bnr .container{padding-top:0;}
 .recruiter-main .search-banner{/*background:url("../n-images/bnr-rec.jpg"); margin-bottom:20px; padding:25px 0; background-size:cover;*/}
 .search-box{}
-.search-box .search-input input{width:48%; margin-right:2%; height:50px; font-size:17px; font-style:italic; color:#7b7b7b;}
+.search-box .search-input input{width:47%; margin-right:2%; height:50px; font-size:17px; font-style:italic; color:#7b7b7b;}
 .search-box .search-input input.city-input{margin-right:0;}
 .search-box .btn1{font-size:22px; padding:12px 21px;}
+.search-box input.btn1{display:inline-block; width:auto; height:auto;}
 .search-box .search-input input.btn1{width:120px; margin-right:0;}
 .search-bnr-text{padding:50px 0 40px; letter-spacing:1px;}
 .search-bnr-text h1{font-size:26px; color:#5c5c5c; line-height:1.5; letter-spacing:1px; }
@@ -1920,6 +1921,8 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .post-design-desc{word-wrap:break-word;}
 .content-bnr .btn5{letter-spacing:1px;}
 .cus-btn-fh{margin-left:75px; padding-top:20px;}
+
+.create-profile-btn{position:absolute; top:50px; right:80px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {

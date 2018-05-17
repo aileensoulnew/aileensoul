@@ -3,11 +3,11 @@
 <div class="search-banner" ng-controller="searchArtistController">
 
 	<div class="container">
-		<div class="text-right pt20">
+		<div class="text-right pt20 create-profile-btn">
 			<?php if($artist_isregister == false){ ?>
-				<a class="btn5" href="<?php echo artist_registration ?>">Create Artist Profile</a>
+				<a class="btn3" href="<?php echo artist_registration ?>">Create Artist Profile</a>
 			<?php } else{ ?>
-				<a class="btn5" href="<?php echo artist_reactivateacc; ?>">Reactivate Artist Profile</a>
+				<a class="btn3" href="<?php echo artist_reactivateacc; ?>">Reactivate Artist Profile</a>
 			<?php } ?>
 		</div>
 		<div class="row">
