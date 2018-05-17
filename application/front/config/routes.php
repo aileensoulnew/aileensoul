@@ -419,8 +419,10 @@ $route['job/company/(:any)'] = "job_live/company/$1";
 //$route['job/search'] = "job_live/job_search";
 $route['job/reactivateacc'] = "job_live/reactivateacc";
 
-$route['job/search/(:any)'] = "job_live/job_search_new/$1";
-$route['job/search/(:any)-in-(:any)'] = "job_live/job_search_new/$1-in-$2";
+$route['jobs/search/(.+)'] = "job_live/job_search_new";
+// $route['jobs/search/(:any)-jobs'] = "job_live/job_search_new/$1-jobs";
+// $route['jobs/search/jobs-in-(:any)'] = "job_live/job_search_new/jobs-in-$1";
+// $route['jobs/search/(:any)-jobs-in-(:any)'] = "job_live/job_search_new/$1-jobs-in-$2";
 // $route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 
 $route['job/home'] = "job/job_all_post";

@@ -43,6 +43,121 @@ app.controller('searchJobController', function ($scope, $window) {
         }
     }
     
-    
-    
+});
+$(function() {
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) { 
+        return split( term ).pop();
+    }
+    $( "#job_keyword" ).focusout(function() {
+        if($( "#job_keyword" ).val() != "")
+        {
+            var ser_val = $( "#job_keyword" ).val();            
+            ser_val_ = ser_val.substring(0, ser_val.length-1);            
+            $( "#job_keyword" ).val(ser_val_)
+        }
+    });
+    $( "#job_keyword" ).focusin(function() {
+        if($( "#job_keyword" ).val() != "")
+        {
+            var ser_val = $( "#job_keyword" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#job_keyword" ).val(ser_val_)
+        }
+    });
+    $( "#job_keyword" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "job_live/job_search_keyword", { term : terms},response);
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," );
+            return false;                
+        }
+    });
+
+    $( "#job_location" ).focusout(function() {
+        if($( "#job_location" ).val() != "")
+        {
+            var ser_val = $( "#job_location" ).val();            
+            ser_val_ = ser_val.substring(0, ser_val.length-1);            
+            $( "#job_location" ).val(ser_val_)
+        }
+    });
+    $( "#job_location" ).focusin(function() {
+        if($( "#job_location" ).val() != "")
+        {
+            var ser_val = $( "#job_location" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#job_location" ).val(ser_val_)
+        }
+    });
+    $( "#job_location" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "job_live/job_search_city", { term : terms},response);
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," ).toLowerCase();
+            return false;                
+        }
+    });
 });

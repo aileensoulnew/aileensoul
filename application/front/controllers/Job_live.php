@@ -449,4 +449,102 @@ class Job_live extends MY_Controller {
         echo json_encode($all_link);
         //print_r($all_link);
     }
+
+    public function job_search_new($searchstr = "") {
+        $work_timing = $_GET['work_timing'];
+        // echo($work_timing);
+        $searchstr = str_replace("jobs/search/","",$this->uri->uri_string());
+        //print_r($searchstr);exit;
+        $userid = $this->session->userdata('aileenuser');
+        $deactivate = $this->checkisjobdeactivate();
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+        /*$this->data['q'] = $_GET['q'];
+        $this->data['l'] = $_GET['l'];
+        $this->data['w'] = $_GET['w'];*/
+
+        if($searchstr != ''){
+            $isloacationsearch = false;
+            $search_location;            
+            //if (substr($searchstr, 0, strlen("-jobs-in-")) === "-jobs-in-") {
+            if (strpos($searchstr, "-jobs-in-") !== false)
+            {
+                $search_loc_cat = explode("-jobs-in-", $searchstr);                
+            }
+            else if (strpos($searchstr, "jobs-in-") !== false)
+            {                
+                $search_location = explode("jobs-in-", $searchstr);                
+            }
+            else
+            {
+                $search_category = explode("-jobs", $searchstr);                
+            }            
+            $this->data['q'] = '';
+            $this->data['l'] = '';
+            if(count($search_loc_cat) > 0){
+                $this->data['q'] = $search_loc_cat[0];
+                $this->data['l'] = $search_loc_cat[1];
+            }
+            else if(count($search_location) > 0){
+                $this->data['q'] = '';
+                $this->data['l'] = $search_location[1];
+            }else{
+                $this->data['q'] = $search_category[0];
+            }
+        }
+        else{
+            $this->data['q'] = $_GET['q'];
+            $this->data['l'] = $_GET['l'];
+        }
+
+        // Replace - with ,
+        $this->data['q'] = str_replace("-",",",$this->data['q']);
+        $this->data['l'] = str_replace("-",",",$this->data['l']);
+        $this->data['q'] = str_replace("+"," ",$this->data['q']);
+        $this->data['l'] = str_replace("+"," ",$this->data['l']);
+        $this->data['work_timing'] = $work_timing;
+        /*print_r($this->data['work_timing']);
+        echo "<--work_timing   Query--->";
+        print_r($this->data['q']);
+        echo "<--Query   Location--->";
+        print_r($this->data['l']);exit;*/
+        $this->load->view('job_live/search_new', $this->data);
+    }
+
+    public function job_search_keyword($id = "") {
+        $searchTerm = $_GET['term'];
+        $result1 = $this->job_model->job_search_keyword($searchTerm);
+        echo json_encode($result1);
+    }
+
+    public function job_search_city($id = "") {
+        $searchTerm = $_GET['term'];
+        $result1 = $this->job_model->job_search_city($searchTerm);
+        echo json_encode($result1);
+
+        /*$searchTerm = $_GET['term'];
+        if (!empty($searchTerm)) {
+            $contition_array = array('status' => '1', 'state_id !=' => '0');
+            $search_condition = "(city_name LIKE '" . trim($searchTerm) . "%')";
+            $location_list = $this->common->select_data_by_search('cities', $search_condition, $contition_array, $data = 'city_name', $sortby = 'city_name', $orderby = '', $limit = '5', $offset = '', $join_str5 = '', $groupby = 'city_name');
+            foreach ($location_list as $key1 => $value) {
+                foreach ($value as $ke1 => $val1) {
+                    $location[] = $val1;
+                }
+            }
+            foreach ($location as $key => $value) {
+                $city_data[$key]['value'] = $value;
+            }
+            echo json_encode($city_data);
+        }*/
+    }
 }

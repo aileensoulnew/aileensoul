@@ -1000,4 +1000,40 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $result_array = $query->result_array();
         return count($result_array);
     }
+
+    function job_search_keyword($keyword = ''){
+        $keyword = urldecode($keyword) . '%';
+        $sql = "SELECT DISTINCT LOWER(name) as value FROM ailee_job_title 
+                WHERE status = 'publish' AND (name LIKE '". $keyword ."') 
+                GROUP BY LOWER(name) 
+                Union
+                
+                SELECT skill as value FROM ailee_skill 
+                WHERE status = '1' AND type = 1 AND (skill LIKE '". $keyword ."') 
+                GROUP BY skill 
+                Union
+
+                SELECT industry_name as value FROM ailee_job_industry 
+                WHERE status = '1' AND is_other = 0 AND (industry_name LIKE '". $keyword ."') 
+                GROUP BY industry_name 
+                Union
+
+                SELECT re_comp_name as value FROM ailee_recruiter 
+                WHERE re_status = '1' AND (re_comp_name LIKE '". $keyword ."') 
+                GROUP BY re_comp_name 
+                LIMIT 10";
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
+            return $result_array;
+    }
+
+    function job_search_city($keyword = ''){
+        $keyword = urldecode($keyword) . '%';
+        $sql = "SELECT city_name as value FROM ailee_cities 
+                WHERE status = '1' AND state_id != '0' AND (city_name LIKE '". $keyword ."') 
+                GROUP BY city_name LIMIT 10";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
 }
