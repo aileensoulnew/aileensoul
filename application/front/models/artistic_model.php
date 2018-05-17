@@ -428,20 +428,7 @@ class Artistic_model extends CI_Model {
                     OR cr.country_name LIKE '". $val ."'
                     OR s.state_name LIKE '". $val ."'";
             }
-            // $sqllocation .= ")";
         }
-
-        // If category and location id selected in filter
-        /*if($category_id != "" && $location_id != ""){
-            $sqlfilter = " OR (ac.category_id IN (". $category_id .") AND ct.city_id IN (". $location_id ."))";
-        }else if($category_id != ""){
-            $sqlfilter = " OR ac.category_id IN (". $category_id .")";
-        }else if($location_id != ""){
-            $sqlfilter = " OR ct.city_id IN (". $location_id .")";
-        }else{
-            $sqlfilter = "";
-        }*/
-
         
         if($location_id != ""){
             $sqllocationfilter = ($sqllocation == "") ? " AND " : " OR ";
@@ -451,8 +438,6 @@ class Artistic_model extends CI_Model {
             $sqllocationfilter = ($sqllocation != "") ? ")" : ""; 
 
         }
-
-
 
         $limit = '';
         $sql = "SELECT ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill,

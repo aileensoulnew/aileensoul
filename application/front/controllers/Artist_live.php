@@ -31,7 +31,7 @@ class Artist_live extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         // $artresult = $this->checkisartistdeactivate();
         // else {
-        if($this->artist_profile_set==1 && !$artresult){
+        if($this->artist_profile_set == 1 && $this->data['isartistactivate'] == true){
             redirect($this->artist_profile_link);
         }
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -49,6 +49,7 @@ class Artist_live extends MY_Controller {
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
+
         $this->load->view('artist_live/index', $this->data);
         // }
     }
@@ -76,7 +77,7 @@ class Artist_live extends MY_Controller {
 
     public function categoryArtistList($category = '') {
         $userid = $this->session->userdata('aileenuser');
-        $artresult = $this->checkisartistdeactivate();
+        // $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -87,7 +88,7 @@ class Artist_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
-        echo $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
+        $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
         $this->data['category_id'] = $category_id['category_id'];
         $this->data['ismainregister'] = false;
         if($userid){
@@ -419,9 +420,9 @@ class Artist_live extends MY_Controller {
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
             
         // $artcountrydata = $this->getcountryandskill();
-        // if (count($artistic_deactive) > 0) {
-            // redirect('find-artist');
-        // }
+        if (count($artistic_deactive) > 0) {
+            redirect('find-artist');
+        }
         //if user deactive profile then redirect to artist/index untill active profile End
         // $segment3 = explode('-', $this->uri->segment(3));
         // $slugdata = array_reverse($segment3);
@@ -465,10 +466,10 @@ class Artist_live extends MY_Controller {
 
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
-        // if (count($artistic_deactive) > 0) {
-            $this->getcountryandskill();
-            // redirect('find-artist');
-        // }
+        if (count($artistic_deactive) > 0) {
+            // $this->getcountryandskill();
+            redirect('find-artist');
+        }
         //if user deactive profile then redirect to artist/index untill active profile End
 
         // $segment3 = explode('-', $this->uri->segment(3));
@@ -531,10 +532,10 @@ class Artist_live extends MY_Controller {
 
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
-        // if (count($artistic_deactive) > 0) {
-            $this->getcountryandskill();
-            // redirect('find-artist');
-        // }
+        if (count($artistic_deactive) > 0) {
+            // $this->getcountryandskill();
+            redirect('find-artist');
+        }
         //if user deactive profile then redirect to artist/index untill active profile End
 
         // $segment3 = explode('-', $this->uri->segment(3));
@@ -573,10 +574,10 @@ class Artist_live extends MY_Controller {
 
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
-        // if (count($artistic_deactive) > 0) {
-            $this->getcountryandskill();
-            // redirect('find-artist');
-        // }
+        if (count($artistic_deactive) > 0) {
+            // $this->getcountryandskill();
+            redirect('find-artist');
+        }
         //if user deactive profile then redirect to artist/index untill active profile End
 
         $slugdata = $this->getdatafromslug($slugname);
@@ -618,10 +619,10 @@ class Artist_live extends MY_Controller {
 
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
-        // if (count($artistic_deactive) > 0) {
+        if (count($artistic_deactive) > 0) {
             $this->getcountryandskill();
-            // redirect('find-artist');
-        // }
+            redirect('find-artist');
+        }
         //if user deactive profile then redirect to artist/index untill active profile End
 
         // $segment3 = explode('-', $this->uri->segment(3));
@@ -661,10 +662,10 @@ class Artist_live extends MY_Controller {
 
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
-        // if (count($artistic_deactive) > 0) {
-            $this->getcountryandskill();
-            // redirect('find-artist');
-        // }
+        // $this->getcountryandskill();
+        if (count($artistic_deactive) > 0) {
+            redirect('find-artist');
+        }
         //if user deactive profile then redirect to artist/index untill active profile End
 
         // $segment3 = explode('-', $this->uri->segment(3));
@@ -880,10 +881,10 @@ class Artist_live extends MY_Controller {
         //if user deactive profile then redirect to artist/index untill active profile start
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
-        // if (count($artistic_deactive) > 0) {
-            $this->getcountryandskill();
-            // redirect('find-artist');
-        // }
+        if (count($artistic_deactive) > 0) {
+            // $this->getcountryandskill();
+            redirect('find-artist');
+        }
         //if user deactive profile then redirect to artist/index untill active profile End
 
         // $segment3 = explode('-', $this->uri->segment(3));

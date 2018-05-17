@@ -28,22 +28,23 @@
             // }
             ?>
         <?php
-
-            echo $ismainregister;
-            echo $isartistactivate;
-            echo $artist_isregister;
+        // } else{
+                //     $this->load->view('artist_live/login_header');
+                // }
        ?>
 
-        <?php if ($ismainregister == false) {
+        <?php 
+            if ($ismainregister == false) {
                 $this->load->view('artist_live/login_header');
             }else if($isartistactivate == true && $artist_isregister){
                 echo $artistic_header2;
             }else{
                 echo $header_profile;
             }
-         ?>
-
-            <?php if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ 
+        ?>
+            <?php 
+                if($ismainregister == false || $isartistactivate == false || $artist_isregister == false){ 
+                // if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ 
             ?>
             <div class="middle-section middle-section-banner">
             <?php
