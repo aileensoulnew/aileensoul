@@ -40,8 +40,9 @@ if($browser == "Firefox")
                     <?php
                         $first_segment = $this->uri->segment(1);
                         $isartist_segment = strpos($first_segment, 'artist');
+                        $isjob_segment = strpos($first_segment, 'jobs');
                     ?>
-                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-profile' && ($first_segment != 'artist' && $first_segment != 'find-artist' && $isartist_segment === FALSE) && $first_segment != 'job')) { ?>
+                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-profile' && ($first_segment != 'artist' && $first_segment != 'find-artist' && $isartist_segment === FALSE) && (($first_segment != 'job' && $first_segment != 'job-search'  && $isjob_segment === FALSE)))) { ?>
                         <form ng-submit="search_submit" action="<?php echo base_url('searchh') ?>">
                             <input type="text" name="q" placeholder="Search.." id="search">
                         </form>
