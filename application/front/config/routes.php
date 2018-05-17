@@ -419,14 +419,6 @@ $route['job/company/(:any)'] = "job_live/company/$1";
 $route['job/search'] = "job_live/job_search";
 $route['job/reactivateacc'] = "job_live/reactivateacc";
 
-$route['recruiter'] = "recruiter_live/index";
-$route['recruiter/category/(:any)'] = "recruiter_live/category/$1";
-$route['recruiter/city/(:any)'] = "recruiter_live/city/$1";
-$route['recruiter/skill/(:any)'] = "recruiter_live/skill/$1";
-$route['recruiter/company/(:any)'] = "recruiter_live/company/$1";
-$route['recruiter/search'] = "recruiter_live/job_search";
-$route['recruiter/reactivateacc'] = "recruiter_live/reactivateacc";
-
 $route['job/home'] = "job/job_all_post";
 $route['job/home/live-post'] = "job/job_all_post/$1";
 
@@ -448,8 +440,8 @@ $route['job/registration'] = "job/job_reg";
 $route['job/registration/live-post'] = "job/job_reg";
 $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";
 //$route['job/search'] = "job/job_search";
- $route['jobs'] = "job/job_search";
- $route['jobs/(:any)'] = "job/job_search/$1";
+ // $route['jobs'] = "job/job_search";
+ // $route['jobs/(:any)'] = "job/job_search/$1";
 //$route['(:any)'] = "job/job_search";
 //$route['(:any)-jobs'] = "job/job_search";//old
 $route['(:any)-jobs'] = "job/job_search_new/$1";//Pratik Job By Job Title,Job by Category,Job by Skills
@@ -461,6 +453,7 @@ $route['jobs-by-skills'] = "job_live/view_more_jobs";
 $route['jobs-by-designations'] = "job_live/view_more_jobs";
 $route['jobs-by-companies'] = "job_live/view_more_jobs";
 $route['jobs-by-categories'] = "job_live/view_more_jobs";
+$route['jobs'] = "job_live/view_more_jobs";
 
 /*$route['jobs-in-(:any)'] = "job/job_search";
 $route['(:any)-jobs-in-(:any)'] = "job/job_search";*/
@@ -470,6 +463,14 @@ $route['job/recruiter-profile/(:any)'] = "job/rec_profile/$1";
 
 
 //RECRUITER ROUTES SETTINGS
+
+$route['recruiter'] = "recruiter_live/index";
+$route['recruiter/category/(:any)'] = "recruiter_live/category/$1";
+$route['recruiter/city/(:any)'] = "recruiter_live/city/$1";
+$route['recruiter/skill/(:any)'] = "recruiter_live/skill/$1";
+$route['recruiter/company/(:any)'] = "recruiter_live/company/$1";
+$route['recruiter/search'] = "recruiter_live/job_search";
+$route['recruiter/reactivateacc'] = "recruiter_live/reactivateacc";
 
 $route['recruiter/registration'] = "recruiter/rec_reg";
 $route['recruiter/registration/live-post'] = "recruiter/rec_reg";

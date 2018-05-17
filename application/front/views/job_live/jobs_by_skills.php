@@ -8,6 +8,7 @@
                         <li><a href="<?php echo base_url(); ?>jobs-by-location"><span class="hidden-xs">Job by</span> Location</a></li>
                         <li><a href="<?php echo base_url(); ?>jobs-by-companies"><span class="hidden-xs">Job by</span> Company</a></li>
                         <li><a href="<?php echo base_url(); ?>jobs-by-designations"><span class="hidden-xs">Job by</span> Designation</a></li>
+                        <li><a href="<?php echo base_url(); ?>jobs"><span class="hidden-xs">Jobs</a></li>
                     </ul>
                 </div>
                 <div class="all-detail-box">

@@ -45,6 +45,10 @@ app.config(function ($routeProvider, $locationProvider) {
             .when("/jobs-by-categories", {
                 templateUrl: base_url + "job_live/jobs_by_categories",
                 controller: 'jobsBycategoryController'
+            })
+            .when("/jobs", {
+                templateUrl: base_url + "job_live/jobs_by_jobs",
+                controller: 'jobsByjobsController'
             });            
     $locationProvider.html5Mode(true);
 });
@@ -354,6 +358,27 @@ app.controller('jobsBycategoryController', function ($scope, $http, $location, $
     
 });
 
+app.controller('jobsByjobsController', function ($scope, $http, $location, $window) {
+    $scope.title = "Jobs, Job Profile | Aileensoul";    
+    $scope.jobByJobs = {};
+    $scope.jobs = {};
+    var isProcessing = false;
+    function jobJobs(pagenum = "") {
+        if (isProcessing) {            
+            return;
+        }
+        $('#loader').show();
+        isProcessing = true;
+        $http.get(base_url + "job_live/jobs_by_jobs_ajax?page=" + pagenum).then(function (success) {
+            $scope.jobByJobs = data = success.data;
+        }, function (error) {});
+    }
+    jobJobs(1);  
+    
+    
+    
+});
+
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({
         autoHideScrollbar: true,
@@ -361,23 +386,23 @@ $(window).on("load", function () {
     });
 });
 
-    // NEW HTML SCRIPT
+// NEW HTML SCRIPT
 
-    AOS.init({
-        easing: 'ease-in-out-sine'
-    });
+AOS.init({
+    easing: 'ease-in-out-sine'
+});
 
-    setInterval(addItem, 100);
+setInterval(addItem, 100);
 
-    var itemsCounter = 1;
-    var container = document.getElementById('aos-demo');
+var itemsCounter = 1;
+var container = document.getElementById('aos-demo');
 
-    function addItem () {
-        if (itemsCounter > 42) return;
-        var item = document.createElement('div');
-        item.classList.add('aos-item');
-        item.setAttribute('data-aos', 'fade-up');
-        item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
-        // container.appendChild(item);
-        itemsCounter++;
-    }
+function addItem () {
+    if (itemsCounter > 42) return;
+    var item = document.createElement('div');
+    item.classList.add('aos-item');
+    item.setAttribute('data-aos', 'fade-up');
+    item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
+    // container.appendChild(item);
+    itemsCounter++;
+}

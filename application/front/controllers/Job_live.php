@@ -403,4 +403,50 @@ class Job_live extends MY_Controller {
         $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
         echo json_encode($jobCat);
     }
+
+    public function jobs_by_jobs()
+    {
+        $this->load->view('job_live/jobs_by_jobs', $this->data);
+    }
+    public function jobs_by_jobs_ajax()
+    {        
+        /*if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
+        echo json_encode($jobCat);*/
+
+        $page = 1;
+        $limit = 20;
+        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
+        $jobDesc = $this->job_model->get_job_designations($page,$limit);
+        $jobSkill = $this->job_model->get_job_skills($page,$limit);
+        $jobCity = $this->job_model->get_job_city($page,$limit);        
+        $all_link = array();
+        foreach ($jobCity['job_city'] as $key => $value) {
+            $i=0;
+            foreach ($jobCat['job_cat'] as $jck => $jcv) {
+                $all_link[$value['slug']]['category'][$i]['name'] = $jcv['industry_name']." Jobs In ".$value['city_name'];
+                $all_link[$value['slug']]['category'][$i]['slug'] = $jcv['industry_slug']."-jobs-in-".$value['slug'];
+                $i++;
+            }
+            foreach ($jobDesc['job_desc'] as $jdk => $jdv) {
+                $all_link[$value['slug']]['designation'][$i]['name'] = $jdv['job_title']." Jobs In ".$value['city_name'];
+                $all_link[$value['slug']]['designation'][$i]['slug'] = $jdv['job_slug']."-jobs-in-".$value['slug'];
+                $i++;
+            }
+            foreach ($jobSkill['job_skills'] as $jsk => $jsv) {
+                $all_link[$value['slug']]['skills'][$i]['name'] = $jsv['skill']." Jobs In ".$value['city_name'];
+                $all_link[$value['slug']]['skills'][$i]['slug'] = $jsv['skill_slug']."-jobs-in-".$value['slug'];
+                $i++;
+            }
+        }
+        echo json_encode($all_link);
+        //print_r($all_link);
+    }
 }
