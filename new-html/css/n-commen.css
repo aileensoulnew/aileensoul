@@ -1161,7 +1161,7 @@ footer ul li a:hover{
 .sub-header .dropdown.open .dropdown-menu.account{width:180px; padding-top:0;}
 .sub-header .dropdown.open .dropdown-menu.account li:first-child{padding:10px; border-bottom:1px solid #d2d2d2; font-size:16px;}
 .sub-header .job-search-box1{float:right;}
-.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:3px 10px 0 0; }
+.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:1px 10px 0 0; }
 .sub-header .job-search-box1 fieldset.sec_h2 input{border:1px solid #c0c0c0;}
 .sub-header .new-search-btn{float:left; width:28px; height:28px; margin-top:6px; border:1px solid #c0c0c0; border-radius:4px; padding:0;}
 .sub-header .new-search-btn label i{background:none; padding:3px 4px 4px 5px;}
@@ -1174,7 +1174,7 @@ footer ul li a:hover{
 .mob-bottom-menu li{float:left; list-style-type:none; width:20%; text-align:center; margin-bottom:0;}
 .mob-bottom-menu li > a{position:relative;}
 .mob-bottom-menu li > a .noti-box{right:-5px; top:-8px; color:#fff;}
-.mobile-header .sub-header .sub-menu li{padding:0 5px; width:33.33%; text-align:center;}
+.mobile-header .sub-header .sub-menu li{padding:0 4px; width:33.33%; text-align:center;}
 .mobile-header .sub-header.bus-only .sub-menu li{width:25%;}
 .mobile-header .sub-header .sub-menu li > a i{padding-right:0px;}
 .mobile-header .sub-header .sub-menu li a{font-size:14px; position:relative; display:inline-block; padding-top:5px; letter-spacing:1px;}
@@ -1473,6 +1473,8 @@ svg path{
 	.none-sub-menu{display:none;}
 	.mobile-header .sub-header .sub-menu li{width:30%;}
 	.mobile-header .sub-header .sub-menu li:first-child{width:40%;}	
+	.mobile-header .sub-header .sub-menu.rec-only li:first-child{width:41%;}	
+	.mobile-header .sub-header .sub-menu.rec-only li:last-child{width:29%;}	
 }
 @media screen and (max-width: 359px) {
 	.search-mob-block{width:63%;}
