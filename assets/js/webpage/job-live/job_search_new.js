@@ -161,6 +161,80 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
     }
     jobTitle(8);
 
+    //apply post start
+    $scope.applypopup = function(postid, userid)
+    {
+        if(job_profile_set == 0 && login_user_id != "")
+        {
+            $("#job_apply").val(postid);
+            $("#job_apply_userid").val(userid);
+            $("#job_save").val('');
+            $('#job_reg').modal('show');
+        }
+        else
+        {
+            $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
+            $('#bidmodal').modal('show');
+        }
+    };
+
+    $scope.apply_post = function(abc, xyz) {
+        var alldata = 'all';
+        var user = xyz;
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'job/job_apply_post',
+            data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
+            datatype: 'json',
+            success: function (data) {
+                $('.savedpost' + abc).hide();
+                $('.applypost' + abc).html(data.status);
+                $('.applypost' + abc).attr('disabled', 'disabled');
+                $('.applypost' + abc).attr('onclick', 'myFunction()');
+                $('.applypost' + abc).addClass('applied');
+
+                if (data.notification.notification_count != 0) {
+                    var notification_count = data.notification.notification_count;
+                    var to_id = data.notification.to_id;
+                    show_header_notification(notification_count, to_id);
+                }
+            }
+        });
+    };
+    //apply post end
+
+    //save post start 
+    $scope.savepopup  = function(id) {
+        
+        if(job_profile_set == 0 && login_user_id != "")
+        {
+            $("#job_apply_userid").val('');
+            $("#job_apply").val('');
+            $("#job_save").val(id);
+            $('#job_reg').modal('show');
+        }
+        else
+        {
+            save_post(id);
+            $('.biderror .mes').html("<div class='pop_content'>Job successfully saved.");
+            $('#bidmodal').modal('show');
+        }
+    };
+
+    function save_post(abc)
+    {
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'job/job_save',
+            data: 'post_id=' + abc,
+            success: function (data) {
+                $('.' + 'savedpost' + abc).html(data).addClass('saved');
+            }
+        });
+
+    };
+
     $scope.applyJobFilter = function () {
         $scope.cmp_fil = "";
         $('.company-filter').each(function(){

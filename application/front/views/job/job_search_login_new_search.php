@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <!-- END HEAD -->
 
@@ -49,7 +51,7 @@
                 </div>
             </header>
         <?php }else{
-            echo $header;
+            echo $header_profile;
             } ?>
             <div class="middle-section middle-section-banner">
                 <?php echo $search_banner ?>
@@ -823,6 +825,8 @@
 <?php } ?>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
@@ -844,6 +848,7 @@
         var w = '';
         var app = angular.module('jobSearchApp', ['ngRoute','ui.bootstrap']);
     </script>
+    <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_search_login_new_search.js?ver=' . time()); ?>"></script>
     

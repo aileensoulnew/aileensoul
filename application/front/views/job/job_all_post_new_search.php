@@ -12,9 +12,16 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page">
-        <?php echo $header_profile; ?>
+        <?php 
+        if($job_deactive == 0)
+            echo $job_header2;
+        else if ($job_deactive > 0) {
+            echo $header_profile;
+                 } ?>
         <div class="middle-section middle-section-banner">
             <?php echo $search_banner ?>
             <div class="container">
@@ -209,7 +216,7 @@
                     <div class="page-title">
                         <h3>Latest Job</h3>
                     </div>
-                    <div class="all-job-box" ng-repeat="job in latestJob">
+                    <div class="all-job-box" ng-repeat="job in searchJob">
                         <div class="all-job-top">
                             <div class="post-img">
                                 <a href="#" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
@@ -250,28 +257,35 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        </div>        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
-                                var base_url = '<?php echo base_url(); ?>';
-                                var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                var title = '<?php echo $title; ?>';
-                                var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                var q = '';
-                                var l = '';
-                                var w = '';
-                                var company_id = '<?php echo $company_id ?>';
-                                var app = angular.module('jobSearchApp', ['ui.bootstrap']);
+                var base_url = '<?php echo base_url(); ?>';
+                var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+                var title = '<?php echo $title; ?>';
+                var header_all_profile = '<?php echo $header_all_profile; ?>';
+                var q = '';
+                var l = '';
+                var w = '';
+                var company_id = '<?php echo $company_id ?>';
+                var skill = '<?php echo $keyword; ?>';
+                //var skill = skill.replace(/\-/g, ' ');
+
+                var search_location = '<?php echo $search_location; ?>';
+                //var place = place.replace(/\-/g, ' ');
+                var app = angular.module('jobSearchApp', ['ui.bootstrap']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/company.js?ver=' . time()) ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_search_login_new_search.js?ver=' . time()); ?>"></script>
     </body>
 </html>

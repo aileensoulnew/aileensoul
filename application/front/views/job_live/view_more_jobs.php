@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style>
           .ui-autocomplete {
             max-height: 100px;
@@ -33,19 +35,19 @@
           </style>
     </head>
     <body class="profile-main-page">    
-        <?php if($user_id != "")
-        {
+        <?php 
+        if($job_deactive == 0)
+            echo $job_header2;
+        else if ($job_deactive > 0) {
             echo $header_profile;
-        } ?>    
+                 } ?>   
         <div class="middle-section middle-section-banner new-ld-page">
             <?php echo $search_banner; ?>
             
             <div class="container pt20">
                 <div ng-view></div>
             </div>
-        </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        </div>        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>

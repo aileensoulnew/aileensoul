@@ -5,6 +5,11 @@ $this->load->model('user_post_model');
 $userid = $this->session->userdata('aileenuser');
 $this->data['userdata'] = $this->user_model->getUserData($userid);
 
+$contition_array_job = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+$job_deactive = $this->common->select_data_by_condition('job_reg', $contition_array_job, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+$this->data['job_deactive'] = $job_deactive[0]['total'];
+
 $contition_array = array('not_read' => '2', 'not_to_id' => $userid, 'not_type !=' => '1', 'not_type !=' => '2');
 $result = $this->common->select_data_by_condition('notification', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 $this->data['user_notification_count'] = $count = $result[0]['total'];

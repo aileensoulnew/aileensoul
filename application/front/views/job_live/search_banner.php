@@ -21,7 +21,7 @@
     <div class="container">
         <div class="text-right pt20">
             <!--  -->
-            <?php if(!$isjobdeactivate || $isjobdeactivate == false) { ?>
+            <?php if((!$isjobdeactivate || $isjobdeactivate == false) && $job_deactive == 0) { ?>
                 <a class="btn5" href="<?php echo $job_profile_link; ?>">Create Job Profile</a>
             <?php } else{ ?>
                 <a class="btn5" href="<?php echo base_url('job/reactivateacc'); ?>">Reactivate Job Profile</a>

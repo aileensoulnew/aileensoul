@@ -48,9 +48,10 @@ class Job_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Job Profile | Aileensoul";
         //$this->load->view('job_live/index', $this->data);
-        if($this->job_profile_set == 1)
+        /*if($this->job_profile_set == 1)
             $this->load->view('job_live/index', $this->data);
-        else if($userid != "")
+        else */
+        if($userid != "" || $this->job_profile_set == 1)
             $this->load->view('job_live/without_job_register', $this->data);
         else
             $this->load->view('job_live/without_main_register', $this->data);
