@@ -1926,8 +1926,16 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 
 .middle-section.job-reg-cus{padding-bottom:0;}
 .middle-section.art-reg-cus{padding-bottom:0;}
+.middle-section.rec-reg-cus{padding-bottom:0;}
+.middle-section.bus-reg-cus{padding-bottom:0;}
+.middle-section.free-hire-reg-cus{padding-bottom:0;}
+.middle-section.free-work-reg-cus{padding-bottom:0;}
 .job-reg-cus{background:url('../n-images/job-reg-cus.jpg'); background-size:100%; background-attachment:fixed;}
-.art-reg-cus{background:url('../n-images/recruiter-img.jpg'); background-size:100%; background-attachment:fixed;}
+.art-reg-cus{background:url('../n-images/art-img.jpg'); background-size:100%; background-attachment:fixed;}
+.rec-reg-cus{background:url('../n-images/recruiter-img.jpg'); background-size:100%; background-attachment:fixed;}
+.bus-reg-cus{background:url('../n-images/bus-img.jpg'); background-size:100%; background-attachment:fixed;}
+.free-hire-reg-cus{background:url('../n-images/free-hire-bnr-img.jpg'); background-size:100%; background-attachment:fixed;}
+.free-work-reg-cus{background:url('../n-images/free-apply-img.jpg'); background-size:100%; background-attachment:fixed;}
 
 body.reg-form-cus{padding-bottom:0;}
 .title-div{width:100%; text-align:center; padding-bottom:35px;}
@@ -1960,16 +1968,18 @@ body.reg-form-cus{padding-bottom:0;}
 .reg-form-cus .form-group.cus_field{width:100%; float:left;}
 .reg-form-cus .student-or-not{letter-spacing:1px;}
 .reg-form-cus .cus-radio-box{float:left; width:auto;}
+
 .reg-form-cus .cus-radio-box label{margin-top:0; width:auto;}
 .reg-form-cus .cus-radio-box .main_raio{width:90px; float:left;}
 .reg-form-cus .cus-radio-box .main_raio input{width:30px; float:left; height:auto;}
 .reg-form-cus .final-reg-form .login .form-group input{font-size:14px !important; padding:6px 0 0;}
-.reg-form-cus .final-reg-form .login .form-group select{font-size:14px !important; padding:6px 0 0; color:#c0bebe;}
+.reg-form-cus .final-reg-form .login .form-group select{font-size:14px !important; padding:6px 0 0; }
+.reg-form-cus .final-reg-form .login .form-group textarea{font-size:14px !important; padding:6px 0 0; color:#848484;}
 .reg-form-cus .final-reg-form .login .form-group select option{padding-left:0;}
 .reg-form-cus .email-note-cus{position:absolute; right:0; top:10px;}
 .reg-form-cus .email-note-cus img{width:18px;}
 .reg-form-cus #art-registration .email-note-cus img{width:15px;}
-.reg-form-cus .final-reg-form{color:#c0bebe;}
+.reg-form-cus .final-reg-form{color:#848484;}
 
 .main_raio [type=radio]:checked,.main_raio [type=radio]:not(:checked){
     position:absolute; left:-9999px}
@@ -1994,6 +2004,18 @@ body.reg-form-cus{padding-bottom:0;}
     opacity:1; -webkit-transform:scale(1); transform:scale(1)
 }
 .form-group{width:100%; float:left;}
+.reg-form-cus input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #848484;
+}
+.reg-form-cus input::-moz-placeholder { /* Firefox 19+ */
+  color: #848484;
+}
+.reg-form-cus input:-ms-input-placeholder { /* IE 10+ */
+  color: #848484;
+}
+.reg-form-cus input:-moz-placeholder { /* Firefox 18- */
+  color: #848484;
+}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -2257,6 +2279,8 @@ body.reg-form-cus{padding-bottom:0;}
 	.middle-section.job-reg-cus{margin:0;}
 	.reg-form-cus .inner-form{padding:0;}
 	.job-reg-cus{background-size:cover;}
+	.rec-reg-cus{background-size:cover;}
+	.art-reg-cus{background-size:cover;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
@@ -2404,6 +2428,7 @@ body.reg-form-cus{padding-bottom:0;}
 	.no-data-available .art-img-nn{width:100%;}
 	.post-popup-box textarea{font-size:12px !important; letter-spacing:0.5px;}
 	.post-popup-box .all-upload .upload_icon .upload_span_icon{font-size:12px;}
+	.title-div ul li a{font-size:13px;}
 }
 @media screen and (max-width: 359px) {
 	.all-job-bottom{text-align:center;}
