@@ -14,61 +14,13 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
     </head>
     <body class="profile-main-page">    
         <?php echo $header_profile;?>    
         <div class="middle-section middle-section-banner">
             
-            <div class="search-banner" >
-                
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="search-bnr-text">
-                                <h1>Find the Right Job Opportunities</h1>
-                                <p>Because Dream Matters </p>
-                            </div>
-                            <div class="search-box">
-                                <form>
-                                    <div class="pb20 search-input">
-                                        <input type="text" placeholder="Job Title, Keywords, or Company ">
-                                        <input class="city-input" type="text" placeholder="City, State or Country">
-                                        
-                                    </div>
-                                    <div class="pt5 fw pb20">
-                                        <ul class="work-timing fw">
-                                            <li>
-                                                <label class="control control--checkbox">Full-Time
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="control control--checkbox">Part-Time
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="control control--checkbox">Internship
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="fw pt20">
-                                        <a href="#" class="btn1">View More Jobs</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-6 right-bnr">
-                            <img src="<?php echo base_url('assets/n-images/job-bnr.png?ver=' . time()) ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php echo $search_banner; ?>
             
             <div class="container pt20">
                 <div class="left-part">
@@ -338,9 +290,11 @@
             </div>
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>

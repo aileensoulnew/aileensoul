@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="noJobReg" ng-controller="noJobRegController">
+<html lang="en" ng-app="jobSearch" ng-controller="jobSearchController">
     <head>
         <title ng-bind="title"></title>
         <meta name="robots" content="noindex, nofollow">
@@ -233,9 +233,9 @@
                 </div>
                 <div class="middle-part">                    
                     <div class="page-title">
-                        <h3>Latest Job</h3>
+                        <h3>Search Result</h3>
                     </div>
-                    <div class="user_no_post_avl ng-scope" ng-if="latestJob.length == 0">
+                    <div class="user_no_post_avl ng-scope" ng-if="job_search.length == 0">
                         <div class="user-img-nn">
                             <div class="user_no_post_img">
                                 <img src="<?php echo base_url('assets/img/no-post.png?ver=time()');?>" alt="bui-no.png">
@@ -243,7 +243,7 @@
                             <div class="art_no_post_text">No Jobs Available.</div>
                         </div>
                     </div>
-                    <div class="all-job-box" ng-repeat="job in latestJob">
+                    <div class="all-job-box" ng-repeat="job in job_search">
                         <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="jobs.page_number" ng-value="{{jobs.page_number}}">
                         <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="jobs.total_record" ng-value="{{jobs.total_record}}">
                         <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
@@ -307,15 +307,16 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var q = "<?php echo $q ?>";
             var l = "<?php echo $l ?>";
-            setTimeout(function(){                
-                $("#job_keyword").val(q);
-                $("#job_location").val(l);
-            },100);
+            
             var w = '';
-            var app = angular.module('noJobReg', ['ui.bootstrap']);
+            var work_timing = "<?php echo $work_timing ?>";
+            var app = angular.module('jobSearch', ['ui.bootstrap']);
+            $(document).ready(function(){
+                $(window).scrollTop(500);
+            });
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/job-live/without_job_regi.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/job-live/job_search_new.js?ver=' . time()) ?>"></script>
     </body>
 </html>

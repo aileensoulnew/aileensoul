@@ -51,23 +51,26 @@ $(function() {
     function extractLast( term ) { 
         return split( term ).pop();
     }
-    $( "#job_keyword" ).focusout(function() {
-        if($( "#job_keyword" ).val() != "")
+    $( "input[name='job_keyword']" ).focusout(function() {
+        if($( "input[name='job_keyword']" ).val() != "")
         {
-            var ser_val = $( "#job_keyword" ).val();            
-            ser_val_ = ser_val.substring(0, ser_val.length-1);            
-            $( "#job_keyword" ).val(ser_val_)
+            var ser_val = $( "input[name='job_keyword']" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {                
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "input[name='job_keyword']" ).val(ser_val_)
+            }
         }
     });
-    $( "#job_keyword" ).focusin(function() {
-        if($( "#job_keyword" ).val() != "")
+    $( "input[name='job_keyword']" ).focusin(function() {
+        if($( "input[name='job_keyword']" ).val() != "")
         {
-            var ser_val = $( "#job_keyword" ).val();            
+            var ser_val = $( "input[name='job_keyword']" ).val();            
             ser_val_ = ser_val+",";
-            $( "#job_keyword" ).val(ser_val_)
+            $( "input[name='job_keyword']" ).val(ser_val_)
         }
     });
-    $( "#job_keyword" ).bind( "keydown", function( event ) {
+    $( "input[name='job_keyword']" ).bind( "keydown", function( event ) {
         if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
             event.preventDefault();
         }
@@ -106,23 +109,26 @@ $(function() {
         }
     });
 
-    $( "#job_location" ).focusout(function() {
-        if($( "#job_location" ).val() != "")
+    $( "input[name='job_location']" ).focusout(function() {
+        if($( "input[name='job_location']" ).val() != "")
         {
-            var ser_val = $( "#job_location" ).val();            
-            ser_val_ = ser_val.substring(0, ser_val.length-1);            
-            $( "#job_location" ).val(ser_val_)
+            var ser_val = $( "input[name='job_location']" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "input[name='job_location']" ).val(ser_val_)
+            }
         }
     });
-    $( "#job_location" ).focusin(function() {
-        if($( "#job_location" ).val() != "")
+    $( "input[name='job_location']" ).focusin(function() {
+        if($( "input[name='job_location']" ).val() != "")
         {
-            var ser_val = $( "#job_location" ).val();            
+            var ser_val = $( "input[name='job_location']" ).val();            
             ser_val_ = ser_val+",";
-            $( "#job_location" ).val(ser_val_)
+            $( "input[name='job_location']" ).val(ser_val_)
         }
     });
-    $( "#job_location" ).bind( "keydown", function( event ) {
+    $( "input[name='job_location']" ).bind( "keydown", function( event ) {
         if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
             event.preventDefault();
         }

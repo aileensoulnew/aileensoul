@@ -1036,4 +1036,245 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $result_array = $query->result_array();
         return $result_array;
     }
+
+    function get_job_search_new_result($userid = "",$job_keyword = "",$job_location = "",$work_time = "",$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$page = "",$limit = "5")
+    {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $sql = "";
+        if($company_id != "")
+        {
+            $sql .= "r.rec_id IN (".$company_id.") OR ";
+        }
+        if($category_id != "")
+        {
+            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+        }
+        if($location_id != "")
+        {
+            $sql .= "rp.city IN (".$location_id.") OR ";
+        }
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+
+        if($job_desc != "")
+        {
+            $sql .= "rp.post_name IN (".$job_desc.") OR";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(rp.max_year >= 1 AND rp.max_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(rp.max_year >= 2 AND rp.max_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(rp.max_year >= 3 AND rp.max_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(rp.max_year >= 4 AND rp.max_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(rp.max_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+        
+        $sql_skill = "";$sql_jt = "";$sql_cn = "";$sql_it = "";        
+        foreach (explode(",", $job_keyword) as $key => $value) {        
+            $sql_skill .= "skill LIKE '".$value."%' OR ";
+            $sql_jt .= "jt.name LIKE '".$value."%' OR ";
+            $sql_cn .= "r.re_comp_name LIKE '".$value."%' OR ";
+            $sql_it .= "industry_name LIKE '".$value."%' OR ";
+        }
+        $sql_work_time = "";
+        foreach (explode("-", $work_time) as $key => $value) {
+            if($value == '1')
+            {
+                $sql_work_time .= "rp.emp_type = 'Full Time' OR ";
+            }
+            else if($value == '2')
+            {
+                $sql_work_time .= "rp.emp_type = 'Part Time' OR ";   
+            }
+            else if($value == '3')
+            {
+                $sql_work_time .= "rp.emp_type = 'Internship' OR ";
+            }
+        }
+
+        $this->db->select("rp.post_id,rp.post_name,jt.name as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo")->from('rec_post rp');
+        $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
+        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $sql_ser = "(rp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
+            OR
+            (".trim($sql_jt, ' OR ').")
+            OR
+            (".trim($sql_cn, ' OR ').")
+            OR
+            rp.industry_type REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]')
+        )";
+        $this->db->where($sql_ser,false,false);
+        if($sql_work_time != "")
+        {            
+            $this->db->where("(".trim($sql_work_time, ' OR ').")",false,false);
+        }
+        $this->db->order_by('rp.post_id', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        $retur_arr['searchJobs'] = $result_array;
+        $retur_arr['total_record'] = $this->get_job_search_new_result_total_rec($userid,$job_keyword,$job_location,$work_time,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil);
+        return $retur_arr;
+    }
+
+    function get_job_search_new_result_total_rec($userid = "",$job_keyword = "",$job_location = "",$work_time = "",$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "")
+    {
+        $sql = "";
+        if($company_id != "")
+        {
+            $sql .= "r.rec_id IN (".$company_id.") OR ";
+        }
+        if($category_id != "")
+        {
+            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+        }
+        if($location_id != "")
+        {
+            $sql .= "rp.city IN (".$location_id.") OR ";
+        }
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+
+        if($job_desc != "")
+        {
+            $sql .= "rp.post_name IN (".$job_desc.") OR";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(rp.max_year >= 1 AND rp.max_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(rp.max_year >= 2 AND rp.max_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(rp.max_year >= 3 AND rp.max_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(rp.max_year >= 4 AND rp.max_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(rp.max_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+        
+        $sql_skill = "";$sql_jt = "";$sql_cn = "";$sql_it = "";        
+        foreach (explode(",", $job_keyword) as $key => $value) {        
+            $sql_skill .= "skill LIKE '".$value."%' OR ";
+            $sql_jt .= "jt.name LIKE '".$value."%' OR ";
+            $sql_cn .= "r.re_comp_name LIKE '".$value."%' OR ";
+            $sql_it .= "industry_name LIKE '".$value."%' OR ";
+        }
+
+        $sql_work_time = "";
+        foreach (explode("-", $work_time) as $key => $value) {
+            if($value == '1')
+            {
+                $sql_work_time .= "rp.emp_type = 'Full Time' OR ";
+            }
+            else if($value == '2')
+            {
+                $sql_work_time .= "rp.emp_type = 'Part Time' OR ";   
+            }
+            else if($value == '3')
+            {
+                $sql_work_time .= "rp.emp_type = 'Internship' OR ";
+            }
+        }
+
+        $this->db->select("COUNT(*) as total_record")->from('rec_post rp');
+        $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
+        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $sql_ser = "(rp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
+            OR
+            (".trim($sql_jt, ' OR ').")
+            OR
+            (".trim($sql_cn, ' OR ').")
+            OR
+            rp.industry_type REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]')
+        )";
+        $this->db->where($sql_ser,false,false);
+        if($sql_work_time != "")
+        {            
+            $this->db->where("(".trim($sql_work_time, ' OR ').")",false,false);
+        }
+        $query = $this->db->get();        
+        $result_array = $query->row_array();
+        
+        return $result_array['total_record'];
+    }
 }
