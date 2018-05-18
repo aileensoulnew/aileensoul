@@ -45,11 +45,11 @@
                                                                     <div class="cq_latest_left">
                                                                         <div class="cq_post_img">
                                                                             <?php if ($friend['business_user_image'] != '') { ?>
-                                                                                <a  href="<?php echo base_url('business-profile/dashboard/' . $friend['business_slug']); ?>">
+                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
                                                                                     <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image']; ?>">
                                                                                 </a>
                                                                             <?php } else { ?>
-                                                                                <a  href="<?php echo base_url('business-profile/dashboard/' . $friend['business_slug']); ?>">
+                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
                                                                                     <img src="<?php echo base_url(NOBUSIMAGE); ?>" />
                                                                                 </a>
                                                                             <?php } ?>
@@ -58,7 +58,7 @@
                                                                     <div class="cq_latest_right">
                                                                         <div class="cq_desc_post">
                                                                             <sapn class="rifght_fname">  
-                                                                                <a  href="<?php echo base_url('business-profile/dashboard/' . $friend['business_slug']); ?>">
+                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
                                                                                     <span class="main_name">
                                                                                         <?php echo ucfirst(strtolower($friend['company_name'])); ?> 
                                                                                     </span>
@@ -129,11 +129,11 @@
                                                                         <div class="cq_post_img">
 
                                                                             <?php if ($friend['business_user_image'] != '') { ?>
-                                                                                <a  href="<?php echo base_url('business-profile/dashboard/' . $friend['business_slug']); ?>">
+                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
                                                                                     <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image']; ?>">
                                                                                 </a>
                                                                             <?php } else { ?>
-                                                                                <a  href="<?php echo base_url('business-profile/dashboard/' . $friend['business_slug']); ?>">
+                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
                                                                                     <img src="<?php echo base_url(NOBUSIMAGE); ?>" />
                                                                                 </a>
                                                                             <?php } ?>
@@ -144,7 +144,7 @@
                                                                     <div class="cq_latest_right">
                                                                         <div class="cq_desc_post">
                                                                             <span class="rifght_fname">  
-                                                                                <a  href="<?php echo base_url('business-profile/dashboard/' . $friend['business_slug']); ?>">
+                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
                                                                                     <span class="main_name">
                                                                                         <?php echo ucfirst(strtolower($friend['company_name'])); ?> 
                                                                                     </span>

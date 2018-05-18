@@ -124,7 +124,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 <?php if ($busienss_data[0]['posted_user_id']) {
                                                     ?>
                                                     <?php if ($userimageposted) { ?>
-                                                        <a href="<?php echo base_url('business-profile/dashboard/' . $slugnameposted); ?>">
+                                                        <a href="<?php echo base_url('company/' . $slugnameposted); ?>">
                                                             <?php
                                                             if (IMAGEPATHFROM == 'upload') {
                                                                 if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $userimageposted)) {
@@ -149,13 +149,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                                                         </a>
                                                     <?php } else { ?>
-                                                        <a href="<?php echo base_url('business-profile/dashboard/' . $slugnameposted); ?>">
+                                                        <a href="<?php echo base_url('company/' . $slugnameposted); ?>">
                                                             <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="11">
                                                         </a>
                                                     <?php } ?>
                                                 <?php } else { ?>
                                                     <?php if ($business_userimage) { ?>
-                                                        <a href="<?php echo base_url('business-profile/dashboard/' . $slugname); ?>">
+                                                        <a href="<?php echo base_url('company/' . $slugname); ?>">
                                                             <?php
                                                             if (IMAGEPATHFROM == 'upload') {
                                                                 if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $business_userimage)) {
@@ -179,7 +179,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                             ?>
                                                         </a>
                                                     <?php } else { ?>
-                                                        <a href="<?php echo base_url('business-profile/dashboard/' . $slugname); ?>">
+                                                        <a href="<?php echo base_url('company/' . $slugname); ?>">
                                                             <img  src="<?php echo base_url(NOBUSIMAGE); ?>"  alt="9">
                                                         </a>
                                                         <?php
@@ -200,9 +200,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         <li>
                                                             <div class="else_post_d">
                                                                 <div class="post-design-product">
-                                                                    <a  class="other_name name_business post_dot" href="<?php echo base_url('business-profile/dashboard/' . $slugnameposted); ?>"><?php echo ucfirst(strtolower($companynameposted)); ?></a>
+                                                                    <a  class="other_name name_business post_dot" href="<?php echo base_url('company/' . $slugnameposted); ?>"><?php echo ucfirst(strtolower($companynameposted)); ?></a>
                                                                     <p class="posted_with" > Posted With </p>
-                                                                    <a  class="other_name name_business post_dot" href="<?php echo base_url('business-profile/dashboard/' . $slugname); ?>"><?php echo ucfirst(strtolower($companyname)); ?></a>
+                                                                    <a  class="other_name name_business post_dot" href="<?php echo base_url('company/' . $slugname); ?>"><?php echo ucfirst(strtolower($companyname)); ?></a>
                                                                     <span class="ctre_date">
                                                                         <?php echo $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($busienss_data[0]['created_date']))); ?>                     
                                                                     </span> 
@@ -211,7 +211,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         </li>
                                                     <?php } else { ?>
                                                         <li>
-                                                            <div class="post-design-product"><a class="post_dot" href="<?php echo base_url('business-profile/details/' . $slugname); ?>"> <span class="span_main_name">  <?php echo ucfirst(strtolower($companyname)); ?> </span> </a>
+                                                            <div class="post-design-product"><a class="post_dot" href="<?php echo base_url('company/' . $slugname . '/details'); ?>"> <span class="span_main_name">  <?php echo ucfirst(strtolower($companyname)); ?> </span> </a>
                                                                 <span class="ctre_date"> 
                                                                     <?php echo $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($busienss_data[0]['created_date']))); ?>      
                                                                 </span>
@@ -589,7 +589,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                     ?>
                                                                 </div>
                                                                 <div class="comment-name">
-                                                                    <b> <a href="<?php echo base_url('business-profile/details/' . $business_slug) ?>">
+                                                                    <b> <a href="<?php echo base_url('company/' . $business_slug . '/details') ?>">
                                                                             <?php
                                                                             echo $companyname;
                                                                             echo '</br>';
@@ -1047,7 +1047,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                 ?>
                                                             </div>
                                                             <div class="comment-name">
-                                                                <b> <a href="<?php echo base_url('business-profile/details/' . $business_slug) ?>"> 
+                                                                <b> <a href="<?php echo base_url('company/' . $business_slug . '/details') ?>"> 
                                                                         <?php
                                                                         echo ucfirst(strtolower($companyname));
                                                                         echo '</br>';

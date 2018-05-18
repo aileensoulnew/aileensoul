@@ -121,7 +121,7 @@
                                     $scope.errorImage = data.errors.image1;
                                 } else {
                                     if (data.is_success == '1') {
-                                        window.location.href = base_url + 'business-profile/home';
+                                        window.location.href = base_url + 'business-profile';
                                     } else {
                                         return false;
                                     }

@@ -514,4 +514,11 @@ class Business_model extends CI_Model {
         return $contacts_count;
     }
 
+    public function removelocationfromslug($slug){
+        $business_slugdata = explode('-', $slug);
+        array_pop($business_slugdata);
+        $slug = implode('-', $business_slugdata);
+        return $slug;
+    }
+
 }

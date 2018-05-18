@@ -612,3 +612,5 @@ define('SKILLS_IMG_PATH', BASEURL. 'uploads/skills_image/');
 // BUSINESS PROFILE
 define('business_category_list', BASEURL. 'business-profile/category');
 define('business_location_list', BASEURL. 'business-profile/location');
+
+define('business_register_step1', BASEURL. 'business-profile/registration/business-information');

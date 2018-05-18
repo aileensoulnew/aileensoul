@@ -78,6 +78,7 @@ function business_contacts(slug, pagenum) {
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+            check_no_contact_list();
         }
     });
 }
@@ -289,3 +290,10 @@ function contact_person(clicked_id) {
     });
 }
 
+function check_no_contact_list() {
+    //var numberPost = $('[id^="removepost"]').length;
+    var numberList = $('.job-contact-frnd').length;
+    if (numberList == 0) {
+        $('.contact-frnd-post').html(no_business_contact_html);
+    }
+}

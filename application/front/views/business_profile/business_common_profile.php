@@ -30,14 +30,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <div id="row2">
             <?php
             $userid = $this->session->userdata('aileenuser');
-            if ($this->uri->segment(3) == $userid) {
+            if ($this->uri->segment(2) == $userid) {
                 $user_id = $userid;
-            } elseif ($this->uri->segment(3) == "") {
+            } elseif ($this->uri->segment(2) == "") {
                 $user_id = $userid;
             } else {
-                $user_id = $this->db->get_where('business_profile', array('business_slug' => $this->uri->segment(3)))->row()->user_id;
+                $user_id = $this->db->get_where('business_profile', array('business_slug' => $this->uri->segment(2)))->row()->user_id;
             }
-
             $contition_array = array('user_id' => $user_id, 'is_deleted' => '0', 'status' => '1');
             $image = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -104,8 +103,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 <div class="business-profile-right">
                     <div class="bui-menu-profile">
                         <div class="profile-left">
-                            <h1 class="profile-head-text"><a href="<?php echo base_url('business-profile/details/' . $business_common_data[0]['business_slug'] . ''); ?>"> <?php echo ucfirst($business_common_data[0]['company_name']); ?></a></h1>
-                            <h2 class="profile-head-text_dg"><a href="<?php echo base_url('business-profile/details/' . $business_common_data[0]['business_slug'] . ''); ?>"> 
+                            <h1 class="profile-head-text"><a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/details'); ?>"> <?php echo ucfirst($business_common_data[0]['company_name']); ?></a></h1>
+                            <h2 class="profile-head-text_dg"><a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/details'); ?>"> 
                                     <?php
                                     if ($business_common_data[0]['industriyal']) {
                                         echo $industry_type = $this->db->get_where('industry_type', array('industry_id' => $business_common_data[0]['industriyal']))->row()->industry_name;
@@ -149,9 +148,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <div></div>
                                                     <div></div>
                                                     <div><span class="cancel_req_busi">   <img src="<?php echo base_url('assets/img/icon_contact_add.png'); ?>" alt="Add To Contact"></span></div>
-
                                                 </div>
-
 
                                                 <div class="addtocont">
                                                     <span class="ft-13"><i class="icon-user"></i>
@@ -251,11 +248,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <?php } else { ?>
                                     <ul class="bpro-fw">
                                     <?php } ?>  
-                                        <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" class="login_link" href="<?php echo base_url('business-profile/dashboard/' . $business_common_data[0]['business_slug']); ?>">Dashboard</a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'details') { ?> class="active" <?php } ?>><a title="Details" class="login_link" href="<?php echo base_url('business-profile/details/' . $business_common_data[0]['business_slug']); ?>"> Details</a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'contacts') { ?> class="active" <?php } ?>><a title="Contacts" href="javascript:void(0);" onclick="open_profile();"> Contacts <br>  (<span class="contactcount"><?php echo $business_user_contacts_count; ?></span>)</a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="javascript:void(0);" onclick="open_profile();">Followers <br>  <div id="countfollower">(<?php echo $business_user_follower_count; ?>)</div></a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="open_profile();">Following <br> <div id="countfollow">(<?php echo $business_user_following_count; ?>)</div></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" class="login_link" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']); ?>">Dashboard</a></li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'details') { ?> class="active" <?php } ?>>
+                                        <a title="Details" class="login_link" href="javascript:void(0);" onclick="open_profile();"> Details</a>
+                                    </li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'contacts') { ?> class="active" <?php } ?>><a title="Contacts" href="javascript:void(0);" onclick="open_profile();"> Contacts <br>  (<span class="contactcount"><?php echo $business_user_contacts_count; ?></span>)</a></li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="javascript:void(0);" onclick="open_profile();">Followers <br>  <div id="countfollower">(<?php echo $business_user_follower_count; ?>)</div></a></li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="open_profile();">Following <br> <div id="countfollow">(<?php echo $business_user_following_count; ?>)</div></a></li>
                                 </ul>
                                 <?php
                                 $userid = $this->session->userdata('aileenuser');
@@ -297,3 +296,39 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             </div>
         </div>
     </div>
+
+    <?php if($isbusiness_deactive == true){ ?>
+    <div class="modal fade login register-model" id="register" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content inner-form1">
+                <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                <div class="modal-body">
+                    <div class="clearfix">
+                        <div class="">
+                            <div class="title">
+                                <h1 class="tlh1">Reactiavte Business Profile</h1>
+                            </div>
+                            <div class="reactivatebox">
+                                <div class="reactivate_header">
+                                    <center><h2> Are you sure you want to reactive your business profile?</h2></center>
+                                </div>
+                                <div class="reactivate_btn_y">
+                                    <a href="<?php echo base_url('business_profile/reactivate'); ?>">Yes</a>
+                                </div>
+                                <div class="reactivate_btn_n">
+                                    <a href="javascript:void(0)" onclick="hideregisterpopup()">No</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+
+    <script type="text/javascript">
+        function hideregisterpopup() {
+            $('#register').modal('hide');
+        }
+    </script>

@@ -104,8 +104,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 <div class="business-profile-right">
                     <div class="bui-menu-profile">
                         <div class="profile-left">
-                            <h1 class="profile-head-text"><a href="<?php echo base_url('business-profile/details/' . $business_common_data[0]['business_slug'] . ''); ?>"> <?php echo ucfirst($business_common_data[0]['company_name']); ?></a></h1>
-                            <h2 class="profile-head-text_dg"><a href="<?php echo base_url('business-profile/details/' . $business_common_data[0]['business_slug'] . ''); ?>"> 
+                            <h1 class="profile-head-text"><a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/details'); ?>"> <?php echo ucfirst($business_common_data[0]['company_name']); ?></a></h1>
+                            <h2 class="profile-head-text_dg"><a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/details'); ?>"> 
                                     <?php
                                     if ($business_common_data[0]['industriyal']) {
                                         echo $industry_type = $this->db->get_where('industry_type', array('industry_id' => $business_common_data[0]['industriyal']))->row()->industry_name;
@@ -251,11 +251,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <?php } else { ?>
                                     <ul class="bpro-fw">
                                     <?php } ?>  
-                                        <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" class="login_link" href="<?php echo base_url('business-profile/dashboard/' . $business_common_data[0]['business_slug']); ?>">Dashboard</a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'details') { ?> class="active" <?php } ?>><a title="Details" class="login_link" href="<?php echo base_url('business-profile/details/' . $business_common_data[0]['business_slug']); ?>"> Details</a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'contacts') { ?> class="active" <?php } ?>><a title="Contacts" href="javascript:void(0);" onclick="open_profile();"> Contacts <br>  (<span class="contactcount"><?php echo $business_user_contacts_count; ?></span>)</a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="javascript:void(0);" onclick="open_profile();">Followers <br>  <div id="countfollower">(<?php echo $business_user_follower_count; ?>)</div></a></li>
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="open_profile();">Following <br> <div id="countfollow">(<?php echo $business_user_following_count; ?>)</div></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" class="login_link" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']); ?>">Dashboard</a></li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'details') { ?> class="active" <?php } ?>><a title="Details" class="login_link" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/details'); ?>"> Details</a></li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'contacts') { ?> class="active" <?php } ?>><a title="Contacts" href="javascript:void(0);" onclick="open_profile();"> Contacts <br>  (<span class="contactcount"><?php echo $business_user_contacts_count; ?></span>)</a></li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="javascript:void(0);" onclick="open_profile();">Followers <br>  <div id="countfollower">(<?php echo $business_user_follower_count; ?>)</div></a></li>
+                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="open_profile();">Following <br> <div id="countfollow">(<?php echo $business_user_following_count; ?>)</div></a></li>
                                 </ul>
                                 <?php
                                 $userid = $this->session->userdata('aileenuser');

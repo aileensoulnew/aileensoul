@@ -46,7 +46,7 @@
                             <div class="col-md-3 col-sm-4">
                                 <div class="left-side-bar">
                                     <ul class="left-form-each">
-                                        <li <?php if ($this->uri->segment(1) == 'business-profile') { ?> class="active init" <?php } ?>><a href="#"><?php echo $this->lang->line("business_information"); ?></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'business-search') { ?> class="active init" <?php } ?>><a href="#"><?php echo $this->lang->line("business_information"); ?></a></li>
                                         <?php if ($business_common_data[0]['business_step'] > '0' && $business_common_data[0]['business_step'] != '') { ?>
                                             <li class="custom-none"><a href="<?php echo base_url('business-profile/contact-information'); ?>"><?php echo $this->lang->line("contact_information"); ?></a></li>
                                         <?php } else { ?>

@@ -119,7 +119,7 @@ function business_dashboard_post(slug, pagenum) {
     isProcessing = true;
     $.ajax({
         type: 'POST',
-        url: base_url + "business_userprofile/business_user_dashboard_post/" + slug + "?page=" + pagenum,
+        url: base_url + "business_profile/ajax_business_dashboard_post/" + slug + "?page=" + pagenum,
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
@@ -152,7 +152,7 @@ function GetBusPhotos() {
 
     $.ajax({
         type: 'POST',
-        url: base_url + "business_userprofile/bus_user_photos",
+        url: base_url + "business_profile/bus_photos",
         data: 'bus_slug=' + slug,
         beforeSend: function () {
             $(".bus_photos").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
@@ -167,7 +167,7 @@ function GetBusPhotos() {
 function GetBusVideos() {
     $.ajax({
         type: 'POST',
-        url: base_url + "business_userprofile/bus_user_videos",
+        url: base_url + "business_profile/bus_videos",
         data: 'bus_slug=' + slug,
         beforeSend: function () {
             $(".bus_videos").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
@@ -182,7 +182,7 @@ function GetBusVideos() {
 function GetBusAudios() {
     $.ajax({
         type: 'POST',
-        url: base_url + "business_userprofile/bus_user_audio",
+        url: base_url + "business_profile/bus_audio",
         data: 'bus_slug=' + slug,
         beforeSend: function () {
             $(".bus_audios").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
@@ -197,7 +197,7 @@ function GetBusAudios() {
 function GetBusPdf() {
     $.ajax({
         type: 'POST',
-        url: base_url + "business_userprofile/bus_user_pdf",
+        url: base_url + "business_profile/bus_pdf",
         data: 'bus_slug=' + slug,
         beforeSend: function () {
             $(".bus_pdf").html('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');

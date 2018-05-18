@@ -36,7 +36,7 @@ if($browser == "Firefox")
                 <div class="col-md-6 mob-p0">
                     <ul class="sub-menu">
                         <li class="profile">
-                            <a href="<?php echo base_url('business-profile/home'); ?>">
+                            <a href="<?php echo base_url('business-search'); ?>">
 								<div class="sub-menu-icon">
 									
 										<svg class="not-hover" viewBox="0 0 486.988 486.988" width="17px" height="17px">
@@ -199,7 +199,7 @@ if($browser == "Firefox")
 
                                 <ul class="dropdown-menu account">
                                     <li>Account</li>
-                                    <li><a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+                                    <li><a href="<?php echo base_url('company/' . $business_login_slug) . '/details'; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                     <li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
                                     <li><a onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
                                 </ul>
@@ -428,7 +428,7 @@ if($browser == "Firefox")
 						</a>
 						<ul class="dropdown-menu account">
 							<li>Account</li>
-							<li><a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+							<li><a href="<?php echo base_url('company/' . $business_login_slug . '/details'); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 							<li><a href="#"><i class="fa fa-cog"></i> Setting</a></li>
 							<li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
 						</ul>
@@ -952,11 +952,11 @@ if($browser == "Firefox")
         if (keyword == '' && city == '') {
             return false;
         } else if (keyword != '' && city == '') {
-            window.location.href = base_url + 'business-profile/search/' + keyword;
+            window.location.href = base_url + 'business/search/' + keyword;
         } else if (keyword == '' && city != '') {
-            window.location.href = base_url + 'business-profile/search/business-in-' + city;
+            window.location.href = base_url + 'business/search/business-in-' + city;
         } else {
-            window.location.href = base_url + 'business-profile/search/' + keyword + '-business-in-' + city;
+            window.location.href = base_url + 'business/search/' + keyword + '-business-in-' + city;
         }
     }
 </script>

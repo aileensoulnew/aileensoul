@@ -32,7 +32,11 @@ class Business_profile_live extends MY_Controller {
         $this->data['no_business_post_html'] = '<div class="art_no_post_avl"><h3>Post</h3><div class="art-img-nn"><div class="art_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Post Available.</div></div></div>';
         $this->data['no_business_contact_html'] = '<div class="art-img-nn"><div class="art_no_post_img"><img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '"></div><div class="art_no_post_text">No Contacts Available.</div></div>';
 
-
+        $this->data['ismainregister'] = false;
+        if($userid){
+            $this->data['ismainregister'] = true;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        }
     }
 
     public function index() {
@@ -187,7 +191,6 @@ class Business_profile_live extends MY_Controller {
     }
 
     public function business_profile_manage_post($id = "") {
-
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $this->data['slugid'] = $id;
         $userid = $this->session->userdata('aileenuser');
@@ -197,11 +200,15 @@ class Business_profile_live extends MY_Controller {
             redirect('business-profile');
         }
         $user_name = $this->session->userdata('user_name');
+
         if ($userid) {
             // $this->business_profile_active_check(false);
             // $this->is_business_profile_register(false);
         }
-        
+        // Remove city or state from slug
+        if($id != ''){
+            $id = $this->business_model->removelocationfromslug($id);
+        }
         $business_main_slug = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_slug;
         $business_main_profile = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_profile_id;
         if ($id != '') {
@@ -236,10 +243,11 @@ class Business_profile_live extends MY_Controller {
         if (count($business_data) == 0) {
             $this->load->view('business_profile/notavalible', $this->data);
         } else {
-            if ($this->session->userdata('aileenuser') && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register']) {
+            if ($this->session->userdata('aileenuser') && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register'] == true) {
                 $this->load->view('business_profile_live/business_profile_manage_post', $this->data);
             } else {
                 include ('business_profile_include.php');
+                $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
                 $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
                 $this->load->view('business_profile_live/business_dashboard', $this->data);
             }
@@ -920,7 +928,7 @@ class Business_profile_live extends MY_Controller {
         if ($post_posted_user_id) {
 
             if ($posted_business_user_image) {
-                $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">';
+                $return_html .= '<a href = "' . base_url('company/' . $posted_business_slug) . '">';
                 if (IMAGEPATHFROM == 'upload') {
                     if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $posted_business_user_image)) {
                         $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -939,13 +947,13 @@ class Business_profile_live extends MY_Controller {
 
                 $return_html .= '</a>';
             } else {
-                $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">';
+                $return_html .= '<a href = "' . base_url('company/' . $posted_business_slug) . '">';
                 $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
                 $return_html .= '</a>';
             }
         } else {
             if ($post_business_user_image) {
-                $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">';
+                $return_html .= '<a href = "' . base_url('company/' . $post_business_slug) . '">';
                 if (IMAGEPATHFROM == 'upload') {
                     if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $post_business_user_image)) {
                         $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -963,7 +971,7 @@ class Business_profile_live extends MY_Controller {
                 }
                 $return_html .= '</a>';
             } else {
-                $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">';
+                $return_html .= '<a href = "' . base_url('company/' . $post_business_slug) . '">';
                 $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
                 $return_html .= '</a>';
             }
@@ -978,8 +986,8 @@ class Business_profile_live extends MY_Controller {
             $return_html .= '<li>
                             <div class = "else_post_d">
                                 <div class = "post-design-product">
-                                    <a class = "post_dot" href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
-<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
+                                    <a class = "post_dot" href = "' . base_url('company/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
+<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('company/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
 <span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">
 ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
 </span> </div></div>
@@ -987,7 +995,7 @@ class Business_profile_live extends MY_Controller {
         } else {
             $return_html .= '<li>
                             <div class = "post-design-product">
-                                <a class = "post_dot" href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
+                                <a class = "post_dot" href = "' . base_url('company/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
 ' . ucfirst(strtolower($post_company_name)) . '</a>
                     <span role = "presentation" aria-hidden = "true"> · </span>
 <div class = "datespan"> <span class = "ctre_date" >
@@ -1420,7 +1428,7 @@ Your browser does not support the audio tag.
                 $business_userimage = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->business_user_image;
 
                 if ($business_userimage) {
-                    $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $slugname1) . '">';
+                    $return_html .= '<a href = "' . base_url('company/' . $slugname1) . '">';
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $business_userimage)) {
                             $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -1438,12 +1446,12 @@ Your browser does not support the audio tag.
                     }
                     $return_html .= '</a>';
                 } else {
-                    $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $slugname1) . '">';
+                    $return_html .= '<a href = "' . base_url('company/' . $slugname1) . '">';
 
                     $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE"></a>';
                 }
                 $return_html .= '</div>
-<div class = "comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $slugname1 . '">
+<div class = "comment-name"><a href="' . base_url() . 'company/' . $slugname1 . '">
 <b title = "' . $companyname . '">';
                 $return_html .= $companyname;
                 $return_html .= '</br>';
@@ -1958,6 +1966,7 @@ Your browser does not support the audio tag.
             include ('business_profile_include.php');
         }
         if ($id != '') {
+            $id = $this->business_model->removelocationfromslug($id);
             $contition_array = array('business_profile.business_slug' => $id, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
             $join_str[0]['table'] = 'countries';
             $join_str[0]['join_table_id'] = 'countries.country_id';
@@ -2224,7 +2233,7 @@ Your browser does not support the audio tag.
                                                                     <li class="fl">
                                                                         <div class="follow-img">';
             if ($user['business_user_image'] != '') {
-                $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $user['business_slug']) . '">';
+                $return_html .= '<a href="' . base_url('company/' . $user['business_slug']) . '">';
                 if (IMAGEPATHFROM == 'upload') {
                     if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $user['business_user_image'])) {
                         $return_html .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
@@ -2242,7 +2251,7 @@ Your browser does not support the audio tag.
                 }
                 $return_html .= '</a>';
             } else {
-                $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $user['business_slug']) . '">
+                $return_html .= '<a href="' . base_url('company/' . $user['business_slug']) . '">
                                                                                     <img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">
                                                                                 </a>';
             }
@@ -2251,7 +2260,7 @@ Your browser does not support the audio tag.
                                                                     <li class="folle_text">
                                                                         <div class="">
                                                                             <div class="follow-li-text " style="padding: 0;">
-                                                                                <a title="' . $user['company_name'] . '" href="' . base_url('business-profile/dashboard/' . $user['business_slug']) . '">' . $user['company_name'] . '</a>
+                                                                                <a title="' . $user['company_name'] . '" href="' . base_url('company/' . $user['business_slug']) . '">' . $user['company_name'] . '</a>
                                                                             </div>
                                                                             <div>';
             $category = $this->db->get_where('industry_type', array('industry_id' => $user['industriyal'], 'status' => '1'))->row()->industry_name;
@@ -2572,7 +2581,7 @@ Your browser does not support the audio tag.
       <div class = " col-md-12 follow_left_box_main">
       <div class = "post-design-pro-img_follow">';
                     if ($userlist['business_user_image']) {
-                        $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
+                        $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $userlist['business_user_image'])) {
                                 $third_user_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -2590,19 +2599,19 @@ Your browser does not support the audio tag.
                         }
                         $third_user_html .= '</a>';
                     } else {
-                        $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">';
+                        $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">';
                         $third_user_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE"></a>';
                     }
                     $third_user_html .= '</div>
       <div class = "post-design-name_follow fl">
       <ul><li><div class = "post-design-product_follow">';
-                    $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
+                    $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
       <h6>' . ucfirst($userlist['company_name']) . '</h6>
       </a></div></li>';
                     $category = $this->db->get_where('industry_type', array('industry_id' => $userlist['industriyal'], 'status' => '1'))->row()->industry_name;
                     $third_user_html .= '<li>
       <div class = "post-design-product_follow_main" style = "display:block;">
-      <a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
+      <a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
       <p>';
                     if ($category) {
                         $third_user_html .= $category;
@@ -2826,7 +2835,7 @@ Your browser does not support the audio tag.
       <div class = " col-md-12 follow_left_box_main">
       <div class = "post-design-pro-img_follow">';
                     if ($userlist['business_user_image']) {
-                        $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
+                        $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $userlist['business_user_image'])) {
                                 $third_user_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -2844,19 +2853,19 @@ Your browser does not support the audio tag.
                         }
                         $third_user_html .= '</a>';
                     } else {
-                        $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
+                        $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
                         $third_user_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE"></a>';
                     }
                     $third_user_html .= '</div>
       <div class = "post-design-name_follow fl">
       <ul><li><div class = "post-design-product_follow">';
-                    $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">
+                    $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">
       <h6>' . ucfirst(strtolower($userlist['company_name'])) . '</h6>
       </a></div></li>';
                     $category = $this->db->get_where('industry_type', array('industry_id' => $userlist['industriyal'], 'status' => '1'))->row()->industry_name;
                     $third_user_html .= '<li>
       <div class = "post-design-product_follow_main" style = "display:block;">
-      <a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">
+      <a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">
       <p>';
                     if ($category) {
                         $third_user_html .= $category;
@@ -2927,7 +2936,7 @@ Your browser does not support the audio tag.
       <div class = " col-md-12 follow_left_box_main">
       <div class = "post-design-pro-img_follow">';
                     if ($userlist['business_user_image']) {
-                        $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
+                        $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $userlist['business_user_image'])) {
                                 $third_user_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -2945,19 +2954,19 @@ Your browser does not support the audio tag.
                         }
                         $third_user_html .= '</a>';
                     } else {
-                        $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">';
+                        $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">';
                         $third_user_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE"></a>';
                     }
                     $third_user_html .= '</div>
       <div class = "post-design-name_follow fl">
       <ul><li><div class = "post-design-product_follow">';
-                    $third_user_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
+                    $third_user_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
       <h6>' . ucfirst($userlist['company_name']) . '</h6>
       </a></div></li>';
                     $category = $this->db->get_where('industry_type', array('industry_id' => $userlist['industriyal'], 'status' => '1'))->row()->industry_name;
                     $third_user_html .= '<li>
       <div class = "post-design-product_follow_main" style = "display:block;">
-      <a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
+      <a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
       <p>';
                     if ($category) {
                         $third_user_html .= $category;
@@ -3258,6 +3267,7 @@ Your browser does not support the audio tag.
 
     public function followers($id = "") {
         $s3 = new S3(awsAccessKey, awsSecretKey);
+        $id = $this->business_model->removelocationfromslug($id);
         $this->data['slug_id'] = $id;
 
         $this->business_profile_active_check();
@@ -3333,7 +3343,7 @@ Your browser does not support the audio tag.
                 $followerslug = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->business_slug;
 
                 if ($followerimage != '') {
-                    $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $followerslug) . '">';
+                    $return_html .= '<a href="' . base_url('company/' . $followerslug) . '">';
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $followerimage)) {
                             $return_html .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
@@ -3352,7 +3362,7 @@ Your browser does not support the audio tag.
 
                     $return_html .= '</a>';
                 } else {
-                    $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $followerslug) . '">
+                    $return_html .= '<a href="' . base_url('company/' . $followerslug) . '">
                                 <img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">
                                                                                     </a>';
                 }
@@ -3361,7 +3371,7 @@ Your browser does not support the audio tag.
                                                                         <li class="folle_text">
                                                                             <div class="">
                                                                                 <div class="follow-li-text " style="padding: 0;">
-                                                                                    <a href="' . base_url('business-profile/dashboard/' . $followerslug) . '">' . ucfirst(strtolower($followername)) . '</a></div>
+                                                                                    <a href="' . base_url('company/' . $followerslug) . '">' . ucfirst(strtolower($followername)) . '</a></div>
                                                                                 <div>';
                 $categoryid = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from'], 'status' => '1'))->row()->industriyal;
                 $category = $this->db->get_where('industry_type', array('industry_id' => $categoryid, 'status' => '1'))->row()->industry_name;
@@ -3421,6 +3431,7 @@ Your browser does not support the audio tag.
 
     public function following($id = "") {
         $s3 = new S3(awsAccessKey, awsSecretKey);
+        $id = $this->business_model->removelocationfromslug($id);
         $this->data['slug_id'] = $id;
 
         $this->business_profile_active_check();
@@ -3493,7 +3504,7 @@ Your browser does not support the audio tag.
                 $companyname = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->company_name;
                 $slug = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->business_slug;
                 if ($this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->business_user_image != '') {
-                    $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $slug) . '" title="' . $companyname . '">';
+                    $return_html .= '<a href="' . base_url('company/' . $slug) . '" title="' . $companyname . '">';
                     $uimage = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->business_user_image;
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $uimage)) {
@@ -3512,7 +3523,7 @@ Your browser does not support the audio tag.
                     }
                     $return_html .= '</a>';
                 } else {
-                    $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $slug) . '" title="' . $companyname . '">';
+                    $return_html .= '<a href="' . base_url('company/' . $slug) . '" title="' . $companyname . '">';
 
                     $return_html .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                 }
@@ -3521,7 +3532,7 @@ Your browser does not support the audio tag.
                                     <li class="folle_text">
                                         <div class="">
                                             <div class="follow-li-text" style="padding: 0;">
-                                                <a title="' . $companyname . '" href="' . base_url('business-profile/dashboard/' . $slug) . '">' . $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->company_name . '</a></div>
+                                                <a title="' . $companyname . '" href="' . base_url('company/' . $slug) . '">' . $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->company_name . '</a></div>
                                             <div>';
 
                 $categoryid = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to'], 'status' => '1'))->row()->industriyal;
@@ -4172,7 +4183,7 @@ Your browser does not support the audio tag.
                 } else {
                     $cmtinsert .= '<img src="' . base_url() . NOBUSIMAGE . '" alt="NOBUSIMAGE"> </div>';
                 }
-                $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>' . $companyname . '</b></a>';
+                $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>' . $companyname . '</b></a>';
                 $cmtinsert .= '</div>';
                 $cmtinsert .= '<div class="comment-details" id= "showcomment' . $business_profile['business_profile_post_comment_id'] . '">';
                 $cmtinsert .= $this->common->make_links($business_profile['comments']);
@@ -4774,7 +4785,7 @@ Your browser does not support the audio tag.
                 $cmtinsert .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                 $cmtinsert .= '</div>';
             }
-            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>' . ucfirst($company_name) . '</b></a>';
+            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>' . ucfirst($company_name) . '</b></a>';
             $cmtinsert .= '</div>';
             $cmtinsert .= '<div class="comment-details" id="showcomment' . $business_profile['business_profile_post_comment_id'] . '">';
             $cmtinsert .= $this->common->make_links($business_profile['comments']);
@@ -4966,7 +4977,7 @@ Your browser does not support the audio tag.
                 $cmtinsert .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                 $cmtinsert .= '</div>';
             }
-            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>' . ucfirst($company_name) . '</b></a>';
+            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>' . ucfirst($company_name) . '</b></a>';
             $cmtinsert .= '</div>';
             $cmtinsert .= '<div class="comment-details" id= "showcommenttwo' . $business_profile['business_profile_post_comment_id'] . '" >';
             $cmtinsert .= $this->common->make_links($business_profile['comments']);
@@ -5898,7 +5909,7 @@ Your browser does not support the audio tag.
                 $cmtinsert .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                 $cmtinsert .= '</div>';
             }
-            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>' . $company_name . '</b></a>';
+            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>' . $company_name . '</b></a>';
             $cmtinsert .= '</div>';
 
             $cmtinsert .= '<div class="comment-details" id= "imgshowcommenttwo' . $bus_comment['post_image_comment_id'] . '"" >';
@@ -6102,7 +6113,7 @@ Your browser does not support the audio tag.
                 $cmtinsert .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                 $cmtinsert .= '</div>';
             }
-            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>' . $company_name . '</b></a>';
+            $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>' . $company_name . '</b></a>';
             $cmtinsert .= '</div>';
 
             $cmtinsert .= '<div class="comment-details" id= "imgshowcomment' . $bus_comment['post_image_comment_id'] . '"" >';
@@ -6709,7 +6720,7 @@ Your browser does not support the audio tag.
                     $cmtinsert .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                     $cmtinsert .= '</div>';
                 }
-                $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $company_slug . '"><b>' . $company_name . '</b></a>';
+                $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $company_slug . '"><b>' . $company_name . '</b></a>';
                 $cmtinsert .= '</div>';
 
                 $cmtinsert .= '<div class="comment-details" id= "imgshowcomment' . $bus_comment['post_image_comment_id'] . '"" >';
@@ -6866,7 +6877,7 @@ Your browser does not support the audio tag.
                     $cmtinsert .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                     $cmtinsert .= '</div>';
                 }
-                $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>' . $company_name . '</b></a>';
+                $cmtinsert .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>' . $company_name . '</b></a>';
                 $cmtinsert .= '</div>';
 
                 $cmtinsert .= '<div class="comment-details" id= "imgshowcommenttwo' . $bus_comment['post_image_comment_id'] . '">';
@@ -7013,7 +7024,7 @@ Your browser does not support the audio tag.
                     $fourdata .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                 }
                 $fourdata .= '</div><div class="comment-name"><b>';
-                $fourdata .= '<a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '">' . ucfirst($companyname) . '</br></b></a></div>';
+                $fourdata .= '<a href="' . base_url() . 'company/' . $companyslug . '">' . ucfirst($companyname) . '</br></b></a></div>';
                 $fourdata .= '<div class="comment-details" id= "showcommenttwo' . $rowdata['business_profile_post_comment_id'] . '">';
                 $fourdata .= '<div id= "lessmore' . $rowdata['business_profile_post_comment_id'] . '"  style="display:block;">';
                 $small = substr($rowdata['comments'], 0, 180);
@@ -7134,7 +7145,7 @@ Your browser does not support the audio tag.
                     $fourdata .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                     $fourdata .= '</div>';
                 }
-                $fourdata .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>';
+                $fourdata .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>';
                 $fourdata .= '' . ucfirst($companyname) . '</br>';
                 $fourdata .= '</b></a></div>';
                 $fourdata .= '<div class="comment-details" id= "showcommenttwo' . $rowdata['post_image_comment_id'] . '" style="display: block;">';
@@ -7260,7 +7271,7 @@ Your browser does not support the audio tag.
                     $mulimgfour .= '<img  src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
                     $mulimgfour .= '</div>';
                 }
-                $mulimgfour .= '<div class="comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $companyslug . '"><b>';
+                $mulimgfour .= '<div class="comment-name"><a href="' . base_url() . 'company/' . $companyslug . '"><b>';
                 $mulimgfour .= '' . ucfirst($companyname) . '</br></b></a></div>';
                 $mulimgfour .= '<div class="comment-details" id="imgshowcommenttwo' . $rowdata['post_image_comment_id'] . '" style="display: block;">';
                 $mulimgfour .= '' . $this->common->make_links($rowdata['comment']) . '</br></div>';
@@ -7663,7 +7674,7 @@ Your browser does not support the audio tag.
 
                     $contactdata .= '<li>';
                     $contactdata .= '<div class="addcontact-left">';
-                    $contactdata .= '<a href="' . base_url('business-profile/dashboard/' . $busdata[0]['business_slug']) . '">';
+                    $contactdata .= '<a href="' . base_url('company/' . $busdata[0]['business_slug']) . '">';
                     $contactdata .= '<div class="addcontact-pic">';
 
                     if ($busdata[0]['business_user_image']) {
@@ -7716,7 +7727,7 @@ Your browser does not support the audio tag.
 
                     $contactdata .= '<li>';
                     $contactdata .= '<div class="addcontact-left custome-approved-contact">';
-                    $contactdata .= '<a href="' . base_url('business-profile/dashboard/' . $busdata[0]['business_slug']) . '">';
+                    $contactdata .= '<a href="' . base_url('company/' . $busdata[0]['business_slug']) . '">';
                     $contactdata .= '<div class="addcontact-pic">';
 
                     if ($busdata[0]['business_user_image']) {
@@ -7865,7 +7876,7 @@ Your browser does not support the audio tag.
                     $inddata = $this->common->select_data_by_id('industry_type', 'industry_id', $busdata[0]['industriyal'], $data = '*', $join_str = array());
                     $contactdata .= '<li>';
                     $contactdata .= '<div class="addcontact-left custome-approved-contact">';
-                    $contactdata .= '<a href="' . base_url('business-profile/dashboard/' . $busdata[0]['business_slug']) . '">';
+                    $contactdata .= '<a href="' . base_url('company/' . $busdata[0]['business_slug']) . '">';
                     $contactdata .= '<div class="addcontact-pic">';
 
                     if ($busdata[0]['business_user_image']) {
@@ -8021,17 +8032,17 @@ Your browser does not support the audio tag.
                                                     <div class="list-box">
                                                         <div class="profile-img">';
                     if ($friend['business_user_image'] != '') {
-                        $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $friend['business_slug']) . '">
+                        $return_html .= '<a href="' . base_url('company/' . $friend['business_slug']) . '">
                                                                     <img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image'] . '?ver=' . time() . '" alt="' . $friend['business_user_image'] . '">
                                                                 </a>';
                     } else {
-                        $return_html .= '<a href="' . base_url('business-profile/dashboard/' . $friend['business_slug']) . '">
+                        $return_html .= '<a href="' . base_url('company/' . $friend['business_slug']) . '">
                                                                     <img src="' . base_url(NOBUSIMAGE) . '" alt="NOBUSIMAGE"/>
                                                                 </a>';
                     }
                     $return_html .= '</div>
                                                         <div class="profile-content">
-                                                            <a  href="' . base_url('business-profile/dashboard/' . $friend['business_slug']) . '">
+                                                            <a  href="' . base_url('company/' . $friend['business_slug']) . '">
                                                                 <div class="main_data_cq">   <span title="' . $friend['company_name'] . '" class="main_compny_name">' . $friend['company_name'] . '</span></div>
                                                                 <div class="main_data_cq">';
                     if ($inddata[0]['industry_name']) {
@@ -8163,7 +8174,7 @@ Your browser does not support the audio tag.
 
                 $contactdata .= '</div>';
                 $contactdata .= '<div class="profile-content">';
-                $contactdata .= '<a href="' . base_url('business-profile/dashboard/' . $busdata[0]['business_slug']) . '">';
+                $contactdata .= '<a href="' . base_url('company/' . $busdata[0]['business_slug']) . '">';
                 $contactdata .= '<div class="main_data_cq">   <span title="' . $busdata[0]['company_name'] . '" class="main_compny_name">' . $busdata[0]['company_name'] . '</span></div>';
                 $contactdata .= '<div class="main_data_cq"><span class="dc_cl_m" title="' . $inddata[0]['industry_name'] . '"> ' . $inddata[0]['industry_name'] . '</span></div>';
                 $contactdata .= '</a></div>';
@@ -8192,6 +8203,7 @@ Your browser does not support the audio tag.
 
     public function bus_contact($id = "") {
         $s3 = new S3(awsAccessKey, awsSecretKey);
+        $id = $this->business_model->removelocationfromslug($id);
         $this->data['slug_id'] = $id;
         $company_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($company_name) . ' | Contacts' . ' | Business Profile' . TITLEPOSTFIX;
@@ -8269,7 +8281,7 @@ Your browser does not support the audio tag.
                 <ul>
                     <li class="fl">
                         <div class="follow-img">
-                            <a href="' . base_url('business-profile/dashboard/' . $business_slug) . '">';
+                            <a href="' . base_url('company/' . $business_slug) . '">';
                 if (IMAGEPATHFROM == 'upload') {
                     if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $business_user_image) || $business_user_image == '') {
                         $return_html .= '<img src="' . base_url(NOBUSIMAGE) . '"  alt="NOBUSIMAGE">';
@@ -8292,7 +8304,7 @@ Your browser does not support the audio tag.
                     <li class="bui_bcon">
                         <div class="">
                             <div class="follow-li-text " style="padding: 0;">
-                                <a href="' . base_url('business-profile/dashboard/' . $business_slug) . '">' . $company_name . '</a>
+                                <a href="' . base_url('company/' . $business_slug) . '">' . $company_name . '</a>
                             </div>
                             <div><a>' . $user_industryal_name . '</a>
                             </div>
@@ -8690,7 +8702,7 @@ No Contacts Available.
                 if ($post_posted_user_id) {
 
                     if ($posted_business_user_image) {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $posted_business_slug) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $posted_business_user_image)) {
                                 $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -8709,13 +8721,13 @@ No Contacts Available.
 
                         $return_html .= '</a>';
                     } else {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $posted_business_slug) . '">';
                         $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
                         $return_html .= '</a>';
                     }
                 } else {
                     if ($post_business_user_image) {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $post_business_slug) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $post_business_user_image)) {
                                 $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -8734,7 +8746,7 @@ No Contacts Available.
 
                         $return_html .= '</a>';
                     } else {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $post_business_slug) . '">';
                         $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
                         $return_html .= '</a>';
                     }
@@ -8749,8 +8761,8 @@ No Contacts Available.
                     $return_html .= '<li>
                             <div class = "else_post_d">
                                 <div class = "post-design-product">
-                                    <a class = "post_dot" href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
-<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
+                                    <a class = "post_dot" href = "' . base_url('company/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
+<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('company/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
 <span class = "ctre_date">
 ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
 </span> </div></div>
@@ -8758,7 +8770,7 @@ No Contacts Available.
                 } else {
                     $return_html .= '<li>
                             <div class = "post-design-product">
-                                <a class = "post_dot" href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
+                                <a class = "post_dot" href = "' . base_url('company/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
 ' . ucfirst($post_company_name) . '</a><div class = "datespan"> <span class = "ctre_date" >
 ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
 
@@ -9163,7 +9175,7 @@ Your browser does not support the audio tag.
                         $business_userimage = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->business_user_image;
 
                         if ($business_userimage) {
-                            $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $slugname1) . '">';
+                            $return_html .= '<a href = "' . base_url('company/' . $slugname1) . '">';
                             if (IMAGEPATHFROM == 'upload') {
                                 if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $business_userimage)) {
                                     $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -9181,12 +9193,12 @@ Your browser does not support the audio tag.
                             }
                             $return_html .= '</a>';
                         } else {
-                            $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $slugname1) . '">';
+                            $return_html .= '<a href = "' . base_url('company/' . $slugname1) . '">';
 
                             $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE"></a>';
                         }
                         $return_html .= '</div>
-<div class = "comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $slugname1 . '">
+<div class = "comment-name"><a href="' . base_url() . 'company/' . $slugname1 . '">
 <b title = "' . $companyname . '">';
                         $return_html .= $companyname;
                         $return_html .= '</br>';
@@ -9358,7 +9370,7 @@ Your browser does not support the audio tag.
       <div class = " col-md-12 follow_left_box_main">
       <div class = "post-design-pro-img_follow">';
                     if ($userlist['business_user_image']) {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $userlist['business_user_image'])) {
                                 $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt="NOBUSIMAGE">';
@@ -9376,19 +9388,19 @@ Your browser does not support the audio tag.
                         }
                         $return_html .= '</a>';
                     } else {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst(strtolower($userlist['company_name'])) . '">';
                         $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt="NOBUSIMAGE"></a>';
                     }
                     $return_html .= '</div>
       <div class = "post-design-name_follow fl">
       <ul><li><div class = "post-design-product_follow">';
-                    $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
+                    $return_html .= '<a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
       <h6>' . ucfirst($userlist['company_name']) . '</h6>
       </a></div></li>';
                     $category = $this->db->get_where('industry_type', array('industry_id' => $userlist['industriyal'], 'status' => '1'))->row()->industry_name;
                     $return_html .= '<li>
       <div class = "post-design-product_follow_main" style = "display:block;">
-      <a href = "' . base_url('business-profile/dashboard/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
+      <a href = "' . base_url('company/' . $userlist['business_slug']) . '" title = "' . ucfirst($userlist['company_name']) . '">
       <p>';
                     if ($category) {
                         $return_html .= $category;
@@ -9967,7 +9979,7 @@ Your browser does not support the audio tag.
                 if ($post_posted_user_id) {
 
                     if ($posted_business_user_image) {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $posted_business_slug) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $posted_business_user_image)) {
                                 $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -9985,13 +9997,13 @@ Your browser does not support the audio tag.
                         }
                         $return_html .= '</a>';
                     } else {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $posted_business_slug) . '">';
                         $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
                         $return_html .= '</a>';
                     }
                 } else {
                     if ($post_business_user_image) {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $post_business_slug) . '">';
                         if (IMAGEPATHFROM == 'upload') {
                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $post_business_user_image)) {
                                 $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -10009,7 +10021,7 @@ Your browser does not support the audio tag.
                         }
                         $return_html .= '</a>';
                     } else {
-                        $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">';
+                        $return_html .= '<a href = "' . base_url('company/' . $post_business_slug) . '">';
                         $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
                         $return_html .= '</a>';
                     }
@@ -10024,8 +10036,8 @@ Your browser does not support the audio tag.
                     $return_html .= '<li>
                             <div class = "else_post_d">
                                 <div class = "post-design-product">
-                                    <a class = "post_dot" href = "' . base_url('business-profile/dashboard/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
-<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
+                                    <a class = "post_dot" href = "' . base_url('company/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
+<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('company/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
 <span class = "ctre_date">
 ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
 </span> </div></div>
@@ -10033,7 +10045,7 @@ Your browser does not support the audio tag.
                 } else {
                     $return_html .= '<li>
                             <div class = "post-design-product">
-                                <a class = "post_dot" href = "' . base_url('business-profile/dashboard/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
+                                <a class = "post_dot" href = "' . base_url('company/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
 ' . ucfirst($post_company_name) . '</a><div class = "datespan"> <span class = "ctre_date" >
 ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
 
@@ -10447,7 +10459,7 @@ Your browser does not support the audio tag.
                         $business_userimage = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->business_user_image;
 
                         if ($business_userimage) {
-                            $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $slugname1) . '">';
+                            $return_html .= '<a href = "' . base_url('company/' . $slugname1) . '">';
                             if (IMAGEPATHFROM == 'upload') {
                                 if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $business_userimage)) {
                                     $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE">';
@@ -10466,12 +10478,12 @@ Your browser does not support the audio tag.
 
                             $return_html .= '</a>';
                         } else {
-                            $return_html .= '<a href = "' . base_url('business-profile/dashboard/' . $slugname1) . '">';
+                            $return_html .= '<a href = "' . base_url('company/' . $slugname1) . '">';
 
                             $return_html .= '<img src = "' . base_url(NOBUSIMAGE) . '" alt = "NOBUSIMAGE"></a>';
                         }
                         $return_html .= '</div>
-<div class = "comment-name"><a href="' . base_url() . 'business-profile/dashboard/' . $slugname1 . '">
+<div class = "comment-name"><a href="' . base_url() . 'company/' . $slugname1 . '">
 <b title = "' . $companyname . '">';
                         $return_html .= $companyname;
                         $return_html .= '</br>';
@@ -10888,4 +10900,5 @@ Your browser does not support the audio tag.
         $this->load->view('business_profile/bus_pdf', $this->data);
     }
 
+    
 }

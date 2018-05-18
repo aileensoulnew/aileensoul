@@ -117,7 +117,6 @@ $route['profiles/opportunities/(:any)'] = "user_opportunities";
 //$route['business-profile'] = "business_profile/index";
 $route['business-search'] = "business_live/index";
 $route['business-profile/category'] = "business_live/category";
-$route['business-profile/category/(:any)'] = "business_live/categoryBusinessList/$1";
 $route['business/search'] = "business_live/business_search";
 
 
@@ -133,36 +132,27 @@ $route['business/reactivateacc'] = "business_profile/reactivateacc";
 //$route['business-profile/description'] = "business_profile/description";
 //$route['business-profile/description-insert'] = "business_profile/description_insert";
 //$route['business-profile/image'] = "business_profile/image";
+$route['business-profile'] = "business_profile_live/business_profile_post";
 $route['business-profile/image-insert'] = "business_profile/image_insert";
-$route['business-profile/details/(:any)'] = "business_profile_live/business_resume/$1";
 $route['business-profile/details'] = "business_profile_live/business_resume";
-$route['business-profile/home'] = "business_profile_live/business_profile_post";
 $route['business-profile/bussiness-profile-post-add'] = "business_profile/business_profile_addpost_insert";
 $route['business-profile/bussiness-profile-post-add/manage/(:any)'] = "business_profile/business_profile_addpost_insert/manage/$1";
 
 $route['business-profile/dashboard'] = "business_profile_live/business_profile_manage_post";
-$route['business-profile/dashboard/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
 
 $route['business-profile/followers'] = "business_profile_live/followers";
-$route['business-profile/followers/(:any)'] = "business_profile_live/followers/$1";
 $route['business-profile/following'] = "business_profile_live/following";
-$route['business-profile/following/(:any)'] = "business_profile_live/following/$1";
 $route['business-profile/userlist'] = "business_profile_live/userlist";
 $route['business-profile/userlist/(:any)'] = "business_profile_live/userlist/$1";
 $route['business-profile/contact-list'] = "business_profile_live/contact_list";
 $route['business-profile/contacts'] = "business_profile_live/bus_contact";
-$route['business-profile/contacts/(:any)'] = "business_profile_live/bus_contact/$1";
 $route['business-profile/user-image-change'] = "business_profile/user_image_insert";
 $route['business-profile/business-profile-save-post'] = "business_profile/business_profile_save_post";
 $route['business-profile/business-profile-addpost'] = "business_profile/business_profile_addpost";
 $route['business-profile/photos'] = "business_profile_live/business_photos";
-$route['business-profile/photos/(:any)'] = "business_profile_live/business_photos/$1";
 $route['business-profile/videos'] = "business_profile_live/business_videos";
-$route['business-profile/videos/(:any)'] = "business_profile_live/business_videos/$1";
 $route['business-profile/audios'] = "business_profile_live/business_audios";
-$route['business-profile/audios/(:any)'] = "business_profile_live/business_audios/$1";
 $route['business-profile/pdf'] = "business_profile_live/business_pdf";
-$route['business-profile/pdf/(:any)'] = "business_profile_live/business_pdf/$1";
 $route['business-profile/business-profile-contactperson'] = "business_profile/business_profile_contactperson";
 $route['business-profile/contact-person/(:any)'] = "business_profile/business_profile_contactperson/$1";
 $route['business-profile/post-detail'] = "business_profile_live/postnewpage";
@@ -192,8 +182,6 @@ $route['business-profile/signup/edit/image'] = "business_profile_registration/im
 // $route['business_profile/reactivate'] = "business_profile_live/reactivate";
 
 $route['business-profile/location'] = "business_live/location";
-$route['business-profile/location/(:any)'] = "business_live/locationBusinessList/$1";
-
 
 $route['message/b/(:any)'] = "message/business_profile/$1";
 $route['message/rj/(:any)'] = "recmessage/recjob/$1";
@@ -551,6 +539,8 @@ $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";
 $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
+$route['(:any)-business'] = "business_live/categoryBusinessList/$1";
+$route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
 $route['(:any)'] = 'Userprofile';
 
 
@@ -561,5 +551,17 @@ $route['artist/search/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
 
 
+
 $route['business/search/(:any)'] = "business_live/business_search/$1";
 $route['business/search/(:any)-in-(:any)'] = "business_live/business_search/$1-in-$2";
+
+$route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
+$route['company/(:any)/details'] = "business_profile_live/business_resume/$1";
+$route['company/(:any)/contacts'] = "business_profile_live/bus_contact/$1";
+$route['company/(:any)/followers'] = "business_profile_live/followers/$1";
+$route['company/(:any)/following'] = "business_profile_live/following/$1";
+
+$route['company/(:any)/photos'] = "business_profile_live/business_photos/$1";
+$route['company/(:any)/videos'] = "business_profile_live/business_videos/$1";
+$route['company/(:any)/audios'] = "business_profile_live/business_audios/$1";
+$route['company/(:any)/pdf'] = "business_profile_live/business_pdf/$1";

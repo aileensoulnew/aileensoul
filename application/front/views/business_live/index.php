@@ -47,7 +47,7 @@
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
                         <div class="col-md-3" ng-repeat="category in businessCategory">
                             <div class="all-cat-box">
-                                <a ng-href="<?php echo base_url('business-profile/category/') ?>{{category.industry_slug}}">
+                                <a ng-href="<?php echo base_url ?>{{category.industry_slug}}-business">
                                     <div class="cus-cat-middle">
                                         <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>" alt="{{category.industry_name}}">
                                         <p ng-bind="category.industry_name"></p>
@@ -71,7 +71,7 @@
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
                         <div class="col-md-3" ng-repeat="location in businessLocation">
                             <div class="all-cat-box">
-                                <a ng-href="<?php echo base_url('business-profile/location/') ?>{{location.slug}}">
+                                <a ng-href="<?php echo base_url ?>business-in-{{location.slug}}">
                                     <div class="cus-cat-middle">
                                         <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
                                         <p ng-bind="location.city_name"></p>

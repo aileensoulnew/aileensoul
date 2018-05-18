@@ -637,7 +637,7 @@ if (IS_BUSINESS_JS_MINIFY == '0') {
 								if (response.is_bussiness == '1') {
 									window.location = "<?php echo base_url() ?>business-profile/registration/business-information";
 								} else {
-									window.location = "<?php echo base_url() ?>business-profile";
+									window.location = "<?php echo base_url() ?>business-search";
 								}
 							} else if (response.data == "password") {
 								$("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
@@ -831,8 +831,7 @@ if (IS_BUSINESS_JS_MINIFY == '0') {
 					{
 						if (response.okmsg == "ok") {
 							$("#btn-register").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
-//                                window.location = "<?php echo base_url() ?>business-profile/dashboard/" + slug;
-window.location = "<?php echo base_url() ?>business-profile/";
+window.location = "<?php echo base_url() ?>business-search/";
 } else {
 	$("#register_error").fadeIn(1000, function () {
 		$("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');

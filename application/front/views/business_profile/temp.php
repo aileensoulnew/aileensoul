@@ -171,9 +171,9 @@
 
 
 
-                        <h4 class="profile-head-text"><a href="<?php echo base_url('business-profile/details/' . $businessdata1[0]['business_slug'] . ''); ?>"> <?php echo ucwords($businessdata1[0]['company_name']); ?></a></h4>
+                        <h4 class="profile-head-text"><a href="<?php echo base_url('company/' . $businessdata1[0]['business_slug'] . '/details'); ?>"> <?php echo ucwords($businessdata1[0]['company_name']); ?></a></h4>
 
-                        <h4 class="profile-head-text_dg"><a href="<?php echo base_url('business-profile/details/' . $businessdata1[0]['business_slug'] . ''); ?>"> 
+                        <h4 class="profile-head-text_dg"><a href="<?php echo base_url('company/' . $businessdata1[0]['business_slug'] . '/details'); ?>"> 
 
 
                                 <?php
@@ -241,7 +241,7 @@
                                 <li <?php if ($this->uri->segment(1) == 'business_profile' && $this->uri->segment(2) == 'business_profile_manage_post') { ?> class="active" <?php } ?>><a title="Dashboard" href="<?php echo base_url('business_profile/business_profile_manage_post/' . $businessdata1[0]['business_slug']); ?>">Dashboard</a>
                                 </li>
 
-                                <li <?php if ($this->uri->segment(1) == 'business_profile' && $this->uri->segment(2) == 'business_resume') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('business-profile/details/' . $businessdata1[0]['business_slug']); ?>"> Details</a>
+                                <li <?php if ($this->uri->segment(1) == 'business_profile' && $this->uri->segment(2) == 'business_resume') { ?> class="active" <?php } ?>><a title="Details" href="<?php echo base_url('company/' . $businessdata1[0]['business_slug'] . '/details'); ?>"> Details</a>
                                 </li>
 
                                 <?php
@@ -391,7 +391,7 @@
                         <div class="profile-boxProfileCard  module">
 
                             <div class="head_details1">
-                                <span><a href="<?php echo base_url('business-profile/details/' . $businessdata1[0]['business_slug']); ?>"><h5><i class="fa fa-info-circle" aria-hidden="true"></i>Information</h5></a>
+                                <span><a href="<?php echo base_url('company/' . $businessdata1[0]['business_slug'] . '/details'); ?>"><h5><i class="fa fa-info-circle" aria-hidden="true"></i>Information</h5></a>
                                 </span>      </div>
                             <table class="business_data_table">
                                 <tr>

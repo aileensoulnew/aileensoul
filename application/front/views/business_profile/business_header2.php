@@ -9,7 +9,7 @@ $userid = $this->session->userdata('aileenuser');
                 <div class="col-md-6 mob-p0">
                     <ul class="sub-menu">
                         <li>
-                            <a href="<?php echo base_url('business-profile/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Business Profile</a>
+                            <a href="<?php echo base_url('business-profile'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Business Profile</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();"><i class="fa fa-envelope" aria-hidden="true"></i> Message
@@ -196,7 +196,7 @@ $userid = $this->session->userdata('aileenuser');
 
                             <ul class="dropdown-menu account">
                                 <li>Account</li>
-                                <li><a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+                                <li><a href="<?php echo base_url('company/' . $business_login_slug . '/details'); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                 <li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
                                 <li><a href="#"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
                             </ul>

@@ -41,9 +41,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 height: auto !important;
             }
         </style>
-
+        <?php if($ismainregister == true){ ?>
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <?php } ?>
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push no-login">
+        <?php if($ismainregister == false){ ?>
         <header>
             <div class="container">
                 <div class="row">
@@ -59,6 +63,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 </div>
             </div>
         </header>
+        <?php } else {
+                    echo $business_header2; 
+                } 
+        ?>
         <section>
             <?php echo $business_common_profile; ?>
             <div class="text-center tab-block">
@@ -171,7 +179,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </a>
                         <a href="javascript:void(0);" onclick="register_profile();">
                             <div class="full-box-module business_data">
-                                <div class="profile-boxProfileCard  module">
+                                <div class="profile-boxProfileCard module">
                                     <div class="head_details1">
                                         <h5><i class="fa fa-music" aria-hidden="true"></i>Audio</h5>
                                     </div>
@@ -474,21 +482,29 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
         <?php } ?>
         <script>
-                                                var base_url = '<?php echo base_url(); ?>';
-                                                var slug = '<?php echo $slugid; ?>';
-                                                var no_business_post_html = '<?php echo $no_business_post_html ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $slugid; ?>';
+            var no_business_post_html = '<?php echo $no_business_post_html ?>';
+            var ismainregister = '<?php echo $ismainregister ?>';
+            var isbusiness_register = '<?php echo $isbusiness_register ?>';
+            var isbusiness_deactive = '<?php echo $isbusiness_deactive ?>';
         </script>
         <script>
+
              function open_profile() {
-                 register_profile();
+                register_profile();
              }
             function login_profile() { 
                 $('#register').modal('hide');
                 $('#login').modal('show');
             }
             function register_profile() {
-                $('#login').modal('hide');
-                $('#register').modal('show');
+                if(ismainregister == false || isbusiness_deactive == true){
+                    $('#login').modal('hide');
+                    $('#register').modal('show');
+                }else{
+                    window.location.href = '<?php echo business_register_step1; ?>'
+                }
             }
             function forgot_profile() {
                 $('#forgotPassword').modal('show');
@@ -499,9 +515,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
 
             $('.modal-close').click(function(e){ 
-    $('body').removeClass('modal-open-other'); 
-    //$('#login').modal('show');
-});
+                $('body').removeClass('modal-open-other'); 
+                //$('#login').modal('show');
+            });
         </script>
         <script type="text/javascript">
             function login()
@@ -554,9 +570,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             if (response.data == "ok") {
                                 $("#btn1").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="Loader" /> &nbsp; Login');
                                 if (response.is_bussiness == '1') {
-                                    window.location = "<?php echo base_url() ?>business-profile/dashboard/" + slug;
+                                    window.location = "<?php echo base_url() ?>company/" + slug;
                                 } else {
-                                    window.location = "<?php echo base_url() ?>business-profile";
+                                    window.location = "<?php echo base_url() ?>business-search";
                                 }
                             } else if (response.data == "password") {
                                 $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
@@ -668,7 +684,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     var selmonth = $("#selmonth").val();
                     var selyear = $("#selyear").val();
                     var selgen = $("#selgen").val();
-
                     var post_data = {
                         'first_name': first_name,
                         'last_name': last_name,
@@ -680,8 +695,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         'selgen': selgen,
                         '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
                     }
-
-
                     var todaydate = new Date();
                     var dd = todaydate.getDate();
                     var mm = todaydate.getMonth() + 1; //January is 0!
@@ -746,8 +759,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         {
                             if (response.okmsg == "ok") {
                                 $("#btn-register").html('<img src="<?php echo base_url() ?>assets/images/btn-ajax-loader.gif" alt="Loader"/> &nbsp; Sign Up ...');
-//                                window.location = "<?php echo base_url() ?>business-profile/dashboard/" + slug;
-                                window.location = "<?php echo base_url() ?>business-profile/";
+
+                                window.location = "<?php echo base_url() ?>business-search/";
                             } else {
                                 $("#register_error").fadeIn(1000, function () {
                                     $("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
@@ -778,45 +791,42 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                      submitHandler: submitforgotForm
                 });
 
-function submitforgotForm()
- {
+                function submitforgotForm()
+                {
 
-    var email_login = $("#forgot_email").val();
+                    var email_login = $("#forgot_email").val();
 
-    var post_data = {
-        'forgot_email': email_login,
-//            csrf_token_name: csrf_hash
-    }
-    $.ajax({
-        type: 'POST',
-        url: base_url + 'profile/forgot_live',
-        data: post_data,
-        dataType: "json",
-        beforeSend: function ()
-        {
-            $("#error").fadeOut();
-//            $("#forgotbuton").html('Your credential has been send in your register email id');
-        },
-        success: function (response)
-        {
-            if (response.data == "success") {
-                //  alert("login");
-                $("#forgotbuton").html(response.message);
-                setTimeout(function () {
-                    $('#forgotPassword').modal('hide');
-                    $('#login').modal('show');
-                    $("#forgotbuton").html('');
-                    document.getElementById("forgot_email").value = "";
-                }, 5000); // milliseconds
-                //window.location = base_url + "job/home/live-post";
-            } else {
-                $("#forgotbuton").html(response.message);
-
-            }
-        }
-    });
-    return false;
-}            /* validation */
+                    var post_data = {
+                        'forgot_email': email_login,
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: base_url + 'profile/forgot_live',
+                        data: post_data,
+                        dataType: "json",
+                        beforeSend: function ()
+                        {
+                            $("#error").fadeOut();
+                        },
+                        success: function (response)
+                        {
+                            if (response.data == "success") {
+                                //  alert("login");
+                                $("#forgotbuton").html(response.message);
+                                setTimeout(function () {
+                                    $('#forgotPassword').modal('hide');
+                                    $('#login').modal('show');
+                                    $("#forgotbuton").html('');
+                                    document.getElementById("forgot_email").value = "";
+                                }, 5000); // milliseconds
+                                //window.location = base_url + "job/home/live-post";
+                            } else {
+                                $("#forgotbuton").html(response.message);
+                            }
+                        }
+                    });
+                    return false;
+                }            /* validation */
             });
         </script>
         <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
@@ -839,9 +849,9 @@ function submitforgotForm()
                 });
             });
             $(document).ready(function () {
-                setTimeout(function () {
-                    $('#register').modal('show');
-                }, 2000);
+                // setTimeout(function () {
+                //     $('#register').modal('show');
+                // }, 2000);
             });
             $('select').on('change', function () {
                 if ($(this).val()) {

@@ -41,16 +41,16 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <?php echo $business_common; ?>
             <div class="text-center tab-block">
                 <div class="container mob-inner-page">
-                    <a href="<?php echo base_url('business-profile/photos/' . $business_common_data[0]['business_slug']) ?>">
+                    <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/photos' ?>">
                         Photo
                     </a>
-                    <a href="<?php echo base_url('business-profile/videos/' . $business_common_data[0]['business_slug']) ?>">
+                    <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
                         Video
                     </a>
-                    <a href="<?php echo base_url('business-profile/audios/' . $business_common_data[0]['business_slug']) ?>">
+                    <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
                         Audio
                     </a>
-                    <a href="<?php echo base_url('business-profile/pdf/' . $business_common_data[0]['business_slug']) ?>">
+                    <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
                         PDf
                     </a>
                 </div>
@@ -61,7 +61,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         <div class="full-box-module business_data">
                             <div class="profile-boxProfileCard  module">
                                 <div class="head_details1">
-                                    <span><a href="<?php echo base_url('business-profile/details/' . $business_common_data[0]['business_slug']); ?>"><h5><i class="fa fa-info-circle" aria-hidden="true"></i>Information</h5></a>
+                                    <span><a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug'] . '/details'); ?>"><h5><i class="fa fa-info-circle" aria-hidden="true"></i>Information</h5></a>
                                     </span>      
                                 </div>
                                 <table class="business_data_table">
@@ -130,18 +130,18 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </table>
                             </div>
                         </div>
-                        <a href="<?php echo base_url('business-profile/photos/' . $business_common_data[0]['business_slug']) ?>">
+                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) .'/photos' ?>">
                             <div class="full-box-module business_data">
                                 <div class="profile-boxProfileCard  module buisness_he_module" >
                                     <div class="head_details">
-                                        <h5><i class="fa fa-camera" aria-hidden="true"></i>   Photos</h5>
+                                        <h5><i class="fa fa-camera" aria-hidden="true"></i>Photos</h5>
                                     </div>
                                     <div class="bus_photos">
                                     </div>
                                 </div>
                             </div>
                         </a>
-                        <a href="<?php echo base_url('business-profile/videos/' . $business_common_data[0]['business_slug']) ?>">
+                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/videos' ?>">
                             <div class="full-box-module business_data">
                                 <div class="profile-boxProfileCard  module">
                                     <table class="business_data_table">
@@ -156,7 +156,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </a>
                         <div class="full-box-module business_data">
                             <div class="profile-boxProfileCard  module">
-                                <a href="<?php echo base_url('business-profile/audios/' . $business_common_data[0]['business_slug']) ?>"> 
+                                <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>"> 
                                     <div class="head_details1">
                                         <h5><i class="fa fa-music" aria-hidden="true"></i>Audio</h5>
                                     </div>
@@ -167,7 +167,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </table>
                             </div>
                         </div>
-                        <a href="<?php echo base_url('business-profile/pdf/' . $business_common_data[0]['business_slug']) ?>">
+                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
                             <div class="full-box-module business_data">
                                 <div class="profile-boxProfileCard  module buisness_he_module" >
                                     <div class="head_details">

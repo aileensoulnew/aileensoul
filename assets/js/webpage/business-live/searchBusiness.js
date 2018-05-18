@@ -4,12 +4,30 @@ app.controller('searchBusinessController', function ($scope, $window) {
     $scope.searchSubmit = function () {
         var keyword = $scope.keyword.toLowerCase().split(' ').join('+');
         var city = $scope.city.toLowerCase().split(' ').join('+');
+        var keyworddata = [];
+        if(keyword != ""){
+            keyworddata = keyword.split(",");
+            // remove in from array
+            if(keyworddata.indexOf("in") > -1 && city != ""){
+                keyworddata.splice(keyworddata.indexOf("in"),1);
+            }
+            keyword = keyworddata.join('-').toString();
+        }
+        var citydata = [];
+        if(city != ""){
+            citydata = city.split(",");
+            // remove in from array
+            // if(citydata.indexOf("in") > -1 && city != ""){
+            //     citydata.splice(citydata.indexOf("in"),1);
+            // }
+            city = citydata.join('-').toString();
+        }
         if (keyword == '' && city == '') {
             return false;
         } else if (keyword != '' && city == '') {
             $window.location.href = base_url + 'business/search/' + keyword;
         } else if (keyword == '' && city != '') {
-            $window.location.href = base_url + 'business/search/' + city;
+            $window.location.href = base_url + 'business/search/business-in-' + city;
         } else {
             $window.location.href = base_url + 'business/search/' + keyword + '-in-' + city;
         }

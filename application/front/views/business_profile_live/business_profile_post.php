@@ -60,7 +60,7 @@ $mobile_agent = $this->agent->mobile;
                                         <h3 class="user_list_head">User List
                                         </h3>
                                         <div class="seeall">
-                                            <a href="<?php echo base_url('business-profile/userlist/' . $business_common_data[0]['business_slug']); ?>">View all
+                                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/userlist'; ?>">View all
                                             </a>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@ $mobile_agent = $this->agent->mobile;
                                             <h3 class="user_list_head">User List
                                             </h3>
                                             <div class="seeall">
-                                                <a href="<?php echo base_url('business-profile/userlist/' . $business_common_data[0]['business_slug']); ?>">View all
+                                                <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/userlist'; ?>">View all
                                                 </a>
                                             </div>
                                         </div>
@@ -292,7 +292,7 @@ $mobile_agent = $this->agent->mobile;
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('business-profile'); ?>" title="Business Profile">
+                                    <a href="<?php echo base_url('business-search'); ?>" title="Business Profile">
                                         <div class="all-pr-img">
                                             <img src="<?php echo base_url('assets/img/i4.jpg'); ?>" alt="<?php echo "i4.jpg"; ?>">
                                         </div>

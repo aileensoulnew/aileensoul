@@ -35,7 +35,7 @@
                                         <div class="cat-box">
                                             <ul data-aos="fade-up" data-aos-duration="1000">
                                                 <li ng-repeat="category in businessAllCategory">
-                                                    <a ng-href="<?php echo base_url('business-profile/category/') ?>{{category.industry_slug}}">
+                                                    <a ng-href="<?php echo base_url ?>{{category.industry_slug}}-business">
                                                         <div class="cus-cat-middle">
                                                             <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>" alt="{{category.industry_name}}">
                                                             <p ng-bind="category.industry_name"></p>
@@ -43,7 +43,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a ng-href="<?php echo base_url('business-profile/category/other') ?>">
+                                                    <a ng-href="<?php echo base_url ?>other-business ?>">
                                                         <div class="cus-cat-middle">
                                                             <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>" alt="Other">
                                                             <p>Other
@@ -59,7 +59,7 @@
                                         <div class="location-box">
                                             <ul data-aos="fade-up" data-aos-duration="1000">
                                                 <li ng-repeat="location in businessAllLocation">
-                                                    <a ng-href="<?php echo base_url('business-profile/location/') ?>{{location.slug}}">
+                                                    <a ng-href="<?php echo base_url('business-in-') ?>{{location.slug}}">
                                                         <div class="cus-cat-middle">
                                                             <img src="<?php echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>">
                                                             <p ng-bind="location.city_name"></p>
@@ -77,37 +77,6 @@
                 <div class="right-part">
                     <div class="add-box">
                         <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>" alt="{{category.industry_name}}">
-                    </div>
-                </div>
-            </div>
-
-            <!-- OLD HTML -->
-            <div class="container hidden">
-                <div class="custom-user-list">
-                    <div class="list-box-custom">
-                        <h3>All Categories</h3>
-                        <div class="cat-box">
-                            <ul>
-                                <li ng-repeat="category in businessAllCategory">
-                                    <a ng-href="<?php echo base_url('business-profile/category/') ?>{{category.industry_slug}}">
-                                        <img ng-src="<?php echo base_url('assets/n-images/car.png?ver=' . time()) ?>" alt="{{category.industry_name}}">
-                                        <p><span ng-bind="category.industry_name"></span><span ng-bind="'(' + category.count + ')'"></span></p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ng-href="<?php echo base_url('business-profile/category/other') ?>">
-                                        <img ng-src="<?php echo base_url('assets/n-images/car.png?ver=' . time()) ?>" alt="Other">
-                                        <p>Other<span ng-bind="'(' + otherCategoryCount + ')'"></span></p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="right-part">
-                    <div class="add-box">
-                        <img ng-src="<?php echo base_url('assets/n-images/add.jpg?ver='.time()) ?>" alt="Advertise">
                     </div>
                 </div>
             </div>

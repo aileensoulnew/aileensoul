@@ -863,7 +863,7 @@
                                     if (data.is_success == '1') {
                                         angular.element('#businessimage #next').removeClass("form_submit");
                                         $scope.loader_show = false;
-                                        window.location.href = base_url + 'business-profile/home';
+                                        window.location.href = base_url + 'business-profile';
                                     } else {
                                         return false;
                                     }

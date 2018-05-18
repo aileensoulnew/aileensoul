@@ -66,7 +66,7 @@ $userid = $this->session->userdata('aileenuser');
     });
 </script>
 
-<?php if (($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'home')) { ?>
+<?php if (($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == '')) { ?>
     <header>
         <div class="bg-search">
             <div class="header2 headerborder animated fadeInDownBig">
@@ -93,7 +93,7 @@ $userid = $this->session->userdata('aileenuser');
                             </div>
                             <div class="">
                                 <ul class="" id="dropdownclass">
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'home') { ?> class="active" <?php } ?>><a class="bus-h" href="<?php echo base_url('business-profile/home'); ?>"><span class="home-22x22-h"></span></a>
+                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'home') { ?> class="active" <?php } ?>><a class="bus-h" href="<?php echo base_url('business-profile'); ?>"><span class="home-22x22-h"></span></a>
                                     </li>
                                     <li id="add_contact">
                                         <a class="action-button shadow animate dropbtn_common <?php
@@ -169,7 +169,7 @@ $userid = $this->session->userdata('aileenuser');
                                                 <span class="my_account">
                                                     <div class="my_S">Account</div>
                                                 </span>
-                                                <a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>">
+                                                <a href="<?php echo base_url('company/' . $business_login_slug) . '/details'; ?>">
                                                     <span class="icon-view-profile edit_data"></span>
                                                     <span> View Profile </span></a> 
                                                 <a href="<?php echo base_url('business-profile/registration/business-information'); ?>">
@@ -220,7 +220,7 @@ $userid = $this->session->userdata('aileenuser');
                             </div>
                             <div class="">
                                 <ul class="" id="dropdownclass">
-                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'home') { ?> class="active" <?php } ?>><a class="bus-h" href="<?php echo base_url('business-profile/home'); ?>"><span class="home-22x22-h"></span></a>
+                                    <li <?php if ($this->uri->segment(1) == 'business-profile' && $this->uri->segment(2) == 'home') { ?> class="active" <?php } ?>><a class="bus-h" href="<?php echo base_url('business-profile'); ?>"><span class="home-22x22-h"></span></a>
                                     </li>
                                     <li id="add_contact">
                                         <a class="action-button shadow animate dropbtn_common <?php
@@ -278,7 +278,7 @@ $userid = $this->session->userdata('aileenuser');
                                                 <span class="my_account">
                                                     <div class="my_S">Account</div>
                                                 </span>
-                                                <a href="<?php echo base_url('business-profile/details/' . $business_login_slug); ?>">
+                                                <a href="<?php echo base_url('company/' . $business_login_slug) . '/details'; ?>">
                                                     <span class="icon-view-profile edit_data"></span>
                                                     <span> View Profile </span></a> 
                                                 <a href="<?php echo base_url('business-profile/registration/business-information'); ?>">

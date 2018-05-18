@@ -51,7 +51,7 @@
             $this->freelance_apply_profile_set = 0;
 
             if(!empty($business_profile_count) &&  $business_profile_count[0]['business_step']==4){
-                $this->business_profile_link = base_url("business-profile/home");
+                $this->business_profile_link = base_url("business-profile");
                  $this->business_profile_set = 1;
             }
             if(!empty($artist_profile_count) &&  count($artist_profile_count)>0){
