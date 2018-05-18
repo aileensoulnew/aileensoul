@@ -71,14 +71,14 @@
 </div>
 
 
-<div class="middle-section job-reg-cus">
+<div class="middle-section art-reg-cus">
 	<div class="container">
 		<div class="">
 		<div class="title-div">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#register">Register</a></li>
 				<li><a data-toggle="tab" href="#basic-information">Basic Information</a></li>
-				<li><a data-toggle="tab" href="#job-registration">Job Registration</a></li>
+				<li><a data-toggle="tab" href="#art-registration">Artist Registration</a></li>
 			</ul>
 		</div>
 		<div class="tab-content">
@@ -400,13 +400,13 @@
 					</div>
 				</div>
 			</div>
-			<div id="job-registration" class="tab-pane fade final-reg-form">
+			<div id="art-registration" class="tab-pane fade final-reg-form">
 				<div class="inner-form">
 					<div class="login">
 						<div class="title">
-                            <h1>Job Registration</h1>
+                            <h1>Artist Registration</h1>
                         </div>
-						<form id="jobseeker_regform">
+						<form id="artinfo">
 							<div class="row">
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
@@ -418,141 +418,99 @@
 										<input type="text" name="last_name" id="last_name" tabindex="2" placeholder="Enter your Last Name" maxlength="35">
 									</div>
 								</div>
-								<div class="col-sm-12 col-md-12">
+								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
 										<input type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address" value="" maxlength="255">
 										<a href="#" data-toggle="tooltip" data-placement="left" title="" class="pull-right email-note-cus" data-original-title=" Related notification email will be sent on provided email address kindly use regular email address."><img tooltips="" tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" alt="tooltip" src="n-images/tooltip.png"></a>
 										
 									</div>
 								</div>
-								<div class="col-sm-12 col-md-12">
-									<div class="form-group cus-radio-box">
-										<label>Fresher <font color="red">*</font> : </label>
-										<div class="main_raio">
-											<input type="radio" value="Fresher" tabindex="4" id="test1" name="fresher" class="radio_job" onclick="not_experience()">
-											<label for="test1" class="point_radio">Yes</label>
-										</div>
-
-										<div class="main_raio">
-											<input type="radio" value="Experience" tabindex="5" id="test2" class="radio_job" name="fresher" onclick="experience()">
-											<label for="test2" class="point_radio">No</label>
-										</div>
-										<div class="fresher-error"></div>
-									</div>
-								</div>
-								<div class="fw">
-									<div id="exp_data">
-										<label class="pl15">Total Experience<span class="red">*</span>:</label>
-										<div class="col-sm-6 col-md-6">
-											<div class="form-group fw">
-												<span class="select-field-custom">
-												<select tabindex="6" autofocus="" name="experience_year" id="experience_year" class="experience_year keyskil" onchange="expyear_change();">
-													<option value="" selected="" option="" disabled="">Year</option>
-													<option value="0 year">0 year</option>
-													<option value="1 year">1 year</option>
-													<option value="2 year">2 year</option>
-													<option value="3 year">3 year</option>
-													<option value="4 year">4 year</option>
-													<option value="5 year">5 year</option>
-													<option value="6 year">6 year</option>
-													<option value="7 year">7 year</option>
-													<option value="8 year">8 year</option>
-													<option value="9 year">9 year</option>
-													<option value="10 year">10 year</option>
-													<option value="11 year">11 year</option>
-													<option value="12 year">12 year</option>
-													<option value="13 year">13 year</option>
-													<option value="14 year">14 year</option>
-													<option value="15 year">15 year</option>
-													<option value="16 year">16 year</option>
-													<option value="17 year">17 year</option>
-													<option value="18 year">18 year</option>
-													<option value="19 year">19 year</option>
-													<option value="20 year">20 year</option>
-												</select>
-												</span>
-											</div>
-										</div>
-										<div class="col-sm-6 col-md-6">
-											<div class="form-group fw">	
-												<span class="select-field-custom">
-												<select tabindex="7" id="experience_month" class="experience_month keyskil" onclick="expmonth_click();">
-													<option value="" selected="" option="" disabled="">Month</option>
-													<option value="0 month">0 month</option>
-													<option value="1 month">1 month</option>
-													<option value="2 month">2 month</option>
-													<option value="3 month">3 month</option>
-													<option value="4 month">4 month</option>
-													<option value="5 month">5 month</option>
-													<option value="6 month">6 month</option>
-													<option value="7 month">7 month</option>
-													<option value="8 month">8 month</option>
-													<option value="9 month">9 month</option>
-													<option value="10 month">10 month</option>
-													<option value="11 month">11 month</option>
-													<option value="12 month">12 month</option>
-												</select>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-12">
+								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="search" tabindex="8" id="job_title" name="job_title" value="" placeholder="Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off">
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-12">
-									<div class="form-group">
-										<input id="skills2" style="text-transform: capitalize;" name="skills" tabindex="9" size="90" placeholder="Enter SKills" class="ui-autocomplete-input" autocomplete="off">
+										<input type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Enter your phone number" maxlength="35">
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="industry" id="industry" tabindex="10">
-												<option value="" selected="selected">Select industry</option>
-												<option value="382">Account</option>
-												<option value="1">Accounting</option>
-												<option value="303">Accounting-Tax/Consulting</option>
-												<option value="328">Advertising/PR/Event Management</option>
-												<option value="351">Agriculture/Forestry/Fishing</option>
-												<option value="3">Airlines/Aviation</option>
-												<option value="4">Alternative Dispute Resolution </option>
-												<option value="5">Alternative Medicine</option>
-												<option value="343">Analyst</option>
-												<option value="6">Animation</option>
-												<option value="7">Apparel &amp; Fashion</option>
-												<option value="321">Apparel/Garments</option>
-												<option value="8">Architecture &amp; Interior</option>
-												<option value="300">Architecture/Interior Design</option>
-												<option value="9">Arts &amp; Crafts</option>
-												<option value="314">Automobiles/Auto Component/Auto Ancillary</option>
-												<option value="10">Automotive</option>
-												<option value="11">Aviation &amp; Aerospace</option>
-												<option value="12">Banking</option>
-												<option value="13">Biotechnology</option>
-												<option value="304">Biotechnology/Pharmaceutical/Medicine</option>
-												<option value="14">Brodcast Media</option>
-												<option value="15">Bulding Materials</option>
-												<option value="16">Business Supplies &amp; Equipment</option>
-												<option value="17">Capital Markets</option>
-												<option value="340">Catering/Food Services/Restaurant</option>
-												<option value="18">Chemicals</option>
-												<option value="19">Civic &amp; Social Organization</option>
-												<option value="20">Civil Engineering</option>
-												<option value="21">Commercial Real Estate</option>
+												<option value="" selected="selected">Select Category</option>
+												<option value="382">Actor</option>
+												<option value="1">Model</option>
+												<option value="303">Singer</option>
+												<option value="328">Photographer</option>
+												<option value="351">Musician</option>
+												<option value="3">Interior Designer</option>
+												<option value="4">Graphic Designer </option>
+												<option value="5">Writer</option>
+												<option value="343">Painter</option>
+												<option value="6">Dancer</option>
+												<option value="7">Anchor</option>
+												<option value="321">Voice Over Artist</option>
 												
 											</select>
 										</span>
 									</div>
 								</div>
-								<div class="col-sm-12 col-md-12">
-									<div class="form-group">
-									   
-									   <input id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites" class="ui-autocomplete-input" autocomplete="off">
+								
+							
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group fw">
+										<span class="select-field-custom">
+											<select name="country" id="country" tabindex="10">
+												<option value="" selected="selected">Select country</option>
+												<option value="382">Afghanistan</option>
+												<option value="1">Albania</option>
+												<option value="303">Algeria</option>
+												<option value="328">American Samoa</option>
+												<option value="351">Andorra</option>
+												<option value="3">Angola</option>
+												<option value="4">Anguilla </option>
+												<option value="5">Antarctica</option>
+												<option value="343">Antigua And Barbuda</option>
+												<option value="6">Argentina</option>
+												<option value="7">Armenia</option>
+											</select>
+										</span>
 									</div>
 								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group fw">
+										<span class="select-field-custom">
+											<select name="state" id="state" tabindex="10">
+												<option value="" selected="selected">Select state</option>
+												<option value="382">Gujarat</option>
+												<option value="1">Maharashtra</option>
+												<option value="303">Goa</option>
+												<option value="328">kerala</option>
+												<option value="351">karnataka</option>
+												<option value="3">Delhi</option>
+												<option value="4">Bihar</option>
+												<option value="5">kolkata</option>
+												<option value="343">Andhr pradesh</option>
+											</select>
+										</span>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-12">
+									<div class="form-group fw">
+										<span class="select-field-custom">
+											<select name="city" id="city" tabindex="10">
+												<option value="" selected="selected">Select city</option>
+												<option value="382">Ahmedabad</option>
+												<option value="1">Surat</option>
+												<option value="303">Rajkot</option>
+												<option value="328">Baroda</option>
+												<option value="351">Gandhinagar</option>
+												<option value="3">Bharuch</option>
+												<option value="4">Junagadh</option>
+												<option value="5">Valsad</option>
+												<option value="343">vapi</option>
+											</select>
+										</span>
+									</div>
+								</div>
+							
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
 									   <div class="job_reg text-right">
