@@ -36,11 +36,31 @@
     </head>
     <body class="profile-main-page">    
         <?php 
-        if($job_deactive == 0)
+        if($job_deactive == 0 && $user_id != "")
             echo $job_header2;
         else if ($job_deactive > 0) {
             echo $header_profile;
-                 } ?>   
+        } 
+        else
+        {
+        ?>
+        <header>
+            <div class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 left-header">
+                            <h2 class="logo"><a href="<?php echo base_url(); ?>">Aileensoul</a></h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 no-login-right fw-479">
+                            <a href="#" class="btn8">Login</a>
+                            <a href="#" class="btn9">Create account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <?php   
+        } ?>
         <div class="middle-section middle-section-banner new-ld-page">
             <?php echo $search_banner; ?>
             

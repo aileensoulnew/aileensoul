@@ -173,8 +173,19 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         }
         else
         {
-            $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
-            $('#bidmodal').modal('show');
+            if(login_user_id == "" || job_deactive == 1)
+            {                
+                if(login_user_id == "")
+                    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+                else if(job_deactive == 1)
+                    $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
+                $('#bidmodal').modal('show');
+            }
+            else
+            {                
+                $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
+                $('#bidmodal').modal('show');
+            }
         }
     };
 
@@ -216,9 +227,20 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         }
         else
         {
-            save_post(id);
-            $('.biderror .mes').html("<div class='pop_content'>Job successfully saved.");
-            $('#bidmodal').modal('show');
+            if(login_user_id == "" || job_deactive == 1)
+            {
+                if(login_user_id == "")
+                    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+                else if(job_deactive == 1)
+                    $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
+                $('#bidmodal').modal('show');
+            }
+            else
+            {
+                save_post(id);
+                $('.biderror .mes').html("<div class='pop_content'>Job successfully saved.");
+                $('#bidmodal').modal('show');
+            }
         }
     };
 

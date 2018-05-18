@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page">        
         <div class="middle-section middle-section-banner new-ld-page">
@@ -22,7 +25,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 left-header">
-                                    <h2 class="logo"><a href="#">Aileensoul</a></h2>
+                                    <h2 class="logo"><a href="<?php echo base_url(); ?>">Aileensoul</a></h2>
                                 </div>
                                 <div class="col-md-6 col-sm-6 no-login-right fw-479">
                                     <a href="#" class="btn8">Login</a>
@@ -40,38 +43,38 @@
                                 <p>Because Dream Matters </p>
                             </div>
                             <div class="search-box">
-                                <form>
-                                    <div class="pb20 search-input">
-                                        <input type="text" placeholder="Job Title, Keywords, or Company ">
-                                        <input class="city-input" type="text" placeholder="City, State or Country">
-                                        
-                                    </div>
-                                    <div class="pt5 fw pb20">
-                                        <ul class="work-timing fw">
-                                            <li>
-                                                <label class="control control--checkbox">Full-Time
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="control control--checkbox">Part-Time
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="control control--checkbox">Internship
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="fw pt20">
-                                        <a href="#" class="btn1">View More Jobs</a>
-                                    </div>
-                                </form>
+                                <form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
+                                <div class="pb20 search-input">
+                                    <input type="text" ng-model="keyword" id="job_keyword" name="job_keyword" placeholder="Job Title, Keywords, or Company" autocomplete="off">
+                                    <input type="text" ng-model="city" id="job_location" name="job_location" placeholder="City, State or Country" class="city-input" autocomplete="off">
+                                    
+                                </div>
+                                <div class="pt5 fw pb20">
+                                    <ul class="work-timing fw">
+                                        <li>
+                                            <label class="control control--checkbox">Full-Time
+                                              <input type="checkbox" ng-model="fulltime" name="work_timing[]" class="work_timing-filter" value="1" />
+                                              <div class="control__indicator"></div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="control control--checkbox">Part-Time
+                                              <input class="work_timing-filter" ng-model="parttime" name="work_timing[]" value="2" type="checkbox"/>
+                                              <div class="control__indicator"></div>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="control control--checkbox">Internship
+                                              <input  class="work_timing-filter" ng-model="internship" name="work_timing[]" value="3" type="checkbox"/>
+                                              <div class="control__indicator"></div>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fw pt20">
+                                    <input type="submit" class="btn1" name="submit" value="Search">
+                                </div>
+                            </form>
                             </div>
                         </div>
                         <div class="col-md-6 right-bnr">
@@ -232,15 +235,60 @@
             </div>
             
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script type="text/javascript" charset="utf-8">
+function jobsearchSubmit(){
+    
+        var keyword = $("input[name='job_keyword']").val().toLowerCase().split(' ').join('+');
+        var city = $("input[name='job_location']").val().toLowerCase().split(' ').join('+');
+
+        var work_timing_fil = "";
+        $('.work_timing-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                work_timing_fil += (work_timing_fil == "") ? currentid : "-" + currentid;
+            }
+        });        
+        // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+        var keyworddata = [];
+        if(keyword != ""){
+            keyworddata = keyword.split(",");
+            // remove in from array
+            if(keyworddata.indexOf("in") > -1 && city != ""){
+                keyworddata.splice(keyworddata.indexOf("in"),1);
+            }
+            keyword = keyworddata.join('-').toString();
+        }
+        var citydata = [];
+        if(city != ""){
+            citydata = city.split(",");
+            // remove in from array
+            // if(citydata.indexOf("in") > -1 && city != ""){
+            //     citydata.splice(citydata.indexOf("in"),1);
+            // }
+            city = citydata.join('-').toString();
+        }
+
+        if (keyword == '' && city == '') {
+            return false;
+        } else if (keyword != '' && city == '') {
+            window.location.href = base_url + 'jobs/search/' + keyword + '-jobs?work_timing='+work_timing_fil;
+        } else if (keyword == '' && city != '') {
+            window.location.href = base_url + 'jobs/search/jobs-in-' + city+'?work_timing='+work_timing_fil;
+        } else {
+            window.location.href = base_url + 'jobs/search/' + keyword + '-jobs-in-' + city+'?work_timing='+work_timing_fil;
+        }
+    }
+</script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';

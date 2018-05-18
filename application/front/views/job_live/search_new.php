@@ -32,6 +32,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); 
         ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <style type="text/css">
           .ui-autocomplete {
             background: #fff;
@@ -40,7 +42,32 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 </style>
     </head>
     <body class="profile-main-page">    
-        <?php echo $header_profile;?>
+        <?php 
+        if($job_deactive == 0 && $userid_login != ""){
+            echo $job_header2;
+        }else if ($job_deactive > 0) {
+            echo $header_profile;
+        }
+        else
+        {
+        ?>
+        <header>
+            <div class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 left-header">
+                            <h2 class="logo"><a href="<?php echo base_url(); ?>">Aileensoul</a></h2>
+                        </div>
+                        <div class="col-md-6 col-sm-6 no-login-right fw-479">
+                            <a href="#" class="btn8">Login</a>
+                            <a href="#" class="btn9">Create account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <?php   
+        } ?>
         <div class="middle-section middle-section-banner">
             
            <?php echo $search_banner; ?>
@@ -324,7 +351,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             </div>
         </div>
 
-        <!-- Bid-modal  -->
+        <!-- Register -modal  -->
         <div class="modal fade message-box login register-model" id="job_reg" role="dialog">
             <div class="modal-dialog modal-lm" >
                 <div class="modal-content message">
@@ -465,14 +492,23 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
             </div>
         </div>
+        <!-- Register Popup Close -->
+        <!-- Bid-modal  -->
+        <div class="modal message-box biderror" id="bidmodal" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+                    <div class="modal-body">
+                        <span class="mes"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Model Popup Close -->
-
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -488,8 +524,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             
             var w = '';
             var work_timing = "<?php echo $work_timing ?>";
-            var login_user_id = "<?php echo $userid_login; ?>"
-            var job_profile_set = "<?php echo $this->job_profile_set; ?>"
+            var login_user_id = "<?php echo $userid_login; ?>";
+            var job_profile_set = "<?php echo $this->job_profile_set; ?>";
+            var job_deactive = "<?php echo $job_deactive; ?>";
             var app = angular.module('jobSearch', ['ui.bootstrap']);
             $(document).ready(function(){
                 $(window).scrollTop(500);
