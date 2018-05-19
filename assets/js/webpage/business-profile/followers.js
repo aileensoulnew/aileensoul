@@ -92,7 +92,12 @@ function followuser_two(clicked_id)
         url: base_url + "business_profile/follow_two",
         data: 'follow_to=' + clicked_id,
         success: function (data) {
-            $('#' + 'frfollow' + clicked_id).html(data);
+            var res = JSON.parse(data);
+            $('.' + 'fr' + clicked_id).html(res.follow_html);
+            $('.contactcount').html(res.contacts_count);
+            $('#countfollower').html("("+res.follower_count+")");
+            $('#countfollow').html("("+res.following_count+")");
+            // $('#' + 'frfollow' + clicked_id).html(data);
 //            $('.' + 'fr' + clicked_id).html(data);
         }
     });
@@ -107,7 +112,11 @@ function unfollowuser_two(clicked_id)
         url: base_url + "business_profile/unfollow_two",
         data: 'follow_to=' + clicked_id,
         success: function (data) {
-            $('#' + 'frfollow' + clicked_id).html(data);
+            var res = JSON.parse(data);
+            $('.' + 'fr' + clicked_id).html(res.unfollow_html);
+            $('.contactcount').html(res.uncontacts_count);
+            $('#countfollower').html("("+res.unfollower_count+")");
+            $('#countfollow').html("("+res.unfollowing_count+")");
 //            $('.' + 'fr' + clicked_id).html(data);
         }
     });
