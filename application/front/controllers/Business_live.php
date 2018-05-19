@@ -265,4 +265,24 @@ class Business_live extends MY_Controller {
             $this->data['isbusinessdeactivate'] = true;
         }
     }
+
+    public function view_more_business()
+    {
+       $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Categories - Business Profile | Aileensoul";
+        $this->data['business_profile_set'] = $this->business_profile_set;
+        $this->data['page'] = '';
+        $this->load->view('business_live/view_more_business', $this->data);
+    }
+
 }

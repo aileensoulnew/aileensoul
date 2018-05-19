@@ -116,7 +116,7 @@ $route['profiles/opportunities/(:any)'] = "user_opportunities";
 
 //$route['business-profile'] = "business_profile/index";
 $route['business-search'] = "business_live/index";
-$route['business-by-categories'] = "business_live/category";
+
 // $route['business-profile/category'] = "business_live/category";
 $route['business/search'] = "business_live/business_search";
 
@@ -183,7 +183,7 @@ $route['business-profile/signup/edit/image'] = "business_profile_registration/im
 
 // $route['business_profile/reactivate'] = "business_profile_live/reactivate";
 
-$route['business-by-location'] = "business_live/location";
+
 // $route['business-profile/location'] = "business_live/location";
 
 $route['message/b/(:any)'] = "message/business_profile/$1";
@@ -519,6 +519,9 @@ $route['how-to-use-recruiter-profile-in-aileensoul'] = "introduction/recruiter_p
 $route['how-to-use-freelance-profile-in-aileensoul'] = "introduction/freelance_profile";
 $route['how-to-use-business-profile-in-aileensoul'] = "introduction/business_profile";
 $route['how-to-use-artistic-profile-in-aileensoul'] = "introduction/artistic_profile";
+
+$route['business-by-categories'] = "business_live/view_more_business";
+$route['business-by-location'] = "business_live/view_more_business";
 
 $route['artist/pdf-view/(:any)'] = "artist/pdf_display/$1";
 $route['business-profile/pdf-view/(:any)'] = "business_profile/pdf_display/$1";
