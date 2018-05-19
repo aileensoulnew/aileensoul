@@ -188,9 +188,11 @@ class Business_model extends CI_Model {
     }
 
     function business_followers($follow_to = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
-        $this->db->select('*')->from('business_profile bp');
+        $this->db->select('ul.*,f.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
         $this->db->join('user_login ul', 'ul.user_id = bp.user_id');
         $this->db->join('follow f', 'f.follow_from = bp.business_profile_id');
+        $this->db->join('cities ct', 'ct.city_id = bp.city');
+        $this->db->join('states st', 'st.state_id = bp.state');
         $this->db->where('f.follow_to', $follow_to);
         $this->db->where('f.follow_status', '1');
         $this->db->where('f.follow_type', '2');
@@ -211,9 +213,11 @@ class Business_model extends CI_Model {
     }
 
     function business_following($follow_from = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
-        $this->db->select('*')->from('business_profile bp');
+        $this->db->select('ul.*,f.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
         $this->db->join('user_login ul', 'ul.user_id = bp.user_id');
         $this->db->join('follow f', 'f.follow_to = bp.business_profile_id');
+        $this->db->join('cities ct', 'ct.city_id = bp.city');
+        $this->db->join('states st', 'st.state_id = bp.state');
         $this->db->where('f.follow_from', $follow_from);
         $this->db->where('f.follow_status', '1');
         $this->db->where('f.follow_type', '2');
@@ -234,8 +238,10 @@ class Business_model extends CI_Model {
     }
 
     function business_userlist($user_id = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
-        $this->db->select('*')->from('business_profile bp');
+        $this->db->select('ul.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
         $this->db->join('user_login ul', 'ul.user_id = bp.user_id');
+        $this->db->join('ailee_cities ct', 'ct.city_id = bp.city');
+        $this->db->join('ailee_states st', 'st.state_id = bp.state');
         $this->db->where('bp.user_id !=', $user_id);
         $this->db->where('bp.business_step', '4');
         $this->db->where('bp.is_deleted', '0');

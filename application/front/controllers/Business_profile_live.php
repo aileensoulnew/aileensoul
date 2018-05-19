@@ -211,6 +211,7 @@ class Business_profile_live extends MY_Controller {
         }
         $business_main_slug = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_slug;
         $business_main_profile = $this->db->get_where('business_profile', array('user_id' => $userid, 'status' => '1'))->row()->business_profile_id;
+
         if ($id != '') {
             $contition_array = array('business_slug' => $id, 'is_deleted' => '0', 'status' => '1', 'business_step' => '4');
             $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -225,6 +226,7 @@ class Business_profile_live extends MY_Controller {
             $other_user_id = $business_data[0]['user_id'];
 
             $loginuser = $business_main_profile;
+
             $contition_array = array('follow_type' => '2', 'follow_status' => '1');
             $search_condition = "((follow_from  = '$loginuser' AND follow_to  = ' $other_user') OR (follow_from  = '$other_user' AND follow_to  = '$loginuser'))";
             $followperson = $this->common->select_data_by_search('follow', $search_condition, $contition_array, $data = 'count(*) as follow_count', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = '', $groupby = '');
@@ -2164,7 +2166,7 @@ Your browser does not support the audio tag.
 
         $compnay_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($compnay_name) . ' | All User' . ' | Business Profile ' . TITLEPOSTFIX;
-        $this->data['business_left'] = $this->load->view('business_profile/business_left', $this->data, TRUE);
+        $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, TRUE);
         $this->load->view('business_profile_live/business_userlist', $this->data);
     }
 
@@ -3024,8 +3026,6 @@ Your browser does not support the audio tag.
             $update = $this->common->update_data($data, 'follow', 'follow_id', $follow[0]['follow_id']);
 
             // insert notification
-
-
             $contition_array = array('not_type' => '8', 'not_from_id' => $userid, 'not_to_id' => $busdatatoid[0]['user_id'], 'not_product_id' => $follow[0]['follow_id'], 'not_from' => '6');
             $busnotification = $this->common->select_data_by_condition('notification', $contition_array, $data = 'not_read', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
             if ($busnotification[0]['not_read'] == 2) {
@@ -5105,6 +5105,8 @@ Your browser does not support the audio tag.
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
+        $slug_id = $this->business_model->removelocationfromslug($slug_id);
+        
         $this->business_profile_active_check();
         $this->is_business_profile_register();
 

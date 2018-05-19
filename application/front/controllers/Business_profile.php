@@ -1132,7 +1132,7 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
 
                 $return_html .= '<div class = "one-image">';
 
-                $return_html .= '<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+                $return_html .= '<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[0]['file_name'] . '">
 </a>
 </div>';
@@ -1197,7 +1197,7 @@ Your browser does not support the audio tag.
             foreach ($businessmultiimage as $multiimage) {
 
                 $return_html .= '<div class = "two-images">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "two-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';
@@ -1205,18 +1205,18 @@ Your browser does not support the audio tag.
         } elseif (count($businessmultiimage) == 3) {
 
             $return_html .= '<div class = "three-image-top" >
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "three-columns" src = "' . BUS_POST_RESIZE4_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '" alt="' . $businessmultiimage[0]['file_name'] . '">
 </a>
 </div>
 <div class = "three-image" >
 
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[1]['file_name'] . '" alt="' . $businessmultiimage[1]['file_name'] . '">
 </a>
 </div>
 <div class = "three-image" >
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[2]['file_name'] . '" alt="' . $businessmultiimage[2]['file_name'] . '">
 </a>
 </div>';
@@ -1225,7 +1225,7 @@ Your browser does not support the audio tag.
             foreach ($businessmultiimage as $multiimage) {
 
                 $return_html .= '<div class = "four-image">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "breakpoint" src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';
@@ -1236,7 +1236,7 @@ Your browser does not support the audio tag.
             foreach ($businessmultiimage as $multiimage) {
 
                 $return_html .= '<div class = "four-image">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '?ver=' . time() . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';
@@ -1247,10 +1247,10 @@ Your browser does not support the audio tag.
             }
 
             $return_html .= '<div class = "four-image">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $businessmultiimage[3]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[3]['file_name'] . '">
 </a>
-<a class = "text-center" href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a class = "text-center" href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <div class = "more-image" >
 <span>View All (+
 ' . (count($businessmultiimage) - 4) . ')</span>
@@ -3288,7 +3288,6 @@ Your browser does not support the audio tag.
         $start = ($page - 1) * $perpage;
         if ($start < 0)
             $start = 0;
-
         $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
         $artdata = $artisticdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $slugid = $artdata[0]['business_slug'];
@@ -3312,7 +3311,6 @@ Your browser does not support the audio tag.
             $userlist = $this->business_model->business_followers($follow_to = $businessdata1[0]['business_profile_id'], $sortby = '', $orderby = '', $limit, $offset);
             $userlist1 = $this->business_model->business_followers($follow_to = $businessdata1[0]['business_profile_id']);
         }
-
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($userlist1);
         }
@@ -3334,8 +3332,15 @@ Your browser does not support the audio tag.
                                                                             <div class="follow-img">';
                 $followerimage = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->business_user_image;
                 $followername = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->company_name;
-                $followerslug = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->business_slug;
-
+                // $followerslug = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_from']))->row()->business_slug;
+                $sql = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
+                        FROM ailee_business_profile bp
+                        LEFT JOIN ailee_cities ct on bp.city = ct.city_id 
+                        LEFT JOIN ailee_states st on bp.state = st.state_id 
+                        WHERE business_profile_id = '". $user['follow_from'] ."'";
+                        // echo $sql;
+                $query = $this->db->query($sql);
+                $followerslug = $query->row()->business_slug;
                 if ($followerimage != '') {
                     $return_html .= '<a href="' . base_url('company/' . $followerslug) . '">';
                     if (IMAGEPATHFROM == 'upload') {
@@ -3496,6 +3501,15 @@ Your browser does not support the audio tag.
 
                 $companyname = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->company_name;
                 $slug = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->business_slug;
+                $sql = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
+                        FROM ailee_business_profile bp
+                        LEFT JOIN ailee_cities ct on bp.city = ct.city_id 
+                        LEFT JOIN ailee_states st on bp.state = st.state_id 
+                        WHERE business_profile_id = '". $user['follow_to'] ."'";
+                        // echo $sql;
+                $query = $this->db->query($sql);
+                $slug = $query->row()->business_slug;
+
                 if ($this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->business_user_image != '') {
                     $return_html .= '<a href="' . base_url('company/' . $slug) . '" title="' . $companyname . '">';
                     $uimage = $this->db->get_where('business_profile', array('business_profile_id' => $user['follow_to']))->row()->business_user_image;
@@ -8245,14 +8259,32 @@ Your browser does not support the audio tag.
         if (count($contacts_user1) > 0) {
             foreach ($contacts_user as $user) {
                 if ($user['contact_from_id'] == $business_user_id) {
-                    $business_data = $this->db->select('company_name,industriyal,business_user_image,user_id,business_slug')->get_where('business_profile', array('user_id' => $user['contact_to_id']))->row();
+                    // $business_data = $this->db->select('company_name,industriyal,business_user_image,user_id,business_slug')->get_where('business_profile', array('user_id' => $user['contact_to_id']))->row();
+                    $sql = "SELECT company_name, industriyal, business_user_image, user_id, IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
+                        FROM ailee_business_profile bp
+                        LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                        LEFT JOIN ailee_states st on bp.state = st.state_id
+                        WHERE user_id = '". $user['contact_to_id'] ."'";
+
+                    $query = $this->db->query($sql);
+                    $business_data = $query->row();
+                    
                     $company_name = $business_data->company_name;
                     $industriyal = $business_data->industriyal;
                     $business_user_image = $business_data->business_user_image;
                     $user_id = $business_data->user_id;
                     $business_slug = $business_data->business_slug;
                 } else {
-                    $business_data = $this->db->select('company_name,industriyal,business_user_image,user_id,business_slug')->get_where('business_profile', array('user_id' => $user['contact_from_id']))->row();
+                    $sql = "SELECT company_name, industriyal, business_user_image, user_id,
+                    IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
+                    FROM ailee_business_profile bp
+                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                    WHERE user_id = '". $user['contact_from_id'] ."'";
+
+                    $query = $this->db->query($sql);
+                    $business_data = $query->row();
+                    // $business_data = $this->db->select('company_name,industriyal,business_user_image,user_id,business_slug')->get_where('business_profile', array('user_id' => $user['contact_from_id']))->row();
                     $company_name = $business_data->company_name;
                     $industriyal = $business_data->industriyal;
                     $business_user_image = $business_data->business_user_image;
@@ -8850,7 +8882,7 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
 
                         $return_html .= '<div class = "one-image">';
 
-                        $return_html .= '<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+                        $return_html .= '<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[0]['file_name'] . '">
 </a>
 </div>';
@@ -8897,7 +8929,7 @@ Your browser does not support the audio tag.
                     foreach ($businessmultiimage as $multiimage) {
 
                         $return_html .= '<div class = "two-images">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "two-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';
@@ -8905,18 +8937,18 @@ Your browser does not support the audio tag.
                 } elseif (count($businessmultiimage) == 3) {
 
                     $return_html .= '<div class = "three-image-top" >
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "three-columns" src = "' . BUS_POST_RESIZE4_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '" alt="' . $businessmultiimage[0]['file_name'] . '">
 </a>
 </div>
 <div class = "three-image" >
 
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[1]['file_name'] . '" alt="' . $businessmultiimage[1]['file_name'] . '">
 </a>
 </div>
 <div class = "three-image" >
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "three-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $businessmultiimage[2]['file_name'] . '" alt="' . $businessmultiimage[2]['file_name'] . '">
 </a>
 </div>';
@@ -8925,7 +8957,7 @@ Your browser does not support the audio tag.
                     foreach ($businessmultiimage as $multiimage) {
 
                         $return_html .= '<div class = "four-image">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "breakpoint" src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';
@@ -8936,7 +8968,7 @@ Your browser does not support the audio tag.
                     foreach ($businessmultiimage as $multiimage) {
 
                         $return_html .= '<div class = "four-image">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '?ver=' . time() . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';
@@ -8947,10 +8979,10 @@ Your browser does not support the audio tag.
                     }
 
                     $return_html .= '<div class = "four-image">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img src = "' . BUS_POST_RESIZE2_UPLOAD_URL . $businessmultiimage[3]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[3]['file_name'] . '">
 </a>
-<a class = "text-center" href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a class = "text-center" href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <div class = "more-image" >
 <span>View All (+
 ' . (count($businessmultiimage) - 4) . ')</span>
@@ -9819,9 +9851,9 @@ Your browser does not support the audio tag.
 
     public function ajax_business_dashboard_post($id = '') {
         $s3 = new S3(awsAccessKey, awsSecretKey);
-        $business_login_slug = $this->data['business_login_slug'];
+        $business_login_slug = $this->data['business_login_slug_with_location'];
+        // $business_login_slug = $this->data['business_login_slug'];
 
-        $id = $this->business_model->removelocationfromslug($business_login_slug);
         $userid = $this->session->userdata('aileenuser');
         $perpage = 5;
         $page = 1;
@@ -9833,6 +9865,7 @@ Your browser does not support the audio tag.
         if ($start < 0)
             $start = 0;
         if ($id != '') {
+            $id = $this->business_model->removelocationfromslug($id);
             $bus_userid = $this->db->get_where('business_profile', array('business_slug' => $id, 'status' => '1'))->row()->user_id;
         } else {
             $bus_userid = $this->session->userdata('aileenuser');
@@ -9866,13 +9899,22 @@ Your browser does not support the audio tag.
 
         $condition_array = array('business_profile_post.is_delete' => '0', 'business_profile_post.status' => '1');
         $search_condition = "`business_profile_post_id` NOT IN ('$delete_post_id') AND (business_profile_post.user_id IN ('$total_user_list')) OR (posted_user_id ='$user_id' AND is_delete=0)";
-        $join_str[0]['table'] = 'business_profile';
-        $join_str[0]['join_table_id'] = 'business_profile.user_id';
+        $join_str[0]['table'] = 'business_profile bp';
+        $join_str[0]['join_table_id'] = 'bp.user_id';
         $join_str[0]['from_table_id'] = 'business_profile_post.user_id';
         $join_str[0]['join_type'] = '';
-        $data = "business_profile.business_user_image,business_profile.company_name,business_profile.industriyal,business_profile.business_slug,business_profile.other_industrial,business_profile.business_slug,business_profile_post.business_profile_post_id,business_profile_post.product_name,business_profile_post.product_description,business_profile_post.business_likes_count,business_profile_post.business_like_user,business_profile_post.created_date,business_profile_post.posted_user_id,business_profile.user_id";
+        $join_str[1]['table'] = 'cities ct';
+        $join_str[1]['join_table_id'] = 'ct.city_id';
+        $join_str[1]['from_table_id'] = 'bp.city';
+        $join_str[1]['join_type'] = 'left';
+        $join_str[2]['table'] = 'states st';
+        $join_str[2]['join_table_id'] = 'st.state_id';
+        $join_str[2]['from_table_id'] = 'bp.state';
+        $join_str[2]['join_type'] = 'left';
+        $data = "bp.business_user_image,bp.company_name,bp.industriyal,bp.other_industrial,business_profile_post.business_profile_post_id,business_profile_post.product_name,business_profile_post.product_description,business_profile_post.business_likes_count,business_profile_post.business_like_user,business_profile_post.created_date,business_profile_post.posted_user_id,bp.user_id,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug";
+
         $business_profile_post = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = $perpage, $offset = $start, $join_str, $groupby = '');
-        
+
         $business_profile_post1 = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
 
         $return_html = '';
@@ -9887,7 +9929,6 @@ Your browser does not support the audio tag.
 
         if (count($business_profile_post1) > 0) {
             foreach ($business_profile_post as $row) {
-
                 $post_business_user_image = $row['business_user_image'];
                 $post_company_name = $row['company_name'];
                 $post_business_profile_post_id = $row['business_profile_post_id'];
@@ -9924,7 +9965,6 @@ Your browser does not support the audio tag.
                                         </div>
                                     </div>
                                 </div>';
-
 
                 if ($post_posted_user_id) {
 
@@ -10109,6 +10149,7 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
 </div>
 <div class = "post-design-mid col-md-12 padding_adust" >
 <div>';
+
                 $contition_array = array('post_id' => $post_business_profile_post_id, 'is_deleted' => '1', 'insert_profile' => '2');
                 $businessmultiimage = $this->common->select_data_by_condition('post_files', $contition_array, $data = 'file_name,post_files_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -10124,7 +10165,7 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
 
                         $return_html .= '<div class = "one-image">';
 
-                        $return_html .= '<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+                        $return_html .= '<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[0]['file_name'] . '">
 </a>
 </div>';
@@ -10191,7 +10232,7 @@ Your browser does not support the audio tag.
                     foreach ($businessmultiimage as $multiimage) {
 
                         $return_html .= '<div class = "two-images">
-<a href = "' . base_url('business-profile/post-detail/' . $business_login_slug . '/' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post' . $post_business_profile_post_id) . '">
 <img class = "two-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';

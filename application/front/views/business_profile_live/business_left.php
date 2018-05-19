@@ -4,10 +4,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 $userid = $this->session->userdata('aileenuser');
         
 $contition_array = array('user_id' => $userid, 'status' => '1', 'is_deleted' => '0');
-$data = "business_profile_id,user_id,business_user_image,business_slug,industriyal,other_industrial,company_name,profile_background,city,state,business_type,business_step";
+$data = "business_profile_id,user_id,business_user_image,business_slug,industriyal,other_industrial,company_name,profile_background,city,state,business_type,business_step,(select city_name from ailee_cities where city_id = city) as city_name,
+            (select state_name from ailee_states where state_id = state) as state_name";
 $business_common_data = $this->data['business_common_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-       
-
+$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+$city_slug = ($slug_data[0]['city_name']) ? $slug_data[0]['city_name'] : $slug_data[0]['state_name'];
+$business_common_data[0]['business_slug'] = $this->data['business_slug'] = $slug_data[0]['business_slug'] . "-" .$city_slug;
 ?>
 <div class="full-box-module">   
     <div class="profile-boxProfileCard  module">

@@ -1,7 +1,5 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
-// echo $business_common_data[0]['business_slug'];
-// exit;
 ?>
 <div class="container" id="paddingtop_fixed">
     <div class="row" id="row1" style="display:none;">
@@ -32,14 +30,14 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <div id="row2">
             <?php
             $userid = $this->session->userdata('aileenuser');
-            if ($this->uri->segment(3) == $userid) {
+            if ($this->uri->segment(2) == $userid) {
                 $user_id = $userid;
-            } elseif ($this->uri->segment(3) == "") {
+            } elseif ($this->uri->segment(2) == "") {
                 $user_id = $userid;
             } else {
-                $user_id = $this->db->get_where('business_profile', array('business_slug' => $this->uri->segment(3)))->row()->user_id;
+                $business_slug_data = $this->business_model->removelocationfromslug($this->uri->segment(2));
+                $user_id = $this->db->get_where('business_profile', array('business_slug' => $business_slug_data))->row()->user_id;
             }
-
             $contition_array = array('user_id' => $user_id, 'is_deleted' => '0', 'status' => '1');
             $image = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
