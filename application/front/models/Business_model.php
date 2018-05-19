@@ -49,9 +49,10 @@ class Business_model extends CI_Model {
     }
 
     function businessListByCategory($id = '0') {
-        $this->db->select('bp.business_user_image,bp.profile_background,bp.business_slug,bp.other_industrial,bp.company_name,bp.country,bp.city,bp.details,bp.contact_website,it.industry_name,ct.city_name as city,cr.country_name as country')->from('business_profile bp');
+        $this->db->select('bp.business_user_image,bp.profile_background,bp.other_industrial,bp.company_name,bp.country,bp.city,bp.details,bp.contact_website,it.industry_name,ct.city_name as city,cr.country_name as country, IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
         $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');
         $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
+        $this->db->join('states st', 'st.state_id = bp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = bp.country', 'left');
         $this->db->where('bp.industriyal', $id);
         $this->db->where('bp.status', '1');
@@ -109,6 +110,8 @@ class Business_model extends CI_Model {
         $this->db->where('bp.business_step', '4');
         $query = $this->db->get();
         $result_array = $query->result_array();
+        echo $this->db->last_query();
+        exit;
         return $result_array;
     }*/
 
@@ -168,8 +171,9 @@ class Business_model extends CI_Model {
         }
 
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.business_slug, 
-                bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, cr.country_name as country 
+        $sql = "SELECT bp.business_user_image, bp.profile_background,  
+                bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, cr.country_name as country, 
+                IF (bp.city IS NULL, concat(bp.business_slug, '-', s.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
                 FROM ailee_business_profile bp 
                 LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
                 LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
@@ -412,12 +416,14 @@ class Business_model extends CI_Model {
 
     // Get Location List based on city id
     function businessListByLocation($id = '0') {
-        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.business_slug, bp.other_industrial, 
+        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, 
+        IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
             bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, 
             cr.country_name as country 
             FROM ailee_business_profile bp 
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
             LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+            LEFT JOIN ailee_states st ON bp.state = st.state_id
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
             WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4' and
             bp.city = '" . $id ."'";

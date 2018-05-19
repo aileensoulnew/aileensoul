@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
-                        <p class="p20 text-center"><a class="btn-1" ng-href="<?php echo base_url('business-profile/category') ?>">View More</a></p>
+                        <p class="p20 text-center"><a class="btn-1" ng-href="<?php echo base_url('business-by-categories') ?>">View More</a></p>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
-                        <p class="p20 text-center"><a ng-href="<?php echo base_url('business-profile/location') ?>" class="btn-1">View More</a></p>
+                        <p class="p20 text-center"><a ng-href="<?php echo base_url('business-by-location') ?>" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>
@@ -217,7 +217,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <p class="text-center"><a ng-href="<?php echo base_url('business-profile/category') ?>" title="View More" class="btn-1">View More</a></p>
+                            <p class="text-center"><a ng-href="<?php echo base_url('business-by-categories') ?>" title="View More" class="btn-1">View More</a></p>
                         </div>
                     </div>
                 </div>

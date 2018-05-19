@@ -38,7 +38,7 @@
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10"><a href="<?php echo base_url('business-profile/category') ?>">More Categories</a></p>
+                        <p class="text-right p10"><a href="<?php echo base_url('business-by-categories') ?>">More Categories</a></p>
                     </div>
                     <!-- TOP Location -->
                     <div class="left-search-box list-type-bullet">
@@ -58,7 +58,7 @@
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10"><a href="<?php echo base_url('business-profile/location') ?>">More Location</a></p>
+                        <p class="text-right p10"><a href="<?php echo base_url('business-by-location') ?>">More Location</a></p>
                     </div>
 
                     <div class="custom_footer_left fw">

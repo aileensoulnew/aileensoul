@@ -116,7 +116,8 @@ $route['profiles/opportunities/(:any)'] = "user_opportunities";
 
 //$route['business-profile'] = "business_profile/index";
 $route['business-search'] = "business_live/index";
-$route['business-profile/category'] = "business_live/category";
+$route['business-by-categories'] = "business_live/category";
+// $route['business-profile/category'] = "business_live/category";
 $route['business/search'] = "business_live/business_search";
 
 
@@ -182,7 +183,8 @@ $route['business-profile/signup/edit/image'] = "business_profile_registration/im
 
 // $route['business_profile/reactivate'] = "business_profile_live/reactivate";
 
-$route['business-profile/location'] = "business_live/location";
+$route['business-by-location'] = "business_live/location";
+// $route['business-profile/location'] = "business_live/location";
 
 $route['message/b/(:any)'] = "message/business_profile/$1";
 $route['message/rj/(:any)'] = "recmessage/recjob/$1";
