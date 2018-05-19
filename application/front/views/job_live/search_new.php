@@ -67,10 +67,16 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             </div>
         </header>
         <?php   
-        } ?>
-        <div class="middle-section middle-section-banner">
-            
-           <?php echo $search_banner; ?>
+        }
+        if($userid_login == "" || $job_deactive > 0)
+        {?>
+            <div class="middle-section middle-section-banner">            
+           <?php echo $search_banner;
+        }
+        else
+        { ?>
+            <div class="middle-section">
+        <?php } ?>  
             
             <div class="container pt20">
                 <div class="left-part">
@@ -299,14 +305,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
                         <div class="all-job-top">
                             <div class="post-img">
-                                <a href="#" ng-if="job.comp_logo != null"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
-                                <a href="#" ng-if="job.comp_logo == null"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
+                                <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo != null"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
+                                <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo == null"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
                             </div>
                             <div class="job-top-detail">
-                                <h5><a href="#" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
-                                <h5><a href="#" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
-                                <p><a href="#" ng-bind="job.re_comp_name"></a></p>
-                                <p><a href="#" ng-bind="job.fullname"></a></p>
+                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
+                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
+                                <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.re_comp_name"></a></p>
+                                <p><a href="<?php echo base_url(); ?>recruiter/profile/{{job.user_id}}" ng-bind="job.fullname"></a></p>
                             </div>
                         </div>
                         <div class="all-job-middle">
@@ -323,20 +329,16 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                         <div class="all-job-bottom">
                             <span class="job-post-date"><b>Posted on:</b><span ng-bind="job.created_date"></span></span>
-                            <p class="pull-right">
-                                <?php /*if($this->job_profile_set == 0 && $userid_login != ""){
-                                ?>
-                                    <a href="#" data-toggle="modal" data-target="#job_reg" class="btn4">Save</a>
-                                    <a href="#" data-toggle="modal" data-target="#job_reg" class="btn4">Apply</a>
-                                <?php
-                                }
-                                else{ ?>
-                                    <a href="#" class="btn4">Save</a>
-                                    <a href="#" class="btn4">Apply</a>
-                                <?php
-                                }*/ ?>
-                                <a href="javascript:void(0);" class="btn4" ng-click="savepopup(job.post_id)">Save</a>
-                                <a href="javascript:void(0);" class="btn4" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
+                            <p class="pull-right" ng-if="job.job_applied == 1 && job.job_saved == 0">
+                                <a href="javascript:void(0);" class="btn4  applied">Applied</a>
+                            </p>
+                            <p class="pull-right" ng-if="job.job_applied == 0 && job.job_saved == 1">
+                                <a href="javascript:void(0);" class="btn4 saved savedpost{{job.post_id}}">Saved</a>
+                                <a href="javascript:void(0);" class="btn4 applypost{{job.post_id}}" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
+                            </p>
+                            <p class="pull-right" ng-if="job.job_applied == 0 && job.job_saved == 0">
+                                <a href="javascript:void(0);" class="btn4 savedpost{{job.post_id}}" ng-click="savepopup(job.post_id)">Save</a>
+                                <a href="javascript:void(0);" class="btn4 applypost{{job.post_id}}" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
                             </p>
 
                         </div>

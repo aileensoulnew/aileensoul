@@ -60,10 +60,17 @@
             </div>
         </header>
         <?php   
-        } ?>
-        <div class="middle-section middle-section-banner new-ld-page">
-            <?php echo $search_banner; ?>
-            
+        }
+        if($user_id == "" || $job_deactive > 0)
+        {?>
+            <div class="middle-section middle-section-banner new-ld-page">
+        <?php
+            echo $search_banner;
+        }
+        else{ ?>
+            <div class="middle-section">
+        <?php } ?>
+        
             <div class="container pt20">
                 <div ng-view></div>
             </div>

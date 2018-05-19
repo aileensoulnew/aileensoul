@@ -1,3 +1,20 @@
+app.filter('slugify', function () {
+    return function (input) {
+        if (!input)
+            return;
+
+        // make lower case and trim
+        var slug = input.toLowerCase().trim();
+
+        // replace invalid chars with spaces
+        slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
+
+        // replace multiple spaces or hyphens with a single hyphen
+        slug = slug.replace(/[\s-]+/g, '-');
+
+        return slug;
+    };
+});
 app.filter('capitalize', function () {
     return function (str) {
         if (str === undefined || !str || str == null) {
@@ -212,12 +229,6 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
                 $('.applypost' + abc).attr('disabled', 'disabled');
                 $('.applypost' + abc).attr('onclick', 'myFunction()');
                 $('.applypost' + abc).addClass('applied');
-
-                if (data.notification.notification_count != 0) {
-                    var notification_count = data.notification.notification_count;
-                    var to_id = data.notification.to_id;
-                    show_header_notification(notification_count, to_id);
-                }
             }
         });
     };

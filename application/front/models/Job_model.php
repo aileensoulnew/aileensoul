@@ -470,7 +470,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
             $sql .= "(".trim($sql_exp, ' OR ').") OR ";
         }
         
-        $this->db->select("rp.post_id,rp.post_name,jt.name as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo")->from('rec_post rp');
+        $this->db->select("rp.post_id,rp.post_name,jt.name as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
@@ -487,7 +487,24 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
             $this->db->limit($limit,$start);
         }
         $query = $this->db->get();
-        $result_array = $query->result_array();
+        $result_array = $query->result_array();        
+        foreach ($result_array as $key => $value) {
+
+            $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
+            $jobapply = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $result_array[$key]['job_applied'] = (isset($jobapply) && !empty($jobapply) ? 1 : 0);
+
+            $contition_array2 = array(
+                'user_id' => $userid,
+                'job_save' => '2',
+                'post_id ' => $value['post_id'],
+                'job_delete' => '1'
+            );
+            $jobsave = $this->common->select_data_by_condition('job_apply', $contition_array2, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $result_array[$key]['job_saved'] = (isset($jobsave) && !empty($jobsave) ? 1 : 0);            
+        }
         $retur_arr['latestJobs'] = $result_array;
         $retur_arr['total_record'] = $this->latestJob_total_rec($userid,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil);
         return $retur_arr;
@@ -576,7 +593,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
-        $this->db->select("rp.post_id,rp.post_name,jt.name as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo")->from('rec_post rp');
+        $this->db->select("rp.post_id,rp.post_name,jt.name as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
@@ -683,7 +700,25 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         }
         $query = $this->db->get();
         //echo $this->db->last_query();exit;
-        $result_array = $query->result_array();        
+        $result_array = $query->result_array();
+
+        foreach ($result_array as $key => $value) {
+
+            $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
+            $jobapply = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $result_array[$key]['job_applied'] = (isset($jobapply) && !empty($jobapply) ? 1 : 0);
+
+            $contition_array2 = array(
+                'user_id' => $userid,
+                'job_save' => '2',
+                'post_id ' => $value['post_id'],
+                'job_delete' => '1'
+            );
+            $jobsave = $this->common->select_data_by_condition('job_apply', $contition_array2, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $result_array[$key]['job_saved'] = (isset($jobsave) && !empty($jobsave) ? 1 : 0);            
+        }
         $retur_arr['jobData'] = $result_array;
         $retur_arr['total_record'] = $this->ajax_job_search_new_filter_total_rec($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$job_city,$job_company_id,$search_location_arr);
         return $retur_arr;
@@ -1021,7 +1056,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
                 SELECT re_comp_name as value FROM ailee_recruiter 
                 WHERE re_status = '1' AND (re_comp_name LIKE '". $keyword ."') 
                 GROUP BY re_comp_name 
-                LIMIT 10";
+                LIMIT 5";
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
             return $result_array;
@@ -1031,7 +1066,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $keyword = urldecode($keyword) . '%';
         $sql = "SELECT city_name as value FROM ailee_cities 
                 WHERE status = '1' AND state_id != '0' AND (city_name LIKE '". $keyword ."') 
-                GROUP BY city_name LIMIT 10";
+                GROUP BY city_name LIMIT 5";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
@@ -1156,6 +1191,23 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         }
         $query = $this->db->get();        
         $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+
+            $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
+            $jobapply = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $result_array[$key]['job_applied'] = (isset($jobapply) && !empty($jobapply) ? 1 : 0);
+
+            $contition_array2 = array(
+                'user_id' => $userid,
+                'job_save' => '2',
+                'post_id ' => $value['post_id'],
+                'job_delete' => '1'
+            );
+            $jobsave = $this->common->select_data_by_condition('job_apply', $contition_array2, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $result_array[$key]['job_saved'] = (isset($jobsave) && !empty($jobsave) ? 1 : 0);            
+        }
         $retur_arr['searchJobs'] = $result_array;
         $retur_arr['total_record'] = $this->get_job_search_new_result_total_rec($userid,$job_keyword,$job_location,$work_time,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil);
         return $retur_arr;
