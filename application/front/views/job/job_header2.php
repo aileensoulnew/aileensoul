@@ -124,16 +124,16 @@ $userid = $this->session->userdata('aileenuser');
 				</div>
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
 					<div class="job-search-box1 clearfix">
-						<form action="https://www.aileensoul.com/search/business_search" method="get">
+						<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
 							<fieldset class="sec_h2">
-								<input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+								<input id="job_keyword" class="tags ui-autocomplete-input" name="job_keyword" ng-model="keyword" placeholder="Companies, Category, Products" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="sec_h2">
-								<input id="searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
+								<input id="job_location" class="searchplace ui-autocomplete-input" name="job_location" ng-model="city" placeholder="Find Location" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="new-search-btn">
 								<label for="search_btn" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>
-								<input id="search_btn" style="display: none;" name="search_submit" value="Search" onclick="return checkvalue()" type="submit">
+								<input id="search_btn" style="display: none;" name="search_submit" value="Search" type="submit">
 							</fieldset>
 						</form>    
 					</div>
@@ -158,10 +158,10 @@ $userid = $this->session->userdata('aileenuser');
 						
 						<div id="search">
 							
-							<form method="get">
+							<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
 								<div class="new-search-input">
-									<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-									<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" />
+									<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title,Skill,Company" />
+									<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="Find Location" />
 								</div>
 				<div class="new-search-btn">
 									<button type="button" class="close-new btn">Cancel</button>
@@ -491,4 +491,47 @@ $userid = $this->session->userdata('aileenuser');
 			}
 		});
 	}
+
+	function jobsearchSubmit(){
+    
+        var keyword = $("input[name='job_keyword']").val().toLowerCase().split(' ').join('+');
+        var city = $("input[name='job_location']").val().toLowerCase().split(' ').join('+');
+
+        var work_timing_fil = "";
+        $('.work_timing-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                work_timing_fil += (work_timing_fil == "") ? currentid : "-" + currentid;
+            }
+        });        
+        // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+        var keyworddata = [];
+        if(keyword != ""){
+            keyworddata = keyword.split(",");
+            // remove in from array
+            if(keyworddata.indexOf("in") > -1 && city != ""){
+                keyworddata.splice(keyworddata.indexOf("in"),1);
+            }
+            keyword = keyworddata.join('-').toString();
+        }
+        var citydata = [];
+        if(city != ""){
+            citydata = city.split(",");
+            // remove in from array
+            // if(citydata.indexOf("in") > -1 && city != ""){
+            //     citydata.splice(citydata.indexOf("in"),1);
+            // }
+            city = citydata.join('-').toString();
+        }
+
+        if (keyword == '' && city == '') {
+            return false;
+        } else if (keyword != '' && city == '') {
+            window.location.href = base_url + 'jobs/search/' + keyword + '-jobs?work_timing='+work_timing_fil;
+        } else if (keyword == '' && city != '') {
+            window.location.href = base_url + 'jobs/search/jobs-in-' + city+'?work_timing='+work_timing_fil;
+        } else {
+            window.location.href = base_url + 'jobs/search/' + keyword + '-jobs-in-' + city+'?work_timing='+work_timing_fil;
+        }
+    }
 </script>
