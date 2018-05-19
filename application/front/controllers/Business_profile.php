@@ -7618,7 +7618,7 @@ Your browser does not support the audio tag.
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/contact-list/' . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/contact-requests/' . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
@@ -7774,7 +7774,7 @@ Your browser does not support the audio tag.
         }
 
         if ($contactperson) {
-            $seeall = '<a class="fr" href="' . base_url() . 'business-profile/contact-list">See All</a>';
+            $seeall = '<a class="fr" href="' . base_url() . 'company/contact-requests">See All</a>';
         } else {
             $seeall = '<div class="fw"><div class="art-img-nn">
                                                 <div class="art_no_post_img">
@@ -8129,7 +8129,7 @@ Your browser does not support the audio tag.
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/contact-list/' . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/contact-requests/' . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
