@@ -33,7 +33,7 @@
                </div>
                <div class="">
                   <ul class="" id="dropdownclass">
-                     <li id="art_profile" <?php if($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'home'){?> class="active" <?php } ?>><a href="<?php echo base_url('job/home'); ?>" title="Home"><span class="home-22x22-h"></span></a>
+                     <li id="art_profile" <?php if($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'home'){?> class="active" <?php } ?>><a href="<?php echo base_url('recommended-jobs'); ?>" title="Home"><span class="home-22x22-h"></span></a>
                      </li>
                      <!-- Friend Request Start-->
                      <li id="Inbox_link " class="job_con">

@@ -413,7 +413,7 @@ $route['jobs/search/(.+)'] = "job_live/job_search_new";
 // $route['jobs/search/(:any)-jobs-in-(:any)'] = "job_live/job_search_new/$1-jobs-in-$2";
 // $route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 
-$route['job/home'] = "job/job_all_post";
+$route['recommended-jobs'] = "job/job_all_post";
 $route['job/home/live-post'] = "job/job_all_post/$1";
 
 $route['job/resume'] = "job/job_printpreview";

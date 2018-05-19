@@ -257,7 +257,7 @@
                                         <?php } else {
                                             ?> 
 
-                                            <a title="Take me in" class="btn-4" id="job-take-btn" href="<?php echo base_url('job/home'); ?>">Take me in</a> 
+                                            <a title="Take me in" class="btn-4" id="job-take-btn" href="<?php echo base_url('recommended-jobs'); ?>">Take me in</a> 
 
                                         <?php } ?>
                                         <a title="How it works" data-target="#jop-popup" data-toggle="modal" href="javascript:;" class="pl20 ml20 hew">How it works?</a>

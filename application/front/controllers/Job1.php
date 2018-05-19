@@ -47,7 +47,7 @@ class Job extends MY_Controller {
             $job = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'job_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
             if ($job[0]['job_step'] == 10) {
-                redirect('job/home', refresh);
+                redirect('recommended-jobs', refresh);
             } else {
                 redirect('job/profile', refresh);
             }
@@ -1489,7 +1489,7 @@ class Job extends MY_Controller {
 
                 if ($updatedata && $updatedata1 || $updatedata && $insertid) {
                     $this->session->set_flashdata('success', 'Work Experience updated successfully');
-                    redirect('job/home');
+                    redirect('recommended-jobs');
                 } else {
                     $this->session->flashdata('error', 'Your data not inserted');
                     redirect('job/work-experience', 'refresh');
@@ -1774,7 +1774,7 @@ class Job extends MY_Controller {
 
                 if ($insert_id && $updatedata || $updatedata1 && $updatedata) {
                     $this->session->set_flashdata('success', 'Work Experience updated successfully');
-                    redirect('job/home');
+                    redirect('recommended-jobs');
                 } else {
                     $this->session->flashdata('error', 'Your data not inserted');
                     redirect('job/work-experience', 'refresh');
@@ -2199,7 +2199,7 @@ class Job extends MY_Controller {
         } else {
 
             $this->session->flashdata('error', 'Your data not inserted');
-            redirect('job/home', refresh);
+            redirect('recommended-jobs', refresh);
         }
     }
 
@@ -2391,7 +2391,7 @@ class Job extends MY_Controller {
         $updatdata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
         if ($updatdata) {
 
-            redirect('job/home', refresh);
+            redirect('recommended-jobs', refresh);
         } else {
 
             redirect('job/reactivate', refresh);
@@ -3045,7 +3045,7 @@ class Job extends MY_Controller {
 
         if ($insert_id) {
             $this->session->set_flashdata('success', 'Basic information updated successfully');
-            redirect('job/home');
+            redirect('recommended-jobs');
         } else {
             $this->session->flashdata('error', 'Sorry!! Your data not inserted');
             redirect('job/profile', 'refresh');

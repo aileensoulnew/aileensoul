@@ -49,7 +49,7 @@ class Job extends MY_Controller {
             $job = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'job_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
             if ($job[0]['job_step'] == 10) {
-                redirect('job/home', refresh);
+                redirect('recommended-jobs', refresh);
             } else {
                 redirect('job/registration', refresh);
             }
@@ -1511,7 +1511,7 @@ class Job extends MY_Controller {
 
 
             if ($updatedata && $updatedata1 || $updatedata && $insertid) {
-                redirect('job/home');
+                redirect('recommended-jobs');
             } else {
                 redirect('job/work-experience', 'refresh');
             }
@@ -1806,7 +1806,7 @@ class Job extends MY_Controller {
 
 
             if ($insert_id && $updatedata || $updatedata1 && $updatedata) {
-                redirect('job/home');
+                redirect('recommended-jobs');
             } else {
                 redirect('job/work-experience', 'refresh');
             }
@@ -2252,7 +2252,7 @@ class Job extends MY_Controller {
         } else {
 
             $this->session->flashdata('error', 'Your data not inserted');
-            redirect('job/home', refresh);
+            redirect('recommended-jobs', refresh);
         }
     }
 
@@ -2460,7 +2460,7 @@ class Job extends MY_Controller {
         $updatdata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);        
         if ($updatdata) {
 
-            redirect('job/home', refresh);
+            redirect('recommended-jobs', refresh);
         } else {
 
             redirect('job/reactivate', refresh);
@@ -3086,7 +3086,7 @@ class Job extends MY_Controller {
             $jobuser = $this->db->select('user_id')->get_where('job_reg', array('user_id' => $userid))->row()->user_id;
         }
         if ($jobuser) {
-            redirect('job/home', refresh);
+            redirect('recommended-jobs', refresh);
         } else {
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
             $this->load->view('job/job_reg', $this->data);
@@ -3219,9 +3219,9 @@ class Job extends MY_Controller {
         }
         if ($insert_id) {
             if ($poslivtid) {
-                redirect('job/home/' . $poslivtid, 'refresh');
+                redirect('recommended-jobs/' . $poslivtid, 'refresh');
             } else {
-                redirect('job/home', 'refresh');
+                redirect('recommended-jobs', 'refresh');
             }
         } else {
             if ($poslivtid) {
@@ -6071,7 +6071,7 @@ class Job extends MY_Controller {
             }
         }
         if($insert_id) {
-            redirect('job/home', 'refresh');
+            redirect('recommended-jobs', 'refresh');
         } 
     }
 

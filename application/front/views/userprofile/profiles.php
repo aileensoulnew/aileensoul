@@ -60,10 +60,10 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
                         <div class="left-box">
-                            <a ng-if="details_data.jp_step == '10'"  ng-href="<?php echo base_url('job/home'); ?>" target="_self">
+                            <a ng-if="details_data.jp_step == '10'"  ng-href="<?php echo base_url('recommended-jobs'); ?>" target="_self">
                                 <img title="Job Profile" src="<?php echo base_url() . "assets/n-images/i1.jpg"; ?>">
                             </a>
-                            <a ng-if="details_data.jp_status == '0' && details_data.jp_step == '10'"  ng-href="<?php echo base_url('job/home'); ?>" target="_self">
+                            <a ng-if="details_data.jp_status == '0' && details_data.jp_step == '10'"  ng-href="<?php echo base_url('recommended-jobs'); ?>" target="_self">
                                 <img title="Job Profile" src="<?php echo base_url() . "assets/n-images/i1.jpg"; ?>">
                             </a>
                             <a  ng-if="details_data.jp_step == null"  ng-href="<?php echo base_url('job'); ?>" target="_self">
@@ -74,14 +74,14 @@
                     <div class="col-md-8 col-sm-8">
                         <div class="right-box">
                             <h1>
-                                <a title="Job Profile"  ng-if="details_data.jp_step == '10'"  ng-href="<?php echo base_url('job/home'); ?>" target="_self">Job Profile</a> 
-                                <a title="Job Profile" ng-if="details_data.jp_status == '0' && details_data.jp_step == '10'"  ng-href="<?php echo base_url('job/home'); ?>" target="_self">Job Profile</a> 
+                                <a title="Job Profile"  ng-if="details_data.jp_step == '10'"  ng-href="<?php echo base_url('recommended-jobs'); ?>" target="_self">Job Profile</a> 
+                                <a title="Job Profile" ng-if="details_data.jp_status == '0' && details_data.jp_step == '10'"  ng-href="<?php echo base_url('recommended-jobs'); ?>" target="_self">Job Profile</a> 
                                 <a title="Job Profile" ng-if="details_data.jp_step == null"  ng-href="<?php echo base_url('job'); ?>" target="_self">Job Profile</a> 
                             </h1>
                             <p>Find best job options and connect with recruiters.</p>
                             <div class="btns">
-                                <a title="Take me in"  ng-if="details_data.jp_step == '10'" class="btn-4" ng-href="<?php echo base_url('job/home'); ?>" target="_self">Take me in</a> 
-                                <a title="Take me in" ng-if="details_data.jp_status == '0' && details_data.jp_step == '10'" class="btn-4" ng-href="<?php echo base_url('job/home'); ?>" target="_self">Active</a> 
+                                <a title="Take me in"  ng-if="details_data.jp_step == '10'" class="btn-4" ng-href="<?php echo base_url('recommended-jobs'); ?>" target="_self">Take me in</a> 
+                                <a title="Take me in" ng-if="details_data.jp_status == '0' && details_data.jp_step == '10'" class="btn-4" ng-href="<?php echo base_url('recommended-jobs'); ?>" target="_self">Active</a> 
                                 <a title="Take me in" ng-if="details_data.jp_step == null" class="btn-4" ng-href="<?php echo base_url('job'); ?>" target="_self">Register</a> 
                                 <a title="How it works" data-target="#jop-popup" data-toggle="modal" href="javascript:;" class="pl20 ml20 hew">How it works?</a>
                             </div>
