@@ -59,7 +59,7 @@
                 $this->artist_profile_set = 1;
             }
             if(!empty($job_profile_count) &&  count($job_profile_count)>0){
-                $this->job_profile_link = base_url("job/home");
+                $this->job_profile_link = base_url("recommended-jobs");
                 $this->job_profile_set = 1;
             }
             if(!empty($recruiter_profile_count) &&  count($recruiter_profile_count)>0){
