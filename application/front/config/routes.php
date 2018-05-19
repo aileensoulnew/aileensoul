@@ -486,8 +486,11 @@ $route['recruiter/save-candidate/(:any)'] = "recruiter_live/save_candidate/$1";
 $route['recruiter/post'] = "recruiter/rec_post";
 $route['recruiter/post/(:any)'] = "recruiter_live/rec_post/$1";
 
-$route['recruiter/jobpost'] = "recruiter/live_post";
-$route['recruiter/jobpost/(:any)'] = "recruiter/live_post/$1";
+// $route['recruiter/jobpost'] = "recruiter/live_post";
+// $route['recruiter/jobpost/(:any)'] = "recruiter/live_post/$1";
+
+$route['(:any)-job-vacancy-in-(:any)'] = "recruiter/live_post";
+$route['(:any)-job-vacancy-in-(:any)/(:any)'] = "recruiter/live_post/$1";
 
 $route['recruiter/add-post'] = "recruiter/add_post";
 

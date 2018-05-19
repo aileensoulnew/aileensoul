@@ -9,6 +9,11 @@ $userid = $this->data['user_id'] = $this->session->userdata('aileenuser');
  $this->load->model('job_model');
  $this->load->model('user_post_model');
 
+$contition_array_job = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+$job_deactive = $this->common->select_data_by_condition('job_reg', $contition_array_job, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+$this->data['job_deactive'] = $job_deactive[0]['total'];
+
 // user detail
 $this->data['userdata'] = $this->user_model->getUserData($userid);
 

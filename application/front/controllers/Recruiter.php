@@ -2015,7 +2015,7 @@ class Recruiter extends MY_Controller {
                         }
                         $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                         if ($cityname != '') {
-                            $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+                            $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
                         } else {
                             $cityname = '';
                         }
@@ -2187,7 +2187,7 @@ class Recruiter extends MY_Controller {
                         }
                         $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                         if ($cityname != '') {
-                            $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+                            $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
                         } else {
                             $cityname = '';
                         }
@@ -4660,8 +4660,11 @@ class Recruiter extends MY_Controller {
 //add other_industry into database End 
 
     public function live_post($userid = '', $postid = '', $posttitle = '') {
-
-        $segment3 = explode('-', $this->uri->segment(3));
+        // print_r($this->uri->segment_array());
+        // print_r($this->uri->segment_array()[count($this->uri->segment_array())]);
+        // exit;
+         // $segment3 = explode('-', $this->uri->segment(3));
+        $segment3 = explode('-', $this->uri->segment_array()[count($this->uri->segment_array())]);
         $slugdata = array_reverse($segment3);
         $postid = $slugdata[0];
         $this->data['recliveid'] = $userid = $slugdata[1];
@@ -4699,7 +4702,7 @@ class Recruiter extends MY_Controller {
 
         $cityname = $this->db->get_where('cities', array('city_id' => $this->data['postdata'][0]['city']))->row()->city_name;
         if ($cityname != '') {
-            $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+            $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
         } else {
             $cityname = '';
         }
@@ -4717,7 +4720,8 @@ class Recruiter extends MY_Controller {
         $contition_array = array('post_id !=' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'post_name' => $this->data['postdata'][0]['post_name']);
         $this->data['recommandedpost'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
-        if ($url == $this->uri->segment(3)) {
+        // if ($url == $this->uri->segment(3)) {
+        if ($url == $this->uri->segment_array()[count($this->uri->segment_array())]) {
             if ($this->session->userdata('aileenuser')) {
                 $this->load->view('job/rec_post', $this->data);
             } else {
