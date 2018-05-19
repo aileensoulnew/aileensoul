@@ -1922,7 +1922,8 @@ class Job extends MY_Controller {
         $contition_array = array('status' => '1', 'is_delete' => '0');
         $this->data['govjob_category'] = $govjob_category = $this->common->select_data_by_condition('gov_category', $contition_array, $data = 'id,name', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $this->load->view('job/job_all_post', $this->data);
+        $this->load->view('job/recommended_jobs', $this->data);
+        // $this->load->view('job/job_all_post', $this->data);
     }
 
     //job seeker Job All Post controller end
@@ -6073,6 +6074,30 @@ class Job extends MY_Controller {
         if($insert_id) {
             redirect('recommended-jobs', 'refresh');
         } 
+    }
+
+    public function recommended_jobs_ajax()
+    {        
+        $userid = $this->session->userdata('aileenuser');
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        
+        $company_id = (isset($_POST['company_id']) && !empty($_POST['company_id']) ? $_POST['company_id'] : "");
+        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");
+        $location_id = (isset($_POST['location_id']) && !empty($_POST['location_id']) ? $_POST['location_id'] : "");
+        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $job_desc = (isset($_POST['job_desc']) && !empty($_POST['job_desc']) ? $_POST['job_desc'] : "");
+        $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
+        $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
+
+        $limit = 5;
+        $searchJobs = $this->job_model->get_recommended_jobs($userid,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$page,$limit);
+        echo json_encode($searchJobs);
     }
 
 }

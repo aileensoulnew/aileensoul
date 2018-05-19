@@ -348,11 +348,11 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
     {       
 
         $sql = "SELECT COUNT(*) as total_record FROM(SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
-UNION
-SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
-UNION
-SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.industry_type = jr.work_job_industry AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
-UNION
+        UNION
+        SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+        UNION
+        SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.industry_type = jr.work_job_industry AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+        UNION
 SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.work_job_title AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1') as recommen_post ORDER BY recommen_post.post_id DESC";
         
 
@@ -1277,4 +1277,207 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         
         return $result_array['total_record'];
     }
+
+     public function get_recommended_jobs($userid = "",$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$page = "",$limit = "5")
+    {        
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql_filter = "";
+        if($company_id != "")
+        {
+            $sql_filter .= "r.rec_id IN (".$company_id.") OR ";
+        }
+        if($category_id != "")
+        {
+            $sql_filter .= "rj.industry_type IN (".$category_id.") OR ";
+        }
+        if($location_id != "")
+        {
+            $sql_filter .= "rj.city IN (".$location_id.") OR ";
+        }
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql_filter .= "rj.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+
+        if($job_desc != "")
+        {
+            $sql_filter .= "rj.post_name IN (".$job_desc.") OR";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 0 AND DATEDIFF(NOW(),rj.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 0 AND DATEDIFF(NOW(),rj.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 0 AND DATEDIFF(NOW(),rj.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 45) OR ";
+            }
+            $sql_filter .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(rj.max_year >= 0 AND rj.max_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(rj.max_year >= 1 AND rj.max_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(rj.max_year >= 2 AND rj.max_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(rj.max_year >= 3 AND rj.max_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(rj.max_year >= 4 AND rj.max_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(rj.max_year >= 5) OR ";
+            }
+            $sql_filter .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+
+        $sql = "SELECT rj.post_id,rj.post_name,jt.name as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rj.min_year,rj.max_year,rj.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo FROM ( SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+            UNION
+            SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+            UNION
+            SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.industry_type = jr.work_job_industry AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+            UNION
+            SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.work_job_title AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1')
+            as rj 
+            LEFT JOIN ailee_recruiter as r ON r.user_id = rj.user_id 
+            LEFT JOIN ailee_cities as ct ON ct.city_id = rj.city 
+            LEFT JOIN ailee_countries as cr ON cr.country_id = rj.country
+            LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name ";
+        if($sql_filter != "")
+        {            
+            $sql .= " WHERE (".trim($sql_filter, ' OR ').")";            
+        }
+        $sql .= " ORDER BY rj.post_id DESC ";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+
+        $query = $this->db->query($sql);        
+        //echo $this->db->last_query();exit;
+        $recommen_post = $query->result_array();
+        foreach ($recommen_post as $key => $value) {
+
+            $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
+            $jobapply = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $recommen_post[$key]['job_applied'] = (isset($jobapply) && !empty($jobapply) ? 1 : 0);
+
+            $contition_array2 = array(
+                'user_id' => $userid,
+                'job_save' => '2',
+                'post_id ' => $value['post_id'],
+                'job_delete' => '1'
+            );
+            $jobsave = $this->common->select_data_by_condition('job_apply', $contition_array2, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $recommen_post[$key]['job_saved'] = (isset($jobsave) && !empty($jobsave) ? 1 : 0);            
+        }
+        $retur_arr['searchJobs'] = $recommen_post;
+        $retur_arr['total_record'] = $this->get_recommended_jobs_total_rec($userid,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil);
+        return $retur_arr;        
+    }
+
+    public function get_recommended_jobs_total_rec($userid = "",$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "")
+    {
+        $sql_filter = "";
+        if($company_id != "")
+        {
+            $sql_filter .= "r.rec_id IN (".$company_id.") OR ";
+        }
+        if($category_id != "")
+        {
+            $sql_filter .= "rj.industry_type IN (".$category_id.") OR ";
+        }
+        if($location_id != "")
+        {
+            $sql_filter .= "rj.city IN (".$location_id.") OR ";
+        }
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql_filter .= "rj.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+
+        if($job_desc != "")
+        {
+            $sql_filter .= "rj.post_name IN (".$job_desc.") OR";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 0 AND DATEDIFF(NOW(),rj.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 0 AND DATEDIFF(NOW(),rj.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 0 AND DATEDIFF(NOW(),rj.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),rj.created_date) >= 45) OR ";
+            }
+            $sql_filter .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(rj.max_year >= 0 AND rj.max_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(rj.max_year >= 1 AND rj.max_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(rj.max_year >= 2 AND rj.max_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(rj.max_year >= 3 AND rj.max_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(rj.max_year >= 4 AND rj.max_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(rj.max_year >= 5) OR ";
+            }
+            $sql_filter .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+
+        $sql = "SELECT rj.post_id,rj.post_name,jt.name as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rj.min_year,rj.max_year,rj.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo FROM ( SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+            UNION
+            SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+            UNION
+            SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.industry_type = jr.work_job_industry AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+            UNION
+            SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.work_job_title AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1')
+            as rj 
+            LEFT JOIN ailee_recruiter as r ON r.user_id = rj.user_id 
+            LEFT JOIN ailee_cities as ct ON ct.city_id = rj.city 
+            LEFT JOIN ailee_countries as cr ON cr.country_id = rj.country
+            LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name ";
+        if($sql_filter != "")
+        {            
+            $$sql .= "(".trim($sql_filter, ' OR ').")";            
+        }
+        $sql .= " ORDER BY rj.post_id DESC ";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+
+        $query = $this->db->query($sql);        
+        //echo $this->db->last_query();exit;
+        $recommen_post = $query->result_array();
+        return count($recommen_post);
+    }    
 }
