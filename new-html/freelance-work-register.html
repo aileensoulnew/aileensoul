@@ -68,7 +68,7 @@
 	
 </div>
 
-</div>
+
 
 
 <div class="middle-section free-work-reg-cus">
@@ -304,7 +304,7 @@
                                         By Clicking on create an account button you agree our 
                                         <a tabindex="10" href="#">Terms and Condition</a> and <a tabindex="11" href="#">Privacy policy</a>.
                                     </p>
-                                    <p class="text-right">
+                                    <p class="text-center">
                                         <button class="btn1" tabindex="9">Next</button>
                                     </p>
 
@@ -327,17 +327,17 @@
 							</div>
 
 							<div class="form-group">
-								<label for="text">Who are you?</label>
+								<label for="text">Who are you?<font color="red">*</font></label>
 								<input type="text" name="jobTitle" class="form-control" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer.." >
 								<label ng-show="errorjobTitle" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">Where are you from?</label>
+								<label for="text">Where are you from?<font color="red">*</font></label>
 								<input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name">
 								<label ng-show="errorcityList" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group cus_field">
-								<label for="text">What is your field?</label>
+								<label for="text">What is your field?<font color="red">*</font></label>
 								<span class="select-field-custom">
 								<select name="field" id="field" class="ng-pristine ng-untouched ng-valid ng-empty">
 									<option value="" selected="selected">Select your field</option>
@@ -361,7 +361,7 @@
 								<label ng-show="errorfield" class="error ng-binding ng-hide"></label>
 							</div>
 							<!-- ngIf: user.field == '0' -->
-							<p class="text-right submit-btn">
+							<p class="text-center submit-btn">
 								<button type="submit" id="submit" class="btn1">Next<span class="ajax_load" id="basic_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 							</p>
 						</form>
@@ -374,26 +374,26 @@
 						</div>
 						<form name="studentinfo" id="studentinfo"class="">
 							<div class="form-group">
-								<label for="text">What are you studying right now?</label>
+								<label for="text">What are you studying right now?<font color="red">*</font></label>
 								<input type="text" name="currentStudy" id="currentStudy" class="form-control" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 10th..">
 								<label class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">Where are you from?</label>
+								<label for="text">Where are you from?<font color="red">*</font></label>
 								<input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name">
 								<label ng-show="errorcityList" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">University / Collage / School </label>
+								<label for="text">University / Collage / School<font color="red">*</font></label>
 								<input type="text" name="university" id="university" class="form-control" placeholder="Enter your University / Collage / school">
 								<label class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">Interested field</label>
+								<label for="text">Interested field<font color="red">*</font></label>
 								<input type="text" name="jobTitle" id="jobTitle" class="form-control"placeholder="Ex:Seeking Opportunity,CEO, Enterpreneur, Founder, Singer, Photographer..">
 								<label class="error ng-binding ng-hide"></label>
 							</div>
-							<p class="text-right submit-btn">
+							<p class="text-center submit-btn">
 								<button type="submit" id="submit" class="btn1">Next<span class="ajax_load" id="student_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 							</p>
 						</form>
@@ -410,31 +410,31 @@
 							<div class="row">
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="first_name" id="first_name" tabindex="1" placeholder="Enter your First Name" maxlength="35">
+										<input class="form-control" type="text" name="first_name" id="first_name" tabindex="1" placeholder="Enter your First Name*" maxlength="35">
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="last_name" id="last_name" tabindex="2" placeholder="Enter your Last Name" maxlength="35">
+										<input class="form-control" type="text" name="last_name" id="last_name" tabindex="2" placeholder="Enter your Last Name*" maxlength="35">
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address" value="" maxlength="255">
+										<input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address*" value="" maxlength="255">
 										<a href="#" data-toggle="tooltip" data-placement="left" title="" class="pull-right email-note-cus" data-original-title=" Related notification email will be sent on provided email address kindly use regular email address."><img tooltips="" tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" alt="tooltip" src="n-images/tooltip.png"></a>
 										
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Enter phone number" maxlength="35">
+										<input class="form-control" type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Enter phone number" maxlength="35">
 									</div>
 								</div>
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="country" id="country" tabindex="10">
-												<option value="" selected="selected">Select country</option>
+												<option value="" selected="selected">Select country*</option>
 												<option value="382">Afghanistan</option>
 												<option value="1">Albania</option>
 												<option value="303">Algeria</option>
@@ -454,7 +454,7 @@
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="state" id="state" tabindex="10">
-												<option value="" selected="selected">Select state</option>
+												<option value="" selected="selected">Select state*</option>
 												<option value="382">Gujarat</option>
 												<option value="1">Maharashtra</option>
 												<option value="303">Goa</option>
@@ -472,7 +472,7 @@
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="city" id="city" tabindex="10">
-												<option value="" selected="selected">Select city</option>
+												<option value="" selected="selected">Select city*</option>
 												<option value="382">Ahmedabad</option>
 												<option value="1">Surat</option>
 												<option value="303">Rajkot</option>
@@ -490,7 +490,7 @@
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="field" tabindex="10">
-												<option value="" selected="selected">Select fields of requirement</option>
+												<option value="" selected="selected">Select fields of requirement*</option>
 												<option value="382">Accounting & Consulting</option>
 												<option value="1">Admin Support</option>
 												<option value="303">Customer Service</option>
@@ -510,7 +510,7 @@
 								</div>
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
-										<input type="text" name="skills" id="skills" tabindex="2" placeholder="Enter skills" maxlength="35">
+										<input class="form-control" type="text" name="skills" id="skills" tabindex="2" placeholder="Enter skills*" maxlength="35">
 									</div>
 								</div>
 							
@@ -574,7 +574,7 @@
 								
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
-									   <div class="job_reg text-right">
+									   <div class="job_reg text-center">
 									
 										  <!-- <input title="Register" type="submit" id="submit" name="" value="Register" tabindex="12"> -->
 										  <button id="submit" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
@@ -591,29 +591,27 @@
 	</div>	
 
 	<footer class="reg-footer-custom">    
-                    <div class="container pt20">
+        <div class="container pt20">
             <div class="row">
-
-                <div class="fw text-center">
+				<div class="fw text-center">
                     <ul class="footer-ul">
-                                                    <li><a title="Login" href="http://localhost/aileensoulnew/aileensoul/login" target="_blank">Login</a></li>
-                            <li><a title="Create an Account" href="http://localhost/aileensoulnew/aileensoul/registration" target="_blank">Create an Account</a></li>
-                            
-                        <li><a title="Job Profile" href="http://localhost/aileensoulnew/aileensoul/how-to-use-job-profile-in-aileensoul" target="_blank">Job Profile</a></li>
-                        <li><a title="Recruiter Profile" href="http://localhost/aileensoulnew/aileensoul/how-to-use-recruiter-profile-in-aileensoul" target="_blank">Recruiter Profile</a></li>
-                        <li><a title="Freelance Profile" href="http://localhost/aileensoulnew/aileensoul/how-to-use-freelance-profile-in-aileensoul" target="_blank">Freelance Profile</a></li>
-                        <li><a title="Business Profile" href="http://localhost/aileensoulnew/aileensoul/how-to-use-business-profile-in-aileensoul" target="_blank">Business Profile</a></li>
-                        <li><a title="Artistic Profile" href="http://localhost/aileensoulnew/aileensoul/how-to-use-artistic-profile-in-aileensoul" target="_blank">Artistic Profile</a></li>
-                        <li><a title="About Us" href="http://localhost/aileensoulnew/aileensoul/about-us" target="_blank">About Us</a></li>
-                        <li><a href="http://localhost/aileensoulnew/aileensoul/terms-and-condition" title="Terms and Condition" target="_blank">Terms and Condition</a></li>
-                        <li><a href="http://localhost/aileensoulnew/aileensoul/privacy-policy" title="Privacy policy" target="_blank">Privacy Policy</a></li>
-                        <li><a title="Disclaimer Policy" href="http://localhost/aileensoulnew/aileensoul/disclaimer-policy" target="_blank">Disclaimer Policy</a></li>
-                        <li><a title="Contact Us" href="http://localhost/aileensoulnew/aileensoul/contact-us" target="_blank">Contact Us</a></li>
-                        <li><a title="Blog" href="http://localhost/aileensoulnew/aileensoul/blog" target="_blank">Blog</a></li>
-                        <li><a title="Send Us Feedback" href="http://localhost/aileensoulnew/aileensoul/feedback" target="_blank">Send Us Feedback</a></li>
-                        <li><a title="Advertise With Us" href="http://localhost/aileensoulnew/aileensoul/advertise-with-us" target="_blank">Advertise With Us</a></li>
-                                                    <li><a title="Sitemap" tabindex="0" href="http://localhost/aileensoulnew/aileensoul/sitemap" target="_blank">Sitemap</a></li>
-                                                </ul>
+                        <li><a title="Login" href="#" target="_blank">Login</a></li>
+                        <li><a title="Create an Account" href="#" target="_blank">Create an Account</a></li>
+                        <li><a title="Job Profile" href="#" target="_blank">Job Profile</a></li>
+                        <li><a title="Recruiter Profile" href="#" target="_blank">Recruiter Profile</a></li>
+                        <li><a title="Freelance Profile" href="#" target="_blank">Freelance Profile</a></li>
+                        <li><a title="Business Profile" href="#" target="_blank">Business Profile</a></li>
+                        <li><a title="Artistic Profile" href="#" target="_blank">Artistic Profile</a></li>
+                        <li><a title="About Us" href="#" target="_blank">About Us</a></li>
+                        <li><a href="#" title="Terms and Condition" target="_blank">Terms and Condition</a></li>
+                        <li><a href="#" title="Privacy policy" target="_blank">Privacy Policy</a></li>
+                        <li><a title="Disclaimer Policy" href="#" target="_blank">Disclaimer Policy</a></li>
+                        <li><a title="Contact Us" href="#" target="_blank">Contact Us</a></li>
+                        <li><a title="Blog" href="#" target="_blank">Blog</a></li>
+                        <li><a title="Send Us Feedback" href="#" target="_blank">Send Us Feedback</a></li>
+                        <li><a title="Advertise With Us" href="#" target="_blank">Advertise With Us</a></li>
+                        <li><a title="Sitemap" tabindex="0" href="#" target="_blank">Sitemap</a></li>
+                    </ul>
                 </div>
                 <div class="ftr-copuright text-center pt10 pb20 fw">
                     <span>    Ⓒ 2018 | by Aileensoul </span>
@@ -623,164 +621,6 @@
     </footer>
 </div>
 
-	
-	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
-		<div class="all-profile-box content custom-scroll">
-			<ul class="all-pr-list">
-				<li>
-					<a href="https://www.aileensoul.com/job">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
-						</div>
-						<span>Job Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/recruiter">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i2.jpg?ver=1517557803" alt="Recruiter Profile">
-						</div>
-						<span>Recruiter Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/freelance">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i3.jpg?ver=1517557803" alt="Freelance Profile">
-						</div>
-						<span>Freelance Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/business-profile">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i4.jpg?ver=1517557803" alt="Business Profile">
-						</div>
-						<span>Business Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.aileensoul.com/artist">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	
-	<div style="display:none;" class="modal fade" id="post-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-								<button type="button" class="modal-close" data-dismiss="modal">×</button>
-								<div class="post-popup-box">
-									<div class="post-box">
-										<div class="post-img">
-											<img src="img/user-pic.jpg">
-										</div>
-										<div class="post-text">
-											<textarea class="title-text-area" placeholder="Post Opportunity"></textarea>
-										</div>
-										<div class="all-upload">
-											<label for="file-1">
-												<i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Photo </span></i>
-												<i class="fa fa-video-camera upload_icon"><span class="upload_span_icon"> Video</span>  </i> 
-												<i class="fa fa-music upload_icon"> <span class="upload_span_icon">  Audio </span> </i>
-												<i class="fa fa-file-pdf-o upload_icon"><span class="upload_span_icon"> PDF </span></i>
-											</label>
-										</div>
-										
-									</div>
-									<div class="post-field">
-										<form>
-											<div class="form-group">
-												
-												<textarea placeholder="FOR WHOM THIS OPPORTUNITY ?&#x0a;&#x09;&#x09;&#x09;&#x0a;&#x09;&#x09;&#x09;&#x0a;&#x09;&#x09;&#x09;&#x0a;&#x09;Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, PHP Developer, HR, BDE, CA, Doctor, Freelancer.." cols="10" rows="5" style="resize:none"></textarea>
-												
-											</div>
-											<div class="form-group">
-												<textarea type="text" class="" placeholder="WHICH LOCATION?&#x0a;&#x09;&#x09;&#x09;&#x0a;&#x09;&#x09;&#x09;&#x0a;&#x09;&#x09;&#x09;&#x0a;&#x09;&#x09;&#x09;&#x0a; Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai, Moscow, Paris, Tokyo.. "></textarea>
-												
-											</div>
-											<div class="form-group">
-												<input type="text" placeholder="What is your field?">
-											</div>
-										
-											
-										</form>
-										
-										
-									</div>
-									<div class="text-right fw pt10">
-										<a class="btn1" href="#">Post</a>
-									</div>
-								</div>
-                                
-                                
-                              
-                            </div>
-                        </div>
-                   
-					</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>

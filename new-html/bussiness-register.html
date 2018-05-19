@@ -68,7 +68,6 @@
 	
 </div>
 
-</div>
 
 
 <div class="middle-section bus-reg-cus">
@@ -78,7 +77,7 @@
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#register">Register</a></li>
 				<li><a data-toggle="tab" href="#basic-information">Basic Information</a></li>
-				<li><a data-toggle="tab" href="#art-registration">Artistic Registration</a></li>
+				<li><a data-toggle="tab" href="#bus-registration">Business Registration</a></li>
 			</ul>
 		</div>
 		<div class="tab-content">
@@ -304,7 +303,7 @@
                                         By Clicking on create an account button you agree our 
                                         <a tabindex="10" href="#">Terms and Condition</a> and <a tabindex="11" href="#">Privacy policy</a>.
                                     </p>
-                                    <p class="text-right">
+                                    <p class="text-center">
                                         <button class="btn1" tabindex="9">Next</button>
                                     </p>
 
@@ -327,17 +326,17 @@
 							</div>
 
 							<div class="form-group">
-								<label for="text">Who are you?</label>
+								<label for="text">Who are you?<font color="red">*</font></label>
 								<input type="text" name="jobTitle" class="form-control" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer.." >
 								<label ng-show="errorjobTitle" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">Where are you from?</label>
+								<label for="text">Where are you from?<font color="red">*</font></label>
 								<input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name">
 								<label ng-show="errorcityList" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group cus_field">
-								<label for="text">What is your field?</label>
+								<label for="text">What is your field?<font color="red">*</font></label>
 								<span class="select-field-custom">
 								<select name="field" id="field" class="ng-pristine ng-untouched ng-valid ng-empty">
 									<option value="" selected="selected">Select your field</option>
@@ -361,7 +360,7 @@
 								<label ng-show="errorfield" class="error ng-binding ng-hide"></label>
 							</div>
 							<!-- ngIf: user.field == '0' -->
-							<p class="text-right submit-btn">
+							<p class="text-center submit-btn">
 								<button type="submit" id="submit" class="btn1">Next<span class="ajax_load" id="basic_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 							</p>
 						</form>
@@ -374,69 +373,45 @@
 						</div>
 						<form name="studentinfo" id="studentinfo"class="">
 							<div class="form-group">
-								<label for="text">What are you studying right now?</label>
+								<label for="text">What are you studying right now?<font color="red">*</font></label>
 								<input type="text" name="currentStudy" id="currentStudy" class="form-control" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 10th..">
 								<label class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">Where are you from?</label>
+								<label for="text">Where are you from?<font color="red">*</font></label>
 								<input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name">
 								<label ng-show="errorcityList" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">University / Collage / School </label>
+								<label for="text">University / Collage / School<font color="red">*</font> </label>
 								<input type="text" name="university" id="university" class="form-control" placeholder="Enter your University / Collage / school">
 								<label class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
-								<label for="text">Interested field</label>
+								<label for="text">Interested field<font color="red">*</font></label>
 								<input type="text" name="jobTitle" id="jobTitle" class="form-control"placeholder="Ex:Seeking Opportunity,CEO, Enterpreneur, Founder, Singer, Photographer..">
 								<label class="error ng-binding ng-hide"></label>
 							</div>
-							<p class="text-right submit-btn">
+							<p class="text-center submit-btn">
 								<button type="submit" id="submit" class="btn1">Next<span class="ajax_load" id="student_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 							</p>
 						</form>
 					</div>
 				</div>
 			</div>
-			<div id="art-registration" class="tab-pane fade final-reg-form">
+			<div id="bus-registration" class="tab-pane fade final-reg-form">
 				<div class="inner-form">
 					<div class="login">
 						<div class="title">
                             <h1>Business Registration</h1>
                         </div>
-						<ul class="nav nav-tabs">
-							<li class="active"><a data-toggle="tab" href="#business-information">Business Information</a></li>
-							<li><a data-toggle="tab" href="#contact-info">Contact Information</a></li>
-							<li><a data-toggle="tab" href="#description">Description</a></li>
-							<li><a data-toggle="tab" href="#business-img">Business Images</a></li>
-						</ul>
-
-						<div class="tab-content">
-							<div id="business-information" class="tab-pane fade in active">
-								<h3>HOME</h3>
-								<p>Some content.</p>
-							</div>
-							<div id="contact-info" class="tab-pane fade">
-								<h3>Menu 1</h3>
-								<p>Some content in menu 1.</p>
-							</div>
-							<div id="description" class="tab-pane fade">
-								<h3>Menu 1</h3>
-								<p>Some content in menu 1.</p>
-							</div>
-							<div id="business-img" class="tab-pane fade">
-								<h3>Menu 1</h3>
-								<p>Some content in menu 1.</p>
-							</div>
-						</div>
+						
 						<form id="businessinfo">
 							<div class="row">
 								
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
-										<input type="text" name="companyname" id="companyname" tabindex="2" placeholder="Enter company name" >
+										<input class="form-control" type="text" name="companyname" id="companyname" tabindex="2" placeholder="Enter company name*" >
 									</div>
 								</div>
 								
@@ -446,7 +421,7 @@
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="country" id="country" tabindex="10">
-												<option value="" selected="selected">Select country</option>
+												<option value="" selected="selected">Select country*</option>
 												<option value="382">Afghanistan</option>
 												<option value="1">Albania</option>
 												<option value="303">Algeria</option>
@@ -466,7 +441,7 @@
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="state" id="state" tabindex="10">
-												<option value="" selected="selected">Select state</option>
+												<option value="" selected="selected">Select state*</option>
 												<option value="382">Gujarat</option>
 												<option value="1">Maharashtra</option>
 												<option value="303">Goa</option>
@@ -480,7 +455,7 @@
 										</span>
 									</div>
 								</div>
-								<div class="col-sm-12 col-md-12">
+								<div class="col-sm-6 col-md-6">
 									<div class="form-group fw">
 										<span class="select-field-custom">
 											<select name="city" id="city" tabindex="10">
@@ -498,14 +473,86 @@
 										</span>
 									</div>
 								</div>
+								
 								<div class="col-sm-6 col-md-6">
 									<div class="form-group">
-										<input type="text" name="business_address" id="business_address" tabindex="1" placeholder="Enter address">
+										<input class="form-control" type="text" name="pincode" id="pincode" tabindex="1" placeholder="Enter pincode">
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
-									   <div class="job_reg text-right">
+										<input class="form-control" type="text" name="business_address" id="business_address" tabindex="1" placeholder="Enter address*">
+									</div>
+								</div>
+								
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="text" name="contactname" id="contactname" tabindex="2" placeholder="Enter Contact Person*" >
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="text" name="contactmobile" id="contactmobile" tabindex="2" placeholder="Enter contact mobile*" >
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="text" name="email" id="email" tabindex="2" placeholder="Enter contact email*" >
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="text" name="contactwebsite" id="contactwebsite" tabindex="2" placeholder="Enter contact website" >
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group fw">
+										<span class="select-field-custom">
+											<select name="business_type" id="business_type" tabindex="10">
+												<option selected="selected">Select Business type*</option>
+												<option>Distributor</option>
+												<option>Marketing</option>
+												<option>Production</option>
+												<option>Retailer</option>
+												<option>Service</option>
+												<option>Wholeseller</option>
+												<option>Other</option>
+											</select>
+										</span>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="form-group fw">
+										<span class="select-field-custom">
+											<select name="industriyal" id="industriyal" tabindex="10">
+												<option selected="selected">Select Industry type*</option>
+												<option>Advertising Services</option>
+												<option>Agriculture</option>
+												<option>Aluminium Products</option>
+												<option>Ambulance Services</option>
+												<option>Auto transport broker</option>
+												<option>Automobile</option>
+												<option>Other</option>
+											</select>
+										</span>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-12">
+									<div class="form-group">
+										<textarea class="form-control" name="business_details" id="business_details" tabindex="2" placeholder="Enter business detail*" ></textarea>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-12 bus-upload-img">
+									<div class="form-group">
+										<span class="pr15">Business images:</span><input type="file" tabindex="2">
+									</div>
+								</div>
+								
+								
+								
+								<div class="col-sm-12 col-md-12">
+									<div class="form-group">
+									   <div class="job_reg text-center">
 									
 										  <!-- <input title="Register" type="submit" id="submit" name="" value="Register" tabindex="12"> -->
 										  <button id="submit" name="" class="btn1" tabindex="12">Next<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
