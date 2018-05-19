@@ -34,9 +34,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
     </head>
     <body class="profile-main-page">    
        <?php 
-        if($job_deactive == 0){
+        if($job_deactive == 0 && $this->job_profile_set == 1){
             echo $job_header2;
-        }else if ($job_deactive > 0) {
+        }else if ($job_deactive > 0 || $this->job_profile_set == 0) {
             echo $header_profile;
         }
         if($userid_login == "" || $job_deactive > 0)
