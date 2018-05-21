@@ -116,15 +116,13 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     ?></a>
                                     </div>
                                     <ul class=" left_box_menubar">
-                                        <li <?php if ($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'resume') { ?> class="active" <?php } ?>>
+                                        <li>
                                             <a class="padding_less_left" title="Details" href="<?php echo base_url('job/resume/' . $jobdata[0]['slug']); ?>"> Details</a>
+                                        </li>                                        
+                                        <li><a title="Saved Job" href="<?php echo base_url('job/saved-job'); ?>">Saved </a>
                                         </li>
-                                        <?php if (($this->uri->segment(1) == 'job') && ($this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'resume' || $this->uri->segment(2) == 'job_resume' || $this->uri->segment(2) == 'saved-job' || $this->uri->segment(2) == 'applied-job') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '' || $this->uri->segment(3) == 'live-post')) { ?>
-                                            <li <?php if ($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'saved-job') { ?> class="active" <?php } ?>><a title="Saved Job" href="<?php echo base_url('job/saved-job'); ?>">Saved </a>
-                                            </li>
-                                            <li <?php if ($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'applied-job') { ?> class="active" <?php } ?>><a class="padding_less_right" title="Applied Job" href="<?php echo base_url('job/applied-job'); ?>">Applied </a>
-                                            </li>
-                                        <?php } ?>
+                                        <li><a class="padding_less_right" title="Applied Job" href="<?php echo base_url('job/applied-job'); ?>">Applied </a>
+                                        </li>                                        
                                     </ul>
                                 </div>
                             </div>
