@@ -98,7 +98,7 @@ $( document ).ready(function() {
 
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
+        //evt.currentTarget.className += " active";
     }
 
   function opengrad(evt, cityName) {
@@ -120,7 +120,7 @@ $( document ).ready(function() {
 
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
+        //evt.currentTarget.className += " active";
     }
 //Tabing In Education And Graduation End
 

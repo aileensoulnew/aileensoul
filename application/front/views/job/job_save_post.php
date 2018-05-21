@@ -181,7 +181,7 @@
                             <p class="mob-edit-pro">
 
 
-                                <a href="<?php echo base_url('job/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                <a href="<?php echo base_url('job-profile/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 
 
                             </p>
@@ -236,7 +236,7 @@
                                 <div class="second circle-1">
                                     <div>
                                         <strong></strong>
-                                        <a href="<?php echo base_url('job/basic-information') ?>" class="edit_profile_job">Edit Profile
+                                        <a href="<?php echo base_url('job-profile/basic-information') ?>" class="edit_profile_job">Edit Profile
                                         </a>
                                     </div>
                                 </div>
