@@ -77,13 +77,23 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         <div class="full-box-module">   
                             <div class="profile-boxProfileCard  module">
                                 <div class="profile-boxProfileCard-cover"> 
-                                    <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+                                    <?php                                    
+                                     if ($this->session->userdata('aileenuser') == $recliveid) {
+                                        if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                            <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                            <?php else: ?>
                                         <a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('recruiter/profile'); ?>" tabindex="-1" 
                                            aria-hidden="true" rel="noopener">
-                                           <?php } else { ?>
+                                           <?php endif;
+                                            } else {
+                                                if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                    <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                                    <?php else: ?>
                                             <a class="profile-boxProfileCard-bg u-bgUserColor a-block" href="<?php echo base_url('recruiter/profile/' . $recliveid) ?>" title="<?php echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname']; ?>" tabindex="-1" 
                                                aria-hidden="true" rel="noopener">
-                                               <?php } ?>
+                                               <?php 
+                                           endif;
+                                           } ?>
                                             <div class="bg-images no-cover-upload"> 
                                                 <?php
                                                 $image_ori = $recdata[0]['profile_background'];
@@ -105,12 +115,18 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </div>
                                 <div class="profile-boxProfileCard-content clearfix">
                                     <div class="left_side_box_img buisness-profile-txext">
-                                        <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+                                        <?php
+                                        if ($this->session->userdata('aileenuser') == $recliveid) {
+                                            if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                            <?php else: ?>
                                             <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('recruiter/profile/'. $recliveid); ?>" title="<?php echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
-                                            <?php } else { ?>
+                                            <?php endif; } else {
+                                                if($this->job_profile_set == 0 && $job_deactive == 0): ?>
+                                                    <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                            <?php else: ?>
                                                 <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('recruiter/profile/' . $recliveid); ?>" title="<?php echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">                                               
-                                                <?php } ?>
-                                                <?php
+                                                <?php endif; } 
                                                 $filename = $this->config->item('rec_profile_thumb_upload_path') . $recdata[0]['recruiter_user_image'];
                                                 $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
@@ -141,21 +157,39 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </div>
                                     <div class="right_left_box_design ">
                                         <span class="profile-company-name ">
-                                            <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+                                            <?php if ($this->session->userdata('aileenuser') == $recliveid) { 
+                                                if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                                    <?php echo ucfirst(strtolower($recdata[0]['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata[0]['rec_lastname'])); ?></a>
+                                            <?php else: ?>
                                                 <a href="<?php echo site_url('recruiter/profile'); ?>" title="<?php echo ucfirst(strtolower($recdata['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata['rec_lastname'])); ?>">   <?php echo ucfirst(strtolower($recdata[0]['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata[0]['rec_lastname'])); ?></a>
-                                            <?php } else { ?>
+                                            <?php 
+                                                endif;
+                                            } else { 
+                                                if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);"><?php echo ucfirst(strtolower($recdata[0]['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata[0]['rec_lastname'])); ?></a>
+                                            <?php else: ?>
                                                 <a href="<?php echo site_url('recruiter/profile/' . $recliveid); ?>" title="<?php echo ucfirst(strtolower($recdata['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata['rec_lastname'])); ?>">   <?php echo ucfirst(strtolower($recdata[0]['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata[0]['rec_lastname'])); ?></a>
-                                            <?php } ?>
+                                            <?php endif;
+                                            } ?>
                                         </span>
 
                                     
                                         <div class="profile-boxProfile-name">
-                                            <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+                                            <?php if ($this->session->userdata('aileenuser') == $recliveid) { 
+                                                if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                            <?php else: ?>
                                                 <a href="<?php echo site_url('recruiter/profile/' . $recdata[0]['user_id']); ?>" title="<?php echo ucfirst(strtolower($recdata[0]['designation'])); ?>">
-                                                <?php } else { ?>
+                                                <?php endif;
+                                            } else { 
+                                                if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                            <?php else: ?>
                                                     <a href="<?php echo site_url('recruiter/profile/' . $recliveid); ?>" title="<?php echo ucfirst(strtolower($recdata[0]['designation'])); ?>">    
-                                                    <?php } ?>
-                                                    <?php
+                                            <?php 
+                                                endif;
+                                            } 
                                                     if (ucfirst(strtolower($recdata[0]['designation']))) {
                                                         echo ucfirst(strtolower($recdata[0]['designation']));
                                                     } else {
@@ -165,19 +199,44 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                         </div>
                                         <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
                                             <ul class=" left_box_menubar">
-                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'profile') { ?> class="active" <?php } ?>><a class="padding_less_left" title="Details" href="<?php echo base_url('recruiter/profile'); ?>"> Details</a>
+                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'profile') { ?> class="active" <?php } ?>>
+                                                    <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">Details</a>
+                                            <?php else: ?>
+                                                    <a class="padding_less_left" title="Details" href="<?php echo base_url('recruiter/profile'); ?>"> Details</a>
+                                                <?php endif;?>
                                                 </li>                                
-                                                <li id="rec_post_home" <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'post') { ?> class="active" <?php } ?>><a title="Post" href="<?php echo base_url('recruiter/post'); ?>">Post</a>
+                                                <li id="rec_post_home" <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'post') { ?> class="active" <?php } ?>>
+                                                    <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">Post</a>
+                                            <?php else: ?>
+                                                    <a title="Post" href="<?php echo base_url('recruiter/post'); ?>">Post</a>
+                                                <?php endif; ?>
                                                 </li>
-                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/save-candidate'); ?>">Saved </a>
+                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>>
+                                                    <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">Saved </a>
+                                            <?php else: ?>
+                                                    <a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/save-candidate'); ?>">Saved </a>
+                                                <?php endif; ?>
                                                 </li>
 
                                             </ul>
                                         <?php } else { ?>
                                             <ul class=" left_box_menubar">
-                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'profile') { ?> class="active" <?php } ?>><a class="padding_less_left" title="Details" href="<?php echo base_url('recruiter/profile/' . $recliveid); ?>"> Details</a>
+                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'profile') { ?> class="active" <?php } ?>>
+                                                <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">Details</a>
+                                            <?php else: ?>
+                                                    <a class="padding_less_left" title="Details" href="<?php echo base_url('recruiter/profile/' . $recliveid); ?>"> Details</a>
+                                                <?php endif; ?>
                                                 </li>                                
-                                                <li id="rec_post_home" <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'post') { ?> class="active" <?php } ?>><a title="Post" href="<?php echo base_url('recruiter/post/' . $recliveid); ?>">Post</a>
+                                                <li id="rec_post_home" <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'post') { ?> class="active" <?php } ?>>
+                                                    <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">Post</a>
+                                            <?php else: ?>
+                                                    <a title="Post" href="<?php echo base_url('recruiter/post/' . $recliveid); ?>">Post</a>
+                                                <?php endif; ?>
                                                 </li>
 
                                             </ul>
