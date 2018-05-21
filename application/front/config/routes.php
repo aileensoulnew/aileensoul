@@ -551,6 +551,7 @@ $route['business/search/business-in-(:any)'] = "business_live/business_search/bu
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['(:any)-business'] = "business_live/categoryBusinessList/$1";
 $route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
+$route['(:any)-business-in-(:any)'] = "business_live/categoryBusinessList/$1/$2";
 $route['(:any)'] = 'Userprofile';
 
 
@@ -559,6 +560,7 @@ $route['artist/search/(:any)'] = "artist_live/artist_search/$1";
 $route['artist/search/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 // $route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
+
 
 
 
