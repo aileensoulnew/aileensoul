@@ -16,7 +16,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 <html lang="en" ng-app="jobSearchNRApp" ng-controller="jobSearchNRController">
     <head>
         <!-- start head -->
-        <?php echo $head; ?>
+        <?php //echo $head; ?>
         <!-- END HEAD -->
 
         <title><?php echo $title; ?></title>
@@ -39,17 +39,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <!-- END HEAD -->
 
-    <body class="profile-main-page">
-        <?php
-        $userid = $this->session->userdata('aileenuser');
-        if (!$userid) {
-             }else{
-            echo $header;
-            } ?>
-            <div class="middle-section middle-section-banner">
+    <body class="profile-main-page">        
+            <div class="middle-section middle-section-banner new-ld-page">
                 <?php echo $search_banner ?>
                 <div class="container">
                     <div class="left-part">
@@ -299,14 +296,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                             <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
                                             <div class="all-job-top">
                                                 <div class="post-img">
-                                                    <a href="#" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
-                                                    <a href="#" ng-if="!job.comp_logo"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
+                                                    <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}"></a>
+                                                    <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.comp_logo"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
                                                 </div>
                                                 <div class="job-top-detail">
-                                                    <h5><a href="#" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
-                                                    <h5><a href="#" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
-                                                    <p><a href="#" ng-bind="job.re_comp_name"></a></p>
-                                                    <p><a href="#" ng-bind="job.fullname"></a></p>
+                                                    <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
+                                                    <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
+                                                    <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.re_comp_name"></a></p>
+                                                    <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.fullname"></a></p>
                                                 </div>
                                             </div>
                                             <div class="all-job-middle">
@@ -963,6 +960,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 <?php } ?>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>

@@ -1017,8 +1017,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
 
         $query = $this->db->get();
         $jobCat = $query->result_array();
-        echo $this->db->last_query();
-        exit;
+        //echo $this->db->last_query();exit;
         foreach ($jobCat as $k => $v) {
             if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$jobCat[$k]['industry_image']))
             {

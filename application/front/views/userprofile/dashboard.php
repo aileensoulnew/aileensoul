@@ -2,7 +2,7 @@
     <div class="left-part">
         <div class="left-info-box">
             <div class="dash-left-title">
-                <h3><i class="fa fa-info-circle"></i> Information123</h3>
+                <h3><i class="fa fa-info-circle"></i> Information</h3>
             </div>
             <table width="100%">
                 <tr>

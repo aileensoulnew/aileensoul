@@ -428,8 +428,10 @@ function login_profile() {
     $('#login').modal('show');
 }
 function register_profile() {
-    $('#login').modal('hide');
-    $('#register').modal('show');
+    //$('#login').modal('hide');
+    //$('#register').modal('show');
+    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+    $('#bidmodal').modal('show');
 }
 //            function register_profile_apply(postid) {
 //                $('#login').modal('hide');
@@ -491,10 +493,14 @@ function create_profile_apply(postid) {
 
 //    $(".password_login").val('');
 //    $(".email_login").val('');
-    $(".post_id_login").val(postid);
-//            $(".regpostval").val(postid);
+//    $(".regpostval").val(postid);
+
+    /*$(".post_id_login").val(postid);
     $('.pt15').html(" Don't have an account? <a class='db-479' href='javascript:void(0);' data-toggle='modal' onclick='register_profile(" + postid + ");'>Create an account</a>");
-    $('#register').modal('show');
+    $('#register').modal('show');*///Old 21-5-18
+
+    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+    $('#bidmodal').modal('show');
 
 }
 //For Apply Button Click Process Start
