@@ -14,7 +14,7 @@ class Job_model extends CI_Model {
     }
 
     function jobCategory($limit = '') {
-        $this->db->select('count(rp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug')->from('job_industry ji');
+        $this->db->select('count(rp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug, ji.industry_image')->from('job_industry ji');
         $this->db->join('rec_post rp', 'rp.industry_type = ji.industry_id', 'left');
         $this->db->where('ji.status', '1');
         $this->db->where('ji.is_delete', '0');
@@ -25,7 +25,14 @@ class Job_model extends CI_Model {
         if($limit != "")
             $this->db->limit($limit);
         $query = $this->db->get();
-        $result_array = $query->result_array();
+        // echo $this->db->last_query();exit;
+        $result_array = $query->result_array();        
+        foreach ($result_array as $k => $v) {
+            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$result_array[$k]['industry_image']))
+            {
+                $result_array[$k]['industry_image'] = "job_industry_image_default.png";
+            }
+        }
         return $result_array;
     }
 
@@ -1408,10 +1415,11 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
             LEFT JOIN ailee_recruiter as r ON r.user_id = rj.user_id 
             LEFT JOIN ailee_cities as ct ON ct.city_id = rj.city 
             LEFT JOIN ailee_countries as cr ON cr.country_id = rj.country
-            LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name ";
+            LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name 
+            WHERE r.user_id != '".$userid."'";
         if($sql_filter != "")
         {            
-            $sql .= " WHERE (".trim($sql_filter, ' OR ').")";            
+            $sql .= " AND (".trim($sql_filter, ' OR ').")";            
         }
         $sql .= " ORDER BY rj.post_id DESC ";
         if($limit != '') {

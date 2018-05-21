@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<?php $user_id = $this->session->userdata('aileenuser'); ?>
+<?php $user_id = $this->session->userdata('aileenuser'); 
+//echo $user_id."-------".$job_deactive."----------".$this->job_profile_set;exit;?>
 <html lang="en" ng-app="viewMoreJob" ng-controller="viewMoreJobController">
     <head>
         <base href="<?php echo base_url(); ?>">        
@@ -36,32 +37,12 @@
     </head>
     <body class="profile-main-page">    
         <?php 
-        if($job_deactive == 0 && $user_id != "")
+        if($job_deactive == 0  && $this->job_profile_set == 1)
             echo $job_header2;
-        else if ($job_deactive > 0) {
+        else if ($user_id != "" && ($job_deactive > 0 || $this->job_profile_set == 1)) {
             echo $header_profile;
-        } 
-        else
-        {
-        ?>
-        <header>
-            <div class="header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 left-header">
-                            <h2 class="logo"><a href="<?php echo base_url(); ?>">Aileensoul</a></h2>
-                        </div>
-                        <div class="col-md-6 col-sm-6 no-login-right fw-479">
-                            <a href="#" class="btn8">Login</a>
-                            <a href="#" class="btn9">Create account</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <?php   
-        }
-        if($user_id == "" || $job_deactive > 0)
+        }         
+        if($this->job_profile_set == 0 || $job_deactive > 0)
         {?>
             <div class="middle-section middle-section-banner new-ld-page">
         <?php

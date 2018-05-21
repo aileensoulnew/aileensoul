@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php $userid_login = $this->session->userdata('aileenuser');
-
+//echo $userid_login."-------".$job_deactive."----------".$this->job_profile_set;exit;
  $contition_array = array('is_delete' => '0', 'status' => '1', 'industry_name !=' => "Others");
 if ($userid_login) {
     $search_condition = "((is_other = '1' AND user_id = $userid_login) OR (is_other = '0'))";
@@ -43,35 +43,22 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
     </head>
     <body class="profile-main-page">    
         <?php 
-        if($job_deactive == 0 && $userid_login != ""){
+        if($job_deactive == 0  && $this->job_profile_set == 1){
             echo $job_header2;
-        }else if ($job_deactive > 0) {
+        }else if ($userid_login != "" && ($job_deactive > 0 || $this->job_profile_set == 1)) {
             echo $header_profile;
-        }
-        else
+        }        
+        if($userid_login == "" || $job_deactive > 0 || $this->job_profile_set == 0)
         {
-        ?>
-        <header>
-            <div class="header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 left-header">
-                            <h2 class="logo"><a href="<?php echo base_url(); ?>">Aileensoul</a></h2>
-                        </div>
-                        <div class="col-md-6 col-sm-6 no-login-right fw-479">
-                            <a href="#" class="btn8">Login</a>
-                            <a href="#" class="btn9">Create account</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <?php   
-        }
-        if($userid_login == "" || $job_deactive > 0)
-        {?>
-            <div class="middle-section middle-section-banner">            
-           <?php echo $search_banner;
+            $headercls = "";
+            if($userid_login == "")
+            {
+                $headercls = " new-ld-page";
+            }
+            ?>
+            <div class="middle-section middle-section-banner <?php echo $headercls; ?>">
+            <?php
+            echo $search_banner;
         }
         else
         { ?>

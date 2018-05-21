@@ -9,7 +9,14 @@ $userid = $this->session->userdata('aileenuser');
 				<div class="col-md-6 mob-p0">
 					<ul class="sub-menu">
 						<li class="profile">
+							<?php
+							if($job_deactive == 0  && $this->job_profile_set == 1)
+							{ ?>
 							<a href="<?php echo base_url('recommended-jobs'); ?>">
+							<?php }
+							else{ ?>
+							<a href="<?php echo base_url('job-search'); ?>">
+							<?php } ?>
 								<div class="sub-menu-icon">
 									
 										<svg class="not-hover" viewBox="0 0 486.988 486.988" width="17px" height="17px">
@@ -35,6 +42,9 @@ $userid = $this->session->userdata('aileenuser');
 								</div>
 							</a>
 						</li>
+						<?php
+						if($job_deactive == 0  && $this->job_profile_set == 1)
+						{ ?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
 								<div class="sub-menu-icon">
@@ -120,6 +130,7 @@ $userid = $this->session->userdata('aileenuser');
 								 <li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
 							</ul>
 						</li>
+						<?php } ?>
 					</ul>
 				</div>
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">

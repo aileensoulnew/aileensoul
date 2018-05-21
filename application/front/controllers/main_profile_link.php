@@ -21,6 +21,11 @@
         /*code for Job profile link start */
             $contition_array = array('user_id' => $userid);
             $job_profile_count = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array_job = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
+        $job_deactive = $this->common->select_data_by_condition('job_reg', $contition_array_job, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+        $job_deactive = $job_deactive[0]['total'];
         /*Code for Job profile link ends*/
         /*code for recruiter profile link start */
             $contition_array = array('user_id' => $userid);
@@ -58,7 +63,7 @@
                 $this->artist_profile_link = base_url("artist/home");
                 $this->artist_profile_set = 1;
             }
-            if(!empty($job_profile_count) &&  count($job_profile_count)>0){
+            if(!empty($job_profile_count) &&  count($job_profile_count)>0 && $job_deactive == 0){
                 $this->job_profile_link = base_url("recommended-jobs");
                 $this->job_profile_set = 1;
             }

@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-6 no-login-right fw-479">
                                     <a href="#" class="btn8">Login</a>
-                                    <a href="#" class="btn9">Create account</a>
+                                    <a href="#" class="btn9">Create Job Profile</a>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url(); ?>{{jobs.industry_slug}}-jobs">
                                     <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url();?>assets/n-images/cat-1.png">
+                                    <img src="<?php echo JOB_INDUSTRY_IMG_PATH."/";?>{{jobs.industry_image}}">
                                     <p class="">{{jobs.industry_name}}</p>
                                     <span>{{jobs.count}} jobs</span>
                                     </div>
@@ -103,7 +103,7 @@
                         </div>                        
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
-                        <p class="p20 text-center"><a href="#" class="btn-1">View More</a></p>
+                        <p class="p20 text-center"><a href="<?php echo base_url(); ?>jobs-by-categories" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@
                             <ul>
                                 <li><h3>Job By Location</h3></li>
                                 <li ng-if="jobCity.length != 0" ng-repeat="jc in jobCity" ng-init="jcIndex=$index"><a href="<?php echo base_url(); ?>jobs-in-{{jc.slug}}">Jobs in {{jc.city_name}} ({{jc.count}})</a></li>
-                                <li><a href="#">View All Location....</a></li>
+                                <li><a href="<?php echo base_url(); ?>jobs-by-location">View All Location....</a></li>
                             </ul>
                         </div>
                     </div>
@@ -218,7 +218,7 @@
                             <ul>
                                 <li><h3>Job By Designation</h3></li>
                                 <li ng-if="jobDesignation.length != 0" ng-repeat="jd in jobDesignation" ng-init="jdIndex=$index"><a href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs">{{jd.job_title}} ({{jd.count}})</a></li>                                
-                                <li><a href="#">View All Designation....</a></li>
+                                <li><a href="<?php echo base_url(); ?>jobs-by-designations">View All Designation....</a></li>
                             </ul>
                         </div>
                     </div>
@@ -227,7 +227,7 @@
                             <ul>
                                 <li><h3>Job By Company</h3></li>
                                 <li ng-if="jobCompany.length != 0" ng-repeat="jcm in jobCompany" ng-init="jcmIndex=$index"><a href="<?php echo base_url(); ?>jobs-opening-at-{{jcm.company_name | slugify}}-{{jcm.rec_id}}">{{jcm.company_name}} ({{jcm.count}})</a></li>
-                                <li><a href="#">View All Companies....</a></li>
+                                <li><a href="<?php echo base_url(); ?>jobs-by-companies">View All Companies....</a></li>
                             </ul>
                         </div>
                     </div>

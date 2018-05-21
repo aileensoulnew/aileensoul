@@ -39,7 +39,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         }else if ($job_deactive > 0 || $this->job_profile_set == 0) {
             echo $header_profile;
         }
-        if($userid_login == "" || $job_deactive > 0)
+        if($this->job_profile_set == 0 || $job_deactive > 0)
         {?>
         <div class="middle-section middle-section-banner">
             <?php echo $search_banner;

@@ -48,6 +48,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <?php //echo $recruiter_header2; ?>
         <?php
         //$returnpage = $_GET['page'];
+        // echo $this->session->userdata('aileenuser');
+        // echo $recliveid;exit;
         if ($this->session->userdata('aileenuser') != $recliveid) {
              if($job_deactive == 0 && $userid_login != ""){
                 echo $job_header2;
