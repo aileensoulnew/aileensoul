@@ -67,7 +67,7 @@ class Business_live extends MY_Controller {
         $this->load->view('business_live/category', $this->data);
     }
 
-    public function categoryBusinessList($category = '') {
+    public function categoryBusinessList($category = '', $location = '') {
         $userid = $this->session->userdata('aileenuser');
         $businessresult = $this->checkbusinessdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -81,9 +81,13 @@ class Business_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Category - Business Profile | Aileensoul";
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
-        $this->data['category_id'] = $category_id['industry_id'];
+        $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row('industry_id');
+        $this->data['category_id'] = $category_id;
+        $city_id = $this->db->select('city_id')->get_where('cities', array('slug' => $location))->row('city_id');
+        $this->data['location_id'] = $city_id;
         $this->data['business_profile_set'] = $this->business_profile_set;
+        $this->data['q'] = $category;
+        $this->data['l'] = $location;
         $this->load->view('business_live/categoryBusinessList', $this->data);
     }
 
@@ -238,8 +242,8 @@ class Business_live extends MY_Controller {
     }
 
     // Get Location list from city id
-    public function businessListByLocation($id = '0') {
-        $businessListByLocation = $this->business_model->businessListByLocation($id);
+    public function businessListByLocation($cat_id = '0',$loc_id = '0') {
+        $businessListByLocation = $this->business_model->businessListByLocation($cat_id, $loc_id);
         echo json_encode($businessListByLocation);
     }
 
@@ -288,14 +292,14 @@ class Business_live extends MY_Controller {
     {        
         $page = 1;
         $limit = 20;
-        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
+        $jobCat = $this->business_model->get_business_by_categories($page,$limit);
         $jobCity = $this->job_model->get_job_city($page,$limit);        
         $all_link = array();
         foreach ($jobCity['job_city'] as $key => $value) {
             $i=0;
             foreach ($jobCat['job_cat'] as $jck => $jcv) {
-                $all_link[$value['slug']]['name'] = $jcv['industry_name']." Jobs In ".$value['city_name'];
-                $all_link[$value['slug']]['slug'] = $jcv['industry_slug']."-jobs-in-".$value['slug'];
+                $all_link[$value['slug']][$i]['name'] = $jcv['industry_name']." Business In ".$value['city_name'];
+                $all_link[$value['slug']][$i]['slug'] = $jcv['industry_slug']."-business-in-".$value['slug'];
                 $i++;
             }
         }

@@ -34,13 +34,31 @@ app.controller('businessListController', function ($scope, $http) {
             $scope.businessList = success.data;
         }, function (error) {});
     }
-    if(location_id == '' || !location_id){
+    if(location_id != "" && category_id != ""){
+        getfilterbusinessdata();
+    }else if(location_id == '' || !location_id){
         categoryBusinessList();
     }else{
         locationBusinessList();
     }
-    
-    $scope.getfilterartistdata = function(){
+    function getfilterbusinessdata(){
+        var location = location_id;
+        var category = category_id;
+        var datavalue = new FormData();
+        datavalue.append('category_id', category);
+        datavalue.append('location_id', location);
+        $("#loader").removeClass("hidden");
+        filterajax = $http.post(base_url + "business_live/businessListByFilter/", datavalue,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false}
+            }).then(function (success) {
+                $("#loader").addClass("hidden");
+                $scope.businessList = success.data;
+        }, function (error) {}
+        , function (complete) { filterajax = false; });
+    }
+    $scope.getfilterbusinessdata = function (){
         var location = location_id;
         // Get Checked Location of filter and make data value for ajax call
         $('.locationcheckbox').each(function(){
@@ -93,5 +111,5 @@ $(window).on("load", function () {
 $(document).on('change','.locationcheckbox,.categorycheckbox',function(){
     var self = this;
     // self.setAttribute('checked',(this.checked));
-    angular.element(self).scope().getfilterartistdata();
+    angular.element(self).scope().getfilterbusinessdata();
 });

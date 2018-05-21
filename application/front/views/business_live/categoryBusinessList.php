@@ -165,8 +165,8 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var category_id = '<?php echo $category_id; ?>';
             var location_id = '<?php echo $location_id; ?>';
-            var q = '';
-            var l = '';
+            var q = '<?php echo $q; ?>';
+            var l = '<?php echo $l; ?>';
             var app = angular.module('businessListApp', ['ui.bootstrap']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

@@ -601,4 +601,36 @@ class Business_model extends CI_Model {
         return $slug;
     }
 
+    function get_business_by_categories($page = 0,$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug')->from('industry_type it');
+        $this->db->join('business_profile bp', 'bp.industriyal = it.industry_id', 'left');
+        $this->db->where('it.status', '1');
+        $this->db->where('it.is_delete', '0');
+        $this->db->where('bp.status', '1');
+        $this->db->where('bp.is_deleted', '0');
+        $this->db->where('bp.business_step', '4');
+        $this->db->group_by('bp.industriyal');
+        $this->db->order_by('count', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        $businessCat = $query->result_array();   
+        
+        foreach ($businessCat as $k => $v) {
+            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$businessCat[$k]['industry_image']))
+            {
+                $businessCat[$k]['industry_image'] = "job_industry_image_default.png";
+            }
+        }
+        $result_array['job_cat'] = $businessCat;
+        $result_array['total_record'] = $this->get_business_category_total_rec();
+
+        return $result_array;
+    }
+
+
 }
