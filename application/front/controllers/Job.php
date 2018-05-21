@@ -3246,12 +3246,12 @@ class Job extends MY_Controller {
                 $cityname = $this->db->get_where('cities', array('city_id' => $postdata[0]['city']))->row()->city_name;
 
                 if ($cityname != '') {
-                    $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+                    $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
                 } else {
                     $cityname = '';
                 }
 
-                redirect('recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id']);
+                redirect( $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id']);
             } else {
                 redirect('job/registration');
             }
@@ -3614,12 +3614,12 @@ class Job extends MY_Controller {
                 }
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 if ($cityname != '') {
-                    $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+                    $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
                 } else {
                     $cityname = '';
                 }
                 $return_html .= '<div class="post-img">
-                                            <a  title="' . $post_name . '" href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a  title="' . $post_name . '" href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
@@ -3657,10 +3657,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -3705,7 +3705,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -3826,12 +3826,12 @@ class Job extends MY_Controller {
                 }
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 if ($cityname != '') {
-                    $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+                    $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
                 } else {
                     $cityname = '';
                 }
                 $return_html .= '<div class="post-img">
-                                            <a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
@@ -3868,10 +3868,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -3916,7 +3916,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -4020,13 +4020,13 @@ class Job extends MY_Controller {
                 }
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 if ($cityname != '') {
-                    $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+                    $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
                 } else {
                     $cityname = '';
                 }
 
                 $return_html .= '<div class="post-img">
-                                            <a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
@@ -4063,10 +4063,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -4109,7 +4109,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -4364,12 +4364,12 @@ class Job extends MY_Controller {
                 }
                 $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
                 if ($cityname != '') {
-                    $cityname = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+                    $cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
                 } else {
                     $cityname = '';
                 }
                 $return_html .= '<div class="post-img">
-                                            <a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
@@ -4406,10 +4406,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -4454,7 +4454,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() . 'recruiter/jobpost/' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -4688,7 +4688,7 @@ class Job extends MY_Controller {
                     $contition_array = array('user_id' => $post['user_id'], 're_status' => '1', 'is_delete' => '0');
                     $recrdata = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 're_comp_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-                    $return_html .= '<a href="' . base_url('job/post-' . $post['post_id'] . '/' . $text . '-vacancy-in-' . $cityname) . '" title="' . $cache_time . '" class=" post_title">';
+                    $return_html .= '<a href="' . base_url('job/post-' . $post['post_id'] . '/' . $text . '-job-vacancy-in-' . $cityname) . '" title="' . $cache_time . '" class=" post_title">';
                     if ($cache_time) {
                         $return_html .= $cache_time;
                     } else {

@@ -39,7 +39,7 @@ if ($userid != $id) {
 
                 <?php
                 if ($id == '' || $userid == $id) {
-                    if (($this->uri->segment(1) == 'job-profile') && ($this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'resume' || $this->uri->segment(2) == 'job_resume' || $this->uri->segment(2) == 'saved-job' || $this->uri->segment(2) == 'applied-job')) {
+                    if (($this->uri->segment(1) == 'job-profile') && ($this->uri->segment(2) != '' || $this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'resume' || $this->uri->segment(2) == 'job_resume' || $this->uri->segment(2) == 'saved-job' || $this->uri->segment(2) == 'applied-job')) {
                         ?>
                         <li <?php if ($this->uri->segment(1) == 'job-profile' && $this->uri->segment(2) == 'saved-job') { ?> class="active" <?php } ?>><a title="Saved Job" href="<?php echo base_url('job-profile/saved-job'); ?>">Saved </a>
                         </li>
