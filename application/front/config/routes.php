@@ -430,14 +430,21 @@ $route['job-profile/saved-job'] = "job/job_save_post";
 // $route['job/applied-job'] = "job/job_applied_post";//Old
 $route['job-profile/applied-job'] = "job/job_applied_post";
 
-$route['job/basic-information'] = "job/job_basicinfo_update";
+//$route['job/basic-information'] = "job/job_basicinfo_update";//Old
+$route['job-profile/basic-information'] = "job/job_basicinfo_update";
 
-$route['job/qualification'] = "job/job_education_update";
-$route['job/qualification/(:any)'] = "job/job_education_update/$1";
+// $route['job/qualification'] = "job/job_education_update";//Old
+// $route['job/qualification/(:any)'] = "job/job_education_update/$1";//Old
 
-$route['job/project'] = "job/job_project_update";
-$route['job/work-area'] = "job/job_skill_update";
-$route['job/work-experience'] = "job/job_work_exp_update";
+$route['job-profile/qualification'] = "job/job_education_update";
+$route['job-profile/qualification/(:any)'] = "job/job_education_update/$1";
+
+// $route['job/project'] = "job/job_project_update"; //Old
+$route['job-profile/project'] = "job/job_project_update";
+// $route['job/work-area'] = "job/job_skill_update";//Old
+$route['job-profile/work-area'] = "job/job_skill_update";
+// $route['job/work-experience'] = "job/job_work_exp_update";//Old
+$route['job-profile/work-experience'] = "job/job_work_exp_update";
 
 $route['job/registration'] = "job/job_reg";
 $route['job/registration/live-post'] = "job/job_reg";

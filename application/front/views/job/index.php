@@ -188,9 +188,11 @@
                                         </fieldset>
 
                                         <fieldset class="hs-submit full-width">
-                                          <!--  <input title="Save" type="submit"  id="next" name="next" value="Save" tabindex="12"> -->
+                                           <!-- <input title="Save" type="submit"  id="next" name="next" value="Save" tabindex="12"> -->
 
-                                            <button id="next" name="next" class="cus_btn_sub" onclick="return profile_reg();" tabindex="12">Save<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                          <!-- <button id="next" name="next" class="cus_btn_sub" onclick="return profile_reg();" tabindex="12"> old -->
+
+                                            <button id="next" name="next" class="cus_btn_sub"  tabindex="12">Save<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
 
                                         </fieldset>
                                         </form>
@@ -208,8 +210,14 @@
             <?php echo $footer; ?>
             <!-- </footer> -->
 
+ <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.js?ver=' . time()); ?>"></script>
+                <!-- js for modal start-->
+                <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+                <!-- js for modal end-->
+
+                <script src="<?php echo base_url('assets/js/jquery.date-dropdowns.js?ver=' . time()); ?>"></script>
 <?php
-if (IS_JOB_JS_MINIFY == '0') {
+/*if (IS_JOB_JS_MINIFY == '0') {
     ?>
 
                 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.js?ver=' . time()); ?>"></script>
@@ -229,7 +237,7 @@ if (IS_JOB_JS_MINIFY == '0') {
 
                 <script src="<?php echo base_url('assets/js_min/jquery.date-dropdowns.js?ver=' . time()); ?>"></script>
 
-<?php } ?>
+<?php }*/ ?>
             <script>
                 var base_url = '<?php echo base_url(); ?>';
                 var date_picker = '<?php echo date('Y-m-d', strtotime($job['user_dob'])); ?>';
@@ -237,9 +245,11 @@ if (IS_JOB_JS_MINIFY == '0') {
                 var header_all_profile = '<?php echo $header_all_profile; ?>';
 
             </script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/index.js?ver=' . time()); ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
 
 <?php
-if (IS_JOB_JS_MINIFY == '0') {
+/*if (IS_JOB_JS_MINIFY == '0') {
     ?>
 
                 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/index.js?ver=' . time()); ?>"></script>
@@ -250,6 +260,6 @@ if (IS_JOB_JS_MINIFY == '0') {
                 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/index.js?ver=' . time()); ?>"></script>
                 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>
 
-<?php } ?>
+<?php }*/ ?>
         </body>
 </html>

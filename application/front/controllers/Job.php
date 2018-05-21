@@ -113,6 +113,7 @@ class Job extends MY_Controller {
     }
 
     public function job_basicinfo_insert() {
+        //print_r($this->input->post());die;
 
         $this->job_deactive_profile();
         $userid = $this->session->userdata('aileenuser');
@@ -157,7 +158,8 @@ class Job extends MY_Controller {
 
         if ($this->form_validation->run() == FALSE) {
 
-            $this->load->view('job/index', $this->data);
+            //$this->load->view('job/index', $this->data);
+            $this->job_basicinfo_update();
         } else {
             $data = array(
                 'fname' => ucfirst($this->input->post('fname')),
@@ -177,7 +179,7 @@ class Job extends MY_Controller {
 
             $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
             if ($updatedata) {
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             } else {
                 redirect('job/basic-information', refresh);
             }
@@ -458,9 +460,9 @@ class Job extends MY_Controller {
             //Update only one field into database End 
 
             if ($updatedata) {
-                redirect('job/qualification/secondary');
+                redirect('job-profile/qualification/secondary');
             } else {
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             }
         } else {
             $data = array(
@@ -476,10 +478,10 @@ class Job extends MY_Controller {
 
             if ($insert_id) {
 
-                redirect('job/qualification/secondary');
+                redirect('job-profile/qualification/secondary');
             } else {
 
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             }
         }
     }
@@ -649,10 +651,10 @@ class Job extends MY_Controller {
             //Update only one field into database End 
 
             if ($updatedata) {
-                redirect('job/qualification/higher-secondary');
+                redirect('job-profile/qualification/higher-secondary');
             } else {
 
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             }
         } else {
             $data = array(
@@ -667,9 +669,9 @@ class Job extends MY_Controller {
             $insert_id = $this->common->insert_data_getid($data, 'job_add_edu');
 
             if ($insert_id) {
-                redirect('job/qualification/higher-secondary');
+                redirect('job-profile/qualification/higher-secondary');
             } else {
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             }
         }
     }
@@ -841,10 +843,10 @@ class Job extends MY_Controller {
 
 
             if ($updatedata) {
-                redirect('job/qualification/graduation');
+                redirect('job-profile/qualification/graduation');
             } else {
 
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             }
         } else {
             $data = array(
@@ -861,9 +863,9 @@ class Job extends MY_Controller {
             $insert_id = $this->common->insert_data_getid($data, 'job_add_edu');
 
             if ($insert_id) {
-                redirect('job/qualification/graduation');
+                redirect('job-profile/qualification/graduation');
             } else {
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             }
         }
     }
@@ -894,7 +896,7 @@ class Job extends MY_Controller {
                 redirect('job/job_add_education', refresh);
             } else {
                 echo "<script>alert('You Can only add 5 Education field');</script>";
-                redirect('job/qualification', refresh);
+                redirect('job-profile/qualification', refresh);
             }
         }
 //Click on Add_More_Education Process End
@@ -1136,10 +1138,10 @@ class Job extends MY_Controller {
 
         if ($insert_id || $updatedata1) {
 
-            redirect('job/project');
+            redirect('job-profile/project');
         } else {
 
-            redirect('job/qualification', 'refresh');
+            redirect('job-profile/qualification', 'refresh');
         }
     }
 
@@ -1184,7 +1186,7 @@ class Job extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
 
         if ($this->input->post('previous')) {
-            redirect('job/qualification', refresh);
+            redirect('job-profile/qualification', refresh);
         }
         //if ($this->input->post('next')) { 
 
@@ -1203,10 +1205,10 @@ class Job extends MY_Controller {
 
 
         if ($updatedata) {
-            redirect('job/work-area');
+            redirect('job-profile/work-area');
         } else {
 
-            redirect('job/project', 'refresh');
+            redirect('job-profile/project', 'refresh');
         }
         //}
     }
@@ -1304,7 +1306,7 @@ class Job extends MY_Controller {
         $cities = explode(',', $cities);
 
         if ($this->input->post('previous')) {
-            redirect('job/project', refresh);
+            redirect('job-profile/project', refresh);
         }
         // if ($this->input->post('next')) {
         // job title start   
@@ -1387,9 +1389,9 @@ class Job extends MY_Controller {
         $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
 
         if ($updatedata) {
-            redirect('job/work-experience');
+            redirect('job-profile/work-experience');
         } else {
-            redirect('job/work-area', 'refresh');
+            redirect('job-profile/work-area', 'refresh');
         }
         //}
     }
@@ -1434,7 +1436,7 @@ class Job extends MY_Controller {
         $count1 = count($userdata[0]['jobtitle']);
 
         if ($this->input->post('previous')) {
-            redirect('job/work-area', refresh);
+            redirect('job-profile/work-area', refresh);
         }
         $post_data = $this->input->post();
 
@@ -1513,7 +1515,7 @@ class Job extends MY_Controller {
             if ($updatedata && $updatedata1 || $updatedata && $insertid) {
                 redirect('recommended-jobs');
             } else {
-                redirect('job/work-experience', 'refresh');
+                redirect('job-profile/work-experience', 'refresh');
             }
         } else {
 
@@ -1808,7 +1810,7 @@ class Job extends MY_Controller {
             if ($insert_id && $updatedata || $updatedata1 && $updatedata) {
                 redirect('recommended-jobs');
             } else {
-                redirect('job/work-experience', 'refresh');
+                redirect('job-profile/work-experience', 'refresh');
             }
         }
         //}
@@ -2750,7 +2752,7 @@ class Job extends MY_Controller {
             if ($seg == 'primary') {
                 $select = '<title>' . $pdf[0]['edu_certificate'] . '</title>';
                 $select .= '<link rel="icon" href="' . base_url('assets/images/favicon.png') . '">';
-                $select .= '<form action="' . base_url() . '/job/qualification/primary" method="post">';
+                $select .= '<form action="' . base_url() . '/job-profile/qualification/primary" method="post">';
                 $select .= '<button type="submit">Back</button>';
                 $select .= '</form>';
                 echo $select;
@@ -2774,7 +2776,7 @@ class Job extends MY_Controller {
             if ($seg == 'secondary') {
                 $select = '<title>' . $pdf[0]['edu_certificate'] . '</title>';
                 $select .= '<link rel="icon" href="' . base_url('assets/images/favicon.png') . '">';
-                $select .= '<form action="' . base_url() . '/job/qualification/secondary" method="post">';
+                $select .= '<form action="' . base_url() . '/job-profile/qualification/secondary" method="post">';
                 $select .= '<button type="submit">Back</button>';
                 $select .= '</form>';
                 echo $select;
@@ -2798,7 +2800,7 @@ class Job extends MY_Controller {
             if ($seg == 'higher-secondary') {
                 $select = '<title>' . $pdf[0]['edu_certificate'] . '</title>';
                 $select .= '<link rel="icon" href="' . base_url('assets/images/favicon.png') . '">';
-                $select .= '<form action="' . base_url() . '/job/qualification/higher-secondary" method="post">';
+                $select .= '<form action="' . base_url() . '/job-profile/qualification/higher-secondary" method="post">';
                 $select .= '<button type="submit">Back</button>';
                 $select .= '</form>';
                 echo $select;

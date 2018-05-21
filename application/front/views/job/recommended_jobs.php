@@ -55,7 +55,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             }
                             ?>">
                                 <a class="profile-boxProfileCard-bg u-bgUserColor a-block"
-                                   href="<?php echo base_url('job/resume/' . $jobdata[0]['slug']); ?>"
+                                   href="<?php echo base_url('job-profile/' . $jobdata[0]['slug']); ?>"
                                    tabindex="-1"
                                    aria-hidden="true"
                                    rel="noopener" title="job resume">
@@ -76,7 +76,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </div>
                             <div class="profile-boxProfileCard-content clearfix">
                                 <div class="left_side_box_img buisness-profile-txext">
-                                    <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('job/resume/' . $jobdata[0]['slug']); ?>" title="<?php echo $jobdata[0]['fname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+                                    <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('job-profile/' . $jobdata[0]['slug']); ?>" title="<?php echo $jobdata[0]['fname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
                                         <?php
                                         if ($jobdata[0]['job_user_image']) {
                                             ?>
@@ -103,12 +103,12 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 <div class="right_left_box_design ">
                                     <span class="profile-company-name ">
                                         <span class="profile-company-name ">
-                                            <a   href="<?php echo site_url('job/resume/' . $jobdata[0]['slug']); ?>" title="<?php echo $jobdata[0]['slug']; ?>">  <?php echo ucfirst($jobdata[0]['fname']) . ' ' . ucfirst($jobdata[0]['lname']); ?></a>
+                                            <a   href="<?php echo site_url('job-profile/' . $jobdata[0]['slug']); ?>" title="<?php echo $jobdata[0]['slug']; ?>">  <?php echo ucfirst($jobdata[0]['fname']) . ' ' . ucfirst($jobdata[0]['lname']); ?></a>
                                         </span>
                                     </span>
                                     <?php $category = $this->db->get_where('industry_type', array('industry_id' => $businessdata[0]['industriyal'], 'status' => '1'))->row()->industry_name; ?>
                                     <div class="profile-boxProfile-name">
-                                        <a  href="<?php echo base_url('job/resume/' . $jobdata[0]['slug']); ?>" title="<?php echo $jobdata[0]['slug']; ?>"><?php
+                                        <a  href="<?php echo base_url('job-profile/' . $jobdata[0]['slug']); ?>" title="<?php echo $jobdata[0]['slug']; ?>"><?php
                                     if (ucwords($jobdata[0]['designation'])) {
                                         echo ucwords($jobdata[0]['designation']);
                                     } else {
