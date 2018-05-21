@@ -21,7 +21,32 @@ class Business_model extends CI_Model {
         return $result_array;
     }
 
-    function businessAllCategory() {
+    function businessAllCategory($page = 0,$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug')->from('industry_type it');
+        $this->db->join('business_profile bp', 'bp.industriyal = it.industry_id', 'left');
+        $this->db->where('it.status', '1');
+        $this->db->where('it.is_delete', '0');
+        $this->db->where('bp.status', '1');
+        $this->db->where('bp.is_deleted', '0');
+        $this->db->where('bp.business_step', '4');
+        $this->db->group_by('bp.industriyal');
+        $this->db->order_by('count', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        $businessCategory = $query->result_array();   
+        // echo $this->db->last_query();
+        // exit;
+        $result_array['bus_cat'] = $businessCategory;
+        $result_array['total_record'] = $this->get_business_category_total_rec();
+        return $result_array;
+    }
+
+    function get_business_category_total_rec() {
         $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug')->from('industry_type it');
         $this->db->join('business_profile bp', 'bp.industriyal = it.industry_id', 'left');
         $this->db->where('it.status', '1');
@@ -32,9 +57,11 @@ class Business_model extends CI_Model {
         $this->db->group_by('bp.industriyal');
         $this->db->order_by('count', 'desc');
         $query = $this->db->get();
-        $result_array = $query->result_array();
-        return $result_array;
+        $result_array = $query->result_array();   
+        return count($result_array);
     }
+
+
 
     function otherCategoryCount() {
         $this->db->select('count(bp.business_profile_id) as count')->from('business_profile bp');
@@ -410,8 +437,49 @@ class Business_model extends CI_Model {
             $sql .= " LIMIT ". $limit;
         }
         $query = $this->db->query($sql);
-        $result_array = $query->result_array();
+        $result_array = $query->result_array();   
         return $result_array;
+    }
+
+    // Get all location of business
+    function businessAllLocation($page = 0,$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug 
+                FROM ailee_cities ac 
+                LEFT JOIN ailee_business_profile bp ON bp.city = ac.city_id
+                WHERE ac.status = '1' AND bp.status = '1' AND bp.is_deleted = '0' 
+                AND bp.business_step = '4' 
+                GROUP BY bp.city 
+                ORDER BY count DESC"; 
+
+        if($limit != ''){
+            $sql .= " LIMIT ". $start . "," . $limit;
+        }
+        $query = $this->db->query($sql);
+        $businessLocation = $query->result_array();   
+        $result_array['bus_loc'] = $businessLocation;
+        $result_array['total_record'] = $this->get_business_location_total_rec();
+
+        return $result_array;
+    }
+
+    function get_business_location_total_rec(){
+        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug 
+                FROM ailee_cities ac 
+                LEFT JOIN ailee_business_profile bp ON bp.city = ac.city_id
+                WHERE ac.status = '1' AND bp.status = '1' AND bp.is_deleted = '0' 
+                AND bp.business_step = '4' 
+                GROUP BY bp.city 
+                ORDER BY count DESC"; 
+
+        if($limit != ''){
+            $sql .= " LIMIT ". $start . "," . $limit;
+        }
+        $query = $this->db->query($sql);
+        $businessLocation = $query->result_array(); 
+        return count($businessLocation);  
     }
 
     // Get Location List based on city id

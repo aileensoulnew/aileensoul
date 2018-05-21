@@ -522,6 +522,7 @@ $route['how-to-use-artistic-profile-in-aileensoul'] = "introduction/artistic_pro
 
 $route['business-by-categories'] = "business_live/view_more_business";
 $route['business-by-location'] = "business_live/view_more_business";
+$route['business'] = "business_live/view_more_business";
 
 $route['artist/pdf-view/(:any)'] = "artist/pdf_display/$1";
 $route['business-profile/pdf-view/(:any)'] = "business_profile/pdf_display/$1";

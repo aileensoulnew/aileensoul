@@ -17,6 +17,7 @@ class Business_live extends MY_Controller {
         $this->load->model('user_post_model');
         $this->load->model('data_model');
         $this->load->model('business_model');
+        $this->load->model('job_model');
         $this->load->library('S3');
         
         include ('main_profile_link.php');
@@ -63,19 +64,6 @@ class Business_live extends MY_Controller {
 
     public function category() {
         $userid = $this->session->userdata('aileenuser');
-        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Categories - Business Profile | Aileensoul";
-        $this->data['business_profile_set'] = $this->business_profile_set;
-        $this->data['page'] = '';
         $this->load->view('business_live/category', $this->data);
     }
 
@@ -161,7 +149,15 @@ class Business_live extends MY_Controller {
     }
 
     public function businessAllCategory() {
-        $businessAllCategory = $this->business_model->businessAllCategory();
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = ($_GET['limit']) ? $_GET['limit'] : 15;
+        $businessAllCategory = $this->business_model->businessAllCategory($page,$limit);
         echo json_encode($businessAllCategory);
     }
 
@@ -198,29 +194,28 @@ class Business_live extends MY_Controller {
 
     // Top Business Location 
     public function businessLocation() {
-        $limit = $_GET['limit'];
+        $limit = ($_GET['limit']) ? $_GET['limit'] : 5;
         $businessLocation = $this->business_model->businessLocation($limit);
+        echo json_encode($businessLocation);
+    }
+
+    // Top Business Location 
+    public function businessAllLocation() {
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = ($_GET['limit']) ? $_GET['limit'] : 15;
+        $businessLocation = $this->business_model->businessAllLocation($page,$limit);
         echo json_encode($businessLocation);
     }
 
     // Get location of business
     public function location() {
-        $userid = $this->session->userdata('aileenuser');
-        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Categories - Business Profile | Aileensoul";
-        $this->data['business_profile_set'] = $this->business_profile_set;
-        $this->data['page'] = 'location';
-
-        $this->load->view('business_live/category', $this->data);
+        $this->load->view('business_live/location', $this->data);
     }
 
     public function locationBusinessList($location = '') {
@@ -266,6 +261,11 @@ class Business_live extends MY_Controller {
         }
     }
 
+    // Get location of business
+    public function business_by_business() {
+        $this->load->view('business_live/business_by_business', $this->data);
+    }
+
     public function view_more_business()
     {
        $userid = $this->session->userdata('aileenuser');
@@ -281,8 +281,25 @@ class Business_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Categories - Business Profile | Aileensoul";
         $this->data['business_profile_set'] = $this->business_profile_set;
-        $this->data['page'] = '';
         $this->load->view('business_live/view_more_business', $this->data);
+    }
+
+    public function business_by_category_location_ajax()
+    {        
+        $page = 1;
+        $limit = 20;
+        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
+        $jobCity = $this->job_model->get_job_city($page,$limit);        
+        $all_link = array();
+        foreach ($jobCity['job_city'] as $key => $value) {
+            $i=0;
+            foreach ($jobCat['job_cat'] as $jck => $jcv) {
+                $all_link[$value['slug']]['name'] = $jcv['industry_name']." Jobs In ".$value['city_name'];
+                $all_link[$value['slug']]['slug'] = $jcv['industry_slug']."-jobs-in-".$value['slug'];
+                $i++;
+            }
+        }
+        echo json_encode($all_link);
     }
 
 }

@@ -23,25 +23,7 @@
             <!-- NEW HTML -->
                 
             <div class="container pt20">
-                <div class="custom-user-list">
-                    <div class="list-box-custom border-none">
-                        <div class="">
-                            <div class="">
-                                <ul class="nav nav-tabs">
-                                    <li class="<?php if($this->uri->segment(1) == 'business-by-categories') echo 'active'; ?>"><a href="<?php echo base_url() ?>business-by-categories" data-toggle="tab"><span class="hidden-xs">Business by</span> Categories</a></li>
-
-                                    <li class="<?php if($this->uri->segment(1) == 'business-by-location') echo 'active'; ?>"><a href="<?php echo base_url() ?>business-by-location" data-toggle="tab"><span class="hidden-xs">Business by</span> Location</a></li>
-                                </ul>
-                            </div>
-                            <div ng-view></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-part">
-                    <div class="add-box">
-                        <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>" alt="{{category.industry_name}}">
-                    </div>
-                </div>
+                <div ng-view></div>                
             </div>
 
         </div>
