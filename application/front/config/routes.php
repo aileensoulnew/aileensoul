@@ -419,11 +419,17 @@ $route['jobs/search/(.+)'] = "job_live/job_search_new";
 $route['recommended-jobs'] = "job/job_all_post";
 $route['job/home/live-post'] = "job/job_all_post/$1";
 
-$route['job/resume'] = "job/job_printpreview";
-$route['job/resume/(:any)'] = "job/job_printpreview/$1";
+// $route['job/resume'] = "job/job_printpreview";//old
+// $route['job/resume/(:any)'] = "job/job_printpreview/$1";//old
 
-$route['job/saved-job'] = "job/job_save_post";
-$route['job/applied-job'] = "job/job_applied_post";
+$route['job-profile'] = "job/job_printpreview";
+
+// $route['job/saved-job'] = "job/job_save_post";//Old
+$route['job-profile/saved-job'] = "job/job_save_post";
+
+// $route['job/applied-job'] = "job/job_applied_post";//Old
+$route['job-profile/applied-job'] = "job/job_applied_post";
+
 $route['job/basic-information'] = "job/job_basicinfo_update";
 
 $route['job/qualification'] = "job/job_education_update";
@@ -436,6 +442,7 @@ $route['job/work-experience'] = "job/job_work_exp_update";
 $route['job/registration'] = "job/job_reg";
 $route['job/registration/live-post'] = "job/job_reg";
 $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";
+$route['job-profile/(:any)'] = "job/job_printpreview/$1";
 //$route['job/search'] = "job/job_search";
  // $route['jobs'] = "job/job_search";
  // $route['jobs/(:any)'] = "job/job_search/$1";

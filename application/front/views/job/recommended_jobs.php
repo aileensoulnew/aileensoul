@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php $userid_login = $this->session->userdata('aileenuser');
+// print_r($jobdata);exit;
 
  $contition_array = array('is_delete' => '0', 'status' => '1', 'industry_name !=' => "Others");
 if ($userid_login) {
@@ -117,11 +118,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </div>
                                     <ul class=" left_box_menubar">
                                         <li>
-                                            <a class="padding_less_left" title="Details" href="<?php echo base_url('job/resume/' . $jobdata[0]['slug']); ?>"> Details</a>
+                                            <a class="padding_less_left" title="Details" href="<?php echo base_url('job-profile/' . $jobdata[0]['slug']); ?>"> Details</a>
                                         </li>                                        
-                                        <li><a title="Saved Job" href="<?php echo base_url('job/saved-job'); ?>">Saved </a>
+                                        <li><a title="Saved Job" href="<?php echo base_url('job-profile/saved-job'); ?>">Saved </a>
                                         </li>
-                                        <li><a class="padding_less_right" title="Applied Job" href="<?php echo base_url('job/applied-job'); ?>">Applied </a>
+                                        <li><a class="padding_less_right" title="Applied Job" href="<?php echo base_url('job-profile/applied-job'); ?>">Applied </a>
                                         </li>                                        
                                     </ul>
                                 </div>

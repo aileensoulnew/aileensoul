@@ -24,12 +24,12 @@ if ($userid != $id) {
                 $slugdata = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                 ?>
 
-                <li <?php if ($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'resume') { ?> class="active" <?php } ?>>
+                <li <?php if ($this->uri->segment(1) == 'job-profile' && $this->uri->segment(2) == $slugdata[0]['slug']) { ?> class="active" <?php } ?>>
                     <?php if ($userid) { ?>
                         <?php if ($userid != $id && $id != '') { ?>
                             <a title="Details" href="javascript:void(0);">Details</a>
                         <?php } else { ?>
-                            <a title="Details" href="<?php echo base_url('job/resume/' . $slugdata[0]['slug']); ?>">Details</a>
+                            <a title="Details" href="<?php echo base_url('job-profile/' . $slugdata[0]['slug']); ?>">Details</a>
                         <?php } ?>
                     <?php } else { ?>
 
@@ -39,11 +39,11 @@ if ($userid != $id) {
 
                 <?php
                 if ($id == '' || $userid == $id) {
-                    if (($this->uri->segment(1) == 'job') && ($this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'resume' || $this->uri->segment(2) == 'job_resume' || $this->uri->segment(2) == 'saved-job' || $this->uri->segment(2) == 'applied-job')) {
+                    if (($this->uri->segment(1) == 'job-profile') && ($this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'resume' || $this->uri->segment(2) == 'job_resume' || $this->uri->segment(2) == 'saved-job' || $this->uri->segment(2) == 'applied-job')) {
                         ?>
-                        <li <?php if ($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'saved-job') { ?> class="active" <?php } ?>><a title="Saved Job" href="<?php echo base_url('job/saved-job'); ?>">Saved </a>
+                        <li <?php if ($this->uri->segment(1) == 'job-profile' && $this->uri->segment(2) == 'saved-job') { ?> class="active" <?php } ?>><a title="Saved Job" href="<?php echo base_url('job-profile/saved-job'); ?>">Saved </a>
                         </li>
-                        <li <?php if ($this->uri->segment(1) == 'job' && $this->uri->segment(2) == 'applied-job') { ?> class="active" <?php } ?>><a title="Applied Job" href="<?php echo base_url('job/applied-job'); ?>">Applied </a>
+                        <li <?php if ($this->uri->segment(1) == 'job-profile' && $this->uri->segment(2) == 'applied-job') { ?> class="active" <?php } ?>><a title="Applied Job" href="<?php echo base_url('job-profile/applied-job'); ?>">Applied </a>
                         </li>
                     <?php
                     }

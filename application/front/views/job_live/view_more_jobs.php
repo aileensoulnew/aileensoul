@@ -41,7 +41,11 @@
             echo $job_header2;
         else if ($user_id != "" && ($job_deactive > 0 || $this->job_profile_set == 1)) {
             echo $header_profile;
-        }         
+        }
+        else if($user_id != "" && $this->job_profile_set == 0)
+        {
+             echo $header_profile;
+        }
         if($this->job_profile_set == 0 || $job_deactive > 0)
         {?>
             <div class="middle-section middle-section-banner new-ld-page">
