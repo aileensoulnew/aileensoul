@@ -109,7 +109,7 @@
 <?php
 $userid = $this->session->userdata('aileenuser');
 
-$id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(3)))->row()->user_id;
+$id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(2)))->row()->user_id;
 if ($userid == $id) {
     ?>
                     <div class="upload-img ">
@@ -237,7 +237,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
                                 <p class="mob-edit-pro">
 
 
-                                    <a href="<?php echo base_url('job/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                    <a href="<?php echo base_url('job-profile/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 
 
                                 </p>
@@ -1538,7 +1538,7 @@ if ($job[0]['work_job_industry']) {
                                         <div class="second circle-1">
                                             <div>
                                                 <strong></strong>
-                                                <a href="<?php echo base_url('job/basic-information') ?>" class="edit_profile_job">Edit Profile
+                                                <a href="<?php echo base_url('job-profile/basic-information') ?>" class="edit_profile_job">Edit Profile
                                                 </a>
                                             </div>
                                         </div>
@@ -1603,7 +1603,7 @@ if ($job[0]['work_job_industry']) {
 <?php echo $login_footer ?>   
 <?php echo $footer; ?>
         <!-- script for skill textbox automatic start-->
-<?php
+<?php /*
 if (IS_JOB_JS_MINIFY == '0') {
     ?> 
             <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script> 
@@ -1620,7 +1620,13 @@ if (IS_JOB_JS_MINIFY == '0') {
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>"></script>
 
-<?php } ?>
+<?php }*/ ?>
+<script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script> 
+            <!-- script for skill textbox automatic end (option 2)-->
+            <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
+            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+
+            <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
         <script>
                 var base_url = '<?php echo base_url(); ?>';
                 var count_profile_value = '<?php echo $count_profile_value; ?>';
@@ -1628,8 +1634,12 @@ if (IS_JOB_JS_MINIFY == '0') {
                 var header_all_profile = '<?php echo $header_all_profile; ?>';
                 var profile_pic = "";
         </script>
+        <script src="<?php echo base_url('assets/js/webpage/job/job_printpreview.js?ver=' . time()); ?>"></script>
+            <script src="<?php echo base_url('assets/js/webpage/job/cover_profile_common.js?ver=' . time()); ?>"></script>
+            <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
+            <script src="<?php echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
 
-<?php
+<?php /*
 if (IS_JOB_JS_MINIFY == '0') {
     ?> 
             <script src="<?php echo base_url('assets/js/webpage/job/job_printpreview.js?ver=' . time()); ?>"></script>
@@ -1643,6 +1653,6 @@ if (IS_JOB_JS_MINIFY == '0') {
             <script src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js_min/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
 
-<?php } ?> 
+<?php }*/ ?> 
     </body>
 </html>

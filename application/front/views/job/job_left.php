@@ -10,7 +10,7 @@
             else
             {
             ?>
-         <li class="custom-none "><a href="<?php echo base_url('job/basic-information'); ?>">Basic Information</a></li>
+         <li class="custom-none "><a href="<?php echo base_url('job-profile/basic-information'); ?>">Basic Information</a></li>
          <?php
             }
             ?>
@@ -23,7 +23,7 @@
             else
             {
             ?>
-         <li class="custom-none "><a href="<?php echo base_url('job/qualification'); ?>">Educational Qualification</a></li>
+         <li class="custom-none "><a href="<?php echo base_url('job-profile/qualification'); ?>">Educational Qualification</a></li>
          <?php
             }
             ?>
@@ -36,7 +36,7 @@
             else
             {
             ?>
-         <li class="custom-none "><a href="<?php echo base_url('job/project'); ?>">Project And Training / Internship</a></li>
+         <li class="custom-none "><a href="<?php echo base_url('job-profile/project'); ?>">Project And Training / Internship</a></li>
          <?php
             }
             ?>
@@ -49,7 +49,7 @@
             else
             {
             ?>
-         <li class="custom-none "><a href="<?php echo base_url('job/work-area'); ?>">Work Area</a></li>
+         <li class="custom-none "><a href="<?php echo base_url('job-profile/work-area'); ?>">Work Area</a></li>
          <?php
             }
             ?>
@@ -62,7 +62,7 @@
             else
             {
             ?>
-         <li class="custom-none "><a href="<?php echo base_url('job/work-experience'); ?>">Work Experience</a></li>
+         <li class="custom-none "><a href="<?php echo base_url('job-profile/work-experience'); ?>">Work Experience</a></li>
          <?php
             }
             ?>
