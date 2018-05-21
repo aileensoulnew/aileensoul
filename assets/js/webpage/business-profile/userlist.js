@@ -1,3 +1,30 @@
+app.controller('userListController', function ($scope, $http) {
+    $scope.title = title;
+    $scope.businessCategory = {};
+    $scope.businessLocation = {};
+    function businessCategory(){
+        $http.get(base_url + "business_live/businessCategory?limit=5").then(function (success) {
+            $scope.businessCategory = success.data;
+        }, function (error) {});
+    }
+    businessCategory();
+    
+    // Top 5 Location for filter
+    function businessLocation(){
+        $http.get(base_url + "business_live/businessLocation?limit=5").then(function (success) {
+            $scope.businessLocation = success.data;
+        }, function (error) {});
+    }
+    businessLocation();
+
+    // get list of company based on category or locations
+    $scope.getfilterbusinessdata = function(){
+        business_userlist(0, "filter");        
+    }
+});
+
+
+
 function checkvalue() {
     var searchkeyword = $.trim(document.getElementById('tags').value);
     var searchplace = $.trim(document.getElementById('searchplace').value);
@@ -42,7 +69,7 @@ $(document).ready(function () {
     });
 });
 var isProcessing = false;
-function business_userlist(pagenum) {
+function business_userlist(pagenum, from = "") {
     if (isProcessing) {
         /*
          *This won't go past this condition while
@@ -52,9 +79,10 @@ function business_userlist(pagenum) {
         return;
     }
     isProcessing = true;
+    var reqdata = getLocationCategoryId();
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/ajax_userlist/?page=" + pagenum,
+        url: base_url + "business_profile/ajax_userlist/?page=" + pagenum + reqdata,
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
@@ -69,6 +97,9 @@ function business_userlist(pagenum) {
         },
         success: function (data) {
             $('.loader').remove();
+            if(from == "filter"){
+                $('.contact-frnd-post').html("");
+            }
             $('.contact-frnd-post').append(data);
 
             // second header class add for scroll
@@ -120,4 +151,35 @@ function unfollowuser(clicked_id)
 
         }
     });
+}
+
+
+
+
+$(document).on('change','.locationcheckbox,.categorycheckbox',function(){
+    var self = this;
+    // self.setAttribute('checked',(this.checked));
+    angular.element(self).scope().getfilterbusinessdata();
+});
+
+function getLocationCategoryId(){
+    var location = "";
+    // Get Checked Category of filter and make data value for ajax call
+    var category = "";
+    $('.categorycheckbox').each(function(){
+        if(this.checked){
+            var currentid = $(this).val();
+            category += (category == "") ? currentid : "," + currentid;
+        }
+    });
+    // Get Checked Location of filter and make data value for ajax call
+    $('.locationcheckbox').each(function(){
+        if(this.checked){
+            var currentid = $(this).val();
+            location += (location == "") ? currentid : "," + currentid;
+        }
+    });
+    var result = (category != "") ? ("&category_id=" + category) : "";
+    result += (location != "") ? ("&location_id=" + location) : "";
+    return result;
 }

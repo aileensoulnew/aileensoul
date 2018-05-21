@@ -5317,6 +5317,7 @@ Your browser does not support the audio tag.
 
 
     public function business_photos($id) {
+        $id = $this->business_model->removelocationfromslug($id);
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
@@ -5367,6 +5368,7 @@ Your browser does not support the audio tag.
 
 
     public function business_videos($id) {
+        $id = $this->business_model->removelocationfromslug($id);
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         $this->business_profile_active_check();
@@ -5401,6 +5403,7 @@ Your browser does not support the audio tag.
 
 
     public function business_audios($id) {
+        $id = $this->business_model->removelocationfromslug($id);
         $s3 = new S3(awsAccessKey, awsSecretKey);
 
         $userid = $this->session->userdata('aileenuser');
@@ -5436,6 +5439,7 @@ Your browser does not support the audio tag.
 
 
     public function business_pdf($id) {
+        $id = $this->business_model->removelocationfromslug($id);
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         $this->business_profile_active_check();

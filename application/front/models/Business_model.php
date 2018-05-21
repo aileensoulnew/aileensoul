@@ -268,9 +268,10 @@ class Business_model extends CI_Model {
         return $result_array;
     }
 
-    function business_userlist($user_id = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
-        $this->db->select('ul.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
+    function business_userlist($user_id = '', $sortby = '', $orderby = '', $limit = '', $offset = '', $category_id = '', $location_id = '') {
+       /* $this->db->select('ul.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
         $this->db->join('user_login ul', 'ul.user_id = bp.user_id');
+        $this->db->join('industry_type it', 'it.industry_id = bp.industriyal');
         $this->db->join('ailee_cities ct', 'ct.city_id = bp.city');
         $this->db->join('ailee_states st', 'st.state_id = bp.state');
         $this->db->where('bp.user_id !=', $user_id);
@@ -278,15 +279,36 @@ class Business_model extends CI_Model {
         $this->db->where('bp.is_deleted', '0');
         $this->db->where('bp.status', '1');
         $this->db->where('ul.status', '1');
-        $this->db->where('ul.is_delete', '0');
+        $this->db->where('ul.is_delete', '0');*/
+
+        $sql = "SELECT ul.*, bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name), concat(bp.business_slug, '-', ct.city_name)) as business_slug
+            FROM ailee_business_profile bp
+            LEFT JOIN ailee_user_login ul ON ul.user_id = bp.user_id
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city
+            LEFT JOIN ailee_states st ON st.state_id = bp.state
+            WHERE bp.user_id != '". $user_id ."'
+            AND bp.business_step = '4'
+            AND bp.is_deleted = '0'
+            AND bp.status = '1'
+            AND ul.status = '1'
+            AND ul.is_delete = '0'";
+        if($location_id != ""){
+            $sql .= " AND ct.city_id IN (". $location_id .")";
+        }
+        if($category_id != ""){
+            $sql .= " AND bp.industriyal IN (". $category_id .")";
+        }
         if ($orderby != '') {
-            $this->db->order_by($sortby, $orderby);
+            $sql .= " ORDER BY ". $sortby . " " .$orderby;
         }
         if ($limit != '') {
-            $this->db->limit($limit, $offset);
+            $sql .= " Limit ". $limit;
         }
-        $query = $this->db->get();
+        $query = $this->db->query($sql);
         $result_array = $query->result_array();
+        // echo $this->db->last_query();
+        // exit;
         return $result_array;
     }
 
@@ -502,12 +524,13 @@ class Business_model extends CI_Model {
 
     // Get Location List based on city id
     function businessListByFilter($category_id = '', $location_id = '', $limit = '') {
-        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
+        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
             ct.city_name as city, 
             cr.country_name as country 
             FROM ailee_business_profile bp 
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
             LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+            LEFT JOIN ailee_states st ON st.state_id = bp.state 
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
             WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'";
 

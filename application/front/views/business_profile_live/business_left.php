@@ -35,7 +35,7 @@ $business_common_data[0]['business_slug'] = $this->data['business_slug'] = $slug
         <div class="profile-boxProfileCard-content clearfix">
             <div class="left_side_box_img buisness-profile-txext">
 
-                <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('company/' . $businessdata[0]['business_slug']); ?>" title="<?php echo $businessdata[0]['company_name']; ?>" tabindex="-1" aria-hidden="true" rel="noopener" >
+                <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']); ?>" title="<?php echo $businessdata[0]['company_name']; ?>" tabindex="-1" aria-hidden="true" rel="noopener" >
                     <?php
                     if ($business_common_data[0]['business_user_image']) {
                         ?>

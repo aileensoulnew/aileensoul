@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="userListApp" ng-controller="userListController">
     <head>
         <title><?php echo $title; ?></title>
         <?php echo $head; ?>
@@ -30,6 +30,44 @@
                             <div class="left_fixed">
                                 <?php echo $business_left ?>
                             </div>
+                            <div class="left-search-box list-type-bullet">
+                                <div class="">
+                                    <h3>Top Categories</h3>
+                                </div>
+                                <ul class="search-listing custom-scroll">
+                                    <li ng-repeat="category in businessCategory">
+                                        <label class="">
+                                            <p class="pull-left" style="width: 45px;">
+                                                <input class="categorycheckbox" type="checkbox" name="{{category.industry_name}}" value="{{category.industry_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                            </p>
+                                            <p class="pull-left">{{category.industry_name | capitalize}}</p>
+                                            <p class="pull-right">({{category.count}})</p>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <p class="text-right p10"><a href="<?php echo base_url('business-by-categories') ?>">More Categories</a></p>
+                            </div>
+                            <!-- TOP Location -->
+                            <div class="left-search-box list-type-bullet">
+                                <div class="">
+                                    <h3>Top Location</h3>
+                                </div>
+                                <ul class="search-listing custom-scroll">
+                                    <li ng-repeat="location in businessLocation">
+                                        <label class="">
+                                            <p class="pull-left" style="width: 45px;">
+                                                <input class="locationcheckbox" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+                                            </p>
+                                            <p class="pull-left">
+                                                {{location.city_name | capitalize}}
+                                            </p>
+                                            <p class="pull-right">({{location.count}})</p>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <p class="text-right p10"><a href="<?php echo base_url('business-by-location') ?>">More Location</a></p>
+                            </div>
+
                             <?php echo $left_footer; ?>
                         </div>
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">
@@ -137,10 +175,18 @@
                 </div>
             </div>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var title = '<?php echo $title; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var app = angular.module('userListApp', ['ui.bootstrap']);
         </script>
-
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>

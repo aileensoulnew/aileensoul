@@ -833,8 +833,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/user_dashboard.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <?php } else { ?>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/user_dashboard.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/user_dashboard.js?ver=' . time()); ?>"></script>
+            <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
         <?php } ?>
         <script>
             $(document).on('click', '[data-toggle*=modal]', function () {
@@ -858,6 +858,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     $(this).css('color', 'black');
                 } else {
                     $(this).css('color', '#acacac');
+                }
+            });
+
+            $(document).on('click', 'a', function (e) {
+                var classNames = $(e.target).prop("class").toString().split(' ').pop();
+                if (classNames != 'login_link') {
+                    open_profile();
                 }
             });
 

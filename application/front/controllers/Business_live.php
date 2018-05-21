@@ -82,9 +82,13 @@ class Business_live extends MY_Controller {
         $this->data['title'] = "Category - Business Profile | Aileensoul";
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row('industry_id');
-        $this->data['category_id'] = $category_id;
+        $this->data['category_id'] = "";
+        if($category != "")
+            $this->data['category_id'] = $category_id;
         $city_id = $this->db->select('city_id')->get_where('cities', array('slug' => $location))->row('city_id');
-        $this->data['location_id'] = $city_id;
+        $this->data['location_id'] = '';
+        if($location != "")
+            $this->data['location_id'] = $city_id;
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->data['q'] = $category;
         $this->data['l'] = $location;

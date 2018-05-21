@@ -2183,13 +2183,14 @@ Your browser does not support the audio tag.
 
         $limit = $perpage;
         $offset = $start;
-
-        $userlist = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc', $limit, $offset);
+        $location_id = $_GET["location_id"];
+        $category_id = $_GET["category_id"];
+        $userlist = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc', $limit, $offset,$category_id,$location_id);
         $userlist1 = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc');
 
         $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
         $businessdata1 = $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-// followers count
+        // followers count
         $join_str[0]['table'] = 'follow';
         $join_str[0]['join_table_id'] = 'follow.follow_to';
         $join_str[0]['from_table_id'] = 'business_profile.business_profile_id';
@@ -2251,13 +2252,13 @@ Your browser does not support the audio tag.
                                                                                 </a>';
             }
             $return_html .= '</div>
-                                                                    </li>
-                                                                    <li class="folle_text">
-                                                                        <div class="">
-                                                                            <div class="follow-li-text " style="padding: 0;">
-                                                                                <a title="' . $user['company_name'] . '" href="' . base_url('company/' . $user['business_slug']) . '">' . $user['company_name'] . '</a>
-                                                                            </div>
-                                                                            <div>';
+                    </li>
+                    <li class="folle_text">
+                        <div class="">
+                            <div class="follow-li-text " style="padding: 0;">
+                                <a title="' . $user['company_name'] . '" href="' . base_url('company/' . $user['business_slug']) . '">' . $user['company_name'] . '</a>
+                            </div>
+                            <div>';
             $category = $this->db->get_where('industry_type', array('industry_id' => $user['industriyal'], 'status' => '1'))->row()->industry_name;
             $return_html .= '<a>';
             if ($category) {
@@ -2265,6 +2266,7 @@ Your browser does not support the audio tag.
             } else {
                 $return_html .= ucfirst($user['other_industrial']);
             }
+            $return_html .= "(" . $user['city_name'] . ")";
             $return_html .= '</a>
                                                                             </div>
                                                                     </li>
@@ -9403,7 +9405,8 @@ Your browser does not support the audio tag.
     public function bus_photos() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $id = $_POST['bus_slug'];
-// manage post start
+        $id = $this->business_model->removelocationfromslug($id);
+        // manage post start
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
 

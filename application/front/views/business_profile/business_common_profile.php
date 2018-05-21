@@ -35,11 +35,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             } elseif ($this->uri->segment(2) == "") {
                 $user_id = $userid;
             } else {
-                $user_id = $this->db->get_where('business_profile', array('business_slug' => $this->uri->segment(2)))->row()->user_id;
+                $business_slug_data = $this->business_model->removelocationfromslug($this->uri->segment(2));
+                $user_id = $this->db->get_where('business_profile', array('business_slug' => $business_slug_data))->row()->user_id;
             }
             $contition_array = array('user_id' => $user_id, 'is_deleted' => '0', 'status' => '1');
             $image = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
             $image_ori = $image[0]['profile_background'];
             if ($image_ori) {
                 ?>
@@ -248,7 +248,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <?php } else { ?>
                                     <ul class="bpro-fw">
                                     <?php } ?>  
-                                        <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'dashboard') { ?> class="active" <?php } ?>><a title="Dashboard" class="login_link" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']); ?>">Dashboard</a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == '') { ?> class="active" <?php } ?>><a title="Dashboard" class="login_link" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']); ?>">Dashboard</a></li>
                                     <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'details') { ?> class="active" <?php } ?>>
                                         <a title="Details" class="login_link" href="javascript:void(0);" onclick="open_profile();"> Details</a>
                                     </li>

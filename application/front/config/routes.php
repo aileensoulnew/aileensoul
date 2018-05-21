@@ -563,9 +563,10 @@ $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";
 $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
-$route['(:any)-business'] = "business_live/categoryBusinessList/$1";
 $route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
 $route['(:any)-business-in-(:any)'] = "business_live/categoryBusinessList/$1/$2";
+$route['(:any)-business'] = "business_live/categoryBusinessList/$1";
+$route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
 $route['(:any)'] = 'Userprofile';
 
 
