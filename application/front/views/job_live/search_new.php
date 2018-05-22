@@ -47,7 +47,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             echo $job_header2;
         }else if ($userid_login != "" && ($job_deactive > 0 || $this->job_profile_set == 1)) {
             echo $header_profile;
-        }        
+        }
+        else if($userid_login != "" && $this->job_profile_set == 0)
+        {
+             echo $header_profile;
+        }
         if($userid_login == "" || $job_deactive > 0 || $this->job_profile_set == 0)
         {
             $headercls = "";
