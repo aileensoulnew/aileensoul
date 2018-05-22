@@ -5899,8 +5899,7 @@ class Job extends MY_Controller {
         echo json_encode($searchJob);
     }
 
-    public function job_insert_popup() {
-        print_r($this->input->post());exit;
+    public function job_insert_popup() {        
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');        
         $job_save = $this->input->post('job_save');
         $job_apply = $this->input->post('job_apply');
