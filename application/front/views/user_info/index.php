@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="basicInfoApp" ng-controller="basicInfoController">
     <head>
-        <base href="/aileensoulnew/aileensoul/" >
+        <base href="<?php echo base_url(); ?>" >
         <title ng-bind="title"></title>
         <meta name="robots" content="noindex, nofollow">
         <meta charset="utf-8">
