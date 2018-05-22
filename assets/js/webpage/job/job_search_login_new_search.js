@@ -1,36 +1,29 @@
-app.filter('slugify', function () {
-    return function (input) {
-        if (!input)
-            return;
-
+app.filter('slugify', function() {
+    return function(input) {
+        if (!input) return;
         // make lower case and trim
         var slug = input.toLowerCase().trim();
-
         // replace invalid chars with spaces
         slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
-
         // replace multiple spaces or hyphens with a single hyphen
         slug = slug.replace(/[\s-]+/g, '-');
-
-        if(slug[slug.length - 1] == "-")
-        {            
-            slug = slug.slice(0,-1);
+        if (slug[slug.length - 1] == "-") {
+            slug = slug.slice(0, -1);
         }
         return slug;
     };
 });
-app.filter('capitalize', function () {
-    return function (str) {
+app.filter('capitalize', function() {
+    return function(str) {
         if (str === undefined || !str || str == null) {
             return false;
         }
-        return str.split(" ").map(function (input) {
+        return str.split(" ").map(function(input) {
             return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : ''
         }).join(" ");
-
     }
 });
-app.controller('jobSearchController', function ($scope, $http,$window) {
+app.controller('jobSearchController', function($scope, $http, $window) {
     $scope.showLoadmore = true;
     $scope.jobCategory = {};
     $scope.jobCity = {};
@@ -40,7 +33,6 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
     $scope.jobs = {};
     $scope.jds = "";
     $scope.mainKeyword = "";
-
     $scope.cmp_fil = "";
     $scope.cat_fil = "";
     $scope.loc_fil = "";
@@ -53,47 +45,47 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
     job_search(1);
 
     function jobCategory(limit = "") {
-        $http.get(base_url + "job_live/jobCategory?limit="+limit).then(function (success) {
+        $http.get(base_url + "job_live/jobCategory?limit=" + limit).then(function(success) {
             $scope.jobCategory = success.data;
-        }, function (error) {});
+        }, function(error) {});
     }
     jobCategory(fil_limit);
 
     function jobCity(limit = "") {
-        $http.get(base_url + "job_live/jobCity?limit="+limit).then(function (success) {
+        $http.get(base_url + "job_live/jobCity?limit=" + limit).then(function(success) {
             $scope.jobCity = success.data;
-        }, function (error) {});
+        }, function(error) {});
     }
     jobCity(fil_limit);
+
     function jobCompany(limit = "") {
-        $http.get(base_url + "job_live/jobCompany?limit="+limit).then(function (success) {
+        $http.get(base_url + "job_live/jobCompany?limit=" + limit).then(function(success) {
             $scope.jobCompany = success.data;
-        }, function (error) {});
+        }, function(error) {});
     }
     jobCompany(fil_limit);
+
     function jobSkill(limit = "") {
-        $http.get(base_url + "job_live/jobSkill?limit="+limit).then(function (success) {
+        $http.get(base_url + "job_live/jobSkill?limit=" + limit).then(function(success) {
             $scope.jobSkill = success.data;
-        }, function (error) {});
+        }, function(error) {});
     }
     jobSkill(fil_limit);
 
     function jobTitle(limit = "") {
-        $http.get(base_url + "job_live/get_jobtitle?limit="+limit).then(function (success) {
+        $http.get(base_url + "job_live/get_jobtitle?limit=" + limit).then(function(success) {
             $scope.jobDesignation = success.data;
-        }, function (error) {});
+        }, function(error) {});
     }
     jobTitle(fil_limit);
-
     //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER START
     var isProcessing = false;
-    
-    angular.element($window).bind("scroll", function (e) {        
+    angular.element($window).bind("scroll", function(e) {
         if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
             isLoadingData = true;
             var page = $scope.jobs.page_number;
             var total_record = $scope.jobs.total_record;
-            var perpage_record = $scope.jobs.perpage_record;            
+            var perpage_record = $scope.jobs.perpage_record;
             if (parseInt(perpage_record * page) <= parseInt(total_record)) {
                 var available_page = total_record / perpage_record;
                 available_page = parseInt(available_page, 10);
@@ -102,7 +94,7 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
                     available_page = available_page + 1;
                 }
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum =  $scope.jobs.page_number + 1;
+                    var pagenum = $scope.jobs.page_number + 1;
                     job_search(pagenum);
                 }
             }
@@ -120,40 +112,39 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         }
         isProcessing = true;
         $('#loader').show();
-        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
-            function(success){
-                $('#loader').hide();
-                data = JSON.parse(success);
-                if(data.jobData.length > 0)
-                {
-                    $scope.mainKeyword = skill;
-                    if(pagenum > 1)
-                    {
-                        for (var i in data.jobData) {
-                            console.log(data.jobData[i]);
-                            //$scope.searchJob.push(data.jobData[i]);
-                            $scope.$apply(function () {
-                                $scope.searchJob.push(data.jobData[i]);
-                            });
-                        }
+        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill) + "&search_location=" + encodeURIComponent(search_location), {
+            "company_id": $scope.cmp_fil,
+            "category_id": $scope.cat_fil,
+            "location_id": $scope.loc_fil,
+            "skill_id": $scope.skills_fil,
+            "job_desc": $scope.jd_fil,
+            "period_filter": $scope.per_fil,
+            "exp_fil": $scope.exp_fil
+        }, function(success) {
+            $('#loader').hide();
+            data = JSON.parse(success);
+            if (data.jobData.length > 0) {
+                $scope.mainKeyword = skill;
+                if (pagenum > 1) {
+                    for (var i in data.jobData) {
+                        console.log(data.jobData[i]);
+                        //$scope.searchJob.push(data.jobData[i]);
+                        $scope.$apply(function() {
+                            $scope.searchJob.push(data.jobData[i]);
+                        });
                     }
-                    else
-                    {
-                        $scope.searchJob = data.jobData;
-                    }
-                    //$scope.searchJob = success.data.jobData;
-                    $scope.jobs.page_number = pagenum;
-                    $scope.jobs.total_record = data.total_record;
-                    $scope.jobs.perpage_record = 5;            
-                    isProcessing = false;
+                } else {
+                    $scope.searchJob = data.jobData;
                 }
-                else
-                {
-                    $scope.showLoadmore = false;                
-                }
-
+                //$scope.searchJob = success.data.jobData;
+                $scope.jobs.page_number = pagenum;
+                $scope.jobs.total_record = data.total_record;
+                $scope.jobs.perpage_record = 5;
+                isProcessing = false;
+            } else {
+                $scope.showLoadmore = false;
             }
-        );
+        });
         /*$http({
             method: 'POST',
             url: base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill),
@@ -186,48 +177,36 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
                 $scope.showLoadmore = false;                
             }
 
-        });*/        
+        });*/
     }
     //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER END
-
     //apply post start
-    $scope.applypopup = function(postid, userid)
-    {
-        if(job_profile_set == 0 && login_user_id != "")
-        {
+    $scope.applypopup = function(postid, userid) {
+        if (job_profile_set == 0 && login_user_id != "") {
             $("#job_apply").val(postid);
             $("#job_apply_userid").val(userid);
             $("#job_save").val('');
             $('#job_reg').modal('show');
-        }
-        else
-        {
-            if(login_user_id == "" || job_deactive == 1)
-            {                
-                if(login_user_id == "")
-                    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
-                else if(job_deactive == 1)
-                    $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
+        } else {
+            if (login_user_id == "" || job_deactive == 1) {
+                if (login_user_id == "") $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+                else if (job_deactive == 1) $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
                 $('#bidmodal').modal('show');
-            }
-            else
-            {                
+            } else {
                 $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
                 $('#bidmodal').modal('show');
             }
         }
     };
-
     $scope.apply_post = function(abc, xyz) {
         var alldata = 'all';
         var user = xyz;
-
         $.ajax({
             type: 'POST',
             url: base_url + 'job/job_apply_post',
             data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
             datatype: 'json',
-            success: function (data) {
+            success: function(data) {
                 $('.savedpost' + abc).hide();
                 $('.applypost' + abc).html(data.status);
                 $('.applypost' + abc).attr('disabled', 'disabled');
@@ -237,29 +216,19 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         });
     };
     //apply post end
-
     //save post start 
-    $scope.savepopup  = function(id) {
-        
-        if(job_profile_set == 0 && login_user_id != "")
-        {
+    $scope.savepopup = function(id) {
+        if (job_profile_set == 0 && login_user_id != "") {
             $("#job_apply_userid").val('');
             $("#job_apply").val('');
             $("#job_save").val(id);
             $('#job_reg').modal('show');
-        }
-        else
-        {
-            if(login_user_id == "" || job_deactive == 1)
-            {
-                if(login_user_id == "")
-                    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
-                else if(job_deactive == 1)
-                    $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
+        } else {
+            if (login_user_id == "" || job_deactive == 1) {
+                if (login_user_id == "") $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+                else if (job_deactive == 1) $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
                 $('#bidmodal').modal('show');
-            }
-            else
-            {
+            } else {
                 save_post(id);
                 $('.biderror .mes').html("<div class='pop_content'>Job successfully saved.");
                 $('#bidmodal').modal('show');
@@ -267,130 +236,242 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         }
     };
 
-    function save_post(abc)
-    {
+    function save_post(abc) {
         $.ajax({
             type: 'POST',
             url: base_url + 'job/job_save',
             data: 'post_id=' + abc,
-            success: function (data) {
+            success: function(data) {
                 $('.' + 'savedpost' + abc).html(data).addClass('saved');
             }
         });
-
     };
-
     $scope.applyJobFilter = function() {
         $scope.cmp_fil = "";
-        $('.company-filter').each(function(){
-            if(this.checked){
+        $('.company-filter').each(function() {
+            if (this.checked) {
                 var currentid = $(this).val();
                 $scope.cmp_fil += ($scope.cmp_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(cmp_fil);
-
         $scope.cat_fil = "";
-        $('.category-filter').each(function(){
-            if(this.checked){
+        $('.category-filter').each(function() {
+            if (this.checked) {
                 var currentid = $(this).val();
                 $scope.cat_fil += ($scope.cat_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(cat_fil);
-
         $scope.loc_fil = "";
-        $('.location-filter').each(function(){
-            if(this.checked){
+        $('.location-filter').each(function() {
+            if (this.checked) {
                 var currentid = $(this).val();
                 $scope.loc_fil += ($scope.loc_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(loc_fil);
-
         $scope.skills_fil = "";
-        $('.skills-filter').each(function(){
-            if(this.checked){
+        $('.skills-filter').each(function() {
+            if (this.checked) {
                 var currentid = $(this).val();
                 $scope.skills_fil += ($scope.skills_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(skills_fil);
-
         $scope.jd_fil = "";
-        $('.jds-filter').each(function(){
-            if(this.checked){
+        $('.jds-filter').each(function() {
+            if (this.checked) {
                 var currentid = $(this).val();
                 $scope.jd_fil += ($scope.jd_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(jd_fil);
-
         $scope.per_fil = "";
-        $('.period-filter').each(function(){
-            if(this.checked){
+        $('.period-filter').each(function() {
+            if (this.checked) {
                 var currentid = $(this).val();
                 $scope.per_fil += ($scope.per_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(per_fil);
-        
         $scope.exp_fil = "";
-        $('.exp-filter').each(function(){
-            if(this.checked){
+        $('.exp-filter').each(function() {
+            if (this.checked) {
                 var currentid = $(this).val();
                 $scope.exp_fil += ($scope.exp_fil == "") ? currentid : "," + currentid;
             }
         });
         // console.log(exp_fil);
         pagenum = 1;
-
         //$("#loader").show();
-
-        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
-            function(success){
-                $scope.searchJob = {};
-                data = JSON.parse(success);
-                $scope.$apply(function () {
-                    $scope.searchJob = data.jobData;
-                });
-            }
-        );
-        
+        $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill) + "&search_location=" + encodeURIComponent(search_location), {
+            "company_id": $scope.cmp_fil,
+            "category_id": $scope.cat_fil,
+            "location_id": $scope.loc_fil,
+            "skill_id": $scope.skills_fil,
+            "job_desc": $scope.jd_fil,
+            "period_filter": $scope.per_fil,
+            "exp_fil": $scope.exp_fil
+        }, function(success) {
+            $scope.searchJob = {};
+            data = JSON.parse(success);
+            $scope.$apply(function() {
+                $scope.searchJob = data.jobData;
+            });
+        });
         // $http({
         //     method: 'POST',
         //     url: base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill),
-            /*data: "company_id=" + cmp_fil + "category_id" + cat_fil + "location_id" + loc_fil + "skill_id" + skills_fil + "job_desc" + jd_fil + "period_filter" + per_fil + "exp_fil" + exp_fil,*/
+        /*data: "company_id=" + cmp_fil + "category_id" + cat_fil + "location_id" + loc_fil + "skill_id" + skills_fil + "job_desc" + jd_fil + "period_filter" + per_fil + "exp_fil" + exp_fil,*/
         //     data: {"company_id": cmp_fil, "category_id" : cat_fil, "location_id": loc_fil, "skill_id": skills_fil, "job_desc": jd_fil, "period_filter": per_fil, "exp_fil": exp_fil},
         //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         //     dataType : "json"
         // })
         // .then(function (success) {
         //     $('#loader').hide();
-            /*if(success.data.jobData.length > 0)
+        /*if(success.data.jobData.length > 0)
+        {
+            $scope.mainKeyword = skill;
+            if(pagenum > 1)
             {
-                $scope.mainKeyword = skill;
-                if(pagenum > 1)
-                {
-                    for (var i in success.data.jobData) {
-                        $scope.searchJob.push(success.data.jobData[i]);
-                    }                
-                }
-                else
-                {
-                    $scope.searchJob = success.data.jobData;
-                }
-                //$scope.searchJob = success.data.jobData;
-                $scope.jobs.page_number = pagenum;
-                $scope.jobs.total_record = success.data.total_record;
-                $scope.jobs.perpage_record = 5;            
-                isProcessing = false;
+                for (var i in success.data.jobData) {
+                    $scope.searchJob.push(success.data.jobData[i]);
+                }                
             }
             else
             {
-                $scope.showLoadmore = false;                
-            }*/
-
+                $scope.searchJob = success.data.jobData;
+            }
+            //$scope.searchJob = success.data.jobData;
+            $scope.jobs.page_number = pagenum;
+            $scope.jobs.total_record = success.data.total_record;
+            $scope.jobs.perpage_record = 5;            
+            isProcessing = false;
+        }
+        else
+        {
+            $scope.showLoadmore = false;                
+        }*/
         //}); 
     };
-});  
+});
+//validation start
+$(document).ready(function() {
+    // $.validator.addMethod("lowercase", function(value, element, regexpr) {          
+    //          return regexpr.test(value);
+    //      }, "email Should be in Small Character");
+    $.validator.addMethod("regx2", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Special character and space not allow in the beginning");
+    $.validator.addMethod("regx_digit", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Digit is not allow");
+    $.validator.addMethod("regx1", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Only space, only number and only special characters are not allow");
+    $("#jobseeker_regform").validate({
+        ignore: '*:not([name])',
+        rules: {
+            first_name: {
+                required: true,
+                regx2: /^[a-zA-Z0-9-.,']*[0-9a-zA-Z][a-zA-Z]*/,
+                regx_digit: /^([^0-9]*)$/,
+            },
+            last_name: {
+                required: true,
+                regx2: /^[a-zA-Z0-9-.,']*[0-9a-zA-Z][a-zA-Z]*/,
+                regx_digit: /^([^0-9]*)$/,
+            },
+            cities: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true,
+                // lowercase: /^[0-9a-z\s\r\n@!#\$\^%&*()+=_\-\[\]\\\';,\.\/\{\}\|\":<>\?]+$/,
+                remote: {
+                    url: base_url + "job/check_email",
+                    //async is used for double click on submit avoid
+                    async: false,
+                    type: "post",
+                },
+            },
+            fresher: {
+                required: true,
+            },
+            job_title: {
+                required: "#test2:checked",
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+            },
+            industry: {
+                required: true,
+            },
+            cities: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+            },
+            skills: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+            },
+        },
+        messages: {
+            first_name: {
+                required: "First name is required.",
+            },
+            last_name: {
+                required: "Last name is required.",
+            },
+            email: {
+                required: "Email address is required.",
+                email: "Please enter valid email id.",
+                remote: "Email already exists"
+            },
+            fresher: {
+                required: "Fresher is required.",
+            },
+            industry: {
+                required: "Industry is required.",
+            },
+            cities: {
+                required: "City is required.",
+            },
+            job_title: {
+                required: "Job title is required.",
+            },
+            skills: {
+                required: "Skill is required.",
+            }
+        },
+        errorPlacement: function(error, element) {
+            //console.log(element);
+            if (element.attr("name") == "fresher" )
+                error.insertBefore(".fresher-error");            
+            else
+                error.insertAfter(element);
+        },
+    });
+});
+//BUTTON SUBMIT DISABLE AFTER SOME TIME START
+$("#submit").on('click', function() {
+    if (!$('#jobseeker_regform').valid()) {
+        return false;
+    } else {
+        $("#submit").addClass("register_disable");
+        return true;
+    }
+});
+//BUTTON SUBMIT DISABLE AFTER SOME TIME END

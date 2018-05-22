@@ -482,7 +482,7 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         }
         
         $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name)
-as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
+as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id,IF(rp.city>0,ct.city_name,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
         $this->db->join('states st', 'st.state_id = rp.state', 'left');
@@ -500,7 +500,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $this->db->limit($limit,$start);
         }
         $query = $this->db->get();
-        $result_array = $query->result_array();        
+        $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
 
             $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);

@@ -5900,7 +5900,7 @@ class Job extends MY_Controller {
     }
 
     public function job_insert_popup() {
-
+        print_r($this->input->post());exit;
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');        
         $job_save = $this->input->post('job_save');
         $job_apply = $this->input->post('job_apply');
