@@ -81,7 +81,7 @@
         </div>
         <ul class="all-pr-list">
             <li>
-                <a href="<?php echo base_url('job/') ?>" title="Job Profile">
+                <a href="<?php echo $this->job_profile_link; ?>" title="Job Profile">
                     <div class="all-pr-img">
                         <img ng-src="<?php echo base_url('assets/n-images/i1.jpg?ver='.time()) ?>" alt="Job Profile">
                     </div>
