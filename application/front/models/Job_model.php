@@ -141,9 +141,10 @@ class Job_model extends CI_Model {
 
 
         $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name)
-as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo")->from('rec_post rp');
+as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         if ($posting_period != '') {
@@ -288,9 +289,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $jobSkill = $this->findJobSkill($keyword);
 
         $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name)
-as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo")->from('rec_post rp');
+as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
         $this->db->join('states s', 's.state_name = rp.state', 'left');
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
@@ -480,9 +482,10 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         }
         
         $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name)
-as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id")->from('rec_post rp');
+as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
@@ -604,9 +607,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         if ($start < 0)
             $start = 0;
         $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name)
-as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id")->from('rec_post rp');
+as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname, r.re_comp_name,r.comp_logo,r.user_id,IF(rp.city>0,ct.city_name,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
@@ -1413,7 +1417,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         }
 
         $sql = "SELECT rj.post_id,rj.post_name,IFNULL(jt.name, rj.post_name)
-as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rj.min_year,rj.max_year,rj.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo FROM ( SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rj.min_year,rj.max_year,rj.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo, IF(rj.city>0,ct.city_name,IF(rj.state>0,st.state_name,IF(rj.country>0,cr.country_name,''))) as slug_city FROM (
+            SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
             UNION
             SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
             UNION
@@ -1422,7 +1427,8 @@ as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') 
             SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.work_job_title AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1')
             as rj 
             LEFT JOIN ailee_recruiter as r ON r.user_id = rj.user_id 
-            LEFT JOIN ailee_cities as ct ON ct.city_id = rj.city 
+            LEFT JOIN ailee_cities as ct ON ct.city_id = rj.city
+            LEFT JOIN ailee_states as st ON st.state_id = rj.state
             LEFT JOIN ailee_countries as cr ON cr.country_id = rj.country
             LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name 
             WHERE r.user_id != '".$userid."'";
@@ -1524,7 +1530,7 @@ as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') 
         }
 
         $sql = "SELECT rj.post_id,rj.post_name,IFNULL(jt.name, rj.post_name)
-as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rj.min_year,rj.max_year,rj.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo FROM ( SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
+as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rj.min_year,rj.max_year,rj.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo, IF(rj.city>0,ct.city_name,IF(rj.state>0,st.state_name,IF(rj.country>0,cr.country_name,''))) as slug_city FROM ( SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_skill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
             UNION
             SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.city REGEXP concat('[[:<:]](', REPLACE(jr.work_job_city, ',', '|'), ')[[:>:]]') AND jr.user_id = '".$userid."' AND jr.is_delete = '0' AND jr.status = '1' AND rp.is_delete = '0' AND rp.status = '1'
             UNION
@@ -1534,6 +1540,7 @@ as string_post_name,rj.post_description,DATE_FORMAT(rj.created_date,'%d-%M-%Y') 
             as rj 
             LEFT JOIN ailee_recruiter as r ON r.user_id = rj.user_id 
             LEFT JOIN ailee_cities as ct ON ct.city_id = rj.city 
+            LEFT JOIN ailee_states as st ON st.state_id = rj.state
             LEFT JOIN ailee_countries as cr ON cr.country_id = rj.country
             LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name ";
         if($sql_filter != "")
