@@ -413,7 +413,7 @@ $(document).ready(function() {
                 required: true,
             },
             job_title: {
-                required: "#test2:checked",
+                required: true,
                 regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
             },
             industry: {

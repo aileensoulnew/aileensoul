@@ -53,6 +53,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+        <style type="text/css">
+            .ui-autocomplete{
+                z-index: 99999!important;
+            }
+        </style>
 
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push freeh3 cust-job-width paddnone">
@@ -909,8 +914,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
 
         <!-- FIELD VALIDATION JS START -->
+        <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <?php
-        if (IS_REC_JS_MINIFY == '0') {
+        /*if (IS_REC_JS_MINIFY == '0') {
             ?>
             <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
             <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -921,7 +929,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
               <script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script>  
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
             <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <?php }*/ ?>
 
         <?php
         if (IS_JOB_JS_MINIFY == '0') {
@@ -963,12 +971,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         }
 
         //remove post start
-
-
         function remove_post(abc)
         {
-
-
             $.ajax({
                 type: 'POST',
                 url: base_url + 'recruiter/remove_post',
@@ -984,12 +988,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='" + base_url + "img/job-no.png' alt='nojobimage'/></div><div class='art_no_post_text'> No Post Available.</div></div>";
                         $('.contact-frnd-post').html(nodataHtml);
                     }
-
                 }
             });
-
         }
-
 
         //apply post start
         function applypopup(postid, userid)
@@ -1086,8 +1087,174 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             });
 
         }
-//save post End
+        //save post End
+
+        function experience(){
+                document.getElementById('exp_data').style.display = 'block';
+            }
+           
+            function not_experience(){
+                var melement = document.getElementById('exp_data');
+                if(melement.style.display == 'block'){
+                    melement.style.display = 'none';
+                    //value none if user have press yes button start
+                    $("#experience_year").val("");
+                    $("#experience_month").val("");
+                }
+            }
+            function expyear_change()
+            {
+                var experience_year = document.querySelector("#experience_year").value;
+                if (experience_year)
+                {
+                    $('#experience_month').attr('disabled', false);
+                    var experience_year = document.getElementById('experience_year').value;
+                    if (experience_year === '0 year') {
+                        $("#experience_month option[value='0 month']").attr('disabled', true);
+                    }
+                    else
+                    {
+                        $("#experience_month option[value='0 month']").attr('disabled', false);
+                    }
+                }
+                else
+                {
+                    $('#experience_month').attr('disabled', 'disabled');
+                }
+                // var element = document.getElementById("experience_year");
+                // element.classList.add("valuechangecolor");
+            }
+            function expmonth_click()
+            {
+                // var element = document.getElementById("experience_month");
+                //element.classList.add("valuechangecolor");              
+            }
+            $('#job_reg').on('hidden.bs.modal', function (e) {
+                $("#job_apply").val('');
+                $("#job_apply_userid").val('');
+                $("#job_save").val('');
+            });
+        //validation start
+    $(document).ready(function() {
+            // $.validator.addMethod("lowercase", function(value, element, regexpr) {          
+            //          return regexpr.test(value);
+            //      }, "email Should be in Small Character");
+            $.validator.addMethod("regx2", function(value, element, regexpr) {
+                if (!value) {
+                    return true;
+                } else {
+                    return regexpr.test(value);
+                }
+            }, "Special character and space not allow in the beginning");
+            $.validator.addMethod("regx_digit", function(value, element, regexpr) {
+                if (!value) {
+                    return true;
+                } else {
+                    return regexpr.test(value);
+                }
+            }, "Digit is not allow");
+            $.validator.addMethod("regx1", function(value, element, regexpr) {
+                if (!value) {
+                    return true;
+                } else {
+                    return regexpr.test(value);
+                }
+            }, "Only space, only number and only special characters are not allow");
+            $("#jobseeker_regform").validate({
+                ignore: '*:not([name])',
+                rules: {
+                    first_name: {
+                        required: true,
+                        regx2: /^[a-zA-Z0-9-.,']*[0-9a-zA-Z][a-zA-Z]*/,
+                        regx_digit: /^([^0-9]*)$/,
+                    },
+                    last_name: {
+                        required: true,
+                        regx2: /^[a-zA-Z0-9-.,']*[0-9a-zA-Z][a-zA-Z]*/,
+                        regx_digit: /^([^0-9]*)$/,
+                    },
+                    cities: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        // lowercase: /^[0-9a-z\s\r\n@!#\$\^%&*()+=_\-\[\]\\\';,\.\/\{\}\|\":<>\?]+$/,
+                        remote: {
+                            url: base_url + "job/check_email",
+                            //async is used for double click on submit avoid
+                            async: false,
+                            type: "post",
+                        },
+                    },
+                    fresher: {
+                        required: true,
+                    },
+                    job_title: {
+                        required: true,
+                        regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+                    },
+                    industry: {
+                        required: true,
+                    },
+                    cities: {
+                        required: true,
+                        regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+                    },
+                    skills: {
+                        required: true,
+                        regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+                    },
+                },
+                messages: {
+                    first_name: {
+                        required: "First name is required.",
+                    },
+                    last_name: {
+                        required: "Last name is required.",
+                    },
+                    email: {
+                        required: "Email address is required.",
+                        email: "Please enter valid email id.",
+                        remote: "Email already exists"
+                    },
+                    fresher: {
+                        required: "Fresher is required.",
+                    },
+                    industry: {
+                        required: "Industry is required.",
+                    },
+                    cities: {
+                        required: "City is required.",
+                    },
+                    job_title: {
+                        required: "Job title is required.",
+                    },
+                    skills: {
+                        required: "Skill is required.",
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    //console.log(element);
+                    if (element.attr("name") == "fresher" )
+                        error.insertBefore(".fresher-error");            
+                    else
+                        error.insertAfter(element);
+                },
+            });
+        });
+        //BUTTON SUBMIT DISABLE AFTER SOME TIME START
+        $("#submit").on('click', function() {
+            if (!$('#jobseeker_regform').valid()) {
+                return false;
+            } else {
+                $("#submit").addClass("register_disable");
+                return true;
+            }
+        });
+        //BUTTON SUBMIT DISABLE AFTER SOME TIME END
         </script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
     </body>
 </html>
