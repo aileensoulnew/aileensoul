@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php $userid_login = $this->session->userdata('aileenuser');
 
  $contition_array = array('is_delete' => '0', 'status' => '1', 'industry_name !=' => "Others");
@@ -17,8 +16,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 <html>
     <head>
         <title><?php echo $title; ?></title>
-        <?php echo $head; ?> 
-        <?php
+        <?php //echo $head; ?> 
+        <?php /*
         if (IS_REC_CSS_MINIFY == '0') {
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
@@ -30,18 +29,30 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
 
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
-        <?php } ?>
+        <?php }*/ ?>
 
-         <?php
+         <?php /*
         if (IS_JOB_CSS_MINIFY == '0') {
             ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
         <?php }else{?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
 
-        <?php }?>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <?php }*/ ?>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">        
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); 
+        ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
 
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push freeh3 cust-job-width paddnone">
@@ -53,7 +64,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         if ($this->session->userdata('aileenuser') != $recliveid) {
              if($job_deactive == 0 && $userid_login != ""){
                 echo $job_header2;
-            }else if ($job_deactive > 0) {
+            }else if ($job_deactive > 0 || $this->job_profile_set == 0) {
                 echo $header_inner_profile;
             }
             //echo $job_header2;

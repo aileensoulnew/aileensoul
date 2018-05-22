@@ -1992,7 +1992,8 @@ label.cameraButton input[accept*=camera]{
     color:#fff!important
 }
 .profile-boxProfileCard-cover a img{
-    min-height:88px
+    min-height:88px;
+	width:100%;
 }
 .lbpos{
     position:relative
