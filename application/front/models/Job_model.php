@@ -1173,10 +1173,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         }
 
         $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name)
-as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo")->from('rec_post rp');
+as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo, IF(rp.city>0,ct.city_name,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
+        // 
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
+        $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
