@@ -967,11 +967,11 @@ span.onclick = function () {
     modal.style.display = "none";
 }
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+// window.onclick = function (event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
 
 // POPUP BOX FOR POST START 
 // DROP DOWN SCRIPT START 
@@ -1558,11 +1558,11 @@ $(document).on('keydown', function (e) {
 // Get the modal
 var modal = document.getElementById('myModal');
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+// window.onclick = function (event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
 
 
 var _onPaste_StripFormatting_IEPaste = false;

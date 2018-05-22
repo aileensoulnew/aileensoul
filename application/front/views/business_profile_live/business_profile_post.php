@@ -313,7 +313,7 @@ $mobile_agent = $this->agent->mobile;
                 </div>
             </div>
         </section>
-        <div id="myModal" class="modal-post">
+        <div id="myModal" class="modal-post" data-backdrop="static" data-keyboard="false">
             <div class="modal-content-post">
                 <span class="close1">&times;
                 </span>
@@ -392,6 +392,7 @@ $mobile_agent = $this->agent->mobile;
                         </ul>
                     </div>
                     <div class="fr margin_btm">
+                        <p>asdjgagdjg</p>
                         <button type="submit"  value="Submit">Post</button>    
                     </div>
                     <?php echo form_close(); ?>
@@ -497,5 +498,8 @@ $mobile_agent = $this->agent->mobile;
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/home.js?ver=' . time()); ?>"></script>
         <?php } ?>
+
+        <!-- out side click disable of post popup -->
+       
     </body>
 </html>

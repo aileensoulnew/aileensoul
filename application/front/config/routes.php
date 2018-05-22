@@ -582,7 +582,6 @@ $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
 $route['business/search/(:any)'] = "business_live/business_search/$1";
 $route['business/search/(:any)-in-(:any)'] = "business_live/business_search/$1-in-$2";
 
-$route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
 $route['company/(:any)/details'] = "business_profile_live/business_resume/$1";
 $route['company/(:any)/contacts'] = "business_profile_live/bus_contact/$1";
 $route['company/(:any)/followers'] = "business_profile_live/followers/$1";

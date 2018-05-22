@@ -41,7 +41,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('BASEURL', 'http://localhost/aileensoulnew/aileensoul/');
-    define('IMAGEPATHFROM', 'upload'); //upload,s3bucket 
+    define('IMAGEPATHFROM', 'uploads'); //upload,s3bucket 
     error_reporting(0);
 }else if ($_SERVER['HTTP_HOST'] == '35.165.1.109:81' || $_SERVER['SERVER_ADDR'] == '35.165.1.109') {
     define('BASEURL', 'http://35.165.1.109:81/');

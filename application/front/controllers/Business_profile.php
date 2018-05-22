@@ -9468,7 +9468,8 @@ Your browser does not support the audio tag.
     public function bus_videos() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $id = $_POST['bus_slug'];
-// manage post start
+        $id = $this->business_model->removelocationfromslug($id);
+        // manage post start
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
 
@@ -9724,7 +9725,8 @@ Your browser does not support the audio tag.
     public function bus_audio() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $id = $_POST['bus_slug'];
-// manage post start
+        $id = $this->business_model->removelocationfromslug($id);
+        // manage post start
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
 
@@ -9817,6 +9819,7 @@ Your browser does not support the audio tag.
     public function bus_pdf() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $id = $_POST['bus_slug'];
+        $id = $this->business_model->removelocationfromslug($id);
 
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
