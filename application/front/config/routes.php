@@ -534,6 +534,10 @@ $route['how-to-use-freelance-profile-in-aileensoul'] = "introduction/freelance_p
 $route['how-to-use-business-profile-in-aileensoul'] = "introduction/business_profile";
 $route['how-to-use-artistic-profile-in-aileensoul'] = "introduction/artistic_profile";
 
+$route['(:any)-business-in-(:any)'] = "business_live/categoryBusinessList/$1/$2";
+$route['(:any)-business'] = "business_live/categoryBusinessList/$1";
+$route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
+
 $route['business-by-categories'] = "business_live/view_more_business";
 $route['business-by-location'] = "business_live/view_more_business";
 $route['business'] = "business_live/view_more_business";
@@ -564,9 +568,7 @@ $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-
 $route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
-$route['(:any)-business-in-(:any)'] = "business_live/categoryBusinessList/$1/$2";
-$route['(:any)-business'] = "business_live/categoryBusinessList/$1";
-$route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
+
 $route['(:any)'] = 'Userprofile';
 
 
