@@ -535,6 +535,11 @@ $userid = $this->session->userdata('aileenuser');
             city = citydata.join('-').toString();
         }
 
+        if(keyword[keyword.length - 1] == "-")
+        {            
+            keyword = keyword.slice(0,-1);
+        }
+
         if (keyword == '' && city == '') {
             return false;
         } else if (keyword != '' && city == '') {

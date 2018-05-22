@@ -4721,6 +4721,7 @@ class Recruiter extends MY_Controller {
         $this->data['recommandedpost'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
         // if ($url == $this->uri->segment(3)) {
+        //echo $url." == ".$this->uri->segment(3);exit;
         if ($url == $this->uri->segment_array()[count($this->uri->segment_array())]) {
             if ($this->session->userdata('aileenuser')) {
                 $this->load->view('job/rec_post', $this->data);
@@ -4728,7 +4729,7 @@ class Recruiter extends MY_Controller {
                 $this->load->view('job/rec_post_login', $this->data);
             }
         } else {
-            redirect('recruiter/jobpost/' . $url, refresh);
+            redirect(base_url().$url, refresh);
         }
     }
 
