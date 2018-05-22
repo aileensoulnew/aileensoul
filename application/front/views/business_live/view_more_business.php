@@ -19,7 +19,7 @@
     <body class="profile-main-page">
         <?php 
             if($ismainregister == false){
-                $this->load->view('business_live/login_header');
+                // $this->load->view('business_live/login_header');
             }else if($isbusiness_register == true && $isbusiness_deactive == false){
                 echo $business_header2;
             }else{
@@ -27,7 +27,7 @@
             }
         ?>
 
-        <div class="middle-section middle-section-banner">
+        <div class="middle-section middle-section-banner new-ld-page">
             <?php if($business_profile_set == 0 && $business_profile_set == '0'){ echo $search_banner; } ?>
             <!-- NEW HTML -->
                 

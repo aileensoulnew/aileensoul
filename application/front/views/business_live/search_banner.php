@@ -8,10 +8,12 @@
 	?>
 	<div class="container">
 		<div class="text-right pt20 create-profile-btn">
-			<?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
-			<a class="btn3" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
-			<?php }else{ ?>
-			<a class="btn3" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
+			<?php if($ismainregister == true){ ?>
+				<?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
+				<a class="btn3" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+				<?php }else{ ?>
+				<a class="btn3" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
+				<?php } ?>
 			<?php } ?>
 		</div>
 		<div class="row">

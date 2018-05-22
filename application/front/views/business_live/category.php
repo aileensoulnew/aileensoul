@@ -39,7 +39,6 @@
                                         <div class="cus-cat-middle">
                                             <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>" alt="Other">
                                             <p>Other
-                                                <!-- <span ng-bind="'(' + otherCategoryCount + ')'"></span> -->
                                             </p>
                                         </div>
                                     </a>

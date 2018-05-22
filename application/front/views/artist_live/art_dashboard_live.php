@@ -26,10 +26,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/artistic.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />  
             <?php }?>    
-            <?php if($this->session->userdata('aileenuser')){ ?>
-                <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
-                <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
-            <?php } ?>
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
         <style type="text/css">
             .two-images, .three-image, .four-image{
                 height: auto !important;
@@ -66,8 +64,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </div>
                         <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
                             <div class="btn-right pull-right">
-                                <a href="javascript:void(0);" onclick="login_data();" class="btn2" title="Login">Login</a>
-                                <a href="javascript:void(0);" onclick="register_profile();" class="btn3" title="Create an account">Create an account</a>
+                                <a href="javascript:void(0);" onclick="login_data();" class="btn7" title="Login">Login</a>
+                                <a href="javascript:void(0);" onclick="register_profile();" class="btn2" title="Create an account">Create Artistic Account</a>
                             </div>
                         </div>
                     </div>

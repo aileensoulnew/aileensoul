@@ -1,13 +1,21 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>"> 
 
 <div class="search-banner" ng-controller="searchArtistController">
-
+	<?php 
+		if ($ismainregister == false) {
+	        $this->load->view('artist_live/login_header');
+	    }
+     ?>
 	<div class="container">
 		<div class="text-right pt20 create-profile-btn">
-			<?php if($artist_isregister == false){ ?>
-				<a class="btn3" href="<?php echo artist_registration ?>">Create Artist Profile</a>
-			<?php } else{ ?>
-				<a class="btn3" href="<?php echo artist_reactivateacc; ?>">Reactivate Artist Profile</a>
+			<?php 
+				if ($ismainregister == true) { 
+			?>
+				<?php if($artist_isregister == false){ ?>
+					<a class="btn3" href="<?php echo artist_registration ?>">Create Artist Profile</a>
+				<?php } else{ ?>
+					<a class="btn3" href="<?php echo artist_reactivateacc; ?>">Reactivate Artist Profile</a>
+				<?php } ?>
 			<?php } ?>
 		</div>
 		<div class="row">

@@ -19,17 +19,17 @@
         <!-- SET BLANK IF VAR NOT DECLARE FROM CONTROLLER -->
         <?php   $location_id = (isset($location_id)) ? $location_id : ''; 
                 $category_id = (isset($category_id)) ? $category_id : ''; 
-                $session_user_id = $this->session->userdata('aileenuser');; 
+                $session_user_id = $this->session->userdata('aileenuser');
                 if ($ismainregister == false) {
-                    $this->load->view('artist_live/login_header');
+                    // $this->load->view('artist_live/login_header');
                 }else if($isartistactivate == true && $artist_isregister == true && $session_user_id){
                     echo $artistic_header2;
                 }else{
                     echo $header_profile;
                 }
         ?>
-        <div class="middle-section middle-section-banner">
-            <?php if($ismainregister == false || $isartistactivate == false || $artist_isregister == false || !$session_user_id){    echo $search_banner; 
+        <div class="middle-section middle-section-banner new-ld-page">
+            <?php if($ismainregister == false || $isartistactivate == false || $artist_isregister == false || !$session_user_id){ echo $search_banner; 
             } ?>
             <div class="container pt20">
                 <div class="left-part">

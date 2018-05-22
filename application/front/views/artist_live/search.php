@@ -22,7 +22,7 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <?php 
             if ($ismainregister == false) {
-                $this->load->view('artist_live/login_header');
+                // $this->load->view('artist_live/login_header');
             }else if($isartistactivate == true && $artist_isregister){
                 echo $artistic_header2;
             }else{
@@ -33,7 +33,7 @@
                 if($ismainregister == false || $isartistactivate == false || $artist_isregister == false){ 
                 // if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ 
             ?>
-            <div class="middle-section middle-section-banner">
+            <div class="middle-section middle-section-banner new-ld-page">
             <?php
                 echo $search_banner; 
             } else{

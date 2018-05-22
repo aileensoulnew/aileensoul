@@ -17,12 +17,12 @@
     <body class="profile-main-page">
         <?php
             if ($ismainregister == false) {
-                $this->load->view('artist_live/login_header');
+                // $this->load->view('artist_live/login_header');
             }else{
                 echo $header_profile;
             }
         ?>
-        <div class="middle-section middle-section-banner">
+        <div class="middle-section middle-section-banner new-ld-page">
             <?php echo $search_banner; ?>
             <!-- TOP CATEGORIES LIST -->
             <div class="job-cat-lp" >

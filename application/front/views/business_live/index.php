@@ -26,7 +26,7 @@
                 echo $header_profile; 
             }
         ?>
-        <div class="middle-section middle-section-banner">
+        <div class="middle-section middle-section-banner new-ld-page">
             <!-- SEARCH BANNER for BUSINESS -->
             <?php if(!$isbusinessactivate){ ?>
                 <?php if(!$business_profile_set){ echo $search_banner; } ?>
