@@ -19,12 +19,12 @@
         </header>
     <?php endif; ?>
     <div class="container">
-        <div class="text-right pt20">
+        <div class="text-right pt20 create-profile-btn">
             <!--  -->
             <?php
             if($user_id != ""):
                 if((!$isjobdeactivate || $isjobdeactivate == false) && $job_deactive == 0) { ?>
-                    <a class="btn5" href="<?php echo $job_profile_link; ?>">Create Job Profile</a>
+                    <a class="btn3" href="<?php echo $job_profile_link; ?>">Create Job Profile</a>
                 <?php } /*else{ ?>
                     <a class="btn5" href="<?php echo base_url('job/reactivateacc'); ?>">Reactivate Job Profile</a>
                 <?php } */

@@ -234,7 +234,7 @@ button,input[type=button],input[type=submit]{
 
 
 .modal-open button:hover,input[type=button]:hover,input[type=submit]:hover{
-    background:#156f95;
+    /*background:#156f95;*/
 }
 
 button:hover,input[type=button]:hover,input[type=submit]:hover{
