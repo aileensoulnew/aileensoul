@@ -8,8 +8,10 @@ $data = "business_profile_id,user_id,business_user_image,business_slug,industriy
             (select state_name from ailee_states where state_id = state) as state_name";
 $business_common_data = $this->data['business_common_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-$city_slug = ($slug_data[0]['city_name']) ? $slug_data[0]['city_name'] : $slug_data[0]['state_name'];
-$business_common_data[0]['business_slug'] = $this->data['business_slug'] = $slug_data[0]['business_slug'] . "-" .$city_slug;
+$city_slug = ($business_common_data[0]['city_name']) ? $business_common_data[0]['city_name'] : $business_common_data[0]['state_name'];
+$business_common_data[0]['business_slug'] = $this->data['business_slug'] = $business_common_data[0]['business_slug'] . "-" .$city_slug;
+$this->data['business_common_data'][0]['business_slug'] = $business_common_data[0]['business_slug'];
+
 ?>
 <div class="full-box-module">   
     <div class="profile-boxProfileCard  module">

@@ -7728,8 +7728,20 @@ Your browser does not support the audio tag.
                     //$busdata = $this->common->select_data_by_id('business_profile', 'user_id', $contact['contact_to_id'], $data = '*', $join_str = array());
 
                     $contition_array = array('user_id' => $contact['contact_to_id'], 'is_deleted' => '0', 'status' => '1');
-                    $busdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                    $sql = "SELECT business_profile_id,company_name,country,state,city,pincode,address,contact_person,contact_mobile,contact_email,contact_website,business_type,industriyal,details,addmore,user_id,bp.status,is_deleted,created_date,modified_date,business_step,business_user_image,profile_background,profile_background_main,other_business_type,other_industrial,
+                    IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                    FROM ailee_business_profile bp
+                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                    WHERE is_deleted = '0' AND bp.status = '1' AND user_id = '". $contact['contact_to_id'] ."'";
 
+                        $query = $this->db->query($sql);
+                        $busdata = $query->result_array();
+
+                    // $busdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                    // print_r($busdata);
+                    // echo $this->db->last_query();
+                    // exit;
                     $inddata = $this->common->select_data_by_id('industry_type', 'industry_id', $busdata[0]['industriyal'], $data = '*', $join_str = array());
 
                     if($busdata){
@@ -10770,7 +10782,7 @@ Your browser does not support the audio tag.
         $term = ($_GET['term']) ? $_GET['term'].'%' : '' ;
         $limit = ($_GET['limit']) ? $_GET['limit'] : 5 ;
         if (!empty($term)) {
-            $sql = "SELECT city_name FROM ailee_cities WHERE status = '1' AND state_id != '0' AND (city_name LIKE '". $term ."') GROUP BY city_name LIMIT " . $limit;
+            $sql = "SELECT city_name as value FROM ailee_cities WHERE status = '1' AND state_id != '0' AND (city_name LIKE '". $term ."') GROUP BY city_name LIMIT " . $limit;
             $query = $this->db->query($sql);
             $city_data = $query->result_array();
             echo json_encode($city_data);

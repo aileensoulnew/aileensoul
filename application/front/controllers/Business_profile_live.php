@@ -151,7 +151,6 @@ class Business_profile_live extends MY_Controller {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
-
         $this->business_profile_active_check();
         $this->is_business_profile_register();
 
@@ -186,7 +185,6 @@ class Business_profile_live extends MY_Controller {
 
         $this->data['title'] = 'Home | Business Profile' . TITLEPOSTFIX;
         $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, true);
-
         $this->load->view('business_profile_live/business_profile_post', $this->data);
     }
 
@@ -2163,10 +2161,13 @@ Your browser does not support the audio tag.
     public function userlist($id = '') {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
-
+        if($id != ""){
+            $id = $this->business_model->removelocationfromslug($id);
+        }
         $compnay_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($compnay_name) . ' | All User' . ' | Business Profile ' . TITLEPOSTFIX;
         $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, TRUE);
+
         $this->load->view('business_profile_live/business_userlist', $this->data);
     }
 
