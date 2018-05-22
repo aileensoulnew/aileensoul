@@ -1160,7 +1160,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-box{}
 .search-box .search-input input{width:47%; margin-right:2%; height:50px; font-size:17px; font-style:italic; color:#7b7b7b;}
 .search-box .search-input input.city-input{margin-right:0;}
-.search-box .btn1{font-size:22px; padding:12px 21px;}
+.search-box .btn1{font-size:22px !important; padding:12px 21px;}
 .search-box input.btn1{display:inline-block; width:auto; height:auto;}
 .search-box .search-input input.btn1{width:120px; margin-right:0;}
 .search-bnr-text{padding:50px 0 40px; letter-spacing:1px;}
@@ -2059,6 +2059,12 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 {background:none; cursor:text}
 .site-box ul.mid-listing li{width:50%; float:left;}
 
+.modal.message-box .modal-body{text-align:left;}
+.job_reg .cus_btn_sub{color:#fff;}
+.message button.cus_btn_sub:hover{border:0;}
+.register-model label.error{right:0;}
+.common-form fieldset.fresher_radio label.error{top:20px;}
+.fresher_radio{padding:6px 8px;}
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
