@@ -11,7 +11,6 @@ app.filter('slugify', function () {
 
         // replace multiple spaces or hyphens with a single hyphen
         slug = slug.replace(/[\s-]+/g, '-');
-       
 
         if(slug[slug.length - 1] == "-")
         {            
