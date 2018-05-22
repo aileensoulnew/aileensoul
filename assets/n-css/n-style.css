@@ -2059,6 +2059,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 {background:none; cursor:text}
 .site-box ul.mid-listing li{width:50%; float:left;}
 
+.modal.message-box .modal-body{text-align:left;}
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
