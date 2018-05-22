@@ -7677,7 +7677,16 @@ Your browser does not support the audio tag.
                     // $busdata = $this->common->select_data_by_id('business_profile', 'user_id', $contact['contact_from_id'], $data = '*', $join_str = array());
 
                 $contition_array = array('user_id' => $contact['contact_from_id'], 'is_deleted' => '0', 'status' => '1');
-                $busdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                // $busdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                    $sql = "SELECT business_profile_id,company_name,country,state,city,pincode,address,contact_person,contact_mobile,contact_email,contact_website,business_type,industriyal,details,addmore,user_id,bp.status,is_deleted,created_date,modified_date,business_step,business_user_image,profile_background,profile_background_main,other_business_type,other_industrial,
+                    IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                    FROM ailee_business_profile bp
+                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                    WHERE is_deleted = '0' AND bp.status = '1' AND user_id = '". $contact['contact_to_id'] ."'";
+
+                    $query = $this->db->query($sql);
+                    $busdata = $query->result_array();
 
                     if($busdata){
 

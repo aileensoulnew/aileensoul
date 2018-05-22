@@ -1,6 +1,11 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>"> 
 <!-- NEW HTML DESIGN -->
 <div class="search-banner" ng-controller="searchBusinessController">
+	<?php  
+		if($ismainregister == false){
+		    $this->load->view('business_live/login_header');
+		}
+	?>
 	<div class="container">
 		<div class="text-right pt20 create-profile-btn">
 			<?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>

@@ -408,6 +408,8 @@ class Business_model extends CI_Model {
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
         }
+        // echo $sql;
+        // exit;
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
@@ -431,7 +433,7 @@ class Business_model extends CI_Model {
             OR (`ailee_business_profile_post`.`posted_user_id` = '".$user_id."' AND `ailee_business_profile_post`.`is_delete` =0)
             ORDER BY `business_profile_post_id` DESC";        
         $query = $this->db->query($sql);
-        $result_array = $query->row_array();
+        $result_array = $query->row()->total_record;
         return $result_array;        
     }
 

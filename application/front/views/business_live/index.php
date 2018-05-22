@@ -19,7 +19,7 @@
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
         <?php 
             if($ismainregister == false){
-                $this->load->view('business_live/login_header');
+                // $this->load->view('business_live/login_header');
             }else if($isbusiness_register == true && $isbusiness_deactive){
                 echo $business_header2;
             }else{
