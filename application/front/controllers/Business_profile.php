@@ -27,7 +27,7 @@ class Business_profile extends MY_Controller {
 
       
         include ('main_profile_link.php');
-        include ('business_include.php');
+        // include ('business_include.php');
 
         // FIX BUSINESS PROFILE NO POST DATA
 
@@ -2181,7 +2181,8 @@ Your browser does not support the audio tag.
         $contition_array = array('user_id' => $userid);
         $artisticdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $limit = $perpage;
+        $limit = 50;
+        // $limit = $perpage;
         $offset = $start;
         $location_id = $_GET["location_id"];
         $category_id = $_GET["category_id"];
@@ -7494,8 +7495,6 @@ Your browser does not support the audio tag.
     }
 
     public function contact_person_query() {
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-
         $userid = $this->session->userdata('aileenuser');
         $to_id = $_POST['toid'];
         $status = $_POST['status'];
@@ -7504,6 +7503,9 @@ Your browser does not support the audio tag.
         $contition_array = array('contact_type' => '2');
         $search_condition = "((contact_to_id = '$to_id' AND contact_from_id = ' $userid') OR (contact_from_id = '$to_id' AND contact_to_id = '$userid'))";
         $contactperson = $this->common->select_data_by_search('contact_person', $search_condition, $contition_array, $data = 'status', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = '', $groupby = '');
+        // echo $this->db->last_query();
+        // print_r($contactperson);
+        // exit;
         if ($contactperson[0]['status'] == $status) {
             echo 1;
         } else {

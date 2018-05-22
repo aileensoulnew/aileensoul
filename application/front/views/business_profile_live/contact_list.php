@@ -19,10 +19,19 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
-        <?php echo $header; ?>
-        <?php echo $business_header2; ?>
-        <?php echo $dash_header; ?>
-        <?php echo $dash_header_menu; ?>
+        <?php //echo $header; ?>
+        <?php // echo $business_header2; ?>
+        <?php //echo $dash_header; ?>
+        <?php //echo $dash_header_menu; ?>
+        <?php 
+            if($ismainregister == false){
+                $this->load->view('business_live/login_header');
+            }else if($isbusiness_register == true && $isbusiness_deactive == false){
+                echo $business_header2;
+            }else{
+                echo $header_profile; 
+            }
+        ?>
         <div class="user-midd-section" id="paddingtop_fixed">
             <div class="container">
                 <div class="row">
@@ -204,6 +213,9 @@
         
         <?php echo $footer; ?>
         <?php echo $login_footer ?>
+
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <script type="text/javascript">
             function contactapprove1(toid, status) {
                 $.ajax({

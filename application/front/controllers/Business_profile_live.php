@@ -7502,6 +7502,7 @@ Your browser does not support the audio tag.
         $contition_array = array('contact_type' => '2');
         $search_condition = "((contact_to_id = '$to_id' AND contact_from_id = ' $userid') OR (contact_from_id = '$to_id' AND contact_to_id = '$userid'))";
         $contactperson = $this->common->select_data_by_search('contact_person', $search_condition, $contition_array, $data = 'status', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = '', $groupby = '');
+        
         if ($contactperson[0]['status'] == $status) {
             echo 1;
         } else {

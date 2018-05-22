@@ -303,12 +303,10 @@ class Business_model extends CI_Model {
             $sql .= " ORDER BY ". $sortby . " " .$orderby;
         }
         if ($limit != '') {
-            $sql .= " Limit ". $limit;
+            $sql .= " Limit ". $offset . "," . $limit;
         }
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
-        // echo $this->db->last_query();
-        // exit;
         return $result_array;
     }
 

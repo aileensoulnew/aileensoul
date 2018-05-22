@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
@@ -12,15 +13,28 @@
 
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page">
         <!-- SET BLANK VALUE IF VAR. NOT SET FROM CONTROLLER -->
         <?php $location_id = (isset($location_id)) ? $location_id : ''; ?>
         <?php $category_id = (isset($category_id)) ? $category_id : ''; ?>
 
-        <?php echo $header_profile; ?>
+        <?php 
+            if($ismainregister == false){
+                $this->load->view('business_live/login_header');
+            }else if($isbusiness_register == true && $isbusiness_deactive == false){
+                echo $business_header2;
+            }else{
+                echo $header_profile; 
+            }
+        ?>
+
         <div class="middle-section middle-section-banner">
             <?php if($business_profile_set == 0 && $business_profile_set == '0'){ echo $search_banner; } ?>
+
+
             <div class="container pt20">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
@@ -149,11 +163,10 @@
                 </div>
             </div>
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -172,5 +185,12 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/categoryBusinessList.js?ver=' . time()) ?>"></script>
+        <?php 
+            if($isbusiness_register == true && $isbusiness_deactive == false){
+        ?>
+            <script src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()) ?>"></script>
+        <?php
+            }
+        ?>
     </body>
 </html>

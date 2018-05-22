@@ -5,6 +5,7 @@ $session_user = $this->session->userdata();
 $userData = $this->user_model->getUserData($session_user['aileenuser']);
 $browser = $this->agent->browser();
 $browserVersion = $this->agent->version();
+
 if($browser == "Internet Explorer")
 {
     if(explode(".", $browserVersion)[0] < 11)
@@ -29,6 +30,7 @@ if($browser == "Firefox")
 ?>
 <div class="web-header">
     <?php echo $header_inner_profile ?>
+    <?php ?>
     <?php if ($business_common_data[0]['business_step'] == 4) { ?>
     <div class="sub-header">
         <div class="container">
@@ -154,7 +156,7 @@ if($browser == "Firefox")
                                 <div class="dropdown-menu">
                                     <div class="dropdown-title">
                                         Contact Request
-                                        <a href="contact-list" class="pull-right" id="seecontact">See All</a>
+                                        <a href="<?php echo base_url(); ?>company/contact-requests" class="pull-right" id="seecontact">See All</a>
                                         <!-- <a href="all-contact.html" class="pull-right" id="seecontact">See All</a> -->
                                     </div>
                                     <div class="content custom-scroll">

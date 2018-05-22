@@ -17,7 +17,16 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page">
-        <?php echo $header_profile; ?>
+        <?php 
+            if($ismainregister == false){
+                $this->load->view('business_live/login_header');
+            }else if($isbusiness_register == true && $isbusiness_deactive == false){
+                echo $business_header2;
+            }else{
+                echo $header_profile; 
+            }
+        ?>
+
         <div class="middle-section middle-section-banner">
             <?php if($business_profile_set == 0 && $business_profile_set == '0'){ echo $search_banner; } ?>
             <!-- NEW HTML -->
@@ -31,6 +40,7 @@
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -51,5 +61,12 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/viewmorebusiness.js?ver=' . time()) ?>"></script>
+        <?php 
+            if($isbusiness_register == true && $isbusiness_deactive == false){
+        ?>
+            <script src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()) ?>"></script>
+        <?php
+            }
+        ?>
     </body>
 </html>
