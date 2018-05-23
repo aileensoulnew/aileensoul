@@ -289,7 +289,7 @@ $route['artist/ajax_data'] = "artist_live/ajax_data";
 $route['artist/followers'] = "artist_live/followers";
 $route['artist/following'] = "artist_live/userlist";
 
-$route['artist/category'] = "artist_live/category";
+// $route['artist/category'] = "artist_live/category";
 // $route['artist/category/(:any)'] = "artist_live/categoryArtistList/$1";
 $route['artist/search'] = "artist_live/artist_search";
 
@@ -338,7 +338,7 @@ $route['artist/reactivate'] = "artist_live/reactivate";
 $route['artist/reactivateacc'] = "artist_live/reactivateacc";
 
 
-$route['artist/location'] = "artist_live/location";
+// $route['artist/location'] = "artist_live/location";
 $route['artist_live/artistCategory'] = "artist_live/artistCategory";
 $route['artist/p/(:any)/following'] = "artist_live/following/$1";
 $route['artist/p/(:any)/followers'] = "artist_live/followers/$1";
@@ -389,6 +389,10 @@ $route['artist/unfollowtwo'] = "artist/unfollowtwo";
 $route['artist/unfollow_following'] = "artist/unfollow_following"; 
 $route['login/artistic_check_login'] = "login/artistic_check_login"; 
 
+$route['artist/category'] = "artist_live/view_more_artist";
+$route['artist/location'] = "artist_live/view_more_artist";
+$route['artist'] = "artist_live/view_more_artist";
+$route['artist/(:any)-in-(:any)'] = "artist_live/categoryArtistList/$1/$2";
 //BLOG ROUTES SETTINGS
 //$route['blog/popular'] = "blog/popular";
 //$route['blog/read_more'] = "blog/read_more";
@@ -568,14 +572,12 @@ $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-
 $route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
-
 $route['(:any)'] = 'Userprofile';
 
 
 // ARTIST SEARCH 
 $route['artist/search/(:any)'] = "artist_live/artist_search/$1";
 $route['artist/search/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
-// $route['artist/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
 
 

@@ -209,6 +209,7 @@ class Business_live extends MY_Controller {
 
     // Top Business Location 
     public function businessAllLocation() {
+        $limit = ($_GET['limit']) ? $_GET['limit'] : 15;
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
         }
@@ -216,7 +217,6 @@ class Business_live extends MY_Controller {
         {
             $page = 1;
         }
-        $limit = ($_GET['limit']) ? $_GET['limit'] : 15;
         $businessLocation = $this->business_model->businessAllLocation($page,$limit);
         echo json_encode($businessLocation);
     }

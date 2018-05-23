@@ -61,8 +61,6 @@ class Business_model extends CI_Model {
         return count($result_array);
     }
 
-
-
     function otherCategoryCount() {
         $this->db->select('count(bp.business_profile_id) as count')->from('business_profile bp');
         $this->db->where('bp.industriyal', '0');

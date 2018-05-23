@@ -43,7 +43,7 @@ class Artistic_model extends CI_Model {
         return $return_array;
     }
 
-    function artistAllCategory() {
+    /*function artistAllCategory() {
         $this->db->select('category_id,art_category,category_slug')->from('art_category ac');
         $this->db->where('ac.status', '1');
         $this->db->where('ac.category_id !=', '26');
@@ -71,6 +71,22 @@ class Artistic_model extends CI_Model {
         array_multisort(array_column($return_array, 'count'), SORT_DESC, $return_array);
 
         return $return_array;
+    }*/
+
+    function artistAllCategory($limit = '') {
+        $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug
+            FROM ailee_art_category ct,ailee_art_reg ar
+            WHERE FIND_IN_SET(ct.category_id,ar.art_skill) > 0 AND ct.status = '1' 
+            AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
+            GROUP BY ct.category_id ORDER BY count DESC";
+
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
     }
 
     function otherCategoryCount() {
@@ -360,6 +376,33 @@ class Artistic_model extends CI_Model {
         return $result;
     }
 
+    function artistAllLocationList($page = 1, $limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $sql = "SELECT count(ar.art_id) as count, ar.art_city as location_id, ac.city_name as art_location, ac.slug as location_slug
+                FROM ailee_cities ac 
+                LEFT JOIN ailee_art_reg ar ON ar.art_city = ac.city_id
+                WHERE ac.status = '1' AND ar.status = '1'
+                AND ar.art_step = '4' 
+                GROUP BY ar.art_city 
+                ORDER BY count DESC";
+
+        $total_query = $this->db->query($sql);
+        $totalartistLocation = $total_query->result_array();   
+        $result_array['total_record'] = count($totalartistLocation);
+        
+        if($limit != ''){
+            $sql .= " LIMIT ". $start . "," . $limit;
+        }
+        // echo $sql;
+        // exit;
+        $query = $this->db->query($sql);
+        $businessLocation = $query->result_array();   
+        $result_array['art_loc'] = $businessLocation;
+        return $result_array;
+    }
+
     function artistListByFilter($category_id = '', $location_id = '', $limit = '') {
         // $limit = ($limit == '') ? 5 : $limit;
         $sql = "SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, ac.art_category, CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, ar.art_desc_art, 
@@ -482,6 +525,63 @@ class Artistic_model extends CI_Model {
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
             return $result_array;
+    }
+
+    function get_artist_by_categories($page = 0,$limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        
+        $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug
+                FROM ailee_art_category ct,ailee_art_reg ar
+                WHERE FIND_IN_SET(ct.category_id,ar.art_skill) > 0 AND ct.status = '1' 
+                AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
+                GROUP BY ct.category_id ORDER BY count DESC";
+
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        $query = $this->db->query($sql);
+        $result_array['art_cat'] = $query->result_array();
+        $result_array['total_record'] = $this->get_artist_category_total_rec();
+
+        return $result_array;
+    }
+
+    function get_artist_category_total_rec() {
+        $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug
+                FROM ailee_art_category ct,ailee_art_reg ar
+                WHERE FIND_IN_SET(ct.category_id,ar.art_skill) > 0 AND ct.status = '1' 
+                AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
+                GROUP BY ct.category_id ORDER BY count DESC";
+        $query = $this->db->query($sql);
+        $totalcount = count($query->result_array());
+        return $totalcount;
+    }
+
+    function get_artist_city($page = 1, $limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $sql = "SELECT count(ar.art_id) as count, ar.art_city as location_id, ac.city_name as art_location, ac.slug as location_slug
+                FROM ailee_cities ac 
+                LEFT JOIN ailee_art_reg ar ON ar.art_city = ac.city_id
+                WHERE ac.status = '1' AND ar.status = '1'
+                AND ar.art_step = '4' 
+                GROUP BY ar.art_city 
+                ORDER BY count DESC";
+
+        $total_query = $this->db->query($sql);
+        $totalartistLocation = $total_query->result_array();   
+        $result_array['total_record'] = count($totalartistLocation);
+        
+        if($limit != ''){
+            $sql .= " LIMIT ". $start . "," . $limit;
+        }
+        $query = $this->db->query($sql);
+        $businessLocation = $query->result_array();   
+        $result_array['art_loc'] = $businessLocation;
+        return $result_array;
     }
 
 }

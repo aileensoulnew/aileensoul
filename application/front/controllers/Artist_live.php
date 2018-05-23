@@ -55,8 +55,11 @@ class Artist_live extends MY_Controller {
     }
 
     public function category() {
+        $this->load->view('artist_live/category', $this->data);
+    }
+
+    public function view_more_artist() {
         $userid = $this->session->userdata('aileenuser');
-        // $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -72,10 +75,10 @@ class Artist_live extends MY_Controller {
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
-        $this->load->view('artist_live/category', $this->data);
+        $this->load->view('artist_live/view_more_artist', $this->data);
     }
 
-    public function categoryArtistList($category = '') {
+    public function categoryArtistList($category = '', $location = '') {
         $userid = $this->session->userdata('aileenuser');
         // $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -88,13 +91,22 @@ class Artist_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+        
         $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
         $this->data['category_id'] = $category_id['category_id'];
+
+        $city_id = $this->db->select('city_id')->get_where('cities', array('slug' => $location))->row('city_id');
+        $this->data['location_id'] = '';
+        if($location != "")
+            $this->data['location_id'] = $city_id;
+
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
+        $this->data['q'] = $category;
+        $this->data['l'] = $location;
         $this->load->view('artist_live/categoryArtistList', $this->data);
     }
 
@@ -1662,26 +1674,11 @@ class Artist_live extends MY_Controller {
 
     // OPEN ALL LOCATION VIEW
     public function location() {
-        $userid = $this->session->userdata('aileenuser');
-        // $artresult = $this->checkisartistdeactivate();
-        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
-        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Categories - Artist Profile | Aileensoul";
-        $this->data['page'] = "location";
-        $this->data['ismainregister'] = false;
-        if($userid){
-            $this->data['ismainregister'] = true;
-            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        }
-        $this->load->view('artist_live/category', $this->data);
+        $this->load->view('artist_live/location', $this->data);
+    }
+    
+    public function artist_by_artist() {
+        $this->load->view('artist_live/artist_by_artist', $this->data);
     }
 
     // GET RESULT OF PERTICULAR LOCATION ARTIST LIST
@@ -1720,6 +1717,19 @@ class Artist_live extends MY_Controller {
     public function artistAllLocation() {
         $limit = $_GET['limit'];
         $artistAllLocation = $this->artistic_model->artistAllLocation($limit);
+        echo json_encode($artistAllLocation);
+    }
+
+    public function artistAllLocationList() {
+        $limit = ($_GET['limit']) ? $_GET['limit'] : 15;
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $artistAllLocation = $this->artistic_model->artistAllLocationList($page,$limit);
         echo json_encode($artistAllLocation);
     }
 
@@ -1764,5 +1774,24 @@ class Artist_live extends MY_Controller {
         
         $contition_array = array('status' => '1');
         $this->data['art_category'] = $this->common->select_data_by_condition('art_category', $contition_array, $data = 'category_id,art_category', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+    }
+
+    public function artist_by_category_location_ajax()
+    {        
+        $page = 1;
+        $limit = 20;
+        $artistCat = $this->artistic_model->get_artist_by_categories($page,$limit);
+        // print_r($artistCat);
+        // exit;
+        $artistCity = $this->artistic_model->artistAllLocationList($page,$limit); 
+        $all_link = array();
+        foreach ($artistCity['art_loc'] as $key => $value) {
+            foreach ($artistCat['art_cat'] as $jck => $jcv) {
+                $all_link[$value['location_slug']][$i]['name'] = $jcv['art_category']." In ".$value['art_location'];
+                $all_link[$value['location_slug']][$i]['slug'] = $jcv['category_slug']."-in-".$value['location_slug'];
+                $i++;
+            }
+        }
+        echo json_encode($all_link);
     }
 }
