@@ -48,7 +48,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
     <body class="profile-main-page">        
             <div class="middle-section middle-section-banner new-ld-page">
                 <?php echo $search_banner ?>
-                <div class="container">
+                <div class="container pt20">
                     <div class="left-part">
                     <form name="job-company-filter" id="job-company-filter">
                         <div class="left-search-box">

@@ -46,9 +46,14 @@
         {
              echo $header_profile;
         }
+        $noLogin = "";
+        if($user_id == "")
+        {
+            $noLogin = "new-ld-page";
+        }
         if($this->job_profile_set == 0 || $job_deactive > 0)
         {?>
-            <div class="middle-section middle-section-banner">
+            <div class="middle-section middle-section-banner <?php echo $noLogin;?>">
         <?php
             echo $search_banner;
         }

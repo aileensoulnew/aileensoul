@@ -142,6 +142,10 @@ app.controller('jobSearchController', function($scope, $http, $window) {
                 $scope.jobs.perpage_record = 5;
                 isProcessing = false;
             } else {
+                if(pagenum == 1)
+                {
+                    $scope.searchJob = data.jobData;
+                }
                 $scope.showLoadmore = false;
             }
         });

@@ -38,7 +38,7 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
         { ?>
             <div class="middle-section">
         <?php } ?>            
-            <div class="container">
+            <div class="container pt20">
                 <div class="left-part">
                     <form name="job-company-filter" id="job-company-filter">
                         <div class="left-search-box">

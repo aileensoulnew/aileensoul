@@ -148,6 +148,10 @@ app.controller('jobSearchNRController', function ($scope, $http,$window) {
                 }
                 else
                 {
+                    if(pagenum == 1)
+                    {                    
+                        $scope.searchJob = data.jobData;
+                    }
                     $scope.showLoadmore = false;                
                 }
 

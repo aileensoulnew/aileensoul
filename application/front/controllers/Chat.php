@@ -17,9 +17,11 @@ class Chat extends MY_Controller {
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
+        $this->load->model('user_model');
 
+        include ('main_profile_link.php');
+        include ('business_include.php');
         include('include.php');
-        include ('main_profile_link.php'); 
     }
 
     public function index($message_from_profile = '', $message_to_profile = '') {
