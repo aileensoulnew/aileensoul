@@ -74,7 +74,7 @@
                             <?php
                             $userid = $this->session->userdata('aileenuser');
 
-                            $id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(3)))->row()->user_id;
+                            $id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment_array()[count($this->uri->segment_array())]))->row()->user_id;
 
                             if ($userid == $id) {
                                 $user_id = $userid;
