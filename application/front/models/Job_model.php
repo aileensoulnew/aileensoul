@@ -1198,7 +1198,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
-        $this->db->where('r.user_id != $userid', '0');
+        $this->db->where('r.user_id != ', $userid);
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
@@ -1368,7 +1368,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
-        $this->db->where('r.user_id != $userid', '0');
+        $this->db->where('r.user_id != ', $userid);
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
