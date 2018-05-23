@@ -18,8 +18,8 @@ class Chat extends MY_Controller {
         $this->load->library('S3');
         //AWS access info end
 
+        include ('main_profile_link.php');
         include('include.php');
-        include ('main_profile_link.php'); 
     }
 
     public function index($message_from_profile = '', $message_to_profile = '') {
