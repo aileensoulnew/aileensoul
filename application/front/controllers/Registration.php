@@ -473,4 +473,92 @@ class Registration extends CI_Controller {
         return $slug;
     }
 
+    public function reg_insert_new() {
+
+        $errors = array();
+        $data = array();
+
+        $_POST = json_decode(file_get_contents('php://input'), true);
+
+        if (empty($_POST['first_name']))
+            $errors['errorFname'] = 'Firstname is required.';
+
+        if (empty($_POST['last_name']))
+            $errors['errorLname'] = 'Lastname is required.';
+
+        if (empty($_POST['email_reg']))
+            $errors['errorEmail'] = 'Email is required.';
+
+        if (empty($_POST['password_reg']))
+            $errors['errorPassword'] = 'Password is required.';
+
+        if (empty($_POST['selday']) || empty($_POST['selmonth']) || empty($_POST['selyear']))
+            $errors['errorDob'] = 'Date of Birth is required.';
+
+        if (empty($_POST['selgen']))
+            $errors['errorGender'] = 'Gender is required.';
+
+        $email_reg = trim($_POST['email_reg']);
+        $userdata = $this->user_model->getUserByEmail($email_reg);
+        if ($userdata) {
+            $errors['errorEmail'] = 'Email is already exist.';
+        }
+
+        if (!empty($errors)) {
+            $data['errors'] = $errors;
+        }
+        else
+        {
+            $dob = trim($_POST['selyear']) . '-' . trim($_POST['selmonth']) . '-' . trim($_POST['selday']);
+            $ip = $this->input->ip_address();
+            
+            $user_data = array(
+                'first_name' => trim($_POST['first_name']),
+                'last_name' => trim($_POST['last_name']),
+                'user_dob' => $dob,
+                'user_gender' => trim($_POST['selgen']),
+                'user_agree' => '1',
+                'created_date' => date('Y-m-d h:i:s', time()),
+                'verify_date' => date('Y-m-d h:i:s', time()),
+                'user_verify' => '0',
+                'user_slider' => '1',
+                'user_slug' => $this->setuser_slug(trim($_POST['first_name']) . '-' . trim($_POST['last_name']), 'user_slug', 'user'),
+            );
+            $user_insert = $this->common->insert_data_getid($user_data, 'user');
+            if ($user_insert) {
+                $user_login_data = array(
+                    'email' => strtolower($email_reg),
+                    'password' => md5(trim($_POST['password_reg'])),
+                    'is_delete' => '0',
+                    'status' => '1',
+                    'user_id' => $user_insert,
+                );
+                $user_login_insert = $this->common->insert_data_getid($user_login_data, 'user_login');
+          
+                $user_info_data = array(
+                    'user_id' => $user_insert,
+                );
+                $user_info_insert = $this->common->insert_data_getid($user_info_data, 'user_info');
+            }
+
+            $is_userBasicInfo = $this->user_model->is_userBasicInfo($user_insert);        
+            $is_userStudentInfo = $this->user_model->is_userStudentInfo($user_insert);
+            //for getting last insrert id
+            if ($user_insert) { 
+                $user_slug = $this->user_model->getUserSlugById($user_insert);
+                $this->session->set_userdata('aileenuser', $user_insert);
+                $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+                $datavl = "ok";
+                $data = array(
+                        "okmsg" => $datavl,
+                        "userid" => $user_insert,
+                        "is_userBasicInfo"=>$is_userBasicInfo,
+                        "is_userStudentInfo"=>$is_userStudentInfo,
+                        "userslug" => $user_slug['user_slug'],
+                        );
+            }
+        }
+        echo json_encode($data);
+    }
+
 }

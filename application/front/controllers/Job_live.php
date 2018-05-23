@@ -563,6 +563,15 @@ class Job_live extends MY_Controller {
 
     public function job_register_new()
     {
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $user_slug = $this->user_model->getUserSlugById($userid);
+        $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+        $userslug = $this->session->userdata('aileenuser_slug');
+        
+        $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
+        $StudentData = $this->user_model->getUserStudentData($userid,"*");
+        $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
+        $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
         $this->load->view('job_live/job_register', $this->data);
     }
 

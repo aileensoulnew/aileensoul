@@ -87,6 +87,9 @@
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
 
+
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
@@ -95,8 +98,11 @@
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script>
-            var base_url = '<?php echo base_url(); ?>';            
-            var app = angular.module('jobRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
+            var base_url = '<?php echo base_url(); ?>';
+            var profData = "<?php echo $professionData;?>";
+            var studData = "<?php echo $studentData?>";
+            var userid = "<?php echo $userid?>";
+            var app = angular.module('jobRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
 
             function experience(){
                 document.getElementById('exp_data').style.display = 'block';
