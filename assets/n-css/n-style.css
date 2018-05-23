@@ -2081,6 +2081,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .register-model label.error{right:0;}
 .common-form fieldset.fresher_radio label.error{top:20px;}
 .fresher_radio{padding:6px 8px;}
+.left_side_box_img a.profile-boxProfileCard-bg{display:inline-block; margin:5px 0 8px 4px;}
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 

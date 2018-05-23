@@ -294,8 +294,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', end
   position: absolute;
   top: 1px;
   left: 0;
-  height: 16px;
-  width: 16px;
+  height: 15px;
+  width: 15px;
   border:1px solid #5c5c5c;
   border-radius:4px;
   /*background:#fff;*/

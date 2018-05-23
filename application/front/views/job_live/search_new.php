@@ -85,7 +85,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>                                
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-companies">More Companies</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-companies">View More Companies</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -99,7 +99,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-categories">More Categories</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-categories">View More Categories</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -113,7 +113,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-location">More Cities</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-location">View More Cities</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -127,7 +127,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-skills">More Skills</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-skills">View More Skills</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
@@ -141,7 +141,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-designations">More Designation</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-designations">View More Designation</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="accordion" id="accordion2">
