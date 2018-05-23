@@ -136,14 +136,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                         <?php
                                         if ($this->session->userdata('aileenuser') == $recliveid) {
                                             if($this->job_profile_set == 0 && $job_deactive == 0):?>
-                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block a-inlineBlock" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
                                             <?php else: ?>
-                                            <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('recruiter/profile/'. $recliveid); ?>" title="<?php echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+                                            <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock a-inlineBlock"  href="<?php echo base_url('recruiter/profile/'. $recliveid); ?>" title="<?php echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
                                             <?php endif; } else {
                                                 if($this->job_profile_set == 0 && $job_deactive == 0): ?>
-                                                    <a class="profile-boxProfileCard-bg u-bgUserColor a-block" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
+                                                    <a class="profile-boxProfileCard-bg u-bgUserColor a-block a-inlineBlock" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);">
                                             <?php else: ?>
-                                                <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('recruiter/profile/' . $recliveid); ?>" title="<?php echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">                                               
+                                                <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock "  href="<?php echo base_url('recruiter/profile/' . $recliveid); ?>" title="<?php echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">                                               
                                                 <?php endif; } 
                                                 $filename = $this->config->item('rec_profile_thumb_upload_path') . $recdata[0]['recruiter_user_image'];
                                                 $s3 = new S3(awsAccessKey, awsSecretKey);
