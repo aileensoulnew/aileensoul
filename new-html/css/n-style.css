@@ -2026,10 +2026,14 @@ body.reg-form-cus{padding-bottom:0;}
 .bus-upload-img span{float:left;}
 .inner-form .login .bus-upload-img input{height:auto; border-bottom:0; width:auto; padding:0 !important;}
 .inner-form .login .bus-upload-img input:focus{border-bottom:0 !important;}
+.reg-form-cus .title p{letter-spacing:1px; color:#5c5c5c;}
 
-.tooltip-custom{position:absolute; width:200px; right:-250px; font-size:12px; color:#5c5c5c; line-height:1.5; background:#fff; padding:5px; text-align: center; border-radius: 10px; bottom:0; border-bottom-left-radius:0;}
-.tooltip-custom:before{content: ""; font-family: FontAwesome; left: -8px; position: absolute; bottom:0;
+.tooltip-custom{position:absolute; width:200px; right:-250px; font-size:12px; color:#5c5c5c; line-height:1.5; background:#fff; padding:5px; text-align: center; border-radius: 10px; bottom:0; border-bottom-left-radius:0; letter-spacing:1px;}
+.tooltip-custom:before{content: ""; font-family: FontAwesome; left: -11px; position: absolute; bottom:0;
 color: #fff; font-size: 25px; background:url('../n-images/tooltip-arrow-down.png'); width:15px; height:15px;}
+.left-tooltip .tooltip-custom{left:-250px;}
+.left-tooltip .tooltip-custom:before{background:url('../n-images/tooltip-arrow-right.png'); right:-12px; left:auto;}
+.left-tooltip .tooltip-custom{border-radius:10px; border-bottom-right-radius:0;}
 
 /***  sitemap  ***/
 body.sitemap{background:#f6f6f6;}
@@ -2177,6 +2181,8 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 	.update-browser{display:none;}
 	.all-detail-box .tab-pane ul li{width:25%;}
 	.title-div ul{width:90%;}
+	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left;}
+	.tooltip-custom::before{display:none;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
