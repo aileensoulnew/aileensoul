@@ -2,14 +2,14 @@
 
 <div class="search-banner" ng-controller="searchArtistController">
 	<?php 
-		if ($ismainregister == false) {
-	        $this->load->view('artist_live/login_header');
+		if ($ismainregister === false && $artist_isregister === false) {
+			$this->load->view('artist_live/login_header');
 	    }
      ?>
 	<div class="container">
 		<div class="text-right pt20 create-profile-btn">
 			<?php 
-				if ($ismainregister == true) { 
+				if ($ismainregister == true && $artist_isregister == true) { 
 			?>
 				<?php if($artist_isregister == false){ ?>
 					<a class="btn3" href="<?php echo artist_registration ?>">Create Artist Profile</a>

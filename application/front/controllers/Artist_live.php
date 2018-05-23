@@ -49,7 +49,6 @@ class Artist_live extends MY_Controller {
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
-
         $this->load->view('artist_live/index', $this->data);
         // }
     }

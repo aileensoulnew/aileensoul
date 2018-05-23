@@ -264,6 +264,7 @@ class Artistic_model extends CI_Model {
 
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
+
             return $result_array;
     } 
 
@@ -312,11 +313,8 @@ class Artistic_model extends CI_Model {
                     )
             ) 
             ORDER BY `art_post_id` DESC";
-            if($limit != '') {
-                $sql .= " LIMIT $start,$limit";
-            }
         $query = $this->db->query($sql);
-        $result_array = $query->row_array();
+        $result_array = $query->row()->total_record;
         return $result_array;
     }
     

@@ -420,9 +420,12 @@ $session_user_id = $this->session->userdata('aileenuser');
 		</script>
 
 		<script type="text/javascript">
-			if(!artist_isregister){
-				$('#register').modal('show');
-			}
+			$(document).ready(function(){
+				if(!artist_isregister){
+					$('#register').modal('show');
+				}
+			});
+
 			
 			function hidereactivepopup(){
 				$('#register').modal('hide');	

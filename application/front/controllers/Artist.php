@@ -122,7 +122,8 @@ class Artist extends MY_Controller {
     }
 
     public function profile_insert() {
-
+        echo "string";
+        exit;
         $userid = $this->session->userdata('aileenuser');
         $other_category = $this->input->post('othercategory');
         $contition_array = array('other_category' => $other_category, 'status' => '1');
@@ -11441,10 +11442,10 @@ class Artist extends MY_Controller {
         $artistic_post = $this->artistic_model->get_artist_home_post($userid,$page,$perpage);
         
         $artistic_post1 = $this->artistic_model->get_artist_home_post_count($userid);
-
+        
         $return_html = '';
         if (empty($_GET["total_record"])) {
-            $_GET["total_record"] = count($artistic_post1);
+            $_GET["total_record"] = $artistic_post1;
         }
 
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';

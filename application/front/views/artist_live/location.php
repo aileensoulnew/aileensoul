@@ -15,7 +15,7 @@
                             <div class="location-box">
                                 <ul data-aos="fade-up" data-aos-duration="1000">
                                     <li ng-repeat="location in artistAllLocation">
-                                        <a href="<?php echo artist_location ?>{{location.location_slug}}">
+                                        <a href="<?php echo artist_location ?>{{location.location_slug}}" target="_self">
                                             <div class="cus-cat-middle">
                                                 <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                                 <p ng-bind="location.art_location | capitalize"></p>

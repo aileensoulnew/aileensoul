@@ -14,7 +14,7 @@
                         <div class="cat-box">
                             <ul data-aos="fade-up" data-aos-duration="1000">
                                 <li ng-repeat="category in artistAllCategory">
-                                    <a href="<?php echo artist_category ?>{{category.category_slug}}">
+                                    <a href="<?php echo artist_category ?>{{category.category_slug}}" target="_self">
                                         <div class="cus-cat-middle">
                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                             <p ng-bind="category.art_category | capitalize"></p>
@@ -22,7 +22,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo artist_other_category; ?>">
+                                    <a href="<?php echo artist_other_category; ?>" target="_self">
                                         <div class="cus-cat-middle">
                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
                                             <p>Other</p>

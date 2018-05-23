@@ -7348,6 +7348,7 @@ Your browser does not support the audio tag.
 
         $contition_array = array('business_profile_post_id' => $post_id, 'status' => '1', 'is_delete' => '0');
         $commnetcount = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            
         $likeuser = $commnetcount[0]['business_like_user'];
         $countlike = $commnetcount[0]['business_likes_count'] - 1;
         $likelistarray = explode(',', $likeuser);
@@ -7361,8 +7362,21 @@ Your browser does not support the audio tag.
         $modal .= '<div class="modal-body padding_less_right">';
         $modal .= '<div class="like_user_list">';
         $modal .= '<ul>';
+
         foreach ($likelistarray as $key => $value) {
-            $bus_slug = $this->db->get_where('business_profile', array('user_id' => $value))->row()->business_slug;
+            // $bus_slug = $this->db->get_where('business_profile', array('user_id' => $value))->row()->business_slug;
+           
+            $sql = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
+                        FROM ailee_business_profile bp
+                        LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                        LEFT JOIN ailee_states st on bp.state = st.state_id
+                        WHERE user_id = '". $value ."'";
+
+            $query = $this->db->query($sql);
+            $bus_slug = $query->row();
+
+
+
             $business_fname = $this->db->get_where('business_profile', array('user_id' => $value, 'status' => '1'))->row()->company_name;
             $bus_image = $this->db->get_where('business_profile', array('user_id' => $value, 'status' => '1'))->row()->business_user_image;
             $bus_ind = $this->db->get_where('business_profile', array('user_id' => $value, 'status' => '1'))->row()->industriyal;
@@ -8620,7 +8634,7 @@ No Contacts Available.
 
     public function ajax_business_home_post() {
 // return html
-
+        include ('business_include.php');
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $business_login_slug = $this->data['business_login_slug'];
         $perpage = 4;
@@ -8645,10 +8659,7 @@ No Contacts Available.
 
         $business_profile_post = $this->business_model->get_business_home_post($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid,$page,$perpage);
         $business_profile_post_total_rec = $this->business_model->business_home_post_total_rec($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid);
-        // print_r($business_profile_post);
-        // print_r($business_profile_post_total_rec);
-        // exit;
-
+        
         $return_html = '';
 
         /*if (empty($_GET["total_record"])) {
@@ -8672,14 +8683,30 @@ No Contacts Available.
                 $post_business_like_user = $row['business_like_user'];
                 $post_created_date = $row['created_date'];
                 $post_posted_user_id = $row['posted_user_id'];
+                $slugname = ($row['city_name']) ? $row['city_name'] : $row['state_name'];
+                $row['business_slug'] = $row['business_slug']."-".$slugname;
                 $post_business_slug = $row['business_slug'];
                 $post_industriyal = $row['industriyal'];
                 $post_user_id = $row['user_id'];
                 $post_category = $this->db->get_where('industry_type', array('industry_id' => $post_industriyal, 'status' => '1'))->row()->industry_name;
                 $post_other_industrial = $row['other_industrial'];
+
+                // echo $post_posted_user_id;
+                // print_r($row);
+                // exit;
                 if ($post_posted_user_id) {
                     $posted_company_name = $this->db->get_where('business_profile', array('user_id' => $post_posted_user_id))->row()->company_name;
-                    $posted_business_slug = $this->db->get_where('business_profile', array('user_id' => $post_posted_user_id, 'status' => '1'))->row()->business_slug;
+                    // $posted_business_slug = $this->db->get_where('business_profile', array('user_id' => $post_posted_user_id, 'status' => '1'))->row()->business_slug;
+
+                     $sql = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                    FROM ailee_business_profile bp
+                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                    WHERE bp.status = '1' AND user_id = '". $post_posted_user_id ."'";
+
+                    $query = $this->db->query($sql);
+                    $posted_business_slug = $query->row()->business_slug;
+
                     $posted_category = $this->db->get_where('industry_type', array('industry_id' => $post_industriyal, 'status' => '1'))->row()->industry_name;
                     $posted_business_user_image = $this->db->get_where('business_profile', array('user_id' => $post_posted_user_id))->row()->business_user_image;
                 }
@@ -9170,7 +9197,16 @@ Your browser does not support the audio tag.
                     foreach ($businessprofiledata as $rowdata) {
                         $companyname = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id']))->row()->company_name;
 
-                        $slugname1 = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->business_slug;
+                        // $slugname1 = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->business_slug;
+
+                        $sql = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                        FROM ailee_business_profile bp
+                        LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                        LEFT JOIN ailee_states st on bp.state = st.state_id
+                        WHERE bp.status = '1' AND user_id = '". $rowdata['user_id'] ."'";
+
+                        $query = $this->db->query($sql);
+                        $slugname1 = $query->row()->business_slug;
 
                         $return_html .= '<div class = "all-comment-comment-box">
 <div class = "post-design-pro-comment-img">';

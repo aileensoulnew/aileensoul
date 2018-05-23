@@ -576,14 +576,32 @@ class Artist_userprofile extends CI_Controller {
             $start = 0;
 
             $contition_array = array('user_id' => $id, 'status' => '1', 'art_step' => 4);
-            $artisticdata = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            // $artisticdata = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $sql = "SELECT * FROM `ailee_art_reg` WHERE `user_id` = '". $id ."' AND `status` = '1' AND `art_step` = 4";
+
+            $query = $this->db->query($sql);
+            $artisticdata = $query->result_array();
+
 
             $contition_array = array('user_id' => $id, 'status' => 1, 'is_delete' => '0');
-            $artsdata = $this->common->select_data_by_condition('art_post', $contition_array, $data, $sortby = 'art_post_id', $orderby = 'DESC', $limit, $offset, $join_str = array(), $groupby = '');
+            // $artsdata = $this->common->select_data_by_condition('art_post', $contition_array, $data, $sortby = 'art_post_id', $orderby = 'DESC', $limit, $offset, $join_str = array(), $groupby = '');
 
-        $return_html = '';
+            $art_sql = "SELECT * FROM `ailee_art_post` WHERE `user_id` = '". $id ."' AND `status` = 1 AND `is_delete` = '0' ORDER BY `art_post_id` DESC";
+            
+            $art_query = $this->db->query($art_sql);
+            $artsdata = $art_query->result_array();
 
-        $artsdata1 = array_slice($artsdata, $start, $perpage);
+            $art_sql_limit = "SELECT * FROM `ailee_art_post` WHERE `user_id` = '". $id ."' AND `status` = 1 AND `is_delete` = '0' ORDER BY `art_post_id` DESC";
+
+            if($perpage != ""){
+                $art_sql_limit .= " LIMIT " . $start . "," . $perpage;
+            }
+            $art_query_limit = $this->db->query($art_sql_limit);
+            $artsdata1 = $art_query_limit->result_array();
+           
+            // echo $this->db->last_query();
+            // exit;
+        // $artsdata1 = array_slice($artsdata, $start, $perpage);
         //echo "<pre>"; print_r($artsdata1);  count($artsdata1); 
         //echo count($artsdata); die();
 
@@ -601,10 +619,10 @@ class Artist_userprofile extends CI_Controller {
                 $artisticdata = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
                 $return_html .= '<div id = "removepost' . $row['art_post_id'] . '">
-<div class = "profile-job-post-detail clearfix">
-<div class = "post-design-box">
-<div class = "post-design-top col-md-12" >
-<div class = "post-design-pro-img">';
+                    <div class = "profile-job-post-detail clearfix">
+                    <div class = "post-design-box">
+                    <div class = "post-design-top col-md-12" >
+                    <div class = "post-design-pro-img">';
                 $userid = $this->session->userdata('aileenuser');
                 $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $row['user_id']))->row()->art_user_image;
                 $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $row['posted_user_id']))->row()->art_user_image;

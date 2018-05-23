@@ -21,7 +21,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/business.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
         <?php } ?>
-
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
 
@@ -39,7 +39,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
         </style>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
+        
         <style type="text/css">
             .two-images, .three-image, .four-image{
                 height: auto !important;
@@ -49,21 +49,21 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push no-login">
         <?php if($ismainregister == false){ ?>
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-3 left-header text-center fw-479">
-                        <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
-                    </div>
-                    <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
-                        <div class="btn-right pull-right">
-                            <a href="javascript:void(0);" onclick="login_profile();" class="btn7 login_link">Login</a>
-                            <a href="javascript:void(0);" onclick="register_profile();" class="btn2 login_link">Create Business Account</a>
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-3 left-header text-center fw-479">
+                            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
+                        </div>
+                        <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
+                            <div class="btn-right pull-right">
+                                <a href="javascript:void(0);" onclick="login_profile();" class="btn7 login_link">Login</a>
+                                <a href="javascript:void(0);" onclick="register_profile();" class="btn2 login_link">Create Business Account</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
         <?php } else {
                     echo $business_header2; 
                 } 
