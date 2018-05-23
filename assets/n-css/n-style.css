@@ -1229,14 +1229,13 @@ header.profile-header .logo a{color:#5c5c5c;}
 /***  profile main page  ***/
 .profile-main-page .left-part{position:absolute;}
 .profile-main-page .right-part{position:absolute;}
-.left-search-box{border: 1px solid #d2d2d2;
-    margin-bottom: 10px;
-    width: 100%;
-    float: left;
-    border-radius: 4px;}
-.left-search-box h3{padding:10px; border-bottom:1px solid #d2d2d2;}
+.left-search-box{border: 1px solid #d2d2d2; margin-bottom: 10px; width: 100%; float: left; border-radius: 4px;}
+.left-search-box p a{color:#5c5c5c; letter-spacing:0.5px; position:relative; padding-left:30px;}
+.left-search-box p a:before{position:absolute; background:url('../n-images/more-link.png'); width:15px; height:15px; content:''; background-size:100%; top:1px; left:0;}
+.left-search-box p a:hover{color:#1b8ab9;}
+.left-search-box h3{padding:10px; border-bottom:1px solid #d2d2d2; font-size:25px; color:#5c5c5c; letter-spacing:1px;} 
 .search-listing{padding:5px 10px; margin:0; max-height:300px;}
-.search-listing li{padding:5px 0;list-style-type:none; margin: 0;}
+.search-listing li{padding:5px 0;list-style-type:none; margin: 0; letter-spacing:0.5px; color:#7b7b7b;}
 .list-type-bullet .search-listing li label{margin-bottom:0; width:100%; position:relative;}
 .list-type-bullet .search-listing li label:before{width:10px; height:10px; background:#5c5c5c; content:""; display:inline-block; border-radius:100%;}
 .list-type-bullet .search-listing li label a{color:#5c5c5c; padding-left:10px;}
@@ -1244,12 +1243,13 @@ header.profile-header .logo a{color:#5c5c5c;}
     font-family: 'FontAwesome';
     content: "\f078";    
     float: right;
+	font-size:15px;
 }
 .accordion-opened .accordion-toggle:after {    
     content: "\f054";    
 }
 .left-search-box .accordion-group h3{border-bottom:none;}
-.left-search-box .accordion-group h3 a{color:#5c5c5c;}
+.left-search-box .accordion-group h3 a{color:#5c5c5c; font-size:25px;}
 .left-search-box .accordion-group .search-listing{border-top:1px solid #d2d2d2;}
 .top-border-box{border:1px solid #d2d2d2; border-radius:4px; margin-bottom:10px;}
 .top-border-box h3{padding:10px;}
@@ -1925,12 +1925,12 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 
 .create-profile-btn{position:absolute; top:50px; right:80px;}
 
-.middle-section.job-reg-cus{padding-bottom:0;}
-.middle-section.art-reg-cus{padding-bottom:0;}
-.middle-section.rec-reg-cus{padding-bottom:0;}
-.middle-section.bus-reg-cus{padding-bottom:0;}
-.middle-section.free-hire-reg-cus{padding-bottom:0;}
-.middle-section.free-work-reg-cus{padding-bottom:0;}
+.middle-section.job-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.art-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.rec-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.bus-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.free-hire-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.free-work-reg-cus{padding-bottom:0; margin-bottom:0;}
 .job-reg-cus{background:url('../n-images/job-reg-cus.jpg'); background-size:100%; background-attachment:fixed;}
 .art-reg-cus{background:url('../n-images/art-img.jpg'); background-size:100%; background-attachment:fixed;}
 .rec-reg-cus{background:url('../n-images/recruiter-img.jpg'); background-size:100%; background-attachment:fixed;}
@@ -2026,9 +2026,10 @@ body.reg-form-cus{padding-bottom:0;}
 .bus-upload-img span{float:left;}
 .inner-form .login .bus-upload-img input{height:auto; border-bottom:0; width:auto; padding:0 !important;}
 .inner-form .login .bus-upload-img input:focus{border-bottom:0 !important;}
+.reg-form-cus .title p{letter-spacing:1px; color:#5c5c5c;}
 
-.tooltip-custom{position:absolute; width:200px; right:-250px; font-size:12px; color:#5c5c5c; line-height:1.5; background:#fff; padding:5px; text-align: center; border-radius: 10px; bottom:0; border-bottom-left-radius:0;}
-.tooltip-custom:before{content: ""; font-family: FontAwesome; left: -8px; position: absolute; bottom:0;
+.tooltip-custom{position:absolute; width:200px; right:-250px; font-size:12px; color:#5c5c5c; line-height:1.5; background:#fff; padding:5px; text-align: center; border-radius: 10px; bottom:0; border-bottom-left-radius:0; letter-spacing:1px;}
+.tooltip-custom:before{content: ""; font-family: FontAwesome; left: -11px; position: absolute; bottom:0;
 color: #fff; font-size: 25px; background:url('../n-images/tooltip-arrow-down.png'); width:15px; height:15px;}
 .left-tooltip .tooltip-custom{left:-250px;}
 .left-tooltip .tooltip-custom:before{background:url('../n-images/tooltip-arrow-right.png'); right:-12px; left:auto;}
@@ -2180,8 +2181,10 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 	.update-browser{display:none;}
 	.all-detail-box .tab-pane ul li{width:25%;}
 	.title-div ul{width:90%;}
-	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left;}
+	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:5px 0;}
 	.tooltip-custom::before{display:none;}
+	.left-tooltip .tooltip-custom:before{display:none;}
+	.left-tooltip .tooltip-custom{position:relative; right:auto; width:100%; text-align:left; left:auto; padding:5px 0;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -2347,6 +2350,10 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 	.job-reg-cus{background-size:cover;}
 	.rec-reg-cus{background-size:cover;}
 	.art-reg-cus{background-size:cover;}
+	.bus-reg-cus{background-size:cover;}
+	.free-hire-reg-cus{background-size:cover;}
+	.free-work-reg-cus{background-size:cover;}
+	.reg-form-cus .title p{font-size:14px; line-height:1.2;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/

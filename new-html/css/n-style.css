@@ -1925,12 +1925,12 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 
 .create-profile-btn{position:absolute; top:50px; right:80px;}
 
-.middle-section.job-reg-cus{padding-bottom:0;}
-.middle-section.art-reg-cus{padding-bottom:0;}
-.middle-section.rec-reg-cus{padding-bottom:0;}
-.middle-section.bus-reg-cus{padding-bottom:0;}
-.middle-section.free-hire-reg-cus{padding-bottom:0;}
-.middle-section.free-work-reg-cus{padding-bottom:0;}
+.middle-section.job-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.art-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.rec-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.bus-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.free-hire-reg-cus{padding-bottom:0; margin-bottom:0;}
+.middle-section.free-work-reg-cus{padding-bottom:0; margin-bottom:0;}
 .job-reg-cus{background:url('../n-images/job-reg-cus.jpg'); background-size:100%; background-attachment:fixed;}
 .art-reg-cus{background:url('../n-images/art-img.jpg'); background-size:100%; background-attachment:fixed;}
 .rec-reg-cus{background:url('../n-images/recruiter-img.jpg'); background-size:100%; background-attachment:fixed;}
@@ -2181,8 +2181,10 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 	.update-browser{display:none;}
 	.all-detail-box .tab-pane ul li{width:25%;}
 	.title-div ul{width:90%;}
-	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left;}
+	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:5px 0;}
 	.tooltip-custom::before{display:none;}
+	.left-tooltip .tooltip-custom:before{display:none;}
+	.left-tooltip .tooltip-custom{position:relative; right:auto; width:100%; text-align:left; left:auto; padding:5px 0;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -2348,6 +2350,10 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 	.job-reg-cus{background-size:cover;}
 	.rec-reg-cus{background-size:cover;}
 	.art-reg-cus{background-size:cover;}
+	.bus-reg-cus{background-size:cover;}
+	.free-hire-reg-cus{background-size:cover;}
+	.free-work-reg-cus{background-size:cover;}
+	.reg-form-cus .title p{font-size:14px; line-height:1.2;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
