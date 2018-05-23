@@ -76,7 +76,7 @@
 		<div class="">
 		<div class="title-div">
 			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#register">Register</a></li>
+				<li class="active"><a data-toggle="tab" href="#register">Create an Account</a></li>
 				<li><a data-toggle="tab" href="#basic-information">Basic Information</a></li>
 				<li><a data-toggle="tab" href="#job-registration">Job Registration</a></li>
 			</ul>
@@ -86,7 +86,8 @@
 				<div class="inner-form">
                             <div class="login">
                                 <div class="title">
-                                    <h1>Register</h1>
+                                    <h1>Sign Up</h1>
+									<p class="text-center">Let’s quickly create an account to get started.</p>
                                 </div>
                                 <form name="register_form" id="register_form" method="post" novalidate="novalidate">
                                     <div class="row">
@@ -287,7 +288,9 @@
                                                                                                         <option value="1901">1901</option>
                                                                                                         <option value="1900">1900</option>
                                                                                                 </select></span>
-
+										<div class="tooltip-custom">
+											Date of Birth will help us in providing better feeds and opportunity only for you.
+										</div>
                                     </div>
 
                                     <div class="form-group gender-custom">
@@ -327,20 +330,23 @@
 							</div>
 
 							<div class="form-group">
-								<label for="text">Who are you?<font color="red">*</font></label>
+								<label for="text">Who are you?(Job title)<font color="red">*</font></label>
 								<input type="text" name="jobTitle" class="form-control" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer.." >
 								<label ng-show="errorjobTitle" class="error ng-binding ng-hide"></label>
+								<div class="tooltip-custom">
+									Enter “seeking opportunity” if you are a fresher else enter your current job title.
+								</div>
 							</div>
 							<div class="form-group">
-								<label for="text">Where are you from?<font color="red">*</font></label>
-								<input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name">
+								<label for="text">What’s your current location?<font color="red">*</font></label>
+								<input type="text" name="city" id="city" class="form-control" placeholder="Enter City Name">
 								<label ng-show="errorcityList" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group cus_field">
 								<label for="text">What is your field?<font color="red">*</font></label>
 								<span class="select-field-custom">
 								<select name="field" id="field" class="ng-pristine ng-untouched ng-valid ng-empty">
-									<option value="" selected="selected">Select your field</option>
+									<option value="" selected="selected">Select Field</option>
 									<option value="0">Other</option>
 									<option value="0">Other</option>
 									<option value="0">Other</option>
@@ -377,21 +383,27 @@
 								<label for="text">What are you studying right now?<font color="red">*</font></label>
 								<input type="text" name="currentStudy" id="currentStudy" class="form-control" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 10th..">
 								<label class="error ng-binding ng-hide"></label>
+								<div class="tooltip-custom">
+									Enter the current qualification that you are pursuing like 10 th , 12 th , B.E, BCA, Medical, MBA
+								</div>
 							</div>
 							<div class="form-group">
-								<label for="text">Where are you from?<font color="red">*</font></label>
-								<input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name">
+								<label for="text">What’s your current location?<font color="red">*</font></label>
+								<input type="text" name="city" id="city" class="form-control" placeholder="Enter city name">
 								<label ng-show="errorcityList" class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
 								<label for="text">University / Collage / School<font color="red">*</font> </label>
-								<input type="text" name="university" id="university" class="form-control" placeholder="Enter your University / Collage / school">
+								<input type="text" name="university" id="university" class="form-control" placeholder="Enter name of your University / College / School">
 								<label class="error ng-binding ng-hide"></label>
 							</div>
 							<div class="form-group">
 								<label for="text">Interested field<font color="red">*</font></label>
 								<input type="text" name="jobTitle" id="jobTitle" class="form-control"placeholder="Ex:Seeking Opportunity,CEO, Enterpreneur, Founder, Singer, Photographer..">
 								<label class="error ng-binding ng-hide"></label>
+								<div class="tooltip-custom">
+									Enter the field name in which you want to make your career.
+								</div>
 							</div>
 							<p class="text-center submit-btn">
 								<button type="submit" id="submit" class="btn1">Next<span class="ajax_load" id="student_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
@@ -405,6 +417,7 @@
 					<div class="login">
 						<div class="title">
                             <h1>Job Registration</h1>
+							<p>Opportunities are waiting, complete your profile now.</p>
                         </div>
 						<form id="jobseeker_regform">
 							<div class="row">
@@ -421,7 +434,10 @@
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
 										<input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address*" value="" maxlength="255">
-										<a href="#" data-toggle="tooltip" data-placement="left" title="" class="pull-right email-note-cus" data-original-title=" Related notification email will be sent on provided email address kindly use regular email address."><img tooltips="" tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" alt="tooltip" src="n-images/tooltip.png"></a>
+										
+										<div class="tooltip-custom">
+											You will get job recommendations, recruiter messages, reminders, and promotional emails on provided email id.
+										</div>
 										
 									</div>
 								</div>
@@ -499,7 +515,10 @@
 								</div>
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
-										<input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" value="" placeholder="Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off">
+										<input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" value="" placeholder="Enter your current Job Title*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off">
+										<div class="tooltip-custom">
+											Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager*”
+										</div>
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-12">
@@ -550,7 +569,10 @@
 								<div class="col-sm-12 col-md-12">
 									<div class="form-group">
 									   
-									   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off">
+									   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred City*" class="ui-autocomplete-input" autocomplete="off">
+									   <div class="tooltip-custom">
+											Enter the location where you want to work
+										</div>
 									</div>
 								</div>
 								<div class="col-sm-12 col-md-12">
