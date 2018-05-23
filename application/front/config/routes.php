@@ -450,6 +450,12 @@ $route['job-profile/work-area'] = "job/job_skill_update";
 // $route['job/work-experience'] = "job/job_work_exp_update";//Old
 $route['job-profile/work-experience'] = "job/job_work_exp_update";
 
+$route['job-profile/create-account'] = "job_live/job_register_new";
+$route['job-profile/basic-info'] = "job_live/job_register_new";
+$route['job-profile/educational-info'] = "job_live/job_register_new";
+$route['job-profile/registration'] = "job_live/job_register_new";
+
+
 $route['job/registration'] = "job/job_reg";
 $route['job/registration/live-post'] = "job/job_reg";
 $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";

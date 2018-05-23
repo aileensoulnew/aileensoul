@@ -561,4 +561,29 @@ class Job_live extends MY_Controller {
         echo json_encode($searchJobs);
     }
 
+    public function job_register_new()
+    {
+        $this->load->view('job_live/job_register', $this->data);
+    }
+
+    public function job_register()
+    {
+        $this->load->view('job_live/job_register_main', $this->data);
+    }
+
+    public function job_basic_info()
+    {
+        $this->load->view('job_live/job_basic_info', $this->data);   
+    }
+
+    public function job_education_info()
+    {
+        $this->load->view('job_live/job_education_info', $this->data);   
+    }
+
+    public function job_create_profile()
+    {
+        $this->load->view('job_live/job_create_profile', $this->data);
+    }
+
 }
