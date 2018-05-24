@@ -104,7 +104,7 @@ header('Expires: ' . $date);
                                 <?php } else {
                                 ?>
 
-                                <div class="text-center mob-pb20 introduce_button col-md-6 col-sm-6"><a href="<?php echo base_url('freelance-hire') ?>" class="btn-new1" title="Freelance hire Profile Take me in" target="_blank">Freelance Hire Profile Take me in</a></div>
+                                <div class="text-center mob-pb20 introduce_button col-md-6 col-sm-6"><a href="<?php echo base_url('freelance-employer') ?>" class="btn-new1" title="Freelance hire Profile Take me in" target="_blank">Freelance Hire Profile Take me in</a></div>
 
                             <?php
                             }
@@ -169,7 +169,7 @@ header('Expires: ' . $date);
                                 <?php } else {
                                 ?>
 
-                                <div class="text-center pb20 introduce_button col-md-6 col-sm-6"><a href="<?php echo base_url('freelance-hire') ?>" class="btn-new1" title="Freelance hire Profile Take me in" target="_blank">Freelance Hire Profile Take me in</a></div>
+                                <div class="text-center pb20 introduce_button col-md-6 col-sm-6"><a href="<?php echo base_url('freelance-employer') ?>" class="btn-new1" title="Freelance hire Profile Take me in" target="_blank">Freelance Hire Profile Take me in</a></div>
 
                             <?php
                             }

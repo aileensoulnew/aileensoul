@@ -214,7 +214,7 @@ class Freelancer_hire extends MY_Controller {
                 // }
                 redirect('hire-freelancer', refresh);
             } else {
-                redirect('freelance-hire', refresh);
+                redirect('freelance-employer', refresh);
             }
         }
     }
@@ -750,7 +750,7 @@ class Freelancer_hire extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
         $freelancerhire_deactive = $this->data['freelancerhire_deactive'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
         if ($freelancerhire_deactive) {
-            redirect('freelance-hire');
+            redirect('freelance-employer');
         }
 //if user deactive profile then redirect to freelancer_hire/freelancer_hire/freelancer_hire_basic_info  End
     }
