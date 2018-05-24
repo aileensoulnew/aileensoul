@@ -378,11 +378,14 @@
         </script>
         <script>
             var header_all_profile = '<?php echo $header_all_profile; ?>';
-        </script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+        </script>        
         <!-- FIELD VALIDATION JS END -->
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/recommen_candidate.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <?php
-            if (IS_REC_JS_MINIFY == '0') {
+            /*if (IS_REC_JS_MINIFY == '0') {
                 ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
@@ -393,6 +396,6 @@
         <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/recommen_candidate.js'); ?>"></script>
-        <?php } ?>
+        <?php }*/ ?>
     </body>
 </html>

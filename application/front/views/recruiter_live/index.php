@@ -59,9 +59,9 @@
                         <h2>Put a Full Stop at Your Employee Hunting Process</h2>
                         <p>
                             <?php if(!$isrecruiteractivate){ ?>
-                                <a href="#" class="btn5">Create Recruiter Profile</a></p>
+                                <a href="#" class="btn5 hide">Create Recruiter Profile</a></p>
                             <?php } else{ ?>
-                                <a href="<?php echo base_url('recruiter/reactivateacc'); ?>" class="btn5">Reactivate Recruiter Profile</a>
+                                <a href="<?php echo base_url('recruiter/reactivateacc'); ?>" class="btn5 hide">Reactivate Recruiter Profile</a>
                             <?php } ?>
                         </p>
                     </div>

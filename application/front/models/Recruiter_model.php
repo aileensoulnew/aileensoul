@@ -91,7 +91,7 @@ class Recruiter_model extends CI_Model {
         $query = $this->db->query($sql);        
         //echo $this->db->last_query();exit;
         $recommen_candid_totrec = $query->row_array();
-        return $recommen_candid_totrec;
+        return $recommen_candid_totrec['total_record'];
     }
    
 }
