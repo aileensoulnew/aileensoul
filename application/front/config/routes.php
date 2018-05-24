@@ -196,7 +196,8 @@ $route['freelance'] = "freelancer";
 
 
 //FREELANCER HIRE ROUTES SETTINGS
-$route['freelance-hire'] = "freelancer_hire_live/freelancer_hire";
+// $route['freelance-hire'] = "freelancer_hire_live/freelancer_hire";
+$route['freelance-employer'] = "freelancer_hire_live/freelancer_hire";
 $route['freelance-hire/home'] = "freelancer_hire_live/recommen_candidate";
 $route['freelance-hire/employer-details'] = "freelancer_hire_live/freelancer_hire_profile";
 $route['freelance-hire/employer-details/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
