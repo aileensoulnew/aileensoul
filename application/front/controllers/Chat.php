@@ -3747,11 +3747,11 @@ class Chat extends MY_Controller {
                 $usrsrch .= '<div class="name">';
                 $usrsrch .= '' . $user['first_name'] . ' ' . $user['last_name'] . '<br></div>';
                 $usrsrch .= '<div class="status' . $user['user_id'] . '" style=" width: 240px;
-    color: #003;    max-height: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-">';
+                color: #003;    max-height: 20px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                ">';
                 $message = $user['message'];
                 $message = preg_replace('[^(<br( \/)?>)*|(<br( \/)?>)*$]', '', $message);
                 $message = str_replace('%26amp;', '&', $message);
@@ -3823,7 +3823,7 @@ class Chat extends MY_Controller {
             }
             $notmsg .= '">';
             $notmsg .= '<a href="' . base_url() . 'chat/abc/' . $message_from_profile . '/' . $message_to_profile . '/' . $msg['user_id'] . '/' . $not[0]['not_id'] . '" class="clearfix msg_dot" style="padding:0px!important;">';
-//            $notmsg .= '<a href="' . base_url() . 'chat/abc/' . $msg['user_id'] . '/' . $message_from_profile . '/' . $message_to_profile . '/' . $not[0]['not_id'] . '" class="clearfix msg_dot" style="padding:0px!important;">';
+            //$notmsg .= '<a href="' . base_url() . 'chat/abc/' . $msg['user_id'] . '/' . $message_from_profile . '/' . $message_to_profile . '/' . $not[0]['not_id'] . '" class="clearfix msg_dot" style="padding:0px!important;">';
             $notmsg .= '<div class="notification-database"><div class="notification-pic">';
 
 
@@ -3866,15 +3866,17 @@ class Chat extends MY_Controller {
         if ($userlist) {
             $seeall = '<a href="' . base_url() . 'chat/abc/' . $message_from_profile . '/' . $message_to_profile . '/' . $userlist[0]['user_id'] . '" >See All</a>';
         } else {
-            $seeall = '<div class="fw">
-  <div class="art-img-nn">
-                                                <div class="art_no_post_img">
-                                                    <img src="' . base_url() . 'assets/img/icon_no_message.png">
-                                                </div>
-                                                <div class="art_no_post_text_c">
-                                                    No Messages Available.
-                                                </div>
-                             </div></div>';
+            $seeall = '';
+            $notmsg = ' <div class="fw">
+                            <div class="art-img-nn">
+                                <div class="art_no_post_img">
+                                    <img src="' . base_url() . 'assets/img/icon_no_message.png">
+                                </div>
+                                <div class="art_no_post_text_c">
+                                    No Messages Available.
+                                </div>
+                            </div>
+                        </div>';
         }
         echo json_encode(
                 array(
