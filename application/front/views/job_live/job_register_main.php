@@ -2,8 +2,8 @@
     <div class="title-div">
         <ul class="nav nav-tabs">
             <li id="ca" class="active"><a href="#">Create an Account</a></li>
-            <li><a href="<?php echo base_url();?>job-profile/basic-info">Basic Information</a></li>
-            <li><a href="<?php echo base_url();?>job-profile/registration">Job Registration</a></li>
+            <li><a href="#" ng-click="submitRegiForm()">Basic Information</a></li>
+            <li><a href="#" ng-click="submitRegiForm()">Job Registration</a></li>
         </ul>
     </div>
     <div class="tab-content">
@@ -104,7 +104,7 @@
                             <a tabindex="10" href="#">Terms and Condition</a> and <a tabindex="11" href="#">Privacy policy</a>.
                         </p>
                         <p class="text-center">
-                            <button type="submit" class="btn1" tabindex="9">Create An Account</button>
+                            <button type="submit" class="btn1" tabindex="9">Create an Account</button>
                         </p>
                     </form>
                 </div>

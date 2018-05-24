@@ -438,9 +438,126 @@ app.controller('jobBasicInfoController', function ($scope, $http, $location, $wi
 
 app.controller('jobEduInfoController', function ($scope, $http, $location, $window,$timeout) {
     $scope.title = "Job By Designation, Job Profile | Aileensoul";    
-    $scope.jobByDesc = {};
-    $scope.jobs = {};
-    var isProcessing = false;    
+    
+    $scope.user = {};
+
+    $scope.jobTitle = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitle',
+            data: 'q=' + $scope.user.jobTitle,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    }
+
+    $('#student_info_ajax_load').hide();                
+
+    $scope.currentStudy = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/degreeList',
+            data: 'q=' + $scope.user.currentStudy,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.degreeSearchResult = data;
+        });
+    }
+
+    $scope.cityList = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchCityList',
+            data: 'q=' + $scope.user.cityList,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.citySearchResult = data;
+        });
+    }
+
+    $scope.universityList = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchUniversityList',
+            data: 'q=' + $scope.user.universityName,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.universitySearchResult = data;
+        });
+    }
+
+    $scope.studentInfoValidate = {
+        rules: {
+            currentStudy: {
+                required: true,
+            },
+            city: {
+                required: true,
+            },
+            university: {
+                required: true,
+            },
+            jobTitle: {
+                required: true,
+            }
+        },
+        messages: {
+            currentStudy: {
+                required: "Current study is required.",
+            },
+            city: {
+                required: "City is required.",
+            },
+            university: {
+                required: "University name is required.",
+            },
+            jobTitle: {
+                required:  "Interested field is required.",
+            }
+        }
+    };
+    $scope.submitStudentInfoForm = function () {
+        if ($scope.studentinfo.validate()) {
+            angular.element('#studentinfo #submit').addClass("form_submit");
+            $('#student_info_ajax_load').show();
+            $http({
+                 method: 'POST',
+                url: base_url + 'user_info/ng_student_info_insert',
+                data: $scope.user,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                if (success.data.errors) {
+                    $scope.errorcurrentStudy = success.data.errors.currentStudy;
+                    $scope.errorcityList = success.data.errors.cityList;
+                    $scope.erroruniversityName = success.data.errors.universityName;
+                } else {
+                if (success.data.is_success == '1') {
+                        angular.element('#studentinfo #submit').removeClass("form_submit");
+                        $('#student_info_ajax_load').hide();                        
+                        var title = "Job Registrion"
+                        var url = base_url+"job-profile/registration";
+                        var obj = {Title: title, Url: url};
+                        history.pushState(obj, obj.Title, obj.Url);
+                    } else {
+                        return false;
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    };   
 });
 
 app.controller('jobCreateProfileController', function ($scope, $http, $location, $window,$timeout) {

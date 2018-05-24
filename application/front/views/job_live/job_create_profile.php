@@ -1,8 +1,8 @@
 <div class="">
     <div class="title-div">
         <ul class="nav nav-tabs">
-            <li><a href="<?php echo base_url();?>job-profile/create-account">Create an Account</a></li>
-            <li><a href="<?php echo base_url();?>job-profile/basic-info">Basic Information</a></li>
+            <li><a href="#">Create an Account</a></li>
+            <li><a href="#">Basic Information</a></li>
             <li class="active"><a href="#">Job Registration</a></li>
         </ul>
     </div>

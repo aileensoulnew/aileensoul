@@ -1,9 +1,9 @@
 <div class="">
     <div class="title-div">
         <ul class="nav nav-tabs">
-            <li><a href="<?php echo base_url();?>job-profile/create-account">Create an Account</a></li>
+            <li><a href="#">Create an Account</a></li>
             <li class="active"><a href="#">Basic Information</a></li>
-            <li><a href="<?php echo base_url();?>job-profile/registration">Job Registration</a></li>
+            <li><a href="#" ng-click="submitStudentInfoForm()">Job Registration</a></li>
         </ul>
     </div>
     <div class="tab-content">
@@ -13,26 +13,26 @@
                     <div class="title">
                         <h1>Educational Information</h1>
                     </div>
-                    <form name="studentinfo" id="studentinfo"class="">
+                    <form name="studentinfo" id="studentinfo"class="" ng-submit="submitStudentInfoForm()" ng-validate="studentInfoValidate">
                         <div class="form-group">
                             <label for="text">What are you studying right now?<font color="red">*</font></label>
-                            <input type="text" name="currentStudy" id="currentStudy" class="form-control" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 10th..">
-                            <label class="error ng-binding ng-hide"></label>
+                            <input type="text" name="currentStudy" id="currentStudy" class="form-control" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 10th.." ng-keyup="currentStudy()" ng-model="user.currentStudy" typeahead="item as item.degree_name for item in degreeSearchResult | filter:$viewValue" autocomplete="off">
+                            <label ng-show="errorcurrentStudy" class="error">{{errorcurrentStudy}}</label>
                         </div>
                         <div class="form-group">
                             <label for="text">Where are you from?<font color="red">*</font></label>
-                            <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name">
-                            <label ng-show="errorcityList" class="error ng-binding ng-hide"></label>
+                            <input type="text" name="city" id="city" class="form-control" placeholder="Enter your city name"  ng-keyup="cityList()" ng-model="user.cityList" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                            <label ng-show="errorcityList" class="error">{{errorcityList}}</label>
                         </div>
                         <div class="form-group">
                             <label for="text">University / Collage / School<font color="red">*</font> </label>
-                            <input type="text" name="university" id="university" class="form-control" placeholder="Enter your University / Collage / school">
-                            <label class="error ng-binding ng-hide"></label>
+                            <input type="text" name="university" id="university" class="form-control" placeholder="Enter your University / Collage / school" ng-model="user.universityName" ng-keyup="universityList()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off">
+                            <label ng-show="erroruniversityName" class="error">{{erroruniversityName}}</label>
                         </div>
                         <div class="form-group">
                             <label for="text">Interested field<font color="red">*</font></label>
-                            <input type="text" name="jobTitle" id="jobTitle" class="form-control"placeholder="Ex:Seeking Opportunity,CEO, Enterpreneur, Founder, Singer, Photographer..">
-                            <label class="error ng-binding ng-hide"></label>
+                            <input type="text" name="jobTitle" id="jobTitle" class="form-control"placeholder="Ex:Seeking Opportunity,CEO, Enterpreneur, Founder, Singer, Photographer.." ng-keyup="jobTitle()" ng-model="user.jobTitle" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+                            <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
                         </div>
                         <p class="text-center submit-btn">
                             <a href="<?php echo base_url();?>job-profile/basic-info" class="btn1">Back to Basic Infomation</a>

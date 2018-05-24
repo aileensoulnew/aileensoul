@@ -56,9 +56,11 @@ class Dashboard extends MY_Controller {
 
     public function logout() {
 
+
         //PROGRESSBAR JOB START
         $userid = $this->session->userdata('aileenuser');
         $this->progressbar();
+
         if ($this->data['count_profile'] == 100) {
             $data = array(
                 'progressbar' => '1',
@@ -73,17 +75,16 @@ class Dashboard extends MY_Controller {
             );
 
             $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
-        }
+        }        
         //PROGRESSBAR JOB END
         if ($this->session->userdata('searchkeyword')) {
             $this->session->unset_userdata('searchkeyword');
         }
         if ($this->session->userdata('searchplace')) {
             $this->session->unset_userdata('searchplace');
-        }
+        }        
         //LOGOUT START       
-        if ($this->session->userdata('aileenuser')) {
-
+        if ($this->session->userdata('aileenuser')) {            
 
             $this->session->unset_userdata('aileenuser');
             $this->session->unset_userdata('aileenuser_slug');
@@ -92,6 +93,7 @@ class Dashboard extends MY_Controller {
             $this->session->sess_destroy();
             redirect(base_url(), 'refresh');
         }
+
         //LOGOUT END  
     }
 
@@ -103,6 +105,9 @@ class Dashboard extends MY_Controller {
         $path = $CI->config->item('cache_path');
 
         $cache_path = ($path == '') ? APPPATH . 'cache/' : $path;
+        if (!is_dir($cache_path)) {
+            return false;
+        }
 
         $handle = opendir($cache_path);
         while (($file = readdir($handle)) !== FALSE) {
