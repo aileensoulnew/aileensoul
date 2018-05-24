@@ -121,9 +121,7 @@ class Artist extends MY_Controller {
         }
     }
 
-    public function profile_insert() {
-        echo "string";
-        exit;
+    public function profile_insert() {        
         $userid = $this->session->userdata('aileenuser');
         $other_category = $this->input->post('othercategory');
         $contition_array = array('other_category' => $other_category, 'status' => '1');
