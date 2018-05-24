@@ -448,7 +448,21 @@ app.controller('jobBasicInfoController', function ($scope, $http, $location, $wi
 });
 
 app.controller('jobEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Job By Designation, Job Profile | Aileensoul";    
+    $scope.title = "Job By Designation, Job Profile | Aileensoul";
+
+    $("#currentStudy").focusin(function(){
+        $('#cstooltip').show();
+    });
+    $("#currentStudy").focusout(function(){
+        $('#cstooltip').hide();
+    });
+
+    $("#jobTitle").focusin(function(){
+        $('#iftooltip').show();
+    });
+    $("#jobTitle").focusout(function(){
+        $('#iftooltip').hide();
+    });
     
     $scope.user = {};
 
@@ -574,6 +588,28 @@ app.controller('jobEduInfoController', function ($scope, $http, $location, $wind
 app.controller('jobCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
     // alert(first_name);
     $scope.title = "Job By Designation, Job Profile | Aileensoul";
+
+    $("#email").focusin(function(){
+        $('#emtooltip').show();
+    });
+    $("#email").focusout(function(){
+        $('#emtooltip').hide();
+    });
+
+    $("#job_title").focusin(function(){
+        $('#jttooltip').show();
+    });
+    $("#job_title").focusout(function(){
+        $('#jttooltip').hide();
+    });
+
+    $("#cities2").focusin(function(){
+        $('#lotooltip').show();
+    });
+    $("#cities2").focusout(function(){
+        $('#lotooltip').hide();
+    });
+
     $scope.user = {};
     $scope.jobTitle = function () {
         $http({

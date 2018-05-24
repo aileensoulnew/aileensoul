@@ -12,6 +12,7 @@
                 <div class="login">
                     <div class="title">
                         <h1>Job Registration</h1>
+                        <p>Opportunities are waiting, complete your profile now.</p>
                     </div>
                     <form id="jobseeker_regform" name="jobseeker_regform" ng-submit="submitJobRegiForm()" ng-validate="jobRegiValidate">
                         <div class="row">
@@ -30,8 +31,9 @@
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address*" maxlength="255"  ng-model="user.email" ng-init="user.email ='<?php echo $job_data['email']; ?>'">
-
-                                    <a href="#" data-toggle="tooltip" data-placement="left" title="" class="pull-right email-note-cus" data-original-title=" Related notification email will be sent on provided email address kindly use regular email address."><img tooltips="" tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" alt="tooltip" src="<?php echo base_url(); ?>assets/img/tooltip.png"></a>
+                                    <div id="emtooltip" class="tooltip-custom" style="display: none;">
+                                        You will get job recommendations, recruiter messages, reminders, and promotional emails on provided email id.
+                                    </div>
                                     <label ng-show="errorEmail" class="error">{{errorEmail}}</label>
                                 </div>
                             </div>
@@ -110,7 +112,10 @@
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" value="" placeholder="Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobTitle" ng-keyup="jobTitle()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue">
-                                </div>
+                                    <div id="jttooltip" class="tooltip-custom" style="display: none;">
+                                        Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager
+                                    </div>
+                                </div>                                
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -131,9 +136,11 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
-                                <div class="form-group">
-                                   
+                                <div class="form-group">                                   
                                    <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off" ng-keyup="cityList()" ng-model="user.cityList" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                                   <div id="lotooltip" class="tooltip-custom" style="display: none;">
+                                        Enter the location where you want to work
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
