@@ -11,17 +11,17 @@
                         <li class="active"><a href="#"><span class="hidden-xs">Jobs</a></li>
                     </ul>
                 </div>
-                <div class="all-detail-box-all-jobs-list">
+                <div class="all-jobs-list">
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="job-category">
                             <div class="location-box">
-                                <ul data-aos="fade-up" data-aos-duration="1000">
+                                <ul class="jobs-listing" data-aos="fade-up" data-aos-duration="1000">
                                     <li ng-repeat="(key, allJobVal) in jobByJobs">
                                         <h4>{{key}}</h4>
-                                        <ul>
+                                        <ul class="jobs-listing-main">
                                             <li ng-repeat="(inJobsKey, inJobsval) in allJobVal">
                                                 <h5>{{inJobsKey}}</h5>
-                                                <ul>
+                                                <ul class="jobs-listing-sub">
                                                     <li ng-repeat="(byJobKey, byJobVal) in inJobsval">      
                                                         <a href="<?php //echo base_url(); ?>{{byJobVal.slug}}" target="_self"> {{byJobVal.name}} </a>
                                                     </li>

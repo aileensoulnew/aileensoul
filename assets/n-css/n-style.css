@@ -1214,6 +1214,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 	-moz-transform:    translate(-50%, -50%);
 	-ms-transform:     translate(-50%, -50%);
 	-o-transform:      translate(-50%, -50%);
+	overflow:hidden;
   
 }	
 .all-cat-box p{font-size:18px; padding:10px 0 0; color:#5c5c5c; line-height:1; letter-spacing:1px;}		
@@ -1753,8 +1754,25 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 
 /*** end  browse job  ***/
 /*** job cat, skill, company page  ***/
-.all-detail-box{border:1px solid #d2d2d2; border-top:0; width:100%; float:left;}
-.list-box-custom .nav-tabs > li > a{color:#5c5c5c;}
+.all-detail-box{border:1px solid #d2d2d2; border-top:0; width:100%; float:left; min-height:500px;}
+.list-box-custom .nav-tabs > li > a{color:#5c5c5c; font-size:18px;}
+.list-box-custom .nav-tabs>li.active>a, .list-box-custom .nav-tabs>li.active>a:focus, .list-box-custom .nav-tabs>li.active>a:hover {color:#1b8ab9;}
+.jobs-listing{width:100%; float:left;}
+.all-jobs-list .jobs-listing h4{font-size:18px; padding-bottom:5px; border-bottom:1px solid #d2d2d2; color:#5c5c5c;}
+.all-jobs-list .jobs-listing h5{font-size:16px; text-transform:capitalize; color:#7b7b7b; font-weight:bold;}
+.all-jobs-list{border:1px solid #d2d2d2; border-top:0; width:100%; float:left; letter-spacing:1px;}
+.all-jobs-list .jobs-listing{padding:20px;}
+.all-jobs-list .jobs-listing h4{margin:0;}
+.all-jobs-list .jobs-listing li{list-style-type:none;}
+.all-jobs-list .jobs-listing > li{list-style-type:none; width:100%; float:left; padding-bottom:15px;}
+.all-jobs-list .jobs-listing-main{padding:0;}
+.all-jobs-list .jobs-listing-main > li{width:33.33%; float:left; padding:0 10px 0;}
+.all-jobs-list .jobs-listing-main > li:first-child{padding-left:0;}
+.all-jobs-list .jobs-listing-main ul{padding:0;}
+.all-jobs-list .jobs-listing-sub li{padding-bottom:12px; line-height:1.2;}
+.all-jobs-list .jobs-listing-sub li a{line-height:1; color:#7b7b7b; font-size:14px; }
+.all-jobs-list .jobs-listing-sub li a:hover{color:#1b8ab9;}
+
 /*** end job cat, skill, company page  ***/
 .bs-example .sr-only{
     position: inherit;
@@ -2082,6 +2100,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .common-form fieldset.fresher_radio label.error{top:20px;}
 .fresher_radio{padding:6px 8px;}
 .left_side_box_img a.profile-boxProfileCard-bg{display:inline-block; margin:5px 0 8px 4px;}
+.post-img img{border:none;}
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
