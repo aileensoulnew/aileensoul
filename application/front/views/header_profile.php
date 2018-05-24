@@ -43,7 +43,7 @@ if($browser == "Firefox")
                         $isjob_segment = strpos($first_segment, 'jobs');
                         $isbusiness_segment = strpos($first_segment, 'business');
                     ?>
-                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-search' && $first_segment != 'business-profile' && $isbusiness_segment === FALSE) && ($first_segment != 'artist' && $first_segment != 'find-artist' && $isartist_segment === FALSE) && ($first_segment != 'job' && $first_segment != 'job-search'  && $isjob_segment === FALSE) && ($first_segment != 'recruiter')) { ?>
+                    <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-search' && $first_segment != 'business-profile' && $isbusiness_segment === FALSE) && ($first_segment != 'artist' && $first_segment != 'find-artist' && $isartist_segment === FALSE) && ($first_segment != 'job' && $first_segment != 'job-search'  && $isjob_segment === FALSE) && ($first_segment != 'recruiter' && $first_segment != 'freelance-employer')) { ?>
                         <form ng-submit="search_submit" action="<?php echo base_url('searchh') ?>">
                             <input type="text" name="q" placeholder="Search.." id="search">
                         </form>
