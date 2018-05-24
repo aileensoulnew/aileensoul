@@ -3,7 +3,7 @@
         <ul class="nav nav-tabs">
             <li><a href="#">Create an Account</a></li>
             <li class="active"><a href="#">Basic Information</a></li>
-            <li><a href="<?php echo base_url();?>job-profile/registration">Job Registration</a></li>
+            <li><a href="#" ng-click="submitBasicInfoForm()">Job Registration</a></li>
         </ul>
     </div>
     <div class="tab-content">
