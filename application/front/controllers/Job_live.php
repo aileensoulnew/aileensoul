@@ -592,6 +592,19 @@ class Job_live extends MY_Controller {
 
     public function job_create_profile()
     {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['job_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+        $contition_array = array('is_delete' => '0', 'status' => '1', 'industry_name !=' => "Others");
+        if ($userid) {
+            $search_condition = "((is_other = '1' AND user_id = $userid) OR (is_other = '0'))";
+        } else {
+            $search_condition = "(is_other = '0')";
+        }
+        $university_data = $this->data['industry'] = $this->common->select_data_by_search('job_industry', $search_condition, $contition_array, $data = 'industry_id,industry_name', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('is_delete' => '0', 'industry_name' => "Others", 'is_other' => '0');
+        $search_condition = "((status = '1'))";
+        $this->data['other_industry'] = $this->common->select_data_by_search('job_industry', $search_condition, $contition_array, $data = 'industry_id,industry_name', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $this->load->view('job_live/job_create_profile', $this->data);
     }
 

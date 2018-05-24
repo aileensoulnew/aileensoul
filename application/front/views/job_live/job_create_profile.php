@@ -13,35 +13,38 @@
                     <div class="title">
                         <h1>Job Registration</h1>
                     </div>
-                    <form id="jobseeker_regform">
+                    <form id="jobseeker_regform" name="jobseeker_regform" ng-submit="submitJobRegiForm()" ng-validate="jobRegiValidate">
                         <div class="row">
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="first_name" id="first_name" tabindex="1" placeholder="Enter your First Name*" maxlength="35">
+                                    <input class="form-control" type="text" name="first_name" id="first_name" tabindex="1" placeholder="Enter your First Name*" maxlength="35" ng-model="user.first_name" ng-init="user.first_name ='<?php echo $job_data['first_name']; ?>'">
+                                    <label ng-show="errorFname" class="error">{{errorFname}}</label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="last_name" id="last_name" tabindex="2" placeholder="Enter your Last Name*" maxlength="35">
+                                    <input class="form-control" type="text" name="last_name" id="last_name" tabindex="2" placeholder="Enter your Last Name*" maxlength="35"  ng-model="user.last_name" ng-init="user.last_name ='<?php echo $job_data['last_name']; ?>'">
+                                    <label ng-show="errorLname" class="error">{{errorLname}}</label>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address*" value="" maxlength="255">
+                                    <input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address*" maxlength="255"  ng-model="user.email" ng-init="user.email ='<?php echo $job_data['email']; ?>'">
+
                                     <a href="#" data-toggle="tooltip" data-placement="left" title="" class="pull-right email-note-cus" data-original-title=" Related notification email will be sent on provided email address kindly use regular email address."><img tooltips="" tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" alt="tooltip" src="<?php echo base_url(); ?>assets/img/tooltip.png"></a>
-                                    
+                                    <label ng-show="errorEmail" class="error">{{errorEmail}}</label>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group cus-radio-box">
                                     <label>Fresher <font color="red">*</font> : </label>
                                     <div class="main_raio">
-                                        <input type="radio" value="Fresher" tabindex="4" id="test1" name="fresher" class="radio_job form-control" onclick="not_experience()">
+                                        <input ng-model="user.fresher" type="radio" value="Fresher" tabindex="4" id="test1" name="fresher" class="radio_job form-control" onclick="not_experience()">
                                         <label for="test1" class="point_radio">Yes</label>
                                     </div>
 
                                     <div class="main_raio">
-                                        <input  type="radio" value="Experience" tabindex="5" id="test2" class="radio_job form-control" name="fresher" onclick="experience()">
+                                        <input ng-model="user.fresher" type="radio" value="Experience" tabindex="5" id="test2" class="radio_job form-control" name="fresher" onclick="experience()">
                                         <label for="test2" class="point_radio">No</label>
                                     </div>
                                     <div class="fresher-error"></div>
@@ -53,7 +56,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="form-group fw">
                                             <span class="select-field-custom">
-                                            <select tabindex="6" autofocus="" name="experience_year" id="experience_year" class="experience_year keyskil" onchange="expyear_change();">
+                                            <select tabindex="6" ng-model="user.experience_year" autofocus="" name="experience_year" id="experience_year" class="experience_year keyskil" onchange="expyear_change();">
                                                 <option value="" selected="" option="" disabled="">Year</option>
                                                 <option value="0 year">0 year</option>
                                                 <option value="1 year">1 year</option>
@@ -83,7 +86,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="form-group fw"> 
                                             <span class="select-field-custom">
-                                            <select tabindex="7" id="experience_month" class="experience_month keyskil">
+                                            <select ng-model="user.experience_month" tabindex="7" id="experience_month" class="experience_month keyskil">
                                                 <option value="" selected="" option="" disabled="">Month</option>
                                                 <option>0 month</option>
                                                 <option>1 month</option>
@@ -106,50 +109,23 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" value="" placeholder="Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off">
+                                    <input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" value="" placeholder="Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobTitle" ng-keyup="jobTitle()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" id="skills2" style="text-transform: capitalize;" name="skills" tabindex="9" size="90" placeholder="Enter SKills*" class="ui-autocomplete-input" autocomplete="off">
+                                    <input class="form-control" id="skills2" style="text-transform: capitalize;" name="skills" tabindex="9" size="90" placeholder="Enter SKills*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobSkill" ng-keyup="jobSkill()" typeahead="item as item.value for item in skillSearchResult | filter:$viewValue">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="industry" id="industry" tabindex="10">
-                                            <option value="" selected="selected">Select industry*</option>
-                                            <option value="382">Account</option>
-                                            <option value="1">Accounting</option>
-                                            <option value="303">Accounting-Tax/Consulting</option>
-                                            <option value="328">Advertising/PR/Event Management</option>
-                                            <option value="351">Agriculture/Forestry/Fishing</option>
-                                            <option value="3">Airlines/Aviation</option>
-                                            <option value="4">Alternative Dispute Resolution </option>
-                                            <option value="5">Alternative Medicine</option>
-                                            <option value="343">Analyst</option>
-                                            <option value="6">Animation</option>
-                                            <option value="7">Apparel &amp; Fashion</option>
-                                            <option value="321">Apparel/Garments</option>
-                                            <option value="8">Architecture &amp; Interior</option>
-                                            <option value="300">Architecture/Interior Design</option>
-                                            <option value="9">Arts &amp; Crafts</option>
-                                            <option value="314">Automobiles/Auto Component/Auto Ancillary</option>
-                                            <option value="10">Automotive</option>
-                                            <option value="11">Aviation &amp; Aerospace</option>
-                                            <option value="12">Banking</option>
-                                            <option value="13">Biotechnology</option>
-                                            <option value="304">Biotechnology/Pharmaceutical/Medicine</option>
-                                            <option value="14">Brodcast Media</option>
-                                            <option value="15">Bulding Materials</option>
-                                            <option value="16">Business Supplies &amp; Equipment</option>
-                                            <option value="17">Capital Markets</option>
-                                            <option value="340">Catering/Food Services/Restaurant</option>
-                                            <option value="18">Chemicals</option>
-                                            <option value="19">Civic &amp; Social Organization</option>
-                                            <option value="20">Civil Engineering</option>
-                                            <option value="21">Commercial Real Estate</option>
-                                            
+                                        <select name="industry" id="industry" tabindex="10" ng-model="user.industry">
+                                            <option value="" selected="selected" disabled="">Select industry</option>
+                                            <?php foreach ($industry as $indu) { ?>
+                                            <option value="<?php echo $indu['industry_id']; ?>"><?php echo $indu['industry_name']; ?></option>
+                                            <?php } ?>
+                                            <option value="<?php echo $other_industry[0]['industry_id']; ?>"><?php echo $other_industry[0]['industry_name']; ?></option>
                                         </select>
                                     </span>
                                 </div>
@@ -157,7 +133,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
                                    
-                                   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off">
+                                   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off" ng-keyup="cityList()" ng-model="user.cityList" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
@@ -165,7 +141,7 @@
                                    <div class="job_reg text-center">
                                 
                                       <!-- <input title="Register" type="submit" id="submit" name="" value="Register" tabindex="12"> -->
-                                      <button id="submit" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                      <button id="submit" type="submit" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="jobreg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                    </div>
                                 </div>
                             </div>

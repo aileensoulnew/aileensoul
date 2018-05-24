@@ -102,6 +102,7 @@
             var profData = "<?php echo $professionData;?>";
             var studData = "<?php echo $studentData?>";
             var userid = "<?php echo $userid?>";
+            var first_name = "asd";
             var app = angular.module('jobRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
 
             function experience(){
