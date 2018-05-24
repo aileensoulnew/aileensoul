@@ -355,7 +355,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
 .custom-user-list .post-img-mainuser{padding:18px 0;}
 .mes{text-align:center;}
 .model_ok_cancel .btn1{margin:5px; font-size:14px; line-height:1;}
-.model_ok_cancel{padding-top:5px;}
+.model_ok_cancel{padding-top:20px;}
 .last-item-box .contact-name{padding:0 15px; line-height:1.2; padding-bottom:5px;}
 /***  end all follow part  ***/
 
@@ -1174,7 +1174,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .new-ld-page .search-banner.cus-search-bnr .container{padding-top:0;}
 .recruiter-main .search-banner{/*background:url("../n-images/bnr-rec.jpg"); margin-bottom:20px; padding:25px 0; background-size:cover;*/}
 .search-box{}
-.search-box .search-input input{width:47%; margin-right:2%; height:50px; font-size:17px; font-style:italic; color:#7b7b7b;}
+.search-box .search-input input{width:47%; margin-right:2%; height:50px; font-size:17px !important; font-style:italic; color:#7b7b7b;}
 .search-box .search-input input.city-input{margin-right:0;}
 .search-box .btn1{font-size:22px !important; padding:12px 21px;}
 .search-box input.btn1{display:inline-block; width:auto; height:auto;}
@@ -1789,6 +1789,14 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .all-jobs-list .jobs-listing-sub li a{line-height:1; color:#7b7b7b; font-size:14px; }
 .all-jobs-list .jobs-listing-sub li a:hover{color:#1b8ab9;}
 
+.art-bus-cus{padding:20px;}
+.art-bus-cus ul{padding:0;}
+.art-bus-cus h4{border-bottom:1px solid #d2d2d2; padding-bottom:5px; color:#5c5c5c;}
+.art-bus-cus > li{list-style-type:none; width:100%; float:left; padding-bottom:25px;}
+.art-bus-cus .art-bus-all li{width:33.33%; float:left; list-style-type:none; padding:0 10px 10px 0;}
+.art-bus-cus .art-bus-all li a{color:#7b7b7b; font-size:14px;}
+.art-bus-cus .art-bus-all li a:hover{color:#1b8ab9;}
+
 /*** end job cat, skill, company page  ***/
 .bs-example .sr-only{
     position: inherit;
@@ -1891,12 +1899,12 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .post-field label{width: 100%;}
 tags-input .tags{box-shadow: none; -webkit-box-shadow:none; -moz-box-shadow:none; border-radius: 4px; border:1px solid #cccccc;}
 tags-input .tags.focused{box-shadow: none; -webkit-box-shadow:none; -moz-box-shadow:none;}
-.post-opportunity-field, #field, #ask_field {margin-top: 5px; padding-left: 5px; color: #7a7a7a;}
+.post-opportunity-field, #field, #ask_field {padding-left: 5px; color: #7a7a7a;}
 .select-field-custom select{-webkit-appearance: none;
    -moz-appearance:    none;
    appearance:         none;}
 .select-field-custom{position: relative; width:100%; float:left;}
-.select-field-custom:after{content: "\f0d7"; font-family: FontAwesome; font-size: 16px; color: #aaa; right: 15px; top: 0; padding: 0 0 2px;
+.select-field-custom:after{content: "\f0d7"; font-family: FontAwesome; font-size: 16px; color: #aaa; right: 15px; top: 5px; padding: 0 0 2px;
 position: absolute; pointer-events: none;}
 .select-field-custom select {
   color: #777; 
@@ -2113,6 +2121,22 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .pop-content-cus h2{color:#7b7b7b; padding:15px; margin-bottom:15px; font-size:24px;}
 .pop-content-cus p{color:#5c5c5c; padding:15px;}
 .pop-content-cus p .btn1{margin:0 10px; display:inline-block;}
+
+
+/***  art and bus css  ***/
+.art-all-comment{width:100%; float:left;}
+.inputtype-edit-comment .editable_text{margin-left:8px !important; }
+.audio_img{margin:0 auto;}
+.post-design-mid .audio_main_div{width:300px; margin:0 auto; position:relative;}
+.pdf_img{text-align:center;}
+.cover-pic{left:0;}
+
+/***  job css  ***/
+.message button.modal-close{background:#1b8ab9; color:#fff;}
+.cnclbtn, .okbtn{transition: all .2s; color: #fff; padding: 8px 18px; background-color: #1b8ab9 !important;
+margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decoration: none;}
+.okbtn{margin-right:20px;}
+.cnclbtn:hover, .okbtn:hover {background-color: #156f95 !important; color:#fff;}
 
 /*** new css  ***/
 .modal.message-box .modal-body{text-align:left;}

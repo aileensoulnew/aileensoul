@@ -31,7 +31,7 @@
                 echo $header_profile;
             }
         ?>
-        <div class="middle-section middle-section-banner new-ld-page">
+        <div class="middle-section new-ld-page">
                 <?php if($isartistactivate == false || $artist_isregister == false || !$session_user_id){ 
                     echo $search_banner; 
                 }

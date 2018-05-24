@@ -1918,9 +1918,9 @@ label.cameraButton input[accept*=camera]{
     margin:0!important
 }
 .message button{
-    background-color:#fff;
+    /*background-color:#fff;
     color:#1B8AB9;
-    border-color:#1B8AB9
+    border-color:#1B8AB9*/
 }
 .biderror .modal-body span{
     padding:0;

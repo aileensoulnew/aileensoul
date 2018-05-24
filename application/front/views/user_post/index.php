@@ -234,7 +234,7 @@
                                                     </script>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                    <label class="pb5">For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
                                                     <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                                     <span class="select-field-custom">
                                                         <select name="field" ng-model="opp.field" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
@@ -799,7 +799,7 @@
                                     </script>
                                 </div>
                                 <div class="form-group">
-                                    <label>For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                    <label class="pb5">For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
                                     <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                     <span class="select-field-custom">
                                         <select name="field" ng-model="opp.field" id="field" ng-change="other_field(this)" class="post-opportunity-field">

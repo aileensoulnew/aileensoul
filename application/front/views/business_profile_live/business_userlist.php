@@ -36,16 +36,16 @@
                                 </div>
                                 <ul class="search-listing custom-scroll">
                                     <li ng-repeat="category in businessCategory">
-                                        <label class="">
-                                            <p class="pull-left" style="width: 45px;">
-                                                <input class="categorycheckbox" type="checkbox" name="{{category.industry_name}}" value="{{category.industry_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
-                                            </p>
-                                            <p class="pull-left">{{category.industry_name | capitalize}}</p>
-                                            <p class="pull-right">({{category.count}})</p>
+                                        <label class="control control--checkbox">
+											<span>{{category.industry_name | capitalize}}
+												<span class="pull-right">({{category.count}})</span>
+											</span>
+                                            <input class="category-filter" type="checkbox" name="{{category.industry_name}}" value="{{category.industry_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+											<div class="control__indicator"></div>
                                         </label>
                                     </li>
                                 </ul>
-                                <p class="text-right p10"><a href="<?php echo base_url('business-by-categories') ?>">More Categories</a></p>
+                                <p class="text-left p10"><a href="<?php echo base_url('business-by-categories') ?>">View More Categories</a></p>
                             </div>
                             <!-- TOP Location -->
                             <div class="left-search-box list-type-bullet">
@@ -54,18 +54,16 @@
                                 </div>
                                 <ul class="search-listing custom-scroll">
                                     <li ng-repeat="location in businessLocation">
-                                        <label class="">
-                                            <p class="pull-left" style="width: 45px;">
-                                                <input class="locationcheckbox" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
-                                            </p>
-                                            <p class="pull-left">
-                                                {{location.city_name | capitalize}}
-                                            </p>
-                                            <p class="pull-right">({{location.count}})</p>
+                                        <label class="control control--checkbox">
+											<span>{{location.city_name | capitalize}}
+												<span class="pull-right">({{location.count}})</span>
+											</span>
+                                            <input class="category-filter" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+											<div class="control__indicator"></div>
                                         </label>
                                     </li>
                                 </ul>
-                                <p class="text-right p10"><a href="<?php echo base_url('business-by-location') ?>">More Location</a></p>
+                                <p class="text-left p10"><a href="<?php echo base_url('business-by-location') ?>">View More Location</a></p>
                             </div>
 
                             <?php echo $left_footer; ?>

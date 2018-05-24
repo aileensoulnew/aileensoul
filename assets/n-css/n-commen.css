@@ -210,6 +210,7 @@ border: 1px solid #fff;
 	padding: 5px 25px;
 	display:inline-block; background:#5c5c5c;}
 .btn9:hover{background:#fff; color:#5c5c5c;}
+.btn9:focus{color:#fff;}
 
 .follow-btn{padding: 3px 10px; background: rgb(44, 83, 158);
     background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -605,7 +606,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 	z-index: 1000;
 	font-weight: normal;
 	font-family: Arial;
-	padding: 8px 13px;
+	padding: 8px 10px;
 	font-size: 18px;
 	background-color: #fff;
 	border-top-left-radius: 9px;
@@ -1142,6 +1143,15 @@ footer ul li a:hover{
 .sub-header .dropdown.open .dropdown-menu{width:360px; border:1px solid #d2d2d2;}
 .sub-header .dropdown.open .dropdown-menu{left:0 !important; top:31px; margin:0;}
 .sub-header .dropdown.open .dropdown-menu li{width:100%; border-right:0; padding:0;}
+.sub-header .dropdown.open .content li{padding:10px; border-bottom:1px solid #d2d2d2;}
+.sub-header .dropdown.open .content li:hover{background:#e9f4f8;}
+.sub-header .dropdown.open .content li .addcontact-right a.add-left-true{border-color:transparent;}
+.sub-header .dropdown.open .content li .addcontact-right a.add-left-true:hover{border-color:#1b8ab9;}
+.sub-header .dropdown.open .content li .addcontact-right a.add-right-true{float: right; background-color: #fff; 
+border: 1px solid #1b8ab9;}
+.sub-header .dropdown.open .content li .addcontact-right a.add-right-true i{color:#1b8ab9;}
+.sub-header .dropdown.open .content li .addcontact-right a.add-right-true:hover{background:#e9f4f8;}
+.sub-header .dropdown.open .content li .addcontact-right a.add-left-true i{color:#fff;}
 .sub-header .dropdown.open .dropdown-menu li a{color:#777;}
 .sub-header .dropdown.user-id .dropdown-menu li a{padding:6px 10px; line-height:1;}
 .sub-header .dropdown.user-id .dropdown-menu li a span{float:left; margin-right:10px;}

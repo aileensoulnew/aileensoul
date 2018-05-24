@@ -29,7 +29,7 @@
                 echo $header_profile; 
             }
        ?>            
-        <div class="middle-section middle-section-banner new-ld-page">
+        <div class="middle-section new-ld-page">
             <?php if($ismainregister == false || $isbusiness_deactive == true || $isbusiness_register == false){ echo $search_banner; }  ?>
             <?php //if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
             <div class="container pt20 searchcontainer">
@@ -40,17 +40,18 @@
                         </div>
                         <ul class="search-listing custom-scroll">
                             <li ng-repeat="category in businessCategory">
-                                <label class="">
-                                    <p class="pull-left" style="width: 45px;">
-                                        <input class="categorycheckbox" type="checkbox" name="{{category.industry_name}}" value="{{category.industry_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
-                                    </p>
-                                    <p class="pull-left">{{category.industry_name | capitalize}}</p>
-                                    <p class="pull-right">({{category.count}})</p>
+                                <label class="control control--checkbox">
+                                    <span>{{category.industry_name | capitalize}}
+										<span class="pull-right">({{category.count}})</span>
+									</span>
+                                    <input class="categorycheckbox" type="checkbox" name="{{category.industry_name}}" value="{{category.industry_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                   <div class="control__indicator"></div>
+
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10">
-                            <a href="<?php echo business_category_list; ?>">More Categories</a>
+                        <p class="text-left p10">
+                            <a href="<?php echo business_category_list; ?>">View More Categories</a>
                         </p>
                     </div>
                     <div class="left-search-box list-type-bullet">
@@ -59,19 +60,17 @@
                         </div>                        
                         <ul class="search-listing" style="list-style: none;">
                             <li ng-repeat="location in businessLocation">
-                                <label class="pointer">
-                                    <p class="pull-left" style="width: 45px;">
-                                        <input class="locationcheckbox" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
-                                    </p>
-                                    <p class="pull-left">
-                                        {{location.city_name | capitalize}}
-                                    </p>
-                                    <p class="pull-right">({{location.count}})</p>
+                                <label class="control control--checkbox">
+                                    <span>{{location.city_name | capitalize}}
+										<span class="pull-right">({{location.count}})</span>
+									</span>
+                                    <input class="locationcheckbox" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+									<div class="control__indicator"></div>
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10">
-                            <a href="<?php echo business_location_list; ?>">More Locations</a>
+                        <p class="text-left p10">
+                            <a href="<?php echo business_location_list; ?>">View More Locations</a>
                         </p>
                     </div>
                     <div class="custom_footer_left fw">

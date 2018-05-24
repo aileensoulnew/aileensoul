@@ -21,14 +21,14 @@
                 </ul>
             </div>
 
-            <div class="all-detail-box-all-jobs-list">
+            <div class="all-jobs-list">
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="job-category">
                         <div class="location-box">
-                            <ul data-aos="fade-up" data-aos-duration="1000">
+                            <ul class="art-bus-cus" data-aos="fade-up" data-aos-duration="1000">
                                 <li ng-repeat="(key, allJobVal) in businessByBusiness">
                                     <h4>{{key}}</h4>
-                                    <ul>
+                                    <ul class="art-bus-all">
                                         <!-- <li ng-repeat="(inJobsKey, inJobsval) in allJobVal"> -->
                                             <!-- <ul> -->
                                                 <li ng-repeat="(byJobKey, byJobVal) in allJobVal">      
