@@ -179,8 +179,9 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         {
             if(login_user_id == "" || job_deactive == 1)
             {                
-                if(login_user_id == "")
-                    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+                if(login_user_id == ""){
+                    $('.biderror .mes').html("<div class='pop_content'>Please <a href='"+base_url+"login'>Login</a> or <a href='"+base_url+"job-profile/create-account'>Register</a>.</div>");
+                }
                 else if(job_deactive == 1)
                     $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
                 $('#bidmodal').modal('show');
@@ -233,8 +234,9 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         {
             if(login_user_id == "" || job_deactive == 1)
             {
-                if(login_user_id == "")
-                    $('.biderror .mes').html("<div class='pop_content'>Please Login or Register.</div>");
+                if(login_user_id == ""){
+                   $('.biderror .mes').html("<div class='pop_content'>Please <a href='"+base_url+"login'>Login</a> or <a href='"+base_url+"job-profile/create-account'>Register</a>.</div>");
+                }
                 else if(job_deactive == 1)
                     $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
                 $('#bidmodal').modal('show');
