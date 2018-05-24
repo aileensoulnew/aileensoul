@@ -2092,6 +2092,12 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .site-box ul.blog-inner-link a{color:#7b7b7b;}
 .site-box ul.blog-inner-link a:hover{color:#1b8ab9; text-decoration:none;}
 
+/***    ***/
+.pop-content-cus{padding:40px 20px !important; color:#7b7b7b; width:75%; margin:0 auto;} 
+.pop-content-cus h2{color:#7b7b7b; padding:15px; margin-bottom:15px; font-size:24px;}
+.pop-content-cus p{color:#5c5c5c; padding-top:15px;}
+.pop-content-cus p a{margin:0 10px;}
+
 /*** new css  ***/
 .modal.message-box .modal-body{text-align:left;}
 .job_reg .cus_btn_sub{color:#fff;}
