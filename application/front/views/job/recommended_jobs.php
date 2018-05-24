@@ -134,7 +134,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="">
                                 <h3>Top Company</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="company in jobCompany">                                   
                                     <label class="control control--checkbox"><span ng-bind="company.company_name | capitalize"></span>
                                         <input type="checkbox" class="company-filter" ng-model="jobcompany" name="jobcompany[]" ng-value="{{company.rec_id}}" ng-change="applyJobFilter()"/>
@@ -142,13 +142,13 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>                                
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-companies">More Companies</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-companies">View More Companies</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
                                 <h3>Top Categories</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="category in jobCategory">
                                     <label class="control control--checkbox"><span ng-bind="category.industry_name | capitalize"></span>
                                         <input type="checkbox" class="category-filter" ng-model="categories" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
@@ -156,13 +156,13 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-categories">More Categories</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-categories">View More Categories</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
                                 <h3>Top Cities</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="city in jobCity">
                                     <label class="control control--checkbox"><span ng-bind="city.city_name | capitalize"></span>
                                         <input type="checkbox" class="location-filter" ng-model="location" name="location[]" ng-value="{{city.city_id}}" ng-change="applyJobFilter()"/>
@@ -170,13 +170,13 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-location">More Cities</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-location">View More Cities</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
                                 <h3>Top Skills</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="skill in jobSkill">
                                     <label class="control control--checkbox"><span ng-bind="skill.skill | capitalize"></span>
                                         <input type="checkbox" class="skills-filter" ng-model="skills" name="skill[]" ng-value="{{skill.skill_id}}" ng-change="applyJobFilter()"/>
@@ -184,13 +184,13 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-skills">More Skills</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-skills">View More Skills</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="">
                                 <h3>Top Designation</h3>
                             </div>
-                            <ul class="search-listing custom-scroll">
+                            <ul class="search-listing">
                                 <li ng-repeat="jd in jobDesignation">
                                     <label class="control control--checkbox"><span ng-bind="jd.job_title | capitalize"></span>
                                         <input type="checkbox" class="jds-filter" ng-model="jds" name="jds[]" ng-value="{{jd.title_id}}" ng-change="applyJobFilter()"/>
@@ -198,7 +198,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-right p10"><a href="<?php echo base_url(); ?>jobs-by-designations">More Designation</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>jobs-by-designations">View More Designation</a></p>
                         </div>
                         <div class="left-search-box">
                             <div class="accordion" id="accordion2">

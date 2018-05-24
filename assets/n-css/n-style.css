@@ -1,6 +1,6 @@
 /***  new flow  ***/
 /***  page 1  ***/
-.middle-section{padding:80px 0 50px;}
+.middle-section{padding:95px 0 50px;}
 .middle-section-banner{padding:54px 0 0px;}
 .middle-section-banner.new-ld-page{padding:0;}
 .register .middle-section{padding:120px 0 50px;}
@@ -1760,7 +1760,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .jobs-listing{width:100%; float:left;}
 .all-jobs-list .jobs-listing h4{font-size:18px; padding-bottom:5px; border-bottom:1px solid #d2d2d2; color:#5c5c5c;}
 .all-jobs-list .jobs-listing h5{font-size:16px; text-transform:capitalize; color:#7b7b7b; font-weight:bold;}
-.all-jobs-list{border:1px solid #d2d2d2; border-top:0; width:100%; float:left; letter-spacing:1px;}
+.all-jobs-list{border:1px solid #d2d2d2; border-top:0; width:100%; float:left; letter-spacing:1px; min-height:500px;}
 .all-jobs-list .jobs-listing{padding:20px;}
 .all-jobs-list .jobs-listing h4{margin:0;}
 .all-jobs-list .jobs-listing li{list-style-type:none;}
