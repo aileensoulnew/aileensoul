@@ -201,7 +201,7 @@
                                                     <?php if (($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'add-projects') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'edit-projects')) { ?>
                                                         <a title="cancel" class="add_post_btnc" tabindex="16"  onclick="return leave_page(9)"><?php echo $this->lang->line("cancel"); ?></a>
                                                     <?php } else { ?>
-                                                        <a title="cancel" tabindex="16" class="add_post_btnc" <?php if ($pages == 'professional') { ?> href="<?php echo base_url('freelance-hire/home'); ?>" <?php } else { ?> href="javascript:history.back()"  <?php } ?>>Cancel</a>
+                                                        <a title="cancel" tabindex="16" class="add_post_btnc" <?php if ($pages == 'professional') { ?> href="<?php echo base_url('hire-freelancer'); ?>" <?php } else { ?> href="javascript:history.back()"  <?php } ?>>Cancel</a>
                                                     <?php } ?>
                                                     <input type="submit" tabindex="17" id="submit"  class="add_post_btns" name="submit" value="Post">    
                                                 </fieldset>
@@ -290,7 +290,7 @@
                             {
                                 if (clicked_id == 1)
                                 {
-                                    location.href = '<?php echo base_url('freelance-hire/home'); ?>';
+                                    location.href = '<?php echo base_url('hire-freelancer'); ?>';
                                 }
                                 if (clicked_id == 2)
                                 {
@@ -340,7 +340,7 @@
                                 if (clicked_id == 9)
                                 {
                                     if (page == 'professional') {
-                                        location.href = '<?php echo base_url('freelance-hire/home'); ?>';
+                                        location.href = '<?php echo base_url('hire-freelancer'); ?>';
                                     } else {
                                         location.href = 'javascript:history.back()';
                                     }
@@ -393,7 +393,7 @@
                                 success: function (data) {
                                     if (clicked_id == 1)
                                     {
-                                        window.location = "<?php echo base_url('freelance-hire/home'); ?>";
+                                        window.location = "<?php echo base_url('hire-freelancer'); ?>";
                                     } else if (clicked_id == 2)
                                     {
                                         window.location = "<?php echo base_url('freelance-hire/employer-details'); ?>";

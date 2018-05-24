@@ -28,7 +28,7 @@
                                     <?php if (($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'add-projects') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'edit-projects')) { ?>
                                     <a title="Home" href="javascript:void(0);" class="button" onclick="return leave_page(1)"><?php echo $this->lang->line("home"); ?></a>
                                     <?php } else { ?>
-                                    <a title="Home" href="<?php echo base_url('freelance-hire/home'); ?>"><?php echo $this->lang->line("home"); ?>
+                                    <a title="Home" href="<?php echo base_url('hire-freelancer'); ?>"><?php echo $this->lang->line("home"); ?>
                                         </a>
                                     <?php } ?>
                                 </li>

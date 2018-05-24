@@ -72,7 +72,7 @@
                 $this->recruiter_profile_set = 1;
             }
             if(!empty($freelancer_hire_profile_count) &&  count($freelancer_hire_profile_count)>0){
-                $this->freelance_hire_profile_link = base_url("freelance-hire/home");
+                $this->freelance_hire_profile_link = base_url("hire-freelancer");
                 $this->freelance_hire_profile_set = 1;
             }
              if(!empty($freelancer_apply_profile_count) &&  count($freelancer_apply_profile_count)>0){

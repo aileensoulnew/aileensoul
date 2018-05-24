@@ -9,7 +9,7 @@ $userid = $this->session->userdata('aileenuser');
                 <div class="col-md-6 mob-p0">
                     <ul class="sub-menu">
                         <li>
-                            <a href="<?php echo base_url('freelance-hire/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Employer Profile</a>
+                            <a href="<?php echo base_url('hire-freelancer'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Employer Profile</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i> Message

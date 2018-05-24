@@ -83,7 +83,7 @@ class Freelancer_hire_live extends MY_Controller {
 				} else if ($jobdata['free_hire_step'] == 2) {
 					redirect('freelance-hire/professional-information', refresh);
 				} else if ($jobdata['free_hire_step'] == 3) {
-					redirect('freelance-hire/home', refresh);
+					redirect('hire-freelancer', refresh);
 				}
 			} else {
 				redirect('freelance-hire/registration', refresh);
@@ -109,7 +109,7 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['isfreelancerhireactivate'] = true;			
 		}
 		if ($hireuser && !$this->data['isfreelancerhireactivate']) {
-			redirect('freelance-hire/home', refresh);
+			redirect('hire-freelancer', refresh);
 		} else {
 			$userid = $this->session->userdata('aileenuser');
 			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -223,11 +223,11 @@ class Freelancer_hire_live extends MY_Controller {
 				//     $this->session->set_flashdata('error', 'Your project successfully posted');
 		  
 				//   //  $this->load->view('freelancer/freelancer_hire/recommen_candidate', $this->data);
-				//     redirect('freelance-hire/home', refresh);
+				//     redirect('hire-freelancer', refresh);
 				// } else {
 				//     redirect('freelance-hire/add-projects?page=professional', refresh);
 				// }
-			redirect('freelance-hire/home', refresh);
+			redirect('hire-freelancer', refresh);
 		} else {
 			redirect('freelance-hire', refresh);
 		}
@@ -710,7 +710,7 @@ public function reactivate() {
 	$updatdata = $this->common->update_data($data, 'freelancer_hire_reg', 'user_id', $userid);
 	$update = $this->common->update_data($data1, 'freelancer_post', 'user_id', $userid);
 	if ($update && $updatdata) {
-		redirect('freelance-hire/home', refresh);
+		redirect('hire-freelancer', refresh);
 	} else {
 
 		redirect('freelancer_hire/reactivate', refresh);
@@ -2006,7 +2006,7 @@ public function freelancer_add_post_insert() {
 
 		$insert_id = $this->common->insert_data_getid($data, 'freelancer_post');
 		if ($insert_id) {
-			redirect('freelance-hire/home', refresh);
+			redirect('hire-freelancer', refresh);
 		} else {
 			$this->session->flashdata('error', 'Sorry!!Your data not inserted');
 			redirect('freelance-hire/freelancer_add_post', refresh);
