@@ -13,12 +13,14 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
             <?php
         } else {
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css'); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
+			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
         <?php } ?>
     </head>
     <!-- END HEAD -->
@@ -32,8 +34,10 @@
                      <div class="logo"> <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver='.time()) ?>" alt="logo"></a></div>                    </div>
                     <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
                         <div class="btn-right pull-right">
-                            <a href="javascript:void(0);" onclick="login_profile();" class="btn2">Login</a>
-                            <a href="javascript:void(0);" onclick="register_profile();" class="btn3">Creat Job Profile</a>
+                            <!-- <a href="javascript:void(0);" onclick="login_profile();" class="btn2">Login</a>
+                            <a href="javascript:void(0);" onclick="register_profile();" class="btn3">Creat Job Profile</a> -->
+                            <a href="<?php echo base_url(); ?>login" onclick="login_profile();" class="btn2">Login</a>
+                            <a href="<?php echo base_url(); ?>job-profile/create-account" onclick="register_profile();" class="btn3">Creat Job Profile</a>
                         </div>
                     </div>
                 </div>

@@ -57,6 +57,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'main';
 //$route['default_controller'] = 'user_post';
 
+$route['login'] = 'Login/index';
+$route['registration'] = 'Registration/index';
 $route['basic-information'] = 'user_info';
 $route['educational-information'] = 'user_info';
 
@@ -194,8 +196,10 @@ $route['freelance'] = "freelancer";
 
 
 //FREELANCER HIRE ROUTES SETTINGS
-$route['freelance-hire'] = "freelancer_hire_live/freelancer_hire";
-$route['freelance-hire/home'] = "freelancer_hire_live/recommen_candidate";
+// $route['freelance-hire'] = "freelancer_hire_live/freelancer_hire";
+$route['freelance-employer'] = "freelancer_hire_live/freelancer_hire";
+// $route['freelance-hire/home'] = "freelancer_hire_live/recommen_candidate";
+$route['hire-freelancer'] = "freelancer_hire_live/recommen_candidate";
 $route['freelance-hire/employer-details'] = "freelancer_hire_live/freelancer_hire_profile";
 $route['freelance-hire/employer-details/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
 $route['freelance-hire/projects'] = "freelancer_hire_live/freelancer_hire_post";
@@ -227,7 +231,8 @@ $route['freelancer/ajax_recommen_candidate'] = "freelancer/ajax_recommen_candida
 
 
 //FREELANCER APPLY ROUTES SETTINGS
-$route['freelance-work/home'] = "freelancer/freelancer_apply_post";
+//$route['freelance-work/home'] = "freelancer/freelancer_apply_post";
+$route['recommended-freelance-work'] = "freelancer/freelancer_apply_post";
 $route['freelance-work/home/live-post'] = "freelancer/freelancer_apply_post/$1";
 $route['freelance-work/freelancer-details/(:any)'] = "freelancer/freelancer_post_profile/$1";
 $route['freelance-work/freelancer-details'] = "freelancer/freelancer_post_profile";
@@ -269,7 +274,8 @@ $route['(:any)-project-in-(:any)'] = "search/freelancer_post_search";
 $route['freelance-work/profile/live-post'] = "freelancer/registation";
 $route['freelance-work/profile/live-post/(:any)'] = "freelancer/registation/$1";
 
-$route['freelance-work'] = "freelancer_apply_live/index";
+// $route['freelance-work'] = "freelancer_apply_live/index";
+$route['freelance-jobs'] = "freelancer_apply_live/index";
 $route['freelance-work/category'] = "freelancer_apply_live/category";
 $route['freelance-work/category/(:any)'] = "freelancer_apply_live/categoryFreelancerList/$1";
 

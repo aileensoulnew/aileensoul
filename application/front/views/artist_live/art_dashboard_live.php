@@ -957,5 +957,10 @@ function submitforgotForm()
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 
         <?php } ?>
+        <?php if($artist_isregister == false){ ?>
+            <script src="<?php echo base_url('assets/js_min/jquery.multi-select.js?ver=' . time()); ?>"></script>
+            <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()); ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist-live/profile.js?ver='.time()); ?>"></script>
+            <?php } ?>
     </body>
 </html>

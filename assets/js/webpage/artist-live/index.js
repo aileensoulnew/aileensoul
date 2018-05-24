@@ -4,7 +4,6 @@ app.controller('artistController', function ($scope, $http) {
     
     function artistCategory(){
         $http.get(base_url + "artist_live/artistCategory?limit=8").then(function (success) {
-            console.log(success);
             $scope.artistCategory = success.data;
         }, function (error) {});
     }

@@ -52,7 +52,7 @@
                                     if($userid){
                                     ?>
 
-                                    <h4>Profiles<a href="<?php echo base_url('freelance-hire') ?>" class="pull-right" title="All">All</a></h4>
+                                    <h4>Profiles<a href="<?php echo base_url('freelance-employer') ?>" class="pull-right" title="All">All</a></h4>
 
                                     <?php }else{?>
 
@@ -65,7 +65,7 @@
                                         <?php 
                                        if($userid){
                                     ?>
-                                        <a href="<?php echo base_url('freelance-hire') ?>" title="job">
+                                        <a href="<?php echo base_url('freelance-employer') ?>" title="job">
                                         <?php }else{?>
 
                                         <a href="javascript:void(0);" onclick="register_profile();" title="job">
@@ -83,7 +83,7 @@
                                  <?php 
                                        if($userid){
                                     ?>
-                                        <a href="<?php echo base_url('freelance-hire') ?>" title="recruiter">
+                                        <a href="<?php echo base_url('freelance-employer') ?>" title="recruiter">
 
                                     <?php }else{?>
 
@@ -101,7 +101,7 @@
                                    <?php 
                                        if($userid){
                                     ?>
-                                        <a href="<?php echo base_url('freelance-hire') ?>" title="freelancer">
+                                        <a href="<?php echo base_url('freelance-employer') ?>" title="freelancer">
                                     <?php }else{?>
 
                                         <a href="javascript:void(0);" onclick="register_profile();" title="freelancer">
@@ -118,7 +118,7 @@
                                         <?php 
                                        if($userid){
                                     ?>
-                                        <a href="<?php echo base_url('freelance-hire') ?>" title="business-profile">
+                                        <a href="<?php echo base_url('freelance-employer') ?>" title="business-profile">
 
                                       <?php }else{?>
 
@@ -136,7 +136,7 @@
                                          <?php 
                                        if($userid){
                                     ?>
-                                        <a href="<?php echo base_url('freelance-hire') ?>" title="artist">
+                                        <a href="<?php echo base_url('freelance-employer') ?>" title="artist">
                                             <?php }else{?>
                                             
                                         <a href="javascript:void(0);" onclick="register_profile();" title="artist">

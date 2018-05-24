@@ -26,10 +26,21 @@ app.filter('slugify', function () {
 });
 
 app.controller('jobRegiMainController', function ($scope, $http, $location, $window,$timeout) {
+
     if(userid != "" && profData == 0 && studData == 0)
     {        
         var title = "Basic Information"
         var url = base_url+"job-profile/basic-info";
+        
+        $location.path(url);
+
+        var obj = {Title: title, Url: url};
+        history.pushState(obj, obj.Title, obj.Url);
+    }
+    else if(userid == "")
+    {
+        var title = "Create Job Profile | Aileensoul"
+        var url = base_url+"job-profile/create-account";
         
         $location.path(url);
 
@@ -60,7 +71,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('jobRegiController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Job By Location, Job Profile | Aileensoul";    
+    $scope.title = "Create Job Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
 
@@ -437,7 +448,21 @@ app.controller('jobBasicInfoController', function ($scope, $http, $location, $wi
 });
 
 app.controller('jobEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Job By Designation, Job Profile | Aileensoul";    
+    $scope.title = "Job By Designation, Job Profile | Aileensoul";
+
+    $("#currentStudy").focusin(function(){
+        $('#cstooltip').show();
+    });
+    $("#currentStudy").focusout(function(){
+        $('#cstooltip').hide();
+    });
+
+    $("#jobTitle").focusin(function(){
+        $('#iftooltip').show();
+    });
+    $("#jobTitle").focusout(function(){
+        $('#iftooltip').hide();
+    });
     
     $scope.user = {};
 
@@ -557,14 +582,213 @@ app.controller('jobEduInfoController', function ($scope, $http, $location, $wind
         else {
             return false;
         }
-    };   
+    };
 });
 
 app.controller('jobCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Job By Designation, Job Profile | Aileensoul";    
-    $scope.jobByDesc = {};
-    $scope.jobs = {};
-    var isProcessing = false;    
+    // alert(first_name);
+    $scope.title = "Job By Designation, Job Profile | Aileensoul";
+
+    $("#email").focusin(function(){
+        $('#emtooltip').show();
+    });
+    $("#email").focusout(function(){
+        $('#emtooltip').hide();
+    });
+
+    $("#job_title").focusin(function(){
+        $('#jttooltip').show();
+    });
+    $("#job_title").focusout(function(){
+        $('#jttooltip').hide();
+    });
+
+    $("#cities2").focusin(function(){
+        $('#lotooltip').show();
+    });
+    $("#cities2").focusout(function(){
+        $('#lotooltip').hide();
+    });
+
+    $scope.user = {};
+    $scope.jobTitle = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitle',
+            data: 'q=' + $scope.user.jobTitle,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    }
+
+    $scope.jobSkill = function () {
+        $http({
+            method: 'GET',
+            url: base_url + 'general/get_skill?'+'term=' + $scope.user.jobSkill,
+            data: '',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.skillSearchResult = data;
+        });
+    }
+
+    $scope.cityList = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchCityList',
+            data: 'q=' + $scope.user.cityList,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.citySearchResult = data;
+        });
+    }
+
+    $.validator.addMethod("regx2", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Special character and space not allow in the beginning");
+    $.validator.addMethod("regx_digit", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Digit is not allow");
+    $.validator.addMethod("regx1", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Only space, only number and only special characters are not allow");
+
+    $scope.jobRegiValidate = {
+        ignore: '*:not([name])',
+        rules: {
+            first_name: {
+                required: true,
+                regx2: /^[a-zA-Z0-9-.,']*[0-9a-zA-Z][a-zA-Z]*/,
+                regx_digit: /^([^0-9]*)$/,
+            },
+            last_name: {
+                required: true,
+                regx2: /^[a-zA-Z0-9-.,']*[0-9a-zA-Z][a-zA-Z]*/,
+                regx_digit: /^([^0-9]*)$/,
+            },
+            cities: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true,
+                // lowercase: /^[0-9a-z\s\r\n@!#\$\^%&*()+=_\-\[\]\\\';,\.\/\{\}\|\":<>\?]+$/,
+                remote: {
+                    url: base_url + "job/check_email",
+                    //async is used for double click on submit avoid
+                    async: false,
+                    type: "post",
+                },
+            },
+            fresher: {
+                required: true,
+            },
+            job_title: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+            },
+            industry: {
+                required: true,
+            },
+            cities: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+            },
+            skills: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/,
+            },
+        },
+        messages: {
+            first_name: {
+                required: "First name is required.",
+            },
+            last_name: {
+                required: "Last name is required.",
+            },
+            email: {
+                required: "Email address is required.",
+                email: "Please enter valid email id.",
+                remote: "Email already exists"
+            },
+            fresher: {
+                required: "Fresher is required.",
+            },
+            industry: {
+                required: "Industry is required.",
+            },
+            cities: {
+                required: "City is required.",
+            },
+            job_title: {
+                required: "Job title is required.",
+            },
+            skills: {
+                required: "Skill is required.",
+            }
+        },
+        errorPlacement: function(error, element) {
+            //console.log(element);
+            if (element.attr("name") == "fresher" )
+                error.insertBefore(".fresher-error");            
+            else
+                error.insertAfter(element);
+        },
+    };
+
+    $scope.submitJobRegiForm = function () {
+        if ($scope.jobseeker_regform.validate()) {
+            angular.element('#jobseeker_regform #submit').addClass("form_submit");
+            $('#jobreg_ajax_load').show();
+            $http({
+                method: 'POST',
+                url: base_url + 'job/job_insert_new',
+                data: $scope.user,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                if (success.data.errors) {
+                    $scope.errorcurrentStudy = success.data.errors.currentStudy;
+                    $scope.errorcityList = success.data.errors.cityList;
+                    $scope.erroruniversityName = success.data.errors.universityName;
+                }
+                else
+                {
+                    if (success.data.is_success == '1')
+                    {
+                        window.location = base_url+"recommended-jobs";
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    };
+
 });
 
 

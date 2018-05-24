@@ -9,7 +9,7 @@ $userid = $this->session->userdata('aileenuser');
                 <div class="col-md-6 mob-p0">
                     <ul class="sub-menu">
                         <li class="profile">
-                            <a href="<?php echo base_url('freelance-hire/home'); ?>">
+                            <a href="<?php echo base_url('hire-freelancer'); ?>">
 								<div class="sub-menu-icon">
 									
 										<svg class="not-hover" viewBox="0 0 486.988 486.988" width="17px" height="17px">
@@ -31,7 +31,7 @@ $userid = $this->session->userdata('aileenuser');
 											</g>
 										</svg>
 
-									<span>Employer Profile123</span>
+									<span>Employer Profile</span>
 								</div>
 							</a>
                         </li>

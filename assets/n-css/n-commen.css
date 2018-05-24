@@ -1143,6 +1143,8 @@ footer ul li a:hover{
 .sub-header .dropdown.open .dropdown-menu{left:0 !important; top:31px; margin:0;}
 .sub-header .dropdown.open .dropdown-menu li{width:100%; border-right:0; padding:0;}
 .sub-header .dropdown.open .dropdown-menu li a{color:#777;}
+.sub-header .dropdown.user-id .dropdown-menu li a{padding:6px 10px; line-height:1;}
+.sub-header .dropdown.user-id .dropdown-menu li a span{float:left; margin-right:10px;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover{background: #1b8ab9; color: #fff;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover .icon-view-profile{background-position: 0 -160px;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover .icon-edit-profile{background-position: 0 -40px;}
@@ -1162,10 +1164,30 @@ footer ul li a:hover{
 .sub-header .dropdown.open .dropdown-menu.account{width:180px; padding-top:0;}
 .sub-header .dropdown.open .dropdown-menu.account li:first-child{padding:10px; border-bottom:1px solid #d2d2d2; font-size:16px;}
 .sub-header .job-search-box1{float:right;}
-.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:1px 10px 0 0; }
-.sub-header .job-search-box1 fieldset.sec_h2 input{border:1px solid #c0c0c0;}
-.sub-header .new-search-btn{float:left; width:28px; height:28px; margin-top:6px; border:1px solid #c0c0c0; border-radius:4px; padding:0;}
-.sub-header .new-search-btn label i{background:none; padding:3px 4px 4px 5px;}
+.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:5px 10px 0 0; }
+.sub-header .job-search-box1 fieldset.sec_h2 input{border:1px solid #c0c0c0; height:30px;}
+.sub-header .new-search-btn{float:left; width:30px; height:30px; margin-top:5px; border:1px solid #c0c0c0; border-radius:4px; padding:0;}
+.sub-header .new-search-btn label i{background:none; padding:5px 4px 4px 7px;}
+
+.icon-delete,.icon-delete-white,.icon-edit-profile,.icon-edit-profile-white,.icon-logout,.icon-logout-white,.icon-settings,.icon-settings-white,.icon-view-profile,.icon-view-profile-white{
+    display:inline-block; background:url(../img/edit_profile.png) no-repeat; overflow:hidden;
+    text-indent:-9999px; text-align:left
+}
+.dropdown_hover .dropdown-content_hover a:hover .icon-delete{ background-position:0 0; width:20px; height:20px}
+.icon-edit-profile{ background-position:0 -20px; width:20px; height:20px}
+.dropdown_hover .dropdown-content_hover a:hover .icon-edit-profile{ background-position:0 -40px; width:20px;
+    height:20px}
+.icon-logout{ background-position:0 -60px; width:20px; height:20px}
+.dropdown_hover .dropdown-content_hover a:hover .icon-logout{ background-position:0 -80px; width:20px; height:20px}
+.icon-settings{ background-position:0 -100px; width:20px; height:20px}
+.dropdown_hover .dropdown-content_hover a:hover.icon-settings{ background-position:0 -120px; width:20px;
+    height:20px}
+.icon-view-profile{ background-position:0 -140px; width:20px; height:20px}
+.dropdown_hover .dropdown-content_hover a:hover .icon-view-profile{ background-position:0 -160px; width:20px;
+    height:20px}
+.icon-delete{ background-position:0 -180px; width:19px; height:19px}
+
+
 /***  end sub header  ***/
 
 /***  mobile header  ***/

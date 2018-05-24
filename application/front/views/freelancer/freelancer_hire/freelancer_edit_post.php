@@ -323,7 +323,7 @@
                     success: function (data) {
                         if (clicked_id == 1)
                         {
-                            window.location = "<?php echo base_url('freelance-hire/home'); ?>";
+                            window.location = "<?php echo base_url('hire-freelancer'); ?>";
                         } else if (clicked_id == 2)
                         {
                             window.location = "<?php echo base_url('freelance-hire/employer-details'); ?>";

@@ -48,7 +48,7 @@
                                 <ul>
                                     
                                     <li>
-                                        <a href="#" class="btn3">Login</a>
+                                        <a href="<?php echo base_url(); ?>login" target="_self" class="btn3">Login</a>
                                     </li>
                                 </ul>
                             </div>
@@ -102,6 +102,7 @@
             var profData = "<?php echo $professionData;?>";
             var studData = "<?php echo $studentData?>";
             var userid = "<?php echo $userid?>";
+            var first_name = "asd";
             var app = angular.module('jobRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
 
             function experience(){

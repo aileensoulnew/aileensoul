@@ -426,7 +426,7 @@ li.fr a{
 .profile-boxProfileCard-cover{
     border:1px solid #efefef;
     border-bottom:none;
-    height:94px
+    height:110px
 }
 .profile-boxProfileCard .bg-images img{height: 94px !important;}
 .profile-boxProfileCard-bg{
@@ -511,7 +511,7 @@ li.fr a{
     position:relative
 }
 .right_left_box_design{
-    padding:3px 9px 0 5px;
+    padding:5px 9px 0 5px;
     width:76%;
     display:inline-block;
     float:left
@@ -519,13 +519,16 @@ li.fr a{
 .right_left_box_design .profile-company-name{
     display:block;
     width:auto;
-    color:#1b8ab9
+    color:#1b8ab9;
+	padding-bottom:1px;
+	
 }
 .profile-company-name a{
-    font-size:15px;
+    font-size:16px;
     margin-left:0;
     font-weight:600;
-    color:#1b8ab9
+    color:#1b8ab9;
+	letter-spacing:1px;
 }
 .left_box_menubar{
     width:100%;
@@ -539,14 +542,17 @@ li.fr a{
     text-align:center;
     padding:0;
     margin:0;
-    width:32.33%
+    width:33.33%
 }
 .left_box_menubar li a{
     padding:4px 4px 0;
-    display:inline-block
+    display:inline-block;
+	font-size:13px;
+	letter-spacing:1px;
 }
+.left_box_menubar li:first-child a{padding-left:0;}
 .left_box_menubar li:last-child a{
-    text-align:center
+    text-align:right; padding-right:0;
 }
 .left_box_menubar li:first-child{
     text-align:left
@@ -1857,7 +1863,8 @@ label.cameraButton input[accept*=camera]{
     position:relative
 }
 .profile-boxProfile-name a{
-    font-size:14px
+    font-size:14px;
+	letter-spacing:1px;
 }
 #hideuserlist .fw.text-center{
     text-align:right
@@ -1992,7 +1999,7 @@ label.cameraButton input[accept*=camera]{
     color:#fff!important
 }
 .profile-boxProfileCard-cover a img{
-    min-height:88px;
+    min-height:110px;
 	width:100%;
 }
 .lbpos{

@@ -43,12 +43,18 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Search Freelance | Aileensoul";
         $this->data['freelance_apply_profile_set'] = $this->freelance_apply_profile_set;
-    
-        $this->load->view('freelancer_apply_live/freelancer_apply_live', $this->data);
+
+        if($userid != ""){
+            $this->load->view('freelancer_apply_live/freelancer_apply_live', $this->data);
+        }
+        else{
+            $this->load->view('freelancer_apply_live/freelancer_apply_without_main_regi', $this->data);
+        }
     }
 
     public function freelancer_apply_live_post() {
-        $postdata = $this->freelancer_apply_model->getfreelancerapplypost();
+        $userid = $this->session->userdata('aileenuser');
+        $postdata = $this->freelancer_apply_model->getfreelancerapplypost($userid,"*");
         echo json_encode($postdata);
     }
 

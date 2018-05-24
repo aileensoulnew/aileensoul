@@ -61,7 +61,13 @@ class Recruiter_live extends MY_Controller {
         }
         $this->data['search_banner'] = $this->load->view('recruiter_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Recruiter Profile | Aileensoul";
-        $this->load->view('recruiter_live/index', $this->data);
+        if($userid != ""){            
+            $this->load->view('recruiter_live/index', $this->data);
+        }
+        else
+        {
+            $this->load->view('recruiter_live/recruiter_without_main_register', $this->data);   
+        }
     }
 
     /*public function category() {

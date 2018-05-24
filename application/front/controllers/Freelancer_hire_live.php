@@ -53,8 +53,13 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
 			$this->data['title'] = "Recruiter Profile | Aileensoul";
-			
-			$this->load->view('freelancer_hire_live/index', $this->data);
+			if($userid != ""){
+				$this->load->view('freelancer_hire_live/index', $this->data);
+			}
+			else
+			{
+				$this->load->view('freelancer_hire_live/freelancer_hire_without_main_register', $this->data);	
+			}
 		}
 	}
 	
@@ -78,7 +83,7 @@ class Freelancer_hire_live extends MY_Controller {
 				} else if ($jobdata['free_hire_step'] == 2) {
 					redirect('freelance-hire/professional-information', refresh);
 				} else if ($jobdata['free_hire_step'] == 3) {
-					redirect('freelance-hire/home', refresh);
+					redirect('hire-freelancer', refresh);
 				}
 			} else {
 				redirect('freelance-hire/registration', refresh);
@@ -104,7 +109,7 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['isfreelancerhireactivate'] = true;			
 		}
 		if ($hireuser && !$this->data['isfreelancerhireactivate']) {
-			redirect('freelance-hire/home', refresh);
+			redirect('hire-freelancer', refresh);
 		} else {
 			$userid = $this->session->userdata('aileenuser');
 			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -218,13 +223,13 @@ class Freelancer_hire_live extends MY_Controller {
 				//     $this->session->set_flashdata('error', 'Your project successfully posted');
 		  
 				//   //  $this->load->view('freelancer/freelancer_hire/recommen_candidate', $this->data);
-				//     redirect('freelance-hire/home', refresh);
+				//     redirect('hire-freelancer', refresh);
 				// } else {
 				//     redirect('freelance-hire/add-projects?page=professional', refresh);
 				// }
-			redirect('freelance-hire/home', refresh);
+			redirect('hire-freelancer', refresh);
 		} else {
-			redirect('freelance-hire', refresh);
+			redirect('freelance-employer', refresh);
 		}
 	}
 }
@@ -705,7 +710,7 @@ public function reactivate() {
 	$updatdata = $this->common->update_data($data, 'freelancer_hire_reg', 'user_id', $userid);
 	$update = $this->common->update_data($data1, 'freelancer_post', 'user_id', $userid);
 	if ($update && $updatdata) {
-		redirect('freelance-hire/home', refresh);
+		redirect('hire-freelancer', refresh);
 	} else {
 
 		redirect('freelancer_hire/reactivate', refresh);
@@ -759,7 +764,7 @@ public function freelancer_hire_deactivate_check() {
 	$contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
 	$freelancerhire_deactive = $this->data['freelancerhire_deactive'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 	if ($freelancerhire_deactive) {
-		redirect('freelance-hire');
+		redirect('freelance-employer');
 	}
 	//if user deactive profile then redirect to freelancer_hire/freelancer_hire/freelancer_hire_basic_info  End
 }
@@ -2001,7 +2006,7 @@ public function freelancer_add_post_insert() {
 
 		$insert_id = $this->common->insert_data_getid($data, 'freelancer_post');
 		if ($insert_id) {
-			redirect('freelance-hire/home', refresh);
+			redirect('hire-freelancer', refresh);
 		} else {
 			$this->session->flashdata('error', 'Sorry!!Your data not inserted');
 			redirect('freelance-hire/freelancer_add_post', refresh);

@@ -31,7 +31,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h2 class="font-white">I want to hire Freelancer</h2>
                                 <?php if ($hire_step[0]['free_hire_step'] == '3') { ?>
-                                    <a href="<?php echo base_url('freelance-hire/home'); ?>" class="button" id="freelancer-hire-button">Hire</a>
+                                    <a href="<?php echo base_url('hire-freelancer'); ?>" class="button" id="freelancer-hire-button">Hire</a>
                                 <?php } else { ?>
                                     <a href="<?php echo base_url('freelance-hire'); ?>" class="button" id="freelancer-hire-button">Hire</a>
                                 <?php } ?>
@@ -39,9 +39,9 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h2 class="font-white">Apply as Freelancer</h2>
                                 <?php if ($apply_step[0]['free_post_step'] == '7') { ?>
-                                    <a href="<?php echo base_url('freelance-work/home'); ?>" class="button" id="freelancer-apply-button">Apply</a>
+                                    <a href="<?php echo base_url('recommended-freelance-work'); ?>" class="button" id="freelancer-apply-button">Apply</a>
                                 <?php } else { ?>
-                                    <a href="<?php echo base_url('freelance-work'); ?>" class="button" id="freelancer-apply-button">Apply</a>
+                                    <a href="<?php echo base_url('freelance-jobs'); ?>" class="button" id="freelancer-apply-button">Apply</a>
                                 <?php } ?>
                             </div>
                         </div>

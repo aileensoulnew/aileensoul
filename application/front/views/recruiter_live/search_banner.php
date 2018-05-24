@@ -182,13 +182,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <textarea placeholder="Company Profile(optional)">
-                                            <?php
-                                                if ($comp_profile1) {
-                                                    echo $comp_profile1;
-                                                }
-                                            ?>
-                                        </textarea>
+                                        <textarea placeholder="Company Profile(optional)"><?php if ($comp_profile1) { echo $comp_profile1; } ?></textarea>
                                     </div>                                      
                                 </div>
                             </div>

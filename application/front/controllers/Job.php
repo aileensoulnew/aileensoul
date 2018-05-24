@@ -6101,4 +6101,152 @@ class Job extends MY_Controller {
         echo json_encode($searchJobs);
     }
 
+    public function job_insert_new() {
+        
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $errors = array();
+        $data = array();
+
+        $_POST = json_decode(file_get_contents('php://input'), true);        
+
+        if (empty($_POST['first_name']))
+            $errors['errorFname'] = 'Firstname is required.';
+
+        if (empty($_POST['last_name']))
+            $errors['errorLname'] = 'Lastname is required.';
+
+        if (empty($_POST['email']))
+            $errors['errorEmail'] = 'Email is required.';
+
+        if (!empty($errors)) {
+            $data['errors'] = $errors;
+        }
+        else
+        {
+            $firstname = $_POST['first_name'];
+            $lastname = $_POST['last_name'];
+            $email = $_POST['email'];
+            $fresher = $_POST['fresher'];
+            $expy = $_POST['experience_year'];
+            $expm = $_POST['experience_month'];
+            $industry = $_POST['industry'];
+
+            $jobtitle = $_POST['job_title'];
+
+            $skills = $_POST['skills'];
+            $skills = explode(',', $skills);
+
+            $cities = $_POST['cities'];
+            $cities = explode(',', $cities);
+
+            // job title start   
+            if ($jobtitle != " ") {
+                $contition_array = array('name' => $jobtitle);
+                $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                if ($jobdata) {
+                    $jobtitle = $jobdata[0]['title_id'];
+                } else {
+                    $forslug = $this->input->post('job_title');
+                    $data = array(
+                        'name' => ucfirst($this->input->post('job_title')),
+                        'slug' => $this->common->clean($forslug),
+                        'status' => 'draft',
+                    );
+                    if ($userid) {
+                        $jobtitle = $this->common->insert_data_getid($data, 'job_title');
+                    }
+                }
+            }
+
+            // skills  start   
+
+            if (count($skills) > 0) {
+
+                foreach ($skills as $ski) {
+                    $contition_array = array('skill' => trim($ski), 'type' => '1');
+                    $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    if (!$skilldata) {
+                        $contition_array = array('skill' => trim($ski), 'type' => '4');
+                        $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    }
+
+                    if ($skilldata) {
+                        $skill[] = $skilldata[0]['skill_id'];
+                    } else {
+                        $data = array(
+                            'skill' => trim($ski),
+                            'status' => '1',
+                            'type' => '4',
+                            'user_id' => $userid,
+                        );
+                        if ($userid) {
+                            $skill[] = $this->common->insert_data_getid($data, 'skill');
+                        }
+                    }
+                }
+                $skills = implode(',', $skill);
+            }
+
+            // city  start   
+
+            if (count($cities) > 0) {
+
+                foreach ($cities as $cit) {
+                    $contition_array = array('city_name' => $cit);
+                    $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    if ($citydata) {
+                        $city[] = $citydata[0]['city_id'];
+                    } else {
+                        $data = array(
+                            'city_name' => $cit,
+                            'status' => '1',
+                        );
+                        if ($userid) {
+                            $city[] = $this->common->insert_data_getid($data, 'cities');
+                        }
+                    }
+                }
+
+                $city = implode(',', $city);
+            }
+
+            $data1 = array(
+                'fname' => ucfirst($firstname),
+                'lname' => ucfirst($lastname),
+                'email' => $email,
+                'keyskill' => $skills,
+                'work_job_title' => $jobtitle,
+                'work_job_industry' => $industry,
+                'work_job_city' => $city,
+                'exp_y' => $expy,
+                'exp_m' => $expm,
+                'experience' => $fresher,
+                'status' => '1',
+                'is_delete' => '0',
+                'created_date' => date('Y-m-d h:i:s', time()),
+                'user_id' => $userid,
+                'job_step' => '10',
+                'slug' => $this->setcategory_slug($firstname . '-' . $lastname, 'slug', 'job_reg')
+            );
+
+
+
+            $contition_array = array('user_id' => $userid);
+            $job = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            if ($userid) {
+                if ($job[0]['total'] != 0) {
+                    $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
+                } else {
+                    $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
+                }
+            }
+            if ($insert_id) {
+                $data = array("is_success" => 1);
+            } else {
+                $data['errors'] = $errors['not_sucess'] = "Please Try again";
+            }
+        }
+        echo json_encode($data);
+    }
+
 }
