@@ -430,7 +430,7 @@ function login_profile() {
 function register_profile() {
     //$('#login').modal('hide');
     //$('#register').modal('show');
-    $('.biderror .mes').html("<div class='pop_content'>Please <a href='"+base_url+"login'>Login</a> or <a href='"+base_url+"job-profile/create-account'>Register</a>.</div>");
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
     $('#bidmodal').modal('show');
 }
 //            function register_profile_apply(postid) {
@@ -499,7 +499,7 @@ function create_profile_apply(postid) {
     $('.pt15').html(" Don't have an account? <a class='db-479' href='javascript:void(0);' data-toggle='modal' onclick='register_profile(" + postid + ");'>Create an account</a>");
     $('#register').modal('show');*///Old 21-5-18
 
-    $('.biderror .mes').html("<div class='pop_content'>Please <a href='"+base_url+"login'>Login</a> or <a href='"+base_url+"job-profile/create-account'>Register</a>.</div>");
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
     $('#bidmodal').modal('show');
 
 }
