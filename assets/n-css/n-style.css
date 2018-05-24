@@ -82,6 +82,22 @@
 .all-profile-box ul li .all-pr-img{width:40px; height:40px; float:left; border:1px solid #d2d2d2;}
 .all-profile-box ul li .all-pr-img img{width:100%;}
 .all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:17px; padding:9px 0 0 15px; letter-spacing:1px;}
+/***  inner profiles left box  ***/
+.profile-boxProfileCard-cover{height:110px !important;}
+.right_left_box_design{padding:5px 9px 0 5px !important;}
+.right_left_box_design .profile-company-name{padding-bottom:1px;}
+.profile-company-name a{font-size:16px !important; letter-spacing:1px;}
+.left_box_menubar{ width:33.33%}
+.left_box_menubar li a{display:inline-block; font-size:13px; letter-spacing:1px;}
+.left_box_menubar li:first-child a{padding-left:0;}
+.left_box_menubar li:last-child a{text-align:right; padding-right:0;}
+.left_box_menubar li:first-child{text-align:left}
+.profile-boxProfile-name a{font-size:14px; letter-spacing:1px;}
+.profile-boxProfileCard-cover a img{min-height:110px;}
+.job-search-box1 fieldset{padding:0;}
+.job-search-box1 label i{font-size:16px;}
+
+.bui_art_left_box .profile-boxProfileCard-content::before{top:47px;}
 
 
 /***  end left part  ***/
@@ -1238,7 +1254,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-listing{padding:5px 10px; margin:0; max-height:300px;}
 .search-listing li{padding:5px 0;list-style-type:none; margin: 0; letter-spacing:0.5px; color:#7b7b7b;}
 .list-type-bullet .search-listing li label{margin-bottom:0; width:100%; position:relative;}
-.list-type-bullet .search-listing li label:before{width:10px; height:10px; background:#5c5c5c; content:""; display:inline-block; border-radius:100%;}
+.list-type-bullet .search-listing li label:before{/*width:10px; height:10px; background:#5c5c5c;*/ content:""; display:inline-block;}
 .list-type-bullet .search-listing li label a{color:#5c5c5c; padding-left:10px;}
 .accordion-toggle:after {
     font-family: 'FontAwesome';
@@ -1624,7 +1640,7 @@ ol li:before{counter-increment: myOrderedListItemsCounter;
   }
 }
 /***  end progress bar  ***/
-.art-img-nn{text-align:center;}
+.art-img-nn{text-align:center; padding:30px 0; margin:0 !important;}
 .no-data-available .art-img-nn{padding: 0 10px 20px;}
 #upload-one{height:auto;}
 #upload-demo-one{padding-top:10px;}
