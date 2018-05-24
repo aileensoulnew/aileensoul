@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
 
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
@@ -37,7 +38,7 @@
             
             <!-- NEW DESIGN -->
             <!-- POST PROJECT -->
-            <div class="sub-fix-head">
+            <div class="sub-fix-head hide">
                 <div class="container">
                     <h2>
                         <span>Get the Job Done</span>
@@ -71,7 +72,7 @@
                         <h2>Grow Your Business with a Remote Team</h2>
                         <p>
                             <?php if(!$isfreelancerhireactivate){ ?>
-                                <a href="#" class="btn5">Create Freelance Employer Profile</a>
+                                <a href="#" class="btn5 hide">Create Freelance Employer Profile</a>
                             <?php } else{ ?>
                                 <a href="<?php echo base_url('freelance-hire/reactivateacc'); ?>" class="btn5">Reactive Freelance Employer Profile</a>
                             <?php } ?>
@@ -172,7 +173,7 @@
                 <div class="row pt20 pb20">
                     <div class="col-md-6 col-sm-6 pull-right">
                         <div class="content-img text-center">
-                            <img src="n-images/img1.jpg">
+                            <img src="<?php echo base_url(); ?>assets/n-images/img1.jpg">
                             
                         </div>
                     </div>
@@ -186,7 +187,7 @@
                 <div class="row pt20 pb20">
                     <div class="col-md-6 col-sm-6">
                         <div class="content-img text-center">
-                            <img src="n-images/img1.jpg">
+                            <img src="<?php echo base_url(); ?>assets/n-images/img1.jpg">
                             
                         </div>
                     </div>
@@ -200,7 +201,7 @@
                 <div class="row pt20 pb20">
                     <div class="col-md-6 col-sm-6 pull-right">
                         <div class="content-img text-center">
-                            <img src="n-images/img1.jpg">
+                            <img src="<?php echo base_url(); ?>assets/n-images/img1.jpg">
                             
                         </div>
                     </div>
@@ -214,7 +215,7 @@
             </div>
             <div class="content-bnr hidden">
                 <div class="bnr-box">
-                    <img src="n-images/img2.jpg">
+                    <img src="<?php echo base_url(); ?>assets/n-images/img2.jpg">
                     <?php if(!$isfreelancerhireactivate){ ?>
                     <div class="content-bnt-text">
                         <h1>Lorem Ipsum is a dummy text</h1>
@@ -236,7 +237,7 @@
                     </div>
                 </div>
                 <div class="it-works-img pt20 pb20">
-                    <img src="n-images/img3.jpg">
+                    <img src="<?php echo base_url(); ?>assets/n-images/img3.jpg">
                 </div>                
                 <div class="related-article pt20">
                     <div class="center-title">
@@ -281,7 +282,7 @@
                     <form>
                         <div class="post-box">
                             <div class="post-img">
-                                <img src="img/user-pic.jpg">
+                                <img src="<?php echo base_url(); ?>assets/img/user-pic.jpg">
                             </div>
                             <div class="post-text">
                                 <textarea class="title-text-area" placeholder="Post Opportunity"></textarea>
@@ -298,17 +299,17 @@
                                 <ul>
                                     <li>
                                         <a href="" data-target="#post-popup" data-toggle="modal">
-                                            <img src="img/post-op.png"><span>Post Opportunity</span>
+                                            <img src="<?php echo base_url(); ?>assets/img/post-op.png"><span>Post Opportunity</span>
                                         </a>
                                     </li>
                                     <li class="pl15">
                                         <a href="article.html">
-                                            <img src="img/article.png"><span>Post Article</span>
+                                            <img src="<?php echo base_url(); ?>assets/img/article.png"><span>Post Article</span>
                                         </a>
                                     </li>
                                     <li class="pl15">
                                         <a href="" data-target="#ask-question" data-toggle="modal">
-                                            <img src="img/ask-qustion.png"><span>Ask Quastion</span>
+                                            <img src="<?php echo base_url(); ?>assets/img/ask-qustion.png"><span>Ask Quastion</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -338,7 +339,7 @@
                     <form>
                         <div class="post-box">
                             <div class="post-img">
-                                <img src="img/user-pic.jpg">
+                                <img src="<?php echo base_url(); ?>assets/img/user-pic.jpg">
                             </div>
                             <div class="post-text">
                                 <textarea class="title-text-area" placeholder="Post Opportunity"></textarea>
@@ -356,17 +357,17 @@
                         <div class="post-field">
                             
                                 <div id="content" class="form-group">
-                                    <label>FOR WHOM THIS OPPORTUNITY ?<span class="pull-right"><img src="img/tooltip.png"></span></label>
+                                    <label>FOR WHOM THIS OPPORTUNITY ?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <textarea rows="1" max-rows="5" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, PHP Developer, HR, BDE, CA, Doctor, Freelancer.." cols="10" style="resize:none"></textarea>
 
                                 </div>
                                 <div class="form-group">
-                                    <label>WHICH LOCATION?<span class="pull-right"><img src="img/tooltip.png"></span></label>
+                                    <label>WHICH LOCATION?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <textarea type="text" class="" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai, Moscow, Paris, Tokyo.. "></textarea>
 
                                 </div>
                                 <div class="form-group">
-                                    <label>What is your field?<span class="pull-right"><img src="img/tooltip.png"></span></label>
+                                    <label>What is your field?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <select>
                                         <option>What is your field</option>
                                         <option>IT</option>
@@ -401,7 +402,7 @@
                     <form>
                         <div class="post-box">
                             <div class="post-img">
-                                <img src="img/user-pic.jpg">
+                                <img src="<?php echo base_url(); ?>assets/img/user-pic.jpg">
                             </div>
                             <div class="post-text">
                                 <textarea class="title-text-area" placeholder="Ask Quastion"></textarea>
@@ -418,17 +419,17 @@
                         <div class="post-field">
                             
                                 <div class="form-group">
-                                    <label>Add Description<span class="pull-right"><img src="img/tooltip.png"></span></label>
+                                    <label>Add Description<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <textarea rows="1" max-rows="5" placeholder="Add Description" cols="10" style="resize:none"></textarea>
 
                                 </div>
                                 <div class="form-group">
-                                    <label>Related Categories<span class="pull-right"><img src="img/tooltip.png"></span></label>
+                                    <label>Related Categories<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <input type="text" class="" placeholder="Related Categories">
 
                                 </div>
                                 <div class="form-group">
-                                    <label>From which field the Question asked?<span class="pull-right"><img src="img/tooltip.png"></span></label>
+                                    <label>From which field the Question asked?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <select>
                                         <option>What is your field</option>
                                         <option>IT</option>
@@ -436,10 +437,6 @@
                                         <option>Sports</option>
                                     </select>
                                 </div>
-
-
-                            
-
 
                         </div>
                         <div class="text-right fw pt10 pb20 pr15">
@@ -456,6 +453,7 @@
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
  <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
@@ -472,7 +470,10 @@
             var l = '';
             var app = angular.module('artistApp', ['ui.bootstrap']); 
             var site = '<?php echo base_url(); ?>';
-             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            AOS.init({
+                easing: 'ease-in-out-sine'
+            });
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         

@@ -31,7 +31,7 @@ $userid = $this->session->userdata('aileenuser');
 											</g>
 										</svg>
 
-									<span>Employer Profile123</span>
+									<span>Employer Profile</span>
 								</div>
 							</a>
                         </li>

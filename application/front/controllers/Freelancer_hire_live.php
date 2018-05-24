@@ -53,8 +53,13 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
 			$this->data['title'] = "Recruiter Profile | Aileensoul";
-			
-			$this->load->view('freelancer_hire_live/index', $this->data);
+			if($userid != ""){
+				$this->load->view('freelancer_hire_live/index', $this->data);
+			}
+			else
+			{
+				$this->load->view('freelancer_hire_live/freelancer_hire_without_main_register', $this->data);	
+			}
 		}
 	}
 	
