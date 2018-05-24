@@ -7008,7 +7008,17 @@ Your browser does not support the audio tag.
             foreach ($busienssdata as $rowdata) {
 
                 $companyname = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id']))->row()->company_name;
-                $companyslug = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id']))->row()->business_slug;
+                // $companyslug = $this->db->get_where('business_profile', array('user_id' => $rowdata['user_id']))->row()->business_slug;
+
+                $sql = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
+                        FROM ailee_business_profile bp
+                        LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                        LEFT JOIN ailee_states st on bp.state = st.state_id
+                        WHERE user_id = '". $rowdata['user_id'] ."'";
+
+                $query = $this->db->query($sql);
+                $companyslug = $query->row()->business_slug;
+
                 $fourdata .= '<div class="all-comment-comment-box">';
                 $fourdata .= '<div class="post-design-pro-comment-img">';
 
@@ -7373,7 +7383,7 @@ Your browser does not support the audio tag.
                         WHERE user_id = '". $value ."'";
 
             $query = $this->db->query($sql);
-            $bus_slug = $query->row();
+            $bus_slug = $query->row()->business_slug;
 
 
 

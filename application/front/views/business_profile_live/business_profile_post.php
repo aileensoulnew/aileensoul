@@ -392,7 +392,6 @@ $mobile_agent = $this->agent->mobile;
                         </ul>
                     </div>
                     <div class="fr margin_btm">
-                        <p>asdjgagdjg</p>
                         <button type="submit"  value="Submit">Post</button>    
                     </div>
                     <?php echo form_close(); ?>
