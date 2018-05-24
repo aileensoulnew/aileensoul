@@ -53,4 +53,34 @@ class Blog_Model extends CI_Model {
         return $get->result();
     }
 
+
+    public function get_blog_post($searchword = '', $start = '', $perpage = '', $sory_by='') {
+        $sql_condition = "";
+        if($searchword != ""){ 
+            $search_split = explode(" ",$searchword);
+            foreach ($search_split as $key => $value) {
+                $val_con = "%".$val."%";
+                $sql_condition = ($sql_condition == "") ? " AND" : " OR";
+                $sql_condition .= " (b.title LIKE '". $val_con ."') OR (b.description LIKE '". $val_con ."')";
+            }
+        }        
+
+        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(bc.name) as category_name
+                    FROM ailee_blog b, ailee_blog_category bc 
+                    WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) 
+                    GROUP BY b.blog_category_id" 
+                    . $sql_condition;
+
+        if($sory_by != ""){
+            $sql .= " ORDER BY bc.id DESC";
+        }
+
+        if($perpage != ""){
+            $sql .= " LIMIT ". $start . "," . $perpage;
+        }
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
+
 }

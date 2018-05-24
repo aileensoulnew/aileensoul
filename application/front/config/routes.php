@@ -396,6 +396,7 @@ $route['artist/(:any)-in-(:any)'] = "artist_live/categoryArtistList/$1/$2";
 //BLOG ROUTES SETTINGS
 //$route['blog/popular'] = "blog/popular";
 //$route['blog/read_more'] = "blog/read_more";
+$route['blog'] = "blog/index";
 $route['blog/blog_ajax'] = "blog/blog_ajax";
 $route['blog/cat_ajax'] = "blog/cat_ajax";
 $route['blog/comment_insert'] = "blog/comment_insert";

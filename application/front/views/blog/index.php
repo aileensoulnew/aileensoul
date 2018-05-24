@@ -18,7 +18,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
 ?>
-<html class="blog_cl" lang="en">
+<html class="blog_cl" lang="en" ng-app="blogApp" ng-controller="blogController">
     <head>
         <title>Official Blog for Regular Updates, News and Sharing knowledge - Aileensoul</title>
         <meta name="description" content="Our Aileensoul official blog will describe our free service and related news, tips and tricks - stay tuned." />
@@ -28,40 +28,38 @@ header("Pragma: no-cache"); // HTTP/1.0
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 <?php
- if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
     ?>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
+            ga('create', 'UA-91486853-1', 'auto');
+            ga('send', 'pageview');
 
-            <script>
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r;
-                    i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-                    a = s.createElement(o),
-                            m = s.getElementsByTagName(o)[0];
-                    a.async = 1;
-                    a.src = g;
-                    m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        </script>
 
-                ga('create', 'UA-91486853-1', 'auto');
-                ga('send', 'pageview');
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-6060111582812113",
+                enable_page_level_ads: true
+            });
+        </script>
 
-            </script>
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({
-                    google_ad_client: "ca-pub-6060111582812113",
-                    enable_page_level_ads: true
-                });
-            </script>
-
-            <meta name="msvalidate.01" content="41CAD663DA32C530223EE3B5338EC79E" />
-            <?php
+        <meta name="msvalidate.01" content="41CAD663DA32C530223EE3B5338EC79E" />
+    <?php
         }
-        ?>
+    ?>
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -92,8 +90,8 @@ header("Pragma: no-cache"); // HTTP/1.0
             <meta name="twitter:creator" content="By Aileensoul">
             <meta name="twitter:image" content="http://placekitten.com/250/250">
             <meta name="twitter:domain" content="<?php base_url('blog/' . $blog['blog_slug']) ?>">
-            <?php
-        }
+        <?php
+            }
         ?>
 
         <?php if (IS_OUTSIDE_CSS_MINIFY == '0') { ?>
@@ -116,15 +114,14 @@ header("Pragma: no-cache"); // HTTP/1.0
             <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
 
         <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
+            <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>        
 
         <?php } ?>
-            
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
     </head>
-     <?php if (!$this->session->userdata('aileenuser')) { ?>
+    <?php if (!$this->session->userdata('aileenuser')) { ?>
     <body class="blog no-login blog-page">
         <?php }else{?>
          <body class="blog">
@@ -132,214 +129,213 @@ header("Pragma: no-cache"); // HTTP/1.0
         <?php }?>
         <div class="main-inner">
             <div class="web-header">
-            <header class="custom-header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-3">
-                            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
-                        </div>
-                        <div class="col-md-8 col-sm-9" style="padding-top: 5px;">
-                            <div class="btn-right pull-right">
-                                <?php if (!$this->session->userdata('aileenuser')) { ?>
-                                    <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-                                    <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
-                                <?php } ?>
+                <header class="custom-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-3">
+                                <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
+                            </div>
+                            <div class="col-md-8 col-sm-9" style="padding-top: 5px;">
+                                <div class="btn-right pull-right">
+                                    <?php if (!$this->session->userdata('aileenuser')) { ?>
+                                        <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
+                                        <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </header>
-            <div class="sub-header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 mob-p0">
+                </header>
+                <div class="sub-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 mob-p0">
 
-                            <ul class="sub-menu blog-sub-menu">
-                                <li>
-                                <?php
-                                if ($this->input->get('q') || $this->uri->segment(2) == 'popular' || $this->uri->segment(2) == 'tag') {
-                                    ?>
-                                    <a class="fs22" href="<?php echo base_url('blog'); ?>">
-                                        Blog
-                                    </a>
+                                <ul class="sub-menu blog-sub-menu">
+                                    <li>
                                     <?php
-                                } else {
+                                    if ($this->input->get('q') || $this->uri->segment(2) == 'popular' || $this->uri->segment(2) == 'tag') {
+                                        ?>
+                                        <a class="fs22" href="<?php echo base_url('blog'); ?>">
+                                            Blog
+                                        </a>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <a class="fs22" href="<?php echo base_url('blog'); ?>">
+                                            Blog
+                                        </a>
+                                        <?php
+                                    }
                                     ?>
-                                    <a class="fs22" href="<?php echo base_url('blog'); ?>">
-                                        Blog
-                                    </a>
-                                    <?php
-                                }
-                                ?>
-                                </li>
-                                <li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
-							
-							</a>
-							<div class="dropdown-menu">
-								<div class="dropdown-title">
-									Recent Post <a href="#" class="pull-right">See All</a>
-								</div>
-								<div class="content custom-scroll">
-									<ul class="dropdown-data msg-dropdown">
-										<li class="">
-											<a href="#">
-												<div class="dropdown-database">
-													<div class="post-img">
-														<img src="img/user-pic.jpg" alt="No Business Image">
-													</div>
-													<div class="dropdown-user-detail">
-														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-														
-															<span class="day-text">12 march 2018</span>
-														
-													</div> 
-												</div>
-											</a> 
-										</li>
-										<li class="">
-											<a href="#">
-												<div class="dropdown-database">
-													<div class="post-img">
-														<img src="img/user-pic.jpg" alt="No Business Image">
-													</div>
-													<div class="dropdown-user-detail">
-														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-														
-															<span class="day-text">12 march 2018</span>
-														
-													</div> 
-												</div>
-											</a> 
-										</li>
-										<li class="">
-											<a href="#">
-												<div class="dropdown-database">
-													<div class="post-img">
-														<img src="img/user-pic.jpg" alt="No Business Image">
-													</div>
-													<div class="dropdown-user-detail">
-														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-														
-															<span class="day-text">12 march 2018</span>
-														
-													</div> 
-												</div>
-											</a> 
-										</li>
-										<li class="">
-											<a href="#">
-												<div class="dropdown-database">
-													<div class="post-img">
-														<img src="img/user-pic.jpg" alt="No Business Image">
-													</div>
-													<div class="dropdown-user-detail">
-														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-														
-															<span class="day-text">12 march 2018</span>
-														
-													</div> 
-												</div>
-											</a> 
-										</li>
-										<li class="">
-											<a href="#">
-												<div class="dropdown-database">
-													<div class="post-img">
-														<img src="img/user-pic.jpg" alt="No Business Image">
-													</div>
-													<div class="dropdown-user-detail">
-														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-														
-															<span class="day-text">12 march 2018</span>
-														
-													</div>
-												</div>
-											</a> 
-										</li>
-										<li class="">
-											<a href="#">
-												<div class="dropdown-database">
-													<div class="post-img">
-														<img src="img/user-pic.jpg" alt="No Business Image">
-													</div>
-													<div class="dropdown-user-detail">
-														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-														
-															<span class="day-text">12 march 2018</span>
-														
-													</div>
-												</div>
-											</a> 
-										</li>
-										<li class="">
-											<a href="#">
-												<div class="dropdown-database">
-													<div class="post-img">
-														<img src="img/user-pic.jpg" alt="No Business Image">
-													</div>
-													<div class="dropdown-user-detail">
-														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-														
-															<span class="day-text">12 march 2018</span>
-														
-													</div> 
-												</div>
-											</a> 
-										</li>
-									</ul>
-								</div>
-							</div>
-						</li>
-                                                <li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
-							<div class="dropdown-menu">
-								<ul class="content custom-scroll">
-									<li><a href="#">Interview Tips</a></li>
-									<li><a href="#">Career</a></li>
-									<li><a href="#">Guides</a></li>
-									<li><a href="#">Aritistic</a></li>
-									<li><a href="#">Insipirational</a></li>
-									<li><a href="#">Business Tips</a></li>
-									<li><a href="#">Trending</a></li>
-									<li><a href="#">Lessons From Entrepreneurs</a></li>
-									<li><a href="#">AileenSoul Services</a></li>
-									<li><a href="#">IT Career</a></li>
-									<li><a href="#">Trending</a></li>
-									<li><a href="#">Lessons From Entrepreneurs</a></li>
-									<li><a href="#">AileenSoul Services</a></li>
-									<li><a href="#">IT Career</a></li>
-								</ul>
-							</div>
-						</li>
-                            </ul>
+                                    </li>
+                                    <li class="dropdown">
+    							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
+    							
+    							</a>
+    							<div class="dropdown-menu">
+    								<div class="dropdown-title">
+    									Recent Post <a href="#" class="pull-right">See All</a>
+    								</div>
+    								<div class="content custom-scroll">
+    									<ul class="dropdown-data msg-dropdown">
+    										<li class="">
+    											<a href="#">
+    												<div class="dropdown-database">
+    													<div class="post-img">
+    														<img src="img/user-pic.jpg" alt="No Business Image">
+    													</div>
+    													<div class="dropdown-user-detail">
+    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
+    														
+    															<span class="day-text">12 march 2018</span>
+    														
+    													</div> 
+    												</div>
+    											</a> 
+    										</li>
+    										<li class="">
+    											<a href="#">
+    												<div class="dropdown-database">
+    													<div class="post-img">
+    														<img src="img/user-pic.jpg" alt="No Business Image">
+    													</div>
+    													<div class="dropdown-user-detail">
+    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
+    														
+    															<span class="day-text">12 march 2018</span>
+    														
+    													</div> 
+    												</div>
+    											</a> 
+    										</li>
+    										<li class="">
+    											<a href="#">
+    												<div class="dropdown-database">
+    													<div class="post-img">
+    														<img src="img/user-pic.jpg" alt="No Business Image">
+    													</div>
+    													<div class="dropdown-user-detail">
+    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
+    														
+    															<span class="day-text">12 march 2018</span>
+    														
+    													</div> 
+    												</div>
+    											</a> 
+    										</li>
+    										<li class="">
+    											<a href="#">
+    												<div class="dropdown-database">
+    													<div class="post-img">
+    														<img src="img/user-pic.jpg" alt="No Business Image">
+    													</div>
+    													<div class="dropdown-user-detail">
+    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
+    														
+    															<span class="day-text">12 march 2018</span>
+    														
+    													</div> 
+    												</div>
+    											</a> 
+    										</li>
+    										<li class="">
+    											<a href="#">
+    												<div class="dropdown-database">
+    													<div class="post-img">
+    														<img src="img/user-pic.jpg" alt="No Business Image">
+    													</div>
+    													<div class="dropdown-user-detail">
+    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
+    														
+    															<span class="day-text">12 march 2018</span>
+    														
+    													</div>
+    												</div>
+    											</a> 
+    										</li>
+    										<li class="">
+    											<a href="#">
+    												<div class="dropdown-database">
+    													<div class="post-img">
+    														<img src="img/user-pic.jpg" alt="No Business Image">
+    													</div>
+    													<div class="dropdown-user-detail">
+    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
+    														
+    															<span class="day-text">12 march 2018</span>
+    														
+    													</div>
+    												</div>
+    											</a> 
+    										</li>
+    										<li class="">
+    											<a href="#">
+    												<div class="dropdown-database">
+    													<div class="post-img">
+    														<img src="img/user-pic.jpg" alt="No Business Image">
+    													</div>
+    													<div class="dropdown-user-detail">
+    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
+    														
+    															<span class="day-text">12 march 2018</span>
+    														
+    													</div> 
+    												</div>
+    											</a> 
+    										</li>
+    									</ul>
+    								</div>
+    							</div>
+    						</li>
+                                                    <li class="dropdown">
+    							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
+    							<div class="dropdown-menu">
+    								<ul class="content custom-scroll">
+    									<li><a href="#">Interview Tips</a></li>
+    									<li><a href="#">Career</a></li>
+    									<li><a href="#">Guides</a></li>
+    									<li><a href="#">Aritistic</a></li>
+    									<li><a href="#">Insipirational</a></li>
+    									<li><a href="#">Business Tips</a></li>
+    									<li><a href="#">Trending</a></li>
+    									<li><a href="#">Lessons From Entrepreneurs</a></li>
+    									<li><a href="#">AileenSoul Services</a></li>
+    									<li><a href="#">IT Career</a></li>
+    									<li><a href="#">Trending</a></li>
+    									<li><a href="#">Lessons From Entrepreneurs</a></li>
+    									<li><a href="#">AileenSoul Services</a></li>
+    									<li><a href="#">IT Career</a></li>
+    								</ul>
+    							</div>
+    						</li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob blog-search">
+    					<div class="job-search-box1 clearfix">
+                                                
+    						<form action="<?php echo base_url;?>blog" method="get">
+    							<fieldset class="sec_h2">
+    								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
+    								<i class="fa fa-search" aria-hidden="true"></i>
+    							</fieldset>
+    							
+    							
+    						</form>   
+    					</div>
+    				</div>
+                           
                         </div>
-                        <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob blog-search">
-					<div class="job-search-box1 clearfix">
-                                            
-						<form action="https://www.aileensoul.com/search/business_search" method="get">
-							<fieldset class="sec_h2">
-								<input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Search" autocomplete="off" type="text">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</fieldset>
-							
-							
-						</form>   
-					</div>
-				</div>
-                       
                     </div>
                 </div>
             </div>
-            </div>
             
-            <section id="paddingtop_fixed">
+            <section id="paddingtop_fixed" class="hidden">
                 
                 <div class="blog-mid-section user-midd-section">
                     <div class="container">
                         <div class="row">
                             <div class="custom-user-list">
-                            
                                     <div class="job-contact-frnd">
 
                                     </div>
@@ -354,32 +350,95 @@ header("Pragma: no-cache"); // HTTP/1.0
                             </div>
 
                             <div class="right-part">
-				<div class="subscribe-box">
-					<h4>Subscribe to Our Newslatter</h4>
-					<input type="text" class="form-control" placeholder="Enter your email id">
-					<a class="btn1" href="#">Subscribe</a>
-				</div>
+                				<div class="subscribe-box">
+                					<h4>Subscribe to Our Newslatter</h4>
+                					<input type="text" class="form-control" placeholder="Enter your email id">
+                					<a class="btn1" href="#">Subscribe</a>
+                				</div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
 
             </section>
+            <div id="paddingtop_fixed" class="user-midd-section">
+                <input type="hidden" class="page_number" value="1">
+                <input type="hidden" class="total_record" ng-value="total_record">
+                <input type="hidden" class="perpage_record" value="4">
+                <div class="container">
+                    <div class="custom-user-list">
+                        <div class="blog-box" ng-repeat="blog in blogPost">
+                            <div class="blog-left-img">
+                                <a class="blog-img" target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
+                                    <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
+                                </a>
+                            </div>
+                            <div class="blog-left-content">
+                                <p class="blog-details-cus">
+                                    <span class="cat text-capitalize">
+                                        {{ blog.category_name }}
+                                    </span> 
+                                    <span>{{ blog.created_date_formatted }}</span> 
+                                    <span>Dhaval Shah</span> 
+                                    <span>{{ blog.total_comment }} comments</span>
+                                </p>
+                                <a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
+                                    <h3>
+                                        {{ blog.title }}
+                                    </h3>
+                                </a>
+                                <p class="blog-text" ng-bind-html="blog.description | unsafe" style="height: 62px;overflow: hidden;">
+                                </p>
+                            
+                                <p>
+                                    <ul class="social-icon">
+                                        <li>
+                                            <a target="_blank" class="fbk" id="facebook_link" url_encode="{{ blog.social_encodeurl }}" url="{{ blog.social_url}}" title="Facebook" summary="{{ blog.social_summary }}" image="{{ social_image }}">
+                                                <i class="fa fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="{{ blog.url_encode }}" url="{{ blog.url }}"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-google"></i></a></li>
+                                        
+                                    </ul>
+                                    
+                                </p>
+                            </div>
+                        </div>
+                                               
+                        <div class="">
+                            <ul class="pagination pull-right">
+                              <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                              <li class="active"><a href="#">1</a></li>
+                              <li><a href="#">2</a></li>
+                              <li><a href="#">3</a></li>
+                              <li><a href="#">4</a></li>
+                              <li><a href="#">5</a></li>
+                              <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <div class="right-part">
+                        <div class="subscribe-box">
+                            <h4>Subscribe to Our Newslatter</h4>
+                            <input type="text" class="form-control" placeholder="Enter your email id">
+                            <a class="btn1" href="#">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
             <?php
-            echo $login_footer
+                echo $login_footer
             ?>
         </div>
 
         <script>
-            var base_url = '<?php echo base_url(); ?>';
-        </script>
-        <script>
             //AJAX DATA LOAD BY LAZZY LOADER START
             $(document).ready(function () {
-                blog_post();
-
+                // blog_post();
             });
 
             function category_data(catid, pagenum) {
@@ -434,35 +493,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                 blog_post(pagenum);
             });
 
-
-// $(document).ready(function () {
-
-//     $(window).scroll(function () {
-//         //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-//         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-
-//             var page = $(".page_number:last").val();
-//             var total_record = $(".total_record").val();
-//             var perpage_record = $(".perpage_record").val();
-//             if (parseInt(perpage_record) <= parseInt(total_record)) {
-//                 var available_page = total_record / perpage_record;
-//                 available_page = parseInt(available_page, 10);
-//                 var mod_page = total_record % perpage_record;
-//                 if (mod_page > 0) {
-//                     available_page = available_page + 1;
-//                 }
-//                 //if ($(".page_number:last").val() <= $(".total_record").val()) {
-//                 if (parseInt(page) <= parseInt(available_page)) {
-//                     var pagenum = parseInt($(".page_number:last").val()) + 1;
-//                     blog_post(pagenum);
-//                 }
-//             }
-//         }
-//     });
-// });
-
             var isProcessing = false;
-            function blog_post(pagenum) {
+            /*function blog_post(pagenum) {
                 if (isProcessing) {
                     return;
                 }
@@ -492,23 +524,17 @@ header("Pragma: no-cache"); // HTTP/1.0
                         isProcessing = false;
                     }
                 });
-            }
+            }*/
             //AJAX DATA LOAD BY LAZZY LOADER END
         </script>
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/webpage/blog/blog.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()); ?>"></script>
             <script>
 		
-			
 		// mcustom scroll bar
 			(function($){
 				$(window).on("load",function(){
-					
 					$(".custom-scroll").mCustomScrollbar({
 						autoHideScrollbar:true,
 						theme:"minimal"
@@ -517,5 +543,25 @@ header("Pragma: no-cache"); // HTTP/1.0
 				});
 			})(jQuery);
     </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+    <script>
+        var base_url = '<?php echo base_url(); ?>';
+        var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+        var title = '<?php echo $title; ?>';
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
+        var app = angular.module('blogApp', ['ui.bootstrap']);
+    </script>
+
+    <?php // if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
+            <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script>
+    <?php // } else { ?>
+            <!-- <script src="<?php //echo base_url('assets/js_min/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
+    <?php // } ?>
+
     </body>
 </html>
