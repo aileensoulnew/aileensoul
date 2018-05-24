@@ -318,9 +318,9 @@ header('Expires: ' . $date);
                                         if (response.data == "ok") {
                                             $("#btn-login").html('<img src="<?php echo base_url() ?>images/btn-ajax-loader.gif" /> &nbsp; Login ...');
                                             if (redirect_url == '') {
-                                                window.location = "<?php echo base_url() ?>profiles/" + response.user_slug;
+                                                window.location = "<?php echo base_url() ?>";
                                             } else {
-                                                window.location = redirect_url;
+                                                window.location = "<?php echo base_url() ?>";
                                             }
                                         } else if (response.data == "password") {
                                             $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
