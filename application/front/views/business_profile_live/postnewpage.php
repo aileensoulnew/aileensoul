@@ -118,10 +118,39 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 $companyname = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->company_name;
                                                 $companynameposted = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['posted_user_id']))->row()->company_name;
                                                 $business_userimage = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->business_user_image;
-                                                $business_slug = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->business_slug;
+                                                // $business_slug = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->business_slug;
+
+                                                $sqlbusslug = "SELECT bp.business_profile_id,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,
+                                                    bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,
+                                                    bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,
+                                                    bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,
+                                                    bp.profile_background,bp.profile_background_main,bp.other_business_type,bp.other_industrial
+                                                    FROM aileensoul.ailee_business_profile bp
+                                                    LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+                                                    LEFT JOIN ailee_states st ON st.state_id = bp.state 
+                                                    WHERE user_id = '". $busienss_data[0]['user_id'] ."'";
+                                                    $querybusslug = $this->db->query($sqlbusslug);
+                                                    $business_slug = $querybusslug->row()->business_slug;
+
                                                 $userimageposted = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['posted_user_id']))->row()->business_user_image;
-                                                $slugname = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->business_slug;
-                                                $slugnameposted = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['posted_user_id'], 'status' => '1'))->row()->business_slug;
+                                                // $slugname = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->business_slug;
+                                                // $slugnameposted = $this->db->get_where('business_profile', array('user_id' => $busienss_data[0]['posted_user_id'], 'status' => '1'))->row()->business_slug;
+                                                $sqlslug = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                                                    FROM ailee_business_profile bp
+                                                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                                                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                                                    WHERE bp.status = '1' AND user_id = '". $busienss_data[0]['user_id'] ."'";
+                                                    $queryslug = $this->db->query($sqlslug);
+                                                    $slugname = $queryslug->row()->business_slug;
+
+                                                    $sqlslugposted = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                                                    FROM ailee_business_profile bp
+                                                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                                                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                                                    WHERE bp.status = '1' AND user_id = '". $busienss_data[0]['posted_user_id'] ."'";
+
+                                                    $queryslugposted = $this->db->query($sqlslugposted);
+                                                    $slugnameposted = $queryslugposted->row()->business_slug;
                                                 ?>
                                                 <?php if ($busienss_data[0]['posted_user_id']) {
                                                     ?>
@@ -192,11 +221,31 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                             <div class="post-design-name fl col-xs-8 col-md-10">
                                                 <ul>
                                                     <?php
-                                                    $slugname = $this->db->select('business_slug')->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->business_slug;
+                                                    // $slugname = $this->db->select('business_slug')->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->business_slug;
+
+                                                    $sqlslug = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                                                    FROM ailee_business_profile bp
+                                                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                                                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                                                    WHERE bp.status = '1' AND user_id = '". $busienss_data[0]['user_id'] ."'";
+                                                    $queryslug = $this->db->query($sqlslug);
+                                                    $slugname = $queryslug->row()->business_slug;
+                                                    
+
+
                                                     $categoryid = $this->db->select('industriyal')->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->industriyal;
                                                     $other_category = $this->db->select('other_industrial')->get_where('business_profile', array('user_id' => $busienss_data[0]['user_id'], 'status' => '1'))->row()->other_industrial;
                                                     $category = $this->db->select('industry_name')->get_where('industry_type', array('industry_id' => $categoryid, 'status' => '1'))->row()->industry_name;
-                                                    $slugnameposted = $this->db->select('business_slug')->get_where('business_profile', array('user_id' => $busienss_data[0]['posted_user_id'], 'status' => '1'))->row()->business_slug;
+                                                    // $slugnameposted = $this->db->select('business_slug')->get_where('business_profile', array('user_id' => $busienss_data[0]['posted_user_id'], 'status' => '1'))->row()->business_slug;
+                                                    $sqlslugposted = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                                                    FROM ailee_business_profile bp
+                                                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                                                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                                                    WHERE bp.status = '1' AND user_id = '". $busienss_data[0]['posted_user_id'] ."'";
+
+                                                    $queryslugposted = $this->db->query($sqlslugposted);
+                                                    $slugnameposted = $queryslugposted->row()->business_slug;
+                                                    
                                                     ?>
                                                     <?php if ($busienss_data[0]['posted_user_id']) { ?>
                                                         <li>

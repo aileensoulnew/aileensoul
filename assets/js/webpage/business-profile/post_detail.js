@@ -219,7 +219,7 @@ function commentall(clicked_id) {
         z.style.visibility = 'show';
         $.ajax({
             type: 'POST',
-            url: base_url + "business_profile/pnfourcomment",
+            url: base_url + "business_profile/fourcomment",
             data: 'bus_post_id=' + clicked_id,
             //alert(data);
             success: function (data) {

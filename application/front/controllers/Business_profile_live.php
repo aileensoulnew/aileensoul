@@ -5118,6 +5118,20 @@ Your browser does not support the audio tag.
 
         $contition_array = array('business_profile_post_id' => $id, 'status' => '1');
         $this->data['busienss_data'] = $busienss_data = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        // echo $this->db->last_query();
+        // exit;
+        // $sql = "SELECT  bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,
+        //         bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,
+        //         bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,
+        //         bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,
+        //         bp.profile_background,bp.profile_background_main,bp.other_business_type,bp.other_industrial
+        //         FROM aileensoul.business_profile_post bp
+        //         LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+        //         LEFT JOIN ailee_states st ON st.state_id = bp.state 
+        //         WHERE business_profile_post_id = '". $id ."' AND status = '1'";
+
+        // $query = $this->db->query($sql);
+        // $$this->data['busienss_data'] = $busienss_data = $query->result_array();        
 
         $company_name = $this->get_company_name($slug_id);
         $this->data['title'] = ucwords($company_name) . ' | Post Detail' . ' | Business Profile' . TITLEPOSTFIX;
