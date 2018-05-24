@@ -231,7 +231,8 @@ $route['freelancer/ajax_recommen_candidate'] = "freelancer/ajax_recommen_candida
 
 
 //FREELANCER APPLY ROUTES SETTINGS
-$route['freelance-work/home'] = "freelancer/freelancer_apply_post";
+//$route['freelance-work/home'] = "freelancer/freelancer_apply_post";
+$route['recommended-freelance-work'] = "freelancer/freelancer_apply_post";
 $route['freelance-work/home/live-post'] = "freelancer/freelancer_apply_post/$1";
 $route['freelance-work/freelancer-details/(:any)'] = "freelancer/freelancer_post_profile/$1";
 $route['freelance-work/freelancer-details'] = "freelancer/freelancer_post_profile";
@@ -273,7 +274,8 @@ $route['(:any)-project-in-(:any)'] = "search/freelancer_post_search";
 $route['freelance-work/profile/live-post'] = "freelancer/registation";
 $route['freelance-work/profile/live-post/(:any)'] = "freelancer/registation/$1";
 
-$route['freelance-work'] = "freelancer_apply_live/index";
+// $route['freelance-work'] = "freelancer_apply_live/index";
+$route['freelance-jobs'] = "freelancer_apply_live/index";
 $route['freelance-work/category'] = "freelancer_apply_live/category";
 $route['freelance-work/category/(:any)'] = "freelancer_apply_live/categoryFreelancerList/$1";
 
