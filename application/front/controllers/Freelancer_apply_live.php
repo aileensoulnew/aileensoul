@@ -97,4 +97,40 @@ class Freelancer_apply_live extends MY_Controller {
     public function categoryFreelancerList($cat_slug = ""){
         echo 123; die();
     }
+
+    public function freelancer_apply_register_new()
+    {
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $user_slug = $this->user_model->getUserSlugById($userid);
+        $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+        $userslug = $this->session->userdata('aileenuser_slug');
+        
+        $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
+        $StudentData = $this->user_model->getUserStudentData($userid,"*");
+        $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
+        $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->load->view('freelancer_apply_live/freelancer_apply_register', $this->data);
+    }
+
+    public function freelancer_apply_register()
+    {
+        $this->load->view('freelancer_apply_live/freelancer_apply_register_main', $this->data);
+    }
+
+    public function freelancer_apply_basic_info_new()
+    {
+        $this->load->view('freelancer_apply_live/freelancer_apply_basic_info', $this->data);   
+    }
+
+    public function freelancer_apply_education_info()
+    {        
+        $this->load->view('freelancer_apply_live/freelancer_apply_education_info', $this->data);   
+    }
+
+    public function freelancer_apply_create_profile()
+    {
+        redirect(base_url(),'refresh');
+        //$this->load->view('artist_live/artist_create_profile', $this->data);
+    }
 }

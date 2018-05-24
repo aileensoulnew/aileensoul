@@ -481,6 +481,20 @@ $route['business-profile/basic-info'] = "business_profile_live/business_register
 $route['business-profile/educational-info'] = "business_profile_live/business_register_new";
 $route['business-profile/registration'] = "business_profile_live/business_register_new";
 
+//Freelance hire Signup start
+$route['freelance-employer/create-account'] = "freelancer_hire_live/freelancer_hire_register_new";
+$route['freelance-employer/general-info'] = "freelancer_hire_live/freelancer_hire_register_new";
+$route['freelance-employer/educational-info'] = "freelancer_hire_live/freelancer_hire_register_new";
+$route['freelance-employer/registration'] = "freelancer_hire_live/freelancer_hire_register_new";
+//Freelance hire Signup End
+
+//Freelance Apply Signup start
+$route['freelancer/create-account'] = "freelancer_apply_live/freelancer_apply_register_new";
+$route['freelancer/general-info'] = "freelancer_apply_live/freelancer_apply_register_new";
+$route['freelancer/educational-info'] = "freelancer_apply_live/freelancer_apply_register_new";
+$route['freelancer/registration'] = "freelancer_apply_live/freelancer_apply_register_new";
+//Freelance Apply Signup End
+
 //$route['job/search'] = "job/job_search";
  // $route['jobs'] = "job/job_search";
  // $route['jobs/(:any)'] = "job/job_search/$1";
