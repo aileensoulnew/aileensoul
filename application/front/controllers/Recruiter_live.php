@@ -66,7 +66,7 @@ class Recruiter_live extends MY_Controller {
         }
         else
         {
-            $this->load->view('recruiter_live/recruiter_without_register', $this->data);   
+            $this->load->view('recruiter_live/recruiter_without_main_register', $this->data);   
         }
     }
 
