@@ -51,8 +51,10 @@
                     </div>
                     <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
                         <div class="btn-right pull-right">
-                            <a href="javascript:void(0);" onclick="login_data();" class="btn2" title="Login">Login</a>
-                            <a href="javascript:void(0);" onclick="register_profile();" class="btn3" title="Create an account">Create an account</a>
+                            <!-- <a href="javascript:void(0);" onclick="login_data();" class="btn2" title="Login">Login</a>
+                            <a href="javascript:void(0);" onclick="register_profile();" class="btn3" title="Create an account">Create an account</a> -->
+                            <a href="<?php echo base_url(); ?>login" class="btn2" title="Login">Login</a>
+                            <a href="<?php echo base_url(); ?>job-profile/create-account" onclick="register_profile();" class="btn3" title="Create an account">Create an account</a>
                         </div>
                     </div>
                 </div>

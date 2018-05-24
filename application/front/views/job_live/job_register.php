@@ -48,7 +48,7 @@
                                 <ul>
                                     
                                     <li>
-                                        <a href="#" class="btn3">Login</a>
+                                        <a href="<?php echo base_url(); ?>login" target="_self" class="btn3">Login</a>
                                     </li>
                                 </ul>
                             </div>

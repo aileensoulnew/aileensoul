@@ -58,6 +58,7 @@ $route['default_controller'] = 'main';
 //$route['default_controller'] = 'user_post';
 
 $route['login'] = 'Login/index';
+$route['registration'] = 'Registration/index';
 $route['basic-information'] = 'user_info';
 $route['educational-information'] = 'user_info';
 
