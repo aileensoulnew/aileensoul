@@ -478,6 +478,7 @@ $route['recruiter/registration'] = "recruiter/recruiter_register_new";
 
 $route['business-profile/create-account'] = "business_profile_live/business_register_new";
 $route['business-profile/basic-info'] = "business_profile_live/business_register_new";
+$route['business-profile/educational-info'] = "business_profile_live/business_register_new";
 $route['business-profile/registration'] = "business_profile_live/business_register_new";
 
 //$route['job/search'] = "job/job_search";

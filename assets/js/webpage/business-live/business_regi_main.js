@@ -52,26 +52,26 @@ app.controller('businessRegiMainController', function ($scope, $http, $location,
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
             .when("/business-profile/create-account", {
-                templateUrl: base_url + "recruiter/recruiter_register",
-                controller: 'recruiterRegiController'
+                templateUrl: base_url + "business_profile_live/business_register",
+                controller: 'businessRegiController'
             })
             .when("/business-profile/basic-info", {
-                templateUrl: base_url + "recruiter/recruiter_basic_info",
-                controller: 'recruiterBasicInfoController'
+                templateUrl: base_url + "business_profile_live/business_basic_info",
+                controller: 'businessBasicInfoController'
             })
             .when("/business-profile/educational-info", {
-                templateUrl: base_url + "recruiter/recruiter_education_info",
-                controller: 'recruiterEduInfoController'
+                templateUrl: base_url + "business_profile_live/business_education_info",
+                controller: 'businessEduInfoController'
             })
             .when("/business-profile/registration", {
-                templateUrl: base_url + "recruiter/recruiter_create_profile",
-                controller: 'recruiterCreateProfileController'
+                templateUrl: base_url + "business_profile_live/business_create_profile",
+                controller: 'businessCreateProfileController'
             })            
     $locationProvider.html5Mode(true);
 });
 
-app.controller('recruiterRegiController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Create Recruiter Profile | Aileensoul";    
+app.controller('businessRegiController', function ($scope, $http, $location, $window,$timeout) {
+    $scope.title = "Create Business Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
 
@@ -175,8 +175,8 @@ app.controller('recruiterRegiController', function ($scope, $http, $location, $w
                 } else {
                     if (success.data.okmsg == "ok") {                        
                         $('#basic_info_ajax_load').hide();
-                        var title = "Recruiter Information"
-                        var url = base_url+"recruiter/general-info";
+                        var title = "Business Information"
+                        var url = base_url+"business-profile/basic-info";
                         var obj = {Title: title, Url: url};
                         history.pushState(obj, obj.Title, obj.Url);
 
@@ -233,8 +233,8 @@ app.controller('recruiterRegiController', function ($scope, $http, $location, $w
                 if (response.okmsg == "ok")
                 {
                     $("#btn-register").html('<img src="'+base_url+'images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
-                    var title = "Recruiter Information"
-                    var url = base_url+"recruiter/general-info";
+                    var title = "Business Information"
+                    var url = base_url+"business-profile/basic-info";
                     
                     $location.path(url);
 
@@ -257,8 +257,8 @@ app.controller('recruiterRegiController', function ($scope, $http, $location, $w
     }
 });
 
-app.controller('recruiterBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Recruiter Profile | Aileensoul";    
+app.controller('businessBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
+    $scope.title = "Business Profile | Aileensoul";    
     $scope.jobByLocation = {};
     //$scope.basicinfo = {};
 
@@ -347,8 +347,8 @@ app.controller('recruiterBasicInfoController', function ($scope, $http, $locatio
                     if (success.data.is_success == '1') {
                         angular.element('#basicinfo #submit').removeClass("form_submit");
                         $('#basic_info_ajax_load').hide();
-                        var title = "Recruiter Registrion"
-                        var url = base_url+"recruiter/registration";
+                        var title = "Business Registrion"
+                        var url = base_url+"business-profile/registration";
 
                         var obj = {Title: title, Url: url};
                         history.pushState(obj, obj.Title, obj.Url);
@@ -373,8 +373,8 @@ app.controller('recruiterBasicInfoController', function ($scope, $http, $locatio
     };
 });
 
-app.controller('recruiterEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Recruiter Profile | Aileensoul";
+app.controller('businessEduInfoController', function ($scope, $http, $location, $window,$timeout) {
+    $scope.title = "Business Profile | Aileensoul";
 
     $("#currentStudy").focusin(function(){
         $('#cstooltip').show();
@@ -495,8 +495,8 @@ app.controller('recruiterEduInfoController', function ($scope, $http, $location,
                 if (success.data.is_success == '1') {
                         angular.element('#studentinfo #submit').removeClass("form_submit");
                         $('#student_info_ajax_load').hide();                        
-                        var title = "Recruiter Registrion"
-                        var url = base_url+"recruiter/registration";
+                        var title = "Business Registrion"
+                        var url = base_url+"business-profile/registration";
                         var obj = {Title: title, Url: url};
                         history.pushState(obj, obj.Title, obj.Url);
                     } else {
@@ -511,7 +511,7 @@ app.controller('recruiterEduInfoController', function ($scope, $http, $location,
     };
 });
 
-app.controller('recruiterCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
+app.controller('businessCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
     // alert(first_name);
     $scope.title = "Recruiter Profile | Aileensoul";
 

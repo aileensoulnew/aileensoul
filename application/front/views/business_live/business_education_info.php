@@ -3,7 +3,7 @@
         <ul class="nav nav-tabs">
             <li><a href="#">Create an Account</a></li>
             <li class="active"><a href="#">Basic Information</a></li>
-            <li><a href="#" ng-click="submitStudentInfoForm()">Artistic Registration</a></li>
+            <li><a href="#" ng-click="submitStudentInfoForm()">Business Registration</a></li>
         </ul>
     </div>
     <div class="tab-content">
@@ -41,7 +41,7 @@
                             <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
                         </div>
                         <p class="text-center submit-btn">
-                            <a href="<?php echo base_url();?>recruiter/general-info" class="btn1">Back to Basic Infomation</a>
+                            <a href="<?php echo base_url();?>business-profile/basic-info" class="btn1">Back to Basic Infomation</a>
 
                             <button type="submit" id="submit" class="btn1">Next<span class="ajax_load" id="student_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                         </p>

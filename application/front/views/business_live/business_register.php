@@ -75,7 +75,7 @@
                 </div>
             </header>
         </div>        
-        <div class="middle-section rec-reg-cus">
+        <div class="middle-section bus-reg-cus">
             <div class="container">
                 <div ng-view></div>
             </div>

@@ -3,7 +3,7 @@
         <ul class="nav nav-tabs">
             <li id="ca" class="active"><a href="#">Create an Account</a></li>
             <li><a href="#" ng-click="submitRegiForm()">Basic Information</a></li>
-            <li><a href="#" ng-click="submitRegiForm()">Artistic Registration</a></li>
+            <li><a href="#" ng-click="submitRegiForm()">Business Registration</a></li>
         </ul>
     </div>
     <div class="tab-content">

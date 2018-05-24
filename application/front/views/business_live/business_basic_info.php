@@ -3,7 +3,7 @@
         <ul class="nav nav-tabs">
             <li><a href="#">Create an Account</a></li>
             <li class="active"><a href="#">Basic Information</a></li>
-            <li><a href="#" ng-click="submitBasicInfoForm()">Artistic Registration</a></li>
+            <li><a href="#" ng-click="submitBasicInfoForm()">Business Registration</a></li>
         </ul>
     </div>
     <div class="tab-content">
@@ -16,7 +16,7 @@
                     <form name="basicinfo" id="basicinfo" class="" ng-submit="submitBasicInfoForm()" ng-validate="basicInfoValidate">
                         <div class="form-group">
                             
-                            <p class="student-or-not">If Student then Make your Profile <a href="<?php echo base_url(); ?>recruiter/educational-info">Here!</a> </p>
+                            <p class="student-or-not">If Student then Make your Profile <a href="<?php echo base_url(); ?>business-profile/educational-info">Here!</a> </p>
                         </div>
 
                         <div class="form-group">
