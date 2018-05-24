@@ -5479,4 +5479,39 @@ class Recruiter extends MY_Controller {
         }
     }
 
+    public function recruiter_register_new()
+    {
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $user_slug = $this->user_model->getUserSlugById($userid);
+        $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+        $userslug = $this->session->userdata('aileenuser_slug');
+        
+        $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
+        $StudentData = $this->user_model->getUserStudentData($userid,"*");
+        $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
+        $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
+        $this->load->view('recruiter_live/recruiter_register', $this->data);
+    }
+
+    public function recruiter_register()
+    {
+        $this->load->view('recruiter_live/recruiter_register_main', $this->data);
+    }
+
+    public function recruiter_basic_info()
+    {
+        $this->load->view('recruiter_live/recruiter_basic_info', $this->data);   
+    }
+
+    public function recruiter_education_info()
+    {        
+        $this->load->view('recruiter_live/recruiter_education_info', $this->data);   
+    }
+
+    public function recruiter_create_profile()
+    {
+        redirect(base_url(),'refresh');
+        //$this->load->view('artist_live/artist_create_profile', $this->data);
+    }
+
 }

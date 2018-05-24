@@ -462,11 +462,24 @@ $route['job-profile/basic-info'] = "job_live/job_register_new";
 $route['job-profile/educational-info'] = "job_live/job_register_new";
 $route['job-profile/registration'] = "job_live/job_register_new";
 
-
-$route['job/registration'] = "job/job_reg";
 $route['job/registration/live-post'] = "job/job_reg";
 $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";
 $route['job-profile/(:any)'] = "job/job_printpreview/$1";
+
+$route['artist-profile/create-account'] = "artist_live/artist_register_new";
+$route['artist-profile/basic-info'] = "artist_live/artist_register_new";
+$route['artist-profile/educational-info'] = "artist_live/artist_register_new";
+$route['artist-profile/registration'] = "artist_live/artist_register_new";
+
+$route['recruiter/create-account'] = "recruiter/recruiter_register_new";
+$route['recruiter/general-info'] = "recruiter/recruiter_register_new";
+$route['recruiter/educational-info'] = "recruiter/recruiter_register_new";
+$route['recruiter/registration'] = "recruiter/recruiter_register_new";
+
+$route['business-profile/create-account'] = "business_profile_live/business_register_new";
+$route['business-profile/basic-info'] = "business_profile_live/business_register_new";
+$route['business-profile/registration'] = "business_profile_live/business_register_new";
+
 //$route['job/search'] = "job/job_search";
  // $route['jobs'] = "job/job_search";
  // $route['jobs/(:any)'] = "job/job_search/$1";
