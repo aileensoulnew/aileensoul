@@ -130,7 +130,21 @@ class Freelancer_apply_live extends MY_Controller {
 
     public function freelancer_apply_create_profile()
     {
-        redirect(base_url(),'refresh');
-        //$this->load->view('artist_live/artist_create_profile', $this->data);
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['user_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+        
+        $contition_array = array('status' => '1');
+        $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('status' => '1', 'is_other' => '0');
+        $this->data['category'] = $this->common->select_data_by_condition('category', $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('is_delete' => '0', 'category_name !=' => "Other");
+        $search_condition = "( status = '1')";
+        $this->data['category_data'] = $this->common->select_data_by_search('category', $search_condition, $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $contition_array = array('is_delete' => '0', 'status' => '1', 'category_name' => "Other");
+        $this->data['category_otherdata'] = $this->common->select_data_by_condition('category', $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->load->view('freelancer_apply_live/freelancer_apply_create_profile', $this->data);
     }
 }

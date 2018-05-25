@@ -3142,8 +3142,100 @@ class Freelancer extends MY_Controller {
         $count = $result[0]['total'];
         return $count;
     }
+    //function user when live link and login start
 
-//function user when live link and login start
-   
+    public function registation_insert_new($postliveid = '') {
+         //echo $postliveid;die();
+        $userid = $this->session->userdata('aileenuser');
 
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $errors = array();
+        $data = array();
+
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        
+        if (empty($_POST['first_name']))
+            $errors['errorFname'] = 'Firstname is required.';
+
+        if (empty($_POST['last_name']))
+            $errors['errorLname'] = 'Lastname is required.';
+
+        if (empty($_POST['email']))
+            $errors['errorEmail'] = 'Email is required.';
+
+        if (!empty($errors)) {
+            $data['errors'] = $errors;
+        }
+        else
+        {
+            $firstname = trim($_POST['first_name']);
+            $lastname = trim($_POST['last_name']);
+            $email = trim($_POST['email']);
+            $country = trim($_POST['country']);
+            $state = trim($_POST['state']);
+            $city = trim($_POST['city']);
+            $field = trim($_POST['field']);
+            $experience_year = trim($_POST['experience_year']);
+            $experience_month = trim($_POST['experience_month']);
+            $phoneno = trim($_POST['phoneno']);
+            $skills = trim($_POST['skills']);
+
+            $skills = explode(',', $skill1);
+            if (count($skills) > 0) {
+                foreach ($skills as $ski) {
+                    if ($ski != " ") {
+                        $contition_array = array('skill' => trim($ski), 'type' => '1');
+                        $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                        if (count($skilldata) < 0) {
+                            $contition_array = array('skill' => trim($ski), 'type' => '5');
+                            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                        }
+                        if ($skilldata) {
+                            $skill[] = $skilldata[0]['skill_id'];
+                        } else {
+                            $data = array(
+                                'skill' => trim($ski),
+                                'status' => '1',
+                                'type' => '5',
+                                'user_id' => $userid,
+                            );
+                            $skill[] = $this->common->insert_data_getid($data, 'skill');
+                        }
+                    }
+                }
+                $skill = array_unique($skill, SORT_REGULAR);
+                $skills = implode(',', $skill);
+            }
+
+            $first_lastname = $firstname . " " . $lastname;
+            $data = array(
+                'freelancer_post_fullname' => $firstname,
+                'freelancer_post_username' => $lastname,
+                'freelancer_post_email' => $email,
+                'freelancer_post_country' => $country,
+                'freelancer_post_state' => $state,
+                'freelancer_post_city' => $city,
+                'freelancer_post_field' => $field,
+                'freelancer_post_area' => $skills,
+                'freelancer_post_exp_month' => $experience_month,
+                'freelancer_post_exp_year' => $experience_year,
+                'freelancer_apply_slug' => $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg'),
+                'user_id' => $userid,
+                'created_date' => date('Y-m-d', time()),
+                'status' => '1',
+                'is_delete' => '0',
+                'free_post_step' => '7'
+            );
+            $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');
+
+            if ($insert_id) {
+                $data = array("is_success" => 1);
+            }
+            else
+            {
+                $data['errors'] = $errors['not_sucess'] = "Please Try again";
+            }
+        }
+        echo json_encode($data);
+    }
 }

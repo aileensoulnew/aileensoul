@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="phone_number" id="phone_number" tabindex="2" placeholder="Phone Number" maxlength="35">
+                                    <input class="form-control" type="text" name="phoneno" id="phoneno" tabindex="2" placeholder="Phone Number" maxlength="35" ng-model="user.phoneno">
                                     <div id="pntooltip" class="tooltip-custom" style="display: none;">
                                         Enter a valid phone number so that other people can connect with you.
                                     </div>
