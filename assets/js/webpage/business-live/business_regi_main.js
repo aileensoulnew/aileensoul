@@ -515,28 +515,20 @@ app.controller('businessCreateProfileController', function ($scope, $http, $loca
     // alert(first_name);
     $scope.title = "Recruiter Profile | Aileensoul";
 
-    $("#email").focusin(function(){
-        $('#emtooltip').show();
+    $("#contactmobile").focusin(function(){
+        $('#cmtooltip').show();
     });
-    $("#email").focusout(function(){
-        $('#emtooltip').hide();
-    });
-
-    $("#job_title").focusin(function(){
-        $('#jttooltip').show();
-    });
-    $("#job_title").focusout(function(){
-        $('#jttooltip').hide();
+    $("#contactmobile").focusout(function(){
+        $('#cmtooltip').hide();
     });
 
-    $("#cities2").focusin(function(){
-        $('#lotooltip').show();
+    $("#business_details").focusin(function(){
+        $('#bdtooltip').show();
     });
-    $("#cities2").focusout(function(){
-        $('#lotooltip').hide();
+    $("#business_details").focusout(function(){
+        $('#bdtooltip').hide();
     });
 });
-
 
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({

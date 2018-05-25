@@ -10982,8 +10982,11 @@ Your browser does not support the audio tag.
 
     public function business_create_profile()
     {
-        redirect(base_url(),'refresh');
-        //$this->load->view('artist_live/artist_create_profile', $this->data);
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['user_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+        $contition_array = array('status' => '1');
+        $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->load->view('business_live/business_create_profile', $this->data);
     }
 
     
