@@ -1,6 +1,6 @@
 $(document).ready(function() {
     if (profile_login == 'live') {
-        if (typeof session_userid === 'undefined') $('#register').modal('show');
+        // if (typeof session_userid === 'undefined') $('#register').modal('show');
     } // country change
     // $('#country').on('change',function(){ 
     $(document).on('change', '#country', function() {

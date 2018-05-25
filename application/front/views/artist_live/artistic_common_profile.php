@@ -64,9 +64,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 </div>
 <div class="container tablate-container">
 	<div class="profile-photo">
-
 		<div class="buisness-menu other-profile-menu">
-
 			<!--PROFILE PIC START-->
 			<div class="profile-pho-bui">
 				<div class="user-pic padd_img">
@@ -83,7 +81,6 @@ $session_user_id = $this->session->userdata('aileenuser');
 								<img  src="<?php echo base_url(NOARTIMAGE); ?>"  alt="NOARTIMAGE">
 							<?php }
 						} else{
-
 							$filename = $this->config->item('art_profile_thumb_upload_path') . $artisticdata[0]['art_user_image'];
 							$s3 = new S3(awsAccessKey, awsSecretKey);
 							$this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
@@ -92,7 +89,6 @@ $session_user_id = $this->session->userdata('aileenuser');
 							 <img src="<?php echo ART_PROFILE_THUMB_UPLOAD_URL . $artisticdata[0]['art_user_image']; ?>" alt="<?php echo $artisticdata[0]['art_user_image']; ?>" >
 							 <?php
 						 } else { ?>
-
 							<img  src="<?php echo base_url(NOARTIMAGE); ?>"  alt="NOARTIMAGE">
 						<?php } }?>
 					</div>
@@ -104,11 +100,8 @@ $session_user_id = $this->session->userdata('aileenuser');
 							<h4 class="profile-head-text"><a href="javascript:void(0);" title="<?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?>" onclick="login_profile();">
 							 <?php echo ucfirst(strtolower($artisticdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artisticdata[0]['art_lastname'])); ?></a>
 						 </h4>
-
 						 <h4 class="profile-head-text_dg">
-
-
-							 <?php
+							<?php
 							 if ($artisticdata[0]['designation'] == '') {
 								?>
 
@@ -118,22 +111,15 @@ $session_user_id = $this->session->userdata('aileenuser');
 								<?php } else{?>
 									<a title="Current Work">Current Work </a>
 								<?php }?>
-
 							<?php } else { ?> 
-
 								<?php if ($artisticdata[0]['user_id'] == $userid) { ?>
-
 									<a id="designation" class="designation" title="<?php echo ucfirst(strtolower($artisticdata[0]['designation'])); ?>">
 										<?php echo ucfirst(strtolower($artisticdata[0]['designation'])); ?>
-
 									</a>
-
 								<?php } else { ?>
 									<a title="<?php echo ucfirst(strtolower($artisticdata[0]['designation'])); ?>"><?php echo ucfirst(strtolower($artisticdata[0]['designation'])); ?></a>
 								<?php } ?>
-
 							<?php } ?>
-
 						</h4>
 					</div>
 				</div>
@@ -380,37 +366,36 @@ $session_user_id = $this->session->userdata('aileenuser');
 				<?php } ?>
 
 <!-- IF DEACTIVATE REGISTER -->
-<?php if($isartistactivate == false && $artist_isregister == true && $session_user_id){ ?>
-<div class="modal fade login register-model" id="register" role="dialog" data-backdrop="static" data-keyboard="false">
-	<div class="modal-dialog">
-		<div class="modal-content inner-form1">
-			<button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
-			<div class="modal-body">
-				<div class="clearfix">
-					<div class=" ">
-						<div class="title">
-							<h1 class="tlh1">Reactiavte Artistic Profile</h1>
-						</div>
-						<div class="reactivatebox">
-							<div class="reactivate_header">
-							 	<center><h2>Are you sure you want to reactive your artistic profile?</h2></center>
+		<?php if($isartistactivate == false && $artist_isregister == true && $session_user_id){ ?>
+		<div class="modal fade login register-model" id="register" role="dialog" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content inner-form1">
+					<button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+					<div class="modal-body">
+						<div class="clearfix">
+							<div class=" ">
+								<div class="title">
+									<h1 class="tlh1">Reactiavte Artistic Profile</h1>
+								</div>
+								<div class="reactivatebox">
+									<div class="reactivate_header">
+									 	<center><h2>Are you sure you want to reactive your artistic profile?</h2></center>
+								 	</div>
+								 	<div class="reactivate_btn_y">
+									 	<a href="<?php echo base_url('artist/reactivate'); ?>" title="Yes">Yes</a>
+								 	</div>
+								 	<div class="reactivate_btn_n">
+										<a href="javascript:void(0)" onclick="hidereactivepopup()" title="No">No</a>
+									</div>
+								 <script src="<?php echo base_url('assets/js_min/fb_login.js'); ?>"></script>
+								</div>
 						 	</div>
-						 	<div class="reactivate_btn_y">
-							 	<a href="<?php echo base_url('artist/reactivate'); ?>" title="Yes">Yes</a>
-						 	</div>
-						 	<div class="reactivate_btn_n">
-								<a href="javascript:void(0)" onclick="hidereactivepopup()" title="No">No</a>
-							</div>
-						 <script src="<?php echo base_url('assets/js_min/fb_login.js'); ?>"></script>
-						</div>
-				 	</div>
-			 	</div>
-	 		</div>
- 		</div>
-		</div>
-	</div>
-<?php } ?>
-
+					 	</div>
+			 		</div>
+		 		</div>
+				</div>
+			</div>
+		<?php } ?>
 		 <script>
 			var artist_deactive = '<?php echo $isartistactivate; ?>';
 			var artist_isregister = '<?php echo $artist_isregister; ?>';
@@ -418,11 +403,10 @@ $session_user_id = $this->session->userdata('aileenuser');
 			var user_id = session_user_id;
 			var profile_login = (session_user_id) ? 'login' : 'live';
 		</script>
-
 		<script type="text/javascript">
 			$(document).ready(function(){
 				if(!artist_isregister){
-					$('#register').modal('show');
+					// $('#register').modal('show');
 				}
 			});
 
