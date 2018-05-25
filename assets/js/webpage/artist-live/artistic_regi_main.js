@@ -522,10 +522,10 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
         $('#emtooltip').hide();
     });
 
-    $("#phone_number").focusin(function(){
+    $("#phoneno").focusin(function(){
         $('#pntooltip').show();
     });
-    $("#phone_number").focusout(function(){
+    $("#phoneno").focusout(function(){
         $('#pntooltip').hide();
     });
 

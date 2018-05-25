@@ -104,44 +104,8 @@
             var userid = "<?php echo $userid?>";
             var first_name = "asd";
             var app = angular.module('freelancerRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
-
-            function experience(){
-                document.getElementById('exp_data').style.display = 'block';
-            }
-
-            function not_experience(){
-                var melement = document.getElementById('exp_data');                   
-                if(melement.style.display == 'block'){
-                    melement.style.display = 'none';
-                    //value none if user have press yes button start
-                    $("#experience_year").val("");
-                    $("#experience_month").val("");
-                }
-            }
-
-            function expyear_change() {
-                var experience_year = document.querySelector("#experience_year").value;
-                if (experience_year)
-                {
-                    $('#experience_month').attr('disabled', false);
-                    var experience_year = document.getElementById('experience_year').value;
-                    if (experience_year === '0 year') {
-                        $("#experience_month option[value='0 month']").attr('disabled', true);
-                    } else {
-                        $("#experience_month option[value='0 month']").attr('disabled', false);
-                    }
-                }
-                else
-                {
-                    $('#experience_month').attr('disabled', 'disabled');
-                }
-            }
-            $(document).ready(function(){
-                $('[data-toggle="tooltip"]').tooltip();   
-            });
-        </script>        
-        <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/freelancer_apply_regi_main.js?ver=' . time()) ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
+            
+        </script>
+        <script src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/freelancer_apply_regi_main.js?ver=' . time()) ?>"></script>        
     </body>
 </html>

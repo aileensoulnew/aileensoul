@@ -522,19 +522,159 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
         $('#emtooltip').hide();
     });
 
-    $("#job_title").focusin(function(){
-        $('#jttooltip').show();
+    $("#phoneno").focusin(function(){
+        $('#pntooltip').show();
     });
-    $("#job_title").focusout(function(){
-        $('#jttooltip').hide();
+    $("#phoneno").focusout(function(){
+        $('#pntooltip').hide();
     });
 
-    $("#cities2").focusin(function(){
-        $('#lotooltip').show();
+    $("#skills1").focusin(function(){
+        $('#sktooltip').show();
     });
-    $("#cities2").focusout(function(){
-        $('#lotooltip').hide();
+    $("#skills1").focusout(function(){
+        $('#sktooltip').hide();
     });
+
+    $scope.freelanceapplyRegiValidate = {
+        rules: {
+            firstname: {
+                required: true
+            },
+            lastname: {
+                required: true,
+                //regx: /^["-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+            },
+            email: {
+                required: true,
+                email: true,
+                remote: {
+                    url: base_url + "freelancer/check_email",
+                    type: "post",
+                    data: {
+                        email: function () {
+                            return $("#email").val();
+                        },
+                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                    }, async: false
+                },
+            },
+            phoneno: {
+               number: true,
+                minlength: 8,
+                maxlength: 15
+            },
+            country: {
+                required: true,
+            },
+            state: {
+                required: true,
+            },
+            city: {
+                required: true,
+            },
+            field: {
+                required: true
+            },
+            skills: {
+                required: true,
+                //regx: /^["-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+            },
+            experience_year: {
+                required: true
+            },
+            experience_month: {
+                required: true
+            },
+        },
+        groups: {
+          experience: "experience_year experience_month"
+        },
+        messages: {
+            firstname: {
+                required: "First name is required."
+            },
+            lastname: {
+                required: "Last name is required."
+            },
+            email: {
+                required: "Email id is required.",
+                email: "Please enter valid email id.",
+                remote: "Email already exists."
+            },
+            phoneno: {
+                minlength: "Minimum length 8 digit",
+                maxlength: "Maximum length 15 digit"
+            },
+            country: {
+                required: "Country is required.",
+            },
+            state: {
+                required: "State is required.",
+            },
+            city: {
+                required: "City is required.",
+            },
+            field: {
+                required: "Field is required",
+            },
+            skills: {
+                required: "Skill is required"
+            },
+            experience_year : {
+              required: "Experience is required"  
+            },
+            experience_month : {
+              required: "Experience is required"  
+            }
+        },
+    };
+
+    $scope.submitFreelanceapplyRegiForm = function () {
+        $scope.user.city = $("#city").val();
+        $scope.user.state = $("#state").val();
+        $scope.user.skills = $("#skills1").val();
+        setTimeout(function(){
+            $("#city").val($scope.user.city);
+            $("#state").val($scope.user.state);
+        },100);
+
+        if ($scope.freelanceapplyinfo.validate()) {
+            angular.element('#freelanceapplyinfo #submit').addClass("form_submit");
+            $('#profilereg_ajax_load').show();
+            $http({
+                method: 'POST',
+                url: base_url + 'freelancer/registation_insert_new',
+                data: $scope.user,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                $('#profilereg_ajax_load').hide();
+                if (success.data.errors) {
+                    $scope.errorFname = success.data.errors.errorFname;
+                    $scope.errorLname = success.data.errors.errorLname;
+                    $scope.errorEmail = success.data.errors.errorEmail;
+                    $scope.errorCon = success.data.errors.errorCon;
+                    $scope.errorSt = success.data.errors.errorSt;
+                }
+                else
+                {
+                    if (success.data.is_success == '1')
+                    {
+                        //window.location = base_url+"artist/home";
+                        window.location = base_url + "recommended-freelance-work"
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    };
 });
 
 
@@ -565,3 +705,38 @@ function addItem () {
     // container.appendChild(item);
     itemsCounter++;
 }
+$(document).on('change','#country', function () {
+    var countryID = $(this).val();
+    if (countryID) {
+        $.ajax({
+            type: 'POST',
+            url: base_url + "freelancer/ajax_data",
+            data: 'country_id=' + countryID,
+            success: function (html) {
+                $('#state').html(html);
+                $('#state').removeClass("color-black-custom");
+                $('#city').removeClass("color-black-custom");
+                $('#city').html('<option value="">Select state first</option>');
+            }
+        });
+    } else {
+        $('#state').html('<option value="">Select country first</option>');
+        $('#city').html('<option value="">Select state first</option>');
+    }
+});
+$(document).on('change','#state', function () {
+    var stateID = $(this).val();
+    if (stateID) {
+        $.ajax({
+            type: 'POST',
+            url: base_url + "freelancer/ajax_data",
+            data: 'state_id=' + stateID,
+            success: function (html) {
+                $('#city').html(html);
+                 $('#city').removeClass("color-black-custom");
+            }
+        });
+    } else {
+        $('#city').html('<option value="">Select state first</option>');
+    }
+});
