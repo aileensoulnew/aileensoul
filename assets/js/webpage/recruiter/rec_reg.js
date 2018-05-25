@@ -424,7 +424,8 @@ function submitrecruiterForm()
 
 
 $(document).ready(function () {
-    $('#country').on('change', function () {
+    //$('#country').on('change', function () {
+    $(document).on('change','#country', function () {
         var countryID = $(this).val();
         
         if (countryID) {
@@ -443,7 +444,8 @@ $(document).ready(function () {
         }
     });
 
-    $('#state').on('change', function () {
+    //$('#state').on('change', function () {
+    $(document).on('change','#state', function () {
         var stateID = $(this).val();
         if (stateID) {
             $.ajax({

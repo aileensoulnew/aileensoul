@@ -102,8 +102,9 @@
             var profData = "<?php echo $professionData;?>";
             var studData = "<?php echo $studentData?>";
             var userid = "<?php echo $userid?>";
-            var first_name = "asd";
+            var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var app = angular.module('recruiterRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
+            
 
             function experience(){
                 document.getElementById('exp_data').style.display = 'block';
@@ -143,5 +144,6 @@
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/recruiter-live/recruiter_regi_main.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_reg.js'); ?>"></script>
     </body>
 </html>

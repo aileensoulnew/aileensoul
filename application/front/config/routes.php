@@ -531,8 +531,11 @@ $route['recruiter/company/(:any)'] = "recruiter_live/company/$1";
 $route['recruiter/search'] = "recruiter_live/job_search";
 $route['recruiter/reactivateacc'] = "recruiter_live/reactivateacc";
 
-$route['recruiter/registration'] = "recruiter/rec_reg";
-$route['recruiter/registration/live-post'] = "recruiter/rec_reg";
+/*$route['recruiter/registration'] = "recruiter/rec_reg";
+$route['recruiter/registration/live-post'] = "recruiter/rec_reg";*/
+
+$route['recruiter/signup'] = "recruiter/rec_reg";
+$route['recruiter/signup/live-post'] = "recruiter/rec_reg";
 
 $route['recruiter/basic-information'] = "recruiter/rec_basic_information";
 $route['recruiter/company-information'] = "recruiter/company_info_form";

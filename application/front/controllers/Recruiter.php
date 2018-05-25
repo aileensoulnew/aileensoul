@@ -5510,8 +5510,83 @@ class Recruiter extends MY_Controller {
 
     public function recruiter_create_profile()
     {
-        redirect(base_url(),'refresh');
-        //$this->load->view('artist_live/artist_create_profile', $this->data);
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['rec_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+        $contition_array = array('status' => '1');
+        $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->load->view('recruiter_live/recruiter_create_profile', $this->data);
+    }
+
+    public function reg_insert_new() {
+
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $errors = array();
+        $data = array();
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        
+        if (empty($_POST['first_name']))
+            $errors['errorFname'] = 'Firstname is required.';
+
+        if (empty($_POST['last_name']))
+            $errors['errorLname'] = 'Lastname is required.';
+
+        if (empty($_POST['email']))
+            $errors['errorEmail'] = 'Email is required.';
+
+        if (empty($_POST['company_name']))
+            $errors['errorCN'] = 'Company name is required.';
+
+        if (empty($_POST['company_email']))
+            $errors['errorCE'] = 'Company Email address is required.';
+
+        if (empty($_POST['country']))
+            $errors['errorCon'] = 'Country is required.';
+
+        if (empty($_POST['state']))
+            $errors['errorSt'] = 'State is required.';
+
+        if (!empty($errors)) {
+            $data['errors'] = $errors;
+        }
+        else
+        {
+            $first_name = trim($_POST['first_name']);
+            $last_name = trim($_POST['last_name']);
+            $email = trim($_POST['email']);
+            $company_name = trim($_POST['company_name']);
+            $company_email = trim($_POST['company_email']);
+            $company_number = trim($_POST['company_number']);
+            $company_profile = trim($_POST['company_profile']);
+            $country = trim($_POST['country']);
+            $state = trim($_POST['state']);
+            $city = trim($_POST['city']);
+
+            $data = array(
+                'rec_firstname' => $first_name,
+                'rec_lastname' => $last_name,
+                'rec_email' => $email,
+                'user_id' => $userid,
+                're_comp_name' => $company_name,
+                're_comp_email' => $company_email,
+                're_comp_phone' => $company_number,
+                're_comp_profile' => trim($company_profile),
+                're_comp_country' => $country,
+                're_comp_state' => $state,
+                're_comp_city' => $city,
+                'created_date' => date('y-m-d h:i:s'),
+                're_status' => '1',
+                'is_delete' => '0',
+                're_step' => '3'
+            );
+
+            $insert_id = $this->common->insert_data_getid($data, 'recruiter');            
+            if ($insert_id) {                
+                $data = array("is_success" => 1);
+            } else {
+                $data['errors'] = $errors['not_sucess'] = "Please Try again";
+            }
+        }
+        echo json_encode($data);        
     }
 
 }
