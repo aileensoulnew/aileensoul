@@ -811,7 +811,7 @@ border-bottom: 0px;}
 .all-list ul li .list-box .profile-img img{height: 100%;}
 .all-list ul li .list-box {
     width: 200px;
-    height: 292px;
+    height: 310px;
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -845,7 +845,6 @@ border-bottom: 0px;}
 }
 .dc_cl_m {
     color: #8c8c8c;
-    display: inline-block;
     font-size:14px;
     text-transform: capitalize;
 }
@@ -2134,6 +2133,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .comment-details-menu a:hover{color:#1b8ab9;}
 .notification-database{padding:0; height:auto;}
 .data_noti_msg span {line-height:1;}
+.cq_post ul li:hover{background:#e9f4f8;}
 
 /***  job css  ***/
 .message button.modal-close{background:#1b8ab9; color:#fff;}
