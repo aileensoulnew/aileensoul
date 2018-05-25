@@ -847,7 +847,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url('artist') ?>">
+                                    <a href="<?php echo base_url('find-artist') ?>">
                                         <div class="all-pr-img">
                                             <img src="<?php echo base_url() ?>assets/img/i5.jpg">
                                         </div>
@@ -1293,8 +1293,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
         <?php } ?>
         <script>
-                                        var base_url = '<?php echo base_url(); ?>';
-                                        var post_id = '<?php echo $post_id; ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var post_id = '<?php echo $post_id; ?>';
+            var header_all_profile = '<?php echo $header_all_profile ?>';
         </script>
         <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/post_detail.js?ver=' . time()); ?>"></script>
