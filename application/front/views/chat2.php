@@ -170,7 +170,9 @@ if ($lstusrdata) {
     }
     if ($message_from_profile == 6) {
         $last_user_image = $last_user_data['user_image'];
-        $profile_url = base_url() . 'artist/art_manage_post/' . $id;
+        // $profile_url = base_url() . 'artist/art_manage_post/' . $id;
+        $artdata = $this->common->select_data_by_id('art_reg', 'user_id', $id, $data = 'slug');
+        $profile_url = base_url() . 'artist/p/' . $artdata[0]['slug'];
     }
     ?>
         <a href="<?php echo $profile_url; ?>">

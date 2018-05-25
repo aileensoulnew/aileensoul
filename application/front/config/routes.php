@@ -346,6 +346,8 @@ $route['artist/reactivateacc'] = "artist_live/reactivateacc";
 
 // $route['artist/location'] = "artist_live/location";
 $route['artist_live/artistCategory'] = "artist_live/artistCategory";
+$route['artist/insert_commentthree_postnewpage'] = "artist/insert_commentthree_postnewpage";
+$route['artist/postnewpage_fourcomment'] = "artist/postnewpage_fourcomment";
 $route['artist/p/(:any)/following'] = "artist_live/following/$1";
 $route['artist/p/(:any)/followers'] = "artist_live/followers/$1";
 // $route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";

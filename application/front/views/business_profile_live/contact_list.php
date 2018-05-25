@@ -285,6 +285,7 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var slug = '<?php echo $slugid; ?>';
+            var header_all_profile = '<?php echo $header_all_profile ?>';
         </script>
         <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
             <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()); ?>"></script>

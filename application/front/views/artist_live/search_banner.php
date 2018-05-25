@@ -9,14 +9,21 @@
 	<div class="container">
 		<div class="text-right pt20 create-profile-btn">
 			<?php 
-				if ($ismainregister == true && $artist_isregister == true) { 
+				//if ($ismainregister == true && $artist_isregister == true) { 
 			?>
-				<?php if($artist_isregister == false){ ?>
-					<a class="btn3" href="<?php echo artist_registration ?>">Create Artist Profile</a>
-				<?php } else{ ?>
-					<a class="btn3" href="<?php echo artist_reactivateacc; ?>">Reactivate Artist Profile</a>
-				<?php } ?>
+				<?php //if($artist_isregister == false){ ?>
+					<!-- <a class="btn3" href="<?php //echo artist_registration ?>">Create Artist Profile</a> -->
+				<?php //} else{ ?>
+					<!-- <a class="btn3" href="<?php //echo artist_reactivateacc; ?>">Reactivate Artist Profile</a> -->
+				<?php //} ?>
+			<?php //} ?>
+
+			<?php 
+				if ($ismainregister == true && $artist_isregister == false) { 
+			?>
+				<a class="btn3" href="<?php echo artist_registration ?>">Create Artist Profile</a>
 			<?php } ?>
+
 		</div>
 		<div class="row">
 			<div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">

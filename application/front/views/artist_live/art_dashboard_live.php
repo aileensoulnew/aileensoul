@@ -943,7 +943,7 @@ function submitforgotForm()
             $(document).ready(function () {
                 if(typeof session_userid === 'undefined'){
                     setTimeout(function () {
-                        $('#register').modal('show');
+                        // $('#register').modal('show');
                     }, 2000);
                 }
             });

@@ -644,7 +644,7 @@ class Artist extends MY_Controller {
                 if ($get_url == $this->uri->segment(3)) {
                     $this->load->view('artist/art_manage_post', $this->data);
                 } else {
-                    redirect('artist/dashboard/' . $get_url, refresh);
+                    redirect('artist/p/' . $get_url, refresh);
                 }
             }
         } else {
@@ -659,7 +659,7 @@ class Artist extends MY_Controller {
                 if ($get_url == $this->uri->segment(3)) {
                     $this->load->view('artist/art_dashboard_live', $this->data);
                 } else {
-                    redirect('artist/dashboard/' . $get_url, refresh);
+                    redirect('artist/p/' . $get_url, refresh);
                 }
             }
         }
@@ -1142,7 +1142,7 @@ class Artist extends MY_Controller {
                                                 <div class="else_post_d">
                                                     <div class="post-design-product">
                                                         <a class="post_dot" href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($artdataposted[0]['art_name'])) . ' ' . ucfirst(strtolower($artdataposted[0]['art_lastname'])) . '</a>
-                                                        <p class="posted_with" > Posted With</p> <a class="post_dot1 padding_less_left"  href="' . base_url('artist/dashboard/' . $geturl_user) . '">' . ucfirst(strtolower($artdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artdata[0]['art_lastname'])) . '</a>
+                                                        <p class="posted_with" > Posted With</p> <a class="post_dot1 padding_less_left"  href="' . base_url('artist/p/' . $geturl_user) . '">' . ucfirst(strtolower($artdata[0]['art_name'])) . ' ' . ucfirst(strtolower($artdata[0]['art_lastname'])) . '</a>
                                                         <span role="presentation" aria-hidden="true"> · </span> <span class="ctre_date">
                                         ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '  
                                                         </span> </div></div>
@@ -2079,7 +2079,11 @@ class Artist extends MY_Controller {
                                                                             </div>
                                                                             <div>';
             $return_html .= '<a>';
-                $return_html .= ucfirst(strtolower($user['art_category'])) . " " . "( " . ucfirst(strtolower($user['city_name'])) . " )";
+            $return_html .= ucfirst(strtolower($user['art_category']));
+            if($user['city_name'] != ""){
+                $return_html .= " " . "( " . ucfirst(strtolower($user['city_name'])) . " )";
+            }
+
             // if ($user['designation']) {
             //     $return_html .= ucfirst(strtolower($user['designation']));
             // } else {
@@ -4415,7 +4419,7 @@ class Artist extends MY_Controller {
 
                     $cmtinsert .= '<div class="all-comment-comment-box">';
                     $cmtinsert .= '<div class="post-design-pro-comment-img">';
-                    $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                    $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
                         if ($art_userimage) {
@@ -4444,7 +4448,7 @@ class Artist extends MY_Controller {
                     $cmtinsert .= '</div>';
 
                     $cmtinsert .= '<div class="comment-name">';
-                    $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                    $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
                 <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
                     $cmtinsert .= '</div>';
@@ -4569,7 +4573,7 @@ class Artist extends MY_Controller {
 
                 $cmtinsert .= '<div class="all-comment-comment-box">';
                 $cmtinsert .= '<div class="post-design-pro-comment-img">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                 if (IMAGEPATHFROM == 'upload') {
                     if ($art_userimage) {
@@ -4601,7 +4605,7 @@ class Artist extends MY_Controller {
 
 
                 $cmtinsert .= '<div class="comment-name">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
                 <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
                 $cmtinsert .= '</div>';
                 $cmtinsert .= '<div class="comment-details" id="showcomment' . $art['artistic_post_comment_id'] . '" >';
@@ -4763,7 +4767,7 @@ class Artist extends MY_Controller {
 
                     $cmtinsert .= '<div class="all-comment-comment-box">';
                     $cmtinsert .= '<div class="post-design-pro-comment-img">';
-                    $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                    $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
                         if ($art_userimage) {
@@ -4795,7 +4799,7 @@ class Artist extends MY_Controller {
                     $cmtinsert .= '</a>';
                     $cmtinsert .= '</div>';
                     $cmtinsert .= '<div class="comment-name">';
-                    $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                    $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
                 <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
                     $cmtinsert .= '</div>';
@@ -4916,7 +4920,7 @@ class Artist extends MY_Controller {
 
                 $cmtinsert .= '<div class="all-comment-comment-box">';
                 $cmtinsert .= '<div class="post-design-pro-comment-img">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                 if (IMAGEPATHFROM == 'upload') {
                     if ($art_userimage) {
@@ -4945,7 +4949,7 @@ class Artist extends MY_Controller {
                 $cmtinsert .= '</a>';
                 $cmtinsert .= '</div>';
                 $cmtinsert .= '<div class="comment-name">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
                 <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
                 $cmtinsert .= '</div>';
@@ -5558,7 +5562,7 @@ class Artist extends MY_Controller {
 
                 $cmtinsert .= '<div class="all-comment-comment-box">';
                 $cmtinsert .= '<div class="post-design-pro-comment-img">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                 if (IMAGEPATHFROM == 'upload') {
                     if ($art_userimage) {
@@ -5588,7 +5592,7 @@ class Artist extends MY_Controller {
                 $cmtinsert .= '</div>';
 
                 $cmtinsert .= '<div class="comment-name">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
             <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
                 $cmtinsert .= '</div>';
                 $cmtinsert .= '<div class="comment-details" id= "showcommenttwo' . $art['artistic_post_comment_id'] . '" >';
@@ -5794,7 +5798,7 @@ class Artist extends MY_Controller {
 
             $cmtinsert .= '<div class="all-comment-comment-box">';
             $cmtinsert .= '<div class="post-design-pro-comment-img">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
             if (IMAGEPATHFROM == 'upload') {
                 if ($art_userimage) {
@@ -5822,7 +5826,7 @@ class Artist extends MY_Controller {
             $cmtinsert .= '</a>';
             $cmtinsert .= '</div>';
             $cmtinsert .= '<div class="comment-name">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
             <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
             $cmtinsert .= '</div>';
 
@@ -6081,7 +6085,7 @@ class Artist extends MY_Controller {
 
                 $cmtinsert .= '<div class="all-comment-comment-box">';
                 $cmtinsert .= '<div class="post-design-pro-comment-img">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                 if (IMAGEPATHFROM == 'upload') {
                     if ($art_userimage) {
@@ -6111,7 +6115,7 @@ class Artist extends MY_Controller {
                 $cmtinsert .= '</a>';
                 $cmtinsert .= '</div>';
                 $cmtinsert .= '<div class="comment-name">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
             <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
                 $cmtinsert .= '</div>';
@@ -7502,7 +7506,7 @@ class Artist extends MY_Controller {
             $geturl = $this->get_url($art_comment['user_id']);
             $cmtinsert = '<div class="all-comment-comment-box">';
             $cmtinsert .= '<div class="post-design-pro-comment-img">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
             if (IMAGEPATHFROM == 'upload') {
                 if ($art_userimage) {
@@ -7530,7 +7534,7 @@ class Artist extends MY_Controller {
             $cmtinsert .= '</div>';
 
             $cmtinsert .= '<div class="comment-name">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
             <b>' . ucfirst(strtolower($art_name)) . ' ' . ucfirst(strtolower($art_lastname)) . '</b></a>';
             $cmtinsert .= '</div>';
@@ -7779,7 +7783,7 @@ class Artist extends MY_Controller {
 
             $cmtinsert .= '<div class="all-comment-comment-box">';
             $cmtinsert .= '<div class="post-design-pro-comment-img">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
             if (IMAGEPATHFROM == 'upload') {
                 if ($art_userimage) {
@@ -7810,7 +7814,7 @@ class Artist extends MY_Controller {
 
 
             $cmtinsert .= '<div class="comment-name">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
             <b>' . ucfirst(strtolower($artname)) . '&nbsp;' . ucfirst(strtolower($artlastname)) . '</b></a>';
             $cmtinsert .= '</div>';
@@ -8030,7 +8034,7 @@ class Artist extends MY_Controller {
 
             $cmtinsert .= '<div class="all-comment-comment-box">';
             $cmtinsert .= '<div class="post-design-pro-comment-img">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
 
             if (IMAGEPATHFROM == 'upload') {
@@ -8060,7 +8064,7 @@ class Artist extends MY_Controller {
             }
             $cmtinsert .= '</a> </div>';
             $cmtinsert .= '<div class="comment-name">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
             <b>' . ucfirst(strtolower($art_name)) . ' ' . ucfirst(strtolower($art_lastname)) . '</b></a>';
             $cmtinsert .= '</div>';
@@ -8769,7 +8773,7 @@ class Artist extends MY_Controller {
 
             $cmtinsert .= '<div class="all-comment-comment-box">';
             $cmtinsert .= '<div class="post-design-pro-comment-img">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
             if (IMAGEPATHFROM == 'upload') {
                 if ($art_userimage) {
@@ -8800,7 +8804,7 @@ class Artist extends MY_Controller {
             $cmtinsert .= '</div>';
 
             $cmtinsert .= '<div class="comment-name">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
             <b>' . ucfirst(strtolower($art_name)) . ' ' . ucfirst(strtolower($art_lname)) . '</b></a>';
             $cmtinsert .= '</div>';
@@ -8963,7 +8967,7 @@ class Artist extends MY_Controller {
                 $cmtinsert .= '<div class="all-comment-comment-box">';
 
                 $cmtinsert .= '<div class="post-design-pro-comment-img">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                 if (IMAGEPATHFROM == 'upload') {
                     if ($art_userimage) {
@@ -8993,7 +8997,7 @@ class Artist extends MY_Controller {
                 $cmtinsert .= '</div>';
 
                 $cmtinsert .= '<div class="comment-name">';
-                $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
                 <b>' . ucfirst(strtolower($art_name)) . ' ' . ucfirst(strtolower($art_lastname)) . '</b></a>';
                 $cmtinsert .= '</div>';
@@ -9184,7 +9188,7 @@ class Artist extends MY_Controller {
 
                     $fourdata .= '<div class="all-comment-comment-box">';
                     $fourdata .= '<div class="post-design-pro-comment-img">';
-                    $fourdata .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                    $fourdata .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                     $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->art_user_image;
 
@@ -9217,7 +9221,7 @@ class Artist extends MY_Controller {
                     $fourdata .= '</div>';
 
                     $fourdata .= '<div class="comment-name">';
-                    $fourdata .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                    $fourdata .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                     $fourdata .= '<b>' . ucfirst(strtolower($artname)) . '&nbsp' . ucfirst(strtolower($artlastname)) . '</b></br></a> </div>';
 
@@ -9337,7 +9341,7 @@ class Artist extends MY_Controller {
 
             $fourdata .= '<div class="all-comment-comment-box">';
             $fourdata .= '<div class="post-design-pro-comment-img">';
-            $fourdata .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $fourdata .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
             $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->art_user_image;
 
@@ -9371,7 +9375,7 @@ class Artist extends MY_Controller {
             $fourdata .= '</div>';
 
             $fourdata .= '<div class="comment-name">';
-            $fourdata .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $fourdata .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
             $fourdata .= '<b>' . ucfirst(strtolower($artname)) . '&nbsp' . ucfirst(strtolower($artlastname)) . '</b></br> </a></div>';
 
@@ -9785,7 +9789,7 @@ class Artist extends MY_Controller {
 
             $cmtinsert .= '<div class="all-comment-comment-box">';
             $cmtinsert .= '<div class="post-design-pro-comment-img">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
             if (IMAGEPATHFROM == 'upload') {
                 if ($art_userimage) {
@@ -9817,7 +9821,7 @@ class Artist extends MY_Controller {
             $cmtinsert .= '</div>';
 
             $cmtinsert .= '<div class="comment-name">';
-            $cmtinsert .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+            $cmtinsert .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
             <b>' . ucfirst(strtolower($art_name)) . ' ' . ucfirst(strtolower($art_lastname)) . '</b></a>';
             $cmtinsert .= '</div>';
@@ -11585,7 +11589,7 @@ class Artist extends MY_Controller {
                         $return_html .= '<li>
                                                 <div class="else_post_d">
                                                     <div class="post-design-product">
-                                                        <a class="post_dot" href="' . base_url('artist/dashboard/' . $geturl_post) . '">' . ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)) . '</a>
+                                                        <a class="post_dot" href="' . base_url('artist/p/' . $geturl_post) . '">' . ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)) . '</a>
                                                         <p class="posted_with" > Posted With</p> <a class="post_dot1 padding_less_left"  href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '</a>
                                                         <span role="presentation" aria-hidden="true"> · </span> <span class="ctre_date">
                                         ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '  
@@ -12891,12 +12895,12 @@ class Artist extends MY_Controller {
 
                         if ($info) {
 
-                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)) . '" href="' . base_url('artist/dashboard/' . $slugposted) . '">';
+                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)) . '" href="' . base_url('artist/p/' . $slugposted) . '">';
                             $return_html .= '<img src = "' . ART_PROFILE_THUMB_UPLOAD_URL . $userimageposted . '" name = "image_src" id = "image_src" alt="' . $userimageposted . '"/>';
                             $return_html .= '</a>';
                         } else {
 
-                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)) . '" href="' . base_url('artist/dashboard/' . $geturl_post) . '">';
+                            $return_html .= '<a  class="post_dot" title="' . ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)) . '" href="' . base_url('artist/p/' . $geturl_post) . '">';
                             $return_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "NOARTIMAGE">';
                             $return_html .= '</a>';
                         }
@@ -12956,7 +12960,7 @@ class Artist extends MY_Controller {
                     $return_html .= '<li>
 <div class = "else_post_d">
 <div class = "post-design-product">
-<a style = "max-width: 40%;" class = "post_dot" title = "' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '" href = "' . base_url('artist/dashboard/' . $geturl_post) . '">' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '</a>
+<a style = "max-width: 40%;" class = "post_dot" title = "' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '" href = "' . base_url('artist/p/' . $geturl_post) . '">' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '</a>
 <p class = "posted_with" > Posted With</p>
 <a class = "other_name post_dot" href = "' . base_url('artist/details/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . '&nbsp;' . ucfirst(strtolower($lastname)) . '</a>
 <span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
@@ -13349,7 +13353,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
                         $return_html .= '<div class="all-comment-comment-box">
                 <div class="post-design-pro-comment-img">';
-                        $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                        $return_html .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                         $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->art_user_image;
 
@@ -13383,7 +13387,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                         $return_html .= '</a>';
                         $return_html .= '</div>
                 <div class="comment-name">';
-                        $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">
+                        $return_html .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">
 
                     <b>';
                         $return_html .= ucfirst(strtolower($artname)) . ' ' . ucfirst(strtolower($artlastname));
@@ -13579,7 +13583,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 $fourdata .= '<div class="all-comment-comment-box">';
 
                 $fourdata .= '<div class="post-design-pro-comment-img">';
-                $fourdata .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                $fourdata .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
                 $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->art_user_image;
 
                 if (IMAGEPATHFROM == 'upload') {
@@ -13612,7 +13616,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 $fourdata .= '</div>';
 
                 $fourdata .= '<div class="comment-name">';
-                $fourdata .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                $fourdata .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                 $fourdata .= '<b>' . ucfirst(strtolower($artname)) . '&nbsp' . ucfirst(strtolower($artlastname)) . '</b></br></a> </div>';
 
@@ -14208,7 +14212,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                                     <div class="module_Ssearch" style="display: inline-block; float: left;">
                                        <div class="search_img" style="height: 110px; width: 108px;">';
 
-                    $return_html .= '<a style="  font-size: 19px;font-weight: 600;" href="' . base_url('artist/dashboard/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '">';
+                    $return_html .= '<a style="  font-size: 19px;font-weight: 600;" href="' . base_url('artist/p/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
 
@@ -14239,7 +14243,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                                     <div class="designation_rec">
                                        <ul>
                                           <li>
-                                             <a style="  font-size: 19px;font-weight: 600;" href="' . base_url('artist/dashboard/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '">' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '</a>
+                                             <a style="  font-size: 19px;font-weight: 600;" href="' . base_url('artist/p/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '">' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '</a>
                                           </li>
                                           <li style="display: block;">
                                              <a  class="color-search">';
@@ -14359,7 +14363,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
 
                                             
-                                          <a class="post_dot" href="' . base_url('artist/dashboard/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '">';
+                                          <a class="post_dot" href="' . base_url('artist/p/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '">';
 
                 if (IMAGEPATHFROM == 'upload') {
                     if ($key['art_user_image']) {
@@ -14394,7 +14398,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                                            
                                              <li>
                                                 <div class="post-design-product">
-                                                   <a class="post_dot" href="' . base_url('artist/dashboard/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '" >' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '
+                                                   <a class="post_dot" href="' . base_url('artist/p/' . $geturl . '') . '" title="' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '" >' . ucfirst(strtolower($key['art_name'])) . ' ' . ucfirst(strtolower($key['art_lastname'])) . '
                                                    </a>
                                                    <span role="presentation" aria-hidden="true"> · </span>
                                                    <div class="datespan"> 
@@ -14842,7 +14846,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
                         $return_html .= '<div class="all-comment-comment-box">
                                                         <div class="post-design-pro-comment-img">';
-                        $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                        $return_html .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
 
                         $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => '1'))->row()->art_user_image;
 
@@ -14874,7 +14878,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                         $return_html .= '</a>';
                         $return_html .= '</div>
                                                         <div class="comment-name">';
-                        $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl . '') . '">';
+                        $return_html .= '<a href="' . base_url('artist/p/' . $geturl . '') . '">';
                         $return_html .= '<b>';
 
                         $return_html .= ucfirst(strtolower($artname));

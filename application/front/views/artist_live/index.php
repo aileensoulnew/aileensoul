@@ -101,11 +101,18 @@
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Mark Impression on This World Through Your Creativity</h2>
                         <p>
-                            <?php if(!$isartistactivate){ ?>
-                            <a href="<?php echo artist_registration; ?>" class="btn5">Create Artist Profile</a>
-                            <?php } else{ ?>
-                            <a href="<?php echo artist_reactivateacc; ?>" class="btn5">Reactivate Artist Profile</a>
+                            <?php //if(!$isartistactivate){ ?>
+                            <!-- <a href="<?php //echo artist_registration; ?>" class="btn5">Create Artist Profile</a> -->
+                            <?php //} else{ ?>
+                            <!-- <a href="<?php //echo artist_reactivateacc; ?>" class="btn5">Reactivate Artist Profile</a> -->
+                            <?php //} ?>
+
+                            <?php 
+                                if ($ismainregister == true && $artist_isregister == false) { 
+                            ?>
+                                <a href="<?php echo artist_registration; ?>" class="btn5">Create Artist Profile</a>
                             <?php } ?>
+
                         </p>
                     </div>
                 </div>

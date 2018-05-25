@@ -42,13 +42,13 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Artist Profile | Aileensoul";
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/index', $this->data);
         // }
     }
@@ -796,7 +796,7 @@ class Artist_live extends MY_Controller {
                                                                             <div class="follow-img">';
 
 
-                    $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+                    $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
                         if ($artaval[0]['art_user_image']) {
@@ -828,7 +828,7 @@ class Artist_live extends MY_Controller {
                                      <li class="folle_text">
                                         <div class="">
                                             <div class="follow-li-text " style="padding: 0;">
-                                                <a href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
+                                                <a href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
                                         <div>';
                     $return_html .= '<a>';
                     if ($artaval[0]['designation']) {
@@ -1016,7 +1016,7 @@ class Artist_live extends MY_Controller {
                                                 <div class = "follow-img">';
 
 
-                    $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '" title="' . ucfirst(strtolower($artaval[0]['art_name'])) . ' ' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '">';
+                    $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '" title="' . ucfirst(strtolower($artaval[0]['art_name'])) . ' ' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '">';
 
                     if (IMAGEPATHFROM == 'upload') {
                         if ($artaval[0]['art_user_image']) {
@@ -1048,7 +1048,7 @@ class Artist_live extends MY_Controller {
                                     <li class="folle_text">
                                         <div class="">
                                             <div class="follow-li-text" style="padding: 0;">
-                                                <a title="' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '" href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
+                                                <a title="' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '" href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($artaval[0]['art_name'])) . '&nbsp;' . ucfirst(strtolower($artaval[0]['art_lastname'])) . '</a></div>
                                             <div>';
 
                     $return_html .= '<a>';
@@ -1517,7 +1517,7 @@ class Artist_live extends MY_Controller {
 
             $geturl = $this->get_url($user['user_id']);
 
-            $return_html .= '<a href="' . base_url('artist/dashboard/' . $geturl) . '">';
+            $return_html .= '<a href="' . base_url('artist/p/' . $geturl) . '">';
 
             if (IMAGEPATHFROM == 'upload') {
                 if ($user['art_user_image']) {
@@ -1550,7 +1550,7 @@ class Artist_live extends MY_Controller {
                                                 <li class="folle_text">
                                                      <div class="">
                                                      <div class="follow-li-text " style="padding: 0;">
-                                                <a title="' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '" href="' . base_url('artist/dashboard/' . $geturl) . '">' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '</a>
+                                                <a title="' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '" href="' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($user['art_name'])) . '&nbsp;' . ucfirst(strtolower($user['art_lastname'])) . '</a>
                                                                             </div>
                                                                             <div>';
             $return_html .= '<a>';
