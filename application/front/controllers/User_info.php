@@ -54,7 +54,7 @@ class User_info extends MY_Controller {
         if (empty($_POST['cityList']))
             $errors['cityList'] = 'City is required.';
 
-        if (empty($_POST['field']))
+        if (!isset($_POST['field']))
             $errors['field'] = 'Field is required.';
 
         if ($_POST['field'] == '0') {

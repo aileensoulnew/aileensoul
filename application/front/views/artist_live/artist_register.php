@@ -84,9 +84,10 @@
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
-
+        <script src="<?php echo base_url('assets/js_min/jquery.multi-select.js?ver=' . time()); ?>"></script>
 
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 
@@ -102,7 +103,7 @@
             var profData = "<?php echo $professionData;?>";
             var studData = "<?php echo $studentData?>";
             var userid = "<?php echo $userid?>";
-            var first_name = "asd";
+            var profile_login = '<?php echo $profile_login; ?>';
             var app = angular.module('artistRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
 
             function experience(){
@@ -140,6 +141,8 @@
                 $('[data-toggle="tooltip"]').tooltip();   
             });
         </script>        
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist-live/artistic_common.js?ver='.time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist-live/profile.js?ver='.time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/artistic_regi_main.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>

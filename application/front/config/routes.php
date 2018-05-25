@@ -471,6 +471,9 @@ $route['artist-profile/basic-info'] = "artist_live/artist_register_new";
 $route['artist-profile/educational-info'] = "artist_live/artist_register_new";
 $route['artist-profile/registration'] = "artist_live/artist_register_new";
 
+$route['artist/profile_insert_new'] = "artist/profile_insert_new";
+
+
 $route['recruiter/create-account'] = "recruiter/recruiter_register_new";
 $route['recruiter/general-info'] = "recruiter/recruiter_register_new";
 $route['recruiter/educational-info'] = "recruiter/recruiter_register_new";

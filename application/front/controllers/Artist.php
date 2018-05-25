@@ -16175,4 +16175,95 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
         return $artresult;
     }
+
+    public function profile_insert_new() {        
+        $userid = $this->session->userdata('aileenuser');
+
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $errors = array();
+        $data = array();
+
+        $_POST = json_decode(file_get_contents('php://input'), true);
+
+        if (empty($_POST['first_name']))
+            $errors['errorFname'] = 'Firstname is required.';
+
+        if (empty($_POST['last_name']))
+            $errors['errorLname'] = 'Lastname is required.';
+
+        if (empty($_POST['email']))
+            $errors['errorEmail'] = 'Email is required.';
+
+        if (!empty($errors)) {
+            $data['errors'] = $errors;
+        }
+        else
+        {
+            $firstname = trim($_POST['first_name']);
+            $lastname = trim($_POST['last_name']);
+            $email = trim($_POST['email']);
+            $phoneno = trim($_POST['phoneno']);
+            $skills = trim($_POST['skills']);
+            $country = trim($_POST['country']);
+            $state = trim($_POST['state']);
+            $city = trim($_POST['city']);
+
+            $other_category = trim($_POST['othercategory']);
+            $contition_array = array('other_category' => $other_category, 'status' => '1');
+            $exist_other = $this->common->select_data_by_condition('art_other_category', $contition_array, $data = 'other_category,other_category_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if ($userid) {
+                if ($other_category) {
+
+                    if ($exist_other) {
+                        $insertid = $exist_other[0]['other_category_id'];
+                    } else {
+
+                        $data1 = array(
+                            'other_category' => $other_category,
+                            'status' => '1',
+                            'is_delete' => '0',
+                            'user_id' => $userid,
+                            'created_date' => date('Y-m-d', time()),
+                        );
+                        $insertid = $this->common->insert_data_getid($data1, 'art_other_category');
+                    }
+                }
+            }
+
+            $checkval = $this->input->post('skills');
+            if (in_array(26, $checkval)) {
+                $otherid = $insertid;
+            } else {
+                $otherid = '';
+            }
+
+            $category = $this->input->post('skills');
+            $category = implode(',', $category);
+
+
+            $reg_data = array(
+                'art_name' => $firstname,
+                'art_lastname' => $lastname,
+                'art_email' => $email,
+                'art_phnno' => $phoneno,
+                'art_country' => $country,
+                'art_state' => $state,
+                'art_city' => $city,
+                'art_skill' => $category,
+                'other_skill' => $otherid,
+                'user_id' => $userid,
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'status' => '1',
+                'is_delete' => '0',
+                'art_step' => '4',
+                'slug' => $this->setcategory_slug($firstname . '-' . $lastname, 'slug', 'art_reg')
+            );
+            if ($userid) {
+                $insert_id = $this->common->insert_data_getid($reg_data, 'art_reg');
+            }
+            $data = array("is_success" => 1);
+        }
+        echo json_encode($data);
+    }
 }

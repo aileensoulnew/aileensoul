@@ -1825,7 +1825,12 @@ class Artist_live extends MY_Controller {
 
     public function artist_create_profile()
     {
-        redirect(base_url(),'refresh');
-        //$this->load->view('artist_live/artist_create_profile', $this->data);
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['user_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+
+        $contition_array = array('status' => '1');
+        $this->data['art_category'] = $this->common->select_data_by_condition('art_category', $contition_array, $data = 'category_id,art_category', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $this->load->view('artist_live/artist_create_profile', $this->data);
     }
 }

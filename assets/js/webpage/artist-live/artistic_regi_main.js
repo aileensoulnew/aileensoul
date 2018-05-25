@@ -522,19 +522,123 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
         $('#emtooltip').hide();
     });
 
-    $("#job_title").focusin(function(){
-        $('#jttooltip').show();
+    $("#phone_number").focusin(function(){
+        $('#pntooltip').show();
     });
-    $("#job_title").focusout(function(){
-        $('#jttooltip').hide();
+    $("#phone_number").focusout(function(){
+        $('#pntooltip').hide();
     });
 
-    $("#cities2").focusin(function(){
-        $('#lotooltip').show();
-    });
-    $("#cities2").focusout(function(){
-        $('#lotooltip').hide();
-    });
+    $.validator.addMethod("noSpace", function(value, element) {
+        return value == '' || value.trim().length != 0;
+    }, "No space please and don't leave it empty");
+    $.validator.addMethod("regx", function(value, element, regexpr) {
+        return regexpr.test(value);
+    }, "Only space and only number are not allow.");
+
+    $scope.artistRegiValidate = {
+        ignore: '*:not([name])',
+        rules: {
+            firstname: {
+                required: true,
+                regx: /^[a-zA-Z\s]*[a-zA-Z]/,
+                noSpace: true
+            },
+            lastname: {
+                required: true,
+                regx: /^[a-zA-Z\s]*[a-zA-Z]/,
+                noSpace: true
+            },
+            email: {
+                required: true,
+                email: true,
+            },
+            phoneno: {
+                number: true,
+                minlength: 8,
+                maxlength: 15
+            },
+            country: {
+                required: true,
+            },
+            state: {
+                required: true,
+            },
+            city: {
+                required: true,
+            },
+            "skills[]": {
+                required: true,
+            },
+        },
+        messages: {
+            firstname: {
+                required: "First name is required.",
+            },
+            lastname: {
+                required: "Last name is required.",
+            },
+            email: {
+                required: "Email id is required",
+                email: "Please enter valid email id",
+                remote: "Email already exists"
+            },
+            country: {
+                required: "Country is required.",
+            },
+            state: {
+                required: "State is required.",
+            },
+            city: {
+                required: "City is required.",
+            },
+            "skills[]": {
+                required: "Skill is required.",
+            },
+        },
+    };
+
+    $scope.submitArtistRegiForm = function () {
+        $scope.user.city = $("#city").val();
+        $scope.user.state = $("#state").val();
+        setTimeout(function(){
+            $("#city").val($scope.user.city);
+            $("#state").val($scope.user.state);
+        },100);
+        
+        if ($scope.artinfo.validate()) {
+            angular.element('#artinfo #submit').addClass("form_submit");
+            $('#profilereg_ajax_load').show();
+            $http({
+                method: 'POST',
+                url: base_url + 'artist/profile_insert_new',
+                data: $scope.user,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                $('#profilereg_ajax_load').hide();                
+                if (success.data.errors) {
+                    $scope.errorFname = success.data.errors.errorFname;
+                    $scope.errorLname = success.data.errors.errorLname;
+                    $scope.errorEmail = success.data.errors.errorEmail;
+                }
+                else
+                {
+                    if (success.data.is_success == '1')
+                    {
+                        window.location = base_url+"artist/home";
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    };
 });
 
 
