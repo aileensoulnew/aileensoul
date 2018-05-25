@@ -405,6 +405,7 @@ $route['artist/(:any)-in-(:any)'] = "artist_live/categoryArtistList/$1/$2";
 $route['blog'] = "blog/index";
 $route['blog/blog_ajax'] = "blog/blog_ajax";
 $route['blog/cat_ajax'] = "blog/cat_ajax";
+$route['blog/get_blog_cat_list'] = "blog/get_blog_cat_list";
 $route['blog/comment_insert'] = "blog/comment_insert";
 //$route['blog/tag/(:any)'] = "blog/tagsearch/$1";
 //$route['blog/page/(:any)'] = "blog/index/$1";

@@ -125,7 +125,6 @@ header("Pragma: no-cache"); // HTTP/1.0
     <body class="blog no-login blog-page">
         <?php }else{?>
          <body class="blog">
-
         <?php }?>
         <div class="main-inner">
             <div class="web-header">
@@ -150,7 +149,6 @@ header("Pragma: no-cache"); // HTTP/1.0
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 mob-p0">
-
                                 <ul class="sub-menu blog-sub-menu">
                                     <li>
                                     <?php
@@ -171,7 +169,6 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     </li>
                                     <li class="dropdown">
     							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
-    							
     							</a>
     							<div class="dropdown-menu">
     								<div class="dropdown-title">
@@ -179,176 +176,67 @@ header("Pragma: no-cache"); // HTTP/1.0
     								</div>
     								<div class="content custom-scroll">
     									<ul class="dropdown-data msg-dropdown">
+                                            <?php foreach ($blog_last as $blog) { ?>
     										<li class="">
-    											<a href="#">
+    											<a href="<?php echo base_url('blog/' . $blog['blog_slug']) ?>">
     												<div class="dropdown-database">
     													<div class="post-img">
-    														<img src="img/user-pic.jpg" alt="No Business Image">
+    														<img src="<?php echo base_url($this->config->item('blog_thumb_upload_path') . $blog['image'] . '?ver=' . time()) ?>" alt="<?php echo $blog['image']; ?>">
     													</div>
     													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-    														
-    															<span class="day-text">12 march 2018</span>
-    														
+    														<p class="drop-blog-title"><?php echo $blog['title']; ?></p>
+    															<span class="day-text"><?php echo $blog['created_date_formatted']; ?></span>
     													</div> 
     												</div>
     											</a> 
     										</li>
-    										<li class="">
-    											<a href="#">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="img/user-pic.jpg" alt="No Business Image">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-    														
-    															<span class="day-text">12 march 2018</span>
-    														
-    													</div> 
-    												</div>
-    											</a> 
-    										</li>
-    										<li class="">
-    											<a href="#">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="img/user-pic.jpg" alt="No Business Image">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-    														
-    															<span class="day-text">12 march 2018</span>
-    														
-    													</div> 
-    												</div>
-    											</a> 
-    										</li>
-    										<li class="">
-    											<a href="#">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="img/user-pic.jpg" alt="No Business Image">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-    														
-    															<span class="day-text">12 march 2018</span>
-    														
-    													</div> 
-    												</div>
-    											</a> 
-    										</li>
-    										<li class="">
-    											<a href="#">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="img/user-pic.jpg" alt="No Business Image">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-    														
-    															<span class="day-text">12 march 2018</span>
-    														
-    													</div>
-    												</div>
-    											</a> 
-    										</li>
-    										<li class="">
-    											<a href="#">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="img/user-pic.jpg" alt="No Business Image">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-    														
-    															<span class="day-text">12 march 2018</span>
-    														
-    													</div>
-    												</div>
-    											</a> 
-    										</li>
-    										<li class="">
-    											<a href="#">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="img/user-pic.jpg" alt="No Business Image">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title">Lorem ipsum is a dummy text it shuld use for dummy.</p>
-    														
-    															<span class="day-text">12 march 2018</span>
-    														
-    													</div> 
-    												</div>
-    											</a> 
-    										</li>
+                                            <?php } ?>
     									</ul>
     								</div>
     							</div>
     						</li>
-                                                    <li class="dropdown">
+                            <li class="dropdown">
     							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
     							<div class="dropdown-menu">
     								<ul class="content custom-scroll">
-    									<li><a href="#">Interview Tips</a></li>
-    									<li><a href="#">Career</a></li>
-    									<li><a href="#">Guides</a></li>
-    									<li><a href="#">Aritistic</a></li>
-    									<li><a href="#">Insipirational</a></li>
-    									<li><a href="#">Business Tips</a></li>
-    									<li><a href="#">Trending</a></li>
-    									<li><a href="#">Lessons From Entrepreneurs</a></li>
-    									<li><a href="#">AileenSoul Services</a></li>
-    									<li><a href="#">IT Career</a></li>
-    									<li><a href="#">Trending</a></li>
-    									<li><a href="#">Lessons From Entrepreneurs</a></li>
-    									<li><a href="#">AileenSoul Services</a></li>
-    									<li><a href="#">IT Career</a></li>
+                                        <li class="category" ng-repeat="category in categoryList track by $index">
+                                            <a href="javascript:void(0)" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
+                                                {{ category.name }}
+                                            </a>
+                                        </li>
     								</ul>
     							</div>
     						</li>
                                 </ul>
                             </div>
                             <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob blog-search">
-    					<div class="job-search-box1 clearfix">
-                                                
-    						<form action="<?php echo base_url;?>blog" method="get">
-    							<fieldset class="sec_h2">
-    								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
-    								<i class="fa fa-search" aria-hidden="true"></i>
-    							</fieldset>
-    							
-    							
-    						</form>   
-    					</div>
-    				</div>
-                           
+            					<div class="job-search-box1 clearfix">        
+            						<form action="<?php echo base_url;?>blog" method="get">
+            							<fieldset class="sec_h2">
+            								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
+            								<i class="fa fa-search" aria-hidden="true"></i>
+            							</fieldset>
+            						</form>   
+            					</div>
+    				        </div>  
                         </div>
                     </div>
                 </div>
             </div>
             
             <section id="paddingtop_fixed" class="hidden">
-                
                 <div class="blog-mid-section user-midd-section">
                     <div class="container">
                         <div class="row">
                             <div class="custom-user-list">
-                                    <div class="job-contact-frnd">
-
-                                    </div>
-
-                                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
-
-                                    <ul class="load-more-blog">
-                                        <li class="loadbutton"></li>
-                                        <li class="loadcatbutton"></li>
-                                    </ul>
-                              
+                                <div class="job-contact-frnd">
+                                </div>
+                                <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
+                                <ul class="load-more-blog">
+                                    <li class="loadbutton"></li>
+                                    <li class="loadcatbutton"></li>
+                                </ul>                              
                             </div>
-
                             <div class="right-part">
                 				<div class="subscribe-box">
                 					<h4>Subscribe to Our Newslatter</h4>
@@ -359,7 +247,6 @@ header("Pragma: no-cache"); // HTTP/1.0
                         </div>
                     </div>
                 </div>
-
             </section>
             <div id="paddingtop_fixed" class="user-midd-section">
                 <input type="hidden" class="page_number" value="1">
@@ -389,7 +276,6 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 </a>
                                 <p class="blog-text" ng-bind-html="blog.description | unsafe" style="height: 62px;overflow: hidden;">
                                 </p>
-                            
                                 <p>
                                     <ul class="social-icon">
                                         <li>
@@ -400,25 +286,22 @@ header("Pragma: no-cache"); // HTTP/1.0
                                         <li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="{{ blog.url_encode }}" url="{{ blog.url }}"><i class="fa fa-twitter"></i></a></li>
                                         <li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-linkedin"></i></a></li>
                                         <li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-google"></i></a></li>
-                                        
                                     </ul>
-                                    
                                 </p>
                             </div>
-                        </div>
-                                               
+                        </div>                                             
                         <div class="">
-                            <ul class="pagination pull-right">
-                              <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                              <li class="active"><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li><a href="#">5</a></li>
-                              <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
-                        
+                            <pagination 
+                              ng-model="currentPage"
+                              total-items="total_record"
+                              max-size="maxSize"  
+                              boundary-links="true">
+                            </pagination>
+                        </div>      
+
+                        <ul>
+                          <li ng-repeat="todo in filteredTodos">{{todo.text}}</li>
+                        </ul>
                     </div>
                     <div class="right-part">
                         <div class="subscribe-box">
@@ -427,8 +310,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                             <a class="btn1" href="#">Subscribe</a>
                         </div>
                     </div>
-                </div>
-                
+                </div>                
             </div>
             <?php
                 echo $login_footer
@@ -441,7 +323,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 // blog_post();
             });
 
-            function category_data(catid, pagenum) {
+            /*function category_data(catid, pagenum) {
                 $('.job-contact-frnd').html("");
                 $('.loadbutton').html("");
                 cat_post(catid, pagenum);
@@ -451,12 +333,11 @@ header("Pragma: no-cache"); // HTTP/1.0
                 var pagenum = parseInt($(".page_number:last").val()) + 1;
                 var catid = $(".catid").val();
                 cat_post(catid, pagenum);
-            });
+            });*/
 
-            var isProcessing = false;
+            /*var isProcessing = false;
             function cat_post(catid, pagenum) { 
                 if (isProcessing) {
-
                     return;
                 }
                 isProcessing = true;
@@ -485,7 +366,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                         isProcessing = false;
                     }
                 });
-            }
+            }*/
 
 
             $('.loadbutton').click(function () {
@@ -526,6 +407,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 });
             }*/
             //AJAX DATA LOAD BY LAZZY LOADER END
+
         </script>
         
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
@@ -549,12 +431,14 @@ header("Pragma: no-cache"); // HTTP/1.0
     <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+    
     <script>
         var base_url = '<?php echo base_url(); ?>';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var title = '<?php echo $title; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
-        var app = angular.module('blogApp', ['ui.bootstrap']);
+        var blog_category = ('<?php echo json_encode($blog_category); ?>');
+        var app = angular.module('blogApp', ['ui.bootstrap','angularUtils.directives.dirPagination']);
     </script>
 
     <?php // if (IS_OUTSIDE_JS_MINIFY == '0') { ?>

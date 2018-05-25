@@ -20,7 +20,7 @@ class Blog extends CI_Controller {
         // blog category start
         $condition_array = array('status' => 'publish');
         $data = 'id,name';
-        $this->data['blog_category'] = $this->common->select_data_by_condition('blog_category', $condition_array, $data, $short_by = '', $order_by = '', $limit = '', $offset = '', $join_str = array());
+        // $this->data['blog_category'] = $this->common->select_data_by_condition('blog_category', $condition_array, $data, $short_by = '', $order_by = '', $limit = '', $offset = '', $join_str = array());
         // blog category end
         if ($slug != '') {
 
@@ -98,8 +98,11 @@ class Blog extends CI_Controller {
                 $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
 
             $condition_array = array('status' => 'publish');
-            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
 
+            // echo $this->db->last_query();
+            // print_r($this->data['blog_last']);
+            // exit;
             $this->load->view('blog/index', $this->data);
 
                 // echo "<pre>";print_r( $this->data['blog_detail']);die();
@@ -198,7 +201,7 @@ class Blog extends CI_Controller {
             echo 0;
         }
     }
-// blog available check start
+    // blog available check start
     public function blog_check($slug = " ") {
 
         $condition_array = array('blog_slug' => $slug);
@@ -216,6 +219,10 @@ class Blog extends CI_Controller {
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
         }
+        if (!empty($_GET["limit"]) && $_GET["limit"] != 'undefined') {
+            $perpage = $_GET["limit"];
+        }
+
         // echo $page;
         $start = ($page - 1) * $perpage;
         if ($start < 0)
@@ -223,11 +230,11 @@ class Blog extends CI_Controller {
         $searchword = trim($this->input->get('searchword'));
         $sql_condition = "";
         if($searchword){ 
-            $blog_detail1 = $this->blog_model->get_blog_post($searchword,'','','');
-            $blog_detail = $this->blog_model->get_blog_post($searchword,$start,$perpage,'');
+            $blog_detail1 = $this->blog_model->get_blog_post($searchword,'','','','');
+            $blog_detail = $this->blog_model->get_blog_post($searchword,'',$start,$perpage,'');
         }else{ 
-            $blog_detail1 = $this->blog_model->get_blog_post($searchword,'','','id');
-            $blog_detail = $this->blog_model->get_blog_post($searchword,$start,$perpage,'id');            
+            $blog_detail1 = $this->blog_model->get_blog_post($searchword,'','','','id');
+            $blog_detail = $this->blog_model->get_blog_post($searchword,'',$start,$perpage,'id');            
         }
        
         if(count($blog_detail) > 0){
@@ -241,7 +248,6 @@ class Blog extends CI_Controller {
                 $blog_detail[$key]['social_summary'] = urlencode('"' . $blog['description'] . '"');
                 $blog_detail[$key]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $blog['image']));
                 $blog_detail[$key]['social_url'] = base_url('blog/' . $blog['blog_slug']);
-
             }
         }
 
@@ -253,7 +259,6 @@ class Blog extends CI_Controller {
         $result['blog_data'] = $blog_detail;
         $result['total_record'] = count($blog_detail1);
         echo json_encode($result);
-
         exit;
 
         $blog_data = '';
@@ -461,20 +466,42 @@ class Blog extends CI_Controller {
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
         }
+        if (!empty($_GET["limit"]) && $_GET["limit"] != 'undefined') {
+            $perpage = $_GET["limit"];
+        }
         $cateid = $_GET["cateid"];
-
         // echo $page;
         $start = ($page - 1) * $perpage;
         if ($start < 0)
             $start = 0;
 
-        $condition_array = array('status' => 'publish', 'FIND_IN_SET("' . $cateid . '",blog_category_id)!=' => '0');
-        $blog_detail = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = $perpage, $offset = $start, $join_str = array());
-        $blog_detail1 = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = '', $offset = '', $join_str = array());
+        $blog_detail = $this->blog_model->get_blog_post('', $cateid, $start, $perpage, 'id');
+        $blog_detail1 = $this->blog_model->get_blog_post('', $cateid, '', '', 'id');
+
+        if(count($blog_detail) > 0){
+            foreach ($blog_detail as $key=>$blog) {
+                $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where blog_id = '". $blog['id'] ."'";
+                $query = $this->db->query($sql);
+                $blog_detail[$key]['total_comment'] = $query->row()->total_comment;
+
+                $blog_detail[$key]['social_title'] = urlencode('"' . $blog['title'] . '"');
+                $blog_detail[$key]['social_encodeurl'] = urlencode(base_url('blog/' . $blog['blog_slug']));
+                $blog_detail[$key]['social_summary'] = urlencode('"' . $blog['description'] . '"');
+                $blog_detail[$key]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $blog['image']));
+                $blog_detail[$key]['social_url'] = base_url('blog/' . $blog['blog_slug']);
+
+            }
+        }
 
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($blog_detail1);
         }
+        // echo $blog_detail;
+        $result['blog_data'] = $blog_detail;
+        $result['total_record'] = count($blog_detail1);
+        echo json_encode($result);
+        exit;
+
 
         $blog_data = '';
         $blog_data .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
@@ -623,6 +650,14 @@ class Blog extends CI_Controller {
             'blog_data' => $blog_data,
             'load_msg' => $lod_message
         ));
+    }
+
+    // Get all category of blog list
+    function get_blog_cat_list(){
+        $sql = "SELECT id,name FROM ailee_blog_category where status = 'publish'";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        echo json_encode($result);
     }
 
 }
