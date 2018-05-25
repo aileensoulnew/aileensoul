@@ -79,7 +79,7 @@ function ajax_business_home_post(pagenum) {
         success: function (data) {
             $('.loader').remove();
             $('.business-all-post').append(data);
-
+            $('video, audio').mediaelementplayer();
             // second header class add for scroll
             var nb = $('.post-design-box').length;
             if (nb == 0) {
