@@ -2426,7 +2426,7 @@ label.cameraButton:active{
     text-overflow:ellipsis;
     font-weight:600
 }
-.all-list ul,.all-list ul li,.dc_cl_m,.main_box_img,.profile-content a{
+.all-list ul,.all-list ul li,.main_box_img,.profile-content a{
     display:inline-block
 }
 .main_box_img{
