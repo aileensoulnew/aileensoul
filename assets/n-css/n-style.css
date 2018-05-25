@@ -1461,7 +1461,7 @@ transform:inherit;
 	background: none;
 	background:none;
 }
-.audio_main_div .mejs__container{background: rgba(0,0,0,0.1); width:400px !important; margin:0 auto;}
+.audio_main_div .mejs__container{background: rgba(0,0,0,0.1); width:100% !important; margin:0 auto;}
 
 
 /***  end photo, audio, video, article page html  ***/
@@ -2130,6 +2130,10 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .post-design-mid .audio_main_div{width:300px; margin:0 auto; position:relative;}
 .pdf_img{text-align:center;}
 .cover-pic{left:0;}
+.audio_source{width:100%;}
+.comment-details-menu a:hover{color:#1b8ab9;}
+.notification-database{padding:0; height:auto;}
+.data_noti_msg span {line-height:1;}
 
 /***  job css  ***/
 .message button.modal-close{background:#1b8ab9; color:#fff;}

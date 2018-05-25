@@ -1144,6 +1144,7 @@ footer ul li a:hover{
 .sub-header .dropdown.open .dropdown-menu{left:0 !important; top:31px; margin:0;}
 .sub-header .dropdown.open .dropdown-menu li{width:100%; border-right:0; padding:0;}
 .sub-header .dropdown.open .content li{padding:10px; border-bottom:1px solid #d2d2d2;}
+.sub-header .dropdown.open .content li a{padding:0px;}
 .sub-header .dropdown.open .content li:hover{background:#e9f4f8;}
 .sub-header .dropdown.open .content li .addcontact-right a.add-left-true{border-color:transparent;}
 .sub-header .dropdown.open .content li .addcontact-right a.add-left-true:hover{border-color:#1b8ab9;}
@@ -1153,7 +1154,7 @@ border: 1px solid #1b8ab9;}
 .sub-header .dropdown.open .content li .addcontact-right a.add-right-true:hover{background:#e9f4f8;}
 .sub-header .dropdown.open .content li .addcontact-right a.add-left-true i{color:#fff;}
 .sub-header .dropdown.open .dropdown-menu li a{color:#777;}
-.sub-header .dropdown.user-id .dropdown-menu li a{padding:6px 10px; line-height:1;}
+.sub-header .dropdown.user-id .dropdown-menu li a{padding:10px; line-height:1;}
 .sub-header .dropdown.user-id .dropdown-menu li a span{float:left; margin-right:10px;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover{background: #1b8ab9; color: #fff;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover .icon-view-profile{background-position: 0 -160px;}

@@ -115,7 +115,7 @@ $userid = $this->session->userdata('aileenuser');
 							</a>
 
 							<ul class="dropdown-menu account">
-								<li>Account</li>
+								<li>Account Details</li>
 								<li><a href="<?php echo artist_dashboard. $arturl; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 								<li><a href="<?php echo artist_edit_profile; ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 								<li class="hidden"><a onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
