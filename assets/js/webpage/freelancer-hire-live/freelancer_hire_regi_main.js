@@ -511,8 +511,7 @@ app.controller('freelanceEduInfoController', function ($scope, $http, $location,
     };
 });
 
-app.controller('freelanceCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
-    // alert(first_name);
+app.controller('freelanceCreateProfileController', function ($scope, $http, $location, $window,$timeout) {    
     $scope.title = "Recruiter Profile | Aileensoul";
 
     $("#email").focusin(function(){
@@ -522,19 +521,133 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
         $('#emtooltip').hide();
     });
 
-    $("#job_title").focusin(function(){
-        $('#jttooltip').show();
+    $("#phoneno").focusin(function(){
+        $('#pntooltip').show();
     });
-    $("#job_title").focusout(function(){
-        $('#jttooltip').hide();
+    $("#phoneno").focusout(function(){
+        $('#pntooltip').hide();
     });
 
-    $("#cities2").focusin(function(){
-        $('#lotooltip').show();
+    $("#professional_info").focusin(function(){
+        $('#pitooltip').show();
     });
-    $("#cities2").focusout(function(){
-        $('#lotooltip').hide();
+    $("#professional_info").focusout(function(){
+        $('#pitooltip').hide();
     });
+
+    $scope.freelancehireRegiValidate = {
+        rules: {
+            first_name: {
+                required: true,
+                // regx: /^[a-zA-Z]+$/,
+            },
+            last_name: {
+                required: true,
+                // regx: /^[a-zA-Z]+$/,
+            },
+            email: {
+                required: true,
+                email: true,
+                remote: {
+                    url: base_url + "freelancer_hire/check_email",
+                    type: "post",
+                    data: {
+                        email: function() {
+                            return $("#email").val();
+                        },
+                    },
+                },
+            },            
+            phoneno: {
+                number: true,
+                minlength: 8,
+                maxlength: 15
+            },            
+            country: {
+                required: true,
+            },
+            state: {
+                required: true,
+            },
+            professionalinfo: {
+                maxlength: 2500
+            }
+        },
+        messages: {
+            first_name: {
+                required: "First name is required.",
+            },
+            last_name: {
+                required: "Last name is required.",
+            },
+            phoneno: {
+                number: "Only Number allowed.",
+                minlength: "Minimum 8 digits.",
+                maxlength: "Maximum 15 digits."
+            },
+            email: {
+                required: "Email id is required.",
+                email: "Please enter valid email id.",
+                remote: "Email already exists."
+            },
+            country: {
+                required: "Country is required.",
+            },
+            state: {
+                required: "State is required.",
+            },
+            professionalinfo: {
+                maxlength: "Maximum 2500 character allowed."
+            }
+        }
+    };
+
+    $scope.submitFreelancehireRegiForm = function () {
+        $scope.user.city = $("#city").val();
+        $scope.user.state = $("#state").val();
+        setTimeout(function(){
+            $("#city").val($scope.user.city);
+            $("#state").val($scope.user.state);
+        },100);
+        if ($scope.freelancehireinfo.validate()) {
+            angular.element('#freelancehireinfo #submit').addClass("form_submit");
+            $('#profilereg_ajax_load').show();
+            // freelancer_hire/hire_registation_insert
+            $http({
+                method: 'POST',
+                url: base_url + 'freelancer_hire_live/hire_registation_insert_new',
+                data: $scope.user,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (success) {
+                $('#profilereg_ajax_load').hide();
+                if (success.data.errors) {
+                    $scope.errorFname = success.data.errors.errorFname;
+                    $scope.errorLname = success.data.errors.errorLname;
+                    $scope.errorEmail = success.data.errors.errorEmail;
+                    $scope.errorCN = success.data.errors.errorCN;
+                    $scope.errorCE = success.data.errors.errorCE;
+                    $scope.errorCon = success.data.errors.errorCon;
+                    $scope.errorSt = success.data.errors.errorSt;
+                }
+                else
+                {
+                    if (success.data.is_success == '1')
+                    {
+                        //window.location = base_url+"artist/home";
+                        window.location = base_url + "hire-freelancer"
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    };
 });
 
 
@@ -565,3 +678,36 @@ function addItem () {
     // container.appendChild(item);
     itemsCounter++;
 }
+$(document).on('change','#country', function () {
+    var countryID = $(this).val();
+    if (countryID) {
+        $.ajax({
+            type: 'POST',
+            url: base_url + "freelancer_hire/ajax_data",
+            data: 'country_id=' + countryID,
+            success: function (html) {
+                $('#state').html(html);
+                $('#city').html('<option value="">Select state first</option>');
+            }
+        });
+    } else {
+        $('#state').html('<option value="">Select country first</option>');
+        $('#city').html('<option value="">Select state first</option>');
+    }
+});
+
+$(document).on('change','#state', function () {
+    var stateID = $(this).val();
+    if (stateID) {
+        $.ajax({
+            type: 'POST',
+            url: base_url + "freelancer_hire/ajax_data",
+            data: 'state_id=' + stateID,
+            success: function (html) {
+                $('#city').html(html);
+            }
+        });
+    } else {
+        $('#city').html('<option value="">Select state first</option>');
+    }
+});

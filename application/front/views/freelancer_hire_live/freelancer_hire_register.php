@@ -101,9 +101,9 @@
             var base_url = '<?php echo base_url(); ?>';
             var profData = "<?php echo $professionData;?>";
             var studData = "<?php echo $studentData?>";
-            var userid = "<?php echo $userid?>";
-            var first_name = "asd";
+            var userid = "<?php echo $userid?>";            
             var app = angular.module('freelancerRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
+
 
             function experience(){
                 document.getElementById('exp_data').style.display = 'block';

@@ -3071,8 +3071,72 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 
     public function freelancer_hire_create_profile()
     {
-        redirect(base_url(),'refresh');
-        //$this->load->view('artist_live/artist_create_profile', $this->data);
+    	$userid = $this->session->userdata('aileenuser');
+        $this->data['fh_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
+        $contition_array = array('status' => '1');
+        $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->load->view('freelancer_hire_live/freelancer_hire_create_profile', $this->data);
+    }
+    public function hire_registation_insert_new() {
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $errors = array();
+        $data = array();
+        $_POST = json_decode(file_get_contents('php://input'), true);        
+        
+        if (empty($_POST['first_name']))
+            $errors['errorFname'] = 'Firstname is required.';
+
+        if (empty($_POST['last_name']))
+            $errors['errorLname'] = 'Lastname is required.';
+
+        if (empty($_POST['email']))
+            $errors['errorEmail'] = 'Email is required.';
+        
+        if (empty($_POST['country']))
+            $errors['errorCon'] = 'Country is required.';
+
+        if (empty($_POST['state']))
+            $errors['errorSt'] = 'State is required.';
+
+        if (!empty($errors)) {
+            $data['errors'] = $errors;
+        }
+        else
+        {
+            $first_name = trim($_POST['first_name']);
+            $last_name = trim($_POST['last_name']);
+            $email = trim($_POST['email']);
+            $phoneno = trim($_POST['phoneno']);
+            $professionalinfo = trim($_POST['professionalinfo']);
+            $country = trim($_POST['country']);
+            $state = trim($_POST['state']);
+            $city = trim($_POST['city']);
+
+        	$first_lastname = $first_name. " " .$last_name;
+            $data = array(
+                'fullname' => $first_name,
+                'username' => $last_name,
+                'email' => $email,
+                'freelancer_hire_slug' => $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg'),
+                'phone' => $phoneno,
+                'country' => $country,
+                'state' => $state,
+                'city' => $city,
+                'professional_info' => $professionalinfo,
+                'status' => '1',
+                'is_delete' => '0',
+                'created_date' => date('Y-m-d h:i:s'),
+                'user_id' => $userid,
+                'free_hire_step' => '3'
+            );
+            $insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
+            if ($insert_id) {
+            	$data = array("is_success" => 1);
+            } else {
+                $data['errors'] = $errors['not_sucess'] = "Please Try again";
+            }
+        }
+        echo json_encode($data);
     }
 
 }

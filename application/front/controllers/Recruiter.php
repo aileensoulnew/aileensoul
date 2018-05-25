@@ -5586,7 +5586,7 @@ class Recruiter extends MY_Controller {
                 $data['errors'] = $errors['not_sucess'] = "Please Try again";
             }
         }
-        echo json_encode($data);        
+        echo json_encode($data);
     }
 
 }
