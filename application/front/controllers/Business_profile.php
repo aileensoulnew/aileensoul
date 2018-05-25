@@ -8055,26 +8055,62 @@ Your browser does not support the audio tag.
 
         $bussdata = $this->common->select_data_by_id('business_profile', 'user_id', $userid, $data = '*', $join_str = array());
 
-        $join_str[0]['table'] = 'business_profile';
-        $join_str[0]['join_table_id'] = 'business_profile.user_id';
-        $join_str[0]['from_table_id'] = 'contact_person.contact_from_id';
-        $join_str[0]['join_type'] = '';
+        // $join_str[0]['table'] = 'business_profile';
+        // $join_str[0]['join_table_id'] = 'business_profile.user_id';
+        // $join_str[0]['from_table_id'] = 'contact_person.contact_from_id';
+        // $join_str[0]['join_type'] = '';
 
         $limit = $perpage;
         $offset = $start;
 
         $contition_array = array('contact_to_id' => $userid, 'contact_person.status' => 'pending');
-        $friendlist_req = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit, $offset, $join_str, $groupby = '');
+        // $friendlist_req = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit, $offset, $join_str, $groupby = '');
+
+        $sql_frnd_req = "SELECT cp.*, IF (bp.city IS NULL, concat(bp.business_slug, '-', s.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
+            bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.other_business_type,bp.other_industrial 
+            FROM ailee_contact_person cp
+            JOIN ailee_business_profile as bp ON bp.user_id=cp.contact_from_id 
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city  
+            LEFT JOIN ailee_states s ON s.state_name = bp.state 
+            WHERE contact_to_id = '" . $userid ."' AND cp.status = 'pending' 
+            ORDER BY contact_id DESC LIMIT " . $offset . "," . $limit;
+            $req_query = $this->db->query($sql_frnd_req);
+            $friendlist_req = $this->data['friendlist_req'] = $req_query->result_array();
+            // print_r($friendlist_req);
+            // exit;
         $friendlist_req1 = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
+        $sql_frnd_req1 = "SELECT cp.*, IF (bp.city IS NULL, concat(bp.business_slug, '-', s.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
+            bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.other_business_type,bp.other_industrial 
+            FROM ailee_contact_person cp
+            JOIN ailee_business_profile as bp ON bp.user_id=cp.contact_from_id 
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city  
+            LEFT JOIN ailee_states s ON s.state_name = bp.state 
+            WHERE contact_to_id = '" . $userid ."' AND cp.status = 'pending' 
+            ORDER BY contact_id DESC";
+            $req_query1 = $this->db->query($sql_frnd_req1);
+            $friendlist_req1 = $req_query1->result_array();
+        // $join_str[0]['table'] = 'business_profile';
+        // $join_str[0]['join_table_id'] = 'business_profile.user_id';
+        // $join_str[0]['from_table_id'] = 'contact_person.contact_to_id';
+        // $join_str[0]['join_type'] = '';
 
-        $join_str[0]['table'] = 'business_profile';
-        $join_str[0]['join_table_id'] = 'business_profile.user_id';
-        $join_str[0]['from_table_id'] = 'contact_person.contact_to_id';
-        $join_str[0]['join_type'] = '';
+        // $contition_array = array('contact_from_id' => $userid, 'contact_person.status' => 'confirm');
+        // $friendlist_con = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
 
-        $contition_array = array('contact_from_id' => $userid, 'contact_person.status' => 'confirm');
-        $friendlist_con = $this->common->select_data_by_condition('contact_person', $contition_array, $data = '*', $sortby = 'contact_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
-
+        $sql = "SELECT cp.*,IF (bp.city IS NULL, concat(bp.business_slug, '-', s.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
+            bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,
+            bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,
+            bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,
+            bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.other_business_type,
+            bp.other_industrial 
+            FROM ailee_contact_person cp
+            JOIN ailee_business_profile bp ON bp.user_id=cp.contact_to_id 
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city  
+            LEFT JOIN ailee_states s ON s.state_name = bp.state 
+            WHERE contact_from_id = '". $userid ."' AND cp.status = 'confirm' ORDER BY contact_id DESC";
+        $query = $this->db->query($sql);
+        $friendlist_con = $query->result_array();
+       
 
         $friendlist = array_merge($friendlist_con, $friendlist_req);
 
