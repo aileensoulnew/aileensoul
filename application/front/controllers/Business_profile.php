@@ -427,6 +427,7 @@ class Business_profile extends MY_Controller {
     }
 
     public function business_profile_addpost_insert($id = "", $para = "") {
+        include ('business_include.php');
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         $business_login_slug = $this->data['business_login_slug'];
@@ -457,9 +458,9 @@ class Business_profile extends MY_Controller {
                 'posted_user_id' => $userid
             );
         }
-//CHECK IF IMAGE POST THEN NAME AND DESCRIPTION IS BLANK THAT TIME POST NOT INSERT AT A TIME.
+        //CHECK IF IMAGE POST THEN NAME AND DESCRIPTION IS BLANK THAT TIME POST NOT INSERT AT A TIME.
         if ($_FILES['postattach']['name'][0] != '') {
-// CHECK FILE IS PROPER 
+        // CHECK FILE IS PROPER 
             if ($_FILES['postattach']['error'][0] != '1') {
                 $insert_id = $this->common->insert_data_getid($data, 'business_profile_post');
             }
@@ -983,44 +984,44 @@ class Business_profile extends MY_Controller {
                             <div class = "else_post_d">
                                 <div class = "post-design-product">
                                     <a class = "post_dot" href = "' . base_url('company/' . $posted_business_slug) . '">' . ucfirst(strtolower($posted_company_name)) . '</a>
-<p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('company/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
-<span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">
-' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
-</span> </div></div>
-</li>';
+                                            <p class = "posted_with" > Posted With</p> <a class = "other_name name_business post_dot" href = "' . base_url('company/' . $post_business_slug) . '">' . ucfirst(strtolower($post_company_name)) . '</a>
+                                            <span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">
+                                            ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
+                                            </span> </div></div>
+                                            </li>';
         } else {
             $return_html .= '<li>
                             <div class = "post-design-product">
                                 <a class = "post_dot" href = "' . base_url('company/' . $post_business_slug) . '" title = "' . ucfirst(strtolower($post_company_name)) . '">
-' . ucfirst(strtolower($post_company_name)) . '</a>
-                    <span role = "presentation" aria-hidden = "true"> · </span>
-<div class = "datespan"> <span class = "ctre_date" >
-' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
+                                    ' . ucfirst(strtolower($post_company_name)) . '</a>
+                                                        <span role = "presentation" aria-hidden = "true"> · </span>
+                                    <div class = "datespan"> <span class = "ctre_date" >
+                                    ' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_created_date))) . '
 
-</span></div>
+                                    </span></div>
 
-</div>
-</li>';
+                                    </div>
+                                    </li>';
         }
 
         $return_html .= '<li>
-<div class = "post-design-product">
-<a class = "buuis_desc_a" href = "javascript:void(0);" title = "Category">';
-        if ($post_industriyal) {
-            $return_html .= ucfirst(strtolower($post_category));
-        } else {
-            $return_html .= ucfirst(strtolower($post_other_industrial));
-        }
+            <div class = "post-design-product">
+            <a class = "buuis_desc_a" href = "javascript:void(0);" title = "Category">';
+            if ($post_industriyal) {
+                $return_html .= ucfirst(strtolower($post_category));
+            } else {
+                $return_html .= ucfirst(strtolower($post_other_industrial));
+            }
 
-        $return_html .= '</a>
-</div>
-</li>
+            $return_html .= '</a>
+            </div>
+            </li>
 
-<li>
-</li>
-</ul>
-</div>
-<div class = "dropdown1">';
+            <li>
+            </li>
+            </ul>
+            </div>
+            <div class = "dropdown1">';
         if ($id == 'manage') {
             $return_html .= '<a onClick = "myFunction1(' . $post_business_profile_post_id . ')" class = "dropbtn_common  dropbtn1 fa fa-ellipsis-v"></a>';
         } else {
@@ -1033,53 +1034,53 @@ class Business_profile extends MY_Controller {
             if ($userid == $post_posted_user_id) {
 
                 $return_html .= '<a onclick = "user_postdelete(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>
-<a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
-<i class = "fa fa-pencil-square-o" aria-hidden = "true">
-</i>Edit
-</a>';
+                    <i class = "fa fa-trash-o" aria-hidden = "true">
+                    </i> Delete Post
+                    </a>
+                    <a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
+                    <i class = "fa fa-pencil-square-o" aria-hidden = "true">
+                    </i>Edit
+                    </a>';
             } else {
 
                 $return_html .= '<a onclick = "user_postdelete(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>';
+                    <i class = "fa fa-trash-o" aria-hidden = "true">
+                    </i> Delete Post
+                    </a>';
             }
         } else {
             if ($userid == $post_user_id) {
                 $return_html .= '<a onclick = "user_postdelete(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>
-<a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
-<i class = "fa fa-pencil-square-o" aria-hidden = "true">
-</i>Edit
-</a>';
+                    <i class = "fa fa-trash-o" aria-hidden = "true">
+                    </i> Delete Post
+                    </a>
+                    <a id = "' . $post_business_profile_post_id . '" onClick = "editpost(this.id)">
+                    <i class = "fa fa-pencil-square-o" aria-hidden = "true">
+                    </i>Edit
+                    </a>';
             } else {
 
                 $return_html .= '<a onclick = "user_postdeleteparticular(' . $post_business_profile_post_id . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>';
+                        <i class = "fa fa-trash-o" aria-hidden = "true">
+                        </i> Delete Post
+                        </a>';
             }
         }
 
         $return_html .= '</div>
-</div>
-<div class = "post-design-desc">
-<div class = "ft-15 t_artd">
-<div id = "editpostdata' . $post_business_profile_post_id . '" style = "display:block;">
-<a>' . $this->common->make_links($post_product_name) . '</a>
-</div>
-<div id = "editpostbox' . $post_business_profile_post_id . '" style = "display:none;">
+            </div>
+            <div class = "post-design-desc">
+            <div class = "ft-15 t_artd">
+            <div id = "editpostdata' . $post_business_profile_post_id . '" style = "display:block;">
+            <a>' . $this->common->make_links($post_product_name) . '</a>
+            </div>
+            <div id = "editpostbox' . $post_business_profile_post_id . '" style = "display:none;">
 
 
-<input type = "text" class="productpostname" id = "editpostname' . $post_business_profile_post_id . '" name = "editpostname" placeholder = "Product Name" value = "' . $post_product_name . '" tabindex="' . $post_business_profile_post_id . '" onKeyDown = check_lengthedit(' . $post_business_profile_post_id . ');
-onKeyup = check_lengthedit(' . $post_business_profile_post_id . ');
-onblur = check_lengthedit(' . $post_business_profile_post_id . ');
->';
+            <input type = "text" class="productpostname" id = "editpostname' . $post_business_profile_post_id . '" name = "editpostname" placeholder = "Product Name" value = "' . $post_product_name . '" tabindex="' . $post_business_profile_post_id . '" onKeyDown = check_lengthedit(' . $post_business_profile_post_id . ');
+            onKeyup = check_lengthedit(' . $post_business_profile_post_id . ');
+            onblur = check_lengthedit(' . $post_business_profile_post_id . ');
+                >';
 
         if ($post_product_name) {
             $counter = $post_product_name;
@@ -1091,8 +1092,8 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
         }
         $return_html .= '</div>
 
-</div>
-<div id = "khyati' . $post_business_profile_post_id . '" style = "display:block;">';
+        </div>
+        <div id = "khyati' . $post_business_profile_post_id . '" style = "display:block;">';
 
         $small = substr($post_product_description, 0, 180);
         $return_html .= nl2br($this->common->make_links($small));
@@ -1101,20 +1102,20 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
         }
 
         $return_html .= '</div>
-<div id = "khyatii' . $post_business_profile_post_id . '" style = "display:none;">
-' . $post_product_description . '</div>
-<div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
-<div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" class = "textbuis editable_text margin_btm" name = "editpostdesc" placeholder = "Description" tabindex="' . ($post_business_profile_post_id + 1) . '" onpaste = "OnPaste_StripFormatting(this, event);" onfocus="cursorpointer(' . $post_business_profile_post_id . ')">' . $post_product_description . '</div>
-</div>
-<div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
-<div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" placeholder = "Product Description" class = "textbuis  editable_text" name = "editpostdesc" onpaste = "OnPaste_StripFormatting(this, event);">' . $post_product_description . '</div>
-</div>
-<button class = "fr" id = "editpostsubmit' . $post_business_profile_post_id . '" style = "display:none;margin: 5px 7px; border-radius: 3px;" onClick = "edit_postinsert(' . $post_business_profile_post_id . ')">Save
-</button>
-</div>
-</div>
-<div class = "post-design-mid col-md-12 padding_adust" >
-<div>';
+            <div id = "khyatii' . $post_business_profile_post_id . '" style = "display:none;">
+            ' . $post_product_description . '</div>
+            <div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
+            <div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" class = "textbuis editable_text margin_btm" name = "editpostdesc" placeholder = "Description" tabindex="' . ($post_business_profile_post_id + 1) . '" onpaste = "OnPaste_StripFormatting(this, event);" onfocus="cursorpointer(' . $post_business_profile_post_id . ')">' . $post_product_description . '</div>
+            </div>
+            <div id = "editpostdetailbox' . $post_business_profile_post_id . '" style = "display:none;">
+            <div contenteditable = "true" id = "editpostdesc' . $post_business_profile_post_id . '" placeholder = "Product Description" class = "textbuis  editable_text" name = "editpostdesc" onpaste = "OnPaste_StripFormatting(this, event);">' . $post_product_description . '</div>
+            </div>
+            <button class = "fr" id = "editpostsubmit' . $post_business_profile_post_id . '" style = "display:none;margin: 5px 7px; border-radius: 3px;" onClick = "edit_postinsert(' . $post_business_profile_post_id . ')">Save
+            </button>
+            </div>
+            </div>
+            <div class = "post-design-mid col-md-12 padding_adust" >
+            <div>';
 
         $contition_array = array('post_id' => $post_business_profile_post_id, 'is_deleted' => '1', 'insert_profile' => '2');
         $businessmultiimage = $this->common->select_data_by_condition('post_files', $contition_array, $data = 'file_name,post_files_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1133,17 +1134,17 @@ onblur = check_lengthedit(' . $post_business_profile_post_id . ');
                 $return_html .= '<div class = "one-image">';
 
                 $return_html .= '<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
-<img src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[0]['file_name'] . '">
-</a>
-</div>';
+                    <img src = "' . BUS_POST_MAIN_UPLOAD_URL . $businessmultiimage[0]['file_name'] . '?ver=' . time() . '" alt="' . $businessmultiimage[0]['file_name'] . '">
+                    </a>
+                    </div>';
             } elseif (in_array($ext, $allowespdf)) {
 
                 $return_html .= '<div>
-<a title = "click to open" href = "' . base_url('business-profile/pdf-view/' . $post_business_profile_post_id) . '" target="_blank"><div class = "pdf_img">
-    <img src="' . base_url('assets/images/PDF.jpg?ver=' . time()) . '" alt="PDF.jpg">
-</div>
-</a>
-</div>';
+                    <a title = "click to open" href = "' . base_url('business-profile/pdf-view/' . $post_business_profile_post_id) . '" target="_blank"><div class = "pdf_img">
+                        <img src="' . base_url('assets/images/PDF.jpg?ver=' . time()) . '" alt="PDF.jpg">
+                    </div>
+                    </a>
+                    </div>';
             } elseif (in_array($ext, $allowesvideo)) {
                 $post_poster = $businessmultiimage[0]['file_name'];
                 $post_poster1 = explode('.', $post_poster);
@@ -7717,7 +7718,7 @@ Your browser does not support the audio tag.
                     FROM ailee_business_profile bp
                     LEFT JOIN ailee_cities ct on bp.city = ct.city_id
                     LEFT JOIN ailee_states st on bp.state = st.state_id
-                    WHERE is_deleted = '0' AND bp.status = '1' AND user_id = '". $contact['contact_to_id'] ."'";
+                    WHERE is_deleted = '0' AND bp.status = '1' AND user_id = '". $contact['contact_from_id'] ."'";
 
                     $query = $this->db->query($sql);
                     $busdata = $query->result_array();
