@@ -738,6 +738,18 @@ label.error{
 }
 header .col-md-4.col-sm-3 a{display: inline-block;}
 
+/***  privecy policy  ***/
+.policy-list{padding:0;}
+.policy-list li{list-style-type:none;}
+.policy-list ul{padding:0;}
+.step-ul li{padding-left:30px; position:relative;}
+.step-ul li b:before{width:10px; height:10px; background:#5c5c5c; content:""; display:block; position:absolute; left:0; top:16px; border-radius:100%;}
+.policy-list > li{padding-left:20px;}
+.policy-list > li h4{margin-left:-20px;}
+/***  privecy policy  ***/
+
+
+
 @media screen and (max-width:1279px){
     .term_desc{
         width:100%!important
