@@ -143,42 +143,80 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
                 </div>
             </header>
-            <!-- <div class="blog_header">
+            <!-- <div class="sub-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-5 col-xs-3 mob-zindex">
-
-                            <div class="logo pl20">
+                        <div class="col-md-6 mob-p0">
+                            <ul class="sub-menu blog-sub-menu">
+                                <li>
                                 <?php
                                 if ($this->input->get('q') || $this->uri->segment(2) == 'popular' || $this->uri->segment(2) == 'tag') {
                                     ?>
-                                    <a href="<?php echo base_url('blog'); ?>">
-                                        <h3  style="color: #1b8ab9;">Blog</h3>
+                                    <a class="fs22" href="<?php echo base_url('blog'); ?>">
+                                        Blog
                                     </a>
                                     <?php
                                 } else {
                                     ?>
-                                    <a href="<?php echo base_url('blog'); ?>">
-                                        <h3  style="color: #1b8ab9;">Blog</h3>
+                                    <a class="fs22" href="<?php echo base_url('blog'); ?>">
+                                        Blog
                                     </a>
                                     <?php
                                 }
                                 ?>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-7 col-xs-9 header-left-menu">
-                            <div class="main-menu-right">
-                                <ul class="">
-                                    <?php foreach ($blog_category as $category) { ?>
-                                        <li class="category">
-                                            <div id="category_<?php echo $cateory['id']; ?>"  onclick="return category_data(<?php echo $category['id']; ?>);">
-                                                <?php echo $category['name']; ?>
-                                            </div>
-                                        </li>
-                                    <?php } ?>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-title">
+                                            Recent Post <a href="#" class="pull-right">See All</a>
+                                        </div>
+                                        <div class="content custom-scroll">
+                                            <ul class="dropdown-data msg-dropdown">
+                                                <?php foreach ($blog_last as $blog) { ?>
+                                                <li class="">
+                                                    <a href="<?php echo base_url('blog/' . $blog['blog_slug']) ?>">
+                                                        <div class="dropdown-database">
+                                                            <div class="post-img">
+                                                                <img src="<?php echo base_url($this->config->item('blog_thumb_upload_path') . $blog['image'] . '?ver=' . time()) ?>" alt="<?php echo $blog['image']; ?>">
+                                                            </div>
+                                                            <div class="dropdown-user-detail">
+                                                                <p class="drop-blog-title"><?php echo $blog['title']; ?></p>
+                                                                    <span class="day-text"><?php echo $blog['created_date_formatted']; ?></span>
+                                                            </div> 
+                                                        </div>
+                                                    </a> 
+                                                </li>
+                                                <?php } ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
+                            <div class="dropdown-menu">
+                                <ul class="content custom-scroll">
+                                    <li class="category" ng-repeat="category in categoryList track by $index">
+                                        <a href="javascript:void(0)" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
+                                            {{ category.name }}
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
+                        </li>
+                            </ul>
                         </div>
+                        <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob blog-search">
+                            <div class="job-search-box1 clearfix">        
+                                <form action="<?php echo base_url;?>blog" method="get">
+                                    <fieldset class="sec_h2">
+                                        <input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </fieldset>
+                                </form>   
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div> -->
@@ -417,10 +455,15 @@ header("Pragma: no-cache"); // HTTP/1.0
                         </ul>
                     </div>
                     <div class="right-part">
-                        <div class="subscribe-box">
+                        <div class="subscribe-box" ng-show="subscribe_visibility">
                             <h4>Subscribe to Our Newslatter</h4>
-                            <input type="text" class="form-control" placeholder="Enter your email id">
-                            <a class="btn1" href="#">Subscribe</a>
+                            <input type="text" class="form-control" placeholder="Enter your email id" ng-model="subscribe_email">
+                            <h6 class="small" style="color: red;" ng-show="error_subscribe_visiblity">{{ error_subscribe_text }}</h6>
+                            <a class="btn1" href="javascript:void(0)" ng-click="addsubscribe();">Subscribe</a>
+                            <h6 class="small" style="color: red;">{{ ajax_error_text }}</h6>
+                        </div>
+                        <div class="subscribe-box" ng-hide="subscribe_visibility">
+                            <h4>Your email id subscribe successfully.</h4>
                         </div>
                     </div>
                 </div>                
@@ -529,16 +572,17 @@ header("Pragma: no-cache"); // HTTP/1.0
             }*/
             //AJAX DATA LOAD BY LAZZY LOADER END
         </script>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+        <script src="<?php echo base_url('assets/js/angular-pagination.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var title = '<?php echo $title; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
-            var blog_category = ('<?php echo json_encode($blog_category); ?>');
             var app = angular.module('blogApp', ['ui.bootstrap','angularUtils.directives.dirPagination']);
         </script>
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>

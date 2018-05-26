@@ -302,10 +302,15 @@ header("Pragma: no-cache"); // HTTP/1.0
                         </ul>
                     </div>
                     <div class="right-part">
-                        <div class="subscribe-box">
+                        <div class="subscribe-box" ng-show="subscribe_visibility">
                             <h4>Subscribe to Our Newslatter</h4>
-                            <input type="text" class="form-control" placeholder="Enter your email id">
-                            <a class="btn1" href="#">Subscribe</a>
+                            <input type="text" class="form-control" placeholder="Enter your email id" ng-model="subscribe_email">
+                            <h6 class="small" style="color: red;" ng-show="error_subscribe_visiblity">{{ error_subscribe_text }}</h6>
+                            <a class="btn1" href="javascript:void(0)" ng-click="addsubscribe();">Subscribe</a>
+                            <h6 class="small" style="color: red;">{{ ajax_error_text }}</h6>
+                        </div>
+                        <div class="subscribe-box" ng-hide="subscribe_visibility">
+                            <h4>Your email id subscribe successfully.</h4>
                         </div>
                     </div>
                 </div>                
@@ -429,13 +434,12 @@ header("Pragma: no-cache"); // HTTP/1.0
     <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
-    
+    <script src="<?php echo base_url('assets/js/angular-pagination.js?ver=' . time()); ?>"></script>
     <script>
         var base_url = '<?php echo base_url(); ?>';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var title = '<?php echo $title; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
-        var blog_category = ('<?php echo json_encode($blog_category); ?>');
         var app = angular.module('blogApp', ['ui.bootstrap','angularUtils.directives.dirPagination']);
     </script>
 

@@ -16,11 +16,12 @@ class Blog extends CI_Controller {
 
     //MAIN INDEX PAGE START   
     public function index($slug = '') {
-
         // blog category start
         $condition_array = array('status' => 'publish');
         $data = 'id,name';
         // $this->data['blog_category'] = $this->common->select_data_by_condition('blog_category', $condition_array, $data, $short_by = '', $order_by = '', $limit = '', $offset = '', $join_str = array());
+
+
         // blog category end
         if ($slug != '') {
 
@@ -33,17 +34,20 @@ class Blog extends CI_Controller {
             //FOR GETTING BLOG
             $condition_array = array('status' => 'publish', 'blog_slug' => $slug);
             $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());
+            // echo $this->db->last_query();
+            // exit;
+
             $blogid = $this->data['blog_detail'][0]['id'];
-        $relatedid = explode(',',$this->data['blog_detail'][0]['blog_related_id']); 
-       foreach($relatedid as $id){
-            $condition_array = array('status' => 'publish', 'id' => $id);
-            $blogs[] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());
-           
-       }
-      $this->data['rand_blog'] = array_reduce($blogs, 'array_merge', array()); 
+            $relatedid = explode(',',$this->data['blog_detail'][0]['blog_related_id']); 
+            foreach($relatedid as $id){
+                $condition_array = array('status' => 'publish', 'id' => $id);
+                $blogs[] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());
+            }
+
+            $this->data['rand_blog'] = array_reduce($blogs, 'array_merge', array()); 
             //FOR GETTING 5 LAST DATA
             $condition_array = array('status' => 'publish');
-            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
             //random blog
             
             // random blog end 
@@ -52,6 +56,7 @@ class Blog extends CI_Controller {
                 redirect('blog', refresh);
             }
         } else {
+
             //THIS IF IS USED FOR WHILE SEARCH FOR RETRIEVE SAME PAGE START
             if ($this->input->get('q') || $this->input->get('p')) { 
 
@@ -85,7 +90,7 @@ class Blog extends CI_Controller {
 
 
             $condition_array = array('status' => 'publish');
-            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
 
                $this->load->view('blog/search', $this->data);
 
@@ -660,4 +665,60 @@ class Blog extends CI_Controller {
         echo json_encode($result);
     }
 
+    // Get all category of blog list
+    function get_blog_details(){
+        $blog_slug = $_GET['blog_slug'];
+        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(bc.name) as category_name
+            FROM ailee_blog b, ailee_blog_category bc 
+            WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) and
+            blog_slug = '". $blog_slug ."' 
+            GROUP BY b.blog_category_id ORDER BY `id` DESC";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        if(count($result) > 0){
+            $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where blog_id = '". $result[0]['id'] ."'";
+            $query = $this->db->query($sql);
+            $result[0]['total_comment'] = $query->row()->total_comment;
+
+            $result[0]['social_title'] = urlencode('"' . $result[0]['title'] . '"');
+            $result[0]['social_encodeurl'] = urlencode(base_url('blog/' . $result[0]['blog_slug']));
+            $result[0]['social_summary'] = urlencode('"' . $result[0]['description'] . '"');
+            $result[0]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $result[0]['image']));
+            $result[0]['social_url'] = base_url('blog/' . $result[0]['blog_slug']);
+
+            $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(bc.name) as category_name
+                FROM ailee_blog b, ailee_blog_category bc 
+                WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) and
+                b.id IN (". $result[0]['blog_related_id'] .") 
+                GROUP BY b.blog_category_id ORDER BY b.id DESC";
+            $query = $this->db->query($sql);
+            $result[0]['related_post'] = $query->result_array();
+
+            $sql = "SELECT *, DATE_FORMAT(comment_date,'%D %M %Y') as created_date_formatted FROM ailee_blog_comment WHERE status = 'approve' AND blog_id = ". $result[0]['id'] ." ORDER BY id DESC";
+            
+            $query = $this->db->query($sql);
+            $result[0]['all_comment'] = $query->result_array();
+        }
+        echo json_encode($result);
+    }
+
+    function add_subscription(){
+        $email = isset($_POST['email']) ? $_POST['email'] : "";
+        if($email == ""){
+            echo "Please enter email id";
+        }else{
+            $sql_sub_exisit = "SELECT * FROM ailee_subscription where email = '". $email ."'";
+            $query_sub_exisit = $this->db->query($sql_sub_exisit);
+            $result_sub_exisit = $query_sub_exisit->result_array();
+            if(count($result_sub_exisit) > 0){
+                $result_data = array("error"=>true,"message"=>"already subscribe");
+            }else{
+                $subscribe_data = array("email" => $email, "status" => '1');
+                $this->db->insert('subscription', $subscribe_data);
+                $insert_id = $this->db->insert_id();
+                $result_data = array("success"=>true,"message"=>$insert_id);
+            }
+            echo json_encode($result_data);
+        }
+    }
 }
