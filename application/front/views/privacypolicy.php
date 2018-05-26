@@ -126,7 +126,7 @@ header('Cache-Control: public, max-age=30');
 								<ul class="step-ul">
 									<li>
 										<b>From User</b>
-										<p>We collect personal identification details like your name, email, phone number, gender, date of birth, street, city, state, pin code, country and IP address when you create an account on our website or ask us a question through phone or email or on our website or apply for any job posts.</p>
+										<p>We collect personal identification details like your name, email, phone number, gender, date of birth, street, city, state, pin code, country and IP address when you create an account on our website or ask us a question through phone or email or on our website or apply for any job posts or respond to our survey.</p>
 									</li>
 									<li>
 										<b id="profile-info">Profile Information</b>
@@ -134,7 +134,7 @@ header('Cache-Control: public, max-age=30');
 									</li>
 									<li>
 										<b>Posting and Uploading</b>
-										<p>We may also collect your information when you provide, post or upload (photos, videos, audio, and PDFs), and respond to our survey.  </p>
+										<p>You can post or upload anything (photos, videos, audio, PDFs, questions, articles and job opportunities) which can be deleted from that particular post itself. You can retain that data from us within 7 days or else it will be lost permanently.  </p>
 									</li>
 									<li>
 										<b>Messages</b>
@@ -145,7 +145,7 @@ header('Cache-Control: public, max-age=30');
 								<b id="info-cookie">Information Collected via Cookies</b>
 								<p>In order to improve our services, we may collect information about your IP address, the type of mobile device you are using and the browser you're using or the version of the operating system your computer or device is running. We might look at what site you came from, duration of time spent on our website, pages accessed or what site you visit when you leave us.</p>
 								<p>All these information are collected through cookie which is stored on your device. We use both persistent cookies and session cookies; persistent cookies remain on your device until you delete them, whilst session cookies automatically expire when you close your browser. We use cookies to understand your preferences while using our services and to serve ads based on your prior visits to your website or other websites. </p>
-								<p>We use third-party vendors tracking tools like Google Analytics and Google Adsense that use cookie or web beacons to collect above-mentioned information.</p>
+								<p>We use third-party vendors tracking tools like Google Analytics and Google Adsense that use cookie or web beacons to collect above-mentioned information. From our side we use persistent cookie that helps us identifying existing user, so it make easy for user to use our Service without signing in again.</p>
 								<p>Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to our sites and/or other sites on the Internet.</p>
 								<p>Users may opt out of Google personalized advertising by visiting <a target="_blank" href="https://www.google.com/settings/ads">Ads Settings</a></p>
 								<p>To opt-out from Google Analytics cookies install an <a target="_blank" href="https://tools.google.com/dlpage/gaoptout">opt-out browser add-on.</a> </p>
@@ -231,7 +231,7 @@ header('Cache-Control: public, max-age=30');
 							</li>
 							<li>
 								<h4><span>5.</span> <span class="h4-title">How we Protect Your Information</span></h4>
-								<p>We implement security measures designed to protect your information from unauthorized access. Your account is protected by your account password and we urge you to take steps to keep your personal information safe by not disclosing your password and by logging out of your account after each session. We further protect your information from potential security breaches by implementing certain technological security measures including firewalls and secure socket layer technology (HTTPS).</p>
+								<p>We implement security measures designed to protect your information from unauthorized access. Your account is protected by your account password and we urge you to take steps to keep your personal information safe by not disclosing your password and by logging out of your account after each session. We further protect your information from potential security breaches by implementing certain technological security measures including encryption, firewalls and secure socket layer technology (HTTPS).</p>
 								<p class="last-p">However, these measures do not guarantee that your information will not be accessed, disclosed, altered or destroyed by breach of such firewalls and secure server software. By using our Service, you acknowledge that you understand and agree to assume these risks.</p>
 							</li>
 							<li>
