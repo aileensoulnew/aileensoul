@@ -194,6 +194,9 @@
                                                 <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a>
                                                 <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
                                             </li>
+											<li>
+												<a data-target="#report-span" data-toggle="modal" onclick="void(0)" href="#">Report</a>
+											</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -648,6 +651,89 @@
                 </div>
             </div>
         </div>
+		
+		<div style="display:none;" class="modal fade" id="report-span" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="report-box">
+						<h3>Give Feedback on this post</h3>
+						<ul>
+							<li>
+								<label class="control control--radio">Not intersed in this post
+									<input name="radio" type="radio">
+									<div class="control__indicator"></div>
+								</label>
+							</li>
+							<li>
+								<label class="control control--radio">Spam, or Promotional
+									<input name="radio" type="radio">
+									<div class="control__indicator"></div>
+								</label>
+							</li>
+							<li>
+								<label class="control control--radio">Nudity or Sexually explicit
+									<input name="radio" type="radio">
+									<div class="control__indicator"></div>
+								</label>
+							</li>
+							<li>
+								<label class="control control--radio">Fake News
+									<input name="radio" type="radio">
+									<div class="control__indicator"></div>
+								</label>
+							</li>
+							<li>
+								<label class="control control--radio">Fake Account
+									<input name="radio" type="radio">
+									<div class="control__indicator"></div>
+								</label>
+							</li>
+							<li>
+								<label class="control control--radio">Scam, Phising or Malware
+									<input name="radio" type="radio">
+									<div class="control__indicator"></div>
+								</label>
+							</li>
+							<li>
+								<label class="control control--radio">Abusive, Violent or Hate speech
+									<input name="radio" type="radio">
+									<div class="control__indicator"></div>
+								</label>
+							</li>
+							<li class="other-rsn">
+								<label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other reasons
+									
+								</label>
+							</li>
+							<li>
+								<button class="btn1">Submit</button>
+							</li>
+							
+						</ul>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div style="display:none;" class="modal fade" id="other-reason" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                    <div class="report-box">
+						
+						<div class="other-reason-box">
+							<textarea placeholder="Enter Other Reason"></textarea>
+							<p class="text-center">
+								<button class="btn3">Back</button> <button class="btn1">Submit</button>
+							</p>
+						</div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+		
         <div style="display:none;" class="modal fade" id="post-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
