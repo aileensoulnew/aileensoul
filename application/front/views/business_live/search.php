@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/header.css?ver=' . time()) ?>">
 
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
@@ -29,7 +30,7 @@
                 echo $header_profile; 
             }
        ?>            
-        <div class="middle-section middle-section-banner new-ld-page">
+        <div class="middle-section">
             <?php if($ismainregister == false || $isbusiness_deactive == true || $isbusiness_register == false){ echo $search_banner; }  ?>
             <?php //if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
             <div class="container pt20 searchcontainer">
@@ -141,9 +142,9 @@
                         </div>
                     </div>
                     <!-- NO RESULT FOUND DIV -->
-                    <div class="job-contact-frnd" ng-if="businessList.length <= 0">
+                    <div class="job-contact-frnd user_no_post_avl" ng-if="businessList.length <= 0">
                         <!-- AJAX DATA... -->
-                        <div class="text-center rio">
+                        <div class="text-center rio user_no_post_img">
                             <h1 class="page-heading  product-listing" style="border:0px;margin-bottom: 11px;">Oops No Data Found.</h1>
                             <p style="text-transform:none !important;border:0px;margin-left:4%;">We couldn't find what you were looking for.</p>
                         </div>

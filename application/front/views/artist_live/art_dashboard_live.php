@@ -52,7 +52,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         </style>
         
     </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push no-login">
+    <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php if($this->session->userdata('aileenuser')){ 
             echo $artistic_header2;
         }else{ ?>

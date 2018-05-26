@@ -2134,7 +2134,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .notification-database{padding:0; height:auto;}
 .data_noti_msg span {line-height:1;}
 .cq_post ul li:hover{background:#e9f4f8;}
-
+.art-cat-custom label.error{top:55px;}
 /***  job css  ***/
 .message button.modal-close{background:#1b8ab9; color:#fff;}
 .cnclbtn, .okbtn{transition: all .2s; color: #fff; padding: 8px 18px; background-color: #1b8ab9 !important;

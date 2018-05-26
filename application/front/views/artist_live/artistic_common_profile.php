@@ -212,7 +212,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 				<button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
 				<div class="modal-body">
 					<div class="clearfix">
-						<div class=" ">
+						<div class="common-form">
 							<div class="title">
 								<h1 class="tlh1">Register in Artistic Profile</h1>
 							</div>
@@ -248,7 +248,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 								<input type="text" name="phoneno" id="phoneno" tabindex="4" placeholder="Enter phone number" value="<?php echo $job[0]['user_email'];?>" maxlength="255">
 								<?php echo form_error('phoneno'); ?>
 							</fieldset>
-							<fieldset class="full-width art-cat-custom <?php if($skills) {  ?> error-msg <?php } ?>">
+							<fieldset class="full-width art-cat-custom vali_er <?php if($skills) {  ?> error-msg <?php } ?>">
 								<label>Art category:<span style="color:red">*</span></label>
 								<select name="skills[]" id="skills" multiple>
 									<?php                             
@@ -281,7 +281,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 											<?php echo form_error('othercategory'); ?>
 										</div>
 									</fieldset>
-									<fieldset <?php if($country) {  ?> class="error-msg" <?php } ?>>
+									<fieldset <?php if($country) {  ?> class="error-msg " <?php } ?>>
 										<label>Country:<span style="color:red">*</span></label>    
 										<select name="country" id="country" tabindex="5">
 											<option value="">Select country</option>
@@ -318,7 +318,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 										<span id="state-error"></span>
 										<?php echo form_error('state'); ?>
 									</fieldset> 
-									<fieldset class="full-width" <?php if($city) {  ?> class="error-msg" <?php } ?>>
+									<fieldset class="full-width vali_er" <?php if($city) {  ?> class="error-msg" <?php } ?>>
 										<label> City:<span style="color:red">*</label>
 											<select name="city" id="city" tabindex="7">
 												<?php

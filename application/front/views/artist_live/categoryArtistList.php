@@ -28,7 +28,7 @@
                     echo $header_profile;
                 }
         ?>
-        <div class="middle-section middle-section-banner new-ld-page">
+        <div class="middle-section">
             <?php if($ismainregister == false || $isartistactivate == false || $artist_isregister == false || !$session_user_id){ echo $search_banner; 
             } ?>
             <div class="container pt20">
@@ -40,17 +40,16 @@
                         </div>
                         <ul class="search-listing">
                             <li ng-repeat="category in artistCategory">
-                                <label class="">
-                                    <p class="pull-left" style="width: 45px;">
-                                        <input class="categorycheckbox" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
-                                    </p>
-                                    <p class="pull-left">{{category.art_category | capitalize}}</p>
-                                    <p class="pull-right">({{category.count}})</p>
-                                    <!-- </a> -->
+                                <label class="control control--checkbox">
+                                    <span>{{category.art_category | capitalize}}
+										<span class="pull-right">({{category.count}})</span>
+									</span>
+                                    <input class="categorycheckbox" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                    <div class="control__indicator"></div>
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10"><a href="<?php echo artist_category_list ?>">More Categories</a></p>
+                        <p class="text-left p10"><a href="<?php echo artist_category_list ?>">View More Categories</a></p>
                     </div>
 
                     <div class="left-search-box list-type-bullet">
@@ -59,18 +58,16 @@
                         </div>                        
                         <ul class="search-listing" style="list-style: none;">
                             <li ng-repeat="location in artistLocation">
-                                <label class="pointer">
-                                    <p class="pull-left" style="width: 45px;">
-                                        <input class="locationcheckbox" type="checkbox" name="{{location.art_location}}" value="{{location.location_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
-                                    </p>
-                                    <p class="pull-left">
-                                        {{location.art_location | capitalize}}
-                                    </p>
-                                    <p class="pull-right">({{location.total}})</p>
+                                <label class="control control--checkbox">
+                                    <span>{{location.art_location | capitalize}}
+										<span class="pull-right">({{location.total}})</span>
+									</span>
+                                    <input class="locationcheckbox" type="checkbox" name="{{location.art_location}}" value="{{location.location_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+									<div class="control__indicator"></div>
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10"><a href="<?php echo artist_location_list ?>">More Locations</a></p>
+                        <p class="text-left p10"><a href="<?php echo artist_location_list ?>">View More Locations</a></p>
                     </div>
 
                     <div class="custom_footer_left fw">
@@ -140,7 +137,8 @@
                         </div>
                     </div>
                     <!-- NO RESULT FOUND DIV -->
-                    <div class="art-img-nn" ng-if="ArtistList.length <= 0">
+					
+                    <div class="art-img-nn user_no_post_avl" ng-if="ArtistList.length <= 0">
                         <div class="art_no_post_img">
                             <img alt="No Saved freelancer" src="<?php echo base_url('assets/img/free-no1.png') ?>">
                         </div>
