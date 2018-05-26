@@ -1419,7 +1419,7 @@ svg path{
 
 
 /***  custom suggestion box dropdown  ***/
-.ui-widget-content{width:100% !important; left:0 !important; top:35px !important;}
+/*.ui-widget-content{width:100% !important; left:0 !important; top:35px !important;}*/
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {

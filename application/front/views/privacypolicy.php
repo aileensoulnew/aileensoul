@@ -165,7 +165,7 @@ header('Cache-Control: public, max-age=30');
 							<li>
 								<h4>2. How we use your data</h4>
 								<p>We use your information to provide you with our best services.</p>
-								<ul>
+								<ul class="no-step-ul">
 									<li>
 										<b>Networking Suggestions</b>
 										<p>Our platform helps you search, connect and engage with others (This applies to each 5 profile mentioned in “Profile Information”). It’s your choice to accept or decline anybody request. The users who are connected to each other can view each other connections. We use your data to provide you with a contact request, enable others to find you, send an invite and connect. </p>
@@ -192,13 +192,13 @@ header('Cache-Control: public, max-age=30');
 									</li>
 									<li>
 										<b>Security</b>
-										<p>We may use the information to protect our company, our customers, or our websites from any fraud or any violations as per our <a href="#">terms and conditions.</a></p>
+										<p class="last-p">We may use the information to protect our company, our customers, or our websites from any fraud or any violations as per our <a href="#">terms and conditions.</a></p>
 									</li>
 								</ul>
 							</li>
 							<li>
 								<h4>3. How we share your data</h4>
-								<ul>
+								<ul class="no-step-ul">
 									<li>
 										<b>Sharing on Our Platform</b>
 										<p>Our services include making profiles, sharing posts, articles, questions, and opportunities, like, follow and comment.</p>
@@ -219,7 +219,7 @@ header('Cache-Control: public, max-age=30');
 									</li>
 									<li>
 										<b>Business Partner or Sale</b>
-										<p>We may share information with our business partners. This includes a third party who provide or sponsor an event, or who operates a venue where we hold events. Our partners use the information we give them as described in their privacy policies. Also, if part of our business is sold we may give our customer list as part of that transaction and the permission to use our data in a way as mentioned in this privacy policy.</p>
+										<p class="last-p">We may share information with our business partners. This includes a third party who provide or sponsor an event, or who operates a venue where we hold events. Our partners use the information we give them as described in their privacy policies. Also, if part of our business is sold we may give our customer list as part of that transaction and the permission to use our data in a way as mentioned in this privacy policy.</p>
 									</li>
 								</ul>
 							</li>
@@ -227,33 +227,33 @@ header('Cache-Control: public, max-age=30');
 								<h4>4. Your Rights Regarding the Use of Your Personal Information</h4>
 								<p>We provide the user with the right to change their data from account settings. We even give our user with an option to contact us regarding changing or correcting details, erase or delete or deactivating account, to object or limit or restrict us from using personal data (if we don’t hold any legal rights), ask a copy of personal information that is associated with their account that we hold via email.</p>
 								<p>We also provide you with a choice to stop receiving our promotional emails. You can opt-out by following the unsubscribe instructions mentioned in the email itself. It may take about ten days to process your request. Note that even if you opt out of getting marketing messages, we can still send you messages regarding security, legal and privacy updates.</p>
-								<p>Please refer the “Contact Information” section to contact us.</p>
+								<p class="last-p">Please refer the “Contact Information” section to contact us.</p>
 							</li>
 							<li>
 								<h4>5. How we Protect Your Information</h4>
 								<p>We implement security measures designed to protect your information from unauthorized access. Your account is protected by your account password and we urge you to take steps to keep your personal information safe by not disclosing your password and by logging out of your account after each session. We further protect your information from potential security breaches by implementing certain technological security measures including firewalls and secure socket layer technology (HTTPS).</p>
-								<p>However, these measures do not guarantee that your information will not be accessed, disclosed, altered or destroyed by breach of such firewalls and secure server software. By using our Service, you acknowledge that you understand and agree to assume these risks.</p>
+								<p class="last-p">However, these measures do not guarantee that your information will not be accessed, disclosed, altered or destroyed by breach of such firewalls and secure server software. By using our Service, you acknowledge that you understand and agree to assume these risks.</p>
 							</li>
 							<li>
 								<h4>6. Links to Other Websites</h4>
 								<p>As part of the Service, we may have links to other websites or applications. However, we are not responsible for the privacy practices employed by those websites or the information or content they contain.</p>
-								<p>This Privacy Policy applies solely to information collected by us through the Site and the Service. Therefore, this Privacy Policy does not apply to your use of a third party website accessed by selecting a link on our Site or via our Service. To the extent that you access or use the Service through or on another website or application, then the privacy policy of that other website or application will apply to your access or use of that site or application. We encourage our users to read the privacy statements of other websites before proceeding to use them.</p>
+								<p class="last-p">This Privacy Policy applies solely to information collected by us through the Site and the Service. Therefore, this Privacy Policy does not apply to your use of a third party website accessed by selecting a link on our Site or via our Service. To the extent that you access or use the Service through or on another website or application, then the privacy policy of that other website or application will apply to your access or use of that site or application. We encourage our users to read the privacy statements of other websites before proceeding to use them.</p>
 							</li>
 							<li>
 								<h4>7. Lawful Basis for Processing Personal Data</h4>
-								<p>We collect data that are necessary to provide you relevant services and are covered by laws. If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy (which includes usage of Cookies and other documents referenced in this Privacy Policy) and agree to our Terms & Conditions. We provide you choices that allow you to opt-out or control how we use and share your data.</p>
+								<p class="last-p">We collect data that are necessary to provide you relevant services and are covered by laws. If you use our Services, you consent to the collection, use and sharing of your personal data under this Privacy Policy (which includes usage of Cookies and other documents referenced in this Privacy Policy) and agree to our Terms & Conditions. We provide you choices that allow you to opt-out or control how we use and share your data.</p>
 							</li>
 							<li>
 								<h4>8. Contact Information</h4>
-								<p>If you have any queries, questions about this Policy or other privacy concerns, you can also email us at <a href="mailto:info@aileensoul.com ">info@aileensoul.com</a> </p>
+								<p class="last-p">If you have any queries, questions about this Policy or other privacy concerns, you can also email us at <a href="mailto:info@aileensoul.com ">info@aileensoul.com</a> </p>
 							</li>
 							<li>
 								<h4>9. Changes to Privacy Policy</h4>
-								<p>This Privacy Policy was last updated on 25.05.2018. We reserve the right to modify this privacy policy. From time to time we may change our privacy practices, so please check our site periodically for updates. We will notify you of any material changes to this policy as required by law. We will also post a notification on our website or send a notice on email address specified in your account.</p>
+								<p class="last-p">This Privacy Policy was last updated on 25.05.2018. We reserve the right to modify this privacy policy. From time to time we may change our privacy practices, so please check our site periodically for updates. We will notify you of any material changes to this policy as required by law. We will also post a notification on our website or send a notice on email address specified in your account.</p>
 							</li>
 							<li>
 								<h4>10. Jurisdiction</h4>
-								<p>If you choose to visit the website, your visit and any dispute over privacy are subject to this Policy and the website's terms of use. In addition to the foregoing, any disputes arising under this Policy shall be governed by the laws of Government of India.</p>
+								<p class="last-p">If you choose to visit the website, your visit and any dispute over privacy are subject to this Policy and the website's terms of use. In addition to the foregoing, any disputes arising under this Policy shall be governed by the laws of Government of India.</p>
 							</li>
 						</ul>
 					</div>
