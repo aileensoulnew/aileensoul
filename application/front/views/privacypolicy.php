@@ -115,7 +115,7 @@ header('Cache-Control: public, max-age=30');
 						<h4 class="pt20 pb10">Introduction</h4>
 						<p>Aileensoul provides a free platform to each and every person in this world to hire, get a job (Full time or Freelance), grow their business network, show artistic talent and make a career. Also, a platform to learn, post information, questions, and discover great opportunities. Some data are visible to only register members whereas some to visitors (who are not a member).</p>
 						<p>This Privacy Policy applies to current and former visitors to our website and to our online users. By visiting and/or using our website, you agree to this Privacy Policy. Make sure you read the whole privacy policy till the end to better understand our services.</p>
-						<p>Aileensoul works as a data controller. Aileensoul.com is a property of Aileensoul Private Limited, an Indian Company registered under the Companies Act, 2013 having its registered office at E- 912, titanium city centre, near Sachin tower, 100 ft. Anandnagar Road, Satellite, Ahmedabad, Gujarat.</p>
+						<p>Aileensoul works as a data controller. Aileensoul.com is a property of Aileensoul Technologies Private Limited, an Indian Company registered under the Companies Act, 2013 having its registered office at E- 912, titanium city centre, near Sachin tower, 100 ft. Anandnagar Road, Satellite, Ahmedabad, Gujarat.</p>
 						<ul class="policy-list">
 							<li>
 								<h4><span>1.</span> <span class="h4-title">Information We Collect</span></h4>
@@ -134,7 +134,7 @@ header('Cache-Control: public, max-age=30');
 									</li>
 									<li>
 										<b>Posting and Uploading</b>
-										<p>You can post or upload anything (photos, videos, audio, PDFs, questions, articles and job opportunities) which can be deleted from that particular post itself. You can retain that data from us within 7 days or else it will be lost permanently.  </p>
+										<p>You can post or upload anything (photos, videos, audio, PDFs, questions, articles and job opportunities) which can be deleted from that particular post from your side. You can retain that data from us within 7 days or else it will be lost permanently.</p>
 									</li>
 									<li>
 										<b>Messages</b>
@@ -145,7 +145,7 @@ header('Cache-Control: public, max-age=30');
 								<b id="info-cookie">Information Collected via Cookies</b>
 								<p>In order to improve our services, we may collect information about your IP address, the type of mobile device you are using and the browser you're using or the version of the operating system your computer or device is running. We might look at what site you came from, duration of time spent on our website, pages accessed or what site you visit when you leave us.</p>
 								<p>All these information are collected through cookie which is stored on your device. We use both persistent cookies and session cookies; persistent cookies remain on your device until you delete them, whilst session cookies automatically expire when you close your browser. We use cookies to understand your preferences while using our services and to serve ads based on your prior visits to your website or other websites. </p>
-								<p>We use third-party vendors tracking tools like Google Analytics and Google Adsense that use cookie or web beacons to collect above-mentioned information. From our side we use persistent cookie that helps us identifying existing user, so it make easy for user to use our Service without signing in again.</p>
+								<p>We use third-party vendors tracking tools like Google Analytics and Google Adsense that use cookie or web beacons to collect above-mentioned information. From our side, we use a persistent cookie that helps us identifying existing user, so it makes easy for the user to use our Service without signing in again.</p>
 								<p>Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to our sites and/or other sites on the Internet.</p>
 								<p>Users may opt out of Google personalized advertising by visiting <a target="_blank" href="https://www.google.com/settings/ads">Ads Settings</a></p>
 								<p>To opt-out from Google Analytics cookies install an <a target="_blank" href="https://tools.google.com/dlpage/gaoptout">opt-out browser add-on.</a> </p>
@@ -230,7 +230,7 @@ header('Cache-Control: public, max-age=30');
 								<p class="last-p">Please refer the <a href="#contact-info">Contact Information</a> section to contact us.</p>
 							</li>
 							<li>
-								<h4><span>5.</span> <span class="h4-title">How we Protect Your Information</span></h4>
+								<h4><span>5.</span> <span class="h4-title">How We Protect Your Information</span></h4>
 								<p>We implement security measures designed to protect your information from unauthorized access. Your account is protected by your account password and we urge you to take steps to keep your personal information safe by not disclosing your password and by logging out of your account after each session. We further protect your information from potential security breaches by implementing certain technological security measures including encryption, firewalls and secure socket layer technology (HTTPS).</p>
 								<p class="last-p">However, these measures do not guarantee that your information will not be accessed, disclosed, altered or destroyed by breach of such firewalls and secure server software. By using our Service, you acknowledge that you understand and agree to assume these risks.</p>
 							</li>
@@ -245,7 +245,7 @@ header('Cache-Control: public, max-age=30');
 							</li>
 							<li>
 								<h4 id="contact-info"><span>8.</span> <span class="h4-title">Contact Information</span></h4>
-								<p class="last-p">If you have any queries, questions about this Policy or other privacy concerns, you can also email us at <a href="mailto:info@aileensoul.com ">info@aileensoul.com</a> </p>
+								<p class="last-p">If you have any queries, questions about this Policy or other privacy concerns, you can also email us at <a href="mailto:info@aileensoul.com ">info@aileensoul.com</a> <a href="mailto:inquiry@aileensoul.com">inquiry@aileensoul.com</a> , <a href="mailto:aileensoulinquiry@gmail.com">aileensoulinquiry@gmail.com</a></p>
 							</li>
 							<li>
 								<h4><span>9.</span> <span class="h4-title">Changes to Privacy Policy</span></h4>
