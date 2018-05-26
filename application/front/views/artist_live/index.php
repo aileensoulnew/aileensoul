@@ -108,7 +108,7 @@
                             <?php //} ?>
 
                             <?php 
-                                if ($ismainregister == true && $artist_isregister == false) { 
+                                if (($ismainregister == true && $artist_isregister == false) || ($ismainregister == false)) { 
                             ?>
                                 <a href="<?php echo artist_registration; ?>" class="btn5">Create Artist Profile</a>
                             <?php } ?>

@@ -341,6 +341,13 @@ class Artistic_model extends CI_Model {
         return $result_array;
     }
 
+    public function getidfromslugoflocation($city_name = ''){
+        $sql = "SELECT group_concat(city_id) as city_id FROM `ailee_cities` WHERE `slug` = '". $city_name ."'";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
     function artistListByLocation($id = '') {
         $sql = "SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, 
                 CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, ar.art_desc_art, 

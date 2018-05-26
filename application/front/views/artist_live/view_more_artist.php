@@ -31,11 +31,14 @@
                 echo $header_profile;
             }
         ?>
-        <div class="middle-section new-ld-page">
-                <?php if($isartistactivate == false || $artist_isregister == false || !$session_user_id){ 
-                    echo $search_banner; 
-                }
-            ?>
+                <?php if($isartistactivate == false || $artist_isregister == false || !$session_user_id){ ?>
+                    <div class="middle-section middle-section-banner new-ld-page">
+                <?php 
+                        echo $search_banner; 
+                    } else{
+                ?>
+                    <div class="middle-section new-ld-page">
+                <?php } ?>
             <div class="container pt20">
                 <div ng-view></div>
             </div>

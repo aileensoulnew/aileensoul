@@ -239,7 +239,7 @@ class Business_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Category - Business Profile | Aileensoul";
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $locationdata = $this->business_model->getlocationdatafromname($location);
+        $locationdata = $this->business_model->getlocationdatafromslug($location);
         $this->data['location_id'] = $locationdata['city_id'];
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/categoryBusinessList', $this->data);

@@ -29,7 +29,7 @@
                 echo $header_profile; 
             }
        ?>            
-        <div class="middle-section new-ld-page">
+        <div class="middle-section middle-section-banner new-ld-page">
             <?php if($ismainregister == false || $isbusiness_deactive == true || $isbusiness_register == false){ echo $search_banner; }  ?>
             <?php //if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
             <div class="container pt20 searchcontainer">
@@ -164,8 +164,7 @@
 
 
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>        
-        <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> 
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>

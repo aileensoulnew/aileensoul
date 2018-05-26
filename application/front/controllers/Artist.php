@@ -571,7 +571,7 @@ class Artist extends MY_Controller {
                     unlink($main_file);
                 }
             }
-            redirect('artist/details/' . $get_url, refresh);
+            redirect('artist/p/' . $get_url, refresh);
         }
     }
 

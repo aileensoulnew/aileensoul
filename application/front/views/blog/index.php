@@ -57,9 +57,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         </script>
 
         <meta name="msvalidate.01" content="41CAD663DA32C530223EE3B5338EC79E" />
-    <?php
-        }
-    ?>
+<?php } ?>
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -70,8 +68,8 @@ header("Pragma: no-cache"); // HTTP/1.0
             .footer{border:1px solid #d9d9d9;}
         </style>
         <?php
-        foreach ($blog_detail as $blog) {
-            ?>
+            foreach ($blog_detail as $blog) {
+        ?>
             <!-- Open Graph data -->
             <meta property="og:title" content="<?php echo $blog['title']; ?>" />
             <meta  property="og:type" content="Blog" />
@@ -369,12 +367,12 @@ header("Pragma: no-cache"); // HTTP/1.0
             }*/
 
 
-            $('.loadbutton').click(function () {
-                var pagenum = parseInt($(".page_number:last").val()) + 1;
-                blog_post(pagenum);
-            });
+            // $('.loadbutton').click(function () {
+            //     var pagenum = parseInt($(".page_number:last").val()) + 1;
+            //     blog_post(pagenum);
+            // });
 
-            var isProcessing = false;
+            // var isProcessing = false;
             /*function blog_post(pagenum) {
                 if (isProcessing) {
                     return;

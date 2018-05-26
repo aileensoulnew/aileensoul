@@ -27,8 +27,14 @@
             }
         ?>
 
-        <div class="middle-section middle-section-banner new-ld-page">
-            <?php if($business_profile_set == 0 && $business_profile_set == '0'){ echo $search_banner; } ?>
+            <?php if($business_profile_set == 0 && $business_profile_set == '0'){ ?>
+                <div class="middle-section middle-section-banner new-ld-page">
+            <?php 
+                    echo $search_banner; 
+                } else{
+            ?>
+                <div class="middle-section new-ld-page">
+            <?php } ?>
             <!-- NEW HTML -->
                 
             <div class="container pt20">

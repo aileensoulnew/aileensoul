@@ -279,11 +279,17 @@
                     <div class="content-bnt-text">
                         <h1>Lorem Ipsum is a dummy text</h1>
                         <p>
-                            <?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
+                            <?php// if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
+                                <!-- <a class="btn5" href="<?php //echo $business_profile_link ?>">Create Business Profile</a> -->
+                            <?php //} else{ ?>
+                                <!-- <a class="btn5" href="<?php //echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a> -->
+                            <?php //} ?>      
+
+                            <?php 
+                                if (($ismainregister == true && $isbusiness_register == false) || ($ismainregister == false)) { 
+                            ?>
                                 <a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
-                            <?php }else{ ?>
-                                <a class="btn5" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
-                            <?php } ?>                            
+                            <?php } ?>                      
                         </p>
                     </div>
                 </div>
@@ -339,7 +345,6 @@
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>

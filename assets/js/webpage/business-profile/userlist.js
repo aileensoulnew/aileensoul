@@ -69,6 +69,7 @@ $(document).ready(function () {
     });
 });
 var isProcessing = false;
+var userAjax;
 function business_userlist(pagenum, from = "") {
     if (isProcessing) {
         /*
@@ -80,7 +81,7 @@ function business_userlist(pagenum, from = "") {
     }
     isProcessing = true;
     var reqdata = getLocationCategoryId();
-    $.ajax({
+    userAjax = $.ajax({
         type: 'POST',
         url: base_url + "business_profile/ajax_userlist/?page=" + pagenum + reqdata,
         data: {total_record: $("#total_record").val()},
@@ -159,6 +160,10 @@ function unfollowuser(clicked_id)
 $(document).on('change','.locationcheckbox,.categorycheckbox',function(){
     var self = this;
     // self.setAttribute('checked',(this.checked));
+    if(isProcessing){
+        userAjax.abort();
+        isProcessing = false;
+    }
     angular.element(self).scope().getfilterbusinessdata();
 });
 

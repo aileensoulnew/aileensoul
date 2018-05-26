@@ -25,9 +25,10 @@ app.controller('blogController', function ($scope, $http) {
 			return;
 		}
 		isProcessing = true;
+		var keyword = (keyword != "" && keyword) ? ("&searchword=" + keyword) : ""   ;
 		$.ajax({
 			type: 'POST',
-			url: base_url + "blog/blog_ajax?page=" + pagenum + "&limit=" + $scope.limit,
+			url: base_url + "blog/blog_ajax?page=" + pagenum + "&limit=" + $scope.limit + keyword,
 			data: {total_record: $("#total_record").val()},
 			dataType: "json",
 			beforeSend: function () {

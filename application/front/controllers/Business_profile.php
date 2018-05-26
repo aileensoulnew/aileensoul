@@ -2268,7 +2268,9 @@ Your browser does not support the audio tag.
             } else {
                 $return_html .= ucfirst($user['other_industrial']);
             }
-            $return_html .= "(" . $user['city_name'] . ")";
+            if($user['city_name']){
+                $return_html .= "(" . $user['city_name'] . ")";
+            }
             $return_html .= '</a>
                                                                             </div>
                                                                     </li>
@@ -11128,6 +11130,9 @@ Your browser does not support the audio tag.
                 FROM ailee_industry_type 
                 WHERE status = '1' AND is_delete = '0' 
                 AND (industry_name LIKE '". $term ."' )";
+                if($limit != ""){
+                    $sql .= " LIMIT " . $limit;
+                }
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         echo json_encode($result_array);

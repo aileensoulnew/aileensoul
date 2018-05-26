@@ -37,9 +37,10 @@ if($browser == "Firefox")
                         $first_segment = $this->uri->segment(1);
                         $isartist_segment = strpos($first_segment, 'artist');
                         $isbusiness_segment = strpos($first_segment, 'business');
-                        $isbusiness_segment = strpos($first_segment, 'jobs');
-                        $isbusiness_segment = strpos($first_segment, '-job-vacancy-in-');
-                        $job_page_array = array("job","job-search","recommended-jobs","jobs-by-companies","jobs-by-categories","jobs-by-skills","jobs-by-location","jobs-by-designations","jobs","job-profile");
+                        // $isbusiness_segment = strpos($first_segment, 'jobs');
+                        // $isbusiness_segment = strpos($first_segment, '-job-vacancy-in-');
+                        // $job_page_array = array("job","job-search","recommended-jobs","jobs-by-companies","jobs-by-categories","jobs-by-skills","jobs-by-location","jobs-by-designations","jobs","job-profile");
+                        $job_page_array = array("job","job-search","recommended-jobs","jobs-by-companies","jobs-by-categories","jobs-by-skills","jobs-by-location","jobs-by-designations","jobs","job-profile","-job-vacancy-in-");
                     ?>
                     <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-search' && $first_segment != 'business-profile' && $first_segment != 'business' && $first_segment != 'company' && $isbusiness_segment === FALSE) && ($first_segment != 'find-artist') && ($first_segment != 'artist') && $isartist_segment === FALSE && !in_array($first_segment, $job_page_array)) { ?>
                         <form ng-submit="search_submit" action="<?php echo base_url('searchh') ?>">

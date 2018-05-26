@@ -443,6 +443,14 @@ class Business_model extends CI_Model {
         return $result_array;
     }
 
+    // Get city id form slug
+    function getlocationdatafromslug($location = ''){
+        $sql = "SELECT group_concat(city_id) as city_id FROM `ailee_cities` WHERE `slug` = '". $location ."'";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
     // Get all location of business
     function businessLocation($limit = '') {
         $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug 

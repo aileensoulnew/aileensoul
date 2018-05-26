@@ -28,7 +28,8 @@ app.controller('userController', function ($scope, $http) {
     artistLocation();
 
     $scope.getfilterartistdata = function(){
-        artistic_userlist(0, "filter");        
+        artistic_userlist(0, "filter");   
+        $('#loader').hide();     
     }
 
 });
@@ -61,6 +62,7 @@ $(document).ready(function () {
 });
 
 var isProcessing = false;
+var userAjax;
 function artistic_userlist(pagenum, from = '') {
     if (isProcessing) {
         /*
@@ -73,7 +75,7 @@ function artistic_userlist(pagenum, from = '') {
     isProcessing = true;
     var reqdata = getLocationCategoryId();
     var userlist_url = base_url + "artist/ajax_userlist/?page=" + pagenum + reqdata;
-    $.ajax({
+    userAjax = $.ajax({
         type: 'POST',
         url: userlist_url,
         data: {total_record: $("#total_record").val()},
@@ -356,7 +358,12 @@ $(document).on('keydown', function (e) {
 // change location
 $(document).on('change','.locationcheckbox,.categorycheckbox',function(){
     var self = this;
+    if(isProcessing){
+        userAjax.abort();
+        isProcessing = false;
+    }
     // self.setAttribute('checked',(this.checked));
+    $('#loader').show();
     angular.element(self).scope().getfilterartistdata();
 });
 

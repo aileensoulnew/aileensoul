@@ -19,7 +19,7 @@
 
 
 if ($_SERVER['HTTP_HOST'] == "localhost") {
-    $config['base_url'] = 'http://localhost/aileensoul-new/admin';
+    $config['base_url'] = 'http://localhost/aileensoulnew/aileensoul/admin';
 } else {
   $config['base_url'] = 'https://www.aileensoul.com/admin/';
 }

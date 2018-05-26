@@ -58,7 +58,7 @@
 											<span>{{location.city_name | capitalize}}
 												<span class="pull-right">({{location.count}})</span>
 											</span>
-                                            <input class="category-filter" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
+                                            <input class="category-filter categorycheckbox" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
 											<div class="control__indicator"></div>
                                         </label>
                                     </li>

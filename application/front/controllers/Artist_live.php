@@ -67,13 +67,13 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Categories - Artist Profile | Aileensoul";
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/view_more_artist', $this->data);
     }
 
@@ -89,7 +89,6 @@ class Artist_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";
-        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         
         $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
         $this->data['category_id'] = $category_id['category_id'];
@@ -106,6 +105,7 @@ class Artist_live extends MY_Controller {
         }
         $this->data['q'] = $category;
         $this->data['l'] = $location;
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/categoryArtistList', $this->data);
     }
 
@@ -121,7 +121,6 @@ class Artist_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";
-        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
@@ -158,6 +157,7 @@ class Artist_live extends MY_Controller {
         $this->data['q'] = str_replace("+"," ",$this->data['q']);
         $this->data['l'] = str_replace("+"," ",$this->data['l']);
         $this->data['is_artist_profile_set'] = $this->artist_profile_set;
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/search', $this->data);
     }
 
@@ -1694,9 +1694,8 @@ class Artist_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";
-        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         // echo $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
-        $locationdata = $this->artistic_model->getidfromnameoflocation($location);
+        $locationdata = $this->artistic_model->getidfromslugoflocation($location);
 
         // echo $locationdata['city_id'];
         if($userid){
@@ -1704,6 +1703,7 @@ class Artist_live extends MY_Controller {
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
         $this->data['location_id'] = $locationdata['city_id'];
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/categoryArtistList', $this->data);
     }
 

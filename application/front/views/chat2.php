@@ -164,9 +164,19 @@ if ($lstusrdata) {
         $profile_url = base_url() . 'freelance-hire/employer-details/' . $slug;
     }
     if ($message_from_profile == 5) {
-        $busdata = $this->common->select_data_by_id('business_profile', 'user_id', $id, $data = 'business_slug');
+        // $busdata = $this->common->select_data_by_id('business_profile', 'user_id', $id, $data = 'business_slug');
+        $sql = "SELECT IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug
+                    FROM ailee_business_profile bp
+                    LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+                    LEFT JOIN ailee_states st on bp.state = st.state_id
+                    WHERE bp.status = '1' AND user_id = '". $id ."'";
+        $query = $this->db->query($sql);
+        $busdata = $query->row()->business_slug;
+        // echo $busdata;
+        // echo "string";
+        // exit;
         $last_user_image = $last_user_data['user_image'];
-        $profile_url = base_url() . 'business-profile/dashboard/' . $busdata[0]['business_slug'];
+        $profile_url = base_url() . 'company/' . $busdata;
     }
     if ($message_from_profile == 6) {
         $last_user_image = $last_user_data['user_image'];

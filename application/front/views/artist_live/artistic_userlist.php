@@ -37,7 +37,7 @@
                                                 <span>{{category.art_category | capitalize}}
 													<span class="pull-right">({{category.count}})</span>
 												</span>
-                                                <input class="category-filter" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                                <input class="category-filter categorycheckbox" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
 												<div class="control__indicator"></div>
                                             </label>
                                         </li>
