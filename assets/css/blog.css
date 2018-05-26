@@ -739,21 +739,23 @@ label.error{
 header .col-md-4.col-sm-3 a{display: inline-block;}
 
 /***  privecy policy  ***/
+.privacy-cust{letter-spacing:1px;}
+.privacy-cust p{margin-bottom:15px;}
 .policy-list{padding:0;}
 .policy-list li{list-style-type:none;}
 .policy-list ul{padding:0;}
 .step-ul li{padding:15px 0 15px 30px; position:relative;}
-.step-ul li b:before{width:10px; height:10px; background:#5c5c5c; content:""; display:block; position:absolute; left:0; top:23px; border-radius:100%;}
+.step-ul li b:before{width:7px; height:7px; background:#5c5c5c; content:""; display:block; position:absolute; left:0; top:23px; border-radius:100%;}
 .step-ul li p{margin-bottom:0;}
 .policy-list > li{padding:40px 0 40px 20px;}
 .policy-list > li > b{padding:15px 0 5px; display:inline-block; font-size:18px;}
-.policy-list .no-step-ul li > b{padding:15px 0 5px; display:inline-block; font-size:18px;}
+.policy-list .no-step-ul li b{padding:15px 0 5px; display:inline-block; font-size:18px;}
 .policy-list > li h4{margin-left:-20px;}
 .privacy-cust .cus-about{padding:0;}
 .privacy-cust .terms-con-cus {background:#fbfbfb;}
 .privacy-cust .term_desc{line-height:1.7;}
-.privacy-cust .term_desc h4{font-size:20px;}
-.last-p{margin-bottom:0;}
+.privacy-cust .term_desc h4{font-size:22px; font-weight:bold;}
+.privacy-cust .last-p{margin-bottom:0;}
 	
 /***  privecy policy  ***/
 
@@ -945,6 +947,18 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     .searc_w{width: 96%}
     .butn_w{width: 4%;padding: 5px 0px !important;}
     .butn_w a{padding: 6px 0px;}
+	.policy-list > li > b{text-align:left;}
+	.policy-list .no-step-ul li b{text-align:left;}
+	.main-comtai h1.about-h2{padding:15px 0 25px !important; font-size:22px;}
+	.privacy-cust .term_desc h4{font-size:20px;}
+	.policy-list > li > b{font-size:18px;}
+	.step-ul li{padding:15px 0 15px 20px;}
+	.privacy-cust .term_desc h4{text-align:left;}
+	.privacy-cust .term_desc h4 span{float:left; padding-right:5px;}
+	.privacy-cust .term_desc h4 span.h4-title{width:87%; float:left;}
+	.policy-list > li{padding-left:0;}
+	.policy-list > li h4{margin-left:0; width:100%; float:left;}
+	.term_desc{text-align:left;}
 }
 @media screen and (max-width:639px){
     .em-py3{
