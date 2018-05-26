@@ -61,7 +61,7 @@
 .user-profile-box .user-detail-top h4{margin:0; padding-top:3px; max-width:100%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
 .user-profile-box .user-detail-top p{max-width:100%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
 .user-profile-box .user-detail-top a{font-size:16px; font-weight:600; color:#5c5c5c; letter-spacing:1px;}
-.user-profile-box .user-detail-top a:hover{color:#1b8ab9;}{font-size:16px; font-weight:600; color:#5c5c5c;}
+.user-profile-box .user-detail-top a:hover{color:#1b8ab9;}
 .user-profile-box .user-detail-top p a{font-size:14px; font-weight:500; letter-spacing:1px;}
 .user-profile-box .user-detail-bottom ul{padding:8px 5px 0 5px; margin:0; width:100%; float:left;}
 .user-profile-box .user-detail-bottom ul li{text-align:center; float:left; list-style-type:none; width:33.33%;}
@@ -2131,10 +2131,11 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .cover-pic{left:0;}
 .audio_source{width:100%;}
 .comment-details-menu a:hover{color:#1b8ab9;}
-.notification-database{padding:0; height:auto;}
+.notification-database{padding:0; height:auto; width:338px;}
 .data_noti_msg span {line-height:1;}
 .cq_post ul li:hover{background:#e9f4f8;}
 .art-cat-custom label.error{top:55px;}
+
 /***  job css  ***/
 .message button.modal-close{background:#1b8ab9; color:#fff;}
 .cnclbtn, .okbtn{transition: all .2s; color: #fff; padding: 8px 18px; background-color: #1b8ab9 !important;
