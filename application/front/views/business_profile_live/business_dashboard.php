@@ -862,9 +862,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 }
             });
 
-            $(document).on('click', 'a,.comment-edit-butn', function (e) {
+            $(document).on('click', 'a,.comment-edit-butn,.ripple like_h_w', function (e) {
                 var classNames = $(e.target).prop("class").toString().split(' ').pop();
                 if (classNames != 'login_link') {
+                    return false;
                     open_profile();
                 }
             });

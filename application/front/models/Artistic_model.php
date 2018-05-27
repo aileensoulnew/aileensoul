@@ -507,11 +507,6 @@ class Artistic_model extends CI_Model {
             $result_array = $query->result_array();
             // echo $this->db->last_query();
             // exit;
-            // foreach ($result_array as $key => $value) {
-            //     $user_id = $value['user_id'];
-            //     $new_slug = $this->get_artistic_slug($user_id);
-            //     $result_array[$key]['slug'] = $new_slug;
-            // }
             return $result_array;
     }
 

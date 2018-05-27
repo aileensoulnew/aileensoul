@@ -119,7 +119,7 @@ function business_dashboard_post(slug, pagenum) {
     isProcessing = true;
     $.ajax({
         type: 'POST',
-        url: base_url + "business_profile/ajax_business_dashboard_post/" + slug + "?page=" + pagenum,
+        url: base_url + "business_userprofile/ajax_business_dashboard_post/" + slug + "?page=" + pagenum,
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
@@ -136,7 +136,6 @@ function business_dashboard_post(slug, pagenum) {
             $('.loader').remove();
             $('.business-all-post').append(data);
             $('video, audio').mediaelementplayer();
-            
             // second header class add for scroll
             var nb = $('.post-design-box').length;
             if (nb == 0) {
@@ -145,6 +144,16 @@ function business_dashboard_post(slug, pagenum) {
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+            // check_no_post_data();
+            $('.user-midd-section a').attr('href', 'javascript:void(0)');
+            $('.art-all-comment').remove();
+            $('.post-design-commnet-box').remove();
+            $('a').on('click', function () {
+                var classNames = $(this).attr("class").toString().split(' ').pop()  ;
+                if (classNames != 'login_link') {
+                    open_profile();
+                }
+            });
         }
     });
 }

@@ -425,7 +425,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                         {{ blog.category_name }}
                                     </span>  -->
                                     <span>{{ blog.created_date_formatted }}</span> 
-                                    <span>Dhaval Shah</span> 
+                                    <span>{{ blog.name }}</span> 
                                     <span>{{ blog.total_comment }} comments</span>
                                 </p>
                                 <a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">

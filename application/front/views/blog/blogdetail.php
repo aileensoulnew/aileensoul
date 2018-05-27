@@ -215,7 +215,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    					<div class="user-img">	
 	    						<img src="<?php echo base_url(); ?>assets/n-images/user-pic.jpg">
 	    					</div>
-	    					<p class="pt20">Dhaval Shah</p>
+	    					<p class="pt20">{{ blog.name }}</p>
 	    					<p>{{ blog.created_date_formatted }}</p>
 	    					<p>
 	    						<img src="<?php echo base_url(); ?>assets/n-images/comment.png" class="pr5">{{ blog.total_comment }}
@@ -329,7 +329,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    								<!-- <img ng-src="<?php //echo base_url($this->config->item('blog_main_upload_path')); ?>{{ comment.image }}"> -->
 	    							</div>
 	    							<div class="comment-text">
-	    								<h4>Dhaval Shah</h4>
+	    								<h4>{{ comment.name }}</h4>
 	    								<span>{{ comment.created_date_formatted }}</span>
 	    								<p>{{ comment.message }}</p>
 	    							</div>

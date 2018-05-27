@@ -88,10 +88,12 @@ class Business_userprofile extends CI_Controller {
         if ($start < 0)
             $start = 0;
         if ($id != '') {
+            $id = $this->business_model->removelocationfromslug($id);
             $bus_userid = $this->db->get_where('business_profile', array('business_slug' => $id, 'status' => '1'))->row()->user_id;
         } else {
             $bus_userid = $this->session->userdata('aileenuser');
         }
+        
         $business_profile_id = $this->data['business_common_data'][0]['business_profile_id'];
         $city = $this->data['business_common_data'][0]['city'];
         $user_id = $this->data['business_common_data'][0]['user_id'];
@@ -127,6 +129,7 @@ class Business_userprofile extends CI_Controller {
         $join_str[0]['join_type'] = '';
         $data = "business_profile.business_user_image,business_profile.company_name,business_profile.industriyal,business_profile.business_slug,business_profile.other_industrial,business_profile.business_slug,business_profile_post.business_profile_post_id,business_profile_post.product_name,business_profile_post.product_description,business_profile_post.business_likes_count,business_profile_post.business_like_user,business_profile_post.created_date,business_profile_post.posted_user_id,business_profile.user_id";
         $business_profile_post = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = $perpage, $offset = $start, $join_str, $groupby = '');
+
         $business_profile_post1 = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
 
         $return_html = '';

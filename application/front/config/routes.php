@@ -396,6 +396,12 @@ $route['artist/unfollow_two'] = "artist/unfollow_two";
 $route['artist/unfollowtwo'] = "artist/unfollowtwo"; 
 $route['artist/unfollow_following'] = "artist/unfollow_following"; 
 $route['login/artistic_check_login'] = "login/artistic_check_login"; 
+$route['artist/like_postimg'] = "artist/like_postimg"; 
+$route['artist/fourcommentimg'] = "artist/fourcommentimg"; 
+$route['artist/insert_commentimg'] = "artist/insert_commentimg"; 
+$route['artist/insert_commentthreeimg'] = "artist/insert_commentthreeimg"; 
+$route['artist/edit_comment_insertimg'] = "artist/edit_comment_insertimg"; 
+$route['artist/delete_commentimg'] = "artist/delete_commentimg";
 
 $route['artist/category'] = "artist_live/view_more_artist";
 $route['artist/location'] = "artist_live/view_more_artist";

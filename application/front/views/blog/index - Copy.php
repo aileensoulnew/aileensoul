@@ -352,11 +352,11 @@ header("Pragma: no-cache"); // HTTP/1.0
                             </div>
 
                             <div class="right-part">
-				<div class="subscribe-box">
-					<h4>Subscribe to Our Newslatter</h4>
-					<input type="text" class="form-control" placeholder="Enter your email id">
-					<a class="btn1" href="#">Subscribe</a>
-				</div>
+                				<div class="subscribe-box">
+                					<h4>Subscribe to Our Newslatter</h4>
+                					<input type="text" class="form-control" placeholder="Enter your email id">
+                					<a class="btn1" href="#">Subscribe</a>
+                				</div>
                             </div>
 
 
