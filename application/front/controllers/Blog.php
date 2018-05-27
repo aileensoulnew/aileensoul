@@ -15,12 +15,21 @@ class Blog extends CI_Controller {
     }
 
     //MAIN INDEX PAGE START   
-    public function index($slug = '') {
+    public function index($slug = '', $iscategory = '') {
         // blog category start
         $condition_array = array('status' => 'publish');
         $data = 'id,name';
         // $this->data['blog_category'] = $this->common->select_data_by_condition('blog_category', $condition_array, $data, $short_by = '', $order_by = '', $limit = '', $offset = '', $join_str = array());
-
+        if($iscategory != ""){
+            $slug = urldecode($slug);
+            $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $slug ."')";
+            $query = $this->db->query($sql);
+            $result = $query->row_array();
+            if(count($result) > 0){
+                $this->data['category_id'] = $result['cate_id'];
+                $slug = "";
+            }
+        }
 
         // blog category end
         if ($slug != '') {
@@ -253,6 +262,7 @@ class Blog extends CI_Controller {
                 $blog_detail[$key]['social_summary'] = urlencode('"' . $blog['description'] . '"');
                 $blog_detail[$key]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $blog['image']));
                 $blog_detail[$key]['social_url'] = base_url('blog/' . $blog['blog_slug']);
+                $blog_detail[$key]['blog_category_name'] = explode(',', $blog['category_name']);
             }
         }
 
@@ -494,7 +504,7 @@ class Blog extends CI_Controller {
                 $blog_detail[$key]['social_summary'] = urlencode('"' . $blog['description'] . '"');
                 $blog_detail[$key]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $blog['image']));
                 $blog_detail[$key]['social_url'] = base_url('blog/' . $blog['blog_slug']);
-
+                $blog_detail[$key]['blog_category_name'] = explode(',', $blog['category_name']);
             }
         }
 
@@ -668,7 +678,7 @@ class Blog extends CI_Controller {
     // Get all category of blog list
     function get_blog_details(){
         $blog_slug = $_GET['blog_slug'];
-        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(bc.name) as category_name
+        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(DISTINCT(bc.name)) as category_name
             FROM ailee_blog b, ailee_blog_category bc 
             WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) and
             blog_slug = '". $blog_slug ."' 
@@ -686,18 +696,22 @@ class Blog extends CI_Controller {
             $result[0]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $result[0]['image']));
             $result[0]['social_url'] = base_url('blog/' . $result[0]['blog_slug']);
 
-            $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(bc.name) as category_name
+            $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(DISTINCT(bc.name)) as category_name
                 FROM ailee_blog b, ailee_blog_category bc 
                 WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) and
                 b.id IN (". $result[0]['blog_related_id'] .") 
                 GROUP BY b.blog_category_id ORDER BY b.id DESC";
             $query = $this->db->query($sql);
             $result[0]['related_post'] = $query->result_array();
-
+            foreach ($result[0]['related_post'] as $key => $value) {
+                $result[0]['related_post'][$key]['blog_category_name'] = explode(',', $value['category_name']);
+            }
             $sql = "SELECT *, DATE_FORMAT(comment_date,'%D %M %Y') as created_date_formatted FROM ailee_blog_comment WHERE status = 'approve' AND blog_id = ". $result[0]['id'] ." ORDER BY id DESC";
             
             $query = $this->db->query($sql);
             $result[0]['all_comment'] = $query->result_array();
+
+            $result[0]['blog_category_name'] = explode(',', $result[0]['category_name']);
         }
         echo json_encode($result);
     }

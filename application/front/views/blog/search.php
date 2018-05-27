@@ -275,7 +275,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                             <div class="dropdown-menu">
                                 <ul class="content custom-scroll">
                                     <li class="category" ng-repeat="category in categoryList track by $index">
-                                        <a href="javascript:void(0)" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
+                                        <a ng-href="<?php echo base_url() ?>blog/category/{{category.name}}" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
                                             {{ category.name }}
                                         </a>
                                     </li>
@@ -397,7 +397,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 </div>
             </section>
 
-            <div id="paddingtop_fixed" class="user-midd-section">
+            <div id="paddingtop_fixed" class="user-midd-section angularsection hidden">
                 <input type="hidden" class="page_number" value="1">
                 <input type="hidden" class="total_record" ng-value="total_record">
                 <input type="hidden" class="perpage_record" value="4">
@@ -413,9 +413,17 @@ header("Pragma: no-cache"); // HTTP/1.0
                             </div>
                             <div class="blog-left-content">
                                 <p class="blog-details-cus">
-                                    <span class="cat text-capitalize">
+                                    <a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ (cat_name).toLowerCase() }}" ng-repeat="cat_name in blog.blog_category_name track by $index">
+                                        <span class="cat text-capitalize" ng-if="($index == 0)">
+                                            {{ cat_name }}
+                                        </span> 
+                                        <span class="cat text-capitalize" ng-if="($index > 0)">
+                                            , {{ cat_name }}
+                                        </span> 
+                                    </a>
+                                    <!-- <span class="cat text-capitalize">
                                         {{ blog.category_name }}
-                                    </span> 
+                                    </span>  -->
                                     <span>{{ blog.created_date_formatted }}</span> 
                                     <span>Dhaval Shah</span> 
                                     <span>{{ blog.total_comment }} comments</span>
@@ -583,6 +591,7 @@ header("Pragma: no-cache"); // HTTP/1.0
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var title = '<?php echo $title; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var category_id = '';
             var app = angular.module('blogApp', ['ui.bootstrap','angularUtils.directives.dirPagination']);
         </script>
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>

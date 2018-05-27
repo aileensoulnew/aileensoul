@@ -14,7 +14,7 @@ app.controller('blogDetailController', function ($scope, $http) {
   	$scope.comment_error_visibility = false;
   	$scope.comment_error_text = true;
 
-  	$scope.comment_name = '';
+  	$scope.cname = '';
   	$scope.comment_email = '';
   	$scope.comment_msg = '';
 
@@ -145,9 +145,8 @@ app.controller('blogDetailController', function ($scope, $http) {
 	    }
 	}
 
-	$scope.addcomment = function(){
-		console.log($scope.comment_name);
-		if($scope.comment_name == "" || !$scope.comment_name){
+	/*$scope.addcomment = function(){
+		if($scope.cname == "" || !$scope.cname){
 			$scope.comment_error_visibility = true;
   			$scope.comment_error_text = "Please enter a name";
 			return false;
@@ -170,9 +169,9 @@ app.controller('blogDetailController', function ($scope, $http) {
   			return false;
 		}
 		if($scope.comment_error_visibility == false){
-			$("#comment").submit();
+			// $("#comment").submit();
 		}
-	}
+	}*/
 });
 
 app.filter('unsafe', function($sce) {
@@ -214,19 +213,19 @@ $(document).ready(function () {
 			   
 			 },   
 		},
-	  });
-//Validation End
-	
+  	});
+		//Validation End
+	$(".angularsection").removeClass("hidden");
 
 	//It prevent page automatically refresh
   	$(document).on('submit', "#comment", function(e) {
 		e.preventDefault();
 		if($(this).valid()) 
 		{
-		  var blog_id=document.getElementById("blog_id").value;
-		  var name=document.getElementById("name").value;
-		  var email=document.getElementById("email").value;
-		  var message=document.getElementById("message").value;
+			var blog_id=document.getElementById("blog_id").value;
+			var name=document.getElementById("name").value;
+			var email=document.getElementById("email").value;
+			var message=document.getElementById("message").value;
    
 		  $.ajax({
 		   type: 'POST',
@@ -256,7 +255,6 @@ $(document).ready(function () {
 	 type: 'POST',
 	 url: 'https://graph.facebook.com?id='+url+'&scrape=true',
 		 success: function(data){
-			console.log(data);
 		}
 });
 // THIS SCRIPT IS USED FOR SCRAP IMAGE FOR FACEBOOK POST TO GET REAL IMAGE END
@@ -297,33 +295,9 @@ $(document).on("click", '#facebook_link', function(event) {
 });
 
 
-// function addcomment(){
-// 	if($("#name").val() == ""){
-// 		$(".comment_error").removeClass("hidden");
-// 		$(".comment_error").text("Please enter a name");
-// 		return false;
-// 	}
-// 	if($("#email").val() == ""){
-// 		$(".comment_error").removeClass("hidden");
-// 		$(".comment_error").text("Please enter a email");
-// 		return false;
-// 	}
-// 	if($("#email").val() != ""){
-// 		var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-// 		if (!filter.test($("#email").val())) {
-// 			$(".comment_error").removeClass("hidden");
-//   			$(".comment_error").text("Please enter valid email");
-//   			return false;
-// 	    }
-// 	}
-// 	if($("#message").val() == ""){
-// 		$(".comment_error").removeClass("hidden");
-// 		$(".comment_error").text("Please enter a message");
-// 		return false;
-// 	}
-// 	if($(".comment_error").hasClass("hidden")){
-// 		$("#comment").submit();
-// 	}
-
-
-// }
+function addcomment(){
+	$(".comment_error").addClass("hidden");
+	$(".comment_error").text("");
+	$("#comment").submit();
+	
+}

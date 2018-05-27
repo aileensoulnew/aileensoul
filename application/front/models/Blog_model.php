@@ -70,7 +70,7 @@ class Blog_Model extends CI_Model {
             $sql_find_cond = " AND FIND_IN_SET(". $cateid .",blog_category_id) != '0'";
         }
 
-        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(bc.name) as category_name
+        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(DISTINCT(bc.name)) as category_name
                     FROM ailee_blog b, ailee_blog_category bc 
                     WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id)". $sql_find_cond ." 
                     GROUP BY b.blog_category_id" 
@@ -83,6 +83,8 @@ class Blog_Model extends CI_Model {
         if($perpage != ""){
             $sql .= " LIMIT ". $start . "," . $perpage;
         }
+        // echo $sql;
+        // exit;
         $query = $this->db->query($sql);
         $result = $query->result_array();
         return $result;

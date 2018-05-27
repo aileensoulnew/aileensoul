@@ -66,6 +66,22 @@ header("Pragma: no-cache"); // HTTP/1.0
         <style>
             footer > .container{border:1px solid transparent!important;}
             .footer{border:1px solid #d9d9d9;}
+            .twolinetext{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                line-height: 1.5em;
+                max-height: 3em;
+            }
+            .onelinetext {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+            }
         </style>
         <?php
             foreach ($blog_detail as $blog) {
@@ -198,7 +214,7 @@ header("Pragma: no-cache"); // HTTP/1.0
     							<div class="dropdown-menu">
     								<ul class="content custom-scroll">
                                         <li class="category" ng-repeat="category in categoryList track by $index">
-                                            <a href="javascript:void(0)" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
+                                            <a ng-href="<?php echo base_url() ?>blog/category/{{category.name}}" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
                                                 {{ category.name }}
                                             </a>
                                         </li>
@@ -246,7 +262,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
                 </div>
             </section>
-            <div id="paddingtop_fixed" class="user-midd-section">
+            <div id="paddingtop_fixed" class="user-midd-section angularsection hidden">
                 <input type="hidden" class="page_number" value="1">
                 <input type="hidden" class="total_record" ng-value="total_record">
                 <input type="hidden" class="perpage_record" value="4">
@@ -260,9 +276,14 @@ header("Pragma: no-cache"); // HTTP/1.0
                             </div>
                             <div class="blog-left-content">
                                 <p class="blog-details-cus">
-                                    <span class="cat text-capitalize">
-                                        {{ blog.category_name }}
-                                    </span> 
+                                    <a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ (cat_name).toLowerCase() }}" ng-repeat="cat_name in blog.blog_category_name track by $index">
+                                        <span class="cat text-capitalize" ng-if="($index == 0)">
+                                            {{ cat_name }}
+                                        </span> 
+                                        <span class="cat text-capitalize" ng-if="($index > 0)">
+                                            , {{ cat_name }}
+                                        </span> 
+                                    </a>
                                     <span>{{ blog.created_date_formatted }}</span> 
                                     <span>Dhaval Shah</span> 
                                     <span>{{ blog.total_comment }} comments</span>
@@ -439,6 +460,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         var base_url = '<?php echo base_url(); ?>';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var title = '<?php echo $title; ?>';
+        var category_id = '<?php echo $category_id; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         var app = angular.module('blogApp', ['ui.bootstrap','angularUtils.directives.dirPagination']);
     </script>

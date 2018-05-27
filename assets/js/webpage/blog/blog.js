@@ -3,7 +3,7 @@ app.controller('blogController', function ($scope, $http) {
 	$scope.categoryList = {};
 	$scope.blogPost = [],
 	$scope.limit = 5;
-	$scope.currentPage = 4,
+	$scope.currentPage = 1,
   	$scope.numPerPage = 5,
   	$scope.maxSize = 5;
   	$scope.iscategorySelected = false;
@@ -16,6 +16,10 @@ app.controller('blogController', function ($scope, $http) {
   	$scope.ajax_error_visibility = false;
   	$scope.subscribe_visibility = true;
 
+  	if((category_id) && category_id != ""){
+		$scope.categorySelectedId = category_id;
+		$scope.iscategorySelected = true;
+	}
   	//CATEGORY LISTING
   	function categoryList(){
   		$http.get(base_url + "blog/get_blog_cat_list").then(function (success) {
@@ -45,7 +49,7 @@ app.controller('blogController', function ($scope, $http) {
 				$('#loader').hide();
 			},
 			success: function (data) {
-				$scope.blogPost = data.blog_data;	
+				$scope.blogPost = data.blog_data;
 				// because of pagination page no. issue * by 2			
 				$scope.total_record = data.total_record * 2;
 				$scope.$apply();
@@ -55,10 +59,13 @@ app.controller('blogController', function ($scope, $http) {
 			}
 		});
 	}
-	blog_post(1);
-
+	
 	var isCatProcessing = false;
     $scope.cat_post = function(cateid,page) { 
+    	category_post_list(cateid,page);
+    }
+
+    function category_post_list(cateid,page){
     	if (isCatProcessing) {
             return;
         }
@@ -85,11 +92,10 @@ app.controller('blogController', function ($scope, $http) {
         	isCatProcessing = false; 
         });
     }
-
     // PAGINATIONS
     $scope.$watch("currentPage + numPerPage", function() {
     	if($scope.iscategorySelected == true){
-    		cat_post('',$scope.currentPage);
+    		category_post_list('',$scope.currentPage);
     	}else{
 	    	blog_post($scope.currentPage);
     	}
@@ -171,24 +177,24 @@ function checkvalue()
 
 // THIS SCRIPT IS USED FOR SCRAP IMAGE FOR FACEBOOK POST TO GET REAL IMAGE START
 $(document).ready(function() {
-   $(document).on('click',".fbk", function() {
-   		 var url= $(this).attr('url');
-		 var url_encode= $(this).attr('url_encode');
-		 var title=$(this).attr('title');
-		 var summary= $(this).attr('summary');
-		 var image=$(this).attr('image');
-   
-		  $.ajax({
-		  type: 'POST',
-		  url: 'https://graph.facebook.com?id='+url+'&scrape=true',
-			  success: function(data){
-				 console.log(data);
-			 }
-   
-	  });
-		   window.open('http://www.facebook.com/sharer.php?s=100&p[title]='+title+'&p[summary]='+summary+'&p[url]='+ url_encode+'&p[images][0]='+image+'', 'sharer', 'toolbar=0,status=0,width=620,height=280');
-   });
-   });
+	$(document).on('click',".fbk", function() {
+		 	var url= $(this).attr('url');
+		var url_encode= $(this).attr('url_encode');
+		var title=$(this).attr('title');
+		var summary= $(this).attr('summary');
+		var image=$(this).attr('image');
+		$.ajax({
+			type: 'POST',
+			url: 'https://graph.facebook.com?id='+url+'&scrape=true',
+			  	success: function(data){
+				console.log(data);
+			}
+  		});
+	   	window.open('http://www.facebook.com/sharer.php?s=100&p[title]='+title+'&p[summary]='+summary+'&p[url]='+ url_encode+'&p[images][0]='+image+'', 'sharer', 'toolbar=0,status=0,width=620,height=280');
+	});
+
+	$(".angularsection").removeClass("hidden");
+});
 // THIS SCRIPT IS USED FOR SCRAP IMAGE FOR FACEBOOK POST TO GET REAL IMAGE END
 
 // Social media click

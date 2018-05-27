@@ -411,6 +411,7 @@ $route['blog/get_blog_cat_list'] = "blog/get_blog_cat_list";
 $route['blog/comment_insert'] = "blog/comment_insert";
 $route['blog/add_subscription'] = "blog/add_subscription";
 $route['blog/get_blog_details'] = "blog/get_blog_details";
+$route['blog/category/(:any)'] = "blog/index/$1/true";
 //$route['blog/tag/(:any)'] = "blog/tagsearch/$1";
 //$route['blog/page/(:any)'] = "blog/index/$1";
 $route['blog/(:any)'] = "blog/index/$1";

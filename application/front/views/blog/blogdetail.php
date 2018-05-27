@@ -90,6 +90,24 @@ header("Pragma: no-cache"); // HTTP/1.0
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
+            <style type="text/css">
+            	.twolinetext{
+	                overflow: hidden;
+	                text-overflow: ellipsis;
+	                display: -webkit-box;
+	                -webkit-box-orient: vertical;
+	                -webkit-line-clamp: 2;
+	                line-height: 1.5em;
+	                max-height: 3em;
+	            }
+	            .onelinetext {
+	                overflow: hidden;
+	                text-overflow: ellipsis;
+	                display: -webkit-box;
+	                -webkit-box-orient: vertical;
+	                -webkit-line-clamp: 1;
+	            }
+            </style>
     </head>
     <body class="blog-page blog">
         <div class="main-inner">
@@ -166,7 +184,7 @@ header("Pragma: no-cache"); // HTTP/1.0
     							<div class="dropdown-menu">
     								<ul class="content custom-scroll">
                                         <li class="category" ng-repeat="category in categoryList track by $index">
-                                            <a href="javascript:void(0)" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
+                                            <a ng-href="<?php echo base_url() ?>blog/category/{{ (category.name).toLowerCase() }}" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
                                                 {{ category.name }}
                                             </a>
                                         </li>
@@ -190,7 +208,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 </div>
             </div>
       
-	    	<div id="paddingtop_fixed" class="user-midd-section">
+	    	<div id="paddingtop_fixed" class="user-midd-section angularsection hidden">
 	    		<div class="container">
 	    			<div class="custom-user-list pt20" ng-repeat="blog in blogDetails track by $index">
 	    				<div class="blog-user-detail">
@@ -218,7 +236,15 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						<div class="blog-left-content blog-detail-top">
 	    							<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
 		    							<p class="blog-details-cus">
-		    								<span class="cat">{{ blog.category_name }}</span> 
+		    								<a ng-href="<?php echo base_url() ?>blog/category/{{cat_name}}" ng-repeat="cat_name in blog.blog_category_name track by $index">
+		                                        <span class="cat text-capitalize" ng-if="($index == 0)">
+		                                            {{ cat_name }}
+		                                        </span> 
+		                                        <span class="cat text-capitalize" ng-if="($index > 0)">
+		                                            , {{ cat_name }}
+		                                        </span> 
+		                                    </a>
+		    								<!-- <span class="cat">{{ blog.category_name }}</span> --> 
 		    							</p>
 		    							<h3>{{ blog.title }}</h3>
 	    							</a>	    							
@@ -269,12 +295,22 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						<div class="row pt20">
 	    							<div class="col-md-4 col-sm-4" ng-repeat="post in blog.related_post">
 	    								<div class="also-like-box">
-	    									<div class="rec-img">
-	    										<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
+    										<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
+		    									<div class="rec-img">
 	    											<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ post.image }}">
-	    										</a>
-	    									</div>
-	    									<span>{{ post.category_name}}</span>
+		    									</div>
+    										</a>
+	    									<a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ (cat_name).toLowerCase() }}" ng-repeat="cat_name in post.blog_category_name track by $index">
+		                                        <span class="cat text-capitalize" ng-if="($index == 0)">
+		                                            {{ cat_name }}
+		                                        </span> 
+		                                        <span class="cat text-capitalize" ng-if="($index > 0)">
+		                                            , {{ cat_name }}
+		                                        </span> 
+		                                    </a>
+	    									<!-- <span class="onelinetext" title="{{ post.category_name}}">
+	    										{{ post.category_name}}
+	    									</span> -->
 	    									<p>
 	    										<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
 	    											{{ post.title }}
@@ -308,12 +344,12 @@ header("Pragma: no-cache"); // HTTP/1.0
 		    							<div class="row pt20">
 		    								<div class="col-md-6 col-sm-6">
 		    									<div class="form-group">
-		    										<input type="text" class="form-control" name="name" id="name" placeholder="Enter Your Name" ng-model="comment_name">
+		    										<input type="text" ng-model="cname" class="form-control" name="name" id="name" placeholder="Enter Your Name">
 		    									</div>
 		    								</div>
 		    								<div class="col-md-6 col-sm-6">
 		    									<div class="form-group">
-		    										<input type="text" class="form-control" name="email" id="email" placeholder="Enter Your Email id" ng-model="comment_email">
+		    										<input type="text" ng-model="comment_email" class="form-control" name="email" id="email" placeholder="Enter Your Email id">
 		    									</div>
 		    								</div>
 		    							</div>
@@ -322,11 +358,12 @@ header("Pragma: no-cache"); // HTTP/1.0
 		    									<div class="form-group">
 		    										<textarea class="form-control" name="message" id="comment_message" placeholder="message" ng-model="msg"></textarea>
 		    									</div>
-		    									<p ng-show="comment_error_visibility">{{ comment_error_text }}</p>
+		    									<!-- <p ng-show="comment_error_visibility">{{ comment_error_text }}</p> -->
+		    									<p class="comment_error"></p>
 		    								</div>	    								
 		    							</div>
 		    							<input type="hidden" value="{{ blog.id }}" name="blog_id" id="blog_id">
-		    							<button ng-click="addcomment()" class="btn1">Comment</button>
+		    							<button onclick="addcomment()" class="btn1">Comment</button>
 		    						</form>
 	    						</div>
 	    					</div>
