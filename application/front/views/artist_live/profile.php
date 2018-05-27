@@ -42,10 +42,10 @@
         $userid = $this->session->userdata('aileenuser');
         if($userid){
 ?>
-<body class="cus-no-login botton_footer">
+<body class="cus-no-login botton_footer registerbody">
 	 <?php echo $header_profile; ?>
   <?php }else{?>
- <body class="cus-no-login botton_footer model-open no-login">
+ <body class="cus-no-login botton_footer model-open no-login registerbody">
  <?php echo $header_profile; ?>
    <header>
             <div class="container">
@@ -499,6 +499,7 @@
      var base_url = '<?php echo base_url(); ?>';  
      var profile_login = '<?php echo $profile_login; ?>';
      var user_id = '<?php echo $this->session->userdata('aileenuser');?>';
+     var header_all_profile = '<?php echo $header_all_profile; ?>';
   		var app = angular.module('artistRegister', ['ui.bootstrap']);
  </script>
  <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script> 

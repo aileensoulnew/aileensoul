@@ -79,6 +79,7 @@ function business_userlist(pagenum, from = "") {
          **/
         return;
     }
+
     isProcessing = true;
     var reqdata = getLocationCategoryId();
     userAjax = $.ajax({
@@ -87,6 +88,10 @@ function business_userlist(pagenum, from = "") {
         data: {total_record: $("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
+            if(from == "filter"){
+                $('.contact-frnd-post').html("");
+                $('.loader').show();
+            }
             if (pagenum == 'undefined') {
                 //  $(".contact-frnd-post").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
             } else {
@@ -95,9 +100,9 @@ function business_userlist(pagenum, from = "") {
         },
         complete: function () {
             $('#loader').hide();
+            $('.loader').remove();
         },
         success: function (data) {
-            $('.loader').remove();
             if(from == "filter"){
                 $('.contact-frnd-post').html("");
             }

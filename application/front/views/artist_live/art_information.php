@@ -217,13 +217,14 @@ var art_id = "<?php echo $get_url; ?>";
 </script>
 
 <?php
-  if (IS_ART_JS_MINIFY == '0') { ?>
+  // if (IS_ART_JS_MINIFY == '0') { ?>
+<script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/art_information.js?ver='.time()); ?>"></script>
-<?php }else{?>
-<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/art_information.js?ver='.time()); ?>"></script>
-<?php }?>
+ <?php //}else{?>
+<!-- <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script> -->
+<!-- <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/artist/art_information.js?ver='.time()); ?>"></script> -->
+ <?php //}?>
 <script>
      var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
