@@ -11,9 +11,17 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
+		<?php
+           if($isartistactivate == true && $artist_isregister){
+               
+        ?>
+			<link rel="stylesheet" href="<?php echo base_url('assets/css/header.css?ver=' . time()) ?>">
+			
+		   <?php } ?>
 
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+		<script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page">
         <!-- SET BLANK IF VAR NOT DECLARE FROM CONTROLLER -->
@@ -28,7 +36,14 @@
                     echo $header_profile;
                 }
         ?>
-        <div class="middle-section">
+		<?php
+           if($ismainregister == true ){
+               
+        ?>
+			<div class="middle-section">
+		 <?php } else { ?>
+			<div class="middle-section middle-section-banner new-ld-page">
+			 <?php } ?>
             <?php if($ismainregister == false || $isartistactivate == false || $artist_isregister == false || !$session_user_id){ echo $search_banner; 
             } ?>
             <div class="container pt20">
@@ -157,7 +172,7 @@
                 </div>
             </div>
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>

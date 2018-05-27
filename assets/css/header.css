@@ -861,7 +861,7 @@ header .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical,header .mCSB_ou
 }
 .data_noti_msg{
     font-size:12px;
-    line-height:19px;
+    /*line-height:19px;*/
     color:#999
 }
 #inboxcontainer::before{
