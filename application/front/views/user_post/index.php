@@ -657,10 +657,10 @@
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
                     <div class="report-box">
-						<h3>Give Feedback on this post</h3>
+						<h3>What’s Wrong with This Post?</h3>
 						<ul>
 							<li>
-								<label class="control control--radio">Not intersed in this post
+								<label class="control control--radio">Not Intersed in This Post
 									<input name="radio" type="radio">
 									<div class="control__indicator"></div>
 								</label>
@@ -672,7 +672,7 @@
 								</label>
 							</li>
 							<li>
-								<label class="control control--radio">Nudity or Sexually explicit
+								<label class="control control--radio">Nudity or Sexually Explicit
 									<input name="radio" type="radio">
 									<div class="control__indicator"></div>
 								</label>
@@ -696,13 +696,13 @@
 								</label>
 							</li>
 							<li>
-								<label class="control control--radio">Abusive, Violent or Hate speech
+								<label class="control control--radio">Abusive, Violent or Hate Speech
 									<input name="radio" type="radio">
 									<div class="control__indicator"></div>
 								</label>
 							</li>
 							<li class="other-rsn">
-								<label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other reasons
+								<label data-target="#other-reason" data-toggle="modal" onclick="void(0)" class="">Other Reasons
 									
 								</label>
 							</li>
@@ -723,7 +723,7 @@
                     <div class="report-box">
 						
 						<div class="other-reason-box">
-							<textarea placeholder="Enter Other Reason"></textarea>
+							<textarea placeholder="Enter your reason for reporting"></textarea>
 							<p class="text-center">
 								<button class="btn3">Back</button> <button class="btn1">Submit</button>
 							</p>

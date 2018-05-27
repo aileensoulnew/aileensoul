@@ -2129,7 +2129,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report-box ul li:last-child{width:100%; text-align:center; padding-top:7px; padding-bottom:10px;}
 .report-box .control__indicator{width:16px; height:16px;}
 .report-box ul li.other-rsn{padding-left:40px; position:relative; }
-.report-box ul li.other-rsn:before{width:16px; height:16px; border:1px solid #5c5c5c; content:""; position:absolute; left:10px; top:15px; border-radius:100%; }
+.report-box ul li.other-rsn:before{width:16px; height:16px; border:1px solid #5c5c5c; content:""; position:absolute; left:10px; top:18px; border-radius:100%; }
 .report-box ul li.other-rsn label{cursor:pointer;}
 .report-box h4{padding:10px; text-align:center;}
 .report-box .other-reason-box{padding:20px;}
@@ -2320,10 +2320,10 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.add-banner{overflow:hidden;}
 	.more-support{font-size:16px;}
 	
-	#post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content{width:100%; height:100%; border:0px; border-radius:0px;}
-	#post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog{padding:0; margin:0; height:100%;}
-	#post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
-	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box{margin-bottom:52px;} 
+	#post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content{width:100%; height:100%; border:0px; border-radius:0px;}
+	#post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog {padding:0; margin:0; height:100%;}
+	#post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
+	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box{margin-bottom:52px;}
 	
 	.post-popup-box .post-box{padding:15px 0;}
 	.post-popup-box .post-box .post-img{margin-left:15px;}
@@ -2459,6 +2459,14 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.free-hire-reg-cus{background-size:cover;}
 	.free-work-reg-cus{background-size:cover;}
 	.reg-form-cus .title p{font-size:14px; line-height:1.2;}
+	.report-box h3{font-size:20px;}
+	.report-box ul li{width:100%; padding:10px 0;}
+	.report-box ul li.other-rsn{padding-left:30px;}
+	.report-box ul li.other-rsn::before{left:1px; top:14px; width:14px; height:14px;}
+	.report-box ul li label{font-size:14px;}
+	.report-box .control__indicator{width:14px; height:14px;}
+	.report-box .control--radio .control__indicator::after{width:12px; height:12px;}
+	
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
@@ -2607,6 +2615,7 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.post-popup-box textarea{font-size:12px !important; letter-spacing:0.5px;}
 	.post-popup-box .all-upload .upload_icon .upload_span_icon{font-size:12px;}
 	.title-div ul li a{font-size:13px;}
+	.report-box .other-reason-box .btn3{font-size: 14px; padding: 3px 25px;}
 }
 @media screen and (max-width: 359px) {
 	.all-job-bottom{text-align:center;}
