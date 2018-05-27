@@ -30,10 +30,21 @@
             }else{
                 echo $header_profile; 
             }
-       ?>            
-        <div class="middle-section">
+       ?>       
+       <?php
+          if($ismainregister == false){
+       ?>
+           <div class="middle-section middle-section-banner new-ld-page">
+       <?php //echo $search_banner; 
+           } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
+           <div class="middle-section">
+       <?php } else { ?>
+           <div class="middle-section middle-section-banner">
+       <?php //echo $search_banner;  
+       } ?>
+
+        <!-- <div class="middle-section"> -->
             <?php if($ismainregister == false || $isbusiness_deactive == true || $isbusiness_register == false){ echo $search_banner; }  ?>
-            <?php //if($business_profile_set == 0 || $business_profile_set == '0'){  echo $search_banner; } ?>
             <div class="container pt20 searchcontainer">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">

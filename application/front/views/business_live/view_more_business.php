@@ -30,14 +30,22 @@
             }
         ?>
 
-            <?php if($business_profile_set == 0 && $business_profile_set == '0'){ ?>
-                <div class="middle-section middle-section-banner new-ld-page">
-            <?php 
+        <?php
+           if($ismainregister == false){
+        ?>
+            <div class="middle-section middle-section-banner new-ld-page">
+        <?php //echo $search_banner; 
+            } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
+            <div class="middle-section">
+        <?php } else { ?>
+            <div class="middle-section middle-section-banner">
+        <?php //echo $search_banner;  
+        } ?>
+
+            <?php if($business_profile_set == 0 && $business_profile_set == '0'){ 
                     echo $search_banner; 
-                } else{
+                } 
             ?>
-                <div class="middle-section new-ld-page">
-            <?php } ?>
             <!-- NEW HTML -->
                 
             <div class="container pt20">

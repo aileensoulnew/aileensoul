@@ -22,8 +22,17 @@
                 echo $header_profile;
             }
         ?>
-        <div class="middle-section middle-section-banner new-ld-page">
-            <?php echo $search_banner; ?>
+        <?php
+           if($ismainregister == false ){
+        ?>
+            <div class="middle-section middle-section-banner new-ld-page">
+        <?php echo $search_banner; 
+            } else if($isartistactivate == true && $artist_isregister == true) { ?>
+            <div class="middle-section">
+        <?php } else { ?>
+            <div class="middle-section middle-section-banner">
+        <?php echo $search_banner;  
+        } ?>
             <!-- TOP CATEGORIES LIST -->
             <div class="job-cat-lp" >
                 <div class="container" >

@@ -26,7 +26,19 @@
                 echo $header_profile; 
             }
         ?>
-        <div class="middle-section middle-section-banner new-ld-page">
+        <?php
+           if($ismainregister == false){
+        ?>
+            <div class="middle-section middle-section-banner new-ld-page">
+        <?php //echo $search_banner; 
+            } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
+            <div class="middle-section">
+        <?php } else { ?>
+            <div class="middle-section middle-section-banner">
+        <?php //echo $search_banner;  
+        } ?>
+
+        <!-- <div class="middle-section middle-section-banner new-ld-page"> -->
             <!-- SEARCH BANNER for BUSINESS -->
             <?php if(!$isbusinessactivate){ ?>
                 <?php if(!$business_profile_set){ echo $search_banner; } ?>

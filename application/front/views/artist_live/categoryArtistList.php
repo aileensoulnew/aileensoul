@@ -37,15 +37,17 @@
                 }
         ?>
 		<?php
-           if($ismainregister == true ){
-               
+           if($ismainregister == false ){
         ?>
-			<div class="middle-section">
-		 <?php } else { ?>
-			<div class="middle-section middle-section-banner new-ld-page">
-			 <?php } ?>
-            <?php if($ismainregister == false || $isartistactivate == false || $artist_isregister == false || !$session_user_id){ echo $search_banner; 
-            } ?>
+            <div class="middle-section middle-section-banner new-ld-page">
+        <?php echo $search_banner; 
+            } else if($isartistactivate == true && $artist_isregister == true) { ?>
+            <div class="middle-section">
+        <?php } else { ?>
+            <div class="middle-section middle-section-banner">
+        <?php echo $search_banner;  
+        } ?>
+        
             <div class="container pt20">
                 <div class="left-part">
                     <!-- TOP CATEGORIES FILTER -->

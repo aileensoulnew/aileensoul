@@ -36,17 +36,19 @@
                 echo $header_profile;
             }
         ?>
-            <?php 
-                if($ismainregister == false || $isartistactivate == false || $artist_isregister == false){ 
-                // if(($is_artist_profile_set == 0 || $is_artist_profile_set == '0') || $isartistactivate == 1){ 
-            ?>
+        
+        <?php
+           if($ismainregister == false){
+        ?>
             <div class="middle-section middle-section-banner new-ld-page">
-            <?php
-                echo $search_banner; 
-            } else{
-            ?>
-                <div class="middle-section">
-            <?php } ?>
+        <?php echo $search_banner; 
+            } else if($isartistactivate == true && $artist_isregister == true) { ?>
+            <div class="middle-section">
+        <?php } else { ?>
+            <div class="middle-section middle-section-banner">
+        <?php echo $search_banner;  
+        } ?>
+
             <div class="container pt20">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
