@@ -1416,7 +1416,10 @@ max-width: inherit;
 svg path{
 	fill: #5c5c5c;
 }
-
+/***  register body  ***/
+.registerbody .header{background:none; position:relative; border-bottom:none;}
+.registerbody .header ul li a{padding-top:0 !important;}
+.registerbody .header ul li.all{background:none; overflow:inherit; text-indent:inherit; width:auto;}
 
 /***  custom suggestion box dropdown  ***/
 /*.ui-widget-content{width:100% !important; left:0 !important; top:35px !important;}*/
