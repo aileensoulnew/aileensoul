@@ -690,7 +690,7 @@
 								</label>
 							</li>
 							<li>
-								<label class="control control--radio">Scam, Phising or Malware
+								<label class="control control--radio">Scam, Phishing or Malware
 									<input name="radio" type="radio">
 									<div class="control__indicator"></div>
 								</label>

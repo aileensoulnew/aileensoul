@@ -1964,7 +1964,11 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .content-bnr .btn5{letter-spacing:1px;}
 .cus-btn-fh{margin-left:75px; padding-top:20px;}
 
-.create-profile-btn{position:absolute; top:50px; right:80px;}
+.create-profile-btn{position:absolute; top:50px; right:50px;}
+.create-profile-btn .btn3{background: #fff !important ;
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 100%);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 100%);}
 
 .middle-section.job-reg-cus{padding-bottom:0; margin-bottom:0;}
 .middle-section.art-reg-cus{padding-bottom:0; margin-bottom:0;}
@@ -2129,13 +2133,28 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report-box ul li:last-child{width:100%; text-align:center; padding-top:7px; padding-bottom:10px;}
 .report-box .control__indicator{width:16px; height:16px;}
 .report-box ul li.other-rsn{padding-left:40px; position:relative; }
-.report-box ul li.other-rsn:before{width:16px; height:16px; border:1px solid #5c5c5c; content:""; position:absolute; left:10px; top:15px; border-radius:100%; }
+.report-box ul li.other-rsn:before{width:16px; height:16px; border:1px solid #5c5c5c; content:""; position:absolute; left:10px; top:18px; border-radius:100%; }
 .report-box ul li.other-rsn label{cursor:pointer;}
 .report-box h4{padding:10px; text-align:center;}
 .report-box .other-reason-box{padding:20px;}
 .report-box .other-reason-box textarea{border:0px; border-bottom:1px solid #d2d2d2; height:150px; margin-bottom:15px; border-radius:0; padding:0; font-size:15px;}
 .report-box .other-reason-box .btn3{font-size:16px; padding:5px 25px; font-weight:normal;}
 /***  end report box  ***/
+/***  report page  ***/
+.report{letter-spacing:1px;}
+.report h1{padding:100px 0 50px; font-size:50px;}
+.report-middle-box{width:80%; margin:0 auto; padding:50px 0;}
+.report-form{padding:50px 0;}
+.report-form .form-group{margin-bottom:40px;}
+.report-form .form-group input{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0; padding:0;}
+.report-form .form-group input:focus{border-bottom:1px solid #1b8ab9;}
+.report-form .form-group input[type="text"]:focus{color:#1b8ab9 !important;}
+.report-form .form-group textarea:focus{border-bottom:1px solid #1b8ab9; color:#1b8ab9 !important;}
+.report-form .form-group textarea{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0; padding:0; height:100px;}
+.report-form .as-user label{display:inline-block; margin-right:15px;}
+.report-form .as-user .control{padding-left:20px;}
+.report-form .control--radio .control__indicator::after{width:13px; height:13px;}
+/***  end report page  ***/
 
 
 /***  art and bus css  ***/
@@ -2151,6 +2170,24 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .data_noti_msg span {line-height:1;}
 .cq_post ul li:hover{background:#e9f4f8;}
 .art-cat-custom label.error{top:55px;}
+.day-text2 {font-size: 11px !important;}
+.post-img-div {
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
+    background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+	background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', endColorstr='#1b8ab9', GradientType=0);
+    font-size: 20px;
+    padding: 16px 0;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1;
+}
 
 /***  job css  ***/
 .message button.modal-close{background:#1b8ab9; color:#fff;}
@@ -2302,10 +2339,10 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.add-banner{overflow:hidden;}
 	.more-support{font-size:16px;}
 	
-	#post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content{width:100%; height:100%; border:0px; border-radius:0px;}
-	#post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog{padding:0; margin:0; height:100%;}
-	#post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
-	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box{margin-bottom:52px;} 
+	#post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content{width:100%; height:100%; border:0px; border-radius:0px;}
+	#post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog {padding:0; margin:0; height:100%;}
+	#post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
+	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box{margin-bottom:52px;}
 	
 	.post-popup-box .post-box{padding:15px 0;}
 	.post-popup-box .post-box .post-img{margin-left:15px;}
@@ -2441,6 +2478,14 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.free-hire-reg-cus{background-size:cover;}
 	.free-work-reg-cus{background-size:cover;}
 	.reg-form-cus .title p{font-size:14px; line-height:1.2;}
+	.report-box h3{font-size:20px;}
+	.report-box ul li{width:100%; padding:10px 0;}
+	.report-box ul li.other-rsn{padding-left:30px;}
+	.report-box ul li.other-rsn::before{left:1px; top:14px; width:14px; height:14px;}
+	.report-box ul li label{font-size:14px;}
+	.report-box .control__indicator{width:14px; height:14px;}
+	.report-box .control--radio .control__indicator::after{width:12px; height:12px;}
+	
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
@@ -2589,6 +2634,7 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.post-popup-box textarea{font-size:12px !important; letter-spacing:0.5px;}
 	.post-popup-box .all-upload .upload_icon .upload_span_icon{font-size:12px;}
 	.title-div ul li a{font-size:13px;}
+	.report-box .other-reason-box .btn3{font-size: 14px; padding: 3px 25px;}
 }
 @media screen and (max-width: 359px) {
 	.all-job-bottom{text-align:center;}

@@ -6,7 +6,7 @@
     top:0;
     left:0
 }
-.header ul li,.header ul li a,.logo{
+.header ul li a,.logo{
     display:inline-block
 }
 .header ul li a:hover,.header ul li a:hover i{
