@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-6 no-login-right fw-479">
                                     <a href="<?php echo base_url(); ?>login" target="_self" class="btn8">Login</a>
-                                    <a href="#" class="btn9">Create Recruiter Account</a>
+                                    <a href="<?php echo base_url('recruiter/create-account'); ?>" class="btn9">Create Recruiter Account</a>
                                 </div>
                             </div>
                         </div>

@@ -29,8 +29,8 @@
                                     
                                 </div>
                                 <div class="col-md-6 col-sm-6 no-login-right fw-479">
-                                    <a href="#" class="btn8">Login</a>
-                                    <a href="#" class="btn9">Create Freelancer Account</a>
+                                    <a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
+                                    <a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Account</a>
                                         
                                 </div>
                             </div>
