@@ -200,7 +200,7 @@ class Recruiter_model extends CI_Model {
     }
 
     // Get Filter List
-    public function get_recommen_candidate_post($searchkeyword = '',$searchplace = '',$city_id='',$title_id = '',$industry_id,$skill_id,$experience_id, $userid, $page = '',$limit = '5')
+    public function get_recommen_candidate_postas($searchkeyword = '',$searchplace = '',$city_id='',$title_id = '',$industry_id,$skill_id,$experience_id, $userid, $page = '',$limit = '5')
     {
         $start = ($page - 1) * $limit;
         if ($start < 0)
@@ -288,6 +288,65 @@ class Recruiter_model extends CI_Model {
         $sql .= " ORDER BY job_id DESC";
         if($limit != '') {
             $sql .= " LIMIT $start, $limit";
+        }
+
+        // echo $sql;exit;
+        $query = $this->db->query($sql);        
+        $recommen_candid = $query->result_array();
+        return $recommen_candid;
+    }
+      public function get_recommen_candidate_post($city_id='',$title_id = '',$industry_id,$skill_id,$experience_id, $userid, $page = '',$limit = '5')
+    {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql_filter = "";
+        // Apply condition for filter
+        if($city_id != ""){
+            $sql_filter .= " AND ailee_job_reg.city_id IN (". $city_id .") AND ailee_job_reg.city_id > 0";
+        }
+
+        if($title_id != ""){
+            $sql_filter .= " AND ailee_job_reg.work_job_title IN (". $title_id .") AND ailee_job_reg.work_job_title > 0";
+        }
+
+        if($industry_id != ""){
+            $sql_filter .= " AND ailee_job_reg.work_job_industry IN (". $industry_id .") AND ailee_job_reg.work_job_industry > 0";
+        }
+
+        if($skill_id != ""){
+            $sql_filter .= " AND ailee_job_reg.keyskill IN (". $skill_id .") AND ailee_job_reg.keyskill > 0";
+        }
+
+        if($experience_id != ""){
+            if($experience_id == 6)
+            {
+                $sql_filter .= " AND ailee_job_reg.exp_y > ". $experience_id;
+            }
+            else{
+                $sql_filter .= " AND ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id;
+            }
+        }
+
+        $sql = "SELECT ailee_job_reg.user_id as iduser, ailee_job_reg.fname, ailee_job_reg.lname, ailee_job_reg.email, ailee_job_reg.phnno, ailee_job_reg.language, ailee_job_reg.keyskill, ailee_job_reg.experience, ailee_job_reg.job_user_image, ailee_job_reg.designation, ailee_job_reg.work_job_title, ailee_job_reg.work_job_industry, ailee_job_reg.work_job_city, ailee_job_reg.slug, ailee_job_add_edu.degree, ailee_job_add_edu.stream, ailee_job_add_edu.board_primary, ailee_job_add_edu.board_secondary, ailee_job_add_edu.board_higher_secondary, ailee_job_add_edu.percentage_primary, ailee_job_add_edu.percentage_secondary, ailee_job_add_edu.percentage_higher_secondary, ailee_job_reg.exp_y,ailee_job_reg.exp_m,ailee_job_graduation.* FROM ailee_job_reg LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id LEFT JOIN ailee_job_graduation ON ailee_job_reg.user_id=ailee_job_graduation.user_id WHERE ailee_job_reg.job_id IN (
+                SELECT DISTINCT j.job_id FROM( 
+                    SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.keyskill REGEXP concat('[[:<:]](', REPLACE(rp.post_skill, ',', '|'), ')[[:>:]]') AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+
+                UNION
+
+                SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_title = rp.post_name AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+
+                UNION
+
+                SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_industry = rp.industry_type AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+                ) as j ORDER BY j.job_id DESC
+
+            ) AND ailee_job_reg.is_delete = '0' AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10'" . $sql_filter;
+
+        $sql .= " ORDER BY job_id DESC";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
         }
 
         // echo $sql;exit;
