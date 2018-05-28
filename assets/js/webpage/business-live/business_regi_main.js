@@ -528,6 +528,208 @@ app.controller('businessCreateProfileController', function ($scope, $http, $loca
     $("#business_details").focusout(function(){
         $('#bdtooltip').hide();
     });
+
+    function getCountry() {
+        $http({
+            method: 'GET',
+            url: base_url + 'business_profile_registration/getCountry',
+            headers: {'Content-Type': 'application/json'},
+        }).then(function (data) {
+            $scope.countryList = data.data;
+        });
+    }
+    getCountry();
+
+    function onCountryChange1(country_id = '') {        
+        if(country_id != null)
+        {            
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_registration/getStateByCountryId',
+                data: {countryId: country_id}
+            }).then(function (data) {
+                $scope.stateList = data.data;            
+            });
+        }
+    }
+
+    $scope.onCountryChange = function () {
+        if($scope.user.country != ""){            
+            $scope.countryIdVal = $scope.user.country;
+            onCountryChange1($scope.countryIdVal);
+            //$scope.user.city = "";
+        }
+    };
+
+    function onStateChange1(state_id = '') {
+        if(state_id != null)
+        {            
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_registration/getCityByStateId',
+                data: {stateId: state_id}
+            }).then(function (data) {
+                if (angular.isDefined($scope.user.city)) {
+                    delete $scope.user.city;
+                }
+                $scope.cityList = data.data;
+            });
+        }
+    }
+
+    $scope.onStateChange = function () {
+        $scope.stateIdVal = $scope.user.state;
+        onStateChange1($scope.stateIdVal);
+    };
+
+    function getDescription() {
+        $http({
+            method: 'POST',
+            url: base_url + 'business_profile_registration/getDescription',
+            headers: {'Content-Type': 'application/json'},
+        }).then(function (data) {                                
+            data = data.data;
+            $scope.business_type = data['business_type'];
+            $scope.industry_type = data['industriyaldata'];
+        });
+    }
+    getDescription();
+
+    $.validator.addMethod("regx1", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Only space, only number and only special characters are not allow");
+    $.validator.addMethod("regx2", function(value, element, regexpr) {
+        if (!value) {
+            return true;
+        } else {
+            return regexpr.test(value);
+        }
+    }, "Special character and space not allow in the beginning");
+
+    $scope.businessRegiValidate = {
+        rules: {
+            companyname: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+            },
+            country: {
+                required: true,
+            },
+            state: {
+                required: true,
+            },
+            business_address: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+            },
+            contactname: {
+                required: true,
+                regx1: /^[a-zA-Z\s]*[a-zA-Z]/
+            },
+            contactmobile: {
+                required: true,
+                number: true,
+                minlength: 8,
+                maxlength: 15,
+                regx2: /^[0-9][0-9]*/
+            },
+            email: {
+                required: true,
+                email: true,
+            },
+            contactwebsite :{
+                url:true
+            },
+            business_type: {
+                required: true,
+            },
+            industriyal: {
+                required: true,
+            },
+            business_details: {
+                required: true,
+                regx1: /^[-@./#&+,\w\s]*[a-zA-Z][a-zA-Z0-9]*/
+            },
+        },
+        messages: {
+            companyname: {
+                required: 'Company name is required.',
+            },
+            country: {
+                required: 'Country is required.',
+            },
+            state: {
+                required: 'State is required.',
+            },
+            business_address: {
+                required: 'Business address is required.',
+            },
+            contactname: {
+                required: "Person name is required.",
+            },
+            contactmobile: {
+                required: "Mobile number is required.",
+            },
+            email: {
+                required: "Email id is required.",
+                email: "Please enter valid email id.",
+            },
+            contactwebsite :{
+                url: "Please enter valid URL With http or https.",
+            },
+            business_type: {
+                required: "Business type is required.",
+            },
+            industriyal: {
+                required: "Industrial is required.",
+            },
+            business_details: {
+                required: "Business details is required.",
+            },
+        }
+    };
+    $scope.submitBusinessRegiForm = function () {
+        if ($scope.businessinfo.validate()) {
+
+            angular.element('#businessinfo #submit').addClass("form_submit");
+            angular.element('#businessinfo #submit').css("pointer-events","none");
+            $('#profilereg_ajax_load').show();
+            $scope.loader_show = true;
+            var form_data = new FormData($("#businessinfo")[0]);
+            angular.forEach($('#business_image')[0].files, function (file) {
+                form_data.append('business_image[]', file);
+            });
+
+            $http.post(base_url+'business_profile_registration/business_profile_insert',form_data,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false}
+            }).then(function (data) {
+                data = data.data;
+                if (data.errors) {
+                    // Showing errors.
+                    $scope.errorImage = data.errors.image1;
+                } else {
+                    angular.element('#businessinfo #submit').css("pointer-events","all");
+                    if (data.is_success == '1') {
+                        angular.element('#businessinfo #submit').removeClass("form_submit");
+                        $scope.loader_show = false;
+                        window.location.href = base_url + 'business-profile';
+                    } else {
+                        return false;
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    };
+
 });
 
 $(window).on("load", function () {
@@ -557,3 +759,36 @@ function addItem () {
     // container.appendChild(item);
     itemsCounter++;
 }
+/*$(document).on('change','#country', function () {
+    var countryID = $(this).val();
+    if (countryID) {
+        $.ajax({
+            type: 'POST',
+            url: base_url + "business_profile_registration/getStateByCountryId",
+            data: 'country_id=' + countryID,
+            success: function (html) {
+                $('#state').html(html);
+                $('#city').html('<option value="">Select state first</option>');
+            }
+        });
+    } else {
+        $('#state').html('<option value="">Select country first</option>');
+        $('#city').html('<option value="">Select state first</option>');
+    }
+});
+
+$(document).on('change','#state', function () {
+    var stateID = $(this).val();
+    if (stateID) {
+        $.ajax({
+            type: 'POST',
+            url: base_url + "business_profile/ajax_data",
+            data: 'state_id=' + stateID,
+            success: function (html) {
+                $('#city').html(html);
+            }
+        });
+    } else {
+        $('#city').html('<option value="">Select state first</option>');
+    }
+});*/
