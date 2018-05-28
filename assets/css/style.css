@@ -234,7 +234,7 @@ button,input[type=button],input[type=submit]{
 
 
 .modal-open button:hover,input[type=button]:hover,input[type=submit]:hover{
-    /*background:#156f95;*/
+    background:#156f95;
 }
 
 button:hover,input[type=button]:hover,input[type=submit]:hover{
@@ -2169,6 +2169,7 @@ footer div.pt20{
     border:none;
     padding-top:4px
 }
+
 .all-job-top .post-img img{
     width:100%;
     height:100%
@@ -2201,6 +2202,9 @@ footer div.pt20{
     padding:10px 15px;
     width:100%;
     float:left
+}
+.all-job-middle p{
+	word-wrap:break-word;
 }
 .all-job-middle .location{
     padding-right:20px
@@ -2465,6 +2469,17 @@ footer div.pt20{
 .notification_data_in_h2 #msg_not_loader{
     margin-top: 85px;
 }
+.full-box-module.add-chitka{height: 252px;}
+#hideuserlist .full-box-module {
+    width: calc(100% - 8px);
+    margin-left: 8px;
+}
+.po-re{position:relative;}
+.verticale-add{display: none;}
+.left-add{display: none;}
+.add-box-cus{width:100%; text-align: center; margin-bottom: 10px; padding: 10px 0; float: left; border:1px solid #d2d2d2; border-radius: 4px;}
+.left-add{width:100%; text-align: center; margin-bottom: 10px; padding: 10px 0; float: left; border:1px solid #d2d2d2; border-radius: 4px;}
+.mob-add-cus{width:100%; text-align: center; margin-bottom: 10px; padding: 10px 0; float: left; border:1px solid #d2d2d2; border-radius: 4px; display: none;}
 
 @media screen and (max-height:540px){
     .no-login .modal-dialog{
@@ -2512,7 +2527,11 @@ footer div.pt20{
         color:#fff
     }
 }
-
+@media screen and (max-width:1299px){
+    .fixed_right_display{display: none;}
+    .verticale-add{display: block; position: absolute;width: 160px; float: left; margin-left: 960px;}
+    .verticale-add.live-post{display: none;}
+}
 @media screen and (max-width:1279px){
     .header2{
         width:1140px
@@ -2567,6 +2586,8 @@ footer div.pt20{
     .detail-discription .all-job-middle ul li span{
         width:75%
     }
+    .verticale-add{display: none;}
+    .left-add{display: block;}
 }
 @media screen and (max-width:1200px){
     .fixed_right_side{
@@ -2729,6 +2750,10 @@ footer div.pt20{
         display:block
     }
     .cus-chang{font-size: 20px !important;}
+    .verticale-add{display: block; margin-left:575px;}
+    .left-add{display: none;}
+    .verticale-add.live-post{display: block;}
+    .verticale-add.artist{margin-left: 590px;}
 }
 @media screen and (max-width:900px){
     .custom-right{
@@ -2748,7 +2773,11 @@ footer div.pt20{
         margin-left:0
     }
 }
-
+@media screen and (max-width:700px){
+    .box,.popup{
+        width:70%
+    }
+}
 @media screen and (max-width:767px){
     .backdiv-mob,.search-mob-block{
         display:block
@@ -2925,14 +2954,11 @@ footer div.pt20{
     .logo img{max-width: 130px;}
     .cus-chang{margin-bottom: 0px;}
     .cus-chang{font-size: 20px !important;line-height: 26px;}
-    
+    .verticale-add{display: none;}
+    .mob-add-cus{display: block;}
+    .verticale-add.live-post{display: none;}
 }
-@media screen and (max-width:700px){
-    .box,.popup{
-        width:70%
-    }
-}
-@media screen and (max-width:640px){
+    @media screen and (max-width:640px){
         .cover-pic{
             right:-4%
         }
@@ -2988,7 +3014,7 @@ footer div.pt20{
             width:100%
         }
     }
-@media screen and (max-width:540px){
+    @media screen and (max-width:540px){
         .cls-ve{
             right:5px;
             top:23px
@@ -3037,7 +3063,7 @@ footer div.pt20{
             width:84%
         }
     }
-@media screen and (max-width:479px){
+    @media screen and (max-width:479px){
         .fw-479,fieldset{
             width:100%
         }
@@ -3233,7 +3259,7 @@ footer div.pt20{
         }
         .cus-chang{font-size: 17px !important;margin-bottom: 0px;line-height: 26px;}
     }
-@media screen and (max-width:360px){
+    @media screen and (max-width:360px){
         .chat .chat-header .chat-with,.job-top-detail h5 a{
             font-size:14px
         }
@@ -3284,6 +3310,10 @@ footer div.pt20{
             width:60px
         }
          .logo img{max-width: 110px;}
+        .search-job-cus .mob-add-cus{border:0px;}
+        .search-cus .mob-add-cus{border:0px;}
+        .user-list .mob-add-cus{border:0px;}
+        .search-cus .mob-add-cus{border:0px;}
     }
     @media screen and (max-width:320px){
         .main-txt{
@@ -3370,4 +3400,4 @@ footer div.pt20{
             background-color:#fff
         }
     }
-}
+    
