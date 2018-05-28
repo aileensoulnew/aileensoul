@@ -24,7 +24,6 @@ class Recruiter extends MY_Controller {
 	}
 
 	public function index() {
-		echo "string";
 		$userid = $this->session->userdata('aileenuser');
 		//  CHECK HOW MUCH STEP FILL UP BY USE IN RECRUITER PROFILE START  
 				// $this->recruiter_apply_check();
@@ -2478,6 +2477,8 @@ public function recruiter_search_candidate() {
 	//if user deactive profile then redirect to recruiter/index untill active profile End
 	$contition_array = array('user_id' => $userid, 'is_delete' => '0', 're_status' => '1');
 	$this->data['city'] = $city = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 're_comp_city', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+	// echo $this->db->last_query();
+	// exit;
 	$data = array(
 		'search_keyword' => $rec_search,
 		'search_location' => $search_place,
@@ -2487,6 +2488,7 @@ public function recruiter_search_candidate() {
 		'status' => '1',
 		'module' => '2'
 	);
+
 	$insert_id = $this->common->insert_data_getid($data, 'search_info');
 	//insert search keyword into database end
 	//RECRUITER SEARCH START 1-9
@@ -2510,12 +2512,12 @@ public function recruiter_search_candidate() {
 		$jobcity_data = $this->common->select_data_by_condition('job_reg', $contition_array, $data, $sortby = 'job_id', $orderby = 'desc', $limit = '', $offset = '', $join_str1, $groupby = '');
 		$unique = $jobcity_data;
 	} elseif ($searchplace == "" || $this->uri->segment(4) == "0") {
-
-	//JOB TITILE DATA START
+		//JOB TITILE DATA START
 		$contition_array = array('status' => 'publish');
 		$search_condition = "(name LIKE '%$searchkeyword%')";
 		$jobtitledata = $this->common->select_data_by_search('job_title', $search_condition, $contition_array = array(), $data = 'GROUP_CONCAT(title_id) as title_list', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 		$job_list = $jobtitledata[0]['title_list'];
+
 		$job_list = str_replace(",", "','", $jobtitledata[0]['title_list']);
 		//JOB TITILE DATA END
 		//SKILL DATA START
@@ -2528,6 +2530,7 @@ public function recruiter_search_candidate() {
 		$contition_array = array('is_delete' => '0', 'status' => '1');
 		$search_condition = "((industry_name LIKE '%$searchkeyword%') OR (industry_name LIKE '%$searchkeyword%' AND user_id = '$userid'))";
 		$inddata = $this->common->select_data_by_search('job_industry', $search_condition, $contition_array, $data = 'GROUP_CONCAT(industry_id) as industry_list ', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
 		$ind_list = $inddata[0]['industry_list'];
 		$ind_list = str_replace(",", "','", $inddata[0]['industry_list']);
 		//INDUSTRY DATA END
@@ -2560,6 +2563,8 @@ public function recruiter_search_candidate() {
 			foreach ($skill_list as $ski) {
 				$contition_array = array('job_reg.status' => '1', 'job_reg.is_delete' => '0', 'job_step' => '10', 'job_reg.user_id != ' => $userid, 'FIND_IN_SET("' . $ski . '", keyskill) != ' => '0');
 				$jobskill_data[] = $this->common->select_data_by_condition('job_reg', $contition_array, $data, $sortby = 'job_id', $orderby = 'desc', $limit = '', $offset = '', $join_str1, $groupby = '');
+				// echo $this->db->last_query();
+				// exit;
 
 
 			//25-9 SKILL RESULT END FOR RECRUITER
@@ -2570,7 +2575,7 @@ public function recruiter_search_candidate() {
 		}
 		$unique = array_merge((array) $jobtitle_data, (array) $job_data, (array) $jobind_data);
 	} else {
-
+		
 			//25-9 SKILL RESULT START FOR RECRUITER
 		$contition_array = array('city_name' => $searchplace, 'status' => '1');
 		$citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
@@ -5622,4 +5627,532 @@ public function postlocation() {
 		
 		echo json_encode($result);
 	}
+
+	public function recommen_candidate_post22($id = "") {
+		$perpage = 5;
+		$page = 1;
+		if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+			$page = $_GET["page"];
+		}
+		//Search query
+		$searchkeyword = trim($_GET["skill"]);
+		$searchplace = trim($_GET["place"]);
+
+		$rec_search = trim($searchkeyword, ' ');
+		$search_place = $searchplace;
+		// Filter if apply
+		$city_id = '';
+		if (!empty($_GET["city_id"]) && $_GET["city_id"] != 'undefined') {
+			$city_id = $_GET["city_id"];
+		}
+		$title_id = '';
+		if (!empty($_GET["title_id"]) && $_GET["title_id"] != 'undefined') {
+			$title_id = $_GET["title_id"];
+		}
+
+		$industry_id = '';
+		if (!empty($_GET["industry_id"]) && $_GET["industry_id"] != 'undefined') {
+			$industry_id = $_GET["industry_id"];
+		}
+
+		$skill_id = '';
+		if (!empty($_GET["skill_id"]) && $_GET["skill_id"] != 'undefined') {
+			$skill_id = $_GET["skill_id"];
+		}
+
+		$experience_id = '';
+		if (!empty($_GET["experience_id"]) && $_GET["experience_id"] != 'undefined') {
+			$experience_id = $_GET["experience_id"];
+		}
+
+		$start = ($page - 1) * $perpage;
+		if ($start < 0)
+			$start = 0;
+
+		$this->recruiter_apply_check();
+
+		$userid = $this->session->userdata('aileenuser');
+
+			//IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
+		$contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
+		$recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
+		if ($recruiter_deactive) {
+			redirect('recruiter/');
+		}
+			
+			$candidatejob1 = $this->recruiter_model->get_recommen_candidate_post('','',$city_id,$title_id,$industry_id,$skill_id,$experience_id,$userid,$page,$perpage);
+			$recommen_candid_totrec = $this->recruiter_model->get_recommen_candidate_post_total('','',$city_id,$title_id,$industry_id,$skill_id,$experience_id,$userid);
+
+			$postdata .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
+			$postdata .= '<input type = "hidden" class = "total_record" value = "' . $recommen_candid_totrec["total_record"] . '" />';
+			$postdata .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
+
+			if (isset($candidatejob1) && !empty($candidatejob1)) {
+				foreach ($candidatejob1 as $row) {
+
+					$postdata .= '<div class="profile-job-post-detail clearfix">';
+					$postdata .= '<div class = "profile-job-post-title-inside clearfix">';
+					$postdata .= '<div class = "profile-job-profile-button clearfix">';
+					$postdata .= '<div id = "popup1" class = "overlay">';
+					$postdata .= '<div class = "popup">';
+					$postdata .= '<div class = "pop_content">';
+					$postdata .= 'Your User is Successfully Saved.';
+					$postdata .= '<p class = "okk"><a class = "okbtn" href = "javascript:void(0)">Ok</a></p>';
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+					$postdata .= '<div class = "profile-job-post-location-name-rec">';
+					$postdata .= '<div style = "display: inline-block; float: left;">';
+					$postdata .= '<div class = "buisness-profile-pic-candidate">';
+
+					$imagee = $this->config->item('job_profile_thumb_upload_path') . $row['job_user_image'];
+
+					if (file_exists($imagee) && $row['job_user_image'] != '') {
+
+						$postdata .= '<a href="' . base_url() . 'job-profile' . $row['slug'] . '" title="' . $row['fname'] . ' ' . $row['lname'] . '">';
+						$postdata .= '<img src="' . JOB_PROFILE_THUMB_UPLOAD_URL . $row['job_user_image'] . '" alt="' . $row[0]['fname'] . ' ' . $row[0]['lname'] . '">';
+						$postdata .= '</a>';
+					} else {
+
+
+						$a = $row['fname'];
+						$acr = substr($a, 0, 1);
+
+						$b = $row['lname'];
+						$acr1 = substr($b, 0, 1);
+
+						$postdata .= '<a href="' . base_url() . 'job-profile' . $row['slug'] . '" title="' . $row['fname'] . ' ' . $row['lname'] . '">';
+						$postdata .= '<div class="post-img-profile">';
+						$postdata .= '' . ucfirst(strtolower($acr)) . ucfirst(strtolower($acr1)) . '';
+
+						$postdata .= '</div>';
+						$postdata .= '</a>';
+					}
+
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+
+					$postdata .= '<div class="designation_rec fl">';
+					$postdata .= '<ul>';
+					$postdata .= '<li>';
+					$postdata .= '<a  class="post_name" href="' . base_url() . 'job-profile' . $row['slug'] . '" title="' . $row['fname'] . ' ' . $row['lname'] . '">';
+					$postdata .= '' . ucfirst(strtolower($row['fname'])) . ' ' . ucfirst(strtolower($row['lname'])) . '</a>';
+					$postdata .= '</li>';
+
+					$postdata .= '<li style="display: block;">';
+					$postdata .= '<a  class="post_designation" href="javascript:void(0)" title="' . $row['designation'] . '">';
+					if ($row['designation']) {
+						$postdata .= '' . $row['designation'] . '';
+					} else {
+						$postdata .= "Current Work";
+					}
+					$postdata .= '</a>';
+					$postdata .= '</li>';
+					$postdata .= '</ul>';
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+
+					$contition_array = array('user_id' => $row['iduser'], 'type' => '3', 'status' => '1');
+					unset($other_skill);
+
+					$other_skill = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+					$postdata .= '<div class="profile-job-post-title clearfix">';
+					$postdata .= '<div class="profile-job-profile-menu">';
+					$postdata .= '<ul class="clearfix">';
+
+					if ($row['work_job_title']) {
+						$contition_array = array('title_id' => $row['work_job_title']);
+						$jobtitle = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+						if ($jobtitle != "") {
+							$postdata .= '<li> <b> Job Title</b> <span>';
+							$postdata .= '' . $jobtitle[0]['name'] . '';
+							$postdata .= '</span>';
+							$postdata .= '</li>';
+						}
+					}
+					if ($row['keyskill']) {
+						$detailes = array();
+						$work_skill = explode(',', $row['keyskill']);
+						foreach ($work_skill as $skill) {
+							$contition_array = array('skill_id' => $skill);
+							$skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+							$detailes[] = $skilldata[0]['skill'];
+						}
+						$postdata .= '<li> <b> Skills</b> <span>';
+						$postdata .= '' . implode(',', $detailes) . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					}
+					if ($row['work_job_industry']) {
+						$contition_array = array('industry_id' => $row['work_job_industry']);
+						$industry = $this->common->select_data_by_condition('job_industry', $contition_array, $data = 'industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+						$postdata .= '<li> <b> Industry</b> <span>';
+						$postdata .= '' . $industry[0]['industry_name'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					}
+
+					if ($row['work_job_city']) {
+						$cities = array();
+						$work_city = explode(',', $row['work_job_city']);
+						foreach ($work_city as $city) {
+							$contition_array = array('city_id' => $city);
+							$citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+							if ($citydata) {
+								$cities[] = $citydata[0]['city_name'];
+							}
+						}
+						$postdata .= '<li> <b> Preferred Cites</b> <span>';
+						$postdata .= '' . implode(',', $cities) . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					}
+					$contition_array = array('user_id' => $row['iduser'], 'experience' => 'Experience', 'status' => '1');
+					$experiance = $this->common->select_data_by_condition('job_add_workexp', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+					if ($experiance[0]['experience_year'] != '') {
+						$total_work_year = 0;
+						$total_work_month = 0;
+						foreach ($experiance as $work1) {
+							$total_work_year += $work1['experience_year'];
+							$total_work_month += $work1['experience_month'];
+						}
+						$postdata .= '<li> <b> Total Experience</b>';
+						$postdata .= '<span>';
+						if ($total_work_month == '12 month' && $total_work_year == '0 year') {
+							$postdata .= '1 year';
+						} else {
+							$month = explode(' ', $total_work_year);
+							$year = $month[0];
+							$y = 0;
+							for ($i = 0; $i <= $y; $i++) {
+								if ($total_work_month >= 12) {
+									$year = $year + 1;
+									$total_work_month = $total_work_month - 12;
+									$y++;
+								} else {
+									$y = 0;
+								}
+							}
+							$postdata .= '' . $year . '';
+							$postdata .= '&nbsp';
+							$postdata .= 'Year';
+							$postdata .= '&nbsp';
+							if ($total_work_month != 0) {
+								$postdata .= '' . $total_work_month . '';
+								$postdata .= '&nbsp';
+								$postdata .= 'Month';
+							}
+						}
+						$postdata .= '</li>';
+					} else {
+
+						if ($row[0]['experience'] == 'Experience') {
+							$postdata .= '<li> <b> Total Experience</b>';
+							if ($row[0]['exp_y'] != " " && $row[0]['exp_m'] != " ") {
+								if ($row[0]['exp_m'] == '12 month' && $row[0]['exp_y'] == '0 year') {
+									$postdata .= "1 year";
+								} else {
+
+									if ($row[0]['exp_y'] != '0 year') {
+										$postdata .= $row[0]['exp_y'];
+									}
+									if ($row[0]['exp_m'] != '0 month') {
+										$postdata .= ' ' . $row[0]['exp_m'];
+									}
+								}
+							}
+						}
+						if ($row['experience'] == 'Fresher') {
+							$postdata .= '<li> <b> Total Experience</b>';
+							$postdata .= '<span>' . $row['experience'] . '</span>';
+							$postdata .= '</li>';
+						} //if complete
+					}//else complete
+
+					if ($row['board_primary'] && $row['board_secondary'] && $row['board_higher_secondary'] && $row['degree']) {
+						$postdata .= '<li>';
+						$postdata .= '<b>Degree</b><span>';
+						$cache_time = $this->db->get_where('degree', array('degree_id' => $row['degree']))->row()->degree_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Stream</b>';
+						$postdata .= '<span>';
+						$cache_time = $this->db->get_where('stream', array('stream_id' => $row['stream']))->row()->stream_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_secondary'] && $row['board_higher_secondary'] && $row['degree']) {
+						$postdata .= '<li>';
+						$postdata .= '<b>Degree</b><span>';
+						$cache_time = $this->db->get_where('degree', array('degree_id' => $row['degree']))->row()->degree_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Stream</b>';
+						$postdata .= '<span>';
+
+						$cache_time = $this->db->get_where('stream', array('stream_id' => $row['stream']))->row()->stream_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_higher_secondary'] && $row['degree']) {
+
+						$postdata .= '<li>';
+						$postdata .= '<b>Degree</b><span>';
+						$cache_time = $this->db->get_where('degree', array('degree_id' => $row['degree']))->row()->degree_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Stream</b>';
+						$postdata .= '<span>';
+						$cache_time = $this->db->get_where('stream', array('stream_id' => $row['stream']))->row()->stream_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} else if ($row['board_secondary'] && $row['degree']) {
+						$postdata .= '<li>';
+						$postdata .= '<b>Degree</b><span>';
+						$cache_time = $this->db->get_where('degree', array('degree_id' => $row['degree']))->row()->degree_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Stream</b>';
+						$postdata .= '<span>';
+						$cache_time = $this->db->get_where('stream', array('stream_id' => $row['stream']))->row()->stream_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_primary'] && $row['degree']) {
+						$postdata .= '<li>';
+						$postdata .= '<b>Degree</b><span>';
+						$cache_time = $this->db->get_where('degree', array('degree_id' => $row['degree']))->row()->degree_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Stream</b>';
+						$postdata .= '<span>';
+						$cache_time = $this->db->get_where('stream', array('stream_id' => $row['stream']))->row()->stream_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_primary'] && $row['board_secondary'] && $row['board_higher_secondary']) {
+						$postdata .= '<li><b>Board of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['board_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Percentage of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['percentage_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_secondary'] && $row['board_higher_secondary']) {
+						$postdata .= '<li><b>Board of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['board_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Percentage of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['percentage_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_primary'] && $row['board_higher_secondary']) {
+
+
+						$postdata .= '<li><b>Board of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['board_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Percentage of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['percentage_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_primary'] && $row['board_secondary']) {
+
+						$postdata .= '<li><b>Board of Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['board_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Percentage of Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['percentage_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['degree']) {
+						$postdata .= '<li>';
+						$postdata .= '<b>Degree</b><span>';
+						$cache_time = $this->db->get_where('degree', array('degree_id' => $row['degree']))->row()->degree_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Stream</b>';
+						$postdata .= '<span>';
+						$cache_time = $this->db->get_where('stream', array('stream_id' => $row['stream']))->row()->stream_name;
+						if ($cache_time) {
+							$postdata .= '' . $cache_time . '';
+						} else {
+							$postdata .= '' . PROFILENA . '';
+						}
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_higher_secondary']) {
+
+						$postdata .= '<li><b>Board of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['board_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Percentage of Higher Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['percentage_higher_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_secondary']) {
+
+						$postdata .= '<li><b>Board of Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['board_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Percentage of Secondary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['percentage_secondary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					} elseif ($row['board_primary']) {
+
+						$postdata .= '<li><b>Board of Primary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['board_primary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+						$postdata .= '<li><b>Percentage of Primary</b>';
+						$postdata .= '<span>';
+						$postdata .= '' . $row['percentage_primary'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					}
+					$postdata .= '<li><b>E-mail</b><span>';
+					if ($row['email']) {
+						$postdata .= '' . $row['email'] . '';
+					} else {
+						$postdata .= '' . PROFILENA . '';
+					}
+					$postdata .= '</span>';
+					$postdata .= '</li>';
+
+					if ($row['phnno']) {
+						$postdata .= '<li><b>Mobile Number</b><span>';
+						$postdata .= '' . $row['phnno'] . '';
+						$postdata .= '</span>';
+						$postdata .= '</li>';
+					}
+					$postdata .= '</ul>';
+					$postdata .= '</div>';
+					$postdata .= '<div class="profile-job-profile-button clearfix">';
+					$postdata .= '<div class="apply-btn fr">';
+					$userid = $this->session->userdata('aileenuser');
+					$contition_array = array('from_id' => $userid, 'to_id' => $row['iduser'], 'save_type' => 1, 'status' => '0');
+					$data = $this->common->select_data_by_condition('save', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+					if ($userid != $row['iduser']) {
+						if (!$data) {
+
+							$postdata .= '<a title="Message" href="' . base_url() . 'chat/abc/2/1/' . $row['iduser'] . '">Message</a>';
+
+
+							$postdata .= '<input type="hidden" id="hideenuser' . $row['iduser'] . '" value= "' . $data[0]['save_id'] . '">';
+
+							$postdata .= '<a title="Save" id="' . $row['iduser'] . '" onClick="savepopup(' . $row['iduser'] . ')" href="javascript:void(0);" class="saveduser' . $row['iduser'] . '">Save</a>';
+						} else {
+							$postdata .= '<a href="' . base_url() . 'chat/abc/2/1/' . $row['iduser'] . '">Message</a>';
+							$postdata .= '<a class="saved">Saved</a>';
+						}
+					}
+
+					$postdata .= '</div> </div>';
+
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+				}
+			} elseif ($recommen_candid_totrec == 0) {
+				$postdata .= '<div class="text-center rio" style="border: none;">';
+				$postdata .= '<div class="no-post-title">';
+				$postdata .= '<h4 class="page-heading  product-listing" style="border:0px;">Lets create your job post.</h4>';
+				$postdata .= '<h4 class="page-heading  product-listing" style="border:0px;"> It will takes only few minutes.</h4>';
+				$postdata .= '</div>';
+				$postdata .= '<div  class="add-post-button add-post-custom">';
+				$postdata .= '<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'recruiter/add-post"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>';
+				$postdata .= '</div>';
+				$postdata .= '</div>';
+			} else {
+				$postdata .= '<div class="art-img-nn">';
+				$postdata .= '    <div class="art_no_post_img">';
+				$postdata .= '<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">';
+
+				$postdata .= '</div>';
+				$postdata .= '<div class="art_no_post_text">';
+				$postdata .= 'No Recommended  Candidate  Available.';
+				$postdata .= '</div>';
+				$postdata .= '</div>';
+			}
+			$postdata .= '<div class="col-md-1">';
+			$postdata .= '</div>';
+			echo $postdata;
+		}
+
 }

@@ -200,11 +200,32 @@ class Recruiter_model extends CI_Model {
     }
 
     // Get Filter List
-    public function get_recommen_candidate_post($city_id='',$title_id = '',$industry_id,$skill_id,$experience_id, $userid, $page = '',$limit = '5')
+    public function get_recommen_candidate_post($searchkeyword = '',$searchplace = '',$city_id='',$title_id = '',$industry_id,$skill_id,$experience_id, $userid, $page = '',$limit = '5')
     {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
+
+        $sql_skill = "";$sql_jt = "";$sql_cn = "";$sql_it = "";        
+        /*foreach (explode(",", $job_keyword) as $key => $value) {
+            if($value != "")
+            {
+                $sql_skill .= "skill LIKE '".$value."%' OR ";
+                $sql_jt .= "jt.name LIKE '".$value."%' OR ";
+                $sql_cn .= "r.re_comp_name LIKE '".$value."%' OR ";
+                $sql_it .= "industry_name LIKE '".$value."%' OR ";
+            }
+        }
+        $sql_city = "";$sql_state = "";$sql_country = "";
+        foreach (explode(",", $job_location) as $key => $value) {
+            if($value != "")
+            {                
+                $sql_city .= "ct.city_name LIKE '".$value."%' OR ";
+                $sql_state .= "st.state_name LIKE '".$value."%' OR ";
+                $sql_country .= "cr.country_name LIKE '".$value."%' OR ";            
+            }
+        }
+*/
 
         $sql_filter = "";
         // Apply condition for filter
@@ -234,24 +255,39 @@ class Recruiter_model extends CI_Model {
             }
         }
 
-        $sql = "SELECT ailee_job_reg.user_id as iduser, ailee_job_reg.fname, ailee_job_reg.lname, ailee_job_reg.email, ailee_job_reg.phnno, ailee_job_reg.language, ailee_job_reg.keyskill, ailee_job_reg.experience, ailee_job_reg.job_user_image, ailee_job_reg.designation, ailee_job_reg.work_job_title, ailee_job_reg.work_job_industry, ailee_job_reg.work_job_city, ailee_job_reg.slug, ailee_job_add_edu.degree, ailee_job_add_edu.stream, ailee_job_add_edu.board_primary, ailee_job_add_edu.board_secondary, ailee_job_add_edu.board_higher_secondary, ailee_job_add_edu.percentage_primary, ailee_job_add_edu.percentage_secondary, ailee_job_add_edu.percentage_higher_secondary, ailee_job_reg.exp_y,ailee_job_reg.exp_m,ailee_job_graduation.* FROM ailee_job_reg LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id LEFT JOIN ailee_job_graduation ON ailee_job_reg.user_id=ailee_job_graduation.user_id WHERE ailee_job_reg.job_id IN (
+
+        $sql = "SELECT ailee_job_reg.user_id as iduser, ailee_job_reg.fname, ailee_job_reg.lname, ailee_job_reg.email, ailee_job_reg.phnno, ailee_job_reg.language, ailee_job_reg.keyskill, ailee_job_reg.experience, ailee_job_reg.job_user_image, ailee_job_reg.designation, ailee_job_reg.work_job_title, ailee_job_reg.work_job_industry, ailee_job_reg.work_job_city, ailee_job_reg.slug, ailee_job_add_edu.degree, ailee_job_add_edu.stream, ailee_job_add_edu.board_primary, ailee_job_add_edu.board_secondary, ailee_job_add_edu.board_higher_secondary, ailee_job_add_edu.percentage_primary, ailee_job_add_edu.percentage_secondary, ailee_job_add_edu.percentage_higher_secondary, ailee_job_reg.exp_y,ailee_job_reg.exp_m,ailee_job_graduation.* FROM ailee_job_reg 
+            LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id 
+            LEFT JOIN ailee_job_graduation ON ailee_job_reg.user_id=ailee_job_graduation.user_id 
+            WHERE ailee_job_reg.job_id IN (
                 SELECT DISTINCT j.job_id FROM( 
-                    SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.keyskill REGEXP concat('[[:<:]](', REPLACE(rp.post_skill, ',', '|'), ')[[:>:]]') AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+                    SELECT jr.job_id FROM ailee_job_reg jr,ailee_skill s 
+                    WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.keyskill REGEXP concat('[[:<:]](', REPLACE(GROUP_CONCAT(s.skill_id), ',', '|'), ')[[:>:]]') AND s.skill like '". $searchkeyword ."' AND s.is_delete = '0' AND s.status = '1'
 
                 UNION
 
-                SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_title = rp.post_name AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+                SELECT jr.job_id FROM ailee_job_reg jr,ailee_job_title jt WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_title = jt.title_id AND jt.name LIKE '". $searchkeyword ."' AND jt.is_delete = '0' AND jt.status = '1'
 
                 UNION
 
-                SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_industry = rp.industry_type AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+                SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_job_industry ji WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_industry = ji.industry_type AND ji.industry_name LIKE '". $searchkeyword ."' AND ji.is_delete = '0' AND ji.status = '1'
+                ) as j ORDER BY j.job_id DESC
+
+                UNION 
+
+                SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_cities ct WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.city_id = ct.city_id AND ct.city_name LIKE '". $searchplace ."' AND ct.is_delete = '0' AND ct.status = '1'
+                ) as j ORDER BY j.job_id DESC
+
+                UNION 
+
+                SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_states st WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.state_id = st.state_id AND st.state_name LIKE '". $searchplace ."' AND st.status = '1'
                 ) as j ORDER BY j.job_id DESC
 
             ) AND ailee_job_reg.is_delete = '0' AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10'" . $sql_filter;
 
         $sql .= " ORDER BY job_id DESC";
         if($limit != '') {
-            $sql .= " LIMIT $start,$limit";
+            $sql .= " LIMIT $start, $limit";
         }
 
         // echo $sql;exit;

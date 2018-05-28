@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="recruiterListApp" ng-controller="recruiterListController">
     <head>
         <title><?php echo $title; ?></title>
         <?php echo $head; ?> 
@@ -113,114 +113,76 @@
                                     <div class="">
                                         <h3>Job Title</h3>
                                     </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">PHP Developer<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Mobile App developer<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Banking<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        
-                                    </ul>
-                                    <p class="text-right p10"><a href="#">More Categories</a></p>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="titles in recruiterTitleFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span>{{titles.name | capitalize}}
+                                                        <span class="pull-right">({{titles.count}})</span>
+                                                    </span>
+                                                    <input class="titlescheckbox" type="checkbox" name="{{titles.name}}" value="{{titles.title_id}}" style="height: 12px;" [attr.checked]="(titles.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
                                 </div>
                                 <div class="left-search-box list-type-bullet">
                                     <div class="">
-                                        <h3>Top Categories</h3>
+                                        <h3>Top Industry</h3>
                                     </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Admin<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Banking<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        
-                                    </ul>
-                                    <p class="text-right p10"><a href="#">More Categories</a></p>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="industry in recruiterIndustryFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span>{{industry.industry_name | capitalize}}
+                                                        <span class="pull-right">({{industry.count}})</span>
+                                                    </span>
+                                                    <input class="industrycheckbox" type="checkbox" name="{{industry.industry_name}}" value="{{industry.industry_id}}" style="height: 12px;" [attr.checked]="(industry.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>                                        
+                                        </ul>
+                                    </div>
+                                    <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
                                 </div>
                                 <div class="left-search-box list-type-bullet">
                                     <div class="">
                                         <h3>Top Cities</h3>
                                     </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">Ahmedabad<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">New York<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Adelaide<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Sydney<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Lahore<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                       
-                                        
-                                    </ul>
-                                    <p class="text-right p10"><a href="#">More Cities</a></p>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="cities in recruiterCityFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span>{{cities.city_name | capitalize}}
+                                                        <span class="pull-right">({{cities.count}})</span>
+                                                    </span>
+                                                    <input class="citiescheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- <p class="text-right p10"><a href="#">More Cities</a></p> -->
                                 </div>
                                 <div class="left-search-box list-type-bullet">
                                     <div class="">
                                         <h3>Skills</h3>
                                     </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                    </ul>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="skill in recruiterSkillFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span>{{skill.skill | capitalize}}
+                                                        <span class="pull-right">({{skill.count}})</span>
+                                                    </span>
+                                                    <input class="skillcheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>      
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="left-search-box">
                                     <div class="accordion" id="accordion3">
@@ -231,39 +193,11 @@
                                             <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
                                                 <div class="accordion-inner">
                                                     <ul class="search-listing">
-                                                        <li>
-                                                            <label class="control control--checkbox">0 to 1 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">1 to 2 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">2 to 3 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">3 to 4 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">4 to 5 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">More than 5 year
-                                                                <input type="checkbox">
+                                                        <li ng-repeat="experience in recruiterExperienceFilterList">
+                                                            <label class="control control--checkbox">
+                                                                <span>{{experience.name | capitalize}}
+                                                                </span>
+                                                                <input class="experiencecheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
@@ -371,13 +305,18 @@
         <?php echo $footer; ?>
         <!-- END FOOTER -->
         <!-- FIELD VALIDATION JS START -->
+
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
             var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
             var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var app = angular.module('recruiterListApp', ['ui.bootstrap']);
         </script>        
         <!-- FIELD VALIDATION JS END -->
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -387,15 +326,16 @@
         <?php
             /*if (IS_REC_JS_MINIFY == '0') {
                 ?>
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/recommen_candidate.js'); ?>"></script>
-        <?php
-            } else {
-                ?>
-        <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/recommen_candidate.js'); ?>"></script>
-        <?php }*/ ?>
+                <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+                <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+                <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/recommen_candidate.js'); ?>"></script>
+                <?php
+                    } else {
+                        ?>
+                <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
+                <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
+                <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/recommen_candidate.js'); ?>"></script>
+            <?php }*/ 
+        ?>
     </body>
 </html>

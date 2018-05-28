@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html ng-app="recruiterSearchListApp" ng-controller="recruiterSearchListController">
 <head>
     <title><?php echo $title; ?></title>
     <?php echo $head; ?> 
@@ -29,9 +30,8 @@
         <div class="user-midd-section" id="paddingtop_fixed">
             <div class="container padding-360">
                 <div class="">
-
-
-                    <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt"><div class="">
+                    <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt">
+                        <div class="">
                             <div class="full-box-module">   
                                 <div class="profile-boxProfileCard  module">
                                     <div class="profile-boxProfileCard-cover"> 
@@ -50,29 +50,24 @@
                                                 } else {
                                                     ?>
                                                     <img src="<?php echo base_url(WHITEIMAGE); ?>" class="bgImage" alt="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>" >
-                                                    <?php
-                                                }
-                                                ?>
-                                                </a>
+                                                <?php } ?>
                                             </div>
+                                        </a>
+                                            <!-- </div> -->
                                     </div>
                                     <div class="profile-boxProfileCard-content clearfix">
                                         <div class="left_side_box_img buisness-profile-txext">
-
                                             <a title="Recruiter Profile" class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('recruiter/profile/' . $recdata['user_id']); ?>" title="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
 
                                                 <?php
                                                 $filename = $this->config->item('rec_profile_thumb_upload_path') . $recdata['recruiter_user_image'];
                                                 $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                                                if ($recdata['recruiter_user_image'] != '' && $info) {
+                                                if ($recdata['recruiter_user_image'] != '' && $info)        {
                                                     ?>
                                                     <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL . $recdata['recruiter_user_image']; ?>" alt="<?php echo $recdata['recruiter_user_image']; ?>" >
                                                     <?php
                                                 } else {
-
-
-
                                                     $a = $recdata['rec_firstname'];
                                                     $acr = substr($a, 0, 1);
 
@@ -81,23 +76,15 @@
                                                     ?>
                                                     <div class="post-img-profile">
                                                         <?php echo ucfirst(strtolower($acr)) . ucfirst(strtolower($acr1)); ?>
-
                                                     </div>
 
-        <!-- <img src="<?php //echo base_url(NOIMAGE);  ?>" alt="<?php //echo $recdata[0]['rec_firstname'] . ' ' . $recdata[0]['rec_lastname'];  ?>">
-                                                    --> 
-
-                                                    <?php
-                                                }
-                                                ?>
+                                                <?php } ?>
                                             </a>
                                         </div>
                                         <div class="right_left_box_design ">
                                             <span class="profile-company-name ">
                                                 <a href="<?php echo site_url('recruiter/profile'); ?>" title="<?php echo ucfirst(strtolower($recdata['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata['rec_lastname'])); ?>">   <?php echo ucfirst(strtolower($recdata['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata['rec_lastname'])); ?></a>
                                             </span>
-
-
                                             <div class="profile-boxProfile-name">
                                                 <a href="<?php echo site_url('recruiter/profile/' . $recdata['user_id']); ?>" title="<?php echo ucfirst(strtolower($recdata['designation'])); ?>">
                                                     <?php
@@ -115,27 +102,109 @@
                                                 </li>
                                                 <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/save-candidate'); ?>">Saved </a>
                                                 </li>
-
                                             </ul>
                                         </div>
                                     </div>
                                 </div>                             
                             </div>
+                            <div class="left-search-box list-type-bullet">
+                                <div class="">
+                                    <h3>Job Title</h3>
+                                </div>
+                                <ul class="search-listing">
+                                    <li ng-repeat="titles in recruiterTitleFilterList">
+                                        <label class="control control--checkbox">
+                                            <span>{{titles.name | capitalize}}
+                                                <span class="pull-right">({{titles.count}})</span>
+                                            </span>
+                                            <input class="titlescheckbox" type="checkbox" name="{{titles.name}}" value="{{titles.title_id}}" style="height: 12px;" [attr.checked]="(titles.isselected) ? 'checked' : null" autocomplete="false">
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
+                            </div>
+                            <div class="left-search-box list-type-bullet">
+                                <div class="">
+                                    <h3>Top Industry</h3>
+                                </div>
+                                <ul class="search-listing">
+                                    <li ng-repeat="industry in recruiterIndustryFilterList">
+                                        <label class="control control--checkbox">
+                                            <span>{{industry.industry_name | capitalize}}
+                                                <span class="pull-right">({{industry.count}})</span>
+                                            </span>
+                                            <input class="industrycheckbox" type="checkbox" name="{{industry.industry_name}}" value="{{industry.industry_id}}" style="height: 12px;" [attr.checked]="(industry.isselected) ? 'checked' : null" autocomplete="false">
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </li>                                        
+                                </ul>
+                                <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
+                            </div>
+                            <div class="left-search-box list-type-bullet">
+                                <div class="">
+                                    <h3>Top Cities</h3>
+                                </div>
+                                <ul class="search-listing">
+                                    <li ng-repeat="cities in recruiterCityFilterList">
+                                        <label class="control control--checkbox">
+                                            <span>{{cities.city_name | capitalize}}
+                                                <span class="pull-right">({{cities.count}})</span>
+                                            </span>
+                                            <input class="citiescheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <p class="text-right p10"><a href="#">More Cities</a></p>
+                            </div>
+                            <div class="left-search-box list-type-bullet">
+                                <div class="">
+                                    <h3>Skills</h3>
+                                </div>
+                                <ul class="search-listing">
+                                    <li ng-repeat="skill in recruiterSkillFilterList">
+                                        <label class="control control--checkbox">
+                                            <span>{{skill.skill | capitalize}}
+                                                <span class="pull-right">({{skill.count}})</span>
+                                            </span>
+                                            <input class="skillcheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </li>      
+                                </ul>
+                            </div>
+                            <div class="left-search-box">
+                                <div class="accordion" id="accordion3">
+                                    <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                            <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo" aria-expanded="true">Required Experience</a></h3>
+                                        </div>
+                                        <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
+                                            <div class="accordion-inner">
+                                                <ul class="search-listing">
+                                                    <li ng-repeat="experience in recruiterExperienceFilterList">
+                                                        <label class="control control--checkbox">
+                                                            <span>{{experience.name | capitalize}}
+                                                                <span class="pull-right">({{experience.count}})</span>
+                                                            </span>
+                                                            <input class="experiencecheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
+                                                            <div class="control__indicator"></div>
+                                                        </label>
+                                                    </li>
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                </div>
+                            </div>
 
-                              <?php echo $left_footer; ?>
+                            <?php echo $left_footer; ?>
                               
                             <div  class="add-post-button">
-
                                 <a class="btn btn-3 btn-3b" href="<?php echo base_url('recruiter/add-post'); ?>" title="Recruiter Add Post"><i class="fa fa-plus" aria-hidden="true"></i>Post a Job</a>
                             </div>
-                          
                         </div>
-
                     </div>
-
-
-                    <!-- <?php //echo "<pre>"; print_r($postdetail);//die();  ?> -->
-                    <!--- search end -->
 
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
                         <div class="common-form">
@@ -242,39 +311,38 @@
     <!-- BEGIN FOOTER -->
     <?php echo $footer; ?>
     <!-- END FOOTER -->
-</body>
-
-</html>
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 <script>
-                                        var base_url = '<?php echo base_url(); ?>';
-                                        var skill = '<?php echo $this->input->get('skills'); ?>';
-                                        var place = '<?php echo $this->input->get('searchplace'); ?>';
-
+    var base_url = '<?php echo base_url(); ?>';
+    var skill = '<?php echo $this->input->get('skills'); ?>';
+    var place = '<?php echo $this->input->get('searchplace'); ?>';
+    var header_all_profile = '<?php echo $header_all_profile; ?>';
+    var app = angular.module('recruiterSearchListApp', ['ui.bootstrap']);
 </script>
-
-
 
 
 <!-- FIELD VALIDATION JS END -->
 <?php
-if (IS_REC_JS_MINIFY == '0') {
+// if (IS_REC_JS_MINIFY == '0') {
     ?>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>">
+    </script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_search.js'); ?>"></script>
     <?php
-} else {
+// } else {
     ?>
-    <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/rec_search.js'); ?>"></script>
-<?php } ?>
+    <!-- <script src="<?php //echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
+    <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/recruiter/rec_search.js'); ?>"></script> -->
+<?php //} ?>
 
-<script>
-    var header_all_profile = '<?php echo $header_all_profile; ?>';
-</script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>">
-       
+       </script>
+       </body>
+
+</html>
