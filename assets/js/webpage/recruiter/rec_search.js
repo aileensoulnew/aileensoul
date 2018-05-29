@@ -72,7 +72,7 @@ app.controller('recruiterSearchListController', function ($scope, $http) {
             filter_selected_data += "&industry_id=" + industry;
         }
         if(skill != ""){
-            filter_selected_data += "&slill_id=" + skill;
+            filter_selected_data += "&skill_id=" + skill;
         }
         if(experience != ""){
             filter_selected_data += "&experience_id=" + experience;
@@ -110,7 +110,16 @@ $(document).ready(function () {
     });
 });
 var isProcessing = false;
-function recommen_candidate_post(pagenum) {
+var ajax_Post;
+function recommen_candidate_post(from,filter_selected_data,pagenum) {
+    if(from == "filter" ){
+        if(isProcessing){
+            ajax_Post.abort();
+            isProcessing = false;
+        }
+        $('.job-contact-frnd').html('');
+        $('#loader').show();
+    }
     if (isProcessing) {
         /*
          *This won't go past this condition while
@@ -120,7 +129,7 @@ function recommen_candidate_post(pagenum) {
         return;
     }
     isProcessing = true;
-    $.ajax({
+    ajax_Post = $.ajax({
         type: 'POST',
         url: base_url + "recruiter/recruiter_search_candidate?page=" + pagenum + "&skill="  + encodeURIComponent(skill) + "&place=" + place + filter_selected_data,
         data: {total_record: $("#total_record").val()},
@@ -134,9 +143,13 @@ function recommen_candidate_post(pagenum) {
         },
         complete: function () {
             $('#loader').hide();
+            $('.loader').remove();
         },
         success: function (data) {
             $('.loader').remove();
+            if(from == "filter"){
+                $('.job-contact-frnd').html('');
+            }
             $('.job-contact-frnd').append(data);
 
             // second header class add for scroll
