@@ -43,6 +43,8 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
                             <?php
                         }
                         ?>
+						<li><a title="Sitemap" tabindex="0" href="#" target="_blank">Report</a></li>
+						<li><a title="Sitemap" tabindex="0" href="#" target="_blank">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="ftr-copuright text-center pt10 pb20 fw">
