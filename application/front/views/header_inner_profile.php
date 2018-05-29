@@ -215,7 +215,7 @@ if($browser == "Firefox")
                                 <div class="dropdown-menu"></div>
                             </li>
                         <li class="dropdown user-id">
-                            <a href="#" title="<?php echo $session_user['aileenuser_firstname']; ?>" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="javascript:void(0);" title="<?php echo $session_user['aileenuser_firstname']; ?>" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <?php
                                     if ($session_user['aileenuser_userimage'] != '')
                                     {?>

@@ -656,6 +656,16 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 $("#job_apply_userid").val('');
                 $("#job_save").val('');
             });
+            jQuery(document).ready(function($) {
+                $(".right-header li.user-id a").click(function(e){
+                    $(".dropdown").removeClass("open");
+                    $(this).next('ul.profile-dropdown').toggle();
+                    e.stopPropagation();
+                });
+                /*$(".right-header ul li.dropdown a").click(function(e){
+                    $('.right-header ul.dropdown-menu').hide();
+                });*/
+            });
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
