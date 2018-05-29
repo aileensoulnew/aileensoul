@@ -1132,7 +1132,7 @@ footer ul li a:hover{
 /***  sub header  ***/
 .sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding-top:54px; position:fixed; background:#fff; z-index:99;}
 .sub-header .sub-menu{padding:10px 0; margin:0; width:100%; float:left;}
-.sub-header .sub-menu li{list-style-type:none; float:left; padding:0px 25px; margin-bottom:0;}
+.sub-header .sub-menu li{list-style-type:none; float:left; padding:0px 20px; margin-bottom:0;}
 .sub-header .sub-menu li:first-child{padding-left:0;}
 .sub-header .sub-menu li a{font-size:16px; color:#5c5c5c;}
 .sub-header .sub-menu li .dropdown-title a:hover{color:#1b8ab9; text-decoration: underline;}
@@ -1176,9 +1176,10 @@ border: 1px solid #1b8ab9;}
 .sub-header .dropdown.open .dropdown-menu.account{width:180px; padding-top:0;}
 .sub-header .dropdown.open .dropdown-menu.account li:first-child{padding:10px; border-bottom:1px solid #d2d2d2; font-size:16px;}
 .sub-header .job-search-box1{float:right;}
-.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:5px 10px 0 0; }
+.sub-header .job-search-box1 fieldset.sec_h2 {width: 210px; float:left; margin:5px 10px 0 0; }
 .sub-header .job-search-box1 fieldset.sec_h2 input{border:1px solid #c0c0c0; height:30px;}
-.sub-header .new-search-btn{float:left; width:30px; height:30px; margin-top:5px; border:1px solid #c0c0c0; border-radius:4px; padding:0;}
+.sub-header .new-search-btn{float:left; width:30px; height:30px; margin-top:5px; border:1px solid #c0c0c0; border-radius:3px; padding:0;}
+.sub-header .new-search-btn:hover{background:#eaeaea;}
 .sub-header .new-search-btn label i{background:none; padding:5px 4px 4px 7px;}
 
 .icon-delete,.icon-delete-white,.icon-edit-profile,.icon-edit-profile-white,.icon-logout,.icon-logout-white,.icon-settings,.icon-settings-white,.icon-view-profile,.icon-view-profile-white{
@@ -1416,6 +1417,19 @@ max-width: inherit;
 
 svg path{
 	fill: #5c5c5c;
+}
+.job-search-box1 input{border-radius:3px;}
+.job-search-box1 input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #7b7b7b !important;
+}
+.job-search-box1 input::-moz-placeholder { /* Firefox 19+ */
+  color: #000 !important;
+}
+.job-search-box1 input:-ms-input-placeholder { /* IE 10+ */
+  color: #7b7b7b !important;
+}
+.job-search-box1 input:-moz-placeholder { /* Firefox 18- */
+  color: #000 !important;
 }
 /***  register body  ***/
 .registerbody .header{background:none; position:relative; border-bottom:none;}
