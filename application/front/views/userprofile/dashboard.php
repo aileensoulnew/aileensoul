@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="media-box latest_pdf">
+        <div class="media-box articles-cs">
             <div class="dash-left-title">
                 <h3><a href="<?php echo base_url(); ?>{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article</a></h3>
             </div>
