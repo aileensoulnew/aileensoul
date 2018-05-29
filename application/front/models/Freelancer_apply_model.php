@@ -72,4 +72,153 @@ class Freelancer_apply_model extends CI_Model {
         return $result_array;
     }
 
+    function freelancerFields($limit = '5',$page = "") {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;$sql = "";
+
+        $this->db->select('count(fp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug,ji.industry_image')->from('job_industry ji');
+        $this->db->join('freelancer_post fp', 'fp.post_field_req = ji.industry_id', 'left');
+        $this->db->where('ji.status', '1');
+        $this->db->where('ji.is_delete', '0');
+        $this->db->where('fp.status', '1');
+        $this->db->where('fp.is_delete', '0');
+        $this->db->group_by('fp.post_field_req');
+        $this->db->order_by('count', 'desc');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        foreach ($result_array as $k => $v) {
+            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$result_array[$k]['industry_image']))
+            {
+                $result_array[$k]['industry_image'] = "job_industry_image_default.png";
+            }
+        }
+        return $result_array;
+    }
+
+    function get_fa_skills($limit = '',$page = "") {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+
+        $sql = "SELECT count(fp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_freelancer_post fp WHERE FIND_IN_SET(s.skill_id,fp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+
+        $query = $this->db->query($sql);
+
+        $faSkills = $query->result_array();
+        foreach ($faSkills as $k => $v) {
+            if(!file_exists(SKILLS_IMG_PATH."/".$faSkills[$k]['skill_image']))
+            {
+                $faSkills[$k]['skill_image'] = "skills_default.png";
+            }
+        }
+        
+        $ret_array['fa_skills'] = $faSkills;
+        $ret_array['total_record'] = $this->get_fa_skills_total_rec();
+        return $ret_array;
+    }
+
+    function get_fa_skills_total_rec() {        
+
+        $sql = "SELECT count(fp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_freelancer_post fp WHERE FIND_IN_SET(s.skill_id,fp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
+
+        $query = $this->db->query($sql);
+        $return_array = $query->result_array();
+        return count($return_array);
+    }
+
+    function is_fa_skills($keyword = "")
+    {
+        $this->db->select('s.skill_id,s.skill,s.skill_slug')->from('skill s');
+        $this->db->where('s.status', '1');
+        $this->db->where('s.type', '1');        
+        $this->db->where('s.skill_slug LIKE BINARY "'.$keyword.'"');
+        $query = $this->db->get();        
+        $return_array = $query->row_array();
+        return $return_array;
+    }
+
+    function is_fa_field($keyword = "")
+    {
+        $this->db->select('ji.industry_id,ji.industry_name,ji.industry_slug')->from('job_industry ji');        
+        $this->db->where('ji.status', '1');
+        $this->db->where('ji.is_delete', '0');
+        $this->db->where('ji.is_other', '0');        
+        $this->db->where('ji.industry_slug LIKE BINARY "'.$keyword.'"');
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit;
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    function ajax_project_list_no_login($userid = "",$fa_skills = array(),$fa_fields = array(),$category_id = "",$skill_id = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5',$keyword = "",$search_location_arr = array())
+    {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain";
+        $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
+        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+        if(isset($fa_skills) && !empty($fa_skills)){            
+            $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
+        }
+        else if(isset($fa_fields) && !empty($fa_fields)){            
+            $this->db->where('post_field_req',$fa_fields['industry_id']);
+        }
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1'));
+        $this->db->group_by('fp.post_skill');
+        $this->db->order_by('fp.post_id','desc');
+        if($limit != "")
+        {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
+            $result_array[$key]['fullname'] = $firstname;
+
+            $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
+            $result_array[$key]['industry_name'] = $industry_name;
+        }
+        //return $result_array;
+        $retur_arr = array();
+        $retur_arr['fa_projects'] = $result_array;
+        $retur_arr['total_record'] = $this->ajax_project_list_no_login_tot_rec($userid,$fa_skills,$fa_fields,$category_id,$skill_id,$period_filter,$exp_fil,$keyword,$search_location_arr);
+        return $retur_arr;
+    }
+
+    function ajax_project_list_no_login_tot_rec($userid = "",$fa_skills = array(),$fa_fields = array(),$category_id = "",$skill_id = "",$period_filter = "",$exp_fil = "",$keyword = "",$search_location_arr = array())
+    {
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req";
+        $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
+        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+        if(isset($fa_skills) && !empty($fa_skills)){            
+            $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
+        }
+        else if(isset($fa_fields) && !empty($fa_fields)){            
+            $this->db->where('post_field_req',$fa_fields['industry_id']);
+        }
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1'));
+        $this->db->group_by('fp.post_skill');
+        
+        $query = $this->db->get();
+        //echo $this->db->last_query();exit;
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
+
 }

@@ -147,4 +147,94 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['category_otherdata'] = $this->common->select_data_by_condition('category', $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $this->load->view('freelancer_apply_live/freelancer_apply_create_profile', $this->data);
     }
+
+    public function freelancerFields() {
+        $limit = $_GET['limit'];
+        $freelancerFields = $this->freelancer_apply_model->freelancerFields($limit);
+        echo json_encode($freelancerFields);        
+    }
+
+    public function freelancerSkills() {
+        $limit = $_GET['limit'];
+        $freelancerSkills = $this->freelancer_apply_model->get_fa_skills($limit);
+        echo json_encode($freelancerSkills);
+    }
+
+    public function freelance_apply_field_cat_no_login($search = "",$ser_location = "")
+    {
+        $this->data['keyword'] = $search;
+        $this->data['search_location'] = $ser_location;
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Aileensoul";
+        $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
+        /*$this->data['category_id'] = $category_id['industry_id'];
+        $this->data['q'] = $_GET['q'];
+        $this->data['l'] = $_GET['l'];*/
+        $this->load->view('freelancer_apply_live/fa_field_cat_list_no_login', $this->data);
+    }
+
+    public function ajax_project_list_no_login()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $category_id = (isset($_POST['field_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");
+        
+        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
+        $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
+
+        $limit = 5;
+        $keyword = trim($_GET['search']);
+        $search_location = trim($_GET['search_location']);
+
+        $fa_skills = $this->freelancer_apply_model->is_fa_skills($keyword);
+        $fa_fields = $this->freelancer_apply_model->is_fa_field($keyword);
+        /*print_r($fa_skills);
+        print_r($fa_fields);
+        exit;*/
+        $search_location_arr = array();
+
+        $searchFA = $this->freelancer_apply_model->ajax_project_list_no_login($userid,$fa_skills,$fa_fields,$category_id,$skill_id,$period_filter,$exp_fil,$page,$limit,$keyword,$search_location_arr);
+
+        echo json_encode($searchFA);
+    }
+
+    public function view_more_freelancer_apply()
+    {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Freelance Apply | Aileensoul";
+
+        $this->load->view('freelancer_apply_live/view_more_freelancer_apply', $this->data);
+    }
 }

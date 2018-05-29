@@ -86,90 +86,13 @@
                         <h3>Fields</h3>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3" ng-if="FAFields.length != 0" ng-repeat="faField in FAFields" ng-init="FAIndex=$index">
                             <div class="all-cat-box">
-                                <a href="#">
+                                <a href="<?php echo base_url(); ?>freelance-jobs/{{faField.industry_slug}}">
                                     <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">IT Sector</p>
-                                    <span>50 jobs</span>
+                                    <img src="<?php echo JOB_INDUSTRY_IMG_PATH."/";?>{{faField.industry_image}}">
+                                    <p class="">{{faField.industry_name}}</p>
+                                    <span>{{faField.count}} jobs</span>
                                     </div>
                                 </a>
                             </div>
@@ -186,94 +109,18 @@
                         <h3>Categories</h3>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+
+                        <div class="col-md-3" ng-if="FASkills.length != 0" ng-repeat="faSkills in FASkills" ng-init="FASIndex=$index">
                             <div class="all-cat-box">
-                                <a href="#">
+                                <a href="<?php echo base_url(); ?>freelance-jobs/{{faSkills.skill_slug}}">
                                     <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">PHP</p>
-                                    <span>50 jobs</span>
+                                    <img src="<?php echo SKILLS_IMG_PATH."/";?>{{faSkills.skill_image}}">
+                                    <p class="">{{faSkills.skill}}</p>
+                                    <span>{{faSkills.count}} jobs</span>
                                     </div>
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">HTML</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">Css</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">Java Script</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">Photo shop</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">Laravel</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">Bootstrap</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="all-cat-box">
-                                <a href="#">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo base_url(); ?>assets/n-images/cat-1.png">
-                                    <p class="">Word Press</p>
-                                    <span>50 jobs</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        </div>               
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
                         <p class="p20 text-center"><a href="#" class="btn-1">View More</a></p>
@@ -285,7 +132,7 @@
                     
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Start Your Freelance Career with Aileensoul</h2>
-                        <p><a href="#" class="btn5">Create Freelancer Profile</a></p>
+                        <p><a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn5">Create Freelancer Profile</a></p>
                     </div>
                 </div>
             </div>
