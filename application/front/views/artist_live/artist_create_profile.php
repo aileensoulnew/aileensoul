@@ -48,8 +48,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="skills[]" id="skills" tabindex="10" class="multi-select-button" multiple ng-model="user.skills">
-                                            <option value="" disabled="" selected="selected">Select Category*</option>
+                                        <select name="skills[]" id="skills" class="multi-select-button" tabindex="10" multiple ng-model="user.skills">
                                             <?php                             
                                             foreach($art_category as $cnt){ 
                                                 if($art_category1)
@@ -72,11 +71,9 @@
                                         </select>
                                     </span>
 
-                                    <div id="other_category" class="other_category" style="display: none;">                                      
-                                        <fieldset class="full-width <?php if($artname) {  ?> error-msg <?php } ?>">
-                                        <label>Other category:<span style="color:red">*</span></label>
-                                        <input name="othercategory"  type="text" id="othercategory" tabindex="2" placeholder="Other category" value="" onkeyup= "return removevalidation();" ng-model="user.othercategory"/>                                     
-                                 </div>
+                                    <div id="other_category" class="other_category" style="display: none;">                                        
+                                        <input name="othercategory"  type="text" id="othercategory" tabindex="2" placeholder="Other skill" value="" onkeyup= "return removevalidation();" ng-model="user.othercategory"/>
+                                    </div>
 
                                 </div>
                             </div>
@@ -134,3 +131,58 @@
         </div>
     </div>
 </div>
+<script src="<?php echo base_url('assets/js/jquery.multi-select.js?ver=' . time()); ?>"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#skills').multiSelect({
+            noneText: "Select Category*"
+        });
+    });
+    function otherchange(cat_id) {
+        if (cat_id == 26) {
+            var active = document.querySelector(".multi-select-container");
+            active.classList.remove("multi-select-container--open");
+            //$("#other_category").show();
+        }
+        else
+        {
+            //$("#other_category").hide();
+        }
+    }
+
+    $('#country').on('change',function(){ 
+        var countryID = $(this).val();
+        if(countryID){
+            $.ajax({
+                type:'POST',
+                url: base_url + "artist/ajax_data",
+                //url:'<?php echo base_url() . "artist/ajax_data"; ?>',
+                data:'country_id='+countryID,
+                success:function(html){
+                    $('#state').html(html);
+                    $('#city').html('<option value="">Select state first</option>'); 
+                }
+            }); 
+        }else{
+            $('#state').html('<option value="">Select country first</option>');
+            $('#city').html('<option value="">Select state first</option>'); 
+        }
+    });
+    
+    $('#state').on('change',function(){
+        var stateID = $(this).val();
+        if(stateID){
+            $.ajax({
+                type:'POST',
+                url: base_url + "artist/ajax_data",
+                //url:'<?php echo base_url() . "artist/ajax_data"; ?>',
+                data:'state_id='+stateID,
+                success:function(html){
+                    $('#city').html(html);
+                }
+            }); 
+        }else{
+            $('#city').html('<option value="">Select state first</option>'); 
+        }
+    });
+</script>
