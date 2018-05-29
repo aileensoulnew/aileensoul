@@ -605,6 +605,7 @@ class Job_live extends MY_Controller {
         $contition_array = array('is_delete' => '0', 'industry_name' => "Others", 'is_other' => '0');
         $search_condition = "((status = '1'))";
         $this->data['other_industry'] = $this->common->select_data_by_search('job_industry', $search_condition, $contition_array, $data = 'industry_id,industry_name', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+         $this->data['user_profession_data'] = $this->user_model->getUserProfessionData($userid,"*");        
         $this->load->view('job_live/job_create_profile', $this->data);
     }
 

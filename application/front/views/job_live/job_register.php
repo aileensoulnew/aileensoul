@@ -142,6 +142,6 @@
         </script>        
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/job_regi_main.js?ver=' . time()) ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
+       
     </body>
 </html>

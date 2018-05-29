@@ -244,8 +244,8 @@ if($browser == "Firefox")
                                         <?php
                                     } ?>
                                 <span class="pr-name"><?php
-                                    if (isset($session_user['aileenuser_firstname'])) {
-                                        echo ucfirst($session_user['aileenuser_firstname']);
+                                    if (isset($userData['first_name'])) {
+                                        echo ucfirst($userData['first_name']);
                                     }
                                     ?></span>
                             </a>

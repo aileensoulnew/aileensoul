@@ -111,7 +111,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" value="" placeholder="Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobTitle" ng-keyup="jobTitle()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue">
+                                    <input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" placeholder="Enter Job Title*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobTitle" ng-keyup="jobTitle()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" ng-init="user.jobTitle = '<?php echo $user_profession_data['name']; ?>'">
                                     <div id="jttooltip" class="tooltip-custom" style="display: none;">
                                         Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager
                                     </div>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" id="skills2" style="text-transform: capitalize;" name="skills" tabindex="9" size="90" placeholder="Enter SKills*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobSkill" ng-keyup="jobSkill()" typeahead="item as item.value for item in skillSearchResult | filter:$viewValue">
+                                    <input class="form-control" id="skills2" style="text-transform: capitalize;" name="skills" tabindex="9" size="90" placeholder="Enter SKills*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.skills">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
@@ -137,7 +137,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">                                   
-                                   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off" ng-keyup="cityList()" ng-model="user.cityList" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                                   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.cities" autocomplete="off">
                                    <div id="lotooltip" class="tooltip-custom" style="display: none;">
                                         Enter the location where you want to work
                                     </div>
@@ -159,3 +159,4 @@
         </div>
     </div>
 </div>
+ <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
