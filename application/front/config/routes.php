@@ -492,7 +492,7 @@ $route['artist/art_information_insert'] = "artist/art_information_insert";
 $route['recruiter/create-account'] = "recruiter/recruiter_register_new";
 $route['recruiter/general-info'] = "recruiter/recruiter_register_new";
 $route['recruiter/educational-info'] = "recruiter/recruiter_register_new";
-$route['recruiter/registration'] = "recruiter/recruiter_register_new";
+$route['recruiter/signup'] = "recruiter/recruiter_register_new";
 
 $route['business-profile/create-account'] = "business_profile_live/business_register_new";
 $route['business-profile/basic-info'] = "business_profile_live/business_register_new";
@@ -555,7 +555,8 @@ $route['recruiter/signup/live-post'] = "recruiter/rec_reg";
 $route['recruiter/basic-information'] = "recruiter/rec_basic_information";
 $route['recruiter/company-information'] = "recruiter/company_info_form";
 
-$route['recruiter/home'] = "recruiter_live/recommen_candidate";
+// $route['recruiter/home'] = "recruiter_live/recommen_candidate";
+$route['recommended-candidates'] = "recruiter_live/recommen_candidate";
 $route['recruiter/reactivateacc'] = "recruiter_live/reactivateacc";
 //$route['recruiter/add-post-live'] = "recruiter/add_post_login";
 
@@ -563,8 +564,8 @@ $route['recruiter/reactivateacc'] = "recruiter_live/reactivateacc";
 $route['recruiter/profile'] = "recruiter_live/rec_profile";
 $route['recruiter/profile/(:any)'] = "recruiter_live/rec_profile/$1";
 
-$route['recruiter/save-candidate'] = "recruiter_live/save_candidate";
-$route['recruiter/save-candidate/(:any)'] = "recruiter_live/save_candidate/$1";
+$route['recruiter/saved-candidate'] = "recruiter_live/save_candidate";
+$route['recruiter/saved-candidate/(:any)'] = "recruiter_live/save_candidate/$1";
 
 $route['recruiter/post'] = "recruiter/rec_post";
 $route['recruiter/post/(:any)'] = "recruiter_live/rec_post/$1";
@@ -575,15 +576,19 @@ $route['recruiter/post/(:any)'] = "recruiter_live/rec_post/$1";
 $route['(:any)-job-vacancy-in-(:any)'] = "recruiter/live_post";
 $route['(:any)-job-vacancy-in-(:any)/(:any)'] = "recruiter/live_post/$1";
 
-$route['recruiter/add-post'] = "recruiter/add_post";
+// $route['recruiter/add-post'] = "recruiter/add_post";
+$route['post-job'] = "recruiter/add_post";
 
 $route['recruiter/post-insert'] = "recruiter/add_post";
 
 $route['recruiter/edit-post'] = "recruiter/edit_post";
 $route['recruiter/edit-post/(:any)'] = "recruiter/edit_post/$1";
-$route['recruiter/apply-list/(:any)'] = "recruiter/view_apply_list/$1";
+$route['recruiter/applied-candidates/(:any)'] = "recruiter/view_apply_list/$1";
 
-$route['recruiter/search'] = "recruiter_live/recruiter_search";
+// $route['recruiter/search'] = "recruiter_live/recruiter_search";
+$route['recruiter/search/(:any)'] = "recruiter_live/recruiter_search/$1";
+$route['recruiter/search/candidates-in-(:any)'] = "recruiter_live/recruiter_search/''/$1";
+$route['recruiter/search/(:any)-candidates-in-(:any)'] = "recruiter_live/recruiter_search/$1/$2";
 $route['recruiter/deactivate'] = "recruiter_live/deactivate";
 
 

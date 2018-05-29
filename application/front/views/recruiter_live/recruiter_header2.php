@@ -9,7 +9,7 @@ $userid = $this->session->userdata('aileenuser');
 				<div class="col-md-6 mob-p0">
 					<ul class="sub-menu">
 						<li class="profile">
-							<a href="<?php echo base_url('recruiter/home'); ?>">
+							<a href="<?php echo base_url('recommended-candidates'); ?>">
 								<div class="sub-menu-icon">
 									
 										<svg class="not-hover" viewBox="0 0 486.988 486.988" width="17px" height="17px">
@@ -124,7 +124,8 @@ $userid = $this->session->userdata('aileenuser');
 				</div>
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
 					<div class="job-search-box1 clearfix">
-						<form action="<?php echo base_url('recruiter/search'); ?>" method="get">
+						<!-- <form action="<?php //echo base_url('recruiter/search'); ?>" method="get"> -->
+						<form onsubmit="recruitersearchSubmit()" action="javascript:void(0)" method="get">
 							<fieldset class="sec_h2">
 								<input id="tags" class="tags ui-autocomplete-input rec_search_title" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
 							</fieldset>

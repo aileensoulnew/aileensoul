@@ -233,13 +233,13 @@ class Recruiter_live extends MY_Controller {
         // REDIRECT USER TO REMAIN PROFILE END
         if (count($apply_step) >= 0) {
             if ($apply_step[0]['re_step'] == 1) {
-                redirect('recruiter/registration');
+                redirect('recruiter/signup');
             }
             if ($apply_step[0]['re_step'] == 0) {
-                redirect('recruiter/registration');
+                redirect('recruiter/signup');
             }
         } else {
-            redirect('recruiter/registration');
+            redirect('recruiter/signup');
         }
     }
 
@@ -306,7 +306,7 @@ class Recruiter_live extends MY_Controller {
         );
         $updatdata = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
         if ($updatdata) {
-            redirect('recruiter/home', refresh);
+            redirect('recommended-candidates', refresh);
         } else {
             redirect('recruiter/reactivate', refresh);
         }
@@ -399,7 +399,7 @@ class Recruiter_live extends MY_Controller {
 
     // RECRUITER SEARCH START
     public function recruiter_search($searchkeyword = " ", $searchplace = " ") {
-        if ($this->input->get('search_submit')) {
+        /*if ($this->input->get('search_submit')) {
             $searchkeyword = $this->input->get('skills');
             $searchplace = $this->input->get('searchplace');
         } else {
@@ -413,17 +413,18 @@ class Recruiter_live extends MY_Controller {
                 $searchkeyword = urldecode($searchkeyword);
                 $searchplace = urldecode($searchplace);
             }
-        }
+        }*/
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
         if ($searchkeyword == "" && $searchplace == "") {
-            redirect('recruiter/home', refresh);
+            redirect('recommended-candidates', refresh);
         }
         $rec_search = trim($searchkeyword, ' ');
         $this->data['keyword'] = $rec_search;
         $search_place = $searchplace;
-        $this->data['key_place'] = $searchplace;
+        // $this->data['key_place'] = $searchplace;
+        $this->data['key_place'] = trim($searchplace, ' ');
         $cache_time = $this->db->get_where('cities', array('city_name' => $search_place))->row()->city_id;
-        $this->data['keyword1'] = $search_place;
+        $this->data['keyword1'] = trim($search_place,'  ');
         //RECRUITER SEARCH END 1-9
         $title = '';
         if ($searchkeyword && $search_place) {
@@ -435,6 +436,11 @@ class Recruiter_live extends MY_Controller {
         }
         $this->data['title'] = $title . " | Recruiter Profile - Aileensoul";
         $this->data['head'] = $this->load->view('head', $this->data, TRUE);
+
+        $this->data['keyword'] = str_replace("-",",",$this->data['keyword']);
+        $this->data['keyword1'] = str_replace("-",",",$this->data['keyword1']);
+        $this->data['keyword'] = str_replace("+"," ",$this->data['keyword']);
+        $this->data['keyword1'] = str_replace("+"," ",$this->data['keyword1']);
 
         //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA START
         if ($this->session->userdata('aileenuser')) {

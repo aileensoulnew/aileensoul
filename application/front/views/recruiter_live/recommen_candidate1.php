@@ -100,7 +100,7 @@
                                                 </li>                                
                                                 <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'post') { ?> class="active" <?php } ?>><a title="Post" href="<?php echo base_url('recruiter/post'); ?>">Post</a>
                                                 </li>
-                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/save-candidate'); ?>">Saved </a>
+                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/saved-candidate'); ?>">Saved </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -211,7 +211,7 @@
                             <?php echo $left_footer; ?>
                               
                             <div  class="add-post-button">
-                                <a class="btn btn-3 btn-3b" href="<?php echo base_url('recruiter/add-post'); ?>" title="Recruiter Add Post"><i class="fa fa-plus" aria-hidden="true"></i>Post a Job</a>
+                                <a class="btn btn-3 btn-3b" href="<?php echo base_url('post-job'); ?>" title="Recruiter Add Post"><i class="fa fa-plus" aria-hidden="true"></i>Post a Job</a>
                             </div>
                         </div>
                     </div>
@@ -223,7 +223,7 @@
                                 <h3>
                                     Search result of 
                                     <?php
-                                    if ($keyword != "" && $keyword1 == "") {
+                                    if ($keyword != "" && (trim($keyword1) == "" || $keyword1)) {
                                         echo '"' . $keyword . '"';
                                     } elseif ($keyword == "" && $keyword1 != "") {
                                         echo '"' . $keyword1 . '"';
@@ -328,8 +328,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script>
         var base_url = '<?php echo base_url(); ?>';
-        var skill = '<?php echo $this->input->get('skills'); ?>';
-        var place = '<?php echo $this->input->get('searchplace'); ?>';
+        // var skill = '<?php //echo $this->input->get('skills'); ?>';
+        // var place = '<?php //echo $this->input->get('searchplace'); ?>';
+        var skill = '<?php echo $keyword; ?>';
+        var place = '<?php echo $keyword1; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         var app = angular.module('recruiterSearchListApp', ['ui.bootstrap']);
     </script>

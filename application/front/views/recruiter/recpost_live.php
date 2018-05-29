@@ -131,7 +131,7 @@
                                                 </li>                                
                                                 <li id="rec_post_home" <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'post') { ?> class="active" <?php } ?>><a title="Post" href="<?php echo base_url('recruiter/post'); ?>">Post</a>
                                                 </li>
-                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/save-candidate'); ?>">Saved </a>
+                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/saved-candidate'); ?>">Saved </a>
                                                 </li>
 
                                             </ul>
@@ -155,13 +155,13 @@
                         <!--left bar box end-->
                         <div  class="add-post-button mob-block">
                             <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
-                                <a class="btn btn-3 btn-3b" id="rec_post_job2" href="<?php echo base_url('recruiter/add-post'); ?>" title="Post a Job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+                                <a class="btn btn-3 btn-3b" id="rec_post_job2" href="<?php echo base_url('post-job'); ?>" title="Post a Job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
                             <?php } ?>
                         </div>
                         <div class="mob-none">
                             <div  class="add-post-button">
                                 <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
-                                    <a class="btn btn-3 btn-3b" id="rec_post_job1" href="<?php echo base_url('recruiter/add-post'); ?>" title="Post a Job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+                                    <a class="btn btn-3 btn-3b" id="rec_post_job1" href="<?php echo base_url('post-job'); ?>" title="Post a Job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
                                 <?php } ?>
                             </div>
                         </div>
@@ -465,7 +465,7 @@
                                                                                 $countt = count($apply_candida);
                                                                                 ?>
 
-                                                                                <a href="<?php echo base_url() . 'recruiter/apply-list/' . $post['post_id'] ?>" class="button" title="Applied  Candidate : <?php echo $countt ?>">Applied  Candidate : <?php echo $countt ?></a>
+                                                                                <a href="<?php echo base_url() . 'recruiter/applied-candidates/' . $post['post_id'] ?>" class="button" title="Applied  Candidate : <?php echo $countt ?>">Applied  Candidate : <?php echo $countt ?></a>
                                                                             </li>
                                                                         <?php } else { ?>
                                                                             <li class="fr">

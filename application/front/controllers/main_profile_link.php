@@ -68,7 +68,7 @@
                 $this->job_profile_set = 1;
             }
             if(!empty($recruiter_profile_count) &&  count($recruiter_profile_count)>0){
-                $this->recruiter_profile_link = base_url("recruiter/home");
+                $this->recruiter_profile_link = base_url("recommended-candidates");
                 $this->recruiter_profile_set = 1;
             }
             if(!empty($freelancer_hire_profile_count) &&  count($freelancer_hire_profile_count)>0){

@@ -111,7 +111,7 @@
                                                 </li>                                
                                                 <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'post') { ?> class="active" <?php } ?>><a title="Post" href="<?php echo base_url('recruiter/post'); ?>">Post</a>
                                                 </li>
-                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/save-candidate'); ?>">Saved </a>
+                                                <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" class="padding_less_right" href="<?php echo base_url('recruiter/saved-candidate'); ?>">Saved </a>
                                                 </li>
 
                                             </ul>
@@ -124,7 +124,7 @@
                               
                             <div  class="add-post-button">
 
-                                <a class="btn btn-3 btn-3b" href="<?php echo base_url('recruiter/add-post'); ?>" title="Recruiter Add Post"><i class="fa fa-plus" aria-hidden="true"></i>Post a Job</a>
+                                <a class="btn btn-3 btn-3b" href="<?php echo base_url('post-job'); ?>" title="Recruiter Add Post"><i class="fa fa-plus" aria-hidden="true"></i>Post a Job</a>
                             </div>
                           
                         </div>

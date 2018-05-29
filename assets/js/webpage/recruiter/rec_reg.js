@@ -203,7 +203,7 @@ $(document).ready(function () {
                 var userid = response.userid;
                 if (response.okmsg == "ok") {
                    
-                    window.location = base_url + "recruiter/registration";
+                    window.location = base_url + "recruiter/signup";
                 } else {
                     $("#register_error").fadeIn(1000, function () {
                         $("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
@@ -410,9 +410,9 @@ function submitrecruiterForm()
                     // if(response.segment == 'live-post') {
                     //     window.location = base_url + "recruiter/post";
                     // }else{
-                    //     window.location = base_url + "recruiter/add-post";
+                    //     window.location = base_url + "post-job";
                     // }
-                       window.location = base_url + "recruiter/home";
+                       window.location = base_url + "recommended-candidates";
                 } else {
                     window.location = base_url + "recruiter/";
                 }
@@ -550,7 +550,7 @@ function forgot_close() {
                 if (response.data == "ok") {
                   //  alert("login");
                     $("#btn1").html('<img src="' + base_url + 'images/btn-ajax-loader.gif" /> &nbsp; Login ...');
-                    window.location = base_url + "recruiter/home";
+                    window.location = base_url + "recommended-candidates";
                 } else if (response.data == "password") {
                     $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
                     document.getElementById("password_login").classList.add('error');

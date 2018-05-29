@@ -1,7 +1,7 @@
 <!-- menubar --> 
 <?php
 $userid = $this->session->userdata('aileenuser');
-$id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(3)))->row()->user_id;
+$id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(2)))->row()->user_id;
 ?>
 <div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
     <div class=" right-side-menu art-side-menu padding_less_right job_edit_pr right-menu-jr <?php
@@ -20,7 +20,7 @@ if ($userid != $id) {
                 <?php } ?>  
                 <?php
                 $userid = $this->session->userdata('aileenuser');
-                $contition_array = array('status' => '1', 'user_id' => $userid);
+                $contition_array = array('status' => '1', 'user_id' => $id);
                 $slugdata = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                 ?>
 
@@ -52,14 +52,14 @@ if ($userid != $id) {
             </ul>
 
             <?php
-            if ($this->uri->segment(3) != "") {
+            if ($this->uri->segment(2) != "") {
                 if ($userid != $id) {
                     ?>
                     <div class="flw_msg_btn fr">
                         <ul>
                             <?php
                             if ($userid) {
-                                $id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(3), 'is_delete' => '0', 'status' => '1'))->row()->user_id;
+                                $id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(2), 'is_delete' => '0', 'status' => '1'))->row()->user_id;
 
                                 $contition_array = array('from_id' => $userid, 'to_id' => $id, 'save_type' => '1', 'status' => '0');
                                 $data = $this->common->select_data_by_condition('save', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');

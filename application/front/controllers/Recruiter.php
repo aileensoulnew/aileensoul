@@ -44,11 +44,11 @@ class Recruiter extends MY_Controller {
 			if ($this->data['recdata']['re_step'] == 1) {
 				redirect('recruiter/company-information', refresh);
 			} else if ($this->data['recdata']['re_step'] == 3) {
-				redirect('recruiter/home', refresh);
+				redirect('recommended-candidates', refresh);
 			} else if ($this->data['recdata']['re_step'] == 0) {
-				redirect('recruiter/registration', refresh);
+				redirect('recruiter/signup', refresh);
 			} else {
-				redirect('recruiter/registration', refresh);
+				redirect('recruiter/signup', refresh);
 			}
 		}
 	}
@@ -65,13 +65,13 @@ class Recruiter extends MY_Controller {
 
 		if (count($apply_step) >= 0) {
 			if ($apply_step[0]['re_step'] == 1) {
-				redirect('recruiter/registration');
+				redirect('recruiter/signup');
 			}
 			if ($apply_step[0]['re_step'] == 0) {
-				redirect('recruiter/registration');
+				redirect('recruiter/signup');
 			}
 		} else {
-			redirect('recruiter/registration');
+			redirect('recruiter/signup');
 		}
 	}
 
@@ -448,7 +448,7 @@ class Recruiter extends MY_Controller {
 				$insert_id = $this->common->update_data($data, 'recruiter', 'rec_id', $this->data['recdata']['rec_id']);
 
 				if ($insert_id) {
-					redirect('recruiter/home', refresh);
+					redirect('recommended-candidates', refresh);
 				} else {
 					redirect('recruiter', refresh);
 				}
@@ -471,7 +471,7 @@ class Recruiter extends MY_Controller {
 				$insert_id = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
 				if ($insert_id) {
 					if ($this->data['recdata']['re_step'] == 3) {
-						redirect('recruiter/home', refresh);
+						redirect('recommended-candidates', refresh);
 					} else {
 						redirect('recruiter/company-information', refresh);
 					}
@@ -796,7 +796,7 @@ class Recruiter extends MY_Controller {
 
 		if ($insert_id) {
 			$this->session->set_flashdata('success', 'your post inserted successfully');
-			redirect('recruiter/home', 'refresh');
+			redirect('recommended-candidates', 'refresh');
 		} else {
 			$this->session->flashdata('error', 'Sorry!! Your data not inserted');
 			redirect('recruiter', 'refresh');
@@ -1134,7 +1134,7 @@ class Recruiter extends MY_Controller {
 		$updatdata = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
 		if ($updatdata) {
 
-			redirect('recruiter/home', refresh);
+			redirect('recommended-candidates', refresh);
 		} else {
 
 			redirect('recruiter/reactivate', refresh);
@@ -1911,7 +1911,7 @@ class Recruiter extends MY_Controller {
 				$postdata .= '<h4 class="page-heading  product-listing" style="border:0px;"> It will takes only few minutes.</h4>';
 				$postdata .= '</div>';
 				$postdata .= '<div  class="add-post-button add-post-custom">';
-				$postdata .= '<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'recruiter/add-post"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>';
+				$postdata .= '<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'post-job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>';
 				$postdata .= '</div>';
 				$postdata .= '</div>';
 			} else {
@@ -2341,7 +2341,7 @@ class Recruiter extends MY_Controller {
 						$apply_candida = $this->common->select_data_by_condition('job_apply', $condition_array, $data, $short_by = '', $order_by = '', $limit, $offset, $join_str, $groupby = '');
 						$countt = count($apply_candida);
 
-						$rec_post .= '<a title="Applied Candidate" href="' . base_url() . 'recruiter/apply-list/' . $post['post_id'] . '" class="btn4">Applied  Candidate :' . $countt . '</a>';
+						$rec_post .= '<a title="Applied Candidate" href="' . base_url() . 'recruiter/applied-candidates/' . $post['post_id'] . '" class="btn4">Applied  Candidate :' . $countt . '</a>';
 						$rec_post .= '</p> </div> </div>';
 					}
 				} else {
@@ -2397,7 +2397,7 @@ class Recruiter extends MY_Controller {
 		}
 		$this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 		if ($searchkeyword == "" && $searchplace == "") {
-			redirect('recruiter/home', refresh);
+			redirect('recommended-candidates', refresh);
 		}
 
 		$rec_search = trim($searchkeyword, ' ');
@@ -2675,7 +2675,7 @@ class Recruiter extends MY_Controller {
 							<img src="' . JOB_PROFILE_THUMB_UPLOAD_URL . $p['job_user_image'] . '" alt="' . $p[0]['fname'] . ' ' . $p[0]['lname'] . '">
 							</a>';
 						} else {
-							$return_html .= '<a href="' . base_url('recruiter/registration') . '" title="' . $p['fname'] . ' ' . $p['lname'] . '"> 
+							$return_html .= '<a href="' . base_url('recruiter/signup') . '" title="' . $p['fname'] . ' ' . $p['lname'] . '"> 
 							<img src="' . JOB_PROFILE_THUMB_UPLOAD_URL . $p['job_user_image'] . '" alt="' . $p[0]['fname'] . ' ' . $p[0]['lname'] . '">
 							</a>';
 						}
@@ -2693,7 +2693,7 @@ class Recruiter extends MY_Controller {
 						if ($recruiter) {
 							$return_html .= '<a href="' . base_url('job-profile/' . $p['slug'] . '') . '" title="' . $p['fname'] . ' ' . $p['lname'] . '">';
 						} else {
-							$return_html .= '<a href="' . base_url('recruiter/registration') . '" title="' . $p['fname'] . ' ' . $p['lname'] . '">';
+							$return_html .= '<a href="' . base_url('recruiter/signup') . '" title="' . $p['fname'] . ' ' . $p['lname'] . '">';
 						}
 					}
 
@@ -2709,7 +2709,7 @@ class Recruiter extends MY_Controller {
 					if ($recruiter) {
 						$return_html .= '<a style="font-size: 19px;font-weight: 600;" class="post_name" href="' . base_url('job-profile/' . $p['slug'] . '') . '">';
 					} else {
-						$return_html .= '<a style="font-size: 19px;font-weight: 600;" class="post_name" href="' . base_url('recruiter/registration') . '">';
+						$return_html .= '<a style="font-size: 19px;font-weight: 600;" class="post_name" href="' . base_url('recruiter/signup') . '">';
 					}
 				} else {
 					$return_html .= '<a style="font-size: 19px;font-weight: 600;" class="post_name" href="javascript:void(0)" onClick="login_profile()">';
@@ -3014,7 +3014,7 @@ class Recruiter extends MY_Controller {
 							if ($recruiter) {
 								$return_html .= '<a href="' . base_url('chat/abc/2/1/' . $p['iduser']) . '">';
 							} else {
-								$return_html .= '<a href="' . base_url('recruiter/registration') . '">';
+								$return_html .= '<a href="' . base_url('recruiter/signuprecruiter/signup') . '">';
 							}
 						} else {
 							$return_html .= '<a href="javascript:void(0)" onClick="login_profile()">';
@@ -3958,9 +3958,9 @@ class Recruiter extends MY_Controller {
 		} elseif ($this->input->post('cancel2')) {
 			redirect('recruiter/profile', refresh);
 		} elseif ($this->input->post('cancel3')) {
-			redirect('recruiter/save-candidate', refresh);
+			redirect('recruiter/saved-candidate', refresh);
 		} elseif ($this->input->post('cancel4')) {
-			redirect('recruiter/add-post', refresh);
+			redirect('post-job', refresh);
 		}
 
 		if (empty($_FILES['profilepic']['name'])) {
@@ -4843,7 +4843,7 @@ class Recruiter extends MY_Controller {
 			$recuser = $this->db->select('user_id')->get_where('recruiter', array('user_id' => $userid))->row()->user_id;
 		}
 		if ($recuser) {
-			redirect('recruiter/home', refresh);
+			redirect('recommended-candidates', refresh);
 		} else {
 			$this->load->view('recruiter/rec_reg', $this->data);
 		}
@@ -6134,7 +6134,7 @@ class Recruiter extends MY_Controller {
 			$postdata .= '<h4 class="page-heading  product-listing" style="border:0px;"> It will takes only few minutes.</h4>';
 			$postdata .= '</div>';
 			$postdata .= '<div  class="add-post-button add-post-custom">';
-			$postdata .= '<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'recruiter/add-post"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>';
+			$postdata .= '<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'post-job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>';
 			$postdata .= '</div>';
 			$postdata .= '</div>';
 		} else {
@@ -6681,7 +6681,7 @@ class Recruiter extends MY_Controller {
 			$postdata .= '<h4 class="page-heading  product-listing" style="border:0px;"> It will takes only few minutes.</h4>';
 			$postdata .= '</div>';
 			$postdata .= '<div  class="add-post-button add-post-custom">';
-			$postdata .= '<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'recruiter/add-post"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>';
+			$postdata .= '<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'post-job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>';
 			$postdata .= '</div>';
 			$postdata .= '</div>';
 		} else {

@@ -39,7 +39,14 @@
     ?>
     <body class="page-container-bg-solid page-boxed botton_footer">
         <?php 
-            echo $job_header2;
+            $userid = $this->session->userdata('aileenuser');
+            $id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(2)))->row()->user_id;
+            if ($userid != $id) {
+                echo $recruiter_header2;
+            }
+            else{
+                echo $job_header2;
+            }
         ?>
         <section class="custom-row">
             <div class="container  " id="paddingtop_fixed">

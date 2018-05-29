@@ -252,7 +252,7 @@
             </div>
             <div  class="add-post-button mob-block">
                 <?php if ($returnpage == '') { ?>
-                    <a title="Post A Job" class="btn btn-3 btn-3b" href="<?php echo base_url('recruiter/add-post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+                    <a title="Post A Job" class="btn btn-3 btn-3b" href="<?php echo base_url('post-job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
                 <?php } ?>
             </div>
             <!-- menubar --> 
@@ -284,7 +284,7 @@
 
                     <div  class="add-post-button">
                         <?php if ($returnpage == '') { ?>
-                            <a title="Recruiter Add Post" class="btn btn-3 btn-3b" href="<?php echo base_url('recruiter/add-post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+                            <a title="Recruiter Add Post" class="btn btn-3 btn-3b" href="<?php echo base_url('post-job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
                         <?php } ?>
                     </div>
                 </div>

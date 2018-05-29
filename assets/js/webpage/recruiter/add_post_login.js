@@ -750,7 +750,7 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (response) {
                             if (response.data == "ok") {
-                                window.location = base_url + "recruiter/home";
+                                window.location = base_url + "recommended-candidates";
                             }
                         }
                     });
@@ -807,7 +807,7 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (response) {
                             if (response.data == "ok") {
-                                window.location = base_url + "recruiter/registration/live-post";
+                                window.location = base_url + "recruiter/signup/live-post";
                             }
                         }
                     });
@@ -1057,7 +1057,7 @@ $(document).ready(function () {
                         dataType: "json",
                         success: function (response) {
                             if (response.data == "ok") {
-                                window.location = base_url + "recruiter/registration/live-post";
+                                window.location = base_url + "recruiter/signup/live-post";
                             }
                         }
                     });

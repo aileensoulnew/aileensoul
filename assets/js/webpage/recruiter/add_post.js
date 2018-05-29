@@ -701,7 +701,7 @@ function home_profile(clicked_id, searchkeyword, searchplace) {
             {
                 // alert("hsjdh");
 
-                window.location = base_url + "recruiter/home";
+                window.location = base_url + "recommended-candidates";
             } else if (clicked_id == 2)
             {
                 window.location = base_url + "recruiter/profile";
@@ -970,7 +970,7 @@ function leave_page(clicked_id)
         //alert("hi");
         if (clicked_id == 1)
         {
-            location.href = base_url + "recruiter/home";
+            location.href = base_url + "recommended-candidates";
         }
         if (clicked_id == 2)
         {

@@ -242,7 +242,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
 <?php if (($this->uri->segment(1) == 'recruiter') && ($this->uri->segment(2) == 'post' || $this->uri->segment(2) == 'profile' || $this->uri->segment(2) == 'add-post' || $this->uri->segment(2) == 'save-candidate') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) { ?>
 
-                                        <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" href="<?php echo base_url('recruiter/save-candidate'); ?>">Saved </a>
+                                        <li <?php if ($this->uri->segment(1) == 'recruiter' && $this->uri->segment(2) == 'save-candidate') { ?> class="active" <?php } ?>><a title="Saved Candidate" href="<?php echo base_url('recruiter/saved-candidate'); ?>">Saved </a>
                                         </li> 
 
 
@@ -270,7 +270,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             </div>
             <div  class="add-post-button mob-block">
                 <?php if ($this->uri->segment(3) == $userid) { ?>
-                    <a class="btn btn-3 btn-3b" href="<?php echo base_url('recruiter/add-post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+                    <a class="btn btn-3 btn-3b" href="<?php echo base_url('post-job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
 <?php } ?>
             </div>
             <!-- menubar --> 
@@ -309,7 +309,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                     <div  class="add-post-button">
                         <?php if($this->uri->segment(3) == $userid) { ?>
-                            <a class="btn btn-3 btn-3b" href="<?php echo base_url('recruiter/add-post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+                            <a class="btn btn-3 btn-3b" href="<?php echo base_url('post-job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
 <?php } ?>
                     </div>
                 </div>
