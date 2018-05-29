@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/artistic.css?ver='.time()); ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style>
@@ -86,8 +87,7 @@
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js_min/jquery.multi-select.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>        
 
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 
@@ -142,7 +142,7 @@
             });
         </script>        
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist-live/artistic_common.js?ver='.time()); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist-live/profile.js?ver='.time()); ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/artistic_regi_main.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>

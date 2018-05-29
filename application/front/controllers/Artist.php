@@ -16188,6 +16188,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         $data = array();
 
         $_POST = json_decode(file_get_contents('php://input'), true);
+        // print_r($_POST);exit;
 
         if (empty($_POST['first_name']))
             $errors['errorFname'] = 'Firstname is required.';
@@ -16207,7 +16208,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
             $lastname = trim($_POST['last_name']);
             $email = trim($_POST['email']);
             $phoneno = trim($_POST['phoneno']);
-            $skills = trim($_POST['skills']);
+            $skills = $_POST['skills'];
             $country = trim($_POST['country']);
             $state = trim($_POST['state']);
             $city = trim($_POST['city']);
@@ -16235,14 +16236,14 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 }
             }
 
-            $checkval = $this->input->post('skills');
-            if (in_array(26, $checkval)) {
+            //$checkval = $this->input->post('skills');
+            if (in_array(26, $skills)) {
                 $otherid = $insertid;
             } else {
                 $otherid = '';
             }
 
-            $category = $this->input->post('skills');
+            $category = $skills;//$this->input->post('skills');
             $category = implode(',', $category);
 
 
