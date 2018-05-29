@@ -87,7 +87,7 @@
 .right_left_box_design{padding:5px 9px 0 5px !important;}
 .right_left_box_design .profile-company-name{padding-bottom:1px;}
 .profile-company-name a{font-size:16px !important; letter-spacing:1px;}
-.left_box_menubar{ width:33.33%}
+.left_box_menubar li{ width:33.33%}
 .left_box_menubar li a{display:inline-block; font-size:13px; letter-spacing:1px;}
 .left_box_menubar li:first-child a{padding-left:0;}
 .left_box_menubar li:last-child a{text-align:right; padding-right:0;}
@@ -96,7 +96,7 @@
 .profile-boxProfileCard-cover a img{min-height:110px;}
 .job-search-box1 fieldset{padding:0;}
 .job-search-box1 label i{font-size:16px;}
-
+.job-contact-frnd .add-post-button{text-align:center; padding-top:15px;}
 .bui_art_left_box .profile-boxProfileCard-content::before{top:47px;}
 
 
@@ -1898,7 +1898,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .post-field label{width: 100%;}
 tags-input .tags{box-shadow: none; -webkit-box-shadow:none; -moz-box-shadow:none; border-radius: 4px; border:1px solid #cccccc;}
 tags-input .tags.focused{box-shadow: none; -webkit-box-shadow:none; -moz-box-shadow:none;}
-.post-opportunity-field, #field, #ask_field {padding-left: 5px; color: #7a7a7a;}
+.post-opportunity-field, #ask_field {padding-left: 5px; color: #7a7a7a;}
 .select-field-custom select{-webkit-appearance: none;
    -moz-appearance:    none;
    appearance:         none;}
@@ -2032,6 +2032,30 @@ body.reg-form-cus{padding-bottom:0;}
 .reg-form-cus .email-note-cus img{width:18px;}
 .reg-form-cus #art-registration .email-note-cus img{width:15px;}
 .reg-form-cus .final-reg-form{color:#848484;}
+
+.reg-form-cus .login label.error{margin-top:0; padding-left:0 !important;}
+.reg-form-cus input.error{border-width:0px 0px 1px 0px !important;}
+.reg-form-cus select.error{border-width:0px 0px 1px 0px !important;}
+.reg-form-cus textarea.error{border-width:0px 0px 1px 0px !important;}
+.reg-form-cus select.label{padding-left:0 !important; }
+.reg-form-cus .dob .error{bottom:-15px;}
+.reg-form-cus .gender-custom .error{bottom:-15px;}
+.reg-form-cus .cus_field .error{bottom:auto;}
+.reg-form-cus .login p a.btn1:hover{color:#fff; text-decoration:none;}
+.reg-form-cus .inner-form .login{float:left;}
+.reg-form-cus .inner-form .login p.submit-btn{width:100%; float:left; padding:20px 0; }
+.reg-form-cus .bus-upload-img{padding-top:15px; padding-bottom:15px; width:100%; float:left;}
+.reg-form-cus .form-group input:focus+label.error{color: #1b8ab9 !important;}
+.reg-form-cus .form-group textarea:focus+label.error{color: #1b8ab9 !important;}
+.reg-form-cus .clr-c.fs12{width:100%; float:left; padding-top:15px; color:#5c5c5c;}
+.reg-form-cus .active{color:#5c5c5c;}
+.reg-form-cus select.error:focus{color:#1b8ab9 !important; border-bottom:1px solid #1b8ab9 !important;}
+.reg-form-cus .multi-select-button{border-width:0 0 1px 0; border-radius:0; padding-left:0;}
+.reg-form-cus .multi-select-button::after{display:none;}
+.reg-form-cus .multi-select-menuitem{width:auto; padding-left:15px;}
+.reg-form-cus .multi-select-menuitem input{width:auto; float:left; height:22px !important;}
+.reg-form-cus .select-field-custom label.error{bottom:-15px;}
+.reg-form-cus .cus-radio-box label.error{bottom:-15px;}
 
 .main_raio [type=radio]:checked,.main_raio [type=radio]:not(:checked){
     position:absolute; left:-9999px}
@@ -2305,7 +2329,7 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.update-browser{display:none;}
 	.all-detail-box .tab-pane ul li{width:25%;}
 	.title-div ul{width:90%;}
-	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:5px 0;}
+	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:15px 0 5px;}
 	.tooltip-custom::before{display:none;}
 	.left-tooltip .tooltip-custom:before{display:none;}
 	.left-tooltip .tooltip-custom{position:relative; right:auto; width:100%; text-align:left; left:auto; padding:5px 0;}
@@ -2674,5 +2698,5 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 	.custom-user-box .custom-user-detail{width:51%;}
 }
 @media screen and (max-width: 320px) {
-
+	.reg-form-cus .login .form-group select{margin-right: 9px;}
 }
