@@ -329,12 +329,12 @@
                                     <span class="exp">
                                         <span>
                                             <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
-                                            Skils: <span dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="true">
+                                            Skils: <span dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
                                             </span>
                                         </span>
                                     </span>
                                 </p>                                
-                                <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{applypost.post_description}}" dd-text-collapse-cond="true">
+                                <p dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_description}}" dd-text-collapse-cond="false">
                                 </p>
                                 <p ng-if="applypost.industry_name != '' ">
                                     Categories : <span>{{applypost.industry_name}}</span>
