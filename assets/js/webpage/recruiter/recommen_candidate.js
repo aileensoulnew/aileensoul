@@ -77,7 +77,6 @@ app.controller('recruiterListController', function ($scope, $http) {
         if(experience != ""){
             filter_selected_data += "&experience_id=" + experience;
         }
-        console.log(filter_selected_data);
         recommen_candidate_post('filter',filter_selected_data, 1);        
     }
 });
@@ -346,7 +345,6 @@ function checkvalue(){
 	var isProcessing = false;
 	var ajax_Post;
 	function recommen_candidate_post(from,filter_selected_data,pagenum) {
-		console.log(filter_selected_data);
 		if(from == "filter" ){
 			if(isProcessing){
 				ajax_Post.abort();

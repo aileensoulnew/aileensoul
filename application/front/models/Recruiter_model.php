@@ -94,8 +94,11 @@ class Recruiter_model extends CI_Model {
         if($experience_id != ""){
             if($experience_id == 6)
             {
-                $sql_filter .= " AND ailee_job_reg.exp_y > ". $experience_id;
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NOT NULL OR ailee_job_reg.exp_y > ". $experience_id .")";
             }
+            else if($experience_id == 1){
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NULL OR ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id .")";
+            } 
             else{
                 $sql_filter .= " AND ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id;
             }
@@ -225,7 +228,10 @@ class Recruiter_model extends CI_Model {
         if($experience_id != ""){
             if($experience_id == 6)
             {
-                $sql_filter .= " AND ailee_job_reg.exp_y > ". $experience_id;
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NOT NULL OR ailee_job_reg.exp_y > ". $experience_id .")";
+            }
+            else if($experience_id == 1){
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NULL OR ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id .")";
             }
             else{
                 $sql_filter .= " AND ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id;
@@ -323,7 +329,11 @@ class Recruiter_model extends CI_Model {
         if($experience_id != ""){
             if($experience_id == 6)
             {
-                $sql_filter .= " AND ailee_job_reg.exp_y > ". $experience_id;
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NOT NULL OR ailee_job_reg.exp_y > ". $experience_id.")";
+            }
+            else if($experience_id == 1)
+            {
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NULL OR ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id .")";
             }
             else{
                 $sql_filter .= " AND ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id;
@@ -371,7 +381,7 @@ class Recruiter_model extends CI_Model {
     }
 
     // Get Filter List
-    public function get_recommen_candidate_search_total($searchkeyword = '',$searchplace = '',$city_id='', $title_id = '', $industry_id, $skill_id, $experience_id, $userid, $page = '',$limit = '5')
+    public function get_recommen_candidate_search_total($searchkeyword = '',$searchplace = '',$city_id='', $title_id = '', $industry_id, $skill_id, $experience_id, $userid, $page = '',$limit = '')
     {
         $sql_skill = "";$sql_jt = "";$sql_cn = "";$sql_it = "";     
         foreach (explode(",", $searchkeyword) as $key => $value) {
@@ -431,7 +441,11 @@ class Recruiter_model extends CI_Model {
         if($experience_id != ""){
             if($experience_id == 6)
             {
-                $sql_filter .= " AND ailee_job_reg.exp_y > ". $experience_id;
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NOT NULL OR ailee_job_reg.exp_y > ". $experience_id .")";
+            }
+            else if($experience_id == 1)
+            {
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NULL OR ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id .")";
             }
             else{
                 $sql_filter .= " AND ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id;
@@ -455,12 +469,10 @@ class Recruiter_model extends CI_Model {
 
                 SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_job_industry ji WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_industry = ji.industry_id". $sql_it ." AND ji.is_delete = '0' AND ji.status = '1'
                
-
                 UNION 
 
                 SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_cities ct WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.city_id = ct.city_id". $sql_city ." AND ct.status = '1'
                 
-
                 UNION 
 
                 SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_states st WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.state_id = st.state_id". $sql_state ." AND st.status = '1'

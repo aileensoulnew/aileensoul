@@ -204,28 +204,43 @@ var searchplace = $.trim(document.getElementById('rec_search_loc').value);
            function save_user(abc,jobid)
                         {
 
-           var saveid = document.getElementById("hideenuser"+jobid);
-         
-                $.ajax({
-        type: 'POST',
-        url: base_url +'recruiter/save_search_user',
-        data: 'user_id=' + abc + '&save_id=' + saveid.value,
-        success: function (data) {
+                // var saveid = document.getElementById("hideenuser"+jobid);
+                var saveid = document.getElementById("hideenuser"+abc);
 
-                $('.'+'saveduser'+jobid).html(data).addClass('saved');
-                                }
-                            });
-                        }
+                $.ajax({
+                    type: 'POST',
+                    url: base_url +'recruiter/save_search_user',
+                    data: 'user_id=' + abc + '&save_id=' + saveid.value,
+                    success: function (data) {
+
+                        $('.'+'saveduser'+jobid).html(data).addClass('saved');
+                    }
+                });
+            }
                  
 // save post end
 
-                        function savepopup(id,jobid) {
-                       
-                            save_user(id,jobid);
-                      
-            $('.biderror .mes').html("<div class='pop_content'>Candidate successfully saved.");
-            $('#bidmodal').modal('show');
-                        }
+            /*function savepopup(id,jobid) {
+           
+                save_user(id,jobid);
+          
+                $('.biderror .mes').html("<div class='pop_content'>Candidate successfully saved.");
+                $('#bidmodal').modal('show');
+            }*/
+            function savepopup(abc)
+            {
+                var saveid = document.getElementById("hideenuser" + abc);
+                $.ajax({
+                    type: 'POST',
+                    url: base_url +'recruiter/save_search_user',
+                    data: 'user_id=' + abc + '&save_id=' + saveid.value,
+                    success: function (data) {
+                        $('.' + 'saveduser' + abc).html(data).addClass('saved');
+                        $('.biderror .mes').html("<div class='pop_content'>Candidate successfully saved.");
+                        $('#bidmodal').modal('show');
+                    }
+                });
+            }
                     
 
 
