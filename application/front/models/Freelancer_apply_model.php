@@ -257,12 +257,14 @@ class Freelancer_apply_model extends CI_Model {
             }
             $sql .= "(".trim($sql_exp, ' OR ').") OR ";
         }
+
         $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
         $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
         $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
         $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
         $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
         $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+
         if(isset($fa_skills) && !empty($fa_skills)){            
             $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
         }
@@ -283,7 +285,7 @@ class Freelancer_apply_model extends CI_Model {
             $this->db->limit($limit,$start);
         }
         $query = $this->db->get();
-        // echo $this->db->last_query();exit;
+        //echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
             $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
@@ -292,6 +294,7 @@ class Freelancer_apply_model extends CI_Model {
             $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
             $result_array[$key]['industry_name'] = $industry_name;
         }
+        
         //return $result_array;
         $retur_arr = array();
         $retur_arr['fa_projects'] = $result_array;
@@ -371,6 +374,7 @@ class Freelancer_apply_model extends CI_Model {
         else if(isset($fa_fields) && !empty($fa_fields)){            
             $this->db->where('post_field_req',$fa_fields['industry_id']);
         }
+        $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
