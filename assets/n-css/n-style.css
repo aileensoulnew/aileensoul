@@ -2181,8 +2181,9 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 /***  end report page  ***/
 /***  faq  ***/
 .faq{padding:30px; width:100%;}
-.faq li{padding:20px 15px; border-bottom:1px solid #d2d2d2; list-style-type:none;}
-.faq li a{color:#5c5c5c;}
+.faq li{border-bottom:1px solid #d2d2d2; list-style-type:none;}
+.faq li a{color:#5c5c5c; padding:20px; display:block; }
+.faq li a img{width:20px;}
 .faq li a:hover{color:#1b8ab9;}
 /***  end faq  ***/
 
@@ -2237,7 +2238,7 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 .post-img img{border:none;}
 
 .message-box{}
-.mob-post-job{background: #fff; position: fixed; bottom: 55; width: 35px; height: 35px; z-index: 99;
+.mob-post-job{background: #fff; position: fixed; bottom: 55px; width: 35px; height: 35px; z-index: 99;
 border-radius: 100%; padding: 8px 7px 8px 9px; right: 15px; box-shadow:0 0 2px 1px #d9d9d9;}
 .mob-post-job svg path{
 	fill: #1b8ab9;
