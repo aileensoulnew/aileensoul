@@ -351,4 +351,56 @@ class Freelancer_apply_model extends CI_Model {
         return count($result_array);
     }
 
+    
+	//GET FILTER LIST
+	public function get_filter_category($limitstart = 0, $limit = 5){
+		$sql = "SELECT count(*) as count, c.category_name, c.category_id, false as isselected
+				FROM ailee_freelancer_post_reg fpr
+				LEFT JOIN ailee_category as c on c.category_id = fpr.freelancer_post_field
+				WHERE  c.category_name IS NOT NULL and fpr.status = 1 and c.category_name != 'Other' 
+				GROUP BY 
+				c.category_name
+				ORDER BY count DESC LIMIT $limitstart,$limit";
+		$query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+	}
+
+	public function get_filter_cities($limitstart = 0, $limit = 5){
+		$sql = "SELECT count(*) as count, c.city_name, c.city_id, false as isselected
+				FROM ailee_freelancer_post_reg fpr
+				LEFT JOIN ailee_cities as c on c.city_id = fpr.freelancer_post_city
+				WHERE  c.city_name IS NOT NULL and fpr.status = 1  
+				GROUP BY c.city_name
+				ORDER BY count DESC LIMIT $limitstart,$limit";
+		$query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+	}
+
+	public function get_filter_skills($limitstart = 0, $limit = 5){
+		$sql = "SELECT count(fpr.freelancer_post_reg_id) as count, s.skill_id, 
+				s.skill, s.skill_slug, s.skill_image 
+				FROM ailee_skill s,ailee_freelancer_post_reg fpr 
+				WHERE FIND_IN_SET(s.skill_id,fpr.freelancer_post_area) > 0 
+				AND s.status = '1' AND s.type = '1' AND fpr.status = '1' AND fpr.is_delete = '0' 
+				GROUP BY s.skill_id 
+				ORDER BY count DESC 
+				LIMIT $limitstart,$limit";
+
+		$query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+	}
+
+	public function get_filter_experience($limitstart = 0, $limit = 5){
+        $result[] = array('id' => '1','name' => '0 to 1 year', 'isselected' => false);
+        $result[] = array('id' => '2','name' => '1 to 2 year', 'isselected' => false);
+        $result[] = array('id' => '3','name' => '2 to 3 year', 'isselected' => false);
+        $result[] = array('id' => '4','name' => '3 to 4 year', 'isselected' => false);
+        $result[] = array('id' => '5','name' => '4 to 5 year', 'isselected' => false);
+        $result[] = array('id' => '6','name' => 'More than 5 year', 'isselected' => false);
+        return $result;
+    }
+
 }
