@@ -18,7 +18,8 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
 
-        <?php } ?>
+        <?php } ?>        
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
 
 
     </head>
@@ -1050,14 +1051,15 @@
 
         </script>
         <?php
-        if (IS_APPLY_JS_MINIFY == '0') {
+        /*if (IS_APPLY_JS_MINIFY == '0') {
             ?>
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/project_live_login.js?ver=' . time()); ?>"></script>
             <?php
         } else {
             ?>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/project_live_login.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <?php }*/ ?>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/project_live_login.js?ver=' . time()); ?>"></script>
 
 
 

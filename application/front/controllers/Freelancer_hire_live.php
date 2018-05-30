@@ -2224,7 +2224,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$slugdata = array_reverse($segment3);
 	$postid = $slugdata[0];
 	$this->data['recliveid'] = $userid = $slugdata[1];
-	$this->data['postid'] = $postid;
+	$this->data['postid'] = $postid;	
 
 	$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
 	$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,profile_background';
@@ -2240,7 +2240,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$this->data['postdata'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data, $sortby = 'freelancer_post.post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
 
-	$city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $userid))->row()->city;
+	$city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $userid))->row()->city;	
 	$cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $city))->row()->city_name;
 
 	$cache_time1 = $this->data['postdata'][0]['post_name'];
@@ -2251,16 +2251,17 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	}
 
 	if ($cityname != '') {
-		$cityname1 = '-vacancy-in-' . strtolower($this->common->clean($cityname));
+		$cityname1 = '';// '-vacancy-in-' . strtolower($this->common->clean($cityname));
 	} else {
 		$cityname1 = '';
 	}
 
 	$postname = $text . $cityname1;
+	
 	$segment3 = array_splice($segment3, 0, -2);
 	$original = implode('-', $segment3);
 	$url = $postname . '-' . $userid . '-' . $postid;
-
+// echo $original."->".$postname;exit;
 
 
 
@@ -2294,7 +2295,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	if ($this->session->userdata('aileenuser')) {
 		$this->load->view('freelancer_live/freelancer_post/hire_project', $this->data);
 	} else {
-		if ($postname == $original) {
+		if (strtolower($postname) == strtolower($original)) {
 			$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);
 		} else {
 			if ($this->data['postdata']) {

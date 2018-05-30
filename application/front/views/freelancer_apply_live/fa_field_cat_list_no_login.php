@@ -40,7 +40,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 left-header fw-479">
-                                    <h2 class="logo"><a href="#">Aileensoul</a></h2>
+                                    <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>">Aileensoul</a></h2>
                                     
                                 </div>
                                 <div class="col-md-6 col-sm-6 no-login-right fw-479">
@@ -302,11 +302,11 @@
                         <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
                             <div class="all-job-top">
                                 <div class="job-top-detail">
-                                    <h5><a href="#">{{applypost.post_name}}
+                                    <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
                                         <span ng-if="applypost.day_remain > 0">({{applypost.day_remain}} days left)</span>
                                         </a>
                                     </h5>
-                                    <p><a href="#">{{applypost.fullname | capitalize}}</a></p>
+                                    <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
                                     <p ng-if="applypost.post_rate != ''">Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
                                 </div>
                             </div>
@@ -344,8 +344,8 @@
                                 <span>Applied Persons: {{applypost.ShortListedCount}}</span>
                                 <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
                                 <p class="pull-right">
-                                    <a href="#" class="btn4">Save</a>
-                                    <a href="#" class="btn4">Apply</a>
+                                    <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
+                                    <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
                                 </p>
                             </div>
                         </div>
