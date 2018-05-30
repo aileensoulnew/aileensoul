@@ -299,6 +299,14 @@
                         <div class="page-title">
                             <h3>Recommended Projects</h3>
                         </div>
+                        <div class="user_no_post_avl ng-scope" ng-if="freepostapply.length == 0">
+                            <div class="user-img-nn">
+                                <div class="user_no_post_img">
+                                    <img src="<?php echo base_url('assets/img/no-post.png?ver=time()');?>" alt="bui-no.png">
+                                </div>
+                                <div class="art_no_post_text">No Projects Available.</div>
+                            </div>
+                        </div>
                         <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
                             <div class="all-job-top">
                                 <div class="job-top-detail">

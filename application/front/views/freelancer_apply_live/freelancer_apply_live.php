@@ -40,7 +40,7 @@
                                 </label>
                             </li>
                         </ul>
-                        <p class="text-right p10"><a href="#">More Categories</a></p>
+                        <p class="text-right p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-fields">More Categories</a></p>
                     </div>
 
                     <!-- WORK TYPE -->

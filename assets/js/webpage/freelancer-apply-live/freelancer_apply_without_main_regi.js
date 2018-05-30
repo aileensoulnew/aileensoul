@@ -10,7 +10,7 @@ app.controller('freelancerApplyController', function ($scope, $http) {
 
     function FASkills(limit = 0) {
         $http.get(base_url + "freelancer_apply_live/freelancerSkills?limit="+limit).then(function (success) {
-            $scope.FASkills = success.data.fa_skills;
+            $scope.FASkills = success.data.fa_category;
         }, function (error) {});
     }
     FASkills(8);

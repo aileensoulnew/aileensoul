@@ -156,7 +156,7 @@ class Freelancer_apply_live extends MY_Controller {
 
     public function freelancerSkills() {
         $limit = $_GET['limit'];
-        $freelancerSkills = $this->freelancer_apply_model->get_fa_skills($limit);
+        $freelancerSkills = $this->freelancer_apply_model->get_fa_category($limit);
         echo json_encode($freelancerSkills);
     }
 

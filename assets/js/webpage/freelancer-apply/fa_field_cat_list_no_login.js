@@ -130,7 +130,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
 
     function FASkills(limit = 0) {
         $http.get(base_url + "freelancer_apply_live/freelancerSkills?limit="+limit).then(function (success) {
-            $scope.FASkills = success.data.fa_skills;
+            $scope.FASkills = success.data.fa_category;
         }, function (error) {});
     }
     FASkills(fil_limit);
@@ -277,6 +277,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
 
         $.post(base_url + "freelancer_apply_live/ajax_project_list_no_login?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"category_id" : $scope.cat_fil, "skill_id": $scope.skills_fil, "worktype": $scope.worktype, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
+                $("#loader").hide();
                 $scope.searchJob = {};
                 data = JSON.parse(success);
                 $scope.$apply(function () {
