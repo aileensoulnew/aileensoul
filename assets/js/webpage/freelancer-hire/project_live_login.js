@@ -355,11 +355,15 @@ $(document).ready(function () { //aletr("hii");
 });
 
 function login_profile() {
-    $('#login').modal('show');
+    //$('#login').modal('show');
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
 }
 function register_profile() {
-    $('#login').modal('hide');
-    $('#register').modal('show');
+    // $('#login').modal('hide');
+    // $('#register').modal('show');
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
 }
 //            function register_profile_apply(postid) {
 //                $('#login').modal('hide');
