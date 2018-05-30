@@ -1338,6 +1338,7 @@ class Recruiter extends MY_Controller {
 
 		$perpage = 5;
 		$page = 1;
+		$isfilterapply = false;
 		if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
 			$page = $_GET["page"];
 		}
@@ -1345,25 +1346,30 @@ class Recruiter extends MY_Controller {
 		$city_id = '';
 		if (!empty($_GET["city_id"]) && $_GET["city_id"] != 'undefined') {
 			$city_id = $_GET["city_id"];
+			$isfilterapply = true;
 		}
 		$title_id = '';
 		if (!empty($_GET["title_id"]) && $_GET["title_id"] != 'undefined') {
 			$title_id = $_GET["title_id"];
+			$isfilterapply = true;
 		}
 
 		$industry_id = '';
 		if (!empty($_GET["industry_id"]) && $_GET["industry_id"] != 'undefined') {
 			$industry_id = $_GET["industry_id"];
+			$isfilterapply = true;
 		}
 
 		$skill_id = '';
 		if (!empty($_GET["skill_id"]) && $_GET["skill_id"] != 'undefined') {
 			$skill_id = $_GET["skill_id"];
+			$isfilterapply = true;
 		}
 
 		$experience_id = '';
 		if (!empty($_GET["experience_id"]) && $_GET["experience_id"] != 'undefined') {
 			$experience_id = $_GET["experience_id"];
+			$isfilterapply = true;
 		}
 
 		$start = ($page - 1) * $perpage;
@@ -1904,7 +1910,7 @@ class Recruiter extends MY_Controller {
 					$postdata .= '</div>';
 					$postdata .= '</div>';
 				}
-			} elseif ($recommen_candid_totrec == 0) {
+			} elseif ($recommen_candid_totrec == 0 && $isfilterapply == false) {
 				$postdata .= '<div class="text-center rio" style="border: none;">';
 				$postdata .= '<div class="no-post-title">';
 				$postdata .= '<h4 class="page-heading  product-listing" style="border:0px;">Lets create your job post.</h4>';
@@ -1918,7 +1924,6 @@ class Recruiter extends MY_Controller {
 				$postdata .= '<div class="art-img-nn">';
 				$postdata .= '    <div class="art_no_post_img">';
 				$postdata .= '<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">';
-
 				$postdata .= '</div>';
 				$postdata .= '<div class="art_no_post_text">';
 				$postdata .= 'No Recommended  Candidate  Available.';

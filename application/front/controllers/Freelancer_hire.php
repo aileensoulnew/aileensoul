@@ -796,25 +796,29 @@ class Freelancer_hire extends MY_Controller {
         $city_id = "";
         $skill_id = "";
         $experience_id = "";
-        $filter_condition = "";
+        $isfilterapply = false;
         if (!empty($_GET["category_id"]) && $_GET["category_id"] != 'undefined') {
             $category_id = $_GET["category_id"];
+            $isfilterapply = true;
         }
         if (!empty($_GET["city_id"]) && $_GET["city_id"] != 'undefined') {
             $city_id = $_GET["city_id"];
+            $isfilterapply = true;
         }
         if (!empty($_GET["skill_id"]) && $_GET["skill_id"] != 'undefined') {
             $skill_id = $_GET["skill_id"];
+            $isfilterapply = true;
         }
         if (!empty($_GET["experience_id"]) && $_GET["experience_id"] != 'undefined') {
             $experience_id = $_GET["experience_id"];
+            $isfilterapply = true;
         }
         
         $candidatefreelancer1 = $this->freelancer_hire_model->get_freelancer_rec_candidate($userid,$category_id,$city_id,$skill_id,$experience_id, $start,$perpage);
         
         $candidatefreelancer = $this->freelancer_hire_model->get_freelancer_rec_candidate_total($userid,$category_id,$city_id,$skill_id,$experience_id);
         
-        if ($candidatefreelancer['total_record'] <= 0 && $filter_condition == "") {
+        if ($candidatefreelancer['total_record'] <= 0 && $isfilterapply == false) {
             $return_html .= '<div class="text-center rio" style="border: none;">';
             $return_html .= '<div class="no-post-title">';
             $return_html .= '<h4 class="page-heading  product-listing" style="border:0px;">Lets create your project.</h4>';
@@ -867,7 +871,7 @@ class Freelancer_hire extends MY_Controller {
             $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
             $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
                
-            if (count($candidatefreelancer) > 0) {
+            if ($candidatefreelancer['total_record'] > 0) {
                 foreach ($candidatefreelancer1 as $key=>$row) {
                     $return_html .= '<div class = "profile-job-post-detail clearfix">
                         <div class = "profile-job-post-title-inside clearfix">
@@ -1098,9 +1102,7 @@ class Freelancer_hire extends MY_Controller {
             } else {
                 $return_html .= '<div class="art-img-nn">
                                                 <div class="art_no_post_img">
-
-                                                    <img alt="No freelancer" src="../assets/img/free-no1.png">
-
+                                                    <img alt="No freelancer" src="assets/img/free-no1.png">
                                                 </div>
                                                 <div class="art_no_post_text">';
                 $return_html .= $this->lang->line("no_freelancer_found");

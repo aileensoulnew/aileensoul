@@ -1104,7 +1104,7 @@ Your browser does not support the audio tag.
     }
 
 
-//freelancer hire search start
+    //freelancer hire search start
     public function freelancer_hire_index() {
         $user_id = $this->session->userdata('user_id');
         $this->load->view('freelancer_hire/freelancer_hire_search', $this->data);
@@ -1188,7 +1188,7 @@ Your browser does not support the audio tag.
         $start = ($page - 1) * $perpage;
         if ($start < 0)
             $start = 0;
-// echo $this->input->get('skills');
+        // echo $this->input->get('skills');
 
         $searchkeyword = $_GET["skill"];
         $searchplace = $_GET["place"];

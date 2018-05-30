@@ -355,8 +355,8 @@
                                             <select tabindex="106" class="month" name="selmonth" id="selmonth">
                                                 <option value="" disabled selected value>Month</option>
                                                 //<?php
-//                  for($i = 1; $i <= 12; $i++){
-//                  
+                        //                  for($i = 1; $i <= 12; $i++){
+                        //                  
                                                 ?>
                                                 <option value="1">Jan</option>
                                                 <option value="2">Feb</option>
@@ -371,8 +371,8 @@
                                                 <option value="11">Nov</option>
                                                 <option value="12">Dec</option>
                                                 //<?php
-//                  }
-//                  
+                                                //                  }
+                                                //                  
                                                 ?>
                                             </select></span>
                                         <span>
@@ -442,15 +442,10 @@
                 $('#forgotPassword').modal('show');
                 $('body').addClass('modal-open-other');   
             }
-
-
-$('.modal-close').click(function(e){ 
-    $('body').removeClass('modal-open-other'); 
-    //$('#login').modal('show');
-});
-
-
-
+            $('.modal-close').click(function(e){ 
+                $('body').removeClass('modal-open-other'); 
+                //$('#login').modal('show');
+            });
         </script>
         <script type="text/javascript">
             function login()
@@ -528,14 +523,9 @@ $('.modal-close').click(function(e){
                 }
                 /* login submit */
             });
-
-
-
         </script>
         <script>
-
             $(document).ready(function () {
-
                 $.validator.addMethod("lowercase", function (value, element, regexpr) {
                     return regexpr.test(value);
                 }, "Email Should be in Small Character");
@@ -717,10 +707,8 @@ $('.modal-close').click(function(e){
                     return false;
                 }
             });
-
         </script>
         <!-- forgot password script end -->
-
         <script type="text/javascript">
             $(document).ready(function () { //aletr("hii");
                 /* validation */
@@ -740,50 +728,43 @@ $('.modal-close').click(function(e){
                     submitHandler: submitforgotForm
                 });
                 /* validation */
-
             });
             function submitforgotForm()
-{
+            {
+                var email_login = $("#forgot_email").val();
+                var post_data = {
+                    'forgot_email': email_login,
+                        //            csrf_token_name: csrf_hash
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: base_url + 'profile/forgot_live',
+                    data: post_data,
+                    dataType: "json",
+                    beforeSend: function ()
+                    {
+                        $("#error").fadeOut();
+                            //            $("#forgotbuton").html('Your credential has been send in your register email id');
+                    },
+                    success: function (response)
+                    {
+                        if (response.data == "success") {
+                            //  alert("login");
+                            $("#forgotbuton").html(response.message);
 
-    var email_login = $("#forgot_email").val();
-
-    var post_data = {
-        'forgot_email': email_login,
-//            csrf_token_name: csrf_hash
-    }
-    $.ajax({
-        type: 'POST',
-        url: base_url + 'profile/forgot_live',
-        data: post_data,
-        dataType: "json",
-        beforeSend: function ()
-        {
-            $("#error").fadeOut();
-//            $("#forgotbuton").html('Your credential has been send in your register email id');
-        },
-        success: function (response)
-        {
-            if (response.data == "success") {
-                //  alert("login");
-                $("#forgotbuton").html(response.message);
-
-                setTimeout(function () {
-                    $('#login').modal('show');
-                     $('#forgotPassword').modal('hide');
-                      $("#forgotbuton").html('');
-                    document.getElementById("forgot_email").value = "";
-                }, 5000); // milliseconds
-
-                //window.location = base_url + "job/home/live-post";
-            } else {
-                $("#forgotbuton").html(response.message);
-
+                            setTimeout(function () {
+                                $('#login').modal('show');
+                                 $('#forgotPassword').modal('hide');
+                                  $("#forgotbuton").html('');
+                                document.getElementById("forgot_email").value = "";
+                            }, 5000); // milliseconds
+                        } else {
+                            $("#forgotbuton").html(response.message);
+                        }
+                    }
+                });
+                return false;
             }
-        }
-    });
-    return false;
-}
-
         </script>
         <script>
             $(document).on('click', '[data-toggle*=modal]', function () {
@@ -800,12 +781,9 @@ $('.modal-close').click(function(e){
         </script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
-
-
             //LEAVE PAGE AT ADD AND EDIT FREELANCER PAGE THEN PROBLEM SO BELOW CODE START
             var seg3 = '<?php echo $this->uri->segment(3); ?>';
             var seg4 = '<?php echo $this->uri->segment(4); ?>';
-
             if (seg3 == 0 && seg4 != "")
             {
                 var skill = "";
@@ -824,18 +802,16 @@ $('.modal-close').click(function(e){
                 var place = '<?php echo $this->input->get('searchplace'); ?>';
             }
             //LEAVE PAGE AT ADD AND EDIT FREELANCER PAGE THEN PROBLEM SO BELOW CODE END
-
         </script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_search_result.js?ver=' . time()); ?>"></script>
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
 
             <!--<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_search_result.js?ver=' . time()); ?>"></script>-->
-            <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>                                              
+            <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
 
         <?php } else { ?>
             <!--<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_search_result.js?ver=' . time()); ?>"></script>-->
-            <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>                                              
-
+            <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php } ?>
     </body>
 </html>

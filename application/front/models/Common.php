@@ -631,4 +631,71 @@ class Common extends CI_Model {
    return preg_replace('/-+/', '-', $string); // Removes special chars.
 }
 
+    function get_search_results($searchword = '',$searchplace = ''){
+        $sql_searchword = '';
+        $sql_searchplace = '';
+        $sql_search = '';
+        $sql_place = '';
+        $sql_final_search = '';
+
+        $sql_skill = "";
+        $sql_place = "";
+        $sql_category = "";
+        $sql_search_query = "";
+        if($searchword != ''){
+            foreach (explode(",", $searchword) as $key => $value) {
+                if($value != "")
+                {
+                    $search_val = "%". $value . "%";
+                    $sql_skill .= "skill like '". $search_val ."' OR ";
+                    $sql_category .= "category_name LIKE '". $search_val ."' OR ";
+                } 
+            }
+            if($sql_skill != ""){
+                $sql_skill = "fpr.freelancer_post_area IN 
+                                (select skill_id from ailee_skill where ". trim($sql_skill," OR ") . ")";
+            }
+            if($sql_category != ""){
+                $sql_category = "fpr.freelancer_post_area IN 
+                                (SELECT category_id FROM ailee_category WHERE ". trim($sql_category," OR ") . ")";
+            }
+
+            if($sql_skill != "" && $sql_category != ""){
+                $sql_search_query = " AND (".$sql_skill . " OR " .$sql_category .")";
+            }
+        }
+        if($searchplace != ""){
+            foreach (explode(",", $searchplace) as $key => $value) {
+                if($value != "")
+                {
+                    $sql_searchplace .= ($sql_searchplace == "") ? "AND (" : " OR";
+                    $sql_searchplace .= " city_name like '". $sql_searchplace ."'";
+                }
+            }
+            $sql_searchplace .= ($sql_searchplace == "") ? "" : ")";
+        }
+        if($searchword != "" && $searchplace !=""){
+            $sql_final_search = $sql_search_query . $sql_searchplace;
+        }else if($searchword != ""){
+            $sql_final_search = $sql_search_query;
+        }else{
+            $sql_final_search = $sql_searchplace;
+        }
+        $sql = "SELECT fpr.freelancer_post_fullname,fpr.freelancer_post_username,fpr.freelancer_post_city,
+            fpr.freelancer_post_country,fpr.freelancer_post_area,fpr.freelancer_post_field,
+            fpr.freelancer_post_skill_description,fpr.freelancer_post_hourly,fpr.freelancer_post_ratestate,
+            fpr.freelancer_post_fixed_rate,fpr.freelancer_post_work_hour,fpr.user_id,
+            fpr.freelancer_post_user_image,fpr.designation,fpr.freelancer_post_otherskill,fpr.freelancer_post_exp_month,
+            fpr.freelancer_post_exp_year,fpr.freelancer_apply_slug,fpr.freelancer_post_reg_id,fp.created_date
+            FROM ailee_freelancer_post_reg fpr 
+            LEFT JOIN ailee_freelancer_post as fp ON fp.user_id = fpr.user_id
+            LEFT JOIN ailee_cities c on c.city_id = freelancer_post_city
+            WHERE fpr.user_id != 103 AND fpr.is_delete = '0' AND fpr.status = '1'" .$sql_final_search;
+        // echo $sql;
+        // exit;
+        $query = $this->db->query($sql);
+        $result = $query->row_array();
+        return $result;
+    }
+
 }
