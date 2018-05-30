@@ -3,8 +3,8 @@
         <div class="">
             <div class="">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#"><span class="hidden-xs">Frrelance Job by</span> Categories</a></li>
-                    <li><a href="<?php echo base_url(); ?>freelance-jobs-by-fields"><span class="hidden-xs">Frrelance Job by</span> Fields</a></li>
+                    <li class="active"><a href="#"><span class="hidden-xs">Freelance Job by</span> Categories</a></li>
+                    <li><a href="<?php echo base_url(); ?>freelance-jobs-by-fields"><span class="hidden-xs">Freelance Job by</span> Fields</a></li>
                 </ul>
             </div>
             <div class="all-detail-box">
