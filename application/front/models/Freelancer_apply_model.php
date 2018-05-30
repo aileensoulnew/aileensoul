@@ -100,7 +100,42 @@ class Freelancer_apply_model extends CI_Model {
         return $result_array;
     }
 
-    function get_fa_skills($limit = '',$page = "") {
+    function get_fa_field($limit = '',$page = "") {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+
+        $sql = "SELECT count(fp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug, ji.industry_image FROM ailee_job_industry ji,ailee_freelancer_post fp WHERE fp.post_field_req = ji.industry_id AND ji.status = '1' AND ji.is_delete = '0' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY fp.post_field_req ORDER BY count DESC";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+
+        $query = $this->db->query($sql);
+
+        $fa_category = $query->result_array();
+        foreach ($fa_category as $k => $v) {
+            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$fa_category[$k]['industry_image']))
+            {
+                $fa_category[$k]['industry_image'] = "job_industry_image_default.png";
+            }
+        }
+        
+        $ret_array['fa_fields'] = $fa_category;
+        $ret_array['total_record'] = $this->get_fa_field_total_rec();
+        return $ret_array;
+    }
+
+    function get_fa_field_total_rec() {        
+
+        $sql = "SELECT count(fp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug, ji.industry_image FROM ailee_job_industry ji,ailee_freelancer_post fp WHERE fp.post_field_req = ji.industry_id AND ji.status = '1' AND ji.is_delete = '0' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY fp.post_field_req ORDER BY count DESC";
+
+        $query = $this->db->query($sql);
+        $return_array = $query->result_array();
+        return count($return_array);
+    }
+
+    function get_fa_category($limit = '',$page = "") {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
@@ -121,12 +156,12 @@ class Freelancer_apply_model extends CI_Model {
             }
         }
         
-        $ret_array['fa_skills'] = $faSkills;
-        $ret_array['total_record'] = $this->get_fa_skills_total_rec();
+        $ret_array['fa_category'] = $faSkills;
+        $ret_array['total_record'] = $this->get_fa_category_total_rec();
         return $ret_array;
     }
 
-    function get_fa_skills_total_rec() {        
+    function get_fa_category_total_rec() {        
 
         $sql = "SELECT count(fp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_freelancer_post fp WHERE FIND_IN_SET(s.skill_id,fp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
 

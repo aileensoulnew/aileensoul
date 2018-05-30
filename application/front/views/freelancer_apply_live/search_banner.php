@@ -1,3 +1,6 @@
+<?php
+    $userid = $this->session->userdata('aileenuser');
+?>
 <div class="search-banner hidden" ng-controller="searchFreelancerApplyController">
     <div class="container">
         <div class="text-right pt20">
@@ -41,13 +44,37 @@
 
 <!-- NEW DESIGN -->
 <div class="search-banner" ng-controller="searchFreelancerApplyController">
+    <?php
+    if($userid == "")
+    {
+    ?>
+    <header>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 left-header fw-479">
+                        <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>">Aileensoul</a></h2>
+                        
+                    </div>
+                    <div class="col-md-6 col-sm-6 no-login-right fw-479">
+                        <a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
+                        <a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Account</a>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <?php
+    }
+    ?>
     <div class="container">
         <div class="text-right pt20">
-            <?php if($isdeactivatefreelancer){ ?>
+            <?php /*if($isdeactivatefreelancer){ ?>
                 <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a>
             <?php }else{ ?>
                 <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
-            <?php } ?>
+            <?php }*/ ?>
         </div>
         <div class="row">
             <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">

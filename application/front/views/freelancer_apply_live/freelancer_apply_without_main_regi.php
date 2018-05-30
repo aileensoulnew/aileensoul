@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
-                        <p class="p20 text-center"><a href="#" class="btn-1">View More</a></p>
+                        <p class="p20 text-center"><a href="<?php echo base_url(); ?>freelance-jobs-by-fields" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                         </div>               
                     </div>
                     <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
-                        <p class="p20 text-center"><a href="#" class="btn-1">View More</a></p>
+                        <p class="p20 text-center"><a href="<?php echo base_url(); ?>freelance-jobs-by-categories" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>

@@ -101,7 +101,7 @@
                         
                         <div class="left-search-box">
                             <div class="">
-                                <h3>Top Categories</h3>
+                                <h3>Top Fields</h3>
                             </div>
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="category in FAFields">
@@ -111,12 +111,12 @@
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-categories">View More Categories</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-fields">View More Fields</a></p>
                         </div>
                         
                         <div class="left-search-box">
                             <div class="">
-                                <h3>Top Skills</h3>
+                                <h3>Top Categories</h3>
                             </div>
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="skill in FASkills">
@@ -126,7 +126,7 @@
                                     </label>
                                 </li>
                             </ul>
-                            <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-skills">View More Skills</a></p>
+                            <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-skills ">View More Categories</a></p>
                         </div>
 
                         <div class="left-search-box">

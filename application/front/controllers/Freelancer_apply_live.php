@@ -239,4 +239,43 @@ class Freelancer_apply_live extends MY_Controller {
 
         $this->load->view('freelancer_apply_live/view_more_freelancer_apply', $this->data);
     }
+
+    public function freelance_jobs_by_fields()
+    {
+        $this->load->view('freelancer_apply_live/freelance_jobs_by_fields', $this->data);
+    }
+
+    public function freelance_jobs_by_fields_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $freelancerSkills = $this->freelancer_apply_model->get_fa_field($limit,$page);
+        echo json_encode($freelancerSkills);
+    }
+
+    public function freelance_jobs_by_categories()
+    {
+        $this->load->view('freelancer_apply_live/freelance_jobs_by_categories', $this->data);
+    }
+
+    public function freelance_jobs_by_categories_ajax()
+    {        
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 15;
+        $freelancerSkills = $this->freelancer_apply_model->get_fa_category($limit,$page);
+        echo json_encode($freelancerSkills);
+    }
+    
 }
