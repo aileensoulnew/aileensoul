@@ -186,6 +186,7 @@ class Freelancer_apply_live extends MY_Controller {
 
     public function ajax_project_list_no_login()
     {
+        //print_r($_POST);exit;
         $userid = $this->session->userdata('aileenuser');
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
@@ -194,9 +195,10 @@ class Freelancer_apply_live extends MY_Controller {
         {
             $page = 1;
         }
-        $category_id = (isset($_POST['field_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");
+        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");//Field
         
         $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $worktype = (isset($_POST['worktype']) && !empty($_POST['worktype']) ? $_POST['worktype'] : "");
         $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
         $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
 
@@ -211,7 +213,7 @@ class Freelancer_apply_live extends MY_Controller {
         exit;*/
         $search_location_arr = array();
 
-        $searchFA = $this->freelancer_apply_model->ajax_project_list_no_login($userid,$fa_skills,$fa_fields,$category_id,$skill_id,$period_filter,$exp_fil,$page,$limit,$keyword,$search_location_arr);
+        $searchFA = $this->freelancer_apply_model->ajax_project_list_no_login($userid,$fa_skills,$fa_fields,$category_id,$skill_id,$worktype,$period_filter,$exp_fil,$page,$limit,$keyword,$search_location_arr);
 
         echo json_encode($searchFA);
     }

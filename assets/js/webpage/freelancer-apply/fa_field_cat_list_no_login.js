@@ -314,7 +314,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
                 $scope.cat_fil += ($scope.cat_fil == "") ? currentid : "," + currentid;
             }
         });
-         console.log($scope.cat_fil);
+        //console.log($scope.cat_fil);
 
         
         $scope.skills_fil = "";
@@ -324,7 +324,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
                 $scope.skills_fil += ($scope.skills_fil == "") ? currentid : "," + currentid;
             }
         });
-         console.log($scope.skills_fil);
+        //console.log($scope.skills_fil);
 
         $scope.worktype = "";
         $('.worktype-filter').each(function(){
@@ -333,7 +333,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
                 $scope.worktype += ($scope.worktype == "") ? currentid : "," + currentid;
             }
         });
-         console.log($scope.worktype);
+        //console.log($scope.worktype);
 
         $scope.per_fil = "";
         $('.period-filter').each(function(){
@@ -342,7 +342,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
                 $scope.per_fil += ($scope.per_fil == "") ? currentid : "," + currentid;
             }
         });
-         console.log($scope.per_fil);
+        //console.log($scope.per_fil);
         
         $scope.exp_fil = "";
         $('.exp-filter').each(function(){
@@ -351,23 +351,24 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
                 $scope.exp_fil += ($scope.exp_fil == "") ? currentid : "," + currentid;
             }
         });
-         console.log($scope.exp_fil);
+        //console.log($scope.exp_fil);
         pagenum = 1;
 
-        //$("#loader").show();
+        $("#loader").show();
 
-        /*$.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
+        $.post(base_url + "freelancer_apply_live/ajax_project_list_no_login?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"category_id" : $scope.cat_fil, "skill_id": $scope.skills_fil, "worktype": $scope.worktype, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
                 $scope.searchJob = {};
                 data = JSON.parse(success);
                 $scope.$apply(function () {
-                    $scope.searchJob = data.jobData;
-                    $scope.jobs.page_number = pagenum;
-                    $scope.jobs.total_record = data.total_record;
-                    $scope.jobs.perpage_record = 5;            
+
+                    $scope.freepostapply = data.fa_projects;
+                    $scope.fa.page_number = pagenum;
+                    $scope.fa.total_record = data.total_record;
+                    $scope.fa.perpage_record = 5;
                     isProcessing = false;
                 });
             }
-        );*/
+        );
     };
 });  
