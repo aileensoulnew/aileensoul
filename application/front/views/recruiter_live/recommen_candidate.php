@@ -210,9 +210,7 @@
                                 </div>
 
                                 <?php echo $left_footer; ?>
-                                <div  class="add-post-button">
-                                    <a class="btn btn-3 btn-3b"  href="<?php echo base_url('post-job'); ?>" title="Recruiter Add Post"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
-                                </div>
+                                
                                 <?php //}  ?>
                                 <div id="khyati"></div>
                             </div>
@@ -234,6 +232,9 @@
                             </div>
                         </div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
+							<div  class="add-post-button">
+                                <a class="btn btn-3 btn-3b"  href="<?php echo base_url('post-job'); ?>" title="Recruiter Add Post"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+                            </div>
                             <div class="all-profile-box">
                                 <div class="all-pro-head">
                                     <h4>Profiles<a href="<?php echo base_url('/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
