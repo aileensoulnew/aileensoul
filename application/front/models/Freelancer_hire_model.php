@@ -145,4 +145,90 @@ class Freelancer_hire_model extends CI_Model {
         }
     }
 
+    public function get_freelancer_rec_candidate($user_id = '', $category_id='',$city_id='',$skill_id='',$experience_id='', $limitstart=0, $limit=5){
+        // echo $user_id;
+        // echo "string";
+        // exit;
+        $filter_condition = "";
+        if ($category_id) {
+            $category_id = $_GET["category_id"];
+            $filter_condition .= " AND freelancer_post_field IN (". $category_id .")";
+        }
+        if ($city_id) {
+            $filter_condition .= " AND freelancer_post_city IN (". $city_id .")";
+        }
+        if ($skill_id) {
+            $filter_condition .= " AND freelancer_post_area IN (". $skill_id .")";
+        }
+        if ($experience_id) {
+            if($experience_id == 6)
+            {
+                $filter_condition .= " AND (freelancer_post_exp_year IS NOT NULL AND freelancer_post_exp_year > ". ($experience_id - 1) .")";
+            }
+            else if($experience_id == 1){
+                $filter_condition .= " AND (freelancer_post_exp_year IS NULL OR freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id .")";
+            }
+            else{
+                $filter_condition .= " AND freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id;
+            }
+        }
+        $sql = "SELECT fpr.freelancer_post_reg_id, fpr.freelancer_post_fullname, 
+                fpr.freelancer_post_username, fpr.freelancer_post_field, fpr.freelancer_post_city,
+                fpr.freelancer_post_area, fpr.freelancer_post_skill_description, 
+                fpr.freelancer_post_hourly, fpr.freelancer_post_ratestate, 
+                fpr.freelancer_post_fixed_rate, fpr.freelancer_post_work_hour, 
+                fpr.user_id, fpr.freelancer_post_user_image, fpr.designation, 
+                fpr.freelancer_post_otherskill, fpr.freelancer_post_exp_month, 
+                fpr.freelancer_post_exp_year, fpr.freelancer_apply_slug, 
+                fpr.freelancer_post_country,fp.created_date
+                FROM ailee_freelancer_post_reg fpr, ailee_freelancer_post fp
+                WHERE fpr.status = '1' AND fpr.is_delete = '0' AND fpr.free_post_step = '7' 
+                AND fpr.user_id != '". $user_id ."' 
+                AND fp.post_skill REGEXP concat('[[:<:]](', REPLACE(fpr.freelancer_post_area, ',', '|'), ')[[:>:]]')
+                AND fp.user_id = '". $user_id ."' AND fp.is_delete = '0' AND fp.status = '1' ". $filter_condition ." 
+                ORDER BY fp.created_date";
+
+        if($limit != ""){
+            $sql .= " LIMIT $limitstart,$limit";
+        }
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
+
+    public function get_freelancer_rec_candidate_total($user_id = '', $category_id='',$city_id='',$skill_id='',$experience_id=''){
+        $filter_condition = "";
+        if ($category_id) {
+            $category_id = $_GET["category_id"];
+            $filter_condition .= " AND freelancer_post_field IN (". $category_id .")";
+        }
+        if ($city_id) {
+            $filter_condition .= " AND freelancer_post_city IN (". $city_id .")";
+        }
+        if ($skill_id) {
+            $filter_condition .= " AND freelancer_post_area IN (". $skill_id .")";
+        }
+        if ($experience_id) {
+            if($experience_id == 6)
+            {
+                $sql_filter .= " AND (freelancer_post_exp_year IS NOT NULL AND freelancer_post_exp_year > ". ($experience_id - 1) .")";
+            }
+            else if($experience_id == 1){
+                $sql_filter .= " AND (freelancer_post_exp_year IS NULL OR freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id .")";
+            }
+            else{
+                $sql_filter .= " AND freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id;
+            }
+        }
+        $sql = "SELECT count(fpr.freelancer_post_reg_id) as total_record
+                FROM ailee_freelancer_post_reg fpr, ailee_freelancer_post fp
+                WHERE fpr.status = '1' AND fpr.is_delete = '0' AND fpr.free_post_step = '7' 
+                AND fpr.user_id != '". $user_id ."' 
+                AND fp.post_skill REGEXP concat('[[:<:]](', REPLACE(fpr.freelancer_post_area, ',', '|'), ')[[:>:]]')
+                AND fp.user_id = '". $user_id ."' AND fp.is_delete = '0' AND fp.status = '1' ". $filter_condition ." 
+                ORDER BY fp.created_date";
+        $query = $this->db->query($sql);
+        $result = $query->row_array();
+        return $result;
+    }
 }

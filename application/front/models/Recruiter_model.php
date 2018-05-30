@@ -228,7 +228,7 @@ class Recruiter_model extends CI_Model {
         if($experience_id != ""){
             if($experience_id == 6)
             {
-                $sql_filter .= " AND (ailee_job_reg.exp_y IS NOT NULL OR ailee_job_reg.exp_y > ". $experience_id .")";
+                $sql_filter .= " AND (ailee_job_reg.exp_y IS NOT NULL AND ailee_job_reg.exp_y > ". $experience_id .")";
             }
             else if($experience_id == 1){
                 $sql_filter .= " AND (ailee_job_reg.exp_y IS NULL OR ailee_job_reg.exp_y <= ". ($experience_id - 1) ." AND ailee_job_reg.exp_y >= ". $experience_id .")";

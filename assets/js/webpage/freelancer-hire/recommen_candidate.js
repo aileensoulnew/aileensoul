@@ -1,6 +1,80 @@
+var filter_selected_data = "";
+app.controller('freelancerHireListController', function ($scope, $http) {
+    $scope.categoryFilterList = {};
+    $scope.cityFilterList = {};
+    $scope.skillFilterList = {};
+    $scope.experienceFilterList = {};
+
+    function getFilterList() {
+        $http.get(base_url + "freelancer/get_filter_data?limit=5").then(function (success) {
+            $scope.cityFilterList = success.data.freelancer_cities;
+            $scope.categoryFilterList = success.data.freelancer_category;
+            $scope.skillFilterList = success.data.freelancer_skills;
+            $scope.experienceFilterList = success.data.freelancer_experience;
+        }, function (error) {});
+    }
+    getFilterList();
+
+    $scope.getfilterfreelancehiredata = function(){
+        filter_selected_data = "";
+
+        // Get Checked Category of filter and make data value for ajax call
+        var category = "";
+        $('.categorycheckbox').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                category += (category == "") ? currentid : "," + currentid;
+            }
+        });
+        
+        // Get Checked Category of filter and make data value for ajax call
+        var city = "";
+        $('.citiescheckbox').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                city += (city == "") ? currentid : "," + currentid;
+            }
+        });
+
+        // Get Checked Skill of filter and make data value for ajax call
+        var skill = "";
+        $('.skillcheckbox').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                skill += (skill == "") ? currentid : "," + currentid;
+            }
+        });
+
+        // Get Checked Experience of filter and make data value for ajax call
+        var experience = "";
+        $('.experiencecheckbox').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                experience += (experience == "") ? currentid : "," + currentid;
+            }
+        });
+
+        // if filter apply append id of category and location
+        if(city != ""){
+            filter_selected_data += "&city_id=" + city;
+        } 
+        if(category != ""){
+            filter_selected_data += "&category_id=" + category;
+        }
+        if(skill != ""){
+            filter_selected_data += "&skill_id=" + skill;
+        }
+        if(experience != ""){
+            filter_selected_data += "&experience_id=" + experience;
+        }
+        freelancerhire_home('filter',filter_selected_data, 1);        
+    }
+});
+
+
 //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER START
 $(document).ready(function () {
-    freelancerhire_home();
+    freelancerhire_home('',filter_selected_data,1);
 
     $(window).scroll(function () {
         //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -20,7 +94,7 @@ $(document).ready(function () {
                 if (parseInt(page) <= parseInt(available_page)) {
                     var pagenum = parseInt($(".page_number:last").val()) + 1;
                     
-                    freelancerhire_home(pagenum);
+                    freelancerhire_home('',filter_selected_data,pagenum);
                 }
             }
         }
@@ -28,8 +102,17 @@ $(document).ready(function () {
     
 });
 var isProcessing = false;
-function freelancerhire_home(pagenum)
+var ajaxHireHome;
+function freelancerhire_home(from = '',filter_selected_data = '', pagenum = 1)
 {
+    if(from == "filter" ){
+        if(isProcessing){
+            ajaxHireHome.abort();
+            isProcessing = false;
+        }
+        $('.job-contact-frnd').html('');
+        $('#loader').show();
+    }
     if (isProcessing) {
         /*
          *This won't go past this condition while
@@ -39,9 +122,9 @@ function freelancerhire_home(pagenum)
         return;
     }
     isProcessing = true;
-    $.ajax({
+    ajaxHireHome = $.ajax({
         type: 'POST',
-        url: base_url + "freelancer_hire/ajax_recommen_candidate?page=" + pagenum,
+        url: base_url + "freelancer_hire/ajax_recommen_candidate?page=" + pagenum + filter_selected_data,
         data: {total_record:$("#total_record").val()},
         dataType: "html",
         beforeSend: function () {
@@ -56,6 +139,9 @@ function freelancerhire_home(pagenum)
         },
         success: function (data) {
             $('.loader').remove();
+            if(from == "filter"){
+                $('.job-contact-frnd').html('');
+            }
             $('.job-contact-frnd').append(data);
             // second header class add for scroll
             var nb = $('.post-design-box').length;
@@ -68,9 +154,7 @@ function freelancerhire_home(pagenum)
         }
     });
 }
-
 //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER END
-
 //FUNCTION FOR CHECK VALUE OF SEARCH KEYWORD AND PLACE ARE BLANK START
 function checkvalue() {
     var searchkeyword = $.trim(document.getElementById('tags').value);
@@ -124,4 +208,10 @@ $(document).ready(function () {
     }
 });
 //SCRIPT FOR NO POST ADD CLASS DESIGNER RELATED HEADER2 END            
+
+// change location
+$(document).on('change','.filtercheckbox',function(){
+    var self = this;
+    angular.element(self).scope().getfilterfreelancehiredata();
+});
 

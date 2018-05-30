@@ -99,7 +99,7 @@ class Freelancer extends MY_Controller {
     }
 
 
-//FREELANCER_APPLY POST_BASIC_INFORMATION PAGE DATA INSERT START
+    //FREELANCER_APPLY POST_BASIC_INFORMATION PAGE DATA INSERT START
     public function freelancer_post_basic_information_insert() {
 
 
@@ -199,7 +199,7 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY POST_BASIC_INFORMATION PAGE DATA INSERT END
+    //FREELANCER_APPLY POST_BASIC_INFORMATION PAGE DATA INSERT END
     // FREELANCER_HIRE SLUG START
     public function setcategory_slug($slugname, $filedname, $tablename, $notin_id = array()) {
         $slugname = $oldslugname = $this->create_slug($slugname);
@@ -226,7 +226,7 @@ class Freelancer extends MY_Controller {
         return $slug;
     }
 
-// FREELANCER HIRE SLUG END
+    // FREELANCER HIRE SLUG END
 
     function slug_script() {
 
@@ -240,7 +240,7 @@ class Freelancer extends MY_Controller {
         echo "yes";
     }
 
-//CHECK EMAIL AVAIBILITY OF FREELANCER_APPLY START 
+    //CHECK EMAIL AVAIBILITY OF FREELANCER_APPLY START 
     public function check_email() {
 
         $email = trim($this->input->post('email'));
@@ -267,8 +267,8 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//CHECK EMAIL AVAIBILITY OF FREELANCER_APPLY END
-//FREELANCER_APPLY USER DEACTIAVTE CHECK START
+    //CHECK EMAIL AVAIBILITY OF FREELANCER_APPLY END
+    //FREELANCER_APPLY USER DEACTIAVTE CHECK START
     public function freelancer_apply_deactivate_check() {
         $userid = $this->session->userdata('aileenuser');
         //IF USER DEACTIVATE PROFILE THEN REDIRECT TO freelancer/freelancer_post/freelancer_post_basic_information START
@@ -279,8 +279,8 @@ class Freelancer extends MY_Controller {
         }
         //IF USER DEACTIVATE PROFILE THEN REDIRECT TO freelancer/freelancer_post/freelancer_post_basic_information END  
     }
-//FREELANCER_APPLY USER DEACTIAVTE CHECK START
-//FREELANCER_APPLY ADDRESS PAGE START
+    //FREELANCER_APPLY USER DEACTIAVTE CHECK START
+    //FREELANCER_APPLY ADDRESS PAGE START
     public function freelancer_post_address_information($postid = '') {
 
         if ($postid != '') {
@@ -320,8 +320,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_address_information', $this->data);
     }
 
-//FREELANCER_APPLY ADDRESS PAGE END
-//FUNCTION FOR GET DATA OF STATE AND CITY START
+    //FREELANCER_APPLY ADDRESS PAGE END
+    //FUNCTION FOR GET DATA OF STATE AND CITY START
     public function ajax_data() {
         // ajax for degree start
         if (isset($_POST["degree_id"]) && !empty($_POST["degree_id"])) {
@@ -376,8 +376,8 @@ class Freelancer extends MY_Controller {
         // ajax for state end
     }
 
-//FUNCTION FOR GET DATA OF STATE AND CITY END
-//FREELANCER_APPLY ADDRESS INFORMATION INSERT CODE START
+    //FUNCTION FOR GET DATA OF STATE AND CITY END
+    //FREELANCER_APPLY ADDRESS INFORMATION INSERT CODE START
     public function freelancer_post_address_information_insert() {
         $userid = $this->session->userdata('aileenuser');
 
@@ -435,9 +435,9 @@ class Freelancer extends MY_Controller {
        // }
     }
 
-//FREELANCER_APPLY ADDRESS INFORMATION INSERT CODE END
-//FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION PAGE START
-//freelancer professional page controller Start
+    //FREELANCER_APPLY ADDRESS INFORMATION INSERT CODE END
+    //FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION PAGE START
+    //freelancer professional page controller Start
     public function freelancer_post_professional_information($postid = '') {
         if ($postid != '') {
             $this->data['livepostid'] = $postid;
@@ -447,7 +447,7 @@ class Freelancer extends MY_Controller {
         //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
-// code for display page start
+        // code for display page start
         $this->freelancer_apply_check();
         // code for display page end
 
@@ -492,8 +492,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_professional_information', $this->data);
     }
 
-//FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION PAGE START
-//FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION INSERT DATA START
+    //FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION PAGE START
+    //FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION INSERT DATA START
     public function freelancer_post_professional_information_insert() {
         if ($this->input->post('livepostid')) {
             $postid = trim($this->input->post('livepostid'));
@@ -583,19 +583,19 @@ class Freelancer extends MY_Controller {
         //}
     }
 
-//FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION INSERT DATA END
-//FREELANCER_APPLY RATE PAGE START
-//freelancer rate page controller Start 
+    //FREELANCER_APPLY POST_PROFESSIONAL_INFORMATION INSERT DATA END
+    //FREELANCER_APPLY RATE PAGE START
+    //freelancer rate page controller Start 
     public function freelancer_post_rate($postid = '') {
 
         if ($postid != '') {
             $this->data['livepostid'] = $postid;
         }
         $userid = $this->session->userdata('aileenuser');
-//code for check user deactivate start
+        //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
-// code for display page start
+        // code for display page start
         $this->freelancer_apply_check();
         // code for display page end
         $contition_array = array('status' => '1', 'is_delete' => '0');
@@ -616,8 +616,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_rate', $this->data);
     }
 
-//FREELANCER_APPLY RATE PAGE END
-//FREELANCER_APPLY RATE PAGE DATA INSERT START
+    //FREELANCER_APPLY RATE PAGE END
+    //FREELANCER_APPLY RATE PAGE DATA INSERT START
     public function freelancer_post_rate_insert() {
         if ($this->input->post('livepostid')) {
             $postid = trim($this->input->post('livepostid'));
@@ -678,15 +678,15 @@ class Freelancer extends MY_Controller {
        // }
     }
 
-//FREELANCER_APPLY RATE PAGE DATA INSERT END
-//FREELANCER_APPLY AVABILITY PAGE START
-//freelancer avability page controller Start
+    //FREELANCER_APPLY RATE PAGE DATA INSERT END
+    //FREELANCER_APPLY AVABILITY PAGE START
+    //freelancer avability page controller Start
     public function freelancer_post_avability($postid = '') {
         if ($postid != '') {
             $this->data['livepostid'] = $postid;
         }
         $userid = $this->session->userdata('aileenuser');
-//code for check user deactivate start
+        //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
         // code for display page start
@@ -707,8 +707,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_avability', $this->data);
     }
 
-//FREELANCER_APPLY AVABILITY PAGE END
-//FREELANCER_APPLY AVABILITY PAGE DATA INSERT START
+    //FREELANCER_APPLY AVABILITY PAGE END
+    //FREELANCER_APPLY AVABILITY PAGE DATA INSERT START
     public function freelancer_post_avability_insert() {
         if ($this->input->post('livepostid')) {
             $postid = trim($this->input->post('livepostid'));
@@ -818,8 +818,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_education', $this->data);
     }
 
-//FREELANCER_APPLY EDUCATION PAGE END
-//ADD OTHER UNIVERSITY INTO DATABASE START
+    //FREELANCER_APPLY EDUCATION PAGE END
+    //ADD OTHER UNIVERSITY INTO DATABASE START
     public function freelancer_other_university() {
         $other_university = $_POST['other_university'];
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
@@ -855,7 +855,7 @@ class Freelancer extends MY_Controller {
                             $select .= '>' . $st['university_name'] . '</option>';
                         }
                     }
-//For Getting Other at end
+            //For Getting Other at end
                     $contition_array = array('is_delete' => '0', 'status' => '1', 'university_name' => "Other");
                     $university_otherdata = $this->common->select_data_by_condition('university', $contition_array, $data = '*', $sortby = 'university_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                     $select .= '<option value="' . $university_otherdata[0]['university_id'] . '">' . $university_otherdata[0]['university_name'] . '</option>';
@@ -871,8 +871,8 @@ class Freelancer extends MY_Controller {
         ));
     }
 
-//ADD OTHER UNIVERSITY INTO DATABASE END
-//FREELANCER_APPLY EDUCATION PAGE DATA INSERT START
+    //ADD OTHER UNIVERSITY INTO DATABASE END
+    //FREELANCER_APPLY EDUCATION PAGE DATA INSERT START
     public function freelancer_post_education_insert() {
 
         if ($this->input->post('livepostid')) {
@@ -926,20 +926,20 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY EDUCATION PAGE DATA INSERT END
-//FREELANCER_APPLY PORTFOLIO PAGE START
+    //FREELANCER_APPLY EDUCATION PAGE DATA INSERT END
+    //FREELANCER_APPLY PORTFOLIO PAGE START
     public function freelancer_post_portfolio($postid = '') {
         if ($postid != '') {
             $this->data['livepostid'] = $postid;
         }
 
         $userid = $this->session->userdata('aileenuser');
-//code for check user deactivate start
+            //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
-// code for display page start
+        // code for display page start
         $this->freelancer_apply_check();
-// code for display page end
+        // code for display page end
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $userdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_portfolio,freelancer_post_portfolio_attachment,free_post_step,user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $this->data['free_post_step'] = $userdata[0]['free_post_step'];
@@ -954,8 +954,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_portfolio', $this->data);
     }
 
-//FREELANCER_APPLY PORTFOLIO PAGE END
-//FREELANCER_APPLY PORTFOLIO PAGE DATA INSERT START
+    //FREELANCER_APPLY PORTFOLIO PAGE END
+    //FREELANCER_APPLY PORTFOLIO PAGE DATA INSERT START
     public function freelancer_post_portfolio_insert($postliveid = '') {
 
         $portfolio = $_POST['portfolio'];
@@ -1021,16 +1021,13 @@ class Freelancer extends MY_Controller {
         $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
     }
 
-//FREELANCER_APPLY PORTFOLIO PAGE DATA INSERT END
-
-
+    //FREELANCER_APPLY PORTFOLIO PAGE DATA INSERT END
     public function text2link($text) {
         $text = preg_replace('/(((f|ht){1}t(p|ps){1}:\/\/)[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i', '<a href="\\1" target="_blank" rel="nofollow">\\1</a>', $text);
         $text = preg_replace('/([[:space:]()[{}])(www.[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)/i', '\\1<a href="http://\\2" target="_blank" rel="nofollow">\\2</a>', $text);
         $text = preg_replace('/([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,3})/i', '<a href="mailto:\\1" rel="nofollow" target="_blank">\\1</a>', $text);
         return $text;
     }
-
 
     public function aasort(&$array, $key) {
         $sorter = array();
@@ -1086,8 +1083,8 @@ class Freelancer extends MY_Controller {
             }
         }
     }
-
-        //FREELANCER_APPLY HOME PAGE START
+    
+    //FREELANCER_APPLY HOME PAGE START
     public function freelancer_apply_post($id = "") {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
         //code for check user deactivate start
@@ -1104,8 +1101,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/post_apply', $this->data);
     }
 
-//FREELANCER_APPLY HOME PAGE END
-//AJAX FREELANCER_APPLY HOME PAGE START
+    //FREELANCER_APPLY HOME PAGE END
+    //AJAX FREELANCER_APPLY HOME PAGE START
     public function ajax_freelancer_apply_post() {
         $userid = $this->session->userdata('aileenuser');
         $perpage = 5;
@@ -1290,8 +1287,8 @@ class Freelancer extends MY_Controller {
 
                 $return_html .= ' </p>
 
-</div>
-</div>';
+                </div>
+                </div>';
             }
         } else {
             $return_html .= '<div class="art-img-nn">
@@ -1308,8 +1305,8 @@ class Freelancer extends MY_Controller {
         echo $return_html;
     }
 
-//AJAX FREELANCER_APPLY HOME PAGE END
-//FREELANCER_APPLY CHECK USER IS REGISTERD START
+    //AJAX FREELANCER_APPLY HOME PAGE END
+    //FREELANCER_APPLY CHECK USER IS REGISTERD START
     public function freelancer_apply_check() {
         $userid = $this->session->userdata('aileenuser');
         $contition_array = array('user_id' => $userid, 'status' => '1', 'is_delete' => '0');
@@ -1391,11 +1388,11 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY CHECK USER IS REGISTERD END
-    
+    //FREELANCER_APPLY CHECK USER IS REGISTERD END
+        
 
-//Freelancer Job All Post controller end
-//FREELANCER_APPLY APPLY TO PROJECT START
+    //Freelancer Job All Post controller end
+    //FREELANCER_APPLY APPLY TO PROJECT START
     public function apply_insert() {
         $id = $_POST['post_id'];
         $para = $_POST['allpost'];
@@ -1498,18 +1495,18 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY APPLY TO PROJECT START
-//FREELANCER_APPLY APPLIED ON POST(PROJECTS) START
+    //FREELANCER_APPLY APPLY TO PROJECT START
+    //FREELANCER_APPLY APPLIED ON POST(PROJECTS) START
     public function freelancer_applied_post() {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
-//code for check user deactivate start
+        //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
         // code for display page start
         $this->freelancer_apply_check();
         // code for display page end
         $this->progressbar();
-// job seeker detail
+        // job seeker detail
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -1525,8 +1522,8 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_applied_post', $this->data);
     }
 
-//FREELANCER_APPLY APPLIED ON POST(PROJECTS) START
-// AJAX FREELANCER_APPLY APLLIED ON POST(PROJECT) START
+    //FREELANCER_APPLY APPLIED ON POST(PROJECTS) START
+    // AJAX FREELANCER_APPLY APLLIED ON POST(PROJECT) START
     public function ajax_freelancer_applied_post() {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 
@@ -1679,8 +1676,8 @@ class Freelancer extends MY_Controller {
 
                 $return_html .= ' </p>
 
-</div>
-</div>';
+            </div>
+            </div>';
             }
         } else {
             $return_html .= '<div class="art-img-nn">
@@ -1697,7 +1694,7 @@ class Freelancer extends MY_Controller {
         echo $return_html;
     }
 
-// AJAX FREELANCER_APPLY APLLIED ON POST(PROJECT) END
+    // AJAX FREELANCER_APPLY APLLIED ON POST(PROJECT) END
     //FREELANCER_APPLY REMOVE FROM APPLIED AND SAVE LIST START
     public function freelancer_delete_apply() {
         $id = $_POST['app_id'];
@@ -1714,7 +1711,7 @@ class Freelancer extends MY_Controller {
         $updatedata = $this->common->update_data($data, 'freelancer_apply', 'app_id', $id);
     }
 
-//FREELANCER_APPLY REMOVE FROM APPLIED AND SAVE LIST END
+    //FREELANCER_APPLY REMOVE FROM APPLIED AND SAVE LIST END
     public function save_insert() {
         $id = $_POST['post_id'];
         $userid = $this->session->userdata('aileenuser');
@@ -1753,7 +1750,6 @@ class Freelancer extends MY_Controller {
             }
         }
     }
-
 
     public function save_user() {
         $id = $_POST['post_id'];
@@ -1799,18 +1795,17 @@ class Freelancer extends MY_Controller {
         }
     }
 
-
-//FREELANCER_APPLY SAVE POST(PROJECT) START
+    //FREELANCER_APPLY SAVE POST(PROJECT) START
     public function freelancer_save_post() {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
-//code for check user deactivate start
+        //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
-// code for display page start
+        // code for display page start
         $this->freelancer_apply_check();
-// code for display page end
+        // code for display page end
         $this->progressbar();
-// job seeker detail
+        // job seeker detail
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1', 'free_post_step' => '7');
         $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_fullname,freelancer_post_username', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -1818,9 +1813,9 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_save_post', $this->data);
     }
 
-//FREELANCER_APPLY SAVE POST(PROJECT) END
-//Freelancer Save Post Controller End
-//AJAX_FREELANCER_APPLY SAVE POST(PROJECT) START
+    //FREELANCER_APPLY SAVE POST(PROJECT) END
+    //Freelancer Save Post Controller End
+    //AJAX_FREELANCER_APPLY SAVE POST(PROJECT) START
     public function ajax_freelancer_save_post() {
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
         $perpage = 5;
@@ -1833,11 +1828,11 @@ class Freelancer extends MY_Controller {
         if ($start < 0)
             $start = 0;
 
-// job seeker detail
+        // job seeker detail
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $jobdata = $this->data['jobdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-// post detail
+        // post detail
         $join_str[0]['table'] = 'freelancer_post';
         $join_str[0]['join_table_id'] = 'freelancer_post.post_id';
         $join_str[0]['from_table_id'] = 'freelancer_apply.post_id';
@@ -1990,8 +1985,8 @@ class Freelancer extends MY_Controller {
 
                     $return_html .= ' </p>
 
-</div>
-</div>';
+            </div>
+            </div>';
                 }
             }
         } else {
@@ -2009,7 +2004,7 @@ class Freelancer extends MY_Controller {
         echo $return_html;
     }
 
-//AJAX_FREELANCER_APPLY SAVE POST(PROJECT) END
+    //AJAX_FREELANCER_APPLY SAVE POST(PROJECT) END
 
     //FREELANCER_APPLY PROFILE PIC INSERT START
     public function user_image_add1() {
@@ -2089,7 +2084,7 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY PROFILE PIC INSERT END
+    //FREELANCER_APPLY PROFILE PIC INSERT END
 
     //FREELANCER_APPLY PORTFOLIO UPLOAD PDF START
     public function pdf($id) {
@@ -2099,9 +2094,9 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer/freelancer_post/freelancer_pdf', $this->data);
     }
 
-//FREELANCER_APPLY PORTFOLIO UPLOAD PDF END
+    //FREELANCER_APPLY PORTFOLIO UPLOAD PDF END
 
-//FREELANCER_APPLY PROFILE PAGE START
+    //FREELANCER_APPLY PROFILE PAGE START
     public function freelancer_post_profile($id = "") {
         if (is_numeric($id)) {
             
@@ -2110,7 +2105,7 @@ class Freelancer extends MY_Controller {
         }
         $userid = $this->session->userdata('aileenuser');
 
-//code for check user deactivate start
+        //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();
         //code for check user deactivate end
         if ($id == $userid || $id == '') {
@@ -2131,9 +2126,9 @@ class Freelancer extends MY_Controller {
         $this->load->view('freelancer_live/freelancer_post/freelancer_post_profile', $this->data);
     }
 
-//FREELANCER_APPLY PROFILE PAGE END
+    //FREELANCER_APPLY PROFILE PAGE END
 
-//FREELANCER_APPLY DEACTIVATE START
+    //FREELANCER_APPLY DEACTIVATE START
     public function deactivate() {
 
         $id = $_POST['id'];
@@ -2143,10 +2138,10 @@ class Freelancer extends MY_Controller {
         $update = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $id);
     }
 
-//FREELANCER_APPLY DEACTIVATE END
+    //FREELANCER_APPLY DEACTIVATE END
 
 
-//FREELANCER_APPLY COVER PIC START
+    //FREELANCER_APPLY COVER PIC START
     public function ajaxpro_work() {
         $userid = $this->session->userdata('aileenuser');
 
@@ -2266,8 +2261,8 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY COVER PIC START
-//FREELANCER_APPLY DESIGNATION START
+    //FREELANCER_APPLY COVER PIC START
+    //FREELANCER_APPLY DESIGNATION START
     public function designation() {
         $userid = $this->session->userdata('aileenuser');
 
@@ -2293,7 +2288,7 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY DESIGNATION END
+    //FREELANCER_APPLY DESIGNATION END
     //FREELANCER_APPLY REACTIVATE PROFILE STRAT
     public function reactivate() {
 
@@ -2313,8 +2308,8 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_APPLY REACTIVATE PROFILE END
-//FREELANCER_HIRE INVITE FREELANCER OF APLLIED START
+    //FREELANCER_APPLY REACTIVATE PROFILE END
+    //FREELANCER_HIRE INVITE FREELANCER OF APLLIED START
     public function free_invite_user() {
         $postid = $_POST['post_id'];
         $invite_user = $_POST['invited_user'];
@@ -2361,8 +2356,8 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_HIRE INVITE FREELANCER OF APLLIED END
-//FREELANCER_APPLY DELETE PDF OF PORTFOLIO START
+    //FREELANCER_HIRE INVITE FREELANCER OF APLLIED END
+    //FREELANCER_APPLY DELETE PDF OF PORTFOLIO START
     public function deletepdf() {
         $userid = $this->session->userdata('aileenuser');
         //code for check user deactivate start
@@ -2389,9 +2384,9 @@ class Freelancer extends MY_Controller {
         echo 'ok';
     }
 
-//FREELANCER_APPLY DELETE PDF OF PORTFOLIO END
+    //FREELANCER_APPLY DELETE PDF OF PORTFOLIO END
 
-//FREELANCER_HIRE SEARCH CITY FOR AUTO COMPLETE START
+    //FREELANCER_HIRE SEARCH CITY FOR AUTO COMPLETE START
     public function freelancer_search_city($id = "") {
         $searchTerm = $_GET['term'];
         if (!empty($searchTerm)) {
@@ -2410,8 +2405,8 @@ class Freelancer extends MY_Controller {
         }
     }
 
-//FREELANCER_HIRE SEARCH CITY FOR AUTO COMPLETE END
-//FREELANCER_APPLY SEARCH KEYWORD FOR AUTO COMPLETE START
+    //FREELANCER_HIRE SEARCH CITY FOR AUTO COMPLETE END
+    //FREELANCER_APPLY SEARCH KEYWORD FOR AUTO COMPLETE START
     public function freelancer_apply_search_keyword($id = "") {
         $searchTerm = $_GET['term'];
         if (!empty($searchTerm)) {
@@ -2447,7 +2442,7 @@ class Freelancer extends MY_Controller {
         echo json_encode($result1);
     }
 
-//FREELANCER_APPLY SEARCH KEYWORD FOR AUTO COMPLETE END
+    //FREELANCER_APPLY SEARCH KEYWORD FOR AUTO COMPLETE END
     public function get_skill($id = "") {
 
         //get search term
@@ -2465,7 +2460,7 @@ class Freelancer extends MY_Controller {
         echo json_encode($cdata);
     }
 
-//FREELANCER_APPLY OTHER DEGREE ADD START
+    //FREELANCER_APPLY OTHER DEGREE ADD START
     public function freelancer_other_degree() {
         $other_degree = $_POST['other_degree'];
         $other_stream = $_POST['other_stream'];
@@ -2535,7 +2530,7 @@ class Freelancer extends MY_Controller {
                             $select .= '>' . $st['degree_name'] . '</option>';
                         }
                     }
-//For Getting Other at end
+        //For Getting Other at end
                     $contition_array = array('is_delete' => '0', 'status' => '1', 'degree_name' => "Other");
                     $degree_otherdata = $this->common->select_data_by_condition('degree', $contition_array, $data = '*', $sortby = 'degree_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -2567,8 +2562,8 @@ class Freelancer extends MY_Controller {
         ));
     }
 
-//FREELANCER_APPLY OTHER DEGREE ADD START
-//FREELANCER_APPLY OTHER STREAM START
+    //FREELANCER_APPLY OTHER DEGREE ADD START
+    //FREELANCER_APPLY OTHER STREAM START
     public function freelancer_other_stream() {
         $other_stream = $_POST['other_stream'];
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
@@ -2609,7 +2604,7 @@ class Freelancer extends MY_Controller {
                             $select .= '>' . $st['stream_name'] . '</option>';
                         }
                     }
-//For Getting Other at end
+            //For Getting Other at end
                     $contition_array = array('is_delete' => '0', 'status' => '1', 'stream_name' => "Other");
                     $stream_otherdata = $this->common->select_data_by_condition('stream', $contition_array, $data = '*', $sortby = 'stream_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
@@ -2625,8 +2620,8 @@ class Freelancer extends MY_Controller {
         echo $select;
     }
 
-//FREELANCER_APPLY OTHER STREAM END
-//FREELANCER_APPLY  OTHER FIELD START
+    //FREELANCER_APPLY OTHER STREAM END
+    //FREELANCER_APPLY  OTHER FIELD START
     public function freelancer_other_field() {
 
         $other_field = $_POST['other_field'];
@@ -2664,7 +2659,7 @@ class Freelancer extends MY_Controller {
                             $select .= '>' . $st['category_name'] . '</option>';
                         }
                     }
-//For Getting Other at end
+        //For Getting Other at end
                     $contition_array = array('is_delete' => '0', 'status' => '1', 'category_name' => "Other");
                     $category_otherdata = $this->common->select_data_by_condition('category', $contition_array, $data = '*', $sortby = 'category_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                     $select .= '<option value="' . $category_otherdata[0]['category_id'] . '">' . $category_otherdata[0]['category_name'] . '</option>';
@@ -2682,7 +2677,7 @@ class Freelancer extends MY_Controller {
         ));
     }
 
-//FREELANCER_APPLY BOTH OTHER FIELD END
+    //FREELANCER_APPLY BOTH OTHER FIELD END
 
     //FREELANCER APPLY AS APPLIED ON POST SEND MAIL START
     public function apply_email($notid) {
@@ -2719,7 +2714,7 @@ class Freelancer extends MY_Controller {
         // mail end  
     }
 
-//FREELANCER APPLY AS APPLIED ON POST SEND MAIL END
+    //FREELANCER APPLY AS APPLIED ON POST SEND MAIL END
     public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         $invite_user = $select_user;
         $postid = $post_id;
@@ -2781,8 +2776,6 @@ class Freelancer extends MY_Controller {
         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);
     }
 
-
-
     //FREELANCER APPLY NEW REGISTATION PROFILE START
     public function registation($postid = '') {
 
@@ -2817,13 +2810,11 @@ class Freelancer extends MY_Controller {
 
     //FREELANCER APPLY NEW REGISTATION PROFILE END
     //FREELANCER APPLY NEW REGISTATION INSERT START
-
     public function registation_insert($postliveid = '') {
-         //echo $postliveid;die();
+        //echo $postliveid;die();
         $userid = $this->session->userdata('aileenuser');
         $skill1 = $this->input->post('skills');
         $skills = explode(',', $skill1);
-
         $this->form_validation->set_rules('firstname', 'Full Name', 'required');
         $this->form_validation->set_rules('lastname', 'Last Name', 'required');
         $this->form_validation->set_rules('email', 'EmailId', 'required|valid_email');
@@ -3019,7 +3010,7 @@ class Freelancer extends MY_Controller {
         $this->load->view('email_view', $this->data);
     }
 
-//CHECK FOR MAIL DESIGNING END
+    //CHECK FOR MAIL DESIGNING END
     public function session() {
         if ($this->session->userdata('searchkeyword')) {
             $this->session->unset_userdata('searchkeyword');
@@ -3145,7 +3136,7 @@ class Freelancer extends MY_Controller {
     //function user when live link and login start
 
     public function registation_insert_new($postliveid = '') {
-         //echo $postliveid;die();
+        //echo $postliveid;die();
         $userid = $this->session->userdata('aileenuser');
 
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
@@ -3238,4 +3229,16 @@ class Freelancer extends MY_Controller {
         }
         echo json_encode($data);
     }
+
+    // GET ALL FILTER DATA FOR FREELANCER HIRE
+    function get_filter_data(){
+        $limitstart = ($_POST['limitstart']) ? $_POST['limitstart'] : 0;
+        $limit = ($_POST['limit']) ? $_POST['limit'] : 5;
+        $result['freelancer_category'] = $this->freelancer_apply_model->get_filter_category($limitstart,10);
+        $result['freelancer_cities'] = $this->freelancer_apply_model->get_filter_cities($limitstart,30);
+        $result['freelancer_skills'] = $this->freelancer_apply_model->get_filter_skills($limitstart,30);
+        $result['freelancer_experience'] = $this->freelancer_apply_model->get_filter_experience($limitstart,$limit);
+        echo json_encode($result);
+    }
+
 }

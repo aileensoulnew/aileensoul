@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html  ng-app="freelancerHireListApp" ng-controller="freelancerHireListController">
     <head>
         <title><?php echo $title; ?></title>
         <?php echo $head; ?>
@@ -113,84 +113,57 @@
                                     <div class="">
                                         <h3>Top Categories</h3>
                                     </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Admin<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Banking<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        
-                                    </ul>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="category in categoryFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span>{{category.category_name | capitalize}}
+                                                        <span class="pull-right">({{category.count}})</span>
+                                                    </span>
+                                                    <input class="categorycheckbox filtercheckbox" type="checkbox" name="{{category.category_name}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>                                        
+                                        </ul>
+                                    </div>
                                     <p class="text-right p10"><a href="#">More Categories</a></p>
                                 </div>
                                 <div class="left-search-box list-type-bullet">
                                     <div class="">
                                         <h3>Top Cities</h3>
                                     </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">Ahmedabad<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">New York<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Adelaide<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Sydney<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Lahore<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                       
-                                        
-                                    </ul>
-                                    <p class="text-right p10"><a href="#">More Cities</a></p>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="cities in cityFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span>{{cities.city_name | capitalize}}
+                                                        <span class="pull-right">({{cities.count}})</span>
+                                                    </span>
+                                                    <input class="citiescheckbox filtercheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- <p class="text-right p10"><a href="#">More Cities</a></p> -->
                                 </div>
                                 <div class="left-search-box list-type-bullet">
                                     <div class="">
                                         <h3>Skills</h3>
                                     </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Photoshop<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                    </ul>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="skill in skillFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span>{{skill.skill | capitalize}}
+                                                        <span class="pull-right">({{skill.count}})</span>
+                                                    </span>
+                                                    <input class="skillcheckbox filtercheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>      
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="left-search-box">
                                     <div class="accordion" id="accordion3">
@@ -201,39 +174,11 @@
                                             <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
                                                 <div class="accordion-inner">
                                                     <ul class="search-listing">
-                                                        <li>
-                                                            <label class="control control--checkbox">0 to 1 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">1 to 2 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">2 to 3 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">3 to 4 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">4 to 5 year
-                                                                <input type="checkbox">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
-                                                        <li>
-                                                            <label class="control control--checkbox">More than 5 year
-                                                                <input type="checkbox">
+                                                        <li ng-repeat="experience in experienceFilterList">
+                                                            <label class="control control--checkbox">
+                                                                <span>{{experience.name | capitalize}}
+                                                                </span>
+                                                                <input class="experiencecheckbox filtercheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
@@ -369,31 +314,31 @@
                 </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var otherfiled = '<?php echo $otherfiled; ?>';
-        </script>
-        <script>
-             var header_all_profile = '<?php echo $header_all_profile; ?>';
-        </script>
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var app = angular.module('freelancerHireListApp', ['ui.bootstrap']);
+        </script>  
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-        
+        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
         <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>
         <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
 
         <!-- <script>
-             var header_all_profile = '<?php echo $header_all_profile; ?>';
+             var header_all_profile = '<?php //echo $header_all_profile; ?>';
         </script>
         <script src="<?php //echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
  -->
-        <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
-            <!--<script async type="text/javascript" src="<?php //echo base_url('assets/js/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>-->
-            <!--<script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script>
+        <?php //if (IS_HIRE_JS_MINIFY == '0') { ?>
+            
+        <?php //} else { ?>
+            <!-- <script src="<?php //echo base_url('assets/js_min/croppie.js?ver='.time()); ?>"></script> -->
             <!--<script async type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/freelancer-hire/recommen_candidate.js?ver=' . time()); ?>"></script>-->
             <!--<script async type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
-        <?php } ?>
+        <?php //} ?>
     </body>
 </html>
