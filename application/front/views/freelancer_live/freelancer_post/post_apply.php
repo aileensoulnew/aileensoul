@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="FARecommendedProject" ng-controller="FARecommendedProjectController">
+<?php $userid = $this->session->userdata('aileenuser'); ?>
     <head>
         <title> <?php echo $title; ?></title>
         <?php echo $head; ?> 
@@ -14,7 +15,8 @@
         <?php } ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
          <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
-
+         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
     <body class="">
@@ -103,160 +105,164 @@
                                         </div>
                                     </div>                             
                                 </div>
-                                <div class="left-search-box list-type-bullet">
-                                    <div class="">
-                                        <h3>Top Categories</h3>
-                                    </div>
-                                    <ul class="search-listing">
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Admin<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">Banking<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        <li>
-                                            <label class=""><a href="#">IT<span class="pull-right">(50)</span></a></label>
-                                        </li>
-                                        
-                                    </ul>
-                                    <p class="text-right p10"><a href="#">More Categories</a></p>
-                                </div>
-                                 <div class="left-search-box">
-                                    <div class="accordion" id="accordion2">
-                                        <div class="accordion-group">
-                                            <div class="accordion-heading">
-                                                <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" aria-expanded="true">Work Type</a></h3>
-                                            </div>
-                                            <div id="collapseOne" class="accordion-body collapse in" aria-expanded="true" style="">
-                                                <ul class="search-listing">
-                                                    <li>
-                                                        <label class="control control--checkbox">Hourly
-                                                            <input type="checkbox">
-                                                            <div class="control__indicator"></div>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label class="control control--checkbox">Fixed
-                                                            <input type="checkbox">
-                                                            <div class="control__indicator"></div>
-                                                        </label>
-                                                    </li>
-                                                    
-                                                </ul>
-                                            </div>
+                                <form name="job-company-filter" id="job-company-filter">
+                        
+                                    <div class="left-search-box">
+                                        <div class="">
+                                            <h3>Top Fields</h3>
                                         </div>
-                                        
+                                        <ul class="search-listing custom-scroll">
+                                            <li ng-repeat="category in FAFields">
+                                                <label class="control control--checkbox"><span ng-bind="category.industry_name | capitalize"></span>
+                                                    <input type="checkbox" class="category-filter" ng-model="cat_fil" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                        <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-fields">View More Fields</a></p>
                                     </div>
-                                </div>
-                                <div class="left-search-box">
-                                    <div class="accordion" id="accordion2">
-                                        <div class="accordion-group">
-                                            <div class="accordion-heading">
-                                                <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" aria-expanded="true">Posting Period</a></h3>
-                                            </div>
-                                            <div id="collapseOne" class="accordion-body collapse in" aria-expanded="true" style="">
-                                                <ul class="search-listing">
-                                                    <li>
-                                                        <label class="control control--checkbox">Today
-                                                            <input type="checkbox">
-                                                            <div class="control__indicator"></div>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label class="control control--checkbox">Last 7 Days
-                                                            <input type="checkbox">
-                                                            <div class="control__indicator"></div>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label class="control control--checkbox">Last 15 Days
-                                                            <input type="checkbox">
-                                                            <div class="control__indicator"></div>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label class="control control--checkbox">Last 45 Days
-                                                            <input type="checkbox">
-                                                            <div class="control__indicator"></div>
-                                                        </label>
-                                                    </li>
-                                                    <li>
-                                                        <label class="control control--checkbox">More than 45 Days
-                                                            <input type="checkbox">
-                                                            <div class="control__indicator"></div>
-                                                        </label>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                    
+                                    <div class="left-search-box">
+                                        <div class="">
+                                            <h3>Top Categories</h3>
                                         </div>
-                                        
+                                        <ul class="search-listing custom-scroll">
+                                            <li ng-repeat="skill in FASkills">
+                                                <label class="control control--checkbox"><span ng-bind="skill.skill | capitalize"></span>
+                                                    <input type="checkbox" class="skills-filter" ng-model="skills_fil" name="skill[]" ng-value="{{skill.skill_id}}" ng-change="applyJobFilter()"/>
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                        <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-skills ">View More Categories</a></p>
                                     </div>
-                                </div>
-                                <div class="left-search-box">
-                                    <div class="accordion" id="accordion3">
-                                        <div class="accordion-group">
-                                            <div class="accordion-heading">
-                                                <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo" aria-expanded="true">Required Experience</a></h3>
-                                            </div>
-                                            <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
-                                                <div class="accordion-inner">
+
+                                    <div class="left-search-box">
+                                        <div class="accordion" id="accordion2">
+                                            <div class="accordion-group">
+                                                <div class="accordion-heading">
+                                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" aria-expanded="true">Work Type</a></h3>
+                                                </div>
+                                                <div id="collapseOne" class="accordion-body collapse in" aria-expanded="true" style="">
                                                     <ul class="search-listing">
                                                         <li>
-                                                            <label class="control control--checkbox">0 to 1 year
-                                                                <input type="checkbox">
+                                                            <label class="control control--checkbox">Hourly
+                                                                <input type="checkbox" ng-value="1" class="worktype-filter" ng-model="worktype1" name="worktype[]" ng-change="applyJobFilter()">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
                                                         <li>
-                                                            <label class="control control--checkbox">1 to 2 year
-                                                                <input type="checkbox">
+                                                            <label class="control control--checkbox">Fixed
+                                                                <input type="checkbox" ng-value="2" class="worktype-filter" ng-model="worktype2" name="worktype[]" ng-change="applyJobFilter()">
+                                                                <div class="control__indicator"></div>
+                                                            </label>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="left-search-box">
+                                        <div class="accordion" id="accordion2">
+                                            <div class="accordion-group">
+                                                <div class="accordion-heading">
+                                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" aria-expanded="true">Posting Period</a></h3>
+                                                </div>
+                                                <div id="collapseOne" class="accordion-body collapse in" aria-expanded="true" style="">
+                                                    <ul class="search-listing">
+                                                        <li>
+                                                            <label class="control control--checkbox">Today
+                                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="1" ng-model="post_period1" ng-change="applyJobFilter()">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
                                                         <li>
-                                                            <label class="control control--checkbox">2 to 3 year
-                                                                <input type="checkbox">
+                                                            <label class="control control--checkbox">Last 7 Days
+                                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="2" ng-model="post_period2" ng-change="applyJobFilter()">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
                                                         <li>
-                                                            <label class="control control--checkbox">3 to 4 year
-                                                                <input type="checkbox">
+                                                            <label class="control control--checkbox">Last 15 Days
+                                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="3" ng-model="post_period3" ng-change="applyJobFilter()">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
                                                         <li>
-                                                            <label class="control control--checkbox">4 to 5 year
-                                                                <input type="checkbox">
+                                                            <label class="control control--checkbox">Last 45 Days
+                                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="4" ng-model="post_period4" ng-change="applyJobFilter()">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
                                                         <li>
-                                                            <label class="control control--checkbox">More than 5 year
-                                                                <input type="checkbox">
+                                                            <label class="control control--checkbox">More than 45 Days
+                                                                <input class="period-filter" type="checkbox" name="posting_period[]" ng-value="5" ng-model="post_period5" ng-change="applyJobFilter()">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
                                                     </ul>
-                                                    
                                                 </div>
                                             </div>
+                                            
                                         </div>
-                                    
                                     </div>
-                                </div>
+                                    <div class="left-search-box">
+                                        <div class="accordion" id="accordion3">
+                                            <div class="accordion-group">
+                                                <div class="accordion-heading">
+                                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo" aria-expanded="true">Required Experience</a></h3>
+                                                </div>
+                                                <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
+                                                    <div class="accordion-inner">
+                                                        <ul class="search-listing">
+                                                            <li>
+                                                                <label class="control control--checkbox">0 to 1 year
+                                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="1" ng-model="exp1" ng-change="applyJobFilter()">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="control control--checkbox">1 to 2 year
+                                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="2" ng-model="exp2" ng-change="applyJobFilter()">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="control control--checkbox">2 to 3 year
+                                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="3" ng-model="exp3" ng-change="applyJobFilter()">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="control control--checkbox">3 to 4 year
+                                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="4" ng-model="exp4" ng-change="applyJobFilter()">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="control control--checkbox">4 to 5 year
+                                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="5" ng-model="exp5" ng-change="applyJobFilter()">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="control control--checkbox">More than 5 year
+                                                                    <input class="exp-filter" type="checkbox" name="experience[]" ng-value="6" ng-model="exp6" ng-change="applyJobFilter()">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                                    
+                                </form>
 
                                 <?php echo $left_footer; ?>
                             </div>
@@ -286,7 +292,76 @@
                             </div>
 
                             <div class="job-contact-frnd1">
-
+                                <div class="user_no_post_avl ng-scope" ng-if="freepostapply.length == 0">
+                                    <div class="user-img-nn">
+                                        <div class="user_no_post_img">
+                                            <img src="<?php echo base_url('assets/img/no-post.png?ver=time()');?>" alt="bui-no.png">
+                                        </div>
+                                        <div class="art_no_post_text">No Projects Available.</div>
+                                    </div>
+                                </div>
+                                <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
+                                    <div class="all-job-top">
+                                        <div class="job-top-detail">
+                                            <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
+                                                <span ng-if="applypost.day_remain > 0">({{applypost.day_remain}} days left)</span>
+                                                </a>
+                                            </h5>
+                                            <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
+                                            <p ng-if="applypost.post_rate != ''">Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
+                                        </div>
+                                    </div>
+                                    <div class="all-job-middle">
+                                        <p class="pb5">
+                                            <span class="location" ng-if="applypost.city || applypost.country">
+                                                <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
+                                                <span ng-if="applypost.city && applypost.country">
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
+                                                </span>
+                                                <!-- IF ONLY CITY AVAILABLE -->
+                                                <span ng-if="applypost.city && !applypost.country">
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
+                                                </span>
+                                                <!-- IF ONLY COUNTRY AVAILABLE -->
+                                                <span ng-if="!applypost.city && applypost.country">
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
+                                                </span>
+                                            </span>
+                                            <span class="exp">
+                                                <span>
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
+                                                    Skils: <span dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </p>                                
+                                        <p dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_description}}" dd-text-collapse-cond="false">
+                                        </p>
+                                        <p ng-if="applypost.industry_name != '' ">
+                                            Categories : <span>{{applypost.industry_name}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="all-job-bottom">
+                                        <span>Applied Persons: {{applypost.ShortListedCount}}</span>
+                                        <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
+                                        <p class="pull-right" ng-if="applypost.apply_post == 1">
+                                            <a href="javascript:void(0);" class="btn4 applied">Applied</a>
+                                        </p>
+                                        <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 1">
+                                            <a href="javascript:void(0);" class="btn4 saved">Saved</a>
+                                            <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
+                                        </p>
+                                        <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 0">
+                                            <?php if($userid_login != "" && $this->freelance_apply_profile_set == 0): ?>
+                                                <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
+                                                <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
+                                            <?php else: ?>
+                                                <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4 savedpost{{applypost.post_id}}">Save</a>
+                                                <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
+                                            <?php endif; ?>
+                                        </p>
+                                    </div>
+                                </div>
 
                             </div>
                             <div id="loader" style="display:none;"><p style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>"/></p></div>
@@ -421,8 +496,18 @@
             ?>
             <!-- <script async src="<?php // echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> -->
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <?php } ?>        
+        <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
 
+        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
 
 
         <script type="text/javascript">
@@ -430,9 +515,20 @@
             var base_url = '<?php echo base_url(); ?>';
             var count_profile_value = '<?php echo $count_profile_value; ?>';
             var count_profile = '<?php echo $count_profile; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var title = '<?php echo $title; ?>';
+            var login_user_id = '<?php echo $userid; ?>';
+            var fa_profile_set = '<?php echo $this->freelance_apply_profile_set; ?>';
+            var app = angular.module('FARecommendedProject', ['ui.bootstrap']);
         </script>
+
+        <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
+        <!-- <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script> -->
+        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
+        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
+        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/post_apply_new.js?ver=' . time()); ?>"></script>
         <?php
-        if (IS_APPLY_JS_MINIFY == '0') {
+        /*if (IS_APPLY_JS_MINIFY == '0') {
             ?>
             <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
             <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script>
@@ -445,11 +541,7 @@
             <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/post_apply.js?ver=' . time()); ?>"></script>
             <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/freelancer_apply_common.js?ver=' . time()); ?>"></script>
             <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/progressbar.js?ver=' . time()); ?>"></script>
-        <?php } ?>
-
-        <script>
-             var header_all_profile = '<?php echo $header_all_profile; ?>';
-        </script>
+        <?php }*/ ?>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     </body>               
 </html>

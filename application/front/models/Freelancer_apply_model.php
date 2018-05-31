@@ -791,4 +791,209 @@ class Freelancer_apply_model extends CI_Model {
         return count($result_array);        
     }
 
+    function recommended_freelance_work($userid = "",$category_id = "",$skill_id = "",$worktype = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5')
+    {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql = "";        
+        if($category_id != "")
+        {
+            $sql .= "post_field_req IN (".$category_id.") OR ";
+        }        
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "fp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+        if($worktype != "")
+        {
+            $sql_wt = "";
+            foreach (explode(",", $worktype) as $key => $value) {
+                if($value == 1)
+                    $sql_wt .= "(fp.post_rating_type = 1) OR ";
+                if($value == 2)
+                    $sql_wt .= "(fp.post_rating_type = 2) OR ";
+            }
+            $sql .= "(".trim($sql_wt, ' OR ').") OR ";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(fp.post_exp_year >= 0 AND fp.post_exp_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(fp.post_exp_year >= 1 AND fp.post_exp_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(fp.post_exp_year >= 2 AND fp.post_exp_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(fp.post_exp_year >= 3 AND fp.post_exp_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(fp.post_exp_year >= 4 AND fp.post_exp_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(fp.post_exp_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
+        $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s,ailee_freelancer_post_reg fpr');
+        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
+        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
+        $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
+        $this->db->where('fp.post_field_req = fpr.freelancer_post_field');
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1','fpr.user_id' =>$userid,'fp.user_id != '=>$userid));
+        $this->db->group_by('fp.post_skill,fp.post_id');
+        $this->db->order_by('fp.post_id','desc');
+        if($limit != "")
+        {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        //echo $this->db->last_query();exit;
+        $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
+            $result_array[$key]['fullname'] = $firstname;
+
+            $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
+            $result_array[$key]['industry_name'] = $industry_name;
+
+            $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
+            $freelancerapply1 = $this->data['freelancerapply'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            if(isset($freelancerapply1) && !empty($freelancerapply1))
+                $result_array[$key]['apply_post'] = 1;
+            else
+                $result_array[$key]['apply_post'] = 0;
+
+            $contition_array = array('user_id' => $userid, 'job_save' => '2', 'post_id ' => $value['post_id'], 'job_delete' => '1');
+            $jobsave = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            if(isset($jobsave) && !empty($jobsave))
+                $result_array[$key]['saved_post'] = 1;
+            else
+                $result_array[$key]['saved_post'] = 0;
+        }
+        
+        //return $result_array;
+        $retur_arr = array();
+        $retur_arr['fa_projects'] = $result_array;
+        $retur_arr['total_record'] = $this->recommended_freelance_work_total_rec($userid,$category_id,$skill_id,$worktype,$period_filter,$exp_fil);        
+        return $retur_arr;
+    }
+
+    function recommended_freelance_work_total_rec($userid = "",$category_id = "",$skill_id = "",$worktype = "",$period_filter = "",$exp_fil = "")
+    {
+        $sql = "";        
+        if($category_id != "")
+        {
+            $sql .= "post_field_req IN (".$category_id.") OR ";
+        }        
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "fp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+        if($worktype != "")
+        {
+            $sql_wt = "";
+            foreach (explode(",", $worktype) as $key => $value) {
+                if($value == 1)
+                    $sql_wt .= "(fp.post_rating_type = 1) OR ";
+                if($value == 2)
+                    $sql_wt .= "(fp.post_rating_type = 2) OR ";
+            }
+            $sql .= "(".trim($sql_wt, ' OR ').") OR ";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(fp.post_exp_year >= 0 AND fp.post_exp_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(fp.post_exp_year >= 1 AND fp.post_exp_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(fp.post_exp_year >= 2 AND fp.post_exp_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(fp.post_exp_year >= 3 AND fp.post_exp_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(fp.post_exp_year >= 4 AND fp.post_exp_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(fp.post_exp_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
+        $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s,ailee_freelancer_post_reg fpr');
+        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
+        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
+        $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
+        $this->db->where('fp.post_field_req = fpr.freelancer_post_field');
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1','fpr.user_id' =>$userid,'fp.user_id != '=>$userid));
+        $this->db->group_by('fp.post_skill,fp.post_id');
+        $this->db->order_by('fp.post_id','desc');
+        if($limit != "")
+        {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        //echo $this->db->last_query();exit;
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
+
 }

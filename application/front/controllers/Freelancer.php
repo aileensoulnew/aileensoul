@@ -1111,9 +1111,18 @@ class Freelancer extends MY_Controller {
             $page = $_GET["page"];
         }
 
-        $start = ($page - 1) * $perpage;
-        if ($start < 0)
-            $start = 0;
+        $limit = '5';
+        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");//Field
+        
+        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $worktype = (isset($_POST['worktype']) && !empty($_POST['worktype']) ? $_POST['worktype'] : "");
+        $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
+        $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
+        
+        $postdetail = $this->freelancer_apply_model->recommended_freelance_work($userid,$category_id,$skill_id,$worktype,$period_filter,$exp_fil,$page,$limit);
+        echo json_encode($postdetail);
+        exit;
+
 
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $freelancerdata = $this->data['freelancerdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
