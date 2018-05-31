@@ -176,7 +176,7 @@
                             <a   ng-if="(details_data.fh_status == '0' && details_data.fh_step == '3') || (details_data.fp_status == '0' && details_data.fp_step == '7')" ng-href="<?php echo base_url('freelancer/home'); ?>" target="_self">
                                 <img title="Freelance Profile" src="<?php echo base_url() . "assets/n-images/i3.jpg"; ?>">
                             </a>
-                            <a  ng-if="details_data.fh_step == null || details_data.fp_step == null" ng-href="<?php echo base_url('freelancer'); ?>" target="_self">
+                            <a  ng-if="details_data.fh_step == null || details_data.fp_step == null" ng-href="<?php echo base_url('freelance-profile'); ?>" target="_self">
                                 <img title="Freelance Profile" src="<?php echo base_url() . "assets/n-images/i3.jpg"; ?>">
                             </a>
                         </div>
@@ -184,15 +184,15 @@
                     <div class="col-md-8 col-sm-8">
                         <div class="right-box">
                             <h1>
-                                <a title="Freelance Profile" ng-if="(details_data.fh_step == '3' && details_data.fh_status == '1') || (details_data.fh_step == '7' && details_data.fp_status == '1')"  ng-href="<?php echo base_url('freelancer/home'); ?>" target="_self">Freelance Profile</a>
-                                 <a title="Freelance Profile"  ng-if="(details_data.fh_status == '0' && details_data.fh_step == '3') || (details_data.fp_status == '0' && details_data.fp_step == '7')" ng-href="<?php echo base_url('freelancer/home'); ?>" target="_self">Freelance Profile</a>
-                                  <a title="Freelance Profile" ng-if="details_data.fh_step == null || details_data.fp_step == null" ng-href="<?php echo base_url('freelancer'); ?>" target="_self">Freelance Profile</a>
+                                <!-- <a title="Freelance Profile" ng-if="(details_data.fh_step == '3' && details_data.fh_status == '1') || (details_data.fh_step == '7' && details_data.fp_status == '1')"  ng-href="<?php //echo base_url('freelancer/home'); ?>" target="_self">Freelance Profile</a>
+                                 <a title="Freelance Profile"  ng-if="(details_data.fh_status == '0' && details_data.fh_step == '3') || (details_data.fp_status == '0' && details_data.fp_step == '7')" ng-href="<?php //echo base_url('freelancer/home'); ?>" target="_self">Freelance Profile</a> -->
+                                  <a title="Freelance Profile" ng-if="details_data.fh_step == null || details_data.fp_step == null" ng-href="<?php echo base_url('freelance-profile'); ?>" target="_self">Freelance Profile</a>
                             </h1>
                             <p>Hire freelancers and also find freelance work.</p>
                             <div class="btns">
-                                <a title="Take me in"  ng-if="(details_data.fh_step == '3' && details_data.fh_status == '1') || (details_data.fh_step == '7' && details_data.fp_status == '1')" class="btn-4"  ng-href="<?php echo base_url('freelancer/home'); ?>" target="_self">Take me in</a> 
-                                <a title="Take me in" ng-if="(details_data.fh_status == '0' && details_data.fh_step == '3') || (details_data.fp_status == '0' && details_data.fp_step == '7')" class="btn-4" ng-href="<?php echo base_url('freelancer/home'); ?>" target="_self">Active</a> 
-                                <a title="Take me in" ng-if="details_data.fh_step == null || details_data.fp_step == null" class="btn-4" ng-href="<?php echo base_url('freelancer'); ?>" target="_self">Register</a> 
+                                <!-- <a title="Take me in"  ng-if="(details_data.fh_step == '3' && details_data.fh_status == '1') || (details_data.fh_step == '7' && details_data.fp_status == '1')" class="btn-4"  ng-href="<?php //echo base_url('freelancer/home'); ?>" target="_self">Take me in</a> 
+                                <a title="Take me in" ng-if="(details_data.fh_status == '0' && details_data.fh_step == '3') || (details_data.fp_status == '0' && details_data.fp_step == '7')" class="btn-4" ng-href="<?php //echo base_url('freelancer/home'); ?>" target="_self">Active</a> --> 
+                                <a title="Take me in" ng-if="details_data.fh_step == null || details_data.fp_step == null" class="btn-4" ng-href="<?php echo base_url('freelance-profile'); ?>" target="_self">Register</a> 
                                 <a title="How it works" data-target="#fre-popup" data-toggle="modal" href="javascript:;" class="pl20 ml20 hew">How it works?</a>
                             </div>
                         </div>
