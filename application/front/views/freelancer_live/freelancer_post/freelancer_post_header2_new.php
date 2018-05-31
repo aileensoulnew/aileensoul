@@ -116,23 +116,24 @@ $userid = $this->session->userdata('aileenuser');
 								<li>Account</li>
 								<li><a href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 								<li><a href="<?php echo base_url('freelance-work/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
-								<li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
+								<!-- <li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
 							</ul>
 						</li>
 					</ul>
 				</div>
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
 					<div class="job-search-box1 clearfix">
-						<form action="<?php echo base_url('freelance-hire/search'); ?>" method="get">
+						<!-- <form action="<?php echo base_url('freelance-hire/search'); ?>" method="get"> -->
+						<form onsubmit="searchSubmit()">
 							<fieldset class="sec_h2">
-								<input id="tags" class="tags ui-autocomplete-input skill_keyword" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+								<input id="freelance_keyword" class="tags ui-autocomplete-input skill_keyword" name="freelance_keyword" placeholder="Companies, Category, Products" autocomplete="off" ng-model="keyword" type="text">
 							</fieldset>
 							<fieldset class="sec_h2">
-								<input id="searchplace" class="searchplace ui-autocomplete-input skill_keyword" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
+								<input id="freelance_location" ng-model="city" class="searchplace ui-autocomplete-input skill_keyword" name="freelance_location" placeholder="Find Location" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="new-search-btn">
-								<label for="search_btn" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>
-								<input id="search_btn" style="display: none;" name="search_submit" value="Search" onclick="return checkvalue()" type="submit">
+								<label for="search_btn_main" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>
+								<input id="search_btn_main" style="display: none;" name="search_submit" value="Search" onclick="return searchSubmit()" type="submit">
 							</fieldset>
 						</form>    
 					</div>
@@ -168,7 +169,7 @@ $userid = $this->session->userdata('aileenuser');
 								</div>
 								<div class="new-search-btn">
 									<button type="button" class="close-new btn">Cancel</button>
-									<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
+									<button type="submit" id="search_btn_res" class="btn btn-primary" onclick="return check();">Search</button>
 								</div>
 							</form>
 						</div>
@@ -543,3 +544,177 @@ $userid = $this->session->userdata('aileenuser');
 	}
 </script>
  <!-- all message notification header end -->
+ <script type="text/javascript" charset="utf-8">
+function searchSubmit(){
+    
+    var keyword = $("#freelance_keyword").val().toLowerCase().split(' ').join('+');
+    var city = $("#freelance_location").val().toLowerCase().split(' ').join('+');
+
+    /*var work_timing_fil = "";
+    $('.work_timing-filter').each(function(){
+        if(this.checked){
+            var currentid = $(this).val();
+            work_timing_fil += (work_timing_fil == "") ? currentid : "-" + currentid;
+        }
+    }); */       
+    // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+    var keyworddata = [];
+    if(keyword != ""){
+        keyworddata = keyword.split(",");
+        // remove in from array
+        if(keyworddata.indexOf("in") > -1 && city != ""){
+            keyworddata.splice(keyworddata.indexOf("in"),1);
+        }
+        keyword = keyworddata.join('-').toString();
+    }
+    var citydata = [];
+    if(city != ""){
+        citydata = city.split(",");
+        // remove in from array
+        // if(citydata.indexOf("in") > -1 && city != ""){
+        //     citydata.splice(citydata.indexOf("in"),1);
+        // }
+        city = citydata.join('-').toString();
+    }
+
+    if(keyword[keyword.length - 1] == "-")
+    {            
+        keyword = keyword.slice(0,-1);
+    }
+    
+    if (keyword == '' && city == '') {
+        return false;
+    } else if (keyword != '' && city == '') {
+        window.location.href = base_url + 'freelancer/search/' + keyword;
+    } else if (keyword == '' && city != '') {
+        window.location.href = base_url + 'freelancer/search/projects-in-' + city;
+    } else {
+        window.location.href = base_url + 'freelancer/search/' + keyword + '-projects-in-' + city;
+    }
+}
+
+$(function() {
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) { 
+        return split( term ).pop();
+    }
+
+    $( "#freelance_keyword" ).focusout(function() {
+        if($( "#freelance_keyword" ).val() != "")
+        {
+            var ser_val = $( "#freelance_keyword" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {                
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "#freelance_keyword" ).val(ser_val_)
+            }
+        }
+    });
+    $( "#freelance_keyword" ).focusin(function() {
+        if($( "#freelance_keyword" ).val() != "")
+        {
+            var ser_val = $( "#freelance_keyword" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#freelance_keyword" ).val(ser_val_)
+        }
+    });
+    $( "#freelance_keyword" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "freelancer_apply_live/freelancer_apply_search_keyword", { term : terms},response);
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," );
+            return false;                
+        }
+    });
+
+    $( "#freelance_location" ).focusout(function() {
+        if($( "#freelance_location" ).val() != "")
+        {
+            var ser_val = $( "#freelance_location" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "#freelance_location" ).val(ser_val_)
+            }
+        }
+    });
+    $( "#freelance_location" ).focusin(function() {
+        if($( "#freelance_location" ).val() != "")
+        {
+            var ser_val = $( "#freelance_location" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#freelance_location" ).val(ser_val_)
+        }
+    });
+    $( "#freelance_location" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "freelancer_apply_live/freelancer_apply_search_city", { term : terms},response);
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," ).toLowerCase();
+            return false;                
+        }
+    });
+});
+</script>

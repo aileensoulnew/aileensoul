@@ -42,18 +42,17 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         }
 </style>
     </head>
-    <body class="profile-main-page">    
+    <body class="profile-main-page">
         <?php 
-        if($job_deactive == 0  && $this->job_profile_set == 1){
-            echo $job_header2;
-        }else if ($userid_login != "" && ($job_deactive > 0 || $this->job_profile_set == 1)) {
+        if($job_deactive == 0  && $this->freelance_apply_profile_set == 1){
             echo $header_profile;
+            echo $freelancer_post_header2;
         }
-        else if($userid_login != "" && $this->job_profile_set == 0)
+        else if($userid_login != "" && $this->freelance_apply_profile_set == 0)
         {
              echo $header_profile;
         }
-        if($userid_login == "" || $job_deactive > 0 || $this->job_profile_set == 0)
+        if($userid_login == "" || $this->freelance_apply_profile_set == 0)
         {
             $headercls = "";
             if($userid_login == "")
