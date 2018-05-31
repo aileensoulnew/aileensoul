@@ -640,8 +640,6 @@ public function freelancer_hire_professional_info_insert() {
 
 
 
-
-
 		// if ($this->input->post('next')) {
 		//            $this->form_validation->set_rules('professional_info', ' Please Enter Your professional info', 'required');
 		//            if ($this->form_validation->run() == FALSE) {
@@ -664,9 +662,9 @@ public function freelancer_hire_professional_info_insert() {
 	if ($updatdata) {
 
 	//                    $this->session->set_flashdata('success', 'professional information updated successfully');
-
+		$hire_slug = (count($userdata) > 0) ? $userdata[0]['freelancer_hire_slug'] : "";
 		if ($userdata[0]['free_hire_step'] == 3) {
-			redirect('freelance-hire/employer-details', refresh);
+			redirect('freelance-hire/employer-details/'.$hire_slug, refresh);
 		} else {
 			redirect('post-freelance-project?page=professional', refresh);
 		}
@@ -1124,10 +1122,10 @@ public function freelancer_hire_profile($id = "") {
 		$this->freelancer_hire_check();
 			// code for display page end
 		$contition_array = array('user_id' => $userid, 'status' => '1');
-		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image, profile_background, user_id,designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 	} else {
 		$contition_array = array('user_id' => $id, 'status' => '1', 'free_hire_step' => '3');
-		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image, profile_background, user_id,designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 	}
 	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " | Details | Employer Profile" . TITLEPOSTFIX;
 	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_profile', $this->data);

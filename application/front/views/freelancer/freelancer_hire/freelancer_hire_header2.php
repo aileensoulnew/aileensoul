@@ -15,6 +15,7 @@
         right: 10px;
     }
 </style>
+
 <header>
     <div class="bg-search">
         <div class="header2 ">
@@ -36,10 +37,15 @@
                                     <div class="dropdown_hover">
                                         <span id="art_profile"><?php echo $this->lang->line("employer_details"); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></span>
                                         <div class="dropdown-content_hover" id="dropdown-content_hover">
-                                            <?php if (($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'add-projects') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'edit-projects')) { ?>
-                                            <a title="View Profile" onclick="return leave_page(2)"><i class="fa fa-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
-                                            <?php } else { ?>
-                                                <a title="View Profile" href="<?php echo base_url('freelance-hire/employer-details'); ?>"><i class="fa ffreelancer/freelancer_hire_profilea-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
+                                            <?php if (($this->uri->segment(1) == 'post-freelance-project') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'edit-projects')) { ?>
+                                                <a title="View Profile" onclick="return leave_page(2)">
+                                                    <i class="fa fa-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?>
+                                                </a>
+                                            <?php } else {  ?>
+                                                <a title="View Profile" href="<?php echo base_url('freelance-hire/employer-details/'.$free_hire_login_slug); ?>">
+                                                    <i class="fa ffreelancer/freelancer_hire_profilea-user" aria-hidden="true"></i>
+                                                    <?php echo $this->lang->line("view_profile"); ?>
+                                                </a>
                                             <?php } ?>
                                             <?php if (($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'add-projects') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'freelancer_edit_post')) { ?>
                                                 <a title="Edit Profile" onclick="return leave_page(3)"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo $this->lang->line("edit_profile"); ?></a>

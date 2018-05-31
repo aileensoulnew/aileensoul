@@ -618,7 +618,8 @@ class Freelancer_hire extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
         $userdata = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-
+        $hire_slug = (count($userdata) > 0) ? $userdata[0]['freelancer_hire_slug'] : "";
+        
 
 
 
@@ -646,7 +647,7 @@ class Freelancer_hire extends MY_Controller {
 //                    $this->session->set_flashdata('success', 'professional information updated successfully');
 
             if ($userdata[0]['free_hire_step'] == 3) {
-                redirect('freelance-hire/employer-details', refresh);
+                redirect('freelance-hire/employer-details/'.$hire_slug, refresh);
             } else {
                 redirect('post-freelance-project?page=professional', refresh);
             }

@@ -139,10 +139,9 @@ $userid = $this->session->userdata('aileenuser');
                         </li>
                         <li class="dropdown user-id">
                             <a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span class="pr-name">Account</span></a>
-
                             <ul class="dropdown-menu account">
                                 <li>Account</li>
-                                <li><a href="<?php echo base_url('freelance-hire/employer-details'); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+                                <li><a href="<?php echo base_url('freelance-hire/employer-details/'. $free_hire_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                 <li><a href="<?php echo base_url('freelance-hire/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
                                 <li><a href="#"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
                             </ul>

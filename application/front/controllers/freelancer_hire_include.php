@@ -5,6 +5,7 @@ $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $selec
 
 $select_data = 'profile_background,username,fullname,freelancer_hire_user_image,profile_background,profile_background_main,designation,freelancer_hire_slug,free_hire_step';
 $this->data['freehiredata'] = $this->freelancer_hire_model->getfreelancerhiredata($userid, $select_data);
+$this->data['free_hire_login_slug'] = (count($this->data['freehiredata']) > 0) ? $this->data['freehiredata']['freelancer_hire_slug'] : '';
 
 $this->data['header'] = $this->load->view('header', $this->data, true);
 $this->data['footer'] = $this->load->view('footer', $this->data, true);

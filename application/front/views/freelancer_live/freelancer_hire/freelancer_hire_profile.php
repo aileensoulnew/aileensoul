@@ -44,7 +44,7 @@
         <?php
         if ($this->session->userdata('aileenuser')) {
             if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
-                echo $freelancer_hire_header2;
+                echo $freelancer_post_header2;
             } else {
                 echo $freelancer_hire_header2;
             }
@@ -228,7 +228,13 @@
                                     <ul class="pro-fw4">
                                     <?php } ?>  
                                     <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>>
-                                        <?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) { ?><a title="Employer Details" href="<?php echo base_url('freelance-hire/employer-details/' . $slug); ?>"><?php echo $this->lang->line("employer_details"); ?></a> <?php } else { ?> <a title="Employer Details" href="<?php echo base_url('freelance-hire/employer-details'); ?>"><?php echo $this->lang->line("employer_details"); ?></a> <?php } ?>
+                                        <?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) { ?>
+                                            <a title="Employer Details" href="<?php echo base_url('freelance-hire/employer-details/' . $slug); ?>">
+                                                <?php echo $this->lang->line("employer_details"); ?>
+                                            </a> 
+                                        <?php } else { ?> 
+                                            <a title="Employer Details" href="<?php echo base_url .'freelance-hire/employer-details/'. $freelancerhiredata[0]['freelancer_hire_slug']; ?>"><?php echo $this->lang->line("employer_details"); ?>
+                                            </a> <?php } ?>
                                     </li>
                                     <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>> 
                                         <?php if($this->session->userdata('aileenuser')){ ?>
