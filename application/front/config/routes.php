@@ -201,7 +201,7 @@ $route['freelance-employer'] = "freelancer_hire_live/freelancer_hire";
 // $route['freelance-hire/home'] = "freelancer_hire_live/recommen_candidate";
 $route['hire-freelancer'] = "freelancer_hire_live/recommen_candidate";
 $route['freelance-hire/employer-details'] = "freelancer_hire_live/freelancer_hire_profile";
-$route['freelance-hire/employer-details/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
+// $route['freelance-hire/employer-details/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
 $route['freelance-employer/projects'] = "freelancer_hire_live/freelancer_hire_post";
 $route['freelance-employer/projects/(:any)'] = "freelancer_hire_live/freelancer_hire_post/$1";
 $route['freelance-employer/saved-freelancer'] = "freelancer_hire_live/freelancer_save";
@@ -210,10 +210,14 @@ $route['post-freelance-project'] = "freelancer_hire_live/freelancer_add_post";
 $route['freelance-employer/basic-information'] = "freelancer_hire_live/freelancer_hire_basic_info";
 $route['freelance-employer/address-information'] = "freelancer_hire_live/freelancer_hire_address_info";
 $route['freelance-employer/professional-information'] = "freelancer_hire_live/freelancer_hire_professional_info";
+
 $route['freelance-hire/search'] = "search_live/freelancer_hire_search";
 $route['freelance-hire/search/0/(:any)'] = "search_live/freelancer_hire_search/0/$1";
 $route['freelance-hire/search/(:any)/0'] = "search_live/freelancer_hire_search/$1/0";
 $route['freelance-hire/search/(:any)/(:any)'] = "search_live/freelancer_hire_search/$1/$2";
+
+
+
 $route['freelance-hire/edit-projects/(:any)'] = "freelancer_hire_live/freelancer_edit_post/$1";
 $route['freelance-hire/reactivate'] = "freelancer_hire_live/reactivate";
 $route['freelance-hire/deactivate'] = "freelancer_hire_live/deactivate_hire";
@@ -531,6 +535,8 @@ $route['freelancer/search/(.+)'] = "freelancer_apply_live/freelancer_apply_searc
  // $route['jobs/(:any)'] = "job/job_search/$1";
 //$route['(:any)'] = "job/job_search";
 //$route['(:any)-jobs'] = "job/job_search";//old
+$route['freelance-employer/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
+
 $route['(:any)-jobs'] = "job/job_search_new/$1";//Pratik Job By Job Title,Job by Category,Job by Skills
 $route['jobs-opening-at-(:any)'] = "job/job_search_new/$1";
 $route['jobs-in-(:any)'] = "job/job_search_new/$1";

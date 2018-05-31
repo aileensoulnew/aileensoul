@@ -227,13 +227,13 @@
                                 <?php } else { ?>
                                     <ul class="pro-fw4">
                                     <?php } ?>  
-                                    <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>>
+                                    <li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(3) == '')) { ?> class="active" <?php } ?>>
                                         <?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) { ?>
-                                            <a title="Employer Details" href="<?php echo base_url('freelance-hire/employer-details/' . $slug); ?>">
+                                            <a title="Employer Details" href="<?php echo base_url('freelance-employer/' . $slug); ?>">
                                                 <?php echo $this->lang->line("employer_details"); ?>
                                             </a> 
                                         <?php } else { ?> 
-                                            <a title="Employer Details" href="<?php echo base_url .'freelance-hire/employer-details/'. $freelancerhiredata[0]['freelancer_hire_slug']; ?>"><?php echo $this->lang->line("employer_details"); ?>
+                                            <a title="Employer Details" href="<?php echo base_url .'freelance-employer/'. $freelancerhiredata[0]['freelancer_hire_slug']; ?>"><?php echo $this->lang->line("employer_details"); ?>
                                             </a> <?php } ?>
                                     </li>
                                     <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>> 

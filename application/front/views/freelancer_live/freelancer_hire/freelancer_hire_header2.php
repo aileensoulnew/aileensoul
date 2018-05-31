@@ -39,7 +39,7 @@
                                             <?php if (($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'add-projects') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'edit-projects')) { ?>
                                             <a title="View Profile" onclick="return leave_page(2)"><i class="fa fa-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
                                             <?php } else { ?>
-                                                <a title="View Profile" href="<?php echo base_url('freelance-hire/employer-details/'. $free_hire_login_slug); ?>"><i class="fa ffreelancer/freelancer_hire_profilea-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
+                                                <a title="View Profile" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"><i class="fa ffreelancer/freelancer_hire_profilea-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
                                             <?php } ?>
                                             <?php if (($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'add-projects') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'freelancer_edit_post')) { ?>
                                                 <a title="Edit Profile" onclick="return leave_page(3)"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo $this->lang->line("edit_profile"); ?></a>

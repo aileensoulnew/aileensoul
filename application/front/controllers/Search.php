@@ -2190,7 +2190,7 @@ class Search extends MY_Controller {
                     $return_html .= '</a></h5>';
                     if ($this->session->userdata('aileenuser')) {
                         if ($free_work_result) {
-                            $return_html .= '<p><a href="' . base_url('freelance-hire/employer-details/' . $hireslug) . '">';
+                            $return_html .= '<p><a href="' . base_url('freelance-employer/' . $hireslug) . '">';
                             $return_html .= ucwords($firstname) . " " . ucwords($lastname);
                             $return_html .= '</a></p>';
                         } else {

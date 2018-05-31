@@ -664,7 +664,7 @@ public function freelancer_hire_professional_info_insert() {
 	//                    $this->session->set_flashdata('success', 'professional information updated successfully');
 		$hire_slug = (count($userdata) > 0) ? $userdata[0]['freelancer_hire_slug'] : "";
 		if ($userdata[0]['free_hire_step'] == 3) {
-			redirect('freelance-hire/employer-details/'.$hire_slug, refresh);
+			redirect('freelance-employer/'.$hire_slug, refresh);
 		} else {
 			redirect('post-freelance-project?page=professional', refresh);
 		}
@@ -1248,7 +1248,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 			$return_html .= '<h5><a title="' . $post['post_name'] . '" href="' . base_url('freelance-hire/project/' . $text . $cityname1 . '-' . $post['user_id'] . '-' . $post['post_id']) . ' ">';
 			$return_html .= $post['post_name'];
 			$return_html .= '</a></h5>';
-			$return_html .= '<p><a title="' . ucwords($firstname) . " " . ucwords($lastname) . '" href="' . base_url('freelance-hire/employer-details/' . $hireslug) . '">';
+			$return_html .= '<p><a title="' . ucwords($firstname) . " " . ucwords($lastname) . '" href="' . base_url('freelance-employer/' . $hireslug) . '">';
 			$return_html .= ucwords($firstname) . " " . ucwords($lastname);
 			$return_html .= '</a></p>
 			</div>
