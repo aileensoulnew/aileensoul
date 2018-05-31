@@ -39,7 +39,7 @@
 
         /*code for freelace apply link start */
             $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
-            $userdata1 = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $freelancer_apply_profile_count = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         /*Code for freelance aply link ends*/
 
             $this->business_profile_link = base_url("business-search");
