@@ -28,6 +28,10 @@ class Freelancer_apply_live extends MY_Controller {
     }
 
     public function index() {
+        if($this->freelance_apply_profile_set == 1)
+        {
+            redirect(base_url()."recommended-freelance-work");
+        }
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);

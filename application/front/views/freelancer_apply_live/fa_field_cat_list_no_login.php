@@ -1,3 +1,4 @@
+<?php $userid = $this->session->userdata('aileenuser'); ?>
 <!DOCTYPE html>
 <html lang="en" ng-app="freelanceApplyNRApp" ng-controller="freelanceApplyNRController">
     <head>
@@ -47,7 +48,10 @@
 
     <body class="profile-main-page">        
             <div class="middle-section middle-section-banner new-ld-page">
-
+                <?php
+                if($userid != ""){
+                    echo $header_profile;
+                } ?>
                 <!-- <div class="search-banner" >
                     <header>
                         <div class="header">
@@ -367,8 +371,13 @@
                                 <span>Applied Persons: {{applypost.ShortListedCount}}</span>
                                 <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
                                 <p class="pull-right">
-                                    <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
-                                    <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
+                                    <?php if($userid != ""): ?>
+                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
+                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
+                                    <?php else: ?>
+                                        <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
+                                        <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
+                                    <?php endif; ?>
                                 </p>
                             </div>
                         </div>
@@ -487,6 +496,7 @@
         var search_location = '<?php echo $search_location; ?>';
         var login_user_id = "<?php echo $userid_login; ?>";
         var app = angular.module('freelanceApplyNRApp', ['ngRoute','ui.bootstrap']);
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
         // $(document).ready(function(){
         //     $(window).scrollTop(500);
         // });
@@ -510,6 +520,7 @@
                 $("#job_save").val('');
             });*/
     </script>    
+    <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>  
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/fa_field_cat_list_no_login.js?ver=' . time()); ?>"></script>
 </body>
 </html>
