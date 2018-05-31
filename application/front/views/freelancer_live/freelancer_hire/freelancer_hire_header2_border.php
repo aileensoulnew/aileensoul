@@ -68,7 +68,7 @@
                                                 <div class="my_S">Account</div>
                                             </span>
                                             <a title="View Profile" href="<?php echo base_url('freelance-hire/employer-details'); ?>" onclick="return leave_page(2)"><span class="h2-img h2-srrt"></span> View Profile</a>
-                                            <a title="Edit Profile" href="<?php echo base_url('freelance-hire/basic-information'); ?>"  onclick="return leave_page(3)"><span class="h3-img h2-srrt"></span> Edit Profile</a>
+                                            <a title="Edit Profile" href="<?php echo base_url('freelance-employer/basic-information'); ?>"  onclick="return leave_page(3)"><span class="h3-img h2-srrt"></span> Edit Profile</a>
                                             <?php
                                             $userid = $this->session->userdata('aileenuser');
                                             ?>

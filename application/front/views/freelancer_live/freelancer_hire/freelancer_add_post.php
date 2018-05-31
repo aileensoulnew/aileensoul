@@ -300,7 +300,7 @@
                                 }
                                 if (clicked_id == 3)
                                 {
-                                    location.href = '<?php echo base_url('freelance-hire/basic-information'); ?>';
+                                    location.href = '<?php echo base_url('freelance-employer/basic-information'); ?>';
                                 }
                                 if (clicked_id == 4)
                                 {
@@ -401,7 +401,7 @@
                                         window.location = "<?php echo base_url('freelance-hire/employer-details'); ?>";
                                     } else if (clicked_id == 3)
                                     {
-                                        window.location = "<?php echo base_url('freelance-hire/basic-information'); ?>";
+                                        window.location = "<?php echo base_url('freelance-employer/basic-information'); ?>";
                                     } else if (clicked_id == 4)
                                     {
 

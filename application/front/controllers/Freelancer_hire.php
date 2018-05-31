@@ -69,9 +69,9 @@ class Freelancer_hire extends MY_Controller {
 
             if (count($jobdata) > 0) {
                 if ($jobdata['free_hire_step'] == 1) {
-                    redirect('freelance-hire/address-information', refresh);
+                    redirect('freelance-employer/address-information', refresh);
                 } else if ($jobdata['free_hire_step'] == 2) {
-                    redirect('freelance-hire/professional-information', refresh);
+                    redirect('freelance-employer/professional-information', refresh);
                 } else if ($jobdata['free_hire_step'] == 3) {
                     redirect('hire-freelancer', refresh);
                 }
@@ -270,10 +270,10 @@ class Freelancer_hire extends MY_Controller {
                 $updatedata = $this->freelancer_hire_model->update_data($data, 'freelancer_hire_reg', 'user_id', $userid);
                 if ($updatedata) {
                     // $this->session->set_flashdata('success', 'Basic information updated successfully');
-                    redirect('freelance-hire/address-information', refresh);
+                    redirect('freelance-employer/address-information', refresh);
                 } else {
                     //  $this->session->flashdata('error', 'Your data not inserted');
-                    redirect('freelance-hire/basic-information', refresh);
+                    redirect('freelance-employer/basic-information', refresh);
                 }
             } else {
                 $data = array(
@@ -292,10 +292,10 @@ class Freelancer_hire extends MY_Controller {
                 $insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
                 if ($insert_id) {
                     //   $this->session->set_flashdata('success', 'Basic information updated successfully');
-                    redirect('freelance-hire/address-information', refresh);
+                    redirect('freelance-employer/address-information', refresh);
                 } else {
                     //   $this->session->flashdata('error', 'Sorry!! Your data not inserted');
-                    redirect('freelance-hire/basic-information', refresh);
+                    redirect('freelance-employer/basic-information', refresh);
                 }
             }
         }
@@ -494,7 +494,7 @@ class Freelancer_hire extends MY_Controller {
                 if ($this->uri->segment(2) == 'address-information') {
                     
                 } else {
-                    redirect('freelance-hire/address-information');
+                    redirect('freelance-employer/address-information');
                 }
             } elseif ($hire_step[0]['free_hire_step'] == '2') {
                 if ($this->uri->segment(2) == 'professional-information') {
@@ -502,7 +502,7 @@ class Freelancer_hire extends MY_Controller {
                 } elseif ($this->uri->segment(2) == 'address-information') {
                     
                 } else {
-                    redirect('freelance-hire/professional-information');
+                    redirect('freelance-employer/professional-information');
                 }
             }
         } else {
@@ -544,11 +544,11 @@ class Freelancer_hire extends MY_Controller {
                 if ($updatdata) {
 
                     //  $this->session->set_flashdata('success', 'Address information updated successfully');
-                    redirect('freelance-hire/professional-information', refresh);
+                    redirect('freelance-employer/professional-information', refresh);
                 } else {
 
                     // $this->session->flashdata('error', 'Sorry!! Your data not inserted');
-                    redirect('freelance-hire/address-information', refresh);
+                    redirect('freelance-employer/address-information', refresh);
                 }
             } else {
                 
@@ -574,11 +574,11 @@ class Freelancer_hire extends MY_Controller {
             if ($updatdata) {
 
                 //   $this->session->set_flashdata('success', 'Address information updated successfully');
-                redirect('freelance-hire/professional-information', refresh);
+                redirect('freelance-employer/professional-information', refresh);
             } else {
 
                 //  $this->session->flashdata('error', 'Sorry!! Your data not inserted');
-                redirect('freelance-hire/address-information', refresh);
+                redirect('freelance-employer/address-information', refresh);
             }
         }
         //}
@@ -653,7 +653,7 @@ class Freelancer_hire extends MY_Controller {
         } else {
 
             $this->session->flashdata('error', 'Sorry!! Your data not inserted');
-            redirect('freelance-hire/professional-information', refresh);
+            redirect('freelance-employer/professional-information', refresh);
         }
         // }
         // }
@@ -1370,7 +1370,7 @@ class Freelancer_hire extends MY_Controller {
                     $contition_array = array('freelancer_apply.post_id' => $post['post_id'], 'freelancer_apply.is_delete' => '0', 'save.from_id' => $userid, 'save.save_type' => '2', 'save.status' => '2', 'freelancer_post_reg.status' => '1');
                     $data = 'freelancer_post_reg.user_id';
                     $shortlist = $this->data['shortlist'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data, $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-                    $return_html .= '<a title="Shortlisted Persons" href="' . base_url('freelance-hire/freelancer-shortlisted/' . $post['post_id']) . '" class="btn4">Shortlisted Persons:';
+                    $return_html .= '<a title="Shortlisted Persons" href="' . base_url('freelance-employer/shortlisted-freelancers/' . $post['post_id']) . '" class="btn4">Shortlisted Persons:';
                     $return_html .= count($shortlist);
                     $return_html .= '</a>';
                 } else {

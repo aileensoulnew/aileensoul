@@ -49,17 +49,17 @@
                             <div class="col-md-3 col-sm-3">
                                 <div class="left-side-bar">
                                     <ul class="left-form-each">
-                                        <li <?php if ($this->uri->segment(1) == 'freelance-hire') { ?> class="active init" <?php } ?>><a title="Basic Information" href="javascript:void(0);"><?php echo $this->lang->line("basic_info"); ?></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'freelance-employer') { ?> class="active init" <?php } ?>><a title="Basic Information" href="javascript:void(0);"><?php echo $this->lang->line("basic_info"); ?></a></li>
                                         <li class="custom-none <?php
                                         if ($freehiredata[0]['free_hire_step'] < '1') {
                                             echo "khyati";
                                         }
-                                        ?>"><a title="Address Information" href="<?php echo base_url('freelance-hire/address-information'); ?>"><?php echo $this->lang->line("address_info"); ?></a></li>
+                                        ?>"><a title="Address Information" href="<?php echo base_url('freelance-employer/address-information'); ?>"><?php echo $this->lang->line("address_info"); ?></a></li>
                                         <li class="custom-none <?php
                                         if ($freehiredata[0]['free_hire_step'] < '2') {
                                             echo "khyati";
                                         }
-                                        ?>"><a title="Professional Information" href="<?php echo base_url('freelance-hire/professional-information'); ?>"><?php echo $this->lang->line("professional_info"); ?></a></li>
+                                        ?>"><a title="Professional Information" href="<?php echo base_url('freelance-employer/professional-information'); ?>"><?php echo $this->lang->line("professional_info"); ?></a></li>
                                     </ul>
                                 </div>
                             </div>

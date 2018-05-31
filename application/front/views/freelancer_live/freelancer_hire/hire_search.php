@@ -504,7 +504,7 @@
                                 if (response.freelancerhire == 1) {
                                     window.location = "<?php echo base_url() ?>freelance-hire/search?skills=" + skill + '&searchplace' + place;
                                 } else {
-                                    window.location = "<?php echo base_url() ?>freelance-hire/basic-information";
+                                    window.location = "<?php echo base_url() ?>freelance-employer/basic-information";
                                 }
                             } else if (response.data == "password") {
                                 $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
@@ -694,7 +694,7 @@
                         {
                             if (response == "ok") {
                                 $("#btn-register").html('<img  alt="loader" src="<?php echo base_url() ?>images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
-                                window.location = "<?php echo base_url() ?>freelance-hire/basic-information";
+                                window.location = "<?php echo base_url() ?>freelance-employer/basic-information";
                                 //                                window.location = "<?php //echo base_url()    ?>freelance-hire/search?skills=" + skill + '&searchplace' + place;
                             } else {
                                 $("#register_error").fadeIn(1000, function () {

@@ -44,7 +44,7 @@
                                             <?php if (($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'add-projects') || ($this->uri->segment(1) == 'freelance-hire' && $this->uri->segment(2) == 'freelancer_edit_post')) { ?>
                                                 <a title="Edit Profile" onclick="return leave_page(3)"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo $this->lang->line("edit_profile"); ?></a>
                                             <?php } else { ?>
-                                                <a title="Edit Profile" href="<?php echo base_url('freelance-hire/basic-information'); ?>"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo $this->lang->line("edit_profile"); ?></a>      <?php } ?>
+                                                <a title="Edit Profile" href="<?php echo base_url('freelance-employer/basic-information'); ?>"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo $this->lang->line("edit_profile"); ?></a>      <?php } ?>
                                             <?php
                                             $userid = $this->session->userdata('aileenuser');
                                             ?>
