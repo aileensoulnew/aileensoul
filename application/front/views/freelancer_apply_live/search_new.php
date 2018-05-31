@@ -28,8 +28,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); 
         ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
@@ -44,7 +44,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
     </head>
     <body class="profile-main-page">
         <?php 
-        if($job_deactive == 0  && $this->freelance_apply_profile_set == 1){
+        if($userid_login != ""  && $this->freelance_apply_profile_set == 1){
             echo $header_profile;
             echo $freelancer_post_header2;
         }
@@ -323,13 +323,20 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="all-job-bottom">
                                 <span>Applied Persons: {{applypost.ShortListedCount}}</span>
                                 <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
-                                <p class="pull-right">
-                                    <?php if($userid_login != ""): ?>
+                                <p class="pull-right" ng-if="applypost.apply_post == 1">
+                                    <a href="javascript:void(0);" class="btn4 applied">Applied</a>
+                                </p>
+                                <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 1">
+                                    <a href="javascript:void(0);" class="btn4 saved">Saved</a>
+                                    <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
+                                </p>
+                                <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 0">
+                                    <?php if($userid_login != "" && $this->freelance_apply_profile_set == 0): ?>
                                         <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
                                         <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
                                     <?php else: ?>
-                                        <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
-                                        <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
+                                        <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4 savedpost{{applypost.post_id}}">Save</a>
+                                        <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
                                     <?php endif; ?>
                                 </p>
                             </div>
@@ -522,8 +529,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             
             var w = '';            
             var login_user_id = "<?php echo $userid_login; ?>";
-            var job_profile_set = "<?php echo $this->job_profile_set; ?>";
-            var job_deactive = "<?php echo $job_deactive; ?>";
+            var fa_profile_set = "<?php echo $this->freelance_apply_profile_set; ?>";
             var app = angular.module('freelancerApplySearch', ['ui.bootstrap']);
             $(document).ready(function(){
                 $(window).scrollTop(500);
@@ -534,9 +540,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     $(this).next('ul.dropdown-menu').toggle();
                     e.stopPropagation();
                 });
-                $(".right-header ul li.dropdown a").click(function(e){                          
+                /*$("li.user-id a").click(function(e){
+                    $(".dropdown").removeClass("open");
+                    $(this).next('ul.dropdown-menu').toggle();
+                    e.stopPropagation();
+                });*/
+                /*$(".right-header ul li.dropdown a").click(function(e){
                     $('.right-header ul.dropdown-menu').hide();
-                });
+                });*/
             });
             $(document).click(function(){
                 $('.right-header ul.dropdown-menu').hide();

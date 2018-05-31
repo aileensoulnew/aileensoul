@@ -36,20 +36,32 @@
           </style>
     </head>
     <body class="profile-main-page">    
-        <?php 
-        
-        if($user_id != "" ) {
+        <?php
+        if($user_id != ""  && $this->freelance_apply_profile_set == 1){
             echo $header_profile;
+            echo $freelancer_post_header2;
+        }
+        else if($user_id != "" && $this->freelance_apply_profile_set == 0)
+        {
+             echo $header_profile;
         }
 
-        $noLogin = "";
-        if($user_id == "")
+        if($user_id == "" || $this->freelance_apply_profile_set == 0)
         {
-            $noLogin = "new-ld-page";
+            $headercls = "";
+            if($user_id == "")
+            {
+                $headercls = " new-ld-page";
+            }
+            ?>
+            <div class="middle-section middle-section-banner <?php echo $headercls; ?>">
+            <?php
+            echo $search_banner;
         }
-        ?>
-        <div class="middle-section middle-section-banner <?php echo $noLogin;?>">
-        <?php echo $search_banner; ?>
+        else
+        { ?>
+            <div class="middle-section">
+        <?php } ?>        
             <div class="container pt20">
                 <div ng-view></div>
             </div>
@@ -76,6 +88,25 @@
             var l = '';
             var w = '';
             var app = angular.module('viewMoreFreelanceApplyApp', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
+
+            $(document).ready(function($) {
+                $("li.user-id label").click(function(e){
+                    $(".dropdown").removeClass("open");
+                    $(this).next('ul.dropdown-menu').toggle();
+                    e.stopPropagation();
+                });
+                /*$("li.user-id a").click(function(e){
+                    $(".dropdown").removeClass("open");
+                    $(this).next('ul.dropdown-menu').toggle();
+                    e.stopPropagation();
+                });*/
+                /*$(".right-header ul li.dropdown a").click(function(e){
+                    $('.right-header ul.dropdown-menu').hide();
+                });*/
+            });
+            $(document).click(function(){
+                $('.right-header ul.dropdown-menu').hide();
+            });
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>        
         <script src="<?php echo base_url('assets/js/webpage/freelancer-apply/view_more_freelance_apply.js?ver=' . time()) ?>"></script>        

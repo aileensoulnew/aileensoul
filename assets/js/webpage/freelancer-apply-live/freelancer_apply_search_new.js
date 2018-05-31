@@ -100,7 +100,7 @@ app.filter('capitalize', function () {
 
     }
 });
-app.controller('freelancerApplySearchController', function ($scope, $http,$window) {
+app.controller('freelancerApplySearchController', function ($scope, $http,$window,$compile ) {
     $scope.title = title;
     $scope.jobCategory = {};
     $scope.jobCity = {};
@@ -210,53 +210,40 @@ app.controller('freelancerApplySearchController', function ($scope, $http,$windo
     //apply post start
     $scope.applypopup = function(postid, userid)
     {
-        if(job_profile_set == 0 && login_user_id != "")
-        {
-            $("#job_apply").val(postid);
-            $("#job_apply_userid").val(userid);
-            $("#job_save").val('');
-            $('#job_reg').modal('show');
-        }
-        else
-        {
-            if(login_user_id == "" || job_deactive == 1)
-            {                
-                if(login_user_id == ""){
-                    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");        
-                }
-                else if(job_deactive == 1)
-                    $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
-                $('#bidmodal').modal('show');
+        
+        if(login_user_id == "" || fa_profile_set == 0)
+        {                
+            /*if(login_user_id == ""){
+                $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");        
             }
-            else
-            {                
-                $('.biderror .mes').html("<div class='pop_content'>Do you want to apply this job?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " onClick='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal' title='Yes'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal' title='No'>No</a></div></div>");
-                $('#bidmodal').modal('show');
-            }
+            else if(job_deactive == 1)
+                $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");*/
+             $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");  
+            $('#bidmodal').modal('show');
         }
+        else if(login_user_id != "" || fa_profile_set == 1)
+        {                
+            var $el = $('.biderror .mes').html("<div class='pop_content'>Do you want to apply for this work?<div class='model_ok_cancel'><a class='okbtn' id=" + postid + " ng-click='apply_post(" + postid + "," + userid + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
+            $compile($el)($scope);
+            $('#bidmodal').modal('show');
+        }
+        
     };
 
     $scope.apply_post = function(abc, xyz) {
         var alldata = 'all';
         var user = xyz;
-
         $.ajax({
             type: 'POST',
-            url: base_url + 'job/job_apply_post',
+            url:  base_url + "freelancer/apply_insert",
             data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
-            datatype: 'json',
             success: function (data) {
-                $('.savedpost' + abc).hide();
-                $('.applypost' + abc).html(data.status);
+                $('.savedpost' + abc).hide();                
+                var $eln = $('.applypost' + abc).html("Applied");
+                $compile($eln)($scope);
                 $('.applypost' + abc).attr('disabled', 'disabled');
                 $('.applypost' + abc).attr('onclick', 'myFunction()');
                 $('.applypost' + abc).addClass('applied');
-
-                if (data.notification.notification_count != 0) {
-                    var notification_count = data.notification.notification_count;
-                    var to_id = data.notification.to_id;
-                    show_header_notification(notification_count, to_id);
-                }
             }
         });
     };
@@ -265,41 +252,32 @@ app.controller('freelancerApplySearchController', function ($scope, $http,$windo
     //save post start 
     $scope.savepopup  = function(id) {
         
-        if(job_profile_set == 0 && login_user_id != "")
+        if(login_user_id == "" || fa_profile_set == 0)
         {
-            $("#job_apply_userid").val('');
-            $("#job_apply").val('');
-            $("#job_save").val(id);
-            $('#job_reg').modal('show');
+            /*if(login_user_id == ""){
+               $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+            }
+            else if(fa_profile_set == 0)
+                $('.biderror .mes').html("<div class='pop_content'>Please Login.</div>");*/
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+            $('#bidmodal').modal('show');
         }
-        else
+        else if(login_user_id != ""  && fa_profile_set == 1)
         {
-            if(login_user_id == "" || job_deactive == 1)
-            {
-                if(login_user_id == ""){
-                   $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");                    
-                }
-                else if(job_deactive == 1)
-                    $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
-                $('#bidmodal').modal('show');
-            }
-            else
-            {
-                save_post(id);
-                $('.biderror .mes').html("<div class='pop_content'>Job successfully saved.");
-                $('#bidmodal').modal('show');
-            }
+            save_post(id);
+            $('.biderror .mes').html("<div class='pop_content'>Project successfully saved.");
+            $('#bidmodal').modal('show');
         }
     };
 
-    function save_post(abc)
+    function save_post(id)
     {
         $.ajax({
             type: 'POST',
-            url: base_url + 'job/job_save',
-            data: 'post_id=' + abc,
+            url:  base_url + "freelancer/save_user",
+            data: 'post_id=' + id,
             success: function (data) {
-                $('.' + 'savedpost' + abc).html(data).addClass('saved');
+                $('.' + 'savedpost' + id).html(data).addClass('saved');
             }
         });
 

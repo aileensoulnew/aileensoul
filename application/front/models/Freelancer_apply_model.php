@@ -294,6 +294,21 @@ class Freelancer_apply_model extends CI_Model {
 
             $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
             $result_array[$key]['industry_name'] = $industry_name;
+
+            $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
+            $freelancerapply1 = $this->data['freelancerapply'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            if(isset($freelancerapply1) && !empty($freelancerapply1))
+                $result_array[$key]['apply_post'] = 1;
+            else
+                $result_array[$key]['apply_post'] = 0;
+
+            $contition_array = array('user_id' => $userid, 'job_save' => '2', 'post_id ' => $value['post_id'], 'job_delete' => '1');
+            $jobsave = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            if(isset($jobsave) && !empty($jobsave))
+                $result_array[$key]['saved_post'] = 1;
+            else
+                $result_array[$key]['saved_post'] = 0;
         }
         
         //return $result_array;
@@ -611,6 +626,8 @@ class Freelancer_apply_model extends CI_Model {
         }
         $query = $this->db->get();
         //echo $this->db->last_query();exit;
+
+        
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
             $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
@@ -618,6 +635,21 @@ class Freelancer_apply_model extends CI_Model {
 
             $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
             $result_array[$key]['industry_name'] = $industry_name;
+
+            $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
+            $freelancerapply1 = $this->data['freelancerapply'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            if(isset($freelancerapply1) && !empty($freelancerapply1))
+                $result_array[$key]['apply_post'] = 1;
+            else
+                $result_array[$key]['apply_post'] = 0;
+
+            $contition_array = array('user_id' => $userid, 'job_save' => '2', 'post_id ' => $value['post_id'], 'job_delete' => '1');
+            $jobsave = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            if(isset($jobsave) && !empty($jobsave))
+                $result_array[$key]['saved_post'] = 1;
+            else
+                $result_array[$key]['saved_post'] = 0;
         }
         
         //return $result_array;
