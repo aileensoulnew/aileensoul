@@ -2639,7 +2639,7 @@ Your browser does not support the audio tag.
                 $hire_slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $id))->row()->freelancer_hire_slug;
                 $image_path = FCPATH . 'uploads/freelancer_post_profile/thumbs/' . $msg['user_image'];
                 $user_image = base_url() . 'uploads/freelancer_post_profile/thumbs/' . $msg['user_image'];
-                $profile_url = base_url() . 'freelance-hire/employer-details/' . $hire_slug;
+                $profile_url = base_url() . 'freelance-employer/' . $hire_slug;
             }
             if ($message_from_profile == 5) {
                 $image_path = FCPATH . 'uploads/business_profile/thumbs/' . $msg['user_image'];
