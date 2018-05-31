@@ -227,7 +227,7 @@
                                 <?php } else { ?>
                                     <ul class="pro-fw4">
                                     <?php } ?>  
-                                    <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>>
+                                    <li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(3) == '')) { ?> class="active" <?php } ?>>
                                         <?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) { ?>
                                             <a title="Employer Details" href="<?php echo base_url('freelance-employer/' . $slug); ?>">
                                                 <?php echo $this->lang->line("employer_details"); ?>
