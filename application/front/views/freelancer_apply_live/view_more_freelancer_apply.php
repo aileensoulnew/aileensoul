@@ -61,7 +61,8 @@
         else
         { ?>
             <div class="middle-section">
-        <?php } ?>        
+            <?php 
+        } ?>
             <div class="container pt20">
                 <div ng-view></div>
             </div>
