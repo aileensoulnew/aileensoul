@@ -31,7 +31,7 @@
           }
           </style>
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page without-reg free-hire-cus">
 
         <div class="middle-section middle-section-banner new-ld-page">
             
@@ -103,7 +103,7 @@
                         <h3>Fields</h3>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3" ng-if="FAFields.length != 0" ng-repeat="faField in FAFields" ng-init="FAIndex=$index">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="FAFields.length != 0" ng-repeat="faField in FAFields" ng-init="FAIndex=$index">
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url(); ?>freelance-jobs/{{faField.industry_slug}}">
                                     <div class="cus-cat-middle">
@@ -127,7 +127,7 @@
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
 
-                        <div class="col-md-3" ng-if="FASkills.length != 0" ng-repeat="faSkills in FASkills" ng-init="FASIndex=$index">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="FASkills.length != 0" ng-repeat="faSkills in FASkills" ng-init="FASIndex=$index">
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url(); ?>freelance-jobs/{{faSkills.skill_slug}}">
                                     <div class="cus-cat-middle">
@@ -159,21 +159,21 @@
                         <h3>How it works</h3>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/reg.png">
                                 <p>Register</p>
                                 <span>Sign up for free, fill up your details and showcase your work portfolio.</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/find-work.png">
                                 <p>Find work</p>
                                 <span>Get notified when someone selects you for a project or search for work or even apply for the recommended projects we provide.</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box last-child">
                                 <img src="<?php echo base_url(); ?>assets/n-images/bid-earn.png">
                                 <p>Bid and Earn</p>
@@ -190,7 +190,7 @@
 
                         </div>
                         <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -198,7 +198,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -206,7 +206,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -214,7 +214,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">

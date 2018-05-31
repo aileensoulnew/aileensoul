@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page without-reg bus-main">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
@@ -57,7 +57,7 @@
                         <h2>Business by Category</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3" ng-repeat="category in businessCategory">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="category in businessCategory">
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url ?>{{category.industry_slug}}-business">
                                     <div class="cus-cat-middle">
@@ -81,7 +81,7 @@
                         <h2>Business by Location</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3" ng-repeat="location in businessLocation">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box " ng-repeat="location in businessLocation">
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url ?>business-in-{{location.slug}}">
                                     <div class="cus-cat-middle">
@@ -106,7 +106,7 @@
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
                        
-                        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2 text-center ">
+                        <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center ">
                             <p>In the emerging phase of start-ups and entrepreneurship more and more people are getting inclined towards having his/her own business venture. </p>
                             <p>Aileensoul recognises the need of time and offers a discreetly designed Business profile which allows the users to increase their business contacts as well as smoothly promote their new established business. </p>
                             <p>Digital marketing is on spur and hence Aileensoul through its business profile helps the users by freely providing a platform to enrich their business through various means. One can upload images, audios, pdf files and videos in this profile. The notification bar of business profile keeps the users aware of all the ongoing trends and details of his/her arena. Hence, keeping people connected to each other.</p>
@@ -138,21 +138,21 @@
                         <h2>How it Works</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/reg.png?ver='.time()) ?>">
                                 <p>Register</p>
                                 <span>List your business for free and fill your business detail to get found online.</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/connect.png?ver='.time()) ?>">
                                 <p>Grow Network</p>
                                 <span>Build and grow your business network by connecting with other business.</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box last-child">
                                 <img src="<?php echo base_url('assets/n-images/stay-update.png?ver='.time()) ?>">
                                 <p>Stay Updated</p>
@@ -170,7 +170,7 @@
                         <h3>Related Article</h3>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="rel-art-box">
                                 <img src="<?php echo base_url('assets/img/art-post.jpg?ver='.time()) ?>">
                                 <div class="rel-art-name">
@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="rel-art-box">
                                 <img src="<?php echo base_url('assets/img/art-post.jpg?ver='.time()) ?>">
                                 <div class="rel-art-name">
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="rel-art-box">
                                 <img src="<?php echo base_url('assets/img/art-post.jpg?ver='.time()) ?>">
                                 <div class="rel-art-name">
@@ -194,7 +194,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="rel-art-box">
                                 <img src="<?php echo base_url('assets/img/art-post.jpg?ver='.time()) ?>">
                                 <div class="rel-art-name">

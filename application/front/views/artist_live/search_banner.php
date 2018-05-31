@@ -26,7 +26,7 @@
 
 		</div>
 		<div class="row">
-			<div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
+			<div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
 				<div class="search-bnr-text">
 					<h1>Search and Connect with the Best Talented Artist from All over the World</h1>
 				</div>
@@ -42,7 +42,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-6 right-bnr">
+			<div class="col-lg-6 col-md-5 hidden-sm hidden-xs right-bnr">
 				<img src="<?php echo base_url('assets/n-images/art-bnr-img1.png') ?>">
 			</div>
 		</div>

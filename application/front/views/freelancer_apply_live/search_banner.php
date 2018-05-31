@@ -11,11 +11,11 @@
         <div class="header">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 left-header fw-479">
+                    <div class="col-md-6 col-sm-4 left-header fw-479">
                         <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>">Aileensoul</a></h2>
                         
                     </div>
-                    <div class="col-md-6 col-sm-6 no-login-right fw-479">
+                    <div class="col-md-6 col-sm-8 no-login-right fw-479">
                         <a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
                         <a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Account</a>
                             
@@ -29,13 +29,13 @@
     ?>
     <div class="container">
         <div class="text-right pt20">
-            <?php if($this->freelance_apply_profile_set == 0){ ?>
+            <?php if($this->freelance_apply_profile_set == 0 && $userid != ""){ ?>
                 <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
                 <!-- <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a> -->
             <?php } ?>
         </div>
         <div class="row">
-            <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
+            <div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
                 <div class="search-bnr-text">
                     <h1>Work from Anywhere at Any Time</h1>
                     <p>Get the work you love</p>
@@ -64,12 +64,12 @@
                         </div>
                         <div class="fw pt20">
                             <!-- <a href="#" class="btn1">Search Jobs</a> -->
-                            <input type="submit" class="btn1" name="submit" value="Submit">
+                            <input type="submit" class="btn1" name="submit" value="Search">
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="col-md-6 right-bnr">
+            <div class="col-lg-6 col-md-5 hidden-sm hidden-xs right-bnr">
                 <img src="<?php echo base_url('assets/n-images/free-apply.png') ?>">
             </div>
         </div>

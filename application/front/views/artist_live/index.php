@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page without-reg find-art">
         <?php
             if ($ismainregister == false) {
                 // $this->load->view('artist_live/login_header');
@@ -40,7 +40,7 @@
                         <h2>Artist by Category</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3" ng-repeat="category in artistCategory">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="category in artistCategory">
                             <div class="all-cat-box">
                                 <a href="<?php echo artist_category ?>{{category.category_slug}}">
                                     <div class="cus-cat-middle">
@@ -66,7 +66,7 @@
                         <h2>Artist by Location</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3" ng-repeat="location in topLocationData">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="location in topLocationData">
                             <div class="all-cat-box">
                                 <a href="<?php echo artist_location ?>{{location.city_name}}">
                                     <div class="cus-cat-middle">
@@ -91,7 +91,7 @@
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
                         
-                        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2 text-center ">
+                        <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center ">
                             <p>Artistic Profile is one of the unique feature that Aileensoul offers to its users. The profile is created solely to provide a magnificent platform for the artists as well as for the art lovers.</p>
                             <p>This profile is an effort to build a bridge between the artists and the layman. Any person with artistic skills can make a profile here for free and showcase their abilities to the viewers. </p>
                             <p>The most Interesting thing about the profile is that, it is not constrained to a particular field but is open to every field.</p>
@@ -134,21 +134,21 @@
                         <h2>How it Works</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/reg.png') ?>">
                                 <p>Register</p>
                                 <span>Sign up in artistic profile for free and illustrate your talent.</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/connect.png') ?>">
                                 <p>Connect</p>
                                 <span>Grow your artist network by connecting with another artist from all over the world.</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-4">
                             <div class="hiw-box last-child">
                                 <img src="<?php echo base_url('assets/n-images/telent.png') ?>">
                                 <p>Show your Talent</p>
@@ -168,7 +168,7 @@
 
                         </div>
                         <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
                                     <div class="rel-art-name">
@@ -176,7 +176,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
                                     <div class="rel-art-name">
@@ -184,7 +184,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
                                     <div class="rel-art-name">
@@ -192,7 +192,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
                                     <div class="rel-art-name">

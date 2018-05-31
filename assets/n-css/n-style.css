@@ -2316,6 +2316,9 @@ input[type=text] {
 	.search-bnr-text{padding:25px 0 40px;}
 	.banner-left h1{font-size:32px;}
 	.how-about-profile .center-title h2{font-size:24px;}
+	.free-hire-cus .right-bnr img{width:85%;}
+	.find-art .right-bnr img{width:85%;}
+	.bus-main .right-bnr img{width:85%;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -2596,8 +2599,14 @@ input[type=text] {
 	.without-reg header .logo a{font-size:28px; padding-top:3px;}
 	.how-about-profile .center-title h2{line-height:1.5;}
 	.content-bnt-text h2{line-height:1.5;}
+	.bus-bnr-prlx .content-bnt-text h2{font-size:20px; padding-bottom:50px;}
+	.content-bnr{max-height:300px;}
+	.content-bnr .content-bnt-text{padding:77px 0;}
 	.content-bnr.recruiter-bnr-prlx{background: url('../n-images/mob-recruiter-img.jpg'); background-size:100%;}
 	.content-bnr.free-hire-bnr-prlx {background: url('../n-images/mob-free-hire-bnr-img.jpg'); background-size:100%;}
+	.content-bnr.free-apply-bnr-prlx {background: url('../n-images/mob-free-apply-img.jpg'); background-size:100%;}
+	.content-bnr.art-bnr-prlx {background: url('../n-images/mob-art-img.jpg'); background-size:100%;}
+	.content-bnr.bus-bnr-prlx {background: url('../n-images/mob-bus-img.jpg'); background-size:100%;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/

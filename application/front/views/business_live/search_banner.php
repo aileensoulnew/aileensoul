@@ -17,7 +17,7 @@
 			<?php } ?>
 		</div>
 		<div class="row">
-			<div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
+			<div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
 				<div class="search-bnr-text">
 					<h1>Find the business that best suits your requirement</h1>
 				</div>
@@ -34,7 +34,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-md-6 right-bnr">
+			<div class="col-lg-6 col-md-5 hidden-sm hidden-xs right-bnr">
 				<img src="<?php echo base_url('assets/n-images/business-bnr.png') ?>">
 			</div>
 		</div>
