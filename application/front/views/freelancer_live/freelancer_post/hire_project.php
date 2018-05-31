@@ -16,21 +16,22 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
 	</head>
 	<body class="page-container-bg-solid page-boxed pushmenu-push freeh3">
-		<?php echo $header; ?>
+		<?php //echo $header; ?>
 		<?php
 		$returnpage = $_GET['page'];
-
 		if ($this->session->userdata('aileenuser') != $recliveid) {
 			$userpost = $this->common->select_data_by_id('freelancer_post_reg', 'user_id', $this->session->userdata('aileenuser'), $data = 'user_id', $join_str = array());
 			if ($userpost) {
 				echo $freelancer_post_header2;
 			}
+			else{
+				echo $header_profile;
+			}
 		} elseif ($freelancr_user_data[0]['free_hire_step'] == 3) {
 			echo $freelancer_hire_header2;
 		} elseif ($this->session->userdata('aileenuser') == $recliveid) {
 			echo $freelancer_hire_header2;
-		} else {
-			
+		} else {			
 		}
 		?>
 
@@ -226,7 +227,7 @@
 																			<?php } ?>
 																			<?php } ?>
 																			<?php if ($this->session->userdata('aileenuser') == $post_user[0]['user_id']) { ?>
-																			<li><a title="Projects" href="<?php echo base_url('freelance-hire/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
+																			<li><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
 																			<?php } else if ($hire_user) { ?>
 																			<li><a title="Projects" href="javascript:void(0);"><?php echo $this->lang->line("Projects"); ?></a></li>
 																			<?php
@@ -238,13 +239,13 @@
 																			}
 																			?>
 																			<?php if ($apply_user) { ?>
-																			<li><a title="Projects" href="<?php echo base_url('freelance-hire/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
+																			<li><a title="Projects" href="<?php echo base_url('freelance-employer/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
 																			<?php } else { ?>
 																			<li><a title="Projects" href="<?php echo base_url('freelance-work/registration'); ?>"><?php echo $this->lang->line("Projects"); ?></a></li>
 																			<?php } ?>
 																			<?php } ?>
 																			<?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
-																			<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-hire/freelancer-save'); ?>">Saved</a></li>
+																			<li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>">Saved</a></li>
 																			<?php } ?>
 
 																		</ul>

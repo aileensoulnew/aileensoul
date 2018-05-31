@@ -23,7 +23,7 @@
                             <div class="add-post-button">
                                 
                                     <div class="back">
-                                        <a title="Back to Post" href="<?php echo base_url("freelance-hire/projects"); ?>">
+                                        <a title="Back to Post" href="<?php echo base_url("freelance-employer/projects"); ?>">
                                         <div class="but1">
                                             <?php echo $this->lang->line("back_to_post"); ?>
                                         </div>

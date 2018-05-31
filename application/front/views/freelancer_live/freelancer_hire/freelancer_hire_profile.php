@@ -232,7 +232,7 @@
                                     </li>
                                     <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>> 
                                         <?php if($this->session->userdata('aileenuser')){ ?>
-                                        <?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) { ?><a title="Projects"  href="<?php echo base_url('freelance-hire/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a><?php } else { ?><a title="Projects" href="<?php echo base_url('freelance-hire/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a><?php } ?>
+                                        <?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) { ?><a title="Projects"  href="<?php echo base_url('freelance-employer/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a><?php } else { ?><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a><?php } ?>
                                         <?php }else{ ?>
                                         <a title="Projects"  href="javascript:void(0);"><?php echo $this->lang->line("Projects"); ?></a>
                                         <?php } ?>
@@ -240,7 +240,7 @@
                                     <?php
                                     if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'projects' || $this->uri->segment(2) == 'employer-details' || $this->uri->segment(2) == 'add-projects' || $this->uri->segment(2) == 'freelancer-save') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) {
                                         ?>
-                                        <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer" href="<?php echo base_url('freelance-hire/freelancer-save'); ?>"><?php echo $this->lang->line("saved_freelancer"); ?></a>
+                                        <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>"><?php echo $this->lang->line("saved_freelancer"); ?></a>
                                         </li>
                                     <?php } ?>
                                 </ul>                          
@@ -281,7 +281,7 @@
 
                 <?php if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
                     <div  class="add-post-button mob-block">
-                        <a title="Post Projects" class="btn btn-3 btn-3b" href="<?php echo base_url('freelance-hire/add-projects'); ?>"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->lang->line("post_project"); ?></a>
+                        <a title="Post Projects" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->lang->line("post_project"); ?></a>
 
                     </div>
                 <?php } ?>
@@ -318,7 +318,7 @@
 
                         <div  class="add-post-button">
                             <?php if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
-                                <a title="Post Projects" class="btn btn-3 btn-3b" href="<?php echo base_url('freelance-hire/add-projects'); ?>"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->lang->line("post_project"); ?></a>
+                                <a title="Post Projects" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->lang->line("post_project"); ?></a>
                             <?php } ?>
                         </div>
                     </div>

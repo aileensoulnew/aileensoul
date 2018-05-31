@@ -18,7 +18,7 @@ class Freelancer_hire_model extends CI_Model {
         $this->db->join('freelancer_hire_reg fr', 'fp.user_id = fr.user_id', 'left');
         $this->db->where(array('fp.post_id' => $postid, 'fp.is_delete' => '0', 'fr.user_id' => $userid, 'fr.status' => '1', 'fr.free_hire_step' => '3'));
         $query = $this->db->get();
-//       $result_array = $query->row_array();
+        //       $result_array = $query->row_array();
         return $query->result_array();
     }
 

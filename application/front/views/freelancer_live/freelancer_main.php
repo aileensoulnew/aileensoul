@@ -33,7 +33,7 @@
                                 <?php if ($hire_step[0]['free_hire_step'] == '3') { ?>
                                     <a href="<?php echo base_url('hire-freelancer'); ?>" class="button" id="freelancer-hire-button">Hire</a>
                                 <?php } else { ?>
-                                    <a href="<?php echo base_url('freelance-employer'); ?>" class="button" id="freelancer-hire-button">Hire</a>
+                                    <a href="<?php echo base_url('freelance-employer/signup'); ?>" class="button" id="freelancer-hire-button">Hire</a>
                                 <?php } ?>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">

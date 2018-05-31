@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <div class="add-post-button">
-                                <a title="Back to post" href="<?php echo base_url("freelance-hire/projects"); ?>"><div class="back">
+                                <a title="Back to post" href="<?php echo base_url("freelance-employer/projects"); ?>"><div class="back">
                                         <div class="but1">
                                             <?php echo $this->lang->line("back_to_post"); ?>
                                         </div>

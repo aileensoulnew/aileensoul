@@ -76,7 +76,7 @@ class Freelancer_hire extends MY_Controller {
                     redirect('hire-freelancer', refresh);
                 }
             } else {
-                redirect('freelance-hire/registration', refresh);
+                redirect('freelance-employer/signup', refresh);
                 // $this->load->view('freelancer/freelancer_hire/freelancer_hire_basic_info', $this->data);
             }
         }
@@ -210,7 +210,7 @@ class Freelancer_hire extends MY_Controller {
                 //   //  $this->load->view('freelancer/freelancer_hire/recommen_candidate', $this->data);
                 //     redirect('hire-freelancer', refresh);
                 // } else {
-                //     redirect('freelance-hire/add-projects?page=professional', refresh);
+                //     redirect('post-freelance-project?page=professional', refresh);
                 // }
                 redirect('hire-freelancer', refresh);
             } else {
@@ -506,7 +506,7 @@ class Freelancer_hire extends MY_Controller {
                 }
             }
         } else {
-            redirect('freelance-hire/registration');
+            redirect('freelance-employer/signup');
         }
     }
 
@@ -648,7 +648,7 @@ class Freelancer_hire extends MY_Controller {
             if ($userdata[0]['free_hire_step'] == 3) {
                 redirect('freelance-hire/employer-details', refresh);
             } else {
-                redirect('freelance-hire/add-projects?page=professional', refresh);
+                redirect('post-freelance-project?page=professional', refresh);
             }
         } else {
 
@@ -825,7 +825,7 @@ class Freelancer_hire extends MY_Controller {
             $return_html .= '<h4 class="page-heading  product-listing" style="border:0px;"> It will takes only few minutes.</h4>';
             $return_html .= '</div>';
             $return_html .= '<div  class="add-post-button add-post-custom">';
-            $return_html .= '<a title="Post Project" class="btn btn-3 btn-3b"  href="' . base_url() . 'freelance-hire/add-projects"><i class="fa fa-plus" aria-hidden="true"></i>  Post Project</a>';
+            $return_html .= '<a title="Post Project" class="btn btn-3 btn-3b"  href="' . base_url() . 'post-freelance-project"><i class="fa fa-plus" aria-hidden="true"></i>  Post Project</a>';
             $return_html .= '</div>';
             $return_html .= '</div>';
             echo $return_html;
@@ -1350,7 +1350,7 @@ class Freelancer_hire extends MY_Controller {
 
                     $contition_array = array('freelancer_post_reg.status' => '1', 'freelancer_apply.post_id' => $post['post_id'], 'freelancer_apply.is_delete ' => '0');
                     $apply_count = $this->data['results'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = 'freelancer_apply.user_id', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-                    $return_html .= '<a title="Applied Persons" href="' . base_url('freelance-hire/freelancer-applied/' . $post['post_id']) . '" class="btn4" >Applied Persons:';
+                    $return_html .= '<a title="Applied Persons" href="' . base_url('freelance-employer/applied-freelancers/' . $post['post_id']) . '" class="btn4" >Applied Persons:';
                     $return_html .= count($apply_count);
                     $return_html .= '</a>';
 
@@ -1753,7 +1753,7 @@ class Freelancer_hire extends MY_Controller {
         } else {
 
             $this->session->flashdata('error', 'Your data not inserted');
-            redirect('freelance-hire/projects', refresh);
+            redirect('freelance-employer/projects', refresh);
         }
     }
 
@@ -2180,7 +2180,7 @@ class Freelancer_hire extends MY_Controller {
 
             $updatdata = $this->common->update_data($data, 'freelancer_post', 'post_id', $id);
             if ($updatdata) {
-                redirect('freelance-hire/projects', refresh);
+                redirect('freelance-employer/projects', refresh);
             } else {
                 $this->session->flashdata('error', 'Sorry!!Your data not inserted');
                 redirect('freelancer/freelancer_edit_post', refresh);

@@ -1306,7 +1306,7 @@ Your browser does not support the audio tag.
                                 if ($free_hire_result) {
                                     $return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 } else {
-                                    $return_html .= '<a href = "' . base_url('freelance-hire/registration') . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+                                    $return_html .= '<a href = "' . base_url('freelance-employer/signup') . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 }
                             } else {
                                 $return_html .= '<a href = "javascript:void(0);" onclick="login_profile();" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
@@ -1320,7 +1320,7 @@ Your browser does not support the audio tag.
                                 if ($free_hire_result) {
                                     $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 } else {
-                                    $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-hire/registration') . '" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+                                    $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-employer/signup') . '" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 }
                             } else {
                                 $return_html .= '<a style="margin-right: 4px;" href="javascript:void(0);" onclick="login_profile();" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
@@ -1337,7 +1337,7 @@ Your browser does not support the audio tag.
                                 if ($free_hire_result) {
                                     $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 } else {
-                                    $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-hire/registration') . '" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+                                    $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-employer/signup') . '" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 }
                             } else {
                                 $return_html .= '<a style="margin-right: 4px;" href="javascript:void(0);" onclick="login_profile();" title=" ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
@@ -1349,7 +1349,7 @@ Your browser does not support the audio tag.
                                 if ($free_hire_result) {
                                     $return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 } else {
-                                    $return_html .= '<a href = "' . base_url('freelance-hire/registration') . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+                                    $return_html .= '<a href = "' . base_url('freelance-employer/signup') . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                                 }
                             } else {
                                 $return_html .= '<a href = "javascript:void(0);" onclick="login_profile();" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
@@ -1366,7 +1366,7 @@ Your browser does not support the audio tag.
                         if ($free_hire_result) {
                             $return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                         } else {
-                            $return_html .= '<a href = "' . base_url('freelance-hire/registration') . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+                            $return_html .= '<a href = "' . base_url('freelance-employer/signup') . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
                         }
                     } else {
                         $return_html .= '<a href = "javascript:void(0);" onclick="login_profile();" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
@@ -1391,7 +1391,7 @@ Your browser does not support the audio tag.
                                                                                 </a>
                                                                             </li>';
                     } else {
-                        $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-hire/registration') . '" title="' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '"><h6>';
+                        $return_html .= '<a style="margin-right: 4px;" href="' . base_url('freelance-employer/signup') . '" title="' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '"><h6>';
                         $return_html .= ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']);
                         $return_html .= '</h6>
                                                                                 </a>
@@ -1545,8 +1545,8 @@ Your browser does not support the audio tag.
                             }
                         }
                     } else {
-                        $return_html .= '<a href="' . base_url('freelance-hire/registration') . '"> Message </a>';
-                        $return_html .= '<a href="' . base_url('freelance-hire/registration') . '"> Save </a>';
+                        $return_html .= '<a href="' . base_url('freelance-employer/signup') . '"> Message </a>';
+                        $return_html .= '<a href="' . base_url('freelance-employer/signup') . '"> Save </a>';
                     }
                 } else {
                     $return_html .= '<a href="javascript:void(0);" onclick="login_profile();"> Message </a>';

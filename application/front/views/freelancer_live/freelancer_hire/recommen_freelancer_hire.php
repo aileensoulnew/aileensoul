@@ -103,8 +103,8 @@
                                                 </div>
                                                 <ul class=" left_box_menubar">
                                                     <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'employer-details')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelance-hire/employer-details'); ?>" > Details</a></li>
-                                                    <li><a title="Projects" href="<?php echo base_url('freelance-hire/projects'); ?>">Projects</a></li>
-                                                    <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-hire/freelancer-save'); ?>">Saved</a></li>
+                                                    <li><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>">Projects</a></li>
+                                                    <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>">Saved</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@
                                 </div>
                                 <?php echo $left_footer; ?>
                                 <div  class="add-post-button">
-                                    <a title="Post Project" class="btn btn-3 btn-3b" href="<?php echo base_url('freelance-hire/add-projects'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Add Project</a>
+                                    <a title="Post Project" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Add Project</a>
                                 </div>
                             </div>
                         </div>

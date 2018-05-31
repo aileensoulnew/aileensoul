@@ -27,7 +27,7 @@ class Freelancer_hire_live extends MY_Controller {
 		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
 
 		if ($freelancerhiredata) {
-			redirect('freelance-hire/registration');
+			redirect('freelance-employer/signup');
 			// $this->load->view('freelancer_live/freelancer_hire/reactivate', $this->data);
 		} else {
 			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
@@ -86,7 +86,7 @@ class Freelancer_hire_live extends MY_Controller {
 					redirect('hire-freelancer', refresh);
 				}
 			} else {
-				redirect('freelance-hire/registration', refresh);
+				redirect('freelance-employer/signup', refresh);
 				// $this->load->view('freelancer/freelancer_hire/freelancer_hire_basic_info', $this->data);
 			}
 		}
@@ -98,9 +98,13 @@ class Freelancer_hire_live extends MY_Controller {
 		$this->data['countries'] = $this->freelancer_hire_model->getCountry();
 		$this->data['title'] = "Registration | Employer Profile" . TITLEPOSTFIX;
 
+		$this->data['isregisterfreelancerhire'] = false;
 		if ($this->session->userdata('aileenuser')) {
 			$userid = $this->session->userdata('aileenuser');
 			$hireuser = $this->db->select('user_id')->get_where('freelancer_hire_reg', array('user_id' => $userid))->row()->user_id;
+			if(count($hireuser) > 0){
+				$this->data['isregisterfreelancerhire'] = true;
+			}
 		}
 		$this->data['isfreelancerhireactivate'] = false;
 		// Check Freelancer Hire is activate or not
@@ -121,6 +125,7 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
 			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
 			$this->data['title'] = "Opportunities | Aileensoul";
 			$this->load->view('freelancer_hire_live/index', $this->data);
 	   }
@@ -225,7 +230,7 @@ class Freelancer_hire_live extends MY_Controller {
 				//   //  $this->load->view('freelancer/freelancer_hire/recommen_candidate', $this->data);
 				//     redirect('hire-freelancer', refresh);
 				// } else {
-				//     redirect('freelance-hire/add-projects?page=professional', refresh);
+				//     redirect('post-freelance-project?page=professional', refresh);
 				// }
 			redirect('hire-freelancer', refresh);
 		} else {
@@ -521,7 +526,7 @@ public function freelancer_hire_check() {
 			}
 		}
 	} else {
-		redirect('freelance-hire/registration');
+		redirect('freelance-employer/signup');
 	}
 }
 
@@ -663,7 +668,7 @@ public function freelancer_hire_professional_info_insert() {
 		if ($userdata[0]['free_hire_step'] == 3) {
 			redirect('freelance-hire/employer-details', refresh);
 		} else {
-			redirect('freelance-hire/add-projects?page=professional', refresh);
+			redirect('post-freelance-project?page=professional', refresh);
 		}
 	} else {
 
@@ -811,7 +816,7 @@ public function ajax_recommen_candidate() {
 		$return_html .= '<h4 class="page-heading  product-listing" style="border:0px;"> It will takes only few minutes.</h4>';
 		$return_html .= '</div>';
 		$return_html .= '<div  class="add-post-button add-post-custom">';
-		$return_html .= '<a title="Post Project" class="btn btn-3 btn-3b"  href="' . base_url() . 'freelance-hire/add-projects"><i class="fa fa-plus" aria-hidden="true"></i>  Post Project</a>';
+		$return_html .= '<a title="Post Project" class="btn btn-3 btn-3b"  href="' . base_url() . 'post-freelance-project"><i class="fa fa-plus" aria-hidden="true"></i>  Post Project</a>';
 		$return_html .= '</div>';
 		$return_html .= '</div>';
 		echo $return_html;
@@ -1339,7 +1344,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 
 				$contition_array = array('freelancer_post_reg.status' => '1', 'freelancer_apply.post_id' => $post['post_id'], 'freelancer_apply.is_delete ' => '0');
 				$apply_count = $this->data['results'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = 'freelancer_apply.user_id', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-				$return_html .= '<a title="Applied Persons" href="' . base_url('freelance-hire/freelancer-applied/' . $post['post_id']) . '" class="btn4" >Applied Persons:';
+				$return_html .= '<a title="Applied Persons" href="' . base_url('freelance-employer/applied-freelancers/' . $post['post_id']) . '" class="btn4" >Applied Persons:';
 				$return_html .= count($apply_count);
 				$return_html .= '</a>';
 
@@ -1742,7 +1747,7 @@ public function user_image_insert1() {
 	} else {
 
 		$this->session->flashdata('error', 'Your data not inserted');
-		redirect('freelance-hire/projects', refresh);
+		redirect('freelance-employer/projects', refresh);
 	}
 }
 
@@ -2169,7 +2174,7 @@ public function freelancer_edit_post_insert($id) {
 
 		$updatdata = $this->common->update_data($data, 'freelancer_post', 'post_id', $id);
 		if ($updatdata) {
-			redirect('freelance-hire/projects', refresh);
+			redirect('freelance-employer/projects', refresh);
 		} else {
 			$this->session->flashdata('error', 'Sorry!!Your data not inserted');
 			redirect('freelancer/freelancer_edit_post', refresh);
@@ -2291,7 +2296,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$segment3 = ucfirst($segment3);
 
 	$this->data['title'] = $segment3 . TITLEPOSTFIX;
-
+	$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
 	if ($this->session->userdata('aileenuser')) {
 		$this->load->view('freelancer_live/freelancer_post/hire_project', $this->data);
 	} else {
