@@ -260,10 +260,11 @@ class Freelancer_apply_model extends CI_Model {
 
         $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
         $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
         $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
         $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
-        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
-        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
 
         if(isset($fa_skills) && !empty($fa_skills)){            
             $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
@@ -364,10 +365,11 @@ class Freelancer_apply_model extends CI_Model {
 
         $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req";
         $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
         $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
         $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
-        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
-        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
         if(isset($fa_skills) && !empty($fa_skills)){            
             $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
         }
@@ -561,11 +563,12 @@ class Freelancer_apply_model extends CI_Model {
 
         $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
         $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
         $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
         $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
-        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
-        $this->db->join('states st', 'st.state_id = fp.state', 'left');
-        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
+        $this->db->join('states st', 'st.state_id = fhr.state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
 
         $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
 
@@ -707,11 +710,12 @@ class Freelancer_apply_model extends CI_Model {
 
         $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
         $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
         $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
         $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
-        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
-        $this->db->join('states st', 'st.state_id = fp.state', 'left');
-        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
+        $this->db->join('states st', 'st.state_id = fhr.state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
 
         $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
 
