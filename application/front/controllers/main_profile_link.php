@@ -76,7 +76,7 @@
                 $this->freelance_hire_profile_set = 1;
             }
              if(!empty($freelancer_apply_profile_count) &&  count($freelancer_apply_profile_count)>0){
-                $this->freelance_apply_profile_link = base_url("freelance-work/home");
+                $this->freelance_apply_profile_link = base_url("recommended-freelance-work");
                 $this->freelance_apply_profile_set = 1;
             }
         /*Code for business profile link end*/

@@ -325,8 +325,13 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 <span>Applied Persons: {{applypost.ShortListedCount}}</span>
                                 <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
                                 <p class="pull-right">
-                                    <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
-                                    <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
+                                    <?php if($userid_login != ""): ?>
+                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
+                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
+                                    <?php else: ?>
+                                        <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
+                                        <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
+                                    <?php endif; ?>
                                 </p>
                             </div>
                         </div>
