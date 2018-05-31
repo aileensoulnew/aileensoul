@@ -1,49 +1,8 @@
 <?php
     $userid = $this->session->userdata('aileenuser');
 ?>
-<div class="search-banner hidden" ng-controller="searchFreelancerApplyController">
-    <div class="container">
-        <div class="text-right pt20">
-            <?php if($isdeactivatefreelancer){ ?>
-                <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a>
-            <?php }else{ ?>
-                <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
-            <?php } ?>
-        </div>
-        <div class="search-bnr-text">
-            <h1>Lorem Ipsum the dummy text</h1>
-        </div>
-        <div class="search-box">
-            <form ng-submit="searchSubmit()">
-                <div class="pb20 search-input">
-                    <input type="text" ng-model="keyword" id="q" name="q" placeholder="Keywords, Title, Or Company" autocomplete="off">
-                    <input type="text" ng-model="city" id="l" name="q" placeholder="City, State or Country" autocomplete="off">
-                    <input type="submit" class="btn1" name="submit" value="Submit">
-                </div>
-                <div class="pt5">
-                    <ul class="work-timing">
-                        <li>
-                            <label class="control control--checkbox">Full-Time
-                                <input ng-model="full_time" name="f" type="checkbox"/>
-                                <div class="control__indicator"></div>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="control control--checkbox">Part-Time
-                                <input ng-model="part_time" name="p" type="checkbox"/>
-                                <div class="control__indicator"></div>
-                            </label>
-                        </li>
-
-                    </ul>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <!-- NEW DESIGN -->
-<div class="search-banner" ng-controller="searchFreelancerApplyController">
+<div class="search-banner"><!-- ng-controller="searchFreelancerApplyController" -->
     <?php
     if($userid == "")
     {
@@ -83,22 +42,22 @@
                     <p>Get the work you love</p>
                 </div>
                 <div class="search-box">
-                    <form ng-submit="searchSubmit()">
+                    <form onsubmit="searchSubmit()">
                         <div class="pb20 search-input">
-                            <input type="text" ng-model="keyword" id="q" name="q" placeholder="Job Title, Keywords, or Skills" autocomplete="off">
-                            <input type="text" ng-model="city" id="l" name="q" placeholder="City, State or Country" autocomplete="off" class="city-input">                          
+                            <input type="text" ng-model="keyword" id="freelance_keyword" name="freelance_keyword" placeholder="Keywords, Title, Or Company" autocomplete="off">
+                            <input type="text" ng-model="city" id="freelance_location" name="freelance_location" placeholder="City, State or Country" autocomplete="off">
                         </div>
-                        <div class="pt5 fw pb20">
+                        <div class="pt5 fw pb20 hide">
                             <ul class="work-timing fw">
                                 <li>
                                     <label class="control control--checkbox">Hourly
-                                      <input type="checkbox"/>
+                                      <input type="checkbox" ng-model="hourly" name="work_timing[]" class="work_timing-filter" value="1" />
                                       <div class="control__indicator"></div>
                                     </label>
                                 </li>
                                 <li>
                                     <label class="control control--checkbox">Fixed
-                                      <input type="checkbox"/>
+                                      <input class="work_timing-filter" ng-model="fixed" name="work_timing[]" value="2" type="checkbox"/>
                                       <div class="control__indicator"></div>
                                     </label>
                                 </li>
@@ -117,3 +76,177 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+function searchSubmit(){
+    
+    var keyword = $("#freelance_keyword").val().toLowerCase().split(' ').join('+');
+    var city = $("#freelance_location").val().toLowerCase().split(' ').join('+');
+
+    /*var work_timing_fil = "";
+    $('.work_timing-filter').each(function(){
+        if(this.checked){
+            var currentid = $(this).val();
+            work_timing_fil += (work_timing_fil == "") ? currentid : "-" + currentid;
+        }
+    }); */       
+    // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+    var keyworddata = [];
+    if(keyword != ""){
+        keyworddata = keyword.split(",");
+        // remove in from array
+        if(keyworddata.indexOf("in") > -1 && city != ""){
+            keyworddata.splice(keyworddata.indexOf("in"),1);
+        }
+        keyword = keyworddata.join('-').toString();
+    }
+    var citydata = [];
+    if(city != ""){
+        citydata = city.split(",");
+        // remove in from array
+        // if(citydata.indexOf("in") > -1 && city != ""){
+        //     citydata.splice(citydata.indexOf("in"),1);
+        // }
+        city = citydata.join('-').toString();
+    }
+
+    if(keyword[keyword.length - 1] == "-")
+    {            
+        keyword = keyword.slice(0,-1);
+    }
+    
+    if (keyword == '' && city == '') {
+        return false;
+    } else if (keyword != '' && city == '') {
+        window.location.href = base_url + 'freelancer/search/' + keyword;
+    } else if (keyword == '' && city != '') {
+        window.location.href = base_url + 'freelancer/search/projects-in-' + city;
+    } else {
+        window.location.href = base_url + 'freelancer/search/' + keyword + '-projects-in-' + city;
+    }
+}
+
+$(function() {
+    function split( val ) {
+        return val.split( /,\s*/ );
+    }
+    function extractLast( term ) { 
+        return split( term ).pop();
+    }
+
+    $( "#freelance_keyword" ).focusout(function() {
+        if($( "#freelance_keyword" ).val() != "")
+        {
+            var ser_val = $( "#freelance_keyword" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {                
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "#freelance_keyword" ).val(ser_val_)
+            }
+        }
+    });
+    $( "#freelance_keyword" ).focusin(function() {
+        if($( "#freelance_keyword" ).val() != "")
+        {
+            var ser_val = $( "#freelance_keyword" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#freelance_keyword" ).val(ser_val_)
+        }
+    });
+    $( "#freelance_keyword" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "freelancer_apply_live/freelancer_apply_search_keyword", { term : terms},response);
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," );
+            return false;                
+        }
+    });
+
+    $( "#freelance_location" ).focusout(function() {
+        if($( "#freelance_location" ).val() != "")
+        {
+            var ser_val = $( "#freelance_location" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "#freelance_location" ).val(ser_val_)
+            }
+        }
+    });
+    $( "#freelance_location" ).focusin(function() {
+        if($( "#freelance_location" ).val() != "")
+        {
+            var ser_val = $( "#freelance_location" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#freelance_location" ).val(ser_val_)
+        }
+    });
+    $( "#freelance_location" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "freelancer_apply_live/freelancer_apply_search_city", { term : terms},response);
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," ).toLowerCase();
+            return false;                
+        }
+    });
+});
+</script>

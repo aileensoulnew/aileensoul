@@ -516,6 +516,12 @@ $route['freelancer/create-account'] = "freelancer_apply_live/freelancer_apply_re
 $route['freelancer/general-info'] = "freelancer_apply_live/freelancer_apply_register_new";
 $route['freelancer/educational-info'] = "freelancer_apply_live/freelancer_apply_register_new";
 $route['freelancer/registration'] = "freelancer_apply_live/freelancer_apply_register_new";
+
+// $route['freelancer/search/(:any)'] = "freelancer_apply_live/$1";
+// $route['freelancer/search/projects-in-(:any)'] = "freelancer_apply_live/$1";
+// $route['freelancer/search/(:any)projects-in-(:any)'] = "freelancer_apply_live/$1";
+$route['freelancer/search/(.+)'] = "freelancer_apply_live/freelancer_apply_search_new";
+
 //Freelance Apply Signup End
 
 //$route['job/search'] = "job/job_search";

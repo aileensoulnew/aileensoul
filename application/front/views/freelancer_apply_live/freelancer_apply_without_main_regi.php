@@ -11,15 +11,31 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        <style>
+          .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+          }
+          /* IE 6 doesn't support max-height
+           * we use height instead, but this forces the menu to always be this tall
+           */
+          * html .ui-autocomplete {
+            height: 100px;
+          }
+          </style>
     </head>
     <body class="profile-main-page">
 
         <div class="middle-section middle-section-banner new-ld-page">
             
-            <div class="search-banner" >
+            <!-- <div class="search-banner" >
                 <header>
                     <div class="header">
                         <div class="container">
@@ -78,7 +94,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <?php echo $search_banner; ?>
             
             <div class="job-cat-lp" >
                 <div class="container" >
@@ -212,8 +229,7 @@
         
             
         </div>
-
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>

@@ -442,4 +442,317 @@ class Freelancer_apply_model extends CI_Model {
         return $result;
     }
 
+    function freelancer_apply_search_city($keyword = ''){
+        $keyword = urldecode($keyword) . '%';
+        $sql = "SELECT city_name as value FROM ailee_cities 
+                WHERE status = '1' AND state_id != '0' AND (city_name LIKE '". $keyword ."') 
+                GROUP BY city_name LIMIT 5";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function freelancer_apply_search_keyword($keyword = ''){
+        $keyword = '%' . urldecode($keyword) . '%';
+        $sql = "SELECT skill as value FROM ailee_skill 
+                WHERE status = '1' AND type = 1 AND (skill LIKE '". $keyword ."') 
+                GROUP BY skill 
+                Union
+
+                SELECT industry_name as value FROM ailee_job_industry 
+                WHERE status = '1' AND is_other = 0 AND (industry_name LIKE '". $keyword ."') 
+                GROUP BY industry_name 
+                Union
+
+                SELECT post_name as value FROM ailee_freelancer_post 
+                WHERE status = '1' AND is_delete = '0' AND (post_name LIKE '". $keyword ."') 
+                GROUP BY post_name 
+                ORDER BY value ASC
+                LIMIT 15";
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
+            return $result_array;
+    }
+
+    function get_freelancer_apply_search_new_result($userid = "",$category_id = "",$skill_id = "",$worktype = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5',$fa_keyword = "",$fa_location = "")
+    {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql = "";
+
+        if($category_id != "")
+        {
+            $sql .= "post_field_req IN (".$category_id.") OR ";
+        }
+
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "fp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+        if($worktype != "")
+        {
+            $sql_wt = "";
+            foreach (explode(",", $worktype) as $key => $value) {
+                if($value == 1)
+                    $sql_wt .= "(fp.post_rating_type = 1) OR ";
+                if($value == 2)
+                    $sql_wt .= "(fp.post_rating_type = 2) OR ";
+            }
+            $sql .= "(".trim($sql_wt, ' OR ').") OR ";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(fp.post_exp_year >= 0 AND fp.post_exp_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(fp.post_exp_year >= 1 AND fp.post_exp_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(fp.post_exp_year >= 2 AND fp.post_exp_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(fp.post_exp_year >= 3 AND fp.post_exp_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(fp.post_exp_year >= 4 AND fp.post_exp_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(fp.post_exp_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+
+        $sql_skill = "";$sql_pn = "";$sql_it = "";        
+        foreach (explode(",", $fa_keyword) as $key => $value) {
+            if($value != "")
+            {
+                $sql_skill .= "s.skill LIKE '%".$value."%' OR ";
+                $sql_pn .= "post_name LIKE '%".$value."%' OR ";
+                $sql_it .= "industry_name LIKE '%".$value."%' OR ";
+            }
+        }
+        $sql_city = "";$sql_state = "";$sql_country = "";
+        foreach (explode(",", $fa_location) as $key => $value) {
+            if($value != "")
+            {                
+                $sql_city .= "ct.city_name LIKE '".$value."%' OR ";
+                $sql_state .= "st.state_name LIKE '".$value."%' OR ";
+                $sql_country .= "cr.country_name LIKE '".$value."%' OR ";            
+            }
+        }
+
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
+        $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
+        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
+        $this->db->join('states st', 'st.state_id = fp.state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+
+        $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
+
+        $sql_ser = "";
+        if($fa_keyword != "")
+        {
+            $sql_ser .= "(fp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
+                OR
+                (".trim($sql_pn, ' OR ').")
+                OR
+                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
+        }
+        if($fa_location != "")
+        {
+            if($sql_ser != "")
+            {
+                $sql_ser .= " AND ";
+            }
+            $sql_ser .= "(
+                (".trim($sql_city, ' OR ').") OR
+                (".trim($sql_state, ' OR ').") OR
+                (".trim($sql_country, ' OR ').")
+            )";
+        }
+        if($sql_ser != "")
+        {
+            $this->db->where($sql_ser,false,false);
+        }
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1'));
+        $this->db->group_by('fp.post_skill,fp.post_id');
+        $this->db->order_by('fp.post_id','desc');
+        if($limit != "")
+        {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        //echo $this->db->last_query();exit;
+        $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
+            $result_array[$key]['fullname'] = $firstname;
+
+            $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
+            $result_array[$key]['industry_name'] = $industry_name;
+        }
+        
+        //return $result_array;
+        $retur_arr = array();
+        $retur_arr['fa_projects'] = $result_array;
+        $retur_arr['total_record'] = $this->get_freelancer_apply_search_new_result_tot_rec($userid,$category_id,$skill_id,$worktype,$period_filter,$exp_fil,$fa_keyword,$fa_location);
+        return $retur_arr;
+    }
+
+    function get_freelancer_apply_search_new_result_tot_rec($userid = "",$category_id = "",$skill_id = "",$worktype = "",$period_filter = "",$exp_fil = "",$fa_keyword = "",$fa_location = "")
+    {
+        $sql = "";
+
+        if($category_id != "")
+        {
+            $sql .= "post_field_req IN (".$category_id.") OR ";
+        }
+
+        if($skill_id != "")
+        {
+            $skill_id = str_replace(",", "|", $skill_id);
+            $sql .= "fp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+        }
+        if($worktype != "")
+        {
+            $sql_wt = "";
+            foreach (explode(",", $worktype) as $key => $value) {
+                if($value == 1)
+                    $sql_wt .= "(fp.post_rating_type = 1) OR ";
+                if($value == 2)
+                    $sql_wt .= "(fp.post_rating_type = 2) OR ";
+            }
+            $sql .= "(".trim($sql_wt, ' OR ').") OR ";
+        }
+        if($period_filter != "")
+        {
+            $sql_period = "";
+            foreach (explode(",", $period_filter) as $key => $value) {
+                if($value == 1)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) = 0) OR ";
+                if($value == 2)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=7) OR ";
+                if($value == 3)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=15) OR ";
+                if($value == 4)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 0 AND DATEDIFF(NOW(),fp.created_date) <=45) OR ";                
+                if($value == 5)
+                    $sql_period .= "(DATEDIFF(NOW(),fp.created_date) >= 45) OR ";
+            }
+            $sql .= "(".trim($sql_period, ' OR ').") OR ";
+        }
+        if($exp_fil != "")
+        {
+            $sql_exp = "";
+            foreach (explode(",", $exp_fil) as $key => $value) {
+                if($value == 1)
+                    $sql_exp .= "(fp.post_exp_year >= 0 AND fp.post_exp_year <=1) OR ";
+                if($value == 2)
+                    $sql_exp .= "(fp.post_exp_year >= 1 AND fp.post_exp_year <=2) OR ";
+                if($value == 3)
+                    $sql_exp .= "(fp.post_exp_year >= 2 AND fp.post_exp_year <=3) OR ";
+                if($value == 4)
+                    $sql_exp .= "(fp.post_exp_year >= 3 AND fp.post_exp_year <=4) OR ";
+                if($value == 5)
+                    $sql_exp .= "(fp.post_exp_year >= 4 AND fp.post_exp_year <=5) OR ";
+                if($value == 6)
+                    $sql_exp .= "(fp.post_exp_year >= 5) OR ";
+            }
+            $sql .= "(".trim($sql_exp, ' OR ').") OR ";
+        }
+
+        $sql_skill = "";$sql_pn = "";$sql_it = "";        
+        foreach (explode(",", $fa_keyword) as $key => $value) {
+            if($value != "")
+            {
+                $sql_skill .= "s.skill LIKE '%".$value."%' OR ";
+                $sql_pn .= "post_name LIKE '%".$value."%' OR ";
+                $sql_it .= "industry_name LIKE '%".$value."%' OR ";
+            }
+        }
+        $sql_city = "";$sql_state = "";$sql_country = "";
+        foreach (explode(",", $fa_location) as $key => $value) {
+            if($value != "")
+            {                
+                $sql_city .= "ct.city_name LIKE '".$value."%' OR ";
+                $sql_state .= "st.state_name LIKE '".$value."%' OR ";
+                $sql_country .= "cr.country_name LIKE '".$value."%' OR ";            
+            }
+        }
+
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,GROUP_CONCAT(DISTINCT(s.skill)) as post_skill,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
+        $this->db->select($select_data)->from('freelancer_post fp,ailee_skill s');
+        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
+        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
+        $this->db->join('cities ct', 'ct.city_id = fp.city', 'left');
+        $this->db->join('states st', 'st.state_id = fp.state', 'left');
+        $this->db->join('countries cr', 'cr.country_id = fp.country', 'left');
+
+        $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
+
+        $sql_ser = "";
+        if($fa_keyword != "")
+        {
+            $sql_ser .= "(fp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
+                OR
+                (".trim($sql_pn, ' OR ').")
+                OR
+                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
+        }
+        if($fa_location != "")
+        {
+            if($sql_ser != "")
+            {
+                $sql_ser .= " AND ";
+            }
+            $sql_ser .= "(
+                (".trim($sql_city, ' OR ').") OR
+                (".trim($sql_state, ' OR ').") OR
+                (".trim($sql_country, ' OR ').")
+            )";
+        }
+        if($sql_ser != "")
+        {
+            $this->db->where($sql_ser,false,false);
+        }
+        if($sql != "")
+        {            
+            $sql = "(".trim($sql, ' OR ').")";
+            $this->db->where($sql,false,false);
+        }
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1'));
+        $this->db->group_by('fp.post_skill,fp.post_id');
+        $this->db->order_by('fp.post_id','desc');
+        
+        $query = $this->db->get();
+        //echo $this->db->last_query();exit;
+        $result_array = $query->result_array();
+        return count($result_array);        
+    }
+
 }

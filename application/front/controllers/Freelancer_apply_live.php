@@ -277,5 +277,113 @@ class Freelancer_apply_live extends MY_Controller {
         $freelancerSkills = $this->freelancer_apply_model->get_fa_category($limit,$page);
         echo json_encode($freelancerSkills);
     }
+
+    public function freelancer_apply_search_new($searchstr = "")
+    {
+
+        //$work_timing = $_GET['work_timing'];
+        // echo($work_timing);exit;
+        $searchstr = str_replace("freelancer/search/","",$this->uri->uri_string());
+        // print_r($searchstr);exit;
+        $userid = $this->session->userdata('aileenuser');
+        
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        /*$this->data['q'] = $_GET['q'];
+        $this->data['l'] = $_GET['l'];
+        $this->data['w'] = $_GET['w'];*/
+
+        if($searchstr != ''){
+            $isloacationsearch = false;
+            $search_location;            
+            //if (substr($searchstr, 0, strlen("-jobs-in-")) === "-jobs-in-") {
+            if (strpos($searchstr, "-projects-in-") !== false)
+            {
+                $search_loc_cat = explode("-projects-in-", $searchstr);                
+            }
+            else if (strpos($searchstr, "projects-in-") !== false)
+            {                
+                $search_location = explode("projects-in-", $searchstr);                
+            }
+            else
+            {
+                $search_category = $searchstr;//explode("-jobs", $searchstr);                
+            }            
+            $this->data['q'] = '';
+            $this->data['l'] = '';
+            if(count($search_loc_cat) > 0){
+                $this->data['q'] = $search_loc_cat[0];
+                $this->data['l'] = $search_loc_cat[1];
+            }
+            else if(count($search_location) > 0){
+                $this->data['q'] = '';
+                $this->data['l'] = $search_location[1];
+            }else{
+                $this->data['q'] = $search_category;
+            }
+        }
+        else{
+            $this->data['q'] = $_GET['q'];
+            $this->data['l'] = $_GET['l'];
+        }
+
+        // Replace - with ,
+        $this->data['q'] = str_replace("-",",",$this->data['q']);
+        $this->data['l'] = str_replace("-",",",$this->data['l']);
+        $this->data['q'] = str_replace("+"," ",$this->data['q']);
+        $this->data['l'] = str_replace("+"," ",$this->data['l']);
+        //$this->data['work_timing'] = $work_timing;
+        
+        $this->load->view('freelancer_apply_live/search_new', $this->data);
+    
+    }
+
+    public function freelancer_apply_search_new_ajax()
+    {        
+        $userid = $this->session->userdata('aileenuser');
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+
+        $fa_keyword = (isset($_POST['fa_keyword']) && $_POST['fa_keyword'] != "" ? $_POST['fa_keyword'] : "");
+        $fa_location = (isset($_POST['fa_location']) && $_POST['fa_location'] != "" ? $_POST['fa_location'] : "");
+
+        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");//Field
+        
+        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $worktype = (isset($_POST['worktype']) && !empty($_POST['worktype']) ? $_POST['worktype'] : "");
+        $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
+        $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
+
+        $limit = 5;
+
+        $searchFA = $this->freelancer_apply_model->get_freelancer_apply_search_new_result($userid,$category_id,$skill_id,$worktype,$period_filter,$exp_fil,$page,$limit,$fa_keyword,$fa_location);
+        echo json_encode($searchFA);
+    }
+
+    public function freelancer_apply_search_city($id = "") {
+        $searchTerm = $_GET['term'];
+        $result1 = $this->freelancer_apply_model->freelancer_apply_search_city($searchTerm);
+        echo json_encode($result1);
+    }
+
+    public function freelancer_apply_search_keyword($id = "") {
+        $searchTerm = $_GET['term'];
+        $result1 = $this->freelancer_apply_model->freelancer_apply_search_keyword($searchTerm);
+        echo json_encode($result1);
+    }
     
 }
