@@ -211,10 +211,15 @@ $route['freelance-employer/basic-information'] = "freelancer_hire_live/freelance
 $route['freelance-employer/address-information'] = "freelancer_hire_live/freelancer_hire_address_info";
 $route['freelance-employer/professional-information'] = "freelancer_hire_live/freelancer_hire_professional_info";
 
-$route['freelance-hire/search'] = "search_live/freelancer_hire_search";
-$route['freelance-hire/search/0/(:any)'] = "search_live/freelancer_hire_search/0/$1";
-$route['freelance-hire/search/(:any)/0'] = "search_live/freelancer_hire_search/$1/0";
-$route['freelance-hire/search/(:any)/(:any)'] = "search_live/freelancer_hire_search/$1/$2";
+$route['freelance-employer/search'] = "search_live/freelancer_hire_search";
+$route['freelance-employer/search/0/(:any)'] = "search_live/freelancer_hire_search/0/$1";
+$route['freelance-employer/search/(:any)/0'] = "search_live/freelancer_hire_search/$1/0";
+$route['freelance-employer/search/(:any)/(:any)'] = "search_live/freelancer_hire_search/$1/$2";
+
+// $route['freelance-hire/search'] = "search_live/freelancer_hire_search";
+// $route['freelance-hire/search/0/(:any)'] = "search_live/freelancer_hire_search/0/$1";
+// $route['freelance-hire/search/(:any)/0'] = "search_live/freelancer_hire_search/$1/0";
+// $route['freelance-hire/search/(:any)/(:any)'] = "search_live/freelancer_hire_search/$1/$2";
 
 
 

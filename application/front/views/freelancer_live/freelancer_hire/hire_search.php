@@ -502,7 +502,7 @@
                             if (response.data == "ok") {
                                 $("#btn1").html('<img alt="loader" src="<?php echo base_url() ?>images/btn-ajax-loader.gif" /> &nbsp; Login ...');
                                 if (response.freelancerhire == 1) {
-                                    window.location = "<?php echo base_url() ?>freelance-hire/search?skills=" + skill + '&searchplace' + place;
+                                    window.location = "<?php echo base_url() ?>freelance-employer/search?skills=" + skill + '&searchplace' + place;
                                 } else {
                                     window.location = "<?php echo base_url() ?>freelance-employer/basic-information";
                                 }
@@ -695,7 +695,7 @@
                             if (response == "ok") {
                                 $("#btn-register").html('<img  alt="loader" src="<?php echo base_url() ?>images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
                                 window.location = "<?php echo base_url() ?>freelance-employer/basic-information";
-                                //                                window.location = "<?php //echo base_url()    ?>freelance-hire/search?skills=" + skill + '&searchplace' + place;
+                                //                                window.location = "<?php //echo base_url()    ?>freelance-employer/search?skills=" + skill + '&searchplace' + place;
                             } else {
                                 $("#register_error").fadeIn(1000, function () {
                                     $("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');

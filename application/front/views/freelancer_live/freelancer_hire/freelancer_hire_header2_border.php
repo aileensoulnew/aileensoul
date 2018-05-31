@@ -18,7 +18,7 @@
 
                             <div id="search">
                                 <button type="button" class="close">×</button>
-                                <form action=<?php echo base_url('freelance-hire/search') ?> method="get">
+                                <form action=<?php echo base_url('freelance-employer/search') ?> method="get">
                                     <div class="new-search-input">
                                         <input type="text" class="skill_keyword" id="tags1" name="skills"  placeholder="Designation, Skills, Field" />
                                         <input type="text" class="skill_place" id="searchplace1" name="searchplace"  placeholder="Find Location" />

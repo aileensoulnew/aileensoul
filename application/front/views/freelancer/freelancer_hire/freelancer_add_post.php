@@ -310,14 +310,14 @@
 
                                         if (searchkeyword == "")
                                         {
-                                            location.href = '<?php echo base_url() ?>freelance-hire/search/' + 0 + '/' + searchplace;
+                                            location.href = '<?php echo base_url() ?>freelance-employer/search/' + 0 + '/' + searchplace;
 
                                         } else if (searchplace == "")
                                         {
-                                            location.href = '<?php echo base_url() ?>freelance-hire/search/' + searchkeyword + '/' + 0;
+                                            location.href = '<?php echo base_url() ?>freelance-employer/search/' + searchkeyword + '/' + 0;
                                         } else
                                         {
-                                            location.href = '<?php echo base_url() ?>freelance-hire/search/' + searchkeyword + '/' + searchplace;
+                                            location.href = '<?php echo base_url() ?>freelance-employer/search/' + searchkeyword + '/' + searchplace;
                                         }
                                     }
                                 }
@@ -383,7 +383,7 @@
                             var url, data;
                             if (clicked_id == 4) {
 
-                                url = '<?php echo base_url() . "freelance-hire/search" ?>';
+                                url = '<?php echo base_url() . "freelance-employer/search" ?>';
                                 data = 'id=' + clicked_id + '&skills=' + searchkeyword + '&searchplace=' + searchplace;
                             }
                             $.ajax({
@@ -405,15 +405,15 @@
 
                                         if (searchkeyword == "")
                                         {
-                                            window.location = "<?php echo base_url() ?>freelance-hire/search/" + 0 + "/" + searchplace;
+                                            window.location = "<?php echo base_url() ?>freelance-employer/search/" + 0 + "/" + searchplace;
 
                                         } else if (searchplace == "")
                                         {
 
-                                            window.location = "<?php echo base_url() ?>freelance-hire/search/" + searchkeyword + "/" + 0;
+                                            window.location = "<?php echo base_url() ?>freelance-employer/search/" + searchkeyword + "/" + 0;
                                         } else
                                         {
-                                            window.location = "<?php echo base_url() ?>freelance-hire/search/" + searchkeyword + "/" + searchplace;
+                                            window.location = "<?php echo base_url() ?>freelance-employer/search/" + searchkeyword + "/" + searchplace;
                                         }
                                     } else if (clicked_id == 5)
                                     {
