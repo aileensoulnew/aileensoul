@@ -10,9 +10,25 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css'); ?>">
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        <style>
+          .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+          }
+          /* IE 6 doesn't support max-height
+           * we use height instead, but this forces the menu to always be this tall
+           */
+          * html .ui-autocomplete {
+            height: 100px;
+          }
+          </style>
 
     </head>
     <body class="profile-main-page">
@@ -236,49 +252,55 @@
                         </div>
                     </div>
                     <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
-                        <div class="all-job-top">
-                            <div class="job-top-detail">
-                                <h5><a href="#">{{applypost.post_name}}(project title) <span>(6 days left)</span></a></h5>
-                                <p><a href="#">Vivek Panday</a></p>
-                                <p>Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
+                            <div class="all-job-top">
+                                <div class="job-top-detail">
+                                    <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
+                                        <span ng-if="applypost.day_remain > 0">({{applypost.day_remain}} days left)</span>
+                                        </a>
+                                    </h5>
+                                    <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
+                                    <p ng-if="applypost.post_rate != ''">Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
+                                </div>
+                            </div>
+                            <div class="all-job-middle">
+                                <p class="pb5">
+                                    <span class="location" ng-if="applypost.city || applypost.country">
+                                        <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
+                                        <span ng-if="applypost.city && applypost.country">
+                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
+                                        </span>
+                                        <!-- IF ONLY CITY AVAILABLE -->
+                                        <span ng-if="applypost.city && !applypost.country">
+                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
+                                        </span>
+                                        <!-- IF ONLY COUNTRY AVAILABLE -->
+                                        <span ng-if="!applypost.city && applypost.country">
+                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
+                                        </span>
+                                    </span>
+                                    <span class="exp">
+                                        <span>
+                                            <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
+                                            Skils: <span dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
+                                            </span>
+                                        </span>
+                                    </span>
+                                </p>                                
+                                <p dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_description}}" dd-text-collapse-cond="false">
+                                </p>
+                                <p ng-if="applypost.industry_name != '' ">
+                                    Categories : <span>{{applypost.industry_name}}</span>
+                                </p>
+                            </div>
+                            <div class="all-job-bottom">
+                                <span>Applied Persons: {{applypost.ShortListedCount}}</span>
+                                <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
+                                <p class="pull-right">
+                                    <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
+                                    <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
+                                </p>
                             </div>
                         </div>
-                        <div class="all-job-middle">
-                            <p class="pb5">
-                                <span class="location" ng-if="applypost.city || applypost.country">
-                                    <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
-                                    <span ng-if="applypost.city && applypost.country">
-                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
-                                    </span>
-                                    <!-- IF ONLY CITY AVAILABLE -->
-                                    <span ng-if="applypost.city && !applypost.country">
-                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
-                                    </span>
-                                    <!-- IF ONLY COUNTRY AVAILABLE -->
-                                    <span ng-if="!applypost.city && applypost.country">
-                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
-                                    </span>
-                                </span>
-                                <span class="exp">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">Skils: {{applypost.post_skill}} etc..</span>
-                                </span>
-                            </p>
-                            <p>
-                                {{applypost.post_description}} ...<a href="#">Read more</a>
-                            </p>
-                            <p>
-                                Categories : <span>It software development</span>
-                            </p>
-                        </div>
-                        <div class="all-job-bottom">
-                            <span>Applied Persons: {{applypost.ShortListedCount}}</span>
-                            <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
-                            <p class="pull-right">
-                                <a href="#" class="btn4">Save</a>
-                                <a href="#" class="btn4">Apply</a>
-                            </p>
-                        </div>
-                    </div>
                     <div id="loader" style="display: none;">
                         <p style="text-align:center;">
                             <img src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="<?php echo 'loaderimage'; ?>"/>
@@ -510,194 +532,13 @@
 
         </div>
         <!--  poup modal  -->
-        <div style="display:none;" class="modal fade" id="post-popup1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <div class="post-popup-box">
-                        <form>
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <img src="<?php echo base_url('assets/n-images/user-pic.jpg?ver=' . time()) ?>">
-                                </div>
-                                <div class="post-text">
-                                    <textarea class="title-text-area" placeholder="Post Opportunity"></textarea>
-                                </div>
-                                <div class="all-upload">
-                                    <label for="file-1">
-                                        <i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Photo </span></i>
-                                        <i class="fa fa-video-camera upload_icon"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon"> <span class="upload_span_icon">  Audio </span> </i>
-                                        <i class="fa fa-file-pdf-o upload_icon"><span class="upload_span_icon"> PDF </span></i>
-                                    </label>
-                                </div>
-                                <div class="post-box-bottom">
-                                    <ul>
-                                        <li>
-                                            <a href="" data-target="#post-popup" data-toggle="modal">
-                                                <img src="<?php echo base_url('assets/n-images/post-op.png?ver=' . time()) ?>"><span>Post Opportunity</span>
-                                            </a>
-                                        </li>
-                                        <li class="pl15">
-                                            <a href="article.html">
-                                                <img src="<?php echo base_url('assets/n-images/article.png?ver=' . time()) ?>"><span>Post Article</span>
-                                            </a>
-                                        </li>
-                                        <li class="pl15">
-                                            <a href="" data-target="#ask-question" data-toggle="modal">
-                                                <img src="<?php echo base_url('assets/n-images/ask-qustion.png?ver=' . time()) ?>"><span>Ask Quastion</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <p class="pull-right">
-                                        <button type="submit" class="btn1" value="Submit">Post</button>
-                                    </p>
-                                </div>
-
-                            </div>
-
-
-                        </form>
-                    </div>
-
-
-
-                </div>
-            </div>
-
-        </div>
-        <div style="display:none;" class="modal fade" id="post-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <div class="post-popup-box">
-                        <form>
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <img src="<?php echo base_url('assets/n-images/user-pic.jpg?ver=' . time()) ?>">
-                                </div>
-                                <div class="post-text">
-                                    <textarea class="title-text-area" placeholder="Post Opportunity"></textarea>
-                                </div>
-                                <div class="all-upload">
-                                    <label for="file-1">
-                                        <i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Photo </span></i>
-                                        <i class="fa fa-video-camera upload_icon"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon"> <span class="upload_span_icon">  Audio </span> </i>
-                                        <i class="fa fa-file-pdf-o upload_icon"><span class="upload_span_icon"> PDF </span></i>
-                                    </label>
-                                </div>
-
-                            </div>
-                            <div class="post-field">
-
-                                <div id="content" class="form-group">
-                                    <label>FOR WHOM THIS OPPORTUNITY ?<span class="pull-right"><img src="<?php echo base_url('assets/n-images/tooltip.png?ver=' . time()) ?>"></span></label>
-                                    <textarea rows="1" max-rows="5" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, PHP Developer, HR, BDE, CA, Doctor, Freelancer.." cols="10" style="resize:none"></textarea>
-
-                                </div>
-                                <div class="form-group">
-                                    <label>WHICH LOCATION?<span class="pull-right"><img src="<?php echo base_url('assets/n-images/tooltip.png?ver=' . time()) ?>"></span></label>
-                                    <textarea type="text" class="" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai, Moscow, Paris, Tokyo.. "></textarea>
-
-                                </div>
-                                <div class="form-group">
-                                    <label>What is your field?<span class="pull-right"><img src="<?php echo base_url('assets/n-images/tooltip.png?ver=' . time()) ?>"></span></label>
-                                    <select>
-                                        <option>What is your field</option>
-                                        <option>IT</option>
-                                        <option>Teacher</option>
-                                        <option>Sports</option>
-                                    </select>
-                                </div>
-
-
-
-
-
-                            </div>
-                            <div class="text-right fw pt10 pb20 pr15">
-                                <button type="submit" class="btn1"  value="Submit">Post</button> 
-                            </div>
-                        </form>
-                    </div>
-
-
-
-                </div>
-            </div>
-
-        </div>
-        <div style="display:none;" class="modal fade" id="ask-question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">×</button>
-                    <div class="post-popup-box">
-                        <form>
-                            <div class="post-box">
-                                <div class="post-img">
-                                    <img src="<?php echo base_url('assets/n-images/user-pic.jpg?ver=' . time()) ?>">
-                                </div>
-                                <div class="post-text">
-                                    <textarea class="title-text-area" placeholder="Ask Quastion"></textarea>
-                                </div>
-                                <div class="all-upload">
-                                    <label for="file-1">
-                                        <i class="fa fa-camera upload_icon"><span class="upload_span_icon"> Add Screenshot </span></i>
-                                        <i class="fa fa fa-link upload_icon"><span class="upload_span_icon"> Add Link</span>  </i> 
-
-                                    </label>
-                                </div>
-
-                            </div>
-                            <div class="post-field">
-
-                                <div class="form-group">
-                                    <label>Add Description<span class="pull-right"><img src="<?php echo base_url('assets/n-images/tooltip.png?ver=' . time()) ?>"></span></label>
-                                    <textarea rows="1" max-rows="5" placeholder="Add Description" cols="10" style="resize:none"></textarea>
-
-                                </div>
-                                <div class="form-group">
-                                    <label>Related Categories<span class="pull-right"><img src="<?php echo base_url('assets/n-images/tooltip.png?ver=' . time()) ?>"></span></label>
-                                    <input type="text" class="" placeholder="Related Categories">
-
-                                </div>
-                                <div class="form-group">
-                                    <label>From which field the Question asked?<span class="pull-right"><img src="<?php echo base_url('assets/n-images/tooltip.png?ver=' . time()) ?>"></span></label>
-                                    <select>
-                                        <option>What is your field</option>
-                                        <option>IT</option>
-                                        <option>Teacher</option>
-                                        <option>Sports</option>
-                                    </select>
-                                </div>
-
-
-
-
-
-                            </div>
-                            <div class="text-right fw pt10 pb20 pr15">
-                                <button type="submit" class="btn1"  value="Submit">Post</button> 
-                            </div>
-                        </form>
-                    </div>
-
-
-
-                </div>
-            </div>
-
+        
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-
-
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
