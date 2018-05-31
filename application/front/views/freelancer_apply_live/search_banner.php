@@ -29,11 +29,10 @@
     ?>
     <div class="container">
         <div class="text-right pt20">
-            <?php /*if($isdeactivatefreelancer){ ?>
-                <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a>
-            <?php }else{ ?>
+            <?php if($this->freelance_apply_profile_set == 0){ ?>
                 <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
-            <?php }*/ ?>
+                <!-- <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a> -->
+            <?php } ?>
         </div>
         <div class="row">
             <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
