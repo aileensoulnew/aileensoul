@@ -124,7 +124,7 @@ $userid = $this->session->userdata('aileenuser');
                 </div>
                 <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
                     <div class="job-search-box1 clearfix">
-                        <form action="<?php echo base_url('freelance-hire/search'); ?>" method="get">
+                        <form action="<?php echo base_url('freelance-employer/search'); ?>" method="get">
                             <fieldset class="sec_h2">
                                 <input id="tags" class="tags ui-autocomplete-input skill_keyword" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
                             </fieldset>

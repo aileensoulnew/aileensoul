@@ -123,7 +123,7 @@ $userid = $this->session->userdata('aileenuser');
 				</div>
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
 					<div class="job-search-box1 clearfix">
-						<!-- <form action="<?php echo base_url('freelance-hire/search'); ?>" method="get"> -->
+						<!-- <form action="<?php //echo base_url('freelance-employer/search'); ?>" method="get"> -->
 						<form onsubmit="searchSubmit()">
 							<fieldset class="sec_h2">
 								<input id="freelance_keyword" class="tags ui-autocomplete-input skill_keyword" name="freelance_keyword" placeholder="Companies, Category, Products" autocomplete="off" ng-model="keyword" type="text">
