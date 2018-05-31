@@ -1,4 +1,5 @@
 <div class="container">
+	<h2 class="basic-h2"> Let's Complete Your Profile to Get You More New Opportunities.</h2>
     <div class="form-box">
         <h2 class="text-center">Basic Information</h3>
             <form name="basicinfo" id="basicinfo" ng-submit="submitBasicInfoForm()" ng-validate="basicInfoValidate">
@@ -11,6 +12,9 @@
                     <label for="text">Who are you?</label>
                     <input type="text" name="jobTitle" id="jobTitle" class="form-control" ng-keyup="jobTitle()" ng-model="user.jobTitle" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
                     <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
+					<div id="jttooltip" class="tooltip-custom" style="display: none;">
+                        Enter “seeking opportunity” if you are a fresher else enter your current job title.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="text">Where are you from?</label>
@@ -37,3 +41,11 @@
             </form>
     </div>
 </div>
+<script>
+	$("#jobTitle").focusin(function(){
+        $('#jttooltip').show();
+    });
+    $("#jobTitle").focusout(function(){
+        $('#jttooltip').hide();
+    });
+</script>

@@ -17,7 +17,7 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
-    <body class="profile-main-page">        
+    <body class="profile-main-page without-reg">        
         <div class="middle-section middle-section-banner new-ld-page">
             <div class="search-banner" >
                 <header>
@@ -37,7 +37,7 @@
                 </header>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
                             <div class="search-bnr-text">
                                 <h1>Find the Right Job Opportunities</h1>
                                 <p>Because Dream Matters </p>
@@ -77,7 +77,7 @@
                             </form>
                             </div>
                         </div>
-                        <div class="col-md-6 right-bnr">
+                        <div class="col-lg-6 col-md-5 hidden-sm hidden-xs right-bnr">
                             <img src="<?php echo base_url('assets/n-images/job-bnr.png?ver=' . time()) ?>">
                         </div>
                     </div>
@@ -87,10 +87,10 @@
             <div class="job-cat-lp" >
                 <div class="container" >
                     <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
-                        <h2>Job by Category</h2>
+                        <h2>Jobs by Category</h2>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3" ng-if="jobCategory.length != 0" ng-repeat="jobs in jobCategory" ng-init="jobIndex=$index">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="jobCategory.length != 0" ng-repeat="jobs in jobCategory" ng-init="jobIndex=$index">
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url(); ?>{{jobs.industry_slug}}-jobs">
                                     <div class="cus-cat-middle">
@@ -124,28 +124,28 @@
                         <h2>How it Works</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url();?>assets/n-images/reg.png">
                                 <p>Register</p>
                                 <span>Sign up, enter your skills, job title and make your profile to get found by recruiters.</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url();?>assets/n-images/get-reccoman.png">
                                 <p>Get Recommendation</p>
                                 <span>Don’t worry if you can’t find a job! We provide suggested job options that best match your skill and job title.</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url();?>assets/n-images/connect.png">
                                 <p>Connect and Apply</p>
                                 <span>Connect with recruiters to know more about opportunities. Shortlist, save and apply for recent job openings.</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box last-child">
                                 <img src="<?php echo base_url();?>assets/n-images/get-job.png">
                                 <p>Get the Job</p>
@@ -162,7 +162,7 @@
 
                         </div>
                         <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url();?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url();?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -178,7 +178,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url();?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -186,7 +186,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url();?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-        
+			<div class="container">
             <div class="browse-jobs">
                 <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
                     <h2>Browse Other Jobs</h2>
@@ -207,33 +207,33 @@
                     <div class="col-md-4 col-sm-4">
                         <div class="browse-box">
                             <ul>
-                                <li><h3>Job By Location</h3></li>
+                                <li><h3>Jobs By Location</h3></li>
                                 <li ng-if="jobCity.length != 0" ng-repeat="jc in jobCity" ng-init="jcIndex=$index"><a href="<?php echo base_url(); ?>jobs-in-{{jc.slug}}">Jobs in {{jc.city_name}} ({{jc.count}})</a></li>
-                                <li><a href="<?php echo base_url(); ?>jobs-by-location">View All Location....</a></li>
+                                <li><a href="<?php echo base_url(); ?>jobs-by-location">View All Location</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div class="browse-box">
                             <ul>
-                                <li><h3>Job By Designation</h3></li>
+                                <li><h3>Jobs By Designation</h3></li>
                                 <li ng-if="jobDesignation.length != 0" ng-repeat="jd in jobDesignation" ng-init="jdIndex=$index"><a href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs">{{jd.job_title}} ({{jd.count}})</a></li>                                
-                                <li><a href="<?php echo base_url(); ?>jobs-by-designations">View All Designation....</a></li>
+                                <li><a href="<?php echo base_url(); ?>jobs-by-designations">View All Designation</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div class="browse-box">
                             <ul>
-                                <li><h3>Job By Company</h3></li>
+                                <li><h3>Jobs By Company</h3></li>
                                 <li ng-if="jobCompany.length != 0" ng-repeat="jcm in jobCompany" ng-init="jcmIndex=$index"><a href="<?php echo base_url(); ?>jobs-opening-at-{{jcm.company_name | slugify}}-{{jcm.rec_id}}">{{jcm.company_name}} ({{jcm.count}})</a></li>
-                                <li><a href="<?php echo base_url(); ?>jobs-by-companies">View All Companies....</a></li>
+                                <li><a href="<?php echo base_url(); ?>jobs-by-companies">View All Companies</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            
+            </div>
         </div>
         
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>

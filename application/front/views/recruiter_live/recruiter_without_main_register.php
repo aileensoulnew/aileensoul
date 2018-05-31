@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page without-reg">
 
         <div class="middle-section middle-section-banner new-ld-page">
             
@@ -24,10 +24,10 @@
                     <div class="header">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-6 col-sm-6 left-header fw-479">
+                                <div class="col-md-6 col-sm-6 col-xs-4 left-header fw-479">
                                     <h2 class="logo"><a href="<?php echo base_url(); ?>" target="_self">Aileensoul</a></h2>
                                 </div>
-                                <div class="col-md-6 col-sm-6 no-login-right fw-479">
+                                <div class="col-md-6 col-sm-6 col-xs-8 no-login-right fw-479">
                                     <a href="<?php echo base_url(); ?>login" target="_self" class="btn8">Login</a>
                                     <a href="<?php echo base_url('recruiter/create-account'); ?>" class="btn9">Create Recruiter Account</a>
                                 </div>
@@ -37,11 +37,11 @@
                 </header>
                 <div class="container">
                     <div class="row banner-main-div">
-                        <div class="col-md-6 col-sm-6 banner-left">
+                        <div class="col-md-6 col-sm-12 banner-left">
                             <h1 class="pb15">Hurdles Becomes Simple with a Right Person Besides You</h1>
                             <p>Easily reach, engage, and hire the job seekers through Aileensoul platform</p>
                         </div>
-                        <div class="col-md-6 right-bnr">
+                        <div class="col-md-6 right-bnr hidden-xs">
                             <img src="<?php echo base_url(); ?>assets/n-images/rec-bnr-img.png">
 
                         </div>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
                         
-                        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2 text-center ">
+                        <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center ">
                             <p>With a lot of job portals popping up nowadays, it has given an edge to the job seeker’s by providing them with lot of opportunities. But the recruiters are often put on the disadvantageous side as the portals charge them for putting up their posts. </p>
                             <p>Here, at Aileensoul the Recruiter profile is free for all, letting the employer post as many job requirements as they need. Recruiters can hire from the large number of job seekers available in Aileensoul.</p>
                             <p>A good number of filters and options help recruiters find the exact kind of candidate he/she is seeking.Also, the chat option feature helps the employer directly connect with job seekers and ask questions before making any hiring decision.</p>
@@ -86,28 +86,28 @@
                         <h2>How it Works</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/reg.png">
                                 <p>Register</p>
                                 <span>Sign up for free and enter your details.</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/post-project.png">
                                 <p>Post Job</p>
                                 <span>Post your requirement and the skills that you are looking for candidates. </span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/find-job.png">
                                 <p>Find Job-Seeker</p>
                                 <span>Search or shortlist candidates from the recommendation we provide for your requirement.</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box last-child">
                                 <img src="<?php echo base_url(); ?>assets/n-images/hire.png">
                                 <p>Hire</p>
@@ -125,7 +125,7 @@
 
                         </div>
                         <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
@@ -149,7 +149,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
                                     <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
                                     <div class="rel-art-name">
