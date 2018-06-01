@@ -66,6 +66,15 @@
         </div>
     </div>
 </div>
+<?php if($user_id != "" && $this->job_profile_set == 0): ?>
+<div class="bottom-bnr-div">
+    <div class="container">
+        <p>Apply on Your Dream Job Now!
+            <a class="btn-1 pull-right" href="<?php echo $job_profile_link; ?>">Create Job Profile</a>
+        </p>
+    </div>
+</div>
+<?php endif; ?>
 <script type="text/javascript" charset="utf-8">
 function jobsearchSubmit(){
     
