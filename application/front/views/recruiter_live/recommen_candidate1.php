@@ -82,7 +82,7 @@
                                             </a>
                                         </div>
                                         <div class="right_left_box_design ">
-                                            <span class="profile-company-name ">
+                                            <span class="profile-company-name">
                                                 <a href="<?php echo site_url('recruiter/profile'); ?>" title="<?php echo ucfirst(strtolower($recdata['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata['rec_lastname'])); ?>">   <?php echo ucfirst(strtolower($recdata['rec_firstname'])) . ' ' . ucfirst(strtolower($recdata['rec_lastname'])); ?></a>
                                             </span>
                                             <div class="profile-boxProfile-name">

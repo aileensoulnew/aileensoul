@@ -53,12 +53,14 @@ $this->data['job_header2'] = $this->load->view('job/job_header2', $this->data, t
 $id = $this->uri->segment(3);
 
 
-if (($id == $userid || $id == '') || $this->uri->segment(2) == 'edit-post' || $this->uri->segment(2) == 'apply-list' || $this->uri->segment(2) == 'recruiter_profile') {
+if (($id == $userid || $id == '') || $this->uri->segment(2) == 'edit-post' || $this->uri->segment(2) == 'apply-list' || $this->uri->segment(2) == 'recruiter_profile' || $this->uri->segment(2) == 'search') {
     $recdata = $this->data['recdata'] = $this->recruiter_model->getRecruiterByUserid($userid);
 } else {
     $recdata = $this->data['recdata'] = $this->recruiter_model->getRecruiterByUserid($id);
 }
 
+// print_r($recdata);
+// exit;
 
 if ($this->uri->segment(2) == 'jobpost') {
 

@@ -119,7 +119,7 @@
                             <?php 
                                 if (($ismainregister == true && $artist_isregister == false) || ($ismainregister == false)) { 
                             ?>
-                                <a href="<?php echo artist_registration; ?>" class="btn5">Create Artist Profile</a>
+                                <a href="<?php echo base_url('artist-profile/create-account'); ?>" class="btn5">Create Artist Profile</a>
                             <?php } ?>
 
                         </p>

@@ -11,14 +11,11 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
-
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
-
     </head>
     <body class="profile-main-page recruiter-main">
        <?php echo $header_profile; ?>
-        
         <div class="middle-section middle-section-banner">
             <!-- If not Register then Registration form display else reactivate div display -->
             <?php if(!$isfreelancerhireactivate){ ?>
@@ -34,8 +31,7 @@
                         <p><span>Do you want to reactivare ? </span><a class="pull-right btn-1" href="<?php echo base_url('freelance-hire/reactivateacc'); ?>">Reactivate</a></p>
                     </div>
                 </div>
-            <?php } ?>
-            
+            <?php } ?>            
             <!-- NEW DESIGN -->
             <!-- POST PROJECT -->
             <div class="sub-fix-head hide">
@@ -46,7 +42,6 @@
                     </h2>
                 </div>
             </div>
-
             <!-- HOW ABOUT PROFILE -->
             <div class="how-about-profile">
                 <div class="container">
@@ -64,7 +59,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- CREATE OR REACTIVATE -->
             <div class="content-bnr free-hire-bnr-prlx">
                 <div class="bnr-box">                    
@@ -80,7 +74,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- HOW IT WORKS -->
             <div class="how-it-work">
                 <div class="container">
@@ -119,7 +112,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- RELATED ARTICLE -->
             <div class="related-article">
                 <div class="container">
@@ -162,7 +154,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="container pt20 hidden">
                 <div class="pt20 pb20">
                     <div class="center-title">
@@ -274,7 +265,6 @@
         </div>
         <!--  poup modal  -->
         <div style="display:none;" class="modal fade" id="post-popup1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
             <div class="modal-dialog">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -317,21 +307,15 @@
                                     <button type="submit" class="btn1" value="Submit">Post</button>
                                 </p>
                             </div>
-
                         </div>
                         
                         
                         </form>
                     </div>
-
-
-
                 </div>
             </div>
-
         </div>
         <div style="display:none;" class="modal fade" id="post-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
             <div class="modal-dialog">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -352,19 +336,16 @@
                                     <i class="fa fa-file-pdf-o upload_icon"><span class="upload_span_icon"> PDF </span></i>
                                 </label>
                             </div>
-
                         </div>
                         <div class="post-field">
                             
                                 <div id="content" class="form-group">
                                     <label>FOR WHOM THIS OPPORTUNITY ?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <textarea rows="1" max-rows="5" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, PHP Developer, HR, BDE, CA, Doctor, Freelancer.." cols="10" style="resize:none"></textarea>
-
                                 </div>
                                 <div class="form-group">
                                     <label>WHICH LOCATION?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <textarea type="text" class="" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai, Moscow, Paris, Tokyo.. "></textarea>
-
                                 </div>
                                 <div class="form-group">
                                     <label>What is your field?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
@@ -375,26 +356,17 @@
                                         <option>Sports</option>
                                     </select>
                                 </div>
-
-
                             
-
-
                         </div>
                         <div class="text-right fw pt10 pb20 pr15">
                             <button type="submit" class="btn1"  value="Submit">Post</button> 
                         </div>
                         </form>
                     </div>
-
-
-
                 </div>
             </div>
-
         </div>
         <div style="display:none;" class="modal fade" id="ask-question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
             <div class="modal-dialog">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -414,19 +386,16 @@
                                     
                                 </label>
                             </div>
-
                         </div>
                         <div class="post-field">
                             
                                 <div class="form-group">
                                     <label>Add Description<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <textarea rows="1" max-rows="5" placeholder="Add Description" cols="10" style="resize:none"></textarea>
-
                                 </div>
                                 <div class="form-group">
                                     <label>Related Categories<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
                                     <input type="text" class="" placeholder="Related Categories">
-
                                 </div>
                                 <div class="form-group">
                                     <label>From which field the Question asked?<span class="pull-right"><img src="<?php echo base_url(); ?>assets/img/tooltip.png"></span></label>
@@ -437,30 +406,25 @@
                                         <option>Sports</option>
                                     </select>
                                 </div>
-
                         </div>
                         <div class="text-right fw pt10 pb20 pr15">
                             <button type="submit" class="btn1"  value="Submit">Post</button> 
                         </div>
                         </form>
                     </div>
-
-
-
                 </div>
             </div>
-
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
- <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
+        <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-         <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/hire_registration.js?ver=' . time()); ?>"></script>
+        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/hire_registration.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
@@ -476,9 +440,6 @@
             });
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-        
         <script src="<?php echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script>
-
-
     </body>
 </html>

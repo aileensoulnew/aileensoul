@@ -97,7 +97,7 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo base_url('freelance/') ?>" title="Freelance Profile">
+                <a href="<?php echo base_url('freelance-profile') ?>" title="Freelance Profile">
                     <div class="all-pr-img">
                         <img ng-src="<?php echo base_url('assets/n-images/i3.jpg?ver='.time()) ?>" alt="Freelance Profile">
                     </div>
