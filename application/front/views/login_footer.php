@@ -43,7 +43,7 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
                             <?php
                         }
                         ?>
-						<li><a title="Sitemap" tabindex="0" href="<?php echo base_url('report'); ?>" target="_blank">Report</a></li>
+						<li><a title="Sitemap" tabindex="0" href="<?php echo base_url('report-abuse'); ?>" target="_blank">Report</a></li>
 						<li><a title="Sitemap" tabindex="0" href="<?php echo base_url('faq'); ?>" target="_blank">FAQ</a></li>
                     </ul>
                 </div>
