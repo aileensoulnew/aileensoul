@@ -363,6 +363,10 @@
             var returnpage = '<?php echo $returnpage; ?>';
             var user_id =<?php echo json_encode($this->uri->segment(3)) ?>;
         </script>
+        <script>
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+        </script>               
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_post.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>

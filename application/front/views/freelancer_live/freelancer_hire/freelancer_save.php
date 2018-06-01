@@ -24,10 +24,8 @@
                         <div id="upload-demo"></div>
                     </div>
                     <div class="col-md-12 cover-pic" >
-                        <button class="btn btn-success cancel-result" onclick="" ><?php echo $this->lang->line("cancel"); ?></button>
-
+                        <button class="btn btn-success cancel-result" onclick=""><?php echo $this->lang->line("cancel"); ?></button>
                         <button class="btn btn-success set-btn upload-result "><?php echo $this->lang->line("save"); ?></button>
-
                         <div id="message1" style="display:none;">
                             <div id="floatBarsG">
                                 <div id="floatBarsG_1" class="floatBarsG"></div>
@@ -74,7 +72,6 @@
                 </div>
             </div>
             <div class="container tablate-container  art-profile">    
-
                 <?php if ($returnpage == '') { ?>
                     <div class="upload-img">
                         <label class="cameraButton"><span class="tooltiptext"><?php echo $this->lang->line("upload_cover_photo"); ?></span><i class="fa fa-camera" aria-hidden="true"></i>
@@ -85,7 +82,6 @@
                 <?php } ?>
                 <div class="profile-photo">
                     <div class="profile-pho">
-
                         <div class="user-pic padd_img">
                             <?php
                             $fname = $freelancr_user_data[0]['fullname'];
@@ -127,7 +123,6 @@
                                 </div>
                             <?php } ?>
                             <a title="Update Profile Picture" href="javascript:void(0);" class="cusome_upload" onclick="updateprofilepopup();"><img alt="Update Profile Picture"  src="<?php echo base_url('assets/img/cam.png'); ?>"><?php echo $this->lang->line("update_profile_picture"); ?></a>
-
                         </div>
                     </div>
                     <div class="job-menu-profile mob-block">
@@ -137,25 +132,21 @@
                             if ($freelancr_user_data[0]['designation'] == '') {
                                 ?>
                                 <a id="designation" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
-
                             <?php } else { ?> 
                                 <a id="designation" class="designation" title="<?php echo ucwords($freelancr_user_data[0]['designation']); ?>"><?php echo ucwords($freelancr_user_data[0]['designation']); ?></a>                <?php } ?>
                         </div>
                     </div>         
                     <div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
-
                         <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr">  
-
                             <?php
                             $userid = $this->session->userdata('aileenuser');
                             if ($freelancr_user_data[0]['user_id'] == $userid) {
                                 ?>     
                                 <ul class="current-user pro-fw">
-
                                 <?php } else { ?>
                                     <ul class="pro-fw4">
                                     <?php } ?>                                    
-                                    <li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(3) == '')) { ?> class="active" <?php } ?>><a title="Employer Details" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>">Employer Details</a>
+                                    <li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(2) != 'projects') && ($this->uri->segment(2) != 'saved-freelancer') && ($this->uri->segment(3) == '')) { ?> class="active" <?php } ?>><a title="Employer Details" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>">Employer Details</a>
                                     </li>
                                     <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(2) == 'projects' || $this->uri->segment(2) == 'employer-details' || $this->uri->segment(1) == 'post-freelance-project' || $this->uri->segment(2) == 'saved-freelancer') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) { ?>
                                         <li rel="stylesheet" type="text/css" href="" <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(2) == 'projects')) { ?> class="active" <?php } ?>><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>">Projects</a>
@@ -180,7 +171,6 @@
                     if ($freelancr_user_data[0]['designation'] == '') {
                         ?>
                         <a title="<?php echo $this->lang->line("designation"); ?>" id="designation" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
-
                     <?php } else { ?> 
                         <a id="designation" class="designation" title="<?php echo ucwords($freelancr_user_data[0]['designation']); ?>"><?php echo ucwords($freelancr_user_data[0]['designation']); ?></a>  <?php } ?>
                 </div>
@@ -226,7 +216,6 @@
                         <div id="popup-form">
                             <div class="fw" id="profi_loader"  style="display:none;" style="text-align:center;" ><img alt="loader" src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" /></div>
                             <form id ="userimage" name ="userimage" class ="clearfix" enctype="multipart/form-data" method="post">
-
                                 <div class="fw">
                                     <input type="file" name="profilepic" accept="image/gif, image/jpeg, image/png" id="upload-one">
                                 </div>
@@ -235,7 +224,6 @@
                                 </div>
                                 <input type="submit" class="upload-result-one" name="profilepicsubmit" id="profilepicsubmit" value="Save" >
                             </form>
-
                         </div>
                     </span>
                 </div>
@@ -256,35 +244,31 @@
         </div>
     </div>
     <!-- Model Popup Close -->
-
     <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
         <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>">
         </script>
-
     <?php } else { ?>
         <script  src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>">
         </script>
-
     <?php } ?>
-
     <script>
         var base_url = '<?php echo base_url(); ?>';
         var no_saved = '<?php echo $this->lang->line("no_saved_freelancer"); ?>';
     </script>
+    <script>
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
+    </script>               
+    <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_save.js?ver=' . time()); ?>"></script>
     <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
-    <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
-                <!--<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_save.js?ver=' . time()); ?>"></script>-->
-        <!--<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
+    <?php /*if (IS_HIRE_JS_MINIFY == '0') { ?>
+        <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_save.js?ver=' . time()); ?>"></script>
+        <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
     <?php } else { ?>
-        <!--<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_save.js?ver=' . time()); ?>"></script>-->
-        <!--<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>-->
-    <?php } ?>
-
-
-
-
+        <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_save.js?ver=' . time()); ?>"></script>
+        <script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
+    <?php } */?>
 </body>
 </html>
