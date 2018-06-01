@@ -194,9 +194,7 @@
 
                                 <?php echo $left_footer; ?>
 
-                                <div  class="add-post-button">
-                                    <a title="Post Project" class="btn btn-3 btn-3b" id ="Fh-post-project" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i><?php echo $this->lang->line("post_project"); ?></a>
-                                </div>
+                                
                             </div>
 
                         </div>

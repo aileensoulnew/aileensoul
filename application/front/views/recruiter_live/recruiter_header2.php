@@ -158,7 +158,7 @@ $userid = $this->session->userdata('aileenuser');
 									</g>
 								</svg>
 
-								<span class="pr-name"><span class="none-sub-menu"> Post a Job</span></span>
+								<span class="pr-name"><span class="none-sub-menu"> Post Job</span></span>
 							</a>
 						</li>
 					</ul>
