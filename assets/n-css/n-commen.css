@@ -1529,6 +1529,8 @@ svg path{
     .mobp0{padding: 0;}
 	.mobmt15{margin-top:15px;}
 	label{font-size:14px;}
+	.no-login #paddingtop_fixed{padding-top:90px !important;}
+	
     
 }
 @media screen and (max-width: 639px) {

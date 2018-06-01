@@ -2956,7 +2956,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 }
 @media screen and (max-width:767px){
     footer,header .col-md-4.col-sm-3{
-        text-align:center;
+        /*text-align:center;*/
     }
 	.mob-pb20{padding-bottom:20px;}
     .footer-ul .mob-none{
@@ -3040,8 +3040,8 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
         text-align:center
     }
     .banner,.btn-right{
-        float:left;
-        width:100%
+        /*float:left;
+        width:100%*/
     }
     .login{
         width:420px

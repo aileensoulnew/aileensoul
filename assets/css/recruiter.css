@@ -1574,7 +1574,7 @@ fieldset.fresher_radio label {
 	/*** end add  ***/
 	.city-location .mian_middle_post_box{width:100%;}
     .no-login #paddingtop_fixed{padding-top: 132px !important;}
-    .no-login .btn-right{text-align: center !important;}   
+    .no-login .btn-right{/*text-align: center !important;*/}   
     
 }
 
