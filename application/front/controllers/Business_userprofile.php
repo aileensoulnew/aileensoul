@@ -518,8 +518,16 @@ Your browser does not support the audio tag.
 <div class = "post-design-like-box col-md-12">
 <div class = "post-design-menu">
 <ul class = "col-md-6 col-sm-6 col-xs-6">
-<li class = "likepost' . $post_business_profile_post_id . '">
-<a id = "' . $post_business_profile_post_id . '" class = "ripple like_h_w" onClick = "post_like(this.id)">';
+<li class = "likepost' . $post_business_profile_post_id . '">';
+if($userid != "")
+{
+    $return_html .= '<a id = "' . $post_business_profile_post_id . '" class = "ripple like_h_w" onClick = "post_like(this.id)">';
+}
+else
+{
+    $return_html .= '<a id = "' . $post_business_profile_post_id . '" class = "ripple like_h_w" onClick = "login_profile();">';
+}
+
 
                 $likeuser = $post_business_like_user;
                 $likeuserarray = explode(',', $likeuser);
@@ -527,7 +535,14 @@ Your browser does not support the audio tag.
 
                     $return_html .= '<i class = "fa fa-thumbs-up fa-1x" aria-hidden = "true"></i>';
                 } else {
-                    $return_html .= '<i class = "fa fa-thumbs-up fa-1x main_color" aria-hidden = "true"></i>';
+                    if($userid != "")
+                    {                        
+                        $return_html .= '<i class = "fa fa-thumbs-up fa-1x main_color" aria-hidden = "true"></i>';
+                    }
+                    else
+                    {
+                        $return_html .= '<i class = "fa fa-thumbs-up fa-1x" aria-hidden = "true"></i>';
+                    }
                 }
                 $return_html .= '<span class = "like_As_count">';
 

@@ -456,6 +456,22 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 </div>
             </div>
         </div>
+        <!-- Bid-modal  -->
+        <div class="modal message-box biderror" id="bidmodal" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class='pop_content pop-content-cus'>
+                                <h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='<?php echo base_url(); ?>login'>Login</a> or <a class='btn1' href='<?php echo base_url(); ?>business-profile/create-account'>Register</a></p>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Model Popup Close -->
         <?php echo $footer; ?>
         <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
             <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
@@ -496,13 +512,15 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 register_profile();
              }
             function login_profile() { 
-                $('#register').modal('hide');
-                $('#login').modal('show');
+                // $('#register').modal('hide');
+                // $('#login').modal('show');
+                $('#bidmodal').modal('show');
             }
             function register_profile() {
                 if(ismainregister == false || isbusiness_deactive == true){
-                    $('#login').modal('hide');
-                    $('#register').modal('show');
+                    // $('#login').modal('hide');
+                    // $('#register').modal('show');
+                    $('#bidmodal').modal('show');
                 }else{
                     window.location.href = '<?php echo business_register_step1; ?>'
                 }

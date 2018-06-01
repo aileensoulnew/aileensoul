@@ -499,6 +499,24 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <?php } ?>
         <!-- Bid-modal for this modal appear or not  Popup Close -->
 
+
+        <!-- Bid-modal  -->
+        <div class="modal message-box biderror" id="bidmodal" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class='pop_content pop-content-cus'>
+                                <h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='<?php echo base_url(); ?>login'>Login</a> or <a class='btn1' href='<?php echo base_url(); ?>artist-profile/create-account'>Register</a></p>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Model Popup Close -->
+
 <?php echo $footer; ?>
 
  <?php
@@ -542,25 +560,29 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <script>
             function login_profile() {
                
-                $('#register').modal('show');
+                // $('#register').modal('show');
+                $('#bidmodal').modal('show');
                 $('body').addClass('modal-open'); 
 
             }
             function login_data() { 
               
-                $('#login').modal('show');
-                $('#register').modal('hide');
+                // $('#login').modal('show');
+                // $('#register').modal('hide');
+                $('#bidmodal').modal('hide');
                 $('body').addClass('modal-open'); 
 
             }
             function register_profile() {
-                $('#login').modal('hide');
-                $('#register').modal('show');
+                // $('#login').modal('hide');
+                // $('#register').modal('show');
+                $('#bidmodal').modal('show');
             }
             function forgot_profile() {
-                $('#forgotPassword').modal('show');
-                $('#register').modal('hide');
-                $('#login').modal('hide');
+                // $('#forgotPassword').modal('show');
+                // $('#register').modal('hide');
+                // $('#login').modal('hide');
+                $('#bidmodal').modal('hide');
                 $('body').addClass('modal-open-other');   
 
             }
