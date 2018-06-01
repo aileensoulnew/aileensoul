@@ -18,11 +18,7 @@
             </div>
         </header>
     <?php endif; ?>
-    <div class="container">
-        <div class="text-right pt20 create-profile-btn">
-            <!--  -->
-          
-        </div>
+    <div class="container">        
         <div class="row">
             <div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
                 <div class="search-bnr-text">
