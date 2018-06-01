@@ -96,7 +96,7 @@
                                                 <ul class=" left_box_menubar">
                                                     <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a  class="padding_less_left"  title="freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo $this->lang->line("details"); ?></a>
                                                     </li>
-                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelance-work/saved-projects'); ?>"><?php echo $this->lang->line("saved"); ?></a>
+                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelancer/saved-projects'); ?>"><?php echo $this->lang->line("saved"); ?></a>
                                                     </li>
                                                     <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'applied-projects')) { ?> class="active" <?php } ?>><a title="Applied Post"  class="padding_less_right"  href="<?php echo base_url('freelance-work/applied-projects'); ?>"><?php echo $this->lang->line("applied"); ?></a>
                                                     </li>
@@ -453,7 +453,7 @@
                                                         <div>
                                                             <strong></strong>
 
-                                                            <a href="<?php echo base_url('freelance-work/basic-information') ?>" class="edit_profile_job">Edit Profile</a>
+                                                            <a href="<?php echo base_url('freelancer/basic-information') ?>" class="edit_profile_job">Edit Profile</a>
 
                                                         </div>
                                                     </div>

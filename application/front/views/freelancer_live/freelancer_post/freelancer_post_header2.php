@@ -94,7 +94,7 @@
                                             <span id="art_profile"><?php echo $this->lang->line("freelancer_profile"); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></span>
                                             <div class="dropdown-content_hover" id="dropdown-content_hover">
                                                 <a title="View Profile" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><i class="fa fa-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
-                                                <a title="Edit Profile" href="<?php echo base_url('freelance-work/basic-information'); ?>"><i class="fa fa-pencil" aria-hidden="true"></i> <?php echo $this->lang->line("edit_profile"); ?></a>
+                                                <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information'); ?>"><i class="fa fa-pencil" aria-hidden="true"></i> <?php echo $this->lang->line("edit_profile"); ?></a>
                                                 <?php
                                                 $userid = $this->session->userdata('aileenuser');
                                                 ?>

@@ -99,7 +99,9 @@ $route['terms-and-condition'] = "main/terms_condition";
 $route['privacy-policy'] = "main/privacy_policy";
 $route['advertise-with-us'] = "advertise_with_us";
 
-
+$route['sitemap'] = "sitemap/sitemap";
+$route['sitemap/blogs'] = "sitemap/blogs";
+$route['sitemap/blogs/(:any)'] = "sitemap/blogs_category/$1";
 $route['sitemap/job-profile'] = "sitemap/job_profile";
 $route['sitemap/recruiter-profile'] = "sitemap/recruiter_profile";
 $route['sitemap/freelance-profile'] = "sitemap/freelance_profile";
@@ -240,35 +242,6 @@ $route['freelance-hire/reactivateacc'] = "freelancer_hire_live/reactivateacc";
 $route['freelancer/ajax_recommen_candidate'] = "freelancer/ajax_recommen_candidate";
 //$route['freelance-hire'] = "freelancer_hire/freelancer_hire/freelancer_hire_basic_info";
 
-
-
-//FREELANCER APPLY ROUTES SETTINGS
-//$route['freelance-work/home'] = "freelancer/freelancer_apply_post";
-$route['recommended-freelance-work'] = "freelancer/freelancer_apply_post";
-$route['freelance-work/home/live-post'] = "freelancer/freelancer_apply_post/$1";
-$route['freelance-work/freelancer-details/(:any)'] = "freelancer/freelancer_post_profile/$1";
-$route['freelance-work/freelancer-details'] = "freelancer/freelancer_post_profile";
-$route['freelance-work/saved-projects'] = "freelancer/freelancer_save_post";
-$route['freelance-work/applied-projects'] = "freelancer/freelancer_applied_post";
-$route['freelance-work/basic-information'] = "freelancer/freelancer_post_basic_information";
-$route['freelance-work/address-information'] = "freelancer/freelancer_post_address_information";
-$route['freelance-work/address-information/(:any)'] = "freelancer/freelancer_post_address_information/$1";
-$route['freelance-work/professional-information'] = "freelancer/freelancer_post_professional_information";
-$route['freelance-work/professional-information/(:any)'] = "freelancer/freelancer_post_professional_information/$1";
-$route['freelance-work/rate'] = "freelancer/freelancer_post_rate";
-$route['freelance-work/rate/(:any)'] = "freelancer/freelancer_post_rate/$1";
-$route['freelance-work/avability'] = "freelancer/freelancer_post_avability";
-$route['freelance-work/avability/(:any)'] = "freelancer/freelancer_post_avability/$1";
-$route['freelance-work/education'] = "freelancer/freelancer_post_education";
-$route['freelance-work/education/(:any)'] = "freelancer/freelancer_post_education/$1";
-$route['freelance-work/portfolio'] = "freelancer/freelancer_post_portfolio";
-$route['freelance-work/portfolio/(:any)'] = "freelancer/freelancer_post_portfolio/$1";
-$route['freelance-work/search'] = "search/freelancer_post_search";
-$route['freelance-work/deactivate'] = "freelancer/deactivate";
-$route['freelance-work/reactivate'] = "freelancer/reactivate";
-//$route['freelance-work/registration'] = "freelancer/registation";//old
-$route['freelancer/signup'] = "freelancer/registation";
-// $route['freelance-work'] = "freelancer_live/freelancer_post/freelancer_post_basic_information";
 
 
  $route['projects'] = "search/freelancer_post_search";
@@ -535,6 +508,132 @@ $route['freelancer/registration'] = "freelancer_apply_live/freelancer_apply_regi
 // $route['freelancer/search/(:any)projects-in-(:any)'] = "freelancer_apply_live/$1";
 $route['freelancer/search/(.+)'] = "freelancer_apply_live/freelancer_apply_search_new";
 
+//FREELANCER APPLY ROUTES SETTINGS
+//$route['freelance-work/home'] = "freelancer/freelancer_apply_post";
+$route['recommended-freelance-work'] = "freelancer/freelancer_apply_post";
+$route['freelance-work/home/live-post'] = "freelancer/freelancer_apply_post/$1";
+// $route['freelance-work/freelancer-details/(:any)'] = "freelancer/freelancer_post_profile/$1";//old
+// $route['freelance-work/freelancer-details'] = "freelancer/freelancer_post_profile";//old
+
+
+// $route['freelance-work/saved-projects'] = "freelancer/freelancer_save_post";//old
+$route['freelancer/saved-projects'] = "freelancer/freelancer_save_post";
+
+//$route['freelance-work/applied-projects'] = "freelancer/freelancer_applied_post";//old
+$route['freelancer/applied-projects'] = "freelancer/freelancer_applied_post";
+
+//$route['freelance-work/basic-information'] = "freelancer/freelancer_post_basic_information";//old
+$route['freelancer/basic-information'] = "freelancer/freelancer_post_basic_information";
+
+//$route['freelance-work/address-information'] = "freelancer/freelancer_post_address_information";//old
+//$route['freelance-work/address-information/(:any)'] = "freelancer/freelancer_post_address_information/$1";//old
+$route['freelancer/address-information'] = "freelancer/freelancer_post_address_information";
+$route['freelancer/address-information/(:any)'] = "freelancer/freelancer_post_address_information/$1";
+
+//$route['freelance-work/professional-information'] = "freelancer/freelancer_post_professional_information";
+//$route['freelance-work/professional-information/(:any)'] = "freelancer/freelancer_post_professional_information/$1";
+
+$route['freelancer/professional-information'] = "freelancer/freelancer_post_professional_information";
+$route['freelancer/professional-information/(:any)'] = "freelancer/freelancer_post_professional_information/$1";
+
+// $route['freelance-work/rate'] = "freelancer/freelancer_post_rate";
+// $route['freelance-work/rate/(:any)'] = "freelancer/freelancer_post_rate/$1";
+$route['freelancer/rate'] = "freelancer/freelancer_post_rate";
+$route['freelancer/rate/(:any)'] = "freelancer/freelancer_post_rate/$1";
+
+// $route['freelance-work/avability'] = "freelancer/freelancer_post_avability";
+// $route['freelance-work/avability/(:any)'] = "freelancer/freelancer_post_avability/$1";
+$route['freelancer/availability'] = "freelancer/freelancer_post_avability";
+$route['freelancer/availability/(:any)'] = "freelancer/freelancer_post_avability/$1";
+
+// $route['freelance-work/education'] = "freelancer/freelancer_post_education";
+// $route['freelance-work/education/(:any)'] = "freelancer/freelancer_post_education/$1";
+$route['freelancer/education'] = "freelancer/freelancer_post_education";
+$route['freelancer/education/(:any)'] = "freelancer/freelancer_post_education/$1";
+
+// $route['freelance-work/portfolio'] = "freelancer/freelancer_post_portfolio";
+// $route['freelance-work/portfolio/(:any)'] = "freelancer/freelancer_post_portfolio/$1";
+$route['freelancer/portfolio'] = "freelancer/freelancer_post_portfolio";
+$route['freelancer/portfolio/(:any)'] = "freelancer/freelancer_post_portfolio/$1";
+
+$route['freelance-work/search'] = "search/freelancer_post_search";
+$route['freelance-work/deactivate'] = "freelancer/deactivate";
+$route['freelance-work/reactivate'] = "freelancer/reactivate";
+//$route['freelance-work/registration'] = "freelancer/registation";//old
+$route['freelancer/signup'] = "freelancer/registation";
+// $route['freelance-work'] = "freelancer_live/freelancer_post/freelancer_post_basic_information";
+
+
+
+$route['freelancer/index'] = "freelancer/index";
+$route['freelancer/freelancer_post'] = "freelancer/freelancer_post";
+$route['freelancer/freelancer_post_basic_information'] = "freelancer/freelancer_post_basic_information";
+$route['freelancer/freelancer_post_basic_information_insert'] = "freelancer/freelancer_post_basic_information_insert";
+$route['freelancer/setcategory_slug'] = "freelancer/setcategory_slug";
+$route['freelancer/comparecategory_slug'] = "freelancer/comparecategory_slug";
+$route['freelancer/create_slug'] = "freelancer/create_slug";
+$route['freelancer/slug_script'] = "freelancer/slug_script";
+$route['freelancer/check_email'] = "freelancer/check_email";
+$route['freelancer/freelancer_apply_deactivate_check'] = "freelancer/freelancer_apply_deactivate_check";
+$route['freelancer/freelancer_post_address_information'] = "freelancer/freelancer_post_address_information";
+$route['freelancer/ajax_data'] = "freelancer/ajax_data";
+$route['freelancer/freelancer_post_address_information_insert'] = "freelancer/freelancer_post_address_information_insert";
+$route['freelancer/freelancer_post_professional_information'] = "freelancer/freelancer_post_professional_information";
+$route['freelancer/freelancer_post_professional_information_insert'] = "freelancer/freelancer_post_professional_information_insert";
+$route['freelancer/freelancer_post_rate'] = "freelancer/freelancer_post_rate";
+$route['freelancer/freelancer_post_rate_insert'] = "freelancer/freelancer_post_rate_insert";
+$route['freelancer/freelancer_post_avability'] = "freelancer/freelancer_post_avability";
+$route['freelancer/freelancer_post_avability_insert'] = "freelancer/freelancer_post_avability_insert";
+$route['freelancer/freelancer_post_education'] = "freelancer/freelancer_post_education";
+$route['freelancer/freelancer_other_university'] = "freelancer/freelancer_other_university";
+$route['freelancer/freelancer_post_education_insert'] = "freelancer/freelancer_post_education_insert";
+$route['freelancer/freelancer_post_portfolio'] = "freelancer/freelancer_post_portfolio";
+$route['freelancer/freelancer_post_portfolio_insert'] = "freelancer/freelancer_post_portfolio_insert";
+$route['freelancer/text2link'] = "freelancer/text2link";
+$route['freelancer/aasort'] = "freelancer/aasort";
+$route['freelancer/ajax_dataforcity'] = "freelancer/ajax_dataforcity";
+$route['freelancer/freelancer_apply_post'] = "freelancer/freelancer_apply_post";
+$route['freelancer/ajax_freelancer_apply_post'] = "freelancer/ajax_freelancer_apply_post";
+$route['freelancer/freelancer_apply_check'] = "freelancer/freelancer_apply_check";
+$route['freelancer/apply_insert'] = "freelancer/apply_insert";
+$route['freelancer/freelancer_applied_post'] = "freelancer/freelancer_applied_post";
+$route['freelancer/ajax_freelancer_applied_post'] = "freelancer/ajax_freelancer_applied_post";
+$route['freelancer/freelancer_delete_apply'] = "freelancer/freelancer_delete_apply";
+$route['freelancer/save_insert'] = "freelancer/save_insert";
+$route['freelancer/save_user'] = "freelancer/save_user";
+$route['freelancer/freelancer_save_post'] = "freelancer/freelancer_save_post";
+$route['freelancer/ajax_freelancer_save_post'] = "freelancer/ajax_freelancer_save_post";
+$route['freelancer/user_image_add1'] = "freelancer/user_image_add1";
+$route['freelancer/pdf'] = "freelancer/pdf";
+$route['freelancer/freelancer_post_profile'] = "freelancer/freelancer_post_profile";
+$route['freelancer/deactivate'] = "freelancer/deactivate";
+$route['freelancer/ajaxpro_work'] = "freelancer/ajaxpro_work";
+$route['freelancer/image_work'] = "freelancer/image_work";
+$route['freelancer/designation'] = "freelancer/designation";
+$route['freelancer/reactivate'] = "freelancer/reactivate";
+$route['freelancer/free_invite_user'] = "freelancer/free_invite_user";
+$route['freelancer/deletepdf'] = "freelancer/deletepdf";
+$route['freelancer/freelancer_search_city'] = "freelancer/freelancer_search_city";
+$route['freelancer/freelancer_apply_search_keyword'] = "freelancer/freelancer_apply_search_keyword";
+$route['freelancer/get_skill'] = "freelancer/get_skill";
+$route['freelancer/freelancer_other_degree'] = "freelancer/freelancer_other_degree";
+$route['freelancer/freelancer_other_stream'] = "freelancer/freelancer_other_stream";
+$route['freelancer/freelancer_other_field'] = "freelancer/freelancer_other_field";
+$route['freelancer/apply_email'] = "freelancer/apply_email";
+$route['freelancer/selectemail_user'] = "freelancer/selectemail_user";
+$route['freelancer/registation'] = "freelancer/registation";
+$route['freelancer/registation_insert'] = "freelancer/registation_insert";
+$route['freelancer/email_view'] = "freelancer/email_view";
+$route['freelancer/session'] = "freelancer/session";
+$route['freelancer/progressbar'] = "freelancer/progressbar";
+$route['freelancer/post_slug'] = "freelancer/post_slug";
+$route['freelancer/category_slug'] = "freelancer/category_slug";
+$route['freelancer/skill_slug'] = "freelancer/skill_slug";
+$route['freelancer/freelancer_notification_count'] = "freelancer/freelancer_notification_count";
+$route['freelancer/registation_insert_new'] = "freelancer/registation_insert_new";
+$route['freelancer/get_filter_data'] = "freelancer/get_filter_data";
+
+$route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 //Freelance Apply Signup End
 
 //$route['job/search'] = "job/job_search";
@@ -626,6 +725,7 @@ $route['notification/art-post/(:any)'] = "notification/art_post/$1";
 $route['feedback'] = "feedback/index";
 $route['faq'] = "general/faq";
 $route['report'] = "general/report";
+$route['report-abuse'] = "general/report";
 
 $route['how-to-use-job-profile-in-aileensoul'] = "introduction/job_profile";
 $route['how-to-use-recruiter-profile-in-aileensoul'] = "introduction/recruiter_profile";

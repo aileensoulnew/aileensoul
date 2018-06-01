@@ -56,12 +56,12 @@
                             <div class="col-md-3 col-sm-3">
                                 <div class="left-side-bar">
                                     <ul class="left-form-each">
-                                        <li class="custom-none"><a title="Basic Information" href="<?php echo base_url('freelance-work/basic-information'); ?>"><?php echo $this->lang->line("basic_info"); ?></a></li>
-                                        <li class="custom-none"><a title="Address Information" href="<?php echo base_url('freelance-work/address-information'); ?>"><?php echo $this->lang->line("address_info"); ?></a></li>
-                                        <li class="custom-none"><a title="Professional Information" href="<?php echo base_url('freelance-work/professional-information'); ?>"><?php echo $this->lang->line("professional_info"); ?></a></li>
-                                        <li class="custom-none"><a title="Rate" href="<?php echo base_url('freelance-work/rate'); ?>"><?php echo $this->lang->line("rate"); ?></a></li>
-                                        <li class="custom-none"><a title="Avability" href="<?php echo base_url('freelance-work/avability'); ?>"><?php echo $this->lang->line("add_avability"); ?></a></li>
-                                        <li class="custom-none"><a title="Education" href="<?php echo base_url('freelance-work/education'); ?>"><?php echo $this->lang->line("education"); ?></a></li>           
+                                        <li class="custom-none"><a title="Basic Information" href="<?php echo base_url('freelancer/basic-information'); ?>"><?php echo $this->lang->line("basic_info"); ?></a></li>
+                                        <li class="custom-none"><a title="Address Information" href="<?php echo base_url('freelancer/address-information'); ?>"><?php echo $this->lang->line("address_info"); ?></a></li>
+                                        <li class="custom-none"><a title="Professional Information" href="<?php echo base_url('freelancer/professional-information'); ?>"><?php echo $this->lang->line("professional_info"); ?></a></li>
+                                        <li class="custom-none"><a title="Rate" href="<?php echo base_url('freelancer/rate'); ?>"><?php echo $this->lang->line("rate"); ?></a></li>
+                                        <li class="custom-none"><a title="Avability" href="<?php echo base_url('freelancer/availability'); ?>"><?php echo $this->lang->line("add_avability"); ?></a></li>
+                                        <li class="custom-none"><a title="Education" href="<?php echo base_url('freelancer/education'); ?>"><?php echo $this->lang->line("education"); ?></a></li>           
                                         <li <?php if ($this->uri->segment(1) == 'freelance-work') { ?> class="active init" <?php } ?>><a title="Portfolio" href="javascript:void(0);"><?php echo $this->lang->line("portfolio"); ?></a></li>
                                     </ul>
                                 </div>
