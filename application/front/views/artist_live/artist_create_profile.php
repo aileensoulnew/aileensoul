@@ -1,8 +1,8 @@
 <div class="">
     <div class="title-div">
         <ul class="nav nav-tabs">
-            <li><a href="#">Artistic an Account</a></li>
-            <li><a href="#">Artistic Information</a></li>
+            <li><a href="#">Create an Account</a></li>
+            <li><a href="#">Basic Information</a></li>
             <li class="active"><a href="#">Artistic Registration</a></li>
         </ul>
     </div>
@@ -82,16 +82,9 @@
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="country" id="country" tabindex="10" ng-model="user.country">
-                                            <option value="" selected="selected">Select Country*</option>
-                                            <?php
-                                            if(count($countries) > 0){
-                                                foreach($countries as $cnt){  ?>
-                                                    <option value="<?php echo $cnt['country_id']; ?>"><?php echo $cnt['country_name'];?></option>
-                                            <?php
-                                                }       
-                                            }
-                                            ?>
+                                        <select name="country" id="country" tabindex="10" ng-model="user.country" ng-change="onCountryChange()">
+                                            <option disabled="" value="" selected="selected">Select Country*</option>
+                                            <option data-ng-repeat='countryItem in countryList' value='{{countryItem.country_id}}'>{{countryItem.country_name}}</option>
                                         </select>
                                     </span>
                                 </div>
@@ -99,8 +92,9 @@
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="state" id="state" tabindex="10" ng-model="user.state">
-                                            <option value="" selected="selected" disabled="">Select State*</option>
+                                        <select name="state" id="state" tabindex="10" ng-model="user.state" ng-change="onStateChange()">
+                                            <option disabled="" value="" selected="selected">Select State*</option>
+                                            <option data-ng-repeat='stateItem in stateList' value='{{stateItem.state_id}}' ng-selected="user.state_id == stateItem.state_id">{{stateItem.state_name}}</option>
                                         </select>
                                     </span>
                                 </div>
@@ -109,7 +103,8 @@
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
                                         <select name="city" id="city" tabindex="10" ng-model="user.city">
-                                            <option value="" selected="selected" disabled="">Select City*</option>
+                                            <option disabled="" value="" selected="selected">Select City</option>
+                                            <option data-ng-repeat='cityItem in cityList' value='{{cityItem.city_id}}'>{{cityItem.city_name}}</option>
                                         </select>
                                     </span>
                                 </div>
@@ -150,7 +145,7 @@
         }
     }
 
-    $('#country').on('change',function(){ 
+    /*$(document).on('change','#country',function(){ 
         var countryID = $(this).val();
         if(countryID){
             $.ajax({
@@ -169,7 +164,7 @@
         }
     });
     
-    $('#state').on('change',function(){
+    $(document).on('change','#state',function(){
         var stateID = $(this).val();
         if(stateID){
             $.ajax({
@@ -184,5 +179,5 @@
         }else{
             $('#city').html('<option value="">Select state first</option>'); 
         }
-    });
+    });*/
 </script>
