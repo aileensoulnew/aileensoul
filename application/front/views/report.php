@@ -120,7 +120,6 @@
 			</div>
 			<?php echo $login_footer ?>
 		</div>
-
 		<div class="modal fade message-box addreport" id="reportmodal" role="dialog">
 		    <div class="modal-dialog modal-lm">
 		        <div class="modal-content">
@@ -133,8 +132,6 @@
 		</div>
 		<!--  poup modal  -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?ver=<?php echo time(); ?>"></script>
-
-        <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>"></script> -->
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>        
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()); ?>"></script>
@@ -168,7 +165,6 @@
                 // container.appendChild(item);
                 itemsCounter++;
             }
-
             $("#addreport").validate({
 		        rules: {
 		            txtName: {
