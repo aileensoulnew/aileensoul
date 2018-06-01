@@ -49,17 +49,17 @@ class Freelancer extends MY_Controller {
             $jobdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
             if ($jobdata[0]['free_post_step'] == 1) {
-                redirect('freelance-work/address-information', refresh);
+                redirect('freelancer/address-information', refresh);
             } else if ($jobdata[0]['free_post_step'] == 2) {
-                redirect('freelance-work/professional-information', refresh);
+                redirect('freelancer/professional-information', refresh);
             } else if ($jobdata[0]['free_post_step'] == 3) {
-                redirect('freelance-work/rate', refresh);
+                redirect('freelancer/rate', refresh);
             } else if ($jobdata[0]['free_post_step'] == 4) {
-                redirect('freelance-work/avability', refresh);
+                redirect('freelancer/availability', refresh);
             } else if ($jobdata[0]['free_post_step'] == 5) {
-                redirect('freelance-work/education', refresh);
+                redirect('freelancer/education', refresh);
             } else if ($jobdata[0]['free_post_step'] == 6) {
-                redirect('freelance-work/portfolio', refresh);
+                redirect('freelancer/portfolio', refresh);
             } else if ($jobdata[0]['free_post_step'] == 7) {
                 redirect('freelance-work/home', refresh);
             } else {
@@ -154,15 +154,15 @@ class Freelancer extends MY_Controller {
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
                 if ($updatedata) {
                     if ($postid) {
-                        redirect('freelance-work/address-information/' . $postid, refresh);
+                        redirect('freelancer/address-information/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/address-information', refresh);
+                        redirect('freelancer/address-information', refresh);
                     }
                 } else {
                     if ($postid) {
-                        redirect('freelance-work/basic-information/' . $postid, refresh);
+                        redirect('freelancer/basic-information/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/basic-information', refresh);
+                        redirect('freelancer/basic-information', refresh);
                     }
                 }
             } else {
@@ -184,15 +184,15 @@ class Freelancer extends MY_Controller {
                 $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');
                 if ($insert_id) {
                     if ($postid) {
-                        redirect('freelance-work/address-information/' . $postid, refresh);
+                        redirect('freelancer/address-information/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/address-information', refresh);
+                        redirect('freelancer/address-information', refresh);
                     }
                 } else {
                     if ($postid) {
-                        redirect('freelance-work/basic-information/' . $postid, refresh);
+                        redirect('freelancer/basic-information/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/basic-information', refresh);
+                        redirect('freelancer/basic-information', refresh);
                     }
                 }
             }
@@ -420,15 +420,15 @@ class Freelancer extends MY_Controller {
                 $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
                 if ($updatdata) {
                     if ($postid) {
-                        redirect('freelance-work/professional-information/' . $postid, refresh);
+                        redirect('freelancer/professional-information/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/professional-information', refresh);
+                        redirect('freelancer/professional-information', refresh);
                     }
                 } else {
                     if ($postid) {
-                        redirect('freelance-work/address-information/' . $postid, refresh);
+                        redirect('freelancer/address-information/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/address-information', refresh);
+                        redirect('freelancer/address-information', refresh);
                     }
                 }
             }
@@ -568,15 +568,15 @@ class Freelancer extends MY_Controller {
                 $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
                 if ($updatdata) {
                     if ($postid) {
-                        redirect('freelance-work/rate/' . $postid, refresh);
+                        redirect('freelancer/rate/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/rate', refresh);
+                        redirect('freelancer/rate', refresh);
                     }
                 } else {
                     if ($postid) {
-                        redirect('freelance-work/rate/' . $postid, refresh);
+                        redirect('freelancer/rate/' . $postid, refresh);
                     } else {
-                        redirect('freelance-work/rate', refresh);
+                        redirect('freelancer/rate', refresh);
                     }
                 }
             }
@@ -663,16 +663,16 @@ class Freelancer extends MY_Controller {
             if ($updatdata) {
                 // $this->session->set_flashdata('success', 'Rate information updated successfully');
                 if ($postid) {
-                    redirect('freelance-work/avability/' . $postid, refresh);
+                    redirect('freelancer/availability/' . $postid, refresh);
                 } else {
-                    redirect('freelance-work/avability', refresh);
+                    redirect('freelancer/availability', refresh);
                 }
             } else {
                 //  $this->session->flashdata('error', 'Your data not inserted');
                 if ($postid) {
-                    redirect('freelance-work/rate/' . $postid, refresh);
+                    redirect('freelancer/rate/' . $postid, refresh);
                 } else {
-                    redirect('freelance-work/rate', refresh);
+                    redirect('freelancer/rate', refresh);
                 }
             }
        // }
@@ -746,15 +746,15 @@ class Freelancer extends MY_Controller {
             $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
             if ($updatdata) {
                 if ($postid) {
-                    redirect('freelance-work/education/' . $postid, refresh);
+                    redirect('freelancer/education/' . $postid, refresh);
                 } else {
-                    redirect('freelance-work/education', refresh);
+                    redirect('freelancer/education', refresh);
                 }
             } else {
                 if ($postid) {
-                    redirect('freelance-work/avability/' . $postid, refresh);
+                    redirect('freelancer/availability/' . $postid, refresh);
                 } else {
-                    redirect('freelance-work/avability', refresh);
+                    redirect('freelancer/availability', refresh);
                 }
             }
       //  }
@@ -912,16 +912,16 @@ class Freelancer extends MY_Controller {
         if ($updatdata) {
             // $this->session->set_flashdata('success', 'Education information updated successfully');
             if ($postid) {
-                redirect('freelance-work/portfolio/' . $postid, refresh);
+                redirect('freelancer/portfolio/' . $postid, refresh);
             } else {
-                redirect('freelance-work/portfolio', refresh);
+                redirect('freelancer/portfolio', refresh);
             }
         } else {
             // $this->session->flashdata('error', 'Your data not inserted');
             if ($postid) {
-                redirect('freelance-work/education/' . $postid, refresh);
+                redirect('freelancer/education/' . $postid, refresh);
             } else {
-                redirect('freelance-work/education', refresh);
+                redirect('freelancer/education', refresh);
             }
         }
     }

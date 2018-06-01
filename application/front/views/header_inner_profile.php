@@ -372,3 +372,4 @@ if($browser == "Firefox")
         var app = angular.module('headerApp', []);
 </script>     
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+<script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>

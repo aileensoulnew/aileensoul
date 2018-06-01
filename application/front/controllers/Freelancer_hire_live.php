@@ -877,13 +877,13 @@ public function ajax_recommen_candidate() {
 				if ($row['freelancer_post_user_image']) {
 					if (IMAGEPATHFROM == 'upload') {
 						if (!file_exists($this->config->item('free_post_profile_main_upload_path') . $row['freelancer_post_user_image'])) {
-							$return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+							$return_html .= '<a href = "' . base_url('freelancer/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
 							$return_html .= '<div class = "post-img-div">';
 							$return_html .= ucfirst(strtolower($sub_post_fname)) . ucfirst(strtolower($sub_post_lname));
 							$return_html .= '</div>
 							</a>';
 						} else {
-							$return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
+							$return_html .= '<a href = "' . base_url('freelancer/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
 							<img src = "' . FREE_POST_PROFILE_THUMB_UPLOAD_URL . $row['freelancer_post_user_image'] . '" alt = " ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
 							</a>';
 						}
@@ -892,11 +892,11 @@ public function ajax_recommen_candidate() {
 						$s3 = new S3(awsAccessKey, awsSecretKey);
 						$this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
 						if ($info) {
-							$return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
+							$return_html .= '<a href = "' . base_url('freelancer/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
 							<img src = "' . FREE_POST_PROFILE_THUMB_UPLOAD_URL . $row['freelancer_post_user_image'] . '" alt = " ' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
 							</a>';
 						} else {
-							$return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+							$return_html .= '<a href = "' . base_url('freelancer/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
 							$return_html .= '<div class = "post-img-div">';
 							$return_html .= ucfirst(strtolower($sub_post_fname)) . ucfirst(strtolower($sub_post_lname));
 							$return_html .= '</div>
@@ -904,7 +904,7 @@ public function ajax_recommen_candidate() {
 						}
 					}
 				} else {
-					$return_html .= '<a href = "' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
+					$return_html .= '<a href = "' . base_url('freelancer/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">';
 					$return_html .= '<div class = "post-img-div">';
 					$return_html .= ucfirst(strtolower($sub_post_fname)) . ucfirst(strtolower($sub_post_lname));
 					$return_html .= '</div>
@@ -915,7 +915,7 @@ public function ajax_recommen_candidate() {
 				<div class = "designation_rec fl">
 				<ul>
 				<li>
-				<a href = " ' . base_url('freelance-work/freelancer-details/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
+				<a href = " ' . base_url('freelancer/' . $row['freelancer_apply_slug']) . '" title = "' . ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '">
 				<h6>';
 				$return_html .= ucwords($row['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']);
 				$return_html .= '</h6>
@@ -1483,7 +1483,7 @@ public function ajax_freelancer_save() {
 				$return_html .= '<a href="' . base_url('freelancer/freelancer_post_profile/' . $rec['freelancer_apply_slug']) . '" title="' . ucwords($rec['freelancer_post_fullname']) . ' ' . ucwords($rec['freelancer_post_username']) . '">
 				<img src="' . FREE_POST_PROFILE_THUMB_UPLOAD_URL . $rec['freelancer_post_user_image'] . '" alt="' . ucwords($rec['freelancer_post_fullname']) . ' ' . ucwords($row['freelancer_post_username']) . '"></a>';
 			} else {
-				$return_html .= '<a href="' . base_url('freelance-work/freelancer-details/' . $rec['freelancer_apply_slug']) . '" title="' . ucwords($rec['freelancer_post_fullname']) . ' ' . ucwords($rec['freelancer_post_username']) . '">';
+				$return_html .= '<a href="' . base_url('freelancer/' . $rec['freelancer_apply_slug']) . '" title="' . ucwords($rec['freelancer_post_fullname']) . ' ' . ucwords($rec['freelancer_post_username']) . '">';
 				$post_fname = $rec['freelancer_post_fullname'];
 				$post_lname = $rec['freelancer_post_username'];
 				$sub_post_fname = substr($post_fname, 0, 1);
@@ -1498,7 +1498,7 @@ public function ajax_freelancer_save() {
 			<div class="designation_rec" style="float: left;">
 			<ul>
 			<li>
-			<a  class="post_name" href="' . base_url('freelance-work/freelancer-details/' . $rec['freelancer_apply_slug']) . '" title="' . ucwords($rec['freelancer_post_fullname']) . ' ' . ucwords($rec['freelancer_post_username']) . '">
+			<a  class="post_name" href="' . base_url('freelancer/' . $rec['freelancer_apply_slug']) . '" title="' . ucwords($rec['freelancer_post_fullname']) . ' ' . ucwords($rec['freelancer_post_username']) . '">
 			' . ucwords($rec['freelancer_post_fullname']) . ' ' . ucwords($rec['freelancer_post_username']) . '</a></li>
 			<li style="display: block;"> <a>';
 			if ($rec['designation']) {

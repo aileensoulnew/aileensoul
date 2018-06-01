@@ -86,15 +86,15 @@
                     <div class="" id="row2">
                         <?php
                         $userid = $this->session->userdata('aileenuser');
-                        if ($this->uri->segment(3) == $userid) {
+                        if ($this->uri->segment(2) == $userid) {
                             $user_id = $userid;
-                        } elseif ($this->uri->segment(3) == "") {
+                        } elseif ($this->uri->segment(2) == "") {
                             $user_id = $userid;
                         } else {
-                            if (is_numeric($this->uri->segment(3))) {
-                                $user_id = $this->uri->segment(3);
+                            if (is_numeric($this->uri->segment(2))) {
+                                $user_id = $this->uri->segment(2);
                             } else {
-                                $user_id = $this->db->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $this->uri->segment(3), 'status' => '1'))->row()->user_id;
+                                $user_id = $this->db->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $this->uri->segment(2), 'status' => '1'))->row()->user_id;
                             }
                         }
                         $contition_array = array('user_id' => $user_id, 'is_delete' => '0', 'status' => '1');
@@ -205,37 +205,40 @@
                         <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr"> 
                             <?php
                             $userid = $this->session->userdata('aileenuser');
-                            if ($freelancerpostdata[0]['user_id'] == $userid) {
-                                ?>     
+                            $login_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $userid, 'status' => '1'))->row()->freelancer_apply_slug;
+                            if ($freelancerpostdata[0]['user_id'] == $userid)
+                            { ?>
                                 <ul class="current-user pro-fw">
-                                <?php } else { ?>
-                                    <ul class="pro-fw4">
-                                        <?php
-                                    }
-                                    if (is_numeric($this->uri->segment(3))) {
-                                        $slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $this->uri->segment(3), 'status' => '1'))->row()->freelancer_apply_slug;
+                            <?php
+                            } else { ?>
+                                <ul class="pro-fw4">
+                            <?php
+                                }
+                                    /*if (is_numeric($this->uri->segment(2))) {
+                                        $slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $this->uri->segment(2), 'status' => '1'))->row()->freelancer_apply_slug;
                                     } else {
-                                        $slug = $this->uri->segment(3);
-                                    }
+                                        $slug = $this->uri->segment(2);
+                                    }*/
+                                    $slug = $this->uri->segment(2);
                                     ?>  
-                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>>
+                                    <li <?php echo (($this->uri->segment(1) == 'freelancer') && ($this->uri->segment(2) == $slug) ? 'class="active"' : '');?>>
                                         <?php if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) { ?>
-                                            <a title="Freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details/') . $slug; ?>">Details</a><?php } else { ?><a title="Freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo $this->lang->line("freelancer_details"); ?></a><?php } ?>
+                                            <a title="Freelancer Details" href="<?php echo base_url('freelancer/'.$slug); ?>">Details</a><?php } else { ?><a title="Freelancer Details" href="<?php echo base_url('freelancer/'.$slug); ?>"><?php echo $this->lang->line("freelancer_details"); ?></a><?php } ?>
                                     </li>
                                     <?php
-                                    $id = $this->db->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $this->uri->segment(3), 'status' => '1'))->row()->user_id;
-                                    if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details' || $this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'freelancer_save_post' || $this->uri->segment(2) == 'applied-projects') && ($id == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) {
+                                    $id = $this->db->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $this->uri->segment(2), 'status' => '1'))->row()->user_id;
+                                    if (($this->uri->segment(1) == 'freelancer') && ($this->uri->segment(2) == $login_slug || $this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'freelancer_save_post' || $this->uri->segment(2) == 'applied-projects') && ($id == $this->session->userdata('aileenuser') || $this->uri->segment(2) == '')) {
                                         ?>
-                                        <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelance-work/saved-projects'); ?>"><?php echo $this->lang->line("saved_projects"); ?></a> </li>
-                                        <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'applied-projects')) { ?> class="active" <?php } ?>><a title="Applied  Post" href="<?php echo base_url('freelance-work/applied-projects'); ?>"><?php echo $this->lang->line("applied_projects"); ?></a> </li>
+                                        <li <?php if (($this->uri->segment(1) == 'freelancer') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelancer/saved-projects'); ?>"><?php echo $this->lang->line("saved_projects"); ?></a> </li>
+                                        <li <?php if (($this->uri->segment(1) == 'freelancer') && ($this->uri->segment(2) == 'applied-projects')) { ?> class="active" <?php } ?>><a title="Applied  Post" href="<?php echo base_url('freelancer/applied-projects'); ?>"><?php echo $this->lang->line("applied_projects"); ?></a> </li>
                                     <?php } ?>
                                 </ul>
 
                                 <?php
-                                if (is_numeric($this->uri->segment(3))) {
-                                    $id = $this->uri->segment(3);
+                                if (is_numeric($this->uri->segment(2))) {
+                                    $id = $this->uri->segment(2);
                                 } else {
-                                    $id = $this->db->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $this->uri->segment(3), 'status' => '1'))->row()->user_id;
+                                    $id = $this->db->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $this->uri->segment(2), 'status' => '1'))->row()->user_id;
                                 }
                                 $userid = $this->session->userdata('aileenuser');
 
@@ -244,7 +247,7 @@
 
                                 if ($this->session->userdata('aileenuser')) {
                                     if ($userid != $id) {
-                                        if ($this->uri->segment(3) != "") {
+                                        if ($this->uri->segment(2) != "") {
                                             ?>
                                             <div class="flw_msg_btn fr">
                                                 <ul>
@@ -361,7 +364,7 @@
                                 <p class="mob-edit-pro">
 
 
-                                    <a title="Edit Profile" href="<?php echo base_url('freelance-work/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                    <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 
 
                                 </p>
@@ -1140,7 +1143,7 @@
                                     <div class="second circle-1">
                                         <div>
                                             <strong></strong>
-                                            <a title="Edit Profile" href="<?php echo base_url('freelance-work/basic-information') ?>" class="edit_profile_job">Edit Profile
+                                            <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information') ?>" class="edit_profile_job">Edit Profile
                                             </a>
                                         </div>
                                     </div>
@@ -1437,14 +1440,16 @@
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>">
             </script>
         <?php } ?>
-
-
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
-            var segment3 = '<?php echo $this->uri->segment(3); ?>'
+            var segment3 = '<?php echo $this->uri->segment(2); ?>'
             var count_profile_value = '<?php echo $count_profile_value; ?>';
             var count_profile = '<?php echo $count_profile; ?>';
+            //var header_all_profile = '<?php echo $header_all_profile; ?>';
+
+        var app = angular.module('headerApp', []);
         </script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/freelancer_post_profile.js?ver=' . time()); ?>"></script>
         <?php

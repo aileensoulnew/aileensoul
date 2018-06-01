@@ -151,10 +151,10 @@
                                     <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a title="Freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details'); ?>">
                                             <?php echo $this->lang->line("freelancer_details"); ?></a>
                                     </li>
-                                    <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details' || $this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'saved-projects' || $this->uri->segment(2) == 'applied-projects') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) { ?>
-                                        <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelance-work/saved-projects'); ?>"><?php echo $this->lang->line("saved_projects"); ?></a>
+                                    <?php if (($this->uri->segment(1) == 'freelancer') && ($this->uri->segment(2) == 'freelancer-details' || $this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'saved-projects' || $this->uri->segment(2) == 'applied-projects') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) { ?>
+                                        <li <?php if (($this->uri->segment(1) == 'freelancer') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelancer/saved-projects'); ?>"><?php echo $this->lang->line("saved_projects"); ?></a>
                                         </li>
-                                        <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'applied-projects')) { ?> class="active" <?php } ?>><a title="Applied Post" href="<?php echo base_url('freelance-work/applied-projects'); ?>"><?php echo $this->lang->line("applied_projects"); ?></a>
+                                        <li <?php if (($this->uri->segment(1) == 'freelancer') && ($this->uri->segment(2) == 'applied-projects')) { ?> class="active" <?php } ?>><a title="Applied Post" href="<?php echo base_url('freelance-work/applied-projects'); ?>"><?php echo $this->lang->line("applied_projects"); ?></a>
                                         </li>
                                     <?php } ?>
                                 </ul>
@@ -209,7 +209,7 @@
                                 <p class="mob-edit-pro">
 
 
-                                    <a title="Edit Profile" href="<?php echo base_url('freelance-work/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                                    <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information') ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
 
 
                                 </p>
@@ -268,7 +268,7 @@
                                     <div class="second circle-1">
                                         <div>
                                             <strong></strong>
-                                            <a title="Edit Profile" href="<?php echo base_url('freelance-work/basic-information') ?>" class="edit_profile_job">Edit Profile
+                                            <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information') ?>" class="edit_profile_job">Edit Profile
                                             </a>
                                         </div>
                                     </div>
