@@ -2167,7 +2167,7 @@ footer div.pt20{
     height:60px;
     float:left;
     border:none;
-    padding-top:4px
+    margin-top:4px
 }
 
 .all-job-top .post-img img{
@@ -3291,13 +3291,6 @@ footer div.pt20{
         }
         .no-login .job_all_post{
             margin-bottom:0!important
-        }
-        .all-job-bottom{
-            text-align:center
-        }
-        .all-job-bottom p.pull-right{
-            float:none!important;
-            padding-top:5px
         }
         .all-job-top .post-img{
             width:45px;

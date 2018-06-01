@@ -180,7 +180,7 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
             if(login_user_id == "" || job_deactive == 1)
             {                
                 if(login_user_id == ""){
-                    $('.biderror .mes').html("<div class='pop_content'>Please <a href='"+base_url+"login'>Login</a> or <a href='"+base_url+"job-profile/create-account'>Register</a>.</div>");
+                    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
                 }
                 else if(job_deactive == 1)
                     $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");
@@ -235,7 +235,7 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
             if(login_user_id == "" || job_deactive == 1)
             {
                 if(login_user_id == ""){
-                   $('.biderror .mes').html("<div class='pop_content'>Please <a href='"+base_url+"login'>Login</a> or <a href='"+base_url+"job-profile/create-account'>Register</a>.</div>");
+                   $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
                 }
                 else if(job_deactive == 1)
                     $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");

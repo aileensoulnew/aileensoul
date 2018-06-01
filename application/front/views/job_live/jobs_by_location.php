@@ -3,12 +3,12 @@
             <div class="">
                 <div class="">
                     <ul class="nav nav-tabs">
-                        <li><a href="<?php echo base_url(); ?>jobs-by-categories"><span class="hidden-xs">Job by</span> Categories</a></li>
-                        <li><a href="<?php echo base_url(); ?>jobs-by-skills"><span class="hidden-xs">Job by</span> Skill</a></li>
-                        <li class="active"><a href="#"><span class="hidden-xs">Job by</span> Location</a></li>
-                        <li><a href="<?php echo base_url(); ?>jobs-by-companies"><span class="hidden-xs">Job by</span> Company</a></li>
-                        <li><a href="<?php echo base_url(); ?>jobs-by-designations"><span class="hidden-xs">Job by</span> Designation</a></li>
-                        <li><a href="<?php echo base_url(); ?>jobs"><span class="hidden-xs">Jobs</a></li>
+                        <li><a href="<?php echo base_url(); ?>jobs-by-categories"><span class="hidden-xs">Jobs by</span> Categories</a></li>
+                        <li><a href="<?php echo base_url(); ?>jobs-by-skills"><span class="hidden-xs">Jobs by</span> Skills</a></li>
+                        <li class="active"><a href="#"><span class="hidden-xs">Jobs by</span> Locations</a></li>
+                        <li><a href="<?php echo base_url(); ?>jobs-by-companies"><span class="hidden-xs">Jobs by</span> Companies</a></li>
+                        <li><a href="<?php echo base_url(); ?>jobs-by-designations"><span class="hidden-xs">Jobs by</span> Designations</a></li>
+                        <li><a href="<?php echo base_url(); ?>jobs">Jobs</a></li>
                     </ul>
                 </div>
                 <div class="all-detail-box">

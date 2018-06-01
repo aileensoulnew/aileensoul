@@ -70,7 +70,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             <div class="middle-section">
         <?php } ?>  
             
-            <div class="container pt20">
+            <div class="container pt20 mobp0">
                 <div class="left-part">
                     <form name="job-company-filter" id="job-company-filter">
                         <div class="left-search-box">
@@ -301,8 +301,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 <a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo == null"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
                             </div>
                             <div class="job-top-detail">
-                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
-                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
+                                <h5 ng-if="job.string_post_name"><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.string_post_name"></a></h5>
+                                <h5 ng-if="!job.string_post_name"><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.post_name"></a></h5>
                                 <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.re_comp_name"></a></p>
                                 <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.slug_city | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.fullname"></a></p>
                             </div>
@@ -346,7 +346,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         </div>
 		<div >
 			<div class="mob-filter" data-target="#filter" data-toggle="modal">
-			<svg width="20.000000pt" height="20.000000pt" viewBox="0 0 300.000000 300.000000">
+			<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
 
 <g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
 fill="#1b8ab9" stroke="none">

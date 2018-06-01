@@ -61,7 +61,7 @@
             <div class="middle-section">
         <?php } ?>
         
-            <div class="container pt20">
+            <div class="container pt20 mobp0 mobmt15">
                 <div ng-view></div>
             </div>
         </div>        
