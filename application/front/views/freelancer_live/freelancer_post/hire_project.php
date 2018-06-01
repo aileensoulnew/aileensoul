@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title><?php echo $title; ?></title>
-	<?php echo $head; ?> 
+	<?php //echo $head; ?> 
 	<?php
 	if (IS_APPLY_CSS_MINIFY == '0') {
 		?>
@@ -12,8 +12,19 @@
 		?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
 		<?php } ?>
-		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
-		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
 	</head>
 	<body class="page-container-bg-solid page-boxed pushmenu-push freeh3">
 		<?php //echo $header; ?>
@@ -728,6 +739,7 @@
 			?>
 			<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 			<!-- FIELD VALIDATION JS START -->
+			<script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script> 
 			<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/project_live.js?ver=' . time()); ?>"></script>
 			<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
 			<?php
@@ -736,19 +748,19 @@
 			<script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
 			<!-- FIELD VALIDATION JS START -->
 			<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/project_live.js?ver=' . time()); ?>"></script>
+			<script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script> 
 			<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
 			<?php } ?>
 
-
+			<script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
 			<?php
 			if (IS_REC_JS_MINIFY == '0') {
 				?>
-				<script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
+				 
 				<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 				<?php
 			} else {
-				?>
-				<script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script> 
+				?>				
 				<script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/croppie_bootstrap_validate.min.js?ver=' . time()); ?>"></script>
 				<?php } ?>
 
@@ -760,7 +772,7 @@
 					var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 					var id = '<?php echo $this->uri->segment(3); ?>';
 					var return_page = '<?php echo $_GET['page']; ?>';
-
+					var header_all_profile = '<?php echo $header_all_profile; ?>';
 
 
 					function removepopup(id) {
@@ -796,5 +808,5 @@
 
 											}
 										</script>
-
+ <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>z
 										</html>    

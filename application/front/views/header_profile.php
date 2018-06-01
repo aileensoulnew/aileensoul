@@ -27,7 +27,7 @@ if($browser == "Firefox")
 }
 ?>
 <div class="web-header">
-    <header class="custom-header" ng-controller="headerCtrl">
+    <header class="custom-header" ng-controller="headerCtrl" ng-app="headerApp">
     <div class="header animated fadeInDownBig">
         <div class="container">
             <div class="row">
@@ -631,4 +631,9 @@ if($browser == "Firefox")
     });
    });
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script>
+        var app = angular.module('headerApp', []);
+</script>     
+<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
