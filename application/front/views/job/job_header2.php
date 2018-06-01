@@ -368,6 +368,8 @@ $userid = $this->session->userdata('aileenuser');
 		
 		</ul>
 	</div>
+
+	
 </div>
 
 <div class="modal fade message-box biderror custom-message cust-err" id="bidmodal" role="dialog">
