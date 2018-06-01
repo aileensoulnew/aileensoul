@@ -16,12 +16,14 @@ class Blog extends CI_Controller {
 
     //MAIN INDEX PAGE START   
     public function index($slug = '', $iscategory = '') {
+        // echo $slug;
+        // exit;
         // blog category start
         $condition_array = array('status' => 'publish');
         $data = 'id,name';
         // $this->data['blog_category'] = $this->common->select_data_by_condition('blog_category', $condition_array, $data, $short_by = '', $order_by = '', $limit = '', $offset = '', $join_str = array());
         if($iscategory != ""){
-            $slug = urldecode($slug);
+            $slug = str_replace('-', ' ', $slug);
             $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $slug ."')";
             $query = $this->db->query($sql);
             $result = $query->row_array();
@@ -33,7 +35,7 @@ class Blog extends CI_Controller {
 
         // blog category end
         if ($slug != '') {
-
+            
             $count =  $this->blog_check($slug); 
             if($count == 1){
             //FOR GETTING ALL DATA
@@ -217,10 +219,8 @@ class Blog extends CI_Controller {
     }
     // blog available check start
     public function blog_check($slug = " ") {
-
         $condition_array = array('blog_slug' => $slug);
         $availblog = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = '', $order_by = '', $limit, $offset, $join_str = array(), $groupby = '');
-
        return count($availblog);
     }
 

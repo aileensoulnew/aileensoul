@@ -184,7 +184,7 @@ header("Pragma: no-cache"); // HTTP/1.0
     							<div class="dropdown-menu">
     								<ul class="content custom-scroll">
                                         <li class="category" ng-repeat="category in categoryList track by $index">
-                                            <a ng-href="<?php echo base_url() ?>blog/category/{{ (category.name).toLowerCase() }}" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
+                                            <a ng-href="<?php echo base_url() ?>blog/category/{{ category.name | slugify }}" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
                                                 {{ category.name }}
                                             </a>
                                         </li>
@@ -236,7 +236,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						<div class="blog-left-content blog-detail-top">
 	    							<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
 		    							<p class="blog-details-cus">
-		    								<a ng-href="<?php echo base_url() ?>blog/category/{{cat_name}}" ng-repeat="cat_name in blog.blog_category_name track by $index">
+		    								<a ng-href="<?php echo base_url() ?>blog/category/{{ cat_name | slugify}}" ng-repeat="cat_name in blog.blog_category_name track by $index">
 		                                        <span class="cat text-capitalize" ng-if="($index == 0)">
 		                                            {{ cat_name }}
 		                                        </span> 
@@ -418,6 +418,27 @@ header("Pragma: no-cache"); // HTTP/1.0
 	        var header_all_profile = '<?php echo $header_all_profile; ?>';
 	        var blog_slug = '<?php echo $this->uri->segment(2); ?>';
 	        var app = angular.module('blogDetailApp', ['ui.bootstrap']);
+            app.filter('slugify', function () {
+                return function (input) {
+                    if (!input)
+                        return;
+
+                    // make lower case and trim
+                    var slug = input.toLowerCase().trim();
+
+                    // replace invalid chars with spaces
+                    slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
+
+                    // replace multiple spaces or hyphens with a single hyphen
+                    slug = slug.replace(/[\s-]+/g, '-');
+
+                    if(slug[slug.length - 1] == "-")
+                    {            
+                        slug = slug.slice(0,-1);
+                    }
+                    return slug;
+                };
+            });
         </script>
 
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
