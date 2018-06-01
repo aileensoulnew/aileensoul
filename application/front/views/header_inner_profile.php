@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
+
 <?php
 $session_user = $this->session->userdata();
 $userData = $this->user_model->getUserData($session_user['aileenuser']);

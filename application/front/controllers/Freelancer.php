@@ -63,7 +63,7 @@ class Freelancer extends MY_Controller {
             } else if ($jobdata[0]['free_post_step'] == 7) {
                 redirect('freelance-work/home', refresh);
             } else {
-                redirect('freelance-work/registration', refresh);
+                redirect('freelancer/signup', refresh);
             }
         }
     }

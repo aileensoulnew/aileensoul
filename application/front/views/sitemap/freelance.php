@@ -123,7 +123,7 @@ if(IS_OUTSIDE_JS_MINIFY == '0'){
                             <div class="smap-catbox">
                                 <ul class="catbox-right artist-sitemap">
                                     <li style="list-style-type: circle;font-size: 20px;">Login/Register</li>
-                                    <li style="padding-bottom: 30px;"><a href="<?php echo base_url('freelance-work/registration') ?>">Register/Takeme in</a></li>
+                                    <li style="padding-bottom: 30px;"><a href="<?php echo base_url('freelancer/signup') ?>">Register/Takeme in</a></li>
                                 </ul>
                             </div>
                         </div>
