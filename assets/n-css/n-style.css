@@ -1388,6 +1388,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .right-bnr {text-align:center;}
 .right-bnr img{width:70%; margin-left:70px;}
 .banner-left img{/*width:100%;*/}
+.bottom-bnr-div{padding:10px 0; border-bottom:1px solid #d2d2d2;}
+.bottom-bnr-div p{font-size:22px; line-height:1.7;}
+.bottom-bnr-div .btn-1{font-size:16px; line-height:1; padding:10px 25px;}
  
 /***  end profile main page  ***/
 /***  audio video css  ***/
@@ -2659,6 +2662,8 @@ input[type=text] {
     .search-box .search-input input{width:100%; margin-right:0; margin-bottom:-1px;}
 	.hiw-box p{font-size:16px; font-weight:bold;}
 	.hiw-box span{font-size:14px;}
+	.work-timing{padding-top:10px;}
+	.work-timing{margin-bottom:0; padding-top:10px;}
 }
 @media screen and (max-width: 479px) {
 	#upload-demo-one .cr-boundary{width:258px !important; height:258px !important;}
@@ -2775,7 +2780,6 @@ input[type=text] {
 	.search-bnr-text p{font-size:14px;}
 	.control{padding-left:20px; font-size:13px;}
 	.control__indicator{top:-1px;}
-	.work-timing{margin-bottom:0; padding-top:10px;}
 	.search-box .btn1{font-size:16px !important;}
 	.mob-cus-box{width:100%;}
 	.all-cat-box a{padding:15px;}

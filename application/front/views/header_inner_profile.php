@@ -262,6 +262,108 @@ if($browser == "Firefox")
         </div>
     </div>
 </header>
+<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
+		<div class="all-profile-box content custom-scroll">
+			<ul class="all-pr-list">
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
+						</div>
+						<span>Job Profile1</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i2.jpg?ver=1517557803" alt="Recruiter Profile">
+						</div>
+						<span>Recruiter Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i3.jpg?ver=1517557803" alt="Freelance Profile">
+						</div>
+						<span>Freelance Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i4.jpg?ver=1517557803" alt="Business Profile">
+						</div>
+						<span>Business Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<div class="all-pr-img">
+							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
+						</div>
+						<span>Artistic Profile</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
