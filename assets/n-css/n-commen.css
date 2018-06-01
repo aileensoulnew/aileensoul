@@ -211,6 +211,7 @@ border: 1px solid #fff;
 	display:inline-block; background:#5c5c5c;}
 .btn9:hover{background:#fff; color:#5c5c5c;}
 .btn9:focus{color:#fff; background:#5c5c5c;}
+.btn9:focus{color:#fff; background:#5c5c5c;}
 
 .follow-btn{padding: 3px 10px; background: rgb(44, 83, 158);
     background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);

@@ -2253,6 +2253,14 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 .error-bottom ul li{list-style-type:none;}
 
 /***  end 404 page  ***/
+/***  filter  ***/
+.mob-filter{position:fixed; right:5px; bottom:60px; width:40px; height:40px; border:1px solid transparent; background:#fff; box-shadow:0 0 2px 1px #d2d2d2; padding:6px; border-radius:100%; cursor:pointer;}
+.mob-filter svg path{
+	fill: #1b8ab9;
+}
+.mob-filter:hover{background:#f2f4f5;}
+
+/***  end filter  ***/
 
 /*** new css  ***/
 .modal.message-box .modal-body{text-align:left;}
@@ -2401,6 +2409,17 @@ input[type=text] {
 	.banner-left h1{font-size:26px;}
 	.right-bnr img{margin-left:35px;}
 	.how-about-profile .center-title h2{font-size:20px;}
+	
+	#filter.mob-modal .modal-content{width:100%; min-height:100%; border:0px; border-radius:0px;}
+	#filter.mob-modal .modal-dialog{padding:0 !important; margin:0 !important; min-height:100%;}
+	#filter.mob-modal .modal-content .modal-close{top:0 !important; right:0 !important; border-radius:0 !important; background:none !important; border:none !important; color:#5c5c5c !important;}
+	#filter .top-modal-body{padding:5px; border-bottom:1px solid #d2d2d2;}
+	#filter .mid-modal-body{width:100%; float:left;}
+	#filter .mid-modal-body form{width:100%; float:left; padding:0;}
+	#filter .mid-modal-body form .left-search-box{border:0;}
+	#filter .left-search-box h3{color:#1b8ab9; -webkit-text-fill-color:inherit; text-align:left; font-size:16px; line-height:1;}
+	#filter .left-search-box .accordion-group h3 a{color:#1b8ab9; font-size:16px; line-height:1;}
+	
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -2431,9 +2450,9 @@ input[type=text] {
 	.add-banner{overflow:hidden;}
 	.more-support{font-size:16px;}
 	
-	#post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content{width:100%; height:100%; border:0px; border-radius:0px;}
-	#post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog {padding:0; margin:0; height:100%;}
-	#post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
+	.mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content{width:100%; min-height:100%; border:0px; border-radius:0px;}
+	.mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog {padding:0; margin:0; min-height:100%;}
+	.mob-modal .modal-close, #post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
 	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box{margin-bottom:52px;}
 	
 	.post-popup-box .post-box{padding:15px 0;}
@@ -2610,6 +2629,8 @@ input[type=text] {
 	.content-bnr.free-apply-bnr-prlx {background: url('../n-images/mob-free-apply-img.jpg'); background-size:100%;}
 	.content-bnr.art-bnr-prlx {background: url('../n-images/mob-art-img.jpg'); background-size:100%;}
 	.content-bnr.bus-bnr-prlx {background: url('../n-images/mob-bus-img.jpg'); background-size:100%;}
+	
+	.control__indicator{width:13px; height:13px; top:2px;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
@@ -2794,6 +2815,7 @@ input[type=text] {
 	.how-about-profile .center-title h2{font-size:18px;}
 	.how-about-profile p{font-size:14px;}
 	.free-hire-bnr-prlx .btn5{font-size:14px;}
+	.new-ld-page header h2.logo{float:none; padding-bottom:10px;}
 }
 @media screen and (max-width: 359px) {
 	.all-job-bottom{text-align:center;}
