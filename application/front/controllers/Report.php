@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class General extends MY_Controller {
+class Report extends MY_Controller {
 
     public $data;
 
@@ -20,8 +20,6 @@ class General extends MY_Controller {
     }
 
     public function get_location($id = "") {
-
-
         //get search term
         $searchTerm = $_GET['term'];
         if (!empty($searchTerm)) {
@@ -139,20 +137,33 @@ class General extends MY_Controller {
         echo json_encode($cdata);
     }
 
-    // DEGREE DATA END
-
-    // LOAD FAQ VIEW
-    public function faq() { 
-        $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
-        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->load->view('faq', $this->data);
-    }
-
     // LOAD REPORT VIEW
     public function report() { 
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->load->view('report', $this->data);
+    }
+
+    public function add_report() {
+        $result = array();
+        $data = array(
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            'uri' => $this->input->post('uri'),
+            'detail' => $this->input->post('detail'),
+            'created_date' => date('Y-m-d H:i:s', time())
+        );
+        $insert_id = $this->common->insert_data_getid($data, 'report');
+        if ($insert_id) {
+            $result = "Report submitted successfully.";
+           // $result['error'] = false;
+           // $result['message'] = "Report added successfully.";
+        } else {
+            $result = "Report not submitted successfully.";
+           // $result['error'] = true;
+           // $result['message'] = "Some error occur. Please try again.";
+        }
+        echo json_encode($result);
     }
 
 }

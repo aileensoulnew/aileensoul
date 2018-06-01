@@ -26,7 +26,6 @@
     <!-- START CONTAINER -->
     <section>
         <!-- MIDDLE SECTION START -->
-
         <div class="user-midd-section" id="paddingtop_fixed">
             <div class="container padding-360">
                 <div class="">
@@ -58,7 +57,6 @@
                                     <div class="profile-boxProfileCard-content clearfix">
                                         <div class="left_side_box_img buisness-profile-txext">
                                             <a title="Recruiter Profile" class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock"  href="<?php echo base_url('recruiter/profile/' . $recdata['user_id']); ?>" title="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
-
                                                 <?php
                                                 $filename = $this->config->item('rec_profile_thumb_upload_path') . $recdata['recruiter_user_image'];
                                                 $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -70,14 +68,12 @@
                                                 } else {
                                                     $a = $recdata['rec_firstname'];
                                                     $acr = substr($a, 0, 1);
-
                                                     $b = $recdata['rec_lastname'];
                                                     $acr1 = substr($b, 0, 1);
                                                     ?>
                                                     <div class="post-img-profile">
                                                         <?php echo ucfirst(strtolower($acr)) . ucfirst(strtolower($acr1)); ?>
                                                     </div>
-
                                                 <?php } ?>
                                             </a>
                                         </div>
@@ -137,7 +133,7 @@
                                                 <span>{{industry.industry_name | capitalize}}
                                                     <span class="pull-right">({{industry.count}})</span>
                                                 </span>
-                                                <input class="industrycheckbox" type="checkbox" name="{{industry.industry_name}}" value="{{industry.industry_id}}" style="height: 12px;" [attr.checked]="(industry.isselected) ? 'checked' : null" autocomplete="false">
+                                                <input class="industrycheckbox filtercheckbox" type="checkbox" name="{{industry.industry_name}}" value="{{industry.industry_id}}" style="height: 12px;" [attr.checked]="(industry.isselected) ? 'checked' : null" autocomplete="false">
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>                                        
@@ -156,7 +152,7 @@
                                                 <span>{{cities.city_name | capitalize}}
                                                     <span class="pull-right">({{cities.count}})</span>
                                                 </span>
-                                                <input class="citiescheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
+                                                <input class="citiescheckbox filtercheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>
@@ -175,7 +171,7 @@
                                                 <span>{{skill.skill | capitalize}}
                                                     <span class="pull-right">({{skill.count}})</span>
                                                 </span>
-                                                <input class="skillcheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
+                                                <input class="skillcheckbox filtercheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </li>      
@@ -196,7 +192,7 @@
                                                             <label class="control control--checkbox">
                                                                 <span>{{experience.name | capitalize}}
                                                                 </span>
-                                                                <input class="experiencecheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
+                                                                <input class="experiencecheckbox filtercheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
                                                                 <div class="control__indicator"></div>
                                                             </label>
                                                         </li>
@@ -207,7 +203,6 @@
                                     </div>                                
                                 </div>
                             </div>
-
                             <?php echo $left_footer; ?>
                               
                             <div  class="add-post-button">
@@ -215,11 +210,9 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
                         <div class="common-form">
                             <div class="job-saved-box">
-
                                 <h3>
                                     Search result of 
                                     <?php
@@ -234,7 +227,6 @@
                                     }
                                     ?>
                                 </h3>
-
                                 <div class="contact-frnd-post">
                                     
                                     <div class = "job-contact-frnd">
@@ -242,12 +234,10 @@
                                     </div>
                                     <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIAMGE'; ?>"/></div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-
                            <div class="all-profile-box">
                                 <div class="all-pro-head">
                                     <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All profiles">All</a></h4>
@@ -295,34 +285,29 @@
                                     </li>
                                 </ul>
                             </div>
-
                     </div>
                     
                 </div>
             </div>
         </div>
     </section>
-
-
+    
     <!-- Bid-modal  -->
     <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
-                <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+                <button type="button" class="modal-close" data-dismiss="modal">&times;</button>      
                 <div class="modal-body">
-                    <!--<img class="icon" src="images/dollar-icon.png" alt="" />-->
                     <span class="mes"></span>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Model Popup Close -->
 
+    <!-- Model Popup Close -->
     <!-- BEGIN FOOTER -->
     <?php echo $footer; ?>
     <!-- END FOOTER -->
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
@@ -332,11 +317,10 @@
         // var place = '<?php //echo $this->input->get('searchplace'); ?>';
         var skill = '<?php echo $keyword; ?>';
         var place = '<?php echo $keyword1; ?>';
+        var totalpost = '<?php echo $login_user_totalpost; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         var app = angular.module('recruiterSearchListApp', ['ui.bootstrap']);
     </script>
-
-
     <!-- FIELD VALIDATION JS END -->
     <?php
     // if (IS_REC_JS_MINIFY == '0') {
@@ -352,10 +336,8 @@
         <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
         <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/recruiter/rec_search.js'); ?>"></script> -->
     <?php //} ?>
-
     <!-- <script type="text/javascript" src="<?php // echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script> -->
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>">
     </script>
 </body>
-
 </html>

@@ -622,7 +622,9 @@ $route['notification/details/(:any)'] = "business_profile/business_resume/$1";
 $route['notification/business-post/(:any)'] = "business_profile/edit_post/$1";
 
 $route['notification/art-post/(:any)'] = "notification/art_post/$1";
-
+$route['feedback'] = "feedback/index";
+$route['faq'] = "general/faq";
+$route['report'] = "general/report";
 
 $route['how-to-use-job-profile-in-aileensoul'] = "introduction/job_profile";
 $route['how-to-use-recruiter-profile-in-aileensoul'] = "introduction/recruiter_profile";

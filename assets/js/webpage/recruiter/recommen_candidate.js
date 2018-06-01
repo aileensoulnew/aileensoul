@@ -413,8 +413,14 @@ function savepopup(abc)
 }
 
 // change location
-$(document).on('change','.citiescheckbox,.titlescheckbox,.industrycheckbox,.skillcheckbox,.experiencecheckbox',function(){
-    var self = this;
-    angular.element(self).scope().getfilterrecruiterdata();
+$(document).on('change','.filtercheckbox',function(){
+	var self = $(this);
+	if(totalpost <= 0){
+		self.prop('checked', false);
+		$("#postmodal").modal('show');
+	}else{
+	    var self = this;
+	    angular.element(self).scope().getfilterrecruiterdata();
+	}
 });
 

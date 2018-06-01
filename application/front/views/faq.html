@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Aileensoul</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/aos.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+
+        <link rel="stylesheet" href="css/n-commen.css">
+        <link rel="stylesheet" href="css/n-style.css">
+
+    </head>
+    <body class="report">
+        
+		
+        <div class="middle-section middle-section-banner new-ld-page">
+			
+			<div class="search-banner cus-search-bnr" >
+				<header>
+					<div class="header">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6 col-sm-6 left-header fw-479">
+									<h2 class="logo"><a href="#">Aileensoul</a></h2>
+									
+								</div>
+								<div class="col-md-6 col-sm-6 no-login-right fw-479">
+									
+											<a href="#" class="btn8">Login</a>
+											<a href="#" class="btn9">Create Account</a>
+										
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="container">
+					<div class="row">
+						<h1 class="text-center">Frequently Asked Questions</h1>
+					</div>
+				
+					
+				</div>
+			</div>
+            
+	
+			<div class="container">
+					<div class="report-middle-box">
+						
+						<ul class="faq">
+							<li><a href="#">How to use Job profile in Aileensoul? <span class="pull-right"><img src="n-images/more-link.png"></span></a></li>
+							<li><a href="#">How to use Recruiter profile in Aileensoul? <span class="pull-right"><img src="n-images/more-link.png"></span></a></li>
+							<li><a href="#">How to use Freelancer profile in Aileensoul?<span class="pull-right"><img src="n-images/more-link.png"></span></a></li>
+							<li><a href="#">How to use Business profile in Aileensoul?<span class="pull-right"><img src="n-images/more-link.png"></span></a></li>
+							<li><a href="#">How to use Artistic profile in Aileensoul?<span class="pull-right"><img src="n-images/more-link.png"></span></a></li>
+						</ul>
+					</div>
+			</div>
+			
+        
+			
+		</div>
+		
+		
+		<!--  poup modal  -->
+		
+        
+		
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script>
+           
+            // mcustom scroll bar
+            (function ($) {
+                $(window).on("load", function () {
+
+                    $(".custom-scroll").mCustomScrollbar({
+                        autoHideScrollbar: true,
+                        theme: "minimal"
+                    });
+
+                });
+            })(jQuery);
+			
+			
+
+        </script>
+		<script>
+		  AOS.init({
+			easing: 'ease-in-out-sine'
+		  });
+
+		  setInterval(addItem, 100);
+
+		  var itemsCounter = 1;
+		  var container = document.getElementById('aos-demo');
+
+		  function addItem () {
+			if (itemsCounter > 42) return;
+			var item = document.createElement('div');
+			item.classList.add('aos-item');
+			item.setAttribute('data-aos', 'fade-up');
+			item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
+			container.appendChild(item);
+			itemsCounter++;
+		  }
+    </script>
+
+    </body>
+</html>
