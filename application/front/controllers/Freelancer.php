@@ -63,7 +63,7 @@ class Freelancer extends MY_Controller {
             } else if ($jobdata[0]['free_post_step'] == 7) {
                 redirect('freelance-work/home', refresh);
             } else {
-                redirect('freelance-work/registration', refresh);
+                redirect('freelancer/signup', refresh);
             }
         }
     }
@@ -1111,7 +1111,7 @@ class Freelancer extends MY_Controller {
             $page = $_GET["page"];
         }
 
-        $limit = '5';
+        $limit = 3;
         $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");//Field
         
         $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");

@@ -30,7 +30,7 @@
     <div class="container">
         <div class="text-right pt20">
             <?php if($this->freelance_apply_profile_set == 0 && $userid != ""){ ?>
-                <a class="btn5" href="<?php echo base_url('freelance-work/registration') ?>">Create Freelance Apply Profile</a>
+                <a class="btn5" href="<?php echo base_url('freelancer/signup') ?>">Create Freelance Apply Profile</a>
                 <!-- <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a> -->
             <?php } ?>
         </div>

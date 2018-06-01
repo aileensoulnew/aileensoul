@@ -529,6 +529,60 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
         $('#pntooltip').hide();
     });
 
+    function getCountry() {
+        $http({
+            method: 'GET',
+            url: base_url + 'business_profile_registration/getCountry',
+            headers: {'Content-Type': 'application/json'},
+        }).then(function (data) {
+            $scope.countryList = data.data;
+        });
+    }
+    getCountry();
+
+    function onCountryChange1(country_id = '') {        
+        if(country_id != null)
+        {            
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_registration/getStateByCountryId',
+                data: {countryId: country_id}
+            }).then(function (data) {
+                $scope.stateList = data.data;            
+            });
+        }
+    }
+
+    $scope.onCountryChange = function () {
+        if($scope.user.country != ""){            
+            $scope.countryIdVal = $scope.user.country;
+            onCountryChange1($scope.countryIdVal);
+            //$scope.user.city = "";
+        }
+    };
+
+    function onStateChange1(state_id = '') {
+        if(state_id != null)
+        {            
+            $http({
+                method: 'POST',
+                url: base_url + 'business_profile_registration/getCityByStateId',
+                data: {stateId: state_id}
+            }).then(function (data) {
+                if (angular.isDefined($scope.user.city)) {
+                    delete $scope.user.city;
+                }
+                $scope.cityList = data.data;
+            });
+        }
+    }
+
+    $scope.onStateChange = function () {
+        $scope.stateIdVal = $scope.user.state;
+        onStateChange1($scope.stateIdVal);
+    };
+
+
     $.validator.addMethod("noSpace", function(value, element) {
         return value == '' || value.trim().length != 0;
     }, "No space please and don't leave it empty");

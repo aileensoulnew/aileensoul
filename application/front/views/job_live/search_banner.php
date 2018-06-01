@@ -18,20 +18,9 @@
             </div>
         </header>
     <?php endif; ?>
-    <div class="container">
-        <div class="text-right pt20 create-profile-btn">
-            <!--  -->
-            <?php
-            if($user_id != ""):
-                if((!$isjobdeactivate || $isjobdeactivate == false) && $job_deactive == 0) { ?>
-                    <a class="btn3" href="<?php echo $job_profile_link; ?>">Create Job Profile</a>
-                <?php } /*else{ ?>
-                    <a class="btn5" href="<?php echo base_url('job/reactivateacc'); ?>">Reactivate Job Profile</a>
-                <?php } */
-            endif; ?>
-        </div>
+    <div class="container">        
         <div class="row">
-            <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
+            <div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
                 <div class="search-bnr-text">
                     <h1>Find the Right Job Opportunities</h1>
                     <p>Because Dream Matters </p>
@@ -71,7 +60,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-6 right-bnr">
+            <div class="col-lg-6 col-md-5 hidden-sm hidden-xs right-bnr">
                 <img src="<?php echo base_url('assets/n-images/job-bnr.png') ?>">
             </div>
         </div>

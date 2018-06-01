@@ -49,13 +49,27 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         if($this->job_profile_set == 0 || $job_deactive > 0)
         {?>
         <div class="middle-section middle-section-banner">
-            <?php echo $search_banner;
+            <?php echo $search_banner; ?>
+			<div class="bottom-bnr-div">
+				<div class="container">
+					<p>Lorem ipsum dummy text 
+                        <?php if($user_id == "" || $this->job_profile_set == 0): ?>
+								<a class="btn-1 pull-right" href="<?php echo $job_profile_link; ?>">Create Job Profile</a>
+							<?php /*} else{ ?>
+								<a class="btn5" href="<?php echo base_url('job/reactivateacc'); ?>">Reactivate Job Profile</a>
+							<?php } */
+						endif; ?>
+					</p>
+				</div>
+			</div>
+			<?php
         }
         else
         { ?>
             <div class="middle-section">
         <?php } ?>
             
+			
             <div class="container pt20">
                 <div class="left-part">
                     <form name="job-company-filter" id="job-company-filter">

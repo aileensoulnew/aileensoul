@@ -2304,9 +2304,9 @@ class Search extends MY_Controller {
                             }
                         } else {
 
-                            $return_html .= '<a href="' . base_url('freelance-work/registration') . '"    class= "btn4 savedpost">Save</a>';
+                            $return_html .= '<a href="' . base_url('freelancer/signup') . '"    class= "btn4 savedpost">Save</a>';
 
-                            $return_html .= '<a href="' . base_url('freelance-work/registration') . '"  class= "btn4 applypost">Apply</a>';
+                            $return_html .= '<a href="' . base_url('freelancer/signup') . '"  class= "btn4 applypost">Apply</a>';
                         }
                     } else {
                         $return_html .= '<a href="javascript:void(0);"  class= "btn4 applypost" onclick="create_profile_apply(' . $post['post_id'] . ');">Apply</a>';
