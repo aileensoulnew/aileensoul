@@ -100,11 +100,12 @@ jQuery(document).ready(function ($) {
                             processData: false,
                             contentType: false,
                             success: function (data) {
-                                if (free_post_step == 7) {
+                                /*if (free_post_step == 7) {
                                     window.location =  base_url + "freelancer-work/freelancer-details";
                                 } else {
-                                    window.location =  base_url + "freelancer-work/home";
-                                }
+                                    window.location =  base_url + "recommended-freelance-work";
+                                }*/
+                                    window.location =  base_url + "recommended-freelance-work";
                             }
                         });
 

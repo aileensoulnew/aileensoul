@@ -62,7 +62,7 @@
                                         <li class="custom-none"><a title="Rate" href="<?php echo base_url('freelancer/rate'); ?>"><?php echo $this->lang->line("rate"); ?></a></li>
                                         <li class="custom-none"><a title="Avability" href="<?php echo base_url('freelancer/availability'); ?>"><?php echo $this->lang->line("add_avability"); ?></a></li>
                                         <li class="custom-none"><a title="Education" href="<?php echo base_url('freelancer/education'); ?>"><?php echo $this->lang->line("education"); ?></a></li>           
-                                        <li <?php if ($this->uri->segment(1) == 'freelance-work') { ?> class="active init" <?php } ?>><a title="Portfolio" href="javascript:void(0);"><?php echo $this->lang->line("portfolio"); ?></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'freelancer') { ?> class="active init" <?php } ?>><a title="Portfolio" href="javascript:void(0);"><?php echo $this->lang->line("portfolio"); ?></a></li>
                                     </ul>
                                 </div>
                             </div>

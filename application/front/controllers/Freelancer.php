@@ -2523,7 +2523,7 @@ class Freelancer extends MY_Controller {
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a title = "View Detail" class="btn" href="' . BASEURL . 'freelance-work/freelancer-details/' . $applydata[0]['freelancer_apply_slug'] . '">view</a></p>
+                                                <p><a title = "View Detail" class="btn" href="' . BASEURL . 'freelancer/' . $applydata[0]['freelancer_apply_slug'] . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
@@ -2820,7 +2820,7 @@ class Freelancer extends MY_Controller {
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a title="View Detail" class="btn" href="' . BASEURL . 'freelance-work/freelancer-details/' . $postuser[0]['freelancer_apply_slug'] . '">view</a></p>
+                                                <p><a title="View Detail" class="btn" href="' . BASEURL . 'freelancer/' . $postuser[0]['freelancer_apply_slug'] . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';

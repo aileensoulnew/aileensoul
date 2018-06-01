@@ -108,7 +108,7 @@ if(IS_OUTSIDE_JS_MINIFY == '0'){
                                     </div>
                                     <ul class="catbox-right">
                                         <?php foreach ($value as $freelancers) { ?>
-                                        <li><a href="<?php echo base_url('freelance-work/freelancer-details/' . $freelancers['freelancer_apply_slug']) ?>" target="_blank"><?php echo $freelancers['freelancer_post_fullname'] . ' ' .$freelancers['freelancer_post_username'] ; ?></a></li>    
+                                        <li><a href="<?php echo base_url('freelancer/' . $freelancers['freelancer_apply_slug']) ?>" target="_blank"><?php echo $freelancers['freelancer_post_fullname'] . ' ' .$freelancers['freelancer_post_username'] ; ?></a></li>    
                                         <?php } ?>
                                     </ul>
                                 </div>

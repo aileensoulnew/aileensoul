@@ -1871,7 +1871,7 @@ Your browser does not support the audio tag.
                 }
                 $apply_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $total['not_from_id']))->row()->freelancer_apply_slug;
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('freelance-work/freelancer-details/' . $apply_slug ) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '><a href="' . base_url('freelancer/' . $apply_slug ) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 $filename = $this->config->item('free_post_profile_thumb_upload_path') . $total['user_image'];
                     $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -2633,7 +2633,7 @@ Your browser does not support the audio tag.
                 $apply_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $id))->row()->freelancer_apply_slug;
                 $image_path = FCPATH . 'uploads/freelancer_hire_profile/thumbs/' . $msg['user_image'];
                 $user_image = base_url() . 'uploads/freelancer_hire_profile/thumbs/' . $msg['user_image'];
-                $profile_url = base_url() . 'freelance-work/freelancer-details/' . $apply_slug;
+                $profile_url = base_url() . 'freelancer/' . $apply_slug;
             }
             if ($message_from_profile == 3) {
                 $hire_slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $id))->row()->freelancer_hire_slug;
@@ -3776,7 +3776,7 @@ Your browser does not support the audio tag.
                     if ($total['not_active'] == 1) {
                         $return_html .= 'active2';
                     } $return_html .= '">';
-                    $return_html .= '<a href="' . base_url() . 'freelance-work/freelancer-details/' . $slug .'">';
+                    $return_html .= '<a href="' . base_url() . 'freelancer/' . $slug .'">';
                     
                     $return_html .= '<div class="notification-pic" id="noti_pc" >';
                                                                
@@ -3814,7 +3814,7 @@ Your browser does not support the audio tag.
                     if ($total['not_active'] == 1) {
                         $return_html .= 'active2';
                     } $return_html .= '">
-                        <a href="' . base_url() . 'freelance-work/freelancer-details/' . $apply_slug.'">
+                        <a href="' . base_url() . 'freelancer/' . $apply_slug.'">
                                             <div class="notification-pic" id="noti_pc" >';
                                                              
                     $filename = $this->config->item('free_post_profile_main_upload_path') . $total['user_image'];

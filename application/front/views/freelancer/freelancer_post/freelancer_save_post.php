@@ -139,13 +139,14 @@
                         <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr"> 
                             <?php
                             $userid = $this->session->userdata('aileenuser');
+                            $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $freepostdata['user_id'], 'status' => '1'))->row()->freelancer_apply_slug;
                             if ($freepostdata['user_id'] == $userid) {
                                 ?>     
                                 <ul class="current-user pro-fw">
                                 <?php } else { ?>
                                     <ul class="pro-fw4">
                                     <?php } ?>  
-                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a title="Freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo $this->lang->line("freelancer_details"); ?></a>
+                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a title="Freelancer Details" href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php echo $this->lang->line("freelancer_details"); ?></a>
                                     </li>
                                     <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details' || $this->uri->segment(2) == 'home' || $this->uri->segment(2) == 'saved-projects' || $this->uri->segment(2) == 'applied-projects') && ($this->uri->segment(3) == $this->session->userdata('aileenuser') || $this->uri->segment(3) == '')) { ?>
                                         <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved" href="<?php echo base_url('freelancer/saved-projects'); ?>"><?php echo $this->lang->line("saved_projects"); ?></a>

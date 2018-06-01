@@ -1,5 +1,6 @@
 <?php
 $userid = $this->session->userdata('aileenuser');
+$fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $freepostdata['user_id'], 'status' => '1'))->row()->freelancer_apply_slug;
 ?>
 <div class="web-header">
     <?php echo $header_inner_profile ?>
@@ -144,7 +145,7 @@ $userid = $this->session->userdata('aileenuser');
 
                             <ul class="dropdown-menu account">
                                 <li>Account</li>
-                                <li><a href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+                                <li><a href="<?php echo base_url('freelancer/'.$fa_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                 <li><a href="<?php echo base_url('freelancer/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
                                  <li><a href="#"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
                             </ul>

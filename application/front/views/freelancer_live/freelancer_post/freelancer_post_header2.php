@@ -83,7 +83,10 @@
             <div class="header2 animated fadeInDownBig">
                 <div class="container">
                     <div class="row">
-                        <?php echo $freelancer_post_search; ?>
+                        <?php echo $freelancer_post_search;
+                        $userid = $this->session->userdata('aileenuser');
+                        $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $userid, 'status' => '1'))->row()->freelancer_apply_slug;
+                            ?>
                         <div class="col-md-5 col-sm-5">
                             <div class=" ">
                                 <ul class="">
@@ -93,7 +96,7 @@
                                         <div class="dropdown_hover">
                                             <span id="art_profile"><?php echo $this->lang->line("freelancer_profile"); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></span>
                                             <div class="dropdown-content_hover" id="dropdown-content_hover">
-                                                <a title="View Profile" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><i class="fa fa-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
+                                                <a title="View Profile" href="<?php echo base_url('freelancer/').$fa_slug; ?>"><i class="fa fa-user" aria-hidden="true"></i><?php echo $this->lang->line("view_profile"); ?></a>
                                                 <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information'); ?>"><i class="fa fa-pencil" aria-hidden="true"></i> <?php echo $this->lang->line("edit_profile"); ?></a>
                                                 <?php
                                                 $userid = $this->session->userdata('aileenuser');

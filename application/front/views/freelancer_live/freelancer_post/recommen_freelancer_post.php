@@ -48,7 +48,7 @@
                                         <div class="profile-boxProfileCard-content clearfix">
                                             <div class="left_side_box_img buisness-profile-txext">
                                                 <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" 
-                                                   href="<?php echo base_url('freelance-work/freelancer-details/' . $freepostdata[0]['freelancer_apply_slug']); ?>" title="<?php echo $freepostdata[0]['freelancer_post_fullname'] . ' ' . $freepostdata[0]['freelancer_post_username']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+                                                   href="<?php echo base_url('freelancer/' . $freepostdata[0]['freelancer_apply_slug']); ?>" title="<?php echo $freepostdata[0]['freelancer_post_fullname'] . ' ' . $freepostdata[0]['freelancer_post_username']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
                                                        <?php
                                                        $fname = $freepostdata[0]['freelancer_post_fullname'];
                                                        $lname = $freepostdata[0]['freelancer_post_username'];
@@ -97,11 +97,11 @@
                                             </div>
                                             <div class="right_left_box_design ">
                                                 <span class="profile-company-name ">
-                                                    <a href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo ucwords($freepostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freepostdata[0]['freelancer_post_username']); ?></a>
+                                                    <a href="<?php echo base_url('freelancer/').$freepostdata[0]['freelancer_apply_slug']; ?>"><?php echo ucwords($freepostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freepostdata[0]['freelancer_post_username']); ?></a>
                                                 </span>
                                                 <?php $category = $this->db->get_where('industry_type', array('industry_id' => $businessdata[0]['industriyal'], 'status' => '1'))->row()->industry_name; ?>
                                                 <div class="profile-boxProfile-name">
-                                                    <a  href="<?php echo base_url('freelance-work/freelancer-details'); ?>">
+                                                    <a  href="<?php echo base_url('freelancer/').$freepostdata[0]['freelancer_apply_slug']; ?>">
                                                         <?php
                                                         if ($freepostdata[0]['designation']) {
                                                             echo $freepostdata[0]['designation'];
@@ -111,7 +111,7 @@
                                                         ?></a>
                                                 </div>
                                                 <ul class=" left_box_menubar">
-                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a  class="padding_less_left"  title="freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo $this->lang->line("details"); ?></a>
+                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a  class="padding_less_left"  title="freelancer Details" href="<?php echo base_url('freelancer/').$freepostdata[0]['freelancer_apply_slug']; ?>"><?php echo $this->lang->line("details"); ?></a>
                                                     </li>
                                                     <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelancer/saved-projects'); ?>"><?php echo $this->lang->line("saved"); ?></a>
                                                     </li>

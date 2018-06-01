@@ -203,6 +203,7 @@
                         <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr"> 
                             <?php
                             $userid = $this->session->userdata('aileenuser');
+                            $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $freelancerpostdata[0]['user_id'], 'status' => '1'))->row()->freelancer_apply_slug;
                             if ($freelancerpostdata[0]['user_id'] == $userid) {
                                 ?>     
                                 <ul class="current-user pro-fw">
@@ -218,7 +219,7 @@
                                     ?>  
                                     <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>>
                                         <?php if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) { ?>
-                                            <a title="Freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details/') . $slug; ?>">Details</a><?php } else { ?><a title="Freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo $this->lang->line("freelancer_details"); ?></a><?php } ?>
+                                            <a title="Freelancer Details" href="<?php echo base_url('freelancer/') . $slug; ?>">Details</a><?php } else { ?><a title="Freelancer Details" href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php echo $this->lang->line("freelancer_details"); ?></a><?php } ?>
                                     </li>
                                     <?php
                                     $id = $this->db->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $this->uri->segment(3), 'status' => '1'))->row()->user_id;

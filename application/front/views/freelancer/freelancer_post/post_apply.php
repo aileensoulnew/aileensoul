@@ -19,7 +19,10 @@
     </head>
     <body class="">
         <?php //echo $header; ?>
-        <?php echo $freelancer_post_header2; ?>
+        <?php echo $freelancer_post_header2; 
+        $userid = $this->session->userdata('aileenuser');
+        $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $freepostdata['user_id'], 'status' => '1'))->row()->freelancer_apply_slug;
+                            ?>
         <section>
             <div class="user-midd-section " id="paddingtop_fixed">
                 <div class="container padding-360">
@@ -30,7 +33,7 @@
                                     <div class="profile-boxProfileCard  module">
                                         <div class="profile-boxProfileCard-cover"> 
                                             <a class="profile-boxProfileCard-bg u-bgUserColor a-block"
-                                               href="<?php echo base_url('freelance-work/freelancer-details'); ?>"
+                                               href="<?php echo base_url('freelancer/').$fa_slug; ?>"
                                                tabindex="-1"
                                                aria-hidden="true"
                                                rel="noopener">
@@ -54,7 +57,7 @@
                                         <div class="profile-boxProfileCard-content clearfix">
                                             <div class="left_side_box_img buisness-profile-txext">
                                                 <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" 
-                                                   href="<?php echo base_url('freelance-work/freelancer-details'); ?>" title="<?php echo $freelancerdata[0]['freelancer_post_fullname'] . ' ' . $freelancerdata[0]['freelancer_post_username']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
+                                                   href="<?php echo base_url('freelancer/').$fa_slug; ?>" title="<?php echo $freelancerdata[0]['freelancer_post_fullname'] . ' ' . $freelancerdata[0]['freelancer_post_username']; ?>" tabindex="-1" aria-hidden="true" rel="noopener">
                                                        <?php
                                                        $filename = $this->config->item('free_post_profile_main_upload_path') . $freelancerdata[0]['freelancer_post_user_image'];
                                                        $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -79,11 +82,11 @@
                                             </div>
                                             <div class="right_left_box_design">
                                                 <span class="profile-company-name">
-                                                    <a href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo ucwords($freelancerdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerdata[0]['freelancer_post_username']); ?></a>
+                                                    <a href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php echo ucwords($freelancerdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerdata[0]['freelancer_post_username']); ?></a>
                                                 </span>
                                                 <?php $category = $this->db->get_where('industry_type', array('industry_id' => $businessdata[0]['industriyal'], 'status' => '1'))->row()->industry_name; ?>
                                                 <div class="profile-boxProfile-name">
-                                                    <a  href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php
+                                                    <a  href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php
                                                         if ($freepostdata['designation']) {
                                                             echo ucwords($freepostdata['designation']);
                                                         } else {
@@ -92,7 +95,7 @@
                                                         ?></a>
                                                 </div>
                                                 <ul class=" left_box_menubar">
-                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a  class="padding_less_left"  title="freelancer Details" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><?php echo $this->lang->line("details"); ?></a>
+                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'freelancer-details')) { ?> class="active" <?php } ?>><a  class="padding_less_left"  title="freelancer Details" href="<?php echo base_url('freelancer/').$fa_slug; ?>"><?php echo $this->lang->line("details"); ?></a>
                                                     </li>
                                                     <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelancer/saved-projects'); ?>"><?php echo $this->lang->line("saved"); ?></a>
                                                     </li>

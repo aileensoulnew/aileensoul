@@ -137,7 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 if ($message_from_profile == 3) {
                                     $slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $id))->row()->freelancer_apply_slug;
                                     $last_user_image = $last_user_data['user_image'];
-                                    $profile_url = base_url() . 'freelance-work/freelancer-details/' . $id;
+                                    $profile_url = base_url() . 'freelancer/' . $id;
                                 }
                                 if ($message_from_profile == 4) {
                                     $slug = $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $id))->row()->freelancer_hire_slug;

@@ -58,7 +58,7 @@
 
                                 <div class="left-side-bar">
                                     <ul  class="left-form-each">
-                                        <li <?php if ($this->uri->segment(1) == 'freelance-work') { ?> class="active init" <?php } ?>><a title="Basic Information"  href="javascript:void(0);"><?php echo $this->lang->line("basic_info"); ?></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'freelancer') { ?> class="active init" <?php } ?>><a title="Basic Information"  href="javascript:void(0);"><?php echo $this->lang->line("basic_info"); ?></a></li>
 
                                         <li class="custom-none  <?php
                                         if ($freepostdata[0]['free_post_step'] < '1') {

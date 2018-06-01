@@ -1,4 +1,7 @@
-<!--post save success pop up style strat -->
+<?php
+$userid = $this->session->userdata('aileenuser');
+$fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $userid, 'status' => '1'))->row()->freelancer_apply_slug;
+?><!--post save success pop up style strat -->
 <style type="text/css">
     .dropdown-content_hover {
         display: none;
@@ -92,7 +95,7 @@
                                                     <span class="my_account">
                                                         <div class="my_S">Account</div>
                                                     </span>
-                                                    <a title="View Profile" href="<?php echo base_url('freelance-work/freelancer-details'); ?>"><span class="h2-img h2-srrt"></span> View Profile</a>
+                                                    <a title="View Profile" href="<?php echo base_url('freelancer/').$fa_slug; ?>"><span class="h2-img h2-srrt"></span> View Profile</a>
                                                     <a title="Edit Profile" href="<?php echo base_url('freelancer/basic-information'); ?>"><span class="h3-img h2-srrt"></span> Edit Profile</a>
                                                     <?php
                                                     $userid = $this->session->userdata('aileenuser');

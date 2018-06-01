@@ -63,7 +63,7 @@
 
                                         <li class="custom-none"><a title="Address Information" href="<?php echo base_url('freelancer/address-information'); ?>"><?php echo $this->lang->line("address_info"); ?></a></li>
 
-                                        <li <?php if ($this->uri->segment(1) == 'freelance-work') { ?> class="active init" <?php } ?>><a title="Professional Information" href="#"><?php echo $this->lang->line("professional_info"); ?></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'freelancer') { ?> class="active init" <?php } ?>><a title="Professional Information" href="#"><?php echo $this->lang->line("professional_info"); ?></a></li>
 
                                         <li class="custom-none <?php
                                         if ($freepostdata[0]['free_post_step'] < '3') {

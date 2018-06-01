@@ -59,7 +59,7 @@
 
                                         <li class="custom-none"><a title="Rate" href="<?php echo base_url('freelancer/rate'); ?>"><?php echo $this->lang->line("rate"); ?></a></li>
 
-                                        <li <?php if ($this->uri->segment(1) == 'freelance-work') { ?> class="active init" <?php } ?>><a title="Avability" href="javascript:void(0);"><?php echo $this->lang->line("add_avability"); ?></a></li>
+                                        <li <?php if ($this->uri->segment(1) == 'freelancer') { ?> class="active init" <?php } ?>><a title="Avability" href="javascript:void(0);"><?php echo $this->lang->line("add_avability"); ?></a></li>
 
                                         <li class="custom-none <?php
                                         if ($freepostdata[0]['free_post_step'] < '5') {
