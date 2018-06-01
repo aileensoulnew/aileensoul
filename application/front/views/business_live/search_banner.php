@@ -7,15 +7,15 @@
 		}
 	?>
 	<div class="container">
-		<div class="text-right pt20 create-profile-btn">
-			<?php if($ismainregister == true){ ?>
+		<?php /*if($ismainregister == true){ ?>
+			<div class="text-right pt20 create-profile-btn">				
 				<?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
 				<a class="btn3" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
 				<?php }else{ ?>
 				<a class="btn3" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
 				<?php } ?>
-			<?php } ?>
-		</div>
+			</div>
+		<?php }*/ ?>
 		<div class="row">
 			<div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
 				<div class="search-bnr-text">
@@ -41,3 +41,12 @@
 	</div>
 </div>
 
+<?php if($ismainregister == true){ ?>
+	<div class="bottom-bnr-div">
+		<div class="container">
+			<p>Got a Business? Be Found by Your Audience
+				<a class="btn-1 pull-right" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+			</p>
+		</div>
+	</div>
+<?php } ?>

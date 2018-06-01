@@ -17,13 +17,6 @@
 					<!-- <a class="btn3" href="<?php //echo artist_reactivateacc; ?>">Reactivate Artist Profile</a> -->
 				<?php //} ?>
 			<?php //} ?>
-
-			<?php 
-				if ($ismainregister == true && $artist_isregister == false) { 
-			?>
-				<a class="btn3" href="<?php echo artist_registration ?>">Create Artist Profile</a>
-			<?php } ?>
-
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
@@ -48,4 +41,14 @@
 		</div>
 	</div>
 </div>
-
+<?php 
+if ($ismainregister == true && $artist_isregister == false) {
+?>
+<div class="bottom-bnr-div">
+	<div class="container">
+		<p>Show Your Artistic Side
+			<a class="btn-1 pull-right" href="<?php echo artist_registration ?>">Create Artist Profile</a>
+		</p>
+	</div>
+</div>
+<?php } ?>

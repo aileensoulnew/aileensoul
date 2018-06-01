@@ -28,12 +28,12 @@
     }
     ?>
     <div class="container">
-        <div class="text-right pt20">
-            <?php if($this->freelance_apply_profile_set == 0 && $userid != ""){ ?>
+        <?php /*if($this->freelance_apply_profile_set == 0 && $userid != ""){ ?>
+            <div class="text-right pt20">
                 <a class="btn5" href="<?php echo base_url('freelancer/signup') ?>">Create Freelance Apply Profile</a>
                 <!-- <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a> -->
-            <?php } ?>
-        </div>
+            </div>
+        <?php }*/ ?>
         <div class="row">
             <div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
                 <div class="search-bnr-text">
@@ -75,6 +75,16 @@
         </div>
     </div>
 </div>
+<?php if($this->freelance_apply_profile_set == 0 && $userid != ""){ ?>
+
+    <div class="bottom-bnr-div">
+        <div class="container">
+            <p>Get Work from Home Opportunities
+                <a class="btn-1 pull-right" href="<?php echo base_url('freelancer/signup') ?>">Create Freelancer Profile</a>
+            </p>
+        </div>
+    </div>
+<?php } ?>
 <script type="text/javascript" charset="utf-8">
 function searchSubmit(){
     
