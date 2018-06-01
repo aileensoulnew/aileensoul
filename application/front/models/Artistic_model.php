@@ -210,12 +210,13 @@ class Artistic_model extends CI_Model {
     // Get data of artistic post 
     function get_artist_home_post($login_userid,$page,$limit = '4'){
         // Get artistic data
-        $artregid = "";
+        /*$artregid = "";
         $artskill = "";
         $artistsql = "SELECT * FROM `ailee_art_reg` WHERE `user_id` = '" . $login_userid ."' AND `status` = '1'";
         // print_r($artdata);
         $artquery = $this->db->query($artistsql);
-        $artdata = $artquery->result_array();
+        $artdata = $artquery->result_array();*/
+        //print_r($artdata);exit;
         if(count($artdata) > 0){
             $artregid = $artdata[0]['art_id'];
             $artskill = $artdata[0]['art_skill'];
@@ -225,7 +226,7 @@ class Artistic_model extends CI_Model {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
-        $sql = "SELECT `ailee_art_reg`.`art_user_image`, `ailee_art_reg`.`art_name`, `ailee_art_reg`.`art_lastname`, `ailee_art_reg`.`art_skill`, `ailee_art_reg`.`slug`, `ailee_art_post`.`art_post_id`, `ailee_art_post`.`art_post`, `ailee_art_post`.`art_description`, `ailee_art_post`.`art_likes_count`, `ailee_art_post`.`art_like_user`, `ailee_art_post`.`created_date`, `ailee_art_post`.`posted_user_id`, `ailee_art_reg`.`user_id` 
+        /*$sql = "SELECT `ailee_art_reg`.`art_user_image`, `ailee_art_reg`.`art_name`, `ailee_art_reg`.`art_lastname`, `ailee_art_reg`.`art_skill`, `ailee_art_reg`.`slug`, `ailee_art_post`.`art_post_id`, `ailee_art_post`.`art_post`, `ailee_art_post`.`art_description`, `ailee_art_post`.`art_likes_count`, `ailee_art_post`.`art_like_user`, `ailee_art_post`.`created_date`, `ailee_art_post`.`posted_user_id`, `ailee_art_reg`.`user_id` 
             FROM `ailee_art_post` 
             JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
             WHERE `ailee_art_post`.`is_delete` = '0' 
@@ -257,6 +258,13 @@ class Artistic_model extends CI_Model {
                         )
                     )
             ) 
+            ORDER BY `art_post_id` DESC";*/
+
+        $sql = "SELECT `ailee_art_reg`.`art_user_image`, `ailee_art_reg`.`art_name`, `ailee_art_reg`.`art_lastname`, `ailee_art_reg`.`art_skill`, `ailee_art_reg`.`slug`, `ailee_art_post`.`art_post_id`, `ailee_art_post`.`art_post`, `ailee_art_post`.`art_description`, `ailee_art_post`.`art_likes_count`, `ailee_art_post`.`art_like_user`, `ailee_art_post`.`created_date`, `ailee_art_post`.`posted_user_id`, `ailee_art_reg`.`user_id` 
+            FROM `ailee_art_post` 
+            JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
+            WHERE `ailee_art_post`.`is_delete` = '0' 
+            AND `ailee_art_post`.`status` = '1' 
             ORDER BY `art_post_id` DESC";
             if($limit != '') {
                 $sql .= " LIMIT $start,$limit";
@@ -280,7 +288,7 @@ class Artistic_model extends CI_Model {
             $artskill = $artdata[0]['art_skill'];
         }
 
-        $sql = "SELECT count(*) as total_record
+        /*$sql = "SELECT count(*) as total_record
             FROM `ailee_art_post` 
             JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
             WHERE `ailee_art_post`.`is_delete` = '0' 
@@ -312,6 +320,12 @@ class Artistic_model extends CI_Model {
                         )
                     )
             ) 
+            ORDER BY `art_post_id` DESC";*/
+        $sql = "SELECT count(*) as total_record
+            FROM `ailee_art_post` 
+            JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
+            WHERE `ailee_art_post`.`is_delete` = '0' 
+            AND `ailee_art_post`.`status` = '1'
             ORDER BY `art_post_id` DESC";
         $query = $this->db->query($sql);
         $result_array = $query->row()->total_record;
