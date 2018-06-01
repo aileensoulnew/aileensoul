@@ -121,6 +121,20 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
     var fil_limit = 10;
     
     var isProcessing = false;
+
+    function FAFields(limit = 0) {
+        $http.get(base_url + "freelancer_apply_live/freelancerFields?limit="+limit).then(function (success) {
+            $scope.FAFields = success.data;
+        }, function (error) {});
+    }
+    FAFields(fil_limit);
+
+    function FASkills(limit = 0) {
+        $http.get(base_url + "freelancer_apply_live/freelancerSkills?limit="+limit).then(function (success) {
+            $scope.FASkills = success.data.fa_category;
+        }, function (error) {});
+    }
+    FASkills(fil_limit);
     
     angular.element($window).bind("scroll", function (e) {
         if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
@@ -186,22 +200,8 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
         );
 
     }
+
     search_job(1);
-
-    function FAFields(limit = 0) {
-        $http.get(base_url + "freelancer_apply_live/freelancerFields?limit="+limit).then(function (success) {
-            $scope.FAFields = success.data;
-        }, function (error) {});
-    }
-    FAFields(fil_limit);
-
-    function FASkills(limit = 0) {
-        $http.get(base_url + "freelancer_apply_live/freelancerSkills?limit="+limit).then(function (success) {
-            $scope.FASkills = success.data.fa_category;
-        }, function (error) {});
-    }
-    FASkills(fil_limit);
-    
 
     //apply post start
     $scope.applypopup = function(postid, userid)

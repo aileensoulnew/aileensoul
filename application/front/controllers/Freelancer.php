@@ -1111,7 +1111,7 @@ class Freelancer extends MY_Controller {
             $page = $_GET["page"];
         }
 
-        $limit = '5';
+        $limit = 3;
         $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");//Field
         
         $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
