@@ -76,7 +76,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>              
+                </div>
 
                 <!-- MIDDLE PART FOR POST -->
                 <div class="middle-part">   
