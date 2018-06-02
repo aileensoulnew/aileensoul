@@ -45,7 +45,7 @@
 
         <!-- <div class="middle-section"> -->
             <?php if($ismainregister == false || $isbusiness_deactive == true || $isbusiness_register == false){ echo $search_banner; }  ?>
-            <div class="container pt20 searchcontainer">
+            <div class="container pt20 mobp0 mobmt15 searchcontainer">
                 <div class="left-part">
                     <div class="left-search-box list-type-bullet">
                         <div class="">
@@ -213,7 +213,7 @@
 									<h3>Top Categories</h3>
 								</div>
 								<ul class="search-listing custom-scroll">
-									<li id="wow" ng-repeat="category in businessCategory">
+									<li ng-repeat="category in businessCategory">
 										<label class="control control--checkbox">
 											<span>{{category.industry_name | capitalize}}
 												<span class="pull-right">({{category.count}})</span>
@@ -222,6 +222,7 @@
 										   <div class="control__indicator"></div>
 
 										</label>
+										
 									</li>
 								</ul>
 								<p class="text-left p10">
@@ -275,13 +276,6 @@
         <script src="<?php echo base_url('assets/js/webpage/business-live/search.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()) ?>"></script>
 		<script>
-			  window.onload = function(){
-				 var wow = document.getElementById("wow");
-				 wow.onclick = function(){
-					 alert("hi");
-				 }
-			  };
-				 
 		</script>
     </body>
 </html>

@@ -47,17 +47,17 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         </style>
         
     </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push no-login">
+    <body class="page-container-bg-solid page-boxed pushmenu-push no-login old-no-login">
         <?php if($ismainregister == false){ ?>
             <header>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-3 left-header text-center fw-479">
+                        <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
                             <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
                         </div>
-                        <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
-                            <div class="btn-right pull-right">
-                                <a href="javascript:void(0);" onclick="login_profile();" class="btn7 login_link">Login</a>
+                        <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+                            <div class="btn-right">
+                                <a href="javascript:void(0);" onclick="login_profile();" class="btn4 login_link">Login</a>
                                 <a href="javascript:void(0);" onclick="register_profile();" class="btn2 login_link">Create Business Account</a>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <section>
             <?php echo $business_common_profile; ?>
             <div class="text-center tab-block">
-                <div class="container mob-inner-page">
+                <div class="mob-inner-page">
                     <a href="javascript:void(0);" onclick="register_profile();">
                         Photo
                     </a>

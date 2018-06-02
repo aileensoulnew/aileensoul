@@ -15,7 +15,7 @@
                     </li> 
                     <li class="active">
                         <a href="<?php echo base_url() ?>business">
-                            <span class="hidden-xs">Businesses</span>
+                           Businesses
                         </a>
                     </li>
                 </ul>

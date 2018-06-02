@@ -1405,9 +1405,6 @@ label.cameraButton:active{
 }
 .buisness-menu{
     margin-bottom:15px;
-    box-shadow:0 4px 17px #CCC;
-    -webkit-box-shadow:0 4px 17px #CCC;
-    -moz-box-shadow:0 4px 17px #CCC;
     width:100%;
     border-bottom:1px solid #d9d9d9;
     border-left:1px solid #d9d9d9;
@@ -1438,7 +1435,7 @@ label.cameraButton:active{
     background-color:#fff;
     margin-left:40px;
     margin-top:-8px;
-    box-shadow:0 0 2px 2px #dad3cb
+    box-shadow:0 0 2px 2px #d9d9d9;
 }
 .user-pic{
     overflow:hidden;
@@ -3359,7 +3356,10 @@ div[class^=likeduserlist]{
 }
 .mob-inner-page{
     background:#fff;
-    border-bottom:1px solid #d9d9d9
+    border:1px solid #d9d9d9;
+	width:580px; margin:0 auto;
+	border-radius:4px;
+	
 }
 .mySlides .post-design-commnet-box .cmy_2{
     width:89%
@@ -4547,7 +4547,7 @@ body.reg-form{
         padding:9px!important
     }
     .buisness-menu.other-profile-menu::before{
-        bottom:97px
+        bottom:77px
     }
     .other-profile-menu .bpro-fw li{
         width:20%
@@ -4591,11 +4591,13 @@ body.reg-form{
         width:60%!important
     }
     .manage-post-custom .mian_middle_post_box{
-        margin-left:0
+        margin-left:auto;
     }
     .more-image{
         width:264px
     }
+	.profile-head-text{padding-top:0; margin-top:-5px;}
+	#contact_per{margin-top:25px;}
 }
 @media screen and (max-width:800px){
     .cmy_2,.mySlides .post-design-commnet-box .cmy_2{

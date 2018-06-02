@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page bus-by-cus">
         <?php 
             if($ismainregister == false){
                 // $this->load->view('business_live/login_header');
@@ -48,7 +48,7 @@
             ?>
             <!-- NEW HTML -->
                 
-            <div class="container pt20">
+            <div class="container pt20 mobp0 mobmt15">
                 <div ng-view></div>                
             </div>
 
