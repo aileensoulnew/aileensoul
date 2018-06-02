@@ -28,7 +28,7 @@
                 </label>
             </li>
         </ul>
-        <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-skills ">View More Categories</a></p>
+        <p class="text-left p10"><a href="<?php echo base_url(); ?>freelance-jobs-by-categories">View More Categories</a></p>
     </div>
 
     <div class="left-search-box">

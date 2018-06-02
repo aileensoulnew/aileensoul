@@ -186,7 +186,7 @@
 										<li><a href="<?php echo base_url().'freelancer/signup' ?>">Create Freelance Account</a></li>
 										<li><a href="<?php echo base_url().'freelance-jobs' ?>">Freelance Jobs</a></li>
 										<li><a href="<?php echo base_url().'freelance-jobs-by-fields' ?>">View Freelance Jobs by Fields</a></li>
-										<li><a href="<?php echo base_url().'freelance-jobs-by-skills' ?>">View Freelance Jobs by Skills</a></li>
+										<li><a href="<?php echo base_url().'freelance-jobs-by-categories' ?>">View Freelance Jobs by Skills</a></li>
 									</ul>
 								</div>
 							</div>
