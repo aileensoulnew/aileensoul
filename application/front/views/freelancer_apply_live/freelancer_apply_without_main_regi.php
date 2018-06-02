@@ -105,10 +105,10 @@
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="FAFields.length != 0" ng-repeat="faField in FAFields" ng-init="FAIndex=$index">
                             <div class="all-cat-box">
-                                <a href="<?php echo base_url(); ?>freelance-jobs/{{faField.industry_slug}}">
+                                <a href="<?php echo base_url(); ?>freelance-jobs/{{faField.category_slug}}">
                                     <div class="cus-cat-middle">
-                                    <img src="<?php echo JOB_INDUSTRY_IMG_PATH."/";?>{{faField.industry_image}}">
-                                    <p class="">{{faField.industry_name}}</p>
+                                    <img src="<?php echo FA_CATEGORY_IMG_PATH."/";?>{{faField.category_image}}">
+                                    <p class="">{{faField.category_name}}</p>
                                     <span>{{faField.count}} jobs</span>
                                     </div>
                                 </a>

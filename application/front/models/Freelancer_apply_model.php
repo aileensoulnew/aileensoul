@@ -77,10 +77,12 @@ class Freelancer_apply_model extends CI_Model {
         if ($start < 0)
             $start = 0;$sql = "";
 
-        $this->db->select('count(fp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug,ji.industry_image')->from('job_industry ji');
-        $this->db->join('freelancer_post fp', 'fp.post_field_req = ji.industry_id', 'left');
-        $this->db->where('ji.status', '1');
-        $this->db->where('ji.is_delete', '0');
+        $this->db->select('count(fp.post_id) as count,c.category_id,c.category_name,c.category_slug,c.category_image')->from('category c');
+        $this->db->join('freelancer_post fp', 'fp.post_field_req = c.category_id', 'left');
+        $this->db->where('c.status', '1');
+        $this->db->where('c.is_delete', '0');
+        $this->db->where('c.is_other', '0');
+        $this->db->where('c.category_id != ', '15');
         $this->db->where('fp.status', '1');
         $this->db->where('fp.is_delete', '0');
         $this->db->group_by('fp.post_field_req');
@@ -92,9 +94,9 @@ class Freelancer_apply_model extends CI_Model {
         // echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         foreach ($result_array as $k => $v) {
-            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$result_array[$k]['industry_image']))
+            if(!file_exists(FA_CATEGORY_IMG_PATH."/".$result_array[$k]['category_image']))
             {
-                $result_array[$k]['industry_image'] = "job_industry_image_default.png";
+                $result_array[$k]['category_image'] = "category_default.png";
             }
         }
         return $result_array;
@@ -106,7 +108,7 @@ class Freelancer_apply_model extends CI_Model {
             $start = 0;
 
 
-        $sql = "SELECT count(fp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug, ji.industry_image FROM ailee_job_industry ji,ailee_freelancer_post fp WHERE fp.post_field_req = ji.industry_id AND ji.status = '1' AND ji.is_delete = '0' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY fp.post_field_req ORDER BY count DESC";
+        $sql = "SELECT count(fp.post_id) as count,c.category_id,c.category_name,c.category_slug,c.category_image FROM ailee_category c,ailee_freelancer_post fp WHERE fp.post_field_req = c.category_id AND c.category_id != 15 AND c.status = '1' AND c.is_delete = '0' AND c.is_other = '0' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY fp.post_field_req ORDER BY count DESC";
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
         }
@@ -115,9 +117,9 @@ class Freelancer_apply_model extends CI_Model {
 
         $fa_category = $query->result_array();
         foreach ($fa_category as $k => $v) {
-            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$fa_category[$k]['industry_image']))
+            if(!file_exists(FA_CATEGORY_IMG_PATH."/".$fa_category[$k]['category_image']))
             {
-                $fa_category[$k]['industry_image'] = "job_industry_image_default.png";
+                $fa_category[$k]['category_image'] = "category_default.png";
             }
         }
         
@@ -128,7 +130,7 @@ class Freelancer_apply_model extends CI_Model {
 
     function get_fa_field_total_rec() {        
 
-        $sql = "SELECT count(fp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug, ji.industry_image FROM ailee_job_industry ji,ailee_freelancer_post fp WHERE fp.post_field_req = ji.industry_id AND ji.status = '1' AND ji.is_delete = '0' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY fp.post_field_req ORDER BY count DESC";
+        $sql = "SELECT count(fp.post_id) as count,c.category_id,c.category_name,c.category_slug,c.category_image FROM ailee_category c,ailee_freelancer_post fp WHERE fp.post_field_req = c.category_id AND c.category_id != 15 AND c.status = '1' AND c.is_delete = '0' AND c.is_other = '0' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY fp.post_field_req ORDER BY count DESC";
 
         $query = $this->db->query($sql);
         $return_array = $query->result_array();
@@ -183,11 +185,12 @@ class Freelancer_apply_model extends CI_Model {
 
     function is_fa_field($keyword = "")
     {
-        $this->db->select('ji.industry_id,ji.industry_name,ji.industry_slug')->from('job_industry ji');        
-        $this->db->where('ji.status', '1');
-        $this->db->where('ji.is_delete', '0');
-        $this->db->where('ji.is_other', '0');        
-        $this->db->where('ji.industry_slug LIKE BINARY "'.$keyword.'"');
+        $this->db->select('c.category_id,c.category_name,c.category_slug')->from('category c');        
+        $this->db->where('c.status', '1');
+        $this->db->where('c.is_delete', '0');
+        $this->db->where('c.is_other', '0');        
+        $this->db->where('c.category_id !=', '15');       
+        $this->db->where('c.category_slug LIKE BINARY "'.$keyword.'"');
         $query = $this->db->get();
         // echo $this->db->last_query();exit;
         $result_array = $query->row_array();
@@ -270,7 +273,7 @@ class Freelancer_apply_model extends CI_Model {
             $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
         }
         else if(isset($fa_fields) && !empty($fa_fields)){            
-            $this->db->where('post_field_req',$fa_fields['industry_id']);
+            $this->db->where('post_field_req',$fa_fields['category_id']);
         }
         $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
         if($sql != "")
@@ -292,8 +295,8 @@ class Freelancer_apply_model extends CI_Model {
             $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
             $result_array[$key]['fullname'] = $firstname;
 
-            $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
-            $result_array[$key]['industry_name'] = $industry_name;
+            $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $value['post_field_req']))->row()->category_name;
+            $result_array[$key]['industry_name'] = $category_name;
 
             $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
             $freelancerapply1 = $this->data['freelancerapply'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -389,7 +392,7 @@ class Freelancer_apply_model extends CI_Model {
             $this->db->where('FIND_IN_SET('.$fa_skills['skill_id'].', fp.`post_skill`) !=', 0);
         }
         else if(isset($fa_fields) && !empty($fa_fields)){            
-            $this->db->where('post_field_req',$fa_fields['industry_id']);
+            $this->db->where('post_field_req',$fa_fields['category_id']);
         }
         $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
         if($sql != "")
@@ -476,9 +479,9 @@ class Freelancer_apply_model extends CI_Model {
                 GROUP BY skill 
                 Union
 
-                SELECT industry_name as value FROM ailee_job_industry 
-                WHERE status = '1' AND is_other = 0 AND (industry_name LIKE '". $keyword ."') 
-                GROUP BY industry_name 
+                SELECT category_name as value FROM ailee_category 
+                WHERE status = '1' AND is_other = '0' AND category_id != 15 AND is_delete = '0' AND (category_name LIKE '". $keyword ."') 
+                GROUP BY category_name 
                 Union
 
                 SELECT post_name as value FROM ailee_freelancer_post 
@@ -563,7 +566,7 @@ class Freelancer_apply_model extends CI_Model {
             {
                 $sql_skill .= "s.skill LIKE '%".$value."%' OR ";
                 $sql_pn .= "post_name LIKE '%".$value."%' OR ";
-                $sql_it .= "industry_name LIKE '%".$value."%' OR ";
+                $sql_it .= "category_name LIKE '%".$value."%' OR ";
             }
         }
         $sql_city = "";$sql_state = "";$sql_country = "";
@@ -594,7 +597,7 @@ class Freelancer_apply_model extends CI_Model {
                 OR
                 (".trim($sql_pn, ' OR ').")
                 OR
-                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
+                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(category_id), ',', '|') FROM ailee_category WHERE status = '1' AND is_delete = '0' AND is_other = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
         }
         if($fa_location != "")
         {
@@ -633,8 +636,8 @@ class Freelancer_apply_model extends CI_Model {
             $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
             $result_array[$key]['fullname'] = $firstname;
 
-            $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
-            $result_array[$key]['industry_name'] = $industry_name;
+            $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $value['post_field_req']))->row()->category_name;
+            $result_array[$key]['industry_name'] = $category_name;
 
             $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
             $freelancerapply1 = $this->data['freelancerapply'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -727,7 +730,7 @@ class Freelancer_apply_model extends CI_Model {
             {
                 $sql_skill .= "s.skill LIKE '%".$value."%' OR ";
                 $sql_pn .= "post_name LIKE '%".$value."%' OR ";
-                $sql_it .= "industry_name LIKE '%".$value."%' OR ";
+                $sql_it .= "category_name LIKE '%".$value."%' OR ";
             }
         }
         $sql_city = "";$sql_state = "";$sql_country = "";
@@ -758,7 +761,7 @@ class Freelancer_apply_model extends CI_Model {
                 OR
                 (".trim($sql_pn, ' OR ').")
                 OR
-                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
+                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(category_id), ',', '|') FROM ailee_category WHERE status = '1' AND is_other = '0' AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
         }
         if($fa_location != "")
         {
@@ -883,8 +886,8 @@ class Freelancer_apply_model extends CI_Model {
             $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
             $result_array[$key]['fullname'] = $firstname;
 
-            $industry_name = $this->db->select('industry_name')->get_where('job_industry', array('industry_id' => $value['post_field_req']))->row()->industry_name;
-            $result_array[$key]['industry_name'] = $industry_name;
+            $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $value['post_field_req']))->row()->category_name;
+            $result_array[$key]['industry_name'] = $category_name;
 
             $contition_array = array('post_id' => $value['post_id'], 'job_delete' => '0', 'user_id' => $userid);
             $freelancerapply1 = $this->data['freelancerapply'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
