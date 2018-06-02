@@ -19,24 +19,25 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
 
         <?php } ?>        
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
 
 
     </head>
     <!-- END HEAD -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
-    <body class="page-container-bg-solid page-boxed no-login freeh3">
+    <body class="page-container-bg-solid page-boxed no-login freeh3 detail-job-no-login">
 
         <header>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-sm-3 left-header text-center fw-479">
+                    <div class="col-md-4 col-sm-3 col-xs-4 left-header fw-539">
                      <div class="logo">  <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a></div>
                     </div>
-                    <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
+                    <div class="col-md-8 col-sm-9 col-xs-8 right-header fw-539">
                         <div class="btn-right pull-right">
-                            <a href="javascript:void(0);" onclick="login_profile();" class="btn2">Login</a>
-                            <a href="javascript:void(0);" onclick="register_profile();" class="btn3">Create an account</a>
+                            <a href="javascript:void(0);" onclick="login_profile();" class="btn4">Login</a>
+                            <a href="javascript:void(0);" onclick="register_profile();" class="btn2">Create Freelancer Account</a>
                         </div>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
         </header>
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
-                <div class="container padding-360">
+                <div class="container padding-360 mobp0 mobmt15">
                     <div class="row4">
 
                         <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt"><div class="">
@@ -184,7 +185,7 @@
                                     </div>
                                     <div class="all-job-box job-detail">
                                         <div class="all-job-top">
-                                            <div class="job-top-detail">
+                                            <div class="job-top-detail free-apply-img">
                                                 <h5><a href="javascript:void(0);" onclick="register_profile();"><?php echo $post['post_name']; ?></a></h5>
 
                                                 <?php

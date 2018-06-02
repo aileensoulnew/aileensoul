@@ -1484,6 +1484,7 @@ svg path{
     .container {
         width: 1250px;
     }
+	
 }
 @media screen and (min-width: 1310px) {
     .container {

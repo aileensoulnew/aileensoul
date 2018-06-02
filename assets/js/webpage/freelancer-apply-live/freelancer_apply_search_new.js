@@ -129,9 +129,9 @@ app.controller('freelancerApplySearchController', function ($scope, $http,$windo
     angular.element($window).bind("scroll", function (e) {        
         if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
             isLoadingData = true;
-            var page = $scope.jobs.page_number;
-            var total_record = $scope.jobs.total_record;
-            var perpage_record = $scope.jobs.perpage_record;            
+            var page = $scope.fa.page_number;
+            var total_record = $scope.fa.total_record;
+            var perpage_record = $scope.fa.perpage_record;            
             if (parseInt(perpage_record * page) <= parseInt(total_record)) {
                 var available_page = total_record / perpage_record;
                 available_page = parseInt(available_page, 10);
@@ -140,7 +140,7 @@ app.controller('freelancerApplySearchController', function ($scope, $http,$windo
                     available_page = available_page + 1;
                 }
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum =  $scope.jobs.page_number + 1;
+                    var pagenum =  $scope.fa.page_number + 1;
                     search_job(pagenum);
                 }
             }
@@ -218,7 +218,7 @@ app.controller('freelancerApplySearchController', function ($scope, $http,$windo
             }
             else if(job_deactive == 1)
                 $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");*/
-             $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");  
+             $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");  
             $('#bidmodal').modal('show');
         }
         else if(login_user_id != "" || fa_profile_set == 1)
@@ -259,7 +259,7 @@ app.controller('freelancerApplySearchController', function ($scope, $http,$windo
             }
             else if(fa_profile_set == 0)
                 $('.biderror .mes').html("<div class='pop_content'>Please Login.</div>");*/
-            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
             $('#bidmodal').modal('show');
         }
         else if(login_user_id != ""  && fa_profile_set == 1)

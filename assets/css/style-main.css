@@ -2636,10 +2636,8 @@ header.profile-header .logo a{
     color: #1b8ab9;
 }
 header .col-md-4.col-sm-3 a{display: inline-block;}
-.autoposition{
-                position: absolute!important;
-                z-index: 999 !important;
-}
+.autoposition{position: absolute!important; z-index: 999 !important;}
+.right-header{text-align:right;}
 
 @media screen and (min-height:540px){
     .cover .modal-content{
@@ -3013,7 +3011,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     .logo{
         font-size:24px;
     }
-    .no-login .logo{margin-bottom: 10px;}
+    .no-login .logo{margin-bottom: 5px;}
     .mid-trns{
         width:100%
     }
@@ -3047,11 +3045,11 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
         width:420px
     }
     .inner-form{
-        width:100%;
+       width:100%!important;
         padding:0 14px
     }
     .login-frm{
-        width:100%!important
+        
     }
     .title{
         width:100%
@@ -3334,14 +3332,11 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
         margin-top:0;
         font-weight:500 !important;
     }
-    .right-header{
-        padding-top:15px
-    }
     .profile-bnr{
         padding-top:100px
     }
     .title h1{
-        font-size:16px!important
+        font-size:20px!important
     }
     #onload-Modal{
         display:none!important
@@ -3468,6 +3463,11 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     .modal.in .modal-dialog{padding: 55px 15px;}
 }
 @media screen and (max-width:479px){
+	.fw-479{width:100%;}
+	.btn-right{padding-top:5px;}
+	.p0-479{padding:0;}
+	.left-header{text-align:center;}
+	.right-header{text-align:center;}
     .mob-none,.profile-box-1.art::after,.profile-box-1.art::before,.profile-box-1.bus::before,.profile-box-1.job::after,.profile-box-1.job::before{
         display:none;
     }
@@ -3498,7 +3498,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
         margin-bottom:0;
     }
     .inner-form .login form{
-        padding:15px 10px;
+        padding:20px;
     }
     .btn-4,.btns .btn-4{
         padding:5px 20px;
@@ -3566,6 +3566,9 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     }
 	.new-abput-page .img-custom{width:100%;}
     .cus-chang{margin-bottom: 0px !important;font-size: 17px !important;}
+	.inner-form{padding:0;}
+	.inner-form .login{width:100%; border-left:0; border-right:0; border-radius:0; box-shadow:none;}
+	.title h1{margin:15px 0;}
 
 }
 @media screen and (max-width:360px){
@@ -3600,9 +3603,6 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     .login #register_form span::after{
         right:16px;
     }
-    .login form{
-        padding:16px 8px 15px!important;
-    }
     .login .form-group select.day,.login .form-group select.month{
         width:60px;
     }
@@ -3627,9 +3627,6 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     }
     .por_content ul li .pro-text .count{
         width:14px;
-    }
-    .login form{
-        padding:16px 8px 15px!important;
     }
     .about-us .main-inner .btn-right.pull-right a.btn2{
         margin-bottom:10px;

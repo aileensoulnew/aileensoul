@@ -229,10 +229,10 @@ if($browser == "Firefox")
                         <li class="dropdown user-id">
                             <label title="<?php echo $session_user['aileenuser_firstname']; ?>" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <?php
-                                    if ($session_user['aileenuser_userimage'] != '')
+                                    if ($userData['user_image'] != '')
                                     {?>
                                         <span class="usr-img profile-brd" id="header-main-profile-pic">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $session_user['aileenuser_userimage'] ?>" alt="<?php echo $session_user['aileenuser_firstname'] ?>">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
                                         </span>
                                     <?php
                                     }
@@ -256,8 +256,8 @@ if($browser == "Firefox")
                                         <?php
                                     } ?>
                                 <span class="pr-name"><?php
-                                    if (isset($session_user['aileenuser_firstname'])) {
-                                        echo ucfirst($session_user['aileenuser_firstname']);
+                                    if (isset($userData['first_name'])) {
+                                        echo ucfirst($userData['first_name']);
                                     }
                                     ?></span>
                             </label>
@@ -311,10 +311,10 @@ if($browser == "Firefox")
 								<label class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     
                                         <?php
-                                        if ($session_user['aileenuser_userimage'] != '')
+                                        if ($userData['user_image'] != '')
                                         { ?>
                                             <span class="usr-img profile-brd" id="header-main-profile-pic">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $session_user['aileenuser_userimage'] ?>" alt="<?php echo $session_user['aileenuser_firstname'] ?>">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
                                             </span>
                                         <?php
                                         }

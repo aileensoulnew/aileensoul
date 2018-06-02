@@ -27,7 +27,7 @@
     </head>
     <!-- END HEAD -->
   
-    <body class="page-container-bg-solid page-boxed no-login freeh3 cust-job-width paddnone cus-error">
+    <body class="page-container-bg-solid detail-job-no-login page-boxed no-login freeh3 cust-job-width paddnone cus-error">
 
         <header>
             <div class="container">

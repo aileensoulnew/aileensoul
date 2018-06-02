@@ -47,6 +47,7 @@ class Freelancer_apply_live extends MY_Controller {
 
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         $this->data['title'] = "Search Freelance | Aileensoul";
         $this->data['freelance_apply_profile_set'] = $this->freelance_apply_profile_set;
 
@@ -183,6 +184,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Aileensoul";
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
         /*$this->data['category_id'] = $category_id['industry_id'];
         $this->data['q'] = $_GET['q'];
@@ -304,6 +306,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         /*$this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];
         $this->data['w'] = $_GET['w'];*/
