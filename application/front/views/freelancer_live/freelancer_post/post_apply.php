@@ -115,8 +115,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                         </div>
                                         <ul class="search-listing custom-scroll">
                                             <li ng-repeat="category in FAFields">
-                                                <label class="control control--checkbox"><span ng-bind="category.industry_name | capitalize"></span>
-                                                    <input type="checkbox" class="category-filter" ng-model="cat_fil" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
+                                                <label class="control control--checkbox"><span ng-bind="category.category_name | capitalize"></span>
+                                                    <input type="checkbox" class="category-filter" ng-model="cat_fil" name="category[]" ng-value="{{category.category_id}}" ng-change="applyJobFilter()"/>
                                                     <div class="control__indicator"></div>
                                                 </label>
                                             </li>
