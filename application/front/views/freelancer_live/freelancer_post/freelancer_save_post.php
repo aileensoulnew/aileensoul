@@ -322,7 +322,7 @@
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+            <!-- <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script> -->
             <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>">
@@ -330,7 +330,7 @@
             <?php
         } else {
             ?>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()) ?>"></script>
+            <!-- <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()) ?>"></script> -->
             <script src="<?php echo base_url('assets/js_min/croppie.js?ver=' . time()); ?>"></script>
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>">
@@ -343,6 +343,7 @@
             var no_saved = '<?php echo $this->lang->line("no_saved_freelancer"); ?>';
             var count_profile_value = '<?php echo $count_profile_value; ?>';
             var count_profile = '<?php echo $count_profile; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {

@@ -117,7 +117,7 @@ $userid = $this->session->userdata('aileenuser');
                                 <li>Account</li>
                                 <li><a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                 <li><a href="<?php echo base_url('freelance-employer/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
-                                <li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li>
+                                <!-- <li><a href="#" onclick="deactivate(<?php //echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
                             </ul>
                         </li>
 						<li class="post-job-sh">

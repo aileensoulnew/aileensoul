@@ -38,12 +38,12 @@
     <body class="profile-main-page">    
         <?php
         if($user_id != ""  && $this->freelance_apply_profile_set == 1){
-            echo $header_profile;
+            echo $header_inner_profile;
             echo $freelancer_post_header2;
         }
         else if($user_id != "" && $this->freelance_apply_profile_set == 0)
         {
-             echo $header_profile;
+             echo $header_inner_profile;
         }
 
         if($user_id == "" || $this->freelance_apply_profile_set == 0)
@@ -67,7 +67,7 @@
                 <div ng-view></div>
             </div>
         </div>        
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
@@ -91,11 +91,11 @@
             var app = angular.module('viewMoreFreelanceApplyApp', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
 
             $(document).ready(function($) {
-                $("li.user-id label").click(function(e){
+                /*$("li.user-id label").click(function(e){
                     $(".dropdown").removeClass("open");
                     $(this).next('ul.dropdown-menu').toggle();
                     e.stopPropagation();
-                });
+                });*/
                 /*$("li.user-id a").click(function(e){
                     $(".dropdown").removeClass("open");
                     $(this).next('ul.dropdown-menu').toggle();

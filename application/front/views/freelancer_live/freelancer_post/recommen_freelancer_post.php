@@ -115,7 +115,7 @@
                                                     </li>
                                                     <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'saved-projects')) { ?> class="active" <?php } ?>><a title="Saved Post" href="<?php echo base_url('freelancer/saved-projects'); ?>"><?php echo $this->lang->line("saved"); ?></a>
                                                     </li>
-                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'applied-projects')) { ?> class="active" <?php } ?>><a title="Applied Post"  class="padding_less_right"  href="<?php echo base_url('freelance-work/applied-projects'); ?>"><?php echo $this->lang->line("applied"); ?></a>
+                                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'applied-projects')) { ?> class="active" <?php } ?>><a title="Applied Post"  class="padding_less_right"  href="<?php echo base_url('freelancer/applied-projects'); ?>"><?php echo $this->lang->line("applied"); ?></a>
                                                     </li>
                                                 </ul>
                                             </div>

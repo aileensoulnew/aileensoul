@@ -306,12 +306,12 @@
     <?php
     if (IS_JOB_JS_MINIFY == '0') {
         ?>
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> -->
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
 <?php } else { ?>
 
 
-        <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> -->
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
 
 <?php } ?>

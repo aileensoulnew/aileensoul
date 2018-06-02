@@ -737,7 +737,7 @@
 			<?php
 			if (IS_APPLY_JS_MINIFY == '0') {
 			?>
-			<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+			<!-- <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script> -->
 			<!-- FIELD VALIDATION JS START -->
 			<script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script> 
 			<script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/project_live.js?ver=' . time()); ?>"></script>
@@ -745,7 +745,7 @@
 			<?php
 			} else {
 			?>
-			<script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
+			<!-- <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script> -->
 			<!-- FIELD VALIDATION JS START -->
 			<script  type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-hire/project_live.js?ver=' . time()); ?>"></script>
 			<script src="<?php echo base_url('assets/js_min/croppie.js'); ?>"></script> 

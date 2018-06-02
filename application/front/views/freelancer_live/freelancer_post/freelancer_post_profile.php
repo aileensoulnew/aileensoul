@@ -26,7 +26,7 @@
         <?php } ?>
         <?php
         if ($this->session->userdata('aileenuser')) {
-            echo $header;
+            echo $header_inner_profile;
         } else {
             ?>
             <header>

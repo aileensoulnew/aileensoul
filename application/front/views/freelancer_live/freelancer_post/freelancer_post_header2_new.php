@@ -10,7 +10,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 				<div class="col-md-6 mob-p0">
 					<ul class="sub-menu">
 						<li class="profile">
-							<a href="<?php echo base_url('recommended-freelance-work'); ?>">
+							<a target="_self" href="<?php echo base_url('recommended-freelance-work'); ?>">
 								<div class="sub-menu-icon">
 									
 										<svg class="not-hover" viewBox="0 0 486.988 486.988" width="17px" height="17px">

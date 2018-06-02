@@ -39,7 +39,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h2 class="font-white">Apply as Freelancer</h2>
                                 <?php if ($apply_step[0]['free_post_step'] == '7') { ?>
-                                    <a href="<?php echo base_url('recommended-freelance-work'); ?>" class="button" id="freelancer-apply-button">Apply</a>
+                                    <a target="_self" href="<?php echo base_url('recommended-freelance-work'); ?>" class="button" id="freelancer-apply-button">Apply</a>
                                 <?php } else { ?>
                                     <a href="<?php echo base_url('freelance-jobs'); ?>" class="button" id="freelancer-apply-button">Apply</a>
                                 <?php } ?>
