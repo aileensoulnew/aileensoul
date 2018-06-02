@@ -2421,13 +2421,14 @@ input[type=text] {
 	.right-bnr img{margin-left:35px;}
 	.how-about-profile .center-title h2{font-size:20px;}
 	
-	#filter.mob-modal .modal-content{width:100%; min-height:100%; border:0px; border-radius:0px;}
+	#filter .modal-dialog{background:#fff;}
+	#filter.mob-modal .modal-content{width:100%; min-height:100%; border:0px; border-radius:0px; box-shadow:none;}
 	#filter.mob-modal .modal-dialog{padding:0 !important; margin:0 !important; min-height:100%;}
 	#filter.mob-modal .modal-content .modal-close{top:0 !important; right:0 !important; border-radius:0 !important; background:none !important; border:none !important; color:#5c5c5c !important;}
 	#filter .top-modal-body{padding:5px; border-bottom:1px solid #d2d2d2;}
 	#filter .mid-modal-body{width:100%; float:left;}
 	#filter .mid-modal-body form{width:100%; float:left; padding:0;}
-	#filter .mid-modal-body form .left-search-box{border:0;}
+	#filter .mid-modal-body .left-search-box{border:0;}
 	#filter .left-search-box h3{color:#1b8ab9; -webkit-text-fill-color:inherit; text-align:left; font-size:16px; line-height:1;}
 	#filter .left-search-box .accordion-group h3 a{color:#1b8ab9; font-size:16px; line-height:1;}
 	.mob-filter{display:block;}
