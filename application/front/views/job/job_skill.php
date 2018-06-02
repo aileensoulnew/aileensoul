@@ -90,10 +90,17 @@
                                  <option value="<?php echo $indu['industry_id']; ?>" <?php if($indu['industry_id'] == $work_industry){ echo "selected"; } ?>><?php echo $indu['industry_name']; ?></option>
                                  
                                  <?php } ?>
-                                    <option value="<?php echo $other_industry[0]['industry_id']; ?>"><?php echo $other_industry[0]['industry_name']; ?></option>  
+                                    <option <?php echo ($other_industry[0]['industry_id']== $work_industry ? "selected" : ''); ?> value="<?php echo $other_industry[0]['industry_id']; ?>"><?php echo $other_industry[0]['industry_name']; ?></option>  
                               </select>
                               <?php echo form_error('industry'); ?>
                            </fieldset>
+                           <?php if($work_industry == '288'): ?>
+                           <fieldset class="full-width fresher_select main_select_data" >
+                              <label for="other_industry">Other Industry: </label>
+                              <input id="other_industry"  style="text-transform: capitalize;" value="<?php echo $work_title_other; ?>" name="other_industry" size="90" tabindex="4">
+                              <?php echo form_error('other_industry'); ?>
+                           </fieldset>
+                         <?php endif; ?>
                            <fieldset class="full-width fresher_select main_select_data" >
                               <label for="cities">Preffered loation for job<font  color="red">*</font>: </label>
                               <input id="cities2"  style="text-transform: capitalize;" value="<?php echo $work_city; ?>" name="cities"  size="90" tabindex="4">

@@ -134,6 +134,12 @@
                                         </select>
                                     </span>
                                 </div>
+                                <div id="otherIndustryCheck" ng-if="user.industry == '288'">
+                                    <div class="form-group">
+                                        <input type="text" name="other_industry" ng-model="user.other_industry" id="other_industry" value="" ng-required="true" placeholder="Other Industry Type">
+                                        <span ng-show="errorOtherIndustry" class="error">{{errorOtherIndustry}}</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">                                   

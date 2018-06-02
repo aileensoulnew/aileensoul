@@ -1238,12 +1238,18 @@ class Job extends MY_Controller {
         $this->data['industry_otherdata'] = $this->common->select_data_by_condition('job_industry', $contition_array, $data = '*', $sortby = 'industry_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         $contition_array = array('status' => '1', 'is_delete' => '0', 'user_id' => $userid);
-        $post = $this->data['postdata'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'job_id,work_job_title,work_job_industry,work_job_city,keyskill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $post = $this->data['postdata'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'job_id,work_job_title,work_job_industry,work_job_city,keyskill,work_job_other_industry', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         $contition_array = array('title_id' => $post[0]['work_job_title']);
         $jobtitle = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
         $this->data['work_title'] = $jobtitle[0]['name'];
+
+        if($post[0]['work_job_industry'] == '288')
+        {
+            $contition_array = array('industry_id ' => $post[0]['work_job_other_industry']);
+            $jobtitle_other = $this->common->select_data_by_condition('job_industry', $contition_array, $data = 'industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $this->data['work_title_other'] = $jobtitle_other[0]['industry_name'];
+        }
 
         //Job title data fetch start
         $contition_array = array('status' => 'publish');
@@ -1377,12 +1383,47 @@ class Job extends MY_Controller {
             $city = implode(',', $city);
         }
 
+        $industry = $this->input->post('industry');
+        if($industry == '288')
+        {
+            $otherindustry = $this->input->post('other_industry');
+        }
+        else
+        {
+            $otherindustry = "";
+        }
+
+        // job other industry
+        if ($otherindustry != "") {
+            $contition_array = array('industry_image' => $otherindustry,'status'=>'1','is_delete'=>'0');
+            $OIdata = $this->common->select_data_by_condition('job_industry', $contition_array, $data = 'industry_id,industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            if ($OIdata) {
+                $otherindustry = $OIdata[0]['industry_id'];
+            } else {
+                $data = array(
+                    'industry_name' => ucfirst( $otherindustry),
+                    'industry_image' => $this->common->clean($otherindustry).".png",
+                    'status' => '1',
+                    'is_delete' => '0',
+                    'is_other' => '1',
+                    'user_id' => $userid,
+                    'created_date' => date('Y-m-d h:i:s', time()),
+                    'modify_date' => date('Y-m-d h:i:s', time()),
+                    'industry_slug' => $this->common->clean($otherindustry),
+                );
+                if ($userid) {
+                    $otherindustry = $this->common->insert_data_getid($data, 'job_industry');
+                }
+            }
+        }
+
         //update data in table start
 
         $data = array(
             'keyskill' => $skills,
             'work_job_title' => $jobtitle,
             'work_job_industry' => $this->input->post('industry'),
+            'work_job_other_industry' => $otherindustry,
             'work_job_city' => $city,
         );
 
@@ -6118,6 +6159,12 @@ class Job extends MY_Controller {
         if (empty($_POST['email']))
             $errors['errorEmail'] = 'Email is required.';
 
+        if ($_POST['industry'] == '288') {
+            if (empty($_POST['other_industry'])) {
+                $errors['errorOtherIndustry'] = 'Please enter other industrial type.';
+            }
+        }
+
         if (!empty($errors)) {
             $data['errors'] = $errors;
         }
@@ -6130,6 +6177,13 @@ class Job extends MY_Controller {
             $expy = $_POST['experience_year'];
             $expm = $_POST['experience_month'];
             $industry = $_POST['industry'];
+          
+
+            if ($_POST['industry'] == '288') {
+                $otherindustry = trim($_POST['other_industry']);
+            } else {
+                $otherindustry = '';
+            }
 
             $jobtitle = $_POST['job_title'];
 
@@ -6146,9 +6200,9 @@ class Job extends MY_Controller {
                 if ($jobdata) {
                     $jobtitle = $jobdata[0]['title_id'];
                 } else {
-                    $forslug = $this->input->post('job_title');
+                    $forslug = $jobtitle;
                     $data = array(
-                        'name' => ucfirst($this->input->post('job_title')),
+                        'name' => ucfirst($jobtitle),
                         'slug' => $this->common->clean($forslug),
                         'status' => 'draft',
                     );
@@ -6210,6 +6264,30 @@ class Job extends MY_Controller {
                 $city = implode(',', $city);
             }
 
+            // job other industry
+            if ($otherindustry != " ") {
+                $contition_array = array('industry_image' => $otherindustry,'status'=>'1','is_delete'=>'0');
+                $OIdata = $this->common->select_data_by_condition('job_industry', $contition_array, $data = 'industry_id,industry_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                if ($OIdata) {
+                    $otherindustry = $OIdata[0]['industry_id'];
+                } else {
+                    $data = array(
+                        'industry_name' => ucfirst( $otherindustry),
+                        'industry_image' => $this->common->clean($otherindustry).".png",
+                        'status' => '1',
+                        'is_delete' => '0',
+                        'is_other' => '1',
+                        'user_id' => $userid,
+                        'created_date' => date('Y-m-d h:i:s', time()),
+                        'modify_date' => date('Y-m-d h:i:s', time()),
+                        'industry_slug' => $this->common->clean($otherindustry),
+                    );
+                    if ($userid) {
+                        $otherindustry = $this->common->insert_data_getid($data, 'job_industry');
+                    }
+                }
+            }
+
             $data1 = array(
                 'fname' => ucfirst($firstname),
                 'lname' => ucfirst($lastname),
@@ -6217,6 +6295,7 @@ class Job extends MY_Controller {
                 'keyskill' => $skills,
                 'work_job_title' => $jobtitle,
                 'work_job_industry' => $industry,
+                'work_job_other_industry' => $otherindustry,
                 'work_job_city' => $city,
                 'exp_y' => $expy,
                 'exp_m' => $expm,
