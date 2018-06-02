@@ -381,28 +381,23 @@ header("Pragma: no-cache"); // HTTP/1.0
                             <h4>Your email id subscribe successfully.</h4>
                         </div>
                     </div>
-	    		</div>
-	    		
+	    		</div>	    		
 	    	</div>
 
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-
         <?php } else { ?>
-
             <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
         <?php } ?>
         <?php
         echo $login_footer
         ?>
-
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <script src="<?php echo base_url('assets/js/jquery.validate.js?ver=' . time()); ?>"></script>
         <?php } else { ?>
-
             <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js') ?>"></script>
             <script src="<?php echo base_url('assets/js_min/jquery.validate.js?ver=' . time()); ?>"></script>
         <?php } ?>
@@ -422,7 +417,6 @@ header("Pragma: no-cache"); // HTTP/1.0
                 return function (input) {
                     if (!input)
                         return;
-
                     // make lower case and trim
                     var slug = input.toLowerCase().trim();
 

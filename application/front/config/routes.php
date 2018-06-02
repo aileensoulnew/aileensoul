@@ -100,8 +100,18 @@ $route['privacy-policy'] = "main/privacy_policy";
 $route['advertise-with-us'] = "advertise_with_us";
 
 $route['sitemap'] = "sitemap/sitemap";
+$route['sitemap/artist'] = "sitemap/sitemap_inner";
+$route['sitemap/artist/(:any)'] = "sitemap/sitemap_inner/$1";
+
+$route['sitemap/companies'] = "sitemap/sitemap_inner";
+$route['sitemap/companies/(:any)'] = "sitemap/sitemap_inner/$1";
+
+$route['sitemap/jobs'] = "sitemap/sitemap_inner";
+$route['sitemap/jobs/(:any)'] = "sitemap/sitemap_inner/$1";
+
 $route['sitemap/blogs'] = "sitemap/blogs";
 $route['sitemap/blogs/(:any)'] = "sitemap/blogs_category/$1";
+
 $route['sitemap/job-profile'] = "sitemap/job_profile";
 $route['sitemap/recruiter-profile'] = "sitemap/recruiter_profile";
 $route['sitemap/freelance-profile'] = "sitemap/freelance_profile";

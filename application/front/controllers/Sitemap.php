@@ -128,7 +128,7 @@ class Sitemap extends CI_Controller {
         $this->load->view('sitemap/sitemap', $this->data);
     }
 
-    //NEW SITEMAP VIEW
+    //NEW BLOG VIEW
     public function blogs() {
         $this->data['title'] = 'Sitemap Blogs - Aileensoul';
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
@@ -136,7 +136,7 @@ class Sitemap extends CI_Controller {
         $this->load->view('sitemap/sitemap-blog', $this->data);
     }
 
-    //NEW SITEMAP VIEW
+    //NEW BLOG CATEGORY VIEW
     public function blogs_category($category = '') {
         $this->data['title'] = 'Sitemap Blogs - Aileensoul';
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
@@ -147,6 +147,41 @@ class Sitemap extends CI_Controller {
         $this->load->view('sitemap/sitemap-blog-inner', $this->data);
     }
 
+    //NEW SITEMAP INNER VIEW
+    public function sitemap_inner($searchword = '') {
+        $this->data['title'] = 'Sitemap - Aileensoul';
+        $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['searchword'] = $searchword;
+        $this->load->view('sitemap/sitemap-inner', $this->data);
+    }
+
+    public function sitemap_art_list() {
+        $this->load->view('sitemap/sitemap_art_list', $this->data);
+    }
+
+    //NEW SITEMAP INNER VIEW
+    public function get_artist_list() {
+        $perpage = 100;
+        $page = 1;
+        if (!empty($_GET["searchword"]) && $_GET["searchword"] != 'undefined') {
+            $searchword = $_GET["searchword"];
+        }
+        if (!empty($_GET["page_id"]) && $_GET["page_id"] != 'undefined') {
+            $page = $_GET["page_id"];
+        }
+        if (!empty($_GET["limit"]) && $_GET["limit"] != 'undefined') {
+            $perpage = $_GET["limit"];
+        }
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+        $result['artist_list'] = $this->sitemap_model->get_artist_list($searchword,$start,$perpage);
+        $result['total_record'] = $this->sitemap_model->get_artist_list_total($searchword);
+        echo json_encode($result);
+    }
+
+    //NEW SITEMAP INNER VIEW
     function get_blog_cat_id($category = ''){
         $sql = "SELECT id as cate_id  FROM ailee_blog_category where name ='". $category ."'";
         $query = $this->db->query($sql);
@@ -155,6 +190,56 @@ class Sitemap extends CI_Controller {
             return $result['cate_id'];
         }
         return false;
+    }
+
+    public function sitemap_company_list() {
+        $this->load->view('sitemap/sitemap_business_list', $this->data);
+    }
+
+    //NEW SITEMAP INNER VIEW
+    public function get_company_list() {
+        $perpage = 100;
+        $page = 1;
+        if (!empty($_GET["searchword"]) && $_GET["searchword"] != 'undefined') {
+            $searchword = $_GET["searchword"];
+        }
+        if (!empty($_GET["page_id"]) && $_GET["page_id"] != 'undefined') {
+            $page = $_GET["page_id"];
+        }
+        if (!empty($_GET["limit"]) && $_GET["limit"] != 'undefined') {
+            $perpage = $_GET["limit"];
+        }
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+        $result['company_list'] = $this->sitemap_model->get_company_list($searchword,$start,$perpage);
+        $result['total_record'] = $this->sitemap_model->get_company_list_total($searchword);
+        echo json_encode($result);
+    }
+
+    public function sitemap_job_list() {
+        $this->load->view('sitemap/sitemap_job_list', $this->data);
+    }
+
+    //NEW SITEMAP INNER VIEW
+    public function get_job_list() {
+        $perpage = 100;
+        $page = 1;
+        if (!empty($_GET["searchword"]) && $_GET["searchword"] != 'undefined') {
+            $searchword = $_GET["searchword"];
+        }
+        if (!empty($_GET["page_id"]) && $_GET["page_id"] != 'undefined') {
+            $page = $_GET["page_id"];
+        }
+        if (!empty($_GET["limit"]) && $_GET["limit"] != 'undefined') {
+            $perpage = $_GET["limit"];
+        }
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+        $result['job_list'] = $this->sitemap_model->get_job_list($searchword,$start,$perpage);
+        $result['total_record'] = $this->sitemap_model->get_job_list_total($searchword);
+        echo json_encode($result);
     }
 
 }

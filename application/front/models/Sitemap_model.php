@@ -12,7 +12,8 @@ class Sitemap_model extends CI_Model {
         $this->db->where(array('rp.status' => '1', 'rp.is_delete' => '0'));
         $query = $this->db->get();
         $result = $query->result_array();
-
+        echo $this->db->last_query();
+        exit;
         $newArray = array();
         foreach ($result as $key => $value) {
             $newArray[$value['city_name']][$key] = $value; // sort as per category name
@@ -171,6 +172,118 @@ class Sitemap_model extends CI_Model {
         $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // replace double --- in single -
 
         return preg_replace('/-+/', '-', $string); // Removes special chars.
+    }
+
+    function get_artist_list($searchword = '',$start = 0, $limit = 100){
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND art_name like '". $searchword ."'";
+        }
+        $sql = "SELECT *, CONCAT(art_name, ' ', art_lastname) as art_fullname
+                FROM ailee_art_reg 
+                WHERE status = '1'
+                AND art_step = '4' AND is_delete = '0'". $search_query ." ORDER BY art_id DESC";
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            // print_r($value['art_skill']);
+            // exit;
+            $sql = "SELECT group_concat(art_category) as category_name FROM ailee_art_category 
+                    WHERE category_id IN (". $value['art_skill'] .")";
+            $query = $this->db->query($sql);
+            $result_array[$key]['category_name'] = $query->row_array()['category_name'];
+        }
+        return $result_array;
+    }
+
+    public function get_artist_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND art_name like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_artist FROM ailee_art_reg 
+                WHERE status = '1' AND art_step = '4'"
+                . $search_query;
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    function get_company_list($searchword = '',$start = 0, $limit = 100){
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND company_name like '". $searchword ."'";
+        }
+        $sql = "SELECT bp.*,bt.business_name, IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug FROM ailee_business_profile bp
+                LEFT JOIN ailee_business_type bt on bt.type_id = bp.business_type
+                LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+                LEFT JOIN ailee_states st ON st.state_name = bp.state 
+                WHERE bp.status = '1'
+                AND business_step = '4' AND bp.is_deleted = '0'". $search_query ." ORDER BY business_profile_id DESC";
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_company_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND company_name like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_rec FROM ailee_business_profile bp
+                LEFT JOIN ailee_business_type bt on bt.type_id = bp.business_type
+                WHERE bp.status = '1'
+                AND business_step = '4' AND bp.is_deleted = '0'". $search_query ." ORDER BY business_profile_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+
+    function get_job_list($searchword = '',$start = 0, $limit = 100){
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND jt.name like '". $searchword ."'";
+        }
+        $sql = "SELECT rp.post_id,rp.city, jt.name as post_name, rp.post_id, 
+                rp.user_id, r.re_comp_name 
+                FROM ailee_rec_post rp 
+                LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
+                JOIN ailee_recruiter r ON rp.user_id = r.user_id 
+                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_job_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND jt.name like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_rec
+                FROM ailee_rec_post rp 
+                LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
+                JOIN ailee_recruiter r ON rp.user_id = r.user_id 
+                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
     }
 
 }

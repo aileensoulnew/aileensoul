@@ -13,9 +13,10 @@ $date = gmdate($format, $now + 30);
 header('Expires: ' . $date);
 header('Cache-Control: public, max-age=30');
 ?>
-<html lang="en">
+<html lang="en" ng-app="siteMapInnerApp" ng-controller="siteMapInnerController">
 	<head>
-		<title>Aileensoul</title>
+		<base href="<?php echo base_url();?>">
+		<title>Artist Sitemap</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
@@ -71,161 +72,10 @@ header('Cache-Control: public, max-age=30');
 		<div class="middle-section">
 			<div class="container">
 				<div class="sitemap">
-					<h1>Sitemap</h1>
-					<div class="site-box">
-						<h3>Member Name with Characters</h3>
-						<ul class="alphabet">
-							<li><a class="active" href="#">A</a></li>
-							<li><a href="#">b</a></li>
-							<li><a href="#">c</a></li>
-							<li><a href="#">d</a></li>
-							<li><a href="#">e</a></li>
-							<li><a href="#">f</a></li>
-							<li><a href="#">g</a></li>
-							<li><a href="#">h</a></li>
-							<li><a href="#">i</a></li>
-							<li><a href="#">j</a></li>
-							<li><a href="#">k</a></li>
-							<li><a href="#">l</a></li>
-							<li><a href="#">m</a></li>
-							<li><a href="#">n</a></li>
-							<li><a href="#">o</a></li>
-							<li><a href="#">p</a></li>
-							<li><a href="#">q</a></li>
-							<li><a href="#">r</a></li>
-							<li><a href="#">s</a></li>
-							<li><a href="#">t</a></li>
-							<li><a href="#">u</a></li>
-							<li><a href="#">v</a></li>
-							<li><a href="#">w</a></li>
-							<li><a href="#">x</a></li>
-							<li><a href="#">y</a></li>
-							<li><a href="#">z</a></li>
-						</ul>
-						<div class="fw pt20">
-							<h3>Member Name with Characters</h3>
-							<ul class="pagination">
-								<li><a href="#">Previous</a></li>
-								<li><a class="active" href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">. . .</a></li>
-								<li><a href="#">8</a></li>
-								<li><a href="#">9</a></li>
-								<li><a href="#">10</a></li>
-								<li><a href="#">11</a></li>
-								<li><a href="#">12</a></li>
-								<li><a href="#">. . .</a></li>
-								<li><a href="#">45</a></li>
-								<li><a href="#">46</a></li>
-								<li><a href="#">Next</a></li>
-								
-							</ul>
-						</div>
-						<div class="fw pt20">
-							<ul class="mid-listing">
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Santhosh Kumar Varaganti (PHP Devloper)</a></li>
-								<li><a href="#">Vikalp Mangal (Designer)</a></li>
-								<li><a href="#">Dhaval Shah (Ceo Aileensoul)</a></li>
-								<li><a href="#">Nikunj Bhalodia (Tester)c</a></li>
-							</ul>
-						</div>
-					</div>
+					<h1>
+						<a href="<?php echo base_url().'sitemap'; ?>">Sitemap</a>
+					</h1>
+					<div ng-view></div>
 				</div>
 			</div>
 		</div>
@@ -245,5 +95,36 @@ header('Cache-Control: public, max-age=30');
 				});
 			})(jQuery);
 		</script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+		<script type="text/javascript">
+			var searchword = "<?php echo $searchword; ?>";
+			var base_url = "<?php echo base_url(); ?>";
+			var app = angular.module('siteMapInnerApp', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
+			app.filter('slugify', function () {
+			    return function (input) {
+			        if (!input)
+			            return;
+			        // make lower case and trim
+			        var slug = input.toLowerCase().trim();
+			        // replace invalid chars with spaces
+			        slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
+			        // replace multiple spaces or hyphens with a single hyphen
+			        slug = slug.replace(/[\s-]+/g, '-');
+			        if(slug[slug.length - 1] == "-")
+			        {            
+			            slug = slug.slice(0,-1);
+			        }
+			        return slug;
+			    };
+			});
+		</script>
+		<script src="<?php echo base_url('assets/js/webpage/sitemap/sitemapinner.js?ver=' . time()); ?>"></script>
 	</body>
 </html>
