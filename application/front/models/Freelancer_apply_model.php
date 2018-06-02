@@ -1008,7 +1008,7 @@ class Freelancer_apply_model extends CI_Model {
     {
         $sql = "SELECT GROUP_CONCAT(DISTINCT(s.skill)) as post_skill FROM (ailee_freelancer_post fp, ailee_skill s) WHERE FIND_IN_SET(s.skill_id, fp.post_skill) AND fp.is_delete = '0' AND fp.status = '1' AND fp.post_id = $post_id GROUP BY fp.post_skill ORDER BY fp.post_id";
         $query = $this->db->query($sql);
-        $result_array = $query->result_array();
+        $result_array = $query->row_array();
         return $result_array['post_skill'];
     }
 
