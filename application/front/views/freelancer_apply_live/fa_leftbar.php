@@ -32,12 +32,12 @@
     </div>
 
     <div class="left-search-box">
-        <div class="accordion" id="accordion2">
+        <div class="accordion" id="accordion1">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" aria-expanded="true">Work Type</a></h3>
+                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">Work Type</a></h3>
                 </div>
-                <div id="collapseOne" class="accordion-body collapse in" aria-expanded="true" style="">
+                <div id="collapseOne" class="accordion-body collapse in">
                     <ul class="search-listing">
                         <li>
                             <label class="control control--checkbox">Hourly
@@ -62,9 +62,9 @@
         <div class="accordion" id="accordion2">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" aria-expanded="true">Posting Period</a></h3>
+                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsetwo" aria-expanded="true">Posting Period</a></h3>
                 </div>
-                <div id="collapseOne" class="accordion-body collapse in" aria-expanded="true" style="">
+                <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
                     <ul class="search-listing">
                         <li>
                             <label class="control control--checkbox">Today
@@ -106,9 +106,9 @@
         <div class="accordion" id="accordion3">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo" aria-expanded="true">Required Experience</a></h3>
+                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsethree" aria-expanded="true">Required Experience</a></h3>
                 </div>
-                <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
+                <div id="collapsethree" class="accordion-body collapse in" aria-expanded="true" style="">
                     <div class="accordion-inner">
                         <ul class="search-listing">
                             <li>

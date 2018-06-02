@@ -16,7 +16,7 @@
                                     <a href="<?php echo base_url(); ?>freelance-jobs/{{jf.category_slug}}" target="_self">
                                         <div class="cus-cat-middle">
                                         <img src="<?php echo FA_CATEGORY_IMG_PATH;?>{{jf.category_image}}">
-                                        <p>{{jf.category_name | capitalize}}<span>({{jf.count}})</span></p>
+                                        <p><span>{{jf.category_name | capitalize}}</span><span>({{jf.count}})</span></p>
                                         </div>
                                     </a>
                                 </li>                                    

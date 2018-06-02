@@ -156,7 +156,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     <span class="exp">
                                         <span>
                                             <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
-                                            Skils: <span dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
+                                            <span dd-text-collapse dd-text-collapse-max-length="35" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
                                             </span>
                                         </span>
                                     </span>
@@ -168,8 +168,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </p>
                             </div>
                             <div class="all-job-bottom">
-                                <span>Applied Persons: {{applypost.ShortListedCount}}</span>
-                                <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
+                                <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: {{applypost.ShortListedCount}}</span>
+                                <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: {{applypost.AppliedCount}}</span></span>
                                 <p class="pull-right" ng-if="applypost.apply_post == 1">
                                     <a href="javascript:void(0);" class="btn4 applied">Applied</a>
                                 </p>

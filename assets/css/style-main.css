@@ -3011,7 +3011,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     .logo{
         font-size:24px;
     }
-    .no-login .logo{margin-bottom: 10px;}
+    .no-login .logo{margin-bottom: 5px;}
     .mid-trns{
         width:100%
     }
