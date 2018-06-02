@@ -1582,9 +1582,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var fileInput1 = document.getElementById("fileInput1").value;
             //console.log(fileInput1);
 
-            if (fileCountSim == 0 && description == '')
+            if (fileCountSim == 0 && (description == '' || description == undefined))
             {
-                $('#posterrormodal .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to post.1");
+                $('#posterrormodal .mes').html("<div class='pop_content'>This post appears to be blank. Please write or attach (photos, videos, audios, pdf) to post.");
                 $('#posterrormodal').modal('show');
                 $(document).on('keydown', function (e) {
                     if (e.keyCode === 27) {
