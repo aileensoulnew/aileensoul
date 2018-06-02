@@ -399,7 +399,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     <div class="second circle-1">
                                         <div>
                                             <strong></strong>
-                                            <a href="<?php echo base_url('job/basic-information') ?>" class="edit_profile_job" title="Edit profile">Edit Profile</a>
+                                            <a href="<?php echo base_url('job-profile/basic-information') ?>" class="edit_profile_job" title="Edit profile">Edit Profile</a>
                                         </div>
                                     </div>
                                 </div>

@@ -214,7 +214,7 @@
                                                         <strong></strong>
 
 
-                                                        <a href="<?php echo base_url('job/basic-information') ?>" class="edit_profile_job" title="Edit profile">Edit Profile</a>
+                                                        <a href="<?php echo base_url('job-profile/basic-information') ?>" class="edit_profile_job" title="Edit profile">Edit Profile</a>
 
 
 

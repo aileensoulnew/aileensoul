@@ -181,7 +181,7 @@ class Job extends MY_Controller {
             if ($updatedata) {
                 redirect('job-profile/qualification', refresh);
             } else {
-                redirect('job/basic-information', refresh);
+                redirect('job-profile/basic-information', refresh);
             }
         }
     }

@@ -21,6 +21,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link href="<?php echo base_url('8/ninja-slider.css'); ?>" rel="stylesheet" type="text/css" />
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style type="text/css">
             .show-more-container {
                 overflow: hidden;
@@ -140,8 +142,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+        </div>        
         <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>

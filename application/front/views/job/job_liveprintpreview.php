@@ -265,7 +265,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                <p class="mob-edit-pro">
                   
                     
-                  <a href="<?php echo base_url('job/basic-information')?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
+                  <a href="<?php echo base_url('job-profile/basic-information')?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
                   
                     
                </p>
@@ -571,7 +571,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                  <div class="profile-job-profile-menu">
                                     <ul class="clearfix">
                                        <div class="text-center">
-                                          <a href="<?php echo base_url('job/qualification');?>">Click Here To fill Up Education Detail</a>
+                                          <a href="<?php echo base_url('job-profile/qualification');?>">Click Here To fill Up Education Detail</a>
                                        </div>
                                     </ul>
                                  </div>
@@ -909,7 +909,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                  <div class="profile-job-profile-menu">
                                     <ul class="clearfix">
                                        <div class="text-center">
-                                          <a href="<?php echo base_url('job/project');?>">Click Here To fill Up Project And Training / Internship Detail</a>
+                                          <a href="<?php echo base_url('job-profile/project');?>">Click Here To fill Up Project And Training / Internship Detail</a>
                                        </div>
                                     </ul>
                                  </div>
@@ -1313,7 +1313,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                        <div class="profile-job-profile-menu">
                                           <ul class="clearfix">
                                              <div class="text-center">
-                                                <a href="<?php echo base_url('job/work-experience');?>">Click Here To fill Up Work Experience Detail</a>
+                                                <a href="<?php echo base_url('job-profile/work-experience');?>">Click Here To fill Up Work Experience Detail</a>
                                              </div>
                                           </ul>
                                        </div>
@@ -1633,7 +1633,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                      <div class="second circle-1">
                         <div>
                            <strong></strong>
-                           <a href="<?php echo base_url('job/basic-information')?>" class="edit_profile_job">Edit Profile
+                           <a href="<?php echo base_url('job-profile/basic-information')?>" class="edit_profile_job">Edit Profile
                            </a>
                         </div>
                      </div>

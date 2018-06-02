@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-db">
         <?php echo $header_profile ?>
@@ -532,8 +534,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+        </div>        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>

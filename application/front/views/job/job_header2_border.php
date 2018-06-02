@@ -73,7 +73,7 @@
                      </span>
                      <a href="<?php echo base_url('job/resume/'.$slugdata[0]['slug']); ?>" title="View Profile"><span class="icon-view-profile edit_data"></span>
                      <span> View Profile </span></a>
-                     <a href="<?php echo base_url('job/basic-information'); ?>" title="Edit Profile"><span class="icon-edit-profile edit_data"></span>  
+                     <a href="<?php echo base_url('job-profile/basic-information'); ?>" title="Edit Profile"><span class="icon-edit-profile edit_data"></span>  
                      <span>Edit Profile </span></a>
                      <?php
                         $userid = $this->session->userdata('aileenuser');

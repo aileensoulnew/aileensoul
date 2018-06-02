@@ -425,7 +425,7 @@ $route['blog/(:any)'] = "blog/index/$1";
 
 //JOB ROUTES SETTINGS
 
-$route['job'] = "job_live/index";
+//$route['job'] = "job_live/index";
 $route['job-search'] = "job_live/index";
 $route['job/category/(:any)'] = "job_live/category/$1";
 $route['job/city/(:any)'] = "job_live/city/$1";

@@ -524,7 +524,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
                                                     <div class="profile-job-profile-menu">
                                                         <ul class="clearfix">
                                                             <div class="text-center">
-                                                                <a href="<?php echo base_url('job/qualification'); ?>">Click Here To fill Up Education Detail</a>
+                                                                <a href="<?php echo base_url('job-profile/qualification'); ?>">Click Here To fill Up Education Detail</a>
                                                             </div>
                                                         </ul>
                                                     </div>
@@ -849,7 +849,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
                                                     <div class="profile-job-profile-menu">
                                                         <ul class="clearfix">
                                                             <div class="text-center">
-                                                                <a href="<?php echo base_url('job/project'); ?>">Click Here To fill Up Project And Training / Internship Detail</a>
+                                                                <a href="<?php echo base_url('job-profile/project'); ?>">Click Here To fill Up Project And Training / Internship Detail</a>
                                                             </div>
                                                         </ul>
                                                     </div>
@@ -1239,7 +1239,7 @@ if ($job[0]['work_job_industry']) {
                                                                     <div class="profile-job-profile-menu">
                                                                         <ul class="clearfix">
                                                                             <div class="text-center">
-                                                                                <a href="<?php echo base_url('job/work-experience'); ?>">Click Here To fill Up Work Experience Detail</a>
+                                                                                <a href="<?php echo base_url('job-profile/work-experience'); ?>">Click Here To fill Up Work Experience Detail</a>
                                                                             </div>
                                                                         </ul>
                                                                     </div>
