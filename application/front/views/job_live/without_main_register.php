@@ -113,7 +113,7 @@
                     
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Still Cant Find the Right Job Don't Worry We Are Here to Help</h2>
-                        <p><a href="#" class="btn5">Create Job Profile</a></p>
+                        <p><a href="<?php echo base_url('job-profile/create-account'); ?>" class="btn5">Create Job Profile</a></p>
                     </div>
                 </div>
             </div>

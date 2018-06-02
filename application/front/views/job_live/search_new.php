@@ -281,7 +281,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
                 <div class="middle-part">
                     <div class="page-title">
-                        <h3>Search Result</h3>
+                        <h3>Search for <?php echo $q.($l != "" ? " jobs in ".$l : '') ; ?></h3>
                     </div>
                     <div class="user_no_post_avl ng-scope" ng-if="job_search.length == 0">
                         <div class="user-img-nn">
