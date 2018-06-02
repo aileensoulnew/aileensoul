@@ -37,10 +37,15 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <style type="text/css">
           .ui-autocomplete {
-            background: #fff;
-            z-index: 99999!important;
-        }
-</style>
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+          }
+        * html .ui-autocomplete {
+            height: 100px;
+          }
+        </style>
     </head>
     <body class="profile-main-page">
         <?php 
@@ -70,7 +75,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <?php } ?>  
             
             <div class="container pt20">
-                <div class="left-part">
+                <?php echo $fa_leftbar; ?>
+                <div style="display: none;" class="left-part">
                     <form name="job-company-filter" id="job-company-filter">
                         
                         <div class="left-search-box">
@@ -79,8 +85,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </div>
                             <ul class="search-listing custom-scroll">
                                 <li ng-repeat="category in FAFields">
-                                    <label class="control control--checkbox"><span ng-bind="category.industry_name | capitalize"></span>
-                                        <input type="checkbox" class="category-filter" ng-model="cat_fil" name="category[]" ng-value="{{category.industry_id}}" ng-change="applyJobFilter()"/>
+                                    <label class="control control--checkbox"><span ng-bind="category.category_name | capitalize"></span>
+                                        <input type="checkbox" class="category-filter" ng-model="cat_fil" name="category[]" ng-value="{{category.category_id}}" ng-change="applyJobFilter()"/>
                                         <div class="control__indicator"></div>
                                     </label>
                                 </li>
@@ -532,7 +538,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             var fa_profile_set = "<?php echo $this->freelance_apply_profile_set; ?>";
             var app = angular.module('freelancerApplySearch', ['ui.bootstrap']);
             $(document).ready(function(){
-                $(window).scrollTop(500);
+                $(window).scrollTop(450);
             });
             $(document).ready(function($) {
                 $("li.user-id label").click(function(e){

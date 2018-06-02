@@ -13,10 +13,10 @@
                         <div class="location-box">
                             <ul data-aos="fade-up" data-aos-duration="1000">
                                 <li ng-repeat="jf in jobByField">
-                                    <a href="<?php echo base_url(); ?>freelance-jobs/{{jf.industry_slug}}" target="_self">
+                                    <a href="<?php echo base_url(); ?>freelance-jobs/{{jf.category_slug}}" target="_self">
                                         <div class="cus-cat-middle">
-                                        <img src="<?php echo JOB_INDUSTRY_IMG_PATH;?>{{jf.industry_image}}">
-                                        <p>{{jf.industry_name | capitalize}}<span>({{jf.count}})</span></p>
+                                        <img src="<?php echo FA_CATEGORY_IMG_PATH;?>{{jf.category_image}}">
+                                        <p>{{jf.category_name | capitalize}}<span>({{jf.count}})</span></p>
                                         </div>
                                     </a>
                                 </li>                                    
