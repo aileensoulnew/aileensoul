@@ -88,7 +88,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             </div>
 
             <div class="user-midd-section">
-                <div class="container art_container padding-360 manage-post-custom">
+                <div class="container art_container mobp0 manage-post-custom">
 
                     <div class="profile-box-custom left_side_posrt">
                         <div class="full-box-module business_data">

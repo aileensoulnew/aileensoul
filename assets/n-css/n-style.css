@@ -2303,6 +2303,8 @@ input[type=text] {
 .job-detail .job-top-detail.free-apply-img{width:100%; padding-left:0;}
 .old-no-login #paddingtop_fixed{padding-top:57px !important;}
 
+.old-no-login #contact_per{display:none;}
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
@@ -2694,6 +2696,10 @@ input[type=text] {
 	.search-business-top .job-top-detail h5{font-size:16px; line-height:1.5;}
 	.search-business .search-detail li{font-size:14px;}
 	.old-no-login #paddingtop_fixed{padding-top:54px !important;}
+	
+	/***  bus art  ***/
+	.mob-inner-page{width:100%; border-width:1px 0 1px 0; border-radius:0;}
+	.post-design-box{border-width:1px 0 1px 0; border-radius:0;}
 }
 @media screen and (max-width: 639px) {
 	/***  all profile  ***/
