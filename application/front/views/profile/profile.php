@@ -239,7 +239,7 @@ color: #1b8ab9 !important;}
                                             <input tabindex="10" name="university" type="text" placeholder="Enter your University / Collage / school " id="university" value="<?php echo $studentData['university_name']; ?>"/><span id="fullname-error"></span><?php echo form_error('university'); ?>
                                         </fieldset>
                                         <fieldset class="fw">
-                                            <label >Who are you?</label>
+                                            <label >Interested field</label>
                                             <input tabindex="10" name="studjob_title" type="text" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." id="studjob_title" value="<?php echo $studentData['name']; ?>"/><span id="fullname-error"></span><?php echo form_error('studjob_title'); ?>
                                         </fieldset>
                                         <fieldset class="hs-submit full-width">
