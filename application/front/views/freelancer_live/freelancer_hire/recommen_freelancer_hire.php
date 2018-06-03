@@ -127,7 +127,7 @@
                                             </li>                                        
                                         </ul>
                                     </div>
-                                    <p class="text-right p10"><a href="#">More Categories</a></p>
+                                    <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
                                 </div>
                                 <div class="left-search-box list-type-bullet">
                                     <div class="">

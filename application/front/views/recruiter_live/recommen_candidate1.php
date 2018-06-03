@@ -158,7 +158,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <p class="text-right p10"><a href="#">More Cities</a></p>
+                                <!-- <p class="text-right p10"><a href="#">More Cities</a></p> -->
                             </div>
                             <div class="left-search-box list-type-bullet">
                                 <div class="">

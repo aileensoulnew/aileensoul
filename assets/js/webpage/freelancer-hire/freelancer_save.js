@@ -143,7 +143,7 @@ function remove_user(abc)
 {
     $.ajax({
         type: 'POST',
-        url: base_url + "freelancer/remove_save",
+        url: base_url + "freelancer_hire_live/remove_save",
         data: 'save_id=' + abc,
         success: function (data) {
             $('#' + 'removeapply' + abc).html(data);

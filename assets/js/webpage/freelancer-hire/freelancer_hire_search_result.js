@@ -187,7 +187,7 @@ function save_user(abc)
     var saveid = document.getElementById("hideenuser" + abc);
     $.ajax({
         type: 'POST',
-        url:  base_url + "freelancer/save_user1",
+        url:  base_url + "freelancer_hire_live/save_user1",
         data: 'user_id=' + abc + '&save_id=' + saveid.value,
         success: function (data) {
             $('.' + 'saveduser' + abc).html(data).addClass('saved');

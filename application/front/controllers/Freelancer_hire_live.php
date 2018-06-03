@@ -2845,7 +2845,7 @@ public function save_user() {
 	}
 }
 
-public function save_user1($id, $save_id) {
+public function save_user1($id = "", $save_id = "") {
 	$id = $_POST['user_id'];
 	$save_id = $_POST['save_id'];
 
