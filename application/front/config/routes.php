@@ -243,7 +243,7 @@ $route['freelance-employer/search/(:any)/(:any)'] = "search_live/freelancer_hire
 
 
 
-$route['freelance-hire/edit-projects/(:any)'] = "freelancer_hire_live/freelancer_edit_post/$1";
+$route['freelance-employer/edit-projects/(:any)'] = "freelancer_hire_live/freelancer_edit_post/$1";
 $route['freelance-hire/reactivate'] = "freelancer_hire_live/reactivate";
 $route['freelance-hire/deactivate'] = "freelancer_hire_live/deactivate_hire";
 $route['freelance-employer/applied-freelancers/(:any)'] = "freelancer_hire_live/freelancer_apply_list/$1";
@@ -762,10 +762,10 @@ $route['artist/pdf-view/(:any)'] = "artist/pdf_display/$1";
 $route['business-profile/pdf-view/(:any)'] = "business_profile/pdf_display/$1";
 
 $route['(:any)/post/(:any)'] = 'user_post/post_detail/$2';
-$route['(:any)/photo/(:any)'] = 'user_post/post_detail/$2';
-$route['(:any)/video/(:any)'] = 'user_post/post_detail/$2';
+$route['(:any)/photos/(:any)'] = 'user_post/post_detail/$2';
+$route['(:any)/videos/(:any)'] = 'user_post/post_detail/$2';
 $route['(:any)/pdf/(:any)'] = 'user_post/post_detail/$2';
-$route['(:any)/audio/(:any)'] = 'user_post/post_detail/$2';
+$route['(:any)/audios/(:any)'] = 'user_post/post_detail/$2';
 
 $route['(:any)/contacts'] = 'Userprofile';
 $route['(:any)/following'] = 'Userprofile';

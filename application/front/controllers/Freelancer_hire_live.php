@@ -1333,7 +1333,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 			<p class="pull-right">';
 			if ($retur == '' && $id == 'null') {
 				$return_html .= '<a title="Remove" href="javascript:void(0);" class="btn4" onclick="removepopup(' . $post['post_id'] . ')">Remove</a>';
-				$return_html .= '<a title="Edit" href="' . base_url('freelance-hire/edit-projects/' . $post['post_id']) . '" class="btn4")">Edit</a>';
+				$return_html .= '<a title="Edit" href="' . base_url('freelance-employer/edit-projects/' . $post['post_id']) . '" class="btn4")">Edit</a>';
 
 				$join_str[0]['table'] = 'freelancer_post_reg';
 				$join_str[0]['join_table_id'] = 'freelancer_post_reg.user_id';

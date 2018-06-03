@@ -131,7 +131,7 @@
 									<h3>Job Profile</h3>
 									<ul>
 										<li><a href="<?php echo base_url().'login' ?>">Login  </a></li>
-										<li><a href="<?php echo base_url().'job-profile/signup' ?>">Create Account </a></li>
+										<li><a href="<?php echo base_url().'job-profile/create-account' ?>">Create Account </a></li>
 										<li><a href="<?php echo base_url().'job-search' ?>">Job Search </a></li>
 										<li><a href="<?php echo base_url().'jobs-by-location' ?>">View Jobs by Location </a></li>
 										<li><a href="<?php echo base_url().'jobs-by-skills' ?>">View Jobs by Skills</a></li>

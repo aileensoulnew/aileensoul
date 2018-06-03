@@ -1,4 +1,4 @@
-<?php //echo $this->uri->segment(2);exit; ?>
+<?php //echo $this->uri->segment(1);exit; ?>
 <!DOCTYPE html>
 <html lang="en" ng-app="userProfileApp" ng-controller="userProfileController">
     <head>
