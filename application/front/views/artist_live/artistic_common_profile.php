@@ -7,7 +7,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 <?php } ?>
 
 
-<div class="container" id="paddingtop_fixed">
+<div class="container fw-991" id="paddingtop_fixed">
 	<div class="row" id="row1" style="display:none;">
 		<div class="col-md-12 text-center">
 			<div id="upload-demo" ></div>
@@ -62,7 +62,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 		</div>
 	</div>
 </div>
-<div class="container tablate-container">
+<div class="container tablate-container fw-991">
 	<div class="profile-photo">
 		<div class="buisness-menu other-profile-menu">
 			<!--PROFILE PIC START-->

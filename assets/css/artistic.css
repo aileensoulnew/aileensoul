@@ -2117,12 +2117,10 @@ label.cameraButton:active {
     color: #000;
 }
 .business_data_table .business_data_td1 {
-    width: 50px;
+    width: 30px;
 }
 .business_data_td1 {
-    padding-bottom: 13px;
-    padding-left: 10px;
-    padding-right: 12px;
+    padding-bottom: 8px;
 }
 .business_data_td1 i {
     color: #1b8ab9;

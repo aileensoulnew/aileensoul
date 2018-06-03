@@ -52,19 +52,19 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         </style>
         
     </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push">
+    <body class="page-container-bg-solid page-boxed pushmenu-push old-no-login">
         <?php if($this->session->userdata('aileenuser')){ 
             echo $artistic_header2;
         }else{ ?>
             <header>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-3 left-header text-center fw-479">
+                        <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
                             <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver='.time()) ?>" alt="logo"></a>
                         </div>
-                        <div class="col-md-8 col-sm-9 right-header fw-479 text-center">
-                            <div class="btn-right pull-right">
-                                <a href="javascript:void(0);" onclick="login_data();" class="btn7" title="Login">Login</a>
+                        <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+                            <div class="btn-right">
+                                <a href="javascript:void(0);" onclick="login_data();" class="btn4" title="Login">Login</a>
                                 <a href="javascript:void(0);" onclick="register_profile();" class="btn2" title="Create an account">Create Artistic Account</a>
                             </div>
                         </div>
@@ -92,9 +92,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             </div>
 
             <div class="user-midd-section">
-                <div class="container">
-                     <div class="row">
-                    <div class="col-md-4 hidden-sm hidden-xs">
+                <div class="container mobp0">
+                    <div class="">
+                    <div class="profile-box-custom left_side_posrt">
                         <div class="full-box-module business_data">
                             <div class="profile-boxProfileCard  module">
                                 <div class="head_details1">
@@ -233,12 +233,12 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         <!-- user pdf  end-->
                     </div>
 
-                      <div class="col-md-6 col-sm-12">
+                      <div class="custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
                             <div class="art-all-post">
                             </div>
                             <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
                         </div>
-                  </div>
+					</div>
                 </div>
             </div>
         </section>
