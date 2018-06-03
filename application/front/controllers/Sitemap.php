@@ -242,4 +242,54 @@ class Sitemap extends CI_Controller {
         echo json_encode($result);
     }
 
+    public function sitemap_freelancer_list() {
+        $this->load->view('sitemap/sitemap_freelance_list', $this->data);
+    }
+
+    //NEW SITEMAP INNER VIEW
+    public function get_freelancer_list() {
+        $perpage = 100;
+        $page = 1;
+        if (!empty($_GET["searchword"]) && $_GET["searchword"] != 'undefined') {
+            $searchword = $_GET["searchword"];
+        }
+        if (!empty($_GET["page_id"]) && $_GET["page_id"] != 'undefined') {
+            $page = $_GET["page_id"];
+        }
+        if (!empty($_GET["limit"]) && $_GET["limit"] != 'undefined') {
+            $perpage = $_GET["limit"];
+        }
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+        $result['freelancer_list'] = $this->sitemap_model->get_freelancer_list($searchword,$start,$perpage);
+        $result['total_record'] = $this->sitemap_model->get_freelancer_list_total($searchword);
+        echo json_encode($result);
+    }
+
+    public function sitemap_member_list() {
+        $this->load->view('sitemap/sitemap_member_list', $this->data);
+    }
+
+    //NEW SITEMAP INNER VIEW
+    public function get_member_list() {
+        $perpage = 100;
+        $page = 1;
+        if (!empty($_GET["searchword"]) && $_GET["searchword"] != 'undefined') {
+            $searchword = $_GET["searchword"];
+        }
+        if (!empty($_GET["page_id"]) && $_GET["page_id"] != 'undefined') {
+            $page = $_GET["page_id"];
+        }
+        if (!empty($_GET["limit"]) && $_GET["limit"] != 'undefined') {
+            $perpage = $_GET["limit"];
+        }
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+        $result['member_list'] = $this->sitemap_model->get_member_list($searchword,$start,$perpage);
+        $result['total_record'] = $this->sitemap_model->get_member_list_total($searchword);
+        echo json_encode($result);
+    }
+
 }

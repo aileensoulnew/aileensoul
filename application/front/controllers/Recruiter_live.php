@@ -221,7 +221,7 @@ class Recruiter_live extends MY_Controller {
         }
         $sql = "SELECT count(*) as totalpost FROM aileensoul.ailee_rec_post where user_id = '$userid'";
         $query = $this->db->query($sql);        
-        $this->data['login_user_totalpost'] = $query->row_array()->totalpost;
+        $this->data['login_user_totalpost'] = $query->row_array()['totalpost'];
 
         //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE END
         //FETCH RECRUITER DATA

@@ -73,7 +73,7 @@ header('Cache-Control: public, max-age=30');
 			<div class="container">
 				<div class="sitemap">
 					<h1>
-						<a href="<?php echo base_url().'sitemap'; ?>">Sitemap</a>
+						<a href="<?php echo base_url().'sitemap'; ?>" target="self">Sitemap</a>
 					</h1>
 					<div ng-view></div>
 				</div>
@@ -107,23 +107,6 @@ header('Cache-Control: public, max-age=30');
 			var searchword = "<?php echo $searchword; ?>";
 			var base_url = "<?php echo base_url(); ?>";
 			var app = angular.module('siteMapInnerApp', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
-			app.filter('slugify', function () {
-			    return function (input) {
-			        if (!input)
-			            return;
-			        // make lower case and trim
-			        var slug = input.toLowerCase().trim();
-			        // replace invalid chars with spaces
-			        slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
-			        // replace multiple spaces or hyphens with a single hyphen
-			        slug = slug.replace(/[\s-]+/g, '-');
-			        if(slug[slug.length - 1] == "-")
-			        {            
-			            slug = slug.slice(0,-1);
-			        }
-			        return slug;
-			    };
-			});
 		</script>
 		<script src="<?php echo base_url('assets/js/webpage/sitemap/sitemapinner.js?ver=' . time()); ?>"></script>
 	</body>

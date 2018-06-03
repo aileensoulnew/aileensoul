@@ -257,9 +257,11 @@ class Sitemap_model extends CI_Model {
             $search_query = " AND jt.name like '". $searchword ."'";
         }
         $sql = "SELECT rp.post_id,rp.city, jt.name as post_name, rp.post_id, 
-                rp.user_id, r.re_comp_name 
+                IFNULL(jt.name, rp.post_name) as string_post_name,
+                rp.user_id, r.re_comp_name, rp.user_id as post_user_id, c.city_name 
                 FROM ailee_rec_post rp 
                 LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
+                LEFT JOIN ailee_cities c on c.city_id = rp.city
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
                 WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
         if($limit != ""){
@@ -281,6 +283,80 @@ class Sitemap_model extends CI_Model {
                 LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
                 WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    } 
+
+    function get_freelancer_list($searchword = '',$start = 0, $limit = 100){
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND post_name like '". $searchword ."'";
+        }
+        $sql = "SELECT fp.*, c.*,fp.user_id as post_user_id 
+                FROM ailee_freelancer_post fp
+                LEFT JOIN ailee_category c on fp.post_field_req = c.category_id 
+                WHERE fp.is_delete = '0' AND fp.status = '1'"
+                . $search_query ." ORDER BY post_id DESC";
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_freelancer_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND post_name like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_rec 
+                FROM ailee_freelancer_post fp
+                LEFT JOIN ailee_category c on fp.post_field_req = c.category_id 
+                WHERE fp.is_delete = '0' AND fp.status = '1'"
+                . $search_query ." ORDER BY post_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    function get_member_list($searchword = '',$start = 0, $limit = 100){
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND first_name like '". $searchword ."'";
+        }
+        $sql = "SELECT u.*, CONCAT(first_name, ' ', last_name) as fullname, 
+                jt.name as designaation 
+                FROM aileensoul.ailee_user u
+                LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
+                LEFT JOIN ailee_job_title jt on up.designation = jt.title_id
+                WHERE user_slug != ''"
+                . $search_query ." ORDER BY u.user_id DESC";
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_member_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND first_name like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_rec 
+                FROM aileensoul.ailee_user u
+                LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
+                LEFT JOIN ailee_job_title jt on up.designation = jt.title_id
+                WHERE user_slug != ''"
+                . $search_query ." ORDER BY u.user_id DESC";
+
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
         return $result_array;
