@@ -109,20 +109,20 @@ header("Pragma: no-cache"); // HTTP/1.0
 	            }
             </style>
     </head>
-    <body class="blog-page blog">
+    <body class="blog-page blog old-no-login">
         <div class="main-inner">
             <div class="web-header">
 	            <header class="custom-header">
 	                <div class="container">
 	                    <div class="row">
-	                        <div class="col-md-4 col-sm-3">
+	                        <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
 	                            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
 	                        </div>
-	                        <div class="col-md-8 col-sm-9" style="padding-top: 5px;">
-	                            <div class="btn-right pull-right">
+	                        <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+	                            <div class="btn-right">
 	                                <?php if (!$this->session->userdata('aileenuser')) { ?>
-	                                    <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-	                                    <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
+	                                    <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
+	                                    <a href="<?php echo base_url('registration'); ?>" class="btn2">Create an account</a>
 	                                <?php } ?>
 	                            </div>
 	                        </div>
@@ -256,7 +256,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						</div>
 	    					</div>
 	    					<div class="">
-	    						<ul class="pagination pull-right">
+	    						<ul class="pagination pull-right pb0 pt20">
 	    						  	<li class="prev">
 	    						  		<?php
 	                                        if (count($blog_all) != 0) {

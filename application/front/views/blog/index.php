@@ -135,7 +135,7 @@ header("Pragma: no-cache"); // HTTP/1.0
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
     </head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
-    <body class="blog no-login blog-page">
+    <body class="blog no-login blog-page old-no-login">
         <?php }else{?>
          <body class="blog">
         <?php }?>
@@ -144,14 +144,14 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <header class="custom-header">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4 col-sm-3">
+                            <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
                                 <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
                             </div>
-                            <div class="col-md-8 col-sm-9" style="padding-top: 5px;">
-                                <div class="btn-right pull-right">
+                            <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+                                <div class="btn-right">
                                     <?php if (!$this->session->userdata('aileenuser')) { ?>
-                                        <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-                                        <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
+                                        <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
+                                        <a href="<?php echo base_url('registration'); ?>" class="btn2">Create an account</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -283,7 +283,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                             , {{ cat_name }}
                                         </span> 
                                     </a>
-                                    <span>{{ blog.created_date_formatted }}</span> 
+                                    <span class="blog-date">{{ blog.created_date_formatted }}</span> 
                                     <span>{{ blog.name }}</span> 
                                     <span>{{ blog.total_comment }} comments</span>
                                 </p>
@@ -308,7 +308,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 </p>
                             </div>
                         </div>                                             
-                        <div class="">
+                        <div class="fw pt20 text-center">
                             <pagination 
                               ng-model="currentPage"
                               total-items="total_record"

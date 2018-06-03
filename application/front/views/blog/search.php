@@ -121,7 +121,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         <?php } ?>
     </head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
-        <body class="blog no-login blog-page">
+        <body class="blog no-login blog-page old-no-login">
     <?php }else{?>
          <body class="blog">
     <?php }?>
@@ -129,14 +129,14 @@ header("Pragma: no-cache"); // HTTP/1.0
             <header>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-sm-3">
+                        <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
                             <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
                         </div>
-                        <div class="col-md-8 col-sm-9" style="padding-top: 5px;">
-                            <div class="btn-right pull-right">
+                        <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+                            <div class="btn-right">
                                 <?php if (!$this->session->userdata('aileenuser')) { ?>
-                                    <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-                                    <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
+                                    <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
+                                    <a href="<?php echo base_url('registration'); ?>" class="btn2">Create an account</a>
                                 <?php } ?>
                             </div>
                         </div>
@@ -320,7 +320,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <div class="blog_main_o">
                                     <div class="common-form">
                                         <div class="job-saved-box">
-                                            <h3>Search results for 
+                                            <h3>Search results of 
                                             <?php echo '' . $search_keyword . ''; ?></h3>
                                             <div class="contact-frnd-post">
                                                 <div class="job-contact-frnd1">
@@ -340,7 +340,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     }//if end
                                     else {
                                 ?>
-                                    <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px;">Search results for 
+                                    <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;">Search results of 
                                         <?php echo '' . $search_keyword . ''; ?></h3>
                                     <div class="job-contact-frnd"> 
                                     </div> 
@@ -403,7 +403,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <input type="hidden" class="perpage_record" value="4">
                 <div class="container">
                     <div class="custom-user-list">
-                        <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px;">Search results for 
+                        <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;">Search results of 
                         <?php echo '' . $search_keyword . ''; ?></h3>
                         <div class="blog-box" ng-repeat="blog in blogPost">
                             <div class="blog-left-img">
@@ -449,7 +449,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 </p>
                             </div>
                         </div>                                             
-                        <div class="">
+                        <div class="fw text-center pt20">
                             <pagination 
                               ng-model="currentPage"
                               total-items="total_record"
