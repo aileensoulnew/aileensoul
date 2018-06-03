@@ -1,4 +1,4 @@
-<div class="custom_footer_left fullwidth">
+<div class="custom_footer_left fullwidth fw">
     <div class="fl">
         <ul class="cus-full1">
             <li><a href="<?php echo base_url('about-us'); ?>" target="_blank"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> About Us </a></li>
@@ -25,21 +25,24 @@
             <li><a href="<?php echo base_url('advertise-with-us'); ?>" target="_blank"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> Advertise With Us</a></li>
 
             <li><a id="trigger" class="click-profiles" style="" href="javascript:void(0)"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> Profiles <i class="fa fa-sort-asc" aria-hidden="true"></i></a>
-                <div class="click-nav"><ul id="drop" class="left-ftr-profiles">
-                        <li><a href="<?php echo base_url('how-to-use-job-profile-in-aileensoul'); ?>" target="_blank">        Job Profiles</a></li>
+                <div class="click-nav">
+                    <ul id="drop" class="left-ftr-profiles">
+                        <li><a href="<?php echo base_url('how-to-use-job-profile-in-aileensoul'); ?>" target="_blank">  Job Profiles</a></li>
                         <li><a href="<?php echo base_url('how-to-use-recruiter-profile-in-aileensoul'); ?>" target="_blank">Recruiter Profile</a></li>
                         <li><a href="<?php echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>" target="_blank">Freelance Profile</a></li>
                         <li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>" target="_blank">Business Profile</a></li>
                         <li><a href="<?php echo base_url('how-to-use-artistic-profile-in-aileensoul'); ?>" target="_blank">Artistic Profile</a></li>
-                    </ul></div>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
 </div>
 
 
+
 <script>
-    $('#trigger').click(function (event) {
+    $(document).on('click', '#trigger', function (event) {
         event.stopPropagation();
         $('#drop').toggle();
     });

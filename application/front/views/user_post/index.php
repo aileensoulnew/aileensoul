@@ -1091,7 +1091,7 @@
             </div>
         </div>
 
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>

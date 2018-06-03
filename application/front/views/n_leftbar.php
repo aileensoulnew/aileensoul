@@ -123,7 +123,7 @@
         </ul>
     </div>
 
-    <div class="custom_footer_left fw">
+    <!-- <div class="custom_footer_left fw">
         <div class="">
             <ul>
                 <li>
@@ -158,5 +158,8 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
+     
+        <?php echo $left_footer; ?>
+  
 </div>

@@ -93,6 +93,7 @@ class Main extends CI_Controller {
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);

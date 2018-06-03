@@ -1179,6 +1179,7 @@ class User_post extends MY_Controller {
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
