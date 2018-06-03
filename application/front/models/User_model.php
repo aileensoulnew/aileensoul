@@ -159,6 +159,7 @@ class User_model extends CI_Model {
         $this->db->join('user usr', 'usr.user_id = us.user_id', 'left');
         $this->db->join('university u', 'u.university_id = us.university_name', 'left');
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = us.interested_fields', 'left');
         $this->db->where("us.user_id =" . $user_id);
         $query = $this->db->get();
         //echo $this->db->last_query();exit;

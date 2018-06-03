@@ -561,4 +561,22 @@ class Registration extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function myfunction()
+    {
+        $sql = "SELECT first_name,last_name,user_id FROM `ailee_user` WHERE user_slug = ''";
+        $query = $this->db->query($sql);        
+        
+        $userdata = $query->result_array();
+        foreach ($userdata as $key => $value) {
+
+            $userslug = $this->setuser_slug(trim($value['first_name']) . '-' . trim($value['last_name']), 'user_slug', 'user');
+            $data = array(
+                'user_slug' => $userslug                
+            );
+           
+            $this->common->update_data($data, 'user', 'user_id', $value['user_id']);            
+        }
+        echo "done";
+    }
+
 }
