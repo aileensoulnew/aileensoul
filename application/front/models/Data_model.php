@@ -156,6 +156,23 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
+    function searchUniversityListNew($search_keyword = '') {
+        $this->db->select('u.university_name as value')->from('university u');
+        if ($search_keyword != '') {
+            $this->db->like('u.university_name', $search_keyword);
+        }
+        $this->db->where('u.status', '1');
+        $this->db->where('u.is_delete', '0');
+        $this->db->where('u.is_other', '0');
+        $query = $this->db->get();
+        if ($search_keyword != '') {
+            $result_array = $query->result_array();
+        } else {
+            $result_array = array();
+        }
+        return $result_array;
+    }
+
     function degreeList() {
         $this->db->select('d.degree_id,d.degree_name')->from('degree d');
         $this->db->where('d.status', '1');
@@ -177,6 +194,22 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
+    function searchDegreeListNew($search_keyword = '') {
+        $this->db->select('d.degree_name as value')->from('degree d');
+        if ($search_keyword != '') {
+            $this->db->like('d.degree_name', $search_keyword);
+        }
+        $this->db->where('d.status', '1');
+        $this->db->where('d.is_delete', '0');
+        $this->db->where('d.is_other', '0');
+        $query = $this->db->get();
+        if ($search_keyword != '') {
+            $result_array = $query->result_array();
+        } else {
+            $result_array = array();
+        }
+        return $result_array;
+    }
     function searchDegreeList($search_keyword = '') {
         $this->db->select('d.degree_id,d.degree_name')->from('degree d');
         if ($search_keyword != '') {

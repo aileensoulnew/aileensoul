@@ -337,15 +337,19 @@ class User_post_model extends CI_Model {
         elseif ($getUserStudentData['interested_fields'] != "") {
             $job_name = $this->user_model->getAnyJobTitle($getUserStudentData['interested_fields']);
         }
+        
 
         $job_sql = "";
-        if(!empty($job_name) && isset($job_name['job_name']) && $job_name['job_name'] != ""){
+        if(isset($job_name) && !empty($job_name) && isset($job_name['job_name']) && $job_name['job_name'] != ""){
             $job_name = explode(" ", $job_name['job_name']);
             foreach ($job_name as $key => $value) {
-                $job_sql .= " name LIKE '%".$value."%' OR";
+                if($value != ""){                    
+                    $job_sql .= " name LIKE '%".$value."%' OR";
+                }
             }
             $job_sql = trim($job_sql," OR");
         }
+        
         
         $oppPostIds = "";
         $quePostIds = "";
@@ -484,7 +488,7 @@ class User_post_model extends CI_Model {
 
         $query = $this->db->query($sql);
         //$query = $this->db->get();
-        //echo $this->db->last_query();exit;
+        // echo $this->db->last_query();exit;
         $user_post = $query->result_array();
 
         foreach ($user_post as $key => $value) {

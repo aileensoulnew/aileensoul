@@ -82,4 +82,16 @@ class General_data extends MY_Controller {
         echo json_encode($getQueList);
     }
 
+    public function searchDegreeListNew() {
+        $degreeSearch = $_GET['q'];
+        $getDegreeList = $this->data_model->searchDegreeListNew($degreeSearch);
+        echo json_encode($getDegreeList);
+    }
+
+    public function searchUniversityListNew() {
+        $universitySearch = $_GET['q'];
+        $getUniversityList = $this->data_model->searchUniversityListNew($universitySearch);
+        echo json_encode($getUniversityList);
+    }
+
 }
