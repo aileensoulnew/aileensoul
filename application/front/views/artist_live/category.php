@@ -5,7 +5,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="<?php echo base_url(); ?>artist/category"><span class="hidden-xs">Artist by</span> Categories</a></li>
                     <li><a href="<?php echo base_url(); ?>artist/location"><span class="hidden-xs">Artist by</span> Location</a></li>
-                    <li><a href="<?php echo base_url(); ?>artist"><span class="hidden-xs">Artist</span></a></li>
+                    <li><a href="<?php echo base_url(); ?>artist">Artist</a></li>
                 </ul>
             </div>
             <div class="all-detail-box">

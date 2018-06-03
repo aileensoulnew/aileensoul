@@ -26,7 +26,7 @@
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page bus-by-cus">
         <?php $page = (isset($page)) ? $page : ''; ?>
         <?php $session_user_id = $this->session->userdata('aileenuser'); ?>
         <?php
@@ -53,7 +53,7 @@
 
 
 
-            <div class="container pt20">
+            <div class="container pt20 mobp0 mobmt15">
                 <div ng-view></div>
             </div>
         </div>        

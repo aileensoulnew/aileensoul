@@ -3603,7 +3603,7 @@ div .comment{
 }
 .post-design-box .post-design-desc a{
     color:#000;
-    font-size:14px
+    font-size:13px
 }
 .profile-job-post-location-name-rec .designation_rec ul li{
     margin-bottom:0
@@ -4596,7 +4596,6 @@ body.reg-form{
     .more-image{
         width:264px
     }
-	.profile-head-text{padding-top:0; margin-top:-5px;}
 	#contact_per{margin-top:25px;}
 }
 @media screen and (max-width:800px){
@@ -5442,9 +5441,6 @@ body.reg-form{
         position:relative;
         padding-left:0!important
     }
-    .post-design-name ul li .post_dot{
-        font-size:14px
-    }
     .four-image,.three-image,.two-images{
         height:150px
     }
@@ -5529,10 +5525,10 @@ body.reg-form{
         padding-right:15px
     }
     .profile-head-text{
-        margin-top:8px
+        margin-top:0px
     }
     .profile-head-text_dg{
-        line-height:18px
+        line-height:18px !important;
     }
     .bui-menu-profile .profile-head-text_dg a{
         font-size:12px
@@ -5680,7 +5676,7 @@ body.reg-form{
         padding-left:70px!important
     }
     .other-profile-menu .profile-main-box-buis-menu li a{
-        padding:3px 5px 12px!important
+        padding:7px 5px 12px!important
     }
     .post-design-name{
         width:74%
@@ -5966,7 +5962,7 @@ body.reg-form{
         min-height:106px
     }
     .buisness-menu.other-profile-menu::before{
-        bottom:89px
+        bottom:69px
     }
     .file-preview{
         width:194px
@@ -5982,6 +5978,7 @@ body.reg-form{
     }
     .all-box ul.audio-sec li{width: 230px;}
     .user-midd-section .tab-content  .all-box li .mejs__audio{width: 230px !important;}
+	.other-profile-menu .profile-main-box-buis-menu li a{padding:3px 5px 12px !important;}
 }
 @media screen and (max-width:319px){
     .editor-content{

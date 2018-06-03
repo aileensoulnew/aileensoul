@@ -1455,6 +1455,7 @@ svg path{
 .right-header .dropdown.user-id .dropdown-menu li a:hover i{color:#fff;}
 
 /***  custom suggestion box dropdown  ***/
+.ui-widget-content .ui-state-focus{background:none !important;}
 .ui-widget-content{background:#fff; padding:0 !important;}
 .ui-menu .ui-menu-item{padding:0px !important;}
 .ui-menu .ui-menu-item:hover{background:#e8f3f8 !important;}

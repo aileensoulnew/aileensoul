@@ -1,4 +1,4 @@
-<div class="container pt20">
+<div class="container pt20 mobp0">
     <div class="custom-user-list">
         <div class="list-box-custom border-none">
             <div class="">
@@ -6,7 +6,7 @@
                     <ul class="nav nav-tabs">
                         <li><a href="<?php echo base_url(); ?>artist/category"><span class="hidden-xs">Artist by</span> Categories</a></li>
                         <li class="active"><a href="<?php echo base_url(); ?>artist/location"><span class="hidden-xs">Artist by</span> Location</a></li>
-                        <li><a href="<?php echo base_url(); ?>artist"><span class="hidden-xs">Artist</a></li>
+                        <li><a href="<?php echo base_url(); ?>artist">Artist</a></li>
                     </ul>
                 </div>
                 <div class="all-detail-box">
