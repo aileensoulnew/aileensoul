@@ -391,10 +391,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                 </div>
 
-            </div>   
-   
-    <!-- Model Popup Open -->
-	<!-- mobile filter  -->
+				<!-- mobile filter  -->
 		<div class="mob-filter" data-target="#filter" data-toggle="modal">
 			<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
 
@@ -605,6 +602,11 @@ l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
             </div>
         </div>
 	<!-- end mobile filter  -->
+				
+            </div>   
+   
+    <!-- Model Popup Open -->
+	
 	
     <!-- Register -modal  -->
         <div class="modal fade message-box login register-model" id="job_reg" role="dialog">

@@ -2271,7 +2271,8 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 
 /***  end 404 page  ***/
 /***  filter  ***/
-.mob-filter{position:fixed; right:15px; bottom:15px; width:50px; height:50px; border:1px solid transparent; background:#fff; box-shadow:0 0 2px 1px #d2d2d2; padding:8px; border-radius:100%; cursor:pointer; display:none;}
+.mob-filter{position:fixed; right:15px; bottom:55px; width:50px; height:50px; border:1px solid transparent; background:#fff; box-shadow:0 0 2px 1px #d2d2d2; padding:8px; border-radius:100%; cursor:pointer; display:none;}
+.new-ld-page .mob-filter{bottom:15px;}
 .mob-filter svg path{
 	fill: #1b8ab9;
 }
@@ -2984,9 +2985,9 @@ input[type=text] {
 	.custom-user-box .custom-user-detail{width:51%;}
 	.error-main-box{width:80%;}
 	.all-job-bottom .hw-479 > span{display:block;}
-	.all-job-bottom{padding:0 10px;}
+	.all-job-bottom{padding:5px 10px;}
 	.all-job-bottom .hw-479 .pl20{padding-left:0;}
-	.all-job-bottom p .btn4{margin-top:7px;}
+	.all-job-bottom p .btn4{/*margin-top:7px;*/}
 }
 @media screen and (max-width: 320px) {
 	.reg-form-cus .login .form-group select{margin-right: 9px;}
@@ -2994,8 +2995,8 @@ input[type=text] {
 .post-box-bottom ul li:nth-child(2){display:none;}
 .articles-cs{display:none;}
 .media-tab ul li:first-child{display:none;}
-.right-header ul > li:nth-child(3){display:none;}
-.right-header ul > li:nth-child(4){display:none;}
+.right-header > ul > li:nth-child(3){display:none;}
+.right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul >li:nth-child(3){display:none;}
 .mob-bottom-menu ul >li:nth-child(4){display:none;}
 .mob-bottom-menu li{width:33.33%;}
