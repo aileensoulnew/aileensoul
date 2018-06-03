@@ -243,11 +243,8 @@
                     </div>
 
                 </div>
-
-            </div>   
-   
-    <!-- Model Popup Open -->
-	<div>
+				
+		<div>
 			<div class="mob-filter" data-target="#filter" data-toggle="modal">
 				<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
 					<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
@@ -271,7 +268,7 @@
 					-29 29 c-38 37 -82 39 -116 4z m265 -855 l0 -210 -210 0 -210 0 0 210 0 210
 					210 0 210 0 0 -210z"/>
 					</g>
-					</svg>
+				</svg>
 			</div>
 		</div>
 		<div id="filter" class="modal mob-modal fade" role="dialog">
@@ -286,6 +283,11 @@
                 </div>
             </div>
         </div>
+				
+    </div>   
+   
+    <!-- Model Popup Open -->
+	
     
         <!-- Bid-modal  -->
         <div class="modal message-box biderror" id="bidmodal" role="dialog">

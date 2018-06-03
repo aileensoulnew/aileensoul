@@ -2718,6 +2718,8 @@ input[type=text] {
 	.old-no-login .right-header{padding-top:0;}
 	.old-no-login .btn-right{padding-top:0;}
 	
+	.search-mob-block a{padding-left:0;}
+	
 	/***  bus art  ***/
 	.mob-inner-page{width:100%; border-width:1px 0 1px 0; border-radius:0;}
 	.post-design-box{border-width:1px 0 1px 0; border-radius:0;}
@@ -2999,4 +3001,4 @@ input[type=text] {
 .right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul >li:nth-child(3){display:none;}
 .mob-bottom-menu ul >li:nth-child(4){display:none;}
-.mob-bottom-menu li{width:33.33%;}
+.mob-bottom-menu li{width:33.33% !important;}

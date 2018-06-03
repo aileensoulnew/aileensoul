@@ -201,8 +201,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
 
             </div>
-        </div>
-		<div>
+        
+			<div>
 			<div class="mob-filter" data-target="#filter" data-toggle="modal">
 				<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
 					<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
@@ -241,6 +241,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
             </div>
         </div>
+			
+		</div>
+		
         <!-- Register -modal  -->
         <div class="modal fade message-box login register-model" id="job_reg" role="dialog">
             <div class="modal-dialog modal-lm" >

@@ -173,9 +173,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-		<div>
+			
+			<div>
 			<div class="mob-filter" data-target="#filter" data-toggle="modal">
 				<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
 					<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
@@ -253,6 +252,10 @@
                 </div>
             </div>
         </div>
+
+	   </div>
+
+		
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> 
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
