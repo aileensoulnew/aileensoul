@@ -48,7 +48,7 @@
         <?php echo $search_banner;  
         } ?>
         
-            <div class="container pt20">
+            <div class="container pt20 mobp0 mobmt15">
                 <div class="left-part">
                     <!-- TOP CATEGORIES FILTER -->
                     <div class="left-search-box list-type-bullet">
