@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page recruiter-main">
        <?php echo $header_profile; ?>
@@ -65,11 +67,12 @@
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Grow Your Business with a Remote Team</h2>
                         <p>
-                            <?php if(!$isfreelancerhireactivate){ ?>
+                            <a href="#" class="btn5">Create Freelance Employer Profile</a>
+                            <?php /*if(!$isfreelancerhireactivate){ ?>
                                 <a href="#" class="btn5 hide">Create Freelance Employer Profile</a>
                             <?php } else{ ?>
                                 <a href="<?php echo base_url('freelance-hire/reactivateacc'); ?>" class="btn5">Reactive Freelance Employer Profile</a>
-                            <?php } ?>
+                            <?php }*/ ?>
                         </p>
                     </div>
                 </div>
@@ -420,6 +423,7 @@
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>

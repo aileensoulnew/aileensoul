@@ -83,7 +83,7 @@
                     
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Grow Your Business with a Remote Team</h2>
-                        <p><a href="#" class="btn5">Create Freelance Employer Account</a></p>
+                        <p><a href="<?php echo base_url('freelance-employer/create-account'); ?>" class="btn5">Create Freelance Employer Account</a></p>
                     </div>
                 </div>
             </div>
