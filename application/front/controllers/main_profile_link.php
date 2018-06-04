@@ -82,6 +82,11 @@
         /*Code for business profile link end*/
          $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="'. base_url("/") .'" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="'. $this->artist_profile_link .'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.  $this->business_profile_link .'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.  $this->job_profile_link .'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.$this->recruiter_profile_link.'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.base_url('freelance-profile').'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
 
+         $this->data['job_right_profile_link'] = $this->job_profile_link;
+         $this->data['recruiter_right_profile_link'] = $this->recruiter_profile_link;
+         $this->data['freelance_right_profile_link'] = base_url('freelance-profile');
+         $this->data['business_right_profile_link'] = $this->business_profile_link;
+         $this->data['artist_right_profile_link'] = $this->artist_profile_link;
 
         // Check freelancer is active or not and generate uel for create freelancer Search_banner
         $this->data['isdeactivatefreelancer'] = false;
@@ -90,4 +95,6 @@
         if ($freelancerpost_deactive) {
             $this->data['isdeactivatefreelancer'] = true;
         }
+
+        $this->data['right_profile_view'] = $this->load->view('right_profile', $this->data, TRUE);
 ?>
