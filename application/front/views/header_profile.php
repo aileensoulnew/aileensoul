@@ -33,10 +33,10 @@ if($browser == "Firefox")
             <div class="row">
 
                 <div class="col-md-6 col-sm-6 left-header">
-                    <!--<h2 class="logo"><a ng-click="goMainLink('<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>');" title="Aileensoul"><img ng-src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a></h2>-->
+                    <!--<h2 class="logo"><a ng-click="goMainLink('<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>');" title="Aileensoul"><img ng-src="<?php echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a></h2>-->
                     <h2 class="logo">
-                        <a ng-href="<?php echo base_url(); ?>" title="Aileensoul" target="_self"><img ng-src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a>
-                        <!-- <a ng-href="<?php //echo base_url(); ?>" title="Aileensoul" target="_self"><img ng-src="<?php // echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a> -->
+                        <a ng-href="<?php echo base_url(); ?>" title="Aileensoul" target="_self"><img ng-src="<?php echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a>
+                        <!-- <a ng-href="<?php //echo base_url(); ?>" title="Aileensoul" target="_self"><img ng-src="<?php // echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a> -->
                     </h2>
                     <?php
                         $first_segment = $this->uri->segment(1);
@@ -56,7 +56,7 @@ if($browser == "Firefox")
                         <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
                             
                             <li>
-                                <a ng-href="<?php echo base_url() ?>" title="Opportunity" target="_self"><img ng-src="<?php echo base_url('assets/n-images/op.png?ver=' . time()) ?>" alt="Opportunity"></a>
+                                <a ng-href="<?php echo base_url() ?>" title="Opportunity" target="_self"><img ng-src="<?php echo base_url('assets/n-images/op.png') ?>" alt="Opportunity"></a>
                             </li>
                             <li id="add-contact" class="dropdown">
                                 <a href="javascript:void(0);" title="Contact Request" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" ng-click="header_contact_request()"><img ng-src="<?php echo base_url('assets/n-images/add-contact.png') ?>" alt="Contact Request">
@@ -67,7 +67,7 @@ if($browser == "Firefox")
                                         Contact Request <a href="<?php echo base_url('contact-request') ?>" class="pull-right">See All</a>
                                     </div>
                                     <div class="fw" id="contact_loader"  style="display:none; text-align:center;">
-                                        <img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/>
+                                        <img src="<?php echo base_url('assets/images/loader.gif') ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/>
                                     </div>
                                     <div class="content custom-scroll">
                                         <ul class="dropdown-data add-dropdown">
@@ -127,7 +127,7 @@ if($browser == "Firefox")
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a href="javascript:void(0);" title="Messages" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
+                                <a href="javascript:void(0);" title="Messages" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png') ?>" alt="Messages">
                                     <span class="noti-box" style="display:none;">1</span>
                                 </a>
                                 <div class="dropdown-menu">
@@ -171,7 +171,7 @@ if($browser == "Firefox")
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/noti.png?ver=' . time()) ?>" alt="Notification"></a>
+                                <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification"></a>
 
                                 <div class="dropdown-menu">
                                     <div class="dropdown-title">
@@ -283,7 +283,7 @@ if($browser == "Firefox")
 		<div class="header animated fadeInDownBig">
             <div class="container">
                 <div class="left-header">
-                    <h2 class="logo"><a href="#"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png?ver=' . time()) ?>"></a></h2>
+                    <h2 class="logo"><a href="#"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png') ?>"></a></h2>
                     <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
 					<div class="search-mob-block">
 						<div class="">
@@ -599,7 +599,7 @@ if($browser == "Firefox")
 		</div>
 	</nav>
 </div>
-<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>" />
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <script>
    var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
     showRight = document.getElementById( 'showRight' ),
@@ -635,5 +635,5 @@ if($browser == "Firefox")
 <script>
         var app = angular.module('headerApp', []);
 </script>     
-<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-<script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
+<script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/classie.js') ?>"></script>
