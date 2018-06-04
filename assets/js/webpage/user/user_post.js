@@ -745,9 +745,15 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     function getUserPost(pg) {
      
         $('#loader').show();
+        if(pg == ""){
+            $('#main_loader').show();
+        }
         $http.get(base_url + "user_post/getUserPost?page=" + pg).then(function (success) {
             $('#loader').hide();
-           
+            if(pg == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             if (success.data) {
                 isLoadingData = false;
                 $('#progress_div').hide();
@@ -755,7 +761,6 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $('.sr-only').text(0+"%");
                 $scope.postData = success.data; 
             } else {
-                 
                 isLoadingData = true;
             }
 
