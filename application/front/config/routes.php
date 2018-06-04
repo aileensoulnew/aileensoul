@@ -500,7 +500,7 @@ $route['artist/art_information_insert'] = "artist/art_information_insert";
 $route['recruiter/create-account'] = "recruiter/recruiter_register_new";
 $route['recruiter/general-info'] = "recruiter/recruiter_register_new";
 $route['recruiter/educational-info'] = "recruiter/recruiter_register_new";
-$route['recruiter/signup'] = "recruiter/recruiter_register_new";
+$route['recruiter/registration'] = "recruiter/recruiter_register_new";
 
 $route['business-profile/create-account'] = "business_profile_live/business_register_new";
 $route['business-profile/basic-info'] = "business_profile_live/business_register_new";

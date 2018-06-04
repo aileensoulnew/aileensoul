@@ -49,7 +49,7 @@ app.config(function($routeProvider, $locationProvider) {
     }).when("/recruiter/educational-info", {
         templateUrl: base_url + "recruiter/recruiter_education_info",
         controller: 'recruiterEduInfoController'
-    }).when("/recruiter/signup", {
+    }).when("/recruiter/registration", {
         templateUrl: base_url + "recruiter/recruiter_create_profile",
         controller: 'recruiterCreateProfileController'
     })
@@ -317,7 +317,7 @@ app.controller('recruiterBasicInfoController', function($scope, $http, $location
                         angular.element('#basicinfo #submit').removeClass("form_submit");
                         $('#basic_info_ajax_load').hide();
                         var title = "Recruiter Registrion"
-                        var url = base_url + "recruiter/signup";
+                        var url = base_url + "recruiter/registration";
                         var obj = {
                             Title: title,
                             Url: url
@@ -457,7 +457,7 @@ app.controller('recruiterEduInfoController', function($scope, $http, $location, 
                         angular.element('#studentinfo #submit').removeClass("form_submit");
                         $('#student_info_ajax_load').hide();
                         var title = "Recruiter Registrion"
-                        var url = base_url + "recruiter/signup";
+                        var url = base_url + "recruiter/registration";
                         var obj = {
                             Title: title,
                             Url: url

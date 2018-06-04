@@ -77,7 +77,7 @@
                     
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Put a Full Stop at Your Employee Hunting Process</h2>
-                        <p><a href="#" class="btn5">Create Recruiter Account</a></p>
+                        <p><a href="<?php echo base_url('recruiter/create-account'); ?>" class="btn5">Create Recruiter Account</a></p>
                     </div>
                 </div>
             </div>
