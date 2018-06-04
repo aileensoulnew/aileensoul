@@ -446,6 +446,9 @@ class Recruiter_live extends MY_Controller {
         $this->data['keyword'] = str_replace("+"," ",$this->data['keyword']);
         $this->data['keyword1'] = str_replace("+"," ",$this->data['keyword1']);
 
+        $this->data['showser'] = str_replace(","," ",$this->data['keyword']);
+        $this->data['showser1'] = str_replace(","," ",$this->data['keyword1']);
+
         //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA START
         if ($this->session->userdata('aileenuser')) {
             $contition_array = array('user_id' => $this->session->userdata('aileenuser'), 'is_delete' => '0', 're_status' => '1');

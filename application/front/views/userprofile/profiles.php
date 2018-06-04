@@ -96,10 +96,10 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="left-box">
-                            <a ng-if="details_data.rp_step == '3'" ng-href="<?php echo base_url('recruiter/home'); ?>" target="_self">
+                            <a ng-if="details_data.rp_step == '3'" ng-href="<?php echo base_url('recommended-candidates'); ?>" target="_self">
                                 <img title="Recruiter Profile" src="<?php echo base_url() . "assets/n-images/i2.jpg"; ?>">
                             </a>
-                            <a ng-if="details_data.rp_status == '0' && details_data.rp_step == '3'" ng-href="<?php echo base_url('recruiter/home'); ?>" target="_self">
+                            <a ng-if="details_data.rp_status == '0' && details_data.rp_step == '3'" ng-href="<?php echo base_url('recommended-candidates'); ?>" target="_self">
                                 <img title="Recruiter Profile" src="<?php echo base_url() . "assets/n-images/i2.jpg"; ?>">
                             </a>
                             <a ng-if="details_data.rp_step == null" ng-href="<?php echo base_url('recruiter'); ?>" target="_self>
@@ -112,15 +112,15 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="right-box">
                             <h1>
-                                <a title="Recruiter Profile" ng-if="details_data.rp_step == '3'" ng-href="<?php echo base_url('recruiter/home'); ?>" target="_self">Recruiter Profile</a>
-                                <a title="Recruiter Profile" ng-if="details_data.rp_status == '0' && details_data.rp_step == '3'" ng-href="<?php echo base_url('recruiter/home'); ?>" target="_self">Recruiter Profile</a>
+                                <a title="Recruiter Profile" ng-if="details_data.rp_step == '3'" ng-href="<?php echo base_url('recommended-candidates'); ?>" target="_self">Recruiter Profile</a>
+                                <a title="Recruiter Profile" ng-if="details_data.rp_status == '0' && details_data.rp_step == '3'" ng-href="<?php echo base_url('recommended-candidates'); ?>" target="_self">Recruiter Profile</a>
                                 <a title="Recruiter Profile" ng-if="details_data.rp_step == null" ng-href="<?php echo base_url('recruiter'); ?>" target="_self">Recruiter Profile</a>
                             
                             </h1>
                             <p>Hire quality employees here.</p>
                             <div class="btns">
-                                <a title="Take me in"  ng-if="details_data.rp_step == '3'" class="btn-4" ng-href="<?php echo base_url('recruiter/home'); ?>" target="_self" >Take me in</a> 
-                                <a title="Take me in" ng-if="details_data.rp_status == '0' && details_data.rp_step == '3'" class="btn-4" ng-href="<?php echo base_url('recruiter/home'); ?>" target="_self">Active</a> 
+                                <a title="Take me in"  ng-if="details_data.rp_step == '3'" class="btn-4" ng-href="<?php echo base_url('recommended-candidates'); ?>" target="_self" >Take me in</a> 
+                                <!-- <a title="Take me in" ng-if="details_data.rp_status == '0' && details_data.rp_step == '3'" class="btn-4" ng-href="<?php echo base_url('recommended-candidates'); ?>" target="_self">Active</a> --> 
                                 <a title="Take me in" ng-if="details_data.rp_step == null" class="btn-4" ng-href="<?php echo base_url('recruiter'); ?>" target="_self">Register</a> 
                                 <a title="How it works" data-target="#rec-popup" data-toggle="modal" href="javascript:;" class="pl20 ml20 hew">How it works?</a>
                             </div>

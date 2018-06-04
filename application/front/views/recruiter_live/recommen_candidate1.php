@@ -216,14 +216,14 @@
                                 <h3>
                                     Search result of 
                                     <?php
-                                    if ($keyword != "" && (trim($keyword1) == "" || $keyword1)) {
-                                        echo '"' . $keyword . '"';
-                                    } elseif ($keyword == "" && $keyword1 != "") {
-                                        echo '"' . $keyword1 . '"';
+                                    if ($showser != "" && (trim($showser1) == "" || $showser1)) {
+                                        echo '"' . trim($showser,",") . '"';
+                                    } elseif ($showser == "" && $showser1 != "") {
+                                        echo '"' . trim($showser1,",") . '"';
                                     } else {
-                                        echo '"' . $keyword . '"';
+                                        echo '"' . trim($showser,",") . '"';
                                         echo " in ";
-                                        echo '"' . $keyword1 . '"';
+                                        echo '"' . trim($showser1,",") . '"';
                                     }
                                     ?>
                                 </h3>
