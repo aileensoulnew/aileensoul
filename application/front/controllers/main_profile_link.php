@@ -55,6 +55,9 @@
             $this->freelance_hire_profile_set = 0;
             $this->freelance_apply_profile_set = 0;
 
+            $this->data['freelance_hire_right_profile_link'] = base_url('freelance-employer');
+            $this->data['freelance_apply_right_profile_link'] = base_url('freelance-jobs');
+
             if(!empty($business_profile_count) &&  $business_profile_count[0]['business_step']==4){
                 $this->business_profile_link = base_url("business-profile");
                  $this->business_profile_set = 1;
@@ -73,10 +76,12 @@
             }
             if(!empty($freelancer_hire_profile_count) &&  count($freelancer_hire_profile_count)>0){
                 $this->freelance_hire_profile_link = base_url("hire-freelancer");
+                $this->data['freelance_hire_right_profile_link'] = $this->freelance_hire_profile_link;
                 $this->freelance_hire_profile_set = 1;
             }
              if(!empty($freelancer_apply_profile_count) &&  count($freelancer_apply_profile_count)>0){
                 $this->freelance_apply_profile_link = base_url("recommended-freelance-work");
+                $this->data['freelance_apply_right_profile_link'] = $this->freelance_apply_profile_link;
                 $this->freelance_apply_profile_set = 1;
             }
         /*Code for business profile link end*/
@@ -91,8 +96,6 @@
         $this->data['job_right_profile_link'] = $this->job_profile_link;
         $this->data['recruiter_right_profile_link'] = $this->recruiter_profile_link;
         $this->data['freelance_right_profile_link'] = base_url('freelance-profile');
-        $this->data['freelance_hire_right_profile_link'] = $this->freelance_hire_profile_link;
-        $this->data['freelance_apply_right_profile_link'] = $this->freelance_apply_profile_link;
         $this->data['business_right_profile_link'] = $this->business_profile_link;
         $this->data['artist_right_profile_link'] = $this->artist_profile_link;
         if($this->session->userdata('aileenuser')){
