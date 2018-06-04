@@ -26,13 +26,13 @@
                     <h2><span>Hire the Right Candidates</span><a class="pull-right btn-1" href="#">Post a Job</a></h2>
                 </div>
             </div>
-            <?php } else{ ?>
+            <?php } /*else{ ?>
                 <div class="sub-fix-head">
                     <div class="container">
                         <p><span>Do you want to reactive ? </span><a class="pull-right btn-1" href="<?php echo base_url('recruiter/reactivateacc'); ?>">Reactivate </a></p>
                     </div>
                 </div>
-            <?php } ?>
+            <?php }*/ ?>
 
             <!-- NEW HTML DESIGN -->
             <!-- STATIC TEXT OF HOW ABOUT PROFILE -->
@@ -59,11 +59,12 @@
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Put a Full Stop at Your Employee Hunting Process</h2>
                         <p>
-                            <?php if(!$isrecruiteractivate){ ?>
+                            <a href="#" class="btn5">Create Recruiter Profile</a></p>
+                            <?php /*if(!$isrecruiteractivate){ ?>
                                 <a href="#" class="btn5 hide">Create Recruiter Profile</a></p>
                             <?php } else{ ?>
                                 <a href="<?php echo base_url('recruiter/reactivateacc'); ?>" class="btn5 hide">Reactivate Recruiter Profile</a>
-                            <?php } ?>
+                            <?php }*/ ?>
                         </p>
                     </div>
                 </div>

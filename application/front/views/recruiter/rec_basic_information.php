@@ -14,11 +14,17 @@
            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
         <?php } ?>
+
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
-        <?php echo $header; ?>
+        <?php echo $recruiter_header2; ?>
         <?php if ($recdata['re_step'] == 3) { ?>
-            <?php echo $recruiter_header2_border; ?>
+            <?php //echo $recruiter_header2_border; ?>
         <?php } ?>
 
         <div id="preloader"></div>
@@ -171,8 +177,11 @@
                                         var data = <?php echo json_encode($demo); ?>;
                                         var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
                                         var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                                        var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <!-- FIELD VALIDATION JS END -->
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
          <?php
         if (IS_REC_JS_MINIFY == '0') {
             ?>

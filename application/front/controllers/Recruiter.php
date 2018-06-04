@@ -1262,7 +1262,7 @@ class Recruiter extends MY_Controller {
 	// REMOVE POST START
 	public function remove_post() {
 
-		$this->recruiter_apply_check();
+		//$this->recruiter_apply_check();
 
 		$postid = $_POST['post_id'];
 		$data = array(
@@ -1271,6 +1271,7 @@ class Recruiter extends MY_Controller {
 		);
 
 		$updatedata = $this->common->update_data($data, 'rec_post', 'post_id', $postid);
+		echo $postid;
 	}
 
 	// REMOVE POST END

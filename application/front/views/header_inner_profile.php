@@ -55,7 +55,7 @@ if($browser == "Firefox")
                         <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
                             
                             <li>
-                                <a ng-href="<?php echo base_url('opportunities') ?>" title="Opportunity" target="_self"><img ng-src="<?php echo base_url('assets/n-images/op.png?ver=' . time()) ?>" alt="Opportunity"></a>
+                                <a ng-href="<?php echo base_url() ?>" title="Opportunity" target="_self"><img ng-src="<?php echo base_url('assets/n-images/op.png?ver=' . time()) ?>" alt="Opportunity"></a>
                             </li>
                             <li id="add-contact" class="dropdown">
                                 <a href="javascript:void(0);" title="Contact Request" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_contact_request()"><img ng-src="<?php echo base_url('assets/n-images/add-contact.png') ?>" alt="Contact Request">
