@@ -65,7 +65,6 @@
                     <div class="modal-body">
                         <div class="mes">
                             <div id="popup-form">
-
                                 <div class="fw" id="profi_loader"  style="display:none; text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
                                 <form id ="userimage" name ="userimage" class ="clearfix" enctype="multipart/form-data" method="post">
                                     <div class="fw">
@@ -169,25 +168,25 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script src="<?php echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script>
         <script>
-                                var base_url = '<?php echo base_url(); ?>';
-                                //var user_slug = '<?php echo $this->uri->segment(2); ?>';
-                                var user_slug = '<?php echo $this->uri->segment(1); ?>';//Pratik
-                                var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                var item = '<?php echo $this->uri->segment(1); ?>';
-                                var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
-                                //var segment2 = '<?php echo $this->uri->segment(2); ?>';
-                                var segment2 = '<?php echo $this->uri->segment(1); ?>';//Pratik
-                                var user_data_slug = '<?php echo $userdata['user_slug']; ?>';
-                                var to_id = '<?php echo $to_id; ?>';
-                                var contact_value = '<?php echo $contact_value; ?>';
-                                var contact_status = '<?php echo $contact_status; ?>';
-                                var contact_id = '<?php echo $contact_id; ?>';
-                                var follow_value = '<?php echo $follow_value; ?>';
-                                var follow_status = '<?php echo $follow_status; ?>';
-                                var follow_id = '<?php echo $follow_id; ?>';
-                                var is_userPostCount = '<?php echo $is_userPostCount; ?>';
-                                var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                var app = angular.module("userProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
+            var base_url = '<?php echo base_url(); ?>';
+            //var user_slug = '<?php echo $this->uri->segment(2); ?>';
+            var user_slug = '<?php echo $this->uri->segment(1); ?>';//Pratik
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var item = '<?php echo $this->uri->segment(1); ?>';
+            var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
+            //var segment2 = '<?php echo $this->uri->segment(2); ?>';
+            var segment2 = '<?php echo $this->uri->segment(1); ?>';//Pratik
+            var user_data_slug = '<?php echo $userdata['user_slug']; ?>';
+            var to_id = '<?php echo $to_id; ?>';
+            var contact_value = '<?php echo $contact_value; ?>';
+            var contact_status = '<?php echo $contact_status; ?>';
+            var contact_id = '<?php echo $contact_id; ?>';
+            var follow_value = '<?php echo $follow_value; ?>';
+            var follow_status = '<?php echo $follow_status; ?>';
+            var follow_id = '<?php echo $follow_id; ?>';
+            var is_userPostCount = '<?php echo $is_userPostCount; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var app = angular.module("userProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_profile.js?ver=' . time()) ?>"></script>

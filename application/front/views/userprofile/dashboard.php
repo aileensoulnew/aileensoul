@@ -682,12 +682,12 @@
                     <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
                         <div class="item" id="item-{{contact.user_id}}">
                             <div class="post-img" ng-if="contact.user_image != ''">
-                                <a href="{{contact.user_slug}}" target="_self" >
+                                <a href="<?php echo base_url() ?>{{contact.user_slug}}" target="_self" >
                                     <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
                                 </a>
                             </div>
                             <div class="post-img" ng-if="contact.user_image == ''">
-                                <a href="{{contact.user_slug}}" target="_self" >
+                                <a href="<?php echo base_url() ?>{{contact.user_slug}}" target="_self" >
                                     <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                     <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                 </a>

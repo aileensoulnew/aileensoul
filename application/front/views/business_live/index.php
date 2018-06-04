@@ -122,10 +122,14 @@
                     <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
                         <h2>Grow Business Network Plus Be Found at Any Time by Listing Your Business Online</h2>
                         <p>
-                            <?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
-                                <a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
-                            <?php }else{ ?>
-                                <a class="btn5" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
+                            <?php if($this->session->userdata('aileenuser')){ ?>
+                                <?php if($isbusinessdeactivate == false || !($isbusinessdeactivate)){ ?>
+                                    <a class="btn5" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+                                <?php }else{ ?>
+                                    <a class="btn5" href="<?php echo base_url('business-profile/registration/business-information') ?>">Reactive Business Profile</a>
+                                <?php } ?>   
+                            <?php } else{ ?>   
+                                    <a class="btn5" href="<?php echo base_url('business-profile/create-account'); ?>">Create Business Profile</a>
                             <?php } ?>   
                         </p>
                     </div>
