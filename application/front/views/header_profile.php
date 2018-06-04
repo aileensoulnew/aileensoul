@@ -33,10 +33,10 @@ if($browser == "Firefox")
             <div class="row">
 
                 <div class="col-md-6 col-sm-6 left-header">
-                    <!--<h2 class="logo"><a ng-click="goMainLink('<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>');" title="Aileensoul"><img ng-src="<?php echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a></h2>-->
+                    <!--<h2 class="logo"><a ng-click="goMainLink('<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>');" title="Aileensoul"><img hide-until-good ng-src="<?php echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a></h2>-->
                     <h2 class="logo">
-                        <a ng-href="<?php echo base_url(); ?>" title="Aileensoul" target="_self"><img ng-src="<?php echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a>
-                        <!-- <a ng-href="<?php //echo base_url(); ?>" title="Aileensoul" target="_self"><img ng-src="<?php // echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a> -->
+                        <a ng-href="<?php echo base_url(); ?>" title="Aileensoul" target="_self"><img hide-until-good ng-src="<?php echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a>
+                        <!-- <a ng-href="<?php //echo base_url(); ?>" title="Aileensoul" target="_self"><img hide-until-good ng-src="<?php // echo base_url('assets/img/logo-name.png') ?>" alt="Aileensoul"></a> -->
                     </h2>
                     <?php
                         $first_segment = $this->uri->segment(1);
@@ -56,10 +56,10 @@ if($browser == "Firefox")
                         <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
                             
                             <li>
-                                <a ng-href="<?php echo base_url() ?>" title="Opportunity" target="_self"><img ng-src="<?php echo base_url('assets/n-images/op.png') ?>" alt="Opportunity"></a>
+                                <a ng-href="<?php echo base_url() ?>" title="Opportunity" target="_self"><img hide-until-good ng-src="<?php echo base_url('assets/n-images/op.png') ?>" alt="Opportunity"></a>
                             </li>
                             <li id="add-contact" class="dropdown">
-                                <a href="javascript:void(0);" title="Contact Request" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" ng-click="header_contact_request()"><img ng-src="<?php echo base_url('assets/n-images/add-contact.png') ?>" alt="Contact Request">
+                                <a href="javascript:void(0);" title="Contact Request" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" ng-click="header_contact_request()"><img hide-until-good ng-src="<?php echo base_url('assets/n-images/add-contact.png') ?>" alt="Contact Request">
                                     <span class="noti-box" style="display:block" ng-bind="contact_request_count" ng-if="contact_request_count != '0'"></span>
                                 </a>
                                 <div class="dropdown-menu">
@@ -75,11 +75,11 @@ if($browser == "Firefox")
                                                 <a href="<?php echo base_url(); ?>{{contact_request.user_slug}}" target="_self">
                                                     <div class="dropdown-database" ng-if="contact_request.status == 'pending'">
                                                         <div class="post-img" ng-if="contact_request.user_image != ''">
-                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact_request.user_image}}" alt="{{contact_request.fullname}}">
+                                                            <img hide-until-good ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact_request.user_image}}" alt="{{contact_request.fullname}}">
                                                         </div>
                                                         <div class="post-img" ng-if="contact_request.user_image == ''">
-                                                            <img ng-if="contact_request.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-if="contact_request.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            <img ng-if="contact_request.user_gender == 'M'" hide-until-good ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                            <img ng-if="contact_request.user_gender == 'F'" hide-until-good ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                         </div>
                                                         <div class="dropdown-user-detail">
                                                             <div class="user-name">
@@ -95,11 +95,11 @@ if($browser == "Firefox")
                                                 <a href="<?php echo base_url(); ?>{{contact_request.user_slug}}" target="_self">
                                                     <div class="dropdown-database confirm_div" ng-if="contact_request.status == 'confirm'">
                                                         <div class="post-img" ng-if="contact_request.user_image != ''">
-                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact_request.user_image}}" alt="{{contact_request.fullname}}">
+                                                            <img hide-until-good ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact_request.user_image}}" alt="{{contact_request.fullname}}">
                                                         </div>
                                                         <div class="post-img" ng-if="contact_request.user_image == ''">
-                                                            <img ng-if="contact_request.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-if="contact_request.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            <img ng-if="contact_request.user_gender == 'M'" hide-until-good ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                            <img ng-if="contact_request.user_gender == 'F'" hide-until-good ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                         </div>
                                                         <div class="dropdown-user-detail">
                                                             <b ng-bind="contact_request.fullname | capitalize"></b> confirmed your contact request.
@@ -127,7 +127,7 @@ if($browser == "Firefox")
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a href="javascript:void(0);" title="Messages" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png') ?>" alt="Messages">
+                                <a href="javascript:void(0);" title="Messages" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img hide-until-good ng-src="<?php echo base_url('assets/n-images/message.png') ?>" alt="Messages">
                                     <span class="noti-box" style="display:none;">1</span>
                                 </a>
                                 <div class="dropdown-menu">
@@ -140,7 +140,7 @@ if($browser == "Firefox")
                                                 <a href="#">
                                                     <div class="dropdown-database">
                                                         <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
+                                                            <img hide-until-good ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
                                                         </div>
                                                         <div class="dropdown-user-detail">
                                                             <h6><b>Atosa Ahmedabad</b></h6>
@@ -154,7 +154,7 @@ if($browser == "Firefox")
                                                 <a href="#">
                                                     <div class="dropdown-database">
                                                         <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
+                                                            <img hide-until-good ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
                                                         </div>
                                                         <div class="dropdown-user-detail">
                                                             <h6><b>Atosa Ahmedabad</b></h6>
@@ -171,7 +171,7 @@ if($browser == "Firefox")
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification"></a>
+                                <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img hide-until-good ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification"></a>
 
                                 <div class="dropdown-menu">
                                     <div class="dropdown-title">
@@ -183,7 +183,7 @@ if($browser == "Firefox")
                                                 <a href="#">
                                                     <div class="dropdown-database">
                                                         <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
+                                                            <img hide-until-good ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
                                                         </div>
                                                         <div class="dropdown-user-detail">
                                                             <h6>
@@ -202,7 +202,7 @@ if($browser == "Firefox")
                                                 <a href="#">
                                                     <div class="dropdown-database">
                                                         <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
+                                                            <img hide-until-good ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
                                                         </div>
                                                         <div class="dropdown-user-detail">
                                                             <h6>
@@ -223,7 +223,7 @@ if($browser == "Firefox")
                             </li>
                         
                         <li class="dropdown all">
-                            <a href="javascript:void(0);" title="All Profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_all_profile()"><img ng-src="<?php echo base_url('assets/n-images/all.png') ?>" alt="All Profile"></a>
+                            <a href="javascript:void(0);" title="All Profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_all_profile()"><img hide-until-good ng-src="<?php echo base_url('assets/n-images/all.png') ?>" alt="All Profile"></a>
                             <div class="dropdown-menu"></div>
                         </li>
                         <li class="dropdown user-id">
@@ -232,7 +232,7 @@ if($browser == "Firefox")
                                     if ($userData['user_image'] != '')
                                     {?>
                                         <span class="usr-img profile-brd" id="header-main-profile-pic">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
+                                            <img hide-until-good ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
                                         </span>
                                     <?php
                                     }
@@ -242,13 +242,13 @@ if($browser == "Firefox")
                                     <?php
                                             if($userData['user_gender'] == "M")
                                             {?>
-                                                <img ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img hide-until-good ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                             <?php
                                             }
                                             if($userData['user_gender'] == "F")
                                             {
                                             ?>
-                                                <img ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                <img hide-until-good ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                             <?php
                                             }
                                     ?>
@@ -283,7 +283,7 @@ if($browser == "Firefox")
 		<div class="header animated fadeInDownBig">
             <div class="container">
                 <div class="left-header">
-                    <h2 class="logo"><a href="#"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png') ?>"></a></h2>
+                    <h2 class="logo"><a href="#"><img hide-until-good ng-src="<?php echo base_url('assets/n-images/mob-logo.png') ?>"></a></h2>
                     <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
 					<div class="search-mob-block">
 						<div class="">
@@ -314,7 +314,7 @@ if($browser == "Firefox")
                                         if ($userData['user_image'] != '')
                                         { ?>
                                             <span class="usr-img profile-brd" id="header-main-profile-pic">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
+                                            <img hide-until-good ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
                                             </span>
                                         <?php
                                         }
@@ -324,13 +324,13 @@ if($browser == "Firefox")
                                             <?php
                                             if($userData['user_gender'] == "M")
                                             {?>
-                                                <img ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img hide-until-good ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                             <?php
                                             }
                                             if($userData['user_gender'] == "F")
                                             {
                                             ?>
-                                                <img ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                <img hide-until-good ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                             <?php
                                             }?>
                                             </span>

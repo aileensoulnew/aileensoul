@@ -3,6 +3,23 @@
 //      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
 //    }
 //});
+app.directive('hideUntilGood', function() {
+  return {
+    restrict: 'A',
+    multiElement: true,
+    link: function(scope, element, attrs) {
+      attrs.$observe('ngSrc', function (value) {
+        // fix where ngSrc doesn't update when blank
+        if (!value || value.length == 0) {
+          element.attr('src', value);
+        }
+        element.css("display", "none");
+      });
+      element.bind('load', function() {
+        element.css("display", "");
+      });
+    }
+  }});
 app.filter('capitalize', function () {
     return function (str) {
         if (str === undefined || !str || str == null) {
