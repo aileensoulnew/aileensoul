@@ -299,29 +299,31 @@ header("Pragma: no-cache"); // HTTP/1.0
 	                                <h3>You may also like</h3>
 	    						</div>
 	    						<div class="row pt20">
-	    							<div class="col-md-4 col-sm-4" ng-repeat="post in blog.related_post">
+	    							<div class="col-md-4 col-sm-12" ng-repeat="post in blog.related_post">
 	    								<div class="also-like-box">
-    										<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
-		    									<div class="rec-img">
+											<div class="rec-img">
+												<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
 	    											<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ post.image }}">
-		    									</div>
-    										</a>
-	    									<a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ (cat_name).toLowerCase() }}" ng-repeat="cat_name in post.blog_category_name track by $index">
-		                                        <span class="cat text-capitalize" ng-if="($index == 0)">
-		                                            {{ cat_name }}
-		                                        </span> 
-		                                        <span class="cat text-capitalize" ng-if="($index > 0)">
-		                                            , {{ cat_name }}
-		                                        </span> 
-		                                    </a>
-	    									<!-- <span class="onelinetext" title="{{ post.category_name}}">
-	    										{{ post.category_name}}
-	    									</span> -->
-	    									<p>
-	    										<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
-	    											{{ post.title }}
-	    										</a> 
-    										</p>
+												</a>
+											</div>
+											<div class="also-like-bottom">
+												<a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ (cat_name).toLowerCase() }}" ng-repeat="cat_name in post.blog_category_name track by $index">
+													<span class="cat text-capitalize" ng-if="($index == 0)">
+														{{ cat_name }}
+													</span> 
+													<span class="cat text-capitalize" ng-if="($index > 0)">
+														, {{ cat_name }}
+													</span> 
+												</a>
+												<!-- <span class="onelinetext" title="{{ post.category_name}}">
+													{{ post.category_name}}
+												</span> -->
+												<p>
+													<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
+														{{ post.title }}
+													</a> 
+												</p>
+											</div>
 	    								</div>
 	    							</div>
 	    						</div>
