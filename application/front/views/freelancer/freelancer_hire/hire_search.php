@@ -46,7 +46,7 @@
                         <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt"><div class="">
 
 
-                            <div class="all-profile-box">
+                            <div class="all-profile-box hidden">
                                 <div class="all-pro-head">
                                     <?php 
                                     if($userid){
@@ -150,7 +150,8 @@
                                     </li>
                                 </ul>
                             </div>
-
+                            <?php echo $right_profile_view; ?>
+                            
                             <?php echo $left_footer; ?>
 
 

@@ -167,7 +167,7 @@
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 
-                           <div class="all-profile-box">
+                            <div class="all-profile-box hidden">
                                 <div class="all-pro-head">
                                     <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All profiles">All</a></h4>
                                 </div>
@@ -214,7 +214,7 @@
                                     </li>
                                 </ul>
                             </div>
-
+                            <?php echo $right_profile_view; ?>
                     </div>
                     
                 </div>

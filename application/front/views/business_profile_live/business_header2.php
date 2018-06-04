@@ -588,7 +588,7 @@ if($browser == "Firefox")
 	</div>
     
      <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
-        <div class="all-profile-box content custom-scroll">
+        <div class="all-profile-box content custom-scroll hidden">
             <ul class="all-pr-list">
                 <li>
                     <a href="#">

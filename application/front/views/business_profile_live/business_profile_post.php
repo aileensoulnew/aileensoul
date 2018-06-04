@@ -262,7 +262,7 @@ $mobile_agent = $this->agent->mobile;
                             </ul>
                             <p class="text-right p10"><a href="#">More Categories</a></p>
                         </div>
-                        <div class="all-profile-box">
+                        <div class="all-profile-box hidden">
                             <div class="all-pro-head">
                                 <h4>Profiles<a href="<?php echo base_url('/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All">All</a></h4>
                             </div>
@@ -309,6 +309,7 @@ $mobile_agent = $this->agent->mobile;
                                 </li>
                             </ul>
                         </div>
+                        <?php echo $right_profile_view; ?>
                     </div>
                 </div>
             </div>

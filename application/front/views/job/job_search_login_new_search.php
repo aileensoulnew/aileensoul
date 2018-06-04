@@ -372,7 +372,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 
-                        <div class="all-profile-box">
+                        <div class="all-profile-box hidden">
                             <div class="all-pro-head">
                                 <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
                             </div>
@@ -419,6 +419,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </li>
                             </ul>
                         </div>
+                        <?php echo $right_profile_view; ?>
 
                     </div>
 

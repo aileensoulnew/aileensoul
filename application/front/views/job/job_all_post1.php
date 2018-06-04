@@ -221,7 +221,7 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="all-profile-box">
+                        <div class="all-profile-box hidden">
                                 <div class="all-pro-head">
                                     <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All">All</a></h4>
                                 </div>
@@ -268,7 +268,7 @@
                                     </li>
                                 </ul>
                             </div>
-
+                        <?php echo $right_profile_view; ?>
                     </div>
                     
                     </section>

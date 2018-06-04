@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div class="all-profile-box">
+    <div class="all-profile-box hidden">
         <div class="all-pro-head">
             <h4>Profiles<a href="<?php echo base_url($leftbox_data['user_slug'].'/profiles') ?>" title="All Profile" class="pull-right">All</a></h4>
         </div>
@@ -122,7 +122,7 @@
             </li>
         </ul>
     </div>
-
+    <?php echo $right_profile_view; ?>
     <!-- <div class="custom_footer_left fw">
         <div class="">
             <ul>
