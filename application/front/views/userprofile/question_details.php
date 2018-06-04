@@ -14,8 +14,12 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-db">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $header_profile ?>
         <div class="middle-section middle-section-banner">
             <div class="container pt20 mobp0">
@@ -323,6 +327,7 @@
 
 
             </div>
+        </div>
         </div>
         <div class="modal fade message-box" id="delete_model" role="dialog">
             <div class="modal-dialog modal-lm">

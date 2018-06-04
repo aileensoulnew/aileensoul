@@ -114,9 +114,12 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
     $scope.user_id = user_id;
     questionData();
     function questionData() {
+        $('#main_loader').show();
         $('#loader').show();
         $http.get(base_url + "userprofile_page/question_data/?question=" + question).then(function (success) {
             $('#loader').hide();
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             $scope.postData = success.data;
         }, function (error) {});
     }

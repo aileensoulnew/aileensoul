@@ -529,10 +529,10 @@ class Userprofile_model extends CI_Model {
             $user_data = $query->row_array();
             $result_array[$key]['user_data'] = $user_data;
 
-            $this->db->select("uaq.*,GROUP_CONCAT(DISTINCT(t.name)) as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
+            $this->db->select("uaq.*,IF(uaq.category != '',GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");
             $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
             $this->db->where('uaq.id', $value['post_id']);
-            $this->db->where('FIND_IN_SET(t.id, uaq.`category`) !=', 0);
+            $this->db->where("IF(uaq.category != '', FIND_IN_SET(t.id, uaq.category) !=0 , 1=1)");
             $this->db->group_by('uaq.category');
             $query = $this->db->get();
             $question_data = $query->row_array();

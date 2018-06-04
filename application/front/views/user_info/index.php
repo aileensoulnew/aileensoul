@@ -50,7 +50,7 @@
         <div class="middle-section">
             <div ng-view></div>
         </div>
-        <?php echo $login_footer; ?>
+        <?php //echo $login_footer; ?>
         
         <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
