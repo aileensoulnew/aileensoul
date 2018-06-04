@@ -6,21 +6,21 @@
         <meta name="robots" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>">
-        <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()) ?>" media="all" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css?ver=' . time()); ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/angular-tooltips.css?ver=' . time()) ?>">
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css'); ?>">
+        <link href="<?php echo base_url('assets/dragdrop/themes/explorer/theme.css') ?>" media="all" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/angular-tooltips.css') ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script>
         <style type="text/css">
             .progress-bar{
                 background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%)!important
@@ -64,7 +64,10 @@
     </head>
     <body>
         <?php echo $header_profile; ?>
-        <div class="middle-section custom-mob-pd">
+        <div id="main_loader" class="fw post_loader" style="text-align: center;display: none;top: 63px;position:  absolute;">
+            <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
+        </div>
+        <div class="middle-section custom-mob-pd" style="display: none;">
             <div class="container">
                 <?php echo $n_leftbar; ?>
                 <div class="middle-part">
@@ -129,14 +132,14 @@
                     <div class="all_user_post">
                         <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Feed</h3><div class="user-img-nn">
                                 <div class="user_no_post_img">
-                                    <img src="<?php echo base_url('assets/img/bui-no.png?ver=' . time()); ?>" alt="bui-no.png">
+                                    <img src="<?php echo base_url('assets/img/bui-no.png'); ?>" alt="bui-no.png">
                                 </div>
                                 <div class="art_no_post_text">No Feed Available.</div>
                             </div>
                         </div>
 
                         <div class="fw post_loader" style="text-align:center; display: none;">
-                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                            <img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
                         </div>
                         <div id="main-post-{{post.post_data.id}}" ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData" ng-init="postIndex=$index">
                             <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
@@ -317,7 +320,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                                                <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                <img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
                                             </div>
                                             <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                             <div class="mySlides mySlides2{{post.post_data.id}}">
@@ -431,7 +434,7 @@
                                         <span  ng-if="post_file.file_type == 'audio'">
                                             <div class = "audio_main_div">
                                                 <div class = "audio_img">
-                                                    <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                    <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
                                                 </div>
                                                 <div class = "audio_source">
                                                     <audio id = "audio_player" width = "100%" height = "40" controls>
@@ -442,7 +445,7 @@
                                             </div>
                                             <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
                                         </span>
-                                        <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                        <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>"></a>
                                     </div>
                                 </div>
                                 <div class="post-images" ng-if="post.post_data.total_post_files == '2'">
@@ -475,7 +478,7 @@
                                     <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModal'+post.post_data.id)">×</button>
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                            <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" />
                                             </div>
                                             <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
                                             <div class="mySlides mySlides2{{post.post_data.id}}" ng-repeat="_photoData in post.post_file_data">
@@ -564,7 +567,7 @@
                                             <?php 
                                             if ($leftbox_data['user_image'] != '')
                                             { ?> 
-                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '?ver=' . time() ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                                <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
                                             <?php
                                             }
                                             else
@@ -599,7 +602,7 @@
 
                     </div>
                     <!-- Repeated Class Complete -->
-                    <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
+                    <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
                 </div>
 
                 <div class="right-part">
@@ -638,7 +641,7 @@
                                     <a href="<?php echo base_url('contact-request') ?>">
                                         <div class="item" id="last-item">
                                             <div class="post-img" ng-if="contact.user_image != ''">
-                                                <img ng-src="<?php echo base_url('assets/n-images/view-all.png?ver=' . time()) ?>">
+                                                <img ng-src="<?php echo base_url('assets/n-images/view-all.png') ?>">
                                             </div>
                                             <div class="user-list-detail">
                                                 <p class="contact-name"><a href="<?php echo base_url(); ?>contact-request" target="_self">Find More Contacts</a></p>
@@ -747,7 +750,7 @@
                                     <?php
                                     if ($leftbox_data['user_image'] != '')
                                     { ?>
-                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '?ver=' . time() ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
                                     <?php
                                     }
                                     else
@@ -823,7 +826,7 @@
                                     <?php
                                     if ($leftbox_data['user_image'] != '')
                                     { ?>
-                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '?ver=' . time() ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
                                     <?php
                                     }
                                     else
@@ -923,7 +926,7 @@
                                     <?php
                                     if ($leftbox_data['user_image'] != '')
                                     { ?>
-                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '?ver=' . time() ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
                                     <?php
                                     }
                                     else
@@ -1091,25 +1094,25 @@
             </div>
         </div>
 
-        <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery.form.3.51.js?ver=' . time()) ?>"></script> 
-        <script src="<?php echo base_url('assets/dragdrop/js/plugins/sortable.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/fileinput.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/locales/fr.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/js/locales/es.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js') ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/owl.carousel.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.form.3.51.js') ?>"></script> 
+        <script src="<?php echo base_url('assets/dragdrop/js/plugins/sortable.js') ?>"></script>
+        <script src="<?php echo base_url('assets/dragdrop/js/fileinput.js') ?>"></script>
+        <script src="<?php echo base_url('assets/dragdrop/js/locales/fr.js') ?>"></script>
+        <script src="<?php echo base_url('assets/dragdrop/js/locales/es.js') ?>"></script>
+        <script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js') ?>"></script>
+        <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/as-videoplayer/demo.js'); ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
-        <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular-validate.min.js') ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script>
                                 var base_url = '<?php echo base_url(); ?>';
@@ -1121,9 +1124,9 @@
                                 var header_all_profile = '<?php echo $header_all_profile; ?>';
                                 var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
         </script>               
-        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/user/user_post.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/classie.js') ?>"></script>
         <script>
 			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 				showRight = document.getElementById( 'showRight' ),
