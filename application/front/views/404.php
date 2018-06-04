@@ -74,7 +74,7 @@
                         <li class="error-main-box">
                             <a href="<?php echo $freelance_hire_right_profile_link; ?>">
                                 <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-free.png?ver=' . time()) ?>g">
+                                    <img src="<?php echo base_url('assets/n-images/e-free-apply.png?ver=' . time()) ?>g">
                                     <p>Looking for Freelance Work / Freelancers Hire? Create Free Freelance Profile Account</p>
                                 </div>
                             </a>
