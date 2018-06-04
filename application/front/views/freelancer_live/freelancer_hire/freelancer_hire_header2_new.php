@@ -535,7 +535,7 @@ $userid = $this->session->userdata('aileenuser');
 </div>
 <!-- Model Popup Close -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>" ></script>
-<script src="js/classie.js"></script>
+<script src="<?php echo base_url('assets/js/classie.js?ver=' . time()); ?>"></script>
 <script type="text/javascript">
     function deactivate(clicked_id) {
         $('.biderror .mes').html("<div class='pop_content'> Are you sure you want to deactive your Freelancer Hire profile?<div class='model_ok_cancel'><a title='yes' class='okbtn' id=" + clicked_id + " onClick='deactivate_profile(" + clicked_id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a title='No' class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
