@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="artistApp" ng-controller="artistController">
     <head>
-        <title>Aileensoul</title>
+        <title>Freelance Register | Aileensoul</title>
         <meta charset="utf-8">
         <meta name="robots" content="noindex, nofollow">
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
