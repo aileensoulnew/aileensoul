@@ -164,8 +164,15 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
         }
         isProcessing = true;
         $('#loader').show();
+        if(pagenum == undefined || pagenum == "1"){
+            $('#main_loader').show();
+        }
         $.post(base_url + "freelancer/ajax_freelancer_apply_post?page=" + pagenum, {"category_id" : $scope.cat_fil, "skill_id": $scope.skills_fil, "worktype": $scope.worktype, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
+                if(pagenum == undefined || pagenum == "1"){
+                    $('#main_loader').hide();
+                }
+                $('#main_page_load').show();
                 $('#loader').hide();
                 data = JSON.parse(success);
                 if(data.fa_projects.length > 0)

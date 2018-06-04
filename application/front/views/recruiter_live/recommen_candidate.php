@@ -18,6 +18,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $recruiter_header2; ?>
         <?php if ($recdata['re_step'] == 3) { ?>
         <?php// echo $recruiter_header2_border; ?>
@@ -287,6 +289,7 @@
             <!-- MIDDLE SECTION END -->
         </section>
         <!-- END CONTAINER -->
+        </div>
         <!-- BEGIN FOOTER -->
         <!-- BID MODAL START -->
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog">

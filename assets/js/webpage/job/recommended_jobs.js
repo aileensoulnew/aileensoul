@@ -95,10 +95,17 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
         }
         isProcessing = true;
         $('#loader').show();
+        if(pagenum == "1"){
+            $('#main_loader').show();
+        }
         $.post(base_url + "job/recommended_jobs_ajax?page=" + pagenum , 
             {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
                 $('#loader').hide();
+                if(pagenum == "1"){
+                    $('#main_loader').hide();
+                }
+                $('#main_page_load').show();
                 data = JSON.parse(success);
                 if(data.searchJobs.length > 0)
                 {                    

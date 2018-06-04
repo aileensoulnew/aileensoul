@@ -61,6 +61,9 @@ function ajax_business_home_post(pagenum) {
         return;
     }
     isProcessing = true;
+    if(pagenum == undefined || pagenum == "1"){
+        $('#main_loader').show();
+    }
     $.ajax({
         type: 'POST',
         url: base_url + "business_profile/ajax_business_home_post?page=" + pagenum,
@@ -77,6 +80,10 @@ function ajax_business_home_post(pagenum) {
             $('#loader').hide();
         },
         success: function (data) {
+            if(pagenum == undefined || pagenum == "1"){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             $('.loader').remove();
             $('.business-all-post').append(data);
             $('video, audio').mediaelementplayer();

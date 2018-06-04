@@ -121,6 +121,9 @@ function freelancerhire_home(from = '',filter_selected_data = '', pagenum = 1)
          **/
         return;
     }
+    if(pagenum == undefined || pagenum == "1"){
+        $('#main_loader').show();
+    }
     isProcessing = true;
     ajaxHireHome = $.ajax({
         type: 'POST',
@@ -138,6 +141,10 @@ function freelancerhire_home(from = '',filter_selected_data = '', pagenum = 1)
             $('#loader').hide();
         },
         success: function (data) {
+            if(pagenum == undefined || pagenum == "1"){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             $('.loader').remove();
             if(from == "filter"){
                 $('.job-contact-frnd').html('');

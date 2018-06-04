@@ -109,7 +109,13 @@ header("Pragma: no-cache"); // HTTP/1.0
 	            }
             </style>
     </head>
-    <body class="blog-page blog old-no-login">
+	<?php if (!$this->session->userdata('aileenuser')) { ?>
+    <body class="blog-page blog blog-d old-no-login">
+        <?php }else{?>
+         <body class="blog-page blog-d">
+        <?php }?>
+		
+
         <div class="main-inner">
             <div class="web-header">
 	            <header class="custom-header">
@@ -132,7 +138,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <div class="sub-header">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6 mob-p0">
+                            <div class="col-md-6 mob-p0 col-xs-6">
                                 <ul class="sub-menu blog-sub-menu">
                                     <li>
                                     <?php
@@ -383,6 +389,9 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
 	    		</div>	    		
 	    	</div>
+
+			
+			
 
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>

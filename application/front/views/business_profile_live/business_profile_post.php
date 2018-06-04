@@ -43,6 +43,8 @@ $mobile_agent = $this->agent->mobile;
         </style>
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $header; ?>
         <?php echo $business_header2; ?>
         <?php // echo $business_header2_border; ?>
@@ -314,6 +316,7 @@ $mobile_agent = $this->agent->mobile;
                 </div>
             </div>
         </section>
+        </div>
         <div id="myModal" class="modal-post" data-backdrop="static" data-keyboard="false">
             <div class="modal-content-post">
                 <span class="close1">&times;
@@ -496,7 +499,7 @@ $mobile_agent = $this->agent->mobile;
             <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/common.js?ver=' . time()); ?>"></script>
-            <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/business-profile/home.js?ver=' . time()); ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/business-profile/home.js?ver=' . time()); ?>"></script>
         <?php } ?>
 
         <!-- out side click disable of post popup -->

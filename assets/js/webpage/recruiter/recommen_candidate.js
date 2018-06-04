@@ -345,6 +345,9 @@ function checkvalue(){
 	var isProcessing = false;
 	var ajax_Post;
 	function recommen_candidate_post(from,filter_selected_data,pagenum) {
+		if(pagenum == undefined || pagenum == 1){
+            $('#main_loader').show();
+        }
 		if(from == "filter" ){
 			if(isProcessing){
 				ajax_Post.abort();
@@ -379,6 +382,10 @@ function checkvalue(){
 			$('.loader').remove();
 		},
 		success: function (data) {
+			if(pagenum == undefined || pagenum == 1){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
 			$('.loader').remove();
 			if(from == "filter"){
 				$('.job-contact-frnd').html('');

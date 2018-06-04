@@ -50,10 +50,13 @@
         $que_cls = "questions";
     } ?>
     <body class="main-db <?php echo $que_cls; ?>">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $header_profile; ?>
         <?php echo $header; ?>
         <div ng-view></div>
         <?php echo $footer; ?>
+        </div>
         <!--PROFILE PIC MODEL START-->
         <div class="modal fade message-box" id="bidmodal-2" role="dialog">
             <div class="modal-dialog modal-lm">
