@@ -8,6 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">

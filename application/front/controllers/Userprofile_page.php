@@ -59,6 +59,7 @@ class Userprofile_page extends MY_Controller {
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
 
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['title'] = "Contact Request | Aileensoul";
         $this->load->view('userprofile/contact_request', $this->data);
     }
 

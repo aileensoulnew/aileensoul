@@ -467,7 +467,7 @@ class Job_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['title'] = "Job Search | Aileensoul";
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         /*$this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];
@@ -571,7 +571,8 @@ class Job_live extends MY_Controller {
         $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
-        $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
+        $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);       
+        $this->data['title'] = "Job Register | Aileensoul"; 
         $this->load->view('job_live/job_register', $this->data);
     }
 
