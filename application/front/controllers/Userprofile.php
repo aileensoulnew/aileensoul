@@ -25,7 +25,7 @@ class Userprofile extends MY_Controller {
     }
 
     public function index() {
-
+        // exit;
         $this->data['slug'] = $slug = $this->session->userdata('aileenuser_slug');
         $userid = $this->session->userdata('aileenuser');
         //$seg_slug = $this->uri->segment(2);
@@ -77,7 +77,8 @@ class Userprofile extends MY_Controller {
     
             $this->load->view('userprofile/index', $this->data);
         } else {
-            $this->load->view('userprofile/notavalible');
+            $this->load->view('404');
+            // $this->load->view('userprofile/notavalible');
         }
     }
 
