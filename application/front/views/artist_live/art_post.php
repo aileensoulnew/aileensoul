@@ -41,6 +41,8 @@
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php //echo $art_header2_border; ?>
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $artistic_header2; ?>
         <div class="user-midd-section bui_art_left_box" id="paddingtop_fixed">
         <div class="container art_container padding-360">
@@ -249,6 +251,7 @@
                 </div>
                 <?php echo $right_profile_view; ?>
             </div>
+        </div>
         <!-- Bid-modal  -->
         <div class="modal fade message-box biderror" id="bidmodal-limit" role="dialog">
             <div class="modal-dialog modal-lm deactive">

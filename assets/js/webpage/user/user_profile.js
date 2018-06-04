@@ -413,12 +413,15 @@ app.controller('profilesController', function ($scope, $http, $location) {
 
     getFieldList();
     function getFieldList() {
+        $('#main_loader').show();
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/profiles_data',
             data: 'u=' + user_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (success) {
+        }).then(function (success) {            
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             details_data = success.data;
             $scope.details_data = details_data;
         });
@@ -1388,9 +1391,17 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }
     });
     function getUserDashboardPost(pagenum = '') {
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
+            
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardPost?page=" + pagenum + "&user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             $scope.postData = success.data;
             $('#progress_div').hide();
             $('.progress-bar').css("width",0);
@@ -3116,6 +3127,7 @@ app.controller('detailsController', function ($scope, $http, $location) {
     getFieldList();
 
     function getFieldList() {
+        $('#main_loader').hide();        
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/detail_data',
@@ -3124,6 +3136,8 @@ app.controller('detailsController', function ($scope, $http, $location) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (success) {
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             details_data = success.data;
             $scope.details_data = details_data;
         });
@@ -3165,12 +3179,19 @@ app.controller('contactsController', function ($scope, $http, $location, $window
 
     // Fetch data
     $scope.getContacts = function (pagenum = '') {
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
 
         $http({
             method: 'post',
             url: base_url + "userprofile_page/contacts_data?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
                 if ($scope.contactData != undefined) {
@@ -3243,12 +3264,18 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     $scope.user_slug = user_data_slug;
     // Fetch data
     $scope.getFollowers = function (pagenum = '') {
-
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
         $http({
             method: 'post',
             url: base_url + "userprofile_page/followers_data?page=" + pagenum +"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
                 if ($scope.contactData != undefined) {
@@ -3335,11 +3362,19 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     // Fetch data
     $scope.getFollowing = function (pagenum = '') {
 
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
+
         $http({
             method: 'post',
             url: base_url + "userprofile_page/following_data?page=" + pagenum +"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
                 if ($scope.contactData != undefined) {
@@ -3465,11 +3500,18 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
 
     $scope.getQuestions = function (pagenum = '') {
         $('.post_loader').show();
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
         $http({
             method: 'post',
             url: base_url + "userprofile_page/questions_list?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             $('.post_loader').hide();
             isLoadingData  = false;
             if (response.data != '') {

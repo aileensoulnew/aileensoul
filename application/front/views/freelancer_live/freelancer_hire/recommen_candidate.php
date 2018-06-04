@@ -13,6 +13,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $header; ?>
         <?php echo $freelancer_hire_header2; ?>
         <section>
@@ -289,6 +291,7 @@
                 </div>
             </div>
         </section>
+        </div>
         <?php echo $footer; ?>
         <!-- Bid-modal  -->
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog">

@@ -23,6 +23,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
     </head>
     <body class="">
         <?php //echo $header; ?>
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $freelancer_post_header2; ?>
         <section>
             <div class="user-midd-section " id="paddingtop_fixed">
@@ -474,6 +476,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                 </div>
             </div>
         </section>
+        </div>
         <?php echo $footer; ?>
 
         <!-- Bid-modal  -->

@@ -63,9 +63,7 @@
         </style>
     </head>
     <body>
-        <div id="main_loader" class="fw post_loader" style="text-align: center;display: none;top: 63px;position:  absolute;">
-            <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
-        </div>
+        <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">
         <?php echo $header_profile; ?>        
         <div class="middle-section custom-mob-pd">

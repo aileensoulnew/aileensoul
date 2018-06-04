@@ -367,6 +367,9 @@ function art_home_post(pagenum) {
         return;
     }
     isProcessing = true;
+    if(pagenum == undefined || pagenum == "1"){
+        $('#main_loader').show();
+    }
 
     $.ajax({
         type: 'POST',
@@ -382,6 +385,10 @@ function art_home_post(pagenum) {
         },
         success: function (data) {
             //$('.fw').hide();
+            if(pagenum == undefined || pagenum == "1"){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             $('#loader_post').hide();
             $('.art-all-post').append(data);
 
