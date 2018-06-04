@@ -464,7 +464,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     <div class="modal-body">
                         <span class="mes">
                             <div class='pop_content pop-content-cus'>
-                                <h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='<?php echo base_url(); ?>login'>Login</a> or <a class='btn1' href='<?php echo base_url(); ?>business-profile/create-account'>Register</a></p>
+                                <h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1 login_link' href='<?php echo base_url(); ?>login'>Login</a> or <a class='btn1 login_link' href='<?php echo base_url(); ?>business-profile/create-account'>Register</a></p>
                             </div>
                         </span>
                     </div>

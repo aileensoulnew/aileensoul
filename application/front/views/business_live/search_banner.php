@@ -45,7 +45,7 @@
 	<div class="bottom-bnr-div">
 		<div class="container">
 			<p>Got a Business? Be Found by Your Audience
-				<a class="btn-1 pull-right" href="<?php echo $business_profile_link ?>">Create Business Profile</a>
+				<a class="btn-1 pull-right" href="<?php echo $business_profile_link ?>" target="_self">Create Business Profile</a>
 			</p>
 		</div>
 	</div>

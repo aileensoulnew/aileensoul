@@ -286,9 +286,10 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->data['title'] = "Categories - Business Profile | Aileensoul";
         $this->data['business_profile_set'] = $this->business_profile_set;
+        $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
+        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->load->view('business_live/view_more_business', $this->data);
     }
 
