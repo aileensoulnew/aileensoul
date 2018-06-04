@@ -240,6 +240,7 @@
             </div>
         </div>
         <!-- Model Popup Close -->
+        <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
         <?php
         if (IS_APPLY_JS_MINIFY == '0') {
             ?>
