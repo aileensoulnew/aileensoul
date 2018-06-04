@@ -1,6 +1,10 @@
 <div class="all-profile-box">
     <div class="all-pro-head">
-        <h4>Profiles<a href="<?php echo base_url . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All">All</a></h4>
+        <h4>Profiles
+            <!-- <a href="<?php //echo base_url . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All">All -->
+            <a href="<?php echo $all_right_profile_link; ?>" class="pull-right" title="All">All
+            </a>
+        </h4>
     </div>
     <ul class="all-pr-list">
         <li>

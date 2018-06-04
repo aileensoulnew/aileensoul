@@ -211,7 +211,12 @@ $(document).ready(function () {
 
 // change location
 $(document).on('change','.filtercheckbox',function(){
-    var self = this;
-    angular.element(self).scope().getfilterfreelancehiredata();
+    var self = $(this);
+    if(totalpost <= 0){
+        self.prop('checked', false);
+        $("#postmodal").modal('show');
+    }else{
+        angular.element(self).scope().getfilterfreelancehiredata();
+    }
 });
 

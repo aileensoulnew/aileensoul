@@ -82,11 +82,21 @@
         /*Code for business profile link end*/
          $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="'. base_url("/") .'" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="'. $this->artist_profile_link .'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.  $this->business_profile_link .'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.  $this->job_profile_link .'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.$this->recruiter_profile_link.'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="'.base_url('freelance-profile').'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
 
-         $this->data['job_right_profile_link'] = $this->job_profile_link;
-         $this->data['recruiter_right_profile_link'] = $this->recruiter_profile_link;
-         $this->data['freelance_right_profile_link'] = base_url('freelance-profile');
-         $this->data['business_right_profile_link'] = $this->business_profile_link;
-         $this->data['artist_right_profile_link'] = $this->artist_profile_link;
+        $login_data_sql = "SELECT user_slug FROM ailee_user where user_id = " . $this->session->userdata('aileenuser');
+        $login_data_query = $this->db->query($login_data_sql);        
+        $login_user_totalpost = $login_data_query->row_array()['user_slug'];
+
+        $this->data['job_right_profile_link'] = $this->job_profile_link;
+        $this->data['recruiter_right_profile_link'] = $this->recruiter_profile_link;
+        $this->data['freelance_right_profile_link'] = base_url('freelance-profile');
+        $this->data['business_right_profile_link'] = $this->business_profile_link;
+        $this->data['artist_right_profile_link'] = $this->artist_profile_link;
+        if($this->session->userdata('aileenuser')){
+            $all_path_link = base_url(). $login_user_totalpost . '/profiles';
+        }else{
+            $all_path_link = base_url('profiles');
+        }
+        $this->data['all_right_profile_link'] = $all_path_link;
 
         // Check freelancer is active or not and generate uel for create freelancer Search_banner
         $this->data['isdeactivatefreelancer'] = false;

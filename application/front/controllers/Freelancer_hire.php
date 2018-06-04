@@ -818,7 +818,6 @@ class Freelancer_hire extends MY_Controller {
         $candidatefreelancer1 = $this->freelancer_hire_model->get_freelancer_rec_candidate($userid,$category_id,$city_id,$skill_id,$experience_id, $start,$perpage);
         
         $candidatefreelancer = $this->freelancer_hire_model->get_freelancer_rec_candidate_total($userid,$category_id,$city_id,$skill_id,$experience_id);
-        
         if ($candidatefreelancer['total_record'] <= 0 && $isfilterapply == false) {
             $return_html .= '<div class="text-center rio" style="border: none;">';
             $return_html .= '<div class="no-post-title">';
@@ -1102,13 +1101,13 @@ class Freelancer_hire extends MY_Controller {
                 }
             } else {
                 $return_html .= '<div class="art-img-nn">
-                                                <div class="art_no_post_img">
-                                                    <img alt="No freelancer" src="assets/img/free-no1.png">
-                                                </div>
-                                                <div class="art_no_post_text">';
+                                    <div class="art_no_post_img">
+                                        <img alt="No freelancer" src="assets/img/free-no1.png">
+                                    </div>
+                                    <div class="art_no_post_text">';
                 $return_html .= $this->lang->line("no_freelancer_found");
                 $return_html .= ' </div>
-                                            </div>';
+                                </div>';
             }
             echo $return_html;
         }

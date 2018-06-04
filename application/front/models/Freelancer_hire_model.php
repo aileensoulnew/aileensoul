@@ -211,13 +211,13 @@ class Freelancer_hire_model extends CI_Model {
         if ($experience_id) {
             if($experience_id == 6)
             {
-                $sql_filter .= " AND (freelancer_post_exp_year IS NOT NULL AND freelancer_post_exp_year > ". ($experience_id - 1) .")";
+                $filter_condition .= " AND (freelancer_post_exp_year IS NOT NULL AND freelancer_post_exp_year > ". ($experience_id - 1) .")";
             }
             else if($experience_id == 1){
-                $sql_filter .= " AND (freelancer_post_exp_year IS NULL OR freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id .")";
+                $filter_condition .= " AND (freelancer_post_exp_year IS NULL OR freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id .")";
             }
             else{
-                $sql_filter .= " AND freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id;
+                $filter_condition .= " AND freelancer_post_exp_year <= ". ($experience_id - 1) ." AND freelancer_post_exp_year >= ". $experience_id;
             }
         }
         $sql = "SELECT count(fpr.freelancer_post_reg_id) as total_record

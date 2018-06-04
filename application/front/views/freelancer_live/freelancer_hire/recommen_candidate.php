@@ -312,6 +312,21 @@
                 </div>
             </div>
         </div>
+        <!-- ADD POST POPUP -->
+        <div class="modal fade message-box" id="postmodal" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body">
+                        <p>
+                            To get most out of this filter, Post your requirement 
+                            <a href="<?php echo base_url().'post-freelance-project'; ?>">here</a>
+                            to get better candidate recommendations. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
@@ -319,6 +334,7 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var otherfiled = '<?php echo $otherfiled; ?>';
+            var totalpost = '<?php echo $login_user_totalpost; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var app = angular.module('freelancerHireListApp', ['ui.bootstrap']);
         </script>  

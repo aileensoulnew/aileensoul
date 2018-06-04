@@ -783,7 +783,13 @@ public function recommen_candidate() {
 		//check user deactivate end
 		// code for display page start
 	$this->freelancer_hire_check();
-		// code for display page end
+
+	$sql = "SELECT count(*) as totalpost FROM ailee_freelancer_post where user_id = '$userid'";
+        $query = $this->db->query($sql);        
+    $this->data['login_user_totalpost'] = $query->row_array()['totalpost'];
+	// print_r($this->data['login_user_totalpost']);
+	// exit;
+	// code for display page end
 	$this->data['title'] = 'Home | Employer Profile' . TITLEPOSTFIX;
 	$this->load->view('freelancer_live/freelancer_hire/recommen_candidate', $this->data);
 }
