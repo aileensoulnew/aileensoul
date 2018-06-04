@@ -63,11 +63,12 @@
         </style>
     </head>
     <body>
-        <?php echo $header_profile; ?>
         <div id="main_loader" class="fw post_loader" style="text-align: center;display: none;top: 63px;position:  absolute;">
             <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
         </div>
-        <div class="middle-section custom-mob-pd" style="display: none;">
+        <div id="main_page_load" style="display: none;">
+        <?php echo $header_profile; ?>        
+        <div class="middle-section custom-mob-pd">
             <div class="container">
                 <?php echo $n_leftbar; ?>
                 <div class="middle-part">
@@ -655,6 +656,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 		
 		<div style="display:none;" class="modal fade" id="report-span" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

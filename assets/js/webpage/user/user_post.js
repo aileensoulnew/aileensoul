@@ -753,7 +753,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             if(pg == ""){
                 $('#main_loader').hide();
             }
-            $('.middle-section').show();
+            $('#main_page_load').show();
             if (success.data) {
                 isLoadingData = false;
                 $('#progress_div').hide();
