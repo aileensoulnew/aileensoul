@@ -2281,11 +2281,11 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 .error-top-box h1 span:first-child{font-size:44px; padding-bottom:15px; color:#ff3c3c;}
 .error-top-box h1 span{display:block;}
 .error-main-box a{color:#5c5c5c;}
-.error-main-box{width:20%; float:left; padding:10px; text-align:center;}
+.error-main-box{width:16.66%; float:left; padding:10px; text-align:center;}
 .error-main-box .error-pr-box{border:1px solid transparent;}
 .error-main-box a:hover .error-pr-box{border:1px solid transparent; box-shadow:0 0 4px 1px #d2d2d2;}
 .error-main-box .error-pr-box{padding:15px;}
-.error-main-box .error-pr-box p{font-size:18px; letter-spacing:1px; padding-top:15px; line-height:1.5;}
+.error-main-box .error-pr-box p{font-size:16px; letter-spacing:1px; padding-top:15px; line-height:1.5;}
 .error-btn{padding-top:20px;}
 .error-btn .btn3{font-size:20px; padding:10px 30px; font-weight:normal; letter-spacing:1px;} 
 .error-btn .btn3 span{line-height:1.5; display:inline-block;}
