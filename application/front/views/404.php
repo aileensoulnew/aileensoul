@@ -51,7 +51,7 @@
                         <li class="error-main-box">
                             <a href="#">
                                 <div class="error-pr-box">
-                                    <img src="<?php echo base_url('assets/n-images/e-free.pn?ver=' . time()) ?>g">
+                                    <img src="<?php echo base_url('assets/n-images/e-free.png?ver=' . time()) ?>g">
                                     <p>Looking for Freelance Work / Freelancers? Create Free Freelance Profile Account</p>
                                 </div>
                             </a>
@@ -76,10 +76,10 @@
                 </div>
                 <div class="error-btn">
                     <div class="col-md-6 col-sm-6 text-right">
-                        <a class="btn3" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><img class="pr20" src="n-images/e-arrow.png"><span>Back to Previous page</span></a>
+                        <a class="btn3" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><img class="pr20" src="<?php echo base_url('assets/n-images/e-arrow.png?ver=' . time()) ?>"><span>Back to Previous page</span></a>
                     </div>
                     <div class="col-md-6 col-sm-6 text-left">
-                        <a class="btn3" href="<?php echo base_url(); ?>"><img class="pr20" src="n-images/e-home.png"><span>Back to Home page</span></a>
+                        <a class="btn3" href="<?php echo base_url(); ?>"><img class="pr20" src="<?php echo base_url('assets/n-images/e-home.png?ver=' . time()) ?>"><span>Back to Home page</span></a>
                     </div>
                 </div>
                 
