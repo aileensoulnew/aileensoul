@@ -110,7 +110,7 @@ header("Pragma: no-cache"); // HTTP/1.0
             </style>
     </head>
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
-    <body class="blog-page blog blog-d old-no-login">
+    <body class="blog-page blog-d old-no-login">
         <?php }else{?>
          <body class="blog-page blog-d">
         <?php }?>
@@ -121,10 +121,10 @@ header("Pragma: no-cache"); // HTTP/1.0
 	            <header class="custom-header">
 	                <div class="container">
 	                    <div class="row">
-	                        <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
+	                        <div class="col-md-4 col-sm-3 col-xs-4 fw-479 left-header">
 	                            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
 	                        </div>
-	                        <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+	                        <div class="col-md-8 col-sm-9 col-xs-8 fw-479 right-header">
 	                            <div class="btn-right">
 	                                <?php if (!$this->session->userdata('aileenuser')) { ?>
 	                                    <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
@@ -138,7 +138,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <div class="sub-header">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6 mob-p0 col-xs-6">
+                            <div class="col-md-6 col-sm-6 mob-p0 col-xs-8 fw-479">
                                 <ul class="sub-menu blog-sub-menu">
                                     <li>
                                     <?php
@@ -199,12 +199,22 @@ header("Pragma: no-cache"); // HTTP/1.0
     						</li>
                                 </ul>
                             </div>
-                            <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob blog-search">
-            					<div class="job-search-box1 clearfix">        
+                            <div class="col-sm-6 col-md-6 col-xs-4 blog-search fw-479">
+            					<div class="job-search-box1 clearfix hidden-479">        
             						<form action="<?php echo base_url;?>blog" method="get">
-            							<fieldset class="sec_h2">
+            							<fieldset class="sec_h2 ">
             								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
             								<i class="fa fa-search" aria-hidden="true"></i>
+            							</fieldset>
+										
+            						</form>   
+            					</div>
+								<div class="clearfix block-479">        
+            						<form action="<?php echo base_url;?>blog" method="get">
+            							
+										<fieldset>
+            								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
+            								
             							</fieldset>
             						</form>   
             					</div>
@@ -221,21 +231,24 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    					<div class="user-img">	
 	    						<img src="<?php echo base_url(); ?>assets/n-images/user-pic.jpg">
 	    					</div>
-	    					<p class="pt20">{{ blog.name }}</p>
-	    					<p>{{ blog.created_date_formatted }}</p>
-	    					<p>
-	    						<img src="<?php echo base_url(); ?>assets/n-images/comment.png" class="pr5">{{ blog.total_comment }}
-	    					</p>
-	    					<ul class="social-icon">
-                                <li>
-                                    <a target="_blank" class="fbk" id="facebook_link" url_encode="{{ blog.social_encodeurl }}" url="{{ blog.social_url}}" title="Facebook" summary="{{ blog.social_summary }}" image="{{ social_image }}">
-                                        <i class="fa fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="{{ blog.url_encode }}" url="{{ blog.url }}"><i class="fa fa-twitter"></i></a></li>
-                                <li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-google"></i></a></li>
-                            </ul>
+							<div class="user-detail-left">
+								<p class="pt20">{{ blog.name }}</p>
+								<p>{{ blog.created_date_formatted }}</p>
+								<p>
+									<img class="hidden-639" src="<?php echo base_url(); ?>assets/n-images/comment.png" class="pr5">{{ blog.total_comment }} <span class="block-639"> Comment</span>
+								</p>
+							
+								<ul class="social-icon">
+									<li>
+										<a target="_blank" class="fbk" id="facebook_link" url_encode="{{ blog.social_encodeurl }}" url="{{ blog.social_url}}" title="Facebook" summary="{{ blog.social_summary }}" image="{{ social_image }}">
+											<i class="fa fa-facebook-f"></i>
+										</a>
+									</li>
+									<li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="{{ blog.url_encode }}" url="{{ blog.url }}"><i class="fa fa-twitter"></i></a></li>
+									<li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-google"></i></a></li>
+								</ul>
+							</div>
 	    				</div>
 	    				<div class="blog-detail">
 	    					<div class="blog-box">
@@ -324,6 +337,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 													</a> 
 												</p>
 											</div>
+											<div class="clearfix"></div>
 	    								</div>
 	    							</div>
 	    						</div>
