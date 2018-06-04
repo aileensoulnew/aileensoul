@@ -48,7 +48,7 @@ class Artist_userprofile extends CI_Controller {
                 } else if ($artdata[0]['art_step'] == 3) { //echo "123"; die();
                     redirect('artist/artistic-portfolio', refresh);
                 } else if ($artdata[0]['art_step'] == 4) {
-                    redirect('artist/home', refresh);
+                    redirect('artist-profile', refresh);
                 }
             } else {
                 $this->load->view('artist/art_basic_information', $this->data);

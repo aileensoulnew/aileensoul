@@ -58,7 +58,7 @@
                 </div>
                 <div class="">
                     <ul class="" id="dropdownclass">
-                        <li <?php if($this->uri->segment(1) == 'artistic' && $this->uri->segment(2) == 'home'){?> class="active" <?php } ?>><a href="<?php echo base_url('artist/home'); ?>" title="Home"><span class="home-22x22-h"></span></a>
+                        <li <?php if($this->uri->segment(1) == 'artist-profile' && $this->uri->segment(2) == ''){?> class="active" <?php } ?>><a href="<?php echo base_url('artist-profile'); ?>" title="Home"><span class="home-22x22-h"></span></a>
                         </li>
                         <!-- Friend Request Start-->
                         <li id="Inbox_link">
@@ -133,7 +133,7 @@
                 </div>
                 <div class="">
                     <ul class="" id="dropdownclass">
-                        <li <?php if($this->uri->segment(1) == 'artistic' && $this->uri->segment(2) == 'home'){?> class="active" <?php } ?>><a href="<?php echo base_url('artist/home'); ?>"><span class="bu_home"></a>
+                        <li <?php if($this->uri->segment(1) == 'artist-profile' && $this->uri->segment(2) == ''){?> class="active" <?php } ?>><a href="<?php echo base_url('artist-profile'); ?>"><span class="bu_home"></a>
                         </li>
                         <!-- Friend Request Start-->
                         <li id="Inbox_link">

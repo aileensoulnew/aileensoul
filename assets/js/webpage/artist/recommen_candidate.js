@@ -1063,7 +1063,7 @@ function del_particular_userpost(abc)
         success: function (data) {
 
             $('#' + 'removepost' + abc).html(data);
-            //window.location = base_url + "artist/home";
+            //window.location = base_url + "artist-profile";
 
 
 

@@ -226,7 +226,7 @@ class Artist_live extends MY_Controller {
         $this->data['head'] = $this->load->view('head', $this->data, TRUE);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         if (count($recuser) > 0) {
-            redirect('artist/home', refresh);
+            redirect('artist-profile', refresh);
         } else {
             $this->load->view('artist_live/profile', $this->data);
         }
@@ -1604,7 +1604,7 @@ class Artist_live extends MY_Controller {
         );
         $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
         if ($updatdata) {
-            redirect('artist/home', refresh);
+            redirect('artist-profile', refresh);
         } else {
             redirect('artist/reactivate', refresh);
         }

@@ -101,7 +101,7 @@ function portfolio_form_submit(event){
                  //window.location= "<?php echo base_url() ?>artist/artistic_profile";
                  window.location= base_url + "artist/details"; 
                  }else{ 
-                 window.location= base_url + "artist/home"; 
+                 window.location= base_url + "artist-profile"; 
                 // window.location= "<?php echo base_url() ?>artist/art_post"; 
                   } 
             }

@@ -58,7 +58,7 @@ class Artist extends MY_Controller {
                 } else if ($artdata[0]['art_step'] == '3') {
                     redirect('artist/artistic-portfolio', refresh);
                 } else if ($artdata[0]['art_step'] == '4') {
-                    redirect('artist/home', refresh);
+                    redirect('artist-profile', refresh);
                 }
             } else {
                 redirect('artist/registration', refresh);
@@ -115,7 +115,7 @@ class Artist extends MY_Controller {
         }
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         if ($recuser) {
-            redirect('artist/home', refresh);
+            redirect('artist-profile', refresh);
         } else {
             $this->load->view('artist/profile', $this->data);
         }
@@ -178,7 +178,7 @@ class Artist extends MY_Controller {
             $insert_id = $this->common->insert_data_getid($data, 'art_reg');
         }
 
-        redirect('artist/home', refresh);
+        redirect('artist-profile', refresh);
     }
 
     public function art_basic_information_update() {
@@ -3845,7 +3845,7 @@ class Artist extends MY_Controller {
         $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
         if ($updatdata) {
             if ($this->input->post('hitext') == 1) {
-                redirect('artist/home', refresh);
+                redirect('artist-profile', refresh);
             } elseif ($this->input->post('hitext') == 2) {
                 redirect('artist/art_addpost', refresh);
             } elseif ($this->input->post('hitext') == 3) {
@@ -3863,7 +3863,7 @@ class Artist extends MY_Controller {
             }
         } else {
             $this->session->flashdata('error', 'Your data not inserted');
-            redirect('artist/home', refresh);
+            redirect('artist-profile', refresh);
         }
     }
 
@@ -6547,7 +6547,7 @@ class Artist extends MY_Controller {
         $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
         if ($updatdata) {
 
-            redirect('artist/home', refresh);
+            redirect('artist-profile', refresh);
         } else {
 
             redirect('artist/reactivate', refresh);

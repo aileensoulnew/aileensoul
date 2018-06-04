@@ -60,7 +60,7 @@
                  $this->business_profile_set = 1;
             }
             if(!empty($artist_profile_count) &&  count($artist_profile_count)>0){
-                $this->artist_profile_link = base_url("artist/home");
+                $this->artist_profile_link = base_url("artist-profile");
                 $this->artist_profile_set = 1;
             }
             if(!empty($job_profile_count) &&  count($job_profile_count)>0 && $job_deactive == 0){
@@ -91,6 +91,8 @@
         $this->data['job_right_profile_link'] = $this->job_profile_link;
         $this->data['recruiter_right_profile_link'] = $this->recruiter_profile_link;
         $this->data['freelance_right_profile_link'] = base_url('freelance-profile');
+        $this->data['freelance_hire_right_profile_link'] = $this->freelance_hire_profile_link;
+        $this->data['freelance_apply_right_profile_link'] = $this->freelance_apply_profile_link;
         $this->data['business_right_profile_link'] = $this->business_profile_link;
         $this->data['artist_right_profile_link'] = $this->artist_profile_link;
         if($this->session->userdata('aileenuser')){

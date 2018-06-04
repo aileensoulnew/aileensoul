@@ -10,6 +10,7 @@ class My404Page extends CI_Controller  {
         $this->load->model('email_model');
 
         include ('include.php');
+        include ('main_profile_link.php');
     }
     public function index(){
         $this->output->set_status_header('404');

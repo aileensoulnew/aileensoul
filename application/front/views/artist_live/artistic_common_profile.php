@@ -203,9 +203,7 @@ $session_user_id = $this->session->userdata('aileenuser');
 </div>
 
 <!-- IF ARTIST NOT REGISTER & SIGN UP DONE -->
-<p><?php echo $artist_isregister; ?></p>
-
-<?php if($artist_isregister == false && $session_user_id){ ?>
+<?php if($artist_isregister == false && $session_user_id !=""){ ?>
 	<div class="modal fade login register-model" id="register" role="dialog" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog">
 			<div class="modal-content inner-form1">

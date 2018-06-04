@@ -360,7 +360,7 @@ $route['artist/p/(:any)/following'] = "artist_live/following/$1";
 $route['artist/p/(:any)/followers'] = "artist_live/followers/$1";
 // $route['artist/location/(:any)'] = "artist_live/locationArtistList/$1";
 
-$route['artist/home'] = "artist_live/art_post"; 
+$route['artist-profile'] = "artist_live/art_post"; 
 $route['artist/profile_insert'] = "artist/profile_insert";
 $route['artist/edit_post_insert'] = "artist/edit_post_insert";
 $route['artist/art_delete_post'] = "artist/art_delete_post";

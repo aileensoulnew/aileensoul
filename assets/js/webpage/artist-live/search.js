@@ -46,9 +46,9 @@ app.controller('artistSearchListController', function ($scope, $http) {
 
     // Search result text
     function searchResultText(){
-        $scope.categorysearch = q.replace(/,/gi,' And ');
-        $scope.locationsearch = l.replace(/,/gi,' And ');
-        $scope.searchtitle = ($scope.categorysearch && $scope.locationsearch) ? (' for ' + $scope.categorysearch + ' and ' + $scope.locationsearch) : (($scope.categorysearch) ? $scope.categorysearch : $scope.locationsearch); 
+        $scope.categorysearch = q.replace(/,/gi,' , ');
+        $scope.locationsearch = l.replace(/,/gi,' , ');
+        $scope.searchtitle = ($scope.categorysearch && $scope.locationsearch) ? (' for ' + $scope.categorysearch + ' in ' + $scope.locationsearch) : (($scope.categorysearch) ? $scope.categorysearch : $scope.locationsearch); 
     }
     searchResultText();
 

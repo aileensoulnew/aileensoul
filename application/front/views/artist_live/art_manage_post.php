@@ -512,6 +512,7 @@ var data1 = <?php echo json_encode($city_data); ?>;
 var complex = <?php echo json_encode($selectdata); ?>;
 var textarea = document.getElementById("textarea");
 var slug = '<?php echo $artid; ?>';
+var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
 
 <?php

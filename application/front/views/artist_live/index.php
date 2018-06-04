@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page without-reg find-art">
         <?php
@@ -120,7 +121,13 @@
                             <?php 
                                 if (($ismainregister == true && $artist_isregister == false) || ($ismainregister == false)) { 
                             ?>
-                                <a href="<?php echo base_url('artist-profile/create-account'); ?>" class="btn5">Create Artist Profile</a>
+                                <?php 
+                                    if ($ismainregister == true) { 
+                                ?>
+                                    <a href="<?php echo artist_registration; ?>" class="btn5">Create Artist Profile</a>
+                                <?php }else { ?>
+                                    <a href="<?php echo base_url().'artist-profile/create-account'; ?>" class="btn5 sda">Create Artist Profile</a>
+                                <?php } ?>
                             <?php } ?>
 
                         </p>
@@ -206,7 +213,7 @@
                     </div>
                 </div>
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>

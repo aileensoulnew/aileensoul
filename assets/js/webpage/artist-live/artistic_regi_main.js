@@ -680,7 +680,7 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
                 {
                     if (success.data.is_success == '1')
                     {
-                        window.location = base_url+"artist/home";
+                        window.location = base_url+"artist-profile";
                     }
                     else
                     {
