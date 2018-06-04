@@ -69,10 +69,17 @@ app.controller('noJobRegController', function ($scope, $http,$window) {
              **/
             return;
         }
+        if(pagenum == "" || pagenum == "1" || pagenum == undefined){
+            $('#main_loader').show();
+        }
         isProcessing = true;
         $('#loader').show();
         $.post(base_url + "job_live/latestJob?page=" + pagenum , {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
+                if(pagenum == "" || pagenum == "1" || pagenum == undefined){
+                    $('#main_loader').hide();
+                }
+                $('#main_page_load').show();
                 $('#loader').hide();
                 data = JSON.parse(success);
                 if(data.latestJobs.length > 0)

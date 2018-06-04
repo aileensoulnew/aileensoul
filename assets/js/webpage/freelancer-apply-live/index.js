@@ -176,10 +176,17 @@ app.controller('freeapplypostController', function ($scope, $http,$window) {
              **/
             return;
         }
+        if(pagenum == "" || pagenum == "1" || pagenum == undefined){
+            $('#main_loader').show();
+        }
         isProcessing = true;
         $('#loader').show();
         $.post(base_url + "freelancer_apply_live/ajax_project_list_no_login?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"category_id" : $scope.cat_fil, "skill_id": $scope.skills_fil, "worktype": $scope.worktype, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
+                if(pagenum == "" || pagenum == "1" || pagenum == undefined){
+                    $('#main_loader').hide();
+                }
+                $('#main_page_load').show();
                 $('#loader').hide();
                 data = JSON.parse(success);
                 if(data.fa_projects.length > 0)

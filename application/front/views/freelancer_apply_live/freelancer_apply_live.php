@@ -33,6 +33,8 @@
 
     </head>
     <body class="profile-main-page">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php if($freelance_apply_profile_set == 0 || $freelance_apply_profile_set == '0'){ echo $search_banner; } ?>
@@ -372,8 +374,8 @@
             </div>
 
         </div>
+        </div>
         <!--  poup modal  -->
-        
         </div>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>

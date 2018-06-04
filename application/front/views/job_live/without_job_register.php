@@ -40,8 +40,10 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             }
         </style>
     </head>
-    <body class="profile-main-page">    
-       <?php 
+    <body class="profile-main-page">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+        <?php 
         if($job_deactive == 0 && $this->job_profile_set == 1){
             echo $job_header2;
         }else if ($job_deactive > 0 || $this->job_profile_set == 0) {
@@ -331,6 +333,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
 
             </div>
+        </div>
         </div>
 
         <!-- Register -modal  -->
