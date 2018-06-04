@@ -18,7 +18,7 @@
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style.css?ver='.time()); ?>">
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver='.time()); ?>">
 		<?php }?>
-		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/media.css?ver='.time()); ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/animate.css?ver='.time()) ?>" />
 

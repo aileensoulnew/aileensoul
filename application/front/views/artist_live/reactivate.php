@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if (IS_ART_CSS_MINIFY == '0' || IS_ART_CSS_MINIFY == 0) {
 						?>
 
-<link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
 <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver='.time()); ?>">
 <!-- CSS START -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver='.time()); ?>">
@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php }else{?>
 
 
-<link rel="stylesheet" href="<?php echo base_url('assets/n-css/bootstrap.min.css?ver=' . time()) ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
 <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver='.time()); ?>">
 <!-- CSS START -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/common-style.css?ver='.time()); ?>">
