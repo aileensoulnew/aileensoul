@@ -898,10 +898,22 @@ footer ul li a:hover{
 	text-decoration:underline;
 }
 /***  custom left footer  ***/
+.click-profiles i{font-size:16px; margin-bottom: -5px; vertical-align: middle;}
+.custom_footer_left ul.left-ftr-profiles{
+    position:absolute;
+    bottom:23px;
+    width:150px;
+    background:#fff;
+    padding:5px 10px;
+    border:1px solid #d9d9d9;
+    border-radius:4px;
+    right:0;
+    display:none
+}
 .custom_footer_left {
     background: white;
     border: 1px solid #d2d2d2;
-    padding: 5px 8px;
+    padding: 5px;
     border-radius: 4px;
     margin-bottom: 10px;
 }

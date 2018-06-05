@@ -201,10 +201,11 @@ header("Pragma: no-cache"); // HTTP/1.0
                 </div>
             </section>
 
-            <?php
+            
+        </div>
+		<?php
             echo $login_footer
             ?>
-        </div>
         <script>
             $(document).ready(function () {
 
