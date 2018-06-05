@@ -494,8 +494,8 @@ $(document).ready(function () {
                         {
                             if (response.okmsg == "ok") {  
                                //  $('#register').modal('hide');
-                              //  window.location = "<?php echo base_url()?>artist/registration";
-                               window.location = base_url + "artist/registration";
+                              //  window.location = "<?php echo base_url()?>artist-profile/signup";
+                               window.location = base_url + "artist-profile/signup";
 
                             } else {
                                 $("#register_error").fadeIn(1000, function () {
@@ -635,10 +635,10 @@ function login()
                         success: function (response)
                         { 
                             if (response.data == "ok") {                              
-                                window.location = base_url + "artist/registration";                              
+                                window.location = base_url + "artist-profile/signup";                              
                             }else if (response.is_artistic == 1) {
-                                window.location = base_url + "artist/registration";
-                               // window.location = "<?php echo base_url() ?>artist/registration";
+                                window.location = base_url + "artist-profile/signup";
+                               // window.location = "<?php echo base_url() ?>artist-profile/signup";
                             } else if (response.data == "password") {
                                 $("#errorpass").html('<label for="email_login" class="error">Please enter a valid password.</label>');
                                 document.getElementById("password_login").classList.add('error');

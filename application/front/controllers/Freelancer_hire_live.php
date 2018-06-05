@@ -36,7 +36,7 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
 			$this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
 			$contition_array = array('status' => '1');
-			$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+			$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
 			$this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
 			// FETCH STATE DATA  
@@ -3029,7 +3029,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 			$this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image,ul.email");
 			$this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
 			$contition_array = array('status' => '1');
-			$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+			$this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
 			$this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
 			// FETCH STATE DATA  

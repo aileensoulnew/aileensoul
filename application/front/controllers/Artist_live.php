@@ -1756,7 +1756,7 @@ class Artist_live extends MY_Controller {
             $this->data['isartistactivate'] = true;
             // $this->load->view('artist_live/reactivate', $this->data);
         } 
-        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         return $artresult;
     }
 

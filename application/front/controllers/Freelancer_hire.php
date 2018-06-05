@@ -32,7 +32,7 @@ class Freelancer_hire extends MY_Controller {
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
             $contition_array = array('status' => '1');
-        $this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        $this->data['freelance_hire_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         $this->data['countries'] = $this->common->select_data_by_condition('countries', $contition_array, $data = 'country_id,country_name', $sortby = 'country_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         // FETCH STATE DATA  

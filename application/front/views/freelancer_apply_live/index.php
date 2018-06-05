@@ -71,7 +71,7 @@
                     <img src="<?php echo base_url('assets/n-images/img2.jpg') ?>">
                     <div class="content-bnt-text">
                         <h1>Lorem Ipsum is a dummy text</h1>
-                        <p><a href="<?php echo base_url('artist/registration') ?>" class="btn5">Create Artist Profile</a></p>
+                        <p><a href="<?php echo base_url('artist-profile/signup') ?>" class="btn5">Create Artist Profile</a></p>
                     </div>
                 </div>
             </div>

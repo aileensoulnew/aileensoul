@@ -61,7 +61,7 @@ class Artist extends MY_Controller {
                     redirect('artist-profile', refresh);
                 }
             } else {
-                redirect('artist/registration', refresh);
+                redirect('artist-profile/signup', refresh);
             }
         }
     }
@@ -16176,7 +16176,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
     }
 
     public function checkisartistdeactivate(){
-        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         return $artresult;
     }
 

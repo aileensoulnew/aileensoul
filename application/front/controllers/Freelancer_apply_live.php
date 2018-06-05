@@ -40,7 +40,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
-        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
@@ -74,7 +74,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Search - Business Profile | Aileensoul";
@@ -179,7 +179,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist/registration');
+        $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Aileensoul";
