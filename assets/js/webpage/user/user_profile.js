@@ -452,12 +452,19 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
     // Fetch data
     $scope.getDashboardPdf = function (pagenum = '') {
         $('.post_loader').show();
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
         $http({
             method: 'post',
             url: base_url + "userprofile_page/pdf_data?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
             $('.post_loader').hide();
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             if (response.data != '') {
                 $scope.pagedata = response.data.pagedata;
                 $scope.page_number = response.data.pagedata.page;
@@ -527,12 +534,19 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
     // Fetch data
     $scope.getDashboardAudios = function (pagenum = '') {
         $('.post_loader').show();
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
         $http({
             method: 'post',
             url: base_url + "userprofile_page/audios_data?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
             $('.post_loader').hide();
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             if (response.data != '') {
                 $scope.pagedata = response.data.pagedata;
                 $scope.page_number = response.data.pagedata.page;
@@ -665,11 +679,19 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
     // Fetch data
     $scope.getDashboardVideos = function (pagenum = '') {
         $('.post_loader').show();
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
+            
         $http({
             method: 'post',
             url: base_url + "userprofile_page/videos_data?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             $('.post_loader').hide();
             if (response.data != '') {
                 $scope.pagedata = response.data.videoData.pagedata;
@@ -798,12 +820,19 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
     // Fetch data
     $scope.getDashboardPhotos = function (pagenum = '') {
         $('.post_loader').show();
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
         $http({
             method: 'post',
             url: base_url + "userprofile_page/photos_data?page=" + pagenum+"&user_slug="+user_slug,
             data: {row: $scope.row, rowperpage: $scope.rowperpage}
         }).then(function successCallback(response) {
             $('.post_loader').hide();
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#main_page_load').show();
             //console.log(response.data.photosData);
             if (response.data != '') {
                 $scope.pagedata = response.data.photosData.pagedata;
