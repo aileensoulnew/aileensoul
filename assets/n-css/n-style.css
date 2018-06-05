@@ -278,6 +278,8 @@ padding: 5px;}
     cursor: text;
 	line-height: 1.6;
 }
+.editable_text img{max-width:100%;}
+.comment-dis-inner img{max-width:100%;}
 .comment-input .editable_text[contenteditable="true"]:empty::before{content: attr(placeholder);
 display: block;
 color: #999;
@@ -1645,7 +1647,7 @@ ol li:before{counter-increment: myOrderedListItemsCounter;
   }
 }
 /***  end progress bar  ***/
-.art-img-nn{text-align:center; padding:30px 0; margin:0 !important; border:1px solid #d2d2d2; border-radius:4px;}
+.art-img-nn{text-align:center; padding:30px 0; border:1px solid #d2d2d2; border-radius:4px;}
 .no-data-available .art-img-nn{padding: 0 10px 20px;}
 #upload-one{height:auto;}
 #upload-demo-one{padding-top:10px;}
@@ -2242,7 +2244,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .notification-database{padding:0; height:auto; width:338px;}
 .data_noti_msg span {line-height:1;}
 .cq_post ul li:hover{background:#e9f4f8;}
-.art-cat-custom label.error{top:55px;}
+.art-cat-custom label.error{top:65px;}
 .day-text2 {font-size: 11px !important;}
 .post-img-div {
     color: #fff;
@@ -2394,13 +2396,17 @@ input[type=text] {
 .profile-head-text_dg a{font-size:18px;}
 .block-639{display:none;}
 .block-479{display:none;}
-
+.all-tab .no-data-available .art-img-nn{width:auto; padding:0;}
 
 .hs-submit button{color:#fff;}
 #jobseeker_regform .hs-submit{padding-top:15px;}
 .hs-submit .delete_btn{margin-bottom:10px; margin-top:0;}
 html{overflow-x:hidden;}
 .job-contact-frnd, .job-contact-frnd1 {margin-bottom:15px;}
+.no-data-available .art-img-nn{border:0;}
+.job_reg_page_fprm label.error{right:0;}
+.email-cus-vl label.error{position: relative; right: 0; text-align: right; margin: 0;}
+.com-name-r label.error{padding:0 !important;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -3200,7 +3206,7 @@ html{overflow-x:hidden;}
 }
 .post-box-bottom ul li:nth-child(2){display:none;}
 .articles-cs{display:none;}
-.media-tab ul li:first-child{display:none;}
+.media-tab ul.nav-tabs li:first-child{display:none;}
 .right-header > ul > li:nth-child(3){display:none;}
 .right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul >li:nth-child(3){display:none;}

@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 com-name-r">
                                         <input name="comp_name" tabindex="4" autofocus type="text" id="comp_name" placeholder="Company Name*"  value="<?php
                                                if ($compname) {
                                                    echo $compname;
@@ -82,11 +82,7 @@
                                                     }
                                                     ?>" />
                                         <span id="fullname-error"></span>
-                                        <span class="email-tooltip">
-                                            <a href="#">
-                                                <img src="<?php echo base_url('assets/n-images/tooltip.png') ?>">
-                                            </a>
-                                        </span>
+                                      
                                     </div>                                              
                                 </div>
                             </div>                                  
