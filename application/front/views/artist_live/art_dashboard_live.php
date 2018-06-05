@@ -1,5 +1,6 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
+$userid = $this->session->userdata('aileenuser');
 ?>
 <!DOCTYPE html>
 <html>
@@ -501,7 +502,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
 
         <!-- Bid-modal  -->
-        <div class="modal message-box biderror" id="bidmodal" role="dialog">
+        <div class="modal message-box biderror" id="errorrmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
@@ -555,34 +556,53 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             var base_url = '<?php echo base_url(); ?>';
             var slug = '<?php echo $artid; ?>';
             var site_url = '<?php echo $get_url; ?>';
+            var userid = "<?php echo $userid; ?>";
         </script>
         <!-- script for login  user valoidtaion start -->
         <script>
             function login_profile() {
-               
-                // $('#register').modal('show');
-                $('#bidmodal').modal('show');
+               if(userid != ""){
+                $('#register').modal('show');
+               }
+               else
+               {                
+                $('#errorrmodal').modal('show');
+               }
                 $('body').addClass('modal-open'); 
 
             }
             function login_data() { 
-              
-                // $('#login').modal('show');
-                // $('#register').modal('hide');
-                $('#bidmodal').modal('hide');
+                if(userid != ""){
+                    $('#login').modal('show');
+                    $('#register').modal('hide');
+                }
+                else
+                {
+                    $('#errorrmodal').modal('hide');
+                }
                 $('body').addClass('modal-open'); 
 
             }
             function register_profile() {
-                // $('#login').modal('hide');
-                // $('#register').modal('show');
-                $('#bidmodal').modal('show');
+                if(userid != ""){
+                    $('#login').modal('hide');
+                    $('#register').modal('show');
+                }
+                else
+                {                    
+                    $('#errorrmodal').modal('show');
+                }
             }
             function forgot_profile() {
-                // $('#forgotPassword').modal('show');
-                // $('#register').modal('hide');
-                // $('#login').modal('hide');
-                $('#bidmodal').modal('hide');
+                if(userid != ""){
+                    $('#forgotPassword').modal('show');
+                    $('#register').modal('hide');
+                    $('#login').modal('hide');
+                }
+                else
+                {                    
+                    $('#errorrmodal').modal('hide');
+                }
                 $('body').addClass('modal-open-other');   
 
             }
@@ -941,12 +961,12 @@ function submitforgotForm()
         <?php
   if (IS_ART_JS_MINIFY == '0') { ?>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
-    <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/artist/common.js?ver=' . time()); ?>"></script>
+    <!-- <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
 
  <?php }else{?>
  
     <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
-    <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script>
+    <!-- <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
 
  <?php }?>           
         
