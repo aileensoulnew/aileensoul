@@ -651,6 +651,7 @@ $route['freelancer/freelancer_notification_count'] = "freelancer/freelancer_noti
 $route['freelancer/registation_insert_new'] = "freelancer/registation_insert_new";
 $route['freelancer/get_filter_data'] = "freelancer/get_filter_data";
 
+$route['freelancer/remove_post'] = "freelancer/remove_post";
 $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 //Freelance Apply Signup End
 
