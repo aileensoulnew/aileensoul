@@ -231,4 +231,17 @@ class Freelancer_hire_model extends CI_Model {
         $result = $query->row_array();
         return $result;
     }
+
+    
+    function free_hire_related_blog_list() {
+        $sql = "SELECT * FROM ailee_blog
+                WHERE status='publish' AND
+                blog_slug = 'how-to-kick-start-your-freelance-career-a-complete-beginners-guide' 
+                OR blog_slug = 'take-your-freelance-career-to-greater-heights-with-these-popular-platforms' 
+                OR blog_slug = 'it-s-raining-dollars-online-know-how-to-earn-online' 
+                OR blog_slug = '8-freelancing-benefits-not-just-earn-but-live-extra-too'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();   
+        return $result_array;
+    }
 }

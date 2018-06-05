@@ -395,5 +395,12 @@ class Freelancer_apply_live extends MY_Controller {
         $result1 = $this->freelancer_apply_model->freelancer_apply_search_keyword($searchTerm);
         echo json_encode($result1);
     }
+
+    // GET RELATED BLOG LIST
+    public function get_free_job_related_blog_list()
+    {
+        $free_job_related_list = $this->freelancer_apply_model->free_job_related_blog_list();
+        echo json_encode($free_job_related_list);
+    }
     
 }

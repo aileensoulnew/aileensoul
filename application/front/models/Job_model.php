@@ -1619,4 +1619,17 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $recommen_post = $query->result_array();
         return count($recommen_post);
     }    
+
+    function job_related_blog_list() {
+        $sql = "SELECT * FROM ailee_blog
+                WHERE status='publish' AND
+                blog_slug = 'finding-the-right-job' 
+                OR blog_slug = '9-tips-for-making-an-outstanding-resume' 
+                OR blog_slug = 'creative-career-options-that-are-both-promising-and-high-paying' 
+                OR blog_slug = '5-interview-tips-for-freshers'";
+
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();   
+        return $result_array;
+    }
 }

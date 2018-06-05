@@ -1012,4 +1012,14 @@ class Freelancer_apply_model extends CI_Model {
         return $result_array['post_skill'];
     }
 
+    function free_job_related_blog_list() {
+        $sql = "SELECT * FROM ailee_blog
+                WHERE status='publish' AND
+                blog_slug = 'benefits-of-hiring-freelancers-from-aileensoul' 
+                OR blog_slug = '7-solutions-for-start-up-challenges' 
+                OR blog_slug = 'find-quick-freelance-work-hire-quality-freelancers-for-free'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();   
+        return $result_array;
+    }
 }

@@ -3149,4 +3149,10 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         echo json_encode($data);
     }
 
+    // GET RELATED BLOG LIST
+    public function get_free_hire_related_blog_list()
+    {
+        $free_hire_related_list = $this->freelancer_hire_model->free_hire_related_blog_list();
+        echo json_encode($free_hire_related_list);
+    }
 }
