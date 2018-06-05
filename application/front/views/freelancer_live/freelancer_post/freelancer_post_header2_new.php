@@ -125,7 +125,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
 					<div class="job-search-box1 clearfix">
 						<!-- <form action="<?php //echo base_url('freelance-employer/search'); ?>" method="get"> -->
-						<form onsubmit="searchSubmit()">
+						<form method="post" name="f-fearch" onsubmit="return searchSubmit()"><!--  onsubmit="searchSubmit()"> -->
 							<fieldset class="sec_h2">
 								<input id="freelance_keyword" class="tags ui-autocomplete-input skill_keyword" name="freelance_keyword" placeholder="Companies, Category, Products" autocomplete="off" ng-model="keyword" type="text">
 							</fieldset>
@@ -134,7 +134,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 							</fieldset>
 							<fieldset class="new-search-btn">
 								<label for="search_btn_main" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>
-								<input id="search_btn_main" style="display: none;" name="search_submit" value="Search" onclick="return searchSubmit()" type="submit">
+								<input id="search_btn_main" style="display: none;" name="search_submit" value="Search" type="submit">
 							</fieldset>
 						</form>    
 					</div>
@@ -546,8 +546,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 </script>
  <!-- all message notification header end -->
  <script type="text/javascript" charset="utf-8">
-function searchSubmit(){
-    
+function searchSubmit(){    
     var keyword = $("#freelance_keyword").val().toLowerCase().split(' ').join('+');
     var city = $("#freelance_location").val().toLowerCase().split(' ').join('+');
 
@@ -581,16 +580,19 @@ function searchSubmit(){
     if(keyword[keyword.length - 1] == "-")
     {            
         keyword = keyword.slice(0,-1);
-    }
+    }    
     
-    if (keyword == '' && city == '') {
+    if (keyword == '' && city == '') {    	
         return false;
-    } else if (keyword != '' && city == '') {
-        window.location.href = base_url + 'freelancer/search/' + keyword;
-    } else if (keyword == '' && city != '') {
-        window.location.href = base_url + 'freelancer/search/projects-in-' + city;
+    } else if (keyword != '' && city == '') {    	
+         window.location.href = base_url + 'freelancer/search/' + keyword;
+         return false;
+    } else if (keyword == '' && city != '') {    	
+         window.location.href = base_url + 'freelancer/search/projects-in-' + city;
+         return false;
     } else {
-        window.location.href = base_url + 'freelancer/search/' + keyword + '-projects-in-' + city;
+         window.location.href = base_url + 'freelancer/search/' + keyword + '-projects-in-' + city;
+         return false;
     }
 }
 

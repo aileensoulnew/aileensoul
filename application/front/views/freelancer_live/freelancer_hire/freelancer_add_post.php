@@ -268,6 +268,7 @@
 
         <script>
                         var base_url = '<?php echo base_url(); ?>';
+                        var header_all_profile = '<?php echo $header_all_profile; ?>';
 
                         // LEAVE PAGE ON ADD AND EDIT POST PAGE START
                         function leave_page(clicked_id)
