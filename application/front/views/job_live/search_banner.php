@@ -70,7 +70,7 @@
 <div class="bottom-bnr-div">
     <div class="container">
         <p>Apply on Your Dream Job Now!
-            <a class="btn-1 pull-right" href="<?php echo base_url('job-profile/create-account'); ?>">Create Job Profile</a>
+            <a class="btn-1 pull-right" href="<?php echo base_url('job-profile/signup'); ?>">Create Job Profile</a>
         </p>
     </div>
 </div>

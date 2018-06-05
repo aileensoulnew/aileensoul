@@ -208,10 +208,6 @@
                     </div>  
                     <!-- menubar -->    
                 </div>                       
-            </div> <div  class="add-post-button mob-block">
-                <?php if ($postdataone[0]['user_id'] == $userid) { ?>
-                    <a class="btn btn-3 btn-3b" id="rec_post_job2" href="<?php echo base_url('post-job'); ?>" title="Post a Job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
-<?php } ?>
             </div>
             <div class="container rec_res">
                 <div class="job-menu-profile mob-none  ">
@@ -238,11 +234,7 @@
                             }
                             ?>
                     </div>
-                    <div  class="add-post-button">
-                        <?php if ($postdataone[0]['user_id'] == $userid) { ?>
-                            <a title="Post  a Job" class="btn btn-3 btn-3b" id="rec_post_job1" href="<?php echo base_url('post-job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
-<?php } ?>
-                    </div>
+             
 
                 </div>
             

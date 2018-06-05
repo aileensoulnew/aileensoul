@@ -228,8 +228,8 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    		<div class="container">
 	    			<div class="custom-user-list pt20" ng-repeat="blog in blogDetails track by $index">
 	    				<div class="blog-user-detail">
-	    					<div class="user-img">	
-	    						<img src="<?php echo base_url(); ?>assets/n-images/user-pic.jpg">
+	    					<div class="user-img">
+								<img ng-src="<?php echo base_url(); ?>assets/n-images/{{ blog.name }}.jpg">
 	    					</div>
 							<div class="user-detail-left">
 								<p class="pt20">{{ blog.name }}</p>

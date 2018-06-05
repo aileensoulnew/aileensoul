@@ -190,9 +190,7 @@
                                     </div>
                                 </div>
                                 <?php echo $left_footer; ?>
-                                <div  class="add-post-button">
-                                    <a title="Post Project" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Add Project</a>
-                                </div>
+                             
                             </div>
                         </div>
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">

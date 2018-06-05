@@ -482,6 +482,7 @@ $route['job-profile/basic-info'] = "job_live/job_register_new";
 $route['job-profile/educational-info'] = "job_live/job_register_new";
 $route['job-profile/registration'] = "job_live/job_register_new";
 
+$route['job-profile/signup'] = "job/job_reg";
 $route['job/registration/live-post'] = "job/job_reg";
 $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";
 $route['job-profile/(:any)'] = "job/job_printpreview/$1";

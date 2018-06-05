@@ -22,7 +22,7 @@
     .common-form fieldset select:focus{ border: 1px solid #1b8ab9 !important;
 color: #1b8ab9 !important;}
      </Style>
-    }
+    
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $header_inner_profile; ?>
         <section>
@@ -236,7 +236,7 @@ color: #1b8ab9 !important;}
 												<div id="stud_info" class="common-form profile_edit main_form change-password-box" style="<?php echo $is_user == 1 ? 'display: none;' : ''; ?>">
 													<h5>Edit Student Information</h5>
 													<form id="stud_info_frm" name="stud_info_frm" action="<?php echo base_url(); ?>profile/edit_stud_info" method="post">
-														<p class="student-or-not">Back to Basic Information <a href="javascript:void(0);" id="is_stud">Click Here.</a></p>
+														
 
 														<fieldset class="fw">
 															<label >What are you studying right now?</label>
@@ -256,6 +256,7 @@ color: #1b8ab9 !important;}
 															<input tabindex="10" name="studjob_title" type="text" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." id="studjob_title" value="<?php echo $studentData['name']; ?>"/><span id="fullname-error"></span><?php echo form_error('studjob_title'); ?>
 														</fieldset>
 														<fieldset class="hs-submit full-width">
+															<a class="btn3" href="javascript:void(0);" id="is_stud">Back</a>
 															<input type="submit" tabindex="14" value="submit" name="submit" id="submit_studinfo">
 														</fieldset>
 													</form>

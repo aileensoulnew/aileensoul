@@ -265,7 +265,7 @@
                                                             </div>
                                                             <fieldset class="full-width">
                                                                 <label>Details of your business:<span style="color:red">*</span></label>
-                                                                <textarea name="business_details" ng-model="user.business_details" id="business_details" rows="4" tabindex="5"  cols="50" placeholder="Enter business detail" style="resize: none;"></textarea>
+                                                                <textarea name="business_details" ng-model="user.business_details" id="business_details" rows="4" tabindex="5"  cols="50" maxlength="2000" placeholder="Enter business detail" style="resize: none;"></textarea>
                                                                 <span ng-show="errorBusinessDetails" class="error">{{errorBusinessDetails}}</span>
                                                             </fieldset>
                                                             <input type="hidden" name="busreg_step" ng-model="user.busreg_step" id="busreg_step" tabindex="4"  value="">
@@ -441,6 +441,7 @@
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var profile_login = '<?php echo $profile_login; ?>';
         var app = angular.module('busRegApp', ['ngValidate','ngRoute','ngTagsInput','ngSanitize']);
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script>

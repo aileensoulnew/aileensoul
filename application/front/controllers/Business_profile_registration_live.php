@@ -24,7 +24,7 @@ class Business_profile_registration_live extends MY_Controller {
 
         $userid = $this->session->userdata('aileenuser');
         include ('business_include.php');
-
+        include ('main_profile_link.php');
         // FIX BUSINESS PROFILE NO POST DATA
 
         $this->data['no_business_post_html'] = '<div class="art_no_post_avl"><h3>Business Post</h3><div class="art-img-nn"><div class="art_no_post_img"><img src=' . base_url('assets/img/bui-no.png') . '></div><div class="art_no_post_text">No Post Available.</div></div></div>';

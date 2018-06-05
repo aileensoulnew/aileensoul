@@ -1,7 +1,15 @@
 <!-- menubar --> 
 <?php
 $userid = $this->session->userdata('aileenuser');
+if($this->uri->segment(2) == "applied-job" || $this->uri->segment(2) == "saved-job")
+{
+$id = $userid;//$this->db->get_where('job_reg', array('slug' => $this->uri->segment(2)))->row()->user_id;
+}
+else
+{
+
 $id = $this->db->get_where('job_reg', array('slug' => $this->uri->segment(2)))->row()->user_id;
+}
 ?>
 <div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
     <div class=" right-side-menu art-side-menu padding_less_right job_edit_pr right-menu-jr <?php
@@ -52,7 +60,7 @@ if ($userid != $id) {
             </ul>
 
             <?php
-            if ($this->uri->segment(2) != "") {
+            if ($this->uri->segment(2) != "") {                
                 if ($userid != $id) {
                     ?>
                     <div class="flw_msg_btn fr">
