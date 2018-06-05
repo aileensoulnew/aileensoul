@@ -17,6 +17,7 @@ class Search_live extends MY_Controller {
 
         include ('include.php');
         include ('business_include.php');
+        include ('main_profile_link.php');
     }
 
     public function index() {

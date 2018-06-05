@@ -296,7 +296,8 @@ $route['freelance-work/category/(:any)'] = "freelancer_apply_live/categoryFreela
 
 //$route['artist'] = "artist/index";
 $route['find-artist'] = "artist_live/index";
-$route['artist/registration'] = "artist_live/registration";
+$route['artist-profile/signup'] = "artist_live/registration";
+// $route['artist/registration'] = "artist_live/registration";
 $route['artist/ajax_data'] = "artist_live/ajax_data";
 
 
@@ -651,6 +652,7 @@ $route['freelancer/freelancer_notification_count'] = "freelancer/freelancer_noti
 $route['freelancer/registation_insert_new'] = "freelancer/registation_insert_new";
 $route['freelancer/get_filter_data'] = "freelancer/get_filter_data";
 
+$route['freelancer/remove_post'] = "freelancer/remove_post";
 $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 //Freelance Apply Signup End
 

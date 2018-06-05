@@ -2400,7 +2400,7 @@ input[type=text] {
 #jobseeker_regform .hs-submit{padding-top:15px;}
 .hs-submit .delete_btn{margin-bottom:10px; margin-top:0;}
 html{overflow-x:hidden;}
-.job-contact-frnd{margin-bottom:15px;}
+.job-contact-frnd, .job-contact-frnd1 {margin-bottom:15px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
