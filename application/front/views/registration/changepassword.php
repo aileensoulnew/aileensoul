@@ -26,12 +26,12 @@ color: #1b8ab9 !important;}
     <?php echo $header_inner_profile; ?>
     <!-- END HEADER -->
     <body>
-        <div class="padd_set">
+        <div id="paddingtop_fixed" class="user-midd-section">
             <div class="container">
                 <div class="row">
                     <div class=" ">
                         <div class="col-lg-3 col-md-4 col-sm-4">
-                            <div class="padd_set">
+                            <div class="">
                                 <div class="left-side-bar">
                                     <ul class="left-form-each">
                                         <li>  <a href="<?php echo base_url() . 'profile' ?>">Edit</a></li>

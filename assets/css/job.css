@@ -2301,6 +2301,10 @@ fieldset.main_select_data span:after{
     margin-left: 8px;
 }
 
+
+
+
+/***  media query  ***/
 @media screen and (min-width:768px){
     .mob-progressbar.temp{
         display:none
