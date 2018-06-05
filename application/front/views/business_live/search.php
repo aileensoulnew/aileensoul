@@ -123,7 +123,7 @@
                             </ul>
                         </div>
                     </div> -->
-                    <?php echo $left_footer; ?>
+                    
                 </div>
                 <div class="middle-part">
                     <div class="page-title">
@@ -173,6 +173,7 @@
                     <div class="add-box">
                         <img src="<?php echo base_url('assets/n-images/add.jpg') ?>">
                     </div>
+					<?php echo $left_footer; ?>
                 </div>
             </div>
 			
