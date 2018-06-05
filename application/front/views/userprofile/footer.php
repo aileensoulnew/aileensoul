@@ -35,12 +35,15 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
                         <li><a title="Contact Us" href="<?php echo base_url('contact-us'); ?>"  target="_blank">Contact Us</a></li>
                         <li><a title="Blog" href="<?php echo base_url('blog'); ?>" target="_blank">Blog</a></li>
                         <li><a title="Send Us Feedback" href="<?php echo base_url('feedback'); ?>" target="_blank">Send Us Feedback</a></li>
+                        <li><a title="Sitemap" tabindex="0" href="<?php echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li>
+                        <li><a title="Report" tabindex="0" href="<?php echo base_url('report-abuse'); ?>" target="_blank">Report</a></li>
+                        <li><a title="Faq" tabindex="0" href="<?php echo base_url('faq'); ?>" target="_blank">FAQ</a></li>
                         <?php
-                        if (!$this->session->userdata('aileenuser')) {
-                            ?>
-                            <li><a title="Sitemap" tabindex="0" href="<?php echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li>
-                            <?php
-                        }
+                            /*if (!$this->session->userdata('aileenuser')) {
+                                ?>
+                                <li><a title="Sitemap" tabindex="0" href="<?php echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li>
+                                <?php
+                            }*/
                         ?>
                     </ul>
                 </div>

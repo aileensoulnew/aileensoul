@@ -243,7 +243,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                     </form>
 
-                    <div class="custom_footer_left fw">
+                    <?php echo $left_footer; ?>
+                    <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -278,7 +279,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="middle-part">
                     <div class="page-title">

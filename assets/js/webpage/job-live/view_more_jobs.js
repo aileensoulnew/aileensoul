@@ -58,7 +58,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('jobByLocationController', function ($scope, $http, $location, $window) {
-    $scope.title = "Job By Location, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Job By Location, Job Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -119,7 +119,7 @@ app.controller('jobByLocationController', function ($scope, $http, $location, $w
 });
 
 app.controller('jobsBySkillsController', function ($scope, $http, $location, $window) {
-    $scope.title = "Job By Skills, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Job By Skills, Job Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -180,7 +180,7 @@ app.controller('jobsBySkillsController', function ($scope, $http, $location, $wi
 });
 
 app.controller('jobsByDescController', function ($scope, $http, $location, $window) {
-    $scope.title = "Job By Designation, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Job By Designation, Job Profile | Aileensoul";    
     $scope.jobByDesc = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -241,7 +241,7 @@ app.controller('jobsByDescController', function ($scope, $http, $location, $wind
 });
 
 app.controller('jobsByCompanyController', function ($scope, $http, $location, $window) {
-    $scope.title = "Job By Companies, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Job By Companies, Job Profile | Aileensoul";    
     $scope.jobByCompany = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -302,7 +302,7 @@ app.controller('jobsByCompanyController', function ($scope, $http, $location, $w
 });
 
 app.controller('jobsBycategoryController', function ($scope, $http, $location, $window) {
-    $scope.title = "Job By Category, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Job By Category, Job Profile | Aileensoul";    
     $scope.jobByCategory = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -363,7 +363,7 @@ app.controller('jobsBycategoryController', function ($scope, $http, $location, $
 });
 
 app.controller('jobsByjobsController', function ($scope, $http, $location, $window) {
-    $scope.title = "Jobs, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Jobs, Job Profile | Aileensoul";    
     $scope.jobByJobs = {};
     $scope.jobs = {};
     var isProcessing = false;

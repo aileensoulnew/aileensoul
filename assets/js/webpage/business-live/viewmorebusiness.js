@@ -21,7 +21,7 @@ app.config(function ($routeProvider, $locationProvider) {
 
 
 app.controller('businessCategoryController', function ($scope, $window, $http) {
-    $scope.title = title;
+    $scope.$parent.title = title;
     $scope.businessAllCategory = {};
     $scope.business = {};
     var isProcessing = false;
@@ -90,7 +90,7 @@ app.controller('businessCategoryController', function ($scope, $window, $http) {
 
 
 app.controller('businessLocationController', function ($scope, $window, $http) {
-    $scope.title = title;
+    $scope.$parent.title = title;
     $scope.businessAllLocation = {};
     $scope.business = {};
     var isProcessing = false;
@@ -150,7 +150,7 @@ app.controller('businessLocationController', function ($scope, $window, $http) {
 });
 
 app.controller('businessBybusinessController', function ($scope, $http) {
-    $scope.title = title;
+    $scope.$parent.title = title;
     $scope.businessByBusiness = {};
     var isProcessing = false;
     function jobJobs(pagenum = "") {

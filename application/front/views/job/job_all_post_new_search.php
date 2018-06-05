@@ -7,6 +7,7 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
         <meta name="robots" content="noindex, nofollow">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">   
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
@@ -209,7 +210,8 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
                             </div>
                         </div>
                     </form>
-                    <div class="custom_footer_left fw">
+                    <?php echo $left_footer; ?>
+                    <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -244,7 +246,7 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="middle-part">
                     <div class="page-title">

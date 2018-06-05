@@ -3,7 +3,8 @@
     <head>
         <title ng-bind="title"></title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">   
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
@@ -81,7 +82,7 @@
                         <p class="text-left p10"><a href="<?php echo base_url('business-by-location') ?>">View More Location</a></p>
                     </div>
 
-                    <div class="custom_footer_left fw">
+                    <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -116,7 +117,8 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+                    <?php echo $left_footer; ?>
                 </div>
                 <div class="middle-part">
                     <div class="page-title">

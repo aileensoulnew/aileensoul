@@ -168,7 +168,8 @@
                         </div>
                     </div>
                     </form>
-                    <div class="custom_footer_left fw">
+                    <?php echo $left_footer; ?>
+                    <<!-- div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -203,7 +204,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="middle-part">
                     <div class="page-title">

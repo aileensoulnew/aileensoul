@@ -316,7 +316,7 @@ app.controller('siteMapMemberController', function ($scope, $http,$location) {
     $scope.alphabetList = {};
     $scope.memberList = [],
     $scope.limit = 100;
-    $scope.currentPage = 5,
+    $scope.currentPage = 1,
     $scope.selectedPage = 3,
     // $scope.currentPage = ($location.search()) ? $location.search()['page_id'] : 1,
     $scope.numPerPage = 5,
