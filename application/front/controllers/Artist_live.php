@@ -120,7 +120,7 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['title'] = "Artist Search | Aileensoul";
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);

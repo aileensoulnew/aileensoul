@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="freeapplypostApp" ng-controller="freeapplypostController">
     <head>
-        <title>Aileensoul</title>
+        <title>Freelancer Jobs</title>
         <meta charset="utf-8">
         <meta name="robots" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +43,7 @@
                 <!-- LEFT SIDE FILTER -->
                 <div class="left-part">
                     <?php echo $fa_leftbar; ?>
-                    <div class="custom_footer_left fw">
+                   <!--  <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -78,7 +78,9 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+                    <?php echo $left_footer_list_view; ?>
+
                 </div>
 
                 <!-- MIDDLE PART FOR POST -->
