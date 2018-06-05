@@ -322,8 +322,8 @@
             </div>
             <div class="modal-footer">
                 <a title="Take me in"  ng-if="(details_data.fh_step == '3' && details_data.fh_status == '1') || (details_data.fh_step == '7' && details_data.fp_status == '1')" class="btn-4"  ng-href="<?php echo base_url('freelancer'); ?>" target="_self">Take me in</a> 
-                <a title="Take me in" ng-if="(details_data.fh_status == '0' && details_data.fh_step == '3') || (details_data.fp_status == '0' && details_data.fp_step == '7')" class="btn-4" ng-href="<?php echo base_url('freelancer'); ?>" target="_self">Active</a> 
-                <a title="Take me in" ng-if="details_data.fh_step == null && details_data.fp_step == null" class="btn-4" ng-href="<?php echo base_url('freelancer'); ?>" target="_self">Register</a> 
+                <!-- <a title="Take me in" ng-if="(details_data.fh_status == '0' && details_data.fh_step == '3') || (details_data.fp_status == '0' && details_data.fp_step == '7')" class="btn-4" ng-href="<?php //echo base_url('freelancer'); ?>" target="_self">Active</a> --> 
+                <a title="Take me in" ng-if="details_data.fh_step == null && details_data.fp_step == null" class="btn-4" ng-href="<?php echo base_url('freelance-profile'); ?>" target="_self">Register</a> 
             </div>
         </div>
     </div>
