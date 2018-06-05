@@ -119,7 +119,7 @@ class Recruiter_model extends CI_Model {
             ) AND ailee_job_reg.is_delete = '0' AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10'". $sql_filter ." ORDER BY job_id DESC";
        
         $query = $this->db->query($sql);        
-        //echo $this->db->last_query();exit;
+        // echo $this->db->last_query();exit;
         $recommen_candid_totrec = $query->row_array();
         return $recommen_candid_totrec['total_record'];
     }

@@ -320,26 +320,25 @@ function checkvalue(){
 	$(document).ready(function () {
 		recommen_candidate_post(filter_selected_data,'',1);
 		$(window).scroll(function () {
-			
-		  if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
-			var page = $(".page_number:last").val();
-			var total_record = $(".total_record").val();
-			var perpage_record = $(".perpage_record").val();
-			if (parseInt(perpage_record) <= parseInt(total_record)) {
-				var available_page = total_record / perpage_record;
-				available_page = parseInt(available_page, 10);
-				var mod_page = total_record % perpage_record;
-				if (mod_page > 0) {
-					available_page = available_page + 1;
-				}
+			if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
+				var page = $(".page_number:last").val();
+				var total_record = $(".total_record").val();
+				var perpage_record = $(".perpage_record").val();
+				if (parseInt(perpage_record) <= parseInt(total_record)) {
+					var available_page = total_record / perpage_record;
+					available_page = parseInt(available_page, 10);
+					var mod_page = total_record % perpage_record;
+					if (mod_page > 0) {
+						available_page = available_page + 1;
+					}
 					//if ($(".page_number:last").val() <= $(".total_record").val()) {
-						if (parseInt(page) <= parseInt(available_page)) {
-							var pagenum = parseInt($(".page_number:last").val()) + 1;
-							recommen_candidate_post('',filter_selected_data,pagenum);
-						}
+					if (parseInt(page) <= parseInt(available_page)) {
+						var pagenum = parseInt($(".page_number:last").val()) + 1;
+						recommen_candidate_post('',filter_selected_data,pagenum);
 					}
 				}
-			});
+			}
+		});
 	});
 
 	var isProcessing = false;
