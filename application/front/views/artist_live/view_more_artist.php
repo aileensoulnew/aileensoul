@@ -5,7 +5,7 @@
         <title ng-bind="title"></title>
         <meta charset="utf-8">
         <meta name="robots" content="noindex, nofollow">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">  
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
@@ -50,13 +50,10 @@
             <div class="middle-section middle-section-banner">
         <?php echo $search_banner;  
         } ?>
-
-
-
-            <div class="container pt20 mobp0 mobmt15">
-                <div ng-view></div>
-            </div>
-        </div>        
+                <div class="container pt20 mobp0 mobmt15">
+                    <div ng-view></div>
+                </div>
+            </div>        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>

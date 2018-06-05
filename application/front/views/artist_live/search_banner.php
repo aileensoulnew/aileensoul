@@ -47,7 +47,7 @@ if ($ismainregister == true && $artist_isregister == false) {
 <div class="bottom-bnr-div">
 	<div class="container">
 		<p>Show Your Artistic Side
-			<a class="btn-1 pull-right" href="<?php echo artist_registration ?>">Create Artist Profile</a>
+			<a class="btn-1 pull-right" href="<?php echo artist_registration ?>" target="_self">Create Artist Profile</a>
 		</p>
 	</div>
 </div>

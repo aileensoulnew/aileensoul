@@ -287,6 +287,7 @@ class Sitemap extends CI_Controller {
         $start = ($page - 1) * $perpage;
         if ($start < 0)
             $start = 0;
+        
         $result['member_list'] = $this->sitemap_model->get_member_list($searchword,$start,$perpage);
         $result['total_record'] = $this->sitemap_model->get_member_list_total($searchword);
         echo json_encode($result);

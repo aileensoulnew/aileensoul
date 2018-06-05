@@ -114,4 +114,5 @@
         }
 
         $this->data['right_profile_view'] = $this->load->view('right_profile', $this->data, TRUE);
+        $this->data['left_footer_list_view'] = $this->load->view('leftfooter', $this->data, TRUE);
 ?>

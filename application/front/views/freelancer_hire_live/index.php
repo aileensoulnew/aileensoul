@@ -265,6 +265,7 @@
                     </div>
                 </div>
             </div>
+            <?php echo $login_footer; ?>
         </div>
         <!--  poup modal  -->
         <div style="display:none;" class="modal fade" id="post-popup1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

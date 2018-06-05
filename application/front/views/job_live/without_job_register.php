@@ -232,7 +232,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                     </form>
 
-                    <div class="custom_footer_left fw">
+                    <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -267,7 +267,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+                    <?php echo $left_footer_list_view; ?>
                 </div>
                 <div class="middle-part">                    
                     <div class="page-title">
@@ -331,7 +332,6 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>">
                     </div>
                 </div>
-
             </div>
         </div>
         </div>

@@ -199,41 +199,42 @@
                     </div>
                 </div>
 			<div class="container">
-            <div class="browse-jobs">
-                <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
-                    <h2>Browse Other Jobs</h2>
-                </div>
-                <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="col-md-4 col-sm-4">
-                        <div class="browse-box">
-                            <ul>
-                                <li><h3>Jobs By Location</h3></li>
-                                <li ng-if="jobCity.length != 0" ng-repeat="jc in jobCity" ng-init="jcIndex=$index"><a href="<?php echo base_url(); ?>jobs-in-{{jc.slug}}">Jobs in {{jc.city_name}} ({{jc.count}})</a></li>
-                                <li><a href="<?php echo base_url(); ?>jobs-by-location">View All Location</a></li>
-                            </ul>
-                        </div>
+                <div class="browse-jobs">
+                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <h2>Browse Other Jobs</h2>
                     </div>
-                    <div class="col-md-4 col-sm-4">
-                        <div class="browse-box">
-                            <ul>
-                                <li><h3>Jobs By Designation</h3></li>
-                                <li ng-if="jobDesignation.length != 0" ng-repeat="jd in jobDesignation" ng-init="jdIndex=$index"><a href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs">{{jd.job_title}} ({{jd.count}})</a></li>                                
-                                <li><a href="<?php echo base_url(); ?>jobs-by-designations">View All Designation</a></li>
-                            </ul>
+                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="browse-box">
+                                <ul>
+                                    <li><h3>Jobs By Location</h3></li>
+                                    <li ng-if="jobCity.length != 0" ng-repeat="jc in jobCity" ng-init="jcIndex=$index"><a href="<?php echo base_url(); ?>jobs-in-{{jc.slug}}">Jobs in {{jc.city_name}} ({{jc.count}})</a></li>
+                                    <li><a href="<?php echo base_url(); ?>jobs-by-location">View All Location</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4">
-                        <div class="browse-box">
-                            <ul>
-                                <li><h3>Jobs By Company</h3></li>
-                                <li ng-if="jobCompany.length != 0" ng-repeat="jcm in jobCompany" ng-init="jcmIndex=$index"><a href="<?php echo base_url(); ?>jobs-opening-at-{{jcm.company_name | slugify}}-{{jcm.rec_id}}">{{jcm.company_name}} ({{jcm.count}})</a></li>
-                                <li><a href="<?php echo base_url(); ?>jobs-by-companies">View All Companies</a></li>
-                            </ul>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="browse-box">
+                                <ul>
+                                    <li><h3>Jobs By Designation</h3></li>
+                                    <li ng-if="jobDesignation.length != 0" ng-repeat="jd in jobDesignation" ng-init="jdIndex=$index"><a href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs">{{jd.job_title}} ({{jd.count}})</a></li>                                
+                                    <li><a href="<?php echo base_url(); ?>jobs-by-designations">View All Designation</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="browse-box">
+                                <ul>
+                                    <li><h3>Jobs By Company</h3></li>
+                                    <li ng-if="jobCompany.length != 0" ng-repeat="jcm in jobCompany" ng-init="jcmIndex=$index"><a href="<?php echo base_url(); ?>jobs-opening-at-{{jcm.company_name | slugify}}-{{jcm.rec_id}}">{{jcm.company_name}} ({{jcm.count}})</a></li>
+                                    <li><a href="<?php echo base_url(); ?>jobs-by-companies">View All Companies</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+            <?php echo $login_footer; ?>
         </div>
         
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
@@ -246,7 +247,7 @@
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script type="text/javascript" charset="utf-8">
-function jobsearchSubmit(){
+        function jobsearchSubmit(){
     
         var keyword = $("input[name='job_keyword']").val().toLowerCase().split(' ').join('+');
         var city = $("input[name='job_location']").val().toLowerCase().split(' ').join('+');

@@ -21,7 +21,10 @@
 		<ul class="mid-listing">
 			<li ng-repeat="member in memberList track by $index">
 				<a ng-href="<?php echo base_url() ?>{{ member.user_slug }}" target="_blank">
-					{{ member.fullname | capitalize }} ( {{ member.user_slug | capitalize }} )
+					{{ member.fullname | capitalize }} 
+					<span ng-if="member.designaation">
+						( {{ member.user_slug | capitalize }} )
+					</span>
 				</a>
 			</li>								
 		</ul>

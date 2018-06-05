@@ -324,6 +324,7 @@ class Sitemap_model extends CI_Model {
     }
 
     function get_member_list($searchword = '',$start = 0, $limit = 100){
+
         $search_query = "";
         if($searchword != ""){
             $searchword = $searchword. '%';

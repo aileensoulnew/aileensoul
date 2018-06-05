@@ -19,7 +19,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('artistCategoryController', function ($scope, $http) {
-    $scope.title = title;
+    $scope.$parent.title = 'Artist Category | Aileensoul';
     $scope.artistAllCategory = {};
     function artistAllCategory(){
         $http.get(base_url + "artist_live/artistAllCategory").then(function (success) {
@@ -37,7 +37,7 @@ app.controller('artistCategoryController', function ($scope, $http) {
 
 
 app.controller('artistLocationController', function ($scope, $window, $http) {
-    $scope.title = title;
+    $scope.$parent.title = 'Artist Location | Aileensoul';
     $scope.artistAllLocation = {};
     $scope.artist = {};
     var isProcessing = false;
@@ -100,7 +100,7 @@ app.controller('artistLocationController', function ($scope, $window, $http) {
 });
 
 app.controller('artistByArtistController', function ($scope, $http) {
-    $scope.title = title;
+    $scope.$parent.title = 'Artist | Aileensoul';
     $scope.artistByArtist = {};
     var isProcessing = false;
     function artistWithLocation(pagenum = "") {

@@ -21,6 +21,10 @@
             <li><a href="<?php echo base_url('blog'); ?>" target="_blank"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> Blog</a></li>
         </ul>
         <ul class="cus-full2">
+            <li><a href="<?php echo base_url('faq'); ?>" target="_blank"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> Faq </a></li>
+            <li><a title="Disclaimer Policy" href="<?php echo base_url('report-abuse'); ?>" target="_blank"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> Report </a></li>
+        </ul>
+        <ul class="cus-full2">
             <li><a href="<?php echo base_url('feedback'); ?>" target="_blank"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> Send Us Feedback</a></li>
             <li><a href="<?php echo base_url('advertise-with-us'); ?>" target="_blank"><span class="custom_footer_dot" role="presentation" aria-hidden="true"> · </span> Advertise With Us</a></li>
 

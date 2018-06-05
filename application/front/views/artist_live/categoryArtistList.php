@@ -87,7 +87,7 @@
                         <p class="text-left p10"><a href="<?php echo artist_location_list ?>">View More Locations</a></p>
                     </div>
 
-                    <div class="custom_footer_left fw">
+                    <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -122,7 +122,9 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
+
+                    <?php echo $left_footer_list_view; ?>
                 </div>
                 <div class="middle-part">
                     <div class="page-title">
