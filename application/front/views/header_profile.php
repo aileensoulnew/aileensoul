@@ -504,7 +504,7 @@ if($browser == "Firefox")
 						<div class="all-pr-img">
 							<img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
 						</div>
-						<span>Job Profile1</span>
+						<span>Job Profile123</span>
 					</a>
 				</li>
 				<li>
