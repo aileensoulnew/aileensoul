@@ -331,12 +331,16 @@ class Sitemap_model extends CI_Model {
             $search_query = " AND first_name like '". $searchword ."'";
         }
         $sql = "SELECT u.*, CONCAT(first_name, ' ', last_name) as fullname, 
-                jt.name as designaation 
-                FROM aileensoul.ailee_user u
+                jt.name as designaation,d.degree_name
+                FROM ailee_user u
                 LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
                 LEFT JOIN ailee_job_title jt on up.designation = jt.title_id
-                WHERE user_slug != ''"
-                . $search_query ." ORDER BY u.user_id DESC";
+                LEFT JOIN ailee_user_student us on us.user_id = u.user_id
+                LEFT JOIN ailee_degree d on d.degree_id = us.current_study
+                WHERE user_slug != '' AND (
+                    u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
+                    OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
+        )". $search_query ." ORDER BY u.user_id DESC";
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
@@ -355,7 +359,10 @@ class Sitemap_model extends CI_Model {
                 FROM aileensoul.ailee_user u
                 LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
                 LEFT JOIN ailee_job_title jt on up.designation = jt.title_id
-                WHERE user_slug != ''"
+                WHERE user_slug != '' AND (
+                    u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
+                    OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
+                )"
                 . $search_query ." ORDER BY u.user_id DESC";
 
         $query = $this->db->query($sql);
