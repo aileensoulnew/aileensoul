@@ -958,21 +958,20 @@ function submitforgotForm()
 
             });
         </script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
         
-        <?php
-  if (IS_ART_JS_MINIFY == '0') { ?>
+    <?php /*
+    if (IS_ART_JS_MINIFY == '0') { ?>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
     <!-- <script type="text/javascript" defer="defer" src="<?php //echo base_url('assets/js/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
 
- <?php }else{?> 
+    <?php }else{?> 
 
     <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
     <!-- <script type="text/javascript" defer="defer" src="<?php //echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
     <!-- <script type="text/javascript" defer="defer" src="<?php //echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script> -->
-
-
- <?php }?>           
+    <?php }*/ ?>           
         
         <script>
             $(document).on('click', '[data-toggle*=modal]', function () {
