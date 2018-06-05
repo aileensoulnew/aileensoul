@@ -243,7 +243,8 @@ if (!files[0].name.match(/.(jpg|jpeg|png|gif)$/i)){
                         data: 'post_id=' + abc,
                         success: function (data) {
 
-                            $('#' + 'removepost' + abc).html(data);
+                            // $('#' + 'removepost' + abc).html(data);
+                            $('#' + 'removepost' + abc).remove();
                             $('#' + 'removepost' + abc).removeClass();
                             var numItems = $('.contact-frnd-post .job-contact-frnd .profile-job-post-detail').length;
 

@@ -835,7 +835,7 @@ class Recruiter extends MY_Controller {
 		}
 
 		if ($userid) {
-			$this->load->view('recruiter/rec_post', $this->data);
+			//$this->load->view('recruiter/rec_post', $this->data);
 		} else {
 			redirect('login/');
 		}
@@ -2020,7 +2020,7 @@ class Recruiter extends MY_Controller {
 
 				if (count($rec_postdata) != '') {
 					foreach ($rec_postdata as $post) {
-						$rec_post .= '<div class="all-job-box" id="removepost"' . $post['post_id'] . '">
+						$rec_post .= '<div class="all-job-box" id="removepost'.$post['post_id'].'">
 						<div class="all-job-top">';
 
 						$cache_time_1 = $this->db->get_where('recruiter', array(
@@ -2193,7 +2193,7 @@ class Recruiter extends MY_Controller {
 
 					foreach ($rec_postdata as $post) {
 
-						$rec_post .= '<div class="all-job-box" id="removepost"' . $post['post_id'] . '">
+						$rec_post .= '<div class="all-job-box" id="removepost'.$post['post_id'] . '">
 						<div class="all-job-top">';
 
 						$cache_time_1 = $this->db->get_where('recruiter', array(

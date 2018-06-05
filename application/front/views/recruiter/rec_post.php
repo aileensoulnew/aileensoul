@@ -335,19 +335,28 @@
         
 
         <script>
-                                var base_url = '<?php echo base_url(); ?>';
-                                var data1 = <?php echo json_encode($de); ?>;
-                                var data = <?php echo json_encode($demo); ?>;
-                                var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
-                                var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
-                                var id = '<?php echo $this->uri->segment(3); ?>';
-                                var return_page = '<?php echo $_GET['page']; ?>';
+                var base_url = '<?php echo base_url(); ?>';
+                var data1 = <?php echo json_encode($de); ?>;
+                var data = <?php echo json_encode($demo); ?>;
+                var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+                var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                var id = '<?php echo $this->uri->segment(3); ?>';
+                var return_page = '<?php echo $_GET['page']; ?>';
         </script>
 
 
+        <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/recruiter/rec_post.js'); ?>"></script>
+        <?php if($this->uri->segment(3) != $userid){   ?>
+            <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>    
+        <?php }else{ ?>
+            <script src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+        <?php } ?>
         <!-- FIELD VALIDATION JS END -->
         <?php
-        if (IS_REC_JS_MINIFY == '0') { ?>
+        /*if (IS_REC_JS_MINIFY == '0') { ?>
   <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
 
             <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -375,7 +384,7 @@
 <?php }else{ ?>
  <script src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
 <?php } ?>
-<?php } ?>
+<?php }*/ ?>
 
     </body>
 </html>
