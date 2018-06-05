@@ -1,6 +1,7 @@
 app.controller('artistController', function ($scope, $http) {
     $scope.title = title;
     $scope.artistCategory = {};
+    $scope.relatedBlog = {};
     
     function artistCategory(){
         $http.get(base_url + "artist_live/artistCategory?limit=8").then(function (success) {
@@ -24,6 +25,15 @@ app.controller('artistController', function ($scope, $http) {
         }, function (error) {});
     }
     getArtistLocation();
+    
+    // GET RELATED BLOG LIST FOR INDEX PAGE 
+    function getRelatedBlogList(){
+        $http.post(base_url + "artist_live/get_art_related_blog_list").then(function (success) {
+            $scope.relatedBlog = success.data;
+        }, function (error) {});
+    }
+    getRelatedBlogList();
+
 
 });
 

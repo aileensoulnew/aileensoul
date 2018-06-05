@@ -17,6 +17,7 @@ class Recruiter_live extends MY_Controller {
         $this->load->model('user_post_model');
         $this->load->model('data_model');
         $this->load->model('artistic_model');
+        $this->load->model('recruiter_model');
         $this->load->library('S3');
 
         $this->data['no_user_post_html'] = '<div class="user_no_post_avl"><h3>Feed</h3><div class="user-img-nn"><div class="user_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Feed Available.</div></div></div>';
@@ -677,5 +678,12 @@ class Recruiter_live extends MY_Controller {
         $this->data['recruiter_profile_link'] = $this->recruiter_profile_link;
         $this->data['recruiter_profile_set'] = $this->recruiter_profile_set;
         return $reactivate;
+    }
+
+    // GET RELATED BLOG LIST
+    public function get_recruiter_related_blog_list()
+    {
+        $recruiter_related_list = $this->recruiter_model->recruiter_related_blog_list();
+        echo json_encode($recruiter_related_list);
     }
 }

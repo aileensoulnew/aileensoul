@@ -1833,4 +1833,11 @@ class Artist_live extends MY_Controller {
 
         $this->load->view('artist_live/artist_create_profile', $this->data);
     }
+
+    // GET RELATED BLOG LIST
+    public function get_art_related_blog_list()
+    {
+        $art_related_list = $this->artistic_model->art_related_blog_list();
+        echo json_encode($art_related_list);
+    }
 }

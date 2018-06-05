@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="artistApp" ng-controller="artistController">
+<html lang="en" ng-app="freelanceHireControllerApp" ng-controller="freelanceHireController">
     <head>
         <title>Freelance Register | Aileensoul</title>
         <meta charset="utf-8">
@@ -122,38 +122,14 @@
                         <h3>Related Articles</h3>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3" ng-repeat="blog in relatedBlog">
                             <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
                                 <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
+                                    <a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
-                                <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
-                                <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
-                                <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
-                                </div>
-                            </div>
-                        </div>                           
+                        </div>                    
                     </div>
                 </div>
             </div>
@@ -429,7 +405,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/hire_registration.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
@@ -437,14 +412,15 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var q = '';
             var l = '';
-            var app = angular.module('artistApp', ['ui.bootstrap']); 
+            var app = angular.module('freelanceHireControllerApp', ['ui.bootstrap']); 
             var site = '<?php echo base_url(); ?>';
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
             AOS.init({
                 easing: 'ease-in-out-sine'
             });
         </script>               
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/hire_registration.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script> -->
     </body>
 </html>

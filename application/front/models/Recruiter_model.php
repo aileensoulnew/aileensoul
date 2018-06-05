@@ -506,4 +506,16 @@ class Recruiter_model extends CI_Model {
         $recommen_candid = $query->row_array();
         return $recommen_candid['total_record'];
     }
+
+    function recruiter_related_blog_list() {
+        $sql = "SELECT * FROM ailee_blog
+                WHERE status='publish' AND
+                blog_slug = 'pros-and-cons-of-hiring-a-full-time-employee-vs-a-freelancer' 
+                OR blog_slug = 'aileensoul-a-timeless-platform-for-every-stage-of-your-life' 
+                OR blog_slug = '7-solutions-for-start-up-challenges'";
+
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();   
+        return $result_array;
+    }
 }

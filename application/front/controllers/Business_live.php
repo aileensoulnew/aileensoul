@@ -311,4 +311,10 @@ class Business_live extends MY_Controller {
         echo json_encode($all_link);
     }
 
+    // GET RELATED BLOG LIST
+    public function get_business_related_blog_list()
+    {
+        $business_related_list = $this->business_model->business_related_blog_list();
+        echo json_encode($business_related_list);
+    }
 }

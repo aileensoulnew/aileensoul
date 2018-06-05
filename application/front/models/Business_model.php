@@ -662,4 +662,17 @@ class Business_model extends CI_Model {
     }
 
 
+    function business_related_blog_list() {
+        $sql = "SELECT * FROM ailee_blog
+                WHERE status = 'publish' AND
+                blog_slug = 'how-to-build-a-startup-from-scratch' 
+                OR blog_slug = '10-prerequisites-to-be-a-successful-entrepreneur-amid-cut-throat-competition' 
+                OR blog_slug = 'top-10-free-business-listing-websites-to-improve-brand-awareness-outreach'
+                OR blog_slug = 'elon-musk-s-7-greatest-inventions-bringing-imagination-to-reality'";
+
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();   
+        return $result_array;
+    }
+
 }

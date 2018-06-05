@@ -610,4 +610,10 @@ class Job_live extends MY_Controller {
         $this->load->view('job_live/job_create_profile', $this->data);
     }
 
+    // GET RELATED BLOG LIST
+    public function get_job_related_blog_list()
+    {
+        $job_related_list = $this->job_model->job_related_blog_list();
+        echo json_encode($job_related_list);
+    }
 }

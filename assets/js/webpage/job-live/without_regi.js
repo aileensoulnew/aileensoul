@@ -22,6 +22,7 @@ app.controller('noRegJobController', function ($scope, $http) {
     $scope.jobCompany = {};
     $scope.jobSkill = {};
     $scope.latestJob = {};
+    $scope.relatedBlog = {};
 
     function jobCategory(limit = 0) {
         $http.get(base_url + "job_live/jobCategory?limit="+limit).then(function (success) {
@@ -84,6 +85,14 @@ app.controller('noRegJobController', function ($scope, $http) {
     $('#job-filter input').change(function () {
         $scope.applyJobFilter();
     });
+
+    // GET RELATED BLOG LIST FOR INDEX PAGE 
+    function getRelatedBlogList(){
+        $http.post(base_url + "job_live/get_job_related_blog_list").then(function (success) {
+            $scope.relatedBlog = success.data;
+        }, function (error) {});
+    }
+    getRelatedBlogList();
 });
 
 $(window).on("load", function () {

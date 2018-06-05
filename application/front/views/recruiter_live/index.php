@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="artistApp" ng-controller="artistController">
+<html lang="en" ng-app="recruiterApp" ng-controller="recruiterController">
     <head>
         <title ng-bind="title"></title>
         <meta name="robots" content="noindex, nofollow">
@@ -116,38 +116,14 @@
                         <h3>Related Articles</h3>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6" ng-repeat="blog in relatedBlog">
                             <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
+                                <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
                                 <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
+                                    <a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
-                                <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
-                                <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="rel-art-box">
-                                <img src="<?php echo base_url('assets/img/art-post.jpg') ?>">
-                                <div class="rel-art-name">
-                                    <a href="#">See the world in your language with Google Translate</a>
-                                </div>
-                            </div>
-                        </div>                           
+                        </div>                                  
                     </div>
                 </div>
             </div>
@@ -468,12 +444,12 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var q = '';
             var l = '';
-            var app = angular.module('artistApp', ['ui.bootstrap']);
+            var app = angular.module('recruiterApp', ['ui.bootstrap']);
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script> -->
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js') ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_reg.js'); ?>"></script>
         <?php   /*if (IS_REC_JS_MINIFY == '0') {

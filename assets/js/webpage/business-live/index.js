@@ -2,6 +2,7 @@ app.controller('businessController', function ($scope, $http) {
     $scope.title = title;
     $scope.businessCategory = {};
     $scope.locationCategory = {};
+    $scope.relatedBlog = {};
     
     function businessCategory(){
         $http.get(base_url + "business_live/businessCategory?limit=8").then(function (success) {
@@ -23,6 +24,15 @@ app.controller('businessController', function ($scope, $http) {
         }, function (error) {});
     }
     businessLocation();
+
+    // GET RELATED BLOG LIST FOR INDEX PAGE 
+    function getRelatedBlogList(){
+        $http.post(base_url + "business_live/get_business_related_blog_list").then(function (success) {
+            $scope.relatedBlog = success.data;
+        }, function (error) {});
+    }
+    getRelatedBlogList();
+
 });
 
 $(window).on("load", function () {
