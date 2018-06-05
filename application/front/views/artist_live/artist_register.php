@@ -43,7 +43,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 col-sm-6 left-header">
-                                <h2 class="logo"><a href="#">Aileensoul</a></h2>
+                                <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>">Aileensoul</a></h2>
                             </div>
                             <div class="col-md-6 col-sm-6 right-header">
                                 <ul>

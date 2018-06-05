@@ -58,7 +58,7 @@ function artistic_dashboard_post(slug, pagenum) { //alert("hii"); alert(slug);
             $('#loader').hide();
         },
         success: function (data) {
-            $('.fw').hide();
+            // $('.fw').hide();
             $('.art-all-post').append(data);
 
             // second header class add for scroll

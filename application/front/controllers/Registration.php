@@ -15,6 +15,7 @@ class Registration extends CI_Controller {
         $this->load->library('S3');
         //AWS access info end
         include('include.php');
+        include ('main_profile_link.php');
 
         //This function is there only one time users slug created after remove it start
 //         $this->db->select('user_id,first_name,last_name');
@@ -248,7 +249,7 @@ class Registration extends CI_Controller {
                     $updatdata = $this->common->update_data($data, 'user_login', 'user_id', $userid);
                     if ($updatdata) {
 
-                        redirect('profiles/' . $this->session->userdata('aileenuser_slug'), 'refresh');
+                        redirect(base_url().$this->session->userdata('aileenuser_slug'), 'refresh');
                         $this->session->flashdata('success', 'Update Successfully!!');
                     } else {
                         $this->session->flashdata('error', 'Your Password not Edited');

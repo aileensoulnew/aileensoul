@@ -11,7 +11,11 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
 <?php } else{ ?>
       <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css?ver='.time()); ?>">
 <?php } ?>
-    
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
        
     </head>
     <style type="text/css">
@@ -19,7 +23,7 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
 color: #1b8ab9 !important;}
     </style>
     <!-- start header -->
-    <?php echo $header; ?>
+    <?php echo $header_inner_profile; ?>
     <!-- END HEADER -->
     <body>
         <div class="padd_set">
@@ -77,6 +81,7 @@ color: #1b8ab9 !important;}
         </div>
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
   <?php
 if(IS_OUTSIDE_JS_MINIFY == '0'){
 ?>
@@ -84,7 +89,7 @@ if(IS_OUTSIDE_JS_MINIFY == '0'){
 <?php } else{ ?>
      <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver='.time()); ?>"></script>
 <?php } ?>
-       
+<script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>       
 <!-- validation for edit email formate form strat -->
 
 <script>
@@ -131,6 +136,9 @@ if(IS_OUTSIDE_JS_MINIFY == '0'){
                                             },
                                     
                                 }); });
+                            var base_url = '<?php echo base_url(); ?>';
+
+                            var header_all_profile = '<?php echo $header_all_profile; ?>';
                                 </script>
     </body>
 </html>

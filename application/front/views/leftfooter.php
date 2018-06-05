@@ -15,11 +15,24 @@
 			<li><a id="trigger" class="click-profiles" style="" href="javascript:void(0)">Profiles <i class="fa fa-sort-asc" aria-hidden="true"></i></a>
                 <div class="click-nav">
                     <ul id="drop" class="left-ftr-profiles">
-                        <li><a href="<?php echo base_url('how-to-use-job-profile-in-aileensoul'); ?>" target="_blank">  Job Profiles</a></li>
-                        <li><a href="<?php echo base_url('how-to-use-recruiter-profile-in-aileensoul'); ?>" target="_blank">Recruiter Profile</a></li>
-                        <li><a href="<?php echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>" target="_blank">Freelance Profile</a></li>
-                        <li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>" target="_blank">Business Profile</a></li>
-                        <li><a href="<?php echo base_url('how-to-use-artistic-profile-in-aileensoul'); ?>" target="_blank">Artistic Profile</a></li>
+                        <li>
+                            <a href="<?php echo $job_right_profile_link; ?>" target="_blank">  Job Profiles</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $recruiter_right_profile_link; ?>" target="_blank">Recruiter Profile</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $freelance_hire_right_profile_link; ?>" target="_blank">Freelance Employer</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $freelance_apply_right_profile_link; ?>" target="_blank">Freelance Job</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $business_right_profile_link; ?>" target="_blank">Business Profile</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $artist_right_profile_link; ?>" target="_blank">Artistic Profile</a>
+                        </li>
                     </ul>
                 </div>
             </li>
