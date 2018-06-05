@@ -1,5 +1,6 @@
 /***  new flow  ***/
 /***  page 1  ***/
+.one-hd .middle-section{padding:69px 0 50px;}
 .middle-section{padding:95px 0 50px;}
 .middle-section-banner{padding:54px 0 0px;}
 .middle-section-banner.new-ld-page{padding:0;}
@@ -80,7 +81,7 @@
 .all-profile-box ul li{padding:5px 10px; border-bottom:1px solid #d2d2d2; width:100%; list-style-type:none; float:left;}
 .all-profile-box ul li:hover{background:#e8f3f8;}
 .all-profile-box ul li:last-child{border-bottom:0;}
-.all-profile-box ul li .all-pr-img{width:40px; height:40px; float:left; border:1px solid #d2d2d2;}
+.all-profile-box ul li .all-pr-img{width:35px; height:35px; float:left; border:1px solid #d2d2d2;}
 .all-profile-box ul li .all-pr-img img{width:100%;}
 .all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:17px; padding:9px 0 0 15px; letter-spacing:1px;}
 /***  inner profiles left box  ***/

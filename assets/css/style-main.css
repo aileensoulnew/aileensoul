@@ -24,7 +24,7 @@ html.custom-main,html.login-custom{
 }
 body{
     float:left;
-    height:100%
+    /*height:100%*/
 }
 @font-face{
     font-family:robotolight;
@@ -677,10 +677,13 @@ footer ul{
     padding-left:0;
     margin-bottom:0;
 }
+footer ul li{
+	color:#7b7b7b;
+}
 footer ul li a{
-    color:#353535;
-    padding:5px 8px;
-    font-size:12px;
+    color:#7b7b7b;
+    padding:5px;
+    font-size:13px;
 }
 #selday:focus,#selgen:focus,#selmonth:focus,#selyear:focus,.form-group textarea:focus,#selgen:focus{
     border-bottom:1px solid #1b8ab9!important;
@@ -1218,7 +1221,7 @@ textarea:focus::-webkit-input-placeholder{
     text-align:center
 }
 section{
-    overflow:hidden
+    /*overflow:hidden*/
 }
 .md-2{
     width:450px!important;
