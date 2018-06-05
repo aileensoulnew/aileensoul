@@ -2404,11 +2404,14 @@ input[type=text] {
 #jobseeker_regform .hs-submit{padding-top:15px;}
 .hs-submit .delete_btn{margin-bottom:10px; margin-top:0;}
 html{overflow-x:hidden;}
+body, body.no-login {padding-bottom:60px;}
 .job-contact-frnd, .job-contact-frnd1 {margin-bottom:15px;}
 .no-data-available .art-img-nn{border:0;}
 .job_reg_page_fprm label.error{right:0;}
 .email-cus-vl label.error{position: relative; right: 0; text-align: right; margin: 0;}
 .com-name-r label.error{padding:0 !important;}
+#jobseeker_regform fieldset{padding:10px;}
+.cus-error fieldset.main_select_data span::after{display:none;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {

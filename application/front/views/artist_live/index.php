@@ -124,7 +124,7 @@
                                 <?php 
                                     if ($ismainregister == true) { 
                                 ?>
-                                    <a href="<?php echo artist_registration; ?>" class="btn5">Create Artist Profile</a>
+                                    <a href="<?php echo base_url('artist-profile/signup'); ?>" class="btn5">Create Artist Profile</a>
                                 <?php }else { ?>
                                     <a href="<?php echo base_url().'artist-profile/create-account'; ?>" class="btn5 sda">Create Artist Profile</a>
                                 <?php } ?>
