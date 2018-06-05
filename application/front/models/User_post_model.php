@@ -61,13 +61,20 @@ class User_post_model extends CI_Model {
         $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
         $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
         // $this->db->order_by('u.user_id', 'DESC');
+        $this->db->where('(
+         u.user_id IN (SELECT DISTINCT user_id 
+                             FROM   ailee_user_profession 
+                             WHERE  user_id != '.$user_id.')
+        OR u.user_id IN (SELECT DISTINCT user_id 
+                             FROM   ailee_user_student 
+                             WHERE  user_id != '.$user_id.')
+        )');
         $this->db->order_by('up.designation', 'asc');
         $this->db->order_by('up.field', 'asc');
         $this->db->order_by('up.city', 'asc');
         $this->db->order_by('us.city', 'asc');
         $this->db->limit($start['offset']);
-        //echo $this->db->last_query();
-        $query = $this->db->get();
+        $query = $this->db->get();        
         $result_array = $query->result_array();
         return $result_array;
     }

@@ -871,13 +871,13 @@ footer{
 	height:60px;
 	width:100%;
     background: #fff;
-	font-size:14px;
+	font-size:13px;
 }
 footer > .container {
 	border-top:1px solid #dbdada;
 }
 footer ul{
-	float:right;
+	/*float:right;*/
 	padding-left:0;
 	margin-bottom:0;
 	display:inline-block;
@@ -885,10 +885,11 @@ footer ul{
 footer ul li{
 	display:inline-block;
 	list-style-type:none;
+	color:#7b7b7b;
 }
 footer ul li a{
-	color:#353535;
-	padding:5px 15px;
+	color:#7b7b7b;
+	padding:5px;
 }
 footer ul li:last-child a{padding-right:0;}
 footer ul li a:hover{
@@ -918,7 +919,7 @@ footer ul li a:hover{
 }
 .custom_footer_left ul li a {
 	line-height:18px;
-    padding: 0px;
+    padding: 2px 5px;
     float: left;
     color: #8c8c8c;
 }
