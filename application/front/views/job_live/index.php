@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     </form>
-                    <?php echo $left_footer; ?>
+                    
                     <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
@@ -242,6 +242,7 @@
                     <div class="add-box">
                         <img src="<?php echo base_url('assets/n-images/add.jpg') ?>">
                     </div>
+					<?php echo $left_footer; ?>
                 </div>
             </div>
         </div>

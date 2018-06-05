@@ -9,7 +9,7 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
             <?php
         }
         ?>
-        <div class="container pt20">
+        <div class="container pt5">
             <div class="row">
 
                 <div class="fw text-center">

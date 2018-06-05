@@ -1155,7 +1155,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .sticky-container.right-profile{display:none;}
 .custom-dediter{padding:20px 0 60px; border-bottom:1px solid #d2d2d2; min-height:300px; position:relative;}
 .publish-btn{position:absolute; bottom:10px; width:100%;}
-.related-article{padding:100px 0 0;}
+.related-article{padding:100px 0 60px;}
 .rel-art-box{margin-bottom:20px;}
 .rel-art-name{width:100%; padding:15px; text-align:center;}
 .rel-art-name a{color:#5c5c5c; font-size:18px;}
@@ -1793,7 +1793,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .all-upload .remove_img:hover{/*background: #e6e6e6;*/}
 /*** end  upload box  ***/
 /*** browse job  ***/
-.browse-jobs{margin:0 auto; padding-top:105px;}
+.browse-jobs{margin:0 auto; padding:105px 0;}
 .browse-box h3{font-size:20px; letter-spacing:1px;}
 .browse-box ul{padding-left:0;}
 .browse-box ul li{list-style-type:none; padding:4px 0; text-align:center;}
@@ -2398,6 +2398,7 @@ input[type=text] {
 .block-639{display:none;}
 .block-479{display:none;}
 .all-tab .no-data-available .art-img-nn{width:auto; padding:0;}
+.list-box-custom .all-detail-box{margin-bottom:85px;}
 
 .hs-submit button{color:#fff;}
 #jobseeker_regform .hs-submit{padding-top:15px;}
