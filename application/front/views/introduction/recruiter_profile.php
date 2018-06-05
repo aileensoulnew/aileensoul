@@ -79,10 +79,10 @@ header('Expires: ' . $date);
                             </div>
                             <div class="col-md-8 col-sm-9 right-header">
                                 <div class="btn-right pull-right">
-                                    <?php if (!$this->session->userdata('aileenuser')) { ?>
+                                    <?php /*if (!$this->session->userdata('aileenuser')) { ?>
                                         <a href="<?php echo base_url('login'); ?>" class="btn-new1">Login</a>
                                         <a href="<?php echo base_url('registration'); ?>" class="btn3-cust">Create an account</a>
-                                    <?php } ?>
+                                    <?php }*/ ?>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@ header('Expires: ' . $date);
 			<div class="fw pt20">
 				<div class="container pt20">
                         <?php
-                        if (!$this->session->userdata('aileenuser') || $is_profile['is_recruiter'] != '1') {
+                        /*if (!$this->session->userdata('aileenuser') || $is_profile['is_recruiter'] != '1') {
                             ?>
                             <div class="text-center introduce_button"><a href="<?php echo base_url('recruiter/registration') ?>" title="Create Recruiter Profile" target="_blank" class="btn-new1">Create Recruiter Profile</a></div>
                         <?php } else {
@@ -105,7 +105,7 @@ header('Expires: ' . $date);
 
                             <div class="text-center introduce_button"><a href="<?php echo base_url('recruiter') ?>" title="Take me in" target="_blank" class="btn-new1">Take me in</a></div>
 
-                        <?php } ?>
+                        <?php }*/ ?>
 				</div>
 			</div>
             <section class="middle-main bg_white">
@@ -150,7 +150,7 @@ header('Expires: ' . $date);
                         </div>
 						<div class="fw">
                         <?php
-                        if (!$this->session->userdata('aileenuser') || $is_profile['is_recruiter'] != '1') {
+                        /*if (!$this->session->userdata('aileenuser') || $is_profile['is_recruiter'] != '1') {
                             ?>
                             <div class="text-center pb20 introduce_button"><a href="<?php echo base_url('recruiter/registration') ?>" title="Create Recruiter Profile" target="_blank" class="btn-new1">Create Recruiter Profile</a></div>
                         <?php } else {
@@ -158,7 +158,7 @@ header('Expires: ' . $date);
 
                             <div class="text-center pb20 introduce_button"><a href="<?php echo base_url('recruiter') ?>" title="Take me in" target="_blank" class="btn-new1">Take me in</a></div>
 
-                        <?php } ?>
+                        <?php }*/ ?>
 						</div>
                     </div>
                 </div>
