@@ -30,7 +30,7 @@ color: #1b8ab9 !important;}
                             <div class="padd_set">
                                 <div class="left-side-bar">
                                     <ul class="left-form-each">
-                                        <li>  <a href="<?php echo base_url() . 'profile' ?>">Edit Profile</a></li>
+                                        <li>  <a href="<?php echo base_url() . 'profile' ?>">Edit</a></li>
                                         <li  <?php if ($this->uri->segment(2) == 'changepassword') { ?> class="active init" <?php } ?>> <a href="<?php echo base_url('registration/changepassword') ?>">Change Password </a></li>
                                     </ul>
                                 </div>

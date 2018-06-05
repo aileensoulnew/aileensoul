@@ -2304,6 +2304,23 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 .mob-filter:hover{background:#f2f4f5;}
 
 /***  end filter  ***/
+/***  edit profile  ***/
+.edit-pr-custom .change-password-box form{border:0; padding:0;}
+.edit-pr-custom .panel-default{border:0;}
+.edit-pr-custom .panel-body{padding:25px 5px 20px;}
+.edit-pr-custom .panel-heading{padding:0; border:0; background:#fff;}
+.edit-pr-custom .nav-tabs li{padding-left:0;}
+.edit-pr-custom .nav-tabs > li.active > a{border-radius:0; color:#5c5c5c;}
+.edit-pr-custom .nav-tabs > li > a{color:#5c5c5c; font-size:18px; padding:5px 15px;}
+.edit-pr-custom .nav-tabs > li > a:hover{background:#fff; color:#5c5c5c; border-radius:0;}
+.edit-pr-custom form fieldset{padding:10px;}
+.edit-pr-custom form fieldset select{height:35px;}
+.student-or-not{padding-left:10px;}
+.edit-pr-custom .common-form fieldset label{margin:0;}
+.edit-pr-custom .gen-male{margin-left:0 !important;}
+.edit-pr-custom #gen{margin-top:-5px;}
+.edit-pr-custom #stud_info h5{margin:0; font-size:18px; padding-bottom:15px; padding-left:10px;}
+/***  end edit profile  ***/
 
 /*** new css  ***/
 .modal.message-box .modal-body{text-align:left;}
