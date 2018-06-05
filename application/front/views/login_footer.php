@@ -23,15 +23,15 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
                         }
                         ?>
 
-                        <li><a title="Job Profile" href="<?php echo base_url('job-search'); ?>" target="_blank">Job Profile</a></li>
-                        <li><a title="Recruiter Profile" href="<?php echo base_url('recruiter'); ?>" target="_blank">Recruiter Profile</a></li>
-                        <li><a title="Freelance Employer" href="<?php echo base_url('freelance-employer'); ?>" target="_blank">Freelancer Profile</a></li>
-						<li><a title="Freelance-Employer Employer" href="<?php echo base_url('freelance-employer'); ?>" target="_blank">Freelance-Employer Profile</a></li>
+                        <li><a title="Job Profile" href="<?php echo $job_right_profile_link; ?>" target="_blank">Job Profile</a></li>
+                        <li><a title="Recruiter Profile" href="<?php echo $recruiter_right_profile_link; ?>" target="_blank">Recruiter Profile</a></li>
+                        <li><a title="Freelance Hire" href="<?php echo $freelance_hire_right_profile_link; ?>" target="_blank">Freelancer Profile</a></li>
+						<li><a title="Freelance Employer" href="<?php echo $freelance_apply_right_profile_link; ?>" target="_blank">Freelance Employer Profile</a></li>
 						
-                        <!--<li><a title="Freelance Jobs" href="<?php echo base_url('freelance-jobs'); ?>" target="_blank">Freelance Jobs</a></li> 
+                        <!--<li><a title="Freelance Jobs" href="<?php //echo base_url('freelance-jobs'); ?>" target="_blank">Freelance Jobs</a></li> 
                         <li><a title="Freelance Profile" href="<?php //echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>" target="_blank">Freelance Profile</a></li> -->
-                        <li><a title="Business Profile" href="<?php echo base_url('business-search'); ?>" target="_blank">Business Profile</a></li>
-                        <li><a title="Artistic Profile" href="<?php echo base_url('find-artist'); ?>" target="_blank">Artistic Profile</a></li>
+                        <li><a title="Business Profile" href="<?php echo $business_right_profile_link; ?>" target="_blank">Business Profile</a></li>
+                        <li><a title="Artistic Profile" href="<?php echo $artist_right_profile_link; ?>" target="_blank">Artistic Profile</a></li>
                         <li><a title="About Us" href="<?php echo base_url('about-us'); ?>"  target="_blank">About</a></li>
 						<li><a title="Blog" href="<?php echo base_url('blog'); ?>" target="_blank">Blog</a></li>
 						<li><a title="Faq" tabindex="0" href="<?php echo base_url('faq'); ?>" target="_blank">FAQ</a></li>
