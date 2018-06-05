@@ -554,11 +554,11 @@
         <!-- </footer> -->
        
         <?php
-        if (IS_APPLY_JS_MINIFY == '0') {
+        /*if (IS_APPLY_JS_MINIFY == '0') {
             ?>
             <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-            <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
 
             <?php
         } else {
@@ -567,17 +567,17 @@
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script async type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
 
-        <?php } ?>
+        <?php }*/ ?>
 
+        <script  type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
 
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var site = '<?php echo base_url(); ?>';
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
-        </script>
-
-        <script async type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/registation.js?ver=' . time()); ?>"></script>
-        <script>
+        
             var app = angular.module('freelancerApp', ['ui.bootstrap']);
             var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>

@@ -1,5 +1,5 @@
 //FLASH MESSAGE SCRIPT START
-$(".alert").delay(3200).fadeOut(300);
+//$(".alert").delay(3200).fadeOut(300);
 //FLASH MESSAGE SCRIPT END
 //CODE FOR COUNTRY,STATE, CITY START
 $('#country').on('change', function () {
