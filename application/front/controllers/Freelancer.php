@@ -1923,6 +1923,10 @@ class Freelancer extends MY_Controller {
             $id = $this->db->select('user_id')->get_where('freelancer_post_reg', array('freelancer_apply_slug' => $id, 'status' => 1))->row()->user_id;
         }
         $userid = $this->session->userdata('aileenuser');
+        if($userid == "")
+        {
+            redirect(base_url());
+        }
 
         //code for check user deactivate start
         $this->freelancer_apply_deactivate_check();

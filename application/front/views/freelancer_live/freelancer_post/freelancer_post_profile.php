@@ -26,7 +26,9 @@
         <?php } ?>
         <?php
         if ($this->session->userdata('aileenuser')) {
+            if ($freelancerpostdata['0']['user_id'] != $this->session->userdata('aileenuser')) {
             echo $header_inner_profile;
+            }
         } else {
             ?>
             <header>
@@ -1440,7 +1442,7 @@
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/progressloader.js?ver=' . time()); ?>">
             </script>
         <?php } ?>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
