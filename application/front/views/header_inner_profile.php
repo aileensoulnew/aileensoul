@@ -272,7 +272,7 @@ if($browser == "Firefox")
 						<div class="all-pr-img">
 							<img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
 						</div>
-						<span>Job Profile1</span>
+						<span>Job Profile123</span>
 					</a>
 				</li>
 				<li>
@@ -366,7 +366,37 @@ if($browser == "Firefox")
 			</ul>
 		</div>
 	</nav>
+<script>
+   var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+    showRight = document.getElementById( 'showRight' ),
+    body = document.body;
 
+   showRight.onclick = function() {
+    classie.toggle( this, 'active' );
+    classie.toggle( menuRight, 'cbp-spmenu-open' );
+    disableOther( 'showRight' );
+   };
+  
+   function disableOther( button ) {
+    
+    if( button !== 'showRight' ) {
+     classie.toggle( showRight, 'disabled' );
+    }
+   }
+   
+   $(function () {
+    $('a[href="#search"]').on('click', function (event) {
+     event.preventDefault();
+     $('#search').addClass('open');
+     $('#search > form > input[type="search"]').focus();
+    });
+    $('#search, #search button.close-new').on('click keyup', function (event) {
+     if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+      $(this).removeClass('open');
+     }
+    });
+   });
+  </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
         var app = angular.module('headerApp', []);
