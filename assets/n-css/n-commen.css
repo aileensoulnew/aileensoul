@@ -916,6 +916,10 @@ footer ul li a:hover{
     float: left;
     font-size:12px;
     padding: 0px 2px;
+	position:relative;
+}
+.custom_footer_left ul  li .click-nav ul:after{
+	position:absolute; right:3px; bottom:-9px; content:''; width:15px; height:9px; background:url('../n-images/lf-down-arrow.png'); background-size:100%;
 }
 .custom_footer_left ul li a {
 	line-height:18px;
