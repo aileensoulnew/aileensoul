@@ -101,6 +101,7 @@ app.filter('slugify', function () {
     };
 });
 app.controller('EditorController', ['$scope', function ($scope) {
+        $scope.title = title;
         $scope.handlePaste = function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -112,6 +113,7 @@ app.controller('EditorController', ['$scope', function ($scope) {
 app.controller('questionDetailsController', function ($scope, $http,$window,$filter,$location,$route) {
     $scope.ask = {};
     $scope.user_id = user_id;
+    $scope.title = title;
     questionData();
     function questionData() {
         $('#main_loader').show();
