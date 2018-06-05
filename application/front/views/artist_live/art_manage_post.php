@@ -209,7 +209,7 @@
                         </table>
                     </div>
                 </div>
-      <?php echo $left_footer; ?>
+                <?php echo $left_footer_list_view; ?>
             </div>
             <!-- popup start -->
             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business"  >

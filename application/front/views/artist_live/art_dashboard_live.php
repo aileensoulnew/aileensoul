@@ -230,6 +230,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </div>
                             </div>
                         </a>
+                        <?php echo $left_footer_list_view; ?>
                         <!-- user pdf  end-->
                     </div>
 
@@ -945,7 +946,7 @@ function submitforgotForm()
 
  <?php }else{?>
  
-    <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/user_dashboard.js?ver=' . time()); ?>"></script>
     <script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/webpage/artist/common.js?ver=' . time()); ?>"></script>
 
  <?php }?>           

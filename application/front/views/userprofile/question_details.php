@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">   
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
@@ -400,10 +401,11 @@
         <script src="//anglibs.github.io/angular-location-update/angular-location-update.min.js"></script>
 
         <script>
-                                            var base_url = '<?php echo base_url(); ?>';
-                                            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                            var question = '<?php echo $question_id ?>';
-                                            var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
+            var base_url = '<?php echo base_url(); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var question = '<?php echo $question_id ?>';
+            var title = '<?php echo $title ?>';
+            var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/question_details.js?ver=' . time()) ?>"></script>
