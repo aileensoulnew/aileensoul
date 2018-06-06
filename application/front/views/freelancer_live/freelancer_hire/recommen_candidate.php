@@ -119,7 +119,7 @@
                                         <ul class="search-listing">
                                             <li ng-repeat="category in categoryFilterList">
                                                 <label class="control control--checkbox">
-                                                    <span>{{category.category_name | capitalize}}
+                                                    <span><span class="mi-cat-width">{{category.category_name | capitalize}}</span>
                                                         <span class="pull-right">({{category.count}})</span>
                                                     </span>
                                                     <input class="categorycheckbox filtercheckbox" type="checkbox" name="{{category.category_name}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
@@ -138,7 +138,7 @@
                                         <ul class="search-listing">
                                             <li ng-repeat="cities in cityFilterList">
                                                 <label class="control control--checkbox">
-                                                    <span>{{cities.city_name | capitalize}}
+                                                    <span><span class="mi-cat-width">{{cities.city_name | capitalize}}</span>
                                                         <span class="pull-right">({{cities.count}})</span>
                                                     </span>
                                                     <input class="citiescheckbox filtercheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
@@ -157,7 +157,7 @@
                                         <ul class="search-listing">
                                             <li ng-repeat="skill in skillFilterList">
                                                 <label class="control control--checkbox">
-                                                    <span>{{skill.skill | capitalize}}
+                                                    <span><span class="mi-cat-width">{{skill.skill | capitalize}}</span>
                                                         <span class="pull-right">({{skill.count}})</span>
                                                     </span>
                                                     <input class="skillcheckbox filtercheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
@@ -316,7 +316,7 @@
             </div>
         </div>
         <!-- ADD POST POPUP -->
-        <div class="modal fade message-box" id="postmodal" role="dialog">
+        <div class="modal fade new-modal" id="postmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>

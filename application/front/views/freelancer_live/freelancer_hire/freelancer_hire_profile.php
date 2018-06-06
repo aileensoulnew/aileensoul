@@ -272,11 +272,7 @@ if ($this->session->userdata('aileenuser')) {
 			</div>
 		</div>
 	</div>
-	<?php if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
-		<div  class="add-post-button mob-block">
-			<a title="Post Projects" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->lang->line("post_project"); ?></a>
-		</div>
-	<?php } ?>
+
 	<div>          
 		<div class="job-menu-profile mob-none pt20">
 			<a title="<?php echo ucwords($freelancerhiredata[0]['fullname']) . ' ' . ucwords($freelancerhiredata[0]['username']); ?>" href="javascript:void(0);">
@@ -305,11 +301,7 @@ if ($this->session->userdata('aileenuser')) {
 					}
 					?>
 				</div>
-				<div  class="add-post-button">
-					<?php if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
-						<a title="Post Projects" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->lang->line("post_project"); ?></a>
-					<?php } ?>
-				</div>
+			
 			</div>
 			<div class="col-md-7 col-sm-12 mob-clear">
 				<div class="common-form">

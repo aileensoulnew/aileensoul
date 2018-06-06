@@ -314,11 +314,7 @@
                             ?>
                         </div>
 
-                        <div  class="add-post-button">
-                            <?php if ($freelancerhiredata[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
-                                <a title="Post Projects" class="btn btn-3 btn-3b" href="<?php echo base_url('freelance-hire/add-projects'); ?>"><i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->lang->line("post_project"); ?></a>
-                            <?php } ?>
-                        </div>
+                     
                     </div>
                     <div class="col-md-7 col-sm-12 mob-clear">
                         <div class="common-form">
