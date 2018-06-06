@@ -182,14 +182,14 @@ header("Pragma: no-cache"); // HTTP/1.0
 
                                     <div class="clr-c fs12 form-group term_condi_check">
                                         <label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
-                                            <input type="checkbox" name="term_condi" id="term_condi" value="1" />
+                                            <input tabindex="9" type="checkbox" name="term_condi" id="term_condi" value="1" />
                                             I have read and agree to use this website as subjected to Aileensoul 
                                             <a tabindex="10" href="<?php echo base_url('terms-and-condition'); ?>">Terms and Condition</a> and <a tabindex="11" href="<?php echo base_url('privacy-policy'); ?>">Privacy policy</a>.
                                             <div class="control__indicator"></div>
                                         </label>
                                     </div>
                                     <p>
-                                        <button class="btn1" tabindex="9">Create an account</button>
+                                        <button class="btn1" tabindex="12">Create an account</button>
                                     </p>
 
                                     <div class="sign_in pt10">
@@ -376,7 +376,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                     var selmonth = $("#selmonth").val();
                     var selyear = $("#selyear").val();
                     var selgen = $("#selgen").val();
-                    var lbl_term_condi = $("#lbl_term_condi").val();
+                    var term_condi = $("#term_condi").val();
 
                     var post_data = {
                         'first_name': first_name,
@@ -406,58 +406,46 @@ header("Pragma: no-cache"); // HTTP/1.0
                             if (response.okmsg == "ok") {
                                 $("#btn-register").html('<img src="<?php echo base_url() ?>images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
 
-                                window.location = "<?php echo base_url() ?>profiles/<?php echo $this->session->userdata('aileenuser_slug'); ?>";
-                                                        sendmail(userid);
-                                                        // setTimeout(' window.location.href = "<?php //echo base_url()   ?>dashboard"; ', 4000);
-                                                    } else {
-                                                        $("#register_error").fadeIn(1000, function () {
-                                                            $("#register_error").html('<div class="alert alert-danger registration"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
-                                                            $("#btn-register").html('Sign Up');
-                                                        });
-                                                    }
-                                                }
-                                            });
-                                            return false;
-                                        }
-                                    });
+                                //window.location = "<?php echo base_url() ?>profiles/<?php //echo $this->session->userdata('aileenuser_slug'); ?>";
+                                window.location = "<?php echo base_url() ?>" + "basic-information";
+                                sendmail(userid);
+                                // setTimeout(' window.location.href = "<?php //echo base_url()   ?>dashboard"; ', 4000);
+                            } else {
+                                $("#register_error").fadeIn(1000, function () {
+                                    $("#register_error").html('<div class="alert alert-danger registration"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
+                                    $("#btn-register").html('Sign Up');
+                                });
+                            }
+                        }
+                    });
+                    return false;
+                }
+            });
 
-                                    function sendmail(userid) {
-
-
-                                        var post_data = {
-                                            'userid': userid,
-                                        }
-
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: base_url + 'registration/sendmail',
-                                            data: post_data,
-                                            success: function (response)
-                                            {
-                                            }
-                                        });
-                                        return false;
-                                    }
+            function sendmail(userid) {
+                var post_data = {
+                    'userid': userid,
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: base_url + 'registration/sendmail',
+                    data: post_data,
+                    success: function (response)
+                    {
+                    }
+                });
+                return false;
+            }
 
         </script>
-
-
-
         <script type="text/javascript">
             //For Scroll page at perticular position js Start
             $(document).ready(function () {
-
                 //  $(document).load().scrollTop(1000);
-
-
-
                 $("#email_reg").val('');
                 $("#password_reg").val('');
-
             });
             //For Scroll page at perticular position js End
         </script>
-
-
     </body>
 </html>
