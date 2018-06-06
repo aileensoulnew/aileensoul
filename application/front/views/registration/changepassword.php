@@ -37,7 +37,7 @@ color: #1b8ab9 !important;}
                                         <li>
                                             <a href="<?php echo base_url() . 'edit-profile' ?>">Edit</a>
                                         </li>
-                                        <li  <?php if ($this->uri->segment(2) == 'change-password') { ?> class="active init" <?php } ?>> <a href="<?php echo base_url('change-password') ?>">Change Password </a></li>
+                                        <li  <?php if ($this->uri->segment(1) == 'change-password') { ?> class="active init" <?php } ?>> <a href="<?php echo base_url('change-password') ?>">Change Password </a></li>
                                     </ul>
                                 </div>
                             </div>
