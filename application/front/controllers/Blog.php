@@ -12,6 +12,7 @@ class Blog extends CI_Controller {
         $this->load->model('blog_model');
         //AWS access info end
         include ('include.php');
+        include ('main_profile_link.php');
     }
 
     //MAIN INDEX PAGE START   
@@ -22,6 +23,7 @@ class Blog extends CI_Controller {
         $condition_array = array('status' => 'publish');
         $data = 'id,name';
         // $this->data['blog_category'] = $this->common->select_data_by_condition('blog_category', $condition_array, $data, $short_by = '', $order_by = '', $limit = '', $offset = '', $join_str = array());
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($iscategory != ""){
             $slug = str_replace('-', ' ', $slug);
             $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $slug ."')";
@@ -185,7 +187,7 @@ class Blog extends CI_Controller {
         $condition_array = array('status' => 'publish');
         $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
 
-
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->load->view('blog/blogdetail', $this->data);
     }
 

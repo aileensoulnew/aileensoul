@@ -346,7 +346,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 </div>                
             </div>
             <?php
-                echo $login_footer
+                echo $login_footer;
             ?>
         </div>
 
