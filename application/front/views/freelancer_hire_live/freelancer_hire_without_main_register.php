@@ -129,42 +129,16 @@
                 <div class="container">
                         <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
                             <h3>Related Articles</h3>
-
                         </div>
                         <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="col-md-3 col-sm-6">
+                            <div class="col-md-3" ng-repeat="blog in relatedBlog">
                                 <div class="rel-art-box">
-                                    <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
+                                    <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
                                     <div class="rel-art-name">
-                                        <a href="#">See the world in your language with Google Translate</a>
+                                        <a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="rel-art-box">
-                                    <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">See the world in your language with Google Translate</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="rel-art-box">
-                                    <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">See the world in your language with Google Translate</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="rel-art-box">
-                                    <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">See the world in your language with Google Translate</a>
-                                    </div>
-                                </div>
-                            </div>
-                           
+                            </div>                           
                         </div>
                     </div>
                 </div>

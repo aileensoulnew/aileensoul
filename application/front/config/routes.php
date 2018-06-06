@@ -795,9 +795,6 @@ $route['artist/search/(:any)'] = "artist_live/artist_search/$1";
 $route['artist/search/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 $route['artist/(:any)'] = "artist_live/categoryArtistList/$1";
 
-
-
-
 $route['business/search/(:any)'] = "business_live/business_search/$1";
 $route['business/search/(:any)-in-(:any)'] = "business_live/business_search/$1-in-$2";
 
