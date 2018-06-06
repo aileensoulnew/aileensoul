@@ -128,7 +128,8 @@ $route['sitemap/artistic-profile'] = "sitemap/artistic_profile";
 $route['load_more/dataaaaa'] = "load_more/dataaaaa";
 
 
-$route['profile'] = "profile";
+$route['edit-profile'] = "profile";
+$route['change-password'] = "registration/changepassword";
 $route['profiles'] = "dashboard";
 $route['profiles/basic-information/(:any)'] = "user_basic_info";
 $route['profiles/opportunities/(:any)'] = "user_opportunities";

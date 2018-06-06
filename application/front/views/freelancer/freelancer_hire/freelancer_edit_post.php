@@ -353,7 +353,7 @@
                             window.location = "<?php echo base_url() . 'profile' ?>";
                         } else if (clicked_id == 7)
                         {
-                            window.location = "<?php echo base_url('registration/changepassword') ?>";
+                            window.location = "<?php echo base_url('change-password') ?>";
                         } else if (clicked_id == 8)
                         {
                             window.location = "<?php echo base_url('dashboard/logout') ?>";

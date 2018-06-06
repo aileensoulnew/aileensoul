@@ -734,7 +734,7 @@ function home_profile(clicked_id, searchkeyword, searchplace) {
                 window.location = base_url + "profile";
             } else if (clicked_id == 7)
             {
-                window.location = base_url + "registration/changepassword";
+                window.location = base_url + "change-password";
             } else if (clicked_id == 8)
             {
                 window.location = base_url + "dashboard/logout";
@@ -1022,7 +1022,7 @@ function leave_page(clicked_id)
         }
         if (clicked_id == 7)
         {
-            location.href = base_url + "registration/changepassword";
+            location.href = base_url + "change-password";
         }
         if (clicked_id == 8)
         {

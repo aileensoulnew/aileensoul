@@ -255,7 +255,7 @@ class Registration extends CI_Controller {
                         $this->session->flashdata('success', 'Update Successfully!!');
                     } else {
                         $this->session->flashdata('error', 'Your Password not Edited');
-                        redirect('registration/changepassword', 'refresh');
+                        redirect('change-password', 'refresh');
                     }
                 }
             } else {

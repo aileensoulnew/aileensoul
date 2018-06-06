@@ -101,7 +101,7 @@ function home_profile(clicked_id, searchkeyword, searchplace) {
                 window.location = base_url + "profile";
             } else if (clicked_id == 7)
             {
-                window.location = base_url + "registration/changepassword";
+                window.location = base_url + "change-password";
             } else if (clicked_id == 8)
             {
                 window.location = base_url + "dashboard/logout";
