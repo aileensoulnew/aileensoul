@@ -270,8 +270,10 @@
         var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
     </script>
 <!-- FIELD VALIDATION JS END -->
+    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/saved_candidate.js'); ?>"></script>
     <?php
-    if (IS_REC_JS_MINIFY == '0') {
+    /*if (IS_REC_JS_MINIFY == '0') {
         ?>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/saved_candidate.js'); ?>"></script>
@@ -280,7 +282,7 @@
         ?>
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/saved_candidate.js'); ?>"></script>
-    <?php } ?>
+    <?php }*/ ?>
     <script type="text/javascript">
         var header_all_profile = '<?php echo $header_all_profile; ?>';
     </script>
