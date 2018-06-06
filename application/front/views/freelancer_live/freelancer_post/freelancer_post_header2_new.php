@@ -78,7 +78,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
-									Messages <a href="#" class="pull-right" id="seemsg">See All</a>
+									Messages <a href="javascript:void(0)" class="pull-right" id="seemsg"></a>
 								</div>
 								<div class="content custom-scroll">
 									<ul class="dropdown-data msg-dropdown notification_data_in_h2">

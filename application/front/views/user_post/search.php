@@ -470,9 +470,10 @@
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>
         <script>
-                                $('#content').on('change keyup keydown paste cut', 'textarea', function () {
-                                $(this).height(0).height(this.scrollHeight);
-                                }).find('textarea').change();
+            $('#content').on('change keyup keydown paste cut', 'textarea', function () {
+            $(this).height(0).height(this.scrollHeight);
+            }).find('textarea').change();
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>

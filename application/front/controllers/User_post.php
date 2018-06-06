@@ -1144,6 +1144,7 @@ class User_post extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);

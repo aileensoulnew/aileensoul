@@ -147,11 +147,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="add-box fw">
+                    <?php echo $left_footer_list_view; ?>
+                    <!-- <div class="add-box fw">
                         <div class="adv-main-view">
-                            <img src="<?php echo base_url('assets/n-images/add.jpg'); ?>">
+                            <img src="<?php //echo base_url('assets/n-images/add.jpg'); ?>">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

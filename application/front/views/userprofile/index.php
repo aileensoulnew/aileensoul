@@ -55,7 +55,7 @@
         <?php echo $header_profile; ?>
         <?php echo $header; ?>
         <div ng-view></div>
-        <?php echo $footer; ?>
+        <?php echo $login_footer; ?>
         </div>
         <!--PROFILE PIC MODEL START-->
         <div class="modal fade message-box" id="bidmodal-2" role="dialog">

@@ -25,7 +25,17 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
 
                         <li><a title="Job Profile" href="<?php echo base_url('how-to-use-job-profile-in-aileensoul'); ?>" target="_blank">Job Profiless</a></li>
                         <li><a title="Recruiter Profile" href="<?php echo base_url('how-to-use-recruiter-profile-in-aileensoul'); ?>" target="_blank">Recruiter Profile</a></li>
-                        <li><a title="Freelance Profile" href="<?php echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>" target="_blank">Freelance Profile</a></li>
+                        <!-- <li><a title="Freelance Profile" href="<?php //echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>" target="_blank">Freelance Profile</a></li> -->
+                        <li>
+                            <a title="Freelance Hire" href="<?php echo $freelance_hire_right_profile_link; ?>" target="_blank">
+                                Freelancer Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a title="Freelance Employer" href="<?php echo $freelance_apply_right_profile_link; ?>" target="_blank">
+                                Freelance Employer Profile
+                            </a>
+                        </li>
                         <li><a title="Business Profile" href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>" target="_blank">Business Profile</a></li>
                         <li><a title="Artistic Profile" href="<?php echo base_url('how-to-use-artistic-profile-in-aileensoul'); ?>" target="_blank">Artistic Profile</a></li>
                         <li><a title="About Us" href="<?php echo base_url('about-us'); ?>"  target="_blank">About Us</a></li>
@@ -35,7 +45,8 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
                         <li><a title="Contact Us" href="<?php echo base_url('contact-us'); ?>"  target="_blank">Contact Us</a></li>
                         <li><a title="Blog" href="<?php echo base_url('blog'); ?>" target="_blank">Blog</a></li>
                         <li><a title="Send Us Feedback" href="<?php echo base_url('feedback'); ?>" target="_blank">Send Us Feedback</a></li>
-                        <li><a title="Sitemap" tabindex="0" href="<?php echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li>
+                        <li><a title="Advertise With Us" href="<?php echo base_url('advertise-with-us'); ?>" target="_blank">Advertise With Us</a></li>
+                        <!-- <li><a title="Sitemap" tabindex="0" href="<?php //echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li> -->
                         <li><a title="Report" tabindex="0" href="<?php echo base_url('report-abuse'); ?>" target="_blank">Report</a></li>
                         <li><a title="Faq" tabindex="0" href="<?php echo base_url('faq'); ?>" target="_blank">FAQ</a></li>
                         <?php

@@ -39,7 +39,9 @@ class Business_profile_registration_live extends MY_Controller {
 
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
-
+        if($userid == "" || !$userid){
+            redirect('/');
+        }
         $this->data['reg_uri'] = $reg_uri = $this->uri->segment(3);
 
         $contition_array = array('user_id' => $userid, 'status' => '0');
