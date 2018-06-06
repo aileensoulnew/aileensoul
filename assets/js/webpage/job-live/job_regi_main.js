@@ -71,7 +71,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('jobRegiController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Create Job Profile | Aileensoul";    
+    $scope.$parent.title = "Create Job Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
 
@@ -345,7 +345,7 @@ app.controller('jobRegiController', function ($scope, $http, $location, $window,
 });
 
 app.controller('jobBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Job By Skills, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Job By Skills, Job Profile | Aileensoul";    
     $scope.jobByLocation = {};
     //$scope.basicinfo = {};
 
@@ -461,7 +461,7 @@ app.controller('jobBasicInfoController', function ($scope, $http, $location, $wi
 });
 
 app.controller('jobEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Job By Designation, Job Profile | Aileensoul";
+    $scope.$parent.title = "Job By Designation, Job Profile | Aileensoul";
 
     $("#currentStudy").focusin(function(){
         $('#cstooltip').show();
@@ -600,7 +600,7 @@ app.controller('jobEduInfoController', function ($scope, $http, $location, $wind
 
 app.controller('jobCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
     // alert(first_name);
-    $scope.title = "Job By Designation, Job Profile | Aileensoul";
+    $scope.$parent.title = "Job By Designation, Job Profile | Aileensoul";
 
     $("#email").focusin(function(){
         $('#emtooltip').show();

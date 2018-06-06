@@ -173,6 +173,7 @@
             var user_slug = '<?php echo $this->uri->segment(2); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var item = '<?php echo $this->uri->segment(1); ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
             var app = angular.module("contactRequestApp", ['ngRoute', 'ui.bootstrap', 'ngSanitize']);
         </script>
         <script>
