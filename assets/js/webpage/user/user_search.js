@@ -108,6 +108,8 @@ app.controller('searchController', function ($scope, $http) {
             $(".post_loader").hide();
             $scope.searchProfileData = success.data.profile;
             $scope.postData = success.data.post;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             setTimeout(function(){
                 $('video,audio').mediaelementplayer(/* Options */);
             },300);
