@@ -3223,3 +3223,4 @@ body, body.no-login {padding-bottom:60px;}
 .mob-bottom-menu ul >li:nth-child(3){display:none;}
 .mob-bottom-menu ul >li:nth-child(4){display:none;}
 .mob-bottom-menu li{width:33.33% !important;}
+.main-user-profile .user-btns a:last-child{display:none;}
