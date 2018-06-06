@@ -24,7 +24,9 @@ color: #1b8ab9 !important;}
      </Style>
     
     <body class="page-container-bg-solid page-boxed pushmenu-push">
-        <?php echo $header_inner_profile; ?>
+        <?php echo $header_inner_profile; 
+        echo $this->session->flashdata('success');?>
+
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container">

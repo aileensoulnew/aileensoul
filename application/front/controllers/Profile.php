@@ -76,7 +76,7 @@ class Profile extends CI_Controller {
 
         if ($updatdata) {
             $this->session->set_flashdata('success', 'Profile information updated successfully');
-            redirect('profiles/' . $this->session->userdata('aileenuser_slug'), 'refresh');
+            redirect('edit-profile', 'refresh');// . $this->session->userdata('aileenuser_slug'), 'refresh');
         } else {
             $this->session->flashdata('error', 'Sorry!! Your data not updated');
             redirect('profile', 'refresh');
@@ -497,7 +497,7 @@ class Profile extends CI_Controller {
                 $data_up['user_id'] = $userid;
                 $updatdata_up = $this->common->insert_data_getid($data_up, 'user_profession');
             }
-            redirect(base_url()."profile");
+            redirect(base_url()."edit-profile");
         }
         //print_r($this->input->post());exit;
     }
