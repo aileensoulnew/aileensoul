@@ -115,7 +115,7 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
 
         <script src="<?php echo base_url('assets/js/angular/angular.min.1.5.7.js') ?>"></script>
-        <script data-semver="0.13.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-route.1.6.4.js') ?>"></script>
         <script>

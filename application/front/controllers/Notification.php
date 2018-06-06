@@ -1019,7 +1019,7 @@ Your browser does not support the audio tag.
         $this->load->view('notification/freelancer_hire_post', $this->data);
     }
 
-    public function not_header($id = "") {
+    public function not_header1($id = "") {
         $userid = $this->session->userdata('aileenuser');
         // freelancer hire shortlisted  notification start
         $contition_array = array('notification.not_type' => '9', 'notification.not_from' => '5', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
@@ -1053,8 +1053,8 @@ Your browser does not support the audio tag.
         );
         $data = array('notification.*', 'job_apply.*', 'job_reg.user_id as user_id', 'job_reg.fname as first_name', 'job_reg.job_user_image as user_image', 'job_reg.lname as last_name');
         $rec_not = $this->data['rec_not'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'app_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-// recruiter notification end
-// job notfication start 
+        // recruiter notification end
+        // job notfication start 
 
         $contition_array = array('notification.not_type' => '4', 'notification.not_to_id' => $userid, 'notification.not_from' => '1', 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -1072,8 +1072,8 @@ Your browser does not support the audio tag.
 
         $job_not = $this->data['job_not'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'invite_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// job notification end
-// freelancer hire  notification start
+        // job notification end
+        // freelancer hire  notification start
         $contition_array = array('notification.not_type' => '3', 'notification.not_from' => '4', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
 
         $join_str = array(
@@ -1092,7 +1092,7 @@ Your browser does not support the audio tag.
 
         $hire_not = $this->data['hire_not'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'app_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
         // freelancer hire notification end
-// freelancer post notification start
+        // freelancer post notification start
     
         $contition_array = array('notification.not_type' => '4', 'notification.not_from' => '5', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -1110,9 +1110,9 @@ Your browser does not support the audio tag.
 
         $work_post = $this->data['work_post'] = $work_post = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'invite_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// freelancer post notification end
-//artistic notification start
-// follow notification start
+        // freelancer post notification end
+        //artistic notification start
+        // follow notification start
 
         $contition_array = array('notification.not_type' => '8', 'notification.not_from' => '3', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -1130,8 +1130,8 @@ Your browser does not support the audio tag.
 
         $artfollow = $this->data['artfollow'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'follow_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// follow notification end
-//post comment notification start
+        // follow notification end
+        //post comment notification start
 
         $contition_array = array('notification.not_type' => '6', 'not_img' => '1', 'notification.not_from' => 3, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -1147,8 +1147,8 @@ Your browser does not support the audio tag.
         );
         $data = array('notification.*', ' artistic_post_comment.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
         $artcommnet = $this->data['artcommnet'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'artistic_post_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-// comment notification end
-//post like notification start
+        // comment notification end
+        //post like notification start
         $contition_array = array('notification.not_type' => '5', 'notification.not_from' => '3', 'not_img' => '2', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
                 'join_type' => '',
@@ -1225,10 +1225,10 @@ Your browser does not support the audio tag.
         $data = array('notification.*', ' art_post_image_comment.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
         $this->data['artimgcmtlike'] = $artimgcmtlike = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// like notification end
-// artistic notification end
-// business profile notification start
-// follow notification start
+        // like notification end
+        // artistic notification end
+        // business profile notification start
+        // follow notification start
 
         $contition_array = array('notification.not_type' => '8', 'notification.not_from' => '6', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -1246,8 +1246,8 @@ Your browser does not support the audio tag.
 
         $busifollow = $this->data['busifollow'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'follow_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// follow notification end
-// comment notification start
+        // follow notification end
+        // comment notification start
 
         $contition_array = array('notification.not_type' => '6', 'not_img' => '1', 'notification.not_from' => '6', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -1280,8 +1280,8 @@ Your browser does not support the audio tag.
 
         $this->data['busimgcommnet'] = $busimgcommnet = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// comment notification end
-// like notification start
+        // comment notification end
+        // like notification start
         $contition_array = array('notification.not_type' => '5', 'not_img' => '2', 'notification.not_from' => '6', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
                 'join_type' => '',
@@ -1974,7 +1974,7 @@ Your browser does not support the audio tag.
             $seeall = '<a href="' . base_url() . 'notification">See All</a>';
         } else {
             $seeall = '<div class="fw">
-  <div class="art-img-nn">
+                        <div class="art-img-nn">
                                                 <div class="art_no_post_img">
                                                     <img src="' . base_url() . 'assets/img/icon_notification_big.png" alt="notificationlogo">
                                                 </div>
@@ -1991,6 +1991,959 @@ Your browser does not support the audio tag.
                     "notification" => $notification,
                     "seeall" => $seeall,
         ));
+    }
+
+    public function not_header($id = "")
+    {
+
+
+        $userid = $this->session->userdata('aileenuser');
+        $contition_array = array('notification.not_type' => 3, 'notification.not_to_id' => $userid, 'notification.not_from' => 2, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'job_apply',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'job_apply.app_id'),
+            array(
+                'join_type' => '',
+                'table' => 'job_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'job_reg.user_id')
+        );
+        $data = array('notification.*', 'job_apply.*', 'job_reg.user_id as user_id', 'job_reg.fname as first_name', 'job_reg.job_user_image as user_image', 'job_reg.lname as last_name');
+        $rec_not = $this->data['rec_not'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'app_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+        // recruiter notification end
+        // job notfication start 
+
+        $contition_array = array('notification.not_type' => 4, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'job_apply',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'job_apply.app_id'),
+            array(
+                'join_type' => '',
+                'table' => 'recruiter',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'recruiter.user_id')
+        );
+        $data = array('notification.*', ' job_apply.*', ' recruiter.user_id as user_id', 'recruiter.rec_firstname as first_name', 'recruiter.recruiter_user_image as user_image', 'recruiter.rec_lastname as last_name');
+
+        $job_not = $this->data['job_not'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'app_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        // job notification end
+        // freelancer hire  notification start
+        $contition_array = array('notification.not_type' => 3, 'notification.not_from' => 4, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+
+        $join_str = array(
+            array(
+                'join_type' => '',
+                'table' => 'freelancer_apply',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'freelancer_apply.app_id'),
+            array(
+                'join_type' => '',
+                'table' => 'freelancer_post_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'freelancer_post_reg.user_id')
+        );
+        $data = array('notification.*', 'freelancer_apply.*', ' freelancer_post_reg.user_id as user_id', 'freelancer_post_reg.freelancer_post_fullname as first_name', 'freelancer_post_reg.freelancer_post_user_image as user_image', 'freelancer_post_reg.freelancer_post_username as last_name');
+
+        $hire_not = $this->data['hire_not'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'app_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+        // freelancer hire notification end
+        // freelancer post notification start
+        // $this->data['work_post'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'app_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+
+        $contition_array = array('notification.not_type' => 4, 'notification.not_from' => 5, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'user_invite',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'user_invite.invite_id'),
+            array(
+                'join_type' => '',
+                'table' => 'freelancer_hire_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'freelancer_hire_reg.user_id')
+        );
+        $data = array('notification.*', ' user_invite.*', 'freelancer_hire_reg.user_id as user_id', 'freelancer_hire_reg.fullname as first_name', 'freelancer_hire_reg.freelancer_hire_user_image as user_image', 'freelancer_hire_reg.username as last_name');
+
+        $work_post = $this->data['work_post'] = $work_post = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'invite_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        // echo '<pre>'; print_r($this->data['hire_not']);
+        //  echo '<pre>'; print_r($this->data['work_post']); die();
+        // freelancer post notification end
+        //artistic notification start
+        // follow notification start
+
+        $contition_array = array('notification.not_type' => 8, 'notification.not_from' => 3, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'follow',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'follow.follow_id'),
+            array(
+                'join_type' => '',
+                'table' => 'art_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'art_reg.user_id')
+        );
+        $data = array('notification.*', ' follow.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
+
+        $artfollow = $this->data['artfollow'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'follow_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        // follow notification end
+        //post comment notification start
+
+        $contition_array = array('notification.not_type' => 6, 'not_img' => 1, 'notification.not_from' => 3, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'artistic_post_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'artistic_post_comment.artistic_post_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'art_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'art_reg.user_id')
+        );
+        $data = array('notification.*', ' artistic_post_comment.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
+        $artcommnet = $this->data['artcommnet'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'artistic_post_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+        // comment notification end
+        //post like notification start
+        $contition_array = array('notification.not_type' => 5, 'notification.not_from' => 3, 'not_img' => 2, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'art_post',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'art_post.art_post_id'),
+            array(
+                'join_type' => '',
+                'table' => 'art_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'art_reg.user_id')
+        );
+        $data = array('notification.*', ' art_post.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
+        $artlike = $this->data['artlike'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'art_post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $contition_array = array('notification.not_type' => 5, 'not_img' => 5, 'notification.not_from' => 3, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'post_image',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'post_image.image_id'),
+            array(
+                'join_type' => '',
+                'table' => 'art_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'art_reg.user_id')
+        );
+        $data = array('notification.*', ' post_image.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
+        $artimglike = $this->data['artimglike'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'image_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+
+        $contition_array = array('notification.not_type' => 5, 'not_img' => 3, 'notification.not_from' => 3, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'artistic_post_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'artistic_post_comment.artistic_post_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'art_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'art_reg.user_id')
+        );
+        $data = array('notification.*', ' artistic_post_comment.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
+        $artcmtlike = $this->data['artcmtlike'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'artistic_post_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $contition_array = array('notification.not_type' => 6, 'not_img' => 4, 'notification.not_from' => 3, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'art_post_image_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'art_post_image_comment.post_image_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'art_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'art_reg.user_id')
+        );
+        $data = array('notification.*', ' art_post_image_comment.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
+        $artimgcommnet = $this->data['artimgcommnet'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $contition_array = array('notification.not_type' => 5, 'not_img' => 6, 'notification.not_from' => 3, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'art_post_image_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'art_post_image_comment.post_image_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'art_reg',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'art_reg.user_id')
+        );
+        $data = array('notification.*', ' art_post_image_comment.*', ' art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
+        $this->data['artimgcmtlike'] = $artimgcmtlike = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        // like notification end
+        // artistic notification end
+        // business profile notification start
+        // follow notification start
+
+        $contition_array = array('notification.not_type' => 8, 'notification.not_from' => 6, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'follow',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'follow.follow_id'),
+            array(
+                'join_type' => '',
+                'table' => 'business_profile',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'business_profile.user_id')
+        );
+        $data = array('notification.*', 'follow.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
+
+        $busifollow = $this->data['busifollow'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'follow_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        // follow notification end
+        // comment notification start
+
+        $contition_array = array('notification.not_type' => 6, 'not_img' => 1, 'notification.not_from' => 6, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'business_profile_post_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'business_profile_post_comment.business_profile_post_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'business_profile',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'business_profile.user_id')
+        );
+        $data = array('notification.*', 'business_profile_post_comment.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
+
+        $buscommnet = $this->data['buscommnet'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'business_profile_post_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+        //echo '<pre>'; print_r($this->data['buscommnet']);
+        $contition_array = array('notification.not_type' => 6, 'not_img' => 4, 'notification.not_from' => 6, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'bus_post_image_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'bus_post_image_comment.post_image_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'business_profile',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'business_profile.user_id')
+        );
+        $data = array('notification.*', 'bus_post_image_comment.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
+
+        $this->data['busimgcommnet'] = $busimgcommnet = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        //echo '<pre>'; print_r($this->data['busimgcommnet']); die(); 
+        // comment notification end
+        // like notification start
+        $contition_array = array('notification.not_type' => 5, 'not_img' => 2, 'notification.not_from' => 6, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'business_profile_post',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'business_profile_post.business_profile_post_id'),
+            array(
+                'join_type' => '',
+                'table' => 'business_profile',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'business_profile.user_id')
+        );
+        $data = array('notification.*', 'business_profile_post.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
+
+        $buslike = $this->data['buslike'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $contition_array = array('notification.not_type' => 5, 'not_img' => 3, 'notification.not_from' => 6, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'business_profile_post_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'business_profile_post_comment.business_profile_post_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'business_profile',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'business_profile.user_id')
+        );
+        $data = array('notification.*', 'business_profile_post_comment.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
+
+        $buscmtlike = $this->data['buscmtlike'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'business_profile_post_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $contition_array = array('notification.not_type' => 5, 'not_img' => 5, 'notification.not_from' => 6, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'post_image',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'post_image.image_id'),
+            array(
+                'join_type' => '',
+                'table' => 'business_profile',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'business_profile.user_id')
+        );
+        $data = array('notification.*', 'post_image.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
+
+        $busimglike = $this->data['busimglike'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'image_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $contition_array = array('notification.not_type' => 5, 'not_img' => 6, 'notification.not_from' => 6, 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
+        $join_str = array(array(
+                'join_type' => '',
+                'table' => 'bus_post_image_comment',
+                'join_table_id' => 'notification.not_product_id',
+                'from_table_id' => 'bus_post_image_comment.post_image_comment_id'),
+            array(
+                'join_type' => '',
+                'table' => 'business_profile',
+                'join_table_id' => 'notification.not_from_id',
+                'from_table_id' => 'business_profile.user_id')
+        );
+        $data = array('notification.*', 'bus_post_image_comment.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
+
+        $busimgcmtlike = $this->data['busimgcmtlike'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+        $this->data['totalnotifi'] = $totalnotifi = array_merge($rec_not, $job_not, $hire_not, $work_post, $artcommnet, $artlike, $artcmtlike, $artimglike, $artimgcommnet, $artfollow, $artimgcmtlike, $busimgcommnet, $busifollow, $buscommnet, $buslike, $buscmtlike, $busimgcmtlike, $busimglike);
+        $this->data['totalnotification'] = $totalnotification = $this->aasort($totalnotifi, "not_created_date");
+
+        //  $notification .= '<div class="notification-data">';
+        // $notification .= '<ul>';
+        // $notification .= '<li>';
+        //  $notification .= '<div class="notification-database">';
+        //   $notification .= '<div class="notification-pic">';
+        //    $notification .= '</div>';
+        // $notification .= '<div class="notification-data-inside">';
+        //  $notification .= '<h6> Notification updates</h6>';
+        // $notification .= '</div>';
+        //   $notification .= '</div></div></li>';
+        //$notification = '<ul class="">';
+        $i = 0;
+        foreach ($totalnotification as $total) {
+//1     
+
+
+            if ($total['not_from'] == 1) {
+                $companyname = $this->db->get_where('recruiter', array('user_id' => $total['user_id']))->row()->re_comp_name;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('notification/recruiter_post/' . $total['post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+
+                $filepath = FCPATH . $this->config->item('rec_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('rec_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $total['first_name'];
+                    $b = $total['last_name'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><i> Recruiter</i></font></b><b>' . '  ' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b>  From ' . ucwords($companyname) . ' <span class="noti-msg-y"> Invited you for an interview. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></div></a></li>';
+            }
+            //  }
+            //  2
+            // foreach ($artfollow as $art) {
+            if ($total['not_from'] == 3 && $total['not_img'] == 0) {
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('artistic/artistic_profile/' . $total['user_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+
+                $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('art_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $total['first_name'];
+                    $b = $total['last_name'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y"> Started following you in artistic profile.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></div></a></li>';
+            }
+            //   }
+            //   3
+            //    foreach ($artcommnet as $art) {
+            $art_not_from = $total['not_from'];
+            $art_not_img = $total['not_img'];
+            if ($art_not_from == '3' && $art_not_img == '1') {
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('notification/art_post/' . $total['art_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('art_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $total['first_name'];
+                    $b = $total['last_name'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                //$notification .= '';
+                $notification .= '<h6>';
+                $notification .= '<b>' . ' ' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b><span class="noti-msg-y"> Commneted on your post in artistic profile.</span>';
+                $notification .= '</h6><div><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></div></a></li>';
+            }
+            //   }
+            //   4
+
+            $art_not_from = $total['not_from'];
+            $art_not_img = $total['not_img'];
+            if ($art_not_from == '3' && $art_not_img == '2') {
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('notification/art_post/' . $total['art_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+
+                $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('art_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $total['first_name'];
+                    $b = $total['last_name'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y">Likes your post in artistic profile.</sapn></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            //5
+            if ($total['not_from'] == 3) {
+                if ($total['not_img'] == 3) {
+
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/art_post/' . $total['art_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                    $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('art_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $total['first_name'];
+                        $b = $total['last_name'];
+                        $acr = substr($a, 0, 1);
+                        $bcr = substr($b, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y"> Likes your post`s comment in artistic profile.</h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div>';
+                    $notification .= '</div></div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //6
+            if ($total['not_from'] == 3) {
+                if ($total['not_img'] == 5) {
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/art_post_img/' . $total['post_id'] . '/' . $total['image_id']) . '"><div class="notification-database"><div class="notification-pic">';
+                    $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('art_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $total['first_name'];
+                        $b = $total['last_name'];
+                        $acr = substr($a, 0, 1);
+                        $bcr = substr($b, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y"> Likes your photo in artistic profile. </sapn></h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div></div>';
+                    $notification .= '</div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //7
+            if ($total['not_from'] == 3) {
+                if ($total['not_img'] == 4) {
+                    $postid = $this->db->get_where('post_image', array('image_id' => $total['post_image_id']))->row()->post_id;
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/art_post_img/' . $postid . '/' . $total['post_image_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic">';
+                    $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('art_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $total['first_name'];
+                        $b = $total['last_name'];
+                        $acr = substr($a, 0, 1);
+                        $bcr = substr($b, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y">Commented on your photo in artistic profile.</sapn></h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div> </div>';
+                    $notification .= '</div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //8
+            if ($total['not_from'] == 3) {
+                if ($total['not_img'] == 6) {
+                    $postid = $this->db->get_where('post_image', array('image_id' => $total['post_image_id']))->row()->post_id;
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/art_post_img/' . $postid . '/' . $total['post_image_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                    $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('art_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $total['first_name'];
+                        $b = $total['last_name'];
+                        $acr = substr($a, 0, 1);
+                        $bcr = substr($b, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y">Likes your photo`s comment in artistic profile.</h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div></div>';
+                    $notification .= '</div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //9
+            $bus_not_from = $total['not_from'];
+            $bus_not_img = $total['not_img'];
+            $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+            if ($bus_not_from == '6' && $bus_not_img == '1') {
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('notification/business_post/' . $total['business_profile_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+                $filepath = FCPATH . $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('bus_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $companyname;
+                    $acr = substr($a, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b><span class="noti-msg-y"> Commented on your post in business profile. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+            //10
+            if ($total['not_from'] == 6 && $total['not_img'] == 0) {
+                $busslug = $this->db->get_where('business_profile', array('user_id' => $total['user_id']))->row()->business_slug;
+                $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('business_profile/business_resume/' . $busslug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                $filepath = FCPATH . $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('bus_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $companyname;
+                    $acr = substr($a, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b> <span class="noti-msg-y">Started following you in business profile.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+            //11
+            $bus_not_from = $total['not_from'];
+            $bus_not_img = $total['not_img'];
+            $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+            if ($bus_not_from == '6' && $bus_not_img == '2') {
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('notification/business_post/' . $total['business_profile_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+                $filepath = FCPATH . $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('bus_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $companyname;
+                    $acr = substr($a, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your post in business profile. </span> </h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div> </a></li>';
+            }
+            //12
+            if ($total['not_from'] == 6) {
+                if ($total['not_img'] == 3) {
+                    $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/business_post/' . $total['business_profile_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')">
+                    <div class="notification-database"> <div class="notification-pic" >';
+                    $filepath = FCPATH . $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('bus_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $companyname;
+                        $acr = substr($a, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your post`s comment in business profile.</h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div> </div>';
+                    $notification .= '</div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //13
+            if ($total['not_from'] == 6) {
+                if ($total['not_img'] == 5) {
+                    $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/bus_post_img/' . $total['post_id'] . '/' . $total['image_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                    $filepath = FCPATH . $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('bus_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $companyname;
+                        $acr = substr($a, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your photo in business profile. </span></h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div></div';
+                    $notification .= '</div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //14
+            if ($total['not_from'] == 6) {
+                if ($total['not_img'] == 4) {
+                    $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+                    $postid = $this->db->get_where('post_image', array('image_id' => $total['post_image_id']))->row()->post_id;
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/bus_post_img/' . $postid . '/' . $total['post_image_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                    $filepath = FCPATH . $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('bus_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $companyname;
+                        $acr = substr($a, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Commented on your photo in business profile. </span></h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div></div';
+                    $notification .= '</div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //15
+            if ($total['not_from'] == 6) {
+                if ($total['not_img'] == 6) {
+                    $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+                    $postid = $this->db->get_where('post_image', array('image_id' => $total['post_image_id']))->row()->post_id;
+                    $notification .= '<li class="';
+                    if ($total['not_active'] == 1) {
+                        $notification .= 'active2';
+                    }
+                    $notification .= '"';
+                    $notification .= '><a href="' . base_url('notification/bus_post_img/' . $postid . '/' . $total['post_image_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                    $filepath = FCPATH . $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                    if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                        $notification .= '<img src="' . base_url($this->config->item('bus_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                    } else {
+                        $a = $companyname;
+                        $acr = substr($a, 0, 1);
+
+
+                        $notification .= '<div class="post-img-div">';
+                        $notification .= '' . ucwords($acr) . '';
+                        $notification .= '</div>';
+                    }
+                    $notification .= '</div>';
+                    $notification .= '<div class="notification-data-inside">';
+                    $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your photos comment in business profile.</h6>';
+                    $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                    $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                    $notification .= '</span></div> </div>';
+                    $notification .= '</div></a>';
+                    $notification .= '</li>';
+                }
+            }
+            //16
+            if ($total['not_from'] == 2) {
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('job/job_printpreview/' . $total['not_from_id'] . '?page=recruiter') . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+                $filepath = FCPATH . $this->config->item('job_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('job_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $total['first_name'];
+                    $b = $total['last_name'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y"> Job seeker</span></font></b><b>' . '  ' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y"> Applied on your jobpost. </sapn></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</sapn></div></div> </div></a> </li>';
+            }
+            //17
+            if ($total['not_from'] == 4) {
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('freelancer/freelancer_post_profile/' . $total['not_from_id'] . '?page=freelancer_hire') . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+                $filepath = FCPATH . $this->config->item('free_post_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('free_post_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $total['first_name'];
+                    $b = $total['last_name'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Freelancer</span></font></b><b>' . '  ' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y"> Applied on your post. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+            //18
+            if ($total['not_from'] == 5) {
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('notification/freelancer_hire_post/' . $total['post_id'] . '?page=freelancer_post') . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+                $filepath = FCPATH . $this->config->item('free_hire_profile_thumb_upload_path') . $total['user_image'];
+                if ($total['user_image'] && (file_exists($filepath)) == 1) {
+                    $notification .= '<img src="' . base_url($this->config->item('free_hire_profile_thumb_upload_path') . $total['user_image']) . '" >';
+                } else {
+                    $a = $total['first_name'];
+                    $b = $total['last_name'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Employer</span></font></b><b>' . '  ' . ucwords($total['first_name']) . ' ' . ucwords($total['last_name']) . '</b> <span class="noti-msg-y"> Selected you for project. </span> </h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div> </a></li>';
+            }
+
+            $i++;
+            if ($i == 10) {
+                break;
+            }
+        }
+        if($totalnotification){
+      $seeall = '<a href="' . base_url() . 'notification">See All</a>';
+    
+        }else{
+         $seeall = '<div class="fw">
+        <div class="art-img-nn">
+                                                <div class="art_no_post_img">
+                                                    <img src="' . base_url() . 'img/icon_notification_big.png">
+                                                </div>
+                                                <div class="art_no_post_text_c">
+                                                    No Notification Available.
+                                                </div>
+                             </div></div>';      
+        }
+      echo json_encode(
+                        array(
+                            "notification" => $notification,
+                            "seeall" => $seeall,
+                ));
+
+      
+    
     }
 
     public function msg_header($id = "") {
