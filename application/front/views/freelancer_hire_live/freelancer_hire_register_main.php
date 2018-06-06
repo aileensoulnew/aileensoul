@@ -99,12 +99,20 @@
                             </span>
                         </div>
 
-                        <p class="clr-c fs12">
+                        <!-- <p class="clr-c fs12">
                             By Clicking on create an account button you agree our 
                             <a tabindex="10" href="#">Terms and Condition</a> and <a tabindex="11" href="#">Privacy policy</a>.
-                        </p>
+                        </p> -->
+                        <div class="clr-c fs12 form-group term_condi_check">
+                            <label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
+                                <input tabindex="9" type="checkbox" ng-model="user.term_condi" name="term_condi" id="term_condi" value="1" />
+                                I have read and agree to use this website as subjected to Aileensoul 
+                                <a tabindex="10" href="<?php echo base_url('terms-and-condition'); ?>">Terms and Condition</a> and <a tabindex="11" href="<?php echo base_url('privacy-policy'); ?>">Privacy policy</a>.
+                                <div class="control__indicator"></div>
+                            </label>
+                        </div>
                         <p class="text-center">
-                            <button type="submit" class="btn1" tabindex="9">Create an Account</button>
+                            <button type="submit" class="btn1" tabindex="12">Create an Account</button>
                         </p>
                     </form>
                 </div>
