@@ -29,11 +29,12 @@
                     </div>
                 </div>
                 <p class="text-center submit-btn">
+					<a class="btn-back" href="basic-information" title="Go to Back"> Back</a>
                     <button type="submit" id="submit" class="btn1">Submit<span class="ajax_load" id="student_info_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                 </p>
             </form>
     </div>
-    <a href="basic-information" title="Go to Back"><i class="fa fa-arrow-left" aria-hidden="true"> Back to Basic Information</i></a>
+
 </div>
 <script>
 	$("#currentStudy").focusin(function(){

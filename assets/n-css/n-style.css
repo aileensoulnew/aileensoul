@@ -1257,7 +1257,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .left-search-box p a:hover{color:#1b8ab9;}
 .left-search-box h3{padding:10px; border-bottom:1px solid #d2d2d2; font-size:25px; color:#5c5c5c; letter-spacing:1px;} 
 .search-listing{padding:5px 10px; margin:0; /*max-height:300px;*/}
-.search-listing li{padding:5px 0;list-style-type:none; margin: 0; letter-spacing:0.5px; color:#7b7b7b;}
+.search-listing li{padding:5px 0;list-style-type:none; margin: 0; letter-spacing:0.5px; color:#7b7b7b; width:100%; float:left;}
 .list-type-bullet .search-listing li label{margin-bottom:0; width:100%; position:relative;}
 .list-type-bullet .search-listing li label:before{/*width:10px; height:10px; background:#5c5c5c;*/ content:""; display:inline-block;}
 .list-type-bullet .search-listing li label a{color:#5c5c5c; padding-left:10px;}
@@ -1648,7 +1648,9 @@ ol li:before{counter-increment: myOrderedListItemsCounter;
   }
 }
 /***  end progress bar  ***/
-.art-img-nn{text-align:center; padding:30px 0; border:1px solid #d2d2d2; border-radius:4px;}
+.cus-border-cus .art-img-nn{border:1px solid #d2d2d2; border-radius:4px; margin-top:15px;}
+.art-img-nn{text-align:center; padding:30px 0; /*border:1px solid #d2d2d2;*/ border-radius:4px;}
+.dropdown-data .art-img-nn{margin:0;}
 .no-data-available .art-img-nn{padding: 0 10px 20px;}
 #upload-one{height:auto;}
 #upload-demo-one{padding-top:10px;}
@@ -2321,7 +2323,7 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 .edit-pr-custom .nav-tabs > li > a:hover{background:#fff; color:#5c5c5c; border-radius:0;}
 .edit-pr-custom form fieldset{padding:10px;}
 .edit-pr-custom form fieldset select{height:35px;}
-.student-or-not{padding-left:10px;}
+.student-or-not{/*padding-left:10px;*/}
 .edit-pr-custom .common-form fieldset label{margin:0;}
 .edit-pr-custom .gen-male{margin-left:0 !important;}
 .edit-pr-custom #gen{margin-top:-5px;}
@@ -2418,6 +2420,8 @@ body, body.no-login {padding-bottom:60px;}
 #jobseeker_regform fieldset{padding:10px;}
 .cus-error fieldset.main_select_data span::after{display:none;}
 .modal-dialog{padding-top:85px;}
+
+.mi-cat-width{width:220px; float:left;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -3220,7 +3224,7 @@ body, body.no-login {padding-bottom:60px;}
 .media-tab ul.nav-tabs li:first-child{display:none;}
 .right-header > ul > li:nth-child(3){display:none;}
 .right-header > ul > li:nth-child(4){display:none;}
-.mob-bottom-menu ul >li:nth-child(3){display:none;}
-.mob-bottom-menu ul >li:nth-child(4){display:none;}
+.mob-bottom-menu ul > li:nth-child(3){display:none;}
+.mob-bottom-menu ul > li:nth-child(4){display:none;}
 .mob-bottom-menu li{width:33.33% !important;}
 .main-user-profile .user-btns a:last-child{display:none;}

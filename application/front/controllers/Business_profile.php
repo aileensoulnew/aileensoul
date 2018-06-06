@@ -7838,7 +7838,7 @@ Your browser does not support the audio tag.
         if ($contactperson) {
             $seeall = '<a class="fr" href="' . base_url() . 'company/contact-requests">See All</a>';
         } else {
-            $seeall = '<div class="fw"><div class="art-img-nn">
+            $contactdata = '<div class="fw"><div class="art-img-nn">
                                                 <div class="art_no_post_img">
                                                     <img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '" alt="No_Contact_Request.png">
                                                 </div>

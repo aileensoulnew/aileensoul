@@ -303,7 +303,7 @@
             </div>
         </div>
 
-        <div class="modal fade message-box" id="postmodal" role="dialog">
+        <div class="modal fade new-modal" id="postmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>

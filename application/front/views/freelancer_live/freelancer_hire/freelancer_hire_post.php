@@ -228,14 +228,7 @@
                     </div>
                 </div>
 
-
-
-
-                <div  class="add-post-button mob-block">
-                    <?php if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
-                        <a title="Post Project" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i><?php echo $this->lang->line("post_project"); ?></a>
-                    <?php } ?>
-                </div> 
+ 
                 <div class="container">
                     <div class="job-menu-profile mob-none pt20">
                         <a title="<?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?>" href="javascript:void(0);">  <h3> <?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?></h3></a>
@@ -262,11 +255,7 @@
                             ?>
                         </div>
 
-                        <div  class="add-post-button">
-                            <?php if ($freelancr_user_data[0]['user_id'] == $this->session->userdata('aileenuser')) { ?>
-                                <a title="Post Project" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i><?php echo $this->lang->line("post_project"); ?></a>
-                            <?php } ?>
-                        </div> 
+                  
                     </div>
                     <div class="col-md-7 col-sm-12 mob-clear">
                         <?php
@@ -281,7 +270,7 @@
                         <div class="page-title">
                             <h3>Projects</h3>
                         </div>
-                        <div class="job-contact-frnd1">
+                        <div class="job-contact-frnd1 cus-border-cus">
 
 
                         </div>

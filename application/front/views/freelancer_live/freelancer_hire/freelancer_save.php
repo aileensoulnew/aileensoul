@@ -159,9 +159,7 @@
                     </div>
                 </div>
             </div>
-            <div  class="add-post-button mob-block">
-                <a title="Post Project" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i><?php echo $this->lang->line("post_project"); ?></a>
-            </div>
+         
         </div>
         <div class="container">
             <div class="job-menu-profile mob-none pt20">
@@ -174,9 +172,7 @@
                     <?php } else { ?> 
                         <a id="designation" class="designation" title="<?php echo ucwords($freelancr_user_data[0]['designation']); ?>"><?php echo ucwords($freelancr_user_data[0]['designation']); ?></a>  <?php } ?>
                 </div>
-                <div  class="add-post-button">
-                    <a title="Post Project" class="btn btn-3 btn-3b" href="<?php echo base_url('post-freelance-project'); ?>"><i class="fa fa-plus" aria-hidden="true"></i><?php echo $this->lang->line("post_project"); ?></a>
-                </div>
+            
             </div>
             <div class="col-md-8 col-sm-12 mob-clear">
                 <div class="common-form">
