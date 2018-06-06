@@ -204,11 +204,7 @@
 							</div>  
 						</div>            
 					</div>
-					<div  class="add-post-button mob-block">
-						<?php if ($this->uri->segment(3) == $userid) { ?>
-						<a title="recruiter add post" class="btn btn-3 btn-3b" href="<?php echo base_url('post-job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
-						<?php } ?>
-					</div>
+				
 					<!-- menubar --> 
 					<div class="container rec_res">
 						<div class="job-menu-profile  mob-none ">
@@ -243,11 +239,7 @@
 
 						</div>
 
-						<div  class="add-post-button">
-							<?php if($this->uri->segment(3) == $userid) { ?>
-							<a class="btn btn-3 btn-3b" title="recruiter add post" href="<?php echo base_url('post-job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
-							<?php } ?>
-						</div>
+						
 					</div>
 					<!-- text head end -->
 
