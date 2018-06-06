@@ -77,7 +77,7 @@ class Blog_Model extends CI_Model {
                     . $sql_condition;
 
         if($sory_by != ""){
-            $sql .= " ORDER BY bc.id DESC";
+            $sql .= " ORDER BY b.created_date DESC";
         }
 
         if($perpage != ""){
