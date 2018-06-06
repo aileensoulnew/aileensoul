@@ -69,6 +69,8 @@ header("Pragma: no-cache"); // HTTP/1.0
         }
         ?>
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
+        <script data-pagespeed-no-defer src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>"></script>
+        <script data-pagespeed-no-defer src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> 
     </head>
     <body class="registeration outer-page">
         <div class="main-inner">
@@ -178,10 +180,14 @@ header("Pragma: no-cache"); // HTTP/1.0
                                         </span>
                                     </div>
 
-                                    <p class="clr-c fs12">
-                                        By Clicking on create an account button you agree our 
-                                        <a tabindex="10" href="<?php echo base_url('terms-and-condition'); ?>">Terms and Condition</a> and <a tabindex="11" href="<?php echo base_url('privacy-policy'); ?>">Privacy policy</a>.
-                                    </p>
+                                    <div class="clr-c fs12 form-group term_condi_check">
+                                        <label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
+                                            <input type="checkbox" name="term_condi" id="term_condi" value="1" />
+                                            I have read and agree to use this website as subjected to Aileensoul 
+                                            <a tabindex="10" href="<?php echo base_url('terms-and-condition'); ?>">Terms and Condition</a> and <a tabindex="11" href="<?php echo base_url('privacy-policy'); ?>">Privacy policy</a>.
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </div>
                                     <p>
                                         <button class="btn1" tabindex="9">Create an account</button>
                                     </p>
@@ -309,42 +315,54 @@ header("Pragma: no-cache"); // HTTP/1.0
                         },
                         selgen: {
                             required: true,
+                        },
+                        term_condi: {
+                            required: true,
                         }
                     },
-
                     groups: {
                         selyear: "selyear selmonth selday"
                     },
                     messages:
-                            {
-                                first_name: {
-                                    required: "Please enter first name",
-                                },
-                                last_name: {
-                                    required: "Please enter last name",
-                                },
-                                email_reg: {
-                                    required: "Please enter email address",
-                                    remote: "Email address already exists",
-                                },
-                                password_reg: {
-                                    required: "Please enter password",
-                                },
+                    {
+                        first_name: {
+                            required: "Please enter first name",
+                        },
+                        last_name: {
+                            required: "Please enter last name",
+                        },
+                        email_reg: {
+                            required: "Please enter email address",
+                            remote: "Email address already exists",
+                        },
+                        password_reg: {
+                            required: "Please enter password",
+                        },
 
-                                selday: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selmonth: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selyear: {
-                                    required: "Please enter your birthdate",
-                                },
-                                selgen: {
-                                    required: "Please enter your gender",
-                                }
+                        selday: {
+                            required: "Please enter your birthdate",
+                        },
+                        selmonth: {
+                            required: "Please enter your birthdate",
+                        },
+                        selyear: {
+                            required: "Please enter your birthdate",
+                        },
+                        selgen: {
+                            required: "Please enter your gender",
+                        },
+                        term_condi: {
+                            required: "Please Accept privacy policy,terms and conditions",
+                        }
 
-                            },
+                    },
+                    errorPlacement: function (error, element) {
+                        if (element.attr("type") == "checkbox") {
+                            error.insertAfter($("#lbl_term_condi"));
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    },
                     submitHandler: submitRegisterForm
                 });
                 /* register submit */
@@ -358,6 +376,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                     var selmonth = $("#selmonth").val();
                     var selyear = $("#selyear").val();
                     var selgen = $("#selgen").val();
+                    var lbl_term_condi = $("#lbl_term_condi").val();
 
                     var post_data = {
                         'first_name': first_name,
@@ -368,6 +387,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                         'selmonth': selmonth,
                         'selyear': selyear,
                         'selgen': selgen,
+                        'term_condi' : term_condi,
                         '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
                     }
                     $.ajax({
