@@ -410,7 +410,7 @@ app.config(function ($routeProvider, $locationProvider) {
 app.controller('profilesController', function ($scope, $http, $location) {
     $scope.user = {};
     // PROFEETIONAL DATA
-
+    $scope.$parent.title = "Profiles | Aileensoul";
     getFieldList();
     function getFieldList() {
         $('#main_loader').show();
@@ -753,6 +753,7 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
 });
 
 app.controller('dashboardPhotosController', function ($scope, $http, $location, $window) {
+    $scope.$parent.title = "Photos | Aileensoul";
     $scope.makeActive = function (item,slug) {
         $scope.active = $scope.active == item ? '' : item;
     }
@@ -896,6 +897,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     /*$scope.makeActive = function (item,slug) {
         $scope.active = $scope.active == item ? '' : item;
     }*/
+    $scope.$parent.title = "Dashboard | Aileensoul";
     var isLoadingData = false;
 
     $(document).on('hidden.bs.modal', function (event) {
@@ -3152,6 +3154,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 });
 app.controller('detailsController', function ($scope, $http, $location) {
     $scope.user = {};
+    $scope.$parent.title = "Details | Aileensoul";
     // PROFEETIONAL DATA
     getFieldList();
 
@@ -3190,6 +3193,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
+    $scope.$parent.title = "Contacts | Aileensoul";
 
     $scope.contact = function (id, status, to_id,indexCon) {
         $http({
@@ -3291,6 +3295,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
+    $scope.$parent.title = "Follower | Aileensoul";
     // Fetch data
     $scope.getFollowers = function (pagenum = '') {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
@@ -3388,6 +3393,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
+    $scope.$parent.title = "Following | Aileensoul";
     // Fetch data
     $scope.getFollowing = function (pagenum = '') {
 
@@ -3495,6 +3501,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     $scope.buttonText = "Load More";
     $scope.ask = {};
     $scope.user_id = user_id;
+    $scope.$parent.title = "Questions | Aileensoul";
 
     getFieldList();
     function getFieldList() {

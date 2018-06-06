@@ -6,6 +6,7 @@
         <meta name="robots" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">  
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
@@ -59,7 +60,6 @@
             .mejs__button > button {
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
-
         </style>
     </head>
     <body class="one-hd">
@@ -117,7 +117,6 @@
                                     </a>
                                 </li>
                             </ul>
-                           
                         </div>
                     </div>
                     <div class="bs-example">
@@ -603,7 +602,6 @@
                     <!-- Repeated Class Complete -->
                     <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
                 </div>
-
                 <div class="right-part">
                     <div class="add-box">
                         <img ng-src="<?php echo base_url('assets/n-images/add.jpg') ?>">
@@ -1060,7 +1058,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="modal fade message-box like-popup" id="likeusermodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">

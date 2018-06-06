@@ -160,6 +160,6 @@
         </div>
     </div> -->
      
-        <?php echo $left_footer; ?>
+    <?php echo $left_footer; ?>
   
 </div>

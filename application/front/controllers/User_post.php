@@ -21,7 +21,7 @@ class User_post extends MY_Controller {
         $this->data['no_user_post_html'] = '<div class="user_no_post_avl"><h3>Feed</h3><div class="user-img-nn"><div class="user_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Feed Available.</div></div></div>';
         $this->data['no_user_contact_html'] = '<div class="art-img-nn"><div class="art_no_post_img"><img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '"></div><div class="art_no_post_text">No Contacts Available.</div></div>';
         // $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="profile.html" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="'. base_url("artist/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("business-profile/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("job/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("recruiter/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="'. base_url("freelance/").'"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
-         include ('main_profile_link.php');
+        include ('main_profile_link.php');
     }
 
     public function index() {
@@ -34,8 +34,8 @@ class User_post extends MY_Controller {
         $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
-        
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);        
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Opportunities | Aileensoul";

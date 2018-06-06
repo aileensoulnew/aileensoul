@@ -14,6 +14,7 @@ class Userprofile_page extends MY_Controller {
 
         $this->load->model('user_model');
         $this->load->model('userprofile_model');
+        include ('main_profile_link.php');
     }
 
     public function profile() {
