@@ -5,7 +5,7 @@
 			<li><a href="<?php echo base_url('blog'); ?>" target="_blank">Blog</a></li>
 			<li><a href="<?php echo base_url('faq'); ?>" target="_blank">Faq</a></li>
 			<li><a href="<?php echo base_url('advertise-with-us'); ?>" target="_blank">Advertise With Us</a></li>
-			<li><a title="Sitemap" href="<?php echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li>
+			<!-- <li><a title="Sitemap" href="<?php //echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li> -->
 			<li><a title="Report" href="<?php echo base_url('report-abuse'); ?>" target="_blank">Report </a></li>
 			<li><a href="<?php echo base_url('contact-us'); ?>" target="_blank">Contact</a></li>
 			<li><a href="<?php echo base_url('feedback'); ?>" target="_blank">Feedback</a></li>

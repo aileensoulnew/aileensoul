@@ -79,8 +79,8 @@ $userid = $this->session->userdata('aileenuser');
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
-									Messages <a href="#" class="pull-right see_link" id="seemsg">See All</a>
 								</div>
+									Messages <a href="javascript:void(0)" class="pull-right see_link" id="seemsg">See All</a>
 								<div class="content custom-scroll">
 									<ul class="dropdown-data msg-dropdown notification_data_in_h2">
 										

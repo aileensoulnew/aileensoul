@@ -70,11 +70,11 @@ class Userprofile extends MY_Controller {
         }
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['header'] = $this->load->view('userprofile/header', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('userprofile/footer', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['footer'] = $this->load->view('userprofile/footer', $this->data, TRUE);
         $this->data['title'] = "Basic Information | Aileensoul";
 
         if (count($userdata) > 0) {
-    
             $this->load->view('userprofile/index', $this->data);
         } else {
             $this->load->view('404');
