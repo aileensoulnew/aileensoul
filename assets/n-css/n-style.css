@@ -2052,6 +2052,8 @@ body.reg-form-cus{padding-bottom:0;}
 .reg-form-cus #basicinfo select{width:100%;}
 .student-or-not a{color:#1b8ab9; font-weight:bold;}
 .reg-form-cus .login label{margin-bottom:0; margin-top:15px; width:100%; float:left;}
+.reg-form-cus .login label.d_o_b{margin-top:0;}
+.reg-form-cus .login .term_condi_check label{margin-top:0;}
 .reg-form-cus #basic-information .login .form-group input{font-size:14px !important; padding:6px 0 0;}
 .reg-form-cus #basic-information .login .form-group select{font-size:14px !important; padding:6px 0 0;}
 .reg-form-cus #basic-information .login .form-group select option{padding-left:0;}
@@ -2415,6 +2417,7 @@ body, body.no-login {padding-bottom:60px;}
 .com-name-r label.error{padding:0 !important;}
 #jobseeker_regform fieldset{padding:10px;}
 .cus-error fieldset.main_select_data span::after{display:none;}
+.modal-dialog{padding-top:85px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
