@@ -65,6 +65,7 @@ app.controller('siteMapMainController', function ($scope, $http,$location) {
 
 app.controller('siteMapArtistController', function ($scope, $http,$location) {
     $scope.total_record = 0;
+    $scope.$parent.title = "Artist Sitemap | Aileensoul";
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.artistList = [],
@@ -131,6 +132,7 @@ app.controller('siteMapArtistController', function ($scope, $http,$location) {
 
 app.controller('siteMapCompaniesController', function ($scope, $http,$location) {
     $scope.total_record = 0;
+    $scope.$parent.title = "Companies Sitemap | Aileensoul";
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.companyList = [],
@@ -145,7 +147,6 @@ app.controller('siteMapCompaniesController', function ($scope, $http,$location) 
     // PAGE NO AND SEARCHWORD BASED ON URL
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
-    console.log($scope.currentPage);
     //ARTIST LISTING
     function companyList(page){
         $scope.companyList = {};
@@ -198,6 +199,7 @@ app.controller('siteMapCompaniesController', function ($scope, $http,$location) 
 
 app.controller('siteMapJobController', function ($scope, $http,$location) {
     $scope.total_record = 0;
+    $scope.$parent.title = "Job Sitemap | Aileensoul";
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.companyList = [],
@@ -264,6 +266,7 @@ app.controller('siteMapJobController', function ($scope, $http,$location) {
 
 app.controller('siteMapFreelancerController', function ($scope, $http,$location) {
     $scope.total_record = 0;
+    $scope.$parent.title = "Freelancer Sitemap | Aileensoul";
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.freelancerList = [],
@@ -313,6 +316,7 @@ app.controller('siteMapFreelancerController', function ($scope, $http,$location)
 
 app.controller('siteMapMemberController', function ($scope, $http,$location) {
     $scope.total_record = 0;
+    $scope.$parent.title = "Member Sitemap | Aileensoul";
     $scope.alphabetList = {};
     $scope.memberList = [],
     $scope.limit = 100;

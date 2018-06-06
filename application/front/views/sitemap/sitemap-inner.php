@@ -16,7 +16,7 @@ header('Cache-Control: public, max-age=30');
 <html lang="en" ng-app="siteMapInnerApp" ng-controller="siteMapInnerController">
 	<head>
 		<base href="<?php echo base_url();?>">
-		<title>Artist Sitemap</title>
+		<title ng-bind="title"></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
@@ -61,8 +61,8 @@ header('Cache-Control: public, max-age=30');
 							</div>
 							<div class="col-md-6 col-sm-6 no-login-right fw-479">
 								<?php if (!$this->session->userdata('aileenuser')) { ?>
-									<a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
-									<a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a>
+									<a href="<?php echo base_url('login'); ?>" class="btn8" target="_self">Login</a>
+									<a href="<?php echo base_url('registration'); ?>" class="btn9" target="_self">Create an account</a>
 								<?php } ?>
 							</div>
 						</div>

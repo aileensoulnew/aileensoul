@@ -7,15 +7,19 @@
 	</ul>
 	<div class="fw pt20" ng-show="isPaginationShow">
 		<h3>Member Name with Characters</h3>
-		
-		<pagination 
-			ng-model="currentPage"
-			total-items="total_record"
-			max-size="maxSize" 
-			items-per-page="limit"
-			boundary-links="true"
-			>
-		</pagination>
+		<div ng-show="memberList.length > 0">
+			<pagination 
+				ng-model="currentPage"
+				total-items="total_record"
+				max-size="maxSize" 
+				items-per-page="limit"
+				boundary-links="true"
+				>
+			</pagination>
+		</div>
+		<div ng-show="memberList.length <= 0">
+			<p class="text-center"> No data </p>
+		</div>
 	</div>
 	<div class="fw pt20" ng-show="isPaginationShow">
 		<ul class="mid-listing">

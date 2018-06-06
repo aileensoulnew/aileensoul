@@ -189,7 +189,7 @@
 										<li><a href="<?php echo base_url().'freelancer/signup' ?>">Create Freelance Account</a></li>
 										<li><a href="<?php echo base_url().'freelance-jobs' ?>">Freelance Jobs</a></li>
 										<li><a href="<?php echo base_url().'freelance-jobs-by-fields' ?>">View Freelance Jobs by Fields</a></li>
-										<li><a href="<?php echo base_url().'freelance-jobs-by-categories' ?>">View Freelance Jobs by Skills</a></li>
+										<li><a href="<?php echo base_url().'freelance-jobs-by-categories' ?>">View Freelance Jobs by Categories</a></li>
 									</ul>
 								</div>
 							</div>
@@ -200,8 +200,8 @@
 										<li><a href="<?php echo base_url().'login' ?>">Login</a></li>
 										<li><a href="<?php echo base_url().'artist-profile/signup' ?>">Create Account</a></li>
 										<li><a href="<?php echo base_url().'find-artist' ?>">Find Artist</a></li>
-										<li><a href="<?php echo base_url().'artist-by-category' ?>">View Artist by Category</a></li>
-										<li><a href="<?php echo base_url().'artist-by-location' ?>">View Artist by Location</a></li>
+										<li><a href="<?php echo base_url().'artist/category' ?>">View Artist by Category</a></li>
+										<li><a href="<?php echo base_url().'artist/location' ?>">View Artist by Location</a></li>
 										<li><a href="<?php echo base_url().'artist' ?>">View Other Artist</a></li>
 									</ul>
 								</div>
