@@ -9,11 +9,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text">Who are you?(Job title)*</label>
-                    <input type="text" name="jobTitle" id="jobTitle" class="form-control" ng-keyup="jobTitle()" ng-model="user.jobTitle" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+                    <label for="text">What's your current position?*</label>
+                    <input type="text" name="jobTitle" id="jobTitle" class="form-control" ng-keyup="jobTitle()" ng-model="user.jobTitle" placeholder="Enter job title / Designation" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
                     <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
 					<div id="jttooltip" class="tooltip-custom" style="display: none;">
-                        Enter “seeking opportunity” if you are a fresher else enter your current job title.
+                        Enter “seeking opportunity” if you are a fresher else enter your current job title. Ex:Seeking Opportunity / CEO / Entrepreneur / Founder / Singer / Photographer / Developer / HR / BDE / CA / Doctor..
                     </div>
                 </div>
                 <div class="form-group">
