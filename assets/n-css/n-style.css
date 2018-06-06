@@ -2423,6 +2423,7 @@ body, body.no-login {padding-bottom:60px;}
 .cus-error fieldset.main_select_data span::after{display:none;}
 .modal-dialog{padding-top:85px;}
 #basicinfo .cus_field .error{bottom:-20px;}
+#basicinfo label.error, #studentinfo label.error{right:0;}
 
 .mi-cat-width{width:220px; float:left;}
 

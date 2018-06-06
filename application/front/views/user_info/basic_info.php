@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="text">Who are you?</label>
+                    <label for="text">Who are you?(Job title)*</label>
                     <input type="text" name="jobTitle" id="jobTitle" class="form-control" ng-keyup="jobTitle()" ng-model="user.jobTitle" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
                     <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
 					<div id="jttooltip" class="tooltip-custom" style="display: none;">
@@ -17,14 +17,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="text">Where are you from?</label>
-                    <input type="text" name="city" id="city" class="form-control" ng-keyup="cityList()" ng-model="user.cityList" placeholder="Enter your city name" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                    <label for="text">What is your current location?*</label>
+                    <input type="text" name="city" id="city" class="form-control" ng-keyup="cityList()" ng-model="user.cityList" placeholder="Enter city name" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
                     <label ng-show="errorcityList" class="error">{{errorcityList}}</label>
                 </div>
                 <div class="form-group cus_field">
                     <label for="text">What is your field?</label>
                     <select name="field" ng-model="user.field" id="field" ng-change="other_field(this)">
-                        <option value="" selected="selected">Select your field</option>
+                        <option value="" selected="selected">Select field</option>
                         <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
                         <option value="0">Other</option>
                     </select>
