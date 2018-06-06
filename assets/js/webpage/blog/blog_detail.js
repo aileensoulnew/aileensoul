@@ -1,6 +1,7 @@
 app.controller('blogDetailController', function ($scope, $http) {
 	$scope.total_record = 0;
 	$scope.blogDetails = {};
+	$scope.recentBlogList = {};
 	$scope.categoryList = {};
   	$scope.iscategorySelected = false;
   	$scope.categorySelectedId = '';
@@ -27,6 +28,14 @@ app.controller('blogDetailController', function ($scope, $http) {
   	}
   	// console.log(blog_category);
   	categoryList();
+
+  	//RECENT BLOG LISTING FOR DROPDOWN
+  	function recentblogList(){
+  		$http.get(base_url + "blog/recent_blog_list").then(function (success) {
+            $scope.recentBlogList = success.data;
+        }, function (error) {});
+  	}
+  	recentblogList();
 
   	function blogDetailsList(){
   		$http.get(base_url + "blog/get_blog_details?blog_slug="+ blog_slug).then(function (success) {

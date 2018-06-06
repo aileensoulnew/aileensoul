@@ -162,25 +162,23 @@ header("Pragma: no-cache"); // HTTP/1.0
     							</a>
     							<div class="dropdown-menu">
     								<div class="dropdown-title">
-    									Recent Post <a href="#" class="pull-right">See All</a>
+    									Recent Post <a href="<?php echo base_url(); ?>blog" class="pull-right">See All</a>
     								</div>
     								<div class="content custom-scroll">
     									<ul class="dropdown-data msg-dropdown">
-                                            <?php foreach ($blog_last as $blog) { ?>
-    										<li class="">
-    											<a href="<?php echo base_url('blog/' . $blog['blog_slug']) ?>">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="<?php echo base_url($this->config->item('blog_thumb_upload_path') . $blog['image'] . '?ver=' . time()) ?>" alt="<?php echo $blog['image']; ?>">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title"><?php echo $blog['title']; ?></p>
-    															<span class="day-text"><?php echo $blog['created_date_formatted']; ?></span>
-    													</div> 
-    												</div>
-    											</a> 
-    										</li>
-                                            <?php } ?>
+                                            <li ng-repeat="blog in recentBlogList">
+                                                <a target="_blank" ng-href="<?php echo base_url(); ?>blog/{{ blog.blog_slug }}">
+                                                    <div class="dropdown-database">
+                                                        <div class="post-img">
+                                                            <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}" alt="{{ blog.image }}">
+                                                        </div>
+                                                        <div class="dropdown-user-detail">
+                                                            <p class="drop-blog-title">{{ blog.title }}</p>
+                                                                <span class="day-text">{{ blog.created_date_formatted }}</span>
+                                                        </div> 
+                                                    </div>
+                                                </a> 
+                                            </li>
     									</ul>
     								</div>
     							</div>
@@ -320,7 +318,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 												</a>
 											</div>
 											<div class="also-like-bottom">
-												<a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ (cat_name).toLowerCase() }}" ng-repeat="cat_name in post.blog_category_name track by $index">
+												<a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ cat_name | slugify }}" ng-repeat="cat_name in post.blog_category_name track by $index">
 													<span class="cat text-capitalize" ng-if="($index == 0)">
 														{{ cat_name }}
 													</span> 
@@ -427,6 +425,7 @@ header("Pragma: no-cache"); // HTTP/1.0
             <script src="<?php echo base_url('assets/js_min/jquery.validate.js?ver=' . time()); ?>"></script>
         <?php } ?>
         <!-- This Js is used for call popup -->
+        <script src="<?php echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
@@ -457,6 +456,12 @@ header("Pragma: no-cache"); // HTTP/1.0
                     }
                     return slug;
                 };
+            });
+            $(window).on("load",function(){
+                $(".custom-scroll").mCustomScrollbar({
+                    autoHideScrollbar:true,
+                    theme:"minimal"
+                });        
             });
         </script>
 

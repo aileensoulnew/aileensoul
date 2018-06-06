@@ -117,6 +117,7 @@ app.controller('EditorController', ['$scope', function ($scope) {
 
 app.controller('postDetailsController', function ($scope, $http,$window,$filter,$location,$route) {
     $scope.ask = {};
+    $scope.title = "Post | Aileensoul";
     $scope.user_id = user_id;
     $scope.opp = {};
     loadPostData();
@@ -124,6 +125,8 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         $('#loader').show();
         $http.get(base_url + "user_post/post_data/?post_id=" + post_id).then(function (success) {
             $('#loader').hide();
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             $scope.postData = success.data;
             setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);
         }, function (error) {});

@@ -181,33 +181,31 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     ?>
                                     </li>
                                     <li class="dropdown">
-    							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
-    							</a>
-    							<div class="dropdown-menu">
-    								<div class="dropdown-title">
-    									Recent Post <a href="#" class="pull-right">See All</a>
-    								</div>
-    								<div class="content custom-scroll">
-    									<ul class="dropdown-data msg-dropdown">
-                                            <?php foreach ($blog_last as $blog) { ?>
-    										<li class="">
-    											<a href="<?php echo base_url('blog/' . $blog['blog_slug']) ?>">
-    												<div class="dropdown-database">
-    													<div class="post-img">
-    														<img src="<?php echo base_url($this->config->item('blog_thumb_upload_path') . $blog['image'] . '?ver=' . time()) ?>" alt="<?php echo $blog['image']; ?>">
-    													</div>
-    													<div class="dropdown-user-detail">
-    														<p class="drop-blog-title"><?php echo $blog['title']; ?></p>
-    															<span class="day-text"><?php echo $blog['created_date_formatted']; ?></span>
-    													</div> 
-    												</div>
-    											</a> 
-    										</li>
-                                            <?php } ?>
-    									</ul>
-    								</div>
-    							</div>
-    						</li>
+            							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
+            							</a>
+            							<div class="dropdown-menu">
+            								<div class="dropdown-title">
+            									Recent Post <a href="<?php echo base_url() ?>blog" class="pull-right">See All</a>
+            								</div>
+            								<div class="content custom-scroll">
+            									<ul class="dropdown-data msg-dropdown">
+                                                    <li ng-repeat="blog in recentBlogList">
+                                                        <a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
+            												<div class="dropdown-database">
+            													<div class="post-img">
+                                                                    <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}" alt="{{ blog.image }}">
+            													</div>
+            													<div class="dropdown-user-detail">
+            														<p class="drop-blog-title">{{ blog.title }}</p>
+            															<span class="day-text">{{ blog.created_date_formatted }}</span>
+            													</div> 
+            												</div>
+            											</a> 
+            										</li>
+            									</ul>
+            								</div>
+            							</div>
+            						</li>
                             <li class="dropdown">
     							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
     							<div class="dropdown-menu">

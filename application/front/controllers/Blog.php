@@ -737,4 +737,10 @@ class Blog extends CI_Controller {
             echo json_encode($result_data);
         }
     }
+
+    function recent_blog_list(){
+        $condition_array = array('status' => 'publish');
+        $recent_blog_list = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+        echo json_encode($recent_blog_list);
+    }
 }

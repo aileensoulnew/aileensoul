@@ -1,6 +1,7 @@
 app.controller('blogController', function ($scope, $http) {
 	$scope.total_record = 0;
 	$scope.categoryList = {};
+	$scope.recentBlogList = {};
 	$scope.blogPost = [],
 	$scope.limit = 5;
 	$scope.currentPage = 1,
@@ -28,6 +29,15 @@ app.controller('blogController', function ($scope, $http) {
   	}
   	// console.log(blog_category);
   	categoryList();
+
+  	//RECENT BLOG LISTING FOR DROPDOWN
+  	function recentblogList(){
+  		$http.get(base_url + "blog/recent_blog_list").then(function (success) {
+            $scope.recentBlogList = success.data;
+        }, function (error) {});
+  	}
+  	// console.log(blog_category);
+  	recentblogList();
   	// console.log($scope.categoryList);
 	var filterajax = false;
 	var isProcessing = false;
@@ -56,6 +66,7 @@ app.controller('blogController', function ($scope, $http) {
 				isProcessing = false;
 				$scope.iscategorySelected = false;
 				$scope.categorySelectedId = '';
+				$('html, body').animate({scrollTop:0},'slow');
 			}
 		});
 	}
@@ -90,6 +101,7 @@ app.controller('blogController', function ($scope, $http) {
         function (complete) { 
         	$("#loader").addClass("hidden");
         	isCatProcessing = false; 
+        	$('html, body').animate({scrollTop:0},'slow');
         });
     }
     // PAGINATIONS

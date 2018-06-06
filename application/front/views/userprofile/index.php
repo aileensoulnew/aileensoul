@@ -28,7 +28,6 @@
             .show-more-container {
                 overflow: hidden;
             }
-
             .show-more-collapse, .show-more-expand {
                 text-align: center;
                 display: none;
