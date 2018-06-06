@@ -44,6 +44,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 </style>
     </head>
     <body class="profile-main-page">    
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php 
         if($job_deactive == 0  && $this->job_profile_set == 1){
             echo $job_header2;
@@ -559,6 +561,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         </div>
         
 		 </div>
+        </div>
 		<!-- Register -modal  -->
         <div class="modal fade message-box login register-model" id="job_reg" role="dialog">
             <div class="modal-dialog modal-lm" >

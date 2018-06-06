@@ -94,11 +94,18 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
             return;
         }
         isProcessing = true;
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            $('#main_loader').show();
+        }
         $('#loader').show();
         $.post(base_url + "job_live/job_search_new_ajax?page=" + pagenum , 
             {"job_keyword":job_keyword, "job_location":job_location, "work_time":work_time, "company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
                 $('#loader').hide();
+                if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                    $('#main_loader').hide();
+                }
+                $('#main_page_load').show();
                 data = JSON.parse(success);
                 if(data.searchJobs.length > 0)
                 {                    

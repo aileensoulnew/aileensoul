@@ -23,6 +23,8 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php 
             if($ismainregister == false){
                 // $this->load->view('business_live/login_header');
@@ -257,7 +259,7 @@
         </div>
 
 	   </div>
-
+        </div>
 		
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> 

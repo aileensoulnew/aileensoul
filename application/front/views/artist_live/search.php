@@ -26,6 +26,8 @@
     </head>
     <body class="profile-main-page">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php 
             if ($ismainregister == false) {
                 // $this->load->view('artist_live/login_header');
@@ -252,7 +254,7 @@
                 </div>
             </div>
 		</div>
-		
+		</div>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <?php if(($is_artist_profile_set == 1 || $is_artist_profile_set == '1') || $isartistactivate == 0){ 
             ?>

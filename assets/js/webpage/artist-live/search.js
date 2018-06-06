@@ -98,8 +98,11 @@ app.controller('artistSearchListController', function ($scope, $http) {
 
     function getsearchresultlist(search_url, from){
         $("#loader").removeClass("hidden");
+        $('#main_loader').show();
         $http.get(search_url).then(function (success) {
             $("#loader").addClass("hidden");
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             if (from == 'filter') {
                 $scope.artistList = {};    
             }
