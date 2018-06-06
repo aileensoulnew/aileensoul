@@ -297,12 +297,13 @@ $(document).ready(function () {
                     $("#btn-register").html('<img src="' + base_url + 'images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
                    // window.location = base_url + "profiles/" + response.userslug;
                     //window.location = base_url + "profiles/basic-information/" + response.userslug;
+                    window.location = base_url + "basic-information";
 
-                    if(response.is_userBasicInfo==1 || response.is_userStudentInfo==1){
+                    /*if(response.is_userBasicInfo==1 || response.is_userStudentInfo==1){
                         window.location = base_url + "profiles/" + response.user_slug;
                     } else {
                         window.location = base_url + "basic-information";//"profiles/" + response.user_slug;    
-                    }
+                    }*/
                     sendmail(userid);
                 } else {
                     $("#register_error").fadeIn(1000, function () {

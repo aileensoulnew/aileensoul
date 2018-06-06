@@ -501,6 +501,9 @@ class Registration extends CI_Controller {
         if (empty($_POST['selgen']))
             $errors['errorGender'] = 'Gender is required.';
 
+        if ($_POST['term_condi'] != 1)
+            $errors['errorTerm_condi'] = 'Please Accept privacy policy,terms and condition.';
+
         $email_reg = trim($_POST['email_reg']);
         $userdata = $this->user_model->getUserByEmail($email_reg);
         if ($userdata) {
@@ -525,6 +528,7 @@ class Registration extends CI_Controller {
                 'verify_date' => date('Y-m-d h:i:s', time()),
                 'user_verify' => '0',
                 'user_slider' => '1',
+                'term_condi' => $_POST['term_condi'],
                 'user_slug' => $this->setuser_slug(trim($_POST['first_name']) . '-' . trim($_POST['last_name']), 'user_slug', 'user'),
             );
             $user_insert = $this->common->insert_data_getid($user_data, 'user');
