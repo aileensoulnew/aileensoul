@@ -101,6 +101,9 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
             },
             selgen: {
                 required: true,
+            },
+            term_condi: {
+                required: true,
             }
         },
         groups: {
@@ -131,6 +134,17 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
             },
             selgen: {
                 required: "Please enter your gender",
+            },
+            term_condi: {
+                required: "Please Accept privacy policy,terms and conditions",
+            }
+
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("type") == "checkbox") {
+                error.insertAfter($("#lbl_term_condi"));
+            } else {
+                error.insertAfter(element);
             }
         },
     };
