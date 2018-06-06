@@ -2406,7 +2406,8 @@ input[type=text] {
 .hs-submit .delete_btn{margin-bottom:10px; margin-top:0;}
 html{overflow-x:hidden;}
 body, body.no-login {padding-bottom:60px;}
-.job-contact-frnd, .job-contact-frnd1 {margin-bottom:15px;}
+.job-contact-frnd, .job-contact-frnd1, .contact-frnd-post {margin-bottom:15px;}
+.contact-frnd-post .art-img-nn{border:0;}
 .no-data-available .art-img-nn{border:0;}
 .job_reg_page_fprm label.error{right:2px;}
 .business-profile label.error{right:2px;}
