@@ -13,6 +13,7 @@ class Search_live extends MY_Controller {
         $this->lang->load('message', 'english');
         $this->load->library('S3');
         $this->load->model('common');
+        $this->load->model('freelancer_hire_model');
        
 
         include ('include.php');

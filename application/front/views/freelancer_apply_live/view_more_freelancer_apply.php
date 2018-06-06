@@ -66,8 +66,11 @@
             <div class="container pt20 mobp0 mobmt15">
                 <div ng-view></div>
             </div>
-        </div>        
+        </div>
+        <?php if($user_id != "" && $this->freelance_apply_profile_set == 0)
+        { ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <?php } ?>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
