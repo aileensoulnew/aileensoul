@@ -210,6 +210,7 @@ $(document).ready(function () {
         var selmonth = $("#selmonth").val();
         var selyear = $("#selyear").val();
         var selgen = $("#selgen").val();
+        var term_condi = $("#term_condi").val();
 
         var post_data = {
             'first_name': first_name,
@@ -220,6 +221,7 @@ $(document).ready(function () {
             'selmonth': selmonth,
             'selyear': selyear,
             'selgen': selgen,
+            'term_condi' : term_condi,
             'aileensoulnewfrontcsrf': get_csrf_hash,
         }
 

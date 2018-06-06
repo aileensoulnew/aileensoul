@@ -835,7 +835,7 @@ class Recruiter extends MY_Controller {
 		}
 
 		if ($userid) {
-			//$this->load->view('recruiter/rec_post', $this->data);
+			$this->load->view('recruiter/rec_post', $this->data);
 		} else {
 			redirect('login/');
 		}
