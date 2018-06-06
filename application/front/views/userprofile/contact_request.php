@@ -10,10 +10,11 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css') ?>">
-
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script> -->
     </head>
     <body class="">
         <?php echo $header_profile; ?>
@@ -157,7 +158,6 @@
 
             </div>
         </div>
-        <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>
@@ -169,11 +169,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script>
-                                                    var base_url = '<?php echo base_url(); ?>';
-                                                    var user_slug = '<?php echo $this->uri->segment(2); ?>';
-                                                    var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                                    var item = '<?php echo $this->uri->segment(1); ?>';
-                                                    var app = angular.module("contactRequestApp", ['ngRoute', 'ui.bootstrap', 'ngSanitize']);
+            var base_url = '<?php echo base_url(); ?>';
+            var user_slug = '<?php echo $this->uri->segment(2); ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+            var item = '<?php echo $this->uri->segment(1); ?>';
+            var app = angular.module("contactRequestApp", ['ngRoute', 'ui.bootstrap', 'ngSanitize']);
         </script>
         <script>
         var menuRight = document.getElementById( 'cbp-spmenu-s2' ),

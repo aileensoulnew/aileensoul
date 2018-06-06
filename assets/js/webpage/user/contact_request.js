@@ -1,9 +1,12 @@
+var isscroll = true;
 app.controller('contactRequestController', function ($scope, $http) {
+    $scope.title = "Contact Request | Aileensoul";
     pending_contact_request();
     var offset="40";
     var processing = false;
     getContactSuggetion(offset);
     contactRequestNotification();
+
     function getContactSuggetion(start) {
         $(".sugg_post_load").show();
 
@@ -19,17 +22,24 @@ app.controller('contactRequestController', function ($scope, $http) {
         }).then(function (success) {
             $("#suggestionlist").show();
             $(".sugg_post_load").hide();
-
+            if(success.data.length <= 0){
+                isscroll = false;
+            }
             if (success.data) {
- 
                 offset=parseInt(offset)+40;
                 processing = false;
                 $scope.contactSuggetion = success.data;
-               
             } else {
-                 console.log('processing true')
+                console.log('processing true')
                 processing = true;
             }
+        }, function (error) {
+            $("#suggestionlist").show();
+            $(".sugg_post_load").hide();
+        }, 
+        function (complete) { 
+            $("#suggestionlist").show();
+            $(".sugg_post_load").hide();
         });
     }
     function pending_contact_request() {
@@ -101,10 +111,11 @@ app.controller('contactRequestController', function ($scope, $http) {
             if (processing)
                 return false;
 
-            if ( $(window).scrollTop() >= ($(document).height() - $(window).height())*0.7 ){
+            if ( $(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
                 processing = true; //sets a processing AJAX request flag
-                
-                getContactSuggetion(offset)
+                if(isscroll){
+                    getContactSuggetion(offset)
+                }
             }
         });
     });

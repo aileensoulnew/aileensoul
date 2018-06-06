@@ -178,7 +178,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <textarea placeholder="Company Profile(optional)"><?php if ($comp_profile1) { echo $comp_profile1; } ?></textarea>
+                                        <textarea id="comp_profile" name="comp_profile" placeholder="Company Profile(optional)" maxlength="2000"><?php if ($comp_profile1) { echo $comp_profile1; } ?></textarea>
                                     </div>                                      
                                 </div>
                             </div>

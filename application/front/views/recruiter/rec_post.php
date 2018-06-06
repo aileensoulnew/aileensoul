@@ -342,6 +342,7 @@
                 var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
                 var id = '<?php echo $this->uri->segment(3); ?>';
                 var return_page = '<?php echo $_GET['page']; ?>';
+                var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
 
 
