@@ -80,6 +80,7 @@ class Registration extends CI_Controller {
 
 
         $email_reg = $this->input->post('email_reg');
+        $term_condi = $this->input->post('term_condi');
        
         $userdata = $this->user_model->getUserByEmail($email_reg);
 
@@ -101,6 +102,7 @@ class Registration extends CI_Controller {
                     'verify_date' => date('Y-m-d h:i:s', time()),
                     'user_verify' => '0',
                     'user_slider' => '1',
+                    'term_condi' => $term_condi,
                     'user_slug' => $this->setuser_slug($this->input->post('first_name') . '-' . $this->input->post('last_name'), 'user_slug', 'user'),
                 );
 

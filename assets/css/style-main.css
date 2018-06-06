@@ -2642,6 +2642,88 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 .autoposition{position: absolute!important; z-index: 999 !important;}
 .right-header{text-align:right;}
 
+/***  custom check box and radio buttons  ***/
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 0px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height:1.1;
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  height:auto;
+  left:0;
+}
+.control__indicator {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  border:1px solid #5c5c5c;
+  border-radius:4px;
+  /*background:#fff;*/
+}
+.control--radio .control__indicator {
+  border-radius: 50%;
+}
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+ /* background: #fff;*/
+}
+.control input:checked ~ .control__indicator {
+  background: #5c5c5c;
+}
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+  background: #5c5c5c;
+}
+.control input:disabled ~ .control__indicator {
+  background: #e6e6e6;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+.control--checkbox .control__indicator:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.control--checkbox input:disabled ~ .control__indicator:after {
+  border-color: #7b7b7b;
+}
+.control--radio .control__indicator:after {
+  left: 0px;
+  top: 0px;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #5c5c5c;
+  border:1px solid #fff;
+}
+.control--radio input:disabled ~ .control__indicator:after {
+  background: #7b7b7b;
+}
+.add-anonymously{display:inline-block; padding:9px 15px 0;}
+/***  end custom check box and radio buttons  ***/
+
+
 @media screen and (min-height:540px){
     .cover .modal-content{
         margin:0 auto

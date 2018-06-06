@@ -148,6 +148,9 @@ $(document).ready(function () {
             },
             selgen: {
                 required: true,
+            },
+            term_condi: {
+                required: true,
             }
         },
 
@@ -181,8 +184,18 @@ $(document).ready(function () {
                     },
                     selgen: {
                         required: "Please enter your gender",
+                    },
+                    term_condi: {
+                        required: "Please Accept privacy policy,terms and conditions",
                     }
 
+                },
+                errorPlacement: function (error, element) {
+                    if (element.attr("type") == "checkbox") {
+                        error.insertAfter($("#lbl_term_condi"));
+                    } else {
+                        error.insertAfter(element);
+                    }
                 },
         submitHandler: submitRegisterForm
     });
@@ -197,6 +210,7 @@ $(document).ready(function () {
         var selmonth = $("#selmonth").val();
         var selyear = $("#selyear").val();
         var selgen = $("#selgen").val();
+        var term_condi = $("#term_condi").val();
 
         var post_data = {
             'first_name': first_name,
@@ -207,6 +221,7 @@ $(document).ready(function () {
             'selmonth': selmonth,
             'selyear': selyear,
             'selgen': selgen,
+            'term_condi' : term_condi,
             'aileensoulnewfrontcsrf': get_csrf_hash,
         }
 

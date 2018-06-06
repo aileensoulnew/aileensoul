@@ -259,10 +259,15 @@ header("Pragma: no-cache"); // HTTP/1.0
                                                 </select>
                                             </span>
                                         </div>
-                                        <p class="form-text">
-                                            By Clicking on create an account button you agree our<br class="mob-none">
-                                            <a href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" tabindex="9" target="_blank">Terms and Condition</a> and <a tabindex="10" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy" target="_blank">Privacy policy</a>.
-                                        </p>
+                                        <div class="form-text term_condi_check" id="lbl_term_condi">
+                                            <label class="control control--checkbox" for="term_condi">
+                                                <input type="checkbox" name="term_condi" id="term_condi" value="1" />
+                                                I have read and agree to use this website as subjected to Aileensoul 
+                                                <a href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" tabindex="9" target="_blank">Terms & Condition</a> and 
+                                                <a tabindex="10" href="<?php echo base_url('privacy-policy'); ?>" title="Privacy policy" target="_blank">Privacy Policy</a>.
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </div>
                                         <p>
                                             <button id="create-acc-new" title="Create an account" tabindex="11" class="btn1">Create an account<span class="ajax_load pl10" id="registration_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                         </p>
