@@ -114,7 +114,7 @@
                                                     <a  onclick="return leave_page(8)">
                                                         <i class="fa fa-power-off" aria-hidden="true"></i> Logout</a> 
                                                 <?php } else { ?>
-                                                    <a href="<?php echo base_url('dashboard/logout') ?>">
+                                                    <a href="<?php echo base_url('logout') ?>">
                                                         <i class="fa fa-power-off" aria-hidden="true"></i> Logout</a> 
                                                     <?php } ?>
                                                 <!--Logout-->

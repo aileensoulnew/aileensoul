@@ -62,7 +62,7 @@ $route['registration'] = 'Registration/index';
 $route['basic-information'] = 'user_info';
 $route['educational-information'] = 'user_info';
 
-$route['dashboard/logout'] = 'dashboard/logout';
+$route['logout'] = 'dashboard/logout';
 $route['dashboard/image'] = 'dashboard/image';
 $route['dashboard/photos/(:any)'] = 'Userprofile';
 $route['dashboard/header_all_dropdown_list'] = 'dashboard/header_all_dropdown_list';

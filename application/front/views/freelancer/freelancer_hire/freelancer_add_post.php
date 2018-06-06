@@ -335,7 +335,7 @@
                                 }
                                 if (clicked_id == 8)
                                 {
-                                    location.href = '<?php echo base_url('dashboard/logout') ?>';
+                                    location.href = '<?php echo base_url('logout') ?>';
                                 }
                                 if (clicked_id == 9)
                                 {
@@ -426,7 +426,7 @@
                                         window.location = "<?php echo base_url('change-password') ?>";
                                     } else if (clicked_id == 8)
                                     {
-                                        window.location = "<?php echo base_url('dashboard/logout') ?>";
+                                        window.location = "<?php echo base_url('logout') ?>";
                                     } else if (clicked_id == 9)
                                     {
                                         location.href = 'javascript:history.back()';
