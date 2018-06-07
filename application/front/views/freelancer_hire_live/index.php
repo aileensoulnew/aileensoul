@@ -84,28 +84,28 @@
                         <h2>How it Works</h2>
                     </div>
                     <div class="row" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/reg.png') ?>">
                                 <p>Register</p>
                                 <span>Sign up for freelance hire profile for free and connect with great talent from all over the world.</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/post-project.png') ?>">
                                 <p>Post Project</p>
                                 <span>Post freelance projects details, budget, and skills required for the job. </span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/short-list.png') ?>">
                                 <p>Hire Freelancer</p>
                                 <span>Search or select from the recommended candidates provided by us or shortlist from applied freelancers.</span>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="hiw-box last-child">
                                 <img src="<?php echo base_url('assets/n-images/pay.png') ?>">
                                 <p>Pay</p>
@@ -138,9 +138,9 @@
                 </div>
             </div>
             
-            
-            
-            <?php echo $login_footer; ?>
+            <div class="bottom-ftr-none">
+				<?php echo $login_footer; ?>
+			</div>
         </div>
         <!--  poup modal  -->
         <div style="display:none;" class="modal fade" id="post-popup1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
