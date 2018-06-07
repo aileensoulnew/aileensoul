@@ -29,6 +29,8 @@ app.controller('businessController', function ($scope, $http) {
     function getRelatedBlogList(){
         $http.post(base_url + "business_live/get_business_related_blog_list").then(function (success) {
             $scope.relatedBlog = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     getRelatedBlogList();

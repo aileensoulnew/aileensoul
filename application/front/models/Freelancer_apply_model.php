@@ -1015,9 +1015,9 @@ class Freelancer_apply_model extends CI_Model {
     function free_job_related_blog_list() {
         $sql = "SELECT * FROM ailee_blog
                 WHERE status='publish' AND
-                blog_slug = 'benefits-of-hiring-freelancers-from-aileensoul' 
-                OR blog_slug = '7-solutions-for-start-up-challenges' 
-                OR blog_slug = 'find-quick-freelance-work-hire-quality-freelancers-for-free'";
+                blog_slug = 'how-to-kick-start-your-freelance-career-a-complete-beginners-guide' 
+                OR blog_slug = 'take-your-freelance-career-to-greater-heights-with-these-popular-platforms' 
+                OR blog_slug = 'it-s-raining-dollars-online-know-how-to-earn-online'";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();   
         return $result_array;
