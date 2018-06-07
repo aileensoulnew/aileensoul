@@ -2665,10 +2665,13 @@ body, body.no-login {padding-bottom:60px;}
 	.add-banner{overflow:hidden;}
 	.more-support{font-size:16px;}
 	
-	.mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content{width:100%; min-height:100%; border:0px; border-radius:0px;}
-	.mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog {padding:0; margin:0; min-height:100%;}
-	.mob-modal .modal-close, #post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
-	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box{margin-bottom:52px;}
+	.mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content, #register .modal-content {width:100%; min-height:100%; border:0px; border-radius:0px !important;}
+	.mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog, #register .modal-dialog {padding:0; margin:0; min-height:100%;}
+	.mob-modal .modal-close, #post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close, #register .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
+	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box, #register .report-box{margin-bottom:52px;}
+	#register .modal-content{border-radius:0 !important;}
+	#register .modal-dialog{padding:0 !important;}
+	#register .modal-close{top:0 !important; right:0 !important; border-radius:0 !important; background:none !important; border:none !important; color:#5c5c5c !important;}
 	
 	.post-popup-box .post-box{padding:15px 0;}
 	.post-popup-box .post-box .post-img{margin-left:15px;}
@@ -3118,7 +3121,7 @@ body, body.no-login {padding-bottom:60px;}
 	.error-top-box h2{font-size:17px;}
 	.error-main-box{width:70%;}
 	.work-timing li{padding:0 10px}
-	.without-reg header h2.logo{float:none; padding-bottom:10px;}
+	.without-reg header h2.logo{/*float:none;*/ padding-bottom:10px;}
 	.search-box .search-input input{font-size:15px !important;}
 	.search-bnr-text{padding-bottom:25px;}
 	.search-bnr-text h1{font-size:17px;}
@@ -3219,6 +3222,7 @@ body, body.no-login {padding-bottom:60px;}
 	.all-list ul li .list-box .profile-img{width:136px; height:136px;}
 	.bottom-bnr-div{text-align:center;}
 	.bottom-bnr-div .btn-1{float:none !important;}
+	.bottom-bnr-div p{font-size:14px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
