@@ -177,7 +177,7 @@ if($browser == "Firefox")
                                      <ul class="notification_data_in">
                                      </ul>
                                     <div class="dropdown-title hide">
-                                        Notifications <a href="notification.html" class="pull-right">See All</a>
+                                        Notifications <a href="#" class="pull-right">See All</a>
                                     </div>
                                     <div class="content custom-scroll hide">
                                         <ul class="dropdown-data noti-dropdown">
