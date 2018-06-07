@@ -483,7 +483,7 @@ class User_post_model extends CI_Model {
             }
             $sql .= ')';
         }        
-        $sql .= ") as main WHERE main.post_for != '' ";
+        $sql .= ") as main WHERE (main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' ) ";
         if ($getDeleteUserPost) {
             $sql .= "AND main.id NOT IN ($getDeleteUserPost) ";
         }
@@ -548,7 +548,7 @@ class User_post_model extends CI_Model {
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array[$key]['question_data'] = $question_data;
 
-            } elseif ($value['post_for'] == 'profile_update') {
+            } /*elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $value['post_id']);
                 $query = $this->db->get();
@@ -560,7 +560,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $cover_update = $query->row_array();
                 $result_array[$key]['cover_update'] = $cover_update;
-            }
+            }*/
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
             $query = $this->db->get();
