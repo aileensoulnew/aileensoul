@@ -2665,13 +2665,14 @@ body, body.no-login {padding-bottom:60px;}
 	.add-banner{overflow:hidden;}
 	.more-support{font-size:16px;}
 	
-	.mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content, #register .modal-content {width:100%; min-height:100%; border:0px; border-radius:0px !important;}
-	.mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog, #register .modal-dialog {padding:0; margin:0; min-height:100%;}
-	.mob-modal .modal-close, #post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close, #register .modal-close{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
-	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box, #register .report-box{margin-bottom:52px;}
-	#register .modal-content{border-radius:0 !important;}
-	#register .modal-dialog{padding:0 !important;}
-	#register .modal-close{top:0 !important; right:0 !important; border-radius:0 !important; background:none !important; border:none !important; color:#5c5c5c !important;}
+	.mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content, #register .modal-content, #job_reg .modal-content {width:100%; min-height:100%; border:0px; border-radius:0px !important;}
+	.mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog, #register .modal-dialog, #job_reg .modal-dialog {padding:0; margin:0; min-height:100%;}
+	.mob-modal .modal-close, #post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close, #register .modal-close, #job_reg .modal-close,{top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
+	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box, #register .report-box, #job_reg .post-popup-box{margin-bottom:52px;}
+	#register .modal-content, #job_reg .modal-content{border-radius:0 !important;}
+	#register .modal-dialog, #job_reg .modal-dialog{padding:0 !important;}
+	#register .modal-close, #job_reg .modal-close {top:0 !important; right:0 !important; border-radius:0 !important; background:none !important; border:none !important; color:#5c5c5c !important;}
+	#job_reg .job_reg_main{border:0; border-radius:0;}
 	
 	.post-popup-box .post-box{padding:15px 0;}
 	.post-popup-box .post-box .post-img{margin-left:15px;}
@@ -2927,6 +2928,10 @@ body, body.no-login {padding-bottom:60px;}
 	.bottom-bnr-div .btn-1{font-size:14px; padding:8px 25px;}
 	.page-title h3{font-size:20px;}
 	.right-header{padding-top:0;}
+	
+	#main_page_load .availabel-data-box{border-left:0; border-right:0; border-radius:0;}
+	#main_page_load .search-profiles .profile-btns{float:right;}
+	#main_page_load .search-profiles .profile-data{width:65%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3224,6 +3229,7 @@ body, body.no-login {padding-bottom:60px;}
 	.bottom-bnr-div{text-align:center;}
 	.bottom-bnr-div .btn-1{float:none !important;}
 	.bottom-bnr-div p{font-size:14px;}
+	#main_page_load .search-profiles .profile-data{width:50%;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
