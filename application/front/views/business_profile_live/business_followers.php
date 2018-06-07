@@ -18,34 +18,37 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
-        <?php echo $header; ?>
-        <?php echo $business_header2; ?> 
-        <section>
-            <?php echo $business_common; ?>
-            <div class="user-midd-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="common-form">
-                                <div class="job-saved-box">
-                                    <h3> Followers</h3>
-                                    <div class="contact-frnd-post">
-                                        <!-- AJAX DATA... -->
-                                        <div class="col-md-1">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+            <?php echo $header; ?>
+            <?php echo $business_header2; ?> 
+            <section>
+                <?php echo $business_common; ?>
+                <div class="user-midd-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-8 col-sm-12">
+                                <div class="common-form">
+                                    <div class="job-saved-box">
+                                        <h3> Followers</h3>
+                                        <div class="contact-frnd-post">
+                                            <!-- AJAX DATA... -->
+                                            <div class="col-md-1">
+                                            </div>
                                         </div>
+                                        <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader"/></div>
                                     </div>
-                                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader"/></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-            <?php echo $login_footer ?>
-            <?php echo $footer; ?>
+            </section>
+        </div>
+        <?php echo $login_footer ?>
+        <?php echo $footer; ?>
         <div class="modal fade message-box" id="query" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">

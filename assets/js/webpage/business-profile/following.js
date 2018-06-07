@@ -65,6 +65,8 @@ function business_following(slug_id, pagenum)
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }
     });
 }

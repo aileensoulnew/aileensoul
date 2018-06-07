@@ -78,6 +78,8 @@ function business_contacts(slug, pagenum) {
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             check_no_contact_list();
         }
     });

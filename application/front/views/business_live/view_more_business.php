@@ -21,40 +21,41 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page bus-by-cus">
-        <?php 
-            if($ismainregister == false){
-                // $this->load->view('business_live/login_header');
-            }else if($isbusiness_register == true && $isbusiness_deactive == false){
-                echo $business_header2;
-            }else{
-                echo $header_profile; 
-            }
-        ?>
-
-        <?php
-           if($ismainregister == false){
-        ?>
-            <div class="middle-section middle-section-banner new-ld-page">
-        <?php //echo $search_banner; 
-            } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
-            <div class="middle-section">
-        <?php } else { ?>
-            <div class="middle-section middle-section-banner">
-        <?php //echo $search_banner;  
-        } ?>
-
-            <?php if($business_profile_set == 0 && $business_profile_set == '0'){ 
-                    echo $search_banner; 
-                } 
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+            <?php 
+                if($ismainregister == false){
+                    // $this->load->view('business_live/login_header');
+                }else if($isbusiness_register == true && $isbusiness_deactive == false){
+                    echo $business_header2;
+                }else{
+                    echo $header_profile; 
+                }
             ?>
-            <!-- NEW HTML -->
-                
-            <div class="container pt20 mobp0 mobmt15">
-                <div ng-view></div>                
-            </div>
 
+            <?php
+               if($ismainregister == false){
+            ?>
+                <div class="middle-section middle-section-banner new-ld-page">
+            <?php //echo $search_banner; 
+                } else if(!$isbusiness_deactive && $isbusiness_register == true) { ?>
+                <div class="middle-section">
+            <?php } else { ?>
+                <div class="middle-section middle-section-banner">
+            <?php //echo $search_banner;  
+            } ?>
+
+                <?php if($business_profile_set == 0 && $business_profile_set == '0'){ 
+                        echo $search_banner; 
+                    } 
+                ?>
+                <!-- NEW HTML -->
+                <div class="container pt20 mobp0 mobmt15">
+                    <div ng-view></div>                
+                </div>
+            </div>
         </div>
-		 <?php echo $login_footer; ?>
+		<?php echo $login_footer; ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>

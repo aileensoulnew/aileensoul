@@ -55,7 +55,8 @@ app.controller('businessCategoryController', function ($scope, $window, $http) {
             {
                 $scope.showLoadmore = false;                
             }
-
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     businessAllCategory(1);
@@ -123,6 +124,8 @@ app.controller('businessLocationController', function ($scope, $window, $http) {
             {
                 $scope.showLoadmore = false;                
             }
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     businessAllLocation(1);
@@ -161,6 +164,8 @@ app.controller('businessBybusinessController', function ($scope, $http) {
         isProcessing = true;
         $http.get(base_url + "business_live/business_by_category_location_ajax?page=" + pagenum).then(function (success) {
             $scope.businessByBusiness = data = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     jobJobs(1);  

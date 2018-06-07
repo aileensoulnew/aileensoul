@@ -48,6 +48,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push no-login old-no-login">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php if($ismainregister == false){ ?>
             <header>
                 <div class="container">
@@ -471,6 +473,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 </div>
             </div>
         </div>
+    </div>
         <!-- Model Popup Close -->
         <?php echo $footer; ?>
         <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
@@ -879,7 +882,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     $(this).css('color', '#acacac');
                 }
             });
-
             $(document).on('click', 'a,.comment-edit-butn,.ripple like_h_w', function (e) {
                 var classNames = $(e.target).prop("class").toString().split(' ').pop();
                 if (classNames != 'login_link') {
@@ -887,8 +889,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     open_profile();
                 }
             });
-
-
         </script>
     </body>
 </html>

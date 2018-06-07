@@ -19,188 +19,191 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
-        <?php //echo $header; ?>
-        <?php // echo $business_header2; ?>
-        <?php //echo $dash_header; ?>
-        <?php //echo $dash_header_menu; ?>
-        <?php 
-            if($ismainregister == false){
-                $this->load->view('business_live/login_header');
-            }else if($isbusiness_register == true && $isbusiness_deactive == false){
-                echo $business_header2;
-            }else{
-                echo $header_profile; 
-            }
-        ?>
-        <div class="user-midd-section" id="paddingtop_fixed">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12  hidden-md hidden-sm hidden-lg pb20 ">
-                        <div class="common-form ">
-                            <div class="main_cqlist-1"> 
-                                <div class="contact-list ">
-                                    <h3 class="list-title">Contact Request Notifications</h3>
-                                    <div class="noti_cq">
-                                        <div class="cq_post content mCustomScrollbar">
-                                            <ul>
-                                                <?php
-                                                if ($friendlist_con) {
-                                                    foreach ($friendlist_con as $friend) {
-                                                        ?>
-                                                        <?php
-                                                        $userid = $this->session->userdata('aileenuser');
-                                                        if ($friend['contact_from_id'] == $userid) {
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+            <?php //echo $header; ?>
+            <?php // echo $business_header2; ?>
+            <?php //echo $dash_header; ?>
+            <?php //echo $dash_header_menu; ?>
+            <?php 
+                if($ismainregister == false){
+                    $this->load->view('business_live/login_header');
+                }else if($isbusiness_register == true && $isbusiness_deactive == false){
+                    echo $business_header2;
+                }else{
+                    echo $header_profile; 
+                }
+            ?>
+            <div class="user-midd-section" id="paddingtop_fixed">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12  hidden-md hidden-sm hidden-lg pb20 ">
+                            <div class="common-form ">
+                                <div class="main_cqlist-1"> 
+                                    <div class="contact-list ">
+                                        <h3 class="list-title">Contact Request Notifications</h3>
+                                        <div class="noti_cq">
+                                            <div class="cq_post content mCustomScrollbar">
+                                                <ul>
+                                                    <?php
+                                                    if ($friendlist_con) {
+                                                        foreach ($friendlist_con as $friend) {
                                                             ?>
-                                                            <li> 
-                                                                <div class="cq_main_lp">
-                                                                    <div class="cq_latest_left">
-                                                                        <div class="cq_post_img">
-                                                                            <?php if ($friend['business_user_image'] != '') { ?>
-                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
-                                                                                    <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image']; ?>">
-                                                                                </a>
-                                                                            <?php } else { ?>
-                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
-                                                                                    <img src="<?php echo base_url(NOBUSIMAGE); ?>" />
-                                                                                </a>
-                                                                            <?php } ?>
-                                                                        </div>
-                                                                    </div>  
-                                                                    <div class="cq_latest_right">
-                                                                        <div class="cq_desc_post">
-                                                                            <sapn class="rifght_fname">  
-                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
-                                                                                    <span class="main_name">
-                                                                                        <?php echo ucfirst(strtolower($friend['company_name'])); ?> 
-                                                                                    </span>
-                                                                                </a>
-                                                                                <span style="color: #8c8c8c;">confirmed your contact request .</span>
-                                                                            </sapn>
-                                                                        </div>
-                                                                        <div class="cq_desc_post">
-                                                                            <sapn class="cq_rifght_desc">  <?php echo $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($friend['modify_date']))); ?> </sapn>
-                                                                        </div>  
-                                                                    </div>
-                                                                </div>
-                                                            </li>
                                                             <?php
+                                                            $userid = $this->session->userdata('aileenuser');
+                                                            if ($friend['contact_from_id'] == $userid) {
+                                                                ?>
+                                                                <li> 
+                                                                    <div class="cq_main_lp">
+                                                                        <div class="cq_latest_left">
+                                                                            <div class="cq_post_img">
+                                                                                <?php if ($friend['business_user_image'] != '') { ?>
+                                                                                    <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
+                                                                                        <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image']; ?>">
+                                                                                    </a>
+                                                                                <?php } else { ?>
+                                                                                    <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
+                                                                                        <img src="<?php echo base_url(NOBUSIMAGE); ?>" />
+                                                                                    </a>
+                                                                                <?php } ?>
+                                                                            </div>
+                                                                        </div>  
+                                                                        <div class="cq_latest_right">
+                                                                            <div class="cq_desc_post">
+                                                                                <sapn class="rifght_fname">  
+                                                                                    <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
+                                                                                        <span class="main_name">
+                                                                                            <?php echo ucfirst(strtolower($friend['company_name'])); ?> 
+                                                                                        </span>
+                                                                                    </a>
+                                                                                    <span style="color: #8c8c8c;">confirmed your contact request .</span>
+                                                                                </sapn>
+                                                                            </div>
+                                                                            <div class="cq_desc_post">
+                                                                                <sapn class="cq_rifght_desc">  <?php echo $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($friend['modify_date']))); ?> </sapn>
+                                                                            </div>  
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <?php
+                                                            }
                                                         }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <li><div class="art-img-nn" id= "art-blank">
-                                                            <div class="art_no_post_img">
-                                                                <img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>" width="100">
-                                                            </div>
-                                                            <div class="art_no_post_text" style="font-size: 20px;">
-                                                                No Notifiaction Available.
-                                                            </div>
-                                                        </div></li>
-                                                <?php } ?>
-                                            </ul>
+                                                    } else {
+                                                        ?>
+                                                        <li><div class="art-img-nn" id= "art-blank">
+                                                                <div class="art_no_post_img">
+                                                                    <img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>" width="100">
+                                                                </div>
+                                                                <div class="art_no_post_text" style="font-size: 20px;">
+                                                                    No Notifiaction Available.
+                                                                </div>
+                                                            </div></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-7 pt_mn2">
+                            <div class="common-form main_cqlist">
+                                <div class="contact-list">
+                                    <h3 class="list-title list-title2"> Contact Request</h3>
                                 </div>  
+                                <div class="all-list">
+                                    <ul  id="contactlist">
+                                        <!-- AJAX DATA ... -->
+                                    </ul>
+                                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
+                                </div>        
+                            </div>
+                            <!-- END PAGE TITLE -->
+                        </div>
+                        <div class="col-md-4 col-sm-5 hidden-xs ">
+                            <div class="common-form ">
+                                <div class="main_cqlist-1"> 
+                                    <div class="contact-list ">
+                                        <h3 class="list-title">Contact Request Notifications</h3>
+                                        <div class="noti_cq">
+                                            <div class="cq_post content mCustomScrollbar">
+                                                <ul>
+                                                    <?php
+                                                    if ($friendlist_con) {
+                                                        foreach ($friendlist_con as $friend) {
+                                                            ?>
+                                                            <?php
+                                                            $userid = $this->session->userdata('aileenuser');
+                                                            if ($friend['contact_from_id'] == $userid) {
+                                                                ?>
+                                                                <li> 
+                                                                    <div class="cq_main_lp">
+                                                                        <div class="cq_latest_left">
+                                                                            <div class="cq_post_img">
+
+                                                                                <?php if ($friend['business_user_image'] != '') { ?>
+                                                                                    <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
+                                                                                        <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image']; ?>">
+                                                                                    </a>
+                                                                                <?php } else { ?>
+                                                                                    <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
+                                                                                        <img src="<?php echo base_url(NOBUSIMAGE); ?>" />
+                                                                                    </a>
+                                                                                <?php } ?>
+
+
+                                                                            </div>
+                                                                        </div>  
+                                                                        <div class="cq_latest_right">
+                                                                            <div class="cq_desc_post">
+                                                                                <span class="rifght_fname">  
+                                                                                    <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
+                                                                                        <span class="main_name">
+                                                                                            <?php echo ucfirst(strtolower($friend['company_name'])); ?> 
+                                                                                        </span>
+                                                                                    </a>
+                                                                                    <span style="color: #8c8c8c;">confirmed your contact request .</span>
+                                                                                </span>
+                                                                            </div>
+
+                                                                            <div class="cq_desc_post">
+                                                                                <span class="cq_rifght_desc">  <?php echo $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($friend['created_date']))); ?> </span>
+                                                                            </div>  
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    } else {
+                                                        ?>
+                                                        <li><div class="art-img-nn" id= "art-blank">
+                                                                <div class="art_no_post_img">
+
+                                                                    <img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>" width="100">
+
+                                                                </div>
+                                                                <div class="art_no_post_text" style="font-size: 20px;">
+                                                                    No Contact Request Notifiaction Available
+                                                                </div>
+                                                            </div></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 col-sm-7 pt_mn2">
-                        <div class="common-form main_cqlist">
-                            <div class="contact-list">
-                                <h3 class="list-title list-title2"> Contact Request</h3>
-                            </div>  
-                            <div class="all-list">
-                                <ul  id="contactlist">
-                                    <!-- AJAX DATA ... -->
-                                </ul>
-                                <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
-                            </div>        
-                        </div>
-                        <!-- END PAGE TITLE -->
-                    </div>
-                    <div class="col-md-4 col-sm-5 hidden-xs ">
-                        <div class="common-form ">
-                            <div class="main_cqlist-1"> 
-                                <div class="contact-list ">
-                                    <h3 class="list-title">Contact Request Notifications</h3>
-                                    <div class="noti_cq">
-                                        <div class="cq_post content mCustomScrollbar">
-                                            <ul>
-                                                <?php
-                                                if ($friendlist_con) {
-                                                    foreach ($friendlist_con as $friend) {
-                                                        ?>
-                                                        <?php
-                                                        $userid = $this->session->userdata('aileenuser');
-                                                        if ($friend['contact_from_id'] == $userid) {
-                                                            ?>
-                                                            <li> 
-                                                                <div class="cq_main_lp">
-                                                                    <div class="cq_latest_left">
-                                                                        <div class="cq_post_img">
-
-                                                                            <?php if ($friend['business_user_image'] != '') { ?>
-                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
-                                                                                    <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL . $friend['business_user_image']; ?>">
-                                                                                </a>
-                                                                            <?php } else { ?>
-                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
-                                                                                    <img src="<?php echo base_url(NOBUSIMAGE); ?>" />
-                                                                                </a>
-                                                                            <?php } ?>
-
-
-                                                                        </div>
-                                                                    </div>  
-                                                                    <div class="cq_latest_right">
-                                                                        <div class="cq_desc_post">
-                                                                            <span class="rifght_fname">  
-                                                                                <a  href="<?php echo base_url('company/' . $friend['business_slug']); ?>">
-                                                                                    <span class="main_name">
-                                                                                        <?php echo ucfirst(strtolower($friend['company_name'])); ?> 
-                                                                                    </span>
-                                                                                </a>
-                                                                                <span style="color: #8c8c8c;">confirmed your contact request .</span>
-                                                                            </span>
-                                                                        </div>
-
-                                                                        <div class="cq_desc_post">
-                                                                            <span class="cq_rifght_desc">  <?php echo $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($friend['created_date']))); ?> </span>
-                                                                        </div>  
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <li><div class="art-img-nn" id= "art-blank">
-                                                            <div class="art_no_post_img">
-
-                                                                <img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>" width="100">
-
-                                                            </div>
-                                                            <div class="art_no_post_text" style="font-size: 20px;">
-                                                                No Contact Request Notifiaction Available
-                                                            </div>
-                                                        </div></li>
-                                                <?php } ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="page-content">
-                    <div class="container">
-                        <div class="page-content">
-                            <div class="container">
-                                <div class="page-content-inner">
-                                    <div class="row">
-                                        <div class="col-md-12">
+                    <div class="page-content">
+                        <div class="container">
+                            <div class="page-content">
+                                <div class="container">
+                                    <div class="page-content-inner">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +213,6 @@
                 </div>
             </div>
         </div>
-        
         <?php echo $footer; ?>
         <?php echo $login_footer ?>
 
@@ -275,7 +277,8 @@
                     success: function (data) {
                         $('.loader').remove();
                         $('#contactlist').append(data);
-
+                        $('#main_loader').hide();
+                        $('#main_page_load').show();
                         isProcessing = false;
                     }
                 });

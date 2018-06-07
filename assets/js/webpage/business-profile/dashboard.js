@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     $(window).scroll(function () {
         //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-//        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        // if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
           if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
 
             var page = $(".page_number:last").val();
@@ -49,7 +49,7 @@ function check() {
 // Upload Post start
 jQuery(document).ready(function ($) {
     //    var bar = $('#bar');
-//    var percent = $('#percent');
+    //    var percent = $('#percent');
     var bar = $('.progress-bar');
     var percent = $('.sr-only');
     var options = {
@@ -79,7 +79,7 @@ jQuery(document).ready(function ($) {
             $(".file-preview-frame").hide();
             // Output AJAX response to the div container
 
-//                    $('#progress_div').fadeOut('5000').remove();
+            //                    $('#progress_div').fadeOut('5000').remove();
             document.getElementById("progress_div").style.display = "none";
             $(".business-all-post").prepend(response.responseText);
 
@@ -144,6 +144,8 @@ function business_dashboard_post(slug, pagenum) {
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }
     });
 }

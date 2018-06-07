@@ -4,7 +4,6 @@ $(document).ready(function() {
     GetBusVideos();
     GetBusAudios();
     GetBusPdf();
-
     $(window).scroll(function() {
         //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
         //if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -159,6 +158,8 @@ function business_dashboard_post(slug, pagenum) {
                     open_profile();
                 }
             });
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }
     });
 }
