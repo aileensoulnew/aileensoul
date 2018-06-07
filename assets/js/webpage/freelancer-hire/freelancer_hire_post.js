@@ -165,7 +165,7 @@ function remove_post(abc)
 {
     $.ajax({
         type: 'POST',
-        url: base_url + "freelancer/remove_post",
+        url: base_url + "freelancer_hire_live/remove_post",
         data: 'post_id=' + abc,
         success: function (data) {
             $('#' + 'removeapply' + abc).html(data);
