@@ -71,7 +71,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('businessRegiController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Create Business Profile | Aileensoul";    
+    $scope.$parent.title = "Create Business Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
 
@@ -271,7 +271,7 @@ app.controller('businessRegiController', function ($scope, $http, $location, $wi
 });
 
 app.controller('businessBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Business Profile | Aileensoul";    
+    $scope.$parent.title = "Business Profile | Aileensoul";    
     $scope.jobByLocation = {};
     //$scope.basicinfo = {};
 
@@ -387,7 +387,7 @@ app.controller('businessBasicInfoController', function ($scope, $http, $location
 });
 
 app.controller('businessEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Business Profile | Aileensoul";
+    $scope.$parent.title = "Business Profile | Aileensoul";
 
     $("#currentStudy").focusin(function(){
         $('#cstooltip').show();
@@ -526,7 +526,7 @@ app.controller('businessEduInfoController', function ($scope, $http, $location, 
 
 app.controller('businessCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
     // alert(first_name);
-    $scope.title = "Recruiter Profile | Aileensoul";
+    $scope.$parent.title = "Recruiter Profile | Aileensoul";
 
     $("#contactmobile").focusin(function(){
         $('#cmtooltip').show();

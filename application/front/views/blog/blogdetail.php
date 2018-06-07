@@ -112,10 +112,8 @@ header("Pragma: no-cache"); // HTTP/1.0
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
     <body class="blog-page blog-d old-no-login">
         <?php }else{?>
-         <body class="blog-page blog-d">
-        <?php }?>
-		
-
+        <body class="blog-page blog-d">
+        <?php }?>	
         <div class="main-inner">
             <div class="web-header">
 	            <header class="custom-header">
@@ -221,8 +219,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
                 </div>
             </div>
-      
-	    	<div id="paddingtop_fixed" class="user-midd-section angularsection hidden">
+        	<div id="paddingtop_fixed" class="user-midd-section angularsection hidden">
 	    		<div class="container">
 	    			<div class="custom-user-list pt20" ng-repeat="blog in blogDetails track by $index">
 	    				<div class="blog-user-detail">
@@ -280,7 +277,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	                                            foreach ($blog_all as $key => $blog) {
 	                                                if ($blog['id'] == $blog_detail[0]['id'] && ($key + 1) != 1) {
 	                                                    ?>
-	                                                    <a href="<?php echo base_url('blog/' . $blog_all[$key - 1]['blog_slug']); ?>">
+	                                                    <a href="<?php echo base_url('blog/' . $blog_all[$key - 1]['blog_slug']); ?>" target="_self">
 	                                                    	Previous
 	                                                    </a>
 	                                                    <?php
@@ -295,7 +292,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 		    						  		    foreach ($blog_all as $key => $blog) {
 		    						  		        if ($blog['id'] == $blog_detail[0]['id'] && ($key + 1) != count($blog_all)) {
 		    						  		            ?>
-		    						  		            <a href="<?php echo base_url('blog/' . $blog_all[$key + 1]['blog_slug']); ?>">Next</a>
+		    						  		            <a href="<?php echo base_url('blog/' . $blog_all[$key + 1]['blog_slug']); ?>" target="_self">Next</a>
 		    						  		            <?php
 		    						  		        }
 		    						  		    }
@@ -403,9 +400,6 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
 	    		</div>	    		
 	    	</div>
-
-			
-			
 
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>

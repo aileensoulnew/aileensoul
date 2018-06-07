@@ -71,7 +71,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('artistRegiController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Create Artist Profile | Aileensoul";    
+    $scope.$parent.title = "Create Artist Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
 
@@ -271,7 +271,7 @@ app.controller('artistRegiController', function ($scope, $http, $location, $wind
 });
 
 app.controller('artistBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Artist Profile | Aileensoul";    
+    $scope.$parent.title = "Artist Profile | Aileensoul";    
     $scope.jobByLocation = {};
     //$scope.basicinfo = {};
 
@@ -387,7 +387,7 @@ app.controller('artistBasicInfoController', function ($scope, $http, $location, 
 });
 
 app.controller('artistEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Artist Profile | Aileensoul";
+    $scope.$parent.title = "Artist Profile | Aileensoul";
 
     $("#currentStudy").focusin(function(){
         $('#cstooltip').show();
@@ -526,7 +526,7 @@ app.controller('artistEduInfoController', function ($scope, $http, $location, $w
 
 app.controller('artistCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
     // alert(first_name);
-    $scope.title = "Artist Profile | Aileensoul";
+    $scope.$parent.title = "Artist Profile | Aileensoul";
 
     $("#email").focusin(function(){
         $('#emtooltip').show();
@@ -707,7 +707,6 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
         }
     };
 });
-
 
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({

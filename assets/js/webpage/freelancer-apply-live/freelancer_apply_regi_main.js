@@ -71,7 +71,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('freelanceRegiController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "Create freelancer Profile | Aileensoul";    
+    $scope.$parent.title = "Create freelancer Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
 
@@ -271,7 +271,7 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
 });
 
 app.controller('freelanceBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "freelancer Profile | Aileensoul";    
+    $scope.$parent.title = "freelancer Profile | Aileensoul";    
     $scope.jobByLocation = {};
     //$scope.basicinfo = {};
 
@@ -387,7 +387,7 @@ app.controller('freelanceBasicInfoController', function ($scope, $http, $locatio
 });
 
 app.controller('freelanceEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.title = "freelancer Profile | Aileensoul";
+    $scope.$parent.title = "freelancer Profile | Aileensoul";
 
     $("#currentStudy").focusin(function(){
         $('#cstooltip').show();
@@ -526,7 +526,7 @@ app.controller('freelanceEduInfoController', function ($scope, $http, $location,
 
 app.controller('freelanceCreateProfileController', function ($scope, $http, $location, $window,$timeout) {
     // alert(first_name);
-    $scope.title = "Recruiter Profile | Aileensoul";
+    $scope.$parent.title = "Recruiter Profile | Aileensoul";
 
     $("#email").focusin(function(){
         $('#emtooltip').show();

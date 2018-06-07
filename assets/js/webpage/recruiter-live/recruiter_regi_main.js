@@ -56,7 +56,7 @@ app.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 });
 app.controller('recruiterRegiController', function($scope, $http, $location, $window, $timeout) {
-    $scope.title = "Create Recruiter Profile | Aileensoul";
+    $scope.$parent.title = "Create Recruiter Profile | Aileensoul";
     $scope.jobByLocation = {};
     $scope.jobs = {};
     $("#selday,#selmonth,#selyear").focusin(function() {
@@ -243,7 +243,7 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
     }
 });
 app.controller('recruiterBasicInfoController', function($scope, $http, $location, $window, $timeout) {
-    $scope.title = "Recruiter Profile | Aileensoul";
+    $scope.$parent.title = "Recruiter Profile | Aileensoul";
     $scope.jobByLocation = {};
     //$scope.basicinfo = {};
     getFieldList();
@@ -353,7 +353,7 @@ app.controller('recruiterBasicInfoController', function($scope, $http, $location
     };
 });
 app.controller('recruiterEduInfoController', function($scope, $http, $location, $window, $timeout) {
-    $scope.title = "Recruiter Profile | Aileensoul";
+    $scope.$parent.title = "Recruiter Profile | Aileensoul";
     $("#currentStudy").focusin(function() {
         $('#cstooltip').show();
     });
@@ -489,7 +489,7 @@ app.controller('recruiterEduInfoController', function($scope, $http, $location, 
 });
 app.controller('recruiterCreateProfileController', function($scope, $http, $location, $window, $timeout) {
     // alert(first_name);
-    $scope.title = "Recruiter Profile | Aileensoul";
+    $scope.$parent.title = "Recruiter Profile | Aileensoul";
     $("#email").focusin(function() {
         $('#emtooltip').show();
     });

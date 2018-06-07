@@ -22,11 +22,10 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
                             <?php
                         }
                         ?>
-
                         <li><a title="Job Profile" href="<?php echo $job_right_profile_link; ?>" target="_blank">Job Profile</a></li>
                         <li><a title="Recruiter Profile" href="<?php echo $recruiter_right_profile_link; ?>" target="_blank">Recruiter Profile</a></li>
-                        <li><a title="Freelance Hire" href="<?php echo $freelance_hire_right_profile_link; ?>" target="_blank">Freelancer Profile</a></li>
-						<li><a title="Freelance Employer" href="<?php echo $freelance_apply_right_profile_link; ?>" target="_blank">Freelance Employer Profile</a></li>
+						<li><a title="Freelance Employer" href="<?php echo $freelance_hire_right_profile_link; ?>" target="_blank">Freelance Employer Profile</a></li>
+                        <li><a title="Freelance Hire" href="<?php echo $freelance_apply_right_profile_link; ?>" target="_blank">Freelancer Profile</a></li>
 						
                         <!--<li><a title="Freelance Jobs" href="<?php //echo base_url('freelance-jobs'); ?>" target="_blank">Freelance Jobs</a></li> 
                         <li><a title="Freelance Profile" href="<?php //echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>" target="_blank">Freelance Profile</a></li> -->
