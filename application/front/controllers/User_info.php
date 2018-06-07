@@ -96,10 +96,17 @@ class User_info extends MY_Controller {
                     $cityId = $this->common->insert_data_getid($data, 'cities');
                 }
             }
+
+            $otherField = "";
+            if ($_POST['field'] == '0') {
+                $otherField = $_POST['otherField'];
+            }
+
             $data = array();
             $data['user_id'] = $userid;
             $data['designation'] = $jobTitleId;
             $data['field'] = $_POST['field'];
+            $data['other_field'] = $otherField;
             $data['city'] = $cityId;
 
             $insert_id = $this->common->insert_data_getid($data, 'user_profession');

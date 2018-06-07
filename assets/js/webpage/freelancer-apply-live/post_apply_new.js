@@ -221,7 +221,7 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
             }
             else if(job_deactive == 1)
                 $('.biderror .mes').html("<div class='pop_content'>Please Reactive.</div>");*/
-             $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");  
+             $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");  
             $('#bidmodal').modal('show');
         }
         else if(login_user_id != "" || fa_profile_set == 1)
@@ -262,7 +262,7 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
             }
             else if(fa_profile_set == 0)
                 $('.biderror .mes').html("<div class='pop_content'>Please Login.</div>");*/
-            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Lorem ipsum is a dummy text ists use for dummy data</h2>Please <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
             $('#bidmodal').modal('show');
         }
         else if(login_user_id != ""  && fa_profile_set == 1)

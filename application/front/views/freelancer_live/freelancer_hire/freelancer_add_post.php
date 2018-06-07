@@ -13,6 +13,8 @@
         <?php } ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style type="text/css">
             .last_date_error{
                 background: none;
@@ -174,7 +176,7 @@
                                             <div class="p15 fw">
                                                 <fieldset  <?php if ($rating) { ?> class="error-msg col-md-3 pl10 work_type_custom" <?php } else { ?> class="col-md-12 fw pl10 work_type_custom" <?php } ?>>
                                                     <label class=""><?php echo $this->lang->line("work_type"); ?>:<span style="color:red">*</span></label>
-                                                    <div class="cus_work">
+                                                    <div class="cus_work" id="rating_div">
                                                     <input type="radio" tabindex="11" class="worktype_minheight worktype" name="rating" value="0"> Hourly
                                                     <input type="radio" tabindex="12" class="worktype"  name="rating" value="1"> Fixed
                                                     <input type="radio" tabindex="13" class="worktype"  name="rating" value="2"> Not Fixed
@@ -265,6 +267,8 @@
             <script  type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
 
         <?php } ?>
+
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
 
         <script>
                         var base_url = '<?php echo base_url(); ?>';

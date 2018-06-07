@@ -1,4 +1,5 @@
 <div class="container">
+	<h2 class="basic-h2"> Let's Complete Your Profile to Get You More New Opportunities.</h2>
     <div class="form-box">
         <h2 class="text-center">Educational Information</h3>
             <form name="studentinfo" id="studentinfo" ng-submit="submitStudentInfoForm()" ng-validate="studentInfoValidate">
