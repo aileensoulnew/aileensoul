@@ -91,56 +91,61 @@ if(IS_OUTSIDE_JS_MINIFY == '0'){
 <?php } else{ ?>
      <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver='.time()); ?>"></script>
 <?php } ?>
+<script type="text/javascript" src="<?php  echo base_url('assets/js/additional-methods1.15.0.min.js?ver='.time()); ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>       
 <!-- validation for edit email formate form strat -->
 
 <script>
-                            $(document).ready(function () { 
-                                $("#regform").validate({ 
-                                    rules: {
-                                        oldpassword: {
-                                            required: true,
-                                            remote: {
-                                               url: "<?php echo site_url() . 'registration/check_password' ?>",
-                                             type: "post",
-                                              data: {
-                                               oldpassword: function () {
-                                                   return $("#oldpassword").val();
-                                                },
-                                            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
-                                              },
-                                        },
+$(document).ready(function () { 
+    $.validator.addMethod( "notEqualTo", function( value, element, param ) {
+        return this.optional( element ) || !$.validator.methods.equalTo.call( this, value, element, param );
+    }, "The entered password should be different than the old one." );
 
-                                        },
-                                        password1: {
-                                            required: true,
-                                        },
-                                        password2: {
-                                            required: true,
-                                            equalTo: "#password1"
-                                        }
-                                    },
 
-                                    messages:
-                                            {
-                                                oldpassword: {
-                                                    required: "Please enter old password",
-                                                    remote: "Old password does not match"
-                                                },
-                                                password1: {
-                                                    required: "Please enter new password",
-                                                },
-                                                password2: {
-                                                    required: "Please enter confirm password",
-                                                    equalTo: "Please enter the same password as above"
-                                                },
-                                        
-                                            },
-                                    
-                                }); });
-                            var base_url = '<?php echo base_url(); ?>';
 
-                            var header_all_profile = '<?php echo $header_all_profile; ?>';
-                                </script>
+    $("#regform").validate({ 
+        rules: {
+            oldpassword: {
+                required: true,
+                remote: {
+                    url: "<?php echo site_url() . 'registration/check_password' ?>",
+                    type: "post",
+                    data: { oldpassword: function () { return $("#oldpassword").val(); },
+                    '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                    },
+                },
+
+            },
+            password1: {
+                required: true,
+                notEqualTo: "#oldpassword"
+            },
+            password2: {
+                required: true,
+                equalTo: "#password1",
+                notEqualTo: "#oldpassword"
+            }
+        },
+
+        messages:
+        {
+            oldpassword: {
+                required: "Please enter old password",
+                remote: "Old password does not match"
+            },
+            password1: {
+                required: "Please enter new password",
+            },
+            password2: {
+                required: "Please enter confirm password",
+                equalTo: "Please enter the same password as above"
+            },
+        },    
+    }); 
+});
+var base_url = '<?php echo base_url(); ?>';
+
+var header_all_profile = '<?php echo $header_all_profile; ?>';
+</script>
     </body>
 </html>
