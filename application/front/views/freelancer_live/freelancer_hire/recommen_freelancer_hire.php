@@ -16,277 +16,280 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>  
     <body>
-        <?php echo $header; ?>
-        <?php echo $freelancer_hire_header2; ?>
-        <section>
-            <div class="user-midd-section" id="paddingtop_fixed">
-                <div class="container padding-360">
-                    <div class="">
-                        <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt">
-                            <div class="">
-                                <div class="full-box-module">   
-                                    <div class="profile-boxProfileCard  module">
-                                        <div class="profile-boxProfileCard-cover"> 
-                                            <a class="profile-boxProfileCard-bg u-bgUserColor a-block"
-                                            href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  tabindex="-1" aria-hidden="true" rel="noopener" 
-                                            title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>">
-                                                <?php
-                                                if ($freehiredata[0]['profile_background'] != '') {
-                                                 ?>
-                                                <div class="data_img">
-                                                    <img src="<?php echo FREE_HIRE_BG_THUMB_UPLOAD_URL . $freehiredata[0]['profile_background']; ?>" class="bgImage" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>" >
-                                                </div>
-                                                <?php } else { ?>
-                                                    <div class="data_img bg-images no-cover-upload">
-                                                        <img src="<?php echo base_url(WHITEIMAGE); ?>" class="bgImage" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>"  >
-                                                    </div>
-                                                <?php  }  ?>
-                                            </a>
-                                        </div>
-                                        <div class="profile-boxProfileCard-content clearfix">
-                                            <div class="left_side_box_img buisness-profile-txext">
-                                                <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  tabindex="-1" aria-hidden="true" rel="noopener" title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+            <?php echo $header; ?>
+            <?php echo $freelancer_hire_header2; ?>
+            <section>
+                <div class="user-midd-section" id="paddingtop_fixed">
+                    <div class="container padding-360">
+                        <div class="">
+                            <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt">
+                                <div class="">
+                                    <div class="full-box-module">   
+                                        <div class="profile-boxProfileCard  module">
+                                            <div class="profile-boxProfileCard-cover"> 
+                                                <a class="profile-boxProfileCard-bg u-bgUserColor a-block"
+                                                href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  tabindex="-1" aria-hidden="true" rel="noopener" 
+                                                title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>">
                                                     <?php
-                                                    $fname = $freehiredata[0]['fullname'];
-                                                    $lname = $freehiredata[0]['username'];
-                                                    $sub_fname = substr($fname, 0, 1);
-                                                    $sub_lname = substr($lname, 0, 1);
-                                                    if ($freehiredata[0]['freelancer_hire_user_image']) {
-                                                        if (IMAGEPATHFROM == 'upload') {
-                                                            if (!file_exists($this->config->item('free_hire_profile_main_upload_path') . $freehiredata[0]['freelancer_hire_user_image'])) {
-                                                                ?>
-                                                                <div class="post-img-profile">
-                                                                    <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
-                                                                </div>
-                                                            <?php } else {
-                                                                ?>
-                                                                <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freehiredata[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>" >
-                                                                <?php
-                                                            }
-                                                        } else {
-                                                            $filename = $this->config->item('free_hire_profile_main_upload_path') . $freehiredata[0]['freelancer_hire_user_image'];
-                                                            $s3 = new S3(awsAccessKey, awsSecretKey);
-                                                            $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                                                            if ($info) {
-                                                                ?>
-                                                                <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freehiredata[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>" >
-                                                            <?php } else { ?>
-                                                                <div class="post-img-profile">
-                                                                    <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
-                                                                </div>
-                                                                <?php
-                                                            }
-                                                        }
-                                                    } else {
-                                                        ?>
-                                                        <div class="post-img-profile">
-                                                            <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                    if ($freehiredata[0]['profile_background'] != '') {
+                                                     ?>
+                                                    <div class="data_img">
+                                                        <img src="<?php echo FREE_HIRE_BG_THUMB_UPLOAD_URL . $freehiredata[0]['profile_background']; ?>" class="bgImage" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>" >
+                                                    </div>
+                                                    <?php } else { ?>
+                                                        <div class="data_img bg-images no-cover-upload">
+                                                            <img src="<?php echo base_url(WHITEIMAGE); ?>" class="bgImage" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>"  >
                                                         </div>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                    <?php  }  ?>
                                                 </a>
                                             </div>
-                                            <div class="right_left_box_design ">
-                                                <span class="profile-company-name ">
-                                                    <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>"> <?php echo ucwords($freehiredata[0]['fullname']) . ' ' . ucwords($freehiredata[0]['username']); ?></a>  
-                                                </span>
-                                                <?php $category = $this->db->get_where('industry_type', array('industry_id' => $businessdata[0]['industriyal'], 'status' => '1'))->row()->industry_name; ?>
-                                                <div class="profile-boxProfile-name">
-                                                    <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>"><?php
-                                                    if ($freehiredata[0]['designation']) {
-                                                        echo $freehiredata[0]['designation'];
-                                                    } else {
-                                                        echo "Designation";
-                                                    }
-                                                    ?></a>
+                                            <div class="profile-boxProfileCard-content clearfix">
+                                                <div class="left_side_box_img buisness-profile-txext">
+                                                    <a class="profile-boxProfilebuisness-avatarLink2 a-inlineBlock" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>"  tabindex="-1" aria-hidden="true" rel="noopener" title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>">
+                                                        <?php
+                                                        $fname = $freehiredata[0]['fullname'];
+                                                        $lname = $freehiredata[0]['username'];
+                                                        $sub_fname = substr($fname, 0, 1);
+                                                        $sub_lname = substr($lname, 0, 1);
+                                                        if ($freehiredata[0]['freelancer_hire_user_image']) {
+                                                            if (IMAGEPATHFROM == 'upload') {
+                                                                if (!file_exists($this->config->item('free_hire_profile_main_upload_path') . $freehiredata[0]['freelancer_hire_user_image'])) {
+                                                                    ?>
+                                                                    <div class="post-img-profile">
+                                                                        <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                    </div>
+                                                                <?php } else {
+                                                                    ?>
+                                                                    <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freehiredata[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>" >
+                                                                    <?php
+                                                                }
+                                                            } else {
+                                                                $filename = $this->config->item('free_hire_profile_main_upload_path') . $freehiredata[0]['freelancer_hire_user_image'];
+                                                                $s3 = new S3(awsAccessKey, awsSecretKey);
+                                                                $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                                                if ($info) {
+                                                                    ?>
+                                                                    <img src="<?php echo FREE_HIRE_PROFILE_MAIN_UPLOAD_URL . $freehiredata[0]['freelancer_hire_user_image']; ?>" alt="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>" >
+                                                                <?php } else { ?>
+                                                                    <div class="post-img-profile">
+                                                                        <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                                    </div>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <div class="post-img-profile">
+                                                                <?php echo ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)); ?>
+                                                            </div>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </a>
                                                 </div>
-                                                <ul class=" left_box_menubar">
-                                                    <li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(3) == '')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" > Details</a></li>
-                                                    <li><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>">Projects</a></li>
-                                                    <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>">Saved</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>                             
-                                </div>
-                                <div class="left-search-box list-type-bullet">
-                                    <div class="">
-                                        <h3>Top Categories</h3>
-                                    </div>
-                                    <div class="content custom-scroll">
-                                        <ul class="search-listing">
-                                            <li ng-repeat="category in categoryFilterList">
-                                                <label class="control control--checkbox">
-                                                    <span>{{category.category_name | capitalize}}
-                                                        <span class="pull-right">({{category.count}})</span>
+                                                <div class="right_left_box_design ">
+                                                    <span class="profile-company-name ">
+                                                        <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>"> <?php echo ucwords($freehiredata[0]['fullname']) . ' ' . ucwords($freehiredata[0]['username']); ?></a>  
                                                     </span>
-                                                    <input class="categorycheckbox filtercheckbox" type="checkbox" name="{{category.category_name}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
-                                                    <div class="control__indicator"></div>
-                                                </label>
-                                            </li>                                        
-                                        </ul>
-                                    </div>
-                                    <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
-                                </div>
-                                <div class="left-search-box list-type-bullet">
-                                    <div class="">
-                                        <h3>Top Cities</h3>
-                                    </div>
-                                    <div class="content custom-scroll">
-                                        <ul class="search-listing">
-                                            <li ng-repeat="cities in cityFilterList">
-                                                <label class="control control--checkbox">
-                                                    <span>{{cities.city_name | capitalize}}
-                                                        <span class="pull-right">({{cities.count}})</span>
-                                                    </span>
-                                                    <input class="citiescheckbox filtercheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
-                                                    <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- <p class="text-right p10"><a href="#">More Cities</a></p> -->
-                                </div>
-                                <div class="left-search-box list-type-bullet">
-                                    <div class="">
-                                        <h3>Skills</h3>
-                                    </div>
-                                    <div class="content custom-scroll">
-                                        <ul class="search-listing">
-                                            <li ng-repeat="skill in skillFilterList">
-                                                <label class="control control--checkbox">
-                                                    <span>{{skill.skill | capitalize}}
-                                                        <span class="pull-right">({{skill.count}})</span>
-                                                    </span>
-                                                    <input class="skillcheckbox filtercheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
-                                                    <div class="control__indicator"></div>
-                                                </label>
-                                            </li>      
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="left-search-box">
-                                    <div class="accordion" id="accordion3">
-                                        <div class="accordion-group">
-                                            <div class="accordion-heading">
-                                                <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo" aria-expanded="true">Required Experience</a></h3>
-                                            </div>
-                                            <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
-                                                <div class="accordion-inner">
-                                                    <ul class="search-listing">
-                                                        <li ng-repeat="experience in experienceFilterList">
-                                                            <label class="control control--checkbox">
-                                                                <span>{{experience.name | capitalize}}
-                                                                </span>
-                                                                <input class="experiencecheckbox filtercheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </li>
+                                                    <?php $category = $this->db->get_where('industry_type', array('industry_id' => $businessdata[0]['industriyal'], 'status' => '1'))->row()->industry_name; ?>
+                                                    <div class="profile-boxProfile-name">
+                                                        <a href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" title="<?php echo $freehiredata[0]['fullname'] . " " . $freehiredata[0]['username']; ?>"><?php
+                                                        if ($freehiredata[0]['designation']) {
+                                                            echo $freehiredata[0]['designation'];
+                                                        } else {
+                                                            echo "Designation";
+                                                        }
+                                                        ?></a>
+                                                    </div>
+                                                    <ul class=" left_box_menubar">
+                                                        <li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(3) == '')) { ?> class="active" <?php } ?>><a title="Employer Details"  class="padding_less_left" href="<?php echo base_url('freelance-employer/'. $free_hire_login_slug); ?>" > Details</a></li>
+                                                        <li><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>">Projects</a></li>
+                                                        <li <?php if (($this->uri->segment(1) == 'freelance-hire') && ($this->uri->segment(2) == 'freelancer-save')) { ?> class="active" <?php } ?>><a title="Saved Freelancer"  class="padding_less_right" href="<?php echo base_url('freelance-employer/saved-freelancer'); ?>">Saved</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </div>                                
+                                        </div>                             
                                     </div>
+                                    <div class="left-search-box list-type-bullet">
+                                        <div class="">
+                                            <h3>Top Categories</h3>
+                                        </div>
+                                        <div class="content custom-scroll">
+                                            <ul class="search-listing">
+                                                <li ng-repeat="category in categoryFilterList">
+                                                    <label class="control control--checkbox">
+                                                        <span>{{category.category_name | capitalize}}
+                                                            <span class="pull-right">({{category.count}})</span>
+                                                        </span>
+                                                        <input class="categorycheckbox filtercheckbox" type="checkbox" name="{{category.category_name}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>                                        
+                                            </ul>
+                                        </div>
+                                        <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
+                                    </div>
+                                    <div class="left-search-box list-type-bullet">
+                                        <div class="">
+                                            <h3>Top Cities</h3>
+                                        </div>
+                                        <div class="content custom-scroll">
+                                            <ul class="search-listing">
+                                                <li ng-repeat="cities in cityFilterList">
+                                                    <label class="control control--checkbox">
+                                                        <span>{{cities.city_name | capitalize}}
+                                                            <span class="pull-right">({{cities.count}})</span>
+                                                        </span>
+                                                        <input class="citiescheckbox filtercheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- <p class="text-right p10"><a href="#">More Cities</a></p> -->
+                                    </div>
+                                    <div class="left-search-box list-type-bullet">
+                                        <div class="">
+                                            <h3>Skills</h3>
+                                        </div>
+                                        <div class="content custom-scroll">
+                                            <ul class="search-listing">
+                                                <li ng-repeat="skill in skillFilterList">
+                                                    <label class="control control--checkbox">
+                                                        <span>{{skill.skill | capitalize}}
+                                                            <span class="pull-right">({{skill.count}})</span>
+                                                        </span>
+                                                        <input class="skillcheckbox filtercheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
+                                                        <div class="control__indicator"></div>
+                                                    </label>
+                                                </li>      
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="left-search-box">
+                                        <div class="accordion" id="accordion3">
+                                            <div class="accordion-group">
+                                                <div class="accordion-heading">
+                                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo" aria-expanded="true">Required Experience</a></h3>
+                                                </div>
+                                                <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
+                                                    <div class="accordion-inner">
+                                                        <ul class="search-listing">
+                                                            <li ng-repeat="experience in experienceFilterList">
+                                                                <label class="control control--checkbox">
+                                                                    <span>{{experience.name | capitalize}}
+                                                                    </span>
+                                                                    <input class="experiencecheckbox filtercheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>                                
+                                        </div>
+                                    </div>
+                                    <?php echo $left_footer; ?>
+                                 
                                 </div>
-                                <?php echo $left_footer; ?>
-                             
                             </div>
-                        </div>
-                        <div class="custom-right-art mian_middle_post_box animated fadeInUp">
-                            <div class="common-form">
-                                <div class="job-saved-box">
-                                    <h3>Search result of 
-                                        <?php
-                                        if ($keyword != "" && ($keyword1 == "" || $keyword1 == '0')) {
-                                            echo '"' . $keyword . '"';
-                                        } elseif (($keyword == "" || $keyword == '0') && $keyword1 != "") {
-                                            echo '"' . $keyword1 . '"';
-                                        } else {
-                                            echo '"' . $keyword . '"';
-                                            echo " In ";
-                                            echo '"' . $keyword1 . '"';
-                                        }
-                                        ?></h3>
-                                        <div class="contact-frnd-post">
+                            <div class="custom-right-art mian_middle_post_box animated fadeInUp">
+                                <div class="common-form">
+                                    <div class="job-saved-box">
+                                        <h3>Search result of 
+                                            <?php
+                                            if ($keyword != "" && ($keyword1 == "" || $keyword1 == '0')) {
+                                                echo '"' . $keyword . '"';
+                                            } elseif (($keyword == "" || $keyword == '0') && $keyword1 != "") {
+                                                echo '"' . $keyword1 . '"';
+                                            } else {
+                                                echo '"' . $keyword . '"';
+                                                echo " In ";
+                                                echo '"' . $keyword1 . '"';
+                                            }
+                                            ?></h3>
+                                            <div class="contact-frnd-post">
 
-                                            <div class="job-contact-frnd ">
-                                                <!--.........AJAX DATA......-->
+                                                <div class="job-contact-frnd ">
+                                                    <!--.........AJAX DATA......-->
+                                                </div>
+                                                <div class="fw" id="loader" style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>"</div>
                                             </div>
-                                            <div class="fw" id="loader" style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>"</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-                            <div class="all-profile-box">
-                                <div class="all-pro-head">
-                                    <h4>Profiles<a title="All" href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
+                            <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
+                                <div class="all-profile-box">
+                                    <div class="all-pro-head">
+                                        <h4>Profiles<a title="All" href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
+                                    </div>
+                                    <ul class="all-pr-list">
+                                        <li>
+                                            <a title="Job Profile" href="<?php echo base_url('job'); ?>">
+                                                <div class="all-pr-img">
+                                                    <img alt="Job Profile" src="<?php echo base_url('assets/img/i1.jpg'); ?>">
+                                                </div>
+                                                <span>Job Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a title="Recruiter Profile" href="<?php echo base_url('recruiter'); ?>">
+                                                <div class="all-pr-img">
+                                                    <img alt="Recruiter Profile" src="<?php echo base_url('assets/img/i2.jpg'); ?>">
+                                                </div>
+                                                <span>Recruiter Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a title="Freelance Profile" href="<?php echo base_url('freelance'); ?>">
+                                                <div class="all-pr-img">
+                                                    <img alt="Freelance Profile" src="<?php echo base_url('assets/img/i3.jpg'); ?>">
+                                                </div>
+                                                <span>Freelance Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a title="Business Profile" href="<?php echo base_url('business-profile'); ?>">
+                                                <div class="all-pr-img">
+                                                    <img alt="Business Profile" src="<?php echo base_url('assets/img/i4.jpg'); ?>">
+                                                </div>
+                                                <span>Business Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a title="Artistic Profile" href="<?php echo base_url('artist'); ?>">
+                                                <div class="all-pr-img">
+                                                    <img alt="Artistic Profile" src="<?php echo base_url('assets/img/i5.jpg'); ?>">
+                                                </div>
+                                                <span>Artistic Profile</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul class="all-pr-list">
-                                    <li>
-                                        <a title="Job Profile" href="<?php echo base_url('job'); ?>">
-                                            <div class="all-pr-img">
-                                                <img alt="Job Profile" src="<?php echo base_url('assets/img/i1.jpg'); ?>">
-                                            </div>
-                                            <span>Job Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a title="Recruiter Profile" href="<?php echo base_url('recruiter'); ?>">
-                                            <div class="all-pr-img">
-                                                <img alt="Recruiter Profile" src="<?php echo base_url('assets/img/i2.jpg'); ?>">
-                                            </div>
-                                            <span>Recruiter Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a title="Freelance Profile" href="<?php echo base_url('freelance'); ?>">
-                                            <div class="all-pr-img">
-                                                <img alt="Freelance Profile" src="<?php echo base_url('assets/img/i3.jpg'); ?>">
-                                            </div>
-                                            <span>Freelance Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a title="Business Profile" href="<?php echo base_url('business-profile'); ?>">
-                                            <div class="all-pr-img">
-                                                <img alt="Business Profile" src="<?php echo base_url('assets/img/i4.jpg'); ?>">
-                                            </div>
-                                            <span>Business Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a title="Artistic Profile" href="<?php echo base_url('artist'); ?>">
-                                            <div class="all-pr-img">
-                                                <img alt="Artistic Profile" src="<?php echo base_url('assets/img/i5.jpg'); ?>">
-                                            </div>
-                                            <span>Artistic Profile</span>
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <?php echo $footer; ?>
+            </section>
+            <?php echo $footer; ?>
 
-        <!-- Bid-modal  -->
-        <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
-            <div class="modal-dialog modal-lm">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
-                    <div class="modal-body">
-                        <span class="mes"></span>
+            <!-- Bid-modal  -->
+            <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
+                <div class="modal-dialog modal-lm">
+                    <div class="modal-content">
+                        <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+                        <div class="modal-body">
+                            <span class="mes"></span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- Model Popup Close -->
         </div>
-        <!-- Model Popup Close -->
-
+        
         <!-- script for skill textbox automatic end (option 2)-->
         <script>
             var base_url = '<?php echo base_url(); ?>';

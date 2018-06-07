@@ -17,145 +17,148 @@
         <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script> -->
     </head>
     <body class="">
-        <?php echo $header_profile; ?>
-        <div class="middle-section middle-section-banner">
-            <div class="container pt20">
-                <div class="custom-user-list">
-                    <div class="list-box-custom">
-                        <h3>Pending Contact Request</h3>
-                        <div class="all-list">
-                            <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
-                                <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
-                            </div>
-                            <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
-                                <div class="no-data-content">
-                                    <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
-                                    <p class="pt20">No Pending Contact Request Available</p>
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+            <?php echo $header_profile; ?>
+            <div class="middle-section middle-section-banner">
+                <div class="container pt20 mobp0">
+                    <div class="custom-user-list">
+                        <div class="list-box-custom">
+                            <h3>Pending Contact Request</h3>
+                            <div class="all-list">
+                                <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
+                                    <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
                                 </div>
-                            </div>
-                            <ul id="contactlist" style="display: none;" ng-if="pending_contact_request_data.length == '0'">
-                                <li ng-repeat="contact in pending_contact_request_data">
-                                    <div class="list-box">
-                                        <div class="profile-img">
-                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
-                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}" alt="{{contact.fullname}}" ng-if="contact.user_image != ''">                                                
-                                                 <img ng-if="contact.user_image == '' && contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                <img ng-if="contact.user_image == '' && contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                            </a>
-                                        </div>
-                                        <div class="profile-content">
-                                            <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
-                                                <div class="main_data_cq">   
-                                                    <span title="{{contact.fullname}}" class="main_compny_name" ng-bind="contact.fullname | capitalize"></span>
-                                                </div>
-                                                <div class="main_data_cq">
-                                                    <span class="dc_cl_m" title="{{contact.designation| capitalize}}" ng-if="contact.designation" ng-bind="contact.designation | capitalize"></span>
-                                                    <span class="dc_cl_m" title="{{contact.degree| capitalize}}" ng-if="contact.degree" ng-bind="contact.degree | capitalize"></span>
-                                                    <span class="dc_cl_m" title="Current Work" ng-if="contact.designation == '' && contact.degree == ''">CURRENT WORK</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="fw">
-                                            <p class="request-btn">
-                                                <a href="javascript:void(0);" class="btn1 pull-left" ng-click="confirmContact(contact.from_id, $index)">
-                                                    Confirm
-                                                </a>
-                                                <a href="javascript:void(0);" class="btn3 pull-right" ng-click="rejectContact(contact.from_id, $index)">
-                                                    Decline
-                                                </a>
-                                            </p>
-                                        </div>
+                                <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
+                                    <div class="no-data-content">
+                                        <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
+                                        <p class="pt20">No Pending Contact Request Available</p>
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="list-box-custom suggestion">
-                        <h3>Suggestion</h3>
-                        <div class="all-list">
-                            <div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
-                                <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
-                            </div>
-                            <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
-                                <div class="no-data-content">
-                                    <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
-                                    <p class="pt20">No Suggestion Contact Request Available</p>
                                 </div>
-                            </div>
-                            <ul id="suggestionlist" style="display: none;">
-                                <li ng-repeat="suggest in contactSuggetion">
-                                    <div class="list-box">
-                                        <div class="profile-img">
-                                            <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
-                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">                                                
-                                                <img ng-if="!suggest.user_image && suggest.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                <img ng-if="!suggest.user_image && suggest.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                            </a>
-                                        </div>
-                                        <div class="profile-content">
-                                            <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
-                                                <div class="main_data_cq">   
-                                                    <span title="{{suggest.fullname| capitalize}}" class="main_compny_name" ng-bind="suggest.fullname | capitalize"></span>
-                                                </div>
-                                                <div class="main_data_cq">
-                                                    <span class="dc_cl_m" title="{{suggest.title_name}}" ng-if="suggest.title_name != ''">{{suggest.title_name}}</span>
-                                                    <span class="dc_cl_m" title="{{suggest.degree_name}}" ng-if="suggest.title_name == ''">{{suggest.degree_name}}</span>
-                                                    <span class="dc_cl_m" title="Current Work" ng-if="suggest.title_name == null && suggest.degree_name == null">Current Work</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="fw" id="item-{{suggest.user_id}}">
-                                            <p class="request-btn">
-                                                <a href="#" class="btn3" ng-click="addToContact(suggest.user_id, suggest);">
-                                                    Add to contact
+                                <ul id="contactlist" style="display: none;" ng-if="pending_contact_request_data.length == '0'">
+                                    <li ng-repeat="contact in pending_contact_request_data">
+                                        <div class="list-box">
+                                            <div class="profile-img">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}" alt="{{contact.fullname}}" ng-if="contact.user_image != ''">                                                
+                                                     <img ng-if="contact.user_image == '' && contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="contact.user_image == '' && contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
-                                            </p>
+                                            </div>
+                                            <div class="profile-content">
+                                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
+                                                    <div class="main_data_cq">   
+                                                        <span title="{{contact.fullname}}" class="main_compny_name" ng-bind="contact.fullname | capitalize"></span>
+                                                    </div>
+                                                    <div class="main_data_cq">
+                                                        <span class="dc_cl_m" title="{{contact.designation| capitalize}}" ng-if="contact.designation" ng-bind="contact.designation | capitalize"></span>
+                                                        <span class="dc_cl_m" title="{{contact.degree| capitalize}}" ng-if="contact.degree" ng-bind="contact.degree | capitalize"></span>
+                                                        <span class="dc_cl_m" title="Current Work" ng-if="contact.designation == '' && contact.degree == ''">CURRENT WORK</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="fw">
+                                                <p class="request-btn">
+                                                    <a href="javascript:void(0);" class="btn1 pull-left" ng-click="confirmContact(contact.from_id, $index)">
+                                                        Confirm
+                                                    </a>
+                                                    <a href="javascript:void(0);" class="btn3 pull-right" ng-click="rejectContact(contact.from_id, $index)">
+                                                        Decline
+                                                    </a>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-part">
-                    <div class="request-noti">
-                        <div class="right-title">
-                            Contact Request Notifications
-                        </div>
-                        <div class="content custom-scroll">
-                            <div class="no-data-box" ng-if="contactRequestNotification.length == '0'">
-                                <div class="no-data-content">
-                                    <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
-                                    <p class="pt20">No Contact Request Notification Available</p>
-                                </div>
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="request-list">
-                                <li ng-repeat="notification in contactRequestNotification">
-                                    <a href="<?php echo base_url(); ?>{{notification.user_slug}}">
-                                        <div class="post-img">
-                                            <img src="<?php echo USER_THUMB_UPLOAD_URL ?>{{notification.user_image}}" alt="{{notification.fullname}}" ng-if="notification.user_image != ''">
-                                            <img ng-if="notification.user_image == '' && notification.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-if="notification.user_image == '' && notification.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                        </div>
+                        <div class="list-box-custom suggestion">
+                            <h3>Suggestion</h3>
+                            <div class="all-list">
+                                <div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
+                                    <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
+                                </div>
+                                <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
+                                    <div class="no-data-content">
+                                        <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
+                                        <p class="pt20">No Suggestion Contact Request Available</p>
+                                    </div>
+                                </div>
+                                <ul id="suggestionlist" style="display: none;">
+                                    <li ng-repeat="suggest in contactSuggetion">
+                                        <div class="list-box">
+                                            <div class="profile-img">
+                                                <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">                                                
+                                                    <img ng-if="!suggest.user_image && suggest.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-if="!suggest.user_image && suggest.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                </a>
+                                            </div>
+                                            <div class="profile-content">
+                                                <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
+                                                    <div class="main_data_cq">   
+                                                        <span title="{{suggest.fullname| capitalize}}" class="main_compny_name" ng-bind="suggest.fullname | capitalize"></span>
+                                                    </div>
+                                                    <div class="main_data_cq">
+                                                        <span class="dc_cl_m" title="{{suggest.title_name}}" ng-if="suggest.title_name != ''">{{suggest.title_name}}</span>
+                                                        <span class="dc_cl_m" title="{{suggest.degree_name}}" ng-if="suggest.title_name == ''">{{suggest.degree_name}}</span>
+                                                        <span class="dc_cl_m" title="Current Work" ng-if="suggest.title_name == null && suggest.degree_name == null">Current Work</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="fw" id="item-{{suggest.user_id}}">
+                                                <p class="request-btn">
+                                                    <a href="#" class="btn3" ng-click="addToContact(suggest.user_id, suggest);">
+                                                        Add to contact
+                                                    </a>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="request-detail">
-                                            <h6 class="">
-                                                <b ng-bind="notification.fullname | capitalize" ng-bind="notification.fullname | capitalize"></b> confirmed your contact request.
-                                            </h6>
-                                            <p>{{notification.time_string}}</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <?php echo $left_footer_list_view; ?>
-                    <!-- <div class="add-box fw">
-                        <div class="adv-main-view">
-                            <img src="<?php //echo base_url('assets/n-images/add.jpg'); ?>">
+                    <div class="right-part">
+                        <div class="request-noti">
+                            <div class="right-title">
+                                Contact Request Notifications
+                            </div>
+                            <div class="content custom-scroll">
+                                <div class="no-data-box" ng-if="contactRequestNotification.length == '0'">
+                                    <div class="no-data-content">
+                                        <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
+                                        <p class="pt20">No Contact Request Notification Available</p>
+                                    </div>
+                                </div>
+                                <ul class="request-list">
+                                    <li ng-repeat="notification in contactRequestNotification">
+                                        <a href="<?php echo base_url(); ?>{{notification.user_slug}}">
+                                            <div class="post-img">
+                                                <img src="<?php echo USER_THUMB_UPLOAD_URL ?>{{notification.user_image}}" alt="{{notification.fullname}}" ng-if="notification.user_image != ''">
+                                                <img ng-if="notification.user_image == '' && notification.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-if="notification.user_image == '' && notification.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </div>
+                                            <div class="request-detail">
+                                                <h6 class="">
+                                                    <b ng-bind="notification.fullname | capitalize" ng-bind="notification.fullname | capitalize"></b> confirmed your contact request.
+                                                </h6>
+                                                <p>{{notification.time_string}}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div> -->
-                </div>
+                        <?php echo $left_footer_list_view; ?>
+                        <!-- <div class="add-box fw">
+                            <div class="adv-main-view">
+                                <img src="<?php //echo base_url('assets/n-images/add.jpg'); ?>">
+                            </div>
+                        </div> -->
+                    </div>
 
+                </div>
             </div>
         </div>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>

@@ -59,6 +59,8 @@ app.controller('businessListController', function ($scope, $http) {
             }).then(function (success) {
                 $("#loader").addClass("hidden");
                 $scope.businessList = success.data;
+                $('#main_loader').hide();
+                $('#main_page_load').show();
         }, function (error) {}
         , function (complete) { filterajax = false; });
     }
@@ -101,7 +103,6 @@ app.controller('businessListController', function ($scope, $http) {
         }, function (error) {}
         , function (complete) { filterajax = false; });
     }
-
 });
 
 $(window).on("load", function () {

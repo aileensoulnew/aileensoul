@@ -153,6 +153,8 @@ function freelancerhire_search(from,filter_selected_data='',pagenum)
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }
     });
 }

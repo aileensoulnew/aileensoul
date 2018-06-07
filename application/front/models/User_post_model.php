@@ -75,7 +75,7 @@ class User_post_model extends CI_Model {
         $this->db->order_by('us.city', 'asc');
         $this->db->limit($start['offset']);
         $query = $this->db->get();        
-        echo $this->db->last_query();exit;
+        // echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         return $result_array;
     }

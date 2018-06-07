@@ -33,6 +33,8 @@ app.controller('contactRequestController', function ($scope, $http) {
                 console.log('processing true')
                 processing = true;
             }
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {
             $("#suggestionlist").show();
             $(".sugg_post_load").hide();

@@ -140,8 +140,7 @@
                             </div>
                         </div>         
                         <div class="profile-main-rec-box-menu profile-box-art col-md-12 padding_les">
-                            <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr">  
-                                <?php
+                            <div class=" right-side-menu art-side-menu padding_less_right  right-menu-jr">    <?php
                                 $userid = $this->session->userdata('aileenuser');
                                 if ($freelancr_user_data[0]['user_id'] == $userid) {
                                     ?>     
@@ -162,37 +161,35 @@
                         </div>
                     </div>
                 </div>
-             
-            </div>
-            <div class="container">
-                <div class="job-menu-profile mob-none pt20">
-                    <a title="<?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?></h3></a>
-                    <div class="profile-text">
-                        <?php
-                        if ($freelancr_user_data[0]['designation'] == '') {
-                            ?>
-                            <a title="<?php echo $this->lang->line("designation"); ?>" id="designation" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
-                        <?php } else { ?> 
-                            <a id="designation" class="designation" title="<?php echo ucwords($freelancr_user_data[0]['designation']); ?>"><?php echo ucwords($freelancr_user_data[0]['designation']); ?></a>  <?php } ?>
+                <div class="container">
+                    <div class="job-menu-profile mob-none pt20">
+                        <a title="<?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?></h3></a>
+                        <div class="profile-text">
+                            <?php
+                            if ($freelancr_user_data[0]['designation'] == '') {
+                                ?>
+                                <a title="<?php echo $this->lang->line("designation"); ?>" id="designation" class="designation" title="Designation"><?php echo $this->lang->line("designation"); ?></a>
+                            <?php } else { ?> 
+                                <a id="designation" class="designation" title="<?php echo ucwords($freelancr_user_data[0]['designation']); ?>"><?php echo ucwords($freelancr_user_data[0]['designation']); ?></a>  <?php } ?>
+                        </div>
+                    
                     </div>
-                
-                </div>
-                <div class="col-md-8 col-sm-12 mob-clear">
-                    <div class="common-form">
-                        <div class="job-saved-box">
-                            <h3><?php echo $this->lang->line("saved_freelancer"); ?></h3>
-                            <div class="contact-frnd-post">
-                                <!--.......AJAX DATA.......-->
-                                <div class="fw" id="loader" style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" /></div>
+                    <div class="col-md-8 col-sm-12 mob-clear">
+                        <div class="common-form">
+                            <div class="job-saved-box">
+                                <h3><?php echo $this->lang->line("saved_freelancer"); ?></h3>
+                                <div class="contact-frnd-post">
+                                    <!--.......AJAX DATA.......-->
+                                    <div class="fw" id="loader" style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" /></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <?php echo $login_footer ?>
-        <?php echo $footer; ?>
-    </div>
+            </section>
+            <?php echo $login_footer ?>
+            <?php echo $footer; ?>
+        </div>
     <!-- model for popup start -->
     <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
         <div class="modal-dialog modal-lm">
