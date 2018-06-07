@@ -60,7 +60,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <?php } ?>
             
 			
-            <div class="container pt20">
+            <div class="container pt20 mobp0">
                 <div class="left-part">
                     <form name="job-company-filter" id="job-company-filter">
                         <div class="left-search-box">
@@ -237,7 +237,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
                 <div class="middle-part">                    
                     <div class="page-title">
-                        <h3>Latest Jobs</h3>
+                        <h3 class="mob-bt-0">Latest Jobs</h3>
                     </div>
                     <div class="user_no_post_avl ng-scope" ng-if="latestJob.length == 0">
                         <div class="user-img-nn">

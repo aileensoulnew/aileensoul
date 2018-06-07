@@ -99,11 +99,11 @@
                     $(this).next('ul.dropdown-menu').toggle();
                     e.stopPropagation();
                 });*/
-                /*$("li.user-id a").click(function(e){
+                $("li.user-id a").click(function(e){
                     $(".dropdown").removeClass("open");
                     $(this).next('ul.dropdown-menu').toggle();
                     e.stopPropagation();
-                });*/
+                });
                 /*$(".right-header ul li.dropdown a").click(function(e){
                     $('.right-header ul.dropdown-menu').hide();
                 });*/

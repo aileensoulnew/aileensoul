@@ -530,6 +530,7 @@ class User_post_model extends CI_Model {
                 $this->db->group_by('uo.opportunity_for', 'uo.location');
                 $query = $this->db->get();
                 $opportunity_data = $query->row_array();
+                $opportunity_data['opportunity'] = nl2br($this->common->make_links($opportunity_data['opportunity']));
                 $result_array[$key]['opportunity_data'] = $opportunity_data;
             } elseif ($value['post_for'] == 'simple') {
                 $this->db->select("usp.description")->from("user_simple_post usp");

@@ -595,9 +595,9 @@ class Profile extends CI_Controller {
                 if ($jobdata) {
                     $jobTitleId = $jobdata[0]['title_id'];
                 } else {
-                    $forslug = $this->input->post('job_title');
+                    $forslug = $this->input->post('studjob_title');
                     $data = array(
-                        'name' => ucfirst($this->input->post('job_title')),
+                        'name' => ucfirst($this->input->post('studjob_title')),
                         'slug' => $this->common->clean($forslug),
                         'status' => 'draft',
                     );

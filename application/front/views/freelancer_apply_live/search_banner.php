@@ -16,8 +16,8 @@
                         
                     </div>
                     <div class="col-md-6 col-sm-8 no-login-right fw-479">
-                        <a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
-                        <a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Account</a>
+                        <a target="_self" href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
+                        <a target="_self" href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Account</a>
                             
                     </div>
                 </div>
@@ -80,7 +80,7 @@
     <div class="bottom-bnr-div">
         <div class="container">
             <p>Get Work from Home Opportunities
-                <a class="btn-1 pull-right" href="<?php echo base_url('freelancer/signup') ?>">Create Freelancer Profile</a>
+                <a target="_self" class="btn-1 pull-right" href="<?php echo base_url('freelancer/signup') ?>">Create Freelancer Profile</a>
             </p>
         </div>
     </div>
