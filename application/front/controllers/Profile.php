@@ -635,7 +635,7 @@ class Profile extends CI_Controller {
                 $data_up['user_id'] = $userid;
                 $updatdata_up = $this->common->insert_data_getid($data_up, 'user_student');
             }
-            redirect(base_url()."profile");
+            redirect(base_url()."edit-profile");
         }
         // print_r($this->input->post());exit;
     }
