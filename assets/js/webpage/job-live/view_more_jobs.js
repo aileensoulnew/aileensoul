@@ -90,7 +90,10 @@ app.controller('jobByLocationController', function ($scope, $http, $location, $w
             else
             {
                 $scope.showLoadmore = false;                
-            }            
+            }
+            $('#main_loader').hide();
+            $('#main_page_load').show();
+
         }, function (error) {});
     }
     jobCity(1);  
@@ -151,7 +154,10 @@ app.controller('jobsBySkillsController', function ($scope, $http, $location, $wi
             else
             {
                 $scope.showLoadmore = false;                
-            }            
+            }         
+
+            $('#main_loader').hide();
+            $('#main_page_load').show();   
         }, function (error) {});
     }
     jobSkill(1);  
@@ -212,7 +218,10 @@ app.controller('jobsByDescController', function ($scope, $http, $location, $wind
             else
             {
                 $scope.showLoadmore = false;                
-            }            
+            }         
+
+            $('#main_loader').hide();
+            $('#main_page_load').show();   
         }, function (error) {});
     }
     jobDesignation(1);  
@@ -274,6 +283,9 @@ app.controller('jobsByCompanyController', function ($scope, $http, $location, $w
             {
                 $scope.showLoadmore = false;                
             }            
+
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     jobCompany(1);  
@@ -335,6 +347,9 @@ app.controller('jobsBycategoryController', function ($scope, $http, $location, $
             {
                 $scope.showLoadmore = false;                
             }            
+
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     jobCategory(1);  
@@ -375,6 +390,8 @@ app.controller('jobsByjobsController', function ($scope, $http, $location, $wind
         isProcessing = true;
         $http.get(base_url + "job_live/jobs_by_jobs_ajax?page=" + pagenum).then(function (success) {
             $scope.jobByJobs = data = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     jobJobs(1);  

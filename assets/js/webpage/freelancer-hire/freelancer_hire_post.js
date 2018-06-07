@@ -77,6 +77,8 @@ function freelancerhire_project(user_id, returnpage, pagenum)
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }
     });
 }
