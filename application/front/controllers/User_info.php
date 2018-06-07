@@ -19,8 +19,12 @@ class User_info extends MY_Controller {
     public function index() {
         $userid = $this->session->userdata('aileenuser');
         $userdata = $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
-        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
-        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userBasicInfo'] = $is_userBasicInfo = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $is_userStudentInfo = $this->user_model->is_userStudentInfo($userid);
+        if($is_userBasicInfo == 1 || $is_userStudentInfo == 1)
+        {
+            redirect(base_url());
+        }        
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
