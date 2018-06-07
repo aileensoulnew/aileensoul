@@ -199,7 +199,7 @@ color: #1b8ab9 !important;}
 													if(isset($studentData) && !empty($studentData))
 														$is_user = 2;?>
 													
-												<div id="basic_info" class="common-form profile_edit main_form change-password-box" <?php echo $is_user == 2 ? 'display: none;' : ''; ?>">
+												<div id="basic_info" class="common-form profile_edit main_form change-password-box" style="<?php echo $is_user == 2 ? 'display: none;' : ''; ?>">
 													<form id="basic_info_frm" name="basic_info_frm" action="<?php echo base_url(); ?>profile/edit_basic_info" method="post">
 														<p class="student-or-not">If you are a student then <a href="javascript:void(0);" id="is_basic">Click Here.</a></p>
 														<fieldset class="fw">
