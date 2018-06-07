@@ -186,7 +186,7 @@ $(document).ready(function () {
                         required: "Please enter your gender",
                     },
                     term_condi: {
-                        required: "Please Accept privacy policy,terms and conditions",
+                        required: "Please read and accept privacy policy, terms and conditions",
                     }
 
                 },
