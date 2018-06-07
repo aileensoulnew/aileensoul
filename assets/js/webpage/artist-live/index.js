@@ -30,6 +30,8 @@ app.controller('artistController', function ($scope, $http) {
     function getRelatedBlogList(){
         $http.post(base_url + "artist_live/get_art_related_blog_list").then(function (success) {
             $scope.relatedBlog = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     getRelatedBlogList();

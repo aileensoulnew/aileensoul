@@ -54,6 +54,8 @@ $userid = $this->session->userdata('aileenuser');
         
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push old-no-login">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php if($this->session->userdata('aileenuser')){ 
             echo $artistic_header2;
         }else{ ?>
@@ -518,7 +520,7 @@ $userid = $this->session->userdata('aileenuser');
             </div>
         </div>
         <!-- Model Popup Close -->
-
+</div>
 <?php echo $footer; ?>
 
  <?php

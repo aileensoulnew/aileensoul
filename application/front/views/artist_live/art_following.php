@@ -17,6 +17,9 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 </head>
 <body   class="page-container-bg-solid page-boxed botton_footer">
+    <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+
 <?php echo $header; ?>
 <?php echo $artistic_header2; ?>
     <section class="custom-row">
@@ -91,6 +94,7 @@
                 </div>
             </div>
         </div>
+    </div>
 <!-- Model Popup Close -->
 <footer>
     <?php echo $login_footer ?>
@@ -116,9 +120,10 @@ var data= <?php echo json_encode($demo); ?>;
 var data1= <?php echo json_encode($de); ?>;
 var slug_id = '<?php echo $artisticdata[0]['user_id']; ?>';
 </script>
-
+<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/following.js?ver='.time()); ?>"></script>
  <?php
-  if (IS_ART_JS_MINIFY == '0') { ?>
+  /*if (IS_ART_JS_MINIFY == '0') { ?>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist/following.js?ver='.time()); ?>"></script>
 
@@ -127,9 +132,9 @@ var slug_id = '<?php echo $artisticdata[0]['user_id']; ?>';
 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/artistic_common.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/artist/following.js?ver='.time()); ?>"></script>
 
-<?php }?>
+<?php } */?>
 <script>
-     var header_all_profile = '<?php echo $header_all_profile; ?>';
+    var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
  </body>

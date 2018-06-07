@@ -24,6 +24,8 @@ app.controller('artistCategoryController', function ($scope, $http) {
     function artistAllCategory(){
         $http.get(base_url + "artist_live/artistAllCategory").then(function (success) {
             $scope.artistAllCategory = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     artistAllCategory();
@@ -71,6 +73,8 @@ app.controller('artistLocationController', function ($scope, $window, $http) {
             {
                 $scope.showLoadmore = false;                
             }
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             // $scope.artistAllLocation = success.data;
         }, function (error) {});
     }
@@ -111,6 +115,8 @@ app.controller('artistByArtistController', function ($scope, $http) {
         isProcessing = true;
         $http.get(base_url + "artist_live/artist_by_category_location_ajax?page=" + pagenum).then(function (success) {
             $scope.artistByArtist = data = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     artistWithLocation(1);  

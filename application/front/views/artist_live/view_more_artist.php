@@ -27,33 +27,35 @@
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
     </head>
     <body class="profile-main-page bus-by-cus">
-        <?php $page = (isset($page)) ? $page : ''; ?>
-        <?php $session_user_id = $this->session->userdata('aileenuser'); ?>
-        <?php
-            if ($ismainregister == false) {
-                // $this->load->view('artist_live/login_header');
-            }else if($isartistactivate == true && $artist_isregister){
-                echo $artistic_header2;
-            }else{
-                echo $header_profile;
-            }
-        ?>
-        
-        <?php
-           if($ismainregister == false ){
-        ?>
-            <div class="middle-section middle-section-banner new-ld-page">
-        <?php echo $search_banner; 
-            } else if($isartistactivate == true && $artist_isregister == true) { ?>
-            <div class="middle-section">
-        <?php } else { ?>
-            <div class="middle-section middle-section-banner">
-        <?php echo $search_banner;  
-        } ?>
-                <div class="container pt20 mobp0 mobmt15">
-                    <div ng-view></div>
-                </div>
-            </div>  
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+            <?php $page = (isset($page)) ? $page : ''; ?>
+            <?php $session_user_id = $this->session->userdata('aileenuser'); ?>
+            <?php
+                if ($ismainregister == false) {
+                    // $this->load->view('artist_live/login_header');
+                }else if($isartistactivate == true && $artist_isregister){
+                    echo $artistic_header2;
+                }else{
+                    echo $header_profile;
+                }
+            ?>
+            <?php
+               if($ismainregister == false ){
+            ?>
+                <div class="middle-section middle-section-banner new-ld-page">
+            <?php echo $search_banner; 
+                } else if($isartistactivate == true && $artist_isregister == true) { ?>
+                <div class="middle-section">
+            <?php } else { ?>
+                <div class="middle-section middle-section-banner">
+            <?php echo $search_banner;  
+            } ?>
+                    <div class="container pt20 mobp0 mobmt15">
+                        <div ng-view></div>
+                    </div>
+                </div>  
+        </div>
 		<?php echo $login_footer; ?>	
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
