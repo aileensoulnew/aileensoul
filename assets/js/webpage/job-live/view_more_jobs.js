@@ -1,3 +1,12 @@
+app.directive('checkImageNew', function() {
+   return {
+      link: function(scope, element, attrs) {
+         element.bind('error', function() {
+            element.attr('src', base_url + '/assets/n-images/commen-img.png'); // set default image
+         });
+       }
+   }
+});
 app.filter('capitalize', function() {
     return function(input) {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
