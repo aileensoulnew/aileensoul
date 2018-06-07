@@ -170,7 +170,7 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown" style="display: block;">
+                            <li class="dropdown">
                                 <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick = "return Notificationheader();"><img ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification"></a>
 
                                 <div class="dropdown-menu">
