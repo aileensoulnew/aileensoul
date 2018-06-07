@@ -27,11 +27,15 @@ app.controller('businessListController', function ($scope, $http) {
     function categoryBusinessList(){
         $http.get(base_url + "business_live/businessListByCategory/" + category_id).then(function (success) {
             $scope.businessList = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     function locationBusinessList(){
         $http.get(base_url + "business_live/businessListByLocation/" + location_id).then(function (success) {
             $scope.businessList = success.data;
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }, function (error) {});
     }
     if(location_id != "" && category_id != ""){
