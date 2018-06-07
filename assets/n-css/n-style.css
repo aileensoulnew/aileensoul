@@ -468,7 +468,7 @@ label.cameraButton input[accept*="camera"] {
 .upload-profile img {display: block; margin: 0 auto 0px; width:40px !important; height:auto !important; border-radius:0px !important;}
 .profile-img:hover .upload-profile{display:block; color:#fff;}
 .user-photo-name{text-align:center; padding-bottom: 10px;}
-.user-photo-name .profile-img img{width:100%; height:100%; border-radius:100%;}
+.user-photo-name .profile-img img{width:168px; height:168px; border-radius:100%;}
 .user-photo-name h3{margin:5px 0 0; letter-spacing: 1px;}
 .user-photo-name h3 a{color:#5c5c5c;}
 .user-photo-name p{color:#6f6f6f; letter-spacing: 1px;}
