@@ -189,9 +189,11 @@
                                         <div class="also-like-bottom">
                                             <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a></p>
                                         </div>
-
+										<div class="clearfix"></div>
                                     </div>
-                                </div>                           
+									
+                                </div> 
+								
                             </div>
                         </div>
                     </div>

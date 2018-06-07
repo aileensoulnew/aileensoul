@@ -232,42 +232,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                     </form>
 
-                    <!-- <div class="custom_footer_left fw">
-                        <div class="">
-                            <ul>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> About Us 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Blogs 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
+                    
                     
                 </div>
                 <div class="middle-part">                    

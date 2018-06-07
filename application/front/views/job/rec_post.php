@@ -65,6 +65,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push freeh3 cust-job-width paddnone">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php //echo $recruiter_header2; ?>
         <?php
         //$returnpage = $_GET['page'];
@@ -911,6 +913,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <!-- Register Popup Close -->
         <!-- START FOOTER -->
         <!-- <footer> -->
+        </div>
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
         <!-- </footer> -->
@@ -946,8 +949,6 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <?php } ?>
 
         <?php }else{?>
-
-
         <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
             <script src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
         <?php } else { ?>
@@ -1094,52 +1095,52 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         //save post End
 
         function experience(){
-                document.getElementById('exp_data').style.display = 'block';
-            }
+            document.getElementById('exp_data').style.display = 'block';
+        }
            
-            function not_experience(){
-                var melement = document.getElementById('exp_data');
-                if(melement.style.display == 'block'){
-                    melement.style.display = 'none';
-                    //value none if user have press yes button start
-                    $("#experience_year").val("");
-                    $("#experience_month").val("");
-                }
+        function not_experience(){
+            var melement = document.getElementById('exp_data');
+            if(melement.style.display == 'block'){
+                melement.style.display = 'none';
+                //value none if user have press yes button start
+                $("#experience_year").val("");
+                $("#experience_month").val("");
             }
-            function expyear_change()
+        }
+        function expyear_change()
+        {
+            var experience_year = document.querySelector("#experience_year").value;
+            if (experience_year)
             {
-                var experience_year = document.querySelector("#experience_year").value;
-                if (experience_year)
-                {
-                    $('#experience_month').attr('disabled', false);
-                    var experience_year = document.getElementById('experience_year').value;
-                    if (experience_year === '0 year') {
-                        $("#experience_month option[value='0 month']").attr('disabled', true);
-                    }
-                    else
-                    {
-                        $("#experience_month option[value='0 month']").attr('disabled', false);
-                    }
+                $('#experience_month').attr('disabled', false);
+                var experience_year = document.getElementById('experience_year').value;
+                if (experience_year === '0 year') {
+                    $("#experience_month option[value='0 month']").attr('disabled', true);
                 }
                 else
                 {
-                    $('#experience_month').attr('disabled', 'disabled');
+                    $("#experience_month option[value='0 month']").attr('disabled', false);
                 }
-                // var element = document.getElementById("experience_year");
-                // element.classList.add("valuechangecolor");
             }
-            function expmonth_click()
+            else
             {
-                // var element = document.getElementById("experience_month");
-                //element.classList.add("valuechangecolor");              
+                $('#experience_month').attr('disabled', 'disabled');
             }
-            $('#job_reg').on('hidden.bs.modal', function (e) {
-                $("#job_apply").val('');
-                $("#job_apply_userid").val('');
-                $("#job_save").val('');
-            });
+            // var element = document.getElementById("experience_year");
+            // element.classList.add("valuechangecolor");
+        }
+        function expmonth_click()
+        {
+            // var element = document.getElementById("experience_month");
+            //element.classList.add("valuechangecolor");              
+        }
+        $('#job_reg').on('hidden.bs.modal', function (e) {
+            $("#job_apply").val('');
+            $("#job_apply_userid").val('');
+            $("#job_save").val('');
+        });
         //validation start
-    $(document).ready(function() {
+        $(document).ready(function() {
             // $.validator.addMethod("lowercase", function(value, element, regexpr) {          
             //          return regexpr.test(value);
             //      }, "email Should be in Small Character");
@@ -1246,6 +1247,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         error.insertAfter(element);
                 },
             });
+            
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         });
         //BUTTON SUBMIT DISABLE AFTER SOME TIME START
         $("#submit").on('click', function() {

@@ -37,34 +37,37 @@
           </style>
     </head>
     <body class="profile-main-page">    
-        <?php 
-        if($job_deactive == 0  && $this->job_profile_set == 1)
-            echo $job_header2;
-        else if ($user_id != "" && ($job_deactive > 0 || $this->job_profile_set == 1)) {
-            echo $header_profile;
-        }
-        else if($user_id != "" && $this->job_profile_set == 0)
-        {
-             echo $header_profile;
-        }
-        $noLogin = "";
-        if($user_id == "")
-        {
-            $noLogin = "new-ld-page";
-        }
-        if($this->job_profile_set == 0 || $job_deactive > 0)
-        {?>
-            <div class="middle-section middle-section-banner <?php echo $noLogin;?>">
-        <?php
-            echo $search_banner;
-        }
-        else{ ?>
-            <div class="middle-section">
-        <?php } ?>
-        
-            <div class="container pt20 mobp0 mobmt15">
-                <div ng-view></div>
-            </div>
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
+            <?php 
+            if($job_deactive == 0  && $this->job_profile_set == 1)
+                echo $job_header2;
+            else if ($user_id != "" && ($job_deactive > 0 || $this->job_profile_set == 1)) {
+                echo $header_profile;
+            }
+            else if($user_id != "" && $this->job_profile_set == 0)
+            {
+                 echo $header_profile;
+            }
+            $noLogin = "";
+            if($user_id == "")
+            {
+                $noLogin = "new-ld-page";
+            }
+            if($this->job_profile_set == 0 || $job_deactive > 0)
+            {?>
+                <div class="middle-section middle-section-banner <?php echo $noLogin;?>">
+            <?php
+                echo $search_banner;
+            }
+            else{ ?>
+                <div class="middle-section">
+            <?php } ?>
+            
+                <div class="container pt20 mobp0 mobmt15">
+                    <div ng-view></div>
+                </div>
+            </div>        
         </div>        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>

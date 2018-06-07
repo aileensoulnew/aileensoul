@@ -502,7 +502,7 @@ if($browser == "Firefox")
 		<div class="all-profile-box content custom-scroll">
 			<ul class="all-pr-list">
 				<li>
-					<a href="#">
+					<a href="<?php echo $job_right_profile_link; ?>">
 						<div class="all-pr-img">
 							<img src="https://www.aileensoul.com/assets/img/i1.png?ver=1517557803" alt="Job Profile">
 						</div>
@@ -510,7 +510,7 @@ if($browser == "Firefox")
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="<?php echo $recruiter_right_profile_link; ?>">
 						<div class="all-pr-img">
 							<img src="https://www.aileensoul.com/assets/img/i2.jpg?ver=1517557803" alt="Recruiter Profile">
 						</div>
@@ -518,7 +518,7 @@ if($browser == "Firefox")
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="<?php echo $freelance_right_profile_link; ?>">
 						<div class="all-pr-img">
 							<img src="https://www.aileensoul.com/assets/img/i3.jpg?ver=1517557803" alt="Freelance Profile">
 						</div>
@@ -526,7 +526,7 @@ if($browser == "Firefox")
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="<?php echo $business_right_profile_link; ?>">
 						<div class="all-pr-img">
 							<img src="https://www.aileensoul.com/assets/img/i4.jpg?ver=1517557803" alt="Business Profile">
 						</div>
@@ -534,7 +534,7 @@ if($browser == "Firefox")
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="<?php echo $artist_right_profile_link; ?>">
 						<div class="all-pr-img">
 							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
 						</div>
@@ -547,54 +547,6 @@ if($browser == "Firefox")
 							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
 						</div>
 						<span>more</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<div class="all-pr-img">
-							<img src="https://www.aileensoul.com/assets/img/i5.jpg?ver=1517557803" alt="Artistic Profile">
-						</div>
-						<span>Artistic Profile</span>
 					</a>
 				</li>
 			</ul>

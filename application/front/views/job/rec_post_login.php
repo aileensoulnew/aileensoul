@@ -28,7 +28,8 @@
     <!-- END HEAD -->
   
     <body class="page-container-bg-solid detail-job-no-login page-boxed no-login freeh3 cust-job-width paddnone cus-error">
-
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">  
         <header>
             <div class="container">
                 <div class="row">
@@ -577,7 +578,7 @@
                                                 <p class="loca-exp">
                                                     <span class="exp">
                                                         <span><!-- <img class="pr5" src="<?php //echo base_url('assets/images/exp.png'); ?>" title="experienceimage">
- -->
+                                                -->
                                                             <?php
                                                             if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
 
@@ -777,6 +778,7 @@
                 </div>
             </div>
         </section>
+    </div>
         <!-- Model Popup Open -->
         <!-- Bid-modal  -->
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
@@ -1198,13 +1200,15 @@
 
         <script>
 
-                                                var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
-                                                var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
-                                                var base_url = '<?php echo base_url(); ?>';
-                                                var skill = '<?php echo $this->input->get('skills'); ?>';
-                                                var place = '<?php echo $this->input->get('searchplace'); ?>';
-                                                var postslug = '<?php echo $this->uri->segment(3); ?>';
-
+            var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+            var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var skill = '<?php echo $this->input->get('skills'); ?>';
+            var place = '<?php echo $this->input->get('searchplace'); ?>';
+            var postslug = '<?php echo $this->uri->segment(3); ?>';
+            
+            $('#main_loader').hide();
+            $('#main_page_load').show();
 
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_post_login.js?ver=' . time()); ?>"></script>
