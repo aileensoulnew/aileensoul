@@ -2926,6 +2926,7 @@ body, body.no-login {padding-bottom:60px;}
 	.bottom-bnr-div p{font-size:16px;}
 	.bottom-bnr-div .btn-1{font-size:14px; padding:8px 25px;}
 	.page-title h3{font-size:20px;}
+	.right-header{padding-top:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

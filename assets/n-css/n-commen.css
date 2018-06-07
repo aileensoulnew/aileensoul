@@ -1577,7 +1577,7 @@ svg path{
 	.mobile-header header h2{padding-right:10px;}
 	.mobile-header header{padding:5px 0;}
 	.mobile-header .left-header{width:100%; float:left;}
-	.mobile-header .left-header form{margin:0 auto; float:none;}
+	.mobile-header .left-header form{margin:0 auto; float:none; width:100%; padding-left:0;}
 	.mobile-header .left-header input[type="text"]{width:100%; margin-bottom:5px;}
 	.sub-header .dropdown.open::before{display:none;}
 	.search-mob-block{display:block;}
