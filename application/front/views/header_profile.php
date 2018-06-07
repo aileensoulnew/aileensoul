@@ -285,16 +285,22 @@ if($browser == "Firefox")
         <div class="header animated fadeInDownBig">
             <div class="container">
                 <div class="left-header">
-                    <h2 class="logo"><a href="#"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png') ?>"></a></h2>
+                    <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png') ?>"></a></h2>
                     <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
                     <div class="search-mob-block">
                         <div class="">
-                            <form ng-submit="search_submit" action="<?php echo base_url('searchh') ?>">
+                            <?php 
+                            $first_segment = $this->uri->segment(1);
+                            $page_arr = array('searchh','');
+                            if(in_array($first_segment, $page_arr)): ?>
+                            <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('searchh') ?>">
                                 <input type="text" name="q" placeholder="Search.." id="mob_search">
                             </form>
-                            <!-- <a href="#search">
+                            <?php else: ?>
+                            <a href="#search">
                                 <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-                            </a> -->
+                            </a>
+                        <?php endif; ?>
                         </div>
                         <div id="search">
                             <form method="get">
@@ -547,19 +553,26 @@ if($browser == "Firefox")
      classie.toggle( showRight, 'disabled' );
     }
    }
-   
-   $(function () {
-    $('a[href="#search"]').on('click', function (event) {
-     event.preventDefault();
-     $('#search').addClass('open');
-     $('#search > form > input[type="search"]').focus();
+
+    $(function () {
+        $('a[href="#search"]').on('click', function (event) {
+            alert(123);
+            event.preventDefault();
+            $('#search').addClass('open');
+            $('#search > form > input[type="search"]').focus();
+        });
+        $('#search, #search button.close-new').on('click keyup', function (event) {
+            if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                $(this).removeClass('open');
+            }
+        });
+        $("#mob_search").keypress(function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                $("#mobile_ser_frm").submit();
+            }
+        });
     });
-    $('#search, #search button.close-new').on('click keyup', function (event) {
-     if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
-      $(this).removeClass('open');
-     }
-    });
-   });
 
    function Notificationheader() {
         getNotification();

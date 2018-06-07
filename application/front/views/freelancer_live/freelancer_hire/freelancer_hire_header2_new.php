@@ -185,7 +185,7 @@ $userid = $this->session->userdata('aileenuser');
     </div>
 </div>
 <div class="mobile-header">
-    <header class="">
+    <!-- <header class="">
         <div class="animated fadeInDownBig">
             <div class="container">
 
@@ -230,8 +230,8 @@ $userid = $this->session->userdata('aileenuser');
             </div>
         </div>
 
-    </header>
-
+    </header> -->
+    <?php echo $header_inner_profile ?>
 
     <div class="sub-header">
 		<div class="container">
@@ -696,7 +696,7 @@ $userid = $this->session->userdata('aileenuser');
     }
 </script>
 <script>
-			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+			/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 				showRight = document.getElementById( 'showRight' ),
 				body = document.body;
 
@@ -724,6 +724,6 @@ $userid = $this->session->userdata('aileenuser');
 						$(this).removeClass('open');
 					}
 				});
-			});
+			});*/
 		</script>
  <!-- all message notification header end -->
