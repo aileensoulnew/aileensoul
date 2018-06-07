@@ -29,7 +29,7 @@
         <section>
             <!-- MIDDLE SECTION START -->
             <div class="user-midd-section" id="paddingtop_fixed">
-                <div class="container padding-360">
+                <div class="container mobp0">
                     <div class="">
                         <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt">
                             <div class="">
@@ -211,7 +211,7 @@
                                     </div>
                                 </div>
 
-                                <?php echo $left_footer; ?>
+                               
                                 
                                 <?php //}  ?>
                                 <div id="khyati"></div>
@@ -282,6 +282,7 @@
                                 </ul>
                             </div>
                             <?php echo $right_profile_view; ?>
+							 <?php echo $left_footer; ?>
                         </div>
                     </div>
                 </div>
@@ -292,7 +293,7 @@
         </div>
         <!-- BEGIN FOOTER -->
         <!-- BID MODAL START -->
-        <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
+        <div class="modal fade new-modal biderror" id="bidmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         

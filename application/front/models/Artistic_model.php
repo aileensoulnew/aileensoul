@@ -602,8 +602,7 @@ class Artistic_model extends CI_Model {
         $sql = "SELECT * FROM ailee_blog
                 WHERE status='publish' AND
                 blog_slug = 'aileensoul-a-unique-platform-to-showcase-your-artistic-sensibilities' 
-                OR blog_slug = 'show-your-art-to-the-world' 
-                OR blog_slug = '5-late-blooming-legendary-artists-who-proved-that-age-is-just-a-number'
+                OR blog_slug = 'show-your-art-to-the-world'
                 OR blog_slug = 'art-to-awaken-your-soul'";
 
         $query = $this->db->query($sql);

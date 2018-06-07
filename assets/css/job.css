@@ -2343,7 +2343,7 @@ fieldset.main_select_data span:after{
         padding-left:225px
     }
     #paddingtop_fixed{
-        padding-top:81px!important
+        /*padding-top:81px!important*/
     }
     .experience_year{
         margin-right:34px

@@ -75,7 +75,7 @@
                             <a href="<?php echo $freelance_hire_right_profile_link; ?>">
                                 <div class="error-pr-box">
                                     <img src="<?php echo base_url('assets/n-images/e-free-apply.png?ver=' . time()) ?>g">
-                                    <p>Looking for Freelance Work? Create Free Freelancer Profile Account</p>
+                                    <p>Looking for Remote Team? Create Free Freelance Employer Profile Account</p>
                                 </div>
                             </a>
                         </li>
@@ -83,7 +83,7 @@
                             <a href="<?php echo $freelance_apply_right_profile_link; ?>">
                                 <div class="error-pr-box">
                                     <img src="<?php echo base_url('assets/n-images/e-free.png?ver=' . time()) ?>g">
-                                    <p>Looking for Remote Team? Create Free Freelance Employer Profile Account</p>
+                                    <p>Looking for Freelance Work? Create Free Freelancer Profile Account</p>
                                 </div>
                             </a>
                         </li>

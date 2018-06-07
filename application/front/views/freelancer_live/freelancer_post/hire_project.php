@@ -55,7 +55,7 @@
 		<section>
 			<!-- MIDDLE SECTION START -->
 			<div class="user-midd-section" id="paddingtop_fixed">
-				<div class="container padding-360">
+				<div class="container mobp0">
 					<div class="row4">
 						<div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt"><div class="">
 							<div class="full-box-module">   

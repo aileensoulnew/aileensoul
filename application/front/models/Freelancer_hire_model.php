@@ -238,8 +238,7 @@ class Freelancer_hire_model extends CI_Model {
                 WHERE status='publish' AND
                 blog_slug = 'how-to-kick-start-your-freelance-career-a-complete-beginners-guide' 
                 OR blog_slug = 'take-your-freelance-career-to-greater-heights-with-these-popular-platforms' 
-                OR blog_slug = 'it-s-raining-dollars-online-know-how-to-earn-online' 
-                OR blog_slug = '8-freelancing-benefits-not-just-earn-but-live-extra-too'";
+                OR blog_slug = 'it-s-raining-dollars-online-know-how-to-earn-online'";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();   
         return $result_array;

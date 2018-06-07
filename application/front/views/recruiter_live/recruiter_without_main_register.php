@@ -125,11 +125,15 @@
                             <h3>Related Articles</h3>
                         </div>
                         <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="col-md-3 col-sm-6" ng-repeat="blog in relatedBlog">
-                                <div class="rel-art-box">
-                                    <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
-                                    <div class="rel-art-name">
-                                        <a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a>
+                            <div class="col-md-4 col-sm-6" ng-repeat="blog in relatedBlog">
+                                <div class="also-like-box">
+									<div class="rec-img">
+										<a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
+										<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
+										</a>
+									</div>
+                                    <div class="also-like-bottom">
+                                        <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a></p>
                                     </div>
                                 </div>
                             </div>                                         
