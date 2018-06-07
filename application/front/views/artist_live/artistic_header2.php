@@ -153,22 +153,21 @@ $userid = $this->session->userdata('aileenuser');
 				<div class="left-header">
 					<h2 class="logo"><a href="#"><img src="<?php echo base_url('assets/n-images/mob-logo.png?ver=' . time()) ?>"></a></h2>
 					<div class="search-mob-block">
-						
-							<a href="#search">
-								<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-							</a>
-						
+						<a href="#search">
+							<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+						</a>
 						<div id="search">
-							
-							<form method="get">
+							<form onsubmit="artistsearchMobileSubmit()" action="javascript:void(0)" method="get">
 								<div class="new-search-input">
-									<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-									<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" />
-									
+									<input id="m_tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+									<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
+									<!-- <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" /> -->
+									<!-- <input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" /> -->
 								</div>
 								<div class="new-search-btn">
-									<button type="button" class="close-new btn">Cancel</button>
-									<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
+									<!-- <input id="mob_search_btn" name="search_submit" value="Search" onclick="return checkvalue()" type="submit"> -->
+									<button type="submit" id="m_search_btn" name="m_search_submit" class="btn btn-primary" onclick="m_checval()">Search</button>
+									<button type="button" class="close-new btn mob_close" id="cancel_mobile">Cancel</button>
 								</div>
 							</form>
 						</div>
@@ -555,4 +554,55 @@ $userid = $this->session->userdata('aileenuser');
     	    window.location.href = base_url + 'artist/search/' + keyword + '-in-' + city;
     	}
     }
+
+    // Mobile Screen Search
+    function artistsearchMobileSubmit(){
+    	var keyword = $("#m_tags").val().toLowerCase().split(' ').join('+');
+    	var city = $("#m_searchplace").val().toLowerCase().split(' ').join('+');
+    	// REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+    	var keyworddata = [];
+    	if(keyword != ""){
+    	    keyworddata = keyword.split(",");
+    	    // remove in from array
+    	    if(keyworddata.indexOf("in") > -1 && city != ""){
+    	        keyworddata.splice(keyworddata.indexOf("in"),1);
+    	    }
+    	    keyword = keyworddata.join('-').toString();
+    	}
+    	var citydata = [];
+    	if(city != ""){
+    	    citydata = city.split(",");
+    	    // remove in from array
+    	    // if(citydata.indexOf("in") > -1 && city != ""){
+    	    //     citydata.splice(citydata.indexOf("in"),1);
+    	    // }
+    	    city = citydata.join('-').toString();
+    	}
+
+    	if (keyword == '' && city == '') {
+    	    return false;
+    	} else if (keyword != '' && city == '') {
+    	    window.location.href = base_url + 'artist/search/' + keyword;
+    	} else if (keyword == '' && city != '') {
+    	    window.location.href = base_url + 'artist/search/artist-in-' + city;
+    	} else {
+    	    window.location.href = base_url + 'artist/search/' + keyword + '-in-' + city;
+    	}
+    }
+
+    function m_checval(){
+    	var keyword = $("#m_tags").val();
+    	var city = $("#m_searchplace").val();
+    	if(keyword == "" && city == ""){
+    		return false;
+    	}
+    }
+
+    $(document).on('click','.mob_close', function (event) {
+    	if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+            $('#search').removeClass('open');
+        }
+    });
+
+
 </script>

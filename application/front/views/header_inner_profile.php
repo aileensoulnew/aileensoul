@@ -315,21 +315,24 @@ if($browser == "Firefox")
    }
    
    $(function () {
-    $('a[href="#search"]').on('click', function (event) {
-     event.preventDefault();
-     $('#search').addClass('open');
-     $('#search > form > input[type="search"]').focus();
-    });
-    $('#search, #search button.close-new').on('click keyup', function (event) {
-     if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
-      $(this).removeClass('open');
-     }
-    });
+       
+
    });
   </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
         var app = angular.module('headerApp', []);
+        $(document).on('click','a[href="#search"]', function(){
+            event.preventDefault();
+            $('#search').addClass('open');
+            $('#search > form > input[type="search"]').focus();
+        });
+
+        $(document).on('click keyup','#search, #search button.close-new', function (event) {
+            if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                $(this).removeClass('open');
+            }
+        });
 </script>     
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>

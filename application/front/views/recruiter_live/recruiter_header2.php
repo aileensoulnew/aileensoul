@@ -192,18 +192,17 @@ $userid = $this->session->userdata('aileenuser');
 					<h2 class="logo"><a href="#"><img src="<?php echo base_url('assets/n-images/mob-logo.png?ver=' . time()) ?>"></a></h2>
 					<div class="search-mob-block">
 						<a href="#search">
-							<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-						</a>
+                            <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+                        </a>
 						<div id="search">
-							<form method="get">
+							<form onsubmit="recruitersearchMobileSubmit()" action="javascript:void(0)" method="get">
 								<div class="new-search-input">
-									<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-									<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" />
-									
+									<input id="m_tags" class="tags ui-autocomplete-input rec_search_title" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+									<input id="m_searchplace" class="searchplace ui-autocomplete-input rec_search_loc" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
 								</div>
 								<div class="new-search-btn">
-									<button type="button" class="close-new btn">Cancel</button>
-									<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
+									<button type="button" class="close-new btn close">Cancel</button>
+									<button type="submit" id="m_search_btn" class="btn btn-primary" onclick="return m_checkvalue();">Search</button>
 								</div>
 							</form>
 						</div>
@@ -566,16 +565,31 @@ $userid = $this->session->userdata('aileenuser');
 	}
 	
 	$(function () {
-				$('a[href="#search"]').on('click', function (event) {
-					event.preventDefault();
-					$('#search').addClass('open');
-					$('#search > form > input[type="search"]').focus();
-				});
-				$('#search, #search button.close-new').on('click keyup', function (event) {
-					if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
-						$(this).removeClass('open');
-					}
-				});
-			});
+		$(document).on('click','a[href="#search"]', function(){
+            event.preventDefault();
+            $('#search').addClass('open');
+            $('#search > form > input[type="search"]').focus();
+        });
+		$('#search, #search button.close-new').on('click keyup', function (event) {
+			if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+				$(this).removeClass('open');
+			}
+		});
+	});
+
+
+	function m_checval(){
+        var keyword = $("#m_tags").val();
+        var city = $("#m_searchplace").val();
+        if(keyword == "" && city == ""){
+            return false;
+        }
+    }
+
+    $(document).on('click','.mob_close', function (event) {
+        if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+            $('#search').removeClass('open');
+        }
+    });
 </script>
 <!-- all popup close close using esc end -->

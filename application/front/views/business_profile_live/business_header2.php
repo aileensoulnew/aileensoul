@@ -247,15 +247,14 @@ if($browser == "Firefox")
                         
                         <div id="search">
                             
-                            <form method="get">
+                            <form onsubmit="businesssearchMobileSubmit()" method="get" action="javascript:void(0)">
                                 <div class="new-search-input">
-                                    <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-                                    <input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" />
-                                    
+                                	<input id="m_tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+									<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
                                 </div>
 								<div class="new-search-btn">
 									<button type="button" class="close-new btn">Cancel</button>
-									<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
+									<button type="submit" id="m_search_btn" class="btn btn-primary" onclick="return m_checval();">Search</button>
 								</div>
 							</form>
                         </div>
@@ -962,6 +961,53 @@ if($browser == "Firefox")
             window.location.href = base_url + 'business/search/' + keyword + '-business-in-' + city;
         }
     }
+
+    function businesssearchMobileSubmit(){
+        var keyword = $("#m_tags").val().toLowerCase().split(' ').join('+');
+        var city = $("#m_searchplace").val().toLowerCase().split(' ').join('+');
+        // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+        var keyworddata = [];
+        if(keyword != ""){
+            keyworddata = keyword.split(",");
+            // remove in from array
+            if(keyworddata.indexOf("in") > -1 && city != ""){
+                keyworddata.splice(keyworddata.indexOf("in"),1);
+            }
+            keyword = keyworddata.join('-').toString();
+        }
+        var citydata = [];
+        if(city != ""){
+            citydata = city.split(",");
+            // remove in from array
+            // if(citydata.indexOf("in") > -1 && city != ""){
+            //     citydata.splice(citydata.indexOf("in"),1);
+            // }
+            city = citydata.join('-').toString();
+        }
+        if (keyword == '' && city == '') {
+            return false;
+        } else if (keyword != '' && city == '') {
+            window.location.href = base_url + 'business/search/' + keyword;
+        } else if (keyword == '' && city != '') {
+            window.location.href = base_url + 'business/search/business-in-' + city;
+        } else {
+            window.location.href = base_url + 'business/search/' + keyword + '-business-in-' + city;
+        }
+    }
+
+    function m_checval(){
+    	var keyword = $("#m_tags").val();
+    	var city = $("#m_searchplace").val();
+    	if(keyword == "" && city == ""){
+    		return false;
+    	}
+    }
+
+    $(document).on('click','.mob_close', function (event) {
+    	if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+            $('#search').removeClass('open');
+        }
+    });
 </script>
 
 <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>

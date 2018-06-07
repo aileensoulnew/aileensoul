@@ -250,3 +250,32 @@ function recruitersearchSubmit(){
         window.location.href = base_url + 'recruiter/search/' + keyword + '-candidates-in-' + city;
     }
 }
+
+function recruitersearchMobileSubmit(){
+    var keyword = $("#m_tags").val().toLowerCase().split(' ').join('+');
+    var city = $("#m_searchplace").val().toLowerCase().split(' ').join('+');
+    var keyworddata = [];
+    if(keyword != ""){
+        keyworddata = keyword.split(",");
+        // remove in from array
+        if(keyworddata.indexOf("in") > -1 && city != ""){
+            keyworddata.splice(keyworddata.indexOf("in"),1);
+        }
+        keyword = keyworddata.join('-').toString();
+    }
+    var citydata = [];
+    if(city != ""){
+        citydata = city.split(",");
+        city = citydata.join('-').toString();
+    }
+
+    if (keyword == '' && city == '') {
+        return false;
+    } else if (keyword != '' && city == '') {
+        window.location.href = base_url + 'recruiter/search/' + keyword;
+    } else if (keyword == '' && city != '') {
+        window.location.href = base_url + 'recruiter/search/candidates-in-' + city;
+    } else {
+        window.location.href = base_url + 'recruiter/search/' + keyword + '-candidates-in-' + city;
+    }
+}
