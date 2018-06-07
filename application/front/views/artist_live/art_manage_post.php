@@ -49,28 +49,30 @@
           
     </head>
 <!-- END HEADER -->
-<body   class="page-container-bg-solid page-boxed">
-<?php echo $header; ?>
-<?php echo $artistic_header2; ?>
-<section class="custom-row">
-<?php echo $artistic_common; ?>
-<div class="text-center tab-block">
-    <div class="container mob-inner-page">
-       <a href="<?php echo site_url('artist/p/' . $get_url . '/photos'); ?>" title="Photo">
-            Photo
-        </a>
-       <a href="<?php echo site_url('artist/p/' . $get_url . '/videos'); ?>" title="Video">
-            Video
-        </a>
-       <a href="<?php echo site_url('artist/p/' . $get_url . '/audios'); ?>" title="Audio">
-            Audio
-        </a>
-        <a href="<?php echo site_url('artist/p/' . $get_url . '/pdf') ?>" title="Pdf">
-            PDf
-        </a>
+<body class="page-container-bg-solid page-boxed">
+    <?php $this->load->view('page_loader'); ?>
+    <div id="main_page_load" style="display: none;">
+    <?php echo $header; ?>
+    <?php echo $artistic_header2; ?>
+    <section class="custom-row">
+    <?php echo $artistic_common; ?>
+    <div class="text-center tab-block">
+        <div class="container mob-inner-page">
+           <a href="<?php echo site_url('artist/p/' . $get_url . '/photos'); ?>" title="Photo">
+                Photo
+            </a>
+           <a href="<?php echo site_url('artist/p/' . $get_url . '/videos'); ?>" title="Video">
+                Video
+            </a>
+           <a href="<?php echo site_url('artist/p/' . $get_url . '/audios'); ?>" title="Audio">
+                Audio
+            </a>
+            <a href="<?php echo site_url('artist/p/' . $get_url . '/pdf') ?>" title="Pdf">
+                PDf
+            </a>
+        </div>
     </div>
-</div>
-<div class="user-midd-section">
+    <div class="user-midd-section">
     <div class="container art_container padding-360 manage-post-custom">        
             <div class="profile-box-custom left_side_posrt">
                 <div class="full-box-module business_data">
@@ -213,17 +215,16 @@
             </div>
             <!-- popup start -->
             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business"  >
-<?php 
-$userid = $this->session->userdata('aileenuser');
-$other_user = $artisticdata[0]['art_id'];
-$contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
- $userdata = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-$loginuser = $userdata[0]['art_id'];
- $contition_array = array('follow_type' => '1', 'follow_status' => '1');
- $search_condition = "((follow_from  = '$loginuser' AND follow_to  = ' $other_user') OR (follow_from  = '$other_user' AND follow_to  = '$loginuser'))";
- $contactperson = $this->common->select_data_by_search('follow', $search_condition, $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = '', $groupby = '');
- if((count($contactperson) == 2) || ($artisticdata[0]['user_id'] == $userid)){
-?>
+            <?php 
+            $userid = $this->session->userdata('aileenuser');
+            $other_user = $artisticdata[0]['art_id'];
+            $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
+             $userdata = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $loginuser = $userdata[0]['art_id'];
+             $contition_array = array('follow_type' => '1', 'follow_status' => '1');
+             $search_condition = "((follow_from  = '$loginuser' AND follow_to  = ' $other_user') OR (follow_from  = '$other_user' AND follow_to  = '$loginuser'))";
+             $contactperson = $this->common->select_data_by_search('follow', $search_condition, $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = '', $groupby = '');
+             if((count($contactperson) == 2) || ($artisticdata[0]['user_id'] == $userid)){ ?>
                 <div class="post-editor col-md-12">
                     <div class="main-text-area col-md-12">
                         <div class="popup-img"> 
@@ -260,23 +261,20 @@ $loginuser = $userdata[0]['art_id'];
                                       <img src="<?php echo ART_PROFILE_THUMB_UPLOAD_URL . $userimageposted; ?>" name="image_src" id="image_src" alt="<?php echo $userimageposted; ?>" />
                                                                 <?php
                                                             } else { ?>
-               
-                <img  src="<?php echo base_url(NOARTIMAGE); ?>"  alt="<?php echo "NOARTIMAGE"; ?>">
-                <?php } }?>
-               
-
+                    <img  src="<?php echo base_url(NOARTIMAGE); ?>"  alt="<?php echo "NOARTIMAGE"; ?>">
+                    <?php } }?>
                     </a> 
                         </div>
                         <div id="myBtn3"  class="editor-content popup-text" onclick="return modelopen();">
                             <span> Post Your Art....</span> 
-<div class="padding-left padding_les_left camer_h">
+                            <div class="padding-left padding_les_left camer_h">
                                 <i class=" fa fa-camera" >
                                 </i> 
                             </div>
                         </div>    
                     </div>
                 </div>
-<?php }?>
+            <?php }?>
             <!-- The Modal -->
             <div id="myModal3" class="modal-post">
                 <!-- Modal content -->
@@ -306,7 +304,7 @@ $loginuser = $userdata[0]['art_id'];
                       $s3 = new S3(awsAccessKey, awsSecretKey);
                      $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
 
-if ($info) { ?>
+        if ($info) { ?>
         <img  src="<?php echo ART_PROFILE_THUMB_UPLOAD_URL . $artisticdata[0]['art_user_image']; ?>"  alt="<?php echo $artisticdata[0]['art_user_image']; ?>">
             <?php
                 } else { ?>
@@ -324,7 +322,7 @@ if ($info) { ?>
                                 <i class=" fa fa-camera" >
                                 </i> 
                             </div>
-</div>
+        </div>
                         </div>
                         <div class="row"></div>
                         <div  id="text"  class="editor-content col-md-12 popup-textarea" >
@@ -469,7 +467,7 @@ if ($info) { ?>
                 </div>
              </div>
         </div>
-
+</div>
       
 
 <?php echo $footer; ?>

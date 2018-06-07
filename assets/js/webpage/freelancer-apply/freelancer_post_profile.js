@@ -91,7 +91,7 @@ function save_user(abc)
 {
     $.ajax({
         type: 'POST',
-        url: base_url + "freelancer/save_user1",
+        url: base_url + "freelancer_hire_live/save_user1",
         data: 'user_id=' + abc,
         success: function (data) {
             $('.' + 'saveduser' + abc).html(data).addClass('butt_rec');

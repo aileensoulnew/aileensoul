@@ -21,6 +21,8 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 </head>
 <body   class="page-container-bg-solid page-boxed botton_footer">
+<?php $this->load->view('page_loader'); ?>
+<div id="main_page_load" style="display: none;">
 <?php echo $header; ?>
 <?php echo $artistic_header2; ?>
 <section class="custom-row">
@@ -138,7 +140,7 @@
             </div>
         </div>
                         <!-- Model Popup Close -->
-
+</div>
   <?php echo $login_footer ?>
 <?php echo $footer; ?>
 
@@ -158,6 +160,10 @@
 var base_url = '<?php echo base_url(); ?>';   
 var data= <?php echo json_encode($demo); ?>;
 var data1 = <?php echo json_encode($de); ?>;
+
+$('#main_loader').hide();
+$('#main_page_load').show();
+
 $(document).ready(function () { 
   $('video, audio').mediaelementplayer();
 });

@@ -441,6 +441,7 @@ class Artistic_model extends CI_Model {
         if($limit){
             $sql .= " Limit ". $limit;   
         }
+        // echo $sql;
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
 
@@ -517,6 +518,7 @@ class Artistic_model extends CI_Model {
             if($limit){
                 $sql .= " LIMIT ". $limit;
             }
+            // echo $sql;
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
             // echo $this->db->last_query();

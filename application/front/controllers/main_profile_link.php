@@ -45,7 +45,7 @@
         $this->business_profile_link = base_url("business-search");
         $this->artist_profile_link = base_url("find-artist");
         $this->job_profile_link = base_url("job-search");
-        $this->recruiter_profile_link = base_url("recruiter/");
+        $this->recruiter_profile_link = base_url("recruiter");
         $this->freelance_hire_profile_link = base_url("freelance-profile");
         $this->freelance_apply_profile_link = base_url("freelance-profile");
         $this->business_profile_set = 0;

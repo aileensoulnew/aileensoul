@@ -320,18 +320,18 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
 																					
                         <!--left bar box end-->
-                        <div  class="add-post-button mob-block">
-                            <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+                        <!-- <div  class="add-post-button mob-block">
+                            <?php /*if ($this->session->userdata('aileenuser') == $recliveid) { ?>
                                 <a class="btn btn-3 btn-3b" id="rec_post_job2" href="<?php echo base_url('recruiter/add-post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job 123</a>
-                            <?php } ?>
+                            <?php }*/ ?>
                         </div>
                         <div class="mob-none">
                             <div  class="add-post-button">
-                                <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+                                <?php /*if ($this->session->userdata('aileenuser') == $recliveid) { ?>
                                     <a class="btn btn-3 btn-3b" id="rec_post_job1" href="<?php echo base_url('recruiter/add-post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job 123</a>
-                                <?php } ?>
+                                <?php }*/ ?>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
 

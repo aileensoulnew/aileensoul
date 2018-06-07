@@ -63,6 +63,8 @@ function artistic_followers(slug_id, pagenum)
             } else {
                 $("#dropdownclass").removeClass("no-post-h2");
             }
+            $('#main_loader').hide();
+            $('#main_page_load').show();
             isProcessing = false;
         }
     });

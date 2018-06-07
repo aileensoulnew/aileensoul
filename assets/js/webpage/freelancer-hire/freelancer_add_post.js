@@ -142,6 +142,9 @@ $(document).ready(function () {
             },
             est_time: {
                 regx_num_space: /^[0-9][a-zA-Z\s]+$/
+            },
+            rating: {
+                required: true,
             }
 
         },
@@ -175,8 +178,18 @@ $(document).ready(function () {
             },
             state: {
                 required: "Please select state"
+            },
+            rating: {
+                required: "Please select work type"
             }
 
+        },
+        errorPlacement: function(error, element) {
+            if (element.attr("name") == "rating") {
+                error.insertAfter("#rating_div");
+            } else {
+                error.insertAfter(element);
+            }
         },
 
     });

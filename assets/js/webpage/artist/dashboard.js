@@ -135,6 +135,9 @@ function artistic_dashboard_post(slug, pagenum) { //alert("hii"); alert(slug);
             }
             isProcessing = false;
             $('video, audio').mediaelementplayer();
+
+            $('#main_loader').hide();
+            $('#main_page_load').show();
         }
     });
 }

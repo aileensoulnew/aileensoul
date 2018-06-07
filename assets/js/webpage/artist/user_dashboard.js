@@ -69,9 +69,11 @@ function artistic_dashboard_post(slug, pagenum) { //alert("hii"); alert(slug);
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             isProcessing = false;
-             $('video, audio').mediaelementplayer();
+            $('video, audio').mediaelementplayer();
 
-             $('.all-comment-comment-box').css('border-bottom','0px');
+            $('.all-comment-comment-box').css('border-bottom','0px');
+            $('#main_loader').hide();
+            $('#main_page_load').show();
 
         }
     });

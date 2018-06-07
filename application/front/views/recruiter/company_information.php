@@ -268,7 +268,7 @@
                                     <?php
                                     if ($complogo1) {
                                         ?>
-                                        <img src="<?php echo base_url($this->config->item('rec_profile_thumb_upload_path') . $complogo1) ?>"  style="width:100px;height:100px;" class="job_education_certificate_img" alt="<?php echo $complogo1; ?>">
+                                        <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL .$complogo1 ?>"  style="width:100px;height:100px;" class="job_education_certificate_img" alt="<?php echo $complogo1; ?>">
                                         <?php
                                     }
                                     ?>
