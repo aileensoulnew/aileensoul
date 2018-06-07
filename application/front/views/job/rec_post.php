@@ -92,7 +92,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <!-- START CONTAINER -->
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
-                <div class="container padding-360">
+                <div class="container mobp0">
                     <!-- MIDDLE SECTION START -->
                     <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt" style="position: absolute !important;">
                         <!--left bar box start-->

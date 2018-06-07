@@ -110,10 +110,12 @@ header("Pragma: no-cache"); // HTTP/1.0
             </style>
     </head>
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
-    <body class="blog-page blog-d old-no-login">
-        <?php }else{?>
+        <body class="blog-page blog-d old-no-login">
+    <?php }else{?>
         <body class="blog-page blog-d">
-        <?php }?>	
+    <?php }?>	
+    <?php $this->load->view('page_loader'); ?>
+    <div id="main_page_load" style="display: none;">
         <div class="main-inner">
             <div class="web-header">
 	            <header class="custom-header">
@@ -400,7 +402,6 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
 	    		</div>	    		
 	    	</div>
-
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
@@ -409,8 +410,9 @@ header("Pragma: no-cache"); // HTTP/1.0
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
         <?php } ?>
         <?php
-        echo $login_footer
+            echo $login_footer
         ?>
+    </div>
         <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
             <script src="<?php echo base_url('assets/js/jquery.validate.js?ver=' . time()); ?>"></script>
@@ -458,12 +460,12 @@ header("Pragma: no-cache"); // HTTP/1.0
                 });        
             });
         </script>
-
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
+        <script src="<?php echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
+        <?php /* if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
         <?php } else { ?>
             <script src="<?php echo base_url('assets/js_min/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
 
-        <?php } ?>
+        <?php } */?>
     </body>
 </html>

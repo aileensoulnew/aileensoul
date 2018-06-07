@@ -72,6 +72,8 @@ app.controller('blogDetailController', function ($scope, $http) {
 				isProcessing = false;
 				$scope.iscategorySelected = false;
 				$scope.categorySelectedId = '';
+				$('#main_loader').hide();
+				$('#main_page_load').show();
 			}
 		});
 	}

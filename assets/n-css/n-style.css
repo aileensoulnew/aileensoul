@@ -2501,6 +2501,7 @@ body, body.no-login {padding-bottom:60px;}
 	.subscribe-box h4{margin-bottom:80px; line-height:1;}
 	.sub-header .job-search-box1 fieldset.sec_h2{width:200px;}
 	.custom-user-list{margin:0 auto; float:none;}
+	.job-top-detail p .exp{padding-right:60px;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -2916,7 +2917,7 @@ body, body.no-login {padding-bottom:60px;}
 	.mob-bt-0{border-top:0px !important;}
 	.bottom-bnr-div p{font-size:16px;}
 	.bottom-bnr-div .btn-1{font-size:14px; padding:8px 25px;}
-	.page-title h3{font-size:20px; padding:3px;}
+	.page-title h3{font-size:20px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3011,7 +3012,7 @@ body, body.no-login {padding-bottom:60px;}
 	.croppie-container .cr-image{top:-20px;}
 	/***  all profile  ***/
 	.custom-box .custom-width .right-box h1 a::after{left: 50% !important; width: 150px; margin-left: -75px;}
-	.page-title h3{font-size:18px;}
+	
 	.job-detail .post-img{width:65px; height:65px;}
 	.loca-exp{padding-right:0;}
 	.job-top-detail .job-top-btn{width:100%; padding-top:10px; margin-top:0;}
