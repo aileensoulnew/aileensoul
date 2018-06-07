@@ -398,7 +398,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             </div>
         </div>
         <!-- Model Popup Close -->
-        <?php  if($userid_login != "" && $this->freelance_apply_profile_set == 0)
+        <?php  if(($userid_login != "" && $this->freelance_apply_profile_set == 0) || $userid_login == "")
         { ?>        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <?php }?>

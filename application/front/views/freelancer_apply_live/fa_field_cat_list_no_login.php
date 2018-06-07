@@ -304,9 +304,10 @@
         <!-- Model Popup Close -->
 
 
-<?php echo $footer; ?>
-
-    <?php
+<?php echo $footer; 
+if($userid_login == ""){?>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+    <?php }
     if (IS_JOB_JS_MINIFY == '0') {
         ?>
         <!-- <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> -->
