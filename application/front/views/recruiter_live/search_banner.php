@@ -2,18 +2,18 @@
 <div class="search-banner cus-search-bnr">
     <div class="container">
         <div class="row banner-main-div">
-            <div class="col-md-6 col-sm-6 banner-left">
+            <div class="col-md-6 col-sm-12 banner-left">
                 <h1 class="pb15">Hurdles Becomes Simple with a Right Person Besides You</h1>
                 <p>Easily reach, engage, and hire the job seekers through Aileensoul platform</p>
             </div>
-            <div class="col-md-6 col-sm-6 banner-right">
+            <div class="col-md-6 col-sm-12 banner-right">
                 <div class="reg-form-box">
                     <div class="reg-form">
                         <h3>Join Recruiter Profile Now! <span>It's free and hardly takes a minute</span></h3>
                         <form id="basicinfo" name="basicinfo" class="ng-pristine ng-valid" novalidate="novalidate">
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6">
                                         <input name="first_name" tabindex="1" autofocus type="text" id="first_name"  placeholder="First Name" value="<?php
                                             if ($firstname) {
                                                 echo trim(ucfirst(strtolower($firstname)));
@@ -24,7 +24,7 @@
                                         <span id="fullname-error "></span>
                                            <?php echo form_error('first_name'); ?>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6">
                                         <input name="last_name" type="text" tabindex="2" id="last_name" placeholder="Last Name"
                                            value="<?php
                                            if ($lastname) {
@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-6 com-name-r">
+                                    <div class="col-md-6 com-name-r col-sm-6">
                                         <input name="comp_name" tabindex="4" autofocus type="text" id="comp_name" placeholder="Company Name*"  value="<?php
                                                if ($compname) {
                                                    echo $compname;
@@ -63,7 +63,7 @@
                                                ?>" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value"/>
                                         <span id="fullname-error"></span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6">
                                         <input name="comp_num"  type="text" id="comp_num" tabindex="5" placeholder="Company number (optional)" value="<?php
                                                 if ($compnum) {
                                                     echo $compnum;
@@ -88,7 +88,7 @@
                             </div>                                  
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6">
                                         <span class="select-field-custom">
                                             <select tabindex="7" autofocus name="country" id="country">
                                                 <option value="">Select Country*</option>
@@ -113,7 +113,7 @@
                                             <span id="country-error"></span>
                                         </span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-6">
                                         <span class="select-field-custom">
                                             <select name="state" id="state" tabindex="8">
                                                 <?php
