@@ -242,24 +242,24 @@ color: #1b8ab9 !important;}
 
 														<fieldset class="fw">
 															<label >What are you studying right now?</label>
-															<input tabindex="10" name="currentStudy" type="text" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." id="currentStudy" value="<?php echo $studentData['degree_name']; ?>"/><span id="fullname-error"></span><?php echo form_error('currentStudy'); ?>
+															<input tabindex="15" name="currentStudy" type="text" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." id="currentStudy" value="<?php echo $studentData['degree_name']; ?>"/><span id="fullname-error"></span><?php echo form_error('currentStudy'); ?>
 														</fieldset>
 														<fieldset class="fw">
 															<label>Where are you from?</label>
-															<input tabindex="11" name="studcity" placeholder="Enter your city name" type="text" id="studcity" value="<?php echo $studentData['city_name']; ?>"/><span id="fullname-error"></span>
+															<input tabindex="16" name="studcity" placeholder="Enter your city name" type="text" id="studcity" value="<?php echo $studentData['city_name']; ?>"/><span id="fullname-error"></span>
 															<?php echo form_error('studcity'); ?>
 														</fieldset>
 														<fieldset class="fw">
 															<label >University / Collage / School</label>
-															<input tabindex="10" name="university" type="text" placeholder="Enter your University / Collage / school " id="university" value="<?php echo $studentData['university_name']; ?>"/><span id="fullname-error"></span><?php echo form_error('university'); ?>
+															<input tabindex="17" name="university" type="text" placeholder="Enter your University / Collage / school " id="university" value="<?php echo $studentData['university_name']; ?>"/><span id="fullname-error"></span><?php echo form_error('university'); ?>
 														</fieldset>
 														<fieldset class="fw">
 															<label >Interested field</label>
-															<input tabindex="10" name="studjob_title" type="text" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." id="studjob_title" value="<?php echo $studentData['name']; ?>"/><span id="fullname-error"></span><?php echo form_error('studjob_title'); ?>
+															<input tabindex="18" name="studjob_title" type="text" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." id="studjob_title" value="<?php echo $studentData['name']; ?>"/><span id="fullname-error"></span><?php echo form_error('studjob_title'); ?>
 														</fieldset>
 														<fieldset class="hs-submit full-width">
 															<a class="btn3" href="javascript:void(0);" id="is_stud">Back</a>
-															<input type="submit" tabindex="14" value="submit" name="submit" id="submit_studinfo">
+															<input type="submit" tabindex="19" value="submit" name="submit" id="submit_studinfo">
 														</fieldset>
 													</form>
 												</div>
