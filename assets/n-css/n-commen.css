@@ -1269,7 +1269,7 @@ border: 1px solid #1b8ab9;}
 .cbp-spmenu-vertical{height:90%;}
 .mob-side-menu .content{height:100%;}
 
-.mob-side-menu .all-profile-box{padding-top:46px; background:#fff;}
+.mob-side-menu .all-profile-box{padding-top:46px; background:#fff; margin-left:0;}
 .mob-side-menu .all-profile-box ul{
     padding:0;
     width:100%;
