@@ -398,8 +398,10 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             </div>
         </div>
         <!-- Model Popup Close -->
-        
+        <?php  if($userid_login != "" && $this->freelance_apply_profile_set == 0)
+        { ?>        
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
+        <?php }?>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
