@@ -122,7 +122,7 @@
                         <h3>Related Articles</h3>
                     </div>
                     <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-md-4" ng-repeat="blog in relatedBlog">
+                        <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
                                 <div class="also-like-box">
 									<div class="rec-img">
 										<a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
