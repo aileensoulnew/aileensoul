@@ -83,6 +83,10 @@ app.controller('siteMapArtistController', function ($scope, $http,$location) {
     //ARTIST LISTING
     function artistList(page){
         $scope.artistList = {};
+        $($scope.alphabetList).each(function(i,d){
+            d.isactive = (d.name == $scope.searchkeyword) ? true : false;
+        });
+
         $http.get("sitemap/get_artist_list?page_id=" + $scope.currentPage + "&searchword="+ $scope.searchkeyword).then(function (success) {
             $scope.artistList = success.data.artist_list;
             $scope.total_record = success.data.total_record['total_artist'];
@@ -214,10 +218,12 @@ app.controller('siteMapJobController', function ($scope, $http,$location) {
     // PAGE NO AND SEARCHWORD BASED ON URL
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
-    console.log($scope.currentPage);
     //ARTIST LISTING
     function jobList(page){
         $scope.jobList = {};
+        $($scope.alphabetList).each(function(i,d){
+            d.isactive = (d.name == $scope.searchkeyword) ? true : false;
+        });
         $http.get("sitemap/get_job_list?page_id=" + $scope.currentPage + "&searchword="+ $scope.searchkeyword).then(function (success) {
             $scope.jobList = success.data.job_list;
             $scope.total_record = success.data.total_record['total_rec'];
@@ -284,6 +290,9 @@ app.controller('siteMapFreelancerController', function ($scope, $http,$location)
     //ARTIST LISTING
     function freelancerList(page){
         $scope.freelancerList = {};
+        $($scope.alphabetList).each(function(i,d){
+            d.isactive = (d.name == $scope.searchkeyword) ? true : false;
+        });
         $http.get("sitemap/get_freelancer_list?page_id=" + $scope.currentPage + "&searchword="+ $scope.searchkeyword).then(function (success) {
             $scope.freelancerList = success.data.freelancer_list;
             $scope.total_record = success.data.total_record['total_rec'];
@@ -335,6 +344,9 @@ app.controller('siteMapMemberController', function ($scope, $http,$location) {
     //ARTIST LISTING
     function memberList(page){
         $scope.memberList = {};
+        $($scope.alphabetList).each(function(i,d){
+            d.isactive = (d.name == $scope.searchkeyword) ? true : false;
+        });
         $http.get("sitemap/get_member_list?page_id=" + $scope.currentPage + "&searchword="+ $scope.searchkeyword).then(function (success) {
             $scope.memberList = success.data.member_list;
             $scope.total_record = success.data.total_record['total_rec'];
