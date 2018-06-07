@@ -76,11 +76,12 @@ class Profile extends CI_Controller {
 
         if ($updatdata) {
             $this->session->set_flashdata('success', 'Profile information updated successfully');
-            redirect('edit-profile', 'refresh');// . $this->session->userdata('aileenuser_slug'), 'refresh');
+            // redirect(base_url(), 'refresh');// . $this->session->userdata('aileenuser_slug'), 'refresh');
         } else {
             $this->session->flashdata('error', 'Sorry!! Your data not updated');
-            redirect('profile', 'refresh');
+            // redirect('profile', 'refresh');
         }
+        redirect(base_url());
     }
 
 //User email already exist checking controller start
@@ -542,7 +543,7 @@ class Profile extends CI_Controller {
                 if ($currentStudydata) {
                     $currentStudyId = $currentStudydata[0]['degree_id'];
                 } else {
-                    $$data = array();
+                    $data = array();
                     $data['degree_name'] = $currentStudy;
                     $data['created_date'] = date('Y-m-d H:i:s', time());
                     $data['modify_date'] = date('Y-m-d H:i:s', time());
@@ -635,7 +636,7 @@ class Profile extends CI_Controller {
                 $data_up['user_id'] = $userid;
                 $updatdata_up = $this->common->insert_data_getid($data_up, 'user_student');
             }
-            redirect(base_url()."edit-profile");
+            redirect(base_url());
         }
         // print_r($this->input->post());exit;
     }

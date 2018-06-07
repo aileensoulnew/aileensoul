@@ -1749,8 +1749,11 @@ top: -3px;}
 .also-like-box span{font-size:12px; padding:10px 0 5px; font-weight:bold;}
 .also-like-box p{font-size:18px;}
 .also-like-box p a{color:#5c5c5c;}
-.related-article .also-like-box{width:85%; margin:0 auto;}
-.related-article .rec-img{height:235px;}
+.related-article .also-like-box{width:85%; margin:0 auto; border:1px solid #d2d2d2; border-radius:15px; overflow:hidden;}
+.related-article .rec-img{height:236px; border:0; border-radius:0;}
+.related-article .also-like-box p{min-height:75px; width:100%; float:left;}
+.related-article .also-like-box p a{padding:15px; display:block;}
+.related-article .col-md-4:first-child .also-like-box{width: calc(85% - 1px);}
 
 .rec-img{border:1px solid #d2d2d2; border-radius:4px; height:200px; margin-bottom:5px; width:100%; overflow:hidden; position:relative;}
 .rec-img img{border-radius:4px; width: auto; height: 100%; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%);}
@@ -2900,6 +2903,11 @@ body, body.no-login {padding-bottom:60px;}
 	.blog-page .sub-header .dropdown.open .dropdown-menu{top:31px;}
 	.blog-page .dropdown-database{width:100%;}
 	.blog-page .dropdown-database .dropdown-user-detail{width:82%;}
+	.related-article .rec-img{border:0;}
+	.related-article .also-like-box{margin-bottom:25px; width:400px !important;}
+	.related-article .rec-img{height:180px;}
+	.related-article .also-like-box p{min-height:auto;}
+	.user-photo-name .profile-img img{width:108px; height:108px;}
 	
 	
 }
@@ -2958,6 +2966,8 @@ body, body.no-login {padding-bottom:60px;}
 	.social-icon{padding-bottom:25px; padding-top:0;}
 	.user-detail-left .block-639{display:inline-block;}
 	.blog-page .pagination li a{font-size:14px;}
+	.blog-page .rec-img img{position:relative; width:100%; transform:inherit; } 
+	
 }
 @media screen and (max-width: 539px) {
 	.fw-539{width:100%; float:left;}
@@ -3189,7 +3199,9 @@ body, body.no-login {padding-bottom:60px;}
 	.blog-page .sub-header .sub-menu li a{font-size:14px;}
 	.blog-page .sub-header .dropdown-title{font-size:16px;}
 	.blog-page .dropdown-title{padding:5px 10px;}
-	
+	.related-article .also-like-box{width:288px !important;}
+	.related-article .rec-img{height:120px;}
+	.user-photo-name .profile-img img{width:102px; height:102px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

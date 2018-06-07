@@ -1259,7 +1259,7 @@ border: 1px solid #1b8ab9;}
 .mob-bottom-menu li{float:left; list-style-type:none; width:20%; text-align:center; margin-bottom:0;}
 .mob-bottom-menu li > a{position:relative;}
 .mob-bottom-menu li > a .noti-box{right:-5px; top:-8px; color:#fff;}
-.mobile-header .sub-header .sub-menu li{padding:0 4px; width:33.33%; text-align:center;}
+.mobile-header .sub-header .sub-menu li{padding:0 4px; width:33.33%; text-align:center; background:#fff;}
 .mobile-header .sub-header.bus-only .sub-menu li{width:25%;}
 .mobile-header .sub-header .sub-menu li > a i{padding-right:0px;}
 .mobile-header .sub-header .sub-menu li a{font-size:14px; position:relative; display:inline-block; padding-top:5px; letter-spacing:1px;}
@@ -1269,7 +1269,7 @@ border: 1px solid #1b8ab9;}
 .cbp-spmenu-vertical{height:90%;}
 .mob-side-menu .content{height:100%;}
 
-.mob-side-menu .all-profile-box{padding-top:46px;}
+.mob-side-menu .all-profile-box{padding-top:46px; background:#fff;}
 .mob-side-menu .all-profile-box ul{
     padding:0;
     width:100%;
@@ -1277,13 +1277,17 @@ border: 1px solid #1b8ab9;}
     margin:0
 }
 .mob-side-menu .all-profile-box ul li a{
-    padding: 10px;
+    padding: 5px 10px;
     display: inline-flex;
     width: 100%;
+	background:#fff;
+	font-size:14px;
+	color:#5c5c5c; letter-spacing:1px;
 }
+.mob-side-menu .all-profile-box ul li a:hover{color:#1b8ab9;}
 .mob-side-menu .all-profile-box ul li{
     padding:0px;
-    border-bottom:1px solid #d2d2d2;
+    border-bottom:0px solid #d2d2d2;
     width:100%;
     list-style-type:none;
     float:left;
@@ -1311,6 +1315,12 @@ border: 1px solid #1b8ab9;}
     font-size:18px;
     padding:9px 0 0 15px
 }
+.mob-side-menu.cbp-spmenu-vertical{padding-bottom:44px;}
+.mob-side-menu.cbp-spmenu-vertical a{border-bottom:0;}
+/*.mob-side-menu .all-profile-box ul.mob-footer-side{}
+.mob-side-menu .all-profile-box ul.mob-footer-side li{border-bottom:none; float:left; width:auto;}
+.mob-side-menu .all-profile-box ul.mob-footer-side li a{color:#5c5c5c; padding:0 10px; font-size:13px;}*/
+
 /***  end mobile header  ***/
 
 /***  mob search  ***/
