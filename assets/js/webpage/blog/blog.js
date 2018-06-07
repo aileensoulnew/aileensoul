@@ -67,6 +67,8 @@ app.controller('blogController', function ($scope, $http) {
 				$scope.iscategorySelected = false;
 				$scope.categorySelectedId = '';
 				$('html, body').animate({scrollTop:0},'slow');
+				$('#main_loader').hide();
+				$('#main_page_load').show();
 			}
 		});
 	}

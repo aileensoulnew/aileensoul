@@ -135,10 +135,13 @@ header("Pragma: no-cache"); // HTTP/1.0
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
     </head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
-    <body class="no-login blog-m blog-page old-no-login">
-        <?php }else{?>
-         <body class="blog-m blog-page">
-        <?php }?>
+        <body class="no-login blog-m blog-page old-no-login">
+    <?php }else{?>
+        <body class="blog-m blog-page">
+    <?php }?>
+
+    <?php $this->load->view('page_loader'); ?>
+    <div id="main_page_load" style="display: none;">
         <div class="main-inner">
             <div class="web-header">
                 <header class="custom-header">
@@ -347,114 +350,112 @@ header("Pragma: no-cache"); // HTTP/1.0
                 echo $login_footer;
             ?>
         </div>
+    </div>
 
-        <script>
-            //AJAX DATA LOAD BY LAZZY LOADER START
-            $(document).ready(function () {
-                // blog_post();
-            });
+    <script>
+        //AJAX DATA LOAD BY LAZZY LOADER START
+        $(document).ready(function () {
+            // blog_post();
+        });
 
-            /*function category_data(catid, pagenum) {
-                $('.job-contact-frnd').html("");
-                $('.loadbutton').html("");
-                cat_post(catid, pagenum);
+        /*function category_data(catid, pagenum) {
+            $('.job-contact-frnd').html("");
+            $('.loadbutton').html("");
+            cat_post(catid, pagenum);
+        }
+
+        $('.loadcatbutton').click(function () {
+            var pagenum = parseInt($(".page_number:last").val()) + 1;
+            var catid = $(".catid").val();
+            cat_post(catid, pagenum);
+        });*/
+
+        /*var isProcessing = false;
+        function cat_post(catid, pagenum) { 
+            if (isProcessing) {
+                return;
             }
-
-            $('.loadcatbutton').click(function () {
-                var pagenum = parseInt($(".page_number:last").val()) + 1;
-                var catid = $(".catid").val();
-                cat_post(catid, pagenum);
-            });*/
-
-            /*var isProcessing = false;
-            function cat_post(catid, pagenum) { 
-                if (isProcessing) {
-                    return;
-                }
-                isProcessing = true;
-                $.ajax({
-                    type: 'POST',
-                    url: base_url + "blog/cat_ajax?page=" + pagenum + "&cateid=" + catid,
-                    data: {total_record: $("#total_record").val()},
-                    dataType: "json",
-                    beforeSend: function () {
-                         $('#loader').show();
-                    },
-                    complete: function () {
-                         $('#loader').hide();
-                    },
-                    success: function (data) {
-                        // $('#loader').hide();
-                        $('.job-contact-frnd').append(data.blog_data);
-                        $('.loadcatbutton').html(data.load_msg)
-                        // second header class add for scroll
-                        var nb = $('.post-design-box').length;
-                        if (nb == 0) {
-                            $("#dropdownclass").addClass("no-post-h2");
-                        } else {
-                            $("#dropdownclass").removeClass("no-post-h2");
-                        }
-                        isProcessing = false;
+            isProcessing = true;
+            $.ajax({
+                type: 'POST',
+                url: base_url + "blog/cat_ajax?page=" + pagenum + "&cateid=" + catid,
+                data: {total_record: $("#total_record").val()},
+                dataType: "json",
+                beforeSend: function () {
+                     $('#loader').show();
+                },
+                complete: function () {
+                     $('#loader').hide();
+                },
+                success: function (data) {
+                    // $('#loader').hide();
+                    $('.job-contact-frnd').append(data.blog_data);
+                    $('.loadcatbutton').html(data.load_msg)
+                    // second header class add for scroll
+                    var nb = $('.post-design-box').length;
+                    if (nb == 0) {
+                        $("#dropdownclass").addClass("no-post-h2");
+                    } else {
+                        $("#dropdownclass").removeClass("no-post-h2");
                     }
-                });
-            }*/
-
-
-            // $('.loadbutton').click(function () {
-            //     var pagenum = parseInt($(".page_number:last").val()) + 1;
-            //     blog_post(pagenum);
-            // });
-
-            // var isProcessing = false;
-            /*function blog_post(pagenum) {
-                if (isProcessing) {
-                    return;
+                    isProcessing = false;
                 }
-                isProcessing = true;
-                $.ajax({
-                    type: 'POST',
-                    url: base_url + "blog/blog_ajax?page=" + pagenum,
-                    data: {total_record: $("#total_record").val()},
-                    dataType: "json",
-                    beforeSend: function () {
-                        $('#loader').show();
-                    },
-                    complete: function () {
-                        $('#loader').hide();
-                    },
-                    success: function (data) {
-                      //  $('#loader').remove();
-                        $('.job-contact-frnd').append(data.blog_data);
-                        $('.loadbutton').html(data.load_msg)
-                        // second header class add for scroll
-                        var nb = $('.post-design-box').length;
-                        if (nb == 0) {
-                            $("#dropdownclass").addClass("no-post-h2");
-                        } else {
-                            $("#dropdownclass").removeClass("no-post-h2");
-                        }
-                        isProcessing = false;
-                    }
-                });
-            }*/
-            //AJAX DATA LOAD BY LAZZY LOADER END
+            });
+        }*/
 
-        </script>
-        
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-            <script src="<?php echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()); ?>"></script>
-            <script>
-		
-		// mcustom scroll bar
-			(function($){
-				$(window).on("load",function(){
-					$(".custom-scroll").mCustomScrollbar({
-						autoHideScrollbar:true,
-						theme:"minimal"
-					});
-					
+
+        // $('.loadbutton').click(function () {
+        //     var pagenum = parseInt($(".page_number:last").val()) + 1;
+        //     blog_post(pagenum);
+        // });
+
+        // var isProcessing = false;
+        /*function blog_post(pagenum) {
+            if (isProcessing) {
+                return;
+            }
+            isProcessing = true;
+            $.ajax({
+                type: 'POST',
+                url: base_url + "blog/blog_ajax?page=" + pagenum,
+                data: {total_record: $("#total_record").val()},
+                dataType: "json",
+                beforeSend: function () {
+                    $('#loader').show();
+                },
+                complete: function () {
+                    $('#loader').hide();
+                },
+                success: function (data) {
+                  //  $('#loader').remove();
+                    $('.job-contact-frnd').append(data.blog_data);
+                    $('.loadbutton').html(data.load_msg)
+                    // second header class add for scroll
+                    var nb = $('.post-design-box').length;
+                    if (nb == 0) {
+                        $("#dropdownclass").addClass("no-post-h2");
+                    } else {
+                        $("#dropdownclass").removeClass("no-post-h2");
+                    }
+                    isProcessing = false;
+                }
+            });
+        }*/
+        //AJAX DATA LOAD BY LAZZY LOADER END
+    </script>        
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()); ?>"></script>
+    <script>
+       // mcustom scroll bar
+		(function($){
+			$(window).on("load",function(){
+				$(".custom-scroll").mCustomScrollbar({
+					autoHideScrollbar:true,
+					theme:"minimal"
 				});
-			})(jQuery);
+				
+			});
+		})(jQuery);
     </script>
 
 
