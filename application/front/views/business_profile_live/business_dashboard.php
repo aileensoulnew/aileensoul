@@ -59,8 +59,10 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </div>
                         <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
                             <div class="btn-right">
-                                <a href="javascript:void(0);" onclick="login_profile();" class="btn4 login_link">Login</a>
-                                <a href="javascript:void(0);" onclick="register_profile();" class="btn2 login_link">Create Business Account</a>
+                                <a href="<?php echo base_url(); ?>login" class="btn4 login_link">Login</a>
+                                <a href="<?php echo base_url('business-profile/create-account'); ?>" class="btn2 login_link">Create Business Account</a>
+                                <!-- <a href="javascript:void(0);" onclick="login_profile();" class="btn4 login_link">Login</a>
+                                <a href="javascript:void(0);" onclick="register_profile();" class="btn2 login_link">Create Business Account</a> -->
                             </div>
                         </div>
                     </div>
@@ -884,6 +886,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             });
             $(document).on('click', 'a,.comment-edit-butn,.ripple like_h_w', function (e) {
                 var classNames = $(e.target).prop("class").toString().split(' ').pop();
+                console.log(classNames);
                 if (classNames != 'login_link') {
                     return false;
                     open_profile();

@@ -603,9 +603,9 @@
                     <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
                 </div>
                 <div class="right-part">
-                    <div class="add-box">
-                        <img ng-src="<?php echo base_url('assets/n-images/add.jpg') ?>">
-                    </div>
+                    <!-- <div class="add-box">
+                        <img ng-src="<?php //echo base_url('assets/n-images/add.jpg') ?>">
+                    </div> -->
                     <div class="all-contact">
                         <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_blank">All</a></h4>
                         <div class="all-user-list">

@@ -133,7 +133,7 @@
 								<div class="site-pr-box">
 									<h3>Job Profile</h3>
 									<ul>
-										<li><a href="<?php echo base_url().'login' ?>">Login  </a></li>
+										<li><a href="<?php echo $sitemap_with_login_job; ?>">Login  </a></li>
 										<li><a href="<?php echo base_url().'job-profile/create-account' ?>">Create Account </a></li>
 										<li><a href="<?php echo base_url().'job-search' ?>">Job Search </a></li>
 										<li><a href="<?php echo base_url().'jobs-by-location' ?>">View Jobs by Location </a></li>
@@ -153,14 +153,14 @@
 										</a>										
 									</h3>
 									<ul>
-										<li><a href="<?php echo base_url().'login' ?>">Login </a></li>
+										<li><a href="<?php echo $sitemap_with_login_rec; ?>">Login </a></li>
 										<li><a href="<?php echo base_url().'recruiter/signup' ?>">Create Recruiter Account </a></li>
 									</ul>
 								</div>
 								<div class="site-pr-box">
 									<h3>Business Profile</h3>
 									<ul>
-										<li><a href="<?php echo base_url().'login' ?>">Login</a></li>
+										<li><a href="<?php echo $sitemap_with_login_bus; ?>">Login</a></li>
 										<li><a href="<?php echo base_url().'business-profile/registration/business-information' ?>">Create Business Account</a></li>
 										<li><a href="<?php echo base_url().'business-search' ?>">Business Search</a></li>
 										<li><a href="<?php echo base_url().'business-by-categories' ?>">View Business by Category</a></li>
@@ -177,7 +177,7 @@
 										</a>
 									</h3>
 									<ul>
-										<li><a href="<?php echo base_url().'login' ?>">Login</a></li>
+										<li><a href="<?php echo $sitemap_with_login_free_emp; ?>">Login</a></li>
 										<li><a href="<?php echo base_url().'freelance-employer/signup' ?>">Create Freelance Employer Account</a></li>
 										<li><a href="<?php echo base_url().'post-freelance-project' ?>">Post Projects</a></li>
 									</ul>
@@ -185,7 +185,7 @@
 								<div class="site-pr-box">
 									<h3>Freelancer Profile</h3>
 									<ul>
-										<li><a href="<?php echo base_url().'login' ?>">Login  </a></li>
+										<li><a href="<?php echo $sitemap_with_login_free_pro; ?>">Login  </a></li>
 										<li><a href="<?php echo base_url().'freelancer/signup' ?>">Create Freelance Account</a></li>
 										<li><a href="<?php echo base_url().'freelance-jobs' ?>">Freelance Jobs</a></li>
 										<li><a href="<?php echo base_url().'freelance-jobs-by-fields' ?>">View Freelance Jobs by Fields</a></li>
@@ -197,7 +197,7 @@
 								<div class="site-pr-box">
 									<h3>Artistic Profile</h3>
 									<ul>
-										<li><a href="<?php echo base_url().'login' ?>">Login</a></li>
+										<li><a href="<?php echo $sitemap_with_login_art; ?>">Login</a></li>
 										<li><a href="<?php echo base_url().'artist-profile/signup' ?>">Create Account</a></li>
 										<li><a href="<?php echo base_url().'find-artist' ?>">Find Artist</a></li>
 										<li><a href="<?php echo base_url().'artist/category' ?>">View Artist by Category</a></li>

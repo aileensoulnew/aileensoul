@@ -84,7 +84,8 @@
 			</div>
 			<div class="container">
 				<div class="report-middle-box">
-					<p class="text-center">We believe in providing value to each of our members. If you found any issues like spam, abusive, fake news or account, phishing, malware that violates our Terms of Service, kindly report here. </p>
+					<p class="text-center">We believe in providing value to each of our members. If you found any issues like spam, abusive, fake news or account, phishing, malware that violates our 
+					<a href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" target="_blank">Terms of Service</a>, kindly report here. </p>
 					<form class="report-form" id="addreport" method="post">
 						<div class="form-group">
 							<input type="text" placeholder="Name*" id="txtName" name="txtName">

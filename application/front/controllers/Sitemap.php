@@ -11,8 +11,33 @@ class Sitemap extends CI_Controller {
         $this->load->library('S3');
         //AWS access info end
         include ('include.php');
+        include ('main_profile_link.php');
         $this->load->model('sitemap_model');
+
         $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, true);
+        if($this->session->userdata('aileenuser')){
+            $this->data['sitemap_with_login_job'] = $this->data['job_right_profile_link'];
+            $this->data['sitemap_with_login_rec'] = $this->data['recruiter_right_profile_link'];
+            $this->data['sitemap_with_login_free_emp'] = $this->data['freelance_hire_right_profile_link'];
+            $this->data['sitemap_with_login_free_pro'] = $this->data['freelance_apply_right_profile_link'];
+            $this->data['sitemap_with_login_bus'] = $this->data['business_right_profile_link'];
+            $this->data['sitemap_with_login_art'] = $this->data['artist_right_profile_link'];
+
+            $this->data['sitemap_with_signup_bus'] = $business_right_profile_link;
+            $this->data['sitemap_with_signup_art'] = base_url().'artist-profile/signup';
+        }else{
+            // Without login page
+            $this->data['sitemap_with_login_job'] = base_url(). 'login';
+            $this->data['sitemap_with_login_rec'] = base_url(). 'login';
+            $this->data['sitemap_with_login_free_emp'] = base_url(). 'login';
+            $this->data['sitemap_with_login_free_pro'] = base_url(). 'login';
+            $this->data['sitemap_with_login_bus'] = base_url(). 'login';
+            $this->data['sitemap_with_login_art'] = base_url(). 'login';
+
+            $this->data['sitemap_with_signup_bus'] = base_url('business-profile/create-account');
+            $this->data['sitemap_with_signup_art'] = base_url().'artist-profile/create-account';
+            $this->data['sitemap_with_signup_rec'] = base_url().'artist-profile/create-account';
+        }
     }
 
     public function index() {
