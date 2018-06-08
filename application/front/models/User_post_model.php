@@ -49,11 +49,13 @@ class User_post_model extends CI_Model {
     }
 
     public function getContactAllSuggetion($user_id = '', $start='') {
+
+        $this->db->distinct();
         
-        $this->db->select("u.user_id,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_gender,u.user_slug,ui.user_image,up.designation,us.current_study")->from("user u");
+        $this->db->select("u.user_id,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_gender,u.user_slug,up.designation,us.current_study")->from("user u");
         //jt.name as title_name,d.degree_name
-        $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
-        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        // $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        // $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
         $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
         // $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
         $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
@@ -70,16 +72,20 @@ class User_post_model extends CI_Model {
                              FROM   ailee_user_student 
                              WHERE  user_id != '.$user_id.')
         )');
-        $this->db->order_by('up.designation', 'asc');
-        $this->db->order_by('up.field', 'asc');
-        $this->db->order_by('up.city', 'asc');
-        $this->db->order_by('us.city', 'asc');
+        // $this->db->order_by('up.designation', 'asc');
+        // $this->db->order_by('up.field', 'asc');
+        // $this->db->order_by('up.city', 'asc');
+        // $this->db->order_by('us.city', 'asc');
+        $this->db->order_by('u.user_id', 'DESC');
         $this->db->limit($start['offset']);
         $query = $this->db->get();
 
         // echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
+
+            $result_array[$key]['user_image'] = $this->db->select('user_image')->get_where('user_info', array('user_id' => $value['user_id']))->row('user_image');
+            
             $result_array[$key]['title_name'] = $this->user_model->getAnyJobTitle($value['designation'])['job_name'];
             $result_array[$key]['degree_name'] = $this->user_model->getAnyDegreename($value['current_study'])['degree_name'];
         }
