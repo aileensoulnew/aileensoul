@@ -55,6 +55,22 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
+    function searchJobTitleStart($search_keyword = '') {
+        $this->db->select('jt.title_id,jt.name')->from('job_title jt');
+        if ($search_keyword != '') {
+            $this->db->where("jt.name LIKE '".$search_keyword."%'");
+        }
+        $this->db->where('jt.status', 'publish');
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit;
+        if ($search_keyword != '') {
+            $result_array = $query->result_array();
+        } else {
+            $result_array = array();
+        }
+        return $result_array;
+    }
+
     function cityList() {
         $this->db->select('c.city_id,c.city_name')->from('cities c');
         $this->db->where('c.status', '1');

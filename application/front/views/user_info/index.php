@@ -96,7 +96,7 @@
             $scope.jobTitle = function () {
             $http({
             method: 'POST',
-                    url: base_url + 'general_data/searchJobTitle',
+                    url: base_url + 'general_data/searchJobTitleStart',
                     data: 'q=' + $scope.user.jobTitle,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })

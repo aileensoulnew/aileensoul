@@ -36,6 +36,12 @@ class General_data extends MY_Controller {
         $getJobTitle = $this->data_model->searchJobTitle($titleSearch);
         echo json_encode($getJobTitle);
     }
+
+    public function searchJobTitleStart() {
+        $titleSearch = $_POST['q'];
+        $getJobTitle = $this->data_model->searchJobTitleStart($titleSearch);
+        echo json_encode($getJobTitle);
+    }
     
     public function cityList() {
         $getCityList = $this->data_model->cityList();
