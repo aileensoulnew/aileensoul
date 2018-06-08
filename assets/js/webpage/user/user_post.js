@@ -1250,9 +1250,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             description = description.trim();
             var job_title = $scope.opp.job_title_edit;
             var location = $scope.opp.location_edit;
-            var fields = $("#field_edit"+post_id).val();            
+            var fields = $("#field_edit"+post_id).val();
+            var otherField_edit = $scope.opp.otherField_edit;
 
-            if((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == ''))
+            if((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == ""))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -1271,6 +1272,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
                 form_data.append('description', description);
                 form_data.append('field', fields);
+                form_data.append('other_field', otherField_edit);
                 form_data.append('job_title', JSON.stringify(job_title));
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.opp.post_for);
@@ -1290,6 +1292,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
                             if (success.data.response == 1) {
                                 $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
+                                $scope.postData[postIndex].opportunity_data.field_id = success.data.field_id;
                                 $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
                                 $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
                                 $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
@@ -2256,7 +2259,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var opportunity = $scope.postData[index].opportunity_data.opportunity;//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
             var job_title = $('#opp-post-opportunity-for-' + post_id).html().split(",");
             var city_names = $('#opp-post-location-' + post_id).html().split(",");
-            var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" || $scope.postData[index].opportunity_data.field == 0 ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html();
+            //var field = ($scope.postData[index].opportunity_data.field_id == null || $scope.postData[index].opportunity_data.field_id == "" || $scope.postData[index].opportunity_data.field_id == 0 ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html();
+            var field = $scope.postData[index].opportunity_data.field;
+            var field_id = $scope.postData[index].opportunity_data.field_id;
             if(opportunity != "" && opportunity != undefined)
             {
                 //$("#description_edit_" + post_id).val(opportunity.replace(/(<([^>]+)>)/ig,""));
@@ -2282,11 +2287,16 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $('#job_title .input').attr('placeholder', '');
                 $('#job_title .input').css('width', '200px');
             }
-            console.log(field);
             $('[id=field_edit'+post_id+'] option').filter(function() { 
-                return ($(this).text() == field ? $(this).text() == field : 'Othes'); //To select Blue
+                return (field_id != 0 ? $(this).text() == field : 'Other'); //To select Blue
             }).prop('selected', true);
 
+            $scope.opp.field_edit = field_id;
+            $scope.opp.otherField_edit = "";
+            setTimeout(function(){
+                // $scope.opp.otherField_edit = field;
+                $("#otherField_edit" + post_id).val(field);    
+            },100);
             $("#description_edit_" + post_id).focus();
             setTimeout(function(){
                 //$('#description_edit_' + post_id).focus();                

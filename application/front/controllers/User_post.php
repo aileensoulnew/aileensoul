@@ -1017,6 +1017,10 @@ class User_post extends MY_Controller {
 
             $opp_desc = $_POST['description'];
             $opp_field = $_POST['field'];
+            if($opp_field == 0)
+                $other_field = $_POST['other_field'];
+            else
+                $other_field = "";
             $job_title = json_decode($_POST['job_title'], TRUE);
             $location = json_decode($_POST['location'], TRUE);
 
@@ -1065,6 +1069,7 @@ class User_post extends MY_Controller {
             $update_data['location'] = $city_id;
             $update_data['opportunity'] = $opp_desc;
             $update_data['field'] = $opp_field;
+            $update_data['other_field'] = $other_field;
             $update_data['modify_date'] = date('Y-m-d H:i:s', time());
             $update_post_data = $this->common->update_data($update_data, 'user_opportunity', 'post_id', $post_id);
         } else if ($post_for == 'question') {
@@ -1115,9 +1120,10 @@ class User_post extends MY_Controller {
                     'response' => 1,
                     'opp_location' => $opportunity_location['location'],
                     'opp_opportunity_for' => $opportunity_title['opportunity_for'],
-                    'opp_field' => $opportunity_field['field'],
+                    'opp_field' => ($opp_field != 0 ? $opportunity_field['field'] : $other_field),
+                    'field_id' => $opp_field,
                     'opportunity' => $opp_desc
-                );
+                );                
             } else if ($post_for == 'simple') {
                 $description = nl2br($this->common->make_links($description));
                 $updatedata = array(
