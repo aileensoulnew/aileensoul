@@ -738,7 +738,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         formFileDataQue.delete("myfiles_"+rmId);
     };
 
-
+    $scope.showLoadmore = true;
     var pg="";
     var processing = false;
     getUserPost(pg);
@@ -769,8 +769,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }
 
     $(window).on('scroll', function () {
-        if ($(window).scrollTop() == $(document).height() - $(window).height() && isLoadingData == false) {
-            isLoadingData = true;
+        if (($(window).scrollTop() == $(document).height() - $(window).height()) && $scope.showLoadmore == true) {
+            // isLoadingData = true;
             var page = $(".page_number:last").val();
             var total_record = $(".total_record").val();
             var perpage_record = $(".perpage_record").val();            
@@ -790,20 +790,33 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     });
 
     function getUserPostLoadMore(pg) {
-     
+       
+        if (isLoadingData) {
+          
+            /*
+             *This won't go past this condition while
+             *isProcessing is true.
+             *You could even display a message.
+             **/
+            return;
+        }
+        isLoadingData = true;
         $('#loader').show();
         $http.get(base_url + "user_post/getUserPost?page=" + pg).then(function (success) {
             $('#loader').hide();
            
-            if (success.data) {
+            if (success.data[0].post_data) {
                 isLoadingData = false;
                 //$scope.postData = success.data; 
                 for (var i in success.data) {
                     $scope.postData.push(success.data[i]);
                 }
+                $scope.showLoadmore = true;
             } else {
-                 
+                // processing = false;
+                // isLoadingData = false;
                 isLoadingData = true;
+                $scope.showLoadmore = false;
             }
 
             setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);

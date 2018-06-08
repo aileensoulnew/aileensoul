@@ -1402,8 +1402,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     $(window).on('scroll', function () {
-        if ($(window).scrollTop() == $(document).height() - $(window).height() && isLoadingData == false) {
-            isLoadingData = true;
+        if ($(window).scrollTop() == $(document).height() - $(window).height())
+        {
             var page = $(".page_number:last").val();
             var total_record = $(".total_record").val();
             var perpage_record = $(".perpage_record").val();
@@ -1443,14 +1443,31 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     function getUserDashboardPostLoad(pagenum = '') {
+        if (isLoadingData) {
+          
+            /*
+             *This won't go past this condition while
+             *isProcessing is true.
+             *You could even display a message.
+             **/
+            return;
+        }
+        isLoadingData = true;
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardPost?page=" + pagenum + "&user_slug=" + user_slug).then(function (success) {
-            isLoadingData = false;
             $('#loader').hide();
-            for (var i in success.data) {
-                $scope.postData.push(success.data[i]);
+            if (success.data.length > 0) {
+                isLoadingData = false;
+                for (var i in success.data) {
+                    $scope.postData.push(success.data[i]);
+                }
+                check_no_post_data();
+            } else {
+                // processing = false;
+                // isLoadingData = false;
+                isLoadingData = true;
+                $scope.showLoadmore = false;
             }
-            check_no_post_data();
             $('video,audio').mediaelementplayer(/* Options */);
         }, function (error) {});
     }

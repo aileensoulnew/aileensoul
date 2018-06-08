@@ -555,10 +555,11 @@
         <script src="//anglibs.github.io/angular-location-update/angular-location-update.min.js"></script>
 
         <script>
-                                            var base_url = '<?php echo base_url(); ?>';
-                                            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-                                            var post_id = '<?php echo $post_id ?>';
-                                            var app = angular.module("postDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
+        var base_url = '<?php echo base_url(); ?>';
+        var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+        var post_id = '<?php echo $post_id ?>';
+        var app = angular.module("postDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/post_details.js?ver=' . time()) ?>"></script>
