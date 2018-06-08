@@ -101,7 +101,7 @@
                                                     </div>
                                                     <div class="main_data_cq">
                                                         <span class="dc_cl_m" title="{{suggest.title_name}}" ng-if="suggest.title_name != ''">{{suggest.title_name}}</span>
-                                                        <span class="dc_cl_m" title="{{suggest.degree_name}}" ng-if="suggest.title_name == ''">{{suggest.degree_name}}</span>
+                                                        <span class="dc_cl_m" title="{{suggest.degree_name}}" ng-if="suggest.degree_name != ''">{{suggest.degree_name}}</span>
                                                         <span class="dc_cl_m" title="Current Work" ng-if="suggest.title_name == null && suggest.degree_name == null">Current Work</span>
                                                     </div>
                                                 </a>

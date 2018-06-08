@@ -380,6 +380,14 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
+    function getAnyDegreename($degree_id = '') {
+        $this->db->select('degree_name')->from('degree');
+        $this->db->where('degree_id', $degree_id);        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
     function getAnyJobIds($title_name = '') {
         $this->db->select("GROUP_CONCAT(jt.title_id) AS jobs_id")->from('job_title jt');
         $this->db->where($title_name);        
