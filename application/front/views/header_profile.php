@@ -356,9 +356,9 @@ if($browser == "Firefox")
                                 </label>                                
                                 <ul class="dropdown-menu profile-dropdown">
                                     <li>Account</li>
-                                    <li><a  href="<?php echo base_url().$this->session->userdata('aileenuser_slug'); ?>" title="Setting"><i class="fa fa-user"></i> View Profile</a></li>
-                                    <li><a href="<?php echo base_url('profile') ?>" title="Setting"><i class="fa fa-cog"></i> Setting</a></li>
-                                    <li><a href="<?php echo base_url('logout') ?>" title="Logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a target="_self" href="<?php echo base_url().$this->session->userdata('aileenuser_slug'); ?>" title="Setting"><i class="fa fa-user"></i> View Profile</a></li>
+                                    <li><a target="_self" href="<?php echo base_url('profile') ?>" title="Setting"><i class="fa fa-cog"></i> Setting</a></li>
+                                    <li><a target="_self" href="<?php echo base_url('logout') ?>" title="Logout"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -400,7 +400,7 @@ if($browser == "Firefox")
             <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
             <li id="add-contact">
                 <div class="mob-btm-icon">
-                    <a href="<?php echo base_url('contact-request') ?>">
+                    <a target="_self" href="<?php echo base_url('contact-request') ?>">
                         <svg class="not-hover" viewBox="0 0 563.43 563.43" width="25px" height="25px">
                             <path d="M280.79,314.559c83.266,0,150.803-67.538,150.803-150.803S364.055,13.415,280.79,13.415S129.987,80.953,129.987,163.756  S197.524,314.559,280.79,314.559z M280.79,52.735c61.061,0,111.021,49.959,111.021,111.021S341.851,274.776,280.79,274.776  s-111.021-49.959-111.021-111.021S219.728,52.735,280.79,52.735z" />
                             <path d="M19.891,550.015h523.648c11.102,0,19.891-8.789,19.891-19.891c0-104.082-84.653-189.198-189.198-189.198H189.198  C85.116,340.926,0,425.579,0,530.124C0,541.226,8.789,550.015,19.891,550.015z M189.198,380.708h185.034  c75.864,0,138.313,56.436,148.028,129.524H41.17C50.884,437.607,113.334,380.708,189.198,380.708z" />
@@ -510,11 +510,11 @@ if($browser == "Firefox")
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
         <div class="all-profile-box content custom-scroll">
             <ul class="all-pr-list">
-                <li><a href="<?php echo $job_right_profile_link; ?>">Job Profile</a></li>
-                <li><a href="<?php echo $recruiter_right_profile_link; ?>">Recruiter Profile</a></li>
-                <li><a href="<?php echo $freelance_right_profile_link; ?>">Freelance Profile</a></li>
-                <li><a href="<?php echo $business_right_profile_link; ?>">Business Profile</a></li>
-                <li><a href="<?php echo $artist_right_profile_link; ?>">Artistic Profile</a></li>
+                <li><a target="_self" href="<?php echo $job_right_profile_link; ?>">Job Profile</a></li>
+                <li><a target="_self" href="<?php echo $recruiter_right_profile_link; ?>">Recruiter Profile</a></li>
+                <li><a target="_self" href="<?php echo $freelance_right_profile_link; ?>">Freelance Profile</a></li>
+                <li><a target="_self" href="<?php echo $business_right_profile_link; ?>">Business Profile</a></li>
+                <li><a target="_self" href="<?php echo $artist_right_profile_link; ?>">Artistic Profile</a></li>
                 <!--li>
                     <ul class="mob-footer-side"-->
                         
@@ -556,7 +556,7 @@ if($browser == "Firefox")
 
     $(function () {
         $('a[href="#search"]').on('click', function (event) {
-            alert(123);
+            
             event.preventDefault();
             $('#search').addClass('open');
             $('#search > form > input[type="search"]').focus();
