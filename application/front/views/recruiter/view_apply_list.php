@@ -18,9 +18,10 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
+        <?php echo $recruiter_header2; ?>
         <?php if ($recdata['re_step'] == 3) { ?>
-            <?php echo $recruiter_header2; ?>
+            <?php //echo $recruiter_header2; ?>
         <?php } ?>
         <div id="preloader"></div>
         <!-- START CONTAINER -->

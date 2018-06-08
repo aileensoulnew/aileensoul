@@ -898,7 +898,7 @@
                                         </select>
                                     </span>
                                 </div>
-                                <div class="form-group" ng-if="field == '0'">
+                                <div class="form-group" ng-if="opp.field == '0'">
                                     <input type="text" class="form-control" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="">

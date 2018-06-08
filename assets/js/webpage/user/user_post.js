@@ -885,8 +885,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var job_title = $scope.opp.job_title;
             var location = $scope.opp.location;
             var fields = $scope.opp.field;
+            var otherField = $scope.opp.otherField;
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '')))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "")))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
                 $('#post').modal('show');
@@ -1154,6 +1155,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
                 formFileDataOpp.append('description', $scope.opp.description);
                 formFileDataOpp.append('field', $scope.opp.field);
+                formFileDataOpp.append('other_field', $scope.opp.otherField);
                 formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
                 formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
                 formFileDataOpp.append('post_for', $scope.opp.post_for);
@@ -2254,7 +2256,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             var opportunity = $scope.postData[index].opportunity_data.opportunity;//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
             var job_title = $('#opp-post-opportunity-for-' + post_id).html().split(",");
             var city_names = $('#opp-post-location-' + post_id).html().split(",");
-            var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html();
+            var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" || $scope.postData[index].opportunity_data.field == 0 ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html();
             if(opportunity != "" && opportunity != undefined)
             {
                 //$("#description_edit_" + post_id).val(opportunity.replace(/(<([^>]+)>)/ig,""));
@@ -2280,9 +2282,9 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $('#job_title .input').attr('placeholder', '');
                 $('#job_title .input').css('width', '200px');
             }
-
+            console.log(field);
             $('[id=field_edit'+post_id+'] option').filter(function() { 
-                return ($(this).text() == field); //To select Blue
+                return ($(this).text() == field ? $(this).text() == field : 'Othes'); //To select Blue
             }).prop('selected', true);
 
             $("#description_edit_" + post_id).focus();
