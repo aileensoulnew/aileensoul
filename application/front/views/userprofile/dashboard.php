@@ -398,7 +398,9 @@
                                         <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
                                     </div>
                                     <div class="text-right fw pb10">
-                                        <button type="submit" class="btn1"  value="Submit">Save</button>                                    
+                                        <button type="submit" class="btn1" id="save_{{post.post_data.id}}" value="Submit">
+                                            <span class="ajax_load" id="login_ajax_load{{post.post_data.id}}" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span>
+                                        Save</button>
                                     </div>
                                     <?php // echo form_close(); ?>
                                 </form>

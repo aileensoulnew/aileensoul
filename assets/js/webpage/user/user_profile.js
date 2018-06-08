@@ -1953,7 +1953,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var job_title = $scope.opp.job_title_edit;
             var location = $scope.opp.location_edit;
             var fields = $("#field_edit"+post_id).val();            
-            var otherField_edit = $scope.opp.otherField_edit;
+            var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
 
             if((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == ""))
             {
@@ -1982,8 +1982,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
                 $('body').removeClass('modal-open');
                 $("#opportunity-popup").modal('hide');
-
-
+                $("#login_ajax_load"+post_id).show();
+                $("#save_"+post_id).attr("style","pointer-events: none;");
                 $http.post(base_url + 'user_post/edit_post_opportunity', form_data,
                         {
                             transformRequest: angular.identity,
@@ -1991,7 +1991,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                             headers: {'Content-Type': undefined, 'Process-Data': false}
                         })
                         .then(function (success) {
-
+                            $("#login_ajax_load"+post_id).hide();
+                            $("#save_"+post_id).attr("style","pointer-events: all;");
                             if (success.data.response == 1) {
                                 $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
                                 $scope.postData[postIndex].opportunity_data.field_id = success.data.field_id;
