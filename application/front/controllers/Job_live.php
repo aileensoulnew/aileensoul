@@ -570,6 +570,10 @@ class Job_live extends MY_Controller {
         
         $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
+        if(!empty($ProfessionData) || !empty($StudentData))
+        {
+            redirect(base_url());
+        }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);       
         $this->data['title'] = "Job Register | Aileensoul"; 

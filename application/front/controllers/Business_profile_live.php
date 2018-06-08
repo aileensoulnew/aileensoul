@@ -10960,6 +10960,10 @@ Your browser does not support the audio tag.
         
         $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
+        if(!empty($ProfessionData) || !empty($StudentData))
+        {
+            redirect(base_url());
+        }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
         $this->load->view('business_live/business_register', $this->data);

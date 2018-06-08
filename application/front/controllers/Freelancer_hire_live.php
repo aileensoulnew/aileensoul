@@ -3062,6 +3062,10 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         
         $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
+        if(!empty($ProfessionData) || !empty($StudentData))
+        {
+            redirect(base_url());
+        }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
         $this->load->view('freelancer_hire_live/freelancer_hire_register', $this->data);
