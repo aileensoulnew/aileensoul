@@ -254,10 +254,10 @@ class User_post_model extends CI_Model {
 
     public function userPostCount($user_id) {
         
-        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'field');
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'field,other_field');
         $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'current_study');
 
-        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field']);
+        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field'],$getUserProfessionData['other_field']);
         $getSameFieldStdUser = $this->user_model->getSameFieldStdUser($getUserStudentData['current_study']);
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
@@ -281,10 +281,10 @@ class User_post_model extends CI_Model {
         $user_id = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
 
 
-        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'field');
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'field,other_field');
         $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'current_study');
 
-        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field']);
+        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field'],$getUserProfessionData['other_field']);
         $getSameFieldStdUser = $this->user_model->getSameFieldStdUser($getUserStudentData['current_study']);
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
@@ -329,8 +329,8 @@ class User_post_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,city');
-        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field']);
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city');        
+        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field'],$getUserProfessionData['other_field']);
         $getSameJobTitleProUser = $this->user_model->getJobTitleCityProUser($getUserProfessionData['designation']);
         $getSameCityProUser = $this->user_model->getJobTitleCityProUser('',$getUserProfessionData['city']);        
         
@@ -522,7 +522,7 @@ class User_post_model extends CI_Model {
             $result_array[$key]['user_data'] = $user_data;
 
             if ($value['post_for'] == 'opportunity') {
-                $this->db->select("uo.post_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field")->from("user_opportunity uo, ailee_job_title jt, ailee_cities c");
+                $this->db->select("uo.post_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,IF(uo.field = 0,uo.other_field,it.industry_name) as field")->from("user_opportunity uo, ailee_job_title jt, ailee_cities c");
                 $this->db->join('industry_type it', 'it.industry_id = uo.field', 'left');
                 $this->db->where('uo.id', $value['post_id']);
                 $this->db->where('FIND_IN_SET(jt.title_id, uo.`opportunity_for`) !=', 0);

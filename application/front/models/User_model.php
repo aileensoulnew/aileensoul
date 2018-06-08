@@ -145,9 +145,29 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
-    public function getSameFieldProUser($field = '') {
-        $this->db->select("GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user")->from("user_profession up");
-        $this->db->where("up.field =" . $field);
+    public function getSameFieldProUser($field = '',$other_field = '') {
+        $this->db->select("GROUP_CONCAT(CONCAT('''', `user_id`, '''' )) AS group_user")->from("user_profession up");        
+        if($field == 0)
+        {
+            if($other_field != ""){
+                $of_sql = "";
+                foreach (explode(" ", $other_field) as $key => $value) {
+                    if($value != ""){                    
+                        $of_sql .= " other_field LIKE '%".$value."%' OR";
+                    }
+                }
+                $of_sql = trim($of_sql," OR");
+                $this->db->where($of_sql);
+            }
+            else
+            {
+                $this->db->where("up.field =" . $field);
+            }
+        }
+        else
+        {
+            $this->db->where("up.field =" . $field);
+        }
         $query = $this->db->get();
         $result_array = $query->row_array();
         return $result_array['group_user'];

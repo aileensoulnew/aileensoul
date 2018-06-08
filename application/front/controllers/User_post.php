@@ -541,6 +541,7 @@ class User_post extends MY_Controller {
                 $insert_data['location'] = $city_id;
                 $insert_data['opportunity'] = $description == 'undefined' ? "" : trim($description);
                 $insert_data['field'] = $field;
+                $insert_data['other_field'] = $other_field;
                 $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
 
                 $inserted_id = $user_opportunity_id = $this->common->insert_data_getid($insert_data, 'user_opportunity');

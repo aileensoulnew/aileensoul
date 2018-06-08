@@ -416,10 +416,10 @@ class Userprofile_model extends CI_Model {
     }
 
     public function userPostCount($user_id = '') {
-        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'field');
+        $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'field,other_field');
         $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'current_study');
 
-        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field']);
+        $getSameFieldProUser = $this->user_model->getSameFieldProUser($getUserProfessionData['field'],$getUserProfessionData['other_field']);
         $getSameFieldStdUser = $this->user_model->getSameFieldStdUser($getUserStudentData['current_study']);
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
