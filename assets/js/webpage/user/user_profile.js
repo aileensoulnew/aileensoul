@@ -1578,8 +1578,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var job_title = $scope.opp.job_title;
             var location = $scope.opp.location;
             var fields = $scope.opp.field;
+            var otherField_edit = $scope.opp.otherField_edit;
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '')))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == "")))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. All fields are mandatory.");
                 $('#post').modal('show');
@@ -1847,6 +1848,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
                 formFileDataOpp.append('description', $scope.opp.description);
                 formFileDataOpp.append('field', $scope.opp.field);
+                formFileDataOpp.append('other_field', otherField_edit);
                 formFileDataOpp.append('job_title', JSON.stringify($scope.opp.job_title));
                 formFileDataOpp.append('location', JSON.stringify($scope.opp.location));
                 formFileDataOpp.append('post_for', $scope.opp.post_for);
@@ -1951,8 +1953,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var job_title = $scope.opp.job_title_edit;
             var location = $scope.opp.location_edit;
             var fields = $("#field_edit"+post_id).val();            
+            var otherField_edit = $scope.opp.otherField_edit;
 
-            if((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == ''))
+            if((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == ""))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -1971,6 +1974,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
                 form_data.append('description', description);
                 form_data.append('field', fields);
+                form_data.append('other_field', otherField_edit);
                 form_data.append('job_title', JSON.stringify(job_title));
                 form_data.append('location', JSON.stringify(location));
                 form_data.append('post_for', $scope.opp.post_for);
@@ -1990,6 +1994,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
                             if (success.data.response == 1) {
                                 $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
+                                $scope.postData[postIndex].opportunity_data.field_id = success.data.field_id;
                                 $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
                                 $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
                                 $scope.postData[postIndex].opportunity_data.opportunity = success.data.opportunity;
@@ -2979,7 +2984,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             var opportunity = $scope.postData[index].opportunity_data.opportunity;//$("#opp-post-opportunity-" + post_id).attr("dd-text-collapse-text");
             var job_title = $('#opp-post-opportunity-for-' + post_id).html().split(",");
             var city_names = $('#opp-post-location-' + post_id).html().split(",");
-            var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html()
+            //var field = ($scope.postData[index].opportunity_data.field == null || $scope.postData[index].opportunity_data.field == "" ? "Other" : $scope.postData[index].opportunity_data.field);//$('#opp-post-field-' + post_id).html()
+            var field = $scope.postData[index].opportunity_data.field;
+            var field_id = $scope.postData[index].opportunity_data.field_id;
             if(opportunity != "" && opportunity != undefined)
             {
                 //$("#description_edit_" + post_id).val(opportunity.replace(/(<([^>]+)>)/ig,""));
@@ -3007,8 +3014,15 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
 
             $('[id=field_edit'+post_id+'] option').filter(function() { 
-                return ($(this).text() == field); //To select Blue
+                return (field_id != 0 ? $(this).text() == field : 'Other'); //To select Blue
             }).prop('selected', true);
+
+            $scope.opp.field_edit = field_id;
+            $scope.opp.otherField_edit = "";
+            setTimeout(function(){
+                // $scope.opp.otherField_edit = field;
+                $("#otherField_edit" + post_id).val(field);    
+            },100);
 
             $("#description_edit_" + post_id).focus();
             setTimeout(function(){

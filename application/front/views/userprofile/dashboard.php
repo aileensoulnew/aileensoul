@@ -384,15 +384,15 @@
                                             <label>For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
                                             <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
     										<span class="select-field-custom">
-    											<select name="field" ng-model="opp.field" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
+    											<select name="field" ng-model="opp.field_edit" id="field_edit{{post.post_data.id}}" ng-change="other_field(this)">
     												<option value="" selected="selected">Select Related Fields</option>
     												<option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
     												<option value="0">Other</option>
     											</select>
     										</span>
                                         </div>
-                                        <div class="form-group" ng-if="field == '0'">
-                                            <input type="text" class="form-control" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                        <div class="form-group" ng-if="opp.field_edit == '0'">
+                                            <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                         </div>
                                         <input type="hidden" name="post_for" class="form-control" value="">
                                         <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
@@ -885,7 +885,7 @@
                                     </select>
                                 </span>
                             </div>
-                            <div class="form-group" ng-if="field == '0'">
+                            <div class="form-group" ng-if="opp.field == '0'">
                                 <input type="text" class="form-control" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                             </div>
                             <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="">
