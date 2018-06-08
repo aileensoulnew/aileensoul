@@ -169,8 +169,6 @@
                         </div>
                     </div>
                 </div>
-
-
             
                 <!-- STATIC TEXT OF RELATED ARTICAL -->
                 <div class="related-article">

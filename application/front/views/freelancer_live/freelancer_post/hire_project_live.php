@@ -6,25 +6,18 @@
         <!-- END HEAD -->
 
         <title><?php echo $title; ?></title>
-        <?php
-        if (IS_APPLY_CSS_MINIFY == '0') {
-            ?>
+        <?php if (IS_APPLY_CSS_MINIFY == '0') { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
-
-            <?php
-        } else {
-            ?>
+        <?php } else { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
-
         <?php } ?>        
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
-
-
     </head>
     <!-- END HEAD -->
+    <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
     <body class="page-container-bg-solid page-boxed no-login freeh3 detail-job-no-login">
         <?php $this->load->view('page_loader'); ?>

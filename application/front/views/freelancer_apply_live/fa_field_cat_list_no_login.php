@@ -19,6 +19,7 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver=' . time()); ?>">
         <?php } ?>
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver='.time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
@@ -68,17 +69,13 @@
             <div class="middle-section middle-section-banner <?php echo $headercls; ?>">
             <?php
             echo $search_banner;
-        }
-        else
-        { ?>
+        } else { ?>
             <div class="middle-section">
-            <?php 
-        } ?>
-
+        <?php } ?>
                 <div class="container pt20 mobp0">
                     <div class="left-part">
                         <?php echo $fa_leftbar; ?>
-                        <div class="custom_footer_left fw">
+                        <!-- <div class="custom_footer_left fw">
                             <div class="">
                                 <ul>
                                     <li>
@@ -113,7 +110,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
                         <!--<div class="common-form">-->
@@ -192,7 +189,7 @@
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display hidden-1279 animated fadeInRightBig"> 
 
-                        <div class="all-profile-box hidden">
+                        <!-- <div class="all-profile-box hidden">
                             <div class="all-pro-head">
                                 <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
                             </div>
@@ -238,54 +235,51 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                         <?php echo $right_profile_view; ?>
+                        <?php echo $left_footer_list_view; ?>
 
                     </div>
-
                 </div>
-				
-		<div>
-			<div class="mob-filter" data-target="#filter" data-toggle="modal">
-				<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
-					<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
-					fill="#1b8ab9" stroke="none">
-					<path d="M489 2781 l-29 -29 0 -221 0 -221 -110 0 c-115 0 -161 -12 -174 -45
-					-3 -9 -6 -163 -6 -341 l0 -325 25 -24 c23 -24 30 -25 144 -25 l121 0 2 -646 3
-					-646 24 -19 c33 -27 92 -25 119 4 l22 23 0 642 0 642 124 0 c107 0 127 3 147
-					19 l24 19 3 331 3 332 -30 29 c-29 30 -30 30 -150 30 l-121 0 0 225 0 226 -25
-					24 c-34 35 -78 33 -116 -4z m271 -851 l0 -210 -210 0 -210 0 0 210 0 210 210
-					0 210 0 0 -210z"/>
-					<path d="M1445 2785 l-25 -24 0 -641 0 -640 -119 0 c-105 0 -121 -2 -145 -21
-					l-26 -20 0 -338 0 -338 23 -21 c21 -20 34 -22 145 -22 l122 0 0 -224 c0 -211
-					1 -225 21 -250 16 -21 29 -26 64 -26 35 0 48 5 64 26 20 25 21 39 21 250 l0
-					224 123 0 c181 0 167 -33 167 382 l0 337 -26 20 c-24 19 -40 21 -145 21 l-119
-					0 0 640 0 641 -25 24 c-33 34 -87 34 -120 0z m275 -1685 l0 -210 -215 0 -215
-					0 0 210 0 210 215 0 215 0 0 -210z"/>
-					<path d="M2405 2785 l-25 -24 0 -226 0 -225 -121 0 c-120 0 -121 0 -150 -30
-					l-30 -29 3 -332 3 -331 24 -19 c20 -16 40 -19 147 -19 l124 0 0 -643 0 -644
-					23 -21 c29 -28 86 -29 118 -3 l24 19 3 646 2 646 121 0 c114 0 121 1 144 25
-					l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
-					-29 29 c-38 37 -82 39 -116 4z m265 -855 l0 -210 -210 0 -210 0 0 210 0 210
-					210 0 210 0 0 -210z"/>
-					</g>
-				</svg>
-			</div>
-		</div>
-		<div id="filter" class="modal mob-modal fade" role="dialog">
-            <div class="modal-dialog modal-lm">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
-                    <div class="modal-body">
-						<div class="mid-modal-body">
-							 <?php echo $fa_leftbar; ?>
-						</div>
+        		<div>
+        			<div class="mob-filter" data-target="#filter" data-toggle="modal">
+        				<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
+        					<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
+        					fill="#1b8ab9" stroke="none">
+        					<path d="M489 2781 l-29 -29 0 -221 0 -221 -110 0 c-115 0 -161 -12 -174 -45
+        					-3 -9 -6 -163 -6 -341 l0 -325 25 -24 c23 -24 30 -25 144 -25 l121 0 2 -646 3
+        					-646 24 -19 c33 -27 92 -25 119 4 l22 23 0 642 0 642 124 0 c107 0 127 3 147
+        					19 l24 19 3 331 3 332 -30 29 c-29 30 -30 30 -150 30 l-121 0 0 225 0 226 -25
+        					24 c-34 35 -78 33 -116 -4z m271 -851 l0 -210 -210 0 -210 0 0 210 0 210 210
+        					0 210 0 0 -210z"/>
+        					<path d="M1445 2785 l-25 -24 0 -641 0 -640 -119 0 c-105 0 -121 -2 -145 -21
+        					l-26 -20 0 -338 0 -338 23 -21 c21 -20 34 -22 145 -22 l122 0 0 -224 c0 -211
+        					1 -225 21 -250 16 -21 29 -26 64 -26 35 0 48 5 64 26 20 25 21 39 21 250 l0
+        					224 123 0 c181 0 167 -33 167 382 l0 337 -26 20 c-24 19 -40 21 -145 21 l-119
+        					0 0 640 0 641 -25 24 c-33 34 -87 34 -120 0z m275 -1685 l0 -210 -215 0 -215
+        					0 0 210 0 210 215 0 215 0 0 -210z"/>
+        					<path d="M2405 2785 l-25 -24 0 -226 0 -225 -121 0 c-120 0 -121 0 -150 -30
+        					l-30 -29 3 -332 3 -331 24 -19 c20 -16 40 -19 147 -19 l124 0 0 -643 0 -644
+        					23 -21 c29 -28 86 -29 118 -3 l24 19 3 646 2 646 121 0 c114 0 121 1 144 25
+        					l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
+        					-29 29 c-38 37 -82 39 -116 4z m265 -855 l0 -210 -210 0 -210 0 0 210 0 210
+        					210 0 210 0 0 -210z"/>
+        					</g>
+        				</svg>
+        			</div>
+        		</div>
+        		<div id="filter" class="modal mob-modal fade" role="dialog">
+                    <div class="modal-dialog modal-lm">
+                        <div class="modal-content">
+                            <button type="button" class="modal-close" data-dismiss="modal">&times;</button><div class="modal-body">
+        						<div class="mid-modal-body">
+        							 <?php echo $fa_leftbar; ?>
+        						</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-				
-    </div>   
+                </div>        				
+            </div>   
    
     <!-- Model Popup Open -->
 	

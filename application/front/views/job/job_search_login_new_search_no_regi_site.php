@@ -222,42 +222,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                     </div>
                     </form>
-                    <div class="custom_footer_left fw">
-                        <div class="">
-                            <ul>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> About Us 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Blogs 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                 </div>
 
                     <div class="middle-part animated fadeInUp">
@@ -339,8 +304,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         <!--</div>-->
                     </div>
                     <div id="hideuserlist" class="right-part animated fadeInRightBig"> 
-
-                        <div class="all-profile-box">
+                        <!-- <div class="all-profile-box">
                             <div class="all-pro-head">
                                 <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
                             </div>
@@ -386,8 +350,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-
+                        </div> -->
+                        <?php echo $right_profile_view; ?>
+                        <?php echo $left_footer; ?>
                     </div>
 
                 </div>

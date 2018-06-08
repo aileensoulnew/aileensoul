@@ -245,7 +245,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                     </form>
 
-                    <?php echo $left_footer; ?>
+                    <?php //echo $left_footer; ?>
                     <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
@@ -341,9 +341,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     </div>
                 </div>
                 <div class="right-part">
-                    <div class="add-box">
-                        <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>">
-                    </div>
+                    <!-- <div class="add-box">
+                        <img src="<?php //echo base_url('assets/img/add.jpg?ver=' . time()) ?>">
+                    </div> -->
+                    <?php echo $right_profile_view; ?>
+                    <?php echo $left_footer; ?>
                 </div>
 
             </div>

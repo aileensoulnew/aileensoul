@@ -54,8 +54,8 @@
                     <div ng-view></div>                
                 </div>
             </div>
+            <?php echo $login_footer; ?>
         </div>
-			<?php echo $login_footer; ?>
 		
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>

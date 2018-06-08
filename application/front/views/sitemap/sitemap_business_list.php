@@ -21,8 +21,8 @@
 			<li ng-repeat="company in companyList track by $index">
 				<a ng-href="<?php echo base_url(). 'company/'?>{{ company.business_slug }}" target="_blank">
 					{{ company.company_name | capitalize }} 
-					<span ng-if="company.business_name != '' && company.business_name != null">
-						( {{ company.business_name | capitalize }} )
+					<span ng-if="company.bus_industry_name != '' && company.bus_industry_name != null">
+						( {{ company.bus_industry_name | capitalize }} )
 					</span>
 				</a>
 			</li>								

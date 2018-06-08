@@ -182,7 +182,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Aileensoul";
+        $this->data['title'] = "Freelance | Aileensoul";
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
         $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
@@ -305,7 +305,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Opportunities | Aileensoul";
+        $this->data['title'] = "Freelance Search | Aileensoul";
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
         $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         /*$this->data['q'] = $_GET['q'];

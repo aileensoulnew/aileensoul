@@ -14,11 +14,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
 		<?php
            if($isartistactivate == true && $artist_isregister){
-               
         ?>
 			<link rel="stylesheet" href="<?php echo base_url('assets/css/header.css?ver=' . time()) ?>">
-			
-		   <?php } ?>
+        <?php } ?>
 
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">

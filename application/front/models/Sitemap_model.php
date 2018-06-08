@@ -190,8 +190,7 @@ class Sitemap_model extends CI_Model {
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
-            // print_r($value['art_skill']);
-            // exit;
+           
             $sql = "SELECT group_concat(art_category) as category_name FROM ailee_art_category 
                     WHERE category_id IN (". $value['art_skill'] .")";
             $query = $this->db->query($sql);
@@ -220,8 +219,11 @@ class Sitemap_model extends CI_Model {
             $searchword = $searchword. '%';
             $search_query = " AND company_name like '". $searchword ."'";
         }
-        $sql = "SELECT bp.*,bt.business_name, IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug FROM ailee_business_profile bp
-                LEFT JOIN ailee_business_type bt on bt.type_id = bp.business_type
+        $sql = "SELECT bp.*, 
+                IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug, 
+                IF (bp.industriyal = 0, bp.other_industrial , it.industry_name) as bus_industry_name
+                FROM ailee_business_profile bp
+                LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
                 LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
                 LEFT JOIN ailee_states st ON st.state_name = bp.state 
                 WHERE bp.status = '1'

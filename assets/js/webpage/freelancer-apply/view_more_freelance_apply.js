@@ -44,7 +44,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('FAjobsByFieldController', function ($scope, $http, $location, $window) {
-    $scope.title = "Freelance Jobs By Field | Aileensoul";    
+    $scope.$parent.title = "Freelance Jobs By Field | Aileensoul";    
     $scope.jobByField = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -105,7 +105,7 @@ app.controller('FAjobsByFieldController', function ($scope, $http, $location, $w
 });
 
 app.controller('FAjobsByCategoryController', function ($scope, $http, $location, $window) {
-    $scope.title = "Freelance Jobs By Category | Aileensoul";    
+    $scope.$parent.title = "Freelance Jobs By Category | Aileensoul";    
     $scope.jobByCategory = {};
     $scope.jobs = {};
     var isProcessing = false;

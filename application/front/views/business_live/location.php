@@ -44,7 +44,8 @@
 </div>
 
 <div class="right-part">
-    <div class="add-box">
-        <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>" alt="{{category.industry_name}}">
-    </div>
+    <!-- <div class="add-box">
+        <img src="<?php //echo base_url('assets/img/add.jpg?ver=' . time()) ?>" alt="{{category.industry_name}}">
+    </div> -->
+    <?php echo $right_profile_view; ?>
 </div>

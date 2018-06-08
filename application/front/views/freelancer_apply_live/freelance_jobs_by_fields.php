@@ -30,7 +30,9 @@
     </div>
 </div>
 <div class="right-part">
-    <div class="add-box">
-        <img src="<?php echo base_url();?>assets/img/add.jpg">
-    </div>
+    <!-- <div class="add-box">
+        <img src="<?php //echo base_url();?>assets/img/add.jpg">
+    </div> -->
+    <?php echo $right_profile_view; ?>
+    <?php echo $left_footer_list_view; ?>
 </div>

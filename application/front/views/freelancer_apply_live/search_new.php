@@ -20,6 +20,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php //echo $head; ?>        
+        <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver='.time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
@@ -77,7 +78,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             <div class="container pt20 mobp0">
                 <div class="left-part">
                     <?php echo $fa_leftbar; ?>
-                    <div class="custom_footer_left fw">
+                    <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
                                 <li>
@@ -112,7 +113,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>                
                 <div class="middle-part">
                     <div class="page-title">
@@ -195,9 +196,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                 </div>
                 <div class="right-part">
-                    <div class="add-box">
-                        <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>">
-                    </div>
+                    <!-- <div class="add-box">
+                        <img src="<?php //echo base_url('assets/img/add.jpg?ver=' . time()) ?>">
+                    </div> -->
+                    <?php echo $right_profile_view; ?>
+                    <?php echo $left_footer_list_view; ?>
                 </div>
 
             </div>
