@@ -203,11 +203,14 @@ color: #1b8ab9 !important;}
 													<form id="basic_info_frm" name="basic_info_frm" action="<?php echo base_url(); ?>profile/edit_basic_info" method="post">
 														<p class="student-or-not">If you are a student then <a href="javascript:void(0);" id="is_basic">Click Here.</a></p>
 														<fieldset class="fw">
-															<label >Who are you?</label>
+															<label >What's your current position?</label>
 															<input tabindex="10" name="job_title" type="text" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." id="job_title" value="<?php echo $professionData['name']; ?>"/><span id="fullname-error"></span><?php echo form_error('job_title'); ?>
+															<div id="jttooltip" class="tooltip-custom" style="display: none;">
+										                        Enter “seeking opportunity” if you are a fresher else enter your current job title. Ex:Seeking Opportunity / CEO / Entrepreneur / Founder / Singer / Photographer / Developer / HR / BDE / CA / Doctor..
+										                    </div>
 														</fieldset>
 														<fieldset class="fw">
-															<label>Where are you from?</label>
+															<label>What’s your current location?</label>
 															<input tabindex="11" name="city" placeholder="Enter your city name" type="text" id="cities2" value="<?php echo $professionData['city_name']; ?>"/><span id="fullname-error"></span>
 															<?php echo form_error('city'); ?>
 														</fieldset>
@@ -243,6 +246,9 @@ color: #1b8ab9 !important;}
 														<fieldset class="fw">
 															<label >What are you studying right now?</label>
 															<input tabindex="15" name="currentStudy" type="text" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." id="currentStudy" value="<?php echo $studentData['degree_name']; ?>"/><span id="fullname-error"></span><?php echo form_error('currentStudy'); ?>
+															<div id="cstooltip" class="tooltip-custom" style="display: none;">
+										                        Enter the current qualification that you are pursuing like 10 th , 12 th , B.E, BCA, Medical, MBA
+										                    </div>
 														</fieldset>
 														<fieldset class="fw">
 															<label>Where are you from?</label>
@@ -256,6 +262,9 @@ color: #1b8ab9 !important;}
 														<fieldset class="fw">
 															<label >Interested field</label>
 															<input tabindex="18" name="studjob_title" type="text" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." id="studjob_title" value="<?php echo $studentData['name']; ?>"/><span id="fullname-error"></span><?php echo form_error('studjob_title'); ?>
+															<div id="iftooltip" class="tooltip-custom" style="display: none;">
+										                        Enter the field name in which you want to make your career.
+										                    </div>
 														</fieldset>
 														<fieldset class="hs-submit full-width">
 															<a class="btn3" href="javascript:void(0);" id="is_stud">Back</a>
@@ -339,7 +348,7 @@ color: #1b8ab9 !important;}
                     minLength: 2,
                     source: function( request, response ) { 
                     // delegate back to autocomplete, but extract the last term
-                    $.getJSON(base_url + "general/get_jobtitle", { term : extractLast( request.term )},response);
+                    $.getJSON(base_url + "general_data/getSearchJobTitleStart", { q : extractLast( request.term )},response);
                     },
                     focus: function() {
                         // prevent value inserted on focus
@@ -539,6 +548,25 @@ color: #1b8ab9 !important;}
                     $("#other_field_div").hide();
                 }
             }
+            $("#job_title").focusin(function(){
+		        $('#jttooltip').show();
+		    });
+		    $("#job_title").focusout(function(){
+		        $('#jttooltip').hide();
+		    });
+
+		    $("#currentStudy").focusin(function(){
+		        $('#cstooltip').show();
+		    });
+		    $("#currentStudy").focusout(function(){
+		        $('#cstooltip').hide();
+		    });
+			$("#studjob_title").focusin(function(){
+		        $('#iftooltip').show();
+		    });
+		    $("#studjob_title").focusout(function(){
+		        $('#iftooltip').hide();
+		    });
         </script>
     </body>
 </html>
