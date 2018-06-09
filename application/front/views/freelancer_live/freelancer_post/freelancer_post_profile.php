@@ -308,7 +308,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container pt10">
+            <div class="container pt10 mobp0">
                 <div class="job-menu-profile mob-none pt-20">
                     <a title="<?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?></h3></a>
                     <div class="profile-text pt5">
@@ -336,7 +336,7 @@
                         ?>
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-12 col-xs-12 mob-clear">
+                <div class="col-md-7 col-sm-12 col-xs-12 mob-clear mobp0">
                     <?php
                     if ($freelancerpostdata['0']['user_id'] == $this->session->userdata('aileenuser')) {
                         if ($count_profile == 100) {
@@ -1161,8 +1161,10 @@
             </div>
             <div class="clearfix"></div>
         </section>
+		<div class="bottom-ftr-none">
         <?php echo $login_footer ?>
         <?php echo $footer; ?>
+		</div>
         <!-- Bid-modal  -->
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
             <div class="modal-dialog modal-lm">

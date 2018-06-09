@@ -1263,7 +1263,7 @@ border: 1px solid #1b8ab9;}
 .mobile-header .sub-header .sub-menu > li{padding:0 4px; width:33.33%; text-align:center; background:#fff;}
 .mobile-header .sub-header.bus-only .sub-menu > li{width:25%;}
 .mobile-header .sub-header .sub-menu.rec-only > li{width:25%;}
-.mobile-header .sub-header .sub-menu.free-h-only li{width:25%;}
+.mobile-header .sub-header .sub-menu.free-h-only > li{width:25%;}
 .mobile-header .sub-header .sub-menu > li > a i{padding-right:0px;}
 .mobile-header .sub-header .sub-menu > li a{font-size:14px; position:relative; display:inline-block; padding-top:5px; letter-spacing:1px;}
 .mobile-header .sub-header .sub-menu > li:first-child{padding-top:0;}
