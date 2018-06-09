@@ -328,13 +328,13 @@ class Recruiter_live extends MY_Controller {
             $searchTerm = $searchTerm . '%';
             $sql = "SELECT designation as value FROM ailee_job_reg WHERE status = '1' 
                     AND is_delete = '0' AND (designation LIKE '". $searchTerm ."') 
-                    GROUP BY designation
+                    
                     UNION
-                    SELECT degree_name as value FROM ailee_degree WHERE status = '1' AND (degree_name LIKE '". $searchTerm ."') GROUP BY degree_name
+                    SELECT degree_name as value FROM ailee_degree WHERE status = '1' AND (degree_name LIKE '". $searchTerm ."')
                     UNION
-                    SELECT stream_name as value FROM ailee_stream WHERE status = '1' AND (stream_name LIKE '". $searchTerm ."') GROUP BY stream_name
+                    SELECT stream_name as value FROM ailee_stream WHERE status = '1' AND (stream_name LIKE '". $searchTerm ."')
                     UNION
-                    SELECT skill as value FROM ailee_skill WHERE status = '1' AND type = '1' AND (skill LIKE '". $searchTerm ."') GROUP BY skill
+                    SELECT skill as value FROM ailee_skill WHERE status = '1' AND type = '1' AND (skill LIKE '". $searchTerm ."') GROUP BY value
                     LIMIT $limit";
                 // echo $sql;
             $query = $this->db->query($sql);        

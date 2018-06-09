@@ -8,7 +8,7 @@ $userid = $this->session->userdata('aileenuser');
 			<input id="m_searchplace" class="searchplace ui-autocomplete-input rec_search_loc" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
 		</div>
 		<div class="new-search-btn">
-			<button type="button" class="close-new btn">Cancel</button>
+			<button type="button" class="close-new btn" data-dismiss="modal">Cancel</button>
 			<button type="submit" id="m_search_btn" class="btn btn-primary" onclick="return m_checkvalue();">Search</button>
 		</div>
 	</form>
@@ -84,12 +84,12 @@ $userid = $this->session->userdata('aileenuser');
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span id="message_count" class="noti-box">1</span>
+									<span id="message_count" class="message_count noti-box">1</span>
 								</div>
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
-									Messages <a href="javascript:void(0)" class="pull-right" id="seemsg"></a>
+									Messages <a href="javascript:void(0)" class="seemsg pull-right" id="seemsg"></a>
 								</div>
 								<div class="content custom-scroll">
 									<ul class="dropdown-data msg-dropdown notification_data_in_h2">
@@ -207,46 +207,56 @@ $userid = $this->session->userdata('aileenuser');
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="#" target="_self">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
 							<div class="sub-menu-icon">
-									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
-										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
-											<path d="M1660 18783 c-94 -10 -265 -48 -373 -83 -271 -90 -508 -233 -716
-											-434 -278 -270 -456 -591 -539 -975 l-27 -126 0 -6500 0 -6500 27 -126 c83
-											-382 260 -703 535 -970 111 -107 164 -150 283 -229 192 -126 434 -224 671
-											-272 l114 -23 9030 0 9030 0 114 23 c388 79 725 262 996 543 234 242 385 511
-											470 832 60 228 56 -298 53 6772 l-3 6460 -27 121 c-113 503 -396 916 -818
-											1194 -188 123 -427 221 -666 272 l-109 23 -9005 1 c-4953 0 -9021 -1 -9040 -3z
-											m13280 -5488 l-4235 -4235 -105 104 c-229 225 -7176 7111 -7787 7718 l-652
-											648 8507 0 8507 0 -4235 -4235z m-9145 -1150 c1920 -1902 3720 -3686 4000
-											-3965 281 -279 524 -517 542 -528 110 -76 229 -112 370 -112 117 0 191 17 293
-											67 74 36 156 117 4578 4537 l4502 4501 0 -5985 c0 -5796 -1 -5988 -19 -6075
-											-41 -199 -120 -344 -271 -495 -151 -151 -296 -230 -495 -271 -87 -18 -343 -19
-											-8630 -19 -8287 0 -8543 1 -8630 19 -199 41 -344 120 -495 271 -151 151 -230
-											296 -271 495 -18 87 -19 279 -19 6080 l0 5990 528 -526 c290 -289 2097 -2082
-											4017 -3984z"/>
-										</g>
-									</svg>
-									<svg class="on-hover" width="17" height="17" viewBox="0 0 2133.000000 2133.000000">
-										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
-											<path d="M1660 18783 c-150 -16 -402 -84 -539 -145 l-53 -24 1423 -1416 c783
-											-779 2952 -2931 4819 -4782 l3395 -3365 4778 4777 c2627 2627 4777 4780 4777
-											4783 0 9 -190 83 -279 109 -40 12 -117 31 -170 43 l-96 21 -9010 2 c-4955 0
-											-9026 -1 -9045 -3z"/>
-											<path d="M132 17618 c-54 -138 -77 -217 -104 -351 l-23 -112 0 -6495 0 -6495
-											27 -126 c83 -382 260 -703 535 -970 111 -107 164 -150 283 -229 192 -126 434
-											-224 671 -272 l114 -23 9030 0 9030 0 114 23 c388 79 725 262 996 543 234 242
-											385 511 470 832 60 228 56 -298 53 6772 l-3 6460 -27 121 c-27 120 -77 276
-											-121 376 l-23 53 -4965 -4969 c-2730 -2732 -5002 -5002 -5049 -5044 -136 -120
-											-267 -172 -435 -172 -108 0 -184 18 -285 67 -89 43 135 -175 -2284 2223 -4484
-											4444 -6484 6425 -7193 7128 l-771 762 -40 -102z"/>
-										</g>
-									</svg>
-									<span class="none-sub-menu"> Message</span>
-									<span id="message_count" class="noti-box">1</span>
-								</div>
+								<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
+									<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
+										<path d="M1660 18783 c-94 -10 -265 -48 -373 -83 -271 -90 -508 -233 -716
+										-434 -278 -270 -456 -591 -539 -975 l-27 -126 0 -6500 0 -6500 27 -126 c83
+										-382 260 -703 535 -970 111 -107 164 -150 283 -229 192 -126 434 -224 671
+										-272 l114 -23 9030 0 9030 0 114 23 c388 79 725 262 996 543 234 242 385 511
+										470 832 60 228 56 -298 53 6772 l-3 6460 -27 121 c-113 503 -396 916 -818
+										1194 -188 123 -427 221 -666 272 l-109 23 -9005 1 c-4953 0 -9021 -1 -9040 -3z
+										m13280 -5488 l-4235 -4235 -105 104 c-229 225 -7176 7111 -7787 7718 l-652
+										648 8507 0 8507 0 -4235 -4235z m-9145 -1150 c1920 -1902 3720 -3686 4000
+										-3965 281 -279 524 -517 542 -528 110 -76 229 -112 370 -112 117 0 191 17 293
+										67 74 36 156 117 4578 4537 l4502 4501 0 -5985 c0 -5796 -1 -5988 -19 -6075
+										-41 -199 -120 -344 -271 -495 -151 -151 -296 -230 -495 -271 -87 -18 -343 -19
+										-8630 -19 -8287 0 -8543 1 -8630 19 -199 41 -344 120 -495 271 -151 151 -230
+										296 -271 495 -18 87 -19 279 -19 6080 l0 5990 528 -526 c290 -289 2097 -2082
+										4017 -3984z"/>
+									</g>
+								</svg>
+								<svg class="on-hover" width="17" height="17" viewBox="0 0 2133.000000 2133.000000">
+									<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
+										<path d="M1660 18783 c-150 -16 -402 -84 -539 -145 l-53 -24 1423 -1416 c783
+										-779 2952 -2931 4819 -4782 l3395 -3365 4778 4777 c2627 2627 4777 4780 4777
+										4783 0 9 -190 83 -279 109 -40 12 -117 31 -170 43 l-96 21 -9010 2 c-4955 0
+										-9026 -1 -9045 -3z"/>
+										<path d="M132 17618 c-54 -138 -77 -217 -104 -351 l-23 -112 0 -6495 0 -6495
+										27 -126 c83 -382 260 -703 535 -970 111 -107 164 -150 283 -229 192 -126 434
+										-224 671 -272 l114 -23 9030 0 9030 0 114 23 c388 79 725 262 996 543 234 242
+										385 511 470 832 60 228 56 -298 53 6772 l-3 6460 -27 121 c-27 120 -77 276
+										-121 376 l-23 53 -4965 -4969 c-2730 -2732 -5002 -5002 -5049 -5044 -136 -120
+										-267 -172 -435 -172 -108 0 -184 18 -285 67 -89 43 135 -175 -2284 2223 -4484
+										4444 -6484 6425 -7193 7128 l-771 762 -40 -102z"/>
+									</g>
+								</svg>
+								<span class="none-sub-menu"> Message</span>
+								<span id="message_count" class="message_count noti-box">1</span>
+							</div>
 							
 						</a>
+						<div class="dropdown-menu">
+							<div class="dropdown-title">
+								Messages <a href="javascript:void(0)" class="seemsg pull-right" id="seemsg"></a>
+							</div>
+							<div class="content custom-scroll">
+								<ul class="dropdown-data msg-dropdown notification_data_in_h2">
+									
+								</ul>
+							</div>
+						</div>
 					</li>
 					<li class="dropdown user-id">
 						<a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -338,7 +348,7 @@ $userid = $this->session->userdata('aileenuser');
 	<div class="container">
 		<div class="search-mob-block">
 			<a href="#" data-toggle="modal" data-target="#recruiter_search">
-		        <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+		        <input type="search" id="tags1" readonly="true" class="tags" name="skills" value="" placeholder="Companies, Category, Products" />
 		    </a>		
 		</div>
 	</div>
@@ -382,16 +392,18 @@ $userid = $this->session->userdata('aileenuser');
 	{
 		if (msg == 0)
 		{ 
-			$("#message_count").html('');
-			$("#message_count").removeAttr("style");
+			$(".message_count").html('');
+			$(".message_count").removeAttr("style");
 			$('#InboxLink').removeClass('msg_notification_available');
-			document.getElementById('message_count').style.display = "none";
+			$(".message_count").hide();
+			// document.getElementById('message_count').style.display = "none";
 		} else
 		{
-			$('#message_count').html(msg);
+			$('.message_count').html(msg);
 			$('#InboxLink').addClass('msg_notification_available');
-			$('#message_count').addClass('count_add');
-			document.getElementById('message_count').style.display = "block";
+			$('.message_count').addClass('count_add');
+			$('.message_count').show();
+			// document.getElementById('message_count').style.display = "block";
 			
 		}
 	}
@@ -457,7 +469,7 @@ $userid = $this->session->userdata('aileenuser');
 			success: function (data) { 
 				$('#userlist').html(data.leftbar);
 				$('.notification_data_in_h2').html(data.headertwo);
-				$('#seemsg').html(data.seeall);
+				$('.seemsg').html(data.seeall);
 				setTimeout(
 					chatmsg,
 					100
