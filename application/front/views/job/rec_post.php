@@ -359,8 +359,12 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 <div class="all-job-box job-detail">
                                     <div class="all-job-top">
                                         <div class="post-img">
-                                            <a title="<?php echo $post['re_comp_name']; ?>" href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>">
+                                            <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                            <?php else: ?>
+                                                <a title="<?php echo $post['re_comp_name']; ?>" href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>">
                                                 <?php
+                                                    endif;
                                                 $cache_time = $this->db->get_where('recruiter', array(
                                                             'user_id' => $post['user_id']
                                                         ))->row()->comp_logo;
@@ -401,7 +405,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                                             <p>
                                                 <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
-                                                    <a href="#" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                                    <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
                                                     <?php else: ?>
                                                         <a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo $post['re_comp_name']; ?>">
                                                     <?php endif;
@@ -412,7 +416,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                             </p>
                                             <p>
                                                 <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
-                                                    <a href="#" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                                    <a data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
                                                 <?php else: ?>
 
                                                     <a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo ucfirst(strtolower($post['rec_firstname'])) . ' ' . ucfirst(strtolower($post['rec_lastname'])); ?>">
