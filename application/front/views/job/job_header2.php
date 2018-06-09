@@ -94,13 +94,13 @@ $userid = $this->session->userdata('aileenuser');
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span id="message_count" class="noti-box">1</span>
+									<span id="message_count" class="message_count noti-box">1</span>
 								</div>
 								
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
-									Messages <a id="seemsg" href="javascript:void(0)" class="pull-right"></a>
+									Messages <a id="seemsg" href="javascript:void(0)" class="seemsg pull-right"></a>
 								</div>
 								<div class="content custom-scroll">
 									<ul class="dropdown-data msg-dropdown notification_data_in_h2">
@@ -185,9 +185,19 @@ $userid = $this->session->userdata('aileenuser');
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="#">
-							<span>Message</span> <span class="noti-box">1</span>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
+							<span>Message</span>
+							<span id="message_count" class="message_count noti-box">1</span>
 						</a>
+						<div class="dropdown-menu">
+							<div class="dropdown-title">
+								Messages <a id="seemsg" href="javascript:void(0)" class="seemsg pull-right"></a>
+							</div>
+							<div class="content custom-scroll">
+								<ul class="dropdown-data msg-dropdown notification_data_in_h2">
+								</ul>
+							</div>
+						</div>
 					</li>
 					<li class="dropdown user-id">
 						<a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -251,7 +261,7 @@ $userid = $this->session->userdata('aileenuser');
 		 success: function(data) { //alert(data);
 			 $('#userlist').html(data.leftbar);
 			 $('.notification_data_in_h2').html(data.headertwo);
-			 $('#seemsg').html(data.seeall);
+			 $('.seemsg').html(data.seeall);
 			 setTimeout(chatmsg, 100000);
 		 },
 		 error: function(XMLHttpRequest, textStatus, errorThrown) {}
@@ -278,16 +288,19 @@ $userid = $this->session->userdata('aileenuser');
 	{
 		if (msg == 0)
 		{ 
-			$("#message_count").html('');
-			$("#message_count").removeAttr("style");
+			$(".message_count").html('');
+			$(".message_count").removeAttr("style");
 			$('#InboxLink').removeClass('msg_notification_available');
-			document.getElementById('message_count').style.display = "none";
+			// document.getElementById('message_count').style.display = "none";
+			$(".message_count").hide();
+
 		} else
 		{
-			$('#message_count').html(msg);
+			$('.message_count').html(msg);
 			$('#InboxLink').addClass('msg_notification_available');
-			$('#message_count').addClass('count_add noti-box');
-			document.getElementById('message_count').style.display = "block";
+			$('.message_count').addClass('count_add noti-box');
+			$(".message_count").show();
+			// document.getElementById('message_count').style.display = "block";
 			//alert("welcome");
 		}
 	}
