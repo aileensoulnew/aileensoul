@@ -302,7 +302,7 @@ if($browser == "Firefox")
                             </a>
                         <?php */endif; ?>
                         </div>
-                        <div id="search">
+                        <!-- <div id="search">
                             <form method="get">
                                 <div class="new-search-input">
                                    <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
@@ -314,7 +314,7 @@ if($browser == "Firefox")
                                     <button type="submit"  id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="right-header">
                         <ul>
