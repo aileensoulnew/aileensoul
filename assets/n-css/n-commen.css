@@ -1268,7 +1268,7 @@ border: 1px solid #1b8ab9;}
 .mobile-header .sub-header .sub-menu{padding:3px 0 4px;}
 .cbp-spmenu{background:#ede9e9;}
 .cbp-spmenu-vertical{height:90%;}
-.mob-side-menu .content{height:100%;}
+.mob-side-menu .content{height:100% !important;}
 
 .mob-side-menu .all-profile-box{padding-top:46px; background:#fff; margin-left:0;}
 .mob-side-menu .all-profile-box ul{
@@ -1652,12 +1652,13 @@ svg path{
     #upload-demo .cr-viewport{height: 200px !important;}
 	.none-sub-menu{display:none;}
 	.mobile-header .sub-header .sub-menu li{width:30%;}
-	.mobile-header .sub-header .sub-menu li:first-child{width:40%;}	
-	.mobile-header .sub-header .sub-menu.rec-only li:first-child{width:45%;}	
+	.mobile-header .sub-header .sub-menu li:first-child{width:45%;}	
+	.mobile-header .sub-header .sub-menu li:last-child{width:25%;}	
 	.mobile-header .sub-header .sub-menu.rec-only > li{width:17.66%;}
 	.sub-header .dropdown.open .dropdown-menu.account li{width:100%;}
 	.mobile-header .search-mob-block{width:68%;}
 	.mobile-header .search-mob-block{width:64%;}
+	.mobile-header .sub-header .sub-menu li a{font-size:13px;}
 }
 @media screen and (max-width: 359px) {
 	.search-mob-block{width:57%;}
