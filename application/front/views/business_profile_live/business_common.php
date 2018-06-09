@@ -1,7 +1,7 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
 ?>
-<div class="container" id="paddingtop_fixed">
+<div class="container fw-991" id="paddingtop_fixed">
     <div class="row" id="row1" style="display:none;">
         <div class="col-md-12 text-center">
             <div id="upload-demo" ></div>
@@ -56,7 +56,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         </div>
     </div>
 </div>
-<div class="container tablate-container">
+<div class="container tablate-container fw-991">
     <?php
     if ($business_common_data[0]['user_id'] == $userid) {
         ?>

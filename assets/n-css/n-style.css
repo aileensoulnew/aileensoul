@@ -2437,6 +2437,7 @@ body, body.no-login {padding-bottom:60px;}
 
 .mi-cat-width{width:220px; float:left;}
 .msg_desc_a{max-height:17px;}
+#contact_per{display:none;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -2605,6 +2606,11 @@ body, body.no-login {padding-bottom:60px;}
 	.business-profile-right{padding-left:0;}
 	.flw_msg_btn ul li:last-child{margin-right:0 !important;}
 	.other-profile-menu .profile-main-box-buis-menu .flw_msg_btn ul{width:190px;}
+	.other-profile-menu .profile-pho-bui{position:inherit; margin:0 auto; float:none; display:block; margin-top:-80px; margin-bottom:15px;}
+	.profile-pho-bui{position:inherit; margin:0 auto; float:none; display:block; margin-top:-50px; margin-bottom:15px;}
+	.business-profile-right{text-align:center;}
+	.business-profile-right .bui-menu-profile{padding-left:0 !important; padding:top10px;}
+	.other-profile-menu .profile-left{width:100%; padding:0;}
 	
 	/***  blog page  ***/
 	.blog-page footer{position:inherit; height:inherit;}
@@ -2635,6 +2641,7 @@ body, body.no-login {padding-bottom:60px;}
 	.reg-form-box .reg-form{padding-left:0; padding-top:15px;}
 	.recruiter-main .search-banner .reg-form-box .reg-form h3{text-align:center;}
 	.bottom-ftr-none{display:none;}
+	#paddingtop_fixed{padding-top:79px !important;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
