@@ -1,7 +1,7 @@
 <?php
 $userid = $this->session->userdata('aileenuser');
 ?>
-<div id="job_search"  class="modal fade mob-search-popup" role="dialog">
+<div id="job_search" class="modal fade mob-search-popup" role="dialog">
 	<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
 		<div class="new-search-input">
 			<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title,Skill,Company" />
@@ -181,10 +181,10 @@ $userid = $this->session->userdata('aileenuser');
 						<?php
 						if($job_deactive == 0  && $this->job_profile_set == 1)
 						{ ?>
-						<a href="<?php echo base_url('recommended-jobs'); ?>">
+						<a href="<?php echo base_url('recommended-jobs'); ?>" target="_self">
 						<?php }
 						else{ ?>
-						<a href="<?php echo base_url('job-search'); ?>">
+						<a href="<?php echo base_url('job-search'); ?>" target="_self">
 						<?php } ?>						
 							<span>Job Profile</span>
 						</a>
@@ -200,9 +200,9 @@ $userid = $this->session->userdata('aileenuser');
 						</a>
 						<ul class="dropdown-menu account">
 							<li>Account</li>
-							<li><a href="<?php echo base_url('job-profile/'.$jobdata[0]['slug']); ?>">
+							<li><a href="<?php echo base_url('job-profile/'.$jobdata[0]['slug']); ?>" target="_self">
 								<span class="icon-view-profile edit_data"></span>  View Profile </a></li>
-							<li><a href="<?php echo base_url('job-profile/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span> Edit Profile</a></li>
+							<li><a href="<?php echo base_url('job-profile/basic-information'); ?>" target="_self"><span class="icon-edit-profile edit_data"></span> Edit Profile</a></li>
 							<!-- <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li> -->
 						</ul>
 					</li>
