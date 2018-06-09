@@ -200,7 +200,7 @@ $userid = $this->session->userdata('aileenuser');
     <div class="sub-header">
 		<div class="container">
 			<div class="row">
-				<ul class="sub-menu rec-only">
+				<ul class="sub-menu free-h-only">
 					<li class="profile">
 						<a href="<?php echo base_url('hire-freelancer'); ?>" target="_self">
 							<span>Employer Profile</span>
