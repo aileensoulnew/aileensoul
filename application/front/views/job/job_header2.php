@@ -167,15 +167,11 @@ $userid = $this->session->userdata('aileenuser');
 	</div>
 </div>
 <?php //echo $header_inner_profile ?>
+</div>
 <div class="mobile-header">
-	<div class="container">
-		<div class="search-mob-block">						
-			<a href="#" data-toggle="modal" data-target="#job_search">
-				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-			</a>
-		</div>
-	</div>
+	
 	<div class="sub-header">
+		
 		<div class="container">
 			<div class="row">
 				<ul class="sub-menu">
@@ -214,6 +210,15 @@ $userid = $this->session->userdata('aileenuser');
 	
 	</div>	
 	
+</div>
+<div class="sub-header-search">
+	<div class="container">
+		<div class="search-mob-block">						
+			<a href="#" data-toggle="modal" data-target="#job_search">
+				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+			</a>
+		</div>
+	</div>
 </div>
 
 <div class="modal fade message-box biderror custom-message cust-err" id="bidmodal" role="dialog">

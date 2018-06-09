@@ -664,8 +664,7 @@ li.dropdown .dropdown-menu:before{
 li.user-id .dropdown-menu:before{
     right:5px;
 }
-.sub-menu li.dropdown .dropdown-menu::before{background: url('../img/sub-h-top-arrow.png'); background-position: 0 19px; 
-    left:1px; border:0; width:26px; height: 13px; top:7px;}
+.sub-menu li.dropdown .dropdown-menu::before{background: url('../img/sub-h-top-arrow.png'); background-position: 0 19px; left:-3px; border:0; width:26px; height: 13px; top:7px;}
 .right-header ul li .dropdown-title a{font-size:14px; color:#5c5c5c;}
 .right-header ul li .dropdown-title a:hover{color:#1b8ab9; text-decoration: underline;}
 header ul li #abody ul {
@@ -1179,7 +1178,8 @@ footer ul li a:hover{
 
 /***  end center title  ***/
 /***  sub header  ***/
-.sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding-top:54px; position:fixed; background:#fff; z-index:99;}
+.sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; top:54px; position:fixed; background:#fff; z-index:99;}
+.sub-header-search{width:100%; float:left; position:fixed; z-index:1002; top:80px;}
 .sub-header .sub-menu{padding:10px 0; margin:0; width:100%; float:left;}
 .sub-header .sub-menu li{list-style-type:none; float:left; padding:0px 20px; margin-bottom:0;}
 .sub-header .sub-menu li:first-child{padding-left:0;}
@@ -1326,10 +1326,8 @@ border: 1px solid #1b8ab9;}
 /***  mob search  ***/
 .mobile-header{/*display:none;*/}
 .mobile-header header h2{padding-right:16px;}
-.search-mob-block{ width:85%;float:left; padding-top:2px;
-    /*display:none*/
-}
-.mobile-header #search{
+.search-mob-block{ width:81%;float:left; padding-top:2px;}
+.modal.mob-search-popup{
     position:fixed;
     top:0;
     left:0;
@@ -1349,7 +1347,7 @@ border: 1px solid #1b8ab9;}
     transform:translate(0,-100%) scale(0,0);
     opacity:0
 }
-.mobile-header #search.open{
+.modal.mob-search-popup.in{
     -webkit-transform:translate(0,0) scale(1,1);
     -moz-transform:translate(0,0) scale(1,1);
     -o-transform:translate(0,0) scale(1,1);
@@ -1358,8 +1356,18 @@ border: 1px solid #1b8ab9;}
     opacity:1;
     height:100vh;
 	padding-top:2px;
+	z-index:999999;
 }
-.mobile-header .mobile-header#search .new-search-input{
+
+.mobile-header .sub-header .dropdown.open .dropdown-menu{left:auto; top:25px; margin:0; right:10px;}
+.mobile-header{display:none;}
+.mobile-header .sub-header{top:48px;}
+.mobile-header .sub-menu .noti-box{left:0px; color:#fff; top:-3px; position:inherit;}
+.mobile-header #search .new-search-input{height:inherit;}
+.mobile-header .bus-only .sub-menu .noti-box{position:absolute; top:-10px; top:-2px; left:10px;}
+
+
+.mob-search-popup .new-search-input{
     position:absolute;
     top:50%;
     width:100%;
@@ -1373,7 +1381,7 @@ border: 1px solid #1b8ab9;}
     padding-right:15px;
     outline:0
 }
-.mobile-header #search .new-search-input input{
+.mob-search-popup .new-search-input input{
     height:35px;
     line-height:1;
     margin:5px auto;
@@ -1381,7 +1389,7 @@ border: 1px solid #1b8ab9;}
     width:100%;
 	border:1px solid #d2d2d2;
 }
-.mobile-header #search .btn{
+.mob-search-popup .btn{
     position:absolute;
     /*top:50%;
     left:50%;*/
@@ -1391,11 +1399,11 @@ border: 1px solid #1b8ab9;}
     color:#1b8ab9;
     border:none
 }
-.mobile-header #search .btn:hover{
+.mob-search-popup .btn:hover{
     background:#1b8ab9;
     color:#fff
 }
-.mobile-header #search .close{
+.mob-search-popup .close{
     background-color:#1b8ab9;
     border-color:#1b8ab9;
     color:#fff;
@@ -1407,16 +1415,11 @@ border: 1px solid #1b8ab9;}
     top:50px;
     z-index:99
 }
-.mobile-header #search form{width:100%; padding:0 15px 5px; border-bottom:1px solid #d2d2d2; float:left;}
-.mobile-header #search form .new-search-input{width:100%; float:left; position:inherit; top:inherit; margin:inherit;}
-.mobile-header #search form .new-search-btn{width:100%; float:left; text-align:center;}
-.mobile-header #search form .new-search-btn button{position:inherit; margin:5px 0; padding:7px 12px; height:35px; border:1px solid #d2d2d2; transform:inherit;}
-.mobile-header .sub-header .dropdown.open .dropdown-menu{left:auto; top:25px; margin:0; right:10px;}
-.mobile-header{display:none;}
-.mobile-header .sub-header{padding-top:48px;}
-.mobile-header .sub-menu .noti-box{left:0px; color:#fff; top:-3px; position:inherit;}
-.mobile-header #search .new-search-input{height:inherit;}
-.mobile-header .bus-only .sub-menu .noti-box{position:absolute; top:-10px; top:-2px; left:10px;}
+.mob-search-popup form{width:100%; padding:0 15px 5px; border-bottom:1px solid #d2d2d2; float:left;}
+.mob-search-popup form .new-search-input{width:100%; float:left; position:inherit; top:inherit; margin:inherit;}
+.mob-search-popup form .new-search-btn{width:100%; float:left; text-align:center;}
+.mob-search-popup form .new-search-btn button{position:inherit; margin:5px 0; padding:7px 12px; height:35px; border:1px solid #d2d2d2; transform:inherit;}
+
 /*** end mob search  ***/
 
 #paddingtop_fixed{padding-top:95px !important;}
@@ -1524,7 +1527,9 @@ svg path{
 #auto_skill .ui-widget-content{width:100% !important; left:0 !important; top:35px !important;}
 
 /***  new modal css  ***/
+.modal{background:rgba(0,0,0,0.8);}
 .new-modal .modal-body{padding: 30px !important; text-align: center; letter-spacing: 1px; line-height: 1.5;}
+
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -1564,6 +1569,7 @@ svg path{
 	.left-header form{width:65%;}
 	.sub-header .sub-menu li{padding:0px 9px}
 	.sub-menu .noti-box{left:17px;}
+	.sub-menu li.dropdown .dropdown-menu::before{left:-14px;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -1581,13 +1587,22 @@ svg path{
 	.mobile-header .left-header input[type="text"]{width:100%; margin-bottom:5px;}
 	.sub-header .dropdown.open::before{display:none;}
 	.search-mob-block{display:block;}
-        
+	.right-header .dropdown.user-id .dropdown-menu{top:36px; right:-6px;}
+	.dropdown-menu.profile-dropdown li a{padding:5px 10px !important; display:block;}
+	.right-header .dropdown.user-id .dropdown-menu li:last-child{padding-left:0;}
+    .sub-menu li.dropdown .dropdown-menu::before{left:58px;}
+	.mobile-header .sub-header .dropdown.open .dropdown-menu{top:29px; right:0 !important; margin:0 auto; border-top-right-radius:0; border-top-left-radius:0}
+	.sub-menu li.dropdown .dropdown-menu::before{width:20px; height:10px; top:10px;}
+	.mobile-header .sub-header .sub-menu li ul li a{display:block; text-align:left;}
+	.sub-header-search .container{position:relative;}
+	.mobile-header .sub-header{top:46px;}
+	.sub-header-search .search-mob-block{position: absolute; left: 60px; z-index: 99999; top: -76px;}
 }
 @media screen and (max-width: 767px) {
     /*header{position:relative;}*/
     html{position:inherit;}
     .container {width: 100%;}
-    .search-mob-block{width:80%; height:36px;}
+    .search-mob-block{width:74%; height:36px;}
     .modal-dialog{margin:15px 0;}
     .mobp0{padding: 0;}
 	.mobmt15{margin-top:15px;}
@@ -1601,9 +1616,13 @@ svg path{
     .modal-content .post-field label{font-size:14px;}
     #upload-demo .cr-boundary{height: 260px !important;}
     #upload-demo .cr-viewport{height: 260px !important;}
+	.mobile-header .sub-header .sub-menu > li:first-child{text-align:left; padding-left:15px;}
+	.mobile-header .sub-header .sub-menu > li:last-child{text-align:right; padding-right:18px;}
+	.sub-menu li.dropdown .dropdown-menu::before{left:auto;}
+	.mobile-header .sub-header .dropdown.open .dropdown-menu{right:15px !important; left:inherit !important;}
 }
 @media screen and (max-width: 539px) {
-    .search-mob-block{width:76%;}
+    .search-mob-block{width:71%;}
 }
 @media screen and (max-width: 479px) {
 	.fw-479{width:100%; float:left;}
@@ -1611,7 +1630,7 @@ svg path{
 	.left-header{text-align:center;}
 	.no-login-right{text-align:center;}
 	.left-header.fw-479 h2.logo{float:none; padding-bottom:10px;}
-	.search-mob-block{width:67%;}
+	.search-mob-block{width:62%;}
 	.bus-only .none-sub-menu{display:none;}
 	.mobile-header .sub-header.bus-only .sub-menu li{width:17%;}
 	.mobile-header .sub-header.bus-only .sub-menu li:first-child{width:48%;}
@@ -1623,9 +1642,10 @@ svg path{
 	.mobile-header .sub-header .sub-menu li:first-child{width:40%;}	
 	.mobile-header .sub-header .sub-menu.rec-only li:first-child{width:41%;}	
 	.mobile-header .sub-header .sub-menu.rec-only li:last-child{width:29%;}	
+	.sub-header .dropdown.open .dropdown-menu.account li{width:100%;}
 }
 @media screen and (max-width: 359px) {
-	.search-mob-block{width:63%;}
+	.search-mob-block{width:57%;}
 	
 	
 }
