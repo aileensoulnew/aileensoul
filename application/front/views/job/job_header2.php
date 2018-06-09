@@ -168,11 +168,13 @@ $userid = $this->session->userdata('aileenuser');
 </div>
 <?php //echo $header_inner_profile ?>
 <div class="mobile-header">
-	<div class="search-mob-block">						
-		<a href="#" data-toggle="modal" data-target="#job_search">
-			<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-		</a>
-	</div>	
+	<div class="container">
+		<div class="search-mob-block">						
+			<a href="#" data-toggle="modal" data-target="#job_search">
+				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+			</a>
+		</div>
+	</div>
 	<div class="sub-header">
 		<div class="container">
 			<div class="row">
