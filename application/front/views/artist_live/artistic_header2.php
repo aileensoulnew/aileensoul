@@ -4,15 +4,15 @@ $userid = $this->session->userdata('aileenuser');
 <div id="artist_mob_search" class="modal fade mob-search-popup" role="dialog">
 	<form onsubmit="artistsearchMobileSubmit()" action="javascript:void(0)" method="get">
 		<div class="new-search-input">
-			<input id="m_tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+			<input id="m_tags" class="tags ui-autocomplete-input search_txt" name="skills" placeholder="Search by Category and Keyword" autocomplete="off" type="text">
 			<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
 			<!-- <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" /> -->
 			<!-- <input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" /> -->
 		</div>
 		<div class="new-search-btn">
 			<!-- <input id="mob_search_btn" name="search_submit" value="Search" onclick="return checkvalue()" type="submit"> -->
+			<button type="button" class="close-new btn mob_close" data-dismiss="modal" id="cancel_mobile">Cancel</button>
 			<button type="submit" id="m_search_btn" name="m_search_submit" class="btn btn-primary" onclick="m_checval()">Search</button>
-			<button type="button" class="close-new btn mob_close" id="cancel_mobile">Cancel</button>
 		</div>
 	</form>
 </div>
@@ -88,14 +88,14 @@ $userid = $this->session->userdata('aileenuser');
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span id="message_count"></span>
+									<span id="message_count" class="message_count noti-box"></span>
 								</div>
 								
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
+									Messages <a href="javascript:void(0)" class="pull-right see_link seemsg" id="seemsg">See All</a>
 								</div>
-									Messages <a href="javascript:void(0)" class="pull-right see_link" id="seemsg">See All</a>
 								<div class="content custom-scroll">
 									<ul class="dropdown-data msg-dropdown notification_data_in_h2">
 										
@@ -143,7 +143,7 @@ $userid = $this->session->userdata('aileenuser');
 					<div class="job-search-box1 clearfix">
 						<form onsubmit="artistsearchSubmit()" action="javascript:void(0)" method="get">
 							<fieldset class="sec_h2">
-								<input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+								<input id="tags" class="tags ui-autocomplete-input search_txt" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="sec_h2">
 								<input id="searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
@@ -170,10 +170,22 @@ $userid = $this->session->userdata('aileenuser');
 							<span>Artistic Profile</span>
 						</a>
 					</li>
+					<?php if($isartistactivate == true &&  $artist_isregister == true){ ?>
 					<li class="dropdown">
-						<a href="#">
-							<span>Message</span> <span class="noti-box">1</span>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
+							<span>Message</span>
+							<span class="message_count noti-box">1</span>
 						</a>
+						<div class="dropdown-menu">
+							<div class="dropdown-title">							
+								Messages <a href="javascript:void(0)" class="pull-right see_link seemsg" id="seemsg">See All</a>
+							</div>
+							<div class="content custom-scroll">
+								<ul class="dropdown-data msg-dropdown notification_data_in_h2">
+									
+								</ul>
+							</div>
+						</div>
 					</li>
 					<li class="dropdown user-id">
 						<a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -185,6 +197,7 @@ $userid = $this->session->userdata('aileenuser');
 							<li><a href="<?php echo artist_edit_profile; ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 						</ul>
 					</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
@@ -196,7 +209,7 @@ $userid = $this->session->userdata('aileenuser');
 	<div class="container">
 		<div class="search-mob-block">
 			<a href="#" data-toggle="modal" data-target="#artist_mob_search">
-				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+				<input type="search" id="tags1" class="tags" name="skills" readonly="true" value="" placeholder="Search by Category and Keyword" />
 			</a>		
 		</div>
 	</div>
@@ -239,7 +252,7 @@ $userid = $this->session->userdata('aileenuser');
 	
 			$('#userlist').html(data.leftbar);
 			$('.notification_data_in_h2').html(data.headertwo);
-			 $('#seemsg').html(data.seeall);
+			 $('.seemsg').html(data.seeall);
 			 setTimeout(
 					 chatmsg,
 					 100000
@@ -301,16 +314,18 @@ $userid = $this->session->userdata('aileenuser');
     {
         if (msg == 0)
         { 
-            $("#message_count").html('');
-            $("#message_count").removeAttr("style");
+            $(".message_count").html('');
+            $(".message_count").removeAttr("style");
             $('#InboxLink').removeClass('msg_notification_available');
-            document.getElementById('message_count').style.display = "none";
+            $(".message_count").hide();
+            // document.getElementById('message_count').style.display = "none";
         } else
         {
-            $('#message_count').html(msg);
+            $('.message_count').html(msg);
             $('#InboxLink').addClass('msg_notification_available');
-            $('#message_count').addClass('count_add noti-box');
-            document.getElementById('message_count').style.display = "block";
+            $('.message_count').addClass('count_add noti-box');
+            $('.message_count').show();
+            // document.getElementById('message_count').style.display = "block";
             //alert("welcome");
         }
     }
