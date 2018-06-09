@@ -550,6 +550,7 @@ class User_post_model extends CI_Model {
                 $this->db->where('usp.id', $value['post_id']);
                 $query = $this->db->get();
                 $simple_data = $query->row_array();
+                $simple_data['description'] = nl2br($this->common->make_links($simple_data['description']));
                 $result_array[$key]['simple_data'] = $simple_data;
             } elseif ($value['post_for'] == 'question') {
                 $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field")->from("user_ask_question uaq, ailee_tags t");

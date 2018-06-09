@@ -3,6 +3,8 @@
 <head>
 	<title><?php echo $title; ?></title>
 	<?php //echo $head; ?> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 	<?php
 	if (IS_APPLY_CSS_MINIFY == '0') {
 		?>
@@ -809,5 +811,5 @@
 
 											}
 										</script>
- <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>z
-										</html>    
+ <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+ </html>    

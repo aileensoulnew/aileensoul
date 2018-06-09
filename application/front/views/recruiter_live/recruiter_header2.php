@@ -196,12 +196,7 @@ $userid = $this->session->userdata('aileenuser');
 		</div>
 	</div>
 </div>
-<div class="mobile-header">
-	<div class="search-mob-block">
-		<a href="#" data-toggle="modal" data-target="#recruiter_search">
-            <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-        </a>		
-	</div>
+<div class="mobile-header">	
 	<div class="sub-header">
 		<div class="container">
 			<div class="row">
@@ -242,6 +237,15 @@ $userid = $this->session->userdata('aileenuser');
 				</g>
 			</svg>
 		</a>
+	</div>
+</div>
+<div class="sub-header-search">
+	<div class="container">
+		<div class="search-mob-block">
+			<a href="#" data-toggle="modal" data-target="#recruiter_search">
+		        <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+		    </a>		
+		</div>
 	</div>
 </div>
 

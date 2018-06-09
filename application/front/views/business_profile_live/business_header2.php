@@ -244,11 +244,6 @@ echo $header_inner_profile ?>
      <?php } ?>
 </div>
 <div class="mobile-header">
-	<div class="search-mob-block">
-        <a href="#" data-toggle="modal" data-target="#business_mob_search">
-            <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-        </a>        
-    </div>
     <?php if ($business_common_data[0]['business_step'] == 4) { ?>
     <div class="sub-header bus-only">
 		<div class="container">
@@ -382,6 +377,16 @@ echo $header_inner_profile ?>
 
     <?php } ?>
 	
+</div>
+
+<div class="sub-header-search">
+	<div class="container">
+		<div class="search-mob-block">
+		    <a href="#" data-toggle="modal" data-target="#business_mob_search">
+		        <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+		    </a>        
+		</div>
+	</div>
 </div>
 
 <div class="modal fade message-box biderror" id="bidmodal" role="dialog">

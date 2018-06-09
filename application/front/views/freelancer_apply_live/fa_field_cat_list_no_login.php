@@ -7,6 +7,8 @@
         <!-- END HEAD -->
 
         <title><?php echo $title; ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <?php
         if (IS_JOB_CSS_MINIFY == '0') {
             ?>
