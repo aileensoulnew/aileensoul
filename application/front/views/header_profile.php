@@ -282,7 +282,7 @@ if($browser == "Firefox")
 </div>
 <div class="mobile-header">
     <header class="">
-        <div class="header animated fadeInDownBig">
+        <div class="animated fadeInDownBig">
             <div class="container">
                 <div class="left-header">
                     <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png') ?>"></a></h2>
@@ -291,7 +291,7 @@ if($browser == "Firefox")
                         <div class="">
                             <?php 
                             $first_segment = $this->uri->segment(1);
-                            $page_arr = array('searchh','');
+                            $page_arr = array('','searchh','contact-request');
                             if(in_array($first_segment, $page_arr)): ?>
                             <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('searchh') ?>">
                                 <input type="text" name="q" placeholder="Search.." id="mob_search">

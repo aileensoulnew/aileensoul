@@ -274,7 +274,7 @@ if($browser == "Firefox")
 </div>
 <div class="mobile-header">
     <header class="">
-        <div class="header animated fadeInDownBig">
+        <div class="animated fadeInDownBig">
             <div class="container">
                 <div class="left-header">
                     <h2 class="logo">
@@ -287,7 +287,7 @@ if($browser == "Firefox")
                         <div class="">
                             <?php 
                             $first_segment = $this->uri->segment(1);
-                            $page_arr = array('','searchh');
+                            $page_arr = array('','searchh','contact-request');
                             $no_ser_arr = array('freelance-profile');
                             if(!in_array($first_segment, $no_ser_arr))
                             {

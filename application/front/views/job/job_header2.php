@@ -14,8 +14,7 @@ $userid = $this->session->userdata('aileenuser');
 	</form>
 </div>
 <?php echo $header_inner_profile ?>
-<div class="web-header">
-	
+<div class="web-header">	
 	<div class="sub-header">
 		<div class="container">
 			<div class="row">
@@ -179,7 +178,14 @@ $userid = $this->session->userdata('aileenuser');
 			<div class="row">
 				<ul class="sub-menu">
 					<li class="profile">
-						<a href="#">
+						<?php
+						if($job_deactive == 0  && $this->job_profile_set == 1)
+						{ ?>
+						<a href="<?php echo base_url('recommended-jobs'); ?>">
+						<?php }
+						else{ ?>
+						<a href="<?php echo base_url('job-search'); ?>">
+						<?php } ?>						
 							<span>Job Profile</span>
 						</a>
 					</li>
