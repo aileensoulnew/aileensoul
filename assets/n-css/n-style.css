@@ -2765,7 +2765,7 @@ body, body.no-login {padding-bottom:60px;}
 	.comment-box .add-comment{Position:relative;}
 	.comment-box .add-comment .post-img{display:none;}
 	.comment-box .add-comment .comment-input{width:100%;}
-	.mob-comment{bottom: 7px; display: block; position: absolute; right: 0px; width:auto;}
+	.mob-comment{bottom: 0px; display: block; position: absolute; right: 10px; width:auto;}
 	.mob-comment .btn2{background:none; font-size:0;}
 	.comment-box .add-comment .comment-input{padding:0;}
 	.mob-comment .btn2 img{display:block;}

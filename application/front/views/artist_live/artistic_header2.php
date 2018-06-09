@@ -164,7 +164,7 @@ $userid = $this->session->userdata('aileenuser');
 	<div class="sub-header">
 		<div class="container">
 			<div class="row">
-				<ul class="sub-menu">
+				<ul class="sub-menu art-only">
 					<li class="profile">
 						<a href="<?php echo $artist_right_profile_link; ?>" target="_self">
 							<span>Artistic Profile</span>

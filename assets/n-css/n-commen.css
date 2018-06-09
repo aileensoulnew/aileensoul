@@ -1658,6 +1658,8 @@ svg path{
 	.none-sub-menu{display:none;}
 	.mobile-header .sub-header .sub-menu li{width:30%;}
 	.mobile-header .sub-header .sub-menu li:first-child{width:45%;}	
+	.mobile-header .sub-header .sub-menu.art-only li:first-child{width:40%;}	
+	.mobile-header .sub-header .sub-menu.art-only li{width:30%;}	
 	.mobile-header .sub-header .sub-menu li:last-child{width:25%;}	
 	.mobile-header .sub-header .sub-menu.free-h-only > li:first-child{width:42%;}
 	.mobile-header .sub-header .sub-menu.free-h-only > li{width:19%;}
