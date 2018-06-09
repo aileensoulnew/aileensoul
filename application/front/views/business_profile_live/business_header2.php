@@ -6,7 +6,7 @@
 			<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
         </div>
 		<div class="new-search-btn">
-			<button type="button" class="close-new btn">Cancel</button>
+			<button type="button" class="close-new btn" data-dismiss="modal">Cancel</button>
 			<button type="submit" id="m_search_btn" class="btn btn-primary" onclick="return m_checval();">Search</button>
 		</div>
 	</form>
@@ -77,7 +77,7 @@ echo $header_inner_profile ?>
 							</a>
                         </li>
                         <?php if($isbusiness_deactive == false && $isbusiness_register == true){ ?>
-                            <li class="dropdown" id="Inbox_link">
+                            <li class="dropdown Inbox_link" id="Inbox_link">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()">
 									<div class="sub-menu-icon">
 									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
@@ -114,13 +114,13 @@ echo $header_inner_profile ?>
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span class="noti-box" id="message_count"></span>
+									<span class="message_count noti-box" id="message_count"></span>
 								</div>
                                     
                                 </a>
                                 <div class="dropdown-menu InboxContainer">
                                     <div class="dropdown-title">
-                                        Messages <a href="javascript:void(0)" class="pull-right" id="seemsg"></a>
+                                        Messages <a href="javascript:void(0)" class="seemsg pull-right" id="seemsg"></a>
                                     </div>
                                     <div class="content custom-scroll">
                                         <ul class="dropdown-data msg-dropdown notification_data_in_h2">
@@ -258,8 +258,9 @@ echo $header_inner_profile ?>
 							
 						</a>
 					</li>
-					<li class="dropdown">
-						<a href="#">
+					<?php if($isbusiness_deactive == false && $isbusiness_register == true){ ?>
+					<li class="dropdown Inbox_link" id="Inbox_link">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()">
 							<div class="sub-menu-icon">
 								<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 									<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -295,9 +296,19 @@ echo $header_inner_profile ?>
 									</g>
 								</svg>
 								<span class="none-sub-menu"> Message</span>
-								<span class="noti-box">1</span>
-							</div>
+								<span class="message_count noti-box"></span>
+							</div>							
 						</a>
+						<div class="dropdown-menu InboxContainer">
+                            <div class="dropdown-title">
+                                Messages <a href="javascript:void(0)" class="seemsg pull-right" id="seemsg"></a>
+                            </div>
+                            <div class="content custom-scroll">
+                                <ul class="dropdown-data msg-dropdown notification_data_in_h2">
+                                    
+                                </ul>
+                            </div>
+                        </div>
 					</li>
 					<li>
 						<a href="">
@@ -369,6 +380,7 @@ echo $header_inner_profile ?>
 							<li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 						</ul>
 					</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
@@ -383,7 +395,7 @@ echo $header_inner_profile ?>
 	<div class="container">
 		<div class="search-mob-block">
 		    <a href="#" data-toggle="modal" data-target="#business_mob_search">
-		        <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+		        <input type="search" readonly="true" id="tags1" class="tags" name="skills" value="" placeholder="Companies, Category, Products" />
 		    </a>        
 		</div>
 	</div>
@@ -498,17 +510,19 @@ echo $header_inner_profile ?>
     {
         if (msg == 0)
         {
-            $("#message_count").html('');
-            $("#message_count").removeAttr("style");
-            $('#message_count').removeClass('count_add');
+            $(".message_count").html('');
+            $(".message_count").removeAttr("style");
+            $('.message_count').removeClass('count_add');
             $('#InboxLink').removeClass('msg_notification_available');
-            document.getElementById('message_count').style.display = "none";
+            $(".message_count").hide();
+            // document.getElementById('message_count').style.display = "none";
         } else
         {
-            $('#message_count').html(msg);
+            $('.message_count').html(msg);
             $('#InboxLink').addClass('msg_notification_available');
-            $('#message_count').addClass('count_add');
-            document.getElementById('message_count').style.display = "block";
+            $('.message_count').addClass('count_add');
+            $('.message_count').show();
+            // document.getElementById('message_count').style.display = "block";
         }
     }
     function waitForMsg1()
@@ -554,7 +568,7 @@ echo $header_inner_profile ?>
                 chatmsg();
             }
         }
-        $('#Inbox_link').on('click', function () {
+        $('.Inbox_link').on('click', function () {
             chatmsg();
         });
     });
@@ -587,7 +601,7 @@ echo $header_inner_profile ?>
             success: function (data) {
                 $('#userlist').html(data.leftbar);
                 $('.notification_data_in_h2').html(data.headertwo);
-                $('#seemsg').html(data.seeall);
+                $('.seemsg').html(data.seeall);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
             }
@@ -623,7 +637,7 @@ echo $header_inner_profile ?>
 <script type="text/javascript">
     $(document).ready(function () {
         document.getElementById('tags1').value = null;
-        document.getElementById('searchplace1').value = null;
+        // document.getElementById('searchplace1').value = null;
     });
 </script>
 
