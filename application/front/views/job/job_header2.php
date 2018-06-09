@@ -163,10 +163,7 @@ $userid = $this->session->userdata('aileenuser');
 				</div>
 			</div>
 		</div>
-
 	</div>
-</div>
-<?php //echo $header_inner_profile ?>
 </div>
 <div class="mobile-header">
 	
