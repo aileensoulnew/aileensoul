@@ -184,6 +184,9 @@ $userid = $this->session->userdata('aileenuser');
 							<span>Job Profile</span>
 						</a>
 					</li>
+					<?php
+						if($job_deactive == 0  && $this->job_profile_set == 1)
+						{ ?>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
 							<span>Message</span>
@@ -211,6 +214,7 @@ $userid = $this->session->userdata('aileenuser');
 							<!-- <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li> -->
 						</ul>
 					</li>
+				<?php } ?>
 				</ul>
 			</div>
 		</div>
@@ -222,7 +226,7 @@ $userid = $this->session->userdata('aileenuser');
 	<div class="container">
 		<div class="search-mob-block">						
 			<a href="#" data-toggle="modal" data-target="#job_search">
-				<input type="search" disabled="true" readonly="true" id="search_pop" class="tags" name="search_pop" value="" placeholder="Job Title,Skill,Company" />
+				<input type="search" readonly="true" id="search_pop" class="tags" name="search_pop" value="" placeholder="Job Title,Skill,Company" />
 			</a>
 		</div>
 	</div>

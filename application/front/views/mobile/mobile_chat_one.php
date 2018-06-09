@@ -48,6 +48,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/font-awesome.min.css'); ?>">
               <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/sprite_img.css'); ?>">
 <?php }?>
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">        
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style type="text/css">
             .msg_right:hover .messagedelete{ visibility: visible;opacity: 1;}
             .msg_right .messagedelete{ visibility: hidden;  cursor: pointer; width:25px; float:left;}
@@ -58,16 +63,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <body>
         <?php
-        echo $header;
+        // echo $header;
 
         if ($message_from_profile == 1) {
-            echo $job_header2_border;
+            echo $job_header2;
         } else if ($message_from_profile == 2) {
-            echo $recruiter_header2_border;
+            echo $recruiter_header2;
         } else if ($message_from_profile == 3) {
-            echo $freelancer_hire_header2;
+            echo $freelancer_hire_header2; 
         } else if ($message_from_profile == 4) {
-            echo $freelancer_post_header2_border;
+            echo $freelancer_post_header2;
         } else if ($message_from_profile == 5) {
             echo $business_header2;
         } else if ($message_from_profile == 6) {
@@ -304,6 +309,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!------  commen script khyati 15-7  ---------------->
                 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
                 <script type="text/javascript">
+                    var header_all_profile = '<?php echo $header_all_profile; ?>';
+                    var base_url = "<?php echo base_url(); ?>";
                     var request_timestamp = 0;
 
                     var setCookie = function (key, value) {
