@@ -1225,7 +1225,7 @@ border: 1px solid #1b8ab9;}
 .sub-header .dropdown.open .dropdown-menu.account{width:180px; padding-top:0;}
 .sub-header .dropdown.open .dropdown-menu.account li:first-child{padding:10px; border-bottom:1px solid #d2d2d2; font-size:16px;}
 .sub-header .job-search-box1{float:right;}
-.sub-header .job-search-box1 fieldset.sec_h2 {width: 210px; float:left; margin:5px 10px 0 0; }
+.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:5px 10px 0 0; }
 .sub-header .job-search-box1 fieldset.sec_h2 input{border:1px solid #c0c0c0; height:30px;}
 .sub-header .new-search-btn{float:left; width:30px; height:30px; margin-top:5px; border:1px solid #c0c0c0; border-radius:3px; padding:0;}
 .sub-header .new-search-btn:hover{background:#eaeaea;}
@@ -1573,6 +1573,7 @@ svg path{
 	.sub-menu .noti-box{left:17px;}
 	.sub-menu li.dropdown .dropdown-menu::before{left:-14px;}
 	.sub-menu li a svg{margin-right:5px;}
+	.sub-header .job-search-box1 fieldset.sec_h2{width:162px;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -1616,6 +1617,7 @@ svg path{
 	.mobile-header .search-mob-block{width:79%;}
     .common-form h3{border-left:0; border-right:0; border-radius:0;}
     .contact-frnd-post{border-left:0; border-right:0; border-radius:0;}
+	.container.padding-360{padding:0;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}
