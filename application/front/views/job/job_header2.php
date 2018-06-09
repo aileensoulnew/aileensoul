@@ -171,7 +171,7 @@ $userid = $this->session->userdata('aileenuser');
 		
 		<div class="container">
 			<div class="row">
-				<ul class="sub-menu">
+				<ul class="sub-menu job-only">
 					<li class="profile">
 						<?php
 						if($job_deactive == 0  && $this->job_profile_set == 1)
