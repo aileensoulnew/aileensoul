@@ -1327,6 +1327,7 @@ border: 1px solid #1b8ab9;}
 .mobile-header{/*display:none;*/}
 .mobile-header header h2{padding-right:16px;}
 .search-mob-block{ width:81%;float:left; padding-top:2px;}
+.mobile-header .search-mob-block{width:85%;}
 .modal.mob-search-popup{
     position:fixed;
     top:0;
@@ -1610,7 +1611,7 @@ svg path{
 	label{font-size:14px;}
 	.no-login #paddingtop_fixed{padding-top:90px !important;}
 	.right-header .dropdown.user-id .dropdown-menu{right:-6px !important;}
-	
+	.mobile-header .search-mob-block{width:79%;}
     
 }
 @media screen and (max-width: 639px) {
@@ -1625,6 +1626,7 @@ svg path{
 }
 @media screen and (max-width: 539px) {
     .search-mob-block{width:71%;}
+	.mobile-header .search-mob-block{width:76%;}
 }
 @media screen and (max-width: 479px) {
 	.fw-479{width:100%; float:left;}
@@ -1645,6 +1647,8 @@ svg path{
 	.mobile-header .sub-header .sub-menu.rec-only li:first-child{width:41%;}	
 	.mobile-header .sub-header .sub-menu.rec-only li:last-child{width:29%;}	
 	.sub-header .dropdown.open .dropdown-menu.account li{width:100%;}
+	.mobile-header .search-mob-block{width:68%;}
+	.mobile-header .search-mob-block{width:64%;}
 }
 @media screen and (max-width: 359px) {
 	.search-mob-block{width:57%;}
