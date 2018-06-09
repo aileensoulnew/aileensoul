@@ -13,8 +13,9 @@ $userid = $this->session->userdata('aileenuser');
 		</div>
 	</form>
 </div>
+<?php echo $header_inner_profile ?>
 <div class="web-header">
-	<?php echo $header_inner_profile ?>
+	
 	<div class="sub-header">
 		<div class="container">
 			<div class="row">
@@ -166,37 +167,13 @@ $userid = $this->session->userdata('aileenuser');
 
 	</div>
 </div>
+<?php //echo $header_inner_profile ?>
 <div class="mobile-header">
-	<?php echo $header_inner_profile ?>
-	<header class="">
-		<div class="animated fadeInDownBig">
-			<div class="container">
-
-				<div class="left-header">
-					<h2 class="logo"><a href="#"><img src="<?php echo base_url('assets/n-images/mob-logo.png?ver=' . time()) ?>"></a></h2>
-					<div class="search-mob-block">
-						
-							<a href="#" data-toggle="modal" data-target="#job_search">
-								<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
-							</a>
-					</div>
-					<div class="right-header">
-						<ul>
-							<li class="dropdown user-id">
-								<a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="usr-img"><img src="<?php echo base_url('assets/img/user-pic.jpg?ver=' . time()) ?>"></span><span class="pr-name"></span></a>
-
-								<ul class="dropdown-menu profile-dropdown">
-									<li>Account</li>
-									<li><a href="#"><i class="fa fa-cog"></i> Setting</a></li>
-									<li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+	<div class="search-mob-block">						
+		<a href="#" data-toggle="modal" data-target="#job_search">
+			<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+		</a>
+	</div>	
 	<div class="sub-header">
 		<div class="container">
 			<div class="row">
@@ -217,9 +194,10 @@ $userid = $this->session->userdata('aileenuser');
 						</a>
 						<ul class="dropdown-menu account">
 							<li>Account</li>
-							<li><a href="<?php echo artist_dashboard. $arturl; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
-							<li><a href="#"><i class="fa fa-cog"></i> Setting</a></li>
-							<li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+							<li><a href="<?php echo base_url('job-profile/'.$jobdata[0]['slug']); ?>">
+								<span class="icon-view-profile edit_data"></span>  View Profile </a></li>
+							<li><a href="<?php echo base_url('job-profile/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span> Edit Profile</a></li>
+							<!-- <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li> -->
 						</ul>
 					</li>
 				</ul>
