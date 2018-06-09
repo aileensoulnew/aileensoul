@@ -2436,6 +2436,7 @@ body, body.no-login {padding-bottom:60px;}
 .student-info-box:before{position:absolute; background:url('../n-images/left-arrow-st.png'); content:''; left:-10px; top:17px; width:10px; height:17px; background-size:100%; }
 
 .mi-cat-width{width:220px; float:left;}
+.msg_desc_a{max-height:17px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -3280,5 +3281,5 @@ body, body.no-login {padding-bottom:60px;}
 .right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul > li:nth-child(3){display:none;}
 .mob-bottom-menu ul > li:nth-child(4){display:none;}
-.mob-bottom-menu li{width:33.33% !important;}
+.mob-bottom-menu li{width:33.33% !important; float:left; list-style-type:none; margin-bottom:0;}
 .main-user-profile .user-btns a:last-child{display:none;}

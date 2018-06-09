@@ -47,7 +47,9 @@
                         </div>
                     </div>
                 </div>
-                <?php echo $login_footer ?>
+				<div class="bottom-ftr-none">
+					<?php echo $login_footer ?>
+				</div>
             </div>
 
         </section>

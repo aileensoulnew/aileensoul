@@ -1256,16 +1256,16 @@ border: 1px solid #1b8ab9;}
 #showRight{background:none; padding:0; position:relative; z-index:99999;}
 .mob-bottom-menu{position:fixed; bottom:0; width:100%; float:left; background:#fff; padding:10px 0; z-index:9999; border-top:1px solid #d2d2d2;}
 .mob-bottom-menu ul{padding:0;width:100%; float:left; margin:0;}
-.mob-bottom-menu li{float:left; list-style-type:none; width:20%; text-align:center; margin-bottom:0;}
-.mob-bottom-menu li > a{position:relative;}
-.mob-bottom-menu li > a .noti-box{right:-5px; top:-8px; color:#fff;}
-.mobile-header .sub-header .sub-menu li{padding:0 4px; width:33.33%; text-align:center; background:#fff;}
-.mobile-header .sub-header.bus-only .sub-menu li{width:25%;}
-.mobile-header .sub-header .sub-menu.rec-only li{width:25%;}
+.mob-bottom-menu > li{float:left; list-style-type:none; width:20%; text-align:center; margin-bottom:0;}
+.mob-bottom-menu > li > a{position:relative;}
+.mob-bottom-menu > li > a .noti-box{right:-5px; top:-8px; color:#fff;}
+.mobile-header .sub-header .sub-menu > li{padding:0 4px; width:33.33%; text-align:center; background:#fff;}
+.mobile-header .sub-header.bus-only .sub-menu > li{width:25%;}
+.mobile-header .sub-header .sub-menu.rec-only > li{width:25%;}
 .mobile-header .sub-header .sub-menu.free-h-only li{width:25%;}
-.mobile-header .sub-header .sub-menu li > a i{padding-right:0px;}
-.mobile-header .sub-header .sub-menu li a{font-size:14px; position:relative; display:inline-block; padding-top:5px; letter-spacing:1px;}
-.mobile-header .sub-header .sub-menu li:first-child{padding-top:0;}
+.mobile-header .sub-header .sub-menu > li > a i{padding-right:0px;}
+.mobile-header .sub-header .sub-menu > li a{font-size:14px; position:relative; display:inline-block; padding-top:5px; letter-spacing:1px;}
+.mobile-header .sub-header .sub-menu > li:first-child{padding-top:0;}
 .mobile-header .sub-header .sub-menu{padding:3px 0 4px;}
 .cbp-spmenu{background:#ede9e9;}
 .cbp-spmenu-vertical{height:90%;}
@@ -1603,6 +1603,8 @@ svg path{
 	.mobile-header .sub-header{top:46px;}
 	.sub-header-search .search-mob-block{position: absolute; left: 60px; z-index: 99999; top: -76px;}
 	.sub-header-search{display:block;}
+	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu{left:-56px !important; right:inherit !important;}
+	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu:before{left:149px;}
 }
 @media screen and (max-width: 767px) {
     /*header{position:relative;}*/
@@ -1621,6 +1623,9 @@ svg path{
 	.container.padding-360{padding:0;}
 	.right_side_posrt{width:100%;}
 	.post-editor{border-left:0; border-right:0; border-radius:0;}
+	.mobile-header .sub-header .dropdown.open:nth-child(2){position:inherit;}
+	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu{left:0 !important; width:100%; top:29px; padding-top:0;}
+	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu::before{left:0; right:0; margin: -20px auto 0;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}
@@ -1656,16 +1661,16 @@ svg path{
     #upload-demo .cr-boundary{height: 200px !important;}
     #upload-demo .cr-viewport{height: 200px !important;}
 	.none-sub-menu{display:none;}
-	.mobile-header .sub-header .sub-menu li{width:30%;}
-	.mobile-header .sub-header .sub-menu li:first-child{width:45%;}	
-	.mobile-header .sub-header .sub-menu.art-only li:first-child{width:40%;}	
-	.mobile-header .sub-header .sub-menu.art-only li{width:30%;}	
-	.mobile-header .sub-header .sub-menu li:last-child{width:25%;}	
+	.mobile-header .sub-header .sub-menu > li{width:30%;}
+	.mobile-header .sub-header .sub-menu > li:first-child{width:45%;}	
+	.mobile-header .sub-header .sub-menu.art-only > li:first-child{width:40%;}	
+	.mobile-header .sub-header .sub-menu.art-only > li{width:30%;}	
+	.mobile-header .sub-header .sub-menu > li:last-child{width:25%;}	
 	.mobile-header .sub-header .sub-menu.free-h-only > li:first-child{width:42%;}
 	.mobile-header .sub-header .sub-menu.free-h-only > li{width:19%;}
-	.mobile-header .sub-header .sub-menu.job-only li{width:33.33%;}
+	.mobile-header .sub-header .sub-menu.job-only > li{width:33.33%;}
 	.mobile-header .sub-header .sub-menu.rec-only > li{width:17.66%;}
-	.sub-header .dropdown.open .dropdown-menu.account li{width:100%;}
+	.sub-header .dropdown.open .dropdown-menu.account > li{width:100%;}
 	.mobile-header .search-mob-block{width:68%;}
 	.mobile-header .search-mob-block{width:64%;}
 	.mobile-header .sub-header .sub-menu li a{font-size:13px;}
