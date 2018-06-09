@@ -5669,8 +5669,8 @@ body.reg-form{
         font-size:12px
     }
     .other-profile-menu .profile-pho-bui,.other-profile-menu .profile-pho-bui .user-pic{
-        width:60px;
-        height:60px
+        /*width:60px;
+        height:60px*/
     }
     .other-profile-menu .bui-menu-profile{
         padding-left:70px!important

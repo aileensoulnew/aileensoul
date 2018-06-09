@@ -1656,8 +1656,8 @@ svg path{
 	.no-login-right{text-align:center;}
 	.left-header.fw-479 h2.logo{float:none; padding-bottom:10px;}
 	.search-mob-block{width:62%;}
-	.mobile-header .sub-header.bus-only .sub-menu li{width:15%;}
-	.mobile-header .sub-header.bus-only .sub-menu li:first-child{width:45%;}
+	.mobile-header .sub-header.bus-only .sub-menu > li{width:15%;}
+	.mobile-header .sub-header.bus-only .sub-menu > li:first-child{width:45%;}
 	.modal-content .post-field label{font-size:12px;}	
     #upload-demo .cr-boundary{height: 200px !important;}
     #upload-demo .cr-viewport{height: 200px !important;}

@@ -2436,7 +2436,7 @@ body, body.no-login {padding-bottom:60px;}
 .student-info-box:before{position:absolute; background:url('../n-images/left-arrow-st.png'); content:''; left:-10px; top:17px; width:10px; height:17px; background-size:100%; }
 
 .mi-cat-width{width:220px; float:left;}
-.msg_desc_a{max-height:17px;}
+.msg_desc_a{max-height:21px;}
 #contact_per{display:none;}
 
 /***  media query  ***/
@@ -2611,6 +2611,8 @@ body, body.no-login {padding-bottom:60px;}
 	.business-profile-right{text-align:center;}
 	.business-profile-right .bui-menu-profile{padding-left:0 !important; padding:top10px;}
 	.other-profile-menu .profile-left{width:100%; padding:0;}
+	.profile-head-text_dg{width:100%;}
+	.buisness-menu.other-profile-menu::before{bottom:97px;}
 	
 	/***  blog page  ***/
 	.blog-page footer{position:inherit; height:inherit;}
@@ -2642,6 +2644,10 @@ body, body.no-login {padding-bottom:60px;}
 	.recruiter-main .search-banner .reg-form-box .reg-form h3{text-align:center;}
 	.bottom-ftr-none{display:none;}
 	#paddingtop_fixed{padding-top:79px !important;}
+	#paddingtop_fixed_art{padding-top:77px !important;}
+	.business-profile-right{width:100%;}
+	.business-profile-right .profile-left{width:100%;}
+	.profile-head-text_dg{width:100%; max-width:100%;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -2940,6 +2946,7 @@ body, body.no-login {padding-bottom:60px;}
 	#main_page_load .search-profiles .profile-btns{float:right;}
 	#main_page_load .search-profiles .profile-data{width:65%;}
 	.full-box-module_follow{border-left:0; border-right:0; border-radius:0;}
+	.notification-database{width:100%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3238,6 +3245,7 @@ body, body.no-login {padding-bottom:60px;}
 	.bottom-bnr-div .btn-1{float:none !important;}
 	.bottom-bnr-div p{font-size:14px;}
 	#main_page_load .search-profiles .profile-data{width:50%;}
+	.buisness-menu.other-profile-menu::before{bottom:89px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

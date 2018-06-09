@@ -1,5 +1,5 @@
 
-<div class="container" id="paddingtop_fixed_art">
+<div class="container fw-991" id="paddingtop_fixed_art">
     <div class="row" id="row1" style="display:none;">
         <div class="col-md-12 text-center padding_less_left">
             <div id="upload-demo" ></div>
@@ -64,7 +64,7 @@
         </div>
     </div>
 </div>
-<div class="container tablate-container art-profile">
+<div class="container tablate-container art-profile fw-991">
 <?php
     $userid = $this->session->userdata('aileenuser');
     if ($artisticdata[0]['user_id'] == $userid) {
