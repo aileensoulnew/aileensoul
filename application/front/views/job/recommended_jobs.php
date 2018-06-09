@@ -38,7 +38,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <style type="text/css">
             .ui-autocomplete {
                 background: #fff;
-                z-index: 99999!important;
+                z-index: 999999!important;
             }
         </style>
     </head>

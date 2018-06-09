@@ -4,11 +4,11 @@ $userid = $this->session->userdata('aileenuser');
 <div id="job_search" class="modal fade mob-search-popup" role="dialog">
 	<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
 		<div class="new-search-input">
-			<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title,Skill,Company" />
-		<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="Find Location" />
+			<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title,Skill,Company" ng-model="keyword" />
+			<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="Find Location" ng-model="city"/>
 		</div>
 		<div class="new-search-btn">
-			<button type="button" class="close-new btn">Cancel</button>
+			<button type="button" class="close-new btn" data-dismiss="modal" >Cancel</button>
 			<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
 		</div>
 	</form>
@@ -212,7 +212,7 @@ $userid = $this->session->userdata('aileenuser');
 	<div class="container">
 		<div class="search-mob-block">						
 			<a href="#" data-toggle="modal" data-target="#job_search">
-				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+				<input type="search" disabled="true" readonly="true" id="search_pop" class="tags" name="search_pop" value="" placeholder="Job Title,Skill,Company" />
 			</a>
 		</div>
 	</div>
