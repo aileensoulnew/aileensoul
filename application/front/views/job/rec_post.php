@@ -16,6 +16,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 <html>
     <head>
         <title><?php echo $title; ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <?php //echo $head; ?> 
         <?php /*
         if (IS_REC_CSS_MINIFY == '0') {

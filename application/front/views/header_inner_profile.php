@@ -295,14 +295,14 @@ if($browser == "Firefox")
                             <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('searchh') ?>">
                                 <input type="text" name="q" placeholder="Search.." id="mob_search">
                             </form>
-                            <?php else: ?>
+                            <?php /*else: ?>
                             <a href="#search">
                                 <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
                             </a>
-                        <?php endif;
+                        <?php */ endif;
                             } ?>
                         </div>
-                        <div id="search">
+                        <!-- <div id="search">
                             <form method="get">
                                 <div class="new-search-input">
                                    <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
@@ -314,7 +314,7 @@ if($browser == "Firefox")
                                     <button type="submit"  id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="right-header">
                         <ul>
