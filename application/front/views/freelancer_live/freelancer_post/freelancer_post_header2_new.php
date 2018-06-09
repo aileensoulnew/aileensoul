@@ -5,7 +5,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 <div id="fa_mob_search" class="modal fade mob-search-popup" role="dialog">			
 	<form method="get">
 		<div class="new-search-input">
-			<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+			<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Companies, Category, Products" />
 			<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" />
 		</div>
 		<div class="new-search-btn">
@@ -85,12 +85,12 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span class="noti-box" id="message_count">1</span>
+									<span class="noti-box message_count" id="message_count"></span>
 								</div>
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-title">
-									Messages <a href="javascript:void(0)" class="pull-right" id="seemsg"></a>
+									Messages <a href="javascript:void(0)" class="pull-right seemsg" id="seemsg"></a>
 								</div>
 								<div class="content custom-scroll">
 									<ul class="dropdown-data msg-dropdown notification_data_in_h2">
@@ -167,9 +167,20 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="#">
-							<span>Message</span> <span class="noti-box">1</span>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
+							<span>Message</span>
+							<span class="noti-box message_count" id="message_count"></span>
 						</a>
+						<div class="dropdown-menu">
+							<div class="dropdown-title">
+								Messages <a href="javascript:void(0)" class="pull-right seemsg" id="seemsg"></a>
+							</div>
+							<div class="content custom-scroll">
+								<ul class="dropdown-data msg-dropdown notification_data_in_h2">
+									
+								</ul>
+							</div>
+						</div>
 					</li>
 					<li class="dropdown user-id">
 						<a href="javascript:void(0);" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -190,7 +201,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 	<div class="container">
 		<div class="search-mob-block">					
 			<a href="#" data-toggle="modal" data-target="#fa_mob_search">
-				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
+				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Companies, Category, Products" />
 			</a>
 		</div>
 	</div>
@@ -251,16 +262,18 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 	{
 		if (msg == 0)
 		{ 
-			$("#message_count").html('');
-			$("#message_count").removeAttr("style");
+			$(".message_count").html('');
+			$(".message_count").removeAttr("style");
 			$('#InboxLink').removeClass('msg_notification_available');
-			document.getElementById('message_count').style.display = "none";
+			$(".message_count").hide();
+			// document.getElementById('message_count').style.display = "none";
 		} else
 		{
-			$('#message_count').html(msg);
+			$('.message_count').html(msg);
 			$('#InboxLink').addClass('msg_notification_available');
-			$('#message_count').addClass('count_add');
-			document.getElementById('message_count').style.display = "block";
+			$('.message_count').addClass('count_add');
+			$('.message_count').show();
+			// document.getElementById('message_count').style.display = "block";
 			//alert("welcome");
 		}
 	}
@@ -327,7 +340,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 
 					$('#userlist').html(data.leftbar);
 					$('.notification_data_in_h2').html(data.headertwo);
-					$('#seemsg').html(data.seeall);
+					$('.seemsg').html(data.seeall);
 					setTimeout(
 						chatmsg,
 						10000000000000
