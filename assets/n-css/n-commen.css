@@ -1596,7 +1596,7 @@ svg path{
 	.dropdown-menu.profile-dropdown li a{padding:5px 10px !important; display:block;}
 	.right-header .dropdown.user-id .dropdown-menu li:last-child{padding-left:0;}
     .sub-menu li.dropdown .dropdown-menu::before{left:58px;}
-	.mobile-header .sub-header .dropdown.open .dropdown-menu{top:29px; right:0 !important; margin:0 auto; border-top-right-radius:0; border-top-left-radius:0}
+	.mobile-header .sub-header .dropdown.open .dropdown-menu{top:28px; right:0 !important; margin:0 auto; border-top-right-radius:0; border-top-left-radius:0}
 	.sub-menu li.dropdown .dropdown-menu::before{width:20px; height:10px; top:10px;}
 	.mobile-header .sub-header .sub-menu li ul li a{display:block; text-align:left;}
 	.sub-header-search .container{position:relative;}
