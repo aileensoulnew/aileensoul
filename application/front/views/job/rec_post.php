@@ -398,14 +398,29 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                             }
                                             ?>
                                             <h5><a title="<?php echo $cache_time1; ?>"><?php echo $cache_time1; ?></a></h5>
-                                            <p><a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo $post['re_comp_name']; ?>">
-                                                    <?php
+
+                                            <p>
+                                                <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                    <a href="#" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                                    <?php else: ?>
+                                                        <a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo $post['re_comp_name']; ?>">
+                                                    <?php endif;
                                                     $out = strlen($post['re_comp_name']) > 40 ? substr($post['re_comp_name'], 0, 40) . "..." : $post['re_comp_name'];
                                                     echo $out;
                                                     ?>
                                                 </a>
                                             </p>
-                                            <p><a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo ucfirst(strtolower($post['rec_firstname'])) . ' ' . ucfirst(strtolower($post['rec_lastname'])); ?>"><?php echo ucfirst(strtolower($post['rec_firstname'])) . ' ' . ucfirst(strtolower($post['rec_lastname'])); ?></a></p>
+                                            <p>
+                                                <?php if($this->job_profile_set == 0 && $job_deactive == 0):?>
+                                                    <a href="#" data-toggle="modal" data-target="#job_reg" href="javascript:void(0);" title="<?php echo $post['re_comp_name']; ?>">
+                                                <?php else: ?>
+
+                                                    <a href="<?php echo base_url('recruiter/profile/' . $post['user_id']); ?>" title="<?php echo ucfirst(strtolower($post['rec_firstname'])) . ' ' . ucfirst(strtolower($post['rec_lastname'])); ?>">
+                                                        <?php 
+                                                        endif;
+                                                        echo ucfirst(strtolower($post['rec_firstname'])) . ' ' . ucfirst(strtolower($post['rec_lastname'])); ?>
+                                                </a>
+                                            </p>
                                             <p class="loca-exp">
                                                 <span class="location">
                                                     <?php
