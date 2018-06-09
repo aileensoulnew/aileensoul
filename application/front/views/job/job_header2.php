@@ -1,6 +1,18 @@
 <?php
 $userid = $this->session->userdata('aileenuser');
 ?>
+<div id="job_search"  class="modal fade mob-search-popup" role="dialog">
+	<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
+		<div class="new-search-input">
+			<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title,Skill,Company" />
+		<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="Find Location" />
+		</div>
+		<div class="new-search-btn">
+			<button type="button" class="close-new btn">Cancel</button>
+			<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
+		</div>
+	</form>
+</div>
 <div class="web-header">
 	<?php echo $header_inner_profile ?>
 	<div class="sub-header">
@@ -167,20 +179,6 @@ $userid = $this->session->userdata('aileenuser');
 							<a href="#" data-toggle="modal" data-target="#job_search">
 								<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
 							</a>
-						
-						<div id="job_search"  class="modal fade mob-search-popup" role="dialog">
-							
-							<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
-								<div class="new-search-input">
-									<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title,Skill,Company" />
-									<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="Find Location" />
-								</div>
-				<div class="new-search-btn">
-									<button type="button" class="close-new btn">Cancel</button>
-									<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
-				</div>
-							</form>
-						</div>
 					</div>
 					<div class="right-header">
 						<ul>
