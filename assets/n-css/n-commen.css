@@ -1179,7 +1179,7 @@ footer ul li a:hover{
 /***  end center title  ***/
 /***  sub header  ***/
 .sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; top:54px; position:fixed; background:#fff; z-index:99;}
-.sub-header-search{width:100%; float:left; position:fixed; z-index:1002; top:80px;}
+.sub-header-search{width:100%; float:left; position:fixed; z-index:1002; top:80px; display:none;}
 .sub-header .sub-menu{padding:10px 0; margin:0; width:100%; float:left;}
 .sub-header .sub-menu li{list-style-type:none; float:left; padding:0px 20px; margin-bottom:0;}
 .sub-header .sub-menu li:first-child{padding-left:0;}
@@ -1597,6 +1597,7 @@ svg path{
 	.sub-header-search .container{position:relative;}
 	.mobile-header .sub-header{top:46px;}
 	.sub-header-search .search-mob-block{position: absolute; left: 60px; z-index: 99999; top: -76px;}
+	.sub-header-search{display:block;}
 }
 @media screen and (max-width: 767px) {
     /*header{position:relative;}*/
@@ -1608,6 +1609,7 @@ svg path{
 	.mobmt15{margin-top:15px;}
 	label{font-size:14px;}
 	.no-login #paddingtop_fixed{padding-top:90px !important;}
+	.right-header .dropdown.user-id .dropdown-menu{right:-6px !important;}
 	
     
 }
