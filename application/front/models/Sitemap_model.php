@@ -190,11 +190,31 @@ class Sitemap_model extends CI_Model {
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
-           
-            $sql = "SELECT group_concat(art_category) as category_name FROM ailee_art_category 
+            $skills = explode(",", $value['art_skill']);            
+            $pos = array_search('26',$skills);
+            if($pos > -1)
+            {                
+                unset($skills[$pos]);
+                $value['art_skill'] = implode(",",$skills);
+            }
+            $category_name = "";
+            $other_category = "";
+            if($value['art_skill'] != "")
+            {
+                $sql = "SELECT group_concat(art_category) as category_name FROM ailee_art_category 
                     WHERE category_id IN (". $value['art_skill'] .")";
-            $query = $this->db->query($sql);
-            $result_array[$key]['category_name'] = $query->row_array()['category_name'];
+                $query = $this->db->query($sql);
+                $category_name = $query->row_array()['category_name'];
+            }
+            if($value['other_skill'] != "")
+            {
+                $sql = "SELECT other_category FROM ailee_art_other_category
+                    WHERE other_category_id = ". $value['other_skill'] ."";
+                $query = $this->db->query($sql);
+                $other_category = $query->row_array()['other_category'];
+            }
+            $result_array[$key]['category_name'] = trim($category_name.",".$other_category,",");
+            
         }
         return $result_array;
     }

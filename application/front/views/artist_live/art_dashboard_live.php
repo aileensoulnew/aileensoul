@@ -67,8 +67,8 @@ $userid = $this->session->userdata('aileenuser');
                         </div>
                         <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
                             <div class="btn-right">
-                                <a href="javascript:void(0);" onclick="login_data();" class="btn4" title="Login">Login</a>
-                                <a href="javascript:void(0);" onclick="register_profile();" class="btn2" title="Create an account">Create Artistic Account</a>
+                                <a href="<?php echo base_url(); ?>/login" class="btn4" title="Login">Login</a>
+                                <a href="<?php echo base_url(); ?>/artist-profile/create-account" class="btn2" title="Create an account">Create Artistic Account</a>
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@ $userid = $this->session->userdata('aileenuser');
                       <div class="custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
                             <div class="art-all-post">
                             </div>
-                            <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
+                            <div class="fw" id="loader-post" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
                         </div>
 					</div>
                 </div>

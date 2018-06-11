@@ -78,7 +78,7 @@ app.controller('blogController', function ($scope, $http) {
     	category_post_list(cateid,page);
     }
 
-    function category_post_list(cateid,page){
+    function category_post_list(cateid,page){    	
     	if (isCatProcessing) {
             return;
         }
@@ -99,9 +99,11 @@ app.controller('blogController', function ($scope, $http) {
 			isCatProcessing = false; 
 			$scope.iscategorySelected = true;
 			$scope.categorySelectedId = cateid;
+			$('#main_loader').hide();
+        	$('#main_page_load').show();
         }, function (error) {}, 
-        function (complete) { 
-        	$("#loader").addClass("hidden");
+        function (complete) {         	
+        	$("#loader").addClass("hidden");        	
         	isCatProcessing = false; 
         	$('html, body').animate({scrollTop:0},'slow');
         });

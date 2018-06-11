@@ -51,14 +51,15 @@ function artistic_dashboard_post(slug, pagenum) { //alert("hii"); alert(slug);
             //if (pagenum == 'undefined') {
                 //  $(".business-all-post").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
             //} else {
-                $('#loader').show();
+                $('#loader-post').show();
             //}
         },
         complete: function () {
-            $('#loader').hide();
+            $('#loader-post').hide();
         },
-        success: function (data) {
+        success: function (data) {            
             // $('.fw').hide();
+            $('#loader-post').hide();
             $('.art-all-post').append(data);
 
             // second header class add for scroll
