@@ -179,7 +179,7 @@
 									<ul>
 										<li><a href="<?php echo $sitemap_with_login_free_emp; ?>">Login</a></li>
 										<li><a href="<?php echo base_url().'freelance-employer/create-account' ?>">Create Freelance Employer Account</a></li>
-										<li><a href="<?php echo base_url().'post-freelance-project' ?>">Post Projects</a></li>
+										<!-- <li><a href="<?php //echo base_url().'post-freelance-project' ?>">Post Projects</a></li> -->
 									</ul>
 								</div>
 								<div class="site-pr-box">
