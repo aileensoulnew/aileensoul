@@ -4,8 +4,8 @@ $userid = $this->session->userdata('aileenuser');
 <div id="job_search" class="modal fade mob-search-popup" role="dialog">
 	<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
 		<div class="new-search-input">
-			<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title,Skill,Company" ng-model="keyword" />
-			<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="Find Location" ng-model="city"/>
+			<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title, Keywords, or Company" ng-model="keyword" />
+			<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="City, State or Country" ng-model="city"/>
 		</div>
 		<div class="new-search-btn">
 			<button type="button" class="close-new btn" data-dismiss="modal" >Cancel</button>
@@ -111,24 +111,32 @@ $userid = $this->session->userdata('aileenuser');
 						<li class="dropdown user-id">
 							<a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								
-								<svg class="not-hover" viewBox="0 0 563.43 563.43" width="17px" height="17px">
-									<path d="M280.79,314.559c83.266,0,150.803-67.538,150.803-150.803S364.055,13.415,280.79,13.415S129.987,80.953,129.987,163.756  S197.524,314.559,280.79,314.559z M280.79,52.735c61.061,0,111.021,49.959,111.021,111.021S341.851,274.776,280.79,274.776  s-111.021-49.959-111.021-111.021S219.728,52.735,280.79,52.735z" />
-									<path d="M19.891,550.015h523.648c11.102,0,19.891-8.789,19.891-19.891c0-104.082-84.653-189.198-189.198-189.198H189.198  C85.116,340.926,0,425.579,0,530.124C0,541.226,8.789,550.015,19.891,550.015z M189.198,380.708h185.034  c75.864,0,138.313,56.436,148.028,129.524H41.17C50.884,437.607,113.334,380.708,189.198,380.708z" />
+								<svg class="not-hover" viewBox="0 0 384.97 384.97" width="17px" height="17px">
+									<g>
+										<g id="Chevron_Down_Circle">
+											<path d="M192.485,0C86.185,0,0,86.173,0,192.485c0,106.3,86.185,192.485,192.485,192.485    c106.312,0,192.485-86.185,192.485-192.485C384.97,86.173,298.797,0,192.485,0z M192.485,360.909    c-92.874,0-168.424-75.55-168.424-168.424S99.611,24.061,192.485,24.061s168.797,75.55,168.797,168.424    S285.359,360.909,192.485,360.909z" fill="#5c5c5c"/>
+											<path d="M268.276,149.092l-75.61,74.528l-75.61-74.54c-4.74-4.704-12.439-4.704-17.191,0c-4.74,4.704-4.74,12.319,0,17.011    l84.2,83.009c4.62,4.572,12.56,4.584,17.191,0l84.2-82.997c4.74-4.704,4.74-12.319,0-17.011    C280.715,144.4,273.028,144.4,268.276,149.092z" fill="#5c5c5c"/>
+										</g>
+									</g>
+
 								</svg>
+						
 								<svg class="on-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
+
 									<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
-										<path d="M10323 20820 c-1257 -72 -2405 -526 -3378 -1336 -167 -139 -540 -511
-										-682 -680 -673 -802 -1102 -1730 -1272 -2749 -51 -304 -71 -570 -71 -924 0
-										-375 25 -671 85 -1006 234 -1309 935 -2517 1955 -3369 930 -778 2019 -1224
-										3227 -1322 248 -20 799 -15 1023 10 716 80 1318 253 1935 556 1160 569 2070
-										1485 2635 2652 288 595 461 1209 537 1908 23 208 26 877 5 1090 -74 757 -276
-										1448 -611 2096 -848 1637 -2446 2769 -4266 3024 -340 47 -803 68 -1122 50z"/>
-										<path d="M6875 8423 c-866 -43 -1609 -201 -2368 -505 -1768 -707 -3198 -2105
-										-3942 -3852 -373 -877 -577 -1871 -563 -2741 3 -221 5 -233 31 -310 95 -273
-										328 -465 613 -505 106 -14 19932 -14 20038 0 285 40 518 232 613 505 26 77 28
-										89 31 310 12 754 -148 1646 -434 2413 -368 988 -931 1862 -1674 2602 -1134
-										1129 -2599 1843 -4174 2035 -421 52 -176 49 -4291 50 -2101 1 -3847 0 -3880
-										-2z"/>
+										<path d="M10055 21319 c-2633 -154 -5074 -1248 -6935 -3109 -1870 -1870 -2958
+										-4308 -3110 -6964 -13 -230 -13 -932 0 -1162 109 -1918 698 -3704 1745 -5294
+										836 -1270 1973 -2378 3265 -3182 604 -376 1257 -699 1900 -938 1017 -379 2061
+										-597 3164 -660 230 -13 932 -13 1162 0 2656 152 5094 1240 6964 3110 1782
+										1782 2869 4112 3085 6610 27 319 35 528 35 935 0 528 -18 844 -76 1320 -373
+										3068 -2093 5847 -4684 7570 -1591 1058 -3393 1655 -5324 1765 -206 12 -984 11
+										-1191 -1z m-3840 -8083 c85 -27 174 -76 234 -128 20 -17 976 -959 2126 -2092
+										1149 -1134 2094 -2061 2100 -2061 6 0 965 941 2131 2090 2285 2253 2162 2137
+										2329 2192 69 23 97 26 205 26 108 0 136 -3 205 -26 108 -36 194 -89 274 -168
+										79 -80 132 -166 168 -274 33 -101 37 -262 9 -365 -37 -136 -87 -212 -246 -372
+										-80 -81 -1155 -1142 -2390 -2359 -1601 -1578 -2264 -2224 -2310 -2254 -133
+										-87 -307 -127 -457 -106 -105 15 -224 57 -297 106 -82 54 -4789 4697 -4846
+										4779 -179 258 -149 608 70 836 178 185 451 254 695 176z"/>
 									</g>
 								</svg>
 
@@ -149,10 +157,10 @@ $userid = $this->session->userdata('aileenuser');
 					<div class="job-search-box1 clearfix">
 						<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
 							<fieldset class="sec_h2">
-								<input id="job_keyword" class="tags ui-autocomplete-input" name="job_keyword" ng-model="keyword" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+								<input id="job_keyword" class="tags ui-autocomplete-input" name="job_keyword" ng-model="keyword" placeholder="Job Title, Keywords, or Company" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="sec_h2">
-								<input id="job_location" class="searchplace ui-autocomplete-input" name="job_location" ng-model="city" placeholder="Find Location" autocomplete="off" type="text">
+								<input id="job_location" class="searchplace ui-autocomplete-input" name="job_location" ng-model="city" placeholder="City, State or Country" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="new-search-btn">
 								<label for="search_btn" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>

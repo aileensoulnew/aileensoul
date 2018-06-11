@@ -5,8 +5,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 <div id="fa_mob_search" class="modal fade mob-search-popup" role="dialog">			
 	<form method="get">
 		<div class="new-search-input">
-			<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Companies, Category, Products" />
-			<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" />
+			<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Title, Keywords, or Skills" />
+			<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="City, State or Country" />
 		</div>
 		<div class="new-search-btn">
 			<button type="button" class="close-new btn">Cancel</button>
@@ -139,10 +139,10 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 						<!-- <form action="<?php //echo base_url('freelance-employer/search'); ?>" method="get"> -->
 						<form method="post" name="f-fearch" onsubmit="return searchSubmit()"><!--  onsubmit="searchSubmit()"> -->
 							<fieldset class="sec_h2">
-								<input id="freelance_keyword" class="tags ui-autocomplete-input skill_keyword" name="freelance_keyword" placeholder="Companies, Category, Products" autocomplete="off" ng-model="keyword" type="text">
+								<input id="freelance_keyword" class="tags ui-autocomplete-input skill_keyword" name="freelance_keyword" placeholder="Title, Keywords, or Skills" autocomplete="off" ng-model="keyword" type="text">
 							</fieldset>
 							<fieldset class="sec_h2">
-								<input id="freelance_location" ng-model="city" class="searchplace ui-autocomplete-input skill_keyword" name="freelance_location" placeholder="Find Location" autocomplete="off" type="text">
+								<input id="freelance_location" ng-model="city" class="searchplace ui-autocomplete-input skill_keyword" name="freelance_location" placeholder="City, State or Country" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="new-search-btn">
 								<label for="search_btn_main" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>

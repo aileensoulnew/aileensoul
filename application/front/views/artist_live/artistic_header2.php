@@ -4,8 +4,8 @@ $userid = $this->session->userdata('aileenuser');
 <div id="artist_mob_search" class="modal fade mob-search-popup" role="dialog">
 	<form onsubmit="artistsearchMobileSubmit()" action="javascript:void(0)" method="get">
 		<div class="new-search-input">
-			<input id="m_tags" class="tags ui-autocomplete-input search_txt" name="skills" placeholder="Search by Category and Keyword" autocomplete="off" type="text">
-			<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
+			<input id="m_tags" class="tags ui-autocomplete-input search_txt" name="skills" placeholder="Search by Category or Skills" autocomplete="off" type="text">
+			<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
 			<!-- <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" /> -->
 			<!-- <input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="Find Location" /> -->
 		</div>
@@ -143,10 +143,10 @@ $userid = $this->session->userdata('aileenuser');
 					<div class="job-search-box1 clearfix">
 						<form onsubmit="artistsearchSubmit()" action="javascript:void(0)" method="get">
 							<fieldset class="sec_h2">
-								<input id="tags" class="tags ui-autocomplete-input search_txt" name="skills" placeholder="Companies, Category, Products" autocomplete="off" type="text">
+								<input id="tags" class="tags ui-autocomplete-input search_txt" name="skills" placeholder="Search by Category or Skills" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="sec_h2">
-								<input id="searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="Find Location" autocomplete="off" type="text">
+								<input id="searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
 							</fieldset>
 							<fieldset class="new-search-btn">
 								<label for="search_btn" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>
