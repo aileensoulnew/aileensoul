@@ -10962,7 +10962,14 @@ Your browser does not support the audio tag.
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
         if(!empty($ProfessionData) || !empty($StudentData))
         {
-            redirect(base_url());
+            if(isset($this->data['slug_data']) && !empty($this->data['slug_data']))
+            {
+                redirect(base_url().'business-profile','refresh');
+            }
+            else
+            {
+                redirect(base_url());
+            }
         }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        

@@ -1805,7 +1805,14 @@ class Artist_live extends MY_Controller {
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
         if(!empty($ProfessionData) || !empty($StudentData))
         {
-            redirect(base_url());
+            if(isset($this->data['artdata']) && !empty($this->data['artdata']))
+            {
+                redirect(base_url().'artist-profile','refresh');
+            }
+            else
+            {                
+                redirect(base_url());
+            }
         }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        

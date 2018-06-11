@@ -63,7 +63,7 @@
                                 </div>
                                 <div class=" ">
                                     <ul class="" id="dropdownclass">
-                                        <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'home')) { ?> class="active" <?php } ?>><a title="home" href="<?php echo base_url('freelance-work/home'); ?>"><span class="home-22x22-h"></span></a>
+                                        <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'home')) { ?> class="active" <?php } ?>><a title="home" href="<?php echo base_url('recommended-freelance-work'); ?>"><span class="home-22x22-h"></span></a>
                                         </li>
                                         <li id="Inbox_link">
                                             <?php if ($message_count) { ?>

@@ -116,7 +116,16 @@ class Freelancer_apply_live extends MY_Controller {
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
         if(!empty($ProfessionData) || !empty($StudentData))
         {
-            redirect(base_url());
+            $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
+            $freelancer_apply_profile = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            if(isset($freelancer_apply_profile) && !empty($freelancer_apply_profile))
+            {
+                redirect(base_url().'recommended-freelance-work','refresh');
+            }
+            else
+            {                
+                redirect(base_url());
+            }
         }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        

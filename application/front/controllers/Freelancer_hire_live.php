@@ -3059,12 +3059,19 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
         $user_slug = $this->user_model->getUserSlugById($userid);
         $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
         $userslug = $this->session->userdata('aileenuser_slug');
-        
+
         $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
         $StudentData = $this->user_model->getUserStudentData($userid,"*");
         if(!empty($ProfessionData) || !empty($StudentData))
         {
-            redirect(base_url());
+        	if(isset($this->data['freehiredata']) && !empty($this->data['freehiredata']))
+        	{
+        		redirect(base_url().'hire-freelancer','refresh');
+        	}
+        	else
+        	{        		
+            	redirect(base_url());
+        	}
         }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        

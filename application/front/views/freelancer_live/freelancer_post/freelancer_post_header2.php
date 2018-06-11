@@ -90,7 +90,7 @@
                         <div class="col-md-5 col-sm-5">
                             <div class=" ">
                                 <ul class="">
-                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'home')) { ?> class="active" <?php } ?>><a title="Home"  href="<?php echo base_url('freelance-work/home'); ?>"><?php echo $this->lang->line("home"); ?></a>
+                                    <li <?php if (($this->uri->segment(1) == 'freelance-work') && ($this->uri->segment(2) == 'home')) { ?> class="active" <?php } ?>><a title="Home"  href="<?php echo base_url('recommended-freelance-work'); ?>"><?php echo $this->lang->line("home"); ?></a>
                                     </li>
                                     <li>
                                         <div class="dropdown_hover">

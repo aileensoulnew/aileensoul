@@ -10,7 +10,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                 <div class="col-md-6 mob-p0">
                     <ul class="sub-menu">
                         <li>
-                            <a href="<?php echo base_url('freelance-work/home'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Freelance Profile</a>
+                            <a href="<?php echo base_url('recommended-freelance-work'); ?>"><i class="fa fa-home" aria-hidden="true"></i> Freelance Profile</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope" aria-hidden="true"></i> Message

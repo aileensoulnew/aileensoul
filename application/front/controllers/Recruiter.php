@@ -5520,7 +5520,16 @@ class Recruiter extends MY_Controller {
 		$StudentData = $this->user_model->getUserStudentData($userid,"*");
 		if(!empty($ProfessionData) || !empty($StudentData))
         {
-            redirect(base_url());
+        	$contition_array = array('user_id' => $userid,'re_status' => '1', 'is_delete' => '0');
+        	$recruiter_profile = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        	if(isset($recruiter_profile) && !empty($recruiter_profile))
+        	{
+        		redirect(base_url().'recommended-candidates','refresh');
+        	}
+        	else
+        	{        		
+            	redirect(base_url());
+        	}
         }
 		$this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
 		$this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
