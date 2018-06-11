@@ -616,7 +616,7 @@
                                     <div class="item" id="item-{{contact.user_id}}">
                                         <div class="post-img" ng-if="contact.user_image != ''">
                                             <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
+                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
                                             </a>
                                         </div>
                                         <div class="post-img" ng-if="contact.user_image == ''">
