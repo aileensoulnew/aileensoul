@@ -343,7 +343,7 @@
                             if ($freepostdata[0]['progressbar'] == 0) {
                                 ?>
 
-                                <div class="mob-progressbar" >
+                                <div class="mob-progressbar mob-mt10" >
                                     <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                     <p class="mob-edit-pro">
 
@@ -361,7 +361,7 @@
                             }
                         } else {
                             ?>
-                            <div class="mob-progressbar" >
+                            <div class="mob-progressbar mob-mt10" >
                                 <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                 <p class="mob-edit-pro">
 

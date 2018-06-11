@@ -25,7 +25,7 @@
         <?php echo $freelancer_hire_header2; ?>
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
-                <div class="container">
+                <div class="container mobp0">
                     <div class="row">
                         <div class="col-md-2 col-sm-1"></div>
                         <div class="col-md-8 col-sm-10 animated fadeInLeftBig">

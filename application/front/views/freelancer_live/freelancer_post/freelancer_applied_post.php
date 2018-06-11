@@ -167,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container padding_set_res">
+                <div class="container padding_set_res mobp0">
                     <div class="job-menu-profile mob-none pt20">
                         <a title="<?php echo ucwords($freepostdata['freelancer_post_fullname']) . ' ' . ucwords($freepostdata['freelancer_post_username']); ?>" href="javascript:void(0);">
                             <h3> <?php echo ucwords($freepostdata['freelancer_post_fullname']) . ' ' . ucwords($freepostdata['freelancer_post_username']); ?></h3>
@@ -184,14 +184,14 @@
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-12 col-xs-12 mob-clear">
+                    <div class="col-md-7 col-sm-12 col-xs-12 mob-clear mobp0">
                         <?php
                         if (!($returnpage)) {
                             if ($count_profile == 100) {
                                 if ($freepostdata['progressbar'] == 0) {
                                     ?>
 
-                                    <div class="mob-progressbar" >
+                                    <div class="mob-progressbar mob-mt10" >
                                         <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                         <p class="mob-edit-pro">
 
@@ -209,7 +209,7 @@
                                 }
                             } else {
                                 ?>
-                                <div class="mob-progressbar" >
+                                <div class="mob-progressbar mob-mt10" >
                                     <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                     <p class="mob-edit-pro">
 

@@ -293,6 +293,125 @@
         </section>
         </div>
         <?php echo $footer; ?>
+		<div>
+			<div class="mob-filter" data-target="#filter" data-toggle="modal">
+				<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">
+					<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
+					fill="#1b8ab9" stroke="none">
+					<path d="M489 2781 l-29 -29 0 -221 0 -221 -110 0 c-115 0 -161 -12 -174 -45
+					-3 -9 -6 -163 -6 -341 l0 -325 25 -24 c23 -24 30 -25 144 -25 l121 0 2 -646 3
+					-646 24 -19 c33 -27 92 -25 119 4 l22 23 0 642 0 642 124 0 c107 0 127 3 147
+					19 l24 19 3 331 3 332 -30 29 c-29 30 -30 30 -150 30 l-121 0 0 225 0 226 -25
+					24 c-34 35 -78 33 -116 -4z m271 -851 l0 -210 -210 0 -210 0 0 210 0 210 210
+					0 210 0 0 -210z"/>
+					<path d="M1445 2785 l-25 -24 0 -641 0 -640 -119 0 c-105 0 -121 -2 -145 -21
+					l-26 -20 0 -338 0 -338 23 -21 c21 -20 34 -22 145 -22 l122 0 0 -224 c0 -211
+					1 -225 21 -250 16 -21 29 -26 64 -26 35 0 48 5 64 26 20 25 21 39 21 250 l0
+					224 123 0 c181 0 167 -33 167 382 l0 337 -26 20 c-24 19 -40 21 -145 21 l-119
+					0 0 640 0 641 -25 24 c-33 34 -87 34 -120 0z m275 -1685 l0 -210 -215 0 -215
+					0 0 210 0 210 215 0 215 0 0 -210z"/>
+					<path d="M2405 2785 l-25 -24 0 -226 0 -225 -121 0 c-120 0 -121 0 -150 -30
+					l-30 -29 3 -332 3 -331 24 -19 c20 -16 40 -19 147 -19 l124 0 0 -643 0 -644
+					23 -21 c29 -28 86 -29 118 -3 l24 19 3 646 2 646 121 0 c114 0 121 1 144 25
+					l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
+					-29 29 c-38 37 -82 39 -116 4z m265 -855 l0 -210 -210 0 -210 0 0 210 0 210
+					210 0 210 0 0 -210z"/>
+					</g>
+					</svg>
+			</div>
+		</div>
+		<div id="filter" class="modal mob-modal fade" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+                    <div class="mid-modal-body">
+						<div class="mid-modal-body">
+							 <div class="left-search-box list-type-bullet">
+                                    <div class="">
+                                        <h3>Top Categories</h3>
+                                    </div>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="category in categoryFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span><span class="mi-cat-width">{{category.category_name | capitalize}}</span>
+                                                        <span class="pull-right">({{category.count}})</span>
+                                                    </span>
+                                                    <input class="categorycheckbox filtercheckbox" type="checkbox" name="{{category.category_name}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>                                        
+                                        </ul>
+                                    </div>
+                                    <!-- <p class="text-right p10"><a href="#">More Categories</a></p> -->
+                                </div>
+                                <div class="left-search-box list-type-bullet">
+                                    <div class="">
+                                        <h3>Top Cities</h3>
+                                    </div>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="cities in cityFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span><span class="mi-cat-width">{{cities.city_name | capitalize}}</span>
+                                                        <span class="pull-right">({{cities.count}})</span>
+                                                    </span>
+                                                    <input class="citiescheckbox filtercheckbox" type="checkbox" name="{{cities.city_name}}" value="{{cities.city_id}}" style="height: 12px;" [attr.checked]="(cities.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- <p class="text-right p10"><a href="#">More Cities</a></p> -->
+                                </div>
+                                <div class="left-search-box list-type-bullet">
+                                    <div class="">
+                                        <h3>Skills</h3>
+                                    </div>
+                                    <div class="content custom-scroll">
+                                        <ul class="search-listing">
+                                            <li ng-repeat="skill in skillFilterList">
+                                                <label class="control control--checkbox">
+                                                    <span><span class="mi-cat-width">{{skill.skill | capitalize}}</span>
+                                                        <span class="pull-right">({{skill.count}})</span>
+                                                    </span>
+                                                    <input class="skillcheckbox filtercheckbox" type="checkbox" name="{{skill.skill}}" value="{{skill.skill_id}}" style="height: 12px;" [attr.checked]="(skill.isselected) ? 'checked' : null" autocomplete="false">
+                                                    <div class="control__indicator"></div>
+                                                </label>
+                                            </li>      
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="left-search-box">
+                                    <div class="accordion" id="accordion3">
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading">
+                                                <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapsetwo" aria-expanded="true">Required Experience</a></h3>
+                                            </div>
+                                            <div id="collapsetwo" class="accordion-body collapse in" aria-expanded="true" style="">
+                                                <div class="accordion-inner">
+                                                    <ul class="search-listing">
+                                                        <li ng-repeat="experience in experienceFilterList">
+                                                            <label class="control control--checkbox">
+                                                                <span>{{experience.name | capitalize}}
+                                                                </span>
+                                                                <input class="experiencecheckbox filtercheckbox" type="checkbox" name="{{experience.name}}" value="{{experience.id}}" style="height: 12px;" [attr.checked]="(experience.isselected) ? 'checked' : null" autocomplete="false">
+                                                                <div class="control__indicator"></div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Bid-modal  -->
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
             <div class="modal-dialog modal-lm">

@@ -343,7 +343,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
 width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
 .all-contact .all-user-list .owl-nav .owl-next:hover:after{opacity: 1;}
 .all-contact .all-user-list .owl-nav .owl-prev:hover:before{opacity: 1;}
-.post-img, .post-img .post-img-mainuser{
+.post-head .post-img, .post-img .post-img-mainuser{
     color:#fff;
     background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9));
@@ -2442,6 +2442,7 @@ body, body.no-login {padding-bottom:60px;}
 .search-mob-block #search_pop{border:0;}
 .modal.message-box span.mes{padding:15px 10px !important; width:100%; float:left;}
 .pop_content .cnclbtn, .pop_content .okbtn{/*display:inline-block;*/ margin-bottom:10px;}
+.home_three_follow_ul li .contact-frnd-post{margin-bottom:0;}
 
 /***  rec css  ***/
 .rec-recmn-post .contact-frnd-post{border:0; padding:0; margin-top:10px;}
@@ -2601,7 +2602,7 @@ body, body.no-login {padding-bottom:60px;}
 	#filter.mob-modal .modal-dialog{padding:0 !important; margin:0 !important; min-height:100%;}
 	#filter.mob-modal .modal-content .modal-close{top:0 !important; right:0 !important; border-radius:0 !important; background:none !important; border:none !important; color:#5c5c5c !important;}
 	#filter .top-modal-body{padding:5px; border-bottom:1px solid #d2d2d2;}
-	#filter .mid-modal-body{width:100%; float:left;}
+	#filter .mid-modal-body{width:100%; float:left; background:#fff;}
 	#filter .mid-modal-body form{width:100%; float:left; padding:0; background:#fff;}
 	#filter .mid-modal-body .left-search-box{border:0;}
 	#filter .left-search-box h3{color:#1b8ab9; -webkit-text-fill-color:inherit; text-align:left; font-size:16px; line-height:1;}
@@ -2988,6 +2989,11 @@ body, body.no-login {padding-bottom:60px;}
 	.job-menu-profile a h3{font-size:20px;}
 	.job-menu-profile{padding:0 15px 15px;}
 	.profile-job-post-detail .profile-job-post-title .button{font-size:12px;}
+	.custom-add-box{border-left:0; border-right:0; border-radius:0;}
+	.fullwidth_experience select{width:47% !important;}
+	.border-btm-0{border-bottom:0;}
+	.mob-mt10{margin-top:10px;}
+	#paddingtop_fixed{padding-top:75px !important;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3289,8 +3295,9 @@ body, body.no-login {padding-bottom:60px;}
 	#main_page_load .search-profiles .profile-data{width:50%;}
 	.buisness-menu.other-profile-menu::before{bottom:89px;}
 	.buisness-profile-pic-candidate{margin-left:9px !important;}
-	.all-job-bottom p{width:100%; float:left !important;}
+	.all-job-bottom p{/*width:100%; float:left !important;*/}
 	.all-job-bottom p a{margin-left:0 !important; font-size:13px;}
+	.profile-main-rec-box-menu.profile-box-art{margin-bottom:0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

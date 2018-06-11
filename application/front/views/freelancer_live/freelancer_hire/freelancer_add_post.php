@@ -40,9 +40,9 @@
         <section>
             <div>
                 <div class="user-midd-section" id="paddingtop_fixed">
-                    <div class="container">
+                    <div class="container mobp0">
                         <div class="row">
-                            <h3 class="col-chang cus-chang text-center">Please Post your requirement of the work that you need, we will recommend the freelancers accordingly.</h3>
+                            <h3 class="col-chang cus-chang text-center p15">Please Post your requirement of the work that you need, we will recommend the freelancers accordingly.</h3>
                             <div class="col-md-2 col-sm-1"></div>
                             <div class="col-md-8 col-sm-10 animated fadeInLeftBig">
                                 <div>
@@ -55,7 +55,7 @@
                                     }
                                     ?>
                                 </div>
-                                <div class="common-form custom-form">
+                                <div class="common-form custom-form free-hire-cus">
 
                                     <div class="job-saved-box">
 

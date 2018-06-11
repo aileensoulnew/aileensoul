@@ -41,7 +41,7 @@
                         <div class="col-md-6 col-sm-6"><h3><?php echo $this->lang->line("hire-regi-title"); ?></h3></div>
                     <?php } ?>
                 </div>
-                <div class="container">
+                <div class="container mobp0">
                     <div class="row">
                         <div class="col-md-3 col-sm-3">
                             <div class="left-side-bar">
