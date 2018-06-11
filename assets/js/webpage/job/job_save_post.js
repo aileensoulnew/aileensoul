@@ -163,25 +163,29 @@ function job_save(pagenum)
    {
    
        var alldata = 'all';
-       var user = aileenuser_id;
-       var appid = xyz;
+       var user = xyz;
+       // var appid = xyz;
    
        $.ajax({
            type: 'POST',
            url: base_url +'job/job_apply_post',
-           data: 'post_id=' + abc + '&allpost=' + alldata.value + '&userid=' + user.value,
+           data: 'post_id=' + abc + '&allpost=' + alldata + '&userid=' + user,
            success: function (data) {
-               $('#' + 'postdata' + appid).html(data);
-               $('#' + 'postdata' + appid).removeClass();
-               var numItems = $('.contact-frnd-post .job-contact-frnd .profile-job-post-detail').length;
-              
-               if (numItems == '0') {
+              data = JSON.parse(data);
+              $('.applypost' + abc).html(data.status);              
+              $('.applypost' + abc).attr('disabled', 'disabled');
+              $('.applypost' + abc).attr('onclick', 'myFunction()');
+              $('.applypost' + abc).addClass('applied');
+              $('.savedpost' + abc).remove();
+           
+              var numItems = $('.contact-frnd-post .job-contact-frnd .profile-job-post-detail').length;
 
-                   var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='"+ base_url + "img/job-no.png'/></div><div class='art_no_post_text'>No  Saved Post Available.</div></div>";
-                    $('.contact-frnd-post').html(nodataHtml);
-               }
-   
-           }
+              if (numItems == '0') {
+
+                 var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='"+ base_url + "img/job-no.png'/></div><div class='art_no_post_text'>No  Saved Post Available.</div></div>";
+                  $('.contact-frnd-post').html(nodataHtml);
+              }
+            }
        });
    
    }

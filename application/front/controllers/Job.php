@@ -1996,7 +1996,7 @@ class Job extends MY_Controller {
 
             $data = array(
                 'job_delete' => '0',
-                'job_save' => '3',
+                'job_save' => '1',
                 'modify_date' => date('Y-m-d h:i:s', time()),
             );
 
@@ -2044,7 +2044,7 @@ class Job extends MY_Controller {
                 'modify_date' => date('Y-m-d h:i:s', time()),
                 'is_delete' => '0',
                 'job_delete' => '0',
-                'job_save' => '3'
+                'job_save' => '1'
             );
 
 
