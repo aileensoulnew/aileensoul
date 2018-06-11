@@ -209,7 +209,7 @@ $userid = $this->session->userdata('aileenuser');
 	<div class="container">
 		<div class="search-mob-block">
 			<a href="#" data-toggle="modal" data-target="#artist_mob_search">
-				<input type="search" id="tags1" class="tags" name="skills" readonly="true" value="" placeholder="Search by Category and Keyword" />
+				<input type="search" id="tags1" class="tags" name="skills" readonly="true" value="" placeholder="Search..." />
 			</a>		
 		</div>
 	</div>

@@ -25,7 +25,7 @@
     <section class="custom-row">
     <?php echo $artistic_common; ?>
 <div class="user-midd-section art-inner">
-    <div class="container">
+    <div class="container mobp0">
 <div class="col-md-3">  
 </div>
                       <div class="col-md-8 col-sm-12 follow_mid">
