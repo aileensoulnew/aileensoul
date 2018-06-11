@@ -215,7 +215,7 @@
                             <?php if ($this->session->flashdata('error')) { ?>  
                                     <p class="alert alert-success"><?php echo $this->session->flashdata('error'); ?></p>
                             <?php } ?>
-                            <div class="common-form">
+                            <div class="common-form rec-recmn-post">
                                 <div class="job-saved-box">
                                     <h3><?php echo $this->lang->line("recommended_freelancer"); ?></h3>
                                     <div class="contact-frnd-post">

@@ -2439,6 +2439,7 @@ body, body.no-login {padding-bottom:60px;}
 .msg_desc_a{max-height:21px;}
 #contact_per{display:none;}
 .common-form button{color:#fff;}
+.common-form .follow_left_box_main_btn button{color:#5c5c5c;}
 .search-mob-block #search_pop{border:0;}
 .modal.message-box span.mes{padding:15px 10px !important; width:100%; float:left;}
 .pop_content .cnclbtn, .pop_content .okbtn{/*display:inline-block;*/ margin-bottom:10px;}
@@ -2446,11 +2447,12 @@ body, body.no-login {padding-bottom:60px;}
 
 /***  rec css  ***/
 .rec-recmn-post .contact-frnd-post{border:0; padding:0; margin-top:10px;}
-.job-saved-box.rec-recmn-post h3{border:1px solid #d2d2d2; border-radius:4px;}
+.job-saved-box.rec-recmn-post h3, .rec-recmn-post .job-saved-box h3{border:1px solid #d2d2d2; border-radius:4px;}
 .mian_middle_post_box{margin-left:15px;}
 .right_middle_side_posrt{width:316px;}
 .right_middle_side_posrt .all-profile-box{width:100%; margin-left:0;}
 .right_middle_side_posrt{margin-left:934px;}
+.right_side_posrt{width:584px;}
 
 
 /***  media query  ***/
@@ -2994,6 +2996,7 @@ body, body.no-login {padding-bottom:60px;}
 	.border-btm-0{border-bottom:0;}
 	.mob-mt10{margin-top:10px;}
 	#paddingtop_fixed{padding-top:75px !important;}
+	.rec-recmn-post .job-saved-box h3{border-left:0; border-right:0; border-radius:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
