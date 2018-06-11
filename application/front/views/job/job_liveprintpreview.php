@@ -203,7 +203,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                <?php echo $job_menubar; ?>   
             </div>
          </div>
-         <div class="middle-part container res-job-print  ">
+         <div class="middle-part container res-job-print  mobp0">
          <div class="job-menu-profile job_edit_menu mob-none">
             <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
                <h3 class="profile-head-text">
@@ -232,7 +232,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             </div>
          </div>
         
-         <div class="col-md-7 col-sm-12 mob-clear">
+         <div class="col-md-7 col-sm-12 mob-clear mobp0">
           <?php if($userid == $id)
                 {
                   if($count_profile == 100)
@@ -242,7 +242,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
           ?>
 
           <div class="mob-progressbar" >
-               <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
+               <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily. </p>
                <p class="mob-edit-pro">
                  
                   <a href="javascript:void(0);"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Successfully Completed</a>      

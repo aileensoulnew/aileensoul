@@ -2438,6 +2438,8 @@ body, body.no-login {padding-bottom:60px;}
 .mi-cat-width{width:220px; float:left;}
 .msg_desc_a{max-height:21px;}
 #contact_per{display:none;}
+.common-form button{color:#fff;}
+.search-mob-block #search_pop{border:0;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -2953,6 +2955,16 @@ body, body.no-login {padding-bottom:60px;}
 	
 	/***  job profile  ***/
 	.profile-main-rec-box-menu{border-left:0; border-right:0;}
+	.mob-progressbar{width:90%; margin:0 auto 15px;}
+	.job-saved-box .contact-frnd-post{padding:0;}
+	.job-saved-box .job-contact-frnd .profile-job-post-detail{border:0;}
+	.profile-job-profile-button{border-radius:0;}
+	.left-form-each{z-index:9;}
+	.gender-custom{min-height:78px;}
+	.common-form_border{border:0px;}
+	.rec_res{padding:0 !important;}
+	.pro-fw{border-bottom:1px solid #d2d2d2;}
+	
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3010,6 +3022,7 @@ body, body.no-login {padding-bottom:60px;}
 	.user-detail-left .block-639{display:inline-block;}
 	.blog-page .pagination li a{font-size:14px;}
 	.blog-page .rec-img img{position:relative; width:100%; transform:inherit; } 
+	.mob-progressbar{width:100%; border-left:0; border-right:0; border-radius:0;}
 	
 }
 @media screen and (max-width: 539px) {

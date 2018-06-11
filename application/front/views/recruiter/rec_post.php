@@ -238,7 +238,7 @@
 
                 </div>
             
-                <div class="col-md-7 col-sm-12 mob-clear ">
+                <div class="col-md-7 col-sm-12 mob-clear mobp0">
                     <div class="page-title">
                         <h3>Post</h3>
                     </div>

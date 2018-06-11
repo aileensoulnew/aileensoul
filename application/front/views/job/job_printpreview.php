@@ -184,7 +184,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
 <?php echo $job_menubar; ?>   
                 </div>
             </div>
-            <div class="container res-job-print">
+            <div class="container res-job-print mobp0">
                 <div class="job-menu-profile job_edit_menu mob-none">
                     <a  href="javascript: void(0);" title="<?php echo $job[0]['fname'] . ' ' . $job[0]['lname']; ?>">
                         <h3 class="profile-head-text">
@@ -214,7 +214,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
                     </div>
                 </div>
 
-                <div class="col-md-7 col-sm-12 mob-clear">
+                <div class="col-md-7 col-sm-12 mob-clear mobp0">
                     <?php
                     if ($userid == $id) {
                         if ($count_profile == 100) {

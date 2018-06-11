@@ -38,7 +38,7 @@
        
       </div>
      
-      <div class="container">
+      <div class="container mobp0">
       <div class="row row4">
 
            <!-- Job leftbar start-->

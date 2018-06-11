@@ -243,7 +243,7 @@
 					</div>
 					<!-- text head end -->
 
-					<div class="col-md-7 col-sm-12 mob-clear">
+					<div class="col-md-7 col-sm-12 mob-clear mobp0">
 						<div class="common-form">
 							<div class="job-saved-box">
 

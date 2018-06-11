@@ -136,7 +136,7 @@
                         <?php echo $job_menubar; ?>       
                     </div>
                 </div>
-                <div class="container padding_set_res">
+                <div class="container padding_set_res mobp0">
                     <div class="job-menu-profile job_edit_menu mob-none">
                         <a  href="javascript:void(0);">
                             <h3 class="profile-head-text"> <?php echo $jobdata[0]['fname'] . ' ' . $jobdata[0]['lname']; ?></h3>
@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <!-- text head end -->
-                    <div class="col-md-7 col-sm-12 mob-clear">
+                    <div class="col-md-7 col-sm-12 mob-clear mobp0">
                         <?php
                         if ($count_profile == 100) {
                             if ($job_reg[0]['progressbar'] == 0) {
