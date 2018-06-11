@@ -87,8 +87,8 @@
        }
    }
   function check() {
-       var keyword = $.trim(document.getElementById('tags1').value);
-       var place = $.trim(document.getElementById('searchplace1').value);
+       var keyword = $.trim(document.getElementById('job_keyword').value);
+       var place = $.trim(document.getElementById('job_location').value);
        if (keyword == "" && place == "") {
            return false;
        }

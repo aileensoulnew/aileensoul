@@ -2,14 +2,14 @@
 $userid = $this->session->userdata('aileenuser');
 ?>
 <div id="job_search" class="modal fade mob-search-popup" role="dialog">
-	<form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
+	<form onsubmit="jobsearchSubmitMobile()" action="javascript:void(0)" method="get">
 		<div class="new-search-input">
-			<input type="search" id="job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title, Keywords, or Company" ng-model="keyword" />
-			<input type="search" ng-model="city" id="job_location" class="searchplace" name="job_location" value="" placeholder="City, State or Country" ng-model="city"/>
+			<input type="search" id="mob_job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title, Keywords, or Company" ng-model="keyword" />
+			<input type="search" ng-model="city" id="mob_job_location" class="searchplace" name="job_location" value="" placeholder="City, State or Country" ng-model="city"/>
 		</div>
 		<div class="new-search-btn">
 			<button type="button" class="close-new btn" data-dismiss="modal" >Cancel</button>
-			<button type="submit" id="search_btn" class="btn btn-primary" onclick="return check();">Search</button>
+			<button type="submit" id="search_btn" class="btn btn-primary">Search</button>
 		</div>
 	</form>
 </div>
@@ -378,9 +378,65 @@ $userid = $this->session->userdata('aileenuser');
 
 	function jobsearchSubmit(){
     
-        var keyword = $("input[name='job_keyword']").val().toLowerCase().split(' ').join('+');
-        var city = $("input[name='job_location']").val().toLowerCase().split(' ').join('+');
+        var keyword = $("#job_keyword").val().toLowerCase().split(' ').join('+');
+        var city = $("#job_location").val().toLowerCase().split(' ').join('+');
 
+        if(keyword == "" && city == "")
+        {
+        	return false;
+        }
+        
+        var work_timing_fil = "";
+        $('.work_timing-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                work_timing_fil += (work_timing_fil == "") ? currentid : "-" + currentid;
+            }
+        });        
+        // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+        var keyworddata = [];
+        if(keyword != ""){
+            keyworddata = keyword.split(",");
+            // remove in from array
+            if(keyworddata.indexOf("in") > -1 && city != ""){
+                keyworddata.splice(keyworddata.indexOf("in"),1);
+            }
+            keyword = keyworddata.join('-').toString();
+        }
+        var citydata = [];
+        if(city != ""){
+            citydata = city.split(",");
+            // remove in from array
+            // if(citydata.indexOf("in") > -1 && city != ""){
+            //     citydata.splice(citydata.indexOf("in"),1);
+            // }
+            city = citydata.join('-').toString();
+        }
+
+        if(keyword[keyword.length - 1] == "-")
+        {            
+            keyword = keyword.slice(0,-1);
+        }
+
+        if (keyword == '' && city == '') {
+            return false;
+        } else if (keyword != '' && city == '') {
+            window.location.href = base_url + 'jobs/search/' + keyword + '-jobs?work_timing='+work_timing_fil;
+        } else if (keyword == '' && city != '') {
+            window.location.href = base_url + 'jobs/search/jobs-in-' + city+'?work_timing='+work_timing_fil;
+        } else {
+            window.location.href = base_url + 'jobs/search/' + keyword + '-jobs-in-' + city+'?work_timing='+work_timing_fil;
+        }
+    }
+
+    function jobsearchSubmitMobile(){
+    
+        var keyword = $("#mob_job_keyword").val().toLowerCase().split(' ').join('+');
+        var city = $("#mob_job_location").val().toLowerCase().split(' ').join('+');
+        if(keyword == "" && city == "")
+        {
+        	return false;
+        }
         var work_timing_fil = "";
         $('.work_timing-filter').each(function(){
             if(this.checked){

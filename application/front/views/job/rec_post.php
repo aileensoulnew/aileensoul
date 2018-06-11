@@ -972,7 +972,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
             <script src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
         <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/webpage/job/search_common.js?ver=' . time()); ?>"></script>
+            <script src="<?php echo base_url('assets/js/webpage/job/search_common.js?ver=' . time()); ?>"></script>
         <?php } ?>
         
         <?php }?>
