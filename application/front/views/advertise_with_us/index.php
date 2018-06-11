@@ -223,6 +223,7 @@ header('Cache-Control: public, max-age=30');
                             </div>
                         </div>
                     </form>
+					<div class="clearfix"></div>
                 </div>
 				<p class="text-center more-support">For more support <a href="mailto:inquiry@aileensoul.com">inquiry@aileensoul.com</a>
 			</div>

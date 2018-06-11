@@ -193,7 +193,7 @@ header("Pragma: no-cache"); // HTTP/1.0
             								<div class="content custom-scroll">
             									<ul class="dropdown-data msg-dropdown">
                                                     <li ng-repeat="blog in recentBlogList">
-                                                        <a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
+                                                        <a  ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
             												<div class="dropdown-database">
             													<div class="post-img">
                                                                     <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}" alt="{{ blog.image }}">

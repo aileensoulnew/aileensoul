@@ -1673,7 +1673,6 @@ ol li:before{counter-increment: myOrderedListItemsCounter;
 .blog-page .web-header .sub-header .sub-menu li ul{/*padding-left:15px;*/}
 .blog-page .web-header .sub-header .sub-menu li ul li a{font-size:16px;}
 .blog-page.old-no-login #paddingtop_fixed{padding-top:110px !important;}
-.blog-page .sub-header{padding-top:54px;}
 .blog-search{padding-top:8px;}
 .sub-header .sub-menu.blog-sub-menu li{padding-top:5px;}
 .sub-header .sub-menu.blog-sub-menu li:first-child{padding-top:0px;}
@@ -2663,7 +2662,7 @@ body, body.no-login {padding-bottom:60px;}
 	.reg-form-box .reg-form{padding-left:0; padding-top:15px;}
 	.recruiter-main .search-banner .reg-form-box .reg-form h3{text-align:center;}
 	.bottom-ftr-none{display:none;}
-	#paddingtop_fixed{padding-top:79px !important;}
+	#paddingtop_fixed{padding-top:77px !important;}
 	#paddingtop_fixed_art{padding-top:77px !important;}
 	.business-profile-right{width:100%;}
 	.business-profile-right .profile-left{width:100%;}
