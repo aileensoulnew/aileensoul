@@ -306,7 +306,7 @@ if ($this->session->userdata('aileenuser')) {
 					</div>
 				
 				</div>
-				<div class="col-md-7 col-sm-12 mob-clear">
+				<div class="col-md-7 col-sm-12 mob-clear mobp0">
 					<div class="common-form">
 						<div class="job-saved-box">
 							<h3><?php echo $this->lang->line("employer_details"); ?></h3>

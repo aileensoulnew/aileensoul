@@ -18,7 +18,7 @@
             <?php echo $freelancer_hire_header2; ?>
             <section>
                 <div class="user-midd-section" id="paddingtop_fixed">
-                    <div class="container">
+                    <div class="container mobp0">
                         <div class="row">
                             <div class="col-md-3 col-sm-3">
                                 <div class="add-post-button">

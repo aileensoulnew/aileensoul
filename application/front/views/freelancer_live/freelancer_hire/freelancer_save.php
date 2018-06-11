@@ -161,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container">
+                <div class="container mobp0">
                     <div class="job-menu-profile mob-none pt20">
                         <a title="<?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?></h3></a>
                         <div class="profile-text">
@@ -174,7 +174,7 @@
                         </div>
                     
                     </div>
-                    <div class="col-md-8 col-sm-12 mob-clear">
+                    <div class="col-md-8 col-sm-12 mob-clear mobp0">
                         <div class="common-form">
                             <div class="job-saved-box">
                                 <h3><?php echo $this->lang->line("saved_freelancer"); ?></h3>
