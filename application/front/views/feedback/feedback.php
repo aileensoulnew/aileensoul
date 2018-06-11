@@ -76,11 +76,11 @@ header('Cache-Control: public, max-age=30');
                     <div class="overlaay">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-4 col-sm-3">
+                                <div class="col-md-6 col-sm-6 left-header col-xs-4 fw-479">
                                     <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name-footer.png?ver=' . time()) ?>" alt="logo"></a>
                                 </div>
-                                <div class="col-md-8 col-sm-9">
-                                    <div class="btn-right pull-right">
+                                <div class="col-md-6 col-sm-6 right-header col-xs-8 fw-479">
+                                    <div class="btn-right">
                                         <?php if (!$this->session->userdata('aileenuser')) { ?>
                                             <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
                                             <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>

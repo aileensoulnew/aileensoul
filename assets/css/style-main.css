@@ -833,7 +833,7 @@ textarea:focus::-webkit-input-placeholder{
 	padding:25px 0 0;
 }
 .main-inner .middle-main .container{
-    height:100%
+   /* height:100%*/
 }
 .pt-a{
     padding-top:65px
