@@ -81,7 +81,7 @@ app.controller('siteMapArtistController', function ($scope, $http,$location) {
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
     //ARTIST LISTING
-    function artistList(page){
+    $scope.artistListNew = function(page){
         $scope.artistList = {};
         $($scope.alphabetList).each(function(i,d){
             d.isactive = (d.name == $scope.searchkeyword) ? true : false;
@@ -93,7 +93,7 @@ app.controller('siteMapArtistController', function ($scope, $http,$location) {
             $scope.isPageNoClicked = true;
         }, function (error) {});
     }
-    artistList();
+    $scope.artistListNew();
     function alphabetList(page){
         // Loop for alphabet list
         var alpha = [];
@@ -107,14 +107,16 @@ app.controller('siteMapArtistController', function ($scope, $http,$location) {
         $scope.alphabetList = alpha;
     }
     alphabetList();
-
+    $scope.pageChanged = function () {  
+        $scope.artistListNew();  
+    };
     // PAGINATIONS
-    $scope.$watch("currentPage + numPerPage", function() {
+    /*$scope.$watch("currentPage + numPerPage", function() {
         if($scope.isPageNoClicked){
             window.location.href = base_url + 'sitemap/artist/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage;
             // $location.url('sitemap/artist/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage);
         }
-    });
+    });*/
 });
 
 /*app.controller('siteMapMainCompaniesController', function ($scope, $http,$location) {
@@ -152,15 +154,15 @@ app.controller('siteMapCompaniesController', function ($scope, $http,$location) 
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
     //ARTIST LISTING
-    function companyList(page){
+    $scope.companyListNew = function (page){
         $scope.companyList = {};
         $http.get("sitemap/get_company_list?page_id=" + $scope.currentPage + "&searchword="+ $scope.searchkeyword).then(function (success) {
             $scope.companyList = success.data.company_list;
             $scope.total_record = success.data.total_record['total_rec'];
             $scope.isPageNoClicked = true;
         }, function (error) {});
-    }
-    companyList();
+    };
+    $scope.companyListNew();    
     function alphabetList(page){
         // Loop for alphabet list
         var alpha = [];
@@ -174,14 +176,17 @@ app.controller('siteMapCompaniesController', function ($scope, $http,$location) 
         $scope.alphabetList = alpha;
     }
     alphabetList();
+    $scope.pageChanged = function () {  
+        $scope.companyListNew();  
+    };
 
     // PAGINATIONS
-    $scope.$watch("currentPage + numPerPage", function() {
+    /*$scope.$watch("currentPage + numPerPage", function() {
         if($scope.isPageNoClicked){
             window.location.href = base_url + 'sitemap/companies/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage;
             // $location.url('sitemap/artist/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage);
         }
-    });
+    });*/
 });
 
 /*app.controller('siteMapMainJobController', function ($scope, $http,$location) {
@@ -219,7 +224,7 @@ app.controller('siteMapJobController', function ($scope, $http,$location) {
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
     //ARTIST LISTING
-    function jobList(page){
+    $scope.jobListNew = function(page){
         $scope.jobList = {};
         $($scope.alphabetList).each(function(i,d){
             d.isactive = (d.name == $scope.searchkeyword) ? true : false;
@@ -229,8 +234,8 @@ app.controller('siteMapJobController', function ($scope, $http,$location) {
             $scope.total_record = success.data.total_record['total_rec'];
             $scope.isPageNoClicked = true;
         }, function (error) {});
-    }
-    jobList();
+    };
+    $scope.jobListNew();
     function alphabetList(page){
         // Loop for alphabet list
         var alpha = [];
@@ -244,14 +249,17 @@ app.controller('siteMapJobController', function ($scope, $http,$location) {
         $scope.alphabetList = alpha;
     }
     alphabetList();
+    $scope.pageChanged = function () {  
+        $scope.jobListNew();  
+    };
 
     // PAGINATIONS
-    $scope.$watch("currentPage + numPerPage", function() {
+   /* $scope.$watch("currentPage + numPerPage", function() {
         if($scope.isPageNoClicked){
             window.location.href = base_url + 'sitemap/jobs/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage;
             // $location.url('sitemap/artist/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage);
         }
-    });
+    });*/
 });
 /*app.controller('siteMapMainFreelancerController', function ($scope, $http,$location) {
     $scope.alphabetList = {};
@@ -288,7 +296,7 @@ app.controller('siteMapFreelancerController', function ($scope, $http,$location)
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
     //ARTIST LISTING
-    function freelancerList(page){
+    $scope.freelancerListNew = function(page){
         $scope.freelancerList = {};
         $($scope.alphabetList).each(function(i,d){
             d.isactive = (d.name == $scope.searchkeyword) ? true : false;
@@ -298,8 +306,8 @@ app.controller('siteMapFreelancerController', function ($scope, $http,$location)
             $scope.total_record = success.data.total_record['total_rec'];
             $scope.isPageNoClicked = true;
         }, function (error) {});
-    }
-    freelancerList();
+    };
+    $scope.freelancerListNew();
     function alphabetList(page){
         // Loop for alphabet list
         var alpha = [];
@@ -313,14 +321,17 @@ app.controller('siteMapFreelancerController', function ($scope, $http,$location)
         $scope.alphabetList = alpha;
     }
     alphabetList();
+    $scope.pageChanged = function () {  
+        $scope.freelancerListNew();  
+    };
 
     // PAGINATIONS
-    $scope.$watch("currentPage + numPerPage", function() {
+    /*$scope.$watch("currentPage + numPerPage", function() {
         if($scope.isPageNoClicked){
             window.location.href = base_url + 'sitemap/freelance-jobs/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage;
             // $location.url('sitemap/artist/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage);
         }
-    });
+    });*/
 });
 
 app.controller('siteMapMemberController', function ($scope, $http,$location) {
@@ -342,7 +353,7 @@ app.controller('siteMapMemberController', function ($scope, $http,$location) {
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
     //ARTIST LISTING
-    function memberList(page){
+    $scope.memberListNew = function(page){
         $scope.memberList = {};
         $($scope.alphabetList).each(function(i,d){
             d.isactive = (d.name == $scope.searchkeyword) ? true : false;
@@ -352,8 +363,8 @@ app.controller('siteMapMemberController', function ($scope, $http,$location) {
             $scope.total_record = success.data.total_record['total_rec'];
             $scope.isPageNoClicked = true;
         }, function (error) {});
-    }
-    memberList();
+    };
+    $scope.memberListNew();
     function alphabetList(page){
         // Loop for alphabet list
         var alpha = [];
@@ -367,14 +378,17 @@ app.controller('siteMapMemberController', function ($scope, $http,$location) {
         $scope.alphabetList = alpha;
     }
     alphabetList();
+    $scope.pageChanged = function () {  
+        $scope.memberListNew();  
+    };
 
     // PAGINATIONS
-    $scope.$watch("currentPage + numPerPage", function() {
+    /*$scope.$watch("currentPage + numPerPage", function() {
         if($scope.isPageNoClicked){
             window.location.href = base_url + 'sitemap/people/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage;
             // $location.url('sitemap/artist/'+ $scope.searchkeyword + '?page_id=' + $scope.currentPage);
         }
-    });
+    });*/
 });
 
 app.filter('unsafe', function($sce) {

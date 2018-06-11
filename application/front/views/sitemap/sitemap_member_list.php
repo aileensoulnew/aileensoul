@@ -2,7 +2,7 @@
 	<h3>Member Name with Characters</h3>
 	<ul class="alphabet">
 		<li ng-repeat="alpha in alphabetList track by $index">
-			<a target="_self" class="{{ alpha.isactive }}" ng-href="<?php echo base_url(). 'sitemap/people/'?>{{ alpha.name.toLowerCase() }}?page_id=1" target="_self">{{ alpha.name }}</a>
+			<a target="_self" class="{{ alpha.isactive }}" ng-href="<?php echo base_url(). 'sitemap/people/'?>{{ alpha.name.toLowerCase() }}" target="_self">{{ alpha.name }}</a>
 		</li>
 	</ul>
 	<div class="fw pt20" ng-show="isPaginationShow">
@@ -14,6 +14,7 @@
 				max-size="maxSize" 
 				items-per-page="limit"
 				boundary-links="true"
+				ng-change="pageChanged()"
 				>
 			</pagination>
 		</div>
