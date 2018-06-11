@@ -27,7 +27,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
         <?php echo $business_header2; ?> 
         <section>
             <?php echo $business_common; ?>
-            <div class="container">
+            <div class="container mobp0">
                 <div class="user-midd-section">
                     <div  class="col-sm-12 border_tag padding_low_data padding_les" >
                         <div class="padding_les main_art" >

@@ -23,7 +23,7 @@
             <?php echo $business_common; ?>
             <div class="">
                 <div class="user-midd-section">
-                    <div class="container">
+                    <div class="container mobp0">
                         <div  class="col-sm-12 border_tag padding_low_data padding_les" >
                             <div class="padding_les main_art" >
                                 <?php echo $file_header; ?>

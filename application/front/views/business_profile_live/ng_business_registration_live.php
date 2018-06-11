@@ -88,7 +88,7 @@
 				<div class="common-form1">
 					<div class="col-md-3 col-sm-4"></div>
 				</div>
-				<div class="container">
+				<div class="container mobp0">
 					<div class="row">
 						<div class="col-md-12 fw">
 							<div class="all-edit-profile-box business-profile">

@@ -37,7 +37,7 @@
         <section>
             <?php echo $business_common_profile; ?>
             <div class="user-midd-section">
-                <div class="container">
+                <div class="container mobp0">
                     <div class="row">
                         <div class="col-md-3" style="width: 22%;"></div>
                         <div class="col-md-7 col-sm-7">

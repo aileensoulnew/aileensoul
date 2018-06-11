@@ -22,14 +22,14 @@
         <section>
             <?php echo $business_common; ?>
             <div class="user-midd-section">
-                <div class="container">
+                <div class="container mobp0">
                     <div class="row">
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <div class="common-form">
                                 <div class="job-saved-box">
-                                    <h3>Contacts</h3>
+                                    <h3>Contacts123</h3>
                                     <div class="contact-frnd-post">
                                         <!-- AJAX DATA..... --> 
                                         <div class="col-md-1"></div>

@@ -395,7 +395,7 @@ echo $header_inner_profile ?>
 	<div class="container">
 		<div class="search-mob-block">
 		    <a href="#" data-toggle="modal" data-target="#business_mob_search">
-		        <input type="search" readonly="true" id="tags1" class="tags" name="skills" value="" placeholder="Companies, Category, Products" />
+		        <input type="search" readonly="true" id="tags1" class="tags" name="skills" value="" placeholder="Search..." />
 		    </a>        
 		</div>
 	</div>

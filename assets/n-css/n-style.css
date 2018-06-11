@@ -1529,7 +1529,7 @@ ol li:before{counter-increment: myOrderedListItemsCounter;
 /***  end add with us  ***/
 
 /***  progress bar  ***/
-.progress{display: none;}
+.progress{/*display: none;*/}
 .progress{
     position:relative;
     width:100%;
@@ -2278,6 +2278,9 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .buisness-menu{box-shadow:none !important;}
 .mob-inner-page { background: #fff; border: 1px solid #d9d9d9; width: 580px; margin: 0 auto; border-radius: 4px;}
 .mian_middle_post_box{width:584px;}
+.buisness-menu .profile-pho-bui{box-shadow:none;}
+.profile-pho-bui .user-pic{border:1px solid #d2d2d2;}
+.profile-pho-bui .user-pic img{padding:4px;}
 
 /***  job css  ***/
 .message button.modal-close{background:#1b8ab9; color:#fff;}
@@ -2440,6 +2443,7 @@ body, body.no-login {padding-bottom:60px;}
 #contact_per{display:none;}
 .common-form button{color:#fff;}
 .common-form .follow_left_box_main_btn button{color:#5c5c5c;}
+.user_lst button{color:#5c5c5c;}
 .search-mob-block #search_pop{border:0;}
 .modal.message-box span.mes{padding:15px 10px !important; width:100%; float:left;}
 .pop_content .cnclbtn, .pop_content .okbtn{/*display:inline-block;*/ margin-bottom:10px;}
@@ -2997,6 +3001,10 @@ body, body.no-login {padding-bottom:60px;}
 	.mob-mt10{margin-top:10px;}
 	#paddingtop_fixed{padding-top:75px !important;}
 	.rec-recmn-post .job-saved-box h3{border-left:0; border-right:0; border-radius:0;}
+	.edit-pro-box{width:40px; height:40px; padding:8px 10px;}
+	.right_side_posrt{width:100%;}
+	.profile-main-box-buis-menu ul{border-bottom:0;}
+	.main_art{border:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
