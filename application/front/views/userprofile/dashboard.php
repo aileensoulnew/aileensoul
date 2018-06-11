@@ -1,3 +1,4 @@
+<?php $user_id = $this->session->userdata('aileenuser'); ?>
 <div class="container pt15 main-dashboard">
     <div class="left-part">
         <div class="left-info-box">
@@ -38,10 +39,16 @@
         </div>
         <div class="media-box latest_photos">
             <div class="dash-left-title" liveslug="{{live_slug}}" userslug="{{user_slug}}">
-                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/photos" ng-click='makeActive("dashboard")'><i class="fa fa-camera"></i> Photos</a></h3>
+                <h3>
+                    <?php if($user_id != ""): ?>
+                        <a href="<?php echo base_url(); ?>{{user_slug}}/photos" ng-click='makeActive("dashboard")'><i class="fa fa-camera"></i> Photos</a>
+                    <?php else: ?>
+                        <a href="#" data-toggle="modal" data-target="#regmodal"><i class="fa fa-camera"></i> Photos</a>
+                <?php endif; ?>
+                </h3>
             </div>
             <div class="media-display">
-                <div class="all-meda" ng-repeat="imageData in postImageData">                    
+                <div class="all-meda" ng-repeat="imageData in postImageData">
                     <img ng-if="imageData.filetype == 'profile_picture'" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image')">
                     <img ng-if="imageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image')">
                     <img ng-if="imageData.filetype == 'image'" ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image')">
@@ -50,7 +57,12 @@
         </div>
         <div class="media-box latest_video">
             <div class="dash-left-title">
-                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/videos" ng-click='makeActive("dashboard")'><i class="fa fa-video-camera"></i> Video</a></h3>
+                <h3>
+                    <?php if($user_id != ""): ?>
+                        <a href="<?php echo base_url(); ?>{{user_slug}}/videos" ng-click='makeActive("dashboard")'>
+                    <?php else: ?>
+                        <a href="#" data-toggle="modal" data-target="#regmodal">
+                    <?php endif; ?><i class="fa fa-video-camera"></i> Video</a></h3>
             </div>
             <div class="media-display">
                 <div class="all-meda" ng-repeat="videoData in postVideoData">
@@ -62,7 +74,13 @@
         </div>
         <div class="media-box latest_audio">
             <div class="dash-left-title">
-                <h3><a href="<?php echo base_url(); ?>{{user_slug}}/audios" ng-click='makeActive("dashboard")'><i class="fa fa-music"></i> Audio</a></h3>
+                <h3>
+                    <?php if($user_id != ""): ?>
+                        <a href="<?php echo base_url(); ?>{{user_slug}}/audios" ng-click='makeActive("dashboard")'>
+                    <?php else: ?>
+                        <a href="#" data-toggle="modal" data-target="#regmodal">
+                    <?php endif; ?>
+                    <i class="fa fa-music"></i> Audio</a></h3>
             </div>
             <div class="media-display">
                 <div class="all-meda" ng-repeat="audioData in postAudioData">
@@ -86,11 +104,21 @@
         </div>
         <div class="media-box latest_pdf">
             <div class="dash-left-title">
-                <h3><a href="{{user_slug}}/pdf" ng-click='makeActive("dashboard")'><i class="fa fa-file-pdf-o"></i> PDF</a></h3>
+                <h3>
+                    <?php if($user_id != ""): ?>
+                        <a href="{{user_slug}}/pdf" ng-click='makeActive("dashboard")'>
+                    <?php else: ?>
+                        <a href="#" data-toggle="modal" data-target="#regmodal">
+                    <?php endif; ?>
+                        <i class="fa fa-file-pdf-o"></i> PDF</a></h3>
             </div>
             <div class="media-display"  ng-repeat="pdfData in postPdfData">
                 <div class="all-meda">
-                    <a href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{pdfData.filename}}" target="_blank">
+                    <?php if($user_id != ""): ?>
+                        <a href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{pdfData.filename}}" target="_blank">
+                    <?php else: ?>
+                        <a href="#" data-toggle="modal" data-target="#regmodal">
+                    <?php endif; ?>
                         <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{pdfData.description}}" dd-text-collapse-cond="false" class="pdf-title" ng-if="pdfData.post_for == 'simple'">{{pdfData.description}}</label>
                         <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{post.simple_data.description}}" dd-text-collapse-cond="false" class="pdf-title" ng-if="pdfData.post_for == 'opportunity'">{{pdfData.opportunity}}</label>
                         <img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>">
@@ -291,19 +319,31 @@
                     <div class="all-post-top">
                         <div class="post-head">
                             <div class="post-img" ng-if="post.post_data.post_for == 'question'">
-                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                <?php if($user_id != ""): ?>
+                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                <?php else: ?>
+                                    <a href="#" data-toggle="modal" data-target="#regmodal">
+                                <?php endif; ?>
                                     <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
                                     <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                     <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                 </a>
                             </div>
                             <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image != ''">
-                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                <?php if($user_id != ""): ?>
+                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                <?php else: ?>
+                                    <a href="#" data-toggle="modal" data-target="#regmodal">
+                                <?php endif; ?>
                                     <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}">
                                 </a>
                             </div>
                             <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image == ''">
-                                <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                <?php if($user_id != ""): ?>
+                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                <?php else: ?>
+                                    <a href="#" data-toggle="modal" data-target="#regmodal">
+                                <?php endif; ?>
                                     <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                     <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                 </a>
@@ -311,10 +351,20 @@
                             <div class="post-detail">
                                 <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                     <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a><span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'"></a><span class="post-time" ng-if="post.question_data.is_anonymously == '0'">{{post.post_data.time_string}}</span>
+                                    <?php if($user_id != ""): ?>
+                                        <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'"></a>
+                                    <?php else: ?>
+                                        <a href="#" data-toggle="modal" data-target="#regmodal" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'"></a>
+                                    <?php endif; ?>
+                                    <span class="post-time" ng-if="post.question_data.is_anonymously == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                    <?php if($user_id != ""): ?>
+                                    <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a>
+                                    <?php else: ?>
+                                        <a href="#" data-toggle="modal" data-target="#regmodal" class="post-name" ng-bind="post.user_data.fullname"></a>
+                                    <?php endif; ?>
+                                    <span class="post-time">{{post.post_data.time_string}}</span>
                                 </div>
                                 <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                     <span class="post-designation" ng-if="post.user_data.title_name != '' && post.question_data.is_anonymously == '0'" ng-bind="post.user_data.title_name"></span>
@@ -333,6 +383,7 @@
                                     <li ng-if="live_slug == user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="javascript:void(0);" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, postIndex)">Edit Post</a></li>
                                     <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
                                     <li>
+                                    <?php if($user_id != ""): ?>
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0' && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/post/{{post.post_data.id}}" target="_blank">Show in new tab</a>
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0' && (post.post_data.post_for == 'profile_update' || post.post_data.post_for == 'cover_update')" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
@@ -341,6 +392,9 @@
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a>
 
                                         <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
+                                        <?php else: ?>
+                                            <a href="#" data-toggle="modal" data-target="#regmodal" class="post-name">Show in new tab</a>
+                                        <?php endif; ?>
                                     </li>
                                 </ul>
                             </div>
@@ -494,9 +548,16 @@
                             <div class="one-img" ng-repeat="post_file in post.post_file_data" ng-init="$last ? loadMediaElement() : false">
                                 <a href="#" ng-if="post_file.file_type == 'image'"><img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)"></a>
                                 <span ng-if="post_file.file_type == 'video'"> 
+                                    <?php //if($user_id != ""): ?>
+                                    
                                     <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
                                         <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                     </video>                                
+                                    <?php /*else: ?>
+                                        <a href="#" data-toggle="modal" data-target="#regmodal">
+                                            <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                        </a>
+                                    <?php endif;*/ ?>
                                 </span>
                                 <span  ng-if="post_file.file_type == 'audio'" >
                                     <div class = "audio_main_div">
@@ -591,12 +652,20 @@
                             <div class="post-comment" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
                                 <div class="post-img">
                                     <div ng-if="comment.user_image != ''">
-                                        <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                        <?php if($user_id != ""): ?>
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                        <?php else: ?>
+                                            <a href="#" data-toggle="modal" data-target="#regmodal">
+                                        <?php endif; ?>
                                             <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
                                         </a>
                                     </div>
                                     <div class="post-img" ng-if="comment.user_image == ''">
-                                        <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                        <?php if($user_id != ""): ?>
+                                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self">
+                                        <?php else: ?>
+                                            <a href="#" data-toggle="modal" data-target="#regmodal">
+                                        <?php endif; ?>
                                             <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                             <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                         </a>
@@ -674,7 +743,13 @@
             <div class="add-box">
                 <img ng-src="<?php echo base_url('assets/n-images/add.jpg') ?>">
             </div>
-            <div class="all-contact">
+            <?php
+            $all_c_no_login = "";
+            if($user_id == ""){
+                $all_c_no_login = "hide";
+            }
+            ?>
+            <div class="all-contact <?php echo $all_c_no_login; ?>">
                 <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_blank">All</a></h4>
                 <div class="all-user-list">
                     <data-owl-carousel class="owl-carousel" data-options="">
@@ -1084,6 +1159,7 @@
         <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModalImage')">×</button>
         <div class="modal-dialog">
             <div class="modal-content">
+                <?php //if($user_id != ""): ?>
                 <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
                 </div>
                 <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
@@ -1095,6 +1171,16 @@
                         <img ng-if="_photoData.filetype == 'image'" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
                     </div>
                 </div>
+                <?php /*else: ?>
+                    <div class='pop_content pop-content-cus'>
+                        <h2>Never miss out any opportunities, news, and updates.</h2>
+                        Join Now! 
+                        <p class='poppup-btns'>
+                            <a class='btn1' href="<?php echo base_url(); ?>login">Login</a> or 
+                            <a class='btn1' href="<?php base_url(); ?>registration">Register</a>
+                        </p>
+                    </div>
+                <?php endif;*/ ?>
             </div>
             <div class="caption-container">
                 <p id="caption"></p>
@@ -1158,7 +1244,6 @@
         <a class="prev" style="left:0px;" ng-click="plusSlides2(-1,'Audio')">&#10094;</a>
         <a class="next" ng-click="plusSlides2(1,'Audio')">&#10095;</a>    
     </div>
-
     <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip();   

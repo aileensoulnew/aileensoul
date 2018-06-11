@@ -1353,7 +1353,16 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 
-    $scope.openModal2 = function(myModal2Id) {        
+    $scope.openModal2 = function(myModal2Id) {
+        /*if(user_id != "")
+        {            
+            document.getElementById(myModal2Id).style.display = "block";
+            $("body").addClass("modal-open");
+        }
+        else
+        {
+            $("#regmodal").modal("show");
+        }*/
         document.getElementById(myModal2Id).style.display = "block";
         $("body").addClass("modal-open");
     };
@@ -1533,13 +1542,17 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $scope.fieldList = success.data;
         }, function (error) {});
     }
-    getContactSuggetion();
-    function getContactSuggetion() {
-        $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
-            $scope.contactSuggetion = success.data;
-//            console.log($scope.contactSuggetion);
-        }, function (error) {});
+    if(user_id != "")
+    {
+        getContactSuggetion();
+        function getContactSuggetion() {
+            $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
+                $scope.contactSuggetion = success.data;
+                //console.log($scope.contactSuggetion);
+            }, function (error) {});
+        }
     }
+
     $scope.job_title = [];
     $scope.loadJobTitle = function ($query) {
         return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
@@ -2788,6 +2801,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $('video,audio').mediaelementplayer(/* Options */);
     };
     $scope.addToContact = function (user_id, contact) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/addToContact',
@@ -2803,6 +2821,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     $scope.post_like = function (post_id) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePost',
@@ -2832,6 +2855,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     $scope.sendComment = function (post_id, index, post) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#commentTaxBox-' + post_id).html();
         //comment = comment.replace(/^(<br\s*\/?>)+/, '');
@@ -2868,6 +2896,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     $scope.viewAllComment = function (post_id, index, post) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/viewAllComment',
@@ -2881,6 +2914,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     $scope.viewLastComment = function (post_id, index, post) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/viewLastComment',
@@ -2939,6 +2977,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
     $scope.likePostComment = function (comment_id, post_id) {
+        if(user_id == "" || user_id == undefined)
+        {
+            $("#regmodal").modal("show");
+            return false;
+        }
         $http({
             method: 'POST',
             url: base_url + 'user_post/likePostComment',
@@ -3136,9 +3179,16 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }
     }
     $scope.deletePost = function (post_id, index) {
-        $scope.p_d_post_id = post_id;
-        $scope.p_d_index = index;
-        $('#delete_post_model').modal('show');
+        if(user_id != "")
+        {            
+            $scope.p_d_post_id = post_id;
+            $scope.p_d_index = index;
+            $('#delete_post_model').modal('show');
+        }
+        else
+        {
+            $('#regmodal').modal('show');   
+        }
     }
     $scope.deletedPost = function (post_id, index) {
         $http({
