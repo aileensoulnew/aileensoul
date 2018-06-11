@@ -30,8 +30,8 @@
                         </div>
                         <div class="col-md-8 col-sm-9 col-xs-8 right-header fw-539">
                             <div class="btn-right pull-right">
-                                <a href="javascript:void(0);" onclick="login_profile();" class="btn4">Login</a>
-                                <a href="javascript:void(0);" onclick="register_profile();" class="btn2">Create Freelancer Account</a>
+                                <a href="<?php echo base_url(); ?>login" class="btn4">Login</a>
+                                <a href="<?php echo base_url(); ?>freelancer/create-account" class="btn2">Create Freelancer Account</a>
                             </div>
                         </div>
                     </div>
