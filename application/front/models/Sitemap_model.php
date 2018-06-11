@@ -392,4 +392,17 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_member(){
+        $sql = "SELECT u.* FROM ailee_user u
+                LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
+                LEFT JOIN ailee_user_student us on us.user_id = u.user_id
+                WHERE u.user_slug != '' AND (
+                    u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
+                    OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
+                ) ORDER BY u.user_id DESC";        
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }
