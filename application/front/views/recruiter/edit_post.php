@@ -30,7 +30,7 @@
         <section>
             <!-- MIDDLE SECTION START -->
             <div class="user-midd-section" id="paddingtop_fixed">
-                <div class="container">
+                <div class="container mobp0">
                     <div class="row">
                         <div class="col-md-2 col-sm-1"> </div>
                         <div class="col-md-8 col-sm-10 animated fadeInLeftBig">
@@ -72,7 +72,7 @@
 
                                 $salary_type = form_error('salary_type');
                                 ?>
-							<div class="custom-add-box">
+							<div class="custom-add-box rec-edit-post">
 								<h3>Job Detail</h3>
 								<div class="p15 fw">
 									<fieldset class="full-width">

@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-7 col-sm-8 all-form-content">
+                        <div class="col-md-7 col-sm-8 all-form-content mobp0">
                             <div class="common-form">
                                 <div class="job-saved-box">
 

@@ -29,9 +29,9 @@
         <section>
             <!-- MIDDLE SECTION START -->
             <div class="user-midd-section" id="paddingtop_fixed">
-                <div class="container">
+                <div class="container mobp0">
                     <div class="row">
-                        <h3 class="col-chang cus-chang text-center" style="color: #1b8ab9 !important;">Please post your requirement, so that we can recommend you the candidates</h3>
+                        <h3 class="col-chang cus-chang text-center p20" style="color: #1b8ab9 !important;">Please post your requirement, so that we can recommend you the candidates</h3>
                         <div class="col-md-2 col-sm-1"> 
                             <div  class="add-post-button">
 
@@ -53,7 +53,7 @@
                             <div class="common-form custom-form">
                                 
 
-                                <div class="job-saved-box">
+                                <div class="job-saved-box rec-edit-post">
 
 
                                     <?php echo form_open(base_url('recruiter/add_post_store'), array('id' => 'artpost', 'name' => 'artpost', 'class' => 'clearfix form_addedit', 'onsubmit' => "return imgval()")); ?>

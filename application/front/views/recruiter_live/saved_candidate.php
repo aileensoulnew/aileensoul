@@ -176,7 +176,7 @@
              
                 <!-- text head end -->
             </div>
-            <div class="col-md-7 col-sm-12 mob-clear">
+            <div class="col-md-7 col-sm-12 mob-clear mob-border-0 mobp0">
                 <div class="page-title">
                     <h3>Saved Candidate</h3>
                 </div>

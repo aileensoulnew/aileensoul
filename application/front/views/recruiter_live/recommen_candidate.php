@@ -220,7 +220,7 @@
                         <!--- search end -->
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">
                             <div class="common-form ">
-                                <div class="job-saved-box">
+                                <div class="job-saved-box rec-recmn-post">
                                     <h3>
                                         Recommended Candidate
                                     </h3>
