@@ -40,7 +40,7 @@
                                         <div class="list-box">
                                             <div class="profile-img">
                                                 <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
-                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}" alt="{{contact.fullname}}" ng-if="contact.user_image != ''">                                                
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}" alt="{{contact.fullname}}" ng-if="contact.user_image != ''">                                                
                                                      <img ng-if="contact.user_image == '' && contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="contact.user_image == '' && contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
@@ -89,7 +89,7 @@
                                         <div class="list-box">
                                             <div class="profile-img">
                                                 <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
-                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">                                                
+                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">                                                
                                                     <img ng-if="!suggest.user_image && suggest.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="!suggest.user_image && suggest.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                 </a>
@@ -135,7 +135,7 @@
                                     <li ng-repeat="notification in contactRequestNotification">
                                         <a href="<?php echo base_url(); ?>{{notification.user_slug}}">
                                             <div class="post-img">
-                                                <img src="<?php echo USER_THUMB_UPLOAD_URL ?>{{notification.user_image}}" alt="{{notification.fullname}}" ng-if="notification.user_image != ''">
+                                                <img src="<?php echo USER_MAIN_UPLOAD_URL ?>{{notification.user_image}}" alt="{{notification.fullname}}" ng-if="notification.user_image != ''">
                                                 <img ng-if="notification.user_image == '' && notification.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                 <img ng-if="notification.user_image == '' && notification.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                             </div>
