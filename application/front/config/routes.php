@@ -74,7 +74,7 @@ $route['followers/(:any)'] = 'Userprofile';
 $route['following/(:any)'] = 'Userprofile';
 $route['contacts/(:any)'] = 'Userprofile';
 $route['questions/(:any)'] = 'Userprofile';
-$route['searchh'] = 'user_post/search';
+$route['search'] = 'user_post/search';
 // $route['post-detail/(:any)'] = 'user_post/post_detail/$1';
 
 $route['userprofile_page'] = 'userprofile_page';

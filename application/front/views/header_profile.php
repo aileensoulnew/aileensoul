@@ -46,7 +46,7 @@ if($browser == "Firefox")
                         $job_page_array = array("job","job-search","recommended-jobs","jobs-by-companies","jobs-by-categories","jobs-by-skills","jobs-by-location","jobs-by-designations","jobs","job-profile","-job-vacancy-in-",'freelancer','freelance-work');
                     ?>
                     <?php if (($is_userBasicInfo == '1' || $is_userStudentInfo == '1') && ($first_segment != 'business-search' && $first_segment != 'business-profile' && $isbusiness_segment === FALSE) && ($first_segment != 'artist' && $first_segment != 'find-artist' && $isartist_segment === FALSE) && ($first_segment != 'job' && $first_segment != 'job-search'  && $isjob_segment === FALSE) && ($first_segment != 'recruiter' && $first_segment != 'freelance-employer')&& !in_array($first_segment, $job_page_array)) { ?>
-                        <form ng-submit="search_submit" action="<?php echo base_url('searchh') ?>">
+                        <form ng-submit="search_submit" action="<?php echo base_url('search') ?>">
                             <input type="text" name="q" placeholder="Search.." id="search">
                         </form>
                     <?php } ?>
@@ -291,9 +291,9 @@ if($browser == "Firefox")
                         <div class="">
                             <?php 
                             $first_segment = $this->uri->segment(1);
-                            $page_arr = array('','searchh','contact-request');
+                            $page_arr = array('','search','contact-request');
                             if(in_array($first_segment, $page_arr)): ?>
-                            <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('searchh') ?>">
+                            <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('search') ?>">
                                 <input type="text" name="q" placeholder="Search.." id="mob_search">
                             </form>
                             <?php /*else: ?>
