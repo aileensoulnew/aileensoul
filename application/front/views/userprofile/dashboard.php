@@ -380,10 +380,10 @@
                             <div class="post-right-dropdown dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                 <ul class="dropdown-menu"> 
+                                    <?php if($user_id != ""): ?>
                                     <li ng-if="live_slug == user_slug && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="javascript:void(0);" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, postIndex)">Edit Post</a></li>
                                     <li><a href="javascript:void(0);" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>
-                                    <li>
-                                    <?php if($user_id != ""): ?>
+                                    <li>                                    
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0' && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/post/{{post.post_data.id}}" target="_blank">Show in new tab</a>
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files == '0' && (post.post_data.post_for == 'profile_update' || post.post_data.post_for == 'cover_update')" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'image'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/photos/{{post.post_data.id}}" target="_blank">Show in new tab</a>
@@ -392,10 +392,12 @@
                                         <a ng-if="post.post_data.post_for != 'question' && post.post_data.total_post_files >= '1' && post.post_file_data[0].file_type == 'pdf'" href="<?php echo base_url(); ?>{{post.user_data.user_slug}}/pdf/{{post.post_data.id}}" target="_blank">Show in new tab</a>
 
                                         <a ng-if="post.post_data.post_for == 'question'" ng-href="<?php echo base_url('questions/');?>{{post.question_data.id}}/{{post.question_data.question| slugify}}" target="_blank">Show in new tab</a>
-                                        <?php else: ?>
-                                            <a href="#" data-toggle="modal" data-target="#regmodal" class="post-name">Show in new tab</a>
-                                        <?php endif; ?>
                                     </li>
+                                    <?php else: ?>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#regmodal" class="post-name">Show in new tab</a>
+                                        </li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>
