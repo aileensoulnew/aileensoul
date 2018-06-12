@@ -89,7 +89,7 @@
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url ?>business-in-{{location.slug}}">
                                     <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>">
+                                        <img src="<?php echo base_url('assets/n-images/cat-2.png?ver='.time()) ?>">
                                         <p ng-bind="location.city_name"></p>
                                     </div>
                                 </a>
