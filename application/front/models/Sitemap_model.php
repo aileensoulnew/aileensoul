@@ -497,4 +497,35 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_business_by_category_listing()
+    {
+        $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug')->from('industry_type it');
+        $this->db->join('business_profile bp', 'bp.industriyal = it.industry_id', 'left');
+        $this->db->where('it.status', '1');
+        $this->db->where('it.is_delete', '0');
+        $this->db->where('bp.status', '1');
+        $this->db->where('bp.is_deleted', '0');
+        $this->db->where('bp.business_step', '4');
+        $this->db->group_by('bp.industriyal');
+        $this->db->order_by('count', 'desc');
+        
+        $query = $this->db->get();
+        $result_array = $query->result_array();  
+        return $result_array;
+    }
+
+    function generate_sitemap_business_by_location_listing()
+    {
+        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug 
+                FROM ailee_cities ac 
+                LEFT JOIN ailee_business_profile bp ON bp.city = ac.city_id
+                WHERE ac.status = '1' AND bp.status = '1' AND bp.is_deleted = '0' 
+                AND bp.business_step = '4' 
+                GROUP BY bp.city 
+                ORDER BY count DESC"; 
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }
