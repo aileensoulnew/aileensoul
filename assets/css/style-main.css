@@ -2545,17 +2545,19 @@ header.profile-header .logo a{
     padding:0 35px
 }
 .new-abput-page .text-custom{
-    border-bottom:1px solid #5c5c5c
+    border-bottom:1px solid #5c5c5c;
+	letter-spacing:1px;
 }
 .new-abput-page .text-custom h4{
-    font-size:30px;
+    font-size:22px;
     font-weight:700;
     color:#5c5c5c
 }
 .new-abput-page .text-custom p{
-    font-size:22px;
+    font-size:14px;
     margin-bottom:15px;
-    color:#5c5c5c
+    color:#7b7b7b;
+	padding-top:5px;
 }
 .post-img img{
     border:1px solid #d9d9d9

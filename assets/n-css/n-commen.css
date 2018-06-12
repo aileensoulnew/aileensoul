@@ -1653,7 +1653,7 @@ svg path{
 	.none-479{display:none !important;}
 	.left-header{text-align:center;}
 	.no-login-right{text-align:center;}
-	.left-header.fw-479 h2.logo{float:none; padding-bottom:10px;}
+	.left-header.fw-479 h2.logo{float:none; padding-bottom:5px;}
 	.search-mob-block{width:62%;}
 	.mobile-header .sub-header.bus-only .sub-menu > li{width:30%;}
 	.mobile-header .sub-header.bus-only .sub-menu > li:first-child{width:45%;}
@@ -1674,6 +1674,8 @@ svg path{
 	.mobile-header .search-mob-block{width:68%;}
 	.mobile-header .search-mob-block{width:64%;}
 	.mobile-header .sub-header .sub-menu li a{font-size:13px;}
+	header{padding:7px 0;}
+	header .logo a, header h2.logo {line-height:0;}
 }
 @media screen and (max-width: 359px) {
 	.search-mob-block{width:57%;}

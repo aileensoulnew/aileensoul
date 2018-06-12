@@ -2169,21 +2169,20 @@ body.sitemap{background:#f6f6f6;}
 .site-box h3 span{color:#5c5c5c; padding-left:10px; position:relative;}
 .site-box h3 span:before{width:2px; height:2px; content:""; display:inline-block; background:#5c5c5c; position:absolute; top:10px; left:0px;}
 .site-box ul{padding-left:0px; width:100%; float:left; margin-bottom:0;}
+.site-box ul.alphabet{margin-left:-8px;}
 .site-box ul li{list-style-type:none; padding:3px 0;}
 .site-box ul li a{color:#7b7b7b;}
-.site-box ul li a:hover{text-decoration:underline;}
+.site-box ul li a:hover{color:#1b8ab9;}
 .site-box .dir-box{width:100%; float:left; padding-bottom:50px;}
 .site-pr-box{width:100%; float:left; padding-bottom:50px;}
 .sitemap footer{background:#f6f6f6; position:inherit;}
 .sitemap ul.alphabet li{float:left; padding:3px 8px;}
-.sitemap ul.alphabet li:first-child{padding-left:0;}
 .alphabet li a{color: #7b7b7b; border: 1px solid transparent; padding: 5px 8px; border-radius: 4px; width: 30px;
 height: 30px; display: inline-block; text-transform: capitalize; text-align:center;}
 .site-box ul.alphabet li a:hover{border:1px solid #d2d2d2; background:#f6f6f6; color:#1b8ab9; text-decoration:none;}
 .site-box ul.alphabet li a.active{border:1px solid #d2d2d2; background:#f6f6f6; color:#1b8ab9; text-decoration:none;}
-.sitemap ul.pagination{margin:0;}
+.sitemap ul.pagination{margin:0 0 0 -6px;}
 .sitemap .pagination li{padding:3px 6px; float:left;}
-.sitemap .pagination li:first-child{padding-left:0;}
 .sitemap .pagination li a{border-radius:4px;}
 .sitemap .pagination li a:hover{border:1px solid #d2d2d2; background:#f6f6f6; color:#1b8ab9; text-decoration:none;}
 .sitemap .pagination li a.active{border:1px solid #d2d2d2; background:#f6f6f6; color:#1b8ab9; text-decoration:none;}
@@ -2672,6 +2671,10 @@ body, body.no-login {padding-bottom:60px;}
 	/***  message module  ***/
 	.chat_nobcx .people-list ul li{padding:10px;}
 	.add-post-button .back{display:none;}
+	
+	/*** site map  ***/
+	.site-box ul li a{font-size:14px;}
+	.site-box ul.mid-listing li{width:100%; padding-right:0;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3013,6 +3016,12 @@ body, body.no-login {padding-bottom:60px;}
 	.report h1{font-size:30px;}
 	.report-middle-box{width:100%;}
 	.faq{padding:0;}
+	.site-box{padding:10px;}
+	.site-box ul.alphabet{margin-left:-16px;}
+	.site-box ul li a{font-size:12px;}
+	.sitemap h1{font-size:22px;}
+	.old-no-login .btn-right .btn2{font-size:14px; padding:5px 18px !important;}
+	.old-no-login .btn-right .btn4{font-size:14px; padding:5px 18px !important;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3249,8 +3258,6 @@ body, body.no-login {padding-bottom:60px;}
 	.all-job-box.job-detail .all-job-top .post-img{margin-top:33px;}
 	.detail-job-no-login .btn-right .btn4{padding:8px 18px !important;}
 	.detail-job-no-login .btn-right .btn2{padding:8px 18px;}
-	.old-no-login .btn-right .btn4{padding:8px 18px !important;}
-	.old-no-login .btn-right .btn2{padding:8px 18px;}
 	
 	.cust-job-width .job-detail .job-top-detail{width:85%; padding-left: 10px;}
 	.all-job-bottom .hw-479 .pl20{padding-left:10px;}
@@ -3320,6 +3327,7 @@ body, body.no-login {padding-bottom:60px;}
 	.faq li a{padding:20px 0 10px; font-size:13px; }
 	.faq li a span{display:none;}
 	.report-middle-box{font-size:14px;}
+	.site-box h3{font-size:16px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

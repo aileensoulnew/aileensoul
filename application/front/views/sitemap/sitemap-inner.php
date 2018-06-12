@@ -51,13 +51,13 @@ header('Cache-Control: public, max-age=30');
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 	</head>
 	<body class="sitemap">
-		<div class="web-header">
+		<div class="">
 			<header>
 				<div class="header">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6 col-sm-6 left-header fw-479">
-								<h2 class="logo"><a href="#">Aileensoul</a></h2>
+								<h2 class="logo"><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png'); ?>"></a></h2>
 							</div>
 							<div class="col-md-6 col-sm-6 old-no-login no-login-right fw-479">
 								<?php if (!$this->session->userdata('aileenuser')) { ?>
@@ -73,7 +73,7 @@ header('Cache-Control: public, max-age=30');
 			</header>
 		</div>
 		<div class="middle-section">
-			<div class="container">
+			<div class="container mobp0">
 				<div class="sitemap">
 					<h1>
 						<a href="<?php echo base_url().'sitemap'; ?>" target="self">Sitemap</a>

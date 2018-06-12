@@ -50,15 +50,15 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 	</head>
 	<body class="sitemap old-no-login">
-		<div class="web-header">
+		<div class="">
 			<header>
 				<div class="header">
 					<div class="container">
 						<div class="row">
-                        <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
+                        <div class="col-md-4 col-sm-3 col-xs-4 fw-479 left-header">
                             <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
                         </div>
-                        <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+                        <div class="col-md-8 col-sm-9 col-xs-8 fw-479 right-header">
                             <div class="btn-right">
                                 <?php if (!$this->session->userdata('aileenuser')) { ?>
                                     <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
@@ -72,7 +72,7 @@
 			</header>
 		</div>	
 		<div class="middle-section">
-			<div class="container">
+			<div class="container mobp0">
 				<div class="sitemap">
 					<h1>
 						<a href="<?php echo base_url().'sitemap'; ?>">Sitemap</a>
@@ -82,7 +82,7 @@
 							<div class="dir-box">
 								<h3>Directories</h3>
 								<div class="row">
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
 												<a href="<?php echo base_url().'sitemap/people' ?>">	Members 
@@ -90,35 +90,35 @@
 											</li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
 												<a href="<?php echo base_url().'sitemap/artist' ?>">Artist</a>
 											</li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
 												<a href="<?php echo base_url().'sitemap/companies' ?>">Companies</a>
 											</li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
 												<a href="<?php echo base_url().'sitemap/jobs' ?>">Jobs</a>
 											</li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
 												<a href="<?php echo base_url().'sitemap/freelance-jobs' ?>">Freelance Jobs</a>
 											</li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li>
 												<a href="<?php echo base_url().'sitemap/blogs' ?>">Blog</a>
@@ -129,7 +129,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-3 col-sm-3">
+							<div class="col-md-3 col-sm-6">
 								<div class="site-pr-box">
 									<h3>Job Profile</h3>
 									<ul>
@@ -145,7 +145,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-3">
+							<div class="col-md-3 col-sm-6">
 								<div class="site-pr-box">
 									<h3>
 										<a href="<?php echo base_url().'recruiter' ?>">
@@ -169,7 +169,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-3">
+							<div class="col-md-3 col-sm-6">
 								<div class="site-pr-box">
 									<h3>
 										<a href="<?php echo base_url().'freelance-employer' ?>">
@@ -193,7 +193,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-3">
+							<div class="col-md-3 col-sm-6">
 								<div class="site-pr-box">
 									<h3>Artistic Profile</h3>
 									<ul>
@@ -211,52 +211,52 @@
 							<div class="dir-box">
 								<h3>General Information</h3>
 								<div class="row">
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url() ?>">Home </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'about-us' ?>">About Us </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'privacy-policy' ?>">Privacy Policy </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'disclaimer-policy' ?>">Disclaimer Policy </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'terms-and-condition' ?>">Terms & Conditions</a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'feedback' ?>">FeedBack </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'contact-us' ?>">Contact Us </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'advertise-with-us' ?>">Advertise With Us </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'report-abuse' ?>"> Report Spam </a></li>
 										</ul>
 									</div>
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-6">
 										<ul>
 											<li><a href="<?php echo base_url().'faq' ?>"> FAQ </a></li>
 										</ul>
@@ -272,83 +272,7 @@
 			</div>
 		</div>
 		<?php echo $login_footer ?>
-		<!-- <footer class="footer">    
-			<div class="container pt20">
-				<div class="row">
-					<div class="fw text-center">
-						<ul class="footer-ul">
-							<li>
-								<a title="Login" href="<?php echo base_url().'' ?>" target="_blank">Login
-								</a>
-							</li>
-							<li>
-								<a title="Create an Account" href="<?php echo base_url().'artist' ?>" target="_blank">Create an Account
-								</a>
-							</li>
-							<li>
-								<a title="Job Profile" href="<?php echo base_url().'artist' ?>" target="_blank">Job Profile
-								</a>
-							</li>
-							<li>
-								<a title="Recruiter Profile" href="<?php echo base_url().'artist' ?>" target="_blank">Recruiter Profile
-								</a>
-							</li>
-							<li>
-								<a title="Freelance Profile" href="<?php echo base_url().'artist' ?>" target="_blank">Freelance Profile
-								</a>
-							</li>
-							<li>
-								<a title="Business Profile" href="<?php echo base_url().'artist' ?>" target="_blank">Business Profile
-								</a>
-							</li>
-							<li>
-								<a title="Artistic Profile" href="<?php echo base_url().'artist' ?>" target="_blank">Artistic Profile
-								</a>
-							</li>
-							<li>
-								<a title="About Us" href="<?php echo base_url().'artist' ?>" target="_blank">About Us
-								</a>
-							</li>
-							<li>
-								<a href="<?php echo base_url().'artist' ?>" title="Terms and Condition" target="_blank">Terms and Condition
-								</a>
-							</li>
-							<li>
-								<a href="<?php echo base_url().'artist' ?>" title="Privacy policy" target="_blank">Privacy Policy
-								</a>
-							</li>
-							<li>
-								<a title="Disclaimer Policy" href="<?php echo base_url().'artist' ?>" target="_blank">Disclaimer Policy
-								</a>
-							</li>
-							<li>
-								<a title="Contact Us" href="<?php echo base_url().'artist' ?>" target="_blank">Contact Us
-								</a>
-							</li>
-							<li>
-								<a title="Blog" href="<?php echo base_url().'artist' ?>" target="_blank">Blog
-								</a>
-							</li>
-							<li>
-								<a title="Send Us Feedback" href="<?php echo base_url().'artist' ?>" target="_blank">Send Us Feedback
-								</a>
-							</li>
-							<li>
-								<a title="Advertise With Us" href="<?php echo base_url().'artist' ?>" target="_blank">Advertise With Us
-								</a>
-							</li>
-							<li>
-								<a title="Sitemap" tabindex="0" href="<?php echo base_url().'artist' ?>" target="_blank">Sitemap
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="ftr-copuright text-center pt10 pb20 fw">
-						<span>    Ⓒ 2018 | by Aileensoul </span>
-					</div>
-				</div>
-			</div>
-		</footer> -->
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?ver=<?php echo time(); ?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
 		<script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()); ?>"></script>
