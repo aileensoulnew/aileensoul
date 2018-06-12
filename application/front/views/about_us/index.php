@@ -220,7 +220,7 @@
                              <li class="img-custom">
                                
                                  <div class="text-custom">
-                                    <h4>Ankit Makadiya</h4>
+                                    <h4>Pratik Suthar</h4>
                                     <p>Technical Head</p>
                                 </div>
                              </li>
@@ -228,7 +228,7 @@
                              <li class="img-custom">
                                
                                  <div class="text-custom">
-                                    <h4>Khyati Raval </h4>
+                                    <h4>Shraddha Chavda </h4>
                                     <p>Sr. Web Developer</p>
                                 </div>
                              </li>
@@ -252,40 +252,11 @@
                              <li class="img-custom">
                                
                                  <div class="text-custom">
-                                    <h4>Prashant Dadhaniya</h4>
+                                    <h4>Poorti Gupta</h4>
                                     <p>Sr. SEO Executive</p>
                                 </div>
                              </li>
-
-                                <li class="img-custom">
-                               
-                                 <div class="text-custom">
-                                    <h4>Jay Patel</h4>
-                                    <p>Jr. SEO Executive</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                               
-                                 <div class="text-custom">
-                                    <h4>Pallavi Panaliya</h4>
-                                    <p>Jr. Web Developer</p>
-                                </div>
-                             </li> 
-								<li class="img-custom">
-                               
-									 <div class="text-custom">
-										<h4>Dhaval Shah</h4>
-										<p>Jr. Web Designer</p>
-									</div>
-								</li> 	
-								<li class="img-custom">
-                               
-									 <div class="text-custom">
-										<h4>Falguni Tank</h4>
-										<p>Jr. Web Developer</p>
-									</div>
-								</li> 								
+								
                              </ul>
 
 
