@@ -1015,6 +1015,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->join('rec_post rp', 'rp.industry_type = ji.industry_id', 'left');
         $this->db->where('ji.status', '1');
         $this->db->where('ji.is_delete', '0');
+        $this->db->where('ji.is_other', '0');
+        $this->db->where('ji.industry_id !=', '288');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
         $this->db->group_by('rp.industry_type');
