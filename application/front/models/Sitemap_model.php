@@ -278,12 +278,12 @@ class Sitemap_model extends CI_Model {
             $searchword = $searchword. '%';
             $search_query = " AND jt.name like '". $searchword ."'";
         }
-        $sql = "SELECT rp.post_id,rp.city, jt.name as post_name, rp.post_id, 
-                IFNULL(jt.name, rp.post_name) as string_post_name,
-                rp.user_id, r.re_comp_name, rp.user_id as post_user_id, c.city_name 
+        $sql = "SELECT rp.post_id,rp.city, IF(jt.name != '',jt.name,rp.post_name) as post_name, rp.post_id,IFNULL(jt.name, rp.post_name) as string_post_name,rp.user_id, r.re_comp_name, rp.user_id as post_user_id, IF(c.city_name != '',c.city_name,IF(s.state_name != '',s.state_name,cn.country_name)) as city_name
                 FROM ailee_rec_post rp 
                 LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
                 LEFT JOIN ailee_cities c on c.city_id = rp.city
+                LEFT JOIN ailee_states s on s.state_id = rp.state
+                LEFT JOIN ailee_countries cn on cn.country_id = rp.country
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
                 WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
         if($limit != ""){
@@ -400,6 +400,20 @@ class Sitemap_model extends CI_Model {
                     u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
                     OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
                 ) ORDER BY u.user_id DESC";        
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_job_listing(){
+        $sql = "SELECT rp.post_id,rp.city, rp.post_id, IF(jt.name != '',jt.name,rp.post_name) as post_name, rp.user_id, r.re_comp_name, rp.user_id as post_user_id,IF(c.city_name != '',c.city_name,IF(s.state_name != '',s.state_name,cn.country_name)) as city_name 
+            FROM ailee_rec_post rp 
+            LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
+            LEFT JOIN ailee_cities c on c.city_id = rp.city
+            LEFT JOIN ailee_states s on s.state_id = rp.state
+            LEFT JOIN ailee_countries cn on cn.country_id = rp.country
+            JOIN ailee_recruiter r ON rp.user_id = r.user_id 
+            WHERE rp.status = '1' AND rp.is_delete = '0' ORDER BY rp.post_id DESC";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;

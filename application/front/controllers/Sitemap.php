@@ -318,10 +318,17 @@ class Sitemap extends CI_Controller {
         echo json_encode($result);
     }
 
+    public function create_slug($string) {
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower(stripslashes($string)));
+        $slug = preg_replace('/[-]+/', '-', $slug);
+        $slug = trim($slug, '-');
+        return $slug;
+    }
+
     public function generate_sitemap_member()
     {
         $memberData = $this->sitemap_model->generate_sitemap_member();
-        $myfile = fopen("members1.xml", "w");
+        $myfile = fopen("members-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
@@ -334,7 +341,35 @@ class Sitemap extends CI_Controller {
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
                 fclose($myfile);                
-                $myfile = fopen("members".$sitemap_index.".xml", "w");                
+                $myfile = fopen("members-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
+
+    public function generate_sitemap_job_listing()
+    {
+        $jobData = $this->sitemap_model->generate_sitemap_job_listing();
+        // print_r($jobData);exit;
+        $myfile = fopen("job-listing-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($jobData as $key => $value) {
+            $url = $this->create_slug($value['post_name'])."-job-vacancy-in-".$this->create_slug($value['city_name']).'-'.$value['post_user_id'].'-'.$value['post_id'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == 100)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);                
+                $myfile = fopen("job-listing-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
             $sitemap_counter++;
