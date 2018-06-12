@@ -1021,4 +1021,46 @@ class Sitemap extends CI_Controller {
         fclose($myfile);
         // return $art_file_arr;
     }
+
+    public function generate_sitemap_blog_listing()
+    {
+        $blogData = $this->sitemap_model->generate_sitemap_blog_listing();
+        // print_r($jobData);exit;
+        $blog_file_arr = array('blog-1.xml');
+        $myfile = fopen("blog-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($blogData as $key => $value) {
+            $url = 'blog/'.$value['blog_slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $blog_file_arr[] = "blog-".$sitemap_index.".xml";
+                $myfile = fopen("blog-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        // return $blog_file_arr;
+
+        $myfile = fopen("blog.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($blog_file_arr as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }        
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
 }

@@ -592,4 +592,13 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_blog_listing()
+    {
+        $sql = "SELECT id, title, blog_slug, status FROM ailee_blog WHERE status = 'publish' ORDER BY id DESC";
+        
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }
