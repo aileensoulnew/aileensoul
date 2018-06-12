@@ -15,6 +15,7 @@ class Sitemap extends CI_Controller {
         $this->load->model('sitemap_model');
         $this->load->model('job_model');
         $this->load->model('business_model');
+        $this->load->model('artistic_model');
 
         $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, true);
         if($this->session->userdata('aileenuser')){
@@ -885,5 +886,139 @@ class Sitemap extends CI_Controller {
         fwrite($myfile, $txt);
         fclose($myfile);
         // return $free_file_arr;
+    }
+
+    public function generate_sitemap_artist_listing()
+    {
+        $artData = $this->sitemap_model->generate_sitemap_artist_listing();
+        // print_r($artData);exit;
+        $art_file_arr = array('artist-listing-1.xml');
+        $myfile = fopen("artist-listing-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($artData as $key => $value) {
+            $url = 'artist/p/'.$value['slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $art_file_arr[] = "artist-listing-".$sitemap_index.".xml";
+                $myfile = fopen("artist-listing-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        // return $art_file_arr;
+    }
+
+    public function generate_sitemap_artist_by_category_listing()
+    {
+        $artCatData = $this->sitemap_model->generate_sitemap_artist_by_category_listing();
+        // print_r($artCatData);exit;
+        $job_file_arr = array('artist-by-category-1.xml');
+        $myfile = fopen("artist-by-category-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($artCatData as $key => $value) {
+            $url = 'artist/'.$value['category_slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $job_file_arr[] = "artist-by-category-".$sitemap_index.".xml";
+                $myfile = fopen("artist-by-category-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        return $job_file_arr;
+    }
+
+    public function generate_sitemap_artist_by_location_listing()
+    {
+        $artLocData = $this->sitemap_model->generate_sitemap_artist_by_location_listing();
+
+        $art_file_arr = array('artist-by-location-1.xml');
+        $myfile = fopen("artist-by-location-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($artLocData as $key => $value) {
+            $url = 'artist-in-'.$value['location_slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $art_file_arr[] = "artist-by-location-".$sitemap_index.".xml";
+                $myfile = fopen("artist-by-location-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        return $art_file_arr;
+    }
+
+    public function generate_sitemap_artist_by_cl_listing()
+    {
+        $page = 1;
+        $limit = 20;
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $art_file_arr = array('artist-by-category-location-1.xml');
+        $myfile = fopen("artist-by-category-location-1.xml", "w");
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+        // $artistCat = $this->artistic_model->get_artist_by_categories($page,$limit);
+        $artCatData = $this->sitemap_model->generate_sitemap_artist_by_category_listing();
+        // print_r($artistCat);
+        // exit;
+        $artistCity = $this->artistic_model->artistAllLocationList($page,$limit); 
+        $all_link = array();
+        foreach ($artistCity['art_loc'] as $key => $value) {
+            foreach ($artCatData as $jck => $jcv) {
+                $txt .= '<url><loc>'.base_url().$jcv['category_slug']."-in-".$value['location_slug'].'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                if($sitemap_counter == SITEMAP_LIMIT)
+                {
+                    $sitemap_counter = 1;
+                    $sitemap_index++;
+                    $txt .= '</urlset>';
+                    fwrite($myfile, $txt);
+                    fclose($myfile);
+                    $art_file_arr[] = "artist-by-category-location-".$sitemap_index.".xml";
+                    $myfile = fopen("artist-by-category-location-".$sitemap_index.".xml", "w");
+                    $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                }
+                $sitemap_counter++;
+                $i++;
+            }
+        }
+
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        // return $art_file_arr;
     }
 }

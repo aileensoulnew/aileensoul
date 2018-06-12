@@ -555,4 +555,41 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_artist_listing()
+    {
+        $sql = "SELECT art_id, art_name, art_lastname, art_email, slug FROM ailee_art_reg 
+                WHERE status = '1'
+                AND art_step = '4' AND is_delete = '0' ORDER BY art_id DESC";        
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_artist_by_category_listing()
+    {
+        $sql = "SELECT ct.category_id, ct.art_category, ct.category_slug
+            FROM ailee_art_category ct,ailee_art_reg ar
+            WHERE ct.status = '1' AND ct.category_id != 26 AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
+            GROUP BY ct.category_id DESC";
+
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_artist_by_location_listing()
+    {
+        $sql = "SELECT count(ar.art_id) as count, ar.art_city as location_id, ac.city_name as art_location, ac.slug as location_slug
+                FROM ailee_cities ac 
+                LEFT JOIN ailee_art_reg ar ON ar.art_city = ac.city_id
+                WHERE ac.status = '1' AND ar.status = '1'
+                AND ar.art_step = '4' 
+                GROUP BY ar.art_city 
+                ORDER BY count DESC";        
+
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }
