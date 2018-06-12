@@ -34,9 +34,7 @@ if($browser == "Firefox")
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6 left-header">                    
-                    <h2 class="logo">
-                        <a ng-href="<?php echo base_url('/') ?>" title="Aileensoul" target="_self"><img ng-src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="Aileensoul"></a>
-                    </h2>
+                    <?php $this->load->view('main_logo'); ?>
                     <?php
                         $first_segment = $this->uri->segment(1);
                         $isartist_segment = strpos($first_segment, 'artist');

@@ -12,11 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-5 col-xs-5 mob-zindex">
-                        <div class="logo">
-                            <a tabindex="-200" href="<?php echo base_url('') . $this->session->userdata('aileenuser_slug'); ?>">
-                                <p><img src="<?php echo base_url('assets/img/logo-name.png?ver='.time()) ?>" alt="Aileensoul"></p>
-                            </a>
-                        </div>
+                        <?php $this->load->view('main_logo'); ?>
                     </div>
                     <?php
                     $userid = $this->session->userdata('aileenuser');
