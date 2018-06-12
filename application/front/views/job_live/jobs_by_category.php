@@ -20,7 +20,7 @@
                                         <a href="<?php echo base_url(); ?>{{jc.industry_slug}}-jobs" target="_self">
                                             <div class="cus-cat-middle">
                                             <img src="<?php echo JOB_INDUSTRY_IMG_PATH ?>{{jc.industry_image}}">
-                                            <p>{{jc.industry_name | capitalize}}<span>({{jc.count}})</span></p>
+                                            <p>{{jc.industry_name | capitalize}} Jobs<span>({{jc.count}})</span></p>
                                             </div>
                                         </a>
                                     </li>                                    

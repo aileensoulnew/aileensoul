@@ -20,7 +20,7 @@
                                         <a href="<?php echo base_url(); ?>{{js.skill_slug}}-jobs" target="_self">
                                             <div class="cus-cat-middle">
                                             <img src="<?php echo SKILLS_IMG_PATH;?>{{js.skill_image}}">
-                                            <p>{{js.skill | capitalize}}<span>({{js.count}})</span></p>
+                                            <p>{{js.skill | capitalize}} Jobs<span>({{js.count}})</span></p>
                                             </div>
                                         </a>
                                     </li>                                    
