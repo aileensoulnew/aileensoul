@@ -34,15 +34,15 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li>
-                                    <a ng-href="<?php echo base_url ?>other-business ?>">
+                                <!-- <li>
+                                    <a ng-href="<?php //echo base_url ?>other-business ?>">
                                         <div class="cus-cat-middle">
-                                            <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>" alt="Other">
+                                            <img ng-src="<?php //echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>" alt="Other">
                                             <p>Other
                                             </p>
                                         </div>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>

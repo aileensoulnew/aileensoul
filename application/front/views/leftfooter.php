@@ -1,17 +1,17 @@
 <div class="custom_footer_left fw">
     <div class="">
         <ul>
-            <li><a href="<?php echo base_url('about-us'); ?>" target="_blank">About</a></li>
-			<li><a href="<?php echo base_url('blog'); ?>" target="_blank">Blog</a></li>
-			<li><a href="<?php echo base_url('faq'); ?>" target="_blank">Faq</a></li>
-			<li><a href="<?php echo base_url('advertise-with-us'); ?>" target="_blank">Advertise With Us</a></li>
-			<!-- <li><a title="Sitemap" href="<?php //echo base_url('sitemap'); ?>" target="_blank">Sitemap</a></li> -->
-			<li><a title="Report" href="<?php echo base_url('report-abuse'); ?>" target="_blank">Report </a></li>
-			<li><a href="<?php echo base_url('contact-us'); ?>" target="_blank">Contact</a></li>
-			<li><a href="<?php echo base_url('feedback'); ?>" target="_blank">Feedback</a></li>
-			<li><a href="<?php echo base_url('terms-and-condition'); ?>" target="_blank">Terms &amp; Condition </a></li>
-            <li><a href="<?php echo base_url('privacy-policy'); ?>" target="_blank">Privacy Policy</a></li>
-			<li><a title="Disclaimer Policy" href="<?php echo base_url('disclaimer-policy'); ?>" target="_blank">Disclaimer Policy</a></li>
+            <li><a href="<?php echo base_url('about-us'); ?>" target="_self">About</a></li>
+			<li><a href="<?php echo base_url('blog'); ?>" target="_self">Blog</a></li>
+			<li><a href="<?php echo base_url('faq'); ?>" target="_self">Faq</a></li>
+			<li><a href="<?php echo base_url('advertise-with-us'); ?>" target="_self">Advertise With Us</a></li>
+			<li><a title="Sitemap" href="<?php echo base_url('sitemap'); ?>" target="_self">Sitemap</a></li>
+			<li><a title="Report" href="<?php echo base_url('report-abuse'); ?>" target="_self">Report </a></li>
+			<li><a href="<?php echo base_url('contact-us'); ?>" target="_self">Contact</a></li>
+			<li><a href="<?php echo base_url('feedback'); ?>" target="_self">Feedback</a></li>
+			<li><a href="<?php echo base_url('terms-and-condition'); ?>" target="_self">Terms &amp; Condition </a></li>
+            <li><a href="<?php echo base_url('privacy-policy'); ?>" target="_self">Privacy Policy</a></li>
+			<li><a title="Disclaimer Policy" href="<?php echo base_url('disclaimer-policy'); ?>" target="_self">Disclaimer Policy</a></li>
 			<li><a id="trigger" class="click-profiles" style="" href="javascript:void(0)">Profiles <i class="fa fa-sort-asc" aria-hidden="true"></i></a>
                 <div class="click-nav">
                     <ul id="drop" class="left-ftr-profiles">
