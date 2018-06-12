@@ -484,4 +484,17 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_bussiness_listing(){        
+        $sql = "SELECT IF (bp.city != '',concat(bp.business_slug, '-', ct.city_name), IF(st.state_name != '', concat(bp.business_slug, '-', st.state_name),concat(bp.business_slug, '-', cn.country_name))) as business_slug, IF (bp.industriyal = 0, bp.other_industrial , it.industry_name) as bus_industry_name
+            FROM ailee_business_profile bp
+            LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+            LEFT JOIN ailee_states st ON st.state_name = bp.state
+            LEFT JOIN ailee_countries cn on cn.country_id = bp.country
+            WHERE bp.status = '1' AND business_step = '4' AND bp.is_deleted = '0' ORDER BY business_profile_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }

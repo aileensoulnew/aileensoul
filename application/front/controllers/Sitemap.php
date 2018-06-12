@@ -329,6 +329,7 @@ class Sitemap extends CI_Controller {
     public function generate_sitemap_member()
     {
         $memberData = $this->sitemap_model->generate_sitemap_member();
+        $mem_file_arr = array('members-1.xml');
         $myfile = fopen("members-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -341,7 +342,8 @@ class Sitemap extends CI_Controller {
                 $sitemap_index++;
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
-                fclose($myfile);                
+                fclose($myfile);
+                $mem_file_arr[] = "members-".$sitemap_index.".xml";
                 $myfile = fopen("members-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -350,12 +352,22 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+
+        $member = fopen("members.xml", "w");        
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($mem_file_arr as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        $txt .= '</sitemapindex>';
+        fwrite($member, $txt);
+        fclose($member);
     }
 
     public function generate_sitemap_job_listing()
     {
         $jobData = $this->sitemap_model->generate_sitemap_job_listing();
         // print_r($jobData);exit;
+        $job_file_arr = array('job-listing-1.xml');
         $myfile = fopen("job-listing-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -369,7 +381,8 @@ class Sitemap extends CI_Controller {
                 $sitemap_index++;
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
-                fclose($myfile);                
+                fclose($myfile);
+                $job_file_arr[] = "job-listing-".$sitemap_index.".xml";
                 $myfile = fopen("job-listing-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -378,12 +391,14 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+        return $job_file_arr;
     }
 
     public function generate_sitemap_job_by_category_listing()
     {
         $jobCatData = $this->sitemap_model->generate_sitemap_job_by_category_listing();
         // print_r($jobCatData);exit;
+        $job_file_arr = array('job-by-category-1.xml');
         $myfile = fopen("job-by-category-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -397,7 +412,8 @@ class Sitemap extends CI_Controller {
                 $sitemap_index++;
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
-                fclose($myfile);                
+                fclose($myfile);
+                $job_file_arr[] = "job-by-category-".$sitemap_index.".xml";
                 $myfile = fopen("job-by-category-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -406,11 +422,13 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+        return $job_file_arr;
     }
 
     public function generate_sitemap_job_by_skills_listing()
     {
         $jobSkillsData = $this->sitemap_model->generate_sitemap_job_by_skills_listing();        
+        $job_file_arr = array('job-by-skills-1.xml');
         $myfile = fopen("job-by-skills-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -424,7 +442,8 @@ class Sitemap extends CI_Controller {
                 $sitemap_index++;
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
-                fclose($myfile);                
+                fclose($myfile);
+                $job_file_arr[] = "job-by-skills-".$sitemap_index.".xml";
                 $myfile = fopen("job-by-skills-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -433,11 +452,13 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+        return $job_file_arr;
     }
 
     public function generate_sitemap_job_by_location_listing()
     {
         $jobLocData = $this->sitemap_model->generate_sitemap_job_by_location_listing();
+        $job_file_arr = array('job-by-location-1.xml');
         $myfile = fopen("job-by-location-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -451,7 +472,8 @@ class Sitemap extends CI_Controller {
                 $sitemap_index++;
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
-                fclose($myfile);                
+                fclose($myfile);
+                $job_file_arr[] = "job-by-location-".$sitemap_index.".xml";
                 $myfile = fopen("job-by-location-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -460,11 +482,13 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+        return $job_file_arr;
     }
 
     public function generate_sitemap_job_by_company_listing()
     {
         $jobCmpData = $this->sitemap_model->generate_sitemap_job_by_company_listing();
+        $job_file_arr = array('job-by-company-1.xml');
         $myfile = fopen("job-by-company-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -478,7 +502,8 @@ class Sitemap extends CI_Controller {
                 $sitemap_index++;
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
-                fclose($myfile);                
+                fclose($myfile);
+                $job_file_arr[] = "job-by-company-".$sitemap_index.".xml";
                 $myfile = fopen("job-by-company-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -487,11 +512,13 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+        return $job_file_arr;
     }
 
     public function generate_sitemap_job_by_desi_listing()
     {
         $jobDesiData = $this->sitemap_model->generate_sitemap_job_by_desi_listing();
+        $job_file_arr = array('job-by-designation-1.xml');
         $myfile = fopen("job-by-designation-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -505,7 +532,8 @@ class Sitemap extends CI_Controller {
                 $sitemap_index++;
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
-                fclose($myfile);                
+                fclose($myfile);
+                $job_file_arr[] = "job-by-designation-".$sitemap_index.".xml";
                 $myfile = fopen("job-by-designation-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -514,6 +542,7 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+        return $job_file_arr;
     }
     public function generate_sitemap_job_by_cdsl_listing()
     {
@@ -521,6 +550,7 @@ class Sitemap extends CI_Controller {
         $limit = 20;
         $sitemap_index = 1;
         $sitemap_counter = 1;
+        $job_file_arr = array('job-with-category-location-1.xml');
         $myfile = fopen("job-with-category-location-1.xml", "w");
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
@@ -538,7 +568,8 @@ class Sitemap extends CI_Controller {
                     $sitemap_index++;
                     $txt .= '</urlset>';
                     fwrite($myfile, $txt);
-                    fclose($myfile);                
+                    fclose($myfile);
+                    $job_file_arr[] = "job-with-category-location-".$sitemap_index.".xml";
                     $myfile = fopen("job-with-category-location-".$sitemap_index.".xml", "w");
                     $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
                 }
@@ -553,7 +584,8 @@ class Sitemap extends CI_Controller {
                     $sitemap_index++;
                     $txt .= '</urlset>';
                     fwrite($myfile, $txt);
-                    fclose($myfile);                
+                    fclose($myfile);
+                    $job_file_arr[] = "job-with-category-location-".$sitemap_index.".xml";
                     $myfile = fopen("job-with-category-location-".$sitemap_index.".xml", "w");
                     $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
                 }
@@ -568,7 +600,8 @@ class Sitemap extends CI_Controller {
                     $sitemap_index++;
                     $txt .= '</urlset>';
                     fwrite($myfile, $txt);
-                    fclose($myfile);                
+                    fclose($myfile);
+                    $job_file_arr[] = "job-with-category-location-".$sitemap_index.".xml";
                     $myfile = fopen("job-with-category-location-".$sitemap_index.".xml", "w");
                     $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
                 }
@@ -579,5 +612,86 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
+        return $job_file_arr;
+    }
+
+    public function job_sitemap()
+    {
+        $jobList = $this->generate_sitemap_job_listing();
+        $jobCatList = $this->generate_sitemap_job_by_category_listing();
+        $jobSkillList = $this->generate_sitemap_job_by_skills_listing();
+        $jobLocList = $this->generate_sitemap_job_by_location_listing();
+        $jobCmpList = $this->generate_sitemap_job_by_company_listing();
+        $jobDesiList = $this->generate_sitemap_job_by_desi_listing();
+        $jobCDSLList = $this->generate_sitemap_job_by_cdsl_listing();
+        /*echo "<pre>";
+        print_r($jobList);
+        print_r($jobCatList);
+        print_r($jobSkillList);
+        print_r($jobLocList);
+        print_r($jobCmpList);
+        print_r($jobDesiList);
+        print_r($jobCDSLList);
+        echo "</pre>";*/
+
+        $myfile = fopen("job.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($jobList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($jobCatList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($jobSkillList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($jobLocList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($jobCmpList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($jobDesiList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($jobCDSLList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
+
+    public function generate_sitemap_bussiness_listing()
+    {
+        $busData = $this->sitemap_model->generate_sitemap_bussiness_listing();
+        // print_r($busData);exit;
+        $bus_file_arr = array('business-listing-1.xml');
+        $myfile = fopen("business-listing-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($busData as $key => $value) {
+            $url = 'company/'.$value['business_slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $bus_file_arr[] = "business-listing-".$sitemap_index.".xml";
+                $myfile = fopen("business-listing-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        // return $bus_file_arr;
     }
 }

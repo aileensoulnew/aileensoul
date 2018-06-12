@@ -468,6 +468,8 @@ class User_post_model extends CI_Model {
         $sql = "SELECT main.* FROM (
                 SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id FROM ailee_user_post up                
                 WHERE up.status = 'publish' AND up.is_delete = '0'";
+        $proSqlIn = '';
+        $stdSqlIn = '';
         if($proSqlIn != "")
         {
             $sql .= ' AND ('.$proSqlIn.')';
@@ -476,7 +478,8 @@ class User_post_model extends CI_Model {
         {
             $sql .= ' AND ('.$stdSqlIn.')';   
         }
-
+        $oppPostIds['post_id'] = "";
+        $quePostIds['post_id'] = "";
         if($oppPostIds['post_id'] != "" || $quePostIds['post_id'] != "")
         {
             $sql .= " UNION
