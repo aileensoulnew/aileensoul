@@ -68,7 +68,7 @@ header('Cache-Control: public, max-age=30');
         <?php } ?>
 
     </head>
-    <body class="feedback-cus cust-outer-page">
+    <body class="feedback-cus cust-outer-page ftr-page">
         <div class="main-inner feedback">
 
             <div class="terms-con-cus">
@@ -77,7 +77,13 @@ header('Cache-Control: public, max-age=30');
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 left-header col-xs-4 fw-479">
-                                    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name-footer.png?ver=' . time()) ?>" alt="logo"></a>
+                                    <h2 class="logo">
+										<a href="<?php echo base_url(); ?>">
+											<svg>
+												<text class="logo-size" x="0" y="25">Aileensoul</text>
+											</svg>
+										</a>
+									</h2>
                                 </div>
                                 <div class="col-md-6 col-sm-6 right-header col-xs-8 fw-479">
                                     <div class="btn-right">

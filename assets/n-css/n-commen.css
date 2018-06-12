@@ -1537,7 +1537,8 @@ svg path{
 .logo-size{font-size:32px;}
 header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
-header .logo svg{height:25px; width:146px; margin-top:5px;}
+header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
+.ftr-page header .logo svg{fill:#5c5c5c;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
