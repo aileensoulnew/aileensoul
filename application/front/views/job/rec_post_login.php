@@ -41,8 +41,8 @@
                         <div class="btn-right pull-right">
                             <!-- <a href="javascript:void(0);" onclick="login_profile();" class="btn2">Login</a>
                             <a href="javascript:void(0);" onclick="register_profile();" class="btn3">Creat Job Profile</a> -->
-                            <a href="<?php echo base_url(); ?>login" onclick="login_profile();" class="btn4">Login</a>
-                            <a href="<?php echo base_url(); ?>job-profile/create-account" onclick="register_profile();" class="btn2">Create Job Account</a>
+                            <a href="<?php echo base_url(); ?>login" class="btn4">Login</a>
+                            <a href="<?php echo base_url(); ?>job-profile/create-account" class="btn2">Create Job Account</a>
                         </div>
                     </div>
                 </div>
