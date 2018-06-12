@@ -50,13 +50,17 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 	</head>
 	<body class="sitemap">
-		<div class="web-header">
+		<div class="">
 			<header>
 				<div class="header">
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6 col-sm-6 left-header fw-479">
-								<h2 class="logo"><a href="#">Aileensoul</a></h2>
+								<h2 class="logo"><a href="<?php echo base_url(); ?>">
+									<svg>
+										<text class="logo-size" x="0" y="25" fill="#fff">Aileensoul</text>
+									</svg>
+								</a></h2>
 							</div>
 							<div class="col-md-6 col-sm-6 no-login-right old-no-login fw-479">
 								<?php if (!$this->session->userdata('aileenuser')) { ?>

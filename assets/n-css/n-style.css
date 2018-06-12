@@ -2458,6 +2458,8 @@ body, body.no-login {padding-bottom:60px;}
 .right_side_posrt{width:584px;}
 
 
+
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
@@ -3328,6 +3330,9 @@ body, body.no-login {padding-bottom:60px;}
 	.faq li a span{display:none;}
 	.report-middle-box{font-size:14px;}
 	.site-box h3{font-size:16px;}
+	.left-header{padding-bottom:5px;}
+	.site-box ul.blog-cat li{padding:5px 0; }
+	.site-box ul.blog-cat li a{padding:5px 15px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
