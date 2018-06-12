@@ -32,70 +32,11 @@
           }
           </style>
     </head>
-    <body class="profile-main-page without-reg free-hire-cus">
+    <body class="profile-main-page without-reg free-hire-cus ftr-page">
 
         <div class="middle-section middle-section-banner new-ld-page">
             
-            <!-- <div class="search-banner" >
-                <header>
-                    <div class="header">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 left-header fw-479">
-                                    <h2 class="logo"><a href="#">Aileensoul</a></h2>
-                                    
-                                </div>
-                                <div class="col-md-6 col-sm-6 no-login-right fw-479">
-                                    <a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
-                                    <a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Account</a>
-                                        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
-                            <div class="search-bnr-text">
-                                <h1>Work from Anywhere at Any Time</h1>
-                                <p>Get the work you love</p>
-                            </div>
-                            <div class="search-box">
-                                <form>
-                                    <div class="pb20 search-input">
-                                        <input type="text" placeholder="Job Title, Keywords, or Skills">
-                                        <input class="city-input" type="text" placeholder="City, State or Country">
-                                        
-                                    </div>
-                                    <div class="pt5 fw pb20">
-                                        <ul class="work-timing fw">
-                                            <li>
-                                                <label class="control control--checkbox">Hourly
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="control control--checkbox">Fixed
-                                                  <input type="checkbox"/>
-                                                  <div class="control__indicator"></div>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="fw pt20">
-                                        <a href="#" class="btn1">Search Jobs</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-6 right-bnr">
-                            <img src="<?php echo base_url(); ?>assets/n-images/free-apply.png">
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            
             <?php echo $search_banner; ?>
             
             <div class="job-cat-lp" >

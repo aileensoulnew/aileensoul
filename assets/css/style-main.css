@@ -242,7 +242,7 @@ header{
     background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    padding:15px 0
+    padding:9px 0
 }
 header .logo a{
     color:#fff
@@ -1677,7 +1677,7 @@ input.form-control{
     background-size:100%
 }
 .main-login header{
-    padding:18px 0
+    padding:9px 0
 }
 .form-pd{
     padding:40px 0
@@ -2734,7 +2734,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 .term_condi_check .control input:focus ~ .control__indicator{border:1px solid #1b8ab9;}
 .term_condi_check .control input:checked ~ .control__indicator{background:#838282; border:1px solid #838282;}
 /***  end custom check box and radio buttons  ***/
-.main-login header .col-md-4.col-sm-3{text-align:center;}
+.main-login header .col-md-4.col-sm-3{/*text-align:center;*/}
 .main-login .header-login .input{margin-bottom:10px;}
 
 .btn-right .btn2{letter-spacing:0;}
@@ -3120,7 +3120,7 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
     .logo{
         font-size:24px;
     }
-    .no-login .logo{margin-bottom: 5px;}
+    .no-login .logo{/*margin-bottom: 5px;*/}
     .mid-trns{
         width:100%
     }
@@ -3468,7 +3468,7 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 	header .logo svg{margin-top:0px;}
 	.logo-size{font-size:28px;}
 	header .logo svg{width:130px;}
-	
+	.about-us .about-h2{font-size:30px;}
 }
 @media screen and (max-width:640px){
     .btns .btn-4{
@@ -3578,7 +3578,7 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 }
 @media screen and (max-width:479px){
 	.fw-479{width:100%;}
-	.btn-right{padding-top:5px;}
+	.btn-right{padding-top:10px;}
 	.p0-479{padding:0;}
 	.left-header{text-align:center;}
 	.right-header{text-align:center;}
@@ -3692,6 +3692,7 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 	.turmcon-cust .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
 	.privacy-cust .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
 	.cust-disclaimer .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
+	.about-us .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
 	.contact .btn-right, .feedback-cus .btn-right {padding-top:10px;}
 	.turmcon-cust .about-h2{font-size:20px;}
 }

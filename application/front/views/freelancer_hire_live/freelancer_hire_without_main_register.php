@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page ftr-page">
 
         <div class="middle-section middle-section-banner new-ld-page">
             
@@ -26,7 +26,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-sm-4 col-xs-4 left-header fw-639">
-                                    <h2 class="logo"><a href="#">Aileensoul</a></h2>
+                                    <?php $this->load->view('main_logo'); ?>
                                     
                                 </div>
                                 <div class="col-md-6 col-sm-8 col-xs-8 no-login-right fw-639">

@@ -18,7 +18,7 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     </head>
-    <body class="profile-main-page without-reg">        
+    <body class="profile-main-page without-reg ftr-page">        
         <div class="middle-section middle-section-banner new-ld-page">
             <div class="search-banner" >
                 <header>
@@ -26,7 +26,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 left-header">
-                                    <h2 class="logo"><a href="<?php echo base_url(); ?>">Aileensoul</a></h2>
+                                    <?php $this->load->view('main_logo'); ?>
                                 </div>
                                 <div class="col-md-6 col-sm-6 no-login-right fw-479">
                                     <a href="<?php echo base_url(); ?>login" class="btn8">Login</a>

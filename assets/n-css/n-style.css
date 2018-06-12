@@ -2633,7 +2633,7 @@ body, body.no-login {padding-bottom:60px;}
 	.business-profile-right .bui-menu-profile{padding-left:0 !important; padding:top10px;}
 	.other-profile-menu .profile-left{width:100%; padding:0;}
 	.profile-head-text_dg{width:100%;}
-	.buisness-menu.other-profile-menu::before{bottom:97px;}
+	.buisness-menu.other-profile-menu::before{bottom:77px;}
 	
 	/***  blog page  ***/
 	.blog-page footer{position:inherit; height:inherit;}
@@ -2935,8 +2935,9 @@ body, body.no-login {padding-bottom:60px;}
 	.other-profile-menu .profile-main-box-buis-menu .flw_msg_btn ul{width:182px;}
 	.blog-page .sub-header .sub-menu{padding:5px 0;}
 	.blog-search{padding-top:0px;}
-	.blog-page .sub-header .sub-menu li a.fs22{font-size:18px;}
+	.blog-page .sub-header .sub-menu li a.fs22{font-size:16px;}
 	.blog-page .sub-header .sub-menu li a{font-size:16px;}
+	.sub-header .sub-menu.blog-sub-menu li:first-child{padding-top:5px;}
 	.sub-header .sub-menu.blog-sub-menu li{/*padding-top:2px;*/}
 	.custom-user-list h3{font-size:18px;}
 	.blog-left-content{font-size:15px;}
@@ -2952,7 +2953,7 @@ body, body.no-login {padding-bottom:60px;}
 	-ms-transform: inherit;
 	transform:inherit;}
 	.blog-m .blog-left-content{padding-left:0; padding-top:10px;}
-	.blog-m .blog-text{height:60px !important;}
+	.blog-m .blog-text{height:58px !important;}
 	.pagination > li > a, .pagination > li > span {padding:3px 8px;}
 	.blog-page .sub-header .dropdown.open::before{right:-3px; top:18px;}
 	.blog-page .sub-header .dropdown.open .dropdown-menu{top:31px;}
@@ -3078,8 +3079,7 @@ body, body.no-login {padding-bottom:60px;}
 	.social-icon li a .fa{font-size:16px;}
 	.social-icon{padding-bottom:25px; padding-top:0;}
 	.user-detail-left .block-639{display:inline-block;}
-	.blog-page .pagination li a{font-size:14px;}
-	.blog-page .rec-img img{position:relative; width:100%; transform:inherit; } 
+	.blog-page .pagination li a{font-size:14px;} 
 	.mob-progressbar{width:100%; border-left:0; border-right:0; border-radius:0;}
 	#popup-form input[type="submit"]#profilepicsubmit {margin-top:15px;}
 }
@@ -3185,7 +3185,7 @@ body, body.no-login {padding-bottom:60px;}
 	.blog-user-detail p{font-size:12px;}
 	.blog-detail{left:70px;}
 	.blog-left-content p span{font-size:13px;}
-	.blog-left-content h3{font-size:15px;}
+	.blog-left-content h3{font-size:16px;}
 	.blog-left-content p{font-size:14px;}
 	.blog-left-content h4{font-size:14px;}
 	.center-title::after{width:170px;}
@@ -3319,7 +3319,7 @@ body, body.no-login {padding-bottom:60px;}
 	.bottom-bnr-div .btn-1{float:none !important;}
 	.bottom-bnr-div p{font-size:14px;}
 	#main_page_load .search-profiles .profile-data{width:50%;}
-	.buisness-menu.other-profile-menu::before{bottom:97px;}
+	.buisness-menu.other-profile-menu::before{/*bottom:97px;*/}
 	.buisness-profile-pic-candidate{margin-left:9px !important;}
 	.all-job-bottom p{/*width:100%; float:left !important;*/}
 	.all-job-bottom p a{margin-left:0 !important; font-size:13px;}
@@ -3329,11 +3329,14 @@ body, body.no-login {padding-bottom:60px;}
 	.faq li a span{display:none;}
 	.report-middle-box{font-size:14px;}
 	.site-box h3{font-size:16px;}
-	.left-header{padding-bottom:5px;}
+	.left-header{/*padding-bottom:5px;*/}
 	.site-box ul.blog-cat li{padding:5px 0; }
 	.site-box ul.blog-cat li a{padding:5px 15px;}
 	.old-no-login .btn-right .btn2{font-size:14px; padding:5px 18px !important;}
 	.old-no-login .btn-right .btn4{font-size:14px; padding:5px 18px !important;}
+	.blog-page.old-no-login .btn-right{padding-top:10px !important;}
+	.blog-detail .blog-left-content h3{width:100%; float:left;}
+	.blog-page .sub-header .sub-menu li a.fs22{font-size:14px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
@@ -3353,7 +3356,6 @@ body, body.no-login {padding-bottom:60px;}
 	.custom-user-box .custom-user-detail p{font-size:12px;}
 	.form-box h2{font-size:22px;}
 	.blog-page .mobile-header .sub-header .sub-menu li:first-child{width:33%;}
-	.blog-page .sub-header .sub-menu li a.fs22{font-size:18px;}
 	.blog-page .mobile-header .sub-header .sub-menu li{width:33%;}
 	.how-it-popup .modal-body h3{font-size: 22px; margin-bottom: 12px;}
 	.por_content ul li .pro-text{font-size:12px;}

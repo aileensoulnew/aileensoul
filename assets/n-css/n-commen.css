@@ -1539,6 +1539,7 @@ header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
 header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
+.new-ld-page header .logo svg{fill:#5c5c5c;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -1635,6 +1636,7 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 	header .logo svg{margin-top:0px;}
 	.logo-size{font-size:28px;}
 	header .logo svg{width:130px;}
+	.sub-header{top:48px;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}
@@ -1655,13 +1657,14 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 @media screen and (max-width: 539px) {
     .search-mob-block{width:71%;}
 	.mobile-header .search-mob-block{width:76%;}
+	.fw-539.left-header h2.logo{float:none;}
 }
 @media screen and (max-width: 479px) {
 	.fw-479{width:100%; float:left;}
 	.none-479{display:none !important;}
 	.left-header{text-align:center;}
 	.no-login-right{text-align:center;}
-	.left-header.fw-479 h2.logo{float:none; padding-bottom:5px;}
+	.left-header.fw-479 h2.logo{float:none;}
 	.search-mob-block{width:62%;}
 	.mobile-header .sub-header.bus-only .sub-menu > li{width:30%;}
 	.mobile-header .sub-header.bus-only .sub-menu > li:first-child{width:45%;}
@@ -1683,7 +1686,9 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 	.mobile-header .search-mob-block{width:64%;}
 	.mobile-header .sub-header .sub-menu li a{font-size:13px;}
 	header{padding:3px 0 7px;}
-	header .logo a, header h2.logo {line-height:0;}
+	header .logo a, header h2.logo, .no-login header h2 a {line-height:0;}
+	.blog-page .sub-header{top:75px;}
+	
 }
 @media screen and (max-width: 359px) {
 	.search-mob-block{width:57%;}

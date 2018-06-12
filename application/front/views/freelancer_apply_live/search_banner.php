@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-4 left-header fw-479">
-                        <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>">Aileensoul</a></h2>
+                        <?php $this->load->view('main_logo'); ?>
                         
                     </div>
                     <div class="col-md-6 col-sm-8 no-login-right fw-479">
