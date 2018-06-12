@@ -824,7 +824,7 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($freeData as $key => $value) {
-            $url = 'freelance-jobs/'.$value['category_name'].'/'.$value['post_slug'].'-'.$value['post_user_id'].'-'.$value['post_id'];
+            $url = 'freelance-jobs/'.urlencode($value['category_name']).'/'.$value['post_slug'].'-'.$value['post_user_id'].'-'.$value['post_id'];
             $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
