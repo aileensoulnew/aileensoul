@@ -17,7 +17,7 @@
                                     <li ng-repeat="location in artistAllLocation">
                                         <a href="<?php echo artist_location ?>{{location.location_slug}}" target="_self">
                                             <div class="cus-cat-middle">
-                                                <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                                <img src="<?php echo base_url('assets/n-images/cat-2.png') ?>">
                                                 <p ng-bind="location.art_location | capitalize"></p>
                                             </div>
                                         </a>

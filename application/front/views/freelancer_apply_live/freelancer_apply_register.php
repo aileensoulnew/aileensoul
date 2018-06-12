@@ -37,45 +37,26 @@
           </style>
     </head>
     <body  class="reg-form-cus">
-        <div class="web-header">
+        <div class="">
             <header class="custom-header">
                 <div class="header animated fadeInDownBig">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 left-header">
-                                <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>">Aileensoul</a></h2>
+                       <div class="row">
+                            <div class="col-md-4 col-sm-3 col-xs-4 fw-479 left-header">
+                                <?php $this->load->view('main_logo'); ?>
                             </div>
-                            <div class="col-md-6 col-sm-6 right-header">
-                                <ul>
-                                    
-                                    <li>
-                                        <a href="<?php echo base_url(); ?>login" target="_self" class="btn3">Login</a>
-                                    </li>
-                                </ul>
+                            <div class="col-md-8 col-sm-9 col-xs-8 fw-479 right-header">
+                                <div class="btn-right">
+                                    <a href="<?php echo base_url(); ?>login" target="_self" class="btn2">Login</a>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>                
             </header>            
         </div>
-        <div class="mobile-header">
-            <header class="">
-                <div class="header animated fadeInDownBig">
-                    <div class="container">
-                        <div class="left-header">
-                            <h2 class="logo"><a href="#"><img src="<?php echo base_url(); ?>assets/n-images/mob-logo.png"></a></h2>                            
-                            <div class="right-header">
-                                <ul>
-                                    <li class="dropdown user-id">
-                                        <a href="#" class="btn3">Login</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>        
+               
         <div class="middle-section free-work-reg-cus">
             <div class="container">
                 <div ng-view></div>

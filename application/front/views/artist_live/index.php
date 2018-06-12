@@ -74,7 +74,7 @@
                                 <div class="all-cat-box">
                                     <a href="<?php echo artist_location ?>{{location.city_name}}">
                                         <div class="cus-cat-middle">
-                                            <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                            <img src="<?php echo base_url('assets/n-images/cat-2.png') ?>">
                                             <p ng-bind="location.city_name | capitalize"></p>
                                         </div>
                                     </a>

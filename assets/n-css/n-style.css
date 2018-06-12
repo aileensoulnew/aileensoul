@@ -2462,7 +2462,9 @@ body, body.no-login {padding-bottom:60px;}
 .right_side_posrt{width:584px;}
 
 
-
+.reg-form-cus .right-header .btn2{background: #fff; color: #1b8ab9; padding: 8px 25px; border-radius: 4px;
+border: 1px solid #fff; line-height: 1;}
+.reg-form-cus .right-header .btn2:hover{background:none; color:#fff;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
