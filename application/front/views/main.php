@@ -85,11 +85,18 @@ header("Pragma: no-cache"); // HTTP/1.0
             <script data-pagespeed-no-defer src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>"></script>
             <script data-pagespeed-no-defer src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> 
         <?php } ?>
-		
+		<style>
+            .pr-pl-box{position: fixed; bottom: 0; background:rgba(255,255,255,1); color:#5c5c5c; padding: 10px; width: 100%; text-align: center; z-index: 9999;}
+            .btn-pr-pl{padding: 1px 10px; background:#1b8ab9; color:#fff; border-radius: 3px; display: inline-block;}
+            .btn-pr-pl:hover{background:#1d7398; color:#fff; text-decoration: none;}
+			.footer{margin-bottom:35px;}
+        </style>
 
     </head>
     <body class="custom-landscape">
-
+		<div class="pr-pl-box">
+            Aileensoul uses cookies to analyze traffic and shows ads to the site. Using this site you agree of its use. Refer <a href="https://www.aileensoul.com/privacy-policy">Privacy Policy</a> to learn more about the use of cookies. <!--a class="btn-pr-pl" href="">I Accept</a-->
+        </div>
         <div class="main-login">
             <header>
                 <div class="container">
