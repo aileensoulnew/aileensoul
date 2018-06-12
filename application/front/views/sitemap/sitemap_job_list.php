@@ -6,7 +6,7 @@
 		</li>
 	</ul>
 	<div class="fw pt20" ng-show="isPaginationShow">
-		<h3>Jobs Starting with Letter A</h3>
+		<h3>Jobs Starting with Letter {{searchword | capitalize}}</h3>
 		<div ng-show="jobList.length > 0">
 			<pagination 
 				ng-model="currentPage"

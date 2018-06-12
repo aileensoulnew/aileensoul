@@ -6,7 +6,7 @@
 		</li>
 	</ul>
 	<div class="fw pt20" ng-show="isPaginationShow">
-		<h3>Companies Starting with Letter A</h3>
+		<h3>Companies Starting with Letter {{searchword | capitalize}}</h3>
 		<pagination 
 			ng-model="currentPage"
 			total-items="total_record"
