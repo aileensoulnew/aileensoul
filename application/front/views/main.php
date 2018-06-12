@@ -20,7 +20,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 ?>
 <html lang="en" class="custom-main">
     <head>
-        <meta name="robots" content="noindex, nofollow">
+        <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <title>Build Career in Business, Freelancing, Job & Art with Aileensoul.com</title>
         <meta name="description" content="Aileensoul provides completely free platform for career-related services, such as job, hiring, freelancing, business networking, artistic and much more.">

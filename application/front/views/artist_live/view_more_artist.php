@@ -4,7 +4,7 @@
         <base href="<?php echo base_url();?>">
         <title ng-bind="title"></title>
         <meta charset="utf-8">
-        <meta name="robots" content="noindex, nofollow">
+        <!-- <meta name="robots" content="noindex, nofollow"> -->
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">  
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">

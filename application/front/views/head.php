@@ -20,7 +20,7 @@ header('Expires: ' . $date);
 //header("Cache-Control: no-cache, must-revalidate"); 
 //header('Cache-Control: public, max-age=30');
 ?>
-<meta name="robots" content="noindex, nofollow">
+<!-- <meta name="robots" content="noindex, nofollow"> -->
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-control" content="no-cache">
 <meta http-equiv="Expires" content="0">

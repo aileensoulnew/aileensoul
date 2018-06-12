@@ -3,7 +3,7 @@
     <head>
         <title><?php echo $title; ?></title>
         <meta charset="utf-8">
-        <meta name="robots" content="noindex, nofollow">
+        <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">  

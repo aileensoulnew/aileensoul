@@ -5,7 +5,7 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	
 	<title>Dynamic Page | Home</title>
-	<meta name="robots" content="noindex, nofollow">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<link rel='stylesheet' type='text/css' href='css/style.css' />
 	
 	<!--[if IE]>
