@@ -2,6 +2,7 @@
 <html>
 <head>
 
+<?php $this->load->view('adsense'); ?>
 </head>
 <body>
 

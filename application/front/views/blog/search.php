@@ -116,7 +116,8 @@ header("Pragma: no-cache"); // HTTP/1.0
             <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
 
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
         <body class="blog no-login blog-page old-no-login">
     <?php }else{?>

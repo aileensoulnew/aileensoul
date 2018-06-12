@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
 <?php }?>
 
+<?php $this->load->view('adsense'); ?>
 </head>
 <body   class="page-container-bg-solid page-boxed botton_footer">
 <?php echo $header; ?>

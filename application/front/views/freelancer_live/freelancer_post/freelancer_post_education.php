@@ -17,7 +17,8 @@
 
         <!-- This Css is used for call popup -->
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
   
     <body class="botton_footer">
      

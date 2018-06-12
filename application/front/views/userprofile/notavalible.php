@@ -3,7 +3,8 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             
-   </head>
+   <?php $this->load->view('adsense'); ?>
+</head>
    <body>
 
  <div class="user-midd-section" id="paddingtop_fixed">    <div class="container" id="paddingtop_fixed">

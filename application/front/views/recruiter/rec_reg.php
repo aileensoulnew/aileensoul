@@ -17,11 +17,13 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css'); ?>">
     <?php } ?>
-  </head>
+  <?php $this->load->view('adsense'); ?>
+</head>
   <head>
     <!-- start head -->
 
-  </head>
+  <?php $this->load->view('adsense'); ?>
+</head>
   <!-- END HEAD -->
 
   <!-- start header -->

@@ -44,7 +44,8 @@
             }
 
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="register">
         <?php echo $header_profile; ?>
         <div class="middle-section">

@@ -18,7 +18,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/job.css?ver=' . time()); ?>">
 
         <?php }?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
     <!-- Start HEADER -->
     <?php

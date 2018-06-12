@@ -14,7 +14,8 @@
         <?php } ?>
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body>
         <?php echo $header; ?>
         <?php echo $freelancer_post_header2; ?>

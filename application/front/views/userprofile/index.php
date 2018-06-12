@@ -42,7 +42,8 @@
             }
         </style>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <?php $que_cls = "";
     if($this->uri->segment(2) && $this->uri->segment(2) == "questions")
     {

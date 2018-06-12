@@ -25,7 +25,8 @@
 
         <?php } ?>     
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
 
     <!-- start header -->

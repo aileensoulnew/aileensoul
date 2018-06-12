@@ -15,7 +15,8 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter/rec_common_header.min.css?ver=' . time()); ?>">
         <?php } ?>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push freeh3">
         <?php echo $header; ?>
         <?php

@@ -47,7 +47,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             height: 100px;
           }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-main-page">
         <?php 
         if($userid_login != ""  && $this->freelance_apply_profile_set == 1){

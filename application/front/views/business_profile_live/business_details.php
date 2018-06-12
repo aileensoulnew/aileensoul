@@ -17,7 +17,8 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css'); ?>" />
         <?php } ?>
         
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push no-login botton_footer">
         <header>
             <div class="container">

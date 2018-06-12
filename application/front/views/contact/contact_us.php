@@ -64,7 +64,8 @@ header('Expires: ' . $date);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style.css?ver=' . time()); ?>">
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="contact outer-page">
         <div class="main-inner">
             <?php echo $login_header; ?>

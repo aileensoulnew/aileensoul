@@ -36,7 +36,8 @@
             height: 100px;
           }
           </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body  class="reg-form-cus">
         <div class="">
             <header class="custom-header">

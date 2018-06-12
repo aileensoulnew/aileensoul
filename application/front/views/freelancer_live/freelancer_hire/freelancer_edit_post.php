@@ -18,7 +18,8 @@
         </style>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 
     <body class="page-container-bg-solid page-boxed botton_footer freeh3">
         <?php echo $header; ?>

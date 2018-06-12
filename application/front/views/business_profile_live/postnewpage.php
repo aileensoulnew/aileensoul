@@ -86,7 +86,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             });
             });
         </script>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $header; ?>
         <?php echo $business_header2; ?>

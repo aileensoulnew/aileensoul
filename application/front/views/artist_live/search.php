@@ -23,7 +23,8 @@
         ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-main-page">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <?php $this->load->view('page_loader'); ?>

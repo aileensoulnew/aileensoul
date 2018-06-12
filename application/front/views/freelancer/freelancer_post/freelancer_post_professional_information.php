@@ -20,7 +20,8 @@
         <?php } ?>
 
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 
     <body class="botton_footer">
 

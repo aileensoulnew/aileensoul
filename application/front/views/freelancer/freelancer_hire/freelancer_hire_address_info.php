@@ -8,7 +8,8 @@
         <?php } else {?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
   
     <body class="botton_footer">
         

@@ -53,7 +53,8 @@
         <?php if (!$this->session->userdata('aileenuser')) { ?>
           
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push reg-form botton_footer no-login">
         <header>
             <div class="container">

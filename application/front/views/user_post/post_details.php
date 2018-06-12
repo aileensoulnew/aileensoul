@@ -18,7 +18,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-db">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

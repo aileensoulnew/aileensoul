@@ -41,7 +41,8 @@
 
         <script src="script.js"></script>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body ng-app="infiniteScrolling" class="virtualRepeatdemoInfiniteScroll">
 
         <div ng-controller="AppCtrl as ctrl" ng-cloak>

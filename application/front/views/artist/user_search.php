@@ -17,7 +17,8 @@
             <link href="<?php echo base_url('assets/css_min/fileinput.css?ver=' . time()); ?>" media="all" rel="stylesheet" type="text/css"/>
             <link href="<?php echo base_url('assets/js/themes/explorer/theme.css?ver=' . time()); ?>" media="all" rel="stylesheet" type="text/css"/>
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 
     <?php
     if (IS_ART_CSS_MINIFY == '0') {

@@ -29,7 +29,8 @@
 
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="pushmenu-push botton_footer freeh3">
         <?php echo $header; ?>
         <?php echo $freelancer_hire_header2_border; ?>

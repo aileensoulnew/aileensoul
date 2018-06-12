@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">	
 
  
+<?php $this->load->view('adsense'); ?>
 </head>
 <!-- END HEAD -->
 

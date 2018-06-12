@@ -132,7 +132,8 @@
                 });
             });
         </script>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push cus-bus">
         <?php echo $header; ?>
         <?php

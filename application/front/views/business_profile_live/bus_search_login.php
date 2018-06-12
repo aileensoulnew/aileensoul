@@ -67,7 +67,8 @@
             })
         </script>   
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
     
     <body class="page-container-bg-solid page-boxed">

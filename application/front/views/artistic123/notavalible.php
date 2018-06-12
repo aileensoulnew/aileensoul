@@ -5,7 +5,8 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        <?php echo $head; ?>
-   </head>
+   <?php $this->load->view('adsense'); ?>
+</head>
    <body>
 
 

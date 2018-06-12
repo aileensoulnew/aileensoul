@@ -24,7 +24,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
     <!-- Start HEADER -->
     <?php

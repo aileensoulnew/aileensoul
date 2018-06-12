@@ -81,7 +81,8 @@
             }
          }  
       </script>      
-   </head>
+   <?php $this->load->view('adsense'); ?>
+</head>
    
    <body ng-app = "firstApplication" ng-cloak>
       <div ng-controller = "autoCompleteController as ctrl" layout = "column" ng-cloak>

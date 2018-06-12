@@ -29,6 +29,7 @@
 
 
  
+<?php $this->load->view('adsense'); ?>
 </head>
 <!-- END HEAD -->
 

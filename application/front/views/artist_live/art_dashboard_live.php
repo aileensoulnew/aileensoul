@@ -52,7 +52,8 @@ $userid = $this->session->userdata('aileenuser');
             .art-all-comment{display: none;}
         </style>
         
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push old-no-login">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

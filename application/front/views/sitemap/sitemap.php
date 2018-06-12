@@ -48,7 +48,8 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
-	</head>
+	<?php $this->load->view('adsense'); ?>
+</head>
 	<body class="sitemap old-no-login">
 		<div class="">
 			<header>

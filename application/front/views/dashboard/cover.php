@@ -26,7 +26,8 @@
         <?php }?>
         
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="cover">
         <?php echo $header; ?>
         <div class="middle-section">

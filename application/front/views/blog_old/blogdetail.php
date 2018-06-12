@@ -55,7 +55,8 @@
 	  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
       <!-- This Css is used for call popup -->
       <link rel="stylesheet" href="<?php echo base_url() ?>css/jquery.fancybox.css" />
-   </head>
+   <?php $this->load->view('adsense'); ?>
+</head>
    <body class="blog-detail blog">
       <div class="main-inner">
          <header>

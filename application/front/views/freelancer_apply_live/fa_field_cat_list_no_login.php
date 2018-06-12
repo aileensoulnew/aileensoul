@@ -46,7 +46,8 @@
             height: 100px;
           }
           </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
 
     <body class="profile-main-page">        

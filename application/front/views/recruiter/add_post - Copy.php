@@ -9,7 +9,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/test.css'); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/jquery.fancybox.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/profiles/recruiter/recruiter.css'); ?>">
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php echo $header; ?>
         <?php if ($recdata[0]['re_step'] == 3) { ?>

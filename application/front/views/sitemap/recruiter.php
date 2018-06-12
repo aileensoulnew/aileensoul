@@ -74,7 +74,8 @@ header('Cache-Control: public, max-age=30');
                         }*/
         </style>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="site-map outer-page" >
         <div class="main-inner">
             <?php echo $sitemap_header ?>

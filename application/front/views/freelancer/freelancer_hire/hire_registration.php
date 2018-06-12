@@ -18,7 +18,8 @@
 
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
 
     <!-- start header -->

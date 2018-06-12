@@ -39,7 +39,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

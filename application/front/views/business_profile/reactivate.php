@@ -13,7 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php } else { ?>
      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body>
         <?php echo $header; ?>
         <div class="container" id="paddingtop_fixed">

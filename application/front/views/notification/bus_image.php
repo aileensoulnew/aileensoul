@@ -84,7 +84,8 @@
             });
             });
         </script>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
         <!-- START HEADER -->
         <?php echo $header; ?>

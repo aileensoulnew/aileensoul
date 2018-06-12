@@ -13,7 +13,8 @@
         <style type="text/css">
             #popup-form img{display: block;}
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

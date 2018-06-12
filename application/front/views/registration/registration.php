@@ -71,7 +71,8 @@ header("Pragma: no-cache"); // HTTP/1.0
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
         <script data-pagespeed-no-defer src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>"></script>
         <script data-pagespeed-no-defer src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script> 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="registeration outer-page">
         <div class="main-inner">
             <header>

@@ -108,7 +108,8 @@ header("Pragma: no-cache"); // HTTP/1.0
 	                -webkit-line-clamp: 1;
 	            }
             </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 	<?php if (!$this->session->userdata('aileenuser')) { ?>
         <body class="blog-page blog-d old-no-login">
     <?php }else{?>

@@ -27,7 +27,8 @@
                 font-size: 11px!important;
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer" ng-app="busInfoApp" ng-controller="busInfoController">
         <?php echo $header; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>

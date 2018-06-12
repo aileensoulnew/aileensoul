@@ -64,7 +64,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             }
         </style>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push freeh3 cust-job-width paddnone">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

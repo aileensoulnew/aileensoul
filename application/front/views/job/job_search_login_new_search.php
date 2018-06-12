@@ -50,7 +50,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 z-index: 99999!important;
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
 
     <body class="profile-main-page">

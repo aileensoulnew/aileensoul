@@ -7,7 +7,8 @@
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <link href="style.css" type="text/css" rel="stylesheet">
       
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body ng-app='myapp'>
         <div class="container" ng-controller='fetchCtrl'>
 

@@ -48,7 +48,8 @@
                 pointer-events: none !important;
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push reg-form botton_footer">
         <?php echo $header; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>

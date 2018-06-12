@@ -35,7 +35,8 @@
             height: 100px;
           }
           </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-main-page">    
         <?php
         if($user_id != ""  && $this->freelance_apply_profile_set == 1){

@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/artistic.css?ver='.time()); ?>">
  <?php }?>  
 <!-- END HEADER -->
+<?php $this->load->view('adsense'); ?>
 </head>
 <body   class="page-container-bg-solid page-boxed botton_footer">
 <?php echo $header; ?>

@@ -70,7 +70,8 @@ header('Expires: ' . $date);
         }
         ?>
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 
     <body class="outer-page">
         <div class="main-inner">

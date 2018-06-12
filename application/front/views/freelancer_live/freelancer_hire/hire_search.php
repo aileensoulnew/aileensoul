@@ -12,7 +12,8 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
         <?php } ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
-    </head>  
+    <?php $this->load->view('adsense'); ?>
+</head>  
     <body class="no-login">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

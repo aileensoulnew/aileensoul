@@ -19,7 +19,8 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <meta property="og:image" content="<?php echo base_url(); ?>assets/n-images/free-hire.png" />
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-main-page recruiter-main">
         <img src="<?php echo base_url(); ?>assets/n-images/free-hire.png" style="display: none;">
        <?php echo $header_profile; ?>

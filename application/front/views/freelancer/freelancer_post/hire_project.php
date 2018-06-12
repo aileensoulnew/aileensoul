@@ -14,7 +14,8 @@
         <?php } ?>
 
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push freeh3">
         <?php echo $header; ?>
         <?php

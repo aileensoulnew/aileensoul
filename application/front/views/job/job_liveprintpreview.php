@@ -47,7 +47,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             }
         </style>
       
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
    <body   class="page-container-bg-solid page-boxed botton_footer no-login" id="add-model-open">
 
      <header>

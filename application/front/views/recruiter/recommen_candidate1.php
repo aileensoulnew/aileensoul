@@ -13,6 +13,7 @@
          <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
     <?php } ?>
+<?php $this->load->view('adsense'); ?>
 </head>
 <body class="page-container-bg-solid page-boxed pushmenu-push">
     <?php

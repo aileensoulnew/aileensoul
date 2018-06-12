@@ -72,7 +72,8 @@ header('Cache-Control: public, max-age=30');
         <?php } ?>
         
         
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="custom-tp privacy-cust outer-page ftr-page">
         <div class="main-inner">
             <div class="terms-con-cus">

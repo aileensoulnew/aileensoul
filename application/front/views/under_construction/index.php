@@ -15,6 +15,7 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
 <link rel="stylesheet" type="text/css" href="assets/css_min/under-bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="assets/css_min/under-styles.css"><?php } ?>
 
+<?php $this->load->view('adsense'); ?>
 </head>
 
 <body id="home">

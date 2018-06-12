@@ -27,7 +27,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php } ?>
 
         
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body>
         <?php echo $header_profile; ?>
         <div class="container" id="paddingtop_fixed">

@@ -17,7 +17,8 @@
             }
         </style>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 
     <body class="page-container-bg-solid page-boxed botton_footer freeh3">
         <?php echo $header; ?>

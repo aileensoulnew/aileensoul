@@ -67,7 +67,8 @@ header('Cache-Control: public, max-age=30');
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style.css?ver=' . time()); ?>">
         <?php } ?>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="feedback-cus cust-outer-page ftr-page">
         <div class="main-inner feedback">
 

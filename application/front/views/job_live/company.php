@@ -12,7 +12,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-main-page">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">

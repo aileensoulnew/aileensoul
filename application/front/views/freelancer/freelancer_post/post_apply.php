@@ -16,7 +16,8 @@
          <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="">
         <?php //echo $header; ?>
         <?php echo $freelancer_post_header2; 

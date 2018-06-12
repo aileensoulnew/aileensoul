@@ -142,6 +142,7 @@ return false;
 
 });
 </script>
+<?php $this->load->view('adsense'); ?>
 </head>
 <body>
 

@@ -69,7 +69,8 @@ if(IS_OUTSIDE_JS_MINIFY == '0'){
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="site-map outer-page" >
         <div class="main-inner">
             <?php echo $sitemap_header ?>

@@ -69,7 +69,8 @@ header('Cache-Control: public, max-age=30');
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/blog.css?ver=' . time()); ?>">
         <?php } ?>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="custom-tp turmcon-cust outer-page ftr-page">
         <div class="main-inner">
             <header class="terms-con bg-none">

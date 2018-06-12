@@ -10,7 +10,8 @@
         <?php } ?>
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

@@ -18,7 +18,8 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
 <?php } ?>
       
         
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="contact">
 
         <div class="main-inner">

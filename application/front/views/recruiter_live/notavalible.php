@@ -17,7 +17,8 @@
                  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
         <?php } ?>
    
-   </head>
+   <?php $this->load->view('adsense'); ?>
+</head>
    <body>
 
 

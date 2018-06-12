@@ -31,7 +31,8 @@ line-height: 1;}
                 border-radius:5px;
 	}
 	.btn:hover{/*opacity:0.8;*/}
-</style></head>
+</style><?php $this->load->view('adsense'); ?>
+</head>
 <body>
 	<div style="max-width:600px; margin:0 auto; background:#f4f4f4; padding:30px;">
 		<table width="100%" style="background:#fff" cellpadding="0" cellspacing="0">

@@ -8,7 +8,8 @@
         
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/artistic.css?ver='.time()); ?>">
         
-    </head>    
+    <?php $this->load->view('adsense'); ?>
+</head>    
     <body class="page-container-bg-solid page-boxed">
         <?php echo $header; ?>
         <?php if ($artdata[0]['art_step'] == 4) { ?>

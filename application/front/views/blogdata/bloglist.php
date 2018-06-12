@@ -29,7 +29,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="blog" ng-app='myapp'>
         <div class="main-inner">
             <header>

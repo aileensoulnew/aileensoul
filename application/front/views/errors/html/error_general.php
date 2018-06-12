@@ -54,6 +54,7 @@ p {
 	margin: 12px 15px 12px 15px;
 }
 </style>
+<?php $this->load->view('adsense'); ?>
 </head>
 <body>
 	<div id="container">

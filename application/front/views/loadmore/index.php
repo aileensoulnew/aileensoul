@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <!--<link href="style.css" type="text/css" rel="stylesheet">-->
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body ng-app='myapp'>
         <div class="container" ng-controller='fetchCtrl'>
             <!-- Post -->

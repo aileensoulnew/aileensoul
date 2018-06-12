@@ -19,7 +19,8 @@
 
 
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="no-login cus-left-project">
         <?php
         $userid = $this->session->userdata('aileenuser');

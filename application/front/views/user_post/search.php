@@ -28,7 +28,8 @@
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="search-page">
         <?php echo $header_profile ?>
         <?php $this->load->view('page_loader'); ?>

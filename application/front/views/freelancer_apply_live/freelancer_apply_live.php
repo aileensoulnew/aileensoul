@@ -31,7 +31,8 @@
           }
           </style>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-main-page">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

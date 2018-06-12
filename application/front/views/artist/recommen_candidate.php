@@ -49,6 +49,7 @@
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
 </style>
+<?php $this->load->view('adsense'); ?>
 </head>
 <body class="cus-art">
 <?php echo $header; ?>

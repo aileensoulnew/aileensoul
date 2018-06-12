@@ -31,7 +31,8 @@
             height: 100px;
           }
           </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="profile-main-page without-reg free-hire-cus ftr-page">
 
         <div class="middle-section middle-section-banner new-ld-page">

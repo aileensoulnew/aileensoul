@@ -25,7 +25,8 @@
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
   
     <body class="page-container-bg-solid detail-job-no-login page-boxed no-login freeh3 cust-job-width paddnone cus-error">

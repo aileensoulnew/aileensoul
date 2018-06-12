@@ -33,7 +33,8 @@
                 color:#616060;
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer" ng-app="descriptionApp" ng-controller="descriptionController">
         <?php echo $header; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>

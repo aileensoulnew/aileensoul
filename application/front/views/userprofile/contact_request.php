@@ -15,7 +15,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script> -->
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">

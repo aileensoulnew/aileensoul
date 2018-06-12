@@ -25,7 +25,8 @@
             }
         }
     </script>-->
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body>
         <?php echo $header_profile; ?>
        <header>

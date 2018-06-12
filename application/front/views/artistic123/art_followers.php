@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/artistic.css?ver='.time()); ?>">
 
+<?php $this->load->view('adsense'); ?>
 </head>
 <body  class="page-container-bg-solid page-boxed">
 <?php echo $header; ?>

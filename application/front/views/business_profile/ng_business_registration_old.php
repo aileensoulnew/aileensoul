@@ -43,7 +43,8 @@
                 float: none;
             }
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="page-container-bg-solid page-boxed pushmenu-push" ng-app="busRegApp" ng-controller="busRegController">
         <?php echo $header; ?>
         <?php if ($business_common_data[0]['business_step'] == 4) { ?>

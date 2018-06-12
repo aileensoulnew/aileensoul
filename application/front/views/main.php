@@ -92,7 +92,8 @@ header("Pragma: no-cache"); // HTTP/1.0
 			.footer{margin-bottom:35px;}
         </style>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="custom-landscape">
 		<div class="pr-pl-box">
             Aileensoul uses cookies to analyze traffic and shows ads to the site. Using this site you agree of its use. Refer <a href="https://www.aileensoul.com/privacy-policy">Privacy Policy</a> to learn more about the use of cookies. <!--a class="btn-pr-pl" href="">I Accept</a-->

@@ -17,7 +17,8 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
        
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <style type="text/css">
           .common-form fieldset select:focus{ border: 1px solid #1b8ab9 !important;
 color: #1b8ab9 !important;}

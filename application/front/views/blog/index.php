@@ -133,7 +133,8 @@ header("Pragma: no-cache"); // HTTP/1.0
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
         <body class="no-login blog-m blog-page old-no-login">
     <?php }else{?>

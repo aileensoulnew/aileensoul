@@ -45,6 +45,7 @@
     border-radius: 15px;
 }
 </style>
+<?php $this->load->view('adsense'); ?>
 </head>
 <div class="container">
   

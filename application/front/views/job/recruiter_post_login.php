@@ -21,7 +21,8 @@
 	 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()); ?>">
 
  <?php }?>     
-   </head>
+   <?php $this->load->view('adsense'); ?>
+</head>
    <!-- END HEAD -->
    
    <body class="page-container-bg-solid page-boxed no-login botton_footer">

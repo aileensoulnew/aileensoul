@@ -116,7 +116,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                     })
                 });
         </script>-->
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="custom-landscape">
     <!--    <script type="application/ld+json">
             {

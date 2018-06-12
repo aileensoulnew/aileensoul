@@ -13,7 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php } else {?>
        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body>
         <?php echo $header; ?>
         <div class="container" id="paddingtop_fixed">

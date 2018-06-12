@@ -74,7 +74,8 @@ header('Cache-Control: public, max-age=30');
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
         <?php } ?>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="main-db add-with-us">
         <div class="web-header">
             <header class="custom-header">

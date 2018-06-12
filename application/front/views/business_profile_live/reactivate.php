@@ -18,7 +18,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver='.time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">        
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <?php echo $header_profile; ?>

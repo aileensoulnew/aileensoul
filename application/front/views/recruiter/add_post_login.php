@@ -33,7 +33,8 @@
 
         </style>
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 
     <body class="page-container-bg-solid page-boxed freeh3 cust-add-live botton_footer no-login">
         <header>

@@ -20,7 +20,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
          <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body class="">
         <?php //echo $header; ?>
         <?php $this->load->view('page_loader'); ?>

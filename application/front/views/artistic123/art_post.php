@@ -13,7 +13,8 @@
    
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       
-   </head>
+   <?php $this->load->view('adsense'); ?>
+</head>
    <body>
    <?php echo $header; ?>
    <?php echo $art_header2_border; ?>

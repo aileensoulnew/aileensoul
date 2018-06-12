@@ -16,6 +16,7 @@
          <script type="text/javascript" src="<?php echo base_url('dynamic/js/jquery.ba-hashchange.min.js'); ?>"></script>
          <script type="text/javascript" src="<?php echo base_url('dynamic/js/dynamicpage.js'); ?>"></script>
     
+<?php $this->load->view('adsense'); ?>
 </head>
 
 <body>

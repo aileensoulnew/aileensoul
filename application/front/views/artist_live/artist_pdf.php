@@ -1,7 +1,8 @@
 <html>
     <head>
         <title><?php echo $title; ?></title>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
 <style>
     body{margin: 0;}
     </style>

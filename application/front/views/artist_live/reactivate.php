@@ -55,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // echo base_url('assets/js_min/jquery-3.2.1.min.js?ver='.time()); ?>"></script> -->
 <?php }?>
 
+<?php $this->load->view('adsense'); ?>
 </head>
 <body>
 	<?php echo $header_profile; ?>

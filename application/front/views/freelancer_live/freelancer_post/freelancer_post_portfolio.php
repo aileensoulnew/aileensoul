@@ -18,7 +18,8 @@
         <style type="text/css">
             /* img{display: none;}*/
         </style>
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
   
     <body class="botton_footer">
    

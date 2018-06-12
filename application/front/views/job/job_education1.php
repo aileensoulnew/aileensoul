@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="<?php echo base_url('css/jquery.fancybox.css?ver='.time()); ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/profiles/job/job.css?ver='.time()); ?>">
 
+<?php $this->load->view('adsense'); ?>
 </head>
 <!-- END HEAD -->
 

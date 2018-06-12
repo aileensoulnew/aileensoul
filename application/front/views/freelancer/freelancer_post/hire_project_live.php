@@ -21,7 +21,8 @@
         <?php } ?>
 
 
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <!-- END HEAD -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
     <body class="page-container-bg-solid page-boxed no-login freeh3">

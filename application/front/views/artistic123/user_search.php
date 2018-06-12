@@ -4,6 +4,7 @@
 
 <link href="<?php echo base_url('assets/css/fileinput.css?ver='.time());?>" media="all" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url('assets/js/themes/explorer/theme.css?ver='.time()); ?>" media="all" rel="stylesheet" type="text/css"/>
+<?php $this->load->view('adsense'); ?>
 </head>
  <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver='.time()); ?>">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

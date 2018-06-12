@@ -54,6 +54,7 @@
             cursor:pointer;
         }
     </style>
+<?php $this->load->view('adsense'); ?>
 </head>
 <body>
     <header>

@@ -9,7 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <meta charset="utf-8">
         <title><?php echo $userdata[0]['first_name']." ".$userdata[0]['last_name'] . " | Reactivate | Freelancer Profile - Aileensoul" ?></title>
       
-    </head>
+    <?php $this->load->view('adsense'); ?>
+</head>
     <body>
         <div class="container" id="paddingtop_fixed">
             <div class="row">
