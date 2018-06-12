@@ -248,14 +248,20 @@
                                 <div class="post-comment" ng-repeat="comment in post.post_comment_data">
                                     <div class="post-img">
                                         <div ng-if="comment.user_image != ''">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
+                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
+                                            </a>
                                         </div>
                                         <div class="post-img" ng-if="comment.user_image == ''">
-                                            <div class="post-img-mainuser">{{comment.first_name| limitTo:1 | uppercase}}{{comment.last_name| limitTo:1 | uppercase}}</div>
+                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
+                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            </a>
+                                            <!-- <div class="post-img-mainuser">{{comment.first_name| limitTo:1 | uppercase}}{{comment.last_name| limitTo:1 | uppercase}}</div> -->
                                         </div>
                                     </div>
                                     <div class="comment-dis">
-                                        <div class="comment-name"><a ng-bind="comment.username"></a></div>
+                                        <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" ng-bind="comment.username"></a></div>
                                         <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}" ng-bind-html="comment.comment"></div>
                                         <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
                                             <div class="comment-input">
@@ -280,7 +286,7 @@
 
                                             <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancelPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Cancel</a></li> 
 
-                                            <li><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, $parent.$index, $index, post)">Delete</a></li>
+                                            <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, $parent.$index, $index, post)">Delete</a></li>
 
                                             <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
                                         </ul>

@@ -402,7 +402,7 @@ class Userprofile_model extends CI_Model {
     }
 
     public function postCommentData($post_id = '') {
-        $this->db->select("u.user_slug,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->select("u.user_slug,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date,u.user_gender")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->join('user u', 'u.user_id = upc.user_id', 'left');
         $this->db->join('user_login ul', 'ul.user_id = upc.user_id', 'left');
         $this->db->join('user_info ui', 'ui.user_id = upc.user_id', 'left');
