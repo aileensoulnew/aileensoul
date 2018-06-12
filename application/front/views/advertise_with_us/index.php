@@ -82,11 +82,7 @@ header('Cache-Control: public, max-age=30');
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 col-sm-6 left-header">
-                                <h2 class="logo"><a href="<?php echo base_url() ?>"><img src="<?php echo base_url('assets/img/logo-name.png') ?>"></a></h2>
-								
-                                <!--form>
-                                        <input type="text" name="search" placeholder="Search..">
-                                </form-->
+                                <?php $this->load->view('main_logo'); ?>
                             </div>
                             <div class="col-md-6 col-sm-6 right-header text-right">
                                 <?php if (!$this->session->userdata('aileenuser')) { ?>

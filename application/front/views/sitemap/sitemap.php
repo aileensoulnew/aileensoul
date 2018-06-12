@@ -56,11 +56,7 @@
 					<div class="container">
 						<div class="row">
                         <div class="col-md-4 col-sm-3 col-xs-4 fw-479 left-header">
-                            <h2 class="logo"><a href="<?php echo base_url(); ?>">
-									<svg>
-										<text class="logo-size" x="0" y="25" fill="#fff">Aileensoul</text>
-									</svg>
-								</a></h2>
+                            <?php $this->load->view('main_logo'); ?>
                         </div>
                         <div class="col-md-8 col-sm-9 col-xs-8 fw-479 right-header">
                             <div class="btn-right">
