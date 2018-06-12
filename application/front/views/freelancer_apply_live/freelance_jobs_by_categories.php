@@ -16,7 +16,7 @@
                                     <a href="<?php echo base_url(); ?>freelance-jobs/{{jc.skill_slug}}" target="_self">
                                         <div class="cus-cat-middle">
                                         <img src="<?php echo SKILLS_IMG_PATH ?>{{jc.skill_image}}">
-                                        <p>{{jc.skill | capitalize}}<span>({{jc.count}})</span></p>
+                                        <p>{{jc.skill | capitalize}}</p>
                                         </div>
                                     </a>
                                 </li>                                    

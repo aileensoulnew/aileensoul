@@ -1352,7 +1352,7 @@ header.profile-header .logo a{color:#5c5c5c;}
  .all-detail-box .tab-pane ul li a span{color:#999;}
  .all-detail-box .tab-pane ul li span{/*display:block;*/}
  .cus-job .all-detail-box .tab-pane ul li a p{padding: 10px 10px 0; color:#999; word-wrap:break-word; height:55px; overflow:hidden;}
- .cus-job .all-detail-box .tab-pane ul li a p span{display:none;}
+ .cus-job .all-detail-box .tab-pane ul li a p span{/*display:none;*/}
  .all-detail-box .tab-pane ul li a p{padding-top: 5px; color:#999;}
  .all-detail-box .tab-pane ul li a img{height: 40px;}
  .all-detail-box ul li a{background:#f6f6f6; padding-top:15px; padding-left:10px; padding-right:10px; padding-bottom:10px; -webkit-transition: all 200ms ease-in;
