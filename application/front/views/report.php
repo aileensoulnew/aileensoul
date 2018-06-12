@@ -56,7 +56,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
 	</head>
-	<body class="report">
+	<body class="report ftr-page">
 		<div class="middle-section middle-section-banner new-ld-page">
 			<div class="search-banner cus-search-bnr" >
 				<header>
@@ -64,7 +64,13 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6 col-sm-6 left-header fw-479">
-									<h2 class="logo"><a href="#">Aileensoul</a></h2>
+									<h2 class="logo">
+										<a href="<?php echo base_url(); ?>">
+											<svg>
+												<text class="logo-size" x="0" y="25">Aileensoul</text>
+											</svg>
+										</a>
+									</h2>
 								</div>
 								<div class="col-md-6 col-sm-6 no-login-right fw-479">
 									<?php if (!$this->session->userdata('aileenuser')) { ?>

@@ -2737,10 +2737,15 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 .main-login header .col-md-4.col-sm-3{text-align:center;}
 .main-login .header-login .input{margin-bottom:10px;}
 
+.btn-right .btn2{letter-spacing:0;}
+.btn-right .btn3{letter-spacing:0;}
+
 .logo-size{font-size:32px;}
 header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
-header .logo svg{height:25px; width:146px; margin-top:5px;}
+header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
+.ftr-page header .logo svg{fill:#5c5c5c;}
+
 
 
 @media screen and (min-height:540px){
@@ -3384,8 +3389,8 @@ header .logo svg{height:25px; width:146px; margin-top:5px;}
         background-size:100%!important
     }
     .cust-disclaimer .about-h2{
-        padding-top:0;
-        padding-bottom:190px
+        padding-top:110px;
+        padding-bottom:110px
     }
     .feedback-cus .cus-about{
         padding:0
@@ -3393,13 +3398,14 @@ header .logo svg{height:25px; width:146px; margin-top:5px;}
     .feedback-cus .about-h2{
         font-size:22px;
         padding-bottom:190px;
-        padding-top:0
+        padding-top:40px;
     }
     .turmcon-cust .about-h2{
-        padding-bottom:190px;
-        padding-top:0;
+        padding-bottom:67px;
+        padding-top:86px;
         margin:0;
-        font-size:29px
+        font-size:24px;
+		text-align:right;
     }
     .turmcon-cust .main-comtai{
         padding:0
@@ -3409,7 +3415,7 @@ header .logo svg{height:25px; width:146px; margin-top:5px;}
     }
     .cust-disclaimer .about-h2{
         margin:0;
-        font-size:32px
+        font-size:24px
     }
     .upload-img{
         margin-top:-72px;
@@ -3462,6 +3468,7 @@ header .logo svg{height:25px; width:146px; margin-top:5px;}
 	header .logo svg{margin-top:0px;}
 	.logo-size{font-size:28px;}
 	header .logo svg{width:130px;}
+	
 }
 @media screen and (max-width:640px){
     .btns .btn-4{
@@ -3678,6 +3685,15 @@ header .logo svg{height:25px; width:146px; margin-top:5px;}
 	.title h1{margin:15px 0;}
 	header{padding:3px 0 7px;}
 	header .logo a, header h2.logo {line-height:0;}
+	.btn-right .btn2{font-size:14px; padding:5px 18px !important;}
+	.btn-right .btn4{font-size:14px; padding:5px 18px !important;}
+	.contact .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
+	.feedback-cus .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
+	.turmcon-cust .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
+	.privacy-cust .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
+	.cust-disclaimer .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
+	.contact .btn-right, .feedback-cus .btn-right {padding-top:10px;}
+	.turmcon-cust .about-h2{font-size:20px;}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{
@@ -3752,9 +3768,6 @@ header .logo svg{height:25px; width:146px; margin-top:5px;}
 @media screen and (max-width:319px){
     footer ul li{
         width:100%
-    }
-    .turmcon-cust .about-h2{
-        font-size:25px
     }
     .login .form-group select.day,.login .form-group select.month,.login .form-group select.year{
         width:53px!important;
