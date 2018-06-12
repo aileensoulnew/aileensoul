@@ -21,14 +21,14 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="<?php echo artist_other_category; ?>" target="_self">
+                                <!-- <li>
+                                    <a href="<?php //echo artist_other_category; ?>" target="_self">
                                         <div class="cus-cat-middle">
-                                            <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                            <img src="<?php //echo base_url('assets/n-images/cat-1.png') ?>">
                                             <p>Other</p>
                                         </div>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
