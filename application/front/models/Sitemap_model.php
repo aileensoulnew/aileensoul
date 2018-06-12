@@ -528,4 +528,31 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_freelance_listing()
+    {
+        $sql = "SELECT fp.*, c.*,fp.user_id as post_user_id 
+                FROM ailee_freelancer_post fp
+                LEFT JOIN ailee_category c on fp.post_field_req = c.category_id 
+                WHERE fp.is_delete = '0' AND fp.status = '1' ORDER BY post_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_freelance_by_category_listing()
+    {
+        $sql = "SELECT count(fp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_freelancer_post fp WHERE FIND_IN_SET(s.skill_id,fp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_freelance_by_field_listing()
+    {
+        $sql = "SELECT count(fp.post_id) as count,c.category_id,c.category_name,c.category_slug,c.category_image FROM ailee_category c,ailee_freelancer_post fp WHERE fp.post_field_req = c.category_id AND c.category_id != 15 AND c.status = '1' AND c.is_delete = '0' AND c.is_other = '0' AND fp.status = '1' AND fp.is_delete = '0' GROUP BY fp.post_field_req ORDER BY count DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }

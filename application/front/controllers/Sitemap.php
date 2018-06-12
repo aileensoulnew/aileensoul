@@ -793,4 +793,97 @@ class Sitemap extends CI_Controller {
         fclose($myfile);
         // return $bus_file_arr;
     }
+
+    public function generate_sitemap_freelance_listing()
+    {
+        $freeData = $this->sitemap_model->generate_sitemap_freelance_listing();
+        // print_r($freeData);exit;
+        $free_file_arr = array('freelancejobs-listing-1.xml');
+        $myfile = fopen("freelancejobs-listing-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($freeData as $key => $value) {
+            $url = 'freelance-jobs/'.$value['category_name'].'-'.$value['post_slug'].'-'.$value['post_user_id'].'-'.$value['post_id'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $free_file_arr[] = "freelancejobs-listing-".$sitemap_index.".xml";
+                $myfile = fopen("freelancejobs-listing-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        // return $free_file_arr;
+    }
+
+    public function generate_sitemap_freelance_by_category_listing()
+    {
+        $freeCatData = $this->sitemap_model->generate_sitemap_freelance_by_category_listing();
+        // print_r($busCatData);exit;
+        $free_file_arr = array('freelancejobs-by-category-1.xml');
+        $myfile = fopen("freelancejobs-by-category-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($freeCatData as $key => $value) {
+            $url = 'freelance-jobs/'.$value['skill_slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT && count($freeCatData) - 1 >= $key)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $free_file_arr[] = "freelancejobs-by-category-".$sitemap_index.".xml";
+                $myfile = fopen("freelancejobs-by-category-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        // return $free_file_arr;
+    }
+
+    public function generate_sitemap_freelance_by_field_listing()
+    {
+        $freeFieldData = $this->sitemap_model->generate_sitemap_freelance_by_field_listing();
+        // print_r($busCatData);exit;
+        $free_file_arr = array('freelancejobs-by-category-1.xml');
+        $myfile = fopen("freelancejobs-by-field-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($freeFieldData as $key => $value) {
+            $url = 'freelance-jobs/'.$value['category_slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT && count($freeFieldData) - 1 >= $key)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $free_file_arr[] = "freelancejobs-by-field-".$sitemap_index.".xml";
+                $myfile = fopen("freelancejobs-by-category-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        // return $free_file_arr;
+    }
 }
