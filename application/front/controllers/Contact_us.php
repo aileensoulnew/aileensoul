@@ -12,6 +12,7 @@ class Contact_us extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('email_model');
         //AWS access info end
+        include ('main_profile_link.php');
         include ('include.php');
     }
 

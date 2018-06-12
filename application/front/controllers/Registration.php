@@ -14,8 +14,8 @@ class Registration extends CI_Controller {
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
-        include('include.php');
         include ('main_profile_link.php');
+        include('include.php');
 
         //This function is there only one time users slug created after remove it start
 //         $this->db->select('user_id,first_name,last_name');

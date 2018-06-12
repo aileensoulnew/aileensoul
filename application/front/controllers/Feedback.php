@@ -12,7 +12,7 @@ class Feedback extends CI_Controller {
         //AWS access info end
         $this->load->library('form_validation');
         $this->load->model('email_model');
-
+        include ('main_profile_link.php');
         include ('include.php');
     }
 

@@ -16,22 +16,22 @@
                 <div class="click-nav">
                     <ul id="drop" class="left-ftr-profiles">
                         <li>
-                            <a href="<?php echo $job_right_profile_link; ?>">  Job Profiles</a>
+                            <a target="_self" href="<?php echo $job_right_profile_link; ?>">  Job Profiles</a>
                         </li>
                         <li>
-                            <a href="<?php echo $recruiter_right_profile_link; ?>">Recruiter Profile</a>
+                            <a target="_self" href="<?php echo $recruiter_right_profile_link; ?>">Recruiter Profile</a>
                         </li>
                         <li>
-                            <a href="<?php echo $freelance_hire_right_profile_link; ?>">Freelance Employer</a>
+                            <a target="_self" href="<?php echo $freelance_hire_right_profile_link; ?>">Freelance Employer</a>
                         </li>
                         <li>
-                            <a href="<?php echo $freelance_apply_right_profile_link; ?>">Freelance Job</a>
+                            <a target="_self" href="<?php echo $freelance_apply_right_profile_link; ?>">Freelance Job</a>
                         </li>
                         <li>
-                            <a href="<?php echo $business_right_profile_link; ?>">Business Profile</a>
+                            <a target="_self" href="<?php echo $business_right_profile_link; ?>">Business Profile</a>
                         </li>
                         <li>
-                            <a href="<?php echo $artist_right_profile_link; ?>">Artistic Profile</a>
+                            <a target="_self" href="<?php echo $artist_right_profile_link; ?>">Artistic Profile</a>
                         </li>
                     </ul>
                 </div>

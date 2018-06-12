@@ -10,6 +10,7 @@ class About_us extends CI_Controller {
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
+        include ('main_profile_link.php');
         include ('include.php');
     }
 
