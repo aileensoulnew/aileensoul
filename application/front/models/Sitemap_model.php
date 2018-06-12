@@ -434,4 +434,54 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_job_by_skills_listing() {
+        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
+
+        $query = $this->db->query($sql);
+
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_job_by_location_listing() {
+        $this->db->select('count(rp.post_id) as count,c.city_id,c.city_name,c.slug,c.city_image')->from('cities c');
+        $this->db->join('rec_post rp', 'rp.city = c.city_id', 'left');
+        $this->db->where('c.status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.city');        
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_job_by_company_listing()
+    {
+        $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name,r.comp_logo')->from('recruiter r');
+        $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.user_id');
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_job_by_desi_listing()
+    {
+        $this->db->select('count(jt.title_id) as count,jt.title_id,jt.name as job_title,jt.slug as job_slug, jt.job_title_img')->from('job_title jt');
+        $this->db->join('rec_post rp', 'rp.post_name = jt.title_id', 'left');
+        $this->db->where('jt.status', 'publish');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('jt.title_id');
+        $this->db->order_by('count', 'desc');
+        $query = $this->db->get();        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }
