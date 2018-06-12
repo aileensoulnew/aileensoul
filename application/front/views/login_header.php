@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6 left-header col-xs-4 fw-479 ">
-                <div class="logo"><a style="cursor: pointer;" href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver='.time()) ?>" alt="Aileensoul"></a></div>
+                <?php $this->load->view('main_logo'); ?>
             </div>
             <div class="col-md-6 col-sm-6 right-header col-xs-8 fw-479">
                 <div class="btn-right">

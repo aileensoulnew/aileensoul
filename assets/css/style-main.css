@@ -2737,6 +2737,11 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 .main-login header .col-md-4.col-sm-3{text-align:center;}
 .main-login .header-login .input{margin-bottom:10px;}
 
+.logo-size{font-size:32px;}
+header h2.logo{line-height:0;}
+header .logo a{line-height:0;}
+header .logo svg{height:25px; width:146px; margin-top:5px;}
+
 
 @media screen and (min-height:540px){
     .cover .modal-content{
@@ -3454,6 +3459,9 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     .blog .main-inner{padding-bottom: 0PX !important;}
     .modal.in .modal-dialog{padding: 55px 15px;}
     .profile-bnr img{width: 100% !important;}
+	header .logo svg{margin-top:0px;}
+	.logo-size{font-size:28px;}
+	header .logo svg{width:130px;}
 }
 @media screen and (max-width:640px){
     .btns .btn-4{
@@ -3668,7 +3676,8 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 	.inner-form{padding:0;}
 	.inner-form .login{width:100%; border-left:0; border-right:0; border-radius:0; box-shadow:none;}
 	.title h1{margin:15px 0;}
-
+	header{padding:3px 0 7px;}
+	header .logo a, header h2.logo {line-height:0;}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{

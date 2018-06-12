@@ -95,7 +95,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-3 col-lg-5">
-                            <a tabindex="1"  href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/img/logo-name.png?ver=' . time()) ?>" alt="logo"></a>
+                            <?php $this->load->view('main_logo'); ?>
                         </div>
                         <div class="col-lg-1"></div>
                         <div class="col-md-8 col-sm-9 col-lg-6">
