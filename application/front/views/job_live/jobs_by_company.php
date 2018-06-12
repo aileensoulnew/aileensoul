@@ -21,7 +21,7 @@
                                             <div class="cus-cat-middle">
                                             <img check-image-new ng-src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{jc.comp_logo}}">
                                             <!-- <img ng-if="!jc.comp_logo" src="<?php //echo base_url('assets/n-images/commen-img.png') ?>"> -->
-                                            <p>{{jc.company_name | capitalize}}<span>({{jc.count}})</span></p>
+                                            <p>Jobs in {{jc.company_name | capitalize}}<span>({{jc.count}})</span></p>
                                             </div>
                                         </a>
                                     </li>                                    

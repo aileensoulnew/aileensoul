@@ -214,7 +214,7 @@
                             <div class="browse-box">
                                 <ul>
                                     <li><h3>Jobs By Location</h3></li>
-                                    <li ng-if="jobCity.length != 0" ng-repeat="jc in jobCity" ng-init="jcIndex=$index"><a href="<?php echo base_url(); ?>jobs-in-{{jc.slug}}">Jobs in {{jc.city_name}} ({{jc.count}})</a></li>
+                                    <li ng-if="jobCity.length != 0" ng-repeat="jc in jobCity" ng-init="jcIndex=$index"><a href="<?php echo base_url(); ?>jobs-in-{{jc.slug}}">Jobs in {{jc.city_name}} </a></li>
                                     <li><a href="<?php echo base_url(); ?>jobs-by-location">View All Location</a></li>
                                 </ul>
                             </div>
@@ -223,7 +223,7 @@
                             <div class="browse-box">
                                 <ul>
                                     <li><h3>Jobs By Designation</h3></li>
-                                    <li ng-if="jobDesignation.length != 0" ng-repeat="jd in jobDesignation" ng-init="jdIndex=$index"><a href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs">{{jd.job_title}} ({{jd.count}})</a></li>                                
+                                    <li ng-if="jobDesignation.length != 0" ng-repeat="jd in jobDesignation" ng-init="jdIndex=$index"><a href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs">{{jd.job_title}} Jobs</a></li>                                
                                     <li><a href="<?php echo base_url(); ?>jobs-by-designations">View All Designation</a></li>
                                 </ul>
                             </div>
@@ -232,7 +232,7 @@
                             <div class="browse-box">
                                 <ul>
                                     <li><h3>Jobs By Company</h3></li>
-                                    <li ng-if="jobCompany.length != 0" ng-repeat="jcm in jobCompany" ng-init="jcmIndex=$index"><a href="<?php echo base_url(); ?>jobs-opening-at-{{jcm.company_name | slugify}}-{{jcm.rec_id}}">{{jcm.company_name}} ({{jcm.count}})</a></li>
+                                    <li ng-if="jobCompany.length != 0" ng-repeat="jcm in jobCompany" ng-init="jcmIndex=$index"><a href="<?php echo base_url(); ?>jobs-opening-at-{{jcm.company_name | slugify}}-{{jcm.rec_id}}">{{jcm.company_name}} Jobs</a></li>
                                     <li><a href="<?php echo base_url(); ?>jobs-by-companies">View All Companies</a></li>
                                 </ul>
                             </div>

@@ -20,7 +20,7 @@
                                         <a href="<?php echo base_url(); ?>jobs-in-{{jl.slug}}" target="_self">
                                             <div class="cus-cat-middle">
                                             <img src="<?php echo CITY_IMG_PATH;?>{{jl.city_image}}">
-                                            <p>{{jl.city_name | capitalize}}<span>({{jl.count}})</span></p>
+                                            <p>Jobs in {{jl.city_name | capitalize}}<span>({{jl.count}})</span></p>
                                             </div>
                                         </a>
                                     </li>                                    
