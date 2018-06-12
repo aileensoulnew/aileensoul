@@ -334,7 +334,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($memberData as $key => $value) {
             $txt .= '<url><loc>'.base_url().$value['user_slug'].'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
-            if($sitemap_counter == 10)
+            if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
                 $sitemap_index++;
@@ -362,7 +362,7 @@ class Sitemap extends CI_Controller {
         foreach ($jobData as $key => $value) {
             $url = $this->create_slug($value['post_name'])."-job-vacancy-in-".$this->create_slug($value['city_name']).'-'.$value['post_user_id'].'-'.$value['post_id'];
             $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
-            if($sitemap_counter == 100)
+            if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
                 $sitemap_index++;
@@ -370,6 +370,34 @@ class Sitemap extends CI_Controller {
                 fwrite($myfile, $txt);
                 fclose($myfile);                
                 $myfile = fopen("job-listing-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
+
+    public function generate_sitemap_job_by_category_listing()
+    {
+        $jobCatData = $this->sitemap_model->generate_sitemap_job_by_category_listing();
+        // print_r($jobCatData);exit;
+        $myfile = fopen("job-by-category-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($jobCatData as $key => $value) {
+            $url = $value['industry_slug']."-jobs";
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);                
+                $myfile = fopen("job-by-category-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
             $sitemap_counter++;

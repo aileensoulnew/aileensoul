@@ -419,4 +419,19 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_job_by_category_listing() {
+        $this->db->select('count(rp.post_id) as count,ji.industry_id,ji.industry_name,ji.industry_slug, ji.industry_image')->from('job_industry ji');
+        $this->db->join('rec_post rp', 'rp.industry_type = ji.industry_id', 'left');
+        $this->db->where('ji.status', '1');
+        $this->db->where('ji.is_delete', '0');
+        $this->db->where('rp.status', '1');
+        $this->db->where('rp.is_delete', '0');
+        $this->db->group_by('rp.industry_type');
+        $this->db->order_by('count', 'desc');        
+
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }

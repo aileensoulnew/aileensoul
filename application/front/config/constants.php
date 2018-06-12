@@ -616,3 +616,4 @@ define('business_category_list', BASEURL. 'business-by-categories');
 define('business_location_list', BASEURL. 'business-by-location');
 
 define('business_register_step1', BASEURL. 'business-profile/registration/business-information');
+define('SITEMAP_LIMIT',49999);
