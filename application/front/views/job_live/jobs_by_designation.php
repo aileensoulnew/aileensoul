@@ -20,7 +20,7 @@
                                         <a href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs" target="_self">
                                             <div class="cus-cat-middle">
                                             <img src="<?php echo DESIGNATION_IMG_PATH;?>{{jd.job_title_img}}">
-                                            <p>{{jd.job_title | capitalize}} Jobs<span>({{jd.count}})</span></p>
+                                            <p>{{jd.job_title | capitalize}} Jobs</p>
                                             </div>
                                         </a>
                                     </li>                                    
