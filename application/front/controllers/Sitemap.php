@@ -625,16 +625,7 @@ class Sitemap extends CI_Controller {
         $jobLocList = $this->generate_sitemap_job_by_location_listing();
         $jobCmpList = $this->generate_sitemap_job_by_company_listing();
         $jobDesiList = $this->generate_sitemap_job_by_desi_listing();
-        $jobCDSLList = $this->generate_sitemap_job_by_cdsl_listing();
-        /*echo "<pre>";
-        print_r($jobList);
-        print_r($jobCatList);
-        print_r($jobSkillList);
-        print_r($jobLocList);
-        print_r($jobCmpList);
-        print_r($jobDesiList);
-        print_r($jobCDSLList);
-        echo "</pre>";*/
+        $jobCDSLList = $this->generate_sitemap_job_by_cdsl_listing();       
 
         $myfile = fopen("job.xml", "w");
         $sitemap_index = 1;
@@ -694,7 +685,7 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $bus_file_arr;
+        return $bus_file_arr;
     }
 
     public function generate_sitemap_business_by_category_listing()
@@ -725,7 +716,7 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $bus_file_arr;
+        return $bus_file_arr;
     }
 
     public function generate_sitemap_business_by_location_listing()
@@ -755,7 +746,7 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $bus_file_arr;
+        return $bus_file_arr;
     }
 
     public function generate_sitemap_business_by_cl_listing()
@@ -792,7 +783,35 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $bus_file_arr;
+        return $bus_file_arr;
+    }
+
+    public function business_sitemap()
+    {
+        $bussList = $this->generate_sitemap_bussiness_listing();
+        $bussCatList = $this->generate_sitemap_business_by_category_listing();        
+        $bussLocList = $this->generate_sitemap_business_by_location_listing();        
+        $bussCLList = $this->generate_sitemap_business_by_cl_listing();        
+
+        $myfile = fopen("business.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($bussList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($bussCatList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($bussLocList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($bussCLList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }        
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
     }
 
     public function generate_sitemap_freelance_listing()
@@ -823,7 +842,7 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $free_file_arr;
+        return $free_file_arr;
     }
 
     public function generate_sitemap_freelance_by_category_listing()
@@ -854,14 +873,14 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $free_file_arr;
+        return $free_file_arr;
     }
 
     public function generate_sitemap_freelance_by_field_listing()
     {
         $freeFieldData = $this->sitemap_model->generate_sitemap_freelance_by_field_listing();
         // print_r($busCatData);exit;
-        $free_file_arr = array('freelancejobs-by-category-1.xml');
+        $free_file_arr = array('freelancejobs-by-field-1.xml');
         $myfile = fopen("freelancejobs-by-field-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -877,7 +896,7 @@ class Sitemap extends CI_Controller {
                 fwrite($myfile, $txt);
                 fclose($myfile);
                 $free_file_arr[] = "freelancejobs-by-field-".$sitemap_index.".xml";
-                $myfile = fopen("freelancejobs-by-category-".$sitemap_index.".xml", "w");                
+                $myfile = fopen("freelancejobs-by-field-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
             $sitemap_counter++;
@@ -885,7 +904,31 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $free_file_arr;
+        return $free_file_arr;
+    }
+
+    public function freelance_sitemap()
+    {
+        $freeList = $this->generate_sitemap_freelance_listing();
+        $freeCatList = $this->generate_sitemap_freelance_by_category_listing();        
+        $freeFieldList = $this->generate_sitemap_freelance_by_field_listing();
+
+        $myfile = fopen("freelancejobs.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($freeList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($freeCatList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($freeFieldList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
     }
 
     public function generate_sitemap_artist_listing()
@@ -916,14 +959,14 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $art_file_arr;
+        return $art_file_arr;
     }
 
     public function generate_sitemap_artist_by_category_listing()
     {
         $artCatData = $this->sitemap_model->generate_sitemap_artist_by_category_listing();
         // print_r($artCatData);exit;
-        $job_file_arr = array('artist-by-category-1.xml');
+        $art_file_arr = array('artist-by-category-1.xml');
         $myfile = fopen("artist-by-category-1.xml", "w");
         $sitemap_index = 1;
         $sitemap_counter = 1;
@@ -938,7 +981,7 @@ class Sitemap extends CI_Controller {
                 $txt .= '</urlset>';
                 fwrite($myfile, $txt);
                 fclose($myfile);
-                $job_file_arr[] = "artist-by-category-".$sitemap_index.".xml";
+                $art_file_arr[] = "artist-by-category-".$sitemap_index.".xml";
                 $myfile = fopen("artist-by-category-".$sitemap_index.".xml", "w");                
                 $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             }
@@ -947,7 +990,7 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        return $job_file_arr;
+        return $art_file_arr;
     }
 
     public function generate_sitemap_artist_by_location_listing()
@@ -1019,7 +1062,35 @@ class Sitemap extends CI_Controller {
         $txt .= '</urlset>';
         fwrite($myfile, $txt);
         fclose($myfile);
-        // return $art_file_arr;
+        return $art_file_arr;
+    }
+
+    public function artist_sitemap()
+    {
+        $artList = $this->generate_sitemap_artist_listing();
+        $artCatList = $this->generate_sitemap_artist_by_category_listing();        
+        $artLocList = $this->generate_sitemap_artist_by_location_listing();        
+        $artCLList = $this->generate_sitemap_artist_by_cl_listing();        
+
+        $myfile = fopen("artist.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($artList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($artCatList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($artLocList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }
+        foreach ($artCLList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod></sitemap>';
+        }        
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
     }
 
     public function generate_sitemap_blog_listing()
@@ -1062,5 +1133,18 @@ class Sitemap extends CI_Controller {
         $txt .= '</sitemapindex>';
         fwrite($myfile, $txt);
         fclose($myfile);
+    }
+
+    public function generate_sitemap()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        $this->generate_sitemap_member();
+        $this->job_sitemap();
+        $this->business_sitemap();
+        $this->freelance_sitemap();
+        $this->artist_sitemap();
+        $this->generate_sitemap_blog_listing();
+        echo "Done";
     }
 }
