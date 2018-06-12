@@ -11,7 +11,7 @@
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">   
         <?php //echo $head; ?>
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/header.css?ver=' . time()) ?>">
+        <!-- <link rel="stylesheet" href="<?php echo base_url('assets/css/header.css?ver=' . time()) ?>"> -->
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
