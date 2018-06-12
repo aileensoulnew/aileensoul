@@ -499,7 +499,7 @@ class Sitemap extends CI_Controller {
         foreach ($jobDesiData as $key => $value) {
             $url = $value['job_slug'].'-jobs';
             $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
-            if($sitemap_counter == 10)
+            if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
                 $sitemap_index++;
@@ -519,6 +519,10 @@ class Sitemap extends CI_Controller {
     {
         $page = 1;
         $limit = 20;
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $myfile = fopen("job-with-category-location-1.xml", "w");
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
         $jobDesc = $this->job_model->get_job_designations($page,$limit);
         $jobSkill = $this->job_model->get_job_skills($page,$limit);
@@ -526,22 +530,54 @@ class Sitemap extends CI_Controller {
         $all_link = array();
         foreach ($jobCity['job_city'] as $key => $value) {
             $i=0;
-            foreach ($jobCat['job_cat'] as $jck => $jcv) {
-                $all_link[$value['slug']]['category'][$i]['name'] = $jcv['industry_name']." Jobs In ".$value['city_name'];
-                $all_link[$value['slug']]['category'][$i]['slug'] = $jcv['industry_slug']."-jobs-in-".$value['slug'];
+            foreach ($jobCat['job_cat'] as $jck => $jcv) {                
+                $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                if($sitemap_counter == SITEMAP_LIMIT)
+                {
+                    $sitemap_counter = 1;
+                    $sitemap_index++;
+                    $txt .= '</urlset>';
+                    fwrite($myfile, $txt);
+                    fclose($myfile);                
+                    $myfile = fopen("job-with-category-location-".$sitemap_index.".xml", "w");
+                    $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                }
+                $sitemap_counter++;
                 $i++;
             }
-            foreach ($jobDesc['job_desc'] as $jdk => $jdv) {
-                $all_link[$value['slug']]['designation'][$i]['name'] = $jdv['job_title']." Jobs In ".$value['city_name'];
-                $all_link[$value['slug']]['designation'][$i]['slug'] = $jdv['job_slug']."-jobs-in-".$value['slug'];
+            foreach ($jobDesc['job_desc'] as $jdk => $jdv) {                
+                $txt .= '<url><loc>'.base_url().$jdv['job_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                if($sitemap_counter == SITEMAP_LIMIT)
+                {
+                    $sitemap_counter = 1;
+                    $sitemap_index++;
+                    $txt .= '</urlset>';
+                    fwrite($myfile, $txt);
+                    fclose($myfile);                
+                    $myfile = fopen("job-with-category-location-".$sitemap_index.".xml", "w");
+                    $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                }
+                $sitemap_counter++;
                 $i++;
             }
-            foreach ($jobSkill['job_skills'] as $jsk => $jsv) {
-                $all_link[$value['slug']]['skills'][$i]['name'] = $jsv['skill']." Jobs In ".$value['city_name'];
-                $all_link[$value['slug']]['skills'][$i]['slug'] = $jsv['skill_slug']."-jobs-in-".$value['slug'];
+            foreach ($jobSkill['job_skills'] as $jsk => $jsv) {                
+                $txt .= '<url><loc>'.base_url().$jsv['skill_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-dTH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                if($sitemap_counter == SITEMAP_LIMIT)
+                {
+                    $sitemap_counter = 1;
+                    $sitemap_index++;
+                    $txt .= '</urlset>';
+                    fwrite($myfile, $txt);
+                    fclose($myfile);                
+                    $myfile = fopen("job-with-category-location-".$sitemap_index.".xml", "w");
+                    $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                }
+                $sitemap_counter++;
                 $i++;
             }
         }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
     }
-
 }
