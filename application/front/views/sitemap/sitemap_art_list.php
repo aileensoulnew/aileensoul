@@ -1,12 +1,12 @@
 <div class="site-box">
-	<h3>Member Name with Characters</h3>
+	<h3>Artist Directory</h3>
 	<ul class="alphabet">
 		<li ng-repeat="alpha in alphabetList track by $index">
 			<a class="{{ alpha.isactive }}" ng-href="<?php echo base_url(). 'sitemap/artist/'?>{{ alpha.name.toLowerCase() }}" target="_self">{{ alpha.name }}</a>
 		</li>
 	</ul>
 	<div class="fw pt20" ng-show="isPaginationShow">
-		<h3>Member Name with Characters</h3>
+		<h3>Artist Profile Starting with Letter A</h3>
 		<div ng-show="artistList.length > 0">
 			<pagination 
 				ng-model="currentPage"

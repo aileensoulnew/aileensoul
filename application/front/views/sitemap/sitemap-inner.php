@@ -59,10 +59,12 @@ header('Cache-Control: public, max-age=30');
 							<div class="col-md-6 col-sm-6 left-header fw-479">
 								<h2 class="logo"><a href="#">Aileensoul</a></h2>
 							</div>
-							<div class="col-md-6 col-sm-6 no-login-right fw-479">
+							<div class="col-md-6 col-sm-6 old-no-login no-login-right fw-479">
 								<?php if (!$this->session->userdata('aileenuser')) { ?>
-									<a href="<?php echo base_url('login'); ?>" class="btn8" target="_self">Login</a>
-									<a href="<?php echo base_url('registration'); ?>" class="btn9" target="_self">Create an account</a>
+									<div class="btn-right">
+									<a href="<?php echo base_url('login'); ?>" class="btn4" target="_self">Login</a>
+									<a href="<?php echo base_url('registration'); ?>" class="btn2" target="_self">Create an account</a>
+									</div>
 								<?php } ?>
 							</div>
 						</div>

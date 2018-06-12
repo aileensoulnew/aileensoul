@@ -2190,7 +2190,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .sitemap .pagination li:nth-child(4) a{/*border:1px solid transparent;*/}
 .sitemap .pagination li:nth-child(10) a{/*border:1px solid transparent;*/}
 .sitemap .pagination li:nth-child(4) a:hover, .sitemap .pagination li:nth-child(4) a:focus, .sitemap .pagination li:nth-child(10) a:hover, .sitemap .pagination li:nth-child(10) a:focus {/*background:none; cursor:text*/}
-.site-box ul.mid-listing li{width:50%; float:left;}
+.site-box ul.mid-listing li{width:50%; float:left; padding-right:10px;}
 .site-box ul.blog-cat{padding-bottom:150px;}
 .site-box ul.blog-cat li{float:left; padding:10px 0;}
 .site-box ul.blog-cat li a{border:1px solid #d2d2d2; padding:10px 25px; border-radius:4px; margin-right:15px; display:inline-block;}
@@ -2199,8 +2199,8 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .site-box ul.blog-inner-link a:hover{color:#1b8ab9; text-decoration:none;}
 
 /***    ***/
-.pop-content-cus{padding:40px 20px !important; color:#7b7b7b; width:80%; margin:0 auto; letter-spacing:1px;} 
-.pop-content-cus h2{color:#7b7b7b; padding:15px; margin-bottom:15px; font-size:24px;}
+.pop-content-cus{padding:40px 0px !important; color:#7b7b7b; width:80%; margin:0 auto; letter-spacing:1px; font-size:20px;} 
+.pop-content-cus h2{color:#7b7b7b; padding:15px; margin-bottom:15px; font-size:24px; line-height:40px;}
 .pop-content-cus p{color:#5c5c5c; padding:15px;}
 .pop-content-cus p .btn1{margin:0 10px; display:inline-block;}
 
@@ -2233,6 +2233,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report-form .as-user label{display:inline-block; margin-right:15px;}
 .report-form .as-user .control{padding-left:20px;}
 .report-form .control--radio .control__indicator::after{width:13px; height:13px;}
+.report footer ul li a{letter-spacing:0;}
 /***  end report page  ***/
 /***  faq  ***/
 .faq{padding:30px; width:100%;}
@@ -2396,7 +2397,7 @@ input[type=text] {
 .detail-job-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;}
 .detail-job-no-login .btn-right .btn2{padding:8px 25px; background:none; color:#fff;}
 .detail-job-no-login .btn-right .btn2:hover{background:#fff; color:#1b8ab9;}
-.old-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;}
+.old-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1.2;}
 .old-no-login .btn-right .btn2{padding:8px 25px; background:none; color:#fff; border:1px solid #fff;}
 .old-no-login .btn-right .btn2:hover{background:#fff; color:#1b8ab9;}
 .job-detail .job-top-detail{/*padding-left:36px;*/}
