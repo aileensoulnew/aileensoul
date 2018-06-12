@@ -67,8 +67,8 @@ $userid = $this->session->userdata('aileenuser');
                         </div>
                         <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
                             <div class="btn-right">
-                                <a href="<?php echo base_url(); ?>/login" class="btn4" title="Login">Login</a>
-                                <a href="<?php echo base_url(); ?>/artist-profile/create-account" class="btn2" title="Create an account">Create Artistic Account</a>
+                                <a href="<?php echo base_url(); ?>login" class="btn4" title="Login">Login</a>
+                                <a href="<?php echo base_url(); ?>artist-profile/create-account" class="btn2" title="Create an account">Create Artistic Account</a>
                             </div>
                         </div>
                     </div>
