@@ -5,6 +5,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 <html>
     <head>
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <?php echo $head; ?>  
          <?php
         if (IS_REC_CSS_MINIFY == '0') {
