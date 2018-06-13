@@ -1633,4 +1633,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $result_array = $query->result_array();   
         return $result_array;
     }
+
+    function getSkillsNames($skills)
+    {
+        $sql = "SELECT GROUP_CONCAT(DISTINCT(skill)) as skill_name FROM ailee_skill WHERE skill_id IN (".$skills.")";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array['skill_name'];
+    }
 }

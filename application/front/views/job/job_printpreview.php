@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <!-- start head -->
         <?php echo $head; ?>
         <!-- END HEAD -->
 
-        <title><?php echo $title; ?></title>
 
         <?php
         if (IS_JOB_CSS_MINIFY == '0') {

@@ -12,6 +12,7 @@ class Job extends MY_Controller {
         $this->load->library('form_validation');
         $this->load->model('email_model');
         $this->load->model('user_model');
+        $this->load->model('data_model');
         $this->load->model('job_model');
         $this->load->model('recruiter_model');
         $this->load->library('S3');
@@ -1929,9 +1930,14 @@ class Job extends MY_Controller {
             $this->data['other_skill'] = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }
 //For Counting Profile data start
-//For Counting Profile data END
-
-        $this->data['title'] = "Resume of " . $job_details[0]['fname'] . " " . $job_details[0]['lname'] . " | Details | Job Profile" . TITLEPOSTFIX;
+//For Counting Profile data END        
+        $cityname = $this->db->get_where('cities', array('city_id' => $job_details[0]['city_id']))->row()->city_name;
+        $statename = $this->db->get_where('states', array('state_id' => $job_details[0]['state_id']))->row()->state_name;
+        $countryname = $this->db->get_where('countries', array('country_id' => $job_details[0]['country_id']))->row()->country_name;
+        $skills_name = $this->job_model->getSkillsNames($job_details[0]['keyskill']);
+        $cityname = ($cityname == ""? ($statename == "" ? $countryname:$statename) :$cityname);
+        $this->data['title'] = "Job Seeker " . $job_details[0]['fname'] . " " . $job_details[0]['lname'] . " In " .$cityname;
+        $this->data['metadesc'] = $job_details[0]['fname'] . " " . $job_details[0]['lname'] . ". Skills: ".$skills_name.". Looking for a job change. ";
 
 //for deactive profile and slug not found then see page start
 
