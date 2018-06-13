@@ -300,7 +300,8 @@ class Artist_live extends MY_Controller {
         } else {
             $this->data['left_artistic'] = $this->load->view('artist_live/left_artistic', $this->data, true);
             $artistic_name = $this->get_artistic_name($id);
-            $this->data['title'] = 'Home | Artistic Profile' . TITLEPOSTFIX;
+            $this->data['title'] = 'Artist Profile | Aileensoul';
+            $this->data['metadesc'] = 'Grow your artist network by connecting with other artist that share the same or similar interest at Aileensoul platform.';
             $this->load->view('artist_live/art_post', $this->data);
         }
     }
@@ -387,12 +388,25 @@ class Artist_live extends MY_Controller {
         $artisticslug = $this->db->select('art_id')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_id;
 
         $contition_array = array('art_id' => $regid, 'status' => '1', 'art_step' => '4');
-        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_step,user_id,art_user_image,art_name,art_lastname,designation,slug,art_id,art_skill,art_yourart,art_desc_art,art_email,art_city,art_country,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $this->data['artisticdata'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_step,user_id,art_user_image,art_name,art_lastname,designation,slug,art_id,art_skill,art_yourart,art_desc_art,art_email,art_city,art_state,art_country,other_skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         
         $this->data['artid'] = $this->data['artisticdata'][0]['user_id'];
         $this->data['get_url'] = $get_url = $this->get_url($this->data['artisticdata'][0]['user_id']);
         $artistic_name = $this->get_artistic_name($this->data['artid']);
-        $this->data['title'] = $artistic_name . ' | Dashboard' . '- Artistic Profile' . TITLEPOSTFIX;
+
+        $cityname = $this->db->get_where('cities', array('city_id' => $this->data['artisticdata'][0]['art_city']))->row()->city_name;
+        $statename = $this->db->get_where('states', array('state_id' => $this->data['artisticdata'][0]['art_state']))->row()->state_name;
+        $countryname = $this->db->get_where('countries', array('country_id' => $this->data['artisticdata'][0]['art_country']))->row()->country_name;
+        $category_name = $this->artistic_model->getCategoryNames($this->data['artisticdata'][0]['art_skill']);
+        $art_othercategory = "";
+        if($this->data['artisticdata'][0]['other_skill'] != "")
+        {
+            $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $this->data['artisticdata'][0]['other_skill']))->row()->other_category;
+        }
+        
+        $this->data['title'] = "Artist ".$artistic_name." ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." From ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname;
+        
+        $this->data['metadesc'] = "Artist ".$artistic_name." from ".($cityname != "" ? $cityname."," : "")." ".$statename.", ".$countryname." is a ".($category_name).($art_othercategory != "" && $category_name != "" ? "," : "").$art_othercategory." ".($this->data['artisticdata'][0]['art_yourart'] != '' ? 'specailist in '.$this->data['artisticdata'][0]['art_yourart'] : '').". Visit Aileensoul to view full ".$artistic_name." portfolio.";        
 
         if ($userid && count($artistic_deactive) <= 0 && $this->data['artist_isregister']) {
             if (!$this->data['artisticdata'] && !$this->data['artsdata']) {

@@ -612,4 +612,12 @@ class Artistic_model extends CI_Model {
         return $result_array;
     }
 
+    function getCategoryNames($category)
+    {
+        $sql = "SELECT GROUP_CONCAT(DISTINCT(art_category)) as category_name FROM ailee_art_category WHERE category_id != 26 AND category_id IN (".$category.")";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array['category_name'];
+    }
+
 }

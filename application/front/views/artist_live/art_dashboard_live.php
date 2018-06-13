@@ -6,6 +6,7 @@ $userid = $this->session->userdata('aileenuser');
 <html>
     <head>
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
          <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
         <?php echo $head; ?>  
 
