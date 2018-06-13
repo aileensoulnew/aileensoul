@@ -1750,6 +1750,7 @@ top: -3px;}
 .blog-detail .pagination li{margin-bottom:0;}
 .blog-detail-top{padding-bottom:5px; height:95px;}
 .blog-page .custom-user-list h3{border-bottom:0;}
+.blog-page .also-like-box .rec-img{width:100%; height:100%; display:block;}
 .also-like-box{width:100%; text-align:center;}
 .also-like-box span{font-size:12px; padding:10px 0 5px; font-weight:bold;}
 .also-like-box p{font-size:18px;}
