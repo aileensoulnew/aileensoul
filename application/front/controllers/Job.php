@@ -1937,7 +1937,7 @@ class Job extends MY_Controller {
         $skills_name = $this->job_model->getSkillsNames($job_details[0]['keyskill']);
         $cityname = ($cityname == ""? ($statename == "" ? $countryname:$statename) :$cityname);
         $this->data['title'] = "Job Seeker " . $job_details[0]['fname'] . " " . $job_details[0]['lname'] . " In " .$cityname;
-        $this->data['metadesc'] = $job_details[0]['fname'] . " " . $job_details[0]['lname'] . ". Skills: ".$skills_name.". Looking for a job change. ";
+        $this->data['metadesc'] = $job_details[0]['fname'] . " " . $job_details[0]['lname'] . ". Skills: ".trim($skills_name,",").". Looking for a job change. ";
 
 //for deactive profile and slug not found then see page start
 
