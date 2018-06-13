@@ -613,7 +613,7 @@
                                                 }
                                             } else {
                                                 ?>
-                                                <div class="art-img-nn">
+                                                <div class="art-img-nn border1">
                                                     <div class="art_no_post_img">
 
                                                         <img src="<?php echo base_url('assets/img/job-no1.png') ?>" alt="job-no1.png">

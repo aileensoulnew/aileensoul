@@ -1921,7 +1921,7 @@ class Recruiter extends MY_Controller {
 				$postdata .= '</div>';
 				$postdata .= '</div>';
 			} else {
-				$postdata .= '<div class="art-img-nn">';
+				$postdata .= '<div class="art-img-nn border1">';
 				$postdata .= '    <div class="art_no_post_img">';
 				$postdata .= '<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">';
 				$postdata .= '</div>';
@@ -2360,7 +2360,7 @@ class Recruiter extends MY_Controller {
 
 			$no_post = '';
 			$no_post = "nodata";
-			$rec_post .= '<div class="art-img-nn">
+			$rec_post .= '<div class="art-img-nn border1">
 			<div class="art_no_post_img">
 
 			<img src="' . base_url('assets/img/job-no.png') . '" alt="noimage">
@@ -3668,7 +3668,7 @@ class Recruiter extends MY_Controller {
 			}
 		} else {
 
-			$return_html .= '<div class="art-img-nn">
+			$return_html .= '<div class="art-img-nn border1">
 			<div class="art_no_post_img">
 
 			<img src="' . base_url() . 'assets/img/job-no1.png" alt="noimage">
@@ -6160,7 +6160,7 @@ class Recruiter extends MY_Controller {
 			$postdata .= '</div>';
 			$postdata .= '</div>';
 		} else {
-			$postdata .= '<div class="art-img-nn">';
+			$postdata .= '<div class="art-img-nn border1">';
 			$postdata .= '    <div class="art_no_post_img">';
 			$postdata .= '<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">';
 
@@ -6712,7 +6712,7 @@ class Recruiter extends MY_Controller {
 			$postdata .= '</div>';
 			$postdata .= '</div>';
 		} else if ($isfilterapply == false){
-			$postdata .= '<div class="art-img-nn">';
+			$postdata .= '<div class="art-img-nn border1">';
 			$postdata .= '    <div class="art_no_post_img">';
 			$postdata .= '<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">';
 

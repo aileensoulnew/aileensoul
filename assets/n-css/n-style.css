@@ -164,7 +164,7 @@ padding: 5px;}
 .post-head .post-img .no-img-post{padding:13px 0; display:inline-block;}
 .post-detail{width:85%; float:left; padding-left:10px;}
 .post-detail .post-name{font-size:15px; color:#5c5c5c; font-weight:600; float:left; padding-right:10px; text-transform: capitalize; max-width:86%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
-.post-detail .post-name:hover{color:#1b8ab9; text-decoration:underline;}
+.post-detail .post-name:hover{color:#1b8ab9;}
 .post-right-dropdown{width:26px; float:right; margin-right: -10px;}
 .post-right-dropdown > a{padding: 5px 10px 8px; display: block;}
 .post-right-dropdown > a:hover{background: #eee; }
@@ -235,7 +235,7 @@ padding: 5px;}
 .add-comment .comment-input{width:426px; padding:0 15px; float:left;}
 .edit-comment .comment-input{width:415px; padding:0 15px 0 0; float:left;}
 .question-page .add-comment .comment-input{width:85%;}
-.custom-user-list.question-page h3{/*border-bottom:0;*/}
+.questions .custom-user-list h3{border-bottom:0;}
 .question-page .edit-comment .comment-input{width:83%;}
 .add-comment .comment-input input{height:36px;}
 .comment-submit{width:90px; position: absolute; right: 0; bottom: 0;}
@@ -1903,6 +1903,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .modal2 .modal-dialog .modal-content .mySlides{height: 100%;}
 .modal2 .modal-close{background: transparent; font-size: 30px; border:0; top: 15px; right: 15px; opacity: 0.6; padding: 3px 5px; border-radius: 3px;}
 .modal2 .modal-close:hover{opacity: 1; background: rgba(255,255,255,0.1);}
+.modal2 .modal-close:focus{outline:none;}
 .all-meda .mejs__inner .mejs__controls{display: none;}
 .all-meda .audio_source .mejs__container{background: none;}
 .slider_img_p .audio_main_div .audio_source{position: absolute; width: 400px; margin: 0 auto; left: 0; right: 0;}
@@ -2213,8 +2214,9 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report-box h3{letter-spacing:1px;}
 .report-box ul{padding:20px; width:100%; float:left; margin-bottom:0;}
 .report-box ul li{padding:15px 10px; width:50%; float:left; list-style-type:none; letter-spacing:1px;}
-.report-box ul li:hover{color:#1b8ab9;}
+.report-box ul li .control:hover{color:#1b8ab9;}
 .report-box ul li:last-child{width:100%; text-align:center; padding-top:7px; padding-bottom:10px;}
+.report-box ul li .control{display:inline-block;}
 .report-box .control__indicator{width:16px; height:16px;}
 .report-box ul li.other-rsn{padding-left:40px; position:relative; }
 .report-box ul li.other-rsn:before{width:16px; height:16px; border:1px solid #5c5c5c; content:""; position:absolute; left:10px; top:18px; border-radius:100%; }
@@ -2228,7 +2230,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report{letter-spacing:1px;}
 .report h1{padding:100px 0 50px; font-size:50px;}
 .report-middle-box{width:80%; margin:0 auto; padding:50px 0;}
-.report-form{padding:50px 0;}
+.report-form{padding:50px 0; width:100%; float:left;}
 .report-form .form-group{margin-bottom:40px;}
 .report-form .form-group input{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0; padding:0;}
 .report-form .form-group input:focus{border-bottom:1px solid #1b8ab9;}
@@ -2239,6 +2241,8 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report-form .as-user .control{padding-left:20px;}
 .report-form .control--radio .control__indicator::after{width:13px; height:13px;}
 .report footer ul li a{letter-spacing:0;}
+.report-form input.error{border-width:0 0 1px 0 !important;}
+.report-form textarea.error{border-width:0 0 1px 0 !important;}
 /***  end report page  ***/
 /***  faq  ***/
 .faq{padding:30px; width:100%;}
@@ -2468,6 +2472,13 @@ body, body.no-login {padding-bottom:60px;}
 border: 1px solid #fff; line-height: 1;}
 .reg-form-cus .right-header .btn2:hover{background:none; color:#fff;}
 .post-popup-box .tooltip-custom{bottom:10px;}
+.border1{border:1px solid #d2d2d2; border-radius:4px;}
+.border-b0{border-bottom:0;}
+#userimage label.error{position:relative; width:100%; text-align:right; right:0;}
+#contact_loader{margin-top:126px;}
+#postinfo label.error{right:2px;}
+.work_type_custom label.error { right: 8px; top: 37px;}
+
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
