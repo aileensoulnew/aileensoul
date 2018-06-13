@@ -211,7 +211,8 @@ class Recruiter_live extends MY_Controller {
     // RECRUITER HOME PAGE
     public function recommen_candidate() {
         
-        $this->data['title'] = 'Home | Recruiter Profile - Aileensoul';
+        $this->data['title'] = 'Get Better Candidate Suggestion Based on Your Job Posting';
+        $this->data['metadesc'] = 'Aileensoul provides you the best employee recommendation based on your job listing. Connect and Hire.';
         $userid = $this->session->userdata('aileenuser');
         $this->recruiter_apply_check();
         //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
