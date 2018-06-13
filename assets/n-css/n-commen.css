@@ -394,7 +394,7 @@ input, textarea, select {
 	border: 1px solid #ccc;
 	outline: none;
 	padding: 5px 15px;
-	color: #000;
+	/*color: #000;*/
 	font-size: 13px;
 	font-weight: 400;
 	border-radius: 4px;
@@ -1540,6 +1540,16 @@ header .logo a{line-height:0;}
 header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
 .new-ld-page header .logo svg{fill:#5c5c5c;}
+
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
