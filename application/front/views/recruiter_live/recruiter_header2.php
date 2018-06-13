@@ -134,7 +134,7 @@ $userid = $this->session->userdata('aileenuser');
 							</a>
 
 							<ul class="dropdown-menu account">
-								<li>Account</li>
+								<li>Recruiter Account</li>
 								<li><a href="<?php echo base_url('recruiter/profile/') . $userid; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 								<li><a href="<?php echo base_url('recruiter/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 								<!-- <li><a href="javascript:void(0)" onclick="deactivate(<?php echo $userid;?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
@@ -300,7 +300,7 @@ $userid = $this->session->userdata('aileenuser');
 								<span class="pr-name"><span class="none-sub-menu"> Account</span></span>
 						</a>
 						<ul class="dropdown-menu account">
-							<li>Account</li>
+							<li>Recruiter Account</li>
 							<li><a href="<?php echo base_url('recruiter/profile/') . $userid; ?>" target="_self"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 							<li><a href="<?php echo base_url('recruiter/basic-information'); ?>" target="_self"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 						</ul>

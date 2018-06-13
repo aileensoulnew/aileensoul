@@ -144,7 +144,7 @@ $userid = $this->session->userdata('aileenuser');
 							</a>
 
 							<ul class="dropdown-menu account">
-								<li>Account</li>
+								<li>Job-Seeker Account</li>
 								<li><a href="<?php echo base_url('job-profile/'.$jobdata[0]['slug']); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 								<li><a href="<?php echo base_url('job-profile/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 								<!-- <li><a href="#" onclick="deactivate(<?php //echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
@@ -215,7 +215,7 @@ $userid = $this->session->userdata('aileenuser');
 							<span class="pr-name"> Account</span>
 						</a>
 						<ul class="dropdown-menu account">
-							<li>Account</li>
+							<li>Job-Seeker Account</li>
 							<li><a href="<?php echo base_url('job-profile/'.$jobdata[0]['slug']); ?>" target="_self">
 								<span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 							<li><a href="<?php echo base_url('job-profile/basic-information'); ?>" target="_self"><span class="icon-edit-profile edit_data"></span> Edit Profile</a></li>

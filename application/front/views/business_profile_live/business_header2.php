@@ -164,7 +164,7 @@ echo $header_inner_profile ?>
 								</a>
 
                                 <ul class="dropdown-menu account">
-                                    <li>Account</li>
+                                    <li>Business Account</li>
                                     <li><a href="<?php echo base_url('company/' . $business_login_slug_with_location); ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
                                     <li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
                                     <!-- <li class="hidden"><a onclick="deactivate(<?php //echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
@@ -239,7 +239,7 @@ echo $header_inner_profile ?>
 							<span class="pr-name"><span> Account</span></span>
 						</a>
 						<ul class="dropdown-menu account">
-							<li>Account</li>
+							<li>Business Account</li>
 							<li><a href="<?php echo base_url('company/' . $business_login_slug_with_location); ?>">
 								<span class="icon-view-profile edit_data"></span> View Profile</a></li>
 							<li><a href="<?php echo base_url('business-profile/registration/business-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>

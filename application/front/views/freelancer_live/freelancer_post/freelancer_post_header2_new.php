@@ -134,7 +134,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 							</a>
 
 							<ul class="dropdown-menu account">
-								<li>Account</li>
+								<li>Freelancer Account</li>
 								<li><a href="<?php echo base_url('freelancer/').$fa_slug; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 								<li><a href="<?php echo base_url('freelancer/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 								<!-- <li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
@@ -195,7 +195,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 							<span class="pr-name"> Account</span>
 						</a>
 						<ul class="dropdown-menu account">
-							<li>Account</li>
+							<li>Freelancer Account</li>
 							<li><a href="<?php echo base_url('freelancer/').$fa_slug; ?>"><span class="icon-view-profile edit_data"></span>  View Profile </a></li>
 							<li><a href="<?php echo base_url('freelancer/basic-information'); ?>"><span class="icon-edit-profile edit_data"></span>  Edit Profile </a></li>
 						</ul>

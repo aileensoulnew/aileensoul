@@ -1523,10 +1523,11 @@ ol {
        }
 ol li:before{counter-increment: myOrderedListItemsCounter;
 /*content: counter(myOrderedListItemsCounter)".";*/}
+a .audience-box:hover{background:#f6f6f6; box-shadow:0 0 2px 1px #d2d2d2;}
 .audience-box{border:1px solid #d2d2d2; padding: 10px; margin-bottom: 20px; min-height: 365px;}
 .audience-box img{width:100%; height: 150px;}
-.audience-box h3{font-weight: bold; padding-top: 10px; font-size: 20px;}
-.audience-box p{text-align: justify; padding-top: 5px;}
+.audience-box h3{font-weight: bold; padding-top: 10px; font-size: 20px; color:#5c5c5c; text-align:center;}
+.audience-box p{text-align: justify; padding-top: 5px; color:#7b7b7b;}
 .add-content{width:80%; margin: 0 auto;}
 .add-content img{width:100%;}
 
