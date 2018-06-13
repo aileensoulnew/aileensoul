@@ -2,7 +2,9 @@
 <html lang="en" ng-app="businessRegiMain" ng-controller="businessRegiMainController">
     <head>
         <base href="<?php echo base_url(); ?>">        
-        <title ng-bind="title"></title>
+        <!-- <title ng-bind="title"></title> -->
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

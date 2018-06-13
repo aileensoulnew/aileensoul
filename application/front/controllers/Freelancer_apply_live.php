@@ -128,6 +128,8 @@ class Freelancer_apply_live extends MY_Controller {
                 redirect(base_url());
             }
         }
+        $this->data['title'] = "Signup to get Freelancing Jobs | Aileensoul";
+        $this->data['metadesc'] = "Search and Get the kind of work that you like to work upon the most. Sign up now! It's Free. ";
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
