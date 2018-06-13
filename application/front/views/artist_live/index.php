@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="artistApp" ng-controller="artistController">
     <head>
-        <title ng-bind="title"></title>
+        <!-- <title ng-bind="title"></title> -->
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">    

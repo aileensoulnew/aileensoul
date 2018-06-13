@@ -42,12 +42,14 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Artist Profile | Aileensoul";
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
             $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         }
+        $this->data['title'] = "Search Creative Artist in any Profession | Aileensoul";
+        $this->data['metadesc'] = "Find and Connect with great talents from photographers, designers, models, musicians, actor, dancer to writers from all over the world only at Aileensoul. ";
+
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/index', $this->data);
         // }
