@@ -15,8 +15,10 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 ?>
 <html lang="en" ng-app="noJobReg" ng-controller="noJobRegController">
     <head>
-        <title ng-bind="title"></title>
+        <!-- <title ng-bind="title"></title> -->
         <!-- <meta name="robots" content="noindex, nofollow"> -->
+        <title>Job Search: Find best local jobs and employment at near by location</title>
+        <meta name="description" content="Find the current job opportunities and options in any industry in your locale that best suits your skill and connect with recruiter. Apply Today! Upload your Resume Now." />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php //echo $head; ?>    

@@ -897,7 +897,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     /*$scope.makeActive = function (item,slug) {
         $scope.active = $scope.active == item ? '' : item;
     }*/
-    $scope.$parent.title = "Dashboard | Aileensoul";
+    // $scope.$parent.title = "Dashboard | Aileensoul";
     var isLoadingData = false;
 
     $(document).on('hidden.bs.modal', function (event) {
@@ -1514,7 +1514,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }).then(function (success) {
             details_data = success.data;
             $scope.details_data = details_data;            
-            $scope.$parent.title = "About "+details_data.fullname+"| Aileensoul";
+            $scope.$parent.title = "About "+details_data.fullname+" | Aileensoul";
         });
     }
 
