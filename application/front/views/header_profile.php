@@ -261,7 +261,7 @@ if($browser == "Firefox")
                             </label>
                             <ul class="dropdown-menu profile-dropdown">
                                 <li>Account</li>
-                                <li><a ng-href="<?php echo base_url().$this->session->userdata('aileenuser_slug'); ?>" href="<?php echo base_url().$this->session->userdata('aileenuser_slug'); ?>" title="Setting"><i class="fa fa-user"></i> View Profile</a></li>
+                                <li><a ng-href="<?php echo base_url().$this->session->userdata('aileenuser_slug'); ?>" href="<?php echo base_url().$this->session->userdata('aileenuser_slug'); ?>" title="View Profile"><i class="fa fa-user"></i> View Profile</a></li>
                                 <li><a href="<?php echo base_url('edit-profile') ?>" title="Setting"><i class="fa fa-cog"></i> Setting</a></li>
                                 <li><a href="<?php echo base_url('logout') ?>" title="Logout"><i class="fa fa-power-off"></i> Logout</a></li>
                             </ul>

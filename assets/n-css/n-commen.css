@@ -360,7 +360,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', end
   display: block;
 }
 .control--checkbox .control__indicator:after {
-  left: 5px;
+  left: 4px;
   top: 1px;
   width: 5px;
   height: 10px;

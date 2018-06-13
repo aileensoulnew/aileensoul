@@ -471,6 +471,7 @@ label.cameraButton input[accept*="camera"] {
 .user-photo-name .profile-img img{width:168px; height:168px; border-radius:100%;}
 .user-photo-name h3{margin:5px 0 0; letter-spacing: 1px;}
 .user-photo-name h3 a{color:#5c5c5c;}
+.user-photo-name h3 a:focus{text-decoration:none;}
 .user-photo-name p{color:#6f6f6f; letter-spacing: 1px;}
 .user-btns{padding:10px 0; text-align:center;}
 .user-btns a{width:165px;}
@@ -2231,7 +2232,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report h1{padding:100px 0 50px; font-size:50px;}
 .report-middle-box{width:80%; margin:0 auto; padding:50px 0;}
 .report-form{padding:50px 0; width:100%; float:left;}
-.report-form .form-group{margin-bottom:40px;}
+.report-form .form-group{margin-bottom:40px; position:relative;}
 .report-form .form-group input{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0; padding:0;}
 .report-form .form-group input:focus{border-bottom:1px solid #1b8ab9;}
 .report-form .form-group input[type="text"]:focus{color:#1b8ab9 !important;}
@@ -2243,6 +2244,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .report footer ul li a{letter-spacing:0;}
 .report-form input.error{border-width:0 0 1px 0 !important;}
 .report-form textarea.error{border-width:0 0 1px 0 !important;}
+.report-form label.error {right:0; bottom:-20px;}
 /***  end report page  ***/
 /***  faq  ***/
 .faq{padding:30px; width:100%;}
