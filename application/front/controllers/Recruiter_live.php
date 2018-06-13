@@ -268,7 +268,7 @@ class Recruiter_live extends MY_Controller {
         } else {
             $this->rec_avail_check($id);
         }
-        $this->data['title'] = 'Recruiter ' . ucwords($this->data['recdata']['rec_firstname']) . ' ' . ucwords($this->data['recdata']['rec_lastname']) . ' for ' . ucwords($this->data['recdata']['re_comp_name']) . 'Company';
+        $this->data['title'] = 'Recruiter ' . ucwords($this->data['recdata']['rec_firstname']) . ' ' . ucwords($this->data['recdata']['rec_lastname']) . ' for ' . ucwords($this->data['recdata']['re_comp_name']) . ' Company';
 
         $this->data['metadesc'] = ucwords($this->data['recdata']['rec_firstname']) . ' ' . ucwords($this->data['recdata']['rec_lastname']) .' is Recruiter at '. ucwords($this->data['recdata']['rec_lastname']) .', currently looking to hire candidate from Aileensoul platform. Follow and contact '. ucwords($this->data['recdata']['rec_firstname']) .' to get latest updates about recent job openings.';
         $this->data['reg_id'] = $id;
