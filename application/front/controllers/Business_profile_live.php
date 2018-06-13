@@ -213,11 +213,11 @@ class Business_profile_live extends MY_Controller {
 
         if ($id != '') {
             $contition_array = array('business_slug' => $id, 'is_deleted' => '0', 'status' => '1', 'business_step' => '4');
-            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         } else {
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1', 'business_step' => '4');
-            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-        }
+            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }        
         if ($business_main_slug == $id) {
             $this->data['is_eligable_for_post'] = 1;
         } else {
@@ -240,7 +240,13 @@ class Business_profile_live extends MY_Controller {
         }
         
         $company_name = $this->get_company_name($id);
-        $this->data['title'] = ucwords($company_name) . ' | Dashboard' . ' | Business Profile' . TITLEPOSTFIX;
+        $industry_name = $this->db->get_where('industry_type', array('industry_id' => $business_data[0]['industriyal'], 'status' => '1'))->row()->industry_name;
+        $cityname = $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
+        $statename = $this->db->get_where('states', array('state_id' => $business_data[0]['state']))->row()->state_name;
+        $countryname = $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
+
+        $this->data['title'] = ucwords($company_name)." ".($cityname != "" ? $cityname."," : "")." ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "")." | ".$industry_name;
+        $this->data['metadesc'] = ucwords($company_name)." is ".$industry_name." company based in ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "").". To know more about it's contact details and services, Visit Aileensoul website.";
         if (count($business_data) == 0) {
             $this->load->view('business_profile/notavalible', $this->data);
         } else {

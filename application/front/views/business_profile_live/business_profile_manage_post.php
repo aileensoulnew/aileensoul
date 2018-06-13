@@ -5,6 +5,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 <html>
     <head>
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <?php echo $head; ?>
         <?php if (IS_BUSINESS_CSS_MINIFY == '0') { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>" />
