@@ -1513,7 +1513,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             details_data = success.data;
-            $scope.details_data = details_data;
+            $scope.details_data = details_data;            
+            $scope.$parent.title = "About "+details_data.fullname+"| Aileensoul";
         });
     }
 
