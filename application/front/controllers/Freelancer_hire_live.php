@@ -52,7 +52,8 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 			$this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
-			$this->data['title'] = "Freelance Employer Profile | Aileensoul";
+			$this->data['title'] = "Hire Freelancers and Post Projects | Aileensoul";
+			$this->data['metadesc'] = "Find freelancer and home based online jobs on Aileensoul. Joining and posting project is completely free. Get freelance job and post your requirement now!";
 			if($userid != ""){
 				$this->load->view('freelancer_hire_live/index', $this->data);
 			}

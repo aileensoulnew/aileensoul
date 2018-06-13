@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="freelanceHireControllerApp" ng-controller="freelanceHireController">
     <head>
-        <title>Freelance Register | Aileensoul</title>
+        <!-- <title>Freelance Register | Aileensoul</title> -->
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
