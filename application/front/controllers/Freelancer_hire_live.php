@@ -791,7 +791,8 @@ public function recommen_candidate() {
 	// print_r($this->data['login_user_totalpost']);
 	// exit;
 	// code for display page end
-	$this->data['title'] = 'Home | Employer Profile' . TITLEPOSTFIX;
+	$this->data['title'] = 'Get Better Freelancer Suggestion Based on Your Remote Job Posting';
+	$this->data['metadesc'] = 'Aileensoul provides you the best freelancer recommendation based on your freelance job posting. Connect and Hire.';
 	$this->load->view('freelancer_live/freelancer_hire/recommen_candidate', $this->data);
 }
 

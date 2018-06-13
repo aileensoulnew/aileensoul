@@ -3,6 +3,7 @@
 <html  ng-app="freelancerHireListApp" ng-controller="freelancerHireListController">
     <head>
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <?php echo $head; ?>
         <?php if (IS_HIRE_CSS_MINIFY == '0') { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/freelancer-hire.css?ver=' . time()); ?>">
