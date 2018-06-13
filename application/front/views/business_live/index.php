@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="businessApp" ng-controller="businessController">
     <head>
-        <title ng-bind="title"></title>
+        <!-- <title ng-bind="title"></title> -->
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">

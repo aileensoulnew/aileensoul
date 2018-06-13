@@ -57,7 +57,8 @@ class Business_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Business Profile | Aileensoul";
+        $this->data['title'] = "Grow Business Network and Get Your Business Listed | Aileensoul";
+        $this->data['metadesc'] = "Search for Real Estate, Fashion, Home appliance, and many more businesses at your near by locations from Aileensoul. Also, you can List your business Now. It's Free.";
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->load->view('business_live/index', $this->data);
     }
