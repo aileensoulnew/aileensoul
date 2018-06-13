@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title><?php echo $title; ?></title>
+	<meta name="description" content="<?php echo $metadesc; ?>" />
 	<?php //echo $head; ?> 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />

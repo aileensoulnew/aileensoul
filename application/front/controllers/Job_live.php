@@ -582,7 +582,8 @@ class Job_live extends MY_Controller {
         }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);       
-        $this->data['title'] = "Job Register | Aileensoul"; 
+        $this->data['title'] = "Sign Up to get 2018 top  jobs | Ailensoul"; 
+        $this->data['metadesc'] = "Are you struggling to seek a job? No worries! Create an account at Aileensoul to get best jobs that matches your skills."; 
         $this->load->view('job_live/job_register', $this->data);
     }
 
