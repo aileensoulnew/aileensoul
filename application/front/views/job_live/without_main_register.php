@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="noRegJob" ng-controller="noRegJobController">
     <head>
-        <title ng-bind="title"></title>
+        <!-- <title ng-bind="title"></title> -->
         <!-- <meta name="robots" content="noindex, nofollow"> -->
+        <title>Job Search: Find best local jobs and employment at near by location</title>
+        <meta name="description" content="Find the current job opportunities and options in any industry in your locale that best suits your skill and connect with recruiter. Apply Today! Upload your Resume Now." />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
