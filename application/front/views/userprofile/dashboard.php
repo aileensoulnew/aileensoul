@@ -413,6 +413,7 @@
                                     <div class="post-field">
                                         <div id="content" class="form-group">
                                             <label>For whom this opportunity?<a href="#" data-toggle="tooltip" data-placement="left" title="Hooray!" class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
+											
                                             <tags-input id="job_title" ng-model="opp.job_title_edit" display-property="name" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer...." replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
                                                 <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
                                             </tags-input>
@@ -929,7 +930,8 @@
                         </div>
                         <div class="post-field">
                             <div id="content" class="form-group">
-                                <label>For whom this opportunity?<a href="#" data-toggle="tooltip" data-placement="left" title="Type the designation which best matches for given opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>"  alt="tooltip"></a></label>
+                                <label>For whom this opportunity?</label>
+								<div id="dobtooltip" class="tooltip-custom" style="">Type the designation which best matches for given opportunity.</div>
                                 <tags-input id="job_title" ng-model="opp.job_title" display-property="name" placeholder="Ex: Singer, SEO, HR, Photographer, Designer…" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
                                     <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
                                 </tags-input>
@@ -942,7 +944,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>For which location?<a href="#" data-toggle="tooltip" data-placement="left" title="Enter a word or two then select the location for the opportunity.!" class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                <label>For which location?</label>
+								<div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select the location for the opportunity.!</div>
                                 <tags-input id="location" ng-model="opp.location" display-property="city_name" placeholder="Ex:Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
                                     <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
                                 </tags-input>
@@ -954,7 +957,8 @@
                                 </script>
                             </div>
                             <div class="form-group">
-                                <label>For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                <label>For which field?</label>
+								<div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Opportunity.</div>
                                 <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                 <span class="select-field-custom">
                                     <select name="field" ng-model="opp.field" id="field" ng-change="other_field(this)">

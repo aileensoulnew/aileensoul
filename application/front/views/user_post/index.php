@@ -380,11 +380,14 @@
                                             </div>
                                             <div class="post-field">
                                                 <div class="form-group">
-                                                    <label>Add Description<a href="#" data-toggle="tooltip" data-placement="left" title="Describe your problem in more details with some examples." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                    <label>Add Description</label>
                                                     <textarea max-rows="5" id="ask_que_desc_{{post.post_data.id}}" placeholder="Add Description" cols="10"></textarea>
+													<div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Related Categories<a href="#" data-toggle="tooltip" data-placement="left" title="Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                    <label>Related Categories</label>
+													<div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”.</div>
+													
                                                     <tags-input ng-model="ask.related_category_edit" display-property="name" placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" id="ask_related_category_edit{{post.post_data.id}}" on-tag-added="onKeyup()">
                                                         <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
                                                     </tags-input>
@@ -396,7 +399,8 @@
                                                     </script>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>From which field the Question asked?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Question." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                                    <label>From which field the Question asked?</label>
+													<div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Question.</div>
                                                     <span class="select-field-custom">
                                                         <select ng-model="ask.ask_field_edit" id="ask_field_{{post.post_data.id}}">
                                                             <option value="" selected="selected">Select Related Field</option>
@@ -867,7 +871,7 @@
                             </div>
                             <div class="post-field">
                                 <div id="content" class="form-group">
-                                    <label>For whom this opportunity? 123<a href="#" data-toggle="tooltip" data-placement="left" title="Type the designation which best matches for given opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="I'm a tooltip that is kwjnefk jnkwjenfkjnk kjwnekjn kjwnekfjn kjwenfkjnkwjnekfjnwkejnf kjwnef bounded on body!" alt="tooltip"></a></label>
+                                    <label>For whom this opportunity?</label>
 									<div id="dobtooltip" class="tooltip-custom" style="">Type the designation which best matches for given opportunity.</div>
                                     <tags-input id="job_title" ng-model="opp.job_title" display-property="name" placeholder="Ex: Singer, SEO, HR, Photographer, Designer…" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
                                         <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
@@ -881,7 +885,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>For which location?<a href="#" data-toggle="tooltip" data-placement="left" title="Enter a word or two then select the location for the opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                    <label>For which location?</label>
+									<div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select the location for the opportunity.</div>
                                     <tags-input id="location" ng-model="opp.location" display-property="city_name" placeholder="Ex: Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
                                         <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
                                     </tags-input>
@@ -893,7 +898,8 @@
                                     </script>
                                 </div>
                                 <div class="form-group">
-                                    <label class="pb5">For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                    <label class="pb5">For which field?</label>
+									<div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Opportunity.</div>
                                     <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                     <span class="select-field-custom">
                                         <select name="field" ng-model="opp.field" id="field" ng-change="other_field(this)" class="post-opportunity-field">
@@ -975,11 +981,13 @@
                             </div>
                             <div class="post-field">
                                 <div class="form-group">
-                                    <label>Add Description<a href="#" data-toggle="tooltip" data-placement="left" title="Describe your problem in more details with some examples." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                    <label>Add Description</label>
+									<div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
                                     <textarea rows="1" max-rows="5" ng-model="ask.ask_description" placeholder="Add Description" cols="10" style="resize:none"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Related Categories<a href="#" data-toggle="tooltip" data-placement="left" title="Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                    <label>Related Categories</label>
+									<div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”.</div>
                                     <tags-input id="ask_related_category" ng-model="ask.related_category" display-property="name"placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" on-tag-added="onKeyup()">
                                         <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
                                     </tags-input>
@@ -991,7 +999,8 @@
                                     </script>
                                 </div>
                                 <div class="form-group">
-                                    <label>From which field the Question asked?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Question." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+                                    <label>From which field the Question asked?</label>
+									<div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Question.</div>
                                     <span class="select-field-custom">
                                         <select ng-model="ask.ask_field" id="ask_field">
                                             <option value="" selected="selected">Select Related Field</option>
@@ -1177,6 +1186,8 @@
 					$(document).ready(function(){
 						$('[data-toggle="tooltip"]').tooltip();   
 					});
+					
+					
 				</script>
     </body>
 </html>
