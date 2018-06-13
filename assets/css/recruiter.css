@@ -133,6 +133,12 @@ li.fr a {text-decoration: none !important;}
     margin: 15px;
 
 }
+.cus_post_profile .post-img .cus-profile{
+	position:  absolute;
+    cursor: pointer;
+    top: 0px;
+	opacity:0;
+}
 .cus_post_profile .post-img:hover .cus-profile{
      width: 60px;
     height:  60px;
@@ -140,9 +146,7 @@ li.fr a {text-decoration: none !important;}
     background-size: 30px;
     display:  block;
     color:  #fff;
-    position:  absolute;
-    cursor: pointer;
-    top: 0px;
+    opacity:1;
 }
 
 

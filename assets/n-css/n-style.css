@@ -278,6 +278,8 @@ padding: 5px;}
     word-break: break-word;
     cursor: text;
 	line-height: 1.6;
+	overflow-y:auto;
+	max-height:200px;
 }
 .editable_text img{max-width:100%;}
 .comment-dis-inner img{max-width:100%;}
@@ -2480,6 +2482,8 @@ border: 1px solid #fff; line-height: 1;}
 #contact_loader{margin-top:126px;}
 #postinfo label.error{right:2px;}
 .work_type_custom label.error { right: 8px; top: 37px;}
+.add-post-button .back .but1:hover{color:#1b8ab9;}
+.modal-body{width:100%; float:left;}
 
 
 /***  media query  ***/
