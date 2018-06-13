@@ -10978,6 +10978,8 @@ Your browser does not support the audio tag.
                 redirect(base_url());
             }
         }
+        $this->data['title'] = "Signup - List you Business with Aileensoul";
+        $this->data['metadesc'] = "Grow your business network by listing your business at Aileensoul";
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
         $this->load->view('business_live/business_register', $this->data);
