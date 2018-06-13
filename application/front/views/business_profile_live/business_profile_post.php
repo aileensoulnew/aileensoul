@@ -6,6 +6,7 @@ $mobile_agent = $this->agent->mobile;
 <html>
     <head>
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <?php echo $head; ?>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <?php if (IS_BUSINESS_CSS_MINIFY == '0') { ?>

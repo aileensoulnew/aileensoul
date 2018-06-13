@@ -183,7 +183,8 @@ class Business_profile_live extends MY_Controller {
 
         /* COUNT FOR USER THREE LIST IN FOLLOW SUGGEST BOX */
 
-        $this->data['title'] = 'Home | Business Profile' . TITLEPOSTFIX;
+        $this->data['title'] = 'Business Feed | Aileensoul';
+        $this->data['metadesc'] = 'Get the lastest updates about your business connection and stay informed about business world.';
         $this->data['business_left'] = $this->load->view('business_profile_live/business_left', $this->data, true);
         $this->load->view('business_profile_live/business_profile_post', $this->data);
     }
