@@ -1135,7 +1135,13 @@ public function freelancer_hire_profile($id = "") {
 		$contition_array = array('user_id' => $id, 'status' => '1', 'free_hire_step' => '3');
 		$hire_data = $this->data['freelancerhiredata'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'username, fullname, email, skyupid, phone, country, state, city, pincode, professional_info, freelancer_hire_user_image,freelancer_hire_slug, profile_background, user_id,designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 	}
-	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " | Details | Employer Profile" . TITLEPOSTFIX;
+	$cityname = $this->db->get_where('cities', array('city_id' => $hire_data[0]['city']))->row()->city_name;
+	$statename = $this->db->get_where('states', array('state_id' => $hire_data[0]['state']))->row()->state_name;
+	$countryname = $this->db->get_where('countries', array('country_id' => $hire_data[0]['country']))->row()->country_name;
+
+	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " Freelance Recruiter | Aileensoul";
+
+	$this->data['metadesc'] = "View ".ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " freelance recruiter from ".($cityname != "" ? $cityname.', ':' ').$statename.", ".$countryname." profile on Aileensoul. Connect and get the work.";
 	$this->load->view('freelancer_live/freelancer_hire/freelancer_hire_profile', $this->data);
 }
 
