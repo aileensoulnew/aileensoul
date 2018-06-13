@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="recruiterApp" ng-controller="recruiterController">
     <head>
-        <title ng-bind="title"></title>
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
+        <!-- <title ng-bind="title"></title> -->
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
