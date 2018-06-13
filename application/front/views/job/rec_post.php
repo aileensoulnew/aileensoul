@@ -15,7 +15,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo $title; ?></title>
+        <title><?php echo ucwords($title); ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <?php //echo $head; ?> 
         <?php /*

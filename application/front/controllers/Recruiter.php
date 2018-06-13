@@ -4710,7 +4710,7 @@ class Recruiter extends MY_Controller {
 
 		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type';
 		$contition_array = array('post_id' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'rec_post.user_id' => $userid);
-		$this->data['postdata'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+		$this->data['postdata'] = $postdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
 		$cache_time = $this->db->get_where('job_title', array(
 			'title_id' => $this->data['postdata'][0]['post_name']
@@ -4734,12 +4734,15 @@ class Recruiter extends MY_Controller {
 		$countryname = $this->db->get_where('countries', array('country_id' => $this->data['postdata'][0]['country']))->row()->country_name;
 		
 		if ($cityname != '') {
+			$m_city = $this->common->clean($cityname);
 			$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
 		}
 		else if($statename != "") {
+			$m_city = $this->common->clean($statename);
 			$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($statename));            
 		}
 		else if($countryname != "") {
+			$m_city = $this->common->clean($countryname);
 			$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($countryname));
 		}
 		if ($this->data['postdata'][0]['post_id'] != '') {
@@ -4752,7 +4755,8 @@ class Recruiter extends MY_Controller {
 		$segment3 = implode(' ', $segment3);
 		$segment3 = ucfirst($segment3);
 
-		$this->data['title'] = $segment3 . ' - Aileensoul';
+		$this->data['title'] = $cache_time1.' job in '.$m_city.' for '.$postdata[0]['min_year'].'-'.$postdata[0]['max_year'] .' Year Experience';
+		$this->data['metadesc'] = 'Apply Now to '.$cache_time1.' job vacancy in '.$recdata[0]['re_comp_name'].', '.$m_city.' on Aileensoul. Experience Required: '.$postdata[0]['min_year'].' to '.$postdata[0]['max_year'] .' year.';
 
 		$contition_array = array('post_id !=' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'post_name' => $this->data['postdata'][0]['post_name']);
 		$this->data['recommandedpost'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
