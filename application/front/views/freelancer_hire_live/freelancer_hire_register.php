@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="freelancerRegiMain" ng-controller="freelancerRegiMainController">
     <head>
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <base href="<?php echo base_url(); ?>">        
-        <title ng-bind="title"></title>
+        <!-- <title ng-bind="title"></title> -->
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

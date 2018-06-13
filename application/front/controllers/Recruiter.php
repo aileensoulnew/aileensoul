@@ -5535,6 +5535,8 @@ class Recruiter extends MY_Controller {
             	redirect(base_url());
         	}
         }
+        $this->data['title'] = 'Register to Take Benefit of Employment Service Provided by Aileensoul';
+        $this->data['metadesc'] = "Find and Hire the perect candidate for your company from Aileensoul. Register Now and Post your Job. It's completely Free Platform.";
 		$this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
 		$this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
 		$this->load->view('recruiter_live/recruiter_register', $this->data);

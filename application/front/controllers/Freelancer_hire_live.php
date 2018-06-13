@@ -3082,6 +3082,8 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
             	redirect(base_url());
         	}
         }
+        $this->data['title'] = "Signup to Hire Freelancers | Aileensoul";
+        $this->data['metadesc'] = "Built your remote team with Aileensoul. Register today. It's Free.";
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
         $this->data['studentData'] = (isset($StudentData) && !empty($StudentData) ? 1 : 0);        
         $this->load->view('freelancer_hire_live/freelancer_hire_register', $this->data);
