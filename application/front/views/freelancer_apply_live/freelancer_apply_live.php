@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="freeapplypostApp" ng-controller="freeapplypostController">
     <head>
-        <title>Freelancer Jobs</title>
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">

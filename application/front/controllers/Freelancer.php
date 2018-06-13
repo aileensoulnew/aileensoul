@@ -1097,7 +1097,8 @@ class Freelancer extends MY_Controller {
         $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1', 'free_post_step' => '7');
         $freelancerdata = $this->data['freelancerdata'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $this->data['title'] = 'Home | Freelancer Profile' . TITLEPOSTFIX;
+        $this->data['title'] = 'Get Freelance Work Suggestion | Aileensoul';
+        $this->data['metadesc'] = 'Aileensoul provides you the freelance job recommendation based on your skills and interest. Apply and Get the work. ';
         $this->load->view('freelancer_live/freelancer_post/post_apply', $this->data);
     }
 

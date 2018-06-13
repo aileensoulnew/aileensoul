@@ -48,7 +48,8 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
         $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
-        $this->data['title'] = "Search Freelance | Aileensoul";
+        $this->data['title'] = "Work from Home: Online Freelance Jobs | Aileensoul";
+        $this->data['metadesc'] = "Find and apply from various freelance work opportunities like web designer, digital marketing, content writing, and many more. Get the online job that interest you the most on Aileensoul. ";
         $this->data['freelance_apply_profile_set'] = $this->freelance_apply_profile_set;
 
         if($userid != ""){

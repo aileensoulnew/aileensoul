@@ -4,7 +4,8 @@
 $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $userid, 'status' => '1'))->row()->freelancer_apply_slug;
 ?>
     <head>
-        <title> <?php echo $title; ?></title>
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <?php echo $head; ?> 
         <?php
         if (IS_APPLY_CSS_MINIFY == '0') {
