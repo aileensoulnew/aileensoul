@@ -957,8 +957,8 @@
                                 </script>
                             </div>
                             <div class="form-group">
-                                <label>For which field?</label>
-								<div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Opportunity.</div>
+                                <label>For which field?<a href="#" data-toggle="tooltip" data-placement="left" title="Select the field from given options that best match with Opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" alt="tooltip"></a></label>
+								<div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select the location for the opportunity.!</div>
                                 <!--<input name="field" id="field" type="text" placeholder="What is your field?" autocomplete="off">-->
                                 <span class="select-field-custom">
                                     <select name="field" ng-model="opp.field" id="field" ng-change="other_field(this)">
