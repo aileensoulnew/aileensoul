@@ -27,8 +27,8 @@ class Job extends MY_Controller {
 //             $this->db->update('job_reg', $data);
 //         }
         // This function is there only one time users slug created after remove it End
-        include ('include.php');
         include ('main_profile_link.php');
+        include ('include.php');
         include ('job_include.php');
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
     }
