@@ -545,7 +545,9 @@ class Recruiter extends MY_Controller {
 	// RECRUITER RECOMMANDED FUNCTION END
 	// RECRUITER ADD POST START
 	public function add_post() {
-		$this->data['title'] = 'Add Post | Recruiter Profile - Aileensoul';
+		// $this->data['title'] = 'Add Post | Recruiter Profile - Aileensoul';
+		$this->data['title'] = "Job Posting: Post Job and Hire Best Candidates";
+        $this->data['metadesc'] = "Post your job requirement and get candidate recommendation from us based on your listing.";
 
 		if ($this->session->userdata('aileenuser')) {
 
