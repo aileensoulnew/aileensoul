@@ -345,7 +345,7 @@
                     </section>
                     <!-- Model Popup Open -->
                     <!-- Bid-modal  -->
-                    <div class="modal message-box biderror" id="bidmodal" role="dialog">
+                    <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
                         <div class="modal-dialog modal-lm">
                             <div class="modal-content">
                                 <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
