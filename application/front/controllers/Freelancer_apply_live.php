@@ -198,10 +198,15 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['artist_profile_link'] =  ($this->artist_profile_set == 1)?$this->artist_profile_link:base_url('artist-profile/signup');
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Freelance | Aileensoul";
+
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
         $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row_array('industry_id');
+
+        $this->data['title'] = "Freelance ".str_replace("-"," ",ucwords($search))." Jobs | Aileensoul";
+        $this->data['metadesc'] = "Explore numerous ".str_replace("-"," ",ucwords($search))." Freelance Jobs on Aileensoul. Earn a little extra income plus enhance your skills. Apply Now!";
+
+
         /*$this->data['category_id'] = $category_id['industry_id'];
         $this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];*/
