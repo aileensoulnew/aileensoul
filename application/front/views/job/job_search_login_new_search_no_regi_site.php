@@ -719,7 +719,7 @@ l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
         </div>
         <!-- Register Popup Close -->
         <!-- Bid-modal  -->
-        <div class="modal message-box biderror" id="bidmodal" role="dialog">
+        <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
