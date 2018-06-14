@@ -2281,7 +2281,11 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	
 	$segment3 = array_splice($segment3, 0, -2);
 	$original = implode('-', $segment3);
-	$url = $postname . '-' . $userid . '-' . $postid;
+	$category_name = $this->db->select('category_name')->get_where('category', array('category_id' => 
+            $this->data['postdata'][0]['post_field_req']))->row()->category_name;
+    
+    $url = base_url()."freelance-jobs/".$category_name."/".$text."-".$userid."-".$postid;
+	// $url = $postname . '-' . $userid . '-' . $postid;
 // echo $original."->".$postname;exit;
 
 
@@ -2321,7 +2325,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 			$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);
 		} else {
 			if ($this->data['postdata']) {
-				redirect('freelance-hire/project/' . $url, refresh);
+				redirect($url, refresh);
 			} else {
 				$this->data['title'] = 'Content Not Avaible - Aileensoul';
 				$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);

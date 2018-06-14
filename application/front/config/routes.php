@@ -119,11 +119,11 @@ $route['sitemap/freelance-jobs/(:any)'] = "sitemap/sitemap_inner/$1";
 $route['sitemap/blogs'] = "sitemap/blogs";
 $route['sitemap/blogs/(:any)'] = "sitemap/blogs_category/$1";
 
-$route['sitemap/job-profile'] = "sitemap/job_profile";
-$route['sitemap/recruiter-profile'] = "sitemap/recruiter_profile";
-$route['sitemap/freelance-profile'] = "sitemap/freelance_profile";
-$route['sitemap/business-profile'] = "sitemap/business_profile";
-$route['sitemap/artistic-profile'] = "sitemap/artistic_profile";
+// $route['sitemap/job-profile'] = "sitemap/job_profile";
+// $route['sitemap/recruiter-profile'] = "sitemap/recruiter_profile";
+// $route['sitemap/freelance-profile'] = "sitemap/freelance_profile";
+// $route['sitemap/business-profile'] = "sitemap/business_profile";
+// $route['sitemap/artistic-profile'] = "sitemap/artistic_profile";
 
 $route['load_more/dataaaaa'] = "load_more/dataaaaa";
 

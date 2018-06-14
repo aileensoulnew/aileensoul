@@ -149,13 +149,17 @@ if(IS_OUTSIDE_JS_MINIFY == '0'){
                                             } else {
                                                 $text = '';
                                             }
+
+                                            $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $projects['post_field_req']))->row()->category_name;
+                                            $f_url = base_url()."freelance-jobs/".$category_name."/".$text."-".$projects['user_id']."-".$projects['post_id'];
+
                                             if ($projects['city_name'] != '') {
                                                 $cityname = '-vacancy-in-' . strtolower($this->common->clean($projects['city_name']));
                                             } else {
                                                 $cityname = '';
                                             }
                                             ?>
-                                            <li><a href="<?php echo base_url('freelance-hire/project/' . $text . $cityname . '-' . $projects['user_id'] . '-' . $projects['post_id']) ?>"><?php echo $projects['post_name'] . '(' . $projects['fullname'] . ' ' . $projects['username'] . ')'; ?></a></li>
+                                            <li><a href="<?php echo $f_url; ?>"><?php echo $projects['post_name'] . '(' . $projects['fullname'] . ' ' . $projects['username'] . ')'; ?></a></li>
                                         <?php } ?>
                                     </ul>
                                 </div>

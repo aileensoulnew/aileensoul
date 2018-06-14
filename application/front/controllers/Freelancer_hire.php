@@ -1238,6 +1238,10 @@ class Freelancer_hire extends MY_Controller {
                 } else {
                     $text = '';
                 }
+
+                $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $post['post_field_req']))->row()->category_name;
+                $f_url = base_url()."freelance-jobs/".$category_name."/".$text."-".$post['user_id']."-".$post['post_id'];
+
                 $city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
                 $cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $city))->row()->city_name;
 
@@ -1253,7 +1257,7 @@ class Freelancer_hire extends MY_Controller {
 
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a title="' . $post['post_name'] . '" href="' . base_url('freelance-hire/project/' . $text . $cityname1 . '-' . $post['user_id'] . '-' . $post['post_id']) . ' ">';
+                $return_html .= '<h5><a title="' . $post['post_name'] . '" href="' .$f_url. ' ">';
                 $return_html .= $post['post_name'];
                 $return_html .= '</a></h5>';
                 $return_html .= '<p><a title="' . ucwords($firstname) . " " . ucwords($lastname) . '" href="' . base_url('freelance-employer/' . $hireslug) . '">';
@@ -1329,7 +1333,7 @@ class Freelancer_hire extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a title="Read more" href="' . base_url('freelance-hire/project/' . $text . $cityname1 . '-' . $post['user_id'] . '-' . $post['post_id']) . ' ">Read more</a>';
+                    $return_html .= '.....<a title="Read more" href="' . $f_url . ' ">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -2270,7 +2274,12 @@ class Freelancer_hire extends MY_Controller {
         $postname = $text . $cityname1;
         $segment3 = array_splice($segment3, 0, -2);
         $original = implode('-', $segment3);
-        $url = $postname . '-' . $userid . '-' . $postid;
+
+        $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => 
+            $this->data['postdata'][0]['post_field_req']))->row()->category_name;
+        $url = base_url()."freelance-jobs/".$category_name."/".$text."-".$userid."-".$postid;
+
+        //$url = $postname . '-' . $userid . '-' . $postid;
 
 
 
@@ -2309,7 +2318,7 @@ class Freelancer_hire extends MY_Controller {
                 $this->load->view('freelancer/freelancer_post/hire_project_live', $this->data);
             } else {
                 if ($this->data['postdata']) {
-                    redirect('freelance-hire/project/' . $url, refresh);
+                    redirect($url, refresh);
                 } else {
                     $this->data['title'] = 'Content Not Avaible - Aileensoul';
                     $this->load->view('freelancer/freelancer_post/hire_project_live', $this->data);
