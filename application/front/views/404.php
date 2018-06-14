@@ -130,8 +130,6 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
         </script>
-        <footer>
-            <?php echo $footer; ?>
-        </footer>
+       
     </body>
 </html>
