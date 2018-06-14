@@ -68,7 +68,7 @@ class Business_live extends MY_Controller {
         $this->load->view('business_live/category', $this->data);
     }
 
-    public function categoryBusinessList($category = '', $location = '') {
+    public function categoryBusinessList($category = '', $location = '',$sertype = "") {
         $userid = $this->session->userdata('aileenuser');
         $businessresult = $this->checkbusinessdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -80,7 +80,7 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Category - Business Profile | Aileensoul";
+        
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row('industry_id');
         $this->data['category_id'] = "";
@@ -93,6 +93,19 @@ class Business_live extends MY_Controller {
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->data['q'] = $category;
         $this->data['l'] = $location;
+        $tmCat = ucwords(str_replace("-"," ",$category));
+        $tmLoc = ucwords(str_replace("-"," ",$location));
+
+        if($sertype == 1)
+        {
+            $this->data['title'] = $tmCat." Business in ".$tmLoc."| Aileensoul";
+            $this->data['metadesc'] = $tmCat." Business: Find and get the contact and location details of various ".$tmCat." Business at ".$tmLoc." on Aileensoul. Visit to know more.";
+        }
+        else if($sertype == 2)
+        {
+            $this->data['title'] = $tmCat." Business | Aileensoul";
+            $this->data['metadesc'] = "Looking for ".$tmCat."? Find and get the contact details of various ".$tmCat." Business at your near by location on Aileensoul. Visit to know more.";
+        }
         $this->load->view('business_live/categoryBusinessList', $this->data);
     }
 
