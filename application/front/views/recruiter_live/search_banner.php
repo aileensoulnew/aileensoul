@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="first_name" tabindex="1" autofocus type="text" id="first_name"  placeholder="First Name" value="<?php
+                                        <input name="first_name" tabindex="1" autofocus type="text" id="first_name"  placeholder="First Name*" value="<?php
                                             if ($firstname) {
                                                 echo trim(ucfirst(strtolower($firstname)));
                                             } else {
@@ -25,7 +25,7 @@
                                            <?php echo form_error('first_name'); ?>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
-                                        <input name="last_name" type="text" tabindex="2" id="last_name" placeholder="Last Name"
+                                        <input name="last_name" type="text" tabindex="2" id="last_name" placeholder="Last Name*"
                                            value="<?php
                                            if ($lastname) {
                                                echo trim(ucfirst(strtolower($lastname)));
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input name="email"  type="text" id="email" tabindex="3" placeholder="Email Address"  value="<?php
+                                        <input name="email"  type="text" id="email" tabindex="3" placeholder="Email Address*"  value="<?php
                                             if ($email) {
                                                 echo $email;
                                             } else {

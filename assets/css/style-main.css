@@ -2745,7 +2745,7 @@ header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
 header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
-
+.header-login .form-control:focus{border-color:#fff;}
 
 
 @media screen and (min-height:540px){

@@ -19,9 +19,9 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <?php if($this->session->userdata('aileenuser')){ ?>
-        <body class="page-container-bg-solid page-boxed ">
+        <body class="page-container-bg-solid page-boxed error-page">
     <?php }else{ ?>
-        <body class="page-container-bg-solid page-boxed old-no-login">
+        <body class="page-container-bg-solid page-boxed old-no-login error-page">
     <?php } ?>    
         <?php //echo $header; ?>        
         <div class="middle-section middle-section-banner new-ld-page">
@@ -35,8 +35,8 @@
                             <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
                                 <div class="btn-right">
                                     <?php if (!$this->session->userdata('aileenuser')) { ?>
-                                        <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
-                                        <a href="<?php echo base_url('registration'); ?>" class="btn2">Create an account</a>
+                                        <a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
+                                        <a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -118,7 +118,10 @@
                 
             </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?ver=<?php echo time(); ?>"></script>
+        
+		<?php echo $login_footer; ?>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?ver=<?php echo time(); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>        
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()); ?>"></script>

@@ -637,6 +637,7 @@ box-shadow: 2px 2px 17px 0.8px rgba(217,217,217,1);}
 
 .custom-box .custom-width .right-box h1{position:relative; padding-top:25px; line-height:50px;}
 .custom-box .custom-width .right-box h1 a{font-size:65px; position:relative; font-family: 'arial';}
+.custom-box .custom-width .right-box h1 a:focus{text-decoration:none;}
 .custom-box .custom-width .right-box h1 a:after{width:140px; height:1px; background:#1b8ab9; position:absolute; left:0;bottom:0; content:"";}
 .custom-box.even .custom-width .right-box h1 a:after{right:0; left:inherit;}
 .custom-box .custom-width .right-box p{font-size:20px; padding-top:20px; font-family:'arial';}
@@ -2304,7 +2305,8 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 
 /***  404 page  ***/
 .error-page{background:#fff; letter-spacing:1px;}
-.error-page header{background:#fff; }
+.error-page header{background:#fff; min-height:54px;}
+.error-page .search-banner header{border-bottom:1px solid #e6ecf0;}
 .error-page header h2.logo a{color:#5c5c5c;}
 .error-top-box{padding:30px 0;}
 .error-top-box h1{text-align:center; font-size:32px; padding-bottom:30px;}
@@ -2410,7 +2412,7 @@ input[type=text] {
 .detail-job-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;}
 .detail-job-no-login .btn-right .btn2{padding:8px 25px; background:none; color:#fff;}
 .detail-job-no-login .btn-right .btn2:hover{background:#fff; color:#1b8ab9;}
-.old-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1.2;}
+.old-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;}
 .old-no-login .btn-right .btn2{padding:8px 25px; background:none; color:#fff; border:1px solid #fff;}
 .old-no-login .btn-right .btn2:hover{background:#fff; color:#1b8ab9;}
 .job-detail .job-top-detail{/*padding-left:36px;*/}
@@ -2484,6 +2486,9 @@ border: 1px solid #fff; line-height: 1;}
 .work_type_custom label.error { right: 8px; top: 37px;}
 .add-post-button .back .but1:hover{color:#1b8ab9;}
 .modal-body{width:100%; float:left;}
+.no-login .right-header{padding-top:0;}
+.blog-page header{min-height:54px;}
+
 
 
 /***  media query  ***/
