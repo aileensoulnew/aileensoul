@@ -57,13 +57,15 @@ class Main extends CI_Controller {
     }
 
     public function terms_condition() {
-        $this->data['title'] = 'Terms and Condition - Aileensoul';
+        $this->data['title'] = "Aileensoul Terms and Condition";
+        $this->data['metadesc'] = "All about Aileensoul Terms and Condition that you are binded with while using the website.";
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data,TRUE);
         $this->load->view('termcondition', $this->data);
     }
 
     public function privacy_policy() {
-        $this->data['title'] = 'Privacy Policy - Aileensoul';
+        $this->data['title'] = "Aileensoul Privacy Policy";
+        $this->data['metadesc'] = "All about Aileensoul privacy policy that is built to maintains user trust.";
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data,TRUE);
         $this->load->view('privacypolicy', $this->data);
     }

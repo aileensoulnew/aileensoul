@@ -17,6 +17,8 @@ class About_us extends CI_Controller {
     public function index() {
         $this->data['login_header'] = $this->load->view('login_header', $this->data,TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data,TRUE);
+        $this->data['title'] = "About Aileensoul Vision, Mission and Team";
+        $this->data['metadesc'] = "Know all about the innovative platform and it' vision, mission and the creative team behind it. Join Now, to becomes its part.";
         $this->load->view('about_us/index', $this->data);
     }
 

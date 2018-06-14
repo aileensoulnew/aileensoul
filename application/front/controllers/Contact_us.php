@@ -18,7 +18,8 @@ class Contact_us extends CI_Controller {
 
     public function index() {
         
-        $this->data['title'] = 'Contact Us - Aileensoul';
+        $this->data['title'] = "Reach Us | Aileensoul";
+        $this->data['metadesc'] = "Send us any queries that you are having. We are happy to help your users at any time.";
         $contition_array = array('site_id' => '1');
         $this->data['cnt'] = $this->common->select_data_by_condition('site_settings', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 

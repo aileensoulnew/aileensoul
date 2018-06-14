@@ -63,7 +63,10 @@ class Blog extends CI_Controller {
             $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
             //random blog
             
-            // random blog end 
+            // random blog end
+            $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
+            $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
+
             $this->load->view('blog/blogdetail', $this->data);
             }else{
                 redirect('blog', refresh);
@@ -117,6 +120,9 @@ class Blog extends CI_Controller {
 
             $condition_array = array('status' => 'publish');
             $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+
+            $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
+            $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
 
             // echo $this->db->last_query();
             // print_r($this->data['blog_last']);

@@ -19,8 +19,8 @@ header('Cache-Control: public, max-age=30');
 ?>
 <html lang="en">
     <head>
-        <title>Feedback - Aileensoul</title>
-        <meta name="description" content="Feel free to share your views and thoughts about Aileensoul.com services." />
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />

@@ -16,7 +16,9 @@ header("Pragma: no-cache"); // HTTP/1.0
 ?>
 <html lang="en" ng-app="blogDetailApp" ng-controller="blogDetailController">
     <head>
-        <title><?php echo $blog_detail[0]['title']; ?> - Aileensoul</title>
+        <!-- <title><?php //echo $blog_detail[0]['title']; ?> - Aileensoul</title> -->
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->

@@ -19,7 +19,7 @@ header('Expires: ' . $date);
 <html lang="en">
     <head>
         <title><?php echo $title; ?></title>
-        <meta name="description" content="Contact us for any concern and query regarding Aileensoul.com platform." />
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
