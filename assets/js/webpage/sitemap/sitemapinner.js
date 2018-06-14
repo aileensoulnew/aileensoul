@@ -1,4 +1,4 @@
-app.controller('siteMapInnerController', function ($scope, $http) {   
+app.controller('siteMapInnerController', function ($scope, $http) {       
 });
 
 app.config(function ($routeProvider, $locationProvider) {
@@ -47,6 +47,8 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('siteMapMainController', function ($scope, $http,$location) {
+    $scope.$parent.title = title;
+    $scope.$parent.metadesc = metadesc;
     $scope.alphabetList = {};
     $scope.isPaginationShow = false;
     function alphabetList(page){
@@ -65,7 +67,7 @@ app.controller('siteMapMainController', function ($scope, $http,$location) {
 
 app.controller('siteMapArtistController', function ($scope, $http,$location) {
     $scope.total_record = 0;
-    $scope.$parent.title = "Artist Sitemap | Aileensoul";
+    
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.artistList = [],
@@ -80,6 +82,10 @@ app.controller('siteMapArtistController', function ($scope, $http,$location) {
     // PAGE NO AND SEARCHWORD BASED ON URL
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
+
+    $scope.$parent.title = "Artist Profile Starting from "+$scope.searchkeyword.toUpperCase()+" | Aileensoul";
+    $scope.$parent.metadesc = "Browse and connect with Artist starting with letter "+$scope.searchkeyword.toUpperCase();
+
     //ARTIST LISTING
     $scope.artistListNew = function(page){
         $scope.artistList = {};
@@ -138,7 +144,7 @@ app.controller('siteMapArtistController', function ($scope, $http,$location) {
 
 app.controller('siteMapCompaniesController', function ($scope, $http,$location) {
     $scope.total_record = 0;
-    $scope.$parent.title = "Companies Sitemap | Aileensoul";
+    
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.companyList = [],
@@ -153,6 +159,8 @@ app.controller('siteMapCompaniesController', function ($scope, $http,$location) 
     // PAGE NO AND SEARCHWORD BASED ON URL
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
+    $scope.$parent.title = "Business Listings Starting from "+$scope.searchkeyword.toUpperCase()+" | Aileensoul";
+    $scope.$parent.metadesc = "Browse all business whose name start with "+$scope.searchkeyword.toUpperCase();
     //ARTIST LISTING
     $scope.companyListNew = function (page){
         $scope.companyList = {};
@@ -208,7 +216,7 @@ app.controller('siteMapCompaniesController', function ($scope, $http,$location) 
 
 app.controller('siteMapJobController', function ($scope, $http,$location) {
     $scope.total_record = 0;
-    $scope.$parent.title = "Job Sitemap | Aileensoul";
+    
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.companyList = [],
@@ -223,6 +231,10 @@ app.controller('siteMapJobController', function ($scope, $http,$location) {
     // PAGE NO AND SEARCHWORD BASED ON URL
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
+
+    $scope.$parent.title = "Job Listing Starting from "+$scope.searchkeyword.toUpperCase()+" | Aileensoul";
+    $scope.$parent.metadesc = "Browse all the job listing starting with "+$scope.searchkeyword.toUpperCase();
+
     //ARTIST LISTING
     $scope.jobListNew = function(page){
         $scope.jobList = {};
@@ -280,7 +292,7 @@ app.controller('siteMapJobController', function ($scope, $http,$location) {
 
 app.controller('siteMapFreelancerController', function ($scope, $http,$location) {
     $scope.total_record = 0;
-    $scope.$parent.title = "Freelancer Sitemap | Aileensoul";
+    
     $scope.alphabetList = {};
     $scope.categoryList = {};
     $scope.freelancerList = [],
@@ -295,6 +307,8 @@ app.controller('siteMapFreelancerController', function ($scope, $http,$location)
     // PAGE NO AND SEARCHWORD BASED ON URL
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
+    $scope.$parent.title = "Freelance Jobs Listing Starting from "+$scope.searchkeyword.toUpperCase()+" | Aileensoul";
+    $scope.$parent.metadesc = "Browse all online jobs listing starting with "+$scope.searchkeyword.toUpperCase();
     //ARTIST LISTING
     $scope.freelancerListNew = function(page){
         $scope.freelancerList = {};
@@ -335,8 +349,7 @@ app.controller('siteMapFreelancerController', function ($scope, $http,$location)
 });
 
 app.controller('siteMapMemberController', function ($scope, $http,$location) {
-    $scope.total_record = 0;
-    $scope.$parent.title = "Member Sitemap | Aileensoul";
+    $scope.total_record = 0;    
     $scope.alphabetList = {};
     $scope.memberList = [],
     $scope.limit = 100;
@@ -352,6 +365,9 @@ app.controller('siteMapMemberController', function ($scope, $http,$location) {
     // PAGE NO AND SEARCHWORD BASED ON URL
     var searchkeyword = $location.path().split("/");
     $scope.searchkeyword = searchkeyword[searchkeyword.length-1];
+
+    $scope.$parent.title = "Members Profile Starting from "+$scope.searchkeyword.toUpperCase()+" | Aileensoul";
+    $scope.$parent.metadesc = "Browse and connect with Aileensoul members profile starting with letter "+$scope.searchkeyword.toUpperCase();
     //ARTIST LISTING
     $scope.memberListNew = function(page){
         $scope.memberList = {};

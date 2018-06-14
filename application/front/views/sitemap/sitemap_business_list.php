@@ -31,3 +31,7 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+	var title = "<?php echo $title ?>";
+	var metadesc = "<?php echo $metadesc ?>";
+</script>

@@ -186,6 +186,8 @@ class Sitemap extends CI_Controller {
     }
 
     public function sitemap_art_list() {
+        $this->data['title'] = "Artist Sitemap | Aileensoul";
+        $this->data['metadesc'] = "Find and connect to a talented artist from all over the world.";
         $this->load->view('sitemap/sitemap_art_list', $this->data);
     }
 
@@ -222,6 +224,8 @@ class Sitemap extends CI_Controller {
     }
 
     public function sitemap_company_list() {
+        $this->data['title'] = "Business Sitemap | Aileensoul";
+        $this->data['metadesc'] = "Search, connect and contact any field business from all over the world.";
         $this->load->view('sitemap/sitemap_business_list', $this->data);
     }
 
@@ -247,6 +251,8 @@ class Sitemap extends CI_Controller {
     }
 
     public function sitemap_job_list() {
+        $this->data['title'] = "Jobs Sitemap | Aileensoul";
+        $this->data['metadesc'] = "Find and apply on various field job registered and verified on Aileensoul.";
         $this->load->view('sitemap/sitemap_job_list', $this->data);
     }
 
@@ -272,6 +278,8 @@ class Sitemap extends CI_Controller {
     }
 
     public function sitemap_freelancer_list() {
+        $this->data['title'] = "Freelance Jobs Sitemap | Aileensoul";
+        $this->data['metadesc'] = "Find and apply on various work from job registered and verified on Aileensoul.";
         $this->load->view('sitemap/sitemap_freelance_list', $this->data);
     }
 
@@ -297,6 +305,8 @@ class Sitemap extends CI_Controller {
     }
 
     public function sitemap_member_list() {
+        $this->data['title'] = "Member Sitemap | Aileensoul";
+        $this->data['metadesc'] = "Find and connect with Aileensoul members.";
         $this->load->view('sitemap/sitemap_member_list', $this->data);
     }
 

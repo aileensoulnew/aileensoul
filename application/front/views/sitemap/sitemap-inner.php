@@ -17,6 +17,7 @@ header('Cache-Control: public, max-age=30');
 	<head>
 		<base href="<?php echo base_url();?>">
 		<title ng-bind="title"></title>
+		<meta name="description" content="{{metadesc}}" />
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
@@ -115,6 +116,8 @@ header('Cache-Control: public, max-age=30');
 			var searchword = "<?php echo $searchword; ?>";
 			var base_url = "<?php echo base_url(); ?>";
 			var app = angular.module('siteMapInnerApp', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
+			var title = "<?php echo $title ?>";
+			var metadesc = "<?php echo $metadesc ?>";
 		</script>
 		<script src="<?php echo base_url('assets/js/webpage/sitemap/sitemapinner.js?ver=' . time()); ?>"></script>
 	</body>
