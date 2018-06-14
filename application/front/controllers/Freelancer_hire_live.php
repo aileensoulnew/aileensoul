@@ -1892,6 +1892,9 @@ public function image_hire() {
 //FREELANCER_HIRE COVER PIC END
 //FREELANCER_HIRE ADD POST(PROJECT) START
 public function freelancer_add_post() {
+	$this->data['title'] = "Post Freelance Project and Hire Freelancers";
+	$this->data['metadesc'] = "Post your project requirement and get expert freelancer recommendation from us based on your listing.";
+
 	if ($this->session->userdata('aileenuser')) {
 		$userid = $this->session->userdata('aileenuser');
 			//check user deactivate start
@@ -1919,7 +1922,6 @@ public function freelancer_add_post() {
 		$data = 'username,fullname';
 		$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
-		$this->data['title'] = 'Post Project | Employer Profile - Aileensoul';
 		$this->load->view('freelancer_live/freelancer_hire/freelancer_add_post', $this->data);
 	} else {
 
@@ -1937,8 +1939,7 @@ public function freelancer_add_post() {
 			//for getting univesity data End
 		$contition_array = array('status' => '1');
 		$this->data['currency'] = $this->common->select_data_by_condition('currency', $contition_array, $data = '*', $sortby = 'currency_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
-		$this->data['title'] = 'Post Project | Employer Profile - Aileensoul';
+		
 		$this->load->view('freelancer/freelancer_hire/freelancer_add_post_live', $this->data);
 	}
 }

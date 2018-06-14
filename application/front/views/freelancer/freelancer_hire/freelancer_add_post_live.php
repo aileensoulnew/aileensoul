@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php echo $head; ?>
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
+        <?php echo $head; ?>
 
         <?php if (IS_HIRE_CSS_MINIFY == '0') { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()); ?>">
