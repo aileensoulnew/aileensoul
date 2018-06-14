@@ -2488,6 +2488,7 @@ border: 1px solid #fff; line-height: 1;}
 .modal-body{width:100%; float:left;}
 .no-login .right-header{padding-top:0;}
 .blog-page header{min-height:54px;}
+.reg-form-box .reg-form .form-group input:focus, .reg-form-box .reg-form .form-group select:focus, .reg-form-box .reg-form .form-group textarea:focus {border-color:#1b8ab9;}
 
 
 

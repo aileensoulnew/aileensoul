@@ -28,18 +28,18 @@
                                     <div class="col-md-12 email-cus">
                                         <input type="email" name="email_reg1" id="email_reg1" tabindex="3" placeholder="Company Email*" value="<?php echo $userdata['email']; ?>" maxlength="255">
                                         <?php echo form_error('email_reg1'); ?>
-                                        <span class="email-tooltip">
+                                        <!--span class="email-tooltip">
                                             <a href="#">
                                                 <img src="<?php echo base_url('assets/n-images/tooltip.png') ?>">
                                             </a>
-                                        </span>
+                                        </span-->
                                     </div>                                  
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Company Number(optional)">
+                                        <input type="text" placeholder="Company Number(optional)" tabindex="4">
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <textarea placeholder="Professional Information(optional)"></textarea>
+                                        <textarea placeholder="Professional Information(optional)" tabindex="8"></textarea>
                                     </div>
                                 </div>
                             </div>

@@ -920,6 +920,7 @@ footer ul li{
 footer ul li a{
 	color:#7b7b7b;
 	padding:5px;
+	letter-spacing:0;
 }
 footer ul li:last-child a{padding-right:0;}
 footer ul li a:hover{
