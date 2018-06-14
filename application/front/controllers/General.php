@@ -143,7 +143,9 @@ class General extends MY_Controller {
     // DEGREE DATA END
 
     // LOAD FAQ VIEW
-    public function faq() { 
+    public function faq() {
+        $this->data['title'] = "FAQ | Aileensoul";
+        $this->data['metadesc'] = "Frequently asked questions and answer about Aileensoul.";
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->load->view('faq', $this->data);

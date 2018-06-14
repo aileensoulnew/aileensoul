@@ -150,7 +150,8 @@ class Sitemap extends CI_Controller {
 
     //NEW SITEMAP VIEW
     public function sitemap() {
-        $this->data['title'] = 'Sitemap - Aileensoul';
+        $this->data['title'] = "Sitemap | Aileensoul";
+        $this->data['metadesc'] = "Aileensoul HTML sitemap for finding any jobs, freelance projects, business, artist and other important pages. ";
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->load->view('sitemap/sitemap', $this->data);
