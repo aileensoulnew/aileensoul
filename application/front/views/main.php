@@ -27,31 +27,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         <meta property="og:title" content="Find best career opportunities in Business, Job Search, Freelancing, and Art | Aileensoul" />
         <meta property="og:description" content="If you are either looking for jobs, freelance work, recruitment, business network or want to show your artistic side, look no further. Ailensoul has built a collabrative platfrom for each industry. Join now! It's Free."/>
         <meta property="og:image" content="<?php echo base_url('assets/images/meta-icon.png'); ?>" />
-        <?php
-        if (base_url() == "https://www.aileensoul.com/") {
-            ?>
-
-            <script>
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r;
-                    i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-                    a = s.createElement(o),
-                            m = s.getElementsByTagName(o)[0];
-                    a.async = 1;
-                    a.src = g;
-                    m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-                ga('create', 'UA-91486853-1', 'auto');
-                ga('send', 'pageview');
-
-            </script>
-            <meta name="msvalidate.01" content="41CAD663DA32C530223EE3B5338EC79E" />
-            <?php
-        }
-        ?>
+       
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
         <meta name="p:domain_verify" content="d0a13cf7576745459dc0ca6027df5513"/>
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
