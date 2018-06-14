@@ -19,29 +19,31 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <?php if($this->session->userdata('aileenuser')){ ?>
-        <body class="page-container-bg-solid page-boxed">
+        <body class="page-container-bg-solid page-boxed ">
     <?php }else{ ?>
         <body class="page-container-bg-solid page-boxed old-no-login">
-    <?php } ?>
-        <?php //echo $header; ?>
-        <header class="custom-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
-                        <?php $this->load->view('main_logo'); ?>
-                    </div>
-                    <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
-                        <div class="btn-right">
-                            <?php if (!$this->session->userdata('aileenuser')) { ?>
-                                <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
-                                <a href="<?php echo base_url('registration'); ?>" class="btn2">Create an account</a>
-                            <?php } ?>
+    <?php } ?>    
+        <?php //echo $header; ?>        
+        <div class="middle-section middle-section-banner new-ld-page">
+            <div class="search-banner">
+                <header class="custom-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
+                                <?php $this->load->view('main_logo'); ?>
+                            </div>
+                            <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
+                                <div class="btn-right">
+                                    <?php if (!$this->session->userdata('aileenuser')) { ?>
+                                        <a href="<?php echo base_url('login'); ?>" class="btn4">Login</a>
+                                        <a href="<?php echo base_url('registration'); ?>" class="btn2">Create an account</a>
+                                    <?php } ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </header>
             </div>
-        </header>
-        <div class="middle-section middle-section-banner">
             <div class="container">
                 <div class="error-top-box">
                     <h1>
