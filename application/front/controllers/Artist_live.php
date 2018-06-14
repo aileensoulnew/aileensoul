@@ -79,7 +79,7 @@ class Artist_live extends MY_Controller {
         $this->load->view('artist_live/view_more_artist', $this->data);
     }
 
-    public function categoryArtistList($category = '', $location = '') {
+    public function categoryArtistList($category = '', $location = '',$sertype = "") {
         $userid = $this->session->userdata('aileenuser');
         // $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -89,8 +89,7 @@ class Artist_live extends MY_Controller {
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Artist Category | Aileensoul";
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);        
         
         $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
         $this->data['category_id'] = $category_id['category_id'];
@@ -107,6 +106,19 @@ class Artist_live extends MY_Controller {
         }
         $this->data['q'] = $category;
         $this->data['l'] = $location;
+        $tmCat = ucwords(str_replace("-"," ",$category));
+        $tmLoc = ucwords(str_replace("-"," ",$location));
+
+        if($sertype == 1)
+        {
+            $this->data['title'] = "Find and Connect with ".$tmCat." in ".$tmLoc;
+            $this->data['metadesc'] = "Looking for great skilful ".$tmCat." in ".$tmLoc."? Connect with them on Aileensoul. Search and explore their portfolio and work details. Join Now to create something artistic!";
+        }
+        else if($sertype == 2)
+        {
+            $this->data['title'] = "Search ".$tmCat." and their work details |Aileensoul";
+            $this->data['metadesc'] = "Looking for great skilful ".$tmCat."? Connect with them on Aileensoul. Search and explore their portfolio and work details. ";
+        }
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/categoryArtistList', $this->data);
     }
