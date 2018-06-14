@@ -667,10 +667,11 @@ $route['freelancer/(:any)'] = "freelancer/freelancer_post_profile/$1";
 //$route['(:any)-jobs'] = "job/job_search";//old
 $route['freelance-employer/(:any)'] = "freelancer_hire_live/freelancer_hire_profile/$1";
 
-$route['(:any)-jobs'] = "job/job_search_new/$1";//Pratik Job By Job Title,Job by Category,Job by Skills
-$route['jobs-opening-at-(:any)'] = "job/job_search_new/$1";
-$route['jobs-in-(:any)'] = "job/job_search_new/$1";
-$route['(:any)-jobs-in-(:any)'] = "job/job_search_new/$1/$2";
+$route['(:any)-jobs'] = "job/job_search_new/$1//1";//Pratik Job By Job Title,Job by Category,Job by Skills
+$route['jobs-opening-at-(:any)'] = "job/job_search_new/$1//2";
+$route['jobs-in-(:any)'] = "job/job_search_new/$1//3";
+$route['(:any)-jobs-in-(:any)'] = "job/job_search_new/$1/$2/4";
+
 $route['jobs-by-location'] = "job_live/view_more_jobs";
 $route['jobs-by-skills'] = "job_live/view_more_jobs";
 $route['jobs-by-designations'] = "job_live/view_more_jobs";

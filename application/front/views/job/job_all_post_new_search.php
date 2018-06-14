@@ -3,7 +3,8 @@
 $userid_login = $this->session->userdata('aileenuser'); ?>
 <html lang="en" ng-app="jobSearchApp" ng-controller="jobSearchController">
     <head>
-        <title ng-bind="title"></title>
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

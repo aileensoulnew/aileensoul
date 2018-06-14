@@ -19,9 +19,10 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <?php //echo $head; ?>
         <!-- END HEAD -->
 		<!-- <meta name="robots" content="noindex, nofollow"> -->
+        <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title><?php echo $title; ?></title>
         <?php
         if (IS_JOB_CSS_MINIFY == '0') {
             ?>

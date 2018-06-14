@@ -20,6 +20,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <!-- END HEAD -->
 
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php

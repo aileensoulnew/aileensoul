@@ -5850,19 +5850,40 @@ class Job extends MY_Controller {
         $this->load->view('job/job_new_page', $this->data);
     }
 
-    public function job_search_new($search = "",$ser_location = "")
+    public function job_search_new($search = "",$ser_location = "",$serach_type = "")
     {
+        // echo $serach_type;exit;
      //   echo $search;exit;
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
 
         // search keyword insert into database start
 
         $this->data['keyword'] = $search;
-        $this->data['search_location'] = $ser_location;
+        $this->data['search_location'] = trim($ser_location);
 
-        $title = $search;        
+        // $title = $search;
+        if($serach_type == 1)
+        {
+            $this->data['title'] = "";
+            $this->data['metadesc'] = "";
+        }
+        else if($serach_type == 2)
+        {
+            $this->data['title'] = "";
+            $this->data['metadesc'] = "";
+        }
+        else if($serach_type == 3)
+        {
+            $this->data['title'] = "Jobs in ".ucwords($search).": Apply on Latest ".date("Y")." Job Openings  ";
+            $this->data['metadesc'] = "Either you are a fresher or experienced, we have jobs for everyone. Search and Apply on the latest jobs vacancies in ".ucwords($search)." from various industry. ";
+        }
+        else if($serach_type == 4)
+        {
+            $this->data['title'] = "";
+            $this->data['metadesc'] = "";
+        }
 
-        $this->data['title'] = $title . " - Job Profile - Aileensoul";
+        // $this->data['title'] = $title . " - Job Profile - Aileensoul";
         $this->data['head'] = $this->load->view('head', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
