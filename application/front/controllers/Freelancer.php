@@ -24,7 +24,8 @@ class Freelancer extends MY_Controller {
     public function index() {
         $userid = $this->session->userdata('aileenuser');
        
-        $this->data['title'] = "Freelance | Aileensoul";
+        $this->data['title'] = "Hire Freelancers and Find Online Freelance Jobs| Aileensoul";
+        $this->data['metadesc'] = "Choose if you want to hire freelancer or become a freelancer. And register yourself. Join now! It's Free.";
         $this->data['freelance_hire_link'] = $this->freelance_hire_profile_link ;
         $this->data['freelance_apply_profile_link'] = $this->freelance_hire_profile_link ;
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);

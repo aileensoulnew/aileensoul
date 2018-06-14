@@ -67,7 +67,8 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('jobByLocationController', function ($scope, $http, $location, $window) {
-    $scope.$parent.title = "Job By Location, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Search Full Time Jobs by Location - Find Available Local Jobs in Your City";
+    $scope.$parent.metadesc = "Explore numerous Jobs near by your location on Aileensoul. Choose your preferable city and find the latest jobs. Get your dream job now!";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -131,7 +132,8 @@ app.controller('jobByLocationController', function ($scope, $http, $location, $w
 });
 
 app.controller('jobsBySkillsController', function ($scope, $http, $location, $window) {
-    $scope.$parent.title = "Job By Skills, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Search Full Time Jobs by Skills - Browse IT/Non-IT Jobs";
+    $scope.$parent.metadesc = "Explore numerous Jobs by your skills on Aileensoul. Choose preferable IT and Non-IT skills and find the latest jobs. Register and Get your dream job now!"; 
     $scope.jobByLocation = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -259,7 +261,8 @@ app.controller('jobsByDescController', function ($scope, $http, $location, $wind
 });
 
 app.controller('jobsByCompanyController', function ($scope, $http, $location, $window) {
-    $scope.$parent.title = "Job By Companies, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Search Full Time Jobs by Companies | Top Companies Hiring at Aileensoul";
+    $scope.$parent.metadesc = "Explore numerous Jobs by company on Aileensoul. Choose your preferable company and find the latest jobs openings. Join Aileensoul and Get your dream job now!"; 
     $scope.jobByCompany = {};
     $scope.jobs = {};
     var isProcessing = false;
@@ -323,7 +326,8 @@ app.controller('jobsByCompanyController', function ($scope, $http, $location, $w
 });
 
 app.controller('jobsBycategoryController', function ($scope, $http, $location, $window) {
-    $scope.$parent.title = "Job By Category, Job Profile | Aileensoul";    
+    $scope.$parent.title = "Search Full Time Jobs by Categories - Browse HR, IT, Banking, Marketing Jobs";
+    $scope.$parent.metadesc = "Explore numerous Jobs by categories like HR, Digital Marketing, Web Designing, Graphic Designing, Banking, and many more on Aileensoul. Join Aileensoul and Grab the opportunity now!"; 
     $scope.jobByCategory = {};
     $scope.jobs = {};
     var isProcessing = false;

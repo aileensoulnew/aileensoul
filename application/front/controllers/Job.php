@@ -5861,7 +5861,8 @@ class Job extends MY_Controller {
         $this->data['keyword'] = $search;
         $this->data['search_location'] = trim($ser_location);
 
-        // $title = $search;
+        $keyser = ucwords(str_replace('-',' ', $search));
+        $keylog = ucwords(str_replace('-',' ', $ser_location));
         if($serach_type == 1)
         {
             $this->data['title'] = "";
@@ -5874,13 +5875,13 @@ class Job extends MY_Controller {
         }
         else if($serach_type == 3)
         {
-            $this->data['title'] = "Jobs in ".ucwords($search).": Apply on Latest ".date("Y")." Job Openings  ";
-            $this->data['metadesc'] = "Either you are a fresher or experienced, we have jobs for everyone. Search and Apply on the latest jobs vacancies in ".ucwords($search)." from various industry. ";
+            $this->data['title'] = "Jobs in ".ucwords($keyser).": Apply on Latest ".date("Y")." Job Openings  ";
+            $this->data['metadesc'] = "Either you are a fresher or experienced, we have jobs for everyone. Search and Apply on the latest jobs vacancies in ".ucwords($keyser)." from various industry. ";
         }
         else if($serach_type == 4)
         {
-            $this->data['title'] = "";
-            $this->data['metadesc'] = "";
+            $this->data['title'] = ucwords($keyser)." Jobs Openings in ".$keylog." | Aileensoul";
+            $this->data['metadesc'] = ucwords($keyser)." Vacancy in ".$keylog.": Explore the latest ".ucwords($keyser)." jobs on Aileensoul. Apply and get the job in ".$keylog." location. ";
         }
 
         // $this->data['title'] = $title . " - Job Profile - Aileensoul";
