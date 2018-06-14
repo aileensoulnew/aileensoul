@@ -94,7 +94,7 @@
 							</label>
 							<label class="control control--radio">
 								No
-								<input name="radio" type="radio" value="0" checked>
+								<input name="radio" type="radio" value="0">
 								<div class="control__indicator"></div>
 							</label>
 						</div>
