@@ -262,12 +262,12 @@ $route['freelancer/ajax_recommen_candidate'] = "freelancer/ajax_recommen_candida
 
 
 
- $route['projects'] = "search/freelancer_post_search";
- $route['projects/(:any)'] = "search/freelancer_post_search/$1";
+ // $route['projects'] = "search/freelancer_post_search";
+ // $route['projects/(:any)'] = "search/freelancer_post_search/$1";
 
-$route['(:any)-project'] = "search/freelancer_post_search";
-$route['project-in-(:any)'] = "search/freelancer_post_search";
-$route['(:any)-project-in-(:any)'] = "search/freelancer_post_search";
+// $route['(:any)-project'] = "search/freelancer_post_search";
+// $route['project-in-(:any)'] = "search/freelancer_post_search";
+// $route['(:any)-project-in-(:any)'] = "search/freelancer_post_search";
 
 // $route['freelance-work'] = "freelancer/freelancer_post";
 //$route['freelance-work/home/'] = "freelancer/freelancer_apply_post";
