@@ -118,9 +118,9 @@
                 
             </div>
         </div>
-        
+        <div class="pt20">
 		<?php echo $login_footer; ?>
-		
+		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?ver=<?php echo time(); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>        
