@@ -15,7 +15,8 @@
 	header('Cache-Control: public, max-age=30');
 ?>
 	<head>
-		<title>Blog Sitemap | Aileensoul</title>
+		<title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>

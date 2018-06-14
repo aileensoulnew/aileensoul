@@ -159,19 +159,21 @@ class Sitemap extends CI_Controller {
 
     //NEW BLOG VIEW
     public function blogs() {
-        $this->data['title'] = 'Sitemap Blogs - Aileensoul';
+        $this->data['title'] = "Blog Sitemap | Aileensoul";
+        $this->data['metadesc'] = "View all blog by categories";
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->load->view('sitemap/sitemap-blog', $this->data);
     }
 
     //NEW BLOG CATEGORY VIEW
-    public function blogs_category($category = '') {
-        $this->data['title'] = 'Sitemap Blogs - Aileensoul';
+    public function blogs_category($category = '') {        
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $category = str_replace('-', ' ', $category);
         $this->data['cate_name'] = $category;
+        $this->data['title'] = ucwords($category)." Related Blog Post | Aileensoul";
+        $this->data['metadesc'] = "Read all ".ucwords($category)." related blogs";        
         $this->data['cate_id'] = $this->get_blog_cat_id($category);
         $this->load->view('sitemap/sitemap-blog-inner', $this->data);
     }
