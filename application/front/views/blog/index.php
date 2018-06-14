@@ -437,6 +437,7 @@ header("Pragma: no-cache"); // HTTP/1.0
     <script src="<?php echo base_url('assets/js/angular-pagination.js?ver=' . time()); ?>"></script>
     <script>
         var base_url = '<?php echo base_url(); ?>';
+        var keyword = '';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var title = '<?php echo $title; ?>';
         var category_id = '<?php echo $category_id; ?>';

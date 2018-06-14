@@ -46,10 +46,10 @@ app.controller('blogController', function ($scope, $http) {
 			return;
 		}
 		isProcessing = true;
-		var keyword = (keyword != "" && keyword) ? ("&searchword=" + keyword) : ""   ;
+		var ser_keyword = (keyword != "" && keyword) ? ("&searchword=" + keyword) : ""   ;
 		$.ajax({
 			type: 'POST',
-			url: base_url + "blog/blog_ajax?page=" + pagenum + "&limit=" + $scope.limit + keyword,
+			url: base_url + "blog/blog_ajax?page=" + pagenum + "&limit=" + $scope.limit + ser_keyword,
 			data: {total_record: $("#total_record").val()},
 			dataType: "json",
 			beforeSend: function () {

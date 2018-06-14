@@ -68,66 +68,69 @@ class Blog extends CI_Controller {
             $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
 
             $this->load->view('blog/blogdetail', $this->data);
-            }else{
+            }
+            else
+            {
                 redirect('blog', refresh);
             }
-        } else {
-
+        }
+        else
+        {
             //THIS IF IS USED FOR WHILE SEARCH FOR RETRIEVE SAME PAGE START
             if ($this->input->get('q') || $this->input->get('p')) { 
-
-                if($this->input->get('q')){
-                $this->data['search_keyword'] = $search_keyword1 = trim($this->input->get('q'));
-              }else if($this->input->get('p')){
-                $this->data['search_keyword'] = $search_keyword1 = trim($this->input->get('p'));
-              }
+                if($this->input->get('q'))
+                {
+                    $this->data['search_keyword'] = $search_keyword1 = trim($this->input->get('q'));
+                }
+                else if($this->input->get('p'))
+                {
+                    $this->data['search_keyword'] = $search_keyword1 = trim($this->input->get('p'));
+                }
 
                 $search_keyword = str_replace("'", "", $search_keyword1);
                 //echo $search_keyword; die();
 
                 $search_split = explode(" ",$search_keyword);
 
-            foreach ($search_split as $key => $value) {
+                foreach ($search_split as $key => $value)
+                {
+                    $search_condition = "(title LIKE '%$value%')";
+                    $contition_array = array('status' => 'publish');
+                    $bolg_data[] = $this->common->select_data_by_search('blog', $search_condition, $contition_array, $data = '*', $sortby = 'id', $orderby = 'desc', $limit, $offset);
 
-                $search_condition = "(title LIKE '%$value%')";
-                $contition_array = array('status' => 'publish');
-                $bolg_data[] = $this->common->select_data_by_search('blog', $search_condition, $contition_array, $data = '*', $sortby = 'id', $orderby = 'desc', $limit, $offset);
+                    $search_condition = "(description LIKE '%$value%')";
+                    $contition_array = array('status' => 'publish');
+                    $bolg_data_des[] = $this->common->select_data_by_search('blog', $search_condition, $contition_array, $data = '*', $sortby = 'id', $orderby = 'desc', $limit, $offset);
+               }
 
-                $search_condition = "(description LIKE '%$value%')";
-                $contition_array = array('status' => 'publish');
-                $bolg_data_des[] = $this->common->select_data_by_search('blog', $search_condition, $contition_array, $data = '*', $sortby = 'id', $orderby = 'desc', $limit, $offset);
-
-           }
-
-                $unique = array_merge($bolg_data, $bolg_data_des);
-                $blog_unique1 = array_reduce($unique, 'array_merge', array()); 
-                $this->data['blog_detail'] = array_unique($blog_unique1, SORT_REGULAR);
+               $unique = array_merge($bolg_data, $bolg_data_des);
+               $blog_unique1 = array_reduce($unique, 'array_merge', array()); 
+               $this->data['blog_detail'] = array_unique($blog_unique1, SORT_REGULAR);
                 //echo "<pre>"; print_r(count($this->data['blog_detail'])); die();
 
 
-            $condition_array = array('status' => 'publish');
-            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+                $condition_array = array('status' => 'publish');
+                $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
 
-               $this->load->view('blog/search', $this->data);
+                $this->load->view('blog/search', $this->data);
 
                // echo "<pre>"; print_r($this->data['blog_detail']); die();
-            }
-            //THIS IF IS USED FOR WHILE SEARCH FOR RETRIEVE SAME PAGE END
-            //FOR GETTING ALL DATA START
-            else { 
+            }//THIS IF IS USED FOR WHILE SEARCH FOR RETRIEVE SAME PAGE END
+            else
+            {   //FOR GETTING ALL DATA START 
                 $condition_array = array('status' => 'publish');
                 $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
 
-            $condition_array = array('status' => 'publish');
-            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+                $condition_array = array('status' => 'publish');
+                $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
 
-            $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
-            $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
+                $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
+                $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
 
-            // echo $this->db->last_query();
-            // print_r($this->data['blog_last']);
-            // exit;
-            $this->load->view('blog/index', $this->data);
+                // echo $this->db->last_query();
+                // print_r($this->data['blog_last']);
+                // exit;
+                $this->load->view('blog/index', $this->data);
 
                 // echo "<pre>";print_r( $this->data['blog_detail']);die();
             }
@@ -265,12 +268,14 @@ class Blog extends CI_Controller {
                 $query = $this->db->query($sql);
                 $blog_detail[$key]['total_comment'] = $query->row()->total_comment;
 
+                $blog_detail[$key]['category_name'] = $category_name = $this->blog_model->get_blog_post_category_name($blog['id']);                
+
                 $blog_detail[$key]['social_title'] = urlencode('"' . $blog['title'] . '"');
                 $blog_detail[$key]['social_encodeurl'] = urlencode(base_url('blog/' . $blog['blog_slug']));
                 $blog_detail[$key]['social_summary'] = urlencode('"' . $blog['description'] . '"');
                 $blog_detail[$key]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $blog['image']));
                 $blog_detail[$key]['social_url'] = base_url('blog/' . $blog['blog_slug']);
-                $blog_detail[$key]['blog_category_name'] = explode(',', $blog['category_name']);
+                $blog_detail[$key]['blog_category_name'] = explode(',', $category_name);
             }
         }
 

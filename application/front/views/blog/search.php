@@ -252,9 +252,9 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-xs-6 hidden-mob blog-search">
                                     <div class="job-search-box1 clearfix">        
-                                        <form action="<?php echo base_url;?>blog" method="get">
+                                        <form action="<?php echo base_url();?>blog" method="get">
                                             <fieldset class="sec_h2">
-                                                <input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
+                                                <input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text" value="<?php echo $search_keyword; ?>">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                             </fieldset>
                                         </form>   
@@ -568,10 +568,11 @@ header("Pragma: no-cache"); // HTTP/1.0
                 });        
             });
         </script>
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
+        <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script>
+        <?php /*if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script>
         <?php } else { ?>
             <script src="<?php echo base_url('assets/js_min/webpage/blog/blog.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <?php }*/ ?>
     </body>
 </html>
