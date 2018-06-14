@@ -32,11 +32,11 @@
     ?>
     <!-- END HEADER -->
     <body   class="page-container-bg-solid page-boxed custom-border">
+        <?php $this->load->view('page_loader'); ?>
+        <div id="main_page_load" style="display: none;">
         <?php 
         echo $job_header2;//$job_header2_border;
         ?>
-        <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
             <section class="custom-row">
                 <div class="container" id="paddingtop_fixed">
                     <div class="row" id="row1" style="display:none;">

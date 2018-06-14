@@ -85,9 +85,9 @@
                                 <?php
                             } else {
                                 ?>
-                                     <div class="bg-images no-cover-upload">
-                                    <img src="<?php echo base_url(WHITEIMAGE); ?>" name="image_src" id="image_src" alt="<?php echo 'NOIMAGE'; ?>"/>
-                                </div>
+                                    <div class="bg-images no-cover-upload">
+                                        <img src="<?php echo base_url(WHITEIMAGE); ?>" name="image_src" id="image_src" alt="<?php echo 'NOIMAGE'; ?>"/>
+                                    </div>
                             <?php }
                             ?>
                         </div>
@@ -204,7 +204,7 @@
                         <div class="page-title">
                             <h3>Applied Job</h3>
                         </div>
-                        <div class="job-contact-frnd1">
+                        <div class="job-contact-frnd">
                         </div>
 
                          <div class="loader"><p style="text-align:center;"><img class="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="LAODERIMAGE"/></p></div>
@@ -254,8 +254,6 @@
                         <?php
                     }
                     ?>
-                </div>
-                    </div>
                 </div>
             </section>
             <!-- Model Popup Open -->
