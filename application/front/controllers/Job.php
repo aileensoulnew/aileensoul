@@ -5862,16 +5862,16 @@ class Job extends MY_Controller {
         $this->data['search_location'] = trim($ser_location);
 
         $keyser = ucwords(str_replace('-',' ', $search));
-        $keylog = ucwords(str_replace('-',' ', $ser_location));
+        $keyloc = ucwords(str_replace('-',' ', $ser_location));
         if($serach_type == 1)
         {
-            $this->data['title'] = "";
-            $this->data['metadesc'] = "";
+            $this->data['title'] = $keyser." Jobs Openings | Apply Now on ".$keyser." Jobs";
+            $this->data['metadesc'] = $keyser." Job Vacancy: Explore the latest ".$keyser." jobs on Aileensoul. Apply and get the job in your location. ";
         }
         else if($serach_type == 2)
         {
-            $this->data['title'] = "";
-            $this->data['metadesc'] = "";
+            $this->data['title'] = $keyser." Job Openings: Great Career Opportunities at ".$keyser;
+            $this->data['metadesc'] = "Explore numerous Jobs by ".$keyser." on Aileensoul. Connect and get the latest information on recent jobs openings by ".$keyser.". Join Aileensoul and Apply Now!";
         }
         else if($serach_type == 3)
         {
@@ -5880,8 +5880,8 @@ class Job extends MY_Controller {
         }
         else if($serach_type == 4)
         {
-            $this->data['title'] = ucwords($keyser)." Jobs Openings in ".$keylog." | Aileensoul";
-            $this->data['metadesc'] = ucwords($keyser)." Vacancy in ".$keylog.": Explore the latest ".ucwords($keyser)." jobs on Aileensoul. Apply and get the job in ".$keylog." location. ";
+            $this->data['title'] = ucwords($keyser)." Jobs Openings in ".$keyloc." | Aileensoul";
+            $this->data['metadesc'] = ucwords($keyser)." Vacancy in ".$keyloc.": Explore the latest ".ucwords($keyser)." jobs on Aileensoul. Apply and get the job in ".$keyloc." location. ";
         }
 
         // $this->data['title'] = $title . " - Job Profile - Aileensoul";
