@@ -74,7 +74,7 @@
                         
                         <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center">
                             <p>Freelancing is no longer an uncommon word, with a vast number of population involved. Penetration of technology and easy access to internet has made freelancing a more preferred choice. </p>
-                            <p>A distinct Freelance profile is offered by Aileensoulfor free which allows the users to both hire and get freelance work from the web portal. </p>
+                            <p>A distinct Freelance profile is offered by Aileensoul for free which allows the users to both hire and get freelance work from the web portal. </p>
                             <p>Freelance Hire profile is especially for freelance recruiters looking out for hiring talented candidates with a hassle-free process. </p>
                             <p>Furthermore, the freelance recruiter can easily put in the skills he/she is requiring for the work and get options as per one’s requirement.The profile also gives the client an option to communicate freely with the candidates.</p>
                         </div>
