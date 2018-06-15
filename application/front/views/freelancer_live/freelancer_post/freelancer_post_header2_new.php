@@ -3,14 +3,18 @@ $userid = $this->session->userdata('aileenuser');
 $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_post_reg', array('user_id' => $userid, 'status' => '1'))->row()->freelancer_apply_slug;
 ?>
 <div id="fa_mob_search" class="modal fade mob-search-popup" role="dialog">			
-	<form method="get">
+	<form method="post" name="f-fearch" onsubmit="return searchMobSubmit()">
 		<div class="new-search-input">
-			<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Title, Keywords, or Skills" />
-			<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="City, State or Country" />
+			<div class="ui-sugges-as" id="freelance_keyword_div">
+				<input type="search" id="freelance_keyword_mob" class="tags" name="skills" value="" placeholder="Title, Keywords, or Skills" ng-model="keyword"/>
+			</div>
+			<div class="ui-sugges-as" id="freelance_location_div">
+				<input type="search" id="freelance_location_mob" class="searchplace" name="searchplace" value="" placeholder="City, State or Country" ng-model="city"/>
+			</div>
 		</div>
 		<div class="new-search-btn">
-			<button type="button" class="close-new btn">Cancel</button>
-			<button type="submit" id="search_btn_res" class="btn btn-primary" onclick="return check();">Search</button>
+			<button type="button" class="close-new btn" data-dismiss="modal">Cancel</button>
+			<button type="submit" id="search_btn_res" class="btn btn-primary">Search</button>
 		</div>
 	</form>
 </div>
@@ -390,19 +394,59 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 
 	}
 </script>
- <!-- all message notification header end -->
- <script type="text/javascript" charset="utf-8">
+<!-- all message notification header end -->
+<script type="text/javascript" charset="utf-8">
 function searchSubmit(){    
     var keyword = $("#freelance_keyword").val().toLowerCase().split(' ').join('+');
     var city = $("#freelance_location").val().toLowerCase().split(' ').join('+');
-
-    /*var work_timing_fil = "";
-    $('.work_timing-filter').each(function(){
-        if(this.checked){
-            var currentid = $(this).val();
-            work_timing_fil += (work_timing_fil == "") ? currentid : "-" + currentid;
+    
+    // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
+    var keyworddata = [];
+    if(keyword != ""){
+        keyworddata = keyword.split(",");
+        // remove in from array
+        if(keyworddata.indexOf("in") > -1 && city != ""){
+            keyworddata.splice(keyworddata.indexOf("in"),1);
         }
-    }); */       
+        keyword = keyworddata.join('-').toString();
+    }
+    var citydata = [];
+    if(city != ""){
+        citydata = city.split(",");
+        // remove in from array
+        // if(citydata.indexOf("in") > -1 && city != ""){
+        //     citydata.splice(citydata.indexOf("in"),1);
+        // }
+        city = citydata.join('-').toString();
+    }
+
+    if(keyword[keyword.length - 1] == "-")
+    {            
+        keyword = keyword.slice(0,-1);
+    }    
+    
+    if (keyword == '' && city == '') {    	
+        return false;
+    } else if (keyword != '' && city == '') {    	
+         window.location.href = base_url + 'freelancer/search/' + keyword;
+         return false;
+    } else if (keyword == '' && city != '') {    	
+         window.location.href = base_url + 'freelancer/search/projects-in-' + city;
+         return false;
+    } else {
+         window.location.href = base_url + 'freelancer/search/' + keyword + '-projects-in-' + city;
+         return false;
+    }
+}
+
+function searchMobSubmit(){    
+    var keyword = $("#freelance_keyword_mob").val().toLowerCase().split(' ').join('+');
+    var city = $("#freelance_location_mob").val().toLowerCase().split(' ').join('+');
+    if(keyword.trim() == "" && city.trim() == "")
+    {
+    	return false;
+    }
+    
     // REPLACE , WITH - AND REMOVE IN FROM KEYWORD ARRAY
     var keyworddata = [];
     if(keyword != ""){
@@ -542,6 +586,124 @@ $(function() {
                 $.getJSON(base_url + "freelancer_apply_live/freelancer_apply_search_city", { term : terms},response);
             }
         },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," ).toLowerCase();
+            return false;                
+        }
+    }); 
+
+    $( "#freelance_keyword_mob" ).focusout(function() {
+        if($( "#freelance_keyword_mob" ).val() != "")
+        {
+            var ser_val = $( "#freelance_keyword_mob" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {                
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "#freelance_keyword_mob" ).val(ser_val_)
+            }
+        }
+    });
+    $( "#freelance_keyword_mob" ).focusin(function() {
+        if($( "#freelance_keyword_mob" ).val() != "")
+        {
+            var ser_val = $( "#freelance_keyword_mob" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#freelance_keyword_mob" ).val(ser_val_)
+        }
+    });
+    $( "#freelance_keyword_mob" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "freelancer_apply_live/freelancer_apply_search_keyword", { term : terms},response);
+            }
+        },
+        appendTo : "#freelance_keyword_div",
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+
+            var terms = split( this.value.toLowerCase() );
+            // remove the current input
+            terms.pop();
+            // add the selected item
+
+            var uniqueNames = [];
+            $.each(terms, function(i, el){
+                if($.inArray(el.toLowerCase(), uniqueNames) === -1) uniqueNames.push(el);
+            });
+
+            uniqueNames.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            uniqueNames.push( "" );
+            this.value = uniqueNames.join( "," );
+            return false;                
+        }
+    });
+
+    $( "#freelance_location_mob" ).focusout(function() {
+        if($( "#freelance_location_mob" ).val() != "")
+        {
+            var ser_val = $( "#freelance_location_mob" ).val();
+            if(ser_val[ser_val.length - 1] == ",")
+            {
+                ser_val_ = ser_val.substring(0, ser_val.length-1);            
+                $( "#freelance_location_mob" ).val(ser_val_)
+            }
+        }
+    });
+    $( "#freelance_location_mob" ).focusin(function() {
+        if($( "#freelance_location_mob" ).val() != "")
+        {
+            var ser_val = $( "#freelance_location_mob" ).val();            
+            ser_val_ = ser_val+",";
+            $( "#freelance_location_mob" ).val(ser_val_)
+        }
+    });
+    $( "#freelance_location_mob" ).bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    })
+    .autocomplete({
+        minLength: 2,
+        source: function( request, response ) { 
+            // delegate back to autocomplete, but extract the last term
+            terms = extractLast( request.term );                
+            if(terms != "")
+            {                    
+                $.getJSON(base_url + "freelancer_apply_live/freelancer_apply_search_city", { term : terms},response);
+            }
+        },
+        appendTo : "#freelance_location_div",
         focus: function() {
             // prevent value inserted on focus
             return false;
