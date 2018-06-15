@@ -127,8 +127,7 @@ app.controller('blogController', function ($scope, $http) {
         {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined, 'Process-Data': false}
-        }).then(function (success) {
-        	console.log(success);
+        }).then(function (success) {        	
         	if(success.data.error){
         		$scope.ajax_error_text = success.data.message;
         		$scope.ajax_error_visibility = true;
