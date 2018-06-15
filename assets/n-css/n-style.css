@@ -2508,6 +2508,8 @@ border: 1px solid #fff; line-height: 1;}
 	background: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 48%,#ffffff 57%,#f6f6f6 100%); 
 	background: linear-gradient(to bottom, #ffffff 0%,#ffffff 48%,#ffffff 57%,#f6f6f6 100%); 
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );}
+.new-search-input input{color:#5c5c5c;}
+.cover-pic .cancel-result{border:1px solid #1b8ab9;}
 
 
 /***  media query  ***/
@@ -2628,9 +2630,9 @@ border: 1px solid #fff; line-height: 1;}
 	.blog-left-content h3{font-size:20px;}
 	.blog-user-detail{width:110px; padding-right:10px; font-size:14px;}
 	.blog-detail{width:610px; left:110px;}
-	
+	.read-more-post{bottom:2px;}
 	.comment-text{width:90%;}
-    .middle-section-banner{padding: 47px 0 0px;}
+    .middle-section-banner{padding: 47px 0;}
     footer{position: relative; height: auto;}
     .cover-pic{width: 100%; float:left;}
     .post-box-bottom ul li:nth-child(2){display: none;}
@@ -2727,6 +2729,9 @@ border: 1px solid #fff; line-height: 1;}
 	/*** site map  ***/
 	.site-box ul li a{font-size:14px;}
 	.site-box ul.mid-listing li{width:100%; padding-right:0;}
+	.user-midd-section{margin-bottom:60px;}
+	
+	.change-pw footer{position:inherit;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3062,7 +3067,7 @@ border: 1px solid #fff; line-height: 1;}
 	.main_art{border:0;}
 	.profile-head-text{line-height:1;}
 	.business-profile-right{padding-top:10px;}
-	.business-profile-right .profile-main-box-buis-menu ul{border-bottom:1px solid #d2d2d2;}
+	.business-profile-right .profile-main-box-buis-menu ul{border-bottom:0px solid #d2d2d2;}
 	.other-profile-menu .profile-main-box-buis-menu .flw_msg_btn ul{border-bottom:0px solid #d2d2d2;}
 	.add-with-us .add-content .fw.p20{padding:0;}
 	.add-with-us .add-form{border-left:0; border-right:0; border-radius:0;}
@@ -3073,7 +3078,9 @@ border: 1px solid #fff; line-height: 1;}
 	.site-box ul.alphabet{margin-left:-16px;}
 	.site-box ul li a{font-size:12px;}
 	.sitemap h1{font-size:22px;}
-	
+	.user_lst ul li button{width:auto; padding:3px 7px; margin-top:6px;}
+	.user_lst ul{width:100%; float:left; border-bottom:1px solid #d2d2d2;}
+	.job-saved-box .job-contact-frnd .profile-job-post-detail{margin-bottom:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3390,6 +3397,7 @@ border: 1px solid #fff; line-height: 1;}
 	.old-no-login .btn-right{padding-top:5px;}
 	body.about-us{padding-bottom:0;}
 	body{padding-bottom:0;}
+	.work_type_custom label.error{top:60px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

@@ -24,7 +24,7 @@
         <div class="container" id="paddingtop_fixed">
         </div>
         <div class="user-midd-section art-inner bui_art_left_box">
-            <div class="container">
+            <div class="container mobp0">
 <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt" >
     <?php echo $left_artistic; ?>
     <?php echo $left_footer; ?> 

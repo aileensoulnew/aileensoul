@@ -804,7 +804,7 @@ min-height: 15px;}
 .no-data{padding:50px 0; text-align:center; }
 .no-data .no-data-text{padding-top:20px;}
 .noti-box{width: 17px; height: 17px; background: red; display: inline-block; text-align: center; 
-border-radius: 50%;font-size: 10px;line-height: 1.6;position: absolute; right: 7px; top:-5px; color:#fff;}
+border-radius: 50%;font-size: 10px;line-height: 2;position: absolute; right: 7px; top:-5px; color:#fff;}
 .mob-btm-icon .noti-box{right:-5px;}
 /***  end register header  ***/
 /***  no data content div search page ***/
@@ -1144,8 +1144,8 @@ footer ul li a:hover{
     border:1px solid #1b8ab9
 }
 .cover-pic .cancel-result:hover{
-    background-color:#fff!important;
-    color:#1b8ab9;
+    background-color:#1b8ab9!important;
+    color:#fff;
     border:1px solid #1b8ab9
 }
 .btn-success:active{
@@ -1163,11 +1163,7 @@ footer ul li a:hover{
     background-color:#156f95!important;
     border:1px solid #1b8ab9
 }
-.cover-pic .cancel-result:hover{
-    background-color:#fff!important;
-    color:#1b8ab9;
-    border:1px solid #1b8ab9
-}
+
 .btn-success:active{
     background-color:#fff;
     color:#1b8ab9

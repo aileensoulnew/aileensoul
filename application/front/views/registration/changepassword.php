@@ -26,7 +26,7 @@ color: #1b8ab9 !important;}
     <!-- start header -->
     <?php echo $header_inner_profile; ?>
     <!-- END HEADER -->
-    <body>
+    <body class="change-pw">
         <div id="paddingtop_fixed" class="user-midd-section">
             <div class="container">
                 <div class="row">
