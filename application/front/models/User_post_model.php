@@ -315,11 +315,11 @@ class User_post_model extends CI_Model {
 
         $getDeleteUserPost = $this->deletePostUser($user_id);
         $this->db->select("COUNT(up.id) as post_count")->from("user_post up");
-        if ($getUserProfessionData && $getSameFieldProUser) {
+        /*if ($getUserProfessionData && $getSameFieldProUser) {
             $this->db->where('up.user_id IN (' . $getSameFieldProUser . ')');
         } elseif ($getUserStudentData && $getSameFieldStdUser) {
             $this->db->where('up.user_id IN (' . $getSameFieldStdUser . ')');
-        }
+        }*/
         if ($getDeleteUserPost) {
             $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
         }

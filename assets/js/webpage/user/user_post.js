@@ -738,10 +738,54 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         formFileDataQue.delete("myfiles_"+rmId);
     };
 
+
+    $("#job_title").focusin(function(){
+        $('#jobtitletooltip').show();
+    });
+    $("#job_title").focusout(function(){
+        $('#jobtitletooltip').hide();
+    });
+
+    $("#location").focusin(function(){
+        $('#locationtooltip').show();
+    });
+    $("#location").focusout(function(){
+        $('#locationtooltip').hide();
+    });
+
+    $("#field").focusin(function(){
+        $('#fieldtooltip').show();
+    });
+    $("#field").focusout(function(){
+        $('#fieldtooltip').hide();
+    });
+
+    $("#ask_desc").focusin(function(){
+        $('#ask_desctooltip').show();
+    });
+    $("#ask_desc").focusout(function(){
+        $('#ask_desctooltip').hide();
+    });
+
+    $("#ask_related_category").focusin(function(){
+        $('#rlcattooltip').show();
+    });
+    $("#ask_related_category").focusout(function(){
+        $('#rlcattooltip').hide();
+    });
+
+    $("#ask_field").focusin(function(){
+        $('#ask_fieldtooltip').show();
+    });
+    $("#ask_field").focusout(function(){
+        $('#ask_fieldtooltip').hide();
+    });
+
     $scope.showLoadmore = true;
     var pg="";
     var processing = false;
     getUserPost(pg);
+    var isProcessing = false;
     function getUserPost(pg) {
      
         $('#loader').show();
@@ -769,7 +813,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }
 
     $(window).on('scroll', function () {
-        if (($(window).scrollTop() == $(document).height() - $(window).height()) && $scope.showLoadmore == true) {
+        if (($(window).scrollTop() == $(document).height() - $(window).height())) {
             // isLoadingData = true;
             var page = $(".page_number:last").val();
             var total_record = $(".total_record").val();
@@ -791,7 +835,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
     function getUserPostLoadMore(pg) {
        
-        if (isLoadingData) {
+        if (isProcessing) {
           
             /*
              *This won't go past this condition while
@@ -800,13 +844,13 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
              **/
             return;
         }
-        isLoadingData = true;
+        isProcessing = true;
         $('#loader').show();
         $http.get(base_url + "user_post/getUserPost?page=" + pg).then(function (success) {
             $('#loader').hide();
            
             if (success.data[0].post_data) {
-                isLoadingData = false;
+                isProcessing = false;
                 //$scope.postData = success.data; 
                 for (var i in success.data) {
                     $scope.postData.push(success.data[i]);
@@ -814,8 +858,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $scope.showLoadmore = true;
             } else {
                 // processing = false;
-                // isLoadingData = false;
-                isLoadingData = true;
+                // isLoadingData = false;                
                 $scope.showLoadmore = false;
             }
 

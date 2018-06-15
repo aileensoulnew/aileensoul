@@ -355,7 +355,7 @@ if($browser == "Firefox")
                                 <ul class="dropdown-menu profile-dropdown">
                                     <li>Account</li>
                                     <li><a target="_self" href="<?php echo base_url().$this->session->userdata('aileenuser_slug'); ?>" title="Setting"><i class="fa fa-user"></i> View Profile</a></li>
-                                    <li><a target="_self" href="<?php echo base_url('profile') ?>" title="Setting"><i class="fa fa-cog"></i> Setting</a></li>
+                                    <li><a target="_self" href="<?php echo base_url('edit-profile') ?>" title="Setting"><i class="fa fa-cog"></i> Setting</a></li>
                                     <li><a target="_self" href="<?php echo base_url('logout') ?>" title="Logout"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </li>

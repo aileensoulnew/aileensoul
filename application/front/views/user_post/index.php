@@ -878,7 +878,7 @@
                                     <tags-input id="job_title" ng-model="opp.job_title" display-property="name" placeholder="Ex: Singer, SEO, HR, Photographer, Designer…" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
                                         <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
                                     </tags-input>
-									<div id="dobtooltip" class="tooltip-custom" style="">Type the designation which best matches for given opportunity.</div>
+									<div id="jobtitletooltip" class="tooltip-custom" style="display: none;">Type the designation which best matches for given opportunity.</div>
                                     <script type="text/ng-template" id="title-template">
                                         <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
                                     </script>
@@ -893,7 +893,7 @@
                                     <tags-input id="location" ng-model="opp.location" display-property="city_name" placeholder="Ex: Mumbai, Delhi, New south wels, London, New York, Captown, Sydeny, Shanghai...." replace-spaces-with-dashes="false" template="location-template" on-tag-added="onKeyup()">
                                         <auto-complete source="loadLocation($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="location-autocomplete-template"></auto-complete>
                                     </tags-input>
-									<div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select the location for the opportunity.</div>
+									<div id="locationtooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select the location for the opportunity.</div>
                                     <script type="text/ng-template" id="location-template">
                                         <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
                                     </script>
@@ -912,7 +912,7 @@
                                             <option value="0">Other</option>
                                         </select>
                                     </span>
-									<div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Opportunity.</div>
+									<div id="fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Opportunity.</div>
                                 </div>
                                 <div class="form-group" ng-if="opp.field == '0'">
                                     <input type="text" class="form-control" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
@@ -988,8 +988,8 @@
                                 <div class="form-group">
                                     <label>Add Description</label>
 									
-                                    <textarea rows="1" max-rows="5" ng-model="ask.ask_description" placeholder="Add Description" cols="10" style="resize:none"></textarea>
-									<div id="dobtooltip" class="tooltip-custom" style="">Describe your problem in more details with some examples.</div>
+                                    <textarea id="ask_desc" rows="1" max-rows="5" ng-model="ask.ask_description" placeholder="Add Description" cols="10" style="resize:none"></textarea>
+									<div id="ask_desctooltip" class="tooltip-custom" style="display: none;">Describe your problem in more details with some examples.</div>
                                 </div>
                                 <div class="form-group">
                                     <label>Related Categories</label>
@@ -997,7 +997,7 @@
                                     <tags-input id="ask_related_category" ng-model="ask.related_category" display-property="name"placeholder="Add a Related Category " replace-spaces-with-dashes="false" template="category-template" on-tag-added="onKeyup()">
                                         <auto-complete source="loadCategory($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="category-autocomplete-template"></auto-complete>
                                     </tags-input>
-									<div id="dobtooltip" class="tooltip-custom" style="">Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”.</div>
+									<div id="rlcattooltip" class="tooltip-custom" style="display: none;">Enter a word or two then select a tag that matches with Question. Enter up to 5 tags. Ex: For the question “How to open a saving account?” tags will be “banking”.</div>
                                     <script type="text/ng-template" id="category-template">
                                         <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
                                     </script>
@@ -1015,7 +1015,7 @@
                                             <option value="0">Other</option>
                                         </select>
                                     </span>
-									<div id="dobtooltip" class="tooltip-custom" style="">Select the field from given options that best match with Question.</div>
+									<div id="ask_fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Question.</div>
                                 </div>
 
                                 <div class="form-group" ng-if="ask.ask_field == '0'">
