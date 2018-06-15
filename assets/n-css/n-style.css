@@ -2509,6 +2509,7 @@ border: 1px solid #fff; line-height: 1;}
 	background: linear-gradient(to bottom, #ffffff 0%,#ffffff 48%,#ffffff 57%,#f6f6f6 100%); 
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );}
 
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
@@ -3068,7 +3069,7 @@ border: 1px solid #fff; line-height: 1;}
 	.report h1{font-size:30px;}
 	.report-middle-box{width:100%;}
 	.faq{padding:0;}
-	.site-box{padding:10px;}
+	.site-box{padding:15px;}
 	.site-box ul.alphabet{margin-left:-16px;}
 	.site-box ul li a{font-size:12px;}
 	.sitemap h1{font-size:22px;}
@@ -3386,6 +3387,9 @@ border: 1px solid #fff; line-height: 1;}
 	.blog-page.old-no-login .btn-right{padding-top:10px !important;}
 	.blog-detail .blog-left-content h3{width:100%; float:left;}
 	.blog-page .sub-header .sub-menu li a.fs22{font-size:14px;}
+	.old-no-login .btn-right{padding-top:5px;}
+	body.about-us{padding-bottom:0;}
+	body{padding-bottom:0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

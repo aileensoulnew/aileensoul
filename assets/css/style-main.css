@@ -2743,10 +2743,10 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 .logo-size{font-size:32px;}
 header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
-header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
+header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
 .header-login .form-control:focus{border-color:#fff;}
-
+.header-login input.error:focus{border-bottom:1px solid #ff0000 !important;}
 
 @media screen and (min-height:540px){
     .cover .modal-content{
@@ -3695,6 +3695,8 @@ header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
 	.about-us .btn-right .btn3{font-size:14px; padding:5px 18px !important; line-height:1;}
 	.contact .btn-right, .feedback-cus .btn-right {padding-top:10px;}
 	.turmcon-cust .about-h2{font-size:20px;}
+	body.about-us{padding-bottom:0;}
+	body{padding-bottom:0;}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{

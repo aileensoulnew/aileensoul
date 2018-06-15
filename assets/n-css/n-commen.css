@@ -1538,7 +1538,7 @@ svg path{
 .logo-size{font-size:32px;}
 header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
-header .logo svg{height:25px; width:146px; margin-top:5px; fill:#fff;}
+header .logo svg{height:26px; width:160px; margin-top:5px; fill:#fff;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
 .new-ld-page header .logo svg{fill:#5c5c5c;}
 
@@ -1646,7 +1646,7 @@ option {
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu::before{left:0; right:0; margin: -20px auto 0;}
 	header .logo svg{margin-top:0px;}
 	.logo-size{font-size:28px;}
-	header .logo svg{width:130px;}
+	header .logo svg{width:140px;}
 	.sub-header{top:48px;}
 }
 @media screen and (max-width: 639px) {
@@ -1699,6 +1699,7 @@ option {
 	header{padding:3px 0 7px;}
 	header .logo a, header h2.logo, .no-login header h2 a {line-height:0;}
 	.blog-page .sub-header{top:75px;}
+	.dob select{padding-right:0px;}
 	
 }
 @media screen and (max-width: 359px) {
