@@ -2490,7 +2490,7 @@ border: 1px solid #fff; line-height: 1;}
 .blog-page header{min-height:54px;}
 .reg-form-box .reg-form .form-group input:focus, .reg-form-box .reg-form .form-group select:focus, .reg-form-box .reg-form .form-group textarea:focus {border-color:#1b8ab9;}
 
-
+.ui-autocomplete{z-index:999999 !important;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
