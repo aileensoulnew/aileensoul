@@ -158,7 +158,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             if (success.data.message == 1) {
-                $('#item-' + user_id + ' a.btn3').html('Request Send');
+                $('#item-' + user_id + ' a.btn3').html('Request Sent');
 //                $('.owl-carousel').trigger('next.owl.carousel');
             }
         });
