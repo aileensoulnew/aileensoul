@@ -48,7 +48,11 @@ class User_post_model extends CI_Model {
         }
     }
 
-    public function getContactAllSuggetion($user_id = '', $start='') {
+    public function getContactAllSuggetion($user_id = '', $page = "",$limit = "40") {
+        
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
 
         $this->db->distinct();
         
@@ -77,7 +81,9 @@ class User_post_model extends CI_Model {
         // $this->db->order_by('up.city', 'asc');
         // $this->db->order_by('us.city', 'asc');
         $this->db->order_by('u.user_id', 'DESC');
-        $this->db->limit($start['offset']);
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
         $query = $this->db->get();
 
         // echo $this->db->last_query();exit;
@@ -89,8 +95,42 @@ class User_post_model extends CI_Model {
             $result_array[$key]['title_name'] = $this->user_model->getAnyJobTitle($value['designation'])['job_name'];
             $result_array[$key]['degree_name'] = $this->user_model->getAnyDegreename($value['current_study'])['degree_name'];
         }
+        $ret_array['con_sugg_data'] = $result_array;
+        $ret_array['total_record'] =$this->getContactAllSuggetion_total_rec($user_id);
+        return $ret_array;
+    }
 
-        return $result_array;
+    public function getContactAllSuggetion_total_rec($user_id = '') {
+        
+
+        $this->db->distinct();
+        
+        $this->db->select("u.user_id,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_gender,u.user_slug,up.designation,us.current_study")->from("user u");
+        //jt.name as title_name,d.degree_name
+        // $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        // $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+        // $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+        $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+        // $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+        $this->db->where('u.user_id !=', $user_id);
+        $this->db->where('u.user_id NOT IN (select from_id from ailee_user_contact where to_id=' . $user_id . ')', NULL, FALSE);
+        $this->db->where('u.user_id NOT IN (select to_id from ailee_user_contact where from_id=' . $user_id . ')', NULL, FALSE);
+        // $this->db->order_by('u.user_id', 'DESC');
+        $this->db->where('(
+         u.user_id IN (SELECT DISTINCT user_id 
+                             FROM   ailee_user_profession 
+                             WHERE  user_id != '.$user_id.')
+        OR u.user_id IN (SELECT DISTINCT user_id 
+                             FROM   ailee_user_student 
+                             WHERE  user_id != '.$user_id.')
+        )');
+        
+        $this->db->order_by('u.user_id', 'DESC');
+       
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return count($result_array);
     }
 
     public function checkContact($user_id = '', $to_user_id = '') {

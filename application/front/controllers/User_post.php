@@ -56,9 +56,17 @@ class User_post extends MY_Controller {
     }
 
     public function getContactAllSuggetion() {
-        $offset = $this->input->post();
+        // $offset = $this->input->post();
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 40;
         $userid = $this->session->userdata('aileenuser');
-        $user_data = $this->user_post_model->getContactAllSuggetion($userid, $offset);
+        $user_data = $this->user_post_model->getContactAllSuggetion($userid,$page,$limit);
         echo json_encode($user_data);
     }
 

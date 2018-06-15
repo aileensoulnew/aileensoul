@@ -1,13 +1,48 @@
 var isscroll = true;
-app.controller('contactRequestController', function ($scope, $http) {
+app.controller('contactRequestController', function ($scope, $http,$window ) {
     $scope.title = "Contact Request | Aileensoul";
     pending_contact_request();
     var offset="40";
     var processing = false;
-    getContactSuggetion(offset);
+    getContactSuggetion(1);
     contactRequestNotification();
+    $scope.jobs = {};
+
+    var isProcessing = false;
+    
+    angular.element($window).bind("scroll", function (e) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
+            // isLoadingData = true;
+            var page = $scope.jobs.page_number;
+            var total_record = $scope.jobs.total_record;
+            var perpage_record = $scope.jobs.perpage_record;
+    
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum =  $scope.jobs.page_number + 1;
+                    getContactSuggetion(pagenum);
+                }
+            }
+        }
+    });
 
     function getContactSuggetion(start) {
+        if (isProcessing) {
+            console.log(1);
+            /*
+             *This won't go past this condition while
+             *isProcessing is true.
+             *You could even display a message.
+             **/
+            return false;
+        }
+        isProcessing = true;
         $(".sugg_post_load").show();
 
         // $http.get(base_url + "user_post/getContactAllSuggetion").then(function (success) {
@@ -15,23 +50,51 @@ app.controller('contactRequestController', function ($scope, $http) {
         // }, function (error) {});
         $http({
             method: 'POST',
-            url: base_url + 'user_post/getContactAllSuggetion',
+            url: base_url + 'user_post/getContactAllSuggetion?page='+start,
             //data: 'from_id=' + from_id + '&action=confirm',
-            data:'offset='+start,
+            // data:'offset='+start,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             $("#suggestionlist").show();
             $(".sugg_post_load").hide();
-            if(success.data.length <= 0){
+            console.log(2);
+            /*if(success.data.length <= 0){
                 isscroll = false;
+            }*/
+            console.log(success.data.con_sugg_data.length);
+            if (success.data.con_sugg_data.length >0 ) {
+            console.log(3);
+                if(start > 1)
+                {
+                    for (var i in success.data.con_sugg_data) {                            
+                        //$scope.searchJob.push(data.latestJobs[i]);
+                        //$scope.$apply(function () {
+                            $scope.contactSuggetion.push(success.data.con_sugg_data[i]);
+                        //});
+                    }
+                }
+                else
+                {
+                    $scope.contactSuggetion = success.data.con_sugg_data;
+                }
+
+                
+                isProcessing = false;
+
+                // $scope.contactSuggetion = success.data.con_sugg_data;
+                $scope.jobs.page_number = start;
+                $scope.jobs.total_record = success.data.total_record;
+                $scope.jobs.perpage_record = 40;
             }
-            if (success.data) {
-                offset=parseInt(offset)+40;
-                processing = false;
-                $scope.contactSuggetion = success.data;
-            } else {
-                console.log('processing true')
-                processing = true;
+            else
+            {
+                console.log(4);
+                isProcessing = true;
+                $scope.showLoadmore = false;
+                $scope.contactSuggetion = success.data.con_sugg_data;
+                $scope.jobs.page_number = start;
+                $scope.jobs.total_record = success.data.total_record;
+                $scope.jobs.perpage_record = 40;
             }
             $('#main_loader').hide();
             $('#main_page_load').show();
@@ -106,7 +169,7 @@ app.controller('contactRequestController', function ($scope, $http) {
         });
     }
 
-    $(document).ready(function () {
+    /*$(document).ready(function () {
   
         $(document).scroll(function(e){
           
@@ -120,7 +183,7 @@ app.controller('contactRequestController', function ($scope, $http) {
                 }
             }
         });
-    });
+    });*/
 });
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({
