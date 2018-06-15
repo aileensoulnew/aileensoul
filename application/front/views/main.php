@@ -72,7 +72,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 </head>
     <body class="custom-landscape">
 		<div class="pr-pl-box">
-            Aileensoul uses cookies to analyze traffic and shows ads to the site. Using this site you agree of its use. Refer <a href="https://www.aileensoul.com/privacy-policy">Privacy Policy</a> to learn more about the use of cookies. <!--a class="btn-pr-pl" href="">I Accept</a-->
+            Aileensoul uses cookies to analyze traffic and shows ads to the site. Using this site you agree of its use. Refer <a href="https://www.aileensoul.com/privacy-policy">Privacy Policy</a> to learn more about the use of cookies. <a class="btn-pr-pl" href="javascript:void(0);">Close</a>
         </div>
         <div class="main-login">
             <header>
@@ -314,7 +314,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 				
 				 $(".btn-pr-pl").click(function () {
-					$(".pr-pl-box").html("");
+					$(".pr-pl-box").remove();
 				});
         </script>
         <script src="<?php echo base_url('assets/js/webpage/main.js?ver=' . time()); ?>"></script>

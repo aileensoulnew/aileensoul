@@ -77,7 +77,7 @@ class Business_userprofile extends CI_Controller {
     public function ajax_business_dashboard_post($id = '') {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $business_login_slug = $this->data['business_login_slug'];
-        $userid = $this->session->userdata('aileenuser');
+        $bus_userid = $this->session->userdata('aileenuser');
         $perpage = 5;
         $page = 1;
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
@@ -93,6 +93,7 @@ class Business_userprofile extends CI_Controller {
         } else {
             $bus_userid = $this->session->userdata('aileenuser');
         }
+        $userid = $bus_userid;
         
         $business_profile_id = $this->data['business_common_data'][0]['business_profile_id'];
         $city = $this->data['business_common_data'][0]['city'];
@@ -129,7 +130,7 @@ class Business_userprofile extends CI_Controller {
         $join_str[0]['join_type'] = '';
         $data = "business_profile.business_user_image,business_profile.company_name,business_profile.industriyal,business_profile.business_slug,business_profile.other_industrial,business_profile.business_slug,business_profile_post.business_profile_post_id,business_profile_post.product_name,business_profile_post.product_description,business_profile_post.business_likes_count,business_profile_post.business_like_user,business_profile_post.created_date,business_profile_post.posted_user_id,business_profile.user_id";
         $business_profile_post = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = $perpage, $offset = $start, $join_str, $groupby = '');
-
+        // print_r($business_profile_post);exit;
         $business_profile_post1 = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = '', $offset = '', $join_str, $groupby = '');
 
         $return_html = '';
@@ -845,6 +846,18 @@ else
 </div>
 </div></div>';
             }
+        }
+        else if($page == 1)
+        {
+            $return_html .='<div class="user_no_post_avl" ng-if="postData.length == 0">
+                <h3>Post</h3>
+                <div class="user-img-nn">
+                    <div class="user_no_post_img">
+                        <img src="'.base_url('assets/img/no-post.png?ver=' . time()).'" alt="bui-no.png">
+                    </div>
+                    <div class="art_no_post_text">No Post Available.</div>
+                </div>
+            </div>';
         }
 
         echo $return_html;
