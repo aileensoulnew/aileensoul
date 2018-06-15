@@ -33,8 +33,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
     });
 
     function getContactSuggetion(start) {
-        if (isProcessing) {
-            console.log(1);
+        if (isProcessing) {            
             /*
              *This won't go past this condition while
              *isProcessing is true.
@@ -56,14 +55,11 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             $("#suggestionlist").show();
-            $(".sugg_post_load").hide();
-            console.log(2);
+            $(".sugg_post_load").hide();            
             /*if(success.data.length <= 0){
                 isscroll = false;
-            }*/
-            console.log(success.data.con_sugg_data.length);
-            if (success.data.con_sugg_data.length >0 ) {
-            console.log(3);
+            }*/            
+            if (success.data.con_sugg_data.length >0 ) {            
                 if(start > 1)
                 {
                     for (var i in success.data.con_sugg_data) {                            
@@ -88,7 +84,6 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
             }
             else
             {
-                console.log(4);
                 isProcessing = true;
                 $scope.showLoadmore = false;
                 $scope.contactSuggetion = success.data.con_sugg_data;
