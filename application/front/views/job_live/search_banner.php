@@ -10,8 +10,8 @@
                             <?php $this->load->view('main_logo'); ?>
                         </div>
                         <div class="col-md-6 col-sm-6 no-login-right fw-479">
-                            <a href="<?php echo base_url(); ?>login" class="btn8">Login</a>
-                            <a href="<?php echo base_url(); ?>job-profile/create-account" class="btn9">Create Job Profile</a>
+                            <a href="<?php echo base_url(); ?>login" class="btn8" target="_self">Login</a>
+                            <a href="<?php echo base_url(); ?>job-profile/create-account" class="btn9" target="_self">Create Job Profile</a>
                         </div>
                     </div>
                 </div>
