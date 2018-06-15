@@ -1014,26 +1014,38 @@ class User_post_model extends CI_Model {
     }
 
     public function searchData($userid = '', $searchKeyword = '') {
+
+        $sql_ser = "u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%'";
+        $sql_post = "uo.opportunity LIKE '%$searchKeyword%' OR usp.description LIKE '%$searchKeyword%' OR uaq.question LIKE '%$searchKeyword%' OR uaq.description LIKE '%$searchKeyword%'";
+        
         $checkKeywordCity = $this->data_model->findCityList($searchKeyword);
         if ($checkKeywordCity['city_id'] != '') {
             $keywordCity = $checkKeywordCity['city_id'];
+            $sql_ser .= " OR up.city = '$keywordCity' OR us.city = '$keywordCity'";
+            $sql_post .= " OR FIND_IN_SET('" . $keywordCity . "',uo.location)";
         }
         $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword);
         if ($checkKeywordJobTitle['title_id'] != '') {
             $keywordJobTitle = $checkKeywordJobTitle['title_id'];
+            $sql_ser .= " OR up.designation = '$keywordJobTitle'";
+            $sql_post .= " (FIND_IN_SET('" . $keywordJobTitle . "',uo.opportunity_for)";
         }
         $checkKeywordFieldList = $this->data_model->findFieldList($searchKeyword);
         if ($checkKeywordFieldList['industry_id'] != '') {
             $keywordFieldList = $checkKeywordFieldList['industry_id'];
+            $sql_ser .= " OR up.field = '$keywordFieldList'";
+            $sql_post .= " OR  uo.field = '$keywordFieldList' OR uaq.field = '$keywordFieldList'";
         }
 
         $checkKeywordUniversityList = $this->data_model->findUniversityList($searchKeyword);
         if ($checkKeywordUniversityList['university_id'] != '') {
             $keywordUniversityList = $checkKeywordUniversityList['university_id'];
+            $sql_ser .= " OR us.university_name = '$keywordUniversityList'";
         }
         $checkKeywordDegreeList = $this->data_model->findDegreeList($searchKeyword);
         if ($checkKeywordDegreeList['degree_id'] != '') {
             $keywordDegreeList = $checkKeywordDegreeList['degree_id'];
+            $sql_ser .= " OR us.current_study = '$keywordDegreeList'";
         }
 
         $this->db->select("u.user_id,u.first_name,u.last_name,u.user_gender,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_slug,ui.user_image,jt.name as title_name,d.degree_name,it.industry_name,up.city as profession_city,us.city as student_city,d.degree_name,un.university_name")->from("user u");
@@ -1061,12 +1073,11 @@ class User_post_model extends CI_Model {
 //            $this->db->or_like('u.first_name', $searchKeyword);
 //            $this->db->or_like('u.last_name', $searchKeyword);
 //        }
-        $this->db->where("u.user_id != ",$userid);
+        // $this->db->where("u.user_id != ",$userid);
 
-        $this->db->where("u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%' OR up.city = '$keywordCity' OR us.city = '$keywordCity' OR up.designation = '$keywordJobTitle'"
-                . " OR up.field = '$keywordFieldList' OR us.university_name = '$keywordUniversityList' OR us.current_study = '$keywordDegreeList'");
+        $this->db->where("u.user_id !=  $userid AND ( $sql_ser )");
         $query = $this->db->get();
-
+        // echo $this->db->last_query();exit;
         $searchProfileData = $query->result_array();
         foreach ($searchProfileData as $key => $value) {
             $is_userBasicInfo = $this->user_model->is_userBasicInfo($value['user_id']);
@@ -1097,18 +1108,22 @@ class User_post_model extends CI_Model {
         $searchPostData = array();
         $getDeleteUserPost = $this->deletePostUser($userid);
 
+        
+        
         $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id")->from("user_post up");
         $this->db->join('user_opportunity uo', 'uo.post_id = up.id', 'left');
         $this->db->join('user_simple_post usp', 'usp.post_id = up.id', 'left');
         $this->db->join('user_ask_question uaq', 'uaq.post_id = up.id', 'left');
-        $this->db->where("(FIND_IN_SET('" . $keywordJobTitle . "',uo.opportunity_for) OR FIND_IN_SET('" . $keywordCity . "',uo.location) OR uo.opportunity LIKE '%$searchKeyword%' OR uo.field = '$keywordFieldList' OR usp.description LIKE '%$searchKeyword%'"
-                . " OR uaq.question LIKE '%$searchKeyword%' OR uaq.description LIKE '%$searchKeyword%' OR uaq.field = '$keywordFieldList')");
-
+        $this->db->where("up.status","publish");
+        $this->db->where("up.is_delete","0");
+        $this->db->where("(".$sql_post.")");
+        // echo $sql_post;
         if ($getDeleteUserPost) {
             $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
         }
         $this->db->order_by('up.id', 'desc');
         $query = $this->db->get();
+        // echo $this->db->last_query();exit;
         $user_post = $query->result_array();
 
 //        echo '<pre>';
