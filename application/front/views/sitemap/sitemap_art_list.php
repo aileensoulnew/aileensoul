@@ -25,7 +25,7 @@
 	<div class="fw pt20" ng-show="isPaginationShow">
 		<ul class="mid-listing">
 			<li ng-repeat="artist in artistList track by $index">
-				<a ng-href="<?php echo base_url(). 'artist/p/'?>{{ artist.slug }}">
+				<a ng-href="<?php echo base_url(). 'artist/p/'?>{{ artist.slug }}" target="_self">
 					{{ artist.art_fullname | capitalize }} ( {{ artist.category_name | capitalize }} )
 				</a>
 			</li>								

@@ -25,7 +25,7 @@
 	<div class="fw pt20" ng-show="isPaginationShow">
 		<ul class="mid-listing">
 			<li ng-repeat="jobs in jobList track by $index">
-				<a ng-href="<?php echo base_url()?>{{ jobs.string_post_name | slugify }}-job-vacancy-in-{{ jobs.city_name | slugify }}-{{ jobs.post_user_id }}-{{ jobs.post_id }}" target="_blank">
+				<a ng-href="<?php echo base_url()?>{{ jobs.string_post_name | slugify }}-job-vacancy-in-{{ jobs.city_name | slugify }}-{{ jobs.post_user_id }}-{{ jobs.post_id }}" target="_self">
 					{{ jobs.post_name | capitalize }} ( {{ jobs.re_comp_name | capitalize }} )
 				</a>
 			</li>								

@@ -25,7 +25,7 @@
 	<div class="fw pt20" ng-show="isPaginationShow">
 		<ul class="mid-listing">
 			<li ng-repeat="member in memberList track by $index">
-				<a ng-href="<?php echo base_url() ?>{{ member.user_slug }}">
+				<a ng-href="<?php echo base_url() ?>{{ member.user_slug }}" target="_self">
 					{{ member.fullname | capitalize }} 
 					<span ng-if="member.designaation">
 						( {{ member.designaation | capitalize }} )

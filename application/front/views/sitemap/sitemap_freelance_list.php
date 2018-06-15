@@ -25,7 +25,7 @@
 	<div class="fw pt20" ng-show="isPaginationShow">
 		<ul class="mid-listing">
 			<li ng-repeat="freelancer in freelancerList track by $index">
-				<a ng-href="<?php echo base_url(). 'freelance-jobs/'?>{{ freelancer.category_name }}/{{ freelancer.post_slug }}-{{ freelancer.post_user_id }}-{{ freelancer.post_id }}" target="_blank">
+				<a ng-href="<?php echo base_url(). 'freelance-jobs/'?>{{ freelancer.category_name }}/{{ freelancer.post_slug }}-{{ freelancer.post_user_id }}-{{ freelancer.post_id }}" target="_self">
 					{{ freelancer.post_name | capitalize }} ( {{ freelancer.category_name | capitalize }} )
 				</a>
 			</li>								

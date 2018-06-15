@@ -20,7 +20,7 @@
 	<div class="fw pt20" ng-show="isPaginationShow">
 		<ul class="mid-listing">
 			<li ng-repeat="company in companyList track by $index">
-				<a ng-href="<?php echo base_url(). 'company/'?>{{ company.business_slug }}" target="_blank">
+				<a ng-href="<?php echo base_url(). 'company/'?>{{ company.business_slug }}" target="_self">
 					{{ company.company_name | capitalize }} 
 					<span ng-if="company.bus_industry_name != '' && company.bus_industry_name != null">
 						( {{ company.bus_industry_name | capitalize }} )
