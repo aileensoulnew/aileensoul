@@ -98,6 +98,7 @@
             var base_url = '<?php echo base_url(); ?>';
             var slug = '<?php echo $slug_id; ?>';
             var no_business_contact_html = '<?php echo $no_business_contact_html ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <?php
         if (IS_BUSINESS_JS_MINIFY == '0') {

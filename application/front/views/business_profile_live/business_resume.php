@@ -286,6 +286,7 @@
         <?php echo $footer; ?>
     <script>
         var base_url = '<?php echo base_url(); ?>';
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
         $('#main_loader').hide();
         $('#main_page_load').show();
     </script>

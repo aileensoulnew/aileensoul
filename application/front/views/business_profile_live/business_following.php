@@ -44,9 +44,10 @@
                     </div>
                 </div>
             </section>
-        </div>
+        
             <?php echo $login_footer ?>
             <?php echo $footer; ?>
+        </div>
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
@@ -92,6 +93,7 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var slug_id = '<?php echo $slug_id; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>

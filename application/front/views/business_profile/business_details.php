@@ -508,8 +508,9 @@
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <?php } ?>
         <script>
-                                            var base_url = '<?php echo base_url(); ?>';
-                                            var slug = '<?php echo $slugid; ?>';
+            var base_url = '<?php echo base_url(); ?>';
+            var slug = '<?php echo $slugid; ?>';
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
         </script>
         <script>
             function open_profile() {
