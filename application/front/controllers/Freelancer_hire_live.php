@@ -12,6 +12,7 @@ class Freelancer_hire_live extends MY_Controller {
 		$this->load->model('user_post_model');
 		
 		$this->load->model('freelancer_hire_model');
+		$this->load->model('freelancer_apply_model');
 		$this->lang->load('message', 'english');
 		//AWS access info start
 		$this->load->library('S3');

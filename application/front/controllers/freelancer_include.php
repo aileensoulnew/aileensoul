@@ -14,6 +14,10 @@ $this->data['user_notification_count'] = $count = $result[0]['total'];
 $select_data ='freelancer_post_fullname,freelancer_post_username,freelancer_post_user_image,profile_background,profile_background_main,designation,freelancer_apply_slug,free_post_step,user_id,progressbar';
 $this->data['freepostdata'] = $this->freelancer_apply_model->getfreelancerapplydata($userid, $select_data);
 
+$select_data = 'profile_background,username,fullname,freelancer_hire_user_image,profile_background,profile_background_main,designation,freelancer_hire_slug,free_hire_step';
+$this->data['freehiredata'] = $this->freelancer_hire_model->getfreelancerhiredata($userid, $select_data);
+$this->data['free_hire_login_slug'] = (count($this->data['freehiredata']) > 0) ? $this->data['freehiredata']['freelancer_hire_slug'] : '';
+
 //echo "<pre>"; print_r($this->data['freepostdata']);die();
 
 $this->data['header'] = $this->load->view('header', $this->data, true);
