@@ -5739,7 +5739,7 @@ body.reg-form{
         padding:0px
     }
     .user-list .profile-job-post-location-name .user_lst ul li .user_btn{
-        padding-top:5px
+        padding-top:1px
     }
     .user-list .profile-job-post-location-name .user_lst ul li .user_btn button{
         margin:0
@@ -5855,7 +5855,7 @@ body.reg-form{
     .follow-img{
         height:40px;
         width:40px;
-        margin-top:9px
+        margin-top:3px
     }
     .post-design-box .post-design-desc .fr{
         padding:3px 6px;
