@@ -2510,6 +2510,8 @@ border: 1px solid #fff; line-height: 1;}
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );}
 .new-search-input input{color:#5c5c5c;}
 .cover-pic .cancel-result{border:1px solid #1b8ab9;}
+.cus_work .control{padding-left:20px; float:left; margin-right:15px;}
+.cus_work .control--radio .control__indicator::after{width:13px; height:13px;}
 
 
 /***  media query  ***/
@@ -3081,6 +3083,11 @@ border: 1px solid #fff; line-height: 1;}
 	.user_lst ul li button{width:auto; padding:3px 7px; margin-top:6px;}
 	.user_lst ul{width:100%; float:left; border-bottom:1px solid #d2d2d2;}
 	.job-saved-box .job-contact-frnd .profile-job-post-detail{/*margin-bottom:0;*/}
+	.post-popup-box .tooltip-custom{top:0px; padding-top:5px;}
+	.cus_work .control--radio .control__indicator::after{width:11px; height:11px;}
+	.contact-frnd-post .job-contact-frnd {margin-bottom:0;}
+	.profile-job-post-location-name{padding:0;}
+	.user_lst ul{padding:10px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3139,6 +3146,7 @@ border: 1px solid #fff; line-height: 1;}
 	.blog-page .pagination li a{font-size:14px;} 
 	.mob-progressbar{width:100%; border-left:0; border-right:0; border-radius:0;}
 	#popup-form input[type="submit"]#profilepicsubmit {margin-top:15px;}
+	.post-img-user{height:88px; width:88px; padding:32px 0;}
 }
 @media screen and (max-width: 539px) {
 	.fw-539{width:100%; float:left;}
@@ -3380,7 +3388,7 @@ border: 1px solid #fff; line-height: 1;}
 	.buisness-profile-pic-candidate{margin-left:9px !important;}
 	.all-job-bottom p{/*width:100%; float:left !important;*/}
 	.all-job-bottom p a{margin-left:0 !important; font-size:13px;}
-	.profile-main-rec-box-menu.profile-box-art{margin-bottom:0;}
+	.profile-main-rec-box-menu.profile-box-art{/*margin-bottom:0;*/}
 	.profile-head-text{margin-top:0;}
 	.faq li a{padding:20px 0 10px; font-size:13px; }
 	.faq li a span{display:none;}
@@ -3438,6 +3446,7 @@ border: 1px solid #fff; line-height: 1;}
 	.all-job-bottom p .btn4{/*margin-top:7px;*/}
 	.buisness-menu.other-profile-menu::before{bottom:89px;}
 	.other-profile-menu .profile-main-box-buis-menu li a{padding:3px 5px 12px !important; font-size:10px; height:40px;}
+	.add-anonymously{padding:9px 5px 0;}
 }
 @media screen and (max-width: 320px) {
 	.reg-form-cus .login .form-group select{margin-right: 9px;}

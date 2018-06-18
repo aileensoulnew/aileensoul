@@ -189,9 +189,21 @@
                                                 <fieldset class="col-md-12  pl10 work_type_custom">
                                                     <label class=""><?php echo $this->lang->line("work_type"); ?>:<span style="color:red">*</span></label>
                                                     <div class="cus_work">
-                                                        <input type="radio" tabindex="11" class="worktype_minheight" name="rating"  value="0"> Hourly
-                                                        <input type="radio" tabindex="12"  name="rating" value="1"> Fixed
-                                                        <input type="radio" tabindex="13" class="worktype"  name="rating" value="2"> Not Fixed
+														<label class="control control--radio">
+															Hourly
+															<input type="radio" tabindex="11" class="worktype_minheight" name="rating"  value="0"> 
+															<div class="control__indicator"></div>
+														</label>
+														<label class="control control--radio">
+															Fixed
+															<input type="radio" tabindex="12"  name="rating" value="1"> 
+															<div class="control__indicator"></div>
+														</label>
+														<label class="control control--radio">
+															Not Fixed
+															<input type="radio" tabindex="13" class="worktype"  name="rating" value="2"> 
+															<div class="control__indicator"></div>
+														</label>
                                                     </div>
                                                     <?php echo form_error('rating'); ?>
                                                 </fieldset>

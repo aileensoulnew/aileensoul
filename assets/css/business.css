@@ -5066,6 +5066,7 @@ body.reg-form{
         height:189px
     }
     .all-list ul{padding:10px 0 10px}
+	.job-saved-box .job-contact-frnd .profile-job-post-detail{margin-bottom:0;}
 }
 @media screen and (max-width:639px){
     .modal.in .modal-dialog .mes .pop_content{
@@ -5735,7 +5736,7 @@ body.reg-form{
         padding-top:9px
     }
     .user-list .profile-job-post-location-name{
-        padding:10px
+        padding:0px
     }
     .user-list .profile-job-post-location-name .user_lst ul li .user_btn{
         padding-top:5px
