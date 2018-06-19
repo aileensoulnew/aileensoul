@@ -219,3 +219,9 @@
     </div>
 
 </div>
+<script>
+	// page scroll top 
+			$(document).ready(function () {
+				$('html,body').animate({scrollTop: 300}, 500);
+			});
+</script>

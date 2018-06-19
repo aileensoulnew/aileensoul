@@ -359,5 +359,11 @@
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script>
 
 <?php } */?>
+<script>
+	// page scroll top 
+			$(document).ready(function () {
+				$('html,body').animate({scrollTop: 300}, 500);
+			});
+</script>
     </body>
 </html>
