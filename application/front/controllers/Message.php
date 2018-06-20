@@ -459,4 +459,9 @@ class Message extends MY_Controller {
         return $contactcount;
     }
 
+    public function main_message()
+    {
+        $this->load->view('message/main_message',$this->data);
+    }
+
 }
