@@ -10,19 +10,7 @@
     <!-- <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js'></script> -->
 
     <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
-    <script src="<?php echo base_url('assets/js/jquery.js?ver=' . time()) ?>"></script>
-    <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->
-    <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
-    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.register.js'></script>
-    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.chatstates.js'></script>
-    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.mam.js'></script>
-    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.rsm.js'></script>
-    <!-- <script src='scripts/flXHR.js'></script>
-    <script src='scripts/strophe.flxhr.js'></script> -->
-
-    <link rel='stylesheet' href='<?php echo base_url(); ?>assets/chatjs/gab.css'>
-    <script src='<?php echo base_url(); ?>assets/chatjs/gab.js'></script>
+    <link rel='stylesheet' href='<?php echo base_url(); ?>assets/chatjs/gab.css'>    
   </head>
   <body>
     <h1>Chat</h1>
@@ -30,8 +18,8 @@
 
     <div id='toolbar'>
       <!-- <span class='button' id='new-contact'>add contact...</span> ||
-      <span class='button' id='new-chat'>chat with...</span> || -->
-      <span class='button' id='disconnect'>disconnect</span>
+      <span class='button' id='new-chat'>chat with...</span> || 
+      <span class='button' id='disconnect'>disconnect</span>-->
     </div>
 
     <div id='chat-area'>
@@ -67,4 +55,19 @@
         to your presence.  Approve or deny?</p>
     </div>
   </body>
+    <script type="text/javascript">
+      var base_url = '<?php echo base_url(); ?>';
+    </script>
+    <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->
+    <script src="<?php echo base_url('assets/js/jquery.js?ver=' . time()) ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
+    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.register.js'></script>
+    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.chatstates.js'></script>
+    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.mam.js'></script>
+    <script src='<?php echo base_url(); ?>assets/chatjs/strophe.rsm.js'></script>
+    <!-- <script src='scripts/flXHR.js'></script>
+    <script src='scripts/strophe.flxhr.js'></script> -->
+
+    <script src='<?php echo base_url(); ?>assets/chatjs/gab.js'></script>
 </html>

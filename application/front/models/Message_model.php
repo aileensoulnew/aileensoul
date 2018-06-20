@@ -154,4 +154,12 @@ class Message_model extends CI_Model {
         return $update_data;
     }
 
+    function all_user()
+    {
+        $sql = "SELECT u.first_name,u.last_name,u.user_slug,ul.email FROM ailee_user u LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id WHERE ul.email != ''";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array(); 
+        return $result_array;
+    }
+
 }

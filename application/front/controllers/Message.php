@@ -464,4 +464,10 @@ class Message extends MY_Controller {
         $this->load->view('message/main_message',$this->data);
     }
 
+    public function get_all_user()
+    {
+        $user_data = $this->message_model->all_user();
+        echo json_encode($user_data);
+    }
+
 }
