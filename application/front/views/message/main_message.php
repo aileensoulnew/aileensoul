@@ -1,9 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-          "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <title>Chat - Chapter 6</title>
+    <title>Chat</title>
 
     <!-- <link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/cupertino/jquery-ui.css'> -->
     <!-- <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script> -->
@@ -29,7 +28,21 @@
     </div>
     
     <div id='roster-area'>
-      <ul></ul>
+      <ul>
+      <?php 
+      foreach ($contact_data as $key => $value)
+      {
+        $slug = str_replace("-","_",$value['user_slug']);?>
+        <li id="<?php echo $value['user_slug']; ?>-127-0-0-1">
+          <div class="roster-contact offline">
+            <div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
+            <div class="roster-jid"><?php echo $slug; ?>@127.0.0.1</div>
+          </div>
+        </li> 
+      <?php
+      }
+      ?>
+      </ul>
     </div>
 
     <!-- login dialog -->
@@ -57,6 +70,7 @@
   </body>
     <script type="text/javascript">
       var base_url = '<?php echo base_url(); ?>';
+      var username = '<?php echo str_replace('-','_', $login_userdata['user_slug']); ?>';
     </script>
     <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->
     <script src="<?php echo base_url('assets/js/jquery.js?ver=' . time()) ?>"></script>

@@ -154,12 +154,65 @@ class Message_model extends CI_Model {
         return $update_data;
     }
 
-    function all_user()
-    {
-        $sql = "SELECT u.first_name,u.last_name,u.user_slug,ul.email FROM ailee_user u LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id WHERE ul.email != ''";
-        $query = $this->db->query($sql);
-        $result_array = $query->result_array(); 
+    public function getAllContactData($user_id = '', $select_data = '', $page = '',$login_user_id = '') {
+        // $limit = '6';
+        // $start = ($page - 1) * $limit;
+        // if ($start < 0)
+        //     $start = 0;
+
+        $where = "((from_id = '" . $user_id . "' OR to_id = '" . $user_id . "'))";
+
+        $this->db->select("uc.id,u.user_id,u.first_name,u.last_name,u.user_gender,ui.user_image,jt.name as title_name,d.degree_name,u.user_slug")->from("user_contact  uc");
+        $this->db->join('user u', 'u.user_id = (CASE WHEN uc.from_id=' . $user_id . ' THEN uc.to_id ELSE uc.from_id END)', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+        $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+        $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+        $this->db->where('u.user_id !=', $user_id);
+        $this->db->where('uc.status', 'confirm');
+        $this->db->where($where);
+        $this->db->order_by("uc.id", "DESC");
+        /*if ($limit != '') {
+            $this->db->limit($limit, $start);
+        }*/
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        /*$total_record = $this->getContactCount($user_id, $select_data = '');
+
+        $page_array['page'] = $page;
+        $page_array['total_record'] = $total_record[0]['total'];
+        $page_array['perpage_record'] = $limit;
+
+        foreach ($result_array as $key => $value) {
+            $is_userContactInfo= $this->userContactStatus($login_user_id, $value['user_id']);
+            if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+            {
+                $result_array[$key]['contact_detail']['contact_status'] = 1;
+                $result_array[$key]['contact_detail']['contact_value'] = $is_userContactInfo['status'];
+                $result_array[$key]['contact_detail']['contact_id'] = $is_userContactInfo['id'];
+            }
+            else
+            {
+                $result_array[$key]['contact_detail']['contact_status'] = 0;
+                $result_array[$key]['contact_detail']['contact_value'] = 'new';
+                $result_array[$key]['contact_detail']['contact_id'] = $is_userContactInfo['id'];   
+            }
+        }
+
+        $data = array(
+            'contactrecord' => $result_array,
+            'pagedata' => $page_array
+        );
+        return $data;*/
         return $result_array;
     }
 
+    function get_messages_from_jid($login_jid = "",$to_jid = "")
+    {
+        $sql = "SELECT * FROM ofMessageArchive WHERE fromJID = '".$login_jid."' AND toJID = '".$to_jid."' UNION  SELECT * FROM ofMessageArchive WHERE fromJID = '".$to_jid."' AND toJID = '".$login_jid."' ORDER By messageID";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return $result_array;
+    }
 }

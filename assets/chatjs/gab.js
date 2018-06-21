@@ -14,6 +14,7 @@ var Gab = {
     },
 
     on_roster: function (iq) {
+        console.log(iq);
         $(iq).find('item').each(function () {
             var jid = $(this).attr('jid');
             var name = $(this).attr('name') || jid;
@@ -248,30 +249,12 @@ var Gab = {
     }
 };
 
-
-var callback = function (status) {
-    if (status === Strophe.Status.REGISTER) {
-        conn_new.register.fields.username = "poorti";
-        conn_new.register.fields.password = "p";
-        conn_new.register.fields.name = "Poorti";
-        conn_new.register.fields.email = "poorti@poorti.com";
-        conn_new.register.submit();
-    } else if (status === Strophe.Status.REGISTERED) {
-        console.log("registered!");
-        conn_new.authenticate();
-    } else if (status === Strophe.Status.CONNECTED) {
-        console.log("logged in!");
-    } else {
-        // every other status a connection.connect would receive
-    }
-};
-// $('#register').click(function () {
-//     var conn = new Strophe.Connection('http://127.0.0.1:7070/http-bind/');
-//     conn.register.connect("example.com", callback, wait, hold);
-// });
-
 $(document).ready(function () {
-    $('#login_dialog').dialog({
+    $(document).trigger('connect', {
+        jid: username+'@127.0.0.1',
+        password: username
+    });
+    /*$('#login_dialog').dialog({
         autoOpen: true,
         draggable: false,
         modal: true,
@@ -289,14 +272,9 @@ $(document).ready(function () {
                 
                 $('#password').val('');
                 $(this).dialog('close');
-            },
-            "Register": function () {
-                // var conn = new Strophe.Connection('http://127.0.0.1:7070/http-bind/');
-                // conn_new.register.connect("http://localhost/chat1/gab.html", callback, 0, 0);
-                get_all_user();
-            }
+            },            
         }
-    });
+    });*/
 
     $('#contact_dialog').dialog({
         autoOpen: false,
@@ -516,8 +494,8 @@ $(document).bind('contact_added', function (ev, data) {
 });
 function get_messages(to_jid)
 {    
-    /*$.ajax({
-        url: "get_data.php",        
+    $.ajax({
+        url: base_url+"message/get_messages_from_jid",        
         type: "POST",
         data: {"login_jid":login_jid,"to_jid": to_jid},
         success: function (data) {
@@ -527,68 +505,5 @@ function get_messages(to_jid)
                 $('.chat-messages')[0].scrollTop = $('.chat-messages')[0].scrollHeight;
             },100);
         }
-    });*/
-}
-
-function get_all_user()
-{    
-    $.ajax({
-        url: 'http://127.0.0.1:9090/plugins/restapi/v1/users',
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        headers: { 'Authorization': 'Basic YWRtaW46YWRtaW5AMTIz' },
-        data :{"username": "ps1","password": "ps1"},
-        /*beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Basic " + btoa('admin' + ":" + 'admin@123'));
-        },*/
-        success: function (json) {
-            console.log("Test");
-        },
-        error: function (err) {
-        }
-
     });
-    /*$.ajax({
-        url: base_url+"message/get_all_user",        
-        type: "POST",        
-        success: function (data) {
-            // console.log(data);
-            res = JSON.parse(data);
-            jQuery.each( res, function( i, val ) {
-                // console.log( i+"Mine is " + val.email + "." );
-                // console.log( i+"Mine is " + val.first_name + "." );
-                // console.log( i+"Mine is " + val.last_name + "." );
-                // console.log( i+"Mine is " + val.user_slug + "." );
-                setTimeout(function(){
-                    user_slug = val.user_slug.replace(/-/g, '_');
-                    // console.log( i+"Mine is " + user_slug + "." );
-
-                    var callback1 = function (status) {
-                        if (status === Strophe.Status.REGISTER) {
-                            conn_new.register.fields.username = user_slug;
-                            conn_new.register.fields.password = "aileensoul";
-                            conn_new.register.fields.name = val.first_name +" "+ val.last_name;
-                            conn_new.register.fields.email = val.email;
-                            conn_new.register.submit();
-                        } else if (status === Strophe.Status.REGISTERED) {
-                            console.log("registered!");
-                            conn_new.authenticate();
-                        } else if (status === Strophe.Status.CONNECTED) {
-                            console.log("logged in!");
-                        } else {
-                            // every other status a connection.connect would receive
-                        }
-                    };
-                    conn_new.register.connect("http://localhost/chat1/gab.html", callback1, 0, 0);
-                },5000);
-                
-                if(i == 3)
-                {
-                    return false;
-                }
-              
-            });
-        }
-    });*/
 }

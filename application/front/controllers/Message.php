@@ -15,6 +15,7 @@ class Message extends MY_Controller {
         //AWS access info start
         $this->load->library('S3');
         //AWS access info end
+        $this->load->model('user_model');
         $this->load->model('business_model');
         $this->load->model('message_model');
         include('business_include.php');
@@ -461,13 +462,31 @@ class Message extends MY_Controller {
 
     public function main_message()
     {
+        $userid = $this->session->userdata('aileenuser');        
+        $this->data['login_userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.user_id, u.first_name, u.last_name, u.user_slug');
+        $this->data['contact_data'] = $this->message_model->getAllContactData($userid);
         $this->load->view('message/main_message',$this->data);
     }
 
-    public function get_all_user()
+    public function get_messages_from_jid()
     {
-        $user_data = $this->message_model->all_user();
-        echo json_encode($user_data);
-    }
+        $login_jid = $this->input->post('login_jid');
+        $to_jid = $this->input->post('to_jid');
+        $message_data = $this->message_model->get_messages_from_jid($login_jid,$to_jid);
+        $ret_html = "";
+        foreach ($message_data as $key => $row) {
+            
+            if($row['fromJID'] == $login_jid)
+            {        
+                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name me">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.$row['body'].'</span></div>';
+            }
+            else
+            {
+                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.$row['body'].'</span></div>';   
+            }
+        }
 
+        echo $ret_html;exit;
+
+    }
 }

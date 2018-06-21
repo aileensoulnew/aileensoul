@@ -196,14 +196,12 @@ class Business_model extends CI_Model {
         }
 
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background,  
-                bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, cr.country_name as country, 
-                IF (bp.city IS NULL, concat(bp.business_slug, '-', s.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug 
+        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, it.industry_name, ct.city_name AS city, cr.country_name AS country, IF (bp.city IS NULL, CONCAT(bp.business_slug, '-', s.state_name) ,CONCAT(bp.business_slug, '-', ct.city_name)) AS business_slug 
                 FROM ailee_business_profile bp 
                 LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
-                LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
                 LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
-                LEFT JOIN ailee_states s ON s.state_name = bp.state 
+                LEFT JOIN ailee_states s ON s.state_id = bp.state 
+                LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
                 WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'"
                 . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;
 
