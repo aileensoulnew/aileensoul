@@ -23,7 +23,7 @@
 			<?php echo $header; ?>
 			<?php echo $artistic_header2; ?>
 			<div class="user-midd-section bui_art_left_box" id="paddingtop_fixed">
-				<div class="container art_container">
+				<div class="container mobp0">
 					<div class="">
 
 						<div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt" >

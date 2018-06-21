@@ -452,7 +452,7 @@ background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     border-color: transparent transparent transparent rgba(0,0,0, 0.6);
 }
 .cameraButton:hover .tooltiptext {
-    visibility: visible;
+    visibility: hidden;
 }
 label.cameraButton input[accept*="camera"] {
     display: none;
@@ -2734,6 +2734,8 @@ border: 1px solid #fff; line-height: 1;}
 	.user-midd-section{margin-bottom:60px;}
 	
 	.change-pw footer{position:inherit;}
+	body.profile-main-page{padding-bottom:0;}
+	body.profile-main-page footer{padding-bottom:0;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3088,6 +3090,8 @@ border: 1px solid #fff; line-height: 1;}
 	.contact-frnd-post .job-contact-frnd {margin-bottom:0;}
 	.profile-job-post-location-name{padding:0;}
 	.user_lst ul{padding:10px;}
+	.browse-jobs{padding-bottom:20px;}
+	.post-design-menu ul.like_cmnt_count li:last-child{min-width:55px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3405,7 +3409,8 @@ border: 1px solid #fff; line-height: 1;}
 	.old-no-login .btn-right{padding-top:5px;}
 	body.about-us{padding-bottom:0;}
 	body{padding-bottom:0;}
-	.work_type_custom label.error{top:60px;}
+	.work_type_custom label.error{top:50px;}
+	.all-job-bottom .hw-479 span{width:100%; float:left;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
@@ -3458,7 +3463,7 @@ border: 1px solid #fff; line-height: 1;}
 .right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul > li:nth-child(3){display:none;}
 .mob-bottom-menu ul > li:nth-child(4){display:none;}
-.mob-bottom-menu li{width:33.33% !important; float:left; list-style-type:none; margin-bottom:0;}
+.mob-bottom-menu li{width:33.33% !important; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
 .main-user-profile .user-btns a:last-child{display:none;}
 .custom-user-add{display:none;}
 .add-box{display:none;}

@@ -1863,7 +1863,8 @@ label.error{
     font-size:11px
 }
 .login .form-group select{
-    top:0
+    top:0;
+	background:transparent;
 }
 .dob{
     position:relative

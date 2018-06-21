@@ -1451,7 +1451,7 @@ label.cameraButton:active {
 .all-comment-comment-box {
     padding-bottom: 10px;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 4px;
     border-bottom: 1px solid #d9d9d9;
 }
 .all-comment-comment-box span {
@@ -1517,7 +1517,7 @@ label.cameraButton:active {
 .edit-comment-box .comment-edit-button button {
     padding: 6px 18px;
     position: absolute;
-    bottom: 2px;
+    bottom: 7px;
 }
 .comment-edit-button button {
     padding: 9px 10px 9px;
@@ -4229,7 +4229,7 @@ div .comment {
                 z-index: 999 !important;
 }
 .common-form fieldset label#othercategory_error{display: block !important;}
-
+.mob-comment button img{height:23px;}
 
 /***  media query  ***/
 @media screen and (max-width: 1280px) {
@@ -5135,10 +5135,11 @@ div .comment {
 	.file-preview{width:520px;}
 	.ctre_date{line-height:1.5;}
     .profile-job-post-location-name .user_lst ul li .bg_following {margin:0px;margin-right: 9px !important;} 
-.profile-job-post-location-name .user_lst ul li.fr {padding-left: 0px;}
-.profile-job-post-location-name .user_lst ul li #followdiv button{margin: 0px;margin-right: 9px;}
-.manage-post-custom .mian_middle_post_box{margin-left: auto !important;}
-.more-image{width: 264px;height: 188px;}
+	.profile-job-post-location-name .user_lst ul li.fr {padding-left: 0px;}
+	.profile-job-post-location-name .user_lst ul li #followdiv button{margin: 0px;margin-right: 9px;}
+	.manage-post-custom .mian_middle_post_box{margin-left: auto !important;}
+	.more-image{width: 264px;height: 188px;}
+	.inputtype-comment{margin-bottom:8px;}
 }
 
 @media screen and (max-width: 639px) {
