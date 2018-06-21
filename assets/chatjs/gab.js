@@ -1,4 +1,5 @@
-var conn_new = new Strophe.Connection('http://127.0.0.1:7070/http-bind/');
+var conn_new = new Strophe.Connection(openfirelink);
+// var conn_new = new Strophe.Connection('http://127.0.0.1:7070/http-bind/');
 // var conn_new = new Strophe.Connection('https://52.43.64.56:7443/http-bind/');
 //var conn_new = new Strophe.Connection('http://52.43.64.56:7070/http-bind/');
 var to_main_jid = '';
@@ -250,7 +251,7 @@ var Gab = {
 
 $(document).ready(function () {
     $(document).trigger('connect', {
-        jid: username+'@127.0.0.1',
+        jid: username+'@'+openfireserver,
         password: username
     });
     /*$('#login_dialog').dialog({
@@ -448,7 +449,8 @@ $(document).bind('connect', function (ev, data) {
     //var conn = new Strophe.Connection('http://bosh.metajack.im:5280/xmpp-httpbind');
     // var conn = new Strophe.Connection('https://52.43.64.56:7443/http-bind/');
     // var conn = new Strophe.Connection('http://52.43.64.56:7070/http-bind/');
-    var conn = new Strophe.Connection('http://127.0.0.1:7070/http-bind/');
+    // var conn = new Strophe.Connection('http://127.0.0.1:7070/http-bind/');
+    var conn = new Strophe.Connection(openfirelink);
 
     conn.connect(data.jid, data.password, function (status) {
         if (status === Strophe.Status.CONNECTED) {

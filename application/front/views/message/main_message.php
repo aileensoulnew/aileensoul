@@ -70,6 +70,8 @@
   </body>
     <script type="text/javascript">
       var base_url = '<?php echo base_url(); ?>';
+      var openfirelink = '<?php echo OPENFIRELINK; ?>';
+      var openfireserver = '<?php echo OPENFIRESERVER; ?>';
       var username = '<?php echo str_replace('-','_', $login_userdata['user_slug']); ?>';
     </script>
     <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->
