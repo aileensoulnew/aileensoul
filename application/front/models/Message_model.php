@@ -210,6 +210,7 @@ class Message_model extends CI_Model {
 
     function get_messages_from_jid($login_jid = "",$to_jid = "")
     {
+        $this->db->query("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;");        
         $sql = "SELECT * FROM ofMessageArchive WHERE fromJID = '".$login_jid."' AND toJID = '".$to_jid."' UNION  SELECT * FROM ofMessageArchive WHERE fromJID = '".$to_jid."' AND toJID = '".$login_jid."' ORDER By messageID";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();

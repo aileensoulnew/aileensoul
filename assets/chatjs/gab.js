@@ -14,7 +14,6 @@ var Gab = {
     },
 
     on_roster: function (iq) {
-        console.log(iq);
         $(iq).find('item').each(function () {
             var jid = $(this).attr('jid');
             var name = $(this).attr('name') || jid;
