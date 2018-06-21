@@ -140,13 +140,13 @@ var Gab = {
         var composing = $(message).find('composing');
         if (composing.length > 0) {
             $('.chat-event').html(Strophe.getNodeFromJid(jid)+" is typing...");
-            Gab.scroll_chat(jid_id);
+            // Gab.scroll_chat(jid_id);
         }
 
         var paused = $(message).find('paused');
         if (paused.length > 0) {
             $('.chat-event').html("");
-            Gab.scroll_chat(jid_id);
+            // Gab.scroll_chat(jid_id);
         }
 
         var body = $(message).find("html > body");
@@ -188,7 +188,7 @@ var Gab = {
                 "</span></div>");
 
             $('#chat-' + jid_id + ' .chat-message:last .chat-text')
-                .append(body);
+                .append(decodeURIComponent(body));
 
             Gab.scroll_chat(jid_id);
         }
@@ -365,7 +365,7 @@ $(document).ready(function () {
                     }
 
                     var message = $msg({to: to_main_jid,"type": "chat"})
-                        .c('body').t(body).up()
+                        .c('body').t(encodeURIComponent(body)).up()
                         .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
                     Gab.connection.send(message);                    
 
@@ -374,7 +374,7 @@ $(document).ready(function () {
                         "<span class='chat-name me'>" + 
                         Strophe.getNodeFromJid(Gab.connection.jid) +
                         "</span>&gt;<span class='chat-text'>" +
-                        body +
+                        decodeURIComponent(body) +
                         "</span></div>");                    
                     Gab.scroll_chat(to_dhash_jid);
 

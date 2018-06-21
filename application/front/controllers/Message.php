@@ -478,11 +478,11 @@ class Message extends MY_Controller {
             
             if($row['fromJID'] == $login_jid)
             {        
-                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name me">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.$row['body'].'</span></div>';
+                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name me">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.urldecode($row['body']).'</span></div>';
             }
             else
             {
-                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.$row['body'].'</span></div>';   
+                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.urldecode($row['body']).'</span></div>';   
             }
         }
 
