@@ -44,18 +44,21 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('IMAGEPATHFROM', 'uploads'); //upload,s3bucket 
     define('OPENFIRELINK', 'http://127.0.0.1:7070/http-bind/');
     define('OPENFIRESERVER', '127.0.0.1');
+    define('OPENFIRESERVERDASH', '127-0-0-1');
     error_reporting(0);
 }else if ($_SERVER['HTTP_HOST'] == '35.165.1.109:81' || $_SERVER['SERVER_ADDR'] == '35.165.1.109') {
     define('BASEURL', 'http://35.165.1.109:81/');
     define('IMAGEPATHFROM', 'upload'); //upload,s3bucket 
     define('OPENFIRELINK', 'http://52.43.64.56:7070/http-bind/');
     define('OPENFIRESERVER', '52.43.64.56');
+    define('OPENFIRESERVERDASH', '52-43-64-56');
     error_reporting(0);
 } else {
     define('BASEURL', 'https://www.aileensoul.com/');
     define('IMAGEPATHFROM', 's3bucket'); //upload,s3bucket 
     define('OPENFIRELINK', 'http://52.43.64.56:7070/http-bind/');
     define('OPENFIRESERVER', '52.43.64.56');
+    define('OPENFIRESERVERDASH', '52-43-64-56');
     error_reporting(0);
 }
 

@@ -345,7 +345,7 @@ class Recruiter_model extends CI_Model {
         if($searchkeyword != ""){
             $sql_skill_search = "
                 SELECT jr.job_id FROM ailee_job_reg jr,ailee_skill s 
-                    WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.keyskill REGEXP concat('[[:<:]](', REPLACE(jr.keyskill, ',', '|'), ')[[:>:]]')". $sql_skill ." AND s.status = '1'
+                    WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.keyskill REGEXP concat('[[:<:]](', s.skill_id, ')[[:>:]]')". $sql_skill ." AND s.status = '1'
                 UNION
                 SELECT jr.job_id FROM ailee_job_reg jr,ailee_job_title jt WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_title = jt.title_id". $sql_jt ." AND jt.status = '1'
                 UNION
@@ -383,7 +383,7 @@ class Recruiter_model extends CI_Model {
             $sql .= " LIMIT $start, $limit";
         }
 
-        // echo $sql;exit;
+        echo $sql;exit;
         $query = $this->db->query($sql);        
         $recommen_candid = $query->result_array();
         return $recommen_candid;

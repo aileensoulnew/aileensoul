@@ -33,10 +33,10 @@
       foreach ($contact_data as $key => $value)
       {
         $slug = str_replace("-","_",$value['user_slug']);?>
-        <li id="<?php echo $value['user_slug']; ?>-127-0-0-1">
+        <li id="<?php echo $value['user_slug']."-".OPENFIRESERVERDASH; ?>">
           <div class="roster-contact offline">
             <div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
-            <div class="roster-jid"><?php echo $slug; ?>@127.0.0.1</div>
+            <div class="roster-jid"><?php echo $slug."@".OPENFIRESERVER; ?></div>
           </div>
         </li> 
       <?php
