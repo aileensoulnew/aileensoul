@@ -454,6 +454,7 @@ background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
 .cameraButton:hover .tooltiptext {
     visibility: hidden;
 }
+.cameraButton:hover .tooltiptext_rec{visibility: hidden;}
 label.cameraButton input[accept*="camera"] {
     display: none;
 }
@@ -2512,6 +2513,10 @@ border: 1px solid #fff; line-height: 1;}
 .cover-pic .cancel-result{border:1px solid #1b8ab9;}
 .cus_work .control{padding-left:20px; float:left; margin-right:15px;}
 .cus_work .control--radio .control__indicator::after{width:13px; height:13px;}
+.edit_data{margin-top:-4px;}
+.cbp-spmenu{background:#fff !important;}
+/***  error  ***/
+#artpost .fw fieldset label.error{right:0;}
 
 
 /***  media query  ***/
@@ -2641,7 +2646,7 @@ border: 1px solid #fff; line-height: 1;}
 	.update-browser{display:none;}
 	.all-detail-box .tab-pane ul li{width:25%;}
 	.title-div ul{width:90%;}
-	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:15px 0 5px;}
+	.tooltip-custom{position:relative; right:auto; width:100%; text-align:left; padding:15px 0 5px; bottom:0; float:left;}
 	.tooltip-custom::before{display:none;}
 	.left-tooltip .tooltip-custom:before{display:none;}
 	.left-tooltip .tooltip-custom{position:relative; right:auto; width:100%; text-align:left; left:auto; padding:5px 0;}
@@ -2736,6 +2741,7 @@ border: 1px solid #fff; line-height: 1;}
 	.change-pw footer{position:inherit;}
 	body.profile-main-page{padding-bottom:0;}
 	body.profile-main-page footer{padding-bottom:0;}
+	.left-side-bar ul li.active::after{top:9px;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3196,6 +3202,7 @@ border: 1px solid #fff; line-height: 1;}
 	.detail-discription .all-job-middle ul li:first-child b{width:100%;}
 	.detail-discription .all-job-middle ul li:first-child span{width:100%; padding-left:0;}
 	.detail-discription .all-job-middle ul li:last-child span{width:100%; padding-left:0;}
+	.detail-discription .all-job-middle ul li:nth-child(5) span{width:auto;}
 	.detail-discription .all-job-middle ul li:nth-child(2) span{width:100%; padding-left:0;}
 	.detail-discription .all-job-middle ul li span{width:49%; padding-left:5px;}
 	.detail-discription .all-job-middle ul li:first-child b::after{display:none;}
@@ -3330,7 +3337,7 @@ border: 1px solid #fff; line-height: 1;}
 	.detail-job-no-login .btn-right .btn2{padding:8px 18px;}
 	
 	.cust-job-width .job-detail .job-top-detail{width:85%; padding-left: 10px;}
-	.all-job-bottom .hw-479 .pl20{padding-left:10px;}
+	.all-job-bottom .hw-479 .pl20{/*padding-left:10px;*/}
 	.search-business-top .all-job-top .post-img{margin:-50px auto 0; float:none; width:80px; height:80px;}
 	.search-business-top .job-top-detail{width:100%; text-align:center; padding:0;}
 	.search-business-top .job-top-detail h5{font-size:15px;}
@@ -3410,7 +3417,9 @@ border: 1px solid #fff; line-height: 1;}
 	body.about-us{padding-bottom:0;}
 	body{padding-bottom:0;}
 	.work_type_custom label.error{top:50px;}
-	.all-job-bottom .hw-479 span{width:100%; float:left;}
+	.all-job-bottom .hw-479 span{width:100%; float:left; padding-left:0; line-height:1.2; font-size:12px;}
+	#floatBarsG{transform: inherit;}
+	#artpost .fw fieldset:first-child label.error{margin-right:0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

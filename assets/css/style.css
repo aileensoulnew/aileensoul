@@ -472,7 +472,8 @@ hr{
     line-height:17px!important
 }
 #paddingtop_fixed #row1 .text-center{
-    padding-left:0!important
+    padding-left:0!important;
+	padding-right:0;
 }
 #paddingtop_fixed{
     padding-top:83px!important;
