@@ -46,9 +46,16 @@ class User_info extends MY_Controller {
 
     public function ng_basic_info_insert() {
         $userid = $this->session->userdata('aileenuser');
-
         $errors = array();
         $data = array();
+
+        $is_userBasicInfo = $this->user_model->is_userBasicInfo($userid);
+        $is_userStudentInfo = $this->user_model->is_userStudentInfo($userid);
+        if($is_userBasicInfo == 1 || $is_userStudentInfo == 1)
+        {
+            $errors['acc_exist'] = "1";
+        }
+
 
         $_POST = json_decode(file_get_contents('php://input'), true);
 
@@ -129,6 +136,13 @@ class User_info extends MY_Controller {
 
         $errors = array();
         $data = array();
+
+        $is_userBasicInfo = $this->user_model->is_userBasicInfo($userid);
+        $is_userStudentInfo = $this->user_model->is_userStudentInfo($userid);
+        if($is_userBasicInfo == 1 || $is_userStudentInfo == 1)
+        {
+            $errors['acc_exist'] = "1";
+        }
 
         $_POST = json_decode(file_get_contents('php://input'), true);
         

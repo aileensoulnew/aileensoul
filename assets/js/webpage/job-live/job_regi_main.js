@@ -430,6 +430,10 @@ app.controller('jobBasicInfoController', function ($scope, $http, $location, $wi
                     $scope.errorcityList = success.data.errors.cityList;
                     $scope.errorfield = success.data.errors.field;
                     $scope.errorotherField = success.data.errors.otherField;
+                    if(success.data.errors.acc_exist == 1)
+                    {
+                        window.location = base_url;
+                    }
                 } else {
                     if (success.data.is_success == '1') {
                         angular.element('#basicinfo #submit').removeClass("form_submit");
@@ -578,6 +582,10 @@ app.controller('jobEduInfoController', function ($scope, $http, $location, $wind
                     $scope.errorcurrentStudy = success.data.errors.currentStudy;
                     $scope.errorcityList = success.data.errors.cityList;
                     $scope.erroruniversityName = success.data.errors.universityName;
+                    if(success.data.errors.acc_exist == 1)
+                    {
+                        window.location = base_url;
+                    }
                 } else {
                 if (success.data.is_success == '1') {
                         angular.element('#studentinfo #submit').removeClass("form_submit");
