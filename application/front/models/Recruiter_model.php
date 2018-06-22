@@ -273,11 +273,11 @@ class Recruiter_model extends CI_Model {
 
         $sql_skill = "";$sql_jt = "";$sql_cn = "";$sql_it = "";     
         foreach (explode(",", $searchkeyword) as $key => $value) {
-            if($value != "")
+            if($value != "" && $value != "in" && $value != "candidates")
             {
-                $sql_skill = ($sql_skill == "") ? " AND (" : " OR";
-                $sql_jt = ($sql_jt == "") ? " AND (" : " OR";
-                $sql_it = ($sql_it == "") ? " AND (" : " OR";
+                $sql_skill .= ($sql_skill == "") ? " AND (" : " OR";
+                $sql_jt .= ($sql_jt == "") ? " AND (" : " OR";
+                $sql_it .= ($sql_it == "") ? " AND (" : " OR";
 
                 $value = '%'. $value .'%'; 
                 $sql_skill .= " s.skill LIKE '". $value ."'";
@@ -293,10 +293,11 @@ class Recruiter_model extends CI_Model {
         foreach (explode(",", $searchplace) as $key => $value) {
             if($value != "")
             {                
-                $sql_city = ($sql_city == "") ? " AND (" : " OR";
-                $sql_state = ($sql_state == "") ? " AND (" : " OR";
-                // $sql_country = ($sql_country == "") ? " AND (" : " OR";
+                $sql_city .= ($sql_city == "") ? " AND (" : " OR";
+                $sql_state .= ($sql_state == "") ? " AND (" : " OR";
+                // $sql_country .= ($sql_country == "") ? " AND (" : " OR";
 
+                $value = $value .'%';
                 $sql_city .= " ct.city_name LIKE '".$value."'";
                 $sql_state .= "  st.state_name LIKE '".$value."'";
                 // $sql_country .= "cr.country_name LIKE '".$value."'";            
@@ -383,7 +384,7 @@ class Recruiter_model extends CI_Model {
             $sql .= " LIMIT $start, $limit";
         }
 
-        echo $sql;exit;
+        // echo $sql;exit;
         $query = $this->db->query($sql);        
         $recommen_candid = $query->result_array();
         return $recommen_candid;
@@ -395,11 +396,11 @@ class Recruiter_model extends CI_Model {
 
         $sql_skill = "";$sql_jt = "";$sql_cn = "";$sql_it = "";     
         foreach (explode(",", $searchkeyword) as $key => $value) {
-            if($value != "")
+            if($value != "" && $value != "in" && $value != "candidates")
             {
-                $sql_skill = ($sql_skill == "") ? " AND (" : " OR";
-                $sql_jt = ($sql_jt == "") ? " AND (" : " OR";
-                $sql_it = ($sql_it == "") ? " AND (" : " OR";
+                $sql_skill .= ($sql_skill == "") ? " AND (" : " OR";
+                $sql_jt .= ($sql_jt == "") ? " AND (" : " OR";
+                $sql_it .= ($sql_it == "") ? " AND (" : " OR";
 
                 $value = '%'. $value .'%'; 
                 $sql_skill .= " s.skill LIKE '". $value ."'";
@@ -415,10 +416,11 @@ class Recruiter_model extends CI_Model {
         foreach (explode(",", $searchplace) as $key => $value) {
             if($value != "")
             {                
-                $sql_city = ($sql_city == "") ? " AND (" : " OR";
-                $sql_state = ($sql_state == "") ? " AND (" : " OR";
-                // $sql_country = ($sql_country == "") ? " AND (" : " OR";
+                $sql_city .= ($sql_city == "") ? " AND (" : " OR";
+                $sql_state .= ($sql_state == "") ? " AND (" : " OR";
+                // $sql_country .= ($sql_country == "") ? " AND (" : " OR";
 
+                $value = $value .'%';
                 $sql_city .= " ct.city_name LIKE '".$value."'";
                 $sql_state .= "  st.state_name LIKE '".$value."'";
                 // $sql_country .= "cr.country_name LIKE '".$value."'";            
@@ -494,7 +496,7 @@ class Recruiter_model extends CI_Model {
             $final_search_query .= " ) as j ORDER BY j.job_id DESC )";
         }
 
-        $sql = "SELECT count(*) as total_record FROM ailee_job_reg 
+        $sql = "SELECT ailee_job_reg.user_id as iduser, ailee_job_reg.fname, ailee_job_reg.lname, ailee_job_reg.email, ailee_job_reg.phnno, ailee_job_reg.language, ailee_job_reg.keyskill, ailee_job_reg.experience, ailee_job_reg.job_user_image, ailee_job_reg.designation, ailee_job_reg.work_job_title, ailee_job_reg.work_job_industry, ailee_job_reg.work_job_city, ailee_job_reg.slug, ailee_job_add_edu.degree, ailee_job_add_edu.stream, ailee_job_add_edu.board_primary, ailee_job_add_edu.board_secondary, ailee_job_add_edu.board_higher_secondary, ailee_job_add_edu.percentage_primary, ailee_job_add_edu.percentage_secondary, ailee_job_add_edu.percentage_higher_secondary, ailee_job_reg.exp_y,ailee_job_reg.exp_m,ailee_job_graduation.* FROM ailee_job_reg 
             LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id 
             LEFT JOIN ailee_job_graduation ON ailee_job_reg.user_id=ailee_job_graduation.user_id 
             WHERE ailee_job_reg.is_delete = '0' ". $final_search_query ." AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10'" . $sql_filter;
@@ -504,7 +506,8 @@ class Recruiter_model extends CI_Model {
         // echo $sql;exit;
         $query = $this->db->query($sql);        
         $recommen_candid = $query->row_array();
-        return $recommen_candid['total_record'];
+        // echo count($recommen_candid);exit;
+        return array("total_record"=>count($recommen_candid));
     }
 
     function recruiter_related_blog_list() {

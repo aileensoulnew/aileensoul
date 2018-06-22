@@ -6195,7 +6195,10 @@ class Recruiter extends MY_Controller {
 
 		$searchkeyword = trim($_GET["skill"]);
 		$searchplace = trim($_GET["searchplace"]);
-
+		$serch = explode("candidates,in,", $searchkeyword);
+		$searchkeyword = $serch[0];
+		$searchplace = $serch[1];
+		
 		$rec_search = trim($searchkeyword, ' ');
 		$search_place = $searchplace;
 
