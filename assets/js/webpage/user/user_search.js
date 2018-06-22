@@ -95,6 +95,7 @@ app.controller('EditorController', ['$scope', function ($scope) {
     }]);
 app.controller('searchController', function ($scope, $http) {
     $scope.user_id = user_id;
+    $scope.live_slug = live_slug;
     searchData();
     getContactSuggetion();
     function searchData() {

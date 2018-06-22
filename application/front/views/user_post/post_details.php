@@ -4,7 +4,7 @@
         <title ng-bind="title"></title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>"> 
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css') ?>">
@@ -63,19 +63,19 @@
                                             <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                                 <span class="post-designation" ng-if="post.user_data.title_name != '' && post.question_data.is_anonymously == '0'" ng-bind="post.user_data.title_name"></span>
                                                 <span class="post-designation" ng-if="post.user_data.title_name == '' && post.question_data.is_anonymously == '0'" ng-bind="post.user_data.degree_name"></span>
-                                                <span class="post-designation" ng-if="post.user_data.title_name == null && post.user_data.degree_name == null && post.question_data.is_anonymously == '0'" ng-bind="CURRENT WORK"></span>
+                                                <span class="post-designation" ng-if="post.user_data.title_name == null && post.user_data.degree_name == null && post.question_data.is_anonymously == '0'">CURRENT WORK</span>
                                             </div>
                                             <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                                 <span class="post-designation" ng-if="post.user_data.title_name != ''" ng-bind="post.user_data.title_name"></span>
                                                 <span class="post-designation" ng-if="post.user_data.title_name == ''" ng-bind="post.user_data.degree_name"></span>
-                                                <span class="post-designation" ng-if="post.user_data.title_name == null && post.user_data.degree_name == null" ng-bind="CURRENT WORK"></span>
+                                                <span class="post-designation" ng-if="post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</span>
                                             </div>
                                         </div>
-                                        <div class="post-right-dropdown dropdown">
+                                        <div class="post-right-dropdown dropdown" ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/right-down.png') ?>" alt="Right Down"></a>
                                             <ul class="dropdown-menu">
                                                 <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="EditPostNew(post.post_data.id, post.post_data.post_for, $index)">Edit Post</a></li>
-                                                <li><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>                                            
+                                                <li ng-if="user_id == post.user_data.user_id && post.post_data.post_for != 'profile_update' && post.post_data.post_for != 'cover_update'"><a href="#" ng-click="deletePost(post.post_data.id, $index)">Delete Post</a></li>                                            
                                             </ul>
                                         </div>
                                     </div>
@@ -566,35 +566,35 @@
         <script src="<?php echo base_url('assets/js/webpage/user/post_details.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
         <script>
-			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-				showRight = document.getElementById( 'showRight' ),
-				body = document.body;
+            var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+                showRight = document.getElementById( 'showRight' ),
+                body = document.body;
 
-			showRight.onclick = function() {
-				classie.toggle( this, 'active' );
-				classie.toggle( menuRight, 'cbp-spmenu-open' );
-				disableOther( 'showRight' );
-			};
-		
-			function disableOther( button ) {
-				
-				if( button !== 'showRight' ) {
-					classie.toggle( showRight, 'disabled' );
-				}
-			}
-			
-			$(function () {
-				$('a[href="#search"]').on('click', function (event) {
-					event.preventDefault();
-					$('#search').addClass('open');
-					$('#search > form > input[type="search"]').focus();
-				});
-				$('#search, #search button.close-new').on('click keyup', function (event) {
-					if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
-						$(this).removeClass('open');
-					}
-				});
-			});
-		</script>
+            showRight.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                disableOther( 'showRight' );
+            };
+        
+            function disableOther( button ) {
+                
+                if( button !== 'showRight' ) {
+                    classie.toggle( showRight, 'disabled' );
+                }
+            }
+            
+            $(function () {
+                $('a[href="#search"]').on('click', function (event) {
+                    event.preventDefault();
+                    $('#search').addClass('open');
+                    $('#search > form > input[type="search"]').focus();
+                });
+                $('#search, #search button.close-new').on('click keyup', function (event) {
+                    if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+                        $(this).removeClass('open');
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
