@@ -11,6 +11,7 @@ class Notification extends MY_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('email_model');
+        $this->load->model('notification_model');
         $this->load->model('freelancer_hire_model');
         $this->lang->load('message', 'english');
 //AWS access info start
@@ -1022,6 +1023,9 @@ Your browser does not support the audio tag.
 
     public function not_header($id = "") {
         $userid = $this->session->userdata('aileenuser');
+
+        // $notificationData = $this->notification_model->get_notification($userid);
+        // print_r($notificationData);exit;
         // freelancer hire shortlisted  notification start
         $contition_array = array('notification.not_type' => '9', 'notification.not_from' => '5', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(

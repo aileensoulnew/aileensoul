@@ -282,6 +282,19 @@ class User_post_model extends CI_Model {
         return $result_array;
     }
 
+    public function postCommentDetail($comment_id = '') {
+        $this->db->select("u.user_slug,u.user_gender,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date")->from("user_post_comment upc");
+        $this->db->join('user u', 'u.user_id = upc.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = upc.user_id', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = upc.user_id', 'left');
+        $this->db->where('upc.id', $comment_id);
+        $this->db->where('ul.status', '1');
+        $this->db->where('upc.is_delete', '0');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
     public function is_userlikePostComment($user_id = '', $comment_id = '') {
         $this->db->select("COUNT(upcl.id) as like_count")->from("user_post_comment_like upcl");
         $this->db->join('user_login ul', 'ul.user_id = upcl.user_id', 'left');

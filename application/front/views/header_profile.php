@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/header.css?ver=' . time()); ?>">
 <?php
 $session_user = $this->session->userdata();
 $userData = $this->user_model->getUserData($session_user['aileenuser']);
@@ -28,7 +29,7 @@ if($browser == "Firefox")
 ?>
 <div class="web-header">
     <header class="custom-header" ng-controller="headerCtrl" ng-app="headerApp">
-    <div class="header animated fadeInDownBig">
+    <div class="animated fadeInDownBig">
         <div class="container">
             <div class="row">
 
