@@ -404,6 +404,89 @@ class User_post extends MY_Controller {
                 $return_array['post_like_data'] = '';
             }
         }
+
+        if($return_array['is_newLike'] == 1)
+        {
+            $to_id = $this->user_post_model->getPostUserId($post_id);
+            if($userid != $to_id)
+            {
+                $contition_array = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                $likenotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                if ($likenotification[0]['not_read'] == 2) {                
+                }
+                elseif($likenotification[0]['not_read'] == 1)
+                {
+                    $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
+                    $where = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                    $this->db->where($where);
+                    $updatdata = $this->db->update('notification', $dataFollow);
+                }
+                else
+                {
+                    $dataFollow = array(
+                        'not_type' => '5',
+                        'not_from_id' => $userid,
+                        'not_product_id'=>$post_id,
+                        'not_to_id' => $to_id,
+                        'not_read' => '2',                    
+                        'not_from' => '7',
+                        'not_img' => '2',
+                        'not_created_date' => date('Y-m-d H:i:s'),
+                        'not_active' => '1'
+                    );
+                    $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+                    if ($insert_id) {
+                        $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_id))->row()->email;
+                        $login_userdata = $this->user_model->getUserData($userid);
+                        $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
+                        if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                        }
+                        else
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                        }
+
+                        $email_html = '';
+                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="padding:5px;">
+                                                <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            </td>
+                                            <td style="padding:5px;">
+                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your post.</p>
+                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                            </td>
+                                            <td style="padding:5px;">
+                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            </td>
+                                        </tr>
+                                        </table>';
+                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' liked your post you in Aileensoul.';
+                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
+                    }
+                }
+            }
+        }
         echo json_encode($return_array);
     }
 

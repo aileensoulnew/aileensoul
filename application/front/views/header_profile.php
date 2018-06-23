@@ -166,15 +166,15 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown" style="display: block;">
                                 <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick = "return Notificationheader();"><img ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification"></a>
 
                                 <div class="dropdown-menu">
-                                     <ul class="notification_data_in">
-                                     </ul>
-                                    <div class="dropdown-title hide">
-                                        Notifications <a href="#" class="pull-right">See All</a>
+                                    <div class="dropdown-title">
+                                        Notifications <span id="seenot" class="pull-right">See All</span>
                                     </div>
+                                     <ul class="notification_data_in">
+                                     </ul>                                    
                                     <div class="content custom-scroll hide">
                                         <ul class="dropdown-data noti-dropdown">
                                             <li class="">

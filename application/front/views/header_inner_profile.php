@@ -162,14 +162,16 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/noti.png?ver=' . time()) ?>" alt="Notification"></a>
+                            <li class="dropdown" style="display: block;">
+                                <a href="#" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" onclick = "return Notificationheader();" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/noti.png?ver=' . time()) ?>" alt="Notification"></a>
 
                                 <div class="dropdown-menu">
                                     <div class="dropdown-title">
-                                        Notifications <a href="notification.html" class="pull-right">See All</a>
+                                        Notifications <span id="seenot" class="pull-right">See All</span>
                                     </div>
-                                    <div class="content custom-scroll">
+                                    <ul class="notification_data_in">
+                                     </ul>
+                                    <div class="content custom-scroll hide">
                                         <ul class="dropdown-data noti-dropdown">
                                             <li class="">
                                                 <a href="#">
@@ -552,10 +554,50 @@ if($browser == "Firefox")
     }
    }
    
-   $(function () {
-       
+   function Notificationheader() {
+        getNotification();
+        notheader();
 
-   });
+    }
+    function getNotification() {
+        // first click alert('here'); 
+
+        $.ajax({
+            url: "<?php echo base_url(); ?>notification/update_notification",
+            type: "POST",
+            //data: {uid: 12341234}, //this sends the user-id to php as a post variable, in php it can be accessed as $_POST['uid']
+            success: function (data) {
+                data = JSON.parse(data);
+                //alert(data);
+                //update some fields with the updated data
+                //you can access the data like 'data["driver"]'
+            }
+        });
+
+    }
+
+    function notheader()
+    {
+
+        // $("#fad" + clicked_id).fadeOut(6000);
+
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "notification/not_header" ?>',
+            dataType: 'json',
+            data: '',
+            success: function (data) {
+                //    alert(data);
+                $('.' + 'notification_data_in').html(data.notification);
+                $('#seenot').html(data.seeall);
+               
+            }
+
+
+        });
+
+    }
   </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>

@@ -792,6 +792,7 @@ $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-
 $route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
+$route['notification'] = 'notification';
 $route['(:any)'] = 'Userprofile';
 
 
