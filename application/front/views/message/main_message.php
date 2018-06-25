@@ -10,6 +10,9 @@
 
     <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
     <link rel='stylesheet' href='<?php echo base_url(); ?>assets/chatjs/gab.css'>    
+    <link rel='stylesheet' href='<?php echo base_url(); ?>assets/css/common-style.css'>    
+    <link rel='stylesheet' href='<?php echo base_url(); ?>assets/n-css/n-commen.css'>    
+    <link rel='stylesheet' href='<?php echo base_url(); ?>assets/n-css/n-style.css'>    
   </head>
   <body>
     <h1>Chat</h1>
@@ -20,31 +23,41 @@
       <span class='button' id='new-chat'>chat with...</span> || 
       <span class='button' id='disconnect'>disconnect</span>-->
     </div>
-
-    <div id='chat-area'>
-      <div class="chat-event"></div>
-      <ul></ul>
-      <div id="chat-messages"></div>
-    </div>
-    
-    <div id='roster-area'>
-      <ul>
-      <?php 
-      foreach ($contact_data as $key => $value)
-      {
-        $slug = str_replace("-","_",$value['user_slug']);?>
-        <li id="<?php echo $value['user_slug']."-".OPENFIRESERVERDASH; ?>">
-          <div class="roster-contact offline">
-            <div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
-            <div class="roster-jid"><?php echo $slug."@".OPENFIRESERVER; ?></div>
-          </div>
-        </li> 
-      <?php
-      }
-      ?>
-      </ul>
-    </div>
-
+	<div class="middle-section custom-mob-pd">
+		<div class="container">
+			<div class="custom-user-list">
+				<div class="msg-box">
+					<div id='roster-area'>
+						  <ul>
+						  <?php 
+						  foreach ($contact_data as $key => $value)
+						  {
+							$slug = str_replace("-","_",$value['user_slug']);?>
+							<li id="<?php echo $value['user_slug']."-".OPENFIRESERVERDASH; ?>">
+							  <div class="roster-contact offline">
+								<div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
+								<div class="roster-jid"><?php echo $slug."@".OPENFIRESERVER; ?></div>
+							  </div>
+							</li> 
+						  <?php
+						  }
+						  ?>
+						  </ul>
+					</div>
+			
+					<div id='chat-area'>
+					  <div class="chat-event"></div>
+					  <ul></ul>
+					  <div id="chat-messages"></div>
+					</div>
+				</div>
+			</div>
+			<div class="right-add">
+				advertise
+			</div>
+				
+		</div>
+	</div>
     <!-- login dialog -->
     <div id='login_dialog' class='hidden'>
       <label>JID:</label><input type='text' id='jid' value="p@127.0.0.1">
