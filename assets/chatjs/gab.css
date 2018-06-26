@@ -1,10 +1,4 @@
-body {
-    font-family: Helvetica;
-}
 
-h1 {
-    text-align: center;
-}
 
 .hidden {
     display: none
@@ -26,12 +20,6 @@ h1 {
     margin-bottom: 15px;
 }
 
-#chat-area {
-    float: left;
-    width: 600px;
-    height: 300px;
-}
-
 .chat-messages {
     height: 180px;
     border-bottom: solid 2px #ddd;
@@ -41,14 +29,6 @@ h1 {
 #chat-area input {
     margin-top: 10px;
     width: 95%;
-}
-
-#roster-area {
-    float: right;
-    border-left: solid 2px #ddd;
-    padding: 10px;
-    width: 250px;
-    height: 300px;
 }
 
 .chat-name {
@@ -62,19 +42,6 @@ h1 {
 .chat-event {
     font-style: italic;
     font-size: 75%;
-}
-
-.roster-contact {
-    padding: 3px;
-}
-
-.roster-contact:hover {
-    background-color: #aaa;
-    color: white;
-}
-
-.roster-name {
-    font-size: 150%;
 }
 
 .online {
