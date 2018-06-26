@@ -8163,7 +8163,8 @@ class Artist extends MY_Controller {
         $artistic_deactive = $this->data['artistic_deactive'] = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
 
         if ($artistic_deactive) {
-            redirect('artist');
+            echo 1;exit;
+            // redirect('artist');
         }
         //if user deactive profile then redirect to artist/index untill active profile End
 
@@ -9304,7 +9305,7 @@ class Artist extends MY_Controller {
     // khyati 9-5 changes end 
 
 
-    public function fourcommentimg($postid) {
+    public function fourcommentimg($postid = "") {
 
         $userid = $this->session->userdata('aileenuser');
 

@@ -283,7 +283,7 @@ class User_post_model extends CI_Model {
     }
 
     public function postCommentDetail($comment_id = '') {
-        $this->db->select("u.user_slug,u.user_gender,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date")->from("user_post_comment upc");
+        $this->db->select("u.user_slug,u.user_gender,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment, upc.post_id, upc.created_date")->from("user_post_comment upc");
         $this->db->join('user u', 'u.user_id = upc.user_id', 'left');
         $this->db->join('user_login ul', 'ul.user_id = upc.user_id', 'left');
         $this->db->join('user_info ui', 'ui.user_id = upc.user_id', 'left');

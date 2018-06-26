@@ -225,8 +225,7 @@ class User_post extends MY_Controller {
                                             </td>
                                         </tr>
                                         </table>';
-                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' commented on your post in Aileensoul.';
-                        echo $email_html;exit;
+                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' commented on your post in Aileensoul.';                        
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                     }
                 }
@@ -313,7 +312,7 @@ class User_post extends MY_Controller {
             $to_id = $this->user_post_model->postCommentDetail($comment_id)['commented_user_id'];
             if($userid != $to_id)
             {
-                $contition_array = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                $contition_array = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$comment_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
                 $likenotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
                 if ($likenotification[0]['not_read'] == 2) {                
@@ -321,7 +320,7 @@ class User_post extends MY_Controller {
                 elseif($likenotification[0]['not_read'] == 1)
                 {
                     $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
-                    $where = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                    $where = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$comment_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
                     $this->db->where($where);
                     $updatdata = $this->db->update('notification', $dataFollow);
                 }
@@ -330,11 +329,11 @@ class User_post extends MY_Controller {
                     $dataFollow = array(
                         'not_type' => '5',
                         'not_from_id' => $userid,
-                        'not_product_id'=>$post_id,
+                        'not_product_id'=>$comment_id,
                         'not_to_id' => $to_id,
                         'not_read' => '2',                    
                         'not_from' => '7',
-                        'not_img' => '2',
+                        'not_img' => '3',
                         'not_created_date' => date('Y-m-d H:i:s'),
                         'not_active' => '1'
                     );

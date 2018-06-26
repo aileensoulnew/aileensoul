@@ -3024,4 +3024,12 @@ class Freelancer_hire extends MY_Controller {
         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);
     }
 
+    public function freelancer_notification_count($to_id = '') {
+        $contition_array = array('not_read' => '2', 'not_to_id' => $to_id, 'not_type !=' => '1', 'not_type !=' => '2');
+        $result = $this->common->select_data_by_condition('notification', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        $count = $result[0]['total'];
+        return $count;
+    }
+
 }
