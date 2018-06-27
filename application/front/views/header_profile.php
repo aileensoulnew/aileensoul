@@ -168,7 +168,9 @@ if($browser == "Firefox")
                                 </div>
                             </li>
                             <li class="dropdown" style="display: block;">
-                                <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick = "return Notificationheader();"><img ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification"></a>
+                                <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick = "return Notificationheader();"><img ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification">
+                                    <span id="noti_count" class="noti-box" style="display: none;"></span>
+                                </a>
 
                                 <div class="dropdown-menu">
                                     <div class="dropdown-title">
@@ -574,6 +576,45 @@ if($browser == "Firefox")
             }
         });
     }
+
+    function get_notification_unread_count()
+    {
+        var url = '<?php echo base_url() . "notification/get_notification_unread_count" ?>';
+        $.get(url, function(data, status){
+            $("#noti_count").show();
+            if(parseInt(data) > 0)
+            {
+                $("#noti_count").html(data);
+            }
+            else
+            {
+                $("#noti_count").hide();
+                $("#noti_count").html("");
+            }
+        });
+        /*$.ajax({
+            type: 'POST',
+            url: '<?php //echo base_url() . "notification/get_notification_unread_count" ?>',
+            dataType: 'json',
+            data: '',
+            success: function (data) {
+                // console.log(data);
+                $("#noti_count").show();
+                if(parseInt(data) > 0)
+                {
+                    $("#noti_count").html(data);
+                }
+                else
+                {
+                    $("#noti_count").hide();
+                    $("#noti_count").html("");
+                }
+            }
+        });*/
+    }
+    window.setInterval(function(){
+      get_notification_unread_count();
+    }, 5000);
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>

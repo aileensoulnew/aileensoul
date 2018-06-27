@@ -62,4 +62,18 @@ class Notification_model extends CI_Model {
         $result_array = $query->first_row();
         return $result_array;
     }
+
+    public function get_notification_unread_count($user_id)
+    {
+        $this->db->select("COUNT(*) as total_rec")->from("notification");
+        $this->db->where('not_to_id',$user_id);
+        $this->db->where('not_read','2');
+        $this->db->where('not_type !=','2');        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['total_rec'];
+
+        // $query = $this->db->query("CALL notification_count(?)",array('user_id'=>$user_id));
+        // return $query->row()->total_rec;
+    }
 }

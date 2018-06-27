@@ -5164,4 +5164,10 @@ Your browser does not support the audio tag.
         ));
     }
 
+    public function get_notification_unread_count()
+    {        
+        $userid = $this->session->userdata('aileenuser');
+        echo $count = $this->notification_model->get_notification_unread_count($userid);exit;
+    }
+
 }
