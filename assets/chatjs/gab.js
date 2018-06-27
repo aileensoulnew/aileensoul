@@ -351,14 +351,14 @@ $(document).ready(function () {
             // $('#chat-messages').html("<div id='chat-" + jid_id+"' data='" + jid_id+"'><div class='chat-messages content custom-scroll'></div><input type='text' class='chat-input'></div>");
 
             get_messages(jid);
-            setTimeout(function(){                
+            /*setTimeout(function(){                
                 $(".custom-scroll").mCustomScrollbar({
                     autoHideScrollbar:true,
                     theme:"minimal",
                     scrollInertia:0
                 });
                 $(".custom-scroll").mCustomScrollbar("scrollTo","bottom");
-            },1000);
+            },1000);*/
             tabs.tabs( "refresh" );
             $('#chat-area').tabs({ active: 0 });
 
