@@ -19,6 +19,7 @@ class Message extends MY_Controller {
         $this->load->model('business_model');
         $this->load->model('message_model');
         include('business_include.php');
+        include ('main_profile_link.php');
     }
 
     public function index() {
@@ -462,7 +463,8 @@ class Message extends MY_Controller {
 
     public function main_message()
     {
-        $userid = $this->session->userdata('aileenuser');        
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['login_userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.user_id, u.first_name, u.last_name, u.user_slug');
         $this->data['contact_data'] = $this->message_model->getAllContactData($userid);
         $this->load->view('message/main_message',$this->data);
@@ -478,12 +480,43 @@ class Message extends MY_Controller {
             
             if($row['fromJID'] == $login_jid)
             {        
-                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name me">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.urldecode($row['body']).'</span></div>';
+                $ret_html .= '<div class="chat-message">
+                                <div class="chat-name me">
+                                    <div class="contact-img hide">
+                                        <img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
+                                    </div>
+                                    <div class="chat-text">'.urldecode($row['body']).'</div>
+                                    <div class="msg-send-time hide">24 june 2018, 11:45 AM </div>
+                                </div>
+                            </div>';
             }
             else
             {
-                $ret_html .= '<div class="chat-message">&lt;<span class="chat-name">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>&gt;<span class="chat-text">'.urldecode($row['body']).'</span></div>';   
+                $ret_html .= '<div class="chat-message">
+                                <div class="chat-name">
+                                    <div class="chat-text">'.urldecode($row['body']).'</div>
+                                    <div class="msg-send-time hide">24 june 2018, 11:45 AM </div>
+                                    <div class="contact-img hide">
+                                        <img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
+                                    </div>
+                                </div>
+                            </div>';   
             }
+
+            /*if($row['fromJID'] == $login_jid)
+            {        
+                $ret_html .= '<div class="chat-message">
+                                <span class="chat-name me">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>
+                                <span class="chat-text">'.urldecode($row['body']).'</span>
+                            </div>';
+            }
+            else
+            {
+                $ret_html .= '<div class="chat-message">
+                                <span class="chat-name">'.ucwords(explode('@', $row['fromJID'])[0]).'</span>
+                                <span class="chat-text">'.urldecode($row['body']).'</span>
+                            </div>';   
+            }*/
         }
 
         echo $ret_html;exit;

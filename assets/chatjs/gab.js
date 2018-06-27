@@ -180,16 +180,12 @@ var Gab = {
             // $('#chat-' + jid_id + ' .chat-event').remove();
             $('.chat-event').html("");
 
+            var msg_body = '<div class="chat-message"><div class="chat-name"><div class="contact-img hide"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png"></div><div class="chat-text">'+decodeURIComponent(body) +'</div><div class="msg-send-time hide">24 june 2018, 11:45 AM </div></div></div>';
             // add the new message
-            $('#chat-' + jid_id + ' .chat-messages').append(
-                "<div class='chat-message'>" +
-                "&lt;<span class='chat-name'>" +
-                Strophe.getNodeFromJid(jid) +
-                "</span>&gt;<span class='chat-text'>" +
-                "</span></div>");
+            $('#chat-' + jid_id + ' .chat-messages').append(msg_body);
+            // $('#chat-' + jid_id + ' .chat-messages').append("<div class='chat-message'>" +"&lt;<span class='chat-name'>" +Strophe.getNodeFromJid(jid) +"</span>&gt;<span class='chat-text'>" +"</span></div>");
 
-            $('#chat-' + jid_id + ' .chat-message:last .chat-text')
-                .append(decodeURIComponent(body));
+            // $('#chat-' + jid_id + ' .chat-message:last .chat-text').append(decodeURIComponent(body));
 
             Gab.scroll_chat(jid_id);
         }
@@ -346,58 +342,50 @@ $(document).ready(function () {
             var tabs = $( "#chat-area" ).tabs();
             var ul = tabs.find( "ul" );
             // $( "<li><a href='#chat-"+jid_id+"'>"+name+"</a></li>" ).appendTo( ul );
-            $( ul ).html( "<li><a href='#chat-"+jid_id+"'>"+name+"</a></li>" );
+            var chat_title = '<div class="contact-img hide"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png"></div><div class="contact-detail"><div class="roster-name">'+name+'</div><div class="last-msg hide">online</div></div>';
 
-            $('#chat-messages').html("<div id='chat-" + jid_id+"' data='" + jid_id+"'><div class='chat-messages'></div><input type='text' class='chat-input'></div>");
+            // $( ul ).html( "<li><a href='#chat-"+jid_id+"'>"+name+"</a></li>" );
+            $( ul ).html( chat_title );
 
-            get_messages(jid)
+            $('#chat-messages').html("<div id='chat-" + jid_id+"' data='" + jid_id+"'><div class='chat-messages content custom-scroll'></div><div class='btm-snd-msg'><div class='comment chat-input' name='comments' onpaste='OnPaste_StripFormatting(this, event);' placeholder='Type your message here...' style='position: relative;' contenteditable='true'></div><span class='comment-submit'><button class='btn2' onclick='send_message();'>Send</button></span></div></div>");
+            // $('#chat-messages').html("<div id='chat-" + jid_id+"' data='" + jid_id+"'><div class='chat-messages content custom-scroll'></div><input type='text' class='chat-input'></div>");
+
+            get_messages(jid);
+            setTimeout(function(){                
+                $(".custom-scroll").mCustomScrollbar({
+                    autoHideScrollbar:true,
+                    theme:"minimal",
+                    scrollInertia:0
+                });
+                $(".custom-scroll").mCustomScrollbar("scrollTo","bottom");
+            },1000);
             tabs.tabs( "refresh" );
             $('#chat-area').tabs({ active: 0 });
 
             $('.chat-input').keyup( function (ev) {
-                var jid = $(this).parent().data('jid');
-                if (ev.which === 13) {                    
-                    ev.preventDefault();
 
-                    var body = $(this).val();
-                    if(body == "" || body == undefined)
-                    {
-                        return false;
-                    }
+                var body = $(".chat-input").text();
+                body = body.replace(/&nbsp;/gi, " ");
+                body = body.replace(/<br>$/, '');
+                body = body.replace(/&gt;/gi, ">");
+                body = body.replace(/&/g, "%26");
 
-                    var message = $msg({to: to_main_jid,"type": "chat"})
-                        .c('body').t(encodeURIComponent(body)).up()
-                        .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
-                    Gab.connection.send(message);                    
-
-                    $(this).parent().find('.chat-messages').append(
-                        "<div class='chat-message'>&lt;" +
-                        "<span class='chat-name me'>" + 
-                        Strophe.getNodeFromJid(Gab.connection.jid) +
-                        "</span>&gt;<span class='chat-text'>" +
-                        decodeURIComponent(body) +
-                        "</span></div>");                    
-                    Gab.scroll_chat(to_dhash_jid);
-
-                    $(this).val('');
-                    $(this).parent().data('composing', false);
-                } else {
-                    if($(this).val() != "")
-                    {                        
-                        var composing = $(this).parent().data('composing');
-                        if (!composing && $('.chat-event').html() == '') {
-                            /*var notify = $msg({to: to_main_jid, "type": "chat"})
-                                .c('composing', {xmlns: "http://jabber.org/protocol/chatstates"});*/
-                            // Gab.connection.send(notify);
-                            // $(this).parent().data('composing', true);
-                            Gab.connection.chatstates.sendComposing(to_main_jid,'chat');
-                        }
-                    }
-                    else
-                    {
-                        Gab.connection.chatstates.sendPaused(to_main_jid,'chat');
+                if(body != "")
+                {
+                    var composing = $(this).parent().data('composing');
+                    if (!composing && $('.chat-event').html() == '') {
+                        /*var notify = $msg({to: to_main_jid, "type": "chat"})
+                            .c('composing', {xmlns: "http://jabber.org/protocol/chatstates"});*/
+                        // Gab.connection.send(notify);
+                        // $(this).parent().data('composing', true);
+                        Gab.connection.chatstates.sendComposing(to_main_jid,'chat');
                     }
                 }
+                else
+                {
+                    Gab.connection.chatstates.sendPaused(to_main_jid,'chat');
+                }
+                
             });
         //}
         // $('#chat-area').tabs('select', '#chat-' + jid_id);
@@ -507,4 +495,56 @@ function get_messages(to_jid)
             },100);
         }
     });
+}
+function send_message()
+{
+    var body = $(".chat-input").text();
+    body = body.replace(/&nbsp;/gi, " ");
+    body = body.replace(/<br>$/, '');
+    body = body.replace(/&gt;/gi, ">");
+    body = body.replace(/&/g, "%26");
+    
+    if(body == "" || body == undefined)
+    {
+        return false;
+    }
+
+    var message = $msg({to: to_main_jid,"type": "chat"})
+        .c('body').t(encodeURIComponent(body)).up()
+        .c('active', {xmlns: "http://jabber.org/protocol/chatstates"});
+    Gab.connection.send(message);
+
+    var msg_body = '<div class="chat-message"><div class="chat-name me"><div class="contact-img hide"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png"></div><div class="chat-text">'+decodeURIComponent(body) +'</div><div class="msg-send-time hide">24 june 2018, 11:45 AM </div></div></div>';
+
+    // $(this).parent().find('.chat-messages').append("<div class='chat-message'>&lt;" +"<span class='chat-name me'>" + Strophe.getNodeFromJid(Gab.connection.jid) +"</span>&gt;<span class='chat-text'>" +decodeURIComponent(body) +"</span></div>");                    
+    // $(".chat-input").parent().find('.chat-messages').append(msg_body);
+    $('#chat-' + to_dhash_jid + ' .chat-messages').append(msg_body);
+    Gab.scroll_chat(to_dhash_jid);
+
+    $(".chat-input").html("");
+    $(this).parent().data('composing', false);
+}
+
+var _onPaste_StripFormatting_IEPaste = false;
+
+function OnPaste_StripFormatting(elem, e) {
+
+    if (e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
+        e.preventDefault();
+        var text = e.originalEvent.clipboardData.getData('text/plain');
+        window.document.execCommand('insertText', false, text);
+    } else if (e.clipboardData && e.clipboardData.getData) {
+        e.preventDefault();
+        var text = e.clipboardData.getData('text/plain');
+        window.document.execCommand('insertText', false, text);
+    } else if (window.clipboardData && window.clipboardData.getData) {
+        // Stop stack overflow
+        if (!_onPaste_StripFormatting_IEPaste) {
+            _onPaste_StripFormatting_IEPaste = true;
+            e.preventDefault();
+            window.document.execCommand('ms-pasteTextOnly', false);
+        }
+        _onPaste_StripFormatting_IEPaste = false;
+    }
+
 }

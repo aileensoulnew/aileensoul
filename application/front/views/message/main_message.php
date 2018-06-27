@@ -16,6 +16,7 @@
     <link rel='stylesheet' href='<?php echo base_url(); ?>assets/n-css/n-style.css'>    
   </head>
   <body>
+  	<?php //echo $header_profile; ?>
     
     <h2 id="login_user"></h2>
 
@@ -36,11 +37,31 @@
 							  <?php 
 							  foreach ($contact_data as $key => $value)
 							  {
+
 								$slug = str_replace("-","_",$value['user_slug']);?>
 								<li id="<?php echo $value['user_slug']."-".OPENFIRESERVERDASH; ?>">
 									<div class="roster-contact offline">
 										<div class="contact-img">
-											<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
+											<?php
+											if ($value['user_image'] != '')
+			                                { ?> 
+			                                    <img src="<?php echo USER_THUMB_UPLOAD_URL . $value['user_image'] . '' ?>" alt="<?php echo $value['first_name'] ?>">
+			                                <?php
+			                                }
+			                                else
+			                                {
+			                                    if($value['user_gender'] == "M")
+			                                    {?>                                
+			                                        <img src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+			                                    <?php
+			                                    }
+			                                    if($value['user_gender'] == "F")
+			                                    {
+			                                    ?>
+			                                        <img src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+			                                    <?php
+			                                    }                                
+			                                } ?>
 										</div>
 										<div class="contact-detail">
 											<div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
@@ -61,144 +82,13 @@
 			
 					<div id='chat-area'>
 					  <div class="chat-event"></div>
-					  <ul>
-						<div class="contact-img">
-							<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-						</div>
-						<div class="contact-detail">
-							<div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
-							<div class="last-msg">online</div>
-						</div>
+					  <ul>						
 					  </ul>
 					  <div id="chat-messages"></div>
 					</div>
 				</div>
 				
 			</div>
-			<div class="pt20 fw"></div>
-			<div class="message-main-box demo-for-test">
-				<div class="msg-box">
-					<div id='roster-area'>
-							<div class="msg-search">
-								<input type="text" placeholder="Search">
-							</div>
-							<ul class="user-msg-list">
-							  
-								<li id="<?php echo $value['user_slug']."-".OPENFIRESERVERDASH; ?>">
-									<div class="roster-contact offline">
-										<div class="contact-img">
-											<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-										</div>
-										<div class="contact-detail">
-											<div class="roster-name">Dhaval Shah</div>
-											<div class="last-msg">hello how are you.</div>
-											<div class="roster-jid"><?php echo $slug."@".OPENFIRESERVER; ?></div>
-										</div>
-										<div class="msg-time">
-											<span>10:55 PM</span>
-											
-										</div>
-									</div>
-								</li> 
-								<li id="<?php echo $value['user_slug']."-".OPENFIRESERVERDASH; ?>">
-									<div class="roster-contact offline">
-										<div class="contact-img">
-											<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-										</div>
-										<div class="contact-detail">
-											<div class="roster-name">Dhaval Shah</div>
-											<div class="last-msg">hello how are you.</div>
-											<div class="roster-jid"><?php echo $slug."@".OPENFIRESERVER; ?></div>
-										</div>
-										<div class="msg-time">
-											<span>10:55 PM</span>
-											
-										</div>
-									</div>
-								</li> 
-							
-							</ul>
-					</div>
-			
-					<div id='chat-area'>
-					  <div class="chat-event"></div>
-					  <ul class="fw" style="padding:10px; border-bottom:1px solid #d2d2d2; height:70px;">
-						<div class="contact-img">
-							<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-						</div>
-						<div class="contact-detail">
-							<div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
-							<div class="last-msg">online</div>
-						</div>
-					  </ul>
-					  <div id="chat-messages">
-						<div class="content custom-scroll">
-							<div class="chat-message">
-								<div class="chat-name me">
-									<div class="contact-img">
-										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-									</div>
-									<div class="chat-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
-									<div class="msg-send-time">24 june 2018, 11:45 AM </div>
-								</div>
-								
-							</div>
-							<div class="chat-message">
-								<div class="chat-name">
-									
-									<div class="chat-text">Lorem Ipsum is simply dummy text of</div>
-									<div class="msg-send-time">24 june 2018, 11:45 AM </div>
-									<div class="contact-img">
-										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-									</div>
-								</div>
-								
-							</div>
-							<div class="chat-message">
-								<div class="chat-name me">
-									
-									<div class="chat-text">Lorem Ipsum is simply dummy text of</div>
-									<div class="msg-send-time">24 june 2018, 11:45 AM </div>
-									<div class="contact-img">
-										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-									</div>
-								</div>
-								
-							</div>
-							<div class="chat-message">
-								<div class="chat-name me">
-									
-									<div class="chat-text">Lorem Ipsum is simply dummy <br> text of</div>
-									<div class="msg-send-time">24 june 2018, 11:45 AM </div>
-									<div class="contact-img">
-										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-									</div>
-								</div>
-								
-							</div>
-							<div class="chat-message">
-								<div class="chat-name">
-									
-									<div class="chat-text">Lorem Ipsum is simply dummy <br> text of</div>
-									<div class="msg-send-time">24 june 2018, 11:45 AM </div>
-									<div class="contact-img">
-										<img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png">
-									</div>
-								</div>
-								
-							</div>
-						</div>
-					  </div>
-					  <div class="btm-snd-msg">
-							<div class="comment" name="comments" onpaste="OnPaste_StripFormatting(this, event);" placeholder="Type your message here..." style="position: relative;" contenteditable="true"></div>
-							<span class="comment-submit"><button class="btn2">Send</button></span>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			
-				
 		</div>
 	</div>
     <!-- login dialog -->
@@ -246,13 +136,11 @@
 	<script>
 		// mcustom scroll bar
 			(function($){
-				$(window).on("load",function(){
-					
+				$(window).on("load",function(){					
 					$(".custom-scroll").mCustomScrollbar({
 						autoHideScrollbar:true,
 						theme:"minimal"
 					});
-					
 				});
 			})(jQuery);
 	</script>
