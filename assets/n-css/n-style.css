@@ -2739,7 +2739,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.business-profile-right .bui-menu-profile{padding-left:0 !important; padding:top10px;}
 	.other-profile-menu .profile-left{width:100%; padding:0;}
 	.profile-head-text_dg{width:100%;}
-	.buisness-menu.other-profile-menu::before{bottom:77px;}
+	.buisness-menu.other-profile-menu::before{bottom:97px;}
 	
 	/***  blog page  ***/
 	.blog-page footer{position:inherit; height:inherit;}
@@ -3141,6 +3141,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.profile-head-text{line-height:1;}
 	.business-profile-right{padding-top:10px;}
 	.business-profile-right .profile-main-box-buis-menu ul{border-bottom:0px solid #d2d2d2;}
+	.other-profile-menu .business-profile-right .profile-main-box-buis-menu ul{border-bottom:1px solid #d2d2d2;}
 	.other-profile-menu .profile-main-box-buis-menu .flw_msg_btn ul{border-bottom:0px solid #d2d2d2;}
 	.add-with-us .add-content .fw.p20{padding:0;}
 	.add-with-us .add-form{border-left:0; border-right:0; border-radius:0;}
