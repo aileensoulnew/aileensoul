@@ -2954,7 +2954,7 @@ Your browser does not support the audio tag.
         echo $data;
     }
 
-    public function ajax_notification_data() {
+    public function ajax_notification_data_old() {
         //NOTIFICATION CODE START
         $perpage = 8;
         $page = 1;
@@ -4104,6 +4104,1064 @@ Your browser does not support the audio tag.
 
         $url = $arturl[0]['slug'] . '-' . $category_url . '-' . $city_get . '-' . $arturl[0]['art_id'];
         return $url;
+    }
+
+    public function ajax_notification_data($id = "") {
+
+        $perpage = 8;
+        $page = 1;
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+
+        $userid = $this->session->userdata('aileenuser');
+
+        $notificationData = $this->notification_model->get_notification_ajax($userid,$perpage,$start);
+        $total_record = $this->notification_model->get_notification_ajax_total_rec($userid);
+
+        $i = 0;
+        $notification = "";
+        foreach ($notificationData as $total) {
+
+            //Recruiter Notification Start
+            if ($total['not_from'] == '1') {
+                // $companyname = $this->db->get_where('recruiter', array('user_id' => $total['user_id']))->row()->re_comp_name;
+                $rec_data = $this->notification_model->get_recruiter_info($total['not_from_id']);
+                $companyname = $rec_data['re_comp_name'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('recruiter/profile/'.$rec_data['user_id']) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+
+                // $filename = $this->config->item('rec_profile_thumb_upload_path') . $total['recruiter_user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                if ($rec_data['recruiter_user_image'] != '') {
+                    $notification .= '<img src="' . REC_PROFILE_THUMB_UPLOAD_URL . $rec_data['recruiter_user_image'] . '" alt="'.$rec_data['recruiter_user_image'].'">';
+                } else {
+                    $a = $rec_data['rec_firstname'];
+                    $b = $rec_data['rec_lastname'];
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><i> Recruiter</i></font></b><b>' . '  ' . ucwords($rec_data['rec_firstname']) . ' ' . ucwords($rec_data['rec_lastname']) . '</b>  <span class="noti-msg-y"> From ' . ucwords($companyname) . '  Invited you for an interview. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a></li>';
+            }
+            //Recruiter Notification Edn
+
+            //Job Notification Start
+            if ($total['not_from'] == '2') {
+                $job_data = $this->db->get_where('job_reg', array('user_id' => $total['not_from_id']))->row();
+                $job_slug = $job_data->slug;
+                $user_image = $job_data->job_user_image;
+                $first_name = $job_data->fname;
+                $last_name = $job_data->lname;
+                $gender = $job_data->gender;
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="'.base_url('job-profile/' . $job_slug).'" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('job_profile_thumb_upload_path') . $user_image;
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != '') {
+                    $notification .= '<img src="' . JOB_PROFILE_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y"> Job seeker</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Applied on your jobpost. </sapn></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</sapn></div></div> </a> </li>';
+            }
+            //Job Notification End
+            
+            //Art Notification Start
+            if ($total['not_from'] == '3' && $total['not_img'] == '0') {
+
+                $art_data = $this->db->get_where('art_reg', array('user_id' => $total['not_from_id']))->row();
+                $first_name = ucfirst(strtolower($art_data->art_name));
+                $last_name = ucfirst(strtolower($art_data->art_lastname));
+                $art_slug = $art_data->slug;
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+
+                // $geturl = $this->get_url($art_data->user_id);
+
+                $notification .= '><a href="' . base_url('artist/p/' . $art_slug) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+
+                // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+
+                if ($art_data->art_user_image != "") {
+                    $notification .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $art_data->art_user_image . '" alt="'.$art_data->art_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "noimage">';
+                }
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y"> Started following you in artistic profile.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a></li>';
+            }            
+            
+            if ($total['not_from'] == '3' && $total['not_img'] == '1') {
+
+                $art_data = $this->db->get_where('art_reg', array('user_id' => $total['not_from_id']))->row();
+                $first_name = ucfirst(strtolower($art_data->art_name));
+                $last_name = ucfirst(strtolower($art_data->art_lastname));
+                $art_comment_data = $this->notification_model->get_artist_comment_data($total['not_product_id']);
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('artist/post-detail/' .$art_comment_data['art_post_id'] ) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+
+              
+                if ($art_data->art_user_image != "") {
+                    $notification .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $art_data->art_user_image . '" alt="'.$art_data->art_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "noartimage">';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                
+                $notification .= '<h6>';
+                $notification .= '<b>' . ' ' . $first_name . ' ' . $last_name . '</b><span class="noti-msg-y"> Commneted on your post in artistic profile.</span>';
+                $notification .= '</h6><div><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a></li>';
+            }            
+                       
+            if ($total['not_from'] == '3' && $total['not_img'] == '2') {
+
+                $art_data = $this->db->get_where('art_reg', array('user_id' => $total['not_from_id']))->row();
+                $first_name = ucfirst(strtolower($art_data->art_name));
+                $last_name = ucfirst(strtolower($art_data->art_lastname));
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('artist/post-detail/' . $total['not_product_id']) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+
+                // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+             
+                if ($art_data->art_user_image != "") {
+                    $notification .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $art_data->art_user_image . '" alt="'.$art_data->art_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "noimage">';
+                }
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y">Likes your post in artistic profile.</sapn></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </a> </li>';
+            }
+         
+            if ($total['not_from'] == '3' && $total['not_img'] == '3') {
+
+                $art_data = $this->db->get_where('art_reg', array('user_id' => $total['not_from_id']))->row();
+                $first_name = ucfirst(strtolower($art_data->art_name));
+                $last_name = ucfirst(strtolower($art_data->art_lastname));
+
+                $art_comment_data = $this->notification_model->get_artist_comment_data($total['not_product_id']);
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('artist/post-detail/' . $art_comment_data['art_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+
+                // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+
+          
+                if ($art_data->art_user_image != "") {
+                    $notification .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $art_data->art_user_image . '" alt="'.$art_data->art_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "noimage">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y"> Likes your post`s comment in artistic profile.</h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div>';
+                $notification .= '</div></a>';
+                $notification .= '</li>';
+                
+            }
+
+            if ($total['not_from'] == '3' && $total['not_img'] == '4') {
+                $post_image_id = $this->db->get_where('art_post_image_comment', array('post_image_comment_id' => $total['not_product_id']))->row()->post_image_id;
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $post_image_id))->row()->post_id;
+                
+                $art_data = $this->db->get_where('art_reg', array('user_id' => $total['not_from_id']))->row();
+                $first_name = ucfirst(strtolower($art_data->art_name));
+                $last_name = ucfirst(strtolower($art_data->art_lastname));
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('artist/post-detail/' . $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic">';
+
+                // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+
+               
+                if ($art_data->art_user_image != "") {
+                    $notification .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL .$art_data->art_user_image . '" alt="'.$art_data->art_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "noimage">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y">Commented on your photo in artistic profile.</sapn></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div> </div>';
+                $notification .= '</a>';
+                $notification .= '</li>';
+            }            
+           
+            if ($total['not_from'] == '3' && $total['not_img'] == '5') {
+
+                $art_data = $this->db->get_where('art_reg', array('user_id' => $total['not_from_id']))->row();
+                $first_name = ucfirst(strtolower($art_data->art_name));
+                $last_name = ucfirst(strtolower($art_data->art_lastname));
+
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $total['not_product_id']))->row()->post_id;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('artist/post-detail/'.$postid).'"><div class="notification-pic">';
+
+                // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+
+            
+                if ($art_data->art_user_image != "") {
+                    $notification .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $art_data->art_user_image . '" alt="'.$art_data->art_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "noimage">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y"> Likes your photo in artistic profile. </sapn></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div>';
+                $notification .= '</a>';
+                $notification .= '</li>';                
+            }
+            
+            if ($total['not_from'] == '3' && $total['not_img'] == '6') {
+                $post_image_id = $this->db->get_where('art_post_image_comment', array('post_image_comment_id' => $total['not_product_id']))->row()->post_image_id;
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $post_image_id))->row()->post_id;
+                
+                $art_data = $this->db->get_where('art_reg', array('user_id' => $total['not_from_id']))->row();
+                $first_name = ucfirst(strtolower($art_data->art_name));
+                $last_name = ucfirst(strtolower($art_data->art_lastname));
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('artist/post-detail/'.$postid).'" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+
+                $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $filepath = $s3->getObjectInfo(bucket, $filename);
+
+
+               
+                if ($art_data->art_user_image != "") {
+                    $notification .= '<img src="' . ART_PROFILE_THUMB_UPLOAD_URL . $art_data->art_user_image . '" alt="'.$art_data->art_user_image.'" >';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "noimage">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y">Likes your photo`s comment in artistic profile.</h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div>';
+                $notification .= '</a>';
+                $notification .= '</li>';                
+            }
+            //Art Notification End
+
+            //Freelance Apply Notification Start
+            if ($total['not_from'] == '4') {
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $fp_data = $this->db->select('*')->get_where('freelancer_post_reg', array('user_id' => $total['not_from_id']))->row();
+                $apply_slug = $fp_data->freelancer_apply_slug;
+                $freelancer_post_user_image = $fp_data->freelancer_post_user_image;
+                $first_name = $fp_data->freelancer_post_fullname;
+                $last_name = $fp_data->freelancer_post_username;
+
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('freelancer/' . $apply_slug ) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+                // $filename = $this->config->item('free_post_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+               
+                if ($freelancer_post_user_image != "") {
+                    $notification .= '<img src="' . FREE_POST_PROFILE_THUMB_UPLOAD_URL . $freelancer_post_user_image . '" alt="'.$freelancer_post_user_image.'">';
+                } else {
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Freelancer</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Applied on your post. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </a> </li>';
+            }
+            //Freelance Apply Notification End
+
+            //Freelance Hire Notification Start
+            if ($total['not_from'] == '5' && $total['not_type'] == '4') {
+
+                $proj_data = $this->db->select('*')->get_where('user_invite', array('invite_id' => $total['not_product_id']))->row();
+                $fa_data = $this->notification_model->getFreelancerApplyPostDetail($proj_data->post_id);
+
+                $fh_data = $this->db->select('*')->get_where('freelancer_hire_reg', array('user_id' => $total['not_from_id']))->row();
+                $freelancer_hire_user_image = $fh_data->freelancer_hire_user_image;
+                $first_name = $fh_data->fullname;
+                $last_name = $fh_data->username;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+                //  $filename = $this->config->item('free_hire_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+
+                // $filepath = FCPATH . $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
+                if ($freelancer_hire_user_image != "") {
+                    $notification .= '<img src="' . FREE_HIRE_PROFILE_THUMB_UPLOAD_URL . $freelancer_hire_user_image . '" alt="'.$freelancer_hire_user_image.'">';
+                } else {
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Employer</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Selected you for project. </span> </h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </a></li>';
+            }
+
+            if ($total['not_from'] == '5' && $total['not_type'] == '9') {
+
+                $proj_data = $this->db->select('*')->get_where('save', array('save_id' => $total['not_product_id']))->row();
+                $fa_data = $this->notification_model->getFreelancerApplyPostDetail($proj_data->post_id);
+
+                $fh_data = $this->db->select('*')->get_where('freelancer_hire_reg', array('user_id' => $total['not_from_id']))->row();
+                $freelancer_hire_user_image = $fh_data->freelancer_hire_user_image;
+                $first_name = $fh_data->fullname;
+                $last_name = $fh_data->username;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+                // $filename = $this->config->item('free_hire_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($freelancer_hire_user_image != "") {
+                    $notification .= '<img src="' . FREE_HIRE_PROFILE_THUMB_UPLOAD_URL . $freelancer_hire_user_image . '" alt="'.$freelancer_hire_user_image.'">';
+                } else {
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Employer</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Shortlisted you for project. </span> </h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </a></li>';
+            }
+            //Freelance Hire Notification End
+
+            //Business Notification Start
+            if ($total['not_from'] == '6' && $total['not_img'] == '0') {
+                 
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+                
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($business_user_image != "") {
+                    $notification .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image . '" alt="'.$business_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOBUSIMAGE2) . '" alt = "No Business Image">';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b> <span class="noti-msg-y">Started following you in business profile.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a> </li>';
+            }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '1') {
+                
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+
+                $buss_cmt_data = $this->db->get_where('business_profile_post_comment', array('business_profile_post_comment_id' => $total['not_product_id']))->row();
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);                 
+                if ($business_user_image != "") {
+                    $notification .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image . '" alt="'.$business_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOBUSIMAGE2) . '" alt = "No Business Image">';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b><span class="noti-msg-y"> Commented on your post in business profile. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a> </li>';
+            }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '2') {
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$total['not_product_id']) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($business_user_image != "") {
+                    $notification .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image . '" alt="'.$business_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOBUSIMAGE2) . '" alt = "No Business Image">';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your post in business profile. </span> </h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </a></li>';
+            }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '3') {
+
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+
+                $buss_cmt_data = $this->db->get_where('business_profile_post_comment', array('business_profile_post_comment_id' => $total['not_product_id']))->row();
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')"> <div class="notification-pic" >';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($business_user_image != "") {
+                    $notification .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image . '" alt="'.$business_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOBUSIMAGE2) . '" alt = "No Business Image">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your post`s comment in business profile.</h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div> </div>';
+                $notification .= '</a>';
+                $notification .= '</li>';                
+            }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '4') {                
+                // $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $buss_cmt_data = $this->db->get_where('bus_post_image_comment', array('post_image_comment_id' => $total['not_product_id']))->row();
+
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $buss_cmt_data->post_image_id))->row()->post_id;
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $filepath = $s3->getObjectInfo(bucket, $filename);
+              
+                if ($business_user_image != "") {
+                    $notification .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image . '" alt="'.$business_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOBUSIMAGE2) . '" alt = "No Business Image">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Commented on your photo in business profile. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div>';
+                $notification .= '</a>';
+                $notification .= '</li>';                
+            }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '5') {                
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $total['not_product_id']))->row()->post_id;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);              
+                if ($business_user_image != "") {
+                    $notification .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image . '" alt="'.$business_user_image.'">';
+                } else {
+
+                    $notification .= '<img src = "' . base_url(NOBUSIMAGE2) . '" alt = "No Business Image">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your photo in business profile. </span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div>';
+                $notification .= '</a>';
+                $notification .= '</li>';                
+            }
+
+            if ($total['not_from'] == '6' && $total['not_img'] == '6') {
+                // $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
+                $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
+                $busslug = $buss_data->business_slug;
+                $companyname = $buss_data->company_name;
+                $business_user_image = $buss_data->business_user_image;
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $buss_cmt_data = $this->db->get_where('bus_post_image_comment', array('post_image_comment_id' => $total['not_product_id']))->row();
+
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $buss_cmt_data->post_image_id))->row()->post_id;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+
+                if ($business_user_image != "") {
+                    $notification .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image . '" alt="'.$business_user_image.'">';
+                } else {
+                    $notification .= '<img src = "' . base_url(NOBUSIMAGE2) . '" alt = "No Business Image">';
+                }
+                $notification .= '</div>';
+                $notification .= '<div class="notification-data-inside">';
+                $notification .= '<h6><b>' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your photos comment in business profile.</h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div> </div>';
+                $notification .= '</a>';
+                $notification .= '</li>';                
+            }
+            //Business Notification End
+
+            //Opportunity Notification Start
+            if ($total['not_from'] == '7' && $total['not_img'] == '0') {
+
+                // = $this->db->get_where('business_profile', array('user_id' => $total['user_id']))->row()->business_slug;
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url($user_slug) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">Started following you.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '5' && $total['not_img'] == '2') {
+
+                $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
+                
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                }
+                else
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your post.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '5' && $total['not_img'] == '3') {
+                //Post Comment Like
+                $comment_data = $this->user_post_model->postCommentDetail($total['not_product_id']);
+                $post_id = $comment_data['post_id'];
+                $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
+                
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                }
+                else
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image  . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your comment.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a> </li>';
+            }
+
+            if ($total['not_from'] == '7' && $total['not_type'] == '6') {
+
+                $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
+                
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                }
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                }
+                else
+                {
+                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                }                
+
+                $user_data = $this->user_model->getUserData($total['not_from_id']);
+                
+                $user_slug = $user_data['user_slug'];
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $user_image = $user_data['user_image'];
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '<div class="notification-pic">';
+
+                // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
+                // $s3 = new S3(awsAccessKey, awsSecretKey);
+                // $filepath = $s3->getObjectInfo(bucket, $filename);
+                if ($user_image != "") {
+                    $notification .= '<img src="' . USER_THUMB_UPLOAD_URL . $user_image . '" alt="'.$user_image.'">';
+                } else {                    
+                    $a = $first_name;
+                    $b = $last_name;
+                    $acr = substr($a, 0, 1);
+                    $bcr = substr($b, 0, 1);
+
+                    $notification .= '<div class="post-img-div">';
+                    $notification .= '' . ucwords($acr) . ucwords($bcr) . '';
+                    $notification .= '</div>';
+                }
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">commented on your post.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div></a> </li>';
+            }
+            //Opportunity Notification End           
+        }
+        if ($notificationData) {
+            $seeall = '<a href="' . base_url() . 'notification">See All</a>';
+        } else {
+            $seeall = '<div class="fw">
+                        <div class="art-img-nn">
+                            <div class="art_no_post_img">
+                                <img src="' . base_url() . 'assets/img/icon_notification_big.png" alt="notificationlogo">
+                            </div>
+                            <div class="art_no_post_text_c">
+                                No Notification Available.
+                            </div>
+                        </div>
+                    </div>';
+        }
+
+        echo json_encode(array(
+                    "notification" => $notification,
+                    "total_record" => $total_record,
+                    "page" => $page,
+                    "perpage" => $perpage,
+        ));
     }
 
 }
