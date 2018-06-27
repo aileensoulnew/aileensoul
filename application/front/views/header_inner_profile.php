@@ -561,9 +561,23 @@ if($browser == "Firefox")
     }
     function get_notification_unread_count()
     {
-        $.ajax({
+        var url = '<?php echo base_url() . "notification/get_notification_unread_count" ?>';
+        $.get(url, function(data, status){
+            $("#noti_count").show();
+            if(parseInt(data) > 0)
+            {
+                $("#noti_count").html(data);
+            }
+            else
+            {
+                $("#noti_count").hide();
+                $("#noti_count").html("");
+            }
+        });
+
+        /*$.ajax({
             type: 'POST',
-            url: '<?php echo base_url() . "notification/get_notification_unread_count" ?>',
+            url: '<?php //echo base_url() . "notification/get_notification_unread_count" ?>',
             dataType: 'json',
             data: '',
             success: function (data) {
@@ -579,7 +593,7 @@ if($browser == "Firefox")
                     $("#noti_count").html("");
                 }
             }
-        });
+        });*/
     }    
     window.setInterval(function(){
       get_notification_unread_count();
