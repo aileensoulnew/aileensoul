@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Notification_model extends CI_Model {
     public function get_notification($user_id)
     {
-        $sql = "SELECT * FROM `ailee_notification` WHERE not_to_id = '".$user_id."' ORDER BY not_created_date DESC LIMIT 50";
+        $sql = "SELECT * FROM `ailee_notification` WHERE not_to_id = '".$user_id."' ORDER BY not_created_date DESC LIMIT 10";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();   
         return $result_array;

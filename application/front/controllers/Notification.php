@@ -1536,12 +1536,28 @@ Your browser does not support the audio tag.
                 $companyname = $buss_data->company_name;
                 $business_user_image = $buss_data->business_user_image;
 
+                $buss_cmt_data = $this->db->get_where('business_profile_post_comment', array('business_profile_post_comment_id' => $total['not_product_id']))->row();
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('notification/business-profile-post/' . $total['business_profile_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -1564,12 +1580,26 @@ Your browser does not support the audio tag.
                 $companyname = $buss_data->company_name;
                 $business_user_image = $buss_data->business_user_image;
 
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('notification/business-profile-post/' . $total['business_profile_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$total['not_product_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -1593,12 +1623,28 @@ Your browser does not support the audio tag.
                 $companyname = $buss_data->company_name;
                 $business_user_image = $buss_data->business_user_image;
 
+                $buss_cmt_data = $this->db->get_where('business_profile_post_comment', array('business_profile_post_comment_id' => $total['not_product_id']))->row();
+
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('notification/business-profile-post/' . $total['business_profile_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')">
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')">
                 <div class="notification-database"> <div class="notification-pic" >';
 
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
@@ -1626,13 +1672,29 @@ Your browser does not support the audio tag.
                 $companyname = $buss_data->company_name;
                 $business_user_image = $buss_data->business_user_image;
 
-                $postid = $this->db->get_where('post_files', array('post_files_id' => $total['post_image_id']))->row()->post_id;
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $buss_cmt_data = $this->db->get_where('bus_post_image_comment', array('post_image_comment_id' => $total['not_product_id']))->row();
+
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $buss_cmt_data->post_image_id))->row()->post_id;
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('notification/business-profile-post-detail/' . $postid . '/' . $total['post_image_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
                 $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 $s3 = new S3(awsAccessKey, awsSecretKey);
                 $filepath = $s3->getObjectInfo(bucket, $filename);
@@ -1658,12 +1720,28 @@ Your browser does not support the audio tag.
                 $companyname = $buss_data->company_name;
                 $business_user_image = $buss_data->business_user_image;
 
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $total['not_product_id']))->row()->post_id;
+
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('notification/business-profile-post-detail/' . $total['post_id'] . '/' . $total['post_files_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
                 // $filepath = $s3->getObjectInfo(bucket, $filename);              
@@ -1690,13 +1768,30 @@ Your browser does not support the audio tag.
                 $companyname = $buss_data->company_name;
                 $business_user_image = $buss_data->business_user_image;
 
-                $postid = $this->db->get_where('post_files', array('post_files_id' => $total['post_image_id']))->row()->post_id;
+                $city_name = "";
+                if($buss_data->city != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->city);
+                }
+                elseif($buss_data->state != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->state);
+                }
+                elseif($buss_data->country != "")
+                {
+                    $city_name = $this->data_model->getCityName($buss_data->country);
+                }
+
+                $buss_cmt_data = $this->db->get_where('bus_post_image_comment', array('post_image_comment_id' => $total['not_product_id']))->row();
+
+                $postid = $this->db->get_where('post_files', array('post_files_id' => $buss_cmt_data->post_image_id))->row()->post_id;
+
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('notification/business-profile-post-detail/' . $postid . '/' . $total['post_image_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
                 // $filepath = $s3->getObjectInfo(bucket, $filename);
@@ -1959,7 +2054,7 @@ Your browser does not support the audio tag.
             //Opportunity Notification End
 
             $i++;
-            if ($i == 30) {
+            if ($i == 10) {
                 break;
             }
         }

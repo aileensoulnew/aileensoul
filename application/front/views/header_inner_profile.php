@@ -169,50 +169,13 @@ if($browser == "Firefox")
                                     <div class="dropdown-title">
                                         Notifications <span id="seenot" class="pull-right">See All</span>
                                     </div>
-                                    <ul class="notification_data_in">
-                                     </ul>
-                                    <div class="content custom-scroll hide">
-                                        <ul class="dropdown-data noti-dropdown">
-                                            <li class="">
-                                                <a href="#">
-                                                    <div class="dropdown-database">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
-                                                        </div>
-                                                        <div class="dropdown-user-detail">
-                                                            <h6>
-                                                                <b>   Atosa Ahmedabad</b> 
-                                                                <span class="">Started following you in business profile.</span>
-                                                            </h6>
-                                                            <div>
-
-                                                                <span class="day-text">1 month ago</span>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                            <li class="">
-                                                <a href="#">
-                                                    <div class="dropdown-database">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
-                                                        </div>
-                                                        <div class="dropdown-user-detail">
-                                                            <h6>
-                                                                <b>   Atosa Ahmedabad</b> 
-                                                                <span class="">Started following you in business profile.</span>
-                                                            </h6>
-                                                            <div>
-
-                                                                <span class="day-text">1 month ago</span>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
+                                    <div class="fw" id="not_loader"  style="display:none; text-align:center;position:  absolute;top: 50%;">
+                                        <img src="<?php echo base_url('assets/images/loader.gif') ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/>
                                     </div>
+                                    <div class="content custom-scroll">
+                                        <ul class="notification_data_in">
+                                        </ul>
+                                    </div> 
                                 </div>
                             </li>
                             <?php
@@ -580,21 +543,17 @@ if($browser == "Firefox")
     {
 
         // $("#fad" + clicked_id).fadeOut(6000);
-
-
+        $("#not_loader").show();
         $.ajax({
             type: 'POST',
             url: '<?php echo base_url() . "notification/not_header" ?>',
             dataType: 'json',
             data: '',
             success: function (data) {
-                //    alert(data);
+                $("#not_loader").hide();
                 $('.' + 'notification_data_in').html(data.notification);
-                $('#seenot').html(data.seeall);
-               
+                $('#seenot').html(data.seeall);               
             }
-
-
         });
 
     }
