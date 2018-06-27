@@ -1,7 +1,7 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
 
-$userid = $this->session->userdata('aileenuser');
+/*$userid = $this->session->userdata('aileenuser');
         
 $contition_array = array('user_id' => $userid, 'status' => '1', 'is_deleted' => '0');
 $data = "business_profile_id,user_id,business_user_image,business_slug,industriyal,other_industrial,company_name,profile_background,city,state,business_type,business_step,(select city_name from ailee_cities where city_id = city) as city_name,
@@ -10,7 +10,7 @@ $business_common_data = $this->data['business_common_data'] = $this->common->sel
 $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
 $city_slug = ($business_common_data[0]['city_name']) ? $business_common_data[0]['city_name'] : $business_common_data[0]['state_name'];
 $business_common_data[0]['business_slug'] = $this->data['business_slug'] = $business_common_data[0]['business_slug'] . "-" .$city_slug;
-$this->data['business_common_data'][0]['business_slug'] = $business_common_data[0]['business_slug'];
+$this->data['business_common_data'][0]['business_slug'] = $business_common_data[0]['business_slug'];*/
 
 ?>
 <div class="full-box-module">   

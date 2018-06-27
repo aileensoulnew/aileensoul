@@ -263,7 +263,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         </li>
                                                     <?php } else { ?>
                                                         <li>
-                                                            <div class="post-design-product"><a class="post_dot" href="<?php echo base_url('business-profile/' . $slugname . '/details'); ?>"> <span class="span_main_name">  <?php echo ucfirst(strtolower($companyname)); ?> </span> </a>
+                                                            <div class="post-design-product"><a class="post_dot" href="<?php echo base_url('company/' . $slugname); ?>"> <span class="span_main_name">  <?php echo ucfirst(strtolower($companyname)); ?> </span> </a>
                                                                 <span class="ctre_date"> 
                                                                     <?php echo $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($busienss_data[0]['created_date']))); ?>      
                                                                 </span>
@@ -641,7 +641,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                     ?>
                                                                 </div>
                                                                 <div class="comment-name">
-                                                                    <b> <a href="<?php echo base_url('company/' . $business_slug . '/details') ?>">
+                                                                    <b> <a href="<?php echo base_url('company/' . $business_slug) ?>">
                                                                             <?php
                                                                             echo $companyname;
                                                                             echo '</br>';
@@ -1100,7 +1100,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                                 ?>
                                                             </div>
                                                             <div class="comment-name">
-                                                                <b> <a href="<?php echo base_url('company/' . $business_slug . '/details') ?>"> 
+                                                                <b> <a href="<?php echo base_url('company/' . $business_slug) ?>"> 
                                                                         <?php
                                                                         echo ucfirst(strtolower($companyname));
                                                                         echo '</br>';

@@ -8745,6 +8745,7 @@ No Contacts Available.
                 $slugname = ($row['city_name']) ? $row['city_name'] : $row['state_name'];
                 $row['business_slug'] = $row['business_slug']."-".$slugname;
                 $post_business_slug = $row['business_slug'];
+                $business_login_slug = $post_business_slug;
                 $post_industriyal = $row['industriyal'];
                 $post_user_id = $row['user_id'];
                 $post_category = $this->db->get_where('industry_type', array('industry_id' => $post_industriyal, 'status' => '1'))->row()->industry_name;
@@ -10063,6 +10064,7 @@ Your browser does not support the audio tag.
                 $post_created_date = $row['created_date'];
                 $post_posted_user_id = $row['posted_user_id'];
                 $post_business_slug = $row['business_slug'];
+                $business_login_slug = $post_business_slug;
                 $post_industriyal = $row['industriyal'];
                 $post_user_id = $row['user_id'];
                 $post_category = $this->db->get_where('industry_type', array('industry_id' => $post_industriyal, 'status' => '1'))->row()->industry_name;
@@ -10366,7 +10368,7 @@ Your browser does not support the audio tag.
                     foreach ($businessmultiimage as $multiimage) {
 
                         $return_html .= '<div class = "two-images">
-<a href = "' . base_url('company/' . $business_login_slug . '/post' . $post_business_profile_post_id) . '">
+<a href = "' . base_url('company/' . $business_login_slug . '/post/' . $post_business_profile_post_id) . '">
 <img class = "two-columns" src = "' . BUS_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
 </a>
 </div>';
