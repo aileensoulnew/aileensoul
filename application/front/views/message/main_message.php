@@ -98,7 +98,9 @@
       var openfirelink = '<?php echo OPENFIRELINK; ?>';
       var openfireserver = '<?php echo OPENFIRESERVER; ?>';
       var username = '<?php echo str_replace('-','_', $login_userdata['user_slug']); ?>';
+      var header_all_profile = '<?php echo $header_all_profile; ?>';
     </script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
     <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->    
     <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
     <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
@@ -111,6 +113,7 @@
     <script src='scripts/strophe.flxhr.js'></script> -->
 
     <script src='<?php echo base_url(); ?>assets/chatjs/gab.js'></script>
+    <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 	<script>
 		// mcustom scroll bar
 			(function($){
