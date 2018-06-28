@@ -16,7 +16,7 @@
     <link rel='stylesheet' href='<?php echo base_url(); ?>assets/n-css/n-style.css'>    
     <script src="<?php echo base_url('assets/js/jquery.js?ver=' . time()) ?>"></script>
   </head>
-  <body class="single-header">
+  <body class="single-header main-message">
   	<?php echo $header_profile; ?>
     
     <!-- <h2 id="login_user"></h2> -->
