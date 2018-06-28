@@ -178,11 +178,15 @@ class Message_model extends CI_Model {
         }*/
         $query = $this->db->get();
         $result_array = $query->result_array();
+
+        $slug = str_replace("-","_",$value['user_slug']);
+        $slug."@".OPENFIRESERVER;
+
         /*$total_record = $this->getContactCount($user_id, $select_data = '');
 
         $page_array['page'] = $page;
         $page_array['total_record'] = $total_record[0]['total'];
-        $page_array['perpage_record'] = $limit;
+        $page_array['perpage_record'] = $limit;*/
 
         foreach ($result_array as $key => $value) {
             $is_userContactInfo= $this->userContactStatus($login_user_id, $value['user_id']);
@@ -200,7 +204,7 @@ class Message_model extends CI_Model {
             }
         }
 
-        $data = array(
+        /*$data = array(
             'contactrecord' => $result_array,
             'pagedata' => $page_array
         );
