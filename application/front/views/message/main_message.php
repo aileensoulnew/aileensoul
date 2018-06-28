@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <title>Chat</title>
+    <title>Message</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>"> 
 
     <!-- <link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/cupertino/jquery-ui.css'> -->
     <!-- <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js'></script> -->
@@ -35,7 +37,7 @@
 								<!-- <input type="text" placeholder="Search"> -->
 								<h2>Messages</h2>
 							</div>
-							<ul class="user-msg-list">
+							<ul class="user-msg-list content custom-scroll">
 							  <?php 
 							  foreach ($contact_data as $key => $value)
 							  {

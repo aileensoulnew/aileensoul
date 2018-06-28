@@ -683,7 +683,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                     $apply_candida = $this->common->select_data_by_condition('job_apply', $condition_array, $data, $short_by = '', $order_by = '', $limit, $offset, $join_str, $groupby = '');
                                                     $countt = count($apply_candida);
                                                     ?>
-                                                    <a href="<?php echo base_url() . 'recruiter/apply-list/' . $post['post_id'] ?>" class="btn4">Applied  Candidate : <?php echo $countt ?></a>
+                                                    <a href="<?php echo base_url() . 'recruiter/applied-candidates/' . $post['post_id'] ?>" class="btn4">Applied  Candidate : <?php echo $countt ?></a>
                                                     <?php
                                                 } else {
                                                     $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
