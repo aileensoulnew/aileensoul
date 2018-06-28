@@ -17,7 +17,7 @@
     <script src="<?php echo base_url('assets/js/jquery.js?ver=' . time()) ?>"></script>
   </head>
   <body class="single-header main-message">
-  	<?php echo $header_profile; ?>
+  	<?php echo $header_inner_profile; ?>
     
     <!-- <h2 id="login_user"></h2> -->
 
@@ -91,7 +91,8 @@
 				
 			</div>
 		</div>
-	</div>    
+	</div>
+	<?php echo $login_footer; ?>
   </body>
     <script type="text/javascript">
       var base_url = '<?php echo base_url(); ?>';

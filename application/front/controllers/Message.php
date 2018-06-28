@@ -463,9 +463,10 @@ class Message extends MY_Controller {
 
     public function main_message()
     {
-        $userid = $this->session->userdata('aileenuser');
-        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $userid = $this->session->userdata('aileenuser');        
+        $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
         $this->data['login_userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.user_id, u.first_name, u.last_name, u.user_slug');
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['contact_data'] = $this->message_model->getAllContactData($userid);
         $this->load->view('message/main_message',$this->data);
     }
