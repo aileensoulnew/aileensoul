@@ -20,11 +20,6 @@
     margin-bottom: 15px;
 }
 
-.chat-messages {
-    height: 180px;
-    border-bottom: solid 2px #ddd;
-    overflow: auto;
-}
 
 #chat-area input {
     margin-top: 10px;
