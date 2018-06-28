@@ -14,6 +14,7 @@
     <link rel='stylesheet' href='<?php echo base_url(); ?>assets/css/common-style.css'>    
     <link rel='stylesheet' href='<?php echo base_url(); ?>assets/n-css/n-commen.css'>    
     <link rel='stylesheet' href='<?php echo base_url(); ?>assets/n-css/n-style.css'>    
+    <script src="<?php echo base_url('assets/js/jquery.js?ver=' . time()) ?>"></script>
   </head>
   <body>
   	<?php echo $header_profile; ?>
@@ -121,8 +122,7 @@
       var openfireserver = '<?php echo OPENFIRESERVER; ?>';
       var username = '<?php echo str_replace('-','_', $login_userdata['user_slug']); ?>';
     </script>
-    <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->
-    <script src="<?php echo base_url('assets/js/jquery.js?ver=' . time()) ?>"></script>
+    <!-- <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->    
     <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
     <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
     <script src='<?php echo base_url(); ?>assets/js/jquery.mCustomScrollbar.js'></script>
