@@ -33,7 +33,7 @@
 					<div id='roster-area'>
 							<div class="msg-search">
 								<!-- <input type="text" placeholder="Search"> -->
-								<h2>Message</h2>
+								<h2>Messages</h2>
 							</div>
 							<ul class="user-msg-list">
 							  <?php 
