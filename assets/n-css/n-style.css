@@ -615,7 +615,7 @@ height: 100%;}
 .media-pages-tablet{display:none;}
 .user-btns a.btn3 img{display:none;}
 .custom-select{width:100%; float:left;}
-.table-responsive.content{height:42px;}
+.table-responsive.content{height:42px !important;}
 .table-responsive.content{overflow:hidden;}
 .table-responsive.content td{text-align:center; border-right:1px solid #d2d2d2; padding:0; line-height:1; width:14.285714%;}
 .table-responsive.content td:last-child{border-right:0px;}
@@ -1761,7 +1761,7 @@ top: -3px;}
 .blog-detail .pagination li{margin-bottom:0;}
 .blog-detail-top{padding-bottom:5px; height:95px;}
 .blog-page .custom-user-list h3{border-bottom:0;}
-.blog-page .also-like-box .rec-img{width:100%; height:100%; display:block;}
+.blog-page .also-like-box .rec-img{width:100%; /*height:100%;*/ display:block;}
 .also-like-box{width:100%; text-align:center;}
 .also-like-box span{font-size:12px; padding:10px 0 5px; font-weight:bold;}
 .also-like-box p{font-size:18px;}
@@ -2816,6 +2816,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.chat-message .chat-name .msg-send-time{padding-right:45px;}
 	.msg-search{height:55px; padding:10px;}
 	.msg-box .ui-tabs .ui-tabs-nav{height:55px;}
+	footer{display:none !important;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3179,6 +3180,8 @@ overflow-y: scroll; overflow-y: auto;}
 	#roster-area{height:auto;}
 	.contact-detail{width:80%;}
 	.msg-time{float:right;}
+	.blog-page header{min-height:40px;}
+	.blog-page .sub-header{top:40px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3554,8 +3557,7 @@ overflow-y: scroll; overflow-y: auto;}
 .right-header > ul > li:nth-child(3){display:none;}
 .right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul > li:nth-child(3){display:none;}
-.mob-bottom-menu ul > li:nth-child(4){display:none;}
-.mob-bottom-menu li{width:33.33% !important; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
+.mob-bottom-menu li{width:25% !important; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
 .main-user-profile .user-btns a:last-child{display:none;}
 .custom-user-add{display:none;}
 .add-box{display:none;}
