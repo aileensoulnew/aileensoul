@@ -252,9 +252,14 @@ header("Pragma: no-cache"); // HTTP/1.0
             <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <?php } ?>
 
+        <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
+        <script src='<?php echo base_url(); ?>assets/chatjs/strophe.register.js'></script>
         <!-- validation for edit email formate form strat -->
 
         <script>
+            var openfirelink = '<?php echo OPENFIRELINK; ?>';
+            var openfireserver = '<?php echo OPENFIRESERVER; ?>';
+            var conn_new = new Strophe.Connection(openfirelink);
             $(document).ready(function () {
                 $("#register_form").validate({
                     rules: {
@@ -384,8 +389,26 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 $("#btn-register").html('<img src="<?php echo base_url() ?>images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
 
                                 //window.location = "<?php echo base_url() ?>profiles/<?php //echo $this->session->userdata('aileenuser_slug'); ?>";
-                                window.location = "<?php echo base_url() ?>" + "basic-information";
                                 sendmail(userid);
+                                var username = response.userslug.replace(/-/g, "_")
+                                var callback = function (status) {
+                                    if (status === Strophe.Status.REGISTER) {
+                                        conn_new.register.fields.username = username;
+                                        conn_new.register.fields.password = username;
+                                        conn_new.register.fields.name = first_name+" "+last_name;
+                                        conn_new.register.fields.email = email_reg;
+                                        conn_new.register.submit();
+                                    } else if (status === Strophe.Status.REGISTERED) {
+                                        console.log("registered!");
+                                        conn_new.authenticate();
+                                    } else if (status === Strophe.Status.CONNECTED) {
+                                        console.log("logged in!");
+                                    } else {
+                                        // every other status a connection.connect would receive
+                                    }
+                                };
+                                conn_new.register.connect("<?php echo base_url() ?>" + "basic-information", callback, 0, 0);
+                                window.location = "<?php echo base_url() ?>" + "basic-information";
                                 // setTimeout(' window.location.href = "<?php //echo base_url()   ?>dashboard"; ', 4000);
                             } else {
                                 $("#register_error").fadeIn(1000, function () {
@@ -405,7 +428,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 }
                 $.ajax({
                     type: 'POST',
-                    url: base_url + 'registration/sendmail',
+                    url: "<?php echo base_url() ?>" + 'registration/sendmail',
                     data: post_data,
                     success: function (response)
                     {

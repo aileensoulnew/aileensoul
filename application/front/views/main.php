@@ -305,6 +305,8 @@ header("Pragma: no-cache"); // HTTP/1.0
         </div>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+        <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
+        <script src='<?php echo base_url(); ?>assets/chatjs/strophe.register.js'></script>
         <script>
                 var user_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
                 var base_url = '<?php echo base_url(); ?>';
@@ -312,6 +314,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                 var data1 = <?php //echo json_encode($city_data); ?>;//Pratik*/
                 var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
                 var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                var openfirelink = '<?php echo OPENFIRELINK; ?>';
+                var openfireserver = '<?php echo OPENFIRESERVER; ?>';
 				
 				 $(".btn-pr-pl").click(function () {
 					$(".pr-pl-box").remove();

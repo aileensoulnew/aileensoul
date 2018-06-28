@@ -1,3 +1,4 @@
+var conn_new = new Strophe.Connection(openfirelink);
 $(document).ready(function () {
     $('.ajax_load').hide();
     function getRandomInt(min, max) {
@@ -297,6 +298,25 @@ $(document).ready(function () {
                     $("#btn-register").html('<img src="' + base_url + 'images/btn-ajax-loader.gif" /> &nbsp; Sign Up ...');
                    // window.location = base_url + "profiles/" + response.userslug;
                     //window.location = base_url + "profiles/basic-information/" + response.userslug;
+                    sendmail(userid);
+                    var username = response.userslug.replace(/-/g, "_")
+                    var callback = function (status) {
+                        if (status === Strophe.Status.REGISTER) {
+                            conn_new.register.fields.username = username;
+                            conn_new.register.fields.password = username;
+                            conn_new.register.fields.name = first_name+" "+last_name;
+                            conn_new.register.fields.email = email_reg;
+                            conn_new.register.submit();
+                        } else if (status === Strophe.Status.REGISTERED) {
+                            console.log("registered!");
+                            conn_new.authenticate();
+                        } else if (status === Strophe.Status.CONNECTED) {
+                            console.log("logged in!");
+                        } else {
+                            // every other status a connection.connect would receive
+                        }
+                    };
+                    conn_new.register.connect(base_url + "basic-information", callback, 0, 0);
                     window.location = base_url + "basic-information";
 
                     /*if(response.is_userBasicInfo==1 || response.is_userStudentInfo==1){
@@ -304,7 +324,7 @@ $(document).ready(function () {
                     } else {
                         window.location = base_url + "basic-information";//"profiles/" + response.user_slug;    
                     }*/
-                    sendmail(userid);
+                    
                 } else {
                     $("#register_error").fadeIn(1000, function () {
                         $("#register_error").html('<div class="alert alert-danger main"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + response + ' !</div>');
