@@ -71,6 +71,7 @@ app.config(function ($routeProvider, $locationProvider) {
 });
 
 app.controller('freelanceRegiController', function ($scope, $http, $location, $window,$timeout) {
+    var conn_new = new Strophe.Connection(openfirelink);
     $scope.$parent.title = "Create freelancer Profile | Aileensoul";    
     $scope.jobByLocation = {};
     $scope.jobs = {};
@@ -187,6 +188,24 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
                     $scope.errorotherField = success.data.errors.otherField;
                 } else {
                     if (success.data.okmsg == "ok") {                        
+                        var username = success.data.userslug.replace(/-/g, "_");
+                        var callback = function (status) {
+                            if (status === Strophe.Status.REGISTER) {
+                                conn_new.register.fields.username = username;
+                                conn_new.register.fields.password = username;
+                                conn_new.register.fields.name = $scope.user.first_name+" "+$scope.user.last_name;
+                                conn_new.register.fields.email = $scope.user.email_reg;
+                                conn_new.register.submit();
+                            } else if (status === Strophe.Status.REGISTERED) {
+                                console.log("registered!");
+                                conn_new.authenticate();
+                            } else if (status === Strophe.Status.CONNECTED) {
+                                console.log("logged in!");
+                            } else {
+                                // every other status a connection.connect would receive
+                            }
+                        };
+                        conn_new.register.connect(base_url+"freelancer/general-info", callback, 0, 0);
                         $('#basic_info_ajax_load').hide();
                         var title = "freelancer Information"
                         var url = base_url+"freelancer/general-info";
