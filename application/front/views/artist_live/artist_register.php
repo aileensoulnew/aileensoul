@@ -82,6 +82,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+        <script src='<?php echo base_url(); ?>assets/chatjs/strophe.js'></script>
+        <script src='<?php echo base_url(); ?>assets/chatjs/strophe.register.js'></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
@@ -89,6 +91,8 @@
             var studData = "<?php echo $studentData?>";
             var userid = "<?php echo $userid?>";
             var profile_login = '<?php echo $profile_login; ?>';
+            var openfirelink = '<?php echo OPENFIRELINK; ?>';
+            var openfireserver = '<?php echo OPENFIRESERVER; ?>';
             var app = angular.module('artistRegiMain', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
 
             function experience(){
