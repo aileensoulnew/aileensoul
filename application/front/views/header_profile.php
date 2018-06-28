@@ -123,11 +123,13 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" title="Messages" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png') ?>" alt="Messages">
+                            <li class="dropdown" style="display: block;">
+                                <a href="<?php echo base_url()."message"; ?>" title="Messages" class="dropdown-toggle"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
+                                </a>
+                                <a href="javascript:void(0);" title="Messages" class="dropdown-toggle hide" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png') ?>" alt="Messages">
                                     <span class="noti-box" style="display:none;">1</span>
                                 </a>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu hide">
                                     <div class="dropdown-title">
                                         Messages <a href="#" class="pull-right">See All</a>
                                     </div>
@@ -186,7 +188,7 @@ if($browser == "Firefox")
                                 </div>
                             </li>
                         
-                        <li class="dropdown all">
+                        <li class="dropdown business_popup">
                             <a href="javascript:void(0);" title="All Profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_all_profile()"><img ng-src="<?php echo base_url('assets/n-images/all.png') ?>" alt="All Profile"></a>
                             <div class="dropdown-menu"></div>
                         </li>

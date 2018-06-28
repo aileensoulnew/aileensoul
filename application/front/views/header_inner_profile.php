@@ -118,11 +118,14 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" title="Messages" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
+                            <li class="dropdown" style="display: block;">
+                                <a href="<?php echo base_url()."message"; ?>" title="Messages" class="dropdown-toggle"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
+                                </a>
+
+                                <a href="#" title="Messages" class="dropdown-toggle hide" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
                                     <span class="noti-box" style="display:none;">1</span>
                                 </a>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu hide">
                                     <div class="dropdown-title">
                                         Messages <a href="#" target="_self" class="pull-right">See All</a>
                                     </div>
