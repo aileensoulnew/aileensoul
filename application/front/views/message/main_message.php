@@ -47,7 +47,7 @@
 											<?php
 											if ($value['user_image'] != '')
 			                                { ?> 
-			                                    <img src="<?php echo USER_THUMB_UPLOAD_URL . $value['user_image'] . '' ?>" alt="<?php echo $value['first_name'] ?>">
+			                                    <img src="<?php echo USER_THUMB_UPLOAD_URL . $value['user_image']; ?>" alt="<?php echo $value['first_name'] ?>">
 			                                <?php
 			                                }
 			                                else
