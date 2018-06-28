@@ -16,9 +16,9 @@
     <link rel='stylesheet' href='<?php echo base_url(); ?>assets/n-css/n-style.css'>    
   </head>
   <body>
-  	<?php //echo $header_profile; ?>
+  	<?php echo $header_profile; ?>
     
-    <h2 id="login_user"></h2>
+    <!-- <h2 id="login_user"></h2> -->
 
     <div id='toolbar'>
       <!-- <span class='button' id='new-contact'>add contact...</span> ||
@@ -31,7 +31,8 @@
 				<div class="msg-box">
 					<div id='roster-area'>
 							<div class="msg-search">
-								<input type="text" placeholder="Search">
+								<!-- <input type="text" placeholder="Search"> -->
+								<h2>Message</h2>
 							</div>
 							<ul class="user-msg-list">
 							  <?php 
