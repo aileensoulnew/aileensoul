@@ -21,11 +21,11 @@
     
     <!-- <h2 id="login_user"></h2> -->
 
-    <div id='toolbar'>
-      <!-- <span class='button' id='new-contact'>add contact...</span> ||
+    <!--<div id='toolbar'>
+       <span class='button' id='new-contact'>add contact...</span> ||
       <span class='button' id='new-chat'>chat with...</span> || 
-      <span class='button' id='disconnect'>disconnect</span>-->
-    </div>
+      <span class='button' id='disconnect'>disconnect</span>
+    </div>-->
 	<div class="middle-section custom-mob-pd">
 		<div class="container">
 			<div class="message-main-box">
