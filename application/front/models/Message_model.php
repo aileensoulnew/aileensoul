@@ -179,8 +179,9 @@ class Message_model extends CI_Model {
         $query = $this->db->get();
         $result_array = $query->result_array();
 
-        // $slug = str_replace("-","_",$value['user_slug']);
-        // $slug."@".OPENFIRESERVER;
+        $userid = $this->session->userdata('aileenuser');
+        $userdata = $this->user_model->getUserData($userid);
+        $login_slug = str_replace("-","_",$userdata['user_slug']);
 
         /*$total_record = $this->getContactCount($user_id, $select_data = '');
 
@@ -188,27 +189,26 @@ class Message_model extends CI_Model {
         $page_array['total_record'] = $total_record[0]['total'];
         $page_array['perpage_record'] = $limit;*/
 
-        /*foreach ($result_array as $key => $value) {
-            $is_userContactInfo= $this->userContactStatus($login_user_id, $value['user_id']);
-            if(isset($is_userContactInfo) && !empty($is_userContactInfo))
+        foreach ($result_array as $key => $value) {
+            $login_jid = $login_slug."@".OPENFIRESERVER;
+            $slug = str_replace("-","_",$value['user_slug']);
+            $to_jid = $slug."@".OPENFIRESERVER;
+            $last_msg = $this->get_last_messages_from_jid($login_jid,$to_jid);
+            if($last_msg['fromJID'] == $login_jid)
             {
-                $result_array[$key]['contact_detail']['contact_status'] = 1;
-                $result_array[$key]['contact_detail']['contact_value'] = $is_userContactInfo['status'];
-                $result_array[$key]['contact_detail']['contact_id'] = $is_userContactInfo['id'];
+                $result_array[$key]['last_message'] = "You:".urldecode($last_msg['body']);
             }
             else
             {
-                $result_array[$key]['contact_detail']['contact_status'] = 0;
-                $result_array[$key]['contact_detail']['contact_value'] = 'new';
-                $result_array[$key]['contact_detail']['contact_id'] = $is_userContactInfo['id'];   
-            }
-        }*/
+                $result_array[$key]['last_message'] = urldecode($last_msg['body']);   
+            }            
+        }
 
         /*$data = array(
             'contactrecord' => $result_array,
             'pagedata' => $page_array
         );
-        return $data;*/
+        return $data;*/        
         return $result_array;
     }
 
@@ -218,6 +218,15 @@ class Message_model extends CI_Model {
         $sql = "SELECT * FROM ofMessageArchive WHERE fromJID = '".$login_jid."' AND toJID = '".$to_jid."' UNION  SELECT * FROM ofMessageArchive WHERE fromJID = '".$to_jid."' AND toJID = '".$login_jid."' ORDER By messageID";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function get_last_messages_from_jid($login_jid = "",$to_jid = "")
+    {
+        $this->db->query("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;");        
+        $sql = "SELECT * FROM ofMessageArchive WHERE fromJID = '".$login_jid."' AND toJID = '".$to_jid."' UNION  SELECT * FROM ofMessageArchive WHERE fromJID = '".$to_jid."' AND toJID = '".$login_jid."' ORDER By messageID DESC LIMIT 1";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
         return $result_array;
     }
 }

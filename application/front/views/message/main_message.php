@@ -67,12 +67,11 @@
 										</div>
 										<div class="contact-detail">
 											<div class="roster-name"><?php echo ucwords($value['first_name']." ".$value['last_name']) ; ?></div>
-											<div class="last-msg">hello how are you.</div>
+											<div class="last-msg"><?php echo $value['last_message'];  ?></div>
 											<div class="roster-jid"><?php echo $slug."@".OPENFIRESERVER; ?></div>
 										</div>
-										<div class="msg-time">
-											<span>10:55 PM</span>
-											
+										<div class="msg-time hide">
+											<span>10:55 PM</span>											
 										</div>
 									</div>
 								</li> 
@@ -92,29 +91,7 @@
 				
 			</div>
 		</div>
-	</div>
-    <!-- login dialog -->
-    <div id='login_dialog' class='hidden'>
-      <label>JID:</label><input type='text' id='jid' value="p@127.0.0.1">
-      <label>Password:</label><input type='password' id='password' value="p">
-    </div>
-
-    <!-- contact dialog -->
-    <div id='contact_dialog' class='hidden'>
-      <label>JID:</label><input type='text' id='contact-jid'>
-      <label>Name:</label><input type='text' id='contact-name'>
-    </div>
-
-    <!-- chat dialog -->
-    <div id='chat_dialog' class='hidden'>
-      <label>JID:</label><input type='text' id='chat-jid'>
-    </div>
-
-    <!-- approval dialog -->
-    <div id='approve_dialog' class='hidden'>
-      <p><span id='approve-jid'></span> has requested a subscription
-        to your presence.  Approve or deny?</p>
-    </div>
+	</div>    
   </body>
     <script type="text/javascript">
       var base_url = '<?php echo base_url(); ?>';
