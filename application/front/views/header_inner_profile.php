@@ -118,7 +118,7 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown" style="display: block;">
+                            <li class="dropdown hide">
                                 <a href="<?php echo base_url()."message"; ?>" title="Messages" class="dropdown-toggle"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
                                 </a>
 

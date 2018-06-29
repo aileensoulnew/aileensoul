@@ -123,7 +123,7 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown" style="display: block;">
+                            <li class="dropdown hide">
                                 <a href="<?php echo base_url()."message"; ?>" title="Messages" class="dropdown-toggle"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
                                 </a>
                                 <a href="javascript:void(0);" title="Messages" class="dropdown-toggle hide" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png') ?>" alt="Messages">
