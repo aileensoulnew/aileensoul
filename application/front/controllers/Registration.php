@@ -586,4 +586,47 @@ class Registration extends CI_Controller {
         echo "done";
     }
 
+    public function scriptforfollow()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT user_id FROM `ailee_user_login` WHERE is_delete = '0'";
+        $query = $this->db->query($sql);
+        // echo $query->num_rows();        
+        $userdata = $query->result_array();
+        $common_user = '16024';        
+        foreach ($userdata as $key => $value) {
+            
+           $sql1 = "SELECT * FROM ailee_user_follow WHERE follow_to = '".$common_user."' AND follow_from = '".$value['user_id']."'";
+            $query1 = $this->db->query($sql1);           
+            if($query1->num_rows() == 0)
+            {
+                $data = array(
+                    'status' => '1',
+                    'follow_from' => $value['user_id'],
+                    'follow_to' => $common_user,
+                    'created_date' => date("Y-m-d h:i:s"),
+                    'modify_date' => date("Y-m-d h:i:s"),
+                );
+                $insert_id = $this->common->insert_data($data, 'user_follow');
+            }
+
+            $sql2 = "SELECT * FROM ailee_user_follow WHERE follow_from = '".$common_user."' AND follow_to = '".$value['user_id']."'";
+            $query2 = $this->db->query($sql2);
+            if($query2->num_rows() == 0)
+            {
+                $data = array(
+                    'status' => '1',
+                    'follow_to' => $value['user_id'],
+                    'follow_from' => $common_user,
+                    'created_date' => date("Y-m-d h:i:s"),
+                    'modify_date' => date("Y-m-d h:i:s"),
+                );
+                $insert_id = $this->common->insert_data($data, 'user_follow');
+            }            
+        }
+        echo "done";
+    }
+
 }

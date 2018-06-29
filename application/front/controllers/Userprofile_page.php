@@ -295,7 +295,7 @@ class Userprofile_page extends MY_Controller {
         $follow = $this->userprofile_model->userFollowStatus($userid, $id);
 
         if (count($follow) != 0) {
-            $data = array('status' => $status);
+            $data = array('status' => $status,'modify_date' => date("Y-m-d h:i:s"));
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             $response = $status;
         } else {
@@ -303,7 +303,8 @@ class Userprofile_page extends MY_Controller {
                 'status' => $status,
                 'follow_from' => $userid,
                 'follow_to' => $id,
-                'created_date' => $status,
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             $response = $status;
@@ -383,6 +384,7 @@ class Userprofile_page extends MY_Controller {
                 'follow_from' => $userid,
                 'follow_to' => $id,
                 'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             // $response = $status;
@@ -400,7 +402,7 @@ class Userprofile_page extends MY_Controller {
         $follow = $this->userprofile_model->userFollowStatus($userid, $id);
 
         if (count($follow) != 0) {
-            $data = array('status' => 0);
+            $data = array('status' => 0,'modify_date' => date("Y-m-d h:i:s"));
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             //   $response = $status;
 
@@ -410,7 +412,8 @@ class Userprofile_page extends MY_Controller {
                 'status' => 0,
                 'follow_from' => $userid,
                 'follow_to' => $id,
-                'created_date' => $status,
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             // $response = $status;
