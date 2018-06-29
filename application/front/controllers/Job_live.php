@@ -51,6 +51,13 @@ class Job_live extends MY_Controller {
         /*if($this->job_profile_set == 1)
             $this->load->view('job_live/index', $this->data);
         else */
+        $limit = 8;
+        $this->data['jobCategory'] = $this->job_model->jobCategory($limit);
+        $this->data['jobCity'] = $this->job_model->jobCity($limit);
+        $this->data['jobCompany'] = $this->job_model->jobCompany($limit);
+        $this->data['jobSkill'] = $this->job_model->jobSkill($limit);
+        $this->data['jobDesignation'] = $this->job_model->get_jobtitle($limit);
+        $this->data['job_related_list'] = $this->job_model->job_related_blog_list();
         if($userid != "" || $this->job_profile_set == 1)
             $this->load->view('job_live/without_job_register', $this->data);
         else

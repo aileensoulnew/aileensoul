@@ -94,17 +94,31 @@
                         <h2>Jobs by Category</h2>
                     </div>
                     <div class="row pt20" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
-                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="jobCategory.length != 0" ng-repeat="jobs in jobCategory" ng-init="jobIndex=$index">
+                        <!-- <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="jobCategory.length != 0" ng-repeat="jobs in jobCategory" ng-init="jobIndex=$index">
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url(); ?>{{jobs.industry_slug}}-jobs">
                                     <div class="cus-cat-middle">
                                     <img ng-src="<?php echo JOB_INDUSTRY_IMG_PATH;?>{{jobs.industry_image}}">
                                     <p class="" ng-bind="jobs.industry_name"></p>
-                                    <!-- <span ng-bind="jobs.count"></span> -->
+                                    <-- <span ng-bind="jobs.count"></span> ---
                                     </div>
                                 </a>
                             </div>
-                        </div>                        
+                        </div> -->
+                        <?php if(isset($jobCategory) && !empty($jobCategory)):
+                                foreach($jobCategory as $_jobCategory): ?>
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
+                            <div class="all-cat-box">
+                                <a href="<?php echo base_url().$_jobCategory['industry_slug'].'-jobs'; ?>">
+                                    <div class="cus-cat-middle">
+                                        <img src="<?php echo JOB_INDUSTRY_IMG_PATH.$_jobCategory['industry_image']; ?>">
+                                    <p><?php echo $_jobCategory['industry_name']; ?></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <?php  endforeach;
+                            endif; ?>
                     </div>
                     <div class="p20 fw" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>jobs-by-categories" class="btn-1">View More</a></p>
@@ -166,18 +180,22 @@
 
                         </div>
                         <div class="row pt20" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
-                            <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
+                            <?php if(isset($job_related_list) && !empty($job_related_list)):
+                                    foreach($job_related_list as $_job_related_list): ?>
+                            <div class="col-md-4 col-sm-4">
                                 <div class="also-like-box">
                                     <div class="rec-img">
-                                        <a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
-                                        <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}"></a>
+                                        <a href="<?php echo base_url().'blog/'.$_job_related_list['blog_slug']; ?>">
+                                        <img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_job_related_list['image']; ?>"></a>
                                     </div>
                                     <div class="also-like-bottom">
-                                        <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}" ng-bind="blog.title"></a></p>
+                                        <p><a href="<?php echo base_url().'blog/'.$_job_related_list['blog_slug']; ?>"><?php echo $_job_related_list['title']; ?></a></p>
                                     </div>
                                 
                                 </div>
                             </div>
+                            <?php  endforeach;
+                                endif; ?>
 
                             <!-- <div class="col-md-3 col-sm-6">
                                 <div class="rel-art-box">
@@ -217,7 +235,11 @@
                             <div class="browse-box">
                                 <ul>
                                     <li><h3>Jobs By Location</h3></li>
-                                    <li ng-if="jobCity.length != 0" ng-repeat="jc in jobCity" ng-init="jcIndex=$index"><a ng-href="<?php echo base_url(); ?>jobs-in-{{jc.slug}}" ng-bind="'Jobs in  '+jc.city_name"></a></li>
+                                    <?php if(isset($jobCity) && !empty($jobCity)):
+                                            foreach($jobCity as $_jobCity): ?>
+                                    <li><a href="<?php echo base_url().'jobs-in-'.$_jobCity['slug']; ?>"><?php echo "Jobs in ".$_jobCity['city_name']; ?></a></li>
+                                    <?php endforeach;
+                                        endif; ?>
                                     <li><a href="<?php echo base_url(); ?>jobs-by-location">View All Location</a></li>
                                 </ul>
                             </div>
@@ -226,7 +248,11 @@
                             <div class="browse-box">
                                 <ul>
                                     <li><h3>Jobs By Designation</h3></li>
-                                    <li ng-if="jobDesignation.length != 0" ng-repeat="jd in jobDesignation" ng-init="jdIndex=$index"><a ng-href="<?php echo base_url(); ?>{{jd.job_slug}}-jobs" ng-bind="jd.job_title + 'Jobs'"></a></li>                                
+                                    <?php if(isset($jobDesignation) && !empty($jobDesignation)):
+                                            foreach($jobDesignation as $_jobDesignation): ?>
+                                    <li><a href="<?php echo base_url().$_jobDesignation['job_slug'].'-jobs'; ?>"><?php echo $_jobDesignation['job_title'].' Jobs'; ?></a></li>
+                                    <?php endforeach;
+                                        endif; ?>
                                     <li><a href="<?php echo base_url(); ?>jobs-by-designations">View All Designation</a></li>
                                 </ul>
                             </div>
@@ -235,7 +261,12 @@
                             <div class="browse-box">
                                 <ul>
                                     <li><h3>Jobs By Company</h3></li>
-                                    <li ng-if="jobCompany.length != 0" ng-repeat="jcm in jobCompany" ng-init="jcmIndex=$index"><a ng-href="<?php echo base_url(); ?>jobs-opening-at-{{jcm.company_name | slugify}}-{{jcm.rec_id}}" ng-bind="jcm.company_name + 'Jobs'"></a></li>
+                                    <?php if(isset($jobCompany) && !empty($jobCompany)):
+                                            foreach($jobCompany as $_jobCompany):
+                                            $slug = $this->common->clean($_jobCompany['company_name']);  ?>
+                                    <li><a href="<?php echo base_url().'jobs-opening-at-'.strtolower($slug).'-'.$_jobCompany['rec_id']; ?>"><?php echo $_jobCompany['company_name'].' Jobs'; ?></a></li>
+                                    <?php endforeach;
+                                        endif; ?>
                                     <li><a href="<?php echo base_url(); ?>jobs-by-companies">View All Companies</a></li>
                                 </ul>
                             </div>
