@@ -1548,7 +1548,7 @@ option[value=""][disabled] {
 option {
   color: black;
 }
-
+.blog-page header{min-height:54px;}
 /***  media query  ***/
 @media screen and (min-width: 768px) {
     .container {
@@ -1650,6 +1650,8 @@ option {
 	.sub-header{top:48px;}
 	.sub-menu li.dropdown.open::before{width:14px; height:7px; top:25px;}
 	.sub-menu li.user-id.open::before{top:22px;}
+	.blog-page header{min-height:40px;}
+	.blog-page .sub-header{top:40px;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}
@@ -1704,7 +1706,7 @@ option {
 	.mobile-header .sub-header .sub-menu li a{font-size:13px;}
 	header{padding:3px 0 7px;}
 	header .logo a, header h2.logo, .no-login header h2 a {line-height:0;}
-	.blog-page .sub-header{top:75px;}
+	.no-login.blog-page .sub-header{top:72px;}
 	.dob select{padding-right:0px;}
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu{top:30px;}
 	.sub-menu li.dropdown.open::before{top:24px;}

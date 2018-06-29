@@ -1773,7 +1773,7 @@ top: -3px;}
 .related-article .col-md-4:first-child .also-like-box{width: calc(85% - 1px);}
 
 .rec-img{border:1px solid #d2d2d2; border-radius:4px; height:200px; margin-bottom:5px; width:100%; overflow:hidden; position:relative;}
-.rec-img img{border-radius:4px; width: auto; height: 100%; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%);}
+.rec-img img{border-radius:4px; width: auto; height: 100%; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); max-width:inherit;}
 .all-comments{padding-top:50px;}
 .comment-box{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding:20px 0 10px;}
 .comment-img{width:60px; height:60px; float:left; border-radius:100%; border:1px solid #5c5c5c;}
@@ -2494,7 +2494,7 @@ border: 1px solid #fff; line-height: 1;}
 .add-post-button .back .but1:hover{color:#1b8ab9;}
 .modal-body{width:100%; float:left;}
 .no-login .right-header{padding-top:0;}
-.blog-page header{min-height:54px;}
+
 .reg-form-box .reg-form .form-group input:focus, .reg-form-box .reg-form .form-group select:focus, .reg-form-box .reg-form .form-group textarea:focus {border-color:#1b8ab9;}
 #datepicker-error.error{top:68px !important;}
 .ui-autocomplete{z-index:999999 !important;}
@@ -3180,8 +3180,7 @@ overflow-y: scroll; overflow-y: auto;}
 	#roster-area{height:auto;}
 	.contact-detail{width:80%;}
 	.msg-time{float:right;}
-	.blog-page header{min-height:40px;}
-	.blog-page .sub-header{top:40px;}
+	
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
