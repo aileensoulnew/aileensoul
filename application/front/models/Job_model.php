@@ -645,33 +645,32 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $city_id_2 = $search_location_arr['city_id'];
             $this->db->where('rp.city',$city_id_2);
         }
-        $sql = "";
-        if($company_id != "")
+        $sql = "";        
+        if(isset($company_id) && !empty($company_id))
         {
-            $sql .= "r.rec_id IN (".$company_id.") OR ";
+            $sql .= "r.rec_id IN (".implode(",", $company_id).") OR ";
         }
-        if($category_id != "")
+        if(isset($category_id) && !empty($category_id))
         {
-            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+            $sql .= "rp.industry_type IN (".implode(",", $category_id).") OR ";
         }
-        if($location_id != "")
+        if(isset($location_id) && !empty($location_id))
         {
-            $sql .= "rp.city IN (".$location_id.") OR ";
+            $sql .= "rp.city IN (".implode(",", $location_id).") OR ";
         }
-        if($skill_id != "")
+        if(isset($skill_id) && !empty($skill_id))
         {
-            $skill_id = str_replace(",", "|", $skill_id);
+            $skill_id = implode("|", $skill_id);//str_replace(",", "|", $skill_id);
             $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
-
-        if($job_desc != "")
+        if(isset($job_desc) && !empty($job_desc))
         {
-            $sql .= "rp.post_name IN (".$job_desc.") OR";
+            $sql .= "rp.post_name IN (".implode(",", $job_desc).") OR";
         }
-        if($period_filter != "")
+        if(isset($period_filter) && !empty($period_filter))
         {
             $sql_period = "";
-            foreach (explode(",", $period_filter) as $key => $value) {
+            foreach ($period_filter as $key => $value) {
                 if($value == 1)
                     $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
                 if($value == 2)
@@ -685,10 +684,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             }
             $sql .= "(".trim($sql_period, ' OR ').") OR ";
         }
-        if($exp_fil != "")
+        if(isset($exp_fil) && !empty($exp_fil))
         {
             $sql_exp = "";
-            foreach (explode(",", $exp_fil) as $key => $value) {
+            foreach ($exp_fil as $key => $value) {
                 if($value == 1)
                     $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
                 if($value == 2)
@@ -734,9 +733,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
 
             $result_array[$key]['job_saved'] = (isset($jobsave) && !empty($jobsave) ? 1 : 0);            
         }
-        $retur_arr['jobData'] = $result_array;
-        $retur_arr['total_record'] = $this->ajax_job_search_new_filter_total_rec($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$job_city,$job_company_id,$search_location_arr);
-        return $retur_arr;
+        return $result_array;
+        // $retur_arr['jobData'] = $result_array;
+        // $retur_arr['total_record'] = $this->ajax_job_search_new_filter_total_rec($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$job_city,$job_company_id,$search_location_arr);
+        // return $retur_arr;
     }
 
     function ajax_job_search_new_filter_total_rec($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$search_location_arr = array()) {
@@ -744,6 +744,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->select("COUNT(*) as total_record")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
         $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
+        $this->db->join('states st', 'st.state_id = rp.state', 'left');
         $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
@@ -779,32 +780,31 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $this->db->where('rp.city',$city_id_2);
         }
         $sql = "";
-        if($company_id != "")
+        if(isset($company_id) && !empty($company_id))
         {
-            $sql .= "r.rec_id IN (".$company_id.") OR ";
+            $sql .= "r.rec_id IN (".implode(",", $company_id).") OR ";
         }
-        if($category_id != "")
+        if(isset($category_id) && !empty($category_id))
         {
-            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+            $sql .= "rp.industry_type IN (".implode(",", $category_id).") OR ";
         }
-        if($location_id != "")
+        if(isset($location_id) && !empty($location_id))
         {
-            $sql .= "rp.city IN (".$location_id.") OR ";
+            $sql .= "rp.city IN (".implode(",", $location_id).") OR ";
         }
-        if($skill_id != "")
+        if(isset($skill_id) && !empty($skill_id))
         {
-            $skill_id = str_replace(",", "|", $skill_id);
+            $skill_id = implode("|", $skill_id);//str_replace(",", "|", $skill_id);
             $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
-
-        if($job_desc != "")
+        if(isset($job_desc) && !empty($job_desc))
         {
-            $sql .= "rp.post_name IN (".$job_desc.") OR";
+            $sql .= "rp.post_name IN (".implode(",", $job_desc).") OR";
         }
-        if($period_filter != "")
+        if(isset($period_filter) && !empty($period_filter))
         {
             $sql_period = "";
-            foreach (explode(",", $period_filter) as $key => $value) {
+            foreach ($period_filter as $key => $value) {
                 if($value == 1)
                     $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
                 if($value == 2)
@@ -818,10 +818,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             }
             $sql .= "(".trim($sql_period, ' OR ').") OR ";
         }
-        if($exp_fil != "")
+        if(isset($exp_fil) && !empty($exp_fil))
         {
             $sql_exp = "";
-            foreach (explode(",", $exp_fil) as $key => $value) {
+            foreach ($exp_fil as $key => $value) {
                 if($value == 1)
                     $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
                 if($value == 2)
@@ -845,7 +845,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->order_by('rp.post_id', 'desc');
         
         $query = $this->db->get();
-        //echo $this->db->last_query();exit;
+        // echo $this->db->last_query();exit;
         $result_array = $query->row_array();
         return $result_array['total_record'];
     }

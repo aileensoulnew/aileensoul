@@ -1,4 +1,4 @@
-app.filter('slugify', function () {
+/*app.filter('slugify', function () {
     return function (input) {
         if (!input)
             return;
@@ -110,12 +110,7 @@ app.controller('jobSearchNRController', function ($scope, $http,$window) {
     });
 
     function job_search(pagenum) {
-        if (isProcessing) {
-            /*
-             *This won't go past this condition while
-             *isProcessing is true.
-             *You could even display a message.
-             **/
+        if (isProcessing) {            
             return;
         }
         isProcessing = true;
@@ -339,4 +334,92 @@ app.controller('jobSearchNRController', function ($scope, $http,$window) {
             }
         );
     };
-});  
+});  */
+
+function applyJobFilter() {
+        var cmp_fil = "";
+        $('.company-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                cmp_fil += (cmp_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(cmp_fil);
+
+        var cat_fil = "";
+        $('.category-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                cat_fil += (cat_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(cat_fil);
+
+        var loc_fil = "";
+        $('.location-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                loc_fil += (loc_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(loc_fil);
+
+        var skills_fil = "";
+        $('.skills-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                skills_fil += (skills_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(skills_fil);
+
+        var jd_fil = "";
+        $('.jds-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                jd_fil += (jd_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(jd_fil);
+
+        var per_fil = "";
+        $('.period-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                per_fil += (per_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(per_fil);
+        
+        var exp_fil = "";
+        $('.exp-filter').each(function(){
+            if(this.checked){
+                var currentid = $(this).val();
+                exp_fil += (exp_fil == "") ? currentid : "," + currentid;
+            }
+        });
+        // console.log(exp_fil);        
+    
+        $("#job-company-filter").on("change", "input:checkbox", function(){            
+            $('#job-company-filter').attr('action', filter_url);
+            $("#job-company-filter").submit();
+        });
+        
+        //pagenum = 1;
+
+        //$("#loader").show();
+
+        /*$.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill)+"&search_location=" + encodeURIComponent(search_location), {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
+            function(success){
+                $scope.searchJob = {};
+                data = JSON.parse(success);
+                $scope.$apply(function () {
+                    $scope.searchJob = data.jobData;
+                    $scope.jobs.page_number = pagenum;
+                    $scope.jobs.total_record = data.total_record;
+                    $scope.jobs.perpage_record = 5;            
+                    isProcessing = false;
+                });
+            }
+        );*/
+    }

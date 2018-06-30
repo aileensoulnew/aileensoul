@@ -17,6 +17,7 @@ class Job extends MY_Controller {
         $this->load->model('recruiter_model');
         $this->load->library('S3');
         $this->load->library('upload');
+        $this->load->library("pagination");
 
         //   This function is there only one time users slug created after remove it start
 //         $this->db->select('job_id,fname,lname');
@@ -5883,11 +5884,65 @@ class Job extends MY_Controller {
             $this->data['title'] = ucwords($keyser)." Jobs Openings in ".$keyloc." | Aileensoul";
             $this->data['metadesc'] = ucwords($keyser)." Vacancy in ".$keyloc.": Explore the latest ".ucwords($keyser)." jobs on Aileensoul. Apply and get the job in ".$keyloc." location. ";
         }
+        $this->data['company_id'] = $company_id = (isset($_POST['company_id']) && !empty($_POST['company_id']) ? $_POST['company_id'] : "");
+        $this->data['category_id'] = $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");
+        $this->data['location_id'] = $location_id = (isset($_POST['location_id']) && !empty($_POST['location_id']) ? $_POST['location_id'] : "");
+        $this->data['skill_id'] = $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $this->data['job_desc'] = $job_desc = (isset($_POST['job_desc']) && !empty($_POST['job_desc']) ? $_POST['job_desc'] : "");
+        $this->data['period_filter'] = $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
+        $this->data['exp_fil'] = $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
+        
+        $keyword = trim($search);
+        $search_location = trim($ser_location);
+        $job_skills = $this->job_model->is_job_skills($keyword);
+        $job_category = $this->job_model->is_job_category($keyword);
+        $job_designation = $this->job_model->is_job_designation($keyword);
+        $job_city = $this->job_model->is_job_location($keyword);
+        $search_location_arr = array();
+        if($search_location != "")
+        {
+            $search_location_arr = $this->job_model->is_job_location($search_location);
+        }
+
+        $limit = 8;
+        $config = array(); 
+        $config["base_url"] = $this->data['filter_url'] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$job_city,explode("-", $keyword),$search_location_arr);
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<< Previous';
+        $config['next_link']        = 'Next >>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';        
+
+        $this->pagination->initialize($config);
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $limit_city = 10;
+        $this->data['jobCategory'] = $this->job_model->jobCategory($limit_city);
+        $this->data['jobCity'] = $this->job_model->jobCity($limit_city);
+        $this->data['jobCompany'] = $this->job_model->jobCompany($limit_city);
+        $this->data['jobSkill'] = $this->job_model->jobSkill($limit_city);
+        $this->data['jobDesignation'] = $this->job_model->get_jobtitle($limit_city);
 
         // $this->data['title'] = $title . " - Job Profile - Aileensoul";
         $this->data['head'] = $this->load->view('head', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+
+        $searchJob = $this->job_model->ajax_job_search_new_filter($userid,$job_skills,$job_category,$job_designation,$company_id,$category_id,$location_id,$skill_id,$job_desc,$period_filter,$exp_fil,$page,$limit,$job_city,explode("-", $keyword),$search_location_arr);
+        // print_r($searchJob);
+        $this->data['searchJob'] = $searchJob;
+        $this->data['links'] = $this->pagination->create_links();
+        $this->data['job_filter'] = $this->load->view('job/job_filter', $this->data, TRUE);
+
         //THIS CODE IS FOR WHEN USER NOT LOGIN AND GET SEARCH DATA START
         if ($this->session->userdata('aileenuser')) {
             $contition_array = array('user_id' => $this->session->userdata('aileenuser'), 'status' => '1', 'is_delete' => '0');
