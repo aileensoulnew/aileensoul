@@ -19,7 +19,7 @@
 			<?php //} ?>
 		</div>
 		<div class="row">
-			<div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
+			<div class="col-lg-6 col-md-7">
 				<div class="search-bnr-text">
 					<h1>Search and Connect with the Best Talented Artist from All over the World</h1>
 				</div>

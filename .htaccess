@@ -2,12 +2,12 @@ Allow from all
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 #	RewriteCond %{HTTP_HOST} !^www\. [NC]
-	RewriteCond %{HTTPS} off
-	RewriteCond %{REQUEST_URI} !^/aileensoulnew/aileensoul/message\.php$ [NC]
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}/aileensoulnew/aileensoul/$1 [R=301,L]
+	#RewriteCond %{HTTPS} off
+	#RewriteCond %{REQUEST_URI} !^/aileensoulnew/aileensoul/message\.php$ [NC]
+    #RewriteRule ^(.*)$ https://%{HTTP_HOST}/aileensoulnew/aileensoul/$1 [R=301,L]
 
-    RewriteCond %{HTTPS} on
-	RewriteRule ^(/aileensoulnew/aileensoul/message\.php)$ http://%{HTTP_HOST}/aileensoulnew/aileensoul/$1 [R=301,L,QSA]
+    #RewriteCond %{HTTPS} on
+	#RewriteRule ^(/aileensoulnew/aileensoul/message\.php)$ http://%{HTTP_HOST}/aileensoulnew/aileensoul/$1 [R=301,L,QSA]
 
 
 	RewriteBase /aileensoulnew/aileensoul/

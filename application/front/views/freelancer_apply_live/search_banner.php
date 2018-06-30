@@ -35,7 +35,7 @@
             </div>
         <?php }*/ ?>
         <div class="row">
-            <div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
+            <div class="col-lg-6 col-md-7">
                 <div class="search-bnr-text">
                     <h1>Work from Anywhere at Any Time</h1>
                     <p>Get the work you love</p>

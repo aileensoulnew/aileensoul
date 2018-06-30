@@ -44,10 +44,10 @@
             
             <div class="job-cat-lp" >
                 <div class="container" >
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h3>Fields</h3>
                     </div>
-                    <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row pt20">
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="FAFields.length != 0" ng-repeat="faField in FAFields" ng-init="FAIndex=$index">
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url(); ?>freelance-jobs/{{faField.category_slug}}">
@@ -60,17 +60,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="p20 fw">
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>freelance-jobs-by-fields" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>
             <div class="job-cat-lp" >
                 <div class="container" >
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h3>Categories</h3>
                     </div>
-                    <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row pt20">
 
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="FASkills.length != 0" ng-repeat="faSkills in FASkills" ng-init="FASIndex=$index">
                             <div class="all-cat-box">
@@ -84,7 +84,7 @@
                             </div>
                         </div>               
                     </div>
-                    <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="p20 fw">
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>freelance-jobs-by-categories" class="btn-1">View More</a></p>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
             <div class="content-bnr free-apply-bnr-prlx">
                 <div class="bnr-box">
                     
-                    <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="content-bnt-text">
                         <h2>Start Your Freelance Career with Aileensoul</h2>
                         <p><a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn5">Create Freelancer Profile</a></p>
                     </div>
@@ -100,10 +100,10 @@
             </div>
             <div class="how-it-work">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h3>How it works</h3>
                     </div>
-                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/reg.png">
@@ -130,11 +130,11 @@
             </div>
             <div class="related-article">
                 <div class="container">
-                        <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="center-title">
                             <h3>Related Articles</h3>
 
                         </div>
-                        <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row pt20">
                             <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
                                 <div class="also-like-box">
 									<div class="rec-img">

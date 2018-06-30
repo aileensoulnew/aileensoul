@@ -60,10 +60,10 @@
             <!-- TOP CATEGORY LIST -->
             <div class="job-cat-lp">
                 <div class="container" >
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h2>Business by Category</h2>
                     </div>
-                    <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row pt20">
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="category in businessCategory">
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url ?>{{category.industry_slug}}-business">
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="p20 fw">
                         <p class="p20 text-center"><a class="btn-1" ng-href="<?php echo base_url('business-by-categories') ?>">View More</a></p>
                     </div>
                 </div>
@@ -84,10 +84,10 @@
             <!-- TOP LOCATION LIST -->
             <div class="job-cat-lp">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h2>Business by Location</h2>
                     </div>
-                    <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row pt20">
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box " ng-repeat="location in businessLocation">
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url ?>business-in-{{location.slug}}">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="p20 fw">
                         <p class="p20 text-center"><a ng-href="<?php echo base_url('business-by-location') ?>" class="btn-1">View More</a></p>
                     </div>
                 </div>
@@ -108,10 +108,10 @@
             <!-- HOW ABOUT PROFILE -->
             <div class="how-about-profile">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h2>How Can Aileensoul Business Profile Help You in Growing Network?</h2>
                     </div>
-                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row">
                        
                         <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center ">
                             <p>In the emerging phase of start-ups and entrepreneurship more and more people are getting inclined towards having his/her own business venture. </p>
@@ -125,7 +125,7 @@
             <!-- CREATE BUSINESS OR REACTIVE -->
             <div class="content-bnr bus-bnr-prlx">
                 <div class="bnr-box">
-                    <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="content-bnt-text">
                         <h2>Grow Business Network Plus Be Found at Any Time by Listing Your Business Online</h2>
                         <p>
                             <?php if($this->session->userdata('aileenuser')){ ?>
@@ -145,10 +145,10 @@
             <!-- HOW IT WORKS -->
             <div class="how-it-work">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h2>How it Works</h2>
                     </div>
-                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url('assets/n-images/reg.png?ver='.time()) ?>">
@@ -177,10 +177,10 @@
             <!-- RELATED ARTICLE -->
             <div class="related-article">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title">
                         <h3>Related Article</h3>
                     </div>
-                    <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row pt20">
                         <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
                             <div class="also-like-box">
 								<div class="rec-img">

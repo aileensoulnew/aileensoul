@@ -21,7 +21,7 @@
 </head>
     <body class="profile-main-page without-reg find-art">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <?php
                 if ($ismainregister == false) {
                     // $this->load->view('artist_live/login_header');
@@ -43,10 +43,10 @@
                 <!-- TOP CATEGORIES LIST -->
                 <div class="job-cat-lp" >
                     <div class="container" >
-                        <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="center-title">
                             <h2>Artist by Category</h2>
                         </div>
-                        <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row pt20">
                             <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="category in artistCategory">
                                 <div class="all-cat-box">
                                     <a href="<?php echo artist_category ?>{{category.category_slug}}">
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="p20 fw">
                             <p class="p20 text-center">
                                 <a href="<?php echo artist_category_list; ?>" class="btn-1">View More</a>
                             </p>
@@ -69,10 +69,10 @@
                 <!-- TOP ARTIST LOCATION LIST -->
                 <div class="job-cat-lp" >
                     <div class="container" >
-                        <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="center-title">
                             <h2>Artist by Location</h2>
                         </div>
-                        <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row pt20">
                             <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="location in topLocationData">
                                 <div class="all-cat-box">
                                     <a href="<?php echo artist_location ?>{{location.city_name}}">
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="p20 fw" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="p20 fw">
                             <p class="p20 text-center"><a href="<?php echo artist_location_list ?>" class="btn-1">View More</a></p>
                         </div>
                     </div>
@@ -93,10 +93,10 @@
                 <!-- STATIC TEXT OF HOW ABOUT PROFILE -->
                 <div class="how-about-profile">
                     <div class="container">
-                        <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="center-title">
                             <h2>How Aileensoul Artistic Profile Can Help Artist Reach Their Career Goals?</h2>
                         </div>
-                        <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row">
                             
                             <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center ">
                                 <p>Artistic Profile is one of the unique feature that Aileensoul offers to its users. The profile is created solely to provide a magnificent platform for the artists as well as for the art lovers.</p>
@@ -114,7 +114,7 @@
                 <div class="content-bnr art-bnr-prlx">
                     <div class="bnr-box">
                         
-                        <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="content-bnt-text">
                             <h2>Mark Impression on This World Through Your Creativity</h2>
                             <p>
                                 <?php //if(!$isartistactivate){ ?>
@@ -143,10 +143,10 @@
                 <!-- STATIC TEXT OF HOW IT WORKS -->
                 <div class="how-it-work">
                     <div class="container">
-                        <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="center-title">
                             <h2>How it Works</h2>
                         </div>
-                        <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row">
                             <div class="col-md-4 col-sm-4">
                                 <div class="hiw-box">
                                     <img src="<?php echo base_url('assets/n-images/reg.png') ?>">
@@ -176,10 +176,10 @@
                 <!-- STATIC TEXT OF RELATED ARTICAL -->
                 <div class="related-article">
                     <div class="container">
-                            <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="center-title">
                                 <h3>Related Article</h3>
                             </div>
-                            <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="row pt20">
                                 <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
                                     <div class="also-like-box">
 										<div class="rec-img">
