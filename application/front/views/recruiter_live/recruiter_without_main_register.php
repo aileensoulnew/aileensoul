@@ -61,10 +61,10 @@
             
             <div class="how-about-profile">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title" >
                         <h2>How Can Aileensoul Recruiter Profile Help in Hiring Relevant Candidate?</h2>
                     </div>
-                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row" >
                         
                         <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center ">
                             <p>With a lot of job portals popping up nowadays, it has given an edge to the job seeker’s by providing them with lot of opportunities. But the recruiters are often put on the disadvantageous side as the portals charge them for putting up their posts. </p>
@@ -78,7 +78,7 @@
             <div class="content-bnr recruiter-bnr-prlx">
                 <div class="bnr-box">
                     
-                    <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="content-bnt-text" >
                         <h2>Put a Full Stop at Your Employee Hunting Process</h2>
                         <p><a href="<?php echo base_url('recruiter/create-account'); ?>" class="btn5">Create Recruiter Account</a></p>
                     </div>
@@ -86,10 +86,10 @@
             </div>
             <div class="how-it-work">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title" >
                         <h2>How it Works</h2>
                     </div>
-                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row" >
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/reg.png">
@@ -124,10 +124,10 @@
             </div>
             <div class="related-article">
                 <div class="container">
-                        <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="center-title" >
                             <h3>Related Articles</h3>
                         </div>
-                        <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row pt20" >
                             <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
                                 <div class="also-like-box">
 									<div class="rec-img">

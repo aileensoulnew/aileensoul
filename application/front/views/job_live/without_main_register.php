@@ -41,7 +41,7 @@
                 </header>
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 col-md-7" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                        <div class="col-lg-6 col-md-7" ><!--  -->
                             <div class="search-bnr-text">
                                 <h1>Find the Right Job Opportunities</h1>
                                 <p>Because Dream Matters </p>
@@ -90,10 +90,10 @@
 
             <div class="job-cat-lp" >
                 <div class="container" >
-                    <div class="center-title" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="center-title" ><!--  -->
                         <h2>Jobs by Category</h2>
                     </div>
-                    <div class="row pt20" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="row pt20" ><!--  -->
                         <!-- <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="jobCategory.length != 0" ng-repeat="jobs in jobCategory" ng-init="jobIndex=$index">
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url(); ?>{{jobs.industry_slug}}-jobs">
@@ -120,7 +120,7 @@
                         <?php  endforeach;
                             endif; ?>
                     </div>
-                    <div class="p20 fw" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="p20 fw" ><!--  -->
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>jobs-by-categories" class="btn-1">View More</a></p>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
             <div class="content-bnr">
                 <div class="bnr-box">
                     
-                    <div class="content-bnt-text" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="content-bnt-text" ><!--  -->
                         <h2>Still Cant Find the Right Job Don't Worry We Are Here to Help</h2>
                         <p><a href="<?php echo base_url('job-profile/create-account'); ?>" class="btn5">Create Job Profile</a></p>
                     </div>
@@ -138,10 +138,10 @@
 
             <div class="how-it-work">
                 <div class="container">
-                    <div class="center-title" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="center-title" ><!--  -->
                         <h2>How it Works</h2>
                     </div>
-                    <div class="row" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="row" ><!--  -->
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url();?>assets/n-images/reg.png">
@@ -175,11 +175,11 @@
             </div>
             <div class="related-article">
                 <div class="container">
-                        <div class="center-title" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                        <div class="center-title" ><!--  -->
                             <h2>Related Articles</h2>
 
                         </div>
-                        <div class="row pt20" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                        <div class="row pt20" ><!--  -->
                             <?php if(isset($job_related_list) && !empty($job_related_list)):
                                     foreach($job_related_list as $_job_related_list): ?>
                             <div class="col-md-4 col-sm-4">
@@ -227,10 +227,10 @@
                 </div>
             <div class="container">
                 <div class="browse-jobs">
-                    <div class="center-title" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="center-title" ><!--  -->
                         <h2>Browse Other Jobs</h2>
                     </div>
-                    <div class="row" ><!-- data-aos="fade-up" data-aos-duration="1000" -->
+                    <div class="row" ><!--  -->
                         <div class="col-md-4 col-sm-4">
                             <div class="browse-box">
                                 <ul>

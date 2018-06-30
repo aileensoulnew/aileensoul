@@ -15,7 +15,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="job-company">
                             <div class="location-box">
-                                <ul data-aos="fade-up" data-aos-duration="1000">
+                                <ul >
                                     <li ng-repeat="jc in jobByComp">
                                         <a href="<?php echo base_url(); ?>jobs-opening-at-{{jc.company_name | slugify}}-{{jc.rec_id}}" target="_self">
                                             <div class="cus-cat-middle">

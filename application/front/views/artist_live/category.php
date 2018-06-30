@@ -12,7 +12,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="artist-categories">
                         <div class="cat-box">
-                            <ul data-aos="fade-up" data-aos-duration="1000">
+                            <ul >
                                 <li ng-repeat="category in artistAllCategory">
                                     <a href="<?php echo artist_category ?>{{category.category_slug}}" target="_self">
                                         <div class="cus-cat-middle">

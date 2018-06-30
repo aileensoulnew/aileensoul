@@ -25,7 +25,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in <?php if($page == '' || !$page) echo 'active'; ?>" id="business-categories">
                         <div class="cat-box">
-                            <ul data-aos="fade-up" data-aos-duration="1000">
+                            <ul >
                                 <li ng-repeat="category in businessAllCategory">
                                     <a ng-href="<?php echo base_url ?>{{category.industry_slug}}-business" target="_self">
                                         <div class="cus-cat-middle">

@@ -11,7 +11,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="job-location">
                         <div class="location-box">
-                            <ul data-aos="fade-up" data-aos-duration="1000">
+                            <ul >
                                 <li ng-repeat="jf in jobByField">
                                     <a href="<?php echo base_url(); ?>freelance-jobs/{{jf.category_slug}}" target="_self">
                                         <div class="cus-cat-middle">

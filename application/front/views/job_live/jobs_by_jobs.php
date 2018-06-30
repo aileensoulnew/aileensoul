@@ -15,7 +15,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="job-category">
                             <div class="location-box">
-                                <ul class="jobs-listing" data-aos="fade-up" data-aos-duration="1000">
+                                <ul class="jobs-listing" >
                                     <li ng-repeat="(key, allJobVal) in jobByJobs">
                                         <h4>{{key}}</h4>
                                         <ul class="jobs-listing-main">

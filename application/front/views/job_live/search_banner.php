@@ -20,7 +20,7 @@
     <?php endif; ?>
     <div class="container">        
         <div class="row">
-            <div class="col-lg-6 col-md-7" data-aos="fade-up" data-aos-duration="1000">
+            <div class="col-lg-6 col-md-7" >
                 <div class="search-bnr-text">
                     <h1>Find the Right Job Opportunities</h1>
                     <p>Because Dream Matters </p>

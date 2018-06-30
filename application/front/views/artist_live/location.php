@@ -13,7 +13,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="artist-location">
                             <div class="location-box">
-                                <ul data-aos="fade-up" data-aos-duration="1000">
+                                <ul >
                                     <li ng-repeat="location in artistAllLocation">
                                         <a href="<?php echo artist_location ?>{{location.location_slug}}" target="_self">
                                             <div class="cus-cat-middle">

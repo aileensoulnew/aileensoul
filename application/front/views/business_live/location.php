@@ -25,7 +25,7 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="business-location">
                     <div class="location-box">
-                        <ul data-aos="fade-up" data-aos-duration="1000">
+                        <ul >
                             <li ng-repeat="location in businessAllLocation">
                                 <a ng-href="<?php echo base_url('business-in-') ?>{{location.slug}}"  target="_self">
                                     <div class="cus-cat-middle">

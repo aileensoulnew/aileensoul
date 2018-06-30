@@ -67,10 +67,10 @@
             
             <div class="how-about-profile">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title" >
                         <h2>How Can Aileensoul Freelance Profile Help in Hiring Remote Talent?</h2>
                     </div>
-                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row" >
                         
                         <div class="col-md-8 col-sm-10 col-md-push-2 col-sm-push-1 text-center">
                             <p>Freelancing is no longer an uncommon word, with a vast number of population involved. Penetration of technology and easy access to internet has made freelancing a more preferred choice. </p>
@@ -85,7 +85,7 @@
             <div class="content-bnr free-hire-bnr-prlx">
                 <div class="bnr-box">
                     
-                    <div class="content-bnt-text" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="content-bnt-text" >
                         <h2>Grow Your Business with a Remote Team</h2>
                         <p><a href="<?php echo base_url('freelance-employer/create-account'); ?>" class="btn5">Create Freelance Employer Account</a></p>
                     </div>
@@ -93,10 +93,10 @@
             </div>
             <div class="how-it-work">
                 <div class="container">
-                    <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="center-title" >
                         <h2>How it Works</h2>
                     </div>
-                    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row" >
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="hiw-box">
                                 <img src="<?php echo base_url(); ?>assets/n-images/reg.png">
@@ -131,10 +131,10 @@
             </div>
             <div class="related-article">
                 <div class="container">
-                        <div class="center-title" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="center-title" >
                             <h3>Related Articles</h3>
                         </div>
-                        <div class="row pt20" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="row pt20" >
                             <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
                                 <div class="also-like-box">
 									<div class="rec-img">
