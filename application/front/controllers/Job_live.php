@@ -324,6 +324,53 @@ class Job_live extends MY_Controller {
 
     public function jobs_by_location()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+
+        $this->data['title'] = "Search Full Time Jobs by Location - Find Available Local Jobs in Your City";
+        $this->data['metadesc'] = "Explore numerous Jobs near by your location on Aileensoul. Choose your preferable city and find the latest jobs. Get your dream job now!"; 
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->job_model->get_job_city_total_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<< Previous';
+        $config['next_link']        = 'Next >>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['jobByLocation'] = $this->job_model->get_job_city($page,$limit);
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('job_live/jobs_by_location', $this->data);
     }
     public function jobs_by_location_ajax()
@@ -342,6 +389,53 @@ class Job_live extends MY_Controller {
 
     public function jobs_by_skills()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+
+        $this->data['title'] = "Search Full Time Jobs by Skills - Browse IT/Non-IT Jobs";
+        $this->data['metadesc'] = "Explore numerous Jobs by your skills on Aileensoul. Choose preferable IT and Non-IT skills and find the latest jobs. Register and Get your dream job now!"; 
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->job_model->get_job_skills_total_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<< Previous';
+        $config['next_link']        = 'Next >>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['jobSkill'] = $this->job_model->get_job_skills($page,$limit);
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('job_live/jobs_by_skills', $this->data);
     }
     public function jobs_by_skills_ajax()
@@ -360,6 +454,53 @@ class Job_live extends MY_Controller {
 
     public function jobs_by_designations()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+
+        $this->data['title'] = "Search Full Time Jobs by Skills - Browse IT/Non-IT Jobs";
+        $this->data['metadesc'] = "Explore numerous Jobs by your skills on Aileensoul. Choose preferable IT and Non-IT skills and find the latest jobs. Register and Get your dream job now!"; 
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->job_model->get_job_designations_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<< Previous';
+        $config['next_link']        = 'Next >>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['jobDesc'] = $this->job_model->get_job_designations($page,$limit);
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('job_live/jobs_by_designation', $this->data);
     }
     public function jobs_by_designations_ajax()
@@ -378,6 +519,53 @@ class Job_live extends MY_Controller {
 
     public function jobs_by_companies()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+
+        $this->data['title'] = "Search Full Time Jobs by Companies | Top Companies Hiring at Aileensoul";
+        $this->data['metadesc'] = "Explore numerous Jobs by company on Aileensoul. Choose your preferable company and find the latest jobs openings. Join Aileensoul and Get your dream job now!"; 
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->job_model->get_jobs_by_companies_total_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<< Previous';
+        $config['next_link']        = 'Next >>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['jobComp'] = $this->job_model->get_jobs_by_companies($page,$limit);
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('job_live/jobs_by_company', $this->data);
     }
     public function jobs_by_companies_ajax()
@@ -396,6 +584,53 @@ class Job_live extends MY_Controller {
 
     public function jobs_by_categories()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+
+        $this->data['title'] = "Job By Designation, Job Profile | Aileensoul";
+        $this->data['metadesc'] = ""; 
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->job_model->get_jobs_by_categories_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<< Previous';
+        $config['next_link']        = 'Next >>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['jobCat'] = $this->job_model->get_jobs_by_categories($page,$limit);
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('job_live/jobs_by_category', $this->data);
     }
     public function jobs_by_categories_ajax()
@@ -414,6 +649,57 @@ class Job_live extends MY_Controller {
 
     public function jobs_by_jobs()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        $deactivate = $this->checkisjobdeactivate($userid);
+        //print_r($deactivate);exit;
+        // if($this->job_profile_set == 1 && !$deactivate){
+        //     redirect( $this->job_profile_link);
+        // }
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
+
+        $this->data['title'] = "Jobs, Job Profile | Aileensoul";
+        $this->data['metadesc'] = ""; 
+
+        
+        $page = 1;
+        $limit = 20;
+        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
+        $jobDesc = $this->job_model->get_job_designations($page,$limit);
+        $jobSkill = $this->job_model->get_job_skills($page,$limit);
+        $jobCity = $this->job_model->get_job_city($page,$limit);        
+        $all_link = array();
+        foreach ($jobCity as $key => $value) {
+            $i=0;
+            foreach ($jobCat as $jck => $jcv) {
+                $all_link[$value['slug']]['category'][$i]['name'] = $jcv['industry_name']." Jobs In ".$value['city_name'];
+                $all_link[$value['slug']]['category'][$i]['slug'] = $jcv['industry_slug']."-jobs-in-".$value['slug'];
+                $i++;
+            }
+            foreach ($jobDesc as $jdk => $jdv) {
+                $all_link[$value['slug']]['designation'][$i]['name'] = $jdv['job_title']." Jobs In ".$value['city_name'];
+                $all_link[$value['slug']]['designation'][$i]['slug'] = $jdv['job_slug']."-jobs-in-".$value['slug'];
+                $i++;
+            }
+            foreach ($jobSkill as $jsk => $jsv) {
+                $all_link[$value['slug']]['skills'][$i]['name'] = $jsv['skill']." Jobs In ".$value['city_name'];
+                $all_link[$value['slug']]['skills'][$i]['slug'] = $jsv['skill_slug']."-jobs-in-".$value['slug'];
+                $i++;
+            }
+        }
+        $this->data['all_link'] = $all_link;
+
         $this->load->view('job_live/jobs_by_jobs', $this->data);
     }
     public function jobs_by_jobs_ajax()

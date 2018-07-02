@@ -678,12 +678,28 @@ $route['jobs-in-(:any)/(:any)'] = "job/job_search_new/$1//3";
 $route['(:any)-jobs-in-(:any)'] = "job/job_search_new/$1/$2/4";
 $route['(:any)-jobs-in-(:any)/(:any)'] = "job/job_search_new/$1/$2/4";
 
-$route['jobs-by-location'] = "job_live/view_more_jobs";
+/*$route['jobs-by-location'] = "job_live/view_more_jobs";
 $route['jobs-by-skills'] = "job_live/view_more_jobs";
 $route['jobs-by-designations'] = "job_live/view_more_jobs";
 $route['jobs-by-companies'] = "job_live/view_more_jobs";
-$route['jobs-by-categories'] = "job_live/view_more_jobs";
-$route['jobs'] = "job_live/view_more_jobs";
+$route['jobs-by-categories'] = "job_live/view_more_jobs";*/
+
+$route['jobs-by-categories'] = "job_live/jobs_by_categories";
+$route['jobs-by-categories/(:any)'] = "job_live/jobs_by_categories";
+
+$route['jobs-by-skills'] = "job_live/jobs_by_skills";
+$route['jobs-by-skills/(:any)'] = "job_live/jobs_by_skills";
+
+$route['jobs-by-location'] = "job_live/jobs_by_location";
+$route['jobs-by-location/(:any)'] = "job_live/jobs_by_location";
+
+$route['jobs-by-companies'] = "job_live/jobs_by_companies";
+$route['jobs-by-companies/(:any)'] = "job_live/jobs_by_companies";
+
+$route['jobs-by-designations'] = "job_live/jobs_by_designations";
+$route['jobs-by-designations/(:any)'] = "job_live/jobs_by_designations";
+
+$route['jobs'] = "job_live/jobs_by_jobs";
 
 /*$route['jobs-in-(:any)'] = "job/job_search";
 $route['(:any)-jobs-in-(:any)'] = "job/job_search";*/

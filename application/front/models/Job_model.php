@@ -873,9 +873,9 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
                 $jobCity[$k]['city_image'] = "default_city.png";
             }
         }
-        $result_array['job_city'] = $jobCity;
-        $result_array['total_record'] = $this->get_job_city_total_rec();
-        return $result_array;
+        // $result_array['job_city'] = $jobCity;
+        // $result_array['total_record'] = $this->get_job_city_total_rec();
+        return $jobCity;
     }
 
     function get_job_city_total_rec() {        
@@ -912,9 +912,9 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             }
         }
         
-        $ret_array['job_skills'] = $jobSkills;
-        $ret_array['total_record'] = $this->get_job_skills_total_rec();
-        return $ret_array;
+        // $ret_array['job_skills'] = $jobSkills;
+        // $ret_array['total_record'] = $this->get_job_skills_total_rec();
+        return $jobSkills;
     }
 
     function get_job_skills_total_rec() {        
@@ -950,9 +950,9 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
                 $jobDesc[$k]['job_title_img'] = "designation_default.png";
             }
         }
-        $result_array['job_desc'] = $jobDesc;
-        $result_array['total_record'] = $this->get_job_designations_rec();
-        return $result_array;
+        // $result_array['job_desc'] = $jobDesc;
+        // $result_array['total_record'] = $this->get_job_designations_rec();
+        return $jobDesc;
     }
 
     function get_job_designations_rec() {        
@@ -986,10 +986,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
 
         $query = $this->db->get();
         
-        $jobComp = $query->result_array();        
-        $result_array['job_company'] = $jobComp;
-        $result_array['total_record'] = $this->get_jobs_by_companies_total_rec();
-        return $result_array;
+        $jobComp = $query->result_array();
+        // $result_array['job_company'] = $jobComp;
+        // $result_array['total_record'] = $this->get_jobs_by_companies_total_rec();
+        return $jobComp;
     }
 
     function get_jobs_by_companies_total_rec() {
@@ -1034,10 +1034,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
                 $jobCat[$k]['industry_image'] = "job_industry_image_default.png";
             }
         }
-        $result_array['job_cat'] = $jobCat;
-        $result_array['total_record'] = $this->get_jobs_by_categories_rec();
+        // $result_array['job_cat'] = $jobCat;
+        // $result_array['total_record'] = $this->get_jobs_by_categories_rec();
 
-        return $result_array;
+        return $jobCat;
     }
 
     function get_jobs_by_categories_rec() {
