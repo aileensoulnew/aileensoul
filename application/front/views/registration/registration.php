@@ -152,7 +152,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                             <select class="gender" name="selgen" id="selgen" tabindex="8">
                                                 <option value="" disabled selected>Gender*</option>
                                                 <option value="M">Male</option>
-                                                <option value="F">female</option>
+                                                <option value="F">Female</option>
                                             </select>
                                         </span>
                                     </div>
