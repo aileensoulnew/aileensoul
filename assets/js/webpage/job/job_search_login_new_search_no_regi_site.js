@@ -400,12 +400,12 @@ function applyJobFilter() {
         });
         // console.log(exp_fil);
 
-        $('#job-company-filter').attr('action', filter_url);
-        $("#job-company-filter").submit();
+        $('.frm-job-company-filter').attr('action', filter_url);
+        $(".frm-job-company-filter").submit();
     
-        /*$("#job-company-filter").on("change", "input:checkbox", function(){            
-            $('#job-company-filter').attr('action', filter_url);
-            $("#job-company-filter").submit();
+        /*$(".frm-job-company-filter").on("change", "input:checkbox", function(){            
+            $('.frm-job-company-filter').attr('action', filter_url);
+            $(".frm-job-company-filter").submit();
         });*/
         
         //pagenum = 1;
@@ -430,8 +430,8 @@ $(document).ready(function(){
     $("#pagination").on("click", "a", function(e){
         console.log();
         e.preventDefault();
-        $('#job-company-filter').attr('action', this.href);
-        $("#job-company-filter").submit();
+        $('.frm-job-company-filter').attr('action', this.href);
+        $(".frm-job-company-filter").submit();
     });
 });
 
