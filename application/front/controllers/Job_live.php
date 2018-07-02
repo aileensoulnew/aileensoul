@@ -358,10 +358,10 @@ class Job_live extends MY_Controller {
 
         //styling
         $config['use_page_numbers']  = TRUE;
-        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
-        $config['prev_link']        = '<< Previous';
-        $config['next_link']        = 'Next >>';
+        $config['prev_link']        = 'Previous';
+        $config['next_link']        = 'Next';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -423,10 +423,10 @@ class Job_live extends MY_Controller {
 
         //styling
         $config['use_page_numbers']  = TRUE;
-        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
-        $config['prev_link']        = '<< Previous';
-        $config['next_link']        = 'Next >>';
+        $config['prev_link']        = 'Previous';
+        $config['next_link']        = 'Next';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -488,10 +488,10 @@ class Job_live extends MY_Controller {
 
         //styling
         $config['use_page_numbers']  = TRUE;
-        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
-        $config['prev_link']        = '<< Previous';
-        $config['next_link']        = 'Next >>';
+        $config['prev_link']        = 'Previous';
+        $config['next_link']        = 'Next';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -553,10 +553,10 @@ class Job_live extends MY_Controller {
 
         //styling
         $config['use_page_numbers']  = TRUE;
-        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
-        $config['prev_link']        = '<< Previous';
-        $config['next_link']        = 'Next >>';
+        $config['prev_link']        = 'Previous';
+        $config['next_link']        = 'Next';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -618,10 +618,10 @@ class Job_live extends MY_Controller {
 
         //styling
         $config['use_page_numbers']  = TRUE;
-        $config['full_tag_open']    = '<div id="pagination">';
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
-        $config['prev_link']        = '<< Previous';
-        $config['next_link']        = 'Next >>';
+        $config['prev_link']        = 'Previous';
+        $config['next_link']        = 'Next';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';

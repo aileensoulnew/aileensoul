@@ -96,7 +96,7 @@
                                                                     if($_jobComp['company_name'] != "")
                                                                     {
                                                                     ?>
-                                                                        <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL.$_jobComp['comp_logo']; ?>">
+                                                                        <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL.$_jobComp['comp_logo']; ?>" onError="this.onerror=null;this.src='<?php echo base_url().'/assets/n-images/commen-img.png'; ?>';">
                                                                     <?php
                                                                     }
                                                                     else
@@ -136,7 +136,7 @@
     <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-    <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+    <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
