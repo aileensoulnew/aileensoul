@@ -2166,7 +2166,7 @@ Your browser does not support the audio tag.
 
     public function ajax_userlist() {
         $s3 = new S3(awsAccessKey, awsSecretKey);
-        $perpage = 5;
+        $perpage = 50;
         $page = 1;
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
             $page = $_GET["page"];
@@ -2182,8 +2182,8 @@ Your browser does not support the audio tag.
         $contition_array = array('user_id' => $userid);
         $artisticdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $limit = 50;
-        // $limit = $perpage;
+        // $limit = 50;
+        $limit = $perpage;
         $offset = $start;
         $location_id = $_GET["location_id"];
         $category_id = $_GET["category_id"];

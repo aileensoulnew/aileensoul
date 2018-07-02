@@ -113,31 +113,31 @@
                     <ul class="search-listing">
                         <li>
                             <label class="control control--checkbox">Today
-                                <input class="period-filter" type="checkbox" name="period_filter[]" value="1" ng-model="post_period1" onchange="applyJobFilter()"/>
+                                <input class="period-filter" type="checkbox" name="period_filter[]" value="1" <?php echo (in_array(1, $period_filter) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                 <div class="control__indicator"></div>
                             </label>
                         </li>
                         <li>
                             <label class="control control--checkbox">Last 7 Days
-                                <input class="period-filter" type="checkbox" name="period_filter[]" value="2" ng-model="post_period2" onchange="applyJobFilter()"/>
+                                <input class="period-filter" type="checkbox" name="period_filter[]" value="2" <?php echo (in_array(2, $period_filter) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                 <div class="control__indicator"></div>
                             </label>
                         </li>
                         <li>
                             <label class="control control--checkbox">Last 15 Days
-                                <input class="period-filter" type="checkbox" name="period_filter[]" value="3" ng-model="post_period3" onchange="applyJobFilter()"/>
+                                <input class="period-filter" type="checkbox" name="period_filter[]" value="3" <?php echo (in_array(3, $period_filter) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                 <div class="control__indicator"></div>
                             </label>
                         </li>
                         <li>
                             <label class="control control--checkbox">Last 45 Days
-                                <input class="period-filter" type="checkbox" name="period_filter[]" value="4" ng-model="post_period4" onchange="applyJobFilter()"/>
+                                <input class="period-filter" type="checkbox" name="period_filter[]" value="4" <?php echo (in_array(4, $period_filter) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                 <div class="control__indicator"></div>
                             </label>
                         </li>
                         <li>
                             <label class="control control--checkbox">More than 45 Days
-                                <input class="period-filter" type="checkbox" name="period_filter[]" value="5" ng-model="post_period5" onchange="applyJobFilter()"/>
+                                <input class="period-filter" type="checkbox" name="period_filter[]" value="5" <?php echo (in_array(5, $period_filter) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                 <div class="control__indicator"></div>
                             </label>
                         </li>
@@ -158,37 +158,37 @@
                         <ul class="search-listing">
                             <li>
                                 <label class="control control--checkbox">0 to 1 year
-                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="1" ng-model="exp1" onchange="applyJobFilter()"/>
+                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="1" <?php echo (in_array(1, $exp_fil)? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                     <div class="control__indicator"></div>
                                 </label>
                             </li>
                             <li>
                                 <label class="control control--checkbox">1 to 2 year
-                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="2" ng-model="exp2" onchange="applyJobFilter()"/>
+                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="2" <?php echo (in_array(2, $exp_fil) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                     <div class="control__indicator"></div>
                                 </label>
                             </li>
                             <li>
                                 <label class="control control--checkbox">2 to 3 year
-                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="3" ng-model="exp3" onchange="applyJobFilter()"/>
+                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="3" <?php echo (in_array(3, $exp_fil) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                     <div class="control__indicator"></div>
                                 </label>
                             </li>
                             <li>
                                 <label class="control control--checkbox">3 to 4 year
-                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="4" ng-model="exp4" onchange="applyJobFilter()"/>
+                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="4" <?php echo (in_array(4, $exp_fil) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                     <div class="control__indicator"></div>
                                 </label>
                             </li>
                             <li>
                                 <label class="control control--checkbox">4 to 5 year
-                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="5" ng-model="exp5" onchange="applyJobFilter()"/>
+                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="5" <?php echo (in_array(5, $exp_fil) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                     <div class="control__indicator"></div>
                                 </label>
                             </li>
                             <li>
                                 <label class="control control--checkbox">More than 5 year
-                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="6" ng-model="exp6" onchange="applyJobFilter()"/>
+                                    <input class="exp-filter" type="checkbox" name="exp_fil[]" value="6" <?php echo (in_array(6, $exp_fil) ? "checked='checked'" : ''); ?> onchange="applyJobFilter()"/>
                                     <div class="control__indicator"></div>
                                 </label>
                             </li>

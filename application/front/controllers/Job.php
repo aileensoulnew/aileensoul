@@ -5884,6 +5884,7 @@ class Job extends MY_Controller {
             $this->data['title'] = ucwords($keyser)." Jobs Openings in ".$keyloc." | Aileensoul";
             $this->data['metadesc'] = ucwords($keyser)." Vacancy in ".$keyloc.": Explore the latest ".ucwords($keyser)." jobs on Aileensoul. Apply and get the job in ".$keyloc." location. ";
         }
+        // print_r($_POST);
         $this->data['company_id'] = $company_id = (isset($_POST['company_id']) && !empty($_POST['company_id']) ? $_POST['company_id'] : "");
         $this->data['category_id'] = $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");
         $this->data['location_id'] = $location_id = (isset($_POST['location_id']) && !empty($_POST['location_id']) ? $_POST['location_id'] : "");

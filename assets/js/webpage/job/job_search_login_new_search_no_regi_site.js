@@ -398,12 +398,15 @@ function applyJobFilter() {
                 exp_fil += (exp_fil == "") ? currentid : "," + currentid;
             }
         });
-        // console.log(exp_fil);        
+        // console.log(exp_fil);
+
+        $('#job-company-filter').attr('action', filter_url);
+        $("#job-company-filter").submit();
     
-        $("#job-company-filter").on("change", "input:checkbox", function(){            
+        /*$("#job-company-filter").on("change", "input:checkbox", function(){            
             $('#job-company-filter').attr('action', filter_url);
             $("#job-company-filter").submit();
-        });
+        });*/
         
         //pagenum = 1;
 
@@ -423,3 +426,23 @@ function applyJobFilter() {
             }
         );*/
     }
+$(document).ready(function(){
+    $("#pagination").on("click", "a", function(e){
+        console.log();
+        e.preventDefault();
+        $('#job-company-filter').attr('action', this.href);
+        $("#job-company-filter").submit();
+    });
+});
+
+//apply post start
+function applypopup(postid, userid)
+{
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now!<p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
+}
+function savepopup(id) {
+        
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now!<p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
+}
