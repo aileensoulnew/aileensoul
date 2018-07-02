@@ -141,7 +141,7 @@ $userid = $this->session->userdata('aileenuser');
                             </ul>
                         </li>
 						<li class="post-job-sh">
-							<a href="<?php echo base_url('post-freelance-project'); ?>" title="Recruiter Add Post">
+							<a href="<?php echo base_url('post-freelance-project'); ?>" title="Post Project">
 								
 								<svg class="not-hover" viewBox="0 0 490.337 490.337" width="17px" height="17px">
 								

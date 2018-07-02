@@ -163,11 +163,23 @@
                                     <h3 class="freelancer_editpost_title"><?php echo $this->lang->line("payment"); ?></h3>
                                     <div class="p15 fw">
                                          <fieldset style="padding-left: 8px;"  <?php if ($rating) { ?> class="error-msg col-md-12" <?php } else{ ?> class="col-md-12" <?php }?>>
-                                             <div class="cus_work">
+                                            <div class="cus_work">
                                             <label><?php echo $this->lang->line("work_type"); ?><span style="color:red">*</span></label>
-                                            <input type="radio" name="rating" tabindex="11" <?php if ($freelancerpostdata[0]['post_rating_type'] == '0') { ?> checked <?php } ?> value="0" > Hourly
-                                            <input type="radio" name="rating" tabindex="12"  <?php if ($freelancerpostdata[0]['post_rating_type'] == '1') { ?> checked <?php } ?> value ="1"> Fixed
-                                            <input type="radio" tabindex="13" class="worktype"  name="rating" value="2"> Not Fixed
+											<label class="control control--radio">
+												Hourly
+												<input type="radio" name="rating" tabindex="11" <?php if ($freelancerpostdata[0]['post_rating_type'] == '0') { ?> checked <?php } ?> value="0" > 
+												<div class="control__indicator"></div>
+											</label>
+											<label class="control control--radio">
+												Fixed
+												<input type="radio" name="rating" tabindex="12"  <?php if ($freelancerpostdata[0]['post_rating_type'] == '1') { ?> checked <?php } ?> value ="1"> 
+												<div class="control__indicator"></div>
+											</label>
+											<label class="control control--radio">
+												Not Fixed
+												<input type="radio" tabindex="13" class="worktype"  name="rating" value="2"> 
+												<div class="control__indicator"></div>
+											</label>
                                              </div>
                                             <?php echo form_error('rating'); ?>
                                         </fieldset>
