@@ -50,7 +50,7 @@
                                 }
                                 ?>
 								
-                            <div class="panel-body rec-edit-post">
+                            <div class="rec-edit-post">
 
 
 

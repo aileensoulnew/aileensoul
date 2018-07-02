@@ -195,6 +195,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </a>
                         <?php echo $left_footer; ?>
                     </div>
+					
+					hfhfdh
+					
                     <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
                         <?php
                         if ($this->session->flashdata('error')) {

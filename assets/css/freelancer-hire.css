@@ -433,7 +433,7 @@ li.fr a {
 }
 .profile-boxProfileCard-cover {
     border: 1px solid #efefef;
-    border-bottom: none;
+    /*border-bottom: none;*/
 	height:94px;
 }
 .profile-boxProfileCard .bg-images img{height: 94px !important;}
