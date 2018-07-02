@@ -89,7 +89,7 @@
                                                     if(isset($jobSkill) && !empty($jobSkill)):
                                                         foreach($jobSkill as $_jobSkill): ?>
                                                         <li>
-                                                            <a href="<?php echo base_url().$_jobSkill['skill_slug'].'-jobs'; ?>" target="_self">
+                                                            <a href="<?php echo base_url().strtolower($_jobSkill['skill_slug']).'-jobs'; ?>" target="_self">
                                                                 <div class="cus-cat-middle">
                                                                 <img src="<?php echo SKILLS_IMG_PATH.$_jobSkill['skill_image'];?>">
                                                                 <p><?php echo ucwords($_jobSkill['skill']).' Jobs'; ?></p>
