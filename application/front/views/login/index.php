@@ -380,7 +380,7 @@ header('Expires: ' . $date);
                     },
                     messages: {
                         forgot_email: {
-                            required: "Email Address Is Required.",
+                            required: "Email address is required.",
                             remote: "Email address not exists",
 
                         }

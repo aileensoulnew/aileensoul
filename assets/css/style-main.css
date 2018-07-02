@@ -2734,6 +2734,9 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 .term_condi_check label.error{position:relative;}
 .term_condi_check .control input:focus ~ .control__indicator{border:1px solid #1b8ab9;}
 .term_condi_check .control input:checked ~ .control__indicator{background:#838282; border:1px solid #838282;}
+.registeration .term_condi_check .control{cursor:inherit;}
+.registeration .term_condi_check .control span{cursor:pointer;}
+.registeration .term_condi_check .control span:after{display:none;}
 /***  end custom check box and radio buttons  ***/
 .main-login header .col-md-4.col-sm-3{/*text-align:center;*/}
 .main-login .header-login .input{margin-bottom:10px;}

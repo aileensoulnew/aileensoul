@@ -160,7 +160,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     <div class="clr-c fs12 form-group term_condi_check">
                                         <label id="lbl_term_condi" class="control control--checkbox" for="term_condi">
                                             <input tabindex="9" type="checkbox" name="term_condi" id="term_condi" value="1" />
-                                            I have read and agree to use this website as subjected to Aileensoul 
+                                            <span>I have read and agree to use this website as subjected to Aileensoul</span> 
                                             <a tabindex="10" href="<?php echo base_url('terms-and-condition'); ?>">Terms and Condition</a> and <a tabindex="11" href="<?php echo base_url('privacy-policy'); ?>">Privacy policy</a>.
                                             <div class="control__indicator"></div>
                                         </label>

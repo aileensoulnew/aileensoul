@@ -2401,21 +2401,11 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 .fresher_radio{padding:6px 8px;}
 .left_side_box_img a.profile-boxProfileCard-bg{display:inline-block; margin:5px 0 8px 4px;}
 .post-img img{border:none;}
-
-.message-box{}
 .mob-post-job{background: #fff; position: fixed; bottom: 55px; width: 35px; height: 35px; z-index: 99;
 border-radius: 100%; padding: 8px 7px 8px 9px; right: 15px; box-shadow:0 0 2px 1px #d9d9d9;}
-.mob-post-job svg path{
-	fill: #1b8ab9;
-}
-input[type=text] {   
-    -webkit-appearance: none;
-    -moz-appearance: none;
-	appearance: none;
-}
-.right-header {
-    text-align: right;
-}
+.mob-post-job svg path{fill: #1b8ab9;}
+input[type=text] {-webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.right-header {text-align: right;}
 .detail-job-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;}
 .detail-job-no-login .btn-right .btn2{padding:8px 25px; background:none; color:#fff;}
 .detail-job-no-login .btn-right .btn2:hover{background:#fff; color:#1b8ab9;}
@@ -2425,7 +2415,6 @@ input[type=text] {
 .job-detail .job-top-detail{/*padding-left:36px;*/}
 .job-detail .job-top-detail.free-apply-img{width:100%; padding-left:0;}
 .old-no-login #paddingtop_fixed{padding-top:54px !important;}
-
 .old-no-login #contact_per{display:none;}
 .old-no-login .other-profile-menu .profile-left{width:100%;}
 .old-no-login .other-profile-menu .bui-menu-profile{padding-right:15px;}
@@ -2435,7 +2424,6 @@ input[type=text] {
 .block-479{display:none;}
 .all-tab .no-data-available .art-img-nn{width:auto; padding:0;}
 .list-box-custom .all-detail-box{margin-bottom:85px;}
-
 .hs-submit button{color:#fff;}
 #jobseeker_regform .hs-submit{padding-top:15px;}
 .hs-submit .delete_btn{margin-bottom:10px; margin-top:0;}
@@ -2459,7 +2447,6 @@ body, body.no-login {padding-bottom:60px;}
 .student-info-box{border:1px solid #d2d2d2; border-radius:4px; padding:5px; width:200px; position:absolute; display:none; font-size:13px; background:#fff;}
 .student-info-popup:hover .student-info-box{display:inline-block; top:0; left:30px; z-index:9; top:-19px;}
 .student-info-box:before{position:absolute; background:url('../n-images/left-arrow-st.png'); content:''; left:-10px; top:17px; width:10px; height:17px; background-size:100%; }
-
 .mi-cat-width{width:220px; float:left;}
 .msg_desc_a{max-height:21px;}
 #contact_per{display:none;}
@@ -2470,6 +2457,7 @@ body, body.no-login {padding-bottom:60px;}
 .modal.message-box span.mes{padding:15px 10px !important; width:100%; float:left;}
 .pop_content .cnclbtn, .pop_content .okbtn{/*display:inline-block;*/ margin-bottom:10px;}
 .home_three_follow_ul li .contact-frnd-post{margin-bottom:0;}
+#basic_info_ajax_load{padding-left:10px;}
 
 /***  rec css  ***/
 .rec-recmn-post .contact-frnd-post{border:0; padding:0; margin-top:10px;}
@@ -2533,13 +2521,7 @@ border: 1px solid #fff; line-height: 1;}
 .roster-contact{width:100%;float:left;}
 .msg-search input{border:0; border-bottom:1px solid #d2d2d2; border-radius:0;}
 #chat-area{width:948px; height:558px;  float:left; border:0 !important; border-radius:0 !important; position:relative;}
-#chat-area.ui-widget {
-     max-height: inherit!important; 
-     margin-top: 0px!important; 
-     overflow-y: inherit; 
-     overflow-x: inherit; 
-     position: relative!important; 
-	z-index: inherit!important; }
+#chat-area.ui-widget {max-height: inherit!important; margin-top: 0px!important; overflow-y: inherit; overflow-x: inherit; position: relative!important; z-index: inherit!important; }
 
 #chat-area.ui-widget-content{/*border-right:1px solid #d2d2d2 !important;*/}
 .contact-img{width:50px; height:50px; border-radius:100%; float:left; overflow:hidden;}
