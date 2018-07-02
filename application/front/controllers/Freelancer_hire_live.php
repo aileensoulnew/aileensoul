@@ -55,6 +55,7 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['search_banner'] = $this->load->view('freelancer_hire_live/search_banner', $this->data, TRUE);
 			$this->data['title'] = "Hire Freelancers and Post Projects | Aileensoul";
 			$this->data['metadesc'] = "Find freelancer and home based online jobs on Aileensoul. Joining and posting project is completely free. Get freelance job and post your requirement now!";
+			$this->data['free_hire_related_list'] = $this->freelancer_hire_model->free_hire_related_blog_list();
 			if($userid != ""){
 				$this->load->view('freelancer_hire_live/index', $this->data);
 			}

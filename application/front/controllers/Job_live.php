@@ -361,7 +361,7 @@ class Job_live extends MY_Controller {
         $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
         $config['prev_link']        = '<span class="btn-p">Previous</span>';
-        $config['next_link']        = '<span class="btn-n">Next</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -426,7 +426,7 @@ class Job_live extends MY_Controller {
         $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
         $config['prev_link']        = '<span class="btn-p">Previous</span>';
-        $config['next_link']        = '<span class="btn-n">Next</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -491,7 +491,7 @@ class Job_live extends MY_Controller {
         $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
         $config['prev_link']        = '<span class="btn-p">Previous</span>';
-        $config['next_link']        = '<span class="btn-n">Next</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -556,7 +556,7 @@ class Job_live extends MY_Controller {
         $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
         $config['prev_link']        = '<span class="btn-p">Previous</span>';
-        $config['next_link']        = '<span class="btn-n">Next</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';
@@ -621,7 +621,7 @@ class Job_live extends MY_Controller {
         $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
         $config['full_tag_close']   = '</div>';
         $config['prev_link']        = '<span class="btn-p">Previous</span>';
-        $config['next_link']        = '<span class="btn-n">Next</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
         $config['display_pages']    = FALSE; 
         $config['first_url']        = '';
         // $config['suffix']           = '-1';

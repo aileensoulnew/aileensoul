@@ -135,18 +135,23 @@
                             <h3>Related Articles</h3>
                         </div>
                         <div class="row pt20" >
-                            <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
+                            <?php
+                            if(isset($free_hire_related_list) && !empty($free_hire_related_list)):
+                                foreach($free_hire_related_list as $_free_hire_related_list): ?>
+                            <div class="col-md-4 col-sm-4">
                                 <div class="also-like-box">
 									<div class="rec-img">
-										<a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
-										<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
+										<a href="<?php echo base_url().'blog/'.$_free_hire_related_list['blog_slug']; ?>">
+										<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path').$_free_hire_related_list['image']); ?>">
 										</a>
 									</div>
                                     <div class="also-like-bottom">
-                                        <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a></p>
+                                        <p><a href="<?php echo base_url().'blog/'.$_free_hire_related_list['blog_slug']; ?>"><?php echo $_free_hire_related_list['title']; ?></a></p>
                                     </div>
                                 </div>
-                            </div>                           
+                            </div>
+                            <?php endforeach;
+                            endif; ?>
                         </div>
                     </div>
                 </div>
@@ -156,7 +161,7 @@
 
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
