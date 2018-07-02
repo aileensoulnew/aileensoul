@@ -4,7 +4,7 @@ body.main-message{padding-bottom:0;}
 .one-hd .middle-section{padding:69px 0 50px;}
 .middle-section{padding:95px 0 50px;}
 .single-header .middle-section {padding:75px 0 50px;}
-.middle-section-banner{padding:54px 0 0px;}
+.middle-section-banner{padding:54px 0 0px !important;}
 .middle-section-banner.new-ld-page{padding:0;}
 .main-message .middle-section {padding:75px 0 0px;}
 .register .middle-section{padding:90px 0 50px;}
@@ -87,6 +87,8 @@ body.main-message{padding-bottom:0;}
 .all-profile-box ul li .all-pr-img{width:35px; height:35px; float:left; border:1px solid #d2d2d2;}
 .all-profile-box ul li .all-pr-img img{width:100%;}
 .all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:17px; padding:5px 0 0 15px; letter-spacing:1px;}
+.all-profile-box .all-pr-list li a{width:100%; float:left; padding:10px;}
+.left-part .all-profile-box .all-pr-list li a{padding:5px 10px;}
 /***  inner profiles left box  ***/
 .profile-boxProfileCard-cover{height:112px !important;}
 .right_left_box_design{padding:5px 9px 0 5px !important;}
@@ -3068,7 +3070,7 @@ overflow-y: scroll; overflow-y: auto;}
 	#roster-area{height:auto;}
 	.contact-detail{width:80%;}
 	.msg-time{float:right;}
-	
+	.mob-detail-custom{width:100%; border-left:0; border-right:0; border-radius:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3128,7 +3130,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.mob-progressbar{width:100%; border-left:0; border-right:0; border-radius:0;}
 	#popup-form input[type="submit"]#profilepicsubmit {margin-top:15px;}
 	.post-img-user{height:88px; width:88px; padding:32px 0;}
-	.mob-detail-custom{width:100%; border-left:0; border-right:0; border-radius:0;}
+	
 }
 @media screen and (max-width: 539px) {
 	.fw-539{width:100%; float:left;}
@@ -3435,6 +3437,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.other-profile-menu .profile-main-box-buis-menu li a{padding:3px 5px 12px !important; font-size:10px; height:40px;}
 	.add-anonymously{padding:9px 5px 0;}
 	.contact-detail{width:70%;}
+	.other-profile-menu .profile-main-box-buis-menu .flw_msg_btn li a{font-size:13px;}
 }
 @media screen and (max-width: 320px) {
 	.reg-form-cus .login .form-group select{margin-right: 9px;}

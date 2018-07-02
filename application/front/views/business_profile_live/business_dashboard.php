@@ -94,10 +94,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             </div>
 			<div class="full-box-module business_data mob-detail-custom">
                             <div class="profile-boxProfileCard  module">
-                                <div class="head_details1">
-                                    <span><a href="javascript:void(0);" onclick="register_profile();"><h5><i class="fa fa-info-circle" aria-hidden="true"></i>Information</h5></a>
-                                    </span>      
-                                </div>
+                               
                                 <table class="business_data_table">
                                     <tr>
                                         <td class="business_data_td1"><i class="fa fa-user"></i></td>

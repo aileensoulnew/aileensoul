@@ -4415,7 +4415,7 @@ body.reg-form{
 	.old-no-login .other-profile-menu .profile-main-box-buis-menu .flw_msg_btn{display:none;}
 	.old-no-login .buisness-menu.other-profile-menu{border-bottom:0;}
     .buisness-menu::before{
-        bottom:49px
+        bottom:48px
     }
     .flw_msg_btn ul li{
         padding-right:0!important;
@@ -4448,8 +4448,11 @@ body.reg-form{
         margin-left:0
     }
     ul.current-user{
-        float:none
+        float:none;
+		width:100%;
     }
+	.business-profile-right .profile-main-box-buis-menu ul.current-user li{width:20%;}
+	.business-profile-right .profile-main-box-buis-menu ul.current-user li:last-child{padding-right:0;}
     .profile-main-box-buis-menu li a{
         height:48px;
         font-size:12px;
@@ -4497,7 +4500,7 @@ body.reg-form{
         padding:12px 5px
     }
     .business-profile-right .bui-menu-profile,.business-profile-right .business-data-menu{
-        padding-left:15px
+        padding-left:0;
     }
     .other-profile-menu .business-profile-right .business-data-menu{
         padding-left:0
@@ -4603,6 +4606,7 @@ body.reg-form{
         width:264px
     }
 	#contact_per{margin-top:25px;}
+
 }
 @media screen and (max-width:800px){
     .cmy_2,.mySlides .post-design-commnet-box .cmy_2{

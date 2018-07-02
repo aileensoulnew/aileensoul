@@ -65,6 +65,75 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         </a>
                     </div>
                 </div>
+				<div class="full-box-module business_data mob-detail-custom">
+                                <div class="profile-boxProfileCard  module">
+                                    
+                                    <table class="business_data_table">
+                                        <tr>
+                                            <td class="business_data_td1 detaile_map"><i class="fa fa-user"></i></td>
+                                            <td class="business_data_td2"><?php echo ucfirst(strtolower($business_data[0]['contact_person'])); ?></td>
+                                        </tr>
+
+                                       <?php if ($business_data[0]['contact_mobile'] != '0') { ?>
+                                        <tr>
+                                            <td class="business_data_td1 detaile_map"><i class="fa fa-mobile"></i></td>
+                                            <td class="business_data_td2"><span><?php
+                                                    
+                                                        echo $business_data[0]['contact_mobile'];
+                                                   
+                                                    ?></span>
+                                            </td>
+                                        </tr>
+                                        <?php }?>
+                                        <tr>
+                                            <td class="business_data_td1 detaile_map"><i class="fa fa-envelope-o" aria-hidden="true"></i></td>
+                                            <td class="business_data_td2"><span><?php echo $business_data[0]['contact_email']; ?></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="business_data_td1 detaile_map"><i class="fa fa-map-marker"></i></td>
+                                            <td class="business_data_td2"><span>
+                                                    <?php
+                                                    if ($business_data[0]['address']) {
+                                                        echo $business_data[0]['address'];
+                                                        echo ",";
+                                                    }
+                                                    ?> 
+                                                    <?php
+                                                    if ($business_data[0]['city']) {
+                                                        echo $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
+                                                        echo",";
+                                                    }
+                                                    ?> 
+                                                    <?php
+                                                    if ($business_data[0]['country']) {
+                                                        echo $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
+                                                    }
+                                                    ?> 
+                                                </span></td>
+                                        </tr>
+                                        <?php
+                                        if ($business_data[0]['contact_website']) {
+                                            ?>
+                                            <tr>
+                                                <td class="business_data_td1 detaile_map"><i class="fa fa-globe"></i></td>
+                                                <td class="business_data_td2 website"><span><a target="_blank" href="<?php echo $business_data[0]['contact_website']; ?>"> <?php echo $business_data[0]['contact_website']; ?></a></span></td>
+                                            </tr>
+                                        <?php } ?>
+
+                                        
+                                        <?php if($business_data[0]['details']){?>
+                                        <tr>
+                                            <td class="business_data_td1 detaile_map"><i class="fa fa-suitcase"></i></td>
+                                            <?php
+                                            $bus_detail = nl2br($this->common->make_links($business_data[0]['details']));
+                                            $bus_detail = preg_replace('[^(<br( \/)?>)*|(<br( \/)?>)*$]', '', $bus_detail);
+                                            ?>
+                                            <td class="business_data_td2"><span><?php echo $bus_detail; ?></span></td>
+                                        </tr>
+                                        <?php }?>
+                                    </table>
+                                </div>
+                            </div>
                 <div class="user-midd-section">
                     <div class="container art_container padding-360 manage-post-custom">
                         <div class="profile-box-custom left_side_posrt">
