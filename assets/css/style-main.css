@@ -2747,10 +2747,28 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 .logo-size{font-size:32px;}
 header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
-header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
+header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
 .header-login .form-control:focus{border-color:#fff;}
 .header-login input.error:focus{border-bottom:1px solid #ff0000 !important;}
+.modal-body .header-login .input{width:100%; border-bottom:1px solid #d2d2d2; color:#5c5c5c; margin-right:0;}
+.modal-body .header-login .btn1{border:1px solid #d2d2d2; color:#5c5c5c;}
+.right-cus-new-hdr{text-align:right;}
+.test-cus{padding:0; display:inline-block; margin-bottom:0; padding-top:7px;}
+.test-cus li{list-style-type:none; float:left;}
+.test-cus li a{padding:3px 15px; display:inline-block; color:#fff; font-size:16px; letter-spacing:1px;}
+.right-cus-new-hdr .btn3{border-radius:20px; font-size:16px; padding:3px 25px; margin-top:-1px;}
+.right-cus-new-hdr .btn3:hover{text-decoration:none;}
+
+.navbar-right.test-cus li > a:hover{background:none;}
+.navbar-right.test-cus li li{width:100%;}
+.navbar-right.test-cus li li a{color:#5c5c5c; width:100%;}
+.navbar-right.test-cus li li a:hover{background:#f6f6f6;}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {background:none;}
+
+.btn4{border:1px solid #fff; padding:3px 25px; border-radius:20px; color:#fff; margin-right:15px;}
+.btn4:hover{color:#1b8ab9; background:#fff;}
+.tablate-main-login{display:none;}
 
 @media screen and (min-height:540px){
     .cover .modal-content{
@@ -3064,6 +3082,8 @@ header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
     .contact-add .p20{padding: 46.50px 30px;}
     .cus-job-img img{width: 75% !important;}
     .cus-job-img{text-align: center;}
+	.test-cus li:last-child{display:block;}
+	.test-cus li{display:none;}
 }
 @media screen and (max-width:767px){
     footer,header .col-md-4.col-sm-3{
@@ -3101,7 +3121,7 @@ header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
     .t-r-l{
         text-align:right!important
     }
-    .bottom-middle,.header-login,.main-inner .btn-right.pull-right,.top-middle,header h2{
+    .bottom-middle,.header-login,.main-inner .btn-right.pull-right,.top-middle{
         text-align:center
     }
     .header-login label.error{text-align: left;display: block;}
@@ -3473,6 +3493,7 @@ header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
 	.logo-size{font-size:28px;}
 	header .logo svg{width:140px;}
 	.about-us .about-h2{font-size:30px;}
+	.test-cus{padding-top:0;}
 }
 @media screen and (max-width:640px){
     .btns .btn-4{
@@ -3701,6 +3722,8 @@ header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
 	.turmcon-cust .about-h2{font-size:20px;}
 	body.about-us{padding-bottom:0;}
 	body{padding-bottom:0;}
+	.tablate-main-login{display:block;}
+	.test-cus{display:none;}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{
@@ -3786,3 +3809,6 @@ header .logo svg{height:26px; width:146px; margin-top:5px; fill:#fff;}
         font-size:16px
     }
 }
+
+
+

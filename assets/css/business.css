@@ -1248,7 +1248,7 @@ label.cameraButton:active{
 .edit-comment-box .comment-edit-button button{
     padding:6px 18px;
     position:absolute;
-    bottom:2px
+    bottom:8px
 }
 .comment-edit-button button{
     padding:9px 10px;
@@ -2449,7 +2449,7 @@ label.cameraButton:active{
 .post-design-box .post-design-desc .editable_text{
     min-height:80px!important;
     float:left;
-    margin-bottom:5px;
+    margin-bottom:10px !important;
     width:82%
 }
 .post-design-box .post-design-desc .textbuis{
@@ -3993,6 +3993,7 @@ div .comment{
     display:block;
     padding:10px
 }
+.edit-pro-box img{height:30px;}
 .edit-progress-box .progress-line{
     width:100%;
     float:left;

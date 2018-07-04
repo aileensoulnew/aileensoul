@@ -635,6 +635,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 .right-header .dropdown-menu ul{width:100%; float:left;}
 .right-header .dropdown-menu ul li{border-bottom:1px solid #d9d9d9;}
 .right-header .dropdown-menu ul li:last-child{border-bottom:0;}
+.sub-menu li.dropdown .dropdown-menu::before {display:none;}
 .dropdown-title{
 	position: relative;
 	z-index: 1000;
@@ -666,7 +667,7 @@ li.dropdown .dropdown-menu:before{
 li.user-id .dropdown-menu:before{
     right:5px;
 }
-.sub-menu li.dropdown.open::before{background: url('../img/sub-h-top-arrow.png'); background-position: 0 19px; left:15px; border:0; width:26px; height: 13px; top:19px; content: ''; display:block; position:absolute; z-index:9999;}
+.sub-menu li.dropdown.open::before{background: url('../img/sub-h-top-arrow.png'); background-position: 0 19px; left:15px; border:0; width:26px; height: 13px; top:17px; content: ''; display:block; position:absolute; z-index:9999;}
 .sub-menu li.user-id .dropdown-menu::before{display:none;}
 .right-header ul li .dropdown-title a{font-size:14px; color:#5c5c5c;}
 .right-header ul li .dropdown-title a:hover{color:#1b8ab9; text-decoration: underline;}
@@ -1181,18 +1182,19 @@ footer ul li a:hover{
 /***  sub header  ***/
 .sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; top:54px; position:fixed; background:#fff; z-index:99;}
 .sub-header-search{width:100%; float:left; position:fixed; z-index:1002; top:80px; display:none;}
-.sub-header .sub-menu{padding:10px 0; margin:0; width:100%; float:left;}
+.sub-header .sub-menu{padding:12px 0; margin:0; width:100%; float:left;}
 .sub-header .sub-menu li{list-style-type:none; float:left; padding:0px 20px; margin-bottom:0;}
 .sub-header .sub-menu li:first-child{padding-left:0;}
 .sub-header .sub-menu li a{font-size:16px; color:#5c5c5c; float:left;}
 .sub-header .sub-menu li .dropdown-title a:hover{color:#1b8ab9; text-decoration: underline;}
 .sub-header .sub-menu li > a i{padding-right:10px; font-size:16px;}
 .sub-header .sub-menu li a .fa{font-size:16px;}
+.sub-header .sub-menu li a span{float:left; line-height:1;}
 .sub-menu .user-id .user-id-custom::after{margin-top:0; position:relative; top:-3px; display: none;}
 .sub-menu .noti-box{left:35px; color:#fff; top:-8px;}
 .sub-header .dropdown .dropdown-menu{}
 .sub-header .dropdown.open .dropdown-menu{width:360px; border:1px solid #d2d2d2;}
-.sub-header .dropdown.open .dropdown-menu{left:0 !important; top:31px; margin:0;}
+.sub-header .dropdown.open .dropdown-menu{left:0 !important; top:29px; margin:0;}
 .sub-header .dropdown.open .dropdown-menu li{width:100%; border-right:0; padding:0;}
 .sub-header .dropdown.open .content li{padding:10px; border-bottom:1px solid #d2d2d2;}
 .sub-header .dropdown.open .content li a{padding:0px;}
@@ -1205,7 +1207,7 @@ border: 1px solid #1b8ab9;}
 .sub-header .dropdown.open .content li .addcontact-right a.add-right-true:hover{background:#e9f4f8;}
 .sub-header .dropdown.open .content li .addcontact-right a.add-left-true i{color:#fff;}
 .sub-header .dropdown.open .dropdown-menu li a{color:#777;}
-.sub-header .dropdown.user-id .dropdown-menu li a{padding:10px; line-height:1;}
+.sub-header .dropdown.user-id .dropdown-menu li a{padding:10px; line-height:1; width:100%;}
 .sub-header .dropdown.user-id .dropdown-menu li a span{float:left; margin-right:10px;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover{background: #1b8ab9; color: #fff;}
 .sub-header .dropdown.open .dropdown-menu.account li a:hover .icon-view-profile{background-position: 0 -160px;}
@@ -1226,7 +1228,7 @@ border: 1px solid #1b8ab9;}
 .sub-header .dropdown.open .dropdown-menu.account{width:180px; padding-top:0;}
 .sub-header .dropdown.open .dropdown-menu.account li:first-child{padding:10px; border-bottom:1px solid #d2d2d2; font-size:16px;}
 .sub-header .job-search-box1{float:right;}
-.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:5px 10px 0 0; }
+.sub-header .job-search-box1 fieldset.sec_h2 {width: 200px; float:left; margin:6px 10px 0 0; }
 .sub-header .job-search-box1 fieldset.sec_h2 input{border:1px solid #c0c0c0; height:30px;}
 .sub-header .new-search-btn{float:left; width:30px; height:30px; margin-top:5px; border:1px solid #c0c0c0; border-radius:3px; padding:0;}
 .sub-header .new-search-btn:hover{background:#eaeaea;}
@@ -1534,7 +1536,7 @@ svg path{
 .new-modal .modal-body{padding: 30px !important; text-align: center; letter-spacing: 1px; line-height: 1.5;}
 
 .logo-size{font-size:32px;}
-header h2.logo{line-height:0;}
+header h2.logo{line-height:0; height:31px;}
 header .logo a{line-height:0;}
 header .logo svg{height:26px; width:160px; margin-top:5px; fill:#fff;}
 .ftr-page header .logo svg{fill:#5c5c5c;}

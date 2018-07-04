@@ -75,8 +75,9 @@
                                     <div class="common-form">
                                         <div class="job-saved-box">
                                             <h3>User list</h3>
-                                            <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
+                                            
                                             <div class="contact-frnd-post">
+											<div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
                                                 <!-- AJAX DATA... -->
                                             </div>
                                            

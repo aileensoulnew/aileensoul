@@ -5,7 +5,7 @@
         <div class="">
             <h3>Top Fields</h3>
         </div>
-        <ul class="search-listing custom-scroll">
+        <ul class="search-listing">
             <li ng-repeat="category in FAFields">
                 <label class="control control--checkbox"><span ng-bind="category.category_name | capitalize"></span>
                     <input type="checkbox" class="category-filter" ng-model="cat_fil" name="category[]" ng-value="{{category.category_id}}" ng-change="applyJobFilter()"/>
@@ -20,7 +20,7 @@
         <div class="">
             <h3>Top Categories</h3>
         </div>
-        <ul class="search-listing custom-scroll">
+        <ul class="search-listing">
             <li ng-repeat="skill in FASkills">
                 <label class="control control--checkbox"><span ng-bind="skill.skill | capitalize"></span>
                     <input type="checkbox" class="skills-filter" ng-model="skills_fil" name="skill[]" ng-value="{{skill.skill_id}}" ng-change="applyJobFilter()"/>

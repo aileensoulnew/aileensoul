@@ -48,7 +48,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 											</g>
 										</svg>
 
-									<span>Freelance Profile</span>
+									<span>Freelancer Profile</span>
 								</div>
 							</a>
 						</li>
@@ -175,7 +175,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 				<ul class="sub-menu">
 					<li class="profile">
 						<a target="_self" href="<?php echo base_url('recommended-freelance-work'); ?>">
-							<span>Freelance Profile</span>
+							<span>Freelance Profiler</span>
 						</a>
 					</li>
 					<li class="dropdown">
