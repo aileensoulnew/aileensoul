@@ -2769,6 +2769,25 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .btn4{border:1px solid #fff; padding:3px 25px; border-radius:20px; color:#fff; margin-right:15px;}
 .btn4:hover{color:#1b8ab9; background:#fff;}
 .tablate-main-login{display:none;}
+.mob-right-bar .cbp-spmenu-right.cbp-spmenu-open{background:#fff; padding-top:56px; border-left:1px solid #d2d2d2;}
+.mob-right-bar .cbp-spmenu-right.cbp-spmenu-open ul{padding-left:0;}
+.mob-right-bar .all-profile-box ul li a{
+    padding: 5px 10px;
+    display: inline-flex;
+    width: 100%;
+	background:#fff;
+	font-size:14px;
+	color:#5c5c5c; letter-spacing:1px;
+}
+.mob-right-bar .all-profile-box ul li a:hover{color:#1b8ab9;}
+.mob-right-bar .all-profile-box ul li{
+    padding:0px;
+    border-bottom:0px solid #d2d2d2;
+    width:100%;
+    list-style-type:none;
+    float:left;
+    margin-bottom:0!important
+}
 
 @media screen and (min-height:540px){
     .cover .modal-content{
