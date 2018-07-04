@@ -36,6 +36,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
         <link rel="canonical" href="<?php echo $actual_link ?>" />
+
         <?php
         if (IS_OUTSIDE_CSS_MINIFY == '0') {
             ?>
@@ -93,6 +94,9 @@ header("Pragma: no-cache"); // HTTP/1.0
 								<li><a class="btn3" href="javascript:void(0)" data-target="#login" data-toggle="modal">Login</a></li>
 								
 							</ul>
+							<span class="mob-right-bar">
+								<?php $this->load->view('mobile_right_bar',TRUE); ?>
+							</span>
 							
 						</div>
 						
