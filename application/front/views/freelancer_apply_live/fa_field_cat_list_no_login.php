@@ -184,13 +184,13 @@
                                                 <span>
                                                     <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
                                                     <span>
-                                                        <?php echo substr($_searchFA['post_skill'], 0,35)."..."; ?>
+                                                        <?php echo substr($_searchFA['post_skill'], 0,35).(strlen($_searchFA['post_skill']) > 35 ? "..." : ""); ?>
                                                     </span>
                                                 </span>
                                             </span>
                                         </p>                                
                                         <p>
-                                            <?php echo substr($_searchFA['post_description'], 0,35)."..."; ?>
+                                            <?php echo substr($_searchFA['post_description'], 0,35).(strlen($_searchFA['post_description']) > 35 ? "..." : ""); ?>
                                         </p>
                                         <?php if($_searchFA['industry_name'] != ""): ?>
                                         <p>
