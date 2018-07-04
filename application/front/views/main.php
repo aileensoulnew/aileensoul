@@ -104,7 +104,12 @@ header("Pragma: no-cache"); // HTTP/1.0
                         
                         
                     </div>
-					<div class="tablate-main-login">
+					
+                </div>
+            </header>
+			
+            <section class="middle-main">
+			<div class="tablate-main-login">
 								<form class="header-login" name="login_form" id="login_form" method="post">
 									<div class="input">
 										<input type="email" tabindex="1"  name="email_login" id="email_login" class="form-control input-sm" placeholder="Email Address">
@@ -113,15 +118,13 @@ header("Pragma: no-cache"); // HTTP/1.0
 										<input type="password" tabindex="1"  name="password_login" id="password_login" class="form-control input-sm" placeholder="Password">
 									</div>
 									<div class="btn-right">
-										<button id="login-new" title="Login" tabindex="1"  class="btn1">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
-										<a tabindex="1" id="myBtn"  class="f-pass" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
+										<button id="login-new" title="Login" tabindex="1"  class="btn1-cus">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+										<a tabindex="1" id="myBtn"  class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
 									</div>
 								</form>
 							</div>
-                </div>
-            </header>
-            <section class="middle-main">
-                <div class="container">
+                <div class="clearfix"></div>
+				<div class="container">
                     <div class="mid-trns">
                         <div class="">
                             <div class="col-md-7 col-sm-6">

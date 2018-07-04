@@ -156,7 +156,7 @@ body{
 .login-frm{
     width:480px!important
 }
-.btn1{
+.btn1-cus, .btn1{
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9));
     background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
@@ -165,10 +165,10 @@ body{
     color:#fff;
     padding:5px 25px;
     border-radius:4px;
-    border:2px solid #1b8ab9!important
+    border:1px solid #1b8ab9!important
 }
-.btn1:hover{
-    border:2px solid #1b8ab9;
+.btn1-cus, .btn1:hover{
+    border:1px solid #1b8ab9;
     color:#fff;
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#1b8ab9),color-stop(56%,#3bb0ac),color-stop(100%,#3bb0ac))!important;
     background:-webkit-linear-gradient(96deg,#3bb0ac 0,#3bb0ac 44%,#1b8ab9 100%)!important;
@@ -176,7 +176,7 @@ body{
     background:-ms-linear-gradient(96deg,#3bb0ac 0,#3bb0ac 44%,#1b8ab9 100%)!important;
     background:linear-gradient(354deg,#3bb0ac 0,#1b8ab9 44%,#1b8ab9 100%)!important;
 }
-.btn1:focus{
+.btn1-cus, .btn1:focus{
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#1b8ab9),color-stop(56%,#3bb0ac),color-stop(100%,#3bb0ac));
     background:-webkit-linear-gradient(96deg,#3bb0ac 0,#3bb0ac 44%,#1b8ab9 100%);
     background:-o-linear-gradient(96deg,#3bb0ac 0,#3bb0ac 44%,#1b8ab9 100%);
@@ -2775,7 +2775,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .mob-side-menu .all-profile-box ul li a:hover{color:#1b8ab9;}
 .mob-side-menu .all-profile-box ul li{padding:0px; border-bottom:0px solid #d2d2d2; width:100%; list-style-type:none; float:left; margin-bottom:0!important}
 .mob-right-bar{display:none;}
-.mob-right-bar .bg-menu{background:none; border:none; }
+.mob-right-bar .bg-menu{background:none; border:none; padding-right:0;}
 .mob-right-bar svg path{ fill: #fff;}
 
 @media screen and (min-height:540px){
@@ -3092,7 +3092,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
     .cus-job-img{text-align: center;}
 	.test-cus li:last-child{display:block;}
 	.test-cus li{display:none;}
-	.mob-right-bar{display:inline-block;}
+	.mob-right-bar{display:inline-block; float:right; padding-top:9px;}
 }
 @media screen and (max-width:767px){
     footer,header .col-md-4.col-sm-3{
@@ -3249,7 +3249,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
         left:inherit
     }
     .about-us header,.custom-landscape header{
-        position:relative
+        /*position:relative;*/ padding:9px 0 3px;
     }
     .custom-box .custom-width{
         height:auto;
@@ -3503,6 +3503,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	header .logo svg{width:140px;}
 	.about-us .about-h2{font-size:30px;}
 	.test-cus{padding-top:0;}
+	.mob-right-bar{padding-top:3px;}
 }
 @media screen and (max-width:640px){
     .btns .btn-4{
@@ -3733,6 +3734,26 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	body{padding-bottom:0;}
 	.tablate-main-login{display:block;}
 	.test-cus{display:none;}
+	.main-login .middle-main{padding-top:45px;}
+	.tablate-main-login{padding:25px 15px 25px; width:100%; float:left; border-bottom:1px solid #d2d2d2; margin-bottom:20px; background:#f6f6f6;}
+	.tablate-main-login .header-login .input{width:100% !important; margin:0; margin-bottom:15px;}
+	.tablate-main-login .header-login input{border-bottom:1px solid #d2d2d2; color:#848484;}
+	.tablate-main-login .header-login input:focus{border-bottom:1px solid #1b8ab9;}
+	.tablate-main-login .btn-right{width:100%; float:left; padding-top:0;}
+	.tablate-main-login .header-login .btn1-cus{width:100%; margin-bottom:10px;}
+	.tablate-main-login .btn-right a{color:#5c5c5c;}
+	.tablate-main-login input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: #848484;
+	}
+	.tablate-main-login input::-moz-placeholder { /* Firefox 19+ */
+	  color: #848484;
+	}
+	.tablate-main-login input:-ms-input-placeholder { /* IE 10+ */
+	  color: #848484;
+	}
+	.tablate-main-login input:-moz-placeholder { /* Firefox 18- */
+	  color: #848484;
+	}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{
