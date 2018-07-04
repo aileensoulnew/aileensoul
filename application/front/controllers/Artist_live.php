@@ -49,6 +49,10 @@ class Artist_live extends MY_Controller {
         }
         $this->data['title'] = "Search Creative Artist in any Profession | Aileensoul";
         $this->data['metadesc'] = "Find and Connect with great talents from photographers, designers, models, musicians, actor, dancer to writers from all over the world only at Aileensoul. ";
+        $limit = 8;
+        $this->data['artistCategory'] = $this->artistic_model->artistCategory($limit);
+        $this->data['artistLocation'] = $this->artistic_model->gettoplocationsofartist(0,$limit);
+        $this->data['art_related_list'] = $this->artistic_model->art_related_blog_list();
 
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
         $this->load->view('artist_live/index', $this->data);

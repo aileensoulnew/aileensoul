@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="artistApp" ng-controller="artistController">
+<html lang="en">
     <head>
         <!-- <title ng-bind="title"></title> -->
         <title><?php echo $title; ?></title>
@@ -20,8 +20,8 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="profile-main-page without-reg find-art">
-        <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: block;">
+        <?php //$this->load->view('page_loader'); ?>
+        <div id="main_page_load">
             <?php
                 if ($ismainregister == false) {
                     // $this->load->view('artist_live/login_header');
@@ -47,16 +47,23 @@
                             <h2>Artist by Category</h2>
                         </div>
                         <div class="row pt20">
-                            <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="category in artistCategory">
+                            <?php
+                            if(isset($artistCategory) && !empty($artistCategory)):
+                                foreach($artistCategory as $_artistCategory): ?>
+                            <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                                 <div class="all-cat-box">
-                                    <a href="<?php echo artist_category ?>{{category.category_slug}}">
+                                    <a href="<?php echo artist_category.$_artistCategory['category_slug']; ?>">
                                         <div class="cus-cat-middle">
                                             <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
-                                            <p ng-bind="category.art_category | capitalize">Actor</p>
+                                            <p><?php echo ucwords($_artistCategory['art_category']); ?></p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
+                            <?php
+                                endforeach;
+                            endif;
+                            ?>
                         </div>
                         <div class="p20 fw">
                             <p class="p20 text-center">
@@ -73,16 +80,23 @@
                             <h2>Artist by Location</h2>
                         </div>
                         <div class="row pt20">
-                            <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="location in topLocationData">
+                            <?php
+                            if(isset($artistLocation) && !empty($artistLocation)):
+                                foreach($artistLocation as $_artistLocation): ?>
+                            <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                                 <div class="all-cat-box">
-                                    <a href="<?php echo artist_location ?>{{location.city_name}}">
+                                    <a href="<?php echo artist_location.$_artistLocation['city_name']; ?>">
                                         <div class="cus-cat-middle">
-                                            <img src="<?php echo base_url('assets/n-images/cat-2.png') ?>">
-                                            <p ng-bind="location.city_name | capitalize"></p>
+                                            <img src="<?php echo CITY_IMG_PATH.'default_city.png'; ?>">
+                                            <p><?php echo ucwords($_artistLocation['city_name']) ?></p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
+                            <?php
+                                endforeach;
+                            endif;
+                            ?>
                         </div>
                         <div class="p20 fw">
                             <p class="p20 text-center"><a href="<?php echo artist_location_list ?>" class="btn-1">View More</a></p>
@@ -180,21 +194,26 @@
                                 <h3>Related Article</h3>
                             </div>
                             <div class="row pt20">
-                                <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
-                                    <div class="also-like-box">
-										<div class="rec-img">
-											<a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
-											<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
-											</a>
-										</div>
-                                        <div class="also-like-bottom">
-                                            <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a></p>
+                                <?php 
+                                if(isset($art_related_list) && !empty($art_related_list)):
+                                    foreach($art_related_list as $_art_related_list): ?>
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="also-like-box">
+    										<div class="rec-img">
+    											<a href="<?php echo base_url().'blog/'.$_art_related_list['blog_slug'] ?>">
+    											<img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_art_related_list['image']; ?>">
+    											</a>
+    										</div>
+                                            <div class="also-like-bottom">
+                                                <p><a href="<?php echo base_url().'blog/'.$_art_related_list['blog_slug']; ?>"><?php echo $_art_related_list['title']; ?></a></p>
+                                            </div>
+    										<div class="clearfix"></div>
                                         </div>
-										<div class="clearfix"></div>
+    									
                                     </div>
-									
-                                </div> 
-								
+                                <?php
+                                    endforeach;
+                                endif; ?>
                             </div>
                         </div>
                     </div>
@@ -204,7 +223,7 @@
         </div>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -217,10 +236,10 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var q = '';
             var l = '';
-            var app = angular.module('artistApp', ['ui.bootstrap']);
+            var app = angular.module('', ['ui.bootstrap']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/artist-live/index.js?ver=' . time()) ?>"></script> -->
     </body>
 </html>
