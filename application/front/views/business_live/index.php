@@ -65,18 +65,19 @@
                     </div>
                     <div class="row pt20">
                         <?php
-                        if(isset($businessCategory) && !empty($businessCategory)): ?>
-                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="category in businessCategory">
+                        if(isset($businessCategory) && !empty($businessCategory)):
+                            foreach($businessCategory as $_businessCategory): ?>
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="all-cat-box">
-                                <a ng-href="<?php echo base_url ?>{{category.industry_slug}}-business">
+                                <a ng-href="<?php echo base_url().$_businessCategory['industry_slug'].'-business'; ?>">
                                     <div class="cus-cat-middle">
-                                        <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>" alt="{{category.industry_name}}">
-                                        <p ng-bind="category.industry_name"></p>
+                                        <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>" alt="<?php echo $_businessCategory['industry_name']; ?>">
+                                        <p><?php echo $_businessCategory['industry_name']; ?></p>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <?php
+                        <?php endforeach;
                         endif; ?>
                     </div>
                     <div class="p20 fw">
@@ -92,16 +93,21 @@
                         <h2>Business by Location</h2>
                     </div>
                     <div class="row pt20">
-                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box " ng-repeat="location in businessLocation">
-                            <div class="all-cat-box">
-                                <a ng-href="<?php echo base_url ?>business-in-{{location.slug}}">
-                                    <div class="cus-cat-middle">
-                                        <img src="<?php echo base_url('assets/n-images/cat-2.png?ver='.time()) ?>">
-                                        <p ng-bind="location.city_name"></p>
-                                    </div>
-                                </a>
+                        <?php
+                        if(isset($businessLocation) && !empty($businessLocation)):
+                            foreach($businessLocation as $_businessLocation): ?>
+                            <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box " ng-repeat="location in businessLocation">
+                                <div class="all-cat-box">
+                                    <a ng-href="<?php echo base_url ?>business-in-{{location.slug}}">
+                                        <div class="cus-cat-middle">
+                                            <img src="<?php echo base_url('assets/n-images/cat-2.png?ver='.time()) ?>">
+                                            <p ng-bind="location.city_name"></p>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        <?php endforeach;
+                        endif; ?>
                     </div>
                     <div class="p20 fw">
                         <p class="p20 text-center"><a ng-href="<?php echo base_url('business-by-location') ?>" class="btn-1">View More</a></p>

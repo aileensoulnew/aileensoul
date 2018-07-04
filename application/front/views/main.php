@@ -52,7 +52,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         <?php } ?>
 
         <?php
-        if (IS_OUTSIDE_JS_MINIFY == '0') {
+        /*if (IS_OUTSIDE_JS_MINIFY == '0') {
             ?>
             <script data-pagespeed-no-defer src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>"></script>
             <!--script data-pagespeed-no-defer src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script--> 
@@ -61,7 +61,8 @@ header("Pragma: no-cache"); // HTTP/1.0
             ?>
             <script data-pagespeed-no-defer src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>"></script>
             <script data-pagespeed-no-defer src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script> 
-        <?php } ?>
+        <?php }*/ ?>
+        <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>"></script>
 		<style>
             .pr-pl-box{position: fixed; bottom: 0; background:rgba(255,255,255,1); color:#5c5c5c; padding: 10px; width: 100%; text-align: center; z-index: 9999;}
             .btn-pr-pl{padding: 1px 10px; background:#1b8ab9; color:#fff; border-radius: 3px; display: inline-block;}
@@ -95,7 +96,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 								
 							</ul>
 							<span class="mob-right-bar">
-								<?php $this->load->view('mobile_right_bar',TRUE); ?>
+								<?php $this->load->view('mobile_right_bar'); ?>
 							</span>
 							
 						</div>
@@ -381,7 +382,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                 </div>
             </div>
             
-			<?php echo $login_footer ?>
+			<?php $this->load->view('mobile_side_slide'); ?>
+            <?php echo $login_footer ?>
         </div>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
