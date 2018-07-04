@@ -282,9 +282,14 @@ $route['freelance-work/profile/live-post/(:any)'] = "freelancer/registation/$1";
 $route['freelance-jobs'] = "freelancer_apply_live/index";
 $route['freelance-jobs/(:any)'] = "freelancer_apply_live/freelance_apply_field_cat_no_login/$1";
 $route['freelance-jobs/(:any)/(:any)'] = "freelancer_hire_live/live_post/$1";
-$route['freelance-jobs-by-categories'] = "freelancer_apply_live/view_more_freelancer_apply";
+//$route['freelance-jobs-by-categories'] = "freelancer_apply_live/view_more_freelancer_apply";
 // $route['freelance-jobs-by-skills'] = "freelancer_apply_live/view_more_freelancer_apply";
-$route['freelance-jobs-by-fields'] = "freelancer_apply_live/view_more_freelancer_apply";
+//$route['freelance-jobs-by-fields'] = "freelancer_apply_live/view_more_freelancer_apply";
+$route['freelance-jobs-by-fields'] = "freelancer_apply_live/freelance_jobs_by_fields";
+$route['freelance-jobs-by-fields/(:any)'] = "freelancer_apply_live/freelance_jobs_by_fields";
+$route['freelance-jobs-by-categories'] = "freelancer_apply_live/freelance_jobs_by_categories";
+$route['freelance-jobs-by-categories/(:any)'] = "freelancer_apply_live/freelance_jobs_by_categories";
+
 $route['freelance-work/category'] = "freelancer_apply_live/category";
 $route['freelance-work/category/(:any)'] = "freelancer_apply_live/categoryFreelancerList/$1";
 

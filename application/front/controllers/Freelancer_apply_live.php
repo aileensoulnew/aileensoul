@@ -277,6 +277,48 @@ class Freelancer_apply_live extends MY_Controller {
 
     public function freelance_jobs_by_fields()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        //$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Freelance Apply | Aileensoul";
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->freelancer_apply_model->get_fa_field_total_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['jobByField'] = $this->freelancer_apply_model->get_fa_field($limit,$page)['fa_fields'];
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('freelancer_apply_live/freelance_jobs_by_fields', $this->data);
     }
 
@@ -296,6 +338,48 @@ class Freelancer_apply_live extends MY_Controller {
 
     public function freelance_jobs_by_categories()
     {
+        // check job is active or not.
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['isjobdeactivate'] = false;
+        
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        //$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        // $this->data['job_profile_link'] =  $this->job_profile_link;
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+        $this->data['title'] = "Freelance Apply | Aileensoul";
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->freelancer_apply_model->get_fa_category_total_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['jobByCategory'] = $this->freelancer_apply_model->get_fa_category($limit,$page)['fa_category'];
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('freelancer_apply_live/freelance_jobs_by_categories', $this->data);
     }
 
