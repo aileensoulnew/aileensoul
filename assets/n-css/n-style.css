@@ -1167,6 +1167,7 @@ header.profile-header .logo a{color:#5c5c5c;}
     transition: all 200ms ease-in;
     transform: scale(1);
 }	
+.all-cat-box .cus-cat-middle img{height:50px;}
 .cus-cat-middle{left: 50%; position: absolute; top: 50%; width:100%;
 	transform: translate(-50%, -50%);
 	-webkit-transform: translate(-50%, -50%);
