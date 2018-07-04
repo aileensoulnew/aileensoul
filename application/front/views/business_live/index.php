@@ -64,6 +64,8 @@
                         <h2>Business by Category</h2>
                     </div>
                     <div class="row pt20">
+                        <?php
+                        if(isset($businessCategory) && !empty($businessCategory)): ?>
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-repeat="category in businessCategory">
                             <div class="all-cat-box">
                                 <a ng-href="<?php echo base_url ?>{{category.industry_slug}}-business">
@@ -74,6 +76,8 @@
                                 </a>
                             </div>
                         </div>
+                        <?php
+                        endif; ?>
                     </div>
                     <div class="p20 fw">
                         <p class="p20 text-center"><a class="btn-1" ng-href="<?php echo base_url('business-by-categories') ?>">View More</a></p>

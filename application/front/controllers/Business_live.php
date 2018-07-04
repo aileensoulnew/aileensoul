@@ -60,6 +60,10 @@ class Business_live extends MY_Controller {
         $this->data['title'] = "Grow Business Network and Get Your Business Listed | Aileensoul";
         $this->data['metadesc'] = "Search for Real Estate, Fashion, Home appliance, and many more businesses at your near by locations from Aileensoul. Also, you can List your business Now. It's Free.";
         $this->data['business_profile_set'] = $this->business_profile_set;
+        $limit = 8;
+        $this->data['businessCategory'] = $this->business_model->businessCategory($limit);
+        $this->data['businessLocation'] = $this->business_model->businessLocation($limit);
+        $this->data['business_related_list'] = $this->business_model->business_related_blog_list();
         $this->load->view('business_live/index', $this->data);
     }
 
