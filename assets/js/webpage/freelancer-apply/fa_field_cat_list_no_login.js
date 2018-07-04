@@ -1,4 +1,4 @@
-app.directive('ddTextCollapse', ['$compile', function($compile) {
+/*app.directive('ddTextCollapse', ['$compile', function($compile) {
 
     return {
         restrict: 'A',
@@ -160,12 +160,7 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
     });
 
     function fa_search(pagenum) {
-        if (isProcessing) {
-            /*
-             *This won't go past this condition while
-             *isProcessing is true.
-             *You could even display a message.
-             **/
+        if (isProcessing) {            
             return;
         }
         isProcessing = true;
@@ -291,4 +286,32 @@ app.controller('freelanceApplyNRController', function ($scope, $http,$window) {
             }
         );
     };
-});  
+});  */
+
+function savepopup(id) {        
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
+}
+function applypopup(postid, userid)
+{
+    $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now! <p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"freelancer/create-account'>Register</a></p></div>");
+    $('#bidmodal').modal('show');
+}
+
+$(document).ready(function(){
+    $("#pagination").on("click", "a", function(e){
+        console.log();
+        e.preventDefault();
+        $('.frm-job-company-filter').attr('action', this.href);
+        $(".frm-job-company-filter").submit();
+    });
+});
+function applyJobFilter() {
+    // console.log(111);
+    pagenum = 1;
+    $(".frm-job-company-filter").on("change", "input:checkbox", function(event){
+        $('.frm-job-company-filter').attr('action', filter_url);
+        this.form.submit();
+        event.preventDefault();
+    });
+}

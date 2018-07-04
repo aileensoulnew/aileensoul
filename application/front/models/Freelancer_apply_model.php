@@ -204,19 +204,19 @@ class Freelancer_apply_model extends CI_Model {
             $start = 0;
 
         $sql = "";        
-        if($category_id != "")
+        if(isset($category_id) && !empty($category_id))
         {
-            $sql .= "post_field_req IN (".$category_id.") OR ";
+            $sql .= "post_field_req IN (".implode(",",$category_id).") OR ";
         }        
-        if($skill_id != "")
+        if(isset($skill_id) && !empty($skill_id))
         {
-            $skill_id = str_replace(",", "|", $skill_id);
+            $skill_id = implode("|",$skill_id);
             $sql .= "fp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
-        if($worktype != "")
+        if(isset($worktype) && !empty($worktype))
         {
             $sql_wt = "";
-            foreach (explode(",", $worktype) as $key => $value) {
+            foreach ($worktype as $key => $value) {
                 if($value == 1)
                     $sql_wt .= "(fp.post_rating_type = 1) OR ";
                 if($value == 2)
@@ -224,10 +224,10 @@ class Freelancer_apply_model extends CI_Model {
             }
             $sql .= "(".trim($sql_wt, ' OR ').") OR ";
         }
-        if($period_filter != "")
+        if(isset($period_filter) && !empty($period_filter))
         {
             $sql_period = "";
-            foreach (explode(",", $period_filter) as $key => $value) {
+            foreach ($period_filter as $key => $value) {
                 if($value == 1)
                     $sql_period .= "(DATEDIFF(NOW(),fp.created_date) = 0) OR ";
                 if($value == 2)
@@ -241,10 +241,10 @@ class Freelancer_apply_model extends CI_Model {
             }
             $sql .= "(".trim($sql_period, ' OR ').") OR ";
         }
-        if($exp_fil != "")
+        if(isset($exp_fil) && !empty($exp_fil))
         {
             $sql_exp = "";
-            foreach (explode(",", $exp_fil) as $key => $value) {
+            foreach ($exp_fil as $key => $value) {
                 if($value == 1)
                     $sql_exp .= "(fp.post_exp_year >= 0 AND fp.post_exp_year <=1) OR ";
                 if($value == 2)
@@ -326,19 +326,19 @@ class Freelancer_apply_model extends CI_Model {
     function ajax_project_list_no_login_tot_rec($userid = "",$fa_skills = array(),$fa_fields = array(),$category_id = "",$skill_id = "",$worktype = "",$period_filter = "",$exp_fil = "",$keyword = "",$search_location_arr = array())
     {
         $sql = "";        
-        if($category_id != "")
+        if(isset($category_id) && !empty($category_id))
         {
-            $sql .= "post_field_req IN (".$category_id.") OR ";
+            $sql .= "post_field_req IN (".implode(",", $category_id).") OR ";
         }        
-        if($skill_id != "")
+        if(isset($skill_id) && !empty($skill_id))
         {
-            $skill_id = str_replace(",", "|", $skill_id);
+            $skill_id = implode("|", $skill_id);
             $sql .= "fp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
-        if($worktype != "")
+        if(isset($worktype) && !empty($worktype))
         {
             $sql_wt = "";
-            foreach (explode(",", $worktype) as $key => $value) {
+            foreach ($worktype as $key => $value) {
                 if($value == 1)
                     $sql_wt .= "(fp.post_rating_type = 1) OR ";
                 if($value == 2)
@@ -346,10 +346,10 @@ class Freelancer_apply_model extends CI_Model {
             }
             $sql .= "(".trim($sql_wt, ' OR ').") OR ";
         }
-        if($period_filter != "")
+        if(isset($period_filter) && !empty($period_filter))
         {
             $sql_period = "";
-            foreach (explode(",", $period_filter) as $key => $value) {
+            foreach ($period_filter as $key => $value) {
                 if($value == 1)
                     $sql_period .= "(DATEDIFF(NOW(),fp.created_date) = 0) OR ";
                 if($value == 2)
@@ -363,10 +363,10 @@ class Freelancer_apply_model extends CI_Model {
             }
             $sql .= "(".trim($sql_period, ' OR ').") OR ";
         }
-        if($exp_fil != "")
+        if(isset($exp_fil) && !empty($exp_fil))
         {
             $sql_exp = "";
-            foreach (explode(",", $exp_fil) as $key => $value) {
+            foreach ($exp_fil as $key => $value) {
                 if($value == 1)
                     $sql_exp .= "(fp.post_exp_year >= 0 AND fp.post_exp_year <=1) OR ";
                 if($value == 2)

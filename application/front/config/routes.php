@@ -281,6 +281,7 @@ $route['freelance-work/profile/live-post/(:any)'] = "freelancer/registation/$1";
 // $route['freelance-work'] = "freelancer_apply_live/index";
 $route['freelance-jobs'] = "freelancer_apply_live/index";
 $route['freelance-jobs/(:any)'] = "freelancer_apply_live/freelance_apply_field_cat_no_login/$1";
+$route['freelance-jobs/(:any)/(:num)'] = "freelancer_apply_live/freelance_apply_field_cat_no_login/$1";
 $route['freelance-jobs/(:any)/(:any)'] = "freelancer_hire_live/live_post/$1";
 //$route['freelance-jobs-by-categories'] = "freelancer_apply_live/view_more_freelancer_apply";
 // $route['freelance-jobs-by-skills'] = "freelancer_apply_live/view_more_freelancer_apply";

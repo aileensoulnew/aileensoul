@@ -193,6 +193,50 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['keyword'] = $search;
         $this->data['search_location'] = $ser_location;
         $userid = $this->session->userdata('aileenuser');
+
+        $this->data['category_id'] = $category_id = (isset($_POST['category']) && !empty($_POST['category']) ? $_POST['category'] : "");//Field
+        $this->data['skill_id'] = $skill_id = (isset($_POST['skill']) && !empty($_POST['skill']) ? $_POST['skill'] : "");
+        $this->data['worktype'] = $worktype = (isset($_POST['worktype']) && !empty($_POST['worktype']) ? $_POST['worktype'] : "");
+        $this->data['period_filter'] = $period_filter = (isset($_POST['posting_period']) && !empty($_POST['posting_period']) ? $_POST['posting_period'] : "");
+        $this->data['exp_fil'] = $exp_fil = (isset($_POST['experience']) && !empty($_POST['experience']) ? $_POST['experience'] : "");
+
+        $keyword = trim($search);
+        $search_location = trim($ser_location);
+
+        $fa_skills = $this->freelancer_apply_model->is_fa_skills($keyword);
+        $fa_fields = $this->freelancer_apply_model->is_fa_field($keyword);
+        $search_location_arr = array();
+
+        $limit = 8;
+        $config = array(); 
+        $config["base_url"] = $this->data['filter_url'] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2);
+        $config["total_rows"] = $this->freelancer_apply_model->ajax_project_list_no_login_tot_rec($userid,$fa_skills,$fa_fields,$category_id,$skill_id,$worktype,$period_filter,$exp_fil,$keyword,$search_location_arr);
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 3;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';        
+
+        $this->pagination->initialize($config);
+        $this->data['page'] = $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $limit_fs = 10;
+        $this->data['FAFields'] = $this->freelancer_apply_model->freelancerFields($limit_fs);
+        $this->data['FASkills'] = $this->freelancer_apply_model->get_fa_category($limit_fs)['fa_category'];
+
+        $this->data['searchFA'] = $searchFA = $this->freelancer_apply_model->ajax_project_list_no_login($userid,$fa_skills,$fa_fields,$category_id,$skill_id,$worktype,$period_filter,$exp_fil,$page,$limit,$keyword,$search_location_arr)['fa_projects'];
+        
+        $this->data['links'] = $this->pagination->create_links();
+
+
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
