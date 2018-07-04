@@ -52,6 +52,11 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['metadesc'] = "Find and apply from various freelance work opportunities like web designer, digital marketing, content writing, and many more. Get the online job that interest you the most on Aileensoul. ";
         $this->data['freelance_apply_profile_set'] = $this->freelance_apply_profile_set;
 
+        $limit = 8;
+        $this->data['FAFields'] = $this->freelancer_apply_model->freelancerFields($limit);
+        $this->data['FASkills'] = $this->freelancer_apply_model->get_fa_category($limit)['fa_category'];
+        $this->data['free_job_related_list'] = $this->freelancer_apply_model->free_job_related_blog_list();
+
         if($userid != ""){
             $this->load->view('freelancer_apply_live/freelancer_apply_live', $this->data);
         }

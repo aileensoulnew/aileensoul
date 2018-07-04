@@ -24,9 +24,9 @@ app.controller('freelancerApplyController', function ($scope, $http) {
     }
     getRelatedBlogList();
 });
-AOS.init({
+/*AOS.init({
     easing: 'ease-in-out-sine'
-});
+});*/
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({
         autoHideScrollbar: true,
