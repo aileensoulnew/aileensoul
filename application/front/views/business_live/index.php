@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="businessApp" ng-controller="businessController">
+<html lang="en">
     <head>
         <!-- <title ng-bind="title"></title> -->
         <title><?php echo $title; ?></title>
@@ -18,8 +18,8 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="profile-main-page without-reg bus-main">
-        <?php $this->load->view('page_loader'); ?>
-            <div id="main_page_load" style="display: none;">
+        <?php //$this->load->view('page_loader'); ?>
+            <div id="main_page_load">
 
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
@@ -69,9 +69,9 @@
                             foreach($businessCategory as $_businessCategory): ?>
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="all-cat-box">
-                                <a ng-href="<?php echo base_url().$_businessCategory['industry_slug'].'-business'; ?>">
+                                <a href="<?php echo base_url().$_businessCategory['industry_slug'].'-business'; ?>">
                                     <div class="cus-cat-middle">
-                                        <img ng-src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>" alt="<?php echo $_businessCategory['industry_name']; ?>">
+                                        <img src="<?php echo base_url('assets/n-images/cat-1.png?ver='.time()) ?>" alt="<?php echo $_businessCategory['industry_name']; ?>">
                                         <p><?php echo $_businessCategory['industry_name']; ?></p>
                                     </div>
                                 </a>
@@ -81,7 +81,7 @@
                         endif; ?>
                     </div>
                     <div class="p20 fw">
-                        <p class="p20 text-center"><a class="btn-1" ng-href="<?php echo base_url('business-by-categories') ?>">View More</a></p>
+                        <p class="p20 text-center"><a class="btn-1" href="<?php echo base_url('business-by-categories') ?>">View More</a></p>
                     </div>
                 </div>
             </div>
@@ -96,12 +96,12 @@
                         <?php
                         if(isset($businessLocation) && !empty($businessLocation)):
                             foreach($businessLocation as $_businessLocation): ?>
-                            <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box " ng-repeat="location in businessLocation">
+                            <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                                 <div class="all-cat-box">
-                                    <a ng-href="<?php echo base_url ?>business-in-{{location.slug}}">
+                                    <a href="<?php echo base_url().'business-in-'.$_businessLocation['slug']; ?>">
                                         <div class="cus-cat-middle">
-                                            <img src="<?php echo base_url('assets/n-images/cat-2.png?ver='.time()) ?>">
-                                            <p ng-bind="location.city_name"></p>
+                                            <img src="<?php echo CITY_IMG_PATH.'default_city.png'; ?>">
+                                            <p><?php echo $_businessLocation['city_name']; ?></p>
                                         </div>
                                     </a>
                                 </div>
@@ -110,7 +110,7 @@
                         endif; ?>
                     </div>
                     <div class="p20 fw">
-                        <p class="p20 text-center"><a ng-href="<?php echo base_url('business-by-location') ?>" class="btn-1">View More</a></p>
+                        <p class="p20 text-center"><a href="<?php echo base_url('business-by-location') ?>" class="btn-1">View More</a></p>
                     </div>
                 </div>
             </div>
@@ -191,18 +191,24 @@
                         <h3>Related Article</h3>
                     </div>
                     <div class="row pt20">
-                        <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
-                            <div class="also-like-box">
-								<div class="rec-img">
-									<a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
-									<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
-									</a>
-								</div>
-                                <div class="also-like-bottom">
-                                    <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a></p>
+                        <?php
+                        if(isset($business_related_list) && !empty($business_related_list)):
+                            foreach($business_related_list as $_business_related_list): ?>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="also-like-box">
+    								<div class="rec-img">
+    									<a href="<?php echo base_url().'blog/'.$_business_related_list['blog_slug']; ?>" target="_self">
+    									<img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_business_related_list['image']; ?>">
+    									</a>
+    								</div>
+                                    <div class="also-like-bottom">
+                                        <p><a href="<?php echo base_url().'blog/'.$_business_related_list['blog_slug']; ?>"><?php echo $_business_related_list['title']; ?></a></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>                         
+                        <?php
+                            endforeach;
+                        endif; ?>
                     </div>
                 </div>
             </div>
@@ -225,10 +231,10 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var q = '';
             var l = '';
-            var app = angular.module('businessApp', ['ui.bootstrap']);
+            var app = angular.module('', ['ui.bootstrap']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/business-live/index.js?ver=' . time()) ?>"></script>            
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/business-live/index.js?ver=' . time()) ?>"></script> -->
     </body>
 </html>
