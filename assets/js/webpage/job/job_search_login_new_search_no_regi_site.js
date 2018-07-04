@@ -400,13 +400,14 @@ function applyJobFilter() {
         });
         // console.log(exp_fil);
 
-        $('.frm-job-company-filter').attr('action', filter_url);
-        $(".frm-job-company-filter").submit();
+        // $(".frm-job-company-filter").attr('action', filter_url);
+        // $(".frm-job-company-filter")[0].submit();
     
-        /*$(".frm-job-company-filter").on("change", "input:checkbox", function(){            
+        $(".frm-job-company-filter").on("change", "input:checkbox", function(event){
             $('.frm-job-company-filter').attr('action', filter_url);
-            $(".frm-job-company-filter").submit();
-        });*/
+            this.form.submit();
+            event.preventDefault();
+        });
         
         //pagenum = 1;
 
