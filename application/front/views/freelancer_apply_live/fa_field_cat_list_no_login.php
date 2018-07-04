@@ -60,6 +60,9 @@
         else if($userid_login != "" && $this->freelance_apply_profile_set == 0)
         {
              echo $header_profile;
+             ?>
+                <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+                <?php
         }
 
         if($userid_login == "" || $this->freelance_apply_profile_set == 0)
