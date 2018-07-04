@@ -42,6 +42,9 @@
 			}
 			else{
 				echo $header_profile;
+				?>
+				<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+				<?php
 			}
 		} elseif ($freelancr_user_data[0]['free_hire_step'] == 3) {
 			echo $freelancer_hire_header2;
@@ -738,7 +741,7 @@
 																						<?php echo $footer; ?>
 																					</body>
 
-			<!-- END FOOTER -->
+			<!-- END FOOTER -->			
 			<?php
 			if (IS_APPLY_JS_MINIFY == '0') {
 			?>
@@ -766,7 +769,7 @@
 				<?php
 			} else {
 				?>				
-				<script type="text/javascript" defer="defer" src="<?php echo base_url('assets/js_min/croppie_bootstrap_validate.min.js?ver=' . time()); ?>"></script>
+				<script type="text/javascript" src="<?php echo base_url('assets/js_min/croppie_bootstrap_validate.min.js?ver=' . time()); ?>"></script>
 				<?php } ?>
 
 				<script>
@@ -813,5 +816,17 @@
 
 											}
 										</script>
+										<script>
+                    // jQuery(document).ready(function($) {
+                    //     $("li.user-id label").click(function(e){
+                    //     	$(".dropdown").removeClass("open");
+	                   //      $(this).next('ul.dropdown-menu').toggle();
+	                   //      e.stopPropagation();
+	                   //  });
+	                   //  $(".right-header ul li.dropdown a").click(function(e){                        	
+	                   //      $('.right-header ul.dropdown-menu').hide();
+	                   //  });
+                    // });
+                   </script>
  <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
  </html>    

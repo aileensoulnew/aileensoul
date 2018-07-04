@@ -69,6 +69,45 @@ class Business_live extends MY_Controller {
 
     public function category() {
         $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Categories - Business Profile | Aileensoul";
+        $this->data['business_profile_set'] = $this->business_profile_set;
+        $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->business_model->get_business_category_total_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['businessAllCategory'] = $this->business_model->businessAllCategory($page,$limit)['bus_cat'];
+        $this->data['links'] = $this->pagination->create_links();
+        $this->data['title'] = "Categories - Business Profile | Aileensoul";
+        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
+
         $this->load->view('business_live/category', $this->data);
     }
 
@@ -241,6 +280,45 @@ class Business_live extends MY_Controller {
 
     // Get location of business
     public function location() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Categories - Business Profile | Aileensoul";
+        $this->data['business_profile_set'] = $this->business_profile_set;
+        $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->business_model->get_business_location_total_rec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['businessLocation'] = $this->business_model->businessAllLocation($page,$limit)['bus_loc'];
+        $this->data['links'] = $this->pagination->create_links();
+        $this->data['title'] = "Locations - Business Profile | Aileensoul";
+        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->load->view('business_live/location', $this->data);
     }
 
@@ -260,6 +338,8 @@ class Business_live extends MY_Controller {
         $locationdata = $this->business_model->getlocationdatafromslug($location);
         $this->data['location_id'] = $locationdata['city_id'];
         $this->data['business_profile_set'] = $this->business_profile_set;
+        $this->data['businessCategory'] = $this->business_model->businessCategory($limit);
+        $this->data['businessLocation'] = $this->business_model->businessLocation($limit);
         $this->load->view('business_live/categoryBusinessList', $this->data);
     }
 
@@ -289,6 +369,38 @@ class Business_live extends MY_Controller {
 
     // Get location of business
     public function business_by_business() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Categories - Business Profile | Aileensoul";
+        $this->data['business_profile_set'] = $this->business_profile_set;
+        $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
+
+        $page = 1;
+        $limit = 20;
+        $jobCat = $this->business_model->get_business_by_categories($page,$limit);
+        $jobCity = $this->job_model->get_job_city($page,$limit);        
+        $all_link = array();
+        foreach ($jobCity as $key => $value) {
+            $i=0;
+            foreach ($jobCat['job_cat'] as $jck => $jcv) {
+                $all_link[$value['slug']][$i]['name'] = $jcv['industry_name']." Business In ".$value['city_name'];
+                $all_link[$value['slug']][$i]['slug'] = $jcv['industry_slug']."-business-in-".$value['slug'];
+                $i++;
+            }
+        }
+
+        $this->data['businessByBusiness'] = $all_link;
+        
+        $this->data['title'] = "Locations - Business Profile | Aileensoul";
+        $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->load->view('business_live/business_by_business', $this->data);
     }
 

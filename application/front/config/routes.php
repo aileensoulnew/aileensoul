@@ -787,13 +787,20 @@ $route['how-to-use-freelance-profile-in-aileensoul'] = "introduction/freelance_p
 $route['how-to-use-business-profile-in-aileensoul'] = "introduction/business_profile";
 $route['how-to-use-artistic-profile-in-aileensoul'] = "introduction/artistic_profile";
 
+$route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
 $route['(:any)-business-in-(:any)'] = "business_live/categoryBusinessList/$1/$2/1";
 $route['(:any)-business'] = "business_live/categoryBusinessList/$1//2";
 $route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
 
-$route['business-by-categories'] = "business_live/view_more_business";
+/*$route['business-by-categories'] = "business_live/view_more_business";
 $route['business-by-location'] = "business_live/view_more_business";
-$route['business'] = "business_live/view_more_business";
+$route['business'] = "business_live/view_more_business";*/
+
+$route['business-by-categories'] = "business_live/category";
+$route['business-by-categories/(:num)'] = "business_live/category";
+$route['business-by-location'] = "business_live/location";
+$route['business-by-location/(:num)'] = "business_live/location";
+$route['business'] = "business_live/business_by_business";
 
 $route['artist/pdf-view/(:any)'] = "artist/pdf_display/$1";
 $route['business-profile/pdf-view/(:any)'] = "business_profile/pdf_display/$1";
@@ -820,7 +827,6 @@ $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";
 $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['business/search/business-in-(:any)'] = "business_live/business_search/business-in-$1";
 $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
-$route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
 $route['notification'] = 'notification';
 $route['message'] = "message/main_message";
 $route['(:any)'] = 'Userprofile';
