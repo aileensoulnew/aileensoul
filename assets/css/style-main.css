@@ -2756,9 +2756,10 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .right-cus-new-hdr{text-align:right;}
 .test-cus{padding:0; display:inline-block; margin-bottom:0; padding-top:7px;}
 .test-cus li{list-style-type:none; float:left;}
-.test-cus li a{padding:3px 15px; display:inline-block; color:#fff; font-size:16px; letter-spacing:1px;}
-.right-cus-new-hdr .btn3{border-radius:20px; font-size:16px; padding:3px 25px; margin-top:-1px;}
-.right-cus-new-hdr .btn3:hover{text-decoration:none;}
+.test-cus li a{padding:3px 15px; display:inline-block; color:#fff; font-size:14px; font-weight:bold; text-transform:uppercase;}
+.test-cus li a:hover{text-decoration:none;}
+.right-cus-new-hdr .btn3{border-radius:20px; font-size:14px; padding:3px 25px; margin-top:-2px; border:2px solid #fff; background:#fff; color:#1b8ab9;}
+.right-cus-new-hdr .btn3:hover{text-decoration:none; background:none; color:#fff;}
 
 .navbar-right.test-cus li > a:hover{background:none;}
 .navbar-right.test-cus li li{width:100%;}
