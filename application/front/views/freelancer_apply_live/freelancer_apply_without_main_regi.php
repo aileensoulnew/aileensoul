@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="freelancerApplyApp" ng-controller="freelancerApplyController">
+<html lang="en">
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
@@ -48,17 +48,22 @@
                         <h3>Fields</h3>
                     </div>
                     <div class="row pt20">
-                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="FAFields.length != 0" ng-repeat="faField in FAFields" ng-init="FAIndex=$index">
+                        <?php
+                        if(isset($FAFields) && !empty($FAFields)):
+                            foreach($FAFields as $_FAFields): ?>
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="all-cat-box">
-                                <a href="<?php echo base_url(); ?>freelance-jobs/{{faField.category_slug}}">
+                                <a href="<?php echo base_url().'freelance-jobs/'.$_FAFields['category_slug']; ?>">
                                     <div class="cus-cat-middle">
-                                    <img src="<?php echo FA_CATEGORY_IMG_PATH."/";?>{{faField.category_image}}">
-                                    <p class="">{{faField.category_name}}</p>
-                                    <span>{{faField.count}} jobs</span>
+                                    <img src="<?php echo FA_CATEGORY_IMG_PATH."/".$_FAFields['category_image'];?>">
+                                    <p class=""><?php echo $_FAFields['category_name']; ?></p>
+                                    <!-- <span><?php //echo $_FAFields['count']; ?> jobs</span> -->
                                     </div>
                                 </a>
                             </div>
                         </div>
+                        <?php endforeach;
+                        endif; ?>
                     </div>
                     <div class="p20 fw">
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>freelance-jobs-by-fields" class="btn-1">View More</a></p>
@@ -71,18 +76,22 @@
                         <h3>Categories</h3>
                     </div>
                     <div class="row pt20">
-
-                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box" ng-if="FASkills.length != 0" ng-repeat="faSkills in FASkills" ng-init="FASIndex=$index">
+                        <?php
+                        if(isset($FASkills) && !empty($FASkills)):
+                            foreach($FASkills as $_FASkills):?>
+                        <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="all-cat-box">
-                                <a href="<?php echo base_url(); ?>freelance-jobs/{{faSkills.skill_slug}}">
+                                <a href="<?php echo base_url().'freelance-jobs/'.$_FASkills['skill_slug']; ?>">
                                     <div class="cus-cat-middle">
-                                    <img src="<?php echo SKILLS_IMG_PATH."/";?>{{faSkills.skill_image}}">
-                                    <p class="">{{faSkills.skill}}</p>
-                                    <span>{{faSkills.count}} jobs</span>
+                                    <img src="<?php echo SKILLS_IMG_PATH."/".$_FASkills['skill_image'];?>">
+                                    <p class=""><?php echo $_FASkills['skill']; ?></p>
+                                    <!-- <span><?php //echo $_FASkills['count']; ?> jobs</span> -->
                                     </div>
                                 </a>
                             </div>
-                        </div>               
+                        </div>
+                        <?php endforeach;
+                        endif; ?>
                     </div>
                     <div class="p20 fw">
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>freelance-jobs-by-categories" class="btn-1">View More</a></p>
@@ -135,19 +144,23 @@
 
                         </div>
                         <div class="row pt20">
-                            <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
-                                <div class="also-like-box">
-									<div class="rec-img">
-										<a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
-										<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
-										</a>
-									</div>
-                                    <div class="also-like-bottom">
-                                        <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a></p>
+                            <?php
+                            if(isset($free_job_related_list) && !empty($free_job_related_list)):
+                                foreach($free_job_related_list as $_free_job_related_list): ?>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="also-like-box">
+    									<div class="rec-img">
+    										<a href="<?php echo base_url().'blog/'.$_free_job_related_list['blog_slug']; ?>">
+    										<img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_free_job_related_list['image']; ?>">
+    										</a>
+    									</div>
+                                        <div class="also-like-bottom">
+                                            <p><a href="<?php echo base_url().'blog/'.$_free_job_related_list['blog_slug']; ?>"><?php echo $_free_job_related_list['title']; ?></a></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                           
+                            <?php endforeach;
+                            endif;?>
                         </div>
                     </div>
                 </div>
@@ -168,9 +181,9 @@
             var title = '<?php echo $title; ?>';            
             var q = '';
             var l = '';
-            var app = angular.module('freelancerApplyApp', ['ui.bootstrap']);            
+            // var app = angular.module('', ['ui.bootstrap']);            
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js') ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/freelancer_apply_without_main_regi.js'); ?>"></script>
+        <!-- <script type="text/javascript" src="<?php //echo base_url('assets/js/webpage/freelancer-apply-live/freelancer_apply_without_main_regi.js'); ?>"></script> -->
     </body>
 </html>

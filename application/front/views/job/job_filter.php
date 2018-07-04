@@ -1,4 +1,4 @@
-<form name="job-company-filter" id="job-company-filter" method="POST">
+<form name="job-company-filter" id="job-company-filter" class="frm-job-company-filter" method="POST">
     <div class="left-search-box">
         <div class="">
             <h3>Top Company</h3>

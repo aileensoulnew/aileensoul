@@ -1,6 +1,6 @@
 <?php $userid_login = $this->session->userdata('aileenuser'); ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="freelanceApplyNRApp" ng-controller="freelanceApplyNRController">
+<html lang="en">
     <head>
         <!-- start head -->
         <?php //echo $head; ?>
@@ -122,7 +122,8 @@
                         <div class="page-title">
                             <h3>Recommended Projects</h3>
                         </div>
-                        <div class="user_no_post_avl ng-scope" ng-if="freepostapply.length == 0">
+                        <?php if(isset($searchFA) && empty($searchFA) && $page == 0): ?>
+                        <div class="user_no_post_avl ng-scope">
                             <div class="user-img-nn">
                                 <div class="user_no_post_img">
                                     <img src="<?php echo base_url('assets/img/no-post.png?ver=time()');?>" alt="bui-no.png">
@@ -130,61 +131,90 @@
                                 <div class="art_no_post_text">No Projects Available.</div>
                             </div>
                         </div>
-                        <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
-                            <div class="all-job-top">
-                                <div class="job-top-detail">
-                                    <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
-                                        <span ng-if="applypost.day_remain > 0">({{applypost.day_remain}} days left)</span>
-                                        </a>
-                                    </h5>
-                                    <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
-                                    <p ng-if="applypost.post_rate != ''">Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
-                                </div>
-                            </div>
-                            <div class="all-job-middle">
-                                <p class="pb5">
-                                    <span class="location" ng-if="applypost.city || applypost.country">
-                                        <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
-                                        <span ng-if="applypost.city && applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
-                                        </span>
-                                        <!-- IF ONLY CITY AVAILABLE -->
-                                        <span ng-if="applypost.city && !applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
-                                        </span>
-                                        <!-- IF ONLY COUNTRY AVAILABLE -->
-                                        <span ng-if="!applypost.city && applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
-                                        </span>
-                                    </span>
-                                    <span class="exp">
-                                        <span>
-                                            <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
-                                            <span dd-text-collapse dd-text-collapse-max-length="35" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
+                        <?php endif;
+                        if(isset($searchFA) && !empty($searchFA)):
+                            foreach($searchFA as $_searchFA): ?>
+                                <div class="all-job-box freelance-recommended-post">
+                                    <div class="all-job-top">
+                                        <div class="job-top-detail">
+                                            <h5><a href="<?php echo base_url().'freelance-jobs/'.$_searchFA['industry_name'].'/'.$_searchFA['post_slug'].'-'.$_searchFA['user_id'].'-'.$_searchFA['post_id']; ?>">
+                                                <?php echo $_searchFA['post_name'];
+                                                if($_searchFA['day_remain'] > 0){
+                                                ?>
+                                                <span>
+                                                    (<?php echo $_searchFA['day_remain']; ?> days left)</span>
+                                                <?php
+                                                } ?>
+                                                </a>
+                                            </h5>
+                                            <p><a href="<?php echo base_url().'freelance-jobs/'.$_searchFA['industry_name'].'/'.$_searchFA['post_slug'].'-'.$_searchFA['user_id'].'-'.$_searchFA['post_id']; ?>">
+                                                <?php echo ucwords($_searchFA['fullname']); ?></a>
+                                            </p>
+                                            <?php 
+                                            if($_searchFA['post_rate'] != "")
+                                            {?>
+                                                <p>Budget : <?php echo $_searchFA['post_rate'].' '.$_searchFA['post_currency'] ?> (hourly/fixed)</p>
+                                            <?php 
+                                            } ?>
+                                        </div>
+                                    </div>
+                                    <div class="all-job-middle">
+                                        <p class="pb5">
+                                            <?php if($_searchFA['city'] != "" || $_searchFA['country'] != ""):?>
+                                            <span class="location">
+                                                <?php if($_searchFA['city'] != "" && $_searchFA['country'] != ""){?>
+                                                <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
+                                                <span>
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>"><?php echo $_searchFA['city'].",(".$_searchFA['country'].")"; ?>
+                                                </span>
+                                                <?php } elseif($_searchFA['city'] != "" && $_searchFA['country'] == ""){?>
+                                                <!-- IF ONLY CITY AVAILABLE -->
+                                                <span>
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>"><?php echo $_searchFA['city']; ?>
+                                                </span>
+                                                <?php }elseif($_searchFA['city'] == "" && $_searchFA['country'] != ""){?>
+                                                <!-- IF ONLY COUNTRY AVAILABLE -->
+                                                <span>
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>"><?php echo $_searchFA['country']; ?>
+                                                </span>
+                                                <?php }?>
                                             </span>
-                                        </span>
-                                    </span>
-                                </p>                                
-                                <p dd-text-collapse dd-text-collapse-max-length="35" dd-text-collapse-text="{{applypost.post_description}}" dd-text-collapse-cond="false">
-                                </p>
-                                <p ng-if="applypost.industry_name != '' ">
-                                    Categories : <span>{{applypost.industry_name}}</span>
-                                </p>
-                            </div>
-                            <div class="all-job-bottom">
-                                <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: {{applypost.ShortListedCount}}</span>
-                                <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: {{applypost.AppliedCount}}</span></span>
-                                <p class="pull-right">
-                                    <?php if($userid != ""): ?>
-                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
-                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
-                                    <?php else: ?>
-                                        <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4">Save</a>
-                                        <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4">Apply</a>
-                                    <?php endif; ?>
-                                </p>
-                            </div>
-                        </div>
+                                            <?php endif;?>
+                                            <span class="exp">
+                                                <span>
+                                                    <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
+                                                    <span>
+                                                        <?php echo substr($_searchFA['post_skill'], 0,35); ?>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </p>                                
+                                        <p>
+                                            <?php echo substr($_searchFA['post_description'], 0,35); ?>
+                                        </p>
+                                        <?php if($_searchFA['industry_name'] != ""): ?>
+                                        <p>
+                                            Categories : <span><?php echo $_searchFA['industry_name']; ?></span>
+                                        </p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="all-job-bottom">
+                                        <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: <?php echo $_searchFA['AppliedCount']; ?></span>
+                                        <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: <?php echo $_searchFA['ShortListedCount']; ?></span></span>
+                                        <p class="pull-right">
+                                            <?php if($userid != ""): ?>
+                                                <a href="<?php echo base_url('freelance-work/profile/live-post/').$_searchFA['post_id']; ?>" class="btn4">Save</a>
+                                                <a href="<?php echo base_url('freelance-work/profile/live-post/').$_searchFA['post_id']; ?>" class="btn4">Apply</a>
+                                            <?php else: ?>
+                                                <a href="javascript:void(0)" onclick="savepopup(<?php echo $_searchFA['post_id']; ?>)" class="btn4">Save</a>
+                                                <a href="javascript:void(0)" onclick="applypopup(<?php echo $_searchFA['post_id']; ?>,<?php echo $_searchFA['user_id']; ?>)" class="btn4">Apply</a>
+                                            <?php endif; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                         <?php endforeach;
+                        endif;?>
+                        <?php echo $links; ?>
                         <div id="loader" style="display: none;">
                             <p style="text-align:center;">
                                 <img src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="<?php echo 'loaderimage'; ?>"/>
@@ -339,8 +369,9 @@ if($userid_login == ""){?>
         var skill = '<?php echo $keyword; ?>';
         var search_location = '<?php echo $search_location; ?>';
         var login_user_id = "<?php echo $userid_login; ?>";
-        var app = angular.module('freelanceApplyNRApp', ['ngRoute','ui.bootstrap']);
+        var app = angular.module('', ['ngRoute','ui.bootstrap']);
         var header_all_profile = '<?php echo $header_all_profile; ?>';
+        var filter_url = "<?php echo $filter_url; ?>";
         // $(document).ready(function(){
         //     $(window).scrollTop(500);
         // });

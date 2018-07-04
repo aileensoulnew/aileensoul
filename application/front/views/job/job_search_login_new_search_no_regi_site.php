@@ -265,7 +265,8 @@ l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
                     <div class="modal-body">
 						
 						<div class="mid-modal-body">
-							<form name="job-company-filter" id="job-company-filter">
+                            <?php echo $job_filter; ?>
+							<!-- <form name="job-company-filter" id="job-company-filter">
 								<div class="left-search-box">
 									<div class="">
 										<h3>Top Company</h3>
@@ -433,7 +434,7 @@ l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
 
 									</div>
 								</div>
-							</form>
+							</form> -->
 						</div>
                     </div>
                 </div>
