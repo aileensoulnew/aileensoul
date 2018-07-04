@@ -6,7 +6,7 @@
             <path d="M2,43.5h49c1.104,0,2-0.896,2-2s-0.896-2-2-2H2c-1.104,0-2,0.896-2,2S0.896,43.5,2,43.5z" />
     </svg>
 </button>
-
+<script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
 <script>
 var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 showRight = document.getElementById( 'showRight' ),
@@ -23,4 +23,3 @@ function disableOther( button ) {
     }
 }
 </script>
-<script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>

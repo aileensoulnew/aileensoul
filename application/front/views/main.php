@@ -380,7 +380,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
                 </div>
             </div>
-            <?php echo $login_footer ?>
+            
+			<?php echo $login_footer ?>
         </div>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
