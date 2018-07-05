@@ -33,10 +33,14 @@ header('Cache-Control: public, max-age=30');
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+		<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>" /> -->
+		<script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
 	<?php $this->load->view('adsense'); ?>
 </head>
 	<body class="sitemap">
 		<div class="">
+			<?php //echo $sitemap_header; ?>
 			<header>
 				<div class="header">
 					<div class="container">
@@ -119,6 +123,7 @@ header('Cache-Control: public, max-age=30');
 				</div>
 			</div>
 		</div>
+		<?php //$this->load->view('mobile_side_slide'); ?>
 		<?php echo $login_footer ?>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?ver=<?php echo time(); ?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>

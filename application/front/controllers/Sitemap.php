@@ -154,6 +154,7 @@ class Sitemap extends CI_Controller {
         $this->data['metadesc'] = "Aileensoul HTML sitemap for finding any jobs, freelance projects, business, artist and other important pages. ";
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
         $this->load->view('sitemap/sitemap', $this->data);
     }
 
@@ -354,7 +355,7 @@ class Sitemap extends CI_Controller {
             $this->data['member_list'] = $this->sitemap_model->get_member_list($searchword,$page,$limit);
             $this->data['links'] = $this->pagination->create_links();
         }
-        
+        // $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
         $this->load->view('sitemap/sitemap_member', $this->data);
     }
 
