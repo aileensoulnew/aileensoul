@@ -14,7 +14,7 @@
                 <li><a title="Blog" href="<?php echo base_url('blog'); ?>">Blog</a></li>
                 <li><a title="Faq" tabindex="0" href="<?php echo base_url('faq'); ?>">FAQ</a></li>
                 <li><a title="Advertise With Us" href="<?php echo base_url('advertise-with-us'); ?>">Advertise With Us</a></li>
-                <li><a title="Sitemap" tabindex="0" href="<?php //echo base_url('sitemap'); ?>">Sitemap</a></li>
+                <li><a title="Sitemap" tabindex="0" href="<?php echo base_url('sitemap'); ?>">Sitemap</a></li>
                 <li><a title="Report" tabindex="0" href="<?php echo base_url('report-abuse'); ?>">Report</a></li>
                 <li><a title="Contact Us" href="<?php echo base_url('contact-us'); ?>">Contact</a></li>
                 <li><a title="Send Us Feedback" href="<?php echo base_url('feedback'); ?>">Feedback</a></li>
