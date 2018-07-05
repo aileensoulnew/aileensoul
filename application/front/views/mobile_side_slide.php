@@ -28,7 +28,7 @@
 </div>
 <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
 <script>
-var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 showRight = document.getElementById( 'showRight' ),
 body = document.body;
 showRight.onclick = function() {
@@ -41,5 +41,16 @@ function disableOther( button ) {
     if( button !== 'showRight' ) {
         classie.toggle( showRight, 'disabled' );
     }
-}
+}*/
+
+$('#showRight').click(function(e){
+    e.stopPropagation();
+     $('#cbp-spmenu-s2').toggleClass('cbp-spmenu-open');
+});
+$('#cbp-spmenu-s2').click(function(e){
+    e.stopPropagation();
+});
+$('body,html').click(function(e){
+       $('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
+});
 </script>
