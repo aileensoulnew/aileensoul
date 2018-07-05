@@ -420,12 +420,13 @@ $route['artist/edit_comment_insertimg'] = "artist/edit_comment_insertimg";
 $route['artist/delete_commentimg'] = "artist/delete_commentimg";
 
 /*$route['artist/category'] = "artist_live/view_more_artist";
-$route['artist/location'] = "artist_live/view_more_artist";*/
+$route['artist/location'] = "artist_live/view_more_artist";
+$route['artist'] = "artist_live/view_more_artist";*/
+
 $route['artist/category'] = "artist_live/category";
 $route['artist/category/(:num)'] = "artist_live/category";
 $route['artist/location'] = "artist_live/location";
 $route['artist/location/(:num)'] = "artist_live/location";
-
 $route['artist'] = "artist_live/artist_by_artist";
 
 //BLOG ROUTES SETTINGS
