@@ -32,31 +32,38 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
+		
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()) ?>">
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="report ftr-page">      
         <div class="middle-section middle-section-banner new-ld-page">
 			<div class="search-banner cus-search-bnr" >
 				<header>
-					<div class="header">
+					<div class="">
 						<div class="container">
 							<div class="row">
-								<div class="col-md-6 col-sm-6 left-header fw-479">
-									<h2 class="logo">
-										<a href="<?php echo base_url(); ?>">
-											<svg>
-												<text class="logo-size" x="0" y="25">Aileensoul</text>
-											</svg>
-										</a>
-									</h2>
+								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+									<?php $this->load->view('main_logo'); ?>
 								</div>
-								<div class="col-md-6 col-sm-6 no-login-right fw-479">
-								 	<?php if (!$this->session->userdata('aileenuser')) { ?>
-                                        <a href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
-                                        <a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a>
-                                    <?php } ?>
+								<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+									<div class="btn-right other-hdr">
+										<?php if (!$this->session->userdata('aileenuser')) { ?>
+											<ul class="nav navbar-nav navbar-right test-cus drop-down">
+												<?php $this->load->view('profile-dropdown'); ?>
+												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
+												<li class="mob-bar-li">
+													<span class="mob-right-bar">
+														<?php $this->load->view('mobile_right_bar'); ?>
+													</span>
+												</li>
+											
+											</ul>
+										<?php } ?>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -114,6 +121,7 @@
 					</ul>
 				</div>
 			</div>
+			<?php $this->load->view('mobile_side_slide'); ?>
 			<?php echo $login_footer ?>
 		</div>
 		<!--  poup modal  -->
@@ -151,5 +159,20 @@
 			itemsCounter++;
 		  }
     </script>
+	<script>
+	$(function(){
+		$(".dropdown").hover(            
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            },
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+                $(this).toggleClass('open');
+                $('b', this).toggleClass("caret caret-up");                
+            });
+    });
+</script>
     </body>
 </html>

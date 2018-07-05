@@ -92,7 +92,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 								<li><a href="<?php echo $freelance_hire_right_profile_link; ?>">Hire Freelancer</a></li>
 								<li><a href="<?php echo $freelance_apply_right_profile_link; ?>">Freelance Jobs</a></li>
 								
-								<li><a class="btn3" href="javascript:void(0)" data-target="#login" data-toggle="modal">Login</a></li>
+								<li><a class="btn-n" href="javascript:void(0)" data-target="#login" data-toggle="modal">Login</a></li>
 								
 							</ul>
 							<span class="mob-right-bar">

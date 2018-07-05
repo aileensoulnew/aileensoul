@@ -1,4 +1,4 @@
-<div class="mob-side-menu">
+<div class="mob-side-menu mob-side-hdr">
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
         <div class="all-profile-box content custom-scroll">
             <ul class="all-pr-list">

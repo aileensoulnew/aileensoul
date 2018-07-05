@@ -9,7 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />       
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
        
-
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-common.css?ver='.time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()) ?>">
          <?php if (IS_OUTSIDE_CSS_MINIFY == '0'){?>
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver='.time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver='.time()) ?>">
@@ -28,15 +29,24 @@
                 <div class="overlaay">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 left-header col-xs-4 fw-479">
+                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
 								<?php $this->load->view('main_logo'); ?>
                             </div>
-                            <div class="col-md-6 col-sm-6 right-header col-xs-8 fw-479">
+                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
                                 <div class="btn-right">
                                 <?php if(!$this->session->userdata('aileenuser')) {?>
-                                    <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-                                    <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
-                                    <?php }?>
+									<ul class="nav navbar-nav navbar-right test-cus drop-down">
+										<?php $this->load->view('profile-dropdown'); ?>
+										<li><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										<li><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
+										<li class="mob-bar-li">
+											<span class="mob-right-bar">
+												<?php $this->load->view('mobile_right_bar'); ?>
+											</span>
+										</li>
+									
+									</ul>
+                                <?php }?>
                                 </div>
                             </div>
                         </div>
@@ -214,6 +224,7 @@
                     </div>
                 </div>
             </section>
+			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer ?>
         </div>
        <?php if (IS_OUTSIDE_JS_MINIFY == '0'){?>
@@ -221,5 +232,6 @@
         <?php }else{?>
         <script src="<?php echo base_url('assets/js_min/webpage/aboutus.js'); ?>"></script>
         <?php }?>
+		
     </body>
 </html>

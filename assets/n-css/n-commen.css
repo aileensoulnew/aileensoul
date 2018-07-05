@@ -1562,8 +1562,8 @@ input[type=number]::-webkit-inner-spin-button {
 	pointer-events:none;
 }
 
-
-.pagination-button{width:100%; float:left; padding:0 23px 20px; text-align:right;}
+.tab-content .pagination-button{padding:0 23px 20px;}
+.pagination-button{width:100%; float:left; text-align:right;}
 .page-title .pagination-button{padding:0;}
 .pagination-button a{padding-left:15px;}
 .pagination-button .btn-p{font-size:16px; font-weight:normal; padding:5px 25px; width:115px; margin:0;}

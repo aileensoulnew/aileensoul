@@ -2308,9 +2308,9 @@ input[type=text] {-webkit-appearance: none; -moz-appearance: none; appearance: n
 .detail-job-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;}
 .detail-job-no-login .btn-right .btn2{padding:8px 25px; background:none; color:#fff;}
 .detail-job-no-login .btn-right .btn2:hover{background:#fff; color:#1b8ab9;}
-.old-no-login .btn-right .btn4{border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;}
-.old-no-login .btn-right .btn2{padding:8px 25px; background:none; color:#fff; border:1px solid #fff;}
-.old-no-login .btn-right .btn2:hover{background:#fff; color:#1b8ab9;}
+.old-no-login .btn-right .btn4{/*border:1px solid #fff; padding:8px 25px !important; font-size:16px; line-height:1;*/}
+.old-no-login .btn-right .btn2{/*padding:8px 25px; background:none; color:#fff; border:1px solid #fff;*/}
+.old-no-login .btn-right .btn2:hover{/*background:#fff; color:#1b8ab9;*/}
 .job-detail .job-top-detail{/*padding-left:36px;*/}
 .job-detail .job-top-detail.free-apply-img{width:100%; padding-left:0;}
 .old-no-login #paddingtop_fixed{padding-top:54px !important;}
@@ -2952,7 +2952,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.mian_middle_post_box{width:100%;}
 	.detail-job-no-login .btn-right .btn2{padding:8px 20px;}
 	.detail-job-no-login .btn-right .btn4{padding: 8px 20px !important;}
-	.old-no-login .btn-right .btn2{padding:8px 20px;}
+	.old-no-login .btn-right .btn2{/*padding:8px 20px;*/}
 	.old-no-login .btn-right .btn4{padding: 8px 20px !important;}
 	
 	.search-business-top .job-top-detail h5{font-size:16px; line-height:1.5;}
@@ -3078,6 +3078,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.mob-detail-custom{width:100%; border-left:0; border-right:0; border-radius:0;}
 	.post-right-dropdown ul.dropdown-menu li a{font-size:12px; padding:5px 10px;}
 	.post-right-dropdown .dropdown-menu{min-width:130px;}
+	.report h1{padding:60px 0 50px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3402,6 +3403,7 @@ overflow-y: scroll; overflow-y: auto;}
 	#floatBarsG{transform: inherit;}
 	#artpost .fw fieldset:first-child label.error{margin-right:0;}
 	.contact-detail{width:75%;}
+	.report h1{font-size:21px; padding:40px 0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
