@@ -32,6 +32,8 @@ header('Cache-Control: public, max-age=30');
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
         <link rel="canonical" href="<?php echo $actual_link ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
         <?php
         if (IS_OUTSIDE_CSS_MINIFY == '0') {
             ?>
@@ -54,24 +56,27 @@ header('Cache-Control: public, max-age=30');
                 <div class="overlaay">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 left-header col-xs-4 fw-479">
-                                 <h2 class="logo">
-										<a href="<?php echo base_url(); ?>">
-											<svg>
-												<text class="logo-size" x="0" y="25">Aileensoul</text>
-											</svg>
-										</a>
-									</h2>
-                            </div>
-                            <div class="col-md-6 col-sm-6 right-header col-xs-8 fw-479">
-                                <div class="btn-right">
-                                    <?php if (!$this->session->userdata('aileenuser')) { ?>
-                                        <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-                                        <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
+								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+									<?php $this->load->view('main_logo'); ?>
+								</div>
+								<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+									<div class="btn-right other-hdr">
+										<?php if (!$this->session->userdata('aileenuser')) { ?>
+											<ul class="nav navbar-nav navbar-right test-cus drop-down">
+												<?php $this->load->view('profile-dropdown'); ?>
+												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
+												<li class="mob-bar-li">
+													<span class="mob-right-bar">
+														<?php $this->load->view('mobile_right_bar'); ?>
+													</span>
+												</li>
+											
+											</ul>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
                     </div>
                 </div>
             </header>
@@ -262,6 +267,7 @@ header('Cache-Control: public, max-age=30');
 
 
             </section>
+			<?php $this->load->view('mobile_side_slide'); ?>
             <?php
             echo $login_footer
             ?>
