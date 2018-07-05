@@ -789,13 +789,10 @@ $route['how-to-use-artistic-profile-in-aileensoul'] = "introduction/artistic_pro
 
 $route['business-in-(:any)'] = "business_live/locationBusinessList/$1";
 $route['business-in-(:any)/(:num)'] = "business_live/locationBusinessList/$1";
-
 $route['(:any)-business-in-(:any)'] = "business_live/categoryBusinessList/$1/$2/1";
 $route['(:any)-business-in-(:any)/(:num)'] = "business_live/categoryBusinessList/$1/$2/1";
-
 $route['(:any)-business'] = "business_live/categoryBusinessList/$1//2";
 $route['(:any)-business/(:num)'] = "business_live/categoryBusinessList/$1//2";
-
 $route['company/(:any)'] = "business_profile_live/business_profile_manage_post/$1";
 
 /*$route['business-by-categories'] = "business_live/view_more_business";
