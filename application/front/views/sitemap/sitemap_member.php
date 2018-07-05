@@ -68,7 +68,9 @@ header('Cache-Control: public, max-age=30');
 						<a href="<?php echo base_url().'sitemap'; ?>" target="self">Sitemap</a>
 					</h1>
 					<div class="site-box">
-						<h3>Member Directory</h3>
+						<h3>
+							<a href="<?php echo base_url('sitemap/people'); ?>" target="_self">Member Directory</a>
+						</h3>
 						<ul class="alphabet">
 							<?php 
 							foreach (range('A', 'Z') as $char): ?>
