@@ -3496,7 +3496,8 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	.contact .mob-bar-li .mob-right-bar .bg-menu{padding-left:10px;}
 	.contact .right-header ul.test-cus li{padding-left:0;}
 	.contact .right-header .test-cus > li > a.btn3{margin-left:10px;}
-	.feedback-cus .right-header ul.test-cus li{padding-left:3px;}
+	.feedback-cus .right-header ul.test-cus li{padding-left:0px;}
+	.feedback-cus .right-header ul.test-cus li.mob-bar-li{padding-left:10px;}
 	.feedback-cus .right-header .test-cus > li > a.btn9{margin-left:10px;}
 }
 @media screen and (max-width:640px){
