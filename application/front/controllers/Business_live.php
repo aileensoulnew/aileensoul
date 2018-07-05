@@ -125,14 +125,21 @@ class Business_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row('industry_id');
         $this->data['category_id'] = "";
+        $category_id = "";
         if($category != "")
+        {            
+            $category_id = $this->db->select('industry_id')->get_where('industry_type', array('industry_slug' => $category))->row('industry_id');
             $this->data['category_id'] = $category_id;
-        $city_id = $this->db->select('city_id')->get_where('cities', array('slug' => $location))->row('city_id');
+        }
+
         $this->data['location_id'] = '';
+        $location_id = "";
         if($location != "")
-            $this->data['location_id'] = $city_id;
+        {
+            $location_id = $this->db->select('city_id')->get_where('cities', array('slug' => $location))->row('city_id');
+            $this->data['location_id'] = $location_id;
+        }
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->data['q'] = $category;
         $this->data['l'] = $location;
@@ -148,7 +155,40 @@ class Business_live extends MY_Controller {
         {
             $this->data['title'] = $tmCat." Business | Aileensoul";
             $this->data['metadesc'] = "Looking for ".$tmCat."? Find and get the contact details of various ".$tmCat." Business at your near by location on Aileensoul. Visit to know more.";
-        }
+        }        
+        
+        $this->data['industry_name'] = $industry_name = ($this->input->post('industry_name') ? $this->input->post('industry_name') : "");
+        $this->data['city_name'] = $city_name = ($this->input->post('city_name') ? $this->input->post('city_name') : "");
+        $limit_cl = 5;
+        $this->data['businessCategory'] = $this->business_model->businessCategory($limit_cl);
+        $this->data['businessLocation'] = $this->business_model->businessLocation($limit_cl);
+        $this->data['business_left'] = $this->load->view('business_live/business_left', $this->data, TRUE);
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = $this->data["filter_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->business_model->businessListByFilterTotalRec($category_id,$location_id,$industry_name,$city_name);
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['businessList'] = $businessListByLocation = $this->business_model->businessListByFilter($category_id,$location_id,$page,$limit,$industry_name,$city_name);
+        // print_r($this->data['businessList']);
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('business_live/categoryBusinessList', $this->data);
     }
 
@@ -296,7 +336,7 @@ class Business_live extends MY_Controller {
 
         $limit = 15;
         $config = array(); 
-        $config["base_url"] = base_url().$this->uri->segment(1);
+        $config["base_url"] = $this->data["filter_url"] = base_url().$this->uri->segment(1);
         $config["total_rows"] = $this->business_model->get_business_location_total_rec();
         $config["per_page"] = $limit;
         $config["uri_segment"] = 2;
@@ -333,13 +373,43 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Category - Business Profile | Aileensoul";
+        $this->data['title'] = "Business in ".ucwords(str_replace("-"," ",$location))." | Aileensoul";
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $locationdata = $this->business_model->getlocationdatafromslug($location);
-        $this->data['location_id'] = $locationdata['city_id'];
+        $this->data['location_id'] = $location_id = $locationdata['city_id'];
         $this->data['business_profile_set'] = $this->business_profile_set;
+        $limit = 5;
         $this->data['businessCategory'] = $this->business_model->businessCategory($limit);
         $this->data['businessLocation'] = $this->business_model->businessLocation($limit);
+
+        $this->data['industry_name'] = $industry_name = ($this->input->post('industry_name') ? $this->input->post('industry_name') : "");
+        $this->data['city_name'] = $city_name = ($this->input->post('city_name') ? $this->input->post('city_name') : "");
+
+        $this->data['business_left'] = $this->load->view('business_live/business_left', $this->data, TRUE);
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = $this->data["filter_url"] = base_url().$this->uri->segment(1);
+        $config["total_rows"] = $this->business_model->businessListByLocationTotalRec($location_id,$industry_name,$city_name);
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 2;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['businessList'] = $businessListByLocation = $this->business_model->businessListByLocation($location_id,$page,$limit,$industry_name,$city_name);
+        // print_r($this->data['businessList']);exit;
+        $this->data['links'] = $this->pagination->create_links();
         $this->load->view('business_live/categoryBusinessList', $this->data);
     }
 

@@ -509,7 +509,10 @@ class Business_model extends CI_Model {
     }
 
     // Get Location List based on city id
-    function businessListByLocation($id = '0') {
+    function businessListByLocation($id = '0',$page = "",$limit = '',$industry_name = array(),$city_name = array()) {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
         $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, 
         IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
             bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, 
@@ -519,15 +522,66 @@ class Business_model extends CI_Model {
             LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
             LEFT JOIN ailee_states st ON bp.state = st.state_id
             LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
-            WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4' and
-            bp.city = '" . $id ."'";
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4' ";
+
+        if(isset($industry_name) && !empty($industry_name))
+        {
+            $sql .= "AND bp.industriyal IN (". implode(",", $industry_name) .")";
+        }
+        
+        if($id != ''){
+            $sql .= " AND (bp.city = ". $id;
+            if(isset($city_name) && !empty($city_name))
+            {
+                $sql .= " OR bp.industriyal IN (". implode(",", $city_name) .")";
+            }
+            $sql .= ")";
+        }
+
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
     }
 
+    function businessListByLocationTotalRec($id = '0',$industry_name = array(),$city_name = array()) {
+        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, 
+        IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
+            bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, 
+            cr.country_name as country 
+            FROM ailee_business_profile bp 
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+            LEFT JOIN ailee_states st ON bp.state = st.state_id
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4' ";
+        if(isset($industry_name) && !empty($industry_name))
+        {
+            $sql .= "AND bp.industriyal IN (". implode(",", $industry_name) .")";
+        }
+        
+        if($id != ''){
+            $sql .= " AND (bp.city = ". $id;
+            if(isset($city_name) && !empty($city_name))
+            {
+                $sql .= " OR bp.industriyal IN (". implode(",", $city_name) .")";
+            }
+            $sql .= ")";
+        }
+        // echo $sql;exit;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
+
     // Get Location List based on city id
-    function businessListByFilter($category_id = '', $location_id = '', $limit = '') {
+    function businessListByFilter($category_id = '', $location_id = '', $page = "",$limit = '',$industry_name = array(),$city_name = array()) {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
             ct.city_name as city, 
             cr.country_name as country 
@@ -539,21 +593,66 @@ class Business_model extends CI_Model {
             WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'";
 
             if($category_id != ''){
-                $sql .= " AND bp.industriyal IN (". $category_id .")";
+                $sql .= " AND (bp.industriyal IN (". $category_id .")";
+                if(isset($industry_name) && !empty($industry_name))
+                {
+                    $sql .= " OR bp.industriyal IN (". implode(",", $industry_name) .")";
+                }
+                $sql .= ")";
             }   
             
             if($location_id != ''){
-                $sql .= " AND bp.city IN (". $location_id .")";
+                $sql .= " AND (bp.city IN (". $location_id .")";
+                if(isset($city_name) && !empty($city_name))
+                {
+                    $sql .= " OR bp.industriyal IN (". implode(",", $city_name) .")";
+                }
+                $sql .= ")";
             }
-            if($limit){
-                $sql .= " Limit ". $limit;   
+            if($limit != '') {
+                $sql .= " LIMIT $start,$limit";
             }
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
     }
 
-     public function business_user_following_count($business_profile_id = '') {
+    function businessListByFilterTotalRec($category_id = '', $location_id = '',$industry_name = array(),$city_name = array()) {        
+
+        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
+            ct.city_name as city, 
+            cr.country_name as country 
+            FROM ailee_business_profile bp 
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
+            LEFT JOIN ailee_states st ON st.state_id = bp.state 
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'";
+
+            if($category_id != ''){
+                $sql .= " AND (bp.industriyal IN (". $category_id .")";
+                if(isset($industry_name) && !empty($industry_name))
+                {
+                    $sql .= " OR bp.industriyal IN (". implode(",", $industry_name) .")";
+                }
+                $sql .= ")";
+            }   
+            
+            if($location_id != ''){
+                $sql .= " AND (bp.city IN (". $location_id .")";
+                if(isset($city_name) && !empty($city_name))
+                {
+                    $sql .= " OR bp.industriyal IN (". implode(",", $city_name) .")";
+                }
+                $sql .= ")";
+            }            
+        // echo $sql;exit;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return count($result_array);
+    }
+    
+    public function business_user_following_count($business_profile_id = '') {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         if ($business_profile_id == '') {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="businessListApp" ng-controller="businessListController">
+<html lang="en">
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
@@ -21,8 +21,8 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="profile-main-page">
-        <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <?php //$this->load->view('page_loader'); ?>
+        <div id="main_page_load">
 
         <!-- SET BLANK VALUE IF VAR. NOT SET FROM CONTROLLER -->
         <?php $location_id = (isset($location_id)) ? $location_id : ''; ?>
@@ -52,7 +52,8 @@
                 <?php if($business_profile_set == 0 && $business_profile_set == '0'){ echo $search_banner; } ?>
                 <div class="container pt20 mobp0 mobmt15">
                     <div class="left-part">
-                        <div class="left-search-box list-type-bullet">
+                        <?php echo $business_left; ?>
+                        <!-- <div class="left-search-box list-type-bullet">
                             <div class="">
                                 <h3>Top Categories</h3>
                             </div>
@@ -68,9 +69,9 @@
                                 </li>
                             </ul>
                             <p class="text-left p10"><a href="<?php echo base_url('business-by-categories') ?>">View More Categories</a></p>
-                        </div>
+                        </div> -->
                         <!-- TOP Location -->
-                        <div class="left-search-box list-type-bullet">
+                        <!-- <div class="left-search-box list-type-bullet">
                             <div class="">
                                 <h3>Top Location</h3>
                             </div>
@@ -86,7 +87,7 @@
                                 </li>
                             </ul>
                             <p class="text-left p10"><a href="<?php echo base_url('business-by-location') ?>">View More Location</a></p>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="custom_footer_left fw">
                             <div class="">
@@ -130,45 +131,101 @@
                         <div class="page-title">
                             <h3>Search Result</h3>
                         </div>
-                        <div class="all-job-box search-business" ng-repeat="business in businessList">
+                        <?php 
+                        if(isset($businessList) && !empty($businessList)):
+                            foreach($businessList as $_businessList): ?>
+                        <div class="all-job-box search-business">
                             <div class="search-business-top">
                                 <div class="bus-cover no-cover-upload">
-                                    <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.profile_background"><img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{business.profile_background}}"></a>
-                                    <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.profile_background"><img ng-src="<?php echo BASEURL . WHITEIMAGE ?>"></a>
+                                    <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
+                                        <?php if($_businessList['profile_background'] != ""){ ?>
+                                            <img src="<?php echo BUS_BG_MAIN_UPLOAD_URL.$_businessList['profile_background']; ?>">
+                                        <?php }
+                                        else{ ?>
+                                            <img src="<?php echo BASEURL . WHITEIMAGE ?>">
+                                        <?php }
+                                        ?>
+                                    </a>                                    
                                 </div>
                                 <div class="all-job-top">
                                     <div class="post-img">
-                                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}"></a>
-                                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image"><img ng-src="<?php echo BASEURL . NOBUSIMAGE ?>"></a>
+                                        <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
+                                            <?php if($_businessList['business_user_image'] != ""){ ?>
+                                                <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL.$_businessList['business_user_image'] ?>">
+                                            <?php }
+                                        else{ ?>
+                                            <img src="<?php echo BASEURL . NOBUSIMAGE ?>">
+                                        <?php }
+                                        ?>
+                                        </a>                                        
                                     </div>
                                     <div class="job-top-detail">
-                                        <h5><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.company_name"></a></h5>
-                                        <h5 ng-if="business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.industry_name"></a></h5>
-                                        <h5 ng-if="!business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.other_industrial"></a></h5>
+                                        <h5>
+                                            <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
+                                                <?php echo $_businessList['company_name']; ?>
+                                            </a>
+                                        </h5>
+                                        <?php if($_businessList['industry_name'] != ""): ?>
+                                            <h5>
+                                                <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
+                                                    <?php echo ucwords($_businessList['industry_name']); ?>
+                                                </a>
+                                            </h5>
+                                        <?php
+                                        else: ?>
+                                            <h5>
+                                                <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>">
+                                                    <?php echo ucwords($_businessList['other_industrial']); ?>
+                                                </a>                                                
+                                            </h5>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="all-job-middle">
                                 <ul class="search-detail">
-                                    <li ng-if="business.contact_website"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/website.png') ?>"></span> <p class="detail-content"><a ng-href="{{business.contact_website}}" target="_self" ng-bind="business.contact_website"></a></p></li>
-                                    <li><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/location.png') ?>"></span> <p class="detail-content"><span ng-bind="business.city"></span><span ng-if="business.city">,(</span><span ng-bind="business.country">India</span><span ng-if="business.city">)</span></p></li>
-                                    <li ng-if="business.details"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{business.details| limitTo:110}}...<a href="<?php echo BASEURL ?>company/{{business.business_slug}}"> Read more</a></p></li>
+                                    <?php 
+                                    if($_businessList['contact_website'] != ""): ?>
+                                    <li>
+                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/website.png') ?>"></span> <p class="detail-content"><a href="<?php echo $_businessList['contact_website']; ?>" target="_self"><?php echo $_businessList['contact_website']; ?></a></p>
+                                    </li>
+                                    <?php endif; ?>
+                                    <li>
+                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/location.png') ?>"></span>
+                                        <p class="detail-content">
+                                            <span><?php echo $_businessList['city'].($_businessList['country'] != "" ? ",(".$_businessList['country'].")" : "");?>
+                                            </span>
+                                        </p>
+                                    </li>
+                                    <?php 
+                                    if($_businessList['details'] != ""): ?>
+                                    <li>
+                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">
+                                            <?php echo substr($_businessList['details'], 0,110); ?>...<a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>"> Read more</a></p>
+                                    </li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>
+                        <?php 
+                            endforeach;
+                        endif;
+                        if(isset($businessList) && empty($businessList) && $page == 0):?>
                         <!-- NO RESULT FOUND DIV -->
-                        <div class="job-contact-frnd" ng-if="businessList.length <= 0">
+                        <div class="job-contact-frnd">
                             <!-- AJAX DATA... -->
                             <div class="text-center rio">
                                 <h1 class="page-heading  product-listing" style="border:0px;margin-bottom: 11px;">Oops No Data Found.</h1>
                                 <p style="text-transform:none !important;border:0px;margin-left:4%;">We couldn't find what you were looking for.</p>
                             </div>
                         </div>
+                        <?php endif; ?>
                         <div id="loader" class="hidden">
                             <p style="text-align:center;">
                                 <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
                             </p>
                         </div>
+                        <?php echo $links; ?>
                     </div>
                     <div class="right-part">
                         <!-- <div class="add-box">
@@ -212,7 +269,8 @@
                             <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
                             <div class="mid-modal-body">
         						<div class="mid-modal-body">
-        							<div class="left-search-box list-type-bullet">
+                                    <?php echo $business_left; ?>
+        							<!-- <div class="left-search-box list-type-bullet">
         								<div class="">
         									<h3>Top Categories</h3>
         								</div>
@@ -251,7 +309,7 @@
         								<p class="text-left p10">
         									<a href="<?php echo business_location_list; ?>">View More Locations</a>
         								</p>
-        							</div>
+        							</div> -->
         						</div>
                             </div>
                         </div>
@@ -277,11 +335,30 @@
             var location_id = '<?php echo $location_id; ?>';
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';
-            var app = angular.module('businessListApp', ['ui.bootstrap']);
+            var filter_url = '<?php echo $filter_url; ?>';
+            var app = angular.module('', ['ui.bootstrap']);
+
+            function applyJobFilter() {
+                // console.log(111);
+                pagenum = 1;
+                $(".frm-job-company-filter").on("change", "input:checkbox", function(event){
+                    $('.frm-job-company-filter').attr('action', filter_url);
+                    this.form.submit();
+                    event.preventDefault();
+                });
+            }
+            $(document).ready(function(){
+                $("#pagination").on("click", "a", function(e){
+                    console.log();
+                    e.preventDefault();
+                    $('.frm-job-company-filter').attr('action', this.href);
+                    $(".frm-job-company-filter").submit();
+                });
+            });
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/business-live/categoryBusinessList.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/business-live/categoryBusinessList.js?ver=' . time()) ?>"></script> -->
         <?php 
             if($isbusiness_register == true && $isbusiness_deactive == false){
         ?>
