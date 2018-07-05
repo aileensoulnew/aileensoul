@@ -479,7 +479,7 @@ class Artistic_model extends CI_Model {
             $sql .= " AND (ar.art_skill IN (". $category_id .")";
             if(isset($art_category) && !empty($art_category))
             {
-                $sql .= " OR ar.art_skill IN (". $art_category .")";
+                $sql .= " OR ar.art_skill IN (". implode(",", $art_category) .")";
             }
             $sql .= " )";
         }   
@@ -488,7 +488,7 @@ class Artistic_model extends CI_Model {
             $sql .= " AND (ar.art_city IN (". $location_id .")";
             if(isset($art_location) && !empty($art_location))
             {
-                $sql .= " OR ar.art_city IN (". $art_location .")";
+                $sql .= " OR ar.art_city IN (". implode(",", $art_location) .")";
             }
             $sql .= " )";
         }
@@ -516,7 +516,7 @@ class Artistic_model extends CI_Model {
             $sql .= " AND (ar.art_skill IN (". $category_id .")";
             if(isset($art_category) && !empty($art_category))
             {
-                $sql .= " OR ar.art_skill IN (". $art_category .")";
+                $sql .= " OR ar.art_skill IN (". implode(",", $art_category) .")";
             }
             $sql .= " )";
         }   
@@ -525,7 +525,7 @@ class Artistic_model extends CI_Model {
             $sql .= " AND (ar.art_city IN (". $location_id .")";
             if(isset($art_location) && !empty($art_location))
             {
-                $sql .= " OR ar.art_city IN (". $art_location .")";
+                $sql .= " OR ar.art_city IN (". implode(",", $art_location) .")";
             }
             $sql .= " )";
         }

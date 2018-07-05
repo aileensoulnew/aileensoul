@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="artistListApp" ng-controller="artistListController">
+<html lang="en">
     <head>
         <!-- <title ng-bind="title"></title> -->
         <title><?php echo $title; ?></title>
@@ -324,10 +324,28 @@
             var location_id = '<?php echo $location_id; ?>';
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';
-            var app = angular.module('artistListApp', ['ui.bootstrap']);
+            var filter_url = '<?php echo $filter_url; ?>';
+            var app = angular.module('', ['ui.bootstrap']);
+            function applyJobFilter() {
+                // console.log(111);
+                pagenum = 1;
+                $(".frm-job-company-filter").on("change", "input:checkbox", function(event){
+                    $('.frm-job-company-filter').attr('action', filter_url);
+                    this.form.submit();
+                    event.preventDefault();
+                });
+            }
+            $(document).ready(function(){
+                $("#pagination").on("click", "a", function(e){
+                    console.log();
+                    e.preventDefault();
+                    $('.frm-job-company-filter').attr('action', this.href);
+                    $(".frm-job-company-filter").submit();
+                });
+            });
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/artist-live/categoryArtistList.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/artist-live/categoryArtistList.js?ver=' . time()) ?>"></script> -->
     </body>
 </html> 
