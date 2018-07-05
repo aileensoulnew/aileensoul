@@ -2132,7 +2132,7 @@ footer div.pt20{
 }
 .btn4:hover{
     background:#1b8ab9;
-    color:#fff!important
+    color:#fff;
 }
 .all-job-box .all-job-middle p a,.job-top-detail p a,.page-title h3{
     color:#5c5c5c
@@ -3265,7 +3265,7 @@ footer div.pt20{
             font-size:14px
         }
         .nav>li>a{
-            padding:10px 7px
+            /*padding:10px 7px*/
         }
         .email-verify{
             float:left;

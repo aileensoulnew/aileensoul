@@ -2981,7 +2981,6 @@ overflow-y: scroll; overflow-y: auto;}
 	.also-like .also-like-bottom{width:69%;}
 	.also-like-box p{font-size:16px;}
 	.blog-page.old-no-login #paddingtop_fixed{padding-top:75px !important;}
-	.blog-page .main-inner header{padding:5px 0;}
 	.blog-m .blog-box .blog-left-img{border:0; height:auto;}
 	.blog-m .blog-box .blog-left-img img{position:relative; width:100%; height:auto;left:inherit; top:inherit;
 	-webkit-transform: inherit;
@@ -3390,9 +3389,9 @@ overflow-y: scroll; overflow-y: auto;}
 	.left-header{/*padding-bottom:5px;*/}
 	.site-box ul.blog-cat li{padding:5px 0; }
 	.site-box ul.blog-cat li a{padding:5px 15px;}
-	.old-no-login .btn-right .btn2{font-size:14px; padding:5px 18px !important;}
+	.old-no-login .btn-right .btn2{font-size:12px; padding:3px 20px !important;}
 	.old-no-login .btn-right .btn4{font-size:14px; padding:5px 18px !important;}
-	.blog-page.old-no-login .btn-right{padding-top:10px !important;}
+	.blog-page.old-no-login .btn-right{padding-top:7px !important;}
 	.blog-detail .blog-left-content h3{width:100%; float:left;}
 	.blog-page .sub-header .sub-menu li a.fs22{font-size:14px;}
 	.old-no-login .btn-right{padding-top:5px;}

@@ -39,6 +39,7 @@ header('Expires: ' . $date);
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style.css?ver=' . time()); ?>">
         <?php } ?>
+		
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="contact outer-page">
@@ -129,7 +130,7 @@ header('Expires: ' . $date);
                 </div>
 
             </section>
-
+			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>
         </div>
 
