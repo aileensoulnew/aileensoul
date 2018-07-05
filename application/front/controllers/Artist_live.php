@@ -60,6 +60,48 @@ class Artist_live extends MY_Controller {
     }
 
     public function category() {
+
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Categories - Artist Profile | Aileensoul";
+        $this->data['ismainregister'] = false;
+        if($userid){
+            $this->data['ismainregister'] = true;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        }
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+
+        $limit = 15;
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2);
+        $config["total_rows"] = $this->artistic_model->artistAllCategoryTotalRec();
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 3;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $this->data['artistAllCategory'] = $this->artistic_model->artistAllCategory($page,$limit);
+        $this->data['links'] = $this->pagination->create_links();
+
         $this->load->view('artist_live/category', $this->data);
     }
 
@@ -84,6 +126,7 @@ class Artist_live extends MY_Controller {
     }
 
     public function categoryArtistList($category = '', $location = '',$sertype = "") {
+        // echo $category."1-----".$location."2-----3".$sertype;exit;
         $userid = $this->session->userdata('aileenuser');
         // $artresult = $this->checkisartistdeactivate();
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
@@ -93,15 +136,23 @@ class Artist_live extends MY_Controller {
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);        
-        
-        $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
-        $this->data['category_id'] = $category_id['category_id'];
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
 
-        $city_id = $this->db->select('city_id')->get_where('cities', array('slug' => $location))->row('city_id');
+        $this->data['category_id'] = "";
+        $category_id = "";
+        if($category != "")
+        {        
+            $category_id = $this->db->select('category_id')->get_where('art_category', array('category_slug' => $category))->row_array('category_id');
+            $this->data['category_id'] = $category_id = $category_id['category_id'];
+        }
+
         $this->data['location_id'] = '';
+        $location_id = "";
         if($location != "")
-            $this->data['location_id'] = $city_id;
+        {
+            $city_id = $this->db->select('city_id')->get_where('cities', array('slug' => $location))->row('city_id');            
+            $this->data['location_id'] = $location_id = $city_id;
+        }
 
         $this->data['ismainregister'] = false;
         if($userid){
@@ -124,6 +175,49 @@ class Artist_live extends MY_Controller {
             $this->data['metadesc'] = "Looking for great skilful ".$tmCat."? Connect with them on Aileensoul. Search and explore their portfolio and work details. ";
         }
         $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+        
+        $this->data['art_category'] = $art_category = ($this->input->post('art_category') ? $this->input->post('art_category') : "");
+        $this->data['art_location'] = $art_location = ($this->input->post('art_location') ? $this->input->post('art_location') : "");
+        $limit_cl = 5;
+        $this->data['artistCategory'] = $this->artistic_model->artistCategory($limit_cl);
+        $this->data['artistLocation'] = $this->artistic_model->artistAllLocation($limit_cl);
+        $this->data['artist_left'] = $this->load->view('artist_live/artist_left', $this->data, TRUE);
+
+        // print_r($this->uri->segment_array());
+        $limit = 15;
+        $config = array();
+        if($this->uri->segment(1) == "artist")
+        {
+            $url = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2);
+            $uri_segment = 3;
+        }
+        else
+        {
+            $url = base_url().$this->uri->segment(1);
+            $uri_segment = 2;
+        }
+        $config["base_url"] = $this->data["filter_url"] = $url;
+        $config["total_rows"] = $this->artistic_model->artistListLocationCategoryTotalRec($category_id,$location_id,$art_category,$art_location);
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = $uri_segment;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        $this->data['page'] = $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+        $this->data['artistList'] = $artistList = $this->artistic_model->artistListLocationCategory($category_id,$location_id,$page,$limit,$art_category,$art_location);
+        // print_r($this->data['artistList']);
+        $this->data['links'] = $this->pagination->create_links();
         $this->load->view('artist_live/categoryArtistList', $this->data);
     }
 
@@ -1705,10 +1799,83 @@ class Artist_live extends MY_Controller {
 
     // OPEN ALL LOCATION VIEW
     public function location() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Locations - Artist Profile | Aileensoul";
+        $this->data['ismainregister'] = false;
+        if($userid){
+            $this->data['ismainregister'] = true;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        }
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+
+        $limit = 15;
+        $this->data['page'] = $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $artistAllLocation = $this->artistic_model->artistAllLocationList($page,$limit);
+        $config = array(); 
+        $config["base_url"] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2);
+        $config["total_rows"] = $artistAllLocation['total_record'];
+        $config["per_page"] = $limit;
+        $config["uri_segment"] = 3;
+        $choice = $config["total_rows"] / $config["per_page"];
+        $config["num_links"] = round($choice);
+
+        //styling
+        $config['use_page_numbers']  = TRUE;
+        $config['full_tag_open']    = '<div class="pagination-button" id="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['prev_link']        = '<span class="btn-p">Previous</span>';
+        $config['next_link']        = '<span class="btn-p">Next</span>';
+        $config['display_pages']    = FALSE; 
+        $config['first_url']        = '';
+        // $config['suffix']           = '-1';
+        $this->pagination->initialize($config);
+
+        
+        $this->data['artistAllLocation'] = $artistAllLocation['art_loc'];
+        $this->data['links'] = $this->pagination->create_links();
         $this->load->view('artist_live/location', $this->data);
     }
     
     public function artist_by_artist() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
+        $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
+        $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($userid);
+        $this->data['is_userPostCount'] = $this->user_post_model->userPostCount($userid);
+        $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['title'] = "Artist Profile | Aileensoul";
+        $this->data['ismainregister'] = false;
+        if($userid){
+            $this->data['ismainregister'] = true;
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+        }
+        $this->data['search_banner'] = $this->load->view('artist_live/search_banner', $this->data, TRUE);
+        $page = 1;
+        $limit = 20;
+        $artistCat = $this->artistic_model->get_artist_by_categories($page,$limit);
+        // print_r($artistCat);
+        // exit;
+        $artistCity = $this->artistic_model->artistAllLocationList($page,$limit); 
+        $all_link = array();
+        foreach ($artistCity['art_loc'] as $key => $value) {
+            foreach ($artistCat['art_cat'] as $jck => $jcv) {
+                $all_link[$value['location_slug']][$i]['name'] = $jcv['art_category']." In ".$value['art_location'];
+                $all_link[$value['location_slug']][$i]['slug'] = $jcv['category_slug']."-in-".$value['location_slug'];
+                $i++;
+            }
+        }
+        $this->data['artistByArtist'] = $all_link;
         $this->load->view('artist_live/artist_by_artist', $this->data);
     }
 

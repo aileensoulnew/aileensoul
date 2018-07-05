@@ -28,8 +28,8 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="profile-main-page">
-        <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <?php //$this->load->view('page_loader'); ?>
+        <div id="main_page_load">
             <!-- SET BLANK IF VAR NOT DECLARE FROM CONTROLLER -->
             <?php   
                 $location_id = (isset($location_id)) ? $location_id : ''; 
@@ -56,8 +56,9 @@
             } ?>
                 <div class="container pt20 mobp0 mobmt15">
                     <div class="left-part">
+                        <?php echo $artist_left; ?>
                         <!-- TOP CATEGORIES FILTER -->
-                        <div class="left-search-box list-type-bullet">
+                        <!-- <div class="left-search-box list-type-bullet">
                             <div class="">
                                 <h3>Top Categories</h3>
                             </div>
@@ -73,9 +74,9 @@
                                 </li>
                             </ul>
                             <p class="text-left p10"><a href="<?php echo artist_category_list ?>">View More Categories</a></p>
-                        </div>
+                        </div> -->
 
-                        <div class="left-search-box list-type-bullet">
+                        <!-- <div class="left-search-box list-type-bullet">
                             <div class="">
                                 <h3>Top Locations</h3>
                             </div>                        
@@ -91,7 +92,7 @@
                                 </li>
                             </ul>
                             <p class="text-left p10"><a href="<?php echo artist_location_list ?>">View More Locations</a></p>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="custom_footer_left fw">
                             <div class="">
@@ -135,40 +136,86 @@
                     <div class="middle-part">
                         <div class="page-title">
                             <h3>Search Result</h3>
-                        </div>
-                        <div class="all-job-box search-business" ng-repeat="artist in ArtistList">
+                        </div><?php 
+                        if(isset($artistList) && !empty($artistList)):
+                            foreach($artistList as $_artistList):
+                         ?>
+                        <div class="all-job-box search-business">
                             <div class="search-business-top">
                                 <div class="bus-cover no-cover-upload">
-                                    <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="artist.profile_background"><img ng-src="<?php echo ART_BG_MAIN_UPLOAD_URL ?>{{artist.profile_background}}"></a>
-                                    <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="!artist.profile_background"><img ng-src="<?php echo BASEURL . WHITEIMAGE ?>"></a>
+                                    <a href="<?php echo artist_dashboard.$_artistList['slug']; ?>">
+                                        <?php if($_artistList['profile_background'] != ""){?>
+                                        <img src="<?php echo ART_BG_MAIN_UPLOAD_URL.$_artistList['profile_background']; ?>">
+                                    <?php }else{ ?>
+                                        <img src="<?php echo BASEURL . WHITEIMAGE ?>">
+                                    <?php } ?>
+                                    </a>                                    
                                 </div>
                                 <div class="all-job-top">
                                     <div class="post-img">
-                                        <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="artist.art_user_image"><img ng-src="<?php echo ART_PROFILE_MAIN_UPLOAD_URL ?>{{artist.art_user_image}}"></a>
-                                        <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="!artist.art_user_image"><img ng-src="<?php echo BASEURL . NOARTIMAGE ?>"></a>
+                                        <a href="<?php echo artist_dashboard.$_artistList['slug']; ?>">
+                                            <?php if($_artistList['art_user_image'] != ""){?>
+                                            <img src="<?php echo ART_PROFILE_MAIN_UPLOAD_URL.$_artistList['art_user_image']; ?>">
+                                            <?php }else{ ?>
+                                            <img src="<?php echo BASEURL . NOARTIMAGE ?>">
+                                            <?php } ?>
+                                        </a>                                        
                                     </div>
                                     <div class="job-top-detail">
-                                        <h5><a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-bind="artist.fullname | capitalize"></a></h5>
-                                        <h5 ng-if="artist.art_category"><a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-bind="artist.art_category | capitalize"></a></h5>
-                                        <h5 ng-if="!artist.art_category"><a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-bind="artist.other_skill | capitalize"></a></h5>
+                                        <h5>
+                                            <a href="<?php echo artist_dashboard.$_artistList['slug']; ?>"><?php echo ucwords($_artistList['fullname']); ?>
+                                            </a>
+                                        </h5>
+                                        <?php if($_artistList['art_category'] != ""){?>
+                                        <h5>
+                                            <a href="<?php echo artist_dashboard.$_artistList['slug']; ?>">
+                                                <?php echo ucwords($_artistList['art_category']); ?>
+                                            </a>
+                                        </h5>
+                                        <?php
+                                        }
+                                        else{?>
+                                        <h5>
+                                            <a href="<?php echo artist_dashboard.$_artistList['slug']; ?>">
+                                                <?php echo ucwords($_artistList['other_skill']); ?>
+                                            </a>
+                                        </h5>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="all-job-middle">
                                 <ul class="search-detail">
-                                    <li><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/location.png') ?>"></span> <p class="detail-content"><span ng-bind="artist.city"></span><span ng-if="artist.city">,(</span><span ng-bind="artist.country"></span><span ng-if="artist.city">)</span></p></li>
-                                    <li ng-if="artist.art_desc_art"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{artist.art_desc_art| limitTo:110}}...<a href="<?php echo artist_dashboard ?>{{artist.slug}}"> Read more</a></p></li>
+                                    <li>
+                                        <span class="img">
+                                            <img class="pr10" src="<?php echo base_url('assets/n-images/location.png') ?>">
+                                        </span>
+                                        <p class="detail-content">
+                                            <span><?php echo $_artistList['city'].($_artistList['city'] != "" ? ',('.$_artistList['country'].')' : $_artistList['country']); ?></span>      
+                                        </p>
+                                    </li>
+                                    <?php if($_artistList['art_desc_art'] != ""): ?>
+                                    <li>
+                                        <span class="img"><img class="pr10" src="<?php echo base_url('assets/n-images/exp.png') ?>"></span>
+                                        <p class="detail-content"><?php echo substr($_artistList['art_desc_art'], 0,110) ?>...<a href="<?php echo artist_dashboard.$_artistList['slug']; ?>"> Read more</a>
+                                        </p>
+                                    </li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>
                         <!-- NO RESULT FOUND DIV -->
-    					
+                        <?php endforeach;
+                        endif;
+                        if(isset($artistList) && empty($artistList) && $page == 0): ?>	
                         <div class="art-img-nn user_no_post_avl" ng-if="ArtistList.length <= 0">
                             <div class="art_no_post_img">
                                 <img alt="No Saved freelancer" src="<?php echo base_url('assets/img/free-no1.png') ?>">
                             </div>
                             <div class="art_no_post_text">No Result Found..</div>
                         </div>
+                        <?php endif; ?>
+                        <?php echo $links; ?>
                         <div id="loader" class="hidden">
                             <p style="text-align:center;">
                                 <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
@@ -216,7 +263,8 @@
                             <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
                             <div class="mid-modal-body">
         						<div class="mid-modal-body">
-        							<div class="left-search-box list-type-bullet">
+                                    <?php echo $artist_left; ?>
+        							<!-- <div class="left-search-box list-type-bullet">
         								<div class="">
         									<h3>Top Categories</h3>
         								</div>
@@ -250,7 +298,7 @@
         									</li>
         								</ul>
         								<p class="text-left p10"><a href="<?php echo artist_location_list ?>">View More Locations</a></p>
-        							</div>
+        							</div> -->
         						</div>
                             </div>
                         </div>

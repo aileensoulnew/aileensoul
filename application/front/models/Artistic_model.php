@@ -73,7 +73,11 @@ class Artistic_model extends CI_Model {
         return $return_array;
     }*/
 
-    function artistAllCategory($limit = '') {
+    function artistAllCategory($page = "",$limit = '5') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug
             FROM ailee_art_category ct,ailee_art_reg ar
             WHERE ct.category_id !=26 AND FIND_IN_SET(ct.category_id,ar.art_skill) > 0 AND ct.status = '1' 
@@ -87,6 +91,17 @@ class Artistic_model extends CI_Model {
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
+    }
+
+    function artistAllCategoryTotalRec() {        
+        $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug
+            FROM ailee_art_category ct,ailee_art_reg ar
+            WHERE ct.category_id !=26 AND FIND_IN_SET(ct.category_id,ar.art_skill) > 0 AND ct.status = '1' 
+            AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
+            GROUP BY ct.category_id ORDER BY count DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        return count($result_array);
     }
 
     function otherCategoryCount() {
@@ -446,6 +461,82 @@ class Artistic_model extends CI_Model {
         $result_array = $query->result_array();
 
         return $result_array;
+    }
+
+    function artistListLocationCategory($category_id = '', $location_id = '', $page ='',$limit = '',$art_category = array(),$art_location = array()) {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql = "SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, ac.art_category, CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, ar.art_desc_art, 
+                ar.user_id, ct.city_id, ct.city_name as city, cr.country_name as country 
+                FROM ailee_art_reg as ar 
+                LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill  
+                LEFT JOIN ailee_cities as ct ON ct.city_id = ar.art_city 
+                LEFT JOIN ailee_countries as cr ON cr.country_id = ar.art_country 
+                WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'";
+        if($category_id != ''){
+            $sql .= " AND (ar.art_skill IN (". $category_id .")";
+            if(isset($art_category) && !empty($art_category))
+            {
+                $sql .= " OR ar.art_skill IN (". $art_category .")";
+            }
+            $sql .= " )";
+        }   
+        
+        if($location_id != ''){
+            $sql .= " AND (ar.art_city IN (". $location_id .")";
+            if(isset($art_location) && !empty($art_location))
+            {
+                $sql .= " OR ar.art_city IN (". $art_location .")";
+            }
+            $sql .= " )";
+        }
+
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        // echo $sql;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+
+        return $result_array;
+    }
+
+    function artistListLocationCategoryTotalRec($category_id = "",$location_id = "",$art_category = array(),$art_location = array()) {
+        // $limit = ($limit == '') ? 5 : $limit;
+        $sql = "SELECT ar.art_user_image, ar.profile_background, ar.slug, ar.other_skill, ac.art_category, CONCAT(ar.art_name, ' ', ar.art_lastname) as fullname, ar.art_country, ar.art_city, ar.art_desc_art, 
+                ar.user_id, ct.city_id, ct.city_name as city, cr.country_name as country 
+                FROM ailee_art_reg as ar 
+                LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill  
+                LEFT JOIN ailee_cities as ct ON ct.city_id = ar.art_city 
+                LEFT JOIN ailee_countries as cr ON cr.country_id = ar.art_country 
+                WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'";
+        if($category_id != ''){
+            $sql .= " AND (ar.art_skill IN (". $category_id .")";
+            if(isset($art_category) && !empty($art_category))
+            {
+                $sql .= " OR ar.art_skill IN (". $art_category .")";
+            }
+            $sql .= " )";
+        }   
+        
+        if($location_id != ''){
+            $sql .= " AND (ar.art_city IN (". $location_id .")";
+            if(isset($art_location) && !empty($art_location))
+            {
+                $sql .= " OR ar.art_city IN (". $art_location .")";
+            }
+            $sql .= " )";
+        }
+        if($limit){
+            $sql .= " Limit ". $limit;   
+        }
+        // echo $sql;exit;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+
+        return count($result_array);
     }
 
     // new artist search result
