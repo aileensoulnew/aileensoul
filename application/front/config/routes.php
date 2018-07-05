@@ -101,8 +101,12 @@ $route['advertise-with-us'] = "advertise_with_us";
 
 $route['sitemap'] = "sitemap/sitemap";
 
-$route['sitemap/people'] = "sitemap/sitemap_inner";
-$route['sitemap/people/(:any)'] = "sitemap/sitemap_inner/$1";
+/*$route['sitemap/people'] = "sitemap/sitemap_inner";
+$route['sitemap/people/(:any)'] = "sitemap/sitemap_inner/$1";*/
+
+$route['sitemap/people'] = "sitemap/sitemap_member";
+$route['sitemap/people/(:any)'] = "sitemap/sitemap_member/$1";
+$route['sitemap/people/(:any)/(:num)'] = "sitemap/sitemap_member/$1";
 
 $route['sitemap/artist'] = "sitemap/sitemap_inner";
 $route['sitemap/artist/(:any)'] = "sitemap/sitemap_inner/$1";

@@ -347,6 +347,10 @@ class Sitemap_model extends CI_Model {
 
     function get_member_list($searchword = '',$start = 0, $limit = 100){
 
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $search_query = "";
         if($searchword != ""){
             $searchword = $searchword. '%';
@@ -389,7 +393,7 @@ class Sitemap_model extends CI_Model {
 
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
-        return $result_array;
+        return $result_array['total_rec'];
     }
 
     function generate_sitemap_member(){
