@@ -345,7 +345,7 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
-    function get_member_list($searchword = '',$start = 0, $limit = 100){
+    function get_member_list($searchword = '',$page = 0, $limit = 100){
 
         $start = ($page - 1) * $limit;
         if ($start < 0)
@@ -354,7 +354,7 @@ class Sitemap_model extends CI_Model {
         $search_query = "";
         if($searchword != ""){
             $searchword = $searchword. '%';
-            $search_query = " AND first_name like '". $searchword ."'";
+            $search_query = " AND LOWER(first_name) like '". $searchword ."'";
         }
         $sql = "SELECT u.*, CONCAT(first_name, ' ', last_name) as fullname, 
                 jt.name as designaation,d.degree_name
@@ -370,26 +370,29 @@ class Sitemap_model extends CI_Model {
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql);        
+        
         $result_array = $query->result_array();
         return $result_array;
     }
 
     public function get_member_list_total($searchword = '') {
+        
         $search_query = "";
         if($searchword != ""){
             $searchword = $searchword. '%';
-            $search_query = " AND first_name like '". $searchword ."'";
+            $search_query = " AND LOWER(first_name) like '". $searchword ."'";
         }
-        $sql = "SELECT count(*) as total_rec 
-                FROM aileensoul.ailee_user u
+        $sql = "SELECT COUNT(*) AS total_rec 
+                FROM ailee_user u
                 LEFT JOIN ailee_user_profession up on up.user_id = u.user_id
                 LEFT JOIN ailee_job_title jt on up.designation = jt.title_id
+                LEFT JOIN ailee_user_student us on us.user_id = u.user_id
+                LEFT JOIN ailee_degree d on d.degree_id = us.current_study
                 WHERE user_slug != '' AND (
                     u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_profession)
                     OR u.user_id IN (SELECT DISTINCT user_id FROM ailee_user_student)
-                )"
-                . $search_query ." ORDER BY u.user_id DESC";
+        )". $search_query ." ORDER BY u.user_id DESC";
 
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
