@@ -472,7 +472,7 @@ class Sitemap extends CI_Controller {
         $this->load->view('sitemap/sitemap_companies', $this->data);
     }
 
-    public function sitemap_jobs($searchword = "") {        
+    public function sitemap_jobs($searchword = "") {
         $this->data['title'] = "Jobs Sitemap | Aileensoul";
         $this->data['metadesc'] = "Find and apply on various field job registered and verified on Aileensoul.";
         $this->data['searchword'] = $searchword;
@@ -525,6 +525,61 @@ class Sitemap extends CI_Controller {
         }
         // $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
         $this->load->view('sitemap/sitemap_jobs', $this->data);
+    }
+
+    public function sitemap_freelance_jobs($searchword = "") {
+        $this->data['title'] = "Freelance Jobs Sitemap | Aileensoul";
+        $this->data['metadesc'] = "Find and apply on various work from job registered and verified on Aileensoul.";
+        $this->data['searchword'] = $searchword;
+        if($searchword != "")
+        {
+            $this->data['title'] = "Freelance Jobs Listing Starting from ".strtoupper($searchword)." | Aileensoul";
+            $this->data['metadesc'] = "Browse all online jobs listing starting with ".strtoupper($searchword);
+
+            $limit = 100;
+            $config = array(); 
+            $config["base_url"] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3);
+            $config["total_rows"] = $this->sitemap_model->get_freelancer_list_total($searchword);
+            $config["per_page"] = $limit;
+            $config["uri_segment"] = 4;
+            $choice = $config["total_rows"] / $config["per_page"];
+            $config["num_links"] = 1;//round($choice);
+
+            //styling
+            $config['full_tag_open']    = '<ul class="pagination pagination-button" id="pagination">';
+            $config['full_tag_close']   = '</ul>';            
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li>';
+            $config['last_tag_close'] = '</li>';
+            $config['use_page_numbers']  = TRUE;
+
+            $config['prev_link']        = 'Previous';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+
+            $config['next_link']        = 'Next';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+
+            $config['cur_tag_open'] = '<li class="active"><a>';
+            $config['cur_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            // $config['display_pages']    = TRUE; 
+            
+            // $config['suffix']           = '-1';
+            $this->pagination->initialize($config);
+
+            $this->data['page'] = $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $this->data['freelancer_list'] = $this->sitemap_model->get_freelancer_list($searchword,$page,$limit);
+            $this->data['links'] = $this->pagination->create_links();
+        }
+        // $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
+        $this->load->view('sitemap/sitemap_freelance_jobs', $this->data);
     }
 
     public function sitemap_member_list() {

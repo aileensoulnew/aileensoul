@@ -129,8 +129,12 @@ $route['sitemap/jobs'] = "sitemap/sitemap_jobs";
 $route['sitemap/jobs/(:any)'] = "sitemap/sitemap_jobs/$1";
 $route['sitemap/jobs/(:any)/(:num)'] = "sitemap/sitemap_jobs/$1";
 
-$route['sitemap/freelance-jobs'] = "sitemap/sitemap_inner";
-$route['sitemap/freelance-jobs/(:any)'] = "sitemap/sitemap_inner/$1";
+/*$route['sitemap/freelance-jobs'] = "sitemap/sitemap_inner";
+$route['sitemap/freelance-jobs/(:any)'] = "sitemap/sitemap_inner/$1";*/
+
+$route['sitemap/freelance-jobs'] = "sitemap/sitemap_freelance_jobs";
+$route['sitemap/freelance-jobs/(:any)'] = "sitemap/sitemap_freelance_jobs/$1";
+$route['sitemap/freelance-jobs/(:any)/(:num)'] = "sitemap/sitemap_freelance_jobs/$1";
 
 $route['sitemap/blogs'] = "sitemap/blogs";
 $route['sitemap/blogs/(:any)'] = "sitemap/blogs_category/$1";
