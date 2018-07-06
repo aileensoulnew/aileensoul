@@ -237,7 +237,11 @@ class Sitemap_model extends CI_Model {
         return $result_array['total_artist'];
     }
 
-    function get_company_list($searchword = '',$start = 0, $limit = 100){
+    function get_company_list($searchword = '',$page = 0, $limit = 100){
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $search_query = "";
         if($searchword != ""){
             $searchword = $searchword. '%';
@@ -255,7 +259,7 @@ class Sitemap_model extends CI_Model {
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql);        
         $result_array = $query->result_array();
         return $result_array;
     }
@@ -270,13 +274,16 @@ class Sitemap_model extends CI_Model {
                 LEFT JOIN ailee_business_type bt on bt.type_id = bp.business_type
                 WHERE bp.status = '1'
                 AND business_step = '4' AND bp.is_deleted = '0'". $search_query ." ORDER BY business_profile_id DESC";
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql);        
         $result_array = $query->row_array();
-        return $result_array;
+        return $result_array['total_rec'];
     }
 
 
-    function get_job_list($searchword = '',$start = 0, $limit = 100){
+    function get_job_list($searchword = '',$page = 0, $limit = 100){
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
         $search_query = "";
         if($searchword != ""){
             $searchword = $searchword. '%';
@@ -293,7 +300,7 @@ class Sitemap_model extends CI_Model {
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
-        $query = $this->db->query($sql);
+        $query = $this->db->query($sql);        
         $result_array = $query->result_array();
         return $result_array;
     }
@@ -310,8 +317,9 @@ class Sitemap_model extends CI_Model {
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
                 WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
         $query = $this->db->query($sql);
+
         $result_array = $query->row_array();
-        return $result_array;
+        return $result_array['total_rec'];
     } 
 
     function get_freelancer_list($searchword = '',$start = 0, $limit = 100){

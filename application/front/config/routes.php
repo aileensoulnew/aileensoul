@@ -115,11 +115,19 @@ $route['sitemap/artist'] = "sitemap/sitemap_artist";
 $route['sitemap/artist/(:any)'] = "sitemap/sitemap_artist/$1";
 $route['sitemap/artist/(:any)/(:num)'] = "sitemap/sitemap_artist/$1";
 
-$route['sitemap/companies'] = "sitemap/sitemap_inner";
-$route['sitemap/companies/(:any)'] = "sitemap/sitemap_inner/$1";
+/*$route['sitemap/companies'] = "sitemap/sitemap_inner";
+$route['sitemap/companies/(:any)'] = "sitemap/sitemap_inner/$1";*/
 
-$route['sitemap/jobs'] = "sitemap/sitemap_inner";
-$route['sitemap/jobs/(:any)'] = "sitemap/sitemap_inner/$1";
+$route['sitemap/companies'] = "sitemap/sitemap_companies";
+$route['sitemap/companies/(:any)'] = "sitemap/sitemap_companies/$1";
+$route['sitemap/companies/(:any)/(:num)'] = "sitemap/sitemap_companies/$1";
+
+/*$route['sitemap/jobs'] = "sitemap/sitemap_inner";
+$route['sitemap/jobs/(:any)'] = "sitemap/sitemap_inner/$1";*/
+
+$route['sitemap/jobs'] = "sitemap/sitemap_jobs";
+$route['sitemap/jobs/(:any)'] = "sitemap/sitemap_jobs/$1";
+$route['sitemap/jobs/(:any)/(:num)'] = "sitemap/sitemap_jobs/$1";
 
 $route['sitemap/freelance-jobs'] = "sitemap/sitemap_inner";
 $route['sitemap/freelance-jobs/(:any)'] = "sitemap/sitemap_inner/$1";
