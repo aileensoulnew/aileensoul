@@ -50,7 +50,7 @@ header('Expires: ' . $date);
     <?php $this->load->view('adsense'); ?>
 </head>
 
-    <body class="outer-page">
+    <body class="outer-page login-cu-page">
         <div class="main-inner">
             <header>
                 <div class="container">

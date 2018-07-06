@@ -222,9 +222,6 @@ body{
 .login-frm .login form{
     padding:16px 60px 15px
 }
-body.custom-landscape,body.outer-page{
-    padding-bottom:104px
-}
 .header-login .btn1{color: #fff;background: #1b8ab9;}
 .header-login .btn1:hover{color: #1b8ab9;background: #fff!important;}
 .modal-open .btn1:hover{color: #fff !important;border:1px solid #156f95;background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#1b8ab9),color-stop(56%,#3bb0ac),color-stop(100%,#3bb0ac))!important;background:-webkit-linear-gradient(96deg,#3bb0ac 0,#3bb0ac 44%,#1b8ab9 100%)!important;background:-o-linear-gradient(96deg,#3bb0ac 0,#3bb0ac 44%,#1b8ab9 100%)!important;background:-ms-linear-gradient(96deg,#3bb0ac 0,#3bb0ac 44%,#1b8ab9 100%)!important;background:linear-gradient(354deg,#3bb0ac 0,#1b8ab9 44%,#1b8ab9 100%)!important;}
@@ -857,7 +854,7 @@ textarea:focus::-webkit-input-placeholder{
     font-family:Arial;
     background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     -webkit-background-clip:text;
-    margin-bottom:20px
+    padding:10px 0;
 }
 .inner-form{
     width:545px;
@@ -2669,7 +2666,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .test-cus > li > a{border-radius:20px; padding:5px 20px;}
 .test-cus.drop-down .hd-profile.open a{position:relative;}
 .test-cus.drop-down .hd-profile.open a:hover{color:#fff;}
-.test-cus.drop-down .hd-profile.open > a:before{background:url('../n-images/top-arow.png'); background-size:100%; width:15px; height:9px; position:absolute; content:''; left:0; right:0; top:21px; margin:0 auto; z-index:9999;}
+.right-header .test-cus.drop-down .hd-profile .abc:before{background:url('../n-images/top-arow.png'); background-size:100%; width:15px; height:9px; position:absolute; content:''; left:0; right:0; top:21px; margin:0 auto; z-index:9999;}
 .right-header .test-cus.drop-down .hd-profile .dropdown-menu{top:27px; width:280px; right:25px; padding:0; margin-top:0;}
 .test-cus li.hd-profile .all-profile-box ul{border:0;}
 .test-cus li.hd-profile .all-profile-box{border:0; margin-bottom:0;}
@@ -3634,7 +3631,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	.tablate-main-login input:-ms-input-placeholder {color: #848484;}
 	.tablate-main-login input:-moz-placeholder {color: #848484;}
 	.test-cus.drop-down li:nth-child(3){width:30%; text-align:left;}
-	.test-cus.drop-down li.login-page{width:auto; text-align:left;}
+	.test-cus.drop-down li.login-page{display:none;}
 	.test-cus.drop-down li:nth-child(4){width:70%; text-align:right;}
 	header .logo .mob-right-bar svg{width:auto;}
 	.logo .mob-right-bar{display:block;}
@@ -3646,6 +3643,8 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	.right-header .other-hdr .test-cus .btn8{margin-top:0;}
 	.right-header .other-hdr .test-cus .btn9{margin-top:0;}
 	.test-cus.drop-down .mob-right-bar{padding-top:10px;}
+	.registeration header{padding-bottom:0;}
+	.login-cu-page header{padding-bottom:0;}
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{

@@ -1,6 +1,6 @@
 <li class="dropdown hd-profile">
 	<a href="#" class="btn4">Profiles </a>
-	<ul class="dropdown-menu">
+	<ul class="dropdown-menu abc">
 		<div class="all-profile-box">
 			<ul class="all-pr-list">
 				<li>
@@ -55,18 +55,3 @@
 		</div>
 	</ul>
 </li>
-<script>
-	$(function(){
-		$(".dropdown").hover(            
-            function() {
-                $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");                
-            },
-            function() {
-                $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-                $(this).toggleClass('open');
-                $('b', this).toggleClass("caret caret-up");                
-            });
-    });
-</script>

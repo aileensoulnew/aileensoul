@@ -1596,8 +1596,8 @@ a .audience-box:hover{background:#f6f6f6; box-shadow:0 0 2px 1px #d2d2d2;}
 .drop-blog-title{font-size:16px; line-height:1.1;}
 .blog-page .dropdown-user-detail .day-text{font-size:12px; padding-top:4px;}
 .blog-page .sub-header .sub-menu li > a i{padding-right:0; padding-left:10px; font-size:20px;}
-.blog-page .sub-header .dropdown.open::before{background:url('../n-images/top-arow.png'); width:26px; height:14px; background-position:0px 46px; border:none; z-index:99999; right:12px;}
-.blog-page .sub-header .dropdown.open .dropdown-menu{top:34px;}
+.blog-page .sub-header .dropdown.open::before{background:url('../n-images/top-arow.png'); width:26px; height:14px; background-position:0px 46px; border:none; z-index:99999; left:30px; top:28px;}
+.blog-page .sub-header .dropdown.open .dropdown-menu{top:41px;}
 .blog-page .web-header .sub-header .sub-menu li ul li{padding:1px 0; border-bottom:1px solid #d2d2d2;}
 .blog-page .web-header .sub-header .sub-menu li ul li:last-child{border-bottom:0px;}
 .blog-page .web-header .sub-header .sub-menu li ul{/*padding-left:15px;*/}
