@@ -174,7 +174,11 @@ class Sitemap_model extends CI_Model {
         return preg_replace('/-+/', '-', $string); // Removes special chars.
     }
 
-    function get_artist_list($searchword = '',$start = 0, $limit = 100){
+    function get_artist_list($searchword = '',$page = 0, $limit = 100){
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
         $search_query = "";
         if($searchword != ""){
             $searchword = $searchword. '%';
@@ -230,7 +234,7 @@ class Sitemap_model extends CI_Model {
                 . $search_query;
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
-        return $result_array;
+        return $result_array['total_artist'];
     }
 
     function get_company_list($searchword = '',$start = 0, $limit = 100){

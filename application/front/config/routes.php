@@ -108,8 +108,12 @@ $route['sitemap/people'] = "sitemap/sitemap_member";
 $route['sitemap/people/(:any)'] = "sitemap/sitemap_member/$1";
 $route['sitemap/people/(:any)/(:num)'] = "sitemap/sitemap_member/$1";
 
-$route['sitemap/artist'] = "sitemap/sitemap_inner";
-$route['sitemap/artist/(:any)'] = "sitemap/sitemap_inner/$1";
+/*$route['sitemap/artist'] = "sitemap/sitemap_inner";
+$route['sitemap/artist/(:any)'] = "sitemap/sitemap_inner/$1";*/
+
+$route['sitemap/artist'] = "sitemap/sitemap_artist";
+$route['sitemap/artist/(:any)'] = "sitemap/sitemap_artist/$1";
+$route['sitemap/artist/(:any)/(:num)'] = "sitemap/sitemap_artist/$1";
 
 $route['sitemap/companies'] = "sitemap/sitemap_inner";
 $route['sitemap/companies/(:any)'] = "sitemap/sitemap_inner/$1";
