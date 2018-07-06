@@ -13,7 +13,7 @@
 	header('Expires: ' . $date);
 	header('Cache-Control: public, max-age=30');
 ?>
-<html lang="en" ng-app="siteMapApp" ng-controller="siteMapController">
+<html lang="en">
 	<head>
 		<title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
@@ -63,46 +63,21 @@
 						<a href="<?php echo base_url().'sitemap'; ?>">Sitemap</a>
 					</h1>
 					<div class="site-box">
-						<h3>Blog Category</h3>
+						<h3><a href="<?php echo base_url('sitemap/blogs'); ?>" target="_self">Blog Category</a></h3>
 						<ul class="blog-cat">
-							<li ng-repeat="category in categoryList track by $index">
-								<a ng-href="<?php echo base_url() ?>sitemap/blogs/{{ category.name | slugify }}">{{ category.name }}</a>
-							</li>
+							<?php 
+							foreach ($categoryList as $_categoryList):
+							$slug = $this->common->clean($_categoryList['name']); ?>
+							<li>
+								<a href="<?php echo base_url().'sitemap/blogs/'.strtolower($slug); ?>"><?php echo ucwords($_categoryList['name']); ?></a>
+							</li>						
+							<?php endforeach; ?>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 		<?php echo $login_footer ?>
-		<!-- <footer class="footer">    
-			<div class="container pt20">
-				<div class="row">
-					<div class="fw text-center">
-						<ul class="footer-ul">
-							<li><a title="Login" href="#" target="_blank">Login</a></li>
-							<li><a title="Create an Account" href="#" target="_blank">Create an Account</a></li>
-							<li><a title="Job Profile" href="#" target="_blank">Job Profile</a></li>
-							<li><a title="Recruiter Profile" href="#" target="_blank">Recruiter Profile</a></li>
-							<li><a title="Freelance Profile" href="#" target="_blank">Freelance Profile</a></li>
-							<li><a title="Business Profile" href="#" target="_blank">Business Profile</a></li>
-							<li><a title="Artistic Profile" href="#" target="_blank">Artistic Profile</a></li>
-							<li><a title="About Us" href="#" target="_blank">About Us</a></li>
-							<li><a href="#" title="Terms and Condition" target="_blank">Terms and Condition</a></li>
-							<li><a href="#" title="Privacy policy" target="_blank">Privacy Policy</a></li>
-							<li><a title="Disclaimer Policy" href="#" target="_blank">Disclaimer Policy</a></li>
-							<li><a title="Contact Us" href="#" target="_blank">Contact Us</a></li>
-							<li><a title="Blog" href="#" target="_blank">Blog</a></li>
-							<li><a title="Send Us Feedback" href="#" target="_blank">Send Us Feedback</a></li>
-							<li><a title="Advertise With Us" href="#" target="_blank">Advertise With Us</a></li>
-							<li><a title="Sitemap" tabindex="0" href="#" target="_blank">Sitemap</a></li>
-						</ul>
-					</div>
-					<div class="ftr-copuright text-center pt10 pb20 fw">
-						<span>    Ⓒ 2018 | by Aileensoul </span>
-					</div>
-				</div>
-			</div>
-		</footer> -->
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?ver=<?php echo time(); ?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
@@ -112,39 +87,7 @@
 		<script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>		
 		<script type="text/javascript">
-			var base_url = "<?php echo base_url(); ?>";
-			var app = angular.module('siteMapApp', ['ui.bootstrap']);
-			app.filter('slugify', function () {
-			    return function (input) {
-			        if (!input)
-			            return;
-
-			        // make lower case and trim
-			        var slug = input.toLowerCase().trim();
-
-			        // replace invalid chars with spaces
-			        slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
-
-			        // replace multiple spaces or hyphens with a single hyphen
-			        slug = slug.replace(/[\s-]+/g, '-');
-
-			        if(slug[slug.length - 1] == "-")
-			        {            
-			            slug = slug.slice(0,-1);
-			        }
-			        return slug;
-			    };
-			});
-			app.controller('siteMapController', function ($scope, $http) {
-				$scope.categoryList = {};
-				//CATEGORY LISTING
-			  	function categoryList(){
-			  		$http.get(base_url + "blog/get_blog_cat_list").then(function (success) {
-			            $scope.categoryList = success.data;
-			        }, function (error) {});
-			  	}
-			  	categoryList();
-			});
+			var base_url = "<?php echo base_url(); ?>";			
 		</script>
 		<script>			
 			// mcustom scroll bar

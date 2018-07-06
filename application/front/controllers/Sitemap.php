@@ -164,6 +164,7 @@ class Sitemap extends CI_Controller {
         $this->data['metadesc'] = "View all blog by categories";
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data["categoryList"] = $this->sitemap_model->get_blog_cat_list();
         $this->load->view('sitemap/sitemap-blog', $this->data);
     }
 
@@ -171,12 +172,59 @@ class Sitemap extends CI_Controller {
     public function blogs_category($category = '') {        
         $this->data['login_header'] = $this->load->view('login_header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        $category = str_replace('-', ' ', $category);
-        $this->data['cate_name'] = $category;
-        $this->data['title'] = ucwords($category)." Related Blog Post | Aileensoul";
-        $this->data['metadesc'] = "Read all ".ucwords($category)." related blogs";        
-        $this->data['cate_id'] = $this->get_blog_cat_id($category);
-        $this->load->view('sitemap/sitemap-blog-inner', $this->data);
+        $this->data["categoryList"] = $this->sitemap_model->get_blog_cat_list();
+
+        if($category != ""){
+            $category = str_replace('-', ' ', $category);
+            $this->data['cate_name'] = $category;
+            $this->data['title'] = ucwords($category)." Related Blog Post | Aileensoul";
+            $this->data['metadesc'] = "Read all ".ucwords($category)." related blogs";        
+            $this->data['cate_id'] = $cate_id = $this->get_blog_cat_id($category);
+
+            $limit = 100;
+            $config = array(); 
+            $config["base_url"] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3);
+            $config["total_rows"] = $this->sitemap_model->get_blog_list_total_rec($cate_id);
+            $config["per_page"] = $limit;
+            $config["uri_segment"] = 4;
+            $choice = $config["total_rows"] / $config["per_page"];
+            $config["num_links"] = 1;//round($choice);
+
+            //styling
+            $config['full_tag_open']    = '<ul class="pagination pagination-button" id="pagination">';
+            $config['full_tag_close']   = '</ul>';            
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li>';
+            $config['last_tag_close'] = '</li>';
+            $config['use_page_numbers']  = TRUE;
+
+            $config['prev_link']        = 'Previous';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+
+            $config['next_link']        = 'Next';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+
+            $config['cur_tag_open'] = '<li class="active"><a>';
+            $config['cur_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            // $config['display_pages']    = TRUE; 
+            
+            // $config['suffix']           = '-1';
+            $this->pagination->initialize($config);
+
+            $this->data['page'] = $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $this->data['blog_list'] = $this->sitemap_model->get_blog_list($cate_id,$page,$limit);            
+            $this->data['links'] = $this->pagination->create_links();
+        }
+
+        $this->load->view('sitemap/sitemap_blog', $this->data);
     }
 
     //NEW SITEMAP INNER VIEW

@@ -416,6 +416,42 @@ class Sitemap_model extends CI_Model {
         return $result_array['total_rec'];
     }
 
+    public function get_blog_list($cateid = '', $page = '', $limit = '') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted
+                    FROM ailee_blog b
+                    WHERE b.status = 'publish'";
+        $sql .= " AND FIND_IN_SET(". $cateid .",blog_category_id) != '0'";
+        $sql .= " ORDER BY b.created_date DESC";        
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }        
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
+
+    public function get_blog_list_total_rec($cateid = '') {        
+
+        $sql = "SELECT COUNT(*) as total_rec FROM ailee_blog b WHERE b.status = 'publish'";
+        $sql .= " AND FIND_IN_SET(". $cateid .",blog_category_id) != '0'";
+        $sql .= " ORDER BY b.created_date DESC";        
+        $query = $this->db->query($sql);        
+        $result = $query->row_array();        
+        return $result['total_rec'];
+    }
+
+    // Get all category of blog list
+    public function get_blog_cat_list(){
+        $sql = "SELECT id,name FROM ailee_blog_category where status = 'publish'";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
+
     function generate_sitemap_member(){
         $sql = "SELECT u.* FROM ailee_user u
                 LEFT JOIN ailee_user_profession up on up.user_id = u.user_id

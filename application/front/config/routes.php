@@ -138,6 +138,7 @@ $route['sitemap/freelance-jobs/(:any)/(:num)'] = "sitemap/sitemap_freelance_jobs
 
 $route['sitemap/blogs'] = "sitemap/blogs";
 $route['sitemap/blogs/(:any)'] = "sitemap/blogs_category/$1";
+$route['sitemap/blogs/(:any)/(:num)'] = "sitemap/blogs_category/$1";
 
 // $route['sitemap/job-profile'] = "sitemap/job_profile";
 // $route['sitemap/recruiter-profile'] = "sitemap/recruiter_profile";
