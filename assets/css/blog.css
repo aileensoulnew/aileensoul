@@ -581,7 +581,7 @@ input:focus:-ms-input-placeholder{
     background-image:linear-gradient(to left,#6297BE 0,#B85790 70%)
 }
 .overlaay{
-    padding:15px 0;
+    padding:10px 0;
     background:rgba(0,0,0,.3)
 }
 .term_desc{
@@ -857,6 +857,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
     .load-more-blog li button{font-size: 35px;}
 }
 @media screen and (max-width:767px){
+	.overlaay{padding:5px 0;}
     .date_blog_left{
         display:none
     }

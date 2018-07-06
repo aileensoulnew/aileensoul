@@ -42,19 +42,21 @@ header('Cache-Control: public, max-age=30');
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style.css?ver=' . time()); ?>">
         <?php } ?>
+		 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
+		 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
+		
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
 
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="feedback-cus cust-outer-page ftr-page">
-        <div class="main-inner feedback">
+    <body class="report ftr-page feedback-cus">
+        <div class="middle-section middle-section-banner new-ld-page">
 
-            <div class="terms-con-cus">
-                <header class="terms-con bg-none cust-header">
-                    <div class="overlaay">
-                        <div class="container">
-                            <div class="row">
+            <header>
+					<div class="">
+						<div class="container">
+							<div class="row">
 								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
 									<?php $this->load->view('main_logo'); ?>
 								</div>
@@ -76,23 +78,19 @@ header('Cache-Control: public, max-age=30');
 									</div>
 								</div>
 							</div>
-                        </div>
-                    </div>
-                </header>
+						</div>
+					</div>
+				</header>
+			
+			<div class="search-banner cus-search-bnr" >
+				
+				<div class="container">
+					<div class="row">
+						<h1 class="text-center">Your Feedback Matters</h1>
+					</div>
+				</div>
+			</div>
 
-                <div class="container">
-                    <div class="cus-about" >
-                        <section class="">
-                            <div class="main-comtai">
-
-                                <h2 class="about-h2">YOUR &nbsp;FEEDBACK &nbsp;MATTERS</h2>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-
-            <section class="middle-main">
                 <div class="container">
                     <div class="form-pd row">
                         <div id="feedbacksucc"></div>
@@ -135,7 +133,7 @@ header('Cache-Control: public, max-age=30');
                         </div>
                     </div>
                 </div>
-            </section>
+            
 			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer ?>
         </div>

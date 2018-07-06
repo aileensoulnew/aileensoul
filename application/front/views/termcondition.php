@@ -52,12 +52,13 @@ header('Cache-Control: public, max-age=30');
 
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="custom-tp turmcon-cust outer-page ftr-page">
-        <div class="main-inner">
-            <header class="terms-con bg-none">
-                <div class="overlaay">
-                    <div class="container">
-                        <div class="row">
+    <body class="report ftr-page turmcon-cust">
+        <div class="middle-section middle-section-banner new-ld-page">
+            
+           <header>
+					<div class="">
+						<div class="container">
+							<div class="row">
 								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
 									<?php $this->load->view('main_logo'); ?>
 								</div>
@@ -79,22 +80,18 @@ header('Cache-Control: public, max-age=30');
 									</div>
 								</div>
 							</div>
-                    </div>
-                </div>
-            </header>
-            <div class="terms-con-cus">
-                <div class="container">
-                    <div class="cus-about" >
-                        <section class="">
-                            <div class="main-comtai">
-                                <!-- <h1>Terms and Conditions</h1> -->
-                                <h2 class="about-h2">Terms and Conditions</h2>
-
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
+						</div>
+					</div>
+				</header>
+			
+			<div class="search-banner cus-search-bnr" >
+				
+				<div class="container">
+					<div class="row">
+						<h1 class="text-center">Terms and Conditions</h1>
+					</div>
+				</div>
+			</div>
             <section class="middle-main bg_white">
 
 

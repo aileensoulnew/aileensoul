@@ -54,13 +54,12 @@ header('Cache-Control: public, max-age=30');
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="custom-tp privacy-cust outer-page ftr-page">
-        <div class="main-inner">
-            <div class="terms-con-cus">
-            <header class="terms-con bg-none">
-                <div class="overlaay">
-                    <div class="container">
-                        <div class="row">
+    <body class="custom-tp privacy-cust outer-page ftr-page report">
+        <div class="middle-section middle-section-banner new-ld-page">
+			<header>
+					<div class="">
+						<div class="container">
+							<div class="row">
 								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
 									<?php $this->load->view('main_logo'); ?>
 								</div>
@@ -82,21 +81,17 @@ header('Cache-Control: public, max-age=30');
 									</div>
 								</div>
 							</div>
-                    </div>
-                </div>
-            </header>
-            <div class="container">
-                <div class="cus-about" >
-            <section class="">
-                <div class="main-comtai">
-                    <!-- <h1>Terms and Conditions</h1> -->
-                    <h1 class="about-h2">Privacy Policy</h1>
-                  
-                </div>
-            </section>
-            </div>
-            </div>
-        </div>
+						</div>
+					</div>
+				</header>
+            <div class="search-banner cus-search-bnr" >
+				
+				<div class="container">
+					<div class="row">
+						<h1 class="text-center">Privacy Policy</h1>
+					</div>
+				</div>
+			</div>
             <section class="middle-main bg_white">
                 <div class="container">
                     <div class="pr-pol term_desc">

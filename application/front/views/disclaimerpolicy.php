@@ -44,50 +44,52 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
         <link rel="stylesheet" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/blog.css?ver='.time()); ?>">
 <?php } ?>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver='.time()); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()); ?>">
         
+	<script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>	
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="custom-tp cust-disclaimer about-us outer-page ftr-page">
-        <div class="main-inner">            
-            <div class="terms-con-cus">
-            <header class="terms-con bg-none cust-header">
-                <div class="overlaay">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 left-header col-xs-4 fw-479">
-                               <h2 class="logo">
-										<a href="<?php echo base_url(); ?>">
-											<svg>
-												<text class="logo-size" x="0" y="25">Aileensoul</text>
-											</svg>
-										</a>
-									</h2>
-                            </div>
-                            <div class="col-md-6 col-sm-6 right-header col-xs-8 fw-479">
-                                <div class="btn-right">
-                                <?php if(!$this->session->userdata('aileenuser')) {?>
-                                    <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-                                    <a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a>
-                                    <?php }?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            
-            <div class="container">
-                <div class="cus-about" >
-            <section class="">
-                <div class="main-comtai">
-                    <!-- <h1>Terms and Conditions</h1> -->
-                    <h2 class="about-h2">Disclaimer Policy</h2>
-<!--                     <p class="about-para" >We provide platform & opportunities to every person in the world to make their career.</p> -->
-                </div>
-            </section>
-            </div>
-            </div>
-        </div>
+    <body class="report ftr-page">
+        <div class="middle-section middle-section-banner new-ld-page">            
+            <header>
+					<div class="">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+									<?php $this->load->view('main_logo'); ?>
+								</div>
+								<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+									<div class="btn-right other-hdr">
+										<?php if (!$this->session->userdata('aileenuser')) { ?>
+											<ul class="nav navbar-nav navbar-right test-cus drop-down">
+												<?php $this->load->view('profile-dropdown'); ?>
+												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
+												<li class="mob-bar-li">
+													<span class="mob-right-bar">
+														<?php $this->load->view('mobile_right_bar'); ?>
+													</span>
+												</li>
+											
+											</ul>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+			
+			<div class="search-banner cus-search-bnr" >
+				
+				<div class="container">
+					<div class="row">
+						<h1 class="text-center">Disclaimer Policy</h1>
+					</div>
+				</div>
+			</div>
             <section class="middle-main bg_white">
                 <div class="container">
                     <div class="term_desc test_py">
@@ -110,7 +112,7 @@ if(IS_OUTSIDE_CSS_MINIFY == '0'){
                 </div>
             </section>
         </div>
-
+		<?php $this->load->view('mobile_side_slide'); ?>
        <?php echo $login_footer ?>
     </body>
 </html>

@@ -55,47 +55,46 @@ header('Cache-Control: public, max-age=30');
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="main-db add-with-us">
-        <div class="web-header">
-            <header class="custom-header">
-                <div class="header animated fadeInDownBig">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
-								<?php $this->load->view('main_logo'); ?>
-                            </div>
-                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
-                                <div class="btn-right">
-                                <?php if(!$this->session->userdata('aileenuser')) {?>
-									<ul class="nav navbar-nav navbar-right test-cus drop-down">
-										<?php $this->load->view('profile-dropdown'); ?>
-										<li><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
-										<li><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
-										<li class="mob-bar-li">
-											<span class="mob-right-bar">
-												<?php $this->load->view('mobile_right_bar'); ?>
-											</span>
-										</li>
-									
-									</ul>
-                                <?php }?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <body class="report ftr-page add-with-us">
+        <div class="middle-section middle-section-banner new-ld-page">
+            <header>
+					<div class="">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+									<?php $this->load->view('main_logo'); ?>
+								</div>
+								<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+									<div class="btn-right other-hdr">
+										<?php if (!$this->session->userdata('aileenuser')) { ?>
+											<ul class="nav navbar-nav navbar-right test-cus drop-down">
+												<?php $this->load->view('profile-dropdown'); ?>
+												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
+												<li class="mob-bar-li">
+													<span class="mob-right-bar">
+														<?php $this->load->view('mobile_right_bar'); ?>
+													</span>
+												</li>
+											
+											</ul>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+			
+			<div class="search-banner cus-search-bnr" >
+				
+				<div class="container">
+					<div class="row">
+						<h1 class="text-center">Promote Your Business With Aileensoul</h1>
+					</div>
+				</div>
+			</div>
 
-            </header>
-
-        </div>
-
-
-        <div class="middle-section">
-
-            <div class="add-banner">
-                <img src="<?php echo base_url('assets/n-images/add-with-us.jpg') ?>" alt="Advertise With Us">
-                <h1>Promote Your Business With Aileensoul</h1>
-            </div>
             <div class="container">
                 <div class="add-content">
                     <div class="fw p20">

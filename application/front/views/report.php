@@ -41,8 +41,7 @@
 </head>
 	<body class="report ftr-page">
 		<div class="middle-section middle-section-banner new-ld-page">
-			<div class="search-banner cus-search-bnr" >
-				<header>
+			<header>
 					<div class="">
 						<div class="container">
 							<div class="row">
@@ -70,6 +69,9 @@
 						</div>
 					</div>
 				</header>
+			
+			<div class="search-banner cus-search-bnr" >
+				
 				<div class="container">
 					<div class="row">
 						<h1 class="text-center">Report Spam</h1>

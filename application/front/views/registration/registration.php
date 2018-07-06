@@ -42,6 +42,8 @@ header("Pragma: no-cache"); // HTTP/1.0
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/common-style.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
         <?php } ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
 
         
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
@@ -54,16 +56,27 @@ header("Pragma: no-cache"); // HTTP/1.0
             <header>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 left-header col-xs-4 fw-479">
-                            <?php $this->load->view('main_logo'); ?>
-                        </div>
-                        <div class="col-md-6 col-sm-6 right-header col-xs-8 fw-479">
-                            <div class="btn-right">
-                                <a href="<?php echo base_url('login'); ?>" class="btn2">Login</a>
-                  <!--              <a href="<?php echo base_url('registration'); ?>" class="btn3">creat an account</a>-->
+                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+								<?php $this->load->view('main_logo'); ?>
+                            </div>
+                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+                                <div class="btn-right">
+                                <?php if(!$this->session->userdata('aileenuser')) {?>
+									<ul class="nav navbar-nav navbar-right test-cus drop-down">
+										<?php $this->load->view('profile-dropdown'); ?>
+										<li><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										
+										<li class="mob-bar-li">
+											<span class="mob-right-bar">
+												<?php $this->load->view('mobile_right_bar'); ?>
+											</span>
+										</li>
+									
+									</ul>
+                                <?php }?>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </header>
             <section class="middle-main">
@@ -186,6 +199,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 
             
         </div>
+		<?php $this->load->view('mobile_side_slide'); ?>
 		<?php
             echo $login_footer
             ?>
