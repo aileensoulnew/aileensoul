@@ -18,6 +18,8 @@
          <link rel="stylesheet" href="<?php echo base_url('assets/css_min/common-style.css?ver='.time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css_min/style-main.css?ver='.time()) ?>">
         <?php }?>
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver='.time()) ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()) ?>">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <?php $this->load->view('adsense'); ?>
 </head>

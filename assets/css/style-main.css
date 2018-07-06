@@ -2666,7 +2666,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .test-cus > li > a{border-radius:20px; padding:5px 20px;}
 .test-cus.drop-down .hd-profile.open a{position:relative;}
 .test-cus.drop-down .hd-profile.open a:hover{color:#fff;}
-.right-header .test-cus.drop-down .hd-profile .abc:before{background:url('../n-images/top-arow.png'); background-size:100%; width:15px; height:9px; position:absolute; content:''; left:0; right:0; top:21px; margin:0 auto; z-index:9999;}
+.right-header .test-cus.drop-down .hd-profile .all-profile-box:before{background:url('../n-images/top-arow.png'); background-size:100%; width:15px; height:9px; position:absolute; content:''; right:30px; top:-7px; margin:0 auto; z-index:9999;}
 .right-header .test-cus.drop-down .hd-profile .dropdown-menu{top:27px; width:280px; right:25px; padding:0; margin-top:0;}
 .test-cus li.hd-profile .all-profile-box ul{border:0;}
 .test-cus li.hd-profile .all-profile-box{border:0; margin-bottom:0;}
@@ -2679,14 +2679,17 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .other-hdr .test-cus.drop-down li.hd-profile a:hover{color:#5c5c5c;}
 .other-hdr .test-cus.drop-down li.hd-profile a:focus{color:#5c5c5c !important;}
 .right-header ul.test-cus li{border-right:0; margin-bottom:0;}
+.right-header ul.test-cus li:nth-last-child(2){padding-right:0;}
 .right-header ul li .all-profile-box li{padding:0;}
 .dropdown.hd-profile .dropdown-menu::before{display:none;}
 .right-header .hd-profile.open .dropdown-menu{margin-top:0;}
 .right-header .other-hdr .test-cus li a{color:#5c5c5c; letter-spacing:0;}
 .right-header .other-hdr .test-cus .btn8{border:2px solid #5c5c5c; margin-top:-2px; background:#5c5c5c; color:#fff;}
 .right-header .other-hdr .test-cus .btn8:hover{background:none; color:#5c5c5c;}
+.right-header .other-hdr .test-cus .btn8:focus{background:none !important; color:#5c5c5c !important;}
 .right-header .other-hdr .test-cus .btn9{border:2px solid #5c5c5c; background:none; color:#5c5c5c; margin-top:-2px;}
 .right-header .other-hdr .test-cus .btn9:hover{background:#5c5c5c; color:#fff;}
+.right-header .other-hdr .test-cus .btn9:focus{background:#5c5c5c !important; color:#fff !important;}
 .other-hdr .mob-bar-li svg path{fill:#5c5c5c;}
 .mob-side-menu.mob-side-hdr .all-profile-box{padding-top:0;}
 .mob-side-menu.mob-side-hdr .cbp-spmenu-vertical{padding-bottom:0;}
@@ -2695,10 +2698,12 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .right-header ul li.hd-profile .btn4:focus{color:#fff !important; background:none !important;}
 .right-header .test-cus > li > a.btn2{color:#1b8ab9; margin:0; border:2px solid #fff; margin-top:-2px; background:#fff;}
 .about-us .right-header .test-cus > li > a.btn2{color:#5c5c5c;}
+.about-us .right-header .test-cus > li > a.btn2:focus{color:#fff !important;background:none !important;}
 .right-header .test-cus > li > a.btn2:hover{color:#fff; background:none;}
 .right-header .test-cus > li > a.btn3{color:#fff; background:none; margin:0; border:2px solid #fff; margin-top:-2px;}
 .test-cus > li > a.btn3:hover{color:#1b8ab9; background:#fff;}
 .about-us .test-cus > li > a.btn3:hover{color:#5c5c5c;}
+.about-us .test-cus > li > a.btn3:focus{color:#5c5c5c !important;}
 .right-header ul li.mob-bar-li{padding:0;}
 .test-cus.drop-down{padding-top:5px !important; padding-bottom:2px;}
 .mob-side-menu.mob-side-hdr .cbp-spmenu-vertical{z-index:10000;}
@@ -3630,9 +3635,9 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	.tablate-main-login input::-moz-placeholder {color: #848484;}
 	.tablate-main-login input:-ms-input-placeholder {color: #848484;}
 	.tablate-main-login input:-moz-placeholder {color: #848484;}
-	.test-cus.drop-down li:nth-child(3){width:30%; text-align:left;}
+	.test-cus.drop-down li:nth-child(2){width:30%; text-align:left;}
 	.test-cus.drop-down li.login-page{display:none;}
-	.test-cus.drop-down li:nth-child(4){width:70%; text-align:right;}
+	.test-cus.drop-down li:nth-child(3){width:70%; text-align:right;}
 	header .logo .mob-right-bar svg{width:auto;}
 	.logo .mob-right-bar{display:block;}
 	.test-cus.drop-down li.mob-bar-li{position:absolute; right:15px; top:-36px;}

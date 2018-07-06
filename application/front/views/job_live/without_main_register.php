@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/animate.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
@@ -23,23 +24,51 @@
 </head>
     <body class="profile-main-page without-reg ftr-page">        
         <div class="middle-section middle-section-banner new-ld-page">
-            <div class="search-banner" >
-                <header>
+			<header>
                     <div class="header">
                         <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 left-header">
-                                    <?php $this->load->view('main_logo'); ?>
-                                </div>
-                                <div class="col-md-6 col-sm-6 no-login-right fw-479">
-                                    <a href="<?php echo base_url(); ?>login" class="btn8">Login</a>
-                                    <a href="<?php echo base_url(); ?>job-profile/create-account" class="btn9">Create Job Profile</a>
-                                </div>
-                            </div>
+							<div class="row">
+								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+									<?php $this->load->view('main_logo'); ?>
+								</div>
+								<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+									<div class="btn-right other-hdr">
+										<?php if (!$this->session->userdata('aileenuser')) { ?>
+											<ul class="nav navbar-nav navbar-right test-cus drop-down">
+												<?php $this->load->view('profile-dropdown'); ?>
+												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+												<li><a href="<?php echo base_url(); ?>job-profile/create-account" class="btn9">Create Job Profile</a></li>
+												<li class="mob-bar-li">
+													<span class="mob-right-bar">
+														<?php $this->load->view('mobile_right_bar'); ?>
+													</span>
+												</li>
+											
+											</ul>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+                            
                         </div>
                     </div>
                 </header>
+            <div class="search-banner" >
+                <div class="ld-sub-header">
+						<div class="container">
+							<ul>
+								<li><a href="#">Job Profile</a></li>
+								<li><a href="#">Job by Category</a></li>
+								<li><a href="#">Job by Skills</a></li>
+								<li><a href="#">Job by Designation</a></li>
+								<li><a href="#">Job by Company</a></li>
+								<li><a href="#">Job by Location</a></li>
+							</ul>
+						</div>
+					</div>
                 <div class="container">
+					
+					<div class="bnr-cus-sec">
                     <div class="row">
                         <div class="col-lg-6 col-md-7" ><!--  -->
                             <div class="search-bnr-text">
@@ -85,7 +114,8 @@
                             <img src="<?php echo base_url('assets/n-images/job-bnr.png?ver=' . time()) ?>">
                         </div>
                     </div>
-                </div>
+					</div>
+				</div>
             </div>
 
             <div class="job-cat-lp" >
