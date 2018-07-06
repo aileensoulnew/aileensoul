@@ -14,7 +14,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
 ?>
-<html lang="en" ng-app="blogDetailApp" ng-controller="blogDetailController">
+<html lang="en"><!--  ng-app="blogDetailApp" ng-controller="blogDetailController"> -->
     <head>
         <!-- <title><?php //echo $blog_detail[0]['title']; ?> - Aileensoul</title> -->
         <title><?php echo $title; ?></title>
@@ -89,8 +89,8 @@ header("Pragma: no-cache"); // HTTP/1.0
     <?php }else{?>
         <body class="blog-page blog-d">
     <?php }?>	
-    <?php $this->load->view('page_loader'); ?>
-    <div id="main_page_load" style="display: none;">
+    <?php //$this->load->view('page_loader'); ?>
+    <div id="main_page_load">
         <div class="main-inner">
             <div class="web-header">
 	            <header class="custom-header">
@@ -142,117 +142,137 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     ?>
                                     </li>
                                     <li class="dropdown">
-    							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
-    							</a>
-    							<div class="dropdown-menu">
-    								<div class="dropdown-title">
-    									Recent Post <a href="<?php echo base_url(); ?>blog" class="pull-right">See All</a>
-    								</div>
-    								<div class="content custom-scroll">
-    									<ul class="dropdown-data msg-dropdown">
-                                            <li ng-repeat="blog in recentBlogList">
-                                                <a target="_blank" ng-href="<?php echo base_url(); ?>blog/{{ blog.blog_slug }}">
-                                                    <div class="dropdown-database">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}" alt="{{ blog.image }}">
-                                                        </div>
-                                                        <div class="dropdown-user-detail">
-                                                            <p class="drop-blog-title">{{ blog.title }}</p>
-                                                                <span class="day-text">{{ blog.created_date_formatted }}</span>
-                                                        </div> 
-                                                    </div>
-                                                </a> 
-                                            </li>
-    									</ul>
-    								</div>
-    							</div>
-    						</li>
-                            <li class="dropdown">
-    							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
-    							<div class="dropdown-menu">
-    								<ul class="content custom-scroll">
-                                        <li class="category" ng-repeat="category in categoryList track by $index">
-                                            <a ng-href="<?php echo base_url() ?>blog/category/{{ category.name | slugify }}" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
-                                                {{ category.name }}
-                                            </a>
-                                        </li>
-    								</ul>
-    							</div>
-    						</li>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Post
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-title">
+                                                Recent Post <a href="<?php echo base_url() ?>blog" class="pull-right">See All</a>
+                                            </div>
+                                            <div class="content custom-scroll">
+                                                <ul class="dropdown-data msg-dropdown">
+                                                    <?php
+                                                    if(isset($recent_blog_list) && !empty($recent_blog_list)):
+                                                        foreach($recent_blog_list as $_recent_blog_list): ?>
+                                                    <li>
+                                                        <a href="<?php echo base_url().'blog/'.$_recent_blog_list['blog_slug']; ?>">
+                                                            <div class="dropdown-database">
+                                                                <div class="post-img">
+                                                                    <img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_recent_blog_list['image']; ?>" alt="<?php echo $_recent_blog_list['image']; ?>">
+                                                                </div>
+                                                                <div class="dropdown-user-detail">
+                                                                    <p class="drop-blog-title">
+                                                                        <?php echo $_recent_blog_list['title']; ?>
+                                                                    </p>
+                                                                    <span class="day-text">
+                                                                        <?php echo $_recent_blog_list['created_date_formatted']; ?>
+                                                                    </span>
+                                                                </div> 
+                                                            </div>
+                                                        </a> 
+                                                    </li>
+                                                    <?php
+                                                        endforeach;
+                                                    endif; ?>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
+                                        <div class="dropdown-menu">
+                                            <ul class="content custom-scroll">
+                                                <?php
+                                                if(isset($categoryList) && !empty($categoryList)):
+                                                    foreach($categoryList as $_categoryList):
+                                                    $category_url = $this->common->clean($_categoryList['name']);
+                                                     ?>
+                                                    <li class="category <?php echo ($category_id == $_categoryList['id'] ? 'active' : '');?>">
+                                                        <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
+                                                            <?php echo ucwords($_categoryList['name']); ?>
+                                                        </a>
+                                                    </li><?php
+                                                    endforeach;
+                                                endif;?>
+                                            </ul>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-sm-6 col-md-6 col-xs-4 blog-search fw-479">
-            					<div class="job-search-box1 clearfix hidden-479">        
-            						<form action="<?php echo base_url;?>blog" method="get">
-            							<fieldset class="sec_h2 ">
-            								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
-            								<i class="fa fa-search" aria-hidden="true"></i>
-            							</fieldset>
-										
-            						</form>   
-            					</div>
-								<div class="clearfix block-479">        
-            						<form action="<?php echo base_url;?>blog" method="get">
-            							
-										<fieldset>
-            								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
-            								
-            							</fieldset>
-            						</form>   
-            					</div>
-    				        </div>  
+                                <div class="job-search-box1 clearfix hidden-479">        
+                                    <form action="<?php echo base_url().'blog';?>" method="get" onsubmit="return formCheckMain()">
+                                        <fieldset class="sec_h2 ">
+                                            <input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text" value="<?php echo $search_keyword; ?>">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </fieldset>
+                                        
+                                    </form>   
+                                </div>
+                                <div class="clearfix block-479">        
+                                    <form action="<?php echo base_url().'blog';?>" method="get" onsubmit="return formCheckMob()">
+                                        <fieldset>
+                                            <input id="res_tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text" value="<?php echo $search_keyword; ?>" required>
+                                        </fieldset>
+                                    </form>   
+                                </div>
+                            </div>  
                         </div>
                     </div>
                 </div>
             </div>
-        	<div id="paddingtop_fixed" class="user-midd-section angularsection hidden">
+        	<div id="paddingtop_fixed" class="user-midd-section">
 	    		<div class="container">
-	    			<div class="custom-user-list pt20" ng-repeat="blog in blogDetails track by $index">
+	    			<div class="custom-user-list pt20">
 	    				<div class="blog-user-detail">
 	    					<div class="user-img">
-								<img ng-src="<?php echo base_url(); ?>assets/n-images/{{ blog.name }}.jpg">
+								<img src="<?php echo base_url().'assets/n-images/'.$blog_data['name'].'.jpg'; ?>">
 	    					</div>
 							<div class="user-detail-left">
-								<p class="pt20">{{ blog.name }}</p>
-								<p>{{ blog.created_date_formatted }}</p>
+								<p class="pt20"><?php echo $blog_data['name']; ?></p>
+								<p><?php echo $blog_data['created_date_formatted']; ?></p>
 								<p>
-									<img class="hidden-639" src="<?php echo base_url(); ?>assets/n-images/comment.png" class="pr5">{{ blog.total_comment }} <span class="block-639"> Comment</span>
+									<img class="hidden-639" src="<?php echo base_url(); ?>assets/n-images/comment.png" class="pr5"><?php echo $blog_data['total_comment']; ?> <span class="block-639"> Comment</span>
 								</p>
 							
 								<ul class="social-icon">
 									<li>
-										<a target="_blank" class="fbk" id="facebook_link" url_encode="{{ blog.social_encodeurl }}" url="{{ blog.social_url}}" title="Facebook" summary="{{ blog.social_summary }}" image="{{ social_image }}">
+										<a target="_blank" class="fbk" id="facebook_link" url_encode="<?php echo $blog_data['social_encodeurl']; ?>" url="<?php echo $blog_data['social_url']; ?>" title="Facebook" summary="<?php echo $blog_data['social_summary']; ?>" image="<?php echo $blog_data['social_image']; ?>">
 											<i class="fa fa-facebook-f"></i>
 										</a>
 									</li>
-									<li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="{{ blog.url_encode }}" url="{{ blog.url }}"><i class="fa fa-twitter"></i></a></li>
-									<li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-linkedin"></i></a></li>
-									<li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-google"></i></a></li>
+									<li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="<?php echo $blog_data['url_encode']; ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-twitter"></i></a></li>
+									<li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="<?php echo $blog_data['encode_url']; ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="<?php echo $blog_data['encode_url']; ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-google"></i></a></li>
 								</ul>
 							</div>
 	    				</div>
 	    				<div class="blog-detail">
 	    					<div class="blog-box">
 	    						<div class="blog-left-content blog-detail-top">
-	    							<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
+	    							<a href="<?php echo base_url().'blog/'.$blog_data['blog_slug']; ?>">
 		    							<p class="blog-details-cus">
-		    								<a ng-href="<?php echo base_url() ?>blog/category/{{ cat_name | slugify}}" ng-repeat="cat_name in blog.blog_category_name track by $index">
-		                                        <span class="cat text-capitalize" ng-if="($index == 0)">
-		                                            {{ cat_name }}
-		                                        </span> 
-		                                        <span class="cat text-capitalize" ng-if="($index > 0)">
-		                                            , {{ cat_name }}
-		                                        </span> 
+                                            <?php foreach($blog_data['blog_category_name'] as $k=>$v):
+                                                $category_url = $this->common->clean($v); ?>
+		    								<a href="<?php echo base_url().'blog/category/'.$category_url; ?>">
+                                                <span class="cat text-capitalize">
+                                                <?php
+                                                if($key == 0)
+                                                    echo $val;
+                                                if($key > 0)
+                                                    echo ", ".$val; ?>
+		                                        </span> 		                                        
 		                                    </a>
+                                            <?php endforeach; ?>
 		    								<!-- <span class="cat">{{ blog.category_name }}</span> --> 
 		    							</p>
-		    							<h3>{{ blog.title }}</h3>
+		    							<h3><?php echo $blog_data['title']; ?></h3>
 	    							</a>	    							
 	    						</div>
 	    						<div class="blog-left-img">
-	    							<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
+	    							<img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$blog_data['image']; ?>">
 	    						</div>
-	    						<div class="blog-left-content" ng-bind-html="blog.description | unsafe">   						
+	    						<div class="blog-left-content">
+                                    <?php echo $blog_data['description']; ?>
 	    						</div>
 	    					</div>
 	    					<div class="">
@@ -293,51 +313,65 @@ header("Pragma: no-cache"); // HTTP/1.0
 	                                <h3>You may also like</h3>
 	    						</div>
 	    						<div class="row pt20">
-	    							<div class="col-md-4 col-sm-12" ng-repeat="post in blog.related_post">
+                                    <?php
+                                    if(isset($blog_data['related_post']) && !empty($blog_data['related_post'])):
+                                        foreach($blog_data['related_post'] as $related_post): ?>
+	    							<div class="col-md-4 col-sm-12">
 	    								<div class="also-like-box">
 											<div class="rec-img">
-												<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
-	    											<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ post.image }}">
+												<a href="<?php echo base_url().'blog/'.$related_post['blog_slug']; ?>">
+	    											<img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$related_post['image']; ?>">
 												</a>
 											</div>
 											<div class="also-like-bottom">
-												<a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ cat_name | slugify }}" ng-repeat="cat_name in post.blog_category_name track by $index">
-													<span class="cat text-capitalize" ng-if="($index == 0)">
-														{{ cat_name }}
-													</span> 
-													<span class="cat text-capitalize" ng-if="($index > 0)">
-														, {{ cat_name }}
-													</span> 
-												</a>
+                                                <?php foreach($related_post['blog_category_name'] as $k=>$v):
+                                                $category_url = $this->common->clean($v); ?>
+                                                <a href="<?php echo base_url().'blog/category/'.$category_url; ?>">
+                                                    <span class="cat text-capitalize">
+                                                    <?php
+                                                    if($key == 0)
+                                                        echo $val;
+                                                    if($key > 0)
+                                                        echo ", ".$val; ?>
+                                                    </span>
+                                                </a>
+                                                <?php endforeach; ?>
+												
 												<!-- <span class="onelinetext" title="{{ post.category_name}}">
 													{{ post.category_name}}
 												</span> -->
 												<p>
-													<a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ post.blog_slug }}">
-														{{ post.title }}
+													<a href="<?php echo base_url().'blog/'.$related_post['blog_slug']; ?>">
+                                                        <?php echo $related_post['title']; ?>
 													</a> 
 												</p>
 											</div>
 											<div class="clearfix"></div>
 	    								</div>
 	    							</div>
+                                <?php endforeach;
+                                    endif; ?>
 	    						</div>
 	    					</div>
-	    					<div class="all-comments fw" ng-show="(blog.all_comment).length">
+                            <?php
+                            if(isset($blog_data['all_comment']) && !empty($blog_data['all_comment'])):?>
+	    					<div class="all-comments fw">
 	    						<div class="center-title">
 	                                <h3>All Comments</h3>
 	    						</div>
-	    						<div class="comment-box" ng-repeat="comment in blog.all_comment">
-	    							<div class="comment-img">
-	    								<!-- <img ng-src="<?php //echo base_url($this->config->item('blog_main_upload_path')); ?>{{ comment.image }}"> -->
+                                <?php foreach($blog_data['all_comment'] as $all_comment): ?>
+	    						<div class="comment-box">
+	    							<div class="comment-img">	    								
 	    							</div>
 	    							<div class="comment-text">
-	    								<h4>{{ comment.name }}</h4>
-	    								<span>{{ comment.created_date_formatted }}</span>
-	    								<p>{{ comment.message }}</p>
+	    								<h4><?php echo $all_comment['name']; ?></h4>
+	    								<span><?php echo $all_comment['created_date_formatted']; ?></span>
+	    								<p><?php echo $all_comment['message']; ?></p>
 	    							</div>
 	    						</div>
+                                <?php endforeach; ?>
 	    					</div>
+                            <?php endif; ?>
 	    					<div class="leave-reply fw">
 	    						<div class="center-title">
 	                                <h3>Leave a reply</h3>
@@ -373,26 +407,25 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    				</div>
 	    			</div>
 	    			<div class="right-part">
-                        <div class="subscribe-box" ng-show="subscribe_visibility">
-                            <h4>Subscribe to Our Newslatter</h4>
-                            <input type="text" class="form-control" placeholder="Enter your email id" ng-model="subscribe_email">
-                            <h6 class="small" style="color: red;" ng-show="error_subscribe_visiblity">{{ error_subscribe_text }}</h6>
-                            <a class="btn1" href="javascript:void(0)" ng-click="addsubscribe();">Subscribe</a>
-                            <h6 class="small" style="color: red;">{{ ajax_error_text }}</h6>
-                        </div>
-                        <div class="subscribe-box" ng-hide="subscribe_visibility">
-                            <h4>Your email id subscribe successfully.</h4>
-                        </div>
+                        <form id="subscribe_form" name="subscribe_form" method="post" action="javascript:void(0);">
+                            <div id="subscribe-form" class="subscribe-box">
+                                <h4>Subscribe to Our Newslatter</h4>
+                                <input type="text" class="form-control" placeholder="Enter your email id" name="subscribe_email" id="subscribe_email" maxlength="100">
+                                <button class="btn1" type="submit">Subscribe</button>
+                                <h6 class="small" style="color: red;display: none;" id="error_subscribe"></h6>
+                            </div>
+                            <div id="subscribe-done" class="subscribe-box" style="display: none;">
+                                <h4>Your email id subscribe successfully.</h4>
+                            </div>
+                        </form>
                     </div>
 	    		</div>	    		
 	    	</div>
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
-            <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
-            <script src="<?php echo base_url('assets/js_min/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
-            <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <?php
             echo $login_footer
         ?>
@@ -416,36 +449,112 @@ header("Pragma: no-cache"); // HTTP/1.0
 	        var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
 	        var title = '<?php echo $title; ?>';
 	        var header_all_profile = '<?php echo $header_all_profile; ?>';
-	        var blog_slug = '<?php echo $this->uri->segment(2); ?>';
-	        var app = angular.module('blogDetailApp', ['ui.bootstrap']);
-            app.filter('slugify', function () {
-                return function (input) {
-                    if (!input)
-                        return;
-                    // make lower case and trim
-                    var slug = input.toLowerCase().trim();
-
-                    // replace invalid chars with spaces
-                    slug = slug.replace(/[^a-z0-9\s-]/g, ' ');
-
-                    // replace multiple spaces or hyphens with a single hyphen
-                    slug = slug.replace(/[\s-]+/g, '-');
-
-                    if(slug[slug.length - 1] == "-")
-                    {            
-                        slug = slug.slice(0,-1);
-                    }
-                    return slug;
-                };
-            });
+	        var blog_slug = '<?php echo $this->uri->segment(2); ?>';	        
+            
             $(window).on("load",function(){
                 $(".custom-scroll").mCustomScrollbar({
                     autoHideScrollbar:true,
                     theme:"minimal"
-                });        
+                });
             });
+            $(document).ready(function(){
+            $("#subscribe_form").validate({
+                rules: {
+                    subscribe_email: {
+                        required: true,
+                        email : true,
+                        maxlength: 100
+                    },                        
+                },
+                messages:
+                {                        
+                    subscribe_email: {
+                        required: "Please enter email address",
+                        email: "Please enter valid email address",
+                        maxlength: "Maxumum 100 allow for email address"
+                    },                      
+
+                },
+                errorElement : 'h6',
+                submitHandler: function (form) {                        
+                    $.ajax({
+                        type: 'POST',
+                        url: base_url + "blog/add_subscription",
+                        data: {email: $("#subscribe_email").val()},
+                        dataType: "json",
+                        beforeSend: function () {
+                            $('#loader').show();
+                        },
+                        complete: function () {
+                            $('#loader').hide();
+                        },
+                        success: function (data) {                                
+                            if(data.success == true)
+                            {
+                                $("#subscribe_form")[0].reset();
+                                $("#subscribe-done").show();
+                                $("#subscribe-form").hide();
+                            }
+
+                            if(data.success == false)
+                            {
+                                $("#error_subscribe").show();
+                                $("#error_subscribe").text(data.message);
+                                setTimeout(function(){
+                                    $("#error_subscribe").hide();
+                                    $("#error_subscribe").text("");
+                                },5000)
+                            }
+
+                            if(data.error == true)
+                            {
+                                $("#error_subscribe").show();
+                                $("#error_subscribe").text(data.message);
+                                setTimeout(function(){
+                                    $("#error_subscribe").text("");
+                                    $("#error_subscribe").hide();
+                                },5000)
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        // Social media click
+$(document).on("click", '#google_link', function(event) { 
+    var  url = $(this).attr('url_encode');
+    window.open('https://plus.google.com/share?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+});
+
+$(document).on("click", '#linked_link', function(event) { 
+    var  url = $(this).attr('url_encode');
+    window.open('https://www.linkedin.com/cws/share?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+});
+
+$(document).on("click", '#twitter_link', function(event) { 
+    var  url = $(this).attr('url_encode');
+    window.open('https://twitter.com/intent/tweet?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+});
+
+$(document).on("click", '#facebook_link', function(event) { 
+    var url = $(this).attr('url');
+    var url_encode = $(this).attr('url_encode');
+    var title = $(this).attr('title');
+    var summary = $(this).attr('summary');
+    var image = $(this).attr('image');
+
+    $.ajax({
+        type: 'POST',
+        url: 'https://graph.facebook.com?id=' + url + '&scrape=true',
+        success: function (data) {
+            console.log(data);
+        }
+
+    });
+    window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + summary + '&p[url]=' + url_encode + '&p[images][0]=' + image + '', 'sharer', 'toolbar=0,status=0,width=620,height=280');
+});
         </script>
-        <script src="<?php echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script> -->
         <?php /* if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="<?php echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
         <?php } else { ?>

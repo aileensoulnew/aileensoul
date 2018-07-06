@@ -51,27 +51,16 @@ class Blog extends CI_Controller {
             if($count == 1){
             //FOR GETTING ALL DATA
             $condition_array = array('status' => 'publish');
-            $this->data['blog_all'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());
+            $this->data['blog_all'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = '', $offset = '', $join_str = array());
 
+            // echo count($this->data['blog_all']);exit;
             //FOR GETTING BLOG
             $condition_array = array('status' => 'publish', 'blog_slug' => $slug);
             $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());
             // echo $this->db->last_query();
             // exit;
 
-            $blogid = $this->data['blog_detail'][0]['id'];
-            $relatedid = explode(',',$this->data['blog_detail'][0]['blog_related_id']); 
-            foreach($relatedid as $id){
-                $condition_array = array('status' => 'publish', 'id' => $id);
-                $blogs[] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());
-            }
-
-            $this->data['rand_blog'] = array_reduce($blogs, 'array_merge', array()); 
-            //FOR GETTING 5 LAST DATA
-            $condition_array = array('status' => 'publish');
-            $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
-            //random blog
-            
+            $this->data['blog_data'] = $this->blog_model->get_blog_details($slug);
             // random blog end
             $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
             $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
@@ -802,7 +791,7 @@ class Blog extends CI_Controller {
         $query = $this->db->query($sql);
         $result = $query->result_array();
         if(count($result) > 0){
-            $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where blog_id = '". $result[0]['id'] ."'";
+            $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where status = 'approve' AND blog_id = '". $result[0]['id'] ."'";
             $query = $this->db->query($sql);
             $result[0]['total_comment'] = $query->row()->total_comment;
 

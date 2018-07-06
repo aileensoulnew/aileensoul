@@ -59,7 +59,7 @@ class Blog_Model extends CI_Model {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
-        
+
         $sql_condition = "";
         if($searchword != ""){ 
             $search_split = explode(" ",$searchword);
@@ -117,6 +117,45 @@ class Blog_Model extends CI_Model {
         $sql = "SELECT id,name FROM ailee_blog_category where status = 'publish'";
         $query = $this->db->query($sql);
         $result = $query->result_array();
+        return $result;
+    }
+
+    public function get_blog_details($blog_slug = ""){        
+        $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(DISTINCT(bc.name)) as category_name
+            FROM ailee_blog b, ailee_blog_category bc 
+            WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) and
+            blog_slug = '". $blog_slug ."' 
+            GROUP BY b.blog_category_id ORDER BY `id` DESC";
+        $query = $this->db->query($sql);
+        $result = $query->row_array();
+        if(count($result) > 0){
+            $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where status = 'approve' AND blog_id = '". $result['id'] ."'";
+            $query = $this->db->query($sql);
+            $result['total_comment'] = $query->row()->total_comment;
+
+            $result['social_title'] = urlencode('"' . $result['title'] . '"');
+            $result['social_encodeurl'] = urlencode(base_url('blog/' . $result['blog_slug']));
+            $result['social_summary'] = urlencode('"' . $result['description'] . '"');
+            $result['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $result['image']));
+            $result['social_url'] = base_url('blog/' . $result['blog_slug']);
+
+            $sql = "SELECT b.*,DATE_FORMAT(b.created_date,'%D %M %Y') as created_date_formatted, GROUP_CONCAT(DISTINCT(bc.name)) as category_name
+                FROM ailee_blog b, ailee_blog_category bc 
+                WHERE b.status = 'publish' AND FIND_IN_SET(bc.id, b.blog_category_id) and
+                b.id IN (". $result['blog_related_id'] .") 
+                GROUP BY b.blog_category_id ORDER BY b.id DESC";
+            $query = $this->db->query($sql);
+            $result['related_post'] = $query->result_array();
+            foreach ($result['related_post'] as $key => $value) {
+                $result['related_post'][$key]['blog_category_name'] = explode(',', $value['category_name']);
+            }
+            $sql = "SELECT *, DATE_FORMAT(comment_date,'%D %M %Y') as created_date_formatted FROM ailee_blog_comment WHERE status = 'approve' AND blog_id = ". $result['id'] ." ORDER BY id DESC";
+            
+            $query = $this->db->query($sql);
+            $result['all_comment'] = $query->result_array();
+
+            $result['blog_category_name'] = explode(',', $result['category_name']);
+        }
         return $result;
     }
 

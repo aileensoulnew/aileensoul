@@ -200,25 +200,25 @@ header("Pragma: no-cache"); // HTTP/1.0
             								</div>
             							</div>
             						</li>
-                            <li class="dropdown">
-    							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
-    							<div class="dropdown-menu">
-    								<ul class="content custom-scroll">
-                                        <?php
-                                        if(isset($categoryList) && !empty($categoryList)):
-                                            foreach($categoryList as $_categoryList):
-                                            $category_url = $this->common->clean($_categoryList['name']);
-                                             ?>
-                                            <li class="category <?php echo ($category_id == $_categoryList['id'] ? 'active' : '');?>">
-                                                <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
-                                                    <?php echo ucwords($_categoryList['name']); ?>
-                                                </a>
-                                            </li><?php
-                                            endforeach;
-                                        endif;?>
-    								</ul>
-    							</div>
-    						</li>
+                                    <li class="dropdown">
+            							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
+            							<div class="dropdown-menu">
+            								<ul class="content custom-scroll">
+                                                <?php
+                                                if(isset($categoryList) && !empty($categoryList)):
+                                                    foreach($categoryList as $_categoryList):
+                                                    $category_url = $this->common->clean($_categoryList['name']);
+                                                     ?>
+                                                    <li class="category <?php echo ($category_id == $_categoryList['id'] ? 'active' : '');?>">
+                                                        <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
+                                                            <?php echo ucwords($_categoryList['name']); ?>
+                                                        </a>
+                                                    </li><?php
+                                                    endforeach;
+                                                endif;?>
+            								</ul>
+            							</div>
+            						</li>
                                 </ul>
                             </div>
                             <div class="col-sm-6 col-md-6 col-xs-4 blog-search fw-479">
@@ -432,75 +432,70 @@ header("Pragma: no-cache"); // HTTP/1.0
                 return false;
             }
             return true;
-        }
-
-        function add_subscriber()
-        {
-            
-        }
+        }       
 
         $(document).ready(function(){
             $("#subscribe_form").validate({
-                    rules: {
-                        subscribe_email: {
-                            required: true,
-                            email : true,
-                            maxlength: 100
-                        },                        
-                    },
-                    messages:
-                    {                        
-                        subscribe_email: {
-                            required: "Please enter email address",
-                            email: "Please enter valid email address",
-                            maxlength: "Maxumum 100 allow for email address"
-                        },                      
+                rules: {
+                    subscribe_email: {
+                        required: true,
+                        email : true,
+                        maxlength: 100
+                    },                        
+                },
+                messages:
+                {                        
+                    subscribe_email: {
+                        required: "Please enter email address",
+                        email: "Please enter valid email address",
+                        maxlength: "Maxumum 100 allow for email address"
+                    },                      
 
-                    },
-                    errorElement : 'h6',
-                    submitHandler: function (form) {                        
-                        $.ajax({
-                            type: 'POST',
-                            url: base_url + "blog/add_subscription",
-                            data: {email: $("#subscribe_email").val()},
-                            dataType: "json",
-                            beforeSend: function () {
-                                $('#loader').show();
-                            },
-                            complete: function () {
-                                $('#loader').hide();
-                            },
-                            success: function (data) {                                
-                                if(data.success == true)
-                                {
-                                    $("#subscribe_form")[0].reset();
-                                    $("#subscribe-done").show();
-                                    $("#subscribe-form").hide();
-                                }
-
-                                if(data.success == false)
-                                {
-                                    $("#error_subscribe").show();
-                                    $("#error_subscribe").text(data.message);
-                                    setTimeout(function(){
-                                        $("#error_subscribe").hide();
-                                        $("#error_subscribe").text("");
-                                    },5000)
-                                }
-
-                                if(data.error == true)
-                                {
-                                    $("#error_subscribe").show();
-                                    $("#error_subscribe").text(data.message);
-                                    setTimeout(function(){
-                                        $("#error_subscribe").text("");
-                                        $("#error_subscribe").hide();
-                                    },5000)
-                                }
+                },
+                errorElement : 'h6',
+                submitHandler: function (form) {                        
+                    $.ajax({
+                        type: 'POST',
+                        url: base_url + "blog/add_subscription",
+                        data: {email: $("#subscribe_email").val()},
+                        dataType: "json",
+                        beforeSend: function () {
+                            $('#loader').show();
+                        },
+                        complete: function () {
+                            $('#loader').hide();
+                        },
+                        success: function (data) {                                
+                            if(data.success == true)
+                            {
+                                $("#subscribe_form")[0].reset();
+                                $("#subscribe-done").show();
+                                $("#subscribe-form").hide();
                             }
-                        });
-                    }
-                });
+
+                            if(data.success == false)
+                            {
+                                $("#error_subscribe").show();
+                                $("#error_subscribe").text(data.message);
+                                setTimeout(function(){
+                                    $("#error_subscribe").hide();
+                                    $("#error_subscribe").text("");
+                                },5000)
+                            }
+
+                            if(data.error == true)
+                            {
+                                $("#error_subscribe").show();
+                                $("#error_subscribe").text(data.message);
+                                setTimeout(function(){
+                                    $("#error_subscribe").text("");
+                                    $("#error_subscribe").hide();
+                                },5000)
+                            }
+                        }
+                    });
+                }
+            });
         });
 
     </script>
