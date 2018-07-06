@@ -54,7 +54,12 @@ class Blog_Model extends CI_Model {
     }
 
 
-    public function get_blog_post($searchword = '',$cateid = '', $start = '', $perpage = '', $sory_by='') {
+    public function get_blog_post($searchword = '',$cateid = '', $page = '', $limit = '', $sory_by='') {
+
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        
         $sql_condition = "";
         if($searchword != ""){ 
             $search_split = explode(" ",$searchword);
@@ -82,12 +87,17 @@ class Blog_Model extends CI_Model {
             $sql .= " AND ".trim($sql_condition," AND ");
         }
 
+        if($sql_find_cond != "")
+        {
+            $sql .= $sql_find_cond;
+        }
+
         if($sory_by != ""){
             $sql .= " ORDER BY b.created_date DESC";
         }
 
-        if($perpage != ""){
-            $sql .= " LIMIT ". $start . "," . $perpage;
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
         }
         // echo $sql;exit;
         $query = $this->db->query($sql);
@@ -101,6 +111,13 @@ class Blog_Model extends CI_Model {
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
         return $result_array['category_name'];
+    }
+
+    public function get_blog_cat_list(){
+        $sql = "SELECT id,name FROM ailee_blog_category where status = 'publish'";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
     }
 
 }

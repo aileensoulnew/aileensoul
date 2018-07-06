@@ -17,24 +17,33 @@ class Blog extends CI_Controller {
 
     //MAIN INDEX PAGE START   
     public function index($slug = '', $iscategory = '') {
-        // echo $slug;
-        // exit;
+         // echo $slug;exit;
         // blog category start
         $condition_array = array('status' => 'publish');
         $data = 'id,name';
         // $this->data['blog_category'] = $this->common->select_data_by_condition('blog_category', $condition_array, $data, $short_by = '', $order_by = '', $limit = '', $offset = '', $join_str = array());
+        $category_id = "";
+        $uri_segment = 2;
+        $pg_url = base_url().$this->uri->segment(1);
+        $this->data['category_name'] = "";
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($iscategory != ""){
-            $slug = str_replace('-', ' ', $slug);
+            $this->data['category_name'] = $slug = str_replace('-', ' ', $slug);
             $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $slug ."')";
             $query = $this->db->query($sql);
             $result = $query->row_array();
             if(count($result) > 0){
-                $this->data['category_id'] = $result['cate_id'];
+                $this->data['category_id'] = $category_id = $result['cate_id'];
                 $slug = "";
+                $uri_segment = 4;
+                $pg_url = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3);
             }
         }
 
+        $condition_array = array('status' => 'publish');
+        $recent_blog_list = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());        
+        $this->data['recent_blog_list'] = $recent_blog_list;
+        $this->data['categoryList'] = $this->blog_model->get_blog_cat_list();        
         // blog category end
         if ($slug != '') {
             
@@ -80,49 +89,143 @@ class Blog extends CI_Controller {
             if ($this->input->get('q') || $this->input->get('p')) { 
                 if($this->input->get('q'))
                 {
-                    $this->data['search_keyword'] = $search_keyword1 = trim($this->input->get('q'));
+                    $this->data['search_keyword'] = $search_keyword = trim($this->input->get('q'));
                 }
                 else if($this->input->get('p'))
                 {
-                    $this->data['search_keyword'] = $search_keyword1 = trim($this->input->get('p'));
+                    $this->data['search_keyword'] = $search_keyword = trim($this->input->get('p'));
                 }
 
-                $search_keyword = str_replace("'", "", $search_keyword1);
-                //echo $search_keyword; die();
+                $total_blog = $this->blog_model->get_blog_post($search_keyword,"",'','','');                
+                $limit = 5;
+                $config = array(); 
+                $config["base_url"] = $pg_url;
+                $config["total_rows"] = count($total_blog);
+                $config["per_page"] = $limit;
+                $config["uri_segment"] = $uri_segment;
+                $choice = $config["total_rows"] / $config["per_page"];
+                $config["num_links"] = 1;//round($choice);
 
-                $search_split = explode(" ",$search_keyword);
+                //styling
+                $config['full_tag_open']    = '<ul class="pagination" id="pagination">';
+                $config['full_tag_close']   = '</ul>';
+                $config['first_url'] = $pg_url.'?q='.$search_keyword;
+                $config['first_link'] = 'First';
+                $config['first_tag_open'] = '<li>';
+                $config['first_tag_close'] = '</li>';
+                $config['last_link'] = 'Last';
+                $config['last_tag_open'] = '<li>';
+                $config['last_tag_close'] = '</li>';
+                $config['use_page_numbers']  = TRUE;
 
-                foreach ($search_split as $key => $value)
-                {
-                    $search_condition = "(title LIKE '%$value%')";
-                    $contition_array = array('status' => 'publish');
-                    $bolg_data[] = $this->common->select_data_by_search('blog', $search_condition, $contition_array, $data = '*', $sortby = 'id', $orderby = 'desc', $limit, $offset);
+                $config['prev_link']        = 'Previous';
+                $config['prev_tag_open'] = '<li>';
+                $config['prev_tag_close'] = '</li>';
 
-                    $search_condition = "(description LIKE '%$value%')";
-                    $contition_array = array('status' => 'publish');
-                    $bolg_data_des[] = $this->common->select_data_by_search('blog', $search_condition, $contition_array, $data = '*', $sortby = 'id', $orderby = 'desc', $limit, $offset);
-               }
+                $config['next_link']        = 'Next';
+                $config['next_tag_open'] = '<li>';
+                $config['next_tag_close'] = '</li>';
 
-               $unique = array_merge($bolg_data, $bolg_data_des);
-               $blog_unique1 = array_reduce($unique, 'array_merge', array()); 
-               $this->data['blog_detail'] = array_unique($blog_unique1, SORT_REGULAR);
-                //echo "<pre>"; print_r(count($this->data['blog_detail'])); die();
+                $config['cur_tag_open'] = '<li class="active"><a>';
+                $config['cur_tag_close'] = '</a></li>';
 
+                $config['num_tag_open'] = '<li>';
+                $config['num_tag_close'] = '</li>';
+                // $config['display_pages']    = TRUE; 
+                // $config['page_query_string'] = TRUE;
+                // $config['query_string_segment'] = "q";
+                $config['suffix'] = '?q='.$search_keyword;
+                $this->pagination->initialize($config);
 
-                $condition_array = array('status' => 'publish');
-                $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+                $this->data['page'] = $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+                $blogPost = $this->blog_model->get_blog_post($search_keyword,"",$page,$limit,'created_date');
 
-                $this->load->view('blog/search', $this->data);
+                foreach ($blogPost as $key=>$blog) {
+                    $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where blog_id = '". $blog['id'] ."'";
+                    $query = $this->db->query($sql);
+                    $blogPost[$key]['total_comment'] = $query->row()->total_comment;
 
-               // echo "<pre>"; print_r($this->data['blog_detail']); die();
+                    $blogPost[$key]['category_name'] = $category_name = $this->blog_model->get_blog_post_category_name($blog['id']);                
+
+                    $blogPost[$key]['social_title'] = urlencode('"' . $blog['title'] . '"');
+                    $blogPost[$key]['social_encodeurl'] = urlencode(base_url('blog/' . $blog['blog_slug']));
+                    $blogPost[$key]['social_summary'] = urlencode('"' . $blog['description'] . '"');
+                    $blogPost[$key]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $blog['image']));
+                    $blogPost[$key]['social_url'] = base_url('blog/' . $blog['blog_slug']);
+                    $blogPost[$key]['blog_category_name'] = explode(',', $category_name);
+                }
+                $this->data['blogPost'] = $blogPost;
+                // print_r($this->data['blogPost']);
+                $this->data['links'] = $this->pagination->create_links();
+
+                $this->data['title'] = "Search | Official Blog for Regular Updates, News and Sharing knowledge - Aileensoul";
+                $this->data['metadesc'] = "Our Aileensoul official blog will describe our free service and related news, tips and tricks - stay tuned.";
+
+                // $this->load->view('blog/search', $this->data);
+                $this->load->view('blog/index', $this->data);
+               
             }//THIS IF IS USED FOR WHILE SEARCH FOR RETRIEVE SAME PAGE END
             else
-            {   //FOR GETTING ALL DATA START 
-                $condition_array = array('status' => 'publish');
-                $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+            {
+                $total_blog = $this->blog_model->get_blog_post("",$category_id,'','','');                
+                $limit = 5;
+                $config = array(); 
+                $config["base_url"] = $pg_url;
+                $config["total_rows"] = count($total_blog);
+                $config["per_page"] = $limit;
+                $config["uri_segment"] = $uri_segment;
+                $choice = $config["total_rows"] / $config["per_page"];
+                $config["num_links"] = 1;//round($choice);
 
-                $condition_array = array('status' => 'publish');
-                $this->data['blog_last'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
+                //styling
+                $config['full_tag_open']    = '<ul class="pagination" id="pagination">';
+                $config['full_tag_close']   = '</ul>';            
+                $config['first_link'] = 'First';
+                $config['first_tag_open'] = '<li>';
+                $config['first_tag_close'] = '</li>';
+                $config['last_link'] = 'Last';
+                $config['last_tag_open'] = '<li>';
+                $config['last_tag_close'] = '</li>';
+                $config['use_page_numbers']  = TRUE;
+
+                $config['prev_link']        = 'Previous';
+                $config['prev_tag_open'] = '<li>';
+                $config['prev_tag_close'] = '</li>';
+
+                $config['next_link']        = 'Next';
+                $config['next_tag_open'] = '<li>';
+                $config['next_tag_close'] = '</li>';
+
+                $config['cur_tag_open'] = '<li class="active"><a>';
+                $config['cur_tag_close'] = '</a></li>';
+
+                $config['num_tag_open'] = '<li>';
+                $config['num_tag_close'] = '</li>';
+                // $config['display_pages']    = TRUE; 
+                
+                // $config['suffix']           = '-1';
+                $this->pagination->initialize($config);
+
+                $this->data['page'] = $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
+                $blogPost = $this->blog_model->get_blog_post('',$category_id,$page,$limit,'created_date');
+
+                foreach ($blogPost as $key=>$blog) {
+                    $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where blog_id = '". $blog['id'] ."'";
+                    $query = $this->db->query($sql);
+                    $blogPost[$key]['total_comment'] = $query->row()->total_comment;
+
+                    $blogPost[$key]['category_name'] = $category_name = $this->blog_model->get_blog_post_category_name($blog['id']);                
+
+                    $blogPost[$key]['social_title'] = urlencode('"' . $blog['title'] . '"');
+                    $blogPost[$key]['social_encodeurl'] = urlencode(base_url('blog/' . $blog['blog_slug']));
+                    $blogPost[$key]['social_summary'] = urlencode('"' . $blog['description'] . '"');
+                    $blogPost[$key]['social_image'] = urlencode(base_url($this->config->item('blog_main_upload_path') . $blog['image']));
+                    $blogPost[$key]['social_url'] = base_url('blog/' . $blog['blog_slug']);
+                    $blogPost[$key]['blog_category_name'] = explode(',', $category_name);
+                }
+                $this->data['blogPost'] = $blogPost;
+                // print_r($this->data['blogPost']);exit;
+                $this->data['links'] = $this->pagination->create_links();
 
                 $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
                 $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
@@ -732,7 +835,7 @@ class Blog extends CI_Controller {
     function add_subscription(){
         $email = isset($_POST['email']) ? $_POST['email'] : "";
         if($email == ""){
-            echo "Please enter email id";
+            $result_data = array("success"=>false,"message"=>"Please enter email id");            
         }else{
             $sql_sub_exisit = "SELECT * FROM ailee_subscription where email = '". $email ."'";
             $query_sub_exisit = $this->db->query($sql_sub_exisit);
@@ -745,8 +848,8 @@ class Blog extends CI_Controller {
                 $insert_id = $this->db->insert_id();
                 $result_data = array("success"=>true,"message"=>$insert_id);
             }
-            echo json_encode($result_data);
         }
+        echo json_encode($result_data);
     }
 
     function recent_blog_list(){

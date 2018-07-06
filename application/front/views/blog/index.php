@@ -18,7 +18,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate"); // HTTP/1.1
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache"); // HTTP/1.0
 ?>
-<html class="blog_cl" lang="en" ng-app="blogApp" ng-controller="blogController">
+<html class="blog_cl" lang="en"><!--  ng-app="blogApp" ng-controller="blogController"> -->
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
@@ -53,7 +53,7 @@ header("Pragma: no-cache"); // HTTP/1.0
             }
         </style>
         <?php
-            foreach ($blog_detail as $blog) {
+            foreach ($blogPost as $blog) {
         ?>
             <!-- Open Graph data -->
             <meta property="og:title" content="<?php echo $blog['title']; ?>" />
@@ -112,8 +112,8 @@ header("Pragma: no-cache"); // HTTP/1.0
         <body class="blog-m blog-page">
     <?php }?>
 
-    <?php $this->load->view('page_loader'); ?>
-    <div id="main_page_load" style="display: none;">
+    <?php //$this->load->view('page_loader'); ?>
+    <div id="main_page_load">
         <div class="main-inner">
             <div class="web-header">
                 <header class="custom-header">
@@ -173,19 +173,29 @@ header("Pragma: no-cache"); // HTTP/1.0
             								</div>
             								<div class="content custom-scroll">
             									<ul class="dropdown-data msg-dropdown">
-                                                    <li ng-repeat="blog in recentBlogList">
-                                                        <a  ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
+                                                    <?php
+                                                    if(isset($recent_blog_list) && !empty($recent_blog_list)):
+                                                        foreach($recent_blog_list as $_recent_blog_list): ?>
+                                                    <li>
+                                                        <a href="<?php echo base_url().'blog/'.$_recent_blog_list['blog_slug']; ?>">
             												<div class="dropdown-database">
             													<div class="post-img">
-                                                                    <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}" alt="{{ blog.image }}">
+                                                                    <img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_recent_blog_list['image']; ?>" alt="<?php echo $_recent_blog_list['image']; ?>">
             													</div>
             													<div class="dropdown-user-detail">
-            														<p class="drop-blog-title">{{ blog.title }}</p>
-            															<span class="day-text">{{ blog.created_date_formatted }}</span>
-            													</div> 
+            														<p class="drop-blog-title">
+                                                                        <?php echo $_recent_blog_list['title']; ?>
+                                                                    </p>
+        															<span class="day-text">
+                                                                        <?php echo $_recent_blog_list['created_date_formatted']; ?>
+                                                                    </span>
+                                                                </div> 
             												</div>
             											</a> 
             										</li>
+                                                    <?php
+                                                        endforeach;
+                                                    endif; ?>
             									</ul>
             								</div>
             							</div>
@@ -194,11 +204,18 @@ header("Pragma: no-cache"); // HTTP/1.0
     							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="pr-name">Category</span></a>
     							<div class="dropdown-menu">
     								<ul class="content custom-scroll">
-                                        <li class="category" ng-repeat="category in categoryList track by $index">
-                                            <a ng-href="<?php echo base_url() ?>blog/category/{{ category.name | slugify }}" ng-attr-id="{{ 'category_' + category.id }}" ng-click="cat_post(category.id)">
-                                                {{ category.name }}
-                                            </a>
-                                        </li>
+                                        <?php
+                                        if(isset($categoryList) && !empty($categoryList)):
+                                            foreach($categoryList as $_categoryList):
+                                            $category_url = $this->common->clean($_categoryList['name']);
+                                             ?>
+                                            <li class="category <?php echo ($category_id == $_categoryList['id'] ? 'active' : '');?>">
+                                                <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
+                                                    <?php echo ucwords($_categoryList['name']); ?>
+                                                </a>
+                                            </li><?php
+                                            endforeach;
+                                        endif;?>
     								</ul>
     							</div>
     						</li>
@@ -206,20 +223,18 @@ header("Pragma: no-cache"); // HTTP/1.0
                             </div>
                             <div class="col-sm-6 col-md-6 col-xs-4 blog-search fw-479">
             					<div class="job-search-box1 clearfix hidden-479">        
-            						<form action="<?php echo base_url;?>blog" method="get">
+            						<form action="<?php echo base_url().'blog';?>" method="get" onsubmit="return formCheckMain()">
             							<fieldset class="sec_h2 ">
-            								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
+            								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text" value="<?php echo $search_keyword; ?>">
             								<i class="fa fa-search" aria-hidden="true"></i>
             							</fieldset>
 										
             						</form>   
             					</div>
 								<div class="clearfix block-479">        
-            						<form action="<?php echo base_url;?>blog" method="get">
-            							
+            						<form action="<?php echo base_url().'blog';?>" method="get" onsubmit="return formCheckMob()">
 										<fieldset>
-            								<input id="tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text">
-            								
+            								<input id="res_tags" class="tags ui-autocomplete-input" name="q" placeholder="Search" autocomplete="off" type="text" value="<?php echo $search_keyword; ?>" required>
             							</fieldset>
             						</form>   
             					</div>
@@ -253,77 +268,94 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
                 </div>
             </section>
-            <div id="paddingtop_fixed" class="user-midd-section angularsection hidden">
-                <input type="hidden" class="page_number" value="1">
+            <div id="paddingtop_fixed" class="user-midd-section">                
+                <!-- <input type="hidden" class="page_number" value="1">
                 <input type="hidden" class="total_record" ng-value="total_record">
-                <input type="hidden" class="perpage_record" value="4">
+                <input type="hidden" class="perpage_record" value="4"> -->
                 <div class="container">
                     <div class="custom-user-list">
-                        <div class="blog-box" ng-repeat="blog in blogPost">
+                        <?php if($category_name != ""){?>
+                            <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;"><?php
+                            echo "Category : ".ucwords($category_name)."</h3>";
+                        }
+                        if($search_keyword != ""){ ?>
+                        <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;">Search results of 
+                            <?php echo '' . $search_keyword . ''; ?></h3>
+                        <?php }
+                        if(isset($blogPost) && !empty($blogPost)):
+                            foreach($blogPost as $_blogPost): ?>
+                        <div class="blog-box">
                             <div class="blog-left-img">
-                                <a class="blog-img" target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
-                                    <img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
+                                <a class="blog-img" href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">
+                                    <img src="<?php echo base_url($this->config->item('blog_main_upload_path')).$_blogPost['image']; ?>">
                                 </a>
                             </div>
                             <div class="blog-left-content">
                                 <p class="blog-details-cus">
-                                    <a target="_blank" ng-href="<?php echo base_url() ?>blog/category/{{ cat_name | slugify }}" ng-repeat="cat_name in blog.blog_category_name track by $index">
-                                        <span class="cat text-capitalize" ng-if="($index == 0)">
-                                            {{ cat_name }}
+                                    <?php
+                                    foreach($_blogPost['blog_category_name'] as $key=>$val):
+                                    $category_url = $this->common->clean($val); ?>
+                                    <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
+                                        <span class="cat text-capitalize">
+                                            <?php
+                                            if($key == 0)
+                                                echo $val;
+                                            if($key > 0)
+                                                echo ", ".$val; ?>
                                         </span> 
-                                        <span class="cat text-capitalize" ng-if="($index > 0)">
+                                        <!-- <span class="cat text-capitalize" ng-if="($index > 0)">
                                             , {{ cat_name }}
-                                        </span> 
+                                        </span>  -->
                                     </a>
-                                    <span class="blog-date">{{ blog.created_date_formatted }}</span> 
-                                    <span>{{ blog.name }}</span> 
-                                    <span>{{ blog.total_comment }} comments</span>
+                                    <?php endforeach; ?>
+                                    <span class="blog-date"><?php echo $_blogPost['created_date_formatted']; ?></span> 
+                                    <span><?php echo $_blogPost['name']; ?></span> 
+                                    <span><?php echo $_blogPost['total_comment']; ?> comments</span>
                                 </p>
-                                <a target="_blank" ng-href="<?php echo base_url; ?>blog/{{ blog.blog_slug }}">
-                                    <h3>
-                                        {{ blog.title }}
-                                    </h3>
+                                <a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">
+                                    <h3><?php echo $_blogPost['title']; ?></h3>
                                 </a>
-                                <p class="blog-text" ng-bind-html="blog.description | unsafe" style="height: 62px;overflow: hidden;">
-                                </p>
+                                <span class="blog-text">
+                                    <?php echo substr($_blogPost['description'], 0,150);?><a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">...read more
+                                    </a>
+                                </span>
                                 <p>
                                     <ul class="social-icon">
                                         <li>
-                                            <a target="_blank" class="fbk" id="facebook_link" url_encode="{{ blog.social_encodeurl }}" url="{{ blog.social_url}}" title="Facebook" summary="{{ blog.social_summary }}" image="{{ social_image }}">
+                                            <a class="fbk" id="facebook_link" url_encode="<?php echo $_blogPost['social_encodeurl']; ?>" url="<?php echo $_blogPost['social_url']; ?>" title="Facebook" summary="<?php echo $_blogPost['social_summary']; ?>" image="<?php echo $_blogPost['social_image']; ?>">
                                                 <i class="fa fa-facebook-f"></i>
                                             </a>
                                         </li>
-                                        <li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="{{ blog.url_encode }}" url="{{ blog.url }}"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="{{ blog.encode_url }}" url="{{ blog.url }}"><i class="fa fa-google"></i></a></li>
+                                        <li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="<?php echo $_blogPost['url_encode']; ?>" url="<?php echo $_blogPost['url']; ?>"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="<?php echo $_blogPost['encode_url']; ?>" url="<?php echo $_blogPost['url']; ?>"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="<?php echo $_blogPost['encode_url']; ?>" url="<?php echo $_blogPost['url']; ?>"><i class="fa fa-google"></i></a></li>
                                     </ul>
                                 </p>
                             </div>
-                        </div>                                             
+                        </div>
+                        <?php
+                            endforeach;
+                        endif; ?>
                         <div class="fw pt20 text-center">
-                            <pagination 
-                              ng-model="currentPage"
-                              total-items="total_record"
-                              max-size="maxSize"  
-                              boundary-links="true">
-                            </pagination>
+                            <?php echo $links; ?>
                         </div>      
 
-                        <ul>
+                        <!-- <ul>
                           <li ng-repeat="todo in filteredTodos">{{todo.text}}</li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <div class="right-part">
-                        <div class="subscribe-box" ng-show="subscribe_visibility">
-                            <h4>Subscribe to Our Newslatter</h4>
-                            <input type="text" class="form-control" placeholder="Enter your email id" ng-model="subscribe_email">
-                            <h6 class="small" style="color: red;" ng-show="error_subscribe_visiblity">{{ error_subscribe_text }}</h6>
-                            <a class="btn1" href="javascript:void(0)" ng-click="addsubscribe();">Subscribe</a>
-                            <h6 class="small" style="color: red;">{{ ajax_error_text }}</h6>
-                        </div>
-                        <div class="subscribe-box" ng-hide="subscribe_visibility">
-                            <h4>Your email id subscribe successfully.</h4>
-                        </div>
+                        <form id="subscribe_form" name="subscribe_form" method="post" action="javascript:void(0);">
+                            <div id="subscribe-form" class="subscribe-box">
+                                <h4>Subscribe to Our Newslatter</h4>
+                                <input type="text" class="form-control" placeholder="Enter your email id" name="subscribe_email" id="subscribe_email" maxlength="100">
+                                <button class="btn1" type="submit">Subscribe</button>
+                                <h6 class="small" style="color: red;display: none;" id="error_subscribe"></h6>
+                            </div>
+                            <div id="subscribe-done" class="subscribe-box" style="display: none;">
+                                <h4>Your email id subscribe successfully.</h4>
+                            </div>
+                        </form>
                     </div>
                 </div>                
             </div>
@@ -333,99 +365,9 @@ header("Pragma: no-cache"); // HTTP/1.0
             ?>
         </div>
     </div>
-
-    <script>
-        //AJAX DATA LOAD BY LAZZY LOADER START
-        $(document).ready(function () {
-            // blog_post();
-        });
-
-        /*function category_data(catid, pagenum) {
-            $('.job-contact-frnd').html("");
-            $('.loadbutton').html("");
-            cat_post(catid, pagenum);
-        }
-
-        $('.loadcatbutton').click(function () {
-            var pagenum = parseInt($(".page_number:last").val()) + 1;
-            var catid = $(".catid").val();
-            cat_post(catid, pagenum);
-        });*/
-
-        /*var isProcessing = false;
-        function cat_post(catid, pagenum) { 
-            if (isProcessing) {
-                return;
-            }
-            isProcessing = true;
-            $.ajax({
-                type: 'POST',
-                url: base_url + "blog/cat_ajax?page=" + pagenum + "&cateid=" + catid,
-                data: {total_record: $("#total_record").val()},
-                dataType: "json",
-                beforeSend: function () {
-                     $('#loader').show();
-                },
-                complete: function () {
-                     $('#loader').hide();
-                },
-                success: function (data) {
-                    // $('#loader').hide();
-                    $('.job-contact-frnd').append(data.blog_data);
-                    $('.loadcatbutton').html(data.load_msg)
-                    // second header class add for scroll
-                    var nb = $('.post-design-box').length;
-                    if (nb == 0) {
-                        $("#dropdownclass").addClass("no-post-h2");
-                    } else {
-                        $("#dropdownclass").removeClass("no-post-h2");
-                    }
-                    isProcessing = false;
-                }
-            });
-        }*/
-
-
-        // $('.loadbutton').click(function () {
-        //     var pagenum = parseInt($(".page_number:last").val()) + 1;
-        //     blog_post(pagenum);
-        // });
-
-        // var isProcessing = false;
-        /*function blog_post(pagenum) {
-            if (isProcessing) {
-                return;
-            }
-            isProcessing = true;
-            $.ajax({
-                type: 'POST',
-                url: base_url + "blog/blog_ajax?page=" + pagenum,
-                data: {total_record: $("#total_record").val()},
-                dataType: "json",
-                beforeSend: function () {
-                    $('#loader').show();
-                },
-                complete: function () {
-                    $('#loader').hide();
-                },
-                success: function (data) {
-                  //  $('#loader').remove();
-                    $('.job-contact-frnd').append(data.blog_data);
-                    $('.loadbutton').html(data.load_msg)
-                    // second header class add for scroll
-                    var nb = $('.post-design-box').length;
-                    if (nb == 0) {
-                        $("#dropdownclass").addClass("no-post-h2");
-                    } else {
-                        $("#dropdownclass").removeClass("no-post-h2");
-                    }
-                    isProcessing = false;
-                }
-            });
-        }*/
-        //AJAX DATA LOAD BY LAZZY LOADER END
-    </script>        
     <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=' . time()); ?>"></script>
     <script>
        // mcustom scroll bar
@@ -439,8 +381,6 @@ header("Pragma: no-cache"); // HTTP/1.0
 			});
 		})(jQuery);
     </script>
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
@@ -475,10 +415,98 @@ header("Pragma: no-cache"); // HTTP/1.0
                 return slug;
             };
         });
+
+        function formCheckMain()
+        {
+            if($("#tags").val().trim() == "" || $("#tags").val() == undefined)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        function formCheckMob()
+        {
+            if($("#res_tags").val().trim() == "" || $("#res_tags").val() == undefined)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        function add_subscriber()
+        {
+            
+        }
+
+        $(document).ready(function(){
+            $("#subscribe_form").validate({
+                    rules: {
+                        subscribe_email: {
+                            required: true,
+                            email : true,
+                            maxlength: 100
+                        },                        
+                    },
+                    messages:
+                    {                        
+                        subscribe_email: {
+                            required: "Please enter email address",
+                            email: "Please enter valid email address",
+                            maxlength: "Maxumum 100 allow for email address"
+                        },                      
+
+                    },
+                    errorElement : 'h6',
+                    submitHandler: function (form) {                        
+                        $.ajax({
+                            type: 'POST',
+                            url: base_url + "blog/add_subscription",
+                            data: {email: $("#subscribe_email").val()},
+                            dataType: "json",
+                            beforeSend: function () {
+                                $('#loader').show();
+                            },
+                            complete: function () {
+                                $('#loader').hide();
+                            },
+                            success: function (data) {                                
+                                if(data.success == true)
+                                {
+                                    $("#subscribe_form")[0].reset();
+                                    $("#subscribe-done").show();
+                                    $("#subscribe-form").hide();
+                                }
+
+                                if(data.success == false)
+                                {
+                                    $("#error_subscribe").show();
+                                    $("#error_subscribe").text(data.message);
+                                    setTimeout(function(){
+                                        $("#error_subscribe").hide();
+                                        $("#error_subscribe").text("");
+                                    },5000)
+                                }
+
+                                if(data.error == true)
+                                {
+                                    $("#error_subscribe").show();
+                                    $("#error_subscribe").text(data.message);
+                                    setTimeout(function(){
+                                        $("#error_subscribe").text("");
+                                        $("#error_subscribe").hide();
+                                    },5000)
+                                }
+                            }
+                        });
+                    }
+                });
+        });
+
     </script>
 
     <?php // if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
-            <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script>
+            <!-- <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
     <?php // } else { ?>
             <!-- <script src="<?php //echo base_url('assets/js_min/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
     <?php // } ?>
