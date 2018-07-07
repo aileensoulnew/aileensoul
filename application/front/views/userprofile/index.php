@@ -63,9 +63,9 @@
                     <div class="col-md-8 col-sm-9 col-xs-9 fw-479 right-header">
                         <ul class="nav navbar-nav navbar-right test-cus drop-down">
                             <?php $this->load->view('profile-dropdown'); ?>
-                            <li><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
-                            <li><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
-                            <li class="mob-bar-li">
+                            <li><a href="<?php echo base_url('login'); ?>" class="btn2" target="_self">Login</a></li>
+                            <li style="display: block;"><a href="<?php echo base_url('registration'); ?>" class="btn3" target="_self">Create an account</a></li>
+                            <li class="mob-bar-li" style="display: block;">
                                 <span class="mob-right-bar">
                                     <?php $this->load->view('mobile_right_bar'); ?>
                                 </span>
@@ -192,7 +192,8 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
+        <?php $this->load->view('mobile_side_slide'); ?>
         <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -239,7 +240,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
         <script>
-    		var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+    		/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
     			showRight = document.getElementById( 'showRight' ),
     			body = document.body;
 
@@ -254,7 +255,7 @@
     			if( button !== 'showRight' ) {
     				classie.toggle( showRight, 'disabled' );
     			}
-    		}
+    		}*/
     		
     		$(function () {
     			$('a[href="#search"]').on('click', function (event) {
