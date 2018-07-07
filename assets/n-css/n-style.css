@@ -2404,15 +2404,16 @@ overflow-y: scroll; overflow-y: auto;}
 .ld-sub-header ul li{list-style-type:none; display:flex; padding:5px 0;}
 .ld-sub-header ul li a{color:#5c5c5c; font-size:14px; font-weight:bold;}
 .ld-sub-header .mob-ld-sub{display:none;}
-.ld-sub-header.detail-sub-header{margin-bottom:15px;}
 .ld-sub-header.detail-sub-header li{margin-bottom:0px;}
 .ld-sub-header.detail-sub-header ul li{padding:7px 0;}
 
 .tab-first-li{position:relative;}
 .tab-first-li ul{position:absolute; display:none; width:220px;background:#fff; z-index:9; border:1px solid #d2d2d2; border-radius:4px; top:32px;}
 .tab-first-li ul:before{width:15px; height:9px; background:url('../n-images/top-arow.png'); background-size:100%; content:''; position:absolute; top:-7px; left:10px;}
+.ld-sub-header.detail-sub-header .tab-first-li ul{top:36px;}
 .tab-first-li:hover ul{display:block;}
-.tab-first-li ul li{padding:5px 10px;}
+.ld-sub-header.detail-sub-header li.tab-first-li ul li{padding:5px 10px;}
+.ld-sub-header li.tab-first-li ul li{padding:5px 10px;}
 
 /***  end main landing page sub header  ***/
 
@@ -2666,6 +2667,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.ld-sub-header .web-ld-sub{display:none;}
 	.test-cus.drop-down li.hidden-991{display:none;}
 	.new-ld-page .search-banner{padding:56px 0 0;}
+	.no-login-padding{padding:56px 0 0;}
 	.job-cat-lp .mob-cus-box{padding:0 3px;}
 }
 @media screen and (max-width: 767px) {
@@ -3034,8 +3036,14 @@ overflow-y: scroll; overflow-y: auto;}
 	.post-right-dropdown .dropdown-menu{min-width:130px;}
 	.report h1{padding:60px 0 0px;}
 	.search-banner header{padding:5px 0;}
+	header{padding:5px 0;}
 	.new-ld-page .search-banner{padding:42px 0 0;}
+	.no-login-padding{padding:42px 0 0;}
 	.job-cat-lp .mob-cus-box{padding:0 6px;}
+	.ld-sub-header ul > li{padding:4px;}
+	.tab-first-li ul{top:30px;}
+	.ld-sub-header.detail-sub-header ul li{padding:4px 0;}
+	.ld-sub-header.detail-sub-header .tab-first-li ul{top:30px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3349,7 +3357,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.blog-page.old-no-login .btn-right{padding-top:7px !important;}
 	.blog-detail .blog-left-content h3{width:100%; float:left;}
 	.blog-page .sub-header .sub-menu li a.fs22{font-size:14px;}
-	.old-no-login .btn-right{padding-top:5px;}
+	.old-no-login .btn-right{/*padding-top:5px;*/}
 	body.about-us{padding-bottom:0;}
 	body{padding-bottom:0;}
 	.work_type_custom label.error{top:50px;}
@@ -3361,6 +3369,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.search-banner{padding:75px 0 0;}
 	.report .new-ld-page header{background:#e9edee;}
 	.job-cat-lp .mob-cus-box{/*padding:0 3px;*/}
+	
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

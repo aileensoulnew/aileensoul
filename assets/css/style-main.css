@@ -2628,7 +2628,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 
 header h2.logo{line-height:0;}
 header .logo a{line-height:0;}
-header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
+header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
 .header-login .form-control:focus{border-color:#fff;}
 .header-login input.error:focus{border-bottom:1px solid #ff0000 !important;}
@@ -3555,8 +3555,6 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	.btn-right{padding-bottom:0px;}
 	.report .btn-right{padding-bottom:5px;}
 	.p0-479{padding:0;}
-	.left-header{text-align:center;}
-	.right-header{text-align:center;}
     .mob-none,.profile-box-1.art::after,.profile-box-1.art::before,.profile-box-1.bus::before,.profile-box-1.job::after,.profile-box-1.job::before{display:none;}
     .custom-box .custom-width .right-box h1 a::after{left:50%!important; width:150px; margin-left:-75px;
 	}
@@ -3650,7 +3648,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 	.other-hdr .test-cus.drop-down .mob-right-bar{padding-top:10px;}
 	.right-header .other-hdr .test-cus .btn8{margin-top:0;}
 	.right-header .other-hdr .test-cus .btn9{margin-top:0;}
-	.test-cus.drop-down .mob-right-bar{padding-top:10px;}
+	.test-cus.drop-down .mob-right-bar{padding-top:9px;}
 	.registeration header{padding-bottom:0;}
 	.login-cu-page header{padding-bottom:0;}
 }

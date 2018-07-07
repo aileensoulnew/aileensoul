@@ -3173,9 +3173,6 @@ footer div.pt20{
             width:284px!important;
             height:284px!important
         }
-        .no-login .fw-479{
-            text-align:center
-        }
         .no-login .btn-right.pull-right{
             float:none!important
         }
@@ -3188,10 +3185,6 @@ footer div.pt20{
         }
         .no-login .login h4{
             font-size:22px
-        }
-        .no-login .btn-right{
-            padding-top:3px;
-            text-align:center
         }
         .no-login .modal.in .modal-dialog{
             margin:auto

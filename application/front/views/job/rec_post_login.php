@@ -94,7 +94,7 @@
 						</div>
 					</div>
 				</div>
-                <div class="container padding-360 mobp0">
+                <div class="container padding-360 mobp0 mt15">
                     <div class="row4">
 
                         <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt" style="position: absolute !important;"><div class="">
@@ -838,7 +838,7 @@
             </div>
         </div>
         <!-- Model Popup Close -->
-
+		<?php $this->load->view('mobile_side_slide'); ?>
         <!--footer>        
         <?php //echo $footer;    ?>
         </footer-->

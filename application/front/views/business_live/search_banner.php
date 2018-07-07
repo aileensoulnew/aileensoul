@@ -16,6 +16,7 @@
 				<?php } ?>
 			</div>
 		<?php }*/ ?>
+		<div class="bnr-cus-sec">
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
 				<div class="search-bnr-text">
@@ -37,6 +38,7 @@
 			<div class="col-lg-6 col-md-5 hidden-sm hidden-xs right-bnr">
 				<img src="<?php echo base_url('assets/n-images/business-bnr.png') ?>">
 			</div>
+		</div>
 		</div>
 	</div>
 </div>

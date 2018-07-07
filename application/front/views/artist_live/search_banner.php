@@ -18,6 +18,7 @@
 				<?php //} ?>
 			<?php //} ?>
 		</div>
+		<div class="bnr-cus-sec">
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
 				<div class="search-bnr-text">
@@ -39,6 +40,7 @@
 				<img src="<?php echo base_url('assets/n-images/art-bnr-img1.png') ?>">
 			</div>
 		</div>
+		</div>
 	</div>
 </div>
 <?php 
@@ -52,3 +54,5 @@ if ($ismainregister == true && $artist_isregister == false) {
 	</div>
 </div>
 <?php } ?>
+
+<?php $this->load->view('mobile_side_slide'); ?>

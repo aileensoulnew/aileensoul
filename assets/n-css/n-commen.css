@@ -86,6 +86,7 @@ body {
 .pb0{padding-bottom: 0;} .pb5{padding-bottom: 5px;} .pb10{padding-bottom: 10px;} .pb15{padding-bottom: 15px;} .pb20{padding-bottom: 20px;}
 .h1, .h2, .h3, h1, h2, h3 {margin:0;}
 p{padding:0; margin:0;}
+.mt15{margin-top:15px;}
 
 a:hover{text-decoration:none;}
 .border-bottom-none{border-bottom:0px;}
@@ -306,6 +307,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb0ac', end
     color: #5c5c5c;
 }
 /***  end buttons  ***/
+.visible-479{display:none;}
 /***  custom check box and radio buttons  ***/
 .control {
   display: block;
@@ -1704,9 +1706,9 @@ input[type=number]::-webkit-inner-spin-button {
 @media screen and (max-width: 479px) {
 	.fw-479{width:100%; float:left;}
 	.none-479{display:none !important;}
-	.left-header{text-align:center;}
+	.visible-479{display:block;}
+	.hidden-479{display:none;}
 	.no-login-right{text-align:center;}
-	.left-header.fw-479 h2.logo{float:none;}
 	.search-mob-block{width:62%;}
 	.mobile-header .sub-header.bus-only .sub-menu > li{width:30%;}
 	.mobile-header .sub-header.bus-only .sub-menu > li:first-child{width:41%;}
@@ -1728,7 +1730,6 @@ input[type=number]::-webkit-inner-spin-button {
 	.mobile-header .search-mob-block{width:64%;}
 	.mobile-header .sub-header .sub-menu li a{font-size:13px;}
 	header{padding:3px 0 7px;}
-	header .logo a, header h2.logo, .no-login header h2 a {line-height:0;}
 	.no-login.blog-page .sub-header{top:78px;}
 	.old-no-login.blog-page .sub-header{top:78px;}
 	.dob select{padding-right:0px;}
@@ -1740,6 +1741,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.sub-menu.rec-only li.user-id.open::before{top:22px;}
 	.mobile-header .sub-header .sub-menu.free-h-only .user-id.open .dropdown-menu{top:28px;}
 	.sub-menu.free-h-only li.user-id.open::before{top:22px;}
+	
 	
 }
 @media screen and (max-width: 359px) {
