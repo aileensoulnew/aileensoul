@@ -17,6 +17,8 @@
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="profile-main-page without-reg ftr-page">
@@ -36,7 +38,7 @@
 										<?php if (!$this->session->userdata('aileenuser')) { ?>
 										<ul class="nav navbar-nav navbar-right test-cus drop-down">
 											<?php $this->load->view('profile-dropdown'); ?>
-											<li class="hidden-991"><a href="#">Post Job</a></li>
+											<li class="hidden-991"><a href="<?php echo base_url('recruiter/create-account'); ?>">Post Job</a></li>
 											<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
 											<li class="hidden-991"><a href="<?php echo base_url('recruiter/create-account'); ?>" class="btn9">Create Recruiter Profile</a></li>
 											<li class="mob-bar-li">
@@ -61,9 +63,7 @@
 						<div class="mob-ld-sub">
 							<ul class="">
 								<li class="tab-first-li">
-									<a href="#">Post Job</a>
-									
-									
+									<a href="<?php echo base_url('recruiter/create-account'); ?>">Post Job</a>
 								</li>
 								<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
 								<li><a href="<?php echo base_url('recruiter/create-account'); ?>"><span class="hidden-479">Create Recruiter Profile</span><span class="visible-479">Sign Up</span></a></li>
