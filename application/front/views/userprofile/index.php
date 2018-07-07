@@ -64,8 +64,8 @@
                         <ul class="nav navbar-nav navbar-right test-cus drop-down">
                             <?php $this->load->view('profile-dropdown'); ?>
                             <li><a href="<?php echo base_url('login'); ?>" class="btn2" target="_self">Login</a></li>
-                            <li style="display: block;"><a href="<?php echo base_url('registration'); ?>" class="btn3" target="_self">Create an account</a></li>
-                            <li class="mob-bar-li" style="display: block;">
+                            <li><a href="<?php echo base_url('registration'); ?>" class="btn3" target="_self">Create an account</a></li>
+                            <li class="mob-bar-li">
                                 <span class="mob-right-bar">
                                     <?php $this->load->view('mobile_right_bar'); ?>
                                 </span>

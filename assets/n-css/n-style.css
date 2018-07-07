@@ -2416,6 +2416,22 @@ overflow-y: scroll; overflow-y: auto;}
 .new-ld-page .right-part{position:absolute;}
 
 
+/***  extra ***/
+.post-box-bottom ul li:nth-child(2){display:none;}
+.articles-cs{display:none;}
+.media-tab ul.nav-tabs li:first-child{display:none;}
+.right-header > ul > li:nth-child(3){display:none;}
+.right-header > ul.test-cus > li:nth-child(3){display:block;}
+.right-header > ul > li:nth-child(4){display:none;}
+.mob-bottom-menu ul > li:nth-child(3){display:none;}
+.mob-bottom-menu li{width:25% !important; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
+.main-user-profile .user-btns a:last-child{display:none;}
+.custom-user-add{display:none;}
+.add-box{display:none;}
+.main-inner .middle-main .container{height:auto;}
+
+/***  end extra  ***/
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 
@@ -2667,6 +2683,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.no-login-padding{padding:56px 0 0;}
 	.job-cat-lp .mob-cus-box{padding:0 3px;}
 	.ld-sub-header.only-rec-cus{border-bottom:1px solid #d2d2d2;}
+	.right-header > ul.test-cus > li.mob-bar-li{display:block;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -2942,7 +2959,6 @@ overflow-y: scroll; overflow-y: auto;}
 	-ms-transform: inherit;
 	transform:inherit;}
 	.blog-m .blog-left-content{padding-left:0; padding-top:10px;}
-	.blog-m .blog-text{height:58px !important;}
 	.pagination > li > a, .pagination > li > span {padding:3px 8px;}
 	.blog-page .sub-header .dropdown.open::before{right:-3px; top:18px;}
 	.blog-page .sub-header .dropdown.open .dropdown-menu{top:31px;}
@@ -3042,6 +3058,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.tab-first-li ul{top:30px;}
 	.ld-sub-header.detail-sub-header ul li{padding:4px 0;}
 	.ld-sub-header.detail-sub-header .tab-first-li ul{top:30px;}
+	
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3288,7 +3305,6 @@ overflow-y: scroll; overflow-y: auto;}
 	.business-profile-right .bui-menu-profile{min-height:75px;}
 	.bui-menu-profile h2, h2.bui-menu-profile a {line-height:10px !important;}
 	.fw-479.right-header{text-align:center;}
-	.blog-page.old-no-login #paddingtop_fixed{padding-top:110px !important;}
 	.blog-search form{width:100%;}
 	.blog-search input{width:25px; box-sizing: border-box; border:0; border-bottom: 1px solid transparent;
     border-radius: 0px; font-size: 16px; background-color: white; background-image: url('../n-images/search1.png'); background-repeat: no-repeat; padding: 5px 10px 3px 15px; -webkit-transition: width 0.4s ease-in-out;
@@ -3352,7 +3368,6 @@ overflow-y: scroll; overflow-y: auto;}
 	.site-box ul.blog-cat li a{padding:5px 15px;}
 	.old-no-login .btn-right .btn2{font-size:12px; padding:3px 20px !important;}
 	.old-no-login .btn-right .btn4{font-size:14px; padding:5px 18px !important;}
-	.blog-page.old-no-login .btn-right{padding-top:7px !important;}
 	.blog-detail .blog-left-content h3{width:100%; float:left;}
 	.blog-page .sub-header .sub-menu li a.fs22{font-size:14px;}
 	.old-no-login .btn-right{/*padding-top:5px;*/}
@@ -3365,7 +3380,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.contact-detail{width:75%;}
 	.report h1{font-size:21px; padding:40px 0 10px;}
 	.search-banner{padding:75px 0 0;}
-	.report .new-ld-page header{background:#e9edee;}
+	.report .new-ld-page header{background:#f2f4f5;}
 	.job-cat-lp .mob-cus-box{/*padding:0 3px;*/}
 	
 }
@@ -3415,14 +3430,3 @@ overflow-y: scroll; overflow-y: auto;}
 @media screen and (max-width: 320px) {
 	.reg-form-cus .login .form-group select{margin-right: 9px;}
 }
-.post-box-bottom ul li:nth-child(2){display:none;}
-.articles-cs{display:none;}
-.media-tab ul.nav-tabs li:first-child{display:none;}
-.right-header > ul > li:nth-child(3){display:none;}
-.right-header > ul > li:nth-child(4){display:none;}
-.mob-bottom-menu ul > li:nth-child(3){display:none;}
-.mob-bottom-menu li{width:25% !important; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
-.main-user-profile .user-btns a:last-child{display:none;}
-.custom-user-add{display:none;}
-.add-box{display:none;}
-.main-inner .middle-main .container{height:auto;}

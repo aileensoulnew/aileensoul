@@ -66,7 +66,7 @@ header('Expires: ' . $date);
 									<ul class="nav navbar-nav navbar-right test-cus drop-down">
 										<?php $this->load->view('profile-dropdown'); ?>
 										
-										<li class="login-page"><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
+										<li class="login-page"><a href="<?php echo base_url('registration'); ?>" class="btn2">Create an account</a></li>
 										<li class="mob-bar-li">
 											<span class="mob-right-bar">
 												<?php $this->load->view('mobile_right_bar'); ?>
