@@ -675,7 +675,8 @@ app.controller('freelanceCreateProfileController', function ($scope, $http, $loc
                     if (success.data.is_success == '1')
                     {
                         //window.location = base_url+"artist/home";
-                        window.location = base_url + "hire-freelancer"
+                        // window.location = base_url + "hire-freelancer"
+                        window.location = base_url + "post-freelance-project"
                     }
                     else
                     {
