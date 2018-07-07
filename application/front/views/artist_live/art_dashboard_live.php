@@ -7,7 +7,7 @@ $userid = $this->session->userdata('aileenuser');
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
-         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
+         
         <?php echo $head; ?>  
 
              <?php
@@ -28,6 +28,7 @@ $userid = $this->session->userdata('aileenuser');
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/artistic.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />  
             <?php }?>    
+			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
         <style type="text/css">
@@ -63,21 +64,68 @@ $userid = $this->session->userdata('aileenuser');
         }else{ ?>
             <header>
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-3 col-xs-4 fw-539 left-header">
-                            <?php $this->load->view('main_logo'); ?>
-                        </div>
-                        <div class="col-md-8 col-sm-9 col-xs-8 fw-539 right-header">
-                            <div class="btn-right">
-                                <a href="<?php echo base_url(); ?>login" class="btn4" title="Login">Login</a>
-                                <a href="<?php echo base_url(); ?>artist-profile/create-account" class="btn2" title="Create an account">Create Artistic Account</a>
+					<div class="row">
+                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+								<?php $this->load->view('main_logo'); ?>
+                            </div>
+                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+                                <div class="btn-right">
+                                <?php if(!$this->session->userdata('aileenuser')) {?>
+									<ul class="nav navbar-nav navbar-right test-cus drop-down">
+										<?php $this->load->view('profile-dropdown'); ?>
+										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										<li class="hidden-991"><a href="<?php echo base_url(); ?>artist-profile/create-account" class="btn3">Create Artistic Account</a></li>
+										<li class="mob-bar-li">
+											<span class="mob-right-bar">
+												<?php $this->load->view('mobile_right_bar'); ?>
+											</span>
+										</li>
+									
+									</ul>
+                                <?php }?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                   
                 </div>
             </header>
         <?php } ?>
         <section>
+			<?php if(!$this->session->userdata('aileenuser')){  ?>
+				<div class="no-login-padding">
+					<div class="ld-sub-header detail-sub-header">
+						<div class="container">
+							<div class="web-ld-sub">
+								<ul class="">
+									<li><a href="#">Artist Profile</a></li>
+									<li><a href="#">Artists by Category</a></li>
+									<li><a href="#">Artists by Location</a></li>
+									<li><a href="#">How Artistic Profile Works</a></li>
+									<li><a href="#">Blog</a></li>
+								</ul>
+							</div>
+							<div class="mob-ld-sub">
+								<ul class="">
+									<li class="tab-first-li">
+										<a href="#">Artists</a>
+										<ul>
+											<li><a href="#">Artist Profile</a></li>
+											<li><a href="#">Artists by Category</a></li>
+											<li><a href="#">Artists by Location</a></li>
+											<li><a href="#">How Artistic Profile Works</a></li>
+											<li><a href="#">Blog</a></li>
+										</ul>
+										
+									</li>
+									<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
+									<li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Artistic Profile</span><span class="visible-479">Sign Up</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php }  ?>
+		
             <?php echo $artistic_common_profile; ?>
             <div class="text-center tab-block">
                 <div class="container mob-inner-page">
@@ -1011,5 +1059,6 @@ function submitforgotForm()
             <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist-live/profile.js?ver='.time()); ?>"></script>
             <?php } ?>
+			<?php $this->load->view('mobile_side_slide'); ?>
     </body>
 </html>
