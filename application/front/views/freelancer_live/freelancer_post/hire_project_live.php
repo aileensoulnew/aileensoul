@@ -56,31 +56,31 @@
 					<div class="ld-sub-header detail-sub-header">
 						<div class="container">
 							<div class="web-ld-sub">
-								<ul class="">
-									<li><a href="#">Freelancer Profile</a></li>
-									<li><a href="#">Freelance Job by Fields</a></li>
-									<li><a href="#">Freelance Job by Categories</a></li>
-									<li><a href="#">How Freelancer Profile Works</a></li>
-									<li><a href="#">Blog</a></li>
-								</ul>
-							</div>
-							<div class="mob-ld-sub">
-								<ul class="">
-									<li class="tab-first-li">
-										<a href="#">Freelance Jobs</a>
-										<ul>
-											<li><a href="#">Freelancer Profile</a></li>
-											<li><a href="#">Freelance Job by Fields</a></li>
-											<li><a href="#">Freelance Job by Categories</a></li>
-											<li><a href="#">How Freelancer Profile Works</a></li>
-											<li><a href="#">Blog</a></li>
-										</ul>
-										
-									</li>
-									<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
-									<li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Freelancer Profile</span><span class="visible-479">Sign Up</span></a></li>
-								</ul>
-							</div>
+                            <ul class="">
+                                <li><a href="<?php echo base_url('freelance-jobs'); ?>">Freelancer Profile</a></li>
+                                <li><a href="<?php echo base_url('freelance-jobs-by-fields'); ?>">Freelance Job by Fields</a></li>
+                                <li><a href="<?php echo base_url('freelance-jobs-by-categories'); ?>">Freelance Job by Categories</a></li>
+                                <li><a href="<?php echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>">How Freelancer Profile Works</a></li>
+                                <li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="mob-ld-sub">
+                            <ul class="">
+                                <li class="tab-first-li">
+                                    <a href="javascript:void(0);">Freelance Jobs</a>
+                                    <ul>
+                                        <li><a href="<?php echo base_url('freelance-jobs'); ?>">Freelancer Profile</a></li>
+                                        <li><a href="<?php echo base_url('freelance-jobs-by-fields'); ?>">Freelance Job by Fields</a></li>
+                                        <li><a href="<?php echo base_url('freelance-jobs-by-categories'); ?>">Freelance Job by Categories</a></li>
+                                        <li><a href="<?php echo base_url('how-to-use-freelance-profile-in-aileensoul'); ?>">How Freelancer Profile Works</a></li>
+                                        <li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
+                                    </ul>
+                                    
+                                </li>
+                                <li><a href="<?php echo base_url('login'); ?>">Login</a></li>
+                                <li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Freelancer Profile</span><span class="visible-479">Sign Up</span></a></li>
+                            </ul>
+                        </div>
 						</div>
 					</div>
                     <div class="container padding-360 mobp0 mt15">
