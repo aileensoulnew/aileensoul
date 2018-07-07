@@ -90,31 +90,31 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 					<div class="ld-sub-header detail-sub-header">
 						<div class="container">
 							<div class="web-ld-sub">
-								<ul class="">
-									<li><a href="#">Business Profile</a></li>
-									<li><a href="#">Business by Categories</a></li>
-									<li><a href="#">Business by Locations</a></li>
-									<li><a href="#">How Business Profile Works</a></li>
-									<li><a href="#">Blog</a></li>
-								</ul>
-							</div>
-							<div class="mob-ld-sub">
-								<ul class="">
-									<li class="tab-first-li">
-										<a href="#">Businesses</a>
-										<ul>
-											<li><a href="#">Business Profile</a></li>
-											<li><a href="#">Business by Categories</a></li>
-											<li><a href="#">Business by Locations</a></li>
-											<li><a href="#">How Business Profile Works</a></li>
-											<li><a href="#">Blog</a></li>
-										</ul>
-										
-									</li>
-									<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
-									<li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Business Profile</span><span class="visible-479">Sign Up</span></a></li>
-								</ul>
-							</div>
+                            <ul class="">
+                                <li><a href="<?php echo base_url('business-search'); ?>">Business Profile</a></li>
+                                <li><a href="<?php echo base_url('business-by-categories'); ?>">Business by Categories</a></li>
+                                <li><a href="<?php echo base_url('business-by-location'); ?>">Business by Locations</a></li>
+                                <li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>">How Business Profile Works</a></li>
+                                <li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="mob-ld-sub">
+                            <ul class="">
+                                <li class="tab-first-li">
+                                    <a href="#">Businesses</a>
+                                    <ul>
+                                        <li><a href="<?php echo base_url('business-search'); ?>">Business Profile</a></li>
+                                        <li><a href="<?php echo base_url('business-by-categories'); ?>">Business by Categories</a></li>
+                                        <li><a href="<?php echo base_url('business-by-location'); ?>">Business by Locations</a></li>
+                                        <li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>">How Business Profile Works</a></li>
+                                        <li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
+                                    </ul>
+                                    
+                                </li>
+                                <li><a href="<?php echo base_url('login'); ?>">Login</a></li>
+                                <li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Business Profile</span><span class="visible-479">Sign Up</span></a></li>
+                            </ul>
+                        </div>
 						</div>
 					</div>
 				</div>
@@ -990,13 +990,16 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                     $(this).css('color', '#acacac');
                 }
             });
-            $(document).on('click', 'a,.comment-edit-butn,.ripple like_h_w', function (e) {
-                var classNames = $(e.target).prop("class").toString().split(' ').pop();
-                console.log(classNames);
-                if (classNames != 'login_link') {
-                    return false;
-                    open_profile();
-                }
+            $(document).on('click', 'a,.comment-edit-butn,.ripple like_h_w', function (e) {                
+                if($(e.target).prop("class") != "")
+                {
+                    var classNames = $(e.target).prop("class").toString().split(' ').pop();
+                    console.log(classNames);
+                    if (classNames != 'login_link') {
+                        return false;
+                        open_profile();
+                    }
+                }                
             });
         </script>
     </body>

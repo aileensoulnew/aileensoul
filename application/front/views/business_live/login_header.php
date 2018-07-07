@@ -33,23 +33,23 @@
 					<div class="container">
 						<div class="web-ld-sub">
 							<ul class="">
-								<li><a href="#">Business Profile</a></li>
-								<li><a href="#">Business by Categories</a></li>
-								<li><a href="#">Business by Locations</a></li>
-								<li><a href="#">How Business Profile Works</a></li>
-								<li><a href="#">Blog</a></li>
+								<li><a href="<?php echo base_url('business-search'); ?>">Business Profile</a></li>
+								<li><a href="<?php echo base_url('business-by-categories'); ?>">Business by Categories</a></li>
+								<li><a href="<?php echo base_url('business-by-location'); ?>">Business by Locations</a></li>
+								<li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>">How Business Profile Works</a></li>
+								<li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
 							</ul>
 						</div>
 						<div class="mob-ld-sub">
 							<ul class="">
 								<li class="tab-first-li">
-									<a href="#">Businesses</a>
+									<a href="javascript:void(0);">Businesses</a>
 									<ul>
-										<li><a href="#">Business Profile</a></li>
-										<li><a href="#">Business by Categories</a></li>
-										<li><a href="#">Business by Locations</a></li>
-										<li><a href="#">How Business Profile Works</a></li>
-										<li><a href="#">Blog</a></li>
+										<li><a href="<?php echo base_url('business-search'); ?>">Business Profile</a></li>
+										<li><a href="<?php echo base_url('business-by-categories'); ?>">Business by Categories</a></li>
+										<li><a href="<?php echo base_url('business-by-location'); ?>">Business by Locations</a></li>
+										<li><a href="<?php echo base_url('how-to-use-business-profile-in-aileensoul'); ?>">How Business Profile Works</a></li>
+										<li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
 									</ul>
 									
 								</li>

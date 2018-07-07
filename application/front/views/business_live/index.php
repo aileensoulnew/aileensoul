@@ -217,6 +217,7 @@
 		<div class="bottom-ftr-none">
             <?php echo $login_footer; ?>
 		</div>
+        <?php $this->load->view('mobile_side_slide'); ?>
         </div>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>

@@ -111,6 +111,7 @@
                 </div>
             </div>
             <?php echo $login_footer; ?>
+            <?php $this->load->view('mobile_side_slide'); ?>
         </div>
         
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>

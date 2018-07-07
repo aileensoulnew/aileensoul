@@ -113,6 +113,7 @@
                     </div>
                 </div>
             </div>
+            <?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>
         </div>
         
