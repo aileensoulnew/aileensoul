@@ -97,6 +97,76 @@ $(document).ready(function () {
         });
         return false;
     }
+});
+$(function() {
+    $("#login_form_main").validate({
+        rules: {
+            email_login_main: {
+                required: true,
+                email: true,
+            },
+            password_login_main: {
+                required: true,
+            }
+        },
+        messages:
+        {
+            email_login_main: {
+                required: "Please enter email address",
+                email:  "Please enter valid email address",
+            },
+            password_login_main: {
+                required: "Please enter password",
+            }
+        },
+        submitHandler: submitFormMain
+    });
+    /* validation */
+    /* login submit */
+    function submitFormMain()
+    {
+        var email_login_main = $("#email_login_main").val();
+        var password_login_main = $("#password_login_main").val();
+        var post_data = {
+            'email_login': email_login_main,
+            'password_login': password_login_main,
+            'aileensoulnewfrontcsrf': get_csrf_hash,
+        }
+        
+
+        $(".btn1").addClass("btn1active");
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'login/check_login',
+            data: post_data,
+            dataType: "json",
+            beforeSend: function ()
+            {
+                $("#error").fadeOut();
+                $('#login_ajax_load').show();
+            },
+            success: function (response)
+            {
+                // console.log(response);return false;
+                if (response.data == "ok") {
+                    $("#btn-login").html('<img src="' + base_url + 'images/btn-ajax-loader.gif" /> &nbsp; Login ...');
+                    if(response.is_userBasicInfo==1 || response.is_userStudentInfo==1){
+                        window.location = base_url;// + response.user_slug + "/profiles";
+                    } else {
+                        window.location = base_url + "basic-information";//"profiles/" + response.user_slug;    
+                    }
+                    
+                } else if (response.data == "password") {
+                    var id = response.id;
+                    window.location = base_url + "login?error_msg=2&lwc=" + id;
+                } else {
+                    window.location = base_url + "login?error_msg=1";
+                }
+                $('#login_ajax_load').hide();
+            }
+        });
+        // return false;
+    }
     /* login submit */
 });
 

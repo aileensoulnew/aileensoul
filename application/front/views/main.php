@@ -92,7 +92,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 								<li><a href="<?php echo $freelance_hire_right_profile_link; ?>">Hire Freelancer</a></li>
 								<li><a href="<?php echo $freelance_apply_right_profile_link; ?>">Freelance Jobs</a></li>
 								
-								<li><a class="btn-n" href="javascript:void(0)" data-target="#login" data-toggle="modal">Login</a></li>
+								<li><a class="btn-n" href="#" data-target="#login" data-toggle="modal">Login</a></li>
 								
 							</ul>
 							<span class="mob-right-bar">
@@ -109,20 +109,20 @@ header("Pragma: no-cache"); // HTTP/1.0
             </header>
 			
             <section class="middle-main">
-			<div class="tablate-main-login">
-								<form class="header-login" name="login_form" id="login_form" method="post">
-									<div class="input">
-										<input type="email" tabindex="1"  name="email_login" id="email_login" class="form-control input-sm" placeholder="Email Address">
-									</div>
-									<div class="input">
-										<input type="password" tabindex="1"  name="password_login" id="password_login" class="form-control input-sm" placeholder="Password">
-									</div>
-									<div class="btn-right">
-										<button id="login-new" title="Login" tabindex="1"  class="btn1-cus">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
-										<a tabindex="1" id="myBtn"  class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
-									</div>
-								</form>
-							</div>
+                <div class="tablate-main-login">
+					<form class="header-login" name="login_form" id="login_form" method="post">
+						<div class="input">
+							<input type="email" tabindex="1"  name="email_login" id="email_login" class="form-control input-sm" placeholder="Email Address">
+						</div>
+						<div class="input">
+							<input type="password" tabindex="1"  name="password_login" id="password_login" class="form-control input-sm" placeholder="Password">
+						</div>
+						<div class="btn-right">
+							<button id="login-new" title="Login" tabindex="1"  class="btn1-cus">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+							<a tabindex="1" id="myBtn"  class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
+						</div>
+					</form>
+				</div>
                 <div class="clearfix"></div>
 				<div class="container">
                     <div class="mid-trns">
@@ -337,10 +337,9 @@ header("Pragma: no-cache"); // HTTP/1.0
                                             <h1 class="ttc tlh2">Welcome To Aileensoul</h1>
                                         </div>
 
-                                        <form role="form" name="login_form" id="login_form" method="post">
-
+                                        <form role="form" name="login_form_main" id="login_form_main" method="post">
                                             <div class="form-group">
-                                                <input type="email" value="<?php echo $email; ?>" name="email_login" id="email_login" autofocus="" class="form-control input-sm" placeholder="Email Address*">
+                                                <input type="email" value="<?php echo $email; ?>" name="email_login_main" id="email_login_main" autofocus="" class="form-control input-sm" placeholder="Email Address*" autocomplete="off">
                                                 <div id="error2" style="display:block;">
                                                     <?php
                                                     if ($this->session->flashdata('erroremail')) {
@@ -351,7 +350,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                                 <div id="errorlogin"></div> 
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password_login" id="password_login" class="form-control input-sm" placeholder="Password*">
+                                                <input type="password" name="password_login_main" id="password_login_main" class="form-control input-sm" placeholder="Password*">
                                                 <div id="error1" style="display:block;">
                                                     <?php
                                                     if ($this->session->flashdata('errorpass')) {
@@ -363,7 +362,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                             </div>
 
                                             <p class="pt-20 ">
-                                                <button class="btn1" onclick="login()">Login</button>
+                                                <button class="btn1" onclick="" type="submit">Login</button>
                                             </p>
 
                                             <p class=" text-center">
