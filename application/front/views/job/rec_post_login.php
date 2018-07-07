@@ -36,22 +36,64 @@
         <header>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-sm-3 col-xs-4 left-header fw-479">
-						<?php $this->load->view('main_logo'); ?>
-					</div>
-                    <div class="col-md-8 col-sm-9 col-xs-8 right-header fw-479">
-                        <div class="btn-right pull-right">
-                            <!-- <a href="javascript:void(0);" onclick="login_profile();" class="btn2">Login</a>
-                            <a href="javascript:void(0);" onclick="register_profile();" class="btn3">Creat Job Profile</a> -->
-                            <a href="<?php echo base_url(); ?>login" class="btn4">Login</a>
-                            <a href="<?php echo base_url(); ?>job-profile/create-account" class="btn2">Create Job Account</a>
+                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+								<?php $this->load->view('main_logo'); ?>
+                            </div>
+                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+                                <div class="btn-right">
+                                <?php if(!$this->session->userdata('aileenuser')) {?>
+									<ul class="nav navbar-nav navbar-right test-cus drop-down">
+										<?php $this->load->view('profile-dropdown'); ?>
+										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										<li class="hidden-991"><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
+										<li class="mob-bar-li">
+											<span class="mob-right-bar">
+												<?php $this->load->view('mobile_right_bar'); ?>
+											</span>
+										</li>
+									
+									</ul>
+                                <?php }?>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </header>
+		
         <section>
-            <div class="user-midd-section" id="paddingtop_fixed">
+            <div class="no-login-padding">
+				<div class="ld-sub-header detail-sub-header">
+					<div class="container">
+						<div class="web-ld-sub">
+							<ul class="">
+								<li><a href="#">Job Profile</a></li>
+								<li><a href="#">Jobs by Category</a></li>
+								<li><a href="#">Jobs by Skill</a></li>
+								<li><a href="#">Jobs by Designation</a></li>
+								<li><a href="#">Jobs by Company</a></li>
+								<li><a href="#">Jobs by Location</a></li>
+							</ul>
+						</div>
+						<div class="mob-ld-sub">
+							<ul class="">
+								<li class="tab-first-li">
+									<a href="#">Jobs</a>
+									<ul>
+										<li><a href="#">Job Profile</a></li>
+										<li><a href="#">Jobs by Category</a></li>
+										<li><a href="#">Jobs by Skill</a></li>
+										<li><a href="#">Jobs by Designation</a></li>
+										<li><a href="#">Jobs by Company</a></li>
+										<li><a href="#">Jobs by Location</a></li>
+									</ul>
+									
+								</li>
+								<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
+								<li><a href="<?php echo base_url(); ?>job-profile/create-account">Create Job Profile</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
                 <div class="container padding-360 mobp0">
                     <div class="row4">
 

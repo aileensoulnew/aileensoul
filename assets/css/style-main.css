@@ -1,6 +1,7 @@
 body,html{
     width:100%
 }
+body{padding-bottom:100px;}
 body.about-us{padding-bottom:60px;}
 .btn-right a:focus,.login p a:focus,.mail-sent li a:focus,footer ul li a:focus{
     text-decoration:none!important
@@ -2693,7 +2694,7 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 .other-hdr .mob-bar-li svg path{fill:#5c5c5c;}
 .mob-side-menu.mob-side-hdr .all-profile-box{padding-top:0;}
 .mob-side-menu.mob-side-hdr .cbp-spmenu-vertical{padding-bottom:0;}
-.right-header ul li.hd-profile .btn4{margin-right:0; padding:5px 20px !important;}
+.right-header ul li.hd-profile .btn4{margin-right:0; padding:5px 20px !important; font-size:14px;}
 .right-header ul li.hd-profile .btn4:hover{color:#fff;}
 .right-header ul li.hd-profile .btn4:focus{color:#fff !important; background:none !important;}
 .right-header .test-cus > li > a.btn2{color:#1b8ab9; margin:0; border:2px solid #fff; margin-top:-2px; background:#fff;}
@@ -3546,11 +3547,13 @@ header .logo svg{height:26px; width:146px; fill:#fff; margin-top:7px;}
 @media screen and (max-width:540px){
     .modal.in .modal-dialog{padding: 55px 15px;}
 	.right-header .other-hdr ul li.mob-bar-li{padding:0;}
-	.other-hdr .test-cus.drop-down{padding-top:5px !important;}
+	.other-hdr .test-cus.drop-down{padding-top:0px !important;}
+	.report .other-hdr .test-cus.drop-down{padding-top:5px !important;}
 }
 @media screen and (max-width:479px){
 	.fw-479{width:100%;}
-	.btn-right{padding-bottom:5px;}
+	.btn-right{padding-bottom:0px;}
+	.report .btn-right{padding-bottom:5px;}
 	.p0-479{padding:0;}
 	.left-header{text-align:center;}
 	.right-header{text-align:center;}

@@ -545,9 +545,9 @@ header {
     height: auto !important;
 }
 .search-banner header {
-    background: none;
+    /*background: none;
     border-bottom: none;
-	position:relative;
+	position:relative;*/
 }
 .search-banner header .logo a {
     color: #5c5c5c;
@@ -1616,6 +1616,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 }
 @media screen and (max-width: 991px) {
+	.hidden-991{display:none;}
 	.right-header ul li{padding:0 5px;}
 	.left-header form{width:54%;}
 	.left-header input[type="text"]{width:110px;}
