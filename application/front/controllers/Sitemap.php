@@ -359,6 +359,7 @@ class Sitemap extends CI_Controller {
         $this->data['title'] = "Member Sitemap | Aileensoul";
         $this->data['metadesc'] = "Find and connect with Aileensoul members.";
         $this->data['searchword'] = $searchword;
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($searchword != "")
         {
             $this->data['title'] = "Members Profile Starting from ".strtoupper($searchword)." | Aileensoul";
@@ -414,6 +415,7 @@ class Sitemap extends CI_Controller {
         $this->data['title'] = "Artist Sitemap | Aileensoul";
         $this->data['metadesc'] = "Find and connect to a talented artist from all over the world.";
         $this->data['searchword'] = $searchword;
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($searchword != "")
         {
             $this->data['title'] = "Artist Profile Starting from ".strtoupper($searchword)." | Aileensoul";
@@ -469,6 +471,7 @@ class Sitemap extends CI_Controller {
         $this->data['title'] = "Business Sitemap | Aileensoul";
         $this->data['metadesc'] = "Search, connect and contact any field business from all over the world.";
         $this->data['searchword'] = $searchword;
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($searchword != "")
         {
             $this->data['title'] = "Business Listings Starting from ".strtoupper($searchword)." | Aileensoul";
@@ -524,6 +527,7 @@ class Sitemap extends CI_Controller {
         $this->data['title'] = "Jobs Sitemap | Aileensoul";
         $this->data['metadesc'] = "Find and apply on various field job registered and verified on Aileensoul.";
         $this->data['searchword'] = $searchword;
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($searchword != "")
         {
             $this->data['title'] = "Job Listing Starting from ".strtoupper($searchword)." | Aileensoul";
@@ -579,6 +583,7 @@ class Sitemap extends CI_Controller {
         $this->data['title'] = "Freelance Jobs Sitemap | Aileensoul";
         $this->data['metadesc'] = "Find and apply on various work from job registered and verified on Aileensoul.";
         $this->data['searchword'] = $searchword;
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($searchword != "")
         {
             $this->data['title'] = "Freelance Jobs Listing Starting from ".strtoupper($searchword)." | Aileensoul";
