@@ -360,6 +360,7 @@ class Sitemap extends CI_Controller {
         $this->data['metadesc'] = "Find and connect with Aileensoul members.";
         $this->data['searchword'] = $searchword;
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
         if($searchword != "")
         {
             $this->data['title'] = "Members Profile Starting from ".strtoupper($searchword)." | Aileensoul";
