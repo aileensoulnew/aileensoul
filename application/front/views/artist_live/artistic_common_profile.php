@@ -1,13 +1,18 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
 $session_user_id = $this->session->userdata('aileenuser');
+$main_id = "";
+if($session_user_id != "")
+{
+    $main_id = "paddingtop_fixed";
+}
 ?>
 
 <?php if($artist_isregister == false){ ?>
 <?php } ?>
 
 
-<div class="container fw-991" id="paddingtop_fixed">
+<div class="container fw-991" id="<?php echo $main_id; ?>">
 	<div class="row" id="row1" style="display:none;">
 		<div class="col-md-12 text-center">
 			<div id="upload-demo" ></div>
