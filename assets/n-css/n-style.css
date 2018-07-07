@@ -2412,7 +2412,8 @@ overflow-y: scroll; overflow-y: auto;}
 .ld-sub-header li.tab-first-li ul li{padding:5px 10px;}
 
 /***  end main landing page sub header  ***/
-
+.new-ld-page .left-part{position:absolute;}
+.new-ld-page .right-part{position:absolute;}
 
 
 /***  media query  ***/
