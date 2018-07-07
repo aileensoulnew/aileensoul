@@ -318,6 +318,7 @@
                 </div>
 	        </div>
 		</div>
+        <?php $this->load->view('mobile_side_slide'); ?>
 		
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
