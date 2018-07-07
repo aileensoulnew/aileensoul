@@ -44,17 +44,29 @@
             <header class="custom-header">
                 <div class="header animated fadeInDownBig">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-3 col-xs-4 fw-479 left-header">
-                                <?php $this->load->view('main_logo'); ?>
-                            </div>
-                            <div class="col-md-8 col-sm-9 col-xs-8 fw-479 right-header">
+						<div class="row">
+							<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+								<?php $this->load->view('main_logo'); ?>
+							</div>
+							<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
                                 <div class="btn-right">
-                                    <a href="<?php echo base_url(); ?>login" target="_self" class="btn2">Login</a>
+                                <?php if(!$this->session->userdata('aileenuser')) {?>
+									<ul class="nav navbar-nav navbar-right test-cus drop-down">
+										<?php $this->load->view('profile-dropdown'); ?>
+										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										
+										<li class="mob-bar-li">
+											<span class="mob-right-bar">
+												<?php $this->load->view('mobile_right_bar'); ?>
+											</span>
+										</li>
+									
+									</ul>
+                                <?php }?>
                                 </div>
-                                
                             </div>
-                        </div>
+               
+						</div>
                     </div>
                 </div>                
             </header>            
@@ -64,6 +76,7 @@
             <div class="container">
                 <div ng-view></div>
             </div>
+			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>            
         </div>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>

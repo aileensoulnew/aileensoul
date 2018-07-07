@@ -2311,9 +2311,6 @@ label.cameraButton{min-height:43px;}
 .right_middle_side_posrt .all-profile-box{width:100%; margin-left:0;}
 .right_middle_side_posrt{margin-left:934px;}
 .right_side_posrt{width:584px;}
-
-
-border: 1px solid #fff; line-height: 1;}
 .reg-form-cus .right-header .btn2:hover{background:none; color:#fff;}
 .post-popup-box .tooltip-custom{bottom:10px;}
 .border1{border:1px solid #d2d2d2; border-radius:4px;}
@@ -2405,7 +2402,7 @@ overflow-y: scroll; overflow-y: auto;}
 .ld-sub-header .mob-ld-sub{display:none;}
 .ld-sub-header.detail-sub-header li{margin-bottom:0px;}
 .ld-sub-header.detail-sub-header ul li{padding:7px 0;}
-
+.ld-sub-header.only-rec-cus{border:0px;}
 .tab-first-li{position:relative;}
 .tab-first-li ul{position:absolute; display:none; width:220px;background:#fff; z-index:9; border:1px solid #d2d2d2; border-radius:4px; top:32px;}
 .tab-first-li ul:before{width:15px; height:9px; background:url('../n-images/top-arow.png'); background-size:100%; content:''; position:absolute; top:-7px; left:10px;}
@@ -2668,6 +2665,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.new-ld-page .search-banner{padding:56px 0 0;}
 	.no-login-padding{padding:56px 0 0;}
 	.job-cat-lp .mob-cus-box{padding:0 3px;}
+	.ld-sub-header.only-rec-cus{border-bottom:1px solid #d2d2d2;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
