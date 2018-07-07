@@ -871,9 +871,9 @@ $route['(:any)'] = 'Userprofile';
 $route['artist/search/(:any)'] = "artist_live/artist_search/$1";
 $route['artist/search/(:any)-in-(:any)'] = "artist_live/artist_search/$1-in-$2";
 
+$route['artist/like_commentimg1'] = "artist/like_commentimg1";
 $route['artist/(:any)-in-(:any)'] = "artist_live/categoryArtistList/$1/$2/1";
 $route['artist/(:any)-in-(:any)/(:num)'] = "artist_live/categoryArtistList/$1/$2/1";
-$route['artist/like_commentimg1'] = "artist/like_commentimg1";
 $route['artist/(:any)'] = "artist_live/categoryArtistList/$1//2";
 $route['artist/(:any)/(:num)'] = "artist_live/categoryArtistList/$1//2";
 
