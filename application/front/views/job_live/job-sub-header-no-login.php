@@ -44,7 +44,7 @@
 								<li class="tab-first-li">
 									<a href="#">Jobs</a>
 									<ul>
-										<li><a href="<?php echo base_url('login'); ?>">Job Profile</a></li>
+										<li><a href="<?php echo base_url('job-search'); ?>">Job Profile</a></li>
 										<li><a href="<?php echo base_url('jobs-by-categories'); ?>">Jobs by Category</a></li>
 										<li><a href="<?php echo base_url('jobs-by-skills'); ?>">Jobs by Skill</a></li>
 										<li><a href="<?php echo base_url('jobs-by-designations'); ?>">Jobs by Designation</a></li>
