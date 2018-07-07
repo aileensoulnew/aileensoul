@@ -307,10 +307,10 @@
             });
 	})(jQuery);
     </script>
-<!--<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>-->
+<!--<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php //echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>-->
 
     <script>
-			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+			/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 				showRight = document.getElementById( 'showRight' ),
 				body = document.body;
 
@@ -325,7 +325,7 @@
 				if( button !== 'showRight' ) {
 					classie.toggle( showRight, 'disabled' );
 				}
-			}
+			}*/
 			
 			$(function () {
 				$('a[href="#search"]').on('click', function (event) {

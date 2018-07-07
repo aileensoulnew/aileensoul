@@ -25,13 +25,29 @@
             </a>
         </li>
         <li>
+            <a href="<?php echo $freelance_hire_right_profile_link; ?>" title="Freelance Employer">
+                <div class="all-pr-img">
+                    <img src="<?php echo base_url('assets/n-images/i31.png?ver='.time()) ?>" alt="Freelance Profile">
+                </div>
+                <span>Freelance Employer</span>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo $freelance_apply_right_profile_link; ?>" title="Freelancer Profile">
+                <div class="all-pr-img">
+                    <img src="<?php echo base_url('assets/n-images/i3.jpg?ver='.time()) ?>" alt="Freelancer Profile">
+                </div>
+                <span>Freelancer Profile</span>
+            </a>
+        </li>
+        <!-- <li>
             <a target="_self" href="<?php echo $freelance_right_profile_link; ?>" title="Freelance Profile">
                 <div class="all-pr-img">
                     <img src="<?php echo base_url('assets/img/i3.jpg'); ?>" alt="<?php echo "i3.jpg"; ?>">
                 </div>
                 <span>Freelance Profile</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a target="_self" href="<?php echo $business_right_profile_link; ?>" title="Business Profile">
                 <div class="all-pr-img">

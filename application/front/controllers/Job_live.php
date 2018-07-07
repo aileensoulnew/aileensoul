@@ -51,6 +51,9 @@ class Job_live extends MY_Controller {
         /*if($this->job_profile_set == 1)
             $this->load->view('job_live/index', $this->data);
         else */
+        if($this->job_profile_set == 1)
+            redirect(base_url()."recommended-jobs","refresh");
+
         $limit = 8;
         $this->data['jobCategory'] = $this->job_model->jobCategory($limit);
         $this->data['jobCity'] = $this->job_model->jobCity($limit);

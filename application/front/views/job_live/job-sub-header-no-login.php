@@ -31,12 +31,12 @@
 					<div class="container">
 						<div class="web-ld-sub">
 							<ul class="">
-								<li><a href="#">Job Profile</a></li>
-								<li><a href="#">Jobs by Category</a></li>
-								<li><a href="#">Jobs by Skill</a></li>
-								<li><a href="#">Jobs by Designation</a></li>
-								<li><a href="#">Jobs by Company</a></li>
-								<li><a href="#">Jobs by Location</a></li>
+								<li><a href="<?php echo base_url('job-search'); ?>">Job Profile</a></li>
+								<li><a href="<?php echo base_url('jobs-by-categories'); ?>">Jobs by Category</a></li>
+								<li><a href="<?php echo base_url('jobs-by-skills'); ?>">Jobs by Skill</a></li>
+								<li><a href="<?php echo base_url('jobs-by-designations'); ?>">Jobs by Designation</a></li>
+								<li><a href="<?php echo base_url('jobs-by-companies'); ?>">Jobs by Company</a></li>
+								<li><a href="<?php echo base_url('jobs-by-location'); ?>">Jobs by Location</a></li>
 							</ul>
 						</div>
 						<div class="mob-ld-sub">
@@ -44,12 +44,12 @@
 								<li class="tab-first-li">
 									<a href="#">Jobs</a>
 									<ul>
-										<li><a href="#">Job Profile</a></li>
-										<li><a href="#">Jobs by Category</a></li>
-										<li><a href="#">Jobs by Skill</a></li>
-										<li><a href="#">Jobs by Designation</a></li>
-										<li><a href="#">Jobs by Company</a></li>
-										<li><a href="#">Jobs by Location</a></li>
+										<li><a href="<?php echo base_url('login'); ?>">Job Profile</a></li>
+										<li><a href="<?php echo base_url('jobs-by-categories'); ?>">Jobs by Category</a></li>
+										<li><a href="<?php echo base_url('jobs-by-skills'); ?>">Jobs by Skill</a></li>
+										<li><a href="<?php echo base_url('jobs-by-designations'); ?>">Jobs by Designation</a></li>
+										<li><a href="<?php echo base_url('jobs-by-companies'); ?>">Jobs by Company</a></li>
+										<li><a href="<?php echo base_url('jobs-by-location'); ?>">Jobs by Location</a></li>
 									</ul>
 									
 								</li>

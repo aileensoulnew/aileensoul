@@ -25,60 +25,7 @@
     <body class="profile-main-page without-reg ftr-page">        
         <div class="middle-section middle-section-banner new-ld-page">
 			
-            <div class="search-banner" >
-				
-                <?php $this->load->view('job_live/job-sub-header-no-login'); ?>
-                <div class="container">
-					
-					<div class="bnr-cus-sec">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-7" ><!--  -->
-                            <div class="search-bnr-text">
-                                <h1>Find the Right Job Opportunities</h1>
-                                <p>Because Dream Matters </p>
-                            </div>
-                            <div class="search-box">
-                                <form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">
-                                <div class="pb20 search-input">
-                                    <input type="text" ng-model="keyword" id="job_keyword" name="job_keyword" placeholder="Job Title, Keywords, or Company" autocomplete="off">
-                                    <input type="text" ng-model="city" id="job_location" name="job_location" placeholder="City, State or Country" class="city-input" autocomplete="off">
-                                    
-                                </div>
-                                <div class="pt5 fw pb20">
-                                    <ul class="work-timing fw">
-                                        <li>
-                                            <label class="control control--checkbox">Full-Time
-                                              <input type="checkbox" ng-model="fulltime" name="work_timing[]" class="work_timing-filter" value="1" />
-                                              <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="control control--checkbox">Part-Time
-                                              <input class="work_timing-filter" ng-model="parttime" name="work_timing[]" value="2" type="checkbox"/>
-                                              <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="control control--checkbox">Internship
-                                              <input  class="work_timing-filter" ng-model="internship" name="work_timing[]" value="3" type="checkbox"/>
-                                              <div class="control__indicator"></div>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="fw pt20">
-                                    <input type="submit" class="btn1" name="submit" value="Search">
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-5 hidden-sm hidden-xs right-bnr">
-                            <img src="<?php echo base_url('assets/n-images/job-bnr.png?ver=' . time()) ?>">
-                        </div>
-                    </div>
-					</div>
-				</div>
-            </div>
+            <?php echo $search_banner ?>
 
             <div class="job-cat-lp" >
                 <div class="container" >

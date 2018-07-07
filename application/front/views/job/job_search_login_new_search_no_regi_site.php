@@ -41,6 +41,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/font-awesome.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/owl.carousel.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
@@ -50,7 +51,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 </head>
     <!-- END HEAD -->
 
-    <body class="profile-main-page">        
+    <body classclass="profile-main-page">        
             <div class="middle-section middle-section-banner new-ld-page">
                 <?php echo $search_banner ?>
                 <div class="container pt20 mobp0">
@@ -602,7 +603,7 @@ l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
         </div>
         <!-- Model Popup Close -->
 
-
+<?php $this->load->view('mobile_side_slide'); ?>
 <?php echo $footer; ?>
 
     <!-- script for skill textbox automatic start-->
