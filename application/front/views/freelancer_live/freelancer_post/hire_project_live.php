@@ -12,35 +12,78 @@
         <?php } else { ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/freelancer-hire.css?ver=' . time()); ?>">
-        <?php } ?>        
+        <?php } ?>   
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">		
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     <?php $this->load->view('adsense'); ?>
 </head>
     <!-- END HEAD -->
     <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
+    
     <body class="page-container-bg-solid page-boxed no-login freeh3 detail-job-no-login">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">    
             <header>
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-3 col-xs-4 left-header fw-539">
-							<?php $this->load->view('main_logo'); ?>
-                        </div>
-                        <div class="col-md-8 col-sm-9 col-xs-8 right-header fw-539">
-                            <div class="btn-right pull-right">
-                                <a href="<?php echo base_url(); ?>login" class="btn4">Login</a>
-                                <a href="<?php echo base_url(); ?>freelancer/create-account" class="btn2">Create Freelancer Account</a>
+					<div class="row">
+                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+								<?php $this->load->view('main_logo'); ?>
+                            </div>
+                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+                                <div class="btn-right">
+                                <?php if(!$this->session->userdata('aileenuser')) {?>
+									<ul class="nav navbar-nav navbar-right test-cus drop-down">
+										<?php $this->load->view('profile-dropdown'); ?>
+										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										<li class="hidden-991"><a href="<?php echo base_url(); ?>freelancer/create-account" class="btn3">Create Freelancer Account</a></li>
+										<li class="mob-bar-li">
+											<span class="mob-right-bar">
+												<?php $this->load->view('mobile_right_bar'); ?>
+											</span>
+										</li>
+									
+									</ul>
+                                <?php }?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                  
                 </div>
             </header>
             <section>
-                <div class="user-midd-section" id="paddingtop_fixed">
-                    <div class="container padding-360 mobp0 mobmt15">
+                <div class="no-login-padding">
+					<div class="ld-sub-header detail-sub-header">
+						<div class="container">
+							<div class="web-ld-sub">
+								<ul class="">
+									<li><a href="#">Freelancer Profile</a></li>
+									<li><a href="#">Freelance Job by Fields</a></li>
+									<li><a href="#">Freelance Job by Categories</a></li>
+									<li><a href="#">How Freelancer Profile Works</a></li>
+									<li><a href="#">Blog</a></li>
+								</ul>
+							</div>
+							<div class="mob-ld-sub">
+								<ul class="">
+									<li class="tab-first-li">
+										<a href="#">Freelance Jobs</a>
+										<ul>
+											<li><a href="#">Freelancer Profile</a></li>
+											<li><a href="#">Freelance Job by Fields</a></li>
+											<li><a href="#">Freelance Job by Categories</a></li>
+											<li><a href="#">How Freelancer Profile Works</a></li>
+											<li><a href="#">Blog</a></li>
+										</ul>
+										
+									</li>
+									<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
+									<li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Freelancer Profile</span><span class="visible-479">Sign Up</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+                    <div class="container padding-360 mobp0 mt15">
                         <div class="row4">
 
                             <div class="profile-box-custom fl animated fadeInLeftBig left_side_posrt"><div class="">
@@ -1020,6 +1063,7 @@
             </div>
             <!-- register for apply end -->
         </div>
+		<?php $this->load->view('mobile_side_slide'); ?>
         <!-- script for skill textbox automatic start-->
         <?php
         if (IS_REC_JS_MINIFY == '0') {

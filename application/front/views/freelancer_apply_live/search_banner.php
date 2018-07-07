@@ -7,23 +7,65 @@
     if($userid == "")
     {
     ?>
-    <header>
-        <div class="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-4 left-header fw-479">
-                        <?php $this->load->view('main_logo'); ?>
-                        
-                    </div>
-                    <div class="col-md-6 col-sm-8 no-login-right fw-479">
-                        <a target="_self" href="<?php echo base_url('login'); ?>" class="btn8">Login</a>
-                        <a target="_self" href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Account</a>
-                            
-                    </div>
-                </div>
+	<header>
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+					<?php $this->load->view('main_logo'); ?>
+				</div>
+				<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+					<div class="btn-right other-hdr">
+						<?php if (!$this->session->userdata('aileenuser')) { ?>
+						<ul class="nav navbar-nav navbar-right test-cus drop-down">
+							<?php $this->load->view('profile-dropdown'); ?>
+							<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+							<li class="hidden-991"><a href="<?php echo base_url('freelancer/create-account'); ?>" class="btn9">Create Freelancer Profile</a></li>
+							<li class="mob-bar-li">
+								<span class="mob-right-bar">
+									<?php $this->load->view('mobile_right_bar'); ?>
+								</span>
+							</li>
+											
+						</ul>
+						<?php } ?>
+					</div>
+				</div>
+               
             </div>
         </div>
-    </header>
+    </div>
+</header>
+   <div class="ld-sub-header">
+					<div class="container">
+						<div class="web-ld-sub">
+							<ul class="">
+								<li><a href="#">Freelancer Profile</a></li>
+								<li><a href="#">Freelance Job by Fields</a></li>
+								<li><a href="#">Freelance Job by Categories</a></li>
+								<li><a href="#">How Freelancer Profile Works</a></li>
+								<li><a href="#">Blog</a></li>
+							</ul>
+						</div>
+						<div class="mob-ld-sub">
+							<ul class="">
+								<li class="tab-first-li">
+									<a href="#">Freelance Jobs</a>
+									<ul>
+										<li><a href="#">Freelancer Profile</a></li>
+										<li><a href="#">Freelance Job by Fields</a></li>
+										<li><a href="#">Freelance Job by Categories</a></li>
+										<li><a href="#">How Freelancer Profile Works</a></li>
+										<li><a href="#">Blog</a></li>
+									</ul>
+									
+								</li>
+								<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
+								<li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Freelancer Profile</span><span class="visible-479">Sign Up</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
     <?php
     }
     ?>
@@ -34,6 +76,7 @@
                 <!-- <a class="btn5" href="<?php echo base_url('freelancer/freelancer_post') ?>">Reactivate Freelance Apply Profile</a> -->
             </div>
         <?php }*/ ?>
+		<div class="bnr-cus-sec">
         <div class="row">
             <div class="col-lg-6 col-md-7">
                 <div class="search-bnr-text">
@@ -73,7 +116,8 @@
                 <img src="<?php echo base_url('assets/n-images/free-apply.png') ?>">
             </div>
         </div>
-    </div>
+		</div>
+	</div>
 </div>
 <?php if($this->freelance_apply_profile_set == 0 && $userid != ""){ ?>
 
@@ -259,3 +303,4 @@ $(function() {
     });
 });
 </script>
+<?php $this->load->view('mobile_side_slide'); ?>
