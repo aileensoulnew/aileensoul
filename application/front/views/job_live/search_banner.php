@@ -2,21 +2,7 @@
 <div class="search-banner">
     <?php
     if($user_id == ""): ?>
-        <header>
-            <div class="header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 left-header">
-                            <?php $this->load->view('main_logo'); ?>
-                        </div>
-                        <div class="col-md-6 col-sm-6 no-login-right fw-479">
-                            <a href="<?php echo base_url(); ?>login" class="btn8" target="_self">Login</a>
-                            <a href="<?php echo base_url(); ?>job-profile/create-account" class="btn9" target="_self">Create Job Profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+       <?php $this->load->view('job_live/job-sub-header-no-login'); ?>
     <?php endif; ?>
     <div class="container">        
         <div class="row">
