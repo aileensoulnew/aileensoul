@@ -149,14 +149,25 @@ class Blog_Model extends CI_Model {
             foreach ($result['related_post'] as $key => $value) {
                 $result['related_post'][$key]['blog_category_name'] = explode(',', $value['category_name']);
             }
-            $sql = "SELECT *, DATE_FORMAT(comment_date,'%D %M %Y') as created_date_formatted FROM ailee_blog_comment WHERE status = 'approve' AND blog_id = ". $result['id'] ." ORDER BY id DESC";
-            
+            $sql = "SELECT *, DATE_FORMAT(comment_date,'%D %M %Y') as created_date_formatted FROM ailee_blog_comment WHERE status = 'approve' AND blog_id = ". $result['id'] ." ORDER BY id DESC LIMIT 2";
             $query = $this->db->query($sql);
             $result['all_comment'] = $query->result_array();
 
             $result['blog_category_name'] = explode(',', $result['category_name']);
         }
         return $result;
+    }
+
+    public function get_loadmore_comment($blog_id,$page,$limit)
+    {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        
+        $sql = "SELECT *, DATE_FORMAT(comment_date,'%D %M %Y') as created_date_formatted FROM ailee_blog_comment WHERE status = 'approve' AND blog_id = ". $blog_id ." ORDER BY id DESC LIMIT $start,$limit";        
+        $query = $this->db->query($sql);
+        $all_comment = $query->result_array();
+        return $all_comment;
     }
 
 }

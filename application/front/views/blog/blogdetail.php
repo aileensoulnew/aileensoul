@@ -359,17 +359,25 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						<div class="center-title">
 	                                <h3>All Comments</h3>
 	    						</div>
-                                <?php foreach($blog_data['all_comment'] as $all_comment): ?>
-	    						<div class="comment-box">
-	    							<div class="comment-img">	    								
-	    							</div>
-	    							<div class="comment-text">
-	    								<h4><?php echo $all_comment['name']; ?></h4>
-	    								<span><?php echo $all_comment['created_date_formatted']; ?></span>
-	    								<p><?php echo $all_comment['message']; ?></p>
-	    							</div>
-	    						</div>
-                                <?php endforeach; ?>
+                                <div class="all-comment-div" style="height: 220px;overflow-y: scroll;">
+                                    <div class="all-comment-result" style="height: auto;float: left;">
+                                    <?php foreach($blog_data['all_comment'] as $all_comment): ?>
+    	    						<div class="comment-box">
+    	    							<div class="comment-img post-head">
+                                            <span class="post-img">
+                                            <?php echo ucwords($all_comment['name'][0]); ?>
+                                            </span>
+                                        </div>
+    	    							<div class="comment-text">
+    	    								<h4><?php echo ucwords($all_comment['name']); ?></h4>
+    	    								<span><?php echo $all_comment['created_date_formatted']; ?></span>
+    	    								<p><?php echo $all_comment['message']; ?></p>
+    	    							</div>
+    	    						</div>
+                                    <?php endforeach; ?>
+                                    </div>
+                                    <div class="fw" id="loader_more" style="text-align:center;display: none;"><img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="loaderimage"></div>
+                                </div>
 	    					</div>
                             <?php endif; ?>
 	    					<div class="leave-reply fw">
@@ -381,26 +389,26 @@ header("Pragma: no-cache"); // HTTP/1.0
 		    							<div class="row pt20">
 		    								<div class="col-md-6 col-sm-6">
 		    									<div class="form-group">
-		    										<input type="text" ng-model="cname" class="form-control" name="name" id="name" placeholder="Enter Your Name">
+		    										<input type="text" class="form-control" name="cname" id="cname" placeholder="Enter Your Name">
 		    									</div>
 		    								</div>
 		    								<div class="col-md-6 col-sm-6">
 		    									<div class="form-group">
-		    										<input type="text" ng-model="comment_email" class="form-control" name="email" id="email" placeholder="Enter Your Email id">
+		    										<input type="text" class="form-control" name="comment_email" id="comment_email" placeholder="Enter Your Email id">
 		    									</div>
 		    								</div>
 		    							</div>
 		    							<div class="row">
 		    								<div class="col-md-12">
 		    									<div class="form-group">
-		    										<textarea class="form-control" name="message" id="comment_message" placeholder="message" ng-model="msg"></textarea>
+		    										<textarea class="form-control" name="comment_message" id="comment_message" placeholder="message"></textarea>
 		    									</div>
 		    									<!-- <p ng-show="comment_error_visibility">{{ comment_error_text }}</p> -->
 		    									<p class="comment_error"></p>
 		    								</div>	    								
 		    							</div>
-		    							<input type="hidden" value="{{ blog.id }}" name="blog_id" id="blog_id">
-		    							<button onclick="addcomment()" class="btn1">Comment</button>
+		    							<input type="hidden" value="<?php echo $blog_data['id']; ?>" name="blog_id" id="blog_id">
+		    							<button class="btn1" type="submit">Comment</button>
 		    						</form>
 	    						</div>
 	    					</div>
@@ -421,11 +429,23 @@ header("Pragma: no-cache"); // HTTP/1.0
                     </div>
 	    		</div>	    		
 	    	</div>
+        <!-- Comment Modal  -->
+        <div class="modal message-box biderror" id="commentmodal" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+                    <div class="modal-body">
+                        <span class="mes"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Comment Modal  -->
 
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()); ?>" ></script>
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
         <?php
             echo $login_footer
         ?>
@@ -450,7 +470,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	        var title = '<?php echo $title; ?>';
 	        var header_all_profile = '<?php echo $header_all_profile; ?>';
 	        var blog_slug = '<?php echo $this->uri->segment(2); ?>';	        
-            
+            var blog_id = "<?php echo $blog_data['id']; ?>";
             $(window).on("load",function(){
                 $(".custom-scroll").mCustomScrollbar({
                     autoHideScrollbar:true,
@@ -458,101 +478,204 @@ header("Pragma: no-cache"); // HTTP/1.0
                 });
             });
             $(document).ready(function(){
-            $("#subscribe_form").validate({
-                rules: {
-                    subscribe_email: {
-                        required: true,
-                        email : true,
-                        maxlength: 100
-                    },                        
-                },
-                messages:
-                {                        
-                    subscribe_email: {
-                        required: "Please enter email address",
-                        email: "Please enter valid email address",
-                        maxlength: "Maxumum 100 allow for email address"
-                    },                      
+                $("#subscribe_form").validate({
+                    rules: {
+                        subscribe_email: {
+                            required: true,
+                            email : true,
+                            maxlength: 100
+                        },                        
+                    },
+                    messages:
+                    {                        
+                        subscribe_email: {
+                            required: "Please enter email address",
+                            email: "Please enter valid email address",
+                            maxlength: "Maxumum 100 allow for email address"
+                        },                      
 
-                },
-                errorElement : 'h6',
-                submitHandler: function (form) {                        
-                    $.ajax({
+                    },
+                    errorElement : 'h6',
+                    submitHandler: function (form) {                        
+                        $.ajax({
+                            type: 'POST',
+                            url: base_url + "blog/add_subscription",
+                            data: {email: $("#subscribe_email").val()},
+                            dataType: "json",
+                            beforeSend: function () {
+                                $('#loader').show();
+                            },
+                            complete: function () {
+                                $('#loader').hide();
+                            },
+                            success: function (data) {                                
+                                if(data.success == true)
+                                {
+                                    $("#subscribe_form")[0].reset();
+                                    $("#subscribe-done").show();
+                                    $("#subscribe-form").hide();
+                                }
+
+                                if(data.success == false)
+                                {
+                                    $("#error_subscribe").show();
+                                    $("#error_subscribe").text(data.message);
+                                    setTimeout(function(){
+                                        $("#error_subscribe").hide();
+                                        $("#error_subscribe").text("");
+                                    },5000)
+                                }
+
+                                if(data.error == true)
+                                {
+                                    $("#error_subscribe").show();
+                                    $("#error_subscribe").text(data.message);
+                                    setTimeout(function(){
+                                        $("#error_subscribe").text("");
+                                        $("#error_subscribe").hide();
+                                    },5000)
+                                }
+                            }
+                        });
+                    }
+                });
+
+                $("#comment").validate({
+                    rules: {
+                        cname: {
+                            required: true,
+                            maxlength: 100
+                        },
+                        comment_email: {
+                            required: true,
+                            email : true,
+                            maxlength: 100
+                        },
+                        comment_message: {
+                            required: true,
+                            maxlength: 1000
+                        },
+                                                
+                    },
+                    messages:
+                    {
+                        cname: {
+                            required: "Please enter you name",
+                            maxlength: "Maxumum 100 allow for name"
+                        },
+                        comment_email: {
+                            required: "Please enter email address",
+                            email : "Please enter valid email address",
+                            maxlength: "Maxumum 100 allow for email address"
+                        },
+                        comment_message: {
+                            required: "Please enter comment",
+                            maxlength: "Maxumum 1000 allow for comment"
+                        },
+                    },                    
+                    submitHandler: function (form) {
+                        // console.log($("#comment").serialize());
+                        $.ajax({
+                            type: 'POST',
+                            url: base_url + "blog/comment_insert",
+                            data: $("#comment").serialize(),
+                            dataType: "json",
+                            beforeSend: function () {
+                                $('#comment_loader').show();
+                            },
+                            complete: function () {
+                                $('#comment_loader').hide();
+                            },
+                            success: function (data) {                                
+                                $("#comment")[0].reset();
+                                if(data == 1)
+                                {
+                                    $('#commentmodal .mes').html("Comment Added Successfully. When admin approve than it will show.");
+                                    $("#commentmodal").modal("show");
+                                }
+                                else if(data == 0)
+                                {
+                                    $('#commentmodal .mes').html("Comment not added. Plese try again.");
+                                    $("#commentmodal").modal("show");
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+            // Social media click
+            $(document).on("click", '#google_link', function(event) { 
+                var  url = $(this).attr('url_encode');
+                window.open('https://plus.google.com/share?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+            });
+
+            $(document).on("click", '#linked_link', function(event) { 
+                var  url = $(this).attr('url_encode');
+                window.open('https://www.linkedin.com/cws/share?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+            });
+
+            $(document).on("click", '#twitter_link', function(event) { 
+                var  url = $(this).attr('url_encode');
+                window.open('https://twitter.com/intent/tweet?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+            });
+
+            $(document).on("click", '#facebook_link', function(event) { 
+                var url = $(this).attr('url');
+                var url_encode = $(this).attr('url_encode');
+                var title = $(this).attr('title');
+                var summary = $(this).attr('summary');
+                var image = $(this).attr('image');
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://graph.facebook.com?id=' + url + '&scrape=true',
+                    success: function (data) {
+                        console.log(data);
+                    }
+
+                });
+                window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + summary + '&p[url]=' + url_encode + '&p[images][0]=' + image + '', 'sharer', 'toolbar=0,status=0,width=620,height=280');
+            });
+            var page = 1;
+            var limit = 5;
+            var total_rec = "";
+            var is_loading = false;
+            $(".all-comment-div").scroll(function(){
+                if($(".all-comment-div").scrollTop() + $(".all-comment-div").height() == $(".all-comment-result").height() && is_loading == false)
+                {
+                    loadmorecomment(page)
+                }
+            });
+            function loadmorecomment(pg)
+            {
+                if (is_loading) {                    
+                    return;
+                }
+                is_loading = true;
+                page = pg + 1;                
+                $.ajax({
                         type: 'POST',
-                        url: base_url + "blog/add_subscription",
-                        data: {email: $("#subscribe_email").val()},
-                        dataType: "json",
+                        url: base_url + "blog/load_more_comment",
+                        data: {page:page,blog_id:blog_id},                        
                         beforeSend: function () {
-                            $('#loader').show();
+                            $('#loader_more').show();
                         },
                         complete: function () {
-                            $('#loader').hide();
+                            $('#loader_more').hide();
                         },
-                        success: function (data) {                                
-                            if(data.success == true)
-                            {
-                                $("#subscribe_form")[0].reset();
-                                $("#subscribe-done").show();
-                                $("#subscribe-form").hide();
+                        success: function (data) {
+                            if(data != "")
+                            {                                
+                                $(".all-comment-result").append(data);
+                                is_loading = false;
                             }
-
-                            if(data.success == false)
+                            else
                             {
-                                $("#error_subscribe").show();
-                                $("#error_subscribe").text(data.message);
-                                setTimeout(function(){
-                                    $("#error_subscribe").hide();
-                                    $("#error_subscribe").text("");
-                                },5000)
-                            }
-
-                            if(data.error == true)
-                            {
-                                $("#error_subscribe").show();
-                                $("#error_subscribe").text(data.message);
-                                setTimeout(function(){
-                                    $("#error_subscribe").text("");
-                                    $("#error_subscribe").hide();
-                                },5000)
+                                is_loading = true;   
                             }
                         }
                     });
-                }
-            });
-        });
-        // Social media click
-$(document).on("click", '#google_link', function(event) { 
-    var  url = $(this).attr('url_encode');
-    window.open('https://plus.google.com/share?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-});
-
-$(document).on("click", '#linked_link', function(event) { 
-    var  url = $(this).attr('url_encode');
-    window.open('https://www.linkedin.com/cws/share?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-});
-
-$(document).on("click", '#twitter_link', function(event) { 
-    var  url = $(this).attr('url_encode');
-    window.open('https://twitter.com/intent/tweet?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-});
-
-$(document).on("click", '#facebook_link', function(event) { 
-    var url = $(this).attr('url');
-    var url_encode = $(this).attr('url_encode');
-    var title = $(this).attr('title');
-    var summary = $(this).attr('summary');
-    var image = $(this).attr('image');
-
-    $.ajax({
-        type: 'POST',
-        url: 'https://graph.facebook.com?id=' + url + '&scrape=true',
-        success: function (data) {
-            console.log(data);
-        }
-
-    });
-    window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + summary + '&p[url]=' + url_encode + '&p[images][0]=' + image + '', 'sharer', 'toolbar=0,status=0,width=620,height=280');
-});
+            }
         </script>
         <!-- <script src="<?php //echo base_url('assets/js/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script> -->
         <?php /* if (IS_OUTSIDE_JS_MINIFY == '0') { ?>

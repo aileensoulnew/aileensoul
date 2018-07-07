@@ -130,7 +130,7 @@ class Blog extends CI_Controller {
                 $blogPost = $this->blog_model->get_blog_post($search_keyword,"",$page,$limit,'created_date');
 
                 foreach ($blogPost as $key=>$blog) {
-                    $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where blog_id = '". $blog['id'] ."'";
+                    $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where status = 'approve' AND blog_id = '". $blog['id'] ."'";
                     $query = $this->db->query($sql);
                     $blogPost[$key]['total_comment'] = $query->row()->total_comment;
 
@@ -199,7 +199,7 @@ class Blog extends CI_Controller {
                 $blogPost = $this->blog_model->get_blog_post('',$category_id,$page,$limit,'created_date');
 
                 foreach ($blogPost as $key=>$blog) {
-                    $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where blog_id = '". $blog['id'] ."'";
+                    $sql = "SELECT count(id) as total_comment FROM ailee_blog_comment where status = 'approve' AND blog_id = '". $blog['id'] ."'";
                     $query = $this->db->query($sql);
                     $blogPost[$key]['total_comment'] = $query->row()->total_comment;
 
@@ -294,11 +294,11 @@ class Blog extends CI_Controller {
 
     //BLOGDETAIL FOR PERICULAR ONE POST END
     //COMMENT INSERT BY USER START
-    public function comment_insert() {
+    public function comment_insert() {        
         $id = $_POST['blog_id'];
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $message = $_POST['message'];
+        $name = $_POST['cname'];
+        $email = $_POST['comment_email'];
+        $message = $_POST['comment_message'];
 
         //FOR INSERT READ MORE BLOG START
         $data = array(
@@ -845,5 +845,29 @@ class Blog extends CI_Controller {
         $condition_array = array('status' => 'publish');
         $recent_blog_list = $this->common->select_data_by_condition('blog', $condition_array, $data = '*,DATE_FORMAT(created_date,"%D %M %Y") as created_date_formatted', $short_by = 'id', $order_by = 'desc', $limit = 5, $offset, $join_str = array());
         echo json_encode($recent_blog_list);
+    }
+
+    public function load_more_comment()
+    {
+        $blog_id = $_POST['blog_id'];
+        $page = $_POST['page'];
+        $limit = 2;
+        $commen_data = $this->blog_model->get_loadmore_comment($blog_id,$page,$limit);
+        $html = "";
+        foreach($commen_data as $_commen_data)
+        {
+            $html .= '<div class="comment-box">
+                <div class="comment-img post-head">
+                    <span class="post-img">'.ucwords($_commen_data['name'][0]).'
+                    </span>
+                </div>
+                <div class="comment-text">
+                    <h4>'.ucwords($_commen_data['name']).'</h4>
+                    <span>'.$_commen_data['created_date_formatted'].'</span>
+                    <p>'.$_commen_data['message'].'</p>
+                </div>
+            </div>';
+        }
+        echo $html;exit;
     }
 }

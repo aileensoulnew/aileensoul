@@ -459,6 +459,7 @@ $route['blog/blog_ajax'] = "blog/blog_ajax";
 $route['blog/cat_ajax'] = "blog/cat_ajax";
 $route['blog/get_blog_cat_list'] = "blog/get_blog_cat_list";
 $route['blog/comment_insert'] = "blog/comment_insert";
+$route['blog/load_more_comment'] = "blog/load_more_comment";
 $route['blog/add_subscription'] = "blog/add_subscription";
 $route['blog/get_blog_details'] = "blog/get_blog_details";
 $route['blog/recent_blog_list'] = "blog/recent_blog_list";
