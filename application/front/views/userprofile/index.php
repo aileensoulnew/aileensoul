@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>" />
         <link href="<?php echo base_url('8/ninja-slider.css'); ?>" rel="stylesheet" type="text/css" />
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
@@ -60,10 +61,17 @@
                         <?php $this->load->view('main_logo'); ?>
                     </div>
                     <div class="col-md-8 col-sm-9 col-xs-9 fw-479 right-header">
-                        <div class="btn-right">
-                            <a class="btn4" href="<?php echo base_url(); ?>login" target="_self">Login</a>
-                            <a class="btn2" href="<?php echo base_url(); ?>registration" target="_self">Creat an account</a>
-                        </div>
+                        <ul class="nav navbar-nav navbar-right test-cus drop-down">
+                            <?php $this->load->view('profile-dropdown'); ?>
+                            <li><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+                            <li><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
+                            <li class="mob-bar-li">
+                                <span class="mob-right-bar">
+                                    <?php $this->load->view('mobile_right_bar'); ?>
+                                </span>
+                            </li>
+                        
+                        </ul>
                     </div>
                 </div>
             </div>
