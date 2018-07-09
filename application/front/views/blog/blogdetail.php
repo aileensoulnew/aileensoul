@@ -359,7 +359,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						<div class="center-title">
 	                                <h3>All Comments</h3>
 	    						</div>
-                                <div class="all-comment-div content custom-scroll">
+                                <div class="all-comment-div " style="height:300px; overflow-y:scroll;">
                                     <div class="all-comment-result">
                                     <?php foreach($blog_data['all_comment'] as $all_comment): ?>
     	    						<div class="comment-box">
