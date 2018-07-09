@@ -155,13 +155,21 @@
                     $('.right-header ul.dropdown-menu').hide();
                 });*/
             });
-            $(document).click(function(){
+            /*$(document).click(function(){
                 $('.right-header ul.dropdown-menu').hide();
-            });
+            });*/
             $(document).ready(function () {
                 $('html,body').animate({scrollTop: 500}, 500);
             });
         </script>
+        <?php if($user_id != "")
+        { ?>
+        <script>
+            $(document).click(function(){
+                $('.right-header ul.dropdown-menu').hide();
+            });
+        </script>
+        <?php } ?>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>        
         <!-- <script src="<?php //echo base_url('assets/js/webpage/freelancer-apply/view_more_freelance_apply.js?ver=' . time()) ?>"></script> -->
     </body>
