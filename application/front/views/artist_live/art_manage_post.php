@@ -42,6 +42,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css'); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style type="text/css">
             .two-images, .three-image, .four-image{
                 height: auto !important;
@@ -63,7 +65,7 @@
 <body class="page-container-bg-solid page-boxed">
     <?php $this->load->view('page_loader'); ?>
     <div id="main_page_load" style="display: none;">
-    <?php echo $header; ?>
+    <?php //echo $header; ?>
     <?php echo $artistic_header2; ?>
     <section class="custom-row">
     <?php echo $artistic_common; ?>
@@ -559,7 +561,7 @@
 <?php echo $footer; ?>
 
 <?php
-  if (IS_ART_JS_MINIFY == '0') { ?>
+  /*if (IS_ART_JS_MINIFY == '0') { ?>
 
 <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
@@ -587,7 +589,19 @@
 <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
 
-<?php }?>
+<?php }*/ ?>
+<script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/dragdrop/js/plugins/sortable.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/dragdrop/js/fileinput.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/dragdrop/js/locales/fr.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/dragdrop/js/locales/es.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/dragdrop/themes/explorer/theme.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.form.3.51.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
 <script type="text/javascript">
 var base_url = '<?php echo base_url(); ?>';   
 var isdeactive = '<?php echo $isartistactivate; ?>';   
