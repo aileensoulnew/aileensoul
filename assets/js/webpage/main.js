@@ -192,7 +192,7 @@ $(document).ready(function () {
             },
             email_reg: {
                 required: true,
-//                email: true,
+                //email: true,
                 //lowercase: /^[0-9a-z\s\r\n@!#\$\^%&*()+=_\-\[\]\\\';,\.\/\{\}\|\":<>\?]+$/,
                 remote: {
                     url: base_url + "registration/check_email",
@@ -431,15 +431,15 @@ function sendmail(userid) {
 //var modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+//var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 //var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function () {
-   $('#forgotPassword').modal('show');
-}
+// btn.onclick = function () {
+//    $('#forgotPassword').modal('show');
+// }
 
 // When the user clicks on <span> (x), close the modal
 //span.onclick = function () {
@@ -453,7 +453,7 @@ btn.onclick = function () {
 //    }
 //}
 // forgot password script end 
-$(document).ready(function () {
+$(function() {
     /* validation */
     $("#forgot_password").validate({
         rules: {

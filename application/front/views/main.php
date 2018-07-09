@@ -119,7 +119,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 						</div>
 						<div class="btn-right">
 							<button id="login-new" title="Login" tabindex="1"  class="btn1-cus">Login <span class="ajax_load" id="login_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
-							<a tabindex="1" id="myBtn"  class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
+							<a tabindex="1" data-target="#forgotPassword" data-toggle="modal" data-dismiss="modal" class="" href="javascript:void(0)" title="Forgot Password">Forgot Password?</a>
 						</div>
 					</form>
 				</div>
@@ -284,7 +284,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         <div class="modal fade login" id="forgotPassword" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content login-frm">
-                    <button type="button" class="modal-close" data-dismiss="modal" onclick="login_profile();">&times;</button>       
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
                     <div class="modal-body">
                         <div class="right-main">
                             <div class="right-main-inner">
@@ -295,9 +295,10 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     </div>
                                    
                                     <?php
-                        $form_attribute = array('name' => 'forgot', 'method' => 'post', 'class' => 'forgot_password', 'id' => 'forgot_password');
-                        echo form_open('profile/forgot_live', $form_attribute);
-                        ?>
+                                    // $form_attribute = array('name' => 'forgot', 'method' => 'post', 'class' => 'forgot_password', 'id' => 'forgot_password');
+                                    // echo form_open('#', $form_attribute);
+                                    ?>
+                                    <form role="form" class="forgot_password" name="forgot" id="forgot_password" method="post">
                                     <div class="form-group">
                                         <input type="email" value="" name="forgot_email" id="forgot_email" class="form-control input-sm" placeholder="Email Address*">
                                         <div id="error2" style="display:block;">
@@ -366,11 +367,11 @@ header("Pragma: no-cache"); // HTTP/1.0
                                             </p>
 
                                             <p class=" text-center">
-                                                <a title="Forgot Password" href="javascript:void(0)" data-toggle="modal" onclick="forgot_profile();" id="myBtn">Forgot Password ?</a>
+                                                <a title="Forgot Password" href="javascript:void(0)" data-toggle="modal"" data-target="#forgotPassword"  data-dismiss="modal" data-toggle="modal">Forgot Password ?</a>
                                             </p>
 
                                             <p class="pt15 text-center">
-                                                Don't have an account? <a title="Create an account" href="javascript:void(0);" data-toggle="modal" onclick="register_profile();">Create an account</a>
+                                                Don't have an account? <a title="Create an account" href="<?php echo base_url()."registration"; ?>">Create an account</a>
                                             </p>
                                         </form>
 
