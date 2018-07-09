@@ -589,7 +589,7 @@ header h2{
     color:#1b8ab9;
     border-bottom:1px solid #c7c7c7;
     font-size:24px;
-    font-family:robotoregular
+    
 }
 .login .form-group select,.login .form-group select:focus{
     width:70px;
@@ -841,7 +841,7 @@ textarea:focus::-webkit-input-placeholder{
     text-align:center
 }
 .titlea h1{
-    font-family:robotoregular;
+    
     -webkit-background-clip:text;
     margin-bottom:15px
 }
@@ -3253,9 +3253,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     footer ul li:last-child a{
         padding-right:15px
     }
-    .form-pd{
-        padding:70px 0 33px
-    }
+    .form-pd{padding:0px 0 30px;}
     .login #register_form span::after{
         right:15px
     }

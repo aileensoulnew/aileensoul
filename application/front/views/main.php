@@ -36,7 +36,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
         <link rel="canonical" href="<?php echo $actual_link ?>" />
-
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
         <?php
         if (IS_OUTSIDE_CSS_MINIFY == '0') {
             ?>
@@ -407,6 +407,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 				});
         </script>
         <script src="<?php echo base_url('assets/js/webpage/main.js?ver=' . time()); ?>"></script>
+		<script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.js?ver=' . time()); ?>"></script>
         <?php
         if (IS_OUTSIDE_JS_MINIFY == '0') {
             ?>
@@ -416,5 +417,21 @@ header("Pragma: no-cache"); // HTTP/1.0
             ?>
             <!--<script src="<?php echo base_url('assets/js_min/webpage/main.js?ver=' . time()); ?>"></script>-->
         <?php } ?>
+		
+		<script>
+		
+			
+		// mcustom scroll bar
+			(function($){
+				$(window).on("load",function(){
+					
+					$(".custom-scroll").mCustomScrollbar({
+						autoHideScrollbar:true,
+						theme:"minimal"
+					});
+					
+				});
+			})(jQuery);
+    </script>
     </body>
 </html>
