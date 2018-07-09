@@ -118,7 +118,7 @@ $userid = $this->session->userdata('aileenuser');
 										
 									</li>
 									<li><a href="<?php echo base_url('login'); ?>">Login</a></li>
-									<li><a href="<?php echo base_url('business-profile/create-account'); ?>"><span class="hidden-479">Create Artistic Profile</span><span class="visible-479">Sign Up</span></a></li>
+									<li><a href="<?php echo base_url('artist-profile/create-account'); ?>"><span class="hidden-479">Create Artistic Profile</span><span class="visible-479">Sign Up</span></a></li>
 								</ul>
 							</div>
 						</div>

@@ -994,7 +994,6 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 if($(e.target).prop("class") != "")
                 {
                     var classNames = $(e.target).prop("class").toString().split(' ').pop();
-                    console.log(classNames);
                     if (classNames != 'login_link') {
                         return false;
                         open_profile();
