@@ -1628,7 +1628,8 @@ top: -3px;}
 .comment-text h4{margin-bottom:0;}
 .comment-text span{font-size:11px;}
 .comment-box .post-head .post-img{width:58px; height:58px; padding:18px 0; border-radius:100%;}
-.all-comment-div{border:1px solid #d2d2d2; max-height:325px; height:auto;}
+.all-comment-div{border:1px solid #d2d2d2; max-height:325px; height:auto; overflow-y:scroll;}
+.all-comment-result{float:left; height:auto;}
 .leave-reply{padding-top:50px;}
 .blog-detail .blog-left-content h3{padding:0;}
 .blog-page .sub-header .dropdown.open .dropdown-menu{left:15px !important;}
