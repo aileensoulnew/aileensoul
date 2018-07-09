@@ -77,7 +77,7 @@
                         <div class="mob-ld-sub">
                             <ul class="">
                                 <li class="tab-first-li">
-                                    <a href="#">Jobs</a>
+                                    <a href="javascript:void(0);">Jobs</a>
                                     <ul>
                                         <li><a href="<?php echo base_url('job-search'); ?>">Job Profile</a></li>
                                         <li><a href="<?php echo base_url('jobs-by-categories'); ?>">Jobs by Category</a></li>

@@ -74,7 +74,7 @@
                                 <div class="">
                                     <ul class="nav nav-tabs">
                                         <li><a href="<?php echo base_url(); ?>jobs-by-categories"><span class="hidden-xs">Jobs by</span> Categories</a></li>
-                                        <li class="active"><a href="#"><span class="hidden-xs">Jobs by</span> Skills</a></li>
+                                        <li class="active"><a href="javascript:void(0);"><span class="hidden-xs">Jobs by</span> Skills</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-location"><span class="hidden-xs">Jobs by</span> Locations</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-companies"><span class="hidden-xs">Jobs by</span> Companies</a></li>
                                         <li><a href="<?php echo base_url(); ?>jobs-by-designations"><span class="hidden-xs">Jobs by</span> Designations</a></li>
@@ -135,7 +135,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
     <script>
         $(document).ready(function(){
-             $('html,body').animate({scrollTop: 500}, 500);
+             $('html,body').animate({scrollTop: 300}, 500);
         });
         var base_url = '<?php echo base_url(); ?>';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
