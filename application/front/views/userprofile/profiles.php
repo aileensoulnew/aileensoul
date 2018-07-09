@@ -30,7 +30,7 @@
                             <a target="_self" ng-if="details_data.bp_status == '0' && details_data.rp_step == '3'"  ng-href="<?php echo base_url('business-profile'); ?>">
                                 <img title="Business Profile" src="<?php echo base_url() . "assets/n-images/i4.jpg"; ?>">
                             </a>
-                            <a href="<?php echo base_url('business-search'); ?>"  ng-if="details_data.bp_step == null" class="" ng-href="<?php echo base_url('business-search'); ?>">
+                            <a href="<?php echo base_url('business-search'); ?>"  ng-if="details_data.bp_step == null || details_data.bp_step == '1'" class="" ng-href="<?php echo base_url('business-search'); ?>">
                                 <img title="Business Profile" src="<?php echo base_url() . "assets/n-images/i4.jpg"; ?>">
                             </a>
                         </div>
@@ -40,13 +40,13 @@
                             <h1>
                                 <a title="Business Profile"  ng-if="details_data.bp_step == '4'" ng-href="<?php echo base_url('business-profile'); ?>" target="_self">Business Profile</a> 
                                 <a title="Business Profile" ng-if="details_data.bp_status == '0' && details_data.rp_step == '3'"  ng-href="<?php echo base_url('business-profile'); ?>" target="_self">Business Profile</a> 
-                                <a title="Business Profile" ng-if="details_data.bp_step == null" ng-href="<?php echo base_url('business-search'); ?>" target="_self">Business Profile</a> 
+                                <a title="Business Profile" ng-if="details_data.bp_step == null || details_data.bp_step == '1'" ng-href="<?php echo base_url('business-search'); ?>" target="_self">Business Profile</a> 
                             </h1>
                             <p>Grow your business network.</p>
                             <div class="btns">
                                 <a title="Take me in"  ng-if="details_data.bp_step == '4'" class="btn-4" ng-href="<?php echo base_url('business-profile'); ?>" target="_self">Take me in</a> 
                                 <a title="Active" ng-if="details_data.bp_status == '0' && details_data.rp_step == '3'" class="btn-4" ng-href="<?php echo base_url('business-profile'); ?>" target="_self">Active</a> 
-                                <a title="Register" ng-if="details_data.bp_step == null" class="btn-4" ng-href="<?php echo base_url('business-search'); ?>" target="_self">Register</a> 
+                                <a title="Register" ng-if="details_data.bp_step == null || details_data.bp_step == '1'" class="btn-4" ng-href="<?php echo base_url('business-search'); ?>" target="_self">Register</a> 
                                 <a title="How it works" data-target="#bus-popup" data-toggle="modal" href="javascript:void(0);" class="pl20 ml20 hew">How it works?</a>
                             </div>
                         </div>
