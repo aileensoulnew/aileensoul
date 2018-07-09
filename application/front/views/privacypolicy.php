@@ -38,6 +38,7 @@ header('Cache-Control: public, max-age=30');
         if (IS_OUTSIDE_CSS_MINIFY == '0') {
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver='.time()); ?>">
+			<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver='.time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/blog.css?ver='.time()); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver='.time()); ?>">

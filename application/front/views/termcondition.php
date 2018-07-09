@@ -31,6 +31,7 @@ header('Cache-Control: public, max-age=30');
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="canonical" href="<?php echo $actual_link ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">

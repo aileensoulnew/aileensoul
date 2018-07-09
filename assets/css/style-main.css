@@ -348,6 +348,7 @@ header h2{
 }
 .modal.login .modal-content{
     padding: 0px;
+	margin:0 auto;
 }
 .pt-20 {
     padding-bottom: 20px;

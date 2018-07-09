@@ -8,7 +8,7 @@
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />       
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
-       
+       <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-common.css?ver='.time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver='.time()) ?>">
          <?php if (IS_OUTSIDE_CSS_MINIFY == '0'){?>
