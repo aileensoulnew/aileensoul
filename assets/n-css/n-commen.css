@@ -1185,6 +1185,7 @@ footer ul li a:hover{
 .sub-header{width:100%; float:left; border-bottom:1px solid #d2d2d2; top:54px; position:fixed; background:#fff; z-index:99;}
 .sub-header-search{width:100%; float:left; position:fixed; z-index:1002; top:80px; display:none;}
 .sub-header .sub-menu{padding:12px 0; margin:0; width:100%; float:left;}
+.sub-header .sub-menu.blog-sub-menu{padding:12px 0 9px;}
 .sub-header .sub-menu li{list-style-type:none; float:left; padding:0px 20px; margin-bottom:0;}
 .sub-header .sub-menu li:first-child{padding-left:0;}
 .sub-header .sub-menu li a{font-size:16px; color:#5c5c5c; float:left;}

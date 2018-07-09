@@ -128,8 +128,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <?php if(!$this->session->userdata('aileenuser')) {?>
 									<ul class="nav navbar-nav navbar-right test-cus drop-down">
 										<?php $this->load->view('profile-dropdown'); ?>
-										<li><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
-										<li><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
+										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										<li class="hidden-991"><a href="<?php echo base_url('registration'); ?>" class="btn3">Create an account</a></li>
 										<li class="mob-bar-li">
 											<span class="mob-right-bar">
 												<?php $this->load->view('mobile_right_bar'); ?>
