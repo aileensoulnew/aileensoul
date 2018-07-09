@@ -477,7 +477,7 @@ label.cameraButton input[accept*="camera"] {
 	position: absolute;
 	text-align: center;
 	width: 170px;font-size: 13px; font-weight: bold;}
-	.upload-profile a{margin-bottom: 33px; color: #fff; display: inline-block;}
+.upload-profile a{margin-bottom: 20px; color: #fff; display: inline-block;}
 .upload-profile img {display: block; margin: 0 auto 0px; width:40px !important; height:auto !important; border-radius:0px !important;}
 .profile-img:hover .upload-profile{display:block; color:#fff;}
 .user-photo-name{text-align:center; padding-bottom: 10px;}
@@ -1513,6 +1513,8 @@ box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15); -webkit-transition: width .6s eas
 .cus-border-cus .art-img-nn{border:1px solid #d2d2d2; border-radius:4px; margin-top:15px;}
 .art-img-nn{text-align:center; padding:30px 0; border:1px solid #d2d2d2; border-radius:4px; margin-top:0;}
 .art_no_post_avl .art-img-nn{border:0px;}
+#seenot .art-img-nn{border:0px;}
+#seenot.pull-right{float:none !important;}
 .dropdown-data .art-img-nn{margin:0; border:0;}
 .no-data-available .art-img-nn{padding: 0 10px 20px;}
 #upload-one{height:auto;}

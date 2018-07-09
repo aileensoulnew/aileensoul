@@ -1168,8 +1168,8 @@ header .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical,header .mCSB_ou
     margin-top:0
 }
 .art-img-nn{
-    width:100%;
-    margin:30px 0
+    /*width:100%;
+    margin:30px 0*/
 }
 .art_no_post_avl h3{
     padding:4px 0;

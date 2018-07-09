@@ -386,12 +386,12 @@ header h2{
 
 .modal.in .modal-dialog .mes .pop_content{padding-bottom:5px;}
 .modal-content {
-    background-color: #fefefe;
+    /*background-color: #fefefe;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #888;  
-    /*width: 100%;*/
-    float: left;
+    width: 100%;
+    float: left;*/
 }
 .profile-modal-close, .modal-close,
 .modal-close1 {
@@ -693,8 +693,8 @@ footer ul li a{
     color:#1b8ab9!important;
 }
 .form-group input:focus,.form-group input[type=password]:focus{
-    border-bottom:1px solid #1b8ab9!important;
-    color:#1b8ab9!important;
+    /*border-bottom:1px solid #1b8ab9!important;
+    color:#1b8ab9!important;*/
 }
 .contact #contact_form input.error,.contact #contact_form textarea.error {
     border:0px !important;
@@ -976,7 +976,7 @@ textarea:focus::-webkit-input-placeholder{
 .login .form-group select{
     padding-left:3px
 }
-.upload-profile{
+/*.upload-profile{
     background-color:rgba(0,0,0,.4);
     border-radius:4px;
     bottom:4px;
@@ -988,7 +988,7 @@ textarea:focus::-webkit-input-placeholder{
     position:absolute;
     text-align:center;
     width:140px
-}
+}*/
 .upload-profile img{
     display:block;
     margin:0 auto 10px
@@ -1014,13 +1014,13 @@ textarea:focus::-webkit-input-placeholder{
     display:none
 }
 .upload-img label.cameraButton{
-    height:42px;
+   /* height:42px;
     line-height:1;
     padding:3px 4px;
     width:50px;
     background:rgba(0,0,0,.8);
     border-radius:4px;
-    border:none
+    border:none*/
 }
 .banner-box .upload-camera{
     position:absolute;

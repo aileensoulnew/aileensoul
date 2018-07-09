@@ -137,7 +137,7 @@ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1b8a
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1b8ab9', endColorstr='#3bb0ac',GradientType=0 ); 
 	
 }
-.btn2{padding: 7px 10px; border-radius: 4px; letter-spacing: 0px; margin: 0px; background:#1b8ab9; color:#fff;}
+.btn2{padding: 7px 10px; border-radius: 4px; letter-spacing: 0px; margin: 0px; background:#1b8ab9; color:#fff; line-height:inherit;}
 .btn2:hover{background:#156f95;}
 .btn-p, .btn3{border-radius: 4px; letter-spacing: 0px; margin: 0px; 
 	background: rgb(44, 83, 158);
