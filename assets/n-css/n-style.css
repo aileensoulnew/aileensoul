@@ -966,7 +966,13 @@ header.profile-header .logo a{color:#5c5c5c;}
     font-size: 11px!important;
 }
 .has-error input, input.error, select.error, .has-error textarea, textarea.error {border: 1px solid #ff0000 !important;}
+.registeration .has-error input,  .registeration input.error, .registeration  select.error, .registeration .has-error textarea, .registeration textarea.error {border-width: 0 0 1px !important;}
+.login-cu-page .has-error input,  .login-cu-page input.error, .login-cu-page  select.error, .login-cu-page .has-error textarea, .login-cu-page textarea.error {border-width: 0 0 1px !important;}
+
 .cus_field .error{bottom: 50px;}
+.registeration .form-group label.error{padding-left:0 !important;}
+.login-cu-page .form-group label.error{padding-left:0 !important;}
+.leave-reply .reply-form .form-group label.error{position:relative; bottom:0 !important; padding-left:0 !important;}
 
 
 /***  img upload css  ***/
