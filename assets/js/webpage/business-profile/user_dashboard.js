@@ -149,15 +149,14 @@ function business_dashboard_post(slug, pagenum) {
             }
             isProcessing = false;
             // check_no_post_data();
-            $('.user-midd-section a').attr('href', 'javascript:void(0)');
+            $('.post-design-box a').attr('href', 'javascript:void(0)');
             $('.art-all-comment').remove();
             $('.post-design-commnet-box').remove();
-            $('a').on('click', function() {
-                console.log($(this).attr("class"));
+            $('a').on('click', function() {                
                 if($(this).attr("class") != "" && $(this).attr("class") != undefined)
                 {                    
                     var classNames = $(this).attr("class").toString().split(' ').pop();
-                    if (classNames != 'login_link') {
+                    if (classNames != 'login_link' && classNames != 'click-profiles') {
                         open_profile();
                     }
                 }

@@ -78,6 +78,7 @@ class Business_userprofile extends CI_Controller {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $business_login_slug = $this->data['business_login_slug'];
         $bus_userid = $this->session->userdata('aileenuser');
+        $login_user_id = $this->session->userdata('aileenuser');
         $perpage = 5;
         $page = 1;
         if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
@@ -283,6 +284,11 @@ class Business_userprofile extends CI_Controller {
 <div class = "dropdown1">';
                 $return_html .= '<a onClick = "myFunction1(' . $post_business_profile_post_id . ')" class = "dropbtn_common dropbtn1 fa fa-ellipsis-v"></a>';
 
+
+
+
+                if($login_user_id != ""){
+
                 $return_html .= '<div id = "myDropdown' . $post_business_profile_post_id . '" class = "dropdown-content1 dropdown2_content">';
                 if ($post_posted_user_id != 0) {
                     if ($userid == $post_posted_user_id) {
@@ -318,8 +324,12 @@ class Business_userprofile extends CI_Controller {
                     }
                 }
 
-                $return_html .= '</div>
-</div>
+                $return_html .= '</div>';
+
+}
+
+
+$return_html .= '</div>
 <div class = "post-design-desc">
 <div class = "ft-15 t_artd">
 <div id = "editpostdata' . $post_business_profile_post_id . '" style = "display:block;">
