@@ -97,23 +97,23 @@ $userid = $this->session->userdata('aileenuser');
 						<div class="container">
 							<div class="web-ld-sub">
 								<ul class="">
-									<li><a href="#">Artist Profile</a></li>
-									<li><a href="#">Artists by Category</a></li>
-									<li><a href="#">Artists by Location</a></li>
-									<li><a href="#">How Artistic Profile Works</a></li>
-									<li><a href="#">Blog</a></li>
+									<li><a href="<?php echo base_url('find-artist'); ?>">Artist Profile</a></li>
+									<li><a href="<?php echo base_url('artist/category'); ?>">Artists by Category</a></li>
+									<li><a href="<?php echo base_url('artist/location'); ?>">Artists by Location</a></li>
+									<li><a href="<?php echo base_url('how-to-use-artistic-profile-in-aileensoul'); ?>">How Artistic Profile Works</a></li>
+									<li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
 								</ul>
 							</div>
 							<div class="mob-ld-sub">
 								<ul class="">
 									<li class="tab-first-li">
-										<a href="#">Artists</a>
+										<a href="javascript:void(0);">Artists</a>
 										<ul>
-											<li><a href="#">Artist Profile</a></li>
-											<li><a href="#">Artists by Category</a></li>
-											<li><a href="#">Artists by Location</a></li>
-											<li><a href="#">How Artistic Profile Works</a></li>
-											<li><a href="#">Blog</a></li>
+											<li><a href="<?php echo base_url('find-artist'); ?>">Artist Profile</a></li>
+											<li><a href="<?php echo base_url('artist/category'); ?>">Artists by Category</a></li>
+											<li><a href="<?php echo base_url('artist/location'); ?>">Artists by Location</a></li>
+											<li><a href="<?php echo base_url('how-to-use-artistic-profile-in-aileensoul'); ?>">How Artistic Profile Works</a></li>
+											<li><a href="<?php echo base_url('blog'); ?>">Blog</a></li>
 										</ul>
 										
 									</li>
