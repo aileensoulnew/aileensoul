@@ -851,7 +851,7 @@ class Blog extends CI_Controller {
     {
         $blog_id = $_POST['blog_id'];
         $page = $_POST['page'];
-        $limit = 2;
+        $limit = 3;
         $commen_data = $this->blog_model->get_loadmore_comment($blog_id,$page,$limit);
         $html = "";
         foreach($commen_data as $_commen_data)
