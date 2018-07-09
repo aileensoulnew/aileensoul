@@ -11,6 +11,7 @@ class Introduction extends CI_Controller {
         $this->load->library('S3');
         //AWS access info end
         include ('include.php');
+        include ('main_profile_link.php');
     }
 
     public function index() {
