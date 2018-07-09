@@ -2510,6 +2510,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.custom-user-list{margin:0 auto; float:none;}
 	.job-top-detail p .exp{padding-right:60px;}
 	#chat-area{width:638px;}
+	#basicinfo .day, #basicinfo .month {width:31%;}
 }
 @media screen and (max-width: 1024px) {
 

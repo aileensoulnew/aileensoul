@@ -2377,16 +2377,13 @@ footer ul li a:hover{
         padding:9px 10px 10px
     }
     #basicinfo .day{
-        width:31%!important;
         padding-left:4px
     }
     #basicinfo .month{
-        width:32%!important;
         padding-right:0;
         padding-left:4px
     }
     #basicinfo .year{
-        width:33%!important;
         padding-left:4px;
         padding-right:0
     }
