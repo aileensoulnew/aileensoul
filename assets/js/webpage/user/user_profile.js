@@ -290,6 +290,7 @@ app.controller('userProfileController', function ($scope, $http) {
     $scope.follow_status = follow_status;
     $scope.follow_id = follow_id;
 
+
     $scope.contact = function (id, status, to_id) {
         $http({
             method: 'POST',
@@ -898,6 +899,49 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $scope.active = $scope.active == item ? '' : item;
     }*/
     // $scope.$parent.title = "Dashboard | Aileensoul";
+
+    $("#job_title").focusin(function(){
+        $('#jobtitletooltip').show();
+    });
+    $("#job_title").focusout(function(){
+        $('#jobtitletooltip').hide();
+    });
+
+    $("#location").focusin(function(){
+        $('#locationtooltip').show();
+    });
+    $("#location").focusout(function(){
+        $('#locationtooltip').hide();
+    });
+
+    $("#field").focusin(function(){
+        $('#fieldtooltip').show();
+    });
+    $("#field").focusout(function(){
+        $('#fieldtooltip').hide();
+    });
+
+    $("#ask_desc").focusin(function(){
+        $('#ask_desctooltip').show();
+    });
+    $("#ask_desc").focusout(function(){
+        $('#ask_desctooltip').hide();
+    });
+
+    $("#ask_related_category").focusin(function(){
+        $('#rlcattooltip').show();
+    });
+    $("#ask_related_category").focusout(function(){
+        $('#rlcattooltip').hide();
+    });
+
+    $("#ask_field").focusin(function(){
+        $('#ask_fieldtooltip').show();
+    });
+    $("#ask_field").focusout(function(){
+        $('#ask_fieldtooltip').hide();
+    });
+    
     var isLoadingData = false;
 
     $(document).on('hidden.bs.modal', function (event) {
