@@ -1,11 +1,11 @@
 // for cursor pointer starts script
 
-$(document).ready(function () {
+/*$(document).ready(function () {
     var input = $(".editable_text");
     var len = input.val().length;
     input[0].focus();
     input[0].setSelectionRange(len, len);
-});
+});*/
 
 $('body').on("click", "*", function (e) {
     if($(e.target).attr("class")){
