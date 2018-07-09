@@ -26,6 +26,7 @@ class Login extends CI_Controller {
         $this->load->model('recruiter_model');
         $this->load->model('freelancer_hire_model');
         $this->load->model('freelancer_apply_model');
+        include ('main_profile_link.php');
     }
 
     public function index() {
