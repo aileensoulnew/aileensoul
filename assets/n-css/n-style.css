@@ -1621,12 +1621,14 @@ top: -3px;}
 .rec-img{border:1px solid #d2d2d2; border-radius:4px; height:200px; margin-bottom:5px; width:100%; overflow:hidden; position:relative;}
 .rec-img img{border-radius:4px; width: auto; height: 100%; left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); max-width:inherit;}
 .all-comments{padding-top:50px;}
-.comment-box{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding:20px 0 10px;}
+.comment-box{width:100%; float:left; border-bottom:1px solid #d2d2d2; padding:20px 15px 10px;}
 .comment-img{width:60px; height:60px; float:left; border-radius:100%; border:1px solid #5c5c5c;}
 .comment-img img{width:100%; border-radius:100%;}
 .comment-text{width:91%; float:left; padding-left:15px;}
 .comment-text h4{margin-bottom:0;}
 .comment-text span{font-size:11px;}
+.comment-box .post-head .post-img{width:58px; height:58px; padding:18px 0; border-radius:100%;}
+.all-comment-div{border:1px solid #d2d2d2; height:325px;}
 .leave-reply{padding-top:50px;}
 .blog-detail .blog-left-content h3{padding:0;}
 .blog-page .sub-header .dropdown.open .dropdown-menu{left:15px !important;}
