@@ -27,7 +27,11 @@ header('Expires: ' . $date);
         <meta charset="utf-8">
         
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> 
+		<link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
+		
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
@@ -51,18 +55,27 @@ header('Expires: ' . $date);
                 <header class="profile-header">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4 col-sm-3 left-header">
-                                <div class="logo"><a href="<?php echo base_url(); ?>"><img style="height:30px; width:auto;" src="<?php echo base_url('assets/img/logo2.png'); ?>" alt="logo"></a></div>
-                            </div>
-                            <div class="col-md-8 col-sm-9 right-header">
-                                <div class="btn-right pull-right">
-                                    <?php /*if (!$this->session->userdata('aileenuser')) { ?>
-                                        <a href="<?php echo base_url('login'); ?>" class="btn-new1">Login</a>
-                                        <a href="<?php echo base_url('registration'); ?>" class="btn3-cust">Create an account</a>
-                                    <?php }*/ ?>
-                                </div>
-                            </div>
-                        </div>
+								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+									<div class="logo"><a href="<?php echo base_url(); ?>"><img style="height:30px; width:auto;" src="<?php echo base_url('assets/img/logo2.png?ver=' . time()); ?>" alt="logo"></a></div>
+								</div>
+								<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+									<div class="btn-right other-hdr">
+										<?php if (!$this->session->userdata('aileenuser')) { ?>
+											<ul class="nav navbar-nav navbar-right test-cus drop-down">
+												<?php $this->load->view('profile-dropdown'); ?>
+												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
+												<li class="mob-bar-li">
+													<span class="mob-right-bar">
+														<?php $this->load->view('mobile_right_bar'); ?>
+													</span>
+												</li>
+											
+											</ul>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
                     </div>
                 </header>
                 <div class="container">
@@ -140,7 +153,7 @@ header('Expires: ' . $date);
                 </div>
             </section>
         </div>
-
+		<?php $this->load->view('mobile_side_slide'); ?>
         <?php echo $login_footer ?>
     </body>
 </html>

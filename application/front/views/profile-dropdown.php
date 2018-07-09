@@ -1,5 +1,5 @@
 <li class="dropdown hd-profile">
-	<a href="#" class="btn4">Profiles </a>
+	<a href="javascript:void(0)" class="btn4">Profiles </a>
 	<ul class="dropdown-menu abc">
 		<div class="all-profile-box">
 			<ul class="all-pr-list">
