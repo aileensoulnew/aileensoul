@@ -59,7 +59,7 @@
                                 <div class="">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="<?php echo base_url() ?>business-by-categories">
+                                            <a href="javascript:void(0);">
                                                 <span class="hidden-xs">Business by </span> Categories
                                             </a>
                                         </li>

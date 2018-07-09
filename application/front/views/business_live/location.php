@@ -64,7 +64,7 @@
                                             </a>
                                         </li>
                                         <li class="active">
-                                            <a href="<?php echo base_url() ?>business-by-location">
+                                            <a href="javascript:void(0);">
                                                 <span class="hidden-xs">Business by</span> Location
                                             </a>
                                         </li> 

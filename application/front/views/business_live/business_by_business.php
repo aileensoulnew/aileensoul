@@ -69,7 +69,7 @@
                                             </a>
                                         </li> 
                                         <li class="active">
-                                            <a href="<?php echo base_url() ?>business">
+                                            <a href="javascript:void(0);">
                                                Businesses
                                             </a>
                                         </li>
