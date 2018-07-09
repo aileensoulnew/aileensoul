@@ -3594,8 +3594,6 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.right-header .other-hdr .test-cus .btn8{margin-top:0;}
 	.right-header .other-hdr .test-cus .btn9{margin-top:0;}
 	.test-cus.drop-down .mob-right-bar{padding-top:9px;}
-	.registeration header{padding-bottom:0;}
-	.login-cu-page header{padding-bottom:0;}
 	.right-header > ul.test-cus > li:nth-child(3){display:none;}
 }
 @media screen and (max-width:360px){

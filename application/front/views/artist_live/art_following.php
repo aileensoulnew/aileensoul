@@ -20,43 +20,42 @@
 <body   class="page-container-bg-solid page-boxed botton_footer">
     <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">
-
-<?php echo $header; ?>
-<?php echo $artistic_header2; ?>
-    <section class="custom-row">
-    <?php echo $artistic_common; ?>
-<div class="user-midd-section art-inner">
-    <div class="container mobp0">
-<div class="col-md-3">  
-</div>
-                      <div class="col-md-8 col-sm-12 follow_mid">
-                    <div>
-                        <?php
-                                        if ($this->session->flashdata('error')) {
-                                            echo '<div class="alert alert-danger">' . $this->session->flashdata('error') . '</div>';
-                                        }
-                                        if ($this->session->flashdata('success')) {
-                                            echo '<div class="alert alert-success">' . $this->session->flashdata('success') . '</div>';
-                                        }?>
-                    </div> 
-                        <div class="common-form">
-                            <div class="job-saved-box">
-                                <h3>Following</h3>
-                                 <div class="contact-frnd-post">
-                                 
-                                    <div class = "job-contact-frnd" >
-                                    </div>
-                                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>      
-                                        <div class="col-md-1">
-                                        </div>
-                                    </div>  
-                                               
-            </div>
-        </div>
-        </div>
-        </div>
-        </div>       
-    </section> 
+			<?php echo $header; ?>
+			<?php echo $artistic_header2; ?>
+			<section class="custom-row">
+				<?php echo $artistic_common; ?>
+				<div class="user-midd-section art-inner">
+					<div class="container mobp0">
+						<div class="col-md-3">  
+						</div>
+						<div class="col-md-8 col-sm-12 follow_mid">
+							<div>
+								<?php
+									if ($this->session->flashdata('error')) {
+										echo '<div class="alert alert-danger">' . $this->session->flashdata('error') . '</div>';
+										}
+										if ($this->session->flashdata('success')) {
+											echo '<div class="alert alert-success">' . $this->session->flashdata('success') . '</div>';
+									}?>
+							</div> 
+							<div class="common-form">
+								<div class="job-saved-box">
+									<h3>Following</h3>
+									 <div class="contact-frnd-post">
+										<div class = "job-contact-frnd" >
+										</div>
+										<div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo "loader.gif"; ?>"/>
+										</div>      
+										<div class="col-md-1">
+										</div>
+									</div>  
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>       
+			</section>
+		</div>
  <!-- Bid-modal  -->
             <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
                 <div class="modal-dialog modal-lm">
@@ -95,7 +94,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 <!-- Model Popup Close -->
 <footer>
     <?php echo $login_footer ?>

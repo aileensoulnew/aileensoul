@@ -121,7 +121,7 @@ header('Expires: ' . $date);
                                         </div>
                                         <div id="errorpass"></div> 
                                     </div>
-                                    <p class="pt-20 ">
+                                    <p class="pt-20 fw">
                                         <button class="btn1" onclick="login()">Login</button>
                                     </p>
                                     <p class=" text-center">
