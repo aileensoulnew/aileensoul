@@ -4,21 +4,26 @@
         <title><?php echo $title; ?></title>
         <?php echo $head; ?> 
         
-         <?php
-        if (IS_REC_CSS_MINIFY == '0') {
-            ?>
-           <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.fancybox.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
-            <?php
+        <?php
+        /*if (IS_REC_CSS_MINIFY == '0') {
+        ?>
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.fancybox.css'); ?>">
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
+        <?php
         } else {
-            ?>
+        ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/1.10.3.jquery-ui.css'); ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/jquery.fancybox.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
-        <?php } ?>
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/jquery.fancybox.css'); ?>">
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/recruiter.css'); ?>">
+        <?php }*/ ?>
+         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.fancybox.css'); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/recruiter.css'); ?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
@@ -265,8 +270,7 @@
                                     <label>Last date for apply: <span style="color:red">*</span></label>
 
                                     <input type="hidden" id="example2" tabindex="12">
-
-<?php echo form_error('last_date'); ?> 
+                                    <?php echo form_error('last_date'); ?> 
                                 </fieldset>
 								
 								
@@ -477,37 +481,34 @@
                   <span class="mes"></span>
                </div>
             </div>
-         </div>
-      </div>
-      <!-- Model Popup Close -->
-      
-           <!-- BEGIN FOOTER -->
-           <?php echo $login_footer ?>
-        <?php echo $footer; ?>
-        <!-- END FOOTER -->
-        
-        
+        </div>
+    </div>
+    <!-- Model Popup Close -->      
+    <!-- BEGIN FOOTER -->
+    <?php echo $login_footer ?>
+    <?php echo $footer; ?>
+    <!-- END FOOTER -->
        
         <script>
-                                            var base_url = '<?php echo base_url(); ?>';
-                                            var user_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
-                                            var data1 = <?php echo json_encode($de); ?>;
-                                            var data = <?php echo json_encode($demo); ?>;
-                                            var jobdata = <?php echo json_encode($jobtitle); ?>;
-                                            var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
-                                            var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
-                                            var complex1 = <?php echo json_encode($selectdata1); ?>;
-                                            var jobdata = <?php echo json_encode($jobtitle); ?>;
-                                            var date_picker = '<?php echo date('Y-m-d', strtotime($postdata[0]['post_last_date'])); ?>';
+        var base_url = '<?php echo base_url(); ?>';
+        var user_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
+        var data1 = <?php echo json_encode($de); ?>;
+        var data = <?php echo json_encode($demo); ?>;
+        var jobdata = <?php echo json_encode($jobtitle); ?>;
+        var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+        var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+        var complex1 = <?php echo json_encode($selectdata1); ?>;
+        var jobdata = <?php echo json_encode($jobtitle); ?>;
+        var date_picker = '<?php echo date('Y-m-d', strtotime($postdata[0]['post_last_date'])); ?>';
        
         
         </script> 
         <!-- FIELD VALIDATION JS END -->
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <?php
-        if (IS_REC_JS_MINIFY == '0') {
-            ?>
-         <!-- FIELD VALIDATION JS START -->
+        /*if (IS_REC_JS_MINIFY == '0') {
+        ?>
+        <!-- FIELD VALIDATION JS START -->
 
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.fancybox.js'); ?>"></script>
@@ -515,20 +516,30 @@
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script> 
         <!--SCRIPT FOR DATE START-->
         <script src="<?php echo base_url('assets/js/jquery.date-dropdowns.js'); ?>"></script>
-     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/edit_post.js'); ?>"></script>
-            <?php
+        <?php
         } else {
-            ?>
-             <!-- FIELD VALIDATION JS START -->
+        ?>
+        <!-- FIELD VALIDATION JS START -->
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/js_min/jquery.fancybox.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script> 
         <!--SCRIPT FOR DATE START-->
         <script src="<?php echo base_url('assets/js_min/jquery.date-dropdowns.js'); ?>"></script>
-     <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/search.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/recruiter/edit_post.js'); ?>"></script>
-        <?php } ?>
+        <?php }*/ ?>
+
+         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery.fancybox.js'); ?>"></script>
+        <!-- THIS SCRIPT ALWAYS PUT UNDER FANCYBOX JS-->
+        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script> 
+        <!--SCRIPT FOR DATE START-->
+        <script src="<?php echo base_url('assets/js/jquery.date-dropdowns.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/search.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/edit_post.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
        
         <script type="text/javascript">
             var header_all_profile = '<?php echo $header_all_profile; ?>';
