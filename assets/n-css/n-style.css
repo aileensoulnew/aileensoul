@@ -1189,7 +1189,7 @@ header.profile-header .logo a{color:#5c5c5c;}
   
 }	
 
-.all-cat-box p{font-size:18px; padding:10px 0 0; color:#5c5c5c; line-height:1.5; letter-spacing:1px;}		
+.all-cat-box p{font-size:18px; padding:10px 0 0; color:#5c5c5c; line-height:1.5; letter-spacing:1px; text-transform:capitalize;}		
 .all-cat-box span{font-size:14px; padding:5px 10px; color:#5c5c5c; background:rgba(217,217,217,0.6); border-radius:5px; margin-top:5px; display:inline-block;}		
 .job-cat-lp{padding-top:100px;}
 .job-cat-lp .mob-cus-box{padding:0 9px; }		
@@ -1281,7 +1281,7 @@ appearance:         none;}
 .all-detail-box .tab-pane ul li a{color:#5c5c5c; display:block; font-size:15px; position:relative; height:100%;}
 .all-detail-box .tab-pane ul li a span{color:#999;}
 .all-detail-box .tab-pane ul li span{/*display:block;*/}
-.cus-job .all-detail-box .tab-pane ul li a p{padding: 10px 10px 0; color:#999; word-wrap:break-word; height:55px; overflow:hidden;}
+.cus-job .all-detail-box .tab-pane ul li a p{padding: 10px 10px 0; color:#999; word-wrap:break-word; height:55px; overflow:hidden; text-transform:capitalize;}
 .cus-job .all-detail-box .tab-pane ul li a p span{/*display:none;*/}
 .all-detail-box .tab-pane ul li a p{padding-top: 5px; color:#999;}
 .all-detail-box .tab-pane ul li a img{height: 40px;}
@@ -3075,6 +3075,9 @@ overflow-y: scroll; overflow-y: auto;}
 	.ld-sub-header.detail-sub-header .tab-first-li ul{top:30px;}
 	.blog-page .also-like-box .rec-img{height:220px;}
 	.sitemap{border-left:0; border-right:0;}
+	.notification-box.bg{border-left:0; border-right:0;}
+	.notification-box .contact-frnd-post .notification_data{padding:0;}
+	.notification-box .contact-frnd-post .notification_data li{margin:0; border-width:0 0 1px; border-radius:0; padding:10px 15px;}
 	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:25.8%;}
 }
 @media screen and (max-width: 639px) {

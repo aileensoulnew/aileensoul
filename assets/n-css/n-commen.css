@@ -636,6 +636,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
     margin-top: 3px;
 }
 .right-header .dropdown-menu ul{width:100%; float:left;}
+.right-header .dropdown-menu ul.notification_data_in{padding-top:0;}
 .right-header .dropdown-menu ul li{border-bottom:1px solid #d9d9d9;}
 .right-header .dropdown-menu ul li:last-child{border-bottom:0;}
 .sub-menu li.dropdown .dropdown-menu::before {display:none;}
@@ -1575,7 +1576,7 @@ input[type=number]::-webkit-inner-spin-button {
 .pagination-button a{padding-left:15px;}
 .pagination-button .btn-p{font-size:16px; font-weight:normal; padding:5px 25px; width:115px; margin:0;}
 .custom-right-art .pagination-button{padding:0;}
-
+.notification-data-inside .day-text{font-size:13px; color:#7b7b7b;}
 /***  media query  ***/
 @media screen and (min-width: 768px) {
     .container {
@@ -1754,7 +1755,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.mobile-header .sub-header .sub-menu.free-h-only .user-id.open .dropdown-menu{top:28px;}
 	.sub-menu.free-h-only li.user-id.open::before{top:22px;}
 	.blog-page .dropdown-database{min-height:60px;}
-	
+	.notification-data-inside .day-text{font-size:12px;}
 }
 @media screen and (max-width: 359px) {
 	.search-mob-block{width:57%;}

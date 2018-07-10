@@ -10,7 +10,7 @@
                 <div class="col-lg-6 col-md-7" >
                     <div class="search-bnr-text">
                         <h1>Find the Right Job Opportunities</h1>
-                        <p>Because Dream Matters </p>
+                        <p>Because Dreams Matter </p>
                     </div>
                     <div class="search-box">
                         <form onsubmit="jobsearchSubmit()" action="javascript:void(0)" method="get">

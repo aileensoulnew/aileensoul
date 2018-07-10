@@ -74,7 +74,7 @@
                 <div class="container">
                     <div class="row banner-main-div">
                         <div class="col-md-6 col-sm-12 banner-left">
-                            <h1 class="pb15">Hurdles Becomes Simple with a Right Person Besides You</h1>
+                            <h1 class="pb15">Hurdles Become Simple with a Right Person Besides You</h1>
                             <p>Easily reach, engage, and hire the job seekers through Aileensoul platform</p>
                         </div>
                         <div class="col-md-6 right-bnr hidden-xs">
