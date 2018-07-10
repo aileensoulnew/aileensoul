@@ -5141,7 +5141,7 @@ Your browser does not support the audio tag.
             }
             //Opportunity Notification End           
         }
-        if ($notificationData) {
+        if (isset($notificationData) && !empty($notificationData)) {
             $seeall = '<a href="' . base_url() . 'notification">See All</a>';
         } else {
             $seeall = '<div class="fw">
@@ -5154,6 +5154,19 @@ Your browser does not support the audio tag.
                             </div>
                         </div>
                     </div>';
+        }
+        if($total_record == 0)
+        {
+            $notification = '<div class="fw">
+                        <div class="art-img-nn">
+                            <div class="art_no_post_img">
+                                <img src="' . base_url() . 'assets/img/icon_notification_big.png" alt="notificationlogo">
+                            </div>
+                            <div class="art_no_post_text_c">
+                                No Notification Available.
+                            </div>
+                        </div>
+                    </div>';   
         }
 
         echo json_encode(array(

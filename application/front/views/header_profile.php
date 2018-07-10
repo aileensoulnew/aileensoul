@@ -171,7 +171,7 @@ if($browser == "Firefox")
                             </li>
                             <li class="dropdown" style="display: block;">
                                 <a href="javascript:void(0);" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick = "return Notificationheader();"><img ng-src="<?php echo base_url('assets/n-images/noti.png') ?>" alt="Notification">
-                                    <span id="noti_count" class="noti-box" style="display: none;"></span>
+                                    <span id="noti_count" class="noti-box noti_count" style="display: none;"></span>
                                 </a>
 
                                 <div class="dropdown-menu">
@@ -386,13 +386,13 @@ if($browser == "Firefox")
                                 -2z"/>
                             </g>
                         </svg>
-                        <span class="noti-box">1</span>
+                        <!-- <span class="noti-box">1</span> -->
                     </a>
                 </div>
             </li>
             <li class="dropdown">
                 <div class="mob-btm-icon">
-                    <a href="#" class="">
+                    <a href="#" class="" title="message">
                         <svg class="not-hover" width="25px" height="25px" viewBox="0 0 2133.000000 2133.000000">
                             <g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
                                 <path d="M1660 18783 c-94 -10 -265 -48 -373 -83 -271 -90 -508 -233 -716
@@ -426,13 +426,13 @@ if($browser == "Firefox")
                                 4444 -6484 6425 -7193 7128 l-771 762 -40 -102z"/>
                             </g>
                         </svg>
-                        <span class="noti-box">1</span>
+                        <!-- <span class="noti-box">1</span> -->
                     </a>
                 </div>
             </li>
             <li class="dropdown">
                 <div class="mob-btm-icon">
-                    <a href="#" class="">
+                    <a target="_self" href="<?php echo base_url('notification') ?>" class="">
                         <svg class="not-hover" viewBox="0 0 512 512" width="25px" height="25px">
                             <path   d="M256,0c-37.554,0-68.11,30.556-68.11,68.11v20.55h35.229V68.11c0-18.131,14.755-32.881,32.881-32.881    c18.131,0,32.887,14.749,32.887,32.881v20.55h35.229V68.11C324.116,30.556,293.555,0,256,0z" />
                             <path  d="M304.147,429.205c0,26.228-21.337,47.565-47.56,47.565h-1.174c-26.222,0-47.56-21.337-47.56-47.565h-35.229    c0,45.657,37.138,82.795,82.789,82.795h1.174c45.651,0,82.789-37.138,82.789-82.795H304.147z" />
@@ -454,7 +454,7 @@ if($browser == "Firefox")
                                 315 -891 500 -1413 559 -104 11 -507 11 -610 -1z"/>
                             </g>
                         </svg>
-                        <span class="noti-box">1</span>
+                        <span class="noti-box noti_count" style="display: none;"></span>
                     </a>
                 </div>
             </li>
@@ -585,15 +585,15 @@ if($browser == "Firefox")
     {
         var url = '<?php echo base_url() . "notification/get_notification_unread_count" ?>';
         $.get(url, function(data, status){
-            $("#noti_count").show();
+            $(".noti_count").show();
             if(parseInt(data) > 0)
             {
-                $("#noti_count").html(data);
+                $(".noti_count").html(data);
             }
             else
             {
-                $("#noti_count").hide();
-                $("#noti_count").html("");
+                $(".noti_count").hide();
+                $(".noti_count").html("");
             }
         });
         /*$.ajax({
