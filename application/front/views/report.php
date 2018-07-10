@@ -15,8 +15,8 @@
 ?>
 <html lang="en">
 	<head>
-		<title>Report - Aileensoul</title>
-		<meta name="description" content="Feel free to share your views and thoughts about Aileensoul.com services." />
+		<title>Report Abuse | Aileensoul</title>
+		<meta name="description" content="Saw any spam, phishing or misleading information on Aileensoul Platform? Fill the form to report us to keep the platform safe and informative for everyone."/>
 		<link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />

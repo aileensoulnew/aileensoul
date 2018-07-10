@@ -70,7 +70,10 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Categories - Artist Profile | Aileensoul";
+        
+        $this->data['title'] = "Find Artist by Category and Connect with Them | Aileensoul";
+        $this->data['metadesc'] = "Explore top artist by various categories such as painter, writer, photographer, dancer, model, and so on. Register free to connect with them."; 
+        
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
@@ -1808,7 +1811,10 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Locations - Artist Profile | Aileensoul";
+        
+        $this->data['title'] = "Find Artist by Location and Connect with Them | Aileensoul";
+        $this->data['metadesc'] = "Explore top location-wise various artist like painter, writer, photographer, dancer, model, and so on. Register free to connect with them."; 
+
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
@@ -1854,7 +1860,8 @@ class Artist_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Artist Profile | Aileensoul";
+        $this->data['title'] = "Find Top Location-Wise Artist by Category and Connect with Them | Aileensoul";
+        $this->data['metadesc'] = "Explore top 10 categories wise artist near your location. Register free to connect with them."; 
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
@@ -1875,6 +1882,7 @@ class Artist_live extends MY_Controller {
                 $i++;
             }
         }
+        
         $this->data['artistByArtist'] = $all_link;
         $this->load->view('artist_live/artist_by_artist', $this->data);
     }

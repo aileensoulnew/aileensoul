@@ -337,7 +337,8 @@ class Freelancer_apply_live extends MY_Controller {
         // $this->data['job_profile_link'] =  $this->job_profile_link;
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Freelance Apply | Aileensoul";
+        $this->data['title'] = "Explore Top Freelance Jobs by Fields | Aileensoul";
+        $this->data['metadesc'] = "Find work from home jobs in various fields like website IT, sales & marketing, data entry, translation, design, writing, data analysis and so on."; 
 
         $limit = 15;
         $config = array(); 
@@ -398,7 +399,8 @@ class Freelancer_apply_live extends MY_Controller {
         // $this->data['job_profile_link'] =  $this->job_profile_link;
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
-        $this->data['title'] = "Freelance Apply | Aileensoul";
+        $this->data['title'] = "Explore Top Freelance Jobs by Categories | Aileensoul";
+        $this->data['metadesc'] = "Find work from home jobs by various categories like accounting, digital marketing, website design, graphic design, lead generation and so on."; 
 
         $limit = 15;
         $config = array(); 

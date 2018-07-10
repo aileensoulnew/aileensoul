@@ -477,8 +477,8 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Search Full Time Jobs by Skills - Browse IT/Non-IT Jobs";
-        $this->data['metadesc'] = "Explore numerous Jobs by your skills on Aileensoul. Choose preferable IT and Non-IT skills and find the latest jobs. Register and Get your dream job now!"; 
+        $this->data['title'] = "Search Full Time Jobs by Designation : Find Jobs by Your Job Title";
+        $this->data['metadesc'] = "Explore numerous Jobs by your Designation on Aileensoul.com. Register and Grab the Opportunity Now! It's Free platfrom."; 
 
         $limit = 15;
         $config = array(); 
@@ -672,8 +672,8 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Jobs, Job Profile | Aileensoul";
-        $this->data['metadesc'] = ""; 
+        $this->data['title'] = "Search Full Time Location-Wise Jobs by Skills or Designation or Field  ";
+        $this->data['metadesc'] = "Explore numerous top Jobs according to your skills, or designation, or field by Location on Aileensoul.com. Register for Free and Apply on your dream job now!"; 
 
         
         $page = 1;
