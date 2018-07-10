@@ -249,7 +249,7 @@ if($browser == "Firefox")
         <div class="animated fadeInDownBig">
             <div class="container">
                 <div class="left-header">
-                    <?php $this->load->view('main_logo'); ?>
+                    <h2 class="logo"><a target="_self" href="<?php echo base_url(); ?>"><img ng-src="<?php echo base_url('assets/n-images/mob-logo.png') ?>"></a></h2>
                     <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
                     <div class="search-mob-block">
                         <div class="">

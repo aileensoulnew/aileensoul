@@ -6,7 +6,7 @@ body.main-message{padding-bottom:0;}
 .one-hd .middle-section{padding:69px 0 50px;}
 .middle-section{padding:95px 0 50px;}
 .single-header .middle-section {padding:75px 0 50px;}
-.middle-section-banner{padding:54px 0 0px !important;}
+.middle-section-banner{padding:51px 0 0px !important;}
 .middle-section-banner.new-ld-page{padding:0 !important;}
 .main-message .middle-section {padding:75px 0 0px;}
 .register .middle-section{padding:90px 0 50px;}
@@ -1116,7 +1116,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-banner{background:url("../n-images/search-bnr-job.jpg"); padding:60px 0; background-size:100%;}
 .new-ld-page .search-banner{padding:60px 0 0;}
 .report .new-ld-page .search-banner{padding:60px 0;}
-.new-ld-page header{background:#fff; border-bottom:1px solid #d2d2d2;}
+.new-ld-page header{background:#fff; border-bottom:1px solid #d2d2d2; padding:10px 0;}
 .report .new-ld-page header{background:#f6f7f8; border-bottom:none;}
 .new-ld-page .search-banner header .container{padding:0 15px;}
 .search-banner.cus-search-bnr{/*padding-top:0;*/}
@@ -2565,7 +2565,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.blog-detail{width:610px; left:110px;}
 	.read-more-post{bottom:2px;}
 	.comment-text{width:89%;}
-    .middle-section-banner{padding: 47px 0;}
+    .middle-section-banner{padding: 47px 0 !important;}
     footer{position: relative; height: auto;}
     .cover-pic{width: 100%; float:left;}
     .post-box-bottom ul li:nth-child(2){display: none;}
@@ -3384,7 +3384,6 @@ overflow-y: scroll; overflow-y: auto;}
 	.blog-page .sub-header .sub-menu li a.fs22{font-size:14px;}
 	.old-no-login .btn-right{/*padding-top:5px;*/}
 	body.about-us{padding-bottom:0;}
-	body{padding-bottom:0;}
 	.work_type_custom label.error{top:50px;}
 	.all-job-bottom .hw-479 span{width:100%; float:left; padding-left:0; line-height:1.2; font-size:12px;}
 	#floatBarsG{transform: inherit;}

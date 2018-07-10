@@ -660,7 +660,9 @@
                             </data-owl-carousel>
                         </div>
                     </div>
-                </div>
+                
+					 <?php echo $left_footer; ?>
+				</div>
             </div>
         </div>
         </div>
