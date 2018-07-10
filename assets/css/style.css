@@ -1126,7 +1126,7 @@ fieldset .add_post_btnc,fieldset .add_post_btns{
     float:left
 }
 .job-saved-box .notification-box ul{
-    font-size:0;
+    /*font-size:0;*/
     margin:0;
     padding:10px
 }

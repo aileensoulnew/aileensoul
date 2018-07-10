@@ -2986,7 +2986,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.mob-bar-li .mob-right-bar .bg-menu{padding:0;}
 }
 @media screen and (max-width:767px){
-	footer .footer-ul:first-child{display:none;}
+	footer .footer-ul:first-child{/*display:none;*/}
     footer,header .col-md-4.col-sm-3{
         /*text-align:center;*/
     }

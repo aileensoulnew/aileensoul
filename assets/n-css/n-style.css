@@ -2565,7 +2565,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.blog-detail{width:610px; left:110px;}
 	.read-more-post{bottom:2px;}
 	.comment-text{width:89%;}
-    .middle-section-banner{padding: 47px 0 !important;}
+    .middle-section-banner{padding: 47px 0 0!important;}
     footer{position: relative; height: auto;}
     .cover-pic{width: 100%; float:left;}
     .post-box-bottom ul li:nth-child(2){display: none;}
@@ -2638,8 +2638,8 @@ overflow-y: scroll; overflow-y: auto;}
 	.blog-page .right-part{width:75%;}
 	.blog-m .right-part{width:100%; margin-left:0;}
 	.blog-details-cus a{float:left;}
-	.blog-page .sub-header .dropdown.open::before{left:49px;}
-	.blog-page .sub-header .blog-sub-menu .dropdown.open:nth-child(3)::before{left:82px;}
+	.blog-page .sub-header .dropdown.open::before{/*left:49px;*/}
+	.blog-page .sub-header .blog-sub-menu .dropdown.open:nth-child(3)::before{/*left:82px;*/}
 	.related-article .also-like-box{width:100%;}
 	.related-article .rec-img{width:100%; height:170px;}
 	.related-article .also-like-box p{font-size:16px;}
@@ -2683,7 +2683,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.chat-message .chat-name .msg-send-time{padding-right:45px;}
 	.msg-search{height:55px; padding:10px;}
 	.msg-box .ui-tabs .ui-tabs-nav{height:55px;}
-	footer{display:none !important;}
+	footer{/*display:none !important;*/}
 	.mob-detail-custom{display:block;}
 	.post-right-dropdown ul.dropdown-menu li a{font-size:14px;}
 	.report h1{padding:100px 0 0px;}
@@ -2970,8 +2970,8 @@ overflow-y: scroll; overflow-y: auto;}
 	transform:inherit;}
 	.blog-m .blog-left-content{padding-left:0; padding-top:10px;}
 	.pagination > li > a, .pagination > li > span {padding:3px 8px;}
-	.blog-page .sub-header .dropdown.open::before{left:46px; top:17px; width:24px; height:12px; background-position:0 44px; background-size:100%;}
-	.blog-page .sub-header .blog-sub-menu .dropdown.open:nth-child(3)::before{left:73px;}
+	.blog-page .sub-header .dropdown.open::before{left:58px; top:17px; width:24px; height:12px; background-position:0 44px; background-size:100%;}
+	.blog-page .sub-header .blog-sub-menu .dropdown.open:nth-child(3)::before{left:86px;}
 	.blog-page .sub-header .dropdown.open .dropdown-menu{top:28px;}
 	.blog-page .dropdown-database{width:100%;}
 	.blog-page .dropdown-database .dropdown-user-detail{width:82%;}
@@ -3070,6 +3070,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.ld-sub-header.detail-sub-header ul li{padding:4px 0;}
 	.ld-sub-header.detail-sub-header .tab-first-li ul{top:30px;}
 	.blog-page .also-like-box .rec-img{height:220px;}
+	.sub-menu.rec-only li.dropdown.open::before{}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3390,7 +3391,7 @@ overflow-y: scroll; overflow-y: auto;}
 	#artpost .fw fieldset:first-child label.error{margin-right:0;}
 	.contact-detail{width:75%;}
 	.report h1{font-size:21px; padding:40px 0 10px;}
-	.search-banner{padding:75px 0 0;}
+	.search-banner{padding:75px 0 35px;}
 	.report .new-ld-page header{background:#f2f4f5;}
 	.job-cat-lp .mob-cus-box{/*padding:0 3px;*/}
 	.comment-box{padding:10px;}
