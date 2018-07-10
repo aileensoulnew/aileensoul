@@ -23,9 +23,9 @@ header("Pragma: no-cache"); // HTTP/1.0
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <title>Find best career opportunities in Business, Job Search, Freelancing, and Art | Aileensoul</title>
-        <meta name="description" content="If you are either looking for jobs, freelance work, recruitment, business network or want to show your artistic side, look no further. Ailensoul has built a collabrative platfrom for each industry. Join now! It's Free.">
+        <meta name="description" content="If you are either looking for jobs, freelance work, recruitment, business network or want to show your artistic side, look no further. Aileensoul has built a collabrative platfrom for each industry. Join now! It's Free.">
         <meta property="og:title" content="Find best career opportunities in Business, Job Search, Freelancing, and Art | Aileensoul" />
-        <meta property="og:description" content="If you are either looking for jobs, freelance work, recruitment, business network or want to show your artistic side, look no further. Ailensoul has built a collabrative platfrom for each industry. Join now! It's Free."/>
+        <meta property="og:description" content="If you are either looking for jobs, freelance work, recruitment, business network or want to show your artistic side, look no further. Aileensoul has built a collabrative platfrom for each industry. Join now! It's Free."/>
         <meta property="og:image" content="<?php echo base_url('assets/images/meta-icon.png'); ?>" />
        
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
