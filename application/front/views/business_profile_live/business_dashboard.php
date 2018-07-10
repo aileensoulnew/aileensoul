@@ -146,13 +146,17 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </tr>
                                     <tr>
                                         <td class="business_data_td1"><i class="fa fa-mobile"></i></td>
-                                        <td class="business_data_td2"><span><?php
-                                                if ($business_data[0]['contact_mobile'] != '0') {
-                                                    echo $business_data[0]['contact_mobile'];
-                                                } else {
-                                                    echo '-';
-                                                }
-                                                ?></span>
+                                        <td class="business_data_td2">
+                                            <?php
+                                            if ($business_data[0]['contact_mobile'] != '0') {
+                                                $contact_mobile = $business_data[0]['contact_mobile'];
+                                            } else {
+                                                $contact_mobile = '-';
+                                            }
+                                            ?>
+                                            <a href="tel:<?php echo $contact_mobile; ?>">
+                                            <span><?php echo $contact_mobile; ?></span>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php if($this->session->userdata('aileenuser') != "") {?>
