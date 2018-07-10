@@ -141,7 +141,7 @@
                             </div>
                             <div class="all-job-top">
                                 <div class="post-img">
-                                    <a href="<?php echo BASEURL ?>{{business.business_slug}}" ng-if="business.business_user_image"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}"></a>
+                                    <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}"></a>
                                     <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image"><img ng-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
                                 </div>
                                 <div class="job-top-detail">
