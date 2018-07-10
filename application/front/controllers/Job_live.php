@@ -607,8 +607,8 @@ class Job_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('job_live/search_banner', $this->data, TRUE);
 
-        $this->data['title'] = "Job By Designation, Job Profile | Aileensoul";
-        $this->data['metadesc'] = ""; 
+        $this->data['title'] = "Search Full Time Jobs by Categories - Browse HR, IT, Banking, Marketing Jobs";
+        $this->data['metadesc'] = "Explore numerous Jobs by categories like HR, Digital Marketing, Web Designing, Graphic Designing, Banking, and many more on Aileensoul. Join Aileensoul and Grab the opportunity now!"; 
 
         $limit = 15;
         $config = array(); 
