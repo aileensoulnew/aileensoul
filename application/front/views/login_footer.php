@@ -1,11 +1,18 @@
 <?php
+if($this->session->userdata('aileenuser') != "") {
+    $class = "login_footer";
+}
+else
+{
+    $class = "no_login_footer";
+}
 if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->uri->segment(1) == 'profiles') {
     ?>
-    <footer class="footer">
+    <footer class="footer <?php echo $class; ?>">
         <?php
     } else {
         ?>
-        <footer>    
+        <footer class="<?php echo $class; ?>">    
             <?php
         }
         ?>
