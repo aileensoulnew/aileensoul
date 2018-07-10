@@ -1652,6 +1652,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu:before{left:149px;}
 	.sub-menu li.dropdown.open::before{left:6px; right:0; /*margin:0 auto;*/ background-position:center center; width:13px; height:7px; top:22px; background-size:100%;}
 	.mobile-header .sub-header .sub-menu{height:31px;}
+	.no_login_footer{display:none;}
 	
 }
 @media screen and (max-width: 767px) {

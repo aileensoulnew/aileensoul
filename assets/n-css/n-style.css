@@ -2566,7 +2566,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.read-more-post{bottom:2px;}
 	.comment-text{width:89%;}
     .middle-section-banner{padding: 47px 0 0!important;}
-    footer{position: relative; height: auto;}
+    footer{/*position: relative; height: auto;*/}
     .cover-pic{width: 100%; float:left;}
     .post-box-bottom ul li:nth-child(2){display: none;}
 	.update-browser{display:none;}
@@ -3070,7 +3070,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.ld-sub-header.detail-sub-header ul li{padding:4px 0;}
 	.ld-sub-header.detail-sub-header .tab-first-li ul{top:30px;}
 	.blog-page .also-like-box .rec-img{height:220px;}
-	.sub-menu.rec-only li.dropdown.open::before{}
+	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:25.8%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3131,6 +3131,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.post-img-user{height:88px; width:88px; padding:32px 0;}
 	.blog-page .also-like-box .rec-img{height:auto;}
 	.also-like-box .rec-img img{position:inherit; left:inherit; right:inherit; width:100%; transform:inherit; -webkit-transform:inherit; -ms-transform:inherit;}
+	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:41%;}
 }
 @media screen and (max-width: 539px) {
 	.fw-539{width:100%; float:left;}
@@ -3400,6 +3401,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.all-comment-div{margin-left:-15px; margin-right:-15px; border-left:0; border-right:0;}
 	.comment-text h4{font-size:16px; line-height:1;}
 	.blog-page .sub-header .sub-menu{padding:5px 0;}
+	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:42%;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
