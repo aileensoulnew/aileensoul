@@ -2030,8 +2030,6 @@ input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focu
     -webkit-text-fill-color:#5c5c5c!important;
 }
 .modal-body .form-group input:-webkit-autofill,.modal-body .form-group input:-webkit-autofill:active,.modal-body .form-group input:-webkit-autofill:focus,.modal-body .form-group input:-webkit-autofill:hover{background-color:#FFF!important; -webkit-box-shadow:0 0 0 1000px #fff inset!important; -webkit-text-fill-color:#848484!important}
-.contact header .logo a{text-shadow:2px 2px #cbcbcb;}
-.contact header{border-bottom:1px solid #d9d9d9; background:url(../img/mob-about-bg.jpg) rgba(255,255,255,.4)!important; background-size:100%!important; position:absolute;}
 .contact .inner-form{float:left; margin:0 20px; box-shadow:0 0 10px -1px rgba(217,217,217,1);}
 .contact-add{
     border:1px solid #c7c7c7;
@@ -2075,12 +2073,13 @@ input:-webkit-autofill,input:-webkit-autofill:active,input:-webkit-autofill:focu
 }
 
 .contact .login .btn1:hover{background:#6291a9;}
-.contact .title h1{
+.contact .title h2{
     color:#838383!important;
     background:0 0;
     -webkit-background-clip:inherit;
     -webkit-text-fill-color:inherit;
     letter-spacing:5px;
+	padding:15px 0;
 }
 .ftr-copuright{
     font-size:13px

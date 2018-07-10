@@ -47,12 +47,45 @@ header('Expires: ' . $date);
 		
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="contact outer-page">
-        <div class="main-inner">
-            <?php echo $login_header; ?>
-            <div class="contact-banner">
-                <img src="<?php echo base_url('assets/img/contactus.jpg?ver=' . time()); ?>" alt="contactus">
-            </div>
+    <body class="contact outer-page report">
+        <div class="middle-section middle-section-banner new-ld-page">
+			<header>
+					<div class="">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+									<?php $this->load->view('main_logo'); ?>
+								</div>
+								<div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+									<div class="btn-right other-hdr">
+										<?php if (!$this->session->userdata('aileenuser')) { ?>
+											<ul class="nav navbar-nav navbar-right test-cus drop-down">
+												<?php $this->load->view('profile-dropdown'); ?>
+												<li><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
+												<li><a href="<?php echo base_url('registration'); ?>" class="btn9">Create an account</a></li>
+												<li class="mob-bar-li">
+													<span class="mob-right-bar">
+														<?php $this->load->view('mobile_right_bar'); ?>
+													</span>
+												</li>
+											
+											</ul>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+			
+			<div class="search-banner cus-search-bnr" >
+				
+				<div class="container">
+					<div class="row">
+						<h1 class="text-center">Contact Us</h1>
+					</div>
+				</div>
+			</div>
             <section class="middle-main">
                 <div class="container">
                     <div id="contactsucc"></div>
@@ -60,7 +93,7 @@ header('Expires: ' . $date);
                         <div class="inner-form">
                             <div class="login">
                                 <div class="title">
-                                    <h1>Contact us</h1>
+                                    <h2>Contact us</h2>
                                 </div>
                                 <form name="contact_form" id="contact_form" method="post">
                                     <div class="row">
@@ -99,7 +132,7 @@ header('Expires: ' . $date);
                         <div class="mob-p15">
                             <div class="contact-add">
                                 <div class="title">
-                                    <h1>Reach Us</h1>
+                                    <h2>Reach Us</h2>
                                 </div>
                                 <div class="fw p20">
                                     <table style="width:100%;" class="con-address">

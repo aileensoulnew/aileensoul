@@ -724,7 +724,7 @@ header ul li #abody ul li:last-child {
 .dropdown-menu .dropdown-data li{padding:0;}
 .dropdown-menu .dropdown-data li:hover .dropdown-database{background:#e9f6fc;}
 .dropdown-menu .dropdown-data li:hover .user-request{background:#e9f6fc;}
-.dropdown-database{height: 70px; width: 358px; padding:10px;}
+.dropdown-database{min-height: 70px; width: 358px; padding:10px;}
 .add-dropdown .dropdown-database.confirm_div{width: 358px;}
 .add-dropdown .dropdown-database.confirm_div .dropdown-user-detail{width:288px;}
 .dropdown-database .dropdown-user-detail{width:288px; float:left; padding-left:10px;}
@@ -1740,7 +1740,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.sub-menu.rec-only li.user-id.open::before{top:22px;}
 	.mobile-header .sub-header .sub-menu.free-h-only .user-id.open .dropdown-menu{top:28px;}
 	.sub-menu.free-h-only li.user-id.open::before{top:22px;}
-	
+	.blog-page .dropdown-database{min-height:60px;}
 	
 }
 @media screen and (max-width: 359px) {
