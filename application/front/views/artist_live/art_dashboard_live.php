@@ -571,6 +571,7 @@ $userid = $this->session->userdata('aileenuser');
         </div>
         <!-- Model Popup Close -->
 </div>
+<?php $this->load->view('mobile_side_slide'); ?>
 <?php echo $footer; ?>
 
  <?php

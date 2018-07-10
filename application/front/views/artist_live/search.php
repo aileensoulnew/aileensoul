@@ -16,7 +16,7 @@
         ?>
 			<link rel="stylesheet" href="<?php echo base_url('assets/css/header.css?ver=' . time()) ?>">	    
 	    <?php } ?>
-
+        <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <?php if(($is_artist_profile_set == 1 || $is_artist_profile_set == '1') || $isartistactivate == 0){ 
@@ -255,6 +255,7 @@
             </div>
 		</div>
 		</div>
+        <?php $this->load->view('mobile_side_slide'); ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <?php if(($is_artist_profile_set == 1 || $is_artist_profile_set == '1') || $isartistactivate == 0){ 
             ?>

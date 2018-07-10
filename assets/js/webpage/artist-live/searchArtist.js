@@ -150,9 +150,9 @@ $('#content').on( 'change keyup keydown paste cut', 'textarea', function (){
     $(this).height(0).height(this.scrollHeight);
 }).find( 'textarea' ).change();
 
-AOS.init({
+/*AOS.init({
     easing: 'ease-in-out-sine'
-});
+});*/
 
 setInterval(addItem, 100);
 
