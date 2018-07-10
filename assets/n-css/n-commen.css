@@ -1633,7 +1633,8 @@ input[type=number]::-webkit-inner-spin-button {
 	.mobile-header header{/*padding:5px 0;*/}
 	.mobile-header .left-header{width:100%; float:left;}
 	.mobile-header .left-header form{margin:0 auto; float:none; width:100%; padding-left:0;}
-	.mobile-header .left-header input[type="text"]{width:100%; margin-bottom:5px;}
+	.mobile-header .left-header input[type="text"]{width:100%; margin-bottom:0px;}
+	.left-header form{padding-top:0;}
 	.sub-header .dropdown.open::before{display:none;}
 	.search-mob-block{display:block;}
 	.right-header .dropdown.user-id .dropdown-menu{top:36px; right:-6px;}
@@ -1651,6 +1652,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu:before{left:149px;}
 	.sub-menu li.dropdown.open::before{left:0; right:0; margin:0 auto; background-position:center center; width:15px; height:8px; top:21px; background-size:100%;}
 	.mobile-header .sub-header .sub-menu{height:31px;}
+	
 }
 @media screen and (max-width: 767px) {
     /*header{position:relative;}*/
@@ -1865,3 +1867,4 @@ input[type=number]::-webkit-inner-spin-button {
   }
 }
 
+.dropdown-backdrop{z-index:0;}
