@@ -74,7 +74,7 @@ class Business_model extends CI_Model {
     }
 
     function businessListByCategory($id = '0') {
-        $this->db->select('bp.business_user_image,bp.profile_background,bp.other_industrial,bp.company_name,bp.country,bp.city,bp.details,bp.contact_website,it.industry_name,ct.city_name as city,cr.country_name as country, IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
+        $this->db->select('bp.business_user_image,bp.profile_background,bp.other_industrial,bp.company_name,bp.country,bp.city,bp.details,bp.contact_website,it.industry_name,ct.city_name as city,cr.country_name as country, IF (bp.city != "",CONCAT(bp.business_slug, "-", ct.city_name),IF(s.state_name != "",CONCAT(bp.business_slug, "-", s.state_name),CONCAT(bp.business_slug, "-", cr.country_name))) as business_slug')->from('business_profile bp');
         $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');
         $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
         $this->db->join('states st', 'st.state_id = bp.state', 'left');
@@ -196,7 +196,7 @@ class Business_model extends CI_Model {
         }
 
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, it.industry_name, ct.city_name AS city, cr.country_name AS country, IF (bp.city IS NULL, CONCAT(bp.business_slug, '-', s.state_name) ,CONCAT(bp.business_slug, '-', ct.city_name)) AS business_slug 
+        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, it.industry_name, ct.city_name AS city, cr.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(s.state_name != '',CONCAT(bp.business_slug, '-', s.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug 
                 FROM ailee_business_profile bp 
                 LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
                 LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
@@ -215,10 +215,11 @@ class Business_model extends CI_Model {
     }
 
     function business_followers($follow_to = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
-        $this->db->select('ul.*,f.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
+        $this->db->select('ul.*,f.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city != "",CONCAT(bp.business_slug, "-", ct.city_name),IF(s.state_name != "",CONCAT(bp.business_slug, "-", s.state_name),CONCAT(bp.business_slug, "-", cr.country_name))) as business_slug')->from('business_profile bp');
         $this->db->join('user_login ul', 'ul.user_id = bp.user_id');
         $this->db->join('follow f', 'f.follow_from = bp.business_profile_id');
         $this->db->join('cities ct', 'ct.city_id = bp.city');
+        $this->db->join('countries cr', 'cr.country_id = bp.country');
         $this->db->join('states st', 'st.state_id = bp.state');
         $this->db->where('f.follow_to', $follow_to);
         $this->db->where('f.follow_status', '1');
@@ -240,10 +241,11 @@ class Business_model extends CI_Model {
     }
 
     function business_following($follow_from = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
-        $this->db->select('ul.*,f.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile bp');
+        $this->db->select('ul.*,f.*,bp.business_profile_id,bp.company_name,bp.country,bp.state,bp.city,bp.pincode,bp.address,bp.contact_person,bp.contact_mobile,bp.contact_email,bp.contact_website,bp.business_type,bp.industriyal,bp.details,bp.addmore,bp.user_id,bp.status,bp.is_deleted,bp.created_date,bp.modified_date,bp.business_step,bp.business_user_image,bp.profile_background,bp.profile_background_main,bp.business_slug,bp.other_business_type,bp.other_industrial,ct.city_name,st.state_name,IF (bp.city != "",CONCAT(bp.business_slug, "-", ct.city_name),IF(s.state_name != "",CONCAT(bp.business_slug, "-", s.state_name),CONCAT(bp.business_slug, "-", cr.country_name))) as business_slug')->from('business_profile bp');
         $this->db->join('user_login ul', 'ul.user_id = bp.user_id');
         $this->db->join('follow f', 'f.follow_to = bp.business_profile_id');
         $this->db->join('cities ct', 'ct.city_id = bp.city');
+        $this->db->join('countries cr', 'cr.country_id = bp.country');
         $this->db->join('states st', 'st.state_id = bp.state');
         $this->db->where('f.follow_from', $follow_from);
         $this->db->where('f.follow_status', '1');
@@ -277,12 +279,13 @@ class Business_model extends CI_Model {
         $this->db->where('ul.status', '1');
         $this->db->where('ul.is_delete', '0');*/
 
-        $sql = "SELECT ul.*, bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name), concat(bp.business_slug, '-', ct.city_name)) as business_slug
+        $sql = "SELECT ul.*, bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.pincode, bp.address, bp.contact_person, bp.contact_mobile, bp.contact_email, bp.contact_website, bp.business_type, bp.industriyal, bp.details, bp.addmore, bp.user_id, bp.status, bp.is_deleted, bp.created_date, bp.modified_date, bp.business_step, bp.business_user_image, bp.profile_background, bp.profile_background_main, bp.business_slug, bp.other_business_type, bp.other_industrial, ct.city_name, st.state_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug
             FROM ailee_business_profile bp
             LEFT JOIN ailee_user_login ul ON ul.user_id = bp.user_id
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
             LEFT JOIN ailee_cities ct ON ct.city_id = bp.city
             LEFT JOIN ailee_states st ON st.state_id = bp.state
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
             WHERE bp.user_id != '". $user_id ."'
             AND bp.business_step = '4'
             AND bp.is_deleted = '0'
@@ -301,6 +304,7 @@ class Business_model extends CI_Model {
         if ($limit != '') {
             $sql .= " Limit ". $offset . "," . $limit;
         }
+        // echo $sql;exit;
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
@@ -514,7 +518,7 @@ class Business_model extends CI_Model {
         if ($start < 0)
             $start = 0;
         $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, 
-        IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
+        IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,
             bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, 
             cr.country_name as country 
             FROM ailee_business_profile bp 
@@ -548,7 +552,7 @@ class Business_model extends CI_Model {
 
     function businessListByLocationTotalRec($id = '0',$industry_name = array(),$city_name = array()) {
         $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, 
-        IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug,
+        IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,
             bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, 
             cr.country_name as country 
             FROM ailee_business_profile bp 
@@ -582,7 +586,7 @@ class Business_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
+        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
             ct.city_name as city, 
             cr.country_name as country 
             FROM ailee_business_profile bp 
@@ -619,7 +623,7 @@ class Business_model extends CI_Model {
 
     function businessListByFilterTotalRec($category_id = '', $location_id = '',$industry_name = array(),$city_name = array()) {        
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
+        $sql = "SELECT bp.business_user_image, bp.profile_background,IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, bp.other_industrial, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, 
             ct.city_name as city, 
             cr.country_name as country 
             FROM ailee_business_profile bp 
