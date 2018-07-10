@@ -198,13 +198,15 @@ $userid = $this->session->userdata('aileenuser');
                                 <td class="business_data_td1 detaile_map"><i class="fa fa-file-text" aria-hidden="true"></i></td>
                                 <td class="business_data_td2"><span><?php echo $this->common->make_links($artisticdata[0]['art_desc_art']); ?></span></td>
                             </tr>
-                            <?php }?>
+                            <?php }
+                            if($userid != ""){?>
                                      <tr>
                                 <td class="business_data_td1 detaile_map"><i class="fa fa-envelope" aria-hidden="true"></i></td>
                                 <td class="business_data_td2">
                                     <a href="mailto:<?php echo $artisticdata[0]['art_email']; ?>" title="<?php echo $artisticdata[0]['art_email']; ?>"><?php echo $artisticdata[0]['art_email']; ?></a>
                                 </td>
                             </tr>
+                        <?php } ?>
                             <tr>
                                 <td class="business_data_td1  detaile_map" ><i class="fa fa-map-marker" aria-hidden="true"></i></td>
                                 <td class="business_data_td2"><span>
@@ -333,13 +335,15 @@ $userid = $this->session->userdata('aileenuser');
                                 <td class="business_data_td1 detaile_map"><i class="fa fa-file-text" aria-hidden="true"></i></td>
                                 <td class="business_data_td2"><span><?php echo $this->common->make_links($artisticdata[0]['art_desc_art']); ?></span></td>
                             </tr>
-                            <?php }?>
+                            <?php }
+                            if($userid != ""){?>
                                      <tr>
                                 <td class="business_data_td1 detaile_map"><i class="fa fa-envelope" aria-hidden="true"></i></td>
                                 <td class="business_data_td2">
                                     <a href="mailto:<?php echo $artisticdata[0]['art_email']; ?>" title="<?php echo $artisticdata[0]['art_email']; ?>"><?php echo $artisticdata[0]['art_email']; ?></a>
                                 </td>
                             </tr>
+                        <?php } ?>
                             <tr>
                                 <td class="business_data_td1  detaile_map" ><i class="fa fa-map-marker" aria-hidden="true"></i></td>
                                 <td class="business_data_td2"><span>

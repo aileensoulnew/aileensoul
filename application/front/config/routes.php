@@ -869,6 +869,7 @@ $route['artist-in-(:any)'] = "artist_live/categoryArtistList//$1/1";
 $route['artist-in-(:any)/(:num)'] = "artist_live/categoryArtistList//$1/1";
 $route['notification'] = 'notification';
 $route['message'] = "message/main_message";
+$route['generate_sitemap'] = "sitemap/generate_sitemap";
 $route['(:any)'] = 'Userprofile';
 
 
