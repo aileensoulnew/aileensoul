@@ -256,7 +256,7 @@ if($browser == "Firefox")
                             <?php 
                             $first_segment = $this->uri->segment(1);
                             $page_arr = array('','search','contact-request');
-                            if(in_array($first_segment, $page_arr)): ?>
+                            //if(in_array($first_segment, $page_arr)): ?>
                             <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('search') ?>">
                                 <input type="text" name="q" placeholder="Search.." id="mob_search">
                             </form>
@@ -264,7 +264,7 @@ if($browser == "Firefox")
                             <a href="#search">
                                 <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
                             </a>
-                        <?php */endif; ?>
+                        <?php *///endif; ?>
                         </div>
                         <!-- <div id="search">
                             <form method="get">
@@ -503,7 +503,7 @@ if($browser == "Firefox")
 </div>
 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <script>
-   var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+   /*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
     showRight = document.getElementById( 'showRight' ),
     body = document.body;
 
@@ -518,7 +518,7 @@ if($browser == "Firefox")
     if( button !== 'showRight' ) {
      classie.toggle( showRight, 'disabled' );
     }
-   }
+   }*/
 
     $(function () {
         $('a[href="#search"]').on('click', function (event) {
