@@ -42,7 +42,18 @@ class Userprofile extends MY_Controller {
         $this->data['is_userSlugBasicInfo'] = $this->user_model->getUserProfessionDataBySlug($userslug, $data = "jt.name as Designation,it.industry_name as Industry,c.city_name as City");
         $this->data['is_userSlugStudentInfo'] = $this->user_model->getUserStudentDataBySlug($userslug, $data = "d.degree_name as Degree,u.university_name as University,c.city_name as City");
         $this->data['is_userPostCount'] = $this->user_post_model->userPostCountBySlug($userslug);
-
+        $fullname = $userdata['first_name']." ".$userdata['last_name'];
+        if(isset($this->data['is_userSlugBasicInfo']) && !empty($this->data['is_userSlugBasicInfo']))
+        {
+            $desg = $this->data['is_userSlugBasicInfo']['Designation'];
+        }
+        if(isset($this->data['is_userSlugStudentInfo']) && !empty($this->data['is_userSlugStudentInfo']))
+        {
+            $desg = $this->data['is_userSlugStudentInfo']['Degree'];
+        }
+        $this->data['title'] = "About ".ucwords($fullname)." | Aileensoul";
+        $this->data['metadesc'] = "Connect with ".ucwords($fullname).", ".ucwords($desg)." and know more about him only at Aileensoul.com. Join Now!";
+        
         $is_userContactInfo = $this->userprofile_model->userContactStatus($userid, $userdata['user_id']);
         $is_userFollowInfo = $this->userprofile_model->userFollowStatus($userid, $userdata['user_id']);
         $this->data['to_id'] = $userdata['user_id'];
@@ -72,7 +83,7 @@ class Userprofile extends MY_Controller {
         $this->data['header'] = $this->load->view('userprofile/header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         // $this->data['footer'] = $this->load->view('userprofile/footer', $this->data, TRUE);
-        $this->data['title'] = "Basic Information | Aileensoul";
+        
 
         if (count($userdata) > 0) {
             $this->load->view('userprofile/index', $this->data);
