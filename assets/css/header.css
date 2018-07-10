@@ -607,7 +607,7 @@ ul.dropdown-menu li a i{
     background-size:100%
 }
 .modal-backdrop.in,.search-mob-block{
-    display:none
+    /*display:none */
 }
 .header2 ul li a.msg_notification_available .img-msg,.header2 ul li a:hover .img-msg{
     background-image:url(../img/message3_24x24.png);

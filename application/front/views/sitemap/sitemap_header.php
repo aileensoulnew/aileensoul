@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
 <!-- <div class="sm-header">
     <header class="terms-con bg-none">
         <div class="overlaay">

@@ -42,6 +42,7 @@ header('Cache-Control: public, max-age=30');
             <link rel="stylesheet" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()) ?>">
 
         <?php } ?>
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
 
  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <?php $this->load->view('adsense'); ?>
