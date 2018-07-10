@@ -70,7 +70,7 @@
                                                                     <div style="display: inline-block; float: left;">
                                                                         <div  class="buisness-profile-pic-candidate">
                                                                             <a style="  font-size: 19px;
-                                                                               font-weight: 600;" href="<?php echo base_url('job/resume/' . $row['slug']); ?>" title="<?php echo $row['job_user_image']; ?>">
+                                                                               font-weight: 600;" href="<?php echo base_url('job-profile/' . $row['slug']); ?>" title="<?php echo $row['job_user_image']; ?>">
 
                                                                                 <?php
                                                                                 $filename = $this->config->item('job_profile_thumb_upload_path') . $row['job_user_image'];
@@ -106,7 +106,7 @@
                                                                         <ul>
                                                                             <li>
                                                                                 <a style="  font-size: 19px;
-                                                                                   font-weight: 600;" href="<?php echo base_url('job/resume/' . $row['slug']); ?>" title="<?php echo $row['job_user_image']; ?>">
+                                                                                   font-weight: 600;" href="<?php echo base_url('job-profile/' . $row['slug']); ?>" title="<?php echo $row['job_user_image']; ?>">
         <?php echo ucfirst(strtolower($row['fname'])) . ' ' . ucfirst(strtolower($row['lname'])); ?></a>
                                                                             </li>
                                                                             <li class="show">
