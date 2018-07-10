@@ -286,6 +286,80 @@ $userid = $this->session->userdata('aileenuser');
                         <?php echo $left_footer_list_view; ?>
                         <!-- user pdf  end-->
                     </div>
+					<div class="full-box-module business_data mob-detail-custom tab-mb15">
+                            <div class="profile-boxProfileCard  module">
+                                
+                                <table class="business_data_table">
+                                    <tr>
+                                        <td class="business_data_td1"><i class="fa fa-trophy" aria-hidden="true"></i></td>
+                                        <td class="business_data_td2">
+                                            <?php
+                                   
+                                    $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $artisticdata[0]['other_skill']))->row()->other_category;
+
+                                    $category = $artisticdata[0]['art_skill'];
+                                    $category = explode(',' , $category);
+
+                                    foreach ($category as $catkey => $catval) {
+                                       $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
+                                       $categorylist[] = ucwords($art_category);
+                                     } 
+
+                                    $listfinal1 = array_diff($categorylist, array('Other'));
+                                    $listFinal = implode(',', $listfinal1);
+                                       
+                                    if(!in_array(26, $category)){
+                                     echo $listFinal;
+                                   }else if($artisticdata[0]['art_skill'] && $artisticdata[0]['other_skill']){
+
+                                    $trimdata = $listFinal .','.ucwords($art_othercategory);
+                                    echo trim($trimdata, ',');
+                                   }
+                                   else{
+                                     echo ucwords($art_othercategory);  
+                                  }
+                                    ?>   
+                                </td>
+                                </tr>
+                                 <?php if($artisticdata[0]['art_yourart']){?>
+                                <tr>
+                                <td class="business_data_td1 detaile_map"><i class="fa fa-lightbulb-o" aria-hidden="true"></i></td>
+                                <td class="business_data_td2"><span><?php echo $artisticdata[0]['art_yourart']; ?></span></td>
+                               </tr>
+                               <?php }?>
+
+                                    <?php if($artisticdata[0]['art_desc_art']){?>
+                            <tr>
+                                <td class="business_data_td1 detaile_map"><i class="fa fa-file-text" aria-hidden="true"></i></td>
+                                <td class="business_data_td2"><span><?php echo $this->common->make_links($artisticdata[0]['art_desc_art']); ?></span></td>
+                            </tr>
+                            <?php }?>
+                                     <tr>
+                                <td class="business_data_td1 detaile_map"><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                                <td class="business_data_td2">
+                                    <a href="mailto:<?php echo $artisticdata[0]['art_email']; ?>" title="<?php echo $artisticdata[0]['art_email']; ?>"><?php echo $artisticdata[0]['art_email']; ?></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="business_data_td1  detaile_map" ><i class="fa fa-map-marker" aria-hidden="true"></i></td>
+                                <td class="business_data_td2"><span>
+                                        <?php
+                                        if ($artisticdata[0]['art_city']) {
+                                            echo $this->db->select('city_name')->select('city_name')->get_where('cities', array('city_id' => $artisticdata[0]['art_city']))->row()->city_name;
+                                            echo",";
+                                        }
+                                        ?> 
+                                        <?php
+                                        if ($artisticdata[0]['art_country']) {
+                                            echo $this->db->select('country_name')->select('country_name')->get_where('countries', array('country_id' => $artisticdata[0]['art_country']))->row()->country_name;
+                                        }
+                                        ?>
+                                    </span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+						
 
                       <div class="custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
                             <div class="art-all-post">

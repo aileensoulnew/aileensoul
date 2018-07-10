@@ -2517,6 +2517,7 @@ overflow-y: scroll; overflow-y: auto;}
 
 }
 @media screen and (max-width: 991px) {
+	.tab-mb15{margin-bottom:15px;}
 	/***  all profile  ***/
 	.custom-box .custom-width{max-width:735px;}
 	.custom-box .left-box img{width:100%;}
@@ -3079,6 +3080,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.notification-box .contact-frnd-post .notification_data{padding:0;}
 	.notification-box .contact-frnd-post .notification_data li{margin:0; border-width:0 0 1px; border-radius:0; padding:10px 15px;}
 	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:25.8%;}
+	.new-ld-page header .logo svg{margin-top:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

@@ -1654,6 +1654,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.sub-menu li.dropdown.open::before{left:6px; right:0; /*margin:0 auto;*/ background-position:center center; width:13px; height:7px; top:22px; background-size:100%;}
 	.mobile-header .sub-header .sub-menu{height:31px;}
 	.no_login_footer{display:none;}
+	.main-login .no_login_footer{display:block;}
 	.login_footer{display:none !important;}
 	.about-us .login_footer{display:block !important;}
 	.report .login_footer{display:block !important;}
@@ -1692,6 +1693,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.blog-page .sub-header{top:42px;}
 	#pagination.pagination-button{text-align:center;}
 	.pagination-button a{padding-left:10px; padding-right:10px;}
+	
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}
