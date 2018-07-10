@@ -335,6 +335,7 @@ if($browser == "Firefox")
         </div>
         
     </header>
+    <?php if ($is_userBasicInfo == '1' || $is_userStudentInfo == '1') { ?>
     <div class="mob-bottom-menu">
         <ul>
             <li>
@@ -471,6 +472,7 @@ if($browser == "Firefox")
             <?php } ?>
         </ul>
     </div>
+    <?php } ?>
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
         <div class="all-profile-box content custom-scroll">
             <ul class="all-pr-list">
