@@ -248,12 +248,13 @@ class Sitemap_model extends CI_Model {
             $search_query = " AND company_name like '". $searchword ."'";
         }
         $sql = "SELECT bp.*, 
-                IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug, 
+                IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, 
                 IF (bp.industriyal = 0, bp.other_industrial , it.industry_name) as bus_industry_name
                 FROM ailee_business_profile bp
                 LEFT JOIN ailee_industry_type it on it.industry_id = bp.industriyal
                 LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
                 LEFT JOIN ailee_states st ON st.state_name = bp.state 
+                LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
                 WHERE bp.status = '1'
                 AND business_step = '4' AND bp.is_deleted = '0'". $search_query ." ORDER BY business_profile_id DESC";
         if($limit != ""){

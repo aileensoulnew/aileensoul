@@ -21,9 +21,9 @@ header("Pragma: no-cache"); // HTTP/1.0
 ?>
 <html lang="en">
     <head>
-        <title>Registration - Aileensoul</title>
+        <title>Register into Aileensoul.com</title>
         <!-- <meta name="robots" content="noindex, nofollow"> -->
-        <meta name="description" content="Register into Aileensoul.com for Free, Find job search, Hire employee, Get Freelance work, Grow business network & make Artistic Profiles.">
+        <meta name="description" content="Signup to get jobs or hire candidates, grow business network or list business, get freelance projects or make remote team, or show your artistic side.">
 
 
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">

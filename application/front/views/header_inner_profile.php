@@ -256,10 +256,10 @@ if($browser == "Firefox")
                             <?php 
                             $first_segment = $this->uri->segment(1);
                             $page_arr = array('','search','contact-request');
-                            $no_ser_arr = array('freelance-profile');
+                            $no_ser_arr = array('freelance-profile','recommended-candidates','hire-freelancer','job-profile');
                             if(!in_array($first_segment, $no_ser_arr))
                             {
-                            if(in_array($first_segment, $page_arr)): ?>
+                            //if(in_array($first_segment, $page_arr)): ?>
                             <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('search') ?>">
                                 <input type="text" name="q" placeholder="Search.." id="mob_search">
                             </form>
@@ -267,7 +267,7 @@ if($browser == "Firefox")
                             <a href="#search">
                                 <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" />
                             </a>
-                        <?php */ endif;
+                        <?php */ //endif;
                             } ?>
                         </div>
                         <!-- <div id="search">

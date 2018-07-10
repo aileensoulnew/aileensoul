@@ -78,7 +78,10 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Categories - Business Profile | Aileensoul";
+        
+        $this->data['title'] = "Search Top Businesses by Category | Aileensoul";
+        $this->data['metadesc'] = "Get details of various businesses from different field like IT sector, Automobile, Real Estate, Clothing, Beverages, and so on."; 
+
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->data['business_profile_link'] =  ($this->business_profile_set == 1)? $this->business_profile_link :base_url('business-profile/registration/business-information');
 
@@ -105,7 +108,6 @@ class Business_live extends MY_Controller {
         $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->data['businessAllCategory'] = $this->business_model->businessAllCategory($page,$limit)['bus_cat'];
         $this->data['links'] = $this->pagination->create_links();
-        $this->data['title'] = "Categories - Business Profile | Aileensoul";
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
 
         $this->load->view('business_live/category', $this->data);
@@ -357,7 +359,8 @@ class Business_live extends MY_Controller {
         $this->data['page'] = $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->data['businessLocation'] = $this->business_model->businessAllLocation($page,$limit)['bus_loc'];
         $this->data['links'] = $this->pagination->create_links();
-        $this->data['title'] = "Locations - Business Profile | Aileensoul";
+        $this->data['title'] = "Search Top Businesses by Location | Aileensoul";
+        $this->data['metadesc'] = "Find and get details of various business and services nearby your location on Aileensoul.com"; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->load->view('business_live/location', $this->data);
     }
@@ -373,7 +376,9 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['title'] = "Business in ".ucwords(str_replace("-"," ",$location))." | Aileensoul";
+        //$this->data['title'] = "Business in ".ucwords(str_replace("-"," ",$location))." | Aileensoul";
+        $this->data['title'] = "Businesses in ".ucwords(str_replace("-"," ",$location)).": Get Details of Top Business | Aileensoul";
+        $this->data['metadesc'] = "View address and contact information of business established in ".ucwords(str_replace("-"," ",$location)).". Register to connect and know more about business."; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $locationdata = $this->business_model->getlocationdatafromslug($location);
         $this->data['location_id'] = $location_id = $locationdata['city_id'];
@@ -469,7 +474,8 @@ class Business_live extends MY_Controller {
 
         $this->data['businessByBusiness'] = $all_link;
         
-        $this->data['title'] = "Locations - Business Profile | Aileensoul";
+        $this->data['title'] = "Search Top 10 Location-Wise Business by Category | Aileensoul";
+        $this->data['metadesc'] = "View details of top 10 sector businesses nearby your location. Visit Aileensoul.com to know more."; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->load->view('business_live/business_by_business', $this->data);
     }

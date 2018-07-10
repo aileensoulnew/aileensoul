@@ -680,7 +680,7 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($memberData as $key => $value) {
-            $txt .= '<url><loc>'.base_url().$value['user_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$value['user_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -701,7 +701,7 @@ class Sitemap extends CI_Controller {
         $member = fopen("members.xml", "w");        
         $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($mem_file_arr as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         $txt .= '</sitemapindex>';
         fwrite($member, $txt);
@@ -719,7 +719,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobData as $key => $value) {
             $url = $this->create_slug($value['post_name'])."-job-vacancy-in-".$this->create_slug($value['city_name']).'-'.$value['post_user_id'].'-'.$value['post_id'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -750,7 +750,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobCatData as $key => $value) {
             $url = $value['industry_slug']."-jobs";
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -780,7 +780,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobSkillsData as $key => $value) {
             $url = $value['skill_slug']."-jobs";
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -810,7 +810,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobLocData as $key => $value) {
             $url = 'jobs-in-'.$value['slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -840,7 +840,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobCmpData as $key => $value) {
             $url = 'jobs-opening-at-'.$this->create_slug($value['company_name']).'-'.$value['rec_id'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -870,7 +870,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobDesiData as $key => $value) {
             $url = $value['job_slug'].'-jobs';
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -906,7 +906,7 @@ class Sitemap extends CI_Controller {
         foreach ($jobCity['job_city'] as $key => $value) {
             $i=0;
             foreach ($jobCat['job_cat'] as $jck => $jcv) {                
-                $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
                 if($sitemap_counter == SITEMAP_LIMIT)
                 {
                     $sitemap_counter = 1;
@@ -922,7 +922,7 @@ class Sitemap extends CI_Controller {
                 $i++;
             }
             foreach ($jobDesc['job_desc'] as $jdk => $jdv) {                
-                $txt .= '<url><loc>'.base_url().$jdv['job_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                $txt .= '<url><loc>'.base_url().$jdv['job_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
                 if($sitemap_counter == SITEMAP_LIMIT)
                 {
                     $sitemap_counter = 1;
@@ -938,7 +938,7 @@ class Sitemap extends CI_Controller {
                 $i++;
             }
             foreach ($jobSkill['job_skills'] as $jsk => $jsv) {                
-                $txt .= '<url><loc>'.base_url().$jsv['skill_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                $txt .= '<url><loc>'.base_url().$jsv['skill_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
                 if($sitemap_counter == SITEMAP_LIMIT)
                 {
                     $sitemap_counter = 1;
@@ -975,25 +975,25 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($jobCatList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($jobSkillList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($jobLocList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($jobCmpList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($jobDesiList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($jobCDSLList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         $txt .= '</sitemapindex>';
         fwrite($myfile, $txt);
@@ -1011,7 +1011,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($busData as $key => $value) {
             $url = 'company/'.$value['business_slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -1042,7 +1042,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($busCatData as $key => $value) {
             $url = $value['industry_slug']."-business";
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT && count($busCatData) - 1 >= $key)
             {
                 $sitemap_counter = 1;
@@ -1071,8 +1071,8 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($busLocData as $key => $value) {
-            $url = 'jobs-in-'.$value['slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $url = 'business-in-'.$value['slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT && count($busLocData) - 1 >= $key)
             {
                 $sitemap_counter = 1;
@@ -1107,7 +1107,7 @@ class Sitemap extends CI_Controller {
         foreach ($jobCity['job_city'] as $key => $value) {
             $i=0;
             foreach ($jobCat['job_cat'] as $jck => $jcv) {                
-                $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-business-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-business-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
                 if($sitemap_counter == SITEMAP_LIMIT)
                 {
                     $sitemap_counter = 1;
@@ -1141,16 +1141,16 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($bussList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($bussCatList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($bussLocList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($bussCLList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }        
         $txt .= '</sitemapindex>';
         fwrite($myfile, $txt);
@@ -1167,8 +1167,8 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($freeData as $key => $value) {
-            $url = 'freelance-jobs/'.urlencode($value['category_name']).'/'.$value['post_slug'].'-'.$value['post_user_id'].'-'.$value['post_id'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $url = 'freelance-jobs/'.urlencode($value['category_name']).'/'.$this->create_slug($value['post_slug']).'-'.$value['post_user_id'].'-'.$value['post_id'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -1199,7 +1199,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($freeCatData as $key => $value) {
             $url = 'freelance-jobs/'.$value['skill_slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT && count($freeCatData) - 1 >= $key)
             {
                 $sitemap_counter = 1;
@@ -1230,7 +1230,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($freeFieldData as $key => $value) {
             $url = 'freelance-jobs/'.$value['category_slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT && count($freeFieldData) - 1 >= $key)
             {
                 $sitemap_counter = 1;
@@ -1261,13 +1261,13 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($freeList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($freeCatList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($freeFieldList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         $txt .= '</sitemapindex>';
         fwrite($myfile, $txt);
@@ -1285,7 +1285,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($artData as $key => $value) {
             $url = 'artist/p/'.$value['slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -1316,7 +1316,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($artCatData as $key => $value) {
             $url = 'artist/'.$value['category_slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -1347,7 +1347,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($artLocData as $key => $value) {
             $url = 'artist-in-'.$value['location_slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;
@@ -1385,7 +1385,7 @@ class Sitemap extends CI_Controller {
         $all_link = array();
         foreach ($artistCity['art_loc'] as $key => $value) {
             foreach ($artCatData as $jck => $jcv) {
-                $txt .= '<url><loc>'.base_url().$jcv['category_slug']."-in-".$value['location_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                $txt .= '<url><loc>'.base_url().$jcv['category_slug']."-in-".$value['location_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
                 if($sitemap_counter == SITEMAP_LIMIT)
                 {
                     $sitemap_counter = 1;
@@ -1420,16 +1420,16 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($artList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($artCatList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($artLocList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }
         foreach ($artCLList as $key => $value) {
-            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod></sitemap>';
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
         }        
         $txt .= '</sitemapindex>';
         fwrite($myfile, $txt);
@@ -1447,7 +1447,7 @@ class Sitemap extends CI_Controller {
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($blogData as $key => $value) {
             $url = 'blog/'.$value['blog_slug'];
-            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:SP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
                 $sitemap_counter = 1;

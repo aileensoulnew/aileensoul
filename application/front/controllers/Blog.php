@@ -28,7 +28,7 @@ class Blog extends CI_Controller {
         $this->data['category_name'] = "";
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($iscategory != ""){
-            $this->data['category_name'] = $slug = str_replace('-', ' ', $slug);
+            $this->data['category_name'] = $sel_category_name = str_replace('-', ' ', $slug);
             $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $slug ."')";
             $query = $this->db->query($sql);
             $result = $query->row_array();
@@ -216,8 +216,15 @@ class Blog extends CI_Controller {
                 // print_r($this->data['blogPost']);exit;
                 $this->data['links'] = $this->pagination->create_links();
 
-                $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
-                $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
+                if($iscategory != ""){
+                    $this->data['title'] = ucwords($sel_category_name)." Blogs | Aileensoul Knowledge";
+                    $this->data['metadesc'] = "Read all best ".ucwords($sel_category_name)." related articles to get more insights about this field.";
+                }
+                else
+                {                    
+                    $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
+                    $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
+                }
 
                 // echo $this->db->last_query();
                 // print_r($this->data['blog_last']);

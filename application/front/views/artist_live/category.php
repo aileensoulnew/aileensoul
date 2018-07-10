@@ -3,6 +3,7 @@
     <head>
         <base href="<?php echo base_url();?>">
         <title><?php echo $title; ?></title>
+        <meta name="description" content="<?php echo $metadesc; ?>" />
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">  
