@@ -2984,7 +2984,8 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.test-cus.drop-down .mob-right-bar{padding-top:3px; padding-left:10px;}
 	.mob-side-menu .all-profile-box{border:0px;}
 	.mob-bar-li .mob-right-bar .bg-menu{padding:0;}
-}
+	.main-login footer ul.footer-ul:first-child{display:none !important;}
+}	
 @media screen and (max-width:767px){
 	footer .footer-ul:first-child{/*display:none;*/}
     footer,header .col-md-4.col-sm-3{
@@ -3296,11 +3297,6 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .site-map .logo{
         padding-bottom:10px
     }
-    .contact header{
-        border-bottom:1px solid #d9d9d9;
-        background:url(../img/mob-about-bg.jpg) rgba(255,255,255,.4)!important;
-        background-size:100%!important
-    }
     .cust-disclaimer .about-h2{
         padding-top:110px;
         padding-bottom:110px
@@ -3545,7 +3541,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.inner-form .login{width:100%; border-left:0; border-right:0; border-radius:0; box-shadow:none;}
 	.title h1{margin:15px 0;}
 	header{padding:3px 0 7px;}
-	.report header{padding:3px 0 0px;}
+	.report header{padding:0px 0 7px;}
 	header .logo a, header h2.logo {line-height:0;}
 	.btn-right .btn2{/*font-size:14px; padding:5px 18px !important;*/}
 	.btn-right .btn4{font-size:14px; padding:5px 18px !important;}

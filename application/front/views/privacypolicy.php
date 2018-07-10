@@ -96,7 +96,7 @@ header('Cache-Control: public, max-age=30');
             <section class="middle-main bg_white">
                 <div class="container">
                     <div class="pr-pol term_desc">
-						<p>This Privacy Policy applies to <a target="_blank" href="www.aileensoul.com">Aileensoul.com</a></p>
+						<p>This Privacy Policy applies to <a target="_self" href="https://www.aileensoul.com">Aileensoul.com</a></p>
 						<p>Aileensoul.com recognizes the importance of maintaining your privacy. We value your privacy and appreciate your trust in us. Our Privacy Policy is intended to clearly describes how we treat user information we collect, use, protect, and with whom it is shared, this will let you make an informed decision about which information you should share with us.</p>
 						<h4 class="pt20 pb10">Introduction</h4>
 						<p>Aileensoul provides a free platform to each and every person in this world to hire, get a job (Full time or Freelance), grow their business network, show artistic talent and make a career. Also, a platform to learn, post information, questions, and discover great opportunities. Some data are visible to only register members whereas some to visitors (who are not a member).</p>

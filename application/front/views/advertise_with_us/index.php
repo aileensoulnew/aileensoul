@@ -122,7 +122,7 @@ header('Cache-Control: public, max-age=30');
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-6">
-								<a href="<?php echo $freelance_apply_right_profile_link; ?>">
+								<a href="<?php echo $freelance_hire_right_profile_link; ?>">
 									<div class="audience-box">
 										<img src="<?php echo base_url('assets/n-images/Freelnace.jpg') ?>" alt="Advertise With Us">
 										<h3>Freelance-Employer</h3>
@@ -149,7 +149,7 @@ header('Cache-Control: public, max-age=30');
 								</a>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-6">
-								<a href="<?php echo $freelance_hire_right_profile_link; ?>">
+								<a href="<?php echo $freelance_apply_right_profile_link; ?>">
 									<div class="audience-box">
 										<img src="<?php echo base_url('assets/n-images/freelance-apply.jpg') ?>" alt="Advertise With Us">
 										<h3>Freelance apply Profile</h3>
