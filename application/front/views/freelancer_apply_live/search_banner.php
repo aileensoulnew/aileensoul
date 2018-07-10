@@ -84,7 +84,7 @@
                     <p>Get the work you love</p>
                 </div>
                 <div class="search-box">
-                    <form onsubmit="searchSubmit()">
+                    <form onsubmit="searchSubmit()" name="serch_freelance" method="post" action="javascript:void(0);">
                         <div class="pb20 search-input">
                             <input type="text" ng-model="keyword" id="freelance_keyword" name="freelance_keyword" placeholder="Keywords, Title, Or Company" autocomplete="off">
                             <input type="text" ng-model="city" id="freelance_location" name="freelance_location" placeholder="City, State or Country" autocomplete="off">
