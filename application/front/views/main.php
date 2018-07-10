@@ -38,7 +38,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         <link rel="canonical" href="<?php echo $actual_link ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
         <?php
-        if (IS_OUTSIDE_CSS_MINIFY == '0') {
+        /*if (IS_OUTSIDE_CSS_MINIFY == '0') {
             ?>
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
@@ -49,7 +49,13 @@ header("Pragma: no-cache"); // HTTP/1.0
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/common-style.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/style-main.css?ver=' . time()); ?>">
-        <?php } ?>
+        <?php }*/ ?>
+
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
 
         <?php
         /*if (IS_OUTSIDE_JS_MINIFY == '0') {
@@ -425,10 +431,10 @@ header("Pragma: no-cache"); // HTTP/1.0
 			(function($){
 				$(window).on("load",function(){
 					
-					$(".custom-scroll").mCustomScrollbar({
+					/*$(".custom-scroll").mCustomScrollbar({
 						autoHideScrollbar:true,
 						theme:"minimal"
-					});
+					});*/
 					
 				});
 			})(jQuery);
