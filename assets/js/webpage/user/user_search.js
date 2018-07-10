@@ -93,7 +93,7 @@ app.controller('EditorController', ['$scope', function ($scope) {
             document.execCommand('inserttext', false, value);
         };
     }]);
-app.controller('searchController', function ($scope, $http) {
+app.controller('searchController', function ($scope, $http,$compile) {
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
     searchData();
@@ -154,6 +154,30 @@ app.controller('searchController', function ($scope, $http) {
                 $('#search-profile-contact-' + user_id).html('Request Send');
             }
         });
+    }
+
+    $scope.follow_user = function (id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/follow_user',
+            data: 'to_id=' + id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            $("#" + id).html($compile(success.data)($scope));
+        });
+    }
+    $scope.unfollow_user = function (id) {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/unfollow_user',
+            data: 'to_id=' + id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+                .then(function (success) {
+
+                    $("#" + id).html($compile(success.data)($scope));
+                });
     }
     
     $scope.followSearch = function (user_id) {

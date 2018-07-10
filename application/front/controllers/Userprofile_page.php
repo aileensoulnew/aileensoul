@@ -377,7 +377,7 @@ class Userprofile_page extends MY_Controller {
             $data = array('status' => '1');
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             //   $response = $status;
-            $html = '<a class="btn3 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
+            $html = '<a class="btn1 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
         } else {
             $data = array(
                 'status' => '1',
@@ -388,7 +388,7 @@ class Userprofile_page extends MY_Controller {
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             // $response = $status;
-            $html = '<a class="btn3 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
+            $html = '<a class="btn1 following"  ng-click="unfollow_user(' . $id . ')">Following</a>';
         }
 
 

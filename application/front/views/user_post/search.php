@@ -78,9 +78,11 @@
                                     <span ng-bind="searchProfile.university_name" ng-if="searchProfile.university_name"></span>
                                     <span ng-if="searchProfile.city">{{searchProfile.city}}, {{searchProfile.country}}</span> -->
                                 </div>
-                                <div class="profile-btns">                                
-                                    <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="!searchProfile.follow_status" class="btn3" title="Follow">Follow</a>
-                                    <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="searchProfile.follow_status == '1'" class="btn1" title="Following">Following</a>                                
+                                <div class="profile-btns" id="{{searchProfile.user_id}}">
+                                    <a ng-if="searchProfile.follow_status == 1" class="btn1 following" ng-click="unfollow_user(searchProfile.user_id)">Following</a>
+                                    <a ng-if="searchProfile.follow_status == 0 || !searchProfile.follow_status" class="btn3 follow" ng-click="follow_user(searchProfile.user_id)">Follow</a>
+                                    <!-- <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="!searchProfile.follow_status" class="btn3" title="Follow">Follow</a>
+                                    <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="searchProfile.follow_status == '1'" class="btn1" title="Following">Following</a> -->
                                 </div>
                             </div>
                         </div>
