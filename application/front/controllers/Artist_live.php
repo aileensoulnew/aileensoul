@@ -169,6 +169,10 @@ class Artist_live extends MY_Controller {
 
         if($sertype == 1)
         {
+            if($tmCat == "")
+            {
+                $tmCat = "Artist";
+            }
             $this->data['title'] = "Find and Connect with ".$tmCat." in ".$tmLoc;
             $this->data['metadesc'] = "Looking for great skilful ".$tmCat." in ".$tmLoc."? Connect with them on Aileensoul. Search and explore their portfolio and work details. Join Now to create something artistic!";
         }

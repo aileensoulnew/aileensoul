@@ -582,7 +582,7 @@ class Sitemap extends CI_Controller {
 
     public function sitemap_freelance_jobs($searchword = "") {
         $this->data['title'] = "Freelance Jobs Sitemap | Aileensoul";
-        $this->data['metadesc'] = "Find and apply on various work from job registered and verified on Aileensoul.";
+        $this->data['metadesc'] = "Find and apply on various work from home jobs registered and verified on Aileensoul.";
         $this->data['searchword'] = $searchword;
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($searchword != "")

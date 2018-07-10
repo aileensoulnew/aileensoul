@@ -1559,6 +1559,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             details_data = success.data;
             $scope.details_data = details_data;            
             $scope.$parent.title = "About "+details_data.fullname+" | Aileensoul";
+            $scope.$parent.metadesc = "Connect with "+details_data.fullname+", "+details_data.Degree+" and know more about him only at Aileensoul.com. Join Now!";
         });
     }
 

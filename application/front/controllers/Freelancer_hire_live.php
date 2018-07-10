@@ -2317,7 +2317,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$segment3 = implode(' ', $segment3);
 	$segment3 = ucfirst($segment3);
 	$skills = $this->freelancer_hire_model->getSkillsNames($this->data['postdata'][0]['post_skill']);
-	$this->data['title'] = $segment3 . " Jobs | Aileensoul";
+	$this->data['title'] = "Online ".$segment3 . " Jobs | Aileensoul";
 	$this->data['metadesc'] = $segment3." Project for ".$this->data['postdata'][0]['post_exp_year'].($this->data['postdata'][0]['post_exp_month'] != '' ? '.'.$this->data['postdata'][0]['post_exp_month'] : '')." Years experience person. Required skills are: ".$skills.". Apply Now to get the work.";
 	$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
 	if ($this->session->userdata('aileenuser')) {

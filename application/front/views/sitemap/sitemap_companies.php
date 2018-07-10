@@ -17,7 +17,7 @@ header('Cache-Control: public, max-age=30');
 	<head>
 		<base href="<?php echo base_url();?>">
 		<title><?php echo $title; ?></title>
-		<meta name="description" content="{{metadesc}}" />
+		<meta name="description" content="<?php echo $metadesc; ?>" />
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
