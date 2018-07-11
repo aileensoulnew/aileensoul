@@ -106,7 +106,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                     <a href="<?php echo base_url().$url.'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
                                                         <?php if($_searchJob['comp_logo'] != ""){
                                                             ?>
-                                                        <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL.$_searchJob['comp_logo'] ?>">
+                                                        <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL.$_searchJob['comp_logo'] ?>" onError="this.onerror=null;this.src='<?php echo base_url().'/assets/n-images/commen-img.png'; ?>';">
                                                         <?php
                                                         }
                                                         else{ ?>
