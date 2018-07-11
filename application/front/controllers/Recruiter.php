@@ -1923,14 +1923,17 @@ class Recruiter extends MY_Controller {
 				$postdata .= '</div>';
 				$postdata .= '</div>';
 			} else {
-				$postdata .= '<div class="art-img-nn border1">';
-				$postdata .= '    <div class="art_no_post_img">';
-				$postdata .= '<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">';
-				$postdata .= '</div>';
-				$postdata .= '<div class="art_no_post_text">';
-				$postdata .= 'No Recommended  Candidate  Available.';
-				$postdata .= '</div>';
-				$postdata .= '</div>';
+				if($page == 1)
+				{					
+					$postdata .= '<div class="art-img-nn border1">';
+					$postdata .= '    <div class="art_no_post_img">';
+					$postdata .= '<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">';
+					$postdata .= '</div>';
+					$postdata .= '<div class="art_no_post_text">';
+					$postdata .= 'No Recommended  Candidate  Available.';
+					$postdata .= '</div>';
+					$postdata .= '</div>';
+				}
 			}
 			$postdata .= '<div class="col-md-1">';
 			$postdata .= '</div>';

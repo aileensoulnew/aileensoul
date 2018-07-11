@@ -344,7 +344,7 @@ function checkvalue(){
 	var isProcessing = false;
 	var ajax_Post;
 	function recommen_candidate_post(from,filter_selected_data,pagenum) {
-		if(pagenum == undefined || pagenum == 1){
+		if((pagenum == undefined || pagenum == 1) && from != "filter"){
             $('#main_loader').show();
         }
 		if(from == "filter" ){
@@ -371,7 +371,7 @@ function checkvalue(){
 			dataType: "html",
 			beforeSend: function () {
 				if (pagenum == 'undefined' || pagenum == 1) {
-					$(".job-contact-frnd").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
+					//$(".job-contact-frnd").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
 			 	} else {
 					$('#loader').show();
 				}
