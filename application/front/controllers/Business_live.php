@@ -466,16 +466,21 @@ class Business_live extends MY_Controller {
         foreach ($jobCity as $key => $value) {
             $i=0;
             foreach ($jobCat['job_cat'] as $jck => $jcv) {
-                $all_link[$value['slug']][$i]['name'] = $jcv['industry_name']." Business In ".$value['city_name'];
-                $all_link[$value['slug']][$i]['slug'] = $jcv['industry_slug']."-business-in-".$value['slug'];
-                $i++;
+
+                $total_buss = $this->business_model->businessListByFilterTotalRec($jcv['industry_id'],$value['city_id'],$industry_name = array(),$city_name = array());
+                if($total_buss > 0)
+                {                    
+                    $all_link[$value['slug']][$i]['name'] = $jcv['industry_name']." Business In ".$value['city_name'];
+                    $all_link[$value['slug']][$i]['slug'] = $jcv['industry_slug']."-business-in-".$value['slug'];
+                    $i++;
+                }
             }
         }
 
         $this->data['businessByBusiness'] = $all_link;
         
-        $this->data['title'] = "Search Top 10 Location-Wise Business by Category | Aileensoul";
-        $this->data['metadesc'] = "View details of top 10 sector businesses nearby your location. Visit Aileensoul.com to know more."; 
+        $this->data['title'] = "Search Top 20 Location-Wise Business by Category | Aileensoul";
+        $this->data['metadesc'] = "View details of top 20 sector businesses nearby your location. Visit Aileensoul.com to know more."; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $this->load->view('business_live/business_by_business', $this->data);
     }

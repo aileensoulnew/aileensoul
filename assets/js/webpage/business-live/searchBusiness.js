@@ -135,7 +135,7 @@ $('#content').on( 'change keyup keydown paste cut', 'textarea', function (){
     $(this).height(0).height(this.scrollHeight);
 }).find( 'textarea' ).change();
 
-AOS.init({
+/*AOS.init({
   easing: 'ease-in-out-sine'
 });
 setInterval(addItem, 100);
@@ -150,4 +150,4 @@ function addItem () {
   item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
   // container.appendChild(item);
   itemsCounter++;
-}
+}*/
