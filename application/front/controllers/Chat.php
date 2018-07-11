@@ -1206,7 +1206,8 @@ class Chat extends MY_Controller {
         if (!empty($_SERVER['HTTP_USER_AGENT'])) {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
             if (preg_match('@(iPad|iPod|iPhone|Android|BlackBerry|SymbianOS|SCH-M\d+|Opera Mini|Windows CE|Nokia|SonyEricsson|webOS|PalmOS)@', $useragent)) {
-                $this->load->view('mobile/mobile_chat_one', $this->data);
+                //$this->load->view('mobile/mobile_chat_one', $this->data);
+                $this->load->view('chat2', $this->data);
             } else {
                 $this->load->view('chat2', $this->data);
             }

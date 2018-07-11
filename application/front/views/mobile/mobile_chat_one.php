@@ -10,16 +10,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png'); ?>">
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
         <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
         <!--<link rel="stylesheet" type="text/css" href="<?php //echo base_url('assets/css/1.10.3.jquery-ui.css'); ?>">-->
-        <!--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-        <?php if (IS_MSG_JS_MINIFY == '0'){?>
+        <!--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->        
+        <?php /*if (IS_MSG_JS_MINIFY == '0'){?>
 
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <?php }else{?>
           <script src="<?php echo base_url('assets/js_min/bootstrap.min.js'); ?>"></script>
-        <?php }?>
+        <?php }*/ ?>
         <!-- http://bootsnipp.com/snippets/4jXW -->
 
             <?php if (IS_MSG_CSS_MINIFY == '0'){?>
@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">        
+        
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <style type="text/css">
@@ -932,7 +933,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     });
 
                     $('body').on("click", "*", function (e) {
-                        document.getElementById('notificationContainer1').style.display = 'none';
+                        // document.getElementById('notificationContainer1').style.display = 'none';
                     });
 
                 </script>
@@ -959,6 +960,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             }
                         }
                     }
+                    /*jQuery(document).ready(function($) {
+                        $("li.user-id label").click(function(e){
+                            $(".dropdown").removeClass("open");
+                            $(this).next('ul.dropdown-menu').toggle();
+                            e.stopPropagation();
+                        });
+                        $(".right-header ul li.dropdown a").click(function(e){                          
+                            $('.right-header ul.dropdown-menu').hide();
+                        });
+                    });*/
 //					document.getElementById("notificationContainer1").onclick = function(evt) {
 //						if (!this.isContentEditable) {
 //							this.contentEditable = "true";
