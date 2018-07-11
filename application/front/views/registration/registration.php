@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <?php
 if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
     // $date = $_SERVER['HTTP_IF_MODIFIED_SINCE'];
