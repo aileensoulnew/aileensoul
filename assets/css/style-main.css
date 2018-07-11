@@ -2985,6 +2985,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.mob-side-menu .all-profile-box{border:0px;}
 	.mob-bar-li .mob-right-bar .bg-menu{padding:0;}
 	.main-login footer ul.footer-ul:first-child{display:none !important;}
+	.main-login .mob-right-bar{padding-left:10px;}
 }	
 @media screen and (max-width:767px){
 	footer .footer-ul:first-child{/*display:none;*/}
@@ -3141,7 +3142,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
         position:inherit;
         left:inherit
     }
-    .custom-landscape header{/*position:relative;*/ padding:5px 0 5px;}
+    .custom-landscape header{/*position:relative;*/ padding:5px 0 2px;}
     .custom-box .custom-width{height:auto; border-left:0!important; border-right:0!important; max-width:90%}
     .custom-box .left-box{
         width:150px;
@@ -3398,8 +3399,10 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.feedback-cus .right-header .test-cus > li > a.btn9{margin-left:10px;}
 	.right-header ul li.mob-bar-li{padding-left:10px;}
 	.right-cus-new-hdr .test-cus{padding-top:2px !important;}
+	.custom-landscape .right-cus-new-hdr .test-cus{padding-top:5px !important;}
 	.test-cus li .btn-n{font-size:12px; padding:3px 20px; margin-top:0;}
 	.right-cus-new-hdr .mob-right-bar{padding-top:3px;}
+	.custom-landscape .right-cus-new-hdr .mob-right-bar{padding-top:9px;}
 	.profile-header .logo img{height:23px !important;}
 }
 @media screen and (max-width:639px){

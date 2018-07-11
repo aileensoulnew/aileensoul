@@ -1316,7 +1316,7 @@ appearance:         none;}
 .search-business .search-detail li a{color:#5c5c5c;} 
 .search-business .search-detail li .img{float:left; width:30px;} 
 .search-business .search-detail li .detail-content{float:left; width:94%; word-wrap:break-word;} 
-.post-design-commnet-box{z-index: 1;}
+.post-design-commnet-box{z-index: 1; background:#f6f6f6;}
 .report .search-banner{background: rgba(255,255,255,1);
 background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(205,213,217,1) 100%);
 background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(205,213,217,1)));
@@ -2123,7 +2123,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 
 
 /***  art and bus css  ***/
-.art-all-comment{width:100%; float:left;}
+.art-all-comment{width:100%; float:left; background:#f6f6f6;}
 .inputtype-edit-comment .editable_text{margin-left:8px !important; }
 .audio_img{margin:0 auto;}
 .post-design-mid .audio_main_div{width:300px; margin:0 auto; position:relative;}
@@ -2442,7 +2442,7 @@ overflow-y: scroll; overflow-y: auto;}
 .custom-user-add{display:none;}
 .add-box{display:none;}
 .main-inner .middle-main .container{height:auto;}
-
+.post-editor{background:#f6f6f6;}
 /***  end extra  ***/
 
 /***  media query  ***/
