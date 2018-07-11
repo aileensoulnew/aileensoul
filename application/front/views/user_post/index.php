@@ -1157,6 +1157,7 @@
 				classie.toggle( this, 'active' );
 				classie.toggle( menuRight, 'cbp-spmenu-open' );
 				disableOther( 'showRight' );
+                $('body').toggleClass("spmenu-open");
 			};
 		
 			function disableOther( button ) {
