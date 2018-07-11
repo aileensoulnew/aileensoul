@@ -2865,7 +2865,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.custom-user-box{margin-bottom:0;}
 	.custom-user-list h3{font-size:20px;}
 	.table-responsive.content td a{font-size:14px;}
-	.detail-box{border:0;}
+	.detail-box{border:0; border-bottom:1px solid #d2d2d2; border-radius:0;}
 	.detail-box h4{display:none;}
 	.reg-form-cus .right-header{padding-top:0;}
 	.title-div ul{width:100%;}

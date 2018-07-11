@@ -174,9 +174,9 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                         <div class="accordion" id="accordion2">
                                             <div class="accordion-group">
                                                 <div class="accordion-heading">
-                                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" aria-expanded="true">Posting Period</a></h3>
+                                                    <h3><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" aria-expanded="true">Posting Period</a></h3>
                                                 </div>
-                                                <div id="collapseOne" class="accordion-body collapse in" aria-expanded="true" style="">
+                                                <div id="collapseTwo" class="accordion-body collapse in" aria-expanded="true" style="">
                                                     <ul class="search-listing">
                                                         <li>
                                                             <label class="control control--checkbox">Today
