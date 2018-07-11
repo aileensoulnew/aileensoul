@@ -71,6 +71,7 @@ class Job_model extends CI_Model {
         $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name')->from('recruiter r');
         $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
         $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
         $this->db->group_by('rp.user_id');
@@ -249,6 +250,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         }
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         $this->db->order_by('rp.post_id', 'desc');
         $query = $this->db->get();
         $result_array = $query->result_array();
@@ -326,6 +329,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         }
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         $this->db->order_by('rp.post_id', 'desc');
         $query = $this->db->get();
         $result_array = $query->result_array();
@@ -490,6 +495,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
@@ -590,6 +597,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
@@ -615,6 +624,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         if(isset($job_skills) && !empty($job_skills))
         {
             $skills_id = $job_skills['skill_id'];
@@ -749,6 +760,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         if(isset($job_skills) && !empty($job_skills))
         {
             $skills_id = $job_skills['skill_id'];
@@ -976,6 +989,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name,r.comp_logo')->from('recruiter r');
         $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
         $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
         $this->db->group_by('rp.user_id');
@@ -996,6 +1010,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->select('count(rp.user_id) as count,r.user_id,r.rec_id, r.re_comp_name as company_name,r.comp_logo')->from('recruiter r');
         $this->db->join('rec_post rp', 'rp.user_id = r.user_id', 'left');
         $this->db->where('r.re_status', '1');
+        $this->db->where('r.is_delete', '0');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
         $this->db->group_by('rp.user_id');
@@ -1072,7 +1087,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
                 Union
 
                 SELECT re_comp_name as value FROM ailee_recruiter 
-                WHERE re_status = '1' AND (re_comp_name LIKE '". $keyword ."') 
+                WHERE re_status = '1' AND is_delete = '0' AND (re_comp_name LIKE '". $keyword ."') 
                 GROUP BY re_comp_name 
                 LIMIT 5";
             $query = $this->db->query($sql);
@@ -1201,6 +1216,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
         $this->db->where('r.user_id != ', $userid);
+        $this->db->where('r.re_status',"1");
+        $this->db->where('r.is_delete', "0");
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
@@ -1371,6 +1388,8 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
         $this->db->where('r.user_id != ', $userid);
+        $this->db->where('r.re_status',"1");
+        $this->db->where('r.is_delete', "0");
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
@@ -1495,7 +1514,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             LEFT JOIN ailee_states as st ON st.state_id = rj.state
             LEFT JOIN ailee_countries as cr ON cr.country_id = rj.country
             LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name 
-            WHERE r.user_id != '".$userid."'";
+            WHERE r.user_id != '".$userid."' AND r.re_status = '1' AND r.is_delete = '0'";
         if($sql_filter != "")
         {            
             $sql .= " AND (".trim($sql_filter, ' OR ').")";            
@@ -1606,7 +1625,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             LEFT JOIN ailee_states as st ON st.state_id = rj.state
             LEFT JOIN ailee_countries as cr ON cr.country_id = rj.country
             LEFT JOIN ailee_job_title as jt ON jt.title_id = rj.post_name 
-            WHERE r.user_id != '".$userid."' ";
+            WHERE r.user_id != '".$userid."' AND r.re_status = '1' AND r.is_delete = '0' ";
         if($sql_filter != "")
         {            
             $$sql .= " AND (".trim($sql_filter, ' OR ').")";            
