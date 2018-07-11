@@ -47,7 +47,6 @@ class Freelancer_apply_live extends MY_Controller {
 
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
-        $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         $this->data['title'] = "Work from Home: Online Freelance Jobs | Aileensoul";
         $this->data['metadesc'] = "Find and apply from various freelance work opportunities like web designer, digital marketing, content writing, and many more. Get the online job that interest you the most on Aileensoul. ";
         $this->data['freelance_apply_profile_set'] = $this->freelance_apply_profile_set;
@@ -56,6 +55,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['FAFields'] = $this->freelancer_apply_model->freelancerFields($limit);
         $this->data['FASkills'] = $this->freelancer_apply_model->get_fa_category($limit)['fa_category'];
         $this->data['free_job_related_list'] = $this->freelancer_apply_model->free_job_related_blog_list();
+        $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
 
         if($userid != ""){
             $this->load->view('freelancer_apply_live/freelancer_apply_live', $this->data);
@@ -273,9 +273,9 @@ class Freelancer_apply_live extends MY_Controller {
         {
             $page = 1;
         }
-        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? $_POST['category_id'] : "");//Field
+        $category_id = (isset($_POST['category_id']) && !empty($_POST['category_id']) ? explode(",", $_POST['category_id']) : "");//Field
         
-        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? $_POST['skill_id'] : "");
+        $skill_id = (isset($_POST['skill_id']) && !empty($_POST['skill_id']) ? explode(",", $_POST['skill_id']) : "");
         $worktype = (isset($_POST['worktype']) && !empty($_POST['worktype']) ? $_POST['worktype'] : "");
         $period_filter = (isset($_POST['period_filter']) && !empty($_POST['period_filter']) ? $_POST['period_filter'] : "");
         $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
