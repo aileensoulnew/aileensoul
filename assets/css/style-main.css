@@ -1901,7 +1901,7 @@ body.cover{padding-bottom:60px}
 .header-login .btn-right a:focus{
     outline:0;
     background:0 0!important;
-    color:#fff!important
+    color:#1b8ab9!important
 }
 .no-login .modal .forgot_password .form-control.error{
     border:none;

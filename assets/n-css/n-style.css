@@ -2158,6 +2158,7 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .profile-job-post-location-name .follow-img{margin-bottom:0;}
 .profile-job-post-location-name .user_btn button{margin-bottom:8px; margin-top:11px;}
 .flw_msg_btn{margin-top:11px; padding-right:0;}
+.art-side-menu .flw_msg_btn{margin-top:5px;}
 
 /***  end art bus css  ***/
 
@@ -2281,7 +2282,8 @@ body, body.no-login {padding-bottom:60px;}
 .com-name-r label.error{padding:0 !important;}
 #jobseeker_regform fieldset{padding:10px;}
 .cus-error fieldset.main_select_data span::after{display:none;}
-.modal-dialog{padding-top:50px;}
+.modal-dialog{padding-top:47px !important;}
+
 #basicinfo .cus_field .error{bottom:-20px;}
 #basicinfo label.error, #studentinfo label.error{right:0;}
 .student-or-not{float:left;}
@@ -2442,6 +2444,8 @@ overflow-y: scroll; overflow-y: auto;}
 .add-box{display:none;}
 .main-inner .middle-main .container{height:auto;}
 .post-editor{background:#f6f6f6;}
+.profile-job-profile-button{background:#f6f6f6;}
+.apply-btn{background:#f6f6f6;}
 .error-page .search-banner{background:none;}
 /***  end extra  ***/
 

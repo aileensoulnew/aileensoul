@@ -1520,9 +1520,7 @@ footer{
     text-decoration:none;
     background:#156f95
 }
-.job-menu-profile a h3{
-    cursor:default
-}
+.job-menu-profile a h3{cursor:default; font-size:24px; color:#5c5c5c; line-height:1;}
 #userimage label.error{
     right:20px
 }
