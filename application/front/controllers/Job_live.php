@@ -686,19 +686,32 @@ class Job_live extends MY_Controller {
         foreach ($jobCity as $key => $value) {
             $i=0;
             foreach ($jobCat as $jck => $jcv) {
-                $all_link[$value['slug']]['category'][$i]['name'] = $jcv['industry_name']." Jobs In ".$value['city_name'];
-                $all_link[$value['slug']]['category'][$i]['slug'] = $jcv['industry_slug']."-jobs-in-".$value['slug'];
-                $i++;
+
+                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$job_skills = array(),$jcv,$job_designation = array(),$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value);
+                if($total_jobs > 0)
+                {                    
+                    $all_link[$value['slug']]['category'][$i]['name'] = $jcv['industry_name']." Jobs In ".$value['city_name'];
+                    $all_link[$value['slug']]['category'][$i]['slug'] = $jcv['industry_slug']."-jobs-in-".$value['slug'];
+                    $i++;
+                }
             }
             foreach ($jobDesc as $jdk => $jdv) {
-                $all_link[$value['slug']]['designation'][$i]['name'] = $jdv['job_title']." Jobs In ".$value['city_name'];
-                $all_link[$value['slug']]['designation'][$i]['slug'] = $jdv['job_slug']."-jobs-in-".$value['slug'];
-                $i++;
+                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$job_skills = array(),$job_category = array(),$jdv,$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value);
+                if($total_jobs > 0)
+                {                    
+                    $all_link[$value['slug']]['designation'][$i]['name'] = $jdv['job_title']." Jobs In ".$value['city_name'];
+                    $all_link[$value['slug']]['designation'][$i]['slug'] = $jdv['job_slug']."-jobs-in-".$value['slug'];
+                    $i++;
+                }
             }
             foreach ($jobSkill as $jsk => $jsv) {
-                $all_link[$value['slug']]['skills'][$i]['name'] = $jsv['skill']." Jobs In ".$value['city_name'];
-                $all_link[$value['slug']]['skills'][$i]['slug'] = $jsv['skill_slug']."-jobs-in-".$value['slug'];
-                $i++;
+                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$jsv,$job_category = array(),$job_designation = array(),$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value);
+                if($total_jobs > 0)
+                {                    
+                    $all_link[$value['slug']]['skills'][$i]['name'] = $jsv['skill']." Jobs In ".$value['city_name'];
+                    $all_link[$value['slug']]['skills'][$i]['slug'] = $jsv['skill_slug']."-jobs-in-".$value['slug'];
+                    $i++;
+                }
             }
         }
         $this->data['all_link'] = $all_link;
