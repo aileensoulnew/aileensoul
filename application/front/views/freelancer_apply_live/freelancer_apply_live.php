@@ -140,8 +140,8 @@
                                 </p>
                             </div>
                             <div class="all-job-bottom">
-                                <span>Applied Persons: {{applypost.ShortListedCount}}</span>
-                                <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
+                                <span>Applied Persons: {{applypost.AppliedCount}}</span>
+                                <span class="pl20">Shortlisted Persons: {{applypost.ShortListedCount}}</span>
                                 <p class="pull-right">
                                     <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
                                     <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
