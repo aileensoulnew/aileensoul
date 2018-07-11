@@ -1865,7 +1865,7 @@ class Artist_live extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Find Top Location-Wise Artist by Category and Connect with Them | Aileensoul";
-        $this->data['metadesc'] = "Explore top 10 categories wise artist near your location. Register free to connect with them."; 
+        $this->data['metadesc'] = "Explore top 20 categories wise artist near your location. Register free to connect with them."; 
         $this->data['ismainregister'] = false;
         if($userid){
             $this->data['ismainregister'] = true;
@@ -1881,9 +1881,13 @@ class Artist_live extends MY_Controller {
         $all_link = array();
         foreach ($artistCity['art_loc'] as $key => $value) {
             foreach ($artistCat['art_cat'] as $jck => $jcv) {
-                $all_link[$value['location_slug']][$i]['name'] = $jcv['art_category']." In ".$value['art_location'];
-                $all_link[$value['location_slug']][$i]['slug'] = $jcv['category_slug']."-in-".$value['location_slug'];
-                $i++;
+                $total_artist = $this->artistic_model->artistListLocationCategoryTotalRec($jcv['category_id'],$value['location_id'],$art_category = array(),$art_location = array());
+                if($total_artist > 0)
+                {                    
+                    $all_link[$value['location_slug']][$i]['name'] = $jcv['art_category']." In ".$value['art_location'];
+                    $all_link[$value['location_slug']][$i]['slug'] = $jcv['category_slug']."-in-".$value['location_slug'];
+                    $i++;
+                }
             }
         }
         
