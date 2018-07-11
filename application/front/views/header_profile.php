@@ -473,6 +473,7 @@ if($browser == "Firefox")
         </ul>
     </div>
     <?php } ?>
+	<div class="mob-side-btm">
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
         <div class="all-profile-box content custom-scroll">
             <ul class="all-pr-list">
@@ -500,6 +501,7 @@ if($browser == "Firefox")
             </ul>
         </div>
     </nav>
+	</div>
 </div>
 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <script>

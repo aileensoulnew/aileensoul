@@ -2170,7 +2170,6 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 
 /***  404 page  ***/
 .error-page{background:#fff; letter-spacing:1px;}
-.error-page header{background:#fff; min-height:54px;}
 .error-page .search-banner header{border-bottom:1px solid #e6ecf0;}
 .error-page header h2.logo a{color:#5c5c5c;}
 .error-top-box{padding:30px 0;}
@@ -2443,6 +2442,7 @@ overflow-y: scroll; overflow-y: auto;}
 .add-box{display:none;}
 .main-inner .middle-main .container{height:auto;}
 .post-editor{background:#f6f6f6;}
+.error-page .search-banner{background:none;}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -3081,6 +3081,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.notification-box .contact-frnd-post .notification_data li{margin:0; border-width:0 0 1px; border-radius:0; padding:10px 15px;}
 	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:25.8%;}
 	.new-ld-page header .logo svg{margin-top:0;}
+	.error-page .search-banner{padding:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3142,6 +3143,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.blog-page .also-like-box .rec-img{height:auto;}
 	.also-like-box .rec-img img{position:inherit; left:inherit; right:inherit; width:100%; transform:inherit; -webkit-transform:inherit; -ms-transform:inherit;}
 	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:41%;}
+	.error-page .search-banner header{padding:10px 0;}
 }
 @media screen and (max-width: 539px) {
 	.fw-539{width:100%; float:left;}

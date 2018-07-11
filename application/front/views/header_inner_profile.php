@@ -475,6 +475,7 @@ if($browser == "Firefox")
             <?php } ?>
         </ul>
     </div>
+	<div class="mob-side-btm">
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
 		<div class="all-profile-box content custom-scroll">
 			<ul class="all-pr-list">
@@ -502,7 +503,8 @@ if($browser == "Firefox")
 			</ul>
 		</div>
 	</nav>
-</div>
+	</div>
+	</div>
 </div>
 <script>
    var menuRight = document.getElementById( 'cbp-spmenu-s2' ),

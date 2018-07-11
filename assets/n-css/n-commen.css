@@ -1262,7 +1262,7 @@ border: 1px solid #1b8ab9;}
 
 /***  mobile header  ***/
 #showRight{background:none; padding:0; position:relative; z-index:99999;}
-.mob-bottom-menu{position:fixed; bottom:0; width:100%; float:left; background:#fff; padding:10px 0; z-index:9999; border-top:1px solid #d2d2d2;}
+.mob-bottom-menu{position:fixed; bottom:0; width:100%; float:left; background:#fff; padding:10px 0; z-index:99999; border-top:1px solid #d2d2d2;}
 .mob-bottom-menu ul{padding:0;width:100%; float:left; margin:0;}
 .mob-bottom-menu > li{float:left; list-style-type:none; width:20%; text-align:center; margin-bottom:0;}
 .mob-bottom-menu > li > a{position:relative;}
@@ -1547,6 +1547,8 @@ header h2.logo{line-height:0; height:31px;}
 header .logo a{line-height:0;}
 header .logo svg{height:26px; width:160px; margin-top:6px; fill:#fff;}
 .new-ld-page header .logo svg{height:26px; width:160px; margin-top:7px; fill:#fff;}
+.error-page .new-ld-page header .logo svg{margin-top:3px;}
+.old-no-login.error-page .new-ld-page header .logo svg{margin-top:7px;}
 .ftr-page header .logo svg{fill:#5c5c5c;}
 .new-ld-page header .logo svg{fill:#5c5c5c;}
 
@@ -1570,7 +1572,7 @@ input[type=number]::-webkit-inner-spin-button {
 .custom-right-art .pagination-button{padding:0;}
 .notification-data-inside .day-text{font-size:13px; color:#7b7b7b;}
 body.spmenu-open{overflow:hidden;}
-.spmenu-open .mob-side-hdr{width: 100%; position: fixed; z-index: 9999; background: rgba(0,0,0,0.6); height: 100%; left: 0; top: 0;}
+.spmenu-open .mob-side-hdr, .spmenu-open .mob-side-btm {width: 100%; position: fixed; z-index: 9999; background: rgba(0,0,0,0.6); height: 100%; left: 0; top: 0;}
 
 
 /***  media query  ***/
@@ -1617,7 +1619,7 @@ body.spmenu-open{overflow:hidden;}
 	.web-header{display:none;}
 	.mobile-header{display:block;}
 	.mobile-header header h2{padding-right:10px;}
-	.mobile-header header{/*padding:5px 0;*/}
+	.mobile-header header{/*padding:5px 0;*/ z-index:99999;}
 	.mobile-header .left-header{width:100%; float:left;}
 	.mobile-header .left-header form{margin:0 auto; float:none; width:100%; padding-left:0;}
 	.mobile-header .left-header input[type="text"]{width:100%; margin-bottom:0px;}
@@ -1684,6 +1686,8 @@ body.spmenu-open{overflow:hidden;}
 	#pagination.pagination-button{text-align:center;}
 	.pagination-button a{padding-left:10px; padding-right:10px;}
 	.main-login .no_login_footer{position:relative; margin-bottom:0;}
+	.dropdown-data .art-img-nn .art_no_post_img img{height:80px;}
+	.sitemap .middle-section{padding:65px 0 0px;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}
