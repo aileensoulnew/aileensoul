@@ -45,12 +45,14 @@ function disableOther( button ) {
 
 $('#showRight').click(function(e){
     e.stopPropagation();
-     $('#cbp-spmenu-s2').toggleClass('cbp-spmenu-open');
+    $('#cbp-spmenu-s2').toggleClass('cbp-spmenu-open');
+    $('body').addClass('spmenu-open');
 });
 $('#cbp-spmenu-s2').click(function(e){
     e.stopPropagation();
 });
 $('body,html').click(function(e){
-       $('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
+    $('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
+    $('body').removeClass('spmenu-open');
 });
 </script>
