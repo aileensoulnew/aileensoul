@@ -1768,7 +1768,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .modal2 .prev:hover{opacity: 1;}
 .modal2 .next:hover{opacity: 1;}
 .modal2 .modal-dialog .modal-content .mySlides{height: 100%;}
-.modal2 .modal-close{background: transparent; font-size: 30px; border:0; top: 15px; right: 15px; opacity: 0.6; padding: 3px 5px; border-radius: 3px;}
+.modal2 .modal-close{background: transparent; font-size: 30px; border:0; top: 15px !important; right: 15px !important; opacity: 0.6; padding:5px; border-radius: 3px;}
 .modal2 .modal-close:hover{opacity: 1; background: rgba(255,255,255,0.1);}
 .modal2 .modal-close:focus{outline:none;}
 .all-meda .mejs__inner .mejs__controls{display: none;}
