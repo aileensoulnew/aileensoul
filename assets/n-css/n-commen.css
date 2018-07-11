@@ -1725,6 +1725,7 @@ input[type=number]::-webkit-inner-spin-button {
 	.fw-539.left-header h2.logo{float:none;}
 }
 @media screen and (max-width: 479px) {
+	.main-login .middle-main{padding:40px 0 80px;}
 	.fw-479{width:100%; float:left;}
 	.none-479{display:none !important;}
 	.visible-479{display:block;}

@@ -3508,8 +3508,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.report .btn-right{padding-bottom:5px;}
 	.p0-479{padding:0;}
     .mob-none,.profile-box-1.art::after,.profile-box-1.art::before,.profile-box-1.bus::before,.profile-box-1.job::after,.profile-box-1.job::before{display:none;}
-    .custom-box .custom-width .right-box h1 a::after{left:50%!important; width:150px; margin-left:-75px;
-	}
+    .custom-box .custom-width .right-box h1 a::after{left:50%!important; width:150px; margin-left:-75px;}
     .pt-a{padding-top:35px;}
     .profile-detail h2{font-size:17px;}
     .middle-main{padding:30px 0;}
@@ -3580,6 +3579,8 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.right-header .other-hdr .test-cus .btn9{margin-top:0;}
 	.test-cus.drop-down .mob-right-bar{padding-top:9px;}
 	.right-header > ul.test-cus > li:nth-child(3){display:none;}
+	.custom-landscape header{padding:0px 0 5px;}
+	
 }
 @media screen and (max-width:360px){
     .main-inner .btn-right.pull-right a.btn2{padding:8px 18px;}
