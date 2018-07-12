@@ -541,7 +541,7 @@
                             <h5 class="post-title">
                                 <p ng-if="post.question_data.question"><b>Question:</b><span ng-bind="post.question_data.question" id="ask-post-question-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.question_data.description && post.question_data.description != 'undefined'"><b>Description:</b><span ng-bind="post.question_data.description" id="ask-post-description-{{post.post_data.id}}"></span></p>
-                                <p ng-if="post.question_data.link"><b>Link:</b><span ng-bind="post.question_data.link" id="ask-post-link-{{post.post_data.id}}"></span></p>
+                                <p ng-if="post.question_data.link"><b>Link:</b><a href="{{post.question_data.link}}" target="_self" ng-bind="post.question_data.link" id="ask-post-link-{{post.post_data.id}}"></a></p>
                                 <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
                             </h5>

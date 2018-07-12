@@ -351,7 +351,7 @@
                                                     <a id="remove-view-more{{post.post_data.id}}" ng-if="post.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+post.post_data.id,'remove-view-more'+post.post_data.id);" class="read-more-post">.... Read More</a>
                                                 </div>                                            
                                             </div>
-                                            <p ng-if="post.question_data.link"><b>Link:</b><span ng-bind="post.question_data.link" id="ask-post-link-{{post.post_data.id}}"></span></p>
+                                            <p ng-if="post.question_data.link"><b>Link:</b><a href="{{post.question_data.link}}" target="_self" ng-bind="post.question_data.link" id="ask-post-link-{{post.post_data.id}}"></a></p>
                                             <p ng-if="post.question_data.category"><b>Category:</b><span ng-bind="post.question_data.category" id="ask-post-category-{{post.post_data.id}}"></span></p>
                                             <p ng-if="post.question_data.field"><b>Field:</b><span ng-bind="post.question_data.field" id="ask-post-field-{{post.post_data.id}}"></span></p>
                                         </h5>
