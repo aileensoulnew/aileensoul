@@ -1090,7 +1090,7 @@
             		<h3 ng-if="count_likeUser > 1">{{count_likeUser}} Likes</h3>
                     <div class="modal-body padding_less_right">
                         <div class="">
-                            <ul>
+                            <ul class="custom-scroll">
                                 <li class="like-img" ng-repeat="userlist in get_like_user_list">
                                     <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
@@ -1105,7 +1105,6 @@
                                         <p ng-if="userlist.title_name != null">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
                                     </div>
-
                                 </li>
                             </ul>
                         </div>
