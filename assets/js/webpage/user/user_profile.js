@@ -4099,17 +4099,6 @@ function unfollowing_contacts(index) {
     });
 }
 $uploadCrop1 = $('#upload-demo-one').croppie({
-    enableExif: true,    
-});
-var fileTypes = ['jpg', 'jpeg', 'png']; 
-$('#upload-one').on('change', function () {
-
-    if (this.files && this.files[0]) {
-        var extension = this.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
-        isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
-            if (isSuccess)
-            {
-                $uploadCrop1 = $('#upload-demo-one').croppie({
                     enableExif: true,
                     viewport: {
                         width: 200,
@@ -4121,7 +4110,14 @@ $('#upload-one').on('change', function () {
                         height: 300
                     }
                 });
+var fileTypes = ['jpg', 'jpeg', 'png']; 
+$('#upload-one').on('change', function () {
 
+    if (this.files && this.files[0]) {
+        var extension = this.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
+        isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
+            if (isSuccess)
+            {
                 document.getElementById('upload-demo-one').style.display = 'block';
                 var reader = new FileReader();
                 
@@ -4138,8 +4134,13 @@ $('#upload-one').on('change', function () {
             else
             {
                 $("#userimage")[0].reset();
-                $uploadCrop1.croppie('destroy', {                        
+                if($uploadCrop1 != "")
+                {
+                    $uploadCrop1.croppie('bind', {
+                        url: ""
                     });
+                    document.getElementById('upload-demo-one').style.display = 'none';
+                }
                 alert("Select only JPG,JPEG,PNG");
             }
         }
