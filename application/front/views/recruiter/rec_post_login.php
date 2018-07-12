@@ -774,54 +774,7 @@
 
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 
-                            <div class="all-profile-box hidden">
-                                <div class="all-pro-head">
-                                    <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
-                                </div>
-                                <ul class="all-pr-list">
-                                    <li>
-                                        <a href="<?php echo base_url('job'); ?>" title="job">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i1.jpg'); ?>" alt="<?php echo 'JOBIMAGE'; ?>">
-                                            </div>
-                                            <span>Job Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('recruiter'); ?>" title="recruiter profile">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i2.jpg'); ?>" alt="<?php echo 'RECIMAGE'; ?>">
-                                            </div>
-                                            <span>Recruiter Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('freelance'); ?>" title="freelancer">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i3.jpg'); ?>" alt="<?php echo 'FREELANCERIMAGE'; ?>">
-                                            </div>
-                                            <span>Freelance Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('business-profile'); ?>" title="business profile">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i4.jpg'); ?>" alt="<?php echo 'BUSINESSIMAGE'; ?>">
-                                            </div>
-                                            <span>Business Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('artist'); ?>" title="artistic">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i5.jpg'); ?>" alt="<?php echo 'ARTISTICIMAGE'; ?>">
-                                            </div>
-                                            <span>Artistic Profile</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <?php echo $right_profile_view; ?>
+                            
                         </div>
                        
 

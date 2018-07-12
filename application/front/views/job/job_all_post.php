@@ -304,55 +304,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="all-profile-box hidden">
-                            <div class="all-pro-head">
-                                <h4>Profiles<a href="<?php echo base_url('profiles/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right" title="All">All</a></h4>
-                            </div>
-                            <ul class="all-pr-list">
-                                <li>
-                                    <a href="<?php echo base_url('job'); ?>" title="job">
-                                        <div class="all-pr-img">
-                                            <img src="<?php echo base_url('assets/img/i1.jpg'); ?>" alt="<?php echo 'job profile'; ?>">
-                                        </div>
-                                        <span>Job Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('recruiter'); ?>" title="recruiter">
-                                        <div class="all-pr-img">
-                                            <img src="<?php echo base_url('assets/img/i2.jpg'); ?>"  alt="<?php echo 'recruiter profile'; ?>">
-                                        </div>
-                                        <span>Recruiter Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('freelance'); ?>" title="freelancer">
-                                        <div class="all-pr-img">
-                                            <img src="<?php echo base_url('assets/img/i3.jpg'); ?>" alt="<?php echo 'freelancer profile'; ?>">
-                                        </div>
-                                        <span>Freelance Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('business-profile'); ?>" title="business-profile">
-                                        <div class="all-pr-img">
-                                            <img src="<?php echo base_url('assets/img/i4.jpg'); ?>" alt="<?php echo 'business profile'; ?>">
-                                        </div>
-                                        <span>Business Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url('artist'); ?>" title="artist">
-                                        <div class="all-pr-img">
-                                            <img src="<?php echo base_url('assets/img/i5.jpg'); ?>" alt="artist">
-                                        </div>
-                                        <span>Artistic Profile</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                       
-                        <?php echo $right_profile_view; ?>
+                        
 
                     </div>
 

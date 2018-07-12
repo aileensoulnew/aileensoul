@@ -236,54 +236,7 @@
                             </div>
                         </div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
-                            <div class="all-profile-box hidden">
-                                <div class="all-pro-head">
-                                    <h4>Profiles<a href="<?php echo base_url('/') . $this->session->userdata('aileenuser_slug'); ?>" class="pull-right">All</a></h4>
-                                </div>
-                                <ul class="all-pr-list">
-                                    <li>
-                                        <a href="<?php echo base_url('job'); ?>" title="Job Profile">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i1.jpg'); ?>" alt="<?php echo "JOABIMAGE"?>">
-                                            </div>
-                                            <span>Job Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('recruiter'); ?>" title="Recruiter Profile">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i2.jpg'); ?>" alt="<?php echo "RECIMAGE"?>">
-                                            </div>
-                                            <span>Recruiter Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('freelance'); ?>" title="Freelancer Profile">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i3.jpg'); ?>" alt="<?php echo "FREELANCERIMAGE"?>">
-                                            </div>
-                                            <span>Freelance Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('business-profile'); ?>" title="Business Profile">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i4.jpg'); ?>" alt="<?php echo "BUSINESSIMAGE"?>">
-                                            </div>
-                                            <span>Business Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo base_url('find-artist'); ?>" title="Artist Profile">
-                                            <div class="all-pr-img">
-                                                <img src="<?php echo base_url('assets/img/i5.jpg'); ?>" alt="<?php echo "ARTISTIMAGE"?>">
-                                            </div>
-                                            <span>Artistic Profile</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <?php echo $right_profile_view; ?>
+                            
 							 <?php echo $left_footer; ?>
                         </div>
                     </div>

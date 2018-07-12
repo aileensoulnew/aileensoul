@@ -257,7 +257,7 @@
                         </li>
                     </ul>
                 </div>
-                <?php echo $right_profile_view; ?>
+               
             </div>
         </div>
         <!-- Bid-modal  -->
