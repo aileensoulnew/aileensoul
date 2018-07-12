@@ -108,9 +108,10 @@
                 </div>
                 <div class="right-part">
                     
-                    <?php echo $left_footer_list_view; ?>
+                   
                 </div>
             </div>
+			<?php echo $login_footer; ?>
         </div>
         <?php if($user_id != "" && $this->freelance_apply_profile_set == 0)
         { ?>

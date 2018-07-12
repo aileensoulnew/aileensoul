@@ -112,11 +112,12 @@
                     </div>
                     <div class="right-part">
                        
-                        <?php echo $left_footer; ?>
+                        
                     </div>
                 </div>
             </div>        
         </div>
+		<?php echo $login_footer; ?>
     </div>
     <?php $this->load->view('mobile_side_slide'); ?>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
