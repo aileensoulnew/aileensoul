@@ -128,7 +128,7 @@ app.filter('parseUrl', function($sce) {
     if(text.match(urls)) {
       text = text.replace(urls, "<a href=\"$1\" target=\"_self\">$1</a>")
     }
-    if(text.match(urlswww)) {
+    else if(text.match(urlswww)) {
       text = text.replace(urlswww, "<a href=\"//$1\" target=\"_self\">$1</a>")
     }
     if(text.match(emails)) {

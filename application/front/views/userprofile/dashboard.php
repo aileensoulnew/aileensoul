@@ -1034,7 +1034,7 @@
                                     <i class="fa fa fa-link upload_icon"><span class="upload_span_icon"> Add Link</span>  </i> 
                                 </div>
                                 <div class="form-group"  ng-show = "IsVisible">
-                                    <input type="text" ng-model="ask.web_link" class="" placeholder="Add Your Web Link">
+                                    <input type="url" ng-model="ask.web_link" class="" placeholder="Add Your Web Link">
                                 </div>
                             </div>
                         </div>
