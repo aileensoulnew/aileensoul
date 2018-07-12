@@ -1086,7 +1086,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box biderror post-error" id="posterrormodal" role="dialog">
+    <div class="modal fade message-box biderror post-error" id="posterrormodal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="posterror-modal-close modal-close" data-dismiss="modal">&times;
@@ -1097,7 +1097,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box post-error" id="post" role="dialog">
+    <div class="modal fade message-box post-error" id="post" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" id="post" data-dismiss="modal">&times;</button>       
@@ -1107,7 +1107,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box" id="delete_model" role="dialog">
+    <div class="modal fade message-box" id="delete_model" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" id="postedit" data-dismiss="modal">&times;</button>       
@@ -1119,7 +1119,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade message-box" id="delete_post_model" role="dialog">
+    <div class="modal fade message-box" id="delete_post_model" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <button type="button" class="modal-close" id="postedit" data-dismiss="modal">&times;</button>       
@@ -1132,7 +1132,7 @@
         </div>
     </div>
 
-    <div class="modal fade message-box like-popup" id="likeusermodal" role="dialog">
+    <div class="modal fade message-box like-popup" id="likeusermodal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                  <button type="button" class="modal-close" data-dismiss="modal">×</button>            

@@ -86,7 +86,7 @@
         <?php echo $login_footer; ?>
         </div>
         <!--PROFILE PIC MODEL START-->
-        <div class="modal fade message-box" id="bidmodal-2" role="dialog">
+        <div class="modal fade message-box" id="bidmodal-2" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>      
@@ -112,7 +112,7 @@
             </div>
         </div>
         <!-- No Signup User Modal Start  -->
-        <div class="modal fade message-box biderror" id="regmodal" role="dialog">
+        <div class="modal fade message-box biderror" id="regmodal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
@@ -132,7 +132,7 @@
             </div>
         </div>
         <!-- No Signup User Modal Close  -->
-        <div class="modal fade message-box custom-popup" id="other-user-profile-img" role="dialog">
+        <div class="modal fade message-box custom-popup" id="other-user-profile-img" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lm">
                 <button type="button" class="modal-close" data-dismiss="modal"><img src="<?php echo base_url('assets/img/left-arrow-popup.png') ?>"></button> 
                 <div class="modal-content">
@@ -147,7 +147,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade message-box custom-popup" id="view-profile-img" role="dialog">
+        <div class="modal fade message-box custom-popup" id="view-profile-img" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lm">
                 <button type="button" class="modal-close" data-dismiss="modal"><img src="<?php echo base_url('assets/img/left-arrow-popup.png') ?>"></button> 
                 <div class="modal-content">
@@ -166,7 +166,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade message-box custom-popup" id="view-cover-img" role="dialog">
+        <div class="modal fade message-box custom-popup" id="view-cover-img" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lm">
                 <button type="button" class="modal-close" data-dismiss="modal"><img src="<?php echo base_url('assets/img/left-arrow-popup.png') ?>"></button> 
                 <div class="modal-content">
@@ -183,7 +183,7 @@
         </div>
         
         <!--PROFILE PIC MODEL END-->
-        <div class="modal fade message-box" id="remove-contact" role="dialog">
+        <div class="modal fade message-box" id="remove-contact" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
