@@ -1044,10 +1044,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $jobCat = $query->result_array();
         //echo $this->db->last_query();exit;
         foreach ($jobCat as $k => $v) {
-            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$jobCat[$k]['industry_image']))
-            {
-                $jobCat[$k]['industry_image'] = "job_industry_image_default.png";
-            }
+            // if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$jobCat[$k]['industry_image']))
+            // {
+            //     $jobCat[$k]['industry_image'] = "job_industry_image_default.png";
+            // }
         }
         // $result_array['job_cat'] = $jobCat;
         // $result_array['total_record'] = $this->get_jobs_by_categories_rec();
