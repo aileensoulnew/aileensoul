@@ -276,7 +276,9 @@ app.controller('userProfileController', function ($scope, $http) {
     var url = window.location.href;
     $scope.active = url.substring(url.lastIndexOf("/") + 1)
     //$scope.active = $scope.active == item ? '' : item;
-    $scope.makeActive = function (item) {
+    $scope.pade_reload = true;
+    $scope.makeActive = function (item) {        
+        $scope.pade_reload = false;
         $scope.active = $scope.active == item ? '' : item;
     }
     $scope.live_slug = live_slug;
@@ -411,10 +413,13 @@ app.config(function ($routeProvider, $locationProvider) {
 app.controller('profilesController', function ($scope, $http, $location) {
     $scope.user = {};
     // PROFEETIONAL DATA
-    $scope.$parent.title = "Profiles | Aileensoul";
+    $scope.$parent.title = "Profiles | Aileensoul";    
     getFieldList();
     function getFieldList() {
-        $('#main_loader').show();
+        if($scope.$parent.pade_reload == true)
+        {
+            $('#main_loader').show();            
+        }
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/profiles_data',
@@ -454,7 +459,11 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
     $scope.getDashboardPdf = function (pagenum = '') {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+             if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
+            //$('#main_loader').show();
         }
         $http({
             method: 'post',
@@ -536,7 +545,11 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
     $scope.getDashboardAudios = function (pagenum = '') {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+             if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
         $http({
             method: 'post',
@@ -681,7 +694,11 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
     $scope.getDashboardVideos = function (pagenum = '') {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+             if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
             
         $http({
@@ -823,7 +840,11 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
     $scope.getDashboardPhotos = function (pagenum = '') {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+             if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
         $http({
             method: 'post',
@@ -1476,7 +1497,11 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     });
     function getUserDashboardPost(pagenum = '') {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+             if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
             
         $('#loader').show();
@@ -3295,7 +3320,11 @@ app.controller('detailsController', function ($scope, $http, $location) {
     getFieldList();
 
     function getFieldList() {
-        $('#main_loader').hide();        
+        // $('#main_loader').hide();        
+        if($scope.$parent.pade_reload == true)
+        {
+            $('#main_loader').show();            
+        }
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/detail_data',
@@ -3349,7 +3378,11 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     // Fetch data
     $scope.getContacts = function (pagenum = '') {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+            if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
 
         $http({
@@ -3435,7 +3468,11 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     // Fetch data
     $scope.getFollowers = function (pagenum = '') {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+            if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
         $http({
             method: 'post',
@@ -3534,7 +3571,11 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     $scope.getFollowing = function (pagenum = '') {
 
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+            if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
 
         $http({
@@ -3673,7 +3714,11 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     $scope.getQuestions = function (pagenum = '') {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
-            $('#main_loader').show();
+            // $('#main_loader').show();
+            if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
         }
         $http({
             method: 'post',
