@@ -255,9 +255,7 @@
                     </div>
                 </div>
                 <div class="right-part">
-                    <div class="add-box">
-                        <img src="<?php echo base_url('assets/n-images/add.jpg') ?>">
-                    </div>
+                   
                 </div>
             </div>
         </div>

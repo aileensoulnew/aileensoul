@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="right-part">
-                        <?php echo $right_profile_view; ?>
+                        
                     </div>
                 </div>
             </div>

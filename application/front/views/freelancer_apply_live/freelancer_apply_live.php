@@ -157,9 +157,7 @@
 
                 <!-- RIGHT SIDE AD IMG -->
                 <div class="right-part">
-                    <div class="add-box">
-                        <img src="<?php echo base_url('assets/img/add.jpg?ver=' . time()) ?>">
-                    </div>
+                    
 					<?php echo $left_footer_list_view; ?>
                 </div>
             </div>

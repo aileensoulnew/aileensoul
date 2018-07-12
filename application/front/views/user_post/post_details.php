@@ -475,9 +475,7 @@
                             </div>
                     </div>
                     <div class="right-part">
-                        <div class="custom-user-add">
-                            <img src="<?php echo base_url('assets/n-images/add.jpg') ?>">
-                        </div>
+                        
                     </div>
 
 
