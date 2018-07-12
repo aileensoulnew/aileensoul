@@ -3,7 +3,7 @@
         <div class="">
             <h3>Top Company</h3>
         </div>
-        <ul class="search-listing custom-scroll">
+        <ul class="search-listing">
             <?php 
             if(isset($jobCompany) && !empty($jobCompany)):
                 foreach($jobCompany as $_jobCompany):
@@ -25,7 +25,7 @@
         <div class="">
             <h3>Top Categories</h3>
         </div>
-        <ul class="search-listing custom-scroll">
+        <ul class="search-listing">
             <?php
             if(isset($jobCategory) && !empty($jobCategory)):
                 foreach($jobCategory as $_jobCategory): ?>
@@ -46,7 +46,7 @@
         <div class="">
             <h3>Top Cities</h3>
         </div>
-        <ul class="search-listing custom-scroll">
+        <ul class="search-listing">
             <?php
             if(isset($jobCity) && !empty($jobCity)):
                 foreach($jobCity as $_jobCity): ?>
@@ -67,7 +67,7 @@
         <div class="">
             <h3>Top Skills</h3>
         </div>
-        <ul class="search-listing custom-scroll">
+        <ul class="search-listing">
             <?php
             if(isset($jobSkill) && !empty($jobSkill)):
                 foreach($jobSkill as $_jobSkill): ?>
@@ -87,7 +87,7 @@
         <div class="">
             <h3>Top Designation</h3>
         </div>
-        <ul class="search-listing custom-scroll">
+        <ul class="search-listing">
             <?php
             if(isset($jobDesignation) && !empty($jobDesignation)):
                 foreach($jobDesignation as $_jobDesignation): ?>
