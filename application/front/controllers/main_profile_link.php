@@ -23,7 +23,7 @@
             $job_profile_count = $this->common->select_data_by_condition('job_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         $contition_array_job = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
-        $job_deactive = $this->common->select_data_by_condition('job_reg', $contition_array_job, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+        $job_deactive = $this->common->select_data_by_condition('job_reg', $contition_array_job, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
         $job_deactive = $job_deactive[0]['total'];
         /*Code for Job profile link ends*/
@@ -110,7 +110,7 @@
         // Check freelancer is active or not and generate uel for create freelancer Search_banner
         $this->data['isdeactivatefreelancer'] = false;
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
-        $freelancerpost_deactive = $this->data['freelancerpost_deactive'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+        $freelancerpost_deactive = $this->data['freelancerpost_deactive'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
         if ($freelancerpost_deactive) {
             $this->data['isdeactivatefreelancer'] = true;
         }

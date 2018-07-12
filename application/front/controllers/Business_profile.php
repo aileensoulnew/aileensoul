@@ -3298,10 +3298,10 @@ Your browser does not support the audio tag.
         $artdata = $artisticdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $slugid = $artdata[0]['business_slug'];
 
-        if ($id == $slug_id || $id == '') {
+        if ($id == $slugid || $id == '') {
             $contition_array = array('business_profile.user_id' => $userid, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1');
-            $businessdata1 = $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
+            $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            
             $limit = $perpage;
             $offset = $start;
 
@@ -3309,13 +3309,12 @@ Your browser does not support the audio tag.
             $userlist1 = $this->business_model->business_followers($follow_to = $businessdata1[0]['business_profile_id']);
         } else {
             $contition_array = array('business_profile.business_slug' => $id, 'business_profile.is_deleted' => '0', 'business_profile.status' => '1', 'business_profile.business_step' => '4');
-            $businessdata1 = $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
+            $businessdata1 = $this->common->select_data_by_condition('business_profile', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');            
             $limit = $perpage;
             $offset = $start;
 
-            $userlist = $this->business_model->business_followers($follow_to = $businessdata1[0]['business_profile_id'], $sortby = '', $orderby = '', $limit, $offset);
-            $userlist1 = $this->business_model->business_followers($follow_to = $businessdata1[0]['business_profile_id']);
+            $userlist = $this->business_model->business_followers($businessdata1[0]['business_profile_id'], $sortby = '', $orderby = '', $limit, $offset);
+            $userlist1 = $this->business_model->business_followers($businessdata1[0]['business_profile_id']);
         }
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = count($userlist1);
