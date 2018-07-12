@@ -93,8 +93,9 @@
                                                     <li>
                                                         <a href="<?php echo base_url().$_jobCat['industry_slug'].'-jobs'; ?>" target="_self">
                                                             <div class="cus-cat-middle">
-                                                            <img src="<?php echo JOB_INDUSTRY_IMG_PATH.$_jobCat['industry_image']; ?>" onError="this.onerror=null;this.src='<?php echo JOB_INDUSTRY_IMG_PATH.'job_industry_image_default.png'; ?>';">
+                                                            <img src="<?php echo JOB_INDUSTRY_IMG_PATH.$_jobCat['industry_image']; ?>">
                                                             <p><?php echo ucwords($_jobCat['industry_name']).' Jobs'; ?></p>
+                                                            <!-- onError="this.onerror=null;this.src='<?php //echo JOB_INDUSTRY_IMG_PATH.'job_industry_image_default.png'; ?>';" -->
                                                             </div>
                                                         </a>
                                                     </li>

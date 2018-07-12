@@ -880,12 +880,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->order_by('count', 'desc');
         $query = $this->db->get();
         $jobCity = $query->result_array();
-        foreach ($jobCity as $k => $v) {
+        /*foreach ($jobCity as $k => $v) {
             if(!file_exists(CITY_IMG_PATH."/".$jobCity[$k]['city_image']))
             {
                 $jobCity[$k]['city_image'] = "default_city.png";
             }
-        }
+        }*/
         // $result_array['job_city'] = $jobCity;
         // $result_array['total_record'] = $this->get_job_city_total_rec();
         return $jobCity;
@@ -918,12 +918,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $query = $this->db->query($sql);
 
         $jobSkills = $query->result_array();
-        foreach ($jobSkills as $k => $v) {
+        /*foreach ($jobSkills as $k => $v) {
             if(!file_exists(SKILLS_IMG_PATH."/".$jobSkills[$k]['skill_image']))
             {
                 $jobSkills[$k]['skill_image'] = "skills_default.png";
             }
-        }
+        }*/
         
         // $ret_array['job_skills'] = $jobSkills;
         // $ret_array['total_record'] = $this->get_job_skills_total_rec();
@@ -957,12 +957,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         }
         $query = $this->db->get();
         $jobDesc = $query->result_array();
-        foreach ($jobDesc as $k => $v) {
+        /*foreach ($jobDesc as $k => $v) {
             if(!file_exists(DESIGNATION_IMG_PATH."/".$jobDesc[$k]['job_title_img']))
             {
                 $jobDesc[$k]['job_title_img'] = "designation_default.png";
             }
-        }
+        }*/
         // $result_array['job_desc'] = $jobDesc;
         // $result_array['total_record'] = $this->get_job_designations_rec();
         return $jobDesc;

@@ -371,11 +371,11 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
 
-    $(document).on('keydown', function (e) {
+    /*$(document).on('keydown', function (e) {
         if (e.keyCode === 27) {
             $('.modal-close').click();            
         }
-    });
+    });*/
     $(document).on('keydown','#job_title .input',function () {
         if($('#job_title ul li').length > 0)
         {            
@@ -443,14 +443,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         if($('#ask_related_category ul li').length > 0)
         {            
             $(this).attr('placeholder', '');
-            $(this).css('width', '10px');
+            $(this).css('width', 'auto');
         }
     });
     $(document).on('focusout','#ask_related_category .input',function () {
         if($('#ask_related_category ul li').length > 0)
         {             
             $(this).attr('placeholder', '');
-            $(this).css('width', '10px');
+            $(this).css('width', 'auto');
         }
         if($('#ask_related_category ul li').length == 0)
         {            

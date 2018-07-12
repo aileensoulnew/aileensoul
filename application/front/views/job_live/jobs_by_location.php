@@ -93,6 +93,7 @@
                                                         <a href="<?php echo base_url().'jobs-in-'.$_jobByLocation['slug']; ?>" target="_self">
                                                             <div class="cus-cat-middle">
                                                             <img src="<?php echo CITY_IMG_PATH.$_jobByLocation['city_image'];?>">
+                                                            <!-- onError="this.onerror=null;this.src='<?php //echo JOB_INDUSTRY_IMG_PATH.'job_industry_image_default.png'; ?>';" -->
                                                             <p><?php echo 'Jobs in '.ucwords($_jobByLocation['city_name']); ?></p>
                                                             </div>
                                                         </a>
