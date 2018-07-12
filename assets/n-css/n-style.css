@@ -877,7 +877,7 @@ border-bottom: 0px;}
 .job-top-detail h5{font-size:15px; margin:0; font-weight:bold; padding-bottom:3px;}
 .job-top-detail h5 a{color:#5c5c5c;}
 .job-top-detail h5 a:hover{border-bottom:1px solid #5c5c5c;}
-.job-top-detail p{font-size:13px; margin:0; line-height:1.5;}
+.job-top-detail p{font-size:13px; margin:0; line-height:1.5; font-weight:normal;}
 .job-top-detail p a{color:#5c5c5c;}
 .all-job-middle{font-size:13px; padding:10px 15px; width:100%; float:left;}
 .all-job-middle .location{padding-right:20px;}
@@ -966,8 +966,10 @@ header.profile-header .logo a{color:#5c5c5c;}
     font-size: 11px!important;
 }
 .has-error input, input.error, select.error, .has-error textarea, textarea.error {border: 1px solid #ff0000 !important;}
+.main-login .has-error input, .main-login input.error, .main-login select.error, .main-login .has-error textarea, .main-login textarea.error {border-width: 0 0 1px !important;}
 .registeration .has-error input,  .registeration input.error, .registeration  select.error, .registeration .has-error textarea, .registeration textarea.error {border-width: 0 0 1px !important;}
 .login-cu-page .has-error input,  .login-cu-page input.error, .login-cu-page  select.error, .login-cu-page .has-error textarea, .login-cu-page textarea.error {border-width: 0 0 1px !important;}
+.main-login .form-group label.error{padding-left:0 !important;}
 
 .cus_field .error{bottom: 50px;}
 .registeration .form-group label.error{padding-left:0 !important;}
@@ -2134,6 +2136,9 @@ height: 30px; display: inline-block; text-transform: capitalize; text-align:cent
 .notification-database{padding:0; height:auto; width:338px;}
 .notification_data_in{padding-top:0px;}
 .notification_data_in .notification-database{padding:10px; height:70px; width:100%;}
+.notification_data_in .notification-data-inside h6{font-size:14px;}
+.notification_data_in .notification-data-inside .noti-msg-y{font-size:13px;}
+.notification_data_in .notification-data-inside .day-text{font-size:11px;}
 .data_noti_msg span {line-height:1;}
 .cq_post ul li:hover{background:#e9f4f8;}
 .art-cat-custom label.error{top:65px;}
