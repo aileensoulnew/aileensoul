@@ -83,6 +83,28 @@ app.directive("editableText", function () {
         transclude: true,
     };
 });
+app.filter('parseUrl', function($sce) {
+  var urls = /(\b(https:\/\/?|http:\/\/?|ftp:\/\/)[A-Z0-9+&@#\/%?=~_|!:,.;-]*[-A-Z0-9+&@#\/%=~_|])/gim
+  var urlswww = /(\b(www.?)[A-Z0-9+&@#\/%?=~_|!:,.;-]*[-A-Z0-9+&@#\/%=~_|])/gim
+  var emails = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim
+
+  return function(text, asTrusted) {
+    if(text.match(urls)) {
+      text = text.replace(urls, "<a href=\"$1\" target=\"_self\">$1</a>")
+    }
+    if(text.match(urlswww)) {
+      text = text.replace(urlswww, "<a href=\"//$1\" target=\"_self\">$1</a>")
+    }
+    if(text.match(emails)) {
+      text = text.replace(emails, "<a href=\"mailto:$1\">$1</a>")
+    }
+
+    if(asTrusted) {
+      return $sce.trustAsHtml(text);
+    }
+    return text;
+  }
+});
 app.filter('slugify', function () {
     return function (input) {
         if (!input)
