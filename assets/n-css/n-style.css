@@ -2452,6 +2452,10 @@ overflow-y: scroll; overflow-y: auto;}
 .profile-job-profile-button{background:#f6f6f6;}
 .apply-btn{background:#f6f6f6;}
 .error-page .search-banner{background:none;}
+.post-field .form-group input[type="text"]:focus{border-bottom:0px !important;}
+.post-field .form-group textarea:focus{border-bottom:1px solid #d2d2d2 !important;}
+.camer_h i{color:#d2d2d2;}
+.registeration #register_form select.error{color:#7b7b7b !important;}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -3091,6 +3095,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:25.8%;}
 	.new-ld-page header .logo svg{margin-top:0;}
 	.error-page .search-banner{padding:0;}
+	.search-page .middle-section{padding:60px 0 50px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
