@@ -50,7 +50,7 @@
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url().$_jobCategory['industry_slug'].'-jobs'; ?>">
                                     <div class="cus-cat-middle">
-                                        <img src="<?php echo JOB_INDUSTRY_IMG_PATH.$_jobCategory['industry_image']; ?>">
+                                        <img src="<?php echo JOB_INDUSTRY_IMG_PATH.$_jobCategory['industry_image']; ?>" onError="this.onerror=null;this.src='<?php echo JOB_INDUSTRY_IMG_PATH.'job_industry_image_default.png'; ?>';">
                                     <p><?php echo $_jobCategory['industry_name']; ?></p>
                                     </div>
                                 </a>

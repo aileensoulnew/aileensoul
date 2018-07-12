@@ -27,12 +27,12 @@ class Job_model extends CI_Model {
         $query = $this->db->get();
         // echo $this->db->last_query();exit;
         $result_array = $query->result_array();        
-        foreach ($result_array as $k => $v) {
+        /*foreach ($result_array as $k => $v) {
             if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$result_array[$k]['industry_image']))
             {
                 $result_array[$k]['industry_image'] = "job_industry_image_default.png";
             }
-        }
+        }*/
         return $result_array;
     }
 
@@ -1043,12 +1043,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $query = $this->db->get();
         $jobCat = $query->result_array();
         //echo $this->db->last_query();exit;
-        foreach ($jobCat as $k => $v) {
-            // if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$jobCat[$k]['industry_image']))
-            // {
-            //     $jobCat[$k]['industry_image'] = "job_industry_image_default.png";
-            // }
-        }
+        /*foreach ($jobCat as $k => $v) {
+            if(!file_exists(JOB_INDUSTRY_IMG_PATH."/".$jobCat[$k]['industry_image']))
+            {
+                $jobCat[$k]['industry_image'] = "job_industry_image_default.png";
+            }
+        }*/
         // $result_array['job_cat'] = $jobCat;
         // $result_array['total_record'] = $this->get_jobs_by_categories_rec();
 
