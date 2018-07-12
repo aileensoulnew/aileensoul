@@ -55,7 +55,7 @@ if ($ismainregister == true && $artist_isregister == false) {
 </div>
 <?php } ?>
 
-<?php $this->load->view('mobile_side_slide'); ?>
+<?php //$this->load->view('mobile_side_slide'); ?>
 <script type="text/javascript">
 	function searchSubmitNew() {
         var keyword = $("#q").val().toLowerCase().split(' ').join('+');

@@ -4099,28 +4099,50 @@ function unfollowing_contacts(index) {
     });
 }
 $uploadCrop1 = $('#upload-demo-one').croppie({
-    enableExif: true,
-    viewport: {
-        width: 200,
-        height: 200,
-        type: 'square'
-    },
-    boundary: {
-        width: 300,
-        height: 300
-    }
+    enableExif: true,    
 });
+var fileTypes = ['jpg', 'jpeg', 'png']; 
 $('#upload-one').on('change', function () {
-    document.getElementById('upload-demo-one').style.display = 'block';
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        $uploadCrop1.croppie('bind', {
-            url: e.target.result
-        }).then(function () {
-            console.log('jQuery bind complete');
-        });
-    }
-    reader.readAsDataURL(this.files[0]);
+
+    if (this.files && this.files[0]) {
+        var extension = this.files[0].name.split('.').pop().toLowerCase(),  //file extension from input file
+        isSuccess = fileTypes.indexOf(extension) > -1;  //is extension in acceptable types
+            if (isSuccess)
+            {
+                $uploadCrop1 = $('#upload-demo-one').croppie({
+                    enableExif: true,
+                    viewport: {
+                        width: 200,
+                        height: 200,
+                        type: 'square'
+                    },
+                    boundary: {
+                        width: 300,
+                        height: 300
+                    }
+                });
+
+                document.getElementById('upload-demo-one').style.display = 'block';
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    
+                    $uploadCrop1.croppie('bind', {
+                        url: e.target.result
+                    }).then(function () {
+                        console.log('jQuery bind complete');
+                    });
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+            else
+            {
+                $("#userimage")[0].reset();
+                $uploadCrop1.croppie('destroy', {                        
+                    });
+                alert("Select only JPG,JPEG,PNG");
+            }
+        }
 });
 $("#userimage").validate({
     rules: {
