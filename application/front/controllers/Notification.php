@@ -1041,15 +1041,21 @@ Your browser does not support the audio tag.
             //Recruiter Notification Start
             if ($total['not_from'] == '1') {
                 // $companyname = $this->db->get_where('recruiter', array('user_id' => $total['user_id']))->row()->re_comp_name;
+                
+                $user_invite = $this->db->select('*')->get_where('user_invite', array('invite_id' => $total['not_product_id']))->row();
+
+                $postdata = $this->notification_model->get_recruiter_post_data($user_invite->post_id);
                 $rec_data = $this->notification_model->get_recruiter_info($total['not_from_id']);
                 $companyname = $rec_data['re_comp_name'];
+                $slug = $this->create_slug($postdata['string_post_name']);
+                $post_url = strtolower($slug."-job-vacancy-in-".$postdata['slug_city']."-".$total['not_from_id']."-".$user_invite->post_id);
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('recruiter/profile/'.$rec_data['user_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '><a href="' . base_url($post_url) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
 
@@ -1080,6 +1086,12 @@ Your browser does not support the audio tag.
 
             //Job Notification Start
             if ($total['not_from'] == '2') {
+                $job_apply = $this->db->select('*')->get_where('job_apply', array('app_id' => $total['not_product_id']))->row();
+                $postdata = $this->notification_model->get_recruiter_post_data($job_apply->post_id);
+                
+                $slug = $this->create_slug($postdata['string_post_name']);
+                $post_url = strtolower($slug."-job-vacancy-in-".$postdata['slug_city']."-".$postdata['user_id']."-".$job_apply->post_id);
+
                 $job_data = $this->db->get_where('job_reg', array('user_id' => $total['not_from_id']))->row();
                 $job_slug = $job_data->slug;
                 $user_image = $job_data->job_user_image;
@@ -1091,7 +1103,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="'.base_url('job-profile/' . $job_slug).'" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '><a href="'.base_url($post_url).'" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('job_profile_thumb_upload_path') . $user_image;
@@ -1251,8 +1263,7 @@ Your browser does not support the audio tag.
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div>';
                 $notification .= '</div></div></a>';
-                $notification .= '</li>';
-                
+                $notification .= '</li>';                
             }
 
             if ($total['not_from'] == '3' && $total['not_img'] == '4') {
@@ -1365,6 +1376,11 @@ Your browser does not support the audio tag.
             //Freelance Apply Notification Start
             if ($total['not_from'] == '4') {
 
+                $fa_apply = $this->db->get_where('freelancer_apply', array('app_id' => $total['not_product_id']))->row();
+                $fa_data = $this->notification_model->getFreelancerApplyPostDetail($fa_apply->post_id);
+                $url = 'freelance-jobs/' .$fa_data->category_name."/".strtolower($fa_data->post_slug)."-".$fa_data->user_id."-".$fa_data->post_id;
+                // print_r($fa_data);exit;
+
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
@@ -1376,7 +1392,7 @@ Your browser does not support the audio tag.
                 $last_name = $fp_data->freelancer_post_username;
 
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('freelancer/' . $apply_slug ) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '><a href="' . base_url($url) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 // $filename = $this->config->item('free_post_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -1665,7 +1681,7 @@ Your browser does not support the audio tag.
                 $notification .= '</li>';                
             }
 
-            if ($total['not_from'] == '6' && $total['not_img'] == '4') {                
+            if ($total['not_from'] == '6' && $total['not_img'] == '4') {
                 // $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
                 $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
                 $busslug = $buss_data->business_slug;
@@ -1714,7 +1730,7 @@ Your browser does not support the audio tag.
                 $notification .= '</li>';                
             }
 
-            if ($total['not_from'] == '6' && $total['not_img'] == '5') {                
+            if ($total['not_from'] == '6' && $total['not_img'] == '5') {
                 $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
                 $busslug = $buss_data->business_slug;
                 $companyname = $buss_data->company_name;
@@ -4130,15 +4146,21 @@ Your browser does not support the audio tag.
             //Recruiter Notification Start
             if ($total['not_from'] == '1') {
                 // $companyname = $this->db->get_where('recruiter', array('user_id' => $total['user_id']))->row()->re_comp_name;
+                
+                $user_invite = $this->db->select('*')->get_where('user_invite', array('invite_id' => $total['not_product_id']))->row();
+
+                $postdata = $this->notification_model->get_recruiter_post_data($user_invite->post_id);
                 $rec_data = $this->notification_model->get_recruiter_info($total['not_from_id']);
                 $companyname = $rec_data['re_comp_name'];
+                $slug = $this->create_slug($postdata['string_post_name']);
+                $post_url = strtolower($slug."-job-vacancy-in-".$postdata['slug_city']."-".$total['not_from_id']."-".$user_invite->post_id);
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('recruiter/profile/'.$rec_data['user_id']) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url($post_url) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
 
@@ -4163,12 +4185,18 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><font color="black"><b><i> Recruiter</i></font></b><b>' . '  ' . ucwords($rec_data['rec_firstname']) . ' ' . ucwords($rec_data['rec_lastname']) . '</b>  <span class="noti-msg-y"> From ' . ucwords($companyname) . '  Invited you for an interview. </span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a></li>';
+                $notification .= '</span></div></div></div></a></li>';
             }
             //Recruiter Notification Edn
 
             //Job Notification Start
             if ($total['not_from'] == '2') {
+                $job_apply = $this->db->select('*')->get_where('job_apply', array('app_id' => $total['not_product_id']))->row();
+                $postdata = $this->notification_model->get_recruiter_post_data($job_apply->post_id);
+                
+                $slug = $this->create_slug($postdata['string_post_name']);
+                $post_url = strtolower($slug."-job-vacancy-in-".$postdata['slug_city']."-".$postdata['user_id']."-".$job_apply->post_id);
+
                 $job_data = $this->db->get_where('job_reg', array('user_id' => $total['not_from_id']))->row();
                 $job_slug = $job_data->slug;
                 $user_image = $job_data->job_user_image;
@@ -4180,7 +4208,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="'.base_url('job-profile/' . $job_slug).'" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="'.base_url($post_url).'" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('job_profile_thumb_upload_path') . $user_image;
@@ -4202,7 +4230,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><font color="black"><b><span class="noti-msg-y"> Job seeker</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Applied on your jobpost. </sapn></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</sapn></div></div> </a> </li>';
+                $notification .= '</sapn></div></div> </div></a> </li>';
             }
             //Job Notification End
             
@@ -4221,7 +4249,7 @@ Your browser does not support the audio tag.
 
                 // $geturl = $this->get_url($art_data->user_id);
 
-                $notification .= '><a href="' . base_url('artist/p/' . $art_slug) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('artist/p/' . $art_slug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
 
@@ -4239,7 +4267,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y"> Started following you in artistic profile.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a></li>';
+                $notification .= '</span></div></div></div></a></li>';
             }            
             
             if ($total['not_from'] == '3' && $total['not_img'] == '1') {
@@ -4254,7 +4282,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('artist/post-detail/' .$art_comment_data['art_post_id'] ) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('artist/post-detail/' .$art_comment_data['art_post_id'] ) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
@@ -4273,7 +4301,7 @@ Your browser does not support the audio tag.
                 $notification .= '<b>' . ' ' . $first_name . ' ' . $last_name . '</b><span class="noti-msg-y"> Commneted on your post in artistic profile.</span>';
                 $notification .= '</h6><div><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a></li>';
+                $notification .= '</span></div></div></div></a></li>';
             }            
                        
             if ($total['not_from'] == '3' && $total['not_img'] == '2') {
@@ -4287,7 +4315,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('artist/post-detail/' . $total['not_product_id']) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('artist/post-detail/' . $total['not_product_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
 
@@ -4305,7 +4333,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . $first_name . ' ' . $last_name . '</b> <span class="noti-msg-y">Likes your post in artistic profile.</sapn></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div> </a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
          
             if ($total['not_from'] == '3' && $total['not_img'] == '3') {
@@ -4321,7 +4349,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('artist/post-detail/' . $art_comment_data['art_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('artist/post-detail/' . $art_comment_data['art_post_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
 
                 // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4339,9 +4367,8 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div>';
-                $notification .= '</div></a>';
-                $notification .= '</li>';
-                
+                $notification .= '</div></div></a>';
+                $notification .= '</li>';                
             }
 
             if ($total['not_from'] == '3' && $total['not_img'] == '4') {
@@ -4357,7 +4384,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('artist/post-detail/' . $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic">';
+                $notification .= '><a href="' . base_url('artist/post-detail/' . $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic">';
 
                 // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4375,7 +4402,7 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div> </div>';
-                $notification .= '</a>';
+                $notification .= '</div></a>';
                 $notification .= '</li>';
             }            
            
@@ -4392,7 +4419,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('artist/post-detail/'.$postid).'"><div class="notification-pic">';
+                $notification .= '><a href="' . base_url('artist/post-detail/'.$postid).'"><div class="notification-database"><div class="notification-pic">';
 
                 // $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4410,7 +4437,7 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div>';
-                $notification .= '</a>';
+                $notification .= '</div></a>';
                 $notification .= '</li>';                
             }
             
@@ -4427,7 +4454,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('artist/post-detail/'.$postid).'" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('artist/post-detail/'.$postid).'" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
 
                 $filename = $this->config->item('art_profile_thumb_upload_path') . $total['user_image'];
                 $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4446,13 +4473,18 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div>';
-                $notification .= '</a>';
+                $notification .= '</div></a>';
                 $notification .= '</li>';                
             }
             //Art Notification End
 
             //Freelance Apply Notification Start
             if ($total['not_from'] == '4') {
+
+                $fa_apply = $this->db->get_where('freelancer_apply', array('app_id' => $total['not_product_id']))->row();
+                $fa_data = $this->notification_model->getFreelancerApplyPostDetail($fa_apply->post_id);
+                $url = 'freelance-jobs/' .$fa_data->category_name."/".strtolower($fa_data->post_slug)."-".$fa_data->user_id."-".$fa_data->post_id;
+                // print_r($fa_data);exit;
 
                 $notification .= '<li class="';
                 if ($total['not_active'] == 1) {
@@ -4465,7 +4497,7 @@ Your browser does not support the audio tag.
                 $last_name = $fp_data->freelancer_post_username;
 
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('freelancer/' . $apply_slug ) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url($url) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 // $filename = $this->config->item('free_post_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4487,7 +4519,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Freelancer</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Applied on your post. </span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div> </a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
             //Freelance Apply Notification End
 
@@ -4507,7 +4539,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 //  $filename = $this->config->item('free_hire_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4530,7 +4562,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Employer</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Selected you for project. </span> </h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div> </a></li>';
+                $notification .= '</span></div></div> </div> </a></li>';
             }
 
             if ($total['not_from'] == '5' && $total['not_type'] == '9') {
@@ -4548,7 +4580,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 // $filename = $this->config->item('free_hire_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4569,7 +4601,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Employer</span></font></b><b>' . '  ' . ucwords($first_name) . ' ' . ucwords($last_name) . '</b> <span class="noti-msg-y"> Shortlisted you for project. </span> </h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div> </a></li>';
+                $notification .= '</span></div></div> </div> </a></li>';
             }
             //Freelance Hire Notification End
 
@@ -4600,7 +4632,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
@@ -4615,7 +4647,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b> <span class="noti-msg-y">Started following you in business profile.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '1') {
@@ -4646,7 +4678,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4660,7 +4692,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b><span class="noti-msg-y"> Commented on your post in business profile. </span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '2') {
@@ -4688,7 +4720,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$total['not_product_id']) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$total['not_product_id']) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4702,7 +4734,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . ucwords($companyname) . '</b> <span class="noti-msg-y"> Likes your post in business profile. </span> </h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div> </a></li>';
+                $notification .= '</span></div></div> </div> </a></li>';
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '3') {
@@ -4733,7 +4765,8 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')"> <div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id) . '" onClick="not_active(' . $total['not_id'] . ')">
+                <div class="notification-database"> <div class="notification-pic" >';
 
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
@@ -4749,11 +4782,11 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div> </div>';
-                $notification .= '</a>';
+                $notification .= '</div></a>';
                 $notification .= '</li>';                
             }
 
-            if ($total['not_from'] == '6' && $total['not_img'] == '4') {                
+            if ($total['not_from'] == '6' && $total['not_img'] == '4') {
                 // $companyname = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row()->company_name;
                 $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
                 $busslug = $buss_data->business_slug;
@@ -4782,7 +4815,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
                 $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 $s3 = new S3(awsAccessKey, awsSecretKey);
                 $filepath = $s3->getObjectInfo(bucket, $filename);
@@ -4798,11 +4831,11 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div>';
-                $notification .= '</a>';
+                $notification .= '</div></a>';
                 $notification .= '</li>';                
             }
 
-            if ($total['not_from'] == '6' && $total['not_img'] == '5') {                
+            if ($total['not_from'] == '6' && $total['not_img'] == '5') {
                 $buss_data = $this->db->get_where('business_profile', array('user_id' => $total['not_from_id']))->row();
                 $busslug = $buss_data->business_slug;
                 $companyname = $buss_data->company_name;
@@ -4829,7 +4862,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
                 // $filepath = $s3->getObjectInfo(bucket, $filename);              
@@ -4845,7 +4878,7 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div>';
-                $notification .= '</a>';
+                $notification .= '</div></a>';
                 $notification .= '</li>';                
             }
 
@@ -4879,7 +4912,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-pic" >';
+                $notification .= '><a href="' . base_url('company/' . $busslug."-".$city_name."/post/". $postid) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database"><div class="notification-pic" >';
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
                 // $s3 = new S3(awsAccessKey, awsSecretKey);
                 // $filepath = $s3->getObjectInfo(bucket, $filename);
@@ -4895,7 +4928,7 @@ Your browser does not support the audio tag.
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div> </div>';
-                $notification .= '</a>';
+                $notification .= '</div></a>';
                 $notification .= '</li>';                
             }
             //Business Notification End
@@ -4916,7 +4949,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . base_url($user_slug) . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . base_url($user_slug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
@@ -4938,7 +4971,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">Started following you.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div> </a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '5' && $total['not_img'] == '2') {
@@ -4982,7 +5015,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
@@ -5004,7 +5037,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '5' && $total['not_img'] == '3') {
@@ -5049,7 +5082,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
@@ -5071,7 +5104,7 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">liked your comment.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '6') {
@@ -5115,7 +5148,7 @@ Your browser does not support the audio tag.
                     $notification .= 'active2';
                 }
                 $notification .= '"';
-                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')">';
+                $notification .= '><a href="' . $url . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
                 $notification .= '<div class="notification-pic">';
 
                 // $filename = $this->config->item('bus_profile_thumb_upload_path') . $total['user_image'];
@@ -5137,9 +5170,9 @@ Your browser does not support the audio tag.
                 $notification .= '<h6><b>' . '  ' . ucwords($first_name." ".$last_name) . '</b> <span class="noti-msg-y">commented on your post.</span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
-                $notification .= '</span></div></div></a> </li>';
+                $notification .= '</span></div></div> </div></a> </li>';
             }
-            //Opportunity Notification End           
+            //Opportunity Notification End
         }
         if (isset($notificationData) && !empty($notificationData)) {
             $seeall = '<a href="' . base_url() . 'notification">See All</a>';
@@ -5181,6 +5214,13 @@ Your browser does not support the audio tag.
     {        
         $userid = $this->session->userdata('aileenuser');
         echo $count = $this->notification_model->get_notification_unread_count($userid);exit;
+    }
+
+    public function create_slug($string) {
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower(stripslashes($string)));
+        $slug = preg_replace('/[-]+/', '-', $slug);
+        $slug = trim($slug, '-');
+        return $slug;
     }
 
 }
