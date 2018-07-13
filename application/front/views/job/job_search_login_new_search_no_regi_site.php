@@ -177,11 +177,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         <!--</div>-->
                     </div>
                     <div id="hideuserlist" class="right-part animated fadeInRightBig"> 
-                      <?php echo $left_footer; ?>
+                      
                     </div>
 
                 </div>
-
+				<?php echo $login_footer; ?>
 				<!-- mobile filter  -->
 		<div class="mob-filter" data-target="#filter" data-toggle="modal">
 			<svg width="25.000000pt" height="25.000000pt" viewBox="0 0 300.000000 300.000000">

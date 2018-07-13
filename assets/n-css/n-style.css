@@ -115,12 +115,13 @@ body.main-message{padding-bottom:0;}
 /***  end left part  ***/
 
 /***  middle part  ***/
-.middle-part{position:relative; width:584px; left:335px; float:left;}
+.middle-part{position:relative; width:584px; left:335px; float:left; padding-bottom:15px;}
 .middle-part .add-post{border:1px solid #d2d2d2; margin-bottom:10px; background:#fff; width:100%; float:left; border-radius:4px; padding:15px;}
 .post-box{background:#fff; position:relative; width:100%; float:left; border-radius:4px; display: block;}
-.post-img{width:50px; height:50px; float:left; }
+.post-img{width:50px; height:50px; float:left; border-radius:100%;}
 .modal .post-img{width:40px; height:40px;}
-.post-img img{width:100%; height:100%;}
+.post-img img{width:100%; height:100%; border-radius:100%;}
+.all-job-top .post-img img{border-radius:0;}
 .post-box .post-text{width:90%; float:left; padding:14px 10px; font-size:17px; color:#7b7b7b; letter-spacing:1px;}
 #ask_question.edit-question-form .post-box .post-text{width:100%; padding:0;}
 #ask_question.edit-question-form .post-box .post-text textarea{padding:5px 0;}
@@ -785,7 +786,7 @@ border-bottom: 0px;}
 .all-list ul {display: inline-block; padding: 15px 0 10px;}
 .all-list ul li {padding: 5px; display: inline-block; list-style-type: none; margin: 0;}
 .all-list ul li .list-box .profile-img{width:178px; height: 178px; border:0px;}
-.all-list ul li .list-box .profile-img img{height: 100%;}
+.all-list ul li .list-box .profile-img img{height: 100%; border-radius:100%;}
 .all-list ul li .list-box {width: 200px; height: 310px; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 10px; float:left;}	
 .profile-img {/*width: 110px; height: 112px;*/ border: 1px solid #d9d9d9; margin: 0px auto;}
 .profile-img img {width: 100%;}
@@ -1207,17 +1208,17 @@ header.profile-header .logo a{color:#5c5c5c;}
 .left-search-box p a{color:#5c5c5c; letter-spacing:0.5px; position:relative; padding-left:30px;}
 .left-search-box p a:before{position:absolute; background:url('../n-images/more-link.png'); width:15px; height:15px; content:''; background-size:100%; top:1px; left:0;}
 .left-search-box p a:hover{color:#1b8ab9;}
-.left-search-box h3{padding:10px; border-bottom:1px solid #d2d2d2; font-size:25px; color:#5c5c5c; letter-spacing:1px;} 
+.left-search-box h3{padding:10px; border-bottom:1px solid #d2d2d2; font-size:20px; color:#5c5c5c; letter-spacing:1px;} 
 .left-search-box p{width:100%; float:left;}
 .search-listing{padding:5px 10px; margin:0; /*max-height:300px;*/}
 .search-listing li{padding:5px 0;list-style-type:none; margin: 0; letter-spacing:0.5px; color:#7b7b7b; width:100%; float:left;}
 .list-type-bullet .search-listing li label{margin-bottom:0; width:100%; position:relative; float:left;}
 .list-type-bullet .search-listing li label:before{/*width:10px; height:10px; background:#5c5c5c;*/ content:""; display:inline-block;}
 .list-type-bullet .search-listing li label a{color:#5c5c5c; padding-left:10px;}
-.accordion-toggle:after {font-family: 'FontAwesome'; content: "\f078"; float: right; font-size:15px;}
+.accordion-toggle:after {font-family: 'FontAwesome'; content: "\f078"; float: right; font-size:15px; margin-top:5px;}
 .accordion-opened .accordion-toggle:after {content: "\f054";    }
 .left-search-box .accordion-group h3{border-bottom:none;}
-.left-search-box .accordion-group h3 a{color:#5c5c5c; font-size:25px;}
+.left-search-box .accordion-group h3 a{color:#5c5c5c; font-size:20px;}
 .left-search-box .accordion-group .search-listing{border-top:1px solid #d2d2d2;}
 .top-border-box{border:1px solid #d2d2d2; border-radius:4px; margin-bottom:10px;}
 .top-border-box h3{padding:10px;}
@@ -2456,6 +2457,8 @@ overflow-y: scroll; overflow-y: auto;}
 .post-field .form-group textarea:focus{border-bottom:1px solid #d2d2d2 !important;}
 .camer_h i{color:#d2d2d2;}
 .registeration #register_form select.error{color:#7b7b7b !important;}
+.custom_footer_left ul.left-ftr-profiles{z-index:9;}
+#view-cover-img, #bidmodal-2, #view-profile-img {z-index:9999999 !important;}
 /***  end extra  ***/
 
 /***  media query  ***/

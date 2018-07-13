@@ -2605,7 +2605,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .right-header .test-cus.drop-down .hd-profile .dropdown-menu{top:27px; width:280px; right:25px; padding:0; margin-top:0;}
 .test-cus li.hd-profile .all-profile-box ul{border:0;}
 .test-cus li.hd-profile .all-profile-box{border:0; margin-bottom:0;}
-.test-cus li.hd-profile .all-profile-box ul li span{width:86%; font-size:14px; padding-top:8px;}
+.test-cus li.hd-profile .all-profile-box ul li span{width:86%; font-size:14px; padding-top:8px; letter-spacing:0;}
 .about-us .right-header ul li a.btn3{color:#fff;}
 .about-us .right-header ul li a.btn3:hover{background:#fff;}
 .logo .mob-right-bar{display:none;}
