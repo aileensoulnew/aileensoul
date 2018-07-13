@@ -248,8 +248,9 @@ function comment_like1(clicked_id)
         type: 'POST',
         url: base_url + "business_profile/like_comment1",
         data: 'post_id=' + clicked_id,
+        dataType: "json",
         success: function (data) {
-            $('#' + 'likecomment1' + clicked_id).html(data);
+            $('#' + 'likecomment1' + clicked_id).html(data.comment_html);
         }
     });
 }

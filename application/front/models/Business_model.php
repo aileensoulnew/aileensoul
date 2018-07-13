@@ -74,7 +74,7 @@ class Business_model extends CI_Model {
     }
 
     function businessListByCategory($id = '0') {
-        $this->db->select('bp.business_user_image,bp.profile_background,bp.other_industrial,bp.company_name,bp.country,bp.city,bp.details,bp.contact_website,it.industry_name,ct.city_name as city,cr.country_name as country, IF (bp.city != "",CONCAT(bp.business_slug, "-", ct.city_name),IF(s.state_name != "",CONCAT(bp.business_slug, "-", s.state_name),CONCAT(bp.business_slug, "-", cr.country_name))) as business_slug')->from('business_profile bp');
+        $this->db->select('bp.business_user_image,bp.profile_background,bp.other_industrial,bp.company_name,bp.country,bp.city,bp.details,bp.contact_website,it.industry_name,ct.city_name as city,cr.country_name as country, IF (bp.city != "",CONCAT(bp.business_slug, "-", ct.city_name),IF(st.state_name != "",CONCAT(bp.business_slug, "-", st.state_name),CONCAT(bp.business_slug, "-", cr.country_name))) as business_slug')->from('business_profile bp');
         $this->db->join('industry_type it', 'it.industry_id = bp.industriyal', 'left');
         $this->db->join('cities ct', 'ct.city_id = bp.city', 'left');
         $this->db->join('states st', 'st.state_id = bp.state', 'left');
@@ -773,6 +773,18 @@ class Business_model extends CI_Model {
         $query = $this->db->query($sql);
         $result_array = $query->result_array();   
         return $result_array;
+    }
+
+    function get_bussiness_from_user_id($user_id)
+    {
+        $sql = "SELECT *,IF(bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug  FROM ailee_business_profile bp
+            LEFT JOIN ailee_cities ct on bp.city = ct.city_id
+            LEFT JOIN ailee_states st on bp.state = st.state_id
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.status = '1' AND user_id = '". $user_id ."'";
+            $query = $this->db->query($sql);
+            $posted_business_slug = $query->row();
+            return $posted_business_slug;
     }
 
 }

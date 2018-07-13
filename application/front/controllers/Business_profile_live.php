@@ -2315,6 +2315,8 @@ Your browser does not support the audio tag.
         $this->business_profile_active_check();
         $this->is_business_profile_register();
 
+        $loginBusinessUserData = $this->business_model->get_bussiness_from_user_id($userid);
+
 //if user deactive profile then redirect to business_profile/index untill active profile start
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_deleted' => '0');
 
@@ -2376,20 +2378,29 @@ Your browser does not support the audio tag.
                 );
                 $insert_id = $this->common->insert_data_getid($data, 'notification');
                 if ($insert_id) {
+                    if($loginBusinessUserData->business_user_image != "")
+                    {
+                        $img = BUS_PROFILE_THUMB_UPLOAD_URL.$loginBusinessUserData->business_user_image;
+                    }
+                    else
+                    {
+                        $img = base_url('uploads/nobusimage.jpg');   
+                    }
+
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
+						<p><b>' .$loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/details/' . $this->data['business_login_slug'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                    $subject = $this->data['business_login_company_name'] . ' Started following you in Aileensoul.';
+                    $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email']);
                 }
@@ -2445,20 +2456,28 @@ Your browser does not support the audio tag.
 
             $insert_id = $this->common->insert_data_getid($data, 'notification');
             if ($insert_id) {
+                if($loginBusinessUserData->business_user_image != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$loginBusinessUserData->business_user_image;
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
+						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/details/' . $this->data['business_login_slug'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $this->data['business_login_company_name'] . ' Started following you in Aileensoul.';
+                $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email']);
             }
             $contition_array = array('follow_type' => '2', 'follow_from' => $artdata[0]['business_profile_id'], 'follow_status' => 1);
@@ -2646,6 +2665,8 @@ Your browser does not support the audio tag.
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
+        $loginBusinessUserData = $this->business_model->get_bussiness_from_user_id($userid);
+
         $this->business_profile_active_check();
 
         $business_id = $_POST["follow_to"];
@@ -2695,21 +2716,31 @@ Your browser does not support the audio tag.
 
                 $insert_id = $this->common->insert_data_getid($data, 'notification');
                 if ($insert_id) {
+
+                    if($loginBusinessUserData->business_user_image != "")
+                    {
+                        $img = BUS_PROFILE_THUMB_UPLOAD_URL.$loginBusinessUserData->business_user_image;
+                    }
+                    else
+                    {
+                        $img = base_url('uploads/nobusimage.jpg');   
+                    }
+
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/details/' . $this->data['business_login_slug'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
 
-                    $subject = $this->data['business_login_company_name'] . ' Started following you in Aileensoul.';
+                    $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email']);
                 }
             }
@@ -2750,20 +2781,30 @@ Your browser does not support the audio tag.
 
             $insert_id = $this->common->insert_data_getid($datanoti, 'notification');
             if ($insert_id) {
+
+                if($loginBusinessUserData->business_user_image != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$loginBusinessUserData->business_user_image;
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
+
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' .$img. '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
+						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/details/' . $this->data['business_login_slug'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $this->data['business_login_company_name'] . ' Started following you in Aileensoul.';
+                $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email']);
             }
@@ -3002,6 +3043,8 @@ Your browser does not support the audio tag.
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
+        $loginBusinessUserData = $this->business_model->get_bussiness_from_user_id($userid);
+
         //if user deactive profile then redirect to business_profile/index untill active profile start
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_deleted' => '0');
         $business_deactive = $this->data['business_deactive'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_profile_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
@@ -3060,20 +3103,29 @@ Your browser does not support the audio tag.
 
                 $insert_id = $this->common->insert_data_getid($data, 'notification');
                 if ($insert_id) {
+                    if($loginBusinessUserData->business_user_image != "")
+                    {
+                        $img = BUS_PROFILE_THUMB_UPLOAD_URL.$loginBusinessUserData->business_user_image;
+                    }
+                    else
+                    {
+                        $img = base_url('uploads/nobusimage.jpg');   
+                    }
+
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
+						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/details/' . $this->data['business_login_slug'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                    $subject = $this->data['business_login_company_name'] . ' Started following you in Aileensoul.';
+                    $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email']);
                 }
@@ -3119,20 +3171,29 @@ Your browser does not support the audio tag.
 
             $insert_id = $this->common->insert_data_getid($datanoti, 'notification');
             if ($insert_id) {
+                if($loginBusinessUserData->business_user_image != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$loginBusinessUserData->business_user_image;
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
+
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $this->data['business_login_company_name'] . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'business-profile/details/' . $this->data['business_login_slug'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $this->data['business_login_company_name'] . ' Started following you in Aileensoul.';
+                $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email']);
             }
@@ -3937,21 +3998,36 @@ Your browser does not support the audio tag.
                     $insert_id = $this->common->insert_data_getid($datacmlike, 'notification');
                     if ($insert_id) {
 
+                        $contition_array = array('business_profile_post_id' => $businessprofiledata[0]['    business_profile_post_id'], 'status' => '1');
+
+                        $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                        $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                        $url = 'company/'.$businessUser->business_slug.'/post/'.$businessprofiledata[0]['   business_profile_post_id'];
+
+                        if($businessUser->business_user_image != "")
+                        {
+                            $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                        }
+                        else
+                        {
+                            $img = base_url('uploads/nobusimage.jpg');   
+                        }
+
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img  . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> like your comment in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post/' . $businessprofiledata[0]['	business_profile_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                        $subject = $this->data['business_login_company_name'] . ' Like your comment in Aileensoul.';
+                        $subject = $businessUser->company_name . ' Like your comment in Aileensoul.';
 
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                     }
@@ -4068,21 +4144,36 @@ Your browser does not support the audio tag.
                     $insert_id = $this->common->insert_data_getid($data, 'notification');
                     if ($insert_id) {
 
+                        $contition_array = array('business_profile_post_id' => $businessprofiledata[0]['    business_profile_post_id'], 'status' => '1');
+
+                        $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                        $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                        $url = 'company/'.$businessUser->business_slug.'/post/'.$businessprofiledata[0]['   business_profile_post_id'];
+
+                        if($businessUser->business_user_image != "")
+                        {
+                            $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                        }
+                        else
+                        {
+                            $img = base_url('uploads/nobusimage.jpg');   
+                        }
+
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> like your comment in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post/' . $businessprofiledata[0]['	business_profile_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL .$url. '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                        $subject = $this->data['business_login_company_name'] . ' Like your comment in Aileensoul.';
+                        $subject = $businessUser->company_name . ' Like your comment in Aileensoul.';
 
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                     }
@@ -4505,21 +4596,36 @@ Your browser does not support the audio tag.
 
                     if ($insert_id) {
 
+                        $contition_array = array('business_profile_post_id' => $post_id, 'status' => '1');
+
+                        $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                        $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                        $url = 'company/'.$businessUser->business_slug.'/post/'.$post_id;
+
+                        if($businessUser->business_user_image != "")
+                        {
+                            $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                        }
+                        else
+                        {
+                            $img = base_url('uploads/nobusimage.jpg');   
+                        }
+
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name. '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> like your post in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> like your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post/' . $post_id . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL. $url . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                        $subject = $this->data['business_login_company_name'] . ' like your post in Aileensoul.';
+                        $subject = $businessUser->company_name . ' like your post in Aileensoul.';
 
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                     }
@@ -4742,21 +4848,37 @@ Your browser does not support the audio tag.
 
             if ($insert_id_notification) {
 
+                $contition_array = array('business_profile_post_id' => $busdatacomment[0]['business_profile_post_id'], 'status' => '1');
+
+                $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+
+                if($businessUser->business_user_image != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
+
+                $url = 'company/'.$businessUser->business_slug.'/post/'.$busdatacomment[0]['business_profile_post_id'];
+
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is comment on your post in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is comment on your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post/' . $busdatacomment[0]['business_profile_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $this->data['business_login_company_name'] . ' is comment on your post in Aileensoul.';
+                $subject = $businessUser->company_name . ' is comment on your post in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
             }
@@ -4931,21 +5053,36 @@ Your browser does not support the audio tag.
 
             if ($insert_id_notification) {
 
+                $contition_array = array('business_profile_post_id' => $busdatacomment[0]['business_profile_post_id'], 'status' => '1');
+
+                $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                $url = 'company/'.$businessUser->business_slug.'/post/'.$busdatacomment[0]['business_profile_post_id'];
+
+                if($businessUser->business_user_image != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
+
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is comment on your post in business profile.</p>
+						<p><b>' .$businessUser->company_name . '</b> is comment on your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post/' . $busdatacomment[0]['business_profile_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL .$url . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $this->data['business_login_company_name'] . ' is comment on your post in Aileensoul.';
+                $subject = $businessUser->company_name. ' is comment on your post in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
             }
@@ -5537,21 +5674,36 @@ Your browser does not support the audio tag.
 
                 if ($insert_id) {
 
+                    $contition_array = array('business_profile_post_id' => $likepostid[0]['business_profile_post_id'], 'status' => '1');
+
+                    $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                    $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                    $url = 'company/'.$businessUser->business_slug.'/post/'.$likepostid[0]['business_profile_post_id'];
+
+                    if($businessUser->business_user_image != "")
+                    {
+                        $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                    }
+                    else
+                    {
+                        $img = base_url('uploads/nobusimage.jpg');   
+                    }
+
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $likepostid[0]['user_id']))->row()->contact_email;
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is like your photo in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is like your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $likepostid[0]['business_profile_post_id'] . '/' . $post_image . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                    $subject = $this->data['business_login_company_name'] . ' is like your photo in Aileensoul.';
+                    $subject = $businessUser->company_name . ' is like your photo in Aileensoul.';
 
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                 }
@@ -5747,21 +5899,36 @@ Your browser does not support the audio tag.
 
                         if ($insert_id) {
 
+                            $contition_array = array('business_profile_post_id' => $likepostid[0]['business_profile_post_id'], 'status' => '1');
+
+                            $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                            $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                            $url = 'company/'.$businessUser->business_slug.'/post/'.$likepostid[0]['business_profile_post_id'];
+
+                            if($businessUser->business_user_image != "")
+                            {
+                                $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                            }
+                            else
+                            {
+                                $img = base_url('uploads/nobusimage.jpg');   
+                            }
+
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $likepostid[0]['user_id']))->row()->contact_email;
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is like your photo in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is like your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $likepostid[0]['business_profile_post_id'] . '/' . $post_image . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                            $subject = $this->data['business_login_company_name'] . ' is like your photo in Aileensoul.';
+                            $subject = $businessUser->company_name . ' is like your photo in Aileensoul.';
 
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                         }
@@ -5879,21 +6046,37 @@ Your browser does not support the audio tag.
 
             $insert_id_notification = $this->common->insert_data_getid($datanotification, 'notification');
             if ($insert_id_notification) {
+
+                $contition_array = array('business_profile_post_id' => $buspostid[0]['business_profile_post_id'], 'status' => '1');
+
+                $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                $url = 'company/'.$businessUser->business_slug.'/post/'.$buspostid[0]['business_profile_post_id'];
+
+                if($businessUser->business_user_image != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
+
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $buspostid[0]['user_id']))->row()->contact_email;
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is comment on your photo in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is comment on your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $buspostid[0]['business_profile_post_id'] . '/' . $post_image_id . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $this->data['business_login_company_name'] . ' is comment on your photo in Aileensoul.';
+                $subject = $businessUser->company_name . ' is comment on your photo in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
             }
@@ -6085,21 +6268,37 @@ Your browser does not support the audio tag.
 
             $insert_id_notification = $this->common->insert_data_getid($datanotification, 'notification');
             if ($insert_id_notification) {
+
+                $contition_array = array('business_profile_post_id' => $buspostid[0]['business_profile_post_id'], 'status' => '1');
+
+                $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                $url = 'company/'.$businessUser->business_slug.'/post/'.$buspostid[0]['business_profile_post_id'];
+
+                if($businessUser->business_user_image != "")
+                {
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                }
+                else
+                {
+                    $img = base_url('uploads/nobusimage.jpg');   
+                }
+
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $buspostid[0]['user_id']))->row()->contact_email;
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is comment on your photo in business profile.</p>
+						<p><b>' . $businessUser->company_name. '</b> is comment on your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $buspostid[0]['business_profile_post_id'] . '/' . $post_image_id . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $this->data['business_login_company_name'] . ' is comment on your photo in Aileensoul.';
+                $subject = $businessUser->company_name . ' is comment on your photo in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
             }
@@ -6303,21 +6502,37 @@ Your browser does not support the audio tag.
                 );
                 $insert_id = $this->common->insert_data_getid($datanotification, 'notification');
                 if ($insert_id) {
+
+                    $contition_array = array('business_profile_post_id' => $buslikeimg[0]['post_id'], 'status' => '1');
+
+                    $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                    $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                    $url = 'company/'.$businessUser->business_slug.'/post/'.$buslikeimg[0]['post_id'];
+
+                    if($businessUser->business_user_image != "")
+                    {
+                        $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                    }
+                    else
+                    {
+                        $img = base_url('uploads/nobusimage.jpg');   
+                    }
+
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is like your comment of photo in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $buslikeimg[0]['post_id'] . '/' . $busimglike[0]['post_image_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                    $subject = $this->data['business_login_company_name'] . ' is like your comment of photo in Aileensoul.';
+                    $subject = $businessUser->company_name . ' is like your comment of photo in Aileensoul.';
 
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                 }
@@ -6417,21 +6632,35 @@ Your browser does not support the audio tag.
                         );
                         $insert_id = $this->common->insert_data_getid($data, 'notification');
                         if ($insert_id) {
+                            $contition_array = array('business_profile_post_id' => $buslikeimg[0]['post_id'], 'status' => '1');
+
+                            $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                            $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                            $url = 'company/'.$businessUser->business_slug.'/post/'.$buslikeimg[0]['post_id'];
+                            if($businessUser->business_user_image != "")
+                            {
+                                $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                            }
+                            else
+                            {
+                                $img = base_url('uploads/nobusimage.jpg');   
+                            }
+
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is like your comment of photo in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $buslikeimg[0]['post_id'] . '/' . $busimglike[0]['post_image_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url  . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                            $subject = $this->data['business_login_company_name'] . ' is like your comment of photo in Aileensoul.';
+                            $subject = $businessUser->company_name . ' is like your comment of photo in Aileensoul.';
 
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                         }
@@ -6511,21 +6740,37 @@ Your browser does not support the audio tag.
 
                 $insert_id = $this->common->insert_data_getid($datanotification, 'notification');
                 if ($insert_id) {
+
+                    $contition_array = array('business_profile_post_id' => $buslikeimg[0]['post_id'], 'status' => '1');
+
+                    $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                    $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                    $url = 'company/'.$businessUser->business_slug.'/post/'.$buslikeimg[0]['post_id'];
+
+                    if($businessUser->business_user_image != "")
+                    {
+                        $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                    }
+                    else
+                    {
+                        $img = base_url('uploads/nobusimage.jpg');   
+                    }
+
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is like your comment of photo in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $buslikeimg[0]['post_id'] . '/' . $busimglike[0]['post_image_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                    $subject = $this->data['business_login_company_name'] . ' is like your comment of photo in Aileensoul.';
+                    $subject = $businessUser->company_name . ' is like your comment of photo in Aileensoul.';
 
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                 }
@@ -6620,21 +6865,37 @@ Your browser does not support the audio tag.
 
                         $insert_id = $this->common->insert_data_getid($datanotification, 'notification');
                         if ($insert_id) {
+
+                            $contition_array = array('business_profile_post_id' => $buspostid[0]['business_profile_post_id'], 'status' => '1');
+
+                            $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
+                            $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
+                            $url = 'company/'.$businessUser->business_slug.'/post/'.$buspostid[0]['business_profile_post_id'];
+
+                            if($businessUser->business_user_image != "")
+                            {
+                                $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                            }
+                            else
+                            {
+                                $img = base_url('uploads/nobusimage.jpg');   
+                            }
+                
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $this->data['business_login_company_name'] . '</b> is like your comment of photo in business profile.</p>
+						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/business-profile-post-detail/' . $buslikeimg[0]['post_id'] . '/' . $busimglike[0]['post_image_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL .$url . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
-                            $subject = $this->data['business_login_company_name'] . ' is like your comment of photo in Aileensoul.';
+                            $subject = $businessUser->company_name. ' is like your comment of photo in Aileensoul.';
 
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
                         }
@@ -7393,7 +7654,7 @@ Your browser does not support the audio tag.
             }
             $modal .= '<li>';
             $modal .= '<div class="like_user_listq">';
-            $modal .= '<a href="' . base_url('business-profile/details/' . $bus_slug) . '" title="' . $business_fname1 . '" class="head_main_name" >';
+            $modal .= '<a href="' . base_url('company/' . $bus_slug) . '" title="' . $business_fname1 . '" class="head_main_name" >';
             $modal .= '<div class="like_user_list_img">';
             if ($bus_image) {
                 if (IMAGEPATHFROM == 'upload') {
@@ -7462,7 +7723,7 @@ Your browser does not support the audio tag.
             }
             $modal .= '<li>';
             $modal .= '<div class="like_user_listq">';
-            $modal .= '<a href="' . base_url('business-profile/details/' . $bus_slug) . '" title="' . $business_fname1 . '" class="head_main_name" >';
+            $modal .= '<a href="' . base_url('company/' . $bus_slug) . '" title="' . $business_fname1 . '" class="head_main_name" >';
             $modal .= '<div class="like_user_list_img">';
             if ($bus_image) {
                 if (IMAGEPATHFROM == 'upload') {

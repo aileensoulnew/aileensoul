@@ -4011,7 +4011,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artdata[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -4252,7 +4252,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artdata[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -5207,7 +5207,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artdata[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -5530,7 +5530,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -5773,7 +5773,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -6046,7 +6046,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -7039,7 +7039,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $likepostid[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $likepostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -7288,7 +7288,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $likepostid[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $likepostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -7476,7 +7476,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artpostid[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artpostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -7750,7 +7750,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -8006,7 +8006,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artpostid[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artpostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -8252,7 +8252,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -8401,7 +8401,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -8533,7 +8533,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -8657,7 +8657,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
@@ -9755,7 +9755,7 @@ class Artist extends MY_Controller {
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a class="btn" href="' . BASEURL . 'notification/art-post/' . $artpostid[0]['art_post_id'] . '">view</a></p>
+                                                <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artpostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
                                     </table>';
