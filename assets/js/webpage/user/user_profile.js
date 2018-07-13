@@ -4160,8 +4160,10 @@ $("#userimage").validate({
 });
 function profile_pic() {
     $uploadCrop1.croppie('result', {
+        /*type: 'canvas',
+        size: 'viewport'*/
         type: 'canvas',
-        size: 'viewport'
+        size: { width: 450, height: 450 }
     }).then(function (resp) {
         $.ajax({
             url: base_url + "userprofile_page/user_image_insert1",

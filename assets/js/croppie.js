@@ -781,7 +781,7 @@
     function _updatePropertiesFromImage() {
         var self = this,
             minZoom = 0,
-            maxZoom = 1.5,
+            maxZoom = 0.7,
             initialZoom = 1,
             cssReset = {},
             img = self.elements.preview,
