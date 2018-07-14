@@ -1148,7 +1148,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js') ?>"></script>
         <script>
-			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+			/*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
 				showRight = document.getElementById( 'showRight' ),
 				body = document.body;
 
@@ -1164,7 +1164,7 @@
 				if( button !== 'showRight' ) {
 					classie.toggle( showRight, 'disabled' );
 				}
-			}
+			}*/
 			
 			$(function () {
 				$('a[href="#search"]').on('click', function (event) {
