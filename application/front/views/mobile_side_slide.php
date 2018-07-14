@@ -5,7 +5,7 @@ if(isset($session_user) && !empty($session_user))
 else
     $cls="mob-side-hdr";?>
 <div class="mob-side-menu <?php echo $cls; ?>">
-<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
+<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
         <div class="all-profile-box content custom-scroll">
             <ul class="all-pr-list">
 				<li><a target="_self" title="Login" href="<?php echo base_url('login'); ?>">Login</a></li>
