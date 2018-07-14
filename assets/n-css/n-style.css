@@ -620,7 +620,7 @@ height: 100%;}
 .media-pages-tablet{display:none;}
 .user-btns a.btn3 img{display:none;}
 .custom-select{width:100%; float:left;}
-.table-responsive.content{height:42px !important;}
+.table-responsive.content{height:42px !important; z-index:1;}
 .table-responsive.content{overflow:hidden;}
 .table-responsive.content td{text-align:center; border-right:1px solid #d2d2d2; padding:0; line-height:1; width:14.285714%;}
 .table-responsive.content td:last-child{border-right:0px;}
@@ -2463,6 +2463,7 @@ overflow-y: scroll; overflow-y: auto;}
 #view-cover-img, #bidmodal-2, #view-profile-img {z-index:9999999 !important;}
 .host .tags.focused{border-color:#1b83b9;}
 .post-popup-box .form-group select:focus, .post-popup-box .form-group textarea:focus {box-shadow:none; border:1px solid #1b8ab9 !important;}
+.common-form fieldset.rec_check input:focus+label{color:#616060 !important;}
 
 /***  end extra  ***/
 

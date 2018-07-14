@@ -1293,6 +1293,7 @@ border: 1px solid #1b8ab9;}
 	background:#fff;
 	font-size:14px;
 	color:#5c5c5c; letter-spacing:1px;
+	border-bottom:0px;
 }
 .mob-side-menu .all-profile-box ul li a:hover{color:#1b8ab9;}
 .mob-side-menu .all-profile-box ul li{
@@ -1570,8 +1571,8 @@ input[type=number]::-webkit-inner-spin-button {
 body.spmenu-open{overflow:hidden; height: 100%; position:fixed;}
 .spmenu-open .mob-side-hdr, .spmenu-open .mob-side-menu  {width: 100%; position: fixed; z-index: 9999; background: rgba(0,0,0,0.6); height: 100%; left: 0; top: 0;}
 .mob-side-btm .cbp-spmenu-right.cbp-spmenu-open{z-index:99999}
-.cbp-spmenu-vertical a{border-bottom:0px;}
-
+.post-right-dropdown .dropdown-menu{top:33px; right:0 !important;}
+a:focus{outline:none;}
 /***  media query  ***/
 @media screen and (min-width: 768px) {
     .container {width: 750px;}
