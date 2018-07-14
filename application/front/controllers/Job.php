@@ -53,7 +53,7 @@ class Job extends MY_Controller {
             if ($job[0]['job_step'] == 10) {
                 redirect('recommended-jobs', refresh);
             } else {
-                redirect('job/registration', refresh);
+                redirect('job-profile/create-account', refresh);
             }
         }
     }
@@ -3303,7 +3303,7 @@ class Job extends MY_Controller {
 
                 redirect( $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id']);
             } else {
-                redirect('job/registration');
+                redirect('job-profile/create-account');
             }
         }
     }
@@ -3324,7 +3324,7 @@ class Job extends MY_Controller {
 
             if ($apply_step[0]['job_step'] == "" || $apply_step[0]['job_step'] == "0") {
 
-                redirect('job/registration');
+                redirect('job-profile/create-account');
             }
         }
     }

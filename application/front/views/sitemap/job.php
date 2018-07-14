@@ -58,7 +58,7 @@ header('Cache-Control: public, max-age=30');
                             <div class="smap-catbox">
                                 <ul class="catbox-right artist-sitemap">
                                     <li style="list-style-type: circle;font-size: 20px; width: 100%;">Login/Register</li>
-                                    <li style="padding-bottom: 30px; width: 100%;"><a href="<?php echo base_url('job/registration') ?>">Register/Takeme in</a></li>
+                                    <li style="padding-bottom: 30px; width: 100%;"><a href="<?php echo base_url('job-profile/create-account') ?>">Register/Takeme in</a></li>
                                 </ul>
                             </div>
                         </div>

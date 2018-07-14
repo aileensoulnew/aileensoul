@@ -295,7 +295,7 @@ class Job_live extends MY_Controller {
             // $this->load->view('job/reactivate', $this->data);
         };
         $this->data['job_profile_set'] = $this->job_profile_set;
-        $this->data['job_profile_link'] =  ($this->job_profile_set == 1)?$this->job_profile_link:base_url('job/registration');
+        $this->data['job_profile_link'] =  ($this->job_profile_set == 1)?$this->job_profile_link:base_url('job-profile/create-account');
         return $deactivate;
     }
 
