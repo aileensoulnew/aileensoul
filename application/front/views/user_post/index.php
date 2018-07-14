@@ -253,7 +253,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group" ng-if="opp.field_edit == '0'">
-                                                    <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                                    <input id="otherField_edit{{post.post_data.id}}" name="otherField_edit{{post.post_data.id}}" type="text" class="form-control other-field" ng-model="opp.otherField_edit" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                                 </div>
                                                 <input type="hidden" name="post_for" class="form-control" value="">
                                                 <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
@@ -413,7 +413,7 @@
                                                 </div>
 
                                                 <div class="form-group"  ng-if="ask.ask_field_edit == '0'">
-                                                    <input id="ask_other_{{post.post_data.id}}" type="text" class="form-control" placeholder="Enter other field" ng-required="true" autocomplete="off" value="{{post.question_data.others_field}}">
+                                                    <input id="ask_other_{{post.post_data.id}}" type="text" class="form-control other-field" placeholder="Enter other field" ng-required="true" autocomplete="off" value="{{post.question_data.others_field}}">
                                                 </div>
                                                 <input type="hidden" name="post_for" ng-model="ask.post_for" class="form-control" value="question">
                                                 <input type="hidden" id="ask_edit_post_id_{{$index}}" name="ask_edit_post_id" class="form-control" value="{{post.post_data.id}}">
@@ -917,7 +917,7 @@
 									<div id="fieldtooltip" class="tooltip-custom" style="display: none;">Select the field from given options that best match with Opportunity.</div>
                                 </div>
                                 <div class="form-group" ng-if="opp.field == '0'">
-                                    <input type="text" class="form-control" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                    <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                 </div>
                                 <input type="hidden" name="post_for" ng-model="opp.post_for" class="form-control" value="">
                                 <input type="hidden" ng-if="is_edit == 1" id="opp_edit_post_id" name="opp_edit_post_id" ng-model="opp.edit_post_id" class="form-control" value="{{opp.edit_post_id}}">

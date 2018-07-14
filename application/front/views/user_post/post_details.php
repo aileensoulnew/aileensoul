@@ -127,7 +127,7 @@
                                                         </span>
                                                     </div>
                                                     <div class="form-group" ng-if="field == '0'">
-                                                        <input type="text" class="form-control" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
+                                                        <input type="text" class="form-control other-field" ng-model="opp.otherField" placeholder="Enter other field" ng-required="true" autocomplete="off">
                                                     </div>
                                                     <input type="hidden" name="post_for" class="form-control" value="">
                                                     <input type="hidden" id="opp_edit_post_id{{postIndex}}" name="opp_edit_post_id" class="form-control" value="{{post.post_data.id}}">
@@ -279,7 +279,7 @@
                                                     </div>
 
                                                     <div class="form-group"  ng-if="ask.ask_field_edit == '0'">
-                                                        <input id="ask_other_{{post.post_data.id}}" type="text" class="form-control" placeholder="Enter other field" ng-required="true" autocomplete="off" value="{{post.question_data.others_field}}">
+                                                        <input id="ask_other_{{post.post_data.id}}" type="text" class="form-control other-field" placeholder="Enter other field" ng-required="true" autocomplete="off" value="{{post.question_data.others_field}}">
                                                     </div>
                                                     <input type="hidden" name="post_for" ng-model="ask.post_for" class="form-control" value="question">
                                                     <input type="hidden" id="ask_edit_post_id_{{$index}}" name="ask_edit_post_id" class="form-control" value="{{post.post_data.id}}">
