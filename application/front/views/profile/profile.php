@@ -172,17 +172,24 @@ color: #1b8ab9 !important;}
 
 													<fieldset>
 														<label>Gender</label>
+														<label class="control control--radio">
+														Male
 														<input class="gen-male" tabindex="8" type="radio" id="gen" name="gender" value="M" <?php
 														if ($userdata['user_gender'] == M) {
 															echo 'checked';
 														}
-														?>>Male
+														?>>
+														<div class="control__indicator"></div>
+														</label>
+														<label class="control control--radio">
+														Female
 														<input type="radio" id="gen" name="gender" value="F" <?php
 														if ($userdata['user_gender'] == F) {
 															echo 'checked';
 														}
-														?>>Female
-
+														?>>
+														<div class="control__indicator"></div>
+														</label>
 														<?php echo form_error('gender'); ?>
 													</fieldset>
 													<fieldset class="hs-submit full-width">
