@@ -2967,6 +2967,10 @@ class Freelancer_hire extends MY_Controller {
         $invite_user = $select_user;
         $postid = $post_id;
         $writting_word = $word;
+
+        $fa_data = $this->freelancer_hire_model->getFreelancerApplyPostDetail($post_id);
+        $url = 'freelance-jobs/' .$fa_data->category_name."/".$fa_data->post_slug."-".$fa_data->user_id."-".$fa_data->post_id;
+
         $userid = $this->session->userdata('aileenuser');
         $applydata = $this->common->select_data_by_id('freelancer_post_reg', 'user_id', $invite_user, $data = 'freelancer_post_email');
         $projectdata = $this->common->select_data_by_id('freelancer_post', 'post_id', $postid, $data = 'post_name');
@@ -2989,7 +2993,7 @@ class Freelancer_hire extends MY_Controller {
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a title= "View Detail" class="btn" href="' . BASEURL . 'notification/freelance-hire/' . $postid . '">view</a></p>
+                                                <p><a title= "View Detail" class="btn" href="' . base_url($url). '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
@@ -3015,7 +3019,7 @@ class Freelancer_hire extends MY_Controller {
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a title = "View Detail" class="btn" href="' . BASEURL . 'notification/freelance-hire/' . $postid . '">view</a></p>
+                                                <p><a title = "View Detail" class="btn" href="' .  base_url($url). '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
