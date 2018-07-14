@@ -903,7 +903,7 @@ class Sitemap extends CI_Controller {
         $jobSkill = $this->job_model->get_job_skills($page,$limit);
         $jobCity = $this->job_model->get_job_city($page,$limit);        
         $all_link = array();
-        foreach ($jobCity['job_city'] as $key => $value) {
+        foreach ($jobCity as $key => $value) {
             $i=0;
             foreach ($jobCat['job_cat'] as $jck => $jcv) {                
                 $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
@@ -1104,23 +1104,27 @@ class Sitemap extends CI_Controller {
         $jobCat = $this->business_model->get_business_by_categories($page,$limit);        
         $jobCity = $this->job_model->get_job_city($page,$limit);        
         $all_link = array();
-        foreach ($jobCity['job_city'] as $key => $value) {
+        foreach ($jobCity as $key => $value) {
             $i=0;
-            foreach ($jobCat['job_cat'] as $jck => $jcv) {                
-                $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-business-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
-                if($sitemap_counter == SITEMAP_LIMIT)
+            foreach ($jobCat['job_cat'] as $jck => $jcv) {
+                $total_buss = $this->business_model->businessListByFilterTotalRec($jcv['industry_id'],$value['city_id'],$industry_name = array(),$city_name = array());
+                if($total_buss > 0)
                 {
-                    $sitemap_counter = 1;
-                    $sitemap_index++;
-                    $txt .= '</urlset>';
-                    fwrite($myfile, $txt);
-                    fclose($myfile);
-                    $bus_file_arr[] = "business-by-category-location-".$sitemap_index.".xml";
-                    $myfile = fopen("business-by-category-location-".$sitemap_index.".xml", "w");
-                    $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                    $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-business-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+                    if($sitemap_counter == SITEMAP_LIMIT)
+                    {
+                        $sitemap_counter = 1;
+                        $sitemap_index++;
+                        $txt .= '</urlset>';
+                        fwrite($myfile, $txt);
+                        fclose($myfile);
+                        $bus_file_arr[] = "business-by-category-location-".$sitemap_index.".xml";
+                        $myfile = fopen("business-by-category-location-".$sitemap_index.".xml", "w");
+                        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                    }
+                    $sitemap_counter++;
+                    $i++;
                 }
-                $sitemap_counter++;
-                $i++;
             }            
         }
         $txt .= '</urlset>';
