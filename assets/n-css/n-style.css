@@ -2459,6 +2459,7 @@ overflow-y: scroll; overflow-y: auto;}
 .registeration #register_form select.error{color:#7b7b7b !important;}
 .custom_footer_left ul.left-ftr-profiles{z-index:9;}
 #view-cover-img, #bidmodal-2, #view-profile-img {z-index:9999999 !important;}
+.host .tags.focused input.input{/*width:auto !important;*/}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -3082,7 +3083,6 @@ overflow-y: scroll; overflow-y: auto;}
 	.post-right-dropdown .dropdown-menu{min-width:130px;}
 	.report h1{padding:60px 0 0px;}
 	.search-banner header{padding:5px 0;}
-	header{padding:5px 0;}
 	.new-ld-page .search-banner{padding:42px 0 0;}
 	.no-login-padding{padding:42px 0 0;}
 	.job-cat-lp .mob-cus-box{padding:0 6px;}
@@ -3099,6 +3099,8 @@ overflow-y: scroll; overflow-y: auto;}
 	.new-ld-page header .logo svg{margin-top:0;}
 	.error-page .search-banner{padding:0;}
 	.search-page .middle-section{padding:60px 0 50px;}
+	.all-profile-custom{padding-top:0;}
+	.custom-box{padding:20px 0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
