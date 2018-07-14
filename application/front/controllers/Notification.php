@@ -1077,7 +1077,7 @@ Your browser does not support the audio tag.
                 }
 
                 $notification .= '</div><div class="notification-data-inside">';
-                $notification .= '<h6><font color="black"><b><i> Recruiter</i></font></b><b>' . '  ' . ucwords($rec_data['rec_firstname']) . ' ' . ucwords($rec_data['rec_lastname']) . '</b>  <span class="noti-msg-y"> From ' . ucwords($companyname) . '  Invited you for an interview. </span></h6>';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y">Recruiter</span></font></b><b>' . '  ' . ucwords($rec_data['rec_firstname']) . ' ' . ucwords($rec_data['rec_lastname']) . '</b>  <span class="noti-msg-y"> From ' . ucwords($companyname) . '  Invited you for an interview. </span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div></div></a></li>';
@@ -3032,7 +3032,7 @@ Your browser does not support the audio tag.
 
         $hire_not = $this->data['hire_noth'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'app_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
         // freelancer hire notification end
-// freelancer post notification start
+        // freelancer post notification start
         $contition_array = array('notification.not_type' => '4', 'notification.not_from' => '5', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
                 'join_type' => '',
@@ -3050,9 +3050,9 @@ Your browser does not support the audio tag.
         $work_post = $this->data['work_post'] = $work_post = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'invite_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
 
-// freelancer post notification end
-//artistic notification start
-// follow notification start
+        // freelancer post notification end
+        //artistic notification start
+        // follow notification start
 
         $contition_array = array('notification.not_type' => '8', 'notification.not_from' => '3', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -3070,8 +3070,8 @@ Your browser does not support the audio tag.
 
         $artfollow = $this->data['artfollow'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'follow_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// follow notification end
-//post comment notification start
+        // follow notification end
+        //post comment notification start
 
         $contition_array = array('notification.not_type' => '6', 'not_img' => '1', 'notification.not_from' => '3', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -3087,8 +3087,8 @@ Your browser does not support the audio tag.
         );
         $data = array('notification.*', ' artistic_post_comment.*', 'art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
         $artcommnet = $this->data['artcommnet'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'artistic_post_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-// comment notification end
-//post like notification start
+        // comment notification end
+        //post like notification start
         $contition_array = array('notification.not_type' => '5', 'notification.not_from' => '3', 'not_img' => '2', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
                 'join_type' => '',
@@ -3165,10 +3165,10 @@ Your browser does not support the audio tag.
         $data = array('notification.*', ' art_post_image_comment.*', 'art_reg.user_id as user_id', 'art_reg.art_name as first_name', 'art_reg.art_user_image as user_image', 'art_reg.art_lastname as last_name');
         $this->data['artimgcmtlike'] = $artimgcmtlike = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// like notification end
-// artistic notification end
-// business profile notification start
-// follow notification start
+        // like notification end
+        // artistic notification end
+        // business profile notification start
+        // follow notification start
 
         $contition_array = array('notification.not_type' => '8', 'notification.not_from' => '6', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -3185,8 +3185,8 @@ Your browser does not support the audio tag.
         $data = array('notification.*', 'follow.*', 'business_profile.user_id as user_id', 'business_profile.company_name as first_name', 'business_profile.business_user_image as user_image');
         $busifollow = $this->data['busifollow'] = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'follow_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// follow notification end
-// comment notification start
+        // follow notification end
+        // comment notification start
 
         $contition_array = array('notification.not_type' => '6', 'not_img' => '1', 'notification.not_from' => '6', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
@@ -3219,8 +3219,8 @@ Your browser does not support the audio tag.
 
         $this->data['busimgcommnet'] = $busimgcommnet = $this->common->select_data_by_condition('notification', $contition_array, $data, $sortby = 'post_image_comment_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 
-// comment notification end
-// like notification start
+        // comment notification end
+        // like notification start
         $contition_array = array('notification.not_type' => '5', 'not_img' => '2', 'notification.not_from' => '6', 'notification.not_to_id' => $userid, 'created_date BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW()');
         $join_str = array(array(
                 'join_type' => '',
@@ -3516,7 +3516,7 @@ Your browser does not support the audio tag.
                     }
                 }
 
-//7
+        //7
                 if ($total['not_from'] == 3) {
                     if ($total['not_img'] == 4) {
                         $postid = $this->db->get_where('post_files', array('post_files_id' => $total['post_image_id']))->row()->post_id;
@@ -4182,7 +4182,7 @@ Your browser does not support the audio tag.
                 }
 
                 $notification .= '</div><div class="notification-data-inside">';
-                $notification .= '<h6><font color="black"><b><i> Recruiter</i></font></b><b>' . '  ' . ucwords($rec_data['rec_firstname']) . ' ' . ucwords($rec_data['rec_lastname']) . '</b>  <span class="noti-msg-y"> From ' . ucwords($companyname) . '  Invited you for an interview. </span></h6>';
+                $notification .= '<h6><font color="black"><b><span class="noti-msg-y"> Recruiter</span></font></b><b>' . '  ' . ucwords($rec_data['rec_firstname']) . ' ' . ucwords($rec_data['rec_lastname']) . '</b>  <span class="noti-msg-y"> From ' . ucwords($companyname) . '  Invited you for an interview. </span></h6>';
                 $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div></div></a></li>';
