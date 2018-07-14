@@ -1260,7 +1260,7 @@ class Freelancer extends MY_Controller {
                 if ($updatedata) {
                     if ($para == 'all') {
                         // apply mail start
-                        $this->apply_email($notid);
+                        $this->apply_email($notid,$id);
 
                         $applypost = 'Applied';
                     }
@@ -1301,7 +1301,7 @@ class Freelancer extends MY_Controller {
                 $insert_id = $this->common->insert_data_getid($data, 'notification');
                 // end notoification
                 if ($insert_id) {
-                    $this->apply_email($notid);
+                    $this->apply_email($notid,$id);
                     $applypost = 'Applied';
                 }
                 // GET NOTIFICATION COUNT
@@ -2520,11 +2520,14 @@ class Freelancer extends MY_Controller {
     //FREELANCER_APPLY BOTH OTHER FIELD END
 
     //FREELANCER APPLY AS APPLIED ON POST SEND MAIL START
-    public function apply_email($notid) {
+    public function apply_email($notid,$post_id) {
 
         $userid = $this->session->userdata('aileenuser');
         $applydata = $this->common->select_data_by_id('freelancer_post_reg', 'user_id', $userid, $data = 'freelancer_post_fullname,freelancer_post_username,freelancer_post_user_image,freelancer_apply_slug', $join_str = array());
         $hiremail = $this->common->select_data_by_id('freelancer_hire_reg', 'user_id', $notid, $data = 'email', $join_str = array());
+        
+        $fa_data = $this->freelancer_apply_model->getFreelancerApplyPostDetail($post_id);
+        $url = 'freelance-jobs/' .$fa_data->category_name."/".strtolower($fa_data->post_slug)."-".$fa_data->user_id."-".$fa_data->post_id;
 
         $email_html = '';
         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
@@ -2544,7 +2547,7 @@ class Freelancer extends MY_Controller {
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a title = "View Detail" class="btn" href="' . BASEURL . 'freelancer/' . $applydata[0]['freelancer_apply_slug'] . '">view</a></p>
+                                                <p><a title = "View Detail" class="btn" href="' . base_url($url) . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
@@ -2784,7 +2787,7 @@ class Freelancer extends MY_Controller {
                                 $insert_id = $this->common->insert_data_getid($data, 'notification');
                                 // end notoification
                                 if ($insert_id) {
-                                    $this->apply_email($notid);
+                                    $this->apply_email($notid,$id);
                                     $applypost = 'Applied';
                                 }
                                 // echo $applypost;

@@ -1030,4 +1030,16 @@ class Freelancer_apply_model extends CI_Model {
         $result_array = $query->row_array();
         return $result_array['skill_name'];
     }
+
+    public function getFreelancerApplyPostDetail($post_id) {
+        $select_data = "fp.post_id,fp.post_name,fp.post_slug,fp.user_id,c.category_name";
+        $this->db->select($select_data)->from('freelancer_post fp');
+        $this->db->join('category c', 'c.category_id = fp.post_field_req', 'left');
+        $this->db->where('fp.post_id', $post_id);
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1'));
+        
+        $query = $this->db->get();
+        $result_array = $query->first_row();
+        return $result_array;
+    }
 }
