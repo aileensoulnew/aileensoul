@@ -4245,19 +4245,81 @@ class Recruiter extends MY_Controller {
 
 			$jobemail = $this->db->get_where('job_reg', array('user_id' => $invite_user, 'status' => '1'))->row()->email;
 			$jobid = $this->session->userdata('aileenuser');
-			$recdata = $this->common->select_data_by_id('recruiter', 'user_id', $userid, $data = 'recruiter_user_image,rec_firstname,rec_lastname,re_comp_name', $join_str = array());
+			// $recdata = $this->common->select_data_by_id('recruiter', 'user_id', $userid, $data = 'recruiter_user_image,rec_firstname,rec_lastname,re_comp_name', $join_str = array());
 			if ($insert_not) {
+
+				$join_str[0]['table'] = 'recruiter';
+				$join_str[0]['join_table_id'] = 'recruiter.user_id';
+				$join_str[0]['from_table_id'] = 'rec_post.user_id';
+				$join_str[0]['join_type'] = '';
+
+				$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type';
+				$contition_array = array('post_id' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'rec_post.user_id' => $userid);
+				$recdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+
+				$cache_time = $this->db->get_where('job_title', array(
+					'title_id' => $recdata[0]['post_name']
+				))->row()->name;
+
+				if ($cache_time) {
+					$cache_time1 = $cache_time;
+				} else {
+					$cache_time1 = $recdata[0]['post_name'];
+				}
+
+				if ($cache_time1 != '') {
+					$text = strtolower($this->common->clean($cache_time1));
+				} else {
+					$text = '';
+				}
+
+				$cityname = $this->db->get_where('cities', array('city_id' => $recdata[0]['city']))->row()->city_name;
+				$statename = $this->db->get_where('states', array('state_id' => $recdata[0]['state']))->row()->state_name;
+				$countryname = $this->db->get_where('countries', array('country_id' => $recdata[0]['country']))->row()->country_name;
+				
+				if ($cityname != '') {
+					$m_city = $this->common->clean($cityname);
+					$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($cityname));
+				}
+				else if($statename != "") {
+					$m_city = $this->common->clean($statename);
+					$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($statename));            
+				}
+				else if($countryname != "") {
+					$m_city = $this->common->clean($countryname);
+					$cityname = '-job-vacancy-in-' . strtolower($this->common->clean($countryname));
+				}
+				if ($recdata[0]['post_id'] != '') {
+					$url = $text . $cityname . '-' . $recdata[0]['user_id'] . '-' . $recdata[0]['post_id'];
+				} else {
+					$url = '';
+				}
+
+				if($recdata[0]['recruiter_user_image'] != "")
+				{
+					$img = '<img src="' . REC_PROFILE_THUMB_UPLOAD_URL . $recdata[0]['recruiter_user_image'] . '" width="50" height="50">';
+				}
+				else
+				{
+					$fname = $recdata[0]['rec_firstname'];
+		            $lname = $recdata[0]['rec_lastname'];
+		            $sub_fname = substr($fname, 0, 1);
+		            $sub_lname = substr($lname, 0, 1);
+		            $img = '<div class="post-img-div">'.ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)).'</div>';
+				}
+
+
 				$email_html = '';
 				$email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 				<tr>
-				<td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">
-				<img src="' . REC_PROFILE_THUMB_UPLOAD_URL . $recdata[0]['recruiter_user_image'] . '" width="50" height="50"></td>
+				<td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">'.$img.'
+				</td>
 				<td style="padding:0px;">
-				<p style="padding-bottom:5px;padding-top:6px;"><b>' . ucwords($recdata[0]['rec_firstname']) . ' ' . ucwords($recdata[0]['rec_lastname']) . '</b> From ' . ucwords($recdata[0]['re_comp_name']) . 'Invited you for an interview.</p>
+				<p style="padding-bottom:5px;padding-top:6px;"><b>' . ucwords($recdata[0]['rec_firstname']) . ' ' . ucwords($recdata[0]['rec_lastname']) . '</b> From ' . ucwords($recdata[0]['re_comp_name']) . ' Invited you for an interview.</p>
 				<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
 				</td>
 				<td style="padding:5px;">
-				<p><a class="btn" href="' . BASEURL . 'notification/recruiter_post/' . $postid . '">view</a></p>
+				<p><a class="btn" href="' . base_url($url) . '">view</a></p>
 				</td>
 				</tr>
 				</table>';
@@ -4717,7 +4779,7 @@ class Recruiter extends MY_Controller {
 		$join_str[0]['from_table_id'] = 'rec_post.user_id';
 		$join_str[0]['join_type'] = '';
 
-		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type';
+		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,state,country,post_currency,salary_type';
 		$contition_array = array('post_id' => $postid, 'status' => '1', 'rec_post.is_delete' => '0', 'rec_post.user_id' => $userid);
 		$this->data['postdata'] = $postdata = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
@@ -4821,7 +4883,7 @@ class Recruiter extends MY_Controller {
 		$join_str[0]['from_table_id'] = 'rec_post.user_id';
 		$join_str[0]['join_type'] = '';
 
-		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,country,post_currency,salary_type';
+		$data = 'post_id,post_name,post_last_date,post_description,post_skill,post_position,interview_process,min_sal,max_sal,max_year,min_year,fresher,degree_name,industry_type,emp_type,rec_post.created_date,rec_post.user_id,recruiter.rec_firstname,recruiter.re_comp_name,recruiter.rec_lastname,recruiter.recruiter_user_image,recruiter.profile_background,recruiter.re_comp_profile,city,country,post_currency,salary_type';
 		$contition_array = array('rec_post.city' => $city_id, 'status' => '1', 'rec_post.is_delete' => '0');
 		$this->data['postdata'] = $this->common->select_data_by_condition('rec_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
