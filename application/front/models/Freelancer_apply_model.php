@@ -886,7 +886,7 @@ class Freelancer_apply_model extends CI_Model {
         //echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
-            $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
+            $firstname = $this->db->select('concat(fullname," ",username) as fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;            
             $result_array[$key]['fullname'] = $firstname;
 
             $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $value['post_field_req']))->row()->category_name;
