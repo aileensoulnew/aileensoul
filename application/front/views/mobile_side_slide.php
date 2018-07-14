@@ -1,4 +1,10 @@
-<div class="mob-side-menu mob-side-hdr">
+<?php
+$session_user = $this->session->userdata('aileenuser'); 
+if(isset($session_user) && !empty($session_user))
+    $cls="";
+else
+    $cls="mob-side-hdr";?>
+<div class="mob-side-menu <?php echo $cls; ?>">
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right mob-side-menu" id="cbp-spmenu-s2">
         <div class="all-profile-box content custom-scroll">
             <ul class="all-pr-list">
@@ -46,7 +52,7 @@ function disableOther( button ) {
 $('#showRight').click(function(e){
     e.stopPropagation();
     $('#cbp-spmenu-s2').toggleClass('cbp-spmenu-open');
-    $('body').addClass('spmenu-open');
+    $('body').toggleClass('spmenu-open');
 });
 $('#cbp-spmenu-s2').click(function(e){
     e.stopPropagation();

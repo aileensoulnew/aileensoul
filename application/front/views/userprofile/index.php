@@ -195,7 +195,12 @@
                 </div>
             </div>
         </div>
-        <?php $this->load->view('mobile_side_slide'); ?>
+        <?php 
+        $session_user = $this->session->userdata('aileenuser');        
+        if(empty($session_user))        
+        {            
+            $this->load->view('mobile_side_slide');
+        }?>
         <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
