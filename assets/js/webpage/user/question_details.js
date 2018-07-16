@@ -335,7 +335,7 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
                 $(".del_comment").removeAttr("style");
             },1000);
 
-            $("#cmt-"+comment_id).hide();
+            // $("#cmt-"+comment_id).hide();
 
             data = success.data;
             if (commentClassName == 'last-comment') {
