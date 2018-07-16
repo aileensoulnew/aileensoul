@@ -33,10 +33,10 @@
                                 <div class="no-data-box" ng-if="pending_contact_request_data.length == '0'">
                                     <div class="no-data-content">
                                         <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
-                                        <p class="pt20">No Pending Contact Request Available</p>
+                                        <p class="pt20">No Pending Contact Request</p>
                                     </div>
                                 </div>
-                                <ul id="contactlist" style="display: none;" ng-if="pending_contact_request_data.length == '0'">
+                                <ul id="contactlist" style="display: none;" ng-if="pending_contact_request_data.length != '0'">
                                     <li ng-repeat="contact in pending_contact_request_data">
                                         <div class="list-box">
                                             <div class="profile-img">
@@ -82,7 +82,7 @@
                                 <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
                                     <div class="no-data-content">
                                         <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
-                                        <p class="pt20">No Suggestion Contact Request Available</p>
+                                        <p class="pt20">No Suggestion Contact Request</p>
                                     </div>
                                 </div>
                                 <ul id="suggestionlist" style="display: none;">
@@ -129,7 +129,7 @@
                                 <div class="no-data-box" ng-if="contactRequestNotification.length == '0'">
                                     <div class="no-data-content">
                                         <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
-                                        <p class="pt20">No Contact Request Notification Available</p>
+                                        <p class="pt20">No Contact Request Notification</p>
                                     </div>
                                 </div>
                                 <ul class="request-list">
