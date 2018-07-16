@@ -55,8 +55,8 @@ $(document).ready(function () {
             url: base_url + 'advertise_with_us/advertise_insert',
             data: post_data,
             success: function (response)
-            {
-                if (response == "ok") {
+            {                
+                //if (response == "ok") {
 
                     $("#firstname").val('');
                     $("#lastname").val('');
@@ -66,14 +66,14 @@ $(document).ready(function () {
                     $('.biderror .mes').html("<div class='pop_content'>Thank you for send advertise enquiry. Our executive contact to you soon!!!</div>");
                     $('#bidmodal').modal('show');
 
-                } else {
+                /*} else {
 
                     $('.biderror .mes').html("<div class='pop_content'>Your advertise enquiry not send successfully.</div>");
                     $('#bidmodal').modal('show');
-                }
+                }*/
             }
         });
-        return false;
+        // return false;
     }
 });
 

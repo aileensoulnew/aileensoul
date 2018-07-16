@@ -300,9 +300,9 @@ app.controller('userProfileController', function ($scope, $http) {
             data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    $scope.contact_value = success.data;
-                });
+        .then(function (success) {                    
+            $scope.contact_value = success.data.trim();
+        });
     }
     $scope.confirmContactRequestInnerHeader = function (from_id) {
         $http({
