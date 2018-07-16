@@ -5527,7 +5527,7 @@ class Artist extends MY_Controller {
                     $email_html .= '</td>
                                             <td style="padding:0px;">
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
@@ -5770,7 +5770,7 @@ class Artist extends MY_Controller {
                 $email_html .= '</td>
                                             <td style="padding:0px;">
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
@@ -6043,7 +6043,7 @@ class Artist extends MY_Controller {
                     $email_html .= '</td>
                                             <td style="padding:0px;">
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
@@ -7747,7 +7747,7 @@ class Artist extends MY_Controller {
                 $email_html .= '</td>
                                             <td style="padding:0px;">
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
-                        <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
+                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
