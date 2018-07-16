@@ -395,7 +395,7 @@
                                 </div>
                                 <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
                                     <div class="comment-box">
-                                        <div class="post-comment" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
+                                        <div id="cmt-{{comment.comment_id}}" class="post-comment" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
                                             <div class="post-img">
                                                 <div ng-if="comment.user_image != ''">
                                                     <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self">
@@ -430,7 +430,7 @@
                                                     <li ng-if="comment.is_userlikePostComment == '0'"><a href="javascript:void(0);" ng-click="likePostComment(comment.comment_id, post.post_data.id)"><i class="fa fa-thumbs-up"></i><span ng-bind="comment.postCommentLikeCount" id="post-comment-like-{{comment.comment_id}}"></span></a></li>
                                                     <li ng-if="comment.commented_user_id == user_id" id="edit-comment-li-{{comment.comment_id}}"><a href="javascript:void(0);" ng-click="editPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Edit</a></li> 
                                                     <li id="cancel-comment-li-{{comment.comment_id}}" style="display: none;"><a href="javascript:void(0);" ng-click="cancelPostComment(comment.comment_id, post.post_data.id, $parent.$index, $index)">Cancel</a></li> 
-                                                    <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)">Delete</a></li>
+                                                    <li ng-if="post.post_data.user_id == user_id || comment.commented_user_id == user_id"><a href="javascript:void(0);" class="del_comment" ng-click="deletePostComment(comment.comment_id, post.post_data.id, postIndex, commentIndex, post)">Delete</a></li>
                                                     <li><a href="javascript:void(0);" ng-bind="comment.comment_time_string"></a></li>
                                                 </ul>
                                             </div>

@@ -330,6 +330,7 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
     }
 
     $scope.deleteComment = function (comment_id, post_id, parent_index, index, post) {
+        $(".del_comment").attr("style","pointer-events:none");
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         $http({
             method: 'POST',
@@ -338,6 +339,12 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
         .then(function (success) {
+            setTimeout(function(){
+                $(".del_comment").removeAttr("style");
+            },1000);
+
+            $("#cmt-"+comment_id).hide();
+
             data = success.data;
             if (commentClassName == 'last-comment') {
                 $scope.postData[parent_index].post_comment_data.splice(0, 1);
