@@ -4854,10 +4854,10 @@ Your browser does not support the audio tag.
 
                 $businessData = $this->common->select_data_by_condition('business_profile_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
                 $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
-
-                if($businessUser->business_user_image != "")
+                $businessLoginUser = $this->business_model->get_bussiness_from_user_id($userid);
+                if($businessLoginUser->business_user_image != "")
                 {
-                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessLoginUser->business_user_image;
                 }
                 else
                 {
@@ -4870,9 +4870,9 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' . $businessUser->company_name . '</b> is comment on your post in business profile.</p>
+						<p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
@@ -4880,7 +4880,7 @@ Your browser does not support the audio tag.
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $businessUser->company_name . ' is comment on your post in Aileensoul.';
+                $subject = $businessLoginUser->company_name . ' is comment on your post in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
             }
@@ -5061,9 +5061,11 @@ Your browser does not support the audio tag.
                 $businessUser = $this->business_model->get_bussiness_from_user_id($businessData[0]['user_id']);
                 $url = 'company/'.$businessUser->business_slug.'/post/'.$busdatacomment[0]['business_profile_post_id'];
 
-                if($businessUser->business_user_image != "")
+                $businessLoginUser = $this->business_model->get_bussiness_from_user_id($userid);
+
+                if($businessLoginUser->business_user_image != "")
                 {
-                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessUser->business_user_image;
+                    $img = BUS_PROFILE_THUMB_UPLOAD_URL.$businessLoginUser->business_user_image;
                 }
                 else
                 {
@@ -5074,9 +5076,9 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
                                             <td style="padding:5px;">
-						<p><b>' .$businessUser->company_name . '</b> is comment on your post in business profile.</p>
+						<p><b>' .$businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
@@ -5084,7 +5086,7 @@ Your browser does not support the audio tag.
                                             </td>
 					</tr>
                                     </table>';
-                $subject = $businessUser->company_name. ' is comment on your post in Aileensoul.';
+                $subject = $businessLoginUser->company_name. ' is comment on your post in Aileensoul.';
 
                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
             }

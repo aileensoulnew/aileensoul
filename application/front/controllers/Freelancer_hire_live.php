@@ -3007,33 +3007,7 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
 	</table>';
 	$subject = $this->data['freehiredata']['fullname'] . " " . $this->data['freehiredata']['username'] . " " . $writting_word . ' you for ' . $projectdata[0]["post_name"] . ' project in Aileensoul.';
 
-	$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);
-	$email_html = '';
-	$email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-	<tr>
-	<td style="padding:5px;">';
-	if ($this->data['freehiredata'][0]['freelancer_hire_user_image']) {
-		$email_html .= '<img alt = "User Image" src="' . FREE_HIRE_PROFILE_THUMB_UPLOAD_URL . $this->data['freehiredata'][0]['freelancer_hire_user_image'] . '" width="60" height="60"></td>';
-	} else {
-		$fname = $this->data['freehiredata']['fullname'];
-		$lname = $this->data['freehiredata']['username'];
-		$sub_fname = substr($fname, 0, 1);
-		$sub_lname = substr($lname, 0, 1);
-		$email_html .= '<div class="post-img-div">
-		' . ucfirst(strtolower($sub_fname)) . ucfirst(strtolower($sub_lname)) . '</div> </td>';
-	}
-	$email_html .= '<td style="padding:5px;">
-	<p>Employer <b>' . $this->data['freehiredata']['fullname'] . " " . $this->data['freehiredata']['username'] . " " . $writting_word . '</b>  you for ' . $projectdata[0]["post_name"] . ' project in freelancer profile.</p>
-	<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
-	</td>
-	<td style="padding:5px;">
-	<p><a title = "View Detail" class="btn" href="' . base_url($url) . '">view</a></p>
-	</td>
-	</tr>
-	</table>';
-	$subject = $this->data['freehiredata']['fullname'] . " " . $this->data['freehiredata']['username'] . " " . $writting_word . ' you for ' . $projectdata[0]["post_name"] . ' project in Aileensoul.';
-
-	$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);
+	$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);	
 }
 	// Open Reactivate freelancer hire view or home 
 	public function reactivateacc() {
