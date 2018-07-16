@@ -261,7 +261,7 @@
             </div>
         </div>
         <!-- Bid-modal  -->
-        <div class="modal fade message-box biderror" id="bidmodal-limit" role="dialog">
+        <div class="modal fade message-box biderror" id="bidmodal-limit" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm deactive">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal" id="common-limit">&times;</button>       
@@ -273,7 +273,7 @@
         </div>
         <!-- Model Popup Close -->
         <!-- Bid-modal  -->
-        <div class="modal fade message-box biderror" id="bidmodal" role="dialog"  >
+        <div class="modal fade message-box biderror" id="bidmodal" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm" >
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
@@ -284,7 +284,7 @@
             </div>
         </div>
         <!-- Model Popup Close -->
-        <div class="modal fade message-box biderror" id="bidmodaleditpost" role="dialog"  >
+        <div class="modal fade message-box biderror" id="bidmodaleditpost" role="dialog" tabindex="-1"  >
             <div class="modal-dialog modal-lm" >
                 <div class="modal-content">
                     <button type="button" class="modal-close editpost" data-dismiss="modal">&times;</button>       
@@ -295,7 +295,7 @@
             </div>
         </div>
         <!-- Bid-modal-2  -->
-        <div class="modal fade message-box" id="likeusermodal" role="dialog" >
+        <div class="modal fade message-box" id="likeusermodal" role="dialog" tabindex="-1" >
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
@@ -308,7 +308,7 @@
         </div>
         <!-- Model Popup Close -->
         <!-- Bid-modal for this modal appear or not start -->
-        <div class="modal fade message-box" id="post" role="dialog">
+        <div class="modal fade message-box" id="post" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" id="post" data-dismiss="modal">&times;</button>       
@@ -319,7 +319,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade message-box" id="postedit" role="dialog">
+        <div class="modal fade message-box" id="postedit" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" id="postedit" data-dismiss="modal">&times;</button>       
@@ -332,7 +332,7 @@
         </div>
         <!-- Bid-modal for this modal appear or not  Popup Close -->
         <!-- The Modal -->
-        <div id="myModal" class="modal-post">
+        <div id="myModal" class="modal-post" role="dialog" tabindex="-1">
             <!-- Modal content -->
             <div class="modal-content-post">
                 <span class="close1">&times;</span>
@@ -364,7 +364,7 @@
                             <?php } }?>
                         </div>
                         <div id="myBtn"  class="editor-content col-md-10 popup-text" >
-                            <textarea id= "test-upload_product" placeholder="Post Your Art...."   onKeyPress=check_length(this.form); onKeyDown=check_length(this.form); onKeyup=check_length(this.form); onblur="check_length(this.form)" name=my_text rows=4 cols=30 class="post_product_name" style="position: relative;"></textarea>
+                            <textarea id= "test-upload_product" placeholder="Post Your Art...." name=my_text rows=4 cols=30 class="post_product_name" style="position: relative;" maxlength="50" onKeyup="check_length(this.form);"></textarea>
                             <div class="fifty_val">                       
                                 <input size=1 class="text_num" tabindex="-500" value=50 name=text_num disabled="disabled"> 
                             </div>

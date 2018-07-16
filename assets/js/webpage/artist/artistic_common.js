@@ -299,9 +299,9 @@ $('.modal-close').on('click', function () {
 
 $( document ).on( 'keydown', function ( e ) {
     if ( e.keyCode === 27 ) {
-        $( "#bidmodal-2" ).hide();
-        document.getElementById('upload-demo-one').style.display = 'none';
-        document.getElementById('upload-one').value = null;
+        // $( "#bidmodal-2" ).hide();
+        // document.getElementById('upload-demo-one').style.display = 'none';
+        // document.getElementById('upload-one').value = null;
     }
 });
 
@@ -549,7 +549,7 @@ $(document).ready(function () {
     $( document ).on( 'keydown', function ( e ) {
         if ( e.keyCode === 27 ) {
         //$( "#bidmodal" ).hide();
-        $('#bidmodal-2').modal('hide');
+        //$('#bidmodal-2').modal('hide');
     }
 });
 
