@@ -2565,10 +2565,13 @@ class Freelancer extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $applydata = $this->common->select_data_by_id('freelancer_post_reg', 'user_id', $invite_user, $data = 'freelancer_post_email');
         $projectdata = $this->common->select_data_by_id('freelancer_post', 'post_id', $postid, $data = 'post_name');
+
+        $fa_data = $this->freelancer_apply_model->getFreelancerApplyPostDetail($post_id);
+        $url = 'freelance-jobs/' .$fa_data->category_name."/".strtolower($fa_data->post_slug)."-".$fa_data->user_id."-".$fa_data->post_id;
+
         $email_html = '';
         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-                                            <td style="padding:5px;">';
+					<tr><td style="padding:5px;">';
         if ($this->data['freehiredata'][0]['freelancer_hire_user_image']) {
             $email_html .= '<img alt="User Image" src="' . FREE_HIRE_PROFILE_THUMB_UPLOAD_URL . $this->data['freehiredata'][0]['freelancer_hire_user_image'] . '" width="60" height="60"></td>';
         } else {
@@ -2584,7 +2587,7 @@ class Freelancer extends MY_Controller {
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a title= "View Detail" class="btn" href="' . BASEURL . 'notification/freelance-hire/' . $postid . '">view</a></p>
+                                                <p><a title= "View Detail" class="btn" href="' . base_url($url) . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
@@ -2610,7 +2613,7 @@ class Freelancer extends MY_Controller {
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><a title = "View Detail" class="btn" href="' . BASEURL . 'notification/freelance-hire/' . $postid . '">view</a></p>
+                                                <p><a title = "View Detail" class="btn" href="' . base_url($url) . '">view</a></p>
                                             </td>
 					</tr>
                                     </table>';
