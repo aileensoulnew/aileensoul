@@ -2500,7 +2500,7 @@ header .col-md-4.col-sm-3 a{display: inline-block;}
 }
 .control:hover input:not([disabled]):checked ~ .control__indicator,
 .control input:checked:focus ~ .control__indicator {
-  background: #5c5c5c;
+ /* background: #5c5c5c;*/
 }
 .control input:disabled ~ .control__indicator {
   background: #e6e6e6;
@@ -2642,7 +2642,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .right-header ul li.mob-bar-li{padding:0;}
 .test-cus.drop-down{padding-top:5px !important; padding-bottom:2px;}
 .mob-side-menu.mob-side-hdr .cbp-spmenu-vertical{z-index:10000;}
-.dropdown.hd-profile:hover .dropdown-menu{display:block;}
+.dropdown.hd-profile:hover .dropdown-menu, .dropdown.hd-profile:focus .dropdown-menu {display:block;}
 .test-cus li.hd-profile .all-profile-box{margin-left:0; width:100%;}
 .contact .right-header .test-cus > li > a.btn2{color:#8ab1c5;}
 .contact .right-header .test-cus > li > a.btn3:hover{color:#8ab1c5;}

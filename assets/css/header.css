@@ -1138,7 +1138,7 @@ header .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical,header .mCSB_ou
 }
 .ui-widget{
     max-height:210px!important;
-    margin-top:4px!important;
+    margin-top:3px!important;
     overflow-y:scroll;
     overflow-x:hidden;
     position:fixed!important;

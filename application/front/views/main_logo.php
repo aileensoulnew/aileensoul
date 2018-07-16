@@ -1,5 +1,5 @@
 <h2 class="logo">
-    <a href="<?php echo base_url(); ?>" target="_self">
+    <a href="<?php echo base_url(); ?>" tabindex="1" target="_self">
         <svg>
             <text class="logo-size" x="0" y="25">Aileensoul</text>
         </svg>

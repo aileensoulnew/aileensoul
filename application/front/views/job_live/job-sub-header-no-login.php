@@ -10,8 +10,8 @@
 										<?php if (!$this->session->userdata('aileenuser')) { ?>
 											<ul class="nav navbar-nav navbar-right test-cus drop-down">
 												<?php $this->load->view('profile-dropdown'); ?>
-												<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn8">Login</a></li>
-												<li class="hidden-991"><a href="<?php echo base_url(); ?>job-profile/create-account" class="btn9">Create Job Profile</a></li>
+												<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" tabindex="9" class="btn8">Login</a></li>
+												<li class="hidden-991"><a href="<?php echo base_url(); ?>job-profile/create-account" tabindex="10" class="btn9">Create Job Profile</a></li>
 												<li class="mob-bar-li">
 													<span class="mob-right-bar">
 														<?php $this->load->view('mobile_right_bar'); ?>
