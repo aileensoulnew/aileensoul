@@ -341,7 +341,7 @@ $userid = $this->session->userdata('aileenuser');
 									-147 50 -79 12 -7732 11 -7860 -1z"/>
 									</g>
 								</svg><span class="none-sub-menu">Post Job</span></a>
-					<li>
+					</li>
 				</ul>
 			</div>
 		</div>
