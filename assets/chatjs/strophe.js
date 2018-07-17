@@ -2330,12 +2330,11 @@ Strophe.Connection.prototype = {
         this._changeConnectStatus(Strophe.Status.DISCONNECTING, reason);
 
         Strophe.info("Disconnect was called because: " + reason);
-        if (this.connected) {
+        //if (this.connected) {
             // setup timeout handler
-            this._disconnectTimeout = this._addSysTimedHandler(
-                3000, this._onDisconnectTimeout.bind(this));
+            //this._disconnectTimeout = this._addSysTimedHandler(3000, this._onDisconnectTimeout.bind(this));
             this._sendTerminate();
-        }
+        //}
     },
 
     /** PrivateFunction: _changeConnectStatus

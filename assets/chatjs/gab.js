@@ -140,7 +140,7 @@ var Gab = {
 
         var composing = $(message).find('composing');
         if (composing.length > 0) {
-            $('.chat-event').html(Strophe.getNodeFromJid(jid)+" is typing...");
+            $('.chat-event').html(Strophe.getNodeFromJid(jid).replace(/_/g, " ")+" is typing...");
             // Gab.scroll_chat(jid_id);
         }
 
@@ -196,7 +196,10 @@ var Gab = {
     scroll_chat: function (jid_id) {
         // var div = $('#chat-' + jid_id + ' .chat-messages').get(0);
         // div.scrollTop = div.scrollHeight;
-        $('#chat-' + jid_id + ' .chat-messages')[0].scrollTop = $('#chat-' + jid_id + ' .chat-messages')[0].scrollHeight
+        if($('.chat-messages').length > 0)
+        {            
+            $('#chat-' + jid_id + ' .chat-messages')[0].scrollTop = $('#chat-' + jid_id + ' .chat-messages')[0].scrollHeight
+        }
     },
 
 
@@ -332,6 +335,7 @@ $(document).ready(function () {
     $(document).on('click','.roster-contact',function () {
         var jid = $(this).find(".roster-jid").text();
         var name = $(this).find(".roster-name").text();
+        var imgSrc = $(this).find(".contact-img img").attr("src");        
         var jid_id = Gab.jid_to_id(jid);
         to_main_jid = jid;
         to_dhash_jid = jid_id;
@@ -342,7 +346,7 @@ $(document).ready(function () {
             var tabs = $( "#chat-area" ).tabs();
             var ul = tabs.find( "ul" );
             // $( "<li><a href='#chat-"+jid_id+"'>"+name+"</a></li>" ).appendTo( ul );
-            var chat_title = '<div class="contact-img hide"><img src="https://aileensoulimagev2.s3.amazonaws.com/uploads/user_profile/thumbs/1528362125.png"></div><div class="contact-detail"><div class="roster-name">'+name+'</div><div class="last-msg hide">online</div></div>';
+            var chat_title = '<div class="contact-img"><img src="'+imgSrc+'"></div><div class="contact-detail"><div class="roster-name">'+name+'</div><div class="last-msg hide">online</div></div>';
 
             // $( ul ).html( "<li><a href='#chat-"+jid_id+"'>"+name+"</a></li>" );
             $( ul ).html( chat_title );
@@ -438,7 +442,11 @@ $(document).bind('connect', function (ev, data) {
     // var conn = new Strophe.Connection('https://52.43.64.56:7443/http-bind/');
     // var conn = new Strophe.Connection('http://52.43.64.56:7070/http-bind/');
     // var conn = new Strophe.Connection('http://127.0.0.1:7070/http-bind/');
-    var conn = new Strophe.Connection(openfirelink);
+    
+    var conn = new Strophe.Connection(openfirelink, {sync: true});
+    conn.flush();
+    // conn.options.sync = true;
+    conn.disconnect();
 
     conn.connect(data.jid, data.password, function (status) {
         if (status === Strophe.Status.CONNECTED) {
@@ -500,7 +508,7 @@ function send_message()
 {
     var body = $(".chat-input").text();
     body = body.replace(/&nbsp;/gi, " ");
-    body = body.replace(/<br>$/, '');
+    body = body.replace(/<br>$/, '\n');
     body = body.replace(/&gt;/gi, ">");
     body = body.replace(/&/g, "%26");
     

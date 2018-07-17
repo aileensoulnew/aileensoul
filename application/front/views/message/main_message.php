@@ -49,7 +49,7 @@
 											<?php
 											if ($value['user_image'] != '')
 			                                { ?> 
-			                                    <img src="<?php echo USER_THUMB_UPLOAD_URL . $value['user_image']; ?>" alt="<?php echo $value['first_name'] ?>">
+			                                    <img src="<?php echo USER_THUMB_UPLOAD_URL . $value['user_image']; ?>" alt="<?php echo $value['first_name'] ?>" onError="this.onerror=null;this.src='<?php echo ($value['user_gender'] == "M" ? base_url('assets/img/man-user.jpg') : base_url('assets/img/female-user.jpg')); ?>';">
 			                                <?php
 			                                }
 			                                else
