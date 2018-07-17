@@ -663,7 +663,7 @@
 
                                             if (numItems == '0') {
 
-                                                var nodataHtml = "<div class='art-img-nn border1'><div class='art_no_post_img'><img src='" + base_url + "img/job-no.png' alt='NOJOBIMAGE'/></div><div class='art_no_post_text'> No Post Available.</div></div>";
+                                                var nodataHtml = "<div class='art-img-nn border1'><div class='art_no_post_img'><img src='" + base_url + "img/job-no.png' alt='NOJOBIMAGE'/></div><div class='art_no_post_text'> No Post</div></div>";
                                                 $('.contact-frnd-post').html(nodataHtml);
                                             }
 

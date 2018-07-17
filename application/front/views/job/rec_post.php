@@ -965,7 +965,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                     if (numItems == '0') {
 
-                        var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='" + base_url + "img/job-no.png' alt='nojobimage'/></div><div class='art_no_post_text'> No Post Available.</div></div>";
+                        var nodataHtml = "<div class='art-img-nn'><div class='art_no_post_img'><img src='" + base_url + "img/job-no.png' alt='nojobimage'/></div><div class='art_no_post_text'> No Post.</div></div>";
                         $('.contact-frnd-post').html(nodataHtml);
                     }
                 }

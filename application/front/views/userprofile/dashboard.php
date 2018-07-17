@@ -308,7 +308,7 @@
                         <div class="user_no_post_img">
                             <img src="<?php echo base_url('assets/img/no-post.png?ver=' . time()); ?>" alt="bui-no.png">
                         </div>
-                        <div class="art_no_post_text">No Post Available.</div>
+                        <div class="art_no_post_text">No Post</div>
                     </div>
                 </div>
                 <div class="fw post_loader" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
