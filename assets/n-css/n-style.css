@@ -2244,7 +2244,7 @@ margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decorat
 /***  end edit profile  ***/
 
 /*** new css  ***/
-.modal.message-box .modal-body{text-align:left;}
+.modal.message-box .modal-body{text-align:left; padding:0;}
 .job_reg .cus_btn_sub{color:#fff;}
 .message button.cus_btn_sub:hover{border:0;}
 .register-model label.error{right:0;}
@@ -2289,7 +2289,7 @@ body, body.no-login {padding-bottom:60px;}
 .com-name-r label.error{padding:0 !important;}
 #jobseeker_regform fieldset{padding:10px;}
 .cus-error fieldset.main_select_data span::after{display:none;}
-.modal-dialog{padding-top:47px !important;}
+.modal-dialog{/*padding-top:47px !important;*/}
 
 #basicinfo .cus_field .error{bottom:-20px;}
 #basicinfo label.error, #studentinfo label.error{right:0;}
@@ -2464,6 +2464,8 @@ overflow-y: scroll; overflow-y: auto;}
 .post-popup-box .form-group select:focus, .post-popup-box .form-group textarea:focus {box-shadow:none; border:1px solid #1b8ab9 !important;}
 .common-form fieldset.rec_check input:focus+label{color:#616060 !important;}
 .art_no_post_text_c{color: #bfbfbf; font-size: 20px;}
+.pop_content{font-size:20px;}
+.request-btn .btn3{font-size:16px; font-weight:normal;}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -2724,6 +2726,7 @@ overflow-y: scroll; overflow-y: auto;}
 	.right-header > ul.test-cus > li.mob-bar-li{display:block;}
 	.blog-page .also-like-box .rec-img{height:204px;}
 	.sitemap header{min-height:47px;}
+	.post-box-bottom ul{padding:7px 0 0;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3113,6 +3116,10 @@ overflow-y: scroll; overflow-y: auto;}
 	.custom-box{padding:20px 0;}
 	.availabel-data-box h3{margin-bottom:10px;}
 	.edit-pr-custom .common-form fieldset .control--radio .control__indicator:after{width:11px; height:11px;}
+	.comment-input .editable_text{padding:6.5px 45px 6.5px 15px;}
+	#contactlist, #suggestionlist {width:100%;}
+	.all-list ul li{width:50%;}
+	.all-list ul li .list-box{width:100%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3404,8 +3411,8 @@ overflow-y: scroll; overflow-y: auto;}
 	.related-article .also-like-box{width:288px !important;}
 	.related-article .rec-img{height:120px;}
 	.user-photo-name .profile-img img{width:102px; height:102px;}
-	.all-list ul li .list-box{width:148px; padding:5px; height:240px;}
-	.all-list ul li .list-box .profile-img{width:136px; height:136px;}
+	.all-list ul li .list-box{height:200px;}
+	.all-list ul li .list-box .profile-img{width:100px; height:100px;}
 	.bottom-bnr-div{text-align:center;}
 	.bottom-bnr-div .btn-1{float:none !important;}
 	.bottom-bnr-div p{font-size:14px;}
@@ -3444,8 +3451,11 @@ overflow-y: scroll; overflow-y: auto;}
 	.all-comment-div{margin-left:-15px; margin-right:-15px; border-left:0; border-right:0;}
 	.comment-text h4{font-size:16px; line-height:1;}
 	.blog-page .sub-header .sub-menu{padding:5px 0;}
-	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:42%;}
+	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:50%;}
 	.sitemap header{padding:7px 0;}
+	.all-list ul li .list-box{padding:6px;}
+	.request-btn .btn1{padding:3px 10px; font-size:13px;}
+	.request-btn .btn3{padding:3px 10px; font-size:13px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

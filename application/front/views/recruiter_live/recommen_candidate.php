@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
 
-                               
+                               <?php echo $left_footer; ?>
                                 
                                 <?php //}  ?>
                                 <div id="khyati"></div>
@@ -237,7 +237,7 @@
                         </div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
                             
-							 <?php echo $left_footer; ?>
+							 
                         </div>
                     </div>
                 </div>
