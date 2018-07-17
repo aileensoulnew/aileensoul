@@ -463,6 +463,11 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['title'] = "Freelance Search | Aileensoul";
         $this->data['search_banner'] = $this->load->view('freelancer_apply_live/search_banner', $this->data, TRUE);
+
+        $limit = 8;
+        $this->data['FAFields'] = $this->freelancer_apply_model->freelancerFields($limit);
+        $this->data['FASkills'] = $this->freelancer_apply_model->get_fa_category($limit)['fa_category'];
+        
         $this->data['fa_leftbar'] = $this->load->view('freelancer_apply_live/fa_leftbar', $this->data, TRUE);
         /*$this->data['q'] = $_GET['q'];
         $this->data['l'] = $_GET['l'];
