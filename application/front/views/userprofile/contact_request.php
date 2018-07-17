@@ -75,10 +75,7 @@
                         </div>
                         <div class="list-box-custom suggestion">
                             <h3>Suggestion</h3>
-                            <div class="all-list">
-                                <div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
-                                    <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
-                                </div>
+                            <div class="all-list">                                
                                 <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
                                     <div class="no-data-content">
                                         <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
@@ -117,6 +114,9 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <div class="fw post_loader sugg_post_load" style="text-align:center; display: none;">
+                                    <img ng-src="<?php echo base_url('assets/images/loader.gif');?>" alt="Loader" />
+                                </div>
                             </div>
                         </div>
                     </div>

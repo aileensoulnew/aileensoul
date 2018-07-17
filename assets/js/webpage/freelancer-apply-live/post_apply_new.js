@@ -336,10 +336,10 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
         pagenum = 1;
 
         $("#loader").show();
+        $scope.freepostapply = {};
         $.post(base_url + "freelancer/ajax_freelancer_apply_post?page=" + pagenum, {"category_id" : $scope.cat_fil, "skill_id": $scope.skills_fil, "worktype": $scope.worktype, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
-                $("#loader").hide();
-                $scope.freepostapply = {};
+                $("#loader").hide();                
                 data = JSON.parse(success);
                 $scope.$apply(function () {
 
