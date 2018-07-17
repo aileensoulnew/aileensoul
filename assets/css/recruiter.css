@@ -41,11 +41,11 @@
 .profile-job-post-location-name-rec ul li a { color: #5b5b5b; display: inline-block; font-size: 13px; font-family: 'arial'; font-weight:normal;}
 
 .apply-btn {background: #e8f3f8; padding: 8px 12px;}
-.apply-btn a {background: #ffffff; color: #1b8ab9; border-radius: 4px; font-size:15px; padding: 3px 13px; display: inline-block; font-weight: 500; text-transform: capitalize; border: 1px solid #1b8ab9; min-width:72px; text-align:center; margin-left:5px;}
-.apply-btn a:hover {color: #fff; background: #1b8ab9;}
+.apply-btn a {background: #ffffff; color: #5c5c5c; border-radius: 4px; font-size:15px; padding: 3px 13px; display: inline-block; font-weight: 500; text-transform: capitalize; border: 1px solid #5c5c5c; min-width:72px; text-align:center; margin-left:5px;}
+.apply-btn a:hover {color: #fff; background: #5c5c5c;}
 li.fr a {text-decoration: none !important;}
 .job-contact-frnd .add-post-button{text-align:center !important;}
-.profile-job-profile-button {background-color: #e8f3f8; padding: 4px 0px; border-bottom-left-radius: 4px;
+.profile-job-profile-button {background-color: #f6f6f6; padding: 4px 0px; border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;}
 .profile-job-post-detail .profile-job-post-title .profile-job-profile-menu ul {list-style: none; display: block;
     width: 100%; clear: both; padding: 10px 4px 6px; margin-left: 4px;}
@@ -224,7 +224,7 @@ li.fr a {text-decoration: none !important;}
 }
 .profile-boxProfileCard-content:before {width: 100%; height: 1px; display: block; position: absolute; content: "";
     top: 49px; background: #d9d9d9;}
-.profile-boxProfileCard-content {position: relative; background-color: #e8f3f8;}
+.profile-boxProfileCard-content {position: relative; background-color: #f6f6f6;}
 .left_side_box_img {float: left;}
 .buisness-profile-txext {z-index: 1; position: relative; display: inline-block; width: 24%; padding-right: 1px !important;
     padding-left: 1px !important;}
