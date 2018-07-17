@@ -82,6 +82,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             <div class="container pt20 mobp0">
                 <div class="left-part">
                     <?php echo $fa_leftbar; ?>
+					<?php echo $left_footer_list_view; ?>
                     <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
@@ -198,10 +199,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 <img src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="<?php echo 'loaderimage'; ?>"/>
                             </p>
                         </div>
+						
                 </div>
                 <div class="right-part">
                     
-                    <?php echo $left_footer_list_view; ?>
+                    
                 </div>
 
             </div>
