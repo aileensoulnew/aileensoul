@@ -97,6 +97,7 @@ overflow-y: scroll; overflow-y: auto;}
 #chat-area .contact-detail{width:80%;}
 .ui-widget-header{font-weight:normal; font-family:'arial';}
 .msg-box #roster-area .content{height:488px;}
+.contact-detail .roster-job{ display: none;}
 /*** end message custom  ***/
 
 /***  media query   ***/
