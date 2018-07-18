@@ -92,8 +92,8 @@
                                                         <li>
                                                             <a href="<?php echo base_url().strtolower($_jobSkill['skill_slug']).'-jobs'; ?>" target="_self">
                                                                 <div class="cus-cat-middle">
-                                                                <img src="<?php echo SKILLS_IMG_PATH.$_jobSkill['skill_image'];?>">
-                                                                <!-- onError="this.onerror=null;this.src='<?php //echo JOB_INDUSTRY_IMG_PATH.'job_industry_image_default.png'; ?>';" -->
+                                                                <img src="<?php echo SKILLS_IMG_PATH.$_jobSkill['skill_image'];?>" onError="this.onerror=null;this.src='<?php echo JOB_INDUSTRY_IMG_PATH.'job_industry_image_default.png'; ?>';">
+                                                                <!--  -->
                                                                 <p><?php echo ucwords($_jobSkill['skill']).' Jobs'; ?></p>
                                                                 </div>
                                                             </a>
