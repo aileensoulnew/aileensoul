@@ -101,13 +101,16 @@ if($browser == "Firefox")
                                                         </div> 
                                                     </div>
                                                     <div class="dropdown-database confirm_div" ng-if="contact_request.status == 'confirm'">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact_request.user_image}}" alt="{{contact_request.fullname}}" ng-if="contact_request.user_image != ''">
-                                                            <img ng-src="<?php echo NOBUSIMAGE2 ?>" ng-if="contact_request.user_image == ''">
+                                                        <div class="post-img" ng-if="contact_request.user_image != ''">
+                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact_request.user_image}}" alt="{{contact_request.fullname}}" ng-if="contact_request.user_image != ''">          
+                                                        </div>
+                                                        <div class="post-img" ng-if="contact_request.user_image == ''">
+                                                            <img ng-if="contact_request.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                            <img ng-if="contact_request.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                         </div>
                                                         <div class="dropdown-user-detail">
                                                             <b ng-bind="contact_request.fullname | capitalize"></b> confirmed your contact request.
-                                                            <div class="msg-discription"><span class="time_ago">2 Month Ago</span></div>
+                                                            <div class="msg-discription"><span class="time_ago">{{contact_request.time_string}}</span></div>
                                                         </div> 
                                                     </div>
                                                 </a> 
