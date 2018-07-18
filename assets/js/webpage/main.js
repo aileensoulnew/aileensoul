@@ -387,7 +387,9 @@ $(document).ready(function () {
                         }
                     };
                     conn_new.register.connect(base_url + "basic-information", callback, 0, 0);
-                    window.location = base_url + "basic-information";
+                    setTimeout(function(){                        
+                        window.location = base_url + "basic-information";
+                    },1000);
 
                     /*if(response.is_userBasicInfo==1 || response.is_userStudentInfo==1){
                         window.location = base_url + "profiles/" + response.user_slug;
