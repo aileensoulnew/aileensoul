@@ -2364,50 +2364,7 @@ label.cameraButton{min-height:43px;}
 #artpost .fw fieldset label.error{right:0;}
 
 
-/*** message custom  ***/
-.message-main-box{width:100%; float:left; border:1px solid #d2d2d2; height:560px;}
-.msg-box{width:100%; float:left;}
-#roster-area{width:300px; float:left; border-right:1px solid #d2d2d2; height:558px; padding:0;}
-.msg-search{height:70px; padding:15px; border-bottom:1px solid #d2d2d2;}
-#roster-area .user-msg-list{padding:0;}
-#roster-area .user-msg-list li{padding:10px; border-bottom:1px solid #d2d2d2; list-style-type:none; width:100%; float:left;}
-#roster-area .user-msg-list li:hover{background:#f6f6f6; cursor:pointer;}
-.roster-contact{width:100%;float:left;}
-.msg-search input{border:0; border-bottom:1px solid #d2d2d2; border-radius:0;}
-#chat-area{width:948px; height:558px;  float:left; border:0 !important; border-radius:0 !important; position:relative;}
-#chat-area.ui-widget {max-height: inherit!important; margin-top: 0px!important; overflow-y: inherit; overflow-x: inherit; position: relative!important; z-index: inherit!important; }
 
-#chat-area.ui-widget-content{/*border-right:1px solid #d2d2d2 !important;*/}
-.contact-img{width:50px; height:50px; border-radius:100%; float:left; overflow:hidden;}
-.contact-img img{width:100%;}
-.contact-detail{width:170px; float:left; padding:5px 0px 0 10px;}
-.contact-detail .roster-name{font-size:18px; color:#5c5c5c; max-width: 100%; white-space: nowrap;
-text-overflow: ellipsis; overflow: hidden}
-.contact-detail .last-msg{font-size:15px; color:#7b7b7b; white-space: nowrap; text-overflow: ellipsis;
-overflow: hidden}
-.contact-detail .roster-jid{display:none;}
-.msg-time{width:58px; float:left; text-align:center; padding-top:5px;}
-.msg-time span{display:block; font-size:11px; color:#7b7b7b;}
-.msg-time .msg-count{width:20px; height:20px; background:#1b8ab9; border-radius:100%; color:#fff; margin:0 auto;}
-.msg-box .ui-tabs .ui-tabs-nav{height:70px; padding:10px; border:none; border-bottom:1px solid #d2d2d2; background:none; border-radius:0;}
-#chat-messages{width:100%; float:left; padding:10px; height:420px;}
-.chat-message{position:relative; width:100%; float:left; margin-bottom:30px;}
-.chat-message .chat-name .contact-img{position:absolute; bottom:26px; left:0;}
-.chat-message .chat-name .chat-text{margin-left:65px; float:left; max-width:85%; box-shadow:0 0 5px 1px #d2d2d2; border-radius:15px; padding:10px; border-bottom-left-radius:0; font-size:15px; color:#7b7b7b; margin-top:5px;}
-.chat-message .chat-name .msg-send-time{padding-left:65px; width:100%; padding-top:5px; float:left; font-size:12px; color:#7b7b7b; text-align:left;}
-
-.chat-message .chat-name.me .contact-img{position:absolute; bottom:26px; right:0;}
-.chat-message .chat-name.me .chat-text{margin-right:65px; float:right; max-width:85%; box-shadow:0 0 5px 1px #d2d2d2; border-radius:15px; padding:10px; border-bottom-right-radius:0; font-size:15px; color:#7b7b7b;}
-.chat-message .chat-name.me .msg-send-time{padding-right:65px; width:100%; padding-top:5px; float:left; font-size:12px; color:#7b7b7b; text-align:right;}
-.btm-snd-msg{width:100%; float:left; border-top:1px solid #d2d2d2; position:absolute; bottom:0; left:0;}
-.btm-snd-msg .comment{word-break: break-all; background-color: #fff; padding: 15px 150px 10px 20px !important;
-padding-right: 20px; cursor: inherit; font-size: 13px; min-height: 54px; position: relative; max-height: 85px;
-overflow-y: scroll; overflow-y: auto;}
-.btm-snd-msg .comment[contenteditable="true"]:empty::before {content: attr(placeholder); display: block; color: #ccc;}
-.btm-snd-msg .comment-submit{bottom:10px; width:75px;}
-#chat-messages .content{height:420px;}
-#chat-messages .mCSB_outside + .mCS-minimal.mCSB_scrollTools_vertical {right:-13px;}
-/*** end message custom  ***/
 /***  main landing page sub header  ***/
 .ld-sub-header{width:100%; border-bottom:1px solid #d2d2d2;}
 .ld-sub-header ul{width:100%; display:flex; -ms-flex-pack:justify; justify-content:space-between; align-items:flex-end; padding:0; margin-bottom:0;}
@@ -2438,7 +2395,7 @@ overflow-y: scroll; overflow-y: auto;}
 .right-header > ul.test-cus > li:nth-child(3){display:block;}
 .right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul > li:nth-child(3){display:none;}
-.mob-bottom-menu li{width:25% !important; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
+.mob-bottom-menu li{width:20%; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
 .main-user-profile .user-btns a:last-child{display:none;}
 .custom-user-add{display:none;}
 .add-box{display:none;}
@@ -2760,11 +2717,11 @@ overflow-y: scroll; overflow-y: auto;}
 	.more-support{font-size:16px;}
 	
 	.mob-modal .modal-content, #post-popup1 .modal-content, #post-popup .modal-content, #ask-question .modal-content, #opportunity-popup .modal-content, #report-span .modal-content, #other-reason .modal-content, #register .modal-content, #job_reg .modal-content {width:100%; height:100%; border:0px; border-radius:0px !important;}
-	.mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog, #register .modal-dialog, #job_reg .modal-dialog {padding:0; margin:0; height:100%;}
-	#report-span .modal-dialog{height:auto; padding-top:0 !important;}
+	.mob-modal .modal-dialog, #post-popup1 .modal-dialog, #post-popup .modal-dialog, #ask-question .modal-dialog, #opportunity-popup .modal-dialog, #report-span .modal-dialog, #other-reason .modal-dialog, #register .modal-dialog, #job_reg .modal-dialog {padding:0; margin:0; height:100% !important;}
+	#report-span .modal-dialog{height:auto !important; padding-top:0 !important;}
 	#report-span .modal-content{padding-top:10px;}
 	#report-span{z-index:999999 !important; background:#fff;}
-	.mob-modal .modal-close, #post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close, #register .modal-close, #job_reg .modal-close {top:0; right:0; border-radius:0; background:none; border:none; color:#5c5c5c;}
+	.mob-modal .modal-close, #post-popup1 .modal-close, #post-popup .modal-close, #ask-question .modal-close, #opportunity-popup .modal-close, #report-span .modal-close, #other-reason .modal-close, #register .modal-close, #job_reg .modal-close {top:0 !important; right:0 !important; border-radius:0; background:none !important; border:none !important; color:#5c5c5c !important;}
 	#post-popup1 .post-popup-box, #post-popup .post-popup-box, #ask-question .post-popup-box, #opportunity-popup .post-popup-box, #report-span .report-box, #other-reason .report-box, #register .report-box, #job_reg .post-popup-box{/*margin-bottom:52px;*/}
 	#register .modal-content, #job_reg .modal-content{border-radius:0 !important;}
 	#register .modal-dialog, #job_reg .modal-dialog{padding:0 !important;}

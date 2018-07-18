@@ -1,5 +1,3 @@
-
-
 .hidden {
     display: none
 }
@@ -50,3 +48,59 @@
 .offline {
     color: #ccc;
 }
+
+
+/*** message custom  ***/
+.message-main-box{width:100%; float:left; border:1px solid #d2d2d2; height:560px; margin-bottom:15px;}
+#roster-area .user-msg-list li:last-child{/*border-bottom:0px;*/}
+.msg-box{width:100%; float:left;}
+#roster-area{width:300px; float:left; border-right:1px solid #d2d2d2; height:558px; padding:0;}
+.msg-search{height:70px; padding:15px; border-bottom:1px solid #d2d2d2;}
+#roster-area .user-msg-list{padding:0;}
+#roster-area .user-msg-list li{padding:10px; border-bottom:1px solid #d2d2d2; list-style-type:none; width:100%; float:left;}
+#roster-area .user-msg-list li:hover{background:#f6f6f6; cursor:pointer;}
+.roster-contact{width:100%;float:left;}
+.msg-search input{border:0; border-bottom:1px solid #d2d2d2; border-radius:0;}
+#chat-area{width:948px; height:558px;  float:left; border:0 !important; border-radius:0 !important; position:relative;}
+#chat-area.ui-widget {max-height: inherit!important; margin-top: 0px!important; overflow-y: inherit; overflow-x: inherit; position: relative!important; z-index: inherit!important; }
+
+#chat-area.ui-widget-content{/*border-right:1px solid #d2d2d2 !important;*/}
+.contact-img{width:50px; height:50px; border-radius:100%; float:left; overflow:hidden;}
+.contact-img img{width:100%;}
+.contact-detail{width:170px; float:left; padding:5px 0px 0 10px;}
+.contact-detail .roster-name{font-size:18px; color:#5c5c5c; max-width: 100%; white-space: nowrap;
+text-overflow: ellipsis; overflow: hidden}
+.contact-detail .last-msg{font-size:15px; color:#7b7b7b; white-space: nowrap; text-overflow: ellipsis;
+overflow: hidden}
+.contact-detail .roster-jid{display:none;}
+.msg-time{width:58px; float:left; text-align:center; padding-top:5px;}
+.msg-time span{display:block; font-size:11px; color:#7b7b7b;}
+.msg-time .msg-count{width:20px; height:20px; background:#1b8ab9; border-radius:100%; color:#fff; margin:0 auto;}
+.msg-box .ui-tabs .ui-tabs-nav{height:70px; padding:10px; border:none; border-bottom:1px solid #d2d2d2; background:none; border-radius:0;}
+#chat-messages{width:100%; float:left; padding:10px; height:420px;}
+.chat-message{position:relative; width:100%; float:left; margin-bottom:30px;}
+.chat-message .chat-name .contact-img{position:absolute; bottom:26px; left:0;}
+.chat-message .chat-name .chat-text{margin-left:65px; float:left; max-width:85%; border-radius:15px; padding:10px; border-bottom-left-radius:0; font-size:15px; color:#7b7b7b; margin-top:5px; border:1px solid #d2d2d2;}
+.chat-message .chat-name .msg-send-time{padding-left:65px; width:100%; padding-top:5px; float:left; font-size:12px; color:#7b7b7b; text-align:left; }
+
+.chat-message .chat-name.me .contact-img{position:absolute; bottom:26px; right:0;}
+.chat-message .chat-name.me .chat-text{margin-right:65px; float:right; max-width:85%;  border-radius:15px; padding:10px; border-bottom-right-radius:0; font-size:15px; color:#7b7b7b; border:1px solid #d2d2d2;}
+.chat-message .chat-name.me .msg-send-time{padding-right:65px; width:100%; padding-top:5px; float:left; font-size:12px; color:#7b7b7b; text-align:right;}
+.btm-snd-msg{width:100%; float:left; border-top:1px solid #d2d2d2; position:absolute; bottom:0; left:0;}
+.btm-snd-msg .comment{word-break: break-all; background-color: #fff; padding: 15px 150px 10px 20px !important;
+padding-right: 20px; cursor: inherit; font-size: 13px; min-height: 54px; position: relative; max-height: 85px;
+overflow-y: scroll; overflow-y: auto;}
+.btm-snd-msg .comment[contenteditable="true"]:empty::before {content: attr(placeholder); display: block; color: #ccc;}
+.btm-snd-msg .comment-submit{bottom:10px; width:75px;}
+#chat-messages .content{height:420px;}
+#chat-messages .mCSB_outside + .mCS-minimal.mCSB_scrollTools_vertical {right:-13px;}
+#chat-area .contact-detail{width:80%;}
+.ui-widget-header{font-weight:normal; font-family:'arial';}
+.msg-box #roster-area .content{height:488px;}
+/*** end message custom  ***/
+
+/***  media query   ***/
+@media screen and (max-width: 767px) {
+	.chat-right{display:none;}
+}
+
