@@ -70,6 +70,67 @@ if($browser == "Firefox")
 									</svg>
 								</a>
                             </li>
+							<li class="dropdown">
+                                <a href="<?php echo base_url()."message"; ?>" title="Messages" class="dropdown-toggle">
+									
+<svg x="0px" y="0px" width="24px" height="24px" viewBox="0 0 30.743 30.744">
+<g>
+	<path d="M28.585,9.67h-0.842v9.255c0,1.441-0.839,2.744-2.521,2.744H8.743v0.44c0,1.274,1.449,2.56,2.937,2.56h12.599l4.82,2.834
+		L28.4,24.669h0.185c1.487,0,2.158-1.283,2.158-2.56V11.867C30.743,10.593,30.072,9.67,28.585,9.67z"/>
+	<path d="M22.762,3.24H3.622C1.938,3.24,0,4.736,0,6.178v11.6c0,1.328,1.642,2.287,3.217,2.435l-1.025,3.891L8.76,20.24h14.002
+		c1.684,0,3.238-1.021,3.238-2.462V8.393V6.178C26,4.736,24.445,3.24,22.762,3.24z M6.542,13.032c-0.955,0-1.729-0.774-1.729-1.729
+		s0.774-1.729,1.729-1.729c0.954,0,1.729,0.774,1.729,1.729S7.496,13.032,6.542,13.032z M13,13.032
+		c-0.955,0-1.729-0.774-1.729-1.729S12.045,9.574,13,9.574s1.729,0.774,1.729,1.729S13.955,13.032,13,13.032z M19.459,13.032
+		c-0.955,0-1.73-0.774-1.73-1.729s0.775-1.729,1.73-1.729c0.953,0,1.729,0.774,1.729,1.729S20.412,13.032,19.459,13.032z"/>
+</g>
+
+</svg>
+
+                                </a>
+
+                                <a href="#" title="Messages" class="dropdown-toggle hide" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
+                                    <span class="noti-box" style="display:none;">1</span>
+                                </a>
+                                <div class="dropdown-menu hide">
+                                    <div class="dropdown-title">
+                                        Messages <a href="#" target="_self" class="pull-right">See All</a>
+                                    </div>
+                                    <div class="content custom-scroll">
+                                        <ul class="dropdown-data msg-dropdown">
+                                            <li class="">
+                                                <a href="#">
+                                                    <div class="dropdown-database">
+                                                        <div class="post-img">
+                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
+                                                        </div>
+                                                        <div class="dropdown-user-detail">
+                                                            <h6><b>Atosa Ahmedabad</b></h6>
+                                                            <div class="msg-discription">Hello how are you</div>
+                                                            <span class="day-text">1 month ago</span>
+                                                        </div> 
+                                                    </div>
+                                                </a> 
+                                            </li>
+                                            <li class="">
+                                                <a href="#">
+                                                    <div class="dropdown-database">
+                                                        <div class="post-img">
+                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
+                                                        </div>
+                                                        <div class="dropdown-user-detail">
+                                                            <h6><b>Atosa Ahmedabad</b></h6>
+                                                            <div class="msg-discription">Hello how are you</div>
+
+                                                            <span class="day-text">1 month ago</span>
+
+                                                        </div> 
+                                                    </div>
+                                                </a> 
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
                             <li id="add-contact" class="dropdown">
                                 <a href="javascript:void(0);" title="Contact Request" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_contact_request()">
 									<svg x="0px" y="0px" viewBox="0 0 55 55" width="24px" height="24px">
@@ -133,53 +194,7 @@ if($browser == "Firefox")
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown hide">
-                                <a href="<?php echo base_url()."message"; ?>" title="Messages" class="dropdown-toggle"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
-                                </a>
-
-                                <a href="#" title="Messages" class="dropdown-toggle hide" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img ng-src="<?php echo base_url('assets/n-images/message.png?ver=' . time()) ?>" alt="Messages">
-                                    <span class="noti-box" style="display:none;">1</span>
-                                </a>
-                                <div class="dropdown-menu hide">
-                                    <div class="dropdown-title">
-                                        Messages <a href="#" target="_self" class="pull-right">See All</a>
-                                    </div>
-                                    <div class="content custom-scroll">
-                                        <ul class="dropdown-data msg-dropdown">
-                                            <li class="">
-                                                <a href="#">
-                                                    <div class="dropdown-database">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
-                                                        </div>
-                                                        <div class="dropdown-user-detail">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">Hello how are you</div>
-                                                            <span class="day-text">1 month ago</span>
-                                                        </div> 
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                            <li class="">
-                                                <a href="#">
-                                                    <div class="dropdown-database">
-                                                        <div class="post-img">
-                                                            <img ng-src="<?php echo base_url('assets/') ?>n-images/user-pic.jpg" alt="No Business Image">
-                                                        </div>
-                                                        <div class="dropdown-user-detail">
-                                                            <h6><b>Atosa Ahmedabad</b></h6>
-                                                            <div class="msg-discription">Hello how are you</div>
-
-                                                            <span class="day-text">1 month ago</span>
-
-                                                        </div> 
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
+                            
                             <li class="dropdown" style="display: block;">
                                 <a href="#" title="Notification" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" onclick = "return Notificationheader();" aria-expanded="false">
 									<svg x="0px" y="0px" width="24px" height="24px" viewBox="0 0 510 510">

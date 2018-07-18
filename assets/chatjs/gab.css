@@ -31,12 +31,6 @@
 .chat-message .me {
     color: #33c;
 }
-
-.chat-event {
-    font-style: italic;
-    font-size: 75%;
-}
-
 .online {
     color: #3c3;
 }
@@ -55,7 +49,7 @@
 #roster-area .user-msg-list li:last-child{/*border-bottom:0px;*/}
 .msg-box{width:100%; float:left;}
 #roster-area{width:300px; float:left; border-right:1px solid #d2d2d2; height:558px; padding:0;}
-.msg-search{height:70px; padding:15px; border-bottom:1px solid #d2d2d2;}
+.msg-search{height:70px; padding:23px 15px; border-bottom:1px solid #d2d2d2;}
 #roster-area .user-msg-list{padding:0;}
 #roster-area .user-msg-list li{padding:10px; border-bottom:1px solid #d2d2d2; list-style-type:none; width:100%; float:left;}
 #roster-area .user-msg-list li:hover{background:#f6f6f6; cursor:pointer;}
@@ -98,6 +92,7 @@ overflow-y: scroll; overflow-y: auto;}
 .ui-widget-header{font-weight:normal; font-family:'arial';}
 .msg-box #roster-area .content{height:488px;}
 .contact-detail .roster-job{ display: none;}
+#chat-area .chat-event{position:absolute; left:15px; bottom:60px; font-size:14px; font-style:normal;}
 /*** end message custom  ***/
 
 /***  media query   ***/
