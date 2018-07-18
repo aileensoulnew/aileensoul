@@ -583,6 +583,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 .right-header ul li:last-child{border-right:none;}
 .right-header ul li a{color:#fff;}
 .right-header > ul > li > a{width:32px; height:32px; float:left; padding:4px;}
+.right-header > ul > li.business_popup > a{padding:5px;}
 .right-header > ul > li.user-id > a{width:auto; padding:0px;}
 .right-header .usr-img{width:25px; height:25px;  border-radius:100%; margin-right:5px; float:left; margin-top:3px;}
 .right-header .usr-img.profile-brd{width:26px; height:26px; border:1px solid #fff;}
@@ -596,6 +597,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 .right-header .pr-name{line-height:2; float:left; font-size: 16px; color: #fff; letter-spacing:1px;}
 .right-header svg path{fill:#fff;}
 .right-header svg polygon{fill:#fff;}
+.right-header svg rect{fill:#fff;}
 .profile-dropdown svg path{fill:#5c5c5c;}
 .profile-dropdown li a:hover svg path{fill:#fff;}
 ul.account li a:hover svg path{fill:#fff;}

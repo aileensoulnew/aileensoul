@@ -2395,7 +2395,7 @@ label.cameraButton{min-height:43px;}
 .right-header > ul.test-cus > li:nth-child(3){display:block;}
 .right-header > ul > li:nth-child(4){display:none;}
 .mob-bottom-menu ul > li:nth-child(3){display:none;}
-.mob-bottom-menu li{width:20%; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
+.mob-bottom-menu li{width:25%; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
 .main-user-profile .user-btns a:last-child{display:none;}
 .custom-user-add{display:none;}
 .add-box{display:none;}

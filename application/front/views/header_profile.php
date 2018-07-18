@@ -64,7 +64,7 @@ if($browser == "Firefox")
 								</a>
                             </li>
 							<li class="dropdown">
-                                <a href="<?php echo base_url()."message"; ?>" title="Messages" class="dropdown-toggle">
+                                <a href="http://message.aileensoul.com" title="Messages" class="dropdown-toggle">
 									<svg x="0px" y="0px" width="24px" height="24px" viewBox="0 0 30.743 30.744">
 <g>
 	<path d="M28.585,9.67h-0.842v9.255c0,1.441-0.839,2.744-2.521,2.744H8.743v0.44c0,1.274,1.449,2.56,2.937,2.56h12.599l4.82,2.834
@@ -227,7 +227,7 @@ if($browser == "Firefox")
                         <li class="dropdown business_popup">
                             <a href="javascript:void(0);" title="All Profile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-click="header_all_profile()">
 								
-								<svg x="0px" y="0px" viewBox="0 0 56 56" width="24px" height="24px">
+								<svg x="0px" y="0px" viewBox="0 0 56 56" width="22px" height="22px">
 								<g>
 									<path d="M8,40c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S12.411,40,8,40z" fill="#d7ecf5"/>
 									<path d="M28,40c-4.411,0-8,3.589-8,8s3.589,8,8,8s8-3.589,8-8S32.411,40,28,40z" fill="#d7ecf5"/>
