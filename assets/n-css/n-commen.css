@@ -582,9 +582,11 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 .right-header ul.notification_data_in li{padding:0;}
 .right-header ul li:last-child{border-right:none;}
 .right-header ul li a{color:#fff;}
+.right-header > ul > li > a{width:32px; height:32px; float:left; padding:4px;}
+.right-header > ul > li.user-id > a{width:auto; padding:0px;}
 .right-header .usr-img{width:25px; height:25px;  border-radius:100%; margin-right:5px; float:left; margin-top:3px;}
 .right-header .usr-img.profile-brd{width:26px; height:26px; border:1px solid #fff;}
-.right-header .usr-img img{width:100%; border-radius:100%; /*border:1px solid #fff;*/}
+.right-header .usr-img img{width:100%; border-radius:100%;/*border:1px solid #fff;*/height:100%;}
 .right-header .usr-img .custom-user{width:100%; border-radius:100%; border:2px solid #fff; text-align: center; background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9));
     background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
@@ -592,6 +594,11 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
     background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%); height: 100%;}
 .right-header .pr-name{line-height:2; float:left; font-size: 16px; color: #fff; letter-spacing:1px;}
+.right-header svg path{fill:#fff;}
+.right-header svg polygon{fill:#fff;}
+.profile-dropdown svg path{fill:#5c5c5c;}
+.profile-dropdown li a:hover svg path{fill:#fff;}
+ul.account li a:hover svg path{fill:#fff;}
 .right-header .pr-name span{display:block; font-size:14px;}
 .right-header .dropdown.open .dropdown-menu{right:0; top:40px; left:auto; margin:0; left: inherit!important;
     position: absolute;}
@@ -601,6 +608,8 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
 .right-header .dropdown.user-id .dropdown-menu{right:0; top:40px; left:auto; margin:3px 0 0; padding-bottom:10px;}
 .right-header .dropdown.user-id .dropdown-menu li{width:100%; border-right:0;}
 .right-header .dropdown.user-id .dropdown-menu li a{color:#777;}
+.right-header .dropdown.user-id .dropdown-menu li a span{display:inline-block; padding-left:5px;}
+.right-header .dropdown.user-id .dropdown-menu li a svg{margin-bottom:-2px;}
 
 .user-id .user-id-custom{position:relative; margin-bottom: 0;}
 .user-id .user-id-custom:after{ 
@@ -802,7 +811,7 @@ min-height: 15px;}
 .right-header .dropdown.open .dropdown-menu.profile-dropdown{width:160px; padding-bottom:10px;}
 .dropdown-menu.profile-dropdown li:first-child{border-bottom:1px solid #d9d9d9; font-size:16px; padding:5px 10px;}
 .dropdown-menu.profile-dropdown li{padding:0;}
-.dropdown-menu.profile-dropdown li a{padding:5px 10px;}
+.dropdown-menu.profile-dropdown li a{padding:8px 10px; line-height:1;}
 .dropdown-menu.profile-dropdown li a:hover{background:#1b8ab9; color:#fff !important;}
 .mCS-minimal.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
 .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
