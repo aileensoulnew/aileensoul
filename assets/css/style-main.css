@@ -3360,6 +3360,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .login .modal-dialog{height: auto;}
     .cus-chang{font-size: 20px!important;line-height: 26px;}
     .modal-dialog {height: auto !important;}
+    .all-post-top .modal-dialog {height: 100% !important;}
     .blog .main-inner{padding-bottom: 0PX !important;}
     .modal.in .modal-dialog{padding: 55px 15px;}
 	header .logo svg{margin-top:2px;}

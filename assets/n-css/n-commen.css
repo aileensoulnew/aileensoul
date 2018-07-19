@@ -1457,7 +1457,7 @@ border: 1px solid #1b8ab9;}
 .custom-popup#view-profile-img .modal-close, #view-cover-img .modal-close, #myModalImage .modal-close, .all-post-top .modal2 .modal-close, #myModalPhotos .modal-close, #myModalVideo .modal-close {top:15px !important; background:none !important; border:0px !important; width:auto !important; height:auto !important;}
 #myModalImage .modal-close, .all-post-top .modal2 .modal-close, #myModalPhotos .modal-close, #myModalVideo .modal-close {width:30px !important; height:30px !important;}
 #other-user-profile-img .modal-close, #myModalImage .modal-close {top:15px !important; background:none !important; border:0px !important;} 
-.custom-popup#view-cover-img .modal-body .mes img{border-radius: 0; width: 100%;}
+.custom-popup#view-cover-img .modal-body .mes img{border-radius: 0; width: 100%; height:100%;}
 .custom-popup#view-cover-img .modal-content{padding: 0 15px;}
 .custom-popup#view-cover-img .modal-content{background-color: transparent; box-shadow:none; -webkit-box-shadow:none;}
 .custom-popup#view-cover-img .modal-close:hover, #view-profile-img .modal-close:hover, #myModalImage .modal-close:hover, .all-post-top .modal2 .modal-close:hover, #myModalPhotos .modal-close:hover, #myModalVideo .modal-close:hover {background: rgba(255,255,255,0.1) !important; border-radius: 4px !important;}
@@ -1696,6 +1696,8 @@ a:focus{outline:none;}
 	.sub-menu li.dropdown.open::before{left:53%;}
 	.sub-menu.job-only li.dropdown.open::before{left:50%;}
 	.sub-menu li.user-id.open::before{left:35% !important; top:19px;}
+	#view-cover-img.modal.in .modal-dialog{padding-left:0; padding-right:0;}
+	.custom-popup#view-cover-img .modal-content{padding-left:0; padding-right:0;}
 }
 @media screen and (max-width: 639px) {
     .post-popup-box .post-box .post-text{width:85%;}

@@ -3082,6 +3082,7 @@ label.cameraButton{min-height:43px;}
 	.all-list ul li .list-box{width:100%;}
 	.sub-menu.rec-only li.user-id.open::before{left:2px !important; top:19px;}
 	.sub-menu.free-h-only li.user-id.open::before{left:2px !important; top:19px;}
+	.modal2 .modal-dialog .modal-content .slider_img_p img{max-width:95%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
