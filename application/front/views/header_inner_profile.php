@@ -375,7 +375,7 @@ if($browser == "Firefox")
                             <?php 
                             $first_segment = $this->uri->segment(1);
                             $page_arr = array('','search','contact-request');
-                            $no_ser_arr = array('freelance-profile','recommended-candidates','hire-freelancer','job-profile');
+                            $no_ser_arr = array("freelance-profile","recommended-candidates","hire-freelancer","job-profile","recruiter","business-profile","job","job-search","recommended-jobs","jobs-by-companies","jobs-by-categories","jobs-by-skills","jobs-by-location","jobs-by-designations","jobs","job-profile","-job-vacancy-in-","freelance-jobs-by-fields","freelance-jobs-by-categories","recruiter","recommended-candidates","post-job","hire-freelancer","freelance-employer","freelancer","post-freelance-project","recommended-freelance-work","artist-profile","artist");
                             if(!in_array($first_segment, $no_ser_arr))
                             {
                             //if(in_array($first_segment, $page_arr)): ?>
@@ -692,7 +692,7 @@ if($browser == "Firefox")
 	</div>
 </div>
 <script>
-   var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+   /*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
     showRight = document.getElementById( 'showRight' ),
     body = document.body;
 
@@ -707,7 +707,7 @@ if($browser == "Firefox")
     if( button !== 'showRight' ) {
      classie.toggle( showRight, 'disabled' );
     }
-   }
+   }*/
    
    function Notificationheader() {
         getNotification();

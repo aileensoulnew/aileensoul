@@ -20,7 +20,7 @@
 </head>
 <body class="page-container-bg-solid page-boxed pushmenu-push">
     <?php
-    echo $header;
+    //echo $header;
     echo $recruiter_header2;
     ?>
     <div id="preloader"></div>
