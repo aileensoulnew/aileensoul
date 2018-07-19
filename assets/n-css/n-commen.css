@@ -1637,7 +1637,7 @@ a:focus{outline:none;}
 	.mobile-header .sub-header .sub-menu li ul li a{display:block; text-align:left;}
 	.sub-header-search .container{position:relative;}
 	.mobile-header .sub-header{top:50px;}
-	.sub-header-search .search-mob-block{position: absolute; left: 60px; z-index: 99999; top: -76px;}
+	.sub-header-search .search-mob-block{position: absolute; left: 60px; z-index: 99999; top: -72px;}
 	.sub-header-search{display:block;}
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu{left:-56px !important; right:inherit !important;}
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu:before{left:149px;}
