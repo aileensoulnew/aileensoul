@@ -1,3 +1,4 @@
+<?php $usre_id = $this->session->userdata('aileenuser'); ?>
 <!DOCTYPE html>
 <html lang="en" ng-app="artistSearchListApp" ng-controller="artistSearchListController">
     <head>
@@ -252,7 +253,11 @@
             </div>
 		</div>
 		</div>
-        <?php $this->load->view('mobile_side_slide'); ?>
+        <?php 
+        if($usre_id == "")
+        {
+            $this->load->view('mobile_side_slide'); 
+        } ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <?php if(($is_artist_profile_set == 1 || $is_artist_profile_set == '1') || $isartistactivate == 0){ 
             ?>
