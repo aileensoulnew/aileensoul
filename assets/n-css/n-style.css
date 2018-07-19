@@ -2522,9 +2522,9 @@ label.cameraButton{min-height:43px;}
 	.media-pages-tablet ul{display:inline-block; margin-bottom:0; padding:0;}
 	.media-pages-tablet ul li{display:inline-block; padding:0 25px; list-style-type:none;}
 	.media-pages-tablet ul li a{color:#5c5c5c;}
-	.user-btns a.btn3{font-size:0; border:0; text-align:center;}
+	/*.user-btns a.btn3{font-size:0; border:0; text-align:center;}
 	.user-btns a.btn3 img{display:inline-block;}
-	.user-btns a.btn3:hover{background:none;}
+	.user-btns a.btn3:hover{background:none;}*/
 	.main-user-option ul.custom-select{border-bottom:1px solid #d2d2d2;}
 	.main-user-option ul.custom-select li{width:100%; text-align:left; border-right:none; position:relative;}
 	.main-user-option ul.custom-select li a{ padding:10px 15px;}
