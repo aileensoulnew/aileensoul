@@ -380,7 +380,7 @@ if($browser == "Firefox")
                             {
                             //if(in_array($first_segment, $page_arr)): ?>
                             <form ng-submit="search_submit" id="mobile_ser_frm" name="mobile_ser_frm" action="<?php echo base_url('search') ?>">
-                                <input type="text" name="q" placeholder="Search..a" id="mob_search">
+                                <input type="text" name="q" placeholder="Search.." id="mob_search">
                             </form>
                             <?php /*else: ?>
                             <a href="#search">
