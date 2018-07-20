@@ -88,43 +88,8 @@
                         </ul>
                         <p class="text-left p10"><a href="<?php echo artist_location_list ?>">View More Locations</a></p>
                     </div>
-
-                    <!-- <div class="custom_footer_left fw">
-                        <div class="">
-                            <ul>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> About Us 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Blogs 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
+					<?php echo $left_footer_list_view; ?>
+                    
                 </div>
                 <div class="middle-part">
                     <div class="page-title">
@@ -174,7 +139,7 @@
                 </div>
                 <div class="right-part">
                    
-					<?php echo $left_footer_list_view; ?>
+					
                 </div>
             </div>
         
