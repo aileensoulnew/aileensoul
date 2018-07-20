@@ -73,7 +73,7 @@ overflow: hidden}
 .msg-box .ui-tabs .ui-tabs-nav{height:70px; padding:10px; border:none; border-bottom:1px solid #d2d2d2; background:none; border-radius:0;}
 #chat-messages{width:100%; float:left; padding:10px; height:420px;}
 .chat-message{position:relative; width:100%; float:left; margin-bottom:30px;}
-.chat-message .chat-name .contact-img{position:absolute; bottom:26px; left:0;}
+.chat-message .chat-name .contact-img{position:absolute; bottom:26px; /*left:0;*/}
 .chat-message .chat-name .chat-text{margin-left:65px; float:left; max-width:85%; border-radius:15px; padding:10px; border-bottom-left-radius:0; font-size:15px; color:#7b7b7b; margin-top:5px; border:1px solid #d2d2d2;}
 .chat-message .chat-name .msg-send-time{padding-left:65px; width:100%; padding-top:5px; float:left; font-size:12px; color:#7b7b7b; text-align:left; }
 
