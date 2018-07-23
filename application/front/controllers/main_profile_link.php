@@ -34,7 +34,7 @@
 
         /*code for freelance hire link start */
         $contition_array = array('user_id' => $userid,'is_delete' => '0', 'status' => '1');
-        $freelancer_hire_profile_count = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $freelancer_hire_profile_count = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');        
         /*Code for freelance hire profile link ends*/
 
         /*code for freelace apply link start */
