@@ -1873,11 +1873,11 @@ Your browser does not support the audio tag.
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
@@ -1895,7 +1895,15 @@ Your browser does not support the audio tag.
                 }
                 else
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    if($postDetailData[0]['post_data']['post_for'] != "question")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+                    else
+                    {                        
+                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                    }
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -1941,11 +1949,11 @@ Your browser does not support the audio tag.
                 $post_id = $comment_data['post_id'];
                 $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
@@ -1963,7 +1971,15 @@ Your browser does not support the audio tag.
                 }
                 else
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    if($postDetailData[0]['post_data']['post_for'] != "question")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+                    else
+                    {                        
+                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                    }
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -2006,11 +2022,11 @@ Your browser does not support the audio tag.
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
@@ -2027,8 +2043,16 @@ Your browser does not support the audio tag.
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
                 }
                 else
-                {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                {                    
+                    if($postDetailData[0]['post_data']['post_for'] != "question")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+                    else
+                    {                        
+                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                    }
                 }                
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -4978,11 +5002,11 @@ Your browser does not support the audio tag.
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
@@ -5000,7 +5024,15 @@ Your browser does not support the audio tag.
                 }
                 else
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    if($postDetailData[0]['post_data']['post_for'] != "question")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+                    else
+                    {                        
+                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                    }
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -5046,11 +5078,11 @@ Your browser does not support the audio tag.
                 $post_id = $comment_data['post_id'];
                 $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
@@ -5068,7 +5100,15 @@ Your browser does not support the audio tag.
                 }
                 else
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    if($postDetailData[0]['post_data']['post_for'] != "question")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+                    else
+                    {                        
+                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                    }
                 }
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
@@ -5111,11 +5151,11 @@ Your browser does not support the audio tag.
 
                 $postDetailData = $this->user_post_model->postDetail($total['not_product_id'], $userid);
                 
-                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
@@ -5133,7 +5173,15 @@ Your browser does not support the audio tag.
                 }
                 else
                 {
-                    $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    if($postDetailData[0]['post_data']['post_for'] != "question")
+                    {
+                        $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                    }
+                    else
+                    {                        
+                        $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
+                        $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                    }
                 }                
 
                 $user_data = $this->user_model->getUserData($total['not_from_id']);
