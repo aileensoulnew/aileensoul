@@ -93,24 +93,8 @@ a:hover{text-decoration:none;}
 .fs22{font-size:22px;}
 /***  buttons  ***/
 button{border:none;}
-.modal-close{
-	height: 30px;
-	width: 30px;
-	background: #1b8ab9;
-	color: #fff;
-	font-size: 24px;
-	border: 1px solid #1b8ab9;
-	border-radius: 50%;
-	position: absolute;
-	top: -15px;
-	right: -15px;
-	line-height: 22px;
-	margin: 0;
-	text-align: center;
-	z-index: 7;
-	padding: 4px 7px;
-	border-radius: 100%;
-}
+.modal-close{background: none; color: #7b7b7b; font-size: 24px; position: absolute; top: 3px; right: 5px; z-index: 7; padding:0;}
+.modal-close:hover{color:#5c5c5c;}
 .btn1{
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9)); 
 	background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
@@ -1636,7 +1620,7 @@ a:focus{outline:none;}
 	.sub-menu li.dropdown .dropdown-menu::before{width:20px; height:10px; top:10px;}
 	.mobile-header .sub-header .sub-menu li ul li a{display:block; text-align:left;}
 	.sub-header-search .container{position:relative;}
-	.mobile-header .sub-header{top:50px;}
+	.mobile-header .sub-header{top:49px;}
 	.sub-header-search .search-mob-block{position: absolute; left: 60px; z-index: 99999; top: -72px;}
 	.sub-header-search{display:block;}
 	.mobile-header .sub-header .dropdown.open:nth-child(2) .dropdown-menu{left:-56px !important; right:inherit !important;}

@@ -83,6 +83,7 @@
                 <div class="container pt20 mobp0">
                     <div class="left-part">
                         <?php echo $fa_leftbar; ?>
+						<?php echo $left_footer_list_view; ?>
                         <!-- <div class="custom_footer_left fw">
                             <div class="">
                                 <ul>
@@ -227,7 +228,7 @@
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display hidden-1279 animated fadeInRightBig"> 
 
-                        <?php echo $left_footer_list_view; ?>
+                       
 
                     </div>
                 </div>

@@ -58,6 +58,7 @@
                 <div class="container pt20 mobp0 mobmt15">
                     <div class="left-part">
                         <?php echo $artist_left; ?>
+						<?php echo $left_footer_list_view; ?>
                         <!-- TOP CATEGORIES FILTER -->
                         <!-- <div class="left-search-box list-type-bullet">
                             <div class="">
@@ -225,7 +226,7 @@
                     </div>
                     <div class="right-part">
                        
-    					<?php echo $left_footer_list_view; ?>
+    					
                     </div>
                 </div>        
     			<div>

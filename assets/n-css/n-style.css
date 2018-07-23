@@ -143,7 +143,7 @@ body.main-message{padding-bottom:0;}
 .post-popup-box{width:100%; float:left; border-radius:4px;}
 .post-popup-box .post-box{padding:15px;}
 .post-popup-box .post-box .post-text{padding:9px 0px 10px 10px;}
-.post-popup-box textarea{padding:0px; min-height: 105px; font-size: 15px !important; resize: none; border: none; line-height:1.5; letter-spacing:1px; /*overflow-y:scroll;*/}
+.post-popup-box textarea{padding:0px; min-height: 160px; font-size: 15px !important; resize: none; border: none; line-height:1.5; letter-spacing:1px; /*overflow-y:scroll;*/}
 .post-popup-box	.post-box .post-text{width:498px;}
 .post-popup-box .post-area{padding:10px; background:#fff; width:100%; float:left;}
 #ask_question.edit-question-form .all-upload{margin-bottom:10px;}
@@ -1051,7 +1051,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .article-content p{padding-bottom:10px;}
 .article-all-comment{border-top:1px solid #d2d2d2;}
 .like-img a{display:inline-block;}
-.like-img a img{width:50px; height:50px;  border-radius:4px;  border:1px solid #d2d2d2;}
+.like-img a img{width:50px; height:50px;  border-radius:100%;  border:1px solid #d2d2d2;}
 .user-likes{margin-bottom:5px;}
 .user-likes a{width:50px; height:50px; border:1px solid #d2d2d2; border-radius:4px !important;}
 .user-likes a i{margin:5px 7px 7px;}
@@ -2383,7 +2383,8 @@ label.cameraButton{min-height:43px;}
 .ld-sub-header li.tab-first-li ul li{padding:5px 10px;}
 
 /***  end main landing page sub header  ***/
-.new-ld-page .left-part{position:absolute;}
+.new-ld-page .left-part{position:relative;}
+.new-ld-page .middle-part{left:15px;}
 .new-ld-page .right-part{position:absolute;}
 
 
@@ -2424,6 +2425,8 @@ label.cameraButton{min-height:43px;}
     background: -ms-linear-gradient(top,#e9e9e9 5%,#f9f9f9 100%) !important;
     background: linear-gradient(to bottom,#e9e9e9 5%,#f9f9f9 100%) !important;
     color: #5c5c5c;}
+.all-upload .form-group{margin-bottom:0;}
+.new-ld-page .mian_middle_post_box{position:relative; left:15px; margin-left:0;}
 	
 /***  end extra  ***/
 
@@ -2830,7 +2833,7 @@ label.cameraButton{min-height:43px;}
 	.questionSuggetion.question-available{width: calc(100% - 30px); float:left; margin-left:15px;}
 	.edit-comment .comment-input{width:100%; padding-right:0;}
 	.edit-comment .comment-input .editable_text{padding-right:35px;}
-	.modal2{background:rgba(0,0,0,1);}
+	.modal2{background:rgba(0,0,0,1); z-index:999999;}
 	.modal2 .modal-dialog{transform: scale(1) !important;
 	-ms-transform: scale (1) !important;
 	-webkit-transform: scale(1) !important;

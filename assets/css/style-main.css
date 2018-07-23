@@ -396,7 +396,7 @@ header h2{
 }
 .profile-modal-close, .modal-close,
 .modal-close1 {
-    height: 30px !important;
+    /*height: 30px !important;
     width: 30px !important;
     background: #1b8ab9 !important;
     color: #fff !important;
@@ -411,9 +411,9 @@ header h2{
     text-align: center !important;
     z-index: 7 !important;
     padding: 4px 7px;
-    border-radius: 100%;
+    border-radius: 100%;*/
 }
-.cust-modal-close{    height: 26px !important;
+.cust-modal-close{ /*   height: 26px !important;
     width: 26px !important;
     background: #1b8ab9 !important;
     color: #fff !important;
@@ -427,7 +427,7 @@ header h2{
     margin: 0 !important;
     text-align: center !important;
     z-index: 7 !important;
-    padding: 2px 3px;}
+    padding: 2px 3px;*/}
 .modal.message-box .modal-body {
     text-align: center;
 }

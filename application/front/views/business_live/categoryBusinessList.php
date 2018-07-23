@@ -54,6 +54,7 @@
                 <div class="container pt20 mobp0 mobmt15">
                     <div class="left-part">
                         <?php echo $business_left; ?>
+						<?php echo $left_footer; ?>
                         <!-- <div class="left-search-box list-type-bullet">
                             <div class="">
                                 <h3>Top Categories</h3>
@@ -230,7 +231,7 @@
                     </div>
                     <div class="right-part">
                        
-    					<?php echo $left_footer; ?>
+    					
                     </div>
                 </div>
            
@@ -315,7 +316,7 @@
                 </div>
 	        </div>
 		</div>
-        <?php $this->load->view('mobile_side_slide'); ?>
+        <?php // $this->load->view('mobile_side_slide'); ?>
 		
         <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
