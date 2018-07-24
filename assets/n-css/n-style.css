@@ -664,7 +664,7 @@ box-shadow: 2px 2px 17px 0.8px rgba(217,217,217,1);}
 .how-it-popup .modal-header a{color:#bababa; font-size:18px; margin-top:-10px;}
 .how-it-popup .modal-header a:hover{color:#777;}
 .how-it-popup .modal-body{padding:0; width:100%; float:left;}
-.how-it-popup .modal-body h3{text-align:center; color:#fff; display:inline-block; margin:0 0 10px; font-size:28px; -webkit-text-fill-color:inherit;
+.how-it-popup .modal-body h3{text-align:center; color:#fff; display:inline-block; margin:0 0 10px; font-size:28px; -webkit-text-fill-color:#fff;
 border-bottom: 0px;}
 .how-it-popup .pro_img{
 	background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); /* ff3.6+ */
@@ -2405,7 +2405,7 @@ label.cameraButton{min-height:43px;}
 .profile-job-profile-button{background:#f6f6f6;}
 .apply-btn{background:#f6f6f6;}
 .error-page .search-banner{background:none;}
-.post-field .form-group input[type="text"]:focus{box-shadow:none;}
+.post-field .form-group input[type="text"]:focus{box-shadow:none; border-bottom:0px;}
 .post-field .form-group textarea:focus{border-bottom:1px solid #d2d2d2 !important;}
 .camer_h i{color:#d2d2d2;}
 .registeration #register_form select.error{color:#7b7b7b !important;}
