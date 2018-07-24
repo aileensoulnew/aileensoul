@@ -64,7 +64,7 @@ if($browser == "Firefox")
 								</a>
                             </li>
 							<li class="dropdown">
-                                <a href="http://message.aileensoul.com" title="Messages" class="dropdown-toggle">
+                                <a href="<?php echo MESSAGE_URL; ?>" title="Messages" class="dropdown-toggle">
 									<svg x="0px" y="0px" width="24px" height="24px" viewBox="0 0 30.743 30.744">
 <g>
 	<path d="M28.585,9.67h-0.842v9.255c0,1.441-0.839,2.744-2.521,2.744H8.743v0.44c0,1.274,1.449,2.56,2.937,2.56h12.599l4.82,2.834
@@ -578,7 +578,7 @@ if($browser == "Firefox")
             </li>
             <li class="dropdown">
                 <div class="mob-btm-icon">
-                    <a href="#" class="" title="message">
+                    <a href="<?php echo MESSAGE_URL; ?>" class="" title="message">
                         <svg class="not-hover" width="25px" height="25px" viewBox="0 0 2133.000000 2133.000000">
                             <g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
                                 <path d="M1660 18783 c-94 -10 -265 -48 -373 -83 -271 -90 -508 -233 -716
