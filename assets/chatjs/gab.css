@@ -93,10 +93,18 @@ overflow-y: scroll; overflow-y: auto;}
 .msg-box #roster-area .content{height:488px;}
 .contact-detail .roster-job{ display: none;}
 #chat-area .chat-event{position:absolute; left:15px; bottom:60px; font-size:14px; font-style:normal;}
+#contact-user-search-list{display: none;}
+.datetime {text-align: center; float: left; width: 100%;}
+.msg-mob-back{display: none;}
+#loader_con{text-align: center; display: block; margin-top: -63px; background: #fff; width: 100%; padding: 10px; position: relative;}
+
 /*** end message custom  ***/
 
 /***  media query   ***/
 @media screen and (max-width: 767px) {
-	.chat-right{display:none;}
+    .chat-right{display:none;}
+    #chat-area{display: none;}
+    #chat-area.chat-right{display: block;}
+    #roster-area.chat-left{display: none;}
+    .msg-mob-back.chat-right-back{display: block;}
 }
-
