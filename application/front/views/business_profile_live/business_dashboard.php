@@ -202,6 +202,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </table>
                             </div>
                         </div>
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
             <div class="user-midd-section">
                 <div class="container art_container mobp0 manage-post-custom">
 
@@ -331,14 +334,15 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             <div class="business-all-post">
                             </div>
                             <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="loader" /></div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
                     </div>
 
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-
-
-
-                    </div>
+						<?php $this->load->view('right_add_box'); ?>
+					</div>
 
                 </div>
             </div>

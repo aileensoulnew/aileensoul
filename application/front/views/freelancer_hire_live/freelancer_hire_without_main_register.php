@@ -94,7 +94,11 @@
                     <h2><span>Get the Job Done</span><a class="pull-right btn-1" href="#">Post a Project</a></h2>
                 </div>
             </div>
-            
+            <div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="how-about-profile">
                 <div class="container">
                     <div class="center-title" >
@@ -121,6 +125,11 @@
                     </div>
                 </div>
             </div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="how-it-work">
                 <div class="container">
                     <div class="center-title" >
@@ -185,6 +194,11 @@
                         </div>
                     </div>
                 </div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
 			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>
         </div>

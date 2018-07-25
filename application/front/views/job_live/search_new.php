@@ -289,6 +289,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     <div class="page-title">
                         <h3>Search for <?php echo $q.($l != "" ? " jobs in ".$l : '') ; ?></h3>
                     </div>
+					<div class="tab-add">
+						<?php $this->load->view('infeed_add'); ?>
+					</div>
                     <div class="user_no_post_avl ng-scope" ng-if="job_search.length == 0">
                         <div class="user-img-nn">
                             <div class="user_no_post_img">
@@ -343,7 +346,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     </div>
                 </div>
                 <div class="right-part">
-                    
+                    <?php $this->load->view('right_add_box'); ?>
                    
                 </div>
 

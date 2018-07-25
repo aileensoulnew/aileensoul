@@ -1,5 +1,8 @@
 <div class="container pt20 mobp0 contacts-page">
     <div class="custom-user-list">
+		<div class="tab-add">
+			<?php $this->load->view('banner_add'); ?>
+		</div>
         <div class="list-box-custom">
             <h3>Contacts</h3>
             <div class="p15 fw mobp0" id="nocontact">
@@ -51,10 +54,11 @@
                 </div>
             </div>
         </div>
+		<div class="tab-add">
+			<?php $this->load->view('banner_add'); ?>
+		</div>
     </div>
     <div class="right-add">
-        <div class="custom-user-add">
-            <img ng-src="<?php echo base_url('assets/n-images/add.jpg') ?>">
-        </div>
+        <?php $this->load->view('right_add_box'); ?>
     </div>
 </div>

@@ -122,6 +122,9 @@
                         </div> -->
                     </div>
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <!--<div class="common-form">-->
                         <!--</div>-->
                         <div class="page-title">
@@ -219,6 +222,9 @@
                                 </div>
                          <?php endforeach;
                         endif;?>
+						<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <?php echo $links; ?>
                         <div id="loader" style="display: none;">
                             <p style="text-align:center;">
@@ -227,7 +233,7 @@
                         </div>
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display hidden-1279 animated fadeInRightBig"> 
-
+						<?php $this->load->view('right_add_box'); ?>
                        
 
                     </div>

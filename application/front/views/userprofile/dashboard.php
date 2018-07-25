@@ -300,6 +300,10 @@
                     </div>
                 </div>
             </div>
+			<div class="tab-add">
+				<?php $this->load->view('infeed_add'); ?>
+			</div>
+			
             <!-- Repeated Class Start -->
             <div class="all_user_post">
                 <div class="user_no_post_avl" ng-if="postData.length == 0">
@@ -738,14 +742,15 @@
                         </div>
                     </div>
                 </div>
+				<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
             </div>
             <!-- Repeated Class Complete -->
             <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
         </div>
         <div class="right-part">
-            <div class="add-box">
-                <img ng-src="<?php echo base_url('assets/n-images/add.jpg') ?>">
-            </div>
+            <?php $this->load->view('right_add_box'); ?>
             <?php
             $all_c_no_login = "";
             if($user_id == ""){

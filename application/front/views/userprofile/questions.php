@@ -1,7 +1,7 @@
 <div class="container pt20 mobp0">
     <div class="custom-user-list question-page">
         <div class="list-box-custom">
-            <h3>Questions</h3>
+            <h3 class="border-none">Questions</h3>
             <div class="custom-user-box no-data-available"  ng-if="questionData.length == '0' ">
                 <div class="art-img-nn">
                     <div class="art_no_post_img">
@@ -13,6 +13,9 @@
                 </div>
             </div>
         </div>
+		<div class="tab-add">
+			<?php $this->load->view('infeed_add'); ?>
+		</div>
         <div class="all-post-box" ng-repeat="post in questionData" ng-init="queIndex=$index">
             <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
             <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
@@ -183,12 +186,13 @@
                 </div>
             </div>
         </div>
+		<div class="tab-add">
+			<?php $this->load->view('banner_add'); ?>
+		</div>
         <div class="fw post_loader" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
     </div>
     <div class="right-add">
-        <div class="custom-user-add">
-            <img ng-src="<?php echo base_url('assets/n-images/add.jpg') ?>">
-        </div>
+        <?php $this->load->view('right_add_box'); ?>
     </div>
 </div>
 

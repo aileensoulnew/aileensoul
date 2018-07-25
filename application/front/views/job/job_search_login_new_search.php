@@ -257,7 +257,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
                         <!--<div class="common-form">-->
-
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div class="page-title">
                                 <h3>
 
@@ -338,11 +340,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </div>
 
                             </div>
+							<div class="banner-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                         <!--</div>-->
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 
-                        
+                        <?php $this->load->view('right_add_box'); ?>
 
                     </div>
 

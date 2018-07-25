@@ -1879,7 +1879,7 @@ li .custom-user-box.no-data-available{border:0; padding: 15px;}
 .how-about-profile{padding-top:100px;}
 .how-about-profile p{padding-bottom:10px; line-height:2; letter-spacing:0.5px;}
 .how-about-profile .pull-right img{width:100%;}
-.border-none{border:0px;}
+.border-none{border:0px !important;}
 .email-cus{position:relative;}
 .email-cus .email-tooltip{display:block; position:absolute; right:23px; top:7px; width:20px; height:20px;}
 .email-cus .email-tooltip img{width:100%;}
@@ -2427,7 +2427,7 @@ label.cameraButton{min-height:43px;}
     color: #5c5c5c;}
 .all-upload .form-group{margin-bottom:0;}
 .new-ld-page .mian_middle_post_box{position:relative; left:15px; margin-left:0;}
-	
+.tab-add{/*display:none;*/}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -2503,6 +2503,7 @@ label.cameraButton{min-height:43px;}
 
 }
 @media screen and (max-width: 991px) {
+	.tab-add{display:block;}
 	.tab-mb15{margin-bottom:15px;}
 	/***  all profile  ***/
 	.custom-box .custom-width{max-width:735px;}

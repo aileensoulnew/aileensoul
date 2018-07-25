@@ -121,6 +121,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     </div> -->
                 </div>                
                 <div class="middle-part">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3>Search Result</h3>
                     </div>
@@ -194,6 +197,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                 </p>
                             </div>
                         </div>
+						<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div id="loader" style="display: none;">
                             <p style="text-align:center;">
                                 <img src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="<?php echo 'loaderimage'; ?>"/>
@@ -202,7 +208,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 						
                 </div>
                 <div class="right-part">
-                    
+                    <?php $this->load->view('right_add_box'); ?>
                     
                 </div>
 

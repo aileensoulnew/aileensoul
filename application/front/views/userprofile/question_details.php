@@ -349,9 +349,12 @@
                             </div>
                         </div>
                     </div>
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                 </div>
                 <div class="right-part">
-                   
+                   <?php $this->load->view('right_add_box'); ?>
                 </div>
 
 

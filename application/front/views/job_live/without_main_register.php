@@ -26,7 +26,11 @@
         <div class="middle-section middle-section-banner new-ld-page">
 			
             <?php echo $search_banner ?>
-
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="job-cat-lp" >
                 <div class="container" >
                     <div class="center-title" ><!--  -->
@@ -59,6 +63,9 @@
                         <?php  endforeach;
                             endif; ?>
                     </div>
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="p20 fw" ><!--  -->
                         <p class="p20 text-center"><a href="<?php echo base_url(); ?>jobs-by-categories" class="btn-1">View More</a></p>
                     </div>
@@ -112,6 +119,11 @@
                     </div>
                 </div>
             </div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="related-article">
                 <div class="container">
                         <div class="center-title" ><!--  -->
@@ -211,7 +223,11 @@
                             </div>
                         </div>
                     </div>
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                 </div>
+				
             </div>
 			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>

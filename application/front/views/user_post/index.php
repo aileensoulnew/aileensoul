@@ -127,8 +127,12 @@
                             </div>
                         </div>
                     </div>
+					<div class="tab-add">
+						<?php $this->load->view('infeed_add'); ?>
+					</div>
                     <!-- Repeated Class Start -->
                     <div class="all_user_post">
+						
                         <div  class="user_no_post_avl" ng-if="postData.length == 0 || postData == ' null' || postData == 'null'"><h3>Feed</h3><div class="user-img-nn">
                                 <div class="user_no_post_img">
                                     <img src="<?php echo base_url('assets/img/bui-no.png'); ?>" alt="bui-no.png">
@@ -608,15 +612,14 @@
                                 </div>
                             </div>
                         </div>
-
+						
                     </div>
                     <!-- Repeated Class Complete -->
+					
                     <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
                 </div>
                 <div class="right-part">
-                    <!-- <div class="add-box">
-                        <img ng-src="<?php //echo base_url('assets/n-images/add.jpg') ?>">
-                    </div> -->
+                    <?php $this->load->view('right_add_box'); ?>
                     <div class="all-contact">
                         <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_self">All</a></h4>
                         <div class="all-user-list">
@@ -662,7 +665,10 @@
                         </div>
                     </div>
                 
-					 <?php echo $left_footer; ?>
+					<?php echo $left_footer; ?>
+					
+					
+					
 				</div>
             </div>
         </div>

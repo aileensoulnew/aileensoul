@@ -185,15 +185,12 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </div>      
+                                        </div> 
+																				
                                     </div>
-
-                                    <div id="hideuserlist" class=" fixed_right_display animated fadeInRightBig"> 
-
-
-
-                                    </div>
-                                    <?php echo $left_footer; ?>
+									<?php $this->load->view('right_add_box'); ?>
+									<?php echo $left_footer; ?>
+                                    
                                 </div>
 
                             </div>
@@ -214,6 +211,9 @@
                                 foreach ($postdata as $post) {
                                     ?>
                                     <div class="inner-right-part">
+										<div class="tab-add">
+											<?php $this->load->view('banner_add'); ?>
+										</div>
                                         <div class="page-title">
                                             <h3>
                                                 <?php
@@ -437,7 +437,11 @@
                                                     <?php } ?>
                                                 </div>
                                             <?php } ?>
+											<div class="banner-add">
+											<?php $this->load->view('banner_add'); ?>
+										</div>
                                         </div>
+										
                                     </div>
                                     <!-- end sortlisted employe -->
 
@@ -454,11 +458,13 @@
                                         <div class="art_no_post_text">
                                             No  Projects Available.
                                         </div>
+										
                                     </div>
+									
                                 </div>
                             <?php } ?>
 
-
+							
 
 
 
@@ -628,12 +634,14 @@
                                                 </div>
                                             </div>
                                         </div>
+										
                                     <?php }
                                     ?>
-
+									
                                 </div>
 
                             <?php } ?>
+							
 
                         </div>
                     </div>

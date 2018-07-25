@@ -68,6 +68,9 @@
             <?php 
         } ?>
             <div class="container pt20 mobp0 mobmt15">
+				<div class="tab-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
                 <div class="custom-user-list">
                     <div class="list-box-custom border-none cus-job">
                         <div class="">
@@ -103,12 +106,15 @@
                                     </div>                        
                                 </div>
                             </div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
                                     
                     </div>
                 </div>
                 <div class="right-part">
-                 
+					<?php $this->load->view('right_add_box'); ?>
                     
                 </div>
             </div>

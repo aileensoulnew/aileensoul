@@ -240,7 +240,7 @@
                     </div>
                 </div>
                 <div class="right-part">
-                    
+                    <?php $this->load->view('right_add_box'); ?>
 					<?php echo $left_footer; ?>
                 </div>
             </div>

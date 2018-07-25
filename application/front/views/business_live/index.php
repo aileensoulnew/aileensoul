@@ -57,6 +57,11 @@
                     </div>
                 </div>
             <?php } ?>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
 
             <!-- TOP CATEGORY LIST -->
             <div class="job-cat-lp">
@@ -81,6 +86,11 @@
                         <?php endforeach;
                         endif; ?>
                     </div>
+				
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
+			
                     <div class="p20 fw">
                         <p class="p20 text-center"><a class="btn-1" href="<?php echo base_url('business-by-categories') ?>">View More</a></p>
                     </div>
@@ -110,6 +120,10 @@
                         <?php endforeach;
                         endif; ?>
                     </div>
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
+			
                     <div class="p20 fw">
                         <p class="p20 text-center"><a href="<?php echo base_url('business-by-location') ?>" class="btn-1">View More</a></p>
                     </div>
@@ -152,7 +166,11 @@
                     </div>
                 </div>
             </div>
-
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <!-- HOW IT WORKS -->
             <div class="how-it-work">
                 <div class="container">
@@ -211,7 +229,11 @@
                             endforeach;
                         endif; ?>
                     </div>
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                 </div>
+				
             </div>
         </div>
 		<div class="bottom-ftr-none">

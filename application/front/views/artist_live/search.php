@@ -95,6 +95,9 @@
                     <div class="page-title">
                         <h3>Search Result {{ searchtitle }} </h3>
                     </div>
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="all-job-box search-business" ng-repeat="artist in artistList">
                         <div class="search-business-top">
                             <div class="bus-cover no-cover-upload">
@@ -131,6 +134,9 @@
                         </div>
                         <div class="art_no_post_text">No Result Found..</div>
                     </div>
+					<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                     <div id="loader" class="hidden">
                         <p style="text-align:center;">
                             <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
@@ -138,7 +144,7 @@
                     </div>
                 </div>
                 <div class="right-part">
-                   
+                   <?php $this->load->view('right_add_box'); ?>
 					
                 </div>
             </div>

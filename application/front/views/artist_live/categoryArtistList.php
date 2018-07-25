@@ -138,7 +138,12 @@
                     <div class="middle-part">
                         <div class="page-title">
                             <h3>Search Result</h3>
-                        </div><?php 
+                        </div>
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
+						
+						<?php 
                         if(isset($artistList) && !empty($artistList)):
                             foreach($artistList as $_artistList):
                          ?>
@@ -205,7 +210,9 @@
                                     <?php endif; ?>
                                 </ul>
                             </div>
-                        </div>
+							
+						</div>
+						
                         <!-- NO RESULT FOUND DIV -->
                         <?php endforeach;
                         endif;
@@ -217,6 +224,9 @@
                             <div class="art_no_post_text">No Result Found..</div>
                         </div>
                         <?php endif; ?>
+						<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         <?php echo $links; ?>
                         <div id="loader" class="hidden">
                             <p style="text-align:center;">
@@ -225,7 +235,7 @@
                         </div>
                     </div>
                     <div class="right-part">
-                       
+                       <?php $this->load->view('right_add_box'); ?>
     					
                     </div>
                 </div>        

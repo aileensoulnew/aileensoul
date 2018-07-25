@@ -242,6 +242,9 @@
                     </div>
                 </div>
                 <div class="middle-part">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3>Search Result</h3>
                     </div>
@@ -279,10 +282,13 @@
                             </p>
 
                         </div>
+						<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                     </div>
                 </div>
                 <div class="right-part">
-                   
+					<?php $this->load->view('right_add_box'); ?>
                 </div>
             </div>
         </div>

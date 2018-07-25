@@ -191,8 +191,9 @@
 
                                 
                             </div>
-																					<?php echo $left_footer; ?>
-
+							<?php $this->load->view('right_add_box'); ?>
+							<?php echo $left_footer; ?>
+							
                                 
 
 
@@ -203,7 +204,9 @@
 
                        
                         <div class="inner-right-part">
-                           
+                           <div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <?php
                             if($postdata){ ?>
                                  <div class="page-title">
@@ -481,7 +484,8 @@
 
                                         </div>
                                     </div>
-                                </div>
+									
+								</div>
                                 <?php
                             } } else {
                             ?>
@@ -489,6 +493,10 @@
                             
                             <div class="art_no_post_avl"><h3>Post</h3><div class="art-img-nn"><div class="art_no_post_img"><img src="<?php echo base_url() . 'assets/img/job-no.png';?>" alt="bui-no.png"></div><div class="art_no_post_text">No Post</div></div></div>
                             <?php } ?>
+							
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
 						
                         
@@ -763,6 +771,9 @@
 
                                             </div>
                                         </div>
+										<div class="banner-add">
+										<?php $this->load->view('banner_add'); ?>
+									</div>
                                     </div>
                                     <?php
                                 }

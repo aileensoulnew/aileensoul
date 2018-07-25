@@ -61,7 +61,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                     <div class="middle-part animated fadeInUp">
                         <!--<div class="common-form">-->
-
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div class="page-title">
                                 <h3>
 
@@ -172,12 +174,15 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     <?php echo $links; ?>
                                     <div class="fw" id="loader" style="text-align:center;display: none;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="loaderimage"/></div>
                                 </div>
-
+								
                             </div>
+							<div class="banner-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                         <!--</div>-->
                     </div>
                     <div id="hideuserlist" class="right-part animated fadeInRightBig"> 
-                      
+						<?php $this->load->view('right_add_box'); ?>
                     </div>
 
                 </div>

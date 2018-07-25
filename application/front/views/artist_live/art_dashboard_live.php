@@ -364,12 +364,20 @@ $userid = $this->session->userdata('aileenuser');
                             </div>
                         </div>
 						
-
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                       <div class="custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
                             <div class="art-all-post">
                             </div>
                             <div class="fw" id="loader-post" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
+						<div id="hideuserlist" class="right_middle_side_posrt">
+							<?php $this->load->view('right_add_box'); ?>
+						</div>
 					</div>
                 </div>
             </div>
