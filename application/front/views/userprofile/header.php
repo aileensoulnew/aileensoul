@@ -172,7 +172,7 @@
                 }
                 ?>
                 <a class="btn3" ng-if="follow_value == 1"  ng-click="follow(follow_id, 0, to_id)">Following</a>
-                <a class="btn3" href="<?php echo MESSAGE_URL.$userdata['user_slug']; ?>" target="_self" style="display: inline-block;">Message</a>
+                <a class="btn3" href="<?php echo MESSAGE_URL."user/".$userdata['user_slug']; ?>" target="_self" style="display: inline-block;">Message</a>
             </div>
             <div class="main-user-option-scroll">
                 <div class="table-responsive content horizontal-images">
