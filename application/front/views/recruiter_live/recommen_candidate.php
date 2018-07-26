@@ -212,7 +212,7 @@
                                     
                                     </div>
                                 </div>
-
+								<?php $this->load->view('right_add_box'); ?>
                                <?php echo $left_footer; ?>
                                 
                                 <?php //}  ?>
@@ -221,22 +221,31 @@
                         </div>
                         <!--- search end -->
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div class="common-form ">
                                 <div class="job-saved-box rec-recmn-post">
                                     <h3>
                                         Recommended Candidate
                                     </h3>
+									<div class="tab-add">
+										<?php $this->load->view('infeed_add'); ?>
+									</div>
                                     <div class="contact-frnd-post">
                                         <div class = "job-contact-frnd">
                                             <!--AJAX DATA START FOR RECOMMAND CANDIDATE-->
                                         </div>
+										<div class="tab-add">
+											<?php $this->load->view('banner_add'); ?>
+										</div>
                                         <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt=""<?php echo "LOADERIMAGE"?>/></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
-                            
+                            <?php $this->load->view('right_add_box'); ?>
 							 
                         </div>
                     </div>

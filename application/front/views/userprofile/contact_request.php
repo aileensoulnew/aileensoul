@@ -23,6 +23,9 @@
             <?php echo $header_profile; ?>
             <div class="middle-section middle-section-banner">
                 <div class="container pt20 mobp0">
+					<div class="tab-add">
+						<?php $this->load->view('infeed_add'); ?>
+					</div>
                     <div class="custom-user-list">
                         <div class="list-box-custom">
                             <h3>Pending Contact Request</h3>
@@ -121,6 +124,7 @@
                         </div>
                     </div>
                     <div class="right-part">
+						<?php $this->load->view('right_add_box'); ?>
                         <div class="request-noti">
                             <div class="right-title">
                                 Contact Request Notifications

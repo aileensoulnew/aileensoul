@@ -303,12 +303,19 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </div>
                         </div>
                     </form>
+					<?php $this->load->view('right_add_box'); ?>
                     <?php echo $left_footer; ?>
                 </div>
                 <div class="middle-part">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3>Recommended Job</h3>
                     </div>
+					<div class="tab-add">
+						<?php $this->load->view('infeed_add'); ?>
+					</div>
                     <div class="user_no_post_avl ng-scope" ng-if="recommended_job.length == 0">
                         <div class="user-img-nn">
                             <div class="user_no_post_img">
@@ -361,13 +368,18 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                         </div>
                     </div>
+					<div class="tab-add">
+						<?php $this->load->view('infeed_add'); ?>
+					</div>
                     <div id="loader" style="display: none;">
                         <p style="text-align:center;">
                             <img src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="<?php echo 'loaderimage'; ?>"/>
                         </p>
                     </div>
+					
                 </div>
                 <div class="right-part">
+					<?php $this->load->view('right_add_box'); ?>
                     <div class="edi_origde">
                         <?php                        
                         if ($count_profile == 100) {

@@ -204,16 +204,20 @@
                                     </div>                                
                                 </div>
                             </div>
+							<?php $this->load->view('right_add_box'); ?>
                             <?php echo $left_footer; ?>
                               
                          
                         </div>
                     </div>
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div class="common-form">
                             <div class="job-saved-box">
-                                <h3>
-                                    Search result of 
+                                <h3 class="mb15">
+                                    Search result of
                                     <?php
                                     if ($showser != "" && (trim($showser1) == "" || $showser1)) {
                                         echo '"' . trim($showser,",") . '"';
@@ -226,18 +230,24 @@
                                     }
                                     ?>
                                 </h3>
+								<div class="tab-add">
+									<?php $this->load->view('infeed_add'); ?>
+								</div>
                                 <div class="contact-frnd-post">
                                     
                                     <div class = "job-contact-frnd">
                                         <!--AJAX DATA START FOR RECOMMAND CANDIDATE-->
                                     </div>
+									<div class="banner-add">
+										<?php $this->load->view('banner_add'); ?>
+									</div>
                                     <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIAMGE'; ?>"/></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-                        
+                        <?php $this->load->view('right_add_box'); ?>
                     </div>
                     
                 </div>

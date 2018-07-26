@@ -198,12 +198,18 @@
                             <?php
                         }
                         ?>
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div class="page-title">
                             <h3>Saved Job</h3>
                         </div>
                         <div class="job-contact-frnd">
                         </div>
                          <div class="loader"><p style="text-align:center;"><img  src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="loaderimage"/></p></div>
+						 <div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                     </div>
                     <?php
                     if ($count_profile == 100) {
@@ -230,7 +236,9 @@
                         }
                     } else {
                         ?>
-                        <div class="edit_profile_progress edit_pr_bar">
+						<div class="edit_pr_bar">
+							<?php $this->load->view('right_add_box'); ?>
+                        <div class="edit_profile_progress">
                             <div class="progre_bar_text">
                                 <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                             </div>
@@ -246,7 +254,8 @@
                                 </div>
                             </div>
                         </div>
-                        <?php
+                        </div>
+						<?php
                     }
                     ?>
                 </div>

@@ -240,6 +240,9 @@
                 </div>
             
                 <div class="col-md-7 col-sm-12 mob-clear mobp0">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3>Post</h3>
                     </div>
@@ -247,8 +250,14 @@
 
 
                     </div>
+					<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                        <div class="fw" id="loader"  style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
                 </div>
+				<div class="edit_pr_bar">
+						<?php $this->load->view('right_add_box'); ?>
+					</div>
             </div>
 
             <!-- MIDDLE SECTION END -->

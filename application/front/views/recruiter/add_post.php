@@ -32,14 +32,13 @@
             <!-- MIDDLE SECTION START -->
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container mobp0">
-                    <div class="row">
-                        <h3 class="col-chang cus-chang text-center p20" style="color: #1b8ab9 !important;">Please post your requirement, so that we can recommend you the candidates</h3>
-                        <div class="col-md-2 col-sm-1"> 
-                            <div  class="add-post-button">
-
-
-                            </div></div>
-                        <div class="col-md-8 col-sm-10">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
+					<h3 class="col-chang cus-chang text-center p20" style="color: #1b8ab9 !important;">Please post your requirement, so that we can recommend you the candidates</h3>
+                    <div class="">
+                        
+                        <div class="custom-user-list">
 
                             <div>
                                 <?php
@@ -385,7 +384,13 @@
                                 <div class="col-md-1">
                                 </div>
                             </div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
+						<div class="right-add">
+							<?php $this->load->view('right_add_box'); ?>
+						</div>
 
                     </div>
                 </div>

@@ -37,12 +37,14 @@
             <!-- MIDDLE SECTION START -->
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container mobp0">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-1"> </div>
-                        <div class="col-md-8 col-sm-10 animated fadeInLeftBig">
-
+                    
+                        
+                        <div class="custom-user-list">
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div class="common-form custom-form">
-								<h3 class="col-chang">Edit Job Post</h3>
+								<h3 class="col-chang border-none">Edit Job Post</h3>
 								
 								<div class="job-saved-box">
                                 
@@ -464,8 +466,15 @@
 								</div>
                             </div>
                             </form>
+							
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
-                    </div>
+						<div class="right-add">
+							<?php $this->load->view('right_add_box'); ?>
+						</div>
+                   
                 </div>
             </div>
             <!-- MIDDLE SECTION END-->

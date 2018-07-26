@@ -28,7 +28,7 @@
 
 <?php $this->load->view('adsense');?>
 </head>
-<body class="page-container-bg-solid page-boxed">
+<body class="page-container-bg-solid page-boxed noti-page">
 <?php echo $header_inner_profile; ?>
     <?php echo $dash_header; ?>
     <!-- BEGIN HEADER MENU -->
@@ -40,13 +40,13 @@
 
 <div class="user-midd-section" id="paddingtop_fixed">
    <div class="container mobp0">
-      <div class="row">
-         <div class="col-md-1 col-sm-1">
-         </div>
-         <div class="col-md-10 col-sm-10" style="padding-bottom: 60px;">
+		<div class="custom-user-list">
+			<div class="banner-add">
+				<?php $this->load->view('banner_add'); ?>
+			</div>
             <div class="common-form">
                <div class="job-saved-box">
-                  <h3 style="-webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;                        box-shadow: inset 0px 1px 0px 0px #ffffff;border-bottom: 1px solid #d9d9d9;padding-left: 24px;background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);background-color: #f9f9f9;font-weight: normal;color: #5c5c5c;">View Notification</h3>
+                  <h3>View Notification</h3>
                   <div class="notification-box bg">
                      <div class="common-form">
                         <div class="">
@@ -63,32 +63,14 @@
                   </div>
                </div>
             </div>
-         </div>
-      </div>
-
-      <!-- BEGIN PAGE CONTENT BODY -->
-      <div class="page-content">
-          <div class="container">
-              <!-- BEGIN PAGE BREADCRUMBS -->
-              <!-- END PAGE BREADCRUMBS -->
-              <!-- BEGIN PAGE CONTENT INNER -->
-              <div class="page-content">
-                  <div class="container">
-                      <!-- BEGIN PAGE CONTENT INNER -->
-                      <div class="page-content-inner">
-                          <div class="row">
-                              <div class="col-md-12">
-
-                              </div>
-                          </div>
-                      </div>
-                      <!-- END PAGE CONTENT INNER -->
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- END PAGE CONTENT BODY -->
-      <!-- END CONTENT BODY -->
+			<div class="banner-add">
+				<?php $this->load->view('banner_add'); ?>
+			</div>
+		</div>
+		<div class="right-add">
+			<?php $this->load->view('right_add_box'); ?>
+		</div>
+      
    </div>
    <!-- END CONTENT -->
 </div>

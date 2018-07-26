@@ -262,6 +262,9 @@ if ($job[0]['job_user_image'] != '' && $info) {
                     }
                     ?>
                     <div class="">
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div class="common-form">
                             <div class="job-saved-box">
                                 <h3>Details</h3>
@@ -1511,7 +1514,10 @@ if ($job[0]['work_job_industry']) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+						<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
+					</div>
                                                     <?php
                                                     if ($userid == $id) {
                                                         if ($count_profile == 100) {
@@ -1538,7 +1544,9 @@ if ($job[0]['work_job_industry']) {
         }
     } else {
         ?>
-                            <div class="edit_profile_progress edit_pr_bar">
+			<div class="edit_pr_bar">
+				<?php $this->load->view('right_add_box'); ?>
+                            <div class="edit_profile_progress">
                                 <div class="progre_bar_text">
                                     <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                 </div>
@@ -1554,6 +1562,7 @@ if ($job[0]['work_job_industry']) {
                                     </div>
                                 </div>
                             </div>
+						</div>
         <?php
     }
     ?>

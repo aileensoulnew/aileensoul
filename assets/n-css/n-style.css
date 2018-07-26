@@ -2395,8 +2395,8 @@ label.cameraButton{min-height:43px;}
 .right-header > ul > li:nth-child(3){/*display:none;*/}
 .right-header > ul.test-cus > li:nth-child(3){display:block;}
 .right-header > ul > li:nth-child(4){display:none;}
-.mob-bottom-menu ul > li:nth-child(3){display:none;}
-.mob-bottom-menu li{width:25%; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
+.mob-bottom-menu ul > li:nth-child(3){/*display:none;*/}
+.mob-bottom-menu li{width:20%; float:left; list-style-type:none; margin-bottom:0; padding-left:0;}
 .main-user-profile .user-btns a:last-child{display:none;}
 .custom-user-add{display:none;}
 .add-box{display:none;}
@@ -2427,7 +2427,9 @@ label.cameraButton{min-height:43px;}
     color: #5c5c5c;}
 .all-upload .form-group{margin-bottom:0;}
 .new-ld-page .mian_middle_post_box{position:relative; left:15px; margin-left:0;}
+.noti-page .job-saved-box h3{color:#5c5c5c; font-weight:normal; border-bottom:1px solid #d2d2d2;}
 .tab-add{/*display:none;*/}
+.job-saved-box h3.mb15{margin-bottom:15px;}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -2659,22 +2661,7 @@ label.cameraButton{min-height:43px;}
 	body.profile-main-page{padding-bottom:0;}
 	body.profile-main-page footer{padding-bottom:0;}
 	.left-side-bar ul li.active::after{top:9px;}
-	#chat-area{width:468px;}
-	#roster-area{width:250px;}
-	.contact-img{width:35px; height:35px;}
-	.contact-detail{padding:0px 0px 0 8px;}
-	.contact-detail .roster-name{font-size:14px;}
-	.contact-detail .last-msg{font-size:13px; line-height:1;}
-	.msg-time{width:45px;}
-	.contact-detail{width:148px; padding-top:0;}
-	.msg-time span{line-height:1;}
-	.msg-time .msg-count{line-height:22px;}
-	.chat-message .chat-name.me .chat-text{margin-left:45px; max-width:90%;}
-	.chat-message .chat-name.me .msg-send-time{padding-left:45px;}
-	.chat-message .chat-name .chat-text{margin-right:45px; max-width:90%;}
-	.chat-message .chat-name .msg-send-time{padding-right:45px;}
-	.msg-search{height:55px; padding:10px;}
-	.msg-box .ui-tabs .ui-tabs-nav{height:55px;}
+	
 	footer{/*display:none !important;*/}
 	.mob-detail-custom{display:block;}
 	.post-right-dropdown ul.dropdown-menu li a{font-size:14px;}
@@ -2690,6 +2677,7 @@ label.cameraButton{min-height:43px;}
 	.blog-page .also-like-box .rec-img{height:204px;}
 	.sitemap header{min-height:47px;}
 	.post-box-bottom ul{padding:7px 0 0;}
+	.edit_pr_bar{display:none;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}

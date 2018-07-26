@@ -88,6 +88,9 @@
                         </div>
                         <div class="availabel-data-box" ng-if="postData.length != '0'">
                             <h3>Posts </h3>
+							<div class="tab-add">
+								<?php $this->load->view('infeed_add'); ?>
+							</div>
                             <div class="post_loader" style="text-align:center;">
                                 <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
                             </div>
@@ -356,13 +359,14 @@
                                     </div>
                                 </div>
                             </div>
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
 
                     </div>
                     <div class="right-part">
-                        <div class="add-box">
-                            <img ng-src="<?php echo base_url('assets/n-images/add.jpg') ?>">
-                        </div>
+                        <?php $this->load->view('right_add_box'); ?>
                         <div class="all-contact">
                             <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right">All</a></h4>
                             <div class="all-user-list">

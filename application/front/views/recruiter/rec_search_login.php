@@ -168,7 +168,7 @@
          <div class="common-form">
             <div class="job-saved-box">
                <h3>
-                  Search result of 
+                  Search result of
                   <?php  if($keyword != "" && $keyword1 == ""){echo '"' .  $keyword . '"';}
                      elseif ($keyword == "" && $keyword1 != "") {
                        echo '"' .  $keyword1 . '"';

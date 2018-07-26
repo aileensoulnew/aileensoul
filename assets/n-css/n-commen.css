@@ -1445,7 +1445,7 @@ border: 1px solid #1b8ab9;}
 .custom-popup#view-cover-img .modal-content{padding: 0 15px;}
 .custom-popup#view-cover-img .modal-content{background-color: transparent; box-shadow:none; -webkit-box-shadow:none;}
 .custom-popup#view-cover-img .modal-close:hover, #view-profile-img .modal-close:hover, #myModalImage .modal-close:hover, .all-post-top .modal2 .modal-close:hover, #myModalPhotos .modal-close:hover, #myModalVideo .modal-close:hover {background: rgba(255,255,255,0.1) !important; border-radius: 4px !important;}
-#row2 .cusome_upload img{position: absolute; left: 50%; top: 50%; width: 100%;
+#row2 .cusome_upload img{position: absolute; left: 50%; top: 50%; width: 100.5%;
 -webkit-transform: translate(-50%,-50%);
 -ms-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
