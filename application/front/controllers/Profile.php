@@ -223,7 +223,8 @@ class Profile extends CI_Controller {
 
         $updatdata = $this->common->update_data($data, 'user_login', 'user_id', $abc);
         $this->session->set_userdata('aileenuser', $abc);
-        redirect('profiles/' . $this->session->userdata('aileenuser_slug'), refresh);
+        // redirect('profiles/' . $this->session->userdata('aileenuser_slug'), refresh);
+        redirect(base_url(), refresh);
     }
 
     public function sendEmail($app_name = '', $app_email = '', $to_email = '', $subject = '', $mail_body = '') {
