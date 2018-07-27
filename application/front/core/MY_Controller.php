@@ -250,4 +250,9 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    function __destruct()
+    {
+        $this->db->close();
+    }
+
 }
