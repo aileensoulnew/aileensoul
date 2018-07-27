@@ -103,6 +103,9 @@
                     <div class="page-title">
                         <h3>Search Result</h3>
                     </div>
+					<div class="tab-add">
+						<?php $this->load->view('infeed_add'); ?>
+					</div>
                     <div class="all-job-box search-business" ng-repeat="business in businessList">
                         <div class="search-business-top">
                             <div class="bus-cover no-cover-upload">

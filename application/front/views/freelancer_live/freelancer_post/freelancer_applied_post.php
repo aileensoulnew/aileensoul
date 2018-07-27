@@ -186,6 +186,7 @@
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-12 col-xs-12 mob-clear mobp0">
+						
                         <?php
                         if (!($returnpage)) {
                             if ($count_profile == 100) {
@@ -230,6 +231,9 @@
                             }
                         }
                         ?>
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div class="page-title">
                             <h3>Applied Projects</h3>
                         </div>
@@ -237,6 +241,9 @@
 
 
                         </div>
+						<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div id="loader" style="display: none;"><p style="text-align:center;"><img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>"/></p></div>
                     </div>
                     <?php
@@ -244,7 +251,9 @@
                         if ($count_profile == 100) {
                             if ($freepostdata['progressbar'] == 0) {
                                 ?>
-                                <div class="edit_profile_progress edit_pr_bar complete_profile">
+								<div class="edit_pr_bar">
+								<?php $this->load->view('right_add_box'); ?>
+                                <div class="edit_profile_progress complete_profile">
                                     <div class="progre_bar_text">
                                         <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                     </div>
@@ -261,11 +270,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php
+                                </div>
+								<?php
                             }
                         } else {
                             ?>
-                            <div class="edit_profile_progress edit_pr_bar">
+							<div class="edit_pr_bar">
+								<?php $this->load->view('right_add_box'); ?>
+                            <div class="edit_profile_progress">
                                 <div class="progre_bar_text">
                                     <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                 </div>
@@ -281,7 +293,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                            </div>
+							<?php
                         }
                         ?>
                         <?php

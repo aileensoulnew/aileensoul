@@ -27,9 +27,12 @@
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
                 <div class="container mobp0">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-1"></div>
-                        <div class="col-md-8 col-sm-10 animated fadeInLeftBig">
+                    
+                       
+                        <div class="custom-user-list animated fadeInLeftBig">
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div>
                                 <?php
                                 if ($this->session->flashdata('error')) {
@@ -41,7 +44,7 @@
                                 ?>
                             </div>
                             <div class="common-form custom-form">
-                                <h3 class="col-chang cus-chang"><?php echo $this->lang->line("edit_project"); ?></h3>
+                                <h3 class="col-chang cus-chang border-none"><?php echo $this->lang->line("edit_project"); ?></h3>
                                 <?php echo form_open(base_url('freelancer_hire/freelancer_edit_post_insert/' . $freelancerpostdata[0]['post_id']), array('id' => 'postinfo', 'name' => 'postinfo', 'class' => 'clearfix form_addedit')); ?>
                                 <?php
                                 $post_name = form_error('post_name');
@@ -226,8 +229,13 @@
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
-                    </div>
+					<div class="right-add">
+						<?php $this->load->view('right_add_box'); ?>
+					</div>
                 </div>
             </div>
         </section>

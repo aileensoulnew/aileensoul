@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html  ng-app="freelancerHireListApp" ng-controller="freelancerHireListController">
     <head>
@@ -195,7 +194,7 @@
                                     </div>
                                 </div>
 
-
+								<?php $this->load->view('right_add_box'); ?>
 
                                 <?php echo $left_footer; ?>
 
@@ -215,11 +214,15 @@
 
                         <!-- middle div stat -->
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">
+						
                             <?php if ($this->session->flashdata('error')) { ?>  
                                     <p class="alert alert-success"><?php echo $this->session->flashdata('error'); ?></p>
                             <?php } ?>
                             <div class="common-form rec-recmn-post">
                                 <div class="job-saved-box">
+									<div class="tab-add">
+										<?php $this->load->view('banner_add'); ?>
+									</div>
                                     <h3><?php echo $this->lang->line("recommended_freelancer"); ?></h3>
                                     <div class="contact-frnd-post">
 
@@ -233,11 +236,14 @@
 
                                     </div>
                                 </div>
+								<div class="banner-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                             </div>
                         </div>
                         <!-- middle div  -->
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-
+							<?php $this->load->view('right_add_box'); ?>
                             
 
                         </div>

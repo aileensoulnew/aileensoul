@@ -92,11 +92,14 @@
                     
                 </div>
                 <div class="middle-part">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3>Search Result {{ searchtitle }} </h3>
                     </div>
 					<div class="tab-add">
-						<?php $this->load->view('banner_add'); ?>
+						<?php $this->load->view('infeed_add'); ?>
 					</div>
                     <div class="all-job-box search-business" ng-repeat="artist in artistList">
                         <div class="search-business-top">

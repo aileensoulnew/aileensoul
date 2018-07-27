@@ -28,10 +28,12 @@
                 <?php echo $business_common; ?>
                 <div class="user-midd-section">
                     <div class="container mobp0">
-                        <div class="row">
-                            <div class="col-md-2">
-                            </div>
-                            <div class="col-md-8 col-sm-12">
+                        
+                            
+                            <div class="custom-user-list bus-art-cus-left">
+								<div class="tab-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                                 <div class="common-form">
                                     <div class="job-saved-box">
                                         <h3>Contacts</h3>
@@ -42,8 +44,13 @@
                                         <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
                                     </div>
                                 </div>
+								<div class="banner-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                             </div>
-                        </div>
+							<div class="right-add">
+								<?php $this->load->view('right_add_box'); ?>
+							</div>
                     </div> 
                 </div>
             </section>

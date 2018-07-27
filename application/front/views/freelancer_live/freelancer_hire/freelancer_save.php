@@ -175,7 +175,10 @@
                         </div>
                     
                     </div>
-                    <div class="col-md-8 col-sm-12 mob-clear mobp0">
+                    <div class="col-md-7 col-sm-12 col-xs-12 mob-clear mobp0">
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div class="common-form">
                             <div class="job-saved-box">
                                 <h3><?php echo $this->lang->line("saved_freelancer"); ?></h3>
@@ -185,7 +188,13 @@
                                 </div>
                             </div>
                         </div>
+						<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                     </div>
+					<div class="edit_pr_bar">
+						<?php $this->load->view('right_add_box'); ?>
+					</div>
                 </div>
             </section>
             <?php echo $login_footer ?>

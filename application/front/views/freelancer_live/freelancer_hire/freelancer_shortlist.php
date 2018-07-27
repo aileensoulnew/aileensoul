@@ -42,11 +42,14 @@
                                 ?>
                             </div>
                             <!-- middle div stat -->
-                            <div class="col-md-7 col-sm-7 all-form-content">
+                            <div class="col-md-6 col-sm-6 all-form-content">
+								<div class="tab-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                                 <div class="common-form">
                                     <div class="job-saved-box">
-                                        <h3><?php echo "Short-listed Freelancer"; ?> </h3>
-                                        <div class="contact-frnd-post">
+                                        <h3 class="mb15 border1"><?php echo "Short-listed Freelancer"; ?> </h3>
+                                        <div class="contact-frnd-post border-none p0">
                                             <div class="job-contact-frnd ">
                                                 <?php
                                                 if ($shortlist) {
@@ -254,7 +257,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+								<div class="banner-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
+							</div>
+							<div class="edit_pr_bar">
+								<?php $this->load->view('right_add_box'); ?>
+							</div>
                             <!-- middle div end -->
                         </div>
                     </div>

@@ -27,9 +27,12 @@
                 <?php echo $business_common; ?>
                 <div class="user-midd-section">
                     <div class="container mobp0">
-                        <div class="row">
-                            <div class="col-md-3" style="width: 22%;"></div>
-                            <div class="col-md-7 col-sm-12">
+                        
+                           
+                            <div class="custom-user-list bus-art-cus-left">
+								<div class="tab-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                                 <div class="common-form">
                                     <div class="job-saved-box">
                                         <h3>Details </h3> 
@@ -257,7 +260,15 @@
                                         </div>
                                     </div>
                                 </div>
+								<div class="banner-add">
+									<?php $this->load->view('banner_add'); ?>
+								</div>
                             </div>
+							<div class="right-add">
+								<?php $this->load->view('right_add_box'); ?>
+							</div>
+					</div>
+				</div>
             </section>
             <div class="modal fade message-box biderror" id="bidmodal" role="dialog">
                 <div class="modal-dialog modal-lm">

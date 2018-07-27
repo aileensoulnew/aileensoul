@@ -26,9 +26,11 @@
 				<?php echo $artistic_common; ?>
 				<div class="user-midd-section art-inner">
 					<div class="container mobp0">
-						<div class="col-md-3">  
-						</div>
-						<div class="col-md-8 col-sm-12 follow_mid">
+						
+						<div class="custom-user-list bus-art-cus-left">
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
 							<div>
 								<?php
 									if ($this->session->flashdata('error')) {
@@ -40,7 +42,7 @@
 							</div> 
 							<div class="common-form">
 								<div class="job-saved-box">
-									<h3>Following</h3>
+									<h3 class="border-bottom0">Following</h3>
 									 <div class="contact-frnd-post">
 										<div class = "job-contact-frnd" >
 										</div>
@@ -51,6 +53,12 @@
 									</div>  
 								</div>
 							</div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
+						</div>
+						<div class="right-add">
+							<?php $this->load->view('right_add_box'); ?>
 						</div>
 					</div>
 				</div>       

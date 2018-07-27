@@ -86,6 +86,9 @@ $mobile_agent = $this->agent->mobile;
                     ?>
                     <div class=" custom-right-art mian_middle_post_box animated fadeInUp">
                         <div class="right_side_posrt fl"> 
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div class="post-editor col-md-12">
                                 <div class="main-text-area col-md-12">
                                     <div class="popup-img"> 
@@ -132,6 +135,9 @@ $mobile_agent = $this->agent->mobile;
                                     </div>
                                 </div>
                             </div>
+							<div class="tab-add">
+								<?php $this->load->view('infeed_add'); ?>
+							</div>
                             <div class="custom-user-list">
                                 <?php
                                 if ($follow_user_suggest_count > 0) {
@@ -155,11 +161,15 @@ $mobile_agent = $this->agent->mobile;
                             <div class="business-all-post">
                                 <div class="nofoundpost"></div>
                             </div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div class="fw" id="loader" style="text-align:center; display: none;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
                         </div>
                     </div>
-                    <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-                        
+                    
+					<div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
+                        <?php $this->load->view('right_add_box'); ?>
                         <div class="left-search-box list-type-bullet hidden">
                             <div class="">
                                 <h3>Categories</h3>

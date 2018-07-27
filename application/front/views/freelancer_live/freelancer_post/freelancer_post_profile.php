@@ -383,6 +383,9 @@
                         }
                     }
                     ?>
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="common-form">
                         <div class="job-saved-box">
                             <h3><?php echo $this->lang->line("freelancer_details"); ?> </h3>
@@ -1111,13 +1114,18 @@
                             </div>
                         </div>
                     </div>
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                 </div>
                 <?php
                 if ($freelancerpostdata['0']['user_id'] == $this->session->userdata('aileenuser')) {
                     if ($count_profile == 100) {
                         if ($freepostdata[0]['progressbar'] == 0) {
                             ?>
-                            <div class="edit_profile_progress edit_pr_bar complete_profile">
+							<div class="edit_pr_bar">
+								<?php $this->load->view('right_add_box'); ?>
+                            <div class="edit_profile_progress complete_profile">
                                 <div class="progre_bar_text">
                                     <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                                 </div>
@@ -1134,11 +1142,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                            </div>
+							<?php
                         }
                     } else {
                         ?>
-                        <div class="edit_profile_progress edit_pr_bar">
+						<div class="edit_pr_bar">
+								<?php $this->load->view('right_add_box'); ?>
+                        <div class="edit_profile_progress">
                             <div class="progre_bar_text">
                                 <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
                             </div>
@@ -1154,7 +1165,8 @@
                                 </div>
                             </div>
                         </div>
-                        <?php
+                        </div>
+						<?php
                     }
                     ?>
                     <?php

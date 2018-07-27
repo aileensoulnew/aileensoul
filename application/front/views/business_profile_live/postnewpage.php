@@ -803,13 +803,18 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         </div>
                                     </div>
                                 </div>
+								
                             <?php } ?>
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                         </div>
+						
                     </div>
 
 
                     <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-
+						<?php $this->load->view('right_add_box'); ?>
                     </div>
 
                 </div>

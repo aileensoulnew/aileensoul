@@ -26,9 +26,8 @@
       <?php echo $artistic_common; ?>
        <div class="user-midd-section art-inner">
            <div class="container">
-   <div class="col-md-3"> 
-</div>
-      <div class="col-md-8 col-sm-12 follow_mid mob-plr0">
+
+      <div class="custom-user-list bus-art-cus-left follow_mid">
       <div>
          <?php
             if ($this->session->flashdata('error')) {
@@ -51,6 +50,10 @@
          </div>
       </div>
       </div>
+		<div class="right-add">
+			<?php $this->load->view('right_add_box'); ?>
+		</div>
+	  
       </div>
            </div>
    </section>   

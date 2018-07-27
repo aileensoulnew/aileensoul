@@ -269,7 +269,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                     </div>
                                     
                                 </form>
-
+								<?php $this->load->view('right_add_box'); ?>
                                 <?php echo $left_footer; ?>
                             </div>
                         </div>
@@ -293,6 +293,9 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                 <?php
                             }
                             ?>
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div class="page-title">
                                 <h3>Recommended Projects</h3>
                             </div>
@@ -371,12 +374,15 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                 </div>
 
                             </div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <div id="loader" style="display:none;"><p style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>"/></p></div>
                         </div>
 
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 
-                            
+							<?php $this->load->view('right_add_box'); ?>
                             <div class="edi_origde">
                                     <?php
                                     

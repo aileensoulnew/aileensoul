@@ -66,12 +66,15 @@
                                 </ul>
                                 <p class="text-left p10"><a href="<?php echo base_url('business-by-location') ?>">View More Location</a></p>
                             </div>
-
+							<?php $this->load->view('right_add_box'); ?>
                             <?php echo $left_footer; ?>
                         </div>
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">
                             <div class="">  
                                 <div class="right_side_posrt fl"> 
+									<div class="tab-add">
+										<?php $this->load->view('banner_add'); ?>
+									</div>
                                     <div class="common-form">
                                         <div class="job-saved-box">
                                             <h3>User list</h3>
@@ -89,7 +92,7 @@
                             </div>
                         </div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
-
+							<?php $this->load->view('right_add_box'); ?>
                         </div>
 
                     </div>

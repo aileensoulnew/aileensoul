@@ -1340,7 +1340,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', end
 /***  audio video css  ***/
 
 .mejs__container.mejs__video,.mejs__layers .mejs__poster.mejs__layer,.mejs__mediaelement video,.mejs__overlay.mejs__layer,.video .mejs__poster{width:100%!important; cursor: pointer; height: 100%;}
-.profile-job-post-location-name .user_lst ul li .user_btn{/*padding-top:7px*/}
+.profile-job-post-location-name .user_lst ul li .user_btn{padding-top:0px;}
 #followdiv button{margin-right:0}
 .video li .mejs__container.mejs__video,.video li .mejs__container.mejs__video .mejs__mediaelement video,.video li .mejs__container.mejs__video .mejs__overlay{width:100%!important; height:100%!important}
 .video .mejs__poster{height:100%!important; background-size:100%!important}
@@ -2430,6 +2430,11 @@ label.cameraButton{min-height:43px;}
 .noti-page .job-saved-box h3{color:#5c5c5c; font-weight:normal; border-bottom:1px solid #d2d2d2;}
 .tab-add{/*display:none;*/}
 .job-saved-box h3.mb15{margin-bottom:15px;}
+.edit_pr_bar {width: 23% !important; display: inline-block; margin: 0 !important;}
+.page-boxed .edit_profile_progress{width:100%;}
+.border1{border:1px solid #d2d2d2; border-radius:4px;}
+.bus-art-cus-left{display:block;}
+.border-bottom0{border-bottom:0 !important;}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -3417,6 +3422,7 @@ label.cameraButton{min-height:43px;}
 	.request-btn .btn1{padding:3px 10px; font-size:13px;}
 	.request-btn .btn3{padding:3px 10px; font-size:13px;}
 	.sub-menu.free-h-only li.dropdown.open:nth-child(2)::before{left:51%;}
+	.user-btns a.btn3{width:auto; font-size:12px; padding:4px 15px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
