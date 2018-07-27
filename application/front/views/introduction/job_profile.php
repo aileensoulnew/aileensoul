@@ -33,6 +33,7 @@ header('Expires: ' . $date);
         ?>
         <link rel="canonical" href="<?php echo $actual_link ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css?ver=' . time()); ?>">
 		 <link rel="stylesheet" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>">
 		 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>">
 		 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">

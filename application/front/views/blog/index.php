@@ -105,12 +105,17 @@ header("Pragma: no-cache"); // HTTP/1.0
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>">
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css_min/font-awesome.min.css?ver=' . time()); ?>">
-    <?php $this->load->view('adsense'); ?>
+    <?php $this->load->view('adsense');
+$cat_cls = "";
+if($category_page == 1)
+{
+		$cat_cls = "blog-cat";
+}?>
 </head>
     <?php if (!$this->session->userdata('aileenuser')) { ?>
-        <body class="no-login blog-m blog-page old-no-login">
+        <body class="no-login blog-m blog-page old-no-login <?php echo $cat_cls; ?>">
     <?php }else{?>
-        <body class="blog-m blog-page">
+        <body class="blog-m blog-page <?php echo $cat_cls; ?>">
     <?php }?>
 
     <?php //$this->load->view('page_loader'); ?>
@@ -278,7 +283,10 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <input type="hidden" class="perpage_record" value="4"> -->
                 <div class="container">
                     <div class="custom-user-list">
-						<?php $this->load->view('infeed_add'); ?>
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
+						<div class="clearfix"></div>
                         <?php if($category_name != ""){?>
                             <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;"><?php
                             echo "Category : ".ucwords($category_name)."</h3>";
@@ -343,13 +351,17 @@ header("Pragma: no-cache"); // HTTP/1.0
                         endif; ?>
                         <div class="fw pt20 text-center">
                             <?php echo $links; ?>
-                        </div>      
+                        </div> 
+						<div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
 
                         <!-- <ul>
                           <li ng-repeat="todo in filteredTodos">{{todo.text}}</li>
                         </ul> -->
                     </div>
                     <div class="right-part">
+						<?php $this->load->view('right_add_box'); ?>
                         <form id="subscribe_form" name="subscribe_form" method="post" action="javascript:void(0);">
                             <div id="subscribe-form" class="subscribe-box">
                                 <h4>Subscribe to Our Newslatter</h4>
@@ -361,6 +373,9 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <h4>Your email id subscribe successfully.</h4>
                             </div>
                         </form>
+						<div class="pt20 fw">
+						<?php $this->load->view('right_add_box'); ?>
+						</div>
                     </div>
                 </div>                
             </div>

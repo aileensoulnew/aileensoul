@@ -431,7 +431,9 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <h4>Your email id subscribe successfully.</h4>
                             </div>
                         </form>
+						<div class="pt20 fw">
 						<?php $this->load->view('right_add_box'); ?>
+						</div>
                     </div>
 	    		</div>	    		
 	    	</div>

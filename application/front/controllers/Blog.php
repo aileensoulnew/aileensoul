@@ -149,6 +149,8 @@ class Blog extends CI_Controller {
 
                 $this->data['title'] = "Search | Official Blog for Regular Updates, News and Sharing knowledge - Aileensoul";
                 $this->data['metadesc'] = "Our Aileensoul official blog will describe our free service and related news, tips and tricks - stay tuned.";
+				
+				$this->data['category_page'] = 1;
 
                 // $this->load->view('blog/search', $this->data);
                 $this->load->view('blog/index', $this->data);
@@ -215,8 +217,10 @@ class Blog extends CI_Controller {
                 $this->data['blogPost'] = $blogPost;
                 // print_r($this->data['blogPost']);exit;
                 $this->data['links'] = $this->pagination->create_links();
-
+				
+				$this->data['category_page'] = 0;
                 if($iscategory != ""){
+					$this->data['category_page'] = 1;
                     $this->data['title'] = ucwords($sel_category_name)." Blogs | Aileensoul Knowledge";
                     $this->data['metadesc'] = "Read all best ".ucwords($sel_category_name)." related articles to get more insights about this field.";
                 }

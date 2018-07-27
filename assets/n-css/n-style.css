@@ -1588,8 +1588,10 @@ top: -3px;}
 .blog-details-cus span{padding:0 15px; position:relative;}
 .blog-details-cus span:before{width:3px; height:3px; border-radius:100%; background:#5c5c5c; display:inline-block; content:""; position:absolute; top:8px; left:-2px;}
 .blog-details-cus span:first-child:before{background:none;}
-.subscribe-box{width:100%; float:left; background:#f6f6f6; padding:50px 25px; text-align:center; margin-top:30px;}
-.blog-d .subscribe-box{margin-top:115px;}
+.subscribe-box{width:100%; float:left; background:#f6f6f6; padding:50px 25px; text-align:center; /*margin-top:30px;*/}
+.blog-page .right-part{margin-top:30px;}
+.blog-cat .right-part{margin-top:110px;}
+.blog-d .right-part{margin-top:115px;}
 .subscribe-box h4{font-size:20px; margin:0 0 40px;}
 .subscribe-box input{margin-bottom:20px; text-align:center;}
 .subscribe-box .btn1{width:100%;}
@@ -2498,6 +2500,7 @@ label.cameraButton{min-height:43px;}
 	.mian_middle_post_box{margin-left:10px;}
 	.blog-page .right-part{position:relative; position: relative; left: auto; right: auto; width: 775px; margin-left: 150px; display:block;}
 	.blog-m .right-part{width:100%; margin-left:0;}
+	.blog-m .right-part .right-add-box{display:none;}
 	.blog-page .sub-header .sub-menu li{padding-left:20px; padding-right:20px;}
 	.blog-page .sub-header .sub-menu li:first-child{padding-left:0px;}
 	.subscribe-box{padding:50px;}
