@@ -2428,13 +2428,15 @@ label.cameraButton{min-height:43px;}
 .all-upload .form-group{margin-bottom:0;}
 .new-ld-page .mian_middle_post_box{position:relative; left:15px; margin-left:0;}
 .noti-page .job-saved-box h3{color:#5c5c5c; font-weight:normal; border-bottom:1px solid #d2d2d2;}
-.tab-add{/*display:none;*/}
+.tab-add{display:none;}
 .job-saved-box h3.mb15{margin-bottom:15px;}
 .edit_pr_bar {width: 23% !important; display: inline-block; margin: 0 !important;}
 .page-boxed .edit_profile_progress{width:100%;}
 .border1{border:1px solid #d2d2d2; border-radius:4px;}
 .bus-art-cus-left{display:block;}
 .border-bottom0{border-bottom:0 !important;}
+.banner-add{width:100%; float:left; padding:10px 0;}
+.right-add-box{height:270px;}
 /***  end extra  ***/
 
 /***  media query  ***/
@@ -3422,7 +3424,10 @@ label.cameraButton{min-height:43px;}
 	.request-btn .btn1{padding:3px 10px; font-size:13px;}
 	.request-btn .btn3{padding:3px 10px; font-size:13px;}
 	.sub-menu.free-h-only li.dropdown.open:nth-child(2)::before{left:51%;}
-	.user-btns a.btn3{width:auto; font-size:12px; padding:4px 15px;}
+	.user-btns a.btn3{font-size:12px; padding:4px 15px;}
+	.user-btns a.btn3:first-child{width:38%;}
+	.user-btns a.btn3:nth-child(2){width:28%;}
+	.user-btns a.btn3:nth-child(3){width:28%;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
