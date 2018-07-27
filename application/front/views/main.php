@@ -318,7 +318,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                     </div>
 
                                     <p class="pt-20 text-center">
-                                        <input class="btn btn-theme btn1" type="submit" name="submit" value="Submit" style="width:105px; margin:0px auto;" /> 
+                                        <input class="btn btn-theme btn1" type="submit" name="submit" value="Submit" id="forgot_submit" style="width:105px; margin:0px auto;" /> 
                                     </p>
 
                                     </form>

@@ -165,7 +165,7 @@ header('Expires: ' . $date);
                                         </div>
 
                                         <p class="pt-20 text-center">
-                                            <input class="btn btn-theme btn1" type="submit" name="submit" value="Submit" style="width:105px; margin:0px auto;" /> 
+                                            <input class="btn btn-theme btn1" type="submit" name="submit" value="Submit" id="forgot_submit" style="width:105px; margin:0px auto;" /> 
                                         </p>
 
                                         </form>
@@ -417,6 +417,7 @@ function submitforgotForm()
     var post_data = {
         'forgot_email': email_login,
     }
+    $("#forgot_submit").attr("disabled","true");
     $.ajax({
         type: 'POST',
         url: "<?php echo site_url() . 'profile/forgot_live' ?>",
@@ -428,7 +429,8 @@ function submitforgotForm()
             $("#error").fadeOut();
         },
         success: function (response)
-        { 
+        {
+            $("#forgot_submit").removeAttr("disabled");
             if (response.data == "success") {
                 $("#forgotbuton").html(response.message);
                 setTimeout(function () {

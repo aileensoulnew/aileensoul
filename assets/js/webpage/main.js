@@ -482,6 +482,7 @@ function submitforgotForm()
         'forgot_email': email_login,
 //            csrf_token_name: csrf_hash
     }
+    $("#forgot_submit").attr("disabled","true");
     $.ajax({
         type: 'POST',
         url: base_url + 'profile/forgot_live',
@@ -489,11 +490,12 @@ function submitforgotForm()
         dataType: "json",
         beforeSend: function ()
         {
-            $("#error").fadeOut();
+            $("#error").fadeOut();            
 //            $("#forgotbuton").html('Your credential has been send in your register email id');
         },
         success: function (response)
         {
+            $("#forgot_submit").removeAttr("disabled");
             if (response.data == "success") {
                 //  alert("login");
                 $("#forgotbuton").html(response.message);
