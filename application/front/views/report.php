@@ -81,6 +81,11 @@
 				</div>
 			</div>
 			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
+			<div class="container">
 				<div class="report-middle-box">
 					<p class="text-center">We believe in providing value to each of our members. If you found any issues like spam, abusive, fake news or account, phishing, malware that violates our 
 					<a href="<?php echo base_url('terms-and-condition'); ?>" title="Terms and Condition" target="_blank">Terms of Service</a>, kindly report here. </p>
@@ -115,6 +120,11 @@
 							<button class="btn1" id="btnReport">Submit</button>
 						</div>
 					</form>
+				</div>
+			</div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
 				</div>
 			</div>
 			<?php $this->load->view('mobile_side_slide'); ?>

@@ -413,9 +413,13 @@ header("Pragma: no-cache"); // HTTP/1.0
 		    						</form>
 	    						</div>
 	    					</div>
+							<div class="banner-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
 	    				</div>
 	    			</div>
 	    			<div class="right-part">
+						<?php $this->load->view('right_add_box'); ?>
                         <form id="subscribe_form" name="subscribe_form" method="post" action="javascript:void(0);">
                             <div id="subscribe-form" class="subscribe-box">
                                 <h4>Subscribe to Our Newslatter</h4>
@@ -427,6 +431,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <h4>Your email id subscribe successfully.</h4>
                             </div>
                         </form>
+						<?php $this->load->view('right_add_box'); ?>
                     </div>
 	    		</div>	    		
 	    	</div>

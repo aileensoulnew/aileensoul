@@ -86,6 +86,11 @@ header('Expires: ' . $date);
 					</div>
 				</div>
 			</div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <section class="middle-main">
                 <div class="container">
                     <div id="contactsucc"></div>
@@ -168,6 +173,11 @@ header('Expires: ' . $date);
                 </div>
 
             </section>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
 			<?php $this->load->view('mobile_side_slide'); ?>
             <?php echo $login_footer; ?>
         </div>

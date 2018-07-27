@@ -79,6 +79,11 @@
 					</div>
 				</div>
 			</div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="container">
 				<div class="report-middle-box">						
 					<ul class="faq">
@@ -123,6 +128,11 @@
 							</a>
 						</li>
 					</ul>
+				</div>
+			</div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
 				</div>
 			</div>
 			<?php $this->load->view('mobile_side_slide'); ?>

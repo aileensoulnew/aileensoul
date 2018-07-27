@@ -253,17 +253,20 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <div class="job-contact-frnd">
                                 </div>
                                 <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
+								<?php $this->load->view('right_add_box'); ?>
                                 <ul class="load-more-blog">
                                     <li class="loadbutton"></li>
                                     <li class="loadcatbutton"></li>
                                 </ul>                              
                             </div>
                             <div class="right-part">
+								<?php $this->load->view('right_add_box'); ?>
                 				<div class="subscribe-box">
                 					<h4>Subscribe to Our Newslatter</h4>
                 					<input type="text" class="form-control" placeholder="Enter your email id">
                 					<a class="btn1" href="#">Subscribe</a>
                 				</div>
+								<?php $this->load->view('right_add_box'); ?>
                             </div>
                         </div>
                     </div>
@@ -275,6 +278,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                 <input type="hidden" class="perpage_record" value="4"> -->
                 <div class="container">
                     <div class="custom-user-list">
+						<?php $this->load->view('infeed_add'); ?>
                         <?php if($category_name != ""){?>
                             <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;"><?php
                             echo "Category : ".ucwords($category_name)."</h3>";

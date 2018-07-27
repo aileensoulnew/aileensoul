@@ -94,6 +94,11 @@ header('Cache-Control: public, max-age=30');
 					</div>
 				</div>
 			</div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
 
             <div class="container">
                 <div class="add-content">
@@ -116,6 +121,11 @@ header('Cache-Control: public, max-age=30');
                            <img src="<?php echo base_url('assets/n-images/Advertisedisplay.jpg') ?>" alt="Advertise With Us">
                         </div>
                     </div>
+
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
+			
                     <div class="fw p20">
                         <div class="add-title">
                             <h2>Our Audience.</h2>
@@ -224,6 +234,11 @@ header('Cache-Control: public, max-age=30');
 					<div class="clearfix"></div>
                 </div>
 				<p class="text-center more-support">For more support <a href="mailto:inquiry@aileensoul.com">inquiry@aileensoul.com</a>
+			</div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
 			</div>
         </div>
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog"  >
