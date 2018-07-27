@@ -156,7 +156,7 @@ $(document).ready(function() {
             $.ajax({
                 //url: "/ajaxpro.php", user_image_insert
                 // url: "<?php echo base_url(); ?>freelancer/ajaxpro_test",
-                url: base_url + "freelancer/user_image_insert1",
+                url: base_url + "freelancer_hire_live/user_image_insert1",
                 type: "POST",
                 data: {
                     "image": resp
@@ -237,7 +237,7 @@ $('.upload-result').off('click').on('click', function(ev) {
             return false;
         } else {
             $.ajax({
-                url: base_url + "freelancer/ajaxpro_hire",
+                url: base_url + "freelancer_hire_live/ajaxpro_hire",
                 type: "POST",
                 data: {
                     "image": resp
@@ -298,7 +298,7 @@ $('#upload').on('change', function() {
     }
     $.ajax({
 
-        url: base_url + "freelancer/image_hire",
+        url: base_url + "freelancer_hire_live/image_hire",
         type: "POST",
         data: fd,
         processData: false,
