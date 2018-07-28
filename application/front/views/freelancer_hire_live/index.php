@@ -53,6 +53,11 @@
                 </div>
             </div>
             <!-- HOW ABOUT PROFILE -->
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="how-about-profile">
                 <div class="container">
                     <div class="center-title" >
@@ -86,6 +91,11 @@
                 </div>
             </div>
             <!-- HOW IT WORKS -->
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="how-it-work">
                 <div class="container">
                     <div class="center-title" >
@@ -145,6 +155,11 @@
                     </div>
                 </div>
             </div>
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             
             <div class="bottom-ftr-none">
 				<?php echo $login_footer; ?>

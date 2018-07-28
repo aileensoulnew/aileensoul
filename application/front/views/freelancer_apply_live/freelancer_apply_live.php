@@ -45,48 +45,16 @@
                 <!-- LEFT SIDE FILTER -->
                 <div class="left-part">
                     <?php echo $fa_leftbar; ?>
-                   <!--  <div class="custom_footer_left fw">
-                        <div class="">
-                            <ul>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> About Us 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Blogs 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
+					<?php $this->load->view('right_add_box'); ?>
                     
 
                 </div>
 
                 <!-- MIDDLE PART FOR POST -->
-                <div class="middle-part">   
+                <div class="middle-part">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3>Recommended Projects</h3>
                     </div>
@@ -157,7 +125,7 @@
 
                 <!-- RIGHT SIDE AD IMG -->
                 <div class="right-part">
-                    
+                    <?php $this->load->view('right_add_box'); ?>
 					<?php echo $left_footer_list_view; ?>
                 </div>
             </div>

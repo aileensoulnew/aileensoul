@@ -246,8 +246,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </div>
                         </div>
                     </form>
-					
-                    <?php echo $left_footer; ?>
+					<?php $this->load->view('right_add_box'); ?>
+                    
                     <!-- <div class="custom_footer_left fw">
                         <div class="">
                             <ul>
@@ -353,7 +353,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
                 <div class="right-part">
                     <?php $this->load->view('right_add_box'); ?>
-                   
+                   <?php echo $left_footer; ?>
                 </div>
 
             </div>

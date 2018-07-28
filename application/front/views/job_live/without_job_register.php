@@ -234,11 +234,15 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </div>
                         </div>
                     </form>
+					<?php $this->load->view('right_add_box'); ?>
 					<?php echo $left_footer_list_view; ?>
                     
                     
                 </div>
-                <div class="middle-part">                    
+                <div class="middle-part"> 
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3 class="mob-bt-0">Latest Jobs</h3>
                     </div>
@@ -296,8 +300,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     </div>
                 </div>
                 <div class="right-part">
-                    
-					
+                    <?php $this->load->view('right_add_box'); ?>
+						
                 </div>
             </div>
         

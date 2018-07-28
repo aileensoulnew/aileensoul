@@ -1142,7 +1142,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-banner .control input:checked:focus ~ .control__indicator {border:1px solid #7b7b7b;}
 .search-banner .control--checkbox .control__indicator:after {border: solid #000; border-width: 0 2px 2px 0;}
 .banner-main-div{ 
-	padding:60px 0 0;
+	/*padding:60px 0 0;*/
     display: -webkit-flex; /* Safari */
     -webkit-align-items: center; /* Safari 7.0+ */
     display: flex;
@@ -2438,8 +2438,15 @@ label.cameraButton{min-height:43px;}
 .bus-art-cus-left{display:block;}
 .border-bottom0{border-bottom:0 !important;}
 .banner-add{width:100%; float:left; padding:10px 0;}
-.right-add-box{height:270px;}
+.right-add-box{border:1px solid #d2d2d2; padding:7px; margin-bottom:10px; border-radius:5px; width:100%; float:left;}
+.tab-add{width:100%; float:left;}
+.banner-add{width:100%; float:left;}
 /***  end extra  ***/
+
+.right-add-box .adBlock { width: 300px; height: 250px; }
+ins.adsbygoogle { background: transparent !important; }
+/*@media (min-width:500px) { .right-add-box .adBlock { width: 468px; height: 270px; } }
+@media (min-width:800px) { .right-add-box .adBlock { width: 728px; height: 270px; } }*/
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -2688,6 +2695,7 @@ label.cameraButton{min-height:43px;}
 	.sitemap header{min-height:47px;}
 	.post-box-bottom ul{padding:7px 0 0;}
 	.edit_pr_bar{display:none;}
+	.new-ld-page .middle-part{left:0;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3085,6 +3093,7 @@ label.cameraButton{min-height:43px;}
 	.sub-menu.rec-only li.user-id.open::before{left:2px !important; top:19px;}
 	.sub-menu.free-h-only li.user-id.open::before{left:2px !important; top:19px;}
 	.modal2 .modal-dialog .modal-content .slider_img_p img{max-width:95%;}
+	.page-title{width:100%; float:left;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

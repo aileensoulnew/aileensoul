@@ -276,11 +276,7 @@
 
 														</div>                           
 
-														<div id="hideuserlist" class=" fixed_right_display animated fadeInRightBig"> 
-
-
-
-														</div>
+														<?php $this->load->view('right_add_box'); ?>
 
 														<?php echo $left_footer; ?>
 													</div>
@@ -293,6 +289,9 @@
 													foreach ($postdata as $post) {
 														?>
 														<div class="inner-right-part cust-inner-part">
+															<div class="tab-add">
+		<?php $this->load->view('banner_add'); ?>
+	</div>
 															<div class="page-title">
 																<h3>
 																	<?php
@@ -300,8 +299,7 @@
 																	?>
 																</h3>
 															</div>
-															<div class="mob-add">
-															</div>
+															
 															<div class="all-job-box job-detail">
 																<div class="all-job-top">
 																	<div class="job-top-detail">
@@ -668,6 +666,9 @@
 																											<!--shortlisted employy end-->
 
 																										</div>
+																										<div class="tab-add">
+		<?php $this->load->view('banner_add'); ?>
+	</div>
 																									</div>
 																									<?php
 																								}

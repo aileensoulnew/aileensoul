@@ -39,6 +39,11 @@
 
             <!-- NEW HTML DESIGN -->
             <!-- STATIC TEXT OF HOW ABOUT PROFILE -->
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <div class="how-about-profile">
                 <div class="container">
                     <div class="center-title" >
@@ -72,7 +77,11 @@
                     </div>
                 </div>
             </div>
-
+			<div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
             <!-- HOW IT WORKS STATIC TEXT -->
             <div class="how-it-work">
                 <div class="container">
@@ -134,121 +143,12 @@
                     </div>
                 </div>
             </div>
-
-            <!-- OLD HTML DESIGN -->
-            <div class="container pt20 hidden">
-                <div class="pt20 pb20">
-                    <div class="center-title">
-                        <h3>What is Recruiter </h3>
-                        <p>Lorem ipsum is dummy text</p>
-                    </div>
-                </div>
-                <div class="row pt20 pb20">
-                    <div class="col-md-6 col-sm-6 pull-right">
-                        <div class="content-img text-center">
-                            <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
-                        <p>
-                                                    <br>
-                            Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. 
-                        </p>
-                    </div>
-                </div>
-                <div class="row pt20 pb20">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="content-img text-center">
-                            <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">                            
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. </p>
-                        <p>
-                        <br>
-                            Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. 
-                        </p>
-                    </div>
-                </div>
-                <div class="row pt20 pb20">
-                    <div class="col-md-6 col-sm-6 pull-right">
-                        <div class="content-img text-center">
-                            <img src="<?php echo base_url('assets/n-images/img1.jpg') ?>">                            
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <p>
-                            Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. 
-                        </p>
-                        <p>
-                            <br>
-                            Aileensoul is a new-age career-oriented portal that provides a host of free services to a diverse audience in relation to job search, hiring, freelancing, business networking and a platform to showcase one’s artistic abilities and talent to the world. The highly sophisticated and tech-enabled website delivers its unique and comprehensive range of offerings through focused service profiles that include its one of a kind ‘Recruiter Profile’, which empowers recruiters to reach out to and interact with qualified and deserving candidates in a completely new and innovative way. 
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="content-bnr hidden">
-                <div class="bnr-box">
-                    <img src="<?php echo base_url(); ?>assets/n-images/img2.jpg">
-                    <?php if(!$isrecruiteractivate){ ?>
-                    <div class="content-bnt-text">
-                        <h1>Lorem Ipsum is a dummy text</h1>
-                        <p><a href="#" class="btn5">Create Recruiter Profile</a></p>
-                    </div>
-                    <?php } else{ ?>
-                    <div class="content-bnt-text">
-                        <h1>Lorem Ipsum is a dummy text</h1>
-                        <p><a href="<?php echo base_url('recruiter/reactivateacc'); ?>" class="btn5">Reactivate Recruiter Profile</a></p>
-                    </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="container pt20 hidden">
-                <div class="pt20 pb20">
-                    <div class="center-title">
-                        <h3>How it works </h3>
-                        <p>Lorem ipsum is dummy text</p>
-                    </div>
-                </div>
-                <div class="it-works-img pt20 pb20">
-                    <img src="<?php echo base_url(); ?>assets/n-images/img3.jpg">
-                </div>
-                
-                <div class="related-article pt20">
-                        <div class="center-title">
-                            <h3>Related Article</h3>
-                            
-                        </div>
-                        <div class="row pt10">
-                            <div class="col-md-4">
-                                <div class="rel-art-box">
-                                    <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">Article Name</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="rel-art-box">
-                                    <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">Article Name</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="rel-art-box">
-                                    <img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-                                    <div class="rel-art-name">
-                                        <a href="#">Article Name</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+            
+            <div class="container">
+				<div class="banner-add">
+					<?php $this->load->view('banner_add'); ?>
+				</div>
+			</div>
 			<div class="bottom-ftr-none">
 				<?php echo $login_footer; ?>
 			</div>
