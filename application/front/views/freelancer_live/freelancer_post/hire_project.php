@@ -41,7 +41,8 @@
 				echo $freelancer_post_header2;
 			}
 			else{
-				echo $header_profile;
+				// echo $header_profile;
+				echo $freelancer_post_header2;
 				?>
 				<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 				<?php

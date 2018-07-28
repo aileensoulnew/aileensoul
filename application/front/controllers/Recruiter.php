@@ -6328,7 +6328,7 @@ class Recruiter extends MY_Controller {
 		$recommen_candid_totrec = $this->recruiter_model->get_recommen_candidate_search_total($searchkeyword,$searchplace,$city_id,$title_id,$industry_id,$skill_id,$experience_id,$userid);
 
 		if (empty($_GET["total_record"])) {
-			$_GET["total_record"] = count($postdetail);
+			$_GET["total_record"] = $recommen_candid_totrec["total_record"];
 		}
 
 		$postdata .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';

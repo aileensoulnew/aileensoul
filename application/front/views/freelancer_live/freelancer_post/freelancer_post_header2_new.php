@@ -52,6 +52,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 								</div>
 							</a>
 						</li>
+						<?php if($this->freelance_apply_profile_set == 1 ):?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
 								<div class="sub-menu-icon">
@@ -181,6 +182,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 								<!-- <li><a href="#" onclick="deactivate(<?php echo $userid; ?>)"><span class="icon-delete edit_data"></span> Deactive Profile</a></li> -->
 							</ul>
 						</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 				<div class="col-sm-6 col-md-6 col-xs-6 hidden-mob">
