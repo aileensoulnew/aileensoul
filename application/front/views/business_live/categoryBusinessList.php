@@ -54,7 +54,8 @@
                 <div class="container pt20 mobp0 mobmt15">
                     <div class="left-part">
                         <?php echo $business_left; ?>
-						<?php echo $left_footer; ?>
+						<?php $this->load->view('right_add_box'); ?>
+						
                         <!-- <div class="left-search-box list-type-bullet">
                             <div class="">
                                 <h3>Top Categories</h3>
@@ -238,7 +239,7 @@
                     </div>
                     <div class="right-part">
                        <?php $this->load->view('right_add_box'); ?>
-    					
+    					<?php echo $left_footer; ?>
                     </div>
                 </div>
            

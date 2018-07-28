@@ -58,82 +58,8 @@
                 <div class="container pt20 mobp0 mobmt15">
                     <div class="left-part">
                         <?php echo $artist_left; ?>
-						<?php echo $left_footer_list_view; ?>
-                        <!-- TOP CATEGORIES FILTER -->
-                        <!-- <div class="left-search-box list-type-bullet">
-                            <div class="">
-                                <h3>Top Categories</h3>
-                            </div>
-                            <ul class="search-listing">
-                                <li ng-repeat="category in artistCategory">
-                                    <label class="control control--checkbox">
-                                        <span>{{category.art_category | capitalize}}
-    										<span class="pull-right">({{category.count}})</span>
-    									</span>
-                                        <input class="categorycheckbox" type="checkbox" name="{{category.art_category}}" value="{{category.category_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
-                                        <div class="control__indicator"></div>
-                                    </label>
-                                </li>
-                            </ul>
-                            <p class="text-left p10"><a href="<?php echo artist_category_list ?>">View More Categories</a></p>
-                        </div> -->
-
-                        <!-- <div class="left-search-box list-type-bullet">
-                            <div class="">
-                                <h3>Top Locations</h3>
-                            </div>                        
-                            <ul class="search-listing" style="list-style: none;">
-                                <li ng-repeat="location in artistLocation">
-                                    <label class="control control--checkbox">
-                                        <span>{{location.art_location | capitalize}}
-    										<span class="pull-right">({{location.total}})</span>
-    									</span>
-                                        <input class="locationcheckbox" type="checkbox" name="{{location.art_location}}" value="{{location.location_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
-    									<div class="control__indicator"></div>
-                                    </label>
-                                </li>
-                            </ul>
-                            <p class="text-left p10"><a href="<?php echo artist_location_list ?>">View More Locations</a></p>
-                        </div> -->
-
-                        <!-- <div class="custom_footer_left fw">
-                            <div class="">
-                                <ul>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> About Us 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Contact Us
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Blogs 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
-
-                        
+						<?php $this->load->view('right_add_box'); ?>
+						
                     </div>
                     <div class="middle-part">
                         <div class="page-title">
@@ -236,6 +162,7 @@
                     </div>
                     <div class="right-part">
                        <?php $this->load->view('right_add_box'); ?>
+					   <?php echo $left_footer_list_view; ?>
     					
                     </div>
                 </div>        

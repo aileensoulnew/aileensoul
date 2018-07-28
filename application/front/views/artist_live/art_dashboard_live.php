@@ -285,6 +285,7 @@ $userid = $this->session->userdata('aileenuser');
                                 </div>
                             </div>
                         </a>
+						<?php $this->load->view('right_add_box'); ?>
                         <?php echo $left_footer_list_view; ?>
                         <!-- user pdf  end-->
                     </div>

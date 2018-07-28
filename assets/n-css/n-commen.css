@@ -840,13 +840,11 @@ border-radius: 50%;font-size: 10px;line-height: 1.8;position: absolute; right: 7
 /***  end no data content div  ***/
 /***  background  ***/
 .no-cover-upload{
-	background:#fff;
-    background-image:-ms-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:-moz-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:-o-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:-webkit-gradient(radial,center center,0,center center,286,color-stop(30,#FCFCFF),color-stop(100,#d5ebfd));
-    background-image:-webkit-radial-gradient(center,ellipse farthest-corner,#FCFCFF 30%,#d5ebfd 100%);
-    background-image:radial-gradient(ellipse farthest-corner at center,#FCFCFF 30%,#d5ebfd 100%)
+	background: #f6f6f6; 
+	background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 100%);
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 100%);
+	background: linear-gradient(to bottom, #ffffff 0%,#f6f6f6 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
 }
 /***  end background  ***/
 

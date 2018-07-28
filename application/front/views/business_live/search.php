@@ -92,7 +92,8 @@
                             <a href="<?php echo business_location_list; ?>">View More Locations</a>
                         </p>
                     </div>
-					<?php echo $left_footer; ?>
+					<?php $this->load->view('right_add_box'); ?>
+					
                     
                     
                 </div>
@@ -151,7 +152,7 @@
                 </div>
                 <div class="right-part">
 					<?php $this->load->view('right_add_box'); ?>
-					
+					<?php echo $left_footer; ?>
                 </div>
             </div>
 			
