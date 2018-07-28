@@ -763,6 +763,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         var login_user_id = "<?php echo $userid_login; ?>";
         var job_profile_set = "<?php echo $this->job_profile_set; ?>";
         var job_deactive = "<?php echo $job_deactive; ?>";
+        var header_all_profile = '<?php echo $header_all_profile; ?>';
         var app = angular.module('jobSearchApp', ['ngRoute','ui.bootstrap']);
         $(document).ready(function(){
                 $(window).scrollTop(500);
