@@ -3,6 +3,9 @@
 /***  page 1  ***/
 
 body.main-message{padding-bottom:0;}
+body.modal-open{position:fixed; width:100%;/* -webkit-overflow-scrolling: touch; height: 100%;overflow-y: auto;*/}
+tags-input .host{/*position:inherit; height:inherit;*/}
+.modal-content .post-field .form-group input{/*position:relative; top:0;*/}
 .one-hd .middle-section{padding:69px 0 50px;}
 .middle-section{padding:95px 0 50px;}
 .single-header .middle-section {padding:75px 0 50px;}
@@ -160,7 +163,7 @@ padding: 5px;}
 .all-post-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px;}
 .all-post-box .all-post-top{padding:15px 15px 7px; width:100%; float:left;}
 .post-field{width:100%; float:left; background:#fff;}
-.modal-content .post-popup-box form{padding:0;}
+.modal-content .post-popup-box form{padding:0; width:100%; float:left;}
 .modal-content .post-field .form-group{padding:5px 15px; margin-bottom:0; position:relative;}
 .modal-content .post-field .form-group textarea{border:none; min-height:30px; max-height:80px; font-size:14px; border:1px solid #d2d2d2; padding:5px 15px; margin-bottom:9px;}
 .modal-content .post-field .form-group input{/*border:none; padding:0;*/}
@@ -1815,6 +1818,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 
 
 .post-box-bottom .btn2{line-height: 1.3;}
+#post_opportunity{width:100%; float:left;}
 #post_something_edit .post-text{padding: 0; width: 100%;}
 #post_something_edit .post-text .editable_text{padding: 0; border: 0;}
 #post_something_edit .post-text textarea{padding: 0; border: 0;}
@@ -2522,6 +2526,7 @@ ins.adsbygoogle { background: transparent !important; }
 
 }
 @media screen and (max-width: 991px) {
+	
 	.tab-add{display:block;}
 	.tab-mb15{margin-bottom:15px;}
 	/***  all profile  ***/

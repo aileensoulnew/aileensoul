@@ -71,6 +71,9 @@
             <div class="container">
                 <?php echo $n_leftbar; ?>
                 <div class="middle-part">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="add-post">
                         <div class="post-box">
                                 <?php if ($leftbox_data['user_image'] != '') { ?> 

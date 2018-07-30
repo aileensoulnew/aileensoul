@@ -321,6 +321,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </div>
                             </div>
                         </a>
+						<?php $this->load->view('right_add_box'); ?>
                         <?php echo $left_footer; ?>
                     </div>
                     <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">

@@ -368,8 +368,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                         </div>
                     </div>
-					<div class="tab-add">
-						<?php $this->load->view('infeed_add'); ?>
+					
+					<div class="banner-add">
+						<?php $this->load->view('banner_add'); ?>
 					</div>
                     <div id="loader" style="display: none;">
                         <p style="text-align:center;">

@@ -54,6 +54,9 @@
             } ?>
                 <div class="container pt20 mobp0">
                     <div class="custom-user-list">
+						<div class="tab-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                         <div class="list-box-custom border-none">
                             <div class="">
                                 <div class="">

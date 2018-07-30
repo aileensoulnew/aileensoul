@@ -3931,8 +3931,8 @@ div .comment{
     left:inherit
 }
 .manage-post-custom .right_middle_side_posrt{
-    position:relative;
-    margin-left:6px
+    /*position:relative;
+    margin-left:6px*/
 }
 .manage-post-custom .tablate-add{
     margin-left:10px;

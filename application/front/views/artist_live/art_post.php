@@ -73,6 +73,7 @@
                     </div>
                 </div>
                 <?php }?>
+				<?php $this->load->view('right_add_box'); ?>
                 <?php echo $left_footer; ?>
             </div>
             </div>

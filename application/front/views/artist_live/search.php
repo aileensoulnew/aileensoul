@@ -88,6 +88,7 @@
                         </ul>
                         <p class="text-left p10"><a href="<?php echo artist_location_list ?>">View More Locations</a></p>
                     </div>
+					<?php $this->load->view('right_add_box'); ?>
 					<?php echo $left_footer_list_view; ?>
                     
                 </div>
