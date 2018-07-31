@@ -755,6 +755,9 @@ if($browser == "Firefox")
                 $(".noti_count").hide();
                 $(".noti_count").html("");
             }
+            setTimeout(function(){
+                get_notification_unread_count();
+            }, 1000);
         });
         /*$.ajax({
             type: 'POST',
@@ -776,9 +779,10 @@ if($browser == "Firefox")
             }
         });*/
     }
-    window.setInterval(function(){
+    get_notification_unread_count();
+    /*window.setInterval(function(){
       get_notification_unread_count();
-    }, 5000);
+    }, 5000);*/
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>
