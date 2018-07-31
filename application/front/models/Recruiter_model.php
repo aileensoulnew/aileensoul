@@ -377,9 +377,10 @@ class Recruiter_model extends CI_Model {
             $final_search_query .= $sql_place_search;
         }
 
-        $sql = "SELECT j.*,jae.degree, jae.stream, jae.board_primary, jae.board_secondary, jae.board_higher_secondary, jae.percentage_primary, jae.percentage_secondary, jae.percentage_higher_secondary,jg.* FROM (". $final_search_query ." ) as j 
+        $sql = "SELECT j.*,jae.degree, jae.stream, jae.board_primary, jae.board_secondary, jae.board_higher_secondary, jae.percentage_primary, jae.percentage_secondary, jae.percentage_higher_secondary FROM (". $final_search_query ." ) as j 
             LEFT JOIN ailee_job_add_edu as jae ON j.iduser=jae.user_id 
-            LEFT JOIN ailee_job_graduation as jg ON j.iduser=jg.user_id";
+            ";
+            //,jg.* LEFT JOIN ailee_job_graduation as jg ON j.iduser=jg.user_id
         if($sql_filter != "")
         {
             $sql .= " WHERE ".trim($sql_filter," AND ");
@@ -507,8 +508,7 @@ class Recruiter_model extends CI_Model {
         }
 
         $sql = "SELECT count(*) as total_record FROM (". $final_search_query ." ) as j 
-            LEFT JOIN ailee_job_add_edu as jae ON j.iduser=jae.user_id 
-            LEFT JOIN ailee_job_graduation as jg ON j.iduser=jg.user_id";
+            LEFT JOIN ailee_job_add_edu as jae ON j.iduser=jae.user_id";
         if($sql_filter != "")
         {
             $sql .= " WHERE ".trim($sql_filter," AND ");

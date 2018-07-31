@@ -6331,10 +6331,19 @@ class Recruiter extends MY_Controller {
 			$_GET["total_record"] = $recommen_candid_totrec["total_record"];
 		}
 
-		$postdata .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
+		$this->data['is_filter_apply'] = $is_filter_apply;
+		$this->data['page'] = $page;
+		$this->data['total_record'] = $recommen_candid_totrec["total_record"];
+		$this->data['perpage'] = $perpage;
+		$this->data['seach_data'] = $candidatejob1;
+		$this->load->view('recruiter_live/search_res', $this->data);
+
+
+		/*$postdata .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
 		$postdata .= '<input type = "hidden" class = "total_record" value = "' . $recommen_candid_totrec["total_record"] . '" />';
 		$postdata .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
+		// print_r($candidatejob1);exit;
 		if (isset($candidatejob1) && !empty($candidatejob1)) {
 			foreach ($candidatejob1 as $row) {
 
@@ -6800,6 +6809,6 @@ class Recruiter extends MY_Controller {
 		}
 		$postdata .= '<div class="col-md-1">';
 		$postdata .= '</div>';
-		echo $postdata;
+		echo $postdata;*/
 	}
 }

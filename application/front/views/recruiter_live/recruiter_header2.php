@@ -462,10 +462,10 @@ $userid = $this->session->userdata('aileenuser');
 
 			success: function (data) {
 				addmsg1("new", data);
-				setTimeout(
+				/*setTimeout(
 					waitForMsg1,
 					10000
-					);
+					);*/
 			},
 			error: function (XMLHttpRequest, textStatus, errorThrown) {
 			}
@@ -512,10 +512,10 @@ $userid = $this->session->userdata('aileenuser');
 				$('#userlist').html(data.leftbar);
 				$('.notification_data_in_h2').html(data.headertwo);
 				$('.seemsg').html(data.seeall);
-				setTimeout(
+				/*setTimeout(
 					chatmsg,
 					100
-					);
+					);*/
 			},
 			error: function (XMLHttpRequest, textStatus, errorThrown) {
 			}
