@@ -196,7 +196,7 @@
 
 								<?php $this->load->view('right_add_box'); ?>
 
-                                <?php echo $left_footer; ?>
+                                
 
                                 
                             </div>
@@ -244,7 +244,7 @@
                         <!-- middle div  -->
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 							<?php $this->load->view('right_add_box'); ?>
-                            
+                            <?php echo $left_footer; ?>
 
                         </div>
 

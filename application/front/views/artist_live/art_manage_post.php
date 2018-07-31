@@ -301,7 +301,7 @@
                 </div>
 				</a>
 				<?php $this->load->view('right_add_box'); ?>
-                <?php echo $left_footer_list_view; ?>
+                
             </div>
             <!-- popup start -->
             <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business"  >
@@ -455,11 +455,15 @@
             
 
              </div>
+			 <div class="banner-add">
+				<?php $this->load->view('banner_add'); ?>
+			</div>
               <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
             </div>           
 			
 			<div class="right-add">
 				<?php $this->load->view('right_add_box'); ?>
+				<?php echo $left_footer_list_view; ?>
 			</div>
     </div>
 </div>   

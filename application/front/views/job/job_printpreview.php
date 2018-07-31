@@ -216,7 +216,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
                     </div>
                 </div>
 
-                <div class="col-md-7 col-sm-12 mob-clear mobp0">
+                <div class="cus-inner-middle mob-clear mobp0">
                     <?php
                     if ($userid == $id) {
                         if ($count_profile == 100) {
@@ -1544,7 +1544,7 @@ if ($job[0]['work_job_industry']) {
         }
     } else {
         ?>
-			<div class="edit_pr_bar">
+			<div class="right-add">
 				<?php $this->load->view('right_add_box'); ?>
                             <div class="edit_profile_progress">
                                 <div class="progre_bar_text">

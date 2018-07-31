@@ -2445,6 +2445,9 @@ label.cameraButton{min-height:43px;}
 .right-add-box{border:1px solid #d2d2d2; padding:7px; margin-bottom:10px; border-radius:5px; width:100%; float:left;}
 .tab-add{width:100%; float:left;}
 .banner-add{width:100%; float:left;}
+.cus-inner-middle{width:55%; float:left; padding-left:15px;}
+.all_user_post{width:100%; float:left;}
+
 /***  end extra  ***/
 
 .right-add-box .adBlock { width: 300px; height: 250px; }
@@ -2488,6 +2491,8 @@ ins.adsbygoogle { background: transparent !important; }
     .audience-box{min-height: 385px;}
 	.mian_middle_post_box {width: 610px;}
 	#chat-area{width:838px;}
+	.cus-inner-middle{width:71%;}
+	.job_edit_menu{width:100% !important; margin-top:10px; margin-bottom:10px;}
 	
 }
 @media screen and (max-width: 1199px) {
@@ -2521,6 +2526,7 @@ ins.adsbygoogle { background: transparent !important; }
 	#chat-area{width:638px;}
 	#basicinfo .day, #basicinfo .month {width:31%;}
 	.tooltip-custom{width:160px; right:-180px;}
+	.cus-inner-middle{width:64%;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -2701,6 +2707,8 @@ ins.adsbygoogle { background: transparent !important; }
 	.post-box-bottom ul{padding:7px 0 0;}
 	.edit_pr_bar{display:none;}
 	.new-ld-page .middle-part{left:0;}
+	.job-menu-profile{margin-top:40px; margin-bottom:0;}
+	.cus-inner-middle{width:100%; padding:0 15px;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}
@@ -3099,6 +3107,8 @@ ins.adsbygoogle { background: transparent !important; }
 	.sub-menu.free-h-only li.user-id.open::before{left:2px !important; top:19px;}
 	.modal2 .modal-dialog .modal-content .slider_img_p img{max-width:95%;}
 	.page-title{width:100%; float:left;}
+	.cus-inner-middle{padding:0;}
+	.middle-part.op-middle{margin-bottom:30px; width:100%; float:left;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

@@ -234,7 +234,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             </div>
          </div>
         
-         <div class="col-md-7 col-sm-12 mob-clear mobp0">
+         <div class="cus-inner-middle mob-clear mobp0">
           <?php if($userid == $id)
                 {
                   if($count_profile == 100)

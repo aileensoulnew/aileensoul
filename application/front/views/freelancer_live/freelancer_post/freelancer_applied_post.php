@@ -185,7 +185,7 @@
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-12 col-xs-12 mob-clear mobp0">
+                    <div class="cus-inner-middle mob-clear mobp0">
 						
                         <?php
                         if (!($returnpage)) {
@@ -251,7 +251,7 @@
                         if ($count_profile == 100) {
                             if ($freepostdata['progressbar'] == 0) {
                                 ?>
-								<div class="edit_pr_bar">
+								<div class="right-add">
 								<?php $this->load->view('right_add_box'); ?>
                                 <div class="edit_profile_progress complete_profile">
                                     <div class="progre_bar_text">
@@ -275,7 +275,7 @@
                             }
                         } else {
                             ?>
-							<div class="edit_pr_bar">
+							<div class="right-add">
 								<?php $this->load->view('right_add_box'); ?>
                             <div class="edit_profile_progress">
                                 <div class="progre_bar_text">

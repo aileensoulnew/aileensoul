@@ -257,7 +257,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 </div>
                             </a>
 							<?php $this->load->view('right_add_box'); ?>
-                            <?php echo $left_footer; ?>
+                           
                         </div>
                         <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
 							<div class="tab-add">
@@ -413,6 +413,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
 
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 							<?php $this->load->view('right_add_box'); ?>
+							<?php echo $left_footer; ?>
                         </div>
                     </div>
                 </div>

@@ -308,7 +308,7 @@ if ($this->session->userdata('aileenuser')) {
 					</div>
 				
 				</div>
-				<div class="col-md-7 col-sm-12 mob-clear mobp0">
+				<div class="cus-inner-middle mob-clear mobp0">
 					<div class="tab-add">
 						<?php $this->load->view('banner_add'); ?>
 					</div>
@@ -500,9 +500,9 @@ if ($this->session->userdata('aileenuser')) {
 			<?php $this->load->view('banner_add'); ?>
 		</div>
 	</div>
-	<div class="edit_pr_bar">
-		<?php $this->load->view('right_add_box'); ?>
-	</div>
+		<div class="right-add">
+			<?php $this->load->view('right_add_box'); ?>
+		</div>
 	</div>
 	</section>
 <?php echo $login_footer ?>

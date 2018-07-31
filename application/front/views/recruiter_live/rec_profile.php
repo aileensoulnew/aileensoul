@@ -245,7 +245,7 @@
 					</div>
 					<!-- text head end -->
 
-					<div class="col-md-7 col-sm-12 mob-clear mobp0">
+					<div class="cus-inner-middle mob-clear mobp0">
 						<div class="tab-add">
 							<?php $this->load->view('banner_add'); ?>
 						</div>
@@ -253,7 +253,7 @@
 							
 							<div class="job-saved-box">
 
-								<h3 class="mb15">Details  </h3>
+								<h3 class="">Details  </h3>
 
 								<?php
 
@@ -594,7 +594,7 @@
 	
 	</div>
 
-					<div class="edit_pr_bar">
+					<div class="right-add">
 						<?php $this->load->view('right_add_box'); ?>
 					</div>
 <div class="clearfix"></div>  
