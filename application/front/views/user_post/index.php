@@ -615,11 +615,13 @@
                                 </div>
                             </div>
                         </div>
-						
+						<div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
+						loading..
                     </div>
+					
                     <!-- Repeated Class Complete -->
 					
-                    <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
+                    
                 </div>
                 <div class="right-part">
                     <?php $this->load->view('right_add_box'); ?>
