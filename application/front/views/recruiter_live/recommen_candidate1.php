@@ -229,19 +229,16 @@
                                         echo '"' . trim($showser1,",") . '"';
                                     }
                                     ?>
-                                </h3>
-								<div class="tab-add">
-									<?php $this->load->view('infeed_add'); ?>
-								</div>
+                                </h3>								
                                 <div class="contact-frnd-post">
                                     
                                     <div class = "job-contact-frnd">
                                         <!--AJAX DATA START FOR RECOMMAND CANDIDATE-->
                                     </div>
+                                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIAMGE'; ?>"/></div>
 									<div class="banner-add">
 										<?php $this->load->view('banner_add'); ?>
 									</div>
-                                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIAMGE'; ?>"/></div>
                                 </div>
                             </div>
                         </div>

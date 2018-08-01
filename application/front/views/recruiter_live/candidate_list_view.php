@@ -3,7 +3,8 @@
 <input class="perpage_record" type="hidden" value="<?php echo $perpage; ?>"/>
 <?php
 if (isset($seach_data) && !empty($seach_data)) {
-	foreach ($seach_data as $row) {
+	$cnounter = 1;
+	foreach ($seach_data as $row) {		
 	?>
 	<div class="profile-job-post-detail clearfix">
 	    <div class="profile-job-post-title-inside clearfix">
@@ -257,7 +258,17 @@ if (isset($seach_data) && !empty($seach_data)) {
 	        </div>
 	    </div>
 	</div>
-<?php }
+<?php 
+		if($cnounter % 3 == 0)
+		{
+			?>
+			<div class="tab-add">
+				<?php $this->load->view('infeed_add'); ?>
+			</div>
+			<?php
+		}
+		$cnounter++;
+	}
 }
 elseif($total_record == 0)
 { ?>
