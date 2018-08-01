@@ -835,7 +835,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }
 
     $(window).on('scroll', function () {
-        if (($(window).scrollTop() == $(document).height() - $(window).height())) {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)) {
             // isLoadingData = true;
             var page = $(".page_number:last").val();
             var total_record = $(".total_record").val();
