@@ -628,8 +628,6 @@
 							
                         </div>
 						<div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif') . '' ?>" alt="Loader" /></div>
-						
-						loading..
                     </div>
 					
                     <!-- Repeated Class Complete -->
