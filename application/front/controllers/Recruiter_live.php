@@ -425,6 +425,19 @@ class Recruiter_live extends MY_Controller {
             }
         }*/
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        if($userid == "")
+        {
+            redirect(base_url('recruiter'), refresh);
+        }
+        else
+        {
+            $contition_array = array('user_id' => $userid, 'is_delete' => '0', 're_status' => '1');
+            $recruiter_data = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'user_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            if(empty($recruiter_data))
+            {
+                redirect(base_url('recruiter'), refresh);
+            }
+        }
         if ($searchkeyword == "" && $searchplace == "") {
             redirect('recommended-candidates', refresh);
         }
