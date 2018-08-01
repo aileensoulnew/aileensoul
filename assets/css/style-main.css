@@ -2659,6 +2659,10 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .profile-header .right-header .other-hdr .test-cus .btn9:hover{background:#b52f88; color:#fff;}
 .profile-header .right-header .other-hdr .test-cus .btn9:focus{background:#b52f88 !important; color:#fff !important;}
 .profile-header .other-hdr .mob-bar-li svg path{fill:#b52f88;}
+.pr-pl-box{position: fixed; bottom: 0; background:rgba(255,255,255,1); color:#5c5c5c; padding: 10px; width: 100%; text-align: center; z-index: 9999;}
+.btn-pr-pl{padding: 1px 10px; background:#1b8ab9; color:#fff; border-radius: 3px; display: inline-block;}
+.btn-pr-pl:hover{background:#1d7398; color:#fff; text-decoration: none;}
+.footer{margin-bottom:35px;}
 
 
 /***  media query  ***/
