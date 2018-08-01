@@ -2449,6 +2449,7 @@ label.cameraButton{min-height:43px;}
 .page-title{width:100%; float:left;}
 .infeed-add{margin-bottom:10px;}
 .job-contact-frnd .profile-job-post-detail{width:100%; float:left;}
+.add-post-button{margin-top:0;}
 /***  end extra  ***/
 
 .right-add-box .adBlock { width: 300px; height: 250px; }
@@ -2495,6 +2496,7 @@ ins.adsbygoogle { background: transparent !important; }
 	.cus-inner-middle{width:71%;}
 	.job_edit_menu{width:100% !important; margin-top:10px; margin-bottom:10px;}
 	.right-part .right-add-box .adBlock { width: 190px; height: 650px; }
+	.edit_pr_bar .right-add-box .adBlock { width: 190px; height: 650px; }
 	
 }
 @media screen and (max-width: 1199px) {

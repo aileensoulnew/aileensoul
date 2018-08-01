@@ -44,7 +44,7 @@
                                 ?>
                             </div>
                             <!-- middle div stat -->
-                            <div class="col-md-6 col-sm-6 all-form-content">
+                            <div class="col-md-6 col-sm-12 all-form-content">
 								<div class="tab-add">
 									<?php $this->load->view('banner_add'); ?>
 								</div>
