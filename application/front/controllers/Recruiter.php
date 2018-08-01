@@ -1470,7 +1470,18 @@ class Recruiter extends MY_Controller {
 			$postdata .= '<input type = "hidden" class = "total_record" value = "' . $recommen_candid_totrec . '" />';
 			$postdata .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
-			if (isset($candidatejob1) && !empty($candidatejob1)) {
+			if (empty($_GET["total_record"])) {
+				$_GET["total_record"] = $recommen_candid_totrec;
+			}
+
+			$this->data['is_filter_apply'] = $isfilterapply;
+			$this->data['page'] = $page;
+			$this->data['total_record'] = $recommen_candid_totrec;
+			$this->data['perpage'] = $perpage;
+			$this->data['seach_data'] = $candidatejob1;
+			$this->load->view('recruiter_live/candidate_list_view', $this->data);
+
+			/*if (isset($candidatejob1) && !empty($candidatejob1)) {
 				foreach ($candidatejob1 as $row) {
 
 					$postdata .= '<div class="profile-job-post-detail clearfix">';
@@ -1937,7 +1948,7 @@ class Recruiter extends MY_Controller {
 			}
 			$postdata .= '<div class="col-md-1">';
 			$postdata .= '</div>';
-			echo $postdata;
+			echo $postdata;*/
 		}
 
 	// RECOMMANDED CANDIDATE AJAX LAZZY LOADER DATA START
@@ -6336,7 +6347,7 @@ class Recruiter extends MY_Controller {
 		$this->data['total_record'] = $recommen_candid_totrec["total_record"];
 		$this->data['perpage'] = $perpage;
 		$this->data['seach_data'] = $candidatejob1;
-		$this->load->view('recruiter_live/search_res', $this->data);
+		$this->load->view('recruiter_live/candidate_list_view', $this->data);
 
 
 		/*$postdata .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';

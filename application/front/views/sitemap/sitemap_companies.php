@@ -104,7 +104,7 @@ header('Cache-Control: public, max-age=30');
 									<a href="<?php echo base_url().'company/'.$_company_list['business_slug']; ?>" target="_self">
 										<?php echo ucwords($_company_list['company_name']);
 										if($_company_list['bus_industry_name'] != "" && $_company_list['bus_industry_name'] != null):?>
-											<span><?php echo ucwords($_company_list['bus_industry_name']);?></span>
+											<span><?php echo "(".ucwords($_company_list['bus_industry_name']).")";?></span>
 										<?php endif; ?>
 									</a>
 								</li>
