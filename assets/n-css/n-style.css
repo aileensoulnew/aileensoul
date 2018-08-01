@@ -82,16 +82,16 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 
 .all-profile-box{border:1px solid #d2d2d2; margin-bottom:10px; width:100%; float:left; border-radius:4px; margin-left:0;}
 .all-profile-box .all-pro-head{padding:5px 10px; border-bottom:1px solid #d2d2d2;}
-.all-profile-box .all-pro-head h4{margin:0; letter-spacing:1px;}
+.all-profile-box .all-pro-head h4{margin:0; letter-spacing:1px; font-size:16px;}
 .all-profile-box .all-pro-head h4 a{color:#5c5c5c;}
 .all-profile-box .all-pro-head h4 a:hover{color:#1b8ab9; text-decoration:underline;}
 .all-profile-box ul{padding:0; width:100%; float:left; margin:0;}
 .all-profile-box ul li{/*padding:5px 10px;*/ border-bottom:1px solid #d2d2d2; width:100%; list-style-type:none; float:left;}
 .all-profile-box ul li:hover{background:#f6f6f6;}
 .all-profile-box ul li:last-child{border-bottom:0;}
-.all-profile-box ul li .all-pr-img{width:35px; height:35px; float:left; border:1px solid #d2d2d2;}
+.all-profile-box ul li .all-pr-img{width:30px; height:30px; float:left; border:1px solid #d2d2d2;}
 .all-profile-box ul li .all-pr-img img{width:100%;}
-.all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:17px; padding:5px 0 0 15px; letter-spacing:1px;}
+.all-profile-box ul li span{width:78%; float:left; color:#2c2c2c; font-size:15px; padding:4px 0 0 15px; letter-spacing:1px;}
 .all-profile-box .all-pr-list li a{width:100%; float:left; padding:10px;}
 .left-part .all-profile-box .all-pr-list li a{padding:5px 10px;}
 /***  inner profiles left box  ***/
@@ -2434,7 +2434,7 @@ label.cameraButton{min-height:43px;}
 .all-upload .form-group{margin-bottom:0;}
 .new-ld-page .mian_middle_post_box{position:relative; left:15px; margin-left:0;}
 .noti-page .job-saved-box h3{color:#5c5c5c; font-weight:normal; border-bottom:1px solid #d2d2d2;}
-.tab-add{display:none;}
+.tab-add{display:none; width:100%; float:left;}
 .job-saved-box h3.mb15{margin-bottom:15px;}
 .edit_pr_bar {width: 23% !important; display: inline-block; margin: 0 !important;}
 .page-boxed .edit_profile_progress{width:100%;}
@@ -2443,11 +2443,11 @@ label.cameraButton{min-height:43px;}
 .border-bottom0{border-bottom:0 !important;}
 .banner-add{width:100%; float:left; padding:10px 0;}
 .right-add-box{border:1px solid #d2d2d2; padding:7px; margin-bottom:10px; border-radius:5px; width:100%; float:left;}
-.tab-add{width:100%; float:left;}
 .banner-add{width:100%; float:left;}
 .cus-inner-middle{width:55%; float:left; padding-left:15px;}
 .all_user_post{width:100%; float:left;}
-
+.page-title{width:100%; float:left;}
+.infeed-add{margin-bottom:10px;}
 /***  end extra  ***/
 
 .right-add-box .adBlock { width: 300px; height: 250px; }
@@ -2493,6 +2493,7 @@ ins.adsbygoogle { background: transparent !important; }
 	#chat-area{width:838px;}
 	.cus-inner-middle{width:71%;}
 	.job_edit_menu{width:100% !important; margin-top:10px; margin-bottom:10px;}
+	.right-part .right-add-box .adBlock { width: 190px; height: 650px; }
 	
 }
 @media screen and (max-width: 1199px) {
@@ -2527,13 +2528,14 @@ ins.adsbygoogle { background: transparent !important; }
 	#basicinfo .day, #basicinfo .month {width:31%;}
 	.tooltip-custom{width:160px; right:-180px;}
 	.cus-inner-middle{width:64%;}
+	.tab-add{display:block;}
 }
 @media screen and (max-width: 1024px) {
 
 }
 @media screen and (max-width: 991px) {
 	
-	.tab-add{display:block;}
+	
 	.tab-mb15{margin-bottom:15px;}
 	/***  all profile  ***/
 	.custom-box .custom-width{max-width:735px;}

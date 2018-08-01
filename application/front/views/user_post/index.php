@@ -70,6 +70,7 @@
         <div class="middle-section custom-mob-pd">
             <div class="container">
                 <?php echo $n_leftbar; ?>
+				
                 <div class="middle-part op-middle">
 					<div class="tab-add">
 						<?php $this->load->view('banner_add'); ?>
@@ -682,7 +683,7 @@
                         </div>
                     </div>
                 
-					<?php echo $left_footer; ?>
+					
 					
 					
 					
