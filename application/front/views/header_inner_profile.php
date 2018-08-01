@@ -737,7 +737,7 @@ if($browser == "Firefox")
             }
             setTimeout(function(){
                 get_notification_unread_count();
-            }, 1000);
+            }, 5000);
         });
 
         /*$.ajax({
