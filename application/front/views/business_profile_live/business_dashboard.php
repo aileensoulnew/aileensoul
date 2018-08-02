@@ -1,4 +1,4 @@
-123<?php
+<?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
 ?>
 <!DOCTYPE html>

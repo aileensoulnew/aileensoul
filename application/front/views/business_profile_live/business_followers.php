@@ -27,7 +27,7 @@
                 <?php echo $business_common; ?>
                 <div class="user-midd-section">
                     <div class="container mobp0">
-                        
+                        <div class="bus-inner">
                             <div class="custom-user-list bus-art-cus-left">
                                 <div class="common-form">
 									<div class="tab-add">
@@ -51,7 +51,7 @@
 							<div class="right-add">
 								<?php $this->load->view('right_add_box'); ?>
 							</div>
-                      
+						</div>
                     </div>
                 </div>
             </section>        

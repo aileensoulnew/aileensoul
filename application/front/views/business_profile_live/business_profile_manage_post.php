@@ -260,6 +260,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                            
                         </div>
                         <div class=" custom-right-art mian_middle_post_box animated fadeInUp custom-right-business">
+							<div class="right_side_posrt">
 							<div class="tab-add">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
@@ -410,7 +411,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
                             </div>
                         </div>
-
+						
+						</div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
 							<?php $this->load->view('right_add_box'); ?>
 							<?php echo $left_footer; ?>

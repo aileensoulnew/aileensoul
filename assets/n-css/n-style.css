@@ -1146,7 +1146,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-banner .control input:checked:focus ~ .control__indicator {border:1px solid #7b7b7b;}
 .search-banner .control--checkbox .control__indicator:after {border: solid #000; border-width: 0 2px 2px 0;}
 .banner-main-div{ 
-	/*padding:60px 0 0;*/
+	padding:60px 0;
     display: -webkit-flex; /* Safari */
     -webkit-align-items: center; /* Safari 7.0+ */
     display: flex;
@@ -2340,7 +2340,7 @@ label.cameraButton{min-height:43px;}
 #contact_loader{margin-top:126px;}
 #postinfo label.error{right:2px;}
 .work_type_custom label.error { right: 8px; top: 37px;}
-.add-post-button .back .but1:hover{color:#1b8ab9;}
+.add-post-button .back .but1:hover{color:#5c5c5c;}
 .modal-body{width:100%; float:left;}
 .no-login .right-header{padding-top:0;}
 
@@ -2495,16 +2495,28 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	#chat-area{width:838px;}
 	.cus-inner-middle{width:71%;}
 	.cus-add-post .right-add{width:220px;}
+	.art-inner .right-add{width:220px;}
+	.bus-inner .right-add{width:220px;}
+	.manage-post-custom .right-add{width:180px;}
 	.job_edit_menu{width:100% !important; margin-top:10px; margin-bottom:10px;}
 	.cus-add-post .right-add .right-add-box .adBlock { width: 190px; height: 650px; }
+	.art-inner .right-add .right-add-box .adBlock { width: 190px; height: 650px; }
+	.bus-inner .right-add .right-add-box .adBlock { width: 190px; height: 650px; }
+	.manage-post-custom .right-add .right-add-box .adBlock { width: 170px; height: 600px; }
 	.right-part .right-add-box .adBlock { width: 190px; height: 650px; }
 	.edit_pr_bar .right-add-box .adBlock { width: 190px; height: 650px; }
+	.fixed_right_display {display: block !important; width:207px;}
+	.right_middle_side_posrt .right-add-box .adBlock { width: 190px !important; height: 600px !important; }
 	
 }
 @media screen and (max-width: 1199px) {
 	.block-1199{display:block;}
 	.right-part{display:none;}
 	.cus-add-post .right-add{display:none;}
+	.art-inner .right-add{display:none;}
+	.bus-inner .right-add{display:none;}
+	.fixed_right_display {display: none !important;}
+	.manage-post-custom .right-add{display:none;}
 	.block-1199 .adv-main-view{display:block;}
 	.middle-part{left:358px;}
 	.inner-right-part{width:605px;}

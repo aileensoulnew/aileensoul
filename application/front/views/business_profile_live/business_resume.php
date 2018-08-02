@@ -28,8 +28,9 @@
                 <div class="user-midd-section">
                     <div class="container mobp0">
                         
-                           
+                           <div class="bus-inner">
                             <div class="custom-user-list bus-art-cus-left">
+								
 								<div class="tab-add">
 									<?php $this->load->view('banner_add'); ?>
 								</div>
@@ -264,8 +265,10 @@
 									<?php $this->load->view('banner_add'); ?>
 								</div>
                             </div>
+							
 							<div class="right-add">
 								<?php $this->load->view('right_add_box'); ?>
+							</div>
 							</div>
 					</div>
 				</div>
