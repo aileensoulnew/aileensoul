@@ -75,7 +75,7 @@ $mobile_agent = $this->agent->mobile;
                             }
                             ?>
 							<?php $this->load->view('right_add_box'); ?>
-                            <?php echo $left_footer; ?>
+                           
                         </div>
                         <br>
                         <div id="result"></div>   
@@ -171,66 +171,7 @@ $mobile_agent = $this->agent->mobile;
                     
 					<div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
                         <?php $this->load->view('right_add_box'); ?>
-                        <div class="left-search-box list-type-bullet hidden">
-                            <div class="">
-                                <h3>Categories</h3>
-                            </div>
-                            <ul class="search-listing">
-                                <li>
-                                    <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Agriculture<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                
-                            </ul>
-                            <p class="text-right p10"><a href="#">More Categories</a></p>
-                        </div>
-                        <div class="left-search-box list-type-bullet hidden">
-                            <div class="">
-                                <h3>Business Type</h3>
-                            </div>
-                            <ul class="search-listing">
-                                <li>
-                                    <label class=""><a href="#">Marketing<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Marketing<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Marketing<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Marketing<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Marketing<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Marketing<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                <li>
-                                    <label class=""><a href="#">Marketing<span class="pull-right">(50)</span></a></label>
-                                </li>
-                                
-                            </ul>
-                            <p class="text-right p10"><a href="#">More Categories</a></p>
-                        </div>
+						<?php echo $left_footer; ?>
                         
                     </div>
                 </div>

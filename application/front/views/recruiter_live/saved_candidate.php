@@ -160,7 +160,7 @@
     </div>
    
         <div class="container rec_res">    
-            <div class="job-menu-profile mob-none  ">
+            <div class="job-menu-profile mob-none job_edit_menu">
                 <a href="<?php echo site_url('recruiter/profile/' . $recdata['userid']); ?>" title='<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>'><h3><?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?></h3></a>
                 <!-- text head start -->
                 <div class="profile-text" >
@@ -177,7 +177,7 @@
              
                 <!-- text head end -->
             </div>
-            <div class="col-md-7 col-sm-12 mob-clear mob-border-0 mobp0">
+            <div class="cus-inner-middle mob-clear mob-border-0 mobp0">
 				<div class="tab-add">
 					<?php $this->load->view('banner_add'); ?>
 				</div>
@@ -194,7 +194,7 @@
                     <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
                 </div>
             </div>
-			<div class="edit_pr_bar">
+			<div class="right-add">
 						<?php $this->load->view('right_add_box'); ?>
 					</div>
         <!-- MIDDLE SECTION END-->

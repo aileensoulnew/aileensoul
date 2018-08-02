@@ -1,3 +1,4 @@
+@cache-version: `( new Date() ).getTime()` ;
 /***  freelance apply  ***/
 
 .common-form select:focus {
@@ -794,7 +795,7 @@ label.cameraButton:active {
 .cameraButton .fa.fa-camera {
     width: 30px;
     height: 26px;
-    background: url('../img/cam.png') no-repeat;
+    background: url('../img/cam.png?version=@{cache-version}') no-repeat;
     border: none;
     padding: 5px;
     opacity: 0.6;

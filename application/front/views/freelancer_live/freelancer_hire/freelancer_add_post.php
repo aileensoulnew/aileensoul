@@ -41,7 +41,9 @@
             <div>
                 <div class="user-midd-section" id="paddingtop_fixed">
                     <div class="container mobp0">
-                       
+							<div class="tab-add">
+								<?php $this->load->view('banner_add'); ?>
+							</div>
                             <h3 class="col-chang cus-chang text-center p15">Please Post your requirement of the work that you need, we will recommend the freelancers accordingly.</h3>
                             
                             <div class="custom-user-list">

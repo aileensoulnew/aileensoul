@@ -36,7 +36,7 @@
 						<?php $this->load->view('banner_add'); ?>
 					</div>
 					<h3 class="col-chang cus-chang text-center p20" style="color: #1b8ab9 !important;">Please post your requirement, so that we can recommend you the candidates</h3>
-                    <div class="">
+                    <div class="cus-add-post">
                         
                         <div class="custom-user-list">
 

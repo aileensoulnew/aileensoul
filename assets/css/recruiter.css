@@ -1,3 +1,4 @@
+@cache-version: `( new Date() ).getTime()` ;
 /***  recruiter  ***/
 /*** common css for job recrutor and freelancer  ***/
 
@@ -25,11 +26,10 @@
     /*text-transform: capitalize;*/
 }
 .profile-boxProfileCard .bg-images img{height: 94px !important;}
-.profile-job-post-detail .profile-job-post-title .button:hover{ background: #1b8ab9; color: #fff; }
+.profile-job-post-detail .profile-job-post-title .button:hover{ background: #5c5c5c; color: #fff; }
 .add-post-button{margin-top: 25px;}
 .add-post-button a{cursor: pointer;}
 .add-post-button .btn:focus{color: white; background: #156f95;}
-.profile-job-post-detail .profile-job-post-title .button:hover{background: #1b8ab9; color: #fff;}
 .buisness-profile-pic-candidate {border: 1px solid #d9d9d9; margin-left: 17px!important;  width: 50px; margin-top: 5px;
     height: 50px;  margin-bottom: 6px; display: inline-block;} 
 .buisness-profile-pic-candidate img { width: 100%; height: 100%;}
@@ -90,9 +90,7 @@ li.fr a {text-decoration: none !important;}
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.profile-job-post-detail .profile-job-post-title .button {font-size: 15px; padding: 3px 13px !important; margin-right: 4px;
-    margin-left: 4px; background-color: #ffffff; text-transform: capitalize; color: #1b8ab9; border: 1px solid #1b8ab9;
-    float: left; font-weight:normal;
+.profile-job-post-detail .profile-job-post-title .button {font-size: 15px; padding: 3px 13px !important; margin-right: 4px; margin-left: 4px; background-color: #ffffff; text-transform: capitalize; color: #5c5c5c; border: 1px solid #5c5c5c; float: left; font-weight:normal;
 }
 .last_date{ padding-left: 15px; float: left; padding-top: 4px;}
 /***  profile menu  ***/
@@ -395,7 +393,7 @@ label.cameraButton:active {border-color: #CCC #EEE #EEE #CCC;}
 }
 .cameraButton:hover .tooltiptext { visibility: visible;}
 .cameraButton .fa.fa-camera:hover{opacity: 1.0;}
-.cameraButton .fa.fa-camera{width:30px; height:26px; background:url('../img/cam.png') no-repeat; border:none; 
+.cameraButton .fa.fa-camera{width:30px; height:26px; background:url('../img/cam.png?version=@{cache-version}') no-repeat; border:none; 
 	padding:5px; opacity: 0.6; background-size:100%;
 }
 .cameraButton .fa-camera::before{display:none;}
@@ -922,9 +920,6 @@ label.cameraButton input[accept*="camera"] {
 #basicinfo  label.error{position: absolute; /*margin-top: 5px;*/ right: 0; margin-bottom: 0px; margin-right: 0; text-align: right;}
 #indus{border:1px solid #1b8ab9;background-color: #1B8AB9;color: #fff; margin-top:20px;padding: 8px 36px }
 #indus:hover{background:#156f95; color:#fff;}
-.job_edit_menu {
-    width: 22.5% !important;
-}
 .job_edit_pr {
     padding-left: 245px;
 }

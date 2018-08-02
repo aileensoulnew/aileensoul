@@ -1,3 +1,4 @@
+@cache-version: `( new Date() ).getTime()` ;
 /***  commen style  ***/
 html {
     min-height: 100%;
@@ -549,7 +550,7 @@ header h2.logo{margin:0; float:left; padding-right:20px; padding:0; line-height:
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-image: url('../n-images/search.png');
+    background-image: url('../n-images/search.png?version=@{cache-version}');
     background-repeat: no-repeat;
     padding: 5px 35px 5px 20px;
     -webkit-transition: width 0.4s ease-in-out;
@@ -667,7 +668,7 @@ li.dropdown .dropdown-menu:before{
 li.user-id .dropdown-menu:before{
     right:5px;
 }
-.sub-menu li.dropdown.open::before{background: url('../img/sub-h-top-arrow.png'); background-position: 0 19px; left:15px; border:0; width:26px; height: 13px; top:17px; content: ''; display:block; position:absolute; z-index:9999;}
+.sub-menu li.dropdown.open::before{background: url('../img/sub-h-top-arrow.png?version=@{cache-version}'); background-position: 0 19px; left:15px; border:0; width:26px; height: 13px; top:17px; content: ''; display:block; position:absolute; z-index:9999;}
 .sub-menu li.user-id .dropdown-menu::before{display:none;}
 .right-header ul li .dropdown-title a{font-size:14px; color:#5c5c5c;}
 .right-header ul li .dropdown-title a:hover{color:#1b8ab9; text-decoration: underline;}
@@ -965,7 +966,7 @@ footer ul li a:hover{
 	position:relative;
 }
 .custom_footer_left ul  li .click-nav ul:after{
-	position:absolute; right:3px; bottom:-9px; content:''; width:15px; height:9px; background:url('../n-images/lf-down-arrow.png'); background-size:100%;
+	position:absolute; right:3px; bottom:-9px; content:''; width:15px; height:9px; background:url('../n-images/lf-down-arrow.png?version=@{cache-version}'); background-size:100%;
 }
 .custom_footer_left ul li a {
 	line-height:18px;
@@ -1227,7 +1228,7 @@ border: 1px solid #1b8ab9;}
 .sub-header .new-search-btn label i{background:none; padding:5px 4px 4px 5px;}
 
 .icon-delete,.icon-delete-white,.icon-edit-profile,.icon-edit-profile-white,.icon-logout,.icon-logout-white,.icon-settings,.icon-settings-white,.icon-view-profile,.icon-view-profile-white{
-    display:inline-block; background:url(../img/edit_profile.png) no-repeat; overflow:hidden;
+    display:inline-block; background:url(../img/edit_profile.png?version=@{cache-version}) no-repeat; overflow:hidden;
     text-indent:-9999px; text-align:left
 }
 .dropdown_hover .dropdown-content_hover a:hover .icon-delete{ background-position:0 0; width:20px; height:20px}

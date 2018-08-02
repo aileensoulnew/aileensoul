@@ -211,7 +211,7 @@
                 </div>                       
             </div>
             <div class="container rec_res">
-                <div class="job-menu-profile mob-none  ">
+                <div class="job-menu-profile mob-none  job_edit_menu">
                     <a href="javascript:void(0);" title="<?php echo $postdataone[0]['rec_firstname'] . ' ' . $postdataone[0]['rec_lastname']; ?>"><h3><?php echo $postdataone[0]['rec_firstname'] . ' ' . $postdataone[0]['rec_lastname']; ?></h3></a>
                     <!-- text head start -->
                     <div class="profile-text" >
@@ -239,7 +239,10 @@
 
                 </div>
             
-                <div class="col-md-7 col-sm-12 mob-clear mobp0">
+                <div class="cus-inner-middle mob-clear mobp0">
+					<div class="tab-add">
+						<?php $this->load->view('banner_add'); ?>
+					</div>
                     <div class="page-title">
                         <h3>Post</h3>
                     </div>
@@ -248,7 +251,13 @@
 
                     </div>
                        <div class="fw" id="loader"  style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
+					   <div class="banner-add">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                 </div>
+				<div class="right-add">
+					<?php $this->load->view('right_add_box'); ?>
+				</div>
             </div>
 
             <!-- MIDDLE SECTION END -->
