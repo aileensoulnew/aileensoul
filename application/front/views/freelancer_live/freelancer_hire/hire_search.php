@@ -1,4 +1,4 @@
-123<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>
@@ -13,7 +13,7 @@
         <?php } ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
     <?php $this->load->view('adsense'); ?>
-</head>  
+    </head>  
     <body class="no-login">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: none;">
