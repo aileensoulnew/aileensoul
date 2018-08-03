@@ -2436,6 +2436,7 @@ label.cameraButton{min-height:43px;}
 .new-ld-page .mian_middle_post_box{position:relative; left:15px; margin-left:0;}
 .noti-page .job-saved-box h3{color:#5c5c5c; font-weight:normal; border-bottom:1px solid #d2d2d2;}
 .tab-add{display:none; width:100%; float:left;}
+.tab-add-991{display:none; width:100%; float:left;}
 .job-saved-box h3.mb15{margin-bottom:15px;}
 .edit_pr_bar {width: 23% !important; display: inline-block; margin: 0 !important;}
 .page-boxed .edit_profile_progress{width:100%;}
@@ -2453,7 +2454,16 @@ label.cameraButton{min-height:43px;}
 .add-post-button{margin-top:0;}
 .follow-img{margin-left:0;}
 .all-contact-cus{display:none;}
+.common-form .notification-box .notification-database:hover{background:none;}
+.notification-box .notification_data li a{width:100%;}
+.notification-box .notification_data li a .notification-database{width:100%;}
 /***  end extra  ***/
+/***  optimization css  ***/
+.left-part.left-scroll{position:absolute;}
+.right-part.right-scroll{position:absolute;}
+
+/***  end optimization css  ***/
+
 
 .right-add-box .adBlock { width: 300px; height: 250px; }
 ins.adsbygoogle { background: transparent !important; min-height:60px;}
@@ -2552,6 +2562,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.cus-inner-middle{width:64%;}
 	.tab-add{display:block;}
 	.mian_middle_post_box{width:610px;}
+	.all-list ul li .list-box{width:190px; height:295px;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -2734,6 +2745,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.new-ld-page .middle-part{left:0;}
 	.job-menu-profile{margin-top:40px; margin-bottom:0;}
 	.cus-inner-middle{width:100%; padding:0 15px;}
+	.tab-add-991{display:block;}
 }
 @media screen and (max-width: 767px) {
     .container {width: 100%;}

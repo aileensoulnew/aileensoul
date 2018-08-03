@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="right-part">
+                    <div class="right-add">
 						<?php $this->load->view('right_add_box'); ?>
                         <div class="request-noti">
                             <div class="right-title">
@@ -185,22 +185,7 @@
             var app = angular.module("contactRequestApp", ['ngRoute', 'ui.bootstrap', 'ngSanitize']);
         </script>
         <script>
-        var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-        showRight = document.getElementById( 'showRight' ),
-        body = document.body;
-
-        showRight.onclick = function() {
-            classie.toggle( this, 'active' );
-            classie.toggle( menuRight, 'cbp-spmenu-open' );
-            disableOther( 'showRight' );
-        };
-
-        function disableOther( button ) {
-            if( button !== 'showRight' ) {
-                classie.toggle( showRight, 'disabled' );
-            }
-        }
-
+        
         $(function () {
             $('a[href="#search"]').on('click', function (event) {
                 event.preventDefault();
