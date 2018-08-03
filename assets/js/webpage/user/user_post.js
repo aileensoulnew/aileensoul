@@ -185,13 +185,13 @@ app.directive("owlCarousel", function () {
                         0: {
                             items: 2
                         },
-                        600: {
-                            items: 2
+                        480: {
+                            items: 3
                         },
-                        960: {
-                            items: 2,
+                        768: {
+                            items: 3,
                         },
-                        1200: {
+						1280: {
                             items: 2
                         }
                     }

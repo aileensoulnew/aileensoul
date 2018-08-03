@@ -799,9 +799,9 @@
                                     </a>
                                 </div>
                                 <div class="user-list-detail">
-                                    <p class="contact-name"><a href="<?php echo base_url(); ?>contact-request" target="_self">Find More Contacts</a></p>
+                                    <p class="contact-name">Find More Contacts</p>
                                 </div>
-                                <button class="follow-btn"><a href="<?php echo base_url(); ?>contact-request" target="_self">View More</a></button>
+                                <button class="follow-btn">View More</button>
                             </div>
                         </div>
                     </data-owl-carousel>

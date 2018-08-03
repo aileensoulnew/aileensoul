@@ -370,7 +370,7 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
 .mes{text-align:center;}
 .model_ok_cancel .btn1{margin:5px; font-size:14px; line-height:1;}
 .model_ok_cancel{padding-top:20px;}
-.last-item-box .contact-name{padding:0 15px; line-height:1.2; padding-bottom:5px;}
+.last-item-box .contact-name{padding:0 15px; line-height:1.2; padding-bottom:5px; color:#5c5c5c; font-size:13px; font-weight:bold;}
 /***  end all follow part  ***/
 
 /***  end right part  ***/
@@ -2452,6 +2452,7 @@ label.cameraButton{min-height:43px;}
 .job-contact-frnd .profile-job-post-detail{width:100%; float:left;}
 .add-post-button{margin-top:0;}
 .follow-img{margin-left:0;}
+.all-contact-cus{display:none;}
 /***  end extra  ***/
 
 .right-add-box .adBlock { width: 300px; height: 250px; }
@@ -2489,7 +2490,6 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.custom-user-list{width:805px;}
 	.job-detail .job-top-detail{/*width:85%;*/}
 	.detail-discription .all-job-middle ul li span{width:80%;}
-	.all-contact .all-user-list .owl-nav{top:88px;}
     .audience-box{min-height: 385px;}
 	.mian_middle_post_box {width: 610px;}
 	#chat-area{width:838px;}
@@ -2507,6 +2507,8 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.edit_pr_bar .right-add-box .adBlock { width: 190px; height: 650px; }
 	.fixed_right_display {display: block !important; width:207px;}
 	.right_middle_side_posrt .right-add-box .adBlock { width: 190px !important; height: 600px !important; }
+	.all-contact-cus{display:block;}
+	.right-part .all-contact{display:none;}
 	
 }
 @media screen and (max-width: 1199px) {
@@ -2825,7 +2827,6 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.search-box .btn1{padding:7px 21px;}
     .custom-user-box{border: 0; border-bottom: 1px solid #d2d2d2; border-radius: 0;}
     .list-box-custom .custom-user-box:last-child{/*border-bottom: 0px solid #d2d2d2;*/}
-	.all-contact .all-user-list .owl-nav{top:75px;}
 	.all-noti .custom-user-box .custom-user-detail{width:84%;}
 	.custom-user-list .all-noti a h4{font-size:14px;}
 	.all-noti .custom-user-detail p{font-size:12px;}
@@ -3133,6 +3134,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.page-title{width:100%; float:left;}
 	.cus-inner-middle{padding:0;}
 	.middle-part.op-middle{margin-bottom:30px; width:100%; float:left;}
+	.all-contact{border-radius:0; border-left:0; border-right:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3283,7 +3285,6 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.custom-user-box .custom-user-detail p{font-size:12px; padding-top:5px; line-height: 1;}
     .custom-user-box .custom-user-btn .btn3{padding: 5px 10px;}
     .custom-user-list .post-img-mainuser{padding: 8px 0; font-size: 13px;}
-	.all-contact .all-user-list .owl-nav{top:150px;}
 	.work-timing li{}
 	
 	.all-noti .custom-user-box .custom-user-detail{padding-top:0;}
@@ -3492,7 +3493,6 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.post-box-bottom ul li a img{/*width:12px;*/}
     .modal .post-box-bottom ul li a img{width:16px;}
 	.comment-action li{padding:0 5px;}
-	.all-contact .all-user-list .owl-nav{top:130px;}
 	.all-noti .custom-user-box .custom-user-detail{width:83%;}
 	.custom-user-list .all-noti a h4{font-size:13px;}
 	.custom-user-box .custom-user-detail p{font-size:12px;}

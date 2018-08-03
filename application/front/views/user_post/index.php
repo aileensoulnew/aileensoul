@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="userOppoApp" ng-controller="userOppoController" scrollable-container>
+<html lang="en" ng-app="userOppoApp" ng-controller="userOppoController">
     <head>
         <title><?php echo $title; ?></title>
         <meta charset="utf-8">
@@ -71,9 +71,7 @@
     <div class="container">
     <?php echo $n_leftbar; ?>
     <div class="middle-part op-middle">
-	<div class="tab-add">
-		<?php $this->load->view('banner_add'); ?>
-	</div>
+	
     <div class="add-post">
         <div class="post-box">
                 <?php if ($leftbox_data['user_image'] != '') { ?> 
@@ -130,8 +128,51 @@
             </div>
         </div>
     </div>
-	<div class="tab-add">
-		<?php $this->load->view('infeed_add'); ?>
+	<div class="all-contact-cus ">
+		<div class="all-contact">
+            <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_self">All</a></h4>
+            <div class="all-user-list">
+                <data-owl-carousel class="owl-carousel" data-options="">
+                    <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
+                        <div class="item" id="item-{{contact.user_id}}">
+                            <div class="post-img" ng-if="contact.user_image != ''">
+                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
+                                </a>
+                            </div>
+                            <div class="post-img" ng-if="contact.user_image == ''">
+                                <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
+                                    <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                    <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                </a>
+                            </div>
+                            <div class="user-list-detail">
+                                <p class="contact-name"><a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-bind="(contact.first_name | limitTo:1 | uppercase) + (contact.first_name.substr(1) | lowercase)+' '+ (contact.last_name | limitTo:1 | uppercase) + (contact.last_name.substr(1) | lowercase)"></a></p>
+                                <p class="contact-designation">
+                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name != ''">{{contact.title_name| uppercase}}</a>
+                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == ''">{{contact.degree_name| uppercase}}</a>
+                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" ng-if="contact.title_name == null && contact.degree_name == null">CURRENT WORK</a>
+                                </p>
+                            </div>
+                            <button class="follow-btn" ng-click="addToContact(contact.user_id, contact)">Add to contact</button>
+                        </div>
+                    </div>
+                    <div owl-carousel-item="" class="item last-item-box">
+                        <a href="<?php echo base_url('contact-request') ?>">
+                            <div class="item" id="last-item">
+                                <div class="post-img" ng-if="contact.user_image != ''">
+                                    <img ng-src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                </div>
+                                <div class="user-list-detail">
+                                    <p class="contact-name">Find More Contacts</p>
+                                </div>
+                                <button class="follow-btn">View More</button> 
+                            </div>
+                        </a>
+                    </div>
+                </data-owl-carousel>
+            </div>
+        </div>
 	</div>
     <!-- Repeated Class Start -->
     <div class="all_user_post">
@@ -674,9 +715,9 @@
                                     <img ng-src="<?php echo base_url('assets/n-images/view-all.png') ?>">
                                 </div>
                                 <div class="user-list-detail">
-                                    <p class="contact-name"><a href="<?php echo base_url(); ?>contact-request" target="_self">Find More Contacts</a></p>
+                                    <p class="contact-name">Find More Contacts</p>
                                 </div>
-                                <button class="follow-btn"><a href="<?php echo base_url(); ?>contact-request" target="_self">View More</a></button> 
+                                <button class="follow-btn">View More</button> 
                             </div>
                         </a>
                     </div>

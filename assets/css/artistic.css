@@ -4241,9 +4241,6 @@ div .comment {
     .fixed_right_display_none {
         display: block;
     }
-    .fixed_right_display {
-        display: none!important;
-    }
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1350px) {
