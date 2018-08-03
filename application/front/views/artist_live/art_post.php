@@ -74,7 +74,7 @@
                 </div>
                 <?php }?>
 				<?php $this->load->view('right_add_box'); ?>
-                
+                <?php echo $left_footer; ?>
             </div>
             </div>
             <div class=" custom-right-art mian_middle_post_box animated fadeInUp">
@@ -161,7 +161,7 @@
             </div>
             <div class="right_middle_side_posrt animated fadeInRightBig fixed_right_display" id="hideuserlist" >
 				<?php $this->load->view('right_add_box'); ?>
-				<?php echo $left_footer; ?>
+				
                 
                
             </div>

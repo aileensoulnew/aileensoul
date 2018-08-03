@@ -262,7 +262,7 @@ if ($job[0]['job_user_image'] != '' && $info) {
                     }
                     ?>
                     <div class="">
-						<div class="tab-add">
+						<div class="tab-add-991">
 							<?php $this->load->view('banner_add'); ?>
 						</div>
                         <div class="common-form">

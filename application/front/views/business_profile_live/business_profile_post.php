@@ -75,7 +75,7 @@ $mobile_agent = $this->agent->mobile;
                             }
                             ?>
 							<?php $this->load->view('right_add_box'); ?>
-                           
+                          <?php echo $left_footer; ?>
                         </div>
                         <br>
                         <div id="result"></div>   
@@ -171,7 +171,7 @@ $mobile_agent = $this->agent->mobile;
                     
 					<div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig"> 
                         <?php $this->load->view('right_add_box'); ?>
-						<?php echo $left_footer; ?>
+						
                         
                     </div>
                 </div>

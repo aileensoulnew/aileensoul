@@ -198,7 +198,7 @@
                             <?php
                         }
                         ?>
-						<div class="tab-add">
+						<div class="tab-add-991">
 							<?php $this->load->view('banner_add'); ?>
 						</div>
                         <div class="page-title">

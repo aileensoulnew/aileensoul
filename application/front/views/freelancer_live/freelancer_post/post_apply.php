@@ -270,7 +270,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                     
                                 </form>
 								<?php $this->load->view('right_add_box'); ?>
-                                
+                                <?php echo $left_footer; ?>
                             </div>
                         </div>
                         <!-- cover pic end -->
@@ -438,7 +438,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                     }
                                     ?>
                             </div>
-                            <?php echo $left_footer; ?>
+                            
 
                         </div>
 

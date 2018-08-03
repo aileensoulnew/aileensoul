@@ -2519,6 +2519,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.right_middle_side_posrt .right-add-box .adBlock { width: 190px !important; height: 600px !important; }
 	.all-contact-cus{display:block;}
 	.right-part .all-contact{display:none;}
+	.cus-inner-middle{padding-left:0;}
 	
 }
 @media screen and (max-width: 1199px) {

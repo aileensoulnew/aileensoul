@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
 								<?php $this->load->view('right_add_box'); ?>
-                               
+                               <?php echo $left_footer; ?>
                                 
                                 <?php //}  ?>
                                 <div id="khyati"></div>
@@ -246,7 +246,7 @@
                         </div>
                         <div id="hideuserlist" class="right_middle_side_posrt fixed_right_display animated fadeInRightBig">
                             <?php $this->load->view('right_add_box'); ?>
-							<?php echo $left_footer; ?>
+							 
                         </div>
                     </div>
                 </div>

@@ -120,10 +120,6 @@ function business_userlist(pagenum, from = "") {
     });
 }
 
-$(document).ready(function () {
-    $('html,body').animate({scrollTop: 330}, 500);
-});
-
 
 function followuser(clicked_id)
 {
