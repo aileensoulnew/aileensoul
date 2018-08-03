@@ -1625,6 +1625,7 @@ class Search extends MY_Controller {
         $unique = $this->common->get_search_results_total($search_skill,$search_place,$filter_array);
         // echo $unique["total_record"];
         // exit;
+        $feed_ads = $this->load->view('infeed_add','',TRUE);
         if (empty($_GET["total_record"])) {
             $_GET["total_record"] = $unique["total_record"];
         }
@@ -1636,6 +1637,7 @@ class Search extends MY_Controller {
         $free_hire_result = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data = 'reg_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         if (count($freelancerpostdata1) > 0) {
+            $counter = 1;
             foreach ($freelancerpostdata1 as $row) {
                 $return_html .= '<div class="profile-job-post-detail clearfix search">
                 <div class="profile-job-post-title-inside clearfix">
@@ -1905,6 +1907,11 @@ class Search extends MY_Controller {
                 </div>
                 </div>
                 </div>';
+                if($counter % 3 == 0)
+                {
+                    $return_html .= '<div class="tab-add">'.$feed_ads.'</div>';
+                }
+                $counter ++;
             }
         } else {
             $return_html .= '<div class="text-center rio">
