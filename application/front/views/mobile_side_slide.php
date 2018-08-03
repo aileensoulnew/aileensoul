@@ -8,8 +8,10 @@ else
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
         <div class="all-profile-box content custom-scroll">
             <ul class="all-pr-list">
+                <?php if(empty($session_user)): ?>
 				<li><a target="_self" title="Login" href="<?php echo base_url('login'); ?>">Login</a></li>
                 <li><a target="_self" title="Create an Account" href="<?php echo base_url('registration'); ?>">Sign Up</a></li>
+                <?php endif; ?>
                 <li><a target="_self" href="<?php echo $job_right_profile_link; ?>">Job Profile</a></li>
                 <li><a target="_self" href="<?php echo $recruiter_right_profile_link; ?>">Recruiter Profile</a></li>
                 <li><a target="_self" title="Freelance Employer" href="<?php echo $freelance_hire_right_profile_link; ?>">Freelance Employer Profile</a></li>

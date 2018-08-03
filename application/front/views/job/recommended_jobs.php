@@ -307,15 +307,15 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     <?php echo $left_footer; ?>
                 </div>
                 <div class="middle-part">
-					<div class="tab-add">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('banner_add'); ?>
+					</div> -->
                     <div class="page-title">
                         <h3>Recommended Job</h3>
                     </div>
-					<div class="tab-add">
-						<?php $this->load->view('infeed_add'); ?>
-					</div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('infeed_add'); ?>
+					</div> -->
                     <div class="user_no_post_avl ng-scope" ng-if="recommended_job.length == 0">
                         <div class="user-img-nn">
                             <div class="user_no_post_img">
@@ -324,48 +324,55 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="art_no_post_text">No Jobs Available.</div>
                         </div>
                     </div>
-                    <div class="all-job-box" ng-repeat="job in recommended_job">
-                        <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="jobs.page_number" ng-value="{{jobs.page_number}}">
-                        <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="jobs.total_record" ng-value="{{jobs.total_record}}">
-                        <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
-                        <div class="all-job-top">
-                            <div class="post-img">
-                                <a ng-href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo != null"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}" on-error-src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
-                                <a ng-href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo == null"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
+                    <div ng-if="recommended_job.length > 0" ng-repeat="job in recommended_job" ng-init="jobIndex=$index">
+                        <div class="all-job-box">
+                            <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="jobs.page_number" ng-value="{{jobs.page_number}}">
+                            <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="jobs.total_record" ng-value="{{jobs.total_record}}">
+                            <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
+                            <div class="all-job-top">
+                                <div class="post-img">
+                                    <a ng-href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo != null"><img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL ?>{{job.comp_logo}}" on-error-src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
+                                    <a ng-href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.comp_logo == null"><img src="<?php echo base_url('assets/n-images/commen-img.png') ?>"></a>
+                                </div>
+                                <div class="job-top-detail">
+                                    <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
+                                    <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
+                                    <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.re_comp_name"></a></p>
+                                    <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.fullname"></a></p>
+                                </div>
                             </div>
-                            <div class="job-top-detail">
-                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="job.string_post_name" ng-bind="job.string_post_name"></a></h5>
-                                <h5><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-if="!job.string_post_name" ng-bind="job.post_name"></a></h5>
-                                <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.re_comp_name"></a></p>
-                                <p><a href="<?php echo base_url(); ?>{{job.string_post_name | slugify}}-job-vacancy-in-{{job.city_name | slugify}}-{{job.user_id}}-{{job.post_id}}" ng-bind="job.fullname"></a></p>
+                            <div class="all-job-middle">
+                                <p class="pb5">
+                                    <span class="location">
+                                        <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png') ?>">{{job.city_name}},({{job.country_name}})</span>
+                                    </span>
+                                    <span class="exp">
+                                        <span><img class="pr5" src="<?php echo base_url('assets/n-images/exp.png') ?>">{{job.min_year}} year - {{job.max_year}} year <span ng-if="job.fresher == '1'">(freshers can also apply)</span></span>
+                                    </span>
+                                </p>
+                                <p ng-bind="(job.post_description | limitTo:175) + '.....'"></p>
+
+                            </div>
+                            <div class="all-job-bottom">
+                                <span class="job-post-date"><b>Posted on:</b><span ng-bind="job.created_date"></span></span>
+                                <p class="pull-right" ng-if="job.job_applied == 1 && job.job_saved == 0">
+                                    <a href="javascript:void(0);" class="btn4  applied">Applied</a>
+                                </p>
+                                <p class="pull-right" ng-if="job.job_applied == 0 && job.job_saved == 1">
+                                    <a href="javascript:void(0);" class="btn4 saved savedpost{{job.post_id}}">Saved</a>
+                                    <a href="javascript:void(0);" class="btn4 applypost{{job.post_id}}" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
+                                </p>
+                                <p class="pull-right" ng-if="job.job_applied == 0 && job.job_saved == 0">
+                                    <a href="javascript:void(0);" class="btn4 savedpost{{job.post_id}}" ng-click="savepopup(job.post_id)">Save</a>
+                                    <a href="javascript:void(0);" class="btn4 applypost{{job.post_id}}" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
+                                </p>
+
                             </div>
                         </div>
-                        <div class="all-job-middle">
-                            <p class="pb5">
-                                <span class="location">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/location.png') ?>">{{job.city_name}},({{job.country_name}})</span>
-                                </span>
-                                <span class="exp">
-                                    <span><img class="pr5" src="<?php echo base_url('assets/n-images/exp.png') ?>">{{job.min_year}} year - {{job.max_year}} year <span ng-if="job.fresher == '1'">(freshers can also apply)</span></span>
-                                </span>
-                            </p>
-                            <p ng-bind="(job.post_description | limitTo:175) + '.....'"></p>
-
-                        </div>
-                        <div class="all-job-bottom">
-                            <span class="job-post-date"><b>Posted on:</b><span ng-bind="job.created_date"></span></span>
-                            <p class="pull-right" ng-if="job.job_applied == 1 && job.job_saved == 0">
-                                <a href="javascript:void(0);" class="btn4  applied">Applied</a>
-                            </p>
-                            <p class="pull-right" ng-if="job.job_applied == 0 && job.job_saved == 1">
-                                <a href="javascript:void(0);" class="btn4 saved savedpost{{job.post_id}}">Saved</a>
-                                <a href="javascript:void(0);" class="btn4 applypost{{job.post_id}}" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
-                            </p>
-                            <p class="pull-right" ng-if="job.job_applied == 0 && job.job_saved == 0">
-                                <a href="javascript:void(0);" class="btn4 savedpost{{job.post_id}}" ng-click="savepopup(job.post_id)">Save</a>
-                                <a href="javascript:void(0);" class="btn4 applypost{{job.post_id}}" ng-click="applypopup(job.post_id,job.user_id)">Apply</a>
-                            </p>
-
+                        <div ng-if="(jobIndex + 1) % 3 == 0">
+                            <div id="ads{{jobIndex}}" class="tab-add">
+                                <?php $this->load->view('infeed_add'); ?>
+                            </div>
                         </div>
                     </div>
 					
@@ -801,7 +808,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
         <script type="text/javascript" src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>

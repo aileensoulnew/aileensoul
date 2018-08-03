@@ -309,7 +309,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                         <div class="art_no_post_text">No Projects Available.</div>
                                     </div>
                                 </div>
-                                <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
+                                <div ng-if="freepostapply.length != 0" ng-repeat="applypost in freepostapply" ng-init="faIndex=$index">
+                                <div class="all-job-box freelance-recommended-post">
                                     <div class="all-job-top">
                                         <div class="job-top-detail">
                                             <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
@@ -371,6 +372,12 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                             <?php endif; ?>
                                         </p>
                                     </div>
+                                </div>
+                                <div ng-if="(faIndex + 1) % 3 == 0">
+                                    <div class="tab-add">
+                                        <?php $this->load->view('infeed_add'); ?>
+                                    </div>
+                                </div>
                                 </div>
 
                             </div>

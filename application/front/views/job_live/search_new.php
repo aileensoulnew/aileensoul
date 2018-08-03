@@ -286,15 +286,15 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     </div> -->
                 </div>
                 <div class="middle-part">
-					<div class="tab-add">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('banner_add'); ?>
+					</div> -->
                     <div class="page-title">
                         <h3>Search for <?php echo $q.($l != "" ? " jobs in ".$l : '') ; ?></h3>
                     </div>
-					<div class="tab-add">
-						<?php $this->load->view('infeed_add'); ?>
-					</div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('infeed_add'); ?>
+					</div> -->
                     <div class="user_no_post_avl ng-scope" ng-if="job_search.length == 0">
                         <div class="user-img-nn">
                             <div class="user_no_post_img">
@@ -303,7 +303,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="art_no_post_text">No Jobs Available.</div>
                         </div>
                     </div>
-                    <div class="all-job-box" ng-repeat="job in job_search">
+                    <div ng-if="job_search.length != 0" ng-repeat="job in job_search" ng-init="jobIndex=$index">
+                    <div class="all-job-box">
                         <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="jobs.page_number" ng-value="{{jobs.page_number}}">
                         <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="jobs.total_record" ng-value="{{jobs.total_record}}">
                         <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="jobs.perpage_record" ng-value="{{jobs.perpage_record}}">
@@ -347,9 +348,15 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                         </div>
                     </div>
-					<div class="tab-add">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
+                    <div id="ads{{jobIndex}}" ng-if="(jobIndex + 1) % 3 == 0">
+                        <div class="tab-add">
+                            <?php $this->load->view('infeed_add'); ?>
+                        </div>
+                    </div>
+                    </div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('banner_add'); ?>
+					</div> -->
                 </div>
                 <div class="right-part">
                     <?php $this->load->view('right_add_box'); ?>

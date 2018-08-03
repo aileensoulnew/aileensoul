@@ -135,76 +135,83 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             <div class="art_no_post_text">No Projects Available.</div>
                         </div>
                     </div>
-                    <div class="all-job-box freelance-recommended-post" ng-repeat="applypost in freepostapply">
-                            <div class="all-job-top">
-                                <div class="job-top-detail">
-                                    <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
-                                        <span ng-if="applypost.day_remain > 0">({{applypost.day_remain}} days left)</span>
-                                        </a>
-                                    </h5>
-                                    <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
-                                    <p ng-if="applypost.post_rate != ''">Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
-                                </div>
-                            </div>
-                            <div class="all-job-middle">
-                                <p class="pb5">
-                                    <span class="location" ng-if="applypost.city || applypost.country">
-                                        <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
-                                        <span ng-if="applypost.city && applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
-                                        </span>
-                                        <!-- IF ONLY CITY AVAILABLE -->
-                                        <span ng-if="applypost.city && !applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
-                                        </span>
-                                        <!-- IF ONLY COUNTRY AVAILABLE -->
-                                        <span ng-if="!applypost.city && applypost.country">
-                                            <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
-                                        </span>
-                                    </span>
-                                    <span class="exp">
-                                        <span>
-                                            <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
-                                            <span dd-text-collapse dd-text-collapse-max-length="35" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
-                                            </span>
-                                        </span>
-                                    </span>
-                                </p>                                
-                                <p dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_description}}" dd-text-collapse-cond="false">
-                                </p>
-                                <p ng-if="applypost.industry_name != '' ">
-                                    Categories : <span>{{applypost.industry_name}}</span>
-                                </p>
-                            </div>
-                            <div class="all-job-bottom">
-                                <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: {{applypost.ShortListedCount}}</span>
-                                <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: {{applypost.AppliedCount}}</span></span>
-                                <p class="pull-right" ng-if="applypost.apply_post == 1">
-                                    <a href="javascript:void(0);" class="btn4 applied">Applied</a>
-                                </p>
-                                <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 1">
-                                    <a href="javascript:void(0);" class="btn4 saved">Saved</a>
-                                    <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
-                                </p>
-                                <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 0">
-                                    <?php if($userid_login != "" && $this->freelance_apply_profile_set == 0): ?>
-                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
-                                        <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
-                                    <?php else: ?>
-                                        <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4 savedpost{{applypost.post_id}}">Save</a>
-                                        <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
-                                    <?php endif; ?>
-                                </p>
+                    <div ng-if="freepostapply.length != 0" ng-repeat="applypost in freepostapply" ng-init="frIndex=$index">
+                    <div class="all-job-box freelance-recommended-post">
+                        <div class="all-job-top">
+                            <div class="job-top-detail">
+                                <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
+                                    <span ng-if="applypost.day_remain > 0">({{applypost.day_remain}} days left)</span>
+                                    </a>
+                                </h5>
+                                <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
+                                <p ng-if="applypost.post_rate != ''">Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
                             </div>
                         </div>
-						<div class="banner-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
-                        <div id="loader" style="display: none;">
-                            <p style="text-align:center;">
-                                <img src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="<?php echo 'loaderimage'; ?>"/>
+                        <div class="all-job-middle">
+                            <p class="pb5">
+                                <span class="location" ng-if="applypost.city || applypost.country">
+                                    <!-- IF BOTH DATA AVAILABLE OF COUNTRY AND CITY -->
+                                    <span ng-if="applypost.city && applypost.country">
+                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }},({{ applypost.country }})
+                                    </span>
+                                    <!-- IF ONLY CITY AVAILABLE -->
+                                    <span ng-if="applypost.city && !applypost.country">
+                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{ applypost.city }}
+                                    </span>
+                                    <!-- IF ONLY COUNTRY AVAILABLE -->
+                                    <span ng-if="!applypost.city && applypost.country">
+                                        <img class="pr5" src="<?php echo base_url('assets/img/location.png?ver=' . time()) ?>">{{applypost.country}}
+                                    </span>
+                                </span>
+                                <span class="exp">
+                                    <span>
+                                        <img class="pr5" src="<?php echo base_url('assets/img/exp.png?ver=' . time()) ?>">
+                                        <span dd-text-collapse dd-text-collapse-max-length="35" dd-text-collapse-text="{{applypost.post_skill}}" dd-text-collapse-cond="false">
+                                        </span>
+                                    </span>
+                                </span>
+                            </p>                                
+                            <p dd-text-collapse dd-text-collapse-max-length="100" dd-text-collapse-text="{{applypost.post_description}}" dd-text-collapse-cond="false">
+                            </p>
+                            <p ng-if="applypost.industry_name != '' ">
+                                Categories : <span>{{applypost.industry_name}}</span>
                             </p>
                         </div>
+                        <div class="all-job-bottom">
+                            <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: {{applypost.ShortListedCount}}</span>
+                            <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: {{applypost.AppliedCount}}</span></span>
+                            <p class="pull-right" ng-if="applypost.apply_post == 1">
+                                <a href="javascript:void(0);" class="btn4 applied">Applied</a>
+                            </p>
+                            <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 1">
+                                <a href="javascript:void(0);" class="btn4 saved">Saved</a>
+                                <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
+                            </p>
+                            <p class="pull-right" ng-if="applypost.apply_post == 0 && applypost.saved_post == 0">
+                                <?php if($userid_login != "" && $this->freelance_apply_profile_set == 0): ?>
+                                    <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Save</a>
+                                    <a href="<?php echo base_url('freelance-work/profile/live-post/'); ?>{{applypost.post_id}}" class="btn4">Apply</a>
+                                <?php else: ?>
+                                    <a href="javascript:void(0)" ng-click="savepopup(applypost.post_id)" class="btn4 savedpost{{applypost.post_id}}">Save</a>
+                                    <a href="javascript:void(0)" ng-click="applypopup(applypost.post_id,applypost.user_id)" class="btn4 applypost{{applypost.post_id}}">Apply</a>
+                                <?php endif; ?>
+                            </p>
+                        </div>
+                    </div>
+                    <div ng-if="(frIndex + 1) % 3 == 0">
+                        <div class="tab-add">
+                            <?php $this->load->view('infeed_add'); ?>
+                        </div>
+                    </div>
+                    </div>
+					<!-- <div class="banner-add">
+						<?php //$this->load->view('banner_add'); ?>
+					</div> -->
+                    <div id="loader" style="display: none;">
+                        <p style="text-align:center;">
+                            <img src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="<?php echo 'loaderimage'; ?>"/>
+                        </p>
+                    </div>
 						
                 </div>
                 <div class="right-part">
