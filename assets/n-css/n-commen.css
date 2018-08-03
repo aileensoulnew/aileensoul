@@ -1568,11 +1568,11 @@ a:focus{outline:none;}
 @media screen and (min-width: 1200px) {
     .container {width: 1170px;}
 }
-@media screen and (min-width: 1280px) and (max-width: 1310px) { 
-    .container {width: 1250px;}
+@media screen and (min-width: 1280px) and (max-width: 1299px) { 
+    .container {width: 1250px; padding-left:0; padding-right:0;}
 }
 
-@media screen and (min-width: 1311px) {
+@media screen and (min-width: 1300px) {
     .container {width: 1280px;}
 }
 

@@ -2530,7 +2530,7 @@ footer div.pt20{
     }
 }
 @media screen and (max-width:1299px){
-    .fixed_right_display{display: none;}
+    .fixed_right_display{/*display: none;*/}
     .verticale-add{display: block; position: absolute;width: 160px; float: left; margin-left: 960px;}
     .verticale-add.live-post{display: none;}
 }

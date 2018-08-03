@@ -1980,12 +1980,7 @@ footer ul li a:hover{
         right:-5px
     }
 }
-@media screen and (max-width:1296px){
-   /* .header2{
-        width:1140px;
-    }*/
-	.fixed_right_display{display:none;}
-}	
+	
 @media screen and (max-width:1279px){
     .reactivate_header h2{
         font-size:22px
