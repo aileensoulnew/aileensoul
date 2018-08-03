@@ -510,6 +510,7 @@
                                 </div>
 								
                                 <?php
+                                $counter = 1;
                                 foreach ($recommandedpost as $post) {
                                     ?>
                                     <div class="all-job-box job-detail">
@@ -771,15 +772,25 @@
 
                                             </div>
                                         </div>
-										<div class="banner-add">
-										<?php $this->load->view('banner_add'); ?>
-									</div>
+										<!-- <div class="banner-add">
+										<?php //$this->load->view('banner_add'); ?>
+                                        </div> -->
                                     </div>
                                     <?php
+                                    if($counter % 2 == 0)
+                                    {
+                                    ?>
+                                    <div class="banner-add">
+                                        <?php $this->load->view('infeed_add'); ?>
+                                    </div>
+                                    <?php
+                                    }
+                                    $counter ++;
                                 }
                                 ?>
-
-
+                                <div class="banner-add">
+                                    <?php $this->load->view('banner_add'); ?>
+                                </div>
                             </div>
                         <?php } ?>
                         <!--recommen candidate end-->
