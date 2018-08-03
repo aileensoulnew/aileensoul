@@ -195,19 +195,19 @@ footer ul li{
     float:left
 }
 .social_fb{
-    background:url(../social/icon_fb.png?version=@{cache-version}) no-repeat;
+    background:url('../social/icon_fb.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .social_gp{
-    background:url(../social/icon_gp.png?version=@{cache-version}) no-repeat;
+    background:url('../social/icon_gp.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .social_lk{
-    background:url(../social/icon_lk.png?version=@{cache-version}) no-repeat;
+    background:url('../social/icon_lk.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .social_tw{
-    background:url(../social/icon_tw.png?version=@{cache-version}) no-repeat;
+    background:url('../social/icon_tw.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .header-left-menu{

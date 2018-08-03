@@ -611,7 +611,7 @@ ul.dropdown-menu li a i{
     /*display:none */
 }
 .header2 ul li a.msg_notification_available .img-msg,.header2 ul li a:hover .img-msg{
-    background-image:url(../img/message3_24x24.png);
+    background-image:url('../img/message3_24x24.png?version=@{cache-version}');
     background-size:100%
 }
 .header2 input::-webkit-input-placeholder{
@@ -657,24 +657,24 @@ header .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical,header .mCSB_ou
     padding:8px 12px
 }
 .header2 ul li a .bu_home{
-    background-image:url(../img/home_22x22_h.png?version=@{cache-version});
+    background-image:url('../img/home_22x22_h.png?version=@{cache-version}');
     float:left;
     background-size:100%;
     height:19px;
     width:20px
 }
 .header2 ul li a:hover .bu_home{
-    background-image:url(../img/home_22x22.png?version=@{cache-version})
+    background-image:url('../img/home_22x22.png?version=@{cache-version}')
 }
 .header2 ul li a .bu_req{
-    background-image:url(../img/icon_contact_request_h.png?version=@{cache-version});
+    background-image:url('../img/icon_contact_request_h.png?version=@{cache-version}');
     float:left;
     background-size:100%;
     height:25px;
     width:25px
 }
 .header2 ul li a.contact_notification_available .bu_req,.header2 ul li a:hover .bu_req{
-    background-image:url(../img/icon_contact_request.png?version=@{cache-version})
+    background-image:url('../img/icon_contact_request.png?version=@{cache-version}')
 }
 .dropdown_hover #art_profile:hover{
     color:#fff
@@ -774,22 +774,22 @@ header .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical,header .mCSB_ou
     padding-right:0
 }
 .dropdown_hover .dropdown-content_hover a:hover .h2-img{
-    background:url(../img/icon_view_profile_white.png?version=@{cache-version}) no-repeat;
+    background:url('../img/icon_view_profile_white.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .dropdown_hover .dropdown-content_hover a:hover{
     color:#fff
 }
 .h3-img{
-    background:url(../img/icon_edit_profile.png?version=@{cache-version}) no-repeat;
+    background:url('../img/icon_edit_profile.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .dropdown_hover .dropdown-content_hover a:hover .h3-img{
-    background:url(../img/icon_edit_profile_white.png?version=@{cache-version}) no-repeat;
+    background:url('../img/icon_edit_profile_white.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .dropdown_hover .dropdown-content_hover a:hover .h4-img{
-    background:url(../img/icon_delete_white.png?version=@{cache-version}) no-repeat;
+    background:url('../img/icon_delete_white.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .dropdown_hover span i{
@@ -836,7 +836,7 @@ header .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical,header .mCSB_ou
     right:9px
 }
 .h2-img{
-    background:url(../img/icon_view_profile.png?version=@{cache-version}) no-repeat;
+    background:url('../img/icon_view_profile.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .h2-srrt{
@@ -847,7 +847,7 @@ header .mCSB_outside+.mCS-minimal-dark.mCSB_scrollTools_vertical,header .mCSB_ou
     background-size:100%
 }
 .h4-img{
-    background:url(../img/icon_delete.png?version=@{cache-version}) no-repeat;
+    background:url('../img/icon_delete.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .msg_desc_a{
@@ -1596,7 +1596,7 @@ footer{
 }
 .all,.all-h,.header-icon-notification,.header-icon-notification-h{
     display:inline-block;
-    background:url(../img/index.png?version=@{cache-version}) no-repeat;
+    background:url('../img/index.png?version=@{cache-version}') no-repeat;
     overflow:hidden;
     text-indent:-9999px;
     text-align:left
@@ -1628,7 +1628,7 @@ footer{
 }
 .home-22x22,.home-22x22-h,.message3-24x24,.message3-24x24-h{
     display:inline-block;
-    background:url(../img/h3.png?version=@{cache-version}) no-repeat;
+    background:url('../img/h3.png?version=@{cache-version}') no-repeat;
     overflow:hidden;
     text-indent:-9999px;
     text-align:left
@@ -1655,7 +1655,7 @@ footer{
 }
 .icon-delete,.icon-delete-white,.icon-edit-profile,.icon-edit-profile-white,.icon-logout,.icon-logout-white,.icon-settings,.icon-settings-white,.icon-view-profile,.icon-view-profile-white{
     display:inline-block;
-    background:url(../img/edit_profile.png?version=@{cache-version}) no-repeat;
+    background:url('../img/edit_profile.png?version=@{cache-version}') no-repeat;
     overflow:hidden;
     text-indent:-9999px;
     text-align:left
@@ -1712,7 +1712,7 @@ footer{
 }
 .down-arrow,.down-arrow-hover{
     display:inline-block;
-    background:url(../img/dropdown_aro.png?version=@{cache-version}) no-repeat;
+    background:url('../img/dropdown_aro.png?version=@{cache-version}') no-repeat;
     overflow:hidden;
     text-indent:-9999px;
     text-align:left
@@ -1736,7 +1736,7 @@ footer{
     display:inline-block
 }
 .em-blush{
-    background-image:url(../img/blush.png?version=@{cache-version})
+    background-image:url('../img/blush.png?version=@{cache-version}')
 }
 .highlight{
     display:inline-block;

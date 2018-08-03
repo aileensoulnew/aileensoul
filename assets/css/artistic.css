@@ -2274,15 +2274,15 @@ label.cameraButton:active {
     color: white!important;
 }
 .dropdown-content2 a:hover .h4-img {
-    background: url(../img/icon_delete_white.png?version=@{cache-version}) no-repeat;
+    background: url('../img/icon_delete_white.png?version=@{cache-version}') no-repeat;
     background-size: 100%;
 }
 .dropdown-content2 a:hover .h3-img {
-    background: url(../img/icon_edit_profile_white.png?version=@{cache-version}) no-repeat;
+    background: url('../img/icon_edit_profile_white.png?version=@{cache-version}') no-repeat;
     background-size: 100%;
 }
 .dropdown-content2 a:hover .h2-img {
-    background: : url(../img/icon_view_profile_white.png?version=@{cache-version}) no-repeat, background-size: 100%;
+    background: : url('../img/icon_view_profile_white.png?version=@{cache-version}') no-repeat, background-size: 100%;
 }
 .dropdown-content2 a i {
     padding-right: 13px;
@@ -3901,7 +3901,7 @@ div .comment {
 #audio_bg {
     height: 97px;
     width: 122px;
-    background-image: url(../images/music-icon_play.png?version=@{cache-version});
+    background-image: url('../images/music-icon_play.png?version=@{cache-version}');
     background-size: 100%;
     overflow: hidden;
 }

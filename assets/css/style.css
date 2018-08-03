@@ -827,7 +827,7 @@ fieldset .add_post_btnc,fieldset .add_post_btns{
     height:100%
 }
 .midd-section{
-    background:url(../images/freelancer-bg.jpg?version=@{cache-version}) no-repeat;
+    background:url('../images/freelancer-bg.jpg?version=@{cache-version}') no-repeat;
     background-size:cover;
     padding:100px 0
 }
@@ -1439,7 +1439,7 @@ body.blog{
     cursor:text
 }
 #mychat_dropdown a:hover .h4-img{
-    background:url(../img/icon_delete_white.png?version=@{cache-version}) no-repeat;
+    background:url('../img/icon_delete_white.png?version=@{cache-version}') no-repeat;
     background-size:100%
 }
 .chatdropbtn:focus,.chatdropbtn:hover{
@@ -1493,7 +1493,7 @@ a.chatdropbtn:hover{
     width:13px;
     float:left;
     background-size:100%!important;
-    background:url(../img/clock.png?version=@{cache-version}) no-repeat
+    background:url('../img/clock.png?version=@{cache-version}') no-repeat
 }
 .msg_desc_a{
     width:95%;
@@ -1865,7 +1865,7 @@ input:-moz-placeholder{
 .cameraButton .fa.fa-camera{
     width:30px;
     height:26px;
-    background:url(../img/cam.png?version=@{cache-version}) no-repeat;
+    background:url('../img/cam.png?version=@{cache-version}') no-repeat;
     border:none;
     padding:5px;
     opacity:.6;
@@ -2934,7 +2934,7 @@ footer div.pt20{
         width:100%
     }
     .outer-page header{
-        background:url(../img/mob-about-bg.jpg?version=@{cache-version})
+        background:url('../img/mob-about-bg.jpg?version=@{cache-version}')
     }
     .title h1{
         font-size:20px!important

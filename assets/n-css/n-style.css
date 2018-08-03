@@ -718,7 +718,7 @@ border-bottom: 0px;}
 
 
 .right-profile .right-menu-box{height:56px; display:block; border:1px solid #c2dce7;  background:#fff url('../img/download.png?version=@{cache-version}') no-repeat; overflow: hidden; text-align: left; border-bottom:0;}
-.right-profile .right-menu-box:hover{background:#1b8ab9 url('../img/download.png') no-repeat;     border: 1px solid #1b8ab9;}
+.right-profile .right-menu-box:hover{background:#1b8ab9 url('../img/download.png?version=@{cache-version}') no-repeat;     border: 1px solid #1b8ab9;}
 .right-profile .job-r{background-position: -0px -0px;}
 .right-profile .job-r:hover{background-position: 0 -54px;}
 .right-profile .rec-r{background-position: 0 -108px;}
@@ -979,7 +979,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .all-upload .form-group .file-input{margin-left:0;}
 .krajee-default[data-template=audio] .file-preview-audio{
     height:125px;
-    background-image:url(../images/music-icon2.jpg?version=@{cache-version});
+    background-image:url('../images/music-icon2.jpg?version=@{cache-version}');
     background-size:83%;
     background-position:center top
 }
@@ -1379,7 +1379,7 @@ transform: translate(-50%,-50%);
 .slider_img_p .audio-title, .slider_img_p .pdf-title{font-weight: bold; color: #fff; padding-bottom: 10px;}
 
 /*.video-tab li{width: 270px;height: 250px;}*/
-.audio-tab li .li-audio{background: url(../n-images/music-icon1.png?version=@{cache-version}); width: 280px; background-size: 100%; padding-top: 180px;}
+.audio-tab li .li-audio{background:url('../n-images/music-icon1.png?version=@{cache-version}'); width: 280px; background-size: 100%; padding-top: 180px;}
 .audio-tab li{height: auto; width:280px; height: 265px;}
 .audio-tab li audio{width:100%;}
 .pdf-tab li a img{width:75%; height:75%;}
@@ -2326,7 +2326,7 @@ label.cameraButton{min-height:43px;}
 
 /***  rec css  ***/
 .rec-recmn-post .contact-frnd-post{border:0; padding:0; margin-top:10px;}
-.job-saved-box.rec-recmn-post h3, .rec-recmn-post .job-saved-box h3{border:1px solid #d2d2d2; border-radius:4px;}
+.job-saved-box.rec-recmn-post h3, .rec-recmn-post .job-saved-box h3{border:1px solid #d2d2d2; border-radius:4px; width:100%; float:left;}
 .mian_middle_post_box{margin-left:15px;}
 .right_middle_side_posrt{width:316px;}
 .right_middle_side_posrt .all-profile-box{width:100%; margin-left:0;}
@@ -2491,7 +2491,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.job-detail .job-top-detail{/*width:85%;*/}
 	.detail-discription .all-job-middle ul li span{width:80%;}
     .audience-box{min-height: 385px;}
-	.mian_middle_post_box {width: 610px;}
+	.mian_middle_post_box {/*width: 610px;*/}
 	#chat-area{width:838px;}
 	.cus-inner-middle{width:71%;}
 	.cus-add-post .right-add{width:220px;}
@@ -2551,6 +2551,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.tooltip-custom{width:160px; right:-180px;}
 	.cus-inner-middle{width:64%;}
 	.tab-add{display:block;}
+	.mian_middle_post_box{width:610px;}
 }
 @media screen and (max-width: 1024px) {
 

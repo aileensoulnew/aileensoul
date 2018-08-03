@@ -1229,7 +1229,7 @@ border: 1px solid #1b8ab9;}
 .sub-header .new-search-btn label i{background:none; padding:5px 4px 4px 5px;}
 
 .icon-delete,.icon-delete-white,.icon-edit-profile,.icon-edit-profile-white,.icon-logout,.icon-logout-white,.icon-settings,.icon-settings-white,.icon-view-profile,.icon-view-profile-white{
-    display:inline-block; background:url(../img/edit_profile.png?version=@{cache-version}) no-repeat; overflow:hidden;
+    display:inline-block; background:url('../img/edit_profile.png?version=@{cache-version}') no-repeat; overflow:hidden;
     text-indent:-9999px; text-align:left
 }
 .dropdown_hover .dropdown-content_hover a:hover .icon-delete{ background-position:0 0; width:20px; height:20px}
