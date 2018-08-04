@@ -8987,11 +8987,14 @@ No Contacts Available.
             $_GET["total_record"] = count($business_profile_post1);
         }*/
 
+        $infeed_add = $this->load->view('infeed_add','',TRUE);
+
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         $return_html .= '<input type = "hidden" class = "total_record" value = "' . $business_profile_post_total_rec. '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
         if ($business_profile_post_total_rec > 0) {
+            $feed_counter = 1;
             foreach ($business_profile_post as $row) {
 
                 $post_business_user_image = $row['business_user_image'];
@@ -9674,6 +9677,11 @@ Your browser does not support the audio tag.
 </div>
 </div>
 </div></div>';
+                if($feed_counter % 3 == 0)
+                {
+                    $return_html .= '<div class="tab-add">'.$infeed_add.'</div>';
+                }
+                $feed_counter ++;
             }
         }
 

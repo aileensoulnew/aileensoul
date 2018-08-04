@@ -11454,9 +11454,9 @@ class Artist extends MY_Controller {
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
-
+        $infeed_add = $this->load->view('infeed_add','',TRUE);
         if (count($artistic_post1) > 0) {
-
+            $feed_counter = 1;
             foreach ($artistic_post as $row) {
                 $userid = $this->session->userdata('aileenuser');
                 $contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1');
@@ -12267,6 +12267,11 @@ class Artist extends MY_Controller {
                 } else {
                     $count[] = "abc";
                 }
+                if($feed_counter % 3 == 0)
+                {
+                    $return_html .= '<div class="tab-add">'.$infeed_add.'</div>';                    
+                }
+                $feed_counter ++;
             }
         }
 

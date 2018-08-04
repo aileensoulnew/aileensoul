@@ -107,7 +107,8 @@
 					<div class="tab-add">
 						<?php $this->load->view('infeed_add'); ?>
 					</div>
-                    <div class="all-job-box search-business" ng-repeat="business in businessList">
+                    <div ng-if="businessList.length != 0" ng-repeat="business in businessList" ng-init="busIndex=$index">
+                    <div class="all-job-box search-business">
                         <div class="search-business-top">
                             <div class="bus-cover no-cover-upload">
                                 <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.profile_background"><img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{business.profile_background}}" on-error-src="<?php echo BASEURL.WHITEIMAGE ?>"></a>
@@ -132,6 +133,12 @@
                                 <li ng-if="business.details"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{business.details | limitTo:110}}...<a href="<?php echo BASEURL ?>company/{{business.business_slug}}"> Read more</a></p></li>
                             </ul>
                         </div>
+                    </div>
+                    <div ng-if="(busIndex + 1) % 3 == 0">
+                        <div class="tab-add">
+                            <?php $this->load->view('infeed_add'); ?>
+                        </div>
+                    </div>
                     </div>
                     <!-- NO RESULT FOUND DIV -->
                     <div class="job-contact-frnd user_no_post_avl" ng-if="businessList.length <= 0">

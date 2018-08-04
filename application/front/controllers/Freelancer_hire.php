@@ -862,6 +862,7 @@ class Freelancer_hire extends MY_Controller {
                 $_GET["total_record"] = count($candidatefreelancer);
             }
         */
+            $feed_ads = $this->load->view('infeed_add','',TRUE);
             if (empty($_GET["total_record"])) {
                 $_GET["total_record"] = $candidatefreelancer['total_record'];
             }
@@ -872,6 +873,7 @@ class Freelancer_hire extends MY_Controller {
             $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
                
             if ($candidatefreelancer['total_record'] > 0) {
+                $feed_counter = 1;
                 foreach ($candidatefreelancer1 as $key=>$row) {
                     $return_html .= '<div class = "profile-job-post-detail clearfix">
                         <div class = "profile-job-post-title-inside clearfix">
@@ -1098,6 +1100,11 @@ class Freelancer_hire extends MY_Controller {
                         </div>
                         </div>';
                     // echo $return_html;
+                    if($feed_counter % 3 == 0)
+                    {
+                        $return_html .= '<div class="tab-add">'.$feed_ads.'</div>';
+                    }
+                    $feed_counter ++;
                 }
             } else {
                 $return_html .= '<div class="art-img-nn">

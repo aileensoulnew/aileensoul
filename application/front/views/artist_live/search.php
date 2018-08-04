@@ -102,7 +102,8 @@
 					<div class="tab-add">
 						<?php $this->load->view('infeed_add'); ?>
 					</div>
-                    <div class="all-job-box search-business" ng-repeat="artist in artistList">
+                    <div ng-if="artistList.length != 0" ng-repeat="artist in artistList" ng-init="artIndex=$index">
+                    <div class="all-job-box search-business">
                         <div class="search-business-top">
                             <div class="bus-cover no-cover-upload">
                                 <a href="<?php echo artist_dashboard ?>{{artist.slug}}" ng-if="artist.profile_background">
@@ -130,6 +131,12 @@
                                 <li ng-if="artist.art_desc_art"><span class="img"><img class="pr10" ng-src="<?php echo base_url('assets/n-images/exp.png') ?>"></span><p class="detail-content">{{artist.art_desc_art| limitTo:110}}...<a href="<?php echo artist_dashboard ?>{{artist.slug}}"> Read more</a></p></li>
                             </ul>
                         </div>
+                    </div>
+                    <div ng-if="(artIndex + 1) % 3 == 0">
+                        <div class="tab-add">
+                            <?php $this->load->view('infeed_add'); ?>
+                        </div>
+                    </div>
                     </div>
                     <!-- NO RESULT FOUND DIV -->
                     <div class="art-img-nn" ng-if="artistList.length <= 0">

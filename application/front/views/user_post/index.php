@@ -669,7 +669,8 @@
             </div>
             <div ng-if="(postIndex + 1) % 3 == 0">
                 <div class="tab-add">
-                    <?php $this->load->view('infeed_add'); ?>
+                    <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"></adsense>
+                    <?php //$this->load->view('infeed_add'); ?>
                 </div>
             </div>
         </div>
@@ -1195,6 +1196,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script>
         var base_url = '<?php echo base_url(); ?>';
@@ -1204,7 +1206,7 @@
         var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
         var no_user_post_html = '<?php echo $no_user_post_html; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
-        var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
+        var app = angular.module('userOppoApp', ['ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense']);
         </script>               
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_post.js') ?>"></script>
