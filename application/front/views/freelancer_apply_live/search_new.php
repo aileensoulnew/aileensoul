@@ -121,9 +121,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     </div> -->
                 </div>                
                 <div class="middle-part">
-					<div class="tab-add">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('banner_add'); ?>
+					</div> -->
                     <div class="page-title">
                         <h3>Search Result</h3>
                     </div>
@@ -198,9 +198,10 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </p>
                         </div>
                     </div>
-                    <div ng-if="(frIndex + 1) % 3 == 0">
+                    <div ng-if="(frIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
-                            <?php $this->load->view('infeed_add'); ?>
+                            <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"></adsense>
+                            <?php //$this->load->view('infeed_add'); ?>
                         </div>
                     </div>
                     </div>
@@ -428,6 +429,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
@@ -440,7 +442,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             var w = '';            
             var login_user_id = "<?php echo $userid_login; ?>";
             var fa_profile_set = "<?php echo $this->freelance_apply_profile_set; ?>";
-            var app = angular.module('freelancerApplySearch', ['ui.bootstrap']);
+            var app = angular.module('freelancerApplySearch', ['ui.bootstrap','angular-google-adsense']);
             $(document).ready(function(){
                 $(window).scrollTop(450);
             });
