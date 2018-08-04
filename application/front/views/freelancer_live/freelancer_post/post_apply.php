@@ -293,9 +293,9 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                 <?php
                             }
                             ?>
-							<div class="tab-add">
-								<?php $this->load->view('banner_add'); ?>
-							</div>
+							<!-- <div class="tab-add">
+								<?php //$this->load->view('banner_add'); ?>
+							</div> -->
                             <div class="page-title">
                                 <h3>Recommended Projects</h3>
                             </div>
@@ -373,17 +373,18 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                         </p>
                                     </div>
                                 </div>
-                                <div ng-if="(faIndex + 1) % 3 == 0">
+                                <div ng-if="(faIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                                     <div class="tab-add">
-                                        <?php $this->load->view('infeed_add'); ?>
+                                        <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"></adsense>
+                                        <?php //$this->load->view('infeed_add'); ?>
                                     </div>
                                 </div>
                                 </div>
 
                             </div>
-							<div class="banner-add">
-								<?php $this->load->view('banner_add'); ?>
-							</div>
+							<!-- <div class="banner-add">
+								<?php //$this->load->view('banner_add'); ?>
+							</div> -->
                             <div id="loader" style="display:none;"><p style="text-align:center;"><img alt="loader" src="<?php echo base_url('assets/images/loading.gif'); ?>"/></p></div>
                         </div>
 
@@ -678,6 +679,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
 
 
@@ -690,7 +692,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
             var title = '<?php echo $title; ?>';
             var login_user_id = '<?php echo $userid; ?>';
             var fa_profile_set = '<?php echo $this->freelance_apply_profile_set; ?>';
-            var app = angular.module('FARecommendedProject', ['ui.bootstrap']);
+            var app = angular.module('FARecommendedProject', ['ui.bootstrap','angular-google-adsense']);
         </script>
 
         <script  src="<?php echo base_url('assets/js/croppie.js?ver=' . time()); ?>"></script>
