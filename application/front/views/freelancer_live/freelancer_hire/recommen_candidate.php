@@ -220,9 +220,9 @@
                             <?php } ?>
                             <div class="common-form rec-recmn-post">
                                 <div class="job-saved-box">
-									<div class="tab-add">
-										<?php $this->load->view('banner_add'); ?>
-									</div>
+									<!-- <div class="tab-add">
+										<?php //$this->load->view('banner_add'); ?>
+									</div> -->
                                     <h3><?php echo $this->lang->line("recommended_freelancer"); ?></h3>
                                     <div class="contact-frnd-post">
 
@@ -236,9 +236,9 @@
 
                                     </div>
                                 </div>
-								<div class="banner-add">
-									<?php $this->load->view('banner_add'); ?>
-								</div>
+								<!-- <div class="banner-add">
+									<?php //$this->load->view('banner_add'); ?>
+								</div> -->
                             </div>
                         </div>
                         <!-- middle div  -->

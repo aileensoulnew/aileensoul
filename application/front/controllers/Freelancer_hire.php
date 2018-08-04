@@ -1100,7 +1100,7 @@ class Freelancer_hire extends MY_Controller {
                         </div>
                         </div>';
                     // echo $return_html;
-                    if($feed_counter % 3 == 0)
+                    if($feed_counter % ADS_BREAK == 0)
                     {
                         $return_html .= '<div class="tab-add">'.$feed_ads.'</div>';
                     }
