@@ -1907,7 +1907,7 @@ class Search extends MY_Controller {
                 </div>
                 </div>
                 </div>';
-                if($counter % 3 == 0)
+                if($counter % ADS_BREAK == 0)
                 {
                     $return_html .= '<div class="tab-add">'.$feed_ads.'</div>';
                 }

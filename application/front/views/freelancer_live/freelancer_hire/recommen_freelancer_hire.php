@@ -198,9 +198,9 @@
                                 </div>
                             </div>
                             <div class="custom-right-art mian_middle_post_box animated fadeInUp">
-								<div class="tab-add">
-									<?php $this->load->view('banner_add'); ?>
-								</div>
+								<!-- <div class="tab-add">
+									<?php //$this->load->view('banner_add'); ?>
+								</div> -->
                                 <div class="common-form">
                                     <div class="job-saved-box">
                                         <h3 class="border1 mb15">Search result of 
