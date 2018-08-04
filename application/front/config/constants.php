@@ -39,6 +39,8 @@ define('FOPEN_READ_WRITE_CREATE', 'a+b');
 define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
+define('ADS_BREAK', '4');
+
 if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1') {
     define('BASEURL', 'http://localhost/aileensoulnew/aileensoul/');
     define('IMAGEPATHFROM', 'uploads'); //upload,s3bucket 

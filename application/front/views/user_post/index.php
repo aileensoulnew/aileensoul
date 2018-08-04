@@ -667,7 +667,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) % 3 == 0">
+            <div ng-if="(postIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                 <div class="tab-add">
                     <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"></adsense>
                     <?php //$this->load->view('infeed_add'); ?>
