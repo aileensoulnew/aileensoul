@@ -183,9 +183,6 @@
     </div>
 
         <div class="middle-part">
-			<div class="tab-add">
-				<?php $this->load->view('banner_add'); ?>
-			</div>
             <div class="add-post" ng-if="live_slug == user_slug">
                 <div class="post-box">                
                     <?php

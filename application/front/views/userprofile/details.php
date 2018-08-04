@@ -1,10 +1,10 @@
 <div class="container pt20 mobp0 detail-page">
     <div class="custom-user-list">
-		<div class="tab-add">
+		<div class="tab-add-991">
 			<?php $this->load->view('banner_add'); ?>
 		</div>
         <div class="list-box-custom">
-            <h3>Details</h3>
+            <h3 class="mob-border-top-1">Details</h3>
             <div class="p15 mobp0 fw">
                 <div class="detail-box">
                     <h4>Basic Information</h4>

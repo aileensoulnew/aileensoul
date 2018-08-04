@@ -23,12 +23,12 @@
             <?php echo $header_profile; ?>
             <div class="middle-section middle-section-banner">
                 <div class="container pt20 mobp0">
-					<div class="tab-add">
-						<?php $this->load->view('infeed_add'); ?>
+					<div class="tab-add-991">
+						<?php $this->load->view('banner_add'); ?>
 					</div>
                     <div class="custom-user-list">
                         <div class="list-box-custom">
-                            <h3>Pending Contact Request</h3>
+                            <h3 class="mob-border-top-1">Pending Contact Request</h3>
                             <div class="all-list">
                                 <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
                                     <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="list-box-custom suggestion">
-                            <h3>Suggestion</h3>
+                            <h3>Suggestions</h3>
                             <div class="all-list">                                
                                 <div class="no-data-box" ng-if="contactSuggetion.length == '0'">
                                     <div class="no-data-content">

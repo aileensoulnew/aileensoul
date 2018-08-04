@@ -2749,10 +2749,12 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.tab-add-991{display:block;}
 }
 @media screen and (max-width: 767px) {
-	.infeed {height: 350px;}
+	.infeed {height: 250px;}
     .container {width: 100%;}
 	.mob-banner{padding:0;}
 	.mob-comment{display: block;}
+	.mob-border-top-1{border-top:1px solid #d2d2d2;}
+	.questions .custom-user-list h3{border-top:1px solid #d2d2d2 !important; border-bottom:1px solid #d2d2d2 !important;}
 	/***  all profile  ***/
 	.custom-box .custom-width{height:auto; border-left:0 !important; border-right:0 !important;}
 	.custom-box .left-box{width:150px; height:150px; margin:0 auto;}
