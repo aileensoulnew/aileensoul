@@ -201,7 +201,7 @@
                             <?php
                         }
                         ?>
-						<div class="tab-add">
+						<div class="tab-add-991">
 							<?php $this->load->view('infeed_add'); ?>
 						</div>
                         <div class="page-title">

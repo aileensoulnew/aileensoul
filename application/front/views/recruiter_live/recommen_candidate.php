@@ -221,17 +221,13 @@
                         </div>
                         <!--- search end -->
                         <div class="custom-right-art mian_middle_post_box animated fadeInUp">
-							<div class="tab-add">
-								<?php $this->load->view('banner_add'); ?>
-							</div>
+							
                             <div class="common-form ">
                                 <div class="job-saved-box rec-recmn-post">
                                     <h3>
                                         Recommended Candidate
                                     </h3>
-									<div class="tab-add">
-										<?php $this->load->view('infeed_add'); ?>
-									</div>
+									
                                     <div class="contact-frnd-post">
                                         <div class = "job-contact-frnd">
                                             <!--AJAX DATA START FOR RECOMMAND CANDIDATE-->

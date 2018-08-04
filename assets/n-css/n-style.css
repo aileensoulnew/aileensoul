@@ -2435,7 +2435,7 @@ label.cameraButton{min-height:43px;}
 .all-upload .form-group{margin-bottom:0;}
 .new-ld-page .mian_middle_post_box{position:relative; left:15px; margin-left:0;}
 .noti-page .job-saved-box h3{color:#5c5c5c; font-weight:normal; border-bottom:1px solid #d2d2d2;}
-.tab-add{display:none; width:100%; float:left;}
+.tab-add{display:none; width:100%; float:left; padding-bottom:10px;}
 .tab-add-991{display:none; width:100%; float:left;}
 .job-saved-box h3.mb15{margin-bottom:15px;}
 .edit_pr_bar {width: 23% !important; display: inline-block; margin: 0 !important;}
@@ -2470,7 +2470,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
-
+	.infeed {height: 450px;}
 }
 @media screen and (min-width: 992px) {
 
@@ -2749,6 +2749,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.tab-add-991{display:block;}
 }
 @media screen and (max-width: 767px) {
+	.infeed {height: 350px;}
     .container {width: 100%;}
 	.mob-banner{padding:0;}
 	.mob-comment{display: block;}

@@ -1,6 +1,6 @@
 <div class="infeed-add">
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<ins class="adsbygoogle"
+	<ins class="adsbygoogle infeed"
 		 style="display:block"
 		 data-ad-format="fluid"
 		 data-ad-layout-key="-6r+eg+1e-3d+36"

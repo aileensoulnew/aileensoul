@@ -87,9 +87,7 @@ $mobile_agent = $this->agent->mobile;
                     ?>
                     <div class=" custom-right-art mian_middle_post_box animated fadeInUp">
                         <div class="right_side_posrt fl"> 
-							<div class="tab-add">
-								<?php $this->load->view('banner_add'); ?>
-							</div>
+							
                             <div class="post-editor col-md-12">
                                 <div class="main-text-area col-md-12">
                                     <div class="popup-img"> 
@@ -136,9 +134,7 @@ $mobile_agent = $this->agent->mobile;
                                     </div>
                                 </div>
                             </div>
-							<div class="tab-add">
-								<?php $this->load->view('infeed_add'); ?>
-							</div>
+							
                             <div class="custom-user-list">
                                 <?php
                                 if ($follow_user_suggest_count > 0) {
