@@ -9677,7 +9677,7 @@ Your browser does not support the audio tag.
 </div>
 </div>
 </div></div>';
-                if($feed_counter % 3 == 0)
+                if($feed_counter % ADS_BREAK == 0)
                 {
                     $return_html .= '<div class="tab-add">'.$infeed_add.'</div>';
                 }

@@ -158,9 +158,9 @@ $mobile_agent = $this->agent->mobile;
                             <div class="business-all-post">
                                 <div class="nofoundpost"></div>
                             </div>
-							<div class="banner-add">
-								<?php $this->load->view('banner_add'); ?>
-							</div>
+							<!-- <div class="banner-add">
+								<?php //$this->load->view('banner_add'); ?>
+							</div> -->
                             <div class="fw" id="loader" style="text-align:center; display: none;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
                         </div>
                     </div>
