@@ -247,43 +247,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         </div>
                     </form>
 					<?php $this->load->view('right_add_box'); ?>
-                    
-                    <!-- <div class="custom_footer_left fw">
-                        <div class="">
-                            <ul>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> About Us 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Contact Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Blogs 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
+                    <?php echo $left_footer; ?>
+                   
                 </div>
                 <div class="middle-part">
 					<!-- <div class="tab-add">
@@ -361,7 +326,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                 </div>
                 <div class="right-part">
                     <?php $this->load->view('right_add_box'); ?>
-                   <?php echo $left_footer; ?>
+                   
                 </div>
 
             </div>

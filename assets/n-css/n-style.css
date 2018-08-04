@@ -2274,7 +2274,7 @@ input[type=text] {-webkit-appearance: none; -moz-appearance: none; appearance: n
 .block-639{display:none;}
 .block-479{display:none;}
 .all-tab .no-data-available .art-img-nn{width:auto; padding:0;}
-.list-box-custom .all-detail-box{margin-bottom:85px;}
+.list-box-custom .all-detail-box{margin-bottom:20px;}
 .hs-submit button{color:#fff;}
 #jobseeker_regform .hs-submit{padding-top:15px;}
 .hs-submit .delete_btn{margin-bottom:10px; margin-top:0;}
@@ -2457,6 +2457,10 @@ label.cameraButton{min-height:43px;}
 .common-form .notification-box .notification-database:hover{background:none;}
 .notification-box .notification_data li a{width:100%;}
 .notification-box .notification_data li a .notification-database{width:100%;}
+.con-detail{padding-top:20px; text-align:center; display:block; font-size:20px;}
+.con-detail a{color:#5c5c5c;}
+.con-detail a:hover{color:#1b8ab9;}
+.more-support{padding-bottom:0;}
 /***  end extra  ***/
 /***  optimization css  ***/
 .left-part.left-scroll{position:absolute;}
@@ -2520,6 +2524,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.all-contact-cus{display:block;}
 	.right-part .all-contact{display:none;}
 	.cus-inner-middle{padding-left:0;}
+	.list-box-custom .nav > li > a{padding:10px 7px;}
 	
 }
 @media screen and (max-width: 1199px) {
@@ -2564,6 +2569,8 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.tab-add{display:block;}
 	.mian_middle_post_box{width:610px;}
 	.all-list ul li .list-box{width:190px; height:295px;}
+	.view-more-page .custom-user-list{width:100%;}
+	.view-more-page .right-add{display:none;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -3497,6 +3504,8 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.user-btns a.btn3:first-child{width:38%;}
 	.user-btns a.btn3:nth-child(2){width:28%;}
 	.user-btns a.btn3:nth-child(3){width:28%;}
+	.con-detail{line-height:1.5;}
+	
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

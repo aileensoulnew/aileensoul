@@ -68,7 +68,7 @@
                 <div class="middle-section">
             <?php } ?>
             
-                <div class="container pt20 mobp0 mobmt15">
+                <div class="container pt20 mobp0 mobmt15 view-more-page">
 					<div class="tab-add">
 						<?php $this->load->view('banner_add'); ?>
 					</div>
@@ -119,7 +119,7 @@
                         </div>
 						
                     </div>
-                    <div class="right-part">
+                    <div class="right-add">
                        <?php $this->load->view('right_add_box'); ?>
                         
                     </div>
