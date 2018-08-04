@@ -98,15 +98,15 @@
                     
                 </div>
                 <div class="middle-part">
-					<div class="tab-add">
-						<?php $this->load->view('banner_add'); ?>
-					</div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('banner_add'); ?>
+					</div> -->
                     <div class="page-title">
                         <h3>Search Result</h3>
                     </div>
-					<div class="tab-add">
-						<?php $this->load->view('infeed_add'); ?>
-					</div>
+					<!-- <div class="tab-add">
+						<?php //$this->load->view('infeed_add'); ?>
+					</div> -->
                     <div ng-if="businessList.length != 0" ng-repeat="business in businessList" ng-init="busIndex=$index">
                     <div class="all-job-box search-business">
                         <div class="search-business-top">
@@ -134,9 +134,10 @@
                             </ul>
                         </div>
                     </div>
-                    <div ng-if="(busIndex + 1) % 3 == 0">
+                    <div ng-if="(busIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
-                            <?php $this->load->view('infeed_add'); ?>
+                            <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"></adsense>
+                            <?php //$this->load->view('infeed_add'); ?>
                         </div>
                     </div>
                     </div>
@@ -256,6 +257,7 @@
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         
         <script>
@@ -266,7 +268,7 @@
             var category_id = '<?php echo $category_id; ?>';
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';
-            var app = angular.module('businessSearchListApp', ['ui.bootstrap']);
+            var app = angular.module('businessSearchListApp', ['ui.bootstrap','angular-google-adsense']);
         </script>   
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
