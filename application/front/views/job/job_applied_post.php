@@ -202,7 +202,7 @@
                         }
                         ?>
 						<div class="tab-add-991">
-							<?php $this->load->view('infeed_add'); ?>
+							<?php $this->load->view('banner_add'); ?>
 						</div>
                         <div class="page-title">
                             <h3>Applied Job</h3>
