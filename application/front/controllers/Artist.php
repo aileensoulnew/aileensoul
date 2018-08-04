@@ -12267,7 +12267,7 @@ class Artist extends MY_Controller {
                 } else {
                     $count[] = "abc";
                 }
-                if($feed_counter % 3 == 0)
+                if($feed_counter % ADS_BREAK == 0)
                 {
                     $return_html .= '<div class="tab-add">'.$infeed_add.'</div>';                    
                 }

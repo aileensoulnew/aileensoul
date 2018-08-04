@@ -149,9 +149,9 @@
                 </div>
                 <div class="nofoundpost"> 
                 </div>
-				<div class="banner-add">
-					<?php $this->load->view('banner_add'); ?>
-				</div>
+				<!-- <div class="banner-add">
+					<?php //$this->load->view('banner_add'); ?>
+				</div> -->
                 <div class="fw" id="loader_post" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo 'LOADERIMAGE'; ?>"/></div>
             </div>
             </div>
