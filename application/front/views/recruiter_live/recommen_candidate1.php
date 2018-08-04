@@ -211,9 +211,9 @@
                         </div>
                     </div>
                     <div class="custom-right-art mian_middle_post_box animated fadeInUp">
-						<div class="tab-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
+						<!-- <div class="tab-add">
+							<?php //$this->load->view('banner_add'); ?>
+						</div> -->
                         <div class="common-form">
                             <div class="job-saved-box">
                                 <h3 class="mb15">
@@ -236,9 +236,9 @@
                                         <!--AJAX DATA START FOR RECOMMAND CANDIDATE-->
                                     </div>
                                     <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="<?php echo 'LOADERIAMGE'; ?>"/></div>
-									<div class="banner-add">
-										<?php $this->load->view('banner_add'); ?>
-									</div>
+									<!-- <div class="banner-add">
+										<?php //$this->load->view('banner_add'); ?>
+									</div> -->
                                 </div>
                             </div>
                         </div>

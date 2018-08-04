@@ -4,7 +4,7 @@
 <?php
 if (isset($seach_data) && !empty($seach_data)) {
 	$counter = 1;
-	foreach ($seach_data as $row) {		
+	foreach ($seach_data as $row) {
 	?>
 	<div class="profile-job-post-detail clearfix">
 	    <div class="profile-job-post-title-inside clearfix">
@@ -259,7 +259,7 @@ if (isset($seach_data) && !empty($seach_data)) {
 	    </div>
 	</div>
 <?php 
-		if($counter % 4 == 0)
+		if($counter % ADS_BREAK == 0)
 		{
 			?>
 			<div class="tab-add">
