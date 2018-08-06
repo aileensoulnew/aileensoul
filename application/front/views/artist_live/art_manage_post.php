@@ -62,9 +62,9 @@
     <?php $this->load->view('adsense'); ?>
 </head>
 <!-- END HEADER -->
-<body class="page-container-bg-solid page-boxed">
+<body class="page-container-bg-solid page-boxed body-loader">
     <?php $this->load->view('page_loader'); ?>
-    <div id="main_page_load" style="display: none;">
+    <div id="main_page_load" style="display: block;">
     <?php //echo $header; ?>
     <?php echo $artistic_header2; ?>
     <section class="custom-row">

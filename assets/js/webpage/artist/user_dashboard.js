@@ -74,7 +74,8 @@ function artistic_dashboard_post(slug, pagenum) { //alert("hii"); alert(slug);
 
             $('.all-comment-comment-box').css('border-bottom','0px');
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
 
         }
     });
