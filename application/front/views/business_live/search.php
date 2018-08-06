@@ -22,12 +22,12 @@
         <?php } ?>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="profile-main-page">        
+    <body class="profile-main-page body-loader">        
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/croppie.js?ver=' . time()) ?>"></script>
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php 
             if($ismainregister == false){
                 // $this->load->view('business_live/login_header');
@@ -92,21 +92,13 @@
                             <a href="<?php echo business_location_list; ?>">View More Locations</a>
                         </p>
                     </div>
-					<?php $this->load->view('right_add_box'); ?>
-					
-                    
-                    
+                    <div class="right-add-box"></div>
+					<?php //$this->load->view('right_add_box'); ?>
                 </div>
-                <div class="middle-part">
-					<!-- <div class="tab-add">
-						<?php //$this->load->view('banner_add'); ?>
-					</div> -->
+                <div class="middle-part">					
                     <div class="page-title">
                         <h3>Search Result</h3>
-                    </div>
-					<!-- <div class="tab-add">
-						<?php //$this->load->view('infeed_add'); ?>
-					</div> -->
+                    </div>					
                     <div ng-if="businessList.length != 0" ng-repeat="business in businessList" ng-init="busIndex=$index">
                     <div class="all-job-box search-business">
                         <div class="search-business-top">
@@ -136,8 +128,7 @@
                     </div>
                     <div ng-if="(busIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
-                            <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
-                            <?php //$this->load->view('infeed_add'); ?>
+                            <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>                            
                         </div>
                     </div>
                     </div>
@@ -154,12 +145,13 @@
                             <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
                         </p>
                     </div>
-					<div class="banner-add">
-						<?php $this->load->view('banner_add'); ?>
+					<div class="banner-add ads">
+						<?php /*$this->load->view('banner_add');*/ ?>
 					</div>
                 </div>
                 <div class="right-part">
-					<?php $this->load->view('right_add_box'); ?>
+                    <div class="right-add-box"></div>
+					<?php /*$this->load->view('right_add_box');*/ ?>
 					<?php echo $left_footer; ?>
                 </div>
             </div>
@@ -252,7 +244,6 @@
         }
         ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> 
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
