@@ -751,7 +751,8 @@
             <div class="fw" id="loader" style="text-align:center; display: block;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
         </div>
         <div class="right-part">
-            <?php $this->load->view('right_add_box'); ?>
+            <div class="right-add-box">        
+            </div>            
             <?php
             $all_c_no_login = "";
             if($user_id == ""){

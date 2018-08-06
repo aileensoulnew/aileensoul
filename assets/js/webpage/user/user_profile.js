@@ -964,10 +964,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     });
 
     setTimeout(function(){        
-    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"  ad-class="infeed"></adsense>').appendTo('.tab-add');
+        var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"  ad-class="infeed"></adsense>').appendTo('.tab-add');
         $compile($el)($scope);
-    
-    },1000);
+
+        var $elm = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+            $compile($elm)($scope);
+    },2000);
     
     var isLoadingData = false;
 

@@ -680,7 +680,8 @@
     <!-- Repeated Class Complete -->
     </div>
     <div class="right-part">
-        <?php $this->load->view('right_add_box'); ?>
+        <div class="right-add-box">            
+        </div>        
         <div class="all-contact">
             <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_self">All</a></h4>
             <div class="all-user-list">
