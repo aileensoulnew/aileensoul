@@ -17,9 +17,9 @@
 		<!-- END HEADER -->
 	<?php $this->load->view('adsense'); ?>
 </head>
-	<body class="page-container-bg-solid page-boxed botton_footer">
+	<body class="page-container-bg-solid page-boxed botton_footer body-loader">
 		<?php $this->load->view('page_loader'); ?>
-		<div id="main_page_load" style="display: none;">
+		<div id="main_page_load" style="display: block;">
 			<?php echo $header; ?>
 			<?php //echo $art_header2_border; ?>
 			<?php echo $artistic_header2; ?>
@@ -280,6 +280,7 @@
 								
 				$('#main_loader').hide();
 				$('#main_page_load').show();
+				$('body').removeClass("body-loader");
 			</script>
 
 			<?php
