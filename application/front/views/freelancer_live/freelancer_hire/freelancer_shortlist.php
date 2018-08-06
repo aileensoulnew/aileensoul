@@ -21,8 +21,8 @@
             <section>
                 <div class="user-midd-section" id="paddingtop_fixed">
                     <div class="container mobp0">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-3">
+                        <div class="">
+                            <div class="left-part">
                                 <div class="add-post-button">
                                     <a title="Back to post" href="<?php echo base_url("freelance-employer/projects"); ?>"><div class="back">
                                             <div class="but1">
@@ -42,7 +42,7 @@
                                 ?>
                             </div>
                             <!-- middle div stat -->
-                            <div class="col-md-6 col-sm-6 all-form-content">
+                            <div class="middle-part all-form-content">
 								<div class="tab-add">
 									<?php $this->load->view('banner_add'); ?>
 								</div>
@@ -261,7 +261,7 @@
 									<?php $this->load->view('banner_add'); ?>
 								</div>
 							</div>
-							<div class="edit_pr_bar">
+							<div class="right-part">
 								<?php $this->load->view('right_add_box'); ?>
 							</div>
                             <!-- middle div end -->

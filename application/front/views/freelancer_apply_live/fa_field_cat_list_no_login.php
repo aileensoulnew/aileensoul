@@ -83,6 +83,7 @@
                 <div class="container pt20 mobp0">
                     <div class="left-part">
                         <?php echo $fa_leftbar; ?>
+						<?php $this->load->view('right_add_box'); ?>
 						<?php echo $left_footer_list_view; ?>
                         <!-- <div class="custom_footer_left fw">
                             <div class="">

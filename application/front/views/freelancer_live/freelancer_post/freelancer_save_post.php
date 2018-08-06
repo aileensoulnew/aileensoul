@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     <div class="container mobp0">
-                        <div class="job-menu-profile mob-none pt20">
+                        <div class="job-menu-profile mob-none job_edit_menu">
                             <a href="javascript:void(0);"> <h3> <?php echo ucwords($freepostdata['freelancer_post_fullname']) . ' ' . ucwords($freepostdata['freelancer_post_username']); ?></h3></a>
                             <div class="profile-text">
                                 <?php
@@ -222,7 +222,7 @@
                                 }
                             }
                             ?>
-							<div class="tab-add">
+							<div class="tab-add-991">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                             <div class="page-title">

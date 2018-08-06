@@ -30,7 +30,7 @@
                     
                        
                         <div class="custom-user-list animated fadeInLeftBig">
-							<div class="tab-add">
+							<div class="tab-add-991">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                             <div>

@@ -160,7 +160,7 @@
                     </div>
                 </div>
                 <div class="middle-part container">
-                    <div class="job-menu-profile mob-none pt20">
+                    <div class="job-menu-profile mob-none pt20 job_edit_menu">
                         <a href="javascript:void(0);"> <h3> <?php echo ucwords($freepostdata['freelancer_post_fullname']) . ' ' . ucwords($freepostdata['freelancer_post_username']); ?></h3></a>
                         <div class="profile-text">
                             <?php
@@ -174,7 +174,7 @@
                             <?php } ?>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-12 col-xs-12 mob-clear">
+                    <div class="cus-inner-middle mob-clear">
                         <?php
                         if (!($returnpage)) {
                             if ($count_profile == 100) {
