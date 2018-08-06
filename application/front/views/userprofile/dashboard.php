@@ -301,7 +301,8 @@
                 </div>
             </div>
 			<div class="tab-add">
-				<?php $this->load->view('infeed_add'); ?>
+
+				<?php //$this->load->view('infeed_add'); ?>
 			</div>
 			
             <!-- Repeated Class Start -->
@@ -743,7 +744,7 @@
                     </div>
                 </div>
 				<div class="tab-add">
-						<?php $this->load->view('banner_add'); ?>
+						<?php //$this->load->view('banner_add'); ?>
 					</div>
             </div>
             <!-- Repeated Class Complete -->

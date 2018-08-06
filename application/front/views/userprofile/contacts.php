@@ -1,7 +1,6 @@
 <div class="container pt20 mobp0 contacts-page">
     <div class="custom-user-list">
-		<div class="tab-add-991">
-			<?php $this->load->view('banner_add'); ?>
+		<div class="tab-add-991 ads">			
 		</div>
         <div class="list-box-custom">
             <h3 class="mob-border-top-1">Contacts </h3>
@@ -54,11 +53,11 @@
                 </div>
             </div>
         </div>
-		<div class="tab-add">
-			<?php $this->load->view('banner_add'); ?>
+		<div class="tab-add ads">			
 		</div>
     </div>
     <div class="right-add">
-        <?php $this->load->view('right_add_box'); ?>
+        <div class="right-add-box">        
+        </div>
     </div>
 </div>

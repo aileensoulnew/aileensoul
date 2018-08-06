@@ -962,6 +962,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     $("#ask_field").focusout(function(){
         $('#ask_fieldtooltip').hide();
     });
+
+    setTimeout(function(){        
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36"  ad-class="infeed"></adsense>').appendTo('.tab-add');
+        $compile($el)($scope);
+    
+    },1000);
     
     var isLoadingData = false;
 
@@ -3313,11 +3319,23 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     }
 
 });
-app.controller('detailsController', function ($scope, $http, $location) {
+app.controller('detailsController', function ($scope, $http, $location,$compile) {
     $scope.user = {};
     $scope.$parent.title = "Details | Aileensoul";
     // PROFEETIONAL DATA
     getFieldList();
+
+    function load_add()
+    {
+        setTimeout(function(){        
+        var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+            $compile($el)($scope);
+
+        var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+            $compile($el)($scope);
+        },1000);        
+    }
+
 
     function getFieldList() {
         // $('#main_loader').hide();        
@@ -3337,6 +3355,7 @@ app.controller('detailsController', function ($scope, $http, $location) {
             $('#main_page_load').show();
             details_data = success.data;
             $scope.details_data = details_data;
+            load_add();
         });
         $('footer').show();
     }
@@ -3359,6 +3378,14 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
     $scope.$parent.title = "Contacts | Aileensoul";
+
+    setTimeout(function(){        
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+        $compile($el)($scope);
+
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+        $compile($el)($scope);
+    },1000);
 
     $scope.contact = function (id, status, to_id,indexCon) {
         $http({
