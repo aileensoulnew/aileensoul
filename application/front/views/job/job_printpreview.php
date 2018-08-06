@@ -1569,8 +1569,13 @@ if ($job[0]['work_job_industry']) {
     <?php
 }
 ?>
+				 <div class="right-add">
+					<?php $this->load->view('right_add_box'); ?>
+				</div>
                 </div>
-                <div class="clearfix"></div>
+               
+				<div class="clearfix"></div>
+			</div>
         </section>
         <!-- Bid-modal-2  -->
         <div class="modal fade message-box" id="bidmodal-2" role="dialog">

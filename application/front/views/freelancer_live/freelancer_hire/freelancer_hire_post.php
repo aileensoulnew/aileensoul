@@ -233,7 +233,7 @@
 
      
                     <div class="container mobp0">
-                        <div class="job-menu-profile mob-none pt20">
+                        <div class="job-menu-profile mob-none pt20 job_edit_menu">
                             <a title="<?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?>" href="javascript:void(0);">  <h3> <?php echo ucwords($freelancr_user_data[0]['fullname']) . ' ' . ucwords($freelancr_user_data[0]['username']); ?></h3></a>
                             <div class="profile-text">
                                 <?php
@@ -261,7 +261,7 @@
                       
                         </div>
                         <div class="cus-inner-middle mob-clear mobp0">
-							<div class="tab-add">
+							<div class="tab-add-991">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                             <?php

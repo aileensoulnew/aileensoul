@@ -209,7 +209,7 @@
 				
 					<!-- menubar --> 
 					<div class="container rec_res">
-						<div class="job-menu-profile  mob-none ">
+						<div class="job-menu-profile  mob-none job_edit_menu ">
 							<a href="javascript:void(0);" title="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>"><h3><?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?></h3></a>
 							<!-- text head start -->
 							<div class="profile-text" >
@@ -246,14 +246,14 @@
 					<!-- text head end -->
 
 					<div class="cus-inner-middle mob-clear mobp0">
-						<div class="tab-add">
+						<div class="tab-add-991">
 							<?php $this->load->view('banner_add'); ?>
 						</div>
 						<div class="common-form">
 							
 							<div class="job-saved-box">
 
-								<h3 class="">Details  </h3>
+								<h3 class="mb15">Details  </h3>
 
 								<?php
 

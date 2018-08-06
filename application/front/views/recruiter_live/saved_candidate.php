@@ -178,7 +178,7 @@
                 <!-- text head end -->
             </div>
             <div class="cus-inner-middle mob-clear mob-border-0 mobp0">
-				<div class="tab-add">
+				<div class="tab-add-991">
 					<?php $this->load->view('banner_add'); ?>
 				</div>
                 <div class="page-title">

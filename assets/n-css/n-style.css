@@ -2461,6 +2461,8 @@ label.cameraButton{min-height:43px;}
 .con-detail a{color:#5c5c5c;}
 .con-detail a:hover{color:#1b8ab9;}
 .more-support{padding-bottom:0;}
+.job-saved-box{margin-bottom:0;}
+.job_edit_menu{margin-top:15px;}
 /***  end extra  ***/
 /***  optimization css  ***/
 .left-part.left-scroll{position:absolute;}
@@ -2533,6 +2535,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.cus-add-post .right-add{display:none;}
 	.art-inner .right-add{display:none;}
 	.bus-inner .right-add{display:none;}
+	.blog-d .right-part .right-add-box{display:none;}
 	.fixed_right_display {display: none !important;}
 	.manage-post-custom .right-add{display:none;}
 	.block-1199 .adv-main-view{display:block;}
@@ -2754,6 +2757,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.job-menu-profile{margin-top:40px; margin-bottom:0;}
 	.cus-inner-middle{width:100%; padding:0 15px;}
 	.tab-add-991{display:block;}
+	.art-side-menu .flw_msg_btn{/*margin-top:0;*/}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -3076,7 +3080,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.rec-edit-post .custom-add-box{border:0;}
 	.rec-edit-post .custom-add-box h3{border-top:1px solid #d2d2d2;}
 	.mob-border-0{border:0px;}
-	.rec_res .contact-frnd-post{padding:0;}
+	.rec_res .contact-frnd-post{padding:0; border-bottom:1px solid #d2d2d2;}
 	.rec_res .job-contact-frnd .profile-job-post-detail{border:0;}
 	.profile-box-art .right-menu-jr .pro-fw{border-bottom:1px solid #d2d2d2;}
 	.job-menu-profile a h3{font-size:20px;}
@@ -3159,6 +3163,8 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.cus-inner-middle{padding:0;}
 	.middle-part.op-middle{margin-bottom:30px; width:100%; float:left;}
 	.all-contact{border-radius:0; border-left:0; border-right:0;}
+	.art-side-menu .flw_msg_btn ul li{padding:0;}
+	.art-side-menu .flw_msg_btn{margin-top:0; margin:0; border-bottom:1px solid #d2d2d2;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

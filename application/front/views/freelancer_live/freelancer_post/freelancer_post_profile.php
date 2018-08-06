@@ -311,7 +311,7 @@
                 </div>
             </div>
             <div class="container pt10 mobp0">
-                <div class="job-menu-profile mob-none pt-20">
+                <div class="job-menu-profile mob-none pt-20 job_edit_menu">
                     <a title="<?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?>" href="javascript:void(0);">   <h3> <?php echo ucwords($freelancerpostdata[0]['freelancer_post_fullname']) . ' ' . ucwords($freelancerpostdata[0]['freelancer_post_username']); ?></h3></a>
                     <div class="profile-text pt5">
                         <?php
@@ -383,7 +383,7 @@
                         }
                     }
                     ?>
-					<div class="tab-add">
+					<div class="tab-add-991">
 						<?php $this->load->view('banner_add'); ?>
 					</div>
                     <div class="common-form">
@@ -1172,6 +1172,9 @@
                     <?php
                 }
                 ?>
+				<div class="right-add">
+					<?php $this->load->view('right_add_box'); ?>
+				</div>
             </div>
             <div class="clearfix"></div>
         </section>

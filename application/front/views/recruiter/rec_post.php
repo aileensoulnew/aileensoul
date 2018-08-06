@@ -211,7 +211,7 @@
                 </div>                       
             </div> 
             <div class="container rec_res">
-                <div class="job-menu-profile mob-none  ">
+                <div class="job-menu-profile mob-none job_edit_menu">
                     <a href="javascript:void(0);" title="<?php echo $postdataone[0]['rec_firstname'] . ' ' . $postdataone[0]['rec_lastname']; ?>"><h3><?php echo $postdataone[0]['rec_firstname'] . ' ' . $postdataone[0]['rec_lastname']; ?></h3></a>
                     <!-- text head start -->
                     <div class="profile-text" >
@@ -240,7 +240,7 @@
                 </div>
             
                 <div class="cus-inner-middle mob-clear mobp0">
-					<div class="tab-add">
+					<div class="tab-add-991">
 						<?php $this->load->view('banner_add'); ?>
 					</div>
                     <div class="page-title">

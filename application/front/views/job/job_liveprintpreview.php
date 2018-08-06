@@ -282,6 +282,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
           }}
           ?>
             <div class="">
+				<div class="tab-add-991">
+							<?php $this->load->view('banner_add'); ?>
+						</div>
                <div class="common-form">
                   <div class="job-saved-box">
                      <h3>Details</h3>
@@ -1648,6 +1651,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             <?php
                }
                ?>
+			   <div class="right-add">
+					<?php $this->load->view('right_add_box'); ?>
+				</div>
          </div>
          <div class="clearfix"></div>
       </section>
