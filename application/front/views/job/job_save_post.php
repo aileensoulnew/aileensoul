@@ -31,9 +31,9 @@
     // echo $job_header2_border;
     ?>
     <!-- END HEADER -->
-    <body   class="page-container-bg-solid page-boxed custom-border">
+    <body   class="page-container-bg-solid page-boxed custom-border body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php 
         echo $job_header2;//$job_header2_border;
         ?>
@@ -198,18 +198,18 @@
                             <?php
                         }
                         ?>
-						<div class="tab-add-991">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
+                        <div class="tab-add-991">
+                            <?php $this->load->view('banner_add'); ?>
+                        </div>
                         <div class="page-title">
                             <h3>Saved Job</h3>
                         </div>
                         <div class="job-contact-frnd">
                         </div>
                          <div class="loader"><p style="text-align:center;"><img  src="<?php echo base_url('assets/images/loading.gif'); ?>" alt="loaderimage"/></p></div>
-						 <div class="banner-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
+                         <div class="banner-add">
+                            <?php $this->load->view('banner_add'); ?>
+                        </div>
                     </div>
                     <?php
                     if ($count_profile == 100) {
@@ -236,8 +236,8 @@
                         }
                     } else {
                         ?>
-						<div class="right-add">
-							<?php $this->load->view('right_add_box'); ?>
+                        <div class="right-add">
+                            <?php $this->load->view('right_add_box'); ?>
                         <div class="edit_profile_progress">
                             <div class="progre_bar_text">
                                 <p>Please fill up your entire profile to get better job options and so that recruiter can find you easily.</p>
@@ -255,7 +255,7 @@
                             </div>
                         </div>
                         </div>
-						<?php
+                        <?php
                     }
                     ?>
                 </div>
@@ -369,10 +369,10 @@
 
 <?php } */?>
 <script>
-	// page scroll top 
-			$(document).ready(function () {
-				$('html,body').animate({scrollTop: 300}, 500);
-			});
+    // page scroll top 
+            $(document).ready(function () {
+                $('html,body').animate({scrollTop: 300}, 500);
+            });
 </script>
     </body>
 </html>

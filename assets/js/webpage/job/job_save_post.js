@@ -99,7 +99,6 @@ function job_save(pagenum)
         dataType: "html",
         beforeSend: function () {
             if (pagenum == 'undefined') {
-
                 $(".job-contact-frnd").prepend('<p style="text-align:center;"><img class="loader" src="' + base_url + 'images/loading.gif"/></p>');
             } else {
                 $('#loader').show();
@@ -120,7 +119,8 @@ function job_save(pagenum)
             }
             isProcessing = false;
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
         }
     });
 }
