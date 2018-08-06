@@ -3499,7 +3499,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
         $compile($el)($scope);
     },1000);
-    
+
     // Fetch data
     $scope.getFollowers = function (pagenum = '') {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
@@ -3591,9 +3591,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
         location.href = base_url + 'profiles/' + path;
     }
 });
-app.controller('followingController', function ($scope, $http, $location, $compile, $window) {
-    //    lazzy loader start
-// Variables
+app.controller('followingController', function ($scope, $http, $location, $compile, $window) {    
+    // Variables
     $scope.showLoadmore = true;
     $scope.row = 0;
     $scope.rowperpage = 3;
@@ -3602,6 +3601,16 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
     $scope.$parent.title = "Following | Aileensoul";
+
+    
+    setTimeout(function(){
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+        $compile($el)($scope);
+
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+        $compile($el)($scope);
+    },1000);
+
     // Fetch data
     $scope.getFollowing = function (pagenum = '') {
 
@@ -3714,6 +3723,15 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
     $scope.ask = {};
     $scope.user_id = user_id;
     $scope.$parent.title = "Questions | Aileensoul";
+
+    setTimeout(function(){
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+        $compile($el)($scope);
+
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+        $compile($el)($scope);
+    },1000);
+
 
     getFieldList();
     function getFieldList() {
