@@ -64,12 +64,13 @@ function artistic_followers(slug_id, pagenum)
                 $("#dropdownclass").removeClass("no-post-h2");
             }
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             isProcessing = false;
         }
     });
 }
-var modal = document.getElementById('myModal');
+/*var modal = document.getElementById('myModal');
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
@@ -87,7 +88,7 @@ window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
+}*/
 
 function checkvalue() {
     var searchkeyword = $.trim(document.getElementById('tags').value);
@@ -104,7 +105,7 @@ function check() {
     }
 }
 //select2 autocomplete start for skill
-$('#searchskills').select2({
+/*$('#searchskills').select2({
     placeholder: 'Find Your Skills',
     ajax: {
         url: base_url + "artist/keyskill",
@@ -118,7 +119,7 @@ $('#searchskills').select2({
         },
         cache: true
     }
-});
+});*/
 $(document).ready(function () {
     $("#artdesignation").validate({
         rules: {
