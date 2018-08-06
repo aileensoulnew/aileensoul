@@ -30,7 +30,7 @@
                         <div class="bus-inner">
                             <div class="custom-user-list bus-art-cus-left">
                                 <div class="common-form">
-									<div class="tab-add">
+									<div class="tab-add-991">
 										<?php $this->load->view('banner_add'); ?>
 									</div>
                                     <div class="job-saved-box">
