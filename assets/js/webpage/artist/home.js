@@ -388,7 +388,8 @@ function art_home_post(pagenum) {
             if(pagenum == undefined || pagenum == "1"){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $('#loader_post').hide();
             $('.art-all-post').append(data);
 

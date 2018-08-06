@@ -47,10 +47,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push">
+    <body class="page-container-bg-solid page-boxed pushmenu-push body-loader">
         <?php //echo $art_header2_border; ?>
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php echo $artistic_header2; ?>
         <div class="user-midd-section bui_art_left_box" id="paddingtop_fixed">
         <div class="container art_container padding-360">
