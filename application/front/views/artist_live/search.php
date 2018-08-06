@@ -26,10 +26,10 @@
         <?php } ?>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page body-loader">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php 
             if ($ismainregister == false) {
                 // $this->load->view('artist_live/login_header');
