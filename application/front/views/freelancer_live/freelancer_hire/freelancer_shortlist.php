@@ -13,9 +13,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="page-container-bg-solid page-boxed">
+    <body class="page-container-bg-solid page-boxed body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <?php echo $header; ?>
             <?php echo $freelancer_hire_header2; ?>
             <section>
@@ -330,7 +330,8 @@
             }
 
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
 
         </script>
     </body>
