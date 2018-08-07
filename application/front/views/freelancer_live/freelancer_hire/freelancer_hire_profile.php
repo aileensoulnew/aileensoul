@@ -17,9 +17,9 @@
 <?php $this->load->view('adsense'); ?>
 </head>
 <?php if (!$this->session->userdata('aileenuser')) { ?>
-   <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer no-login">
+   <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer no-login body-loader">
    <?php } ?>
-   <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
+   <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer body-loader">
 	<?php
 	if ($this->session->userdata('aileenuser')) {
 		echo $header;
@@ -53,7 +53,7 @@ if ($this->session->userdata('aileenuser')) {
 ?>
  
 <?php $this->load->view('page_loader'); ?>
-<div id="main_page_load" style="display: none;">
+<div id="main_page_load" style="display: block;">
 	<section class="custom-row">
 		<div class="container" id="paddingtop_fixed">
 			<div class="row" id="row1" style="display:none;">
@@ -760,7 +760,8 @@ if ($this->session->userdata('aileenuser')) {
 	var segment3 = '<?php echo $this->uri->segment(3); ?>'
 	var header_all_profile = '<?php echo $header_all_profile; ?>';
 	$('#main_loader').hide();
-	$('#main_page_load').show();
+	// $('#main_page_load').show();
+	$('body').removeClass("body-loader");
 </script>
 <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_profile.js?ver=' . time()); ?>"></script>
 <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_common.js?ver=' . time()); ?>"></script>
