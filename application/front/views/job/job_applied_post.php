@@ -32,9 +32,9 @@
     // echo $job_header2_border;
     ?>
     <!-- END HEADER -->
-    <body  class="page-container-bg-solid page-boxed custom-border botton_footer">
+    <body  class="page-container-bg-solid page-boxed custom-border botton_footer body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <?php
                 echo $job_header2;
             ?>

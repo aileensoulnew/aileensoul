@@ -121,7 +121,8 @@ function job_apply(pagenum)
             }
             isProcessing = false;
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
         }
     });
 }
