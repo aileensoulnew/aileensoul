@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="page-container-bg-solid page-boxed botton_footer">
+    <body class="page-container-bg-solid page-boxed botton_footer body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <?php echo $header; ?>
             <?php echo $freelancer_post_header2; ?>
             <section class="custom-row">
