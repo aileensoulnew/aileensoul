@@ -43,9 +43,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php 
         if($job_deactive == 0 && $this->job_profile_set == 1){
             echo $job_header2;
@@ -676,7 +676,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
