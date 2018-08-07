@@ -67,9 +67,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push freeh3 cust-job-width paddnone">
+    <body class="page-container-bg-solid page-boxed pushmenu-push freeh3 cust-job-width paddnone body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php //echo $recruiter_header2; ?>
         <?php
         //$returnpage = $_GET['page'];
@@ -1229,7 +1229,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             });
             
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
         });
         //BUTTON SUBMIT DISABLE AFTER SOME TIME START
         $("#submit").on('click', function() {
