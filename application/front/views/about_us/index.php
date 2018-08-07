@@ -137,97 +137,24 @@
        <div class="container" >
                     <div class="pt10">
                         <div class="titlea">
-                            <h1 class="pb20">Our Team</h1>
+                            <h1 class="pb20">Our Leadership</h1>
                         </div>
                        <div class="about-content text-center">
 					   <img style="width:100%;" src="<?php echo base_url('assets/img/about-4.jpg') ?>" alt="aboutus-image">
-                           Coming together is a beginning, staying together is progress, and working together is success.<br>
-                    -Henry Ford 
+                           
                         </div>
                         <div class="all-tem">
                            <ul class="new-abput-page">
 							<li class="img-custom">
-                           
-                                 <div class="text-custom">
+								<div class="ceo-img">
+									<img src="<?php echo base_url('assets/n-images/user-pic.jpg') ?>">
+								</div>
+                                <div class="text-custom">
                                     <h4>Dhaval Shah</h4>
-                                    <p>CEO</p>
+                                    <p>Chief Executive Officer</p>
                                 </div>
-                             </li>
-                            <li class="img-custom">
-                           
-                                 <div class="text-custom">
-                                    <h4>Nisha Raj</h4>
-                                    <p>Content Head</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                               
-                                 <div class="text-custom">
-                                    <h4>Yatin Belani</h4>
-                                    <p>Project Manager</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                               
-                                 <div class="text-custom">
-                                    <h4>Shashwat Barbhaya</h4>
-                                    <p>Business Manager</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                                
-                                 <div class="text-custom">
-                                    <h4>Himanshu Sadadiya</h4>
-                                    <p>AWS Architect/Devops Expert</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                               
-                                 <div class="text-custom">
-                                    <h4>Pratik Suthar</h4>
-                                    <p>Technical Head</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                               
-                                 <div class="text-custom">
-                                    <h4>Shraddha Chavda </h4>
-                                    <p>Sr. Web Developer</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                              
-                                 <div class="text-custom">
-                                    <h4>Nikunj Bhalodiya </h4>
-                                    <p>Software Tester</p>
-                                </div>
-                             </li>
-
-                                <li class="img-custom">
-                              
-                                 <div class="text-custom">
-                                    <h4>Harshad Patoliya</h4>
-                                    <p>Sr. Web Designer</p>
-                                </div>
-                             </li>
-
-                             <li class="img-custom">
-                               
-                                 <div class="text-custom">
-                                    <h4>Poorti Gupta</h4>
-                                    <p>Sr. SEO Executive</p>
-                                </div>
-                             </li>
-								
-                             </ul>
-
-
+                            </li>
+                           </ul>
                         </div>
                     </div>
                 </div>
@@ -238,8 +165,9 @@
 				</div>
 			</div>
 			<?php $this->load->view('mobile_side_slide'); ?>
-            <?php echo $login_footer ?>
+            
         </div>
+		<?php echo $login_footer ?>
        <?php if (IS_OUTSIDE_JS_MINIFY == '0'){?>
         <script src="<?php echo base_url('assets/js/webpage/aboutus.js'); ?>"></script>
         <?php }else{?>

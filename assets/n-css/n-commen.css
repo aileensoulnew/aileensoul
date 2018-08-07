@@ -1645,7 +1645,7 @@ a:focus{outline:none;}
 }
 @media screen and (max-width: 767px) {
     /*header{position:relative;}*/
-    html{position:inherit;}
+    html{/*position:inherit;*/}
     .container {width: 100%;}
     .search-mob-block{width:74%;}
     .modal-dialog{margin:15px 0;}

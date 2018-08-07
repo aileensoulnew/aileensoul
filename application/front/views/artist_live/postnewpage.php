@@ -30,7 +30,7 @@
 							<div class="left_fixed"> 
 								<?php ?>
 								<?php echo $left_artistic; ?>
-								
+								<?php echo $left_footer_list_view; ?>
 							</div>
 						</div>
 						<div class=" custom-right-art post_detailbox mian_middle_post_box animated fadeInUp">

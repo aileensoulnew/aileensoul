@@ -2356,69 +2356,24 @@ header.profile-header .logo a{color:#5c5c5c}
     padding:35px 0
 }
 .profile-bnr .logo{text-align:left; padding-top:5px;}
-.new-abput-page{
-    padding-left:0
-}
-.new-abput-page .img-custom{
-    width:49%;
-    padding:0 35px
-}
-.new-abput-page .text-custom{
-    border-bottom:1px solid #5c5c5c;
-	letter-spacing:1px;
-}
-.new-abput-page .text-custom h4{
-    font-size:22px;
-    font-weight:700;
-    color:#5c5c5c
-}
-.new-abput-page .text-custom p{
-    font-size:14px;
-    margin-bottom:15px;
-    color:#7b7b7b;
-	padding-top:5px;
-}
-.post-img img{
-    border:1px solid #d9d9d9
-}
-.test_py p a .fa-external-link{
-    font-size:12px
-}
-.user-gen ol li{
-    font-size:18px
-}
-.user-gen ol li p,.user-gen ol li ul li{
-    font-size:14px
-}
-.third_ts.user-gen ol{
-    margin-left:10px
-}
-.header-login .f-pass:focus{
-    border-bottom:1px solid #fff
-}
-.dateerror{
-	color:#f00; 
-	display: block;
-}
-.fp-clr{
-	color: #a0b3b0;
-}
-.fp-clr1{
-	margin-bottom: 15px; 
-	color: #a0b3b0;
-}
-
+.new-abput-page{ padding-left:0}
+.new-abput-page .img-custom{width:38%; padding:0 35px}
+.new-abput-page .text-custom{border-bottom:1px solid #5c5c5c; letter-spacing:1px;}
+.new-abput-page .text-custom h4{font-size:22px; font-weight:700; color:#5c5c5c}
+.new-abput-page .text-custom p{font-size:14px; margin-bottom:15px; color:#7b7b7b; padding-top:5px;}
+.post-img img{border:1px solid #d9d9d9}
+.test_py p a .fa-external-link{font-size:12px}
+.user-gen ol li{font-size:18px}
+.user-gen ol li p,.user-gen ol li ul li{font-size:14px}
+.third_ts.user-gen ol{margin-left:10px}
+.header-login .f-pass:focus{border-bottom:1px solid #fff}
+.dateerror{color:#f00; display: block;}
+.fp-clr{color: #a0b3b0;}
+.fp-clr1{margin-bottom: 15px; color: #a0b3b0;}
 .main_otp_box_middle_submit #new_password:focus{border-bottom: 1px solid #1b8ab9 !important;}
 .main_otp_box_middle_submit #code:focus{border-bottom: 1px solid #1b8ab9 !important;}
 .main_otp_box_middle span #showhide:focus{text-decoration: none;}
-.modal-dialog{
-    height:100%;
-    width:100%;
-    display:flex;
-    align-items:center;
-    margin:0 auto
-}
-
+.modal-dialog{height:100%; width:100%; display:flex; align-items:center; margin:0 auto}
 .main_otp_box_middle a:hover{text-decoration: none !important;}
 .contact-add .p20{padding: 46px 30px;}
 .modal-open .dob select{color: #848484 !important;}
@@ -2779,6 +2734,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .contact-add .p20{padding: 23px 30px;}
     .profiles-details h2::after{top:95px;}
 	.test-cus > li > a{padding:5px 10px;}
+	.new-abput-page .img-custom{width:45%;}
 }
 @media screen and (max-width:1024px){
     .carousel-fade .carousel-caption .carousel-text{
@@ -2984,6 +2940,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 	.mob-bar-li .mob-right-bar .bg-menu{padding:0;}
 	.main-login footer ul.footer-ul:first-child{display:none !important;}
 	.main-login .mob-right-bar{padding-left:10px;}
+	.new-abput-page .img-custom{width:60%;}
 }	
 @media screen and (max-width:767px){
 	footer .footer-ul:first-child{/*display:none;*/}
@@ -3360,7 +3317,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     width:50%
 	}
 	.about-content p img{width:100%;}
-	.new-abput-page .img-custom{width:49%; padding:0 15px;}
+	.new-abput-page .img-custom{width:382px; padding:0 15px;}
     .contact-add .p20{padding: 46.50px 30px;}
     .modal-dialog{width: 95%;}
     .login .modal-dialog{height: auto;}
@@ -3529,14 +3486,14 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
     .about-h2{font-size:30px; padding-top:50px;}
     .about-para{font-size:15px;}
     .about-us .terms-con-cus{background-size:cover;}
-    .about-us .middle-main .all-tem .text-custom h4{font-size:20px;}
+    .about-us .middle-main .all-tem .text-custom h4{font-size:16px;}
     .about-us .middle-main .all-tem .text-custom p{font-size:12px;}
     .con-address td{width:100%; float:left;}
     .con-address td:first-child{padding-bottom:0;}
     .con-address td:last-child{padding-top:0;}
     .site-map-all-profile ul li{width:100%;}
     footer ul li a{padding:5px!important;}
-	.new-abput-page .img-custom{width:100%;}
+	.new-abput-page .img-custom{width:290px;}
     .cus-chang{margin-bottom: 0px !important;font-size: 17px !important;}
 	.inner-form{padding:0;}
 	.inner-form .login{width:100%; border-left:0; border-right:0; border-radius:0; box-shadow:none;}

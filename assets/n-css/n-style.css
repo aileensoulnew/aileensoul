@@ -2463,6 +2463,9 @@ label.cameraButton{min-height:43px;}
 .more-support{padding-bottom:0;}
 .job-saved-box{margin-bottom:0;}
 .job_edit_menu{margin-top:15px;}
+.img-custom .ceo-img{width:150px; height:150px; border:1px solid #d2d2d2; border-radius:100%; float:left; overflow:hidden;}
+.img-custom .ceo-img img{/*width:100%;*/}
+.new-abput-page .img-custom .text-custom{padding:40px 0px 50px; border-bottom:0;}
 /***  end extra  ***/
 /***  optimization css  ***/
 .left-part.left-scroll{position:absolute;}
@@ -3164,6 +3167,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.all-contact{border-radius:0; border-left:0; border-right:0;}
 	.art-side-menu .flw_msg_btn ul li{padding:0;}
 	.art-side-menu .flw_msg_btn{margin-top:0; margin:0; border-bottom:1px solid #d2d2d2;}
+	.img-custom .ceo-img img{width:100%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3510,6 +3514,8 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.user-btns a.btn3:nth-child(2){width:28%;}
 	.user-btns a.btn3:nth-child(3){width:28%;}
 	.con-detail{line-height:1.5;}
+	.img-custom .ceo-img{width:80px; height:80px;}
+	.new-abput-page .img-custom .text-custom{padding:12px 0px 0px;}
 	
 }
 @media screen and (max-width: 359px) {
