@@ -18,9 +18,9 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
+    <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <?php echo $header; ?>
             <?php echo $business_header2; ?>
             <section>
@@ -302,7 +302,8 @@
         var base_url = '<?php echo base_url(); ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
         $('#main_loader').hide();
-        $('#main_page_load').show();
+        // $('#main_page_load').show();
+        $('body').removeClass("body-loader");
     </script>
    
     <?php if (IS_BUSINESS_JS_MINIFY == '0') { ?>

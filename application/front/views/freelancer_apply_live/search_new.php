@@ -50,9 +50,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page body-loader">
     <?php $this->load->view('page_loader'); ?>
-    <div id="main_page_load" style="display: none;">
+    <div id="main_page_load" style="display: block;">
         <?php 
         if($userid_login != ""  && $this->freelance_apply_profile_set == 1){
             echo $header_profile;
