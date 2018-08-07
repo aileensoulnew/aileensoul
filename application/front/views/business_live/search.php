@@ -91,15 +91,13 @@
                         <p class="text-left p10">
                             <a href="<?php echo business_location_list; ?>">View More Locations</a>
                         </p>
-<<<<<<< HEAD
                     </div>
                     <div class="right-add-box"></div>
 					<?php //$this->load->view('right_add_box'); ?>
 					<?php echo $left_footer; ?>
-=======
                     </div>                    
 					<?php $this->load->view('right_add_box'); ?>
->>>>>>> d076be0327b583e2e12a7be558f81a17b5d35db9
+
                 </div>
                 <div class="middle-part">					
                     <div class="page-title">
@@ -152,16 +150,12 @@
                         </p>
                     </div>					
                 </div>
-<<<<<<< HEAD
                 <div class="right-part">
                     <div class="right-add-box"></div>
-					<?php /*$this->load->view('right_add_box');*/ ?>
-					
-=======
+					<?php /*$this->load->view('right_add_box');*/ ?>					
                 <div class="right-part">                    
 					<?php $this->load->view('right_add_box'); ?>
 					<?php echo $left_footer; ?>
->>>>>>> d076be0327b583e2e12a7be558f81a17b5d35db9
                 </div>
             </div>
 			
