@@ -427,7 +427,8 @@ app.controller('profilesController', function ($scope, $http, $location) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {            
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             details_data = success.data;
             $scope.details_data = details_data;
         });
@@ -474,7 +475,8 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             if (response.data != '') {
                 $scope.pagedata = response.data.pagedata;
                 $scope.page_number = response.data.pagedata.page;
@@ -560,7 +562,8 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             if (response.data != '') {
                 $scope.pagedata = response.data.pagedata;
                 $scope.page_number = response.data.pagedata.page;
@@ -709,7 +712,8 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $('.post_loader').hide();
             if (response.data != '') {
                 $scope.pagedata = response.data.videoData.pagedata;
@@ -855,7 +859,8 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             //console.log(response.data.photosData);
             if (response.data != '') {
                 $scope.pagedata = response.data.photosData.pagedata;
@@ -1518,7 +1523,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $scope.postData = success.data;
             $('#progress_div').hide();
             $('.progress-bar').css("width",0);
@@ -3354,7 +3360,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         })
         .then(function (success) {
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             details_data = success.data;
             $scope.details_data = details_data;
             load_add();
@@ -3422,7 +3429,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
                 if ($scope.contactData != undefined) {
@@ -3519,7 +3527,8 @@ app.controller('followersController', function ($scope, $http, $location, $compi
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
                 if ($scope.contactData != undefined) {
@@ -3632,7 +3641,8 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             if (response.data != '') {
                 $scope.row += $scope.rowperpage;
                 if ($scope.contactData != undefined) {
@@ -3783,7 +3793,8 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $('.post_loader').hide();
             isLoadingData  = false;
             if (response.data != '') {
