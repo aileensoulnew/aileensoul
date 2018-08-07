@@ -126,7 +126,8 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         $http.get(base_url + "user_post/post_data/?post_id=" + post_id).then(function (success) {
             $('#loader').hide();
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $scope.postData = success.data;
             setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);
         }, function (error) {});
