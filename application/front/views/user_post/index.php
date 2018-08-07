@@ -63,9 +63,9 @@
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="one-hd">
+    <body class="one-hd body-loader">
     <?php $this->load->view('page_loader'); ?>
-    <div id="main_page_load" style="display: none;">
+    <div id="main_page_load" style="display: block;">
     <?php echo $header_profile; ?>        
     <div class="middle-section custom-mob-pd">
     <div class="container">

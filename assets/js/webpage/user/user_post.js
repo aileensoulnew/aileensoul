@@ -824,7 +824,8 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             if(pg == ""){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             if (success.data) {
                 isLoadingData = false;
                 $('#progress_div').hide();
