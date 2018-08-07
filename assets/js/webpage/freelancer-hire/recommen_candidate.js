@@ -144,7 +144,8 @@ function freelancerhire_home(from = '',filter_selected_data = '', pagenum = 1)
             if(pagenum == undefined || pagenum == "1"){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $('.loader').remove();
             if(from == "filter"){
                 $('.job-contact-frnd').html('');
