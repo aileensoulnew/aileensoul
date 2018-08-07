@@ -157,12 +157,13 @@ app.controller('freelancerApplySearchController', function ($scope, $http,$windo
         if(pagenum == 1)
         {            
             $('#main_loader').show();
-            $('#main_page_load').hide();
+            // $('#main_page_load').hide();
         }
         $.post(base_url + "freelancer_apply_live/freelancer_apply_search_new_ajax?page=" + pagenum, {"fa_keyword":fa_keyword, "fa_location":fa_location,"category_id" : $scope.cat_fil, "skill_id": $scope.skills_fil, "worktype": $scope.worktype, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
                 $('#main_loader').hide();
-                $('#main_page_load').show();
+                // $('#main_page_load').show();
+                $('body').removeClass("body-loader");
                 $('#loader').hide();
                 data = JSON.parse(success);
                 if(data.fa_projects.length > 0)
