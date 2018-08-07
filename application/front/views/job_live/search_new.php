@@ -724,9 +724,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             var job_profile_set = "<?php echo $this->job_profile_set; ?>";
             var job_deactive = "<?php echo $job_deactive; ?>";
             var app = angular.module('jobSearch', ['ui.bootstrap','angular-google-adsense']);
-            $(document).ready(function(){
-                $(window).scrollTop(500);
-            });
+            
             $(document).ready(function($) {
                 $("li.user-id label").click(function(e){
                     $(".dropdown").removeClass("open");
