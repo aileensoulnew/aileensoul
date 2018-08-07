@@ -258,7 +258,7 @@ if($userid != "")
                                     <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'details') { ?> class="active" <?php } ?>>
                                         <a title="Details" class="login_link" href="javascript:void(0);" onclick="open_profile();"> Details</a>
                                     </li>
-                                    <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'contacts') { ?> class="active" <?php } ?>><a title="Contacts" href="javascript:void(0);" onclick="open_profile();"> Contacts <br>  (<span class="contactcount"><?php echo $business_user_contacts_count; ?></span>)</a></li>
+                                    <!-- <li <?php /*if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'contacts') {*/ ?> class="active" <?php //} ?>><a title="Contacts" href="javascript:void(0);" onclick="open_profile();"> Contacts <br>  (<span class="contactcount"><?php //echo $business_user_contacts_count; ?></span>)</a></li> -->
                                     <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'followers') { ?> class="active" <?php } ?>><a title="Followers" href="javascript:void(0);" onclick="open_profile();">Followers <br>  <div id="countfollower">(<?php echo $business_user_follower_count; ?>)</div></a></li>
                                     <li <?php if ($this->uri->segment(1) == 'company' && $this->uri->segment(3) == 'following') { ?> class="active" <?php } ?>><a title="Following" href="javascript:void(0);" onclick="open_profile();">Following <br> <div id="countfollow">(<?php echo $business_user_following_count; ?>)</div></a></li>
                                 </ul>
