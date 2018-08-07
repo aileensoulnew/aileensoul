@@ -105,7 +105,8 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
                 if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                     $('#main_loader').hide();
                 }
-                $('#main_page_load').show();
+                // $('#main_page_load').show();
+                $('body').removeClass("body-loader");
                 data = JSON.parse(success);
                 if(data.searchJobs.length > 0)
                 {                    
@@ -363,7 +364,7 @@ $(window).on("load", function () {
 
     // NEW HTML SCRIPT
 
-    AOS.init({
+    /*AOS.init({
         easing: 'ease-in-out-sine'
     });
 
@@ -380,4 +381,4 @@ $(window).on("load", function () {
         item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
         // container.appendChild(item);
         itemsCounter++;
-    }
+    }*/
