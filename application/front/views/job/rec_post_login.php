@@ -30,9 +30,9 @@
 </head>
     <!-- END HEAD -->
   
-    <body class="page-container-bg-solid detail-job-no-login page-boxed no-login freeh3 cust-job-width paddnone cus-error">
+    <body class="page-container-bg-solid detail-job-no-login page-boxed no-login freeh3 cust-job-width paddnone cus-error body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">  
+        <div id="main_page_load" style="display: block;">  
         <header>
             <div class="container">
                 <div class="row">
@@ -1229,7 +1229,8 @@
             var postslug = '<?php echo $this->uri->segment(3); ?>';
             
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
 
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/recruiter/rec_post_login.js?ver=' . time()); ?>"></script>
