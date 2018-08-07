@@ -110,7 +110,8 @@ app.controller('searchController', function ($scope, $http,$compile) {
             $scope.searchProfileData = success.data.profile;
             $scope.postData = success.data.post;
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             setTimeout(function(){
                 $('video,audio').mediaelementplayer(/* Options */);
             },300);

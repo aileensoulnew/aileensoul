@@ -30,10 +30,10 @@
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="search-page">
+    <body class="search-page body-loader">
         <?php echo $header_profile ?>
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <div class="middle-section">
                 <div class="container mobp0">
                     <?php echo $n_leftbar; ?>
