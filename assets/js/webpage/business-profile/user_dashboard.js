@@ -166,7 +166,8 @@ function business_dashboard_post(slug, pagenum) {
                 }
             });
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
         }
     });
 }
