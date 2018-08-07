@@ -116,7 +116,8 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
                 if(pagenum == "1"){
                     $('#main_loader').hide();
                 }
-                $('#main_page_load').show();
+                // $('#main_page_load').show();
+                $('body').removeClass("body-loader");
                 data = JSON.parse(success);
                 if(data.searchJobs.length > 0)
                 {                    
