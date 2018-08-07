@@ -21,9 +21,9 @@
     <!-- END HEAD -->
     <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
     
-    <body class="page-container-bg-solid page-boxed no-login freeh3 detail-job-no-login">
+    <body class="page-container-bg-solid page-boxed no-login freeh3 detail-job-no-login body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">    
+        <div id="main_page_load" style="display: block;">    
             <header>
                 <div class="container">
 					<div class="row">
@@ -1093,7 +1093,8 @@
             var skill = '<?php echo $this->input->get('skills'); ?>';
             var place = '<?php echo $this->input->get('searchplace'); ?>';
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
         </script>
         <?php
         /*if (IS_APPLY_JS_MINIFY == '0') {
