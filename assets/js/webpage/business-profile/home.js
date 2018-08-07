@@ -83,7 +83,8 @@ function ajax_business_home_post(pagenum) {
             if(pagenum == undefined || pagenum == "1"){
                 $('#main_loader').hide();
             }
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $('.loader').remove();
             $('.business-all-post').append(data);
             $('video, audio').mediaelementplayer();
