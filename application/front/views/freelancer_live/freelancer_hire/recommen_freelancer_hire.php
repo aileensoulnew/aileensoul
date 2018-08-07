@@ -16,9 +16,9 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
     <?php $this->load->view('adsense'); ?>
 </head>  
-    <body>
+    <body class="body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <?php echo $header; ?>
             <?php echo $freelancer_hire_header2; ?>
             <section>

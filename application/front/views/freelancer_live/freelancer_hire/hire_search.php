@@ -14,9 +14,9 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>">
     <?php $this->load->view('adsense'); ?>
     </head>  
-    <body class="no-login">
+    <body class="no-login body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
             <?php
             $userid = $this->session->userdata('aileenuser');
             if (!$userid) {
@@ -803,8 +803,17 @@
                 var skill = '<?php echo $this->input->get('skills'); ?>';
                 var place = '<?php echo $this->input->get('searchplace'); ?>';
             }
-            //LEAVE PAGE AT ADD AND EDIT FREELANCER PAGE THEN PROBLEM SO BELOW CODE END
+            //LEAVE PAGE AT ADD AND EDIT FREELANCER PAGE THEN PROBLEM SO BELOW CODE END            
         </script>
+        <script src="<?php echo base_url('assets/js/croppie.js?ver='.time()); ?>"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script type="text/javascript">
+            var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var app = angular.module('freelancerHireSearchApp', ['ui.bootstrap']);
+        </script>
+
         <script  type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_hire_search_result.js?ver=' . time()); ?>"></script>
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>
 

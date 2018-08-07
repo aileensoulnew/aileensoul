@@ -154,7 +154,8 @@ function freelancerhire_search(from,filter_selected_data='',pagenum)
             }
             isProcessing = false;
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
         }
     });
 }
