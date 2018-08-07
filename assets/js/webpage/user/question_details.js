@@ -143,7 +143,8 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
         $http.get(base_url + "userprofile_page/question_data/?question=" + question).then(function (success) {
             $('#loader').hide();
             $('#main_loader').hide();
-            $('#main_page_load').show();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
             $scope.postData = success.data;
         }, function (error) {});
     }

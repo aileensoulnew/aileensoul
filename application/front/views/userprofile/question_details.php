@@ -19,9 +19,9 @@
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="profile-db">
+    <body class="profile-db body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php echo $header_profile ?>
         <div class="middle-section middle-section-banner">
             <div class="container pt20 mobp0">
