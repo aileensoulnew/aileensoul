@@ -142,6 +142,12 @@ var slug_id = '<?php echo $artisticdata[0]['user_id']; ?>';
 
 <?php } */?>
 <script>
+    // page scroll top 
+            $(document).ready(function () {
+                $('html,body').animate({scrollTop: 300}, 500);
+            });
+</script>
+<script>
     var header_all_profile = '<?php echo $header_all_profile; ?>';
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

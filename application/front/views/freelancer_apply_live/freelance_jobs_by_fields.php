@@ -161,7 +161,7 @@
                 });*/
             });            
             $(document).ready(function () {
-                $('html,body').animate({scrollTop: 500}, 500);
+                $('html,body').animate({scrollTop: 300}, 500);
             });
         </script>
         <?php if($user_id != "")

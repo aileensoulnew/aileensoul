@@ -282,6 +282,12 @@
 				$('#main_page_load').show();
 				$('body').removeClass("body-loader");
 			</script>
+			<script>
+    // page scroll top 
+            $(document).ready(function () {
+                $('html,body').animate({scrollTop: 300}, 500);
+            });
+</script>
 
 			<?php
 			if (IS_ART_JS_MINIFY == '0') { ?>

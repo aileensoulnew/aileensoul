@@ -443,9 +443,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             var login_user_id = "<?php echo $userid_login; ?>";
             var fa_profile_set = "<?php echo $this->freelance_apply_profile_set; ?>";
             var app = angular.module('freelancerApplySearch', ['ui.bootstrap','angular-google-adsense']);
-            $(document).ready(function(){
-                $(window).scrollTop(450);
-            });
+            
             $(document).ready(function($) {
                 $("li.user-id label").click(function(e){
                     $(".dropdown").removeClass("open");

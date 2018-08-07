@@ -224,6 +224,12 @@
                  var header_all_profile = '<?php echo $header_all_profile; ?>';
                </script>
                <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
+				<script>
+					// page scroll top 
+							$(document).ready(function () {
+								$('html,body').animate({scrollTop: 300}, 500);
+							});
+				</script>
              </body>
              </html>
 
