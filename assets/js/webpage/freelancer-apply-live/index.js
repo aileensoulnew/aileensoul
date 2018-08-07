@@ -186,7 +186,8 @@ app.controller('freeapplypostController', function ($scope, $http,$window) {
                 if(pagenum == "" || pagenum == "1" || pagenum == undefined){
                     $('#main_loader').hide();
                 }
-                $('#main_page_load').show();
+                // $('#main_page_load').show();
+                $('body').removeClass("body-loader");
                 $('#loader').hide();
                 data = JSON.parse(success);
                 if(data.fa_projects.length > 0)

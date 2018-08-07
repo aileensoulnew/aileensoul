@@ -34,9 +34,9 @@
 
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="profile-main-page">
+    <body class="profile-main-page body-loader">
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php echo $header_profile; ?>
         <div class="middle-section middle-section-banner">
             <?php if($freelance_apply_profile_set == 0 || $freelance_apply_profile_set == '0'){ echo $search_banner; } ?>

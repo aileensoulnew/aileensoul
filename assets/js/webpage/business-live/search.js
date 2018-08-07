@@ -17,13 +17,14 @@ app.controller('businessSearchListController', function ($scope, $http,$compile)
     $scope.categorysearch = '';
     $scope.locationsearch = '';
 
-    setTimeout(function(){        
-    /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
-        $compile($el)($scope);*/
-
-    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
-        $compile($el)($scope);
-    },2000);
+    function load_add(){        
+        setTimeout(function(){        
+        /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+            $compile($el)($scope);*/
+        /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+            $compile($el)($scope);*/
+        },2000);
+    }
 
     function businessCategory() {
         $http.get(base_url + "business_live/businessCategory?limit=5").then(function (success) {
@@ -122,6 +123,7 @@ app.controller('businessSearchListController', function ($scope, $http,$compile)
             $("#loader").addClass("hidden");
             $('#main_loader').hide();
             // $('#main_page_load').show();
+            //load_add();
             $('body').removeClass("body-loader");
             $scope.businessList = success.data;
         }, function (error) {});

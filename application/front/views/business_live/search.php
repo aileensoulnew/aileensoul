@@ -91,9 +91,8 @@
                         <p class="text-left p10">
                             <a href="<?php echo business_location_list; ?>">View More Locations</a>
                         </p>
-                    </div>
-                    <div class="right-add-box"></div>
-					<?php //$this->load->view('right_add_box'); ?>
+                    </div>                    
+					<?php $this->load->view('right_add_box'); ?>
                 </div>
                 <div class="middle-part">					
                     <div class="page-title">
@@ -144,14 +143,10 @@
                         <p style="text-align:center;">
                             <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
                         </p>
-                    </div>
-					<div class="banner-add ads">
-						<?php /*$this->load->view('banner_add');*/ ?>
-					</div>
+                    </div>					
                 </div>
-                <div class="right-part">
-                    <div class="right-add-box"></div>
-					<?php /*$this->load->view('right_add_box');*/ ?>
+                <div class="right-part">                    
+					<?php $this->load->view('right_add_box'); ?>
 					<?php echo $left_footer; ?>
                 </div>
             </div>
