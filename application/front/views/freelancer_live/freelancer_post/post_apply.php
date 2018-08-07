@@ -23,10 +23,10 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="">
+    <body class="body-loader">
         <?php //echo $header; ?>
         <?php $this->load->view('page_loader'); ?>
-        <div id="main_page_load" style="display: none;">
+        <div id="main_page_load" style="display: block;">
         <?php echo $freelancer_post_header2; ?>
         <section>
             <div class="user-midd-section " id="paddingtop_fixed">

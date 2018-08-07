@@ -137,7 +137,7 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
     FASkills(fil_limit);
     
     angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.5) {
             isLoadingData = true;
             var page = $scope.fa.page_number;
             var total_record = $scope.fa.total_record;
@@ -172,7 +172,8 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
                 if(pagenum == undefined || pagenum == "1"){
                     $('#main_loader').hide();
                 }
-                $('#main_page_load').show();
+                // $('#main_page_load').show();
+                $('body').removeClass("body-loader");
                 $('#loader').hide();
                 data = JSON.parse(success);
                 if(data.fa_projects.length > 0)
