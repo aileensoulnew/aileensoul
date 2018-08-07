@@ -301,6 +301,8 @@
                 </div>
 				</a>
 				<?php $this->load->view('right_add_box'); ?>
+				
+				<?php echo $left_footer; ?>
                 
             </div>
             <!-- popup start -->
@@ -461,9 +463,9 @@
               <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver='.time()) ?>" alt="<?php echo "loader.gif"; ?>"/></div>
             </div>           
 			
-			<div class="right-add">
+			<div class="right-part right-scroll">
 				<?php $this->load->view('right_add_box'); ?>
-				<?php echo $left_footer_list_view; ?>
+				
 			</div>
     </div>
 </div>   

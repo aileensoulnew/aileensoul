@@ -94,6 +94,7 @@
                     </div>
                     <div class="right-add-box"></div>
 					<?php //$this->load->view('right_add_box'); ?>
+					<?php echo $left_footer; ?>
                 </div>
                 <div class="middle-part">					
                     <div class="page-title">
@@ -152,7 +153,7 @@
                 <div class="right-part">
                     <div class="right-add-box"></div>
 					<?php /*$this->load->view('right_add_box');*/ ?>
-					<?php echo $left_footer; ?>
+					
                 </div>
             </div>
 			

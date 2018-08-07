@@ -55,83 +55,10 @@
                     <div class="left-part">
                         <?php echo $business_left; ?>
 						<?php $this->load->view('right_add_box'); ?>
-						
-                        <!-- <div class="left-search-box list-type-bullet">
-                            <div class="">
-                                <h3>Top Categories</h3>
-                            </div>
-                            <ul class="search-listing custom-scroll">
-                                <li ng-repeat="category in businessCategory">
-                                    <label class="control control--checkbox">
-                                        <span>{{category.industry_name | capitalize}}
-    										<span class="pull-right">({{category.count}})</span>
-    									</span>
-                                            <input class="categorycheckbox" type="checkbox" name="{{category.industry_name}}" value="{{category.industry_id}}" style="height: 12px;" [attr.checked]="(category.isselected) ? 'checked' : null" autocomplete="false">
-    									<div class="control__indicator"></div>
-                                    </label>
-                                </li>
-                            </ul>
-                            <p class="text-left p10"><a href="<?php echo base_url('business-by-categories') ?>">View More Categories</a></p>
-                        </div> -->
-                        <!-- TOP Location -->
-                        <!-- <div class="left-search-box list-type-bullet">
-                            <div class="">
-                                <h3>Top Location</h3>
-                            </div>
-                            <ul class="search-listing custom-scroll">
-                                <li ng-repeat="location in businessLocation">
-                                    <label class="control control--checkbox">
-                                        <span> {{location.city_name | capitalize}}
-    										<span class="pull-right">({{location.count}})</span>
-    									</span>
-                                            <input class="locationcheckbox" type="checkbox" name="{{location.city_name}}" value="{{location.city_id}}" style="height: 12px;" [attr.checked]="(location.isselected) ? 'checked' : null" autocomplete="false">
-                                        <div class="control__indicator"></div>
-                                    </label>
-                                </li>
-                            </ul>
-                            <p class="text-left p10"><a href="<?php echo base_url('business-by-location') ?>">View More Location</a></p>
-                        </div> -->
-
-                        <!-- <div class="custom_footer_left fw">
-                            <div class="">
-                                <ul>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> About Us 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Contact Us
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Blogs 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Privacy Policy 
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Terms &amp; Condition
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <span class="custom_footer_dot"> · </span> Send Us Feedback
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> -->
-                        
+						<?php echo $left_footer; ?>
                     </div>
                     <div class="middle-part">
-						<div class="tab-add">
+						<div class="tab-add-991">
 							<?php $this->load->view('banner_add'); ?>
 						</div>
                         <div class="page-title">
@@ -239,7 +166,7 @@
                     </div>
                     <div class="right-part">
                        <?php $this->load->view('right_add_box'); ?>
-    					<?php echo $left_footer; ?>
+    					
                     </div>
                 </div>
            

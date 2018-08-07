@@ -29,7 +29,7 @@
 					<div class="container mobp0">
 						
 						<div class="custom-user-list bus-art-cus-left">
-							<div class="tab-add">
+							<div class="tab-add-991">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
 							<div class="common-form">
