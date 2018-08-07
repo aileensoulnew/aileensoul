@@ -59,7 +59,7 @@
                     <div class="left-part">
                         <?php echo $artist_left; ?>
 						<?php $this->load->view('right_add_box'); ?>
-						
+						<?php echo $left_footer_list_view; ?> 
                     </div>
                     <div class="middle-part">
                         <div class="page-title">
@@ -162,7 +162,7 @@
                     </div>
                     <div class="right-part">
                        <?php $this->load->view('right_add_box'); ?>
-					   <?php echo $left_footer_list_view; ?>
+					  
     					
                     </div>
                 </div>        

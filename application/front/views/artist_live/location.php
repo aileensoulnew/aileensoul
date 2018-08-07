@@ -54,7 +54,7 @@
             } ?>
                 <div class="container pt20 mobp0">
                     <div class="custom-user-list">
-						<div class="tab-add">
+						<div class="tab-add-991">
 							<?php $this->load->view('banner_add'); ?>
 						</div>
                         <div class="list-box-custom border-none">
@@ -94,8 +94,8 @@
 								</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="right-part">
+                    </div> 
+                    <div class="right-add">
                         <?php $this->load->view('right_add_box'); ?>
                     </div>
                 </div>
