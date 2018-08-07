@@ -6822,4 +6822,10 @@ class Recruiter extends MY_Controller {
 		$postdata .= '</div>';
 		echo $postdata;*/
 	}
+
+	public function create_search_table()
+	{
+		$this->recruiter_model->create_search_table();
+
+	}
 }

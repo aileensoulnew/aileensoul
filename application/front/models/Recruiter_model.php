@@ -534,4 +534,71 @@ class Recruiter_model extends CI_Model {
         $result_array = $query->result_array();   
         return $result_array;
     }
+
+    public function create_search_table()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        echo "<pre>";
+        $sql = "SELECT * FROM ailee_job_reg WHERE is_delete = '0' AND status = '1'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();   
+        // print_r($result_array);exit;
+        foreach ($result_array as $key => $value) {            
+            if($value['keyskill'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$value['keyskill']) as $skk => $skv) {
+                    if($skv != "")
+                    {
+                        $s_name = $this->db->get_where('skill', array('skill_id' => $skv, 'status' => 1))->row()->skill;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                }
+                $value['keyskill_txt'] = trim($skill_name,",");
+            }
+
+            if(trim($value['work_job_title']) != "")
+            {
+                $work_job_title = $this->db->get_where('job_title', array('title_id' => $value['work_job_title'], 'status' => 1))->row()->name;
+
+                $value['work_job_title_txt'] = trim($work_job_title);
+            }
+
+            if(trim($value['work_job_industry']) != "")
+            {
+                $work_job_industry = $this->db->get_where('job_industry', array('industry_id' => $value['work_job_industry'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+
+                $value['work_job_industry_txt'] = trim($work_job_industry);
+            }
+
+            if(trim($value['country_id']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $value['country_id'], 'status' => '1'))->row()->country_name;
+
+                $value['country_name'] = trim($country_name);
+            }
+
+            if(trim($value['state_id']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $value['state_id'], 'status' => '1'))->row()->state_name;
+
+                $value['state_name'] = trim($state_name);
+            }
+
+            if(trim($value['city_id']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $value['city_id'], 'status' => '1'))->row()->city_name;
+
+                $value['city_name'] = trim($city_name);
+            }
+            // print_r();
+            $this->db->insert('ailee_job_reg_search_tmp', $value);
+        }
+        echo "Done";
+        
+    }
 }
