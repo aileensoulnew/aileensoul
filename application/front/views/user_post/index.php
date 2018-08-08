@@ -730,7 +730,7 @@
     </div>
     </div>
     </div>
-		
+		<?php $this->load->view('feedback_fixed'); ?>
 		<div style="display:none;" class="modal fade" id="report-span" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

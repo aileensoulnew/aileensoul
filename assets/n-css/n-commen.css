@@ -828,7 +828,7 @@ border-radius: 50%;font-size: 10px;line-height: 1.8;position: absolute; right: 7
 .search-profiles .profile-img{width:60px; height:60px; border:1px solid #d2d2d2; float:left;}
 .search-profiles .profile-img.post-img a span{padding:43px 0; display:block; color:#fff;}
 .search-profiles .profile-img img{width:100%; height:100%;}
-.search-profiles .profile-data{padding:0 10px; /*min-height:110px;*/ width:410px; float:left;}
+.search-profiles .profile-data{padding:0 10px; /*min-height:110px;*/ width:405px; float:left;}
 .search-profiles .profile-data p{font-size:15px; font-weight:600;}
 .search-profiles .profile-data p a{color:#5c5c5c;}
 .search-profiles .profile-data p a:hover{color:#1b8ab9;}
