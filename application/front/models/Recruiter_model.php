@@ -294,17 +294,17 @@ class Recruiter_model extends CI_Model {
             if($value != "")
             {                
                 $sql_city .= ($sql_city == "") ? " (" : " OR";
-                $sql_state .= ($sql_state == "") ? " (" : " OR";
+                // $sql_state .= ($sql_state == "") ? " (" : " OR";
                 // $sql_country .= ($sql_country == "") ? " (" : " OR";
 
                 $value = $value .'%';
-                $sql_city .= " jr.city_name LIKE '".$value."'";
-                $sql_state .= "  jr.state_name LIKE '".$value."'";
+                $sql_city .= " jr.work_job_city_txt LIKE '".$value."'";
+                // $sql_state .= "  jr.state_name LIKE '".$value."'";
                 // $sql_country .= "jr.country_name LIKE '".$value."'";            
             }
         }
         $sql_city .= ($sql_city == "") ? "" : ")";
-        $sql_state .= ($sql_state == "") ? "" : ")";
+        // $sql_state .= ($sql_state == "") ? "" : ")";
         // $sql_country .= ($sql_country == "") ? "" : ")";
         // echo $sql_city;
         // exit;
@@ -312,7 +312,7 @@ class Recruiter_model extends CI_Model {
         $sql_filter = "";
         // Apply condition for filter
         if($city_id != ""){
-            $sql_filter .= " AND jr.city_id IN (". $city_id .") AND jr.city_id > 0";
+            $sql_filter .= " AND jr.work_job_city IN (". $city_id .") AND jr.work_job_city > 0";
         }
 
         if($title_id != ""){
@@ -358,7 +358,7 @@ class Recruiter_model extends CI_Model {
             {
                 $sql .= "AND";
             }
-            $sql .= "(".$sql_city." OR ".$sql_state.")";      
+            $sql .= "(".$sql_city.")";      
         }
 
         if($sql_filter != "")
@@ -404,17 +404,17 @@ class Recruiter_model extends CI_Model {
             if($value != "")
             {                
                 $sql_city .= ($sql_city == "") ? " (" : " OR";
-                $sql_state .= ($sql_state == "") ? " (" : " OR";
+                // $sql_state .= ($sql_state == "") ? " (" : " OR";
                 // $sql_country .= ($sql_country == "") ? " (" : " OR";
 
                 $value = $value .'%';
-                $sql_city .= " jr.city_name LIKE '".$value."'";
-                $sql_state .= "  jr.state_name LIKE '".$value."'";
+                $sql_city .= " jr.work_job_city_txt LIKE '".$value."'";
+                // $sql_state .= "  jr.state_name LIKE '".$value."'";
                 // $sql_country .= "jr.country_name LIKE '".$value."'";            
             }
         }
         $sql_city .= ($sql_city == "") ? "" : ")";
-        $sql_state .= ($sql_state == "") ? "" : ")";
+        // $sql_state .= ($sql_state == "") ? "" : ")";
         // $sql_country .= ($sql_country == "") ? "" : ")";
         // echo $sql_city;
         // exit;
@@ -422,7 +422,7 @@ class Recruiter_model extends CI_Model {
         $sql_filter = "";
         // Apply condition for filter
         if($city_id != ""){
-            $sql_filter .= " AND jr.city_id IN (". $city_id .") AND jr.city_id > 0";
+            $sql_filter .= " AND jr.work_job_city IN (". $city_id .") AND jr.work_job_city > 0";
         }
 
         if($title_id != ""){
@@ -468,7 +468,7 @@ class Recruiter_model extends CI_Model {
             {
                 $sql .= "AND";
             }
-            $sql .= "(".$sql_city." OR ".$sql_state.")";      
+            $sql .= "(".$sql_city.")";
         }
 
         if($sql_filter != "")
@@ -555,8 +555,23 @@ class Recruiter_model extends CI_Model {
 
                 $value['city_name'] = trim($city_name);
             }
-            // print_r();
-            $this->db->insert('ailee_job_reg_search_tmp', $value);
+
+            if($value['work_job_city'] != "")
+            {
+                $w_city_name = "";
+                foreach (explode(',',$value['work_job_city']) as $ck => $cv) {
+                    if($cv != "")
+                    {
+                        $c_name = $this->db->get_where('cities', array('city_id' => $cv, 'status' => '1'))->row()->city_name;
+                        if(trim($c_name) != "")
+                        {
+                            $w_city_name .= $c_name.",";
+                        }
+                    }
+                }
+                $value['work_job_city_txt'] = trim($w_city_name,",");
+            }
+            // $this->db->insert('ailee_job_reg_search_tmp', $value);
         }
         echo "Done";
         

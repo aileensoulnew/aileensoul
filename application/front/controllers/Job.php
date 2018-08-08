@@ -180,6 +180,8 @@ class Job extends MY_Controller {
 
 
             $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+            $data['city_name'] = $city;
+            $updatedata1 = $this->common->update_data($data, 'ailee_job_reg_search_tmp', 'user_id', $userid);
             if ($updatedata) {
                 redirect('job-profile/qualification', refresh);
             } else {
@@ -1204,6 +1206,7 @@ class Job extends MY_Controller {
 
 
         $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+        $updatedata1 = $this->common->update_data($data, 'job_reg_search_tmp', 'user_id', $userid);
 
 
         if ($updatedata) {
@@ -1338,26 +1341,29 @@ class Job extends MY_Controller {
         if (count($skills) > 0) {
 
             foreach ($skills as $ski) {
-                $contition_array = array('skill' => trim($ski), 'type' => '1');
-                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-
-                if (!$skilldata) {
-
-                    $contition_array = array('skill' => trim($ski), 'type' => '4');
+                if(trim($ski) != "")
+                {                    
+                    $contition_array = array('skill' => trim($ski), 'type' => '1');
                     $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                }
-                if ($skilldata) {
 
-                    $skill[] = $skilldata[0]['skill_id'];
-                } else {
+                    if (!$skilldata) {
 
-                    $data = array(
-                        'skill' => $ski,
-                        'status' => '1',
-                        'type' => '4',
-                        'user_id' => $userid,
-                    );
-                    $skill[] = $this->common->insert_data_getid($data, 'skill');
+                        $contition_array = array('skill' => trim($ski), 'type' => '4');
+                        $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    }
+                    if ($skilldata) {
+
+                        $skill[] = $skilldata[0]['skill_id'];
+                    } else {
+
+                        $data = array(
+                            'skill' => $ski,
+                            'status' => '1',
+                            'type' => '4',
+                            'user_id' => $userid,
+                        );
+                        $skill[] = $this->common->insert_data_getid($data, 'skill');
+                    }
                 }
             }
 
@@ -1369,16 +1375,22 @@ class Job extends MY_Controller {
         if (count($cities) > 0) {
 
             foreach ($cities as $cit) {
-                $contition_array = array('city_name' => $cit);
-                $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                if ($citydata) {
-                    $city[] = $citydata[0]['city_id'];
-                } else {
-                    $data = array(
-                        'city_name' => $cit,
-                        'status' => '1',
-                    );
-                    $city[] = $this->common->insert_data_getid($data, 'cities');
+                if(trim($cit) != "")
+                {                    
+                    $contition_array = array('city_name' => $cit);
+                    $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    if ($citydata) {
+                        $city[] = $citydata[0]['city_id'];
+                    } else {
+                        $slug = $this->setcategory_slug($cit, 'slug', 'cities');
+                        $data = array(
+                            'city_name' => $cit,
+                            'city_image' => $slug.".png",
+                            'status' => '1',
+                            'slug' => $slug,
+                        );                        
+                        $city[] = $this->common->insert_data_getid($data, 'cities');
+                    }
                 }
             }
 
@@ -1430,6 +1442,57 @@ class Job extends MY_Controller {
         );
 
         $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+
+
+        if($data['keyskill'] != "")
+        {
+            $skill_name = "";
+            foreach (explode(',',$data['keyskill']) as $skk => $skv) {
+                if($skv != "")
+                {
+                    $s_name = $this->db->get_where('skill', array('skill_id' => $skv, 'status' => 1))->row()->skill;
+                    if(trim($s_name) != "")
+                    {
+                        $skill_name .= $s_name.",";
+                    }
+                }
+            }
+            $data['keyskill_txt'] = trim($skill_name,",");
+        }
+
+        if(trim($data['work_job_title']) != "")
+        {
+            $work_job_title = $this->db->get_where('job_title', array('title_id' => $data['work_job_title'], 'status' => 1))->row()->name;
+
+            $data['work_job_title_txt'] = trim($work_job_title);
+        }
+
+        if(trim($data['work_job_industry']) != "")
+        {
+            $work_job_industry = $this->db->get_where('job_industry', array('industry_id' => $data['work_job_industry'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+
+            $data['work_job_industry_txt'] = trim($work_job_industry);
+        }
+
+        if($data['work_job_city'] != "")
+        {
+            $city_name = "";
+            foreach (explode(',',$data['work_job_city']) as $ck => $cv) {
+                if($cv != "")
+                {
+                    $c_name = $this->db->get_where('cities', array('city_id' => $cv, 'status' => '1'))->row()->city_name;
+                    if(trim($c_name) != "")
+                    {
+                        $city_name .= $c_name.",";
+                    }
+                }
+            }
+            $data['work_job_city_txt'] = trim($city_name,",");
+        }
+
+        // print_r();
+        // $this->db->insert('ailee_job_reg_search_tmp', $data1);
+        $updatedata1 = $this->common->update_data($data, 'ailee_job_reg_search_tmp', 'user_id', $userid);
 
         if ($updatedata) {
             redirect('job-profile/work-experience');
@@ -1531,6 +1594,7 @@ class Job extends MY_Controller {
                 );
 
                 $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+                $updatedata2 = $this->common->update_data($data, 'job_reg_search_tmp', 'user_id', $userid);
             }
             //update data at job_add_workexp for fresher table end
             //Insert data at first time job_add_workexp for fresher table start        
@@ -1551,6 +1615,7 @@ class Job extends MY_Controller {
 
 
                 $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+                $updatedata3 = $this->common->update_data($data, 'job_reg_search_tmp', 'user_id', $userid);
             }
             //Insert data at first time job_add_workexp for fresher table end
 
@@ -1846,6 +1911,7 @@ class Job extends MY_Controller {
             );
 
             $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+            $updatedata4 = $this->common->update_data($data, 'job_reg_search_tmp', 'user_id', $userid);
             //Update only one field into database End
 
 
@@ -3191,24 +3257,27 @@ class Job extends MY_Controller {
         if (count($skills) > 0) {
 
             foreach ($skills as $ski) {
-                $contition_array = array('skill' => trim($ski), 'type' => '1');
-                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                if (!$skilldata) {
-                    $contition_array = array('skill' => trim($ski), 'type' => '4');
+                if(trim($ski) != "")
+                {                    
+                    $contition_array = array('skill' => trim($ski), 'type' => '1');
                     $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                }
+                    if (!$skilldata) {
+                        $contition_array = array('skill' => trim($ski), 'type' => '4');
+                        $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    }
 
-                if ($skilldata) {
-                    $skill[] = $skilldata[0]['skill_id'];
-                } else {
-                    $data = array(
-                        'skill' => trim($ski),
-                        'status' => '1',
-                        'type' => '4',
-                        'user_id' => $userid,
-                    );
-                    if ($userid) {
-                        $skill[] = $this->common->insert_data_getid($data, 'skill');
+                    if ($skilldata) {
+                        $skill[] = $skilldata[0]['skill_id'];
+                    } else {
+                        $data = array(
+                            'skill' => trim($ski),
+                            'status' => '1',
+                            'type' => '4',
+                            'user_id' => $userid,
+                        );
+                        if ($userid) {
+                            $skill[] = $this->common->insert_data_getid($data, 'skill');
+                        }
                     }
                 }
             }
@@ -3220,17 +3289,23 @@ class Job extends MY_Controller {
         if (count($cities) > 0) {
 
             foreach ($cities as $cit) {
-                $contition_array = array('city_name' => $cit);
-                $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                if ($citydata) {
-                    $city[] = $citydata[0]['city_id'];
-                } else {
-                    $data = array(
-                        'city_name' => $cit,
-                        'status' => '1',
-                    );
-                    if ($userid) {
-                        $city[] = $this->common->insert_data_getid($data, 'cities');
+                if(trim($cit) != "")
+                {                    
+                    $contition_array = array('city_name' => $cit);
+                    $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                    if ($citydata) {
+                        $city[] = $citydata[0]['city_id'];
+                    } else {
+                        $slug = $this->setcategory_slug($cit, 'slug', 'cities');
+                        $data = array(
+                            'city_name' => $cit,
+                            'city_image' => $slug.".png",
+                            'status' => '1',
+                            'slug' => $slug,
+                        );
+                        if ($userid) {
+                            $city[] = $this->common->insert_data_getid($data, 'cities');
+                        }
                     }
                 }
             }
@@ -3266,6 +3341,56 @@ class Job extends MY_Controller {
                 $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
             } else {
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
+
+                if($data1['keyskill'] != "")
+                {
+                    $skill_name = "";
+                    foreach (explode(',',$data1['keyskill']) as $skk => $skv) {
+                        if($skv != "")
+                        {
+                            $s_name = $this->db->get_where('skill', array('skill_id' => $skv, 'status' => 1))->row()->skill;
+                            if(trim($s_name) != "")
+                            {
+                                $skill_name .= $s_name.",";
+                            }
+                        }
+                    }
+                    $data1['keyskill_txt'] = trim($skill_name,",");
+                }
+
+                if(trim($data1['work_job_title']) != "")
+                {
+                    $work_job_title = $this->db->get_where('job_title', array('title_id' => $data1['work_job_title'], 'status' => 1))->row()->name;
+
+                    $data1['work_job_title_txt'] = trim($work_job_title);
+                }
+
+                if(trim($data1['work_job_industry']) != "")
+                {
+                    $work_job_industry = $this->db->get_where('job_industry', array('industry_id' => $data1['work_job_industry'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+
+                    $data1['work_job_industry_txt'] = trim($work_job_industry);
+                }
+
+                if($data1['work_job_city'] != "")
+                {
+                    $city_name = "";
+                    foreach (explode(',',$data1['work_job_city']) as $ck => $cv) {
+                        if($cv != "")
+                        {
+                            $c_name = $this->db->get_where('cities', array('city_id' => $cv, 'status' => '1'))->row()->city_name;
+                            if(trim($c_name) != "")
+                            {
+                                $city_name .= $c_name.",";
+                            }
+                        }
+                    }
+                    $data1['work_job_city_txt'] = trim($city_name,",");
+                }
+
+                // print_r();
+                $this->db->insert('ailee_job_reg_search_tmp', $data1);
+
             }
         }
         if ($insert_id) {
@@ -6271,7 +6396,7 @@ class Job extends MY_Controller {
                 $otherindustry = '';
             }
 
-            $jobtitle = $_POST['job_title'];
+            $jobtitle = $_POST['jobTitle'];
 
             $skills = $_POST['skills'];
             $skills = explode(',', $skills);
@@ -6303,24 +6428,27 @@ class Job extends MY_Controller {
             if (count($skills) > 0) {
 
                 foreach ($skills as $ski) {
-                    $contition_array = array('skill' => trim($ski), 'type' => '1');
-                    $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                    if (!$skilldata) {
-                        $contition_array = array('skill' => trim($ski), 'type' => '4');
+                    if(trim($ski) != "")
+                    {                        
+                        $contition_array = array('skill' => trim($ski), 'type' => '1');
                         $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                    }
+                        if (!$skilldata) {
+                            $contition_array = array('skill' => trim($ski), 'type' => '4');
+                            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                        }
 
-                    if ($skilldata) {
-                        $skill[] = $skilldata[0]['skill_id'];
-                    } else {
-                        $data = array(
-                            'skill' => trim($ski),
-                            'status' => '1',
-                            'type' => '4',
-                            'user_id' => $userid,
-                        );
-                        if ($userid) {
-                            $skill[] = $this->common->insert_data_getid($data, 'skill');
+                        if ($skilldata) {
+                            $skill[] = $skilldata[0]['skill_id'];
+                        } else {
+                            $data = array(
+                                'skill' => trim($ski),
+                                'status' => '1',
+                                'type' => '4',
+                                'user_id' => $userid,
+                            );
+                            if ($userid) {
+                                $skill[] = $this->common->insert_data_getid($data, 'skill');
+                            }
                         }
                     }
                 }
@@ -6332,17 +6460,23 @@ class Job extends MY_Controller {
             if (count($cities) > 0) {
 
                 foreach ($cities as $cit) {
-                    $contition_array = array('city_name' => $cit);
-                    $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
-                    if ($citydata) {
-                        $city[] = $citydata[0]['city_id'];
-                    } else {
-                        $data = array(
-                            'city_name' => $cit,
-                            'status' => '1',
-                        );
-                        if ($userid) {
-                            $city[] = $this->common->insert_data_getid($data, 'cities');
+                    if(trim($cit) != "")
+                    {                        
+                        $contition_array = array('city_name' => $cit);
+                        $citydata = $this->common->select_data_by_condition('cities', $contition_array, $data = 'city_id,city_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+                        if ($citydata) {
+                            $city[] = $citydata[0]['city_id'];
+                        } else {
+                            $slug = $this->setcategory_slug($cit, 'slug', 'cities');
+                            $data = array(
+                                'city_name' => $cit,
+                                'city_image' => $slug.".png",
+                                'status' => '1',
+                                'slug' => $slug,
+                            );
+                            if ($userid) {
+                                $city[] = $this->common->insert_data_getid($data, 'cities');
+                            }
                         }
                     }
                 }
@@ -6403,6 +6537,55 @@ class Job extends MY_Controller {
                     $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
                 } else {
                     $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
+
+                    if($data1['keyskill'] != "")
+                    {
+                        $skill_name = "";
+                        foreach (explode(',',$data1['keyskill']) as $skk => $skv) {
+                            if($skv != "")
+                            {
+                                $s_name = $this->db->get_where('skill', array('skill_id' => $skv, 'status' => 1))->row()->skill;
+                                if(trim($s_name) != "")
+                                {
+                                    $skill_name .= $s_name.",";
+                                }
+                            }
+                        }
+                        $data1['keyskill_txt'] = trim($skill_name,",");
+                    }
+
+                    if(trim($data1['work_job_title']) != "")
+                    {
+                        $work_job_title = $this->db->get_where('job_title', array('title_id' => $data1['work_job_title'], 'status' => 1))->row()->name;
+
+                        $data1['work_job_title_txt'] = trim($work_job_title);
+                    }
+
+                    if(trim($data1['work_job_industry']) != "")
+                    {
+                        $work_job_industry = $this->db->get_where('job_industry', array('industry_id' => $data1['work_job_industry'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+
+                        $data1['work_job_industry_txt'] = trim($work_job_industry);
+                    }
+
+                    if($data1['work_job_city'] != "")
+                    {
+                        $city_name = "";
+                        foreach (explode(',',$data1['work_job_city']) as $ck => $cv) {
+                            if($cv != "")
+                            {
+                                $c_name = $this->db->get_where('cities', array('city_id' => $cv, 'status' => '1'))->row()->city_name;
+                                if(trim($c_name) != "")
+                                {
+                                    $city_name .= $c_name.",";
+                                }
+                            }
+                        }
+                        $data1['work_job_city_txt'] = trim($city_name,",");
+                    }
+
+                    // print_r();
+                    $this->db->insert('ailee_job_reg_search_tmp', $data1);
                 }
             }
             if ($insert_id) {

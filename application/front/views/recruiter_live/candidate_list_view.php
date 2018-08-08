@@ -150,8 +150,7 @@ if (isset($seach_data) && !empty($seach_data)) {
 										$postdata .= '' . $total_work_month . '';
 										$postdata .= '&nbsp';
 										$postdata .= 'Month';
-									}
-									echo $postdata;
+									}									
 								}
 							}
 							else {
@@ -172,9 +171,40 @@ if (isset($seach_data) && !empty($seach_data)) {
 								}
 								if ($row['experience'] == 'Fresher') {							
 									$postdata = $row['experience'];							
-								}
+								}								
+							}
+							if(trim($postdata) != "")
+							{
 								echo $postdata;
-							}?>	                	
+							}
+							else
+							{
+								$y = explode(" year", $row['exp_y'])[0];
+								$m = explode(" month", $row['exp_m'])[0];
+								if($m == 12)
+								{
+									$y = $y + 1;
+									echo $y." Year";
+								}
+								else if($y == 0 && $m > 0)
+								{
+									echo $m." Month";
+								}
+								else if($m == 0 && $y > 0)
+								{
+									echo $y." Year";
+								}
+								else if($y > 0 && $m > 0)
+								{
+									echo $y." Year ".$m." Month";
+								}
+								else
+								{
+									echo "Fresher";
+								}
+							}
+
+								?>
 		                	</span>
 		                </li>
 		                <?php
@@ -259,15 +289,17 @@ if (isset($seach_data) && !empty($seach_data)) {
 	    </div>
 	</div>
 <?php 
-		if($counter % ADS_BREAK == 0)
-		{
-			?>
-			<div class="tab-add">
-				<?php $this->load->view('infeed_add'); ?>
-			</div>
-			<?php
+		if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { 
+			if($counter % ADS_BREAK == 0)
+			{
+				?>
+				<div class="tab-add">
+					<?php $this->load->view('infeed_add'); ?>
+				</div>
+				<?php
+			}
+			$counter++;
 		}
-		$counter++;
 	}
 }
 elseif($total_record == 0)
