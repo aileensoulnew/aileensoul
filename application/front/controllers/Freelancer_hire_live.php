@@ -2139,8 +2139,8 @@ public function freelancer_edit_post_insert($id) {
 		$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
 		$data = 'username,fullname';
 		$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-
-		$this->load->view('freelancer/freelancer_hire/freelancer_edit_post', $this->data);
+		
+		$this->load->view('freelancer_live/freelancer_hire/freelancer_edit_post', $this->data);
 	} else {
 
 		$datereplace = $this->input->post('last_date');
