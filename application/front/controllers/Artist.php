@@ -121,7 +121,7 @@ class Artist extends MY_Controller {
         }
     }
 
-    public function profile_insert() {        
+    public function profile_insert() {
         $userid = $this->session->userdata('aileenuser');
         $other_category = $this->input->post('othercategory');
         $contition_array = array('other_category' => $other_category, 'status' => '1');
@@ -176,6 +176,50 @@ class Artist extends MY_Controller {
         );
         if ($userid) {
             $insert_id = $this->common->insert_data_getid($data, 'art_reg');
+
+            if($data['art_skill'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$data['art_skill']) as $skk => $skv) {
+                    if($skv != "" && $skv != "26")
+                    {
+                        $s_name = $this->db->get_where('art_category', array('category_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->art_category;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                    if($skv != "" && $skv == "26")
+                    {                        
+                        $os_name = $this->db->get_where('art_other_category', array('other_category_id' => $data['other_skill'], 'status' => '1' , 'is_delete' => '0'))->row()->other_category;                        
+                        if(trim($os_name) != "")
+                        {
+                            $skill_name .= $os_name.",";
+                        }
+                        $skill_name;
+                    }
+                }
+                $data['art_skill_txt'] = trim($skill_name,",");
+            }
+            if(trim($data['art_country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $data['art_country'], 'status' => '1'))->row()->country_name;
+                $data['country_name'] = trim($country_name);
+            }
+
+            if(trim($data['art_state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $data['art_state'], 'status' => '1'))->row()->state_name;
+                $data['state_name'] = trim($state_name);
+            }
+
+            if(trim($data['art_city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $data['art_city'], 'status' => '1'))->row()->city_name;
+                $data['city_name'] = trim($city_name);
+            }
+
+            $insert_id1 = $this->common->insert_data_getid($data, 'ailee_art_reg_search_tmp');
         }
 
         redirect('artist-profile', refresh);
@@ -16307,6 +16351,50 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
             );
             if ($userid) {
                 $insert_id = $this->common->insert_data_getid($reg_data, 'art_reg');
+
+                if($reg_data['art_skill'] != "")
+                {
+                    $skill_name = "";
+                    foreach (explode(',',$reg_data['art_skill']) as $skk => $skv) {
+                        if($skv != "" && $skv != "26")
+                        {
+                            $s_name = $this->db->get_where('art_category', array('category_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->art_category;
+                            if(trim($s_name) != "")
+                            {
+                                $skill_name .= $s_name.",";
+                            }
+                        }
+                        if($skv != "" && $skv == "26")
+                        {                        
+                            $os_name = $this->db->get_where('art_other_category', array('other_category_id' => $reg_data['other_skill'], 'status' => '1' , 'is_delete' => '0'))->row()->other_category;                        
+                            if(trim($os_name) != "")
+                            {
+                                $skill_name .= $os_name.",";
+                            }
+                            $skill_name;
+                        }
+                    }
+                    $reg_data['art_skill_txt'] = trim($skill_name,",");
+                }
+                if(trim($reg_data['art_country']) != "")
+                {
+                    $country_name = $this->db->get_where('countries', array('country_id' => $reg_data['art_country'], 'status' => '1'))->row()->country_name;
+                    $reg_data['country_name'] = trim($country_name);
+                }
+
+                if(trim($reg_data['art_state']) != "")
+                {
+                    $state_name = $this->db->get_where('states', array('state_id' => $reg_data['art_state'], 'status' => '1'))->row()->state_name;
+                    $reg_data['state_name'] = trim($state_name);
+                }
+
+                if(trim($reg_data['art_city']) != "")
+                {
+                    $city_name = $this->db->get_where('cities', array('city_id' => $reg_data['art_city'], 'status' => '1'))->row()->city_name;
+                    $reg_data['city_name'] = trim($city_name);
+                }
+
+                $insert_id1 = $this->common->insert_data_getid($reg_data, 'ailee_art_reg_search_tmp');
             }
             $data = array("is_success" => 1);
         }
