@@ -594,7 +594,7 @@ class Artistic_model extends CI_Model {
 
         $limit = '';
         $sql = "SELECT ar.art_id,ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill, CONCAT(ar.art_name,' ',ar.art_lastname) as fullname,ar.art_country,ar.art_city,
-                ar.art_desc_art,ar.user_id,ar.art_skill,ar.city_name as city,ar.country_name as country
+                ar.art_desc_art,ar.user_id,ar.art_skill_txt as art_category,ar.city_name as city,ar.country_name as country
                 from ailee_art_reg_search_tmp ar                
                 WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'"
                 . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;    
