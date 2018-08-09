@@ -1,4 +1,5 @@
-<div class="right-add-box">
+<?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
+	<div class="right-add-box">
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<!-- As All URL -->
 	<ins class="adsbygoogle adBlock"
@@ -9,4 +10,5 @@
 	<script>
 	(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
-</div>	
+</div>
+<?php } ?>

@@ -1,4 +1,5 @@
-<div class="infeed-add">
+<?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
+	<div class="infeed-add">
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<ins class="adsbygoogle infeed"
 		 style="display:block"
@@ -10,3 +11,4 @@
 		 (adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
 </div>	
+<?php } ?>

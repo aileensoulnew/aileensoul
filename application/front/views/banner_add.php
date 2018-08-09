@@ -1,4 +1,5 @@
-<div class="banner-add">
+<?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
+	<div class="banner-add">
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<!-- As All URL -->
 	<ins class="adsbygoogle"
@@ -10,4 +11,5 @@
 	<script>
 	(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
-</div>	
+</div>
+<?php } ?>
