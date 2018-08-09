@@ -1,6 +1,6 @@
 <div class="fix-feedback">
 	<div class="fix-small">
-		Feedback<span class="pull-right"><img src="<?php echo base_url('assets/n-images/fd.png') . '' ?>"></span>
+		<span>Feedback</span>
 	</div>
 	<div class="fix-big">
 		<div class="feed-top">
@@ -13,13 +13,13 @@
 			<div class="form-group">
 				<textarea type="text" placeholder="Add Discription"></textarea>
 			</div>
-			<div class="form-group pt20">
-				<a href="#">Add Screensot</a><button class="pull-right" type="submit">Send</button>
+			<div class="form-group fd-btn">
+				<a href="#">Add Screensot</a><button class="pull-right" type="submit"><img src="<?php echo base_url('assets/n-images/fd-send.png') . '' ?>"></button>
 			</div>
 		</form>
 	</div>
 </div>
-<div class="fix-feedback mobile">
+<!--div class="fix-feedback mobile">
 	<div class="fix-small1" data-target="#feed-mob" data-toggle="modal">
 		Feedback<span class="pull-right"><img src="<?php echo base_url('assets/n-images/fd.png') . '' ?>"></span>
 	</div>
@@ -38,8 +38,9 @@
 							<div class="form-group">
 								<textarea type="text" placeholder="Add Discription"></textarea>
 							</div>
-							<div class="form-group pt20">
-								<a href="#">Add Screensot</a><button class="pull-right" type="submit">Send</button>
+							<div class="form-group pt20 fd-btn">
+								<a href="#">Add Screensot</a>
+								<button class="pull-right btn1" type="submit">Send</button>
 							</div>
 						</form>
 					</div>
@@ -47,7 +48,7 @@
             </div>
         </div>
 	
-</div>
+</div-->
 
 <script>
 	$(".fix-small").click(function(){
