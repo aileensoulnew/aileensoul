@@ -429,7 +429,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                         </div>
                         <div class="right-part">
                             <div class="subscribe-box" ng-show="subscribe_visibility">
-                                <h4>Subscribe to Our Newslatter</h4>
+                                <h4>Subscribe to Our Newsletter</h4>
                                 <input type="text" class="form-control" placeholder="Enter your email id" ng-model="subscribe_email">
                                 <h6 class="small" style="color: red;" ng-show="error_subscribe_visiblity">{{ error_subscribe_text }}</h6>
                                 <a class="btn1" href="javascript:void(0)" ng-click="addsubscribe();">Subscribe</a>

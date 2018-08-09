@@ -267,7 +267,7 @@ if($category_page == 1)
                             <div class="right-part">
 								<?php $this->load->view('right_add_box'); ?>
                 				<div class="subscribe-box">
-                					<h4>Subscribe to Our Newslatter</h4>
+                					<h4>Subscribe to Our Newsletter</h4>
                 					<input type="text" class="form-control" placeholder="Enter your email id">
                 					<a class="btn1" href="#">Subscribe</a>
                 				</div>
@@ -364,7 +364,7 @@ if($category_page == 1)
 						<?php $this->load->view('right_add_box'); ?>
                         <form id="subscribe_form" name="subscribe_form" method="post" action="javascript:void(0);">
                             <div id="subscribe-form" class="subscribe-box">
-                                <h4>Subscribe to Our Newslatter</h4>
+                                <h4>Subscribe to Our Newsletter</h4>
                                 <input type="text" class="form-control" placeholder="Enter your email id" name="subscribe_email" id="subscribe_email" maxlength="100">
                                 <button class="btn1" type="submit">Subscribe</button>
                                 <h6 class="small" style="color: red;display: none;" id="error_subscribe"></h6>
