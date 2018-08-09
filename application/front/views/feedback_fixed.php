@@ -17,7 +17,7 @@
 				<!-- <a href="#">Add Screensot</a> -->
 				<input file-input="files" type="file" id="feedback_file" name="postfiles[]" data-overwrite-initial="false" multiple="" onchange="makeFileList()" style="display: none;">
 				<label for="feedback_file">
-					<i class="fa fa-camera upload_icon">
+					<i class="upload_icon">
 						<span class="upload_span_icon"> Add Screenshot </span>
 					</i>
 					<span id="fileList"></span>
