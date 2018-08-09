@@ -2561,6 +2561,7 @@ class Job extends MY_Controller {
             'designation' => trim($_POST['designation'])
         );
         $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
+        $updatedata = $this->common->update_data($data, 'job_reg_search_tmp', 'user_id', $userid);
     }
 
 // cover pic end
