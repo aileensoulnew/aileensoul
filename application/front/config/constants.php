@@ -355,7 +355,7 @@ if (IMAGEPATHFROM == 's3bucket') {
 
 // USER POST 550 X 220
     define('USER_POST_RESIZE4_UPLOAD_URL', BUCKETLINK . 'uploads/user_post/resize4/');    
-    
+    define('FEEDBACK_IMG_URL', BUCKETLINK . 'uploads/feedback/');
     
 } else {
     //USER PHOTO 
@@ -569,6 +569,8 @@ if (IMAGEPATHFROM == 's3bucket') {
 
 // USER POST 550 X 220
     define('USER_POST_RESIZE4_UPLOAD_URL', BASEURL . 'uploads/user_post/resize4/');    
+
+    define('FEEDBACK_IMG_URL', BASEURL . 'uploads/feedback/');
     
 }
 

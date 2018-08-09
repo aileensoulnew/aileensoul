@@ -178,4 +178,97 @@ line-height: 1;}
 
     }
 
+    public function main_feedback_insert()
+    {
+        // print_r($_POST);
+        // print_r($_FILES);
+        $f_email = $this->input->post('f_email');
+        $f_desc = $this->input->post('f_desc');
+        $config = array(
+            'image_library' => 'gd',
+            'upload_path'   => $this->config->item('feedback_main_upload_path'),
+            'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+            'overwrite'     => true,
+            'remove_spaces' => true
+        );
+
+        $images = array();
+        $this->load->library('upload');
+        $count = count($_FILES['postfiles']['name']);//$_FILES['postfiles']['name']);
+        $title = time();
+        if ($count >= 0)
+        {
+            $i = 0;
+            $images = array();
+            foreach($_FILES['postfiles']['name'] as $k=>$v) {                
+
+                $_FILES['postfile']['name'] = $_FILES['postfiles']['name'][$k];
+                $_FILES['postfile']['type'] = $_FILES['postfiles']['type'][$k];
+                $_FILES['postfile']['tmp_name'] = $_FILES['postfiles']['tmp_name'][$k];
+                $_FILES['postfile']['error'] = $_FILES['postfiles']['error'][$k];
+                $_FILES['postfile']['size'] = $_FILES['postfiles']['size'][$k];
+                $file_type = $_FILES['postfile']['type'];
+                $file_type = explode('/', $file_type);
+                $file_type = $file_type[0];
+                
+                if ($_FILES['postfile']['error'] == 0 && $file_type == 'image') {
+                    $store = $_FILES['postfile']['name'];
+                    $store_ext = explode('.', $store);
+                    $store_ext = end($store_ext);
+                    $fileName = 'file_' . $title . '_' . random_string('numeric', 4) . '.' . $store_ext;
+                    $images[] = $fileName;
+                    $config['file_name'] = $fileName;
+                    $this->upload->initialize($config);
+                    $imgdata = $this->upload->data();
+
+                    if ($this->upload->do_upload('postfile'))
+                    {                        
+                        //Main Image
+                        $main_image = $this->config->item('user_post_main_upload_path') . $response['result'][$i]['file_name'];
+                        if (IMAGEPATHFROM == 's3bucket') {
+                            $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                        }                            
+
+                        /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
+
+                        if ($_SERVER['HTTP_HOST'] != "localhost") {
+                            if (isset($main_image)) {
+                                unlink($main_image);
+                            }                               
+                        }
+                        /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
+                    }
+                    else
+                    {
+                        echo "0";
+                        exit;
+                    }
+                }
+                else
+                {
+                    echo "0";
+                    exit;
+                }
+                $i++;
+            }
+        }
+
+        $insertData = array(
+            'feedback_email' => $f_email,
+            'feedback_desc' => $f_desc,
+            'feedback_screenshot'=>implode(",",$images),
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s'),
+        );
+        $insert_id = $this->common->insert_data_getid($insertData, 'feedback_general');
+        if($insert_id > 0)
+        {
+            echo "1";
+        }
+        else
+        {
+            echo "0";
+        }
+    }
+
 }

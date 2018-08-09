@@ -940,3 +940,5 @@ $config['user_post_resize3_height'] = '210';
 $config['user_post_resize4_upload_path'] = 'uploads/user_post/resize4/';
 $config['user_post_resize4_width'] = '550';
 $config['user_post_resize4_height'] = '315';
+
+$config['feedback_main_upload_path'] = 'uploads/feedback/';

@@ -199,13 +199,14 @@
     function extractLast(term) {
         return split(term).pop();
     }
-        $(document).bind("keydown","#skills1", function (event) {            
+        /*$(document).bind("keydown","#skills1", function (event) {            
             if (event.keyCode === $.ui.keyCode.TAB &&
                     $(this).autocomplete("instance").menu.active) {
                 event.preventDefault();
             }
-        })
-        .autocomplete({ 
+        })*/
+
+        $("#skills1").autocomplete({ 
                 minLength: 2,                
                 source: function (request, response) {                     
                     // delegate back to autocomplete, but extract the last term
@@ -247,5 +248,41 @@
                     }
                 }
             });
+
+    $('#country').change(function () {
+        var countryID = $(this).val();
+        if (countryID) {
+            $.ajax({
+                type: 'POST',
+                url: base_url + "freelancer/ajax_data",
+                data: 'country_id=' + countryID,
+                success: function (html) {
+                    $('#state').html(html);
+                    $('#state').removeClass("color-black-custom");
+                    $('#city').removeClass("color-black-custom");
+                    $('#city').html('<option value="">Select state first</option>');
+                }
+            });
+        } else {
+            $('#state').html('<option value="">Select country first</option>');
+            $('#city').html('<option value="">Select state first</option>');
+        }
+    });
+    $('#state').change(function () {
+        var stateID = $(this).val();
+        if (stateID) {
+            $.ajax({
+                type: 'POST',
+                url: base_url + "freelancer/ajax_data",
+                data: 'state_id=' + stateID,
+                success: function (html) {
+                    $('#city').html(html);
+                     $('#city').removeClass("color-black-custom");
+                }
+            });
+        } else {
+            $('#city').html('<option value="">Select state first</option>');
+        }
+    });
 });
 </script>

@@ -745,7 +745,8 @@ function addItem () {
     // container.appendChild(item);
     itemsCounter++;
 }
-$(document).on('change','#country', function () {
+/*$(function () {
+$('#country').change(function () {
     var countryID = $(this).val();
     if (countryID) {
         $.ajax({
@@ -764,7 +765,7 @@ $(document).on('change','#country', function () {
         $('#city').html('<option value="">Select state first</option>');
     }
 });
-$(document).on('change','#state', function () {
+$('#state').change(function () {
     var stateID = $(this).val();
     if (stateID) {
         $.ajax({
@@ -780,3 +781,4 @@ $(document).on('change','#state', function () {
         $('#city').html('<option value="">Select state first</option>');
     }
 });
+});*/
