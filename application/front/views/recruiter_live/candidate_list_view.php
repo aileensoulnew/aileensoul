@@ -58,7 +58,7 @@ if (isset($seach_data) && !empty($seach_data)) {
 	                        </li>
 	                        <li style="display: block;">
 	                            <a class="post_designation" href="javascript:void(0)" title="<?php echo $row['designation']; ?>">
-	                                <?php echo $row['designation']; ?>
+	                                <?php echo (trim($row['designation']) != "" ? $row['designation'] : "Current Work"); ?>
 	                            </a>
 	                        </li>
 	                    </ul>
