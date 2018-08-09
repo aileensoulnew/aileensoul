@@ -557,14 +557,13 @@ class Artistic_model extends CI_Model {
             foreach($keyworddata as $key => $val){
                 $val = $val.'%';
                 $sqlkeyword .= ($key == 0) ? "" : " OR ";
-                $sqlkeyword .= " ar.art_name LIKE '". $val ."' OR ar.art_lastname LIKE '". $val ."' OR CONCAT(ar.art_name, ' ',ar.art_lastname) LIKE '". $val ."' OR ac.art_category LIKE '". $val ."' OR
-                    ar.other_skill LIKE '" . $val ."'";
+                $sqlkeyword .= " ar.art_name LIKE '". $val ."' OR ar.art_lastname LIKE '". $val ."' OR CONCAT(ar.art_name, ' ',ar.art_lastname) LIKE '". $val ."' OR ar.art_skill_txt LIKE '". $val ."'";
             }
         }
 
         if($category_id != ""){
             $sqlcategoryfilter = ($sqlkeyword == "") ? " AND " : " OR ";
-            $sqlcategoryfilter .= "ac.category_id IN (". $category_id .")";
+            $sqlcategoryfilter .= "ar.art_skill IN (". $category_id .")";
             $sqlcategoryfilter .= ($sqlkeyword != "") ? ")" : "";
         }else{
             $sqlcategoryfilter = ($sqlkeyword != "") ? ")" : "";
@@ -578,15 +577,15 @@ class Artistic_model extends CI_Model {
             foreach($locationdata as $key => $val){
                 $val = $val.'%';
                 $sqllocation .= ($key == 0) ? "" : " OR ";
-                $sqllocation .= " ct.city_name LIKE '". $val ."'
-                    OR cr.country_name LIKE '". $val ."'
-                    OR s.state_name LIKE '". $val ."'";
+                $sqllocation .= " ar.city_name LIKE '". $val ."'
+                    OR ar.country_name LIKE '". $val ."'
+                    OR ar.state_name LIKE '". $val ."'";
             }
         }
         
         if($location_id != ""){
             $sqllocationfilter = ($sqllocation == "") ? " AND " : " OR ";
-            $sqllocationfilter .= "ct.city_id IN (". $location_id .")";  
+            $sqllocationfilter .= "ar.art_city IN (". $location_id .")";  
             $sqllocationfilter .= ($sqllocation != "") ? ")" : ""; 
         }else{
             $sqllocationfilter = ($sqllocation != "") ? ")" : ""; 
@@ -594,15 +593,9 @@ class Artistic_model extends CI_Model {
         }
 
         $limit = '';
-        $sql = "SELECT ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill,
-                CONCAT(ar.art_name,' ',ar.art_lastname) as fullname,ar.art_country,ar.art_city,
-                ar.art_desc_art,ar.user_id,ac.art_category,ct.city_name as city,cr.country_name as country
-                from ailee_art_reg ar
-                LEFT JOIN ailee_art_category ac ON ac.category_id = ar.art_skill 
-                LEFT JOIN ailee_art_other_category oc ON oc.other_category_id = ar.other_skill 
-                LEFT JOIN ailee_cities ct ON ct.city_id = ar.art_city 
-                LEFT JOIN ailee_countries cr ON cr.country_id = ar.art_country 
-                LEFT JOIN ailee_states s ON s.state_id = ar.art_state 
+        $sql = "SELECT ar.art_id,ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill, CONCAT(ar.art_name,' ',ar.art_lastname) as fullname,ar.art_country,ar.art_city,
+                ar.art_desc_art,ar.user_id,ar.art_skill,ar.city_name as city,ar.country_name as country
+                from ailee_art_reg_search_tmp ar                
                 WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'"
                 . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;    
 
@@ -711,4 +704,62 @@ class Artistic_model extends CI_Model {
         return $result_array['category_name'];
     }
 
+    function art_create_search_table()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        echo "<pre>";
+        $sql = "SELECT * from ailee_art_reg WHERE status = '1' AND is_delete = '0' AND art_step = '4'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();        
+        foreach ($result_array as $key => $value) {            
+            if($value['art_skill'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$value['art_skill']) as $skk => $skv) {
+                    if($skv != "" && $skv != "26")
+                    {
+                        $s_name = $this->db->get_where('art_category', array('category_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->art_category;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+
+                    if($skv != "" && $skv == "26")
+                    {                        
+                        $os_name = $this->db->get_where('art_other_category', array('other_category_id' => $value['other_skill'], 'status' => '1' , 'is_delete' => '0'))->row()->other_category;                        
+                        if(trim($os_name) != "")
+                        {
+                            $skill_name .= $os_name.",";
+                        }
+                        $skill_name;
+                    }
+                }
+                $value['art_skill_txt'] = trim($skill_name,",");
+            }
+            if(trim($value['art_country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $value['art_country'], 'status' => '1'))->row()->country_name;
+
+                $value['country_name'] = trim($country_name);
+            }
+
+            if(trim($value['art_state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $value['art_state'], 'status' => '1'))->row()->state_name;
+
+                $value['state_name'] = trim($state_name);
+            }
+
+            if(trim($value['art_city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $value['art_city'], 'status' => '1'))->row()->city_name;
+
+                $value['city_name'] = trim($city_name);
+            }
+            $this->db->insert('ailee_art_reg_search_tmp', $value);
+        }
+        echo "Done";
+    }
 }

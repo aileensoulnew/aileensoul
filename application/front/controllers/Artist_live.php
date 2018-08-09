@@ -2068,4 +2068,9 @@ class Artist_live extends MY_Controller {
         $art_related_list = $this->artistic_model->art_related_blog_list();
         echo json_encode($art_related_list);
     }
+
+    public function art_create_search_table()
+    {
+        $this->artistic_model->art_create_search_table();
+    }
 }
