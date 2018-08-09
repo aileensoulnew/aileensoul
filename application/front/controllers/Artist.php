@@ -246,6 +246,7 @@ class Artist extends MY_Controller {
 
                 // echo "<pre>"; print_r($data); die();
                 $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+                $updatdata1 = $this->common->update_data($data, 'ailee_art_reg_search_tmp', 'user_id', $userid);
 
                 if ($updatdata) {
                     redirect('artist/artistic-address', refresh);
@@ -267,9 +268,8 @@ class Artist extends MY_Controller {
                 );
 
                 $insert_id = $this->common->insert_data_getid($data, 'art_reg');
+                $insert_id1 = $this->common->insert_data_getid($data, 'ailee_art_reg_search_tmp');
                 if ($insert_id) {
-
-
                     $this->session->set_flashdata('success', 'Basic Information updated successfully');
                     redirect('artist/artistic-address', refresh);
                 } else {
@@ -422,6 +422,18 @@ class Artist extends MY_Controller {
             }
             $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
             if ($updatdata) {
+                $country_name = $this->db->get_where('countries', array('country_id' => $data['art_country'], 'status' => '1'))->row()->country_name;
+                $data['country_name'] = trim($country_name);
+
+                $state_name = $this->db->get_where('states', array('state_id' => $data['art_state'], 'status' => '1'))->row()->state_name;
+
+                $data['state_name'] = trim($state_name);
+
+                $city_name = $this->db->get_where('cities', array('city_id' => $data['art_city'], 'status' => '1'))->row()->city_name;
+
+                $data['city_name'] = trim($city_name);
+
+                $updatdata1 = $this->common->update_data($data, 'ailee_art_reg_search_tmp', 'user_id', $userid);
                 redirect('artist/artistic-information', refresh);
             } else {
                 redirect('artist/artistic-address', refresh);
@@ -565,6 +577,29 @@ class Artist extends MY_Controller {
 
         if ($updatdata) {
 
+            $skill_name = "";
+            foreach (explode(',',$data['art_skill']) as $skk => $skv) {
+                if($skv != "" && $skv != "26")
+                {
+                    $s_name = $this->db->get_where('art_category', array('category_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->art_category;
+                    if(trim($s_name) != "")
+                    {
+                        $skill_name .= $s_name.",";
+                    }
+                }
+
+                if($skv != "" && $skv == "26")
+                {                        
+                    $os_name = $this->db->get_where('art_other_category', array('other_category_id' => $data['other_skill'], 'status' => '1' , 'is_delete' => '0'))->row()->other_category;                        
+                    if(trim($os_name) != "")
+                    {
+                        $skill_name .= $os_name.",";
+                    }
+                    $skill_name;
+                }
+            }
+            $data['art_skill_txt'] = trim($skill_name,",");
+            $updatdata = $this->common->update_data($data, 'ailee_art_reg_search_tmp', 'user_id', $userid);
 
             if ($_SERVER['HTTP_HOST'] != "localhost") {
                 if (isset($main_file)) {

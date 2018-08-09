@@ -6,6 +6,7 @@ app.controller('artistSearchListController', function ($scope, $http) {
     $scope.categorysearch = '';
     $scope.locationsearch = '';
     // $scope.artistList = {};
+    searchArtist();
     function artistCategory() {
         $http.get(base_url + "artist_live/artistCategory?limit=5").then(function (success) {
             $scope.artistCategory = success.data;
@@ -42,7 +43,7 @@ app.controller('artistSearchListController', function ($scope, $http) {
         }
         getsearchresultlist(search_data_url,'pageload');
     }
-    searchArtist();
+    
 
     // Search result text
     function searchResultText(){
