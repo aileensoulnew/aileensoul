@@ -11,7 +11,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
     var isProcessing = false;
     
     angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.6) {
             // isLoadingData = true;
             var page = $scope.jobs.page_number;
             var total_record = $scope.jobs.total_record;
