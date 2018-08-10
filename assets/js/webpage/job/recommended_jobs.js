@@ -151,7 +151,7 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
     }
     recommended_jobs(1);
 
-    function jobCategory(limit = 0) {
+    function jobCategory(limit) {
         $http.get(base_url + "job_live/jobCategory?limit="+limit).then(function (success) {
             $scope.jobCategory = success.data;
         }, function (error) {});

@@ -122,14 +122,14 @@ app.controller('FARecommendedProjectController', function ($scope, $http,$window
     
     var isProcessing = false;
 
-    function FAFields(limit = 0) {
+    function FAFields(limit) {
         $http.get(base_url + "freelancer_apply_live/freelancerFields?limit="+limit).then(function (success) {
             $scope.FAFields = success.data;
         }, function (error) {});
     }
     FAFields(fil_limit);
 
-    function FASkills(limit = 0) {
+    function FASkills(limit) {
         $http.get(base_url + "freelancer_apply_live/freelancerSkills?limit="+limit).then(function (success) {
             $scope.FASkills = success.data.fa_category;
         }, function (error) {});

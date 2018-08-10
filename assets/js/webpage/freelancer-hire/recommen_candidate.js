@@ -103,7 +103,7 @@ $(document).ready(function () {
 });
 var isProcessing = false;
 var ajaxHireHome;
-function freelancerhire_home(from = '',filter_selected_data = '', pagenum = 1)
+function freelancerhire_home(from,filter_selected_data, pagenum)
 {
     if(from == "filter" ){
         if(isProcessing){
