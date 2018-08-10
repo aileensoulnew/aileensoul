@@ -3,7 +3,7 @@
         <ul>
             <li><a href="<?php echo base_url('about-us'); ?>" target="_self">About</a></li>
 			<li><a href="<?php echo base_url('blog'); ?>" target="_self">Blog</a></li>
-			<li><a href="<?php echo base_url('faq'); ?>" target="_self">Faq</a></li>
+			<li><a href="<?php echo base_url('faq'); ?>" target="_self">FAQ</a></li>
 			<li><a href="<?php echo base_url('advertise-with-us'); ?>" target="_self">Advertise With Us</a></li>
 			<li><a title="Sitemap" href="<?php echo base_url('sitemap'); ?>" target="_self">Sitemap</a></li>
 			<li><a title="Report" href="<?php echo base_url('report-abuse'); ?>" target="_self">Report </a></li>
