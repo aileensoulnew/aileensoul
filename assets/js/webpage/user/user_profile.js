@@ -457,7 +457,7 @@ app.controller('dashboardPdfController', function ($scope, $http, $location, $wi
 
     
     // Fetch data
-    $scope.getDashboardPdf = function (pagenum = '') {
+    $scope.getDashboardPdf = function (pagenum) {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
              if($scope.$parent.pade_reload == true)
@@ -544,7 +544,7 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
 
     
     // Fetch data
-    $scope.getDashboardAudios = function (pagenum = '') {
+    $scope.getDashboardAudios = function (pagenum) {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
@@ -694,7 +694,7 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
 
     
     // Fetch data
-    $scope.getDashboardVideos = function (pagenum = '') {
+    $scope.getDashboardVideos = function (pagenum) {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
@@ -841,7 +841,7 @@ app.controller('dashboardPhotosController', function ($scope, $http, $location, 
         //captionText.innerHTML = dots[slideIndex - 1].alt;
     }
     // Fetch data
-    $scope.getDashboardPhotos = function (pagenum = '') {
+    $scope.getDashboardPhotos = function (pagenum) {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
@@ -1508,7 +1508,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             }
         }
     });
-    function getUserDashboardPost(pagenum = '') {
+    function getUserDashboardPost(pagenum) {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
              if($scope.$parent.pade_reload == true)
@@ -1534,7 +1534,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }, function (error) {});
     }
 
-    function getUserDashboardPostLoad(pagenum = '') {
+    function getUserDashboardPostLoad(pagenum) {
         if (isLoadingData) {
           
             /*
@@ -1564,7 +1564,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }, function (error) {});
     }
 
-    function getUserDashboardImage(pagenum = '') {
+    function getUserDashboardImage(pagenum) {
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardImage?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
@@ -1573,7 +1573,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }, function (error) {});
     }
 
-    function getUserDashboardVideo(pagenum = '') {
+    function getUserDashboardVideo(pagenum) {
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardVideo?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
@@ -1610,7 +1610,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         });
     }
 
-    function getUserDashboardAudio(pagenum = '') {
+    function getUserDashboardAudio(pagenum) {
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardAudio?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
@@ -1620,7 +1620,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }, function (error) {});
     }
 
-    function getUserDashboardPdf(pagenum = '') {
+    function getUserDashboardPdf(pagenum) {
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardPdf?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
@@ -1688,7 +1688,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         document.getElementById('field').value = d;
     }
 
-    $scope.post_opportunity_check = function (event,postIndex = -1) {
+    $scope.post_opportunity_check = function (event,postIndex) {
 
         if (document.getElementById("opp_edit_post_id"+postIndex)) {
             var post_id = document.getElementById("opp_edit_post_id"+postIndex).value;
@@ -2418,7 +2418,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
     // POST SOMETHING UPLOAD START
 
-    $scope.post_something_check = function (event,postIndex = -1) {        
+    $scope.post_something_check = function (event,postIndex) {        
         //alert(postIndex);return false;
         if (document.getElementById("edit_post_id"+postIndex)) {
             var post_id = document.getElementById("edit_post_id"+postIndex).value;
@@ -3412,7 +3412,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     }
 
     // Fetch data
-    $scope.getContacts = function (pagenum = '') {
+    $scope.getContacts = function (pagenum) {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
             if($scope.$parent.pade_reload == true)
@@ -3511,7 +3511,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
     },1000);
 
     // Fetch data
-    $scope.getFollowers = function (pagenum = '') {
+    $scope.getFollowers = function (pagenum) {
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
             if($scope.$parent.pade_reload == true)
@@ -3623,7 +3623,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     },1000);
 
     // Fetch data
-    $scope.getFollowing = function (pagenum = '') {
+    $scope.getFollowing = function (pagenum) {
 
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();
@@ -3776,7 +3776,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
         });
     }
 
-    $scope.getQuestions = function (pagenum = '') {
+    $scope.getQuestions = function (pagenum) {
         $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
             // $('#main_loader').show();

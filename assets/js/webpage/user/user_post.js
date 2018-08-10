@@ -956,7 +956,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         $('#field').val(d);
     }
 
-    $scope.post_opportunity_check = function (event,postIndex = -1) {
+    $scope.post_opportunity_check = function (event,postIndex) {
 
         if (document.getElementById("opp_edit_post_id"+postIndex)) {
             var post_id = document.getElementById("opp_edit_post_id"+postIndex).value;
@@ -1420,7 +1420,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     }
 
 
-    $scope.ask_question_check = function (event,postIndex = -1) {
+    $scope.ask_question_check = function (event,postIndex) {
 
         if (document.getElementById("ask_edit_post_id_"+postIndex)) {
             var post_id = document.getElementById("ask_edit_post_id_"+postIndex).value;
@@ -1662,7 +1662,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
     // POST SOMETHING UPLOAD START
 
-    $scope.post_something_check = function (event,postIndex = -1) {        
+    $scope.post_something_check = function (event,postIndex) {        
         //alert(postIndex);return false;
         if (document.getElementById("edit_post_id"+postIndex)) {
             var post_id = document.getElementById("edit_post_id"+postIndex).value;
