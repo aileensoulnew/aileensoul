@@ -85,6 +85,7 @@ class User_post extends MY_Controller {
             $data['not_read'] = '2';
             $user_contact = $this->common->insert_data_getid($data, 'user_contact');
             if ($user_contact) {
+                //Add Send Mail
                 $return_data['status'] = 'pending';
                 $return_data['message'] = '1';
             } else {
