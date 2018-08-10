@@ -95,13 +95,26 @@
                     <div class="right-add-box"></div>
 					<?php //$this->load->view('right_add_box'); ?>
 					<?php echo $left_footer; ?>
-                    </div>                    
 					<?php $this->load->view('right_add_box'); ?>
-
                 </div>
                 <div class="middle-part">					
                     <div class="page-title">
-                        <h3>Search Result</h3>
+                        <h3>Search Result for
+                            <?php 
+                            if($q != "" && $l == "")
+                            {
+                                echo '"' .  $q . '"';
+                            }
+                            else if($q == "" && $l != "")
+                            {
+                                echo '"Business in ' .  $l . '"';
+                            }
+                            else
+                            {
+                                echo '"' .  $q . '"'." in ".'"' .  $l . '"';
+                            }
+                            ?>
+                        </h3>
                     </div>					
                     <div ng-if="businessList.length != 0" ng-repeat="business in businessList" ng-init="busIndex=$index">
                     <div class="all-job-box search-business">
@@ -130,11 +143,13 @@
                             </ul>
                         </div>
                     </div>
+                    <?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
                     <div ng-if="(busIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
                             <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>                            
                         </div>
                     </div>
+                    <?php } ?>
                     </div>
                     <!-- NO RESULT FOUND DIV -->
                     <div class="job-contact-frnd user_no_post_avl" ng-if="businessList.length <= 0">
@@ -156,6 +171,7 @@
                 <div class="right-part">                    
 					<?php $this->load->view('right_add_box'); ?>
 					<?php echo $left_footer; ?>
+                </div>
                 </div>
             </div>
 			
@@ -263,6 +279,8 @@
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';
             var app = angular.module('businessSearchListApp', ['ui.bootstrap','angular-google-adsense']);
+            $(".tags").val(q);
+            $(".searchplace").val(l);
         </script>   
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>

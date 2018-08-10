@@ -50,7 +50,7 @@ echo $header_inner_profile ?>
                 <div class="col-md-6 mob-p0">
                     <ul class="sub-menu">
                         <li class="profile">
-                            <a href="<?php echo $business_right_profile_link; ?>">
+                            <a href="<?php echo base_url('business-profile');//$business_right_profile_link; ?>">
 								<div class="sub-menu-icon">
 									
 										<svg class="not-hover" viewBox="0 0 486.988 486.988" width="17px" height="17px">

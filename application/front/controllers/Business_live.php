@@ -228,7 +228,7 @@ class Business_live extends MY_Controller {
                 $this->data['l'] = $search_location[1];
             }
             else if(count($search_category) > 0){
-                $this->data['q'] = $search_category[0];
+                $this->data['q'] = str_replace("-business", "", $search_category[0]);
                 $this->data['l'] = $search_category[1];
             }else{
                 $this->data['q'] = $search_category[0];
