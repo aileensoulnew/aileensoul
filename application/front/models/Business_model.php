@@ -140,7 +140,10 @@ class Business_model extends CI_Model {
         return $result_array;
     }*/
 
-    function searchBusinessData($keyword = '', $location = '',  $category_id = '',$location_id = '') {
+    function searchBusinessData($keyword = '', $location = '',  $category_id = '',$location_id = '',$page = 0,$limit = '5') {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
          // $keyword = str_replace('%20', ' ', $keyword);
         $keyword = urldecode($keyword);
         // $location = str_replace('%20', ' ', $location);
@@ -162,7 +165,7 @@ class Business_model extends CI_Model {
                 OR bp.contact_person LIKE '". $val ."' OR bp.contact_mobile LIKE '". $val ."' 
                 OR bp.details LIKE '". $val ."' OR bp.business_slug LIKE '". $val ."' 
                 OR bp.other_business_type LIKE '". $val ."' OR bp.other_industrial LIKE '". $val ."' 
-                OR it.industry_name LIKE '". $val ."') ";
+                OR bp.industry_name LIKE '". $val ."') ";
             }
         } 
 
@@ -170,7 +173,9 @@ class Business_model extends CI_Model {
             $sqlcategoryfilter = ($sqlkeyword == "") ? " AND " : " OR ";
             $sqlcategoryfilter .= "bp.industriyal IN (". $category_id .")";
             $sqlcategoryfilter .= ($sqlkeyword != "") ? ")" : "";
-        }else{
+        }
+        else
+        {
             $sqlcategoryfilter = ($sqlkeyword != "") ? ")" : "";
         }
 
@@ -181,37 +186,41 @@ class Business_model extends CI_Model {
             foreach($locationdata as $key => $val){
                 $val = $val.'%';
                 $sqllocation .= ($key == 0) ? "" : " OR ";
-                $sqllocation .= " ct.city_name LIKE '". $val ."'
-                    OR cr.country_name LIKE '". $val ."'
-                    OR s.state_name LIKE '". $val ."'";
+                $sqllocation .= " bp.city_name LIKE '". $val ."'
+                    OR bp.country_name LIKE '". $val ."'
+                    OR bp.state_name LIKE '". $val ."'";
             }
         }
         
         if($location_id != ""){
             $sqllocationfilter = ($sqllocation == "") ? " AND " : " OR ";
-            $sqllocationfilter .= "ct.city_id IN (". $location_id .")";  
+            $sqllocationfilter .= "bp.city IN (". $location_id .")";  
             $sqllocationfilter .= ($sqllocation != "") ? ")" : ""; 
-        }else{
+        }
+        else
+        {
             $sqllocationfilter = ($sqllocation != "") ? ")" : ""; 
         }
 
 
-        $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, it.industry_name, ct.city_name AS city, cr.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(s.state_name != '',CONCAT(bp.business_slug, '-', s.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) AS business_slug 
-                FROM ailee_business_profile bp 
-                LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
-                LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
-                LEFT JOIN ailee_states s ON s.state_id = bp.state 
-                LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 
-                WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'"
-                . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;
+        $tot_sql = $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, bp.industry_name, bp.city_name AS city, bp.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', bp.city_name),IF(bp.state_name != '',CONCAT(bp.business_slug, '-', bp.state_name),CONCAT(bp.business_slug, '-', bp.country_name))) AS business_slug 
+            FROM ailee_business_profile_searc_tmp bp                 
+            WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'"
+            . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;
 
 
-            if($limit){
-                $sql .= " LIMIT ". $limit;
-            }
-            $query = $this->db->query($sql);
-            $result_array = $query->result_array();
-            return $result_array;
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        // echo $sql;exit;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+
+        $query2 = $this->db->query($tot_sql);
+        $total_record = $query2->num_rows();
+        
+        $ret_arr = array("seach_business"=>$result_array,"total_record"=>$total_record);
+        return $ret_arr;
     }
 
     function business_followers($follow_to = '', $sortby = '', $orderby = '', $limit = '', $offset = '') {
@@ -785,6 +794,49 @@ class Business_model extends CI_Model {
             $query = $this->db->query($sql);
             $posted_business_slug = $query->row();
             return $posted_business_slug;
+    }
+
+    function business_create_search_table()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        echo "<pre>";
+        $sql = "SELECT * from ailee_business_profile WHERE status = '1' AND is_deleted = '0' AND business_step = '4'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();        
+        // print_r($result_array);exit;
+        foreach ($result_array as $key => $value) {            
+            
+            if(trim($value['industriyal']) != "")
+            {
+                $industriyal = $this->db->get_where('industry_type', array('industry_id' => $value['industriyal'], 'status' => '1'))->row()->industry_name;
+
+                $value['industry_name'] = trim($industriyal);
+            }
+
+            if(trim($value['country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $value['country'], 'status' => '1'))->row()->country_name;
+
+                $value['country_name'] = trim($country_name);
+            }
+
+            if(trim($value['state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $value['state'], 'status' => '1'))->row()->state_name;
+
+                $value['state_name'] = trim($state_name);
+            }
+
+            if(trim($value['city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $value['city'], 'status' => '1'))->row()->city_name;
+
+                $value['city_name'] = trim($city_name);
+            }
+            $this->db->insert('ailee_business_profile_searc_tmp', $value);
+        }
+        echo "Done";
     }
 
 }

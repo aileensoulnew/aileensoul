@@ -9,13 +9,19 @@ app.directive('onErrorSrc', function() {
         }
     }
 });
-app.controller('businessSearchListController', function ($scope, $http,$compile) {
+app.controller('businessSearchListController', function ($scope, $http,$compile,$window) {
     $scope.title = title;
     $scope.businessCategory = {};
     $scope.businessLocation = {};
     $scope.searchtitle = '';
     $scope.categorysearch = '';
     $scope.locationsearch = '';
+    $scope.business = {};
+    pagenum = 1;
+    var search_data_url = '';
+    var isProcessing = false;
+
+    searchBusiness();
 
     function load_add(){        
         setTimeout(function(){        
@@ -51,8 +57,7 @@ app.controller('businessSearchListController', function ($scope, $http,$compile)
     }
     businessLocation();
 
-    function searchBusiness() {
-        var search_data_url = '';
+    function searchBusiness() {        
         if (q != '' && l == '') {
             search_data_url = base_url + 'business_live/searchBusinessData?q=' + q;
         } else if (q == '' && l != '') {
@@ -60,9 +65,9 @@ app.controller('businessSearchListController', function ($scope, $http,$compile)
         } else {
             search_data_url = base_url + 'business_live/searchBusinessData?q=' + q + '&l=' + l;
         }
-        getsearchresultlist(search_data_url,'pageload');
+        getsearchresultlist(search_data_url,'pageload', pagenum);
     }
-    searchBusiness();
+    
 
     // Search result text
     function searchResultText(){
@@ -96,8 +101,7 @@ app.controller('businessSearchListController', function ($scope, $http,$compile)
                 }
             }
         });
-
-        var search_data_url = '';
+        
         if (q != '' && l == '') {
             search_data_url = base_url + 'business_live/searchBusinessData?q=' + q;
         } else if (q == '' && l != '') {
@@ -113,21 +117,83 @@ app.controller('businessSearchListController', function ($scope, $http,$compile)
         if(category != ""){
             search_data_url += "&category_id=" + category;
         }
-        getsearchresultlist(search_data_url,'filter');        
-    }
-
-    function getsearchresultlist(search_url, from){
-        $("#loader").removeClass("hidden");
-        $('#main_loader').show();
-        $http.get(search_url).then(function (success) {
+        // getsearchresultlist(search_data_url,'filter');
+        $scope.businessList = {};
+        $http.get(search_data_url+'&page='+pagenum).then(function (success) {
             $("#loader").addClass("hidden");
             $('#main_loader').hide();
             // $('#main_page_load').show();
             //load_add();
             $('body').removeClass("body-loader");
-            $scope.businessList = success.data;
+            $scope.businessList = success.data.seach_business;
         }, function (error) {});
     }
+
+    function getsearchresultlist(search_url, from, pagenum){
+        if (isProcessing) {            
+            return;
+        }
+        isProcessing = true;
+        $("#loader").show;
+        if(pagenum == 1){            
+            $('#main_loader').show();
+        }
+        $http.get(search_url+'&page='+pagenum).then(function (success) {
+            result = success.data;
+            $("#loader").hide();
+            $('#main_loader').hide();            
+            $('body').removeClass("body-loader");
+
+            if(result.seach_business.length > 0)
+            {
+                if(pagenum > 1)
+                {
+                    for (var i in result.seach_business) {
+                        // $scope.$apply(function () {
+                            $scope.businessList.push(result.seach_business[i]);
+                        // });
+                    }
+                }
+                else
+                {
+                    $scope.businessList = result.seach_business;
+                }                    
+                $scope.business.page_number = pagenum;
+                $scope.business.total_record = result.total_record;
+                $scope.business.perpage_record = 5;            
+                isProcessing = false;
+            }
+            else
+            {
+                if(pagenum == 1)
+                {                    
+                    $scope.businessList = result.seach_business;
+                }
+                $scope.showLoadmore = false;                
+            }
+        }, function (error) {});
+    }
+
+    angular.element($window).bind("scroll", function (e) {        
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+            isLoadingData = true;
+            var page = $scope.business.page_number;
+            var total_record = $scope.business.total_record;
+            var perpage_record = $scope.business.perpage_record;            
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum =  $scope.business.page_number + 1;
+                    getsearchresultlist(search_data_url, "", pagenum);
+                }
+            }
+        }
+    });
 });
 
 $(window).on("load", function () {

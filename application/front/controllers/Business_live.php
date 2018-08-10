@@ -281,9 +281,11 @@ class Business_live extends MY_Controller {
     public function searchBusinessData() {
         $keyword = $_GET['q'];
         $city = $_GET['l'];
+        $page = $_GET['page'];
+        $limit = '5';
         $category_id = $_GET['category_id'];
         $location_id = $_GET['location_id'];
-        $searchBusinessData = $this->business_model->searchBusinessData($keyword,$city,$category_id,$location_id);
+        $searchBusinessData = $this->business_model->searchBusinessData($keyword,$city,$category_id,$location_id,$page,$limit);
         echo json_encode($searchBusinessData);
     }
 
@@ -527,5 +529,10 @@ class Business_live extends MY_Controller {
     {
         $business_related_list = $this->business_model->business_related_blog_list();
         echo json_encode($business_related_list);
+    }
+
+    public function business_create_search_table()
+    {
+        $this->business_model->business_create_search_table();
     }
 }

@@ -251,6 +251,28 @@ class Business_profile_registration extends MY_Controller {
                 $data['contact_email'] = $userdata['email'];
 
                 $insert_id = $this->common->insert_data_getid($data, 'business_profile');
+
+                if(trim($data['country']) != "")
+                {
+                    $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
+
+                    $data['country_name'] = trim($country_name);
+                }
+
+                if(trim($data['state']) != "")
+                {
+                    $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+
+                    $data['state_name'] = trim($state_name);
+                }
+
+                if(trim($data['city']) != "")
+                {
+                    $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+
+                    $data['city_name'] = trim($city_name);
+                }
+                $insert_id1 = $this->common->insert_data_getid($data, 'business_profile_searc_tmp');
                 if ($insert_id) {
                     $data['is_success'] = 1;
                 } else {
@@ -266,6 +288,27 @@ class Business_profile_registration extends MY_Controller {
                 $data['business_slug'] = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
                 $data['modified_date'] = date('Y-m-d H:i:s', time());
                 $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+                if(trim($data['country']) != "")
+                {
+                    $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
+
+                    $data['country_name'] = trim($country_name);
+                }
+
+                if(trim($data['state']) != "")
+                {
+                    $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+
+                    $data['state_name'] = trim($state_name);
+                }
+
+                if(trim($data['city']) != "")
+                {
+                    $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+
+                    $data['city_name'] = trim($city_name);
+                }
+                $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
                 if ($updatdata) {
                     $data['is_success'] = 1;
                 } else {
@@ -346,6 +389,7 @@ class Business_profile_registration extends MY_Controller {
                 $data['business_step'] = '2';
             }
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+            $updatdata = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
             if ($updatdata) {
                 $data['is_success'] = 1;
             } else {
@@ -435,6 +479,15 @@ class Business_profile_registration extends MY_Controller {
                 $data['business_step'] = '3';
             }
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+            if(trim($data['industriyal']) != "")
+            {
+
+                $industriyal = $this->db->get_where('industry_type', array('industry_id' => $data['industriyal'], 'status' => '1'))->row()->industry_name;
+
+
+                $data['industry_name'] = trim($industriyal);
+            }
+            $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
             if ($updatdata) {
                 $data['is_success'] = 1;
             } else {
@@ -677,12 +730,14 @@ class Business_profile_registration extends MY_Controller {
                         'business_step' => '4'
                     );
                     $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+                    $updatdata1 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
                 } else {
                     $data = array(
                         'modified_date' => date('Y-m-d H:i:s', time()),
                         'business_step' => '4'
                     );
                     $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+                    $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
                 }
             }
         } else {
@@ -691,6 +746,7 @@ class Business_profile_registration extends MY_Controller {
                 'business_step' => '4'
             );
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+            $updatdata3 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
         }
         if ($updatdata) {
             $data['is_success'] = 1;
@@ -937,6 +993,35 @@ class Business_profile_registration extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'business_profile');
 
+            if(trim($data['industriyal']) != "")
+            {
+                $industriyal = $this->db->get_where('industry_type', array('industry_id' => $data['industriyal'], 'status' => '1'))->row()->industry_name;
+
+                $data['industry_name'] = trim($industriyal);
+            }
+
+            if(trim($data['country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
+
+                $data['country_name'] = trim($country_name);
+            }
+
+            if(trim($data['state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+
+                $data['state_name'] = trim($state_name);
+            }
+
+            if(trim($data['city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+
+                $data['city_name'] = trim($city_name);
+            }
+            $insert_id = $this->common->insert_data_getid($data, 'business_profile_searc_tmp');
+
             $config = array(
                 'upload_path' => $this->config->item('bus_profile_main_upload_path'),
                 'max_size' => 1024 * 100,
@@ -1101,12 +1186,14 @@ class Business_profile_registration extends MY_Controller {
                             'business_step' => '4'
                         );
                         $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+                        $updatdata1 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
                     } else {
                         $data = array(
                             'modified_date' => date('Y-m-d H:i:s', time()),
                             'business_step' => '4'
                         );
                         $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+                        $updatdata1 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
                     }
                 }
             }
@@ -1117,6 +1204,7 @@ class Business_profile_registration extends MY_Controller {
                     'business_step' => '4'
                 );
                 $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+                $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
             }
             if ($updatdata) {
                 $data['is_success'] = 1;
