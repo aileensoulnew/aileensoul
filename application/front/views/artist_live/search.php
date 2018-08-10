@@ -132,12 +132,14 @@
                             </ul>
                         </div>
                     </div>
+                    <?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
                     <div ng-if="(artIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
                             <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
                             <?php //$this->load->view('infeed_add'); ?>
                         </div>
                     </div>
+                    <?php } ?>
                     </div>
                     <!-- NO RESULT FOUND DIV -->
                     <div class="art-img-nn" ng-if="artistList.length <= 0">
@@ -149,7 +151,7 @@
 					<div class="banner-add">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
-                    <div id="loader" class="hidden">
+                    <div id="loader" style="display: none;">
                         <p style="text-align:center;">
                             <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
                         </p>

@@ -304,10 +304,12 @@ class Artist_live extends MY_Controller {
     public function searchArtistData() {
         $keyword = $_GET['q'];
         $city = $_GET['l'];
+        $page = $_GET['page'];
+        $limit = '5';
         $category_id = $_GET['category_id'];
         $location_id = $_GET['location_id'];
 
-        $searchArtistData = $this->artistic_model->searchArtistData($keyword, $city, $category_id,$location_id);
+        $searchArtistData = $this->artistic_model->searchArtistData($keyword, $city, $category_id,$location_id,$page,$limit);
         echo json_encode($searchArtistData);
     }
 

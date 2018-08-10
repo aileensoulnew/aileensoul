@@ -1,10 +1,14 @@
-app.controller('artistSearchListController', function ($scope, $http) {
+app.controller('artistSearchListController', function ($scope, $http,$window) {
     $scope.title = title;
     $scope.artistCategory = {};
     $scope.artistLocation = {};
     $scope.searchtitle = '';
     $scope.categorysearch = '';
     $scope.locationsearch = '';
+    $scope.artist = {};
+    pagenum = 1;
+    var search_data_url = '';
+    var isProcessing = false;
     // $scope.artistList = {};
     searchArtist();
     function artistCategory() {
@@ -33,7 +37,7 @@ app.controller('artistSearchListController', function ($scope, $http) {
     }
     artistLocation();
     function searchArtist() {
-        var search_data_url = '';
+        
         if (q != '' && l == '') {
             search_data_url = base_url + 'artist_live/searchArtistData?q=' + q;
         } else if (q == '' && l != '') {
@@ -41,7 +45,7 @@ app.controller('artistSearchListController', function ($scope, $http) {
         } else {
             search_data_url = base_url + 'artist_live/searchArtistData?q=' + q + '&l=' + l;
         }
-        getsearchresultlist(search_data_url,'pageload');
+        getsearchresultlist(search_data_url,'pageload',pagenum);
     }
     
 
@@ -78,7 +82,6 @@ app.controller('artistSearchListController', function ($scope, $http) {
             }
         });
 
-        var search_data_url = '';
         if (q != '' && l == '') {
             search_data_url = base_url + 'artist_live/searchArtistData?q=' + q;
         } else if (q == '' && l != '') {
@@ -94,23 +97,84 @@ app.controller('artistSearchListController', function ($scope, $http) {
         if(category != ""){
             search_data_url += "&category_id=" + category;
         }
-        getsearchresultlist(search_data_url,'filter');        
-    }
-
-    function getsearchresultlist(search_url, from){
-        $("#loader").removeClass("hidden");
-        $('#main_loader').show();
-        $http.get(search_url).then(function (success) {
+        // getsearchresultlist(search_data_url,'filter');
+        $scope.artistList = {};
+        $http.get(search_data_url+'&page='+pagenum).then(function (success) {
             $("#loader").addClass("hidden");
             $('#main_loader').hide();
             // $('#main_page_load').show();
-            $('body').removeClass("body-loader");
-            if (from == 'filter') {
-                $scope.artistList = {};    
-            }
+            $('body').removeClass("body-loader");            
             $scope.artistList = success.data;
         }, function (error) {});
     }
+
+    function getsearchresultlist(search_url, from, pagenum){
+        if (isProcessing) {            
+            return;
+        }
+        isProcessing = true;
+        $("#loader").show;
+        if(pagenum == 1){            
+            $('#main_loader').show();
+        }
+        $http.get(search_url+'&page='+pagenum).then(function (success) {
+            result = success.data;
+            $("#loader").hide;
+            $('#main_loader').hide();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+
+            if(result.seach_artist.length > 0)
+            {
+                if(pagenum > 1)
+                {
+                    for (var i in result.seach_artist) {
+                        // $scope.$apply(function () {
+                            $scope.artistList.push(result.seach_artist[i]);
+                        // });
+                    }
+                }
+                else
+                {
+                    $scope.artistList = result.seach_artist;
+                }                    
+                $scope.artist.page_number = pagenum;
+                $scope.artist.total_record = result.total_record;
+                $scope.artist.perpage_record = 5;            
+                isProcessing = false;
+            }
+            else
+            {
+                if(pagenum == 1)
+                {                    
+                    $scope.artistList = result.seach_artist;
+                }
+                $scope.showLoadmore = false;                
+            }
+            
+        }, function (error) {});
+    }
+
+    angular.element($window).bind("scroll", function (e) {        
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+            isLoadingData = true;
+            var page = $scope.artist.page_number;
+            var total_record = $scope.artist.total_record;
+            var perpage_record = $scope.artist.perpage_record;            
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum =  $scope.artist.page_number + 1;
+                    getsearchresultlist(search_data_url, "", pagenum);
+                }
+            }
+        }
+    });
 
 });
 

@@ -540,7 +540,10 @@ class Artistic_model extends CI_Model {
     }
 
     // new artist search result
-    function searchArtistData($keyword = '', $location = '',  $category_id = '',$location_id = ''){
+    function searchArtistData($keyword = '', $location = '',  $category_id = '',$location_id = '',$page = 0,$limit = '5'){
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
         // $keyword = str_replace('%20', ' ', $keyword);
         $keyword = urldecode($keyword);
         // $location = str_replace('%20', ' ', $location);
@@ -592,22 +595,25 @@ class Artistic_model extends CI_Model {
 
         }
 
-        $limit = '';
-        $sql = "SELECT ar.art_id,ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill, CONCAT(ar.art_name,' ',ar.art_lastname) as fullname,ar.art_country,ar.art_city,
-                ar.art_desc_art,ar.user_id,ar.art_skill_txt as art_category,ar.city_name as city,ar.country_name as country
-                from ailee_art_reg_search_tmp ar                
-                WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'"
-                . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;    
+        $tot_sql = $sql = "SELECT ar.art_id,ar.art_user_image,ar.profile_background,ar.slug,ar.other_skill,ar.art_skill, CONCAT(ar.art_name,' ',ar.art_lastname) as fullname,ar.art_country,ar.art_city,
+            ar.art_desc_art,ar.user_id,ar.art_skill_txt as art_category,ar.city_name as city,ar.country_name as country
+            from ailee_art_reg_search_tmp ar                
+            WHERE ar.status = '1' AND ar.is_delete = '0' AND ar.art_step = '4'"
+            . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;    
 
-            if($limit){
-                $sql .= " LIMIT ". $limit;
-            }
-            // echo $sql;
-            $query = $this->db->query($sql);
-            $result_array = $query->result_array();
-            // echo $this->db->last_query();
-            // exit;
-            return $result_array;
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        // echo $sql;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        // echo $this->db->last_query();
+        // exit;
+        $query2 = $this->db->query($tot_sql);
+        $total_record = $query2->num_rows();
+
+        $ret_arr = array("seach_artist"=>$result_array,"total_record"=>$total_record);
+        return $ret_arr;
     }
 
      // new artist search suggetion
