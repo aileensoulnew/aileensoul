@@ -936,4 +936,9 @@ class Job_live extends MY_Controller {
         $job_related_list = $this->job_model->job_related_blog_list();
         echo json_encode($job_related_list);
     }
+
+    public function job_create_search_table()
+    {
+        $this->job_model->job_create_search_table();        
+    }
 }

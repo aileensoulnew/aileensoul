@@ -313,12 +313,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 
                         </div>
                     </div>
+                    <?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
                     <div id="ads{{jobIndex}}" ng-if="(jobIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
                             <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
                             <?php //$this->load->view('infeed_add'); ?>
                         </div>
                     </div>
+                    <?php } ?>
                     </div>
 					<!-- <div class="tab-add">
 						<?php //$this->load->view('banner_add'); ?>

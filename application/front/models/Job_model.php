@@ -1113,40 +1113,40 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql = "";
         if($company_id != "")
         {
-            $sql .= "r.rec_id IN (".$company_id.") OR ";
+            $sql .= "rec_id IN (".$company_id.") OR ";
         }
         if($category_id != "")
         {
-            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+            $sql .= "industry_type IN (".$category_id.") OR ";
         }
         if($location_id != "")
         {
-            $sql .= "rp.city IN (".$location_id.") OR ";
+            $sql .= "city IN (".$location_id.") OR ";
         }
         if($skill_id != "")
         {
             $skill_id = str_replace(",", "|", $skill_id);
-            $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+            $sql .= "post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
 
         if($job_desc != "")
         {
-            $sql .= "rp.post_name IN (".$job_desc.") OR";
+            $sql .= "post_name IN (".$job_desc.") OR";
         }
         if($period_filter != "")
         {
             $sql_period = "";
             foreach (explode(",", $period_filter) as $key => $value) {
                 if($value == 1)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) = 0) OR ";
                 if($value == 2)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=7) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 0 AND DATEDIFF(NOW(),created_date) <=7) OR ";
                 if($value == 3)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=15) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 0 AND DATEDIFF(NOW(),created_date) <=15) OR ";
                 if($value == 4)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=45) OR ";                
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 0 AND DATEDIFF(NOW(),created_date) <=45) OR ";                
                 if($value == 5)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 45) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 45) OR ";
             }
             $sql .= "(".trim($sql_period, ' OR ').") OR ";
         }
@@ -1155,17 +1155,17 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $sql_exp = "";
             foreach (explode(",", $exp_fil) as $key => $value) {
                 if($value == 1)
-                    $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
+                    $sql_exp .= "(max_year >= 0 AND max_year <=1) OR ";
                 if($value == 2)
-                    $sql_exp .= "(rp.max_year >= 1 AND rp.max_year <=2) OR ";
+                    $sql_exp .= "(max_year >= 1 AND max_year <=2) OR ";
                 if($value == 3)
-                    $sql_exp .= "(rp.max_year >= 2 AND rp.max_year <=3) OR ";
+                    $sql_exp .= "(max_year >= 2 AND max_year <=3) OR ";
                 if($value == 4)
-                    $sql_exp .= "(rp.max_year >= 3 AND rp.max_year <=4) OR ";
+                    $sql_exp .= "(max_year >= 3 AND max_year <=4) OR ";
                 if($value == 5)
-                    $sql_exp .= "(rp.max_year >= 4 AND rp.max_year <=5) OR ";
+                    $sql_exp .= "(max_year >= 4 AND max_year <=5) OR ";
                 if($value == 6)
-                    $sql_exp .= "(rp.max_year >= 5) OR ";
+                    $sql_exp .= "(max_year >= 5) OR ";
             }
             $sql .= "(".trim($sql_exp, ' OR ').") OR ";
         }
@@ -1174,9 +1174,9 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         foreach (explode(",", $job_keyword) as $key => $value) {
             if($value != "")
             {
-                $sql_skill .= "skill LIKE '".$value."%' OR ";
-                $sql_jt .= "jt.name LIKE '".$value."%' OR ";
-                $sql_cn .= "r.re_comp_name LIKE '".$value."%' OR ";
+                $sql_skill .= "post_skill_txt LIKE '".$value."%' OR ";
+                $sql_jt .= "post_name_txt LIKE '".$value."%' OR ";
+                $sql_cn .= "rec_comp_name LIKE '".$value."%' OR ";
                 $sql_it .= "industry_name LIKE '".$value."%' OR ";
             }
         }
@@ -1184,56 +1184,48 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         foreach (explode(",", $job_location) as $key => $value) {
             if($value != "")
             {                
-                $sql_city .= "ct.city_name LIKE '".$value."%' OR ";
-                $sql_state .= "st.state_name LIKE '".$value."%' OR ";
-                $sql_country .= "cr.country_name LIKE '".$value."%' OR ";            
+                $sql_city .= "city_name LIKE '".$value."%' OR ";
+                $sql_state .= "state_name LIKE '".$value."%' OR ";
+                $sql_country .= "country_name LIKE '".$value."%' OR ";            
             }
         }
         $sql_work_time = "";
         foreach (explode("-", $work_time) as $key => $value) {
             if($value == '1')
             {
-                $sql_work_time .= "rp.emp_type = 'Full Time' OR ";
+                $sql_work_time .= "emp_type = 'Full Time' OR ";
             }
             else if($value == '2')
             {
-                $sql_work_time .= "rp.emp_type = 'Part Time' OR ";   
+                $sql_work_time .= "emp_type = 'Part Time' OR ";   
             }
             else if($value == '3')
             {
-                $sql_work_time .= "rp.emp_type = 'Internship' OR ";
+                $sql_work_time .= "emp_type = 'Internship' OR ";
             }
         }
 
-        $this->db->select("rp.post_id,rp.post_name,IFNULL(jt.name, rp.post_name)
-as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') as created_date,ct.city_name,cr.country_name,rp.min_year,rp.max_year,rp.fresher,CONCAT(r.rec_firstname,' ',r.rec_lastname) as fullname,r.user_id, r.re_comp_name,r.comp_logo, IF(rp.city>0,ct.city_name,IF(rp.state>0,st.state_name,IF(rp.country>0,cr.country_name,''))) as slug_city")->from('rec_post rp');
-        // 
-        $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
-        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
-        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
-        $this->db->join('states st', 'st.state_id = rp.state', 'left');
-        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
-        $this->db->where('rp.status', '1');
-        $this->db->where('rp.is_delete', '0');
-        $this->db->where('r.user_id != ', $userid);
-        $this->db->where('r.re_status',"1");
-        $this->db->where('r.is_delete', "0");
+        $this->db->select("post_id,post_name_txt as string_post_name,post_description,DATE_FORMAT(created_date,'%d-%M-%Y') as created_date, city_name, country_name,min_year,max_year,fresher,CONCAT(rec_firstname,' ',rec_lastname) as fullname,user_id, rec_comp_name,rec_comp_logo, IF(city>0,city_name,IF(state>0,state_name,IF(country>0,country_name,''))) as slug_city")->from('rec_post_search_tmp');
+        $this->db->where('status', '1');
+        $this->db->where('is_delete', '0');
+        $this->db->where('user_id != ', $userid);
+        
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
             $this->db->where($sql,false,false);
-        
         }
         $sql_ser = "";
         if($job_keyword != "")
         {
-            $sql_ser .= "(rp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
+            $sql_ser .= "(
+                (".trim($sql_skill, ' OR ').")
                 OR
                 (".trim($sql_jt, ' OR ').")
                 OR
                 (".trim($sql_cn, ' OR ').")
                 OR
-                rp.industry_type REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]')
+                (".trim($sql_it, ' OR ').")
             )";        
         }
         if($job_location != "")
@@ -1256,11 +1248,12 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         {            
             $this->db->where("(".trim($sql_work_time, ' OR ').")",false,false);
         }
-        $this->db->order_by('rp.post_id', 'desc');
+        $this->db->order_by('post_id', 'desc');
         if($limit != '') {
             $this->db->limit($limit,$start);
         }
         $query = $this->db->get();
+        // echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
 
@@ -1289,40 +1282,40 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql = "";
         if($company_id != "")
         {
-            $sql .= "r.rec_id IN (".$company_id.") OR ";
+            $sql .= "rec_id IN (".$company_id.") OR ";
         }
         if($category_id != "")
         {
-            $sql .= "rp.industry_type IN (".$category_id.") OR ";
+            $sql .= "industry_type IN (".$category_id.") OR ";
         }
         if($location_id != "")
         {
-            $sql .= "rp.city IN (".$location_id.") OR ";
+            $sql .= "city IN (".$location_id.") OR ";
         }
         if($skill_id != "")
         {
             $skill_id = str_replace(",", "|", $skill_id);
-            $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
+            $sql .= "post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
 
         if($job_desc != "")
         {
-            $sql .= "rp.post_name IN (".$job_desc.") OR";
+            $sql .= "post_name IN (".$job_desc.") OR";
         }
         if($period_filter != "")
         {
             $sql_period = "";
             foreach (explode(",", $period_filter) as $key => $value) {
                 if($value == 1)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) = 0) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) = 0) OR ";
                 if($value == 2)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=7) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 0 AND DATEDIFF(NOW(),created_date) <=7) OR ";
                 if($value == 3)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=15) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 0 AND DATEDIFF(NOW(),created_date) <=15) OR ";
                 if($value == 4)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 0 AND DATEDIFF(NOW(),rp.created_date) <=45) OR ";                
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 0 AND DATEDIFF(NOW(),created_date) <=45) OR ";                
                 if($value == 5)
-                    $sql_period .= "(DATEDIFF(NOW(),rp.created_date) >= 45) OR ";
+                    $sql_period .= "(DATEDIFF(NOW(),created_date) >= 45) OR ";
             }
             $sql .= "(".trim($sql_period, ' OR ').") OR ";
         }
@@ -1331,65 +1324,61 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $sql_exp = "";
             foreach (explode(",", $exp_fil) as $key => $value) {
                 if($value == 1)
-                    $sql_exp .= "(rp.max_year >= 0 AND rp.max_year <=1) OR ";
+                    $sql_exp .= "(max_year >= 0 AND max_year <=1) OR ";
                 if($value == 2)
-                    $sql_exp .= "(rp.max_year >= 1 AND rp.max_year <=2) OR ";
+                    $sql_exp .= "(max_year >= 1 AND max_year <=2) OR ";
                 if($value == 3)
-                    $sql_exp .= "(rp.max_year >= 2 AND rp.max_year <=3) OR ";
+                    $sql_exp .= "(max_year >= 2 AND max_year <=3) OR ";
                 if($value == 4)
-                    $sql_exp .= "(rp.max_year >= 3 AND rp.max_year <=4) OR ";
+                    $sql_exp .= "(max_year >= 3 AND max_year <=4) OR ";
                 if($value == 5)
-                    $sql_exp .= "(rp.max_year >= 4 AND rp.max_year <=5) OR ";
+                    $sql_exp .= "(max_year >= 4 AND max_year <=5) OR ";
                 if($value == 6)
-                    $sql_exp .= "(rp.max_year >= 5) OR ";
+                    $sql_exp .= "(max_year >= 5) OR ";
             }
             $sql .= "(".trim($sql_exp, ' OR ').") OR ";
         }
         
         $sql_skill = "";$sql_jt = "";$sql_cn = "";$sql_it = "";        
-        foreach (explode(",", $job_keyword) as $key => $value) {        
-            $sql_skill .= "skill LIKE '".$value."%' OR ";
-            $sql_jt .= "jt.name LIKE '".$value."%' OR ";
-            $sql_cn .= "r.re_comp_name LIKE '".$value."%' OR ";
-            $sql_it .= "industry_name LIKE '".$value."%' OR ";
+        foreach (explode(",", $job_keyword) as $key => $value) {
+            if($value != "")
+            {
+                $sql_skill .= "post_skill_txt LIKE '".$value."%' OR ";
+                $sql_jt .= "post_name_txt LIKE '".$value."%' OR ";
+                $sql_cn .= "rec_comp_name LIKE '".$value."%' OR ";
+                $sql_it .= "industry_name LIKE '".$value."%' OR ";
+            }
         }
-
         $sql_city = "";$sql_state = "";$sql_country = "";
         foreach (explode(",", $job_location) as $key => $value) {
             if($value != "")
             {                
-                $sql_city .= "ct.city_name LIKE '".$value."%' OR ";
-                $sql_state .= "st.state_name LIKE '".$value."%' OR ";
-                $sql_country .= "cr.country_name LIKE '".$value."%' OR ";            
+                $sql_city .= "city_name LIKE '".$value."%' OR ";
+                $sql_state .= "state_name LIKE '".$value."%' OR ";
+                $sql_country .= "country_name LIKE '".$value."%' OR ";            
             }
         }
         $sql_work_time = "";
         foreach (explode("-", $work_time) as $key => $value) {
             if($value == '1')
             {
-                $sql_work_time .= "rp.emp_type = 'Full Time' OR ";
+                $sql_work_time .= "emp_type = 'Full Time' OR ";
             }
             else if($value == '2')
             {
-                $sql_work_time .= "rp.emp_type = 'Part Time' OR ";   
+                $sql_work_time .= "emp_type = 'Part Time' OR ";   
             }
             else if($value == '3')
             {
-                $sql_work_time .= "rp.emp_type = 'Internship' OR ";
+                $sql_work_time .= "emp_type = 'Internship' OR ";
             }
         }
 
-        $this->db->select("COUNT(*) as total_record")->from('rec_post rp');
-        $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
-        $this->db->join('cities ct', 'ct.city_id = rp.city', 'left');
-        $this->db->join('states st', 'st.state_id = rp.state', 'left');
-        $this->db->join('countries cr', 'cr.country_id = rp.country', 'left');
-        $this->db->join('job_title jt', 'jt.title_id = rp.post_name', 'left');
-        $this->db->where('rp.status', '1');
-        $this->db->where('rp.is_delete', '0');
-        $this->db->where('r.user_id != ', $userid);
-        $this->db->where('r.re_status',"1");
-        $this->db->where('r.is_delete', "0");
+        $this->db->select("COUNT(*) as total_record")->from('rec_post_search_tmp');
+        $this->db->where('status', '1');
+        $this->db->where('is_delete', '0');
+        $this->db->where('user_id != ', $userid);
+        
         if($sql != "")
         {            
             $sql = "(".trim($sql, ' OR ').")";
@@ -1398,13 +1387,14 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql_ser = "";
         if($job_keyword != "")
         {
-            $sql_ser .= "(rp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
+            $sql_ser .= "(
+                (".trim($sql_skill, ' OR ').")
                 OR
                 (".trim($sql_jt, ' OR ').")
                 OR
                 (".trim($sql_cn, ' OR ').")
                 OR
-                rp.industry_type REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(industry_id), ',', '|') FROM ailee_industry_type WHERE status = 1 AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]')
+                (".trim($sql_it, ' OR ').")
             )";        
         }
         if($job_location != "")
@@ -1427,6 +1417,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         {            
             $this->db->where("(".trim($sql_work_time, ' OR ').")",false,false);
         }
+                
         $query = $this->db->get();        
         $result_array = $query->row_array();
         
@@ -1659,5 +1650,93 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
         return $result_array['skill_name'];
+    }
+
+    function job_create_search_table()
+    {       
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        echo "<pre>";
+        $sql = "SELECT * from ailee_rec_post WHERE status = '1' AND is_delete = '0' ORDER BY post_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        // print_r($result_array);exit;
+        foreach ($result_array as $key => $value) {
+
+            if(trim($value['post_name']) != "" && is_numeric($value['post_name']))
+            {
+                $post_name = $this->db->get_where('job_title', array('title_id' => $value['post_name']))->row()->name;
+
+                $value['post_name_txt'] = trim($post_name);
+            }
+            else if(trim($value['post_name']) != "")
+            {
+                $value['post_name_txt'] = trim($value['post_name']);
+            }
+
+            if($value['post_skill'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$value['post_skill']) as $skk => $skv) {
+                    if($skv != "" && $skv != "26")
+                    {
+                        $s_name = $this->db->get_where('skill', array('skill_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->skill;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                }
+                $value['post_skill_txt'] = trim($skill_name,",");
+            }
+            if(trim($value['country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $value['country'], 'status' => '1'))->row()->country_name;
+
+                $value['country_name'] = trim($country_name);
+            }
+
+            if(trim($value['state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $value['state'], 'status' => '1'))->row()->state_name;
+
+                $value['state_name'] = trim($state_name);
+            }
+
+            if(trim($value['city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $value['city'], 'status' => '1'))->row()->city_name;
+
+                $value['city_name'] = trim($city_name);
+            }
+
+            if(trim($value['industry_type']) != "")
+            {
+                $industry_name = $this->db->get_where('industry_type', array('industry_id' => $value['industry_type'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+
+                $value['industry_name'] = trim($industry_name);
+            }
+            $recruiter = $this->db->get_where('recruiter', array('user_id' => $value['user_id'], 're_status' => '1','is_delete'=> '0'))->row();
+            if($recruiter->rec_id != ""){                
+                $value['rec_id'] = $recruiter->rec_id;
+            }
+
+            if($recruiter->rec_firstname != ""){                
+                $value['rec_firstname'] = $recruiter->rec_firstname;
+            }
+
+            if($recruiter->rec_lastname != ""){
+                $value['rec_lastname'] = $recruiter->rec_lastname;
+            }
+            if($recruiter->re_comp_name != "")
+            {
+                $value['rec_comp_name'] = $recruiter->re_comp_name;
+            }
+            if($recruiter->comp_logo != ""){                
+                $value['rec_comp_logo'] = $recruiter->comp_logo;
+            }
+            $this->db->insert('ailee_rec_post_search_tmp', $value);            
+        }
+        echo "Done";
     }
 }
