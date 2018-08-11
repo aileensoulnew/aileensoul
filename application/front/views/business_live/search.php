@@ -159,7 +159,7 @@
                             <p style="text-transform:none !important;border:0px;margin-left:4%;">We couldn't find what you were looking for.</p>
                         </div>
                     </div>
-                    <div id="loader" class="hidden">
+                    <div id="load-more" style="display: none;">
                         <p style="text-align:center;">
                             <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
                         </p>

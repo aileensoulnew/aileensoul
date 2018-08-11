@@ -118,14 +118,21 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
             search_data_url += "&category_id=" + category;
         }
         // getsearchresultlist(search_data_url,'filter');
+        pagenum = 1;
+        isProcessing = false;
         $scope.businessList = {};
+        $("#load-more").show();
         $http.get(search_data_url+'&page='+pagenum).then(function (success) {
-            $("#loader").addClass("hidden");
+            $("#load-more").hide();
             $('#main_loader').hide();
             // $('#main_page_load').show();
             //load_add();
             $('body').removeClass("body-loader");
             $scope.businessList = success.data.seach_business;
+            $scope.business.page_number = pagenum;
+            $scope.business.total_record = success.data.total_record;
+            $scope.business.perpage_record = 5;            
+            isProcessing = false;
         }, function (error) {});
     }
 
@@ -134,13 +141,13 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
             return;
         }
         isProcessing = true;
-        $("#loader").show;
+        $("#load-more").show();
         if(pagenum == 1){            
             $('#main_loader').show();
         }
         $http.get(search_url+'&page='+pagenum).then(function (success) {
             result = success.data;
-            $("#loader").hide();
+            $("#load-more").hide();
             $('#main_loader').hide();            
             $('body').removeClass("body-loader");
 
@@ -175,8 +182,7 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
     }
 
     angular.element($window).bind("scroll", function (e) {        
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
-            isLoadingData = true;
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {            
             var page = $scope.business.page_number;
             var total_record = $scope.business.total_record;
             var perpage_record = $scope.business.perpage_record;            
