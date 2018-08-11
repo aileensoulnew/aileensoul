@@ -516,6 +516,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
     var fileNamesArrQue = [];
 
     var isLoadingData = false;
+    var postIndex = -1;
 
     $(document).on('change','#fileInput1', function(e){
         $.each($('#fileInput1')[0].files, function(i, f) {
