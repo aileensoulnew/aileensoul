@@ -151,7 +151,7 @@
 					<div class="banner-add">
 								<?php $this->load->view('banner_add'); ?>
 							</div>
-                    <div id="loader" style="display: none;">
+                    <div id="load-more" style="display: none;">
                         <p style="text-align:center;">
                             <img alt="loader" class="loader" src="<?php echo base_url('assets/images/loading.gif') ?>">
                         </p>

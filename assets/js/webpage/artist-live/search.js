@@ -99,12 +99,19 @@ app.controller('artistSearchListController', function ($scope, $http,$window) {
         }
         // getsearchresultlist(search_data_url,'filter');
         $scope.artistList = {};
+        pagenum = 1;
+        isProcessing = false;
+        $("#load-more").show();
         $http.get(search_data_url+'&page='+pagenum).then(function (success) {
-            $("#loader").addClass("hidden");
+            $("#load-more").hide();
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");            
-            $scope.artistList = success.data;
+            $scope.artistList = success.data.seach_artist;
+            $scope.artist.page_number = pagenum;
+            $scope.artist.total_record = success.data.total_record;
+            $scope.artist.perpage_record = 5;            
+            isProcessing = false;
         }, function (error) {});
     }
 
@@ -113,13 +120,13 @@ app.controller('artistSearchListController', function ($scope, $http,$window) {
             return;
         }
         isProcessing = true;
-        $("#loader").show;
+        $("#load-more").show();
         if(pagenum == 1){            
             $('#main_loader').show();
         }
         $http.get(search_url+'&page='+pagenum).then(function (success) {
             result = success.data;
-            $("#loader").hide;
+            $("#load-more").show();
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
