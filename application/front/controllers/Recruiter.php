@@ -151,6 +151,11 @@ class Recruiter extends MY_Controller {
 				);
 
 				$insert_id = $this->common->update_data($data, 'recruiter', 'rec_id', $this->data['recdata']['rec_id']);
+				$data1 = array(
+					'rec_firstname' => $this->input->post('first_name'),
+					'rec_lastname' => $this->input->post('last_name')
+				);
+				$insert_id1 = $this->common->update_data($data1, 'rec_post_search_tmp', 'rec_id', $this->data['recdata']['rec_id']);
 
 				if ($insert_id) {
 					redirect('recruiter/company-information', refresh);
@@ -426,12 +431,14 @@ class Recruiter extends MY_Controller {
 					$data = array(
 						'comp_logo' => $this->input->post('image_hidden_logo')
 					);
+					$cmp_logo = $this->input->post('image_hidden_logo');
 				} else {
 					$data = array(
 						'comp_logo' => $logo
 					);
+					$cmp_logo = $logo;
 				}
-				$insert_id = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
+				// $insert_id = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
 				$data = array(
 					're_comp_name' => $this->input->post('comp_name'),
 					're_comp_email' => $this->input->post('comp_email'),
@@ -442,10 +449,16 @@ class Recruiter extends MY_Controller {
 					're_comp_country' => $this->input->post('country'),
 					're_comp_state' => $this->input->post('state'),
 					're_comp_city' => $this->input->post('city'),
+					'comp_logo' => $cmp_logo,
 					're_step' => '3'
 				);
 
 				$insert_id = $this->common->update_data($data, 'recruiter', 'rec_id', $this->data['recdata']['rec_id']);
+				$data = array(
+					'rec_comp_name' => $this->input->post('comp_name'),
+					'rec_comp_logo' => $cmp_logo
+				);
+				$insert_id2 = $this->common->update_data($data, 'rec_post_search_tmp', 'rec_id', $this->data['recdata']['rec_id']);
 
 				if ($insert_id) {
 					redirect('recommended-candidates', refresh);
@@ -469,6 +482,11 @@ class Recruiter extends MY_Controller {
 					're_step' => '3'
 				);
 				$insert_id = $this->common->update_data($data, 'recruiter', 'user_id', $userid);
+				$data = array(
+					'rec_comp_name' => $this->input->post('comp_name'),
+					'rec_comp_logo' => $logo
+				);
+				$insert_id1 = $this->common->update_data($data, 'rec_post_search_tmp', 'user_id', $userid);
 				if ($insert_id) {
 					if ($this->data['recdata']['re_step'] == 3) {
 						redirect('recommended-candidates', refresh);
@@ -795,6 +813,81 @@ class Recruiter extends MY_Controller {
 
 		$insert_id = $this->common->insert_data_getid($data, 'rec_post');
 
+		if(trim($data['post_name']) != "" && is_numeric($data['post_name']))
+        {
+            $post_name = $this->db->get_where('job_title', array('title_id' => $data['post_name']))->row()->name;
+
+            $data['post_name_txt'] = trim($post_name);
+        }
+        else if(trim($data['post_name']) != "")
+        {
+            $data['post_name_txt'] = trim($data['post_name']);
+        }
+
+        if($data['post_skill'] != "")
+        {
+            $skill_name = "";
+            foreach (explode(',',$data['post_skill']) as $skk => $skv) {
+                if($skv != "" && $skv != "26")
+                {
+                    $s_name = $this->db->get_where('skill', array('skill_id' => $skv, 'status' => '1' , 'type'=> '1'))->row()->skill;
+                    if(trim($s_name) != "")
+                    {
+                        $skill_name .= $s_name.",";
+                    }
+                }
+            }
+            $data['post_skill_txt'] = trim($skill_name,",");
+        }
+        if(trim($data['country']) != "")
+        {
+            $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
+
+            $data['country_name'] = trim($country_name);
+        }
+
+        if(trim($data['state']) != "")
+        {
+            $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+
+            $data['state_name'] = trim($state_name);
+        }
+
+        if(trim($data['city']) != "")
+        {
+            $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+
+            $data['city_name'] = trim($city_name);
+        }
+
+        if(trim($data['industry_type']) != "")
+        {
+            $industry_name = $this->db->get_where('job_industry', array('industry_id' => $data['industry_type'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+
+            $data['industry_name'] = trim($industry_name);
+        }
+        $recruiter = $this->db->get_where('recruiter', array('user_id' => $data['user_id'], 're_status' => '1','is_delete'=> '0'))->row();
+        if($recruiter->rec_id != ""){                
+            $data['rec_id'] = $recruiter->rec_id;
+        }
+
+        if($recruiter->rec_firstname != ""){                
+            $data['rec_firstname'] = $recruiter->rec_firstname;
+        }
+
+        if($recruiter->rec_lastname != ""){
+            $data['rec_lastname'] = $recruiter->rec_lastname;
+        }
+        if($recruiter->re_comp_name != "")
+        {
+            $data['rec_comp_name'] = $recruiter->re_comp_name;
+        }
+        if($recruiter->comp_logo != ""){                
+            $data['rec_comp_logo'] = $recruiter->comp_logo;
+        }
+
+		$insert_id1 = $this->common->insert_data_getid($data, 'rec_post_search_tmp');
+
 
 		if ($insert_id) {
 			$this->session->set_flashdata('success', 'your post inserted successfully');
@@ -1085,7 +1178,62 @@ class Recruiter extends MY_Controller {
 			'salary_type' => $this->input->post('salary_type'),
 			'modify_date' => date('y-m-d h:i:s')
 		);
-		$update = $this->common->update_data($data, 'rec_post', 'post_id', $id);
+		$update = $this->common->update_data($data, 'rec_post', 'post_id', $id);		
+		if(trim($data['post_name']) != "" && is_numeric($data['post_name']))
+        {
+            $post_name = $this->db->get_where('job_title', array('title_id' => $data['post_name']))->row()->name;
+
+            $data['post_name_txt'] = trim($post_name);
+        }
+        else if(trim($data['post_name']) != "")
+        {
+            $data['post_name_txt'] = trim($data['post_name']);
+        }
+
+        if($data['post_skill'] != "")
+        {
+            $skill_name1 = "";
+            foreach (explode(',',$data['post_skill']) as $skk => $skv) {
+                if($skv != "" && $skv != "26")
+                {
+                    $s_name1 = $this->db->get_where('skill', array('skill_id' => $skv, 'status' => '1'))->row()->skill;                    
+                    if(trim($s_name1) != "")
+                    {
+                        $skill_name1 .= $s_name1.",";
+                    }
+                }
+            }
+            $data['post_skill_txt'] = trim($skill_name1,",");
+        }
+        if(trim($data['country']) != "")
+        {
+            $country_name = $this->db->get_where('countries', array('country_id' => $data['country'], 'status' => '1'))->row()->country_name;
+
+            $data['country_name'] = trim($country_name);
+        }
+
+        if(trim($data['state']) != "")
+        {
+            $state_name = $this->db->get_where('states', array('state_id' => $data['state'], 'status' => '1'))->row()->state_name;
+
+            $data['state_name'] = trim($state_name);
+        }
+
+        if(trim($data['city']) != "")
+        {
+            $city_name = $this->db->get_where('cities', array('city_id' => $data['city'], 'status' => '1'))->row()->city_name;
+
+            $data['city_name'] = trim($city_name);
+        }
+
+        if(trim($data['industry_type']) != "")
+        {
+            $industry_name = $this->db->get_where('job_industry', array('industry_id' => $data['industry_type'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+
+            $data['industry_name'] = trim($industry_name);
+        }
+
+		$update1 = $this->common->update_data($data, 'rec_post_search_tmp', 'post_id', $id);
 
 		if ($update) {
 			$this->session->set_flashdata('success', 'your post updated successfully');

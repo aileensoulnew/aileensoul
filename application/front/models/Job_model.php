@@ -1712,7 +1712,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
 
             if(trim($value['industry_type']) != "")
             {
-                $industry_name = $this->db->get_where('industry_type', array('industry_id' => $value['industry_type'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
+                $industry_name = $this->db->get_where('job_industry', array('industry_id' => $value['industry_type'], 'status' => '1','is_delete'=> '0'))->row()->industry_name;
 
                 $value['industry_name'] = trim($industry_name);
             }
