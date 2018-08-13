@@ -1041,7 +1041,7 @@ class User_post_model extends CI_Model {
         if ($checkKeywordJobTitle['title_id'] != '') {
             $keywordJobTitle = $checkKeywordJobTitle['title_id'];
             $sql_ser .= " OR up.designation = '$keywordJobTitle'";
-            $sql_post .= " (FIND_IN_SET('" . $keywordJobTitle . "',uo.opportunity_for)";
+            $sql_post .= " OR FIND_IN_SET('" . $keywordJobTitle . "',uo.opportunity_for)";
         }
         $checkKeywordFieldList = $this->data_model->findFieldList($searchKeyword);
         if ($checkKeywordFieldList['industry_id'] != '') {
