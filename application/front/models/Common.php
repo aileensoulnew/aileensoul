@@ -626,6 +626,7 @@ class Common extends CI_Model {
 
         // Apply filter if any
         // Apply condition for filter
+        $userid = $this->session->userdata('aileenuser');
         $sql_filter = "";
         if(isset($filter_data['city_id']) && $filter_data['city_id'] != ""){
             $sql_filter .= " OR fpr.freelancer_post_city IN (". $filter_data['city_id'] .") AND fpr.freelancer_post_city > 0";
@@ -705,7 +706,7 @@ class Common extends CI_Model {
             FROM ailee_freelancer_post_reg fpr 
             LEFT JOIN ailee_freelancer_post as fp ON fp.user_id = fpr.user_id
             LEFT JOIN ailee_cities c on c.city_id = freelancer_post_city
-            WHERE fpr.user_id != 103 AND fpr.is_delete = '0' AND fpr.status = '1' AND fpr.free_post_step = '7'" 
+            WHERE fpr.user_id != '".$userid."' AND fpr.is_delete = '0' AND fpr.status = '1' AND fpr.free_post_step = '7'" 
             . $sql_final_search . $sql_filter;
 
         if($limit != ""){
@@ -795,7 +796,7 @@ class Common extends CI_Model {
             FROM ailee_freelancer_post_reg fpr 
             LEFT JOIN ailee_freelancer_post as fp ON fp.user_id = fpr.user_id
             LEFT JOIN ailee_cities c on c.city_id = freelancer_post_city
-            WHERE fpr.user_id != 103 AND fpr.is_delete = '0' AND fpr.status = '1' AND fpr.free_post_step = '7'" 
+            WHERE fpr.user_id != '".$userid."' AND fpr.is_delete = '0' AND fpr.status = '1' AND fpr.free_post_step = '7'" 
             . $sql_final_search . $sql_filter;
         $query = $this->db->query($sql);
         $result = $query->row_array();
