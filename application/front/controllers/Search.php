@@ -1625,10 +1625,13 @@ class Search extends MY_Controller {
         $unique = $this->common->get_search_results_total($search_skill,$search_place,$filter_array);
         // echo $unique["total_record"];
         // exit;
+        
+        $this->data['page'] = $page;
+        $this->data['total_record'] = $unique["total_record"];
+        $this->data['perpage'] = $perpage;
+        $this->data['freelancerpostdata1'] = $freelancerpostdata1;
         $feed_ads = $this->load->view('infeed_add','',TRUE);
-        if (empty($_GET["total_record"])) {
-            $_GET["total_record"] = $unique["total_record"];
-        }
+        
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
