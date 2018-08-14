@@ -3043,4 +3043,9 @@ class Freelancer_hire extends MY_Controller {
         return $count;
     }
 
+    public function freelancer_create_search_table()
+    {
+        $this->freelancer_hire_model->freelancer_create_search_table();
+    }
+
 }

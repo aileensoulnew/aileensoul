@@ -391,7 +391,7 @@ $userid = $this->session->userdata('aileenuser');
 	<div class="container">
 		<div class="search-mob-block">
 			<a href="#" data-toggle="modal" data-target="#fh_mob_search">
-				<input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Search..." />
+				<input type="search" id="tags1" name="skills" value="" placeholder="Search..." readonly/>
 			</a>
 		</div>
 	</div>
@@ -576,7 +576,7 @@ $userid = $this->session->userdata('aileenuser');
 
     function checkform()
     {    	
-    	if($("#d_tags").val() == "" && $("#searchplace").val() == "")
+    	if($("#d_tags").val().trim() == "" && $("#searchplace").val().trim() == "")
     	{    		
     		return false;
     	}

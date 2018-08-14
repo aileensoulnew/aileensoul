@@ -663,29 +663,21 @@ class Common extends CI_Model {
                 if($value != "")
                 {
                     $search_val = "%". $value . "%";
-                    $sql_skill .= "skill like '". $search_val ."' OR ";
-                    $sql_category .= "category_name LIKE '". $search_val ."' OR ";
+                    $sql_search_query .= ($sql_search_query == "") ? " AND (" : " OR ";
+                    $sql_search_query .= "fpr.freelancer_post_area_txt LIKE '". $search_val ."' OR ";
+                    $sql_search_query .= "fpr.freelancer_post_field_txt LIKE '". $search_val ."'";
                 } 
             }
-            if($sql_skill != ""){
-                $sql_skill = "fpr.freelancer_post_area IN 
-                                (select skill_id from ailee_skill where ". trim($sql_skill," OR ") . ")";
-            }
-            if($sql_category != ""){
-                $sql_category = "fpr.freelancer_post_area IN 
-                                (SELECT category_id FROM ailee_category WHERE ". trim($sql_category," OR ") . ")";
-            }
-            if($sql_skill != "" && $sql_category != ""){
-                $sql_search_query = " AND (".$sql_skill . " OR " .$sql_category .")";
-            }
+            // $sql_search_query = trim($sql_search_query," OR ");
+            $sql_search_query .= ($sql_search_query == "") ? "" : ")";
         }
         if($searchplace != ""){
             foreach (explode(",", $searchplace) as $key => $value) {
                 if($value != "")
                 {
                     $search_val = "%". $value . "%";
-                    $sql_searchplace .= ($sql_searchplace == "") ? "AND (" : " OR";
-                    $sql_searchplace .= " city_name like '". $search_val ."'";
+                    $sql_searchplace .= ($sql_searchplace == "") ? " AND (" : " OR";
+                    $sql_searchplace .= " fpr.city_name LIKE '". $search_val ."' OR fpr.state_name LIKE '". $search_val ."'";
                 }
             }
             $sql_searchplace .= ($sql_searchplace == "") ? "" : ")";
@@ -697,10 +689,8 @@ class Common extends CI_Model {
         }else{
             $sql_final_search = $sql_searchplace;
         }
-        $sql = "SELECT fpr.freelancer_post_reg_id,fpr.freelancer_post_fullname,fpr.freelancer_post_username,fpr.freelancer_post_city, fpr.freelancer_post_country,fpr.freelancer_post_area,fpr.freelancer_post_field, fpr.freelancer_post_skill_description,fpr.freelancer_post_hourly,fpr.freelancer_post_ratestate, fpr.freelancer_post_fixed_rate,fpr.freelancer_post_work_hour,fpr.user_id, fpr.freelancer_post_user_image,fpr.designation,fpr.freelancer_post_otherskill,fpr.freelancer_post_exp_month, fpr.freelancer_post_exp_year,fpr.freelancer_apply_slug,fpr.created_date, fpr.free_post_step
-            FROM ailee_freelancer_post_reg fpr 
-            LEFT JOIN ailee_freelancer_post as fp ON fp.user_id = fpr.user_id
-            LEFT JOIN ailee_cities c on c.city_id = freelancer_post_city
+        $sql = "SELECT fpr.freelancer_post_reg_id,fpr.freelancer_post_fullname,fpr.freelancer_post_username,fpr.freelancer_post_city,fpr.city_name,fpr.state_name,fpr.country_name, fpr.freelancer_post_country,fpr.freelancer_post_area,fpr.freelancer_post_area_txt as skills,fpr.freelancer_post_field,fpr.freelancer_post_field_txt as category_name, fpr.freelancer_post_skill_description,fpr.freelancer_post_hourly,fpr.freelancer_post_ratestate, fpr.freelancer_post_fixed_rate,fpr.freelancer_post_work_hour,fpr.user_id, fpr.freelancer_post_user_image,fpr.designation,fpr.freelancer_post_otherskill,fpr.freelancer_post_exp_month, fpr.freelancer_post_exp_year,fpr.freelancer_apply_slug,fpr.created_date, fpr.free_post_step
+            FROM ailee_freelancer_post_reg_search_tmp fpr
             WHERE fpr.user_id != '".$userid."' AND fpr.is_delete = '0' AND fpr.status = '1' AND fpr.free_post_step = '7'" 
             . $sql_final_search . $sql_filter;
         $sql .= " ORDER BY fpr.freelancer_post_reg_id DESC ";
@@ -752,29 +742,21 @@ class Common extends CI_Model {
                 if($value != "")
                 {
                     $search_val = "%". $value . "%";
-                    $sql_skill .= "skill like '". $search_val ."' OR ";
-                    $sql_category .= "category_name LIKE '". $search_val ."' OR ";
+                    $sql_search_query .= ($sql_search_query == "") ? " AND (" : " OR ";
+                    $sql_search_query .= "fpr.freelancer_post_area_txt LIKE '". $search_val ."' OR ";
+                    $sql_search_query .= "fpr.freelancer_post_field_txt LIKE '". $search_val ."'";
                 } 
             }
-            if($sql_skill != ""){
-                $sql_skill = "fpr.freelancer_post_area IN 
-                                (select skill_id from ailee_skill where ". trim($sql_skill," OR ") . ")";
-            }
-            if($sql_category != ""){
-                $sql_category = "fpr.freelancer_post_area IN 
-                                (SELECT category_id FROM ailee_category WHERE ". trim($sql_category," OR ") . ")";
-            }
-            if($sql_skill != "" && $sql_category != ""){
-                $sql_search_query = " AND (".$sql_skill . " OR " .$sql_category .")";
-            }
+            // $sql_search_query = trim($sql_search_query," OR ");
+            $sql_search_query .= ($sql_search_query == "") ? "" : ")";
         }
         if($searchplace != ""){
             foreach (explode(",", $searchplace) as $key => $value) {
                 if($value != "")
                 {
                     $search_val = "%". $value . "%";
-                    $sql_searchplace .= ($sql_searchplace == "") ? "AND (" : " OR";
-                    $sql_searchplace .= " city_name like '". $search_val ."'";
+                    $sql_searchplace .= ($sql_searchplace == "") ? " AND (" : " OR";
+                    $sql_searchplace .= " fpr.city_name LIKE '". $search_val ."' OR fpr.state_name LIKE '". $search_val ."'";
                 }
             }
             $sql_searchplace .= ($sql_searchplace == "") ? "" : ")";
@@ -786,12 +768,10 @@ class Common extends CI_Model {
         }else{
             $sql_final_search = $sql_searchplace;
         }
-        $sql = "SELECT count(fpr.freelancer_post_reg_id) as total_record
-            FROM ailee_freelancer_post_reg fpr 
-            LEFT JOIN ailee_freelancer_post as fp ON fp.user_id = fpr.user_id
-            LEFT JOIN ailee_cities c on c.city_id = freelancer_post_city
+        $sql = "SELECT count(*) as total_record
+            FROM ailee_freelancer_post_reg_search_tmp fpr
             WHERE fpr.user_id != '".$userid."' AND fpr.is_delete = '0' AND fpr.status = '1' AND fpr.free_post_step = '7'" 
-            . $sql_final_search . $sql_filter;
+            . $sql_final_search . $sql_filter;        
         $query = $this->db->query($sql);
         $result = $query->row_array();
         return $result;

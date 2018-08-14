@@ -9,8 +9,7 @@ if (count($freelancerpostdata1) > 0)
 {
     $counter = 1;
     foreach ($freelancerpostdata1 as $row)
-    {
-        ?>
+    { ?>
         <div class="profile-job-post-detail clearfix search">
             <div class="profile-job-post-title-inside clearfix">
                 <div class="profile-job-profile-button clearfix">
@@ -204,9 +203,8 @@ if (count($freelancerpostdata1) > 0)
                             <b>Field</b>
                             <span>
                                 <?php
-                                if ($row['freelancer_post_field']) {
-                                    $field_name = $this->db->get_where('category', array('category_id' => $row['freelancer_post_field']))->row()->category_name;
-                                    echo $field_name;
+                                if ($row['freelancer_post_field']) {                                    
+                                    echo $row['category_name'];
                                 } else {
                                     echo PROFILENA;
                                 } ?>
@@ -218,24 +216,12 @@ if (count($freelancerpostdata1) > 0)
                                 <?php
                                 $aud = $row['freelancer_post_area'];
                                 $aud_res = explode(',', $aud);
-                                if (!$row['freelancer_post_area']) {
-                                    $return_html .= $row['freelancer_post_otherskill'];
-                                } elseif (!$row['freelancer_post_otherskill']) {
-                                    foreach ($aud_res as $skill) {
-                                        $cache_time = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
-                                        $skillsss[] = $cache_time;
-                                    }
-                                    $listskill = implode(', ', $skillsss);
-                                    echo $listskill;
-                                    unset($skillsss);
-                                } elseif ($row['freelancer_post_area'] && $row['freelancer_post_otherskill']) {
-                                    foreach ($aud_res as $skillboth) {
-                                        $cache_time = $this->db->get_where('skill', array('skill_id' => $skillboth))->row()->skill;
-                                        $skilldddd[] = $cache_time;
-                                    }
-                                    $listFinal = implode(', ', $skilldddd);
-                                    echo $listFinal . "," . $row['freelancer_post_otherskill'];
-                                    unset($skilldddd);
+                                if (trim($row['skills']) != "") {
+                                    echo $row['skills'];
+                                }
+                                else
+                                {
+                                    echo PROFILENA;
                                 }
                                 ?>
                             </span>
@@ -243,15 +229,13 @@ if (count($freelancerpostdata1) > 0)
                         <li>
                             <b>Location</b>
                             <span>
-                                <?php
-                                $cityname = $this->db->get_where('cities', array('city_id' => $row['freelancer_post_city']))->row()->city_name;
-                                $countryname = $this->db->select('country_name')->get_where('countries', array('country_id' => $row['freelancer_post_country']))->row()->country_name;
-                                if ($cityname || $countryname) {
-                                    if ($cityname) {
-                                        echo $cityname . ",";
+                                <?php                                
+                                if ($row['city_name'] || $row['country_name']) {
+                                    if ($row['city_name']) {
+                                        echo $row['city_name'] . ",";
                                     }
-                                    if ($countryname) {
-                                        echo $countryname;
+                                    if ($row['country_name']) {
+                                        echo $row['country_name'];
                                     }
                                 }
                                 ?>
@@ -302,25 +286,24 @@ if (count($freelancerpostdata1) > 0)
                             <?php
                             if ($row['freelancer_post_exp_year'] || $row['freelancer_post_exp_month']) {
                                 if ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] == '') {
-                                    $return_html .= "1 year";
+                                    echo  "1 year";
                                 } elseif ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] == '0 year') {
-                                    $return_html .= "1 year";
+                                    echo  "1 year";
                                 } elseif ($row['freelancer_post_exp_month'] == '12 month' && $row['freelancer_post_exp_year'] != '') {
                                     $year = explode(' ', $row['freelancer_post_exp_year']);
                                     // echo $year;
                                     $totalyear = $year[0] + 1;
-                                    $return_html .= $totalyear . " year";
+                                    echo  $totalyear . " year";
                                 } elseif ($row['freelancer_post_exp_year'] != '' && $row['freelancer_post_exp_month'] == '') {
-                                    $return_html .= $row['freelancer_post_exp_year'];
+                                    echo  $row['freelancer_post_exp_year'];
                                 } elseif ($row['freelancer_post_exp_year'] != '' && $row['freelancer_post_exp_month'] == '0 month') {
 
-                                    $return_html .= $row['freelancer_post_exp_year'];
+                                    echo  $row['freelancer_post_exp_year'];
                                 } else {
-
-                                    $return_html .= $row['freelancer_post_exp_year'] . ' ' . $row['freelancer_post_exp_month'];
+                                    echo  $row['freelancer_post_exp_year'] . ' ' . $row['freelancer_post_exp_month'];
                                 }
                             } else {
-                                $return_html .= PROFILENA;
+                                echo  PROFILENA;
                             } ?>
                             </span>
                         </li>
@@ -374,14 +357,14 @@ if (count($freelancerpostdata1) > 0)
 else
 {?>
     <div class="text-center rio">
-        <h1 style="margin-bottom:11px;" class="page-heading  product-listing" >';
+        <h1 style="margin-bottom:11px;" class="page-heading  product-listing" >
             <?php echo $this->lang->line("oops_no_data"); ?>
         </h1>
         <p style="margin-left:4%;">
             <?php echo $this->lang->line("couldn_find"); ?>
         </p>
         <ul>
-            <li style="text-transform:none !important; list-style: none;">';
+            <li style="text-transform:none !important; list-style: none;">
             <?php echo $this->lang->line("right_keyword"); ?>
             </li>
         </ul>

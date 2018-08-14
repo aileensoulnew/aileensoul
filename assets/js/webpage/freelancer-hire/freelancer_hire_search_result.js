@@ -1,5 +1,7 @@
 
 var filter_selected_data = "";
+var isProcessing = false;
+var ajaxSearch;
 freelancerhire_search('',filter_selected_data, 1);
 app.controller('freelancerHireSearchController', function ($scope, $http) {
     $scope.categoryFilterList = {};
@@ -69,6 +71,7 @@ app.controller('freelancerHireSearchController', function ($scope, $http) {
         if(experience != ""){
             filter_selected_data += "&experience_id=" + experience;
         }
+        isProcessing = false;
         freelancerhire_search('filter',filter_selected_data, 1);        
     }
 });
@@ -103,8 +106,6 @@ $(document).ready(function () {
         }
     });    
 });
-var isProcessing = false;
-var ajaxSearch;
 function freelancerhire_search(from,filter_selected_data='',pagenum)
 {
     if(from == "filter" ){

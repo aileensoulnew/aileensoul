@@ -272,6 +272,12 @@
                 var skill = '<?php echo $this->input->get('skills'); ?>';
                 var place = '<?php echo $this->input->get('searchplace'); ?>';
             }
+            var keyword = "<?php echo $keyword; ?>";
+            var loca = "<?php echo $keyword1; ?>";
+            setTimeout(function(){                
+                $(".tags").val(keyword);
+                $(".searchplace").val(loca);
+            },1000);
             //LEAVE PAGE AT ADD AND EDIT FREELANCER PAGE THEN PROBLEM SO BELOW CODE END
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()) ?>"></script>

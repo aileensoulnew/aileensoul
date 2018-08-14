@@ -263,4 +263,61 @@ class Freelancer_hire_model extends CI_Model {
         $result_array = $query->first_row();
         return $result_array;
     }
+
+    public function freelancer_create_search_table()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        echo "<pre>";
+        $sql = "SELECT * from ailee_freelancer_post_reg WHERE is_delete = '0' AND status = '1' AND free_post_step = '7'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        // print_r($result_array);exit;
+        foreach ($result_array as $key => $value) {
+
+            if(trim($value['freelancer_post_field']) != "")
+            {
+                $field_name = $this->db->get_where('category', array('category_id' => $value['freelancer_post_field']))->row()->category_name;
+                $value['freelancer_post_field_txt'] = trim($field_name);
+            }            
+
+            if($value['freelancer_post_area'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$value['freelancer_post_area']) as $skk => $skv) {
+                    if($skv != "" && $skv != "26")
+                    {
+                        $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                }
+                $value['freelancer_post_area_txt'] = trim($skill_name,",");
+            }
+            if(trim($value['freelancer_post_country']) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $value['freelancer_post_country'], 'status' => '1'))->row()->country_name;
+
+                $value['country_name'] = trim($country_name);
+            }
+
+            if(trim($value['freelancer_post_state']) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $value['freelancer_post_state'], 'status' => '1'))->row()->state_name;
+
+                $value['state_name'] = trim($state_name);
+            }
+
+            if(trim($value['freelancer_post_city']) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $value['freelancer_post_city'], 'status' => '1'))->row()->city_name;
+
+                $value['city_name'] = trim($city_name);
+            }            
+            $this->db->insert('ailee_freelancer_post_reg_search_tmp', $value);
+        }
+        echo "Done";
+    }
 }
