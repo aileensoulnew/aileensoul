@@ -341,7 +341,7 @@ class Recruiter_model extends CI_Model {
             $sql .= "AND ".trim($sql_filter," AND ");
         }
 
-        $sql .= " ORDER BY jr.user_id DESC";
+        $sql .= " ORDER BY jr.job_id DESC";
         if($limit != '') {
             $sql .= " LIMIT $start, $limit";
         }
