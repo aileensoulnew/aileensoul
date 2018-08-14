@@ -1626,13 +1626,15 @@ class Search extends MY_Controller {
         // echo $unique["total_record"];
         // exit;
         
+        $this->data['userid'] = $userid;
         $this->data['page'] = $page;
         $this->data['total_record'] = $unique["total_record"];
         $this->data['perpage'] = $perpage;
         $this->data['freelancerpostdata1'] = $freelancerpostdata1;
-        $feed_ads = $this->load->view('infeed_add','',TRUE);
+        $this->data['feed_ads'] = $feed_ads = $this->load->view('infeed_add','',TRUE);
+        $this->load->view('freelancer_live/freelancer_hire/freelance_employer_search',$this->data);        
         
-        $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
+        /*$return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
@@ -1932,7 +1934,7 @@ class Search extends MY_Controller {
         }
         $return_html .= '<div class="col-md-1">
         </div>';
-        echo $return_html;
+        echo $return_html;*/
     }
 
     //freelancer hire ajax search end 

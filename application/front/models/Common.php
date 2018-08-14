@@ -697,23 +697,17 @@ class Common extends CI_Model {
         }else{
             $sql_final_search = $sql_searchplace;
         }
-        $sql = "SELECT fpr.freelancer_post_fullname,fpr.freelancer_post_username,fpr.freelancer_post_city,
-            fpr.freelancer_post_country,fpr.freelancer_post_area,fpr.freelancer_post_field,
-            fpr.freelancer_post_skill_description,fpr.freelancer_post_hourly,fpr.freelancer_post_ratestate,
-            fpr.freelancer_post_fixed_rate,fpr.freelancer_post_work_hour,fpr.user_id,
-            fpr.freelancer_post_user_image,fpr.designation,fpr.freelancer_post_otherskill,fpr.freelancer_post_exp_month,
-            fpr.freelancer_post_exp_year,fpr.freelancer_apply_slug,fpr.freelancer_post_reg_id,fp.created_date, fpr.free_post_step
+        $sql = "SELECT fpr.freelancer_post_reg_id,fpr.freelancer_post_fullname,fpr.freelancer_post_username,fpr.freelancer_post_city, fpr.freelancer_post_country,fpr.freelancer_post_area,fpr.freelancer_post_field, fpr.freelancer_post_skill_description,fpr.freelancer_post_hourly,fpr.freelancer_post_ratestate, fpr.freelancer_post_fixed_rate,fpr.freelancer_post_work_hour,fpr.user_id, fpr.freelancer_post_user_image,fpr.designation,fpr.freelancer_post_otherskill,fpr.freelancer_post_exp_month, fpr.freelancer_post_exp_year,fpr.freelancer_apply_slug,fpr.created_date, fpr.free_post_step
             FROM ailee_freelancer_post_reg fpr 
             LEFT JOIN ailee_freelancer_post as fp ON fp.user_id = fpr.user_id
             LEFT JOIN ailee_cities c on c.city_id = freelancer_post_city
             WHERE fpr.user_id != '".$userid."' AND fpr.is_delete = '0' AND fpr.status = '1' AND fpr.free_post_step = '7'" 
             . $sql_final_search . $sql_filter;
-
+        $sql .= " ORDER BY fpr.freelancer_post_reg_id DESC ";
         if($limit != ""){
             $sql .= " LIMIT $limitstart , $limit";
         }
-        // echo $sql;
-        // exit;
+        // echo $sql;exit;
         $query = $this->db->query($sql);
         $result = $query->result_array();
         return $result;

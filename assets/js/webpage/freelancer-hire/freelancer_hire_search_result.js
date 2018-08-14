@@ -1,4 +1,6 @@
+
 var filter_selected_data = "";
+freelancerhire_search('',filter_selected_data, 1);
 app.controller('freelancerHireSearchController', function ($scope, $http) {
     $scope.categoryFilterList = {};
     $scope.cityFilterList = {};
@@ -74,7 +76,7 @@ app.controller('freelancerHireSearchController', function ($scope, $http) {
 
 //CODE FOR RESPONES OF AJAX COME FROM CONTROLLER AND LAZY LOADER START
 $(document).ready(function () {
-    freelancerhire_search('',filter_selected_data, 1);
+    //freelancerhire_search('',filter_selected_data, 1);
 
     $(window).scroll(function () {
         
