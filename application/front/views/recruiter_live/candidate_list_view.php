@@ -2,9 +2,9 @@
 <input class="total_record" type="hidden" value="<?php echo $total_record; ?>"/>
 <input class="perpage_record" type="hidden" value="<?php echo $perpage; ?>"/>
 <?php
-if (isset($seach_data) && !empty($seach_data)) {
+if (isset($search_data) && !empty($search_data)) {
 	$counter = 1;
-	foreach ($seach_data as $row) {
+	foreach ($search_data as $row) {
 	?>
 	<div class="profile-job-post-detail clearfix">
 	    <div class="profile-job-post-title-inside clearfix">

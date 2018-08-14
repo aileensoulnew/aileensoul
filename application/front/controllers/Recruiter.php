@@ -1626,7 +1626,7 @@ class Recruiter extends MY_Controller {
 			$this->data['page'] = $page;
 			$this->data['total_record'] = $recommen_candid_totrec;
 			$this->data['perpage'] = $perpage;
-			$this->data['seach_data'] = $candidatejob1;
+			$this->data['search_data'] = $candidatejob1;
 			$this->load->view('recruiter_live/candidate_list_view', $this->data);
 
 			/*if (isset($candidatejob1) && !empty($candidatejob1)) {
@@ -6494,7 +6494,7 @@ class Recruiter extends MY_Controller {
 		$this->data['page'] = $page;
 		$this->data['total_record'] = $recommen_candid_totrec["total_record"];
 		$this->data['perpage'] = $perpage;
-		$this->data['seach_data'] = $candidatejob1;
+		$this->data['search_data'] = $candidatejob1;
 		$this->load->view('recruiter_live/candidate_list_view', $this->data);
 
 
