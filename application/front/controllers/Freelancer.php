@@ -567,7 +567,7 @@ class Freelancer extends MY_Controller {
                 }
                 if (count($skills) > 0) {
                     foreach ($skills as $ski) {
-                        if ($ski != " ") {
+                        if (trim($ski) != "") {
                             $contition_array = array('skill' => trim($ski), 'type' => '1');
                             $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
                             if (count($skilldata) < 0) {
@@ -2795,9 +2795,50 @@ class Freelancer extends MY_Controller {
                     'is_delete' => '0',
                     'free_post_step' => '7'
                 );
-                $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');
-
+                $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');                
                 if ($insert_id) {
+                    if(trim($data['freelancer_post_field']) != "")
+                    {
+                        $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
+                        $data['freelancer_post_field_txt'] = trim($field_name);
+                    }            
+
+                    if($data['freelancer_post_area'] != "")
+                    {
+                        $skill_name = "";
+                        foreach (explode(',',$data['freelancer_post_area']) as $skk => $skv) {
+                            if($skv != "" && $skv != "26")
+                            {
+                                $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                                if(trim($s_name) != "")
+                                {
+                                    $skill_name .= $s_name.",";
+                                }
+                            }
+                        }
+                        $data['freelancer_post_area_txt'] = trim($skill_name,",");
+                    }
+                    if(trim($data['freelancer_post_country']) != "")
+                    {
+                        $country_name = $this->db->get_where('countries', array('country_id' => $data['freelancer_post_country'], 'status' => '1'))->row()->country_name;
+
+                        $data['country_name'] = trim($country_name);
+                    }
+
+                    if(trim($data['freelancer_post_state']) != "")
+                    {
+                        $state_name = $this->db->get_where('states', array('state_id' => $data['freelancer_post_state'], 'status' => '1'))->row()->state_name;
+
+                        $data['state_name'] = trim($state_name);
+                    }
+
+                    if(trim($data['freelancer_post_city']) != "")
+                    {
+                        $city_name = $this->db->get_where('cities', array('city_id' => $data['freelancer_post_city'], 'status' => '1'))->row()->city_name;
+
+                        $data['city_name'] = trim($city_name);
+                    }
+                    $insert_id1 = $this->common->insert_data_getid($data, 'freelancer_post_reg_search_tmp');
 
                     if ($postliveid) {
                         $id = trim($postliveid);
@@ -3066,12 +3107,11 @@ class Freelancer extends MY_Controller {
             $experience_year = trim($_POST['experience_year']);
             $experience_month = trim($_POST['experience_month']);
             $phoneno = trim($_POST['phoneno']);
-            $skills = trim($_POST['skills']);
-
+            $skill1 = trim($_POST['skills']);
             $skills = explode(',', $skill1);
             if (count($skills) > 0) {
-                foreach ($skills as $ski) {
-                    if ($ski != " ") {
+                foreach ($skills as $skk=>$ski) {
+                    if (trim($ski) != "") {
                         $contition_array = array('skill' => trim($ski), 'type' => '1');
                         $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
                         if (count($skilldata) < 0) {
@@ -3114,9 +3154,50 @@ class Freelancer extends MY_Controller {
                 'is_delete' => '0',
                 'free_post_step' => '7'
             );
-            $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');
+            $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');            
+            if ($insert_id) {                
+                if(trim($data['freelancer_post_field']) != "")
+                {
+                    $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
+                    $data['freelancer_post_field_txt'] = trim($field_name);
+                }            
 
-            if ($insert_id) {
+                if($data['freelancer_post_area'] != "")
+                {
+                    $skill_name = "";
+                    foreach (explode(',',$data['freelancer_post_area']) as $skk => $skv) {
+                        if($skv != "")
+                        {
+                            $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                            if(trim($s_name) != "")
+                            {
+                                $skill_name .= $s_name.",";
+                            }
+                        }
+                    }
+                    $data['freelancer_post_area_txt'] = trim($skill_name,",");
+                }
+                if(trim($data['freelancer_post_country']) != "")
+                {
+                    $country_name = $this->db->get_where('countries', array('country_id' => $data['freelancer_post_country'], 'status' => '1'))->row()->country_name;
+
+                    $data['country_name'] = trim($country_name);
+                }
+
+                if(trim($data['freelancer_post_state']) != "")
+                {
+                    $state_name = $this->db->get_where('states', array('state_id' => $data['freelancer_post_state'], 'status' => '1'))->row()->state_name;
+
+                    $data['state_name'] = trim($state_name);
+                }
+
+                if(trim($data['freelancer_post_city']) != "")
+                {
+                    $city_name = $this->db->get_where('cities', array('city_id' => $data['freelancer_post_city'], 'status' => '1'))->row()->city_name;
+
+                    $data['city_name'] = trim($city_name);
+                }                
+                $insert_id1 = $this->common->insert_data_getid($data, 'freelancer_post_reg_search_tmp');
                 $data = array("is_success" => 1);
             }
             else
