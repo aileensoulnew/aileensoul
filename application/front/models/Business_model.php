@@ -204,7 +204,7 @@ class Business_model extends CI_Model {
 
 
         $tot_sql = $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, bp.company_name, bp.country, bp.details, bp.contact_website, bp.industry_name, bp.city_name AS city, bp.country_name AS country, IF (bp.city != '',CONCAT(bp.business_slug, '-', bp.city_name),IF(bp.state_name != '',CONCAT(bp.business_slug, '-', bp.state_name),CONCAT(bp.business_slug, '-', bp.country_name))) AS business_slug 
-            FROM ailee_business_profile_searc_tmp bp                 
+            FROM ailee_business_profile_search_tmp bp                 
             WHERE bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step = '4'"
             . $sqlkeyword .$sqlcategoryfilter . $sqllocation . $sqllocationfilter;
 
@@ -834,7 +834,7 @@ class Business_model extends CI_Model {
 
                 $value['city_name'] = trim($city_name);
             }
-            $this->db->insert('ailee_business_profile_searc_tmp', $value);
+            $this->db->insert('ailee_business_profile_search_tmp', $value);
         }
         echo "Done";
     }

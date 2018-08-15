@@ -272,7 +272,7 @@ class Business_profile_registration extends MY_Controller {
 
                     $data['city_name'] = trim($city_name);
                 }
-                $insert_id1 = $this->common->insert_data_getid($data, 'business_profile_searc_tmp');
+                $insert_id1 = $this->common->insert_data_getid($data, 'business_profile_search_tmp');
                 if ($insert_id) {
                     $data['is_success'] = 1;
                 } else {
@@ -308,7 +308,7 @@ class Business_profile_registration extends MY_Controller {
 
                     $data['city_name'] = trim($city_name);
                 }
-                $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+                $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
                 if ($updatdata) {
                     $data['is_success'] = 1;
                 } else {
@@ -389,7 +389,7 @@ class Business_profile_registration extends MY_Controller {
                 $data['business_step'] = '2';
             }
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-            $updatdata = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+            $updatdata = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
             if ($updatdata) {
                 $data['is_success'] = 1;
             } else {
@@ -487,7 +487,7 @@ class Business_profile_registration extends MY_Controller {
 
                 $data['industry_name'] = trim($industriyal);
             }
-            $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+            $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
             if ($updatdata) {
                 $data['is_success'] = 1;
             } else {
@@ -730,14 +730,14 @@ class Business_profile_registration extends MY_Controller {
                         'business_step' => '4'
                     );
                     $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                    $updatdata1 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+                    $updatdata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
                 } else {
                     $data = array(
                         'modified_date' => date('Y-m-d H:i:s', time()),
                         'business_step' => '4'
                     );
                     $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                    $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+                    $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
                 }
             }
         } else {
@@ -746,7 +746,7 @@ class Business_profile_registration extends MY_Controller {
                 'business_step' => '4'
             );
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-            $updatdata3 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+            $updatdata3 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
         }
         if ($updatdata) {
             $data['is_success'] = 1;
@@ -1020,7 +1020,7 @@ class Business_profile_registration extends MY_Controller {
 
                 $data['city_name'] = trim($city_name);
             }
-            $insert_id = $this->common->insert_data_getid($data, 'business_profile_searc_tmp');
+            $insert_id = $this->common->insert_data_getid($data, 'business_profile_search_tmp');
 
             $config = array(
                 'upload_path' => $this->config->item('bus_profile_main_upload_path'),
@@ -1186,14 +1186,14 @@ class Business_profile_registration extends MY_Controller {
                             'business_step' => '4'
                         );
                         $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                        $updatdata1 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+                        $updatdata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
                     } else {
                         $data = array(
                             'modified_date' => date('Y-m-d H:i:s', time()),
                             'business_step' => '4'
                         );
                         $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                        $updatdata1 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+                        $updatdata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
                     }
                 }
             }
@@ -1204,7 +1204,7 @@ class Business_profile_registration extends MY_Controller {
                     'business_step' => '4'
                 );
                 $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
-                $updatdata2 = $this->common->update_data($data, 'business_profile_searc_tmp', 'user_id', $userid);
+                $updatdata2 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
             }
             if ($updatdata) {
                 $data['is_success'] = 1;
