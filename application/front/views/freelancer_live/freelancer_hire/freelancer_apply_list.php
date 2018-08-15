@@ -311,6 +311,7 @@
             <!-- <script src="<?php // echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"> -->
             </script>
         <?php } ?>
+        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
         </script>
