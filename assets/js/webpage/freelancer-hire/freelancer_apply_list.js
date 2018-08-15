@@ -35,6 +35,27 @@ function save_user(abc) {
 }
 //SAVE USER END
 
+function shortlistpopup(e) {
+    short_user(e), $(".biderror .mes").html("<div class='pop_content'>Freelancer successfully Shortlisted."), $("#bidmodal").modal("show")
+}
+
+function short_user(e) {
+    var t = document.getElementById("hideenpostid");
+    $.ajax({
+        type: "POST",
+        url: base_url + "freelancer_hire/shortlist_user",
+        data: "user_id=" + e + "&post_id=" + t.value,
+        dataType: "json",
+        success: function(t) {
+            if ($(".saveduser" + e).html(t.status).addClass("saved"), 0 != t.notification.notification_count) {
+                var o = t.notification.notification_count,
+                    n = t.notification.to_id;
+                show_header_notification(o, n)
+            }
+        }
+    })
+}
+
 //INVITE USER START
  // function inviteuserpopup(abc){
 //    $('.biderror .mes').html("<div class='pop_content'>Do you want to select this freelancer for your project?<div class='model_ok_cancel'><a class='okbtn' id=" + abc + " onClick='inviteuser(" + abc + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
