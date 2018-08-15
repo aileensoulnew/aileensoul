@@ -580,7 +580,7 @@ class Freelancer_apply_model extends CI_Model {
             }
         }
 
-        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
+        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) AND afa.job_delete = '0' AND afa.job_save = '3' ) As AppliedCount,fp.created_date,post_rate,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
         $this->db->select($select_data)->from('freelancer_post fp');
         $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
         $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
@@ -621,7 +621,7 @@ class Freelancer_apply_model extends CI_Model {
             $sql = "(".trim($sql, ' OR ').")";
             $this->db->where($sql,false,false);
         }
-        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1'));
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1','fp.user_id != '=>$userid));
         // $this->db->group_by('fp.post_skill,fp.post_id');
         $this->db->order_by('fp.post_id','desc');
         if($limit != "")

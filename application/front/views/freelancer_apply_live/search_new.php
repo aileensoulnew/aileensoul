@@ -125,7 +125,21 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 						<?php //$this->load->view('banner_add'); ?>
 					</div> -->
                     <div class="page-title">
-                        <h3>Search Result</h3>
+                        <h3>Search Result for "<?php
+                        if(trim($q) != "" && trim($l) != "")
+                        {                            
+                         echo $q." in ".$l;
+                        }
+                        else if(trim($q) != "")
+                        {
+                            echo $q;
+                        }
+                        else if(trim($l) != "")
+                        {
+                            echo $l;   
+                        }
+                        ?>"
+                        </h3>
                     </div>
                     <div class="user_no_post_avl ng-scope" ng-if="freepostapply.length == 0">
                         <div class="user-img-nn">
@@ -178,8 +192,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </p>
                         </div>
                         <div class="all-job-bottom">
-                            <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: {{applypost.ShortListedCount}}</span>
-                            <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: {{applypost.AppliedCount}}</span></span>
+                            <span class="hw-479"><span>Applied<span class="hidden-479"> Persons</span>: {{applypost.AppliedCount}}</span>
+                            <span class="pl20">Shortlisted<span class="hidden-479"> Persons</span>: {{applypost.ShortListedCount}}</span></span>
                             <p class="pull-right" ng-if="applypost.apply_post == 1">
                                 <a href="javascript:void(0);" class="btn4 applied">Applied</a>
                             </p>
@@ -198,12 +212,14 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                             </p>
                         </div>
                     </div>
+                    <?php if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") { ?>
                     <div ng-if="(frIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                         <div class="tab-add">
                             <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense>
                             <?php //$this->load->view('infeed_add'); ?>
                         </div>
                     </div>
+                    <?php } ?>
                     </div>
 					<!-- <div class="banner-add">
 						<?php //$this->load->view('banner_add'); ?>

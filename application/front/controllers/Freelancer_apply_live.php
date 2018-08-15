@@ -506,7 +506,8 @@ class Freelancer_apply_live extends MY_Controller {
             $this->data['q'] = $_GET['q'];
             $this->data['l'] = $_GET['l'];
         }
-
+        $this->data['keyword'] = $this->data['q'];
+        $this->data['location'] = $this->data['l'];
         // Replace - with ,
         $this->data['q'] = str_replace("-",",",$this->data['q']);
         $this->data['l'] = str_replace("-",",",$this->data['l']);
