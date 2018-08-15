@@ -130,16 +130,19 @@ class Freelancer extends MY_Controller {
                         'free_post_step' => '7'
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 } else if ($userdata[0]['free_post_step'] > 1) {
                     $data = array(
                         'free_post_step' => $userdata[0]['free_post_step']
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 } else {
                     $data = array(
                         'free_post_step' => '1'
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 }
 
                 $data = array(
@@ -154,6 +157,7 @@ class Freelancer extends MY_Controller {
                 );
 
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 if ($updatedata) {
                     if ($postid) {
                         redirect('freelancer/address-information/' . $postid, refresh);
@@ -184,6 +188,7 @@ class Freelancer extends MY_Controller {
                 );
 
                 $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');
+                $insert_id1 = $this->common->insert_data_getid($data, 'freelancer_post_reg_search_tmp');
                 if ($insert_id) {
                     if ($postid) {
                         redirect('freelancer/address-information/' . $postid, refresh);
@@ -401,16 +406,19 @@ class Freelancer extends MY_Controller {
                         'free_post_step' => '7'
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 } else if ($userdata[0]['free_post_step'] > 2) {
                     $data = array(
                         'free_post_step' => $userdata[0]['free_post_step']
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 } else {
                     $data = array(
                         'free_post_step' => '2'
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 }
                 $data = array(
                     'freelancer_post_country' => trim($this->input->post('country')),
@@ -421,6 +429,27 @@ class Freelancer extends MY_Controller {
                 );
                 $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
                 if ($updatdata) {
+                    if(trim($data['freelancer_post_country']) != "")
+                    {
+                        $country_name = $this->db->get_where('countries', array('country_id' => $data['freelancer_post_country'], 'status' => '1'))->row()->country_name;
+
+                        $data['country_name'] = trim($country_name);
+                    }
+
+                    if(trim($data['freelancer_post_state']) != "")
+                    {
+                        $state_name = $this->db->get_where('states', array('state_id' => $data['freelancer_post_state'], 'status' => '1'))->row()->state_name;
+
+                        $data['state_name'] = trim($state_name);
+                    }
+
+                    if(trim($data['freelancer_post_city']) != "")
+                    {
+                        $city_name = $this->db->get_where('cities', array('city_id' => $data['freelancer_post_city'], 'status' => '1'))->row()->city_name;
+
+                        $data['city_name'] = trim($city_name);
+                    } 
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                     if ($postid) {
                         redirect('freelancer/professional-information/' . $postid, refresh);
                     } else {
@@ -521,17 +550,20 @@ class Freelancer extends MY_Controller {
                         'free_post_step' => '7'
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 } else if ($userdata[0]['free_post_step'] > 3) {
                     $data = array(
                         'free_post_step' => $userdata[0]['free_post_step']
                     );
 
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 } else {
                     $data = array(
                         'free_post_step' => '3'
                     );
                     $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                 }
                 if (count($skills) > 0) {
                     foreach ($skills as $ski) {
@@ -569,6 +601,29 @@ class Freelancer extends MY_Controller {
                 );
                 $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
                 if ($updatdata) {
+
+                    if(trim($data['freelancer_post_field']) != "")
+                    {
+                        $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
+                        $data['freelancer_post_field_txt'] = trim($field_name);
+                    }            
+
+                    if($data['freelancer_post_area'] != "")
+                    {
+                        $skill_name = "";
+                        foreach (explode(',',$data['freelancer_post_area']) as $skk => $skv) {
+                            if($skv != "" && $skv != "26")
+                            {
+                                $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                                if(trim($s_name) != "")
+                                {
+                                    $skill_name .= $s_name.",";
+                                }
+                            }
+                        }
+                        $data['freelancer_post_area_txt'] = trim($skill_name,",");
+                    }
+                    $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
                     if ($postid) {
                         redirect('freelancer/rate/' . $postid, refresh);
                     } else {
@@ -637,6 +692,7 @@ class Freelancer extends MY_Controller {
                 );
             }
             $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+            $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
 
             $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
             $userdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -645,16 +701,19 @@ class Freelancer extends MY_Controller {
                     'free_post_step' => '7'
                 );
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             } else if ($userdata[0]['free_post_step'] > 4) {
                 $data = array(
                     'free_post_step' => $userdata[0]['free_post_step']
                 );
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             } else {
                 $data = array(
                     'free_post_step' => '4'
                 );
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             }
             $data = array(
                 'freelancer_post_hourly' => trim($this->input->post('hourly')),
@@ -662,6 +721,7 @@ class Freelancer extends MY_Controller {
                 'modify_date' => date('Y-m-d', time())
             );
             $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+            $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             if ($updatdata) {
                 // $this->session->set_flashdata('success', 'Rate information updated successfully');
                 if ($postid) {
@@ -728,16 +788,19 @@ class Freelancer extends MY_Controller {
                     'free_post_step' => '7'
                 );
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             } else if ($userdata[0]['free_post_step'] > 5) {
                 $data = array(
                     'free_post_step' => $userdata[0]['free_post_step']
                 );
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             } else {
                 $data = array(
                     'free_post_step' => '5'
                 );
                 $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+                $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             }
             $data = array(
                 'freelancer_post_job_type' => trim($this->input->post('job_type')),
@@ -746,6 +809,7 @@ class Freelancer extends MY_Controller {
             );
 
             $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+            $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
             if ($updatdata) {
                 if ($postid) {
                     redirect('freelancer/education/' . $postid, refresh);
@@ -890,16 +954,19 @@ class Freelancer extends MY_Controller {
                 'free_post_step' => '7'
             );
             $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+            $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
         } else if ($userdata[0]['free_post_step'] > 6) {
             $data = array(
                 'free_post_step' => $userdata[0]['free_post_step']
             );
             $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+            $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
         } else {
             $data = array(
                 'free_post_step' => '6'
             );
             $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+            $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
         }
         $data = array(
             'freelancer_post_degree' => trim($this->input->post('degree')),
@@ -911,6 +978,7 @@ class Freelancer extends MY_Controller {
             'modify_date' => date('Y-m-d', time())
         );
         $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
         if ($updatdata) {
             // $this->session->set_flashdata('success', 'Education information updated successfully');
             if ($postid) {
@@ -1021,6 +1089,7 @@ class Freelancer extends MY_Controller {
             'free_post_step' => '7'
         );
         $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
     }
 
     //FREELANCER_APPLY PORTFOLIO PAGE DATA INSERT END
@@ -1869,9 +1938,11 @@ class Freelancer extends MY_Controller {
         $main_image = $user_bg_path . $imageName;
         $main_image_size = filesize($main_image);
 
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-        $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+        if (IMAGEPATHFROM == 's3bucket') {
+            $s3 = new S3(awsAccessKey, awsSecretKey);
+            $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+            $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+        }
 
         $user_thumb_path = $this->config->item('free_post_profile_thumb_upload_path');
         $user_thumb_width = $this->config->item('free_post_profile_thumb_width');
@@ -1879,13 +1950,16 @@ class Freelancer extends MY_Controller {
 
         $thumb_image = $user_thumb_path . $imageName;
         copy($main_image, $thumb_image);
-        $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+        if (IMAGEPATHFROM == 's3bucket') {
+            $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+        }
 
         $data = array(
             'freelancer_post_user_image' => $imageName
         );
 
         $update = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
         if ($_server['HTTP_HOST'] != 'localhost') {
             if (isset($main_image)) {
                 unlink($main_image);
@@ -1899,7 +1973,7 @@ class Freelancer extends MY_Controller {
             $contition_array = array('user_id' => $userid, 'status' => '1', 'is_delete' => '0');
             $freelancerpostdata = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data = 'freelancer_post_user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
             $userimage .= '<img src="' . FREE_POST_PROFILE_MAIN_UPLOAD_URL . $freelancerpostdata[0]['freelancer_post_user_image'] . '" alt="User Image" >';
-            $userimage .= '<a title = "update profile pic" href="javascript:void(0);" onclick="updateprofilepopup();" class="cusome_upload"><img alt="Upload profile pic" src="' . base_url('../assets/img/cam.png') . '">';
+            $userimage .= '<a title = "update profile pic" href="javascript:void(0);" onclick="updateprofilepopup();" class="cusome_upload"><img alt="Upload profile pic" src="' . base_url('assets/img/cam.png') . '">';
             $userimage .= $this->lang->line("update_profile_picture");
             $userimage .= '</a>';
 
@@ -2046,6 +2120,7 @@ class Freelancer extends MY_Controller {
         );
 
         $update = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
 
         if ($_SERVER['HTTP_HOST'] != 'localhost') {
             if (isset($main_image)) {
@@ -2093,6 +2168,7 @@ class Freelancer extends MY_Controller {
         );
 
         $updatedata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
 
         if ($updatedata) {
             echo $userid;
@@ -2112,6 +2188,7 @@ class Freelancer extends MY_Controller {
         );
 
         $updatdata = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $userid);
+        $this->common->update_data($data, 'freelancer_post_reg_search_tmp', 'user_id', $userid);
 
         if ($updatdata) {
 
