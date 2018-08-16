@@ -2297,7 +2297,7 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 	$this->data['recommandedpost'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
 
-	$join_str = array(array(
+	/*$join_str = array(array(
 		'join_type' => '',
 		'table' => 'freelancer_apply',
 		'join_table_id' => 'freelancer_post_reg.user_id',
@@ -2307,9 +2307,13 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 		'table' => 'save',
 		'join_table_id' => 'freelancer_post_reg.user_id',
 		'from_table_id' => 'save.to_id')
-	);
+	);*/
+	$join_str[0]['table'] = 'save';
+	$join_str[0]['join_table_id'] = 'freelancer_post_reg.user_id';
+	$join_str[0]['from_table_id'] = 'save.to_id';
+	$join_str[0]['join_type'] = '';
 
-	$contition_array = array('freelancer_apply.post_id' => $postid, 'freelancer_apply.is_delete' => '0', 'save.from_id' => $userid, 'save.save_type' => '2', 'save.status' => '2');
+	$contition_array = array('save.post_id' => $postid, 'save.from_id' => $userid, 'save.save_type' => '2', 'save.status' => '2');
 	$data = 'freelancer_post_reg.user_id, freelancer_post_reg.freelancer_apply_slug, freelancer_post_reg.freelancer_post_fullname, freelancer_post_reg.freelancer_post_username, freelancer_post_reg.designation,freelancer_post_reg.freelancer_post_user_image,freelancer_post_reg.freelancer_apply_slug';
 	$shortlist = $this->data['shortlist'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data, $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
 

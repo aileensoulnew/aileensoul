@@ -2663,7 +2663,7 @@ class Freelancer_hire extends MY_Controller {
         $word = 'Shortlisted';
         $userid = $this->session->userdata('aileenuser');
         //this condition for prevent dublicate entry of save
-        $contition_array = array('from_id' => $userid, 'to_id' => $saveuser_id, 'save_type' => '2');
+        $contition_array = array('post_id' => $post_id,'from_id' => $userid, 'to_id' => $saveuser_id, 'save_type' => '2');
         $usershortlist = $this->common->select_data_by_condition('save', $contition_array, $data = 'save_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
         $save_id = $usershortlist[0]['save_id'];
