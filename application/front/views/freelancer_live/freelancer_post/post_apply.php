@@ -352,8 +352,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
                                         </p>
                                     </div>
                                     <div class="all-job-bottom">
-                                        <p class="pull-left hw-479"><span>Applied Persons: {{applypost.ShortListedCount}}</span>
-                                        <span class="pl20">Shortlisted Persons: {{applypost.AppliedCount}}</span>
+                                        <p class="pull-left hw-479"><span>Applied Persons: {{applypost.AppliedCount}}</span>
+                                        <span class="pl20">Shortlisted Persons: {{applypost.ShortListedCount}}</span>
 										</p>
                                         <p class="pull-right" ng-if="applypost.apply_post == 1">
                                             <a href="javascript:void(0);" class="btn4 applied">Applied</a>
