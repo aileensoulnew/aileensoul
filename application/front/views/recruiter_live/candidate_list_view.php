@@ -310,21 +310,22 @@ elseif($total_record == 0)
 			<h4 class="page-heading  product-listing" style="border:0px;"> It will takes only few minutes.</h4>
 		</div>
 		<div  class="add-post-button add-post-custom">
-			<a title="Post a Job" class="btn btn-3 btn-3b"  href="' . base_url() . 'post-job"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
+			<a title="Post a Job" class="btn btn-3 btn-3b"  href="<?php echo base_url().'post-job';?>"><i class="fa fa-plus" aria-hidden="true"></i>  Post a Job</a>
 		</div>
 	</div>
 <?php
 }
-elseif($isfilterapply == false && $page == 1)
-{ ?>
+elseif($isfilterapply == false)
+{ 
+	if($page == 1): ?>
 	<div class="art-img-nn border1">
 	    <div class="art_no_post_img">
-			<img src="' . base_url() . 'assets/img/job-no1.png" alt="nojobimage">
+			<img src="<?php echo base_url() . 'assets/img/job-no1.png';?>" alt="nojobimage">
 		</div>
 		<div class="art_no_post_text">
 			No Recommended  Candidate  Available.
 		</div>
 	</div>
-<?php
+<?php endif;
 } ?>
 <div class="col-md-1"></div>

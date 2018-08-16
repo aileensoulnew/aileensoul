@@ -104,7 +104,21 @@ class Recruiter_model extends CI_Model {
             }
         }
 
-        $sql = "SELECT COUNT(*) as total_record FROM ailee_job_reg LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id WHERE ailee_job_reg.is_delete = '0' AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10'". $sql_filter ." ORDER BY job_id DESC";
+        $sql = "SELECT COUNT(*) as total_record FROM ailee_job_reg LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id WHERE ailee_job_reg.is_delete = '0' AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10' AND 
+            ailee_job_reg.job_id IN (
+                    SELECT DISTINCT j.job_id FROM( 
+                        SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.keyskill REGEXP concat('[[:<:]](', REPLACE(rp.post_skill, ',', '|'), ')[[:>:]]') AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+
+                    UNION
+
+                    SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_title = rp.post_name AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+
+                    UNION
+
+                    SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_industry = rp.industry_type AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+                    ) as j ORDER BY j.job_id DESC
+
+                )". $sql_filter ." ORDER BY job_id DESC";
        
         $query = $this->db->query($sql);        
         // echo $this->db->last_query();exit;
@@ -148,7 +162,7 @@ class Recruiter_model extends CI_Model {
         $sql = "SELECT count(*) as count, jt.name, jt.title_id, false as isselected
                 FROM ailee_job_reg jr
                 left join ailee_job_title as jt on jt.title_id = jr.work_job_title
-                where jt.name IS NOT NULL and jr.status = 1 and jt.name != 'Others' 
+                where jt.name IS NOT NULL AND jt.name != '' AND jr.status = 1 AND jt.name != 'Others' 
                 group by jt.name
                 order by count desc LIMIT ". $limitstart .",". $limit;
         $query = $this->db->query($sql);
@@ -226,7 +240,21 @@ class Recruiter_model extends CI_Model {
             }
         }
 
-        $sql = "SELECT ailee_job_reg.user_id as iduser, ailee_job_reg.fname, ailee_job_reg.lname, ailee_job_reg.email, ailee_job_reg.phnno, ailee_job_reg.language, ailee_job_reg.keyskill, ailee_job_reg.experience, ailee_job_reg.job_user_image, ailee_job_reg.designation, ailee_job_reg.work_job_title, ailee_job_reg.work_job_industry, ailee_job_reg.work_job_city, ailee_job_reg.slug, ailee_job_add_edu.degree, ailee_job_add_edu.stream, ailee_job_add_edu.board_primary, ailee_job_add_edu.board_secondary, ailee_job_add_edu.board_higher_secondary, ailee_job_add_edu.percentage_primary, ailee_job_add_edu.percentage_secondary, ailee_job_add_edu.percentage_higher_secondary, ailee_job_reg.exp_y,ailee_job_reg.exp_m FROM ailee_job_reg LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id WHERE ailee_job_reg.is_delete = '0' AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10'" . $sql_filter;
+        $sql = "SELECT ailee_job_reg.user_id as iduser, ailee_job_reg.fname, ailee_job_reg.lname, ailee_job_reg.email, ailee_job_reg.phnno, ailee_job_reg.language, ailee_job_reg.keyskill, ailee_job_reg.experience, ailee_job_reg.job_user_image, ailee_job_reg.designation, ailee_job_reg.work_job_title, ailee_job_reg.work_job_industry, ailee_job_reg.work_job_city, ailee_job_reg.slug, ailee_job_add_edu.degree, ailee_job_add_edu.stream, ailee_job_add_edu.board_primary, ailee_job_add_edu.board_secondary, ailee_job_add_edu.board_higher_secondary, ailee_job_add_edu.percentage_primary, ailee_job_add_edu.percentage_secondary, ailee_job_add_edu.percentage_higher_secondary, ailee_job_reg.exp_y,ailee_job_reg.exp_m FROM ailee_job_reg LEFT JOIN ailee_job_add_edu ON ailee_job_reg.user_id=ailee_job_add_edu.user_id WHERE ailee_job_reg.is_delete = '0' AND ailee_job_reg.status = '1' AND ailee_job_reg.job_step = '10' AND 
+            ailee_job_reg.job_id IN (
+                    SELECT DISTINCT j.job_id FROM( 
+                        SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.keyskill REGEXP concat('[[:<:]](', REPLACE(rp.post_skill, ',', '|'), ')[[:>:]]') AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+
+                    UNION
+
+                    SELECT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_title = rp.post_name AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+
+                    UNION
+
+                    SELECT DISTINCT jr.job_id FROM ailee_job_reg jr,ailee_rec_post rp WHERE jr.status = '1' AND jr.is_delete = '0' AND jr.job_step = '10' AND jr.user_id != '".$userid."' AND jr.work_job_industry = rp.industry_type AND rp.user_id = '".$userid."' AND rp.is_delete = '0' AND rp.status = '1'
+                    ) as j ORDER BY j.job_id DESC
+
+                )" . $sql_filter;
 
         $sql .= " ORDER BY job_id DESC";
         if($limit != '') {

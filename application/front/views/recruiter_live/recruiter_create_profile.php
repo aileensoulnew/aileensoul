@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" id="company_profile" name="company_profile" tabindex="10" placeholder="Enter Company Profile" maxlength="200" ng-model="user.company_profile"></textarea>
+                                        <textarea class="form-control" id="company_profile" name="company_profile" tabindex="10" placeholder="Enter Company Profile" maxlength="2000" ng-model="user.company_profile"></textarea>
                                         <div id="cptooltip" class="tooltip-custom" style="display: none;">
                                             Describe more in detail about the company background, services, culture, size, website link, etc.
                                         </div>
