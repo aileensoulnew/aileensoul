@@ -505,7 +505,7 @@ class Freelancer_apply_model extends CI_Model {
 
         if($category_id != "")
         {
-            $sql .= "post_field_req IN (".$category_id.") OR ";
+            $sql .= "fp.post_field_req IN (".$category_id.") OR ";
         }
 
         if($skill_id != "")
@@ -565,40 +565,32 @@ class Freelancer_apply_model extends CI_Model {
         foreach (explode(",", $fa_keyword) as $key => $value) {
             if($value != "")
             {
-                $sql_skill .= "skill LIKE '%".$value."%' OR ";
-                $sql_pn .= "post_name LIKE '%".$value."%' OR ";
-                $sql_it .= "category_name LIKE '%".$value."%' OR ";
+                $sql_skill .= "LOWER(fp.post_skill_txt) LIKE '%".strtolower($value)."%' OR ";
+                $sql_pn .= "LOWER(fp.post_name) LIKE '%".strtolower($value)."%' OR ";
+                $sql_it .= "LOWER(fp.category_name) LIKE '%".strtolower($value)."%' OR ";
             }
         }
         $sql_city = "";$sql_state = "";$sql_country = "";
         foreach (explode(",", $fa_location) as $key => $value) {
             if($value != "")
             {                
-                $sql_city .= "ct.city_name LIKE '".$value."%' OR ";
-                $sql_state .= "st.state_name LIKE '".$value."%' OR ";
-                $sql_country .= "cr.country_name LIKE '".$value."%' OR ";            
+                $sql_city .= "LOWER(fp.city_name) LIKE '".strtolower($value)."%' OR ";
+                $sql_state .= "LOWER(fp.state_name) LIKE '".strtolower($value)."%' OR ";
+                $sql_country .= "LOWER(fp.country_name) LIKE '".strtolower($value)."%' OR ";            
             }
         }
 
-        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) AND afa.job_delete = '0' AND afa.job_save = '3' ) As AppliedCount,fp.created_date,post_rate,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
-        $this->db->select($select_data)->from('freelancer_post fp');
-        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
-        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
-        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
-        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
-        $this->db->join('states st', 'st.state_id = fhr.state', 'left');
-        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
-
-        // $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
+        $select_data = "fp.post_id,fp.post_name,(SELECT  Count(s.to_id) FROM ailee_save as s WHERE (s.post_id = fp.post_id) AND s.status = '2' AND s.save_type = '2' ) As ShortListedCount,(SELECT  Count(afa.app_id) FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) AND afa.job_delete = '0' AND afa.job_save = '3' ) As AppliedCount,fp.created_date,fp.post_rate,fp.post_rating_type,fp.currency_name as post_currency,fp.city_name as city,fp.country_name as country,fp.post_description,fp.post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
+        $this->db->select($select_data)->from('freelancer_post_search_tmp fp');
 
         $sql_ser = "";
         if($fa_keyword != "")
         {
-            $sql_ser .= "(fp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
-                OR
-                (".trim($sql_pn, ' OR ').")
-                OR
-                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(category_id), ',', '|') FROM ailee_category WHERE status = '1' AND is_delete = '0' AND is_other = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
+            $sql_ser .= "((".trim($sql_skill, ' OR ').")
+                        OR
+                        (".trim($sql_pn, ' OR ').")
+                        OR
+                        (".trim($sql_it, ' OR ')."))";
         }
         if($fa_location != "")
         {
@@ -614,6 +606,7 @@ class Freelancer_apply_model extends CI_Model {
         }
         if($sql_ser != "")
         {
+            $sql_ser = "(".trim($sql_ser).")";
             $this->db->where($sql_ser,false,false);
         }
         if($sql != "")
@@ -629,9 +622,7 @@ class Freelancer_apply_model extends CI_Model {
             $this->db->limit($limit,$start);
         }
         $query = $this->db->get();
-        //echo $this->db->last_query();exit;
-
-        
+        // echo $this->db->last_query();exit;
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
             $firstname = $this->db->select('fullname')->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row()->fullname;
@@ -731,40 +722,32 @@ class Freelancer_apply_model extends CI_Model {
         foreach (explode(",", $fa_keyword) as $key => $value) {
             if($value != "")
             {
-                $sql_skill .= "skill LIKE '%".$value."%' OR ";
-                $sql_pn .= "post_name LIKE '%".$value."%' OR ";
-                $sql_it .= "category_name LIKE '%".$value."%' OR ";
+                $sql_skill .= "LOWER(fp.post_skill_txt) LIKE '%".strtolower($value)."%' OR ";
+                $sql_pn .= "LOWER(fp.post_name) LIKE '%".strtolower($value)."%' OR ";
+                $sql_it .= "LOWER(fp.category_name) LIKE '%".strtolower($value)."%' OR ";
             }
         }
         $sql_city = "";$sql_state = "";$sql_country = "";
         foreach (explode(",", $fa_location) as $key => $value) {
             if($value != "")
             {                
-                $sql_city .= "ct.city_name LIKE '".$value."%' OR ";
-                $sql_state .= "st.state_name LIKE '".$value."%' OR ";
-                $sql_country .= "cr.country_name LIKE '".$value."%' OR ";            
+                $sql_city .= "LOWER(fp.city_name) LIKE '".strtolower($value)."%' OR ";
+                $sql_state .= "LOWER(fp.state_name) LIKE '".strtolower($value)."%' OR ";
+                $sql_country .= "LOWER(fp.country_name) LIKE '".strtolower($value)."%' OR ";            
             }
         }
 
-        $select_data = "post_id,post_name,(SELECT  Count(uv.invite_id) As invitecount FROM ailee_user_invite as uv WHERE   (uv.post_id = fp.post_id) ) As ShortListedCount,(SELECT  Count(afa.app_id) As invitecount FROM ailee_freelancer_apply as afa WHERE (afa.post_id = fp.post_id) ) As AppliedCount,fp.created_date,post_rate,post_rating_type,currency_name as post_currency,ct.city_name as city,cr.country_name as country,post_description,post_field_req,fp.user_id,DATEDIFF(fp.post_last_date,NOW()) as day_remain,fp.post_slug";
-        $this->db->select($select_data)->from('freelancer_post fp');
-        $this->db->join('freelancer_hire_reg fhr', 'fhr.user_id = fp.user_id', 'left');
-        $this->db->join('job_title jt', 'jt.title_id = fp.post_name', 'left');
-        $this->db->join('currency c', 'c.currency_id = fp.post_currency', 'left');
-        $this->db->join('cities ct', 'ct.city_id = fhr.city', 'left');
-        $this->db->join('states st', 'st.state_id = fhr.state', 'left');
-        $this->db->join('countries cr', 'cr.country_id = fhr.country', 'left');
-
-        // $this->db->where('FIND_IN_SET(`s`.`skill_id`, `fp`.`post_skill`)');
+        $select_data = "count(*) as total_record";
+        $this->db->select($select_data)->from('freelancer_post_search_tmp fp');
 
         $sql_ser = "";
         if($fa_keyword != "")
         {
-            $sql_ser .= "(fp.post_skill REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(skill_id), ',', '|') FROM ailee_skill WHERE status = 1 AND type = 1 AND (".trim($sql_skill, ' OR ').")), ')[[:>:]]')
-                OR
-                (".trim($sql_pn, ' OR ').")
-                OR
-                fp.post_field_req REGEXP concat('[[:<:]](',(SELECT REPLACE(group_concat(category_id), ',', '|') FROM ailee_category WHERE status = '1' AND is_other = '0' AND is_delete = '0' AND (".trim($sql_it, ' OR ').") ), ')[[:>:]]') )";        
+            $sql_ser .= "((".trim($sql_skill, ' OR ').")
+                        OR
+                        (".trim($sql_pn, ' OR ').")
+                        OR
+                        (".trim($sql_it, ' OR ')."))";
         }
         if($fa_location != "")
         {
@@ -780,6 +763,7 @@ class Freelancer_apply_model extends CI_Model {
         }
         if($sql_ser != "")
         {
+            $sql_ser = "(".trim($sql_ser).")";
             $this->db->where($sql_ser,false,false);
         }
         if($sql != "")
@@ -787,14 +771,14 @@ class Freelancer_apply_model extends CI_Model {
             $sql = "(".trim($sql, ' OR ').")";
             $this->db->where($sql,false,false);
         }
-        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1'));
+        $this->db->where(array('fp.is_delete' => '0', 'fp.status' => '1','fp.user_id != '=>$userid));
         // $this->db->group_by('fp.post_skill,fp.post_id');
         $this->db->order_by('fp.post_id','desc');
         
         $query = $this->db->get();
         //echo $this->db->last_query();exit;
-        $result_array = $query->result_array();
-        return count($result_array);        
+        $result_array = $query->row_array();
+        return $result_array['total_record'];        
     }
 
     function recommended_freelance_work($userid = "",$category_id = "",$skill_id = "",$worktype = "",$period_filter = "",$exp_fil = "",$page = "",$limit = '5')
@@ -1041,5 +1025,73 @@ class Freelancer_apply_model extends CI_Model {
         $query = $this->db->get();
         $result_array = $query->first_row();
         return $result_array;
+    }
+
+    public function freelancer_apply_create_search_table()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        echo "<pre>";
+        $sql = "SELECT * from ailee_freelancer_post WHERE is_delete = '0' AND status = '1'";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        // print_r($result_array);exit;
+        foreach ($result_array as $key => $value) {
+
+            if(trim($value['post_field_req']) != "")
+            {
+                $field_name = $this->db->get_where('category', array('category_id' => $value['post_field_req']))->row()->category_name;
+                $value['category_name'] = trim($field_name);
+            }            
+
+            if($value['post_skill'] != "")
+            {
+                $skill_name = "";
+                foreach (explode(',',$value['post_skill']) as $skk => $skv) {
+                    if($skv != "" && $skv != "26")
+                    {
+                        $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                        if(trim($s_name) != "")
+                        {
+                            $skill_name .= $s_name.",";
+                        }
+                    }
+                }
+                $value['post_skill_txt'] = trim($skill_name,",");
+            }
+            
+            if(trim($value['post_currency']) != "")
+            {
+                $currency_name = $this->db->get_where('currency', array('currency_id' => $value['post_currency'], 'status' => '1'))->row()->currency_name;
+
+                $value['currency_name'] = trim($currency_name);
+            }
+
+            $fa_regi = $this->db->get_where('freelancer_hire_reg', array('user_id' => $value['user_id']))->row();
+
+            if(trim($fa_regi->country) != "")
+            {
+                $country_name = $this->db->get_where('countries', array('country_id' => $fa_regi->country, 'status' => '1'))->row()->country_name;
+
+                $value['country_name'] = trim($country_name);
+            }
+
+            if(trim($fa_regi->state) != "")
+            {
+                $state_name = $this->db->get_where('states', array('state_id' => $fa_regi->state, 'status' => '1'))->row()->state_name;
+
+                $value['state_name'] = trim($state_name);
+            }
+
+            if(trim($fa_regi->city) != "")
+            {
+                $city_name = $this->db->get_where('cities', array('city_id' => $fa_regi->city, 'status' => '1'))->row()->city_name;
+
+                $value['city_name'] = trim($city_name);
+            }
+            // print_r($value);
+            $this->db->insert('ailee_freelancer_post_search_tmp', $value);
+        }
+        echo "Done";
     }
 }

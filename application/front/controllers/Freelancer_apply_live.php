@@ -23,10 +23,10 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['no_user_post_html'] = '<div class="user_no_post_avl"><h3>Feed</h3><div class="user-img-nn"><div class="user_no_post_img"><img src=' . base_url('assets/img/bui-no.png?ver=' . time()) . ' alt="bui-no.png"></div><div class="art_no_post_text">No Feed Available.</div></div></div>';
         $this->data['no_user_contact_html'] = '<div class="art-img-nn"><div class="art_no_post_img"><img src="' . base_url('assets/img/No_Contact_Request.png?ver=' . time()) . '"></div><div class="art_no_post_text">No Contacts Available.</div></div>';
         // $this->data['header_inner_profile'] = $this->load->view('header_inner_profile', $this->data, true);
-        $this->data['freelancer_post_header2'] = $this->load->view('freelancer_live/freelancer_post/freelancer_post_header2_new', $this->data, true);
         // $this->data['header_all_profile'] = '<div class="dropdown-title"> Profiles <a href="profile.html" title="All" class="pull-right">All</a> </div><div id="abody" class="as"> <ul> <li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i5.jpg') . '"> </div><div class="text-all"> Artistic Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i4.jpg') . '"> </div><div class="text-all"> Business Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i1.jpg') . '"> </div><div class="text-all"> Job Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i2.jpg') . '"> </div><div class="text-all"> Recruiter Profile </div></a> </div></li><li> <div class="all-down"> <a href="#"> <div class="all-img"> <img src="' . base_url('assets/n-images/i3.jpg') . '"> </div><div class="text-all"> Freelance Profile </div></a> </div></li></ul> </div>';
 
         include ('main_profile_link.php');
+        $this->data['freelancer_post_header2'] = $this->load->view('freelancer_live/freelancer_post/freelancer_post_header2_new', $this->data, true);
     }
 
     public function index() {
@@ -515,8 +515,7 @@ class Freelancer_apply_live extends MY_Controller {
         $this->data['l'] = str_replace("+"," ",$this->data['l']);
         //$this->data['work_timing'] = $work_timing;
         
-        $this->load->view('freelancer_apply_live/search_new', $this->data);
-    
+        $this->load->view('freelancer_apply_live/search_new', $this->data);    
     }
 
     public function freelancer_apply_search_new_ajax()
@@ -563,6 +562,11 @@ class Freelancer_apply_live extends MY_Controller {
     {
         $free_job_related_list = $this->freelancer_apply_model->free_job_related_blog_list();
         echo json_encode($free_job_related_list);
+    }
+
+    public function freelancer_apply_create_search_table()
+    {
+        $this->freelancer_apply_model->freelancer_apply_create_search_table();
     }
     
 }

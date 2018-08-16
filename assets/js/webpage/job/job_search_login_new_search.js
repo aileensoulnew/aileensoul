@@ -127,7 +127,7 @@ app.controller('jobSearchController', function($scope, $http, $window) {
                 $scope.mainKeyword = skill;
                 if (pagenum > 1) {
                     for (var i in data.jobData) {
-                        console.log(data.jobData[i]);
+                        //console.log(data.jobData[i]);
                         //$scope.searchJob.push(data.jobData[i]);
                         $scope.$apply(function() {
                             $scope.searchJob.push(data.jobData[i]);

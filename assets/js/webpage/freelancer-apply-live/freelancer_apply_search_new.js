@@ -368,23 +368,22 @@ $(window).on("load", function () {
     });
 });
 
-    // NEW HTML SCRIPT
+// NEW HTML SCRIPT
+/*AOS.init({
+    easing: 'ease-in-out-sine'
+});
 
-    AOS.init({
-        easing: 'ease-in-out-sine'
-    });
+setInterval(addItem, 100);
 
-    setInterval(addItem, 100);
+var itemsCounter = 1;
+var container = document.getElementById('aos-demo');
 
-    var itemsCounter = 1;
-    var container = document.getElementById('aos-demo');
-
-    function addItem () {
-        if (itemsCounter > 42) return;
-        var item = document.createElement('div');
-        item.classList.add('aos-item');
-        item.setAttribute('data-aos', 'fade-up');
-        item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
-        // container.appendChild(item);
-        itemsCounter++;
-    }
+function addItem () {
+    if (itemsCounter > 42) return;
+    var item = document.createElement('div');
+    item.classList.add('aos-item');
+    item.setAttribute('data-aos', 'fade-up');
+    item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
+    // container.appendChild(item);
+    itemsCounter++;
+}*/

@@ -441,8 +441,6 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         <?php }?>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
-
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
         <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
@@ -481,8 +479,8 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/freelancer_apply_search_new.js?ver=' . time()) ?>"></script>        
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         
-        <script src="<?php echo base_url('assets/js/webpage/freelancer-apply-live/freelancer_apply_search_new.js?ver=' . time()) ?>"></script>        
     </body>
 </html>

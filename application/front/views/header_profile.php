@@ -779,7 +779,9 @@ if($browser == "Firefox")
             }
         });*/
     }
-    get_notification_unread_count();
+    setTimeout(function(){
+        get_notification_unread_count();
+    }, 1000);
     /*window.setInterval(function(){
       get_notification_unread_count();
     }, 5000);*/

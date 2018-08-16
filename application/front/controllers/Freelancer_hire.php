@@ -2028,6 +2028,58 @@ class Freelancer_hire extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'freelancer_post');
             if ($insert_id) {
+                if(trim($data['post_field_req']) != "")
+                {
+                    $field_name = $this->db->get_where('category', array('category_id' => $data['post_field_req']))->row()->category_name;
+                    $data['category_name'] = trim($field_name);
+                }            
+
+                if($data['post_skill'] != "")
+                {
+                    $skill_name = "";
+                    foreach (explode(',',$data['post_skill']) as $skk => $skv) {
+                        if($skv != "" && $skv != "26")
+                        {
+                            $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                            if(trim($s_name) != "")
+                            {
+                                $skill_name .= $s_name.",";
+                            }
+                        }
+                    }
+                    $data['post_skill_txt'] = trim($skill_name,",");
+                }
+                
+                if(trim($data['post_currency']) != "")
+                {
+                    $currency_name = $this->db->get_where('currency', array('currency_id' => $data['post_currency'], 'status' => '1'))->row()->currency_name;
+
+                    $data['currency_name'] = trim($currency_name);
+                }
+
+                $fa_regi = $this->db->get_where('freelancer_hire_reg', array('user_id' => $data['user_id']))->row();
+
+                if(trim($fa_regi->country) != "")
+                {
+                    $country_name = $this->db->get_where('countries', array('country_id' => $fa_regi->country, 'status' => '1'))->row()->country_name;
+
+                    $data['country_name'] = trim($country_name);
+                }
+
+                if(trim($fa_regi->state) != "")
+                {
+                    $state_name = $this->db->get_where('states', array('state_id' => $fa_regi->state, 'status' => '1'))->row()->state_name;
+
+                    $data['state_name'] = trim($state_name);
+                }
+
+                if(trim($fa_regi->city) != "")
+                {
+                    $city_name = $this->db->get_where('cities', array('city_id' => $fa_regi->city, 'status' => '1'))->row()->city_name;
+
+                    $data['city_name'] = trim($city_name);
+                }
+                $insert_id1 = $this->common->insert_data_getid($data, 'freelancer_post_search_tmp');
                 redirect('hire-freelancer', refresh);
             } else {
                 $this->session->flashdata('error', 'Sorry!!Your data not inserted');
@@ -2191,6 +2243,59 @@ class Freelancer_hire extends MY_Controller {
 
             $updatdata = $this->common->update_data($data, 'freelancer_post', 'post_id', $id);
             if ($updatdata) {
+
+                if(trim($data['post_field_req']) != "")
+                {
+                    $field_name = $this->db->get_where('category', array('category_id' => $data['post_field_req']))->row()->category_name;
+                    $data['category_name'] = trim($field_name);
+                }            
+
+                if($data['post_skill'] != "")
+                {
+                    $skill_name = "";
+                    foreach (explode(',',$data['post_skill']) as $skk => $skv) {
+                        if($skv != "" && $skv != "26")
+                        {
+                            $s_name = $this->db->get_where('skill', array('skill_id' => $skv))->row()->skill;
+                            if(trim($s_name) != "")
+                            {
+                                $skill_name .= $s_name.",";
+                            }
+                        }
+                    }
+                    $data['post_skill_txt'] = trim($skill_name,",");
+                }
+                
+                if(trim($data['post_currency']) != "")
+                {
+                    $currency_name = $this->db->get_where('currency', array('currency_id' => $data['post_currency'], 'status' => '1'))->row()->currency_name;
+
+                    $data['currency_name'] = trim($currency_name);
+                }
+
+                $fa_regi = $this->db->get_where('freelancer_hire_reg', array('user_id' => $data['user_id']))->row();
+
+                if(trim($fa_regi->country) != "")
+                {
+                    $country_name = $this->db->get_where('countries', array('country_id' => $fa_regi->country, 'status' => '1'))->row()->country_name;
+
+                    $data['country_name'] = trim($country_name);
+                }
+
+                if(trim($fa_regi->state) != "")
+                {
+                    $state_name = $this->db->get_where('states', array('state_id' => $fa_regi->state, 'status' => '1'))->row()->state_name;
+
+                    $data['state_name'] = trim($state_name);
+                }
+
+                if(trim($fa_regi->city) != "")
+                {
+                    $city_name = $this->db->get_where('cities', array('city_id' => $fa_regi->city, 'status' => '1'))->row()->city_name;
+
+                    $data['city_name'] = trim($city_name);
+                }
+                $this->common->update_data($data, 'freelancer_post_search_tmp', 'post_id', $id);
                 redirect('freelance-employer/projects', refresh);
             } else {
                 $this->session->flashdata('error', 'Sorry!!Your data not inserted');
