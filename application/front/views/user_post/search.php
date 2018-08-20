@@ -78,7 +78,7 @@
                                     <a ng-if="searchProfile.follow_status == 0 || !searchProfile.follow_status" class="btn3 follow" ng-click="follow_user(searchProfile.user_id)">Follow</a>
                                 </div>
                             </div>
-                            <div class="load-more-btn">
+                            <div class="load-more-btn" id="load_more_pro_div">
                                 <button class="" name="load_more_pro" id="load_more_pro" ng-click="load_more_profile();">Load more</button>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="load-more-btn">
+                                <div class="load-more-btn" id="load_more_pst_div">
                                     <button class="" name="load_more_pst" id="load_more_pst" ng-click="load_more_post();">Load more</button>
                                 </div>
                             </div>

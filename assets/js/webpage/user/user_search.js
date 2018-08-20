@@ -160,7 +160,7 @@ app.controller('searchController', function ($scope, $http,$compile) {
                 $scope.showLoadmore = false;
                 isProcessing = true;
                 $('#load_more_pro').attr("disabled","disabled");
-                $('#load_more_pro').html('done');
+                $('#load_more_pro_div').remove();
             }
             
         });
@@ -199,7 +199,7 @@ app.controller('searchController', function ($scope, $http,$compile) {
                 $scope.showLoadmore = false;
                 isProcessingPst = true;
                 $('#load_more_pst').attr("disabled","disabled");
-                $('#load_more_pst').html('done');
+                $('#load_more_pst_div').remove();
             }
             
         });
