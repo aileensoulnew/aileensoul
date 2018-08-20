@@ -1028,7 +1028,7 @@ class User_post_model extends CI_Model {
 
     public function searchData($userid = '', $searchKeyword = '') {
 
-        $sql_ser = "u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%'";
+        $sql_ser = "u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%' OR CONCAT(u.first_name,' ',u.last_name) LIKE '%$searchKeyword%' OR CONCAT(u.last_name,' ',u.first_name) LIKE '%$searchKeyword%'";
         $sql_post = "uo.opportunity LIKE '%$searchKeyword%' OR usp.description LIKE '%$searchKeyword%' OR uaq.question LIKE '%$searchKeyword%' OR uaq.description LIKE '%$searchKeyword%'";
         
         $checkKeywordCity = $this->data_model->findCityList($searchKeyword);
@@ -1203,7 +1203,7 @@ class User_post_model extends CI_Model {
 
     public function searchDataProfileAjax($userid = '', $searchKeyword = '',$start = "",$limit = "5") {
 
-        $sql_ser = "u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%'";
+        $sql_ser = "u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%' OR CONCAT(u.first_name,' ',u.last_name) LIKE '%$searchKeyword%' OR CONCAT(u.last_name,' ',u.first_name) LIKE '%$searchKeyword%'";
 
         $checkKeywordCity = $this->data_model->findCityList($searchKeyword);
         if ($checkKeywordCity['city_id'] != '') {

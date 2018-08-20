@@ -500,6 +500,7 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var searchKeyword = '<?php echo $search_keyword; ?>';
             var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
+            var keyword = "<?php echo $search_keyword ?>";
             var app = angular.module("searchApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

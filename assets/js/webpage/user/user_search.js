@@ -100,6 +100,8 @@ app.controller('searchController', function ($scope, $http,$compile) {
     $scope.pst = {};
     var isProcessing = false;
     var isProcessingPst = false;
+    $("#search").val(keyword);
+    $("#mob_search").val(keyword);
     searchData();
     getContactSuggetion();
     function searchData() {
