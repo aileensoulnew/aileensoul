@@ -71,19 +71,15 @@
                                     <span ng-if="searchProfile.degree_name != ''">{{searchProfile.title_name}}</span>
                                     <span ng-if="searchProfile.degree_name == ''">{{searchProfile.degree_name}}</span>
                                     <span ng-if="searchProfile.degree_name == null && searchProfile.title_name == null">Current work</span>
-                                    <!-- <span ng-bind="searchProfile.title_name" ng-if="searchProfile.title_name"></span>
-                                    <span ng-bind="searchProfile.degree_name" ng-if="searchProfile.degree_name"></span>
-                                    <span ng-if="(searchProfile.degree_name == 'null' || searchProfile.degree_name == '') && (searchProfile.title_name == 'null' || searchProfile.title_name == '')">CURRENT WORK</span>
-                                    <span ng-bind="searchProfile.industry_name" ng-if="searchProfile.industry_name"></span>
-                                    <span ng-bind="searchProfile.university_name" ng-if="searchProfile.university_name"></span>
-                                    <span ng-if="searchProfile.city">{{searchProfile.city}}, {{searchProfile.country}}</span> -->
+                                    
                                 </div>
                                 <div class="profile-btns" id="{{searchProfile.user_id}}">
                                     <a ng-if="searchProfile.follow_status == 1" class="btn1 following" ng-click="unfollow_user(searchProfile.user_id)">Following</a>
                                     <a ng-if="searchProfile.follow_status == 0 || !searchProfile.follow_status" class="btn3 follow" ng-click="follow_user(searchProfile.user_id)">Follow</a>
-                                    <!-- <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="!searchProfile.follow_status" class="btn3" title="Follow">Follow</a>
-                                    <a href="javascript:void(0);" id="search-profile-follow-{{searchProfile.user_id}}" ng-click="followSearch(searchProfile.user_id)" ng-if="searchProfile.follow_status == '1'" class="btn1" title="Following">Following</a> -->
                                 </div>
+                            </div>
+                            <div class="load-more-btn">
+                                <button class="" name="load_more_pro" id="load_more_pro" ng-click="load_more_profile();">Load more</button>
                             </div>
                         </div>
                         <div class="availabel-data-box" ng-if="postData.length != '0'">
@@ -95,10 +91,7 @@
                                 <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
                             </div>
                             <div class="p10 mobp0">
-                                <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData" ng-init="postIndex=$index">
-                                    <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
-                                    <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
-                                    <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
+                                <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData" ng-init="postIndex=$index">                                    
                                     <div class="all-post-top">
                                         <div class="post-head">
                                             <div class="post-img" ng-if="post.post_data.post_for == 'question' && post.user_data.user_image !=''">
@@ -357,6 +350,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="load-more-btn">
+                                    <button class="" name="load_more_pst" id="load_more_pst" ng-click="load_more_post();">Load more</button>
                                 </div>
                             </div>
 							<div class="tab-add">

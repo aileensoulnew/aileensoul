@@ -1422,6 +1422,30 @@ class User_post extends MY_Controller {
         $searchData = $this->user_post_model->searchData($userid,$searchKeyword);
         echo json_encode($searchData);
     }
+
+    public function searchDataProfileAjax() {
+        $userid = $this->session->userdata('aileenuser');
+        $searchKeyword = $_POST['searchKeyword'];
+        $page = $_POST['pagenum'];
+        $limit = 5;
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $searchData = $this->user_post_model->searchDataProfileAjax($userid,$searchKeyword,$start,$limit);
+        echo json_encode($searchData);
+    }
+
+    public function searchDataPostAjax() {
+        $userid = $this->session->userdata('aileenuser');
+        $searchKeyword = $_POST['searchKeyword'];
+        $page = $_POST['pagenum'];
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+        $searchData = $this->user_post_model->searchDataPostAjax($userid,$searchKeyword,$start,$limit);
+        echo json_encode($searchData);
+    }
     
     public function likeuserlist() {
         $userid = $this->session->userdata('aileenuser');

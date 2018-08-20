@@ -96,6 +96,10 @@ app.controller('EditorController', ['$scope', function ($scope) {
 app.controller('searchController', function ($scope, $http,$compile) {
     $scope.user_id = user_id;
     $scope.live_slug = live_slug;
+    $scope.pro = {};
+    $scope.pst = {};
+    var isProcessing = false;
+    var isProcessingPst = false;
     searchData();
     getContactSuggetion();
     function searchData() {
@@ -109,6 +113,8 @@ app.controller('searchController', function ($scope, $http,$compile) {
             $(".post_loader").hide();
             $scope.searchProfileData = success.data.profile;
             $scope.postData = success.data.post;
+            $scope.pro.page_number = 2;
+            $scope.pst.page_number = 2;
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
@@ -118,6 +124,84 @@ app.controller('searchController', function ($scope, $http,$compile) {
             
         });
     }
+
+    $scope.load_more_profile = function()
+    {
+        var pagenum = $scope.pro.page_number;
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
+        $('#load_more_pro').attr("disabled","disabled");
+        $('#load_more_pro').html('<img src="'+base_url+'assets/images/loading.gif" alt="loaderimage">');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/searchDataProfileAjax',
+            data: 'searchKeyword=' + searchKeyword +'&pagenum='+pagenum,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $('#load_more_pro').removeAttr("disabled");
+            $('#load_more_pro').html("Load more");
+            if(success.data.profile.length > 0)
+            {                    
+                for (var i in success.data.profile) {                            
+                    $scope.searchProfileData.push(success.data.profile[i]);
+                    /*$scope.$apply(function () {
+                        $scope.searchProfileData.push(success.data.profile[i]);
+                    });*/
+                }
+                $scope.pro.page_number = parseInt($scope.pro.page_number) + 1;
+                isProcessing = false;
+            }
+            else
+            {
+                $scope.showLoadmore = false;
+                isProcessing = true;
+                $('#load_more_pro').attr("disabled","disabled");
+                $('#load_more_pro').html('done');
+            }
+            
+        });
+    };
+
+    $scope.load_more_post = function()
+    {
+        var pagenum_pst = $scope.pst.page_number;
+        if (isProcessingPst) {
+            return;
+        }
+        isProcessingPst = true;
+        $('#load_more_pst').attr("disabled","disabled");
+        $('#load_more_pst').html('<img src="'+base_url+'assets/images/loading.gif" alt="loaderimage">');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/searchDataPostAjax',
+            data: 'searchKeyword=' + searchKeyword +'&pagenum='+pagenum_pst,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $('#load_more_pst').removeAttr("disabled");
+            $('#load_more_pst').html("Load more");            
+            if(success.data.post.length > 0)
+            {                    
+                for (var i in success.data.post) {                            
+                    $scope.postData.push(success.data.post[i]);
+                    /*$scope.$apply(function () {
+                        $scope.postData.push(success.data.post[i]);
+                    });*/
+                }                
+                $scope.pst.page_number = parseInt($scope.pst.page_number) + 1;
+                isProcessingPst = false;
+            }
+            else
+            {
+                $scope.showLoadmore = false;
+                isProcessingPst = true;
+                $('#load_more_pst').attr("disabled","disabled");
+                $('#load_more_pst').html('done');
+            }
+            
+        });
+    };
 
     function getContactSuggetion() {
         $http.get(base_url + "user_post/getContactSuggetion").then(function (success) {
