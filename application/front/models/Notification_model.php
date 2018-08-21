@@ -94,4 +94,25 @@ class Notification_model extends CI_Model {
         // $query = $this->db->query("CALL notification_count(?)",array('user_id'=>$user_id));
         // return $query->row()->total_rec;
     }
+
+    public function get_unread_message_count($user_slug)
+    {
+        $this->db->select("*")->from("user_readunread_message");
+        $this->db->where('to_jid',$user_slug);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        $unread_msg = 0;
+        foreach ($result as $key => $value) {
+
+            $sql = "SELECT COUNT(*) as unread_msg FROM ofmessagearchive WHERE toJID = '".$user_slug."' AND fromJID = '".$value['from_jid']."' AND sentDate >= '".$value['timestamp']."'";
+            $query = $this->db->query($sql);
+            $unread_msg = $unread_msg + $query->row_array()['unread_msg'];
+
+        }
+        return $unread_msg;
+        // print_r($result);        
+
+        // $query = $this->db->query("CALL notification_count(?)",array('user_id'=>$user_id));
+        // return $query->row()->total_rec;
+    }
 }

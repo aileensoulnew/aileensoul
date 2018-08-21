@@ -781,7 +781,15 @@ if($browser == "Firefox")
     }
     setTimeout(function(){
         get_notification_unread_count();
+        unread_message_count();
     }, 1000);
+    function unread_message_count()
+    {
+        var url = '<?php echo base_url() . "notification/unread_message_count" ?>';
+        $.get(url, function(data, status){            
+            console.log(data);
+        });
+    }
     /*window.setInterval(function(){
       get_notification_unread_count();
     }, 5000);*/

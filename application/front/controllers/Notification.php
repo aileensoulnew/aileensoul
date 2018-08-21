@@ -5264,11 +5264,21 @@ Your browser does not support the audio tag.
         echo $count = $this->notification_model->get_notification_unread_count($userid);exit;
     }
 
+    public function unread_message_count()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $user_data = $this->user_model->getUserData($userid);
+        $user_slug = str_replace("-", "_",$user_data['user_slug'])."@".OPENFIRESERVER;
+        $unread_cnt = $this->notification_model->get_unread_message_count($user_slug);
+        echo $unread_cnt;exit;
+    }
+
     public function create_slug($string) {
         $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower(stripslashes($string)));
         $slug = preg_replace('/[-]+/', '-', $slug);
         $slug = trim($slug, '-');
         return $slug;
     }
+
 
 }
