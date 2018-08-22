@@ -84,7 +84,7 @@
                                                 </fieldset>
                                                 <fieldset  <?php if ($post_desc) { ?> class="error-msg full-width" <?php } else { ?> class="full-width" <?php } ?>>
                                                     <label><?php echo $this->lang->line("project_description"); ?> :<span style="color:red">*</span></label>
-                                                    <textarea class="add-post-textarea" name="post_desc" id="post_desc" placeholder="Enter description" tabindex="2" onpaste="OnPaste_StripFormatting(this, event);"></textarea>
+                                                    <textarea class="add-post-textarea" name="post_desc" id="post_desc" placeholder="Enter description" tabindex="2"></textarea>
                                                     <?php echo form_error('post_desc'); ?>
                                                 </fieldset>
                                                 <fieldset  <?php if ($skills) { ?> class="error-msg full-width" <?php } else { ?> class="full-width" <?php } ?>>
@@ -288,6 +288,7 @@
         <?php } ?>
 
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>
 
         <script>
                         var base_url = '<?php echo base_url(); ?>';
@@ -465,6 +466,30 @@
                             });
                         }
                         // LEAVE PAGE ON ADD AND EDIT POST PAGE END 
+
+                        var _onPaste_StripFormatting_IEPaste = false;
+
+    function OnPaste_StripFormatting(elem, e) {
+
+        if (e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
+            e.preventDefault();
+            var text = e.originalEvent.clipboardData.getData('text/plain');
+            window.document.execCommand('insertText', false, text);
+        } else if (e.clipboardData && e.clipboardData.getData) {
+            e.preventDefault();
+            var text = e.clipboardData.getData('text/plain');
+            window.document.execCommand('insertText', false, text);
+        } else if (window.clipboardData && window.clipboardData.getData) {
+            // Stop stack overflow
+            if (!_onPaste_StripFormatting_IEPaste) {
+                _onPaste_StripFormatting_IEPaste = true;
+                e.preventDefault();
+                window.document.execCommand('ms-pasteTextOnly', false);
+            }
+            _onPaste_StripFormatting_IEPaste = false;
+        }
+
+    }
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/freelancer_add_post.js?ver=' . time()); ?>"></script>
         <?php if (IS_HIRE_JS_MINIFY == '0') { ?>

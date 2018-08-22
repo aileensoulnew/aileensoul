@@ -95,7 +95,7 @@
                                                 </fieldset>
                                                 <fieldset class="full-width">
                                                     <label><?php echo $this->lang->line("project_description"); ?> :<span style="color:red">*</span></label>
-                                                    <textarea class="add-post-textarea" name="post_desc" id="post_desc" placeholder="Enter description" tabindex="2" onpaste="OnPaste_StripFormatting(this, event);"></textarea>
+                                                    <textarea class="add-post-textarea" name="post_desc" id="post_desc" placeholder="Enter description" tabindex="2"></textarea>
                                                     <?php echo form_error('post_desc'); ?>
                                                 </fieldset>
                                                 <fieldset class="full-width" <?php if ($skills) { ?> class="error-msg" <?php } ?>>
@@ -478,6 +478,7 @@
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script type="text/javascript" src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()) ?>"></script>
         <?php } ?>
+        <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>
 
         <script>
                                                     var user_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
