@@ -105,7 +105,7 @@ class Notification_model extends CI_Model {
         $unread_user = 0;
         foreach ($result as $key => $value) {
 
-            $sql = "SELECT COUNT(*) as unread_msg FROM ofmessagearchive WHERE toJID = '".$user_slug."' AND fromJID = '".$value['from_jid']."' AND sentDate >= '".$value['timestamp']."'";
+            $sql = "SELECT COUNT(*) as unread_msg FROM ofMessageArchive WHERE toJID = '".$user_slug."' AND fromJID = '".$value['from_jid']."' AND sentDate >= '".$value['timestamp']."'";
             $query = $this->db->query($sql);
             $um = $query->row_array()['unread_msg'];
             if($um > 0)
