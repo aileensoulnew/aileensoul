@@ -5269,8 +5269,8 @@ Your browser does not support the audio tag.
         $userid = $this->session->userdata('aileenuser');
         $user_data = $this->user_model->getUserData($userid);
         $user_slug = str_replace("-", "_",$user_data['user_slug'])."@".OPENFIRESERVER;
-        $unread_cnt = $this->notification_model->get_unread_message_count($user_slug);
-        echo $unread_cnt;exit;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;
     }
 
     public function create_slug($string) {

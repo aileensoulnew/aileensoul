@@ -102,14 +102,20 @@ class Notification_model extends CI_Model {
         $query = $this->db->get();
         $result = $query->result_array();
         $unread_msg = 0;
+        $unread_user = 0;
         foreach ($result as $key => $value) {
 
             $sql = "SELECT COUNT(*) as unread_msg FROM ofmessagearchive WHERE toJID = '".$user_slug."' AND fromJID = '".$value['from_jid']."' AND sentDate >= '".$value['timestamp']."'";
             $query = $this->db->query($sql);
-            $unread_msg = $unread_msg + $query->row_array()['unread_msg'];
+            $um = $query->row_array()['unread_msg'];
+            if($um > 0)
+            {
+                $unread_msg = $unread_msg + $query->row_array()['unread_msg'];
+                $unread_user = $unread_user + 1;
+            }
 
         }
-        return $unread_msg;
+        return array("unread_message"=>$unread_msg,"unread_user"=>$unread_user);
         // print_r($result);        
 
         // $query = $this->db->query("CALL notification_count(?)",array('user_id'=>$user_id));
