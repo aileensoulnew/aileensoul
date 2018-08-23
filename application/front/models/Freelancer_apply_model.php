@@ -93,12 +93,12 @@ class Freelancer_apply_model extends CI_Model {
         $query = $this->db->get();
         // echo $this->db->last_query();exit;
         $result_array = $query->result_array();
-        foreach ($result_array as $k => $v) {
+        /*foreach ($result_array as $k => $v) {
             if(!file_exists(FA_CATEGORY_IMG_PATH."/".$result_array[$k]['category_image']))
             {
                 $result_array[$k]['category_image'] = "category_default.png";
             }
-        }
+        }*/
         return $result_array;
     }
 
@@ -116,12 +116,12 @@ class Freelancer_apply_model extends CI_Model {
         $query = $this->db->query($sql);
 
         $fa_category = $query->result_array();
-        foreach ($fa_category as $k => $v) {
+        /*foreach ($fa_category as $k => $v) {
             if(!file_exists(FA_CATEGORY_IMG_PATH."/".$fa_category[$k]['category_image']))
             {
                 $fa_category[$k]['category_image'] = "category_default.png";
             }
-        }
+        }*/
         
         $ret_array['fa_fields'] = $fa_category;
         $ret_array['total_record'] = $this->get_fa_field_total_rec();
@@ -151,12 +151,12 @@ class Freelancer_apply_model extends CI_Model {
         $query = $this->db->query($sql);
 
         $faSkills = $query->result_array();
-        foreach ($faSkills as $k => $v) {
+        /*foreach ($faSkills as $k => $v) {
             if(!file_exists(SKILLS_IMG_PATH."/".$faSkills[$k]['skill_image']))
             {
                 $faSkills[$k]['skill_image'] = "skills_default.png";
             }
-        }
+        }*/
         
         $ret_array['fa_category'] = $faSkills;
         $ret_array['total_record'] = $this->get_fa_category_total_rec();

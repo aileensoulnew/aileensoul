@@ -59,8 +59,8 @@
                         <div class="col-md-3 col-sm-6 col-xs-6 mob-cus-box">
                             <div class="all-cat-box">
                                 <a href="<?php echo base_url().'freelance-jobs/'.$_FAFields['category_slug']; ?>">
-                                    <div class="cus-cat-middle">
-                                    <img src="<?php echo FA_CATEGORY_IMG_PATH."/".$_FAFields['category_image'];?>">
+                                    <div class="cus-cat-middle">                                    
+                                    <img src="<?php echo FA_CATEGORY_IMG_PATH.$_FAFields['category_image']; ?>" onErroraa="this.onerror=null;this.src='<?php echo FA_CATEGORY_IMG_PATH.'category_default.png' ?>';">
                                     <p class=""><?php echo $_FAFields['category_name']; ?></p>
                                     <!-- <span><?php //echo $_FAFields['count']; ?> jobs</span> -->
                                     </div>
