@@ -92,7 +92,7 @@
                                                         <li>
                                                             <a href="<?php echo base_url().'freelance-jobs/'.$_jobByField['category_slug']; ?>" target="_self">
                                                                 <div class="cus-cat-middle">
-                                                                <img src="<?php echo FA_CATEGORY_IMG_PATH.$_jobByField['category_image'];?>" onErroraa="this.onerror=null;this.src='<?php echo FA_CATEGORY_IMG_PATH.'category_default.png' ?>';">
+                                                                <img src="<?php echo FA_CATEGORY_IMG_PATH.strtolower($_jobByField['category_image']);?>" onErroraa="this.onerror=null;this.src='<?php echo FA_CATEGORY_IMG_PATH.'category_default.png' ?>';">
                                                                 <p><span><?php echo ucwords($_jobByField['category_name']); ?></span></p>
                                                                 </div>
                                                             </a>
