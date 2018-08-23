@@ -90,7 +90,7 @@
                                                 <li>
                                                     <a href="<?php echo base_url('business-in-').$_businessLocation['slug']; ?>"  target="_self">
                                                         <div class="cus-cat-middle">
-                                                            <img src="<?php echo CITY_IMG_PATH.'default_city.png'; ?>">
+                                                            <img src="<?php echo CITY_IMG_PATH.$_businessLocation['city_image'];?>" onError="this.onerror=null;this.src='<?php echo CITY_IMG_PATH.'default_city.png'; ?>';">
                                                             <p><?php echo $_businessLocation['city_name']; ?></p>
                                                         </div>
                                                     </a>

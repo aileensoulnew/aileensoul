@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Business_model extends CI_Model {
 
     function businessCategory($limit = '') {
-        $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug')->from('industry_type it');
+        $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug,industry_image')->from('industry_type it');
         $this->db->join('business_profile bp', 'bp.industriyal = it.industry_id', 'left');
         $this->db->where('it.status', '1');
         $this->db->where('it.is_delete', '0');
@@ -25,7 +25,7 @@ class Business_model extends CI_Model {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
-        $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug')->from('industry_type it');
+        $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug,industry_image')->from('industry_type it');
         $this->db->join('business_profile bp', 'bp.industriyal = it.industry_id', 'left');
         $this->db->where('it.status', '1');
         $this->db->where('it.is_delete', '0');
@@ -464,7 +464,7 @@ class Business_model extends CI_Model {
 
     // Get all location of business
     function businessLocation($limit = '') {
-        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug 
+        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug,ac.city_image
                 FROM ailee_cities ac 
                 LEFT JOIN ailee_business_profile bp ON bp.city = ac.city_id
                 WHERE ac.status = '1' AND bp.status = '1' AND bp.is_deleted = '0' 
@@ -485,7 +485,7 @@ class Business_model extends CI_Model {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
-        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug 
+        $sql = "SELECT count(bp.business_profile_id) as count, ac.city_id, ac.city_name, ac.slug,ac.city_image
                 FROM ailee_cities ac 
                 LEFT JOIN ailee_business_profile bp ON bp.city = ac.city_id
                 WHERE ac.status = '1' AND bp.status = '1' AND bp.is_deleted = '0' 

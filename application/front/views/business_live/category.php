@@ -90,7 +90,9 @@
                                                     <li>
                                                         <a href="<?php echo base_url().$_businessAllCategory['industry_slug'].'-business'; ?>" target="_self">
                                                             <div class="cus-cat-middle">
-                                                                <img src="<?php echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>" alt="<?php echo $_businessAllCategory['industry_name']; ?>">
+                                                                <img src="<?php echo BUSINESS_CAT_IMG.$_businessAllCategory['industry_image']; ?>">
+                                                                <!--
+                                                                onError="this.onerror=null;this.src='<?php //echo base_url('assets/n-images/cat-1.png') ?>';" <img src="<?php //echo base_url('assets/n-images/cat-1.png?ver=' . time()) ?>" alt="<?php //echo $_businessAllCategory['industry_name']; ?>"> -->
                                                                 <p><?php echo $_businessAllCategory['industry_name']; ?></p>
                                                             </div>
                                                         </a>
