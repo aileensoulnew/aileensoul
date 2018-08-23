@@ -76,7 +76,8 @@
                                                     <li>
                                                         <a href="<?php echo artist_location.$_artistAllLocation['location_slug']; ?>" target="_self">
                                                             <div class="cus-cat-middle">
-                                                                <img src="<?php echo CITY_IMG_PATH.'default_city.png';?>">
+                                                                <img src="<?php echo CITY_IMG_PATH.$_artistAllLocation['city_image'];?>" onError="this.onerror=null;this.src='<?php echo CITY_IMG_PATH.'default_city.png'; ?>';">
+                                                                <!-- <img src="<?php //echo CITY_IMG_PATH.'default_city.png';?>"> -->
                                                                 <p><?php echo ucwords($_artistAllLocation['art_location']); ?></p>
                                                             </div>
                                                         </a>

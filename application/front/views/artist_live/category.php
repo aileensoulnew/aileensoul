@@ -76,7 +76,8 @@
                                                         <li>
                                                             <a href="<?php echo artist_category.$_artistAllCategory['category_slug']; ?>" target="_self">
                                                                 <div class="cus-cat-middle">
-                                                                    <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                                                    <img src="<?php echo ARTIST_CAT_IMG.$_artistAllCategory['art_category_img']; ?>" onError="this.onerror=null;this.src='<?php echo base_url('assets/n-images/cat-1.png') ?>';">
+                                                                    <!-- <img src="<?php //echo base_url('assets/n-images/cat-1.png') ?>"> -->
                                                                     <p>
                                                                         <?php echo ucwords($_artistAllCategory['art_category']); ?>
                                                                     </p>

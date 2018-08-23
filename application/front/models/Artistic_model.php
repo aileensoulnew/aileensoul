@@ -14,7 +14,7 @@ class Artistic_model extends CI_Model {
     }
 
     public function artistCategory($limit = '') {
-        $this->db->select('category_id,art_category,category_slug')->from('art_category ac');
+        $this->db->select('category_id,art_category,category_slug,art_category_img')->from('art_category ac');
         $this->db->where('ac.status', '1');
         $this->db->where('ac.category_id !=', '26');
         $query = $this->db->get();
@@ -34,6 +34,7 @@ class Artistic_model extends CI_Model {
             $return['category_id'] = $value['category_id'];
             $return['art_category'] = $value['art_category'];
             $return['category_slug'] = $value['category_slug'];
+            $return['art_category_img'] = $value['art_category_img'];
 
             array_push($return_array, $return);
         }
@@ -78,7 +79,7 @@ class Artistic_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug
+        $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug,ct.art_category_img
             FROM ailee_art_category ct,ailee_art_reg ar
             WHERE ct.category_id !=26 AND FIND_IN_SET(ct.category_id,ar.art_skill) > 0 AND ct.status = '1' 
             AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
@@ -351,7 +352,7 @@ class Artistic_model extends CI_Model {
     public function gettoplocationsofartist($limitstart, $limit){
         $limitstart = ($limitstart) ? $limitstart : 0;
         $limit = ($limit) ? $limit : 8;
-        $sql = "select count(*) as count, ac.city_name 
+        $sql = "select count(*) as count, ac.city_name,ac.city_image 
                     from ailee_art_reg as ar
                     left join ailee_cities as ac on ac.city_id = ar.art_city
                     where city_name IS NOT NULL and ar.status = 1 
@@ -414,7 +415,7 @@ class Artistic_model extends CI_Model {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
-        $sql = "SELECT count(ar.art_id) as count, ar.art_city as location_id, ac.city_name as art_location, ac.slug as location_slug
+        $sql = "SELECT count(ar.art_id) as count, ar.art_city as location_id, ac.city_name as art_location, ac.slug as location_slug,ac.city_image 
                 FROM ailee_cities ac 
                 LEFT JOIN ailee_art_reg ar ON ar.art_city = ac.city_id
                 WHERE ac.status = '1' AND ar.status = '1'

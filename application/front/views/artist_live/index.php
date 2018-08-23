@@ -60,7 +60,8 @@
                                 <div class="all-cat-box">
                                     <a href="<?php echo artist_category.$_artistCategory['category_slug']; ?>">
                                         <div class="cus-cat-middle">
-                                            <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>">
+                                            <img src="<?php echo ARTIST_CAT_IMG.$_artistCategory['art_category_img']; ?>" onError="this.onerror=null;this.src='<?php echo base_url('assets/n-images/cat-1.png') ?>';">
+                                            <!-- <img src="<?php echo base_url('assets/n-images/cat-1.png') ?>"> -->
                                             <p><?php echo ucwords($_artistCategory['art_category']); ?></p>
                                         </div>
                                     </a>
@@ -97,7 +98,8 @@
                                 <div class="all-cat-box">
                                     <a href="<?php echo artist_location.$_artistLocation['city_name']; ?>">
                                         <div class="cus-cat-middle">
-                                            <img src="<?php echo CITY_IMG_PATH.'default_city.png'; ?>">
+                                            <img src="<?php echo CITY_IMG_PATH.$_artistLocation['city_image'];?>" onError="this.onerror=null;this.src='<?php echo CITY_IMG_PATH.'default_city.png'; ?>';">
+                                            <!-- <img src="<?php //echo CITY_IMG_PATH.'default_city.png'; ?>"> -->
                                             <p><?php echo ucwords($_artistLocation['city_name']) ?></p>
                                         </div>
                                     </a>

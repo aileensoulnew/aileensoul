@@ -625,6 +625,8 @@ define('DESIGNATION_IMG_PATH', BASEURL. 'uploads/designation_image/');
 define('JOB_INDUSTRY_IMG_PATH', BASEURL. 'uploads/job_industry_image/');
 define('SKILLS_IMG_PATH', BASEURL. 'uploads/skills_image/');
 
+define('ARTIST_CAT_IMG', BASEURL. 'uploads/artist_category/');
+
 define('FA_CATEGORY_IMG_PATH', BASEURL. 'uploads/category_image/');
 
 // BUSINESS PROFILE
