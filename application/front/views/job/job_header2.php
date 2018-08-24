@@ -2,6 +2,7 @@
 $userid = $this->session->userdata('aileenuser');
 ?>
 <div id="job_search" class="modal fade mob-search-popup" role="dialog">
+
 	<form onsubmit="jobsearchSubmitMobile()" action="javascript:void(0)" method="get">
 		<div class="new-search-input">
 			<input type="search" id="mob_job_keyword" class="tags" name="job_keyword" value="" ng-model="keyword" placeholder="Job Title, Keywords, or Company" ng-model="keyword" />

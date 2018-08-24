@@ -721,7 +721,7 @@ background:url('../img/edit_profile.png?version=@{cache-version}') no-repeat; ov
 .mob-side-menu .content{height:100% !important;}
 
 .mob-side-menu .all-profile-box{padding-top:46px; background:#fff; margin-left:0;}
-.mob-side-menu .all-profile-box ul{padding:0; width:100%; float:left; margin:0}
+.mob-side-menu .all-profile-box ul{padding:0 0 50px; width:100%; float:left; margin:0}
 .mob-side-menu .all-profile-box ul li a{padding: 5px 10px; display: inline-flex; width:100%; background:#fff; font-size:14px; color:#5c5c5c; letter-spacing:1px; border-bottom:0px;}
 .mob-side-menu .all-profile-box ul li a:hover{color:#1b8ab9;}
 .mob-side-menu .all-profile-box ul li{padding:0px; border-bottom:0px solid #d2d2d2; width:100%; list-style-type:none; float:left; margin-bottom:0!important;}

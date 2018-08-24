@@ -47,8 +47,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 </head>
     <body class="profile-main-page body-loader">
         <?php $this->load->view('page_loader'); ?>
+		<?php echo $job_header2; ?>
         <div id="main_page_load" style="display: block;">
-        <?php echo $job_header2; ?>
+        
         <div class="middle-section">            
             <div class="container pt20 mobp0">
                 <div class="left-part">
