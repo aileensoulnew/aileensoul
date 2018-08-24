@@ -278,7 +278,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             <div class="full-box-module business_data">
                                 <div class="profile-boxProfileCard  module buisness_he_module" >
                                     <div class="head_details">
-                                        <h5><i class="fa fa-camera" aria-hidden="true"></i>   Photos</h5>
+                                        <h5><i class="fa fa-camera" aria-hidden="true"></i>
+                                            <span class="business-media">Photos</span></h5>
                                     </div>
                                     <div class="bus_photos">
                                     </div>
@@ -290,7 +291,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                 <div class="profile-boxProfileCard  module">
                                     <table class="business_data_table">
                                         <div class="head_details">
-                                            <h5><i class="fa fa-video-camera" aria-hidden="true"></i>Video</h5>
+                                            <h5><i class="fa fa-video-camera" aria-hidden="true"></i>
+                                                <span class="business-media">Video</span></h5>
                                         </div>
                                         <div class="bus_videos">
                                         </div>
@@ -302,7 +304,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             <div class="full-box-module business_data">
                                 <div class="profile-boxProfileCard module">
                                     <div class="head_details1">
-                                        <h5><i class="fa fa-music" aria-hidden="true"></i>Audio</h5>
+                                        <h5><i class="fa fa-music" aria-hidden="true"></i>
+                                            <span class="business-media">Audio</span></h5>
                                     </div>
                                     <table class="business_data_table">
                                         <div class="bus_audios"> 
@@ -315,7 +318,8 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                             <div class="full-box-module business_data">
                                 <div class="profile-boxProfileCard  module buisness_he_module" >
                                     <div class="head_details">
-                                        <h5><i class="fa fa-file-pdf-o" aria-hidden="true"></i>  PDF</h5>
+                                        <h5><i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                            <span class="business-media">PDF</span></h5>
                                     </div>      
                                     <div class="bus_pdf"></div>
                                 </div>
@@ -629,6 +633,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             var ismainregister = '<?php echo $ismainregister ?>';
             var isbusiness_register = '<?php echo $isbusiness_register ?>';
             var isbusiness_deactive = '<?php echo $isbusiness_deactive ?>';
+            var user_id = '<?php echo $this->session->userdata('aileenuser') ?>';
         </script>
         <script>
 
@@ -1008,8 +1013,15 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 {
                     var classNames = $(e.target).prop("class").toString().split(' ').pop();
                     if (classNames != 'login_link' && classNames != 'click-profiles') {
-                        return false;
-                        open_profile();
+                        if(user_id != "")
+                        {
+                            window.location = '<?php echo business_register_step1; ?>'
+                        }
+                        else
+                        {
+                            return false;
+                            open_profile();                            
+                        }
                     }
                 }                
             });
