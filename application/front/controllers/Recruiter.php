@@ -1613,6 +1613,7 @@ class Recruiter extends MY_Controller {
 			*/
 
 			$candidatejob1 = $this->recruiter_model->get_recommen_candidate_post($city_id,$title_id,$industry_id,$skill_id,$experience_id,$userid,$page,$perpage);
+			$this->data['recruiter_recommne_data'] = $candidatejob1;			
 			$recommen_candid_totrec = $this->recruiter_model->get_recommen_candidate_post_total($city_id,$title_id,$industry_id,$skill_id,$experience_id,$userid);
 			$postdata .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
 			$postdata .= '<input type = "hidden" class = "total_record" value = "' . $recommen_candid_totrec . '" />';
@@ -1626,7 +1627,7 @@ class Recruiter extends MY_Controller {
 			$this->data['page'] = $page;
 			$this->data['total_record'] = $recommen_candid_totrec;
 			$this->data['perpage'] = $perpage;
-			$this->data['search_data'] = $candidatejob1;
+			
 			$this->load->view('recruiter_live/candidate_list_view', $this->data);
 
 			/*if (isset($candidatejob1) && !empty($candidatejob1)) {
@@ -6494,7 +6495,7 @@ class Recruiter extends MY_Controller {
 		$this->data['page'] = $page;
 		$this->data['total_record'] = $recommen_candid_totrec["total_record"];
 		$this->data['perpage'] = $perpage;
-		$this->data['search_data'] = $candidatejob1;
+		$this->data['recruiter_recommne_data'] = $candidatejob1;		
 		$this->load->view('recruiter_live/candidate_list_view', $this->data);
 
 

@@ -2,9 +2,12 @@
 <input class="total_record" type="hidden" value="<?php echo $total_record; ?>"/>
 <input class="perpage_record" type="hidden" value="<?php echo $perpage; ?>"/>
 <?php
-if (isset($search_data) && !empty($search_data)) {
+if($_SERVER["REMOTE_ADDR"]=='219.91.191.99'){        
+    // print_r($recruiter_recommne_data);exit;
+}
+if (isset($recruiter_recommne_data) && !empty($recruiter_recommne_data)) {
 	$counter = 1;
-	foreach ($search_data as $row) {
+	foreach ($recruiter_recommne_data as $row) {
 	?>
 	<div class="profile-job-post-detail clearfix">
 	    <div class="profile-job-post-title-inside clearfix">
