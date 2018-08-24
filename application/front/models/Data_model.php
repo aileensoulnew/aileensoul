@@ -31,9 +31,15 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
-    function findJobTitle($search_keyword = '') {
+    function findJobTitle($search_keyword = '',$flag = 0) {
         $this->db->select('jt.title_id')->from('job_title jt');
-        $this->db->where('jt.name', $search_keyword);
+        if($flag == 1){            
+            $this->db->like('LOWER(jt.name)', strtolower($search_keyword));
+        }
+        else
+        {            
+            $this->db->where('jt.name', $search_keyword);
+        }
         $this->db->where('jt.status', 'publish');
         $query = $this->db->get();
         $result_array = $query->row_array();

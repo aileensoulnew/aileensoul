@@ -1037,7 +1037,7 @@ class User_post_model extends CI_Model {
             $sql_ser .= " OR up.city = '$keywordCity' OR us.city = '$keywordCity'";
             $sql_post .= " OR FIND_IN_SET('" . $keywordCity . "',uo.location)";
         }
-        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword);
+        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword,1);
         if ($checkKeywordJobTitle['title_id'] != '') {
             $keywordJobTitle = $checkKeywordJobTitle['title_id'];
             $sql_ser .= " OR up.designation = '$keywordJobTitle'";
@@ -1210,7 +1210,7 @@ class User_post_model extends CI_Model {
             $keywordCity = $checkKeywordCity['city_id'];
             $sql_ser .= " OR up.city = '$keywordCity' OR us.city = '$keywordCity'";            
         }
-        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword);
+        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword,1);
         if ($checkKeywordJobTitle['title_id'] != '') {
             $keywordJobTitle = $checkKeywordJobTitle['title_id'];
             $sql_ser .= " OR up.designation = '$keywordJobTitle'";            
@@ -1284,7 +1284,7 @@ class User_post_model extends CI_Model {
             $keywordCity = $checkKeywordCity['city_id'];            
             $sql_post .= " OR FIND_IN_SET('" . $keywordCity . "',uo.location)";
         }
-        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword);
+        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword,1);
         if ($checkKeywordJobTitle['title_id'] != '') {
             $keywordJobTitle = $checkKeywordJobTitle['title_id'];            
             $sql_post .= " OR FIND_IN_SET('" . $keywordJobTitle . "',uo.opportunity_for)";
