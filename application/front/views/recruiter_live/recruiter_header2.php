@@ -3,7 +3,7 @@ $userid = $this->session->userdata('aileenuser');
 ?>
 <div id="recruiter_search" class="modal fade mob-search-popup" role="dialog">
 	<form onsubmit="recruitersearchMobileSubmit()" action="javascript:void(0)" method="get">
-		<div class="new-search-input">
+		<div class="new-search-input1">
 			<input id="m_tags" class="tags ui-autocomplete-input rec_search_title" name="skills" placeholder="Job Title, skill, or Keywords" autocomplete="off" type="text">
 			<input id="m_searchplace" class="searchplace ui-autocomplete-input rec_search_loc" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
 		</div>

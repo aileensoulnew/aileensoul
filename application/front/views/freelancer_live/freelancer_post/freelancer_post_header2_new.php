@@ -4,7 +4,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 ?>
 <div id="fa_mob_search" class="modal fade mob-search-popup" role="dialog">			
 	<form method="post" name="f-fearch" onsubmit="return searchMobSubmit()">
-		<div class="new-search-input">
+		<div class="new-search-input1">
 			<div class="ui-sugges-as" id="freelance_keyword_div">
 				<input type="search" id="freelance_keyword_mob" class="tags" name="skills" value="" placeholder="Title, Keywords, or Skills" ng-model="keyword"/>
 			</div>

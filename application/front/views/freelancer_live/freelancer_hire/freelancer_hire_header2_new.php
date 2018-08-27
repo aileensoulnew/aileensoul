@@ -3,7 +3,7 @@ $userid = $this->session->userdata('aileenuser');
 ?>
 <div id="fh_mob_search" class="modal fade mob-search-popup" role="dialog">
 	<form action="<?php echo base_url('freelance-employer/search'); ?>" method="get" onSubmit="return checkformMob();">
-		<div class="new-search-input">
+		<div class="new-search-input1">
 			<input type="search" id="m_tags" class="tags" name="skills" value="" placeholder="Title, Keywords, or Skills" />
 			<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="City, State or Country" />
 		</div>

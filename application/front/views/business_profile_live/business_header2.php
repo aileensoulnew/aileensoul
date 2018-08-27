@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <div id="business_mob_search" class="modal fade mob-search-popup" role="dialog">
     <form onsubmit="businesssearchMobileSubmit()" method="get" action="javascript:void(0)">
-        <div class="new-search-input">
+        <div class="new-search-input1">
         	<input id="m_tags" class="tags ui-autocomplete-input" name="skills" placeholder="Search by Company, Category, or Products" autocomplete="off" type="text">
 			<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
         </div>

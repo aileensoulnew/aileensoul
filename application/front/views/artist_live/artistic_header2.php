@@ -3,7 +3,7 @@ $userid = $this->session->userdata('aileenuser');
 ?>
 <div id="artist_mob_search" class="modal fade mob-search-popup" role="dialog">
 	<form onsubmit="artistsearchMobileSubmit()" action="javascript:void(0)" method="get">
-		<div class="new-search-input">
+		<div class="new-search-input1">
 			<input id="m_tags" class="tags ui-autocomplete-input search_txt" name="skills" placeholder="Search by Category or Skills" autocomplete="off" type="text">
 			<input id="m_searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
 			<!-- <input type="search" id="tags1" class="tags" name="skills" value="" placeholder="Job Title,Skill,Company" /> -->
