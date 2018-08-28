@@ -24,7 +24,7 @@ class Freelancer_hire_live extends MY_Controller {
 
 	public function freelancer_hire() {
 	   
-		$userid = $this->session->userdata('aileenuser');
+		$userid = $this->session->userdata('aileenuser');		
 		$freelancerhiredata = $this->freelancer_hire_model->checkfreelanceruser($userid);
 
 		if ($freelancerhiredata) {
@@ -57,11 +57,17 @@ class Freelancer_hire_live extends MY_Controller {
 			$this->data['metadesc'] = "Find freelancer and home based online jobs on Aileensoul. Joining and posting project is completely free. Get freelance job and post your requirement now!";
 			$this->data['free_hire_related_list'] = $this->freelancer_hire_model->free_hire_related_blog_list();
 			if($userid != ""){
+				$ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
+		        $StudentData = $this->user_model->getUserStudentData($userid,"*");            
+		        if(empty($ProfessionData) && empty($StudentData))
+		        {
+		            redirect(base_url().'basic-information', 'refresh');
+		        }
 				$this->load->view('freelancer_hire_live/index', $this->data);
 			}
 			else
 			{
-				$this->load->view('freelancer_hire_live/freelancer_hire_without_main_register', $this->data);	
+				$this->load->view('freelancer_hire_live/freelancer_hire_without_main_register', $this->data);
 			}
 		}
 	}

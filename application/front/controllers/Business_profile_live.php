@@ -151,6 +151,12 @@ class Business_profile_live extends MY_Controller {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
+        $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
+        $StudentData = $this->user_model->getUserStudentData($userid,"*");            
+        if(empty($ProfessionData) && empty($StudentData))
+        {
+            redirect(base_url().'basic-information', 'refresh');
+        }
         $this->business_profile_active_check();
         $this->is_business_profile_register();
 

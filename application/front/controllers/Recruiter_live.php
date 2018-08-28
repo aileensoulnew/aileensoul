@@ -59,6 +59,13 @@ class Recruiter_live extends MY_Controller {
         if ($this->session->userdata('aileenuser')) {
             $userid = $this->session->userdata('aileenuser');
             $recuser = $this->db->select('user_id')->get_where('recruiter', array('user_id' => $userid))->row()->user_id;
+
+            $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
+            $StudentData = $this->user_model->getUserStudentData($userid,"*");            
+            if(empty($ProfessionData) && empty($StudentData))
+            {
+                redirect(base_url().'basic-information', 'refresh');
+            }
         }
         $this->data['recruiter_related_list'] = $recruiter_related_list = $this->recruiter_model->recruiter_related_blog_list();
         $this->data['search_banner'] = $this->load->view('recruiter_live/search_banner', $this->data, TRUE);

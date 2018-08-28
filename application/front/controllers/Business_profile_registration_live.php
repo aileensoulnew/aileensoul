@@ -51,6 +51,12 @@ class Business_profile_registration_live extends MY_Controller {
             $this->load->view('business_profile_live/reactivate', $this->data);
         } else {
             $userid = $this->session->userdata('aileenuser');
+            $ProfessionData = $this->user_model->getUserProfessionData($userid,"*");
+            $StudentData = $this->user_model->getUserStudentData($userid,"*");            
+            if(empty($ProfessionData) && empty($StudentData))
+            {
+                redirect(base_url().'basic-information', 'refresh');
+            }
             // GET BUSINESS PROFILE DATA
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
             $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
