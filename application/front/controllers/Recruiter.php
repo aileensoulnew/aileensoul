@@ -5085,7 +5085,13 @@ class Recruiter extends MY_Controller {
 		if ($recuser) {
 			redirect('recommended-candidates', refresh);
 		} else {
-			$this->load->view('recruiter/rec_reg', $this->data);
+			if($userid){				
+				$this->load->view('recruiter/rec_reg', $this->data);
+			}
+			else
+			{
+				redirect('recruiter/create-account', refresh);
+			}
 		}
 	}
 

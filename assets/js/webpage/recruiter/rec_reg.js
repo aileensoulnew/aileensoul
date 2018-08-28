@@ -1,4 +1,4 @@
-app.controller('recruiterController', function ($scope, $http) {
+/*app.controller('recruiterController', function ($scope, $http) {
     $scope.title = title;    
 
     // GET RELATED BLOG LIST FOR INDEX PAGE 
@@ -9,7 +9,7 @@ app.controller('recruiterController', function ($scope, $http) {
     }
     getRelatedBlogList();
 
-});
+});*/
 
 
 $(document).ready(function () {
