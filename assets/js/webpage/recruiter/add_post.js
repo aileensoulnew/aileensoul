@@ -91,8 +91,8 @@ $.validator.addMethod("greaterThan1",
                 return true;
             } else
             {
-                //return parseInt(value) > parseInt($min.val());
-                return (value) > ($min.val());
+                return parseFloat(value) > parseFloat($min.val());
+                // return (value) > ($min.val());
             }
         }, "Maximum experience must be greater than minimum experience.");
 
@@ -166,9 +166,9 @@ jQuery.validator.addMethod("isValid", function (value, element) {
         $('.year').addClass('error');
         return true;
     } else {
-        $('.day').addClass('error');
-        $('.month').addClass('error');
-        $('.year').addClass('error');
+        $('.day').removeClass('error');
+        $('.month').removeClass('error');
+        $('.year').removeClass('error');
         return false;
     }
 
@@ -185,10 +185,16 @@ $.validator.addMethod("required1", function (value, element, regexpr) {
     {
         $('.day').addClass('error');
         $('.month').addClass('error');
-        $('.year').addClass('error');
+        $('.year').addClass('error');        
         return false;
-    } else
+    }
+    else
     {
+        setTimeout(function(){            
+            $('.day').removeClass('error');
+            $('.month').removeClass('error');
+            $('.year').removeClass('error');
+        },100);
         return true;
     }
 
