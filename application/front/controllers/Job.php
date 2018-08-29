@@ -6598,4 +6598,22 @@ class Job extends MY_Controller {
         echo json_encode($data);
     }
 
+    public function rec_slug()
+    {
+        $contition_array = array('is_delete' => '0','re_status' => '1');
+        $rec_data = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id,rec_firstname,rec_lastname,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        echo "<pre>";
+        // print_r($rec_data);
+        foreach ($rec_data as $_rec_data) {
+            $firstname = $_rec_data['rec_firstname'];
+            $lastname = $_rec_data['rec_lastname'];
+            $slug = $this->setcategory_slug($firstname . '-' . $lastname, 'slug', 'recruiter');
+            $_rec_data['slug'] = $slug;
+            $data = array('slug' => $slug);
+            $updatedata = $this->common->update_data($data, 'recruiter', 'rec_id', $_rec_data['rec_id']);
+            // echo $slug."->";            
+        }
+        echo "Done";
+    }
+
 }
