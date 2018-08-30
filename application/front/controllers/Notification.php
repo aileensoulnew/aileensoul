@@ -1877,19 +1877,19 @@ Your browser does not support the audio tag.
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
                 }
@@ -1953,19 +1953,19 @@ Your browser does not support the audio tag.
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
                 }
@@ -2026,19 +2026,19 @@ Your browser does not support the audio tag.
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image" && $postDetailData[0]['post_data']['post_for'] != "question")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
                 }
-                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_data']['post_for'] != "question" && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
                 {
                     $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
                 }
