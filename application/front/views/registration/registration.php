@@ -404,7 +404,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 
                                 //window.location = "<?php echo base_url() ?>profiles/<?php //echo $this->session->userdata('aileenuser_slug'); ?>";
                                 sendmail(userid);
-                                var username = response.userslug.replace(/-/g, "_")
+                                /*var username = response.userslug.replace(/-/g, "_")
                                 var callback = function (status) {
                                     if (status === Strophe.Status.REGISTER) {
                                         conn_new.register.fields.username = username;
@@ -421,7 +421,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                         // every other status a connection.connect would receive
                                     }
                                 };
-                                conn_new.register.connect("<?php echo base_url() ?>" + "basic-information", callback, 0, 0);
+                                conn_new.register.connect("<?php echo base_url() ?>" + "basic-information", callback, 0, 0);*/
                                 window.location = "<?php echo base_url() ?>" + "basic-information";
                                 // setTimeout(' window.location.href = "<?php //echo base_url()   ?>dashboard"; ', 4000);
                             } else {

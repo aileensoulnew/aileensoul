@@ -19,6 +19,7 @@ class Registration extends CI_Controller {
         //AWS access info end
         include ('main_profile_link.php');
         include('include.php');
+        include "openfireapi/vendor/autoload.php";
 
         //This function is there only one time users slug created after remove it start
 //         $this->db->select('user_id,first_name,last_name');
@@ -55,7 +56,7 @@ class Registration extends CI_Controller {
         }
     }
 
-    public function reg_insert() {
+    public function reg_insert() {        
          
         $date = $this->input->post('selday');
         $month = $this->input->post('selmonth');
@@ -82,6 +83,8 @@ class Registration extends CI_Controller {
 
 
 
+        $first_name = $this->input->post('first_name');
+        $last_name = $this->input->post('last_name');
         $email_reg = $this->input->post('email_reg');
         $term_condi = $this->input->post('term_condi');
        
@@ -94,10 +97,11 @@ class Registration extends CI_Controller {
             if ($userdata) {
                 
             } else {
+                $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
 
                 $user_data = array(
-                    'first_name' => $this->input->post('first_name'),
-                    'last_name' => $this->input->post('last_name'),
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
                     'user_dob' => $dob,
                     'user_gender' => $this->input->post('selgen'),
                     'user_agree' => '1',
@@ -106,12 +110,25 @@ class Registration extends CI_Controller {
                     'user_verify' => '0',
                     'user_slider' => '1',
                     'term_condi' => $term_condi,
-                    'user_slug' => $this->setuser_slug($this->input->post('first_name') . '-' . $this->input->post('last_name'), 'user_slug', 'user'),
+                    'user_slug' => $user_slug,
                 );
 
 
                 $user_insert = $this->common->insert_data_getid($user_data, 'user');
                 if ($user_insert) {
+
+                    //Openfire Username Generate Start
+                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                    $op_un_ps = str_replace("-", "_", $user_slug);
+                    $properties = array();
+                    $username = $op_un_ps;
+                    $password = $op_un_ps;
+                    $name = ucwords($first_name." ".$last_name);
+                    $email = $email_reg;
+                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                    //Openfire Username Generate End
+
                     $user_login_data = array(
                         'email' => strtolower($this->input->post('email_reg')),
                         'password' => md5($this->input->post('password_reg')),
@@ -138,6 +155,7 @@ class Registration extends CI_Controller {
             $user_slug = $this->user_model->getUserSlugById($user_insert);
             $this->session->set_userdata('aileenuser', $user_insert);
             $this->session->set_userdata('aileenuser_slug', $user_slug['user_slug']);
+
             $datavl = "ok";
             echo json_encode(
                     array(
@@ -520,10 +538,13 @@ class Registration extends CI_Controller {
         {
             $dob = trim($_POST['selyear']) . '-' . trim($_POST['selmonth']) . '-' . trim($_POST['selday']);
             $ip = $this->input->ip_address();
+            $first_name = trim($_POST['first_name']);
+            $last_name = trim($_POST['last_name']);            
+            $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
             
             $user_data = array(
-                'first_name' => trim($_POST['first_name']),
-                'last_name' => trim($_POST['last_name']),
+                'first_name' => $first_name,
+                'last_name' => $last_name,
                 'user_dob' => $dob,
                 'user_gender' => trim($_POST['selgen']),
                 'user_agree' => '1',
@@ -532,10 +553,23 @@ class Registration extends CI_Controller {
                 'user_verify' => '0',
                 'user_slider' => '1',
                 'term_condi' => $_POST['term_condi'],
-                'user_slug' => $this->setuser_slug(trim($_POST['first_name']) . '-' . trim($_POST['last_name']), 'user_slug', 'user'),
+                'user_slug' => ,
             );
             $user_insert = $this->common->insert_data_getid($user_data, 'user');
             if ($user_insert) {
+
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
+
                 $user_login_data = array(
                     'email' => strtolower($email_reg),
                     'password' => md5(trim($_POST['password_reg'])),

@@ -369,7 +369,7 @@ $(document).ready(function () {
                    // window.location = base_url + "profiles/" + response.userslug;
                     //window.location = base_url + "profiles/basic-information/" + response.userslug;
                     sendmail(userid);
-                    var username = response.userslug.replace(/-/g, "_")
+                    /*var username = response.userslug.replace(/-/g, "_")
                     var callback = function (status) {
                         if (status === Strophe.Status.REGISTER) {
                             conn_new.register.fields.username = username;
@@ -386,7 +386,7 @@ $(document).ready(function () {
                             // every other status a connection.connect would receive
                         }
                     };
-                    conn_new.register.connect(base_url + "basic-information", callback, 0, 0);
+                    conn_new.register.connect(base_url + "basic-information", callback, 0, 0);*/
                     setTimeout(function(){                        
                         window.location = base_url + "basic-information";
                     },1000);
