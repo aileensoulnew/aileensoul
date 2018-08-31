@@ -188,7 +188,7 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
                     $scope.errorotherField = success.data.errors.otherField;
                 } else {
                     if (success.data.okmsg == "ok") {                        
-                        var username = success.data.userslug.replace(/-/g, "_");
+                        /*var username = success.data.userslug.replace(/-/g, "_");
                         var callback = function (status) {
                             if (status === Strophe.Status.REGISTER) {
                                 conn_new.register.fields.username = username;
@@ -205,7 +205,7 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
                                 // every other status a connection.connect would receive
                             }
                         };
-                        conn_new.register.connect(base_url+"freelancer/general-info", callback, 0, 0);
+                        conn_new.register.connect(base_url+"freelancer/general-info", callback, 0, 0);*/
                         $('#basic_info_ajax_load').hide();
                         var title = "freelancer Information"
                         var url = base_url+"freelancer/general-info";
