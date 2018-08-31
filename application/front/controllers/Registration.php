@@ -553,7 +553,7 @@ class Registration extends CI_Controller {
                 'user_verify' => '0',
                 'user_slider' => '1',
                 'term_condi' => $_POST['term_condi'],
-                'user_slug' => ,
+                'user_slug' => $user_slug,
             );
             $user_insert = $this->common->insert_data_getid($user_data, 'user');
             if ($user_insert) {
