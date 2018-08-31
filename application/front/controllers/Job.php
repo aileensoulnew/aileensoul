@@ -31,6 +31,7 @@ class Job extends MY_Controller {
         include ('main_profile_link.php');
         include ('include.php');
         include ('job_include.php');
+        include "openfireapi/vendor/autoload.php";
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
     }
 
@@ -3313,11 +3314,14 @@ class Job extends MY_Controller {
 
             $city = implode(',', $city);
         }
-
+        $first_name = $this->input->post('first_name');
+        $last_name = $this->input->post('last_name');
+        $email_reg = $this->input->post('email');
+        $user_slug = $this->setcategory_slug($first_name . '-' . $last_name, 'slug', 'job_reg');
         $data1 = array(
-            'fname' => ucfirst($this->input->post('first_name')),
-            'lname' => ucfirst($this->input->post('last_name')),
-            'email' => $this->input->post('email'),
+            'fname' => ucfirst($first_name),
+            'lname' => ucfirst($last_name),
+            'email' => $email_reg,
             'keyskill' => $skills,
             'work_job_title' => $jobtitle,
             'work_job_industry' => $this->input->post('industry'),
@@ -3330,7 +3334,7 @@ class Job extends MY_Controller {
             'created_date' => date('Y-m-d h:i:s', time()),
             'user_id' => $userid,
             'job_step' => '10',
-            'slug' => $this->setcategory_slug($this->input->post('first_name') . '-' . $this->input->post('last_name'), 'slug', 'job_reg')
+            'slug' => $user_slug
         );
 
 
@@ -3339,9 +3343,22 @@ class Job extends MY_Controller {
         $job = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if ($userid) {
             if ($job[0]['total'] != 0) {
+                unset($data1[count($data1)-1]);
                 $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
             } else {
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
+
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "job_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
 
                 if($data1['keyskill'] != "")
                 {
@@ -6244,10 +6261,15 @@ class Job extends MY_Controller {
             $city = implode(',', $city);
         }
 
+        $first_name = $this->input->post('first_name');
+        $last_name = $this->input->post('last_name');
+        $email_reg = $this->input->post('email');
+        $user_slug = $this->setcategory_slug($first_name . '-' . $last_name, 'slug', 'job_reg');
+
         $data1 = array(
-            'fname' => ucfirst($this->input->post('first_name')),
-            'lname' => ucfirst($this->input->post('last_name')),
-            'email' => $this->input->post('email'),
+            'fname' => ucfirst($first_name),
+            'lname' => ucfirst($last_name),
+            'email' => $email_reg,
             'keyskill' => $skills,
             'work_job_title' => $jobtitle,
             'work_job_industry' => $this->input->post('industry'),
@@ -6260,15 +6282,29 @@ class Job extends MY_Controller {
             'created_date' => date('Y-m-d h:i:s', time()),
             'user_id' => $userid,
             'job_step' => '10',
-            'slug' => $this->setcategory_slug($this->input->post('first_name') . '-' . $this->input->post('last_name'), 'slug', 'job_reg')
+            'slug' => $user_slug
         );
 
         $contition_array = array('user_id' => $userid);
         $job = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         if ($userid) {
             if ($job[0]['total'] != 0) {
+                unset($data1[count($data1)-1]);
                 $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
             } else {
+
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "job_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
+
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
 
                 if($job_save != "")
@@ -6509,6 +6545,7 @@ class Job extends MY_Controller {
                 }
             }
 
+            $user_slug = $this->setcategory_slug($firstname . '-' . $lastname, 'slug', 'job_reg');
             $data1 = array(
                 'fname' => ucfirst($firstname),
                 'lname' => ucfirst($lastname),
@@ -6526,19 +6563,30 @@ class Job extends MY_Controller {
                 'created_date' => date('Y-m-d h:i:s', time()),
                 'user_id' => $userid,
                 'job_step' => '10',
-                'slug' => $this->setcategory_slug($firstname . '-' . $lastname, 'slug', 'job_reg')
+                'slug' => $user_slug
             );
-
-
 
             $contition_array = array('user_id' => $userid);
             $job = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
             if ($userid) {
                 if ($job[0]['total'] != 0) {
+                    unset($data1[count($data1)-1]);
                     $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
                 } else {
                     $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
 
+                    //Openfire Username Generate Start
+                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                    $op_un_ps = str_replace("-", "_", $user_slug);
+                    $properties = array();
+                    $username = $op_un_ps;
+                    $password = $op_un_ps;
+                    $name = ucwords($firstname." ".$lastname);
+                    // $email = $email_reg;
+                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                    //Openfire Username Generate End
+                    
                     if($data1['keyskill'] != "")
                     {
                         $skill_name = "";

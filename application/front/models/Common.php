@@ -777,4 +777,31 @@ class Common extends CI_Model {
         return $result;
     }
 
+    // CREATE SLUG START
+    public function set_slug($slugname, $filedname, $tablename, $notin_id = array()) {
+        $slugname = $oldslugname = $this->create_slug($slugname);
+        $i = 1;
+        while ($this->compare_slug($slugname, $filedname, $tablename, $notin_id) > 0) {
+            $slugname = $oldslugname . '-' . $i;
+            $i++;
+        }return $slugname;
+    }
+
+    public function compare_slug($slugname, $filedname, $tablename, $notin_id = array()) {
+        $this->db->where($filedname, $slugname);
+        if (isset($notin_id) && $notin_id != "" && count($notin_id) > 0 && !empty($notin_id)) {
+            $this->db->where($notin_id);
+        }
+        $num_rows = $this->db->count_all_results($tablename);
+        return $num_rows;
+    }
+
+    public function create_slug($string) {
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower(stripslashes($string)));
+        $slug = preg_replace('/[-]+/', '-', $slug);
+        $slug = trim($slug, '-');
+        return $slug;
+    }
+    // CREATE SLUG END
+
 }

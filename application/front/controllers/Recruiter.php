@@ -20,6 +20,7 @@ class Recruiter extends MY_Controller {
 		$this->load->library('S3');
 		include ('main_profile_link.php');
 		include ('rec_include.php');
+		include "openfireapi/vendor/autoload.php";
 
 	}
 
@@ -5131,11 +5132,14 @@ class Recruiter extends MY_Controller {
 			$this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 			$this->load->view('recruiter/rec_reg', $this->data);
 		} else {
-
+			$first_name = $this->input->post('first_name');
+			$last_name = $this->input->post('last_name');
+			$email_reg = $this->input->post('email');
+			$user_slug = $this->common->set_slug($first_name . '-' . $last_name, 'slug', 'recruiter');
 			$data = array(
-				'rec_firstname' => $this->input->post('first_name'),
-				'rec_lastname' => $this->input->post('last_name'),
-				'rec_email' => $this->input->post('email'),
+				'rec_firstname' => $first_name,
+				'rec_lastname' => $last_name,
+				'rec_email' => $email_reg,
 				'user_id' => $userid,
 				're_comp_name' => $this->input->post('comp_name'),
 				're_comp_email' => $this->input->post('comp_email'),
@@ -5147,11 +5151,24 @@ class Recruiter extends MY_Controller {
 				'created_date' => date('y-m-d h:i:s'),
 				're_status' => '1',
 				'is_delete' => '0',
-				're_step' => '3'
+				're_step' => '3',
+				'slug' => $user_slug
 			);
 
-
 			$insert_id = $this->common->insert_data_getid($data, 'recruiter');
+			
+			//Openfire Username Generate Start
+            $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+            $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+            $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
+            $properties = array();
+            $username = $op_un_ps;
+            $password = $op_un_ps;
+            $name = ucwords($first_name." ".$last_name);
+            $email = $email_reg;
+            $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+            //Openfire Username Generate End
+
 			if ($this->input->post('segment') == 'live-post') {
 				$segment = $this->input->post('segment');
 
@@ -5846,6 +5863,7 @@ class Recruiter extends MY_Controller {
 			$country = trim($_POST['country']);
 			$state = trim($_POST['state']);
 			$city = trim($_POST['city']);
+			$user_slug = $this->common->set_slug($first_name . '-' . $last_name, 'slug', 'recruiter');
 
 			$data = array(
 				'rec_firstname' => $first_name,
@@ -5862,11 +5880,23 @@ class Recruiter extends MY_Controller {
 				'created_date' => date('y-m-d h:i:s'),
 				're_status' => '1',
 				'is_delete' => '0',
-				're_step' => '3'
+				're_step' => '3',
+				'slug' => $user_slug
 			);
 
 			$insert_id = $this->common->insert_data_getid($data, 'recruiter');            
-			if ($insert_id) {                
+			if ($insert_id) {
+				//Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                // $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
 				$data = array("is_success" => 1);
 			} else {
 				$data['errors'] = $errors['not_sucess'] = "Please Try again";

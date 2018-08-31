@@ -283,7 +283,8 @@ class Recruiter_live extends MY_Controller {
         if ($userid) {
             $this->load->view('recruiter_live/rec_profile', $this->data);
         } else {
-            $this->load->view('recruiter_live/rec_liveprofile', $this->data);
+            redirect(base_url(),"refresh");
+            // $this->load->view('recruiter_live/rec_liveprofile', $this->data);
         }
     }
 
