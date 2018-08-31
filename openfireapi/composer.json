@@ -1,0 +1,5 @@
+{
+    "require": {
+        "gnello/php-openfire-restapi": "^2.0"
+    }
+}
