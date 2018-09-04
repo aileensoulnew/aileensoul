@@ -23,7 +23,8 @@ class Business_profile_registration extends MY_Controller {
         //AWS access info end
 
         $userid = $this->session->userdata('aileenuser');
-            include ('business_include.php');
+        include ('business_include.php');
+        include "openfireapi/vendor/autoload.php";
 
         // FIX BUSINESS PROFILE NO POST DATA
 
@@ -234,14 +235,14 @@ class Business_profile_registration extends MY_Controller {
             $data['errors'] = $errors;
         } else {
             if ($_POST['busreg_step'] == '0' || $_POST['busreg_step'] == '') {
-                $data['company_name'] = $_POST['companyname'];
+                $data['company_name'] = $company_name = $_POST['companyname'];
                 $data['country'] = $_POST['country_id'];
                 $data['state'] = $_POST['state_id'];
                 $data['city'] = $_POST['city_id'];
                 $data['pincode'] = $_POST['pincode'];
                 $data['address'] = $_POST['business_address'];
                 $data['user_id'] = $userid;
-                $data['business_slug'] = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
+                $data['business_slug'] = $business_slug = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
                 $data['created_date'] = date('Y-m-d H:i:s', time());
                 $data['status'] = '1';
                 $data['is_deleted'] = '0';
@@ -251,6 +252,19 @@ class Business_profile_registration extends MY_Controller {
                 $data['contact_email'] = $userdata['email'];
 
                 $insert_id = $this->common->insert_data_getid($data, 'business_profile');
+
+                //Openfire Username Generate Start
+                $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "business_".str_replace("-", "_", $business_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = $company_name;
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
 
                 if(trim($data['country']) != "")
                 {
@@ -957,7 +971,7 @@ class Business_profile_registration extends MY_Controller {
             $data['errors'] = $errors;
         } else {
 
-            $data['company_name'] = trim($_POST['companyname']);
+            $data['company_name'] = $company_name = trim($_POST['companyname']);
             $data['country'] = trim($_POST['country']);
             $data['state'] = trim($_POST['state']);
             $data['city'] = trim($_POST['city']);
@@ -984,7 +998,7 @@ class Business_profile_registration extends MY_Controller {
             $data['details'] = trim($_POST['business_details']);
 
             $data['user_id'] = $userid;
-            $data['business_slug'] = $this->setcategory_slug(trim($data['company_name']), 'business_slug', 'business_profile');
+            $data['business_slug'] = $business_slug = $this->setcategory_slug(trim($data['company_name']), 'business_slug', 'business_profile');
             $data['created_date'] = date('Y-m-d H:i:s', time());
             $data['status'] = '1';
             $data['is_deleted'] = '0';
@@ -992,6 +1006,19 @@ class Business_profile_registration extends MY_Controller {
             $data['modified_date'] = date('Y-m-d H:i:s', time());
 
             $insert_id = $this->common->insert_data_getid($data, 'business_profile');
+
+            //Openfire Username Generate Start
+            $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
+            $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+            $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+            $op_un_ps = "business_".str_replace("-", "_", $business_slug);
+            $properties = array();
+            $username = $op_un_ps;
+            $password = $op_un_ps;
+            $name = $company_name;
+            $email = $email_reg;
+            $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+            //Openfire Username Generate End
 
             if(trim($data['industriyal']) != "")
             {

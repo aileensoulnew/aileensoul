@@ -4,8 +4,8 @@ $userid = $this->session->userdata('aileenuser');
 <div id="fh_mob_search" class="modal fade mob-search-popup" role="dialog">
 	<form action="<?php echo base_url('freelance-employer/search'); ?>" method="get" onSubmit="return checkformMob();">
 		<div class="new-search-input1">
-			<input type="search" id="m_tags" class="tags" name="skills" value="" placeholder="Title, Keywords, or Skills" />
-			<input type="search" id="searchplace1" class="searchplace" name="searchplace" value="" placeholder="City, State or Country" />
+			<input type="search" id="m_tags" class="tags skill_keyword" name="skills" value="" placeholder="Title, Keywords, or Skills" />
+			<input type="search" id="searchplace1" class="searchplace skill_place" name="searchplace" value="" placeholder="City, State or Country" />
 		</div>
 		<div class="new-search-btn">
 			<button type="button" class="close-new btn" data-dismiss="modal">Cancel</button>
@@ -227,7 +227,7 @@ $userid = $this->session->userdata('aileenuser');
                                 <input id="d_tags" class="tags ui-autocomplete-input skill_keyword" name="skills" placeholder="Title, Keywords, or Skills" autocomplete="off" type="text">
                             </fieldset>
                             <fieldset class="sec_h2">
-                                <input id="searchplace" class="searchplace ui-autocomplete-input skill_keyword" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
+                                <input id="searchplace" class="searchplace ui-autocomplete-input skill_place" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">
                             </fieldset>
                             <fieldset class="new-search-btn">
                                 <label for="search_btn" id="search_f"><i class="fa fa-search" aria-hidden="true"></i></label>
