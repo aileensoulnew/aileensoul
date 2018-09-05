@@ -19,6 +19,7 @@ class Freelancer_hire_live extends MY_Controller {
 		//AWS access info end
 		include ('main_profile_link.php');
 		include ('freelancer_hire_include.php');
+		include "openfireapi/vendor/autoload.php";
 		$this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
 	}
 
@@ -3149,11 +3150,12 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
             $city = trim($_POST['city']);
 
         	$first_lastname = $first_name. " " .$last_name;
+        	$freelancer_hire_slug = $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg');
             $data = array(
                 'fullname' => $first_name,
                 'username' => $last_name,
                 'email' => $email,
-                'freelancer_hire_slug' => $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg'),
+                'freelancer_hire_slug' => $freelancer_hire_slug,
                 'phone' => $phoneno,
                 'country' => $country,
                 'state' => $state,
@@ -3167,6 +3169,17 @@ public function selectemail_user($select_user = '', $post_id = '', $word = '') {
             );
             $insert_id = $this->freelancer_hire_model->insert_data($data, 'freelancer_hire_reg');
             if ($insert_id) {
+            	//Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "fh_".str_replace("-", "_", $freelancer_hire_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
             	$data = array("is_success" => 1);
             } else {
                 $data['errors'] = $errors['not_sucess'] = "Please Try again";

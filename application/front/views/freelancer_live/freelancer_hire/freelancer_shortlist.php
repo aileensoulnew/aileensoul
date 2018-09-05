@@ -319,7 +319,7 @@
                     data: 'post_id=' + post_id + '&invited_user=' + clicked_id,
                     dataType: 'json',
                     success: function (data) { //alert(data);
-                        $('#' + 'invited' + clicked_id).html(data).addClass('button invited').removeClass('invite_border').removeAttr("onclick");
+                        $('#' + 'invited' + clicked_id).html(data.status).addClass('button invited').removeClass('invite_border').removeAttr("onclick");
                         $('#' + 'invited' + clicked_id).css('cursor', 'default');
                         if (data.notification.notification_count != 0) {
                             var notification_count = data.notification.notification_count;

@@ -18,6 +18,7 @@ class Freelancer_hire extends MY_Controller {
         //AWS access info end
         include ('main_profile_link.php');
         include ('freelancer_hire_include.php');
+        include "openfireapi/vendor/autoload.php";
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
         
          
@@ -127,12 +128,16 @@ class Freelancer_hire extends MY_Controller {
             $this->data['title'] = "Registration | Employer Profile" . TITLEPOSTFIX;
             $this->load->view('freelancer/freelancer_hire/hire_registration', $this->data);
         } else {
-            $first_lastname = trim($this->input->post('firstname')) . " " . trim($this->input->post('lastname'));
+            $firstname = trim($this->input->post('firstname'));
+            $lastname = trim($this->input->post('lastname'));
+            $email_reg = trim($this->input->post('email_reg1'));
+            $first_lastname = trim($firstname) . " " . trim($lastname);
+            $freelancer_hire_slug = $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg');
             $data = array(
-                'fullname' => trim($this->input->post('firstname')),
-                'username' => trim($this->input->post('lastname')),
-                'email' => trim($this->input->post('email_reg1')),
-                'freelancer_hire_slug' => $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg'),
+                'fullname' => $firstname,
+                'username' => $lastname,
+                'email' => $email_reg,
+                'freelancer_hire_slug' => $freelancer_hire_slug,
                 'phone' => trim($this->input->post('phoneno')),
                 'country' => trim($this->input->post('country')),
                 'state' => trim($this->input->post('state')),
@@ -202,8 +207,18 @@ class Freelancer_hire extends MY_Controller {
                 $updatdata = $this->freelancer_hire_model->update_data($data, 'freelancer_post_live', 'post_id', $temp[0][post_id]);
             }
 
-
             if ($insert_id1) {
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "fh_".str_replace("-", "_", $freelancer_hire_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($firstname." ".$lastname);
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
                 // if ($this->input->post('segment') == 'live-post') {
                 //     $this->session->set_flashdata('error', 'Your project successfully posted');
                   

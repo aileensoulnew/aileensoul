@@ -1,4 +1,4 @@
-123<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title><?php echo $title; ?></title>

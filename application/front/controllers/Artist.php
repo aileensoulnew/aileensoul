@@ -31,7 +31,8 @@ class Artist extends MY_Controller {
         //     $this->db->update('art_reg', $data);
         //  }
         //This function is there only one time users slug created after remove it End
-         include ('main_profile_link.php');
+        include "openfireapi/vendor/autoload.php";
+        include ('main_profile_link.php');
 
         include ('artistic_include.php');
         $this->data['no_artistic_post_html'] = '<div class="art_no_post_avl"><h3>Artistic Post</h3><div class="art-img-nn"><div class="art_no_post_img"><img src=' . base_url('assets/img/art-no.png') . ' alt="art-no.png"></div><div class="art_no_post_text">No Post Available.</div></div></div>';
@@ -156,10 +157,13 @@ class Artist extends MY_Controller {
         $category = $this->input->post('skills');
         $category = implode(',', $category);
 
+        $first_name = $this->input->post('firstname');
+        $last_name = $this->input->post('lastname');
+        $user_slug = $this->setcategory_slug($first_name . '-' . $last_name, 'slug', 'art_reg');
 
         $data = array(
-            'art_name' => $this->input->post('firstname'),
-            'art_lastname' => $this->input->post('lastname'),
+            'art_name' => $first_name,
+            'art_lastname' => $last_name,
             'art_email' => $this->input->post('email'),
             'art_phnno' => $this->input->post('phoneno'),
             'art_country' => $this->input->post('country'),
@@ -172,10 +176,31 @@ class Artist extends MY_Controller {
             'status' => '1',
             'is_delete' => '0',
             'art_step' => '4',
-            'slug' => $this->setcategory_slug($this->input->post('firstname') . '-' . $this->input->post('lastname'), 'slug', 'art_reg')
+            'slug' => $user_slug
         );
         if ($userid) {
-            $insert_id = $this->common->insert_data_getid($data, 'art_reg');
+            $artistData = $this->db->get_where('art_reg', array('user_id' => $userid, 'status' => '1'))->row();
+            if(isset($artistData) && !empty($artistData))
+            {
+                unset($data['slug']);
+                $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+            }
+            else
+            {                
+                $insert_id = $this->common->insert_data_getid($data, 'art_reg');
+
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "artist_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($first_name." ".$last_name);
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
+            }
 
             if($data['art_skill'] != "")
             {
@@ -16265,7 +16290,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         return $artresult;
     }
 
-    public function profile_insert_new() {        
+    public function profile_insert_new() {
         $userid = $this->session->userdata('aileenuser');
 
         $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
@@ -16331,7 +16356,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
             $category = $skills;//$this->input->post('skills');
             $category = implode(',', $category);
 
-
+            $user_slug = $this->setcategory_slug($firstname . '-' . $lastname, 'slug', 'art_reg');
             $reg_data = array(
                 'art_name' => $firstname,
                 'art_lastname' => $lastname,
@@ -16347,10 +16372,22 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 'status' => '1',
                 'is_delete' => '0',
                 'art_step' => '4',
-                'slug' => $this->setcategory_slug($firstname . '-' . $lastname, 'slug', 'art_reg')
+                'slug' => $user_slug
             );
             if ($userid) {
                 $insert_id = $this->common->insert_data_getid($reg_data, 'art_reg');
+
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "artist_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($firstname." ".$lastname);
+                $email = $email;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
 
                 if($reg_data['art_skill'] != "")
                 {

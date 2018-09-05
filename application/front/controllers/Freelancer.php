@@ -19,6 +19,7 @@ class Freelancer extends MY_Controller {
         $this->load->library('S3');
         include ('main_profile_link.php');
         include ('freelancer_include.php');
+        include "openfireapi/vendor/autoload.php";
         $this->data['aileenuser_id'] = $this->session->userdata('aileenuser');
     }
 
@@ -2699,7 +2700,7 @@ class Freelancer extends MY_Controller {
             $hireuser = $this->db->select('user_id')->get_where('freelancer_post_reg', array('user_id' => $userid))->row()->user_id;
         }
         if ($hireuser) {
-            redirect('freelance-work/home', refresh);
+            redirect('recommended-freelance-work', refresh);
         } else {
             $this->load->view('freelancer_live/freelancer_post/registation', $this->data);
         }
@@ -2775,12 +2776,16 @@ class Freelancer extends MY_Controller {
                     $skills = implode(',', $skill);
                 }
 
-                $first_lastname = trim($this->input->post('firstname')) . " " . trim($this->input->post('lastname'));
+                $first_name = trim($this->input->post('firstname'));
+                $last_name = trim($this->input->post('lastname'));
+                $email_reg = trim($this->input->post('email'));
+                $first_lastname = $first_name." ".$last_name;
+                $user_slug = $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg');
 
                 $data = array(
-                    'freelancer_post_fullname' => trim($this->input->post('firstname')),
-                    'freelancer_post_username' => trim($this->input->post('lastname')),
-                    'freelancer_post_email' => trim($this->input->post('email')),
+                    'freelancer_post_fullname' => $first_name,
+                    'freelancer_post_username' => $last_name,
+                    'freelancer_post_email' => $email_reg,
                     'freelancer_post_country' => trim($this->input->post('country')),
                     'freelancer_post_state' => trim($this->input->post('state')),
                     'freelancer_post_city' => trim($this->input->post('city')),
@@ -2788,7 +2793,7 @@ class Freelancer extends MY_Controller {
                     'freelancer_post_area' => $skills,
                     'freelancer_post_exp_month' => trim($this->input->post('experience_month')),
                     'freelancer_post_exp_year' => trim($this->input->post('experience_year')),
-                    'freelancer_apply_slug' => $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg'),
+                    'freelancer_apply_slug' => $user_slug,
                     'user_id' => $userid,
                     'created_date' => date('Y-m-d', time()),
                     'status' => '1',
@@ -2797,6 +2802,17 @@ class Freelancer extends MY_Controller {
                 );
                 $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');                
                 if ($insert_id) {
+                    //Openfire Username Generate Start
+                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                    $op_un_ps = "fa_".str_replace("-", "_", $user_slug);
+                    $properties = array();
+                    $username = $op_un_ps;
+                    $password = $op_un_ps;
+                    $name = ucwords($first_name." ".$last_name);
+                    $email = $email_reg;
+                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                    //Openfire Username Generate End
                     if(trim($data['freelancer_post_field']) != "")
                     {
                         $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
@@ -3136,6 +3152,7 @@ class Freelancer extends MY_Controller {
             }
 
             $first_lastname = $firstname . " " . $lastname;
+            $user_slug = $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg');
             $data = array(
                 'freelancer_post_fullname' => $firstname,
                 'freelancer_post_username' => $lastname,
@@ -3147,7 +3164,7 @@ class Freelancer extends MY_Controller {
                 'freelancer_post_area' => $skills,
                 'freelancer_post_exp_month' => $experience_month,
                 'freelancer_post_exp_year' => $experience_year,
-                'freelancer_apply_slug' => $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg'),
+                'freelancer_apply_slug' => $user_slug,
                 'user_id' => $userid,
                 'created_date' => date('Y-m-d', time()),
                 'status' => '1',
@@ -3155,7 +3172,18 @@ class Freelancer extends MY_Controller {
                 'free_post_step' => '7'
             );
             $insert_id = $this->common->insert_data_getid($data, 'freelancer_post_reg');            
-            if ($insert_id) {                
+            if ($insert_id) {
+                //Openfire Username Generate Start
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "fa_".str_replace("-", "_", $user_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = ucwords($firstname." ".$lastname);
+                $email = $email;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
                 if(trim($data['freelancer_post_field']) != "")
                 {
                     $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
