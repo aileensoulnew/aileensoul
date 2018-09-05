@@ -193,8 +193,11 @@
 											<?php
 											$returnpage = $_GET['page'];
 											if ($this->uri->segment(3) != $userid) {
+												// $msg_url = base_url('chat/abc/1/2/' . $this->uri->segment(3));//Old
+												$msg_url = MESSAGE_URL.'job/recruiter-'.$recdata['slug'];
+
 												?>
-												<a href="<?php echo base_url('chat/abc/1/2/' . $this->uri->segment(3)); ?>" title="Message">Message</a>
+												<a href="<?php echo $msg_url; ?>" title="Message">Message</a>
 												<?php } else { ?>
 												<a href="<?php echo base_url('chat/abc/2/1/' . $this->uri->segment(3)); ?>" title="Message">Message</a>
 												<?php } ?>

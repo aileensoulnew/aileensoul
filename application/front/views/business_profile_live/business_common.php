@@ -40,7 +40,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 $user_id = $this->db->get_where('business_profile', array('business_slug' => $business_slug_data))->row()->user_id;
             }
             $contition_array = array('user_id' => $user_id, 'is_deleted' => '0', 'status' => '1');
-            $image = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $image = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'profile_background,business_slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
             $image_ori = $image[0]['profile_background'];
             if ($image_ori) {
@@ -323,7 +323,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     </div>         
                                                 </li>
                                                 <li>
-                                                    <a href="<?php echo base_url('chat/abc/5/5/' . $business_common_data[0]['user_id']); ?>">Message</a></li>
+                                                    <?php
+                                                    // $message_url = base_url('chat/abc/5/5/' . $business_common_data[0]['user_id']);//Old
+                                                    $message_url = MESSAGE_URL.'business/business-'.$image[0]['business_slug'];
+                                                    ?>
+                                                    <a href="<?php echo $message_url; ?>">Message</a></li>
                                             <?php } ?>
                                         </ul>   
                                     </div>

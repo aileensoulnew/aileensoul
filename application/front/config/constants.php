@@ -49,7 +49,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
     define('OPENFIRESERVERDASH', '127-0-0-1');
     define('OP_ADMIN_UN', 'admin');
     define('OP_ADMIN_PW', 'admin@123');
-    define('MESSAGE_URL', 'http://localhost/chat/user');
+    define('MESSAGE_URL', 'http://localhost/chat/');
     error_reporting(0);
 }else if ($_SERVER['HTTP_HOST'] == '35.165.1.109:81' || $_SERVER['SERVER_ADDR'] == '35.165.1.109') {
     define('BASEURL', 'http://35.165.1.109:81/');

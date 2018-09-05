@@ -261,8 +261,10 @@
                                         <?php
                                             $userid = $this->session->userdata('aileenuser');
                                             if ($userid != $artisticdata[0]['user_id']) {
+                                                // $msg_url = base_url('chat/abc/6/6/' . $artisticdata[0]['user_id']);//old
+                                                $msg_url = MESSAGE_URL.'artist/artist-'.$artisticdata[0]['slug'];
                                                 ?>
-                                    <li> <a href="<?php echo base_url('chat/abc/6/6/' . $artisticdata[0]['user_id']); ?>">Message</a> </li>
+                                    <li> <a href="<?php echo $msg_url; ?>">Message</a> </li>
                                     <?php } ?>
                             </ul>
                         </div>
