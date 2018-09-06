@@ -216,11 +216,13 @@
                                                 <li> 
                                                     <?php
                                                     if ($freelancr_user_data[0]['user_id'] != $this->session->userdata('aileenuser')) {
+                                                        // $msg_url = base_url('chat/abc/4/3/' . $id);//Old
+                                                        $msg_url = $freelancr_user_data[0]['freelancer_hire_slug'];
                                                         ?>
-                                                        <a title="Message" href="<?php echo base_url('chat/abc/4/3/' . $id); ?>"><?php echo $this->lang->line("message"); ?></a>
-                                                    <?php } else { ?>
+                                                        <a title="Message" href="<?php echo MESSAGE_URL.'fa/fh-'.$msg_url; ?>"><?php echo $this->lang->line("message"); ?></a>
+                                                    <?php } /*else { ?>
                                                         <a title="Message" href="<?php echo base_url('chat/abc/3/4/' . $id); ?>"><?php echo $this->lang->line("message"); ?></a>
-                                                    <?php }
+                                                    <?php }*/
                                                     ?>
                                                 </li>
 

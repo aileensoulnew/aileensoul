@@ -273,15 +273,20 @@ if (isset($recruiter_recommne_data) && !empty($recruiter_recommne_data)) {
 					{
 						if (!$data)
 						{
+							// $msg_url = base_url() . 'chat/abc/2/1/' . $row['iduser'];//Old
+							$msg_url = MESSAGE_URL.'recruiter/job-'.$row['slug'];
 						?>
-		                	<a href="<?php echo base_url() . 'chat/abc/2/1/' . $row['iduser']; ?>" title="Message">Message</a>
+		                	<a href="<?php echo $msg_url; ?>" title="Message">Message</a>
 		                	<input id="hideenuser<?php echo $row['iduser']; ?>" type="hidden" value="<?php echo $data[0]['save_id']; ?>" />
 		                	<a class="saveduser<?php echo $row['iduser']; ?>" href="javascript:void(0);" id="<?php echo $row['iduser']; ?>" onclick="savepopup(<?php echo $row['iduser']; ?>)" title="Save">Save</a>                
 		            	<?php 
 		            	}
 		            	else
-		            	{ ?>
-							<a href="<?php echo base_url() . 'chat/abc/2/1/' . $row['iduser']; ?>" title="Message">Message</a>
+		            	{ 
+		            		// $msg_url = base_url() . 'chat/abc/2/1/' . $row['iduser'];//Old
+							$msg_url = MESSAGE_URL.'recruiter/job-'.$row['slug'];
+							?>
+							<a href="<?php echo $msg_url; ?>" title="Message">Message</a>
 							<a class="saved">Saved</a>
 						<?php 
 						}

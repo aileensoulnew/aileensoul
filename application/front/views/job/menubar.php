@@ -90,9 +90,11 @@ if ($userid != $id) {
                                     <a onclick="register_profile();">Save</a> 
                                 </li>
         <?php } ?>
-                            <?php if ($userid) { ?>
+                            <?php if ($userid) {
+                                // $msg_url = base_url('chat/abc/2/1/' . $id);//Old
+                                $msg_url = MESSAGE_URL.'recruiter/job-'.$slugdata[0]['slug']; ?>
                                 <li> 
-                                    <a href="<?php echo base_url('chat/abc/2/1/' . $id); ?>">Message</a> 
+                                    <a href="<?php echo $msg_url; ?>">Message</a> 
                                 </li>
         <?php } else { ?>
 

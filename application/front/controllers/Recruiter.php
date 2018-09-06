@@ -3819,8 +3819,10 @@ class Recruiter extends MY_Controller {
 					<div class="apply-btn fr" >';
 					$userid = $this->session->userdata('aileenuser');
 					if ($userid != $rec['userid']) {
+						// $msg_url = base_url() . 'chat/abc/2/1/' . $rec['userid'];//Old
+						$msg_url = MESSAGE_URL.'recruiter/job-'.$rec['slug'];
 
-						$return_html .= '<a title="Message" href="' . base_url() . 'chat/abc/2/1/' . $rec['userid'] . '">Message</a>';
+						$return_html .= '<a title="Message" href="'.$msg_url.'">Message</a>';
 
 						$return_html .= '<a title="Remove" href="javascript:void(0);" class="button" onclick="removepopup(' . $rec['save_id'] . ')">Remove</a>';
 					}

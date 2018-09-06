@@ -1171,12 +1171,12 @@ public function freelancer_hire_post($id = "") {
 		$this->freelancer_hire_check();
 			// code for display page end
 		$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
-		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id';
+		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,freelancer_hire_slug';
 		$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 	} else {
 		$userid = $id;
 		$contition_array = array('is_delete' => '0', 'user_id' => $userid, 'status' => '1', 'free_hire_step' => '3');
-		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id';
+		$data = 'username,fullname,designation,freelancer_hire_user_image,user_id,freelancer_hire_slug';
 		$hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 	}
 	$this->data['title'] = ucfirst($hire_data[0]['fullname']) . " " . ucfirst($hire_data[0]['username']) . " | Projects | Employer Profile " . TITLEPOSTFIX;

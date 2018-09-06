@@ -212,7 +212,7 @@ if ($this->session->userdata('aileenuser')) {
 					if(is_numeric($this->uri->segment(3))){
 						$slug= $this->db->select('freelancer_hire_slug')->get_where('freelancer_hire_reg', array('user_id' => $this->uri->segment(3)))->row()->freelancer_hire_slug;
 					}else{
-						$slug= $this->uri->segment(3);
+						$slug= $this->uri->segment(count($this->uri->segment_array()));
 					}
 					if ($freelancerhiredata[0]['user_id'] == $userid) {
 						?>     
@@ -231,7 +231,16 @@ if ($this->session->userdata('aileenuser')) {
 							</li>
 							<li <?php if (($this->uri->segment(1) == 'freelance-employer') && ($this->uri->segment(2) == 'saved-freelancer')) { ?> class="active" <?php } ?>> 
 								<?php if($this->session->userdata('aileenuser')){ ?>
-									<?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) { ?><a title="Projects"  href="<?php echo base_url('freelance-employer/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a><?php } else { ?><a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a><?php } ?>
+									<?php if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser'))
+										{ ?>
+											<a title="Projects"  href="<?php echo base_url('freelance-employer/projects/' . $slug); ?>"><?php echo $this->lang->line("Projects"); ?></a>
+										<?php
+										}
+										else
+										{ ?>
+											<a title="Projects" href="<?php echo base_url('freelance-employer/projects'); ?>"><?php echo $this->lang->line("Projects"); ?></a>
+										<?php 
+										} ?>
 								<?php }else{ ?>
 									<a title="Projects"  href="javascript:void(0);"><?php echo $this->lang->line("Projects"); ?></a>
 								<?php } ?>
@@ -246,12 +255,12 @@ if ($this->session->userdata('aileenuser')) {
 							</ul>                          
 							<?php
 							$userid = $this->session->userdata('aileenuser');
-							if ($userid != $this->uri->segment(3)) {
-								if ($this->uri->segment(3) != "") {
-									if (is_numeric($this->uri->segment(3))) {
-										$id = $this->uri->segment(3);
+							if ($userid != $this->uri->segment(count($this->uri->segment_array()))) {
+								if ($this->uri->segment(count($this->uri->segment_array())) != "") {
+									if (is_numeric($this->uri->segment(count($this->uri->segment_array())))) {
+										$id = $this->uri->segment(count($this->uri->segment_array()));
 									} else {
-										$id = $this->db->get_where('freelancer_hire_reg', array('freelancer_hire_slug' => $this->uri->segment(3), 'status' => '1'))->row()->user_id;
+										$id = $this->db->get_where('freelancer_hire_reg', array('freelancer_hire_slug' => $this->uri->segment(count($this->uri->segment_array())), 'status' => '1'))->row()->user_id;
 									}
 									?>
 									<div class="flw_msg_btn fr">
@@ -259,11 +268,13 @@ if ($this->session->userdata('aileenuser')) {
 											<?php
 											if($this->session->userdata('aileenuser')){
 												if ($freelancerhiredata[0]['user_id'] != $this->session->userdata('aileenuser')) {
+													// $msg_url = base_url('chat/abc/4/3/' . $id);//Old
+													$msg_url = MESSAGE_URL.'fa/fh-'.$freelancerhiredata[0]['freelancer_hire_slug'];
 													?>
-													<a title="Message" href="<?php echo base_url('chat/abc/4/3/' . $id); ?>"><?php echo $this->lang->line("message"); ?></a>
-												<?php } else { ?>
+													<a title="Message" href="<?php echo $msg_url; ?>"><?php echo $this->lang->line("message"); ?></a>
+												<?php } /*else { ?>
 													<a title="Message" href="<?php echo base_url('chat/abc/3/4/' . $id); ?>"><?php echo $this->lang->line("message"); ?></a>
-												<?php }
+												<?php }*/
 											}
 											?>
 										</li>

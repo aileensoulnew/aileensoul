@@ -1088,7 +1088,9 @@ class Freelancer_hire extends MY_Controller {
                             $contition_array = array('from_id' => $userid, 'to_id' => $row['user_id'], 'save_type' => '2');
                             $data = $this->common->select_data_by_condition('save', $contition_array, $data = 'status', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                             if ($userid != $row['user_id']) {
-                                $return_html .= '<a href = " ' . base_url('chat/abc/3/4/' . $row['user_id']) . '" title="Message">';
+                                // $msg_url = base_url('chat/abc/3/4/' . $row['user_id']);//Old
+                                $msg_url = MESSAGE_URL.'fh/fa-'.$row['freelancer_apply_slug'];
+                                $return_html .= '<a href = "'.$msg_url.'" title="Message">';
                                 $return_html .= $this->lang->line("message");
                                 $return_html .= '</a>';
                                 if ($data[0]['status'] == 1 || $data[0]['status'] == '') {
@@ -1675,7 +1677,9 @@ class Freelancer_hire extends MY_Controller {
                                     <div class="apply-btn fr">';
                 $userid = $this->session->userdata('aileenuser');
                 if ($userid != $rec['user_id']) {
-                    $return_html .= '<a title = "Message" href="' . base_url('chat/abc/3/4/' . $rec['user_id']) . '">';
+                    // $msg_url = base_url('chat/abc/3/4/' . $rec['user_id']);//Old
+                    $msg_url = MESSAGE_URL.'fh/fa-'.$rec['freelancer_apply_slug'];                    
+                    $return_html .= '<a title = "Message" href="'.$msg_url.'">';
                     $return_html .= $this->lang->line("message");
                     $return_html .= '</a>';
                     $return_html .= '<a title = "Remove" href="javascript:void(0);" class="button" onclick="removepopup(' . $rec['save_id'] . ')">';
