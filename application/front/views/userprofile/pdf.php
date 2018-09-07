@@ -10,7 +10,7 @@
 						<li><a href="<?php echo base_url(); ?>{{user_slug}}/photos" ng-click='makeActive("dashboard")'><i class="fa fa-camera" aria-hidden="true"></i> Photo</a></li>
 						<li><a href="<?php echo base_url(); ?>{{user_slug}}/videos" ng-click='makeActive("dashboard")'><i class="fa fa-video-camera" aria-hidden="true"></i> Video</a></li>
 						<li><a href="<?php echo base_url(); ?>{{user_slug}}/audios" ng-click='makeActive("dashboard")'><i class="fa fa-music" aria-hidden="true"></i> Audio</a></li>
-						<li class="active"><a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> PDF</a></li>
+						<li class="active"><a href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a></li>
 					</ul>
 
 					<div class="tab-content">
@@ -26,13 +26,13 @@
 										<label dd-text-collapse dd-text-collapse-max-length="40" dd-text-collapse-text="{{_pdfData.opportunity}}" dd-text-collapse-cond="false" class="pdf-title" ng-if="_pdfData.post_for == 'opportunity'">{{_pdfData.opportunity}}</label>
 									</a>
 								</li>
-								<li ng-if="pagecntctData.pagedata.total_record == 0">
+								<li ng-class="pagecntctData.pagedata.total_record == 0 ? 'no-data' : ''" ng-if="pagecntctData.pagedata.total_record == 0">
 									<div class="custom-user-box no-data-available">
 					                    <div class='art-img-nn'>
 					                        <div class='art_no_post_img'>
 					                            <img src="<?php echo base_url('assets/img/no-pdf.png'); ?>" alt="No PDF">
 					                        </div>
-					                        <div class='art_no_post_text'>No PDF Available. </div>
+					                        <div class='art_no_post_text'>No PDF</div>
 					                    </div>
 					                </div>
 								</li>

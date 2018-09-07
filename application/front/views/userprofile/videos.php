@@ -10,7 +10,7 @@
 						<li><a href="<?php echo base_url(); ?>{{user_slug}}/photos" ng-click='makeActive("dashboard")'><i class="fa fa-camera" aria-hidden="true"></i> Photo</a></li>
 						<li class="active"><a href="#"><i class="fa fa-video-camera" aria-hidden="true"></i> Video</a></li>
 						<li><a href="<?php echo base_url(); ?>{{user_slug}}/audios" ng-click='makeActive("dashboard")'><i class="fa fa-music" aria-hidden="true"></i> Audio</a></li>
-						<li><a href="<?php echo base_url(); ?>{{user_slug}}/pdf" ng-click='makeActive("dashboard")'><i class="fa fa-newspaper-o" aria-hidden="true"></i> PDF</a></li>
+						<li><a href="<?php echo base_url(); ?>{{user_slug}}/pdf" ng-click='makeActive("dashboard")'><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a></li>
 					</ul>
 
 					<div class="tab-content">
@@ -24,13 +24,13 @@
 										<img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_videoData.filename | removeLastCharacter}}png"" alt="Image-{{$index}}">
 									</a>
 			                    </li>
-			                    <li ng-if="pagecntctData.pagedata.total_record == 0">
+			                    <li ng-class="pagecntctData.pagedata.total_record == 0 ? 'no-data' : ''" ng-if="pagecntctData.pagedata.total_record == 0">
 									<div class="custom-user-box no-data-available">
 					                    <div class='art-img-nn'>
 					                        <div class='art_no_post_img'>
 					                            <img src="<?php echo base_url('assets/img/no-video.png'); ?>" alt="No Videos">
 					                        </div>
-					                        <div class='art_no_post_text'>No Videos Available. </div>
+					                        <div class='art_no_post_text'>No Videos</div>
 					                    </div>
 					                </div>
 								</li>
