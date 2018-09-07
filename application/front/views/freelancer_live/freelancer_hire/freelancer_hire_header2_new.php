@@ -48,7 +48,8 @@ $userid = $this->session->userdata('aileenuser');
 							</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
+                            <a href="<?php echo MESSAGE_URL.'fh'; ?>" class="dropdown-toggle">
+                            	<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()" -->
 								<div class="sub-menu-icon">
 									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -84,7 +85,7 @@ $userid = $this->session->userdata('aileenuser');
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span id="message_count" class="message_count noti-box"></span>
+									<span id="message_count" class="message_count noti-box" style="display: none;"></span>
 								</div>
                             </a>
                             <div class="dropdown-menu">
@@ -252,7 +253,8 @@ $userid = $this->session->userdata('aileenuser');
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
+						<a href="<?php echo MESSAGE_URL.'fh'; ?>" class="dropdown-toggle">
+							<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()" -->
 							<div class="sub-menu-icon">
 								<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 									<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -288,7 +290,7 @@ $userid = $this->session->userdata('aileenuser');
 									</g>
 								</svg>
 								<span class="none-sub-menu"> Message</span>
-								<span id="message_count" class="message_count noti-box"></span>
+								<span id="message_count" class="message_count noti-box" style="display: none;"></span>
 							</div>
 						</a>
 						<div class="dropdown-menu">
@@ -429,11 +431,7 @@ $userid = $this->session->userdata('aileenuser');
             }
         });
     }
-</script>
 
-
-<!-- all popup close close using esc start -->
-<script type="text/javascript">
     $(document).on('keydown', function (e) {
         if (e.keyCode === 27) {
             $("#dropdown-content_hover").hide();
@@ -494,8 +492,7 @@ $userid = $this->session->userdata('aileenuser');
     ;
 
     $(document).ready(function () {
-        waitForMsg1();
-
+        // waitForMsg1();
     });
     $(document).ready(function () {
         $menuLeft = $('.pushmenu-left');
@@ -516,7 +513,7 @@ $userid = $this->session->userdata('aileenuser');
     
 	$(document).ready(function () {
 		var segment = '<?php echo "" . $this->uri->segment(1) . "" ?>';
-		if(segment != "chat"){ chatmsg(); };
+		if(segment != "chat"){ /*chatmsg();*/ };
 	});  // khyati chnages  start
 
  	function chatmsg()
@@ -545,8 +542,8 @@ $userid = $this->session->userdata('aileenuser');
             };
 
     function getmsgNotification() {
-        msgNotification();
-        //msgheader();
+        // msgNotification();
+        //msgheader();old
     }
 
     function msgNotification() {
@@ -590,4 +587,33 @@ $userid = $this->session->userdata('aileenuser');
     	}
     	return true;
     }
+    function unread_message_count_fh()
+	{
+	    var url = '<?php echo base_url() . "notification/unread_message_count_fh" ?>';
+	    $.get(url, function(data, status){    	
+	        data = JSON.parse(data);
+	        if(data.unread_user > 0)
+	        {
+	            $(".message_count").show();
+	            $(".message_count").text(data.unread_user);
+	        }
+	        else
+	        {
+	            $(".message_count").hide();
+	            $(".message_count").text('');   
+	        }
+
+	        setTimeout(function(){
+	            unread_message_count_fh();
+	        }, 5000);
+	    })
+	    .fail(function() {
+	        setTimeout(function(){
+	            unread_message_count_fh();
+	        }, 5000);
+	    });
+	}
+	setTimeout(function(){
+	    unread_message_count_fh();
+	}, 1000);
 </script>
