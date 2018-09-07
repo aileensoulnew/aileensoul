@@ -543,7 +543,7 @@ class Business_model extends CI_Model {
         }
         
         if($id != ''){
-            $sql .= " AND (bp.city = ". $id;
+            $sql .= " AND (bp.city IN(". $id .")";
             if(isset($city_name) && !empty($city_name))
             {
                 $sql .= " OR bp.industriyal IN (". implode(",", $city_name) .")";
@@ -576,7 +576,7 @@ class Business_model extends CI_Model {
         }
         
         if($id != ''){
-            $sql .= " AND (bp.city = ". $id;
+            $sql .= " AND (bp.city IN(".$id.")";
             if(isset($city_name) && !empty($city_name))
             {
                 $sql .= " OR bp.industriyal IN (". implode(",", $city_name) .")";
