@@ -48,7 +48,8 @@ $userid = $this->session->userdata('aileenuser');
 							</a>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
+							<a href="<?php echo MESSAGE_URL.'recruiter'; ?>" class="dropdown-toggle">
+								<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()" -->
 								<div class="sub-menu-icon">
 									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -84,7 +85,7 @@ $userid = $this->session->userdata('aileenuser');
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span id="message_count" class="message_count noti-box">1</span>
+									<span id="message_count" class="message_count noti-box" style="display: none;"></span>
 								</div>
 							</a>
 							<div class="dropdown-menu">
@@ -252,7 +253,8 @@ $userid = $this->session->userdata('aileenuser');
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
+						<a href="<?php echo MESSAGE_URL.'recruiter'; ?>" class="dropdown-toggle">
+							<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()" -->
 							<div class="sub-menu-icon">
 								<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 									<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -288,7 +290,7 @@ $userid = $this->session->userdata('aileenuser');
 									</g>
 								</svg>
 								<span class="none-sub-menu"> Message</span>
-								<span id="message_count" class="message_count noti-box">1</span>
+								<span id="message_count" class="message_count noti-box" style="display: none;"></span>
 							</div>
 							
 						</a>
@@ -422,7 +424,6 @@ $userid = $this->session->userdata('aileenuser');
 	});
 	$(document).on('keydown', function (e) {
 		if (e.keyCode === 27) {
-
 			$('#bidmodal').modal('hide');
 		}
 	});
@@ -445,8 +446,7 @@ $userid = $this->session->userdata('aileenuser');
 			$('#InboxLink').addClass('msg_notification_available');
 			$('.message_count').addClass('count_add');
 			$('.message_count').show();
-			// document.getElementById('message_count').style.display = "block";
-			
+			// document.getElementById('message_count').style.display = "block";			
 		}
 	}
 
@@ -473,7 +473,7 @@ $userid = $this->session->userdata('aileenuser');
 	};
 
 	$(document).ready(function () {
-		waitForMsg1();
+		// waitForMsg1();
 	});
 
 	$(document).ready(function () {
@@ -487,18 +487,11 @@ $userid = $this->session->userdata('aileenuser');
 		});
 	});
 
-</script>
-<!-- script for fetch all unread message notification end-->
-
-<!-- script for update all read notification start-->
-<script type="text/javascript">
 	$(document).ready(function () {
-
 		var segment = '<?php echo "" . $this->uri->segment(1) . "" ?>';
 		if (segment != "chat") {
-			chatmsg();
-		}
-		;
+			// chatmsg();
+		};
 	});  // khyati chnages  start
 	function chatmsg()
 	{
@@ -523,18 +516,16 @@ $userid = $this->session->userdata('aileenuser');
 	};
 
 	function getmsgNotification() {
-		msgNotification();
+		// msgNotification();
 	}
 
 	function msgNotification() {
 		// first click alert('here'); 
 		$.ajax({
 			url: "<?php echo base_url(); ?>notification/update_msg_noti/2",
-			type: "POST",
-			
+			type: "POST",			
 			success: function (data) {
-				data = JSON.parse(data);
-				
+				data = JSON.parse(data);				
 				//update some fields with the updated data
 				//you can access the data like 'data["driver"]'
 			}
@@ -581,61 +572,90 @@ $userid = $this->session->userdata('aileenuser');
         }
     });
     function recruitersearchSubmit(){
-    var keyword = $("#tags").val().toLowerCase().split(' ').join('+');
-    var city = $("#searchplace").val().toLowerCase().split(' ').join('+');
-    var keyworddata = [];
-    if(keyword != ""){
-        keyworddata = keyword.split(",");
-        // remove in from array
-        if(keyworddata.indexOf("in") > -1 && city != ""){
-            keyworddata.splice(keyworddata.indexOf("in"),1);
-        }
-        keyword = keyworddata.join('-').toString();
-    }
-    var citydata = [];
-    if(city != ""){
-        citydata = city.split(",");
-        city = citydata.join('-').toString();
-    }
+	    var keyword = $("#tags").val().toLowerCase().split(' ').join('+');
+	    var city = $("#searchplace").val().toLowerCase().split(' ').join('+');
+	    var keyworddata = [];
+	    if(keyword != ""){
+	        keyworddata = keyword.split(",");
+	        // remove in from array
+	        if(keyworddata.indexOf("in") > -1 && city != ""){
+	            keyworddata.splice(keyworddata.indexOf("in"),1);
+	        }
+	        keyword = keyworddata.join('-').toString();
+	    }
+	    var citydata = [];
+	    if(city != ""){
+	        citydata = city.split(",");
+	        city = citydata.join('-').toString();
+	    }
 
-    if (keyword == '' && city == '') {
-        return false;
-    } else if (keyword != '' && city == '') {
-        window.location.href = base_url + 'recruiter/search/' + keyword;
-    } else if (keyword == '' && city != '') {
-        window.location.href = base_url + 'recruiter/search/candidates-in-' + city;
-    } else {
-        window.location.href = base_url + 'recruiter/search/' + keyword + '-candidates-in-' + city;
-    }
-}
+	    if (keyword == '' && city == '') {
+	        return false;
+	    } else if (keyword != '' && city == '') {
+	        window.location.href = base_url + 'recruiter/search/' + keyword;
+	    } else if (keyword == '' && city != '') {
+	        window.location.href = base_url + 'recruiter/search/candidates-in-' + city;
+	    } else {
+	        window.location.href = base_url + 'recruiter/search/' + keyword + '-candidates-in-' + city;
+	    }
+	}
 
-function recruitersearchMobileSubmit(){
-    var keyword = $("#m_tags").val().toLowerCase().split(' ').join('+');
-    var city = $("#m_searchplace").val().toLowerCase().split(' ').join('+');
-    var keyworddata = [];
-    if(keyword != ""){
-        keyworddata = keyword.split(",");
-        // remove in from array
-        if(keyworddata.indexOf("in") > -1 && city != ""){
-            keyworddata.splice(keyworddata.indexOf("in"),1);
-        }
-        keyword = keyworddata.join('-').toString();
-    }
-    var citydata = [];
-    if(city != ""){
-        citydata = city.split(",");
-        city = citydata.join('-').toString();
-    }
+	function recruitersearchMobileSubmit(){
+	    var keyword = $("#m_tags").val().toLowerCase().split(' ').join('+');
+	    var city = $("#m_searchplace").val().toLowerCase().split(' ').join('+');
+	    var keyworddata = [];
+	    if(keyword != ""){
+	        keyworddata = keyword.split(",");
+	        // remove in from array
+	        if(keyworddata.indexOf("in") > -1 && city != ""){
+	            keyworddata.splice(keyworddata.indexOf("in"),1);
+	        }
+	        keyword = keyworddata.join('-').toString();
+	    }
+	    var citydata = [];
+	    if(city != ""){
+	        citydata = city.split(",");
+	        city = citydata.join('-').toString();
+	    }
 
-    if (keyword == '' && city == '') {
-        return false;
-    } else if (keyword != '' && city == '') {
-        window.location.href = base_url + 'recruiter/search/' + keyword;
-    } else if (keyword == '' && city != '') {
-        window.location.href = base_url + 'recruiter/search/candidates-in-' + city;
-    } else {
-        window.location.href = base_url + 'recruiter/search/' + keyword + '-candidates-in-' + city;
-    }
-}
+	    if (keyword == '' && city == '') {
+	        return false;
+	    } else if (keyword != '' && city == '') {
+	        window.location.href = base_url + 'recruiter/search/' + keyword;
+	    } else if (keyword == '' && city != '') {
+	        window.location.href = base_url + 'recruiter/search/candidates-in-' + city;
+	    } else {
+	        window.location.href = base_url + 'recruiter/search/' + keyword + '-candidates-in-' + city;
+	    }
+	}
+	function unread_message_count_rec()
+	{
+	    var url = '<?php echo base_url() . "notification/unread_message_count_rec" ?>';
+	    $.get(url, function(data, status){    	
+	        data = JSON.parse(data);
+	        if(data.unread_user > 0)
+	        {
+	            $(".message_count").show();
+	            $(".message_count").text(data.unread_user);
+	        }
+	        else
+	        {
+	            $(".message_count").hide();
+	            $(".message_count").text('');   
+	        }
+
+	        setTimeout(function(){
+	            unread_message_count_rec();
+	        }, 5000);
+	    })
+	    .fail(function() {
+	        setTimeout(function(){
+	            unread_message_count_rec();
+	        }, 5000);
+	    });
+	}
+	setTimeout(function(){
+	    unread_message_count_rec();
+	}, 1000);
 </script>
 <!-- all popup close close using esc end -->

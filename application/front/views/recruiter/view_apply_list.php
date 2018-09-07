@@ -578,10 +578,13 @@
 
                                                                         $contition_array = array('from_id' => $userid, 'to_id' => $row['userid'], 'save_type' => '1', 'status' => '0');
                                                                         $savedata = $this->common->select_data_by_condition('save', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                                                                        $msg_url = base_url('chat/abc/2/1/' . $row['userid']);
+                                                                        $msg_url = MESSAGE_URL.'recruiter/job-'.$row['slug'];
                                                                         ?>
 
 
-                                                                        <a  class="button invite_border" href="<?php echo base_url('chat/abc/2/1/' . $row['userid']); ?>" title="Message">Message</a>
+                                                                        <a  class="button invite_border" href="<?php echo $msg_url; ?>" title="Message">Message</a>
 
                                                                         <?php
                                                                         $contition_array = array('invite_user_id' => $row['userid'], 'post_id' => $postid);
