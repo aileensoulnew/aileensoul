@@ -16,6 +16,7 @@ class Notification extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('user_post_model');
         $this->load->model('data_model');
+        $this->load->model('message_model');
         $this->lang->load('message', 'english');
 //AWS access info start
         $this->load->library('S3');
@@ -5269,6 +5270,66 @@ Your browser does not support the audio tag.
         $userid = $this->session->userdata('aileenuser');
         $user_data = $this->user_model->getUserData($userid);
         $user_slug = str_replace("-", "_",$user_data['user_slug'])."@".OPENFIRESERVER;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;
+    }
+
+    public function unread_message_count_job()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        // $user_data = $this->user_model->getUserData($userid);
+        $userdata = $this->message_model->getJobByUserid($userid);        
+        $user_slug = "job_".str_replace("-", "_",$userdata['user_slug'])."@".OPENFIRESERVER;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;
+    }
+
+    public function unread_message_count_rec()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        // $user_data = $this->user_model->getUserData($userid);
+        $userdata = $this->message_model->getRecruiterByUserid($userid);        
+        $user_slug = "recruiter_".str_replace("-", "_",$userdata['user_slug'])."@".OPENFIRESERVER;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;
+    }
+
+    public function unread_message_count_artist()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        // $user_data = $this->user_model->getUserData($userid);
+        $userdata = $this->message_model->getArtistByUserid($userid);        
+        $user_slug = "artist_".str_replace("-", "_",$userdata['user_slug'])."@".OPENFIRESERVER;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;
+    }
+
+    public function unread_message_count_business()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        // $user_data = $this->user_model->getUserData($userid);
+        $userdata = $this->message_model->getBusinesstByUserid($userid);        
+        $user_slug = "business_".str_replace("-", "_",$userdata['user_slug'])."@".OPENFIRESERVER;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;
+    }
+
+    public function unread_message_count_fa()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        // $user_data = $this->user_model->getUserData($userid);
+        $userdata = $this->message_model->getFreelanceApplyByUserid($userid);        
+        $user_slug = "fa_".str_replace("-", "_",$userdata['user_slug'])."@".OPENFIRESERVER;
+        $unread = $this->notification_model->get_unread_message_count($user_slug);
+        echo json_encode($unread);exit;
+    }
+
+    public function unread_message_count_fh()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        // $user_data = $this->user_model->getUserData($userid);
+        $userdata = $this->message_model->getFreelancerHireByUserid($userid);        
+        $user_slug = "fh_".str_replace("-", "_",$userdata['user_slug'])."@".OPENFIRESERVER;
         $unread = $this->notification_model->get_unread_message_count($user_slug);
         echo json_encode($unread);exit;
     }

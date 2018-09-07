@@ -59,7 +59,7 @@ $userid = $this->session->userdata('aileenuser');
 						if($job_deactive == 0  && $this->job_profile_set == 1)
 						{ ?>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
+							<a href="<?php echo MESSAGE_URL.'job'; ?>" class="dropdown-toggle">
 								<div class="sub-menu-icon">
 									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -95,7 +95,7 @@ $userid = $this->session->userdata('aileenuser');
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span id="message_count" class="message_count noti-box">1</span>
+									<span id="message_count" class="message_count noti-box" style="display: none;"></span>
 								</div>
 								
 							</a>
@@ -234,9 +234,10 @@ $userid = $this->session->userdata('aileenuser');
 						if($job_deactive == 0  && $this->job_profile_set == 1)
 						{ ?>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
+						<a href="<?php echo MESSAGE_URL.'job'; ?>" class="dropdown-toggle">
+							<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();" -->
 							<span>Message</span>
-							<span id="message_count" class="message_count noti-box">1</span>
+							<span id="message_count" class="message_count noti-box" style="display: none;"></span>
 						</a>
 						<div class="dropdown-menu">
 							<div class="dropdown-title">
@@ -291,48 +292,46 @@ $userid = $this->session->userdata('aileenuser');
 <script type="text/javascript">
 	var segment = '<?php echo $this->uri->segment(1); ?>';
 	$(document).ready(function() {
-	 if (segment != "chat") {
-		 chatmsg();
-	 };
- });
+		if (segment != "chat") {
+		 // chatmsg();
+		};
+	});
 
- function chatmsg() {
-	 $.ajax({
-		 type: 'POST',
-		 url: base_url + 'chat/userajax/1/2',
-		 dataType: 'json',
-		 data: '',
-		 beforeSend: function() {
-			 $('#msg_not_loader').show();
-		 },
-		 complete: function() {
-			 $('#msg_not_loader').show();
-		 },
-		 success: function(data) { //alert(data);
-			 $('#userlist').html(data.leftbar);
-			 $('.notification_data_in_h2').html(data.headertwo);
-			 $('.seemsg').html(data.seeall);
-			 setTimeout(chatmsg, 100000);
-		 },
-		 error: function(XMLHttpRequest, textStatus, errorThrown) {}
-	 });
- };
+	function chatmsg() {
+		$.ajax({
+			type: 'POST',
+			url: base_url + 'chat/userajax/1/2',
+			dataType: 'json',
+			data: '',
+			beforeSend: function() {
+				$('#msg_not_loader').show();
+			},
+			complete: function() {
+				$('#msg_not_loader').show();
+			},
+			success: function(data) { //alert(data);
+				$('#userlist').html(data.leftbar);
+				$('.notification_data_in_h2').html(data.headertwo);
+				$('.seemsg').html(data.seeall);
+				setTimeout(chatmsg, 100000);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {}
+		});
+	};
 
- function getmsgNotification() {
-	 msgNotification();
- }
+	function getmsgNotification() {
+		//msgNotification();
+	}
 
- function msgNotification() {
-	 $.ajax({
-		 url: base_url + "notification/update_msg_noti/1",
-		 type: "POST",
-		 success: function(data) {
-			 data = JSON.parse(data);
-		 }
-	 });
- }
-</script>
-<script type="text/javascript" charset="utf-8">
+	function msgNotification() {
+		$.ajax({
+			url: base_url + "notification/update_msg_noti/1",
+			type: "POST",
+			success: function(data) {
+				data = JSON.parse(data);
+			}
+		});
+	}
 
 	function addmsg1(type, msg)
 	{
@@ -375,12 +374,10 @@ $userid = $this->session->userdata('aileenuser');
 			error: function (XMLHttpRequest, textStatus, errorThrown) {
 			}
 		});
-	}
-	;
+	};
 
 	$(document).ready(function () {
-		waitForMsg1();
-
+		// waitForMsg1();
 	});
 	$(document).ready(function () {
 		$menuLeft = $('.pushmenu-left');
@@ -393,9 +390,6 @@ $userid = $this->session->userdata('aileenuser');
 		});
 	});
 
-</script>
-
-<script type="text/javascript">
 	//Deactivate Job Profile Start
 	function deactivate(clicked_id) { 
 		$('.biderror .mes').html("<div class='pop_content'> Are you sure you want to deactive your job profile?<div class='model_ok_cancel'><a class='okbtn' id=" + clicked_id + " onClick='deactivate_profile(" + clicked_id + ")' href='javascript:void(0);' data-dismiss='modal'>Yes</a><a class='cnclbtn' href='javascript:void(0);' data-dismiss='modal'>No</a></div></div>");
@@ -517,4 +511,34 @@ $userid = $this->session->userdata('aileenuser');
             window.location.href = base_url + 'jobs/search/' + keyword + '-jobs-in-' + city+'?work_timing='+work_timing_fil;
         }
     }
+
+	function unread_message_count_job()
+	{
+	    var url = '<?php echo base_url() . "notification/unread_message_count_job" ?>';
+	    $.get(url, function(data, status){    	
+	        data = JSON.parse(data);
+	        if(data.unread_user > 0)
+	        {
+	            $(".message_count").show();
+	            $(".message_count").text(data.unread_user);
+	        }
+	        else
+	        {
+	            $(".message_count").hide();
+	            $(".message_count").text('');   
+	        }
+
+	        setTimeout(function(){
+	            unread_message_count_job();
+	        }, 5000);
+	    })
+	    .fail(function() {
+	        setTimeout(function(){
+	            unread_message_count_job();
+	        }, 5000);
+	    });
+	}
+	setTimeout(function(){
+	    unread_message_count_job();
+	}, 1000);
 </script>

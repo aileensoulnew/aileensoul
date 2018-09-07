@@ -229,4 +229,59 @@ class Message_model extends CI_Model {
         $result_array = $query->row_array();
         return $result_array;
     }
+
+    public function getRecruiterByUserid($user_id = '') {
+        $this->db->select('r.user_id,r.rec_firstname as first_name,r.rec_lastname as last_name,r.slug as user_slug,u.user_gender,r.recruiter_user_image as user_image,r.profile_background as profile_background,if(r.designation != "", r.designation,"Current Work") as title_name')->from("user u");
+        $this->db->join('recruiter r', 'r.user_id = u.user_id', 'left');
+        $this->db->where(array('r.user_id' => $user_id,'is_delete' => '0', 're_status' => '1'));
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;        
+    }
+
+    public function getJobByUserid($user_id = '') {
+        $this->db->select('jr.user_id,jr.fname as first_name,jr.lname as last_name,jr.slug as user_slug,u.user_gender,jr.job_user_image as user_image,jr.profile_background as profile_background,if(jr.designation != "",jr.designation,"Current Work") as title_name')->from("user u");
+        $this->db->join('job_reg jr', 'jr.user_id = u.user_id', 'left');
+        $this->db->where(array('jr.user_id' => $user_id, 'jr.status' => '1', 'jr.is_delete' => '0'));
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function getArtistByUserid($user_id = '') {
+        $this->db->select("a.user_id,a.art_name as first_name,a.art_lastname as last_name,a.slug as user_slug,u.user_gender,a.art_user_image as user_image,a.profile_background as profile_background,if(a.designation != '',a.designation,'Current Work') as title_name")->from("user u");
+        $this->db->join('art_reg a', 'a.user_id = u.user_id', 'left');
+        $this->db->where(array('a.user_id' => $user_id, 'a.is_delete' => '0', 'a.status' => '1'));
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function getBusinesstByUserid($user_id = '') {
+        $this->db->select("b.user_id,b.company_name as first_name,'' as last_name,b.business_slug as user_slug,u.user_gender,b.business_user_image as user_image,b.profile_background as profile_background,if(it.industry_name != '',it.industry_name,'Current Work') as title_name")->from("user u");
+        $this->db->join('business_profile b', 'b.user_id = u.user_id', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = b.industriyal', 'left');        
+        $this->db->where(array('b.user_id' => $user_id, 'b.is_deleted' => '0', 'b.status' => '1'));
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function getFreelanceApplyByUserid($user_id = '') {
+        $this->db->select("fp.user_id,fp.freelancer_post_fullname as first_name,fp.freelancer_post_username as last_name,fp.freelancer_apply_slug as user_slug,u.user_gender,fp.freelancer_post_user_image as user_image,fp.profile_background as profile_background,if(fp.designation != '',fp.designation,'Current Work') as title_name")->from("user u");
+        $this->db->join('freelancer_post_reg fp', 'fp.user_id = u.user_id', 'left');        
+        $this->db->where(array('fp.user_id' => $user_id, 'fp.is_delete' => '0', 'fp.status' => '1'));
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
+    public function getFreelancerHireByUserid($user_id = '') {
+        $this->db->select("fh.user_id,fh.fullname as first_name,fh.username as last_name,fh.freelancer_hire_slug as user_slug,u.user_gender,fh.freelancer_hire_user_image as user_image,fh.profile_background as profile_background,if(fh.designation != '',fh.designation,'Current Work') as title_name")->from("user u");
+        $this->db->join('freelancer_hire_reg fh', 'fh.user_id = u.user_id', 'left');
+        $this->db->where(array('fh.user_id' => $user_id, 'fh.is_delete' => '0', 'fh.status' => '1'));
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
 }
