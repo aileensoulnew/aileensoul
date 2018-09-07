@@ -13,9 +13,9 @@ class Registration extends CI_Controller {
         $this->load->model('user_model');
         //AWS access info start
         $this->load->library('S3');
-        if ($this->session->userdata('aileenuser')) {
+        /*if ($this->session->userdata('aileenuser')) {
             redirect($this->session->userdata('aileenuser_slug')."/profiles", 'refresh');
-        }
+        }*/
         //AWS access info end
         include ('main_profile_link.php');
         include('include.php');
@@ -34,7 +34,9 @@ class Registration extends CI_Controller {
 
     //Show main registratin page insert Start
     public function index() {
-     
+        if ($this->session->userdata('aileenuser')) {
+            redirect($this->session->userdata('aileenuser_slug')."/profiles", 'refresh');
+        }
         $this->load->view('registration/registration', $this->data);
     }
 
