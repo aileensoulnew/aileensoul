@@ -52,7 +52,8 @@ $userid = $this->session->userdata('aileenuser');
 						</li>
 						<?php if($isartistactivate == true &&  $artist_isregister == true){ ?>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
+							<a href="<?php echo MESSAGE_URL.'artist'; ?>" class="dropdown-toggle">
+								<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();" -->
 								<div class="sub-menu-icon">
 									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -88,7 +89,7 @@ $userid = $this->session->userdata('aileenuser');
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span id="message_count" class="message_count noti-box"></span>
+									<span id="message_count" class="message_count noti-box" style="display: none;"></span>
 								</div>
 								
 							</a>
@@ -218,9 +219,10 @@ $userid = $this->session->userdata('aileenuser');
 					</li>
 					<?php if($isartistactivate == true &&  $artist_isregister == true){ ?>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();">
+						<a href="<?php echo MESSAGE_URL.'artist'; ?>" class="dropdown-toggle">
+							<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification();" -->
 							<span>Message</span>
-							<span class="message_count noti-box">1</span>
+							<span class="message_count noti-box" style="display: none;"></span>
 						</a>
 						<div class="dropdown-menu">
 							<div class="dropdown-title">							
@@ -228,7 +230,6 @@ $userid = $this->session->userdata('aileenuser');
 							</div>
 							<div class="content custom-scroll">
 								<ul class="dropdown-data msg-dropdown notification_data_in_h2">
-									
 								</ul>
 							</div>
 						</div>
@@ -280,7 +281,7 @@ $userid = $this->session->userdata('aileenuser');
 	
 	 var segment = '<?php echo "" . $this->uri->segment(1) . "" ?>';
 	 if (segment != "chat") {
-		 chatmsg();
+		 // chatmsg();
 	 }
 	 ;
 	});  // khyati chnages  start
@@ -310,7 +311,7 @@ $userid = $this->session->userdata('aileenuser');
 	};
 		   
 	function getmsgNotification() {
-		msgNotification();
+		// msgNotification();
 	}
 	
 	function msgNotification() {
@@ -400,8 +401,7 @@ $userid = $this->session->userdata('aileenuser');
     ;
 
     $(document).ready(function () {
-        waitForMsg1();
-
+        // waitForMsg1();
     });
     $(document).ready(function () {
         $menuLeft = $('.pushmenu-left');
@@ -497,5 +497,33 @@ $userid = $this->session->userdata('aileenuser');
         }
     });
 
+    function unread_message_count_artist()
+	{
+	    var url = '<?php echo base_url() . "notification/unread_message_count_artist" ?>';
+	    $.get(url, function(data, status){    	
+	        data = JSON.parse(data);
+	        if(data.unread_user > 0)
+	        {
+	            $(".message_count").show();
+	            $(".message_count").text(data.unread_user);
+	        }
+	        else
+	        {
+	            $(".message_count").hide();
+	            $(".message_count").text('');   
+	        }
 
+	        setTimeout(function(){
+	            unread_message_count_artist();
+	        }, 5000);
+	    })
+	    .fail(function() {
+	        setTimeout(function(){
+	            unread_message_count_artist();
+	        }, 5000);
+	    });
+	}
+	setTimeout(function(){
+	    unread_message_count_artist();
+	}, 1000);
 </script>
