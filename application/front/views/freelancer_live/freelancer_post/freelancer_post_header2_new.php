@@ -54,7 +54,8 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 						</li>
 						<?php if($this->freelance_apply_profile_set == 1 ):?>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
+							<a href="<?php echo MESSAGE_URL.'fa' ?>" class="dropdown-toggle">
+								 <!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()" -->
 								<div class="sub-menu-icon">
 									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -90,7 +91,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span class="noti-box message_count" id="message_count"></span>
+									<span class="noti-box message_count" id="message_count" style="display: none;"></span>
 								</div>
 							</a>
 							<div class="dropdown-menu">
@@ -218,9 +219,10 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 						</a>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()">
+						<a href="<?php echo MESSAGE_URL.'fa' ?>" class="dropdown-toggle">
+							<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="return getmsgNotification()" -->
 							<span>Message</span>
-							<span class="noti-box message_count" id="message_count"></span>
+							<span class="noti-box message_count" id="message_count" style="display: none;"></span>
 						</a>
 						<div class="dropdown-menu">
 							<div class="dropdown-title">
@@ -353,7 +355,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 	;
 
 	$(document).ready(function () {
-		waitForMsg1();
+		// waitForMsg1();
 
 	});
 	$(document).ready(function () {
@@ -376,7 +378,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
    $(document).ready(function () {
 	  
 	 var segment = '<?php echo "" . $this->uri->segment(1) . "" ?>';
-	 if(segment != "chat"){ chatmsg(); };
+	 if(segment != "chat"){ /*chatmsg();*/ };
 		   });  // khyati chnages  start
    function chatmsg()
    {             
@@ -404,7 +406,7 @@ $fa_slug = $this->db->select('freelancer_apply_slug')->get_where('freelancer_pos
 		 };
 
 		 function getmsgNotification() {
-			msgNotification();
+			// msgNotification();
 		//msgheader();
 	}
 
@@ -767,4 +769,33 @@ $(function() {
         }
     });
 });
+function unread_message_count_fa()
+{
+    var url = '<?php echo base_url() . "notification/unread_message_count_fa" ?>';
+    $.get(url, function(data, status){    	
+        data = JSON.parse(data);
+        if(data.unread_user > 0)
+        {
+            $(".message_count").show();
+            $(".message_count").text(data.unread_user);
+        }
+        else
+        {
+            $(".message_count").hide();
+            $(".message_count").text('');   
+        }
+
+        setTimeout(function(){
+            unread_message_count_fa();
+        }, 5000);
+    })
+    .fail(function() {
+        setTimeout(function(){
+            unread_message_count_fa();
+        }, 5000);
+    });
+}
+setTimeout(function(){
+    unread_message_count_fa();
+}, 1000);
 </script>
