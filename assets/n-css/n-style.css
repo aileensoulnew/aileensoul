@@ -1381,6 +1381,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', end
 .all-tab{padding:0;}
 .all-tab li{display: inline-block;list-style-type: none;width: 220px;height: 220px;margin: 7px 5px; cursor: pointer; position: relative; overflow: hidden;}
 .all-tab.video-tab li{/*background: #000;*/}
+.all-tab li.no-data{height:auto;}
+.all-tab li.no-data .art_no_post_text{line-height:0; padding-top:0;}
 .all-tab li img{position: absolute; left: 50%; top: 50%; width: auto; max-width: inherit; height: 100%;
 -webkit-transform: translate(-50%,-50%);
 -ms-transform: translate(-50%,-50%);
@@ -2600,6 +2602,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.media-pages-tablet{width:100%; float:left; border:1px solid #d2d2d2; text-align:center; padding:10px 0; border-radius: 4px; margin:0px 0 10px;}
 	.media-pages-tablet ul{display:inline-block; margin-bottom:0; padding:0;}
 	.media-pages-tablet ul li{display:inline-block; padding:0 25px; list-style-type:none;}
+	.media-pages-tablet ul li:last-child{display:none;}
 	.media-pages-tablet ul li a{color:#5c5c5c;}
 	/*.user-btns a.btn3{font-size:0; border:0; text-align:center;}
 	.user-btns a.btn3 img{display:inline-block;}
@@ -3347,7 +3350,11 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.comment-text{width:85%; padding-left:10px;}
     .audio_main_div{width: 100%;}
     #photo .all-tab li{width: 32%; height: 100px; float: left; margin: 2px 2px;}
+	#photo .all-tab li.no-data{width:auto; height:auto; float:none;}
     .all-tab.pdf-tab li{width: 100%; float: left; margin: 0; height: 75px;}
+	.all-tab li.no-data{height:auto;}
+	.all-tab li.no-data .custom-user-box.no-data-available .art_no_post_img img{width:auto; float:none; height:auto;}
+	.all-tab.pdf-tab li.no-data{height:auto;}
     .all-tab.pdf-tab li img{width: 65px; height: 65px; float: left; margin-left: 5px;}
     .all-tab.pdf-tab li .pdf-title{width: 75%; float: left; padding-left: 10px; text-align: left; padding-top: 10px;}
     .upload-camera{left: 0; bottom: 0; right: auto;}
