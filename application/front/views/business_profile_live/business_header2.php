@@ -78,7 +78,8 @@ echo $header_inner_profile ?>
                         </li>
                         <?php if($isbusiness_deactive == false && $isbusiness_register == true){ ?>
                             <li class="dropdown Inbox_link" id="Inbox_link">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()">
+                                <a href="<?php echo MESSAGE_URL.'business'; ?>" class="dropdown-toggle">
+                                	<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()" -->
 									<div class="sub-menu-icon">
 									<svg class="not-hover" width="17px" height="17px" viewBox="0 0 2133.000000 2133.000000">
 										<g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)">
@@ -114,7 +115,7 @@ echo $header_inner_profile ?>
 										</g>
 									</svg>
 									<span class="none-sub-menu"> Message</span>
-									<span class="message_count noti-box" id="message_count"></span>
+									<span class="message_count noti-box" id="message_count" style="display: none;"></span>
 								</div>
                                     
                                 </a>
@@ -249,12 +250,11 @@ echo $header_inner_profile ?>
 					</li>
 					<?php if($isbusiness_deactive == false && $isbusiness_register == true){ ?>
 					<li class="dropdown Inbox_link" id="Inbox_link">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()">
+						<a href="<?php echo MESSAGE_URL.'business'; ?>" class="dropdown-toggle">
+							<!-- data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  onclick="return getmsgNotification()" -->
 							<div class="sub-menu-icon">
-								
-							
 								<span> Message</span>
-								<span class="message_count noti-box"></span>
+								<span class="message_count noti-box" style="display: none;"></span>
 							</div>							
 						</a>
 						<div class="dropdown-menu InboxContainer">
@@ -263,7 +263,6 @@ echo $header_inner_profile ?>
                             </div>
                             <div class="content custom-scroll">
                                 <ul class="dropdown-data msg-dropdown notification_data_in_h2">
-                                    
                                 </ul>
                             </div>
                         </div>
@@ -448,7 +447,7 @@ echo $header_inner_profile ?>
     }
     ;
     $(document).ready(function () {
-        waitForMsg1();
+        // waitForMsg1();
     });
     $(document).ready(function () {
         $menuLeft = $('.pushmenu-left');
@@ -467,11 +466,11 @@ echo $header_inner_profile ?>
         if (InboxContainer == 'dropdown2_content show') {
             var segment = '<?php echo "" . $this->uri->segment(1) . "" ?>';
             if (segment != "chat") {
-                chatmsg();
+                // chatmsg();
             }
         }
         $('.Inbox_link').on('click', function () {
-            chatmsg();
+            // chatmsg();
         });
     });
     function chatmsg()
@@ -623,6 +622,35 @@ echo $header_inner_profile ?>
             $('#search').removeClass('open');
         }
     });
+    function unread_message_count_business()
+	{
+	    var url = '<?php echo base_url() . "notification/unread_message_count_business" ?>';
+	    $.get(url, function(data, status){
+	        data = JSON.parse(data);
+	        if(data.unread_user > 0)
+	        {
+	            $(".message_count").show();
+	            $(".message_count").text(data.unread_user);
+	        }
+	        else
+	        {
+	            $(".message_count").hide();
+	            $(".message_count").text('');   
+	        }
+
+	        setTimeout(function(){
+	            unread_message_count_business();
+	        }, 5000);
+	    })
+	    .fail(function() {
+	        setTimeout(function(){
+	            unread_message_count_business();
+	        }, 5000);
+	    });	    
+	}
+	setTimeout(function(){
+	    unread_message_count_business();
+	}, 1000);
 </script>
 
 <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
