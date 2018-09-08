@@ -2134,7 +2134,9 @@ body.sitemap{background:#f6f6f6; border:0px;}
 /***  end art bus css  ***/
 
 /***  job css  ***/
-.message button.modal-close{background:#1b8ab9; color:#fff;}
+.message button.modal-close{background:none !important; color:#5c5c5c !important; border:0 !important; top:0 !important; right:0 !important;}
+.message button.modal-close:hover{background:none !important;}
+.message button.modal-close:focus{outline:none !important;}
 .cnclbtn, .okbtn{transition: all .2s; color: #fff; padding: 8px 18px; background-color: #1b8ab9 !important;
 margin-top: 8px; width: 100px; border-radius: 8px; font-size: 16px; text-decoration: none;}
 .okbtn{margin-right:20px;}
@@ -2464,6 +2466,7 @@ label.cameraButton{min-height:43px;}
 .load-more-btn{width:100%; float:left; text-align:center; padding:10px 0;}
 .load-more-btn button{background:none; color:#1b8ab9; font-size:18px;}
 .load-more-btn button:focus{outline:none;}
+.job_reg_main{box-shadow:none;}
 /***  end extra  ***/
 /***  optimization css  ***/
 .left-part.left-scroll{position:absolute;}
