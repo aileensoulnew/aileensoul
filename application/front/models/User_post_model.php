@@ -1030,8 +1030,8 @@ class User_post_model extends CI_Model {
 
     public function searchData($userid = '', $searchKeyword = '') {
 
-        $sql_ser = "u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%' OR CONCAT(u.first_name,' ',u.last_name) LIKE '%$searchKeyword%' OR CONCAT(u.last_name,' ',u.first_name) LIKE '%$searchKeyword%'";
-        $sql_post = "uo.opportunity LIKE '%$searchKeyword%' OR usp.description LIKE '%$searchKeyword%' OR uaq.question LIKE '%$searchKeyword%' OR uaq.description LIKE '%$searchKeyword%'";
+        $sql_ser = "LOWER(u.first_name) Like '%".strtolower($searchKeyword)."%' OR LOWER(u.last_name) Like '%".strtolower($searchKeyword)."%' OR LOWER(CONCAT(u.first_name,' ',u.last_name)) LIKE '%".strtolower($searchKeyword)."%' OR LOWER(CONCAT(u.last_name,' ',u.first_name)) LIKE '%".strtolower($searchKeyword)."%'";
+        $sql_post = "LOWER(uo.opportunity) LIKE '%".strtolower($searchKeyword)."%' OR LOWER(usp.description) LIKE '%".strtolower($searchKeyword)."%' OR LOWER(uaq.question) LIKE '%".strtolower($searchKeyword)."%' OR LOWER(uaq.description) LIKE '%".strtolower($searchKeyword)."%'";
         
         $checkKeywordCity = $this->data_model->findCityList($searchKeyword);
         if ($checkKeywordCity['city_id'] != '') {
