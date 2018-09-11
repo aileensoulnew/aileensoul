@@ -117,7 +117,15 @@ app.controller('searchController', function ($scope, $http,$compile) {
             $scope.postData = success.data.post;
             $scope.pro.page_number = 2;
             $scope.pst.page_number = 2;
-            $('#main_loader').hide();
+            $('#main_loader').hide();            
+            if(success.data.profile_total_rec > 5)
+            {
+                $("#load_more_pro_div").show();
+            }
+            if(success.data.post_total_rec > 3)
+            {
+                $("#load_more_pst_div").show();
+            }
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
             setTimeout(function(){

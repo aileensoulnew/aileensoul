@@ -1199,7 +1199,8 @@ class User_post_model extends CI_Model {
         }
 
         $searchData['post'] = $searchPostData;
-
+        $searchData['profile_total_rec'] = $this->searchDataProfileTotalRecAjax($userid,$searchKeyword);
+        $searchData['post_total_rec'] = $this->searchDataPostTotalRecAjax($userid,$searchKeyword);
         return $searchData;
     }
 
@@ -1274,8 +1275,57 @@ class User_post_model extends CI_Model {
             $searchProfileData[$key]['follow_status'] = $follow_detail['status'];
         }
 
-        $searchData['profile'] = $searchProfileData;        
+        $searchData['profile'] = $searchProfileData;
+        $searchData['profile_total_rec'] = $this->searchDataProfileTotalRecAjax($userid,$searchKeyword);
         return $searchData;
+    }
+
+    public function searchDataProfileTotalRecAjax($userid = '', $searchKeyword = '') {
+
+        $sql_ser = "u.first_name Like '%$searchKeyword%' OR u.last_name Like '%$searchKeyword%' OR CONCAT(u.first_name,' ',u.last_name) LIKE '%$searchKeyword%' OR CONCAT(u.last_name,' ',u.first_name) LIKE '%$searchKeyword%'";
+
+        $checkKeywordCity = $this->data_model->findCityList($searchKeyword);
+        if ($checkKeywordCity['city_id'] != '') {
+            $keywordCity = $checkKeywordCity['city_id'];
+            $sql_ser .= " OR up.city = '$keywordCity' OR us.city = '$keywordCity'";            
+        }
+        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword,1);
+        if ($checkKeywordJobTitle['title_id'] != '') {
+            $keywordJobTitle = $checkKeywordJobTitle['title_id'];
+            $sql_ser .= " OR up.designation = '$keywordJobTitle'";            
+        }
+        $checkKeywordFieldList = $this->data_model->findFieldList($searchKeyword);
+        if ($checkKeywordFieldList['industry_id'] != '') {
+            $keywordFieldList = $checkKeywordFieldList['industry_id'];
+            $sql_ser .= " OR up.field = '$keywordFieldList'";            
+        }
+
+        $checkKeywordUniversityList = $this->data_model->findUniversityList($searchKeyword);
+        if ($checkKeywordUniversityList['university_id'] != '') {
+            $keywordUniversityList = $checkKeywordUniversityList['university_id'];
+            $sql_ser .= " OR us.university_name = '$keywordUniversityList'";
+        }
+        $checkKeywordDegreeList = $this->data_model->findDegreeList($searchKeyword);
+        if ($checkKeywordDegreeList['degree_id'] != '') {
+            $keywordDegreeList = $checkKeywordDegreeList['degree_id'];
+            $sql_ser .= " OR us.current_study = '$keywordDegreeList'";
+        }
+
+        $this->db->select("count(*) as total_record")->from("user u");
+        $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
+        $this->db->join('user_profession up', 'up.user_id = u.user_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+        $this->db->join('user_student us', 'us.user_id = u.user_id', 'left');
+        $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+        $this->db->join('industry_type it', 'it.industry_id = up.field', 'left');
+        $this->db->join('university un', 'un.university_name = us.university_name', 'left');
+
+        $this->db->where("u.user_id !=  $userid AND ( $sql_ser )");        
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit;
+        $total_rec = $query->row_array();
+        return $total_rec['total_record'];
     }
 
     public function searchDataPostAjax($userid = '', $searchKeyword = '',$start = "",$limit = "5") {
@@ -1390,8 +1440,50 @@ class User_post_model extends CI_Model {
         }
 
         $searchData['post'] = $searchPostData;
+        $searchData['post_total_rec'] = $this->searchDataPostTotalRecAjax($userid,$searchKeyword);
 
         return $searchData;
+    }
+
+    public function searchDataPostTotalRecAjax($userid = '', $searchKeyword = '',$start = "",$limit = "5") {
+        $sql_post = "uo.opportunity LIKE '%$searchKeyword%' OR usp.description LIKE '%$searchKeyword%' OR uaq.question LIKE '%$searchKeyword%' OR uaq.description LIKE '%$searchKeyword%'";
+        
+        $checkKeywordCity = $this->data_model->findCityList($searchKeyword);
+        if ($checkKeywordCity['city_id'] != '') {
+            $keywordCity = $checkKeywordCity['city_id'];            
+            $sql_post .= " OR FIND_IN_SET('" . $keywordCity . "',uo.location)";
+        }
+        $checkKeywordJobTitle = $this->data_model->findJobTitle($searchKeyword,1);
+        if ($checkKeywordJobTitle['title_id'] != '') {
+            $keywordJobTitle = $checkKeywordJobTitle['title_id'];            
+            $sql_post .= " OR FIND_IN_SET('" . $keywordJobTitle . "',uo.opportunity_for)";
+        }
+        $checkKeywordFieldList = $this->data_model->findFieldList($searchKeyword);
+        if ($checkKeywordFieldList['industry_id'] != '') {
+            $keywordFieldList = $checkKeywordFieldList['industry_id'];            
+            $sql_post .= " OR  uo.field = '$keywordFieldList' OR uaq.field = '$keywordFieldList'";
+        }
+
+        $getDeleteUserPost = $this->deletePostUser($userid);
+        $this->db->select("count(*) as total_record")->from("user_post up");
+        $this->db->join('user_opportunity uo', 'uo.post_id = up.id', 'left');
+        $this->db->join('user_simple_post usp', 'usp.post_id = up.id', 'left');
+        $this->db->join('user_ask_question uaq', 'uaq.post_id = up.id', 'left');
+        $this->db->where("up.status","publish");
+        $this->db->where("up.is_delete","0");
+        $this->db->where("(".$sql_post.")");
+        // echo $sql_post;
+        if ($getDeleteUserPost) {
+            $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
+        }
+        if ($limit != '') {
+            $this->db->limit($limit, $start);
+        }
+        $this->db->order_by('up.id', 'desc');
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit;
+        $total_rec = $query->row_array();
+        return $total_rec['total_record'];
     }
     
     
