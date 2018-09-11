@@ -141,10 +141,7 @@
     <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
     <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('html,body').animate({scrollTop: 300}, 500);
-        });
+    <script>        
         var base_url = '<?php echo base_url(); ?>';
         var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
         var title = '<?php echo $title; ?>';
@@ -153,6 +150,12 @@
         var l = '';
         var w = '';
         var app = angular.module('', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize']);
+        $(document).ready(function(){
+            if(user_id == "")
+            {
+                $('html,body').animate({scrollTop: 300}, 500);
+            }
+        });
     </script>
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
