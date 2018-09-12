@@ -311,7 +311,9 @@ if (isset($recruiter_recommne_data) && !empty($recruiter_recommne_data)) {
 	}
 }
 elseif($total_record == 0)
-{ ?>
+{
+	if($rec_page == 1)
+	{?>
 	<div class="text-center rio" style="border: none;">
 		<div class="no-post-title">
 			<h4 class="page-heading  product-listing" style="border:0px;">Lets create your job post.</h4>
@@ -322,6 +324,22 @@ elseif($total_record == 0)
 		</div>
 	</div>
 <?php
+	}
+	else
+	{
+		if($page == 1):
+		?>
+		<div class="art-img-nn border1">
+		    <div class="art_no_post_img">
+				<img src="<?php echo base_url() . 'assets/img/job-no1.png';?>" alt="nojobimage">
+			</div>
+			<div class="art_no_post_text">
+				No Recommended  Candidate  Available.
+			</div>
+		</div>
+		<?php
+		endif;
+	}
 }
 elseif($isfilterapply == false)
 { 

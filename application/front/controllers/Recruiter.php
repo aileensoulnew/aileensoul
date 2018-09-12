@@ -1628,6 +1628,7 @@ class Recruiter extends MY_Controller {
 			$this->data['page'] = $page;
 			$this->data['total_record'] = $recommen_candid_totrec;
 			$this->data['perpage'] = $perpage;
+			$this->data['rec_page'] = '1';
 			
 			$this->load->view('recruiter_live/candidate_list_view', $this->data);
 
@@ -6533,7 +6534,8 @@ class Recruiter extends MY_Controller {
 		$this->data['page'] = $page;
 		$this->data['total_record'] = $recommen_candid_totrec["total_record"];
 		$this->data['perpage'] = $perpage;
-		$this->data['recruiter_recommne_data'] = $candidatejob1;		
+		$this->data['recruiter_recommne_data'] = $candidatejob1;
+		$this->data['rec_page'] = '2';
 		$this->load->view('recruiter_live/candidate_list_view', $this->data);
 
 
