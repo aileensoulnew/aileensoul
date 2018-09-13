@@ -303,4 +303,4 @@ $(function() {
     });
 });
 </script>
-<?php $this->load->view('mobile_side_slide'); ?>
+<?php //$this->load->view('mobile_side_slide'); ?>

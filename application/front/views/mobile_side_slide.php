@@ -70,4 +70,8 @@ $('body,html').click(function(e){
     $('#cbp-spmenu-s2').removeClass('cbp-spmenu-open');
     $('body').removeClass('spmenu-open');
 });
+$(".mob-side-close-btn").click(function(){
+    $(".mob-side-menu .cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-right").removeClass("cbp-spmenu-open");
+    $("body").removeClass("spmenu-open");
+});
 </script>
