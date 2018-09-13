@@ -303,4 +303,8 @@ $(function() {
     });
 });
 </script>
-<?php //$this->load->view('mobile_side_slide'); ?>
+<?php 
+if($userid == "")
+{
+    $this->load->view('mobile_side_slide');
+} ?>
