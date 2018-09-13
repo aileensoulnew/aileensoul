@@ -120,6 +120,11 @@
             </div>
 			<?php echo $login_footer; ?>
         </div>
+        <?php
+        if($this->session->userdata('aileenuser') == "")
+        {
+            $this->load->view('mobile_side_slide');
+        } ?>
         <?php if($user_id != "" && $this->freelance_apply_profile_set == 0)
         { ?>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
