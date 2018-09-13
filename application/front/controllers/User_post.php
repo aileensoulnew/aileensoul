@@ -85,7 +85,29 @@ class User_post extends MY_Controller {
             $data['not_read'] = '2';
             $user_contact = $this->common->insert_data_getid($data, 'user_contact');
             if ($user_contact) {
-                //Add Send Mail
+                //Send Mail Start
+                $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_user_id))->row()->email;
+                $login_userdata = $this->user_model->getUserData($userid);
+
+                $url = base_url().$login_userdata['user_slug'];
+                $email_html = '';
+                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding:5px;">
+                                        <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                    </td>
+                                    <td style="padding:5px;">
+                                        <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
+                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                    </td>
+                                    <td style="padding:5px;">
+                                        <p><a class="btn" href="'.$url.'">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
+                $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' sent you a contact request in Aileensoul.';                        
+                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
+                //Send Mail End
                 $return_data['status'] = 'pending';
                 $return_data['message'] = '1';
             } else {
@@ -99,6 +121,29 @@ class User_post extends MY_Controller {
                 $data['status'] = 'pending';
                 $data['not_read'] = '2';
                 $user_contact = $this->common->update_data($data, 'user_contact', 'id', $checkContactData['id']);
+                //Send Mail Start
+                $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_user_id))->row()->email;
+                $login_userdata = $this->user_model->getUserData($userid);
+
+                $url = base_url().$login_userdata['user_slug'];
+                $email_html = '';
+                $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding:5px;">
+                                        <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                    </td>
+                                    <td style="padding:5px;">
+                                        <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
+                                        <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                    </td>
+                                    <td style="padding:5px;">
+                                        <p><a class="btn" href="'.$url.'">view</a></p>
+                                    </td>
+                                </tr>
+                                </table>';
+                $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' sent you a contact request Aileensoul.';                        
+                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
+                //Send Mail End
                 $return_data['status'] = 'pending';
                 $return_data['message'] = '1';
             } elseif ($checkContactData['status'] == 'block') {

@@ -248,6 +248,32 @@ class Userprofile_page extends MY_Controller {
             $insert_id = $this->common->insert_data($data, 'user_contact');
             $response = $status;
         }
+        if($status == "pending")
+        {            
+            //Send Mail Start
+            $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $id))->row()->email;
+            $login_userdata = $this->user_model->getUserData($userid);
+
+            $url = base_url().$login_userdata['user_slug'];
+            $email_html = '';
+            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td style="padding:5px;">
+                                    <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                </td>
+                                <td style="padding:5px;">
+                                    <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
+                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                </td>
+                                <td style="padding:5px;">
+                                    <p><a class="btn" href="'.$url.'">view</a></p>
+                                </td>
+                            </tr>
+                            </table>';
+            $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' sent you a contact request in Aileensoul.';                        
+            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
+            //Send Mail End
+        }
         echo $response;
     }
 
@@ -281,7 +307,30 @@ class Userprofile_page extends MY_Controller {
             $response['button'] = '<a class="btn3" ng-click="contact('. $contact_id.', \'pending\', '.$id.','.$indexCon.')">Add to contact</a>';
         }
         if($status == "pending")
-        {            
+        {
+            //Send Mail Start
+            $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $id))->row()->email;
+            $login_userdata = $this->user_model->getUserData($userid);
+
+            $url = base_url().$login_userdata['user_slug'];
+            $email_html = '';
+            $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td style="padding:5px;">
+                                    <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                </td>
+                                <td style="padding:5px;">
+                                    <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
+                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                </td>
+                                <td style="padding:5px;">
+                                    <p><a class="btn" href="'.$url.'">view</a></p>
+                                </td>
+                            </tr>
+                            </table>';
+            $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' sent you a contact request in Aileensoul.';                        
+            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id);
+            //Send Mail End
             $response['button'] = '<a class="btn3" ng-click="contact('. $contact_id.', \'cancel\', '.$id.','.$indexCon.')">Request sent</a>';
         }
         echo json_encode($response);
