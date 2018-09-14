@@ -811,13 +811,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
     $scope.showLoadmore = true;
     var pg="";
+    var fl_addpost="";
     var processing = false;
     getUserPost(pg);
     var isProcessing = false;
-    function getUserPost(pg) {
+    function getUserPost(pg,fl_addpost) {
      
         $('#loader').show();
-        if(pg == ""){
+        if(pg == "" && fl_addpost == ""){
             $('#main_loader').show();
         }
         $http.get(base_url + "user_post/getUserPost?page=" + pg).then(function (success) {
@@ -1300,7 +1301,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
                                 $('.file-preview-thumbnails').html('');
                                 //$scope.postData.splice(0, 0, success.data[0]);
-                                getUserPost(pg);
+                                getUserPost(pg,1);
 
                                 bar.width(100+'%');
                                 percent.html(100+'%');
@@ -1555,7 +1556,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $('#ask_related_category .input').css('width', '100%');
 
                                 //$scope.postData.splice(0, 0, success.data[0]);
-                                getUserPost(pg);
+                                getUserPost(pg,1);
 
                                 bar.width(100+'%');
                                 percent.html(100+'%');
@@ -2037,7 +2038,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 document.getElementById('fileInput1').value = '';
                                 $('.file-preview-thumbnails').html('');
                                 //$scope.postData.splice(0, 0, success.data[0]);                                
-                                getUserPost(pg);
+                                getUserPost(pg,1);
 
                                 bar.width(100+'%');
                                 percent.html(100+'%');
