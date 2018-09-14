@@ -325,6 +325,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
 					<!-- <div class="tab-add">
 						<?php //$this->load->view('banner_add'); ?>
 					</div> -->
+                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="loaderimage"/></div>
                 </div>
                 <div class="right-part">
                     <?php $this->load->view('right_add_box'); ?>

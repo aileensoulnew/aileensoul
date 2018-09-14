@@ -659,24 +659,25 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql = "";        
         if(isset($company_id) && !empty($company_id))
         {
-            $sql .= "r.rec_id IN (".implode(",", $company_id).") OR ";
+            $sql .= "r.rec_id IN (".$company_id.") OR ";
         }
         if(isset($category_id) && !empty($category_id))
         {
-            $sql .= "rp.industry_type IN (".implode(",", $category_id).") OR ";
+            $sql .= "rp.industry_type IN (".$category_id.") OR ";
         }
         if(isset($location_id) && !empty($location_id))
         {
-            $sql .= "rp.city IN (".implode(",", $location_id).") OR ";
+            $sql .= "rp.city IN (".$location_id.") OR ";
         }
         if(isset($skill_id) && !empty($skill_id))
         {
-            $skill_id = implode("|", $skill_id);//str_replace(",", "|", $skill_id);
+            // $skill_id = implode("|", $skill_id);//
+            str_replace(",", "|", $skill_id);
             $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
         if(isset($job_desc) && !empty($job_desc))
         {
-            $sql .= "rp.post_name IN (".implode(",", $job_desc).") OR";
+            $sql .= "rp.post_name IN (".$job_desc.") OR";
         }
         if(isset($period_filter) && !empty($period_filter))
         {
@@ -795,24 +796,25 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql = "";
         if(isset($company_id) && !empty($company_id))
         {
-            $sql .= "r.rec_id IN (".implode(",", $company_id).") OR ";
+            $sql .= "r.rec_id IN (".$company_id.") OR ";
         }
         if(isset($category_id) && !empty($category_id))
         {
-            $sql .= "rp.industry_type IN (".implode(",", $category_id).") OR ";
+            $sql .= "rp.industry_type IN (".$category_id.") OR ";
         }
         if(isset($location_id) && !empty($location_id))
         {
-            $sql .= "rp.city IN (".implode(",", $location_id).") OR ";
+            $sql .= "rp.city IN (".$location_id.") OR ";
         }
         if(isset($skill_id) && !empty($skill_id))
         {
-            $skill_id = implode("|", $skill_id);//str_replace(",", "|", $skill_id);
+            // $skill_id = implode("|", $skill_id);//
+            str_replace(",", "|", $skill_id);
             $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
         if(isset($job_desc) && !empty($job_desc))
         {
-            $sql .= "rp.post_name IN (".implode(",", $job_desc).") OR";
+            $sql .= "rp.post_name IN (".$job_desc.") OR";
         }
         if(isset($period_filter) && !empty($period_filter))
         {

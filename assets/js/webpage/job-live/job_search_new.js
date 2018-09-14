@@ -337,10 +337,12 @@ app.controller('jobSearchController', function ($scope, $http,$window) {
         $scope.showLoadmore = true;
         pagenum = 1;
 
+        $scope.job_search = {};
+        $('#loader').show();
         $.post(base_url + "job_live/job_search_new_ajax?page=" + pagenum, {"job_keyword":job_keyword, "job_location":job_location, "work_time":work_time, "company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){                 
-                $scope.job_search = {};
                 data = JSON.parse(success);
+                $('#loader').hide();
                 $scope.$apply(function () {
                     $scope.job_search = data.searchJobs;
                     $scope.jobs.page_number = pagenum;

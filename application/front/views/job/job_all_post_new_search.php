@@ -303,6 +303,7 @@ $userid_login = $this->session->userdata('aileenuser'); ?>
 
                         </div>
                     </div>
+                    <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="loaderimage"/></div>
                 </div>
                 <div class="right-part">
                     <?php $this->load->view('right_add_box'); ?>

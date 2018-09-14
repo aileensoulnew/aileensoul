@@ -342,10 +342,11 @@ app.controller('recommendedJobsController', function ($scope, $http,$window,$com
         // console.log(exp_fil);
         $scope.showLoadmore = true;
         pagenum = 1;
-
+        $scope.recommended_job = {};
+        $('#loader').show();
         $.post(base_url + "job/recommended_jobs_ajax?page=" + pagenum, {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
-            function(success){                 
-                $scope.recommended_job = {};
+            function(success){
+                $('#loader').hide();
                 data = JSON.parse(success);
                 $scope.$apply(function () {
                     $scope.recommended_job = data.searchJobs;

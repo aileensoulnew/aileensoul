@@ -310,10 +310,12 @@ app.controller('noJobRegController', function ($scope, $http,$window) {
         $scope.showLoadmore = true;
         pagenum = 1;
 
+        $scope.latestJob = {};
+        $('#loader').show();
         $.post(base_url + "job_live/latestJob?page=" + pagenum, {"company_id": $scope.cmp_fil, "category_id" : $scope.cat_fil, "location_id": $scope.loc_fil, "skill_id": $scope.skills_fil, "job_desc": $scope.jd_fil, "period_filter": $scope.per_fil, "exp_fil": $scope.exp_fil},
             function(success){
-                $scope.latestJob = {};
                 data = JSON.parse(success);
+                $('#loader').hide();
                 $scope.$apply(function () {
                     $scope.latestJob = data.latestJobs;
                     $scope.jobs.page_number = pagenum;

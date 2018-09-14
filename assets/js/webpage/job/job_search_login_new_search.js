@@ -308,7 +308,8 @@ app.controller('jobSearchController', function($scope, $http, $window) {
         });
         // console.log(exp_fil);
         pagenum = 1;
-        //$("#loader").show();
+        $scope.searchJob = {};
+        $("#loader").show();
         $.post(base_url + "job/ajax_job_search_new_filter?page=" + pagenum + "&search=" + encodeURIComponent(skill) + "&search_location=" + encodeURIComponent(search_location), {
             "company_id": $scope.cmp_fil,
             "category_id": $scope.cat_fil,
@@ -318,7 +319,7 @@ app.controller('jobSearchController', function($scope, $http, $window) {
             "period_filter": $scope.per_fil,
             "exp_fil": $scope.exp_fil
         }, function(success) {
-            $scope.searchJob = {};
+            $("#loader").hide();
             data = JSON.parse(success);
             $scope.$apply(function() {
                 $scope.searchJob = data.jobData;
