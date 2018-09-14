@@ -1,3 +1,4 @@
+var scopeHold;
 app.directive('ddTextCollapse', ['$compile', function($compile) {
 
     return {
@@ -1125,7 +1126,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $("#"+removeViewMore).remove();
     };
 
-    
+    $scope.dashboardPhotosAfterDPUpload = function() {    
+        getUserDashboardImage()
+    };    
     
     var cntImgSim = 0;
     var formFileDataSim = new FormData();
@@ -1564,7 +1567,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }, function (error) {});
     }
 
-    function getUserDashboardImage(pagenum) {
+    function getUserDashboardImage(pagenum) {        
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardImage?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
@@ -3325,7 +3328,8 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 });
 
     }
-
+    scopeHold = $scope;
+    console.log(scopeHold);
 });
 app.controller('detailsController', function ($scope, $http, $location,$compile) {
     $scope.user = {};
@@ -4252,6 +4256,13 @@ function profile_pic() {
                     $("#header-main-profile-pic").addClass("profile-brd");
                 }
                 $(".login-user-pro-pic").attr('src',res.userProfilePicThumb);
+
+                /*var elem = angular.element(document.querySelector('[ng-app]'));
+                var injector = elem.injector();
+                var $rootScope = injector.get('$rootScope');*/
+                scopeHold.dashboardPhotosAfterDPUpload();
+                // $rootScope.$apply(function(){});
+
                 document.getElementById('upload-one').value = null;
                 document.getElementById('upload-demo-one').value = '';
             }
