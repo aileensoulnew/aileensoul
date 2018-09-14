@@ -659,24 +659,47 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql = "";        
         if(isset($company_id) && !empty($company_id))
         {
+            if(is_array($company_id))
+            {
+                $company_id = implode(",", $company_id);
+            }
             $sql .= "r.rec_id IN (".$company_id.") OR ";
         }
         if(isset($category_id) && !empty($category_id))
         {
+            if(is_array($category_id))
+            {
+                $category_id = implode(",", $category_id);
+            }
             $sql .= "rp.industry_type IN (".$category_id.") OR ";
         }
         if(isset($location_id) && !empty($location_id))
         {
+            if(is_array($location_id))
+            {
+                $location_id = implode(",", $location_id);
+            }
             $sql .= "rp.city IN (".$location_id.") OR ";
         }
         if(isset($skill_id) && !empty($skill_id))
         {
-            // $skill_id = implode("|", $skill_id);//
-            str_replace(",", "|", $skill_id);
+            if(is_array($skill_id))
+            {
+                $skill_id = implode("|", $skill_id);
+            }
+            else
+            {
+                $skill_id = str_replace(",", "|", $skill_id);
+            }
+            // $skill_id = implode("|", $skill_id);//str_replace(",", "|", $skill_id);
             $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
         if(isset($job_desc) && !empty($job_desc))
         {
+            if(is_array($job_desc))
+            {
+                $job_desc = implode(",", $job_desc);
+            }
             $sql .= "rp.post_name IN (".$job_desc.") OR";
         }
         if(isset($period_filter) && !empty($period_filter))
@@ -796,24 +819,47 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql = "";
         if(isset($company_id) && !empty($company_id))
         {
+            if(is_array($company_id))
+            {
+                $company_id = implode(",", $company_id);
+            }
             $sql .= "r.rec_id IN (".$company_id.") OR ";
         }
         if(isset($category_id) && !empty($category_id))
         {
+            if(is_array($category_id))
+            {
+                $category_id = implode(",", $category_id);
+            }
             $sql .= "rp.industry_type IN (".$category_id.") OR ";
         }
         if(isset($location_id) && !empty($location_id))
         {
+            if(is_array($location_id))
+            {
+                $location_id = implode(",", $location_id);
+            }
             $sql .= "rp.city IN (".$location_id.") OR ";
         }
         if(isset($skill_id) && !empty($skill_id))
         {
-            // $skill_id = implode("|", $skill_id);//
-            str_replace(",", "|", $skill_id);
+            if(is_array($skill_id))
+            {
+                $skill_id = implode("|", $skill_id);
+            }
+            else
+            {
+                $skill_id = str_replace(",", "|", $skill_id);
+            }
+            // $skill_id = implode("|", $skill_id);//str_replace(",", "|", $skill_id);
             $sql .= "rp.post_skill REGEXP '[[:<:]](".$skill_id.")[[:>:]]' OR ";
         }
         if(isset($job_desc) && !empty($job_desc))
         {
+            if(is_array($job_desc))
+            {
+                $job_desc = implode(",", $job_desc);
+            }
             $sql .= "rp.post_name IN (".$job_desc.") OR";
         }
         if(isset($period_filter) && !empty($period_filter))
