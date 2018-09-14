@@ -24,3 +24,4 @@
 </script>
 <meta name="msvalidate.01" content="41CAD663DA32C530223EE3B5338EC79E" />
 <?php } ?>
+<?php $this->load->view('feedback_fixed'); ?>

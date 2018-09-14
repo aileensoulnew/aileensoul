@@ -1,3 +1,4 @@
+<?php $user_id = $this->session->userdata('aileenuser'); ?>
 <div class="fix-feedback">
 	<div class="fix-small">
 		<span>Feedback</span>
@@ -7,9 +8,11 @@
 			Feedback<a class="pull-right feed-close"><img src="<?php echo base_url('assets/n-images/f-close.png') . '' ?>"></a>
 		</div>
 		<form action="javascript:void(0);" name="main_feedback" id="main_feedback">
+			<?php if($user_id == ""): ?>
 			<div class="form-group">
 				<input type="text" name="f_email" id="f_email" placeholder="Enter Your Email">
 			</div>
+			<?php endif; ?>
 			<div class="form-group">
 				<textarea type="text" id="f_desc" name="f_desc" placeholder="Add Discription" maxlength="1000"></textarea>
 			</div>
@@ -29,6 +32,7 @@
 </div>
 <script type="text/javascript">
 var base_url = "<?php echo base_url(); ?>";
+var user_id = "<?php echo $this->session->userdata('aileenuser'); ?>";
 var valid_img = false;
 $(function() {
 	$("#f_email").focusin(function(){
@@ -70,7 +74,12 @@ function makeFileList() {
 $(document).ready(function (e) {
 	$("#main_feedback").on('submit',(function(e) {
 		e.preventDefault();
-		var f_email = $("#f_email").val();
+		if(user_id == ""){
+			var f_email = $("#f_email").val();
+		}
+		else{
+			var f_email = user_id;
+		}
 		var f_desc = $("#f_desc").val();
 		if(f_email == "" && f_desc == "")
 		{
@@ -89,7 +98,7 @@ $(document).ready(function (e) {
 			return false;
 		}
 		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if(!f_email.match(mailformat))
+		if(!f_email.match(mailformat) && user_id == "")
 		{		
 			$("#f_email").addClass("error");
 			return false;
