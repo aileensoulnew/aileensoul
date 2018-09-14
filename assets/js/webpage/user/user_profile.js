@@ -3328,8 +3328,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 });
 
     }
-    scopeHold = $scope;
-    console.log(scopeHold);
+    scopeHold = $scope;    
 });
 app.controller('detailsController', function ($scope, $http, $location,$compile) {
     $scope.user = {};
@@ -4257,11 +4256,7 @@ function profile_pic() {
                 }
                 $(".login-user-pro-pic").attr('src',res.userProfilePicThumb);
 
-                /*var elem = angular.element(document.querySelector('[ng-app]'));
-                var injector = elem.injector();
-                var $rootScope = injector.get('$rootScope');*/
                 scopeHold.dashboardPhotosAfterDPUpload();
-                // $rootScope.$apply(function(){});
 
                 document.getElementById('upload-one').value = null;
                 document.getElementById('upload-demo-one').value = '';
@@ -4337,6 +4332,7 @@ $('.upload-result').on('click', function (ev) {
                     document.getElementById('message1').style.display = "none";
                     document.getElementById("upload-demo").style.visibility = "visible";
                     document.getElementById("upload-demo-i").style.visibility = "visible";
+                    scopeHold.dashboardPhotosAfterDPUpload();
                 }
             }
         });
