@@ -30,7 +30,7 @@
                     </div>
                 </div> -->
                 <div class="form-group cus_field">
-                    <label for="text">What is your field?</label>
+                    <label for="text">Interested field</label>
                     <select name="field" ng-model="user.field" id="field" ng-change="other_field(this)">
                         <option value="" selected="selected">Select field</option>
                         <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             

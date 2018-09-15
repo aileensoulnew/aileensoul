@@ -502,6 +502,13 @@ app.controller('jobEduInfoController', function ($scope, $http, $location, $wind
     
     $scope.user = {};
 
+    getFieldList();
+    function getFieldList() {
+    $http.get(base_url + "general_data/getFieldList").then(function (success) {
+            $scope.fieldList = success.data;
+        }, function (error) {});
+    }
+
     $scope.jobTitle = function () {
         $http({
             method: 'POST',
@@ -567,7 +574,8 @@ app.controller('jobEduInfoController', function ($scope, $http, $location, $wind
             university: {
                 required: true,
             },
-            jobTitle: {
+            // jobTitle
+            field: {
                 required: true,
             }
         },
@@ -581,7 +589,8 @@ app.controller('jobEduInfoController', function ($scope, $http, $location, $wind
             university: {
                 required: "University name is required.",
             },
-            jobTitle: {
+            // jobTitle
+            field: {
                 required:  "Interested field is required.",
             }
         }

@@ -32,18 +32,34 @@
                             <input type="text" name="university" id="university" class="form-control" placeholder="Enter your University / Collage / school" ng-model="user.universityName" ng-keyup="universityList()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off">
                             <label ng-show="erroruniversityName" class="error">{{erroruniversityName}}</label>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="text">Interested field<font color="red">*</font></label>
                             <input type="text" name="jobTitle" id="jobTitle" class="form-control"placeholder="Ex:Seeking Opportunity,CEO, Enterpreneur, Founder, Singer, Photographer.." ng-keyup="jobTitle()" ng-model="user.jobTitle" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
                             <div id="iftooltip" class="tooltip-custom" style="display: none;">
                                 Enter the field name in which you want to make your career.
                             </div>
                             <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
+                        </div> -->
+                        <div class="form-group cus_field">
+                            <label for="text">Interested field<font color="red">*</font></label>
+                            <span class="select-field-custom">
+                            <select name="field" id="field" ng-model="user.field" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <option value="" selected="selected">Select Field</option>
+                                <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>            
+                                <option value="0">Other</option>
+                            </select>
+                            </span>
+                            <label ng-show="errorfield" class="error">{{errorfield}}</label>
+                            <!-- <label ng-show="errorfield" class="error ng-binding ng-hide"></label> -->
+                        </div>
+                        <div class="form-group cus_field" ng-if="user.field == '0'">
+                            <label for="text">Other Field</label>
+                            <input type="text" class="form-control" ng-model="user.otherField" placeholder="Enter other field" ng-required="true">
+                            <label ng-show="errorotherField" class="error">{{errorotherField}}</label>
                         </div>
                         <p class="text-center submit-btn">
                             <a href="<?php echo base_url();?>job-profile/basic-info" class="btn-back">Back</a>
-
-                            <button type="submit" id="submit" class="btn1">Next 123<span class="ajax_load" id="student_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                            <button type="submit" id="submit" class="btn1">Next<span class="ajax_load" id="student_info_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                         </p>
                     </form>
                 </div>
