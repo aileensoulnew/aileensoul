@@ -276,7 +276,7 @@ color: #1b8ab9 !important;}
 														</fieldset> -->
 														<?php $getFieldList = $this->data_model->getFieldList();?>
 														<fieldset class="fw">           
-															<label >What is your field?</label>
+															<label >Interested field</label>
 															<select tabindex="18" name="field" id="interested_field" onchange="other_interested_field_fnc(this)">
 																<option value="" selected="selected">Select your field</option>
 																<?php foreach ($getFieldList as $key => $value) { ?>
