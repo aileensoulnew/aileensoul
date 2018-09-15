@@ -843,7 +843,7 @@ class Freelancer extends MY_Controller {
         $this->freelancer_apply_check();
         // code for display page end
         //for getting degree data Strat
-        $contition_array = array('is_delete' => '0', 'degree_name !=' => "Other");
+        $contition_array = array('is_delete' => '0', 'degree_name !=' => "Other", 'degree_name !=' => "", 'status' => "1");
         $search_condition = "((status = '2' AND user_id = $userid) OR (status = '1'))";
         $degree_data = $this->data['degree_data'] = $this->common->select_data_by_search('degree', $search_condition, $contition_array, $data = '*', $sortby = 'degree_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
