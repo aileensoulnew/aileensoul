@@ -267,16 +267,33 @@ color: #1b8ab9 !important;}
 															<label >University / Collage / School</label>
 															<input tabindex="17" name="university" type="text" placeholder="Enter your University / Collage / school " id="university" value="<?php echo $studentData['university_name']; ?>"/><span id="fullname-error"></span><?php echo form_error('university'); ?>
 														</fieldset>
-														<fieldset class="fw">
+														<!-- <fieldset class="fw">
 															<label >Interested field</label>
 															<input tabindex="18" name="studjob_title" type="text" placeholder="Ex:Seeking Opportunity, CEO, Enterpreneur, Founder, Singer, Photographer, Developer, HR, BDE, CA, Doctor.." id="studjob_title" value="<?php echo $studentData['name']; ?>"/><span id="fullname-error"></span><?php echo form_error('studjob_title'); ?>
 															<div id="iftooltip" class="tooltip-custom" style="display: none;">
 										                        Enter the field name in which you want to make your career.
 										                    </div>
+														</fieldset> -->
+														<?php $getFieldList = $this->data_model->getFieldList();?>
+														<fieldset class="fw">           
+															<label >What is your field?</label>
+															<select tabindex="18" name="field" id="interested_field" onchange="other_interested_field_fnc(this)">
+																<option value="" selected="selected">Select your field</option>
+																<?php foreach ($getFieldList as $key => $value) { ?>
+																	<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $studentData['interested_fields'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
+																<?php } ?>
+																<option value="0" <?php echo $studentData['interested_fields'] == "0" ? "selected='selected'" : ""; ?>>Other</option>
+															</select>
+															<?php echo form_error('field'); ?>
+														</fieldset>
+														<fieldset class="fw" id="other_interested_field_div" style="<?php echo $studentData['interested_fields'] == '0' ? '' : 'display: none;'; ?>;">
+															<label>Enter other field</label>
+															<input tabindex="19" name="other_field" placeholder="Enter your field name" type="text" id="other_interested_field" value="<?php echo $studentData['other_interested_fields'];?>"/><span id="fullname-error"></span>
+															<?php echo form_error('other_field'); ?>
 														</fieldset>
 														<fieldset class="hs-submit full-width">
 															<a class="btn3" href="javascript:void(0);" id="is_stud">Back</a>
-															<input type="submit" tabindex="19" value="submit" name="submit" id="submit_studinfo">
+															<input type="submit" tabindex="20" value="submit" name="submit" id="submit_studinfo">
 														</fieldset>
 													</form>
 												</div>
@@ -554,6 +571,17 @@ color: #1b8ab9 !important;}
                 else
                 {
                     $("#other_field_div").hide();
+                }
+            }
+            function other_interested_field_fnc(id)
+            {
+                if(id.value == 0)
+                {
+                    $("#other_interested_field_div").show();
+                }
+                else
+                {
+                    $("#other_interested_field_div").hide();
                 }
             }
             $("#job_title").focusin(function(){

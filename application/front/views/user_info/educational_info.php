@@ -21,13 +21,27 @@
                     <input type="text" name="university" id="university" class="form-control" placeholder="Enter University / College / school " ng-model="user.universityName" ng-keyup="universityList()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off">
                     <label ng-show="erroruniversityName" class="error">{{erroruniversityName}}</label>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="text">Interested field<font color="red">*</font></label>
                     <input type="text" name="jobTitle" id="jobTitle" class="form-control" ng-keyup="jobTitle()" ng-model="user.jobTitle" placeholder="Ex: IT, Banking, Medical, CS, Accounting, Media, Marketing, Fitness, Sports.." typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
                     <label ng-show="errorjobTitle" class="error">{{errorjobTitle}}</label>
 					<div id="iftooltip" class="tooltip-custom" style="display: none;">
                         Enter the field name in which you want to make your career.
                     </div>
+                </div> -->
+                <div class="form-group cus_field">
+                    <label for="text">What is your field?</label>
+                    <select name="field" ng-model="user.field" id="field" ng-change="other_field(this)">
+                        <option value="" selected="selected">Select field</option>
+                        <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
+                        <option value="0">Other</option>
+                    </select>
+                    <label ng-show="errorfield" class="error">{{errorfield}}</label>
+                </div>
+                <div class="form-group" ng-if="user.field == '0'">
+                    <label for="text">Other Field</label>
+                    <input type="text" class="form-control" ng-model="user.otherField" placeholder="Enter other field" ng-required="true">
+                    <label ng-show="errorotherField" class="error">{{errorotherField}}</label>
                 </div>
                 <p class="text-center submit-btn">
 					<a class="btn-back" href="basic-information" title="Go to Back"> Back</a>

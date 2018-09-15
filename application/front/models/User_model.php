@@ -382,6 +382,18 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
+    function getAnyIndustryName($title_id = '') {
+        // $this->db->select('jt.name as job_name')->from('job_title jt');
+        $this->db->select('it.industry_name as job_name')->from('industry_type it');
+        $this->db->where('it.type_id', '');
+        $this->db->where('it.industry_id', $title_id);
+        $this->db->where('it.status', '1');
+        $this->db->where('it.is_delete', '0');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
+
     function getAnyDegreename($degree_id = '') {
         $this->db->select('degree_name')->from('degree');
         $this->db->where('degree_id', $degree_id);        

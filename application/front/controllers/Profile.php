@@ -31,7 +31,7 @@ class Profile extends CI_Controller {
         $this->data['usry'] = date('Y', strtotime($this->data['userdata']['user_dob']));
         $this->data['usrm'] = date('m', strtotime($this->data['userdata']['user_dob']));
         $this->data['usrd'] = date('d', strtotime($this->data['userdata']['user_dob']));
-
+        // print_r($this->data['studentData']);exit;
         $this->load->view('profile/profile', $this->data);
     }
 
@@ -509,7 +509,8 @@ class Profile extends CI_Controller {
         $this->form_validation->set_rules('currentStudy', 'Current Study', 'required');
         $this->form_validation->set_rules('studcity', 'City', 'required');
         $this->form_validation->set_rules('university', 'University', 'required');
-        $this->form_validation->set_rules('studjob_title', 'Field', 'required');
+        // $this->form_validation->set_rules('studjob_title', 'Field', 'required');
+        $this->form_validation->set_rules('field', 'Field', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -534,7 +535,16 @@ class Profile extends CI_Controller {
             $currentStudy = $this->input->post('currentStudy');
             $studcity = $this->input->post('studcity');
             $university = $this->input->post('university');
-            $field = $this->input->post('studjob_title');
+            // $field = $this->input->post('studjob_title');
+            $field = $this->input->post('field');
+            if($field == 0)
+            {
+                $other_field = $this->input->post('other_field');
+            }
+            else
+            {
+                $other_field = "";
+            }
 
             if ($currentStudy != "")
             {
@@ -590,7 +600,7 @@ class Profile extends CI_Controller {
             }
 
             // job title start   
-            if ($field != " ") {
+            /*if ($field != " ") {
                 $contition_array = array('name' => $field);
                 $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
                 if ($jobdata) {
@@ -606,9 +616,7 @@ class Profile extends CI_Controller {
                         $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
                     }
                 }
-            }
-
-            
+            }*/            
 
             $professionData = $this->user_model->getUserProfessionData($userid,"*");            
             if(isset($professionData) && !empty($professionData))
@@ -625,7 +633,8 @@ class Profile extends CI_Controller {
                 'current_study' => $currentStudyId,
                 'city' => $cityId,
                 'university_name' => $universityId,
-                'interested_fields' => $jobTitleId,
+                'interested_fields' => $field,
+                'other_interested_fields' => $other_field,
             );
             if(isset($studentData) && !empty($studentData))
             {                

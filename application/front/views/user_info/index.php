@@ -255,7 +255,8 @@
                         university: {
                             required: true,
                         },
-                        jobTitle: {
+                        // jobTitle
+                        field: {
                             required: true,
                         }
                     },
@@ -269,7 +270,8 @@
                         university: {
                             required: "University name is required.",
                         },
-                        jobTitle: {
+                        // jobTitle
+                        field: {
                             required:  "Interested field is required.",
                         }
                     }

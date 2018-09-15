@@ -402,7 +402,7 @@ class User_post_model extends CI_Model {
         $getSameJobTitleProUser = $this->user_model->getJobTitleCityProUser($getUserProfessionData['designation']);
         $getSameCityProUser = $this->user_model->getJobTitleCityProUser('',$getUserProfessionData['city']);        
         
-        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields');
+        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');
         
         $getSameFieldStdUser = $this->user_model->getSameFieldStdUser($getUserStudentData['current_study']);
         $getUnivetsityStdUser = $this->user_model->getUnivetsityCityStdUser($getUserStudentData['university_name']);
@@ -411,7 +411,7 @@ class User_post_model extends CI_Model {
         if($getUserProfessionData['designation'] != "")
             $job_name = $this->user_model->getAnyJobTitle($getUserProfessionData['designation']);
         elseif ($getUserStudentData['interested_fields'] != "") {
-            $job_name = $this->user_model->getAnyJobTitle($getUserStudentData['interested_fields']);
+            $job_name = ($getUserStudentData['interested_fields'] == 0 ? $getUserStudentData['other_interested_fields'] : $this->user_model->getAnyIndustryName($getUserStudentData['interested_fields']));
         }
         
 
