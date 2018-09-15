@@ -42,7 +42,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1
 	$db_password = '';
 	$db_name 	 = 'laceberry';
         
-    define('SITEURL','http://localhost/aileensoul-new/');
+    define('SITEURL','http://localhost/aileensoulnew/aileensoul/');
 	define('SITEPATH',$_SERVER['DOCUMENT_ROOT'].'/aileensoul/');
 	define('SITEMAPPATH',$_SERVER['DOCUMENT_ROOT'].'/laceberry/');
 	define('NEWSITEURL','http://localhost/laceberry/');
@@ -151,3 +151,6 @@ define('PROFILENA', '--');
 
 // GOVERMENT CATEGORY  NOMAIN
     define('GOV_CAT_NOUPLOAD', SITEURL . 'uploads/gov_cate_icon/agj.png');
+    
+
+define('FEEDBACK_SCREENSHOT', SITEURL . 'uploads/feedback/');

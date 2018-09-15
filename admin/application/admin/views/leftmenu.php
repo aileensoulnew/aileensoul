@@ -198,6 +198,7 @@
                  <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li>
  -->
                     <li><a href="<?php echo base_url('feedback/user'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Feedback List</a></li>
+                    <li><a href="<?php echo base_url('feedback/general'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>General Feedback</a></li>
                 </ul>
             </li>
            <!--End Feedback-->
