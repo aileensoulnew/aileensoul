@@ -290,7 +290,7 @@ app.controller('freelanceRegiController', function ($scope, $http, $location, $w
 });
 
 app.controller('freelanceBasicInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.$parent.title = "freelancer Profile | Aileensoul";    
+    $scope.$parent.title = "Freelancer Profile | Aileensoul";    
     $scope.jobByLocation = {};
     //$scope.basicinfo = {};
 
@@ -410,7 +410,7 @@ app.controller('freelanceBasicInfoController', function ($scope, $http, $locatio
 });
 
 app.controller('freelanceEduInfoController', function ($scope, $http, $location, $window,$timeout) {
-    $scope.$parent.title = "freelancer Profile | Aileensoul";
+    $scope.$parent.title = "Freelancer Profile | Aileensoul";
 
     $("#currentStudy").focusin(function(){
         $('#cstooltip').show();
@@ -427,6 +427,13 @@ app.controller('freelanceEduInfoController', function ($scope, $http, $location,
     });
     
     $scope.user = {};
+
+    getFieldList();
+    function getFieldList() {
+    $http.get(base_url + "general_data/getFieldList").then(function (success) {
+            $scope.fieldList = success.data;
+        }, function (error) {});
+    }
 
     $scope.jobTitle = function () {
         $http({
@@ -493,7 +500,8 @@ app.controller('freelanceEduInfoController', function ($scope, $http, $location,
             university: {
                 required: true,
             },
-            jobTitle: {
+            // jobTitle
+            field: {
                 required: true,
             }
         },
@@ -507,7 +515,8 @@ app.controller('freelanceEduInfoController', function ($scope, $http, $location,
             university: {
                 required: "University name is required.",
             },
-            jobTitle: {
+            // jobTitle
+            field: {
                 required:  "Interested field is required.",
             }
         }
@@ -552,7 +561,7 @@ app.controller('freelanceEduInfoController', function ($scope, $http, $location,
 });
 
 app.controller('freelanceCreateProfileController', function ($scope, $http, $location, $window,$timeout) {    
-    $scope.$parent.title = "Recruiter Profile | Aileensoul";
+    $scope.$parent.title = "Freelancer Profile | Aileensoul";
 
     $("#email").focusin(function(){
         $('#emtooltip').show();
