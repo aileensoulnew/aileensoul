@@ -15,6 +15,7 @@
                         <li ng-if="details_data.Degree !==undefined"><b>Degree:</b> <span>{{details_data.Degree}}</span></li>
                         <li ng-if="details_data.Industry !==undefined"><b>Field:</b> <span>{{details_data.Industry}}</span></li>
                         <li ng-if="details_data.University !==undefined"><b>University:</b> <span>{{details_data.University}}</span></li>
+                        <li ng-if="details_data.interested_fields != ''"><b>Interested Fields:</b> <span>{{details_data.interested_fields}}</span></li>
                         <li><b>City:</b> <span>{{details_data.City}}</span></li>
                         <li><b>DOB:</b> <span>{{details_data.DOB}}</span></li>
                     </ul>
