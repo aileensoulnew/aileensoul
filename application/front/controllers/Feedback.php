@@ -195,6 +195,10 @@ line-height: 1;}
             'remove_spaces' => true
         );
 
+        //S3 BUCKET ACCESS START
+        $s3 = new S3(awsAccessKey, awsSecretKey);
+        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+
         $images = array();
         $this->load->library('upload');
         $count = count($_FILES['postfiles']['name']);//$_FILES['postfiles']['name']);
@@ -205,7 +209,7 @@ line-height: 1;}
             $images = array();
             if($_FILES['postfiles']['name'][0] != "")
             {            
-              foreach($_FILES['postfiles']['name'] as $k=>$v) {                
+              foreach($_FILES['postfiles']['name'] as $k=>$v) {
 
                   $_FILES['postfile']['name'] = $_FILES['postfiles']['name'][$k];
                   $_FILES['postfile']['type'] = $_FILES['postfiles']['type'][$k];
@@ -214,9 +218,9 @@ line-height: 1;}
                   $_FILES['postfile']['size'] = $_FILES['postfiles']['size'][$k];
                   $file_type = $_FILES['postfile']['type'];
                   $file_type = explode('/', $file_type);
-                  $file_type = $file_type[0];
+                  $file_type_ext = $file_type[0];
                   
-                  if ($_FILES['postfile']['error'] == 0 && $file_type == 'image') {
+                  if ($_FILES['postfile']['error'] == 0 && $file_type_ext == 'image') {
                       $store = $_FILES['postfile']['name'];
                       $store_ext = explode('.', $store);
                       $store_ext = end($store_ext);
@@ -229,18 +233,18 @@ line-height: 1;}
                       if ($this->upload->do_upload('postfile'))
                       {                        
                           //Main Image
-                          $main_image = $this->config->item('user_post_main_upload_path') . $response['result'][$i]['file_name'];
+                          $main_image = $this->config->item('feedback_main_upload_path') . $response['result'][$i]['file_name'];
                           if (IMAGEPATHFROM == 's3bucket') {
-                              $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                              $abc = $s3->putObjectFile($main_image,bucket,$main_image,S3::ACL_PUBLIC_READ);
                           }                            
 
                           /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
 
-                          if ($_SERVER['HTTP_HOST'] != "localhost") {
+                          /*if ($_SERVER['HTTP_HOST'] != "localhost") {
                               if (isset($main_image)) {
                                   unlink($main_image);
                               }                               
-                          }
+                          }*/
                           /* THIS CODE UNCOMMENTED AFTER SUCCESSFULLY WORKING : REMOVE IMAGE FROM UPLOAD FOLDER */
                       }
                       else

@@ -25,7 +25,7 @@
 					</i>
 					<span id="fileList"></span>
 				</label>
-				<button class="pull-right" type="submit"><img src="<?php echo base_url('assets/n-images/fd-send.png') . '' ?>"></button>
+				<button id="send_feedback" class="pull-right" type="submit"><img src="<?php echo base_url('assets/n-images/fd-send.png') . '' ?>"></button>
 			</div>
 		</form>
 	</div>
@@ -103,6 +103,8 @@ $(document).ready(function (e) {
 			$("#f_email").addClass("error");
 			return false;
 		}
+		$("#send_feedback").attr('disabled','disabled')
+		$("#send_feedback img").attr('src',base_url+'assets/images/loader.gif')
 		$.ajax({
 			url: base_url+"feedback/main_feedback_insert", // Url to which the request is send
 			type: "POST",             // Type of request to be send, called as method
@@ -112,6 +114,8 @@ $(document).ready(function (e) {
 			processData:false,        // To send DOMDocument or non processed data file it is set to false
 			success: function(data)   // A function to be called if request succeeds
 			{
+				$("#send_feedback").removeAttr('disabled');
+				$("#send_feedback img").attr('src',base_url+'assets/n-images/fd-send.png')
 				$("#main_feedback")[0].reset();
 				$("#fileList").html("");
 			}
