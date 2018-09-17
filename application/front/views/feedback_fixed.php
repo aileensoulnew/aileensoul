@@ -27,6 +27,9 @@
 				</label>
 				<button id="send_feedback" class="pull-right" type="submit"><img src="<?php echo base_url('assets/n-images/fd-send.png') . '' ?>"></button>
 			</div>
+			<div id="feed_success" class="form-group" style="display: none;position: absolute;bottom: 53px;color: #1b8ab9;">
+				Thank you for the feedback.
+			</div>
 		</form>
 	</div>
 </div>
@@ -115,7 +118,11 @@ $(document).ready(function (e) {
 			success: function(data)   // A function to be called if request succeeds
 			{
 				$("#send_feedback").removeAttr('disabled');
-				$("#send_feedback img").attr('src',base_url+'assets/n-images/fd-send.png')
+				$("#send_feedback img").attr('src',base_url+'assets/n-images/fd-send.png');
+				$("#feed_success").show();
+				setTimeout(function(){
+					$("#feed_success").hide();
+				},5000);
 				$("#main_feedback")[0].reset();
 				$("#fileList").html("");
 			}
