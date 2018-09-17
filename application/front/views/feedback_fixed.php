@@ -33,6 +33,16 @@
 		</form>
 	</div>
 </div>
+<div class="modal fade message-box post-error" id="feedback-modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
+            <div class="modal-body">
+                <span class="mes"></span>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
 var base_url = "<?php echo base_url(); ?>";
 var user_id = "<?php echo $this->session->userdata('aileenuser'); ?>";
@@ -49,10 +59,20 @@ $(function() {
 
 function makeFileList() {
 	var input = document.getElementById("feedback_file");
-	var ul = document.getElementById("fileList");	
+	var ul = document.getElementById("fileList");
+	$("#fileList").html("");
 	if(input.files.length > 5)
 	{
-		alert("Select Only 5 Images.")
+		// alert("Select Only 5 Images.");
+		$("#feedback-modal .mes").html('<div class="pop_content error">Select Only 5 Screenshot.</div>');
+		$("#feedback-modal").modal("show");
+		setTimeout(function(){
+			// $("#feed_success").hide();
+			$("#feedback-modal .mes").html('');
+			$("#feedback-modal .modal-close").click();
+		},5000);
+		// $("#feedback_file").val();
+		input.value = "";		
 	}
 	else
 	{
@@ -119,9 +139,13 @@ $(document).ready(function (e) {
 			{
 				$("#send_feedback").removeAttr('disabled');
 				$("#send_feedback img").attr('src',base_url+'assets/n-images/fd-send.png');
-				$("#feed_success").show();
+				$("#feedback-modal .mes").html('<div class="pop_content" style="color: #1b8ab9;">Thank You for the Feedback.</div>');
+				$("#feedback-modal").modal("show");
 				setTimeout(function(){
-					$("#feed_success").hide();
+					// $("#feed_success").hide();
+					$("#feedback-modal .mes").html('');
+					// $("#feedback-modal").modal("hide");
+					$("#feedback-modal .modal-close").click();
 				},5000);
 				$("#main_feedback")[0].reset();
 				$("#fileList").html("");
