@@ -3,14 +3,22 @@
   echo $leftmenu;
 ?>
 <style type="text/css">
-  .feedback-img
-  {
-    width: 25% !important;
-    float: left;
-    padding-left: 10px;
+  .feedback-img {
+      width: 25% !important;
+      float: left;
+      padding-left: 10px;
+      height: 180px;
   }
-  .feedback-img img{
-    width: 100%;
+  .feedback-img img {
+      height: 170px;
+      width: 170px;
+  }
+  
+  .feedback .modal-dialog{
+    margin: 15px auto !important;
+  }
+  .pop_content img {
+      width: 100%;
   }
 </style>
 
@@ -37,7 +45,7 @@
  
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content feedback">
 
       <div class="row">
         <div class="col-md-3">
@@ -106,24 +114,32 @@
                           ?>
                           <span class="feedback-img">
                             <img data-target="#screen-model-<?php echo $key; ?>" data-toggle="modal" src="<?php echo FEEDBACK_SCREENSHOT.$value; ?>">
-                          </span>
-                          <div class="modal fade message-box" id="screen-model-<?php echo $key; ?>" role="dialog" tabindex="-1">
-                              <div class="modal-dialog modal-lm">
-                                  <div class="modal-content">
-                                      <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
-                                      <div class="modal-body">
-                                          <span class="mes">
-                                              <img src="<?php echo FEEDBACK_SCREENSHOT.$value; ?>">
-                                          </span>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                          </span>                          
                           <?php
                           }
                         ?>
                       </div>
                     </div>
+                    <?php 
+                        foreach ($images as $key => $value) {
+                        ?>
+                        <div class="modal fade message-box" id="screen-model-<?php echo $key; ?>" role="dialog" tabindex="-1">
+                            <div class="modal-dialog modal-lm">
+                                <div class="modal-content">
+                                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                                    <div class="modal-body">
+                                        <div class="mes">
+                                            <div class="pop_content">
+                                              <img src="<?php echo FEEDBACK_SCREENSHOT.$value; ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        }
+                      ?>
                     <?php endif; ?>
                   </form>
                 </div>
