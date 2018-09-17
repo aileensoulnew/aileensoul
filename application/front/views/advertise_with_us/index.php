@@ -91,7 +91,7 @@ header('Cache-Control: public, max-age=30');
 				<div class="container">
 					<div class="row">
 						<h1 class="text-center">Promote Your Business With Aileensoul
-							<span class="con-detail">mail : <a href="mailto:info@aileensoul.com"><span class="pr15">info@aileensoul.com</span></a><br class="block-479"> call : <a href="tel:9879907399">9879907399</a></span>
+							<span class="con-detail">mail : <a href="mailto:info@aileensoul.com"><span class="pr15">info@aileensoul.com</span></a><br class="block-479"> call : <a href="tel:9879907399">+91 9879907399</a></span>
 						</h1>
 						
 					</div>
@@ -237,7 +237,7 @@ header('Cache-Control: public, max-age=30');
 					<div class="clearfix"></div>
                 </div>
 				<p class="text-center more-support">For more support <a href="mailto:inquiry@aileensoul.com">inquiry@aileensoul.com</a>
-				<p class="text-center more-support">Call : <a href="tel:9879907399">9879907399</a><p>
+				<p class="text-center more-support">Call : <a href="tel:9879907399">+91 9879907399</a><p>
 			</div>
 			<div class="container">
 				<div class="banner-add">

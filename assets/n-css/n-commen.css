@@ -918,8 +918,8 @@ a:focus{outline:none;}
 .new-search-input1 input{margin-bottom:15px;}
 .new-search-input1{padding-top:35px;}
 
-.mob-side-menu.mob-side-hdr .mob-side-close-btn{width: 19px; height: 19px; position: absolute; top: 7px; right:10px; background: #fff; display:none; z-index:10; }
-.mob-side-menu .mob-side-close-btn{width: 19px; height: 19px; position: absolute; top: 54px; right:12px; background: #fff; display:none; z-index:10; }
+.mob-side-menu.mob-side-hdr .mob-side-close-btn{width: 19px; height: 19px; position: absolute; top: 7px; right:10px; background: #fff; z-index:10; }
+.mob-side-menu .mob-side-close-btn{width: 19px; height: 19px; position: absolute; top: 54px; right:12px; background: #fff; z-index:10; }
 .mob-side-close-btn svg{padding:4px; opacity:0.7;}
 .mob-side-close-btn svg:hover{cursor:pointer; opacity:1;}
 .cbp-spmenu-open .mob-side-close-btn{display:block;}

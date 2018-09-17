@@ -110,11 +110,9 @@
                         </div>
                         <div class="about-content">
 						<img style="width:100%;" src="<?php echo base_url('assets/img/about-2.jpg') ?>">
-                            <p>
-                            Social and economic upliftment of people is a key contributor to the all-round progress of a nation. Aileensoul endeavours to impact this very aspect of socio-economic development through creation of employment opportunities for the country’s youth and helping eradicate unemployment and poverty, not just from India but also from the world. 
-                        </p>
-                        <p>
-                         We believe that every individual has the right to a better tomorrow and a prospering career is one its founding stones. At Aileensoul, we strive to remove the man-made barriers of bureaucracy by enabling individuals and professionals to connect and collaborate in a transparent and independent manner.
+                           
+                        <p class="text-center">
+                         Make the world more transparent for opportunities.
                         </p>   
                         </div>
                        
@@ -128,7 +126,7 @@
                         </div>
                         <div class="about-content text-center">
 							<img style="width:100%;" src="<?php echo base_url('assets/img/about-3.jpg') ?>">
-                                We aspire to become a one-stop destination for career enthusiasts from various walks of life and with diverse experience and educational backgrounds.                              
+                                A place where everyone will learn, earn and grow.                              
 
                         </div>
                        
