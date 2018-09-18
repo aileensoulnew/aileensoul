@@ -897,3 +897,5 @@ $route['company/(:any)/audios'] = "business_profile_live/business_audios/$1";
 $route['company/(:any)/pdf'] = "business_profile_live/business_pdf/$1";
 $route['company/(:any)/userlist'] = "business_profile_live/userlist/$1";
 $route['company/(:any)/post/(:any)'] = "business_profile_live/postnewpage/$1/$2";
+
+$route['unsubscribe/(:any)/(:any)/(:any)'] = "Registration/unsubscribe/$1/$2/$3";

@@ -5799,7 +5799,9 @@ class Job extends MY_Controller {
                                                             </table>';
 
         $subject = ucwords($jobdata[0]['fname']) . ' ' . ucwords($jobdata[0]['lname']) . ' Applied on your jobpost - Aileensoul.';
-        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $recemail[0]['re_comp_email']);
+        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id')->get_where('user', array('user_id' => $notid))->row();
+        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $recemail[0]['re_comp_email'],$unsubscribe);
     }
 
     public function name_slug() {

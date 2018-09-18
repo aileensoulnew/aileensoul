@@ -471,5 +471,24 @@ class User_model extends CI_Model {
         return $url;
     }
 
+    public function unsubscribeUser($encrypt_key = "", $user_slug = "",$user_id = "")
+    {
+        $userData = $this->db->select('*')->get_where('user', array('md5(encrypt_key)' => $encrypt_key, 'md5(user_slug)' => $user_slug, 'md5(user_id)' => $user_id))->row();
+        if(isset($userData) && !empty($userData))
+        {
+            $data = array("is_subscribe" => 0);            
+            $this->db->where('encrypt_key', $userData->encrypt_key);
+            $this->db->where('user_slug', $userData->user_slug);
+            $this->db->where('user_id', $userData->user_id);            
+            $result_array = $this->db->update('user', $data);
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+        // print_r($userData);exit();
+    }
+
 
 }

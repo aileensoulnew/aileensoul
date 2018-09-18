@@ -2631,7 +2631,11 @@ class Freelancer extends MY_Controller {
                                     </table>';
         $subject = $applydata[0]['freelancer_post_fullname'] . " " . $applydata[0]['freelancer_post_username'] . ' Applied on your Project.';
 
-        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $hiremail[0]['email']);
+        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id')->get_where('user', array('user_id' => $notid))->row();
+
+        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+
+        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $hiremail[0]['email'],$unsubscribe);
         // mail end  
     }
 
@@ -2671,7 +2675,11 @@ class Freelancer extends MY_Controller {
                                     </table>';
         $subject = $this->data['freehiredata'][0]['fullname'] . " " . $this->data['freehiredata'][0]['username'] . " " . $writting_word . ' you for ' . $projectdata[0]["post_name"] . ' project in Aileensoul.';
 
-        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email']);        
+        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id')->get_where('user', array('user_id' => $invite_user))->row();
+
+        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+
+        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email'],$unsubscribe);
     }
 
     //FREELANCER APPLY NEW REGISTATION PROFILE START

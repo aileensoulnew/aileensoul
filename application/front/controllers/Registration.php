@@ -668,4 +668,25 @@ class Registration extends CI_Controller {
         echo "done";
     }
 
+    public function unsubscribe($encrypt_key = "", $user_slug = "",$user_id = "")
+    {
+        if($encrypt_key != "" &&  $user_slug != "" && $user_id != "")
+        {
+            $userdata = $this->user_model->unsubscribeUser($encrypt_key,$user_slug,$user_id);
+            if($userdata)
+            {
+                echo "<script type='text/javascript'>alert('Unsubscribe successfully!'); close();</script>";
+            }
+            else
+            {
+                echo "<script type='text/javascript'>alert('Please try again!'); close();</script>";   
+            }
+
+        }
+        else
+        {
+            redirect(base_url());
+        }
+    }
+
 }
