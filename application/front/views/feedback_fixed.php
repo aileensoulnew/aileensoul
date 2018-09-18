@@ -14,7 +14,7 @@
 			</div>
 			<?php endif; ?>
 			<div class="form-group">
-				<textarea type="text" id="f_desc" name="f_desc" placeholder="Add Discription" maxlength="1000"></textarea>
+				<textarea type="text" id="f_desc" name="f_desc" placeholder="Add Description" maxlength="1000"></textarea>
 			</div>
 			<div class="form-group fd-btn">
 				<!-- <a href="#">Add Screensot</a> -->
