@@ -87,7 +87,7 @@ class Email_model extends CI_Model {
 
         $config['protocol'] = 'sendmail';
         $config['smtp_host'] = 'smtpout.secureserver.net';
-        $config['smtp_user'] = 'noreply@aileensoul.com';
+        $config['smtp_user'] = 'notification@aileensoul.com';
         $config['smtp_pass'] = 'aileensoul@123';
         $config['smtp_port'] = '465';
         $config['smtp_timeout'] = 5;
@@ -99,7 +99,7 @@ class Email_model extends CI_Model {
         $config['newline'] = '\r\n';
 
         //$this->email->initialize($config);
-        $this->email->from('noreply@aileensoul.com', 'Aileensoul');
+        $this->email->from('notification@aileensoul.com', 'Aileensoul');
         $this->email->to($to_email);
         $this->email->bcc('dm.aileensoul@gmail.com');
         $this->email->subject($subject);
@@ -234,7 +234,7 @@ class Email_model extends CI_Model {
         $config['smtp_host'] = "Smtp.gmail.com";
         //$config['smtp_port'] = "465";
         $config['smtp_port'] = "25";
-        $config['smtp_user'] = "noreply@aileensoul.com";
+        $config['smtp_user'] = "notification@aileensoul.com";
         $config['smtp_pass'] = "aileensoul@123";
         $config['charset'] = "utf-8";
         $config['mailtype'] = "html";
@@ -250,7 +250,7 @@ class Email_model extends CI_Model {
         //$to = "falguni.aileensoul@gmail.com";
         //$sub = "khytiii";
         //$this->email->from('aileensoul@gmail.com', 'Aileensoul');
-        $this->email->from('noreply@aileensoul.com', 'Aileensoul');
+        $this->email->from('notification@aileensoul.com', 'Aileensoul');
 
         $this->email->to($to_email);
         //$this->email->reply_to('no-replay@aileensoul.com', 'Explendid Videos');
@@ -290,7 +290,7 @@ class Email_model extends CI_Model {
         $config['protocol'] = "SMTP";
         $config['smtp_host'] = "Smtp.gmail.com";
         $config['smtp_port'] = "25";
-        $config['smtp_user'] = "noreply@aileensoul.com";
+        $config['smtp_user'] = "notification@aileensoul.com";
         $config['smtp_pass'] = "aileensoul@123";
         $config['charset'] = "utf-8";
         $config['mailtype'] = "html";
@@ -324,7 +324,7 @@ class Email_model extends CI_Model {
         $config['useragent'] = 'CodeIgniter';
         $config['protocol'] = 'sendmail';
         $config['smtp_host'] = 'smtpout.secureserver.net';
-        $config['smtp_user'] = 'noreply@aileensoul.com';
+        $config['smtp_user'] = 'notification@aileensoul.com';
         $config['smtp_pass'] = 'aileensoul@123';
         $config['smtp_port'] = '465';
         $config['smtp_timeout'] = 5;
@@ -336,7 +336,7 @@ class Email_model extends CI_Model {
         $config['newline'] = '\r\n';
         
         $this->email->initialize($config);
-        $this->email->from('noreply@aileensoul.com', 'Aileensoul');
+        $this->email->from('notification@aileensoul.com', 'Aileensoul');
         $this->email->to($to_email);
         $this->email->bcc('dm.aileensoul@gmail.com');
         $this->email->subject($subject);
