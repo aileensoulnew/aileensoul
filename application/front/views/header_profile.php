@@ -128,7 +128,7 @@ if($browser == "Firefox")
 
 									</svg>
 
-                                    <span class="noti-box" style="display:block" ng-bind="contact_request_count" ng-if="contact_request_count != '0'"></span>
+                                    <span class="noti-box con_req_cnt" style="display:none;" ng-bind="contact_request_count" ng-if="contact_request_count != '0'"></span>
                                 </a>
                                 <div class="dropdown-menu">
                                     <div class="dropdown-title">
@@ -573,6 +573,7 @@ if($browser == "Firefox")
                             </g>
                         </svg>
                         <!-- <span class="noti-box">1</span> -->
+                        <span class="noti-box con_req_cnt" style="display:none;" ng-bind="contact_request_count" ng-if="contact_request_count != '0'"></span>
                     </a>
                 </div>
             </li>

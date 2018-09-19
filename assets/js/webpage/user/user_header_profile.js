@@ -24,6 +24,10 @@ app.controller('headerCtrl', function ($scope, $http) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             contact_request = success.data;
+            if(contact_request.total > 0)
+            {
+                $(".con_req_cnt").show();
+            }
             $scope.contact_request_count = contact_request.total;
         });
     }
