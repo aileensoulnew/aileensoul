@@ -30,7 +30,7 @@
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-    <body class="search-page body-loader">
+    <body class="search-page body-loader one-hd">
         <?php echo $header_profile ?>
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
