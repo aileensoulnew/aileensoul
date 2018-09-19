@@ -271,9 +271,12 @@ class Userprofile_page extends MY_Controller {
                             </tr>
                             </table>';
             $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' sent you a contact request in Aileensoul.';
-            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id')->get_where('user', array('user_id' => $id))->row();
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $id))->row();
             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+            if($unsubscribeData->is_subscribe == 1)
+            {
+                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+            }
             //Send Mail End
         }
         echo $response;
@@ -331,10 +334,13 @@ class Userprofile_page extends MY_Controller {
                             </tr>
                             </table>';
             $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' sent you a contact request in Aileensoul.';
-            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id')->get_where('user', array('user_id' => $id))->row();
 
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $id))->row();
             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+            if($unsubscribeData->is_subscribe == 1)
+            {
+                $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+            }
             //Send Mail End
             $response['button'] = '<a class="btn3" ng-click="contact('. $contact_id.', \'cancel\', '.$id.','.$indexCon.')">Request sent</a>';
         }
@@ -413,9 +419,12 @@ class Userprofile_page extends MY_Controller {
                                         </tr>
                                         </table>';
                         $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' started following you in Aileensoul.';
-                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id')->get_where('user', array('user_id' => $id))->row();
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $id))->row();
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                        $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        if($unsubscribeData->is_subscribe == 1)
+                        {
+                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        }
                     }
                 }
             }            

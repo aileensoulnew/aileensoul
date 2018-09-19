@@ -4490,11 +4490,13 @@ class Recruiter extends MY_Controller {
 
 				$subject = $recdata[0]['re_comp_name'] . ' invited for an interview - Aileensoul.';
 
-				$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id')->get_where('user', array('user_id' => $invite_user))->row();
+				$unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $invite_user))->row();
 
 				$unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-
-				$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $jobemail,$unsubscribe);
+				if($unsubscribeData->is_subscribe == 1)
+                {
+					$send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $jobemail,$unsubscribe);
+				}
 			}
 			// GET NOTIFICATION COUNT
 			$not_count = $this->recruiter_notification_count($invite_user);
