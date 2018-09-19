@@ -684,7 +684,7 @@ class Registration extends CI_Controller {
             $this->data['encrypt_key'] = $encrypt_key;
             $this->data['user_slug'] = $user_slug;
             $this->data['user_id'] = $user_id;
-            $this->load->view('unsubscribe', $this->data);
+            $this->load->view('registration/unsubscribe', $this->data);
             /*$userdata = $this->user_model->unsubscribeUser($encrypt_key,$user_slug,$user_id);
             if($userdata)
             {
@@ -725,6 +725,25 @@ class Registration extends CI_Controller {
             echo "-1";
         }
         exit;
+    }
+
+    public function subscribe()
+    {
+        $this->data['title'] = 'Aileensoul';
+        $userid = $this->session->userdata('aileenuser');
+        
+        $this->data['userdata'] =  $this->common->select_data_by_id('user', 'user_id', $userid, $data = '*', $join_str = array())[0];
+        $this->load->view('registration/subscribe', $this->data);
+    }
+    public function subscribe_update()
+    {
+        $subscribe = $this->input->post('subscribe');
+        $userid = $this->session->userdata('aileenuser');
+        $data = array(
+            'is_subscribe' => $subscribe
+        );       
+        $this->common->update_data($data, 'user', 'user_id',$userid);
+        echo "1";
     }
 
 }

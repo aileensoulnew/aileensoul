@@ -151,6 +151,7 @@ $route['load_more/dataaaaa'] = "load_more/dataaaaa";
 
 $route['edit-profile'] = "profile";
 $route['change-password'] = "registration/changepassword";
+$route['subscribe'] = "registration/subscribe";
 $route['profiles'] = "dashboard";
 $route['profiles/basic-information/(:any)'] = "user_basic_info";
 $route['profiles/opportunities/(:any)'] = "user_opportunities";

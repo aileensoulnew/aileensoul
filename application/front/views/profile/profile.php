@@ -39,6 +39,7 @@ color: #1b8ab9 !important;}
                                         <ul class="left-form-each">
                                             <li  <?php if ($this->uri->segment(1) == 'edit-profile') { ?> class="active init" <?php } ?>>  <a href="<?php echo base_url() . 'edit-profile' ?>" data-toggle="collapse" data-parent="#bs-collapse" id="toggle">Edit</a></li>
                                             <li> <a href="<?php echo base_url('change-password') ?>">Change Password</a></li>
+                                            <li> <a href="<?php echo base_url('subscribe') ?>">Subscribe</a></li>
                                              <!-- <li> <a href="#">Edit Basic Information</a></li> -->
                                         </ul>
                                     </div>
