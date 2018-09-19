@@ -20,6 +20,8 @@ class Registration extends CI_Controller {
         include ('main_profile_link.php');
         include('include.php');
         include "openfireapi/vendor/autoload.php";
+        $this->load->library('encryption');
+
 
         //This function is there only one time users slug created after remove it start
 //         $this->db->select('user_id,first_name,last_name');
@@ -58,7 +60,7 @@ class Registration extends CI_Controller {
         }
     }
 
-    public function reg_insert() {        
+    public function reg_insert() {
          
         $date = $this->input->post('selday');
         $month = $this->input->post('selmonth');
@@ -100,6 +102,7 @@ class Registration extends CI_Controller {
                 
             } else {
                 $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
+                $key = $this->common->generate_encrypt_key(16);
 
                 $user_data = array(
                     'first_name' => $first_name,
@@ -113,6 +116,8 @@ class Registration extends CI_Controller {
                     'user_slider' => '1',
                     'term_condi' => $term_condi,
                     'user_slug' => $user_slug,
+                    'is_subscribe' => '1',
+                    'encrypt_key' => $key
                 );
 
 
@@ -543,6 +548,7 @@ class Registration extends CI_Controller {
             $first_name = trim($_POST['first_name']);
             $last_name = trim($_POST['last_name']);            
             $user_slug = $this->setuser_slug($first_name . '-' . $last_name, 'user_slug', 'user');
+            $key = $this->common->generate_encrypt_key(16);
             
             $user_data = array(
                 'first_name' => $first_name,
@@ -556,6 +562,8 @@ class Registration extends CI_Controller {
                 'user_slider' => '1',
                 'term_condi' => $_POST['term_condi'],
                 'user_slug' => $user_slug,
+                'is_subscribe' => '1',
+                'encrypt_key' => $key
             );
             $user_insert = $this->common->insert_data_getid($user_data, 'user');
             if ($user_insert) {
@@ -670,23 +678,53 @@ class Registration extends CI_Controller {
 
     public function unsubscribe($encrypt_key = "", $user_slug = "",$user_id = "")
     {
+        
         if($encrypt_key != "" &&  $user_slug != "" && $user_id != "")
         {
-            $userdata = $this->user_model->unsubscribeUser($encrypt_key,$user_slug,$user_id);
+            $this->data['encrypt_key'] = $encrypt_key;
+            $this->data['user_slug'] = $user_slug;
+            $this->data['user_id'] = $user_id;
+            $this->load->view('unsubscribe', $this->data);
+            /*$userdata = $this->user_model->unsubscribeUser($encrypt_key,$user_slug,$user_id);
             if($userdata)
             {
                 echo "<script type='text/javascript'>alert('Unsubscribe successfully!'); close();</script>";
             }
             else
             {
-                echo "<script type='text/javascript'>alert('Please try again!'); close();</script>";   
-            }
-
+                echo "<script type='text/javascript'>alert('Already Unsubscribed!'); close();</script>";   
+            }*/
         }
         else
         {
             redirect(base_url());
         }
+    }
+
+    public function unsubscribe_reason()
+    {
+        // print_r($this->input->post());exit;
+        $reason = $this->input->post('reason');
+        $encrypt_key = $this->input->post('key1');//encrypt_key
+        $user_slug = $this->input->post('key2');//user_slug
+        $user_id = $this->input->post('key3');//user_id
+        if($encrypt_key != "" &&  $user_slug != "" && $user_id != "")
+        {            
+            $userdata = $this->user_model->unsubscribeUser($encrypt_key,$user_slug,$user_id,$reason);
+            if($userdata)
+            {
+                echo "1";
+            }
+            else
+            {
+                echo "0";   
+            }
+        }
+        else
+        {
+            echo "-1";
+        }
+        exit;
     }
 
 }

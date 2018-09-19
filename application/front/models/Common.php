@@ -804,4 +804,17 @@ class Common extends CI_Model {
     }
     // CREATE SLUG END
 
+    //GENERATE ENCRYPT KEY START
+    public function generate_encrypt_key($length = '16')
+    {
+        $cipher = $length.' byte key';
+        $key = bin2hex( $this->encryption->create_key($length));
+        $query = $this->db->get_where('user', array('encrypt_key' => $key));
+        if ($query->num_rows() > 0) {
+            $this->generate_encrypt_key(16);
+        }
+        return $key;
+    }
+    //GENERATE ENCRYPT KEY END
+
 }

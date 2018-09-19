@@ -471,21 +471,30 @@ class User_model extends CI_Model {
         return $url;
     }
 
-    public function unsubscribeUser($encrypt_key = "", $user_slug = "",$user_id = "")
+    public function unsubscribeUser($encrypt_key = "", $user_slug = "",$user_id = "",$reason = "")
     {
-        $userData = $this->db->select('*')->get_where('user', array('md5(encrypt_key)' => $encrypt_key, 'md5(user_slug)' => $user_slug, 'md5(user_id)' => $user_id))->row();
+        $userData = $this->db->select('*')->get_where('user', array('md5(encrypt_key)' => $encrypt_key, 'md5(user_slug)' => $user_slug, 'md5(user_id)' => $user_id, 'is_subscribe' => '1'))->row();
         if(isset($userData) && !empty($userData))
         {
-            $data = array("is_subscribe" => 0);            
+            $data = array("is_subscribe" => 0);
             $this->db->where('encrypt_key', $userData->encrypt_key);
             $this->db->where('user_slug', $userData->user_slug);
-            $this->db->where('user_id', $userData->user_id);            
+            $this->db->where('user_id', $userData->user_id);
             $result_array = $this->db->update('user', $data);
-            return TRUE;
+
+            $data_ins = array(
+                "user_id" => $userData->user_id,
+                "reason" => $reason,
+                "status" => '1',
+                "created_date" => date('Y-m-d H:i:s', time())
+
+            );
+            $result_array = $this->db->insert('unsubscribe_reason', $data_ins);
+            return 1;
         }
         else
         {
-            return FALSE;
+            return 0;
         }
         // print_r($userData);exit();
     }

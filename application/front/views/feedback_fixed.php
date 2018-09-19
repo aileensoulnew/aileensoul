@@ -43,6 +43,7 @@
         </div>
     </div>
 </div>
+<script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
 <script type="text/javascript">
 var base_url = "<?php echo base_url(); ?>";
 var user_id = "<?php echo $this->session->userdata('aileenuser'); ?>";
@@ -221,5 +222,16 @@ $(document).ready(function (e) {
 	$(".feed-close").click(function(){
 		$(".fix-big").hide();
 		$(".fix-small").show();
+	});
+	$(".feed-top").click(function(){
+		$(".fix-big").hide();
+		$(".fix-small").show();
+	});	
+	$(document).click(function (e) {
+		if ($(e.target).parents(".fix-feedback").length === 0) 
+		{
+		    $(".fix-big").hide();
+			$(".fix-small").show();
+		}
 	});
 </script>
