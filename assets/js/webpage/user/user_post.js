@@ -2146,6 +2146,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         }).then(function (success) {
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
+                    $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
@@ -2154,6 +2155,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 } else if (success.data.is_oldLike == 1) {
+                    if(success.data.likePost_count < 1)
+                    {                        
+                        $('#post-like-count-' + post_id).hide();
+                    }
                     $('#post-like-' + post_id).removeClass('like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
@@ -2188,10 +2193,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                             if (commentClassName == 'last-comment') {
                                 $scope.postData[index].post_comment_data.splice(0, 1);
                                 $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                                if(data.comment_count > 0)
+                                {
+                                    $('.post-comment-count-' + post_id).show();
+                                }
                                 $('.post-comment-count-' + post_id).html(data.comment_count);
                                 $('.editable_text').html('');
                             } else {
                                 $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                                if(data.comment_count > 0)
+                                {
+                                    $('.post-comment-count-' + post_id).show();
+                                }
                                 $('.post-comment-count-' + post_id).html(data.comment_count);
                                 $('.editable_text').html('');
                             }
@@ -2252,10 +2265,18 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             if (commentClassName == 'last-comment') {
                 $scope.postData[parent_index].post_comment_data.splice(0, 1);
                 $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
+                if(data.comment_count < 1)
+                {
+                    $('.post-comment-count-' + post_id).hide();
+                }
                 $('.post-comment-count-' + post_id).html(data.comment_count);
                 $('.editable_text').html('');
             } else {
                 $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                if(data.comment_count < 1)
+                {
+                    $('.post-comment-count-' + post_id).hide();
+                }
                 $('.post-comment-count-' + post_id).html(data.comment_count);
                 $('.editable_text').html('');
             }
@@ -2591,12 +2612,14 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    $scope.count_likeUser = success.data.countlike;
-                    $scope.get_like_user_list = success.data.likeuserlist;
-                    $('#likeusermodal').modal('show');
-
-                });
+        .then(function (success) {
+            $scope.count_likeUser = success.data.countlike;
+            $scope.get_like_user_list = success.data.likeuserlist;
+            if($scope.count_likeUser > 0)
+            {                
+                $('#likeusermodal').modal('show');
+            }
+        });
 
     }
 
