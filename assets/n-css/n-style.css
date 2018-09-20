@@ -2370,7 +2370,7 @@ label.cameraButton{min-height:43px;}
 .feed-close:hover{background:#e7e7e7; border-radius:100%;}
 .feed-close img{width:10px; margin-top:-1px;}
 .fix-big{display:none; width:369px; background:#fff; border:1px solid #d2d2d2; border-radius:4px; font-size:18px; border-bottom-left-radius:0; border-bottom-right-radius:0; float:left;}
-.feed-top{padding:8px 15px; border-bottom:1px solid #d2d2d2; font-size:20px;border-top-left-radius:4px; border-top-right-radius:4px;}
+.feed-top{padding:8px 15px; border-bottom:1px solid #d2d2d2; font-size:20px;border-top-left-radius:4px; border-top-right-radius:4px; cursor:pointer;}
 .fix-big form{padding:15px 15px;}
 .fix-big form input{border:0; border-bottom:1px solid #d2d2d2; border-radius:0; padding:5px 0px;}
 .fix-big form textarea{border:0; border-bottom:1px solid #d2d2d2; border-radius:0; height:200px; padding:5px 0px;}
