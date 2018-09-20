@@ -1413,11 +1413,15 @@ function likeuserlist(post_id) {
         type: 'POST',
         url: base_url + "business_profile/likeuserlist",
         data: 'post_id=' + post_id,
-        dataType: "html",
+        dataType: "JSON",
         success: function (data) {
-            var html_data = data;
-            $('#likeusermodal .mes').html(html_data);
-            $('#likeusermodal').modal('show');
+            var html_data = data.html_data;
+            var like_count = data.like_count;
+            if(like_count > 0)
+            {
+                $('#likeusermodal .mes').html(html_data);
+                $('#likeusermodal').modal('show');
+            }
         }
     });
 }

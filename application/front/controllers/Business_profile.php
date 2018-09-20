@@ -7828,7 +7828,8 @@ Your browser does not support the audio tag.
         $modal .= '</div>';
         $modal .= '<div class="clearfix"></div>';
         $modal .= '</div>';
-        echo $modal;
+        $ret_arr = array("like_count"=>count($likelistarray),"html_data"=>$modal);
+        echo json_encode($ret_arr);
     }
 
     public function imglikeuserlist() {
@@ -9568,7 +9569,7 @@ Your browser does not support the audio tag.
 
 <li>
 <div class = "comnt_count_ext">
-<span class = "comment_like_count' . $post_business_profile_post_id . '">';
+<span class = "comment_like_count' . $post_business_profile_post_id . '" onclick = "likeuserlist(' . $post_business_profile_post_id . ')">';
                 if ($post_business_likes_count > 0) {
                     $return_html .= $post_business_likes_count;
 
@@ -10897,7 +10898,7 @@ Your browser does not support the audio tag.
 
 <li>
 <div class = "comnt_count_ext">
-<span class = "comment_like_count' . $post_business_profile_post_id . '">';
+<span class = "comment_like_count' . $post_business_profile_post_id . '" onclick = "likeuserlist(' . $post_business_profile_post_id . ')">';
                 if ($post_business_likes_count > 0) {
                     $return_html .= $post_business_likes_count;
 
