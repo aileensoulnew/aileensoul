@@ -838,7 +838,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 isLoadingData = true;
             }
 
-            setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);
+            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
         }, function (error) {});
     }
 
@@ -892,7 +892,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                 $scope.showLoadmore = false;
             }
 
-            setTimeout(function(){$('video,audio').mediaelementplayer(/* Options */);},300);
+            setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
         }, function (error) {});
     }
 
@@ -1321,7 +1321,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $("#selectedFilesOpp").html("");
                                 $("#fileCountOpp").text("");
 
-                                $('video, audio').mediaelementplayer();
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
                         });
             }
@@ -1573,7 +1573,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 formFileExtQue = [];
                                 $("#selectedFilesQue").html("");
                                 $("#fileCountQue").text("");
-                                $('video, audio').mediaelementplayer();
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
                         });
             }
@@ -2059,7 +2059,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                                 $("#selectedFiles").html("");
                                 $("#fileCountSim").text("");
 
-                                $('video, audio').mediaelementplayer();
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
                         });
             }
@@ -2119,7 +2119,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
 
     $scope.loadMediaElement = function ()
     {
-        $('video,audio').mediaelementplayer(/* Options */);
+        $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
     };
 
     $scope.addToContact = function (user_id, contact) {

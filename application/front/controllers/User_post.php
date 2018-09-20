@@ -90,11 +90,27 @@ class User_post extends MY_Controller {
                 $login_userdata = $this->user_model->getUserData($userid);
 
                 $url = base_url().$login_userdata['user_slug'];
+                if($login_userdata['user_image'] != "")
+                {
+                    $user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                }
+                else
+                {
+                    if($login_userdata['user_gender']  == 'M')
+                    {
+                        $user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($login_userdata['user_gender']  == 'F')
+                    {
+                        $user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="padding:5px;">
-                                        <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                        <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
                                     </td>
                                     <td style="padding:5px;">
                                         <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
@@ -133,11 +149,27 @@ class User_post extends MY_Controller {
                 $login_userdata = $this->user_model->getUserData($userid);
 
                 $url = base_url().$login_userdata['user_slug'];
+                if($login_userdata['user_image'] != "")
+                {
+                    $user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                }
+                else
+                {
+                    if($login_userdata['user_gender']  == 'M')
+                    {
+                        $user_img = base_url('assets/img/man-user.jpg');
+                    }
+
+                    if($login_userdata['user_gender']  == 'F')
+                    {
+                        $user_img = base_url('assets/img/female-user.jpg');
+                    }
+                }
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="padding:5px;">
-                                        <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                        <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
                                     </td>
                                     <td style="padding:5px;">
                                         <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> sent you a contact request.</p>
