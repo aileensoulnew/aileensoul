@@ -317,10 +317,11 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    $scope.postData[index].post_comment_data = data.all_comment_data;
-                });
+        .then(function (success) {
+            data = success.data;
+            $scope.postData[index].post_comment_data = data.all_comment_data;
+            $scope.postData[index].post_comment_count = data.post_comment_count;
+        });
 
     }
 
@@ -331,10 +332,11 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    data = success.data;
-                    $scope.postData[index].post_comment_data = data.comment_data;
-                });
+        .then(function (success) {
+            data = success.data;
+            $scope.postData[index].post_comment_data = data.comment_data;
+            $scope.postData[index].post_comment_count = data.post_comment_count;
+        });
 
     }
     $scope.deletePostComment = function (comment_id, post_id, parent_index, index, post) {

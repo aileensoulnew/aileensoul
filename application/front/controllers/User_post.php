@@ -516,6 +516,7 @@ class User_post extends MY_Controller {
         $post_id = $_POST['post_id'];
         $return_data = array();
         $return_data['comment_data'] = $this->user_post_model->postCommentData($post_id,$userid);
+        $return_data['post_comment_count'] = $this->user_post_model->postCommentCount($post_id);
         echo json_encode($return_data);
     }
 
@@ -524,6 +525,7 @@ class User_post extends MY_Controller {
         $post_id = $_POST['post_id'];
         $return_data = array();
         $return_data['all_comment_data'] = $this->user_post_model->viewAllComment($post_id,$userid);
+        $return_data['post_comment_count'] = $this->user_post_model->postCommentCount($post_id);
         echo json_encode($return_data);
     }
 
