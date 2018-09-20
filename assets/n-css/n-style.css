@@ -365,15 +365,17 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
     text-align:center;
     text-transform:uppercase
 }
-.all-post-top .post-head .post-img{
-    color:#fff;
-	background:none !important;
-    /*background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+.all-post-top .post-head.anonymous-que .post-img{
+	background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#3bb0ac),color-stop(56%,#1b8ab9),color-stop(100%,#1b8ab9));
     background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-o-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background:-ms-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
-    background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);*/
+    background:linear-gradient(354deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+	
+}
+.all-post-top .post-head .post-img{
+    color:#fff;
     font-size:20px;
     text-align:center;
     text-transform:uppercase
