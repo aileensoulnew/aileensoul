@@ -237,6 +237,7 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         }).then(function (success) {
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
+                    $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
@@ -245,6 +246,14 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 } else if (success.data.is_oldLike == 1) {
+                    if(success.data.likePost_count < 1)
+                    {                        
+                        $('#post-like-count-' + post_id).hide();
+                    }
+                    else
+                    {
+                        $('#post-like-count-' + post_id).show();
+                    }
                     $('#post-like-' + post_id).removeClass('like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
@@ -279,10 +288,18 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
                             if (commentClassName == 'last-comment') {
                                 $scope.postData[index].post_comment_data.splice(0, 1);
                                 $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                                if(data.comment_count > 0)
+                                {
+                                    $('.post-comment-count-' + post_id).show();
+                                }
                                 $('.post-comment-count-' + post_id).html(data.comment_count);
                                 $('.editable_text').html('');
                             } else {
                                 $scope.postData[index].post_comment_data.push(data.comment_data[0]);
+                                if(data.comment_count > 0)
+                                {
+                                    $('.post-comment-count-' + post_id).show();
+                                }
                                 $('.post-comment-count-' + post_id).html(data.comment_count);
                                 $('.editable_text').html('');
                             }
@@ -352,9 +369,17 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
                 $scope.postData[parent_index].post_comment_data.splice(0, 1);
                 $scope.postData[parent_index].post_comment_data.push(data.comment_data[0]);
                 $('.post-comment-count-' + post_id).html(data.comment_count);
+                if(data.comment_count < 1)
+                {
+                    $('.post-comment-count-' + post_id).hide();
+                }
                 $('.editable_text').html('');
             } else {
                 $scope.postData[parent_index].post_comment_data.splice(index, 1);
+                if(data.comment_count < 1)
+                {
+                    $('.post-comment-count-' + post_id).hide();
+                }
                 $('.post-comment-count-' + post_id).html(data.comment_count);
                 $('.editable_text').html('');
             }
@@ -610,7 +635,10 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         .then(function (success) {
             $scope.count_likeUser = success.data.countlike;
             $scope.get_like_user_list = success.data.likeuserlist;
-            $('#likeusermodal').modal('show');
+            if(success.data.countlike > 0)
+            {
+                $('#likeusermodal').modal('show');
+            }
         });
     }
 

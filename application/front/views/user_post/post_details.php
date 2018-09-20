@@ -18,7 +18,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
-    <?php $this->load->view('adsense'); ?>
+    <?php $this->load->view('adsense');
+    $login_userid = $this->session->userdata('aileenuser'); ?>
 </head>
     <body class="profile-db body-loader">
         <?php $this->load->view('page_loader'); ?>
@@ -383,8 +384,10 @@
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-6">
                                                 <ul class="pull-right bottom-right">
-                                                    <li class="like-count"><span id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li>
-                                                    <li class="comment-count"><span class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li>
+                                                    <li class="like-count" ng-click="like_user_list(post.post_data.id);"><span id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count" style="{{post.post_like_count > 0 ? '' : 'display: none';}}"></span><span>Like</span></li>
+                                                    <!-- <li class="comment-count"><span class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></li> -->
+                                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewAllComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length <= 1" id="comment-icon-{{post.post_data.id}}" class="last-comment"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></a></li>
+                                                    <li class="comment-count"><a href="javascript:void(0);" ng-click="viewLastComment(post.post_data.id, $index, post)" ng-if="post.post_comment_data.length > 1" id="comment-icon-{{post.post_data.id}}" class="all-comment"><span style="{{post.post_comment_count > 0 ? '' : 'display: none';}}" class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Comment</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -529,9 +532,9 @@
                                         <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                     <div class="like-detail">
-                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{userlist.fullname}}</a></h4>
-                                        <p ng-if="userlist.title_name == ''">{{userlist.degree_name}}</p>
-                                        <p ng-if="userlist.title_name != null">{{userlist.title_name}}</p>
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{ userlist.user_id == '<?php echo $login_userid; ?>' ? 'You' : userlist.fullname}}</a></h4>
+                                        <p ng-if="(userlist.degree_name != null) && (userlist.title_name == null)">{{userlist.degree_name}}</p>
+                                        <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
                                     </div>
 
