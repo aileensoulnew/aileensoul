@@ -1108,7 +1108,7 @@
                                     <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                 </a>
                                 <div class="like-detail">
-                                    <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{(userlist.user_id == <?php echo $user_id; ?> ? 'You' : userlist.fullname)}}</a></h4>
+                                    <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
                                     <p ng-if="(userlist.degree_name != null) && (userlist.title_name == null)">{{userlist.degree_name}}</p>
                                     <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                     <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>

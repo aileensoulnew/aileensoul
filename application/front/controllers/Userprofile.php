@@ -30,6 +30,10 @@ class Userprofile extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         //$seg_slug = $this->uri->segment(2);
         $seg_slug = $this->uri->segment(1);//Pratik
+        if($userid == "" && $this->uri->segment(2) != "")
+        {
+            redirect(base_url().$seg_slug);
+        }
 
         if ($seg_slug == $slug) {
             $userslug = $slug;
