@@ -1,10 +1,11 @@
+<?php $user_id = $this->session->userdata('aileenuser'); ?>
 <div class="container pt20 mobp0">
     <div class="custom-user-list question-page">
 		<div class="tab-add-991 ads">
 		</div>
         <div class="list-box-custom">
             <h3 class="border-none mob-border-top-1">Questions</h3>
-            <div class="custom-user-box no-data-available"  ng-if="questionData.length == '0' ">
+            <div class="custom-user-box no-data-available" ng-if="questionData.length == 0 ">
                 <div class="art-img-nn">
                     <div class="art_no_post_img">
                         <img src="<?php echo base_url('assets/img/no-question.png'); ?>" alt="No Questions">
@@ -21,7 +22,7 @@
             <input type="hidden" name="total_record" class="total_record" ng-class="total_record" ng-model="post.total_record" ng-value="{{post.page_data.total_record}}">
             <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
             <div class="all-post-top">
-                <div class="post-head">
+                <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                     <div class="post-img" ng-if="post.post_data.post_for == 'question'">
                         <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
                         <span class="no-img-post"  ng-if="post.user_data.user_image == '' || post.question_data.is_anonymously == '1'">A</span>
@@ -137,7 +138,7 @@
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-7">
                             <ul class="pull-right bottom-right">
-                                <li class="like-count"><span id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li>
+                                <li class="like-count"><span style="{{post.post_like_count > 0 ? '' : 'display: none';}}" id="post-like-count-{{post.post_data.id}}" ng-bind="post.post_like_count"></span><span>Like</span></li>
                                 <li class="comment-count"><span class="post-comment-count-{{post.post_data.id}}" ng-bind="post.post_comment_count"></span><span>Answers</span></li>
                             </ul>
                         </div>
@@ -226,9 +227,9 @@
                                         <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                     <div class="like-detail">
-                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{userlist.fullname}}</a></h4>
-                                        <p ng-if="userlist.title_name == ''">{{userlist.degree_name}}</p>
-                                        <p ng-if="userlist.title_name != null">{{userlist.title_name}}</p>
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}">{{(userlist.user_id == <?php echo $user_id; ?> ? 'You' : userlist.fullname)}}</a></h4>
+                                        <p ng-if="(userlist.degree_name != null) && (userlist.title_name == null)">{{userlist.degree_name}}</p>
+                                        <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
                                     </div>
 

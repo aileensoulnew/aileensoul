@@ -355,7 +355,7 @@ class Userprofile_model extends CI_Model {
     }
 
     public function postLikeData($post_id = '') {
-        $this->db->select("CONCAT(u.first_name,' ',u.last_name) as username")->from("user_post_like upl");
+        $this->db->select("CONCAT(u.first_name,' ',u.last_name) as username,u.user_id")->from("user_post_like upl");
         $this->db->join('user u', 'u.user_id = upl.user_id', 'left');
         $this->db->join('user_login ul', 'ul.user_id = upl.user_id', 'left');
         $this->db->where('upl.post_id', $post_id);
@@ -572,6 +572,7 @@ class Userprofile_model extends CI_Model {
     }
 
     public function questionList($user_id = '', $select_data = '', $page = '') {
+        $userid_login = $this->session->userdata('aileenuser');
         $limit = '5';
         $start = ($page - 1) * $limit;
         if ($start < 0)
@@ -638,10 +639,18 @@ class Userprofile_model extends CI_Model {
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
             $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
+            if($userid_login == $post_like_data['user_id'])
+            {
+                $postLikeUsername = "You";
+            }
+            else
+            {
+                $postLikeUsername = $post_like_data['username'];
+            }
             if ($post_like_count > 1) {
-                $result_array[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
+                $result_array[$key]['post_like_data'] = $postLikeUsername . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
-                $result_array[$key]['post_like_data'] = $post_like_data['username'];
+                $result_array[$key]['post_like_data'] = $postLikeUsername;
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             

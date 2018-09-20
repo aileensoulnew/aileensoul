@@ -2159,6 +2159,10 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
                     {                        
                         $('#post-like-count-' + post_id).hide();
                     }
+                    else
+                    {
+                        $('#post-like-count-' + post_id).show();
+                    }
                     $('#post-like-' + post_id).removeClass('like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {

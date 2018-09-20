@@ -2930,6 +2930,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         }).then(function (success) {
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
+                    $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
@@ -2938,6 +2939,14 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 } else if (success.data.is_oldLike == 1) {
+                    if(success.data.likePost_count < 1)
+                    {                        
+                        $('#post-like-count-' + post_id).hide();
+                    }
+                    else
+                    {
+                        $('#post-like-count-' + post_id).show();
+                    }
                     $('#post-like-' + post_id).removeClass('like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
                     if (success.data.likePost_count == '0') {
@@ -3320,12 +3329,14 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             data: 'post_id=' + post_id,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })
-                .then(function (success) {
-                    $scope.count_likeUser = success.data.countlike;
-                    $scope.get_like_user_list = success.data.likeuserlist;
-                    $('#likeusermodal').modal('show');
-
-                });
+        .then(function (success) {
+            $scope.count_likeUser = success.data.countlike;
+            $scope.get_like_user_list = success.data.likeuserlist;
+            if(success.data.countlike > 0)
+            {                
+                $('#likeusermodal').modal('show');
+            }
+        });
 
     }
     scopeHold = $scope;    
@@ -3775,13 +3786,16 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
         .then(function (success) {
             $scope.count_likeUser = success.data.countlike;
             $scope.get_like_user_list = success.data.likeuserlist;
-            $('#likeusermodal').modal('show');
+            if(success.data.countlike > 0)
+            {
+                $('#likeusermodal').modal('show');
+            }
         });
     }
 
     $scope.getQuestions = function (pagenum) {
-        $('.post_loader').show();
         if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            // $('.post_loader').show();
             // $('#main_loader').show();
             if($scope.$parent.pade_reload == true)
             {
@@ -3813,7 +3827,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                     $scope.questionData = response.data;
                 }
             } else {
-                if(pagenum == '' && pagenum == 0)
+                if(pagenum == '' || pagenum == 0 || pagenum == undefined)
                 {
                     $scope.questionData = [];
                 }
@@ -3857,6 +3871,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
         }).then(function (success) {
             if (success.data.message == 1) {
                 if (success.data.is_newLike == 1) {
+                    $('#post-like-count-' + post_id).show();
                     $('#post-like-' + post_id).addClass('like');
                     $('#post-like-' + post_id).html('Liked');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
@@ -3866,6 +3881,14 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                         $('#post-other-like-' + post_id).html(success.data.post_like_data);
                     }
                 } else if (success.data.is_oldLike == 1) {
+                    if(success.data.likePost_count < 1)
+                    {                        
+                        $('#post-like-count-' + post_id).hide();
+                    }
+                    else
+                    {
+                        $('#post-like-count-' + post_id).show();
+                    }
                     $('#post-like-' + post_id).removeClass('like');
                     $('#post-like-' + post_id).html('Like');
                     $('#post-like-count-' + post_id).html(success.data.likePost_count);
