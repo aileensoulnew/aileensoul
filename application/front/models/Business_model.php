@@ -320,8 +320,11 @@ class Business_model extends CI_Model {
     }
 
     function getBusinessPostComment($post_id = '', $sortby = '', $orderby = '', $limit = '') {
-        $this->db->select('bppc.*')->from('business_profile_post_comment bppc');
+        $this->db->select('bppc.*,bp.company_name,business_user_image,IF (bp.city IS NULL, concat(bp.business_slug, "-", st.state_name) ,concat(bp.business_slug, "-", ct.city_name)) as business_slug')->from('business_profile_post_comment bppc');
         $this->db->join('user_login ul', 'ul.user_id = bppc.user_id');
+        $this->db->join('business_profile bp', 'bp.user_id = bppc.user_id');
+        $this->db->join('cities ct', 'bp.city = ct.city_id');
+        $this->db->join('states st', 'bp.state = st.state_id');
         $this->db->where('business_profile_post_id', $post_id);
         $this->db->where('bppc.status', '1');
         $this->db->where('bppc.is_delete', '0');

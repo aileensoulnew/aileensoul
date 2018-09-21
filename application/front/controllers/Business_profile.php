@@ -9108,8 +9108,8 @@ No Contacts Available.
         $industriyal = $this->data['business_common_data'][0]['industriyal'];
         $other_industrial = $this->data['business_common_data'][0]['other_industrial'];
 
-        $business_profile_post = $this->business_model->get_business_home_post($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid,$page,$perpage);
-        $business_profile_post_total_rec = $this->business_model->business_home_post_total_rec($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid);
+        $this->data['business_profile_post'] = $business_profile_post = $this->business_model->get_business_home_post($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid,$page,$perpage);
+        $this->data['business_profile_post_total_rec'] = $business_profile_post_total_rec = $this->business_model->business_home_post_total_rec($business_profile_id,$city,$user_id,$industriyal,$other_industrial,$userid);
         
         $return_html = '';
 
@@ -9117,9 +9117,12 @@ No Contacts Available.
             $_GET["total_record"] = count($business_profile_post1);
         }*/
 
-        $infeed_add = $this->load->view('infeed_add','',TRUE);
+        $this->data['infeed_add'] = $infeed_add = $this->load->view('infeed_add','',TRUE);
+        $this->data['page'] = $page;
+        $this->data['perpage'] = $perpage;
+        $this->load->view('business_live/bussiness_home_view', $this->data);
 
-        $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
+        /*$return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         $return_html .= '<input type = "hidden" class = "total_record" value = "' . $business_profile_post_total_rec. '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
 
@@ -9815,7 +9818,7 @@ Your browser does not support the audio tag.
             }
         }
 
-        echo $return_html;
+        echo $return_html;*/
     }
 
     public function ajax_business_home_three_user_list() {
@@ -10448,6 +10451,20 @@ Your browser does not support the audio tag.
             $_GET["total_record"] = count($business_profile_post1);
         }
 
+        $this->data['business_profile_post'] = $business_profile_post;
+        $this->data['business_profile_post_total_rec'] = count($business_profile_post1);
+        
+        
+
+        /*if (empty($_GET["total_record"])) {
+            $_GET["total_record"] = count($business_profile_post1);
+        }*/
+
+        $this->data['infeed_add'] = $infeed_add = $this->load->view('infeed_add','',TRUE);
+        $this->data['page'] = $page;
+        $this->data['perpage'] = $perpage;
+        $this->load->view('business_live/bussiness_home_view', $this->data);
+        /*
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
@@ -11164,7 +11181,7 @@ Your browser does not support the audio tag.
             </div>';
         }
 
-        echo $return_html;
+        echo $return_html;*/
     }
 
     public function check_post_available() {
