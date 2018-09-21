@@ -3253,13 +3253,14 @@ class Recruiter extends MY_Controller {
 		$userid = $this->session->userdata('aileenuser');
 		//get search term
 		$searchTerm = $_GET['term'];
+		$result_array = array();
 
 		if (!empty($searchTerm)) {
 
-			// JOB REGISTRATION DATA START (designation)
-			$contition_array = array('status' => '1', 'is_delete' => '0');
-			$search_condition = "(designation LIKE '" . trim($searchTerm) . "%')";
-			$designation = $this->common->select_data_by_search('job_reg', $search_condition, $contition_array, $data = 'designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'designation');
+			/*// JOB REGISTRATION DATA START (designation)
+			$contition_array = array('status' => 'publish');
+			$search_condition = "(name LIKE '" . trim($searchTerm) . "%')";
+			$designation = $this->common->select_data_by_search('job_title', $search_condition, $contition_array, $data = 'name as designation', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = 'name');
 			// JOB REGISTRATION DATA END  (designation)
 			// DEGREE DATA START
 			$contition_array = array('status' => '1');
@@ -3278,9 +3279,32 @@ class Recruiter extends MY_Controller {
 			// SKILL DATA END
 			//MERGE DATA START
 			$uni = array_merge($designation, $degreedata, $streamdata, $skilldata);
-			//MERGE DATA END
+			//MERGE DATA END*/
+
+			$sql = "SELECT DISTINCT LOWER(name) as value FROM ailee_job_title 
+                WHERE status = 'publish' AND (name LIKE '". $searchTerm ."%') 
+                GROUP BY LOWER(name) 
+                Union
+                
+                SELECT degree_name as value FROM ailee_degree 
+                WHERE status = '1' AND (degree_name LIKE '". $searchTerm ."%') 
+                GROUP BY degree_name 
+                Union
+
+                SELECT stream_name as value FROM ailee_stream 
+                WHERE status = '1' AND is_other = 0 AND (stream_name LIKE '". $searchTerm ."%') 
+                GROUP BY stream_name 
+                Union
+
+                SELECT skill as value FROM ailee_skill 
+                WHERE status = '1' AND type = '1' AND (skill LIKE '". $searchTerm ."%') 
+                GROUP BY skill 
+                LIMIT 5";
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
 		}
-		foreach ($uni as $key => $value) {
+		echo json_encode( $result_array);
+		/*foreach ($uni as $key => $value) {
 			foreach ($value as $ke => $val) {
 				if ($val != "") {
 					$result[] = $val;
@@ -3293,7 +3317,7 @@ class Recruiter extends MY_Controller {
 		}
 
 		$all_data = array_values($result1);
-		echo json_encode($all_data);
+		echo json_encode($all_data);*/
 	}
 
 	public function ajax_saved_candidate() {
