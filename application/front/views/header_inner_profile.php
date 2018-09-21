@@ -155,9 +155,9 @@ if($browser == "Firefox")
                                                         <div class="dropdown-user-detail">
                                                             <div class="user-name">
                                                                 <h6><b ng-bind="contact_request.fullname | capitalize"></b></h6>
-                                                                <div class="msg-discription" ng-bind="contact_request.designation | capitalize" ng-if="contact_request.designation != ''"></div>
-                                                                <div class="msg-discription" ng-bind="contact_request.degree | capitalize" ng-if="contact_request.designation == ''"></div>
-                                                                <div class="msg-discription" ng-if="contact_request.designation == '' && contact_request.degree == ''">Current Work</div>
+                                                                <div class="msg-discription" ng-bind="contact_request.designation | capitalize" ng-if="contact_request.designation != null && contact_request.degree == null"></div>
+                                                                <div class="msg-discription" ng-bind="contact_request.degree | capitalize" ng-if=" contact_request.degree != null && contact_request.designation == null"></div>
+                                                                <div class="msg-discription" ng-if="contact_request.designation == null && contact_request.degree == null">Current Work</div>
                                                                 <div class="msg-discription"><span class="time_ago">{{contact_request.time_string}}</span></div>
                                                             </div>
                                                         </div> 

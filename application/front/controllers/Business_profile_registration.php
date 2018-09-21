@@ -299,7 +299,7 @@ class Business_profile_registration extends MY_Controller {
                 $data['city'] = $_POST['city_id'];
                 $data['pincode'] = $_POST['pincode'];
                 $data['address'] = $_POST['business_address'];
-                $data['business_slug'] = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
+                // $data['business_slug'] = $this->setcategory_slug($data['company_name'], 'business_slug', 'business_profile');
                 $data['modified_date'] = date('Y-m-d H:i:s', time());
                 $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
                 if(trim($data['country']) != "")
