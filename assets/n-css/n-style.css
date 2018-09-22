@@ -10,7 +10,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .one-hd .middle-section{padding:69px 0 50px;}
 .middle-section{padding:95px 0 50px;}
 .single-header .middle-section {padding:75px 0 50px;}
-.middle-section-banner{padding:51px 0 0px !important;}
+.middle-section-banner{padding:44px 0 0px !important;}
 .middle-section-banner.new-ld-page{padding:0 !important;}
 .main-message .middle-section {padding:75px 0 0px;}
 .register .middle-section{padding:90px 0 50px;}
@@ -111,7 +111,7 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .profile-boxProfile-name a:hover{color:#1b8ab9;}
 .profile-boxProfileCard-cover a img{min-height:110px;}
 .job-search-box1 fieldset{padding:0;}
-.job-search-box1 label i{font-size:16px;}
+.sub-header .job-search-box1 label i{font-size:14px;}
 .job-contact-frnd .add-post-button{text-align:center; padding-top:15px;}
 .bui_art_left_box .profile-boxProfileCard-content::before{top:47px;}
 
@@ -396,11 +396,11 @@ width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
 /***  main dashboard page  ***/
 .container-fluid.bnr{padding:0;}
 .main-user-profile{width:100%; float:left;}
-.main-banner{max-height:340px; overflow:hidden; height:340px; position:relative;}
+.main-banner{max-height:335px; overflow:hidden; height:335px; position:relative;}
 .main-banner .banner-img img{width:100%;}
 .main-banner .banner-img{border-top:0;}
 .main-user-profile{/*border-bottom:1px solid #d9d9d9;*/}
-.user-photo-name .profile-img{width:180px; height:180px; background:#fff; border:1px solid #d9d9d9; padding:5px; border-radius:100%; margin:-135px auto 0; position:relative;
+.user-photo-name .profile-img{width:180px; height:180px; background:#fff; border:5px solid #fff; border-radius:100%; margin:-135px auto 0; position:relative;
 }
 .user-photo-name .profile-img .post-img-user{width:170px; height: 170px; color: #fff;
 background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
@@ -502,7 +502,7 @@ label.cameraButton input[accept*="camera"] {
 .user-photo-name h3 a{color:#5c5c5c;}
 .user-photo-name h3 a:focus{text-decoration:none;}
 .user-photo-name p{color:#6f6f6f; letter-spacing: 1px;}
-.user-btns{padding:10px 0; text-align:center;}
+.user-btns{padding:0px 0 10px; text-align:center;}
 .user-btns a{width:165px;}
 .main-user-option ul{margin:0; padding:15px 0 0;}
 .main-user-option ul li{width:14.285714%; float:left; border-top:1px solid #d9d9d9; text-align:center; list-style-type:none; border-right:1px solid #d9d9d9;

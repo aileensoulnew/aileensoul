@@ -133,7 +133,7 @@ echo $header_inner_profile ?>
                             
     			            <li class="dropdown user-id">
                                 <a href="#" class="dropdown-toggle user-id-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<svg class="not-hover" viewBox="0 0 384.97 384.97" width="17px" height="17px">
+									<svg class="not-hover" viewBox="0 0 384.97 384.97" width="16px" height="16px">
 									<g>
 										<g id="Chevron_Down_Circle">
 											<path d="M192.485,0C86.185,0,0,86.173,0,192.485c0,106.3,86.185,192.485,192.485,192.485    c106.312,0,192.485-86.185,192.485-192.485C384.97,86.173,298.797,0,192.485,0z M192.485,360.909    c-92.874,0-168.424-75.55-168.424-168.424S99.611,24.061,192.485,24.061s168.797,75.55,168.797,168.424    S285.359,360.909,192.485,360.909z" fill="#5c5c5c"/>
