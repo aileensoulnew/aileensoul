@@ -642,3 +642,6 @@ define('business_location_list', BASEURL. 'business-by-location');
 
 define('business_register_step1', BASEURL. 'business-profile/registration/business-information');
 define('SITEMAP_LIMIT',49999);
+
+define('AMAZON_SES_USERNAME','AKIAJTF4AWFIBR256RDA');
+define('AMAZON_SES_PASSWORD','Alr+GuRQv6HG2FhnGO1lo06qBe3unZ+NVYvi9ASNhR9p');
