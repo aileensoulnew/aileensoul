@@ -277,7 +277,7 @@ class Freelancer_hire extends MY_Controller {
                     'fullname' => trim($this->input->post('fname')),
                     'username' => trim($this->input->post('lname')),
                     'email' => trim($this->input->post('email')),
-                    'freelancer_hire_slug' => $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg'),
+                    // 'freelancer_hire_slug' => $this->setcategory_slug($first_lastname, 'freelancer_hire_slug', 'freelancer_hire_reg'),
                     'skyupid' => trim($this->input->post('skyupid')),
                     'phone' => trim($this->input->post('phone')),
                     'modified_date' => date('Y-m-d h:i:s')

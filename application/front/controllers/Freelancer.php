@@ -152,7 +152,7 @@ class Freelancer extends MY_Controller {
                     'freelancer_post_skypeid' => trim($this->input->post('skypeid')),
                     'freelancer_post_email' => trim($this->input->post('email')),
                     'freelancer_post_phoneno' => trim($this->input->post('phoneno')),
-                    'freelancer_apply_slug' => $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg'),
+                    // 'freelancer_apply_slug' => $this->setcategory_slug($first_lastname, 'freelancer_apply_slug', 'freelancer_post_reg'),
                     'user_id' => $userid,
                     'modify_date' => date('Y-m-d', time())
                 );

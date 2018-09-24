@@ -310,7 +310,7 @@ class Artist extends MY_Controller {
                     'art_email' => $this->input->post('email'),
                     'art_phnno' => $this->input->post('phoneno'),
                     'modified_date' => date('Y-m-d', time()),
-                    'slug' => $this->setcategory_slug($this->input->post('firstname') . '-' . $this->input->post('lastname'), 'slug', 'art_reg')
+                    // 'slug' => $this->setcategory_slug($this->input->post('firstname') . '-' . $this->input->post('lastname'), 'slug', 'art_reg')
                 );
 
                 // echo "<pre>"; print_r($data); die();

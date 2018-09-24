@@ -175,7 +175,7 @@ class Job extends MY_Controller {
                 'city_id' => $citytitle,
                 'pincode' => $this->input->post('pincode'),
                 'address' => $this->input->post('address'),
-                'slug' => $this->setcategory_slug($this->input->post('fname') . '-' . $this->input->post('lname'), 'slug', 'job_reg'),
+                //'slug' => $this->setcategory_slug($this->input->post('fname') . '-' . $this->input->post('lname'), 'slug', 'job_reg'),
                 'modified_date' => date('Y-m-d h:i:s', time())
             );
 
