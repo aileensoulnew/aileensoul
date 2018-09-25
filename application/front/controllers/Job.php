@@ -5769,7 +5769,7 @@ class Job extends MY_Controller {
         $email_html = '';
         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                                                                 <tr>
-                                                                    <td style="padding:5px;">';
+                                                                    <td style="'.MAIL_TD_1.'">';
         $filename = $this->config->item('job_profile_thumb_upload_path') . $jobdata[0]['job_user_image'];
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
@@ -5792,7 +5792,7 @@ class Job extends MY_Controller {
                                                                         <p>Job seeker<b> ' . ucwords($jobdata[0]['fname']) . ' ' . ucwords($jobdata[0]['lname']) . '</b> Applied on your jobpost.
                                                                             <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                                                     </td>
-                                                                    <td style="padding:5px;">
+                                                                    <td style="'.MAIL_TD_3.'">
                                                                         <p><a class="btn" href="' . BASEURL . 'job/resume/' . $jobdata[0]['slug'] . '">view</a></p>
                                                                     </td>
                                                                 </tr>

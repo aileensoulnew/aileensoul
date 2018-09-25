@@ -2314,7 +2314,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -2347,7 +2347,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
                                             </td>
                     </tr>
@@ -2510,7 +2510,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -2544,7 +2544,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
                                             </td>
                     </tr>
@@ -3091,7 +3091,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
 
                 if (IMAGEPATHFROM == 'upload') {
@@ -3125,7 +3125,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
                                             </td>
                     </tr>
@@ -3266,7 +3266,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td  style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td  style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -3299,7 +3299,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artdata[0]['art_name'] . ' ' . $artdata[0]['art_lastname'] . '</b> Started following you in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/details/' . $geturl . '">view</a></p>
                                             </td>
                     </tr>
@@ -4103,7 +4103,7 @@ class Artist extends MY_Controller {
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                             if (IMAGEPATHFROM == 'upload') {
 
@@ -4138,7 +4138,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> like your comment in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -4351,7 +4351,7 @@ class Artist extends MY_Controller {
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
                             if (IMAGEPATHFROM == 'upload') {
 
                                 if ($artuserdata[0]['art_user_image']) {
@@ -4385,7 +4385,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> like your comment in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -5311,7 +5311,7 @@ class Artist extends MY_Controller {
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                             if (IMAGEPATHFROM == 'upload') {
 
@@ -5346,7 +5346,7 @@ class Artist extends MY_Controller {
                         <pstyle="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> like your post in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdata[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -5640,7 +5640,7 @@ class Artist extends MY_Controller {
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                     if (IMAGEPATHFROM == 'upload') {
 
@@ -5675,7 +5675,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
                         <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -5890,7 +5890,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -5924,7 +5924,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
                         <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -6168,7 +6168,7 @@ class Artist extends MY_Controller {
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                     if (IMAGEPATHFROM == 'upload') {
 
@@ -6203,7 +6203,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
                         <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -7168,7 +7168,7 @@ class Artist extends MY_Controller {
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                     if (IMAGEPATHFROM == 'upload') {
 
@@ -7202,7 +7202,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is like on your post image in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $likepostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -7424,7 +7424,7 @@ class Artist extends MY_Controller {
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                             if (IMAGEPATHFROM == 'upload') {
 
@@ -7457,7 +7457,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is like on your post image in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $likepostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -7617,7 +7617,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -7651,7 +7651,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post image in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artpostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -7897,7 +7897,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -7931,7 +7931,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post in artistic profile.</p>
                         <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artdatacomment[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -8160,7 +8160,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -8193,7 +8193,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post image in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artpostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -8412,7 +8412,7 @@ class Artist extends MY_Controller {
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                     if (IMAGEPATHFROM == 'upload') {
 
@@ -8445,7 +8445,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is like on your post image in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -8567,7 +8567,7 @@ class Artist extends MY_Controller {
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                             if (IMAGEPATHFROM == 'upload') {
 
@@ -8600,7 +8600,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is like on your post image in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -8705,7 +8705,7 @@ class Artist extends MY_Controller {
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                     if (IMAGEPATHFROM == 'upload') {
 
@@ -8738,7 +8738,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is like on your post image comment in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -8836,7 +8836,7 @@ class Artist extends MY_Controller {
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
                             if (IMAGEPATHFROM == 'upload') {
 
                                 if ($artuserdata[0]['art_user_image']) {
@@ -8868,7 +8868,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is like on your post image comment in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artimglikepost[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -9937,7 +9937,7 @@ class Artist extends MY_Controller {
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                                            <td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">';
+                                            <td style="'.MAIL_TD_1.'">';
 
                 if (IMAGEPATHFROM == 'upload') {
 
@@ -9972,7 +9972,7 @@ class Artist extends MY_Controller {
                         <p style="padding-bottom:5px;padding-top:6px;"><b>' . $artuserdata[0]['art_name'] . ' ' . $artuserdata[0]['art_lastname'] . '</b> is comment on your post image in artistic profile.</p>
                         <span style="display:block; font-size:11px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'artist/post-detail/' . $artpostid[0]['art_post_id'] . '">view</a></p>
                                             </td>
                     </tr>
@@ -11671,14 +11671,23 @@ class Artist extends MY_Controller {
         $artistic_post1 = $this->artistic_model->get_artist_home_post_count($userid);
         
         $return_html = '';
-        if (empty($_GET["total_record"])) {
+        /*if (empty($_GET["total_record"])) {
             $_GET["total_record"] = $artistic_post1;
-        }
+        }*/
+
+        $infeed_add = $this->load->view('infeed_add','',TRUE);
+        
+        // $this->data['page'] = $page;
+        // $this->data['total_record'] = $artistic_post1;
+        // $this->data['perpage'] = $perpage;
+        // $this->data['artistic_post'] = $artistic_post;
+        // $this->data['infeed_add'] = $infeed_add;
+
+        // $this->load->view('artist_live/art_post', $this->data);
 
         $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
-        $return_html .= '<input type = "hidden" class = "total_record" value = "' . $_GET["total_record"] . '" />';
+        $return_html .= '<input type = "hidden" class = "total_record" value = "' . $artistic_post1 . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
-        $infeed_add = $this->load->view('infeed_add','',TRUE);
         if (count($artistic_post1) > 0) {
             $feed_counter = 1;
             foreach ($artistic_post as $row) {

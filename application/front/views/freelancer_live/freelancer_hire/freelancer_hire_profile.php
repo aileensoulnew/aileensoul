@@ -22,7 +22,7 @@
    <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer body-loader">
 	<?php
 	if ($this->session->userdata('aileenuser')) {
-		echo $header;
+		//echo $header;
 	} else {
 		?>
 		<header>

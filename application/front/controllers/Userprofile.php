@@ -126,14 +126,14 @@ class Userprofile extends MY_Controller {
             $email_html = '';
             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
                             <tr>
-                                <td style="padding:5px;">
+                                <td style="'.MAIL_TD_1.'">
                                     <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
                                 </td>
                                 <td style="padding:5px;">
                                     <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> accepted your contact request.</p>
                                     <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
                                 </td>
-                                <td style="padding:5px;">
+                                <td style="'.MAIL_TD_3.'">
                                     <p><a class="btn" href="'.$url.'">view</a></p>
                                 </td>
                             </tr>

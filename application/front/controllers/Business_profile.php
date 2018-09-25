@@ -2381,12 +2381,12 @@ Your browser does not support the audio tag.
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
@@ -2465,13 +2465,13 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name
+                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name
  . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
@@ -2733,12 +2733,12 @@ Your browser does not support the audio tag.
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' .$img. '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' .$img. '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
@@ -2803,12 +2803,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="'.$img.'" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="'.$img.'" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
@@ -3130,12 +3130,12 @@ Your browser does not support the audio tag.
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' .$img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' .$img . '" width="50" height="50" alt="' . $loginBusinessUserData->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $loginBusinessUserData->company_name . '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
@@ -3204,12 +3204,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' .$loginBusinessUserData->company_name. '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' .$loginBusinessUserData->company_name. '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $loginBusinessUserData->company_name. '</b> Started following you in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/' . $loginBusinessUserData->business_slug . '">view</a></p>
                                             </td>
 					</tr>
@@ -4056,12 +4056,12 @@ Your browser does not support the audio tag.
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img. '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' .BASEURL.$url. '">view</a></p>
                                             </td>
 					</tr>
@@ -4208,12 +4208,12 @@ Your browser does not support the audio tag.
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> like your comment in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="'.BASEURL.$url.'">view</a></p>
                                             </td>
 					</tr>
@@ -4669,12 +4669,12 @@ Your browser does not support the audio tag.
                         $email_html = '';
                         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' .  $businessLoginUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' .  $businessLoginUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' .  $businessLoginUser->company_name . '</b> like your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL .$url . '">view</a></p>
                                             </td>
 					</tr>
@@ -4928,12 +4928,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL .$url. '">view</a></p>
                                             </td>
 					</tr>
@@ -5148,12 +5148,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessLoginUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessLoginUser->company_name . '</b> is comment on your post in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
@@ -5755,12 +5755,12 @@ Your browser does not support the audio tag.
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name. '</b> is like your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url.'">view</a></p>
                                             </td>
 					</tr>
@@ -5986,12 +5986,12 @@ Your browser does not support the audio tag.
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> is like your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
                                             </td>
 					</tr>
@@ -6140,12 +6140,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> is comment on your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL. $url. '">view</a></p>
                                             </td>
 					</tr>
@@ -6368,12 +6368,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> is comment on your photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
@@ -6608,12 +6608,12 @@ Your browser does not support the audio tag.
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url. '">view</a></p>
                                             </td>
 					</tr>
@@ -6744,12 +6744,12 @@ Your browser does not support the audio tag.
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
@@ -6861,12 +6861,12 @@ Your browser does not support the audio tag.
                     $email_html = '';
                     $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' .$businessUser->company_name. '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
@@ -6992,12 +6992,12 @@ Your browser does not support the audio tag.
                             $email_html = '';
                             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . $img . '" width="50" height="50" alt="' . $businessUser->company_name . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $businessUser->company_name . '</b> is like your comment of photo in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . $url . '">view</a></p>
                                             </td>
 					</tr>
@@ -8033,12 +8033,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $this->data['business_login_company_name'] . '</b> send contact request in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/contact-requests/' . '">view</a></p>
                                             </td>
 					</tr>
@@ -8607,12 +8607,12 @@ Your browser does not support the audio tag.
                 $email_html = '';
                 $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
+                                            <td style="'.MAIL_TD_1.'"><img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $this->data['business_login_user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $this->data['business_login_user_image'] . '"></td>
                                             <td style="padding:5px;">
 						<p><b>' . $this->data['business_login_company_name'] . '</b> is approved your contact request in business profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a class="btn" href="' . BASEURL . 'company/contact-requests/' . '">view</a></p>
                                             </td>
 					</tr>

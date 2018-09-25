@@ -32,7 +32,7 @@ class Email_model extends CI_Model {
             line-height: 1;}
                         .btn{background:#1b8ab9;
             		font-size:16px;
-            		color:#fff;
+            		color:#fff !important;
             		padding:8px 20px;
             		text-decoration:none;
                             border-radius:3px;
@@ -52,7 +52,7 @@ class Email_model extends CI_Model {
                     </tr>
                     <tr><td style="border-bottom:1px solid #ddd;">
                         <table width="100%" cellpadding="0" cellspacing="0" class="description_table">
-                        <tr><td style="padding:5px;padding-left: 10px;padding-top: 21px;} font-size:15px;">' . $templ . '</td></tr>
+                        <tr><td style="padding:5px;padding-left: 5px; font-size:15px;">' . $templ . '</td></tr>
                         </table>
                         </td></tr>
                         <tr><td style="padding:25px 0px;">
@@ -66,11 +66,7 @@ class Email_model extends CI_Model {
                         </table>
                         </td>
                     </tr>
-                </table>
-                <table width="100%" cellpadding="0" cellspacing="0">
-                <tr><td style="text-align:center; padding:10px 0;"><b>It\'s FREE Platform For Everyone</b></td></tr>
                 </table>';
-
         if($unsubscribe != "")
         {
             $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">

@@ -3108,7 +3108,7 @@ class Freelancer_hire extends MY_Controller {
         $email_html = '';
         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;">';
+                                            <td style="'.MAIL_TD_1.'">';
         if ($this->data['freehiredata']['freelancer_hire_user_image']) {
             $email_html .= '<img alt="User Image" src="' . FREE_HIRE_PROFILE_THUMB_UPLOAD_URL . $this->data['freehiredata'][0]['freelancer_hire_user_image'] . '" width="60" height="60"></td>';
         } else {
@@ -3123,7 +3123,7 @@ class Freelancer_hire extends MY_Controller {
 						<p>Employer <b>' . $this->data['freehiredata']['fullname'] . " " . $this->data['freehiredata']['username'] . " " . $writting_word . '</b> you for ' . $projectdata[0]["post_name"] . ' project in freelancer profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a title= "View Detail" class="btn" href="' . base_url($url). '">view</a></p>
                                             </td>
 					</tr>
@@ -3141,7 +3141,7 @@ class Freelancer_hire extends MY_Controller {
         $email_html = '';
         $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-                                            <td style="padding:5px;">';
+                                            <td style="'.MAIL_TD_1.'">';
         if ($this->data['freehiredata'][0]['freelancer_hire_user_image']) {
             $email_html .= '<img alt = "User Image" src="' . FREE_HIRE_PROFILE_THUMB_UPLOAD_URL . $this->data['freehiredata'][0]['freelancer_hire_user_image'] . '" width="60" height="60"></td>';
         } else {
@@ -3156,7 +3156,7 @@ class Freelancer_hire extends MY_Controller {
 						<p>Employer <b>' . $this->data['freehiredata']['fullname'] . " " . $this->data['freehiredata']['username'] . " " . $writting_word . '</b>  you for ' . $projectdata[0]["post_name"] . ' project in freelancer profile.</p>
 						<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">' . date('j F') . ' at ' . date('H:i') . '</span>
                                             </td>
-                                            <td style="padding:5px;">
+                                            <td style="'.MAIL_TD_3.'">
                                                 <p><a title = "View Detail" class="btn" href="' .  base_url($url). '">view</a></p>
                                             </td>
 					</tr>

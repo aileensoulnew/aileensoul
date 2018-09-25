@@ -4500,13 +4500,13 @@ class Recruiter extends MY_Controller {
 				$email_html = '';
 				$email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
 				<tr>
-				<td style="padding-left: 15px;padding-top: 12px;padding-bottom: 8px;">'.$img.'
+				<td style="'.MAIL_TD_1.'">'.$img.'
 				</td>
 				<td style="padding:0px;">
 				<p style="padding-bottom:5px;padding-top:6px;"><b>' . ucwords($recdata[0]['rec_firstname']) . ' ' . ucwords($recdata[0]['rec_lastname']) . '</b> From ' . ucwords($recdata[0]['re_comp_name']) . ' Invited you for an interview.</p>
 				<span style="display:block; font-size:13px; padding-top: 1px; color: #646464;padding-bottom:15px;">' . date('j F') . ' at ' . date('H:i') . '</span>
 				</td>
-				<td style="padding:5px;">
+				<td style="'.MAIL_TD_3.'">
 				<p><a class="btn" href="' . base_url($url) . '">view</a></p>
 				</td>
 				</tr>
