@@ -254,7 +254,10 @@ class Business_profile_live extends MY_Controller {
         $this->data['title'] = ucwords($company_name)." ".($cityname != "" ? $cityname."," : "")." ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "")." | ".$industry_name;
         $this->data['metadesc'] = ucwords($company_name)." is ".$industry_name." company based in ".($statename != "" ? $statename."," : "")." ".($countryname != "" ? $countryname."" : "").". To know more about it's contact details and services, Visit Aileensoul website.";
         if (count($business_data) == 0) {
-            $this->load->view('business_profile/notavalible', $this->data);
+            // $this->load->view('business_profile/notavalible', $this->data);
+            redirect(base_url("404"),"refresh");
+            // $this->data['title'] = "404 | Aileensoul";
+            // $this->load->view('404', $this->data);
         } else {
             if ($this->session->userdata('aileenuser') && $this->data['isbusiness_deactive'] == false && $this->data['isbusiness_register'] == true) {
                 $this->load->view('business_profile_live/business_profile_manage_post', $this->data);
