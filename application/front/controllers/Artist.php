@@ -9341,7 +9341,8 @@ class Artist extends MY_Controller {
     //mulitple images commnet delete end 
     // khyati 17-4 changes start
 
-    public function fourcomment($postid) {
+    public function fourcomment($postid = "") {
+        $postid = $this->input->post('art_post_id');
 
         $userid = $this->session->userdata('aileenuser');
 
@@ -11677,15 +11678,15 @@ class Artist extends MY_Controller {
 
         $infeed_add = $this->load->view('infeed_add','',TRUE);
         
-        // $this->data['page'] = $page;
-        // $this->data['total_record'] = $artistic_post1;
-        // $this->data['perpage'] = $perpage;
-        // $this->data['artistic_post'] = $artistic_post;
-        // $this->data['infeed_add'] = $infeed_add;
+        $this->data['page'] = $page;
+        $this->data['total_record'] = $artistic_post1;
+        $this->data['perpage'] = $perpage;
+        $this->data['artistic_post'] = $artistic_post;
+        $this->data['infeed_add'] = $infeed_add;
 
-        // $this->load->view('artist_live/art_post', $this->data);
+        $this->load->view('artist_live/art_post_list_view', $this->data);
 
-        $return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
+        /*$return_html .= '<input type = "hidden" class = "page_number" value = "' . $page . '" />';
         $return_html .= '<input type = "hidden" class = "total_record" value = "' . $artistic_post1 . '" />';
         $return_html .= '<input type = "hidden" class = "perpage_record" value = "' . $perpage . '" />';
         if (count($artistic_post1) > 0) {
@@ -12044,21 +12045,21 @@ class Artist extends MY_Controller {
                     } elseif (count($artmultiimage) == 3) {
 
                         $return_html .= '<div class = "three-image-top" >
-            <a href = "' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
-            <img class = "three-columns" src = "' . ART_POST_RESIZE4_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" alt="' . $artmultiimage[0]['file_name'] . '">
-            </a>
-            </div>
-            <div class = "three-image" >
+                        <a href = "' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
+                        <img class = "three-columns" src = "' . ART_POST_RESIZE4_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" alt="' . $artmultiimage[0]['file_name'] . '">
+                        </a>
+                        </div>
+                        <div class = "three-image" >
 
-            <a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
-            <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[1]['file_name'] . '" alt="' . $artmultiimage[1]['file_name'] . '">
-            </a>
-            </div>
-            <div class = "three-image" >
-            <a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
-            <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[2]['file_name'] . '" alt="' . $artmultiimage[2]['file_name'] . '">
-            </a>
-            </div>';
+                        <a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
+                        <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[1]['file_name'] . '" alt="' . $artmultiimage[1]['file_name'] . '">
+                        </a>
+                        </div>
+                        <div class = "three-image" >
+                        <a href = "' . base_url('artist/post-detail/' . $row['business_profile_post_id']) . '">
+                        <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[2]['file_name'] . '" alt="' . $artmultiimage[2]['file_name'] . '">
+                        </a>
+                        </div>';
                     } elseif (count($artmultiimage) == 4) {
 
                         foreach ($artmultiimage as $multiimage) {
@@ -12508,7 +12509,7 @@ class Artist extends MY_Controller {
             }
         }
 
-        echo $return_html;
+        echo $return_html;*/
     }
     
     //photos video audio pdf fatch using ajax art_manage_post start

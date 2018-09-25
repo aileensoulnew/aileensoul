@@ -276,12 +276,14 @@ class Artistic_model extends CI_Model {
             ) 
             ORDER BY `art_post_id` DESC";*/
 
-        $sql = "SELECT `ailee_art_reg`.`art_user_image`, `ailee_art_reg`.`art_name`, `ailee_art_reg`.`art_lastname`, `ailee_art_reg`.`art_skill`, `ailee_art_reg`.`slug`, `ailee_art_post`.`art_post_id`, `ailee_art_post`.`art_post`, `ailee_art_post`.`art_description`, `ailee_art_post`.`art_likes_count`, `ailee_art_post`.`art_like_user`, `ailee_art_post`.`created_date`, `ailee_art_post`.`posted_user_id`, `ailee_art_reg`.`user_id` 
-            FROM `ailee_art_post` 
-            JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
-            WHERE `ailee_art_post`.`is_delete` = '0' 
-            AND `ailee_art_post`.`status` = '1' 
-            ORDER BY `art_post_id` DESC";
+        $sql = "SELECT ar.art_user_image, ar.art_name, ar.art_lastname, ar.art_skill, ar.slug, ap.art_post_id, ap.art_post, ar.user_id, ar.designation, ar.art_skill, ap.art_description, ap.art_likes_count, ap.art_like_user, ap.created_date, ap.posted_user_id
+            FROM ailee_art_post as ap
+            JOIN ailee_art_reg as ar ON ar.user_id=ap.user_id 
+            WHERE ap.is_delete = '0' 
+            AND ap.status = '1' 
+            AND ar.status = '1' 
+            AND ar.is_delete = '0' 
+            ORDER BY ap.art_post_id DESC";
             if($limit != '') {
                 $sql .= " LIMIT $start,$limit";
             }
@@ -338,11 +340,13 @@ class Artistic_model extends CI_Model {
             ) 
             ORDER BY `art_post_id` DESC";*/
         $sql = "SELECT count(*) as total_record
-            FROM `ailee_art_post` 
-            JOIN `ailee_art_reg` ON `ailee_art_reg`.`user_id`=`ailee_art_post`.`user_id` 
-            WHERE `ailee_art_post`.`is_delete` = '0' 
-            AND `ailee_art_post`.`status` = '1'
-            ORDER BY `art_post_id` DESC";
+            FROM ailee_art_post as ap
+            JOIN ailee_art_reg as ar ON ar.user_id=ap.user_id 
+            WHERE ap.is_delete = '0' 
+            AND ap.status = '1'
+            AND ar.status = '1' 
+            AND ar.is_delete = '0' 
+            ORDER BY ap.art_post_id DESC";
         $query = $this->db->query($sql);
         $result_array = $query->row()->total_record;
         return $result_array;
@@ -768,5 +772,48 @@ class Artistic_model extends CI_Model {
             $this->db->insert('ailee_art_reg_search_tmp', $value);
         }
         echo "Done";
+    }
+
+    public function get_url($userid) {
+
+        $contition_array = array('user_id' => $userid, 'status' => '1');
+        $arturl = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'art_id,art_city,art_skill,other_skill,slug', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        return $arturl[0]['slug'];
+
+        $city_url = $this->db->select('city_name')->get_where('cities', array('city_id' => $arturl[0]['art_city'], 'status' => '1'))->row()->city_name;
+
+        $art_othercategory = $this->db->select('other_category')->get_where('art_other_category', array('other_category_id' => $arturl[0]['other_skill']))->row()->other_category;
+
+        $category = $arturl[0]['art_skill'];
+        $category = explode(',', $category);
+
+        foreach ($category as $catkey => $catval) {
+            $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
+            $categorylist[] = $art_category;
+        }
+
+        $listfinal1 = array_diff($categorylist, array('other'));
+        $listFinal = implode('-', $listfinal1);
+
+        if (!in_array(26, $category)) {
+            $category_url = $this->common->clean($listFinal);
+        } else if ($arturl[0]['art_skill'] && $arturl[0]['other_skill']) {
+
+            $trimdata = $this->common->clean($listFinal) . '-' . $this->common->clean($art_othercategory);
+            $category_url = trim($trimdata, '-');
+        } else {
+            $category_url = $this->common->clean($art_othercategory);
+        }
+
+        $city_get = $this->common->clean($city_url);
+
+        if (!$city_get) {
+            $url = $arturl[0]['slug'] . '-' . $category_url . '-' . $arturl[0]['art_id'];
+        } else if (!$category_url) {
+            $url = $arturl[0]['slug'] . '-' . $city_get . '-' . $arturl[0]['art_id'];
+        } else if ($city_get && $category_url) {
+            $url = $arturl[0]['slug'] . '-' . $category_url . '-' . $city_get . '-' . $arturl[0]['art_id'];
+        }
+        return $url;
     }
 }
