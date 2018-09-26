@@ -27,7 +27,7 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
         <?php if ($recdata['re_step'] == 3) { ?>
             <?php echo $recruiter_header2; ?>
         <?php } ?>
@@ -552,6 +552,7 @@
        
         <script type="text/javascript">
             var header_all_profile = '<?php echo $header_all_profile; ?>';
+            var app = angular.module('', ['ui.bootstrap']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 

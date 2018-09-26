@@ -286,19 +286,22 @@
                                                             </span>
                                                         </span>
                                                     </p>
-                                                    <p class="pull-right job-top-btn">
+                                                    
                                                         <?php
                                                         if($remail_days < 0)
                                                         { ?>
+                                                        <p class="pull-right job-top-btn">
                                                         <a href="javascript:void(0);" class="job-expired">
                                                             <img src="<?php echo base_url('assets/n-images/close-job.png'); ?>">Closed</a>
+                                                        </p>
                                                         <?php
                                                         }
                                                         else
                                                         {?>
+                                                        <p class="pull-right job-bottom-btn">
                                                             <a href="javascript:void(0);" onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost  btn4"> Apply</a>
+                                                        </p>
                                                         <?php } ?>
-                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="detail-discription">

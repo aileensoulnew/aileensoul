@@ -287,6 +287,10 @@
 		<?php
 		if (count($postdata) > 0) {
 		foreach ($postdata as $post) {
+		$date1=date_create(date('y-m-d'));
+        $date2=date_create($post_last_date_txt);
+        $diff=date_diff($date1,$date2);
+        $remail_days = $diff->format("%r%a");
 		?>
 		<div class="inner-right-part cust-inner-part">
 		<div class="tab-add">
@@ -384,8 +388,18 @@
 		</span>
 		</span>
 		</p>
-		<p class="pull-right job-top-btn">
-
+		<?php
+        if($remail_days < 0)
+        { ?>
+        <p class="pull-right job-top-btn">
+        <a href="javascript:void(0);" class="job-expired">
+            <img src="<?php echo base_url('assets/n-images/close-job.png'); ?>">Closed</a>
+        </p>
+        <?php
+        }
+        else
+        {?>
+		<p class="pull-right job-bottom-btn">
 		<?php
 		if ($postuser[0]['user_id'] != $this->session->userdata('aileenuser')) {
 		$contition_array = array('post_id' => $post['post_id'], 'job_delete' => '0', 'user_id' => $this->session->userdata('aileenuser'));
@@ -416,6 +430,7 @@
 		<?php } ?>
 
 		<?php
+		}
 		}
 		?>
 
@@ -508,6 +523,16 @@
 		<span class="job-post-date"><b>Posted on:  </b><?php echo date('d-M-Y', strtotime($post['created_date'])); ?></span>
 		<p class="pull-right">
 		<?php
+        if($remail_days < 0)
+        { ?>
+        
+        <a href="javascript:void(0);" class="job-expired">
+            <img src="<?php echo base_url('assets/n-images/close-job.png'); ?>">Closed</a>
+        
+        <?php
+        }
+        else
+        {
 		if ($postuser[0]['user_id'] != $this->session->userdata('aileenuser')) {
 		$contition_array = array('post_id' => $post['post_id'], 'job_delete' => '0', 'user_id' => $this->session->userdata('aileenuser'));
 		$freelancerapply1 = $this->data['freelancerapply'] = $this->common->select_data_by_condition('freelancer_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -535,6 +560,7 @@
 		<?php } ?>
 
 		<?php
+		}
 		}
 		?>
 

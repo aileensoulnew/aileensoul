@@ -19,7 +19,7 @@
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer cus_post_profile">
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
         <?php
         $userid = $this->session->userdata('aileenuser');
         if ($postdataone[0]['user_id'] != $userid) {

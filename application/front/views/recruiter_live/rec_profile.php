@@ -20,7 +20,7 @@
 <?php $this->load->view('adsense'); ?>
 </head>
 <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer">
-		<?php echo $header; ?>
+		<?php //echo $header; ?>
 		<?php
 		$returnpage= $_GET['page'];
 		$userid = $this->session->userdata('aileenuser');

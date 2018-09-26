@@ -14,7 +14,7 @@
 </head>
  
     <body class="botton_footer">
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
         <?php
         if ($freehiredata['free_hire_step'] == '3') {
             echo $freelancer_hire_header2;
