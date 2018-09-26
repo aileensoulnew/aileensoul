@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="recruiterApp" ng-controller="recruiterController">
+<html lang="en"><!--  ng-app="recruiterApp" ng-controller="recruiterController"> -->
     <head>
         <title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
@@ -126,25 +126,30 @@
             <!-- RELATED ARTICLES -->
             <div class="related-article">
                 <div class="container">
-                    <div class="center-title" >
-                        <h3>Related Articles</h3>
-                    </div>
-                    <div class="row pt20" >
-                        <div class="col-md-4 col-sm-4" ng-repeat="blog in relatedBlog">
+                        <div class="center-title" >
+                            <h3>Related Articles</h3>
+                        </div>
+                        <div class="row pt20" >
+                            <?php 
+                            if(isset($recruiter_related_list) && !empty($recruiter_related_list)):
+                                foreach($recruiter_related_list as $_recruiter_related_list): ?>
+                            <div class="col-md-4 col-sm-4">
                                 <div class="also-like-box">
-									<div class="rec-img">
-										<a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">
-										<img ng-src="<?php echo base_url($this->config->item('blog_main_upload_path')); ?>{{ blog.image }}">
-										</a>
-									</div>
+                                    <div class="rec-img">
+                                        <a href="<?php echo base_url().'blog/'.$_recruiter_related_list['blog_slug']; ?>">
+                                        <img src="<?php echo base_url($this->config->item('blog_main_upload_path').$_recruiter_related_list['image']); ?>">
+                                        </a>
+                                    </div>
                                     <div class="also-like-bottom">
-                                        <p><a ng-href="<?php echo base_url() ?>blog/{{ blog.blog_slug }}">{{ blog.title }}</a></p>
+                                        <p><a href="<?php echo base_url().'blog/'.$_recruiter_related_list['blog_slug']; ?>"><?php echo $_recruiter_related_list['title']; ?></a></p>
                                     </div>
                                 </div>
-                            </div>                                  
+                            </div>
+                            <?php endforeach;
+                            endif;?>
+                        </div>
                     </div>
                 </div>
-            </div>
             
             <div class="container">
 				<div class="banner-add">
@@ -355,7 +360,7 @@
             var header_all_profile = '<?php echo $header_all_profile; ?>';
             var q = '';
             var l = '';
-            var app = angular.module('recruiterApp', ['ui.bootstrap']);
+            var app = angular.module('', ['ui.bootstrap']);
             var user_session = '<?php echo $this->session->userdata('aileenuser'); ?>';
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

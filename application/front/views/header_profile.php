@@ -251,7 +251,7 @@ if($browser == "Firefox")
                                     if ($userData['user_image'] != '')
                                     {?>
                                         <span class="usr-img profile-brd" id="header-main-profile-pic">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
+                                            <img src="<?php echo USER_THUMB_UPLOAD_URL . $userData['user_image'] ?>" alt="<?php echo $userData['first_name'] ?>">
                                         </span>
                                     <?php
                                     }
@@ -261,13 +261,13 @@ if($browser == "Firefox")
                                     <?php
                                             if($userData['user_gender'] == "M")
                                             {?>
-                                                <img ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                <img src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                             <?php
                                             }
                                             if($userData['user_gender'] == "F")
                                             {
                                             ?>
-                                                <img ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                <img src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                             <?php
                                             }
                                     ?>
