@@ -899,7 +899,7 @@ border-bottom: 0px;}
 .all-job-middle .location{padding-right:20px;}
 .all-job-middle span span img{margin-top:-3px;}
 .all-job-bottom{font-size:13px; padding:10px 15px; width:100%; float:left; border-top:1px solid #d2d2d2;}
-.all-job-bottom .job-post-date{padding-top:4px; display:inline-block;}
+.all-job-bottom .job-post-date{padding-top:0px; display:inline-block;}
 /***  end all job page  ***/
 /***  all job page detail  ***/
 .inner-right-part{width:915px; left:335px; position:relative; float:left;}
@@ -917,7 +917,7 @@ border-bottom: 0px;}
 top: -1px;}
 .detail-discription .all-job-middle ul li span{float:left; padding-left:15px; width:84%;}
 .loca-exp{padding-right:80px;}
-.job-top-detail .job-top-btn{margin-top:-40px;}
+.job-top-detail .job-top-btn{margin-top:0px;}
 /***  end all job page  ***/
 /***  job landing new page  ***/
 .job-custom-box{width:100%; float:left; padding-bottom:15px; border-bottom:1px solid #d2d2d2;}
@@ -2489,6 +2489,12 @@ position: fixed;}
 
 .right-add-box .adBlock { width: 300px; height: 250px; }
 ins.adsbygoogle { background: transparent !important; min-height:60px;}
+.cust-job-width .job-detail .job-top-detail{position:relative;}
+.job-top-btn{position: absolute; top: 0; right: 0;}
+
+a.job-expired{color: #000 !important; font-weight: bold; cursor:default;}
+a.job-expired:hover{color:#000 !important;}
+.job-expired img{width:20px; margin-top:-4px; margin-right:3px;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -2584,6 +2590,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.all-list ul li .list-box{width:190px; height:295px;}
 	.view-more-page .custom-user-list{width:100%;}
 	.view-more-page .right-add{display:none;}
+	.job-top-btn{position:inherit; margin-top:-23px !important;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -2771,6 +2778,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.art-side-menu .flw_msg_btn{/*margin-top:0;*/}
 	.fix-feedback{bottom:45px; z-index:9;}
 	.fix-feedback{display:none;}
+	.left-header form input{height:34px;}
 	
 }
 @media screen and (max-width: 767px) {
@@ -3016,7 +3024,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.page-title h3{border-top:1px solid #d2d2d2;}
 	.job-detail .all-job-top{border-left:0; border-right:0; border-radius:0; position:relative;}
 	.job-detail .detail-discription{border-left:0; border-right:0; border-radius:0;}
-	.job-detail .job-top-detail p.job-top-btn{position:absolute; right:15px; bottom:15px; text-align:right;}
+	.job-detail .job-top-detail p.job-top-btn{/*position:absolute; right:15px; bottom:15px; text-align:right;*/}
 	.mian_middle_post_box{width:100%;}
 	.detail-job-no-login .btn-right .btn2{/*padding:8px 20px;*/}
 	.detail-job-no-login .btn-right .btn4{/*padding: 8px 20px !important;*/}
@@ -3291,7 +3299,7 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 	.custom-box .custom-width .right-box h1 a::after{left: 50% !important; width: 150px; margin-left: -75px;}
 	.job-detail .post-img{width:65px; height:65px;}
 	.loca-exp{padding-right:0;}
-	.job-top-detail .job-top-btn{width:100%; padding-top:10px; margin-top:0;}
+	.job-top-detail .job-top-btn{/*width:100%;*/ padding-top:10px; margin-top:0;}
 	.detail-discription .all-job-middle ul li{border-bottom:0px solid #d2d2d2}
 	.detail-discription .all-job-middle ul li:last-child{border-bottom:none;}
 	.detail-discription .all-job-middle ul li:first-child b{width:100%;}

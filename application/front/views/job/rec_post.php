@@ -432,7 +432,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 <?php
                                                 if($remail_days < 0)
                                                 { ?>
-                                                    <a href="javascript:void(0);" class="btn4 job-expired">Expired</a>
+                                                    <a href="javascript:void(0);" class="job-expired"><img src="<?php echo base_url() . 'assets/n-images/close-job.png'; ?>">Closed</a>
                                                 <?php
                                                 }
                                                 else
@@ -638,7 +638,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 <?php
                                                 if($remail_days < 0)
                                                 { ?>
-                                                    <a href="javascript:void(0);" class="btn4 job-expired">Expired</a>
+                                                    <a href="javascript:void(0);" class="job-expired"><img src="<?php echo base_url() . 'assets/n-images/close-job.png'; ?>">Closed</a>
                                                 <?php
                                                 }
                                                 else
