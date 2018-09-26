@@ -209,6 +209,13 @@
                             <?php
                             if (count($postdata) > 0) {
                                 foreach ($postdata as $post) {
+                                    $post_date_txt = $post['created_date'];
+                                    $post_last_date_txt = $post['post_last_date'];
+                                    $post_name_txt = $post['post_name'];
+                                    $date1=date_create(date('y-m-d'));
+                                    $date2=date_create($post_last_date_txt);
+                                    $diff=date_diff($date1,$date2);
+                                    $remail_days = $diff->format("%r%a");
                                     ?>
                                     <div class="inner-right-part">
 										<div class="tab-add">
@@ -237,9 +244,11 @@
                                                             <?php $city = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city; ?>
                                                             <?php $country = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country; ?>
 
-                                                            <?php
-                                                            $cityname = $this->db->get_where('cities', array('city_id' => $city))->row()->city_name;
-                                                            $countryname = $this->db->get_where('countries', array('country_id' => $country))->row()->country_name;
+                                                            <?php          
+                                                            $cityObj = $this->db->get_where('cities', array('city_id' => $city))->row();
+                                                            $statename = $statename_txt = $this->db->get_where('states', array('state_id' => $cityObj->state_id))->row()->state_name;
+                                                            $cityname = $cityname_txt = $cityObj->city_name;
+                                                            $countryname = $countryname_txt = $this->db->get_where('countries', array('country_id' => $country))->row()->country_name;
                                                             ?>
                                                             <span>
 
@@ -258,25 +267,37 @@
                                                         <span class="exp">
                                                             <span>
                                                                 <?php
+                                                                $post_exp_year_txt = "";
                                                                 if ($post['post_exp_month'] || $post['post_exp_year']) {
                                                                     if ($post['post_exp_year']) {
-                                                                        echo $post['post_exp_year'];
+                                                                        $post_exp_year_txt .= $post['post_exp_year'];
                                                                     }
                                                                     if ($post['post_exp_month']) {
                                                                         if ($post['post_exp_year'] == '' || $post['post_exp_year'] == '0') {
-                                                                            echo 0;
+                                                                            $post_exp_year_txt .= 0;
                                                                         }
-                                                                        echo ".";
-                                                                        echo $post['post_exp_month'];
+                                                                        $post_exp_year_txt .= ".";
+                                                                        $post_exp_year_txt .= $post['post_exp_month'];
                                                                     }
-                                                                    echo " Year" . " (Required Experience)";
+                                                                    $post_exp_year_txt .= " Year";
+                                                                    echo $post_exp_year_txt." (Required Experience)";
                                                                 }
                                                                 ?> 
                                                             </span>
                                                         </span>
                                                     </p>
                                                     <p class="pull-right job-top-btn">
-                                                        <a href="javascript:void(0);" onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost  btn4"> Apply</a>
+                                                        <?php
+                                                        if($remail_days < 0)
+                                                        { ?>
+                                                        <a href="javascript:void(0);" class="job-expired">
+                                                            <img src="<?php echo base_url('assets/n-images/close-job.png'); ?>">Closed</a>
+                                                        <?php
+                                                        }
+                                                        else
+                                                        {?>
+                                                            <a href="javascript:void(0);" onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost  btn4"> Apply</a>
+                                                        <?php } ?>
                                                     </p>
                                                 </div>
                                             </div>
@@ -286,61 +307,66 @@
                                                         <li>
                                                             <b>Project description</b>
                                                             <span>
-                                                                <pre><?php echo $this->common->make_links($post['post_description']); ?></pre>
+                                                                <pre><?php echo $post_description = $this->common->make_links($post['post_description']); ?></pre>
                                                             </span>
                                                         </li>
                                                         <li>
                                                             <b>Key skill</b>
-                                                            <span>  <?php
+                                                            <span>
+                                                            <?php
                                                                 $comma = " , ";
                                                                 $k = 0;
                                                                 $aud = $post['post_skill'];
                                                                 $aud_res = explode(',', $aud);
-
+                                                                $skills_txt = "";
                                                                 if (!$post['post_skill']) {
-
-                                                                    echo $post['post_other_skill'];
+                                                                    $skills_txt = $post['post_other_skill'];
                                                                 } else if (!$post['post_other_skill']) {
                                                                     foreach ($aud_res as $skill) {
                                                                         if ($k != 0) {
-                                                                            echo $comma;
+                                                                            $skills_txt .= $comma;
                                                                         }
-                                                                        $cache_time = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
-                                                                        echo $cache_time;
+                                                                        $skills_txt .= $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
                                                                         $k++;
                                                                     }
                                                                 } else if ($post['post_skill'] && $post['post_other_skill']) {
 
                                                                     foreach ($aud_res as $skill) {
                                                                         if ($k != 0) {
-                                                                            echo $comma;
+                                                                            $skills_txt .= $comma;
                                                                         }
-                                                                        $cache_time = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
-                                                                        echo $cache_time;
+                                                                        $skills_txt .= $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
                                                                         $k++;
-                                                                    } echo "," . $post['post_other_skill'];
+                                                                    } 
+                                                                    $skills_txt .= "," . $post['post_other_skill'];
                                                                 }
-                                                                ?>     
-
+                                                                echo $skills_txt;
+                                                                ?>
                                                             </span>
                                                         </li>
                                                         <li><b>Field of Requirements</b>
                                                             <span> 
-                                                                <?php echo $this->db->get_where('category', array('category_id' => $post['post_field_req']))->row()->category_name; ?>
+                                                                <?php echo $category_txt = $this->db->get_where('category', array('category_id' => $post['post_field_req']))->row()->category_name; ?>
                                                             </span>
                                                         </li>
                                                         <li><b>Rate</b>
-                                                            <span>  <?php
+                                                            <span>
+                                                                <?php
+                                                                $post_rate_txt = "";
+                                                                $currency_name_txt = "";
+                                                                $post_rate_type_txt = "";
+
                                                                 if ($post['post_rate']) {
-                                                                    echo $post['post_rate'];
+                                                                    $post_rate_txt = $post['post_rate'];
                                                                     echo "&nbsp";
-                                                                    echo $this->db->get_where('currency', array('currency_id' => $post['post_currency']))->row()->currency_name;
+                                                                    $currency_name_txt = $this->db->get_where('currency', array('currency_id' => $post['post_currency']))->row()->currency_name;
                                                                     echo "&nbsp";
                                                                     if ($post['post_rating_type'] == '0') {
-                                                                        echo "Hourly";
+                                                                        $post_rate_type_txt = "Hourly";
                                                                     } else if ($post['post_rating_type'] == '1') {
-                                                                        echo "Fixed";
+                                                                        $post_rate_type_txt = "Fixed";
                                                                     }
+                                                                    echo $post_rate_txt."&nbsp".$currency_name_txt."&nbsp".$post_rate_type_txt;
                                                                 } else {
                                                                     echo PROFILENA;
                                                                 }
@@ -365,7 +391,17 @@
                                                 <div class="all-job-bottom">
                                                     <span class="job-post-date"><b>Posted on:  </b><?php echo date('d-M-Y', strtotime($post['created_date'])); ?></span>
                                                     <p class="pull-right">
+                                                        <?php
+                                                        if($remail_days < 0)
+                                                        { ?>
+                                                        <a href="javascript:void(0);" class="job-expired">
+                                                            <img src="<?php echo base_url('assets/n-images/close-job.png'); ?>">Closed</a>
+                                                        <?php
+                                                        }
+                                                        else
+                                                        { ?>
                                                         <a href="javascript:void(0);" onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost btn4"> Apply</a>
+                                                    <?php } ?>
                                                     </p>
 
                                                 </div>
@@ -499,7 +535,9 @@
                                                             <?php $country = $this->db->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->country; ?>
 
                                                             <?php
-                                                            $cityname = $this->db->get_where('cities', array('city_id' => $city))->row()->city_name;
+                                                            $cityObj = $this->db->get_where('cities', array('city_id' => $city))->row();
+                                                            $statename = $this->db->get_where('states', array('state_id' => $cityObj->state_id))->row()->state_name;
+                                                            $cityname = $cityObj->city_name;
                                                             $countryname = $this->db->get_where('countries', array('country_id' => $country))->row()->country_name;
                                                             ?>
                                                             <span>
@@ -1107,10 +1145,51 @@
         <?php }*/ ?>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-hire/project_live_login.js?ver=' . time()); ?>"></script>
 
-
-
-        <script>
-
+        <?php
+        if($remail_days < 0)
+        {
+        }
+        else{ ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "JobPosting",
+            "title": "<?php echo $post_name_txt; ?>",
+            "description": " Description: <?php echo addslashes($post_description); ?>",
+            "skills": "<?php echo addslashes($skills_txt); ?>",
+            "industry": "<?php echo addslashes($category_txt); ?>",
+            "experienceRequirements": "<?php echo $post_exp_year_txt; ?>",
+            "employmentType": "OTHER",
+            "baseSalary": {
+                "@type": "MonetaryAmount",
+                "currency": "<?php echo $currency_name_txt; ?>",
+                "value": {
+                    "@type": "QuantitativeValue",
+                    "value": <?php echo ($post_rate_txt != "" ? $post_rate_txt : '""'); ?>,
+                    "unitText": "<?php echo strtoupper($post_rate_type_txt); ?>"
+                }
+            },
+            "datePosted": "<?php echo date('Y-m-d', strtotime($post_date_txt)); ?>",
+            "validThrough": "<?php echo date('Y-m-d', strtotime($post_last_date_txt)); ?>",
+            "jobLocation": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "<?php echo $cityname_txt; ?>",
+                    "addressRegion": "<?php echo $statename_txt; ?>",
+                    "addressCountry": "<?php echo $countryname_txt; ?>"
+                },
+                "additionalProperty": {
+                    "@type": "PropertyValue",
+                    "value": "TELECOMMUTE"
+                }
+            },
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": "<?php echo ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)); ?>"
+            }
+        } 
         </script>
+    <?php } ?>
     </body>
 </html>
