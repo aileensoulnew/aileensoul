@@ -756,4 +756,17 @@ if (count($total_record) > 0) {
         }
         $feed_counter ++;
     }
+}
+else { ?>
+    <div class="art_no_post_avl" id="no_post_avl">
+        <h3> Post</h3>
+        <div class="art-img-nn">
+            <div class="art_no_post_img">
+                <img src="<?php echo base_url('assets/img/art-no.png'); ?>" alt="art-no.png">
+            </div>
+            <div class="art_no_post_text">
+                No Post Available.
+            </div>
+        </div>
+    </div><?php
 } ?>

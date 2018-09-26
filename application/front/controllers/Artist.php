@@ -13053,7 +13053,7 @@ class Artist extends MY_Controller {
     // dashboard post using ajax strat
 
     public function artistic_dashboard_post($id = '') {
-// manage post start
+        // manage post start
 
         $perpage = 5;
         $page = 1;
@@ -13065,7 +13065,20 @@ class Artist extends MY_Controller {
         if ($start < 0)
             $start = 0;
 
-        $userid = $this->session->userdata('aileenuser');
+        $artistic_post = $this->artistic_model->get_artist_dashboard_post($id,$page,$perpage);
+        
+        $artistic_post1 = $this->artistic_model->get_artist_dashboard_count($id);
+        $infeed_add = $this->load->view('infeed_add','',TRUE);
+        
+        $this->data['page'] = $page;
+        $this->data['total_record'] = $artistic_post1;
+        $this->data['perpage'] = $perpage;
+        $this->data['artistic_post'] = $artistic_post;
+        $this->data['infeed_add'] = $infeed_add;
+
+        $this->load->view('artist_live/art_post_list_view', $this->data);
+
+        /*$userid = $this->session->userdata('aileenuser');
         $user_name = $this->session->userdata('user_name');
 
 
@@ -13093,10 +13106,10 @@ class Artist extends MY_Controller {
                 $artisticdata = $this->common->select_data_by_condition('art_reg', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
                 $return_html .= '<div id = "removepost' . $row['art_post_id'] . '">
-<div class = "profile-job-post-detail clearfix">
-<div class = "post-design-box">
-<div class = "post-design-top col-md-12" >
-<div class = "post-design-pro-img">';
+                <div class = "profile-job-post-detail clearfix">
+                <div class = "post-design-box">
+                <div class = "post-design-top col-md-12" >
+                <div class = "post-design-pro-img">';
                 $userid = $this->session->userdata('aileenuser');
                 $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $row['user_id']))->row()->art_user_image;
                 $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $row['posted_user_id']))->row()->art_user_image;
@@ -13181,8 +13194,8 @@ class Artist extends MY_Controller {
                     }
                 }
                 $return_html .= '</div>
-<div class = "post-design-name fl col-xs-8 col-md-10">
-<ul>';
+                <div class = "post-design-name fl col-xs-8 col-md-10">
+                <ul>';
                 $firstname = $this->db->select('art_name')->get_where('art_reg', array('user_id' => $row['user_id']))->row()->art_name;
                 $lastname = $this->db->select('art_lastname')->get_where('art_reg', array('user_id' => $row['user_id']))->row()->art_lastname;
 
@@ -13198,22 +13211,22 @@ class Artist extends MY_Controller {
 
                 if ($row['posted_user_id']) {
                     $return_html .= '<li>
-<div class = "else_post_d">
-<div class = "post-design-product">
-<a style = "max-width: 40%;" class = "post_dot" title = "' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '" href = "' . base_url('artist/p/' . $geturl_post) . '">' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '</a>
-<p class = "posted_with" > Posted With</p>
-<a class = "other_name post_dot" href = "' . base_url('artist/details/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . '&nbsp;' . ucfirst(strtolower($lastname)) . '</a>
-<span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
-</div></div>
-</li>';
+                <div class = "else_post_d">
+                <div class = "post-design-product">
+                <a style = "max-width: 40%;" class = "post_dot" title = "' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '" href = "' . base_url('artist/p/' . $geturl_post) . '">' . ucfirst(strtolower($firstnameposted)) . '&nbsp;' . ucfirst(strtolower($lastnameposted)) . '</a>
+                <p class = "posted_with" > Posted With</p>
+                <a class = "other_name post_dot" href = "' . base_url('artist/details/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . '&nbsp;' . ucfirst(strtolower($lastname)) . '</a>
+                <span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
+                </div></div>
+                </li>';
                 } else {
                     $return_html .= '<li><div class = "post-design-product"><a class = "post_dot" title = "' . ucfirst(strtolower($firstname)) . '&nbsp;' . ucfirst(strtolower($lastname)) . '" href = "' . base_url('artist/p/' . $geturl) . '">' . ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)) . '</a>
-<span role = "presentation" aria-hidden = "true"> · </span>
-<div class = "datespan">
-<span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
-</div>
-</div>
-</li>';
+                <span role = "presentation" aria-hidden = "true"> · </span>
+                <div class = "datespan">
+                <span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
+                </div>
+                </div>
+                </li>';
                 }
 
                 $return_html .= '<li><div class = "post-design-product"> <a class = "buuis_desc_a" title = "Designation">';
@@ -13225,54 +13238,54 @@ class Artist extends MY_Controller {
                 }
 
                 $return_html .= '</a> </div>
-</li>
-<li>
-</li>
-</ul>
-</div>';
+                </li>
+                <li>
+                </li>
+                </ul>
+                </div>';
 
                 if ($userid == $row['posted_user_id'] || $row['user_id'] == $userid) {
 
                     $return_html .= '<div class = "dropdown2">
-<a  onClick="myFunction1(' . $row['art_post_id'] . ')" class = " dropbtn2 fa fa-ellipsis-v"></a>
-<div id = "myDropdown' . $row['art_post_id'] . '" class = "dropdown-content2 ">';
-                    if ($row['posted_user_id'] != 0) {
-                        if ($this->session->userdata('aileenuser') == $row['posted_user_id']) {
-                            $return_html .= '<a onclick = "deleteownpostmodel(' . $row['art_post_id'] . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>
-<a id = "' . $row['art_post_id'] . '" onClick = "editpost(this.id)">
-<i class = "fa fa-pencil-square-o" aria-hidden = "true">
-</i>Edit
-</a>';
+                    <a  onClick="myFunction1(' . $row['art_post_id'] . ')" class = " dropbtn2 fa fa-ellipsis-v"></a>
+                    <div id = "myDropdown' . $row['art_post_id'] . '" class = "dropdown-content2 ">';
+                                        if ($row['posted_user_id'] != 0) {
+                                            if ($this->session->userdata('aileenuser') == $row['posted_user_id']) {
+                                                $return_html .= '<a onclick = "deleteownpostmodel(' . $row['art_post_id'] . ')">
+                    <i class = "fa fa-trash-o" aria-hidden = "true">
+                    </i> Delete Post
+                    </a>
+                    <a id = "' . $row['art_post_id'] . '" onClick = "editpost(this.id)">
+                    <i class = "fa fa-pencil-square-o" aria-hidden = "true">
+                    </i>Edit
+                    </a>';
                         } else {
                             $return_html .= '<a onclick = "deleteownpostmodel(' . $row['art_post_id'] . ')">
-<i class = "fa fa-trash-o" aria-hidden = "true">
-</i> Delete Post
-</a>';
+                        <i class = "fa fa-trash-o" aria-hidden = "true">
+                        </i> Delete Post
+                        </a>';
                         }
                     } else {
                         if ($this->session->userdata('aileenuser') == $row['user_id']) {
                             $return_html .= '<a onclick = "deleteownpostmodel(' . $row['art_post_id'] . ')"><i class = "fa fa-trash-o" aria-hidden = "true"></i> Delete Post</a>
-<a id = "' . $row['art_post_id'] . '" onClick = "editpost(this.id)"><i class = "fa fa-pencil-square-o" aria-hidden = "true"></i>Edit</a>';
+                            <a id = "' . $row['art_post_id'] . '" onClick = "editpost(this.id)"><i class = "fa fa-pencil-square-o" aria-hidden = "true"></i>Edit</a>';
                         } else {
                             
                         }
                     }
                     $return_html .= '</div>
-</div>';
+                    </div>';
                 }
 
                 $return_html .= '<div class = "post-design-desc ">';
 
                 $return_html .= '<div class = "ft-15 t_artd">
-<div id = "editpostdata' . $row['art_post_id'] . '" style = "display:block;">
-<a id="editpostval' . $row['art_post_id'] . '">' . $this->common->make_links($row['art_post']) . '</a>
-</div>
-<div id = "editpostbox' . $row['art_post_id'] . '" style = "display:none;">
-<input type = "text" class="my_text" id = "editpostname' . $row['art_post_id'] . '" name = "editpostname" placeholder = "Title" value = "' . $row['art_post'] . '" onKeyDown = check_lengthedit(' . $row['art_post_id'] . ') onKeyup = check_lengthedit(' . $row['art_post_id'] . ');
-onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
+                    <div id = "editpostdata' . $row['art_post_id'] . '" style = "display:block;">
+                    <a id="editpostval' . $row['art_post_id'] . '">' . $this->common->make_links($row['art_post']) . '</a>
+                    </div>
+                    <div id = "editpostbox' . $row['art_post_id'] . '" style = "display:none;">
+                    <input type = "text" class="my_text" id = "editpostname' . $row['art_post_id'] . '" name = "editpostname" placeholder = "Title" value = "' . $row['art_post'] . '" onKeyDown = check_lengthedit(' . $row['art_post_id'] . ') onKeyup = check_lengthedit(' . $row['art_post_id'] . ');
+                    onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 if ($row['art_post']) {
                     $counter = $row['art_post'];
                     $a = strlen($counter);
@@ -13281,8 +13294,8 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                     $return_html .= '<input size = 1 id = "text_num_' . $row['art_post_id'] . '" class = "text_num" value = 50 name = text_num disabled="disabled">';
                 }
                 $return_html .= '</div>
-</div>
-<div id = "khyati' . $row['art_post_id'] . '" style = "display:block;">';
+                </div>
+                <div id = "khyati' . $row['art_post_id'] . '" style = "display:block;">';
 
                 $num_words = 29;
                 $words = array();
@@ -13299,18 +13312,18 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
 
                 $return_html .= '</div>
-<div id = "khyatii' . $row['art_post_id'] . '" style = "display:none;">';
-                $return_html .= $this->common->make_links($row['art_description']);
-                $return_html .= '</div>
-<div id = "editpostdetailbox' . $row['art_post_id'] . '" style = "display:none;">
-<div contenteditable = "true" id = "editpostdesc' . $row['art_post_id'] . '" class = "textbuis editable_text" placeholder = "Description" name = "editpostdesc" onpaste = "OnPaste_StripFormatting(this, event);" onfocus="return cursorpointer(' . $row['art_post_id'] . ');">' . $row['art_description'] . '</div>
-</div><button class = "fr" id = "editpostsubmit' . $row['art_post_id'] . '" style="display:none; margin: 5px 0;" onClick="edit_postinsert(' . $row['art_post_id'] . ')">Save</button>
-</div> ';
+                <div id = "khyatii' . $row['art_post_id'] . '" style = "display:none;">';
+                                $return_html .= $this->common->make_links($row['art_description']);
+                                $return_html .= '</div>
+                <div id = "editpostdetailbox' . $row['art_post_id'] . '" style = "display:none;">
+                <div contenteditable = "true" id = "editpostdesc' . $row['art_post_id'] . '" class = "textbuis editable_text" placeholder = "Description" name = "editpostdesc" onpaste = "OnPaste_StripFormatting(this, event);" onfocus="return cursorpointer(' . $row['art_post_id'] . ');">' . $row['art_description'] . '</div>
+                </div><button class = "fr" id = "editpostsubmit' . $row['art_post_id'] . '" style="display:none; margin: 5px 0;" onClick="edit_postinsert(' . $row['art_post_id'] . ')">Save</button>
+                </div> ';
 
                 $return_html .= '</div>';
 
                 $return_html .= '<div class="post-design-mid col-md-12" >  
-    <div class="mange_post_image">';
+                <div class="mange_post_image">';
 
                 $contition_array = array('post_id' => $row['art_post_id'], 'is_deleted' => '1', 'insert_profile' => '1');
                 $artmultiimage = $this->data['artmultiimage'] = $this->common->select_data_by_condition('post_files', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -13329,15 +13342,15 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
            <img src = "' . ART_POST_MAIN_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" alt="' . $artmultiimage[0]['file_name'] . '">
 
              </a>
-        </div>';
+                    </div>';
                     } elseif (in_array($ext, $allowespdf)) {
 
                         $return_html .= '<div>
-<a title = "click to open" href = "' . base_url('artist/pdf_display/' . $row['art_post_id']) . '" target="_blank"><div class = "pdf_img">
-    <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
-</div>
-</a>
-</div>';
+                        <a title = "click to open" href = "' . base_url('artist/pdf_display/' . $row['art_post_id']) . '" target="_blank"><div class = "pdf_img">
+                            <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
+                        </div>
+                        </a>
+                        </div>';
                     } elseif (in_array($ext, $allowesvideo)) {
 
                         $post_poster = $artmultiimage[0]['file_name'];
@@ -13391,24 +13404,24 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
             <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
              <img class = "two-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
              </a>
-        </div>';
+                    </div>';
                     }
                 } elseif (count($artmultiimage) == 3) {
                     $return_html .= '<div class="three-imag-top" >
-            <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
-            <img class = "three-columns" src = "' . ART_POST_RESIZE4_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" alt="' . $artmultiimage[0]['file_name'] . '">
-            </a>
-        </div>
-        <div class="three-image" >
-            <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
-           <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[1]['file_name'] . '" alt="' . $artmultiimage[1]['file_name'] . '">
-            </a>
-        </div>
-        <div class="three-image" >
-            <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
-            <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[2]['file_name'] . '" alt="' . $artmultiimage[2]['file_name'] . '">
-            </a>
-        </div>';
+                    <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
+                    <img class = "three-columns" src = "' . ART_POST_RESIZE4_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" alt="' . $artmultiimage[0]['file_name'] . '">
+                    </a>
+                </div>
+                <div class="three-image" >
+                    <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
+                   <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[1]['file_name'] . '" alt="' . $artmultiimage[1]['file_name'] . '">
+                    </a>
+                </div>
+                <div class="three-image" >
+                    <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
+                    <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[2]['file_name'] . '" alt="' . $artmultiimage[2]['file_name'] . '">
+                    </a>
+                </div>';
                 } elseif (count($artmultiimage) == 4) {
 
                     foreach ($artmultiimage as $multiimage) {
@@ -13416,7 +13429,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
             <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
             <img class = "breakpoint" src = "' . ART_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
              </a>
-        </div>';
+                </div>';
                     }
                 } elseif (count($artmultiimage) > 4) {
 
@@ -13426,7 +13439,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
             <a href="' . base_url('artist/post-detail/' . $row['art_post_id']) . '">
             <img class = "breakpoint" src = "' . ART_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '" alt="' . $multiimage['file_name'] . '">
             </a>
-        </div>';
+                    </div>';
                         $i++;
                         if ($i == 3)
                             break;
@@ -13440,16 +13453,16 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                     <span> View All (+' . (count($artmultiimage) - 4) . ')
                     </span></div>
             </a>
-        </div>';
+                </div>';
                 }
                 $return_html .= '<div>
-        </div>
-    </div>
-</div>
-<div class="post-design-like-box col-md-12">
-    <div class="post-design-menu">
-        <ul class="col-md-6">
-            <li class="likepost' . $row['art_post_id'] . '">
+                    </div>
+                </div>
+            </div>
+            <div class="post-design-like-box col-md-12">
+                <div class="post-design-menu">
+                    <ul class="col-md-6">
+                        <li class="likepost' . $row['art_post_id'] . '">
                 <a class="ripple like_h_w" id="' . $row['art_post_id'] . '"   onClick="post_like(this.id)">';
                 $userid = $this->session->userdata('aileenuser');
                 $contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1');
@@ -13478,8 +13491,8 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 $return_html .= '</i> 
                 </a>
             </li> 
-        </ul>
-        <ul class="col-md-6 like_cmnt_count">';
+                </ul>
+                <ul class="col-md-6 like_cmnt_count">';
 
                 $contition_array = array('post_id' => $row['art_post_id'], 'insert_profile' => '1');
                 $postformat = $this->common->select_data_by_condition('post_files', $contition_array, $data = 'post_format', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -13524,9 +13537,9 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
                 $return_html .= '</div>
             </li>
-        </ul>
-    </div>
-</div>';
+                        </ul>
+                    </div>
+                </div>';
 
                 $return_html .= '<div class="likeduserlist1 likeusername' . $row['art_post_id'] . '" id="likeusername' . $row['art_post_id'] . '" style="display:block">';
 
@@ -13569,15 +13582,15 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 }
                 $return_html .= '</a></div>
    
-</div>';
+            </div>';
 
 
 
                 $return_html .= '<div class="art-all-comment col-md-12">
-    <div id="fourcomment' . $row['art_post_id'] . '" style="display:none;">
-    </div>
-    <div  id="threecomment' . $row['art_post_id'] . '" style="display:block">
-        <div class="hidebottomborder insertcomment' . $row['art_post_id'] . '">';
+                <div id="fourcomment' . $row['art_post_id'] . '" style="display:none;">
+                </div>
+                <div  id="threecomment' . $row['art_post_id'] . '" style="display:block">
+                    <div class="hidebottomborder insertcomment' . $row['art_post_id'] . '">';
                 $contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1');
                 $artdata = $this->data['artdata'] = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = '*', $sortby = 'artistic_post_comment_id', $orderby = 'DESC', $limit = '1', $offset = '', $join_str = array(), $groupby = '');
 
@@ -13714,10 +13727,10 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                     }
                 }
                 $return_html .= '</div>
-    </div>
-</div>
-<div class="post-design-commnet-box col-md-12">
-    <div class="post-design-proo-img hidden-mob"> ';
+                    </div>
+                </div>
+                <div class="post-design-commnet-box col-md-12">
+                    <div class="post-design-proo-img hidden-mob"> ';
 
                 $art_slug = $this->db->select('slug')->get_where('art_reg', array('user_id' => $userid, 'status' => '1'))->row()->slug;
 
@@ -13758,19 +13771,19 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                     }
                 }
                 $return_html .= '</a></div>
-    <div id="content" class="col-md-12  inputtype-comment cmy_2" >
-        <div contenteditable="true" class="editable_text edt_2" name="' . $row['art_post_id'] . '"  id="post_comment' . $row['art_post_id'] . '" placeholder="Add a Comment...." onClick="entercomment(' . $row['art_post_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);"></div>
-          <div class="mob-comment">       
-                            <button id="' . $row['art_post_id'] . '" onClick="insert_comment(this.id)"><img src="' . base_url('assets/img/send.png') . '" alt="send.png">
-                            </button>
-                        </div>
-    </div>';
-                $return_html .= form_error('post_comment');
-                $return_html .= '<div class="comment-edit-butn  hidden-mob">       
-        <button id="' . $row['art_post_id'] . '" onClick="insert_comment(this.id)">Comment</button></div>
-</div>
-</div>
-</div> </div>';
+                    <div id="content" class="col-md-12  inputtype-comment cmy_2" >
+                        <div contenteditable="true" class="editable_text edt_2" name="' . $row['art_post_id'] . '"  id="post_comment' . $row['art_post_id'] . '" placeholder="Add a Comment...." onClick="entercomment(' . $row['art_post_id'] . ')" onpaste="OnPaste_StripFormatting(this, event);"></div>
+                          <div class="mob-comment">       
+                                            <button id="' . $row['art_post_id'] . '" onClick="insert_comment(this.id)"><img src="' . base_url('assets/img/send.png') . '" alt="send.png">
+                                            </button>
+                                        </div>
+                    </div>';
+                                $return_html .= form_error('post_comment');
+                                $return_html .= '<div class="comment-edit-butn  hidden-mob">       
+                        <button id="' . $row['art_post_id'] . '" onClick="insert_comment(this.id)">Comment</button></div>
+                </div>
+                </div>
+                </div> </div>';
             }
         } else {
             $return_html .= '<div class="art_no_post_avl" id="no_post_avl">
@@ -13788,8 +13801,8 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                             </div> ';
         }
         $return_html .= '<div class="nofoundpost">
-</div>';
-        echo $return_html;
+        </div>';
+        echo $return_html;*/
     }
 
     public function postnewpage_fourcomment($postid) {

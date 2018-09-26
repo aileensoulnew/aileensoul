@@ -816,4 +816,45 @@ class Artistic_model extends CI_Model {
         }
         return $url;
     }
+
+    // Get data of artistic dashboard post 
+    function get_artist_dashboard_post($userid,$page,$limit = '4'){        
+        // Start limit
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;        
+
+        $sql = "SELECT ar.art_user_image, ar.art_name, ar.art_lastname, ar.art_skill, ar.slug, ap.art_post_id, ap.art_post, ar.user_id, ar.designation, ar.art_skill, ap.art_description, ap.art_likes_count, ap.art_like_user, ap.created_date, ap.posted_user_id
+            FROM ailee_art_post as ap
+            JOIN ailee_art_reg as ar ON ar.user_id=ap.user_id 
+            WHERE ap.user_id = '".$userid."' 
+            AND ap.is_delete = '0' 
+            AND ap.status = '1' 
+            AND ar.status = '1' 
+            AND ar.is_delete = '0' 
+            ORDER BY ap.art_post_id DESC";
+            if($limit != '') {
+                $sql .= " LIMIT $start,$limit";
+            }
+
+            $query = $this->db->query($sql);
+            $result_array = $query->result_array();
+            return $result_array;
+    } 
+
+    // Get count of artistic dashboard post data 
+    function get_artist_dashboard_count($userid){        
+        $sql = "SELECT count(*) as total_record
+            FROM ailee_art_post as ap
+            JOIN ailee_art_reg as ar ON ar.user_id=ap.user_id 
+            WHERE ap.user_id = '".$userid."' 
+            AND ap.is_delete = '0' 
+            AND ap.status = '1'
+            AND ar.status = '1' 
+            AND ar.is_delete = '0' 
+            ORDER BY ap.art_post_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->row()->total_record;
+        return $result_array;
+    }
 }

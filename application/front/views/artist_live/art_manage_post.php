@@ -310,7 +310,7 @@
 			<div class="tab-add">
 				<?php $this->load->view('banner_add'); ?>
 			</div>
-            <?php 
+            <?php /*
             $userid = $this->session->userdata('aileenuser');
             $other_user = $artisticdata[0]['art_id'];
             $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
@@ -319,21 +319,15 @@
              $contition_array = array('follow_type' => '1', 'follow_status' => '1');
              $search_condition = "((follow_from  = '$loginuser' AND follow_to  = ' $other_user') OR (follow_from  = '$other_user' AND follow_to  = '$loginuser'))";
              $contactperson = $this->common->select_data_by_search('follow', $search_condition, $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = '', $groupby = '');
-             if((count($contactperson) == 2) || ($artisticdata[0]['user_id'] == $userid)){ ?>
+             if((count($contactperson) == 2) || ($artisticdata[0]['user_id'] == $userid)){ ?>                
                 <div class="post-editor col-md-12">
                     <div class="main-text-area col-md-12">
                         <div class="popup-img"> 
                             <a href="<?php echo artist_dashboard . $get_url; ?>">
                             <?php
-                                    $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
-                                    $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
-                                    ?>
-                            <?php ?>
-                                                            
-                
-                 <?php 
-
-                        if (IMAGEPATHFROM == 'upload') {
+                            $userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;
+                            $userimageposted = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $this->session->userdata('aileenuser')))->row()->art_user_image;                                   
+                            if (IMAGEPATHFROM == 'upload') {
 
                                 if($artisticdata[0]['art_user_image']){
                                     if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $artisticdata[0]['art_user_image'])) { ?>
@@ -345,20 +339,20 @@
                                    <?php }
                                 } else{ ?>
                                    <img  src="<?php echo base_url(NOARTIMAGE); ?>"  alt="<?php echo "NOARTIMAGE"; ?>">
-                               <?php } }else{
+                               <?php } 
+                           }else{
 
-                      $filename = $this->config->item('art_profile_thumb_upload_path') .$userimageposted;
-                      $s3 = new S3(awsAccessKey, awsSecretKey);
-                     $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-
-
-                     if ($info) { ?>
+                                  $filename = $this->config->item('art_profile_thumb_upload_path') .$userimageposted;
+                                  $s3 = new S3(awsAccessKey, awsSecretKey);
+                                 $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
+                                 if ($info) { ?>
                                       <img src="<?php echo ART_PROFILE_THUMB_UPLOAD_URL . $userimageposted; ?>" name="image_src" id="image_src" alt="<?php echo $userimageposted; ?>" />
-                                                                <?php
-                                                            } else { ?>
-                    <img  src="<?php echo base_url(NOARTIMAGE); ?>"  alt="<?php echo "NOARTIMAGE"; ?>">
-                    <?php } }?>
-                    </a> 
+                                      <?php
+                                  } else { ?>
+                                    <img  src="<?php echo base_url(NOARTIMAGE); ?>"  alt="<?php echo "NOARTIMAGE"; ?>">
+                                <?php } 
+                            }?>
+                            </a> 
                         </div>
                         <div id="myBtn3"  class="editor-content popup-text" onclick="return modelopen();">
                             <span> Post Your Art....</span> 
@@ -368,8 +362,8 @@
                             </div>
                         </div>    
                     </div>
-                </div>
-            <?php }?>
+                </div>                
+            <?php }*/ ?>
             <!-- The Modal -->
             <div id="myModal3" class="modal-post">
                 <!-- Modal content -->
