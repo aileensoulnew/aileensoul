@@ -895,6 +895,8 @@ border-bottom: 0px;}
 .job-top-detail h5 a:hover{border-bottom:1px solid #5c5c5c;}
 .job-top-detail p{font-size:13px; margin:0; line-height:1.5; font-weight:normal;}
 .job-top-detail p a{color:#5c5c5c;}
+.job-top-detail p.job-bottom-btn a{color:#1b8ab9;}
+.job-top-detail p.job-top-btn a{color:#1b8ab9;}
 .all-job-middle{font-size:13px; padding:10px 15px; width:100%; float:left;}
 .all-job-middle .location{padding-right:20px;}
 .all-job-middle span span img{margin-top:-3px;}
@@ -2237,7 +2239,7 @@ input[type=text] {-webkit-appearance: none; -moz-appearance: none; appearance: n
 .old-no-login .btn-right .btn2{/*padding:8px 25px; background:none; color:#fff; border:1px solid #fff;*/}
 .old-no-login .btn-right .btn2:hover{/*background:#fff; color:#1b8ab9;*/}
 .job-detail .job-top-detail{/*padding-left:36px;*/}
-.job-detail .job-top-detail.free-apply-img{width:100%; padding-left:0;}
+.job-detail .job-top-detail.free-apply-img{width:100%; padding-left:0; position:relative;}
 .old-no-login #paddingtop_fixed{padding-top:54px !important;}
 .old-no-login #contact_per{display:none;}
 .old-no-login .other-profile-menu .profile-left{width:100%;}
@@ -2495,6 +2497,9 @@ ins.adsbygoogle { background: transparent !important; min-height:60px;}
 a.job-expired{color: #000 !important; font-weight: bold; cursor:default;}
 a.job-expired:hover{color:#000 !important;}
 .job-expired img{width:20px; margin-top:-4px; margin-right:3px;}
+.sub-header-search .search-mob-block input{border:0px;}
+.job-bottom-btn{margin-top:-30px !important;}
+
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
@@ -3203,7 +3208,7 @@ a.job-expired:hover{color:#000 !important;}
 	.btns .btn-4{font-size:14px !important; padding:5px 20px;}
 	.inner-right-part{width:100%;}
 	.middle-part{width:100%;}
-	.job-detail .job-top-detail{width:73%;}
+	.job-detail .job-top-detail{/*width:73%;*/}
 	.detail-discription .all-job-middle ul li span{width:68%;}
 	.comment-dis{width:90%;}
 	.post-images .two-img{width:calc(50% - 4px);}
@@ -3545,7 +3550,7 @@ a.job-expired:hover{color:#000 !important;}
 	.con-detail{line-height:1.5;}
 	.img-custom .ceo-img{width:80px; height:80px;}
 	.new-abput-page .img-custom .text-custom{padding:12px 0px 0px;}
-	
+	.job-bottom-btn{display:none;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
