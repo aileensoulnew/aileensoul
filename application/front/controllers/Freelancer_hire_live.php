@@ -794,7 +794,7 @@ public function recommen_candidate() {
 		// code for display page start
 	$this->freelancer_hire_check();
 
-	$sql = "SELECT count(*) as totalpost FROM ailee_freelancer_post where user_id = '$userid'";
+	$sql = "SELECT count(*) as totalpost FROM ailee_freelancer_post where user_id = '$userid' AND status = '1' AND is_delete = '0'";
         $query = $this->db->query($sql);        
     $this->data['login_user_totalpost'] = $query->row_array()['totalpost'];
 	// print_r($this->data['login_user_totalpost']);
