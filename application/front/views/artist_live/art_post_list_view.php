@@ -277,6 +277,7 @@ if (count($total_record) > 0) {
                                         <div>
                                         <?php
                                         $filename = $this->config->item('art_post_main_upload_path') . $artmultiimage[0]['file_name'];
+                                        $s3 = new S3(awsAccessKey, awsSecretKey);
                                         $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
                                         if ($info) {
                                             ?>
