@@ -15,7 +15,7 @@
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer body-loader">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
-            <?php echo $header; ?>
+            <?php //echo $header; ?>
             <?php
             if ($freelancr_user_data[0]['user_id'] != $this->session->userdata('aileenuser')) {
                 echo $freelancer_post_header2;

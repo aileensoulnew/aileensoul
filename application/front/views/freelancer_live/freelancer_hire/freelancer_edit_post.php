@@ -22,7 +22,7 @@
 </head>
 
     <body class="page-container-bg-solid page-boxed botton_footer freeh3">
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
         <?php echo $freelancer_hire_header2; ?>
         <section>
             <div class="user-midd-section" id="paddingtop_fixed">
