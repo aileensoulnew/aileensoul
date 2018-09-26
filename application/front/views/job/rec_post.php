@@ -298,19 +298,27 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                         <div class="page-title">
                             <h3>
                                 <?php
+                                $job_title_txt = "";
                                 $cache_time = $this->db->get_where('job_title', array('title_id' => $postdata[0]['post_name']))->row()->name;
                                 if ($cache_time) {
-                                    echo $cache_time;
+                                    $job_title_txt = $cache_time;
                                 } else {
-                                    echo $postdata[0]['post_name'];
+                                    $job_title_txt = $postdata[0]['post_name'];
                                 }
+                                echo $job_title_txt;
                                 ?>
                             </h3>
                         </div>
 						
                         <?php
                         if (count($postdata) > 0) {
-                            foreach ($postdata as $post) {  
+                            foreach ($postdata as $post) {
+                                $post_last_date_txt = $post['post_last_date'];
+                                $comp_name_txt = $post['re_comp_name'];
+                                $date1=date_create(date('y-m-d'));
+                                $date2=date_create($post_last_date_txt);
+                                $diff=date_diff($date1,$date2);
+                                $remail_days = $diff->format("%r%a");
                                 ?>
                                 <div class="all-job-box job-detail">
                                     <div class="all-job-top">
@@ -385,6 +393,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 <span class="location">
                                                     <?php
                                                     $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
+                                                    $statename = $this->db->get_where('states', array('state_id' => $post['state']))->row()->state_name;
                                                     $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
                                                     ?>
                                                     <span>
@@ -406,59 +415,65 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                         <!-- <img class="pr5" src="<?php //echo base_url('assets/images/exp.png'); ?>"> -->
 
                                                         <?php
+                                                        $exp_txt = "";
                                                         if (($post['min_year'] != '0' || $post['max_year'] != '0') && ($post['fresher'] == 1)) {
-
-
-                                                            echo $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " (Required Experience) " . "(Fresher can also apply).";
+                                                            $exp_txt = $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year' . " (Required Experience) " . "(Fresher can also apply).";
                                                         } else if (($post['min_year'] != '0' || $post['max_year'] != '0')) {
-                                                            echo $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year'. " (Required Experience) ";
+                                                            $exp_txt = $post['min_year'] . ' Year - ' . $post['max_year'] . ' Year'. " (Required Experience) ";
                                                         } else {
-                                                            echo "Fresher";
+                                                            $exp_txt = "Fresher";
                                                         }
+                                                        echo $exp_txt;
                                                         ?>
                                                     </span>
                                                 </span>
                                             </p>
                                             <p class="pull-right job-top-btn">
-
-                                                <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
-           
-                                                    <?php
-                                                } else {
-                                                    $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
-                                                    $contition_array = array(
-                                                        'post_id' => $post['post_id'],
-                                                        'job_delete' => '0',
-                                                        'user_id' => $userid
-                                                    );
-                                                    $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-                                                    if ($jobsave) {
-                                                        ?>
-                                                        <a href="javascript:void(0);" class="btn4 applied">Applied</a>
-                                                    <?php } else { ?>
-                                                       
-                                                        <?php
-                                                        $userid = $this->session->userdata('aileenuser');
+                                                <?php
+                                                if($remail_days < 0)
+                                                { ?>
+                                                    <a href="javascript:void(0);" class="btn4 job-expired">Expired</a>
+                                                <?php
+                                                }
+                                                else
+                                                {
+                                                    if ($this->session->userdata('aileenuser') == $recliveid){
+                                                    }
+                                                    else
+                                                    {
+                                                        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
                                                         $contition_array = array(
-                                                            'user_id' => $userid,
-                                                            'job_save' => '2',
-                                                            'post_id ' => $post['post_id'],
-                                                            'job_delete' => '1'
+                                                            'post_id' => $post['post_id'],
+                                                            'job_delete' => '0',
+                                                            'user_id' => $userid
                                                         );
-                                                        $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                                                        $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                                                         if ($jobsave) {
                                                             ?>
-                                                            <a class="btn4 saved save_saved_btn">Saved</a>
+                                                            <a href="javascript:void(0);" class="btn4 applied">Applied</a>
                                                         <?php } else { ?>
-                                                            <a title="Save" id="<?php echo $post['post_id']; ?>" onClick="savepopup(<?php echo $post['post_id'] ?>)" href="javascript:void(0);" class="savedpost<?php echo $post['post_id']; ?> btn4 save_saved_btn">Save</a>
-                                                        <?php } ?>
-                                                         <a href="javascript:void(0);"  class= "applypost<?php echo $post['post_id']; ?>  btn4" onclick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id'] ?>)">Apply</a>
-                                                        <?php
+                                                           
+                                                            <?php
+                                                            $userid = $this->session->userdata('aileenuser');
+                                                            $contition_array = array(
+                                                                'user_id' => $userid,
+                                                                'job_save' => '2',
+                                                                'post_id ' => $post['post_id'],
+                                                                'job_delete' => '1'
+                                                            );
+                                                            $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                                                            if ($jobsave) {
+                                                                ?>
+                                                                <a class="btn4 saved save_saved_btn">Saved</a>
+                                                            <?php } else { ?>
+                                                                <a title="Save" id="<?php echo $post['post_id']; ?>" onClick="savepopup(<?php echo $post['post_id'] ?>)" href="javascript:void(0);" class="savedpost<?php echo $post['post_id']; ?> btn4 save_saved_btn">Save</a>
+                                                            <?php } ?>
+                                                             <a href="javascript:void(0);"  class= "applypost<?php echo $post['post_id']; ?>  btn4" onclick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id'] ?>)">Apply</a>
+                                                            <?php
+                                                        }
                                                     }
                                                 }
                                                 ?>
-
-                                               
                                             </p>
                                         </div>
                                     </div>
@@ -473,42 +488,39 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 </li>
                                                 <li>
                                                     <b>Key skill</b>
-                                                    <span>  <?php
-                                        $comma = ", ";
-                                        $k = 0;
-                                        $aud = $post['post_skill'];
-                                        $aud_res = explode(',', $aud);
-
-                                        if (!$post['post_skill']) {
-
-                                            echo $post['other_skill'];
-                                        } else if (!$post['other_skill']) {
-
-
-                                            foreach ($aud_res as $skill) {
-
-                                                $cache_time = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
-
-                                                if ($cache_time != " ") {
-                                                    if ($k != 0) {
-                                                        echo $comma;
-                                                    }echo $cache_time;
-                                                    $k++;
-                                                }
-                                            }
-                                        } else if ($post['post_skill'] && $post['other_skill']) {
-                                            foreach ($aud_res as $skill) {
-                                                if ($k != 0) {
-                                                    echo $comma;
-                                                }
-                                                $cache_time3 = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
-
-
-                                                echo $cache_time3;
-                                                $k++;
-                                            } echo "," . $post['other_skill'];
-                                        }
-                                                ?>  
+                                                    <span>
+                                                    <?php
+                                                    $comma = ", ";
+                                                    $k = 0;
+                                                    $aud = $post['post_skill'];
+                                                    $aud_res = explode(',', $aud);
+                                                    $skill_txt = "";
+                                                    if (!$post['post_skill']) {
+                                                        $skill_txt .=$post['other_skill'];
+                                                    } else if (!$post['other_skill']) {
+                                                        foreach ($aud_res as $skill) {
+                                                        $cache_time = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
+                                                            if ($cache_time != " ") {
+                                                                if ($k != 0) {
+                                                                    $skill_txt .= $comma;
+                                                                }
+                                                                $skill_txt .=$cache_time;
+                                                                $k++;
+                                                            }
+                                                        }
+                                                    } else if ($post['post_skill'] && $post['other_skill']) {
+                                                        foreach ($aud_res as $skill) {
+                                                            if ($k != 0) {
+                                                                $skill_txt .=$comma;
+                                                            }
+                                                            $cache_time3 = $this->db->get_where('skill', array('skill_id' => $skill))->row()->skill;
+                                                            $skill_txt .=$cache_time3;
+                                                            $k++;
+                                                        } 
+                                                        $skill_txt .="," . $post['other_skill'];
+                                                    }
+                                                    echo $skill_txt;
+                                                    ?>  
                                                     </span>
                                                 </li>
                                                 <li><b>No of openings</b>
@@ -518,80 +530,78 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 <li><b>Industry</b>
                                                     <span> 
                                                         <?php
-                                                        $cache_time4 = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
-                                                        echo $cache_time4;
+                                                        $industry_txt = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
+                                                        echo $industry_txt;
                                                         ?>
                                                     </span>
                                                 </li>
                                                 <li><b>Required education</b>
-                                                    <?php if ($post['degree_name'] != '' || $post['other_education'] != '') { ?>
-                                                        <span>
+                                                    <?php if ($post['degree_name'] != '' || $post['other_education'] != '') { ?>                  
                                                             <?php
                                                             $comma = ", ";
                                                             $k = 0;
                                                             $edu = $post['degree_name'];
                                                             $edu_nm = explode(',', $edu);
-
+                                                            $edu_txt = "";
                                                             if (!$post['degree_name']) {
-
-                                                                echo $post['other_education'];
+                                                                $edu_txt = $post['other_education'];
                                                             } else if (!$post['other_education']) {
-
-
                                                                 foreach ($edu_nm as $edun) {
                                                                     if ($k != 0) {
-                                                                        echo $comma;
+                                                                        $edu_txt .= $comma;
                                                                     }
                                                                     $cache_time = $this->db->get_where('degree', array('degree_id' => $edun))->row()->degree_name;
 
-
-                                                                    echo $cache_time;
+                                                                    $edu_txt .= $cache_time;
                                                                     $k++;
                                                                 }
                                                             } else if ($post['degree_name'] && $post['other_education']) {
                                                                 foreach ($edu_nm as $edun) {
                                                                     if ($k != 0) {
-                                                                        echo $comma;
+                                                                        $edu_txt .=$comma;
                                                                     }
                                                                     $cache_time = $this->db->get_where('degree', array('degree_id' => $edun))->row()->degree_name;
-
-
-                                                                    echo $cache_time;
+                                                                    $edu_txt .=$cache_time;
                                                                     $k++;
-                                                                } echo "," . $post['other_education'];
+                                                                } 
+                                                                $edu_txt .= "," . $post['other_education'];
                                                             }
-                                                            ?>     
-
-                                                        </span>
-                                                    <?php } else { ?>
-                                                        <span>
-                                                            <?php echo JOBDATANA; ?>
-                                                        </span>
-                                                    <?php } ?>
+                                                        } else { 
+                                                            $edu_txt = JOBDATANA;
+                                                        }
+                                                    ?>
+                                                    <span>
+                                                        <?php echo $edu_txt; ?>
+                                                    </span>
                                                 </li>
-                                                <li><b>Sallary</b>
+                                                <li><b>Salary</b>
                                                     <span>
                                                         <?php
                                                         $currency = $this->db->get_where('currency', array('currency_id' => $post['post_currency']))->row()->currency_name;
-
+                                                        $min_sal_txt = "";
+                                                        $max_sal_txt = "";
+                                                        $salary_type_txt = "";
                                                         if ($post['min_sal'] || $post['max_sal']) {
-                                                            echo $post['min_sal'] . " - " . $post['max_sal'] . ' ' . $currency . ' ' . $post['salary_type'];
+                                                            $min_sal_txt = $post['min_sal'];
+                                                            $max_sal_txt = $post['max_sal'];
+                                                            $salary_type_txt = $post['salary_type'];
                                                         } else {
                                                             echo JOBDATANA;
                                                         }
+                                                        echo $min_sal_txt . " - " . $max_sal_txt . ' ' . $currency . ' ' . $salary_type_txt;
                                                         ?></span>
                                                 </li>
                                                 <li><b>Employment Type</b>
                                                     <span>
-                                                        <?php if ($post['emp_type'] != '') { ?>
-
-                                                            <?php echo $this->common->make_links($post['emp_type']) . '  Job'; ?>
-
-                                                            <?php
-                                                        } else {
-                                                            echo JOBDATANA;
+                                                        <?php
+                                                        $emp_type_txt = "";
+                                                        if ($post['emp_type'] != '') { 
+                                                            $emp_type_txt = $this->common->make_links($post['emp_type']) . '  Job'; 
                                                         }
-                                                        ?> 
+                                                        else {
+                                                            $emp_type_txt = JOBDATANA;
+                                                        }
+                                                        echo $emp_type_txt; ?>
                                                     </span>
                                                 </li>
                                                 <li><b>Interview Process</b>
@@ -621,54 +631,65 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                             </ul>
                                         </div>
                                         <div class="all-job-bottom">
-                                            <span class="job-post-date"><b>Posted on:  </b><?php echo date('d-M-Y', strtotime($post['created_date'])); ?></span>
+                                            <span class="job-post-date"><b>Posted on:</b>
+                                                <?php echo date('d-M-Y', strtotime($post['created_date'])); ?>
+                                            </span>
                                             <p class="pull-right">
-                                                <?php if ($this->session->userdata('aileenuser') == $recliveid) { ?>
-                                                    <a href="javascript:void(0);" class="btn4" onclick="removepopup(<?php echo $post['post_id'] ?>)">Remove</a>
-                                                    <a href="<?php echo base_url() . 'recruiter/edit-post/' . $post['post_id'] ?>" class="btn4">Edit</a>
-                                                    <?php
-                                                    $join_str[0]['table'] = 'job_reg';
-                                                    $join_str[0]['join_table_id'] = 'job_reg.user_id';
-                                                    $join_str[0]['from_table_id'] = 'job_apply.user_id';
-                                                    $join_str[0]['join_type'] = '';
-
-                                                    $condition_array = array('post_id' => $post['post_id'], 'job_apply.job_delete' => '0', 'job_reg.status' => '1', 'job_reg.is_delete' => '0', 'job_reg.job_step' => '10');
-                                                    $data = "job_apply.*,job_reg.job_id";
-                                                    $apply_candida = $this->common->select_data_by_condition('job_apply', $condition_array, $data, $short_by = '', $order_by = '', $limit, $offset, $join_str, $groupby = '');
-                                                    $countt = count($apply_candida);
-                                                    ?>
-                                                    <a href="<?php echo base_url() . 'recruiter/applied-candidates/' . $post['post_id'] ?>" class="btn4">Applied  Candidate : <?php echo $countt ?></a>
-                                                    <?php
-                                                } else {
-                                                    $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
-                                                    $contition_array = array(
-                                                        'post_id' => $post['post_id'],
-                                                        'job_delete' => '0',
-                                                        'user_id' => $userid
-                                                    );
-                                                    $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-                                                    if ($jobsave) {
-                                                        ?>
-                                                        <a href="javascript:void(0);" class="btn4 applied">Applied</a>
-                                                    <?php } else { ?>
-                                                        
+                                                <?php
+                                                if($remail_days < 0)
+                                                { ?>
+                                                    <a href="javascript:void(0);" class="btn4 job-expired">Expired</a>
+                                                <?php
+                                                }
+                                                else
+                                                {
+                                                    if ($this->session->userdata('aileenuser') == $recliveid) { ?>
+                                                        <a href="javascript:void(0);" class="btn4" onclick="removepopup(<?php echo $post['post_id'] ?>)">Remove</a>
+                                                        <a href="<?php echo base_url() . 'recruiter/edit-post/' . $post['post_id'] ?>" class="btn4">Edit</a>
                                                         <?php
-                                                        $userid = $this->session->userdata('aileenuser');
+                                                        $join_str[0]['table'] = 'job_reg';
+                                                        $join_str[0]['join_table_id'] = 'job_reg.user_id';
+                                                        $join_str[0]['from_table_id'] = 'job_apply.user_id';
+                                                        $join_str[0]['join_type'] = '';
+
+                                                        $condition_array = array('post_id' => $post['post_id'], 'job_apply.job_delete' => '0', 'job_reg.status' => '1', 'job_reg.is_delete' => '0', 'job_reg.job_step' => '10');
+                                                        $data = "job_apply.*,job_reg.job_id";
+                                                        $apply_candida = $this->common->select_data_by_condition('job_apply', $condition_array, $data, $short_by = '', $order_by = '', $limit, $offset, $join_str, $groupby = '');
+                                                        $countt = count($apply_candida);
+                                                        ?>
+                                                        <a href="<?php echo base_url() . 'recruiter/applied-candidates/' . $post['post_id'] ?>" class="btn4">Applied  Candidate : <?php echo $countt ?></a>
+                                                        <?php
+                                                    } else {
+                                                        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
                                                         $contition_array = array(
-                                                            'user_id' => $userid,
-                                                            'job_save' => '2',
-                                                            'post_id ' => $post['post_id'],
-                                                            'job_delete' => '1'
+                                                            'post_id' => $post['post_id'],
+                                                            'job_delete' => '0',
+                                                            'user_id' => $userid
                                                         );
-                                                        $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                                                        $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                                                         if ($jobsave) {
                                                             ?>
-                                                            <a class="btn4 saved save_saved_btn">Saved</a>
+                                                            <a href="javascript:void(0);" class="btn4 applied">Applied</a>
                                                         <?php } else { ?>
-                                                            <a title="Save" id="<?php echo $post['post_id']; ?>" onClick="savepopup(<?php echo $post['post_id'] ?>)" href="javascript:void(0);" class="savedpost<?php echo $post['post_id']; ?> btn4 save_saved_btn">Save</a>
-                                                        <?php } ?>
-                                                        <a href="javascript:void(0);"  class= "applypost<?php echo $post['post_id']; ?>  btn4" onclick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id'] ?>)">Apply</a>
-                                                        <?php
+                                                            
+                                                            <?php
+                                                            $userid = $this->session->userdata('aileenuser');
+                                                            $contition_array = array(
+                                                                'user_id' => $userid,
+                                                                'job_save' => '2',
+                                                                'post_id ' => $post['post_id'],
+                                                                'job_delete' => '1'
+                                                            );
+                                                            $jobsave = $this->data['jobsave'] = $this->common->select_data_by_condition('job_apply', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                                                            if ($jobsave) {
+                                                                ?>
+                                                                <a class="btn4 saved save_saved_btn">Saved</a>
+                                                            <?php } else { ?>
+                                                                <a title="Save" id="<?php echo $post['post_id']; ?>" onClick="savepopup(<?php echo $post['post_id'] ?>)" href="javascript:void(0);" class="savedpost<?php echo $post['post_id']; ?> btn4 save_saved_btn">Save</a>
+                                                            <?php } ?>
+                                                            <a href="javascript:void(0);"  class= "applypost<?php echo $post['post_id']; ?>  btn4" onclick="applypopup(<?php echo $post['post_id'] ?>,<?php echo $post['user_id'] ?>)">Apply</a>
+                                                            <?php
+                                                        }
                                                     }
                                                 }
                                                 ?>
@@ -1245,5 +1266,49 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
         </script>
         <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
+        <?php
+        if($remail_days < 0)
+        {
+        }
+        else{ ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "JobPosting",
+            "title": "<?php echo $job_title_txt; ?>",
+            "description": " Description: <?php echo $this->common->make_links($post['post_description']); ?>",
+            "skills": "<?php echo addslashes($skill_txt); ?>",
+            "industry": "<?php echo $industry_txt; ?>",
+            "experienceRequirements": "<?php echo $exp_txt; ?>",
+            "educationRequirements": "<?php echo $edu_txt; ?>",
+            "employmentType": "<?php echo $emp_type_txt; ?>",
+            "baseSalary": {
+                "@type": "MonetaryAmount",
+                "currency": "<?php echo substr($currency, 0,3); ?>",
+                "value": {
+                    "@type": "QuantitativeValue",
+                    "minValue": <?php echo ($min_sal_txt != "" ? $min_sal_txt : '""'); ?>,
+                    "maxValue": <?php echo ($max_sal_txt != "" ? $max_sal_txt : '""'); ?>,
+                    "unitText": "<?php echo strtoupper(substr($salary_type_txt, 4)); ?>"
+                }
+            },
+            "datePosted": "<?php echo date('Y-m-d', strtotime($post['created_date'])); ?>",
+            "validThrough": "<?php echo $post_last_date_txt; ?>",
+            "jobLocation": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "<?php echo $cityname; ?>",
+                    "addressRegion": "<?php echo $statename; ?>",
+                    "addressCountry": "<?php echo $countryname; ?>"
+                }
+            },
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": "<?php echo $comp_name_txt; ?>"  
+            }
+        }
+        </script>
+    <?php } ?>
     </body>
 </html>
