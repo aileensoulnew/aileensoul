@@ -25,7 +25,7 @@
 
     <body class="botton_footer">
 
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
         <?php
         if ($freepostdata['user_id'] && $freepostdata['free_post_step'] == '7') {
             echo $freelancer_post_header2;
