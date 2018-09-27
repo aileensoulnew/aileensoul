@@ -73,7 +73,16 @@ class Email_model extends CI_Model {
             <tr><td style="text-align:center; padding:10px 0;"><a style="color:#505050; padding:5px 15px; text-decoration:none;" href="'.$unsubscribe.'">Unsubscribe</a></td></tr>
             </table>';
         }
-        $email_html .= '</div></body></html>';        
+        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;padding:10px 0;font-size: 12px;">
+                                            Aileensoul Technologies Private Limited,<br>
+                                            Titanium City Centre, 100 Feet Road, Satellite, Ahmedabad, India.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table></div></body></html>';        
         //        </table>
         //        <table width="100%" cellpadding="0" cellspacing="0">
         //			<tr><td style="text-align:center; padding:10px 0;"><a style="color:#505050; padding:5px 15px; text-decoration:none;" href="#">Unsubscribe</a>|<a style="color:#505050; padding:5px 15px; text-decoration:none;" href="#">Help</a></td></tr>
@@ -228,10 +237,20 @@ class Email_model extends CI_Model {
                             </table>
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td style="text-align:center; padding:10px 0;"> 
-                                        <a style="color:#505050; padding:5px 15px; text-decoration:none;" href="#">Unsubscribe</a>|
-                                        <a style="color:#505050; padding:5px 15px; text-decoration:none;" href="#">Help</a></td>
+                                    <td style="text-align:center; padding:10px 0;">
+                                        <a style="color:#505050; padding:5px 15px; text-decoration:none;" href="'.base_url('faq').'">Help</a>
+                                    </td>
                                 </tr>
+                            </table>
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;padding:10px 0;font-size: 12px;">
+                                            Aileensoul Technologies Private Limited,<br>
+                                            Titanium City Centre, 100 Feet Road, Satellite, Ahmedabad, India.
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </body>
