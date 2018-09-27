@@ -1165,7 +1165,7 @@
             "employmentType": "OTHER",
             "baseSalary": {
                 "@type": "MonetaryAmount",
-                "currency": "<?php echo $currency_name_txt; ?>",
+                "currency": "<?php echo substr($currency_name_txt,0,3); ?>",
                 "value": {
                     "@type": "QuantitativeValue",
                     "value": <?php echo ($post_rate_txt != "" ? $post_rate_txt : '""'); ?>,

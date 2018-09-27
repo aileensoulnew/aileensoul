@@ -1533,6 +1533,10 @@ class Sitemap extends CI_Controller {
         fwrite($myfile, $txt);
         fclose($myfile);
 
+    }
+    public function main_other_page_sitemap()
+    {
+
         $myfile1 = fopen("otherpages.xml", "w");
         $freq1 = "weekly";
         $lastmod1 = date('Y-m-d');
@@ -1770,6 +1774,7 @@ class Sitemap extends CI_Controller {
         set_time_limit(0);
         ini_set("memory_limit","512M");
         $this->main_sitemap();
+        $this->main_other_page_sitemap();
         $this->generate_sitemap_member();
         $this->job_sitemap();
         $this->business_sitemap();
