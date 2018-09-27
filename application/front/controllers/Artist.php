@@ -184,6 +184,7 @@ class Artist extends MY_Controller {
             {
                 unset($data['slug']);
                 $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+                $updatdata1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
             }
             else
             {                
@@ -244,7 +245,7 @@ class Artist extends MY_Controller {
                 $data['city_name'] = trim($city_name);
             }
 
-            $insert_id1 = $this->common->insert_data_getid($data, 'ailee_art_reg_search_tmp');
+            $insert_id1 = $this->common->insert_data_getid($data, 'art_reg_search_tmp');
         }
 
         redirect('artist-profile', refresh);
@@ -315,7 +316,7 @@ class Artist extends MY_Controller {
 
                 // echo "<pre>"; print_r($data); die();
                 $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
-                $updatdata1 = $this->common->update_data($data, 'ailee_art_reg_search_tmp', 'user_id', $userid);
+                $updatdata1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
 
                 if ($updatdata) {
                     redirect('artist/artistic-address', refresh);
@@ -337,7 +338,7 @@ class Artist extends MY_Controller {
                 );
 
                 $insert_id = $this->common->insert_data_getid($data, 'art_reg');
-                $insert_id1 = $this->common->insert_data_getid($data, 'ailee_art_reg_search_tmp');
+                $insert_id1 = $this->common->insert_data_getid($data, 'art_reg_search_tmp');
                 if ($insert_id) {
                     $this->session->set_flashdata('success', 'Basic Information updated successfully');
                     redirect('artist/artistic-address', refresh);
@@ -502,7 +503,7 @@ class Artist extends MY_Controller {
 
                 $data['city_name'] = trim($city_name);
 
-                $updatdata1 = $this->common->update_data($data, 'ailee_art_reg_search_tmp', 'user_id', $userid);
+                $updatdata1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
                 redirect('artist/artistic-information', refresh);
             } else {
                 redirect('artist/artistic-address', refresh);
@@ -668,7 +669,7 @@ class Artist extends MY_Controller {
                 }
             }
             $data['art_skill_txt'] = trim($skill_name,",");
-            $updatdata = $this->common->update_data($data, 'ailee_art_reg_search_tmp', 'user_id', $userid);
+            $updatdata = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
 
             if ($_SERVER['HTTP_HOST'] != "localhost") {
                 if (isset($main_file)) {
@@ -3949,6 +3950,7 @@ class Artist extends MY_Controller {
             'status' => 0
         );
         $update = $this->common->update_data($data, 'art_reg', 'user_id', $id);
+        $update = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $id);
     }
 
     // deactivate user end
@@ -3971,6 +3973,7 @@ class Artist extends MY_Controller {
             'modified_date' => date('Y-m-d', time())
         );
         $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+        $updatdata1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
         if ($updatdata) {
             if ($this->input->post('hitext') == 1) {
                 redirect('artist-profile', refresh);
@@ -6542,6 +6545,7 @@ class Artist extends MY_Controller {
         );
 
         $update = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+        $update1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
 
         if ($update) {
             if ($_SERVER['HTTP_HOST'] != "localhost") {
@@ -6709,6 +6713,7 @@ class Artist extends MY_Controller {
             'modified_date' => date('y-m-d h:i:s')
         );
         $updatdata = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+        $updatdata1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
         if ($updatdata) {
 
             redirect('artist-profile', refresh);
@@ -9702,6 +9707,7 @@ class Artist extends MY_Controller {
         );
 
         $update = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+        $update1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
         echo 'ok';
     }
 
@@ -14082,6 +14088,7 @@ class Artist extends MY_Controller {
         );
 
         $update = $this->common->update_data($data, 'art_reg', 'user_id', $userid);
+        $update1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
 
         if ($update) {
 
@@ -16574,7 +16581,7 @@ class Artist extends MY_Controller {
                     $reg_data['city_name'] = trim($city_name);
                 }
 
-                $insert_id1 = $this->common->insert_data_getid($reg_data, 'ailee_art_reg_search_tmp');
+                $insert_id1 = $this->common->insert_data_getid($reg_data, 'art_reg_search_tmp');
             }
             $data = array("is_success" => 1);
         }

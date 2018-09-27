@@ -126,7 +126,7 @@ app.controller('artistSearchListController', function ($scope, $http,$window) {
         }
         $http.get(search_url+'&page='+pagenum).then(function (success) {
             result = success.data;
-            $("#load-more").show();
+            $("#load-more").hide();
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
