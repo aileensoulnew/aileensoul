@@ -1497,7 +1497,7 @@ class Sitemap extends CI_Controller {
 
     public function main_sitemap()
     {
-        $myfile = fopen("sitemap11.xml", "w");
+        $myfile = fopen("sitemap.xml", "w");
         $lastmod = date('Y-m-d');
         $txt = '<?xml version="1.0" encoding="UTF-8"?>
                 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1533,7 +1533,7 @@ class Sitemap extends CI_Controller {
         fwrite($myfile, $txt);
         fclose($myfile);
 
-        $myfile1 = fopen("otherpages11.xml", "w");
+        $myfile1 = fopen("otherpages.xml", "w");
         $freq1 = "weekly";
         $lastmod1 = date('Y-m-d');
         $txt1 = '<?xml version="1.0" encoding="UTF-8"?>
