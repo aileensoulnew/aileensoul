@@ -27,26 +27,26 @@
     <div class="">
         <div class="" id="row2">
             <?php
-                $segment3 = explode('-', $this->uri->segment(3));
+                /*$segment3 = explode('-', $this->uri->segment(3));
                 $slugdata = array_reverse($segment3);
-                $regid = $slugdata[0];
+                $regid = $slugdata[0];*/
                 
                 $regslug = $this->uri->segment(3);
                 
-                if(is_numeric($regid)) {  
+                /*if(is_numeric($regid)) {  
                 
                 $userid = $this->db->select('user_id')->get_where('art_reg', array('art_id' => $regid))->row()->user_id;
-                }else{
+                }else{*/
                 
                   if($regslug){
                 $userid = $this->db->select('user_id')->get_where('art_reg', array('slug' => $regslug))->row()->user_id;
                   }else{
                     $userid = $this->session->userdata('aileenuser');
                   }
-                }
+                //}
                 
                 $contition_array = array('user_id' => $userid, 'is_delete' => '0', 'status' => '1');
-                $image = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                $image = $this->common->select_data_by_condition('art_reg', $contition_array, $data = 'profile_background', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');                
                 
                 $image_ori = $image[0]['profile_background'];
                 
