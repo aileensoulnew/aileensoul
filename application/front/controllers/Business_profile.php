@@ -1805,6 +1805,7 @@ Your browser does not support the audio tag.
 
 
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+            $updatdata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
 
             if ($updatdata) {
 
@@ -1924,6 +1925,7 @@ Your browser does not support the audio tag.
         );
 
         $update = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+        $update1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
 
         if ($update) {
 
@@ -3770,6 +3772,7 @@ Your browser does not support the audio tag.
                         );
 
                         $update = $this->common->update_data($data, 'business_profile', 'user_id', $session_uid);
+                        $update1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $session_uid);
                         if ($update) {
                             $path = base_url('uploads/user_image/');
                             echo $bgSave . '<img src = "' . $path . $picture . '?ver=' . time() . '" id = "timelineBGload" class = "headerimage ui-corner-all" style = "top:0px"/>';
@@ -3801,6 +3804,7 @@ Your browser does not support the audio tag.
             );
 
             $update = $this->common->update_data($data, 'business_profile', 'user_id', $session_uid);
+            $update1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $session_uid);
             if ($update) {
 
                 echo $position;
@@ -3918,6 +3922,7 @@ Your browser does not support the audio tag.
         );
 
         $update = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+        $update1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
 
         if ($update) {
             if ($_SERVER['HTTP_HOST'] != "localhost") {
@@ -3962,6 +3967,7 @@ Your browser does not support the audio tag.
 
 
         $updatedata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+        $updatedata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
 
         if ($updatedata) {
             echo $userid;
@@ -5406,6 +5412,7 @@ Your browser does not support the audio tag.
         );
 
         $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
+        $updatdata1 = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
         if ($updatdata) {
             redirect('business-profile', refresh);
         } else {

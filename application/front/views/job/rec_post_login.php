@@ -489,7 +489,7 @@
                                             </ul>
                                         </div>
                                         <div class="all-job-bottom">
-                                            <span class="job-post-date"><b>Posted on: </b><?php echo date('d-M-Y', strtotime($post['created_date'])); ?></span>
+                                            <span class="job-post-date"><b>Posted on: </b><?php echo $created_date_txt = date('d-M-Y', strtotime($post['created_date'])); ?></span>
                                             <p class="pull-right">
                                                  <!-- <a href="javascript:void(0);"  onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost  btn4">Save</a> -->
                                                  <?php
@@ -1283,7 +1283,7 @@
             "@context": "http://schema.org",
             "@type": "JobPosting",
             "title": "<?php echo $job_title_txt; ?>",
-            "description": " Description: <?php echo $post_description_txt; ?>",
+            "description": " Description: <?php echo htmlentities($post_description_txt); ?>",
             "skills": "<?php echo addslashes($skill_txt); ?>",
             "industry": "<?php echo $industry_txt; ?>",
             "experienceRequirements": "<?php echo $exp_txt; ?>",
@@ -1299,7 +1299,7 @@
                     "unitText": "<?php echo strtoupper(substr($salary_type_txt, 4)); ?>"
                 }
             },
-            "datePosted": "<?php echo date('Y-m-d', strtotime($post['created_date'])); ?>",
+            "datePosted": "<?php echo date('Y-m-d', strtotime($created_date_txt)); ?>",
             "validThrough": "<?php echo $post_last_date_txt; ?>",
             "jobLocation": {
                 "@type": "Place",

@@ -486,7 +486,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 <li>
                                                     <b>Job description</b>
                                                     <span>
-                                                        <pre><?php echo $this->common->make_links($post['post_description']); ?></pre>
+                                                        <pre><?php echo $post_description_txt = $this->common->make_links($post['post_description']); ?></pre>
                                                     </span>
                                                 </li>
                                                 <li>
@@ -1279,7 +1279,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             "@context": "http://schema.org",
             "@type": "JobPosting",
             "title": "<?php echo $job_title_txt; ?>",
-            "description": " Description: <?php echo $this->common->make_links($post['post_description']); ?>",
+            "description": " Description: <?php echo htmlentities($post_description_txt); ?>",
             "skills": "<?php echo addslashes($skill_txt); ?>",
             "industry": "<?php echo $industry_txt; ?>",
             "experienceRequirements": "<?php echo $exp_txt; ?>",

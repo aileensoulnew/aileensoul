@@ -341,7 +341,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <div class="right-main-inner">
                                     <div class="">
                                         <div class="title">
-                                            <h1 class="ttc tlh2">Welcome To Aileensoul</h1>
+                                            <h1 class="ttc tlh2">Welcome to Aileensoul</h1>
                                         </div>
 
                                         <form role="form" name="login_form_main" id="login_form_main" method="post">
