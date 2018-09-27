@@ -55,8 +55,8 @@ class Blog extends CI_Controller {
 
             // echo count($this->data['blog_all']);exit;
             //FOR GETTING BLOG
-            $condition_array = array('status' => 'publish', 'blog_slug' => $slug);
-            $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());
+            /*$condition_array = array('status' => 'publish', 'blog_slug' => $slug);
+            $this->data['blog_detail'] = $this->common->select_data_by_condition('blog', $condition_array, $data = '*', $short_by = 'id', $order_by = 'desc', $limit, $offset, $join_str = array());*/
             // echo $this->db->last_query();
             // exit;
 
@@ -841,7 +841,7 @@ class Blog extends CI_Controller {
             $query_sub_exisit = $this->db->query($sql_sub_exisit);
             $result_sub_exisit = $query_sub_exisit->result_array();
             if(count($result_sub_exisit) > 0){
-                $result_data = array("error"=>true,"message"=>"already subscribe");
+                $result_data = array("error"=>true,"message"=>"Already subscribed");
             }else{
                 $subscribe_data = array("email" => $email, "status" => '1');
                 $this->db->insert('subscription', $subscribe_data);

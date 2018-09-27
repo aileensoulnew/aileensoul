@@ -114,7 +114,7 @@ class Blog_Model extends CI_Model {
     }
 
     public function get_blog_cat_list(){
-        $sql = "SELECT id,name FROM ailee_blog_category where status = 'publish'";
+        $sql = "SELECT id,name FROM ailee_blog_category where status = 'publish' ORDER BY name";
         $query = $this->db->query($sql);
         $result = $query->result_array();
         return $result;

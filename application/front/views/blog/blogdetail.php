@@ -16,30 +16,30 @@ header("Pragma: no-cache"); // HTTP/1.0
 ?>
 <html lang="en"><!--  ng-app="blogDetailApp" ng-controller="blogDetailController"> -->
     <head>
-        <!-- <title><?php //echo $blog_detail[0]['title']; ?> - Aileensoul</title> -->
-        <title><?php echo $title; ?></title>
-        <meta name="description" content="<?php echo $metadesc; ?>" />
+        <!-- <title><?php //echo $blog_data['title']; ?> - Aileensoul</title> -->
+        <title><?php echo trim($blog_data['title']); ?></title>
+        <meta name="description" content="<?php echo trim($blog_data['meta_description']); ?>" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <meta charset="utf-8">
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />       
         <meta name="google-site-verification" content="BKzvAcFYwru8LXadU4sFBBoqd0Z_zEVPOtF0dSxVyQ4" />
         <!-- Open Graph data -->
-        <meta property="og:title" content="<?php echo $blog_detail[0]['title']; ?>" />
+        <meta property="og:title" content="<?php echo $blog_data['title']; ?>" />
         <meta  property="og:type" content="Blog" />
-        <meta  property="og:image" content="<?php echo base_url($this->config->item('blog_main_upload_path') . $blog_detail[0]['image']) ?>" />
-        <meta  property="og:description" content="<?php echo $blog_detail[0]['meta_description']; ?>" />
-        <meta  property="og:url" content="<?php echo base_url('blog/' . $blog_detail[0]['blog_slug']) ?>" />
+        <meta  property="og:image" content="<?php echo base_url($this->config->item('blog_main_upload_path') . $blog_data['image']) ?>" />
+        <meta  property="og:description" content="<?php echo $blog_data['meta_description']; ?>" />
+        <meta  property="og:url" content="<?php echo base_url('blog/' . $blog_data['blog_slug']) ?>" />
         <meta property="fb:app_id" content="825714887566997" />
 
         <!-- for twitter -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="<?php base_url('blog/' . $blog_detail[0]['blog_slug']) ?>">
-        <meta name="twitter:title" content="<?php $blog_detail[0]['title']; ?>">
-        <meta name="twitter:description" content="<?php $blog_detail[0]['meta_description']; ?>">
+        <meta name="twitter:site" content="<?php base_url('blog/' . $blog_data['blog_slug']) ?>">
+        <meta name="twitter:title" content="<?php $blog_data['title']; ?>">
+        <meta name="twitter:description" content="<?php $blog_data['meta_description']; ?>">
         <meta name="twitter:creator" content="By Aileensoul">
         <meta name="twitter:image" content="http://placekitten.com/250/250">
-        <meta name="twitter:domain" content="<?php base_url('blog/' . $blog_detail[0]['blog_slug']) ?>">
+        <meta name="twitter:domain" content="<?php base_url('blog/' . $blog_data['blog_slug']) ?>">
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
@@ -282,7 +282,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						  		<?php
 	                                        if (count($blog_all) != 0) {
 	                                            foreach ($blog_all as $key => $blog) {
-	                                                if ($blog['id'] == $blog_detail[0]['id'] && ($key + 1) != 1) {
+	                                                if ($blog['id'] == $blog_data['id'] && ($key + 1) != 1) {
 	                                                    ?>
 	                                                    <a href="<?php echo base_url('blog/' . $blog_all[$key - 1]['blog_slug']); ?>" target="_self">
 	                                                    	Previous
@@ -297,7 +297,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    						  		<?php
 	    						  			if (count($blog_all) != 0) {
 		    						  		    foreach ($blog_all as $key => $blog) {
-		    						  		        if ($blog['id'] == $blog_detail[0]['id'] && ($key + 1) != count($blog_all)) {
+		    						  		        if ($blog['id'] == $blog_data['id'] && ($key + 1) != count($blog_all)) {
 		    						  		            ?>
 		    						  		            <a href="<?php echo base_url('blog/' . $blog_all[$key + 1]['blog_slug']); ?>" target="_self">Next</a>
 		    						  		            <?php
@@ -325,9 +325,9 @@ header("Pragma: no-cache"); // HTTP/1.0
 												</a>
 											</div>
 											<div class="also-like-bottom">
-                                                <?php foreach($related_post['blog_category_name'] as $k=>$v):
-                                                $category_url = $this->common->clean($v); ?>
-                                                <a href="<?php echo base_url().'blog/category/'.$category_url; ?>">
+                                                <?php foreach($related_post['blog_category_name'] as $key=>$val):
+                                                $category_url = $this->common->clean($val); ?>
+                                                <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
                                                     <span class="cat text-capitalize">
                                                     <?php
                                                     if($key == 0)
@@ -428,7 +428,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                 <h6 class="small" style="color: red;display: none;" id="error_subscribe"></h6>
                             </div>
                             <div id="subscribe-done" class="subscribe-box" style="display: none;">
-                                <h4>Your email id subscribe successfully.</h4>
+                                <h4>Your email id subscribed successfully.</h4>
                             </div>
                         </form>
 						<div class="pt20 fw">
