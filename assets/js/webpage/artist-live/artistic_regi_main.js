@@ -658,6 +658,7 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
                 email: true,
             },
             phoneno: {
+                required: true,
                 number: true,
                 minlength: 8,
                 maxlength: 15
@@ -687,6 +688,9 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
                 email: "Please enter valid email id",
                 remote: "Email already exists"
             },
+            phoneno: {
+                required: "Phone Number is required.",
+            },
             country: {
                 required: "Country is required.",
             },
@@ -697,7 +701,7 @@ app.controller('artistCreateProfileController', function ($scope, $http, $locati
                 required: "City is required.",
             },
             "skills[]": {
-                required: "Skill is required.",
+                required: "Category is required.",
             },
         },
     };
@@ -751,24 +755,3 @@ $(window).on("load", function () {
         theme: "minimal"
     });
 });
-
-// NEW HTML SCRIPT
-
-AOS.init({
-    easing: 'ease-in-out-sine'
-});
-
-setInterval(addItem, 100);
-
-var itemsCounter = 1;
-var container = document.getElementById('aos-demo');
-
-function addItem () {
-    if (itemsCounter > 42) return;
-    var item = document.createElement('div');
-    item.classList.add('aos-item');
-    item.setAttribute('data-aos', 'fade-up');
-    item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
-    // container.appendChild(item);
-    itemsCounter++;
-}

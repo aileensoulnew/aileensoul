@@ -253,7 +253,7 @@ if($session_user_id != "")
 								<?php echo form_error('email'); ?>
 							</fieldset>
 							<fieldset>
-								<label >Phone number:</label>
+								<label >Phone number <font  color="red">*</font> :</label>
 								<input type="text" name="phoneno" id="phoneno" tabindex="4" placeholder="Enter phone number" value="<?php echo $job[0]['user_email'];?>" maxlength="255">
 								<?php echo form_error('phoneno'); ?>
 							</fieldset>

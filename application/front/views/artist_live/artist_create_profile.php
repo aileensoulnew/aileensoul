@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="phoneno" id="phoneno" tabindex="2" placeholder="Phone Number" maxlength="35" ng-model="user.phoneno">
+                                    <input class="form-control" type="text" name="phoneno" id="phoneno" tabindex="4" placeholder="Phone Number*" maxlength="35" ng-model="user.phoneno">
                                     <div id="pntooltip" class="tooltip-custom" style="display: none;">
                                         Enter a valid phone number so that other people can connect with you.
                                     </div>
@@ -48,7 +48,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="skills[]" id="skills" class="multi-select-button" tabindex="10" multiple ng-model="user.skills">
+                                        <select name="skills[]" id="skills" class="multi-select-button" tabindex="5" multiple ng-model="user.skills">
                                             <?php                             
                                             foreach($art_category as $cnt){ 
                                                 if($art_category1)
@@ -72,7 +72,7 @@
                                     </span>
 
                                     <div id="other_category" class="other_category" style="display: none;">                                        
-                                        <input name="othercategory"  type="text" id="othercategory" tabindex="2" placeholder="Other skill" value="" onkeyup= "return removevalidation();" ng-model="user.othercategory"/>
+                                        <input name="othercategory"  type="text" id="othercategory" tabindex="6" placeholder="Other skill" value="" onkeyup= "return removevalidation();" ng-model="user.othercategory"/>
                                     </div>
 
                                 </div>
@@ -82,7 +82,7 @@
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="country" id="country" tabindex="10" ng-model="user.country" ng-change="onCountryChange()">
+                                        <select name="country" id="country" tabindex="7" ng-model="user.country" ng-change="onCountryChange()">
                                             <option disabled="" value="" selected="selected">Select Country*</option>
                                             <option data-ng-repeat='countryItem in countryList' value='{{countryItem.country_id}}'>{{countryItem.country_name}}</option>
                                         </select>
@@ -92,7 +92,7 @@
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="state" id="state" tabindex="10" ng-model="user.state" ng-change="onStateChange()">
+                                        <select name="state" id="state" tabindex="8" ng-model="user.state" ng-change="onStateChange()">
                                             <option disabled="" value="" selected="selected">Select State*</option>
                                             <option data-ng-repeat='stateItem in stateList' value='{{stateItem.state_id}}' ng-selected="user.state_id == stateItem.state_id">{{stateItem.state_name}}</option>
                                         </select>
@@ -102,7 +102,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="city" id="city" tabindex="10" ng-model="user.city">
+                                        <select name="city" id="city" tabindex="9" ng-model="user.city">
                                             <option disabled="" value="" selected="selected">Select City</option>
                                             <option data-ng-repeat='cityItem in cityList' value='{{cityItem.city_id}}'>{{cityItem.city_name}}</option>
                                         </select>
@@ -115,7 +115,7 @@
                                    <div class="job_reg text-center">
                                 
                                       <!-- <input title="Register" type="submit" id="submit" name="" value="Register" tabindex="12"> -->
-                                      <button id="submit" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                      <button id="submit" name="" class="btn1" tabindex="10">Register<span class="ajax_load pl10" id="profilereg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                    </div>
                                 </div>
                             </div>

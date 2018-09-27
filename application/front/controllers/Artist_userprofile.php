@@ -659,13 +659,13 @@ class Artist_userprofile extends CI_Controller {
 
                         if ($info) {
 
-                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)).'" href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)).'" href = "javascript:void(0)"  onclick="login_profile();">';
                             $return_html .= '<img src = "' . ART_PROFILE_THUMB_UPLOAD_URL . $userimageposted . '" name = "image_src" id = "image_src" />';       
                             $return_html .= '</a>';
 
                         } else {
 
-                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)).'" href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstnameposted)) . ' ' . ucfirst(strtolower($lastnameposted)).'" href = "javascript:void(0)"  onclick="login_profile();">';
                             $return_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "">';                                    
                              $return_html .= '</a>';
                         }
@@ -674,7 +674,7 @@ class Artist_userprofile extends CI_Controller {
                     
                     if (IMAGEPATHFROM == 'upload') {
 
-                        $return_html .= '<a  class="post_dot" href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                        $return_html .= '<a  class="post_dot" href = "javascript:void(0)"  onclick="login_profile();">';
 
                         if($userimage){
                         if (!file_exists($this->config->item('art_profile_thumb_upload_path') . $userimage)) {
@@ -697,14 +697,14 @@ class Artist_userprofile extends CI_Controller {
 
                         if ($info) {
 
-                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstname)). ' ' . ucfirst(strtolower($lastname)).'"  href ="javascript:void(0)" target="_blank" onclick="login_profile();">';
+                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstname)). ' ' . ucfirst(strtolower($lastname)).'"  href ="javascript:void(0)"  onclick="login_profile();">';
 
                             $return_html .= '<img src = "' . ART_PROFILE_THUMB_UPLOAD_URL . $userimage . '" name = "image_src" id = "image_src" />';
                               
                             $return_html .= '</a>';
                         } else {
 
-                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstname)). ' ' . ucfirst(strtolower($lastname)).'"  href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                             $return_html .= '<a  class="post_dot" title="'.ucfirst(strtolower($firstname)). ' ' . ucfirst(strtolower($lastname)).'"  href = "javascript:void(0)"  onclick="login_profile();">';
                             $return_html .= '<img src = "' . base_url(NOARTIMAGE) . '" alt = "">';   
 
                             $return_html .= '</a>';
@@ -732,14 +732,14 @@ class Artist_userprofile extends CI_Controller {
                     $return_html .= '<li>
 <div class = "else_post_d">
 <div class = "post-design-product">
-<a style = "max-width: 40%;" class = "post_dot" title = "' . ucfirst(strtolower($firstnameposted)) .'&nbsp;'. ucfirst(strtolower($lastnameposted)) . '" href = "javascript:void(0)" target="_blank" onclick="login_profile();">' . ucfirst(strtolower($firstnameposted)). '&nbsp;' .ucfirst(strtolower($lastnameposted)).  '</a>
+<a style = "max-width: 40%;" class = "post_dot" title = "' . ucfirst(strtolower($firstnameposted)) .'&nbsp;'. ucfirst(strtolower($lastnameposted)) . '" href = "javascript:void(0)"  onclick="login_profile();">' . ucfirst(strtolower($firstnameposted)). '&nbsp;' .ucfirst(strtolower($lastnameposted)).  '</a>
 <p class = "posted_with" > Posted With</p>
-<a class = "other_name post_dot" href = "javascript:void(0)" target="_blank" onclick="login_profile();">' .ucfirst(strtolower($firstname)).'&nbsp;'.ucfirst(strtolower($lastname)).'</a>
+<a class = "other_name post_dot" href = "javascript:void(0)"  onclick="login_profile();">' .ucfirst(strtolower($firstname)).'&nbsp;'.ucfirst(strtolower($lastname)).'</a>
 <span role = "presentation" aria-hidden = "true"> · </span> <span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
 </div></div>
 </li>';
                 } else {
-                    $return_html .= '<li><div class = "post-design-product"><a class = "post_dot" title = "' . ucfirst(strtolower($firstname)) .'&nbsp;'.ucfirst(strtolower($lastname)).'" href = "javascript:void(0)" target="_blank" onclick="login_profile();">'.ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)).'</a>
+                    $return_html .= '<li><div class = "post-design-product"><a class = "post_dot" title = "' . ucfirst(strtolower($firstname)) .'&nbsp;'.ucfirst(strtolower($lastname)).'" href = "javascript:void(0)"  onclick="login_profile();">'.ucfirst(strtolower($firstname)) . ' ' . ucfirst(strtolower($lastname)).'</a>
 <span role = "presentation" aria-hidden = "true"> · </span>
 <div class = "datespan">
 <span class = "ctre_date">' . $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($row['created_date']))) . '</span>
@@ -766,7 +766,7 @@ class Artist_userprofile extends CI_Controller {
  if($userid == $row['posted_user_id'] || $row['user_id'] == $userid){
 
  $return_html .= '<div class = "dropdown2">
-<a  href = "javascript:void(0)" target="_blank" onclick="login_profile();" class = " dropbtn2 fa fa-ellipsis-v"></a>
+<a  href = "javascript:void(0)"  onclick="login_profile();" class = " dropbtn2 fa fa-ellipsis-v"></a>
 <div id = "myDropdown' . $row['art_post_id'] . '" class = "dropdown-content2 ">';
                 if ($row['posted_user_id'] != 0) {
                     if ($this->session->userdata('aileenuser') == $row['posted_user_id']) {
@@ -774,12 +774,12 @@ class Artist_userprofile extends CI_Controller {
 <i class = "fa fa-trash-o" aria-hidden = "true">
 </i> Delete Post
 </a>
-<a id = "' . $row['art_post_id'] . '" href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+<a id = "' . $row['art_post_id'] . '" href = "javascript:void(0)"  onclick="login_profile();">
 <i class = "fa fa-pencil-square-o" aria-hidden = "true">
 </i>Edit
 </a>';
                     } else {
-                        $return_html .= '<a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+                        $return_html .= '<a href = "javascript:void(0)"  onclick="login_profile();">
 <i class = "fa fa-trash-o" aria-hidden = "true">
 </i> Delete Post
 </a>';
@@ -787,8 +787,8 @@ class Artist_userprofile extends CI_Controller {
                     }
                 } else {
                     if ($this->session->userdata('aileenuser') == $row['user_id']) {
-                        $return_html .= '<a href = "javascript:void(0)" target="_blank" onclick="login_profile();"><i class = "fa fa-trash-o" aria-hidden = "true"></i> Delete Post</a>
-<a id = "' . $row['art_post_id'] . '" href = "javascript:void(0)" target="_blank" onclick="login_profile();"><i class = "fa fa-pencil-square-o" aria-hidden = "true"></i>Edit</a>';
+                        $return_html .= '<a href = "javascript:void(0)"  onclick="login_profile();"><i class = "fa fa-trash-o" aria-hidden = "true"></i> Delete Post</a>
+<a id = "' . $row['art_post_id'] . '" href = "javascript:void(0)"  onclick="login_profile();"><i class = "fa fa-pencil-square-o" aria-hidden = "true"></i>Edit</a>';
                     } else {
                         
                     }
@@ -857,7 +857,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                     $ext = pathinfo($filename, PATHINFO_EXTENSION);
                     if (in_array($ext, $allowed)) {
                         $return_html .= '<div class="one-image">
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
 
            <img src = "' . ART_POST_MAIN_UPLOAD_URL . $artmultiimage[0]['file_name'] . '">
 
@@ -865,7 +865,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         </div>';
                     } elseif (in_array($ext, $allowespdf)) {
 
-        //                 $return_html .= '<div><a href = "javascript:void(0)" target="_blank" onclick="login_profile();"> 
+        //                 $return_html .= '<div><a href = "javascript:void(0)"  onclick="login_profile();"> 
 
         //    <div class="pdf_img">
         //            <embed src="' . ART_POST_MAIN_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" width="100%" height="450px" />
@@ -873,7 +873,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
         // </div>';
 
                         $return_html .= '<div>
-<a title = "click to open" href = "' . ART_POST_MAIN_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" target="_blank"><div class = "pdf_img">
+<a title = "click to open" href = "' . ART_POST_MAIN_UPLOAD_URL . $artmultiimage[0]['file_name'] . '" ><div class = "pdf_img">
     <img src="' . base_url('assets/images/PDF.jpg') . '" alt="PDF">
 </div>
 </a>
@@ -933,24 +933,24 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 } elseif (count($artmultiimage) == 2) {
                     foreach ($artmultiimage as $multiimage) {
                         $return_html .= '<div  class="two-images" >
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
              <img class = "two-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $multiimage['file_name'] . '">
              </a>
         </div>';
                     }
                 } elseif (count($artmultiimage) == 3) {
                     $return_html .= '<div class="three-imag-top" >
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
             <img class = "three-columns" src = "' . ART_POST_RESIZE4_UPLOAD_URL . $artmultiimage[0]['file_name'] . '">
             </a>
         </div>
         <div class="three-image" >
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
            <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[1]['file_name'] . '">
             </a>
         </div>
         <div class="three-image" >
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
             <img class = "three-columns" src = "' . ART_POST_RESIZE1_UPLOAD_URL . $artmultiimage[2]['file_name'] . '">
             </a>
         </div>';
@@ -958,7 +958,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
                     foreach ($artmultiimage as $multiimage) {
                         $return_html .= '<div class="four-image">
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
             <img class = "breakpoint" src = "' . ART_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '">
              </a>
         </div>';
@@ -968,7 +968,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                     $i = 0;
                     foreach ($artmultiimage as $multiimage) {
                         $return_html .= '<div class="four-image">
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
             <img class = "breakpoint" src = "' . ART_POST_RESIZE2_UPLOAD_URL . $multiimage['file_name'] . '">
             </a>
         </div>';
@@ -977,10 +977,10 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                             break;
                     }
                     $return_html .= '<div class="four-image">
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
            <img src = "' . ART_POST_RESIZE2_UPLOAD_URL . $artmultiimage[3]['file_name'] . '">
              </a>
-            <a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+            <a href = "javascript:void(0)"  onclick="login_profile();">
                 <div class="more-image" >
                     <span> View All (+' . (count($artmultiimage) - 4) . ')
                     </span></div>
@@ -995,7 +995,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
     <div class="post-design-menu">
         <ul class="col-md-6">
             <li class="likepost' . $row['art_post_id'] . '">
-                <a class="ripple like_h_w"  href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                <a class="ripple like_h_w"  href = "javascript:void(0)"  onclick="login_profile();">';
                 $userid = $this->session->userdata('aileenuser');
                 $contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1');
                 $artlike = $this->data['artlike'] = $this->common->select_data_by_condition('art_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1015,7 +1015,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
                 $contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1', 'is_delete' => '0');
                 $commnetcount = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-                $return_html .= '<a title="Comment" class="ripple like_h_w"  href = "javascript:void(0)" target="_blank" onclick="login_profile();"><i class="fa fa-comment-o" aria-hidden="true">';
+                $return_html .= '<a title="Comment" class="ripple like_h_w"  href = "javascript:void(0)"  onclick="login_profile();"><i class="fa fa-comment-o" aria-hidden="true">';
                 $return_html .= '</i> 
                 </a>
             </li> 
@@ -1095,7 +1095,7 @@ onblur = check_lengthedit(' . $row['art_post_id'] . ')>';
 
                     $return_html .= '<div class="like_one_other">';
 
-                     $return_html .= '<a href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                     $return_html .= '<a href = "javascript:void(0)"  onclick="login_profile();">';
 
                         $return_html .= ucfirst(strtolower($art_fname)).' '.ucfirst(strtolower($art_lname));
                         $return_html .= "&nbsp;";
@@ -1130,7 +1130,7 @@ $return_html .= '<div class="art-all-comment col-md-12">
 
                         $return_html .= '<div class="all-comment-comment-box">
                 <div class="post-design-pro-comment-img">';
-                 $return_html .= '<a href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                 $return_html .= '<a href = "javascript:void(0)"  onclick="login_profile();">';
 
                         $art_userimage = $this->db->select('art_user_image')->get_where('art_reg', array('user_id' => $rowdata['user_id'], 'status' => 1))->row()->art_user_image; 
 
@@ -1167,7 +1167,7 @@ $return_html .= '<div class="art-all-comment col-md-12">
                         $return_html .= '</a>';
                         $return_html .= '</div>
                 <div class="comment-name">';
-                 $return_html .= '<a href = "javascript:void(0)" target="_blank" onclick="login_profile();">
+                 $return_html .= '<a href = "javascript:void(0)"  onclick="login_profile();">
 
                     <b>';
                         $return_html .= ucfirst(strtolower($artname)).' '.ucfirst(strtolower($artlastname));
@@ -1200,7 +1200,7 @@ $return_html .= '<div class="art-all-comment col-md-12">
                 </div>
                 <div class="art-comment-menu-design"> 
                     <div class="comment-details-menu" id="likecomment1' . $rowdata['artistic_post_comment_id'] . '">
-                        <a id="' . $rowdata['artistic_post_comment_id'] . '"  href = "javascript:void(0)" target="_blank" onclick="login_profile();">';
+                        <a id="' . $rowdata['artistic_post_comment_id'] . '"  href = "javascript:void(0)"  onclick="login_profile();">';
                         $userid = $this->session->userdata('aileenuser');
                         $contition_array = array('artistic_post_comment_id' => $rowdata['artistic_post_comment_id'], 'status' => '1');
                         $artcommentlike = $this->data['artcommentlike'] = $this->common->select_data_by_condition('artistic_post_comment', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
@@ -1223,11 +1223,11 @@ $return_html .= '<div class="art-all-comment col-md-12">
                             $return_html .= '<span role="presentation" aria-hidden="true"> · </span>
                     <div class="comment-details-menu">
                         <div id="editcommentbox' . $rowdata['artistic_post_comment_id'] . '" style="display:block;">
-                            <a id="' . $rowdata['artistic_post_comment_id'] . '" href = "javascript:void(0)" target="_blank" onclick="login_profile();" class="editbox">Edit
+                            <a id="' . $rowdata['artistic_post_comment_id'] . '" href = "javascript:void(0)"  onclick="login_profile();" class="editbox">Edit
                             </a>
                         </div>
                         <div id="editcancle' . $rowdata['artistic_post_comment_id'] . '" style="display:none;">
-                            <a id="' . $rowdata['artistic_post_comment_id'] . '"  href = "javascript:void(0)" target="_blank" onclick="login_profile();">Cancel
+                            <a id="' . $rowdata['artistic_post_comment_id'] . '"  href = "javascript:void(0)"  onclick="login_profile();">Cancel
                             </a>
                         </div>
                     </div>';
@@ -1238,7 +1238,7 @@ $return_html .= '<div class="art-all-comment col-md-12">
                             $return_html .= '<span role="presentation" aria-hidden="true"> · </span>
                     <div class="comment-details-menu">
                         <input type="hidden" name="post_delete"  id="post_delete' . $rowdata['artistic_post_comment_id'] . '" value= "' . $rowdata['art_post_id'] . '">
-                        <a id="' . $rowdata['artistic_post_comment_id'] . '"   href = "javascript:void(0)" target="_blank" onclick="login_profile();"> Delete<span class="insertcomment' . $rowdata['artistic_post_comment_id'] . '">
+                        <a id="' . $rowdata['artistic_post_comment_id'] . '"   href = "javascript:void(0)"  onclick="login_profile();"> Delete<span class="insertcomment' . $rowdata['artistic_post_comment_id'] . '">
                             </span>
                         </a>
                     </div>';

@@ -195,6 +195,7 @@ $(document).ready(function() {
                 email: true,
             },
             phoneno: {
+                required: true,
                 number: true,
                 minlength: 8,
                 maxlength: 15
@@ -223,6 +224,9 @@ $(document).ready(function() {
                 required: "Email id is required",
                 email: "Please enter valid email id",
                 remote: "Email already exists"
+            },
+            phoneno: {
+                required: "Phone number is required.",
             },
             country: {
                 required: "Country is required.",
