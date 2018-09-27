@@ -285,8 +285,9 @@
                                             <p class="loca-exp">
                                                 <span class="location">
                                                     <?php
-                                                    $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
-                                                    $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
+                                                    $cityname_txt = $cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
+                                                    $statename_txt = $statename = $this->db->get_where('states', array('state_id' => $post['state']))->row()->state_name;
+                                                    $countryname_txt = $countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
                                                     ?>
                                                     <span>
                                                       
@@ -318,19 +319,21 @@
                                                         ?>
                                                     </span>
                                                 </span>
-                                            </p>
-                                            <p class="pull-right job-top-btn">
+                                            </p>                                            
                                                 <!-- <a href="javascript:void(0);"  onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost  btn4">Save</a> -->
                                                 <?php
                                                 if($remail_days < 0)
                                                 { ?>
-                                                    <a href="javascript:void(0);" class="btn4 job-expired">Expired</a>
+                                                    <p class="pull-right job-top-btn">
+                                                        <a href="javascript:void(0);" class="job-expired"><img src="<?php echo base_url() . 'assets/n-images/close-job.png'; ?>">Closed</a>
+                                                    </p>
                                                 <?php
                                                 }
                                                 else{ ?>
-                                                <a href="javascript:void(0);"  onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost  btn4">Apply</a>
+                                                    <p class="pull-right job-bottom-btn">
+                                                        <a href="javascript:void(0);"  onClick="create_profile_apply(<?php echo $post['post_id']; ?>)" class= "applypost  btn4">Apply</a>
+                                                    </p>
                                             <?php } ?>
-                                            </p>
                                         </div>
                                     </div>
                                     <div class="detail-discription">
@@ -433,14 +436,20 @@
                                                 <li><b>Salary</b>
                                                     <span>
                                                         <?php
-                                                        $currency = $this->db->get_where('currency', array('currency_id' => $post['post_currency']))->row()->currency_name;
-
-                                                        if ($post['min_sal'] || $post['max_sal']) {
-                                                            echo $post['min_sal'] . " - " . $post['max_sal'] . ' ' . $currency . ' ' . $post['salary_type'];
-                                                        } else {
-                                                            echo PROFILENA;
-                                                        }
-                                                        ?></span>
+                                                            $currency_txt = $currency = $this->db->get_where('currency', array('currency_id' => $post['post_currency']))->row()->currency_name;
+                                                            $min_sal_txt = "";
+                                                            $max_sal_txt = "";
+                                                            $salary_type_txt = "";
+                                                            if ($post['min_sal'] || $post['max_sal']) {
+                                                                $min_sal_txt = $post['min_sal'];
+                                                                $max_sal_txt = $post['max_sal'];
+                                                                $salary_type_txt = $post['salary_type'];
+                                                            } else {
+                                                                echo PROFILENA;
+                                                            }
+                                                            echo $min_sal_txt. " - " . $max_sal_txt. ' ' . $currency . ' ' . $salary_type_txt;
+                                                            ?>
+                                                        </span>
                                                 </li>
                                                 <li><b>Employment Type</b>
                                                     <span>
@@ -486,7 +495,7 @@
                                                  <?php
                                                 if($remail_days < 0)
                                                 { ?>
-                                                    <a href="javascript:void(0);" class="btn4 job-expired">Expired</a>
+                                                    <a href="javascript:void(0);" class="job-expired"><img src="<?php echo base_url() . 'assets/n-images/close-job.png'; ?>">Closed</a>
                                                 <?php
                                                 }
                                                 else{ ?>
@@ -730,22 +739,18 @@
                                                             </span>
                                                         <?php } ?>
                                                     </li>
-                                                    <li><b>Sallary</b>
+                                                    <li><b>Salary</b>
                                                         <span>
                                                             <?php
                                                             $currency = $this->db->get_where('currency', array('currency_id' => $post['post_currency']))->row()->currency_name;
-                                                            $min_sal_txt = "";
-                                                            $max_sal_txt = "";
-                                                            $salary_type_txt = "";
+
                                                             if ($post['min_sal'] || $post['max_sal']) {
-                                                                $min_sal_txt = $post['min_sal'];
-                                                                $max_sal_txt = $post['max_sal'];
-                                                                $salary_type_txt = $post['salary_type'];
+                                                                echo $post['min_sal'] . " - " . $post['max_sal'] . ' ' . $currency . ' ' . $post['salary_type'];
                                                             } else {
                                                                 echo PROFILENA;
                                                             }
-                                                            echo $min_sal_txt. " - " . $max_sal_txt. ' ' . $currency . ' ' . $salary_type_txt;
-                                                            ?></span>
+                                                            ?>
+                                                            </span>
                                                     </li>
                                                     <li><b>Employment Type</b>
                                                         <span>
@@ -1286,7 +1291,7 @@
             "employmentType": "<?php echo strtoupper(str_replace(" ", "_", $emp_type_txt)); ?>",
             "baseSalary": {
                 "@type": "MonetaryAmount",
-                "currency": "<?php echo substr($currency, 0,3); ?>",
+                "currency": "<?php echo substr($currency_txt, 0,3); ?>",
                 "value": {
                     "@type": "QuantitativeValue",
                     "minValue": <?php echo ($min_sal_txt != "" ? $min_sal_txt : '""'); ?>,
@@ -1300,9 +1305,9 @@
                 "@type": "Place",
                 "address": {
                     "@type": "PostalAddress",
-                    "addressLocality": "<?php echo $cityname; ?>",
-                    "addressRegion": "<?php echo $statename; ?>",
-                    "addressCountry": "<?php echo $countryname; ?>"
+                    "addressLocality": "<?php echo $cityname_txt; ?>",
+                    "addressRegion": "<?php echo $statename_txt; ?>",
+                    "addressCountry": "<?php echo $countryname_txt; ?>"
                 }
             },
             "hiringOrganization": {

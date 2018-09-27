@@ -219,10 +219,10 @@ class Business_profile_live extends MY_Controller {
 
         if ($id != '') {
             $contition_array = array('business_slug' => $id, 'is_deleted' => '0', 'status' => '1', 'business_step' => '4');
-            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,pincode,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         } else {
             $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1', 'business_step' => '4');
-            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            $business_data = $this->data['business_data'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'user_id,business_profile_id,company_name,contact_email,contact_person,contact_mobile,contact_website,details,address,city,country,state,pincode,industriyal', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }        
         if ($business_main_slug == $id) {
             $this->data['is_eligable_for_post'] = 1;
@@ -2069,9 +2069,10 @@ Your browser does not support the audio tag.
         } else {
             if ($this->session->userdata('aileenuser')) {
                 $this->load->view('business_profile_live/business_resume', $this->data);
-            } else {
-                $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
-                $this->load->view('business_profile/business_details', $this->data);
+            } else {                
+                redirect(base_url("company/".$this->data['slugid']),"refresh");
+                // $this->data['business_common_profile'] = $this->load->view('business_profile/business_common_profile', $this->data, true);
+                // $this->load->view('business_profile/business_details', $this->data);
             }
         }
     }
@@ -8662,6 +8663,7 @@ Your browser does not support the audio tag.
 
     public function bus_contact($id = "") {
         $s3 = new S3(awsAccessKey, awsSecretKey);
+        $business_slug_id = $id;
         $id = $this->business_model->removelocationfromslug($id);
         $this->data['slug_id'] = $id;
         $company_name = $this->get_company_name($id);
@@ -8669,7 +8671,14 @@ Your browser does not support the audio tag.
         if ($company_name == '') {
             $this->load->view('business_profile_live/notavalible');
         } else {
-            $this->load->view('business_profile_live/bus_contact', $this->data);
+            if($this->session->userdata('aileenuser'))
+            {
+                $this->load->view('business_profile_live/bus_contact', $this->data);
+            }
+            else
+            {
+                redirect(base_url('company/'.$business_slug_id),'refresh');
+            }
         }
     }
 

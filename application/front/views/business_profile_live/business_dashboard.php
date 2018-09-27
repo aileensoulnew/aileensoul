@@ -1,5 +1,14 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
+$company_name_txt = $business_data[0]['company_name'];
+$business_slug_txt = base_url().'company/'.$business_common_data[0]['business_slug'];
+if ($business_common_data[0]['business_user_image'] != '') {
+    $business_user_image_txt = BUS_PROFILE_THUMB_UPLOAD_URL . $business_common_data[0]['business_user_image'];
+}
+else{
+    $business_user_image_txt = base_url(NOBUSIMAGE);
+}
+$contact_email_txt = $business_data[0]['contact_email'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -148,8 +157,9 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         <td class="business_data_td1"><i class="fa fa-mobile"></i></td>
                                         <td class="business_data_td2">
                                             <?php
+                                            $contact_mobile_txt = "";
                                             if ($business_data[0]['contact_mobile'] != '0') {
-                                                $contact_mobile = $business_data[0]['contact_mobile'];
+                                                $contact_mobile_txt = $contact_mobile = $business_data[0]['contact_mobile'];
                                             } else {
                                                 $contact_mobile = '-';
                                             }
@@ -162,28 +172,34 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <?php if($this->session->userdata('aileenuser') != "") {?>
                                     <tr>
                                         <td class="business_data_td1"><i class="fa fa-envelope-o" aria-hidden="true"></i></td>
-                                        <td class="business_data_td2"><span><?php echo $business_data[0]['contact_email']; ?></span></td>
+                                        <td class="business_data_td2"><span><?php echo $contact_email_txt = $business_data[0]['contact_email']; ?></span></td>
                                     </tr>
                                     <?php } ?>
                                     <tr>
                                         <td class="business_data_td1 detaile_map"><i class="fa fa-map-marker"></i></td>
                                         <td class="business_data_td2"><span>
                                                 <?php
+                                                $address_txt = "";
+                                                $city_txt = "";
+                                                $state_txt = "";
+                                                $county_txt = "";
+                                                $pincode_txt = $business_data[0]['pincode'];
                                                 if ($business_data[0]['address']) {
-                                                    echo $business_data[0]['address'];
-                                                    echo ",";
+                                                    $address_txt = $business_data[0]['address'];
+                                                    echo $address_txt.",";
                                                 }
                                                 ?> 
                                                 <?php
                                                 if ($business_data[0]['city']) {
-                                                    echo $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
-                                                    echo",";
+                                                    $city_txt = $this->db->get_where('cities', array('city_id' => $business_data[0]['city']))->row()->city_name;
+                                                    echo $city_txt.",";
                                                 }
                                                 ?> 
                                                 <?php
                                                 if ($business_data[0]['country']) {
-                                                    echo $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
+                                                    echo $county_txt = $this->db->get_where('countries', array('country_id' => $business_data[0]['country']))->row()->country_name;
                                                 }
+                                                $state_txt = $this->db->get_where('states', array('state_id' => $business_data[0]['state']))->row()->state_name;
                                                 ?> 
                                             </span></td>
                                     </tr>
@@ -197,7 +213,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     <?php } ?>
                                     <tr>
                                         <td class="business_data_td1 detaile_map"><i class="fa fa-suitcase"></i></td>
-                                        <td class="business_data_td2"><span><?php echo nl2br($this->common->make_links($business_data[0]['details'])); ?></span></td>
+                                        <td class="business_data_td2"><span><?php echo $description_txt = nl2br($this->common->make_links($business_data[0]['details'])); ?></span></td>
                                     </tr>
                                 </table>
                             </div>
@@ -1026,5 +1042,36 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                 }                
             });
         </script>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": "Aileensoul",
+            "url": "https://www.aileensoul.com"
+        }
+        </script>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "LocalBusiness",
+            
+            "name": "<?php echo $company_name_txt; ?>",
+            "image": "<?php echo $business_user_image_txt; ?>",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "<?php echo $address_txt; ?>",
+                "addressLocality": "<?php echo $city_txt; ?>",
+                "addressRegion": "<?php echo $state_txt; ?>",
+                "addressCountry": "<?php echo $county_txt; ?>",
+                "postalCode": "<?php echo $pincode_txt; ?>"
+            },
+           
+           "telephone": "<?php echo $contact_mobile_txt; ?>",
+           "email": "<?php echo $contact_email_txt; ?>",
+           "url": "<?php echo $business_slug_txt; ?>",
+            "description": "Description: <?php echo $description_txt; ?>"
+          }
+        </script>
+
     </body>
 </html>
