@@ -342,7 +342,7 @@
                                                 <li>
                                                     <b>Job description</b>
                                                     <span>
-                                                        <pre><?php echo $this->common->make_links($post['post_description']); ?></pre>
+                                                        <pre><?php echo $post_description_txt = $this->common->make_links($post['post_description']); ?></pre>
                                                     </span>
                                                 </li>
                                                 <li>
@@ -388,8 +388,8 @@
                                                 <li><b>Industry</b>
                                                     <span> 
                                                         <?php
-                                                        $cache_time4 = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
-                                                        echo $cache_time4;
+                                                        $industry_txt = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
+                                                        echo $industry_txt;
                                                         ?>
                                                     </span>
                                                 </li>
@@ -688,8 +688,8 @@
                                                     <li><b>Industry</b>
                                                         <span> 
                                                             <?php
-                                                            $industry_txt = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
-                                                            echo $industry_txt;
+                                                            $industry_name = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
+                                                            echo $industry_name;
                                                             ?>
                                                         </span>
                                                     </li>
@@ -1283,7 +1283,7 @@
             "@context": "http://schema.org",
             "@type": "JobPosting",
             "title": "<?php echo $job_title_txt; ?>",
-            "description": " Description: <?php echo $this->common->make_links($post['post_description']); ?>",
+            "description": " Description: <?php echo $post_description_txt; ?>",
             "skills": "<?php echo addslashes($skill_txt); ?>",
             "industry": "<?php echo $industry_txt; ?>",
             "experienceRequirements": "<?php echo $exp_txt; ?>",
