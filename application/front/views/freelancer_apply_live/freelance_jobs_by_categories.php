@@ -92,7 +92,7 @@
                                                         <li>
                                                             <a href="<?php echo base_url().'freelance-jobs/'.$_jobByCategory['skill_slug']; ?>" target="_self">
                                                                 <div class="cus-cat-middle">
-                                                                <img src="<?php echo SKILLS_IMG_PATH.$_jobByCategory['skill_image']; ?>">
+                                                                <img src="<?php echo SKILLS_IMG_PATH.$_jobByCategory['skill_image']; ?>" onError="this.onerror=null;this.src='<?php echo JOB_INDUSTRY_IMG_PATH.'job_industry_image_default.png'; ?>';">
                                                                 <p><?php echo ucwords($_jobByCategory['skill']); ?></p>
                                                                 </div>
                                                             </a>
