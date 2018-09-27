@@ -63,11 +63,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container">
-				<div class="banner-add">
-					<?php $this->load->view('banner_add'); ?>
-				</div>
-			</div>
+			
 			<div class="container">
 				<div class="report-middle-box">					
 					<form class="report-form" id="addunsubscribe" method="post" action="javascript:void(0);">
