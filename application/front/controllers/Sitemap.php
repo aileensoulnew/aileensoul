@@ -1769,6 +1769,7 @@ class Sitemap extends CI_Controller {
     {        
         set_time_limit(0);
         ini_set("memory_limit","512M");
+        $this->main_sitemap();
         $this->generate_sitemap_member();
         $this->job_sitemap();
         $this->business_sitemap();
