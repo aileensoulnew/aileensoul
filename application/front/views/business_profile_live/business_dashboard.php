@@ -9,6 +9,7 @@ else{
     $business_user_image_txt = base_url(NOBUSIMAGE);
 }
 $contact_email_txt = $business_data[0]['contact_email'];
+$login_user_id = $this->session->userdata('aileenuser')
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,9 +57,14 @@ $contact_email_txt = $business_data[0]['contact_email'];
             }
         </style>
         
-    <?php $this->load->view('adsense'); ?>
+    <?php $this->load->view('adsense');
+    $cls = "";
+    if($login_user_id == "")
+    {
+        $cls = "no-login old-no-login";
+    } ?>
 </head>
-    <body class="page-container-bg-solid page-boxed pushmenu-push no-login old-no-login body-loader">
+    <body class="page-container-bg-solid page-boxed pushmenu-push body-loader <?php echo $cls; ?>">
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
         <?php if($ismainregister == false){ ?>
