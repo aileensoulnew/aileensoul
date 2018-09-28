@@ -233,6 +233,7 @@ class Userprofile_page extends MY_Controller {
                 'status' => $status,
                 'from_id' => $userid,
                 'to_id' => $id,
+                'not_read' => '2',
                 'modify_date' => date('Y-m-d H:i:s', time()));
             $insert_id = $this->common->update_data($data, 'user_contact', 'id', $contact['id']);
             $response = $status;

@@ -295,6 +295,13 @@ app.controller('userProfileController', function ($scope, $http) {
 
 
     $scope.contact = function (id, status, to_id) {
+        // alert(status);
+        // return false;
+        if(status == 'cancel')
+        {
+            $("#remove-contact-conform").modal("show");
+            return false;
+        }
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/addcontact',
@@ -305,6 +312,19 @@ app.controller('userProfileController', function ($scope, $http) {
             $scope.contact_value = success.data.trim();
         });
     }
+
+    $scope.remove_contact = function (id, status, to_id) {        
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/addcontact',
+            data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {                    
+            $scope.contact_value = success.data.trim();
+        });
+    }
+
     $scope.confirmContactRequestInnerHeader = function (from_id) {
         $http({
             method: 'POST',

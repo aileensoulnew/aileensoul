@@ -276,10 +276,11 @@ class User_model extends CI_Model {
 
     public function contactRequestCount($user_id = '') {
         $this->db->select('COUNT(id) as total')->from('user_contact uc');
-        $this->db->where("(uc.to_id ='$user_id' AND uc.status = 'pending') OR (uc.from_id ='$user_id' AND uc.status = 'confirm')");
+        $this->db->where("((uc.to_id ='$user_id' AND uc.status = 'pending') OR (uc.from_id ='$user_id' AND uc.status = 'confirm'))");
         $this->db->where("uc.not_read", '2');
-        $this->db->where("(uc.status = 'confirm' OR  uc.status = 'pending')");
+        // $this->db->where("(uc.status = 'confirm' OR  uc.status = 'pending')");
         $query = $this->db->get();
+        // echo $this->db->last_query();exit();
         $result_array = $query->row_array();
         return $result_array;
     }

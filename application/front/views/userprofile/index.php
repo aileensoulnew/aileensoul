@@ -195,6 +195,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade message-box" id="remove-contact-conform" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">
+                            <div class="pop_content">Do you want to remove this contact?<div class="model_ok_cancel"><a class="okbtn" ng-click="remove_contact('<?php echo $contact_id; ?>','cancel','<?php echo $to_id; ?>')" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php 
         $session_user = $this->session->userdata('aileenuser');        
         if(empty($session_user))        
