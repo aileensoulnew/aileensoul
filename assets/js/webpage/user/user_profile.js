@@ -600,7 +600,7 @@ app.controller('dashboardAudiosController', function ($scope, $http, $location, 
                     $scope.pagecntctData = response.data;
                     $scope.audioData = response.data.videorecord;
                 }
-                setTimeout(function(){ $('video,audio').mediaelementplayer(/* Options */); }, 300);
+                setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
             } else {
                 $scope.showLoadmore = false;
             }
@@ -755,7 +755,7 @@ app.controller('dashboardVideoController', function ($scope, $http, $location, $
                 {
                     $scope.allVideosData = response.data.allVideosData;   
                 }
-                setTimeout(function(){ $('video,audio').mediaelementplayer(/* Options */); }, 300);
+                setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
             } else {
                 $scope.showLoadmore = false;
             }
@@ -1553,7 +1553,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('.progress-bar').css("width",0);
             $('.sr-only').text(0+"%");
             check_no_post_data();
-            $('video,audio').mediaelementplayer(/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
 
@@ -1583,7 +1583,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 isLoadingData = true;
                 $scope.showLoadmore = false;
             }
-            $('video,audio').mediaelementplayer(/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
 
@@ -1602,7 +1602,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#loader').hide();
             $scope.postVideoData = success.data.userDashboardVideo;
             $scope.postAllVideoData = success.data.userDashboardVideoAll;
-            setTimeout(function(){ $('video,audio').mediaelementplayer(/* Options */); }, 300);
+            setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
             
         }, function (error) {});
     }
@@ -1639,7 +1639,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $('#loader').hide();
             $scope.postAudioData = success.data.userDashboardAudio;
             $scope.postAllAudioData = success.data.userDashboardAudioAll;
-            setTimeout(function(){ $('video,audio').mediaelementplayer(/* Options */); }, 300);
+            setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
         }, function (error) {});
     }
 
@@ -1648,7 +1648,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $http.get(base_url + "user_post/getUserDashboardPdf?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
             $scope.postPdfData = success.data.userDashboardPdf;
-            $('video,audio').mediaelementplayer(/* Options */);
+            $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
         }, function (error) {});
     }
 
@@ -2083,7 +2083,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                 $("#selectedFilesOpp").html("");
                                 $("#fileCountOpp").text("");
 
-                                $('video, audio').mediaelementplayer();
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
                         });
             }
@@ -2339,7 +2339,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                 formFileExtQue = [];
                                 $("#selectedFilesQue").html("");
                                 $("#fileCountQue").text("");
-                                $('video, audio').mediaelementplayer();
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
                         });
             }
@@ -2411,7 +2411,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                 $scope.ask.is_anonymously = '';
 
                                 $scope.postData.splice(0, 0, success.data[0]);
-                                $('video, audio').mediaelementplayer();
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
                         });
             }
@@ -2854,7 +2854,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                 $("#selectedFiles").html("");
                                 $("#fileCountSim").text("");
 
-                                $('video, audio').mediaelementplayer();
+                                $('video, audio').mediaelementplayer({'pauseOtherPlayers': true});
                             }
                         });
             }
@@ -2914,7 +2914,31 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
     $scope.loadMediaElement = function ()
     {
-        $('video,audio').mediaelementplayer(/* Options */);
+        $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);
+        var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+
+        for (i = 0; i < total; i++) {
+            new MediaElementPlayer(mediaElements[i], {
+                stretching: stretching,
+                pluginPath: '../js/build/',
+                success: function (media) {
+                    var renderer = document.getElementById(media.id + '-rendername');
+
+                    media.addEventListener('loadedmetadata', function () {
+                        var src = media.originalNode.getAttribute('src').replace('&amp;', '&');
+                        if (src !== null && src !== undefined) {
+                            renderer.querySelector('.src').innerHTML = '<a href="' + src + '" target="_blank">' + src + '</a>';
+                            renderer.querySelector('.renderer').innerHTML = media.rendererName;
+                            renderer.querySelector('.error').innerHTML = '';
+                        }
+                    });
+
+                    media.addEventListener('error', function (e) {
+                        renderer.querySelector('.error').innerHTML = '<strong>Error</strong>: ' + e.message;
+                    });
+                }
+            });
+        }
     };
     $scope.addToContact = function (user_id, contact) {
         if(user_id == "" || user_id == undefined)

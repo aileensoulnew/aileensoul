@@ -100,12 +100,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	mejs.i18n.language(lang);
 
-	var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
+	/*var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
 	for (i = 0; i < total; i++) {
 		new MediaElementPlayer(mediaElements[i], {
 			stretching: stretching,
-			pluginPath: '../build/',
+			pluginPath: '../js/build/',
 			success: function (media) {
 				var renderer = document.getElementById(media.id + '-rendername');
 
@@ -123,5 +123,5 @@ document.addEventListener('DOMContentLoaded', function () {
 				});
 			}
 		});
-	}
+	}*/
 });

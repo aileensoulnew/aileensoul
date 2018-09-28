@@ -507,7 +507,7 @@
                                 <span ng-if="post_file.file_type == 'video'"> 
                                     <?php //if($user_id != ""): ?>
                                     
-                                    <video controls width = "100%" height = "350" preload="metadata" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
+                                    <video controls width = "100%" height = "350" preload="none" poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}png">
                                         <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="video/mp4">
                                     </video>                                
                                     <?php /*else: ?>
