@@ -503,7 +503,7 @@ label.cameraButton input[accept*="camera"] {
 .user-photo-name h3 a:focus{text-decoration:none;}
 .user-photo-name p{color:#6f6f6f; letter-spacing: 1px;}
 .user-btns{padding:0px 0 10px; text-align:center;}
-.user-btns a{width:165px;}
+.user-btns a{width:170px;}
 .main-user-option ul{margin:0; padding:15px 0 0;}
 .main-user-option ul li{width:14.285714%; float:left; border-top:1px solid #d9d9d9; text-align:center; list-style-type:none; border-right:1px solid #d9d9d9;
 border-bottom: 1px solid #d2d2d2;}
