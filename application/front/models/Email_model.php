@@ -77,7 +77,7 @@ class Email_model extends CI_Model {
                                 <tbody>
                                     <tr>
                                         <td style="text-align:center;padding:10px 0;font-size: 12px;">
-                                            Aileensoul Technologies Private Limited,<br>
+                                            Aileensoul Technologies Private Limited<br>
                                             Titanium City Centre, 100 Feet Road, Satellite, Ahmedabad, India.
                                         </td>
                                     </tr>
@@ -246,7 +246,7 @@ class Email_model extends CI_Model {
                                 <tbody>
                                     <tr>
                                         <td style="text-align:center;padding:10px 0;font-size: 12px;">
-                                            Aileensoul Technologies Private Limited,<br>
+                                            Aileensoul Technologies Private Limited<br>
                                             Titanium City Centre, 100 Feet Road, Satellite, Ahmedabad, India.
                                         </td>
                                     </tr>
