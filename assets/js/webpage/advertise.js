@@ -65,7 +65,7 @@ $(document).ready(function () {
                     $("#email").val('');
                     $("#message").val('');
 
-                    $('.biderror .mes').html("<div class='pop_content'>Thank you for send advertise enquiry. Our executive contact to you soon!!!</div>");
+                    $('.biderror .mes').html("<div class='pop_content'>Your message is submitted successfully. One of our executives will get back to you.</div>");
                     $('#bidmodal').modal('show');
 
                 /*} else {
