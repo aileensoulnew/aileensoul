@@ -50,12 +50,14 @@ $(document).ready(function () {
             'message': message,
             //get_csrf_token_name : get_csrf_hash,
         }
+        $("#submit").attr("disabled","disabled")
         $.ajax({
             type: 'POST',
             url: base_url + 'advertise_with_us/advertise_insert',
             data: post_data,
             success: function (response)
             {                
+                $("#submit").removeAttr("disabled");
                 //if (response == "ok") {
 
                     $("#firstname").val('');

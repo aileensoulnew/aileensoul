@@ -107,6 +107,7 @@ $(document).ready(function () {
             'feedback_message': feedback_message,
             //get_csrf_token_name : get_csrf_hash,
         }
+        $(".btn1").attr("disabled","disabled");
         $.ajax({
             type: 'POST',
             url: base_url + 'feedback/feedback_insert',
@@ -118,18 +119,23 @@ $(document).ready(function () {
             // },
             success: function (response)
             {
-                if (response == "ok") {
+                $(".btn1").removeAttr("disabled");
+                $("#feedback_form")[0].reset();
+                if (response.trim() == "ok") {
 
                     $("#feedback_firstname").val('');
                     $("#feedback_lastname").val('');
                     $("#feedback_email").val('');
                     $("#feedback_subject").val('');
                     $("#feedback_message").val('');
-
-                    $.fancybox.open('<div class="alert alert-danger feedback"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + 'Your feedback send successfully' + ' !</div>');
+                  
+                    $('.biderror .mes').html('<div class="contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; Your feedback sent successfully!</div>');
+                    $('#bidmodal').modal('show');
 
                 } else {
-                    $.fancybox.open('<div class="alert alert-danger feedback"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + 'your feedback not send successfully' + ' !</div>');
+                    // $.fancybox.open('<div class="alert alert-danger feedback"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + 'your feedback not send successfully' + ' !</div>');
+                    $('.biderror .mes').html('<div class="contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp;Oops! Seems like some thing is going wrong.</div>');
+                    $('#bidmodal').modal('show');
                 }
             }
         });

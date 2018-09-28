@@ -182,9 +182,20 @@ header('Expires: ' . $date);
             <?php echo $login_footer; ?>
         </div>
 
-        <div class="modal fade message-box biderror" id="bidmodal" role="dialog"  >
+        <!-- <div class="modal fade message-box biderror" id="bidmodal" role="dialog"  >
             <div class="modal-dialog modal-lm" >
                 <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes"></span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="modal fade message-box biderror custom-message cust-err" id="bidmodal" role="dialog">
+            <div class="modal-dialog modal-lm deactive">
+               <div class="modal-content message">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
                     <div class="modal-body">
                         <span class="mes"></span>
@@ -198,17 +209,17 @@ header('Expires: ' . $date);
             var get_csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
             var get_csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
         </script>
-        <?php if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
+        <?php //if (IS_OUTSIDE_JS_MINIFY == '0') { ?>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js/webpage/contactus.js?ver=' . time()); ?>"></script>
-        <?php } else { ?>
+        <?php /*} else { ?>
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="<?php echo base_url('assets/js_min/bootstrap.min.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js_min/jquery.validate.min.js?ver=' . time()); ?>"></script>
             <script src="<?php echo base_url('assets/js_min/webpage/contactus.js?ver=' . time()); ?>"></script>
-        <?php } ?>
+        <?php }*/ ?>
     </body>
 </html>

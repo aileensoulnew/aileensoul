@@ -172,6 +172,7 @@ $(document).ready(function () {
             'contact_message': contact_message,
             get_csrf_token_name: get_csrf_hash,
         }
+        $(".btn1").attr("disabled","disabled");
         $.ajax({
             type: 'POST',
             url: base_url + 'contact_us/contact_us_insert',
@@ -179,11 +180,13 @@ $(document).ready(function () {
             beforeSend: function ()
             {
                 $("#register_error").fadeOut();
-                $("#btn-register").html('Sign Up ...');
+                // $("#btn-register").html('Sign Up ...');
             },
             success: function (response)
             {
-                if (response == "ok") {
+                $(".btn1").removeAttr("disabled");
+                $("#contact_form")[0].reset();
+                if (response.trim() == "ok") {
 
                     $("#contact_name").val('');
                     $("#contactlast_name").val('');
@@ -191,11 +194,17 @@ $(document).ready(function () {
                     $("#contact_subject").val('');
                     $("#contact_message").val('');
 
-                    $.fancybox.open('<div class="alert alert-danger contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + 'Your message send successfully' + ' !</div>');
+                    $('.biderror .mes').html('<div class="contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; Your message sent successfully!</div>');
+                    $('#bidmodal').modal('show');
+
+                    // $.fancybox.open('<div class="alert alert-danger contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + 'Your message send successfully' + ' !</div>');
                 } else {
 
-                    $.fancybox.open('<div class="alert alert-danger contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + 'your conatct not send successfully' + ' !</div>');
+                    // $.fancybox.open('<div class="alert alert-danger contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp; ' + 'your conatct not send successfully' + ' !</div>');
+                    $('.biderror .mes').html('<div class="contactus"> <i class="fa fa-info-circle" aria-hidden="true"></i> &nbsp;Oops! Seems like some thing is going wrong. <br /> Please drop your queries on mentioned email id on this page.</div>');
+                    $('#bidmodal').modal('show');
                 }
+
             }
         });
         return false;

@@ -130,12 +130,11 @@
 			<?php $this->load->view('mobile_side_slide'); ?>
 			<?php echo $login_footer ?>
 		</div>
-		<div class="modal fade message-box addreport" id="reportmodal" role="dialog">
+		<div class="modal fade message-box custom-message cust-err" id="reportmodal" role="dialog">
 		    <div class="modal-dialog modal-lm">
 		        <div class="modal-content">
 		            <button type="button" class="modal-close" data-dismiss="modal">&times;</button><div class="modal-body">
-		                <span class="mes"></span>
-		                <p class="message"></p>
+		                <span class="mes"></span>		                
 		            </div>
 		        </div>
 		    </div>
@@ -225,6 +224,7 @@
 		            'isuserregi': addradio
 		        }
 		        // return false;
+		        $("#btnReport").attr("disabled","disabled")
 		        $.ajax({
 		            type: 'POST',
 		            url: base_url + 'report/add_report',
@@ -232,13 +232,15 @@
 		            success: function (response)
 		            {	
 		                // if (response) {
+		                	$("#btnReport").removeAttr("disabled")
 		                    $("#txtName").val('');
 		                    $("#txtEmail").val('');
 		                    $("#txtUri").val('');
 		                    $("#txtDetail").val('');
-		                    $(".message").text("Report submitted successfully.");
 		                    // $(".message").text("Report submitted successfully.");
-		                    // $("#reportmodal").modal("show");
+		                    // $(".message").text("Report submitted successfully.");
+		                    $('.message-box .mes').html('<div class="contactus">Report submitted successfully.</div>');
+		                    $("#reportmodal").modal("show");
 		                // } else {
 		                	// $("#reportmodal").modal("show");
 		                	// $(".message").text("Report not submitted successfully.");
