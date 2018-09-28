@@ -26,8 +26,8 @@
                         <h4>
                             <a href="<?php echo base_url();?>{{contacts.user_slug}}" target="_self" ng-bind="(contacts.first_name | limitTo:1 | uppercase) + (contacts.first_name.substr(1) | lowercase) + ' ' + (contacts.last_name | limitTo:1 |uppercase) + (contacts.last_name.substr(1) | lowercase)"></a>
                         </h4>
-                        <p ng-if="contacts.degree_name != ''">{{contacts.title_name}}</p>
-                        <p ng-if="contacts.degree_name == ''">{{contacts.degree_name}}</p>
+                        <p ng-if="contacts.title_name != null && contacts.degree_name == null">{{contacts.title_name}}</p>
+                        <p ng-if="contacts.degree_name != null && contacts.title_name == null">{{contacts.degree_name}}</p>
                         <p ng-if="contacts.degree_name == null && contacts.title_name == null">Current work</p>
                     </div>
                     <div id="contact-btn-{{$index + 1}}" ng-if="contacts.user_id != user_id" class="custom-user-btn">
@@ -35,10 +35,22 @@
                         <!-- <a class="btn3" id="{{contacts.user_id}}" ng-click="remove(contacts.user_id)">In Contacts</a> -->
 
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'new'" ng-click="contact(contacts.contact_detail.contact_id, 'pending', contacts.user_id,$index + 1)">Add to contact</a>
-                        <a class="btn1" ng-if="contacts.contact_detail.contact_value == 'confirm'" ng-click="contact(contacts.contact_detail.contact_id, 'cancel', contacts.user_id,$index + 1)">In Contacts</a>
+                        <a class="btn1" ng-if="contacts.contact_detail.contact_value == 'confirm'" ng-click="contact(contacts.contact_detail.contact_id, 'cancel', contacts.user_id,$index + 1,1)">In Contacts</a>
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'pending'" ng-click="contact(contacts.contact_detail.contact_id, 'cancel', contacts.user_id,$index + 1)">Request sent</a>
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'cancel'" ng-click="contact(contacts.contact_detail.contact_id, 'pending', contacts.user_id,$index + 1)">Add to contact</a>
                         <a class="btn3" ng-if="contacts.contact_detail.contact_value == 'reject'" ng-click="contact(contacts.contact_detail.contact_id, 'pending', contacts.user_id,$index + 1)">Add to contact</a>
+                    </div>
+                    <div class="modal fade message-box" id="remove-contact-conform-{{$index + 1}}" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-lm">
+                            <div class="modal-content">
+                                <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                                <div class="modal-body">
+                                    <span class="mes">
+                                        <div class="pop_content">Do you want to remove this contact?<div class="model_ok_cancel"><a class="okbtn" ng-click="remove_contact(contacts.contact_detail.contact_id, 'cancel', contacts.user_id,$index + 1)" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -153,7 +153,7 @@
                 <?php 
                 }
                 ?>
-                <a class="btn3" ng-if="contact_value == 'confirm'" ng-click="contact(contact_id, 'cancel', to_id)">In Contacts</a>
+                <a class="btn3" ng-if="contact_value == 'confirm'" ng-click="contact(contact_id, 'cancel', to_id,1)">In Contacts</a>
                 <a class="btn3" ng-if="contact_value == 'pending' && from_id != to_id" ng-click="contact(contact_id, 'cancel', to_id)">Request sent</a>
                 <a class="btn3" ng-if="contact_value == 'pending' && from_id == to_id" ng-click="confirmContactRequestInnerHeader(to_id)">Confirm Request</a>
                 <a class="btn3" ng-if="contact_value == 'cancel'" ng-click="contact(contact_id, 'pending', to_id)">Add to contact</a>

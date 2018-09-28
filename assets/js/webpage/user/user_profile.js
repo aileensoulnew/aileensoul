@@ -294,10 +294,10 @@ app.controller('userProfileController', function ($scope, $http) {
     $scope.follow_id = follow_id;
 
 
-    $scope.contact = function (id, status, to_id) {
+    $scope.contact = function (id, status, to_id, confirm = 0) {
         // alert(status);
         // return false;
-        if(status == 'cancel')
+        if(confirm == '1')
         {
             $("#remove-contact-conform").modal("show");
             return false;
@@ -313,7 +313,7 @@ app.controller('userProfileController', function ($scope, $http) {
         });
     }
 
-    $scope.remove_contact = function (id, status, to_id) {        
+    $scope.remove_contact = function (id, status, to_id) {
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/addcontact',
@@ -3432,8 +3432,28 @@ app.controller('contactsController', function ($scope, $http, $location, $window
         $compile($el)($scope);
     },1000);
 
-    $scope.contact = function (id, status, to_id,indexCon) {
+    $scope.contact = function (id, status, to_id,indexCon,confirm = 0) {
+        if(confirm == '1')
+        {
+            $("#remove-contact-conform-"+indexCon).modal("show");
+            return false;
+        }
         $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/addToContactNew',
+            data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {            
+            if(success.data != "")
+            {                
+                $("#contact-btn-"+indexCon).html($compile(success.data.button)($scope));
+            }
+        });
+    }
+
+    $scope.remove_contact = function (id, status, to_id,indexCon) {        
+            $http({
             method: 'POST',
             url: base_url + 'userprofile_page/addToContactNew',
             data: 'contact_id=' + id + '&status=' + status + '&to_id=' + to_id + '&indexCon=' + indexCon,
@@ -3489,8 +3509,6 @@ app.controller('contactsController', function ($scope, $http, $location, $window
         //    console.log($(document).height() - $(window).height());
         
         if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
-          
-          
             var page = $(".page_number").val();
             var total_record = $(".total_record").val();
             var perpage_record = $(".perpage_record").val();
