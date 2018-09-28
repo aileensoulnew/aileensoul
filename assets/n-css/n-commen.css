@@ -890,7 +890,7 @@ svg path{fill: #5c5c5c;}
 
 .logo-size{font-size:28px;}
 header h2.logo{line-height:0; height:31px;}
-header .logo a{line-height:0;}
+header .logo a{/*line-height:0;*/}
 header .logo svg{height:26px; width:140px; margin-top:5px; fill:#fff;}
 .new-ld-page header .logo svg{height:26px; width:160px; margin-top:6px; fill:#fff;}
 .error-page .new-ld-page header .logo svg{margin-top:3px;}
