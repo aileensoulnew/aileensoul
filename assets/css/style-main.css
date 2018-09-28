@@ -2619,6 +2619,7 @@ header .logo svg{height:26px; width:160px; fill:#fff; margin-top:7px;}
 .btn-pr-pl{padding: 1px 10px; background:#1b8ab9; color:#fff; border-radius: 3px; display: inline-block;}
 .btn-pr-pl:hover{background:#1d7398; color:#fff; text-decoration: none;}
 .footer{/*margin-bottom:35px;*/}
+.common-form .title h1{margin:0 !important;}
 
 
 /***  media query  ***/

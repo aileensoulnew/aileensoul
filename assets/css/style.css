@@ -233,14 +233,14 @@ button,input[type=button],input[type=submit]{
 }
 */
 
-
+/*
 .modal-open button:hover,input[type=button]:hover,input[type=submit]:hover{
     background:#156f95;
 }
 
 button:hover,input[type=button]:hover,input[type=submit]:hover{
     background:#156f95;
-}
+}*/
 input[type=text],input[type=password],input[type=tel],input[type=email],input[type=search],select,textarea{
     -webkit-appearance:none
 }
