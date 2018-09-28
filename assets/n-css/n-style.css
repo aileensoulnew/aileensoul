@@ -4,7 +4,7 @@
 /***  page 1  ***/
 
 body.main-message{padding-bottom:0;}
-body.modal-open{position:fixed; width:100%;/* -webkit-overflow-scrolling: touch; height: 100%;overflow-y: auto;*/}
+body.modal-open{/*position:fixed;*/ width:100%;/* -webkit-overflow-scrolling: touch; height: 100%;overflow-y: auto;*/}
 tags-input .host{/*position:inherit; height:inherit;*/}
 .modal-content .post-field .form-group input{/*position:relative; top:0;*/}
 .one-hd .middle-section{padding:60px 0 50px;}
@@ -482,17 +482,7 @@ label.cameraButton input[accept*="camera"] {
     display: none;
 }
 
-.upload-profile{background-color: rgba(0, 0, 0, 0.4);
-	border-radius: 100%;
-	bottom: 4px;
-	color: #fff;
-	display: none;
-	height: 170px;
-	left: 4px;
-	padding: 20px 10px;
-	position: absolute;
-	text-align: center;
-	width: 170px;font-size: 13px; font-weight: bold;}
+.upload-profile{background-color: rgba(0, 0, 0, 0.4); border-radius: 100%; bottom: 1px; color: #fff; display: none; height: 169px; left: 1px; padding: 20px 10px; position: absolute; text-align: center; width: 169px;font-size: 13px; font-weight: bold;}
 .upload-profile a{margin-bottom: 20px; color: #fff; display: inline-block;}
 .upload-profile img {display: block; margin: 0 auto 0px; width:40px !important; height:auto !important; border-radius:0px !important;}
 .profile-img:hover .upload-profile{display:block; color:#fff;}
