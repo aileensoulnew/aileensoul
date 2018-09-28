@@ -912,12 +912,12 @@ option {color: black;}
 .outer-page header{padding:10px 0;}
 .reg-form-cus .logo-size{font-size:30px;}
 .blog-page header{padding:7px 0;}
-.old-no-login header{/*padding:10px 0;*/}
+.old-no-login header{padding:10px 0;}
 .blog-page .sub-header{top:54px;}
 .blog-page .sub-header .sub-menu li a{font-weight:normal;}
 .blog-page .logo-size{font-size:30px;}
 .outer-page .logo-size{font-size:30px;}
-.old-no-login .logo-size{/*font-size:30px;*/}
+.old-no-login .logo-size{font-size:30px;}
 .about-us .logo-size{font-size:30px;}
 .ftr-page .logo-size{font-size:30px;}
 

@@ -896,7 +896,9 @@ border-bottom: 0px;}
 .job-top-detail p{font-size:13px; margin:0; line-height:1.5; font-weight:normal;}
 .job-top-detail p a{color:#5c5c5c;}
 .job-top-detail p.job-bottom-btn a{color:#1b8ab9;}
+.job-top-detail p.job-bottom-btn a:hover{color:#fff;}
 .job-top-detail p.job-top-btn a{color:#1b8ab9;}
+.job-top-detail p.job-top-btn a:hover{color:#fff;}
 .all-job-middle{font-size:13px; padding:10px 15px; width:100%; float:left;}
 .all-job-middle .location{padding-right:20px;}
 .all-job-middle span span img{margin-top:-3px;}
@@ -1165,12 +1167,12 @@ header.profile-header .logo a{color:#5c5c5c;}
 .search-banner .control:hover input:not([disabled]):checked ~ .control__indicator,
 .search-banner .control input:checked:focus ~ .control__indicator {border:1px solid #7b7b7b;}
 .search-banner .control--checkbox .control__indicator:after {border: solid #000; border-width: 0 2px 2px 0;}
-.banner-main-div{ 
-	padding:60px 0;
+.banner-main-div{padding:60px 0;
     display: -webkit-flex; /* Safari */
     -webkit-align-items: center; /* Safari 7.0+ */
     display: flex;
     align-items: center;}
+.recruiter-main .banner-main-div{padding:0;}
 .banner-main-div .banner-left{-webkit-flex: 1; /* Safari 6.1+ */
    flex: 1; letter-spacing:1px; text-align:left; line-height:1.5;}
 .banner-main-div .banner-left h1{line-height:1.5;}
