@@ -733,7 +733,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             var job_deactive = "<?php echo $job_deactive; ?>";
             var app = angular.module('jobSearch', ['ui.bootstrap','angular-google-adsense']);
             
-            $(document).ready(function($) {
+            /*$(document).ready(function($) {
                 $("li.user-id label").click(function(e){
                     $(".dropdown").removeClass("open");
                     $(this).next('ul.dropdown-menu').toggle();
@@ -745,7 +745,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             });
             $(document).click(function(){
                 $('.right-header ul.dropdown-menu').hide();
-            });
+            });*/
 
             function experience(){
                 document.getElementById('exp_data').style.display = 'block';

@@ -459,11 +459,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
             var app = angular.module('freelancerApplySearch', ['ui.bootstrap','angular-google-adsense']);
             
             $(document).ready(function($) {
-                $("li.user-id label").click(function(e){
+                /*$("li.user-id label").click(function(e){
                     $(".dropdown").removeClass("open");
                     $(this).next('ul.dropdown-menu').toggle();
                     e.stopPropagation();
-                });
+                });*/
                 /*$("li.user-id a").click(function(e){
                     $(".dropdown").removeClass("open");
                     $(this).next('ul.dropdown-menu').toggle();
@@ -473,9 +473,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     $('.right-header ul.dropdown-menu').hide();
                 });*/
             });
-            $(document).click(function(){
+            /*$(document).click(function(){
                 $('.right-header ul.dropdown-menu').hide();
-            });
+            });*/
             
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js?ver='.time()) ?>"></script>
