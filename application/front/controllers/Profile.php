@@ -136,19 +136,7 @@ class Profile extends CI_Controller {
               <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
                 $msg .= '<p style="margin:0; font-family:arial;">Hi,' . ucwords($firstname) . ' ' . ucwords($lastname) . '</p>
                 <p style="padding:25px 0 ; font-family:arial; margin:0;">This is your code: ' . $rand_password . '</p>
-                <p><a style="background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
-        background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#3bb0ac", endColorstr="#1b8ab9",GradientType=0 );
-        font-size:16px;
-           color:#fff;
-      padding: 7px 12px;
-    text-decoration: none;
-    font-family: arial;
-    letter-spacing: 1px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
+                <p><a style="background: #1b8ab9;font-size:16px;color:#fff !important;padding: 8px 20px;text-decoration: none;font-family: arial;letter-spacing: 1px;border-radius:3px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
               </td>
             </tr>';
 
@@ -345,19 +333,7 @@ class Profile extends CI_Controller {
               <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
                 $msg .= '<p style="margin:0; font-family:arial;">Hi,' . ucwords($firstname) . ' ' . ucwords($lastname) . '</p>
                 <p style="padding:25px 0 ; font-family:arial; margin:0;">This is your code: ' . $rand_password . '</p>
-                <p><a style="background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3bb0ac), color-stop(56%, #1b8ab9), color-stop(100%, #1b8ab9));
-        background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: -o-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: -ms-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); 
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#3bb0ac", endColorstr="#1b8ab9",GradientType=0 );
-        font-size:16px;
-           color:#fff;
-      padding: 7px 12px;
-    text-decoration: none;
-    font-family: arial;
-    letter-spacing: 1px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
+                <p><a style="background: #1b8ab9;font-size:16px;color:#fff !important;padding: 8px 20px;text-decoration: none;font-family: arial;letter-spacing: 1px;border-radius:3px;" class="btn" href="' . base_url() . 'profile/changepassword/' . $forgot_email_check[0]['user_id'] . '">Reset password</a></p>
               </td>
             </tr>';
 

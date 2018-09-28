@@ -415,14 +415,14 @@ header("Pragma: no-cache"); // HTTP/1.0
         <script src="<?php echo base_url('assets/js/webpage/main.js?ver=' . time()); ?>"></script>
 		<script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.js?ver=' . time()); ?>"></script>
         <?php
-        if (IS_OUTSIDE_JS_MINIFY == '0') {
+        /*if (IS_OUTSIDE_JS_MINIFY == '0') {
             ?>
             <!--<script src="<?php echo base_url('assets/js/webpage/main.js?ver=' . time()); ?>"></script>-->
             <?php
         } else {
             ?>
             <!--<script src="<?php echo base_url('assets/js_min/webpage/main.js?ver=' . time()); ?>"></script>-->
-        <?php } ?>
+        <?php }*/ ?>
 		
 		<script>
 		
