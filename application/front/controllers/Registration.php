@@ -61,7 +61,7 @@ class Registration extends CI_Controller {
     }
 
     public function reg_insert() {
-         
+      
         $date = $this->input->post('selday');
         $month = $this->input->post('selmonth');
         $year = $this->input->post('selyear');
@@ -179,47 +179,75 @@ class Registration extends CI_Controller {
     }
 
     public function sendmail() {
+        echo "1";exit();
 
-        $user_id = $_POST['userid'];
+        $user_id = $_POST['userid'];//($_POST['userid'] != "" ? $_POST['userid'] : "23555");
         if ($user_id) {
-            $contition_array = array('user_id' => $user_id);
-            $userdata = $this->common->select_data_by_condition('user', $contition_array, $data = 'user_email,first_name,last_name,user_id,user_gender,user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+            // $contition_array = array('user_id' => $user_id);
+            // $userdata = $this->common->select_data_by_condition('user', $contition_array, $data = 'user_email,first_name,last_name,user_id,user_gender,user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-            $gender = $userdata[0]['user_gender'];
-            $toemail = $userdata[0]['user_email'];
-            $fname = $userdata[0]['first_name'];
-            $lname = $userdata[0]['last_name'];
+            $userdata = $this->user_model->getUserData($user_id);
+            // print_r($userdata);exit();            
 
-            $msg = '<tr>
-                             <td style="text-align:center; padding-top:15px;">';
-            if ($userdata[0]['user_image']) {
-                $msg .= '<img src="' . base_url($this->config->item('user_thumb_upload_path') . $userdata[0]['user_image']) . '">';
+            $gender = $userdata['user_gender'];
+            $toemail = $userdata['email'];
+            $fname = $userdata['first_name'];
+            $lname = $userdata['last_name'];
+
+            /*$msg = '<tr><td style="text-align:center; padding-top:15px;">';
+
+            if ($userdata['user_image'] != "") {
+                $msg .= '<img style="width:100px" src="' .USER_MAIN_UPLOAD_URL.$userdata['user_image'].'">';
             } else {
 
                 if ($gender == 'F') {
-                    $msg .= '<img src="' . base_url(FNOIMAGE) . '">';
+                    $msg .= '<img style="width:100px" src="'.base_url('assets/img/female-user.jpg').'">';
                 } else {
-                    $msg .= '<img src="' . base_url(MNOIMAGE) . '">';
+                    $msg .= '<img style="width:100px" src="'.base_url('assets/img/man-user.jpg').'">';
                 }
             }
             $msg .= '</td>
-                              </tr>
-                            <tr>
-                               <td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
+            </tr><tr><td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
             $msg .= '<p style="margin:0;">Hi,' . ucwords($fname) . ' ' . ucwords($lname) . '</p>
                             <p style="padding:25px 0 ; margin:0;">Verify your email address.</p>
-                             <p><a class="btn" href="' . base_url() . 'registration/verify/' . $user_id . '">Verify</a></p>
+                             <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_id . '">Verify</a></p>
                               </td>
-                              </tr>';
-            echo "<pre>";
-            print_r($msg);
-            die();
+                              </tr>';*/
+            if ($userdata['user_image'] != "") {                
+                $login_user_img = USER_MAIN_UPLOAD_URL.$userdata['user_image'];
+            } else {
+                if ($gender == 'F') {
+                    $login_user_img = base_url('assets/img/female-user.jpg');
+                } else {
+                    $login_user_img = base_url('assets/img/man-user.jpg');
+                }
+            }
+            $msg = "";
+            $msg .= '<table width="100%" cellpadding="0" cellspacing="0">
+                            <tr>                                
+                                <td style="padding:5px;">
+                                    <p><b>Hi '.ucwords($fname). ' ' . ucwords($lname). ',</b> please verify your email address.</p>
+                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                </td>
+                                <td style="'.MAIL_TD_3.'">
+                                    <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_id . '">Verify</a></p>
+                                </td>
+                            </tr>
+                            </table>';
+            // echo "<pre>";
+            // print_r($msg);
+            // die();
+            // echo $msg;exit();
 
             $subject = "Welcome to aileensoul";
 
-            $mail = $this->email_model->sendEmail($app_name = '', $app_email = '', $toemail, $subject, $msg);
-
+            // $mail = $this->email_model->sendEmail($app_name = '', $app_email = '', $toemail, $subject, $msg);
+            $mail = $this->email_model->send_email($subject = $subject, $templ = $msg, $to_email = $toemail);
             //$mail = $this->email_model->do_email($msg, $subject, $toemail, $from);
+        }
+        else
+        {
+            redirect(base_url(),"refresh");
         }
     }
 
