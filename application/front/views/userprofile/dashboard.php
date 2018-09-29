@@ -631,7 +631,7 @@
                                     </div>
                                 </div>
                                 <div class="comment-dis">
-                                    <div class="comment-name"><a ng-bind="comment.username"></a></div>
+                                    <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username"></a></div>
                                     <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}" ng-bind-html="comment.comment"></div>
                                     <div class="edit-comment" id="edit-comment-{{comment.comment_id}}" style="display:none;">
                                         <div class="comment-input">

@@ -861,6 +861,7 @@ $route['(:any)/videos'] = 'Userprofile';
 $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
+
 // $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";
 $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
@@ -871,6 +872,7 @@ $route['artist-in-(:any)/(:num)'] = "artist_live/categoryArtistList//$1/1";
 $route['notification'] = 'notification';
 $route['message'] = "message/main_message";
 $route['generate_sitemap'] = "sitemap/generate_sitemap";
+$route['new-article'] = 'article/new_article';
 $route['(:any)'] = 'Userprofile';
 
 
