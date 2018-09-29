@@ -89,7 +89,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push">
-        <?php echo $header; ?>
+        <?php //echo $header; ?>
         <?php echo $business_header2; ?>
         <section>
             <div class="user-midd-section bui_art_left_box" id="paddingtop_fixed">
