@@ -37,9 +37,17 @@
             	display: none !important;
             }
             
-            .mce-content-body img[data-mce-selected] {
+            .mce-content-body img[.data-mce-selected] {
 			    width: 100% !important;
 			    height: 100% !important;
+			}
+			/*#tinymce .img-responsive{
+				width: 100% !important;
+			    height: 100% !important;
+			}*/
+			img {
+			 max-width: 100%;
+			 height: auto;
 			}
         </style>
     <?php $this->load->view('adsense'); ?>
@@ -48,7 +56,7 @@
 	<?php echo $header_inner_profile; ?>
 	<div class="middle-section">
 		<div class="container">
-			<textarea>Next, use our Get Started docs to setup Tiny!</textarea>
+			<textarea id="artist_editor" name="artist_editor">Next, use our Get Started docs to setup Tiny!</textarea>
 		</div>
 	</div>
 </body>
@@ -88,23 +96,24 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script type="text/javascript">//tinymce.init({ selector:'textarea' });
 tinymce.init({
-	selector: 'textarea',
-	height: 200,
+	selector: '#artist_editor',
+	height: 400,
+	menubar: false,
 	// image_dimensions: true,
-	image_class_list: [
-		{title: 'Responsive', value: 'img-responsive'}
-	],
-	plugins:  [
-		"advlist autolink lists link image charmap print preview anchor",
+	plugins:  [//autoresize
+		"advlist autolink lists link image charmap print preview anchor ",
 		"searchreplace visualblocks code fullscreen",
 		"insertdatetime media table contextmenu paste imagetools wordcount"
 	],
 	toolbar: 'link image | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify',
 	// enable title field in the Image dialog
-	image_title: true, 
+	image_title: false,
+	image_caption: false, 
 	// enable automatic uploads of images represented by blob or data URIs
-	automatic_uploads: true,
-	image_advtab: true,
+	automatic_uploads: true,	
+	image_description: false,
+	image_dimensions: false,	
+	image_title: false,
 	// URL of our upload handler (for more details check: https://www.tinymce.com/docs/configure/file-image-upload/#images_upload_url)
 	// images_upload_url: 'postAcceptor.php',
 	// here we add custom filepicker only to Image dialog
@@ -135,8 +144,7 @@ tinymce.init({
 				var blobInfo = blobCache.create(id, file, base64);
 				blobCache.add(blobInfo);
 				// call the callback and populate the Title field with the file name
-				cb(blobInfo.blobUri(), { title: file.name });
-				console.log(blobInfo);
+				cb(blobInfo.blobUri(), { title: file.name });				
 			};
 			reader.readAsDataURL(file);
 		};
