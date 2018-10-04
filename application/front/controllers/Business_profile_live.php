@@ -2065,7 +2065,8 @@ Your browser does not support the audio tag.
         $this->data['title'] = ucwords($company_name) . ' | Details' . TITLEPOSTFIX;
 
         if (count($business_data) == 0) {
-            $this->load->view('business_profile/notavalible');
+            // $this->load->view('business_profile/notavalible');
+            redirect(base_url("404"),"refresh");
         } else {
             if ($this->session->userdata('aileenuser')) {
                 $this->load->view('business_profile_live/business_resume', $this->data);
@@ -3392,7 +3393,8 @@ Your browser does not support the audio tag.
         $company_name = $this->get_company_name($id);
         $this->data['title'] = ucwords($company_name) . ' | Followers' . ' | Business Profile' . TITLEPOSTFIX;
         if ($company_name == '') {
-            $this->load->view('business_profile_live/notavalible');
+            // $this->load->view('business_profile_live/notavalible');
+            redirect(base_url("404"),"refresh");
         } else {
             $this->load->view('business_profile_live/business_followers', $this->data);
         }
@@ -3557,7 +3559,8 @@ Your browser does not support the audio tag.
         $company_name = $this->get_company_name($id);
         $this->data['title'] = $company_name . ' | Following' . ' | Business Profile' . TITLEPOSTFIX;
         if ($company_name == '') {
-            $this->load->view('business_profile_live/notavalible');
+            // $this->load->view('business_profile_live/notavalible');
+            redirect(base_url("404"),"refresh");
         } else {
             $this->load->view('business_profile_live/business_following', $this->data);
         }

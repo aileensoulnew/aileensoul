@@ -40,4 +40,24 @@ class Article extends MY_Controller {
             redirect(base_url(),"refresh");
         }
     }
+
+    public function upload_image()
+    {
+        $config = array(
+            'image_library' => 'gd',
+            'upload_path'   => $this->config->item('article_upload_path'),
+            'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+            'overwrite'     => true,
+            'remove_spaces' => true
+        );
+        $store = $_FILES['file']['name'];
+        $store_ext = explode('.', $store);        
+        $store_ext = $store_ext[count($store_ext)-1];
+        $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+        $config['file_name'] = $fileName;
+        $this->upload->initialize($config);
+        $imgdata = $this->upload->data();
+        $this->upload->do_upload('file');
+        echo json_encode(array("location"=>base_url().'uploads/article/'.$fileName,"filename"=>$fileName));
+    }
 }
