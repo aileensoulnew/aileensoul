@@ -56,12 +56,14 @@
 	<?php echo $header_inner_profile; ?>
 	<div class="middle-section">
 		<div class="container">
+			<div id="save_post" style="display: none;">				
+			</div>
 			<div class="fw" id="upload_loader" style="text-align: center;position: absolute;display: none;z-index: 99999;top: 47%;">
                 <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
             </div>
             <form id="article_frm" name="article_frm" action="javascript:void(0);">
-			<input type="text" name="title_txt" id="title_txt" placeholder="Enter title of Article">
-			<textarea id="artist_editor" name="artist_editor"></textarea>
+			<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
+			<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
 			<input type="submit" name="publish" value="Publish">
 			</form>
 		</div>
@@ -76,6 +78,8 @@
 	var user_id = '<?php echo $this->session->userdata('aileenuser');?>';
 	var header_all_profile = '<?php echo $header_all_profile; ?>';
 	var app = angular.module('', ['ui.bootstrap']);
+	var unique_key = "<?php echo(isset($articleData) && !empty($articleData) ? $articleData['unique_key'] : $unique_key); ?>"
+	var base_url = "<?php echo base_url(); ?>"
 </script>
 <script>
     /*ClassicEditor
@@ -108,10 +112,13 @@ var doneTypingInterval = 1000;  //time in ms, 5 second for example
 var maineditor;
 
 maineditor = tinymce.init({
-	selector: '#artist_editor',	
+	selector: '#article_editor',	
 	body_class: 'editor-body',
-	content_css : 'assets/n-css/editor-style.css',
-	height: 400,
+	content_css : base_url+'assets/n-css/editor-style.css',
+	height: 300,
+	relative_urls : false,
+	remove_script_host : false,
+	document_base_url : base_url,
 	menubar: false,
 	theme: 'modern',
 	resize: false,
@@ -121,7 +128,57 @@ maineditor = tinymce.init({
 		"searchreplace visualblocks code fullscreen",
 		"insertdatetime media table contextmenu paste imagetools wordcount textcolor hr charmap"
 	],
-	toolbar: 'link image | undo redo |  formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | hr charmap blockquote ',
+	toolbar: 'link image | undo redo |  formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | hr charmap blockquote',
+	imagetools_toolbar: "alignleft aligncenter alignright | rotateleft rotateright | flipv fliph | editimage imageoptions| removeimage",
+	setup: function(editor) {
+
+		function insertDate() {
+			
+			editor.insertContent('');
+		}
+
+		editor.addButton('removeimage', {
+			icon: 'removeimage',
+			image: base_url+'assets/n-images/trash.png',
+			tooltip: "Insert Current Date",
+			onclick: insertDate
+		});
+
+		editor.on('change', function (e) {	      
+	      	//console.log('Content changed to:  ' + editor.getContent());
+			var title = $("#title_txt").val();
+			var descr = editor.getContent();
+			// console.log('title',title,'content',editor.getContent());
+			if(title.trim() == "" && descr.trim() == "")
+			{
+				return false;
+			}
+			else
+			{
+				$("#save_post").show();
+				$("#save_post").text("Saving...");
+				$.ajax({
+				    type: 'POST',
+				    url: base_url + "article/add_article",
+				    data: {"article_title":title,"article_content":descr,"unique_key":unique_key},
+				    dataType: "JSON",	        
+				    success: function (data) {
+				    	if(data.add_new_article == 1)
+			        	{
+			        		var title = "Edit Article"
+		                    var url = base_url +"edit-article/"+unique_key;
+		                    var obj = {
+		                        Title: title,
+		                        Url: url
+		                    };
+		                    history.pushState(obj, obj.Title, obj.Url);
+			        	}
+				    	$("#save_post").text("Saved");
+				    }
+				});
+			}
+	    });
+	},
 	// enable title field in the Image dialog
 	image_title: false,
 	image_caption: false, 
@@ -137,7 +194,36 @@ maineditor = tinymce.init({
 	    	if (editor.getContent()) {
 		        typingTimer = setTimeout(function(){
 		        	var title = $("#title_txt").val();
-	    			console.log('title',title,'content',editor.getContent());
+		        	var descr = editor.getContent();
+	    			// console.log('title',title,'content',editor.getContent());
+	    			if(title.trim() == "" && descr.trim() == "")
+	    			{
+	    				return false;
+	    			}
+	    			else
+					{
+						$("#save_post").show();
+						$("#save_post").text("Saving...");
+		    			$.ajax({
+					        type: 'POST',
+					        url: base_url + "article/add_article",
+					        data: {"article_title":title,"article_content":descr,"unique_key":unique_key},
+					        dataType: "JSON",	        
+					        success: function (data) {
+					        	if(data.add_new_article == 1)
+					        	{
+					        		var title = "Edit Article"
+			                        var url = base_url +"edit-article/"+unique_key;
+			                        var obj = {
+			                            Title: title,
+			                            Url: url
+			                        };
+			                        history.pushState(obj, obj.Title, obj.Url);
+					        	}
+					        	$("#save_post").text("Saved");
+					        }
+					    });
+					}
 		        }, doneTypingInterval);
 		    }
 	      // console.log('Editor contents was KeyUp.');
@@ -150,66 +236,89 @@ maineditor = tinymce.init({
 	file_picker_types: 'image', 
 	// and here's our custom image picker
 	file_picker_callback: function(cb, value, meta) {
-		
-		// console.log(meta);
-		var input = document.createElement('input');
-		input.setAttribute('type', 'file');
-		input.setAttribute('accept', 'image/*');
+		if (meta.filetype == 'image') {			
+			// console.log(meta);
+			var input = document.createElement('input');
+			input.setAttribute('type', 'file');
+			input.setAttribute('accept', 'image/*');
 
-		// Note: In modern browsers input[type="file"] is functional without 
-		// even adding it to the DOM, but that might not be the case in some older
-		// or quirky browsers like IE, so you might want to add it to the DOM
-		// just in case, and visually hide it. And do not forget do remove it
-		// once you do not need it anymore.
-		input.onchange = function() {
-			var file = this.files[0];
-			var reader = new FileReader();
-			reader.onload = function () {
-				// Note: Now we need to register the blob in TinyMCEs image blob
-				// registry. In the next release this part hopefully won't be
-				// necessary, as we are looking to handle it internally.
-				var id = 'blobid' + (new Date()).getTime();
-				var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-				var base64 = reader.result.split(',')[1];
-				var blobInfo = blobCache.create(id, file, base64);
-				blobCache.add(blobInfo);
-				// call the callback and populate the Title field with the file name
-				// cb(blobInfo.blobUri(), { title: file.name });
-				var xhr, formData;
+			// Note: In modern browsers input[type="file"] is functional without 
+			// even adding it to the DOM, but that might not be the case in some older
+			// or quirky browsers like IE, so you might want to add it to the DOM
+			// just in case, and visually hide it. And do not forget do remove it
+			// once you do not need it anymore.
+			input.onchange = function() {
+				var file = this.files[0];
+				var reader = new FileReader();
+				reader.onload = function () {
+					// Note: Now we need to register the blob in TinyMCEs image blob
+					// registry. In the next release this part hopefully won't be
+					// necessary, as we are looking to handle it internally.
+					var id = 'blobid' + (new Date()).getTime();
+					var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+					var base64 = reader.result.split(',')[1];
+					var blobInfo = blobCache.create(id, file, base64);
+					blobCache.add(blobInfo);
+					// call the callback and populate the Title field with the file name
+					// cb(blobInfo.blobUri(), { title: file.name });
+					var xhr, formData;
 
-			    xhr = new XMLHttpRequest();
-			    xhr.withCredentials = false;
-			    xhr.open('POST', '<?php echo base_url("article/upload_image") ?>');
+				    xhr = new XMLHttpRequest();
+				    xhr.withCredentials = false;
+				    xhr.open('POST', base_url+'article/upload_image');
 
-			    xhr.onload = function() {
-			      var json;
+				    xhr.onload = function() {
+						var json;
 
-			      if (xhr.status != 200) {
-			        failure('HTTP Error: ' + xhr.status);
-			        return;
-			      }
+						if (xhr.status != 200) {
+							failure('HTTP Error: ' + xhr.status);
+							return;
+						}
 
-			      json = JSON.parse(xhr.responseText);			      
+						json = JSON.parse(xhr.responseText);			      
 
-			      /*if (!json || typeof json.location != 'string') {
-			        failure('Invalid JSON: ' + xhr.responseText);
-			        return;
-			      }*/
+						/*if (!json || typeof json.location != 'string') {
+						failure('Invalid JSON: ' + xhr.responseText);
+						return;
+						}*/
 
-			      // success(json.location);
-			      $("#upload_loader").hide();
-			      var location = '<?php echo base_url() ?>'+json.location;
-			      cb(location,json.filename)
-			    };
+						$("#upload_loader").hide();
+						$("#save_post").text("Saved");
+						var location = json.location;
+						cb(location,json.filename);
+						if(json.add_new_article == 1)
+						{
+							var title = "Edit Article"
+							var url = base_url +"edit-article/"+unique_key;
+							var obj = {
+								Title: title,
+								Url: url
+							};
+							history.pushState(obj, obj.Title, obj.Url);
+						}
+						// upload_success();
+				    };
+				    var title = $("#title_txt").val();
+				    tinyMCE.activeEditor.getContent();
+					// Get the raw contents of the currently active editor
+					tinyMCE.activeEditor.getContent({format : 'raw'});
+					// Get content of a specific editor:
+					var descr =  tinyMCE.get('article_editor').getContent();
 
-			    formData = new FormData();
-			    formData.append('file', blobInfo.blob(), blobInfo.filename());
-			    $("#upload_loader").show();
-			    xhr.send(formData);
+				    formData = new FormData();
+				    formData.append('file', blobInfo.blob(), blobInfo.filename());			    
+				    formData.append('unique_key',unique_key);			    
+				    formData.append('article_title',title);			    
+				    formData.append('article_content',descr);			    
+				    $("#upload_loader").show();
+				    $("#save_post").show();
+					$("#save_post").text("Saving...");
+				    xhr.send(formData);
+				};
+				reader.readAsDataURL(file);
 			};
-			reader.readAsDataURL(file);
-		};
-		input.click();
+			input.click();
+		}
 	}
 });
 //setup before functions
@@ -222,19 +331,50 @@ $('#title_txt').keyup(function(){
     if ($('#title_txt').val()) {    	
         typingTimer1 = setTimeout(function(){
            	//do stuff here e.g ajax call etc....
-            var title = $("#title_txt").val();
-            tinyMCE.activeEditor.getContent();
-			// Get the raw contents of the currently active editor
-			tinyMCE.activeEditor.getContent({format : 'raw'});
-			// Get content of a specific editor:
-			var descr =  tinyMCE.get('artist_editor').getContent();
-
-            console.log('title',title,'content',descr);
+            upload_success();
+            // console.log('title',title,'content',descr);
              // $("#out").html(v);
         }, doneTypingInterval1);
     }
 });
+function upload_success()
+{
+	var title = $("#title_txt").val();
+    tinyMCE.activeEditor.getContent();
+	// Get the raw contents of the currently active editor
+	tinyMCE.activeEditor.getContent({format : 'raw'});
+	// Get content of a specific editor:
+	var descr =  tinyMCE.get('article_editor').getContent();
+	if(title.trim() == "" && descr.trim() == "")
+	{
+		return false;
+	}
+	else
+	{
+		$("#save_post").show();
+		$("#save_post").text("Saving...");
+		$.ajax({
+	        type: 'POST',
+	        url: base_url + "article/add_article",
+	        data: {"article_title":title,"article_content":descr,"unique_key":unique_key},
+	        dataType: "JSON",	        
+	        success: function (data) {
+	        	if(data.add_new_article == 1)
+	        	{
+	        		var title = "Edit Article"
+                    var url = base_url +"edit-article/"+unique_key;
+                    var obj = {
+                        Title: title,
+                        Url: url
+                    };
+                    history.pushState(obj, obj.Title, obj.Url);
+	        	}
+	        	$("#save_post").text("Saved");
+	        }
+	    });
+	}
 
+}
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 </html>
