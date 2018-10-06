@@ -120,20 +120,20 @@ class Article_model extends CI_Model {
         $result_array = $query->row_array();
         return $result_array;
     }
-    function findFieldList($search_keyword = '') {
-        $this->db->select('it.industry_id')->from('industry_type it');
-        $this->db->where('it.industry_name', $search_keyword);
-        $this->db->where('it.status', '1');
+    function getArticleMediaData($post_article_id = '') {
+        $this->db->select('*')->from('post_article_media');
+        $this->db->where('post_article_id', $post_article_id);
         $query = $this->db->get();
-        $result_array = $query->row_array();
+        $result_array = $query->result_array();
         return $result_array;
     }
 
-    function getJobTitle() {
-        $this->db->select('jt.title_id,jt.name')->from('job_title jt');
-        $this->db->where('jt.status', 'publish');
+    function getUserPostArticle($post_id) {
+        $this->db->select('*')->from('user_post');
+        $this->db->where('post_for', 'article');
+        $this->db->where('post_id', $post_id);
         $query = $this->db->get();
-        $result_array = $query->result_array();
+        $result_array = $query->row_array();
         return $result_array;
     }
 

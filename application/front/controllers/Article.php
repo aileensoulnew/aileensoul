@@ -121,4 +121,85 @@ class Article extends MY_Controller {
         }
 
     }
+
+    public function publish_article()
+    {
+        // print_r($this->input->post());exit();
+        $article_title = $this->input->post('article_title');
+        $article_content = $this->input->post('article_content');
+        $unique_key = $this->input->post('unique_key');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $article_data = $this->article_model->getArticleData($user_id,$unique_key);
+            $id_post_article = $article_data['id_post_article'];            
+            $article_mediaData = $this->article_model->getArticleMediaData($id_post_article);
+            $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
+            $doc = new DOMDocument();
+            $doc->loadHTML($article_content);
+            $xpath = new DOMXPath($doc);
+            // $src = $xpath->evaluate("string(//img/@src)");
+            $images = $xpath->query('//img/@src');
+            $img_arr = array();
+            foreach($images as $_images)
+            {
+                $img_arr[] = substr($_images->value, strrpos($_images->value, '/') + 1);
+            }
+            foreach ($article_mediaData as $_articleMediaData) {
+                # code...
+                if (!in_array($_articleMediaData['image_url'], $img_arr)) 
+                {
+                    $article_img = $this->config->item('article_upload_path').$_articleMediaData['image_url'];
+                    @unlink($article_img);
+                    $this->common->delete_data('post_article_media','id',$_articleMediaData['id']);
+                } 
+            }
+            if(isset($user_post_article) && !empty($user_post_article))
+            {
+                $post_id = $user_post_article['post_id'];
+                $new_post = 0;
+            }
+            else
+            {
+
+                $data = array(
+                    "user_id"                   => $user_id,
+                    "post_for"                  => "article",
+                    "post_id"                   => $id_post_article,
+                    "created_date"              => date('Y-m-d h:i:s', time()),
+                    "status"                    => "draft",
+                    "is_delete"                 => '0',
+                );
+                $post_id = $this->common->insert_data_getid($data,'user_post');
+                $new_post = 1;
+            }
+
+            if($post_id > 0)
+            {
+                $data_update = array(
+                    "article_title" => $article_title,                    
+                    "article_desc"  => $article_content,                    
+                    "status"        => 'publish',                    
+                    "modify_date"   => date('Y-m-d h:i:s', time()),                    
+                );
+                if($new_post == 1)
+                {
+                    $article_slug = $this->common->set_slug($article_title, 'article_slug', 'post_article');
+                    $data_update["article_slug"] = $article_slug;
+                }
+                
+                $udapte_data = $this->common->update_data($data_update,'post_article','id_post_article', $id_post_article);
+                $ret_arr = array("status"=>"1","message"=>"Atricle published successfully.");
+            }
+            else
+            {
+                $ret_arr = array("status"=>"0","message"=>"Try again later.");
+            }            
+        }
+        else
+        {
+            $ret_arr = array("status"=>"0","message"=>"Try again later.");
+        }
+        echo json_encode($ret_arr);
+    }
 }

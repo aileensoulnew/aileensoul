@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">        
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>"> 
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <style type="text/css">
@@ -64,13 +64,32 @@
             <form id="article_frm" name="article_frm" action="javascript:void(0);">
 				<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
 				<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
-				<input type="submit" name="publish" value="Publish">
+				<input type="submit" name="publish" value="Publish" id="publish">
 			</form>
 		</div>
 	</div>
+
+	<!-- Model Popup Start -->
+	<div class="modal fade message-box biderror" id="publishmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+	    <div class="modal-dialog modal-lm">
+	        <div class="modal-content message">	            
+	            <div class="modal-body">
+	                <span class="mes">
+	                	<div class="msg"></div>
+		                <div class="pop_content">
+		                	<div class="model_ok_cancel">
+		                		<a class="btn1" id="okbtn" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
+		                	</div>
+		                </div>
+		            </span>
+	            </div>	            
+	        </div>
+	    </div>
+	</div>
+	<!-- Model Popup End -->
 </body>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script>
+<!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script> -->
 <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 <!-- <script src="<?php //echo base_url('assets/js/ckeditor.js?ver='.time()); ?>"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -415,24 +434,38 @@ $(document).ready(function () {
             'article_content': descr,
             'unique_key': unique_key,
         }
+        $("#publish").val('Publishing ...');
+        $("#publish").attr('disabled','disabled');
         $.ajax({
             type: 'POST',
             url: '<?php echo base_url() ?>article/publish_article',
             dataType: 'json',
-            data: post_data,
-            beforeSend: function ()
-            {
-                $("#register_error").fadeOut();
-                $("#btn-register").html('Sign Up ...');
-            },
+            data: post_data,            
             success: function (response)
             {
-                
+            	if(response.status == 1)
+            	{
+            		$("#publishmodal .mes .msg").html("Congratulations, your post has been successfully submitted and sent for approval. We'll send you notifications once it's live.");
+            		$("#publishmodal").modal("show");
+	            	$("#publish").val('Publish');  
+	                $("#publish").removeAttr('disabled');
+            	}
+            	else
+            	{
+            		$("#publishmodal .mes .msg").html("Congratulations, your post has been successfully submitted and sent for approval. We'll send you notifications once it's live.");
+            		$("#publishmodal").modal("show");
+            		$("#publish").val('Publish');  
+	                $("#publish").removeAttr('disabled');	
+            	}            	
             }
         });
         return false;
     }
+    /*$("#okbtn").click(function(){
+    	location.href = "<?php //echo base_url(); ?>";
+    });*/
 });
+
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 </html>
