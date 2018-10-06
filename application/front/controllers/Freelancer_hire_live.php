@@ -2841,6 +2841,7 @@ public function remove_post() {
 	);
 
 	$updatedata = $this->common->update_data($data, 'freelancer_post', 'post_id', $postid);
+	$updatedata1 = $this->common->update_data($data, 'freelancer_post_search_tmp', 'post_id', $postid);
 }
 
 //FREELANCER_HIRE REMOVE POST(PROJECT) END

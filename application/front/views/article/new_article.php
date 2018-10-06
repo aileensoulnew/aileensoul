@@ -62,14 +62,16 @@
                 <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
             </div>
             <form id="article_frm" name="article_frm" action="javascript:void(0);">
-			<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
-			<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
-			<input type="submit" name="publish" value="Publish">
+				<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
+				<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
+				<input type="submit" name="publish" value="Publish">
 			</form>
 		</div>
 	</div>
 </body>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 <!-- <script src="<?php //echo base_url('assets/js/ckeditor.js?ver='.time()); ?>"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script data-semver="0.13.0" src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
@@ -375,6 +377,62 @@ function upload_success()
 	}
 
 }
+
+$(document).ready(function () {
+    $("#article_frm").validate({
+        rules: {
+            title_txt: {
+                required: true,
+            },
+            article_editor: {
+                required: true,
+            },
+            
+        },                   
+        messages:
+        {
+            title_txt: {
+                required: "Please enter article title",
+            },
+            article_editor: {
+                required: "Please enter article description",
+            },
+        },                   
+        submitHandler: submitArticle
+    });
+    /* register submit */
+    function submitArticle()
+    {
+        var title = $("#title_txt").val();
+	    tinyMCE.activeEditor.getContent();
+		// Get the raw contents of the currently active editor
+		tinyMCE.activeEditor.getContent({format : 'raw'});
+		// Get content of a specific editor:
+		var descr =  tinyMCE.get('article_editor').getContent();
+
+        var post_data = {
+            'article_title': title,
+            'article_content': descr,
+            'unique_key': unique_key,
+        }
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() ?>article/publish_article',
+            dataType: 'json',
+            data: post_data,
+            beforeSend: function ()
+            {
+                $("#register_error").fadeOut();
+                $("#btn-register").html('Sign Up ...');
+            },
+            success: function (response)
+            {
+                
+            }
+        });
+        return false;
+    }
+});
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 </html>

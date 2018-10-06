@@ -1222,10 +1222,13 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         foreach (explode(",", $job_keyword) as $key => $value) {
             if($value != "")
             {
-                $sql_skill .= "post_skill_txt LIKE '".$value."%' OR ";
-                $sql_jt .= "post_name_txt LIKE '".$value."%' OR ";
-                $sql_cn .= "rec_comp_name LIKE '".$value."%' OR ";
-                $sql_it .= "industry_name LIKE '".$value."%' OR ";
+                foreach (explode(" ", $value) as $k => $v)
+                {                    
+                    $sql_skill .= "post_skill_txt LIKE '%".$v."%' OR ";
+                    $sql_jt .= "post_name_txt LIKE '%".$v."%' OR ";
+                    $sql_cn .= "rec_comp_name LIKE '%".$v."%' OR ";
+                    $sql_it .= "industry_name LIKE '%".$v."%' OR ";
+                }
             }
         }
         $sql_city = "";$sql_state = "";$sql_country = "";
@@ -1391,10 +1394,13 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         foreach (explode(",", $job_keyword) as $key => $value) {
             if($value != "")
             {
-                $sql_skill .= "post_skill_txt LIKE '".$value."%' OR ";
-                $sql_jt .= "post_name_txt LIKE '".$value."%' OR ";
-                $sql_cn .= "rec_comp_name LIKE '".$value."%' OR ";
-                $sql_it .= "industry_name LIKE '".$value."%' OR ";
+                foreach (explode(" ", $value) as $k => $v)
+                {                    
+                    $sql_skill .= "post_skill_txt LIKE '%".$v."%' OR ";
+                    $sql_jt .= "post_name_txt LIKE '%".$v."%' OR ";
+                    $sql_cn .= "rec_comp_name LIKE '%".$v."%' OR ";
+                    $sql_it .= "industry_name LIKE '%".$v."%' OR ";
+                }
             }
         }
         $sql_city = "";$sql_state = "";$sql_country = "";

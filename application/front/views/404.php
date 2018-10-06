@@ -6,6 +6,7 @@
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
+        <meta name="robots" content="noindex, nofollow">
         <link rel="canonical" href="<?php echo $actual_link ?>" />
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/common-style.css?ver=' . time()) ?>">

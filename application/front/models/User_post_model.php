@@ -1091,6 +1091,8 @@ class User_post_model extends CI_Model {
         $this->db->join('university un', 'un.university_name = us.university_name', 'left');
 
         $this->db->where("u.user_id !=  $userid AND ( $sql_ser )");
+        $this->db->where('ul.status', '1');
+        $this->db->where('ul.is_delete', '0');
         $this->db->limit(5);
         $query = $this->db->get();
         // echo $this->db->last_query();exit;
