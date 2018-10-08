@@ -945,3 +945,4 @@ $config['user_post_resize4_height'] = '315';
 $config['feedback_main_upload_path'] = 'uploads/feedback/';
 
 $config['article_upload_path'] = 'uploads/article/';
+$config['article_featured_upload_path'] = 'uploads/article_featured/';

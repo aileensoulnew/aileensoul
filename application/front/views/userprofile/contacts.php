@@ -53,6 +53,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="fw post_loader loadmore" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
 
                 <div class="custom-user-box no-data-available"  ng-if="pagecntctData.pagedata.total_record == '0'">
                     <div class='art-img-nn'>

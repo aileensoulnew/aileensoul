@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<?php $userid_login = $this->session->userdata('aileenuser');?>
+<?php
+$userid_login = $this->session->userdata('aileenuser');
+$article_featured_upload_path = $this->config->item('article_featured_upload_path');?>
 <html lang="en">
     <head>
         <title><?php echo $meta_title; ?></title>
@@ -49,10 +51,13 @@
 			 max-width: 100%;
 			 height: auto;
 			}
+			.error {
+			    border: 1px solid #ff0000 !important;
+			}
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-<body class="profile-main-page body-loader">
+<body class="profile-main-page">
 	<?php echo $header_inner_profile; ?>
 	<div class="middle-section">
 		<div class="container">
@@ -61,9 +66,31 @@
 			<div class="fw" id="upload_loader" style="text-align: center;position: absolute;display: none;z-index: 99999;top: 47%;">
                 <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
             </div>
-            <form id="article_frm" name="article_frm" action="javascript:void(0);">
+            <form id="article_frm" method="post" name="article_frm" action="javascript:void(0);" onsubmit="return submitArticle();">
 				<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
+				<label class="error" id="err_title" style="display: none;">Please Enter Title.</label>
+				<?php
+					if(isset($articleData) && !empty($articleData) && $articleData['article_featured_image'] != ""){
+						$article_featured_image = $articleData['article_featured_image'];
+						$article_cls = "";
+					}
+					else{
+						$article_featured_image = $articleData['article_featured_image'];
+						$article_cls = "display: none;";
+					} ?>
+				<input type="file" name="featured_img" id="featured_img">
+				<div id="img_preview_div" class="text-center" style="display: none;position: relative;">
+                    <div id="img_preview" style="width:100%;position: relative;"></div>
+                	<button type="button" title="Save" class="btn btn-success set-btn upload-result pull-right" style="position: absolute;right: 0;bottom: 0;">Save</button>
+                	<button type="button" title="Save" class="btn btn-success set-btn cancel-result pull-right" style="position: absolute;right: 40px;bottom: 0;">Cancel</button>
+                </div>
+                <img id="featured_img_src" style="<?php echo $article_cls; ?>" src="<?php echo base_url().$article_featured_upload_path.$article_featured_image; ?>">
+				<!-- <div id="img_preview" style="display: none;position: relative;">					
+					<i onclick="remove_img();" class="fa fa-close" aria-hidden="true" style="position: absolute;right: 0;cursor: pointer;"></i>
+					<img id="featured_img_src" style="width: 15%;">
+				</div> -->
 				<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
+				<label class="error" id="err_desc" style="display: none;">Please Enter Some Content.</label>
 				<input type="submit" name="publish" value="Publish" id="publish">
 			</form>
 		</div>
@@ -126,6 +153,7 @@
         } );*/
 </script>
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
 <script type="text/javascript">//tinymce.init({ selector:'textarea' });
 //setup before functions
 var typingTimer;                //timer identifier
@@ -248,6 +276,10 @@ maineditor = tinymce.init({
 		        }, doneTypingInterval);
 		    }
 	      // console.log('Editor contents was KeyUp.');
+	    });
+	    editor.on('focus blur',function(){
+	    	$("#article_editor").prev().removeClass("error");
+	    	$("#err_desc").hide();
 	    });
 	},
 
@@ -397,8 +429,8 @@ function upload_success()
 
 }
 
-$(document).ready(function () {
-    $("#article_frm").validate({
+// $(document).ready(function () {
+    /*$("#article_frm").validate({
         rules: {
             title_txt: {
                 required: true,
@@ -418,17 +450,38 @@ $(document).ready(function () {
             },
         },                   
         submitHandler: submitArticle
-    });
-    /* register submit */
+    });*/
+
+    $("#title_txt").focusin(function(){
+        $("#title_txt").removeClass("error");
+        $("#err_title").hide();
+    });    
+    /*$("#title_txt").focusout(function(){
+        $('#dobtooltip').hide();
+    });*/
+
     function submitArticle()
     {
-        var title = $("#title_txt").val();
-	    tinyMCE.activeEditor.getContent();
-		// Get the raw contents of the currently active editor
-		tinyMCE.activeEditor.getContent({format : 'raw'});
-		// Get content of a specific editor:
-		var descr =  tinyMCE.get('article_editor').getContent();
-
+        var title = $("#title_txt").val();	    
+		var descr_vali =  tinyMCE.get('article_editor').getContent({format: 'text'});
+		var descr =  tinyMCE.get('article_editor').getContent({format: 'raw'});    	
+    	var error = 0;
+    	if(title.trim() == '')
+    	{
+    		$("#title_txt").addClass("error");
+    		$("#err_title").show();
+    		error = 1;
+    	}
+    	if(descr_vali.trim() == '')
+    	{
+    		$("#article_editor").prev().addClass("error");
+    		$("#err_desc").show();
+    		error = 1;	
+    	}
+    	if(error == 1)
+    	{    		
+    		return false;
+    	}    	
         var post_data = {
             'article_title': title,
             'article_content': descr,
@@ -460,12 +513,102 @@ $(document).ready(function () {
             }
         });
         return false;
+    }    
+
+// });
+
+//Featured Image Crop and Upload Start
+$uploadCrop = $('#img_preview').croppie({
+    enableExif: true,
+    viewport: {
+        width: 1250,
+        height: 350,
+        type: 'square'
+    },
+    boundary: {
+        width: 1250,
+        height: 350
     }
-    /*$("#okbtn").click(function(){
-    	location.href = "<?php //echo base_url(); ?>";
-    });*/
+});
+   
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('.cr-image').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+$(document).on('change','#featured_img', function(){
+	$("#featured_img_src").hide();
+	$("#img_preview_div").show();
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $uploadCrop.croppie('bind', {
+            url: e.target.result
+        }).then(function () {
+            console.log('jQuery bind complete');
+        });
+    }
+    reader.readAsDataURL(this.files[0]);
 });
 
+$('.upload-result').on('click', function (ev) {
+	$(this).attr("disabled","disabled");
+	$(".cancel-result").attr("disabled","disabled");
+	$("#publish").attr("disabled","disabled");
+
+    $uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+    }).then(function (resp) {
+    	//console.log(resp);return false;
+    	var title = $("#title_txt").val();
+	    tinyMCE.activeEditor.getContent();
+		// Get the raw contents of the currently active editor
+		tinyMCE.activeEditor.getContent({format : 'raw'});
+		// Get content of a specific editor:
+		var descr =  tinyMCE.get('article_editor').getContent();
+		$("#save_post").show();
+		$("#save_post").text("Saving...");
+        $.ajax({
+            url: base_url + "article/upload_featured_img",
+            type: "POST",
+            data: {"image": resp,"article_title":title,"article_content":descr,"unique_key":unique_key},
+            dataType: 'json',
+            success: function (result) {
+            	$(".upload-result").removeAttr("disabled");
+            	$(".cancel-result").removeAttr("disabled");
+            	$("#publish").removeAttr("disabled");
+            	$('#img_preview_div').hide();
+            	$("#featured_img").val('');
+                if(result.add_new_article == 1)
+	        	{
+	        		var title = "Edit Article"
+                    var url = base_url +"edit-article/"+unique_key;
+                    var obj = {
+                        Title: title,
+                        Url: url
+                    };
+                    history.pushState(obj, obj.Title, obj.Url);
+	        	}
+	        	$("#featured_img_src").show();
+	        	$("#featured_img_src").attr('src',result.featured_img);
+	        	$("#save_post").text("Saved");
+            }
+        });
+    });
+});
+$('.cancel-result').on('click', function (ev) {
+	$("#img_preview_div").hide();
+	$("#featured_img").val('');
+	$("#featured_img_src").show();
+});
+//Featured Image Crop and Upload End
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 </html>

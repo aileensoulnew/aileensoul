@@ -874,6 +874,7 @@ $route['message'] = "message/main_message";
 $route['generate_sitemap'] = "sitemap/generate_sitemap";
 $route['new-article'] = 'article/new_article';
 $route['edit-article/(:any)'] = 'article/edit_article/$1';
+$route['article-preview/(:any)'] = 'article/article_preview/$1';
 $route['(:any)'] = 'Userprofile';
 
 

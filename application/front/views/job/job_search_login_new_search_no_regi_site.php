@@ -620,9 +620,9 @@ l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
                     $('.right-header ul.dropdown-menu').hide();
                 });
             });
-            $(document).click(function(){
+            /*$(document).click(function(){
                 $('.right-header ul.dropdown-menu').hide();
-            });
+            });*/
 
             function experience(){
                 document.getElementById('exp_data').style.display = 'block';

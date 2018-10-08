@@ -3447,6 +3447,8 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     $scope.live_slug = live_slug;    
     $scope.user_slug = user_data_slug;
     $scope.$parent.title = "Contacts | Aileensoul";
+    $scope.pagi = {};
+    var isProcessing = false;
 
     setTimeout(function(){        
     var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
@@ -3500,7 +3502,17 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 $('#main_loader').show();            
             }
         }
-
+        if (isProcessing) {
+          
+            /*
+             *This won't go past this condition while
+             *isProcessing is true.
+             *You could even display a message.
+             **/
+            return;
+        }
+        isProcessing = true;
+        $(".loadmore").show();
         $http({
             method: 'post',
             url: base_url + "userprofile_page/contacts_data?page=" + pagenum+"&user_slug="+user_slug,
@@ -3509,9 +3521,14 @@ app.controller('contactsController', function ($scope, $http, $location, $window
             if(pagenum == undefined || pagenum == "1" || pagenum == ""){
                 $('#main_loader').hide();
             }
+            $(".loadmore").hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
             if (response.data != '') {
+                isProcessing = false;
+                $scope.pagi.page = response.data.pagedata.page;
+                $scope.pagi.total_record = response.data.pagedata.total_record;
+                $scope.pagi.perpage_record = response.data.pagedata.perpage_record;
                 $scope.row += $scope.rowperpage;
                 if ($scope.contactData != undefined) {
                     $scope.page_number = response.data.pagedata.page;
@@ -3530,12 +3547,14 @@ app.controller('contactsController', function ($scope, $http, $location, $window
     }
     angular.element($window).bind("scroll", function (e) {
         // console.log($(window).scrollTop());
-        //    console.log($(document).height() - $(window).height());
+        // console.log($(document).height() - $(window).height());
+        // console.log(($(document).height() - $(window).height()) * 0.7);
         
         if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
-            var page = $(".page_number").val();
-            var total_record = $(".total_record").val();
-            var perpage_record = $(".perpage_record").val();
+        // if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)) {
+            var page = $scope.pagi.page;
+            var total_record = $scope.pagi.total_record;
+            var perpage_record = $scope.pagi.perpage_record;
             
            // alert(parseInt(perpage_record * page));
            // alert(total_record);
@@ -3547,7 +3566,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                     available_page = available_page + 1;
                 }
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum = parseInt($(".page_number").val()) + 1;
+                    var pagenum = parseInt($scope.pagi.page) + 1;
                     $scope.getContacts(pagenum);
                 }
             }
