@@ -157,11 +157,6 @@
                     </div>
                 </div>
             </section>
-			<div class="container">
-				<div class="banner-add">
-					<?php $this->load->view('banner_add'); ?>
-				</div>
-			</div>
 			<?php $this->load->view('mobile_side_slide'); ?>
             
         </div>

@@ -1927,7 +1927,7 @@ body.cover{padding-bottom:60px}
 }
 .cus-about{padding:80px 0 10px;}
 .all-tem{width:100%; float:left}
-.img-custom{width:24%; margin-bottom:35px}
+.img-custom{width:24%; margin-bottom:0px}
 .Main-im .team-1,.team-1{overflow:hidden; margin:0 auto}
 .team-1{height:200px; width:200px; border-radius:100%; border:1px solid #5c5c5c; box-shadow:0 0 10px -1px rgba(92,92,92,1);}
 .team-1 img{width:100%}
