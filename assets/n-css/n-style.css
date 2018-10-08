@@ -3379,7 +3379,7 @@ a.job-expired:hover{color:#000 !important;}
     .all-tab.pdf-tab li .pdf-title{width: 75%; float: left; padding-left: 10px; text-align: left; padding-top: 10px;}
     .upload-camera{left: 0; bottom: 0; right: auto;}
     .cover-pic{left: -3px; right: auto;}
-    .user-photo-name .profile-img{padding: 3px;}
+    .user-photo-name .profile-img{/*padding: 3px;*/}
     .post-popup-box .all-upload .upload_icon .upload_span_icon{padding-left: 2px;}
     .post-popup-box .all-upload .upload_icon{padding: 10px 5px 10px 15px;}
     .cover-pic .btn{float: left !important; }
@@ -3493,7 +3493,7 @@ a.job-expired:hover{color:#000 !important;}
 	.blog-page .dropdown-title{padding:5px 10px;}
 	.related-article .also-like-box{width:288px !important;}
 	.related-article .rec-img{height:120px;}
-	.user-photo-name .profile-img img{width:102px; height:102px;}
+	.user-photo-name .profile-img img{width:100px; height:100px;}
 	.all-list ul li .list-box{height:200px;}
 	.all-list ul li .list-box .profile-img{width:100px; height:100px;}
 	.bottom-bnr-div{text-align:center;}
