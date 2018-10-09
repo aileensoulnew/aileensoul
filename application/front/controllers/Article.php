@@ -81,6 +81,10 @@ class Article extends MY_Controller {
             $id_post_article = $article_data['id_post_article'];
             $this->data['article_media_data'] = $article_media_data = $this->article_model->getArticleMediaData($id_post_article);            
             $this->data['user_post_article'] = $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
+            if($user_post_article['status'] == 'publish')
+            {
+                redirect(base_url(),"refresh");   
+            }
             /*print_r($this->data['article_data']);
             print_r($this->data['user_post_article']);
             print_r($this->data['user_data']);exit();*/
