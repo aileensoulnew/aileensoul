@@ -46,7 +46,7 @@ echo $leftmenu;
                   <h3 class="box-title">Article</h3>
 
                   <div class="box-tools">
-                     <?php echo form_open('job/search', array('method' => 'post', 'id' => 'search_frm', 'class' => 'form-inline','autocomplete' => 'off')); ?>
+                     <?php echo form_open('article/search', array('method' => 'post', 'id' => 'search_frm', 'class' => 'form-inline','autocomplete' => 'off')); ?>
                      <div class="input-group input-group-sm" >
                         <input type="text" class="form-control input-sm" value="<?php echo $search_keyword; ?>" placeholder="Search" name="search_keyword" id="search_keyword">
                         <div class="input-group-btn">
@@ -55,7 +55,7 @@ echo $leftmenu;
                         <?php echo form_close(); 
                         if ($this->session->userdata('user_search_keyword'))
                         {?>
-                           <a href="<?php echo base_url('job/clear_search') ?>">Clear Search</a>
+                           <a href="<?php echo base_url('article/clear_search') ?>">Clear Search</a>
                            <?php
                         } ?>
                      </div><!--input-group input-group-sm-->

@@ -91,7 +91,7 @@ class Common extends CI_Model {
 
         
         $query = $this->db->get($tablename);
-
+        // echo  $this->db->last_query();exit();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {

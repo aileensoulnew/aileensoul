@@ -34,6 +34,25 @@ class Article extends MY_Controller {
 
     public function list() {
 
+        $limit = $this->paging['per_page'];
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
+            $sortby = $this->uri->segment(3);
+            $orderby = $this->uri->segment(4);
+        } else {
+            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+            $sortby = 'id';
+            $orderby = 'desc';
+        }
+  
+        $this->data['offset'] = $offset;
+        $this->paging['base_url'] = site_url("article/list");
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $this->paging['uri_segment'] = 5;
+        } else {
+            $this->paging['uri_segment'] = 3;
+        }
+
         $join_str[0]['table'] = "user_post";
         $join_str[0]['join_table_id'] = "user_post.post_id";
         $join_str[0]['from_table_id'] = "post_article.id_post_article";
@@ -51,6 +70,13 @@ class Article extends MY_Controller {
         $select_data = "post_article.id_post_article, post_article.user_id, post_article.article_title, post_article.article_desc, post_article.article_featured_image, post_article.unique_key, post_article.status as article_status, post_article.created_date, post_article.article_slug, user_post.post_for, user_post.post_id, user_post.status as user_post_status,user_post.is_delete as user_post_isdeleted, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
 
         $this->data['article_list'] = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit, $offset, $join_str);
+
+        $total_rows = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit = "", $offset = "", $join_str);
+        $this->paging['total_rows'] = count($total_rows);
+        $this->data['total_rows'] = $this->paging['total_rows'];
+        $this->data['limit'] = $limit;
+        $this->pagination->initialize($this->paging);
+        $this->data['search_keyword'] = '';
         // print_r($this->data['article_list']);exit();        
         $this->load->view('article/list', $this->data);
     }
@@ -188,6 +214,78 @@ class Article extends MY_Controller {
         $this->data['article_detail'] = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit, $offset, $join_str)[0];
         // print_r($this->data['article_detail']);exit();        
         $this->load->view('article/articledetail', $this->data);
+    }
+
+    public function clear_search()
+    {
+        if ($this->session->userdata('user_search_keyword'))
+        {
+            $this->session->unset_userdata('user_search_keyword');
+            redirect('article/list','refresh');
+        }
+    }
+
+    public function search() {
+        if($this->input->post('search_keyword'))
+        {
+            $search_keyword = $this->input->post('search_keyword');
+        }
+        elseif($this->session->userdata('user_search_keyword'))
+        {
+            $search_keyword = $this->session->userdata('user_search_keyword');   
+        }
+        else
+        {
+            redirect('article/list','refresh');
+        }
+        $this->data['search_keyword'] = trim($search_keyword);
+        $this->session->set_userdata('user_search_keyword', $search_keyword);
+        $this->data['user_search_keyword'] = $this->session->userdata('user_search_keyword');
+
+        $limit = $this->paging['per_page'];
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
+            $sortby = $this->uri->segment(3);
+            $orderby = $this->uri->segment(4);
+        } else {
+            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+            $sortby = 'id';
+            $orderby = 'desc';
+        }
+  
+        $this->data['offset'] = $offset;
+        $this->paging['base_url'] = site_url("article/search");
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $this->paging['uri_segment'] = 5;
+        } else {
+            $this->paging['uri_segment'] = 3;
+        }
+
+        $join_str[0]['table'] = "user_post";
+        $join_str[0]['join_table_id'] = "user_post.post_id";
+        $join_str[0]['from_table_id'] = "post_article.id_post_article";
+
+        $join_str[1]['table'] = "user";
+        $join_str[1]['join_table_id'] = "user.user_id";
+        $join_str[1]['from_table_id'] = "post_article.user_id";
+
+        $join_str[2]['table'] = "user_login";
+        $join_str[2]['join_table_id'] = "user_login.user_id";
+        $join_str[2]['from_table_id'] = "user.user_id";
+
+        $condition_array = array('user_post.post_for' => 'article',"post_article.article_desc LIKE '%".$search_keyword."%'"=>'');
+
+        $select_data = "post_article.id_post_article, post_article.user_id, post_article.article_title, post_article.article_desc, post_article.article_featured_image, post_article.unique_key, post_article.status as article_status, post_article.created_date, post_article.article_slug, user_post.post_for, user_post.post_id, user_post.status as user_post_status,user_post.is_delete as user_post_isdeleted, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
+
+        $this->data['article_list'] = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit, $offset, $join_str);
+
+        $total_rows = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit = "", $offset = "", $join_str);
+        $this->paging['total_rows'] = count($total_rows);
+        $this->data['total_rows'] = $this->paging['total_rows'];
+        $this->data['limit'] = $limit;
+        $this->pagination->initialize($this->paging);        
+        // print_r($this->data['article_list']);exit();        
+        $this->load->view('article/list', $this->data);
     }
 }
 ?>
