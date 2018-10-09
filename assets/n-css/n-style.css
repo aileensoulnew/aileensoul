@@ -1671,6 +1671,21 @@ top: -3px;}
 .blog-page .pagination li a.active{border:1px solid #d2d2d2; background:#f6f6f6; color:#1b8ab9; text-decoration:none; color:#fff;}
 .blog-page .pagination li.active a{color:#fff;}
 .blog-page .pagination li.active a:hover{color:#1b8ab9;}
+
+.blog-m.blog-page h1{font-size:30px; color:#5c5c5c; line-height:1;}
+.blog-m.blog-page .blog-left-content h2{padding-bottom:0;}
+.blog-page .blog-left-content h1{font-size:26px; color:#5c5c5c; line-height:1.3;}
+.blog-page .blog-left-content h2{font-size:24px; color:#5c5c5c; padding-bottom:20px;}
+.blog-page .blog-left-content h2 a{font-size:24px; color:#1b8ab9;}
+.blog-page .blog-left-content h3{font-size:22px; color:#5c5c5c; padding-bottom:15px;}
+.blog-page .blog-left-content h4{font-size:20px; color:#5c5c5c; padding-bottom:15px;}
+.blog-page .blog-left-content h5{font-size:18px; color:#5c5c5c; padding-bottom:10px;}
+.blog-d .blog-left-content p{padding-bottom:20px;}
+.blog-left-content ul, .blog-left-content ol {margin-bottom:15px; padding-left:35px;}
+.blog-left-content ul li, .blog-left-content ol li {margin-bottom:0; font-size:16px; padding:5px; color:#7b7b7b;}
+
+
+
 /***  end Blog page  ***/
 /***  upload box  ***/
 #fileCountOpp{display: none;}
