@@ -128,6 +128,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	var app = angular.module('', ['ui.bootstrap']);
 	var unique_key = "<?php echo(isset($articleData) && !empty($articleData) ? $articleData['unique_key'] : $unique_key); ?>"
 	var base_url = "<?php echo base_url(); ?>"
+	var article_slug = "";
 </script>
 <script>
     /*ClassicEditor
@@ -491,7 +492,7 @@ function upload_success()
         $("#publish").attr('disabled','disabled');
         $.ajax({
             type: 'POST',
-            url: '<?php echo base_url() ?>article/publish_article',
+            url: base_url+'article/publish_article',
             dataType: 'json',
             data: post_data,            
             success: function (response)
@@ -502,10 +503,12 @@ function upload_success()
             		$("#publishmodal").modal("show");
 	            	$("#publish").val('Publish');  
 	                $("#publish").removeAttr('disabled');
+	                article_slug = response.article_slug;
+
             	}
             	else
             	{
-            		$("#publishmodal .mes .msg").html("Congratulations, your post has been successfully submitted and sent for approval. We'll send you notifications once it's live.");
+            		$("#publishmodal .mes .msg").html("Please try again later.");
             		$("#publishmodal").modal("show");
             		$("#publish").val('Publish');  
 	                $("#publish").removeAttr('disabled');	
@@ -609,6 +612,9 @@ $('.cancel-result').on('click', function (ev) {
 	$("#featured_img_src").show();
 });
 //Featured Image Crop and Upload End
+$("#okbtn").click(function(){	
+	window.location = base_url + "article-preview/" + article_slug;
+});
 </script>
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 </html>

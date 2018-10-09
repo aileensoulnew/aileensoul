@@ -28,20 +28,320 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
             .ui-autocomplete {
                 background: #fff;
                 z-index: 999999!important;
-            }            
+            }
+            .article-info-box{
+            	text-align: center;
+            	width: 100%;
+            	float: left;
+            	position: absolute;
+            	top: 45px;
+            }
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
 <body class="profile-main-page">
 	<?php echo $header_inner_profile; ?>
+
 	<div class="middle-section">
+		<?php if($user_post_article['status'] == "draft"){
+			echo "<span class='article-info-box'>The post has sent for approval. We'll send you a notification once it's live.</span>";
+		} ?>
 		<div class="container">
-			<div id="save_post" style="display: none;">				
+			<div class="custom-user-list pt20">
+				<!-- article-box -->
+				<div class="article-preview">
+					<div class="article-title">
+						<h2><?php echo ucwords($article_data['article_title']); ?></h2>
+					</div>
+					<p class="pt20">Posted on <?php echo date('dS F Y',strtotime($article_data['created_date'])); ?></p>
+					<div class="article-author">
+						<div class="post-img">
+							<?php
+							if($user_data['user_image'] != "")
+							{
+								$pro_img = USER_THUMB_UPLOAD_URL.$user_data['user_image'];
+							}
+							else
+							{
+								if($user_data['user_gender'] == "M")
+								{
+									$pro_img = base_url('assets/img/man-user.jpg');
+								}
+								elseif($user_data['user_gender'] == "F")
+								{
+									$pro_img = base_url('assets/img/female-user.jpg');
+								}
+								else
+								{
+									$pro_img = base_url('assets/img/man-user.jpg');	
+								}
+
+							} ?>
+							<img src="<?php echo $pro_img; ?>">
+						</div>
+						<div class="author-detail">
+							<h4><?php echo ucwords($user_data['first_name'].' '.$user_data['last_name']); ?></h4>
+							<p><?php
+							if($user_data['title_name'] != "")
+							{
+								$designation = $user_data['title_name'];
+							}
+							elseif($user_data['degree_name'] != "")
+							{
+								$designation = $user_data['degree_name'];
+							}
+							else
+							{
+								$designation = "Current Work";
+							}
+							echo $designation; ?></p>
+						</div>
+						<?php if($userid_login != $article_data['user_id']){ ?>
+						<div class="author-btn">
+							<div class="user-btns">
+								<a class="btn3">Add to contact</a>
+								<a class="btn3">Follow</a>
+								<a class="btn3">Message</a>
+							</div>
+						</div>
+						<?php } ?>
+					</div><?php
+					if($article_data['article_featured_image'] != ""){?>
+					<div class="art-banner gradient-bg">
+						<a href="#">
+							<div class="upload-box">
+								<p><img src="<?php echo base_url().$article_featured_upload_path.$article_data['article_featured_image'] ?>"></p>
+								<p>Upload Article Image</p>
+							</div>
+						</a>
+					</div>
+					<?php } ?>
+					<div class="article-content">
+						<?php echo $article_data['article_desc']; ?>
+					</div>
+				</div>
+				<?php if($user_post_article['status'] == "publish"): ?>
+				<div class="post-bottom">
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="bottom-left">
+								<li class="user-likes"><a class="ripple" href="javascript:void(0);"><i class="fa fa-thumbs-up"></i></a></li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										<img src="<?php echo base_url(); ?>n-images/user-pic.jpg">
+									</a>
+									
+								</li>
+								<li class="like-img">
+									<a class="ripple" href="javascript:void(0);">
+										+5 Others
+									</a>
+									
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+				<div class="like-other-box">
+
+					<div class="article-all-comment">
+						<h2>All Comments</h2>
+						<div class="art-comment">
+							<div class="post-comment">
+		                        <div class="post-img">
+		                            <img src="img/user-pic.jpg">
+		                        </div>
+		                        <div class="comment-dis">
+		                            <div class="comment-name"><a>Sarasvati Musical Shop</a></div>
+		                            <div class="comment-dis-inner">nice click.....</div>
+		                            <ul class="comment-action">
+		                                <li><a href="#"><i class="fa fa-thumbs-up"></i></a></li>
+		                                <li><a href="#">Edit</a></li>
+		                                <li><a href="#">Delete</a></li>
+		                                <li><a href="#">13 minutes ago</a></li>
+		                            </ul>
+		                        </div>
+		                    </div>
+							<div class="post-comment">
+		                        <div class="post-img">
+		                            <img src="img/user-pic.jpg">
+		                        </div>
+		                        <div class="comment-dis">
+		                            <div class="comment-name"><a>Sarasvati Musical Shop</a></div>
+		                            <div class="comment-dis-inner">However, most attention in this field is given to crop varieties and to crop wild relatives. Cultivated varieties can be broadly classified into “modern varieties” and “farmer's or traditional varieties”. </div>
+		                            <ul class="comment-action">
+		                                <li><a href="#"><i class="fa fa-thumbs-up"></i></a></li>
+		                                <li><a href="#">Edit</a></li>
+		                                <li><a href="#">Delete</a></li>
+		                                <li><a href="#">13 minutes ago</a></li>
+		                            </ul>
+		                        </div>
+								
+		                    </div>
+							<div class="post-comment">
+		                        <div class="post-img">
+		                            <img src="img/user-pic.jpg">
+		                        </div>
+		                        <div class="comment-dis">
+		                            <div class="comment-name"><a>Sarasvati Musical Shop</a></div>
+		                            <div class="comment-dis-inner">However, most attention in this field is given to crop varieties and to crop wild relatives. Cultivated varieties can be broadly classified into “modern varieties” and “farmer's or traditional varieties”.However, most attention in this field is given to crop varieties and to crop wild relatives. Cultivated varieties can be broadly classified into “modern varieties” and “farmer's or traditional varieties”.However, most attention in this field is given to crop varieties and to crop wild relatives. Cultivated varieties can be broadly classified into “modern varieties” and “farmer's or traditional varieties”.However, most attention in this field is given to crop varieties and to crop wild relatives. Cultivated varieties can be broadly classified into “modern varieties” and “farmer's or traditional varieties”.However, most attention in this field is given to crop varieties and to crop wild relatives. Cultivated varieties can be broadly classified into “modern varieties” and “farmer's or traditional varieties”. </div>
+		                            <ul class="comment-action">
+		                                <li><a href="#"><i class="fa fa-thumbs-up"></i></a></li>
+		                                <li><a href="#">Edit</a></li>
+		                                <li><a href="#">Delete</a></li>
+		                                <li><a href="#">13 minutes ago</a></li>
+		                            </ul>
+		                        </div>
+								
+		                    </div>
+						</div>
+					</div>
+					<div class="comment-article">
+						<h2>Leave a Comment (if not login)</h2>
+						<div class="add-comment">
+							<form class="pt10">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="text" placeholder="Enter Your Name">
+										</div>
+										<div class="form-group">
+											<input type="text" placeholder="Enter Your Email">
+										</div>
+										<div class="form-group">
+											<input type="text" placeholder="Website">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<textarea placeholder="Your Messages"></textarea>
+										</div>
+									</div>
+									<div class="col-md-12 text-right">
+										<a href="#" class="btn1">Submint</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="comment-article">
+						<h2>Leave a Comment (if login)</h2>
+						<div class="add-comment">
+							<form class="pt10">
+								<div class="row">
+									
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea placeholder="Your Messages" style="height:100px;"></textarea>
+										</div>
+									</div>
+									<div class="col-md-12 text-right">
+										<a href="#" class="btn1">Submint</a>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div class="related-article">
+						<h2>Related Article</h2>
+						<div class="row pt10">
+							<div class="col-md-4">
+								<div class="rel-art-box">
+									<img src="img/art-post.jpg">
+									<div class="rel-art-name">
+										<a href="#">Article Name</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="rel-art-box">
+									<img src="img/art-post.jpg">
+									<div class="rel-art-name">
+										<a href="#">Article Name</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="rel-art-box">
+									<img src="img/art-post.jpg">
+									<div class="rel-art-name">
+										<a href="#">Article Name</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php endif; ?>
 			</div>
-			<div class="fw" id="upload_loader" style="text-align: center;position: absolute;display: none;z-index: 99999;top: 47%;">
-                <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
-            </div>
-            <h2 style="text-align: center;" data-mce-style="text-align: center;"><span style="color: #ff0000;" data-mce-style="color: #ff0000;"><strong>Duis tortor elit, porta ut erat vel, fermentum finibus urna.</strong></span></h2><h3 style="text-align: center;" data-mce-style="text-align: center;"><span style="text-decoration: underline; color: #0000ff;" data-mce-style="text-decoration: underline; color: #0000ff;"><strong>Duis tortor elit, porta ut erat vel, fermentum finibus urna.</strong></span></h3><h4 style="text-align: center;" data-mce-style="text-align: center;"><span style="color: #ff00ff;" data-mce-style="color: #ff00ff;"><strong>Duis tortor elit, porta ut erat vel, fermentum finibus urna.</strong></span></h4><h5 style="text-align: center;" data-mce-style="text-align: center;"><span style="text-decoration: underline; color: #339966;" data-mce-style="text-decoration: underline; color: #339966;"><strong>Duis tortor elit, porta ut erat vel, fermentum finibus urna.</strong></span></h5><h6 style="text-align: center;" data-mce-style="text-align: center;"><span style="color: #00ccff;" data-mce-style="color: #00ccff;"><strong>Duis tortor elit, porta ut erat vel, fermentum finibus urna.</strong></span></h6><pre style="text-align: center;" data-mce-style="text-align: center;"><span style="text-decoration: underline; color: #003366;" data-mce-style="text-decoration: underline; color: #003366;"><strong>Duis tortor elit, porta ut erat vel, fermentum finibus urna.</strong></span></pre><p style="text-align: justify;" data-mce-style="text-align: justify;">Morbi posuere dui vel porta rhoncus. Phasellus imperdiet lorem at elit scelerisque condimentum. Duis bibendum dolor vel lectus porttitor semper. Praesent accumsan enim lacus, ut ultrices sapien gravida luctus. Etiam sit amet ante ipsum. Sed scelerisque ligula ut mi facilisis, sed porttitor elit iaculis. Pellentesque consequat pellentesque sapien. Phasellus sollicitudin velit risus, pellentesque interdum massa ornare nec. Sed faucibus, ex quis mollis fringilla, mi ipsum fermentum leo, eget congue arcu ipsum vel justo. Pellentesque bibendum interdum leo. Maecenas fringilla pellentesque rhoncus. Phasellus eget nulla mi. Aliquam erat volutpat. Aenean facilisis tellus sed ipsum dapibus eleifend. Praesent sodales elementum suscipit. Pellentesque hendrerit arcu eu lorem mattis, id suscipit nisi dapibus.</p><blockquote><p style="text-align: justify;" data-mce-style="text-align: justify;">Morbi posuere dui vel porta rhoncus. Phasellus imperdiet lorem at elit scelerisque condimentum. Duis bibendum dolor vel lectus porttitor semper. Praesent accumsan enim lacus, ut ultrices sapien gravida luctus. Etiam sit amet ante ipsum. Sed scelerisque ligula ut mi facilisis, sed porttitor elit iaculis. Pellentesque consequat pellentesque sapien. Phasellus sollicitudin velit risus, pellentesque interdum massa ornare nec.</p></blockquote><p style="text-align: justify;" data-mce-style="text-align: justify;">Morbi posuere dui vel porta rhoncus. Phasellus imperdiet lorem at elit scelerisque condimentum. Duis bibendum dolor vel lectus porttitor semper. Praesent accumsan enim lacus, ut ultrices sapien gravida luctus. Etiam sit amet ante ipsum. Sed scelerisque ligula ut mi facilisis, sed porttitor elit iaculis. Pellentesque consequat pellentesque sapien. Phasellus sollicitudin velit risus, pellentesque interdum massa ornare nec. Sed faucibus, ex quis mollis fringilla, mi ipsum fermentum leo, eget congue arcu ipsum vel justo. Pellentesque bibendum interdum leo. Maecenas fringilla pellentesque rhoncus. Phasellus eget nulla mi. Aliquam erat volutpat. Aenean facilisis tellus sed ipsum dapibus eleifend. Praesent sodales elementum suscipit. Pellentesque hendrerit arcu eu lorem mattis, id suscipit nisi dapibus.</p><p><img style="float: left;" src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_1542.png" alt="" width="209" height="133" data-mce-src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_1542.png" data-mce-style="float: left;"></p><p style="text-align: justify;" data-mce-style="text-align: justify;">Morbi posuere dui vel porta rhoncus. Phasellus imperdiet lorem at elit scelerisque condimentum. Duis bibendum dolor vel lectus porttitor semper. Praesent accumsan enim lacus, ut ultrices sapien gravida luctus. Etiam sit amet ante ipsum. Sed scelerisque ligula ut mi facilisis, sed porttitor elit iaculis. Pellentesque consequat pellentesque sapien. Phasellus sollicitudin velit risus, pellentesque interdum massa ornare nec. Sed faucibus, ex quis mollis fringilla, mi ipsum fermentum leo, eget congue arcu ipsum vel justo. Pellentesque bibendum interdum leo. Maecenas fringilla pellentesque rhoncus. Phasellus eget nulla mi. Aliquam erat volutpat. Aenean facilisis tellus sed ipsum dapibus eleifend. Praesent sodales elementum suscipit. Pellentesque hendrerit arcu eu lorem mattis, id suscipit nisi dapibus.</p><p style="text-align: justify;" data-mce-style="text-align: justify;">Morbi posuere dui vel porta rhoncus. Phasellus imperdiet lorem at elit scelerisque condimentum. Duis bibendum dolor vel lectus porttitor semper. Praesent accumsan enim lacus, ut ultrices sapien gravida luctus. Etiam sit amet ante ipsum. Sed scelerisque ligula ut mi facilisis, sed porttitor elit iaculis. Pellentesque consequat pellentesque sapien. Phasellus sollicitudin velit risus, pellentesque interdum massa ornare nec. Sed faucibus, ex quis mollis fringilla, mi ipsum fermentum leo, eget congue arcu ipsum vel justo. Pellentesque bibendum interdum leo. Maecenas fringilla pellentesque rhoncus. Phasellus eget nulla mi. Aliquam erat volutpat. Aenean facilisis tellus sed ipsum dapibus eleifend. Praesent sodales elementum suscipit. Pellentesque hendrerit arcu eu lorem mattis, id suscipit nisi dapibus.<img style="display: block; margin-left: auto; margin-right: auto;" src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_7416.jpg" alt="" width="514" height="261" data-mce-src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_7416.jpg" data-mce-style="display: block; margin-left: auto; margin-right: auto;"></p><p style="text-align: justify;" data-mce-style="text-align: justify;">Morbi posuere dui vel porta rhoncus. Phasellus imperdiet lorem at elit scelerisque condimentum. Duis bibendum dolor vel lectus porttitor semper. Praesent accumsan enim lacus, ut ultrices sapien gravida luctus. Etiam sit amet ante ipsum. Sed scelerisque ligula ut mi facilisis, sed porttitor elit iaculis. Pellentesque consequat pellentesque sapien. Phasellus sollicitudin velit risus, pellentesque interdum massa ornare nec. Sed faucibus, ex quis mollis fringilla, mi ipsum fermentum leo, eget congue arcu ipsum vel justo. Pellentesque bibendum interdum leo. Maecenas fringilla pellentesque rhoncus. Phasellus eget nulla mi. Aliquam erat volutpat. Aenean facilisis tellus sed ipsum dapibus eleifend. Praesent sodales elementum suscipit. Pellentesque hendrerit arcu eu lorem mattis, id suscipit nisi dapibus.</p><hr><p><img style="float: right;" src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_7430.jpg" alt="" width="189" height="138" data-mce-src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_7430.jpg" data-mce-style="float: right;"></p><p style="text-align: justify;" data-mce-style="text-align: justify;">Morbi posuere dui vel porta rhoncus. Phasellus imperdiet lorem at elit scelerisque condimentum. Duis bibendum dolor vel lectus porttitor semper. Praesent accumsan enim lacus, ut ultrices sapien gravida luctus. Etiam sit amet ante ipsum. Sed scelerisque ligula ut mi facilisis, sed porttitor elit iaculis. Pellentesque consequat pellentesque sapien. Phasellus sollicitudin velit risus, pellentesque interdum massa ornare nec. Sed faucibus, ex quis mollis fringilla, mi ipsum fermentum leo, eget congue arcu ipsum vel justo. Pellentesque bibendum interdum leo. Maecenas fringilla pellentesque rhoncus. Phasellus eget nulla mi. Aliquam erat volutpat. Aenean facilisis tellus sed ipsum dapibus eleifend. Praesent sodales elementum suscipit. Pellentesque hendrerit arcu eu lorem mattis, id suscipit nisi dapibus.</p><hr><p>Nullam egestas urna a orci cursus, vitae rutrum ipsum ullamcorper. Cras neque magna, porttitor non neque eu, fermentum vehicula nunc. Integer tincidunt fringilla urna sit amet egestas. Quisque elementum quam nec mauris tincidunt mattis. Ut tempor odio lobortis maximus scelerisque. Nullam volutpat elit sit amet dui pretium tincidunt. Donec quis aliquet orci, eu tempus mi. Sed elementum, urna sit amet elementum finibus, purus ante sodales eros, non facilisis est elit a dui. Donec sit amet orci et tortor malesuada aliquam nec nec erat. Nam fermentum aliquam venenatis. Donec nisi nisl, accumsan in felis quis, viverra viverra nunc. In scelerisque enim sed velit dictum, at fringilla sem egestas. Fusce feugiat ullamcorper sapien non ornare. Nullam in elit nec lectus porta varius. Etiam nec lobortis diam, non vestibulum sem.</p><p><img style="float: left;" src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_6542.jpg" alt="" width="243" height="128" data-mce-src="http://localhost/aileensoulnew/aileensoul/uploads/article/file_6542.jpg" data-mce-style="float: left;"></p><p style="text-align: justify;" data-mce-style="text-align: justify;">Nullam egestas urna a orci cursus, vitae rutrum ipsum ullamcorper. Cras neque magna, porttitor non neque eu, fermentum vehicula nunc. Integer tincidunt fringilla urna sit amet egestas. Quisque elementum quam nec mauris tincidunt mattis. Ut tempor odio lobortis maximus scelerisque. Nullam volutpat elit sit amet dui pretium tincidunt. Donec quis aliquet orci, eu tempus mi. Sed elementum, urna sit amet elementum finibus, purus ante sodales eros, non facilisis est elit a dui. Donec sit amet orci et tortor malesuada aliquam nec nec erat. Nam fermentum aliquam venenatis. Donec nisi nisl, accumsan in felis quis, viverra viverra nunc. In scelerisque enim sed velit dictum, at fringilla sem egestas. Fusce feugiat ullamcorper sapien non ornare. Nullam in elit nec lectus porta varius. Etiam nec lobortis diam, non vestibulum sem.</p>
+			<div class="right-part">
+				<?php $this->load->view('right_add_box'); ?>            
+				<div class="pt20 fw">
+				<?php $this->load->view('right_add_box'); ?>
+				</div>
+	        </div>
 		</div>
 	</div>
 

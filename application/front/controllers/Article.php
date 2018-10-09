@@ -73,18 +73,24 @@ class Article extends MY_Controller {
         {
             $this->data['article_data'] = $article_data = $this->article_model->getArticleDataFromSlug($article_slug);
             // print_r($article_data);exit();
-            if(empty($article_data))
+            if(empty($article_data) || $article_data['user_id'] != $userid)
             {
                 redirect(base_url(),"refresh");
             }
-            $this->data['article_media_data'] = $article_media_data = $this->article_model->getArticleMediaData($article_data['id_post_article']);            
-            $this->data['meta_title'] = "Edit Article";
-            $this->data['meta_desc'] = "Edit Article";
+            $this->data['user_data'] = $this->user_model->getLeftboxData($article_data['user_id']);
+            $id_post_article = $article_data['id_post_article'];
+            $this->data['article_media_data'] = $article_media_data = $this->article_model->getArticleMediaData($id_post_article);            
+            $this->data['user_post_article'] = $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
+            /*print_r($this->data['article_data']);
+            print_r($this->data['user_post_article']);
+            print_r($this->data['user_data']);exit();*/
+            $this->data['meta_title'] = "Article Title";
+            $this->data['meta_desc'] = "Edit Description";
             $this->load->view('article/article_preview', $this->data);
         }
         else
         {
-            // redirect(base_url(),"refresh");
+            redirect(base_url(),"refresh");
         }
     }
 
@@ -164,6 +170,7 @@ class Article extends MY_Controller {
         {
             $article_data = $this->article_model->getArticleData($user_id,$unique_key);
             $id_post_article = $article_data['id_post_article'];            
+            $article_slug = $article_data['article_slug'];            
             $article_mediaData = $this->article_model->getArticleMediaData($id_post_article);
             $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
             $doc = new DOMDocument();
@@ -220,7 +227,7 @@ class Article extends MY_Controller {
                 }
                 
                 $udapte_data = $this->common->update_data($data_update,'post_article','id_post_article', $id_post_article);
-                $ret_arr = array("status"=>"1","message"=>"Article published successfully.","is_publish"=>1);
+                $ret_arr = array("status"=>"1","message"=>"Article published successfully.","is_publish"=>1,"article_slug"=>$article_slug);
             }
             else
             {

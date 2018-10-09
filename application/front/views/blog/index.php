@@ -283,7 +283,7 @@ if($category_page == 1)
                 <input type="hidden" class="perpage_record" value="4"> -->
                 <div class="container">
                     <div class="blog-t">
-                        <h1>The Aileensoul Blog</h1>
+                        <h1>Aileensoul Blog</h1>
                     </div>
                 </div>
                 <div class="container">
