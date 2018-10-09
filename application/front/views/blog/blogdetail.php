@@ -267,7 +267,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 		                                    </a>
                                             <?php endforeach;*/ ?>
 		    							</p> -->
-		    							<h3><?php echo $blog_data['title']; ?></h3>
+		    							<h1><?php echo $blog_data['title']; ?></h1>
 	    							</a>	    							
 	    						</div>
 	    						<div class="blog-left-img">

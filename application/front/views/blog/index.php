@@ -253,6 +253,11 @@ if($category_page == 1)
             <section id="paddingtop_fixed" class="hidden">
                 <div class="blog-mid-section user-midd-section">
                     <div class="container">
+                        <div class="blog-t">
+                            <h1>The Aileensoul Blog</h1>
+                        </div>
+                    </div>
+                    <div class="container">
                         <div class="row">
                             <div class="custom-user-list">
                                 <div class="job-contact-frnd">
@@ -326,7 +331,7 @@ if($category_page == 1)
                                     <span><?php echo $_blogPost['total_comment']; ?> comments</span>
                                 </p>
                                 <a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">
-                                    <h3><?php echo $_blogPost['title']; ?></h3>
+                                    <h2><?php echo $_blogPost['title']; ?></h2>
                                 </a>
                                 <span class="blog-text">
                                     <?php echo substr($_blogPost['description'], 0,150);?><a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">...read more
