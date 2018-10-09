@@ -19,7 +19,18 @@
                 </a>
             </li>
             <!-- End Dashboard -->
-          <!--Start user Management-->
+            <!--Start Article Management-->
+            <li <?php if ($this->uri->segment(1) == 'article' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
+                <a href="#">
+                    <i class="fa fa-newspaper-o margin-r-5"></i> <span>Article Management</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('article/list'); ?>"><i class="fa fa-newspaper-o"></i>List ALL Article</a></li>
+                </ul>
+            </li>
+            <!--End Article Management-->
+            <!--Start user Management-->
             <li <?php if ($this->uri->segment(1) == 'user_manage' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
                     <i class="fa fa-briefcase margin-r-5"></i> <span>User Management</span>

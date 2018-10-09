@@ -2094,6 +2094,60 @@ Your browser does not support the audio tag.
             }
             //Opportunity Notification End
 
+            //Article Notification Start
+            if ($total['not_from'] == '8' && $total['not_type'] == '10') {
+
+                $article_data = $this->db->select('*')->get_where('post_article', array('id_post_article' => $total['not_product_id']))->row();
+                $article_slug = $article_data->article_slug;
+                $article_title = $article_data->article_title;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('article/'.$article_slug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                $notification .= '<div class="post-img">';
+                // $notification .= '' . ucwords('Admin'). '';
+                $notification .= '<img src="' .base_url('assets/img/user.jpg') . '" alt="'.$user_image.'">';
+                $notification .= '</div>';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>Admin</b> <span class="noti-msg-y"> has beed approved your article :<br><b>'.$article_title.'</b>.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '8' && $total['not_type'] == '11') {
+
+                $article_data = $this->db->select('*')->get_where('post_article', array('id_post_article' => $total['not_product_id']))->row();
+                $article_slug = $article_data->article_slug;
+                $article_title = $article_data->article_title;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="javascript:void(0);" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                $notification .= '<div class="post-img">';
+                // $notification .= '' . ucwords('Admin'). '';
+                $notification .= '<img src="' .base_url('assets/img/user.jpg') . '" alt="'.$user_image.'">';
+                $notification .= '</div>';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>Admin</b> <span class="noti-msg-y"> has rejected your article:<br><b>'.$article_title.'</b>.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+            //Article Notification End
+
             $i++;
             if ($i == 10) {
                 break;
@@ -5221,6 +5275,60 @@ Your browser does not support the audio tag.
                 $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
                 $notification .= '</span></div></div> </div></a> </li>';
             }
+
+            //Article Notification Start
+            if ($total['not_from'] == '8' && $total['not_type'] == '10') {
+
+                $article_data = $this->db->select('*')->get_where('post_article', array('id_post_article' => $total['not_product_id']))->row();
+                $article_slug = $article_data->article_slug;
+                $article_title = $article_data->article_title;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="' . base_url('article/'.$article_slug) . '" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                $notification .= '<div class="post-img">';
+                // $notification .= '' . ucwords('Admin'). '';
+                $notification .= '<img src="' .base_url('assets/img/user.jpg') . '" alt="'.$user_image.'">';
+                $notification .= '</div>';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>Admin</b> <span class="noti-msg-y"> has beed approved your article :<br><b>'.$article_title.'</b>.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+
+            if ($total['not_from'] == '8' && $total['not_type'] == '11') {
+
+                $article_data = $this->db->select('*')->get_where('post_article', array('id_post_article' => $total['not_product_id']))->row();
+                $article_slug = $article_data->article_slug;
+                $article_title = $article_data->article_title;
+
+                $notification .= '<li class="';
+                if ($total['not_active'] == 1) {
+                    $notification .= 'active2';
+                }
+                $notification .= '"';
+                $notification .= '><a href="javascript:void(0);" onClick="not_active(' . $total['not_id'] . ')"><div class="notification-database">';
+                $notification .= '<div class="notification-pic">';
+
+                $notification .= '<div class="post-img">';
+                // $notification .= '' . ucwords('Admin'). '';
+                $notification .= '<img src="' .base_url('assets/img/user.jpg') . '" alt="'.$user_image.'">';
+                $notification .= '</div>';
+
+                $notification .= '</div><div class="notification-data-inside">';
+                $notification .= '<h6><b>Admin</b> <span class="noti-msg-y"> has rejected your article:<br><b>'.$article_title.'</b>.</span></h6>';
+                $notification .= '<div ><i class="clockimg" ></i><span class="day-text">';
+                $notification .= '' . $this->common->time_elapsed_string($total['not_created_date'], $full = false) . '';
+                $notification .= '</span></div></div> </div></a> </li>';
+            }
+            //Article Notification End
             //Opportunity Notification End
         }
         if (isset($notificationData) && !empty($notificationData)) {

@@ -154,3 +154,9 @@ define('PROFILENA', '--');
     
 
 define('FEEDBACK_SCREENSHOT', SITEURL . 'uploads/feedback/');
+
+define('AMAZON_SES_USERNAME','AKIAJTF4AWFIBR256RDA');
+define('AMAZON_SES_PASSWORD','Alr+GuRQv6HG2FhnGO1lo06qBe3unZ+NVYvi9ASNhR9p');
+
+define('MAIL_TD_1','padding-left: 5px;padding-top: 5px;padding-bottom: 0px;width:60px');
+define('MAIL_TD_3','padding:5px;text-align:right;');
