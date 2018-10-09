@@ -251,12 +251,7 @@ if($category_page == 1)
             </div>
             
             <section id="paddingtop_fixed" class="hidden">
-                <div class="blog-mid-section user-midd-section">
-                    <div class="container">
-                        <div class="blog-t">
-                            <h1>The Aileensoul Blog</h1>
-                        </div>
-                    </div>
+                <div class="blog-mid-section user-midd-section">                    
                     <div class="container">
                         <div class="row">
                             <div class="custom-user-list">
@@ -286,6 +281,11 @@ if($category_page == 1)
                 <!-- <input type="hidden" class="page_number" value="1">
                 <input type="hidden" class="total_record" ng-value="total_record">
                 <input type="hidden" class="perpage_record" value="4"> -->
+                <div class="container">
+                    <div class="blog-t">
+                        <h1>The Aileensoul Blog</h1>
+                    </div>
+                </div>
                 <div class="container">
                     <div class="custom-user-list">
 						<div class="tab-add">
