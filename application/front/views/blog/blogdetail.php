@@ -253,8 +253,8 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    					<div class="blog-box">
 	    						<div class="blog-left-content blog-detail-top">
 	    							<a href="<?php echo base_url().'blog/'.$blog_data['blog_slug']; ?>">
-		    							<p class="blog-details-cus">
-                                            <?php foreach($blog_data['blog_category_name'] as $k=>$v):
+		    							<!-- <p class="blog-details-cus">
+                                            <?php /*foreach($blog_data['blog_category_name'] as $k=>$v):
                                                 $category_url = $this->common->clean($v); ?>
 		    								<a href="<?php echo base_url().'blog/category/'.$category_url; ?>">
                                                 <span class="cat text-capitalize">
@@ -265,9 +265,8 @@ header("Pragma: no-cache"); // HTTP/1.0
                                                     echo ", ".$val; ?>
 		                                        </span> 		                                        
 		                                    </a>
-                                            <?php endforeach; ?>
-		    								<!-- <span class="cat">{{ blog.category_name }}</span> --> 
-		    							</p>
+                                            <?php endforeach;*/ ?>
+		    							</p> -->
 		    							<h3><?php echo $blog_data['title']; ?></h3>
 	    							</a>	    							
 	    						</div>
