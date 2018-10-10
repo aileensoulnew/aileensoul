@@ -281,11 +281,13 @@ if($category_page == 1)
                 <!-- <input type="hidden" class="page_number" value="1">
                 <input type="hidden" class="total_record" ng-value="total_record">
                 <input type="hidden" class="perpage_record" value="4"> -->
+                <?php if($category_name == "" && $search_keyword == ""){?>
                 <div class="container">
                     <div class="blog-t">
                         <h1>Aileensoul Blog</h1>
                     </div>
                 </div>
+                <?php } ?>
                 <div class="container">
                     <div class="custom-user-list">
 						<div class="tab-add">
