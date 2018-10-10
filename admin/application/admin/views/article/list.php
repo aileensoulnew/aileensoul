@@ -76,16 +76,16 @@ echo $leftmenu;
                            <th><i class="fa fa-bullhorn"></i>
                               <a href="javascript:void(0);">ID.</a>
                            </th>
-                           <th><i class="fa fa-user"></i>
+                           <th style="width: 10%;"><i class="fa fa-user"></i>
                               <a href="javascript:void(0);">Fullname</a>
                            </th>
                            <th><i class="fa fa-envelope"></i>
                               <a href="javascript:void(0);">Email</a>
                            </th>
-                           <th><i class="fa fa-fw fa-pencil-square"></i> 
+                           <th style="width: 15%;"><i class="fa fa-fw fa-pencil-square"></i> 
                               <a href="javascript:void(0);">Title</a>
                            </th>
-                           <th width="33%"><i class="fa fa-fw fa-pencil-square"></i> 
+                           <th  style="width: 25%;"><i class="fa fa-fw fa-pencil-square"></i> 
                               <a href="javascript:void(0);">Description</a>
                            </th>
                            <th><i class="fa fa-fw fa-pencil-square"></i> 
