@@ -14,6 +14,7 @@ class Article extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('data_model');
         $this->load->model('article_model');
+        $this->load->model('user_post_model');
         $this->load->library('S3');
         $this->load->library('upload');
         $this->load->library("pagination");
@@ -304,5 +305,448 @@ class Article extends MY_Controller {
         {
             echo json_encode(array("featured_img"=>"","success"=>"-1"));
         }    
+    }
+
+    public function article_published($article_slug)
+    {
+        $userid = $this->session->userdata('aileenuser');
+        if($userid != "")
+        {
+            $this->data['article_data'] = $article_data = $this->article_model->getArticleDataFromSlug($article_slug);
+            // print_r($article_data);exit();
+            if(empty($article_data))
+            {
+                redirect(base_url(),"refresh");
+            }
+            $this->data['user_data'] = $this->user_model->getLeftboxData($article_data['user_id']);
+            $id_post_article = $article_data['id_post_article'];
+            $this->data['article_media_data'] = $article_media_data = $this->article_model->getArticleMediaData($id_post_article);            
+            $this->data['user_post_article'] = $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
+            if($user_post_article['status'] == 'draft')
+            {
+                redirect(base_url(),"refresh");   
+            }
+            /*print_r($this->data['article_data']);
+            print_r($this->data['user_post_article']);
+            print_r($this->data['user_data']);exit();*/
+            $this->data['meta_title'] = "Article Title";
+            $this->data['meta_desc'] = "Article Description";
+            $this->load->view('article/article_preview', $this->data);
+        }
+        else
+        {
+            redirect(base_url(),"refresh");
+        }
+    }
+
+    public function likePost() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_id = $this->input->post('post_id');
+
+        $is_likepost = $this->user_post_model->is_likepost($userid, $post_id);
+
+        if ($is_likepost['id'] != '') {
+            if ($is_likepost['is_like'] == '1') {
+                $data = array();
+                $data['is_like'] = '0';
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $updatedata = $this->common->update_data($data, 'user_post_like', 'id', $is_likepost['id']);
+                if ($updatedata) {
+                    $return_array['message'] = '1';
+                    $return_array['is_newLike'] = '0';
+                    $return_array['is_oldLike'] = '1';
+                    $return_array['likePost_count'] = $this->likePost_count($post_id);
+                    $return_array['post_like_data'] = $this->article_model->postLikeData($post_id);
+                    /*if($userid == $postLikeData['user_id'])
+                    {
+                        $postLikeUsername = "You";
+                    }
+                    else
+                    {
+                        $postLikeUsername = $postLikeData['username'];
+                    }
+                    if ($return_array['likePost_count'] > 1) {
+                        $return_array['post_like_data'] = $postLikeUsername . ' and ' . ($return_array['likePost_count'] - 1) . ' other';
+                    } elseif ($return_array['likePost_count'] == 1) {
+                        $return_array['post_like_data'] = $postLikeUsername;
+                    }*/
+                }
+            } else {
+                $data = array();
+                $data['is_like'] = '1';
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $updatedata = $this->common->update_data($data, 'user_post_like', 'id', $is_likepost['id']);
+                if ($updatedata) {
+                    $return_array['message'] = '1';
+                    $return_array['is_newLike'] = '1';
+                    $return_array['is_oldLike'] = '0';
+                    $return_array['likePost_count'] = $this->likePost_count($post_id);
+                    $return_array['post_like_data'] = $this->article_model->postLikeData($post_id);
+                    /*if($userid == $postLikeData['user_id'])
+                    {
+                        $postLikeUsername = "You";
+                    }
+                    else
+                    {
+                        $postLikeUsername = $postLikeData['username'];
+                    }
+                    if ($return_array['likePost_count'] > 1) {
+                        $return_array['post_like_data'] = $postLikeUsername . ' and ' . ($return_array['likePost_count'] - 1) . ' other';
+                    } elseif ($return_array['likePost_count'] == 1) {
+                        $return_array['post_like_data'] = $postLikeUsername;
+                    }*/
+                }
+            }
+        } else {
+            $insert_data = array();
+            $insert_data['user_id'] = $userid;
+            $insert_data['post_id'] = $post_id;
+            $insert_data['created_date'] = date('Y-m-d H:i:s', time());
+            $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
+            $insert_data['is_like'] = '1';
+            $user_post_like_id = $this->common->insert_data_getid($insert_data, 'user_post_like');
+            $return_array = array();
+            if ($user_post_like_id != '') {
+                $return_array['message'] = '1';
+                $return_array['is_newLike'] = '1';
+                $return_array['is_oldLike'] = '0';
+                $return_array['likePost_count'] = $this->likePost_count($post_id);
+                $return_array['post_like_data'] = $this->article_model->postLikeData($post_id);
+                /*if($userid == $postLikeData['user_id'])
+                {
+                    $postLikeUsername = "You";
+                }
+                else
+                {
+                    $postLikeUsername = $postLikeData['username'];
+                }
+                if ($return_array['likePost_count'] > 1) {
+                    $return_array['post_like_data'] = $postLikeUsername . ' and ' . ($return_array['likePost_count'] - 1) . ' other';
+                } elseif ($return_array['likePost_count'] == 1) {
+                    $return_array['post_like_data'] = $postLikeUsername;
+                }*/
+            } else {
+                $return_array['message'] = '0';
+                $return_array['likePost_count'] = $this->likePost_count($post_id);
+                $return_array['post_like_data'] = '';
+            }
+        }
+
+        if($return_array['is_newLike'] == 1)
+        {
+            $to_id = $this->user_post_model->getPostUserId($post_id);
+            if($userid != $to_id)
+            {
+                $contition_array = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                $likenotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                if ($likenotification[0]['not_read'] == 2) {                
+                }
+                elseif($likenotification[0]['not_read'] == 1)
+                {
+                    $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
+                    $where = array('not_type' => '5', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                    $this->db->where($where);
+                    $updatdata = $this->db->update('notification', $dataFollow);
+                }
+                else
+                {
+                    $dataFollow = array(
+                        'not_type' => '5',
+                        'not_from_id' => $userid,
+                        'not_product_id'=>$post_id,
+                        'not_to_id' => $to_id,
+                        'not_read' => '2',                    
+                        'not_from' => '7',
+                        'not_img' => '2',
+                        'not_created_date' => date('Y-m-d H:i:s'),
+                        'not_active' => '1'
+                    );
+                    $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+                    if ($insert_id) {
+                        $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_id))->row()->email;
+                        $login_userdata = $this->user_model->getUserData($userid);
+                        $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
+                        if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                        }
+                        else
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                        }
+
+                        $email_html = '';
+                        
+                        if($login_userdata['user_image'] != "")
+                        {
+                            $login_user_img = USER_THUMB_UPLOAD_URL . $login_userdata['user_image'];
+                        }
+                        else
+                        {
+                            if($login_userdata['user_gender']  == 'M')
+                            {
+                                $login_user_img = base_url('assets/img/man-user.jpg');
+                            }
+
+                            if($login_userdata['user_gender']  == 'F')
+                            {
+                                $login_user_img = base_url('assets/img/female-user.jpg');
+                            }
+                        }
+                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="'.MAIL_TD_1.'">
+                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            </td>
+                                            <td style="padding:5px;">
+                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your aticle.</p>
+                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                            </td>
+                                            <td style="'.MAIL_TD_3.'">
+                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            </td>
+                                        </tr>
+                                        </table>';
+                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' liked your post in Aileensoul.';
+
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $to_id))->row();
+
+                        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                        if($unsubscribeData->is_subscribe == 1)
+                        {
+                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        }
+                    }
+                }
+            }
+        }
+        echo json_encode($return_array);
+    }
+
+    public function likePost_count($post_id = '') {
+        $userid = $this->session->userdata('aileenuser');
+
+        $likepost_count = $this->user_post_model->likepost_count($post_id);
+        return $likepost_count;
+    }
+
+    public function load_more_comment()
+    {
+        $post_id = $this->input->post('post_id');
+        $offset = $this->input->post('offset');
+        $limit = 5;
+        $user_id = $this->session->userdata('aileenuser');
+        $_post_comment_data = $this->article_model->viewAllComment($post_id,$user_id,$limit,$offset);
+
+        $content = "";
+        if(isset($_post_comment_data) && !empty($_post_comment_data))
+        {
+            foreach ($_post_comment_data as $post_comment_data)
+            {
+                if($post_comment_data['user_image'] != "")
+                {
+                    $pro_img_url = USER_THUMB_UPLOAD_URL.$post_comment_data['user_image'];
+                }
+                else
+                {
+                    if($post_comment_data['user_gender'] == "M")
+                    {
+                        $pro_img_url = base_url('assets/img/man-user.jpg');
+                    }
+                    elseif($post_comment_data['user_gender'] == "F")
+                    {
+                        $pro_img_url = base_url('assets/img/man-user.jpg');
+                    }
+                    else
+                    {
+                        $pro_img_url = base_url('assets/img/man-user.jpg');
+                    }
+                }
+                $content .= '<div id="comment-'.$post_comment_data['comment_id'].'" class="post-comment">
+                    <div class="post-img">';
+                        $content .= '<img src="'.$pro_img_url.'">
+                    </div>';
+                    $content .= '<div class="comment-dis">';
+                        $content .= '<div class="comment-name">
+                            <a href="'.base_url($post_comment_data['user_slug']).'">'.ucwords($post_comment_data['username']).'</a>
+                        </div>';
+                        $content .= '<div id="comment-dis-inner-'.$post_comment_data['comment_id'].'" class="comment-dis-inner">'.$post_comment_data['comment'].'
+                        </div>';
+                        // Edit Comment Start
+                        $content .= '<div class="edit-comment" id="edit-comment-'.$post_comment_data['comment_id'].'" style="display:none;">';
+                            $content .= '<div class="comment-input">
+                                <div contenteditable="true" data-directive ng-model="editComment" class="editable_text" placeholder="Add a Comment ..." id="editCommentTaxBox-'.$post_comment_data['comment_id'].'" focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true">'.$post_comment_data['comment'].'</div>
+                            </div>';
+                            $content .= '<div class="mob-comment">
+                                <button onclick="sendEditComment('.$post_comment_data['comment_id'].', '.$post_id.')"><img src="'.base_url('assets/n-images/send.png').'"></button>
+                            </div>';
+                            
+                            $content .= '<div class="comment-submit hidden-mob">
+                                <button class="btn2" onclick="sendEditComment('.$post_comment_data['comment_id'].', '.$post_id.')">Save</button>
+                            </div>
+                        </div>';
+                        // Edit Comment End
+                        $content .= '<ul class="comment-action">
+                            <li>';                                
+                                $cmt_like_cls = "";
+                                if($post_comment_data['is_userlikePostComment'] == 1)
+                                {
+                                    $cmt_like_cls = "like";
+                                }
+                                $content .= '<a href="javascript:void(0);" class="'.$cmt_like_cls.'" onclick="likePostComment('.$post_comment_data['comment_id'].', '.$post_id.')">';
+                                    $content .= '<i class="fa fa-thumbs-up"></i>';
+                                    $content .= '<span id="post-comment-like-'.$post_comment_data['comment_id'].'">';
+                                    $content .= ($post_comment_data['postCommentLikeCount'] > 0 ? $post_comment_data['postCommentLikeCount'] : "");
+                                    $content .= '</span>
+                                </a>
+                            </li>';
+                            
+                            if($post_comment_data['commented_user_id'] == $userid_login){
+                            $content .= '<li id="edit-comment-li-'.$post_comment_data['comment_id'].'">
+                                <a href="javascript:void(0);" onclick="editPostComment('.$post_comment_data['comment_id'].','.$post_id.'">Edit</a>
+                            </li>';
+                            $content .= '<li id="cancel-comment-li-'.$post_comment_data['comment_id'].'" style="display: none;"><a href="javascript:void(0);" onclick="cancelPostComment('.$post_comment_data['comment_id'].','.$post_id.')">Cancel</a></li>';
+                            }
+                            if($user_post_article['user_id'] == $userid_login || $post_comment_data['commented_user_id'] == $userid_login){
+                            $content .= '<li><a href="javascript:void(0);" onclick="deletePostComment('.$post_comment_data['comment_id'].','.$post_id.')">Delete</a></li>';
+                            }
+                            $content .= '<li><a href="javascript:void(0);">'.$post_comment_data['comment_time_string'].'</a></li>';
+                        $content .= '</ul>';
+                    $content .= '</div>';
+                $content .= '</div>';
+            }
+        }        
+        echo $content;
+    }
+
+    public function postCommentInsert() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_id = $this->input->post('post_id');
+        $comment = $this->input->post('comment');
+
+        $data = array();
+        $data['user_id'] = $userid;
+        $data['post_id'] = $post_id;
+        $data['comment'] = $comment;
+        $data['created_date'] = date('Y-m-d H:i:s', time());
+        $data['modify_date'] = date('Y-m-d H:i:s', time());
+        $data['is_delete'] = '0';
+        $postComentId = $this->common->insert_data_getid($data, 'user_post_comment');
+        $return_data = array();
+        if ($postComentId) {
+            $return_data['message'] = '1';
+            $return_data['comment_data'] = $this->user_post_model->postCommentData($post_id,$userid);
+            $return_data['comment_data'][0]['is_userlikePostComment'] = '0';
+            $return_data['comment_data'][0]['postCommentLikeCount'] = '';
+            $return_data['comment_count'] = $this->user_post_model->postCommentCount($post_id);
+
+            $to_id = $this->user_post_model->getPostUserId($post_id);
+            if($userid != $to_id)
+            {
+                $contition_array = array('not_type' => '6', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                $likenotification = $this->common->select_data_by_condition('notification', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                if ($likenotification[0]['not_read'] == 2) {                
+                }
+                elseif($likenotification[0]['not_read'] == 1)
+                {
+                    $dataFollow = array('not_read' => '2','not_created_date' => date('Y-m-d H:i:s'));
+                    $where = array('not_type' => '6', 'not_from_id' => $userid,'not_product_id'=>$post_id,'not_to_id' => $to_id, 'not_from' => '7', 'not_img' => '2');
+                    $this->db->where($where);
+                    $updatdata = $this->db->update('notification', $dataFollow);
+                }
+                else
+                {
+                    $dataFollow = array(
+                        'not_type' => '6',
+                        'not_from_id' => $userid,
+                        'not_product_id'=>$post_id,
+                        'not_to_id' => $to_id,
+                        'not_read' => '2',                    
+                        'not_from' => '7',
+                        'not_img' => '2',
+                        'not_created_date' => date('Y-m-d H:i:s'),
+                        'not_active' => '1'
+                    );
+                    $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+                    if ($insert_id) {
+                        $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_id))->row()->email;
+                        $login_userdata = $this->user_model->getUserData($userid);
+                        $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
+                        // print_r($postDetailData);exit;
+                        if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                        }
+                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
+                        }
+                        else
+                        {
+                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                        }
+
+                        $email_html = '';
+                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="'.MAIL_TD_1.'">
+                                                <img src="' . USER_THUMB_UPLOAD_URL . $login_userdata['user_image'] . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            </td>
+                                            <td style="padding:5px;">
+                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> commented on your article.</p>
+                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                            </td>
+                                            <td style="'.MAIL_TD_3.'">
+                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            </td>
+                                        </tr>
+                                        </table>';
+                        $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' commented on your post in Aileensoul.';
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $to_id))->row();
+
+                        $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                        if($unsubscribeData->is_subscribe == 1)
+                        {
+                            $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
+                        }
+                    }
+                }
+            }
+        } else {
+            $return_data['message'] = '0';
+        }
+        echo json_encode($return_data);
     }
 }

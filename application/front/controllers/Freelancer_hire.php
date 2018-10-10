@@ -2210,7 +2210,7 @@ class Freelancer_hire extends MY_Controller {
             $data = 'username,fullname';
             $hire_data = $this->data['freelancr_user_data'] = $this->common->select_data_by_condition('freelancer_hire_reg', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
 
-            $this->load->view('freelancer/freelancer_hire/freelancer_edit_post', $this->data);
+            $this->load->view('freelancer_live/freelancer_hire/freelancer_edit_post', $this->data);
         } else {
 
             $datereplace = $this->input->post('last_date');

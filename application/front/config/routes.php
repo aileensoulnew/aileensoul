@@ -862,6 +862,11 @@ $route['(:any)/audios'] = 'Userprofile';
 $route['(:any)/pdf'] = 'Userprofile';
 $route['(:any)/article'] = 'Userprofile';
 
+//Article
+$route['article/likePost'] = 'article/likePost';
+$route['article/load_more_comment'] = 'article/load_more_comment';
+$route['article/postCommentInsert'] = 'article/postCommentInsert';
+
 // $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";
 $route['artist/search/artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
@@ -875,6 +880,7 @@ $route['generate_sitemap'] = "sitemap/generate_sitemap";
 $route['new-article'] = 'article/new_article';
 $route['edit-article/(:any)'] = 'article/edit_article/$1';
 $route['article-preview/(:any)'] = 'article/article_preview/$1';
+$route['article/(:any)'] = 'article/article_published/$1';
 $route['(:any)'] = 'Userprofile';
 
 
