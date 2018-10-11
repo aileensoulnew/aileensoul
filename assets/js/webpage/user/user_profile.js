@@ -459,10 +459,91 @@ app.controller('profilesController', function ($scope, $http, $location) {
 });
 
 app.controller('dashboardArticleController', function ($scope, $http, $location, $window) {
+    /*$('.post_loader').hide();
+    $('#main_loader').hide();
+    $('body').removeClass("body-loader");*/
     $scope.makeActive = function (item,slug) {
         $scope.active = $scope.active == item ? '' : item;
     }
-    $('footer').show();
+    // Variables
+    $scope.showLoadmore = true;
+    $scope.row = 0;
+    $scope.rowperpage = 6;
+    $scope.buttonText = "Load More";
+
+    // Fetch data
+    $scope.getDashboardArticle = function (pagenum) {
+        $('.load_more_post').show();
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+             if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
+            //$('#main_loader').show();
+        }
+        $http({
+            method: 'post',
+            url: base_url + "userprofile_page/article_data?page=" + pagenum+"&user_slug="+user_slug,
+            data: {row: $scope.row, rowperpage: $scope.rowperpage}
+        }).then(function successCallback(response) {            
+            $('.load_more_post').hide();
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+            if (response.data != '') {
+                $scope.pagedata = response.data.pagedata;
+                $scope.page_number = response.data.pagedata.page;
+                $scope.total_record = response.data.pagedata.total_record;
+                $scope.perpage_record = response.data.pagedata.perpage_record;
+                //$scope.row += $scope.rowperpage;
+                if ($scope.articleData != undefined) {
+                    $scope.page_number = response.data.pagedata.page;
+                    for (var i in response.data.articlerecord) {                        
+                        $scope.articleData.push(response.data.articlerecord[i]);
+                        /*$scope.$apply(function() {
+                            $scope.articleData.push(response.data.articlerecord[i]);
+                        });*/
+                    }
+                } else {
+                    $scope.pagecntctData = response.data;
+                    $scope.articleData = response.data.articlerecord;
+                }                
+            } else {
+                $scope.showLoadmore = false;
+            }
+            $('footer').show();
+        });
+    }
+    angular.element($window).bind("scroll", function (e) {
+        
+        if (($(window).scrollTop()) == ($(document).height() - $(window).height())) {
+            // console.log($(window).scrollTop());
+            // console.log($(document).height() - $(window).height());
+            var page = $scope.page_number;//$(".page_number").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage_record;//$(".perpage_record").val();            
+            // alert(parseInt(perpage_record * page));
+            // alert(total_record);
+
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.page_number) + 1;// parseInt($(".page_number").val()) + 1;
+                    $scope.getDashboardArticle(pagenum);
+                }
+            }
+        }
+    });
+    // Call function
+    $scope.getDashboardArticle();
+
     $scope.user = {};    
 });
 app.controller('dashboardPdfController', function ($scope, $http, $location, $window) {

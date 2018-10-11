@@ -138,7 +138,7 @@
                             <img ng-if="articleData.article_featured_image != ''" src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{articleData.article_featured_image}}">
                         </div>
                         <div class="article-hover">
-                            {{ articleData.article_title | limitTo : 59}}
+                            <span dd-text-collapse dd-text-collapse-max-length="49" dd-text-collapse-text="{{articleData.article_title != '' ? articleData.article_title : 'Untitled'}}" dd-text-collapse-cond="false"></span>
                         </div>
                     </a>
                 </div>

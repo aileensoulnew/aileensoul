@@ -918,6 +918,25 @@ class Userprofile_page extends MY_Controller {
         $this->load->view('userprofile/article', $this->data);
     }
 
+    public function article_data() {
+       
+        $page = 1;
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+        if (!empty($_GET["user_slug"]) && $_GET["user_slug"] != 'undefined')
+        {
+            $user_slug = $_GET["user_slug"];             
+            $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        }
+        else
+        {            
+            $userid = $this->session->userdata('aileenuser');
+        }
+        $pdfData = $this->data['articleData'] = $this->userprofile_model->getArticleData($userid, $data = "", $page);
+        echo json_encode($pdfData);
+    }
+
     public function get_post_desctiprion($post_id,$post_for)
     {
         echo $post_id,$post_for;

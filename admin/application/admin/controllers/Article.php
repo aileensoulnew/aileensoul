@@ -145,6 +145,12 @@ class Article extends MY_Controller {
             'is_delete' => '1'
         );
         $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
+
+        $data = array(
+            'status' => 'delete'
+        );
+        $update1 = $this->common->update_data($data, 'post_article', 'id_post_article', $id);
+
         echo 'Rejected';
 
         $join_str[0]['table'] = "user_post";

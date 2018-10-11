@@ -44,9 +44,14 @@ $like_usr_cnt = 2;?>
 	<?php echo $header_inner_profile; ?>
 
 	<div class="middle-section">
-		<?php 	if ($user_post_article['status'] == "draft") {
-				    echo "<span class='article-info-box'>The post has sent for approval. We'll send you a notification once it's live.</span>";
-				}?>
+		<?php 
+			// print_r($user_post_article);exit();
+			if ($user_post_article['status'] == "draft" && $user_post_article['is_delete'] == "0") {
+				echo "<span class='article-info-box'>This Article has sent for approval. We'll send you a notification once it's live.</span>";
+			}
+			if ($user_post_article['status'] == "draft" && $user_post_article['is_delete'] == "1") {
+				echo "<span class='article-info-box'>This Article is rejected.</span>";
+			}?>
 		<div class="container">
 			<div class="custom-user-list pt20">
 				<!-- article-box -->

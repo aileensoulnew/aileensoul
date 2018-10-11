@@ -143,7 +143,7 @@ class Article_model extends CI_Model {
     function getArticleDataFromSlug($article_slug = "") {
         $this->db->select('*')->from('post_article');        
         $this->db->where('article_slug', $article_slug);
-        $this->db->where('status', 'publish');
+        // $this->db->where('status', 'publish');
         $query = $this->db->get();
         // echo $this->db->last_query();exit();
         $result_array = $query->row_array();
@@ -162,7 +162,7 @@ class Article_model extends CI_Model {
         $user_id = $this->session->userdata('aileenuser');
         $this->db->select('*')->from('user_post');
         $this->db->where('post_for', 'article');
-        $this->db->where('is_delete', '0');
+        // $this->db->where('is_delete', '0');
         $this->db->where('post_id', $post_id);
         $query = $this->db->get();
         $result_array = $query->row_array();

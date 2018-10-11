@@ -970,4 +970,105 @@ class Userprofile_model extends CI_Model {
         return $result_array;
     }
 
+    public function getArticleData($user_id = '', $select_data = '', $page = '')
+    {
+        $limit = '5';
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $login_userid = $this->session->userdata('aileenuser');
+        $this->db->select("a.id_post_article, a.article_title, a.article_featured_image, a.article_slug, a.unique_key")->from("post_article a");
+        if($login_userid != $user_id)
+        {            
+            $this->db->join('user_post up', 'up.post_id = a.id_post_article', 'left');
+            $this->db->where('up.user_id', $user_id);
+            $this->db->where('up.status', 'publish');
+            $this->db->where('up.post_for', 'article');
+        }
+        else
+        {
+            $this->db->where('a.user_id', $user_id);
+            // $this->db->where('a.status != ', 'delete');   
+        }
+        $this->db->order_by('a.id_post_article', 'desc');
+        if ($limit != '') {
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit();
+        $article_data = $query->result_array();
+        if($login_userid == $user_id)
+        { 
+            foreach ($article_data as $k=>$v)
+            {
+                $check_article = $this->check_article($v['id_post_article']);             
+                if(isset($check_article) && !empty($check_article))
+                {
+                    if($check_article['status'] == "publish")
+                    {
+                        $article_data[$k]['article_slug'] = base_url().'article/'.$v['article_slug'];
+                    }
+                    else
+                    {
+                        $article_data[$k]['article_slug'] = base_url().'article-preview/'.$v['article_slug'];  
+                    }
+                }
+                else
+                {
+                    $article_data[$k]['article_slug'] = base_url().'edit-article/'.$v['unique_key'];
+                }
+            }            
+        }
+        else
+        {
+            foreach ($article_data as $k=>$v)
+            {
+                $article_data[$k]['article_slug'] = base_url().'article/'.$v['article_slug'];
+            }    
+        }        
+        $total_record = $this->getArticleCount($user_id, $select_data = '');
+
+        $page_array['page'] = $page;
+        $page_array['total_record'] = $total_record['total'];
+        $page_array['perpage_record'] = $limit;
+
+        $data = array(
+            'articlerecord' => $article_data,
+            'pagedata' => $page_array
+        );
+        return $data;
+    }
+
+    public function getArticleCount($user_id = '', $select_data = '')
+    {
+        $login_userid = $this->session->userdata('aileenuser');
+        $this->db->select("count(*) as total")->from("post_article a");
+        if($login_userid != $user_id)
+        {            
+            $this->db->join('user_post up', 'up.post_id = a.id_post_article', 'left');
+            $this->db->where('up.user_id', $user_id);
+            $this->db->where('up.status', 'publish');
+            $this->db->where('up.post_for', 'article');
+        }
+        else
+        {
+            $this->db->where('a.user_id', $user_id);
+            // $this->db->where('a.status != ', 'delete');   
+        }
+        $this->db->order_by('a.id_post_article', 'desc');        
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit();
+        return $query->row_array();
+    }
+
+    public function check_article($post_id = '') {
+        $this->db->select('*')->from('user_post');
+        $this->db->where('post_id', $post_id);
+        $this->db->where('post_for', 'article');        
+        $query = $this->db->get();
+        $article_data = $query->row_array();
+        return $article_data;
+    }
+
 }
