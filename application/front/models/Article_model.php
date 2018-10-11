@@ -162,6 +162,7 @@ class Article_model extends CI_Model {
         $user_id = $this->session->userdata('aileenuser');
         $this->db->select('*')->from('user_post');
         $this->db->where('post_for', 'article');
+        $this->db->where('is_delete', '0');
         $this->db->where('post_id', $post_id);
         $query = $this->db->get();
         $result_array = $query->row_array();
@@ -296,6 +297,7 @@ class Article_model extends CI_Model {
         $this->db->where('up.post_id !=', $post_id);
         $this->db->where('up.status', 'publish');
         $this->db->where('up.post_for', 'article');
+        $this->db->where('up.is_delete', '0');
         $this->db->order_by('a.id_post_article', 'desc');
         $this->db->limit(3);
         $query = $this->db->get();

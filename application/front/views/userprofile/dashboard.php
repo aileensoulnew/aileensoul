@@ -131,7 +131,17 @@
                 <h3><a href="<?php echo base_url(); ?>{{user_slug}}/article" ng-click='makeActive("dashboard")'><i class="fa fa-file"></i> Article</a></h3>
             </div>
             <div class="media-display" >
-                
+                <div class="all-meda" ng-repeat="articleData in postArticleData">
+                    <a href="{{articleData.article_slug}}" target="_self">
+                        <div ng-class="articleData.article_featured_image == '' ? 'article-img default-img' : 'article-img'">
+                            <img ng-if="articleData.article_featured_image == ''" src="<?php echo base_url() ?>assets/img/art-default.jpg">
+                            <img ng-if="articleData.article_featured_image != ''" src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{articleData.article_featured_image}}">
+                        </div>
+                        <div class="article-hover">
+                            {{ articleData.article_title | limitTo : 59}}
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="block-1199 fw">

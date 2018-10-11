@@ -984,6 +984,67 @@ class User_post_model extends CI_Model {
         return $result_array;
     }
 
+    public function getUserDashboardArticle($user_id,$login_userid)
+    {
+        $this->db->select("a.id_post_article, a.article_title, a.article_featured_image, a.article_slug, a.unique_key")->from("post_article a");
+        if($login_userid != $user_id)
+        {            
+            $this->db->join('user_post up', 'up.post_id = a.id_post_article', 'left');
+            $this->db->where('up.user_id', $user_id);
+            $this->db->where('up.status', 'publish');
+            $this->db->where('up.post_for', 'article');
+        }
+        else
+        {
+            $this->db->where('a.user_id', $user_id);
+            $this->db->where('a.status != ', 'delete');   
+        }
+        $this->db->order_by('a.id_post_article', 'desc');
+        $this->db->limit('6');
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit();
+        $article_data = $query->result_array();
+        if($login_userid == $user_id)
+        { 
+            foreach ($article_data as $k=>$v)
+            {
+                $check_article = $this->check_article($v['id_post_article']);             
+                if(isset($check_article) && !empty($check_article))
+                {
+                    if($check_article['status'] == "publish")
+                    {
+                        $article_data[$k]['article_slug'] = base_url().'article/'.$v['article_slug'];
+                    }
+                    else
+                    {
+                        $article_data[$k]['article_slug'] = base_url().'article-preview/'.$v['article_slug'];  
+                    }
+                }
+                else
+                {
+                    $article_data[$k]['article_slug'] = base_url().'edit-article/'.$v['unique_key'];
+                }
+            }            
+        }
+        else
+        {
+            foreach ($article_data as $k=>$v)
+            {
+                $article_data[$k]['article_slug'] = base_url().'article/'.$v['article_slug'];
+            }    
+        }
+        $result_array['userDashboardArticle'] = $article_data;
+        return $result_array;
+    }
+    public function check_article($post_id = '') {
+        $this->db->select('*')->from('user_post');
+        $this->db->where('post_id', $post_id);
+        $this->db->where('post_for', 'article');
+        $this->db->where('is_delete', '0');
+        $query = $this->db->get();
+        $article_data = $query->row_array();
+        return $article_data;
+    }
     public function simplePost($post_id = '') {
         $this->db->select('description')->from('user_simple_post usp');
         $this->db->where('usp.post_id', $post_id);

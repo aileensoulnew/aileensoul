@@ -1137,6 +1137,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     getUserDashboardPost();
     getUserDashboardImage();
     getUserDashboardVideo();
+    getUserDashboardArticle();
     getUserDashboardInformation()
     getUserDashboardAudio();
     getUserDashboardPdf();
@@ -1604,6 +1605,15 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $scope.postAllVideoData = success.data.userDashboardVideoAll;
             setTimeout(function(){ $('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */); }, 300);
             
+        }, function (error) {});
+    }
+
+    function getUserDashboardArticle() {
+        $('#loader').show();
+        $http.get(base_url + "user_post/getUserDashboardArticle?user_slug=" + user_slug).then(function (success)
+        {
+            $('#loader').hide();
+            $scope.postArticleData = success.data.userDashboardArticle;            
         }, function (error) {});
     }
 

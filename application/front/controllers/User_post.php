@@ -581,6 +581,14 @@ class User_post extends MY_Controller {
         echo json_encode($post_pdf_data);
     }
 
+    public function getUserDashboardArticle() {
+        $user_slug = $_GET["user_slug"];
+        $login_userid = $this->session->userdata('aileenuser');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        $post_pdf_data = $this->user_post_model->getUserDashboardArticle($userid,$login_userid);
+        echo json_encode($post_pdf_data);
+    }
+
     public function deletePost() {
         $userid = $this->session->userdata('aileenuser');
         $post_id = $_POST['post_id'];
