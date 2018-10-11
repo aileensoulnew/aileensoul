@@ -866,6 +866,10 @@ $route['(:any)/article'] = 'Userprofile';
 $route['article/likePost'] = 'article/likePost';
 $route['article/load_more_comment'] = 'article/load_more_comment';
 $route['article/postCommentInsert'] = 'article/postCommentInsert';
+$route['article/add_article'] = 'article/add_article';
+$route['article/publish_article'] = 'article/publish_article';
+$route['article/upload_featured_img'] = 'article/upload_featured_img';
+$route['article/upload_image'] = 'article/upload_image';
 
 // $route['artist-in-(:any)'] = "artist_live/artist_search/artist-in-$1";
 $route['artist/p/(:any)'] = "artist_live/art_manage_post/$1";

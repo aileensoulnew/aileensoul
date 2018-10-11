@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 class Article_model extends CI_Model {
 
-    function add_article($user_id,$article_title = "",$article_content = "",$unique_key = "")
+    function add_article($user_id,$article_title = "",$article_content = "",$unique_key = "",$article_meta_title = "",$article_meta_description = "",$article_main_category = "",$article_other_category = "")
     {
         $add_new_article = 0;
         $this->db->select('*')->from('post_article');
@@ -17,10 +17,13 @@ class Article_model extends CI_Model {
             $artist_data = $query->row_array();
             $data = array(
                 "article_desc"              => $article_content,
-                // "article_featured_image"    =>  "",
-                "modify_date"               =>  date('Y-m-d h:i:s', time()),
+                "article_meta_title"        => $article_meta_title,
+                "article_meta_description"  => $article_meta_description,
+                "article_main_category"     => $article_main_category,
+                "article_other_category"    => $article_other_category,
+                "modify_date"               => date('Y-m-d h:i:s', time()),
             );
-            if($artist_data['status'] == 'status')
+            if($artist_data['status'] == 'draft')
             {
                 $data['article_title'] = $article_title;
             }
@@ -42,8 +45,11 @@ class Article_model extends CI_Model {
                 "user_id"                   => $user_id,
                 "article_title"             => $article_title,
                 "article_desc"              => $article_content,
-                // "article_featured_image"    =>  "",
-                "unique_key"                =>  $unique_key,
+                "article_meta_title"        => $article_meta_title,
+                "article_meta_description"  => $article_meta_description,
+                "article_main_category"     => $article_main_category,
+                "article_other_category"    => $article_other_category,
+                "unique_key"                => $unique_key,
                 "status"                    => "draft",
                 "created_date"              => date('Y-m-d h:i:s', time()),
                 "modify_date"               => date('Y-m-d h:i:s', time()),
@@ -62,7 +68,7 @@ class Article_model extends CI_Model {
         return $ret_arr;
     }
 
-    function add_article_media($user_id,$article_title = "",$article_content = "",$unique_key = "",$fileName)
+    function add_article_media($user_id,$article_title = "",$article_content = "",$unique_key = "",$fileName,$article_meta_title = "",$article_meta_description = "",$article_main_category = "",$article_other_category = "")
     {
         $this->db->select('*')->from('post_article');
         $this->db->where('user_id', $user_id);   
@@ -74,10 +80,13 @@ class Article_model extends CI_Model {
             $artist_data = $query->row_array();
             $data = array(            
                 "article_desc"              => $article_content,
-                "article_featured_image"    =>  "",
+                "article_meta_title"        => $article_meta_title,
+                "article_meta_description"  => $article_meta_description,
+                "article_main_category"     => $article_main_category,
+                "article_other_category"    => $article_other_category,
                 "modify_date"               =>  date('Y-m-d h:i:s', time()),
             );
-            if($artist_data['status'] == 'status')
+            if($artist_data['status'] == 'draft')
             {
                 $data['article_title'] = $article_title;
             }
@@ -91,9 +100,12 @@ class Article_model extends CI_Model {
             $data = array(
                 "user_id"                   => $user_id,
                 "article_title"             => $article_title,
-                "article_desc"              => $article_content,
-                // "article_featured_image"    =>  "",
-                "unique_key"                =>  $unique_key,
+                "article_desc"              => $article_content,                
+                "unique_key"                => $unique_key,
+                "article_meta_title"        => $article_meta_title,
+                "article_meta_description"  => $article_meta_description,
+                "article_main_category"     => $article_main_category,
+                "article_other_category"    => $article_other_category,
                 "status"                    => "draft",
                 "created_date"              => date('Y-m-d h:i:s', time()),
                 "modify_date"               => date('Y-m-d h:i:s', time()),
@@ -153,6 +165,10 @@ class Article_model extends CI_Model {
         $this->db->where('post_id', $post_id);
         $query = $this->db->get();
         $result_array = $query->row_array();
+        if(empty($result_array))
+        {
+            return $result_array;
+        }
 
         $result_array['post_like_data'] = $this->postLikeData($result_array['id']);
         $post_like_count = $this->user_post_model->likepost_count($result_array['id']);
@@ -270,5 +286,21 @@ class Article_model extends CI_Model {
             $post_comment_data[$key]['postCommentLikeCount'] = $this->user_post_model->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->user_post_model->postCommentLikeCount($value['comment_id']);
         }
         return $post_comment_data;
+    }
+
+    public function get_related_article($user_id,$post_id)
+    {
+        $this->db->select("a.id_post_article,a.article_title,a.article_featured_image,a.article_slug")->from("post_article a");
+        $this->db->join('user_post up', 'up.post_id = a.id_post_article', 'left');
+        $this->db->where('up.user_id', $user_id);
+        $this->db->where('up.post_id !=', $post_id);
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.post_for', 'article');
+        $this->db->order_by('a.id_post_article', 'desc');
+        $this->db->limit(3);
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit();
+        $related_article_data = $query->result_array();
+        return $related_article_data;
     }
 }

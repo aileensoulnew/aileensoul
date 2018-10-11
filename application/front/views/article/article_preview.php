@@ -5,8 +5,8 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 $like_usr_cnt = 2;?>
 <html lang="en">
     <head>
-        <title><?php echo $meta_title; ?></title>
-        <meta name="description" content="<?php echo $meta_desc; ?>" />
+        <title><?php echo $article_data['article_meta_title']; ?></title>
+        <meta name="description" content="<?php echo $article_data['article_meta_description']; ?>" />
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,9 +44,9 @@ $like_usr_cnt = 2;?>
 	<?php echo $header_inner_profile; ?>
 
 	<div class="middle-section">
-		<?php if ($user_post_article['status'] == "draft") {
-    echo "<span class='article-info-box'>The post has sent for approval. We'll send you a notification once it's live.</span>";
-}?>
+		<?php 	if ($user_post_article['status'] == "draft") {
+				    echo "<span class='article-info-box'>The post has sent for approval. We'll send you a notification once it's live.</span>";
+				}?>
 		<div class="container">
 			<div class="custom-user-list pt20">
 				<!-- article-box -->
@@ -55,51 +55,94 @@ $like_usr_cnt = 2;?>
 						<h2><?php echo ucwords($article_data['article_title']); ?></h2>
 					</div>
 					<p class="pt20">Posted on <?php echo date('dS F Y', strtotime($article_data['created_date'])); ?></p>
+					<p class="pt20">
+						<?php
+						if($article_data['article_main_category'] == 0)
+						{
+							echo $article_data['article_other_category'];
+						}
+						else
+						{
+							$category = $this->db->get_where('industry_type', array('industry_id' => $article_data['article_main_category'], 'status' => 1))->row()->industry_name;
+							echo $category;
+						}  ?>
+					</p>
 					<div class="article-author">
 						<div class="post-img">
 							<?php
-if ($user_data['user_image'] != "") {
-    $pro_img = USER_THUMB_UPLOAD_URL . $user_data['user_image'];
-} else {
-    if ($user_data['user_gender'] == "M") {
-        $pro_img = base_url('assets/img/man-user.jpg');
-    } elseif ($user_data['user_gender'] == "F") {
-        $pro_img = base_url('assets/img/female-user.jpg');
-    } else {
-        $pro_img = base_url('assets/img/man-user.jpg');
-    }
+							if ($user_data['user_image'] != "") {
+							    $pro_img = USER_THUMB_UPLOAD_URL . $user_data['user_image'];
+							} else {
+							    if ($user_data['user_gender'] == "M") {
+							        $pro_img = base_url('assets/img/man-user.jpg');
+							    } elseif ($user_data['user_gender'] == "F") {
+							        $pro_img = base_url('assets/img/female-user.jpg');
+							    } else {
+							        $pro_img = base_url('assets/img/man-user.jpg');
+							    }
 
-}?>
-							<img src="<?php echo $pro_img; ?>">
+							}?>
+							<a href="<?php echo base_url($user_data['user_slug']); ?>">
+								<img src="<?php echo $pro_img; ?>">
+							</a>
 						</div>
 						<div class="author-detail">
+							<a href="<?php echo base_url($user_data['user_slug']); ?>">
 							<h4><?php echo ucwords($user_data['first_name'] . ' ' . $user_data['last_name']); ?></h4>
 							<p><?php
-if ($user_data['title_name'] != "") {
-    $designation = $user_data['title_name'];
-} elseif ($user_data['degree_name'] != "") {
-    $designation = $user_data['degree_name'];
-} else {
-    $designation = "Current Work";
-}
-echo $designation;?></p>
+								if ($user_data['title_name'] != "") {
+								    $designation = $user_data['title_name'];
+								} elseif ($user_data['degree_name'] != "") {
+								    $designation = $user_data['degree_name'];
+								} else {
+								    $designation = "Current Work";
+								}
+								echo $designation;?>
+							</p>
+							</a>
 						</div>
-						<?php if ($userid_login != $article_data['user_id']) {?>
+						<?php if ($userid_login != "" && $userid_login != $article_data['user_id']) {?>
 						<div class="author-btn">
 							<div class="user-btns">
-								<a class="btn3">Add to contact</a>
-								<a class="btn3">Follow</a>
-								<a class="btn3">Message</a>
+								<?php
+								if($contact_value == 'new'){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
+								<?php
+								}
+								elseif($contact_value == 'confirm'){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>,1)">In Contacts</a>
+								<?php
+								}
+								elseif($contact_value == 'pending' && $from_id != $to_id){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>)">Request sent</a>
+								<?php
+								}
+								elseif($contact_value == 'pending' && $from_id == $to_id){ ?>
+									<a id="contact-btn" class="btn3" onclick="confirmContactRequestInnerHeader(<?php echo $to_id; ?>)">Confirm Request</a>
+								<?php
+								}
+								elseif($contact_value == 'cancel' || $contact_value == 'reject'){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
+								<?php
+								}
+
+								if($follow_value == "new" || $follow_value == "0"){ ?>
+									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 1, <?php echo $to_id; ?>)">Follow</a>
+								<?php }
+								elseif($follow_value == "1"){ ?>
+									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 0, <?php echo $to_id; ?>)">Following</a>
+								<?php
+								} ?>
+								<a href="<?php echo MESSAGE_URL."user/".$user_data['user_slug']; ?>" class="btn3">Message</a>
 							</div>
 						</div>
 						<?php }?>
 					</div><?php
-if ($article_data['article_featured_image'] != "") {?>
+					if ($article_data['article_featured_image'] != "") {?>
 					<div class="art-banner gradient-bg">
 						<a href="#">
 							<div class="upload-box">
 								<p><img src="<?php echo base_url() . $article_featured_upload_path . $article_data['article_featured_image'] ?>"></p>
-								<p>Upload Article Image</p>
 							</div>
 						</a>
 					</div>
@@ -208,7 +251,9 @@ if ($article_data['article_featured_image'] != "") {?>
 								} ?>								
 								<div id="comment-<?php echo $post_comment_data['comment_id']; ?>" class="post-comment">
 			                        <div class="post-img">
-			                            <img src="<?php echo $pro_img_url; ?>">
+			                        	<a href="<?php echo base_url($post_comment_data['user_slug']) ?>">
+			                            	<img src="<?php echo $pro_img_url; ?>">
+			                        	</a>
 			                        </div>
 			                        <div class="comment-dis">
 			                            <div class="comment-name">
@@ -220,7 +265,7 @@ if ($article_data['article_featured_image'] != "") {?>
 			                            <!-- Edit Comment Start -->
 			                            <div class="edit-comment" id="edit-comment-<?php echo $post_comment_data['comment_id']; ?>" style="display:none;">
                                             <div class="comment-input">                         
-                                                <div contenteditable="true" data-directive ng-model="editComment" class="editable_text" placeholder="Add a Comment ..." id="editCommentTaxBox-<?php echo $post_comment_data['comment_id']; ?>" focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true"><?php echo $post_comment_data['comment']; ?></div>
+                                                <div contenteditable="true" data-directive class="editable_text" placeholder="Add a Comment ..." id="editCommentTaxBox-<?php echo $post_comment_data['comment_id']; ?>" focus="setFocus" focus-me="setFocus" role="textbox" spellcheck="true"><?php echo $post_comment_data['comment']; ?></div>
                                             </div>
                                             <div class="mob-comment">
                                                 <button onclick="sendEditComment(<?php echo $post_comment_data['comment_id']; ?>, <?php echo $user_post_article['id']; ?>)"><img src="<?php echo base_url('assets/n-images/send.png') ?>"></button>
@@ -314,7 +359,7 @@ if ($article_data['article_featured_image'] != "") {?>
 
 									<div class="col-md-12">
 										<div class="form-group">
-											<div contenteditable="true" data-directive  class="editable_text" placeholder="Add a Comment ..." id="commentTaxBox-<?php echo $user_post_article['id']; ?>" ng-focus="setFocus" focus-me="setFocus" style="height:100px;"></div>
+											<div contenteditable="true" data-directive  class="editable_text" placeholder="Add a Comment ..." id="commentTaxBox-<?php echo $user_post_article['id']; ?>" focus-me="setFocus" style="height:100px;"></div>
 											<!-- <textarea placeholder="Your Messages" style="height:100px;"></textarea> -->
 										</div>
 									</div>
@@ -326,36 +371,41 @@ if ($article_data['article_featured_image'] != "") {?>
 						</div>
 					</div>
 					<?php
-					endif; ?>
+					endif;
+					if(isset($related_article_data) && !empty($related_article_data)): ?>
 					<div class="related-article">
 						<h2>Related Article</h2>
 						<div class="row pt10">
-							<div class="col-md-4">
-								<div class="rel-art-box">
-									<img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-									<div class="rel-art-name">
-										<a href="#">Article Name</a>
+							<?php							
+							foreach($related_article_data as $_related_article_data):
+								if($_related_article_data['article_featured_image'] != "")
+								{
+									$article_img = base_url().$article_featured_upload_path.$_related_article_data['article_featured_image'];
+									$default_img_cls ="";
+								}
+								else
+								{
+									$article_img = base_url('assets/img/art-default.jpg');
+									$default_img_cls =" article-defaul-img";
+								} ?>
+								<div class="col-md-4">
+									<div class="rel-art-box<?php echo $default_img_cls; ?>">
+										<a href="<?php echo base_url().$_related_article_data['article_slug']; ?>">
+											<img src="<?php echo $article_img; ?>" alt="<?php echo ucwords($_related_article_data['article_title']); ?>">
+										</a>
+										<div class="rel-art-name">
+											<a href="<?php echo base_url().$_related_article_data['article_slug']; ?>"><?php echo ucwords($_related_article_data['article_title']); ?></a>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="rel-art-box">
-									<img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-									<div class="rel-art-name">
-										<a href="#">Article Name</a>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="rel-art-box">
-									<img src="<?php echo base_url(); ?>assets/img/art-post.jpg">
-									<div class="rel-art-name">
-										<a href="#">Article Name</a>
-									</div>
-								</div>
-							</div>
+							<?php
+							endforeach;
+							?>
 						</div>
 					</div>
+					<?php
+					endif;
+					?>
 				</div>
 				<?php endif;?>
 			</div>
@@ -367,6 +417,8 @@ if ($article_data['article_featured_image'] != "") {?>
 	        </div>
 		</div>
 	</div>
+	<?php echo $login_footer ?>   
+	<?php echo $footer; ?>
 
 	<!-- Model Popup Start -->
 	<div class="modal fade message-box biderror" id="publishmodal" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -388,22 +440,34 @@ if ($article_data['article_featured_image'] != "") {?>
 	<!-- Model Popup End -->
 
 	<div class="modal fade message-box" id="delete_model" role="dialog">
-            <div class="modal-dialog modal-lm">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
-                    <div class="modal-body">
-                        <span class="mes">
-                            <div class="pop_content">Do you want to delete this comment?
-                            	<div class="model_ok_cancel">
-	                            	<a id="del_com" class="okbtn btn1" onclick="" href="javascript:void(0);" data-dismiss="modal">Yes</a>
-	                            	<a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a>
-	                            </div>
-	                        </div>
-                        </span>
-                    </div>
+        <div class="modal-dialog modal-lm">
+            <div class="modal-content">
+                <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>       
+                <div class="modal-body">
+                    <span class="mes">
+                        <div class="pop_content">Do you want to delete this comment?
+                        	<div class="model_ok_cancel">
+                            	<a id="del_com" class="okbtn btn1" onclick="" href="javascript:void(0);" data-dismiss="modal">Yes</a>
+                            	<a class="cnclbtn btn1" href="javascript:void(0);" data-dismiss="modal">No</a>
+                            </div>
+                        </div>
+                    </span>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal fade message-box" id="remove-contact-conform" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lm">
+            <div class="modal-content">
+                <button type="button" class="modal-close" id="postedit"data-dismiss="modal">&times;</button>
+                <div class="modal-body">
+                    <span class="mes">
+                        <div class="pop_content">Do you want to remove this contact?<div class="model_ok_cancel"><a class="okbtn" onclick="remove_contact('<?php echo $contact_id; ?>','cancel','<?php echo $to_id; ?>')" href="javascript:void(0);" data-dismiss="modal">Yes</a><a class="cnclbtn" href="javascript:void(0);" data-dismiss="modal">No</a></div></div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()); ?>"></script>
 <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()); ?>"></script> -->

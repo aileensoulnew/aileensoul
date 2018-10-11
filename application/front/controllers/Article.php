@@ -15,6 +15,7 @@ class Article extends MY_Controller {
         $this->load->model('data_model');
         $this->load->model('article_model');
         $this->load->model('user_post_model');
+        $this->load->model('userprofile_model');
         $this->load->library('S3');
         $this->load->library('upload');
         $this->load->library("pagination");
@@ -88,9 +89,7 @@ class Article extends MY_Controller {
             }
             /*print_r($this->data['article_data']);
             print_r($this->data['user_post_article']);
-            print_r($this->data['user_data']);exit();*/
-            $this->data['meta_title'] = "Article Title";
-            $this->data['meta_desc'] = "Edit Description";
+            print_r($this->data['user_data']);exit();*/            
             $this->load->view('article/article_preview', $this->data);
         }
         else
@@ -119,6 +118,17 @@ class Article extends MY_Controller {
         $unique_key = $this->input->post('unique_key');
         $article_title = $this->input->post('article_title');
         $article_content = $this->input->post('article_content');
+        $article_meta_title = $this->input->post('article_meta_title');
+        $article_meta_description = $this->input->post('article_meta_description');
+        $article_main_category = $this->input->post('article_main_category');
+        if($article_main_category == 0)
+        {                
+            $article_other_category = $this->input->post('article_other_category');
+        }
+        else
+        {
+            $article_other_category = "";
+        }
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
@@ -132,7 +142,7 @@ class Article extends MY_Controller {
                     $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
                 }
 
-                $success = $this->article_model->add_article_media($user_id,$article_title,$article_content,$unique_key,$fileName);                
+                $success = $this->article_model->add_article_media($user_id,$article_title,$article_content,$unique_key,$fileName,$article_meta_title,$article_meta_description,$article_main_category,$article_other_category);                
                 echo json_encode(array("location"=>base_url().$article_upload_path.$fileName,"filename"=>$fileName,"add_new_article"=>$success['add_new_article']));
             }
             else
@@ -154,7 +164,18 @@ class Article extends MY_Controller {
             $article_title = $this->input->post('article_title');
             $article_content = $this->input->post('article_content');
             $unique_key = $this->input->post('unique_key');
-            $success = $this->article_model->add_article($user_id,$article_title,$article_content,$unique_key);
+            $article_meta_title = $this->input->post('article_meta_title');
+            $article_meta_description = $this->input->post('article_meta_description');
+            $article_main_category = $this->input->post('article_main_category');
+            if($article_main_category == 0)
+            {                
+                $article_other_category = $this->input->post('article_other_category');
+            }
+            else
+            {
+                $article_other_category = "";
+            }
+            $success = $this->article_model->add_article($user_id,$article_title,$article_content,$unique_key,$article_meta_title,$article_meta_description,$article_main_category,$article_other_category);
             echo json_encode($success);
         }
         else
@@ -170,6 +191,18 @@ class Article extends MY_Controller {
         $article_title = $this->input->post('article_title');
         $article_content = $this->input->post('article_content');
         $unique_key = $this->input->post('unique_key');
+
+        $article_meta_title = $this->input->post('article_meta_title');
+        $article_meta_description = $this->input->post('article_meta_description');
+        $article_main_category = $this->input->post('article_main_category');
+        if($article_main_category == 0)
+        {                
+            $article_other_category = $this->input->post('article_other_category');
+        }
+        else
+        {
+            $article_other_category = "";
+        }
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
@@ -177,7 +210,7 @@ class Article extends MY_Controller {
             $id_post_article = $article_data['id_post_article'];            
             $article_slug = $article_data['article_slug'];            
             $article_mediaData = $this->article_model->getArticleMediaData($id_post_article);
-            $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
+            $user_post_article = $this->article_model->getUserPostArticle($id_post_article);            
             $doc = new DOMDocument();
             $doc->loadHTML($article_content);
             $xpath = new DOMXPath($doc);
@@ -220,10 +253,14 @@ class Article extends MY_Controller {
             if($post_id > 0)
             {
                 $data_update = array(
-                    "article_title" => $article_title,                    
-                    "article_desc"  => $article_content,                    
-                    "status"        => 'publish',                    
-                    "modify_date"   => date('Y-m-d h:i:s', time()),                    
+                    "article_title"             => $article_title,                    
+                    "article_desc"              => $article_content,
+                    "article_meta_title"        => $article_meta_title,
+                    "article_meta_description"  => $article_meta_description,
+                    "article_main_category"     => $article_main_category,
+                    "article_other_category"    => $article_other_category,
+                    "status"                    => 'publish',                    
+                    "modify_date"               => date('Y-m-d h:i:s', time()),                    
                 );
                 if($new_post == 1)
                 {
@@ -236,12 +273,12 @@ class Article extends MY_Controller {
             }
             else
             {
-                $ret_arr = array("status"=>"0","message"=>"Try again later.","is_publish"=>0);
+                $ret_arr = array("status"=>"0","message"=>"Try again later1.","is_publish"=>0);
             }            
         }
         else
         {
-            $ret_arr = array("status"=>"0","message"=>"Try again later.","is_publish"=>0);
+            $ret_arr = array("status"=>"0","message"=>"Try again later2.","is_publish"=>0);
         }
         echo json_encode($ret_arr);
     }
@@ -325,6 +362,32 @@ class Article extends MY_Controller {
             if($user_post_article['status'] == 'draft')
             {
                 redirect(base_url(),"refresh");   
+            }
+            $this->data['related_article_data'] = $this->article_model->get_related_article($userid,$id_post_article);
+
+            $is_userContactInfo = $this->userprofile_model->userContactStatus($userid, $article_data['user_id']);
+            $is_userFollowInfo = $this->userprofile_model->userFollowStatus($userid, $article_data['user_id']);
+            $this->data['to_id'] = $article_data['user_id'];
+            if (count($is_userContactInfo) != 0) {
+                $this->data['contact_status'] = 1;
+                $this->data['contact_value'] = $is_userContactInfo['status'];
+                $this->data['contact_id'] = $is_userContactInfo['id'];
+                $this->data['from_id'] = $is_userContactInfo['from_id'];
+            } else {
+                $this->data['contact_value'] = 'new';
+                $this->data['contact_status'] = 0;
+                $this->data['contact_id'] = ($is_userContactInfo['id'] != "" ? $is_userContactInfo['id'] : "''");
+                $this->data['from_id'] = $is_userContactInfo['from_id'];
+            }
+
+            if (count($is_userFollowInfo) != 0) {
+                $this->data['follow_status'] = 1;
+                $this->data['follow_id'] = $is_userFollowInfo['id'];
+                $this->data['follow_value'] = $is_userFollowInfo['status'];
+            } else {
+                $this->data['follow_value'] = 'new';
+                $this->data['follow_id'] = $is_userFollowInfo['id'];
+                $this->data['follow_status'] = 0;
             }
             /*print_r($this->data['article_data']);
             print_r($this->data['user_post_article']);
@@ -581,8 +644,8 @@ class Article extends MY_Controller {
                     }
                 }
                 $content .= '<div id="comment-'.$post_comment_data['comment_id'].'" class="post-comment">
-                    <div class="post-img">';
-                        $content .= '<img src="'.$pro_img_url.'">
+                    <div class="post-img"><a href="'.base_url($post_comment_data['user_slug']).'">';
+                        $content .= '<img src="'.$pro_img_url.'"></a>
                     </div>';
                     $content .= '<div class="comment-dis">';
                         $content .= '<div class="comment-name">

@@ -124,7 +124,7 @@ class Article extends MY_Controller {
             'not_created_date' => date('Y-m-d H:i:s'),
             'not_active' => '1'
         );
-        echo $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+        $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
 
 
         $email_user = '';

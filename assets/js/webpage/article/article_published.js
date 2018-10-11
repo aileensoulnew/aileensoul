@@ -307,3 +307,110 @@ function sendComment(post_id) {
         });
     }
 }
+
+function contact(id, status, to_id, confirm = 0) {
+    // alert(status);
+    // return false;
+    if(confirm == '1')
+    {
+        $("#remove-contact-conform").modal("show");
+        return false;
+    }
+    $("#contact-btn").attr("style","pointer-events:none");
+    $.ajax({
+        url: base_url + 'userprofile_page/addcontact',
+        type: "POST",
+        data: {"contact_id": id,"status":status,"to_id":to_id},
+        dataType: 'text',
+        success: function (result) {            
+            $("#contact-btn").removeAttr("style");
+            if(result.trim() == 'pending')
+            {
+                $("#contact-btn").attr("onclick","contact("+id+", 'cancel', "+to_id+")");
+                $("#contact-btn").html("Request sent");
+            }
+            if(result.trim() == 'cancel')
+            {
+                $("#contact-btn").attr("onclick","contact("+id+", 'pending', "+to_id+")");
+                $("#contact-btn").html("Add to contact");
+            }
+        },
+        error: function (jqXHR, status, err) {
+            console.error(err);
+            $("#contact-btn").removeAttr("style");
+        },
+    });
+}
+
+function remove_contact(id, status, to_id) {
+    $("#contact-btn").attr("style","pointer-events:none");
+    $.ajax({
+        url: base_url + 'userprofile_page/addcontact',
+        type: "POST",
+        data: {"contact_id": id,"status":status,"to_id":to_id},
+        dataType: 'text',
+        success: function (result) {
+            $("#contact-btn").removeAttr("style");
+            $("#contact-btn").attr("onclick","contact("+id+",'pending',"+to_id+")");
+            $("#contact-btn").html("Add to contact");
+            
+        },
+        error: function (jqXHR, status, err) {
+            console.error(err);
+            $("#contact-btn").removeAttr("style");
+        },
+    });
+}
+
+function confirmContactRequestInnerHeader(from_id,to_id) {
+    $("#contact-btn").attr("style","pointer-events:none");
+    $.ajax({
+        url: base_url + 'userprofile/contactRequestAction',
+        type: "POST",
+        data: {"from_id": from_id,"action":'confirm'},
+        dataType: 'json',
+        success: function (result) {
+            $("#contact-btn").removeAttr("style");            
+            $("#contact-btn").attr("onclick","contact("+from_id+",'cancel',"+to_id+",1)");
+            $("#contact-btn").html("In Contacts");            
+        },
+        error: function (jqXHR, status, err) {
+            console.error(err);
+            $("#contact-btn").removeAttr("style");
+        },
+    });
+    $http({
+        method: 'POST',
+        url: base_url + 'userprofile/contactRequestAction',
+        data: 'from_id=' + from_id + '&action=confirm',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).then(function (success) {
+        $scope.contact_value = 'confirm';
+    });
+}
+function follow(id, status, to_id) {    
+    $("#follow-btn").attr("style","pointer-events:none");
+    $.ajax({
+        url: base_url + 'userprofile_page/addfollow',
+        type: "POST",
+        data: {"follow_id": id,"status":status,"to_id":to_id},
+        dataType: 'json',
+        success: function (result) {
+            $("#follow-btn").removeAttr("style");
+            if(result == '1')
+            {
+                $("#follow-btn").attr("onclick","follow("+id+", 0, "+to_id+")");
+                $("#follow-btn").html("Following");
+            }
+            if(result == '0')
+            {
+                $("#follow-btn").attr("onclick","follow("+id+", 1, "+to_id+")");
+                $("#follow-btn").html("Follow");
+            }
+        },
+        error: function (jqXHR, status, err) {
+            console.error(err);
+            $("#follow-btn").removeAttr("style");
+        },
+    });    
+}
