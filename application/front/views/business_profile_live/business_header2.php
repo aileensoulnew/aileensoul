@@ -215,7 +215,7 @@ echo $header_inner_profile ?>
                     <div class="job-search-box1 clearfix">
                         <form onsubmit="businesssearchSubmit()" method="get" action="javascript:void(0)">
                             <fieldset class="sec_h2">
-                                <input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Search by Company, Category, or Products" autocomplete="off" type="text">
+                                <input id="tags" class="tags ui-autocomplete-input" name="skills" placeholder="Company, Category, or Products" autocomplete="off" type="text">
                             </fieldset>
                             <fieldset class="sec_h2">
                                 <input id="searchplace" class="searchplace ui-autocomplete-input" name="searchplace" placeholder="City, State or Country" autocomplete="off" type="text">

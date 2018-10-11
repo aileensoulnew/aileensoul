@@ -500,7 +500,7 @@ li.fr a{
 }
 .a-inlineBlock{display:inline-block!important; z-index:3; position:relative;}
 .profile-boxProfileCard-content .buisness-profile-txext a img{
-    height:100%;
+    height:auto;
     width:100%;
     z-index:3;
     position:relative
@@ -559,21 +559,21 @@ li.fr a{
     text-align:center
 }
 .left_iner_img_profile{
-    height:60px;
+    height:75px;
     width:60px;
     z-index:3;
     position:relative;
     overflow:hidden
 }
 .left_iner_img_profile img{
-    position:absolute;
+    /*position:absolute;
     left:50%;
     top:50%;
     height:100%;
     width:auto;
     -webkit-transform:translate(-50%,-50%);
     -ms-transform:translate(-50%,-50%);
-    transform:translate
+    transform:translate*/
 }
 .post-img-profile{
     color:#fff;
