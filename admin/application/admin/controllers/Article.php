@@ -142,12 +142,12 @@ class Article extends MY_Controller {
     public function reject() {
         $id = $_POST['id'];
         $data = array(
-            'is_delete' => '1'
+            'status' => 'reject'
         );
         $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
 
         $data = array(
-            'status' => 'delete'
+            'status' => 'reject'
         );
         $update1 = $this->common->update_data($data, 'post_article', 'id_post_article', $id);
 
@@ -195,6 +195,23 @@ class Article extends MY_Controller {
 
         $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);
 
+
+        die();
+    }
+
+    public function delete() {
+        $id = $_POST['id'];
+        $data = array(
+            'is_delete' => '1'
+        );
+        $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
+
+        $data = array(
+            'status' => 'delete'
+        );
+        $update1 = $this->common->update_data($data, 'post_article', 'id_post_article', $id);
+
+        echo 'Deleted';
 
         die();
     }

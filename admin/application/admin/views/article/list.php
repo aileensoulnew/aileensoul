@@ -114,13 +114,17 @@ echo $leftmenu;
                                     {
                                        $status = "Accepted";
                                     }
-                                    elseif($article['user_post_isdeleted'] == '1')
-                                    {
-                                       $status = "Rejected";
-                                    }
                                     elseif($article['user_post_status'] == "draft" && $article['user_post_isdeleted'] == '0')
                                     {
                                        $status = "Pending";
+                                    }
+                                    elseif($article['user_post_status'] == "reject" && $article['user_post_isdeleted'] == '0')
+                                    {
+                                       $status = "Rejected";
+                                    }
+                                    elseif($article['user_post_isdeleted'] == '1')
+                                    {
+                                       $status = "Deleted";
                                     }
                                     echo $status; ?>
                                  </td>
@@ -132,8 +136,11 @@ echo $leftmenu;
                                     <button class="btn btn-primary btn-xs art-pub-<?php echo $article['id_post_article']; ?>" onclick="publish_article(<?php echo $article['id_post_article']; ?>);" >
                                        <i class="fa fa-upload"></i>
                                     </button>
-                                    <button class="btn btn-danger btn-xs art-pub-<?php echo $article['id_post_article']; ?>" onclick="reject_article(<?php echo $article['id_post_article']; ?>);">
+                                    <button class="btn btn-danger btn-xs art-pub-<?php echo $article['id_post_article']; ?>" onclick="delete_article(<?php echo $article['id_post_article']; ?>);">
                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs art-pub-<?php echo $article['id_post_article']; ?>" onclick="reject_article(<?php echo $article['id_post_article']; ?>);">
+                                       <i class="fa fa-ban"></i>
                                     </button>
                                     <?php endif; ?>
                                     <a class="btn btn-success btn-xs" href="<?php echo base_url('article/articledetail/'.$article['id_post_article'] ); ?>">
@@ -265,6 +272,27 @@ function article_reject(id)
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/reject" ?>',
+      data: 'id=' + id,
+      success: function (response){
+         $('.'+'art-pub-'+id).remove();
+         $('.'+'art-status-'+id).html(response);
+      }
+   });
+}
+//Reject Article End
+
+//Reject Article Start
+function delete_article(id) 
+{
+   $("#publishmodal .mes .msg").html("Are you sure want to delete article ?");
+   $("#okbtn").attr("onclick","article_delete("+id+")");
+   $("#publishmodal").modal("show");
+}
+function article_delete(id) 
+{
+   $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url() . "article/delete" ?>',
       data: 'id=' + id,
       success: function (response){
          $('.'+'art-pub-'+id).remove();
