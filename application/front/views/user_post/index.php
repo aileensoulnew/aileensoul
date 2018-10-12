@@ -109,7 +109,7 @@
                     </a>
                 </li>
                 <li class="pl15">
-                    <a href="article.html">
+                    <a href="<?php echo base_url('new-article'); ?>" target="_self">
                         <img src="<?php echo base_url('assets/n-images/article.png') ?>"><span><span class="none-479">Post</span> <span> Article</span></span>
                     </a>
                 </li>
