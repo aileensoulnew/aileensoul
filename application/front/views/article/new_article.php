@@ -57,64 +57,88 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-<body class="profile-main-page">
+<body class="new-article">
 	<?php echo $header_inner_profile; ?>
+	<div class="sub-header">
+		<div class="container">
+			<div class="pull-left">
+				<p class="pt5">Publish your Article</p>
+			</div>
+			<div class="pull-right">
+				<a href="#" class="btn3">Publish</a>
+			</div>
+		</div>
+	</div>
 	<div class="middle-section">
 		<div class="container">
-			<div id="save_post" style="display: none;">				
+			<div class="custom-user-list">
+				<div id="save_post" style="display: none;">				
+				</div>
+				<div class="fw" id="upload_loader" style="text-align: center;position: absolute;display: none;z-index: 99999;top: 47%;">
+					<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
+				</div>
+				<form id="article_frm" method="post" name="article_frm" action="javascript:void(0);" onsubmit="return submitArticle();">
+					<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
+					<label class="error" id="err_title" style="display: none;">Please Enter Title.</label>
+					<?php
+						if(isset($articleData) && !empty($articleData) && $articleData['article_featured_image'] != ""){
+							$article_featured_image = $articleData['article_featured_image'];
+							$article_cls = "";
+						}
+						else{
+							$article_featured_image = $articleData['article_featured_image'];
+							$article_cls = "display: none;";
+						} ?>
+						<div class="image-upload">
+							<label for="featured_img">
+								<img src="<?php echo base_url('assets/n-images/article-bnr.png') . '' ?>"/>
+							</label>
+
+							<input id="featured_img" type="file"/>
+							<div class="arti-preview-img">	
+								<div id="img_preview_div" class="text-center" style="display: none;position: relative;">
+									<div id="img_preview" style="width:100%;position: relative;"></div>
+									<button type="button" title="Save" class="btn btn-success set-btn upload-result pull-right" style="position: absolute;right: 0;bottom: 0;">Save</button>
+									<button type="button" title="Save" class="btn btn-success set-btn cancel-result pull-right" style="position: absolute;right: 40px;bottom: 0;">Cancel</button>
+								</div>
+								<img id="featured_img_src" style="<?php echo $article_cls; ?>" src="<?php echo base_url().$article_featured_upload_path.$article_featured_image; ?>">
+							</div>
+						</div>
+					
+					<!-- <div id="img_preview" style="display: none;position: relative;">					
+						<i onclick="remove_img();" class="fa fa-close" aria-hidden="true" style="position: absolute;right: 0;cursor: pointer;"></i>
+						<img id="featured_img_src" style="width: 15%;">
+					</div> -->
+					<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
+					<label class="error" id="err_desc" style="display: none;">Please Enter Some Content.</label>
+
+					<input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
+					<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
+					<?php $getFieldList = $this->data_model->getFieldList();?>
+					<fieldset class="fw">           
+						<label >What is your field?</label>
+						<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
+							<option value="" selected="selected">Select your field</option>
+							<?php foreach ($getFieldList as $key => $value) { ?>
+								<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
+							<?php } ?>
+							<option value="0" <?php echo $articleData['article_main_category'] == "0" ? "selected='selected'" : ""; ?>>Other</option>
+						</select>
+					</fieldset>
+					<fieldset class="fw" id="other_field_div" style="<?php echo $articleData['article_main_category'] == '0' ? '' : 'display: none;'; ?>;">
+						<label>Enter other field</label>
+						<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
+						<span id="fullname-error"></span>
+						<?php echo form_error('other_field'); ?>
+					</fieldset>
+
+
+					<input type="submit" name="publish" value="Publish" id="publish">
+				</form>
 			</div>
-			<div class="fw" id="upload_loader" style="text-align: center;position: absolute;display: none;z-index: 99999;top: 47%;">
-                <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
-            </div>
-            <form id="article_frm" method="post" name="article_frm" action="javascript:void(0);" onsubmit="return submitArticle();">
-				<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
-				<label class="error" id="err_title" style="display: none;">Please Enter Title.</label>
-				<?php
-					if(isset($articleData) && !empty($articleData) && $articleData['article_featured_image'] != ""){
-						$article_featured_image = $articleData['article_featured_image'];
-						$article_cls = "";
-					}
-					else{
-						$article_featured_image = $articleData['article_featured_image'];
-						$article_cls = "display: none;";
-					} ?>
-				<input type="file" name="featured_img" id="featured_img">
-				<div id="img_preview_div" class="text-center" style="display: none;position: relative;">
-                    <div id="img_preview" style="width:100%;position: relative;"></div>
-                	<button type="button" title="Save" class="btn btn-success set-btn upload-result pull-right" style="position: absolute;right: 0;bottom: 0;">Save</button>
-                	<button type="button" title="Save" class="btn btn-success set-btn cancel-result pull-right" style="position: absolute;right: 40px;bottom: 0;">Cancel</button>
-                </div>
-                <img id="featured_img_src" style="<?php echo $article_cls; ?>" src="<?php echo base_url().$article_featured_upload_path.$article_featured_image; ?>">
-				<!-- <div id="img_preview" style="display: none;position: relative;">					
-					<i onclick="remove_img();" class="fa fa-close" aria-hidden="true" style="position: absolute;right: 0;cursor: pointer;"></i>
-					<img id="featured_img_src" style="width: 15%;">
-				</div> -->
-				<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
-				<label class="error" id="err_desc" style="display: none;">Please Enter Some Content.</label>
-
-				<input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
-				<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
-				<?php $getFieldList = $this->data_model->getFieldList();?>
-				<fieldset class="fw">           
-					<label >What is your field?</label>
-					<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
-						<option value="" selected="selected">Select your field</option>
-						<?php foreach ($getFieldList as $key => $value) { ?>
-							<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
-						<?php } ?>
-						<option value="0" <?php echo $articleData['article_main_category'] == "0" ? "selected='selected'" : ""; ?>>Other</option>
-					</select>
-				</fieldset>
-				<fieldset class="fw" id="other_field_div" style="<?php echo $articleData['article_main_category'] == '0' ? '' : 'display: none;'; ?>;">
-					<label>Enter other field</label>
-					<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
-					<span id="fullname-error"></span>
-					<?php echo form_error('other_field'); ?>
-				</fieldset>
-
-
-				<input type="submit" name="publish" value="Publish" id="publish">
-			</form>
+			<div class="right-part">
+				123
+			</div>
 		</div>
 	</div>
 

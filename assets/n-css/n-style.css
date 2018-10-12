@@ -2502,6 +2502,23 @@ label.cameraButton{min-height:43px;}
 .right-part.right-scroll{position:absolute;}
 
 /***  end optimization css  ***/
+/***  new article page css  ***/
+.new-article .sub-header{padding:5px 0; height:40px;}
+.new-article .sub-header .btn3{padding:3px 25px}
+.new-article .sub-header p.pt5{padding-top:3px;}
+.new-article .sub-header input{height:30px;}
+#article_frm{position:relative;}
+#article_frm #title_txt{border:0; border-bottom:1px solid #d2d2d2; font-size:28px; border-radius:0; height:auto;}
+#article_frm .image-upload{border:0; text-align:center; position:relative; min-height:350px; padding:80px 0;}
+#article_frm .image-upload label{cursor:pointer;}
+#article_frm input{padding:10px 0;}
+.image-upload input{display:none;}
+#img_preview_div{}
+#article_frm .cr-boundary{width:100% !important;}
+.image-upload .arti-preview-img{position:absolute; top:0; width:100%;}
+.arti-preview-img #img_preview_div .btn{bottom:10px !important;}
+
+/***  end new article page css  ***/
 body.body-loader{height:100vh; overflow:hidden;}
 #main_loader{display: block;
 height: 100vh;
