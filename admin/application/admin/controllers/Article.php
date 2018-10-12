@@ -129,7 +129,7 @@ class Article extends MY_Controller {
 
         $email_user = '';
         $email_user .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
-        <tr><td style="padding-left:20px;">Hi '.$fullname.'!<br><br><p style="padding-left:0px; padding-bottom: 20px;"> Your Article has been approved by the admin.</p><br></td></tr>';
+        <tr><td style="padding-left:20px;">Hi '.$fullname.'!<br><br><p style="padding-left:0px; padding-bottom: 20px;">Your Article has approved by the Aileensoul.</p><br></td></tr>';
         $email_user .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
         $email_user .= '<a href="'.SITEURL.'article/'.$article_slug.'">Click here to view article.</a>';
         $email_user .= '<br></td></tr>';        

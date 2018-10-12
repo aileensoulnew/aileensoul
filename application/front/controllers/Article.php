@@ -52,11 +52,28 @@ class Article extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         if($userid != "" && $unique_key != "")
         {
-            $this->data['articleData'] = $this->article_model->getArticleData($userid,$unique_key);
-            if(empty($this->data['articleData']))
+            $this->data['articleData'] = $article_data = $this->article_model->getArticleData($userid,$unique_key);
+            if(empty($article_data))
             {
                 redirect(base_url(),"refresh");
             }
+            $id_post_article = $article_data['id_post_article'];
+            $this->data['user_post_article'] = $user_post_article = $this->article_model->getUserPostArticle($id_post_article);
+            // print_r($article_data);
+            // print_r($user_post_article);exit();
+            $edit_art_published = 0;
+            if(isset($user_post_article) && !empty($user_post_article))
+            {
+                if($user_post_article['status'] == 'publish' && $article_data['status'] == 'publish')
+                {
+                    $edit_art_published = 1;
+                }
+                elseif($user_post_article['status'] == 'draft' && $article_data['status'] == 'publish')
+                {
+                    redirect(base_url(),"refresh");
+                }
+            }
+            $this->data['edit_art_published'] = $edit_art_published;
             $this->data['unique_key'] = $unique_key;
             $this->data['meta_title'] = "Edit Article";
             $this->data['meta_desc'] = "Edit Article";
@@ -121,6 +138,7 @@ class Article extends MY_Controller {
         $article_meta_title = $this->input->post('article_meta_title');
         $article_meta_description = $this->input->post('article_meta_description');
         $article_main_category = $this->input->post('article_main_category');
+        $edit_art_published = $this->input->post('edit_art_published');
         if($article_main_category == 0)
         {                
             $article_other_category = $this->input->post('article_other_category');
@@ -141,9 +159,15 @@ class Article extends MY_Controller {
                 if (IMAGEPATHFROM == 's3bucket') {
                     $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
                 }
-
-                $success = $this->article_model->add_article_media($user_id,$article_title,$article_content,$unique_key,$fileName,$article_meta_title,$article_meta_description,$article_main_category,$article_other_category);                
-                echo json_encode(array("location"=>base_url().$article_upload_path.$fileName,"filename"=>$fileName,"add_new_article"=>$success['add_new_article']));
+                if($edit_art_published == 0)
+                {                    
+                    $success = $this->article_model->add_article_media($user_id,$article_title,$article_content,$unique_key,$fileName,$article_meta_title,$article_meta_description,$article_main_category,$article_other_category);                
+                    echo json_encode(array("location"=>base_url().$article_upload_path.$fileName,"filename"=>$fileName,"add_new_article"=>$success['add_new_article']));
+                }
+                else
+                {
+                    echo json_encode(array("location"=>base_url().$article_upload_path.$fileName,"filename"=>$fileName,"add_new_article"=>0));
+                }
             }
             else
             {
@@ -195,6 +219,7 @@ class Article extends MY_Controller {
         $article_meta_title = $this->input->post('article_meta_title');
         $article_meta_description = $this->input->post('article_meta_description');
         $article_main_category = $this->input->post('article_main_category');
+        $edit_art_published = $this->input->post('edit_art_published');
         if($article_main_category == 0)
         {                
             $article_other_category = $this->input->post('article_other_category');
@@ -234,10 +259,38 @@ class Article extends MY_Controller {
             {
                 $post_id = $user_post_article['post_id'];
                 $new_post = 0;
+                if($edit_art_published == 1)
+                {
+                    $data = array(
+                        "status" => "draft",                        
+                    );
+                    $udapte_data = $this->common->update_data($data,'user_post','post_id', $post_id);
+
+                    $toemail = "dshah1341@gmail.com";
+                    $user_data = $this->user_model->getUserData($user_id);
+                    $fullname = ucwords($user_data['first_name']." ".$user_data['last_name']);
+                    $article_email = $user_data['email'];
+                    $subject = "Edit Article";
+                    $email_html = '';
+                    $email_html .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
+                        <tr><td style="padding-left:20px;">Hi admin!<br><br>
+                        <p style="padding-left:70px;">You have received an edited article..</p><br></td></tr>';
+                    $email_html .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
+                    $email_html .= 'The user feedback detail follows:';
+                    $email_html .= '</td></tr>';
+                    $email_html .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
+                    $email_html .= '<b>Name</b> :'.$fullname;
+                    $email_html .= '<br></td></tr>';
+                    $email_html .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
+                    $email_html .= '<b>Email-Address</b> : '.$article_email;
+                    $email_html .= '</td></tr>';
+                    $email_html .= '</tr></table>';
+
+                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $toemail);
+                }
             }
             else
             {
-
                 $data = array(
                     "user_id"                   => $user_id,
                     "post_for"                  => "article",
@@ -270,15 +323,40 @@ class Article extends MY_Controller {
                 
                 $udapte_data = $this->common->update_data($data_update,'post_article','id_post_article', $id_post_article);
                 $ret_arr = array("status"=>"1","message"=>"Article published successfully.","is_publish"=>1,"article_slug"=>$article_slug);
+
+                if($new_post == 1)
+                {
+                    $toemail = "dshah1341@gmail.com";
+                    $user_data = $this->user_model->getUserData($user_id);
+                    $fullname = ucwords($user_data['first_name']." ".$user_data['last_name']);
+                    $article_email = $user_data['email'];
+                    $subject = "New Article";
+                    $email_html = '';
+                    $email_html .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
+                        <tr><td style="padding-left:20px;">Hi admin!<br><br>
+                        <p style="padding-left:70px;"> You have received a new article from a user while you were away..</p><br></td></tr>';
+                    $email_html .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
+                    $email_html .= 'The user feedback detail follows:';
+                    $email_html .= '</td></tr>';
+                    $email_html .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
+                    $email_html .= '<b>Name</b> :'.$fullname;
+                    $email_html .= '<br></td></tr>';
+                    $email_html .= '<tr><td style="padding-bottom: 3px;padding-left:20px;">';
+                    $email_html .= '<b>Email-Address</b> : '.$article_email;
+                    $email_html .= '</td></tr>';
+                    $email_html .= '</tr></table>';
+
+                    $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $toemail);
+                }
             }
             else
             {
-                $ret_arr = array("status"=>"0","message"=>"Try again later1.","is_publish"=>0);
+                $ret_arr = array("status"=>"0","message"=>"Try again later.","is_publish"=>0);
             }            
         }
         else
         {
-            $ret_arr = array("status"=>"0","message"=>"Try again later2.","is_publish"=>0);
+            $ret_arr = array("status"=>"0","message"=>"Try again later.","is_publish"=>0);
         }
         echo json_encode($ret_arr);
     }

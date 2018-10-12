@@ -46,40 +46,43 @@ maineditor = tinymce.init({
             }
             else
             {
-                $("#save_post").show();
-                $("#save_post").text("Saving...");
-                var article_meta_title = $("#article_meta_title").val();
-                var article_meta_description = $("#article_meta_description").val();
-                var article_main_category = $('#article_main_category').find(":selected").val();
-                var article_other_category = $("#article_other_category").val();
-                var post_data = {
-                    'article_title': title,
-                    'article_content': descr,
-                    'unique_key': unique_key,
-                    'article_meta_title': article_meta_title,
-                    'article_meta_description': article_meta_description,
-                    'article_main_category': article_main_category,
-                    'article_other_category': article_other_category,
-                };
-                $.ajax({
-                    type: 'POST',
-                    url: base_url + "article/add_article",
-                    data: post_data,
-                    dataType: "JSON",           
-                    success: function (data) {
-                        if(data.add_new_article == 1)
-                        {
-                            var title = "Edit Article"
-                            var url = base_url +"edit-article/"+unique_key;
-                            var obj = {
-                                Title: title,
-                                Url: url
-                            };
-                            history.pushState(obj, obj.Title, obj.Url);
+                if(edit_art_published == 0)
+                {                    
+                    $("#save_post").show();
+                    $("#save_post").text("Saving...");
+                    var article_meta_title = $("#article_meta_title").val();
+                    var article_meta_description = $("#article_meta_description").val();
+                    var article_main_category = $('#article_main_category').find(":selected").val();
+                    var article_other_category = $("#article_other_category").val();
+                    var post_data = {
+                        'article_title': title,
+                        'article_content': descr,
+                        'unique_key': unique_key,
+                        'article_meta_title': article_meta_title,
+                        'article_meta_description': article_meta_description,
+                        'article_main_category': article_main_category,
+                        'article_other_category': article_other_category,
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        url: base_url + "article/add_article",
+                        data: post_data,
+                        dataType: "JSON",           
+                        success: function (data) {
+                            if(data.add_new_article == 1)
+                            {
+                                var title = "Edit Article"
+                                var url = base_url +"edit-article/"+unique_key;
+                                var obj = {
+                                    Title: title,
+                                    Url: url
+                                };
+                                history.pushState(obj, obj.Title, obj.Url);
+                            }
+                            $("#save_post").text("Saved");
                         }
-                        $("#save_post").text("Saved");
-                    }
-                });
+                    });
+                }
             }
         });
     },
@@ -106,40 +109,43 @@ maineditor = tinymce.init({
                     }
                     else
                     {
-                        $("#save_post").show();
-                        $("#save_post").text("Saving...");
-                        var article_meta_title = $("#article_meta_title").val();
-                        var article_meta_description = $("#article_meta_description").val();
-                        var article_main_category = $('#article_main_category').find(":selected").val();
-                        var article_other_category = $("#article_other_category").val();
-                        var post_data = {
-                            'article_title': title,
-                            'article_content': descr,
-                            'unique_key': unique_key,
-                            'article_meta_title': article_meta_title,
-                            'article_meta_description': article_meta_description,
-                            'article_main_category': article_main_category,
-                            'article_other_category': article_other_category,
-                        };
-                        $.ajax({
-                            type: 'POST',
-                            url: base_url + "article/add_article",
-                            data: post_data,
-                            dataType: "JSON",           
-                            success: function (data) {
-                                if(data.add_new_article == 1)
-                                {
-                                    var title = "Edit Article"
-                                    var url = base_url +"edit-article/"+unique_key;
-                                    var obj = {
-                                        Title: title,
-                                        Url: url
-                                    };
-                                    history.pushState(obj, obj.Title, obj.Url);
+                        if(edit_art_published == 0)
+                        {                            
+                            $("#save_post").show();
+                            $("#save_post").text("Saving...");
+                            var article_meta_title = $("#article_meta_title").val();
+                            var article_meta_description = $("#article_meta_description").val();
+                            var article_main_category = $('#article_main_category').find(":selected").val();
+                            var article_other_category = $("#article_other_category").val();
+                            var post_data = {
+                                'article_title': title,
+                                'article_content': descr,
+                                'unique_key': unique_key,
+                                'article_meta_title': article_meta_title,
+                                'article_meta_description': article_meta_description,
+                                'article_main_category': article_main_category,
+                                'article_other_category': article_other_category,
+                            };
+                            $.ajax({
+                                type: 'POST',
+                                url: base_url + "article/add_article",
+                                data: post_data,
+                                dataType: "JSON",           
+                                success: function (data) {
+                                    if(data.add_new_article == 1)
+                                    {
+                                        var title = "Edit Article"
+                                        var url = base_url +"edit-article/"+unique_key;
+                                        var obj = {
+                                            Title: title,
+                                            Url: url
+                                        };
+                                        history.pushState(obj, obj.Title, obj.Url);
+                                    }
+                                    $("#save_post").text("Saved");
                                 }
-                                $("#save_post").text("Saved");
-                            }
-                        });
+                            });
+                        }
                     }
                 }, doneTypingInterval);
             }
@@ -240,6 +246,7 @@ maineditor = tinymce.init({
                     formData.append('article_meta_description',article_meta_description);               
                     formData.append('article_main_category',article_main_category);               
                     formData.append('article_other_category',article_other_category);               
+                    formData.append('edit_art_published',edit_art_published);               
                     $("#upload_loader").show();
                     $("#save_post").show();
                     $("#save_post").text("Saving...");
@@ -264,42 +271,45 @@ function upload_success()
         return false;
     }
     else
-    {        
-        var article_meta_title = $("#article_meta_title").val();
-        var article_meta_description = $("#article_meta_description").val();
-        var article_main_category = $('#article_main_category').find(":selected").val();
-        var article_other_category = $("#article_other_category").val();
-        var post_data = {
-            'article_title': title,
-            'article_content': descr,
-            'unique_key': unique_key,
-            'article_meta_title': article_meta_title,
-            'article_meta_description': article_meta_description,
-            'article_main_category': article_main_category,
-            'article_other_category': article_other_category,
-        };
+    {
+        if(edit_art_published == 0)
+        {            
+            var article_meta_title = $("#article_meta_title").val();
+            var article_meta_description = $("#article_meta_description").val();
+            var article_main_category = $('#article_main_category').find(":selected").val();
+            var article_other_category = $("#article_other_category").val();
+            var post_data = {
+                'article_title': title,
+                'article_content': descr,
+                'unique_key': unique_key,
+                'article_meta_title': article_meta_title,
+                'article_meta_description': article_meta_description,
+                'article_main_category': article_main_category,
+                'article_other_category': article_other_category,
+            };
 
-        $("#save_post").show();
-        $("#save_post").text("Saving...");
-        $.ajax({
-            type: 'POST',
-            url: base_url + "article/add_article",
-            data: post_data,
-            dataType: "JSON",           
-            success: function (data) {
-                if(data.add_new_article == 1)
-                {
-                    var title = "Edit Article"
-                    var url = base_url +"edit-article/"+unique_key;
-                    var obj = {
-                        Title: title,
-                        Url: url
-                    };
-                    history.pushState(obj, obj.Title, obj.Url);
+            $("#save_post").show();
+            $("#save_post").text("Saving...");
+            $.ajax({
+                type: 'POST',
+                url: base_url + "article/add_article",
+                data: post_data,
+                dataType: "JSON",           
+                success: function (data) {
+                    if(data.add_new_article == 1)
+                    {
+                        var title = "Edit Article"
+                        var url = base_url +"edit-article/"+unique_key;
+                        var obj = {
+                            Title: title,
+                            Url: url
+                        };
+                        history.pushState(obj, obj.Title, obj.Url);
+                    }
+                    $("#save_post").text("Saved");
                 }
-                $("#save_post").text("Saved");
-            }
-        });
+            });
+        }
     }
 
 }
@@ -369,6 +379,7 @@ function upload_success()
             'article_meta_description': article_meta_description,
             'article_main_category': article_main_category,
             'article_other_category': article_other_category,
+            'edit_art_published': edit_art_published,
         };
         $("#publish").val('Publishing ...');
         $("#publish").attr('disabled','disabled');

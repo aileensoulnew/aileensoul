@@ -150,6 +150,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	var app = angular.module('', ['ui.bootstrap']);
 	var unique_key = "<?php echo(isset($articleData) && !empty($articleData) ? $articleData['unique_key'] : $unique_key); ?>"
 	var base_url = "<?php echo base_url(); ?>"
+	var edit_art_published = "<?php echo $edit_art_published; ?>"
 	var article_slug = "";
 </script>
 <script>
