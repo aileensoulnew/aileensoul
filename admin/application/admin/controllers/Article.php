@@ -232,7 +232,7 @@ class Article extends MY_Controller {
 
         $condition_array = array('user_post.post_for' => 'article','post_article.id_post_article'=>$id);
 
-        $select_data = "post_article.id_post_article, post_article.user_id, post_article.article_title, post_article.article_desc, post_article.article_featured_image, post_article.unique_key, post_article.status as article_status, post_article.created_date, post_article.article_slug, user_post.post_for, user_post.post_id, user_post.status as user_post_status,user_post.is_delete as user_post_isdeleted, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
+        $select_data = "post_article.id_post_article, post_article.user_id, post_article.article_title, post_article.article_desc, post_article.article_desc_old, post_article.article_featured_image, post_article.unique_key, post_article.status as article_status, post_article.created_date, post_article.article_slug, user_post.post_for, user_post.post_id, user_post.status as user_post_status,user_post.is_delete as user_post_isdeleted, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
 
         $this->data['article_detail'] = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit, $offset, $join_str)[0];
         // print_r($this->data['article_detail']);exit();        

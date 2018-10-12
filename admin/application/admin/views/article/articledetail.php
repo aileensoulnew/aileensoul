@@ -1,6 +1,8 @@
 <?php
 echo $header;
 echo $leftmenu;
+use Caxy\HtmlDiff\HtmlDiff;
+require '../contentcompare/vendor/autoload.php';
 ?>
 <style type="text/css">
      .feedback-img {
@@ -20,6 +22,25 @@ echo $leftmenu;
      .pop_content img {
           width: 100%;
      }
+     del.diffmod {
+          color: red;
+          display: none;
+      }
+
+      ins.diffmod {
+          color: #000;
+          background: #1b8ab921;
+          text-decoration: none
+      }
+
+      ins.diffins {
+        color: #000;
+          background: #1b8ab921;
+          text-decoration: none;
+      }
+      ins.mod {
+          text-decoration: none;
+      }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -100,7 +121,7 @@ echo $leftmenu;
                                    <a href="#basic_information" data-toggle="tab"><i class="fa fa-fw fa-info-circle margin-r-5"></i> <?php echo ucwords($article_detail['article_title']); ?></a>
                               </li>
                          </ul>
-                         <div class="tab-content">
+                         <div class="tab-content hide">
                               <div class="active tab-pane" id="basic_information">
                                    <!-- Post -->
                                    <div class="post">
@@ -119,6 +140,32 @@ echo $leftmenu;
                               </div>
                          </div>
                          <!-- /.tab-content -->
+                         <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#new">New</a></li>
+                            <li><a data-toggle="tab" href="#old">Old</a></li>
+                            <li><a data-toggle="tab" href="#compare">Compare</a></li>
+                          </ul>
+
+                          <div class="tab-content">
+                            <div id="new" class="tab-pane fade in active">
+                              <?php echo $article_detail['article_desc'];?>
+                            </div>
+                            <div id="old" class="tab-pane fade">
+                              <?php echo $article_detail['article_desc_old'];?>
+                            </div>
+                            <div id="compare" class="tab-pane fade">
+                              <?php
+                              $oldHtml = $article_detail['article_desc_old'];
+                              $newHtml = $article_detail['article_desc'];
+                              $htmlDiff = new HtmlDiff($oldHtml, $newHtml);
+                              $htmlDiff->getConfig()
+                                  ->setMatchThreshold(80)
+                                  ->setInsertSpaceInReplace(true);
+                              $content = $htmlDiff->build();
+                              echo $content;
+                              ?>
+                            </div>                            
+                          </div>
                     </div>
                     <!-- /.nav-tabs-custom -->
                </div>
