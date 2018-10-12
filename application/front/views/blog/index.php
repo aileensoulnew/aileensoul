@@ -330,7 +330,7 @@ if($category_page == 1)
                                     <?php endforeach; ?>
                                     <span class="blog-date"><?php echo $_blogPost['created_date_formatted']; ?></span> 
                                     <span><?php echo $_blogPost['name']; ?></span> 
-                                    <span><?php echo $_blogPost['total_comment']; ?> comments</span>
+                                    <?php if($_blogPost['total_comment'] > 0): ?><span><?php echo $_blogPost['total_comment']; ?> comments</span><?php endif; ?>
                                 </p>
                                 <a href="<?php echo base_url().'blog/'.$_blogPost['blog_slug']; ?>">
                                     <h2><?php echo $_blogPost['title']; ?></h2>

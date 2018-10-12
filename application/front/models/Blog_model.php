@@ -99,7 +99,7 @@ class Blog_Model extends CI_Model {
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
-        // echo $sql;exit;
+        echo $sql;exit;
         $query = $this->db->query($sql);
         $result = $query->result_array();
         return $result;

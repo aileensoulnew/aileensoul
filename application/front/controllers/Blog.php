@@ -29,7 +29,7 @@ class Blog extends CI_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         if($iscategory != ""){
             $this->data['category_name'] = $sel_category_name = str_replace('-', ' ', $slug);
-            $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $slug ."')";
+            $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $sel_category_name ."')";
             $query = $this->db->query($sql);
             $result = $query->row_array();
             if(count($result) > 0){
@@ -37,7 +37,7 @@ class Blog extends CI_Controller {
                 $slug = "";
                 $uri_segment = 4;
                 $pg_url = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3);
-            }
+            }            
         }
 
         $condition_array = array('status' => 'publish');

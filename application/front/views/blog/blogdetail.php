@@ -233,10 +233,11 @@ header("Pragma: no-cache"); // HTTP/1.0
 							<div class="user-detail-left">
 								<p class="pt20"><?php echo $blog_data['name']; ?></p>
 								<p><?php echo $blog_data['created_date_formatted']; ?></p>
+                                <?php if($blog_data['total_comment'] > 0){ ?>
 								<p>
 									<img class="hidden-639" src="<?php echo base_url(); ?>assets/n-images/comment.png" class="pr5"><?php echo $blog_data['total_comment']; ?> <span class="block-639"> Comment</span>
 								</p>
-							
+                                <?php } ?>
 								<ul class="social-icon">
 									<li>
 										<a target="_blank" class="fbk" id="facebook_link" url_encode="<?php echo $blog_data['social_encodeurl']; ?>" url="<?php echo $blog_data['social_url']; ?>" title="Facebook" summary="<?php echo $blog_data['social_summary']; ?>" image="<?php echo $blog_data['social_image']; ?>">
@@ -252,21 +253,22 @@ header("Pragma: no-cache"); // HTTP/1.0
 	    				<div class="blog-detail">
 	    					<div class="blog-box">
 	    						<div class="blog-left-content blog-detail-top">
+                                     <div>
+                                        <?php 
+                                        foreach($blog_data['blog_category_name'] as $k=>$v):
+                                            $category_url = $this->common->clean($v); ?>
+                                        <a href="<?php echo base_url().'blog/category/'.$category_url; ?>">
+                                            <span class="cat text-capitalize">
+                                            <?php
+                                            if($k == 0)
+                                                echo $v;
+                                            if($k > 0)
+                                                echo ", ".$v; ?>
+                                            </span>                                                 
+                                        </a>
+                                        <?php endforeach; ?>
+                                    </div>
 	    							<a href="<?php echo base_url().'blog/'.$blog_data['blog_slug']; ?>">
-		    							<!-- <p class="blog-details-cus">
-                                            <?php /*foreach($blog_data['blog_category_name'] as $k=>$v):
-                                                $category_url = $this->common->clean($v); ?>
-		    								<a href="<?php echo base_url().'blog/category/'.$category_url; ?>">
-                                                <span class="cat text-capitalize">
-                                                <?php
-                                                if($key == 0)
-                                                    echo $val;
-                                                if($key > 0)
-                                                    echo ", ".$val; ?>
-		                                        </span> 		                                        
-		                                    </a>
-                                            <?php endforeach;*/ ?>
-		    							</p> -->
 		    							<h1><?php echo $blog_data['title']; ?></h1>
 	    							</a>	    							
 	    						</div>
