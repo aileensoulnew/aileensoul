@@ -6,7 +6,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/add.css">
 		<style>
-			
+
+			body{margin:0; padding:0;}
+			.add1, .add2, .add3, .add4, .add5, .add6, .add7, .add8, .add9 {display:none;}
+			.right-add-box .add1{display:block;}
+			.banner-add .add3{display:block;}
+			@media screen and (max-width: 1279px) {
+				.right-add-box .add1{display:none;}
+				.right-add-box .add2{display:block;}
+				.banner-add .add3{display:none;}
+				.banner-add .add4{display:block;}
+			}
+			@media screen and (max-width: 1199px) {
+				.right-add-box .add1{display:block;}
+				.right-add-box .add2{display:none;}
+				.banner-add .add4{display:none;}
+				.banner-add .add5{display:block;}
+				.tab-add .add9{display:block;}
+			}
+			@media screen and (max-width: 991px) {
+				.banner-add .add5{display:none;}
+				.banner-add .add6{display:block;}
+			}
+			@media screen and (max-width: 767px) {
+				.banner-add .add6{display:none;}
+				.banner-add .add7{display:block;}
+			}
+			@media screen and (max-width: 480px) {
+				.banner-add .add7{display:none;}
+				.banner-add .add8{display:block;}
+			}
 		</style>
     </head>
 	

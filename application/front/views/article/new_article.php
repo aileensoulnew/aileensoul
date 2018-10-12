@@ -65,19 +65,36 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 				<p class="pt5">Publish your Article</p>
 			</div>
 			<div class="pull-right">
-				<a href="#" class="btn3">Publish</a>
+				<span id="save_post" style="display: none;">				
+				</span>
+				<a id="publish" href="javascript:void(0)" onclick="return submitArticle();" class="btn3">Publish</a>
 			</div>
 		</div>
 	</div>
 	<div class="middle-section">
 		<div class="container">
-			<div class="custom-user-list">
-				<div id="save_post" style="display: none;">				
+			<div class="right-part">
+				<div class="arti-profile-box">
+					<div class="user-cover-img">
+						<a href="#">
+							<img src="<?php echo base_url(); ?>assets/n-images/user-cover.jpg">
+						</a>
+					</div>
+					<div class="user-pr-img">
+						<a href="#"><img src="<?php echo base_url(); ?>assets/n-images/user-pic.jpg"></a>
+					</div>
+					<div class="user-info-text text-center">
+						<h3><a href="#">Dhaval Shah</a></h3>
+						<p>Ceo</p>
+					</div>
 				</div>
+			</div>
+			<div class="custom-user-list">
+				
 				<div class="fw" id="upload_loader" style="text-align: center;position: absolute;display: none;z-index: 99999;top: 47%;">
 					<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
 				</div>
-				<form id="article_frm" method="post" name="article_frm" action="javascript:void(0);" onsubmit="return submitArticle();">
+				<div id="article_frm" method="post" name="article_frm" action="javascript:void(0);" onsubmit="">
 					<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
 					<label class="error" id="err_title" style="display: none;">Please Enter Title.</label>
 					<?php
@@ -133,12 +150,10 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 					</fieldset>
 
 
-					<input type="submit" name="publish" value="Publish" id="publish">
-				</form>
+					
+				</div>
 			</div>
-			<div class="right-part">
-				123
-			</div>
+			
 		</div>
 	</div>
 
