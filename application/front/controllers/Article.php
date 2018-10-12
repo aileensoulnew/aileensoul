@@ -425,8 +425,8 @@ class Article extends MY_Controller {
     public function article_published($article_slug)
     {
         $userid = $this->session->userdata('aileenuser');
-        if($userid != "")
-        {
+        // if($userid != "")
+        // {
             $this->data['article_data'] = $article_data = $this->article_model->getArticleDataFromSlug($article_slug);
             // print_r($article_data);exit();
             if(empty($article_data))
@@ -473,11 +473,11 @@ class Article extends MY_Controller {
             $this->data['meta_title'] = "Article Title";
             $this->data['meta_desc'] = "Article Description";
             $this->load->view('article/article_preview', $this->data);
-        }
-        else
-        {
-            redirect(base_url(),"refresh");
-        }
+        // }
+        // else
+        // {
+        //     redirect(base_url(),"refresh");
+        // }
     }
 
     public function likePost() {
@@ -694,8 +694,8 @@ class Article extends MY_Controller {
         $post_id = $this->input->post('post_id');
         $offset = $this->input->post('offset');
         $limit = 5;
-        $user_id = $this->session->userdata('aileenuser');
-        $_post_comment_data = $this->article_model->viewAllComment($post_id,$user_id,$limit,$offset);
+        $userid_login = $this->session->userdata('aileenuser');
+        $_post_comment_data = $this->article_model->viewAllComment($post_id,$userid_login,$limit,$offset);
 
         $content = "";
         if(isset($_post_comment_data) && !empty($_post_comment_data))
@@ -745,8 +745,9 @@ class Article extends MY_Controller {
                             </div>
                         </div>';
                         // Edit Comment End
-                        $content .= '<ul class="comment-action">
-                            <li>';                                
+                        $content .= '<ul class="comment-action">';
+                        if($userid_login != ""){
+                            $content .= '<li>';                                
                                 $cmt_like_cls = "";
                                 if($post_comment_data['is_userlikePostComment'] == 1)
                                 {
@@ -758,16 +759,17 @@ class Article extends MY_Controller {
                                     $content .= ($post_comment_data['postCommentLikeCount'] > 0 ? $post_comment_data['postCommentLikeCount'] : "");
                                     $content .= '</span>
                                 </a>
-                            </li>';
+                                </li>';
                             
-                            if($post_comment_data['commented_user_id'] == $userid_login){
-                            $content .= '<li id="edit-comment-li-'.$post_comment_data['comment_id'].'">
-                                <a href="javascript:void(0);" onclick="editPostComment('.$post_comment_data['comment_id'].','.$post_id.'">Edit</a>
-                            </li>';
-                            $content .= '<li id="cancel-comment-li-'.$post_comment_data['comment_id'].'" style="display: none;"><a href="javascript:void(0);" onclick="cancelPostComment('.$post_comment_data['comment_id'].','.$post_id.')">Cancel</a></li>';
-                            }
-                            if($user_post_article['user_id'] == $userid_login || $post_comment_data['commented_user_id'] == $userid_login){
-                            $content .= '<li><a href="javascript:void(0);" onclick="deletePostComment('.$post_comment_data['comment_id'].','.$post_id.')">Delete</a></li>';
+                                if($post_comment_data['commented_user_id'] == $userid_login){
+                                $content .= '<li id="edit-comment-li-'.$post_comment_data['comment_id'].'">
+                                    <a href="javascript:void(0);" onclick="editPostComment('.$post_comment_data['comment_id'].','.$post_id.'">Edit</a>
+                                </li>';
+                                $content .= '<li id="cancel-comment-li-'.$post_comment_data['comment_id'].'" style="display: none;"><a href="javascript:void(0);" onclick="cancelPostComment('.$post_comment_data['comment_id'].','.$post_id.')">Cancel</a></li>';
+                                }
+                                if($user_post_article['user_id'] == $userid_login || $post_comment_data['commented_user_id'] == $userid_login){
+                                $content .= '<li><a href="javascript:void(0);" onclick="deletePostComment('.$post_comment_data['comment_id'].','.$post_id.')">Delete</a></li>';
+                                }
                             }
                             $content .= '<li><a href="javascript:void(0);">'.$post_comment_data['comment_time_string'].'</a></li>';
                         $content .= '</ul>';

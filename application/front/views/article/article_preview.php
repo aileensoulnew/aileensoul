@@ -2,7 +2,12 @@
 <?php
 $userid_login                 = $this->session->userdata('aileenuser');
 $article_featured_upload_path = $this->config->item('article_featured_upload_path');
-$like_usr_cnt = 2;?>
+$like_usr_cnt = 2;
+$no_login_cls= "";
+if($userid_login == "")
+{
+	$no_login_cls= " old-no-login";
+} ?>
 <html lang="en">
     <head>
         <title><?php echo $article_data['article_meta_title']; ?></title>
@@ -19,6 +24,7 @@ $like_usr_cnt = 2;?>
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/jquery.mCustomScrollbar.min.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/aos.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/header.css?ver=' . time()) ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
@@ -40,8 +46,40 @@ $like_usr_cnt = 2;?>
         </style>
     <?php $this->load->view('adsense');?>
 </head>
-<body class="profile-main-page">
-	<?php echo $header_inner_profile; ?>
+<body class="profile-main-page<?php echo $no_login_cls; ?>">
+		<?php 
+			if($userid_login){ 
+				echo $header_inner_profile;
+			}else{ ?>
+            <header>
+                <div class="container">
+					<div class="row">
+                            <div class="col-md-4 col-sm-4 left-header col-xs-4 fw-479">
+								<?php $this->load->view('main_logo'); ?>
+                            </div>
+                            <div class="col-md-8 col-sm-8 right-header col-xs-8 fw-479">
+                                <div class="btn-right">
+                                <?php if(!$this->session->userdata('aileenuser')) {?>
+									<ul class="nav navbar-nav navbar-right test-cus drop-down">
+										<?php $this->load->view('profile-dropdown'); ?>
+										<li class="hidden-991"><a href="<?php echo base_url('login'); ?>" class="btn2">Login</a></li>
+										<li class="hidden-991"><a href="<?php echo base_url(); ?>registration" class="btn3">Create Account</a></li>
+										<li class="mob-bar-li">
+											<span class="mob-right-bar">
+												<?php $this->load->view('mobile_right_bar'); ?>
+											</span>
+										</li>
+									
+									</ul>
+                                <?php }?>
+                                </div>
+                            </div>
+                        </div>
+                   
+                </div>
+            </header>
+        <?php } ?>
+
 
 	<div class="middle-section">
 		<?php 
@@ -159,78 +197,91 @@ $like_usr_cnt = 2;?>
 						<?php echo $article_data['article_desc']; ?>
 					</div>
 				</div>
-				<?php if ($user_post_article['status'] == "publish"): ?>
-				<div class="post-bottom">
-					<div class="row">
-						<div class="col-md-12">
-							<ul class="bottom-left">
-								<li class="user-likes">
-									<?php
-									$like_cls = "";
-									if ($user_post_article['is_userlikePost'] == 1) {
-									    $like_cls = "like";
-									}?>
-									<a id="post-like-<?php echo $user_post_article['id']; ?>" class="ripple <?php echo $like_cls; ?>" href="javascript:void(0);" onclick="post_like(<?php echo $user_post_article['id']; ?>);">
-										<i class="fa fa-thumbs-up"></i>
-									</a>
-								</li>
-							</ul>
-							<ul id="like_user_list" class="bottom-left">
-								<?php
-								if(isset($user_post_article['post_like_data']) && !empty($user_post_article['post_like_data'])):
-									$i = 1;
-									foreach ($user_post_article['post_like_data'] as $post_like_data) {
-										if($post_like_data['user_image'] != "")
-										{
-											$pro_img_url = USER_THUMB_UPLOAD_URL.$post_like_data['user_image'];
-										}
-										else
-										{
-											if($post_like_data['user_gender'] == "M")
-											{
-												$pro_img_url = base_url('assets/img/man-user.jpg');
-											}
-											elseif($post_like_data['user_gender'] == "F")
-											{
-												$pro_img_url = base_url('assets/img/man-user.jpg');
-											}
-											else
-											{
-												$pro_img_url = base_url('assets/img/man-user.jpg');
-											}
-										} ?>
-										<li class="like-img">
-											<a class="ripple" href="<?php echo base_url($post_like_data['user_slug']); ?>" title="<?php echo $post_like_data['fullname']; ?>">
-												<img src="<?php echo $pro_img_url; ?>">
-											</a>
-										</li><?php
-										if($i == $like_usr_cnt)
-										{
-											break;
-										}
-										$i++;
-									}
-									if($user_post_article['post_like_count'] > $like_usr_cnt)
-									{?>
-										<li class="like-img">
-											<a class="ripple" href="javascript:void(0);">
-												+<?php echo $user_post_article['post_like_count'] - $like_usr_cnt; ?> Others
+				<?php if ($user_post_article['status'] == "publish"):
+					if($userid_login != "")
+					{ ?>
+						<div class="post-bottom">
+							<div class="row">
+								<div class="col-md-12">
+									<ul class="bottom-left">
+										<li class="user-likes">
+											<?php
+											$like_cls = "";
+											if ($user_post_article['is_userlikePost'] == 1) {
+											    $like_cls = "like";
+											} ?>
+											<a id="post-like-<?php echo $user_post_article['id']; ?>" class="ripple <?php echo $like_cls; ?>" href="javascript:void(0);" onclick="post_like(<?php echo $user_post_article['id']; ?>);">
+												<i class="fa fa-thumbs-up"></i>
 											</a>
 										</li>
-									<?php
-									}
-								endif; ?>
-								<!-- <li class="like-img">
-									<a class="ripple" href="javascript:void(0);">
-										+5 Others
-									</a>
-								</li> -->
-							</ul>
-						</div>
+									</ul>
+									<ul id="like_user_list" class="bottom-left">
+										<?php
+										if(isset($user_post_article['post_like_data']) && !empty($user_post_article['post_like_data'])):
+											$i = 1;
+											foreach ($user_post_article['post_like_data'] as $post_like_data) {
+												if($post_like_data['user_image'] != "")
+												{
+													$pro_img_url = USER_THUMB_UPLOAD_URL.$post_like_data['user_image'];
+												}
+												else
+												{
+													if($post_like_data['user_gender'] == "M")
+													{
+														$pro_img_url = base_url('assets/img/man-user.jpg');
+													}
+													elseif($post_like_data['user_gender'] == "F")
+													{
+														$pro_img_url = base_url('assets/img/man-user.jpg');
+													}
+													else
+													{
+														$pro_img_url = base_url('assets/img/man-user.jpg');
+													}
+												} ?>
+												<li class="like-img">
+													<a class="ripple" href="<?php echo base_url($post_like_data['user_slug']); ?>" title="<?php echo $post_like_data['fullname']; ?>">
+														<img src="<?php echo $pro_img_url; ?>">
+													</a>
+												</li><?php
+												if($i == $like_usr_cnt)
+												{
+													break;
+												}
+												$i++;
+											}
+											if($user_post_article['post_like_count'] > $like_usr_cnt)
+											{?>
+												<li class="like-img">
+													<a class="ripple" href="javascript:void(0);">
+														+<?php echo $user_post_article['post_like_count'] - $like_usr_cnt; ?> Others
+													</a>
+												</li>
+											<?php
+											}
+										endif; ?>
+										<!-- <li class="like-img">
+											<a class="ripple" href="javascript:void(0);">
+												+5 Others
+											</a>
+										</li> -->
+									</ul>
+								</div>
 
-					</div>
-				</div>
+							</div>
+						</div>
+				<?php } ?>
 				<div class="like-other-box">
+					<?php
+					if($userid_login == ""): ?>
+					<div class="comment-article">
+						<h2>Leave a Comment</h2><!-- (if not login) -->
+						<div class="add-comment">
+							To insert a comment you have to <a href="<?php echo base_url('login'); ?>">log in.</a>
+						</div>
+					</div>
+					<?php
+					endif; ?>
 					<?php if(isset($user_post_article['post_comment_data']) && !empty($user_post_article['post_comment_data'])): ?>
 					<div class="article-all-comment">
 						<h2>All Comments</h2>
@@ -285,6 +336,8 @@ $like_usr_cnt = 2;?>
                                         </div>
                                         <!-- Edit Comment End -->
 			                            <ul class="comment-action">
+			                            	<?php
+			                            	if($userid_login != ""){ ?>
 			                                <li>
 			                                	<?php 
 			                                	$cmt_like_cls = "";
@@ -297,7 +350,7 @@ $like_usr_cnt = 2;?>
 			                                		<span id="post-comment-like-<?php echo $post_comment_data['comment_id']; ?>"><?php echo $post_comment_data['postCommentLikeCount'] > 0 ? $post_comment_data['postCommentLikeCount'] : ''; ?></span>
 			                                	</a>
 			                                </li>
-			                                <?php
+			                                <?php			                                
 			                                if($post_comment_data['commented_user_id'] == $userid_login){ ?>
 			                                <li id="edit-comment-li-<?php echo $post_comment_data['comment_id']; ?>">
 			                                	<a href="javascript:void(0);" onclick="editPostComment(<?php echo $post_comment_data['comment_id']; ?>, <?php echo $user_post_article['id']; ?>)">Edit</a>
@@ -308,7 +361,8 @@ $like_usr_cnt = 2;?>
 			                            	}
 			                                if($user_post_article['user_id'] == $userid_login || $post_comment_data['commented_user_id'] == $userid_login){ ?>
 			                                <li><a href="javascript:void(0);" onclick="deletePostComment(<?php echo $post_comment_data['comment_id']; ?>, <?php echo $user_post_article['id']; ?>)">Delete</a></li>
-			                            	<?php } ?>
+			                            	<?php }
+			                            	} ?>
 			                                <li><a href="javascript:void(0);"><?php echo $post_comment_data['comment_time_string']; ?></a></li>
 			                            </ul>
 			                        </div>
@@ -327,38 +381,8 @@ $like_usr_cnt = 2;?>
 						</div>							
 					</div>
 					<?php
-					endif;
-					if($userid_login == ""): ?>
-					<div class="comment-article">
-						<h2>Leave a Comment</h2><!-- (if not login) -->
-						<div class="add-comment">
-							<form class="pt10">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" placeholder="Enter Your Name">
-										</div>
-										<div class="form-group">
-											<input type="text" placeholder="Enter Your Email">
-										</div>
-										<div class="form-group">
-											<input type="text" placeholder="Website">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<textarea placeholder="Your Messages"></textarea>
-										</div>
-									</div>
-									<div class="col-md-12 text-right">
-										<a href="#" class="btn1">Submint</a>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-					<?php
-					else: ?>
+					endif;?>					
+					<?php if($userid_login != ""): ?>
 					<div class="comment-article">
 						<h2>Leave a Comment</h2><!-- (if login) -->
 						<div class="add-comment">

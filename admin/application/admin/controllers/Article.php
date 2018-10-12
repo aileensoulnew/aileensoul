@@ -87,8 +87,11 @@ class Article extends MY_Controller {
         $data = array(
             'status' => 'publish'
         );
-
         $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
+        
+        $sql = "UPDATE ailee_post_article SET article_desc_old = article_desc WHERE id_post_article = '".$id."'";
+        $query = $this->db->query($sql); 
+        
         echo 'Accepted';
 
         $join_str[0]['table'] = "user_post";

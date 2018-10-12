@@ -41,6 +41,9 @@ require '../contentcompare/vendor/autoload.php';
       ins.mod {
           text-decoration: none;
       }
+      del.diffdel {
+          display: none;
+      }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
