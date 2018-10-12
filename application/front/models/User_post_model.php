@@ -622,6 +622,15 @@ class User_post_model extends CI_Model {
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array[$key]['question_data'] = $question_data;
 
+            }
+            elseif ($value['post_for'] == 'article') {
+                $this->db->select("*")->from("post_article");                
+                $this->db->where('id_post_article', $value['post_id']);
+                $this->db->where('status', 'publish');                
+                $query = $this->db->get();                
+                $article_data = $query->row_array();                
+                $result_array[$key]['article_data'] = $article_data;
+
             } /*elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $value['post_id']);
@@ -763,6 +772,15 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $cover_update = $query->row_array();
                 $result_array[$key]['cover_update'] = $cover_update;
+            }
+            elseif ($value['post_for'] == 'article') {
+                $this->db->select("*")->from("post_article");                
+                $this->db->where('id_post_article', $value['post_id']);
+                $this->db->where('status', 'publish');                
+                $query = $this->db->get();                
+                $article_data = $query->row_array();                
+                $result_array[$key]['article_data'] = $article_data;
+
             }
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
