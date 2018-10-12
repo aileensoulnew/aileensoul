@@ -24,8 +24,7 @@ maineditor = tinymce.init({
     imagetools_toolbar: "alignleft aligncenter alignright | rotateleft rotateright | flipv fliph | editimage imageoptions| removeimage",
     setup: function(editor) {
 
-        function insertDate() {
-            
+        function insertDate() {            
             editor.insertContent('');
         }
 
