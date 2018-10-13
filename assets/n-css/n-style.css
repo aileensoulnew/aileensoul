@@ -2574,7 +2574,8 @@ display: inline-block; content: ""; position: absolute; top: 8px; right: -8px;}
 .new-article .add-comment-no-login{font-size:20px; color:#7b7b7b;}
 .new-article .add-comment-no-login a{font-size:20px; color:#1b8ab9; text-decoration:underline; text-transform:uppercase; padding:0;}
 .new-article .mce-toolbar-grp.stop-scroll-toolbar{position: fixed; z-index: 99; top: 46px; margin-top: 0; border-top: 0;}
-
+.article-info-box{top:44px; background:#f6f6f6; padding:2px;}
+.article-preview{padding-right:15px;}
 
 /***  end new article page css  ***/
 body.body-loader{height:100vh; overflow:hidden;}
