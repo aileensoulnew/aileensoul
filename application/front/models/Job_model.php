@@ -384,9 +384,10 @@ SELECT rp.* FROM ailee_job_reg jr, ailee_rec_post rp WHERE rp.post_name = jr.wor
         $this->db->select('s.skill_id,s.skill,s.skill_slug')->from('skill s');
         $this->db->where('s.status', '1');
         $this->db->where('s.type', '1');        
-        $this->db->where('s.skill_slug LIKE BINARY "'.$keyword.'"');
+        $this->db->where('LOWER(s.skill_slug)',strtolower($keyword));
         $query = $this->db->get();        
         $return_array = $query->row_array();
+        // echo $this->db->last_query();exit();
         return $return_array;
     }
 

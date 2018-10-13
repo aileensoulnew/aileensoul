@@ -71,16 +71,16 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                     if ($keyword == "" && $keyword1 == "") {
                                         echo 'All Jobs';
                                     } elseif ($keyword != "" && $keyword1 == "") {
-                                        echo $keyword;
-                                        echo " Jobs";
-                                    } elseif ($keyword == "" && $keyword1 != "") {
+                                        echo $schema_name_item4;
+                                        // echo " Jobs";
+                                    } /*elseif ($keyword == "" && $keyword1 != "") {
                                         echo " Jobs in ";
                                         echo $keyword1;
                                     } else {
                                         echo $keyword;
                                         echo " Jobs in ";
                                         echo $keyword1;
-                                    }
+                                    }*/
                                     ?>
                                 </h3>
 
@@ -672,6 +672,50 @@ l25 24 0 325 c0 178 -3 332 -6 341 -13 33 -59 45 -174 45 l-110 0 0 221 0 221
     </script>
     <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_search_login_new_search_no_regi_site.js?ver=' . time()); ?>"></script>
-    
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item":
+                {
+                    "@id": "<?php echo base_url(); ?>",
+                    "name": "Aileensoul"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item":
+                {
+                    "@id": "<?php echo base_url(); ?>job-search",
+                    "name": "Jobs"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item":
+                {
+                    "@id": "<?php echo  $schema_url_item3; ?>",
+                    "name": "<?php echo  $schema_name_item3; ?>"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "item":
+                {
+                    "@id": "<?php echo current_url(); ?>",
+                    "name": "<?php echo  $schema_name_item4; ?>"
+                }
+            }
+        ]
+    }
+    </script>
 </body>
 </html>

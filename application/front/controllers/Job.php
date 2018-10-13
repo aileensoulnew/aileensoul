@@ -6019,8 +6019,9 @@ class Job extends MY_Controller {
         }
         else if($serach_type == 2)
         {
-            $this->data['title'] = $keyser." Job Openings: Great Career Opportunities at ".$keyser;
-            $this->data['metadesc'] = "Explore numerous Jobs by ".$keyser." on Aileensoul. Connect and get the latest information on recent jobs openings by ".$keyser.". Join Aileensoul and Apply Now!";
+            $keyser1 = substr($keyser, 0, strrpos( $keyser, ' '));
+            $this->data['title'] = $keyser1." Job Openings: Great Career Opportunities at ".$keyser1;
+            $this->data['metadesc'] = "Explore numerous Jobs by ".$keyser1." on Aileensoul. Connect and get the latest information on recent jobs openings by ".$keyser1.". Join Aileensoul and Apply Now!";
         }
         else if($serach_type == 3)
         {
@@ -6047,6 +6048,31 @@ class Job extends MY_Controller {
         $job_category = $this->job_model->is_job_category($keyword);
         $job_designation = $this->job_model->is_job_designation($keyword);
         $job_city = $this->job_model->is_job_location($keyword);
+        if(isset($job_skills) && !empty($job_skills)){            
+            $this->data['schema_url_item3'] = base_url().'jobs-by-skills';
+            $this->data['schema_name_item3'] = "Jobs by Skills";
+            $this->data['schema_name_item4'] = ucwords($keyser)." Jobs";
+        }
+        elseif(isset($job_category) && !empty($job_category)){            
+            $this->data['schema_url_item3'] = base_url().'jobs-by-categories';
+            $this->data['schema_name_item3'] = "Jobs by Category";
+            $this->data['schema_name_item4'] = ucwords($keyser)." Jobs";
+        }
+        elseif(isset($job_designation) && !empty($job_designation)){            
+            $this->data['schema_url_item3'] = base_url().'jobs-by-designations';
+            $this->data['schema_name_item3'] = "Jobs by Designation";
+            $this->data['schema_name_item4'] = ucwords($keyser)." Jobs";
+        }
+        elseif(isset($job_city) && !empty($job_city)){            
+            $this->data['schema_url_item3'] = base_url().'jobs-by-location';
+            $this->data['schema_name_item3'] = "Jobs by Location";
+            $this->data['schema_name_item4'] = "Jobs in ".ucwords($keyser);
+        }
+        else{            
+            $this->data['schema_url_item3'] = base_url().'jobs-by-companies';
+            $this->data['schema_name_item3'] = "Jobs by Companies";
+            $this->data['schema_name_item4'] = ucwords(substr($keyser, 0, strrpos( $keyser, ' ')))." Jobs";
+        }        
         $search_location_arr = array();
         if($search_location != "")
         {
