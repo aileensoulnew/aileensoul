@@ -165,7 +165,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	        </div>
 	    </div>
 	</div>
-	<div class="modal fade message-box biderror" id="article-cetegory" role="dialog" tabindex="-1">
+	<div class="modal fade message-box biderror" id="article-cetegory" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lm">
                 <div class="modal-content">
                     <button type="button" class="modal-close" data-dismiss="modal">&times;
@@ -229,6 +229,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	var base_url = "<?php echo base_url(); ?>"
 	var edit_art_published = "<?php echo $edit_art_published; ?>"
 	var article_slug = "";
+	$("#article-cetegory").modal('show');
 </script>
 <script>
     /*ClassicEditor
