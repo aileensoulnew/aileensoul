@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <?php $user_id = $this->session->userdata('aileenuser'); 
 //echo $user_id."-------".$job_deactive."----------".$this->job_profile_set;exit;?>
 <html lang="en">
@@ -169,4 +169,40 @@
     </script>
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
     <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item":
+                {
+                    "@id": "<?php echo base_url(); ?>",
+                    "name": "Aileensoul"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item":
+                {
+                    "@id": "<?php echo base_url(); ?>job-search",
+                    "name": "Jobs"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item":
+                {
+                    "@id": "<?php echo base_url(); ?>jobs",                    
+                    "name": "All Jobs"
+                }
+            }
+        ]
+    }
+    </script>
 </body>

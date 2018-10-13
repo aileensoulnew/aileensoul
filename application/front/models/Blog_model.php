@@ -65,7 +65,7 @@ class Blog_Model extends CI_Model {
             $search_split = explode(" ",$searchword);
             foreach ($search_split as $key => $value) {
                 $val_con = "%".$value."%";                
-                $sql_condition .= " (b.title LIKE '". $val_con ."' OR b.description LIKE '". $val_con ."') AND ";
+                $sql_condition .= " (b.title LIKE '". $val_con ."' ) AND ";//OR b.description LIKE '". $val_con ."'
             }
         }   
 
@@ -99,7 +99,7 @@ class Blog_Model extends CI_Model {
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
-        echo $sql;exit;
+        // echo $sql;exit;
         $query = $this->db->query($sql);
         $result = $query->result_array();
         return $result;

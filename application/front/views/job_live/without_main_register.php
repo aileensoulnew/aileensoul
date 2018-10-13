@@ -291,17 +291,44 @@
         }
     }
 </script>
-        <script>
-            var base_url = '<?php echo base_url(); ?>';
-            var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
-            var title = '<?php echo $title; ?>';
-            //var header_all_profile = '<?php echo $header_all_profile; ?>';
-            var q = '';
-            var l = '';
-            var w = '';
-            var app = angular.module('noRegJob', ['ui.bootstrap']);
-        </script>
-        <script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/webpage/job-live/without_regi.js?ver=' . time()) ?>"></script>
+<script>
+    var base_url = '<?php echo base_url(); ?>';
+    var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
+    var title = '<?php echo $title; ?>';
+    //var header_all_profile = '<?php echo $header_all_profile; ?>';
+    var q = '';
+    var l = '';
+    var w = '';
+    var app = angular.module('noRegJob', ['ui.bootstrap']);
+</script>
+<script src="<?php echo base_url('assets/js/webpage/job-live/searchJob.js?ver=' . time()) ?>"></script>
+<script src="<?php echo base_url('assets/js/webpage/job-live/without_regi.js?ver=' . time()) ?>"></script>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement":
+    [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item":
+            {
+                "@id": "<?php echo base_url(); ?>",
+                "name": "Aileensoul"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item":
+            {
+                "@id": "<?php echo base_url(); ?>job-search",
+                "name": "Jobs"
+            }
+        }
+    ]
+}
+</script>
     </body>
 </html>
