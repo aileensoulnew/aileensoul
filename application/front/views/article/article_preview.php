@@ -2,7 +2,7 @@
 <?php
 $userid_login                 = $this->session->userdata('aileenuser');
 $article_featured_upload_path = $this->config->item('article_featured_upload_path');
-$like_usr_cnt = 2;
+$like_usr_cnt = 5;
 $no_login_cls= "";
 if($userid_login == "")
 {
@@ -28,7 +28,7 @@ if($userid_login == "")
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>">
+        <!--link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver=' . time()); ?>"-->
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <style type="text/css">
@@ -46,7 +46,7 @@ if($userid_login == "")
         </style>
     <?php $this->load->view('adsense');?>
 </head>
-<body class="new-article <?php echo $no_login_cls; ?>">
+<body class="new-article preview-article<?php echo $no_login_cls; ?>">
 		<?php 
 			if($userid_login){ 
 				echo $header_inner_profile;
@@ -94,15 +94,15 @@ if($userid_login == "")
 				echo "<span class='article-info-box'>This Article is deleted.</span>";
 			}?>
 		<div class="container">
-			<div class="custom-user-list pt20">
+			<div class="custom-user-list">
 				<!-- article-box -->
 				<div class="article-preview">
 					<div class="article-title">
 						<h2><?php echo ucwords($article_data['article_title']); ?></h2>
 					</div>
-					<p class="pt20">Posted on <?php echo date('dS F Y', strtotime($article_data['created_date'])); ?></p>
-					<p class="pt20">
-						<?php
+					<p class="pb10">
+						<span class="cat-name-cus">
+							<?php
 						if($article_data['article_main_category'] == 0)
 						{
 							echo $article_data['article_other_category'];
@@ -112,8 +112,11 @@ if($userid_login == "")
 							$category = $this->db->get_where('industry_type', array('industry_id' => $article_data['article_main_category'], 'status' => 1))->row()->industry_name;
 							echo $category;
 						}  ?>
+						</span>
+						<span><?php echo date('dS F Y', strtotime($article_data['created_date'])); ?></span>
 					</p>
-					<div class="article-author">
+					
+					<!--div class="article-author">
 						<div class="post-img">
 							<?php
 							if ($user_data['user_image'] != "") {
@@ -147,43 +150,9 @@ if($userid_login == "")
 							</p>
 							</a>
 						</div>
-						<?php if ($userid_login != "" && $userid_login != $article_data['user_id']) {?>
-						<div class="author-btn">
-							<div class="user-btns">
-								<?php
-								if($contact_value == 'new'){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
-								<?php
-								}
-								elseif($contact_value == 'confirm'){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>,1)">In Contacts</a>
-								<?php
-								}
-								elseif($contact_value == 'pending' && $from_id != $to_id){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>)">Request sent</a>
-								<?php
-								}
-								elseif($contact_value == 'pending' && $from_id == $to_id){ ?>
-									<a id="contact-btn" class="btn3" onclick="confirmContactRequestInnerHeader(<?php echo $to_id; ?>)">Confirm Request</a>
-								<?php
-								}
-								elseif($contact_value == 'cancel' || $contact_value == 'reject'){ ?>
-									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
-								<?php
-								}
-
-								if($follow_value == "new" || $follow_value == "0"){ ?>
-									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 1, <?php echo $to_id; ?>)">Follow</a>
-								<?php }
-								elseif($follow_value == "1"){ ?>
-									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 0, <?php echo $to_id; ?>)">Following</a>
-								<?php
-								} ?>
-								<a href="<?php echo MESSAGE_URL."user/".$user_data['user_slug']; ?>" class="btn3">Message</a>
-							</div>
-						</div>
-						<?php }?>
-					</div><?php
+						
+					</div-->
+					<?php
 					if ($article_data['article_featured_image'] != "") {?>
 					<div class="art-banner gradient-bg">
 						<a href="#">
@@ -193,7 +162,7 @@ if($userid_login == "")
 						</a>
 					</div>
 					<?php }?>
-					<div class="article-content">
+					<div class="pt15">
 						<?php echo $article_data['article_desc']; ?>
 					</div>
 				</div>
@@ -252,7 +221,7 @@ if($userid_login == "")
 											}
 											if($user_post_article['post_like_count'] > $like_usr_cnt)
 											{?>
-												<li class="like-img">
+												<li class="like-img other-like-cus">
 													<a class="ripple" href="javascript:void(0);">
 														+<?php echo $user_post_article['post_like_count'] - $like_usr_cnt; ?> Others
 													</a>
@@ -275,9 +244,9 @@ if($userid_login == "")
 					<?php
 					if($userid_login == ""): ?>
 					<div class="comment-article">
-						<h2>Leave a Comment</h2><!-- (if not login) -->
-						<div class="add-comment">
-							To insert a comment you have to <a href="<?php echo base_url('login'); ?>">log in.</a>
+						<!-- (if not login) -->
+						<div class="add-comment-no-login">
+							To Insert a Comment You Have To <a href="<?php echo base_url('login'); ?>">login.</a>
 						</div>
 					</div>
 					<?php
@@ -373,7 +342,8 @@ if($userid_login == "")
 						<?php
 							if($user_post_article['post_comment_count'] > 5)
 							{ ?>
-								<span id="loadmore" onclick="load_more_comment(<?php echo $user_post_article['id']; ?>);">Load more comments</span>
+								<p class="text-center pt15 fw"><span id="loadmore" onclick="load_more_comment(<?php echo $user_post_article['id']; ?>);">See More Comments</span>
+								</p>
 							<?php
 							} ?>
 						<div class="fw" id="cmt_loader" style="text-align: center; display: none;">
@@ -455,15 +425,46 @@ if($userid_login == "")
 						<h3><a href="#">Dhaval Shah</a></h3>
 						<p>Ceo</p>
 					</div>
-				</div>
-				<div class="meta-detail-box">
-					<p>
-						<span class="cat-field-cus">Business Services And Financial Operations</span>
-					</p>
-					
-					
-					
-				</div>
+				
+				<?php if ($userid_login != "" && $userid_login != $article_data['user_id']) {?>
+						<div class="author-btn">
+							<div class="user-btns">
+								<?php
+								if($contact_value == 'new'){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
+								<?php
+								}
+								elseif($contact_value == 'confirm'){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>,1)">In Contacts</a>
+								<?php
+								}
+								elseif($contact_value == 'pending' && $from_id != $to_id){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'cancel', <?php echo $to_id; ?>)">Request sent</a>
+								<?php
+								}
+								elseif($contact_value == 'pending' && $from_id == $to_id){ ?>
+									<a id="contact-btn" class="btn3" onclick="confirmContactRequestInnerHeader(<?php echo $to_id; ?>)">Confirm Request</a>
+								<?php
+								}
+								elseif($contact_value == 'cancel' || $contact_value == 'reject'){ ?>
+									<a id="contact-btn" class="btn3" onclick="contact(<?php echo $contact_id; ?>, 'pending', <?php echo $to_id; ?>)">Add to contact</a>
+								<?php
+								}
+
+								if($follow_value == "new" || $follow_value == "0"){ ?>
+									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 1, <?php echo $to_id; ?>)">Follow</a>
+								<?php }
+								elseif($follow_value == "1"){ ?>
+									<a id="follow-btn" class="btn3" onclick="follow(<?php echo $follow_id; ?>, 0, <?php echo $to_id; ?>)">Following</a>
+								<?php
+								} ?>
+								<a href="<?php echo MESSAGE_URL."user/".$user_data['user_slug']; ?>" class="btn3">Message</a>
+							</div>
+						</div>
+						<?php }?>
+					</div>
+					<div class="right-add-box">            
+					</div>
 	        </div>
 		</div>
 	</div>
