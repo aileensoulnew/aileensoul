@@ -97,6 +97,12 @@ maineditor = tinymce.init({
 
     init_instance_callback: function (editor) {
         editor.on('KeyUp', function (e) {
+            console.log(e);
+            if(e.keyCode == 13)
+            {
+                var h = $("#article_editor_ifr").innerHeight();
+                $("#article_editor_ifr").attr("style","width: 100%; display: block;height:"+ parseInt(h + 100)+"px");
+            }
             clearTimeout(typingTimer);
             if (editor.getContent()) {
                 typingTimer = setTimeout(function(){
@@ -619,7 +625,7 @@ $("#okcategory").click(function(){
 });
 $(window).scroll(function() {
     var window_height = $(window).scrollTop();
-    var mce_tool_scroll = $('.mce-toolbar-grp').offset().top;
+    var mce_tool_scroll = $('.mce-top-part').offset().top;    
     if(window_height >= parseInt(mce_tool_scroll) - 85)
     {
         $('.mce-toolbar-grp').addClass('stop-scroll-toolbar');
