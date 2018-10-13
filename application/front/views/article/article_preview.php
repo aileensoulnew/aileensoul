@@ -46,7 +46,7 @@ if($userid_login == "")
         </style>
     <?php $this->load->view('adsense');?>
 </head>
-<body class="profile-main-page<?php echo $no_login_cls; ?>">
+<body class="new-article <?php echo $no_login_cls; ?>">
 		<?php 
 			if($userid_login){ 
 				echo $header_inner_profile;
@@ -442,9 +442,27 @@ if($userid_login == "")
 				<?php endif;?>
 			</div>
 			<div class="right-part">
-				<?php $this->load->view('right_add_box');?>
-				<div class="pt20 fw">
-				<?php $this->load->view('right_add_box');?>
+				<div class="arti-profile-box">
+					<div class="user-cover-img">
+						<a href="#">
+							<img src="<?php echo base_url(); ?>assets/n-images/user-cover.jpg">
+						</a>
+					</div>
+					<div class="user-pr-img">
+						<a href="#"><img src="<?php echo base_url(); ?>assets/n-images/user-pic.jpg"></a>
+					</div>
+					<div class="user-info-text text-center">
+						<h3><a href="#">Dhaval Shah</a></h3>
+						<p>Ceo</p>
+					</div>
+				</div>
+				<div class="meta-detail-box">
+					<p>
+						<span class="cat-field-cus">Business Services And Financial Operations</span>
+					</p>
+					
+					
+					
 				</div>
 	        </div>
 		</div>

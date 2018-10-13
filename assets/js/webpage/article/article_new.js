@@ -418,12 +418,12 @@ $uploadCrop = $('#img_preview').croppie({
     enableExif: true,
     viewport: {
         width: 915,
-        height: 256,
+        height: 350,
         type: 'square'
     },
     boundary: {
         width: 915,
-        height: 256
+        height: 350
     }
 });
    
