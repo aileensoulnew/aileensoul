@@ -516,7 +516,7 @@ $('.upload-result').on('click', function (ev) {
 $('.cancel-result').on('click', function (ev) {
     $("#img_preview_div").hide();
     $("#featured_img").val('');
-    $("#featured_img_src").show();
+    $("#featured_img_src").hide();
 });
 //Featured Image Crop and Upload End
 $("#okbtn").click(function(){   
@@ -552,45 +552,36 @@ $('#title_txt').keyup(function(){
     }
 });
 
-//on keyup, start the countdown
-$('#article_meta_title').keyup(function(){
-    clearTimeout(typingTimer1);
-    if ($('#article_meta_title').val()) {        
-        typingTimer1 = setTimeout(function(){
-            //do stuff here e.g ajax call etc....
-            upload_success();
-            // console.log('title',title,'content',descr);
-             // $("#out").html(v);
-        }, doneTypingInterval1);
-    }
-});
 
-//on keyup, start the countdown
-$('#article_meta_description').keyup(function(){
-    clearTimeout(typingTimer1);
-    if ($('#article_meta_description').val()) {        
-        typingTimer1 = setTimeout(function(){
-            //do stuff here e.g ajax call etc....
-            upload_success();
-            // console.log('title',title,'content',descr);
-             // $("#out").html(v);
-        }, doneTypingInterval1);
-    }
-});
 
-//on keyup, start the countdown
-$('#article_meta_description').keyup(function(){
-    clearTimeout(typingTimer1);
-    if ($('#article_meta_description').val()) {        
-        typingTimer1 = setTimeout(function(){
-            //do stuff here e.g ajax call etc....
-            upload_success();
-            // console.log('title',title,'content',descr);
-             // $("#out").html(v);
-        }, doneTypingInterval1);
-    }
-});
+// $('#meta-detail').on('shown.bs.modal', function (e) {
+    //on keyup, start the countdown
+    $('#article_meta_title').keyup(function(){
+        clearTimeout(typingTimer1);
+        if ($('#article_meta_title').val()) {        
+            typingTimer1 = setTimeout(function(){
+                //do stuff here e.g ajax call etc....
+                upload_success();
+                // console.log('title',title,'content',descr);
+                 // $("#out").html(v);
+            }, doneTypingInterval1);
+        }
+    });
 
+    //on keyup, start the countdown
+    $('#article_meta_description').keyup(function(){
+        clearTimeout(typingTimer1);
+        if ($('#article_meta_description').val()) {        
+            typingTimer1 = setTimeout(function(){
+                //do stuff here e.g ajax call etc....
+                upload_success();
+                // console.log('title',title,'content',descr);
+                 // $("#out").html(v);
+            }, doneTypingInterval1);
+        }
+    });
+
+// });
 //on keyup, start the countdown
 $('#article_other_category').keyup(function(){
     clearTimeout(typingTimer1);
@@ -602,4 +593,40 @@ $('#article_other_category').keyup(function(){
              // $("#out").html(v);
         }, doneTypingInterval1);
     }
+});
+$("#okcategory").click(function(){
+    var cat = $("#article_main_category").find(":selected").val();
+    if(cat != 0)
+    {
+        var txt = $("#article_main_category").find(":selected").text();
+        $("#cat-selected").text(txt);
+        $('#article-cetegory').modal('hide');
+    }
+    else
+    {
+        var txt = $("#article_other_category").val();
+        if(txt.trim() != "")
+        {
+            $("#article_other_category").removeClass("error");
+            $("#cat-selected").text(txt);
+            $('#article-cetegory').modal('hide');
+        }
+        else
+        {
+            $("#article_other_category").addClass("error");
+        }
+    }
+});
+$(window).scroll(function() {
+    var window_height = $(window).scrollTop();
+    var mce_tool_scroll = $('.mce-toolbar-grp').offset().top;
+    if(window_height >= parseInt(mce_tool_scroll) - 85)
+    {
+        $('.mce-toolbar-grp').addClass('stop-scroll-toolbar');
+    }
+    else
+    {
+        $('.mce-toolbar-grp').removeClass('stop-scroll-toolbar');   
+    }
+
 });

@@ -35,10 +35,11 @@ class Article extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         if($userid)
         {
-            $this->data['userData'] = $this->user_model->getUserData($userid);
+            $this->data['user_data'] = $this->user_model->getLeftboxData($userid);
             $this->data['unique_key'] = $this->common->generate_article_unique_key(16);
             $this->data['meta_title'] = "Add Article";
             $this->data['meta_desc'] = "Add Article";
+            $this->data['new_article'] = "1";
             $this->load->view('article/new_article', $this->data);
         }
         else
@@ -73,10 +74,12 @@ class Article extends MY_Controller {
                     redirect(base_url(),"refresh");
                 }
             }
+            $this->data['user_data'] = $this->user_model->getLeftboxData($userid);
             $this->data['edit_art_published'] = $edit_art_published;
             $this->data['unique_key'] = $unique_key;
             $this->data['meta_title'] = "Edit Article";
             $this->data['meta_desc'] = "Edit Article";
+            $this->data['new_article'] = "0";
             $this->load->view('article/new_article', $this->data);
         }
         else

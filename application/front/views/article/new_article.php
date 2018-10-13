@@ -57,7 +57,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>
-<body class="new-article">
+<body class="new-article edit-article">
 	<?php echo $header_inner_profile; ?>
 	<div class="sub-header">
 		<div class="container">
@@ -76,22 +76,61 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 			<div class="right-part">
 				<div class="arti-profile-box">
 					<div class="user-cover-img">
-						<a href="#">
-							<img src="<?php echo base_url(); ?>assets/n-images/user-cover.jpg">
+						<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+							<?php 
+							if($user_data['profile_background'] != "")
+							{ ?>							    
+								<img src="<?php echo USER_BG_MAIN_UPLOAD_URL.$user_data['profile_background'];?>">
+							<?php
+							}else{ ?>
+								<div class="gradient-bg"></div>
+							<?php
+							} ?>
 						</a>
 					</div>
 					<div class="user-pr-img">
-						<a href="#"><img src="<?php echo base_url(); ?>assets/n-images/user-pic.jpg"></a>
+						<?php
+							if ($user_data['user_image'] != "")
+							{
+							    $pro_img = USER_THUMB_UPLOAD_URL . $user_data['user_image'];
+							}
+							else
+							{
+							    if ($user_data['user_gender'] == "M") {
+							        $pro_img = base_url('assets/img/man-user.jpg');
+							    } elseif ($user_data['user_gender'] == "F") {
+							        $pro_img = base_url('assets/img/female-user.jpg');
+							    } else {
+							        $pro_img = base_url('assets/img/man-user.jpg');
+							    }
+
+							}
+						?>
+						<a href="<?php echo base_url().$user_data['user_slug']; ?>"><img src="<?php echo $pro_img; ?>"></a>
 					</div>
 					<div class="user-info-text text-center">
-						<h3><a href="#">Dhaval Shah</a></h3>
-						<p>Ceo</p>
+						<h3>
+							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+							<?php echo ucwords($user_data['first_name']." ".$user_data['last_name']); ?>
+							</a>
+						</h3>
+						<p>
+							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+								<?php 
+								if($user_data['title_name'] != "")
+									echo $user_data['title_name'];
+								elseif($user_data['degree_name'] != "")
+									echo $user_data['degree_name'];
+								else
+									echo "Current Work"; ?>
+							</a>
+						</p>
 					</div>
 				</div>
 				<div class="meta-detail-box">
 					<p>
-						<a href="" data-target="#article-cetegory" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"> </a>
-						<span class="cat-field-cus">Business Services And Financial Operations</span>
+						<a href="" data-target="#article-cetegory" data-toggle="modal" class="pull-left"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"> </a>
+						<span id="cat-selected" class="cat-field-cus">Select Category</span>
 					</p>
 					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Title</p>
 					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Discription</p>
@@ -137,11 +176,6 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 					</div> -->
 					<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
 					<label class="error" id="err_desc" style="display: none;">Please Enter Some Content.</label>
-
-					
-
-
-					
 				</div>
 			</div>
 			
@@ -167,18 +201,13 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	</div>
 	<div class="modal fade message-box biderror" id="article-cetegory" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lm">
-                <div class="modal-content">
-                    <button type="button" class="modal-close" data-dismiss="modal">&times;
-                    </button>       
+                <div class="modal-content">                    
                     <div class="modal-body">
                         <div class="article-popup">
 							<?php $getFieldList = $this->data_model->getFieldList();?>
 							<fieldset class="fw">
 								<span>
 								<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
-									<optgroup style="max-height: 65px;">
-									<option value="" selected="selected">Add Category</option>
-									</optgroup>
 									<?php foreach ($getFieldList as $key => $value) { ?>
 										<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
 									<?php } ?>
@@ -191,8 +220,12 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 								<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
 								<span id="fullname-error"></span>
 								<?php echo form_error('other_field'); ?>
-							</fieldset>
-							
+							</fieldset>							
+							<div class="mes">
+								<div class="model_ok_cancel">
+			                		<a class="btn1" id="okcategory" href="javascript:void(0);" title="OK">OK</a>
+			                	</div>
+							</div>
 						</div>
                     </div>
                 </div>
@@ -205,8 +238,13 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
                     </button>       
                     <div class="modal-body">
 						<div class="article-popup">
-                        <input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
-						<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
+	                        <input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
+							<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
+							<div class="mes">
+								<div class="model_ok_cancel">
+			                		<a class="btn1" id="okmeta" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
+			                	</div>
+							</div>
 						</div>
                     </div>
                 </div>
@@ -228,8 +266,12 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	var unique_key = "<?php echo(isset($articleData) && !empty($articleData) ? $articleData['unique_key'] : $unique_key); ?>"
 	var base_url = "<?php echo base_url(); ?>"
 	var edit_art_published = "<?php echo $edit_art_published; ?>"
+	var new_article = "<?php echo $new_article; ?>"
 	var article_slug = "";
-	$("#article-cetegory").modal('show');
+	if(new_article == 1)
+	{
+		$("#article-cetegory").modal('show');
+	}
 </script>
 <script>
     /*ClassicEditor
