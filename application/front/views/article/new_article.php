@@ -21,7 +21,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver=' . time()) ?>">        
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>"> 
+        <!--link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/job.css?ver='.time()); ?>"--> 
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
         <style type="text/css">
@@ -88,6 +88,15 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 						<p>Ceo</p>
 					</div>
 				</div>
+				<div class="meta-detail-box">
+					<p>
+						<a href="" data-target="#article-cetegory" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"> </a>
+						<span class="cat-field-cus">Business Services And Financial Operations</span>
+					</p>
+					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Title</p>
+					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Discription</p>
+					
+				</div>
 			</div>
 			<div class="custom-user-list">
 				
@@ -129,25 +138,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 					<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
 					<label class="error" id="err_desc" style="display: none;">Please Enter Some Content.</label>
 
-					<input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
-					<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
-					<?php $getFieldList = $this->data_model->getFieldList();?>
-					<fieldset class="fw">           
-						<label >What is your field?</label>
-						<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
-							<option value="" selected="selected">Select your field</option>
-							<?php foreach ($getFieldList as $key => $value) { ?>
-								<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
-							<?php } ?>
-							<option value="0" <?php echo $articleData['article_main_category'] == "0" ? "selected='selected'" : ""; ?>>Other</option>
-						</select>
-					</fieldset>
-					<fieldset class="fw" id="other_field_div" style="<?php echo $articleData['article_main_category'] == '0' ? '' : 'display: none;'; ?>;">
-						<label>Enter other field</label>
-						<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
-						<span id="fullname-error"></span>
-						<?php echo form_error('other_field'); ?>
-					</fieldset>
+					
 
 
 					
@@ -174,6 +165,53 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	        </div>
 	    </div>
 	</div>
+	<div class="modal fade message-box biderror" id="article-cetegory" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;
+                    </button>       
+                    <div class="modal-body">
+                        <div class="article-popup">
+							<?php $getFieldList = $this->data_model->getFieldList();?>
+							<fieldset class="fw">
+								<span>
+								<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
+									<optgroup style="max-height: 65px;">
+									<option value="" selected="selected">Add Category</option>
+									</optgroup>
+									<?php foreach ($getFieldList as $key => $value) { ?>
+										<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
+									<?php } ?>
+									<option value="0" <?php echo $articleData['article_main_category'] == "0" ? "selected='selected'" : ""; ?>>Other</option>
+								</select>
+								</span>
+							</fieldset>
+							<fieldset class="fw" id="other_field_div" style="<?php echo $articleData['article_main_category'] == '0' ? '' : 'display: none;'; ?>;">
+								<label>Enter other field</label>
+								<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
+								<span id="fullname-error"></span>
+								<?php echo form_error('other_field'); ?>
+							</fieldset>
+							
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="modal fade message-box biderror" id="meta-detail" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;
+                    </button>       
+                    <div class="modal-body">
+						<div class="article-popup">
+                        <input type="text" name="article_meta_title" id="article_meta_title" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_title'] : ''); ?>" placeholder="Enter meta title" maxlength="70">
+						<input type="text" name="article_meta_description" id="article_meta_description" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_meta_description'] : ''); ?>" placeholder="Enter meta description" maxlength="200">
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	<!-- Model Popup End -->
 </body>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver='.time()); ?>"></script>

@@ -2517,6 +2517,7 @@ label.cameraButton{min-height:43px;}
 #article_frm .cr-boundary{width:100% !important;}
 .image-upload .arti-preview-img{position:absolute; top:0; width:100%;}
 .arti-preview-img #img_preview_div .btn{top:10px !important; bottom:inherit !important;}
+.arti-preview-img #img_preview_div .btn.cancel-result{right:70px !important;}
 #article_frm .mce-top-part::before{box-shadow:inherit !important;}
 #article_frm .mce-tinymce.mce-container{border-width:0 !important;}
 #article_frm .mce-tinymce{box-shadow:inherit !important;}
@@ -2530,6 +2531,16 @@ label.cameraButton{min-height:43px;}
 .new-article .arti-profile-box .user-info-text h3{font-size:22px; color:#1b8ab9;}
 .new-article .arti-profile-box .user-info-text p{font-size:18px; color:#1b8ab9;}
 .new-class-add{position: fixed; top: 46px; z-index: 9999; background: #fff;}
+.meta-detail-box{padding:15px 0; width:100%; float:left;}
+.meta-detail-box p{padding-bottom:7px; margin-bottom:15px; width:100%; float:left;}
+.meta-detail-box p img{width:20px; margin-top:-3px; margin-right:15px;}
+.article-popup{padding:20px; width:100%; float:left;}
+.article-popup input:first-child{margin-bottom:15px;}
+.new-article .mce-toolbar-grp{border-top:1px solid #d2d2d2;}
+.article-add-cat select{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0; padding:5px 0;}
+.article-add-cat select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
+.meta-detail-box .cat-field-cus{max-width: 89%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; float:right;}
+.meta-detail-box .cat-field-cus a{}
 
 /***  end new article page css  ***/
 body.body-loader{height:100vh; overflow:hidden;}
