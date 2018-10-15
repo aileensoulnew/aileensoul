@@ -297,7 +297,7 @@ class Sitemap_model extends CI_Model {
                 LEFT JOIN ailee_states s on s.state_id = rp.state
                 LEFT JOIN ailee_countries cn on cn.country_id = rp.country
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
-                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
+                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ORDER BY rp.post_id DESC";
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
@@ -316,8 +316,9 @@ class Sitemap_model extends CI_Model {
                 FROM ailee_rec_post rp 
                 LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
-                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." ORDER BY rp.post_id DESC";
+                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ORDER BY rp.post_id DESC";
         $query = $this->db->query($sql);
+        //DATEDIFF(NOW(),fp.created_date) >= 0
 
         $result_array = $query->row_array();
         return $result_array['total_rec'];
@@ -474,7 +475,7 @@ class Sitemap_model extends CI_Model {
             LEFT JOIN ailee_states s on s.state_id = rp.state
             LEFT JOIN ailee_countries cn on cn.country_id = rp.country
             JOIN ailee_recruiter r ON rp.user_id = r.user_id 
-            WHERE rp.status = '1' AND rp.is_delete = '0' ORDER BY rp.post_id DESC";
+            WHERE rp.status = '1' AND rp.is_delete = '0' AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ORDER BY rp.post_id DESC";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
@@ -487,6 +488,7 @@ class Sitemap_model extends CI_Model {
         $this->db->where('ji.is_delete', '0');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
         $this->db->group_by('rp.industry_type');
         $this->db->order_by('count', 'desc');        
 
@@ -496,7 +498,7 @@ class Sitemap_model extends CI_Model {
     }
 
     function generate_sitemap_job_by_skills_listing() {
-        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
+        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' AND DATEDIFF(NOW(),rp.post_last_date) >= 0 GROUP BY s.skill_id ORDER BY count DESC";
 
         $query = $this->db->query($sql);
 
@@ -510,6 +512,7 @@ class Sitemap_model extends CI_Model {
         $this->db->where('c.status', '1');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
         $this->db->group_by('rp.city');        
         $this->db->order_by('count', 'desc');
         $query = $this->db->get();
@@ -524,6 +527,7 @@ class Sitemap_model extends CI_Model {
         $this->db->where('r.re_status', '1');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
         $this->db->group_by('rp.user_id');
         $this->db->order_by('count', 'desc');
         $query = $this->db->get();        
@@ -538,6 +542,7 @@ class Sitemap_model extends CI_Model {
         $this->db->where('jt.status', 'publish');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
         $this->db->group_by('jt.title_id');
         $this->db->order_by('count', 'desc');
         $query = $this->db->get();        

@@ -898,16 +898,16 @@ class Sitemap extends CI_Controller {
         $job_file_arr = array('job-with-category-location-1.xml');
         $myfile = fopen("job-with-category-location-1.xml", "w");
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit);
-        $jobDesc = $this->job_model->get_job_designations($page,$limit);
-        $jobSkill = $this->job_model->get_job_skills($page,$limit);
-        $jobCity = $this->job_model->get_job_city($page,$limit);        
+        $jobCat = $this->job_model->get_jobs_by_categories($page,$limit,1);
+        $jobDesc = $this->job_model->get_job_designations($page,$limit,1);
+        $jobSkill = $this->job_model->get_job_skills($page,$limit,1);
+        $jobCity = $this->job_model->get_job_city($page,$limit,1);        
         $all_link = array();
         $userid = "";
         foreach ($jobCity as $key => $value) {
             $i=0;
             foreach ($jobCat as $jck => $jcv) {
-                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$job_skills = array(),$jcv,$job_designation = array(),$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value);
+                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$job_skills = array(),$jcv,$job_designation = array(),$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value,1);
                 if($total_jobs > 0)
                 {
                     $txt .= '<url><loc>'.base_url().$jcv['industry_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
@@ -927,7 +927,7 @@ class Sitemap extends CI_Controller {
                 }
             }
             foreach ($jobDesc as $jdk => $jdv) {
-                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$job_skills = array(),$job_category = array(),$jdv,$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value);
+                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$job_skills = array(),$job_category = array(),$jdv,$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value,1);
                 if($total_jobs > 0)
                 {
                     $txt .= '<url><loc>'.base_url().$jdv['job_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
@@ -947,7 +947,7 @@ class Sitemap extends CI_Controller {
                 }
             }
             foreach ($jobSkill as $jsk => $jsv) {
-                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$jsv,$job_category = array(),$job_designation = array(),$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value);
+                $total_jobs = $this->job_model->ajax_job_search_new_filter_total_rec($userid,$jsv,$job_category = array(),$job_designation = array(),$company_id = "","","",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$value,1);
                 if($total_jobs > 0)
                 {
                     $txt .= '<url><loc>'.base_url().$jsv['skill_slug']."-jobs-in-".$value['slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';

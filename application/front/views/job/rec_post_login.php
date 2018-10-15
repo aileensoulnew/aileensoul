@@ -1317,6 +1317,101 @@
         }
         </script>
         <?php
+        if($cityname_txt != "")
+        {
+            $location_txt = $cityname_txt;
+        }
+        elseif ($statename_txt != "") {
+            $location_txt = $statename_txt;
+        }
+        else {
+            $location_txt = $countryname_txt;
+        }
+        ?>
+        <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+            [
+                {
+                "@type": "ListItem",
+                "position": 1,
+                    "item":
+                    {
+                    "@id": "<?php echo base_url(); ?>",
+                    "name": "Aileensoul"
+                    }
+                },
+                {
+                "@type": "ListItem",
+                "position": 2,
+                    "item":
+                    {
+                    "@id": "<?php echo base_url(); ?>job-search",
+                    "name": "Jobs"
+                    }
+                },
+                {
+                "@type": "ListItem",
+                "position": 3,
+                    "item":
+                    {
+                    "@id": "<?php echo base_url(); ?>jobs",
+                    "name": "All Jobs"
+                    }
+                },
+                {
+                "@type": "ListItem",
+                "position": 4,
+                    "item":
+                    {
+                    "@id": "<?php echo base_url().$this->common->clean($industry_txt."-jobs-in-".$location_txt); ?>",
+                    "name": "<?php echo $industry_txt." Jobs in ".$location_txt; ?>"
+                    }
+                },
+                {
+                "@type": "ListItem",
+                "position": 4,
+                    "item":
+                    {
+                    "@id": "<?php echo base_url().$this->common->clean($job_title_txt."-jobs-in-".$location_txt); ?>",
+                    "name": "<?php echo $job_title_txt ." Jobs in ". $location_txt; ?>"
+                    }
+                },
+                <?php
+                if($skill_txt != "")
+                {
+                    foreach (explode(",", $skill_txt) as $key => $value) {
+                        if($value != "")
+                        {?>
+                            {
+                            "@type": "ListItem",
+                            "position": 4,
+                                "item":
+                                {
+                                "@id": "<?php echo base_url().$this->common->clean(trim($value)."-jobs-in-".$location_txt); ?>",
+                                "name": "<?php echo $value." Jobs in ".$location_txt; ?>"
+                                }
+                            },
+                        <?php
+                        }
+                    }
+                }
+                ?>
+                {
+                "@type": "ListItem",
+                "position": 5,
+                    "item":
+                    {
+                    "@id": "<?php echo current_url(); ?>",
+                    "name": "<?php echo $job_title_txt; ?>"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php
         } ?>
     </body>
 </html>

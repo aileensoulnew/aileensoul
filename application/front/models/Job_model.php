@@ -775,7 +775,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         // return $retur_arr;
     }
 
-    function ajax_job_search_new_filter_total_rec($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$search_location_arr = array()) {
+    function ajax_job_search_new_filter_total_rec($userid = "",$job_skills = array(),$job_category = array(),$job_designation = array(),$company_id = "",$category_id = "",$location_id = "",$skill_id = "",$job_desc = "",$period_filter = "",$exp_fil = "",$job_city = array(),$job_company_id = array(),$search_location_arr = array(),$from_sitemap = 0) {
 
         $this->db->select("COUNT(*) as total_record")->from('rec_post rp');
         $this->db->join('recruiter r', 'r.user_id = rp.user_id', 'left');
@@ -904,6 +904,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
             $sql = "(".trim($sql, ' OR ').")";
             $this->db->where($sql,false,false);
         }
+        if($from_sitemap == 1)
+        {
+            $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
+        }
         $this->db->order_by('rp.post_id', 'desc');
         
         $query = $this->db->get();
@@ -912,7 +916,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         return $result_array['total_record'];
     }
 
-    function get_job_city($page = "",$limit = '5') {
+    function get_job_city($page = "",$limit = '5',$from_sitemap = 0) {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
@@ -922,6 +926,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('c.status', '1');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        if($from_sitemap == 1)
+        {
+            $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
+        }
         $this->db->group_by('rp.city');        
         if($limit != '') {
             $this->db->limit($limit,$start);
@@ -953,13 +961,18 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         return count($result_array);
     }
 
-    function get_job_skills($page = "",$limit = '') {
+    function get_job_skills($page = "",$limit = '',$from_sitemap = 0) {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
 
 
-        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' GROUP BY s.skill_id ORDER BY count DESC";
+        $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' ";
+        if($from_sitemap == 1)
+        {
+            $sql .= " AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ";
+        }
+        $sql .= "GROUP BY s.skill_id ORDER BY count DESC";
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
         }
@@ -988,7 +1001,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         return count($return_array);
     }
 
-    public function get_job_designations($page = 0,$limit = '') {
+    public function get_job_designations($page = 0,$limit = '',$from_sitemap = 0) {
 
         $start = ($page - 1) * $limit;
         if ($start < 0)
@@ -999,6 +1012,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('jt.status', 'publish');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        if($from_sitemap == 1)
+        {
+            $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
+        }
         $this->db->group_by('jt.title_id');
         $this->db->order_by('count', 'desc');
         if($limit != '') {
@@ -1070,7 +1087,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         return count($result_array);
     }
 
-    function get_jobs_by_categories($page = 0,$limit = '') {
+    function get_jobs_by_categories($page = 0,$limit = '',$from_sitemap = 0) {
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
@@ -1083,6 +1100,10 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('ji.industry_id !=', '288');
         $this->db->where('rp.status', '1');
         $this->db->where('rp.is_delete', '0');
+        if($from_sitemap == 1)
+        {
+            $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
+        }
         $this->db->group_by('rp.industry_type');
         $this->db->order_by('count', 'desc');
         if($limit != '') {
