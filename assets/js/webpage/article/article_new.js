@@ -453,6 +453,7 @@ function readURL(input) {
 }
 $(document).on('change','#featured_img', function(){
     $("#featured_img_src").hide();
+    $("#featured_img_remove").hide();
     $("#img_preview_div").show();
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -464,7 +465,12 @@ $(document).on('change','#featured_img', function(){
     }
     reader.readAsDataURL(this.files[0]);
 });
-
+$("#featured_img_remove").click(function(){
+    $("#featured_img_src").hide();
+    $("#featured_img_src").attr("src","");
+    $("#featured_img_remove").hide();
+    $("#img_preview_div").hide();    
+});
 $('.upload-result').on('click', function (ev) {
     $(this).attr("disabled","disabled");
     $(".cancel-result").attr("disabled","disabled");
@@ -519,6 +525,7 @@ $('.upload-result').on('click', function (ev) {
                     history.pushState(obj, obj.Title, obj.Url);
                 }
                 $("#featured_img_src").show();
+                $("#featured_img_remove").show();
                 $("#featured_img_src").attr('src',result.featured_img);
                 $("#save_post").text("Saved");
             }
@@ -529,6 +536,7 @@ $('.cancel-result').on('click', function (ev) {
     $("#img_preview_div").hide();
     $("#featured_img").val('');
     $("#featured_img_src").hide();
+    $("#featured_img_remove").hide();
 });
 //Featured Image Crop and Upload End
 $("#okbtn").click(function(){   
@@ -612,7 +620,7 @@ $("#okcategory").click(function(){
     {
         var txt = $("#article_main_category").find(":selected").text();
         $("#cat-selected").text(txt);
-        $('#article-cetegory').modal('hide');
+        change_category();
     }
     else
     {
@@ -621,7 +629,7 @@ $("#okcategory").click(function(){
         {
             $("#article_other_category").removeClass("error");
             $("#cat-selected").text(txt);
-            $('#article-cetegory').modal('hide');
+            change_category();
         }
         else
         {
@@ -629,6 +637,42 @@ $("#okcategory").click(function(){
         }
     }
 });
+function change_category()
+{    
+    var article_main_category = $('#article_main_category').find(":selected").val();
+    var article_other_category = $("#article_other_category").val();
+    var post_data = {
+        'unique_key': unique_key,
+        'article_main_category': article_main_category,
+        'article_other_category': article_other_category,
+    };
+    $("#okcategory").hide();
+    $("#save_post").show();
+    $("#save_post").text("Saving...");
+    $("#cat_load_img").show();
+    $.ajax({
+        url: base_url + "article/change_category",
+        type: "POST",
+        data: post_data,
+        dataType: 'json',
+        success: function (result) {
+            if(result.add_new_article == 1)
+            {
+                var title = "Edit Article"
+                var url = base_url +"edit-article/"+unique_key;
+                var obj = {
+                    Title: title,
+                    Url: url
+                };
+                history.pushState(obj, obj.Title, obj.Url);
+            }
+            $("#okcategory").show();
+            $("#save_post").hide();
+            $("#cat_load_img").hide();
+            $('#article-cetegory').modal('hide');
+        }
+    });
+}
 $(window).scroll(function() {
     var window_height = $(window).scrollTop();
     var mce_tool_scroll = $('.mce-top-part').offset().top;    

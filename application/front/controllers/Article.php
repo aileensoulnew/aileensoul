@@ -895,4 +895,29 @@ class Article extends MY_Controller {
         }
         echo json_encode($return_data);
     }
+
+    function change_category()
+    {
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $unique_key = $this->input->post('unique_key');
+            $article_meta_description = $this->input->post('article_meta_description');
+            $article_main_category = $this->input->post('article_main_category');
+            if($article_main_category == 0)
+            {                
+                $article_other_category = $this->input->post('article_other_category');
+            }
+            else
+            {
+                $article_other_category = "";
+            }
+            $success = $this->article_model->change_category($user_id,$unique_key,$article_main_category,$article_other_category);
+            echo json_encode($success);
+        }
+        else
+        {
+            echo json_encode(array("success"=>"-1"));
+        }
+    }
 }

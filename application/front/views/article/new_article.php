@@ -137,8 +137,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 					
 				</div>
 			</div>
-			<div class="custom-user-list">
-				
+			<div class="custom-user-list">				
 				<div class="fw" id="upload_loader" style="text-align: center;position: absolute;display: none;z-index: 99999;top: 47%;">
 					<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
 				</div>
@@ -167,6 +166,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 									<button type="button" title="Save" class="btn btn-success set-btn cancel-result pull-right" style="position: absolute;right: 40px;bottom: 0;">Cancel</button>
 								</div>
 								<img id="featured_img_src" style="<?php echo $article_cls; ?>" src="<?php echo base_url().$article_featured_upload_path.$article_featured_image; ?>">
+								<a id="featured_img_remove" class="remove-featured-img" style="<?php echo $article_cls; ?>" href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
 							</div>
 						</div>
 					
@@ -191,7 +191,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 	                	<div class="msg"></div>
 		                <div class="pop_content">
 		                	<div class="model_ok_cancel">
-		                		<a class="btn1" id="okbtn" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
+		                		<a class="btn1" id="okbtn" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>		                		
 		                	</div>
 		                </div>
 		            </span>
@@ -224,6 +224,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 							<div class="mes">
 								<div class="model_ok_cancel">
 			                		<a class="btn1" id="okcategory" href="javascript:void(0);" title="OK">OK</a>
+			                		<img id="cat_load_img" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE" style="display: none;">
 			                	</div>
 							</div>
 						</div>

@@ -305,4 +305,56 @@ class Article_model extends CI_Model {
         $related_article_data = $query->result_array();
         return $related_article_data;
     }
+
+    public function change_category($user_id,$unique_key,$article_main_category = "",$article_other_category = "")
+    {
+        $add_new_article = 0;
+        $this->db->select('*')->from('post_article');
+        $this->db->where('user_id', $user_id);   
+        $this->db->where('unique_key', $unique_key);
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            $artist_data = $query->row_array();
+            $data = array(
+                "article_main_category"     => $article_main_category,
+                "article_other_category"    => $article_other_category,
+                "modify_date"               => date('Y-m-d h:i:s', time()),
+            );            
+            $this->db->where('user_id', $user_id);   
+            $this->db->where('unique_key', $unique_key);
+            $udapte_data = $this->db->update('post_article',$data);
+            if($udapte_data)
+            {
+                $ret_arr = array("success"=>1,"add_new_article"=>$add_new_article);                
+            }
+            else
+            {
+                $ret_arr = array("success"=>0,"add_new_article"=>$add_new_article);
+            }
+        }
+        else
+        {
+            $data = array(
+                "user_id"                   => $user_id,
+                "article_main_category"     => $article_main_category,
+                "article_other_category"    => $article_other_category,
+                "unique_key"                => $unique_key,
+                "status"                    => "draft",
+                "created_date"              => date('Y-m-d h:i:s', time()),
+                "modify_date"               => date('Y-m-d h:i:s', time()),
+            );
+            $article_id = $this->common->insert_data_getid($data,'post_article');
+            if($article_id > 0)
+            {
+                $add_new_article = 1;                
+                $ret_arr = array("success"=>$article_id,"add_new_article"=>$add_new_article);
+            }
+            else
+            {
+                $ret_arr = array("success"=>0,"add_new_article"=>$add_new_article);                
+            }
+        }
+        return $ret_arr;
+    }
 }
