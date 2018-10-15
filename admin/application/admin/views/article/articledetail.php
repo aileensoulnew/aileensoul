@@ -88,11 +88,14 @@ require '../contentcompare/vendor/autoload.php';
                                    <a class="btn1 btn-lg" id="acceptbtn" onclick="publish_article(<?php echo $article_detail['id_post_article']; ?>)" href="javascript:void(0);" data-dismiss="modal" title="Accept">Accept</a>
                                    <a class="btn1 btn-lg" id="rejectbtn" onclick="reject_article(<?php echo $article_detail['id_post_article']; ?>)" href="javascript:void(0);" data-dismiss="modal" title="Reject">Reject</a>
                               <?php }
-                              elseif($article_detail['user_post_isdeleted'] == '1'){
+                              elseif($article_detail['user_post_status'] == 'reject'){
                                    echo "Rejected";
                               }
                               elseif($article_detail['user_post_status'] == 'publish'){
                                    echo "Accepted";
+                              }
+                              elseif($article_detail['user_post_isdeleted'] == '1'){
+                                   echo "Deleted";
                               } ?>
                               </div>
                          </div>
@@ -111,11 +114,31 @@ require '../contentcompare/vendor/autoload.php';
                               <strong><i class="fa fa-map-marker margin-r-5"></i> Email Address</strong>
                               <p> <?php echo $article_detail['email']; ?> </p> 
                          </div>
+                          <div class="box-body"></div>
                          <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-               </div>              
+               </div>
 
+               <?php
+               if($article_detail['article_featured_image'] != ""){ ?>
+               <div class="col-md-3">
+                    <!-- About Me Box -->
+                    <div class="box box-primary mt0">
+                         <div class="box-header with-border">
+                              <h3 class="box-title">Featured Image</h3>
+                         </div>
+                         <!-- /.box-header -->
+                         <div class="box-body">
+                          <img id="featured_img_src" src="<?php echo ARTICLE_FEATURED_IMAGE.$article_detail['article_featured_image']; ?>" style="width: 100%">
+                         </div>
+                          <div class="box-body"></div>
+                         <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+               </div>
+               <?php 
+                } ?>
                <!-- /.col -->
                <div class="col-md-12">
                     <div class="nav-tabs-custom">

@@ -155,6 +155,8 @@ define('PROFILENA', '--');
 
 define('FEEDBACK_SCREENSHOT', SITEURL . 'uploads/feedback/');
 
+define('ARTICLE_FEATURED_IMAGE', SITEURL . 'uploads/article_featured/');
+
 define('AMAZON_SES_USERNAME','AKIAJTF4AWFIBR256RDA');
 define('AMAZON_SES_PASSWORD','Alr+GuRQv6HG2FhnGO1lo06qBe3unZ+NVYvi9ASNhR9p');
 
