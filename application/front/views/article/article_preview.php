@@ -84,6 +84,8 @@ if($userid_login == "")
 	<div class="middle-section">
 		<?php 
 			// print_r($user_post_article);exit();
+			$article_pub = 0;
+			$article_pub_cls = "";
 			if ($user_post_article['status'] == "draft" && $user_post_article['is_delete'] == "0") {
 				echo "<span class='article-info-box'>This Article has sent for approval. We'll send you a notification once it's live.</span>";
 			}
@@ -92,7 +94,12 @@ if($userid_login == "")
 			}
 			else if ($user_post_article['is_delete'] == "1") {
 				echo "<span class='article-info-box'>This Article is deleted.</span>";
-			}?>
+			}
+			else if($user_post_article['status'] == "publish")
+			{
+				$article_pub_cls = "cat-name-cus";
+				$article_pub = 1;
+			} ?>
 		<div class="container">
 			<div class="custom-user-list">
 				<!-- article-box -->
@@ -113,7 +120,10 @@ if($userid_login == "")
 							echo $category;
 						}  ?>
 						</span>
-						<span><?php echo date('dS F Y', strtotime($article_data['created_date'])); ?></span>
+						<span class="<?php echo $article_pub_cls; ?>"><?php echo date('dS F Y', strtotime($article_data['created_date'])); ?></span>
+						<?php if($article_pub == 1){ ?>
+						<span><a href="<?php echo base_url()."edit-article/".$article_data['unique_key']; ?>">Edit Article</a></span>
+						<?php } ?>
 					</p>
 					
 					<!--div class="article-author">
