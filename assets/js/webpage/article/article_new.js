@@ -164,8 +164,9 @@ maineditor = tinymce.init({
           // console.log('Editor contents was KeyUp.');
         });
         editor.on('focus blur',function(){
-            $("#article_editor").prev().removeClass("error");
-            $("#err_desc").hide();
+            $(".mce-statusbar").removeClass("error");
+            // $("#article_editor").prev().removeClass("error");
+            // $("#err_desc").hide();
         });
     },
 
@@ -366,13 +367,14 @@ function upload_success()
         if(title.trim() == '')
         {
             $("#title_txt").addClass("error");
-            $("#err_title").show();
+            // $("#err_title").show();
             error = 1;
         }
         if(descr_vali.trim() == '')
         {
-            $("#article_editor").prev().addClass("error");
-            $("#err_desc").show();
+            $(".mce-statusbar").addClass("error");
+            // $("#article_editor").prev().addClass("error");
+            // $("#err_desc").show();
             error = 1;  
         }
         if(error == 1)

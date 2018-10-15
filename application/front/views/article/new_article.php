@@ -142,8 +142,8 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 					<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="LOADERIMAGE">
 				</div>
 				<div id="article_frm" method="post" name="article_frm" action="javascript:void(0);" onsubmit="">
-					<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter title of Article">
-					<label class="error" id="err_title" style="display: none;">Please Enter Title.</label>
+					<input type="text" name="title_txt" id="title_txt" value="<?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_title'] : ''); ?>" placeholder="Enter Title of Article">
+					<!-- <label class="error" id="err_title" style="display: none;">Please Enter Title.</label> -->
 					<?php
 						if(isset($articleData) && !empty($articleData) && $articleData['article_featured_image'] != ""){
 							$article_featured_image = $articleData['article_featured_image'];
@@ -175,7 +175,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 						<img id="featured_img_src" style="width: 15%;">
 					</div> -->
 					<textarea id="article_editor" name="article_editor"><?php echo(isset($articleData) && !empty($articleData) ? $articleData['article_desc'] : ''); ?></textarea>
-					<label class="error" id="err_desc" style="display: none;">Please Enter Some Content.</label>
+					<!-- <label class="error" id="err_desc" style="display: none;">Please Enter Some Content.</label> -->
 				</div>
 			</div>
 			
