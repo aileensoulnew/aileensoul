@@ -374,22 +374,25 @@
                         </div>
                         <!-- Edit Simple Post End -->
                     </div>
-                    <div class="post-discription" ng-if="post.post_data.post_for == 'article'">
+                    <!-- <div class="post-discription" ng-if="post.post_data.post_for == 'article'">
                         <div ng-init="limit = 100; moreShown = false" class="article-title" ng-if="post.article_data.article_featured_image == ''">
                             <span ng-if="post.article_data.article_title != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.article_data.article_title" ng-class="post.article_data.article_title.length > 100 ? 'view-more-expand' : ''">
                             </span>
-                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.article_data.article_title.length > 100" href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}">.... Read More</a>
+                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.article_data.article_title.length > 100" href="<?php //echo base_url(); ?>article/{{post.article_data.article_slug}}">.... Read More</a>
                         </div>
                         <div ng-init="limit = 100; moreShown = false" class="article-description" ng-if="post.article_data.article_featured_image == ''">
                             <span ng-if="post.article_data.article_desc != ''" id="simple-post-description-{{post.post_data.id}}" ng-bind-html="post.article_data.article_desc" ng-class="post.article_data.article_desc.length > 100 ? 'view-more-expand' : ''">
                             </span>
-                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.article_data.article_desc.length > 100" href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}">.... Read More</a>
+                            <a id="remove-view-more{{post.post_data.id}}" ng-if="post.article_data.article_desc.length > 100" href="<?php //echo base_url(); ?>article/{{post.article_data.article_slug}}">.... Read More</a>
                         </div>
-                    </div>
-                    <div class="post-images" ng-if="post.post_data.post_for == 'article' && post.article_data.article_featured_image != ''">
-                        <div class="one-img">
-                            <a href="javascript:void(0);">
-                                <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
+                    </div> -->
+                    <div class="post-discription" ng-if="post.post_data.post_for == 'article'"></div>
+                    <div class="post-images" ng-if="post.post_data.post_for == 'article'">
+                        <div class="one-img" ng-class="post.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
+                            <a href="<?php echo base_url(); ?>article/{{post.article_data.article_slug}}" target="_self">
+                                <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image != ''">
+
+                                <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-if="post.article_data.article_featured_image == ''">
                                 <div class="article-post-text">
                                     <h3>{{post.article_data.article_title}}</h3>
                                     <p>Aileensoul</p>
@@ -581,12 +584,12 @@
                                         <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
                                     </div>
                                 </div>
-                                <div class="mySlides mySlides2{{post.post_data.id}}" ng-if="post.post_data.post_for == 'article' && post.article_data.article_featured_image != ''">
+                                <!-- <div class="mySlides mySlides2{{post.post_data.id}}" ng-if="post.post_data.post_for == 'article' && post.article_data.article_featured_image != ''">
                                     <div class="numbertext">1</div>
                                     <div class="slider_img_p">
-                                        <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="Image-1" id="element_load_1">
+                                        <img ng-src="<?php //echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="Image-1" id="element_load_1">
                                     </div>
-                                </div> 
+                                </div>  -->
                             </div>
                             <div class="caption-container">
                                 <p id="caption"></p>

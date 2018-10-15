@@ -414,19 +414,60 @@ if($userid_login == "")
 			<div class="right-part">
 				<div class="arti-profile-box">
 					<div class="user-cover-img">
-						<a href="#">
-							<img src="<?php echo base_url(); ?>assets/n-images/user-cover.jpg">
+						<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+							<?php 
+							if($user_data['profile_background'] != "")
+							{ ?>							    
+								<img src="<?php echo USER_BG_MAIN_UPLOAD_URL.$user_data['profile_background'];?>">
+							<?php
+							}else{ ?>
+								<div class="gradient-bg"></div>
+							<?php
+							} ?>
 						</a>
 					</div>
 					<div class="user-pr-img">
-						<a href="#"><img src="<?php echo base_url(); ?>assets/n-images/user-pic.jpg"></a>
+						<?php
+							if ($user_data['user_image'] != "")
+							{
+							    $pro_img = USER_THUMB_UPLOAD_URL . $user_data['user_image'];
+							}
+							else
+							{
+							    if ($user_data['user_gender'] == "M") {
+							        $pro_img = base_url('assets/img/man-user.jpg');
+							    } elseif ($user_data['user_gender'] == "F") {
+							        $pro_img = base_url('assets/img/female-user.jpg');
+							    } else {
+							        $pro_img = base_url('assets/img/man-user.jpg');
+							    }
+
+							}
+						?>
+						<a href="<?php echo base_url().$user_data['user_slug']; ?>"><img src="<?php echo $pro_img; ?>"></a>
 					</div>
 					<div class="user-info-text text-center">
-						<h3><a href="#">Dhaval Shah</a></h3>
-						<p>Ceo</p>
+						<h3>
+							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+							<?php echo ucwords($user_data['first_name']." ".$user_data['last_name']); ?>
+							</a>
+						</h3>
+						<p>
+							<a href="<?php echo base_url().$user_data['user_slug']; ?>">
+								<?php 
+								if($user_data['title_name'] != "")
+									echo $user_data['title_name'];
+								elseif($user_data['degree_name'] != "")
+									echo $user_data['degree_name'];
+								else
+									echo "Current Work"; ?>
+							</a>
+						</p>
 					</div>
 				
-				<?php if ($userid_login != "" && $userid_login != $article_data['user_id']) {?>
+					<?php
+					if ($userid_login != "" && $userid_login != $article_data['user_id'])
+					{?>
 						<div class="author-btn">
 							<div class="user-btns">
 								<?php
@@ -461,11 +502,11 @@ if($userid_login == "")
 								<a href="<?php echo MESSAGE_URL."user/".$user_data['user_slug']; ?>" class="btn3">Message</a>
 							</div>
 						</div>
-						<?php }?>
-					</div>
-					<div class="right-add-box">            
-					</div>
-	        </div>
+						<?php 
+					}?>
+				</div>
+				<div class="right-add-box"></div>
+			</div>
 		</div>
 	</div>
 	<?php echo $login_footer ?>   

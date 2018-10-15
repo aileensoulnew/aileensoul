@@ -14,11 +14,12 @@ maineditor = tinymce.init({
     menubar: false,
     theme: 'modern',
     resize: false,
+    // autoresize_max_height: 500,
     // image_dimensions: true,
     plugins:  [//autoresize
         "advlist autolink lists link image charmap print preview anchor ",
         "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools wordcount textcolor hr charmap"
+        "insertdatetime media table contextmenu paste imagetools wordcount textcolor hr charmap autoresize"
     ],
     toolbar: 'link image | undo redo |  formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | hr charmap blockquote',
     imagetools_toolbar: "alignleft aligncenter alignright | rotateleft rotateright | flipv fliph | editimage imageoptions| removeimage",
@@ -96,13 +97,12 @@ maineditor = tinymce.init({
     image_title: false,
 
     init_instance_callback: function (editor) {
-        editor.on('KeyUp', function (e) {
-            console.log(e);
-            if(e.keyCode == 13)
+        editor.on('KeyUp', function (e) {            
+            /*if(e.keyCode == 13)
             {
                 var h = $("#article_editor_ifr").innerHeight();
                 $("#article_editor_ifr").attr("style","width: 100%; display: block;height:"+ parseInt(h + 100)+"px");
-            }
+            }*/
             clearTimeout(typingTimer);
             if (editor.getContent()) {
                 typingTimer = setTimeout(function(){
@@ -115,6 +115,12 @@ maineditor = tinymce.init({
                     }
                     else
                     {
+                        /*var words = descr.split(/[\w\u2019\'-]+/).length;
+                        if(words > 200)
+                        {
+                            var ht = $("#article_editor_ifr").innerHeight();
+                            $("#article_editor_ifr").attr("style","width: 100%; display: block;height:"+ parseInt(ht + 10)+"px");
+                        }*/
                         if(edit_art_published == 0)
                         {                            
                             $("#save_post").show();
@@ -387,7 +393,7 @@ function upload_success()
             'article_other_category': article_other_category,
             'edit_art_published': edit_art_published,
         };
-        $("#publish").val('Publishing ...');
+        $("#publish").text('Publishing ...');
         $("#publish").attr('disabled','disabled');
         $.ajax({
             type: 'POST',
@@ -400,7 +406,7 @@ function upload_success()
                 {
                     $("#publishmodal .mes .msg").html("Congratulations, your post has been successfully submitted and sent for approval. We'll send you notifications once it's live.");
                     $("#publishmodal").modal("show");
-                    $("#publish").val('Publish');  
+                    $("#publish").text('Publish');  
                     $("#publish").removeAttr('disabled');
                     article_slug = response.article_slug;
 
@@ -409,7 +415,7 @@ function upload_success()
                 {
                     $("#publishmodal .mes .msg").html("Please try again later.");
                     $("#publishmodal").modal("show");
-                    $("#publish").val('Publish');  
+                    $("#publish").text('Publish');  
                     $("#publish").removeAttr('disabled');   
                 }               
             }
@@ -635,4 +641,25 @@ $(window).scroll(function() {
         $('.mce-toolbar-grp').removeClass('stop-scroll-toolbar');   
     }
 
+});
+$(document).ready(function(){
+    var cat = $("#article_main_category").find(":selected").val();
+    if(cat != 0)
+    {
+        var txt = $("#article_main_category").find(":selected").text();
+        $("#cat-selected").text(txt);        
+    }
+    else
+    {
+        var txt = $("#article_other_category").val();
+        if(txt.trim() != "")
+        {
+            $("#article_other_category").removeClass("error");
+            $("#cat-selected").text(txt);            
+        }
+        else
+        {
+            // $("#article_other_category").addClass("error");
+        }
+    }
 });
