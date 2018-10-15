@@ -132,8 +132,8 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 						<a href="" data-target="#article-cetegory" data-toggle="modal" class="pull-left"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"> </a>
 						<span id="cat-selected" class="cat-field-cus">Select Category</span>
 					</p>
-					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Title</p>
-					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Discription</p>
+					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Title and Discription</p>
+					
 					
 				</div>
 			</div>
@@ -206,7 +206,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
                         <div class="article-popup">
 							<?php $getFieldList = $this->data_model->getFieldList();?>
 							<fieldset class="fw">
-								<span>
+								<span class="span-select">
 								<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
 									<?php foreach ($getFieldList as $key => $value) { ?>
 										<option value="<?php echo $value['industry_id']; ?>" <?php echo $value['industry_id'] == $articleData['article_main_category'] ? "selected='selected'" : ""; ?>"><?php echo $value['industry_name']; ?></option>
@@ -216,7 +216,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 								</span>
 							</fieldset>
 							<fieldset class="fw" id="other_field_div" style="<?php echo $articleData['article_main_category'] == '0' ? '' : 'display: none;'; ?>;">
-								<label>Enter other field</label>
+								
 								<input name="article_other_category" placeholder="Enter other field name" type="text" id="article_other_category" value="<?php echo $articleData['article_other_category'];?>"/>
 								<span id="fullname-error"></span>
 								<?php echo form_error('other_field'); ?>

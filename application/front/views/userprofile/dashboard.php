@@ -492,7 +492,7 @@
                                     <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.article_data.article_featured_image}}" alt="{{post.article_data.article_title}}" ng-click="openModal2('myModal'+post.post_data.id);currentSlide2($index + 1,post.post_data.id)">
                                     <div class="article-post-text">
                                         <h3>{{post.article_data.article_title}}</h3>
-                                        <p>On aileensoul.com</p>
+                                        <p>Aileensoul</p>
                                     </div>
                                 </a>                            
                             </div>
