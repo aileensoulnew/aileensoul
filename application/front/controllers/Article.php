@@ -422,7 +422,30 @@ class Article extends MY_Controller {
         else
         {
             echo json_encode(array("featured_img"=>"","success"=>"-1"));
-        }    
+        }
+    }
+
+    public function remove_featured_img()
+    {
+        $unique_key = $this->input->post('unique_key');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {        
+            $article_data = $this->article_model->getArticleData($user_id,$unique_key);
+            $article_featured_image = $article_data['article_featured_image'];
+            $article_featured_upload_path = $this->config->item('article_featured_upload_path');
+            if($article_featured_image != "")
+            {
+                @unlink($article_featured_image.$article_featured_upload_path);
+            }
+            $success = $this->article_model->add_article_featured($user_id,$article_title = "",$article_content = "",$unique_key,$imageName = "");
+
+            echo json_encode(array("add_new_article"=>$success['add_new_article'],"success"=>$success['success']));
+        }
+        else
+        {
+            echo json_encode(array("featured_img"=>"","success"=>"-1"));
+        }
     }
 
     public function article_published($article_slug)

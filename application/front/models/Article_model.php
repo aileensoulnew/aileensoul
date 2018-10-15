@@ -228,8 +228,8 @@ class Article_model extends CI_Model {
         {
             $data = array(
                 "user_id"                   => $user_id,
-                "article_title"             => $article_title,
-                "article_desc"              => $article_content,
+                // "article_title"             => $article_title,
+                // "article_desc"              => $article_content,
                 "article_featured_image"    => $fileName,
                 "unique_key"                => $unique_key,
                 "status"                    => "draft",
