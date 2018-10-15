@@ -63,7 +63,24 @@
                     </div>
                     <div class="middle-part">
                         <div class="page-title">
-                            <h3>Search Result</h3>
+                            <h3>Search Result for: <?php
+                                if($category_txt != "" && $location_txt != "")
+                                {
+                                    echo $search_txt = $category_txt." in ".$location_txt;
+                                    $item3_url = base_url()."artist";
+                                    $item3_txt = "All Artist";
+                                }
+                                elseif($location_txt != "")
+                                {
+                                    echo $search_txt = "Artist in ".$location_txt;
+                                    $item3_url = base_url()."artist/location";
+                                    $item3_txt = "Artist by Location";
+                                }
+                                elseif ($category_txt != "") {
+                                    echo $search_txt = $category_txt;
+                                    $item3_url = base_url()."artist/category";
+                                    $item3_txt = "Artist by Category";
+                                } ?></h3>
                         </div>
 						<div class="tab-add">
 							<?php $this->load->view('banner_add'); ?>
@@ -283,5 +300,53 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/webpage/artist-live/categoryArtistList.js?ver=' . time()) ?>"></script> -->
+        <?php if($this->session->userdata('aileenuser') == ""):
+        ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>find-artist",
+                        "name": "Artist"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo $item3_url; ?>",
+                        "name": "<?php echo $item3_txt; ?>"                
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "<?php echo $search_txt; ?>"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     </body>
 </html> 

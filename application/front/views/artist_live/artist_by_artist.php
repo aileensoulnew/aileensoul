@@ -134,5 +134,44 @@
         <script src="<?php echo base_url('assets/js/webpage/artist-live/searchArtist.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/artist-live/category.js?ver=' . time()) ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/webpage/artist-live/viewmoreartist.js?ver=' . time()) ?>"></script> -->
+        <?php if($this->session->userdata('aileenuser') == ""):
+        ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>find-artist",
+                        "name": "Artist"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "All Artist"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     </body>
 </html>

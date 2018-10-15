@@ -151,6 +151,44 @@
             <script src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()) ?>"></script>
         <?php
             }
+        if($this->session->userdata('aileenuser') == ""):
         ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>business-search",
+                        "name": "Jobs"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "Business by Location"                
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     </body>
 </html>

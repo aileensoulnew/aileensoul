@@ -1,6 +1,7 @@
 <?php
 $s3 = new S3(awsAccessKey, awsSecretKey);
 $userid = $this->session->userdata('aileenuser');
+$fullname = ucwords($artisticdata[0]['art_name']." ".$artisticdata[0]['art_lastname']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -169,10 +170,11 @@ $userid = $this->session->userdata('aileenuser');
 
                                     $category = $artisticdata[0]['art_skill'];
                                     $category = explode(',' , $category);
-
+                                    $category_txt = "";
                                     foreach ($category as $catkey => $catval) {
                                        $art_category = $this->db->select('art_category')->get_where('art_category', array('category_id' => $catval))->row()->art_category;
                                        $categorylist[] = ucwords($art_category);
+                                       $category_txt .= ucwords($art_category).",";
                                      } 
 
                                     $listfinal1 = array_diff($categorylist, array('Other'));
@@ -217,7 +219,7 @@ $userid = $this->session->userdata('aileenuser');
                                 <td class="business_data_td2"><span>
                                         <?php
                                         if ($artisticdata[0]['art_city']) {
-                                            echo $this->db->select('city_name')->select('city_name')->get_where('cities', array('city_id' => $artisticdata[0]['art_city']))->row()->city_name;
+                                            echo $city_txt = $this->db->select('city_name')->select('city_name')->get_where('cities', array('city_id' => $artisticdata[0]['art_city']))->row()->city_name;
                                             echo",";
                                         }
                                         ?> 
@@ -1153,5 +1155,74 @@ function submitforgotForm()
             <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/artist-live/profile.js?ver='.time()); ?>"></script>
             <?php } ?>
 			<?php $this->load->view('mobile_side_slide'); ?>
+        <?php
+        if($this->session->userdata('aileenuser') == ""): ?>
+            <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>find-artist",
+                        "name": "Artist"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>artist",
+                        "name": "All Artist"                
+                    }
+                },
+                <?php                
+                if($category_txt != "" && $city_txt != ""){
+                    foreach (explode(",", $category_txt) as $key => $value) {
+                        if($value != "")
+                        { ?>
+                            {
+                                "@type": "ListItem",
+                                "position": 4,
+                                "item":
+                                {
+                                    "@id": "<?php echo base_url()."artist/".$this->common->create_slug($value)."-in-".$this->common->clean($city_txt); ?>",
+                                    "name": "<?php echo $value." in ".$city_txt; ?>"
+                                }
+                            },
+                        <?php }
+                    }
+                }
+                ?>                
+                {
+                    "@type": "ListItem",
+                    "position": 5,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "<?php echo $fullname; ?>"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php 
+        // $category_txt
+        // $city_txt
+        endif; ?>
     </body>
 </html>

@@ -203,8 +203,8 @@ class Freelancer_apply_live extends MY_Controller {
         $keyword = trim($search);
         $search_location = trim($ser_location);
 
-        $fa_skills = $this->freelancer_apply_model->is_fa_skills($keyword);
-        $fa_fields = $this->freelancer_apply_model->is_fa_field($keyword);
+        $this->data['is_skill'] = $fa_skills = $this->freelancer_apply_model->is_fa_skills($keyword);
+        $this->data['is_field'] = $fa_fields = $this->freelancer_apply_model->is_fa_field($keyword);
         $search_location_arr = array();
 
         $limit = 8;

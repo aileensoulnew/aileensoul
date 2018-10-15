@@ -62,7 +62,25 @@
 							<?php $this->load->view('banner_add'); ?>
 						</div>
                         <div class="page-title">
-                            <h3>Search Result</h3>
+                            <h3>Search Result for: 
+                                <?php
+                                if($category_txt != "" && $location_txt != "")
+                                {
+                                    echo $search_txt = $category_txt." Business in ".$location_txt;
+                                    $item3_url = base_url()."business";
+                                    $item3_txt = "All Business";
+                                }
+                                elseif($location_txt != "")
+                                {
+                                    echo $search_txt = "Business in ".$location_txt;
+                                    $item3_url = base_url()."business-by-location";
+                                    $item3_txt = "Business by Location";
+                                }
+                                elseif ($category_txt != "") {
+                                    echo $search_txt = $category_txt." Business";
+                                    $item3_url = base_url()."business-by-categories";
+                                    $item3_txt = "Business by Category";
+                                } ?></h3>
                         </div>
                         <?php 
                         if(isset($businessList) && !empty($businessList)):
@@ -300,6 +318,53 @@
             <script src="<?php echo base_url('assets/js/webpage/business-profile/common.js?ver=' . time()) ?>"></script>
         <?php
             }
+        if($this->session->userdata('aileenuser') == ""):
         ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>business-search",
+                        "name": "Business"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo $item3_url; ?>",
+                        "name": "<?php echo $item3_txt; ?>"                
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "<?php echo $search_txt; ?>"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     </body>
 </html>

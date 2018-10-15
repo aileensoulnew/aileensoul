@@ -267,5 +267,34 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/business-live/searchBusiness.js?ver=' . time()) ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/webpage/business-live/index.js?ver=' . time()) ?>"></script> -->
+        <?php if($this->session->userdata('aileenuser') == ""): ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "Jobs"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     </body>
 </html>

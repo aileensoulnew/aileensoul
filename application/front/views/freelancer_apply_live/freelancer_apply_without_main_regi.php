@@ -206,5 +206,32 @@
         </script>
         <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.validate.min.js') ?>"></script>
         <!-- <script type="text/javascript" src="<?php //echo base_url('assets/js/webpage/freelancer-apply-live/freelancer_apply_without_main_regi.js'); ?>"></script> -->
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "Freelance Jobs"
+                    }
+                }
+            ]
+        }
+        </script>
     </body>
 </html>

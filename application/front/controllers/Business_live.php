@@ -145,8 +145,8 @@ class Business_live extends MY_Controller {
         $this->data['business_profile_set'] = $this->business_profile_set;
         $this->data['q'] = $category;
         $this->data['l'] = $location;
-        $tmCat = ucwords(str_replace("-"," ",$category));
-        $tmLoc = ucwords(str_replace("-"," ",$location));
+        $this->data['category_txt'] = $tmCat = ucwords(str_replace("-"," ",$category));
+        $this->data['location_txt'] = $tmLoc = ucwords(str_replace("-"," ",$location));
 
         if($sertype == 1)
         {
@@ -378,9 +378,10 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
+        $this->data['location_txt'] = $location_txt = ucwords(str_replace("-"," ",$location));
         //$this->data['title'] = "Business in ".ucwords(str_replace("-"," ",$location))." | Aileensoul";
-        $this->data['title'] = "Businesses in ".ucwords(str_replace("-"," ",$location)).": Get Details of Top Business | Aileensoul";
-        $this->data['metadesc'] = "View address and contact information of business established in ".ucwords(str_replace("-"," ",$location)).". Register to connect and know more about business."; 
+        $this->data['title'] = "Businesses in ".$location_txt.": Get Details of Top Business | Aileensoul";
+        $this->data['metadesc'] = "View address and contact information of business established in ".$location_txt.". Register to connect and know more about business."; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
         $locationdata = $this->business_model->getlocationdatafromslug($location);
         $this->data['location_id'] = $location_id = $locationdata['city_id'];

@@ -183,5 +183,43 @@
         <?php } ?>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>        
         <!-- <script src="<?php //echo base_url('assets/js/webpage/freelancer-apply/view_more_freelance_apply.js?ver=' . time()) ?>"></script> -->
+        <?php if($this->session->userdata('aileenuser') == ""): ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('freelance-jobs'); ?>",
+                        "name": "Freelance Jobs"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "Freelance Jobs by Categories"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     </body>
 </html>

@@ -361,5 +361,67 @@ if($userid_login == ""){?>
     </script>    
     <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>  
     <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/freelancer-apply/fa_field_cat_list_no_login.js?ver=' . time()); ?>"></script>
+    <?php if($this->session->userdata('aileenuser') == ""): ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('freelance-jobs'); ?>",
+                        "name": "Freelance Jobs"
+                    }
+                },
+                <?php if(isset($is_field) && !empty($is_field)):
+                $item4_name = $is_field['category_name']; ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('freelance-jobs-by-fields'); ?>",
+                        "name": "Freelance Jobs by Field"
+                    }
+                },
+                <?php 
+                elseif(isset($is_skill) && !empty($is_skill)):
+                    $item4_name = $is_skill['skill']; ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('freelance-jobs-by-categories'); ?>",
+                        "name": "Freelance Jobs by Categories"
+                    }
+                },
+                <?php endif; ?>
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "Freelance <?php echo $item4_name; ?> Jobs"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
 </body>
 </html>

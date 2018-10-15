@@ -164,8 +164,8 @@ class Artist_live extends MY_Controller {
         }
         $this->data['q'] = $category;
         $this->data['l'] = $location;
-        $tmCat = ucwords(str_replace("-"," ",$category));
-        $tmLoc = ucwords(str_replace("-"," ",$location));
+        $this->data['category_txt'] = $tmCat = ucwords(str_replace("-"," ",$category));
+        $this->data['location_txt'] = $tmLoc = ucwords(str_replace("-"," ",$location));
 
         if($sertype == 1)
         {
