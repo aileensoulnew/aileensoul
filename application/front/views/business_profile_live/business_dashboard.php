@@ -1078,6 +1078,111 @@ $login_user_id = $this->session->userdata('aileenuser')
             "description": "Description: <?php echo $description_txt; ?>"
           }
         </script>
+        <?php if($this->session->userdata('aileenuser') == "" && ($county_txt != "" || $business_data[0]['industriyal'] != 0)):
 
+            $category_arr = $this->db->select('industry_slug,industry_name')->get_where('industry_type', array('industry_id' => $business_data[0]['industriyal']))->row_array();
+            $category_slug = $category_arr['industry_slug'];
+            $category_txt = $category_arr['industry_name'];
+            
+        ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>business-search",
+                        "name": "Business"
+                    }
+                },
+                <?php
+                if($city_txt != "" && $category_txt != ""): ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('business'); ?>",
+                        "name": "All Business"                
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url().$category_slug."-business-in-".$this->common->create_slug($city_txt); ?>",
+                        "name": "<?php echo $category_txt." Business in ".$city_txt; ?>"
+                    }
+                },
+                <?php
+                elseif($category_txt != ""): ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('business-by-categories'); ?>",
+                        "name": "Business by Category"                
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url().$category_slug."-business"; ?>",
+                        "name": "<?php echo $category_txt." Business"; ?>"
+                    }
+                },
+                <?php
+                elseif($city_txt != ""): ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('business-by-location'); ?>",
+                        "name": "Business by Location"                
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url()."business-in-".$this->common->create_slug($city_txt); ?>",
+                        "name": "<?php echo $city_txt; ?>"
+                    }
+                },
+                <?php
+                endif; ?>
+                {
+                    "@type": "ListItem",
+                    "position": 5,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "<?php echo $company_name_txt; ?>"                
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     </body>
 </html>

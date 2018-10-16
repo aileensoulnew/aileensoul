@@ -1181,6 +1181,8 @@ function submitforgotForm()
                         "name": "Artist"
                     }
                 },
+                <?php
+                if(trim($category_txt) != "Other," && $city_txt != ""): ?>
                 {
                     "@type": "ListItem",
                     "position": 3,
@@ -1190,10 +1192,9 @@ function submitforgotForm()
                         "name": "All Artist"                
                     }
                 },
-                <?php                
-                if($category_txt != "" && $city_txt != ""){
+                <?php
                     foreach (explode(",", $category_txt) as $key => $value) {
-                        if($value != "")
+                        if($value != "" && $value != "Other")
                         { ?>
                             {
                                 "@type": "ListItem",
@@ -1205,8 +1206,57 @@ function submitforgotForm()
                                 }
                             },
                         <?php }
+                    } ?>
+                <?php
+                elseif($category_txt != "Other," && $city_txt == ""): ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>artist/category",
+                        "name": "Artist by Category"                
                     }
-                }
+                },
+                <?php
+                    foreach (explode(",", $category_txt) as $key => $value) {
+                        if($value != "" && $value != "Other")
+                        { ?>
+                            {
+                                "@type": "ListItem",
+                                "position": 4,
+                                "item":
+                                {
+                                    "@id": "<?php echo base_url()."artist/".$this->common->create_slug($value); ?>",
+                                    "name": "<?php echo $value; ?>"
+                                }
+                            },
+                        <?php }
+                    } ?>
+                <?php
+                elseif($city_txt != "" && trim($category_txt) == "Other,"): ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>artist/location",
+                        "name": "Artist by location"                
+                    }
+                },
+                
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url()."artist/artist-in-".$this->common->clean($city_txt); ?>",
+                        "name": "<?php echo $city_txt; ?>"
+                    }
+                },
+                        
+                <?php
+                endif;
                 ?>                
                 {
                     "@type": "ListItem",

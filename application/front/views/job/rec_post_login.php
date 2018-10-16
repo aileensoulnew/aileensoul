@@ -1366,39 +1366,10 @@
                 "position": 4,
                     "item":
                     {
-                    "@id": "<?php echo base_url().$this->common->clean($industry_txt."-jobs-in-".$location_txt); ?>",
-                    "name": "<?php echo $industry_txt." Jobs in ".$location_txt; ?>"
+                    "@id": "<?php echo base_url().$this->common->create_slug($industry_txt."-jobs");?>",
+                    "name": "<?php echo $industry_txt." Jobs"; ?>"
                     }
                 },
-                {
-                "@type": "ListItem",
-                "position": 4,
-                    "item":
-                    {
-                    "@id": "<?php echo base_url().$this->common->clean($job_title_txt."-jobs-in-".$location_txt); ?>",
-                    "name": "<?php echo $job_title_txt ." Jobs in ". $location_txt; ?>"
-                    }
-                },
-                <?php
-                if($skill_txt != "")
-                {
-                    foreach (explode(",", $skill_txt) as $key => $value) {
-                        if($value != "")
-                        {?>
-                            {
-                            "@type": "ListItem",
-                            "position": 4,
-                                "item":
-                                {
-                                "@id": "<?php echo base_url().$this->common->clean(trim($value)."-jobs-in-".$location_txt); ?>",
-                                "name": "<?php echo $value." Jobs in ".$location_txt; ?>"
-                                }
-                            },
-                        <?php
-                        }
-                    }
-                }
-                ?>
                 {
                 "@type": "ListItem",
                 "position": 5,
