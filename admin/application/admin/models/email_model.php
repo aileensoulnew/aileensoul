@@ -413,7 +413,7 @@ line-height: 1;}
 
     }
 
-    function send_email_new($subject = '', $templ = '', $to_email = '',$unsubscribe = '') {
+    public function send_email_new($subject = '', $templ = '', $to_email = '',$unsubscribe = '') {
         $this->load->library('email');
 
         $email_html = '';
@@ -488,8 +488,7 @@ line-height: 1;}
                                 </tbody>
                             </table></div></body></html>';
         // echo $email_html;exit();
-        require 'phpmailer/vendor/autoload.php';
- 
+        require FCPATH.'../phpmailer/vendor/autoload.php'; 
         //Create a new PHPMailer instance
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
@@ -512,12 +511,11 @@ line-height: 1;}
         // Enable TLS encryption over port 587
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
-
         // if ($this->email->send()) {
         if ($mail->send()) {
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 

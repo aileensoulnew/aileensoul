@@ -143,7 +143,8 @@ class Article extends CI_Controller {
     }
 
     public function reject() {
-        $id = $_POST['id'];
+        // $id = $_POST['id'];
+        $id = $this->input->post('id');
         $data = array(
             'status' => 'reject'
         );
@@ -154,7 +155,7 @@ class Article extends CI_Controller {
         );
         $update1 = $this->common->update_data($data, 'post_article', 'id_post_article', $id);
 
-        echo 'Rejected';
+        
 
         $join_str[0]['table'] = "user_post";
         $join_str[0]['join_table_id'] = "user_post.post_id";
@@ -172,7 +173,8 @@ class Article extends CI_Controller {
 
         $select_data = "post_article.id_post_article, post_article.user_id, post_article.article_title, post_article.article_desc, post_article.article_featured_image, post_article.unique_key, post_article.status as article_status, post_article.created_date, post_article.article_slug, user_post.post_for, user_post.post_id, user_post.status as user_post_status,user_post.is_delete as user_post_isdeleted, user.first_name, user.last_name, user.user_dob, user.user_gender, user.user_agree, user.user_slug, user.is_student, user.is_subscribe,user_login.email";
 
-        $article_data = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit, $offset, $join_str)[0];
+        $article_data = $this->common->select_data_by_condition('post_article', $condition_array, $data = $select_data, $short_by = 'id_post_article', $order_by = 'desc', $limit = '', $offset = '', $join_str)[0];
+        
         $fullname = ucwords($article_data['first_name']." ".$article_data['last_name']);
         $touser = $article_data['email'];
         $user_id = $article_data['user_id'];
@@ -180,7 +182,7 @@ class Article extends CI_Controller {
         
         $dataFollow = array(
             'not_type' => '11',//Article Rejected
-            'not_from_id' => 1,
+            'not_from_id' => '1',
             'not_product_id'=>$id,
             'not_to_id' => $user_id,
             'not_read' => '2',                    
@@ -190,16 +192,17 @@ class Article extends CI_Controller {
             'not_active' => '1'
         );
         $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+        
+        echo 'Rejected';
 
         $email_user = '';
         $email_user .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
-        <tr><td style="padding-left:20px;">Hi '.$fullname.'!<br><br><p style="padding-left:0px; padding-bottom: 20px;"> Your Article has been rejected by the Aileensoul.</p><br></td></tr>';        
+        <tr><td style="padding-left:20px;">Hi '.$fullname.'!<br><br><p style="padding-left:0px; padding-bottom: 20px;"> Your Article has been rejected by the Aileensoul.</p><br></td></tr>';
         $email_user .= '</table>';
         $subject = "Reject Article";
-        $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);
+        $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);        
 
-
-        die();
+        exit();
     }
 
     public function delete() {

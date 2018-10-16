@@ -251,7 +251,7 @@ function article_publish(id)
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/publish" ?>',
-      data: {'id':id},
+      data: {'id':id},      
       success: function (response){
          $('.'+'art-pub-'+id).remove();
          $('.'+'art-status-'+id).html(response);
@@ -272,10 +272,10 @@ function article_reject(id)
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/reject" ?>',
-      data: {'id':id},
+      data: {'id':id},      
       success: function (response){
-         $('.'+'art-pub-'+id).remove();
-         $('.'+'art-status-'+id).html(response);
+        $('.art-pub-'+id).remove();
+        $('.art-status-'+id).html(response);
       }
    });
 }
@@ -293,10 +293,10 @@ function article_delete(id)
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/delete" ?>',
-      data: {'id':id},
+      data: {'id':id},      
       success: function (response){
-         $('.'+'art-pub-'+id).remove();
-         $('.'+'art-status-'+id).html(response);
+         $('.art-pub-'+id).remove();
+         $('.art-status-'+id).html(response);
       }
    });
 }

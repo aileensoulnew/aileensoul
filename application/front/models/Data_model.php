@@ -292,4 +292,15 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
+    function getFieldListForArticle() {
+        $this->db->select('it.industry_id,it.industry_name')->from('industry_type it');
+        $this->db->where('type_id', '');
+        $this->db->where('status', '1');
+        $this->db->where('is_delete', '0');
+        $this->db->where('it.industry_id >', '113');
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
 }
