@@ -33,7 +33,7 @@
         <!--<link rel="stylesheet" href="<?php // echo base_url('admin/plugins/morris/morris.css');   ?>">-->
 
         <!-- Fancybox Css Start -->
-        <link rel="stylesheet" href="<?php echo SITEURL.('css/jquery.fancybox.css') ?>" />
+        <!-- <link rel="stylesheet" href="<?php //echo SITEURL.('css/jquery.fancybox.css') ?>" /> -->
         <!-- Fancybox Css End -->
 
         <!-- Date Picker -->
@@ -53,9 +53,11 @@
 
         <!--ALL JS Start Here-->
         <!-- jQuery 2.1.4 -->
-        <script src="<?php echo base_url('admin/plugins/jQuery/jQuery-2.1.4.min.js'); ?>"></script>
+        <!-- <script src="<?php echo base_url('admin/plugins/jQuery/jQuery-2.1.4.min.js'); ?>"></script> -->
         <!-- jQuery UI 1.11.4 -->
          <!--<script src="<?php // echo base_url('admin/plugins/jQuery/jquery-ui.min.1.11.4.js');   ?>"></script>-->
+        <script src="<?php echo SITEURL.('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php echo SITEURL.('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
 
         <!-- Bootstrap 3.3.5 -->
         <script src="<?php echo base_url('admin/bootstrap/js/bootstrap.min.js'); ?>"></script>
@@ -113,7 +115,7 @@
             </script>-->
 
         <!-- Fancybox Js Start -->
-       <script src="<?php echo SITEURL.('js/jquery.fancybox.js'); ?>"></script>
+       <!-- <script src="<?php //echo SITEURL.('js/jquery.fancybox.js'); ?>"></script> -->
         <!-- Fancybox Js End -->
 
         <!--for multiple delete-->

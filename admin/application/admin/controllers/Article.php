@@ -137,7 +137,7 @@ class Article extends CI_Controller {
         $email_user .= '<a href="'.SITEURL.'article/'.$article_slug.'">Click here to view article.</a>';
         $email_user .= '<br></td></tr>';        
         $email_user .= '</table>';
-
+        $subject = "Approve Article";
         $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);
         die();
     }
@@ -193,9 +193,9 @@ class Article extends CI_Controller {
 
         $email_user = '';
         $email_user .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
-        <tr><td style="padding-left:20px;">Hi '.$fullname.'!<br><br><p style="padding-left:0px; padding-bottom: 20px;"> Your Article has been rejected by the admin.</p><br></td></tr>';        
+        <tr><td style="padding-left:20px;">Hi '.$fullname.'!<br><br><p style="padding-left:0px; padding-bottom: 20px;"> Your Article has been rejected by the Aileensoul.</p><br></td></tr>';        
         $email_user .= '</table>';
-
+        $subject = "Reject Article";
         $send_user = $this->email_model->send_email_new($subject = $subject, $templ = $email_user, $to_email = $touser);
 
 

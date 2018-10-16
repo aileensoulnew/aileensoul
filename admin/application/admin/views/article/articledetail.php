@@ -271,7 +271,7 @@ function article_publish(id)
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/publish" ?>',
-      data: 'id=' + id,
+      data: {'id':id},
       success: function (response){
          $('.'+'art-pub-'+id).html(response);         
       }
@@ -282,7 +282,7 @@ function article_reject(id)
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/reject" ?>',
-      data: 'id=' + id,
+      data: {'id':id},
       success: function (response){
          $('.'+'art-pub-'+id).html(response);
       }
