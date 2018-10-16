@@ -95,7 +95,7 @@ if($userid_login == "")
 			else if ($user_post_article['is_delete'] == "1") {
 				echo "<span class='article-info-box'>This Article is deleted.</span>";
 			}
-			else if($user_post_article['status'] == "publish")
+			else if($user_post_article['status'] == "publish" && $userid_login == $article_data['user_id'])
 			{
 				$article_pub_cls = "cat-name-cus";
 				$article_pub = 1;
@@ -121,7 +121,7 @@ if($userid_login == "")
 						}  ?>
 						</span>
 						<span class="<?php echo $article_pub_cls; ?>"><?php echo date('dS F Y', strtotime($article_data['created_date'])); ?></span>
-						<?php if($article_pub == 1){ ?>
+						<?php if($article_pub == 1 && $userid_login == $article_data['user_id']){ ?>
 						<span><a href="<?php echo base_url()."edit-article/".$article_data['unique_key']; ?>">Edit Article</a></span>
 						<?php } ?>
 					</p>
@@ -515,7 +515,7 @@ if($userid_login == "")
 						<?php 
 					}?>
 				</div>
-				<div class="right-add-box"></div>
+				<?php $this->load->view('right_add_box'); ?>
 			</div>
 		</div>
 	</div>
