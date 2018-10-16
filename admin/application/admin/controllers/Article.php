@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Article extends MY_Controller {
+class Article extends CI_Controller {
 
     public $data;
 
@@ -32,7 +32,7 @@ class Article extends MY_Controller {
         // echo $this->profile->thumb();
     }
 
-    public function list() {
+    public function articlelist() {
 
         $limit = $this->paging['per_page'];
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
@@ -46,7 +46,7 @@ class Article extends MY_Controller {
         }
   
         $this->data['offset'] = $offset;
-        $this->paging['base_url'] = site_url("article/list");
+        $this->paging['base_url'] = site_url("article/articlelist");
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
             $this->paging['uri_segment'] = 5;
         } else {
@@ -78,7 +78,7 @@ class Article extends MY_Controller {
         $this->pagination->initialize($this->paging);
         $this->data['search_keyword'] = '';
         // print_r($this->data['article_list']);exit();        
-        $this->load->view('article/list', $this->data);
+        $this->load->view('article/articlelist', $this->data);
     }
 
     
@@ -247,7 +247,7 @@ class Article extends MY_Controller {
         if ($this->session->userdata('user_search_keyword'))
         {
             $this->session->unset_userdata('user_search_keyword');
-            redirect('article/list','refresh');
+            redirect('article/articlelist','refresh');
         }
     }
 
@@ -262,7 +262,7 @@ class Article extends MY_Controller {
         }
         else
         {
-            redirect('article/list','refresh');
+            redirect('article/articlelist','refresh');
         }
         $this->data['search_keyword'] = trim($search_keyword);
         $this->session->set_userdata('user_search_keyword', $search_keyword);
@@ -311,7 +311,7 @@ class Article extends MY_Controller {
         $this->data['limit'] = $limit;
         $this->pagination->initialize($this->paging);        
         // print_r($this->data['article_list']);exit();        
-        $this->load->view('article/list', $this->data);
+        $this->load->view('article/articlelist', $this->data);
     }
 }
 ?>

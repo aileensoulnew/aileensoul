@@ -51,10 +51,10 @@ if($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1
 }
 else
 {
-	$db_host 	 = 'localhost';
-	$db_user 	 = 'alael_elalanew';
-	$db_password = '_PcEefMObeyP';
-	$db_name 	 = 'alael_elalanew';
+	$db_host 	 = 'aileensoul.cd5k72kgdruv.us-west-2.rds.amazonaws.com';
+	$db_user 	 = 'sysadmin';
+	$db_password = 'sysadmin123?';
+	$db_name 	 = 'aileensoulv2';
 	
 	$sitenewpath = str_split($_SERVER['DOCUMENT_ROOT'],23);
 	
@@ -126,11 +126,12 @@ $time	=	array(
 
 
 if($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1'){
-
-	 error_reporting(0);
+	ini_set('display_errors', '0');
+	error_reporting(0);
 }
 else
 {
+	ini_set('display_errors', '0');
 	error_reporting(0);
 }
   			

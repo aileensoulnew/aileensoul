@@ -12,8 +12,9 @@ RewriteRule ^(.*)$ index.php/$1 [L]
    RewriteCond $1 !^(index\.php|images|robots\.txt|css|docs|js|system)
    RewriteRule ^(.*)$ /index.php?/$1 [L]
    
-   RewriteCond %{HTTP_HOST} ^textileguru.com [NC]
-   RewriteRule ^(.*)$ http://www.aileensoul.com/admin/$1 [L,R=301,NC]
+   #RewriteCond %{HTTP_HOST} ^textileguru.com [NC]
+   #RewriteRule ^(.*)$ http://www.aileensoul.com/admin/$1 [L,R=301,NC]
 
-
-
+<IfModule mod_headers.c>
+	Header add Cache-Control:  "no-store, no-cache, must-revalidate"
+</IfModule>
