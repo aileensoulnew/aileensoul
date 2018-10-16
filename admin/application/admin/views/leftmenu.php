@@ -26,7 +26,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('article/list'); ?>"><i class="fa fa-newspaper-o"></i>List ALL Article</a></li>
+                    <li><a href="<?php echo base_url('article/articlelist'); ?>"><i class="fa fa-newspaper-o"></i>List ALL Article</a></li>
                 </ul>
             </li>
             <!--End Article Management-->

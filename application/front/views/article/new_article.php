@@ -206,7 +206,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
                         <div class="article-popup">
 							<?php $getFieldList = $this->data_model->getFieldList();?>
 							<fieldset class="fw">
-								<b>Select Category for your blog</b>
+								<b>Select Category For Your Article</b>
 								<span class="span-select">
 								<select name="article_main_category" id="article_main_category" onchange="other_field_fnc(this)">
 									<?php foreach ($getFieldList as $key => $value) { ?>
