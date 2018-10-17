@@ -132,7 +132,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
 						<a href="" data-target="#article-cetegory" data-toggle="modal" class="pull-left"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"> </a>
 						<span id="cat-selected" class="cat-field-cus">Select Category</span>
 					</p>
-					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Title and Discription</p>
+					<p><a href="" data-target="#meta-detail" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/edit.png"></a>Meta Title and Description</p>
 					
 					
 				</div>
