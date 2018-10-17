@@ -39,6 +39,7 @@ class Article extends MY_Controller {
             $this->data['unique_key'] = $this->common->generate_article_unique_key(16);
             $this->data['meta_title'] = "Add Article";
             $this->data['meta_desc'] = "Add Article";
+            $this->data['articleData'] = array();
             $this->data['new_article'] = "1";
             $this->load->view('article/new_article', $this->data);
         }

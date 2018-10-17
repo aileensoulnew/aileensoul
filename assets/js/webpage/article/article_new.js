@@ -687,11 +687,11 @@ function change_category()
                     Url: url
                 };
                 history.pushState(obj, obj.Title, obj.Url);
+                $("#cat_load_img").hide();
+                $('#article-cetegory').modal('hide');
             }
             $("#okcategory").show();
             $("#save_post").hide();
-            $("#cat_load_img").hide();
-            $('#article-cetegory').modal('hide');
         }
     });
 }
