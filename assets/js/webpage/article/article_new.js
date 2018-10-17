@@ -16,6 +16,7 @@ maineditor = tinymce.init({
     resize: false,
     autoresize_min_height: 350,
     advlist_bullet_styles:'default,circle,disc,square',
+    block_formats: 'Paragraph=p;Text=h2;Text=h3;Text=h4;Text=h5;Text=h6',
     // image_dimensions: true,
     plugins:  [//autoresize
         "advlist autolink lists link image charmap print preview anchor ",
@@ -23,7 +24,7 @@ maineditor = tinymce.init({
         "insertdatetime media table contextmenu paste imagetools wordcount textcolor hr charmap autoresize"
     ],
     toolbar: 'link image | undo redo |  formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | hr charmap blockquote bullist numlist',
-    imagetools_toolbar: "alignleft aligncenter alignright | rotateleft rotateright | flipv fliph | editimage imageoptions| removeimage",
+    imagetools_toolbar: "alignleft aligncenter alignright | rotateleft rotateright | flipv fliph | editimage imageoptions| removeimage",    
     setup: function(editor) {
 
         function insertDate() {            
