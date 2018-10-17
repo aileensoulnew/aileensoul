@@ -14,14 +14,15 @@ maineditor = tinymce.init({
     menubar: false,
     theme: 'modern',
     resize: false,
-    // autoresize_max_height: 500,
+    autoresize_min_height: 350,
+    advlist_bullet_styles:'default,circle,disc,square',
     // image_dimensions: true,
     plugins:  [//autoresize
         "advlist autolink lists link image charmap print preview anchor ",
         "searchreplace visualblocks code fullscreen",
         "insertdatetime media table contextmenu paste imagetools wordcount textcolor hr charmap autoresize"
     ],
-    toolbar: 'link image | undo redo |  formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | hr charmap blockquote',
+    toolbar: 'link image | undo redo |  formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | hr charmap blockquote bullist numlist',
     imagetools_toolbar: "alignleft aligncenter alignright | rotateleft rotateright | flipv fliph | editimage imageoptions| removeimage",
     setup: function(editor) {
 
@@ -396,7 +397,8 @@ function upload_success()
             'edit_art_published': edit_art_published,
         };
         $("#publish").text('Publishing ...');
-        $("#publish").attr('disabled','disabled');
+        $("#publish").attr('style','pointer-events: none;');
+        $("#publish").removeAttr('onclick');
         $.ajax({
             type: 'POST',
             url: base_url+'article/publish_article',
@@ -409,7 +411,8 @@ function upload_success()
                     $("#publishmodal .mes .msg").html("Congratulations, your post has been successfully submitted and sent for approval. We'll send you notifications once it's live.");
                     $("#publishmodal").modal("show");
                     $("#publish").text('Publish');  
-                    $("#publish").removeAttr('disabled');
+                    $("#publish").removeAttr('style');
+                    $("#publish").attr('onclick','return submitArticle();');
                     article_slug = response.article_slug;
 
                 }
@@ -418,7 +421,8 @@ function upload_success()
                     $("#publishmodal .mes .msg").html("Please try again later.");
                     $("#publishmodal").modal("show");
                     $("#publish").text('Publish');  
-                    $("#publish").removeAttr('disabled');   
+                    $("#publish").removeAttr('style');
+                    $("#publish").attr('onclick','return submitArticle();');
                 }               
             }
         });

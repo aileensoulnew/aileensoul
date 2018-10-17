@@ -242,12 +242,13 @@ echo $leftmenu;
 //Publish Article Start
 function publish_article(id) 
 {
-   $("#publishmodal .mes .msg").html("Are you sure want to publish article ?");
-   $("#okbtn").attr("onclick","article_publish("+id+")");
-   $("#publishmodal").modal("show");
+  $("#publishmodal .mes .msg").html("Are you sure want to publish article ?");
+  $("#okbtn").attr("onclick","article_publish("+id+")");
+  $("#publishmodal").modal("show");
 }
 function article_publish(id) 
 {
+  $('.'+'art-pub-'+id).attr("style","pointer-events: none;");
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/publish" ?>',
@@ -269,6 +270,7 @@ function reject_article(id)
 }
 function article_reject(id) 
 {
+  $('.'+'art-pub-'+id).attr("style","pointer-events: none;");
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/reject" ?>',
@@ -290,6 +292,7 @@ function delete_article(id)
 }
 function article_delete(id) 
 {
+  $('.'+'art-pub-'+id).attr("style","pointer-events: none;");
    $.ajax({
       type: 'POST',
       url: '<?php echo base_url() . "article/delete" ?>',
