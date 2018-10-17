@@ -2825,6 +2825,19 @@ class Freelancer extends MY_Controller {
                     $email = $email_reg;
                     $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                     //Openfire Username Generate End
+
+                    //Send Promotional Mail Start
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                    $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                    $this->userdata['firstname'] = $first_name;
+                    
+                    $email_html = $this->load->view('email_template/freelancer',$this->userdata,TRUE);
+
+                    $subject = $first_name.", Here’s How to Not Miss Great Opportunities.";
+
+                    $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                    //Send Promotional Mail End
                     if(trim($data['freelancer_post_field']) != "")
                     {
                         $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;
@@ -3196,6 +3209,20 @@ class Freelancer extends MY_Controller {
                 $email = $email;
                 $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                 //Openfire Username Generate End
+
+                //Send Promotional Mail Start
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                $this->userdata['firstname'] = $firstname;
+                
+                $email_html = $this->load->view('email_template/freelancer',$this->userdata,TRUE);                
+
+                $subject = $firstname.", Here’s How to Not Miss Great Opportunities.";
+
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                //Send Promotional Mail End
+
                 if(trim($data['freelancer_post_field']) != "")
                 {
                     $field_name = $this->db->get_where('category', array('category_id' => $data['freelancer_post_field']))->row()->category_name;

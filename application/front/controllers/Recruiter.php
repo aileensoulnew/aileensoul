@@ -5202,6 +5202,18 @@ class Recruiter extends MY_Controller {
             $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
             //Openfire Username Generate End
 
+            //Send Promotional Mail Start
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+            $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+            
+            $email_html = $this->load->view('email_template/recruiter_reg',$this->userdata,TRUE);                
+
+            $subject = "Congrats, ".$first_name.". You’re Just One Step Away from Hiring Great Talents";
+
+            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email_reg,$unsubscribe);
+            //Send Promotional Mail End
+
 			if ($this->input->post('segment') == 'live-post') {
 				$segment = $this->input->post('segment');
 
@@ -5930,6 +5942,19 @@ class Recruiter extends MY_Controller {
                 // $email = $email_reg;
                 $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
                 //Openfire Username Generate End
+                
+                //Send Promotional Mail Start
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                
+                $email_html = $this->load->view('email_template/recruiter_reg',$this->userdata,TRUE);                
+
+                $subject = "Congrats, ".$first_name.". You’re Just One Step Away from Hiring Great Talents";
+
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                //Send Promotional Mail End
+
 				$data = array("is_success" => 1);
 			} else {
 				$data['errors'] = $errors['not_sucess'] = "Please Try again";

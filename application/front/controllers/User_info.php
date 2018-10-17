@@ -122,6 +122,20 @@ class User_info extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'user_profession');
             if ($insert_id) {
+
+                $this->userdata['user_data'] = $user_data = $this->user_model->getUserData($userid);
+                $fullname = ucwords($user_data['first_name']);
+                $to_email_id = $user_data['email'];
+
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                
+                $email_html = $this->load->view('email_template/welcome_mail',$this->userdata,TRUE);                
+
+                $subject = $fullname.", Welcome to Aileensoul Platform :)";
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $to_email_id,$unsubscribe);
+
                 $data['is_success'] = 1;
             } else {
                 $data['is_success'] = 0;
@@ -257,6 +271,19 @@ class User_info extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'user_student');
             if ($insert_id) {
+                $this->userdata['user_data'] = $this->user_model->getUserData($userid);
+                $fullname = ucwords($user_data['first_name']);
+                $to_email_id = $user_data['email'];
+
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                
+                $email_html = $this->load->view('email_template/welcome_mail',$this->userdata,TRUE);                
+
+                $subject = $fullname.", Welcome to Aileensoul Platform :)";
+
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $to_email_id,$unsubscribe);
                 $data['is_success'] = 1;
             } else {
                 $data['is_success'] = 0;

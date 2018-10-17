@@ -420,4 +420,41 @@ class Email_model extends CI_Model {
         }
     }
 
+    function send_email_template($subject = '', $email_html = '', $to_email = '',$unsubscribe = '') {
+        $this->load->library('email');        
+
+        require 'phpmailer/vendor/autoload.php';
+ 
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer\PHPMailer\PHPMailer;
+        $mail->isSMTP();
+        
+        $mail->Username = AMAZON_SES_USERNAME;//Amazon SES SMTP user name.        
+        $mail->Password = AMAZON_SES_PASSWORD;//Amazon SES SMTP password.
+        $mail->Host = 'email-smtp.us-west-2.amazonaws.com';
+        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        //Set an alternative reply-to address
+        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->addBCC('dm.aileensoul@gmail.com');
+        //Set who the message is to be sent to
+        $mail->addAddress($to_email);
+        $mail->Subject = $subject;
+        $mail->isHTML(true);
+        echo $email_html;exit();
+        $mail->Body = $email_html;
+        // Tells PHPMailer to use SMTP authentication
+        $mail->SMTPAuth = true;
+
+        // Enable TLS encryption over port 587
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        // if ($this->email->send()) {
+        if ($mail->send()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
 }

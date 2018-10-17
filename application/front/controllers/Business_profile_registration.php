@@ -396,7 +396,7 @@ class Business_profile_registration extends MY_Controller {
         } else {
             $data['contact_person'] = $_POST['contactname'];
             $data['contact_mobile'] = $_POST['contactmobile'];
-            $data['contact_email'] = $_POST['email'];
+            $data['contact_email'] = $email = $_POST['email'];
             $data['contact_website'] = $_POST['contactwebsite'];
             $data['modified_date'] = date('Y-m-d H:i:s', time());
             if ($_POST['busreg_step'] == '1') {
@@ -405,6 +405,23 @@ class Business_profile_registration extends MY_Controller {
             $updatdata = $this->common->update_data($data, 'business_profile', 'user_id', $userid);
             $updatdata = $this->common->update_data($data, 'business_profile_search_tmp', 'user_id', $userid);
             if ($updatdata) {
+                if($_POST['busreg_step'] == '1')
+                {
+                    //Send Promotional Mail Start
+                    $contition_array = array('user_id' => $userid, 'is_deleted' => '0', 'status' => '1');
+                    $userdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'country,state,city,company_name,pincode,address,business_step', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                    $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                    
+                    $email_html = $this->load->view('email_template/business',$this->userdata,TRUE);                
+
+                    $subject = $userdata['company_name']." is Now Live on Aileensoul Platform ";
+
+                    $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                    //Send Promotional Mail End
+                }
                 $data['is_success'] = 1;
             } else {
                 $data['is_success'] = 0;
@@ -1019,6 +1036,18 @@ class Business_profile_registration extends MY_Controller {
             $email = $email_reg;
             $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
             //Openfire Username Generate End
+
+            //Send Promotional Mail Start            
+            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+            $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+            
+            $email_html = $this->load->view('email_template/business',$this->userdata,TRUE);                
+
+            $subject = $company_name." is Now Live on Aileensoul Platform ";
+
+            $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+            //Send Promotional Mail End
 
             if(trim($data['industriyal']) != "")
             {

@@ -218,6 +218,19 @@ class Freelancer_hire extends MY_Controller {
                 $name = ucwords($firstname." ".$lastname);
                 $email = $email_reg;
                 $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+
+                //Send Promotional Mail Start
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                
+                $email_html = $this->load->view('email_template/freelancer_hire',$this->userdata,TRUE);                
+
+                $subject = $firstname.", Get the Work Done by Skilled Freelancer";
+
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+                //Send Promotional Mail End
+                
                 //Openfire Username Generate End
                 // if ($this->input->post('segment') == 'live-post') {
                 //     $this->session->set_flashdata('error', 'Your project successfully posted');

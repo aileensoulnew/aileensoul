@@ -3347,6 +3347,14 @@ class Job extends MY_Controller {
                 $insert_id = $this->common->update_data($data1, 'job_reg', 'user_id', $userid);
             } else {
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                
+                $email_html = $this->load->view('email_template/job_register',$this->userdata,TRUE);
+
+                $subject = "Find and Get Great Opportunities on Aileensoul";
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email_reg,$unsubscribe);
 
                 //Openfire Username Generate Start
                 $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
@@ -6337,6 +6345,15 @@ class Job extends MY_Controller {
                 //Openfire Username Generate End
 
                 $insert_id = $this->common->insert_data_getid($data1, 'job_reg');
+                
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                
+                $email_html = $this->load->view('email_template/job_register',$this->userdata,TRUE);
+
+                $subject = "Find and Get Great Opportunities on Aileensoul";
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
 
                 if($job_save != "")
                 {
@@ -6609,7 +6626,7 @@ class Job extends MY_Controller {
                     //Openfire Username Generate Start
                     $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
                     $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                    $op_un_ps = str_replace("-", "_", $user_slug);
+                    $op_un_ps = "job_".str_replace("-", "_", $user_slug);
                     $properties = array();
                     $username = $op_un_ps;
                     $password = $op_un_ps;
@@ -6669,6 +6686,14 @@ class Job extends MY_Controller {
                 }
             }
             if ($insert_id) {
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+
+                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+                
+                $email_html = $this->load->view('email_template/job_register',$this->userdata,TRUE);
+
+                $subject = "Find and Get Great Opportunities on Aileensoul";
+                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
                 $data = array("is_success" => 1);
             } else {
                 $data['errors'] = $errors['not_sucess'] = "Please Try again";
