@@ -2599,13 +2599,35 @@ padding: 4px;}
 .article-preview h4, .article-preview h4, .article-preview h6{margin-top:10px; margin-bottom:10px;}
 .article-preview p{margin:0 0 10px;}
 .article-preview .article-title h2{margin-top:0;}
+.new-article .right-part{position:absolute;}
 
 /***  end new article page css  ***/
+/***  new details page  ***/
+.detail-left{width:80%; padding-left:15px; padding-right:15px; float:left;}
+.detail-right{width:20%; padding-left:15px; padding-right:15px; float:left;}
+.dtl-box{border:1px solid #d2d2d2; width:100%; border-radius:20px; margin-bottom:30px; float:left;}
+.dtl-title{padding:15px 20px; border-bottom:1px solid #d2d2d2; font-size:22px; color:#1b8ab9;}
+.dtl-title .cus-width{width:40px;}
+.dtl-title span{margin-left:15px; vertical-align:middle;}
+.dtl-title a{margin-top:7px;}
+.dtl-dis{padding:15px 20px; width:100%; float:left;}
+.no-info{text-align:center;}
+.no-info img{width:100px; margin:0 auto;}
+.no-info span{width:100%; float:left; padding:10px 25px;}
+.dtl-modal .modal-content{border-radius:20px;}
+.dtl-modal .modal-close{font-size:30px; top:15px; right:15px;}
+.dtl-modal .dtl-title{background:#f6f6f6; border-bottom:0; border-top-left-radius:20px; border-top-right-radius:20px; color:#5c5c5c;}
+.dtl-modal .dtl-title span{margin-left:0;}
+.dtl-dis textarea{height:200px;}
+.dtl-btn{width:100%; float:left; text-align:center; border-top:1px solid #d2d2d2; margin-top:10px;}
+.dtl-btn .save{-webkit-text-fill-color: transparent; color: #1b8ab9;
+	background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+    background-clip: border-box;
+-webkit-background-clip: text; font-size:18px; font-weight:bold; letter-spacing:1px; width:100%; padding:15px; display:block;}
+
+/***  end new details page  ***/
 body.body-loader{height:100vh; overflow:hidden;}
-#main_loader{display: block;
-height: 100vh;
-background: #fff;
-z-index: 9999999999;
+#main_loader{display: block; height: 100vh; background: #fff; z-index: 9999999999;
 position: fixed;}
 
 .right-add-box .adBlock { width: 300px; height: 250px; }

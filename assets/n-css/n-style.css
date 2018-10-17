@@ -2599,6 +2599,7 @@ padding: 4px;}
 .article-preview h4, .article-preview h4, .article-preview h6{margin-top:10px; margin-bottom:10px;}
 .article-preview p{margin:0 0 10px;}
 .article-preview .article-title h2{margin-top:0;}
+.new-article .right-part{position:absolute;}
 
 /***  end new article page css  ***/
 body.body-loader{height:100vh; overflow:hidden;}
