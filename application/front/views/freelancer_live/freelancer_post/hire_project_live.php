@@ -349,7 +349,10 @@
                                                         </li>
                                                         <li><b>Field of Requirements</b>
                                                             <span> 
-                                                                <?php echo $category_txt = $this->db->get_where('category', array('category_id' => $post['post_field_req']))->row()->category_name; ?>
+                                                                <?php
+                                                                $cat_arr = $this->db->get_where('category', array('category_id' => $post['post_field_req']))->row();
+                                                                echo $category_txt = $cat_arr->category_name;
+                                                                $category_slug = $cat_arr->category_slug; ?>
                                                             </span>
                                                         </li>
                                                         <li><b>Rate</b>
@@ -1193,6 +1196,62 @@
             }
         } 
         </script>
+        <?php if($this->session->userdata('aileenuser') == ""): ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('freelance-jobs'); ?>",
+                        "name": "Freelance Jobs"
+                    }
+                },               
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url('freelance-jobs-by-fields'); ?>",
+                        "name": "Freelance Jobs by Field"
+                    }
+                },               
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url().'freelance-jobs/'.$category_slug; ?>",
+                        "name": "Freelance <?php echo addslashes($category_txt); ?> Jobs"
+                    }
+                },               
+                {
+                    "@type": "ListItem",
+                    "position": 5,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "<?php echo $post_name_txt; ?>"
+                    }
+                }
+            ]
+        }
+        </script>
+        <?php endif; ?>
     <?php } ?>
     </body>
 </html>
