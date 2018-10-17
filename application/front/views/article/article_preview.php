@@ -7,10 +7,18 @@ $no_login_cls= "";
 if($userid_login == "")
 {
 	$no_login_cls= " old-no-login";
+}
+if($article_data['article_meta_title'] != "")
+{
+	$meta_title = $article_data['article_meta_title'];
+}
+else
+{
+	$meta_title = ucwords($article_data['article_title'])." by ".ucwords($user_data['first_name']." ".$user_data['last_name']);
 } ?>
 <html lang="en">
     <head>
-        <title><?php echo $article_data['article_meta_title']; ?></title>
+        <title><?php echo $meta_title; ?></title>
         <meta name="description" content="<?php echo $article_data['article_meta_description']; ?>" />
         <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
