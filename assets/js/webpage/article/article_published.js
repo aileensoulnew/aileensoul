@@ -414,3 +414,20 @@ function follow(id, status, to_id) {
         },
     });    
 }
+$(document).ready(function(){
+    
+    $(window).scroll(function() {
+        var scroll_height = $(window).scrollTop();
+        var window_height = $(window).innerHeight();        
+        var mce_tool_scroll = $('.like-other-box').offset().top;        
+        if(Math.abs(window_height + scroll_height) >= parseInt(mce_tool_scroll))
+        {
+            $('.right-part').addClass('reach-to-allcomment');
+        }
+        else
+        {
+            $('.right-part').removeClass('reach-to-allcomment');   
+        }
+
+    });
+});
