@@ -450,7 +450,7 @@ header ul li #abody ul li:last-child {border: none;}
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 box-sizing: border-box;}
-.msg-discription{font-size:12px; line-height: 1.5;}
+.msg-discription{font-size:12px; line-height: 1.5;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 165px; min-height: 15px;}
 .msg-dropdown .day-text{line-height:1; display:block;}
 
 .add-dropdown .user-name{width:185px; float:left; padding-right:10px;}

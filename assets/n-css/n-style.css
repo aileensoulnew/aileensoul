@@ -1064,6 +1064,7 @@ header.profile-header .logo a{color:#5c5c5c;}
 .article-post .post-images a{display:block; color:#5c5c5c;}
 .article-post .article-post-text p{font-weight:normal;}
 .article-post .post-bottom{border-top:0px;}
+.article-preview h3{padding:0; border:0; text-align:left;}
 .article-preview .art-banner a img{width:100%;}
 .article-preview .art-banner{overflow:hidden;}
 .article-preview .upload-box{padding-top:0;}
@@ -2544,8 +2545,8 @@ label.cameraButton{min-height:43px;}
 .new-article .mce-toolbar-grp{border-top:1px solid #d2d2d2; margin-top:25px;}
 .article-popup select{border:0px; border-bottom:1px solid #d2d2d2; border-radius:0; padding:5px 0; margin-bottom:15px; font-size:16px; position:relative; z-index:9; background:transparent;}
 .article-popup select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
-.article-popup .span-select{position:relative;} 
-.article-popup .span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:15px; height:15px; top:2px; right:6px; background-size:100%;} 
+.article-popup .span-select{position:relative; width:100%; float:left;} 
+.article-popup .span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:15px; height:15px; top:10px; right:6px; background-size:100%;} 
 .article-popup .model_ok_cancel .btn1{border-radius:20px; padding:8px 25px; font-size:16px;}
 .article-popup input{border-width:0 0 1px 0; border-radius:0; padding:0 0 0 4px; font-size:16px;}
 .meta-detail-box .cat-field-cus{max-width: 89%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; float:left;}
@@ -2593,6 +2594,11 @@ display: inline-block; content: ""; position: absolute; top: 8px; right: -8px;}
 #featured_img_remove{display:none; float: right; font-size: 22px; width: 30px; height: 30px; position: relative; color: #fff; background: rgba(0,0,0,0.4); margin-top: -30px;
 padding: 4px;}
 .arti-preview-img:hover #featured_img_remove{display:block;}
+.arti-profile-box .user-cover-img .gradient-bg{height:130px;}
+.article-preview h1, .article-preview h2, .article-preview h3{margin-top:20px; margin-bottom:10px;}
+.article-preview h4, .article-preview h4, .article-preview h6{margin-top:10px; margin-bottom:10px;}
+.article-preview p{margin:0 0 10px;}
+.article-preview .article-title h2{margin-top:0;}
 
 /***  end new article page css  ***/
 body.body-loader{height:100vh; overflow:hidden;}
@@ -2618,6 +2624,14 @@ a.job-expired:hover{color:#000 !important;}
 .main-message .add-dropdown .dropdown-database.confirm_div{width:341px;}
 .main-message .add-dropdown .dropdown-database.confirm_div .dropdown-user-detail{width:271px;}
 .job-contact-frnd1{width:100%; float:left;}
+.form-group input:focus::-webkit-input-placeholder{color:#1b8ab9;}
+.form-group input:focus::-moz-placeholder{color:#1b8ab9;}
+.form-group input:focus:-ms-input-placeholder{color:#1b8ab9;}
+.form-group input:focus:-moz-placeholder{color:#1b8ab9;}
+#login_form_main .form-group input:focus{border-bottom:1px solid #1b8ab9;}
+#login_form .form-group input:focus{border-bottom:1px solid #1b8ab9;}
+.login .form-group input:focus{border-bottom:1px solid #1b8ab9;}
+
 
 
 /***  media query  ***/
