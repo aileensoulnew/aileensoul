@@ -110,8 +110,15 @@ class Article extends MY_Controller {
             }
             /*print_r($this->data['article_data']);
             print_r($this->data['user_post_article']);
-            print_r($this->data['user_data']);exit();*/            
-            $this->load->view('article/article_preview', $this->data);
+            print_r($this->data['user_data']);exit();*/
+            if($user_post_article['is_delete'] == '1')
+            {
+                $this->load->view('404', $this->data);
+            }
+            else
+            {
+                $this->load->view('article/article_preview', $this->data);
+            }
         }
         else
         {
@@ -499,7 +506,14 @@ class Article extends MY_Controller {
             print_r($this->data['user_data']);exit();*/
             $this->data['meta_title'] = "Article Title";
             $this->data['meta_desc'] = "Article Description";
-            $this->load->view('article/article_preview', $this->data);
+            if($user_post_article['is_delete'] == '1')
+            {
+                $this->load->view('404', $this->data);
+            }
+            else
+            {
+                $this->load->view('article/article_preview', $this->data);
+            }
         // }
         // else
         // {

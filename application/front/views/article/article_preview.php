@@ -14,7 +14,7 @@ if($article_data['article_meta_title'] != "")
 }
 else
 {
-	$meta_title = ucwords($article_data['article_title'])." by ".ucwords($user_data['first_name']." ".$user_data['last_name']);
+	$meta_title = ucwords($article_data['article_title'])." by ".ucwords($user_data['first_name']." ".$user_data['last_name'])." | Aileensoul";
 } ?>
 <html lang="en">
     <head>
