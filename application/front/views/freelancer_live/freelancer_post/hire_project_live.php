@@ -478,12 +478,12 @@
                                                         </div>
                                                     <?php } ?>
                                                 </div>
+                                            </div>
                                             <?php } ?>
+                                        
 											<div class="banner-add">
-											<?php $this->load->view('banner_add'); ?>
-										</div>
-                                        </div>
-										
+                                                <?php $this->load->view('banner_add'); ?>
+                                            </div>
                                     </div>
                                     <!-- end sortlisted employe -->
 
