@@ -2604,6 +2604,7 @@ padding: 4px;}
 
 /***  end new article page css  ***/
 /***  new details page  ***/
+.fs18{font-size:18px;}
 .detail-left{width:80%; padding-left:15px; padding-right:15px; float:left;}
 .detail-right{width:20%; padding-left:15px; padding-right:15px; float:left;}
 .dtl-box{border:1px solid #d2d2d2; width:100%; border-radius:20px; margin-bottom:30px; float:left;}
@@ -2621,6 +2622,7 @@ padding: 4px;}
 .dtl-modal .dtl-title span{margin-left:0;}
 .dtl-dis textarea{height:100px;}
 #profile-overview .dtl-dis textarea{height:200px;}
+.dtl-dis h4{margin-top:0;}
 .dtl-btn{width:100%; float:left; text-align:center; border-top:1px solid #d2d2d2;}
 .dtl-btn .save{font-size:18px; font-weight:bold; letter-spacing:1px; width:100%; padding:16px 15px 15px; display:block;}
 .dtl-btn .save span{-webkit-text-fill-color: transparent; color: #1b8ab9;
@@ -2641,6 +2643,14 @@ padding: 4px;}
 .dtl-modal select{padding-left:12px;}
 .form-group .upload-file input{border:0; padding:10px 0 0; height:auto;}
 .edit-user-info{position:absolute; right:25px; top:150px;}
+.dtl-dis ul{padding-left:0; margin-bottom:0; border-bottom:1px solid #d2d2d2; padding-bottom:5px;}
+.dtl-dis ul li{list-style-type:none; padding-bottom:5px;}
+.about-dtl-box{padding:15px 0; border-bottom:1px solid #d2d2d2;}
+.more-less {float: right; color: #212121;}
+.dtl-dis.dis-accor{padding:0;}
+.dtl-dis.dis-accor .panel-group .panel-heading + .panel-collapse > .panel-body{border-top:0px;}
+.dtl-dis.dis-accor .panel{border-width:0px 0px 1px 0; border-bottom:1px solid #d2d2d2; border-radius:0;}
+
 
 /***  end new details page  ***/
 /***  new job registration form  ***/
