@@ -486,7 +486,7 @@ label.cameraButton input[accept*="camera"] {
 .upload-profile a{margin-bottom: 20px; color: #fff; display: inline-block;}
 .upload-profile img {display: block; margin: 0 auto 0px; width:40px !important; height:auto !important; border-radius:0px !important;}
 .profile-img:hover .upload-profile{display:block; color:#fff;}
-.user-photo-name{text-align:center; padding-bottom: 10px;}
+.user-photo-name{text-align:center; padding-bottom: 10px; position:relative;}
 .user-photo-name .profile-img img{width:168px; height:168px; border-radius:100%;}
 .user-photo-name h3{margin:5px 0 0; letter-spacing: 1px;}
 .user-photo-name h3 a{color:#5c5c5c;}
@@ -2600,6 +2600,7 @@ padding: 4px;}
 .article-preview p{margin:0 0 10px;}
 .article-preview .article-title h2{margin-top:0;}
 .new-article .right-part{position:absolute;}
+.new-article .art-banner{height:225px;}
 
 /***  end new article page css  ***/
 /***  new details page  ***/
@@ -2639,6 +2640,7 @@ padding: 4px;}
 .dlt-img{margin-top:32px;}
 .dtl-modal select{padding-left:12px;}
 .form-group .upload-file input{border:0; padding:10px 0 0; height:auto;}
+.edit-user-info{position:absolute; right:25px; top:150px;}
 
 /***  end new details page  ***/
 body.body-loader{height:100vh; overflow:hidden;}
@@ -2768,6 +2770,7 @@ a.job-expired:hover{color:#000 !important;}
 	.view-more-page .custom-user-list{width:100%;}
 	.view-more-page .right-add{display:none;}
 	.job-top-btn{position:inherit; margin-top:-23px !important;}
+	.article-all-comment .comment-dis{width:90%;}
 }
 @media screen and (max-width: 1024px) {
 
