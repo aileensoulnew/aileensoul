@@ -1071,4 +1071,16 @@ class Userprofile_model extends CI_Model {
         return $article_data;
     }
 
+
+    public function get_user_skills($userid)
+    {
+        $this->db->select("jt.name as name")->from("user_info ui, ailee_job_title jt");
+        $this->db->where('ui.user_id', $userid);
+        $this->db->where('FIND_IN_SET(jt.title_id, ui.`user_skills`) !=', 0);
+        // $this->db->group_by('ui.user_skills', 'uo.location');
+        $query = $this->db->get();
+        $skills_data = $query->result_array();
+        return $skills_data;
+    }
+
 }

@@ -1709,7 +1709,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             data: 'u=' + user_slug,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            details_data = success.data;
+            details_data = success.data.detail_data;
             $scope.details_data = details_data;            
             $scope.$parent.title = "About "+details_data.fullname+" | Aileensoul";
             if(details_data.Degree != "")
@@ -3513,8 +3513,19 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
-            details_data = success.data;
+            details_data = success.data.detail_data;
+            user_bio = success.data.user_bio;
+            skills_data = success.data.skills_data;
+            skills_data_edit = success.data.skills_data_edit;
             $scope.details_data = details_data;
+            $scope.user_bio = user_bio;
+            var edit_skills_data = [];
+            /*skills_data.forEach(function(element,skillArrIndex) {
+              edit_skills_data[skillArrIndex] = {"name":element.skill};
+            });*/
+            $scope.user_skills = skills_data;
+            $scope.edit_user_skills = skills_data_edit;
+
             load_add();
         });
         $('footer').show();
@@ -3523,9 +3534,88 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         location.href = path;
     }
     $scope.makeActive = function (item,slug) {
-
         $scope.active = $scope.active == item ? '' : item;
     }
+
+    $scope.save_user_bio = function(){
+        var user_bio = $("#user_bio").val();        
+        if(user_bio != "" && $scope.user_bio != user_bio)
+        {
+            $("#user_bio_loader").show();
+            $("#user_bio_save").attr("style","pointer-events:none;display:none;");
+            var updatedata = $.param({'user_bio':user_bio});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/save_user_bio',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    user_bio = result.data.user_bio;
+                    $scope.user_bio = user_bio;                
+                }
+                $("#user_bio_save").removeAttr("style");
+                $("#user_bio_loader").hide();
+                $("#profile-overview").modal('hide');
+            });
+        }
+    };
+
+    $("#profile-overview").on("hide.bs.modal", function () {
+        $("#user_bio").val($scope.user_bio);
+    });
+
+    $scope.save_user_skills = function(){        
+        if($scope.edit_user_skills != "")
+        {
+            $("#user_skills_loader").show();
+            $("#user_skills_save").attr("style","pointer-events:none;display:none;");
+            var updatedata = $.param({"user_skills":$scope.edit_user_skills});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/save_user_skills',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {
+                success = result.data.success;
+                if(success == 1)
+                {
+                    skills_data = result.data.skills_data;
+                    skills_data_edit = result.data.skills_data_edit;
+                    $scope.user_skills = skills_data;
+                    // $scope.edit_user_skills = skills_data_edit;
+                }
+                $("#user_skills_save").removeAttr("style");
+                $("#user_skills_loader").hide();
+                $("#skills").modal('hide');
+            });
+        }
+    };
+
+    $("#skills .modal-close").click(function () {
+        /*var edit_user_skills = [];
+        $scope.user_skills.forEach(function(element,catArrIndex) {
+          edit_user_skills[catArrIndex] = {name:element.name};
+        });*/
+        $scope.$apply(function () {
+            $scope.edit_user_skills = $scope.user_skills;
+        });
+    });
+
+    $scope.job_title = [];
+    $scope.loadJobTitle = function ($query) {
+        return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
+            var job_title = response.data;
+            return job_title.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };    
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {
     

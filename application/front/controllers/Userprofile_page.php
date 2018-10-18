@@ -12,6 +12,7 @@ class Userprofile_page extends MY_Controller {
         $this->load->library('S3');
         $this->load->library('form_validation');
 
+        $this->load->model('data_model');
         $this->load->model('user_model');
         $this->load->model('userprofile_model');
         $this->load->model('email_model');
@@ -87,8 +88,13 @@ class Userprofile_page extends MY_Controller {
         } else {
             $detailsData = $this->data['detailsData'] = $this->user_model->getUserProfessionData($userid, $data = "jt.name as Designation,CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) as first_name,CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2))) as last_name,IF(up.field = 0 , up.other_field ,it.industry_name) as Industry,c.city_name as City, CONCAT(CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) ,' ',CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2)))) as fullname , usr.first_name as First name,usr.last_name as Last name,DATE_FORMAT(usr.user_dob, '%D %M %Y') as DOB,'' as interested_fields");
         }
-
-        echo json_encode($detailsData);
+        $user_bio = $this->db->select('user_bio')->get_where('user_info', array('user_id' => $userid))->row('user_bio');
+        $skills_data = $this->userprofile_model->get_user_skills($userid);
+        $ret_arr['detail_data'] = $detailsData;
+        $ret_arr['user_bio'] = $user_bio;
+        $ret_arr['skills_data'] = $skills_data;
+        $ret_arr['skills_data_edit'] = $skills_data;
+        echo json_encode($ret_arr);
     }
 
     public function profiles_data() {
@@ -940,6 +946,59 @@ class Userprofile_page extends MY_Controller {
     public function get_post_desctiprion($post_id,$post_for)
     {
         echo $post_id,$post_for;
+    }
+
+    public function save_user_bio()
+    {
+        $user_bio = $this->input->post('user_bio');
+        $userid = $this->session->userdata('aileenuser');
+        $data = array('user_bio' => $user_bio);
+        $udpate_data = $this->common->update_data($data, 'user_info', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $ret_arr = array("success"=>1,"user_bio"=>$user_bio);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
+    }
+
+    public function save_user_skills()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $job_title = $this->input->post('user_skills');
+        $job_title_id = "";
+        foreach ($job_title as $title) {
+            $designation = $this->data_model->findJobTitle($title['name']);
+            if ($designation['title_id'] != '') {
+                $jobTitleId = $designation['title_id'];
+            } else {
+                $data = array();
+                $data['name'] = $title['name'];
+                $data['created_date'] = date('Y-m-d H:i:s', time());
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $data['status'] = 'draft';
+                $data['slug'] = $this->common->clean($title['name']);
+                $jobTitleId = $this->common->insert_data_getid($data, 'job_title');                
+            }
+            $job_title_id .= $jobTitleId . ',';
+        }
+        $job_title_id = trim($job_title_id, ',');
+        $data = array('user_skills' => $job_title_id);
+        $udpate_data = $this->common->update_data($data, 'user_info', 'user_id', $userid);
+        if($udpate_data)
+        {
+            $skills_data = $this->userprofile_model->get_user_skills($userid);
+            $skills_data_edit = $skills_data;
+            $ret_arr = array("success"=>1,"skills_data"=>$skills_data,"skills_data_edit"=>$skills_data_edit);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
 }
