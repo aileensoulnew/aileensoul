@@ -2630,9 +2630,9 @@ padding: 4px;}
 .dtl-btn .save:hover{background:#f6f6f6; border-bottom-left-radius:20px; border-bottom-right-radius:20px;}
 .width-45{width:45%; float:left; padding-left:15px; padding-right:15px;}
 .width-10{width:10%; float:left; padding-left:15px; padding-right:15px;}
-.dtl-modal select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
-.dtl-modal .span-select{position:relative; width:100%; float:left;} 
-.dtl-modal .span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:10px; right:6px; background-size:100%;}
+.span-select select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
+.span-select{position:relative; width:100%; float:left;} 
+.span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:10px; right:6px; background-size:100%;}
 .dtl-more-add{text-align:center;}
 .dtl-more-add a{color:#5c5c5c; letter-spacing:1px;}
 .dtl-about-box textarea{height:60px;}
@@ -2643,6 +2643,25 @@ padding: 4px;}
 .edit-user-info{position:absolute; right:25px; top:150px;}
 
 /***  end new details page  ***/
+/***  new job registration form  ***/
+.job_reg_page_fprm{width:640px; margin:0 auto;}
+.job_reg_main{border:1px solid #d2d2d2; border-radius:20px;}
+.job_reg_main h3{font-size: 24px; color: #1b8ab9;
+    background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; padding:15px 0; text-align:center; border-bottom:1px solid #d2d2d2;}
+.job-reg-cus-new .form-group input{position: relative; z-index: 9; background: transparent; border-width:0 0 1px 0; border-radius:0; padding-left:0; padding-right:0;}
+.job-reg-cus-new .form-group input:focus{box-shadow:none;}
+.fresher_radio label{display:inline-block;}
+.main_raio{display:inline-block;}
+.fresher_radio label span{margin-top: -6px; display: inline-block; vertical-align: middle;}
+.job-reg-cus-new .form-group select{border-width:0 0 1px 0; border-radius:0; padding-left:0;}
+.job-reg-cus-new .fresher_radio{padding-left:0;}
+
+
+
+/***  end new job registration form  ***/
+
 body.body-loader{height:100vh; overflow:hidden;}
 #main_loader{display: block; height: 100vh; background: #fff; z-index: 9999999999;
 position: fixed;}
