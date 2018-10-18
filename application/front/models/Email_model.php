@@ -440,7 +440,7 @@ class Email_model extends CI_Model {
         $mail->addAddress($to_email);
         $mail->Subject = $subject;
         $mail->isHTML(true);
-        echo $email_html;exit();
+        // echo $email_html;exit();
         $mail->Body = $email_html;
         // Tells PHPMailer to use SMTP authentication
         $mail->SMTPAuth = true;

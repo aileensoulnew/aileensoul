@@ -27,7 +27,7 @@
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 				<td style="text-align:center; padding-bottom:30px;">
-					<p style="font-size:30px; color:#1b8ab9;"><img style="width:30px;margin-right:10px; vertical-align:middle; margin-top:-5px;" src="https://www.aileensoul.com/assets/img/mail/m-logo.png">
+					<p style="font-size:30px; color:#1b8ab9;"><img style="width:30px;margin-right:10px; vertical-align:middle; margin-top:-5px;" src="<?php echo base_url(); ?>assets/img/mail/m-logo.png">
 					<span>Aileensoul</span></p>
 				</td>
 			</tr>
@@ -38,7 +38,7 @@
 					<table width="100%" cellpadding="0" cellspacing="0" >
 						<tr>
 							<td style="">
-								<img style="border-top-left-radius:10px; border-bottom:1px solid #d2d2d2; border-top-right-radius:10px;" src="https://www.aileensoul.com/assets/img/mail/artist.jpg">
+								<img style="border-top-left-radius:10px; border-bottom:1px solid #d2d2d2; border-top-right-radius:10px;" src="<?php echo base_url(); ?>assets/img/mail/artist.jpg">
 							</td>
 						</tr>
 					</table>
@@ -63,7 +63,7 @@
 								<table width="100%" cellpadding="0" cellspacing="0">
 									<tr>
 										<td style="padding-top:30px; vertical-align:top;">
-											<img style="margin-right:20px; vertical-align:middle; margin-top:2px;" src="https://www.aileensoul.com/assets/img/mail/bus-1.png">
+											<img style="margin-right:20px; vertical-align:middle; margin-top:2px;" src="<?php echo base_url(); ?>assets/img/mail/bus-1.png">
 										</td>
 										<td style="padding-top:30px; vertical-align:top;">
 											<p style="font-weight:bold;">Grow Network</p>
@@ -72,7 +72,7 @@
 									</tr>
 									<tr>
 										<td style="padding-top:30px; vertical-align:top;">
-											<img style="margin-right:20px; vertical-align:middle; margin-top:2px;" src="https://www.aileensoul.com/assets/img/mail/bus-2.png">
+											<img style="margin-right:20px; vertical-align:middle; margin-top:2px;" src="<?php echo base_url(); ?>assets/img/mail/bus-2.png">
 										</td>
 										<td style="padding-top:30px; vertical-align:top;">
 											<p style="font-weight:bold;">Post Your Art</p>
@@ -81,7 +81,7 @@
 									</tr>
 									<tr>
 										<td style="padding-top:30px; vertical-align:top;">
-											<img style="margin-right:20px; vertical-align:middle; margin-top:2px;" src="https://www.aileensoul.com/assets/img/mail/art-3.png">
+											<img style="margin-right:20px; vertical-align:middle; margin-top:2px;" src="<?php echo base_url(); ?>assets/img/mail/art-3.png">
 										</td>
 										<td style="padding-top:30px; vertical-align:top;">
 											<p style="font-weight:bold;">Edit Profile</p>
@@ -93,28 +93,28 @@
 						</tr>
 						<tr> 
 							<td style="padding-top:30px; text-align:center;">
-								<a href="#" class="btn">Get Started Now</a>
+								<a href="<?php echo base_url(); ?>artist-profile?utm_source=email&utm_medium=email&utm_campaign=wc_artist_started_button" class="btn">Get Started Now</a>
 							</td>
 						</tr>
 						<tr>
 							<td style="padding-top:30px; padding-bottom:30px; border-bottom:1px solid #d2d2d2; line-height:1.5;">
-								<p>For any further queries or suggestions, you can send your valuable feedback <a href="#" style="color:#1b8ab9; text-decoration:none;">here</a>.</p>
+								<p>For any further queries or suggestions, you can send your valuable feedback <a href="<?php echo base_url(); ?>feedback?utm_source=email&utm_medium=email&utm_campaign=wc_artist_feedbackline" style="color:#1b8ab9; text-decoration:none;">here</a>.</p>
 								
 								<p style="padding-top:20px;">Team Aileensoul</p>
 							</td>
 						</tr>
 						<tr>
 							<td style="padding-top:25px; text-align:center; padding-bottom:15px;">
-								<a href="#" style="margin:0 15px;"><img src="https://www.aileensoul.com/assets/img/mail/m-fb.png"></a>
-								<a href="#" style="margin:0 15px;"><img src="https://www.aileensoul.com/assets/img/mail/m-twt.png"></a>
-								<a href="#" style="margin:0 15px;"><img src="https://www.aileensoul.com/assets/img/mail/m-in.png"></a>
+								<a href="https://www.facebook.com/aileensouldotcom?utm_source=email&utm_medium=email&utm_campaign=wc_artist_fb" style="margin:0 15px;"><img src="<?php echo base_url(); ?>assets/img/mail/m-fb.png"></a>
+								<a href="https://twitter.com/aileen_soul?utm_source=email&utm_medium=email&utm_campaign=wc_artist_twitter" style="margin:0 15px;"><img src="<?php echo base_url(); ?>assets/img/mail/m-twt.png"></a>
+								<a href="https://www.linkedin.com/company/aileensoul/?utm_source=email&utm_medium=email&utm_campaign=wc_artist_linkedin" style="margin:0 15px;"><img src="<?php echo base_url(); ?>assets/img/mail/m-in.png"></a>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align:center; padding-bottom:15px; font-size:12px;">
-								<a href="#" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Terms & Conditions</a>
-								<a href="#" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Privacy Policy</a>
-								<a href="#" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Feedback</a>
+								<a href="<?php echo base_url(); ?>terms-and-condition?utm_source=email&utm_medium=email&utm_campaign=wc_artist_tc" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Terms & Conditions</a>
+								<a href="<?php echo base_url(); ?>privacy-policy?utm_source=email&utm_medium=email&utm_campaign=wc_artist_privacy" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Privacy Policy</a>
+								<a href="<?php echo base_url(); ?>feedback?utm_source=email&utm_medium=email&utm_campaign=wc_artist_feedback" style="margin:0 15px; color:#5c5c5c; text-decoration:none;">Feedback</a>
 							</td>
 						</tr>
 						<tr>
@@ -124,7 +124,7 @@
 						</tr>
 						<tr>
 							<td style="text-align:center; padding-bottom:15px; font-size:12px;">
-								<p>This email was sent with the intention to give you timely updates. If you don't want to receive any further insiders information, you can <a href="#" style="color:#5c5c5c;"> unsubscribe.</p>
+								<p>This email was sent with the intention to give you timely updates. If you don't want to receive any further insiders information, you can <a href="<?php echo $unsubscribe_link; ?>?utm_source=email&utm_medium=email&utm_campaign=wc_artist_unsubscribe" style="color:#5c5c5c;"> unsubscribe.</p>
 							</td>
 						</tr>
 						
