@@ -4032,7 +4032,7 @@ class Job extends MY_Controller {
                     $cityname = '';
                 }
                 $return_html .= '<div class="post-img">
-                                            <a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
@@ -4069,10 +4069,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -4117,7 +4117,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -4227,7 +4227,7 @@ class Job extends MY_Controller {
                 }
 
                 $return_html .= '<div class="post-img">
-                                            <a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
@@ -4264,10 +4264,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -4310,7 +4310,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 

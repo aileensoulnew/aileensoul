@@ -2217,7 +2217,7 @@ class Recruiter extends MY_Controller {
 
 						$rec_post .= '<div class="post-img">
 						
-						<a href="' . base_url() . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						<a href="' . base_url() . substr($text,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						if ($cache_time_1) {
 
 							if (IMAGEPATHFROM == 'upload') {
@@ -2265,13 +2265,13 @@ class Recruiter extends MY_Controller {
 						$cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
 						$countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
 						$rec_post .= '<div class="job-top-detail">';
-						$rec_post .= '<h5><a href="' . base_url() . $text. '-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<h5><a href="' . base_url() . substr($text,200). '-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= $post_name;
 						$rec_post .= '</a></h5>';
-						$rec_post .= '<p><a href = "' . base_url() . $text .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<p><a href = "' . base_url() . substr($text,200) .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= $cache_time1;
 						$rec_post .= '</a></p>';
-						$rec_post .= '<p><a href="' . base_url() . $text .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<p><a href="' . base_url() . substr($text,200) .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= ucwords($cache_time2) . " " . ucfirst($cache_time3);
 						$rec_post .= '</a></p>
 						</div>
@@ -2311,7 +2311,7 @@ class Recruiter extends MY_Controller {
 						$rec_post .= $rest;
 
 						if (strlen($post['post_description']) > 150) {
-							$rec_post .= '.....<a href="' . base_url() . '' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+							$rec_post .= '.....<a href="' . base_url() . '' . substr($text, 0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
 						}
 						$rec_post .= '</p>
 
@@ -2422,7 +2422,6 @@ class Recruiter extends MY_Controller {
 								}
 							}
 						} else {
-
 							$rec_post .= '<img src="' . base_url('assets/images/commen-img.png') . '" alt="commonimage">';
 						}
 						$rec_post .= '</a>
@@ -2447,7 +2446,7 @@ class Recruiter extends MY_Controller {
 						$rec_post .= '<h5><a href="' . base_url() . '' . substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= $post_name;
 						$rec_post .= '</a></h5>';
-						$rec_post .= '<p><a href = "' . base_url() . '' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<p><a href = "' . base_url() . '' . substr($text, 0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= $cache_time1;
 						$rec_post .= '</a></p>';
 						$rec_post .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -2490,7 +2489,7 @@ class Recruiter extends MY_Controller {
 						$rec_post .= $rest;
 
 						if (strlen($post['post_description']) > 150) {
-							$rec_post .= '.....<a href="' . base_url() . '' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '" target="blank();">Read more</a>';
+							$rec_post .= '.....<a href="' . base_url() . '' .substr($text, 0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '" target="blank();">Read more</a>';
 						}
 						$rec_post .= '</p>
 

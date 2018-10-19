@@ -105,7 +105,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                     <?php 
                                                     $url = strtolower($this->common->clean($_searchJob['string_post_name']));
                                                     $slug_city = strtolower($this->common->clean($_searchJob['slug_city'])); ?>
-                                                    <a href="<?php echo base_url().$url.'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
+                                                    <a href="<?php echo base_url().substr($url,0,200).'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
                                                         <?php if($_searchJob['comp_logo'] != ""){
                                                             ?>
                                                         <img src="<?php echo REC_PROFILE_THUMB_UPLOAD_URL.$_searchJob['comp_logo'] ?>" onError="this.onerror=null;this.src='<?php echo base_url().'/assets/n-images/commen-img.png'; ?>';">
@@ -119,17 +119,17 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                 </div>
                                                 <div class="job-top-detail">
                                                     <h5>
-                                                        <a href="<?php echo base_url().$url.'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
+                                                        <a href="<?php echo base_url().substr($url,0,200).'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
                                                             <?php echo($_searchJob['string_post_name'] != $_searchJob['post_name'] ? $_searchJob['string_post_name']:$_searchJob['string_post_name']); ?>
                                                         </a>
                                                        
                                                     <p>
-                                                        <a href="<?php echo base_url().$url.'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
+                                                        <a href="<?php echo base_url().substr($url,0,200).'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
                                                             <?php echo $_searchJob['re_comp_name']; ?>
                                                         </a>
                                                     </p>
                                                     <p>
-                                                        <a href="<?php echo base_url().$url.'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
+                                                        <a href="<?php echo base_url().substr($url,0,200).'-job-vacancy-in-'.$slug_city.'-'.$_searchJob['user_id'].'-'.$_searchJob['post_id']; ?>">
                                                             <?php echo $_searchJob['fullname']; ?>
                                                         </a>  
                                                     </p>
