@@ -2607,15 +2607,17 @@ padding: 4px;}
 .fs18{font-size:18px;}
 .detail-left{width:80%; padding-left:15px; padding-right:15px; float:left;}
 .detail-right{width:20%; padding-left:15px; padding-right:15px; float:left;}
-.dtl-box{border:1px solid #d2d2d2; width:100%; border-radius:20px; margin-bottom:30px; float:left;}
-.dtl-title{padding:15px 20px; border-bottom:1px solid #d2d2d2; font-size:22px; color:#1b8ab9;}
-.dtl-title .cus-width{width:40px;}
-.dtl-title span{margin-left:15px; vertical-align:middle;}
-.dtl-title a{margin-top:7px;}
-.dtl-dis{padding:15px 20px; width:100%; float:left;}
-.no-info{text-align:center;}
-.no-info img{width:100px; margin:0 auto;}
-.no-info span{width:100%; float:left; padding:10px 25px;}
+.dtl-box{width:100%; border-radius:20px; margin-bottom:30px; float:left;     -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);}
+.dtl-title{padding:15px 20px; font-size:20px;}
+.dtl-title .cus-width{width:25px;}
+.dtl-title span{vertical-align:middle; margin-left:10px;}
+.dtl-title a{}
+.dtl-dis{padding:10px 20px 30px; width:100%; float:left;}
+.no-info{text-align:left;}
+.no-info img{width:50px; float:left; display:none;}
+.no-info span{width:100%; float:left; color:#7b7b7b;}
+.detail-right .no-info span{width:73%; padding:5px 0px 0 10px;}
 .dtl-modal .modal-content{border-radius:20px;}
 .dtl-modal .modal-close{font-size:30px; top:15px; right:15px;}
 .dtl-modal .dtl-title{background:#f6f6f6; border-bottom:0; border-top-left-radius:20px; border-top-right-radius:20px; color:#5c5c5c;}
@@ -2647,9 +2649,36 @@ padding: 4px;}
 .dtl-dis ul li{list-style-type:none; padding-bottom:5px;}
 .about-dtl-box{padding:15px 0; border-bottom:1px solid #d2d2d2;}
 .more-less {float: right; color: #212121;}
+.dis-left{width:60px; float:left;}
+.dis-middle{width:330px; float:left; padding-left:15px;}
+.dis-right{width:50px; float:left;}
+.dis-left-img{width:60px; height:60px; border:1px solid #d2d2d2; text-align:center;}
+.dis-left-img span{font-size:28px; color:#1b8ab9; padding:18px 10px; display:inline-block;}
+.dis-middle h4{margin-bottom:5px;}
 .dtl-dis.dis-accor{padding:0;}
-.dtl-dis.dis-accor .panel-group .panel-heading + .panel-collapse > .panel-body{border-top:0px;}
-.dtl-dis.dis-accor .panel{border-width:0px 0px 1px 0; border-bottom:1px solid #d2d2d2; border-radius:0;}
+.dtl-dis.dis-accor .panel-heading{min-height:88px; padding:15px 20px; background:#fff; border-radius:0;}
+.dis-accor .panel.panel-default{border-radius:0; border-width:1px 0 0 0; box-shadow:inherit; -webkit-box-shadow:inherit; width:100%; float:left;}
+.dis-accor .panel-body{padding:20px 0;}
+.dis-accor .panel-collapse{padding:0 20px;}
+.panel-body .dis-list{border-bottom:0px; padding-bottom:0;}
+.panel-body .dis-list li{padding-bottom:10px;}
+.panel-body .dis-list li:last-child{padding-bottom:0px;}
+.panel-body .dis-list li span{display: block; font-size: 18px; padding-bottom: 5px;}
+.panel-body .dis-list li a.dis-more{color:#5c5c5c;}
+.panel-body .dis-list li .screen-shot{width:130px; height:130px; float: left; position: relative; overflow: hidden;}
+.panel-body .dis-list li .screen-shot img{position: absolute; left: 50%; top: 50%;
+width: auto; height: 100%;
+-webkit-transform: translate(-50%,-50%);
+-ms-transform: translate(-50%,-50%);
+transform: translate(-50%,-50%);
+max-width: inherit;}
+.dis-accor .panel-group{width:100%; float:left;}
+.edu-info .dtl-dis.dis-accor .panel-heading{width:100%; float:left;}
+.dtl-dis ul.skill-list{width:100%; float:left; padding-bottom:0; border-bottom:0;}
+.dtl-dis ul.skill-list li{border:1px solid #d2d2d2; padding:3px 15px; border-radius:20px; margin-right:5px; margin-bottom:7px; float:left; font-size:14px; background:#f6f6f6;}
+.dtl-dis ul.social-link-list{width:100%; float:left; padding-bottom:0; border-bottom:0;}
+.dtl-dis ul.social-link-list li{float:left; margin-right:6px;}
+.dtl-dis ul.social-link-list li img{width:25px;}
 
 
 /***  end new details page  ***/

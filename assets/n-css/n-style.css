@@ -486,7 +486,7 @@ label.cameraButton input[accept*="camera"] {
 .upload-profile a{margin-bottom: 20px; color: #fff; display: inline-block;}
 .upload-profile img {display: block; margin: 0 auto 0px; width:40px !important; height:auto !important; border-radius:0px !important;}
 .profile-img:hover .upload-profile{display:block; color:#fff;}
-.user-photo-name{text-align:center; padding-bottom: 10px;}
+.user-photo-name{text-align:center; padding-bottom: 10px; position:relative;}
 .user-photo-name .profile-img img{width:168px; height:168px; border-radius:100%;}
 .user-photo-name h3{margin:5px 0 0; letter-spacing: 1px;}
 .user-photo-name h3 a{color:#5c5c5c;}
@@ -2604,23 +2604,27 @@ padding: 4px;}
 
 /***  end new article page css  ***/
 /***  new details page  ***/
+.fs18{font-size:18px;}
 .detail-left{width:80%; padding-left:15px; padding-right:15px; float:left;}
 .detail-right{width:20%; padding-left:15px; padding-right:15px; float:left;}
-.dtl-box{border:1px solid #d2d2d2; width:100%; border-radius:20px; margin-bottom:30px; float:left;}
-.dtl-title{padding:15px 20px; border-bottom:1px solid #d2d2d2; font-size:22px; color:#1b8ab9;}
-.dtl-title .cus-width{width:40px;}
-.dtl-title span{margin-left:15px; vertical-align:middle;}
-.dtl-title a{margin-top:7px;}
-.dtl-dis{padding:15px 20px; width:100%; float:left;}
-.no-info{text-align:center;}
-.no-info img{width:100px; margin:0 auto;}
-.no-info span{width:100%; float:left; padding:10px 25px;}
+.dtl-box{width:100%; border-radius:20px; margin-bottom:30px; float:left;     -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);}
+.dtl-title{padding:15px 20px; font-size:20px;}
+.dtl-title .cus-width{width:25px;}
+.dtl-title span{vertical-align:middle; margin-left:15px;}
+.dtl-title a{}
+.dtl-dis{padding:10px 20px 30px; width:100%; float:left;}
+.no-info{text-align:left;}
+.no-info img{width:50px; float:left; display:none;}
+.no-info span{width:100%; float:left; color:#7b7b7b;}
+.detail-right .no-info span{width:73%; padding:5px 0px 0 10px;}
 .dtl-modal .modal-content{border-radius:20px;}
 .dtl-modal .modal-close{font-size:30px; top:15px; right:15px;}
 .dtl-modal .dtl-title{background:#f6f6f6; border-bottom:0; border-top-left-radius:20px; border-top-right-radius:20px; color:#5c5c5c;}
 .dtl-modal .dtl-title span{margin-left:0;}
 .dtl-dis textarea{height:100px;}
 #profile-overview .dtl-dis textarea{height:200px;}
+.dtl-dis h4{margin-top:0;}
 .dtl-btn{width:100%; float:left; text-align:center; border-top:1px solid #d2d2d2;}
 .dtl-btn .save{font-size:18px; font-weight:bold; letter-spacing:1px; width:100%; padding:16px 15px 15px; display:block;}
 .dtl-btn .save span{-webkit-text-fill-color: transparent; color: #1b8ab9;
@@ -2630,9 +2634,9 @@ padding: 4px;}
 .dtl-btn .save:hover{background:#f6f6f6; border-bottom-left-radius:20px; border-bottom-right-radius:20px;}
 .width-45{width:45%; float:left; padding-left:15px; padding-right:15px;}
 .width-10{width:10%; float:left; padding-left:15px; padding-right:15px;}
-.dtl-modal select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
-.dtl-modal .span-select{position:relative; width:100%; float:left;} 
-.dtl-modal .span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:10px; right:6px; background-size:100%;}
+.span-select select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
+.span-select{position:relative; width:100%; float:left;} 
+.span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:10px; right:6px; background-size:100%;}
 .dtl-more-add{text-align:center;}
 .dtl-more-add a{color:#5c5c5c; letter-spacing:1px;}
 .dtl-about-box textarea{height:60px;}
@@ -2640,8 +2644,36 @@ padding: 4px;}
 .dlt-img{margin-top:32px;}
 .dtl-modal select{padding-left:12px;}
 .form-group .upload-file input{border:0; padding:10px 0 0; height:auto;}
+.edit-user-info{position:absolute; right:25px; top:150px;}
+.dtl-dis ul{padding-left:0; margin-bottom:0; border-bottom:1px solid #d2d2d2; padding-bottom:5px;}
+.dtl-dis ul li{list-style-type:none; padding-bottom:5px;}
+.about-dtl-box{padding:15px 0; border-bottom:1px solid #d2d2d2;}
+.more-less {float: right; color: #212121;}
+.dtl-dis.dis-accor{padding:0;}
+.dtl-dis.dis-accor .panel-group .panel-heading + .panel-collapse > .panel-body{border-top:0px;}
+.dtl-dis.dis-accor .panel{border-width:0px 0px 1px 0; border-bottom:1px solid #d2d2d2; border-radius:0;}
+
 
 /***  end new details page  ***/
+/***  new job registration form  ***/
+.job_reg_page_fprm{width:640px; margin:0 auto;}
+.job_reg_main{border:1px solid #d2d2d2; border-radius:20px;}
+.job_reg_main h3{font-size: 24px; color: #1b8ab9;
+    background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; padding:15px 0; text-align:center; border-bottom:1px solid #d2d2d2;}
+.job-reg-cus-new .form-group input{position: relative; z-index: 9; background: transparent; border-width:0 0 1px 0; border-radius:0; padding-left:0; padding-right:0;}
+.job-reg-cus-new .form-group input:focus{box-shadow:none;}
+.fresher_radio label{display:inline-block;}
+.main_raio{display:inline-block;}
+.fresher_radio label span{margin-top: -6px; display: inline-block; vertical-align: middle;}
+.job-reg-cus-new .form-group select{border-width:0 0 1px 0; border-radius:0; padding-left:0;}
+.job-reg-cus-new .fresher_radio{padding-left:0;}
+
+
+
+/***  end new job registration form  ***/
+
 body.body-loader{height:100vh; overflow:hidden;}
 #main_loader{display: block; height: 100vh; background: #fff; z-index: 9999999999;
 position: fixed;}
