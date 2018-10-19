@@ -4032,7 +4032,7 @@ class Job extends MY_Controller {
                     $cityname = '';
                 }
                 $return_html .= '<div class="post-img">
-                                            <a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
@@ -4069,10 +4069,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -4117,7 +4117,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -4227,7 +4227,7 @@ class Job extends MY_Controller {
                 }
 
                 $return_html .= '<div class="post-img">
-                                            <a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                                            <a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 if ($cache_time_1) {
                     if (IMAGEPATHFROM == 'upload') {
                         if (!file_exists($this->config->item('rec_profile_thumb_upload_path') . $cache_time)) {
@@ -4264,10 +4264,10 @@ class Job extends MY_Controller {
                         ))->row()->rec_lastname;
 
                 $return_html .= '<div class="job-top-detail">';
-                $return_html .= '<h5><a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<h5><a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $post_name;
                 $return_html .= '</a></h5>';
-                $return_html .= '<p><a href = "' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+                $return_html .= '<p><a href = "' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
                 $return_html .= $cache_time1;
                 $return_html .= '</a></p>';
                 $return_html .= '<p><a href="' . base_url('recruiter/profile/' . $post['user_id']) . '">';
@@ -4310,7 +4310,7 @@ class Job extends MY_Controller {
                 $return_html .= $rest;
 
                 if (strlen($post['post_description']) > 150) {
-                    $return_html .= '.....<a href="' . base_url() .  $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
+                    $return_html .= '.....<a href="' . base_url() .  substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">Read more</a>';
                 }
                 $return_html .= '</p>
 
@@ -6051,7 +6051,7 @@ class Job extends MY_Controller {
         $this->data['exp_fil'] = $exp_fil = (isset($_POST['exp_fil']) && !empty($_POST['exp_fil']) ? $_POST['exp_fil'] : "");
         
         $keyword = trim($search);
-        $search_location = trim($ser_location);
+        $search_location = trim($ser_location);        
         $job_skills = $this->job_model->is_job_skills($keyword);
         $job_category = $this->job_model->is_job_category($keyword);
         $job_designation = $this->job_model->is_job_designation($keyword);
@@ -6059,17 +6059,32 @@ class Job extends MY_Controller {
         if(isset($job_skills) && !empty($job_skills)){            
             $this->data['schema_url_item3'] = base_url().'jobs-by-skills';
             $this->data['schema_name_item3'] = "Jobs by Skills";
-            $this->data['schema_name_item4'] = ucwords($keyser)." Jobs";
+            if($serach_type == 4){
+                $this->data['schema_name_item4'] = $job_skills['skill']." Jobs in ".$search_location;
+            }
+            else{
+                $this->data['schema_name_item4'] = $job_skills['skill']." Jobs";
+            }
         }
         elseif(isset($job_category) && !empty($job_category)){            
             $this->data['schema_url_item3'] = base_url().'jobs-by-categories';
             $this->data['schema_name_item3'] = "Jobs by Category";
-            $this->data['schema_name_item4'] = ucwords($keyser)." Jobs";
+            if($serach_type == 4){
+                $this->data['schema_name_item4'] = $job_category['industry_name']." Jobs in ".$search_location;
+            }
+            else{
+                $this->data['schema_name_item4'] = $job_category['industry_name']." Jobs";
+            }
         }
         elseif(isset($job_designation) && !empty($job_designation)){            
             $this->data['schema_url_item3'] = base_url().'jobs-by-designations';
             $this->data['schema_name_item3'] = "Jobs by Designation";
-            $this->data['schema_name_item4'] = ucwords($keyser)." Jobs";
+            if($serach_type == 4){
+                $this->data['schema_name_item4'] = $job_designation['job_title']." Jobs in ".$search_location;
+            }
+            else{
+                $this->data['schema_name_item4'] = $job_designation['job_title']." Jobs";
+            }
         }
         elseif(isset($job_city) && !empty($job_city)){            
             $this->data['schema_url_item3'] = base_url().'jobs-by-location';

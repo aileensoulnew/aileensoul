@@ -146,7 +146,7 @@
                                 <div class="all-job-box freelance-recommended-post">
                                     <div class="all-job-top">
                                         <div class="job-top-detail">
-                                            <h5><a href="<?php echo base_url().'freelance-jobs/'.$_searchFA['industry_name'].'/'.$_searchFA['post_slug'].'-'.$_searchFA['user_id'].'-'.$_searchFA['post_id']; ?>">
+                                            <h5><a href="<?php echo base_url().'freelance-jobs/'.$_searchFA['industry_name'].'/'.substr($_searchFA['post_slug'], 0,200).'-'.$_searchFA['user_id'].'-'.$_searchFA['post_id']; ?>">
                                                 <?php echo $_searchFA['post_name'];
                                                 if($_searchFA['day_remain'] > 0){
                                                 ?>
@@ -156,7 +156,7 @@
                                                 } ?>
                                                 </a>
                                             </h5>
-                                            <p><a href="<?php echo base_url().'freelance-jobs/'.$_searchFA['industry_name'].'/'.$_searchFA['post_slug'].'-'.$_searchFA['user_id'].'-'.$_searchFA['post_id']; ?>">
+                                            <p><a href="<?php echo base_url().'freelance-jobs/'.$_searchFA['industry_name'].'/'.substr($_searchFA['post_slug'], 0,200).'-'.$_searchFA['user_id'].'-'.$_searchFA['post_id']; ?>">
                                                 <?php echo ucwords($_searchFA['fullname']); ?></a>
                                             </p>
                                             <?php 

@@ -459,7 +459,7 @@ class Business_model extends CI_Model {
 
     // Get city id form slug
     function getlocationdatafromslug($location = ''){
-        $sql = "SELECT group_concat(city_id) as city_id FROM `ailee_cities` WHERE `slug` = '". $location ."'";
+        $sql = "SELECT group_concat(city_id) as city_id,city_name FROM `ailee_cities` WHERE `slug` = '". $location ."'";
         $query = $this->db->query($sql);
         $result_array = $query->row_array();
         return $result_array;

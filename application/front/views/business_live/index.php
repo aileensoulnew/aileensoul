@@ -289,7 +289,7 @@
                     "item":
                     {
                         "@id": "<?php echo current_url(); ?>",
-                        "name": "Jobs"
+                        "name": "Business"
                     }
                 }
             ]

@@ -1709,7 +1709,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             data: 'u=' + user_slug,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            details_data = success.data;
+            details_data = success.data.detail_data;
             $scope.details_data = details_data;            
             $scope.$parent.title = "About "+details_data.fullname+" | Aileensoul";
             if(details_data.Degree != "")
@@ -3513,8 +3513,22 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
-            details_data = success.data;
+            details_data = success.data.detail_data;
+            user_bio = success.data.user_bio;
+            skills_data = success.data.skills_data;
+            skills_data_edit = success.data.skills_data_edit;
             $scope.details_data = details_data;
+            $scope.user_bio = user_bio;
+            $scope.user_skills = skills_data;
+            $scope.edit_user_skills = skills_data_edit;
+
+            dob = $scope.details_data.user_dob.split('-');
+            $scope.dob_month = dob[1];
+            dob_month = dob[1];            
+            dob_day = dob[2];            
+            dob_year = dob[0];
+            $scope.dob_fnc(dob_day,dob_month,dob_year);
+
             load_add();
         });
         $('footer').show();
@@ -3523,9 +3537,148 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         location.href = path;
     }
     $scope.makeActive = function (item,slug) {
-
         $scope.active = $scope.active == item ? '' : item;
     }
+
+    $scope.save_user_bio = function(){
+        var user_bio = $("#user_bio").val();        
+        if(user_bio != "" && $scope.user_bio != user_bio)
+        {
+            $("#user_bio_loader").show();
+            $("#user_bio_save").attr("style","pointer-events:none;display:none;");
+            var updatedata = $.param({'user_bio':user_bio});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/save_user_bio',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                if(success == 1)
+                {                    
+                    user_bio = result.data.user_bio;
+                    $scope.user_bio = user_bio;                
+                }
+                $("#user_bio_save").removeAttr("style");
+                $("#user_bio_loader").hide();
+                $("#profile-overview").modal('hide');
+            });
+        }
+    };
+
+    $("#profile-overview").on("hide.bs.modal", function () {
+        $("#user_bio").val($scope.user_bio);
+    });
+    var close_skill = 0;
+    $scope.save_user_skills = function(){        
+        if($scope.edit_user_skills != "")
+        {
+            $("#user_skills_loader").show();
+            $("#user_skills_save").attr("style","pointer-events:none;display:none;");
+            var updatedata = $.param({"user_skills":$scope.edit_user_skills});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/save_user_skills',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {
+                success = result.data.success;
+                if(success == 1)
+                {
+                    skills_data = result.data.skills_data;
+                    skills_data_edit = result.data.skills_data_edit;
+                    $scope.user_skills = skills_data;
+                    $scope.edit_user_skills = skills_data_edit;
+                }
+                close_skill = 1;
+                $("#user_skills_save").removeAttr("style");
+                $("#user_skills_loader").hide();
+                // $("#skills").modal('hide');
+                $("#skills .modal-close").click();
+            });
+        }
+    };
+
+    $("#skills").on("hide.bs.modal", function () {
+        if(close_skill == 0)
+        {            
+            var edit_user_skills = [];
+            $scope.user_skills.forEach(function(element,catArrIndex) {
+              edit_user_skills[catArrIndex] = {name:element.name};
+            });
+            $scope.$apply(function () {
+                $scope.edit_user_skills = edit_user_skills;//$scope.user_skills;
+            });
+        }
+        else
+        {
+            close_skill = 0;
+        }
+    });
+
+    $scope.job_title = [];
+    $scope.loadSkills = function ($query) {
+        return $http.get(base_url + 'userprofile_page/get_skills', {cache: true}).then(function (response) {
+            var job_title = response.data;
+            return job_title.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.dob_fnc = function(dob_day,dob_month,dob_year){
+        var kcyear = document.getElementsByName("year")[0],
+        kcmonth = document.getElementsByName("month")[0],
+        kcday = document.getElementsByName("day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        for (var i = n; i >= 1950; i--) {
+            var opt = new Option();
+            opt.value = opt.text = i;
+            if(dob_year == opt.value)
+            {
+                opt.selected = true;
+            }
+            kcyear.add(opt);
+        }
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;            
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            for (var i = 1; i <= mlength; i++) {
+                var opt = new Option();
+                opt.value = opt.text = i;
+                if (i == d) opt.selected = true;
+                kcday.add(opt);
+            }
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {
     
@@ -4616,3 +4769,4 @@ function setCursotToEnd(el)
         textRange.select();
     }
 }
+

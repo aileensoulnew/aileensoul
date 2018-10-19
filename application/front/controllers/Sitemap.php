@@ -718,7 +718,7 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($jobData as $key => $value) {
-            $url = $this->create_slug($value['post_name'])."-job-vacancy-in-".$this->create_slug($value['city_name']).'-'.$value['post_user_id'].'-'.$value['post_id'];
+            $url = $this->create_slug(substr($value['post_name'], 0,200))."-job-vacancy-in-".$this->create_slug($value['city_name']).'-'.$value['post_user_id'].'-'.$value['post_id'];
             $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {
@@ -1184,7 +1184,7 @@ class Sitemap extends CI_Controller {
         $sitemap_counter = 1;
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
         foreach ($freeData as $key => $value) {
-            $url = 'freelance-jobs/'.urlencode($value['category_name']).'/'.$this->create_slug($value['post_slug']).'-'.$value['post_user_id'].'-'.$value['post_id'];
+            $url = 'freelance-jobs/'.urlencode($value['category_name']).'/'.$this->create_slug(substr($value['post_slug'],0,200)).'-'.$value['post_user_id'].'-'.$value['post_id'];
             $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
             if($sitemap_counter == SITEMAP_LIMIT)
             {

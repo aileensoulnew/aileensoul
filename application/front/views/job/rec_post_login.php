@@ -389,6 +389,9 @@
                                                     <span> 
                                                         <?php
                                                         $industry_txt = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
+                                                        
+                                                        $industry_txt_schema = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type'],"is_other"=>"0"))->row();
+
                                                         echo $industry_txt;
                                                         ?>
                                                     </span>
@@ -1317,16 +1320,8 @@
         }
         </script>
         <?php
-        if($cityname_txt != "")
+        if(!empty($industry_txt_schema))
         {
-            $location_txt = $cityname_txt;
-        }
-        elseif ($statename_txt != "") {
-            $location_txt = $statename_txt;
-        }
-        else {
-            $location_txt = $countryname_txt;
-        }
         ?>
         <script type="application/ld+json">
         {
@@ -1357,8 +1352,8 @@
                 "position": 3,
                     "item":
                     {
-                    "@id": "<?php echo base_url(); ?>jobs",
-                    "name": "All Jobs"
+                    "@id": "<?php echo base_url(); ?>jobs-by-categories",
+                    "name": "Jobs by Categories"
                     }
                 },
                 {
@@ -1366,8 +1361,8 @@
                 "position": 4,
                     "item":
                     {
-                    "@id": "<?php echo base_url().$this->common->create_slug($industry_txt."-jobs");?>",
-                    "name": "<?php echo $industry_txt." Jobs"; ?>"
+                    "@id": "<?php echo base_url().$this->common->create_slug($industry_txt_schema->industry_slug."-jobs");?>",
+                    "name": "<?php echo $industry_txt_schema->industry_name." Jobs"; ?>"
                     }
                 },
                 {
@@ -1376,13 +1371,14 @@
                     "item":
                     {
                     "@id": "<?php echo current_url(); ?>",
-                    "name": "<?php echo $job_title_txt; ?>"
+                    "name": "<?php echo $job_title_txt; ?> Job"
                     }
                 }
             ]
         }
         </script>
         <?php
+        }
         } ?>
     </body>
 </html>

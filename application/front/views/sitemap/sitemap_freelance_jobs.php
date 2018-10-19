@@ -104,7 +104,7 @@ header('Cache-Control: public, max-age=30');
 									$string_post_name = $this->common->clean($_freelancer_list['string_post_name']);
 									$city_name = $this->common->clean($_freelancer_list['city_name']); ?>
 								<li>
-									<a href="<?php echo base_url().'freelance-jobs/'.$_freelancer_list['category_name'].'/'.$_freelancer_list['post_slug'].'-'.$_freelancer_list['post_user_id'].'-'.$_freelancer_list['post_id']; ?>" target="_self">
+									<a href="<?php echo base_url().'freelance-jobs/'.$_freelancer_list['category_name'].'/'.substr($_freelancer_list['post_slug'], 0,200).'-'.$_freelancer_list['post_user_id'].'-'.$_freelancer_list['post_id']; ?>" target="_self">
 										<?php echo ucwords($_freelancer_list['post_name'])." (".ucwords($_freelancer_list['category_name']).")";?>
 									</a>
 								</li>

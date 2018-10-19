@@ -1271,10 +1271,10 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 
 
 			$return_html .= '<div class="job-top-detail">';
-			$return_html .= '<h5><a title="' . $post['post_name'] . '" href="' . base_url('freelance-jobs/'.$category_name.'/'. $text . '-' . $post['user_id'] . '-' . $post['post_id']) . ' ">';
+			$return_html .= '<h5><a title="' . $post['post_name'] . '" href="' . base_url('freelance-jobs/'.$category_name.'/'. substr($text,0,200) . '-' . $post['user_id'] . '-' . $post['post_id']) . ' ">';
 			$return_html .= $post['post_name'];
 			$return_html .= '</a></h5>';
-			$return_html .= '<p><a title="' . ucwords($firstname) . " " . ucwords($lastname) . '" href="' . base_url('freelance-jobs/'.$category_name.'/'. $text . '-' . $post['user_id'] . '-' . $post['post_id']) . '">';
+			$return_html .= '<p><a title="' . ucwords($firstname) . " " . ucwords($lastname) . '" href="' . base_url('freelance-jobs/'.$category_name.'/'. substr($text,0,200) . '-' . $post['user_id'] . '-' . $post['post_id']) . '">';
 			$return_html .= ucwords($firstname) . " " . ucwords($lastname);
 			$return_html .= '</a></p>
 			</div>
@@ -1347,7 +1347,7 @@ public function ajax_freelancer_hire_post($id = "", $retur = "") {
 			$return_html .= $rest;
 
 			if (strlen($post['post_description']) > 150) {
-				$return_html .= '.....<a title="Read more" href="' . base_url('freelance-jobs/'.$category_name.'/'. $text . '-' . $post['user_id'] . '-' . $post['post_id']) . ' ">Read more</a>';
+				$return_html .= '.....<a title="Read more" href="' . base_url('freelance-jobs/'.$category_name.'/'. substr($text, 0,200) . '-' . $post['user_id'] . '-' . $post['post_id']) . ' ">Read more</a>';
 			}
 			$return_html .= '</p>
 

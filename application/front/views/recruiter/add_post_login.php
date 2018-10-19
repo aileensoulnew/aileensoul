@@ -246,7 +246,7 @@
                                                     <?php echo form_error('position'); ?>        
                                                 </fieldset>
                                                 <fieldset class="form-group fw">
-                                                    <label class="control-label">Last Date For Apply:<span style="color:red">*</span></label>
+                                                    <label class="control-label">Mention Job Expire Date:<span style="color:red">*</span></label>
 
                                                     <input type="hidden" id="example2" tabindex="12">
 

@@ -104,7 +104,7 @@ header('Cache-Control: public, max-age=30');
 									$string_post_name = $this->common->clean($_jobs_list['string_post_name']);
 									$city_name = $this->common->clean($_jobs_list['city_name']); ?>
 								<li>
-									<a href="<?php echo base_url().strtolower($string_post_name).'-job-vacancy-in-'.strtolower($city_name).'-'.$_jobs_list['post_user_id'].'-'.$_jobs_list['post_id']; ?>" target="_self">
+									<a href="<?php echo base_url().substr(strtolower($string_post_name),0,200).'-job-vacancy-in-'.strtolower($city_name).'-'.$_jobs_list['post_user_id'].'-'.$_jobs_list['post_id']; ?>" target="_self">
 										<?php echo ucwords($_jobs_list['post_name'])." (".ucwords($_jobs_list['re_comp_name']).")";?>
 									</a>
 								</li>

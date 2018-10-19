@@ -153,11 +153,11 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                     <div class="all-job-box freelance-recommended-post">
                         <div class="all-job-top">
                             <div class="job-top-detail">
-                                <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
+                                <h5><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug | limitTo:200}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.post_name}}
                                     <span ng-if="applypost.day_remain > 0">({{applypost.day_remain}} days left)</span>
                                     </a>
                                 </h5>
-                                <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
+                                <p><a href="<?php echo base_url(); ?>freelance-jobs/{{applypost.industry_name}}/{{applypost.post_slug | limitTo:200}}-{{applypost.user_id}}-{{applypost.post_id}}">{{applypost.fullname | capitalize}}</a></p>
                                 <p ng-if="applypost.post_rate != ''">Budget : {{applypost.post_rate}} {{applypost.post_currency}} (hourly/fixed)</p>
                             </div>
                         </div>
