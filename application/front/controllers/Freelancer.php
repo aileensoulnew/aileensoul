@@ -1463,7 +1463,7 @@ class Freelancer extends MY_Controller {
                     $text = '';
                 }
                 $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $post['post_field_req']))->row()->category_name;
-                $f_url = base_url()."freelance-jobs/".$category_name."/".$text."-".$post['user_id']."-".$post['post_id'];
+                $f_url = base_url()."freelance-jobs/".$category_name."/".substr($text, 0, 200)."-".$post['user_id']."-".$post['post_id'];
                 $city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
                 $cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $city))->row()->city_name;
 
@@ -1765,7 +1765,7 @@ class Freelancer extends MY_Controller {
                         $text = '';
                     }
                     $category_name = $this->db->select('category_name')->get_where('category', array('category_id' => $post['post_field_req']))->row()->category_name;
-                    $f_url = base_url()."freelance-jobs/".$category_name."/".$text."-".$post['user_id']."-".$post['post_id'];
+                    $f_url = base_url()."freelance-jobs/".$category_name."/".substr($text, 0,200)."-".$post['user_id']."-".$post['post_id'];
                     
                     $city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $post['user_id']))->row()->city;
                     $cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $city))->row()->city_name;
