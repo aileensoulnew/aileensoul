@@ -55,7 +55,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>About {{details_data.first_name}} {{details_data.last_name}}</span><a href="#" data-target="#detail-about" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>About {{details_data.first_name}}</span><a href="#" data-target="#detail-about" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                         </div>
                         <div class="dtl-dis">
                             <div class="no-info">
@@ -250,7 +250,7 @@
                 </div>
                 <div class="dtl-dis">
                     <label>Enter Profile Details</label>
-                    <textarea name="user_bio" id="user_bio" ng-modal="user_bio" type="text" placeholder="Enter Details">{{user_bio}}</textarea>
+                    <textarea name="user_bio" id="user_bio" ng-model="user_bio" type="text" placeholder="Enter Details">{{user_bio}}</textarea>
                     
                 </div>
                 <div class="dtl-btn">
@@ -271,7 +271,7 @@
             <button type="button" class="modal-close" data-dismiss="modal">×</button>
             <div class="modal-body-cus"> 
                 <div class="dtl-title">
-                    <span>About {{details_data.first_name}} {{details_data.last_name}}</span>
+                    <span>About {{details_data.first_name}}</span>
                 </div>
                 <div class="dtl-dis dtl-about-box">
                     <div class="fw pb20">
@@ -312,31 +312,34 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">
-                                    <select>
-                                        <option>Day</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+                                    <select name="month" ng-model="dob_month" ng-change="dob_fnc('','','')">
+                                        <option value="">Month</option>
+                                        <option value="01">Jan</option>
+                                        <option value="02">Feb</option>
+                                        <option value="03">Mar</option>
+                                        <option value="04">Apr</option>
+                                        <option value="05">May</option>
+                                        <option value="06">Jun</option>
+                                        <option value="07">Jul</option>
+                                        <option value="08">Aug</option>
+                                        <option value="09">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
                                     </select>
                                 </span>
                             </div>
                             <div class="col-md-4 col-sm-4">
-                                <span class="span-select">
-                                    <select>
-                                        <option>Month</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
+                                <span class="span-select">                                    
+                                    <select name="day" ng-model="dob_day">
+                                        <option value="">Day</option>
                                     </select>
                                 </span>
                             </div>
                             <div class="col-md-4 col-sm-4">
-                                <span class="span-select">
-                                    <select>
-                                        <option>Year</option>
-                                        <option>2015</option>
-                                        <option>2016</option>
-                                        <option>2017</option>
+                                <span class="span-select">                                    
+                                    <select name="year" ng-model="dob_year" ng-change="dob_fnc('','','')">
+                                        <option value="">Year</option>
                                     </select>
                                 </span>
                             </div>
@@ -1378,7 +1381,7 @@
                         <label>Skills</label>
                         <!-- <input type="text" placeholder="Enter Skills"> -->
                         <tags-input id="job_title" ng-model="edit_user_skills" display-property="name" placeholder="Enter Skills" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
-                            <auto-complete source="loadJobTitle($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                            <auto-complete source="loadSkills($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
                         </tags-input>                        
                         <script type="text/ng-template" id="title-template">
                             <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>

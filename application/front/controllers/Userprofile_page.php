@@ -84,9 +84,9 @@ class Userprofile_page extends MY_Controller {
         $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
         $is_basicInfo = $this->data['is_basicInfo'] = $this->user_model->is_userBasicInfo($userid);
         if ($is_basicInfo == 0) {
-            $detailsData = $this->data['detailsData'] = $this->user_model->getUserStudentData($userid, $data = "d.degree_name as Degree,u.university_name as University,c.city_name as City,CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) as first_name,usr.first_name as First name,CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2))) as last_name,usr.last_name as Last name,  CONCAT(CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) ,' ',CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2)))) as fullname , DATE_FORMAT(usr.user_dob, '%D %M %Y') as DOB,IF(us.interested_fields = 0 , us.other_interested_fields ,it.industry_name) as interested_fields");
+            $detailsData = $this->data['detailsData'] = $this->user_model->getUserStudentData($userid, $data = "d.degree_name as Degree,u.university_name as University,c.city_name as City,CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) as first_name,usr.first_name as First name,CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2))) as last_name,usr.last_name as Last name,  CONCAT(CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) ,' ',CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2)))) as fullname , DATE_FORMAT(usr.user_dob, '%D %M %Y') as DOB,IF(us.interested_fields = 0 , us.other_interested_fields ,it.industry_name) as interested_fields,usr.user_dob");
         } else {
-            $detailsData = $this->data['detailsData'] = $this->user_model->getUserProfessionData($userid, $data = "jt.name as Designation,CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) as first_name,CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2))) as last_name,IF(up.field = 0 , up.other_field ,it.industry_name) as Industry,c.city_name as City, CONCAT(CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) ,' ',CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2)))) as fullname , usr.first_name as First name,usr.last_name as Last name,DATE_FORMAT(usr.user_dob, '%D %M %Y') as DOB,'' as interested_fields");
+            $detailsData = $this->data['detailsData'] = $this->user_model->getUserProfessionData($userid, $data = "jt.name as Designation,CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) as first_name,CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2))) as last_name,IF(up.field = 0 , up.other_field ,it.industry_name) as Industry,c.city_name as City, CONCAT(CONCAT(UCASE(LEFT(usr.first_name,1)),LCASE(SUBSTRING(usr.first_name,2))) ,' ',CONCAT(UCASE(LEFT(usr.last_name,1)),LCASE(SUBSTRING(usr.last_name,2)))) as fullname , usr.first_name as First name,usr.last_name as Last name,DATE_FORMAT(usr.user_dob, '%D %M %Y') as DOB,'' as interested_fields,usr.user_dob");
         }
         $user_bio = $this->db->select('user_bio')->get_where('user_info', array('user_id' => $userid))->row('user_bio');
         $skills_data = $this->userprofile_model->get_user_skills($userid);
@@ -968,25 +968,36 @@ class Userprofile_page extends MY_Controller {
     public function save_user_skills()
     {
         $userid = $this->session->userdata('aileenuser');
-        $job_title = $this->input->post('user_skills');
-        $job_title_id = "";
-        foreach ($job_title as $title) {
-            $designation = $this->data_model->findJobTitle($title['name']);
-            if ($designation['title_id'] != '') {
-                $jobTitleId = $designation['title_id'];
-            } else {
-                $data = array();
-                $data['name'] = $title['name'];
-                $data['created_date'] = date('Y-m-d H:i:s', time());
-                $data['modify_date'] = date('Y-m-d H:i:s', time());
-                $data['status'] = 'draft';
-                $data['slug'] = $this->common->clean($title['name']);
-                $jobTitleId = $this->common->insert_data_getid($data, 'job_title');                
+        $skills = $this->input->post('user_skills');
+        $skill_ids = "";
+        foreach ($skills as $title) {
+            $ski = $title['name'];
+            $contition_array = array('skill' => trim($ski), 'type' => '1');
+            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if (!$skilldata) {
+
+                $contition_array = array('skill' => trim($ski), 'type' => '7');
+                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
             }
-            $job_title_id .= $jobTitleId . ',';
+            if ($skilldata) {
+
+                $skill_id = $skilldata[0]['skill_id'];
+            } else {
+
+                $data = array(
+                    'skill' => $ski,
+                    'status' => '1',
+                    'type' => '7',
+                    'user_id' => $userid,
+                );
+                $skill_id = $this->common->insert_data_getid($data, 'skill');
+            }           
+
+            $skill_ids .= $skill_id . ',';
         }
-        $job_title_id = trim($job_title_id, ',');
-        $data = array('user_skills' => $job_title_id);
+        $skill_ids = trim($skill_ids, ',');
+        $data = array('user_skills' => $skill_ids);
         $udpate_data = $this->common->update_data($data, 'user_info', 'user_id', $userid);
         if($udpate_data)
         {
@@ -1000,5 +1011,11 @@ class Userprofile_page extends MY_Controller {
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_skills() {
+        $skills = $this->userprofile_model->get_skills();
+        echo json_encode($skills);
+    }
+
 
 }

@@ -3519,12 +3519,15 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             skills_data_edit = success.data.skills_data_edit;
             $scope.details_data = details_data;
             $scope.user_bio = user_bio;
-            var edit_skills_data = [];
-            /*skills_data.forEach(function(element,skillArrIndex) {
-              edit_skills_data[skillArrIndex] = {"name":element.skill};
-            });*/
             $scope.user_skills = skills_data;
             $scope.edit_user_skills = skills_data_edit;
+
+            dob = $scope.details_data.user_dob.split('-');
+            $scope.dob_month = dob[1];
+            dob_month = dob[1];            
+            dob_day = dob[2];            
+            dob_year = dob[0];
+            $scope.dob_fnc(dob_day,dob_month,dob_year);
 
             load_add();
         });
@@ -3568,7 +3571,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $("#profile-overview").on("hide.bs.modal", function () {
         $("#user_bio").val($scope.user_bio);
     });
-
+    var close_skill = 0;
     $scope.save_user_skills = function(){        
         if($scope.edit_user_skills != "")
         {
@@ -3588,34 +3591,94 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     skills_data = result.data.skills_data;
                     skills_data_edit = result.data.skills_data_edit;
                     $scope.user_skills = skills_data;
-                    // $scope.edit_user_skills = skills_data_edit;
+                    $scope.edit_user_skills = skills_data_edit;
                 }
+                close_skill = 1;
                 $("#user_skills_save").removeAttr("style");
                 $("#user_skills_loader").hide();
-                $("#skills").modal('hide');
+                // $("#skills").modal('hide');
+                $("#skills .modal-close").click();
             });
         }
     };
 
-    $("#skills .modal-close").click(function () {
-        /*var edit_user_skills = [];
-        $scope.user_skills.forEach(function(element,catArrIndex) {
-          edit_user_skills[catArrIndex] = {name:element.name};
-        });*/
-        $scope.$apply(function () {
-            $scope.edit_user_skills = $scope.user_skills;
-        });
+    $("#skills").on("hide.bs.modal", function () {
+        if(close_skill == 0)
+        {            
+            var edit_user_skills = [];
+            $scope.user_skills.forEach(function(element,catArrIndex) {
+              edit_user_skills[catArrIndex] = {name:element.name};
+            });
+            $scope.$apply(function () {
+                $scope.edit_user_skills = edit_user_skills;//$scope.user_skills;
+            });
+        }
+        else
+        {
+            close_skill = 0;
+        }
     });
 
     $scope.job_title = [];
-    $scope.loadJobTitle = function ($query) {
-        return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
+    $scope.loadSkills = function ($query) {
+        return $http.get(base_url + 'userprofile_page/get_skills', {cache: true}).then(function (response) {
             var job_title = response.data;
             return job_title.filter(function (title) {
                 return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
             });
         });
-    };    
+    };
+
+    $scope.dob_fnc = function(dob_day,dob_month,dob_year){
+        var kcyear = document.getElementsByName("year")[0],
+        kcmonth = document.getElementsByName("month")[0],
+        kcday = document.getElementsByName("day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        for (var i = n; i >= 1950; i--) {
+            var opt = new Option();
+            opt.value = opt.text = i;
+            if(dob_year == opt.value)
+            {
+                opt.selected = true;
+            }
+            kcyear.add(opt);
+        }
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;            
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            for (var i = 1; i <= mlength; i++) {
+                var opt = new Option();
+                opt.value = opt.text = i;
+                if (i == d) opt.selected = true;
+                kcday.add(opt);
+            }
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {
     
@@ -4706,3 +4769,4 @@ function setCursotToEnd(el)
         textRange.select();
     }
 }
+
