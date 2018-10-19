@@ -174,7 +174,7 @@
                     "item":
                     {
                         "@id": "<?php echo base_url(); ?>business-search",
-                        "name": "Jobs"
+                        "name": "Business"
                     }
                 },
                 {

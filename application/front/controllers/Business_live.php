@@ -378,13 +378,16 @@ class Business_live extends MY_Controller {
         $this->data['n_leftbar'] = $this->load->view('n_leftbar', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
-        $this->data['location_txt'] = $location_txt = ucwords(str_replace("-"," ",$location));
+        // $this->data['location_txt'] = $location_txt = ucwords(str_replace("-"," ",$location));
+        
+        $locationdata = $this->business_model->getlocationdatafromslug($location);
+        $this->data['location_id'] = $location_id = $locationdata['city_id'];
+        $this->data['location_txt'] = $location_txt = $locationdata['city_name'];
+
         //$this->data['title'] = "Business in ".ucwords(str_replace("-"," ",$location))." | Aileensoul";
         $this->data['title'] = "Businesses in ".$location_txt.": Get Details of Top Business | Aileensoul";
         $this->data['metadesc'] = "View address and contact information of business established in ".$location_txt.". Register to connect and know more about business."; 
         $this->data['search_banner'] = $this->load->view('business_live/search_banner', $this->data, TRUE);
-        $locationdata = $this->business_model->getlocationdatafromslug($location);
-        $this->data['location_id'] = $location_id = $locationdata['city_id'];
         $this->data['business_profile_set'] = $this->business_profile_set;
         $limit = 5;
         $this->data['businessCategory'] = $this->business_model->businessCategory($limit);

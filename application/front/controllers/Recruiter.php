@@ -2444,7 +2444,7 @@ class Recruiter extends MY_Controller {
 						$city_name = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
 						$countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
 						$rec_post .= '<div class="job-top-detail">';
-						$rec_post .= '<h5><a href="' . base_url() . '' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<h5><a href="' . base_url() . '' . substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= $post_name;
 						$rec_post .= '</a></h5>';
 						$rec_post .= '<p><a href = "' . base_url() . '' . $text . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
