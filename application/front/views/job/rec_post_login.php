@@ -390,7 +390,7 @@
                                                         <?php
                                                         $industry_txt = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type']))->row()->industry_name;
                                                         
-                                                        $industry_txt_schema = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type'],"is_other"=>"0"))->row()->industry_name;
+                                                        $industry_txt_schema = $this->db->get_where('job_industry', array('industry_id' => $post['industry_type'],"is_other"=>"0"))->row();
 
                                                         echo $industry_txt;
                                                         ?>
@@ -1320,7 +1320,7 @@
         }
         </script>
         <?php
-        if($industry_txt_schema != "")
+        if(!empty($industry_txt_schema))
         {
         ?>
         <script type="application/ld+json">
@@ -1361,8 +1361,8 @@
                 "position": 4,
                     "item":
                     {
-                    "@id": "<?php echo base_url().$this->common->create_slug($industry_txt_schema."-jobs");?>",
-                    "name": "<?php echo $industry_txt_schema." Jobs"; ?>"
+                    "@id": "<?php echo base_url().$this->common->create_slug($industry_txt_schema->industry_slug."-jobs");?>",
+                    "name": "<?php echo $industry_txt_schema->industry_name." Jobs"; ?>"
                     }
                 },
                 {
