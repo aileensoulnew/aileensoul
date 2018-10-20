@@ -728,11 +728,11 @@ header("Pragma: no-cache"); // HTTP/1.0
                 {
                     "@type": "ImageObject",
                     "url": "<?php echo base_url(); ?>assets/img/aileensoul-logo.png",
-                    "width": 1024,
-                    "height": 1024
+                    "width": 60,
+                    "height": 60
                 }
             },
-            "description": "<?php echo trim(addslashes($blog_data['meta_description'])); ?>"
+            "description": "<?php echo trim($blog_data['meta_description']); ?>"
         }
         </script>
 
