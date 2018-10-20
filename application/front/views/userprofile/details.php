@@ -58,9 +58,16 @@
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>About {{details_data.first_name}}</span><a href="#" data-target="#detail-about" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                         </div>
                         <div class="dtl-dis">
-                            <div class="no-info">
+                            <div class="no-info" ng-if="about_user_data.user_hobbies == '' && about_user_data.user_fav_quote_headline == '' && about_user_data.user_fav_artist == '' && about_user_data.user_fav_book == '' && about_user_data.user_fav_sport == ''">
                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                 <span>Lorem ipsum its a dummy text and its user to for all.</span>
+                            </div>
+                            <div class="no-info" ng-if="about_user_data.user_hobbies != '' || about_user_data.user_fav_quote_headline != '' || about_user_data.user_fav_artist != '' || about_user_data.user_fav_book != '' || about_user_data.user_fav_sport != ''">
+                                {{about_user_data.user_hobbies}}
+                                {{about_user_data.user_fav_quote_headline}}
+                                {{about_user_data.user_fav_artist}}
+                                {{about_user_data.user_fav_book}}
+                                {{about_user_data.user_fav_sport}}
                             </div>
                         </div>
                     </div>
@@ -273,36 +280,37 @@
                 <div class="dtl-title">
                     <span>About {{details_data.first_name}}</span>
                 </div>
-                <div class="dtl-dis dtl-about-box">
+                <div class="dtl-dis dtl-about-box post-field">
                     <div class="fw pb20">
                         
                         <div class="row">
                             <div class="">
-                                <div class="width-45">
-                                    <div class="form-group">
-                                        <label>Language</label>
-                                        <input type="text" placeholder="language">
+                                <div class="" data-ng-repeat="field in languageSet.language track by $index">
+                                    <div class="width-45">
+                                        <div class="form-group">
+                                            <label>Language</label>
+                                            <input type="text" placeholder="language">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="width-45">
-                                    <div class="form-group">
-                                        <label>Proficiency</label>
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Basic</option>
-                                                <option>Intermediate</option>
-                                                <option>Expert</option>
-                                            </select>
-                                        </span>
+                                    <div class="width-45">
+                                        <div class="form-group">
+                                            <label>Proficiency</label>
+                                            <span class="span-select">
+                                                <select>
+                                                    <option>Basic</option>
+                                                    <option>Intermediate</option>
+                                                    <option>Expert</option>
+                                                </select>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="width-10">
-                                    <label></label>
-                                    <a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
-                                    
+                                    <div class="width-10">
+                                        <label></label>
+                                        <a href="#" class="pull-right" ng-click="removeLanguage($index)"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
+                                    </div>
                                 </div>
                                 <div class="fw dtl-more-add">
-                                    <a href="#"><span class="pr10">Add More languages </span><img src="<?php echo base_url(); ?>assets/n-images/detail/inr-add.png"></a>
+                                    <a href="#" ng-click="addNewLanguage()"><span class="pr10">Add Language </span><img src="<?php echo base_url(); ?>assets/n-images/detail/inr-add.png"></a>
                                 </div>
                             </div>
                         </div>
@@ -312,7 +320,7 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">
-                                    <select name="month" ng-model="dob_month" ng-change="dob_fnc('','','')">
+                                    <select id="dob_month" name="month" ng-model="dob_month" ng-change="dob_fnc('','','')">
                                         <option value="">Month</option>
                                         <option value="01">Jan</option>
                                         <option value="02">Feb</option>
@@ -331,43 +339,47 @@
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">                                    
-                                    <select name="day" ng-model="dob_day">
-                                        <option value="">Day</option>
+                                    <select id="dob_day" name="day" ng-model="dob_day" ng-click="dob_error()">
                                     </select>
                                 </span>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">                                    
-                                    <select name="year" ng-model="dob_year" ng-change="dob_fnc('','','')">
-                                        <option value="">Year</option>
+                                    <select id="dob_year" name="year" ng-model="dob_year" ng-change="dob_fnc('','','')" ng-click="dob_error()">                                        
                                     </select>
                                 </span>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <span id="dateerror" class="error" style="display: none;"></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Hobbies</label>
-                        <input type="text" placeholder="Enter hobbies">
+                        <!-- <input type="text" placeholder="Enter hobbies"> -->
+                        <tags-input id="hobby_txt" ng-model="hobby_txt" display-property="hobby" placeholder="Enter hobbies" replace-spaces-with-dashes="false" template="title-template">
+                        </tags-input>  
                     </div>
                     <div class="form-group">
                         <label>Favourite Quotes, Headline</label>
-                        <textarea type="text" placeholder="Description (Fav. Quotes, Headline)"></textarea>
+                        <textarea id="user_fav_quote_headline" ng-model="user_fav_quote_headline" name="user_fav_quote_headline" type="text" placeholder="Description (Fav. Quotes, Headline)"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Favourite Artist</label>
-                        <input type="text" placeholder="Enter artist">
+                        <input id="user_fav_artist" ng-model="user_fav_artist" name="user_fav_artist" type="text" placeholder="Enter artist">
                     </div>
                     <div class="form-group">
                         <label>Favourite Book</label>
-                        <input type="text" placeholder="Enter Book">
+                        <input id="user_fav_book" ng-model="user_fav_book" name="user_fav_book" type="text" placeholder="Enter Book">
                     </div>
                     <div class="form-group">
                         <label>Favourite Sports</label>
-                        <input type="text" placeholder="Enter Sports">
+                        <input id="user_fav_sport" ng-model="user_fav_sport" name="user_fav_sport" type="text" placeholder="Enter Sports">
                     </div>
                 </div>
-                <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
+                <div class="dtl-btn">                        
+                        <a id="save_about_user" href="#" ng-click="save_about_user()" class="save"><span>Save</span></a>
+                        <img id="about_user_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
             </div>  
 

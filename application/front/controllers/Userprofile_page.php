@@ -1007,7 +1007,7 @@ class Userprofile_page extends MY_Controller {
         }
         else
         {
-            $ret_arr = array("success"=>0);   
+            $ret_arr = array("success"=>0);
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
@@ -1017,5 +1017,60 @@ class Userprofile_page extends MY_Controller {
         echo json_encode($skills);
     }
 
+    public function get_about_user()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        $about_user_data = $this->userprofile_model->get_about_user($userid);
+        if(isset($about_user_data) && !empty($about_user_data))
+        {
+            $ret_arr = array("success"=>1,"about_user_data"=>$about_user_data);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 
+    public function save_about_user()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $user_dob = $this->input->post('user_dob');
+        $user_hobby = $this->input->post('user_hobby');
+        $user_hobby_txt = "";
+        if(isset($user_hobby) && !empty($user_hobby))
+        {
+            foreach ($user_hobby as $key => $value) {
+                $user_hobby_txt .= $value['hobby'].",";
+            }
+        }
+        $user_hobby_txt = trim($user_hobby_txt,",");
+        $user_fav_quote_headline = $this->input->post('user_fav_quote_headline');
+        $user_fav_artist = $this->input->post('user_fav_artist');
+        $user_fav_book = $this->input->post('user_fav_book');
+        $user_fav_sport = $this->input->post('user_fav_sport');
+
+        $data_dob = array("user_dob"=>$user_dob);
+        $udpate_data_dob = $this->common->update_data($data_dob, 'user', 'user_id', $userid);
+
+        $data = array(
+            'user_hobbies' => $user_hobby_txt,
+            'user_fav_quote_headline' => $user_fav_quote_headline,
+            'user_fav_artist' => $user_fav_artist,
+            'user_fav_book' => $user_fav_book,
+            'user_fav_sport' => $user_fav_sport,            
+        );
+        $udpate_data = $this->common->update_data($data, 'user_info', 'user_id', $userid);
+        if($udpate_data_dob && $udpate_data)
+        {
+            $about_user_data = $this->userprofile_model->get_about_user($userid);
+            $ret_arr = array("success"=>1,"about_user_data"=>$about_user_data,"user_dob"=>$user_dob);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

@@ -2073,7 +2073,23 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
         
 
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
-            description = description.trim();
+            description = description.trim();            
+            if($scope.sim.post_for == "simple")
+            {
+                if (description == '')
+                {
+                    $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
+                    $('#post').modal('show');
+                    $(document).on('keydown', function (e) {
+                        if (e.keyCode === 27) {
+                            $('#posterrormodal').modal('hide');
+                            $('.modal-post').show();
+                        }
+                    });
+                    //event.preventDefault();
+                    return false;
+                }
+            }
             /*if (description == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");

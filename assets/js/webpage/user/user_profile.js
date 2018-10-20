@@ -3495,7 +3495,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         },1000);        
     }
 
-
     function getFieldList() {
         // $('#main_loader').hide();        
         if($scope.$parent.pade_reload == true)
@@ -3521,17 +3520,39 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $scope.user_bio = user_bio;
             $scope.user_skills = skills_data;
             $scope.edit_user_skills = skills_data_edit;
+            $scope.user_dob = $scope.details_data.user_dob;
 
             dob = $scope.details_data.user_dob.split('-');
             $scope.dob_month = dob[1];
             dob_month = dob[1];            
             dob_day = dob[2];            
             dob_year = dob[0];
-            $scope.dob_fnc(dob_day,dob_month,dob_year);
+            $scope.dob_fnc(dob_day,dob_month,dob_year); 
 
             load_add();
         });
         $('footer').show();
+    }
+
+    getAboutUser();
+    function getAboutUser()
+    {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_about_user',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.about_user_data = result.data.about_user_data;
+            }
+
+        });
     }
     $scope.goMainLink = function (path) {
         location.href = path;
@@ -3630,24 +3651,29 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
 
     $scope.dob_fnc = function(dob_day,dob_month,dob_year){
+        $("#dateerror").hide();
+        $("#dateerror").html('');
         var kcyear = document.getElementsByName("year")[0],
         kcmonth = document.getElementsByName("month")[0],
         kcday = document.getElementsByName("day")[0];                
         
         var d = new Date();
         var n = d.getFullYear();
+        year_opt = "";
         for (var i = n; i >= 1950; i--) {
-            var opt = new Option();
-            opt.value = opt.text = i;
-            if(dob_year == opt.value)
+            if(dob_year == i)
             {
-                opt.selected = true;
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
             }
-            kcyear.add(opt);
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
         }
+        $("#dob_year").html(year_opt);
         
         function validate_date(dob_day,dob_month,dob_year) {
-            var y = +kcyear.value;            
+            var y = +kcyear.value;
             if(dob_month != ""){
                 var m = dob_month;
             }
@@ -3669,14 +3695,98 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             }
 
             kcday.length = 0;
+            var day_opt = "";
             for (var i = 1; i <= mlength; i++) {
-                var opt = new Option();
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                } 
+                /*var opt = new Option();
                 opt.value = opt.text = i;
-                if (i == d) opt.selected = true;
-                kcday.add(opt);
+                if (i == d)
+                {
+                    opt.selected = true;
+                }
+                kcday.add(opt);*/
             }
+            $("#dob_day").html(day_opt);
         }
         validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.dob_error = function()
+    {
+        $("#dateerror").hide();
+        $("#dateerror").html('');
+    };
+    $scope.save_about_user = function(){        
+        $("#about_user_loader").show();
+        $("#save_about_user").attr("style","pointer-events:none;display:none;");
+        var dob_day_txt = $("#dob_day option:selected").val();
+        var dob_month_txt = $("#dob_month option:selected").val();
+        var dob_year_txt = $("#dob_year option:selected").val();
+
+        var todaydate = new Date();
+        var dd = todaydate.getDate();
+        var mm = todaydate.getMonth() + 1;
+        var yyyy = todaydate.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        var todaydate = yyyy + '/' + mm + '/' + dd;
+        var value = dob_year_txt + '/' + dob_month_txt + '/' + dob_day_txt;
+
+        var d1 = Date.parse(todaydate);
+        var d2 = Date.parse(value);
+
+        if (d1 < d2) {
+            $("#dateerror").html("Date of birth always less than to today's date.");
+            $("#dateerror").show();
+
+            $("#save_about_user").removeAttr("style");
+            $("#about_user_loader").hide();
+            return false;
+        }
+        var dob = dob_year_txt+'-'+dob_month_txt+'-'+dob_day_txt;        
+        var updatedata = $.param({'user_dob':dob,'user_hobby':$scope.hobby_txt,'user_fav_quote_headline':$scope.user_fav_quote_headline,'user_fav_artist':$scope.user_fav_artist,'user_fav_book':$scope.user_fav_sport,'user_fav_sport':$scope.user_fav_sport});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/save_about_user',                
+            data: updatedata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {                
+            // $('#main_page_load').show();                
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.about_user_data = result.data.about_user_data;
+            }
+            $("#save_about_user").removeAttr("style");
+            $("#about_user_loader").hide();
+            // $("#profile-overview").modal('hide');
+        });
+    };
+
+    $scope.languageSet = {language: []};
+    $scope.quest = {};
+
+    $scope.languageSet.language = [];
+    $scope.addNewLanguage = function () {
+        $scope.languageSet.language.push('');
+    };
+
+    $scope.removeLanguage = function (z) {
+        //var lastItem = $scope.languageSet.language.length - 1;
+        $scope.languageSet.language.splice(z,1);
     };
     
 });

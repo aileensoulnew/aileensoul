@@ -1092,4 +1092,13 @@ class Userprofile_model extends CI_Model {
         return $skills_data;
     }
 
+    public function get_about_user($userid)
+    {
+        $this->db->select("user_hobbies, user_fav_quote_headline, user_fav_artist, user_fav_book, user_fav_sport")->from("user_info");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $about_user_data = $query->row_array();        
+        return $about_user_data;
+    }
+
 }
