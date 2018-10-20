@@ -26,8 +26,9 @@ class Blog extends CI_Controller {
         $uri_segment = 2;
         $pg_url = base_url().$this->uri->segment(1);
         $this->data['category_name'] = "";
+        $this->data['blog_page'] = "";
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
-        if($iscategory != ""){
+        if($iscategory != ""){            
             $this->data['category_name'] = $sel_category_name = str_replace('-', ' ', $slug);
             $sql = "SELECT GROUP_CONCAT(id) as cate_id  FROM ailee_blog_category where name IN ('". $sel_category_name ."')";
             $query = $this->db->query($sql);
@@ -84,6 +85,7 @@ class Blog extends CI_Controller {
                 {
                     $this->data['search_keyword'] = $search_keyword = trim($this->input->get('p'));
                 }
+                $this->data['blog_page'] = "search";
 
                 $total_blog = $this->blog_model->get_blog_post($search_keyword,"",'','','');                
                 $limit = 5;
@@ -157,7 +159,7 @@ class Blog extends CI_Controller {
                
             }//THIS IF IS USED FOR WHILE SEARCH FOR RETRIEVE SAME PAGE END
             else
-            {
+            {                
                 $total_blog = $this->blog_model->get_blog_post("",$category_id,'','','');                
                 $limit = 5;
                 $config = array(); 
@@ -220,12 +222,14 @@ class Blog extends CI_Controller {
 				
 				$this->data['category_page'] = 0;
                 if($iscategory != ""){
+                    $this->data['blog_page'] = "category";
 					$this->data['category_page'] = 1;
                     $this->data['title'] = ucwords($sel_category_name)." Blogs | Aileensoul Knowledge";
                     $this->data['metadesc'] = "Read all best ".ucwords($sel_category_name)." related articles to get more insights about this field.";
                 }
                 else
-                {                    
+                {   
+                    $this->data['blog_page'] = "list";                 
                     $this->data['title'] = "Career Advice, Business Hacks, Recruitment Solutions, and More - Aileensoul Blog ";
                     $this->data['metadesc'] = "Get the advice and solutions about business and career from Aileensoul Blog. Setup to provide insights to its user.";
                 }

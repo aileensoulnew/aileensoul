@@ -294,7 +294,7 @@ if($category_page == 1)
 							<?php $this->load->view('banner_add'); ?>
 						</div>
 						<div class="clearfix"></div>
-                        <?php if($category_name != ""){?>
+                        <?php if($category_name != ""){ ?>
                             <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;"><?php
                             echo "Category : ".ucwords($category_name)."</h3>";
                         }
@@ -531,7 +531,76 @@ if($category_page == 1)
             <!-- <script src="<?php echo base_url('assets/js/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
     <?php // } else { ?>
             <!-- <script src="<?php //echo base_url('assets/js_min/webpage/blog/blog.js?ver=' . time()); ?>"></script> -->
-    <?php // } ?>
+    <?php // }
+    if($blog_page == 'list'){ ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>blog",
+                        "name": "Blog"
+                    }
+                }
+            ]
+        }
+        </script>
+
+    <?php }
+    elseif($blog_page == 'category'){ ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>blog",
+                        "name": "Blog"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "<?php echo ucwords($category_name); ?>"
+                    }
+                }
+            ]
+        }
+        </script>
+
+    <?php } ?>
 
     </body>
 </html>

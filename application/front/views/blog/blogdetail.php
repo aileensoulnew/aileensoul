@@ -257,7 +257,7 @@ header("Pragma: no-cache"); // HTTP/1.0
                                         <?php 
                                         foreach($blog_data['blog_category_name'] as $k=>$v):
                                             $category_url = $this->common->clean($v); ?>
-                                        <a href="<?php echo base_url().'blog/category/'.$category_url; ?>">
+                                        <a href="<?php echo base_url().'blog/category/'.strtolower($category_url); ?>">
                                             <span class="cat text-capitalize">
                                             <?php
                                             if($k == 0)
@@ -694,7 +694,96 @@ header("Pragma: no-cache"); // HTTP/1.0
         <?php } else { ?>
             <script src="<?php echo base_url('assets/js_min/webpage/blog/blog_detail.js?ver=' . time()); ?>"></script>
 
-        <?php } */?>
-		
+        <?php } */
+        list($width,$height) = getimagesize(base_url($this->config->item('blog_main_upload_path')).$blog_data['image']); ?>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage":
+            {
+                "@type":"WebPage",
+                "@id":"<?php echo current_url(); ?>"
+            },
+            "headline": "<?php echo $blog_data['title']; ?>",
+            "image":
+            {
+                "@type": "ImageObject",
+                "url": "<?php echo base_url($this->config->item('blog_main_upload_path')).$blog_data['image']; ?>",
+                "height": <?php echo $height; ?>,
+                "width": <?php echo $width; ?>
+            },
+            "datePublished": "<?php echo date("Y-m-d",strtotime($blog_data['created_date'])); ?>",
+            "dateModified": "<?php echo date("Y-m-d",strtotime($blog_data['modify_date'])); ?>",
+            "author":
+            {
+                "@type": "Person",
+                "name": "<?php echo $blog_data['name']; ?>"
+            },
+            "publisher":
+            {
+                "@type": "Organization",
+                "name": "Aileensoul",
+                "logo":
+                {
+                    "@type": "ImageObject",
+                    "url": "<?php echo base_url(); ?>assets/img/aileensoul-logo.png",
+                    "width": 1024,
+                    "height": 1024
+                }
+            },
+            "description": "<?php echo trim(addslashes($blog_data['meta_description'])); ?>"
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement":
+            [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>",
+                        "name": "Aileensoul"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url(); ?>blog",
+                        "name": "Blog"
+                    }
+                },
+                <?php
+                foreach($blog_data['blog_category_name'] as $k=>$v):
+                    $cat_url_schema = $this->common->clean($v); ?>
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item":
+                    {
+                        "@id": "<?php echo base_url().'blog/category/'.strtolower($cat_url_schema); ?>",
+                        "name": "<?php echo $v; ?>"
+                    }
+                },
+                <?php endforeach; ?>
+                {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "item":
+                    {
+                        "@id": "<?php echo current_url(); ?>",
+                        "name": "<?php echo $blog_data['title']; ?>"
+                    }
+                }
+            ]
+        }
+        </script>
     </body>
 </html>

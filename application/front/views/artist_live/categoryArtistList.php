@@ -72,7 +72,7 @@
                                 }
                                 elseif($location_txt != "")
                                 {
-                                    echo $search_txt = "Artist in ".$location_txt;
+                                    echo "Artist in ".$search_txt = $location_txt;
                                     $item3_url = base_url()."artist/location";
                                     $item3_txt = "Artist by Location";
                                 }

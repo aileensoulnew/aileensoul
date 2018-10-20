@@ -1075,7 +1075,7 @@ $login_user_id = $this->session->userdata('aileenuser')
            "telephone": "<?php echo $contact_mobile_txt; ?>",
            "email": "<?php echo $contact_email_txt; ?>",
            "url": "<?php echo $business_slug_txt; ?>",
-            "description": "Description: <?php echo $description_txt; ?>"
+            "description": "Description: <?php echo addslashes($description_txt); ?>"
           }
         </script>
         <?php if($this->session->userdata('aileenuser') == "" && ($county_txt != "" || $business_data[0]['industriyal'] != 0)):
