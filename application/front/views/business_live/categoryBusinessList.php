@@ -66,18 +66,19 @@
                                 <?php
                                 if($category_txt != "" && $location_txt != "")
                                 {
-                                    echo $search_txt = $category_txt." Business in ".$location_txt;
+                                    echo $search_txt = $category_txt." Business in ".$location_txt; 
                                     $item3_url = base_url()."business";
                                     $item3_txt = "All Business";
                                 }
                                 elseif($location_txt != "")
                                 {
-                                    echo $search_txt = "Business in ".$location_txt;
+                                    echo "Business in ".$search_txt = $location_txt;
                                     $item3_url = base_url()."business-by-location";
                                     $item3_txt = "Business by Location";
                                 }
                                 elseif ($category_txt != "") {
-                                    echo $search_txt = $category_txt." Business";
+                                    $search_txt = $category_txt;
+                                    echo $category_txt." Business";
                                     $item3_url = base_url()."business-by-categories";
                                     $item3_txt = "Business by Category";
                                 } ?></h3>
