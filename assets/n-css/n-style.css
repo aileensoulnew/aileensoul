@@ -643,7 +643,7 @@ height: 100%;}
 .post-images .one-img a:focus{text-decoration:none;}
 .article-post-text h3{font-size:18px; letter-spacing:1px;}
 .article-post-text p{font-size:14px; color:#7b7b7b;}
-.article-default-featured img{width:38%; padding:40px;}
+.article-default-featured img{width:38%; padding:40px; margin:0 auto;}
 .article-default-featured .article-post-text{border-top:1px solid #d2d2d2;}
 
 
@@ -2608,11 +2608,11 @@ padding: 4px;}
 .detail-right{width:320px; padding-left:15px; padding-right:15px; float:left;}
 .dtl-box{width:100%; border-radius:15px; margin-bottom:30px; float:left;     -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);}
-.dtl-title{padding:15px 20px; font-size:20px; border-bottom:1px solid #d2d2d2;}
+.dtl-title{padding:15px; font-size:20px; border-bottom:1px solid #d2d2d2;}
 .dtl-title .cus-width{width:25px; display:inline-block;}
 .dtl-title span{vertical-align:middle; margin-left:10px;}
 .dtl-title a{}
-.dtl-dis{padding:10px 20px 30px; width:100%; float:left;}
+.dtl-dis{padding:15px; width:100%; float:left;}
 .no-info{text-align:left;}
 .no-info img{width:50px; float:left; display:none;}
 .no-info span{width:100%; float:left; color:#7b7b7b;}
@@ -2655,19 +2655,22 @@ padding: 4px;}
 .about-dtl-box span:first-child{font-size:15px; font-weight:bold;}
 .more-less {float: right; color: #212121;}
 .dis-left{width:50px; float:left;}
-.dis-middle{width:340px; float:left; padding-left:10px; padding-top:7px;}
+.dis-middle{width:310px; float:left; padding-left:10px; padding-top:7px;}
 .dis-right{width:50px; float:left; padding-top:7px;}
 .dis-right a{float:left;}
 .dis-right a:last-child{float:right; padding-top:5px;}
 .dis-left-img{width:50px; height:50px; border:1px solid #d2d2d2; text-align:center;}
 .dis-left-img span{font-size:28px; color:#1b8ab9; padding:13px 10px; display:inline-block;}
-.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b;}
+.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
+overflow: hidden;}
+.dtl-dis .dis-middle p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
+overflow: hidden;}
 .dtl-dis.dis-accor{padding:0;}
-.dtl-dis.dis-accor .panel-heading{min-height:80px; padding:15px 20px; background:transparent; border-radius:0;}
+.dtl-dis.dis-accor .panel-heading{min-height:80px; padding:15px; background:transparent; border-radius:0;}
 .dis-accor .panel.panel-default{border-radius:0; border-width:1px 0 0 0; box-shadow:inherit; -webkit-box-shadow:inherit; width:100%; float:left; border-bottom-left-radius:20px; border-bottom-right-radius:20px; margin-top:0;}
 .dis-accor .panel.panel-default:first-child{border-top:0px;}
 .dis-accor .panel-body{padding:20px 0;}
-.dis-accor .panel-collapse{padding:0 20px;}
+.dis-accor .panel-collapse{padding:0 15px;}
 .dis-list{border-bottom:0px; padding-bottom:0;}
 .dis-list li{padding-bottom:10px; color:#7b7b7b; font-size:14px;}
 .dis-list li:last-child{padding-bottom:0px;}
@@ -2712,6 +2715,9 @@ max-width: inherit;}
 .dtl-dis .known-language li{padding-bottom:0;} 
 .about-detail .dis-list li{padding-bottom:13px;}
 .about-detail .dis-list li:last-child span{padding-bottom:0px;}
+.dtl-edit-p{text-align:center;}
+.dtl-edit-p img{display:inline-block;}
+
 
 /***  end new details page  ***/
 /***  new job registration form  ***/
@@ -2760,7 +2766,7 @@ a.job-expired:hover{color:#000 !important;}
 #login_form_main .form-group input:focus{border-bottom:1px solid #1b8ab9;}
 #login_form .form-group input:focus{border-bottom:1px solid #1b8ab9;}
 .login .form-group input:focus{border-bottom:1px solid #1b8ab9;}
-
+.rec-edit-p{margin-top:48px;}
 
 
 /***  media query  ***/
@@ -2813,7 +2819,7 @@ a.job-expired:hover{color:#000 !important;}
 	.right-part .all-contact{display:none;}
 	.cus-inner-middle{padding-left:0;}
 	.list-box-custom .nav > li > a{padding:10px 7px;}
-	.dis-middle{width:285px;}
+	.dis-middle{width:265px;}
 }
 @media screen and (max-width: 1199px) {
 	.block-1199{display:block;}

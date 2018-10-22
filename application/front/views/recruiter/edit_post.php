@@ -471,7 +471,7 @@
 								<?php $this->load->view('banner_add'); ?>
 							</div>
                         </div>
-						<div class="right-add">
+						<div class="right-add rec-edit-p">
 							<?php $this->load->view('right_add_box'); ?>
 						</div>
                    
