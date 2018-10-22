@@ -303,4 +303,19 @@ class Data_model extends CI_Model {
         return $result_array;
     }
 
+    function get_languages($search_keyword = '') {
+        $this->db->select('language_name')->from('language');
+        if ($search_keyword != '') {
+            $this->db->like('language_name', $search_keyword);
+        }
+        $this->db->where('status', '1');
+        $query = $this->db->get();        
+        if ($search_keyword != '') {
+            $result_array = $query->result_array();
+        } else {
+            $result_array = array();
+        }
+        return $result_array;
+    }
+
 }

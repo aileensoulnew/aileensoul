@@ -1022,9 +1022,10 @@ class Userprofile_page extends MY_Controller {
         $user_slug = $this->input->post('user_slug');
         $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
         $about_user_data = $this->userprofile_model->get_about_user($userid);
+        $user_languages = $this->userprofile_model->get_user_languages($userid);
         if(isset($about_user_data) && !empty($about_user_data))
         {
-            $ret_arr = array("success"=>1,"about_user_data"=>$about_user_data);
+            $ret_arr = array("success"=>1,"about_user_data"=>$about_user_data,"user_languages"=>$user_languages);
         }
         else
         {
@@ -1036,6 +1037,39 @@ class Userprofile_page extends MY_Controller {
     public function save_about_user()
     {
         $userid = $this->session->userdata('aileenuser');
+
+        $language = $this->input->post('language');
+        $proficiency = $this->input->post('proficiency');        
+        
+        if(isset($language) && isset($proficiency) && !empty($language) && !empty($proficiency))
+        {
+            $this->db->where('user_id', $userid);
+            $this->db->delete('user_languages');
+
+            if(count($language) == count($proficiency))
+            {
+                foreach($language as $k=>$v)
+                {                    
+                    if($v['value'] != "")
+                    {                        
+                        $data = array(
+                            'user_id' => $userid,
+                            'language_txt' => $v['value'],
+                            'proficiency' => $proficiency[$k]['value'],
+                            'status' => '1',
+                            'created_date' => date('Y-m-d H:i:s', time()),
+                            'modify_date' => date('Y-m-d H:i:s', time()),
+                        );
+                        $insert_id = $this->common->insert_data($data, 'user_languages');
+                    }
+                }
+            }
+            else
+            {
+
+            }
+        }
+        
         $user_dob = $this->input->post('user_dob');
         $user_hobby = $this->input->post('user_hobby');
         $user_hobby_txt = "";

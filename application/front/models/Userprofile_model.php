@@ -1101,4 +1101,13 @@ class Userprofile_model extends CI_Model {
         return $about_user_data;
     }
 
+    public function get_user_languages($userid)
+    {
+        $this->db->select("user_id,language_txt as language_name,proficiency,status")->from("user_languages");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
 }

@@ -282,24 +282,44 @@
                 </div>
                 <div class="dtl-dis dtl-about-box post-field">
                     <div class="fw pb20">
-                        
                         <div class="row">
                             <div class="">
+                                <div class="width-45">
+                                    <div class="form-group">
+                                        <label>Language</label>
+                                        <!-- <input type="text" placeholder="Language" class="language" name="language"> -->
+                                        <input type="text" name="language" ng-model="language[100].lngtxt" ng-keyup="get_languages(100)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue"  autocomplete="off" ng-value="primari_lang.language_name" value="{{primari_lang.language_name}}">
+                                    </div>
+                                </div>
+                                <div class="width-45">
+                                    <div class="form-group">
+                                        <label>Proficiency</label>
+                                        <span class="span-select">
+                                            <select class="proficiency" name="proficiency">
+                                                <option value="Basic" ng-selected="primari_lang.proficiency == 'Basic'">Basic</option>
+                                                <option value="Intermediate" ng-selected="primari_lang.proficiency == 'Intermediate'">Intermediate</option>
+                                                <option value="Expert" ng-selected="primari_lang.proficiency == 'Expert'">Expert</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="" data-ng-repeat="field in languageSet.language track by $index">
+                                <!-- <form class="frm_language" name="frm_language" id="frm_language" action="javascript:void(0);" method="post"> -->
                                     <div class="width-45">
                                         <div class="form-group">
                                             <label>Language</label>
-                                            <input type="text" placeholder="language">
+                                            <!-- <input type="text" placeholder="Language" class="language" name="language"> -->
+                                            <input type="text" name="language" ng-model="language[$index].lngtxt" ng-keyup="get_languages($index)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue" autocomplete="off" ng-value="field.language_name" value="{{field.language_name}}">
                                         </div>
                                     </div>
                                     <div class="width-45">
                                         <div class="form-group">
                                             <label>Proficiency</label>
                                             <span class="span-select">
-                                                <select>
-                                                    <option>Basic</option>
-                                                    <option>Intermediate</option>
-                                                    <option>Expert</option>
+                                                <select class="proficiency" name="proficiency">
+                                                    <option value="Basic" ng-selected="field.proficiency == 'Basic'">Basic</option>
+                                                    <option value="Intermediate" ng-selected="field.proficiency == 'Intermediate'">Intermediate</option>
+                                                    <option value="Expert" ng-selected="field.proficiency == 'Expert'">Expert</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -312,6 +332,7 @@
                                 <div class="fw dtl-more-add">
                                     <a href="#" ng-click="addNewLanguage()"><span class="pr10">Add Language </span><img src="<?php echo base_url(); ?>assets/n-images/detail/inr-add.png"></a>
                                 </div>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
@@ -362,19 +383,19 @@
                     </div>
                     <div class="form-group">
                         <label>Favourite Quotes, Headline</label>
-                        <textarea id="user_fav_quote_headline" ng-model="user_fav_quote_headline" name="user_fav_quote_headline" type="text" placeholder="Description (Fav. Quotes, Headline)"></textarea>
+                        <textarea id="user_fav_quote_headline" ng-model="user_fav_quote_headline" name="user_fav_quote_headline" placeholder="Description (Fav. Quotes, Headline)" ng-bind="about_user_data.user_fav_quote_headline"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Favourite Artist</label>
-                        <input id="user_fav_artist" ng-model="user_fav_artist" name="user_fav_artist" type="text" placeholder="Enter artist">
+                        <input id="user_fav_artist" ng-model="user_fav_artist" name="user_fav_artist" type="text" placeholder="Enter artist" ng-value="about_user_data.user_fav_artist">
                     </div>
                     <div class="form-group">
                         <label>Favourite Book</label>
-                        <input id="user_fav_book" ng-model="user_fav_book" name="user_fav_book" type="text" placeholder="Enter Book">
+                        <input id="user_fav_book" ng-model="user_fav_book" name="user_fav_book" type="text" placeholder="Enter Book" ng-value="about_user_data.user_fav_book">
                     </div>
                     <div class="form-group">
                         <label>Favourite Sports</label>
-                        <input id="user_fav_sport" ng-model="user_fav_sport" name="user_fav_sport" type="text" placeholder="Enter Sports">
+                        <input id="user_fav_sport" ng-model="user_fav_sport" name="user_fav_sport" type="text" placeholder="Enter Sports" ng-value="about_user_data.user_fav_sport">
                     </div>
                 </div>
                 <div class="dtl-btn">                        

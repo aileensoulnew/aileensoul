@@ -106,4 +106,10 @@ class General_data extends MY_Controller {
         echo json_encode($getUniversityList);
     }
 
+    public function get_languages(){        
+        $lang_search = $this->input->post('q');
+        $language_list = $this->data_model->get_languages($lang_search);
+        echo json_encode($language_list);
+    }
+
 }

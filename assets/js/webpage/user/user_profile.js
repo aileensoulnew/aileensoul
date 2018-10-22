@@ -3549,7 +3549,22 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             success = result.data.success;
             if(success == 1)
             {
-                $scope.about_user_data = result.data.about_user_data;
+                about_user_data = result.data.about_user_data;
+                $scope.about_user_data = about_user_data;
+                var user_langs = result.data.user_languages;
+                $scope.primari_lang = user_langs[0];
+                $scope.languageSet.language = user_langs.slice(1);
+
+                var user_hobbies = about_user_data.user_hobbies.split(',');
+                var edit_hobbies = [];
+                user_hobbies.forEach(function(element,jobArrIndex) {
+                  edit_hobbies[jobArrIndex] = {"hobby":element};
+                });
+                $scope.hobby_txt = edit_hobbies;
+                $scope.user_fav_quote_headline = about_user_data.user_fav_quote_headline;
+                $scope.user_fav_artist = about_user_data.user_fav_artist;
+                $scope.user_fav_book = about_user_data.user_fav_book;
+                $scope.user_fav_sport = about_user_data.user_fav_sport;                
             }
 
         });
@@ -3755,8 +3770,15 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#about_user_loader").hide();
             return false;
         }
+        // var languages = $('.frm_language').serialize();
+        var languages = $('.language').serializeArray();
+        var proficiency = $('.proficiency').serializeArray();
+        // var languages = $('.frm_language').serializeArray();
+        // var languages = new FormData('.frm_language');
+
+        // var lang_prof = $('.lang_prof :selected').serialize();
         var dob = dob_year_txt+'-'+dob_month_txt+'-'+dob_day_txt;        
-        var updatedata = $.param({'user_dob':dob,'user_hobby':$scope.hobby_txt,'user_fav_quote_headline':$scope.user_fav_quote_headline,'user_fav_artist':$scope.user_fav_artist,'user_fav_book':$scope.user_fav_sport,'user_fav_sport':$scope.user_fav_sport});
+        var updatedata = $.param({'user_dob':dob,'user_hobby':$scope.hobby_txt,'user_fav_quote_headline':$scope.user_fav_quote_headline,'user_fav_artist':$scope.user_fav_artist,'user_fav_book':$scope.user_fav_book,'user_fav_sport':$scope.user_fav_sport,"language":languages,"proficiency":proficiency});
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/save_about_user',                
@@ -3777,17 +3799,34 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
 
     $scope.languageSet = {language: []};
-    $scope.quest = {};
 
     $scope.languageSet.language = [];
     $scope.addNewLanguage = function () {
-        $scope.languageSet.language.push('');
+        // console.log($scope.languageSet.language.length);
+        if($scope.languageSet.language.length < 99)
+        {
+            $scope.languageSet.language.push('');
+        }
     };
 
     $scope.removeLanguage = function (z) {
         //var lastItem = $scope.languageSet.language.length - 1;
         $scope.languageSet.language.splice(z,1);
     };
+    $scope.language = [];
+    $scope.get_languages = function(id) {        
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/get_languages',
+            data: 'q=' + $scope.language[id].lngtxt,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(success) {
+            data = success.data;
+            $scope.lang_search_result = data;
+        });
+    }
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {
