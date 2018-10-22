@@ -2658,7 +2658,7 @@ padding: 4px;}
 .dis-middle{width:310px; float:left; padding-left:10px; padding-top:7px;}
 .dis-right{width:50px; float:left; padding-top:7px;}
 .dis-right a{float:left;}
-.dis-right a:last-child{float:right; padding-top:5px;}
+.dis-right a:last-child{float:right;}
 .dis-left-img{width:50px; height:50px; border:1px solid #d2d2d2; text-align:center;}
 .dis-left-img span{font-size:28px; color:#1b8ab9; padding:13px 10px; display:inline-block;}
 .dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
@@ -2867,9 +2867,9 @@ a.job-expired:hover{color:#000 !important;}
 	.view-more-page .right-add{display:none;}
 	.job-top-btn{position:inherit; margin-top:-23px !important;}
 	.article-all-comment .comment-dis{width:90%;}
-	.detail-left{width:100%;}
-	.detail-right{width:100%; padding:0;}
-	.detail-right .rsp-dtl-box{width:50%; float:left; padding-left:15px; padding-right:15px;}
+	.all-detail-custom .custom-user-list{width:100%;}
+	.all-detail-custom .right-add{width:100%; padding:0;}
+	.all-detail-custom .right-add .rsp-dtl-box{width:50%; float:left; padding-left:15px; padding-right:15px;}
 	.dtl-dis ul.skill-list{min-height:180px;}
 }
 @media screen and (max-width: 1024px) {
@@ -3908,13 +3908,6 @@ a.job-expired:hover{color:#000 !important;}
 }
 
 
-
-img {
-  max-width: 100%;
-  display: block;
-  /*height: 100%;
-  object-fit: cover; Esto no funciona correctamente*/
-}
 
 .masonry-layout {
   --columns: 1;
