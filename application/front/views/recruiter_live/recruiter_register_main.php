@@ -112,7 +112,7 @@
                             </label>
                         </div>
                         <p class="text-center">
-                            <button type="submit" class="btn1" tabindex="12">Create an Account</button>
+                            <button type="submit" class="btn1" tabindex="12" id="create-account">Create an Account</button>
                         </p>
                     </form>
                 </div>

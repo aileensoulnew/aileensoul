@@ -5897,67 +5897,77 @@ class Recruiter extends MY_Controller {
 		}
 		else
 		{
-			$first_name = trim($_POST['first_name']);
-			$last_name = trim($_POST['last_name']);
-			$email = trim($_POST['email']);
-			$company_name = trim($_POST['company_name']);
-			$company_email = trim($_POST['company_email']);
-			$company_number = trim($_POST['company_number']);
-			$company_profile = trim($_POST['company_profile']);
-			$country = trim($_POST['country']);
-			$state = trim($_POST['state']);
-			$city = trim($_POST['city']);
-			$user_slug = $this->common->set_slug($first_name . '-' . $last_name, 'slug', 'recruiter');
+			$contition_array = array('user_id' => $userid,'re_status' => '1', 'is_delete' => '0');
+        	$recruiter_profile = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        	if(isset($recruiter_profile) && !empty($recruiter_profile))
+        	{
+        		$data = array("is_success" => 0);	
+        	}
+        	else
+        	{
+        		$first_name = trim($_POST['first_name']);
+				$last_name = trim($_POST['last_name']);
+				$email = trim($_POST['email']);
+				$company_name = trim($_POST['company_name']);
+				$company_email = trim($_POST['company_email']);
+				$company_number = trim($_POST['company_number']);
+				$company_profile = trim($_POST['company_profile']);
+				$country = trim($_POST['country']);
+				$state = trim($_POST['state']);
+				$city = trim($_POST['city']);
+				$user_slug = $this->common->set_slug($first_name . '-' . $last_name, 'slug', 'recruiter');
 
-			$data = array(
-				'rec_firstname' => $first_name,
-				'rec_lastname' => $last_name,
-				'rec_email' => $email,
-				'user_id' => $userid,
-				're_comp_name' => $company_name,
-				're_comp_email' => $company_email,
-				're_comp_phone' => $company_number,
-				're_comp_profile' => trim($company_profile),
-				're_comp_country' => $country,
-				're_comp_state' => $state,
-				're_comp_city' => $city,
-				'created_date' => date('y-m-d h:i:s'),
-				're_status' => '1',
-				'is_delete' => '0',
-				're_step' => '3',
-				'slug' => $user_slug
-			);
+				$data = array(
+					'rec_firstname' => $first_name,
+					'rec_lastname' => $last_name,
+					'rec_email' => $email,
+					'user_id' => $userid,
+					're_comp_name' => $company_name,
+					're_comp_email' => $company_email,
+					're_comp_phone' => $company_number,
+					're_comp_profile' => trim($company_profile),
+					're_comp_country' => $country,
+					're_comp_state' => $state,
+					're_comp_city' => $city,
+					'created_date' => date('y-m-d h:i:s'),
+					're_status' => '1',
+					'is_delete' => '0',
+					're_step' => '3',
+					'slug' => $user_slug
+				);
+				
+				$insert_id = $this->common->insert_data_getid($data, 'recruiter');            
+				if ($insert_id) {
+					//Openfire Username Generate Start
+	                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+	                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+	                $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
+	                $properties = array();
+	                $username = $op_un_ps;
+	                $password = $op_un_ps;
+	                $name = ucwords($first_name." ".$last_name);
+	                // $email = $email_reg;
+	                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+	                //Openfire Username Generate End
+	                
+	                //Send Promotional Mail Start
+	                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
-			$insert_id = $this->common->insert_data_getid($data, 'recruiter');            
-			if ($insert_id) {
-				//Openfire Username Generate Start
-                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
-                $properties = array();
-                $username = $op_un_ps;
-                $password = $op_un_ps;
-                $name = ucwords($first_name." ".$last_name);
-                // $email = $email_reg;
-                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                //Openfire Username Generate End
-                
-                //Send Promotional Mail Start
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
+	                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
+	                
+	                $email_html = $this->load->view('email_template/recruiter_reg',$this->userdata,TRUE);                
 
-                $this->userdata['unsubscribe_link'] = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                
-                $email_html = $this->load->view('email_template/recruiter_reg',$this->userdata,TRUE);                
+	                $subject = "Congrats, ".$first_name.". You’re Just One Step Away from Hiring Great Talents";
 
-                $subject = "Congrats, ".$first_name.". You’re Just One Step Away from Hiring Great Talents";
+	                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
+	                //Send Promotional Mail End
 
-                $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email = $email,$unsubscribe);
-                //Send Promotional Mail End
+					$data = array("is_success" => 1);
+				} else {
+					$data['errors'] = $errors['not_sucess'] = "Please Try again";
+				}
+        	}
 
-				$data = array("is_success" => 1);
-			} else {
-				$data['errors'] = $errors['not_sucess'] = "Please Try again";
-			}
 		}
 		echo json_encode($data);
 	}

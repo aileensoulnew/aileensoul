@@ -151,6 +151,7 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
     };
     $scope.submitRegiForm = function() {
         if ($scope.register_form.validate()) {
+            $("#register_form #create-account").attr("style","pointer-events:none");
             $http({
                 method: 'POST',
                 url: base_url + 'registration/reg_insert_new',
@@ -159,6 +160,7 @@ app.controller('recruiterRegiController', function($scope, $http, $location, $wi
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(success) {
+                $("#register_form #create-account").removeAttr("style");
                 if (success.data.errors) {
                     $scope.errorjobTitle = success.data.errors.jobTitle;
                     $scope.errorcityList = success.data.errors.cityList;
@@ -331,6 +333,7 @@ app.controller('recruiterBasicInfoController', function($scope, $http, $location
     $scope.submitBasicInfoForm = function() {
         if ($scope.basicinfo.validate()) {
             angular.element('#basicinfo #submit').addClass("form_submit");
+            angular.element('#basicinfo #submit').attr("style","pointer-events:none");
             $('#basic_info_ajax_load').show();
             $http({
                 method: 'POST',
@@ -352,6 +355,7 @@ app.controller('recruiterBasicInfoController', function($scope, $http, $location
                 } else {
                     if (success.data.is_success == '1') {
                         angular.element('#basicinfo #submit').removeClass("form_submit");
+                        angular.element('#basicinfo #submit').removeAttr("style");
                         $('#basic_info_ajax_load').hide();
                         var title = "Recruiter Registrion"
                         var url = base_url + "recruiter/registration";
@@ -487,6 +491,7 @@ app.controller('recruiterEduInfoController', function($scope, $http, $location, 
     $scope.submitStudentInfoForm = function() {
         if ($scope.studentinfo.validate()) {
             angular.element('#studentinfo #submit').addClass("form_submit");
+            angular.element('#studentinfo #submit').attr("style","pointer-events:none");
             $('#student_info_ajax_load').show();
             $http({
                 method: 'POST',
@@ -495,7 +500,8 @@ app.controller('recruiterEduInfoController', function($scope, $http, $location, 
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            }).then(function(success) {
+            }).then(function(success) {                
+                angular.element('#studentinfo #submit').removeAttr("style");
                 if (success.data.errors) {
                     $scope.errorcurrentStudy = success.data.errors.currentStudy;
                     $scope.errorcityList = success.data.errors.cityList;
@@ -640,6 +646,8 @@ app.controller('recruiterCreateProfileController', function($scope, $http, $loca
             $("#state").val($scope.user.state);
         },100);
         if ($scope.recruiterinfo.validate()) {
+            $("#bidmodal").modal('show');            
+            angular.element('#recruiterinfo #submit').attr("style","pointer-events: none;");
             angular.element('#recruiterinfo #submit').addClass("form_submit");
             $('#profilereg_ajax_load').show();
             $http({
@@ -649,7 +657,8 @@ app.controller('recruiterCreateProfileController', function($scope, $http, $loca
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function (success) {
-                $('#profilereg_ajax_load').hide();                
+                $('#profilereg_ajax_load').hide();
+                angular.element('#recruiterinfo #submit').removeAttr("style");
                 if (success.data.errors) {
                     $scope.errorFname = success.data.errors.errorFname;
                     $scope.errorLname = success.data.errors.errorLname;
@@ -686,19 +695,3 @@ $(window).on("load", function() {
     });
 });
 // NEW HTML SCRIPT
-AOS.init({
-    easing: 'ease-in-out-sine'
-});
-setInterval(addItem, 100);
-var itemsCounter = 1;
-var container = document.getElementById('aos-demo');
-
-function addItem() {
-    if (itemsCounter > 42) return;
-    var item = document.createElement('div');
-    item.classList.add('aos-item');
-    item.setAttribute('data-aos', 'fade-up');
-    item.innerHTML = '<div class="aos-item__inner"><h3>' + itemsCounter + '</h3></div>';
-    // container.appendChild(item);
-    itemsCounter++;
-}

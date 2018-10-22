@@ -71,6 +71,20 @@
                 </div>                
             </header>            
         </div>
+
+        <!-- Model Popup Open  -->
+        <div class="modal fade message-box biderror" id="bidmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lm">
+                <div class="modal-content">
+                    <button type="button" class="modal-close" data-dismiss="modal">&times;</button>       
+                    <div class="modal-body">
+                        <span class="mes">Your profile is creating. <br>
+                        Please wait,You will be redirect automatically.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Model Popup Close -->
                
         <div class="middle-section rec-reg-cus">
             <div class="container">
@@ -83,7 +97,7 @@
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/aos.js?ver=' . time()) ?>"></script> -->
 
 
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
