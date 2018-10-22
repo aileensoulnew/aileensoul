@@ -1110,4 +1110,30 @@ class Userprofile_model extends CI_Model {
         return $user_data_lang;
     }
 
+    public function set_user_research($userid,$research_title = "",$research_desc = "",$research_url = "",$research_published_date = "",$research_document = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'research_title' => $research_title,
+            'research_desc' => $research_desc,
+            'research_url' => $research_url,
+            'research_publish_date' => $research_published_date,
+            'research_document' => $research_document,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_research');
+        return $insert_id;
+    }
+
+    public function get_user_research($userid)
+    {
+        $this->db->select("*")->from("user_research");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
 }

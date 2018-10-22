@@ -3826,7 +3826,211 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             data = success.data;
             $scope.lang_search_result = data;
         });
-    }
+    };
+
+    //Research Start
+    $scope.research_pub_fnc = function(dob_day,dob_month,dob_year){
+        $("#dateerror").hide();
+        $("#dateerror").html('');
+        var kcyear = document.getElementsByName("year")[0],
+        kcmonth = document.getElementsByName("month")[0],
+        kcday = document.getElementsByName("day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#research_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#research_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.research_error = function()
+    {
+        $("#recdateerror").hide();
+        $("#recdateerror").html('');
+    };
+    $scope.research_validate = {
+        rules: {
+            research_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 20
+            },
+            research_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 50
+            },
+            research_url: {
+                url: true,
+            },
+            research_month: {
+                required: true,
+            },
+            research_day: {
+                required: true,
+            },
+            research_year: {
+                required: true,
+            }
+        },
+        groups: {
+            research_year: "research_year research_month research_day"
+        },
+        messages: {
+            research_title: {
+                required: "Please enter research title",
+            },
+            research_desc: {
+                research_desc: "Please enter description",
+            },
+            research_url: {                
+                url: "Enter valid URL",
+            },            
+            research_day: {
+                required: "Please enter research publishing date",
+            },
+            research_month: {
+                required: "Please enter research publishing date",
+            },
+            research_year: {
+                required: "Please enter research publishing date",
+            },
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("type") == "checkbox") {
+                error.insertAfter($("#lbl_term_condi"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    };
+    var research_formdata = new FormData();
+    $(document).on('change','#research_document', function(e){
+        var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','docx','doc','PDF'];
+        var ext = $(this).val().split('.');
+        alert(ext[ext.length - 1]);
+        if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+            research_formdata.append('file', $('#research_document')[0].files[0]);
+        }
+        else {
+            $(this).val() = "";
+        }         
+    });
+    $scope.save_user_research = function(){
+        if ($scope.research_form.validate()) {
+            $("#user_research_loader").show();
+            $("#user_research_save").attr("style","pointer-events:none;display:none;");
+
+            var dob_day_txt = $("#research_day option:selected").val();
+            var dob_month_txt = $("#research_month option:selected").val();
+            var dob_year_txt = $("#research_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = dob_year_txt + '/' + dob_month_txt + '/' + dob_day_txt;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#recdateerror").html("Date of publishing always less than to today's date.");
+                $("#recdateerror").show();
+
+                $("#user_research_save").removeAttr("style");
+                $("#user_research_loader").hide();
+                return false;
+            }
+
+            research_formdata.append('research_title', $('#research_title').val());
+            research_formdata.append('research_desc', $('#research_desc').val());
+            research_formdata.append('research_url', $('#research_url').val());
+            
+            research_formdata.append('research_month',$("#research_month option:selected").val());
+            research_formdata.append('research_day',$("#research_day option:selected").val());
+            research_formdata.append('research_year',$("#research_year option:selected").val());
+            $http.post(base_url + 'userprofile_page/save_research_user', research_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $("#user_research_save").removeAttr("style");
+                        $("#user_research_loader").hide();
+                        $("#research_form")[0].reset();
+                        $("#research").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_research_save").removeAttr("style");
+                        $("#user_research_loader").hide();
+                        $("#research_form")[0].reset();
+                        $("#research").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //Research End
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {

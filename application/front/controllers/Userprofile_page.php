@@ -16,6 +16,7 @@ class Userprofile_page extends MY_Controller {
         $this->load->model('user_model');
         $this->load->model('userprofile_model');
         $this->load->model('email_model');
+        $this->load->library('upload');
         include ('main_profile_link.php');
     }
 
@@ -1100,6 +1101,57 @@ class Userprofile_page extends MY_Controller {
         {
             $about_user_data = $this->userprofile_model->get_about_user($userid);
             $ret_arr = array("success"=>1,"about_user_data"=>$about_user_data,"user_dob"=>$user_dob);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_research_user()
+    {
+        // print_r($_POST);
+        // print_r($_FILES);
+        // exit();
+        
+        $research_title = $this->input->post('research_title');
+        $research_desc = $this->input->post('research_desc');
+        $research_url = $this->input->post('research_url');
+        $research_published_date = $this->input->post('research_year').'-'.$this->input->post('research_month').'-'.$this->input->post('research_day');
+        $fileName = "";
+        if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != "")
+        {
+            $user_research_upload_path = $this->config->item('user_research_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_research_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('file'))            {
+                $main_image = $user_research_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_research = $this->userprofile_model->set_user_research($user_id,$research_title,$research_desc,$research_url,$research_published_date,$fileName);
+            $user_research = $this->userprofile_model->get_user_research($user_id);
+            $ret_arr = array("success"=>1,"user_research"=>$user_research);
         }
         else
         {

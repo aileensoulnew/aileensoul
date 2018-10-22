@@ -946,3 +946,5 @@ $config['feedback_main_upload_path'] = 'uploads/feedback/';
 
 $config['article_upload_path'] = 'uploads/article/';
 $config['article_featured_upload_path'] = 'uploads/article_featured/';
+
+$config['user_research_upload_path'] = 'uploads/user_research/';

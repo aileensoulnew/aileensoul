@@ -1325,74 +1325,73 @@
                 <div class="dtl-title">
                     <span>Research</span>
                 </div>
-                <div class="dtl-dis">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" placeholder="Title">
-                    </div>
-                    <div class="form-group">
-                        <label>Details</label>
-                        <textarea type="text" placeholder="Details"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>URL</label>
-                        <input type="text" placeholder="URL">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Publishing Date</label>
+                    <form name="research_form" id="research_form" ng-validate="research_validate">
+                        <div class="dtl-dis">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" placeholder="Title" id="research_title" name="research_title" ng-model="research_title" minlength="20" maxlength="200">
+                            </div>
+                            <div class="form-group">
+                                <label>Details</label>
+                                <textarea placeholder="Details" id="research_desc" name="research_desc" ng-model="research_desc" minlength="20" maxlength="700"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>URL</label>
+                                <input type="text" placeholder="URL" id="research_url" name="research_url" ng-model="research_url">
+                            </div>
                             
-                                
+                            <div class="form-group">
+                                <label>Publishing Date</label>
                                 <div class="row">
                                     <div class="col-md-4 col-sm-4">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Date</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
+                                            <select id="research_month" name="research_month" ng-model="research_month" ng-change="research_pub_fnc('','','')">
+                                                <option value="">Month</option>
+                                                <option value="01">Jan</option>
+                                                <option value="02">Feb</option>
+                                                <option value="03">Mar</option>
+                                                <option value="04">Apr</option>
+                                                <option value="05">May</option>
+                                                <option value="06">Jun</option>
+                                                <option value="07">Jul</option>
+                                                <option value="08">Aug</option>
+                                                <option value="09">Sep</option>
+                                                <option value="10">Oct</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Dec</option>
                                             </select>
                                         </span>
                                     </div>
                                     <div class="col-md-4 col-sm-4">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
+                                            <select id="research_day" name="research_day" ng-model="research_day" ng-click="research_error()">
+                                        </select>                                    
                                         </span>
                                     </div>
                                     <div class="col-md-4 col-sm-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>2016</option>
-                                                <option>2017</option>
-                                                <option>2018</option>
-                                                <option>2019</option>
-                                                <option>2020</option>
+                                        <span class="span-select">                                            
+                                            <select id="research_year" name="research_year" ng-model="research_year" ng-change="research_pub_fnc('','','')" ng-click="research_error()">
                                             </select>
                                         </span>
                                     </div>
-                                </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <span id="recdateerror" class="error" style="display: none;"></span>
+                                    </div>
+                                </div>                            
+                            </div>                    
                             
-                            
-                    </div>
-                    
-                    
-                    <div class="form-group">
-                        <label class="upload-file">
-                            Upload File <input type="file">
-                        </label>
-                    </div>
-                    
-                </div>
-                <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
+                            <div class="form-group">
+                                <label class="upload-file">
+                                    Upload File <input type="file" id="research_document" name="research_document">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="dtl-btn">
+                            <!-- <a href="#" class="save"><span>Save</span></a> -->
+                            <a id="user_research_save" href="#" ng-click="save_user_research()" class="save"><span>Save</span></a>
+                            <img id="user_research_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </div>
+                    </form>
             </div>  
 
 
