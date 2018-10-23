@@ -252,19 +252,20 @@ class Business_profile_registration extends MY_Controller {
                 $data['contact_email'] = $userdata['email'];
 
                 $insert_id = $this->common->insert_data_getid($data, 'business_profile');
-
-                //Openfire Username Generate Start
-                $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
-                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                $op_un_ps = "business_".str_replace("-", "_", $business_slug);
-                $properties = array();
-                $username = $op_un_ps;
-                $password = $op_un_ps;
-                $name = $company_name;
-                $email = $email_reg;
-                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                //Openfire Username Generate End
+                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                    //Openfire Username Generate Start
+                    $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
+                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                    $op_un_ps = "business_".str_replace("-", "_", $business_slug);
+                    $properties = array();
+                    $username = $op_un_ps;
+                    $password = $op_un_ps;
+                    $name = $company_name;
+                    $email = $email_reg;
+                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                    //Openfire Username Generate End
+                }
 
                 if(trim($data['country']) != "")
                 {
@@ -1024,18 +1025,20 @@ class Business_profile_registration extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'business_profile');
 
-            //Openfire Username Generate Start
-            $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
-            $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-            $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-            $op_un_ps = "business_".str_replace("-", "_", $business_slug);
-            $properties = array();
-            $username = $op_un_ps;
-            $password = $op_un_ps;
-            $name = $company_name;
-            $email = $email_reg;
-            $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-            //Openfire Username Generate End
+            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                //Openfire Username Generate Start
+                $email_reg = $this->db->get_where('user_login', array('user_id' => $userid, 'status' => '1'))->row()->email;
+                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                $op_un_ps = "business_".str_replace("-", "_", $business_slug);
+                $properties = array();
+                $username = $op_un_ps;
+                $password = $op_un_ps;
+                $name = $company_name;
+                $email = $email_reg;
+                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                //Openfire Username Generate End
+            }
 
             //Send Promotional Mail Start            
             $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();

@@ -123,18 +123,19 @@ class Registration extends CI_Controller {
 
                 $user_insert = $this->common->insert_data_getid($user_data, 'user');
                 if ($user_insert) {
-
-                    //Openfire Username Generate Start
-                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                    $op_un_ps = str_replace("-", "_", $user_slug);
-                    $properties = array();
-                    $username = $op_un_ps;
-                    $password = $op_un_ps;
-                    $name = ucwords($first_name." ".$last_name);
-                    $email = $email_reg;
-                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                    //Openfire Username Generate End
+                    if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                        //Openfire Username Generate Start
+                        $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                        $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                        $op_un_ps = str_replace("-", "_", $user_slug);
+                        $properties = array();
+                        $username = $op_un_ps;
+                        $password = $op_un_ps;
+                        $name = ucwords($first_name." ".$last_name);
+                        $email = $email_reg;
+                        $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                        //Openfire Username Generate End
+                    }
 
                     $user_login_data = array(
                         'email' => strtolower($this->input->post('email_reg')),
@@ -595,18 +596,19 @@ class Registration extends CI_Controller {
             );
             $user_insert = $this->common->insert_data_getid($user_data, 'user');
             if ($user_insert) {
-
-                //Openfire Username Generate Start
-                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-                $op_un_ps = str_replace("-", "_", $user_slug);
-                $properties = array();
-                $username = $op_un_ps;
-                $password = $op_un_ps;
-                $name = ucwords($first_name." ".$last_name);
-                $email = $email_reg;
-                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-                //Openfire Username Generate End
+                if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                    //Openfire Username Generate Start
+                    $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+                    $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+                    $op_un_ps = str_replace("-", "_", $user_slug);
+                    $properties = array();
+                    $username = $op_un_ps;
+                    $password = $op_un_ps;
+                    $name = ucwords($first_name." ".$last_name);
+                    $email = $email_reg;
+                    $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+                    //Openfire Username Generate End
+                }
 
                 $user_login_data = array(
                     'email' => strtolower($email_reg),

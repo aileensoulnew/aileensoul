@@ -5200,19 +5200,20 @@ class Recruiter extends MY_Controller {
 			);
 
 			$insert_id = $this->common->insert_data_getid($data, 'recruiter');
-			
-			//Openfire Username Generate Start
-            $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-            $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-            $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
-            $properties = array();
-            $username = $op_un_ps;
-            $password = $op_un_ps;
-            $name = ucwords($first_name." ".$last_name);
-            $email = $email_reg;
-            $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-            //Openfire Username Generate End
 
+			if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+				//Openfire Username Generate Start
+	            $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+	            $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+	            $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
+	            $properties = array();
+	            $username = $op_un_ps;
+	            $password = $op_un_ps;
+	            $name = ucwords($first_name." ".$last_name);
+	            $email = $email_reg;
+	            $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+	            //Openfire Username Generate End
+	        }
             //Send Promotional Mail Start
             $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
 
@@ -5950,17 +5951,19 @@ class Recruiter extends MY_Controller {
 				
 				$insert_id = $this->common->insert_data_getid($data, 'recruiter');            
 				if ($insert_id) {
-					//Openfire Username Generate Start
-	                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
-	                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
-	                $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
-	                $properties = array();
-	                $username = $op_un_ps;
-	                $password = $op_un_ps;
-	                $name = ucwords($first_name." ".$last_name);
-	                // $email = $email_reg;
-	                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
-	                //Openfire Username Generate End
+					if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+						//Openfire Username Generate Start
+		                $authenticationToken = new \Gnello\OpenFireRestAPI\AuthenticationToken(OP_ADMIN_UN, OP_ADMIN_PW);
+		                $api = new \Gnello\OpenFireRestAPI\API(OPENFIRESERVER, 9090, $authenticationToken);
+		                $op_un_ps = "recruiter_".str_replace("-", "_", $user_slug);
+		                $properties = array();
+		                $username = $op_un_ps;
+		                $password = $op_un_ps;
+		                $name = ucwords($first_name." ".$last_name);
+		                // $email = $email_reg;
+		                $result = $api->Users()->createUser($username, $password, $name, $email, $properties);
+		                //Openfire Username Generate End
+		            }
 	                
 	                //Send Promotional Mail Start
 	                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $userid))->row();
