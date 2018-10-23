@@ -948,3 +948,5 @@ $config['article_upload_path'] = 'uploads/article/';
 $config['article_featured_upload_path'] = 'uploads/article_featured/';
 
 $config['user_research_upload_path'] = 'uploads/user_research/';
+$config['user_idol_upload_path'] = 'uploads/user_idol/';
+$config['user_publication_upload_path'] = 'uploads/user_publication/';

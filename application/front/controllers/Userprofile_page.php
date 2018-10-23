@@ -1226,4 +1226,106 @@ class Userprofile_page extends MY_Controller {
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function save_user_idol()
+    {
+        // print_r($_POST);
+        // print_r($_FILES);
+        // exit();
+        
+        if(isset($_FILES['user_idol_file']['name']) && $_FILES['user_idol_file']['name'] != "")
+        {
+            $user_idol_name = $this->input->post('user_idol_name');
+            $fileName = "";
+            $user_idol_upload_path = $this->config->item('user_idol_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_idol_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['user_idol_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('user_idol_file')){
+                $main_image = $user_idol_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+            $userid = $this->session->userdata('aileenuser');
+            $data = array(
+                'user_id' => $userid,
+                'user_links_name' => $user_idol_name,
+                'user_links_pic' => $fileName,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_idol');
+            $user_idol = $this->userprofile_model->get_user_idols($userid);
+            $ret_arr = array("success"=>1,"user_idol"=>$user_idol);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_publication()
+    {
+        $pub_title = $this->input->post('pub_title');
+        $pub_author = $this->input->post('pub_author');
+        $pub_url = $this->input->post('pub_url');
+        $pub_publisher = $this->input->post('pub_publisher');
+        $pub_desc = $this->input->post('pub_desc');
+        $publication_date = $this->input->post('pub_year_txt').'-'.$this->input->post('pub_month_txt').'-'.$this->input->post('pub_day_txt');
+        $fileName = "";
+        if(isset($_FILES['pub_file']['name']) && $_FILES['pub_file']['name'] != "")
+        {
+            $user_publication_upload_path = $this->config->item('user_publication_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_publication_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['pub_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('pub_file'))            {
+                $main_image = $user_publication_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_publication = $this->userprofile_model->set_user_publication($user_id,$pub_title,$pub_author,$pub_url,$pub_publisher,$pub_desc,$publication_date,$fileName);
+            $user_publication = $this->userprofile_model->get_user_publication($user_id);
+            $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

@@ -1131,6 +1131,7 @@ class Userprofile_model extends CI_Model {
     {
         $this->db->select("*")->from("user_research");
         $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
         $query = $this->db->get();
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
@@ -1140,6 +1141,7 @@ class Userprofile_model extends CI_Model {
     {
         $this->db->select("*")->from("user_links");
         $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
         $query = $this->db->get();
         $user_data_links = $query->result_array();        
         return $user_data_links;
@@ -1150,6 +1152,7 @@ class Userprofile_model extends CI_Model {
         $this->db->select("*")->from("user_links");
         $this->db->where('user_id', $userid);
         $this->db->where('user_links_type != ','Personal');
+        $this->db->order_by('created_date',"desc");
         $query = $this->db->get();
         $user_data_links = $query->result_array();        
         return $user_data_links;
@@ -1160,8 +1163,48 @@ class Userprofile_model extends CI_Model {
         $this->db->select("*")->from("user_links");
         $this->db->where('user_id', $userid);
         $this->db->where('user_links_type','Personal');
+        $this->db->order_by('created_date',"desc");
         $query = $this->db->get();
         $user_data_links = $query->result_array();        
         return $user_data_links;
+    }
+
+    public function get_user_idols($userid)
+    {
+        $this->db->select("*")->from("user_idol");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_idol_data = $query->result_array();        
+        return $user_idol_data;
+    }
+
+    public function set_user_publication($userid,$pub_title = "",$pub_author = "",$pub_url = "",$pub_publisher = "",$pub_desc = "",$publication_date = "",$pub_document = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'pub_title' => $pub_title,
+            'pub_author' => $pub_author,
+            'pub_url' => $pub_url,
+            'pub_publisher' => $pub_publisher,
+            'pub_desc' => $pub_desc,
+            'pub_date' => $publication_date,
+            'pub_file' => $pub_document,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_publication');
+        return $insert_id;
+    }
+
+    public function get_user_publication($userid)
+    {
+        $this->db->select("*")->from("user_publication");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
     }
 }

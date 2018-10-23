@@ -1104,105 +1104,82 @@
                 <div class="dtl-title">
                     <span>Publication</span>
                 </div>
+                <form name="publication_form" id="publication_form" ng-validate="publication_validate">
                 <div class="dtl-dis">
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" placeholder="Title">
+                        <input type="text" placeholder="Title" id="pub_title" name="pub_title" minlength="3" maxlength="200">
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <label>Author</label>
-                                <input type="text" placeholder="Author">
+                                <input type="text" placeholder="Author" id="pub_author" name="pub_author"  minlength="3" maxlength="200">
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>URL</label>
-                                <input type="text" placeholder="URL">
+                                <input type="text" placeholder="URL" id="pub_url" name="pub_url" maxlength="200">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Publisher / Publication</label>
-                        <input type="text" placeholder="Publisher / Publication">
+                        <input type="text" placeholder="Publisher / Publication" id="pub_publisher" name="pub_publisher" minlength="3" maxlength="200">
                     </div>
                     
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Start Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
+                        <label>Publication Date</label>                            
+                        <div class="row">                            
+                            <div class="col-md-4 col-sm-4">
+                                <span class="span-select">
+                                    <select id="publication_month" name="publication_month" ng-model="publication_month" ng-change="publication_pub_fnc('','','')">
+                                        <option value="">Month</option>
+                                        <option value="01">Jan</option>
+                                        <option value="02">Feb</option>
+                                        <option value="03">Mar</option>
+                                        <option value="04">Apr</option>
+                                        <option value="05">May</option>
+                                        <option value="06">Jun</option>
+                                        <option value="07">Jul</option>
+                                        <option value="08">Aug</option>
+                                        <option value="09">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
+                                    </select>
+                                </span>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>End Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="col-md-4 col-sm-4">
+                                <span class="span-select">
+                                    <select id="publication_day" name="publication_day" ng-model="publication_day" ng-click="publication_error()"></select>
+                                </span>
                             </div>
+                            <div class="col-md-4 col-sm-4">
+                                <span class="span-select">
+                                    <select id="publication_year" name="publication_year" ng-model="publication_year" ng-change="publication_pub_fnc('','','')" ng-click="publication_error()">
+                                    </select>
+                                </span>
+                            </div>                            
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea type="text" placeholder="Description"></textarea>
-                    </div>
-                    
+                        <textarea type="text" placeholder="Description" id="pub_desc" name="pub_desc" minlength="10" maxlength="700"></textarea>
+                    </div>                    
                     <div class="form-group">
                         <label class="upload-file">
-                            Upload File (Publication Certificate) <input type="file">
+                            Upload File (Publication Certificate) <input type="file" id="pub_file" name="pub_file">
                         </label>
-                    </div>
-                    
+                        <span id="pub_file_error" class="error" style="display: none;">File size must be less than 5MB.</span>
+                    </div>                    
                 </div>
                 <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                    <!-- <a href="#" class="save"><span>Save</span></a> -->
+                    <a id="user_publication_save" href="#" ng-click="save_user_publication()" class="save"><span>Save</span></a>
+                    <img id="user_publication_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -1443,23 +1420,26 @@
                 <div class="dtl-title">
                     <span>Inspiration</span>
                 </div>
-                <div class="dtl-dis">
-                    <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (Photo of your inspiration) <input type="file">
-                        </label>
+                <form name="idol_form" id="idol_form" ng-validate="idol_validate">
+                    <div class="dtl-dis">
+                        <div class="form-group">
+                            <label class="upload-file">
+                                Upload File (Photo of your inspiration)<input type="file" id="user_idol_file" name="user_idol_file">
+                            </label>
+                            <span id="user_idol_file_error" class="error" style="display: none;">File size must be less than 5MB.</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Enter Name" id="user_idol_name" name="user_idol_name">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" placeholder="Enter Skills">
+                    <div class="dtl-btn">
+                        <!-- <a href="#" class="save"><span>Save</span></a> -->
+                        <a id="user_idol_save" href="#" ng-click="save_user_idol()" class="save"><span>Save</span></a>
+                        <img id="user_idol_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
-                </div>
-                <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                </form>
+            </div>
         </div>
     </div>
 </div>

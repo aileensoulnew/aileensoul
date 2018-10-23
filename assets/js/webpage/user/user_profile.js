@@ -3589,9 +3589,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 // $scope.user_social_links_data = user_social_links_data;
                 // $scope.user_personal_links_data = user_personal_links_data;
                 $scope.social_linksset.social_links = user_social_links_data;
-                $scope.personal_linksset.personal_links = user_personal_links_data;
-                console.log($scope.social_linksset.social_links);
-                console.log($scope.personal_linksset.personal_links);
+                $scope.personal_linksset.personal_links = user_personal_links_data;                
             }
 
         });
@@ -3857,8 +3855,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
     //Research Start
     $scope.research_pub_fnc = function(dob_day,dob_month,dob_year){
-        $("#dateerror").hide();
-        $("#dateerror").html('');
+        $("#recdateerror").hide();
+        $("#recdateerror").html('');
         var kcyear = document.getElementsByName("year")[0],
         kcmonth = document.getElementsByName("month")[0],
         kcday = document.getElementsByName("day")[0];                
@@ -3954,7 +3952,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 required: "Please enter research title",
             },
             research_desc: {
-                research_desc: "Please enter description",
+                required: "Please enter description",
             },
             research_url: {                
                 url: "Enter valid URL",
@@ -3980,13 +3978,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var research_formdata = new FormData();
     $(document).on('change','#research_document', function(e){
         var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','docx','doc','PDF'];
-        var ext = $(this).val().split('.');
-        alert(ext[ext.length - 1]);
+        var ext = $(this).val().split('.');        
         if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
             research_formdata.append('file', $('#research_document')[0].files[0]);
         }
         else {
-            $(this).val() = "";
+            $(this).val("");
         }         
     });
     $scope.save_user_research = function(){
@@ -4237,6 +4234,322 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     };
     //Socila Links End
+
+    //User Idol Start
+    var idol_formdata = new FormData();
+    $(document).on('change','#user_idol_file', function(e){
+        $("#user_idol_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#user_idol_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {            
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                idol_formdata.append('user_idol_file', $('#user_idol_file')[0].files[0]);
+            }
+            else {
+                $(this).val("");
+            }         
+        }
+    });
+    $scope.idol_validate = {
+        rules: {
+            user_idol_file: {
+                required: true,
+            },
+            user_idol_name: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+        },
+        messages: {
+            user_idol_file: {
+                required: "Please select image",
+            },
+            user_idol_name: {
+                required: "Please enter name",
+            },
+        },
+        errorPlacement: function (error, element) {
+            if (element.attr("type") == "checkbox") {                
+            } else {
+                error.insertAfter(element);
+            }
+        },
+    };
+    $scope.save_user_idol = function(){
+        if ($scope.idol_form.validate()) {
+            
+            $("#user_idol_loader").show();
+            $("#user_idol_save").attr("style","pointer-events:none;display:none;");
+
+            idol_formdata.append('user_idol_name', $('#user_idol_name').val());
+            $http.post(base_url + 'userprofile_page/save_user_idol', idol_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $("#user_idol_save").removeAttr("style");
+                        $("#user_idol_loader").hide();
+                        $("#idol_form")[0].reset();
+                        $("#inspiration").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_idol_save").removeAttr("style");
+                        $("#user_idol_loader").hide();
+                        $("#idol_form")[0].reset();
+                        $("#inspiration").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //User Idol End
+
+    // User Publication Start
+    $scope.publication_pub_fnc = function(dob_day,dob_month,dob_year){
+        $("#pubdateerror").hide();
+        $("#pubdateerror").html('');
+        var kcyear = document.getElementsByName("publication_year")[0],
+        kcmonth = document.getElementsByName("publication_month")[0],
+        kcday = document.getElementsByName("publication_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#publication_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#publication_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.publication_error = function()
+    {
+        $("#pubdateerror").hide();
+        $("#pubdateerror").html('');
+    };
+
+    var publication_formdata = new FormData();
+    $(document).on('change','#pub_file', function(e){
+        $("#pub_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#pub_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                publication_formdata.append('pub_file', $('#pub_file')[0].files[0]);
+            }
+            else {
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.publication_validate = {
+        rules: {            
+            pub_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            pub_author: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            pub_url: {
+                url: true,                
+            },
+            pub_publisher: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            publication_month: {
+                required: true,
+            },
+            publication_day: {
+                required: true,
+            },
+            publication_year: {
+                required: true,
+            },
+            pub_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+        },
+        /*groups: {
+            publication_date: "publication_year publication_month publication_day"
+        },   */     
+        messages: {
+            pub_title: {
+                required: "Please enter publication title",
+            },
+            pub_author: {
+                required: "Please enter publication author",
+            },
+            pub_url: {
+                url: "URL must start with http:// or https://",
+            },
+            pub_publisher: {
+                required: "Please enter publisher",
+            },
+            publication_month: {
+                required: "Please select publication date",
+            },
+            publication_day: {
+                required: "Please select publication date",
+            },
+            publication_year: {
+                required: "Please select publication date",
+            },
+            pub_desc: {
+                required: "Please enter publication description",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_publication = function(){
+        if ($scope.publication_form.validate()) {
+            $("#user_publication_loader").show();
+            $("#user_publication_save").attr("style","pointer-events:none;display:none;");
+
+            var pub_day_txt = $("#publication_day option:selected").val();
+            var pub_month_txt = $("#publication_month option:selected").val();
+            var pub_year_txt = $("#publication_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = pub_year_txt + '/' + pub_month_txt + '/' + pub_day_txt;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#recdateerror").html("Date of publishing always less than to today's date.");
+                $("#recdateerror").show();
+
+                $("#user_research_save").removeAttr("style");
+                $("#user_research_loader").hide();
+                return false;
+            }
+
+            publication_formdata.append('pub_title', $('#pub_title').val());
+            publication_formdata.append('pub_author', $('#pub_author').val());
+            publication_formdata.append('pub_url', $('#pub_url').val());
+            publication_formdata.append('pub_publisher', $('#pub_publisher').val());
+            publication_formdata.append('pub_desc', $('#pub_desc').val());            
+            publication_formdata.append('pub_day_txt', pub_day_txt);            
+            publication_formdata.append('pub_month_txt', pub_month_txt);            
+            publication_formdata.append('pub_year_txt', pub_year_txt);            
+
+            $http.post(base_url + 'userprofile_page/save_user_publication', publication_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $("#user_publication_save").removeAttr("style");
+                        $("#user_publication_loader").hide();
+                        $("#publication_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_publication_save").removeAttr("style");
+                        $("#user_publication_loader").hide();
+                        $("#publication_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    // User Publication End
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {
