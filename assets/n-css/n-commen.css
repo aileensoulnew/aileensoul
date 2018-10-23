@@ -1118,6 +1118,7 @@ a:focus{outline:none;}
 	.fw-539.left-header h2.logo{float:none;}
 }
 @media screen and (max-width: 479px) {
+	.mob-pr0{padding-right:0;}
 	.main-login .middle-main{padding:40px 0 80px;}
 	.fw-479{width:100%; float:left;}
 	.none-479{display:none !important;}

@@ -2731,7 +2731,7 @@ max-width: inherit;}
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
-.job_reg_main{border:1px solid #d2d2d2; border-radius:20px;}
+.job_reg_main{border-radius:20px;}
 .job_reg_main h3{font-size: 24px; color: #1b8ab9;
     background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     -webkit-background-clip: text;
@@ -3506,6 +3506,8 @@ a.job-expired:hover{color:#000 !important;}
 	.detail-right .rsp-dtl-box{width:100%;}
 	.edit-user-info{top:100px;}
 	.width-10{padding-left:0;}
+	.all-detail-custom .right-add .rsp-dtl-box{width:100%;}
+	.dtl-dis ul.skill-list{min-height:auto;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3602,6 +3604,7 @@ a.job-expired:hover{color:#000 !important;}
 	
 }
 @media screen and (max-width: 479px) {
+	.mob-pr0{padding-right:0;}
 	.hw-479{width:50%; float:left;}
 	.hidden-479{display:none;}
 	.block-479{display:block;}
@@ -3860,7 +3863,7 @@ a.job-expired:hover{color:#000 !important;}
 	.img-custom .ceo-img{width:80px; height:80px;}
 	.new-abput-page .img-custom .text-custom{padding:12px 0px 0px;}
 	.job-bottom-btn{display:none;}
-	.dtl-title{padding:10px; font-size:16px;}
+	.dtl-title{font-size:16px;}
 	.dtl-title .cus-width{width:20px;}
 	.dtl-title a img{width:20px; margin-top:3px;}
 	.dtl-dis.dis-accor .panel-heading{padding:10px;}
@@ -3873,7 +3876,7 @@ a.job-expired:hover{color:#000 !important;}
 	.dis-list li span{font-size:14px;}
 	.dtl-dis ul li{font-size:12px; padding-bottom:10px;}
 	.dis-accor .panel-collapse{padding:0 10px;}
-	.dtl-dis{padding:10px 10px 30px;}
+	.dtl-dis{/*padding:10px 10px 30px;*/}
 	.dis-right a.pr5{padding-right:0;}
 	.mob-plr0{padding-left:0; padding-right:0;}
 	.dtl-box{border-radius:0;}
@@ -3891,6 +3894,7 @@ a.job-expired:hover{color:#000 !important;}
 	.dtl-modal .modal-close{top:15px;}
 	.dtl-btn .save:hover{border-radius:0;}
 	#profile-overview .dtl-btn{position:absolute; width:100%; bottom:0;}
+	#skills .dtl-btn{position:absolute; width:100%; bottom:0;}
 	.dtl-about-box .width-45{width:44%;}
 	.dtl-about-box .width-10{width:12%;}
 	.dtl-two-btn .dtl-btn .back:hover{border-radius:0;}
@@ -3898,7 +3902,8 @@ a.job-expired:hover{color:#000 !important;}
 	.dtl-more-add a img{width:13px;}
 	.dtl-modal .dtl-title{padding:15px;}
 	.dtl-modal .dtl-dis{padding:15px;}
-	.dtl-modal .dlt-img{margin-top:35px; width:15px;}
+	.dtl-modal .dlt-img{margin-top:15px; width:15px;}
+	#social-link .span-select select{padding-left:1px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}

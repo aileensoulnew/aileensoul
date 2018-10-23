@@ -2985,7 +2985,7 @@
 							
 							<div class="row">
 								<div class="">
-									<div class="col-md-3 col-sm-3">
+									<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
 										<div class="form-group">
 											<label>Website</label>
 											<span class="span-select">
@@ -2997,14 +2997,14 @@
 											</span>
 										</div>
 									</div>
-									<div class="col-md-8 col-sm-8">
+									<div class="col-md-8 col-sm-8 col-xs-7">
 										<div class="form-group">
 											<label>URL</label>
 											<input type="text" placeholder="URL">
 										</div>
 									</div>
 									
-									<div class="col-md-1 col-sm-1 pl0">
+									<div class="col-md-1 col-sm-1 col-xs-1 pl0">
 										<label></label>
 										<a href="#" class="pull-right"><img class="dlt-img" src="n-images/detail/dtl-delet.png"></a>
 										
@@ -3015,9 +3015,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Add Personal Website</label>
-							<input type="text" placeholder="Add Personal Website">
+						<div class="row">
+							<div class="col-md-11 col-sm-11 col-xs-11">
+								<div class="form-group">
+									<label>Add Personal Website</label>
+									<input type="text" placeholder="Add Personal Website">
+								</div>
+							</div>
+							<div class="col-md-1 col-sm-1 col-xs-1 pl0">
+								<label></label>
+									<a href="#" class="pull-right"><img class="dlt-img" src="n-images/detail/dtl-delet.png"></a>
+							</div>
 							<div class="fw dtl-more-add pt15">
 										<a href="#"><span class="pr10">Add More Links </span><img src="n-images/detail/inr-add.png"></a>
 									</div>
@@ -3166,10 +3174,7 @@
 
 masonryLayout(document.getElementById('gallery'),
 document.querySelectorAll('.gallery-item'), 2);
-if (screen.width > 1200) {
-		masonryLayout(document.getElementById('gallery1'),
-		document.querySelectorAll('.gallery-item1'), 2);
-}
+
 
 
 		// mcustom scroll bar
