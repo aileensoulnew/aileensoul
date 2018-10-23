@@ -2618,7 +2618,7 @@ padding: 4px;}
 .no-info span{width:100%; float:left; color:#7b7b7b;}
 .detail-right .no-info span{width:73%; padding:5px 0px 0 10px;}
 .dtl-modal .modal-content{border-radius:20px;}
-.dtl-modal .modal-close{font-size:30px; top:15px; right:15px;}
+.dtl-modal .modal-close{font-size:30px; top:15px; right:17px;}
 .dtl-modal .dtl-title{background:#f6f6f6; border-bottom:0; border-top-left-radius:20px; border-top-right-radius:20px; color:#5c5c5c;}
 .dtl-modal .dtl-title span{margin-left:0;}
 .dtl-dis textarea{height:100px;}
@@ -2627,12 +2627,16 @@ padding: 4px;}
 .dtl-dis p{color:#7b7b7b; font-size:14px;}
 .dtl-dis p a b{color:#7b7b7b;}
 .dtl-btn{width:100%; float:left; text-align:center; border-top:1px solid #d2d2d2;}
-.dtl-btn .save{font-size:18px; font-weight:bold; letter-spacing:1px; width:100%; padding:16px 15px 15px; display:block;}
-.dtl-btn .save span{-webkit-text-fill-color: transparent; color: #1b8ab9;
+.dtl-btn .save, .dtl-btn .back{font-size:18px; font-weight:bold; letter-spacing:1px; width:100%; padding:16px 15px 15px; display:block;}
+.dtl-btn .save span, .dtl-btn .back span{-webkit-text-fill-color: transparent; color: #1b8ab9;
 	background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background-clip: border-box;
 -webkit-background-clip: text; }
 .dtl-btn .save:hover{background:#f6f6f6; border-bottom-left-radius:20px; border-bottom-right-radius:20px;}
+.dtl-two-btn .dtl-btn .back{border-right:1px solid #d2d2d2;}
+.dtl-two-btn .dtl-btn .save:hover{border-bottom-left-radius:0px;}
+.dtl-two-btn .dtl-btn .back:hover{background:#f6f6f6; border-bottom-left-radius:20px;}
+.dtl-two-btn{width:100%; float:left;}
 .width-45{width:45%; float:left; padding-left:15px; padding-right:15px;}
 .width-10{width:10%; float:left; padding-left:15px; padding-right:15px;}
 .span-select select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
@@ -2720,6 +2724,8 @@ max-width: inherit;}
 .dtl-edit-p img{display:inline-block;}
 .all-detail-custom .right-add .row{margin-left:0; margin-right:0;}
 .modal.in{padding-right:0 !important;}
+.dtl-modal .dtl-title{padding:15px 20px;}
+.dtl-modal .dtl-dis{padding:15px 20px;}
 
 
 /***  end new details page  ***/
@@ -3882,11 +3888,17 @@ a.job-expired:hover{color:#000 !important;}
 	.dtl-modal .modal-dialog{padding:0; margin:0; height:100%;}
 	.dtl-modal .modal-content{border-radius:0px; box-shadow:inherit; border:0px; width:100%; height:100%;}
 	.dtl-modal .dtl-title{border-radius:0px;}
-	.dtl-modal .modal-close{top:11px;}
+	.dtl-modal .modal-close{top:15px;}
 	.dtl-btn .save:hover{border-radius:0;}
 	#profile-overview .dtl-btn{position:absolute; width:100%; bottom:0;}
 	.dtl-about-box .width-45{width:44%;}
 	.dtl-about-box .width-10{width:12%;}
+	.dtl-two-btn .dtl-btn .back:hover{border-radius:0;}
+	.dtl-more-add a{font-size:14px;}
+	.dtl-more-add a img{width:13px;}
+	.dtl-modal .dtl-title{padding:15px;}
+	.dtl-modal .dtl-dis{padding:15px;}
+	.dtl-modal .dlt-img{margin-top:35px; width:15px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
