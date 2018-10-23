@@ -186,6 +186,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button id="submit" class="btn1 recruiter_registration" name="submit" tabindex="11" onclick="return reg_loader();">Register</button>
+                                        <img id="recruiter_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                                     </div>                                      
                                 </div>
                             </div>

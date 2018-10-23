@@ -5164,6 +5164,18 @@ class Recruiter extends MY_Controller {
 			$this->data['cities'] = $this->common->select_data_by_condition('cities', $contition_array, $data = '*', $sortby = 'city_name,city_id,state_id', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 			$this->load->view('recruiter/rec_reg', $this->data);
 		} else {
+			$contition_array = array('user_id' => $userid, 're_status' => '1', 'is_delete' => '0');
+			$recruiter_data = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
+			if(isset($recruiter_data) && !empty($recruiter_data))
+			{
+				$datavl = "ok";
+				echo json_encode(
+				array(
+					"okmsg" => $datavl,
+					"segment" => "",
+				));
+				exit();	
+			}
 			$first_name = $this->input->post('first_name');
 			$last_name = $this->input->post('last_name');
 			$email_reg = $this->input->post('email');

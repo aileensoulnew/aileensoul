@@ -378,7 +378,9 @@ $(document).ready(function () {
 
 
 function submitrecruiterForm()
-    {
+{
+    $("#recruiter_loader").show();
+    $(".recruiter_registration").attr("style","pointer-events: none;");
 
       var first_name = $("#first_name").val();
       var last_name = $("#last_name").val();
@@ -419,6 +421,8 @@ function submitrecruiterForm()
             },
             success: function (response)
             {
+                // $("#recruiter_loader").hide();
+                // $("#recruiter_registration").removeAttr("style");
               
                 if (response.okmsg == "ok") {
                     // if(response.segment == 'live-post') {

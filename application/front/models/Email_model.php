@@ -421,9 +421,9 @@ class Email_model extends CI_Model {
     }
 
     function send_email_template($subject = '', $email_html = '', $to_email = '',$unsubscribe = '') {
-        $this->load->library('email');        
+        $this->load->library('email');
 
-        require 'phpmailer/vendor/autoload.php';
+        require FCPATH.'phpmailer/vendor/autoload.php';
  
         //Create a new PHPMailer instance
         $mail = new PHPMailer\PHPMailer\PHPMailer;
