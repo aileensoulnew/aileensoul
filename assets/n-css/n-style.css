@@ -2646,6 +2646,7 @@ padding: 4px;}
 .dtl-modal select{padding-left:12px;}
 .form-group .upload-file input{border:0; padding:10px 0 0; height:auto;}
 .edit-user-info{position:absolute; right:25px; top:150px;}
+.edit-user-info a img{width:25px;}
 .dtl-dis ul{padding-left:0; margin-bottom:0;  padding-bottom:5px;}
 .dtl-dis ul li{list-style-type:none; padding-bottom:15px; font-size:14px;}
 .about-dtl-box{padding:5px 0; float:left;}
@@ -2658,7 +2659,7 @@ padding: 4px;}
 .dis-middle{width:310px; float:left; padding-left:10px; padding-top:7px;}
 .dis-right{width:50px; float:left; padding-top:7px;}
 .dis-right a{float:left;}
-.dis-right a:last-child{float:right; padding-top:5px;}
+.dis-right a:last-child{float:right;}
 .dis-left-img{width:50px; height:50px; border:1px solid #d2d2d2; text-align:center;}
 .dis-left-img span{font-size:28px; color:#1b8ab9; padding:13px 10px; display:inline-block;}
 .dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
@@ -2717,6 +2718,8 @@ max-width: inherit;}
 .about-detail .dis-list li:last-child span{padding-bottom:0px;}
 .dtl-edit-p{text-align:center;}
 .dtl-edit-p img{display:inline-block;}
+.all-detail-custom .right-add .row{margin-left:0; margin-right:0;}
+.modal.in{padding-right:0 !important;}
 
 
 /***  end new details page  ***/
@@ -2867,15 +2870,20 @@ a.job-expired:hover{color:#000 !important;}
 	.view-more-page .right-add{display:none;}
 	.job-top-btn{position:inherit; margin-top:-23px !important;}
 	.article-all-comment .comment-dis{width:90%;}
-	.detail-left{width:100%;}
-	.detail-right{width:100%; padding:0;}
-	.detail-right .rsp-dtl-box{width:50%; float:left; padding-left:15px; padding-right:15px;}
+	.all-detail-custom .custom-user-list{width:100%;}
+	.all-detail-custom .right-add{width:100%; padding:0;}
+	.all-detail-custom .right-add .rsp-dtl-box{width:50%; float:left; padding-left:8px; padding-right:8px;}
 	.dtl-dis ul.skill-list{min-height:180px;}
+	.dis-right{float:right;}
+	.dis-middle{width:325px;}
+	.all-detail-custom .right-add .row{margin-left:-15px; margin-right:-15px;}
+	.dtl-adv{display:none;}
 }
 @media screen and (max-width: 1024px) {
 
 }
 @media screen and (max-width: 991px) {
+	.none-991{display:none;}
 	.post-box-bottom ul li:nth-child(2){display:none;}
 	.bus-inner .right-add{display:none;}
 	.tab-mb15{margin-bottom:15px;}
@@ -3064,9 +3072,15 @@ a.job-expired:hover{color:#000 !important;}
 	.dtl-dis.dis-accor .panel-heading{padding:15px;}
 	.dis-left{width:40px;}
 	.dis-left-img{width:40px; height:40px;}
-	.dis-middle{width:224px; padding-left:10px;}
+	.dis-middle{width:240px; padding-left:10px;}
 	.dis-left-img span{padding:8px 10px;}
-	
+	.dis-middle{padding-top:0px;}
+	.dtl-dis.dis-accor .panel-heading{min-height:70px;}
+	.dis-right a.pr5 img{width:18px;}
+	.dis-right a img{width:15px;}
+	.dis-right{padding-top:0;}
+	.dis-right{width:40px;}
+	.all-detail-custom .right-add{display:block;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -3484,6 +3498,7 @@ a.job-expired:hover{color:#000 !important;}
 	.dis-middle{width:85%;}
 	.dis-right{float:right;}
 	.detail-right .rsp-dtl-box{width:100%;}
+	.edit-user-info{top:100px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3846,18 +3861,22 @@ a.job-expired:hover{color:#000 !important;}
 	.dis-left-img{width:30px; height:30px;}
 	.dis-left-img span{font-size:16px; padding:3px;}
 	.dis-middle h4{font-size:14px;}
-	.dtl-dis p{font-size:13px;}
-	.dis-middle{width:82%;}
+	.dtl-dis p{font-size:12px;}
+	.dis-middle{width:77%;}
 	.dis-list li span{font-size:14px;}
-	.dtl-dis ul li{font-size:13px; padding-bottom:10px;}
+	.dtl-dis ul li{font-size:12px; padding-bottom:10px;}
 	.dis-accor .panel-collapse{padding:0 10px;}
 	.dtl-dis{padding:10px 10px 30px;}
-	.dis-right{width:17px;}
 	.dis-right a.pr5{padding-right:0;}
-	.dis-right a:last-child{padding-top:10px;}
 	.mob-plr0{padding-left:0; padding-right:0;}
 	.dtl-box{border-radius:0;}
-	
+	.dtl-dis.dis-accor .panel-heading{min-height:50px;}
+	.dis-middle h4{margin-bottom:0; line-height:1;}
+	.dis-right a.pr5 img{width:16px;}
+	.dis-right a img{width:13px;}
+	.dis-right{width:35px;}
+	.edit-user-info a img{width:20px;}
+	.edit-user-info{top:85px; right:9px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
@@ -3937,8 +3956,11 @@ a.job-expired:hover{color:#000 !important;}
 .masonry-layout.columns-6 {
   --columns: 6;
 }
-@media screen and (max-width: 767px) {
-.masonry-layout.columns-2 {
-  --columns: 1;
+@media screen and (max-width: 1199px) {
+
 }
+@media screen and (max-width: 767px) {
+	.masonry-layout.columns-2 {
+	  --columns: 1;
+	}
 }

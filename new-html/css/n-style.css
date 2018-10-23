@@ -2719,6 +2719,7 @@ max-width: inherit;}
 .dtl-edit-p{text-align:center;}
 .dtl-edit-p img{display:inline-block;}
 .all-detail-custom .right-add .row{margin-left:0; margin-right:0;}
+.modal.in{padding-right:0 !important;}
 
 
 /***  end new details page  ***/
@@ -3498,6 +3499,7 @@ a.job-expired:hover{color:#000 !important;}
 	.dis-right{float:right;}
 	.detail-right .rsp-dtl-box{width:100%;}
 	.edit-user-info{top:100px;}
+	.width-10{padding-left:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3876,6 +3878,15 @@ a.job-expired:hover{color:#000 !important;}
 	.dis-right{width:35px;}
 	.edit-user-info a img{width:20px;}
 	.edit-user-info{top:85px; right:9px;}
+	.dtl-modal{background:#fff;}
+	.dtl-modal .modal-dialog{padding:0; margin:0; height:100%;}
+	.dtl-modal .modal-content{border-radius:0px; box-shadow:inherit; border:0px; width:100%; height:100%;}
+	.dtl-modal .dtl-title{border-radius:0px;}
+	.dtl-modal .modal-close{top:11px;}
+	.dtl-btn .save:hover{border-radius:0;}
+	#profile-overview .dtl-btn{position:absolute; width:100%; bottom:0;}
+	.dtl-about-box .width-45{width:44%;}
+	.dtl-about-box .width-10{width:12%;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
