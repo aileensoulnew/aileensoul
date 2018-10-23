@@ -3569,6 +3569,33 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
         });
     }
+    get_user_links();
+    function get_user_links()
+    {
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_links',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_social_links_data = result.data.user_social_links_data;
+                user_personal_links_data = result.data.user_personal_links_data;
+                // $scope.user_social_links_data = user_social_links_data;
+                // $scope.user_personal_links_data = user_personal_links_data;
+                $scope.social_linksset.social_links = user_social_links_data;
+                $scope.personal_linksset.personal_links = user_personal_links_data;
+                console.log($scope.social_linksset.social_links);
+                console.log($scope.personal_linksset.personal_links);
+            }
+
+        });
+    }
     $scope.goMainLink = function (path) {
         location.href = path;
     }
@@ -4031,6 +4058,185 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     };
     //Research End
+
+    //Socila Links Start
+    $scope.social_linksset = {social_links: []};
+
+    $scope.social_linksset.social_links = [];
+    $scope.addNewSocialLinks = function () {
+        // console.log($scope.social_linksset.social_links.length);
+        if($scope.social_linksset.social_links.length < 7)
+        {
+            $scope.social_linksset.social_links.push('');
+            if($scope.social_linksset.social_links.length == 7)
+            {
+                $("#add-new-link").hide();
+            }
+        }
+        else
+        {
+            $("#add-new-link").hide();
+        }
+    };
+
+    $scope.removeSocialLinks = function (z) {
+        //var lastItem = $scope.social_linksset.social_links.length - 1;
+        $scope.social_linksset.social_links.splice(z,1);
+        $("#add-new-link").show();
+    };
+
+    $scope.check_socialurl = function(id){
+        var link_type = $("#link_type"+id+" option:selected").val();
+        var link_url = $("#link_url"+id).val();        
+        if(link_type == "Facebook")
+        {            
+            if(/(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i.test(link_url)){
+                console.log('valid');
+                $("#link_url"+id).removeClass("error");
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+            }
+        }
+        if(link_type == "Google")
+        {            
+            if(/\+[^/]+|\d{21}/i.test(link_url)){
+                console.log('valid');
+                $("#link_url"+id).removeClass("error");
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+            }
+        }
+        if(link_type == "Instagram")
+        {            
+            if(/https?:\/\/(www\.)?instagram\.com\/([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)/i.test(link_url)){
+                console.log('valid');
+                $("#link_url"+id).removeClass("error");
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+            }
+        }
+        if(link_type == "LinkedIn")
+        {            
+            if(/(ftp|http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i.test(link_url)){
+                console.log('valid');
+                $("#link_url"+id).removeClass("error");
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+            }
+        }
+        if(link_type == "Pinterest")
+        {            
+            if(/^http(s)?:\/\/(in.)pinterest.com\/(.*)?$/i.test(link_url)){
+                console.log('valid');
+                $("#link_url"+id).removeClass("error");
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+            }
+        }
+        if(link_type == "GitHub")
+        {            
+            if(/http(s)?:\/\/(www\.)?github\.(com|io)\/[A-z 0-9 _-]+\/?/i.test(link_url)){
+                console.log('valid');
+                $("#link_url"+id).removeClass("error");
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+            }
+        }
+        if(link_type == "Twitter")
+        {            
+            if(/http(s)?:\/\/(.*\.)?twitter\.com\/[A-z 0-9 _]+\/?/i.test(link_url)){
+                console.log('valid');
+                $("#link_url"+id).removeClass("error");
+            }
+            else
+            {
+                $("#link_url"+id).addClass("error");
+            }
+        }
+
+    };
+
+    $scope.personal_linksset = {personal_links: []};
+
+    $scope.personal_linksset.personal_links = [];
+    $scope.addNewPersonalLinks = function () {
+        // console.log($scope.personal_linksset.personal_links.length);
+        if($scope.personal_linksset.personal_links.length < 10)
+        {
+            $scope.personal_linksset.personal_links.push('');
+            if($scope.personal_linksset.personal_links.length == 10)
+            {
+                $("#add-personla-link").hide();
+            }
+        }
+        else
+        {
+            $("#add-personla-link").hide();
+        }
+    };
+
+    $scope.removePersonalLinks = function (z) {
+        //var lastItem = $scope.personal_linksset.personal_links.length - 1;
+        $scope.personal_linksset.personal_links.splice(z,1);
+        $("#add-personla-link").show();
+    };
+    $scope.check_personalurl = function(id){
+        var personal_link_url = $("#personal_link_url"+id).val();
+        var regexp =   /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
+        if (regexp.test(personal_link_url))
+        {
+            console.log('valid');
+            $("#personal_link_url"+id).removeClass("error");
+        }
+        else
+        {
+            $("#personal_link_url"+id).addClass("error");
+        }
+    };
+
+    $scope.save_user_links = function(){
+        $("#user_links_loader").show();
+        $("#user_links_save").attr("style","pointer-events:none;display:none;");
+        var link_type = $('.link_type').serializeArray();
+        var link_url = $('.link_url').serializeArray();
+        var personal_link_url = $('.personal_link_url').serializeArray();
+        var updatedata = $.param({'link_type':link_type,'link_url':link_url,'personal_link_url':personal_link_url});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/save_user_links',                
+            data: updatedata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {                
+            // $('#main_page_load').show();                
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_social_links_data = result.data.user_social_links_data;
+                user_personal_links_data = result.data.user_personal_links_data;
+                // $scope.user_social_links_data = user_social_links_data;
+                // $scope.user_personal_links_data = user_personal_links_data;
+                $scope.social_linksset.social_links = user_social_links_data;
+                $scope.personal_linksset.personal_links = user_personal_links_data;
+            }
+            $("#user_links_save").removeAttr("style");
+            $("#user_links_loader").hide();
+            // $("#profile-overview").modal('hide');
+        });
+    };
+    //Socila Links End
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {

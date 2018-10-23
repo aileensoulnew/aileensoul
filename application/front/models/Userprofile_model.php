@@ -1136,4 +1136,32 @@ class Userprofile_model extends CI_Model {
         return $user_data_lang;
     }
 
+    public function get_user_links($userid)
+    {
+        $this->db->select("*")->from("user_links");
+        $this->db->where('user_id', $userid);
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_social_links($userid)
+    {
+        $this->db->select("*")->from("user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type != ','Personal');
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
+
+    public function get_user_personal_links($userid)
+    {
+        $this->db->select("*")->from("user_links");
+        $this->db->where('user_id', $userid);
+        $this->db->where('user_links_type','Personal');
+        $query = $this->db->get();
+        $user_data_links = $query->result_array();        
+        return $user_data_links;
+    }
 }

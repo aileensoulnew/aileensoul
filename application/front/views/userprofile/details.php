@@ -1424,9 +1424,9 @@
                     </div>
                 </div>
                 <div class="dtl-btn">                        
-                        <a id="user_skills_save" href="#" ng-click="save_user_skills()" class="save"><span>Save</span></a>
-                        <img id="user_skills_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
-                    </div>
+                    <a id="user_skills_save" href="#" ng-click="save_user_skills()" class="save"><span>Save</span></a>
+                    <img id="user_skills_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                </div>
             </div>  
 
 
@@ -1478,14 +1478,19 @@
                         
                         <div class="row">
                             <div class="">
+                                <div class="" data-ng-repeat="field in social_linksset.social_links track by $index">
                                 <div class="col-md-3 col-sm-3">
                                     <div class="form-group">
                                         <label>Website</label>
                                         <span class="span-select">
-                                            <select>
-                                                <option>Facebook</option>
-                                                <option>Google</option>
-                                                <option>Instagram</option>
+                                            <select id="link_type{{$index}}" name="link_type" class="link_type">
+                                                <option value="Facebook" ng-selected="field.user_links_type == 'Facebook'">Facebook</option>
+                                                <option value="Google" ng-selected="field.user_links_type == 'Google'">Google</option>
+                                                <option value="Instagram" ng-selected="field.user_links_type == 'Instagram'">Instagram</option>
+                                                <option value="LinkedIn" ng-selected="field.user_links_type == 'LinkedIn'">LinkedIn</option>
+                                                <option value="Pinterest" ng-selected="field.user_links_type == 'Pinterest'">Pinterest</option>
+                                                <option value="GitHub" ng-selected="field.user_links_type == 'GitHub'">GitHub</option>
+                                                <option value="Twitter" ng-selected="field.user_links_type == 'Twitter'">Twitter</option>
                                             </select>
                                         </span>
                                     </div>
@@ -1493,31 +1498,46 @@
                                 <div class="col-md-8 col-sm-8">
                                     <div class="form-group">
                                         <label>URL</label>
-                                        <input type="text" placeholder="URL">
+                                        <input type="text" placeholder="URL" id="link_url{{$index}}" class="link_url" name="link_url" ng-keyup="check_socialurl($index)" ng-value="field.user_links_txt">
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-1 col-sm-1 pl0">
                                     <label></label>
-                                    <a href="#" class="pull-right"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
-                                    
+                                    <a href="#" class="pull-right" ng-click="removeSocialLinks()"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
                                 </div>
-                                <div class="fw dtl-more-add">
-                                    <a href="#"><span class="pr10">Add More Links </span><img src="<?php echo base_url(); ?>assets/n-images/detail/inr-add.png"></a>
+                                </div>
+                                <div class="fw dtl-more-add" id="add-new-link">
+                                    <a href="#" ng-click="addNewSocialLinks()"><span class="pr10">Add Social Links</span><img src="<?php echo base_url(); ?>assets/n-images/detail/inr-add.png"></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Add Personal Website</label>
-                        <input type="text" placeholder="Add Personal Website">
-                        <div class="fw dtl-more-add pt15">
-                                    <a href="#"><span class="pr10">Add More Links </span><img src="<?php echo base_url(); ?>assets/n-images/detail/inr-add.png"></a>
+                    <div class="row">
+                        <div data-ng-repeat="field in personal_linksset.personal_links track by $index">
+                            <div class="form-group">
+                                <div class="col-md-11 col-sm-11">
+                                    <label>Add Personal Website</label>
+                                    <input type="text" placeholder="Add Personal Website" id="personal_link_url{{$index}}" class="personal_link_url" name="personal_link_url" ng-keyup="check_personalurl($index)" ng-value="field.user_links_txt">
+                                    <span class="personal-link-info">Add http:// or https:// before link</span>
                                 </div>
+                                <div class="col-md-1 col-sm-1 pl0">
+                                    <label></label>
+                                    <a href="#" class="pull-right" ng-click="removePersonalLinks()"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="add-personla-link" class="fw dtl-more-add pt15">
+                            <a href="#" ng-click="addNewPersonalLinks()"><span class="pr10">Add Personal Website Links </span>
+                                <img src="<?php echo base_url(); ?>assets/n-images/detail/inr-add.png">
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
+                        <!-- <a href="#" class="save"><span>Save</span></a> -->
+                        <a id="user_links_save" href="#" ng-click="save_user_links()" class="save"><span>Save</span></a>
+                        <img id="user_links_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
             </div>  
 

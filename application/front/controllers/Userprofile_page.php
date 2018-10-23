@@ -1064,11 +1064,7 @@ class Userprofile_page extends MY_Controller {
                         $insert_id = $this->common->insert_data($data, 'user_languages');
                     }
                 }
-            }
-            else
-            {
-
-            }
+            }            
         }
         
         $user_dob = $this->input->post('user_dob');
@@ -1156,6 +1152,77 @@ class Userprofile_page extends MY_Controller {
         else
         {
             $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    function save_user_links()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $link_type = $this->input->post('link_type');
+        $link_url = $this->input->post('link_url');
+        $personal_link_url = $this->input->post('personal_link_url');
+
+        $this->db->where('user_id', $userid);
+        $this->db->delete('user_links');
+
+        if(count($link_type) == count($link_url))
+        {
+            foreach($link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => $link_type[$k]['value'],
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'user_links');
+                }
+            }
+        }
+
+        if(count($personal_link_url) > 0)
+        {
+            foreach($personal_link_url as $k=>$v)
+            {                    
+                if($v['value'] != "")
+                {                        
+                    $data = array(
+                        'user_id' => $userid,
+                        'user_links_txt' => $v['value'],
+                        'user_links_type' => "Personal",
+                        'status' => '1',
+                        'created_date' => date('Y-m-d H:i:s', time()),
+                        'modify_date' => date('Y-m-d H:i:s', time()),
+                    );
+                    $insert_id = $this->common->insert_data($data, 'user_links');
+                }
+            }
+        }
+
+        $user_social_links_data = $this->userprofile_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->userprofile_model->get_user_personal_links($userid);        
+        $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_links()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        $user_social_links_data = $this->userprofile_model->get_user_social_links($userid);        
+        $user_personal_links_data = $this->userprofile_model->get_user_personal_links($userid);        
+        if(empty($user_social_links_data) && empty($user_personal_links_data))
+        {
+            $ret_arr = array("success"=>0);
+        }
+        else
+        {
+            $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);   
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
