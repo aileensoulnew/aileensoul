@@ -13,11 +13,18 @@
         <link rel="stylesheet" href="css/n-style.css">
 		<style>
 			.form-group {position: relative; margin-bottom: 1.5rem;}
-			.form-control-placeholder {position: absolute; top: 0; padding: 15px 0 0 0px; transition: all 200ms; opacity: 1; }
+			.form-control-placeholder {position: absolute; top: 0; padding: 7px 0 0 0px; transition: all 200ms; opacity: 1; }
 			.form-control:focus + .form-control-placeholder,
 			.form-control:valid + .form-control-placeholder {
 				font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
-			
+			.job-reg-cus-new .form-group input{border-width:0 0 1px 0; border-radius:0; border-color:#d2d2d2;}
+			.job-reg-cus-new .form-group select{border-width:0 0 1px 0; border-radius:0; padding-left:0; border-color:#d2d2d2;}
+			.job-reg-cus-new .form-group label{padding-left:0; color:#7b7b7b}
+			.job_reg_main h3{border-bottom:1px solid #d2d2d2; color:#1b8ab9;}
+			.job_reg_main{border-radius:20px;
+				    box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);
+			}
+			.job-reg-cus-new .btn3{border:#5c5c5c; background:#5c5c5c; color:#fff; border-radius:20px;}
 
 		</style>
     </head>
@@ -551,7 +558,7 @@
 
         <div class="middle-section">
 
-            <div class="container mob-plr0">
+            <div class="container">
                 <div class="job_reg_page_fprm">
 					<div class="job_reg_main fw job-reg-cus-new">
 						<h3>Welcome in Job Profile</h3>
@@ -570,23 +577,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<input type="text" class="form-control" required>
-										<label class="form-control-placeholder" for="First Name">Email Address</label>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-6">
-									<div class="form-group">
-										<input type="text" class="form-control" required>
-										<label class="form-control-placeholder" for="First Name">Phone Number</label>
-									</div>
-								</div>
-								
+							<div class="form-group">
+								<input type="text" class="form-control" required>
+								<label class="form-control-placeholder" for="First Name">Email Address</label>
 							</div>
-							
-							<div class="fresher_radio fw">
+							<div class="fresher_radio form-group">
 							   <label><span>Fresher</span> <font color="red">*</font> : </label>
 							   <div class="main_raio">
 								  <input type="radio" value="Fresher" tabindex="4" id="test1" name="fresher" class="radio_job" onclick="not_experience()">
@@ -598,40 +593,6 @@
 								  <label for="test2" class="point_radio">No</label>
 							   </div>
 							   
-							</div>
-							<div class="row total-exp">
-								<div class="col-md-12">
-									Total Experience*:
-								</div>
-								<div class="col-md-6 col-sm-6 col-xs-6">
-									<div class="form-group">
-										<span class="span-select">
-											<select class="form-control">
-												<option>Year</option>
-												<option>2015</option>
-												<option>2016</option>
-												<option>2017</option>
-												<option>2018</option>
-											</select>
-										</span>
-									</div>
-								
-								</div>
-								<div class="col-md-6 col-sm-6 col-xs-6">
-									<div class="form-group">
-										<span class="span-select">
-											<select class="form-control">
-												<option>Month</option>
-												<option>januari</option>
-												<option>Fabruari</option>
-												<option>March</option>
-												<option>April</option>
-											</select>
-											
-										</span>
-									</div>
-								</div>
-								
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control" required>
@@ -657,9 +618,10 @@
 								<input type="text" class="form-control" required>
 								<label class="form-control-placeholder" for="First Name">Preferred location for job</label>
 							</div>
-							<div class="fw text-center pt5">
-								<a href="#" class="btn3">Register</a>
-							</div>
+							
+						</div>
+						<div class="form-group text-center pt20">
+							<a href="#" class="btn3">Register</a>
 						</div>
 					</div>
 				</div>

@@ -2726,21 +2726,31 @@ max-width: inherit;}
 .modal.in{padding-right:0 !important;}
 .dtl-modal .dtl-title{padding:15px 20px;}
 .dtl-modal .dtl-dis{padding:15px 20px;}
+.dtl-modal .form-group label.control{display:inline-block;}
+.dtl-dis.resume-img img{width:50px;}
 
 
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
-.job_reg_main{border-radius:20px;}
-.job_reg_main h3{font-size: 24px; color: #5c5c5c;
-   padding:15px 0; text-align:center; border-bottom:1px solid #d2d2d2;}
-.job-reg-cus-new .form-group input{position: relative; z-index: 9; background: transparent; border-width:0 0 1px 0; border-radius:0; padding-left:0; padding-right:0;}
-.job-reg-cus-new .form-group input:focus{box-shadow:none;}
-.fresher_radio label{display:inline-block;}
-.main_raio{display:inline-block;}
-.fresher_radio label span{margin-top: -6px; display: inline-block; vertical-align: middle;}
-.job-reg-cus-new .form-group select{border-width:0 0 1px 0; border-radius:0; padding-left:0;}
-.job-reg-cus-new .fresher_radio{padding-left:0;}
+.job_reg_main{border-radius:20px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
+.job_reg_main h3{font-size: 24px; color: #5c5c5c; border-bottom:1px solid #d2d2d2;
+   padding:15px 0; text-align:center;}
+.job-reg-cus-new .form-group{padding-top:5px; }
+.job-reg-cus-new .form-group label{color:#7b7b7b;}
+.job-reg-cus-new .form-group input{padding-left:0; padding-right:0; border-width: 0 0 1px 0; border-radius: 0; border-color: #d2d2d2; font-size:16px; position:relative; z-index:9; background:transparent;}
+.job-reg-cus-new .form-group input:focus{box-shadow:none; border-bottom:1px solid #1b8ab9;}
+.job-reg-cus-new .form-group select:focus{border-bottom:1px solid #1b8ab9;}
+.job-reg-cus-new .fresher_radio label{display:inline-block; padding-left:0;}
+.main_raio{display:inline-block; }
+.fresher_radio label span{margin-top: -3px; display: inline-block; vertical-align: middle;}
+.job-reg-cus-new .form-group select{padding-left:12px; font-size:16px; border-width: 0 0 1px 0; border-radius: 0; border-color: #d2d2d2; padding-left:0; color:#7b7b7b;}
+.job-reg-cus-new .fresher_radio{padding-left:0; color:#7b7b7b;}
+.main_raio [type="radio"]:checked + .point_radio::before, .main_raio [type="radio"]:not(:checked) + .point_radio::before {border-color:#7b7b7b;}
+.job-reg-cus-new .btn3{border:1px solid #5c5c5c; border-radius:20px; color:#5c5c5c;}
+.job-reg-cus-new .form-control:focus{box-shadow:none;}
+.total-exp{color:#7b7b7b;}
+
 
 
 
@@ -3507,6 +3517,9 @@ a.job-expired:hover{color:#000 !important;}
 	.width-10{padding-left:0;}
 	.all-detail-custom .right-add .rsp-dtl-box{width:100%;}
 	.dtl-dis ul.skill-list{min-height:auto;}
+	.job_reg_page_fprm{width:100%;}
+	.job-reg-cus-new .form-group select{font-size:14px;}
+	.total-exp{font-size:14px;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -3903,6 +3916,7 @@ a.job-expired:hover{color:#000 !important;}
 	.dtl-modal .dtl-dis{padding:15px;}
 	.dtl-modal .dlt-img{margin-top:15px; width:15px;}
 	#social-link .span-select select{padding-left:1px;}
+	.job_reg_main{box-shadow:none; border-top:1px solid #d2d2d2; border-bottom:1px solid #d2d2d2; border-radius:0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
