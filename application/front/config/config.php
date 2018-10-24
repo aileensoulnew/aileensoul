@@ -950,3 +950,7 @@ $config['article_featured_upload_path'] = 'uploads/article_featured/';
 $config['user_research_upload_path'] = 'uploads/user_research/';
 $config['user_idol_upload_path'] = 'uploads/user_idol/';
 $config['user_publication_upload_path'] = 'uploads/user_publication/';
+$config['user_patent_upload_path'] = 'uploads/user_patent/';
+$config['user_award_upload_path'] = 'uploads/user_award/';
+$config['user_activity_upload_path'] = 'uploads/user_activity/';
+$config['user_addicourse_upload_path'] = 'uploads/user_addicourse/';

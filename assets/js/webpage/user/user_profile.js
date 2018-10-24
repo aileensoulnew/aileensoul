@@ -4318,7 +4318,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     //User Idol End
 
     // User Publication Start
-    $scope.publication_pub_fnc = function(dob_day,dob_month,dob_year){
+    $scope.publication_date_fnc = function(dob_day,dob_month,dob_year){
         $("#pubdateerror").hide();
         $("#pubdateerror").html('');
         var kcyear = document.getElementsByName("publication_year")[0],
@@ -4550,6 +4550,801 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     };
     // User Publication End
+
+    //User Patent Start
+    $scope.patent_date_fnc = function(dob_day,dob_month,dob_year){
+        $("#patentdateerror").hide();
+        $("#patentdateerror").html('');
+        var kcyear = document.getElementsByName("patent_year")[0],
+        kcmonth = document.getElementsByName("patent_month")[0],
+        kcday = document.getElementsByName("patent_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#patent_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#patent_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.patent_date_error = function()
+    {
+        $("#patentdateerror").hide();
+        $("#patentdateerror").html('');
+    };
+
+    var patent_formdata = new FormData();
+    $(document).on('change','#patent_file', function(e){
+        $("#patent_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#patent_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                patent_formdata.append('patent_file', $('#patent_file')[0].files[0]);
+            }
+            else {
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.patent_validate = {
+        rules: {            
+            patent_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            patent_creator: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            patent_number: {
+                required: true,
+                maxlength: 200,
+            },            
+            patent_month: {
+                required: true,
+            },
+            patent_day: {
+                required: true,
+            },
+            patent_year: {
+                required: true,
+            },
+            patent_office: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            patent_url: {
+                url: true,                
+            },
+            patent_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+        },
+        /*groups: {
+            publication_date: "publication_year publication_month publication_day"
+        },   */     
+        messages: {
+            patent_title: {
+                required: "Please enter patent title",
+            },
+            patent_creator: {
+                required: "Please enter patent creator",
+            },
+            patent_number: {
+                required: "Please enter patent creator",
+            },
+            patent_month: {
+                required: "Please select patent date",
+            },
+            patent_day: {
+                required: "Please select patent date",
+            },
+            patent_year: {
+                required: "Please select patent date",
+            },
+            patent_office: {
+                required: "Please patent office",
+            },
+            patent_url: {
+                url: "URL must start with http:// or https://",
+            },
+            patent_desc: {
+                required: "Please enter patent description",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_patent = function(){
+        if ($scope.patent_form.validate()) {
+            $("#user_patent_loader").show();
+            $("#user_patent_save").attr("style","pointer-events:none;display:none;");
+
+            var patent_day = $("#patent_day option:selected").val();
+            var patent_month = $("#patent_month option:selected").val();
+            var patent_year = $("#patent_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = patent_year + '/' + patent_month + '/' + patent_day;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#patentdateerror").html("Patent date always less than to today's date.");
+                $("#patentdateerror").show();
+
+                $("#user_patent_save").removeAttr("style");
+                $("#user_patent_loader").hide();
+                return false;
+            }
+
+            patent_formdata.append('patent_title', $('#patent_title').val());
+            patent_formdata.append('patent_creator', $('#patent_creator').val());
+            patent_formdata.append('patent_number', $('#patent_number').val());
+            patent_formdata.append('patent_day', patent_day);
+            patent_formdata.append('patent_month', patent_month);
+            patent_formdata.append('patent_year', patent_year);
+            patent_formdata.append('patent_office', $('#patent_office').val());
+            patent_formdata.append('patent_url', $('#patent_url').val());
+            patent_formdata.append('patent_desc', $('#patent_desc').val());
+
+            $http.post(base_url + 'userprofile_page/save_user_patent', patent_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $("#user_patent_save").removeAttr("style");
+                        $("#user_patent_loader").hide();
+                        $("#patent_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_patent_save").removeAttr("style");
+                        $("#user_patent_loader").hide();
+                        $("#patent_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //User Patent End
+
+    //User Achieve & Award Start
+    $scope.award_date_fnc = function(dob_day,dob_month,dob_year){
+        $("#awarddateerror").hide();
+        $("#awarddateerror").html('');
+        var kcyear = document.getElementsByName("award_year")[0],
+        kcmonth = document.getElementsByName("award_month")[0],
+        kcday = document.getElementsByName("award_day")[0];                
+        
+        var d = new Date();
+        var n = d.getFullYear();
+        year_opt = "";
+        for (var i = n; i >= 1950; i--) {
+            if(dob_year == i)
+            {
+                year_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+            }
+            else
+            {                
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }            
+        }
+        $("#award_year").html(year_opt);
+        
+        function validate_date(dob_day,dob_month,dob_year) {
+            var y = +kcyear.value;
+            if(dob_month != ""){
+                var m = dob_month;
+            }
+            else{
+            var m = kcmonth.value;
+            }
+
+            if(dob_day != ""){
+                var d = dob_day;
+            }
+            else{                
+                var d = kcday.value;
+            }
+            if (m === "02"){
+                var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15)));
+            }
+            else{
+                var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+            }
+
+            kcday.length = 0;
+            var day_opt = "";
+            for (var i = 1; i <= mlength; i++) {
+                if(dob_day == i)
+                {
+                    day_opt += "<option value='"+i+"' selected='selected'>"+i+"</option>";
+                }
+                else
+                {                
+                    day_opt += "<option value='"+i+"'>"+i+"</option>";
+                }
+            }
+            $("#award_day").html(day_opt);
+        }
+        validate_date(dob_day,dob_month,dob_year);
+    };
+    $scope.award_error = function()
+    {
+        $("#awarddateerror").hide();
+        $("#awarddateerror").html('');
+    };
+
+    var award_formdata = new FormData();
+    $(document).on('change','#award_file', function(e){
+        $("#award_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#award_file_error").html("File size must be less than 5MB.");
+            $("#award_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                award_formdata.append('award_file', $('#award_file')[0].files[0]);
+            }
+            else {
+                $("#award_file_error").html("Invalid file selected.");
+                $("#award_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.award_validate = {
+        rules: {            
+            award_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            award_org: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },           
+            award_month: {
+                required: true,
+            },
+            award_day: {
+                required: true,
+            },
+            award_year: {
+                required: true,
+            },
+            award_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+        },
+        /*groups: {
+            publication_date: "publication_year publication_month publication_day"
+        },   */     
+        messages: {
+            award_title: {
+                required: "Please enter achievements & awards title",
+            },
+            award_org: {
+                required: "Please enter achievements & awards organization",
+            },
+            award_month: {
+                required: "Please select achievements & awards date",
+            },
+            award_day: {
+                required: "Please select achievements & awards date",
+            },
+            award_year: {
+                required: "Please select achievements & awards date",
+            },
+            award_desc: {
+                required: "Please enter achievements & awards description",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_award = function(){
+        if ($scope.award_form.validate()) {
+            $("#user_award_loader").show();
+            $("#user_award_save").attr("style","pointer-events:none;display:none;");
+
+            var award_day = $("#award_day option:selected").val();
+            var award_month = $("#award_month option:selected").val();
+            var award_year = $("#award_year option:selected").val();
+
+            var todaydate = new Date();
+            var dd = todaydate.getDate();
+            var mm = todaydate.getMonth() + 1;
+            var yyyy = todaydate.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            var todaydate = yyyy + '/' + mm + '/' + dd;
+            var value = award_year + '/' + award_month + '/' + award_day;
+
+            var d1 = Date.parse(todaydate);
+            var d2 = Date.parse(value);
+
+            if (d1 < d2) {
+                $("#awarddateerror").html("Achievements & Award date always less than to today's date.");
+                $("#awarddateerror").show();
+
+                $("#user_award_save").removeAttr("style");
+                $("#user_award_loader").hide();
+                return false;
+            }
+
+            award_formdata.append('award_title', $('#award_title').val());
+            award_formdata.append('award_org', $('#award_org').val());            
+            award_formdata.append('award_day', award_day);
+            award_formdata.append('award_month', award_month);
+            award_formdata.append('award_year', award_year);
+            award_formdata.append('award_desc', $('#award_desc').val());
+
+            $http.post(base_url + 'userprofile_page/save_user_award', award_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $("#user_award_save").removeAttr("style");
+                        $("#user_award_loader").hide();
+                        $("#award_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_award_save").removeAttr("style");
+                        $("#user_award_loader").hide();
+                        $("#award_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //User Achieve & Award End
+
+    //Extracurricular Activity Start
+    $scope.activity_start_year = function(){
+        $("#activitydateerror").html("");
+        $("#activitydateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();        
+        var year_opt = "";
+        for (var i = yyyy; i >= $scope.activity_s_year; i--) {            
+            year_opt += "<option value='"+i+"'>"+i+"</option>";
+        }
+        var $el = $('#activity_e_year').html(year_opt);
+        $compile($el)($scope);
+        // $("#activity_e_year").html(year_opt);
+    };
+
+    var activity_formdata = new FormData();
+    $(document).on('change','#activity_file', function(e){
+        $("#activity_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#activity_file_error").html("File size must be less than 5MB.");
+            $("#activity_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                activity_formdata.append('activity_file', $('#activity_file')[0].files[0]);
+            }
+            else {
+                $("#activity_file_error").html("Invalid file selected.");
+                $("#activity_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.activity_validate = {
+        rules: {            
+            activity_participate: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            activity_org: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },           
+            activity_s_year: {
+                required: true,
+            },
+            activity_s_month: {
+                required: true,
+            },
+            activity_e_year: {
+                required: true,
+            },
+            activity_e_month: {
+                required: true,
+            },
+            activity_desc: {
+                required: true,
+                maxlength: 700,
+                minlength: 10
+            },
+        },      
+        messages: {
+            activity_participate: {
+                required: "Please enter Participated In",
+            },
+            activity_org: {
+                required: "Please enter extracurricular activity organization",
+            },
+            activity_s_year: {
+                required: "Please select extracurricular activity start date",
+            },
+            activity_s_month: {
+                required: "Please select extracurricular activity start date",
+            },
+            activity_e_year: {
+                required: "Please select extracurricular activity end date",
+            },
+            activity_e_month: {
+                required: "Please select extracurricular activity end date",
+            },
+            activity_desc: {
+                required: "Please enter achievements & awards description",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_activity = function(){
+        $("#activitydateerror").html("");
+        $("#activitydateerror").hide();
+        if ($scope.activity_form.validate()) {
+            $("#user_activity_loader").show();
+            $("#user_activity_save").attr("style","pointer-events:none;display:none;");
+
+            var activity_s_year = $("#activity_s_year option:selected").val();
+            var activity_s_month = $("#activity_s_month option:selected").val();
+
+            var activity_e_year = $("#activity_e_year option:selected").val();
+            var activity_e_month = $("#activity_e_month option:selected").val();
+            var activity_date_error = false;
+            if(activity_e_year == activity_s_year)
+            {
+                if(activity_e_month <= activity_s_month)
+                {
+                    activity_date_error = true;
+                }
+            }
+
+            if (activity_date_error == true) {                
+                $("#activitydateerror").html("Extracurricular Activity date not same or start date is less than end date.");
+                $("#activitydateerror").show();
+
+                $("#user_activity_save").removeAttr("style");
+                $("#user_activity_loader").hide();
+                return false;
+            }
+
+            activity_formdata.append('activity_participate', $('#activity_participate').val());
+            activity_formdata.append('activity_org', $('#activity_org').val());            
+            activity_formdata.append('activity_s_year', activity_s_year);
+            activity_formdata.append('activity_s_month', activity_s_month);
+            activity_formdata.append('activity_e_year', activity_e_year);
+            activity_formdata.append('activity_e_month', activity_e_month);
+            activity_formdata.append('activity_desc', $('#activity_desc').val());
+
+            $http.post(base_url + 'userprofile_page/save_user_activity', activity_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $("#user_activity_save").removeAttr("style");
+                        $("#user_activity_loader").hide();
+                        $("#activity_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_activity_save").removeAttr("style");
+                        $("#user_activity_loader").hide();
+                        $("#activity_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //Extracurricular Activity End
+
+    //Additional Course Start
+    $scope.addicourse_start_year = function(){
+        $("#addicoursedateerror").html("");
+        $("#addicoursedateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();        
+        var year_opt = "";
+        for (var i = yyyy; i >= $scope.addicourse_s_year; i--) {            
+            year_opt += "<option value='"+i+"'>"+i+"</option>";
+        }
+        var $el1 = $('#addicourse_e_year').html(year_opt);
+        $compile($el1)($scope);
+        // $("#addicourse_e_year").html(year_opt);
+    };
+
+    var addicourse_formdata = new FormData();
+    $(document).on('change','#addicourse_file', function(e){
+        $("#addicourse_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#addicourse_file_error").html("File size must be less than 5MB.");
+            $("#addicourse_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                addicourse_formdata.append('addicourse_file', $('#addicourse_file')[0].files[0]);
+            }
+            else {
+                $("#addicourse_file_error").html("Invalid file selected.");
+                $("#addicourse_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.addicourse_validate = {
+        rules: {            
+            addicourse_name: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },            
+            addicourse_org: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },           
+            addicourse_s_year: {
+                required: true,
+            },
+            addicourse_s_month: {
+                required: true,
+            },
+            addicourse_e_year: {
+                required: true,
+            },
+            addicourse_e_month: {
+                required: true,
+            },
+            addicourse_url: {
+                url: true,
+            },
+        },      
+        messages: {
+            addicourse_name: {
+                required: "Please enter additional course name",
+            },
+            addicourse_org: {
+                required: "Please enter additional course organization",
+            },
+            addicourse_s_year: {
+                required: "Please select additional course start date",
+            },
+            addicourse_s_month: {
+                required: "Please select additional course start date",
+            },
+            addicourse_e_year: {
+                required: "Please select additional course end date",
+            },
+            addicourse_e_month: {
+                required: "Please select additional course end date",
+            },
+            addicourse_url: {
+                url: "URL must start with http:// or https://",
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            /*if (element.attr("name") == "publication_month" || element.attr("name") == "publication_day" || element.attr("name") == "publication_year") {
+                error.insertAfter("#publication_year");                
+            } else {*/
+                error.insertAfter(element);
+            // }
+        },
+    };
+    $scope.save_user_addicourse = function(){
+        $("#addicoursedateerror").html("");
+        $("#addicoursedateerror").hide();
+        if ($scope.addicourse_form.validate()) {
+            $("#user_addicourse_loader").show();
+            $("#user_addicourse_save").attr("style","pointer-events:none;display:none;");
+
+            var addicourse_s_year = $("#addicourse_s_year option:selected").val();
+            var addicourse_s_month = $("#addicourse_s_month option:selected").val();
+
+            var addicourse_e_year = $("#addicourse_e_year option:selected").val();
+            var addicourse_e_month = $("#addicourse_e_month option:selected").val();
+            var activity_date_error = false;
+            if(addicourse_e_year == addicourse_s_year)
+            {
+                if(addicourse_e_month <= addicourse_s_month)
+                {
+                    activity_date_error = true;
+                }
+            }
+
+            if (activity_date_error == true) {                
+                $("#addicoursedateerror").html("Additional Course date not same or start date is less than end date.");
+                $("#addicoursedateerror").show();
+
+                $("#user_addicourse_save").removeAttr("style");
+                $("#user_addicourse_loader").hide();
+                return false;
+            }
+
+            addicourse_formdata.append('addicourse_name', $('#addicourse_name').val());
+            addicourse_formdata.append('addicourse_org', $('#addicourse_org').val());            
+            addicourse_formdata.append('addicourse_s_year', addicourse_s_year);
+            addicourse_formdata.append('addicourse_s_month', addicourse_s_month);
+            addicourse_formdata.append('addicourse_e_year', addicourse_e_year);
+            addicourse_formdata.append('addicourse_e_month', addicourse_e_month);
+            addicourse_formdata.append('addicourse_url', $('#addicourse_url').val());
+
+            $http.post(base_url + 'userprofile_page/save_user_addicourse', addicourse_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $("#user_addicourse_save").removeAttr("style");
+                        $("#user_addicourse_loader").hide();
+                        $("#addicourse_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                    else
+                    {
+                        $("#user_addicourse_save").removeAttr("style");
+                        $("#user_addicourse_loader").hide();
+                        $("#addicourse_form")[0].reset();
+                        // $("#publication").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //Additional Course End
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {

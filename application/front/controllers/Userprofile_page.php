@@ -1328,4 +1328,197 @@ class Userprofile_page extends MY_Controller {
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function save_user_patent()
+    {
+        $patent_title = $this->input->post('patent_title');
+        $patent_creator = $this->input->post('patent_creator');
+        $patent_number = $this->input->post('patent_number');
+        $patent_date = $this->input->post('patent_year').'-'.$this->input->post('patent_month').'-'.$this->input->post('patent_day');
+        $patent_office = $this->input->post('patent_office');
+        $patent_url = $this->input->post('patent_url');
+        $patent_desc = $this->input->post('patent_desc');
+        $fileName = "";
+        if(isset($_FILES['patent_file']['name']) && $_FILES['patent_file']['name'] != "")
+        {
+            $user_patent_upload_path = $this->config->item('user_patent_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_patent_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['patent_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('patent_file'))            {
+                $main_image = $user_patent_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_patent_insert = $this->userprofile_model->set_user_patent($user_id,$patent_title,$patent_creator,$patent_number,$patent_date,$patent_office,$patent_url,$patent_desc,$fileName);
+            $user_patent = $this->userprofile_model->get_user_patent($user_id);
+            $ret_arr = array("success"=>1,"user_patent"=>$user_patent);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_award()
+    {
+        $award_title = $this->input->post('award_title');
+        $award_org = $this->input->post('award_org');        
+        $award_date = $this->input->post('award_year').'-'.$this->input->post('award_month').'-'.$this->input->post('award_day');
+        $award_desc = $this->input->post('award_desc');
+        $fileName = "";
+        if(isset($_FILES['award_file']['name']) && $_FILES['award_file']['name'] != "")
+        {
+            $user_award_upload_path = $this->config->item('user_award_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_award_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['award_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('award_file')){
+                $main_image = $user_award_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_award_insert = $this->userprofile_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName);
+            $user_award = $this->userprofile_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_activity()
+    {
+        $activity_participate = $this->input->post('activity_participate');
+        $activity_org = $this->input->post('activity_org');        
+        $award_start_date = $this->input->post('activity_s_year').'-'.$this->input->post('activity_s_month');
+        $award_end_date = $this->input->post('activity_e_year').'-'.$this->input->post('activity_e_month');
+        $activity_desc = $this->input->post('activity_desc');
+        $fileName = "";
+        if(isset($_FILES['activity_file']['name']) && $_FILES['activity_file']['name'] != "")
+        {
+            $user_activity_upload_path = $this->config->item('user_activity_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_activity_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['activity_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('activity_file')){
+                $main_image = $user_activity_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_activity_insert = $this->userprofile_model->set_user_activity($user_id,$activity_participate,$activity_org,$award_start_date,$award_end_date,$activity_desc,$fileName);
+            $user_activity = $this->userprofile_model->get_user_activity($user_id);
+            $ret_arr = array("success"=>1,"user_activity"=>$user_activity);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_addicourse()
+    {
+        $addicourse_name = $this->input->post('addicourse_name');
+        $addicourse_org = $this->input->post('addicourse_org');        
+        $addicourse_start_date = $this->input->post('addicourse_s_year').'-'.$this->input->post('addicourse_s_month');
+        $addicourse_end_date = $this->input->post('addicourse_e_year').'-'.$this->input->post('addicourse_e_month');
+        $addicourse_url = $this->input->post('addicourse_url');
+        $fileName = "";
+        if(isset($_FILES['addicourse_file']['name']) && $_FILES['addicourse_file']['name'] != "")
+        {
+            $user_addicourse_upload_path = $this->config->item('user_addicourse_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_addicourse_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['addicourse_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('addicourse_file')){
+                $main_image = $user_addicourse_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_activity_insert = $this->userprofile_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName);
+            $user_addicourse = $this->userprofile_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

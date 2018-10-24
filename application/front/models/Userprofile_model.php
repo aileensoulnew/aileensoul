@@ -1207,4 +1207,117 @@ class Userprofile_model extends CI_Model {
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
     }
+
+    public function set_user_patent($userid,$patent_title = "",$patent_creator = "",$patent_number = "",$patent_date = "",$patent_office = "",$patent_url = "",$patent_desc = "",$patent_document = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'patent_title' => $patent_title,
+            'patent_creator' => $patent_creator,
+            'patent_number' => $patent_number,
+            'patent_date' => $patent_date,
+            'patent_office' => $patent_office,
+            'patent_url' => $patent_url,
+            'patent_desc' => $patent_desc,
+            'patent_file' => $patent_document,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_patent');
+        return $insert_id;
+    }
+
+    public function get_user_patent($userid)
+    {
+        $this->db->select("*")->from("user_patent");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_award($userid,$award_title = "",$award_org = "",$award_date = "",$award_desc = "",$award_document = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'award_title' => $award_title,
+            'award_org' => $award_org,
+            'award_date' => $award_date,
+            'award_desc' => $award_desc,
+            'award_file' => $award_document,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_award');
+        return $insert_id;
+    }
+
+    public function get_user_award($userid)
+    {
+        $this->db->select("*")->from("user_award");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_activity($userid,$activity_participate = "",$activity_org = "",$activity_start_date = "",$activity_end_date = "",$activity_desc = "",$activity_document = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'activity_participate' => $activity_participate,
+            'activity_org' => $activity_org,
+            'activity_start_date' => $activity_start_date,
+            'activity_end_date' => $activity_end_date,
+            'activity_desc' => $activity_desc,
+            'activity_file' => $activity_document,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_extra_activity');
+        return $insert_id;
+    }
+
+    public function get_user_activity($userid)
+    {
+        $this->db->select("*")->from("user_extra_activity");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
+
+    public function set_user_addicourse($userid,$addicourse_name = "",$addicourse_org = "",$addicourse_start_date = "",$addicourse_end_date = "",$addicourse_url = "",$addicourse_document = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'addicourse_name' => $addicourse_name,
+            'addicourse_org' => $addicourse_org,
+            'addicourse_start_date' => $addicourse_start_date,
+            'addicourse_end_date' => $addicourse_end_date,
+            'addicourse_url' => $addicourse_url,
+            'addicourse_file' => $addicourse_document,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_addicourse');
+        return $insert_id;
+    }
+
+    public function get_user_addicourse($userid)
+    {
+        $this->db->select("*")->from("user_addicourse");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
 }

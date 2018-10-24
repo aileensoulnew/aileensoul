@@ -128,7 +128,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Extracurricular Activity</span><a href="#" data-target="#extra-acticity" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Extracurricular Activity</span><a href="#" data-target="#extra-activity" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div class="dtl-dis">
                             <div class="no-info">
@@ -416,7 +416,7 @@
             <button type="button" class="modal-close" data-dismiss="modal">×</button>
             <div class="modal-body-cus"> 
                 <div class="dtl-title">
-                    <span>Profile Overview</span>
+                    <span>Experience</span>
                 </div>
                 <div class="dtl-dis">
                     
@@ -810,88 +810,109 @@
                 <div class="dtl-title">
                     <span>Additional Course</span>
                 </div>
-                <div class="dtl-dis">
-                    <div class="form-group">
-                        <label>Course Name</label>
-                        <input type="text" placeholder="Course Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Organization</label>
-                        <input type="text" placeholder="Organization">
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Start Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
+                <form name="addicourse_form" id="addicourse_form" ng-validate="addicourse_validate">
+                    <div class="dtl-dis">
+                        <div class="form-group">
+                            <label>Course Name</label>
+                            <input type="text" placeholder="Course Name" id="addicourse_name" name="addicourse_name">
+                        </div>
+                        <div class="form-group">
+                            <label>Organization</label>
+                            <input type="text" placeholder="Organization" id="addicourse_org" name="addicourse_org">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Start Date</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="addicourse_s_year" name="addicourse_s_year" ng-model="addicourse_s_year" ng-change="addicourse_start_year();">
+                                                    <option value="">Year</option>
+                                                    <?php
+                                                    $year = date("Y",NOW());
+                                                    for ($i=$year; $i >= 1950; $i--) { ?>
+                                                        <option value="<?=$i?>"><?=$i?></option>
+                                                    <?php
+                                                    } ?>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="addicourse_s_month" name="addicourse_s_month">
+                                                    <option value="">Month</option>
+                                                    <option value="01">Jan</option>
+                                                    <option value="02">Feb</option>
+                                                    <option value="03">Mar</option>
+                                                    <option value="04">Apr</option>
+                                                    <option value="05">May</option>
+                                                    <option value="06">Jun</option>
+                                                    <option value="07">Jul</option>
+                                                    <option value="08">Aug</option>
+                                                    <option value="09">Sep</option>
+                                                    <option value="10">Oct</option>
+                                                    <option value="11">Nov</option>
+                                                    <option value="12">Dec</option>
+                                                </select>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>End Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>End Date</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="addicourse_e_year" name="addicourse_e_year">
+                                                    <option value="">Year</option>                  
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="addicourse_e_month" name="addicourse_e_month">
+                                                    <option value="">Month</option>
+                                                    <option value="01">Jan</option>
+                                                    <option value="02">Feb</option>
+                                                    <option value="03">Mar</option>
+                                                    <option value="04">Apr</option>
+                                                    <option value="05">May</option>
+                                                    <option value="06">Jun</option>
+                                                    <option value="07">Jul</option>
+                                                    <option value="08">Aug</option>
+                                                    <option value="09">Sep</option>
+                                                    <option value="10">Oct</option>
+                                                    <option value="11">Nov</option>
+                                                    <option value="12">Dec</option>
+                                                </select>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <span id="addicoursedateerror" class="error" style="display: none;"></span>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>URL</label>
+                            <input type="text" placeholder="Enter URL" id="addicourse_url" name="addicourse_url">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="upload-file">
+                                Upload File (Additional Course Certificate) <input type="file" id="addicourse_file" name="addicourse_file">
+                            </label>
+                            <span id="addicourse_file_error" class="error" style="display: none;"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>URL</label>
-                        <input type="text" placeholder="Enter URL">
+                    <div class="dtl-btn">
+                        <!-- <a href="#" class="save"><span>Save</span></a> -->
+                        <a id="user_addicourse_save" href="#" ng-click="save_user_addicourse()" class="save"><span>Save</span></a>
+                        <img id="user_addicourse_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
-                    
-                    <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (Additional Course Certificate) <input type="file">
-                        </label>
-                    </div>
-                    
-                </div>
-                <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
+                </form>
             </div>  
 
 
@@ -900,7 +921,7 @@
 </div>
 
 <!---  model Extracurricular Activity  -->
-<div style="display:none;" class="modal fade dtl-modal" id="extra-acticity" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div style="display:none;" class="modal fade dtl-modal" id="extra-activity" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -908,14 +929,15 @@
                 <div class="dtl-title">
                     <span>Extracurricular Activity</span>
                 </div>
+                <form name="activity_form" id="activity_form" ng-validate="activity_validate">
                 <div class="dtl-dis">
                     <div class="form-group">
                         <label>Participated In</label>
-                        <input type="text" placeholder="Participated In">
+                        <input type="text" placeholder="Participated In" id="activity_participate" name="activity_participate">
                     </div>
                     <div class="form-group">
                         <label>Organization</label>
-                        <input type="text" placeholder="Organization">
+                        <input type="text" placeholder="Organization" id="activity_org" name="activity_org">
                     </div>
                     <div class="form-group">
                         <div class="row">
@@ -924,23 +946,33 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
+                                            <select id="activity_s_year" name="activity_s_year" ng-model="activity_s_year" ng-change="activity_start_year();">
+                                                <option value="">Year</option>
+                                                <?php
+                                                $year = date("Y",NOW());
+                                                for ($i=$year; $i >= 1950; $i--) { ?>
+                                                    <option value="<?=$i?>"><?=$i?></option>
+                                                <?php
+                                                } ?>
                                             </select>
                                         </span>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
+                                            <select id="activity_s_month" name="activity_s_month">
+                                                <option value="">Month</option>
+                                                <option value="01">Jan</option>
+                                                <option value="02">Feb</option>
+                                                <option value="03">Mar</option>
+                                                <option value="04">Apr</option>
+                                                <option value="05">May</option>
+                                                <option value="06">Jun</option>
+                                                <option value="07">Jul</option>
+                                                <option value="08">Aug</option>
+                                                <option value="09">Sep</option>
+                                                <option value="10">Oct</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Dec</option>
                                             </select>
                                         </span>
                                     </div>
@@ -951,48 +983,57 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
+                                            <select id="activity_e_year" name="activity_e_year">
+                                                <option value="">Year</option>                  
                                             </select>
                                         </span>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
+                                            <select id="activity_e_month" name="activity_e_month">
+                                                <option value="">Month</option>
+                                                <option value="01">Jan</option>
+                                                <option value="02">Feb</option>
+                                                <option value="03">Mar</option>
+                                                <option value="04">Apr</option>
+                                                <option value="05">May</option>
+                                                <option value="06">Jun</option>
+                                                <option value="07">Jul</option>
+                                                <option value="08">Aug</option>
+                                                <option value="09">Sep</option>
+                                                <option value="10">Oct</option>
+                                                <option value="11">Nov</option>
+                                                <option value="12">Dec</option>
                                             </select>
                                         </span>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12 col-sm-12">
+                                <span id="activitydateerror" class="error" style="display: none;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea type="text" placeholder="Description"></textarea>
+                        <textarea type="text" placeholder="Description" id="activity_desc" name="activity_desc"></textarea>
                     </div>
                     
                     <div class="form-group">
                         <label class="upload-file">
-                            Upload File (Extracurricular Activity Certificate) <input type="file">
+                            Upload File (Extracurricular Activity Certificate) <input type="file" id="activity_file" name="activity_file">
                         </label>
+                        <span id="activity_file_error" class="error" style="display: none;"></span>
                     </div>
                     
                 </div>
                 <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                    <!-- <a href="#" class="save"><span>Save</span></a> -->
+                    <a id="user_activity_save" href="#" ng-click="save_user_activity()" class="save"><span>Save</span></a>
+                    <img id="user_activity_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -1006,91 +1047,73 @@
                 <div class="dtl-title">
                     <span>Achievements & Awards</span>
                 </div>
+                <form name="award_form" id="award_form" ng-validate="award_validate">
                 <div class="dtl-dis">
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" placeholder="Title">
+                        <input type="text" placeholder="Title" id="award_title" name="award_title">
                     </div>
                     <div class="form-group">
                         <label>Organization</label>
-                        <input type="text" placeholder="Organization">
+                        <input type="text" placeholder="Organization" id="award_org" name="award_org">
                     </div>
                     <div class="form-group">
+                        <label>Achievements & Awards Date</label>
                         <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Start Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="col-md-4 col-sm-4">
+                                <span class="span-select">
+                                    <select id="award_month" name="award_month" ng-model="award_month" ng-change="award_date_fnc('','','')">
+                                        <option value="">Month</option>
+                                        <option value="01">Jan</option>
+                                        <option value="02">Feb</option>
+                                        <option value="03">Mar</option>
+                                        <option value="04">Apr</option>
+                                        <option value="05">May</option>
+                                        <option value="06">Jun</option>
+                                        <option value="07">Jul</option>
+                                        <option value="08">Aug</option>
+                                        <option value="09">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
+                                    </select>
+                                </span>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>End Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="col-md-4 col-sm-4">
+                                <span class="span-select">
+                                    <select id="award_day" name="award_day" ng-model="award_day" ng-click="award_error()"></select>
+                                </span>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <span class="span-select">
+                                    <select id="award_year" name="award_year" ng-model="award_year" ng-change="award_date_fnc('','','')" ng-click="award_error()">
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <span id="awarddateerror" class="error" style="display: none;"></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea type="text" placeholder="Description"></textarea>
-                    </div>
-                    
+                        <textarea type="text" placeholder="Description" id="award_desc" name="award_desc"></textarea>
+                    </div>                    
                     <div class="form-group">
                         <label class="upload-file">
-                            Upload File (Achievements & Awards Certificate) <input type="file">
+                            Upload File (Achievements & Awards Certificate) <input type="file" id="award_file" name="award_file">
+                            <span id="award_file_error" class="error" style="display: none;"></span>
                         </label>
                     </div>
                     
                 </div>
                 <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                    <!-- <a href="#" class="save"><span>Save</span></a> -->
+                    <a id="user_award_save" href="#" ng-click="save_user_award()" class="save"><span>Save</span></a>
+                    <img id="user_award_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -1132,7 +1155,7 @@
                         <div class="row">                            
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">
-                                    <select id="publication_month" name="publication_month" ng-model="publication_month" ng-change="publication_pub_fnc('','','')">
+                                    <select id="publication_month" name="publication_month" ng-model="publication_month" ng-change="publication_date_fnc('','','')">
                                         <option value="">Month</option>
                                         <option value="01">Jan</option>
                                         <option value="02">Feb</option>
@@ -1156,7 +1179,7 @@
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">
-                                    <select id="publication_year" name="publication_year" ng-model="publication_year" ng-change="publication_pub_fnc('','','')" ng-click="publication_error()">
+                                    <select id="publication_year" name="publication_year" ng-model="publication_year" ng-change="publication_date_fnc('','','')" ng-click="publication_error()">
                                     </select>
                                 </span>
                             </div>                            
@@ -1193,102 +1216,96 @@
                 <div class="dtl-title">
                     <span>Patent</span>
                 </div>
-                <div class="dtl-dis">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Patent Title</label>
-                                <input type="text" placeholder="Patent Title">
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>Patent Number</label>
-                                <input type="text" placeholder="Patent Number">
+                <form name="patent_form" id="patent_form" ng-validate="patent_validate">
+                    <div class="dtl-dis">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <label>Patent Title</label>
+                                    <input type="text" placeholder="Patent Title" id="patent_title" name="patent_title">
+                                </div>                                
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Patent Creator / Innovator</label>
-                                <input type="text" placeholder="Patent Creator / Innovator">
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>Patent Status</label>
-                                <input type="text" placeholder="Patent Status">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Patent Date</label>
-                            
-                                
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Date</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>2016</option>
-                                                <option>2017</option>
-                                                <option>2018</option>
-                                                <option>2019</option>
-                                                <option>2020</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Patent Creator / Innovator</label>
+                                    <input type="text" placeholder="Patent Creator / Innovator" id="patent_creator" name="patent_creator">
                                 </div>
-                            
-                            
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Patent Office</label>
-                                <input type="text" placeholder="Patent Office">
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>Patent URL</label>
-                                <input type="text" placeholder="Patent URL">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Patent Number</label>
+                                    <input type="text" placeholder="Patent Number" id="patent_number" name="patent_number">
+                                </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Patent Date</label>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <span class="span-select">
+                                        <select id="patent_month" name="patent_month" ng-model="patent_month" ng-change="patent_date_fnc('','','')">
+                                            <option value="">Month</option>
+                                            <option value="01">Jan</option>
+                                            <option value="02">Feb</option>
+                                            <option value="03">Mar</option>
+                                            <option value="04">Apr</option>
+                                            <option value="05">May</option>
+                                            <option value="06">Jun</option>
+                                            <option value="07">Jul</option>
+                                            <option value="08">Aug</option>
+                                            <option value="09">Sep</option>
+                                            <option value="10">Oct</option>
+                                            <option value="11">Nov</option>
+                                            <option value="12">Dec</option>
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <span class="span-select">
+                                        <select id="patent_day" name="patent_day" ng-model="patent_day" ng-click="patent_date_error()"></select>
+                                    </span>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <span class="span-select">
+                                        <select id="patent_year" name="patent_year" ng-model="patent_year" ng-change="patent_date_fnc('','','')" ng-click="patent_date_error()">
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <span id="recdateerror" class="error" style="display: none;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Patent Office</label>
+                                    <input type="text" placeholder="Patent Office" id="patent_office" name="patent_office">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Patent URL</label>
+                                    <input type="text" placeholder="Patent URL" id="patent_url" name="patent_url">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea type="text" placeholder="Description" id="patent_desc" name="patent_desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="upload-file">
+                                Upload File <input type="file" id="patent_file" name="patent_file">
+                                <span id="patent_file_error" class="error" style="display: none;">File size must be less than 5MB.</span>
+                            </label>
+                        </div>                        
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea type="text" placeholder="Description"></textarea>
+                    <div class="dtl-btn">
+                        <!-- <a href="#" class="save"><span>Save</span></a> -->
+                        <a id="user_patent_save" href="#" ng-click="save_user_patent()" class="save"><span>Save</span></a>
+                        <img id="user_patent_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
-                    <div class="form-group">
-                        <label class="upload-file">
-                            Upload File <input type="file">
-                        </label>
-                    </div>
-                    
-                </div>
-                <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -1526,4 +1543,4 @@
     </div>
 </div>
 
-<!-- All Model End
+<!-- All Model End -->
