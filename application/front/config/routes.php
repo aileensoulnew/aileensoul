@@ -533,6 +533,7 @@ $route['job-profile/signup'] = "job/job_reg";
 $route['job/registration/live-post'] = "job/job_reg";
 $route['job/registration/live-post/(:any)'] = "job/job_reg/$1";
 $route['job-profile/(:any)'] = "job/job_printpreview/$1";
+$route['job-profile-new/(:any)'] = "job/job_printpreviewnew/$1";
 
 $route['artist-profile/create-account'] = "artist_live/artist_register_new";
 $route['artist-profile/basic-info'] = "artist_live/artist_register_new";

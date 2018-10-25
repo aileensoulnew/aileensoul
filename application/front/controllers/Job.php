@@ -1997,8 +1997,8 @@ class Job extends MY_Controller {
 
             $this->data['other_skill'] = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         }
-//For Counting Profile data start
-//For Counting Profile data END        
+        //For Counting Profile data start
+        //For Counting Profile data END        
         $cityname = $this->db->get_where('cities', array('city_id' => $job_details[0]['city_id']))->row()->city_name;
         $statename = $this->db->get_where('states', array('state_id' => $job_details[0]['state_id']))->row()->state_name;
         $countryname = $this->db->get_where('countries', array('country_id' => $job_details[0]['country_id']))->row()->country_name;
@@ -2007,7 +2007,7 @@ class Job extends MY_Controller {
         $this->data['title'] = "Job Seeker " . $job_details[0]['fname'] . " " . $job_details[0]['lname'] . " In " .$cityname;
         $this->data['metadesc'] = $job_details[0]['fname'] . " " . $job_details[0]['lname'] . ". Skills: ".trim($skills_name,",").". Looking for a job change. ";
 
-//for deactive profile and slug not found then see page start
+        //for deactive profile and slug not found then see page start
 
         $id_deactiveuser = $this->db->get_where('job_reg', array('slug' => $slug, 'is_delete' => '0', 'status' => '0'))->row()->user_id;
         $contition_array = array('user_id' => $id_deactiveuser, 'is_delete' => '0', 'status' => '0');
@@ -2022,7 +2022,103 @@ class Job extends MY_Controller {
                 $this->load->view('job/job_liveprintpreview', $this->data);
             }
         }
-//for deactive profile and slug not found then see page end 
+        //for deactive profile and slug not found then see page end 
+    }
+
+    public function job_printpreviewnew($slug = "") {
+
+        $this->job_deactive_profile();
+
+        $userid = $this->session->userdata('aileenuser');
+
+        $id = $this->db->get_where('job_reg', array('slug' => $slug, 'is_delete' => '0', 'status' => '1'))->row()->user_id;
+
+        $slug_user = $this->db->get_where('job_reg', array('slug' => $slug, 'user_id !=' => $userid, 'is_delete' => '0', 'status' => '1'))->row()->slug;
+
+        $this->data['get_url'] = $slug;
+
+        if ($slug != $slug_user || $slug == '') {
+
+            if ($slug == '') {
+                $this->job_apply_check();
+            }
+            $this->progressbar();
+
+            //for getting data job_reg table
+            $contition_array = array('job_reg.user_id' => $userid, 'job_reg.is_delete' => '0', 'job_reg.status' => '1');
+
+            $data = '*';
+
+            $job_details = $this->data['job'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
+
+            //for getting data job_add_workexp table
+            $contition_array = array('user_id' => $userid, 'status' => '1');
+
+            $data = '*';
+
+            $this->data['job_work'] = $this->common->select_data_by_condition('job_add_workexp', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
+
+            //for getting other skill data
+            $contition_array = array('user_id' => $userid, 'type' => '4', 'status' => '1');
+
+            $this->data['other_skill'] = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        } else {
+
+            //for getting data job_reg table
+            $contition_array = array('job_reg.user_id' => $id, 'job_reg.is_delete' => '0', 'job_reg.status' => '1');
+
+            $data = '*';
+
+            $job_details = $this->data['job'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
+
+
+            $contition_array = array('user_id' => $id, 'status' => '1');
+            $this->data['job_add_edu'] = $this->common->select_data_by_condition('job_add_edu', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+            $contition_array = array('user_id' => $id);
+
+            $data = '*';
+
+            $this->data['jobgrad'] = $this->common->select_data_by_condition('job_graduation', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
+
+            //for getting data job_add_workexp table
+            $contition_array = array('user_id' => $id, 'experience' => 'Experience', 'status' => '1');
+
+            $data = '*';
+
+            $this->data['job_work'] = $this->common->select_data_by_condition('job_add_workexp', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
+
+            //for getting other skill data
+            $contition_array = array('user_id' => $id, 'type' => '4', 'status' => '1');
+
+            $this->data['other_skill'] = $this->common->select_data_by_condition('skill', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        }
+        //For Counting Profile data start
+        //For Counting Profile data END        
+        $cityname = $this->db->get_where('cities', array('city_id' => $job_details[0]['city_id']))->row()->city_name;
+        $statename = $this->db->get_where('states', array('state_id' => $job_details[0]['state_id']))->row()->state_name;
+        $countryname = $this->db->get_where('countries', array('country_id' => $job_details[0]['country_id']))->row()->country_name;
+        $skills_name = $this->job_model->getSkillsNames($job_details[0]['keyskill']);
+        $cityname = ($cityname == ""? ($statename == "" ? $countryname:$statename) :$cityname);
+        $this->data['title'] = "Job Seeker " . $job_details[0]['fname'] . " " . $job_details[0]['lname'] . " In " .$cityname;
+        $this->data['metadesc'] = $job_details[0]['fname'] . " " . $job_details[0]['lname'] . ". Skills: ".trim($skills_name,",").". Looking for a job change. ";
+
+        //for deactive profile and slug not found then see page start
+
+        $id_deactiveuser = $this->db->get_where('job_reg', array('slug' => $slug, 'is_delete' => '0', 'status' => '0'))->row()->user_id;
+        $contition_array = array('user_id' => $id_deactiveuser, 'is_delete' => '0', 'status' => '0');
+        $availuser = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        if (($availuser[0]['total'] > 0 || count($id) == 0) && $slug != '') {
+            $this->load->view('job/notavalible');
+        } else {
+            if ($userid) {
+                $this->load->view('job/job_printpreviewnew', $this->data);
+            } else {
+                $this->load->view('job/job_liveprintpreview', $this->data);
+            }
+        }
+        //for deactive profile and slug not found then see page end 
     }
 
     //job seeker PRINTDATA controller end
