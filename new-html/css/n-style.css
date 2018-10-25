@@ -2652,7 +2652,7 @@ padding: 4px;}
 .edit-user-info{position:absolute; right:25px; top:150px;}
 .edit-user-info a img{width:25px;}
 .dtl-dis ul{padding-left:0; margin-bottom:0;  padding-bottom:5px;}
-.dtl-dis ul li{list-style-type:none; padding-bottom:15px; font-size:14px;}
+.dtl-dis ul li{list-style-type:none; padding-bottom:15px; font-size:14px; padding-left:0; margin-bottom:0;}
 .about-dtl-box{padding:5px 0; float:left;}
 .about-detail > h4{margin-bottom:2px;}
 .about-dtl-box h4{margin-bottom:0;}
@@ -2662,17 +2662,16 @@ padding: 4px;}
 .dis-left{width:50px; float:left;}
 .dis-middle{width:310px; float:left; padding-left:10px; padding-top:7px;}
 .dis-right{width:50px; float:left; padding-top:7px;}
-.dis-right a{float:left;}
+.dis-right a{float:left; padding:0;}
 .dis-right a:last-child{float:right;}
 .dis-left-img{width:50px; height:50px; border:1px solid #d2d2d2; text-align:center;}
 .dis-left-img span{font-size:28px; color:#1b8ab9; padding:13px 10px; display:inline-block;}
-.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
-overflow: hidden;}
+.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; line-height:1;}
 .dtl-dis .dis-middle p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
 overflow: hidden;}
 .dtl-dis.dis-accor{padding:0;}
 .dtl-dis.dis-accor .panel-heading{min-height:80px; padding:15px; background:transparent; border-radius:0;}
-.dis-accor .panel.panel-default{border-radius:0; border-width:1px 0 0 0; box-shadow:inherit; -webkit-box-shadow:inherit; width:100%; float:left; border-bottom-left-radius:20px; border-bottom-right-radius:20px; margin-top:0;}
+.dis-accor .panel.panel-default{border-radius:0; border-width:1px 0 0 0; box-shadow:inherit; -webkit-box-shadow:inherit; width:100%; float:left; border-bottom-left-radius:20px; border-bottom-right-radius:20px; margin-top:0; border-color:#d2d2d2;}
 .dis-accor .panel.panel-default:first-child{border-top:0px;}
 .dis-accor .panel-body{padding:20px 0;}
 .dis-accor .panel-collapse{padding:0 15px;}
@@ -2730,6 +2729,7 @@ max-width: inherit;}
 .dtl-modal .dtl-dis{padding:15px 20px;}
 .dtl-modal .form-group label.control{display:inline-block;}
 .dtl-dis.resume-img img{width:50px;}
+.panel-heading .dis-right a::before{display:none;}
 
 
 /***  end new details page  ***/
