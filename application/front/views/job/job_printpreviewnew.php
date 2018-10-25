@@ -1395,7 +1395,7 @@
 								<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/e-profile.png?ver=' . time()) ?>"><span>Edit Profile</span>
 							</div>
 							<div class="dtl-dis dtl-edit-p">
-								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.png?ver=' . time()) ?>">
+								<img src="<?php echo base_url('assets/n-images/detail/profile-progressbar.jpg?ver=' . time()) ?>">
 								
 							</div>
 						</div>
