@@ -2711,8 +2711,10 @@ max-width: inherit;}
 .modal-body-cus .idol-box ul li span img{width:20px; height:auto; border-radius:0;}
 .modal-body-cus .idol-box ul li span.idol-name{width:95%;}
 .about-detail{height:156px; overflow:hidden;}
+.dtl-box-height{height:156px; overflow:hidden;}
 .about-detail ul{padding-bottom:0;}
-.about-more{width:100%; float:left; text-align:center; font-size:18px;  padding:0 20px;}
+.dtl-box-height ul{padding-bottom:0;}
+.about-more{width:100%; float:left; text-align:center; font-size:18px;  padding:0 15px;}
 .about-more a{color:#5c5c5c; border-top:1px solid #d2d2d2; display:block; padding:10px 0;}
 .about-more a img{display:inline-block; margin-left:5px;}
 .dtl-dis p a:hover{color:#1b8ab9;}
@@ -3906,7 +3908,7 @@ a.job-expired:hover{color:#000 !important;}
 	.dtl-modal .modal-close{top:15px;}
 	.dtl-btn .save:hover{border-radius:0;}
 	#profile-overview .dtl-btn{position:absolute; width:100%; bottom:0;}
-	#skills .dtl-btn{position:absolute; width:100%; bottom:0;}
+	#skills .dtl-btn, .dtl-btn.bottom-btn {position:absolute; width:100%; bottom:0;}
 	.dtl-about-box .width-45{width:44%;}
 	.dtl-about-box .width-10{width:12%;}
 	.dtl-two-btn .dtl-btn .back:hover{border-radius:0;}
