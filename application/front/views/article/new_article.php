@@ -204,7 +204,7 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
                 <div class="modal-content">                    
                     <div class="modal-body">
                         <div class="article-popup">
-							<?php $getFieldList = $this->data_model->getFieldListForArticle();?>
+							<?php $getFieldList = $this->data_model->getNewFieldList();?>
 							<fieldset class="fw">
 								<b>Select Category For Your Article</b>
 								<span class="span-select">

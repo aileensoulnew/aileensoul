@@ -76,7 +76,7 @@
                 <div class="col-md-6 col-sm-6">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Experience(4year 5month)</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Experience({{exp_years}}year {{exp_months}}month)</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div class="dtl-dis">
                             <div class="no-info">
@@ -418,129 +418,166 @@
                 <div class="dtl-title">
                     <span>Experience</span>
                 </div>
-                <div class="dtl-dis">
-                    
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Company Name</label>
-                                <input type="text" placeholder="Enter Company Name">
+                <form name="experience_form" id="experience_form" ng-validate="experience_validate">
+                    <div class="dtl-dis">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Company Name</label>
+                                    <input type="text" placeholder="Enter Company Name" id="exp_company_name" name="exp_company_name">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Designation / Role</label>
+                                    <!-- <input type="text" placeholder="Enter Designation"> -->
+                                    <tags-input id="exp_designation" name="exp_designation" ng-model="exp_designation" display-property="name" placeholder="Enter Designation" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" min-length="1" ng-keyup="exp_designation_fnc()">
+                                        <auto-complete source="loadJobtitle($query)" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                    </tags-input>                        
+                                    <script type="text/ng-template" id="title-template">
+                                        <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                    </script>
+                                    <script type="text/ng-template" id="title-autocomplete-template">
+                                        <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                    </script>
+                                    <label id="exp_designation_err" for="exp_designation" class="error" style="display: none;">Please enter designation / role</label>
+                                </div>
+                                
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>Designation / Role</label>
-                                <input type="text" placeholder="Enter Designation">
-                            </div>
-                            
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            
-                            <div class="col-md-6 col-sm-6">
-                                <label>Company Website</label>
-                                <input type="text" placeholder="Enter Company Website">
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>Field </label>
-                                <span class="span-select">
-                                    <select>
-                                        <option>Select Field</option>
-                                        <option>It Field</option>
-                                        <option>Design</option>
-                                        <option>Advertizing</option>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Company Website</label>
+                                    <input type="text" placeholder="Enter Company Website" id="exp_company_website" name="exp_company_website">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Field </label>
+                                    <span class="span-select">
+                                        <?php $getFieldList = $this->data_model->getNewFieldList();?>
+                                        <select name="exp_field" id="exp_field" ng-model="exp_field" ng-change="other_field_fnc()">
+                                            <option value="">Select Field</option>
+                                        <?php foreach ($getFieldList as $key => $value) { ?>
+                                            <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+                                        <?php } ?>
+                                        <option value="0">Other</option>
                                     </select>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Company Location</label>
-                        <input type="text" placeholder="Enter Company Location">
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Start Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>End Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                            <div id="exp_other_field_div" class="row" style="display: none;">
+                                <div class="col-md-6 col-sm-6"></div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Other Field</label>
+                                    <input type="text" placeholder="Enter Other Field" id="exp_other_field" name="exp_other_field">
                                 </div>
                             </div>
                         </div>
-                        <div class="pt10">
-                            <label class="control control--checkbox">
-                                <input type="checkbox">I currently working here.
-                                <div class="control__indicator">
+                        <div class="form-group">
+                            <label>Company Location</label>
+                            <!-- <input type="text" placeholder="Enter Company Location"> -->
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <span class="span-select">
+                                        <select id="exp_country" name="exp_country" ng-model="exp_country" ng-change="exp_country_change()">
+                                            <option value="">Select Country</option>         
+                                            <option data-ng-repeat='country_item in exp_country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
+                                        </select>
+                                    </span>
                                 </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <span class="span-select">
+                                        <select id="exp_state" name="exp_state" ng-model="exp_state" ng-change="exp_state_change()" disabled = "disabled">
+                                            <option value="">Select State</option>
+                                            <option data-ng-repeat='state_item in exp_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
+                                        </select>
+                                        <img id="exp_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+                                    </span>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <span class="span-select">
+                                        <select id="exp_city" name="exp_city" ng-model="exp_city" disabled = "disabled">
+                                            <option value="">Select City</option>
+                                            <option data-ng-repeat='city_item in exp_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
+                                        </select>
+                                        <img id="exp_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Start Date</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="exp_s_year" name="exp_s_year" ng-model="exp_s_year" ng-change="exp_start_year();">
+                                                    <option value="">Year</option>
+                                                    <?php
+                                                    $year = date("Y",NOW());
+                                                    for ($i=$year; $i >= 1950; $i--) { ?>
+                                                        <option value="<?=$i?>"><?=$i?></option>
+                                                    <?php
+                                                    } ?>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="exp_s_month" name="exp_s_month">
+                                                    <option value="">Month</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="exp_end_date" class="col-md-6 col-sm-6" ng-show='!exp_isworking'>
+                                    <label>End Date</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="exp_e_year" name="exp_e_year" ng-model="exp_e_year">
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="exp_e_month" name="exp_e_month">
+                                                    <option value="">Month</option> 
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <span id="expdateerror" class="error" style="display: none;"></span>
+                                </div>
+                            </div>
+                            <div class="pt10">
+                                <label class="control control--checkbox">
+                                    <input type="checkbox" ng-model="exp_isworking" id="exp_isworking" class="exp_isworking">I currently working here.
+                                    <div class="control__indicator">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description/Roles and Responsibilities</label>
+                            <textarea row="4" type="text" placeholder="Description" id="exp_desc" name="exp_desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="upload-file">
+                                Upload File (work experience certificate) <input type="file" id="exp_file" name="exp_file">
                             </label>
+                            <span id="exp_file_error" class="error" style="display: none;"></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Description/Roles and Responsibilities</label>
-                        <textarea row="4" type="text" placeholder="Description">
-                        </textarea>
+                    <div class="dtl-btn">
+                        <!-- <a href="#" class="save"><span>Save</span></a> -->
+                        <a id="save_user_exp" href="#" ng-click="save_user_exp()" class="save"><span>Save</span></a>
+                        <img id="user_exp_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
-                    <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (work experience certificate) <input type="file">
-                        </label>
-                    </div>
-                    
-                    
-                </div>
-                <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -1406,7 +1443,7 @@
                     <div class="form-group">
                         <label>Skills</label>
                         <!-- <input type="text" placeholder="Enter Skills"> -->
-                        <tags-input id="job_title" ng-model="edit_user_skills" display-property="name" placeholder="Enter Skills" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
+                        <tags-input id="user_skill_list" ng-model="edit_user_skills" display-property="name" placeholder="Enter Skills" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()">
                             <auto-complete source="loadSkills($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
                         </tags-input>                        
                         <script type="text/ng-template" id="title-template">

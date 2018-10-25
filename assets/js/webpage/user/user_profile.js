@@ -3680,11 +3680,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     });
 
-    $scope.job_title = [];
+    $scope.load_skills = [];
     $scope.loadSkills = function ($query) {
         return $http.get(base_url + 'userprofile_page/get_skills', {cache: true}).then(function (response) {
-            var job_title = response.data;
-            return job_title.filter(function (title) {
+            var load_skills = response.data;
+            return load_skills.filter(function (title) {
                 return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
             });
         });
@@ -5345,6 +5345,378 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     };
     //Additional Course End
+
+    //Experience Start
+    $scope.load_jobtitle = [];
+    $scope.loadJobtitle = function ($query) {
+        return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
+            var load_jobtitle = response.data;
+            return load_jobtitle.filter(function (title) {
+                return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
+            });
+        });
+    };
+
+    $scope.get_country = function () {
+        $http({
+            method: 'GET',
+            url: base_url + 'userprofile_page/get_country',
+            headers: {'Content-Type': 'application/json'},
+        }).then(function (data) {
+            $scope.exp_country_list = data.data;
+        });
+    };
+    $scope.get_country();
+
+    $scope.exp_country_change = function() {
+        $("#exp_state").attr("disabled","disabled");
+        $("#exp_state_loader").show();
+        var counrtydata = $.param({'country_id': $scope.exp_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#exp_state").removeAttr("disabled");
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_state_loader").hide();
+            $scope.exp_state_list = data.data;
+            $scope.exp_city_list = [];
+        });
+    }
+
+    $scope.exp_state_change = function() {
+        if($scope.exp_state != "" && $scope.exp_state != 0 && $scope.exp_state != null)
+        {
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_city_loader").show();
+            var statedata = $.param({'state_id': $scope.exp_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#exp_city").removeAttr("disabled");
+                $("#exp_city_loader").hide();
+                $scope.exp_city_list = data.data;
+            });
+        }
+    }
+
+    $scope.other_field_fnc = function()
+    {
+        if($scope.exp_field == 0 && $scope.exp_field != "")
+        {
+            $("#exp_other_field_div").show();
+        }
+        else
+        {
+            $("#exp_other_field_div").hide();
+        }
+    }
+
+    var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    $scope.exp_start_year = function(){
+        $("#expdateerror").html("");
+        $("#expdateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+        if($scope.exp_s_year == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+        var year_opt = "<option value=''>Year</option>";
+        for (var i = yyyy; i >= $scope.exp_s_year; i--) {            
+            year_opt += "<option value='"+i+"'>"+i+"</option>";
+        }
+        // $('#exp_e_year').html(year_opt);
+        // var $elyear = $('#exp_e_year').html(year_opt);
+        // $compile($elyear)($scope);
+
+        var elyear = $('#exp_e_year');
+        elyear.html($compile(year_opt)($scope));
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        // $('#exp_s_month').html(month_opt);
+        // var $elmonth = $('#exp_s_month').html(month_opt);
+        // $compile($elmonth)($scope);
+
+        var elmonth = $('#exp_s_month');
+        elmonth.html($compile(month_opt)($scope));
+    };
+    $(document).on('change','#exp_e_year', function(e){
+
+    // };
+    // $scope.exp_end_year = function(){
+        $("#expdateerror").html("");
+        $("#expdateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+
+        // console.log($(this).val());
+        if($(this).val() == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        $('#exp_e_month').html(month_opt);
+    });
+
+    $scope.exp_designation_fnc = function(){
+        // $("#exp_designation input").removeClass("error");
+        $("#exp_designation .tags").removeAttr("style");
+        $("#exp_designation_err").attr("style","display:none;");
+    };
+
+    $scope.experience_validate = {
+        rules: {            
+            exp_company_name: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            exp_company_website: {
+                url: true,
+            },
+            exp_field: {
+                required: true,
+            },
+            exp_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#exp_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+            exp_country: {
+                required: true,
+            },
+            exp_state: {
+                required: true,
+            },
+            exp_city: {
+                required: true,
+            },
+            exp_s_year: {
+                required: true,
+            },
+            exp_s_month: {
+                required: true,
+            },
+            exp_e_year: {
+                required: {
+                    depends: function(element) {
+                        return $("#exp_isworking").is(':checked') ? false : true;
+                    }
+                },
+            },
+            exp_e_month: {
+                required: {
+                    depends: function(element) {
+                        return $("#exp_isworking").is(':checked') ? false : true;
+                    }
+                },
+            },
+            exp_desc: {
+                required: true,
+            },
+            
+        },      
+        messages: {
+            exp_company_name: {
+                required: "Please enter company name",
+            },
+            exp_company_website: {
+                url: "URL must start with http:// or https://",
+            },
+            exp_field: {
+                required: "Please select field",
+            },
+            exp_country: {
+                required: "Please select county",
+            },
+            exp_state: {
+                required: "Please select state",
+            },
+            exp_city: {
+                required: "Please select city",
+            },
+            exp_s_year: {
+                required: "Please select experience start date",
+            },
+            exp_s_month: {
+                required: "Please select experience start date",
+            },
+            exp_e_year: {
+                required: "Please select experience end date",
+            },
+            exp_e_month: {
+                required: "Please select experience end date",
+            },
+            exp_desc: {
+                required: "Please enter experience description",
+            },
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+    };
+
+    var exp_formdata = new FormData();
+    $(document).on('change','#exp_file', function(e){
+        $("#exp_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#exp_file_error").html("File size must be less than 5MB.");
+            $("#exp_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                exp_formdata.append('exp_file', $('#exp_file')[0].files[0]);
+            }
+            else {
+                $("#exp_file_error").html("Invalid file selected.");
+                $("#exp_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.validate_desig = function(){        
+        if($scope.exp_designation == "" || $scope.exp_designation == undefined)
+        {
+            $("#exp_designation .tags").attr("style","border:1px solid #ff0000;");
+            setTimeout(function(){
+                $("#exp_designation_err").attr("style","display:block;");            
+            },100);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    $scope.save_user_exp = function(){
+        var desig = $scope.validate_desig();
+        $("#expdateerror").html("");
+        $("#expdateerror").hide();
+        if ($scope.experience_form.validate() && desig) {
+            $("#user_exp_loader").show();
+            $("#save_user_exp").attr("style","pointer-events:none;display:none;");
+
+            var exp_s_year = $("#exp_s_year option:selected").val();
+            var exp_s_month = $("#exp_s_month option:selected").val();
+
+            var exp_e_year = $("#exp_e_year option:selected").val();
+            var exp_e_month = $("#exp_e_month option:selected").val();
+            var exp_date_error = false;
+            if(parseInt(exp_e_year) == parseInt(exp_s_year))
+            {
+                if(parseInt(exp_e_month) <= parseInt(exp_s_month))
+                {
+                    exp_date_error = true;
+                }
+            }
+
+            if (exp_date_error == true) {                
+                $("#expdateerror").html("Experience date not same or start date is less than end date.");
+                $("#expdateerror").show();
+                $("#save_user_exp").removeAttr("style");
+                $("#user_exp_loader").hide();
+                return false;
+            }
+
+            exp_formdata.append('exp_company_name', $('#exp_company_name').val());
+            exp_formdata.append('exp_designation', JSON.stringify($scope.exp_designation));
+            exp_formdata.append('exp_company_website', $('#exp_company_website').val());
+            exp_formdata.append('exp_field', $('#exp_field option:selected').val());
+            exp_formdata.append('exp_other_field', $('#exp_other_field').val());
+            exp_formdata.append('exp_country', $('#exp_country option:selected').val());
+            exp_formdata.append('exp_state', $('#exp_state option:selected').val());
+            exp_formdata.append('exp_city', $('#exp_city option:selected').val());
+            exp_formdata.append('exp_s_year', exp_s_year);
+            exp_formdata.append('exp_s_month', exp_s_month);
+            exp_formdata.append('exp_e_year', exp_e_year);
+            exp_formdata.append('exp_e_month', exp_e_month);
+            exp_formdata.append('exp_isworking', $("#exp_isworking:checked").length);
+            exp_formdata.append('exp_desc', $('#exp_desc').val());
+
+            $http.post(base_url + 'userprofile_page/save_user_experience', exp_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    if(result.success == '1')
+                    {
+                        $scope.exp_years = result.data.exp_years;
+                        $scope.exp_months = result.data.exp_months;
+                        $("#save_user_exp").removeAttr("style");
+                        $("#user_exp_loader").hide();
+                        $scope.exp_designation = [];
+                        $("#experience_form")[0].reset();
+                        // $("#experience").modal('hide');
+                    }
+                    else
+                    {
+                        $("#save_user_exp").removeAttr("style");
+                        $("#user_exp_loader").hide();
+                        $scope.exp_designation = [];
+                        $("#experience_form")[0].reset();
+                        // $("#experience").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    $scope.get_user_experience = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_experience',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_experience = result.data.user_experience;
+                $scope.user_experience = user_experience;
+                $scope.exp_years = result.data.exp_years;
+                $scope.exp_months = result.data.exp_months;
+            }
+
+        });
+    }
+    $scope.get_user_experience();
+    //Experience End
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {

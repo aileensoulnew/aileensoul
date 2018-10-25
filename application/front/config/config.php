@@ -954,3 +954,4 @@ $config['user_patent_upload_path'] = 'uploads/user_patent/';
 $config['user_award_upload_path'] = 'uploads/user_award/';
 $config['user_activity_upload_path'] = 'uploads/user_activity/';
 $config['user_addicourse_upload_path'] = 'uploads/user_addicourse/';
+$config['user_experience_upload_path'] = 'uploads/user_experience/';

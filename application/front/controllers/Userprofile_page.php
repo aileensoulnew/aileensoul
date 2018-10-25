@@ -1521,4 +1521,159 @@ class Userprofile_page extends MY_Controller {
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_country() {
+        $county_list = $this->user_model->getCountry();
+        echo json_encode($county_list);
+    }
+
+    public function get_state_by_country_id() {
+        $country_id = $this->input->post('country_id');
+        $state_list = $this->user_model->getStateByCountryId($country_id);
+        echo json_encode($state_list);
+        
+    }
+
+    public function get_city_by_state_id() {
+        $state_id = $this->input->post('state_id');
+        $cityList = $this->user_model->getCityByStateId($state_id);
+        if(isset($cityList) && !empty($cityList)){
+            echo json_encode($cityList);
+        } else {
+            echo json_encode(array(array("city_id" => "0", "city_name" => "No City")));
+        }
+    }
+
+    public function save_user_experience()
+    {
+        $exp_company_name = $this->input->post('exp_company_name');
+        $exp_designation = json_decode($this->input->post('exp_designation'),TRUE);
+        $exp_company_website = $this->input->post('exp_company_website');
+        $exp_field = $this->input->post('exp_field');        
+        $exp_country = $this->input->post('exp_country');
+        $exp_state = $this->input->post('exp_state');
+        $exp_city = $this->input->post('exp_city');
+        $exp_start_date = $this->input->post('exp_s_year').'-'.$this->input->post('exp_s_month');
+        $exp_end_date = $this->input->post('exp_e_year').'-'.$this->input->post('exp_e_month');
+        $exp_isworking = $this->input->post('exp_isworking');
+        $exp_desc = $this->input->post('exp_desc');
+        $fileName = "";
+        if($exp_isworking == 1)
+        {
+            $exp_end_date = "";
+        }
+        if($exp_field == 0)
+        {
+            $exp_other_field = $this->input->post('exp_other_field');
+        }
+        else
+        {
+            $exp_other_field = "";
+        }
+        $exp_designation_id = "";
+        foreach ($exp_designation as $title) {
+            $designation = $this->data_model->findJobTitle($title['name']);
+            if ($designation['title_id'] != '') {
+                $jobTitleId = $designation['title_id'];
+            } else {
+                $data = array();
+                $data['name'] = $title['name'];
+                $data['created_date'] = date('Y-m-d H:i:s', time());
+                $data['modify_date'] = date('Y-m-d H:i:s', time());
+                $data['status'] = 'draft';
+                $data['slug'] = $this->common->clean($title['name']);
+                $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+            }
+            $exp_designation_id .= $jobTitleId . ',';
+        }
+        $exp_designation_id = trim($exp_designation_id, ',');
+        if(isset($_FILES['exp_file']['name']) && $_FILES['exp_file']['name'] != "")
+        {
+            $user_experience_upload_path = $this->config->item('user_experience_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_experience_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['exp_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('exp_file')){
+                $main_image = $user_experience_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_activity_insert = $this->userprofile_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_city,$exp_state,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName);
+            $user_experience = $this->userprofile_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_experience()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        
+        $user_experience = $this->userprofile_model->get_user_experience($userid);
+        $year = array();
+        $month = array();
+        foreach ($user_experience as $_user_experience) {
+            $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+            if($_user_experience['exp_isworking'] == 1)
+            {
+                $datetime2 = new DateTime();
+            }
+            else
+            {
+                $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+            }
+            $interval = $datetime1->diff($datetime2);                
+            $year[] = $interval->format('%y');
+            $month[] = $interval->format('%m') + 1;
+        }
+        $years = array_sum($year);
+        $cal_years = array_sum($month);
+        $total_month = $cal_years % 12;
+        $years = $years + intval($cal_years / 12);
+        $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

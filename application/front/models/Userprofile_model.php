@@ -1320,4 +1320,39 @@ class Userprofile_model extends CI_Model {
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
     }
+
+    public function set_user_experience($userid,$exp_company_name = "",$exp_designation = "",$exp_company_website = "",$exp_field = "",$exp_other_field = "",$exp_country = "",$exp_state = "",$exp_city = "",$exp_start_date = "",$exp_end_date = "",$exp_isworking = "",$exp_desc = "",$exp_file = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'exp_company_name' => $exp_company_name,
+            'exp_designation' => $exp_designation,
+            'exp_company_website' => $exp_company_website,
+            'exp_field' => $exp_field,
+            'exp_other_field' => $exp_other_field,
+            'exp_country' => $exp_country,                
+            'exp_state' => $exp_state,                
+            'exp_city' => $exp_city,                
+            'exp_start_date' => $exp_start_date,                
+            'exp_end_date' => $exp_end_date,                
+            'exp_isworking' => $exp_isworking,                
+            'exp_desc' => $exp_desc,                
+            'exp_file' => $exp_file,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_experience');
+        return $insert_id;
+    }
+
+    public function get_user_experience($userid)
+    {
+        $this->db->select("*")->from("user_experience");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
 }
