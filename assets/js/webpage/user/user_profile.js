@@ -5636,7 +5636,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
             var exp_e_year = $("#exp_e_year option:selected").val();
             var exp_e_month = $("#exp_e_month option:selected").val();
-            var exp_date_error = false;
+            var exp_date_error = false;            
             if(parseInt(exp_e_year) == parseInt(exp_s_year))
             {
                 if(parseInt(exp_e_month) <= parseInt(exp_s_month))
@@ -5644,7 +5644,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     exp_date_error = true;
                 }
             }
-
+            if($("#exp_isworking:checked").length == 1)
+            {
+                exp_date_error = false;
+            }
             if (exp_date_error == true) {                
                 $("#expdateerror").html("Experience date not same or start date is less than end date.");
                 $("#expdateerror").show();
@@ -6007,20 +6010,328 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.project_skill_list = [];
                         $scope.project_partner = [];
                         $("#project_form")[0].reset();
-                        // $("#experience").modal('hide');
+                        // $("#dtl-project").modal('hide');
                     }
                     else
                     {
                         // $("#project_save").removeAttr("style");
                         // $("#prject_loader").hide();
                         // $("#project_form")[0].reset();
-                        // $("#experience").modal('hide');
+                        // $("#dtl-project").modal('hide');
                     }
                 }
             });
         }
     };
     //Project End
+
+    //Education Start
+    $scope.get_edu_degree = function(){
+        $http.get(base_url + "userprofile_page/get_edu_degree").then(function (success) {
+            $scope.degree_data = success.data.degree_data;
+        }, function (error) {});
+    };
+    $scope.get_edu_degree();
+
+    $scope.get_edu_university = function(){
+        $http.get(base_url + "userprofile_page/get_edu_university").then(function (success) {
+            $scope.university_data = success.data.university_data;
+        }, function (error) {});
+    };
+    $scope.get_edu_university();
+
+    $scope.edu_degree_change = function(){
+        $("#other_edu").hide();
+        if($scope.edu_degree != "" && $scope.edu_degree != 0)
+        {            
+            $("#edu_stream").attr("disabled","disabled");
+            $("#edu_stream_loader").show();
+            var counrtydata = $.param({'degree_id': $scope.edu_degree});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_stream_by_degree_id',
+                data: counrtydata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#edu_stream").removeAttr("disabled");
+                $("#edu_stream_loader").hide();
+                $scope.stream_data = data.data.stream_data;
+            });
+        }
+        else
+        {
+            $scope.stream_data = [];
+            if($scope.edu_degree == 0 && $scope.edu_degree != "")
+            {
+                $("#edu_stream").attr("disabled","disabled");
+                $("#other_edu").show();
+            }
+            
+        }
+    };
+
+    $scope.edu_university_change = function(){
+        if($scope.edu_university == 0 && $scope.edu_university != "")
+        {
+            $("#other_university").show();
+        }
+        else
+        {
+            $("#other_university").hide();   
+        }
+    };
+
+    $scope.edu_start_year = function(){        
+        $("#edudateerror").html("");
+        $("#edudateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+        if($scope.edu_s_year == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+        var year_opt = "<option value=''>Year</option>";
+        if($scope.edu_s_year != "" && $scope.edu_s_year != 0)
+        {            
+            for (var i = yyyy; i >= $scope.edu_s_year; i--) {            
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }
+        }
+        var elyear = $('#edu_e_year');
+        elyear.html($compile(year_opt)($scope));
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        var elmonth = $('#edu_s_month');
+        elmonth.html($compile(month_opt)($scope));
+    };
+    $(document).on('change','#edu_e_year', function(e){
+        $("#edudateerror").html("");
+        $("#edudateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+
+        // console.log($(this).val());
+        if($(this).val() == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        $('#edu_e_month').html(month_opt);
+    });
+
+    var edu_formdata = new FormData();
+    $(document).on('change','#edu_file', function(e){
+        $("#edu_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#edu_file_error").html("File size must be less than 5MB.");
+            $("#edu_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                edu_formdata.append('edu_file', $('#edu_file')[0].files[0]);
+            }
+            else {
+                $("#edu_file_error").html("Invalid file selected.");
+                $("#edu_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.edu_validate = {
+        rules: {            
+            edu_school_college: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            edu_university: {
+                required: true,
+            },
+            edu_other_university: {
+                required: {
+                    depends: function(element) {
+                        return $("#edu_university option:selected").val() == 0 ? true : false;
+                    }
+                },
+                maxlength: 200,
+                minlength: 3
+            },
+            edu_degree: {
+                required: true,
+            },
+            edu_other_degree: {
+                required: {
+                    depends: function(element) {
+                        return $("#edu_degree option:selected").val() == 0 ? true : false;
+                    }
+                },
+                maxlength: 200,
+                minlength: 3
+            },
+            edu_stream: {
+                required: true,
+            },
+            edu_other_stream: {
+                required: {
+                    depends: function(element) {
+                        return $("#edu_stream option:selected").val() == 0 ? true : false;
+                    }
+                },
+                maxlength: 200,
+                minlength: 3
+            },
+            edu_s_year: {
+                required: true,
+            },
+            edu_s_month: {
+                required: true,
+            },
+            edu_e_year: {
+                required: {
+                    depends: function(element) {
+                        return $("#edu_nograduate").is(':checked') ? false : true;
+                    }
+                },
+            },
+            edu_e_month: {
+                required: {
+                    depends: function(element) {
+                        return $("#edu_nograduate").is(':checked') ? false : true;
+                    }
+                },
+            },
+        },      
+        messages: {
+            edu_school_college: {
+                required: "Please enter school / college name",
+            },
+            edu_university: {
+                required: "Please enter select board / university",
+            },
+            edu_degree: {
+                required: "Please enter select degree / qualification",
+            },
+            edu_stream: {
+                required: "Please select course / field of study / stream",
+            },
+            edu_s_year: {
+                required: "Please select education start date",
+            },
+            edu_s_month: {
+                required: "Please select education start date",
+            },
+            edu_e_year: {
+                required: "Please select education end date",
+            },            
+            edu_e_month: {
+                required: "Please select education end date",
+            },
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+    };
+
+    $scope.save_user_education = function(){        
+        $("#edudateerror").html("");
+        $("#edudateerror").hide();
+        if ($scope.edu_form.validate()) {
+            $("#edu_loader").show();
+            $("#edu_save").attr("style","pointer-events:none;display:none;");
+
+            var edu_s_year = $("#edu_s_year option:selected").val();
+            var edu_s_month = $("#edu_s_month option:selected").val();
+
+            var edu_e_year = $("#edu_e_year option:selected").val();
+            var edu_e_month = $("#edu_e_month option:selected").val();
+            var edu_date_error = false;
+            if(parseInt(edu_e_year) == parseInt(edu_s_year))
+            {
+                if(parseInt(edu_e_month) <= parseInt(edu_s_month))
+                {
+                    edu_date_error = true;
+                }
+            }
+            var edu_nograduate = 0;
+            if($("#edu_nograduate:checked").length == 1)
+            {
+                edu_nograduate = 1;
+                edu_date_error = false;
+            }
+
+            if (edu_date_error == true) {                
+                $("#edudateerror").html("Education date not same or start date is less than end date.");
+                $("#edudateerror").show();
+                $("#edu_save").removeAttr("style");
+                $("#edu_loader").hide();
+                return false;
+            }
+
+            edu_formdata.append('edu_school_college', $('#edu_school_college').val());
+            edu_formdata.append('edu_university', $('#edu_university option:selected').val());
+            edu_formdata.append('edu_other_university', $('#edu_other_university').val());
+            edu_formdata.append('edu_degree', $('#edu_degree option:selected').val());
+            edu_formdata.append('edu_other_degree', $('#edu_other_degree').val());
+            edu_formdata.append('edu_stream', $('#edu_stream option:selected').val());
+            edu_formdata.append('edu_other_stream', $('#edu_other_stream').val());
+            edu_formdata.append('edu_s_year', edu_s_year);
+            edu_formdata.append('edu_s_month', edu_s_month);
+            edu_formdata.append('edu_e_year', edu_e_year);
+            edu_formdata.append('edu_e_month', edu_e_month);            
+            edu_formdata.append('edu_nograduate', edu_nograduate);
+
+            $http.post(base_url + 'userprofile_page/save_user_education', edu_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == 1)
+                    {
+                        $scope.edu_nograduate = 0;
+                        $("#other_university").hide(); 
+                        $("#other_edu").hide();
+                        $("#edu_save").removeAttr("style");
+                        $("#edu_loader").hide();
+                        $("#edu_form")[0].reset();
+                        // $("#educational-info").modal('hide');
+                    }
+                    else
+                    {
+                        // $("#edu_save").removeAttr("style");
+                        // $("#edu_loader").hide();
+                        // $("#edu_form")[0].reset();
+                        // $("#educational-info").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //Education End
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {

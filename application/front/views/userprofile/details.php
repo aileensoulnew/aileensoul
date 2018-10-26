@@ -591,104 +591,126 @@
                 <div class="dtl-title">
                     <span>Educational Info</span>
                 </div>
-                <div class="dtl-dis">
-                    <div class="form-group">
-                        <label>School / College Name</label>
-                        <input type="text" placeholder="School / College Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Board / University</label>
-                        <input type="text" placeholder="Board / University">
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Degree / Qualification </label>
-                                <input type="text" placeholder="Degree / Qualification ">
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>Course / Field of Study / Stream </label>
-                                <input type="text" placeholder="Course / Field of Study / Stream">
-                            </div>
+                <form name="edu_form" id="edu_form" ng-validate="edu_validate">
+                    <div class="dtl-dis">
+                        <div class="form-group">
+                            <label>School / College Name</label>
+                            <input type="text" placeholder="School / College Name" id="edu_school_college" name="edu_school_college" minlength="3" maxlength="200">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <label>Start Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
+                        <div class="form-group">
+                            <label>Board / University</label>
+                            <select id="edu_university" name="edu_university" ng-model="edu_university" ng-change="edu_university_change();">
+                                <option value="">Board / University</option>    
+                                <option data-ng-repeat='university_item in university_data' value='{{university_item.university_id}}'>{{university_item.university_name}}</option>
+                                <option value="0">Other</option>    
+                            </select>
+                        </div>
+                        <div id="other_university" class="form-group" style="display: none;">
+                            <input type="text" placeholder="Other Board / University" id="edu_other_university" name="edu_other_university" maxlength="200" minlength="3">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Degree / Qualification </label>
+                                    <!-- <input type="text" placeholder="Degree / Qualification "> -->
+                                    <select id="edu_degree" name="edu_degree" ng-model="edu_degree" ng-change="edu_degree_change();">
+                                        <option value="">Degree / Qualification</option>    
+                                        <option data-ng-repeat='degree_item in degree_data' value='{{degree_item.degree_id}}'>{{degree_item.degree_name}}</option>
+                                        <option value="0">Other</option>    
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Course / Field of Study / Stream </label>
+                                    <!-- <input type="text" placeholder="Course / Field of Study / Stream"> -->
+                                    <select id="edu_stream" name="edu_stream" ng-model="edu_stream" ng-change="edu_stream_change()" disabled = "disabled">
+                                        <option value="">Course / Field of Study / Stream</option>
+                                        <option data-ng-repeat='stream_item in stream_data' value='{{stream_item.stream_id}}'>{{stream_item.stream_name}}</option>
+                                    </select>
+                                    <img id="edu_stream_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 33px;right: 33px;display: none;">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6">
-                                <label>End Date</label>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                            </select>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                            </select>
-                                        </span>
-                                    </div>
+
+                            <div id="other_edu" class="row" style="display: none;">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Other Degree / Qualification </label>
+                                    <input type="text" placeholder="Degree / Qualification" id="edu_other_degree" name="edu_other_degree">
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Other Course / Field of Study / Stream </label>
+                                    <input type="text" placeholder="Course / Field of Study / Stream" id="edu_other_stream" name="edu_other_stream">
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label>Start Date</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="edu_s_year" name="edu_s_year" ng-model="edu_s_year" ng-change="edu_start_year();">
+                                                    <option value="">Year</option>
+                                                    <?php
+                                                    $year = date("Y",NOW());
+                                                    for ($ey=$year; $ey >= 1950; $ey--) { ?>
+                                                        <option value="<?=$ey?>"><?=$ey?></option>
+                                                    <?php
+                                                    } ?>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="edu_s_month" name="edu_s_month">
+                                                    <option value="">Month</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6" ng-show='!edu_nograduate'>
+                                    <label>End Date</label>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="edu_e_year" name="edu_e_year" ng-model="edu_e_year">
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <span class="span-select">
+                                                <select id="edu_e_month" name="edu_e_month">
+                                                    <option value="">Month</option> 
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <span id="edudateerror" class="error" style="display: none;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control control--checkbox">
+                                <input type="checkbox" ng-model="edu_nograduate" id="edu_nograduate" name="edu_nograduate">If You are not graduate click here.
+                                <div class="control__indicator"></div>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="upload-file">
+                                Upload File (Educational Certificate)<input type="file" id="edu_file" name="edu_file">
+                            </label>
+                            <span id="edu_file_error" class="error" style="display: none;"></span>
+                        </div>                    
                     </div>
-                    <div class="form-group">
-                        <label class="control control--checkbox">
-                            <input type="checkbox">If You are not graduate click here.
-                            <div class="control__indicator"></div>
-                        </label>
+                    <div class="dtl-btn">
+                        <!-- <a href="#" class="save"><span>Save</span></a> -->
+                        <a id="edu_save" href="#" ng-click="save_user_education()" class="save"><span>Save</span></a>
+                        <img id="edu_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
-                    <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (Educational Certificate)<input type="file">
-                        </label>
-                    </div>
-                    
-                </div>
-                <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                </form>
+            </div>
         </div>
     </div>
 </div>

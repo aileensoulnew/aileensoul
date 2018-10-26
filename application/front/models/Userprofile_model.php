@@ -1390,4 +1390,37 @@ class Userprofile_model extends CI_Model {
         $user_data_exp = $query->result_array();        
         return $user_data_exp;
     }
+
+    public function set_user_education($userid,$edu_school_college = "",$edu_university = "",$edu_other_university = "",$edu_degree = "",$edu_stream = "",$edu_other_degree = "",$edu_other_stream = "",$edu_start_date = "",$edu_end_date = "",$edu_nograduate = "",$edu_file = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'edu_school_college' => $edu_school_college,
+            'edu_university' => $edu_university,
+            'edu_other_university' => $edu_other_university,
+            'edu_degree' => $edu_degree,
+            'edu_other_degree' => $edu_other_degree,
+            'edu_stream' => $edu_stream,                
+            'edu_other_stream' => $edu_other_stream,                
+            'edu_start_date' => $edu_start_date,                
+            'edu_end_date' => $edu_end_date,                
+            'edu_nograduate' => $edu_nograduate,    
+            'edu_file' => $edu_file,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_education');
+        return $insert_id;
+    }
+
+    public function get_user_education($userid)
+    {
+        $this->db->select("*")->from("user_education");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
 }

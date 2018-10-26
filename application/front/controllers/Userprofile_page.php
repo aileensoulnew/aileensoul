@@ -1778,4 +1778,110 @@ class Userprofile_page extends MY_Controller {
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_edu_degree()
+    {
+        $contition_array = array('is_delete' => '0', 'is_other' => '0', 'degree_name !=' => '');
+        $search_condition = "(status = '1')";
+        $degree_data = $this->common->select_data_by_search('degree', $search_condition, $contition_array, $data = 'degree_id,degree_name', $sortby = 'degree_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $ret_arr = array("degree_data"=>$degree_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_edu_university()
+    {
+        $contition_array = array('is_delete' => '0','is_other' => '0','university_name !=' => "");
+        $search_condition = "(status = '1')";
+        $university_data = $this->common->select_data_by_search('university', $search_condition, $contition_array, $data = 'university_id,university_name', $sortby = 'university_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+        $ret_arr = array("university_data"=>$university_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_stream_by_degree_id()
+    {
+        $degree_id = $this->input->post('degree_id');
+        $contition_array = array('is_delete' => '0', 'degree_id' => $degree_id);
+        $search_condition = "(status = '1')";
+        $stream_data = $this->common->select_data_by_search('stream', $search_condition, $contition_array, $data = 'stream_id,stream_name', $sortby = 'stream_name', $orderby = 'ASC', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+
+        if (count($stream_data) > 0) {
+            $ret_arr = array("stream_data"=>$stream_data);
+        } else {
+            $ret_arr = array("stream_data"=>array(array("stream_id" => "0", "stream_name" => "No Stream")));
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_education()
+    {
+        $edu_school_college = $this->input->post('edu_school_college');
+        $edu_university = $this->input->post('edu_university');
+        if($edu_university == 0)
+        {
+            $edu_other_university = $this->input->post('edu_other_university');
+        }
+        else
+        {
+            $edu_other_university = "";
+        }
+        $edu_degree = $this->input->post('edu_degree');
+        $edu_stream = $this->input->post('edu_stream');
+        if($edu_degree == 0)
+        {            
+            $edu_other_degree = $this->input->post('edu_other_degree');
+            $edu_other_stream = $this->input->post('edu_other_stream');
+        }
+        else
+        {
+            $edu_other_degree = "";
+            $edu_other_stream = "";
+        }
+        $edu_start_date = $this->input->post('edu_s_year').'-'.$this->input->post('edu_s_month');
+        $edu_end_date = $this->input->post('edu_e_year').'-'.$this->input->post('edu_e_month');
+        $edu_nograduate = $this->input->post('edu_nograduate');
+        if($edu_nograduate == 1)
+        {
+            $edu_end_date = "";
+        }
+
+        $fileName = "";
+        if(isset($_FILES['edu_file']['name']) && $_FILES['edu_file']['name'] != "")
+        {
+            $user_education_upload_path = $this->config->item('user_education_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_education_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['edu_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('edu_file')){
+                $main_image = $user_education_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_project_insert = $this->userprofile_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName);
+            $user_education = $this->userprofile_model->get_user_education($user_id);            
+            $ret_arr = array("success"=>1,"user_education"=>$user_education);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }
