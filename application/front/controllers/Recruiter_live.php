@@ -288,6 +288,34 @@ class Recruiter_live extends MY_Controller {
         }
     }
 
+    public function rec_profilenew($id = "") {
+        $this->data['userid'] = $userid = $this->session->userdata('aileenuser');
+        $recruiterdata = $this->common->select_data_by_id('recruiter', 'user_id', $userid, $data = 'user_id,designation,rec_firstname,rec_lastname', $join_str = array());
+        //if user deactive profile then redirect to recruiter/index untill active profile start
+        $contition_array = array('user_id' => $userid, 're_status' => '0', 'is_delete' => '0');
+
+        $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+        if ($recruiter_deactive) {
+            redirect('recruiter/');
+        }
+        if ($id == $userid || $id == '') {
+            $this->recruiter_apply_check();
+        } else {
+            $this->rec_avail_check($id);
+        }
+        $this->data['title'] = 'Recruiter ' . ucwords($this->data['recdata']['rec_firstname']) . ' ' . ucwords($this->data['recdata']['rec_lastname']) . ' for ' . ucwords($this->data['recdata']['re_comp_name']) . ' Company';
+
+        $this->data['metadesc'] = ucwords($this->data['recdata']['rec_firstname']) . ' ' . ucwords($this->data['recdata']['rec_lastname']) .' is Recruiter at '. ucwords($this->data['recdata']['rec_lastname']) .', currently looking to hire candidate from Aileensoul platform. Follow and contact '. ucwords($this->data['recdata']['rec_firstname']) .' to get latest updates about recent job openings.';
+        $this->data['reg_id'] = $id;
+        if ($userid) {
+            $this->load->view('recruiter_live/rec_profile_new', $this->data);
+        } else {
+            redirect(base_url(),"refresh");
+            // $this->load->view('recruiter_live/rec_liveprofile', $this->data);
+        }
+    }
+
     // recruiter available check
     public function rec_avail_check($userid = " ") {
         $contition_array = array('user_id' => $userid, 'is_delete' => '1');

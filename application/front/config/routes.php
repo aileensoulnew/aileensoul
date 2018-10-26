@@ -778,6 +778,7 @@ $route['recruiter/reactivateacc'] = "recruiter_live/reactivateacc";
 
 
 $route['recruiter/profile'] = "recruiter_live/rec_profile";
+$route['recruiter/profilenew'] = "recruiter_live/rec_profilenew";
 $route['recruiter/profile/(:any)'] = "recruiter_live/rec_profile/$1";
 
 $route['recruiter/saved-candidate'] = "recruiter_live/save_candidate";

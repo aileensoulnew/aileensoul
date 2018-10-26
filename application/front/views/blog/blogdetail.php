@@ -33,13 +33,11 @@ header("Pragma: no-cache"); // HTTP/1.0
         <meta property="fb:app_id" content="825714887566997" />
 
         <!-- for twitter -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="<?php base_url('blog/' . $blog_data['blog_slug']) ?>">
-        <meta name="twitter:title" content="<?php $blog_data['title']; ?>">
-        <meta name="twitter:description" content="<?php $blog_data['meta_description']; ?>">
-        <meta name="twitter:creator" content="By Aileensoul">
-        <meta name="twitter:image" content="http://placekitten.com/250/250">
-        <meta name="twitter:domain" content="<?php base_url('blog/' . $blog_data['blog_slug']) ?>">
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@aileen_soul" />
+        <meta name="twitter:creator" content="@aileen_soul" />
+        <meta name="twitter:title" content="<?php echo $blog_data['title']; ?>" />
+        
         <?php
         $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
@@ -244,9 +242,11 @@ header("Pragma: no-cache"); // HTTP/1.0
 											<i class="fa fa-facebook-f"></i>
 										</a>
 									</li>
-									<li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="<?php echo $blog_data['url_encode']; ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-twitter"></i></a></li>
-									<li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="<?php echo $blog_data['encode_url']; ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-linkedin"></i></a></li>
-									<li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="<?php echo $blog_data['encode_url']; ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-google"></i></a></li>
+									<li><a href="javascript:void(0)"  title="twitter" id="twitter_link" url_encode="<?php echo urlencode(base_url('blog/' . $blog_data['blog_slug'])); ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-twitter"></i></a></li>
+
+									<li><a id="linked_link" href="javascript:void(0)" title="linkedin" url_encode="<?php echo urlencode(base_url('blog/' . $blog_data['blog_slug'])); ?>" url="<?php echo $blog_data['url']; ?>" url_title="<?php echo urlencode(trim($blog_data['title'])); ?>"><i class="fa fa-linkedin"></i></a></li>
+                                    
+									<li><a href="javascript:void(0)" title="Google +" id="google_link" url_encode="<?php echo urlencode(base_url('blog/' . $blog_data['blog_slug'])); ?>" url="<?php echo $blog_data['url']; ?>"><i class="fa fa-google"></i></a></li>
 								</ul>
 							</div>
 	    				</div>
@@ -622,7 +622,8 @@ header("Pragma: no-cache"); // HTTP/1.0
 
             $(document).on("click", '#linked_link', function(event) { 
                 var  url = $(this).attr('url_encode');
-                window.open('https://www.linkedin.com/cws/share?url=' + url +'', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+                var  url_title = $(this).attr('url_title');
+                window.open('https://www.linkedin.com/shareArticle?mini=true&url=' + url +'&title='+url_title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
             });
 
             $(document).on("click", '#twitter_link', function(event) { 
