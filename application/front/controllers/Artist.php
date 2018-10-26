@@ -187,7 +187,8 @@ class Artist extends MY_Controller {
                 $updatdata1 = $this->common->update_data($data, 'art_reg_search_tmp', 'user_id', $userid);
             }
             else
-            {                
+            {
+                $email_reg = $this->input->post('email');
                 $insert_id = $this->common->insert_data_getid($data, 'art_reg');
                 if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                     //Openfire Username Generate Start
