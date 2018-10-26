@@ -431,8 +431,8 @@ background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
 	bottom:25px;
 	background:rgba(255,255,255, 0.4);
 	border-radius:4px;
-        border:1px solid transparent;
-
+    border:1px solid transparent;
+	z-index:9;
 }
 .upload-camera .cameraButton{
 	background:none;
