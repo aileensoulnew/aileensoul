@@ -2730,6 +2730,7 @@ max-width: inherit;}
 .dtl-modal .form-group label.control{display:inline-block;}
 .dtl-dis.resume-img img{width:50px;}
 .panel-heading .dis-right a::before{display:none;}
+.job-menu-profile {float: left; padding-left: 31px; width: 18.5%;}
 
 
 /***  end new details page  ***/
@@ -2787,7 +2788,7 @@ a.job-expired:hover{color:#000 !important;}
 #login_form .form-group input:focus{border-bottom:1px solid #1b8ab9;}
 .login .form-group input:focus{border-bottom:1px solid #1b8ab9;}
 .rec-edit-p{margin-top:48px;}
-
+.blog-text .social-icon{display:none;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
