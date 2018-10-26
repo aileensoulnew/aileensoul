@@ -955,3 +955,4 @@ $config['user_award_upload_path'] = 'uploads/user_award/';
 $config['user_activity_upload_path'] = 'uploads/user_activity/';
 $config['user_addicourse_upload_path'] = 'uploads/user_addicourse/';
 $config['user_experience_upload_path'] = 'uploads/user_experience/';
+$config['user_project_upload_path'] = 'uploads/user_project/';

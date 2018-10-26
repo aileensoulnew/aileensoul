@@ -3479,6 +3479,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
     scopeHold = $scope;    
 });
 app.controller('detailsController', function ($scope, $http, $location,$compile) {
+    var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     $scope.user = {};
     $scope.$parent.title = "Details | Aileensoul";
     // PROFEETIONAL DATA
@@ -4036,6 +4037,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $("#user_research_save").removeAttr("style");
@@ -4297,6 +4299,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $("#user_idol_save").removeAttr("style");
@@ -4531,6 +4534,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $("#user_publication_save").removeAttr("style");
@@ -4773,6 +4777,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $("#user_patent_save").removeAttr("style");
@@ -4994,6 +4999,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $("#user_award_save").removeAttr("style");
@@ -5161,6 +5167,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $("#user_activity_save").removeAttr("style");
@@ -5326,6 +5333,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $("#user_addicourse_save").removeAttr("style");
@@ -5417,8 +5425,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     }
 
-    var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
     $scope.exp_start_year = function(){
         $("#expdateerror").html("");
         $("#expdateerror").hide();
@@ -5455,9 +5461,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         elmonth.html($compile(month_opt)($scope));
     };
     $(document).on('change','#exp_e_year', function(e){
-
-    // };
-    // $scope.exp_end_year = function(){
         $("#expdateerror").html("");
         $("#expdateerror").hide();
         var todaydate = new Date();
@@ -5672,6 +5675,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             })
             .then(function (result) {
                 if (result) {
+                    result = result.data;
                     if(result.success == '1')
                     {
                         $scope.exp_years = result.data.exp_years;
@@ -5717,6 +5721,306 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     }
     $scope.get_user_experience();
     //Experience End
+
+    //Project Start
+    $scope.other_project_field_fnc = function()
+    {
+        if($scope.project_field == 0 && $scope.project_field != "")
+        {
+            $("#proj_other_field_div").show();
+        }
+        else
+        {
+            $("#proj_other_field_div").hide();
+        }
+    }
+
+    $scope.project_start_year = function(){        
+        $("#projdateerror").html("");
+        $("#projdateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+        if($scope.project_s_year == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+        var year_opt = "<option value=''>Year</option>";
+        for (var i = yyyy; i >= $scope.project_s_year; i--) {            
+            year_opt += "<option value='"+i+"'>"+i+"</option>";
+        }
+        var elyear = $('#project_e_year');
+        elyear.html($compile(year_opt)($scope));
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        var elmonth = $('#project_s_month');
+        elmonth.html($compile(month_opt)($scope));
+    };
+    $(document).on('change','#project_e_year', function(e){
+        $("#projdateerror").html("");
+        $("#projdateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+
+        // console.log($(this).val());
+        if($(this).val() == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        $('#project_e_month').html(month_opt);
+    });
+
+    $(document).on('keydown','#project_team',function (e) {
+        /*var key = window.e ? e.keyCode : e.which;
+        if (e.keyCode === 8 || e.keyCode === 46) {
+            return true;
+        } else if ( key < 48 || key > 57 ) {
+            return false;
+        } else {
+            return true;
+        }*/
+        // Allow: backspace, delete, tab, escape, enter         
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: Ctrl/cmd+r
+            (e.keyCode == 82 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    $scope.project_validate = {
+        rules: {            
+            project_title: {
+                required: true,
+                maxlength: 200,
+                minlength: 3
+            },
+            project_team: {
+                required: true,
+                maxlength: 3,
+                number: true
+            },
+            project_role: {
+                required: true,
+                maxlength: 200,
+            },
+            project_field: {
+                required: true,
+            },
+            project_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#project_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+                maxlength: 200,
+            },
+            project_url: {
+                url: true,
+                maxlength: 200,
+            },
+            project_s_year: {
+                required: true,
+            },
+            project_s_month: {
+                required: true,
+            },
+            project_e_year: {
+                required: true,
+            },
+            project_e_month: {
+                required: true,
+            },
+            project_desc: {
+                required: true,
+                minlength: 50,
+                maxlength: 700,
+            },
+            
+        },      
+        messages: {
+            project_title: {
+                required: "Please enter project title",
+            },
+            project_team: {
+                required: "Please enter project team size",
+            },
+            project_role: {
+                required: "Please enter your role in project",
+            },
+            project_field: {
+                required: "Please select field",
+            },
+            project_url: {
+                url: "URL must start with http:// or https://",
+            },
+            project_s_year: {
+                required: "Please select project start date",
+            },
+            project_s_month: {
+                required: "Please select project start date",
+            },
+            project_e_year: {
+                required: "Please select project end date",
+            },
+            project_e_month: {
+                required: "Please select project end date",
+            },
+            project_desc: {
+                required: "Please enter project description",
+            },
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        },
+    };
+
+    $scope.project_skills_fnc = function(){
+        // $("#exp_designation input").removeClass("error");
+        $("#project_skill_list .tags").removeAttr("style");
+        $("#project_skill_err").attr("style","display:none;");
+    };
+
+    var project_formdata = new FormData();
+    $(document).on('change','#project_file', function(e){
+        $("#project_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#project_file_error").html("File size must be less than 5MB.");
+            $("#project_file_error").show();
+            $(this).val("");
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','PDF','docx','doc'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                project_formdata.append('project_file', $('#project_file')[0].files[0]);
+            }
+            else {
+                $("#project_file_error").html("Invalid file selected.");
+                $("#project_file_error").show();
+                $(this).val("");
+            }         
+        }
+    });
+
+    $scope.validate_proj_skills = function(){        
+        if($scope.project_skill_list == "" || $scope.project_skill_list == undefined)
+        {
+            $("#project_skill_list .tags").attr("style","border:1px solid #ff0000;");
+            setTimeout(function(){
+                $("#project_skill_err").attr("style","display:block;");            
+            },100);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    $scope.save_user_project = function(){
+        var proj_skills = $scope.validate_proj_skills();
+        $("#projdateerror").html("");
+        $("#projdateerror").hide();
+        if ($scope.project_form.validate() && proj_skills) {
+            $("#prject_loader").show();
+            $("#project_save").attr("style","pointer-events:none;display:none;");
+
+            var project_s_year = $("#project_s_year option:selected").val();
+            var project_s_month = $("#project_s_month option:selected").val();
+
+            var project_e_year = $("#project_e_year option:selected").val();
+            var project_e_month = $("#project_e_month option:selected").val();
+            var project_date_error = false;
+            if(parseInt(project_e_year) == parseInt(project_s_year))
+            {
+                if(parseInt(project_e_month) <= parseInt(project_s_month))
+                {
+                    project_date_error = true;
+                }
+            }
+
+            if (project_date_error == true) {                
+                $("#projdateerror").html("Project date not same or start date is less than end date.");
+                $("#projdateerror").show();
+                $("#project_save").removeAttr("style");
+                $("#prject_loader").hide();
+                return false;
+            }
+
+            project_formdata.append('project_title', $('#project_title').val());
+            project_formdata.append('project_team', $('#project_team').val());
+            project_formdata.append('project_role', $('#project_role').val());
+            project_formdata.append('project_skill_list', JSON.stringify($scope.project_skill_list));
+            project_formdata.append('project_field', $('#project_field option:selected').val());
+            project_formdata.append('project_other_field', $('#project_other_field').val());
+            project_formdata.append('project_url', $('#project_url').val());
+            project_formdata.append('project_partner', JSON.stringify($scope.project_partner));
+            project_formdata.append('project_s_year', project_s_year);
+            project_formdata.append('project_s_month', project_s_month);
+            project_formdata.append('project_e_year', project_e_year);
+            project_formdata.append('project_e_month', project_e_month);
+            project_formdata.append('project_desc', $('#project_desc').val());
+
+            $http.post(base_url + 'userprofile_page/save_user_project', project_formdata,
+            {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined, 'Process-Data': false},
+            })
+            .then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == 1)
+                    {
+                        $("#project_save").removeAttr("style");
+                        $("#prject_loader").hide();
+                        $scope.project_skill_list = [];
+                        $scope.project_partner = [];
+                        $("#project_form")[0].reset();
+                        // $("#experience").modal('hide');
+                    }
+                    else
+                    {
+                        // $("#project_save").removeAttr("style");
+                        // $("#prject_loader").hide();
+                        // $("#project_form")[0].reset();
+                        // $("#experience").modal('hide');
+                    }
+                }
+            });
+        }
+    };
+    //Project End
     
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {

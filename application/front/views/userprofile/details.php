@@ -379,7 +379,7 @@
                         <label>Hobbies</label>
                         <!-- <input type="text" placeholder="Enter hobbies"> -->
                         <tags-input id="hobby_txt" ng-model="hobby_txt" display-property="hobby" placeholder="Enter hobbies" replace-spaces-with-dashes="false" template="title-template">
-                        </tags-input>  
+                        </tags-input>
                     </div>
                     <div class="form-group">
                         <label>Favourite Quotes, Headline</label>
@@ -702,60 +702,76 @@
                 <div class="dtl-title">
                     <span>Projects</span>
                 </div>
+                <form name="project_form" id="project_form" ng-validate="project_validate">
                 <div class="dtl-dis">
                     <div class="form-group">
                         <div class="row">
-                            
                             <div class="col-md-6 col-sm-6">
                                 <label>Project Name / Title</label>
-                                <input type="text" placeholder="Project Name / Title">
+                                <input type="text" placeholder="Project Name / Title" id="project_title" name="project_title" maxlength="200">
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>Team Size</label>
-                                <input type="text" placeholder="Enter Company Location">
+                                <input type="text" placeholder="Enter Team size" id="project_team" name="project_team" maxlength="3">
                             </div>
-                            
-                            
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <div class="row">
-                            
+                        <div class="row">                            
                             <div class="col-md-6 col-sm-6">
                                 <label>Role</label>
-                                <input type="text" placeholder="Role">
+                                <input type="text" placeholder="Role" id="project_role" name="project_role" maxlength="200">
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>Skills Applied</label>
-                                <input type="text" placeholder="Skills Applied">
+                                <tags-input id="project_skill_list" ng-model="project_skill_list" display-property="name" placeholder="Enter Skills" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" ng-keyup="project_skills_fnc()">
+                                    <auto-complete source="loadSkills($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
+                                </tags-input>                        
+                                <script type="text/ng-template" id="title-template">
+                                    <div class="tag-template"><div class="right-panel"><span>{{$getDisplayText()}}</span><a class="remove-button" ng-click="$removeTag()">&#10006;</a></div></div>
+                                </script>
+                                <script type="text/ng-template" id="title-autocomplete-template">
+                                    <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
+                                </script>
+                                <label id="project_skill_err" for="project_skill_list" class="error" style="display: none;">Please enter skills</label>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>                   
                     
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
-                                <label>Project Field </label>
+                                <label>Project Field</label>
                                 <span class="span-select">
-                                    <select>
-                                        <option>Project Field</option>
-                                        <option>It Field</option>
-                                        <option>Design</option>
-                                        <option>Advertizing</option>
+                                    <?php $getFieldList = $this->data_model->getNewFieldList();?>
+                                    <select name="project_field" id="project_field" ng-model="project_field" ng-change="other_project_field_fnc()">
+                                            <option value="">Select Field</option>
+                                        <?php foreach ($getFieldList as $key => $value) { ?>
+                                            <option value="<?php echo $value['industry_id']; ?>""><?php echo $value['industry_name']; ?></option>
+                                        <?php } ?>
+                                        <option value="0">Other</option>
                                     </select>
                                 </span>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>Project URL</label>
-                                <input type="text" placeholder="Project URL">
+                                <input type="text" placeholder="Project URL" id="project_url" name="project_url">
                             </div>
+                        </div>
+                        <div id="proj_other_field_div" class="row" style="display: none;">
+                            <div class="col-md-6 col-sm-6">
+                                <label>Other Field</label>
+                                <input type="text" placeholder="Enter Other Field" id="project_other_field" name="project_other_field" maxlength="200">
+                            </div>
+                            <div class="col-md-6 col-sm-6"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Tag Project Partner</label>
-                        <input type="text" placeholder="Tag Project Partner">
+                        <!-- <input type="text" placeholder="Tag Project Partner" id="project_partner" name="project_partner"> -->
+                        <tags-input id="project_partner" ng-model="project_partner" display-property="p_name" placeholder="Tag Project Partner" replace-spaces-with-dashes="false" template="title-template" min-length="1">
+                        </tags-input>
                     </div>
                     <div class="form-group">
                         <div class="row">
@@ -764,23 +780,21 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
+                                            <select id="project_s_year" name="project_s_year" ng-model="project_s_year" ng-change="project_start_year();">
+                                                <option value="">Year</option>
+                                                <?php
+                                                $year = date("Y",NOW());
+                                                for ($pi=$year; $pi >= 1950; $pi--) { ?>
+                                                    <option value="<?=$pi?>"><?=$pi?></option>
+                                                <?php
+                                                } ?>
                                             </select>
                                         </span>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
+                                            <select id="project_s_month" name="project_s_month">
+                                                <option value="">Month</option>
                                             </select>
                                         </span>
                                     </div>
@@ -791,48 +805,42 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Year</option>
-                                                <option>2012</option>
-                                                <option>2013</option>
-                                                <option>2014</option>
-                                                <option>2015</option>
+                                            <select id="project_e_year" name="project_e_year" ng-model="project_e_year">
                                             </select>
                                         </span>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <span class="span-select">
-                                            <select>
-                                                <option>Month</option>
-                                                <option>januari</option>
-                                                <option>Fabruari</option>
-                                                <option>March</option>
-                                                <option>April</option>
+                                            <select id="project_e_month" name="project_e_month">
+                                                <option value="">Month</option> 
                                             </select>
                                         </span>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12 col-sm-12">
+                                <span id="projdateerror" class="error" style="display: none;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Project Details / Description</label>
-                        <textarea type="text" placeholder="Description">
-                        </textarea>
+                        <textarea type="text" placeholder="Description" id="project_desc" name="project_desc" minlength="50" maxlength="700"></textarea>
                     </div>
                     <div class="form-group">
                         <label class="upload-file">
-                            Upload File (Project certificate) <input type="file">
+                            Upload File (Project certificate) <input type="file" id="project_file" name="project_file">
                         </label>
+                        <span id="project_file_error" class="error" style="display: none;"></span>
                     </div>
-                    
                 </div>
                 <div class="dtl-btn">
-                        <a href="#" class="save"><span>Save</span></a>
-                    </div>
-            </div>  
-
-
+                    <!-- <a href="#" class="save"><span>Save</span></a> -->
+                    <a id="project_save" href="#" ng-click="save_user_project()" class="save"><span>Save</span></a>
+                    <img id="prject_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -1580,4 +1588,4 @@
     </div>
 </div>
 
-<!-- All Model End -->
+<!-- All Model End 

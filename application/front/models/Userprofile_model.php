@@ -1075,6 +1075,7 @@ class Userprofile_model extends CI_Model {
         $this->db->select("s.skill as name")->from("skill s");
         $this->db->where("(s.type = '1' OR s.type = '2')");
         $this->db->where('s.status', '1');
+        $this->db->group_by('s.skill');
         $query = $this->db->get();
         $result_array = $query->result_array();
         return $result_array;
@@ -1349,6 +1350,40 @@ class Userprofile_model extends CI_Model {
     public function get_user_experience($userid)
     {
         $this->db->select("*")->from("user_experience");
+        $this->db->where('user_id', $userid);
+        $this->db->order_by('created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function set_user_project($userid,$project_title = "",$project_team = "",$project_role = "",$project_skill_ids = "",$project_field = "",$project_other_field = "",$project_url = "",$project_partner_name = "",$project_start_date = "",$project_end_date = "",$project_desc = "",$project_file = "")
+    {
+        $data = array(
+            'user_id' => $userid,
+            'project_title' => $project_title,
+            'project_team' => $project_team,
+            'project_role' => $project_role,
+            'project_skills' => $project_skill_ids,
+            'project_field' => $project_field,
+            'project_other_field' => $project_other_field,                
+            'project_url' => $project_url,                
+            'project_partner_name' => $project_partner_name,                
+            'project_start_date' => $project_start_date,                
+            'project_end_date' => $project_end_date,                
+            'project_desc' => $project_desc,        
+            'project_file' => $project_file,                
+            'status' => '1',
+            'created_date' => date('Y-m-d H:i:s', time()),
+            'modify_date' => date('Y-m-d H:i:s', time()),
+        );
+        $insert_id = $this->common->insert_data($data, 'user_projects');
+        return $insert_id;
+    }
+
+    public function get_user_project($userid)
+    {
+        $this->db->select("*")->from("user_projects");
         $this->db->where('user_id', $userid);
         $this->db->order_by('created_date',"desc");
         $query = $this->db->get();

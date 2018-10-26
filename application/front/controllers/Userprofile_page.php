@@ -1676,4 +1676,106 @@ class Userprofile_page extends MY_Controller {
         $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function save_user_project()
+    {
+        $project_title = $this->input->post('project_title');
+        $project_team = $this->input->post('project_team');
+        $project_role = $this->input->post('project_role');
+        $project_skill_list = json_decode($this->input->post('project_skill_list'),TRUE);
+        $project_field = $this->input->post('project_field');        
+        $project_url = $this->input->post('project_url');
+        $project_partner = json_decode($this->input->post('project_partner'),TRUE);
+        $project_start_date = $this->input->post('project_s_year').'-'.$this->input->post('project_s_month');
+        $project_end_date = $this->input->post('project_e_year').'-'.$this->input->post('project_e_month');
+        $project_desc = $this->input->post('project_desc');
+        $fileName = "";        
+        if($project_field == 0)
+        {
+            $project_other_field = $this->input->post('project_other_field');
+        }
+        else
+        {
+            $project_other_field = "";
+        }
+        
+        $project_skill_ids = "";
+        foreach ($project_skill_list as $title) {
+            $ski = $title['name'];
+            $contition_array = array('skill' => trim($ski), 'type' => '1');
+            $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+
+            if (!$skilldata) {
+
+                $contition_array = array('skill' => trim($ski), 'type' => '7');
+                $skilldata = $this->common->select_data_by_condition('skill', $contition_array, $data = 'skill_id,skill', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+            }
+            if ($skilldata) {
+
+                $skill_id = $skilldata[0]['skill_id'];
+            } else {
+
+                $data = array(
+                    'skill' => $ski,
+                    'status' => '1',
+                    'type' => '7',
+                    'user_id' => $userid,
+                );
+                $skill_id = $this->common->insert_data_getid($data, 'skill');
+            }           
+
+            $project_skill_ids .= $skill_id . ',';
+        }
+        $project_skill_ids = trim($project_skill_ids, ',');
+
+        $project_partner_name = "";
+        if(isset($project_partner) && !empty($project_partner))
+        {
+            foreach ($project_partner as $_project_partner) {
+                if(trim($_project_partner['p_name']) != "")
+                {
+                    $project_partner_name = $_project_partner['p_name'].",";
+                }
+            }
+        }
+        $project_partner_name = trim($project_partner_name, ',');
+        if(isset($_FILES['project_file']['name']) && $_FILES['project_file']['name'] != "")
+        {
+            $user_project_upload_path = $this->config->item('user_project_upload_path');
+            $config = array(
+                'image_library' => 'gd',
+                'upload_path'   => $user_project_upload_path,
+                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                'overwrite'     => true,
+                'remove_spaces' => true
+            );
+            $store = $_FILES['project_file']['name'];
+            $store_ext = explode('.', $store);        
+            $store_ext = $store_ext[count($store_ext)-1];
+            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+            $config['file_name'] = $fileName;
+            $this->upload->initialize($config);
+            $imgdata = $this->upload->data();
+            if($this->upload->do_upload('project_file')){
+                $main_image = $user_project_upload_path . $fileName;
+                $s3 = new S3(awsAccessKey, awsSecretKey);
+                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                if (IMAGEPATHFROM == 's3bucket') {
+                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                }
+            }
+        }
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_project_insert = $this->userprofile_model->set_user_project($user_id,$project_title,$project_team,$project_role,$project_skill_ids,$project_field,$project_other_field,$project_url,$project_partner_name,$project_start_date,$project_end_date,$project_desc,$fileName);
+            $user_project = $this->userprofile_model->get_user_project($user_id);            
+            $ret_arr = array("success"=>1,"user_project"=>$user_project);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }
