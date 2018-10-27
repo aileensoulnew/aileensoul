@@ -2753,9 +2753,12 @@ max-width: inherit;}
 .job-reg-cus-new .btn3{border:1px solid #5c5c5c; border-radius:20px; color:#5c5c5c;}
 .job-reg-cus-new .form-control:focus{box-shadow:none;}
 .total-exp{color:#7b7b7b;}
-
-
-
+.post-job-new .job_reg_main{margin-top:25px;}
+.post-job-new textarea.form-control{border-width:0px 0px 1px 0px; border-radius:0;}
+.post-job-new .control input{float:left; width:auto;}
+.post-job-new .right-add{margin-top:25px;}
+.post-job-new .dtl-box{box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
+.post-job-new h2{text-align:center; color:#1b8ab9;}
 
 
 /***  end new job registration form  ***/

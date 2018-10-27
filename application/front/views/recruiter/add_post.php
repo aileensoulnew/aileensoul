@@ -194,6 +194,19 @@
                                             <fieldset class="rec_check form-group full-width">
                                                 <input  type="checkbox" tabindex="10" id="fresher_nme" name="fresher" value="1"><label for="fresher_nme">Fresher can also apply..!   </label> 
                                             </fieldset>
+											<fieldset class="full-width">
+												<label>Hiring for level</label>
+												<span class="span-select">
+													<select>
+														<option>Intern</option>
+														<option>Entry-level</option>
+														<option>Associate</option>
+														<option>Mid-senior</option>
+														<option>Director</option>
+														<option>Executive</option>
+													</select>
+												</span>
+											</fieldset>
                                             <fieldset id="erroe_nn" class="full-width" <?php if ($degree1) { ?> class="error-msg" <?php } ?>>
                                                 <label>Required Education:<span class="optional">(optional)</span></label> 
 
@@ -284,6 +297,33 @@
                                     <div class="custom-add-box">
                                         <h3>Job Location</h3>
                                         <div class="p15 fw">
+											<fieldset class="fw">
+												<label>Company Name</label>
+												<input type="text" placeholder="Enter your company name">
+											</fieldset>
+											<fieldset class="fw">
+												<label>Company URL</label>
+												<input type="text" placeholder="Enter Company URL">
+											</fieldset>
+											<fieldset class="fw">
+												<label>About Company Details / Profile</label>
+												<textarea type="text" placeholder="About Company Details / Profile"></textarea>
+											</fieldset>
+											<fieldset class="fw">
+												<label>Work Schedule type</label>
+												<span class="span-select">
+													<select>
+														<option>Day</option>
+														<option>Night</option>
+														<option>Flexible</option>
+														
+													</select>
+												</span>
+											</fieldset>
+											
+											
+										<div class="row">
+											<div class="col-md-4 col-sm-4 col-xs-4">
                                             <fieldset class="fw" <?php if ($country) { ?> class="error-msg" <?php } ?>>
                                                 <label >Country:<span style="color:red">*</span></label>
                                                 <select style="cursor:pointer;" name="country" id="country" tabindex="21">
@@ -300,7 +340,8 @@
                                                 </select> 
                                                 <?php echo form_error('country'); ?>
                                             </fieldset>
-
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-4">
                                             <fieldset class="fw" <?php if ($state) { ?> class="error-msg" <?php } ?>>
                                                 <label>State:<span style="color:red">*</span></label>
                                                 <select style="cursor:pointer;" name="state" id="state" tabindex="22">
@@ -308,7 +349,8 @@
                                                 </select>
                                                 <?php echo form_error('state'); ?> 
                                             </fieldset>
-
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-4">
                                             <fieldset class="fw" <?php if ($city) { ?> class="error-msg" <?php } ?>>
                                                 <label>City:</label>
                                                 <select style="cursor:pointer;" name="city" id="city" tabindex="23">
@@ -316,18 +358,7 @@
                                                 </select>
 
                                             </fieldset>
-
-
-
-
-
-
-
-
-
-
-
-
+											</div>
 
 <!--   <fieldset class="full-width" <?php //if ($other_skill) {          ?> class="error-msg" <?php //}          ?> >
     <label class="control-label">Other Skill: --><!-- <span style="color:red">*</span> --><!-- </label>
