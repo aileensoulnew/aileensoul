@@ -210,7 +210,7 @@
 					</div>
 				
 					<!-- menubar --> 
-					<div class="container rec_res">
+					<div class="container rec_res rec-dtl">
 						<div class="job-menu-profile  mob-none job_edit_menu ">
 							<a href="javascript:void(0);" title="<?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?>"><h3><?php echo $recdata['rec_firstname'] . ' ' . $recdata['rec_lastname']; ?></h3></a>
 							<!-- text head start -->
@@ -253,14 +253,135 @@
 						</div>
 						<div class="common-form">
 
-							Add New Here
+							
+						<!-- Basic information  -->
+						
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/about.png?ver=' . time()) ?>"><span>Basic Information</span><a href="#" data-target="#job-basic-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<ul class="dis-list">
+										
+										<li>
+											<span>Current Position</span>
+											Sr. Multimedia Designer
+										</li>
+										<li>
+											<span>Role & Responsibilities</span>
+											Manage team
+										</li>
+										<li>
+											<span>Total Experience</span>
+											5 years 5 month
+										</li>
+										<li>
+											<span>Skills Hired For</span>
+											<ul class="skill-list">
+												<li>HTML</li>
+												<li>PHP</li>
+												<li>CSS</li>
+											</ul>
+											 
+										</li>
+										<li>
+											<span>Industry Hired For</span>
+											IT sector
+										</li>
+										<li>
+											<span>Hired Levels</span>
+											Director
+										</li>
+								
+										
+								
+										
+									</ul>
+								</div>
+								
+								
+							</div>
+						
+						
+						
+						<!-- Company Details  -->
+						
+						
+							<div class="dtl-box">
+								<div class="dtl-title">
+									<img class="cus-width" src="<?php echo base_url('assets/n-images/detail/exp.png?ver=' . time()) ?>"><span>Company Details</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url('assets/n-images/detail/edit.png?ver=' . time()) ?>"></a>
+								</div>
+								<div class="dtl-dis">
+									<ul class="dis-list">
+										
+										<li>
+											<span>Company Name</span>
+											Verve system pvt ltd
+										</li>
+										<li>
+											<span>Company Email Id</span>
+											info@verve.com
+										</li>
+										<li>
+											<span>Company Phone number</span>
+											+91 9874563210
+										</li>
+										<li>
+											<span>Company Website URL</span>
+											<a href="#">www.vervesystem.com</a>
+										</li>
+										<li>
+											<span>Company Size</span>
+											108
+										</li>
+										<li>
+											<span>Industry Type </span>
+											IT Sector
+										</li>
+										<li>
+											<span>Company Culture </span>
+											Corporate
+										</li>
+										<li>
+											<span>Company Location</span>
+											Ahmedabad , Gujarat , India
+										</li>
+										<li>
+											<span>Company Profile</span>
+											With jQuery, I am looking to find the anchor tag in div i.e. div1 anchor tag. I need to add a class to it on button click. Follow Answer ...
+										</li>
+										<li>
+											<span>Other Activities</span>
+											<ul class="skill-list">
+												<li>Plying game</li>
+												<li>Annual function</li>
+												<li>Csr activity</li>
+											</ul>
+										</li>
+										<li>
+											<span>Company Logo</span>
+											<img style="width:50px;" src="<?php echo base_url('assets/n-images/detail/website.png?ver=' . time()) ?>">
+										</li>
+										
+								
+										
+								
+										
+									</ul>
+								</div>
+								
+							</div>
 							
 						</div>
 						<div class="banner-add">
 							<?php $this->load->view('banner_add'); ?>
+							
 						</div>
 					</div>
 					<div class="right-add">
+						<div class="dtl-box p10 dtl-adv">
+								<img src="<?php echo base_url('assets/n-images/detail/add.png?ver=' . time()) ?>">
+							</div>
 						<?php $this->load->view('right_add_box'); ?>
 					</div>
 					<div class="clearfix"></div>  
@@ -268,7 +389,260 @@
 				<!-- MIDDLE SECTION END-->
 </section>
 <!-- END CONTAINER -->
+<!---  model basic information  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="job-basic-info" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Basic Information</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>First Name</label>
+									<input type="text" placeholder="First Name">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Last Name</label>
+									<input type="text" placeholder="Last Name">
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Current Position </label>
+									<input type="text" placeholder="Current Position">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Industry Hired For</label>
+									<span class="span-select">
+										<select>
+											<option>industry name</option>
+											<option>IT sector</option>
+											<option>Factory</option>
+											<option>Industry</option>
+										</select>
+									</span>
+									
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Skills Hired For</label>
+							<input type="text" placeholder="Role & Responsibilities">
+						</div>
+						<div class="form-group">
+							<label>Role & Responsibilities</label>
+							<textarea type="text" placeholder="Role & Responsibilities"></textarea>
+						</div>
+						<div class="form-group">
+									<label>Hired Levels</label>
+									<span class="span-select">
+										<select>
+											<option>Intern</option>
+											<option>Entry-level</option>
+											<option>Associate</option>
+											<option>Mid-senior</option>
+											<option>Director</option>
+											<option>Executive</option>
+										</select>
+									</span>
+									
+								</div>
+						
+							<div class="">
+								<div class="form-group">
+									<label>Total Experience</label>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Year</option>
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+													<option>5</option>
+												</select>
+											</span>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span class="span-select">
+												<select>
+													<option>Month</option>
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+												</select>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+						
+					</div>
+					<div class="dtl-btn">
+							<a href="#" class="save"><span>Save</span></a>
+						</div>
+				</div>	
 
+
+            </div>
+        </div>
+    </div>
+	
+	<!---  model Experience  -->
+	<div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">×</button>
+                <div class="modal-body-cus"> 
+					<div class="dtl-title">
+						<span>Company Details</span>
+					</div>
+					<div class="dtl-dis">
+						<div class="form-group">
+							<label>Company Name</label>
+							<input type="text" placeholder="Enter Company Name">
+						</div>
+						
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Company Email Id</label>
+									<input type="text" placeholder="Enter Company Website">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Company Phone number</label>
+									<input type="text" placeholder="Enter Company Website">
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Company Website URL</label>
+									<input type="text" placeholder="Enter Company Website">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Company Size</label>
+									<input type="text" placeholder="Enter Company Website">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Industry Type </label>
+									<span class="span-select">
+										<select>
+											<option>Select Field</option>
+											<option>It Field</option>
+											<option>Design</option>
+											<option>Advertizing</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Company Culture </label>
+									<span class="span-select">
+										<select>
+											<option>Traditional</option>
+											<option>Corporate</option>
+											<option>Start-Up</option>
+											<option>Free Spirit</option>
+											<option>Don't Specify</option>
+											<option>others</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+					
+						
+						<div class="form-group dtl-dob ">
+							<label>Company Location</label>
+							<div class="row">
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<span class="span-select">
+										<select>
+											<option>Country</option>
+											<option>America</option>
+											<option>India</option>
+											<option>Japan</option>
+										</select>
+									</span>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<span class="span-select">
+										<select>
+											<option>State</option>
+											<option>Gujrat</option>
+											<option>Delhi</option>
+											<option>Rajsthaan</option>
+										</select>
+									</span>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<span class="span-select">
+										<select>
+											<option>City</option>
+											<option>Ahmedabad</option>
+											<option>Rajkot</option>
+											<option>Junagadh</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label>Company Profile</label>
+							<textarea row="4" type="text" placeholder="Company Profile">
+							</textarea>
+						</div>
+						<div class="form-group">
+							<label>Other Activities</label>
+							<input type="text" placeholder="Company Profile">
+						</div>
+						<div class="form-group">
+							<label class="upload-file">
+								Upload Company Logo<input type="file">
+							</label>
+						</div>
+						
+						
+					</div>
+					<div class="dtl-btn">
+						<a href="#" class="save"><span>Save</span></a>
+					</div>
+				</div>	
+
+
+            </div>
+        </div>
+    </div>
+	
+	
 <!--PROFILE PIC MODEL START-->
 <div class="modal fade message-box" id="bidmodal-2" role="dialog">
    <div class="modal-dialog modal-lm">

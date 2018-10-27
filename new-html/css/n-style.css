@@ -2478,7 +2478,7 @@ label.cameraButton{min-height:43px;}
 .banner-add{width:100%; float:left; padding:10px;}
 .right-add-box{border:1px solid #d2d2d2; padding:7px; margin-bottom:10px; border-radius:5px; width:100%; float:left;}
 .banner-add{width:100%; float:left;}
-.cus-inner-middle{width:55%; float:left; padding-left:15px;}
+.cus-inner-middle{width:54%; float:left; padding-left:15px;}
 .all_user_post{width:100%; float:left;}
 .page-title{width:100%; float:left;}
 .infeed-add{margin-bottom:10px;}
@@ -2731,7 +2731,7 @@ max-width: inherit;}
 .dtl-dis.resume-img img{width:50px;}
 .panel-heading .dis-right a::before{display:none;}
 .job-menu-profile {float: left; padding-left: 31px; width: 18.5%;}
-
+.rec-dtl .dtl-box{box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); -webkit-box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
 
 /***  end new details page  ***/
 /***  new job registration form  ***/
@@ -2891,11 +2891,12 @@ a.job-expired:hover{color:#000 !important;}
 	.all-detail-custom .custom-user-list{width:100%;}
 	.all-detail-custom .right-add{width:100%; padding:0;}
 	.all-detail-custom .right-add .rsp-dtl-box{width:50%; float:left; padding-left:8px; padding-right:8px;}
-	.dtl-dis ul.skill-list{min-height:180px;}
+	.dtl-dis ul.skill-list{/*min-height:180px;*/}
 	.dis-right{float:right;}
 	.dis-middle{width:325px;}
 	.all-detail-custom .right-add .row{margin-left:-15px; margin-right:-15px;}
 	.dtl-adv{display:none;}
+	.rec-dtl .dtl-adv{display:block;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -3078,7 +3079,7 @@ a.job-expired:hover{color:#000 !important;}
 	.post-box-bottom ul{padding:7px 0 0;}
 	.edit_pr_bar{display:none;}
 	.new-ld-page .middle-part{left:0;}
-	.job-menu-profile{margin-top:40px; margin-bottom:0;}
+	.job-menu-profile{margin-bottom:0;}
 	.cus-inner-middle{width:100%; padding:0 15px;}
 	.tab-add-991{display:block;}
 	.art-side-menu .flw_msg_btn{/*margin-top:0;*/}
@@ -3523,6 +3524,7 @@ a.job-expired:hover{color:#000 !important;}
 	.job_reg_page_fprm{width:100%;}
 	.job-reg-cus-new .form-group select{font-size:14px;}
 	.total-exp{font-size:14px;}
+	.rec-dtl .dtl-box{border-radius:0; border-left:0; border-right:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}

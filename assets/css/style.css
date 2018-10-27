@@ -701,33 +701,33 @@ fieldset .add_post_btnc,fieldset .add_post_btns{
     float:left
 }
 .cust-modal-close,.modal-close,.modal-close1,.profile-modal-close{
-    background:#1b8ab9!important;
+    /*background:#1b8ab9!important;
     color:#fff!important;
     position:absolute!important;
     line-height:22px!important;
     margin:0!important;
     text-align:center!important;
-    z-index:7!important
+    z-index:7!important*/
 }
 .modal-close,.modal-close1,.profile-modal-close{
-    height:30px!important;
+    /*height:30px!important;
     width:30px!important;
     font-size:24px!important;
     border:1px solid #1b8ab9!important;
     border-radius:50%!important;
     top:-15px!important;
     right:-15px!important;
-    padding:4px 7px
+    padding:4px 7px*/
 }
 .cust-modal-close{
-    height:26px!important;
+    /*height:26px!important;
     width:26px!important;
     font-size:19px!important;
     border:1px solid #1b8ab9!important;
     border-radius:50%!important;
     top:-12px!important;
     right:-12px!important;
-    padding:2px 3px
+    padding:2px 3px*/
 }
 .modal.message-box .modal-body{
     text-align:center
@@ -2488,7 +2488,7 @@ footer div.pt20{
         margin-bottom:20px!important;
         height:auto!important
     }
-    .modal.in .modal-dialog{padding: 55px 15px !important;}
+    .modal.in .modal-dialog{/*padding: 55px 15px !important;*/}
 }
 @media screen and (min-height:540px){
     .no-login .modal-content{
@@ -2891,8 +2891,8 @@ footer div.pt20{
         width:85%!important
     }
     .modal.in .modal-dialog{
-        width:100%;
-        padding:55px 15px;
+        /*width:100%;
+        padding:55px 15px;*/
     }
     .padd_set .change-password{
         padding:0
@@ -3087,7 +3087,7 @@ footer div.pt20{
             padding-right:20px
         }
         .modal.in .modal-dialog{
-            margin:20px auto
+            /*margin:20px auto*/
         }
         #row1,#row2 img{
             height:200px

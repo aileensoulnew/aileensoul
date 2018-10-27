@@ -967,8 +967,7 @@ label.cameraButton input[accept*="camera"] {
 .cancel-result:hover{color: #fff;background-color: #1b8ab9;border-color:#1B8AB9 !important;}
 .modal-content .message span#field_error{width: 100%;float: left!important;text-align: right;}
 .custom_footer_left ul li a:focus{color: #1b8ab9 !important}
-.modal-content .modal-close:hover{color: #fff;background-color: #156f95 !important;}
-.modal-content .modal-close{top:-13px !important;right: -13px !important;}
+.modal-content .modal-close:hover{/*color: #fff;background-color: #156f95 !important;*/}
 #InboxBody #mCSB_2_container div ul{float: none!important;}
 
 fieldset.fresher_radio label {
