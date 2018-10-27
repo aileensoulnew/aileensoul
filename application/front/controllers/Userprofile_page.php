@@ -33,7 +33,7 @@ class Userprofile_page extends MY_Controller {
 
     public function details() {
 
-        $this->load->view('userprofile/details', $this->data);
+        $this->load->view('userprofile/details-new', $this->data);
     }
 
     public function contacts() {
