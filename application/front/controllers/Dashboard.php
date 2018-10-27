@@ -56,6 +56,7 @@ class Dashboard extends MY_Controller {
 
     public function logout() {
 
+       
 
         //PROGRESSBAR JOB START
         $userid = $this->session->userdata('aileenuser');
@@ -75,31 +76,36 @@ class Dashboard extends MY_Controller {
             );
 
             $updatedata = $this->common->update_data($data, 'job_reg', 'user_id', $userid);
-        }        
+        }       
+
         //PROGRESSBAR JOB END
         if ($this->session->userdata('searchkeyword')) {
             $this->session->unset_userdata('searchkeyword');
         }
         if ($this->session->userdata('searchplace')) {
             $this->session->unset_userdata('searchplace');
-        }        
+        }
+        
         //LOGOUT START       
         if ($this->session->userdata('aileenuser')) {            
 
             $this->session->unset_userdata('aileenuser');
             $this->session->unset_userdata('aileenuser_slug');
             $this->session->unset_userdata('aileenuser_fullname');
-            $this->clear_all_cache();
-            $this->session->sess_destroy();
-            clearstatcache();
-            redirect(base_url(), 'refresh');
+            // $this->clear_all_cache();
+            // $this->session->sess_destroy();
+            // clearstatcache();
+            
+            redirect(base_url());
+            exit();
         }
         else
         {
-            $this->clear_all_cache();
-            $this->session->sess_destroy();
-            clearstatcache();
-            redirect(base_url(), 'refresh');
+            // $this->clear_all_cache();
+            // $this->session->sess_destroy();
+            // clearstatcache();            
+            redirect(base_url());
+            exit();
         }
 
         //LOGOUT END  
@@ -377,65 +383,65 @@ class Dashboard extends MY_Controller {
 
         $count = 0;
 
-        if ($job_reg[0]['fname'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['fname'] != '') {
             $count++;
         }
-        if ($job_reg[0]['lname'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['lname'] != '') {
             $count++;
         }
-        if ($job_reg[0]['email'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['email'] != '') {
             $count++;
         }
-        if ($job_reg[0]['keyskill'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['keyskill'] != '') {
             $count++;
         }
 
-        if ($job_reg[0]['work_job_title'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['work_job_title'] != '') {
             $count++;
         }
-        if ($job_reg[0]['work_job_industry'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['work_job_industry'] != '') {
             $count++;
         }
-        if ($job_reg[0]['work_job_city'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['work_job_city'] != '') {
             $count++;
         }
-        if ($job_reg[0]['phnno'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['phnno'] != '') {
             $count++;
         }
-        if ($job_reg[0]['language'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['language'] != '') {
             $count++;
         }
-        if ($job_reg[0]['dob'] != '0000-00-00') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['dob'] != '0000-00-00') {
             $count++;
         }
-        if ($job_reg[0]['gender'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['gender'] != '') {
             $count++;
         }
-        if ($job_reg[0]['city_id'] != '0') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['city_id'] != '0') {
             $count++;
         }
-        if ($job_reg[0]['pincode'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['pincode'] != '') {
             $count++;
         }
-        if ($job_reg[0]['address'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['address'] != '') {
             $count++;
         }
-        if ($job_reg[0]['project_name'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['project_name'] != '') {
             $count++;
         }
-        if ($job_reg[0]['project_duration'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['project_duration'] != '') {
             $count++;
         }
-        if ($job_reg[0]['project_description'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['project_description'] != '') {
             $count++;
         }
-        if ($job_reg[0]['training_as'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['training_as'] != '') {
             $count++;
         }
-        if ($job_reg[0]['training_duration'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['training_duration'] != '') {
             $count++;
         }
-        if ($job_reg[0]['training_organization'] != '') {
+        if (isset($job_reg) && !empty($job_reg) && $job_reg[0]['training_organization'] != '') {
             $count++;
         }
 
@@ -446,10 +452,10 @@ class Dashboard extends MY_Controller {
         $jobgrad = $this->common->select_data_by_condition('job_graduation', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
 
-        if ($job_add_edu[0]['board_primary'] != '' || $job_add_edu[0]['board_secondary'] != '' || $job_add_edu[0]['board_higher_secondary'] != '' || $jobgrad[0]['degree'] != '') {
+        if (isset($job_add_edu) && !empty($job_add_edu) && ($job_add_edu[0]['board_primary'] != '' || $job_add_edu[0]['board_secondary'] != '' || $job_add_edu[0]['board_higher_secondary'] != '' || $jobgrad[0]['degree'] != '')) {
             $count++;
         }
-        if (($job_add_edu[0]['board_primary'] != '' && $job_add_edu[0]['edu_certificate_primary'] != '') || ($job_add_edu[0]['board_secondary'] != '' && $job_add_edu[0]['edu_certificate_secondary'] != '') || ($job_add_edu[0]['board_higher_secondary'] != '' && $job_add_edu[0]['edu_certificate_higher_secondary'] != '') || ($jobgrad[0]['degree'] != '' && $jobgrad[0]['grade'] != '' && $jobgrad[0]['edu_certificate'] != '')) {
+        if ((isset($job_add_edu) && !empty($job_add_edu) && $job_add_edu[0]['board_primary'] != '' && $job_add_edu[0]['edu_certificate_primary'] != '') || (isset($job_add_edu) && !empty($job_add_edu) && $job_add_edu[0]['board_secondary'] != '' && $job_add_edu[0]['edu_certificate_secondary'] != '') || (isset($job_add_edu) && !empty($job_add_edu) && $job_add_edu[0]['board_higher_secondary'] != '' && $job_add_edu[0]['edu_certificate_higher_secondary'] != '') || (isset($jobgrad) && !empty($jobgrad) && $jobgrad[0]['degree'] != '' && $jobgrad[0]['grade'] != '' && $jobgrad[0]['edu_certificate'] != '')) {
             $count++;
         }
 
@@ -458,7 +464,7 @@ class Dashboard extends MY_Controller {
         $workdata = $this->common->select_data_by_condition('job_add_workexp', $contition_array, $data = '*', $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
 
-        if (($job_reg[0]['experience'] != '' && $job_reg[0]['experience'] != 'Experience') || ($workdata[0]['experience_year'] != '' && $workdata[0]['companyemail'] != '' && $workdata[0]['companyphn'] != '' && $workdata[0]['work_certificate'] != '')) {
+        if ((isset($job_reg) && !empty($job_reg) && $job_reg[0]['experience'] != '' && $job_reg[0]['experience'] != 'Experience') || (isset($workdata) && !empty($workdata) && $workdata[0]['experience_year'] != '' && $workdata[0]['companyemail'] != '' && $workdata[0]['companyphn'] != '' && $workdata[0]['work_certificate'] != '')) {
             $count++;
         }
 

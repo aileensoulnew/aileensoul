@@ -32,11 +32,11 @@
     </div>
 </div> -->
 
-<div class="container pt20">
-    <div class="row">
-        <div class="detail-left">
-            <div class="row">
-                <div class="col-md-6 col-sm-6">
+<div class="container mob-plr0 pt20">
+    <div class="all-detail-custom">
+        <div class="custom-user-list">
+            <div class="gallery" id="gallery">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Profile Overview</span><a href="#" data-target="#profile-overview" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
@@ -52,7 +52,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item edit-profile-move">
+                </div>
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>About {{details_data.first_name}}</span><a href="#" data-target="#detail-about" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
@@ -73,20 +75,81 @@
                     </div>
                 </div>
                 
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Experience({{exp_years}}year {{exp_months}}month)</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
-                        <div class="dtl-dis">
+                        <div class="dtl-dis" ng-if="user_experience.length < 1">
                             <div class="no-info">
                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                 <span>Lorem ipsum its a dummy text and its user to for all.</span>
                             </div>
                         </div>
+                        <div class="dtl-dis dis-accor" ng-if="user_experience.length > 1">
+                            <div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" ng-repeat="user_exp in user_experience" ng-if="$index <= view_more">
+                                    <div class="panel-heading" role="tab" id="exp-{{$index}}">
+                                        <div class="panel-title">
+                                            <div class="dis-left">
+                                                <div class="dis-left-img">
+                                                    <span>V</span>
+                                                </div>
+                                            </div>
+                                            <div class="dis-middle">
+                                                <h4>Verv System PVT LTD{{$index}}</h4>
+                                                <p>Working as Sr.multimedia dsigner </p>
+                                                
+                                            </div>
+                                            <div class="dis-right">
+                                                <span href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png"></span>
+                                                <span role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp{{$index}}" aria-expanded="true" aria-controls="exp1">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                </span>
+                                            </div>
+         
+                                        </div>
+                                    </div>
+                                    <div id="exp{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exp-{{$index}}">
+                                        <div class="panel-body">
+                                            <ul class="dis-list">
+                                                <li>
+                                                    <span>Time Period</span>
+                                                    Jun 2015 to March 2015
+                                                    
+                                                </li>
+                                                <li>
+                                                    <span>Company Location</span>
+                                                    Ahmedabad, India
+                                                    
+                                                </li>
+                                                <li>
+                                                    <span>Website</span>
+                                                    <a href="#">www.vervsystem.com</a>
+                                                </li>
+                                                <li>
+                                                    <span>Description</span>
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
+                                                    <a class="dis-more" href="#"><b>See More..</b> </a>
+                                                </li>
+                                                <li>
+                                                    <span>Document</span>
+                                                    <p class="screen-shot">
+                                                        <img src="<?php echo base_url(); ?>assets/n-images/art-img.jpg">
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-more">
+                                    <a href="#" ng-click="exp_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -99,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Project</span><a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -112,7 +175,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Additional Course</span><a href="#" data-target="#additional-course" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -125,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Extracurricular Activity</span><a href="#" data-target="#extra-activity" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -138,7 +201,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -151,7 +214,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Publication</span><a href="#" data-target="#publication" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -164,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Patent</span><a href="#" data-target="#patent" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -177,7 +240,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Research</span><a href="#" data-target="#research" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
@@ -191,10 +254,17 @@
                     </div>
                 </div>
                 
+                <div class="gallery-item skill-move">
+                </div>
+                <div class="gallery-item social-link-move">
+                </div>
+                <div class="gallery-item idol-move">
+                </div>
+                
             </div>
         </div>
-        <div class="detail-right">
-            <div class="dtl-box">
+        <div class="right-add">
+            <div id="edit-profile-move" class="dtl-box">
                 <div class="dtl-title">
                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Profile</span>
                 </div>
@@ -203,7 +273,7 @@
                     
                 </div>
             </div>
-            <div class="dtl-box">
+            <div id="skill-move" class="dtl-box">
                 <div class="dtl-title">
                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
@@ -218,7 +288,7 @@
                 </div>
             </div>
             
-            <div class="dtl-box">
+            <div id="social-link-move" class="dtl-box">
                 <div class="dtl-title">
                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Social Links</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
@@ -229,7 +299,7 @@
                     </div>
                 </div>
             </div>
-            <div class="dtl-box">
+            <div id="idol-move" class="dtl-box">
                 <div class="dtl-title">
                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Inspiration</span><a href="#" data-target="#inspiration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
@@ -1610,4 +1680,4 @@
     </div>
 </div>
 
-<!-- All Model End 
+<!-- All Model End -->

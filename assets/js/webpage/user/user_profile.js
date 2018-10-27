@@ -3555,12 +3555,18 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var user_langs = result.data.user_languages;
                 $scope.primari_lang = user_langs[0];
                 $scope.languageSet.language = user_langs.slice(1);
-
-                var user_hobbies = about_user_data.user_hobbies.split(',');
+                var user_hobbies = "";
+                if(about_user_data.user_hobbies.trim() != "")
+                {
+                    var user_hobbies = about_user_data.user_hobbies.split(',');
+                }
                 var edit_hobbies = [];
-                user_hobbies.forEach(function(element,jobArrIndex) {
-                  edit_hobbies[jobArrIndex] = {"hobby":element};
-                });
+                if(user_hobbies.length > 0)
+                {                    
+                    user_hobbies.forEach(function(element,jobArrIndex) {
+                      edit_hobbies[jobArrIndex] = {"hobby":element};
+                    });
+                }
                 $scope.hobby_txt = edit_hobbies;
                 $scope.user_fav_quote_headline = about_user_data.user_fav_quote_headline;
                 $scope.user_fav_artist = about_user_data.user_fav_artist;
@@ -5723,6 +5729,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_experience();
+    $scope.view_more = 1;
+    $scope.exp_view_more = function(){
+        $scope.view_more = $scope.user_experience.length;
+
+    };
     //Experience End
 
     //Project Start
@@ -6332,7 +6343,43 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     };
     //Education End
-    
+
+    angular.element(document).ready(function () {
+        if (screen.width <= 1199) {
+            $("#edit-profile-move").appendTo($(".edit-profile-move"));
+            $("#skill-move").appendTo($(".skill-move"));
+            $("#social-link-move").appendTo($(".social-link-move"));
+            $("#idol-move").appendTo($(".idol-move"));
+        }
+
+        var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
+          containerElem.classList.add('masonry-layout', 'columns-' + columns);
+          var columnsElements = [];
+
+          for (var i = 1; i <= columns; i++) {
+            var column = document.createElement('div');
+            column.classList.add('masonry-column', 'column-' + i);
+            containerElem.appendChild(column);
+            columnsElements.push(column);
+          }
+
+          for (var m = 0; m < Math.ceil(itemsElems.length / columns); m++) {
+            for (var n = 0; n < columns; n++) {
+              var item = itemsElems[m * columns + n];
+              columnsElements[n].appendChild(item);
+              item.classList.add('masonry-item');
+            }
+          }
+        };
+
+        masonryLayout(document.getElementById('gallery'),
+        document.querySelectorAll('.gallery-item'), 2);
+
+
+        /*if (screen.width > 767) {
+            alert(1);
+        }*/
+    });
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {
     
