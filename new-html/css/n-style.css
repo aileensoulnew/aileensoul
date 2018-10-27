@@ -2753,14 +2753,16 @@ max-width: inherit;}
 .job-reg-cus-new .btn3{border:1px solid #5c5c5c; border-radius:20px; color:#5c5c5c;}
 .job-reg-cus-new .form-control:focus{box-shadow:none;}
 .total-exp{color:#7b7b7b;}
-.post-job-new .job_reg_main{margin-top:25px;}
-.post-job-new textarea.form-control{border-width:0px 0px 1px 0px; border-radius:0;}
-.post-job-new .control input{float:left; width:auto;}
-.post-job-new .right-add{margin-top:25px;}
-.post-job-new .dtl-box{box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
-.post-job-new h2{text-align:center; color:#1b8ab9;}
 
-
+.custom-add-box{box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); border:0; border-radius:15px;} 
+.custom-user-list h3{border: 0px; box-shadow: 0px; border-radius: 0; background: transparent !important; border-bottom: 1px solid #d2d2d2;}
+.rec-edit-post .hs-submit .btn1{border-radius:20px; border:0px !important;}
+.rec-edit-post .hs-submit{text-align:center;}
+.uplod-file input{padding-left:0;}
+.common-form .form-group.uplod-file input:focus{border:0px !important;}
+.common-form .form-group.uplod-file input{cursor:pointer;}
+.rec-edit-post .form-group label{margin-bottom:3px;}
+.form-group.textarea-cus{margin-bottom:12px;}
 /***  end new job registration form  ***/
 
 body.body-loader{height:100vh; overflow:hidden;}

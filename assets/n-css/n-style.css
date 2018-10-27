@@ -2754,10 +2754,15 @@ max-width: inherit;}
 .job-reg-cus-new .form-control:focus{box-shadow:none;}
 .total-exp{color:#7b7b7b;}
 
-
-
-
-
+.custom-add-box{box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); border:0; border-radius:15px;} 
+.custom-user-list h3{border: 0px; box-shadow: 0px; border-radius: 0; background: transparent !important; border-bottom: 1px solid #d2d2d2;}
+.rec-edit-post .hs-submit .btn1{border-radius:20px; border:0px !important;}
+.rec-edit-post .hs-submit{text-align:center;}
+.uplod-file input{padding-left:0;}
+.common-form .form-group.uplod-file input:focus{border:0px !important;}
+.common-form .form-group.uplod-file input{cursor:pointer;}
+.rec-edit-post .form-group label{margin-bottom:3px;}
+.form-group.textarea-cus{margin-bottom:12px;}
 /***  end new job registration form  ***/
 
 body.body-loader{height:100vh; overflow:hidden;}
@@ -3524,7 +3529,7 @@ a.job-expired:hover{color:#000 !important;}
 	.job_reg_page_fprm{width:100%;}
 	.job-reg-cus-new .form-group select{font-size:14px;}
 	.total-exp{font-size:14px;}
-	.rec-dtl .dtl-box{border-radius:0;}
+	.rec-dtl .dtl-box{border-radius:0; border-left:0; border-right:0;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
