@@ -54,7 +54,7 @@
                             <div class="common-form custom-form">
                                 
 
-                                <div class="job-saved-box rec-edit-post">
+                                <div class="job-saved-box rec-edit-post post-j-c">
 
 
                                     <?php echo form_open(base_url('recruiter/add_post_store'), array('id' => 'artpost', 'name' => 'artpost', 'class' => 'clearfix form_addedit', 'onsubmit' => "return imgval()")); ?>
@@ -283,7 +283,7 @@
                                             </div>
 											</div>
 											<div class="col-md-6 col-sm-6 col-xs-6">
-                                            <div class="" <?php if ($currency) { ?> class="error-msg" <?php } ?> class="form-group"> 
+                                            <div class="form-group" <?php if ($currency) { ?> class="error-msg" <?php } ?> class="form-group"> 
                                                 <label>Currency:<span class="optional">(optional)</span></label>
                                                 <select name="currency" id="currency" tabindex="18">
 
@@ -301,7 +301,7 @@
 											</div>
 											<div class="row">
 											<div class="col-md-6 col-sm-6 col-xs-6">
-                                            <div class=" " <?php if ($minsal) { ?> class="error-msg" <?php } ?>>
+                                            <div class="form-group" <?php if ($minsal) { ?> class="error-msg" <?php } ?>>
                                                 <label class="control-label">Minimum Salary:<span class="optional">(optional)</span></label>
                                                 <input name="minsal" type="text" id="minsal" placeholder="Enter Minimum Salary" tabindex="19" /><span id="fullname-error"></span>
                                                 <?php echo form_error('minsal'); ?>
@@ -382,7 +382,7 @@
                                             </div>
 											</div>
 											<div class="col-md-4 col-sm-4 col-xs-4">
-                                            <div class="fw" <?php if ($city) { ?> class="error-msg" <?php } ?>>
+                                            <div class="fw form-group" <?php if ($city) { ?> class="error-msg" <?php } ?>>
                                                 <label>City:</label>
                                                 <select style="cursor:pointer;" name="city" id="city" tabindex="23">
                                                     <option value="">Select State First</option>

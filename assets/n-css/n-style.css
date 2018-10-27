@@ -2759,10 +2759,15 @@ max-width: inherit;}
 .rec-edit-post .hs-submit .btn1{border-radius:20px; border:0px !important;}
 .rec-edit-post .hs-submit{text-align:center;}
 .uplod-file input{padding-left:0;}
+.common-form .form-group.uplod-file input{border:0px !important; height:auto;}
 .common-form .form-group.uplod-file input:focus{border:0px !important;}
 .common-form .form-group.uplod-file input{cursor:pointer;}
 .rec-edit-post .form-group label{margin-bottom:3px;}
 .form-group.textarea-cus{margin-bottom:12px;}
+.rec_check.form-group input{margin-left:0; margin-top:-3px;}
+.rec_check.form-group{margin-top:-3px; margin-bottom:3px;}
+.post-j-c .form-group{position:relative;}
+.post-j-c .form-group label.error{bottom:-20px;}
 /***  end new job registration form  ***/
 
 body.body-loader{height:100vh; overflow:hidden;}
@@ -2794,6 +2799,7 @@ a.job-expired:hover{color:#000 !important;}
 .login .form-group input:focus{border-bottom:1px solid #1b8ab9;}
 .rec-edit-p{margin-top:48px;}
 .blog-text .social-icon{display:none;}
+.blog-page.blog-d .right-part{position:fixed;}
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {
