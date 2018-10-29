@@ -1616,7 +1616,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_activity_insert = $this->userprofile_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_city,$exp_state,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName);
+            $user_activity_insert = $this->userprofile_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName);
             $user_experience = $this->userprofile_model->get_user_experience($user_id);
             $year = array();
             $month = array();

@@ -31,19 +31,19 @@ class Login extends CI_Controller {
             {
                 $this->session->set_userdata('aileen_admin', $admin_check[0]['admin_id']);
                 
-                redirect('dashboard', 'refresh');
+                redirect('dashboard');
             
             } 
             else
              {
                 $this->session->set_flashdata('error', '<div class="alert alert-danger">Please Enter Valid Credential.</div>');
-                redirect('login', 'refresh');
+                redirect('login');
             }
         } 
         else 
         {
             $this->session->set_flashdata('error', '<div class="alert alert-danger">Please Enter Valid Login Detail.</div>');
-            redirect('login', 'refresh');
+            redirect('login');
         }
     }
 

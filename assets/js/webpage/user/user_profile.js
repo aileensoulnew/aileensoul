@@ -1,4 +1,22 @@
 var scopeHold;
+app.directive('checkFileExt', ['$compile', function($compile) {
+
+    return {
+        restrict: 'A',
+        scope: true,
+        link: function(scope, element, attrs) {
+            console.log(element);
+            console.log(attrs);
+            attrs.$observe('checkFile', function(text) {
+                // console.log(text);
+                var filenameArr = text.split('.');
+                // console.log(filenameArr);
+                console.log(filenameArr[filenameArr.length - 1]);
+            });
+            
+        }
+    };
+}]);
 app.directive('ddTextCollapse', ['$compile', function($compile) {
 
     return {
@@ -5687,8 +5705,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     result = result.data;
                     if(result.success == '1')
                     {
-                        $scope.exp_years = result.data.exp_years;
-                        $scope.exp_months = result.data.exp_months;
+                        $scope.exp_years = result.exp_years;
+                        $scope.exp_months = result.exp_months;
                         $("#save_user_exp").removeAttr("style");
                         $("#user_exp_loader").hide();
                         $scope.exp_designation = [];

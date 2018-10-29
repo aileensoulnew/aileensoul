@@ -93,13 +93,12 @@
                                         <div class="panel-title">
                                             <div class="dis-left">
                                                 <div class="dis-left-img">
-                                                    <span>V</span>
+                                                    <span>{{user_exp.exp_company_name | limitTo:1 | uppercase}}</span>
                                                 </div>
                                             </div>
                                             <div class="dis-middle">
-                                                <h4>Verv System PVT LTD{{$index}}</h4>
-                                                <p>Working as Sr.multimedia dsigner </p>
-                                                
+                                                <h4>{{user_exp.exp_company_name}}</h4>
+                                                <p>Working as {{user_exp.designation}}</p>
                                             </div>
                                             <div class="dis-right">
                                                 <span href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png"></span>
@@ -114,28 +113,27 @@
                                         <div class="panel-body">
                                             <ul class="dis-list">
                                                 <li>
-                                                    <span>Time Period</span>
-                                                    Jun 2015 to March 2015
-                                                    
+                                                    <span>Time Period</span> 
+                                                    <label>{{user_exp.start_date_str}} to</label>
+                                                    <label ng-if="user_exp.end_date_str != '' && user_exp.end_date_str != null">{{user_exp.end_date_str}}</label> 
+                                                    <label ng-if="user_exp.end_date_str == '' || user_exp.end_date_str == null">Still Working</label>
                                                 </li>
                                                 <li>
                                                     <span>Company Location</span>
-                                                    Ahmedabad, India
-                                                    
+                                                    {{user_exp.city_name}},{{user_exp.state_name}},{{user_exp.country_name}} 
                                                 </li>
-                                                <li>
+                                                <li ng-if="user_exp.exp_company_website != '' && user_exp.exp_company_website != null">
                                                     <span>Website</span>
-                                                    <a href="#">www.vervsystem.com</a>
+                                                    <a href="{{user_exp.exp_company_website}}" target="_self">{{user_exp.exp_company_website}}</a>
                                                 </li>
                                                 <li>
                                                     <span>Description</span>
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting indus try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it       
-                                                    <a class="dis-more" href="#"><b>See More..</b> </a>
+                                                    <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_exp.exp_desc}}" dd-text-collapse-cond="true">{{user_exp.exp_desc}}</label>
                                                 </li>
-                                                <li>
+                                                <li ng-if="user_exp.exp_file != '' && user_exp.exp_file != null">
                                                     <span>Document</span>
-                                                    <p class="screen-shot">
-                                                        <img src="<?php echo base_url(); ?>assets/n-images/art-img.jpg">
+                                                    <p class="screen-shot" check-file-ext check-file="{{user_exp.exp_file}}">
+                                                        <!-- <img src="<?php echo base_url(); ?>assets/n-images/art-img.jpg"> -->
                                                     </p>
                                                 </li>
                                             </ul>
