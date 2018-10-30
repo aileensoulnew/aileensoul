@@ -482,7 +482,7 @@ background: -webkit-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%
 .dropdown-menu.profile-dropdown li{padding:0;}
 .dropdown-menu.profile-dropdown li a{padding:8px 10px; line-height:1;}
 .dropdown-menu.profile-dropdown li a:hover{background:#1b8ab9; color:#fff !important;}
-.mCS-minimal.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
+.mCS-minimal.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3) !important;}
 .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{background-color:rgba(0,0,0,0.3);}
 .mCS-minimal.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar, .mCS-minimal.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar {background-color:rgba(0,0,0,0.6);}

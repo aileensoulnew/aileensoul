@@ -2732,6 +2732,25 @@ max-width: inherit;}
 .panel-heading .dis-right a::before{display:none;}
 .job-menu-profile {float: left; padding-left: 31px; width: 18.5%;}
 .rec-dtl .dtl-box{box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); -webkit-box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
+body.freelancer-box{height:100vh; padding-bottom:0;}
+.freelancer-box .freelancer-midd{height:100%;}
+.vertical-m-box{max-width:530px; margin:0 auto;}
+.vertical-m-box h2{text-align:center; margin-bottom:25px;}
+.vertical-m-box .middle-left{ border-right:1px solid #d2d2d2;}
+.vertical-m-box .m-box{width:50%; float:left; padding:10px 30px; text-align:center;}
+.vertical-m-box .m-box a{padding:20px; display:block;}
+.vertical-m-box .m-box a .indi-img{width:80px; height:80px; display:block; margin:0 auto; background:url('../n-images/detail/free-sprite.png'); background-position:80px 0;}
+.vertical-m-box .m-box a .com-img{width:80px; height:80px; display:block; margin:0 auto; background:url('../n-images/detail/free-sprite.png'); background-position:0px 0px;}
+.vertical-m-box .m-box a p{padding-top:10px; color:#5c5c5c;}
+.vertical-m-box .m-box a h4{color:#5c5c5c; margin:0; font-size:20px; padding-top:10px;}
+.vertical-m-box .m-box a:hover{webkit-box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);
+box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25); border-radius:20px;}
+.vertical-m-box .m-box a:hover .indi-img{background-position:80px 80px;}
+.vertical-m-box .m-box a:hover .com-img{background-position:0px 80px;}
+.vertical-m-box{}
+.vertical-m-box .vm-box{float: left; top: 50%; width: 530px; position: absolute;
+max-width: 100%; max-height: 100%; transform: translate(-50%,-50%); left: 50%; margin-top:22px;}
+.one-border textarea{border-width:0 0 1px 0; border-radius:0;}
 
 /***  end new details page  ***/
 /***  new job registration form  ***/
@@ -2880,7 +2899,8 @@ a.job-expired:hover{color:#000 !important;}
 	.find-art .right-bnr img{width:85%;}
 	.bus-main .right-bnr img{width:85%;}
 	.mian_middle_post_box{margin-left:10px;}
-	.blog-page .right-part{position:relative; position: relative; left: auto; right: auto; width: 775px; margin-left: 150px; display:block;}
+	.blog-page .right-part{position: relative; left: auto; right: auto; width: 775px; margin-left: 150px; display:block;}
+	.blog-page.blog-d .right-part{position: relative;}
 	.blog-m .right-part{width:100%; margin-left:0;}
 	.blog-m .right-part .right-add-box{display:none;}
 	.blog-page .sub-header .sub-menu li{padding-left:20px; padding-right:20px;}
@@ -3578,7 +3598,7 @@ a.job-expired:hover{color:#000 !important;}
 	.free-hire-bnr .left-header .logo{float:none; padding-bottom:10px;}
 	.free-hire-bnr .no-login-right a{font-size:12px; padding:4px 10px;}
 	.blog-user-detail{width:100%; padding:0; position:relative;}
-	.blog-user-detail .user-img{float:left; margin-right:15px; margin-top:10px;}
+	.blog-user-detail .user-img{float:left; margin-right:15px;/* margin-top:10px;*/}
 	.user-detail-left{width:80%; float:left; text-align:left;}
 	.user-detail-left p{padding-top:0;}
 	.blog-user-detail .social-icon li{width:auto; padding:0 15px;}

@@ -2899,7 +2899,8 @@ a.job-expired:hover{color:#000 !important;}
 	.find-art .right-bnr img{width:85%;}
 	.bus-main .right-bnr img{width:85%;}
 	.mian_middle_post_box{margin-left:10px;}
-	.blog-page .right-part{position:relative; position: relative; left: auto; right: auto; width: 775px; margin-left: 150px; display:block;}
+	.blog-page .right-part{position: relative; left: auto; right: auto; width: 775px; margin-left: 150px; display:block;}
+	.blog-page.blog-d .right-part{position: relative;}
 	.blog-m .right-part{width:100%; margin-left:0;}
 	.blog-m .right-part .right-add-box{display:none;}
 	.blog-page .sub-header .sub-menu li{padding-left:20px; padding-right:20px;}
@@ -3597,7 +3598,7 @@ a.job-expired:hover{color:#000 !important;}
 	.free-hire-bnr .left-header .logo{float:none; padding-bottom:10px;}
 	.free-hire-bnr .no-login-right a{font-size:12px; padding:4px 10px;}
 	.blog-user-detail{width:100%; padding:0; position:relative;}
-	.blog-user-detail .user-img{float:left; margin-right:15px; margin-top:10px;}
+	.blog-user-detail .user-img{float:left; margin-right:15px;/* margin-top:10px;*/}
 	.user-detail-left{width:80%; float:left; text-align:left;}
 	.user-detail-left p{padding-top:0;}
 	.blog-user-detail .social-icon li{width:auto; padding:0 15px;}
