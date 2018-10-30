@@ -9,9 +9,20 @@ app.directive('checkFileExt', ['$compile', function($compile) {
             console.log(attrs);
             attrs.$observe('checkFile', function(text) {
                 // console.log(text);
-                var filenameArr = text.split('.');
-                // console.log(filenameArr);
-                console.log(filenameArr[filenameArr.length - 1]);
+                var filename_arr = text.split('.');
+                // console.log(filename_arr);
+                //console.log(filename_arr[filename_arr.length - 1]);
+                var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+                var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+                var fileExt = filename_arr[filename_arr.length - 1];
+                if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                    var inner_html = $compile('<a href="'+user_experience_upload_url+text+'" target="_blank"><img src="'+user_experience_upload_url+text+'"></a>')(scope);
+                }
+                else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                    var inner_html = $compile('<a href="'+user_experience_upload_url+text+'" target="_blank"><img src="'+base_url+'assets/images/PDF.jpg"></a>')(scope);   
+                }
+                element.empty();
+                element.append(inner_html);
             });
             
         }

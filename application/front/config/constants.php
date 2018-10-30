@@ -362,6 +362,18 @@ if (IMAGEPATHFROM == 's3bucket') {
 // USER POST 550 X 220
     define('USER_POST_RESIZE4_UPLOAD_URL', BUCKETLINK . 'uploads/user_post/resize4/');    
     define('FEEDBACK_IMG_URL', BUCKETLINK . 'uploads/feedback/');
+
+//User Detail page
+    define('USER_RESEARCH_UPLOAD_URL', BUCKETLINK . 'uploads/user_research/');
+    define('USER_IDOL_UPLOAD_URL', BUCKETLINK . 'uploads/user_idol/');
+    define('USER_PUBLICATION_UPLOAD_URL', BUCKETLINK . 'uploads/user_publication/');
+    define('USER_PATENT_UPLOAD_URL', BUCKETLINK . 'uploads/user_patent/');
+    define('USER_AWARD_UPLOAD_URL', BUCKETLINK . 'uploads/user_award/');
+    define('USER_ACTIVITY_UPLOAD_URL', BUCKETLINK . 'uploads/user_activity/');
+    define('USER_ADDICOURSE_UPLOAD_URL', BUCKETLINK . 'uploads/user_addicourse/');
+    define('USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/user_experience/');
+    define('USER_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/user_project/');
+    define('USER_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/user_education/');
     
 } else {
     //USER PHOTO 
@@ -577,6 +589,18 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('USER_POST_RESIZE4_UPLOAD_URL', BASEURL . 'uploads/user_post/resize4/');    
 
     define('FEEDBACK_IMG_URL', BASEURL . 'uploads/feedback/');
+
+//User Detail page
+    define('USER_RESEARCH_UPLOAD_URL', BASEURL . 'uploads/user_research/');
+    define('USER_IDOL_UPLOAD_URL', BASEURL . 'uploads/user_idol/');
+    define('USER_PUBLICATION_UPLOAD_URL', BASEURL . 'uploads/user_publication/');
+    define('USER_PATENT_UPLOAD_URL', BASEURL . 'uploads/user_patent/');
+    define('USER_AWARD_UPLOAD_URL', BASEURL . 'uploads/user_award/');
+    define('USER_ACTIVITY_UPLOAD_URL', BASEURL . 'uploads/user_activity/');
+    define('USER_ADDICOURSE_UPLOAD_URL', BASEURL . 'uploads/user_addicourse/');
+    define('USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/user_experience/');
+    define('USER_PROJECT_UPLOAD_URL', BASEURL . 'uploads/user_project/');
+    define('USER_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/user_education/');
     
 }
 
