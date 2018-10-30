@@ -78,7 +78,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Experience({{exp_years}}year {{exp_months}}month)</span><a href="#" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Experience({{exp_years}}year {{exp_months}}month)</span><a href="#" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div class="dtl-dis" ng-if="user_experience.length < 1">
                             <div class="no-info">
@@ -101,7 +101,9 @@
                                                 <p>Working as {{user_exp.designation}}</p>
                                             </div>
                                             <div class="dis-right">
-                                                <span href="#" data-target="#experience" data-toggle="modal" class="pr5"><img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png"></span>
+                                                <span role="button" ng-click="edit_user_exp($index)" class="pr5">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                </span>
                                                 <span role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp{{$index}}" aria-expanded="true" aria-controls="exp1">
                                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
                                                 </span>
@@ -487,12 +489,13 @@
                     <span>Experience</span>
                 </div>
                 <form name="experience_form" id="experience_form" ng-validate="experience_validate">
+                    <!-- <input type="hidden" name="edit_exp" id="edit_exp" ng-model="edit_exp" ng-value="0"> -->
                     <div class="dtl-dis">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <label>Company Name</label>
-                                    <input type="text" placeholder="Enter Company Name" id="exp_company_name" name="exp_company_name">
+                                    <input type="text" placeholder="Enter Company Name" id="exp_company_name" name="exp_company_name" ng-model="exp_company_name">
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <label>Designation / Role</label>
@@ -515,7 +518,7 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <label>Company Website</label>
-                                    <input type="text" placeholder="Enter Company Website" id="exp_company_website" name="exp_company_website">
+                                    <input type="text" placeholder="Enter Company Website" id="exp_company_website" name="exp_company_website" ng-model="exp_company_website">
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <label>Field </label>
@@ -535,7 +538,7 @@
                                 <div class="col-md-6 col-sm-6"></div>
                                 <div class="col-md-6 col-sm-6">
                                     <label>Other Field</label>
-                                    <input type="text" placeholder="Enter Other Field" id="exp_other_field" name="exp_other_field">
+                                    <input type="text" placeholder="Enter Other Field" id="exp_other_field" name="exp_other_field" ng-model="exp_other_field">
                                 </div>
                             </div>
                         </div>
@@ -591,7 +594,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <span class="span-select">
-                                                <select id="exp_s_month" name="exp_s_month">
+                                                <select id="exp_s_month" name="exp_s_month" ng-model="exp_s_month">
                                                     <option value="">Month</option>
                                                 </select>
                                             </span>
@@ -609,7 +612,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <span class="span-select">
-                                                <select id="exp_e_month" name="exp_e_month">
+                                                <select id="exp_e_month" name="exp_e_month" ng-model="exp_e_month">
                                                     <option value="">Month</option> 
                                                 </select>
                                             </span>
@@ -630,7 +633,7 @@
                         </div>
                         <div class="form-group">
                             <label>Description/Roles and Responsibilities</label>
-                            <textarea row="4" type="text" placeholder="Description" id="exp_desc" name="exp_desc"></textarea>
+                            <textarea row="4" type="text" placeholder="Description" id="exp_desc" name="exp_desc" ng-model="exp_desc"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="upload-file">

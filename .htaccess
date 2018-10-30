@@ -108,3 +108,6 @@ FileETag None
 
 	ErrorDocument 404 /index.php
 </IfModule>
+<IfModule pagespeed_module>
+    ModPagespeed off
+</IfModule>

@@ -5,8 +5,6 @@ app.directive('checkFileExt', ['$compile', function($compile) {
         restrict: 'A',
         scope: true,
         link: function(scope, element, attrs) {
-            console.log(element);
-            console.log(attrs);
             attrs.$observe('checkFile', function(text) {
                 // console.log(text);
                 var filename_arr = text.split('.');
@@ -5691,6 +5689,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            exp_formdata.append('edit_exp', $scope.edit_exp);
+            exp_formdata.append('exp_file_old', $scope.exp_file_old);
             exp_formdata.append('exp_company_name', $('#exp_company_name').val());
             exp_formdata.append('exp_designation', JSON.stringify($scope.exp_designation));
             exp_formdata.append('exp_company_website', $('#exp_company_website').val());
@@ -5716,25 +5716,53 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     result = result.data;
                     if(result.success == '1')
                     {
+                        user_experience = result.user_experience;
+                        $scope.user_experience = user_experience;
                         $scope.exp_years = result.exp_years;
                         $scope.exp_months = result.exp_months;
                         $("#save_user_exp").removeAttr("style");
                         $("#user_exp_loader").hide();
-                        $scope.exp_designation = [];
-                        $("#experience_form")[0].reset();
+                        $scope.reset_exp_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();
                         // $("#experience").modal('hide');
                     }
                     else
                     {
                         $("#save_user_exp").removeAttr("style");
                         $("#user_exp_loader").hide();
-                        $scope.exp_designation = [];
-                        $("#experience_form")[0].reset();
+                        $scope.reset_exp_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();
                         // $("#experience").modal('hide');
                     }
                 }
             });
         }
+    };
+    $scope.reset_exp_form = function(){
+        $scope.exp_designation_fnc();
+        $scope.edit_exp = 0;
+        $scope.exp_file_old = '';
+        $scope.exp_state_list = '';
+        $scope.exp_designation = [];
+        $scope.exp_company_website = '';
+        $scope.exp_field = '';
+        $scope.exp_other_field = '';
+        $("#exp_other_field_div").hide(); 
+        // $scope.exp_country = '';
+        $scope.exp_state_list = [];
+        $scope.exp_city_list = [];
+        $scope.exp_s_year = '';
+        $("#exp_s_month").html('');
+        $("#exp_e_year").html('');
+        $("#exp_e_month").html('');
+        
+        // $scope.exp_e_year = '';
+        // $scope.exp_e_month = '';
+        $scope.exp_isworking = '';
+        $("#exp_doc_prev").remove();
+        $("#experience_form")[0].reset();
     };
     $scope.get_user_experience = function(){
         $http({
@@ -5763,6 +5791,115 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $scope.view_more = $scope.user_experience.length;
 
     };
+    
+    $scope.edit_user_exp = function(index){
+
+        $scope.reset_exp_form();
+        console.log($scope.user_experience[index]);
+        // $scope.exp_city_list = [];
+        $scope.edit_exp = $scope.user_experience[index].id_experience;        
+        $("#edit_exp").val($scope.user_experience[index].id_experience);
+        $scope.exp_company_name = $scope.user_experience[index].exp_company_name;
+
+        var user_exp_desig = "";
+        if($scope.user_experience[index].designation.trim() != "")
+        {
+            var user_exp_desig = $scope.user_experience[index].designation.split(',');
+        }
+        var exp_desig = [];
+        if(user_exp_desig.length > 0)
+        {                    
+            user_exp_desig.forEach(function(element,jobArrIndex) {
+              exp_desig[jobArrIndex] = {"name":element};
+            });
+        }
+        $scope.exp_designation = exp_desig;
+        $scope.exp_company_website = $scope.user_experience[index].exp_company_website;
+        $scope.exp_field = $scope.user_experience[index].exp_field;
+        if($scope.exp_field == 0)
+        {
+            $scope.exp_other_field = $scope.user_experience[index].exp_other_field;
+            $("#exp_other_field_div").show();
+        }
+        else
+        {
+            $scope.exp_other_field = "";
+            $("#exp_other_field_div").hide();   
+        }
+        $scope.exp_country = $scope.user_experience[index].exp_country;        
+        
+        // $scope.exp_country_change();
+        var counrtydata = $.param({'country_id': $scope.exp_country});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_state_by_country_id',
+            data: counrtydata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (data) {
+            $("#exp_state").removeAttr("disabled");
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_state_loader").hide();
+            $scope.exp_state_list = data.data;
+            $scope.exp_city_list = [];
+            $scope.exp_state = $scope.user_experience[index].exp_state;
+
+            $("#exp_city").attr("disabled","disabled");
+            $("#exp_city_loader").show();
+            var statedata = $.param({'state_id': $scope.exp_state});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/get_city_by_state_id',
+                data: statedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (data) {
+                $("#exp_city").removeAttr("disabled");
+                $("#exp_city_loader").hide();
+                $scope.exp_city_list = data.data;
+                $scope.exp_city = $scope.user_experience[index].exp_city;
+            });        
+        });
+        // $scope.exp_state_change();        
+
+        var exp_start_date = $scope.user_experience[index].exp_start_date.split('-');
+        var exp_end_date = $scope.user_experience[index].exp_end_date.split('-');        
+        $scope.exp_s_year = exp_start_date[0];
+        $scope.exp_start_year();
+        // $scope.exp_s_month = exp_start_date[1];
+        setTimeout(function(){
+            $("#exp_s_month").val(exp_start_date[1]);
+            $("#exp_e_year").val(exp_end_date[0]).change();
+            // $scope.exp_e_year = exp_end_date[0];
+        },100);
+        setTimeout(function(){
+            $("#exp_e_month").val(exp_end_date[1]);
+        },500);
+        $scope.exp_isworking = (parseInt($scope.user_experience[index].exp_isworking) == 1 ? true : false);
+        $scope.exp_desc = $scope.user_experience[index].exp_desc;
+        var exp_file_name = $scope.user_experience[index].exp_file;
+        $scope.exp_file_old = exp_file_name;
+        var filename_arr = exp_file_name.split('.');
+        // console.log(filename_arr);
+        //console.log(filename_arr[filename_arr.length - 1]);
+        $("#exp_doc_prev").remove();
+        var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+        var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+        var fileExt = filename_arr[filename_arr.length - 1];
+        if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_experience_upload_url+exp_file_name+'"></a></p>';
+        }
+        else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+        }
+
+        var contentTr = angular.element(inner_html);
+        contentTr.insertAfter($("#exp_file_error"));
+        $compile(contentTr)($scope);
+        setTimeout(function(){  
+            $scope.experience_form.validate();
+        },1000); 
+        $("#experience").modal("show");
+    };
+    
     //Experience End
 
     //Project Start
@@ -6403,11 +6540,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
         masonryLayout(document.getElementById('gallery'),
         document.querySelectorAll('.gallery-item'), 2);
-
-
-        /*if (screen.width > 767) {
-            alert(1);
-        }*/
     });
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {

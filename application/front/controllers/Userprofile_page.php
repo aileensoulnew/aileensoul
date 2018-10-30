@@ -1546,6 +1546,8 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_experience()
     {
+        $edit_exp = $this->input->post('edit_exp');
+        $exp_file_old = $this->input->post('exp_file_old');
         $exp_company_name = $this->input->post('exp_company_name');
         $exp_designation = json_decode($this->input->post('exp_designation'),TRUE);
         $exp_company_website = $this->input->post('exp_company_website');
@@ -1587,9 +1589,14 @@ class Userprofile_page extends MY_Controller {
             $exp_designation_id .= $jobTitleId . ',';
         }
         $exp_designation_id = trim($exp_designation_id, ',');
+        $fileName = $exp_file_old;
         if(isset($_FILES['exp_file']['name']) && $_FILES['exp_file']['name'] != "")
-        {
+        {            
             $user_experience_upload_path = $this->config->item('user_experience_upload_path');
+            $user_exp_file_old = $user_experience_upload_path . $exp_file_old;
+            if (isset($user_exp_file_old)) {
+                unlink($user_exp_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_experience_upload_path,
@@ -1616,7 +1623,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_activity_insert = $this->userprofile_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName);
+            $user_exp_insert = $this->userprofile_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName,$edit_exp);
             $user_experience = $this->userprofile_model->get_user_experience($user_id);
             $year = array();
             $month = array();
