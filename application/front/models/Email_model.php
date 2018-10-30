@@ -116,9 +116,9 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = AMAZON_SES_USERNAME;//Amazon SES SMTP user name.        
-        $mail->Password = AMAZON_SES_PASSWORD;//Amazon SES SMTP password.
-        $mail->Host = 'email-smtp.us-west-2.amazonaws.com';
+        $mail->Username = 'notification@aileensoul.com';//Amazon SES SMTP user name.        
+        $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Host = 'smtpout.secureserver.net';
         $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
         $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
@@ -304,9 +304,9 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = AMAZON_SES_USERNAME;//Amazon SES SMTP user name.        
-        $mail->Password = AMAZON_SES_PASSWORD;//Amazon SES SMTP password.
-        $mail->Host = 'email-smtp.us-west-2.amazonaws.com';
+        $mail->Username = 'notification@aileensoul.com';//Amazon SES SMTP user name.        
+        $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Host = 'smtpout.secureserver.net';
         $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
         $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
@@ -429,9 +429,9 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = AMAZON_SES_USERNAME;//Amazon SES SMTP user name.        
-        $mail->Password = AMAZON_SES_PASSWORD;//Amazon SES SMTP password.
-        $mail->Host = 'email-smtp.us-west-2.amazonaws.com';
+        $mail->Username = 'notification@aileensoul.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = 'aileensoul@123';//'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'; //Amazon SES SMTP password.
+        $mail->Host = 'smtpout.secureserver.net';//'smtp.sendgrid.net';// 'smtpout.secureserver.net';
         $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
         $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
