@@ -12,13 +12,7 @@
         <link rel="stylesheet" href="css/n-commen.css">
         <link rel="stylesheet" href="css/n-style.css">
 		<style>
-			.form-group {position: relative; margin-bottom: 1.5rem;}
-			.form-control-placeholder {position: absolute; top: 0; padding: 15px 0 0 0px; transition: all 200ms; opacity: 1; }
-			.form-control:focus + .form-control-placeholder,
-			.form-control:valid + .form-control-placeholder {
-				font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
-			
-
+		
 		</style>
     </head>
     <body>
@@ -552,38 +546,30 @@
         <div class="middle-section">
 
             <div class="container mob-plr0 post-job-new">
-				<h2>Please post your requirement, so that we can recommend you the candidates</h2>
+				
 				<div class="custom-user-list">
                 <div class="">
-					<div class="job_reg_main fw job-reg-cus-new">
-						<h3>Job Detail</h3>
+					<div class="job_reg_main fw post-job-cus">
+						<h3>Post Job</h3>
 						<div class="fw p20">
 							<div class="form-group">
-								<input type="text" class="form-control" required>
-								<label class="form-control-placeholder" for="First Name">Job Title</label>
+								<label>Job Title</label>
+								<input type="text" placeholder="Job Title">
+								
+							</div>
+							
+							<div class="form-group big-textarea textarea-cus">
+								<label for="First Name">Job Description</label>
+								<textarea type="text" placeholder="Job Description" ></textarea>
+								
 							</div>
 							<div class="form-group">
 								
-								<span class="span-select">
-									<select class="form-control">
-										<option>Job Type</option>
-										<option>Job Type</option>
-										<option>Job Type</option>
-										<option>Job Type</option>
-										<option>Job Type</option>
-									</select>
-								</span>
-							</div>
-							<div class="form-group one-border">
-								<textarea type="text" class="form-control" required></textarea>
-								<label class="form-control-placeholder" for="First Name">Job Description</label>
+								<label for="First Name">Skills</label>
+								<input type="text" placeholder="Skills">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" required>
-								<label class="form-control-placeholder" for="First Name">Slills</label>
-							</div>
-							<div class="form-group">
-								
+								<label>Industry</label>
 								<span class="span-select">
 									<select class="form-control">
 										<option>Industry</option>
@@ -594,10 +580,7 @@
 									</select>
 								</span>
 							</div>
-							<div class="form-group one-border">
-								<textarea type="text" class="form-control" required></textarea>
-								<label class="form-control-placeholder" for="First Name">Interview process</label>
-							</div>
+							
 							<div class="row total-exp">
 								<label class="col-md-12 fw">Required Experience</label>
 								<div class="col-md-6 col-sm-6 col-xs-6">
@@ -636,35 +619,64 @@
 									<div class="control__indicator"></div>
 								</label>
 							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" required>
-								<label class="form-control-placeholder" for="First Name">Required Education</label>
-							</div>
+							
+							
 							<div class="row total-exp">
-								
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<div class="form-group">
+										<label>Required Education</label>
+										<input type="text" placeholder="Required Education">
+										
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<label>No Of Vacancies</label>-
+										<input type="text" placeholder="No Of Vacancies">
+										
+									</div>
+								</div>
+								
+							</div>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="form-group">
+										<label>Employment Type</label>
 										<span class="span-select">
 											<select class="form-control">
-												<option>Employment Type</option>
-												<option>Part Time</option>
+												<option>Part time</option>
 												<option>Full Time</option>
 												<option>Inernship</option>
 											</select>
 										</span>
 									</div>
-								
 								</div>
-								<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="col-md-6 col-sm-6">
 									<div class="form-group">
-										<input type="text" class="form-control" required>
-										<label class="form-control-placeholder" for="First Name">No Of Vacancies</label>
+										<label>Hiring level</label>
+												<span class="span-select">
+													<select class="form-control">
+														<option>Intern</option>
+														<option>Entry-level</option>
+														<option> Associate</option>
+														<option>Mid-senior</option>
+														<option>Director</option>
+														<option>Executive</option>
+													</select>
+													
+												</span>
 									</div>
 								</div>
 								
+								
+							</div>
+							<div class="form-group textarea-cus">
+								
+								<label>Interview process</label>
+								<textarea type="text" placeholder="Interview process"></textarea>
 							</div>
 							<div class="form-group">
-								<label>Last Date of Apply</label>
+								<label>Last Date of Apply (Mention Job Expire Date)</label>
 								<div class="row">
 									
 									<div class="col-md-4 col-sm-4 col-xs-4">
@@ -700,54 +712,19 @@
 									
 								</div>
 							</div>
-							<div class="form-group">
-								<input type="text" class="form-control" required>
-								<label class="form-control-placeholder" for="First Name">Hiring for level</label>
-							</div>
-							<div class="row total-exp">
-								
-								<div class="col-md-6 col-sm-6 col-xs-6">
-									<div class="form-group">
-										<input type="text" class="form-control" required>
-										<label class="form-control-placeholder" for="First Name">Company Name</label>
-									</div>
-								
-								</div>
-								<div class="col-md-6 col-sm-6 col-xs-6">
-									<div class="form-group">
-										<input type="text" class="form-control" required>
-										<label class="form-control-placeholder" for="First Name">Company URL</label>
-									</div>
-								</div>
-								
-							</div>
-							<div class="form-group">
-								<label>Work Schedule type</label>
-								<span class="span-select">
-									<select>
-										<option>Day</option>
-										<option>Night</option>
-										<option>Flaxible</option>
-									</select>
-								</span>
-							</div>
 							
-							<div class="form-group one-border">
-								<textarea type="text" class="form-control" required></textarea>
-								<label class="form-control-placeholder" for="First Name">About Company Details / Profile</label>
-							</div>
+							
+							
+							
+							
 								
 							
-							<div class="form-group">
-							<label class="upload-file">
-								Upload Company logo<input type="file">
-							</label>
-						</div>
+							
 							
 							
 						</div>
 					</div>
-					<div class="job_reg_main fw job-reg-cus-new">
+					<div class="job_reg_main fw post-job-cus">
 						<h3>Salary Information</h3>
 						<div class="fw p20">
 							<div class="form-group">
@@ -786,14 +763,16 @@
 									
 									<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 										<div class="form-group">
-											<input type="text" class="form-control" required>
-											<label class="form-control-placeholder" for="First Name">Minimum Salary</label>
+											<label>Minimum Salary</label>
+											<input type="text" placeholder="Minimum Salary">
+											
 										</div>
 									</div>
 									<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 										<div class="form-group">
-											<input type="text" class="form-control" required>
-											<label class="form-control-placeholder" for="First Name">Maximum Salary</label>
+											<label >Maximum Salary</label>
+											<input type="text" placeholder="Maximum Salary">
+											
 										</div>
 									</div>
 								
@@ -802,50 +781,95 @@
 							</div>
 						</div>
 					</div>
-					<div class="job_reg_main fw job-reg-cus-new">
-						<h3>Company Location</h3>
+					<div class="job_reg_main fw post-job-cus">
+						<h3>Company Information</h3>
 						<div class="fw p20">
 							<div class="form-group">
-								<div class="form-group dtl-dob">
-									<label>Address / Location</label>
-									<div class="row">
-										<div class="col-md-4 col-sm-4 col-xs-4">
-											<span class="span-select">
-												<select>
-													<option>Country</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select>
-											</span>
-										</div>
-										<div class="col-md-4 col-sm-4 col-xs-4">
-											<span class="span-select">
-												<select>
-													<option>State</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select>
-											</span>
-										</div>
-										<div class="col-md-4 col-sm-4 col-xs-4">
-											<span class="span-select">
-												<select>
-													<option>City</option>
-													<option>2015</option>
-													<option>2016</option>
-													<option>2017</option>
-												</select>
-											</span>
-										</div>
+										<label>Company Name</label>
+										<input type="text" placeholder="Company Name">
+										
 									</div>
+							<div class="row total-exp">
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<label>Company URL</label>
+										<input type="text" placeholder="Company URL">
+										
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<label>Work Schedule type</label>
+										<span class="span-select">
+											<select>
+												<option>Day</option>
+												<option>Night</option>
+												<option>Flaxible</option>
+											</select>
+										</span>
+									</div>
+								
 								</div>
 								
 								
 							</div>
+							<div class="form-group textarea-cus">
+								<label>Company Profile</label>
+								<textarea type="text" placeholder="About Company Details / Profile"></textarea>
+								
+							</div>
+							
+							<div class="row total-exp">
+							<label class="col-md-12 fw">
+								Company Address
+							</label>
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>Country</option>
+											<option>2015</option>
+											<option>2016</option>
+											<option>2017</option>
+											<option>2018</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 hw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>State</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
+									<span class="span-select">
+										<select class="form-control">
+											<option>City</option>
+											<option>januari</option>
+											<option>Fabruari</option>
+											<option>March</option>
+											<option>April</option>
+										</select>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="upload-file">
+								Upload Company logo<input type="file">
+							</label>
+						</div>
 							<div class="fw text-center pt5">
-								<a href="#" class="btn3">Register</a>
+								<a href="#" class="btn3">Post</a>
 							</div>
 						</div>
 					</div>

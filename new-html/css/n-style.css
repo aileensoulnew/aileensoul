@@ -2479,6 +2479,7 @@ label.cameraButton{min-height:43px;}
 .right-add-box{border:1px solid #d2d2d2; padding:7px; margin-bottom:10px; border-radius:5px; width:100%; float:left;}
 .banner-add{width:100%; float:left;}
 .cus-inner-middle{width:54%; float:left; padding-left:15px;}
+.cus-inner-middle1{width:54%; float:left; padding-left:15px;}
 .all_user_post{width:100%; float:left;}
 .page-title{width:100%; float:left;}
 .infeed-add{margin-bottom:10px;}
@@ -2641,7 +2642,7 @@ padding: 4px;}
 .width-10{width:10%; float:left; padding-left:15px; padding-right:15px;}
 .span-select select{ -webkit-appearance: none; -moz-appearance:none; appearance:none;}
 .span-select{position:relative; width:100%; float:left;} 
-.span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:10px; right:6px; background-size:100%;}
+.span-select:after{position:absolute; content:""; background:url('../n-images/down-arrow.png'); width:12px; height:12px; top:12px; right:6px; background-size:100%;}
 .dtl-more-add{text-align:center;}
 .dtl-more-add a{color:#5c5c5c; letter-spacing:1px;}
 .dtl-about-box textarea{height:60px;}
@@ -2751,7 +2752,7 @@ box-shadow: 0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104
 .vertical-m-box{}
 .vertical-m-box .vm-box{float: left; top: 50%; width: 530px; position: absolute;
 max-width: 100%; max-height: 100%; transform: translate(-50%,-50%); left: 50%; margin-top:22px;}
-.one-border textarea{border-width:0 0 1px 0; border-radius:0;}
+.one-border textarea{border-width:0 0 1px 0; border-radius:0; height:120px;}
 
 /***  end new details page  ***/
 /***  new job registration form  ***/
@@ -2770,7 +2771,8 @@ max-width: 100%; max-height: 100%; transform: translate(-50%,-50%); left: 50%; m
 .job-reg-cus-new .form-group select{padding-left:12px; font-size:16px; border-width: 0 0 1px 0; border-radius: 0; border-color: #d2d2d2; padding-left:0; color:#7b7b7b;}
 .job-reg-cus-new .fresher_radio{padding-left:0; color:#7b7b7b;}
 .main_raio [type="radio"]:checked + .point_radio::before, .main_raio [type="radio"]:not(:checked) + .point_radio::before {border-color:#7b7b7b;}
-.job-reg-cus-new .btn3{border:1px solid #5c5c5c; border-radius:20px; color:#5c5c5c;}
+.job-reg-cus-new .btn3, .post-job-cus .btn3{border:1px solid #5c5c5c; border-radius:20px; color:#5c5c5c;}
+.post-job-cus .btn3{border-radius: 20px; padding: 8px 43px; font-size: 16px;}
 .job-reg-cus-new .form-control:focus{box-shadow:none;}
 .total-exp{color:#7b7b7b;}
 
@@ -2788,8 +2790,10 @@ max-width: 100%; max-height: 100%; transform: translate(-50%,-50%); left: 50%; m
 .rec_check.form-group{margin-top:-3px; margin-bottom:3px;}
 .post-j-c .form-group{position:relative;}
 .post-j-c .form-group label.error{bottom:-20px;}
+.big-textarea textarea{height:200px;}
+.post-job-cus{margin-bottom:35px;}
+.abc{display:none;}
 /***  end new job registration form  ***/
-
 body.body-loader{height:100vh; overflow:hidden;}
 #main_loader{display: block; height: 100vh; background: #fff; z-index: 9999999999;
 position: fixed;}
