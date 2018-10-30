@@ -1,11 +1,11 @@
 <?php $user_id = $this->session->userdata('aileenuser'); ?>
 <div class="fix-feedback">
 	<div class="fix-small">
-		<span>Feedback</span>
+		<span>Suggestion</span>
 	</div>
 	<div class="fix-big">
 		<div class="feed-top">
-			Feedback<a class="pull-right feed-close"><img src="<?php echo base_url('assets/n-images/f-close.png') . '' ?>"></a>
+			Suggestion<a class="pull-right feed-close"><img src="<?php echo base_url('assets/n-images/f-close.png') . '' ?>"></a>
 		</div>
 		<form action="javascript:void(0);" name="main_feedback" id="main_feedback">
 			<?php if($user_id == ""): ?>

@@ -2645,7 +2645,7 @@ padding: 4px;}
 .dtl-more-add{text-align:center;}
 .dtl-more-add a{color:#5c5c5c; letter-spacing:1px;}
 .dtl-about-box textarea{height:60px;}
-.dtl-modal .form-group label{font-size:15px;}
+.dtl-modal label{font-size:15px;}
 .dlt-img{margin-top:32px;}
 .dtl-modal select{padding-left:12px;}
 .form-group .upload-file input{border:0; padding:10px 0 0; height:auto;}
@@ -2660,13 +2660,13 @@ padding: 4px;}
 .about-dtl-box span:first-child{font-size:15px; font-weight:bold;}
 .more-less {float: right; color: #212121;}
 .dis-left{width:50px; float:left;}
-.dis-middle{width:310px; float:left; padding-left:10px; padding-top:7px;}
+.dis-middle{width:310px; float:left; padding-left:10px; padding-top:5px;}
 .dis-right{width:50px; float:left; padding-top:7px;}
 .dis-right a{float:left; padding:0;}
 .dis-right a:last-child{float:right;}
 .dis-left-img{width:50px; height:50px; border:1px solid #d2d2d2; text-align:center;}
 .dis-left-img span{font-size:28px; color:#1b8ab9; padding:13px 10px; display:inline-block;}
-.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; line-height:1;}
+.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .dtl-dis .dis-middle p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
 overflow: hidden;}
 .dtl-dis.dis-accor{padding:0;}
@@ -2678,7 +2678,7 @@ overflow: hidden;}
 .dis-list{border-bottom:0px; padding-bottom:0;}
 .dis-list li{padding-bottom:10px; color:#7b7b7b; font-size:14px;}
 .dis-list li:last-child{padding-bottom:0px;}
-.dis-list li:last-child span{padding-bottom:5px;}
+.dis-list li:last-child span{/*padding-bottom:5px;*/}
 .dis-list li span{display: block; font-size: 15px; font-weight:bold;}
 .dis-list li a.dis-more{color:#5c5c5c;}
 .dis-list li a{color:#7b7b7b;}
@@ -2693,6 +2693,7 @@ width: auto; height: 100%;
 -ms-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
 max-width: inherit;}
+.dtl-dis .control__indicator{top:0;}
 .dis-accor .panel-group{width:100%; float:left; margin-bottom:5px;}
 .dtl-dis ul.skill-list{width:100%; float:left; padding-bottom:0; border-bottom:0; padding-top:2px;}
 .dtl-dis ul.skill-list li{border:1px solid #d2d2d2; padding:3px 15px; border-radius:20px; margin-right:5px; margin-bottom:7px; float:left; font-size:14px; background:#f6f6f6;}
@@ -3953,6 +3954,7 @@ a.job-expired:hover{color:#000 !important;}
 	.dtl-modal .dlt-img{margin-top:15px; width:15px;}
 	#social-link .span-select select{padding-left:1px;}
 	.job_reg_main{box-shadow:none; border-top:1px solid #d2d2d2; border-bottom:1px solid #d2d2d2; border-radius:0;}
+	.span-select .form-control{padding-left:5px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
