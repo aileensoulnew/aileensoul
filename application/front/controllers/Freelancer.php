@@ -2631,10 +2631,10 @@ class Freelancer extends MY_Controller {
                                     </table>';
         $subject = $applydata[0]['freelancer_post_fullname'] . " " . $applydata[0]['freelancer_post_username'] . ' Applied on your Project.';
 
-        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $notid))->row();
+        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $notid))->row();
 
         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-        if($unsubscribeData->is_subscribe == 1)
+        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
         {
             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $hiremail[0]['email'],$unsubscribe);
         }
@@ -2677,10 +2677,10 @@ class Freelancer extends MY_Controller {
                                     </table>';
         $subject = $this->data['freehiredata'][0]['fullname'] . " " . $this->data['freehiredata'][0]['username'] . " " . $writting_word . ' you for ' . $projectdata[0]["post_name"] . ' project in Aileensoul.';
 
-        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $invite_user))->row();
+        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $invite_user))->row();
 
         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-        if($unsubscribeData->is_subscribe == 1)
+        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
         {
             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $applydata[0]['freelancer_post_email'],$unsubscribe);
         }

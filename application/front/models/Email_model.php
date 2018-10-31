@@ -50,22 +50,12 @@ class Email_model extends CI_Model {
 						</h2></td></tr></table>
                         </td>
                     </tr>
-                    <tr><td style="border-bottom:1px solid #ddd;">
+                    <tr><td style="padding-bottom: 20px;">
                         <table width="100%" cellpadding="0" cellspacing="0" class="description_table">
                         <tr><td style="padding:5px;padding-left: 5px; font-size:15px;">' . $templ . '</td></tr>
                         </table>
                         </td></tr>
-                        <tr><td style="padding:25px 0px;">
-                        <table width="100%" cellpadding="0" cellspacing="0">
-                            <tr><td style="text-align:center; vertical-align:top; padding:0 10px;" width="20%"><img src="https://www.aileensoul.com/assets/img/m1.png"><h3 style="font-size:13px;">Job Profile</h3><p style="font-size:11px;">Find best job options and connect with recruiters.</p></td>
-                            <td style="text-align:center; vertical-align:top; padding:0 10px;" width="20%"><img src="https://www.aileensoul.com/assets/img/m2.png"><h3 style="font-size:13px;">Recruiter Profile</h3><p style="font-size:11px;">Hire quality employees here.</p></td>
-                            <td style="text-align:center; vertical-align:top; padding:0 10px;" width="20%"><img src="https://www.aileensoul.com/assets/img/m3.png"><h3 style="font-size:13px; ">Freelance Profile</h3><p style="font-size:11px;">Hire freelancers and also find freelance work.</p></td>
-                            <td style="text-align:center; vertical-align:top; padding:0 10px;" width="20%"><img src="https://www.aileensoul.com/assets/img/m4.png"><h3 style="font-size:13px;">Business Profile</h3><p style="font-size:11px;">Grow your business network.</p></td>
-                            <td style="text-align:center; vertical-align:top; padding:0 10px;" width="20%"><img src="https://www.aileensoul.com/assets/img/m5.png"><h3 style="font-size:13px;">Artistic Profile</h3><p style="font-size:11px;">Show your art & talent to the world.</p></td>
-                            </tr>
-                        </table>
-                        </td>
-                    </tr>
+                        
                 </table>';
         if($unsubscribe != "")
         {
@@ -89,11 +79,11 @@ class Email_model extends CI_Model {
         //		</table>
         //</div></body></html>';
 
-        /*$config['protocol'] = 'sendmail';
-        $config['smtp_host'] = 'smtpout.secureserver.net';
-        $config['smtp_user'] = 'notification@aileensoul.com';
+        $config['protocol'] = 'sendmail';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_user'] = 'notification.aileensoul@gmail.com';
         $config['smtp_pass'] = 'aileensoul@123';
-        $config['smtp_port'] = '465';
+        $config['smtp_port'] = '587';
         $config['smtp_timeout'] = 5;
         $config['smtp_keepalive'] = ''; 
         $config['smtp_crypto'] = '';
@@ -103,12 +93,12 @@ class Email_model extends CI_Model {
         $config['newline'] = '\r\n';
 
         //$this->email->initialize($config);
-        $this->email->from('notification@aileensoul.com', 'Aileensoul');
+        $this->email->from('notification.aileensoul@gmail.com', 'Aileensoul');
         $this->email->to($to_email);
-        $this->email->bcc('dm.aileensoul@gmail.com');
+        // $this->email->bcc('dm.aileensoul@gmail.com');
         $this->email->subject($subject);
         $this->email->message($email_html);
-        $this->email->set_mailtype("html");*/
+        $this->email->set_mailtype("html");
 
         require 'phpmailer/vendor/autoload.php';
  
@@ -116,13 +106,13 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notification@aileensoul.com';//Amazon SES SMTP user name.        
+        $mail->Username = 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
         $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
-        $mail->Host = 'smtpout.secureserver.net';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Host = 'smtp.gmail.com';
+        $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
-        $mail->addBCC('dm.aileensoul@gmail.com');
+        $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
         $mail->Subject = $subject;
@@ -132,8 +122,8 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
 
         // if ($this->email->send()) {
         if ($mail->send()) {
@@ -194,46 +184,13 @@ class Email_model extends CI_Model {
                                 </tr>
 
                                 <tr>
-                                    <td style="border-bottom:1px solid #ddd;">
+                                    <td style="style="padding-bottom: 20px;"">
                                         <table width="100%" cellpadding="0" cellspacing="0">';
                             $mail_html .= $mail_body;
                             $mail_html .= '</table>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="padding:25px 0px;">
-                                        <table width="100%" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <td style="text-align:center; padding:0 10px;" width="20%">
-                                                    <img src="https://www.aileensoul.com/assets/img/m1.png">
-                                                    <h3 style="font-size:13px; font-family:arial;">Job Profile</h3>
-                                                    <p style="font-size:9px;">Find best job options and connect with recruiters.</p>
-                                                </td>
-                                                <td style="text-align:center; padding:0 10px;" width="20%">
-                                                    <img src="https://www.aileensoul.com/assets/img/m2.png">
-                                                    <h3 style="font-size:13px; font-family:arial;">Recruiter Profile</h3>
-                                                    <p style="font-size:9px;">Hire quality employees here.</p>
-                                                </td>
-                                                <td style="text-align:center; padding:0 10px;" width="20%">
-                                                    <img src="https://www.aileensoul.com/assets/img/m3.png">
-                                                    <h3 style="font-size:13px; font-family:arial; ">Freelance Profile</h3>
-                                                    <p style="font-size:9px;">Hire freelancers and also find freelance work.</p>
-                                                </td>
-                                                <td style="text-align:center; padding:0 10px;" width="20%">
-                                                    <img src="https://www.aileensoul.com/assets/img/m4.png">
-                                                    <h3 style="font-size:13px; font-family:arial;">Business Profile</h3>
-                                                    <p style="font-size:9px;">Grow your business network.</p>
-                                                </td>
-                                                <td style="text-align:center; padding:0 10px;" width="20%">
-                                                    <img src="https://www.aileensoul.com/assets/img/m5.png">
-                                                    <h3 style="font-size:13px; font-family:arial;">Artistic Profile</h3>
-                                                    <p style="font-size:9px;">Show your art & talent to the world.</p>
-                                                </td>
-                                            </tr>
-                                        
-                                        </table>
-                                    </td>
-                                </tr>
+                                
                             </table>
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
@@ -271,9 +228,9 @@ class Email_model extends CI_Model {
         /*$config['protocol'] = "SMTP";
                         //$config['smtp_host'] = "email-smtp.us-west-2.amazonaws.com";
         $config['smtp_host'] = "Smtp.gmail.com";
-                    //$config['smtp_port'] = "465";
+                    //$config['smtp_port'] = "587";
         $config['smtp_port'] = "25";
-        $config['smtp_user'] = "notification@aileensoul.com";
+        $config['smtp_user'] = "notification.aileensoul@gmail.com";
         $config['smtp_pass'] = "aileensoul@123";
         $config['charset'] = "utf-8";
         $config['mailtype'] = "html";
@@ -289,7 +246,7 @@ class Email_model extends CI_Model {
         //$to = "falguni.aileensoul@gmail.com";
         //$sub = "khytiii";
         //$this->email->from('aileensoul@gmail.com', 'Aileensoul');
-        /*$this->email->from('notification@aileensoul.com', 'Aileensoul');
+        /*$this->email->from('notification.aileensoul@gmail.com', 'Aileensoul');
 
         $this->email->to($to_email);*/
                     //$this->email->reply_to('no-replay@aileensoul.com', 'Explendid Videos');
@@ -304,13 +261,13 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notification@aileensoul.com';//Amazon SES SMTP user name.        
+        $mail->Username = 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
         $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
-        $mail->Host = 'smtpout.secureserver.net';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Host = 'smtp.gmail.com';
+        $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
-        $mail->addBCC('dm.aileensoul@gmail.com');
+        $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
         $mail->Subject = $subject;
@@ -320,8 +277,8 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
 
 //echo '<pre>'; print_r($this->email->print_debugger()); die();
         // if ($this->email->send()) {
@@ -343,7 +300,7 @@ class Email_model extends CI_Model {
 
 //        $config['protocol'] = "SMTP";
 //        $config['smtp_host'] = "SMTP.gmail.com";
-//        $config['smtp_port'] = "465";
+//        $config['smtp_port'] = "587";
 //        $config['smtp_user'] = "aileensoftsolution@gmail.com";
 //        $config['smtp_pass'] = "xyz123456";
 //        $config['charset'] = "utf-8";
@@ -355,7 +312,7 @@ class Email_model extends CI_Model {
         $config['protocol'] = "SMTP";
         $config['smtp_host'] = "Smtp.gmail.com";
         $config['smtp_port'] = "25";
-        $config['smtp_user'] = "notification@aileensoul.com";
+        $config['smtp_user'] = "notification.aileensoul@gmail.com";
         $config['smtp_pass'] = "aileensoul@123";
         $config['charset'] = "utf-8";
         $config['mailtype'] = "html";
@@ -388,10 +345,10 @@ class Email_model extends CI_Model {
 
         $config['useragent'] = 'CodeIgniter';
         $config['protocol'] = 'sendmail';
-        $config['smtp_host'] = 'smtpout.secureserver.net';
-        $config['smtp_user'] = 'notification@aileensoul.com';
+        $config['smtp_host'] = 'smtp.gmail.com';
+        $config['smtp_user'] = 'notification.aileensoul@gmail.com';
         $config['smtp_pass'] = 'aileensoul@123';
-        $config['smtp_port'] = '465';
+        $config['smtp_port'] = '587';
         $config['smtp_timeout'] = 5;
         $config['smtp_keepalive'] = ''; 
         $config['smtp_crypto'] = '';
@@ -401,9 +358,9 @@ class Email_model extends CI_Model {
         $config['newline'] = '\r\n';
         
         $this->email->initialize($config);
-        $this->email->from('notification@aileensoul.com', 'Aileensoul');
+        $this->email->from('notification.aileensoul@gmail.com', 'Aileensoul');
         $this->email->to($to_email);
-        $this->email->bcc('dm.aileensoul@gmail.com');
+        // $this->email->bcc('dm.aileensoul@gmail.com');
         $this->email->subject($subject);
         $this->email->message($email_html);
         $this->email->set_mailtype("html");
@@ -428,14 +385,14 @@ class Email_model extends CI_Model {
         //Create a new PHPMailer instance
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
-        
-        $mail->Username = 'notification@aileensoul.com';//'apikey' //Amazon SES SMTP user name.        
+        // $mail->SMTPDebug = 2;
+        $mail->Username = 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
         $mail->Password = 'aileensoul@123';//'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'; //Amazon SES SMTP password.
-        $mail->Host = 'smtpout.secureserver.net';//'smtp.sendgrid.net';// 'smtpout.secureserver.net';
-        $mail->setFrom('notification@aileensoul.com', 'Aileensoul Notification');
+        $mail->Host = 'smtp.gmail.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
+        $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@aileensoul.com', 'Aileensoul Notification');
-        $mail->addBCC('dm.aileensoul@gmail.com');
+        $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
         $mail->Subject = $subject;
@@ -446,8 +403,8 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
 
         // if ($this->email->send()) {
         if ($mail->send()) {

@@ -2395,10 +2395,10 @@ Your browser does not support the audio tag.
                                     </table>';
                     $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
                     
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                    if($unsubscribeData->is_subscribe == 1)
+                    if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                     {
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
                     }
@@ -2480,10 +2480,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
                 }
@@ -2748,10 +2748,10 @@ Your browser does not support the audio tag.
 
                     $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                    if($unsubscribeData->is_subscribe == 1)
+                    if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                     {
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
                     }
@@ -2817,10 +2817,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
                 }
@@ -3144,10 +3144,10 @@ Your browser does not support the audio tag.
                                     </table>';
                     $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                    if($unsubscribeData->is_subscribe == 1)
+                    if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                     {
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
                     }
@@ -3218,10 +3218,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $loginBusinessUserData->company_name . ' Started following you in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatatoid[0]['user_id']))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $busdatatoid[0]['contact_email'],$unsubscribe);
                 }
@@ -4074,10 +4074,10 @@ Your browser does not support the audio tag.
                                     </table>';
                         $subject = $businessUser->company_name . ' Like your comment in Aileensoul.';
 
-                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
 
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                        if($unsubscribeData->is_subscribe == 1)
+                        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                         {
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                         }
@@ -4226,10 +4226,10 @@ Your browser does not support the audio tag.
                                     </table>';
                         $subject = $businessUser->company_name . ' Like your comment in Aileensoul.';
 
-                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
 
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                        if($unsubscribeData->is_subscribe == 1)
+                        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                         {
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                         }
@@ -4687,10 +4687,10 @@ Your browser does not support the audio tag.
                                     </table>';
                         $subject = $businessLoginUser->company_name . ' like your post in Aileensoul.';
 
-                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
+                        $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $businessprofiledata[0]['user_id']))->row();
 
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                        if($unsubscribeData->is_subscribe == 1)
+                        if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                         {
                             $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                         }
@@ -4946,10 +4946,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $businessLoginUser->company_name . ' is comment on your post in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatacomment[0]['user_id']))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatacomment[0]['user_id']))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }
@@ -5166,10 +5166,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $businessLoginUser->company_name . ' is comment on your post in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busdatacomment[0]['user_id']))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busdatacomment[0]['user_id']))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }
@@ -5774,10 +5774,10 @@ Your browser does not support the audio tag.
                                     </table>';
                     $subject = $businessUser->company_name . ' is like your photo in Aileensoul.';
 
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $likepostid[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $likepostid[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                    if($unsubscribeData->is_subscribe == 1)
+                    if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                     {
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                     }
@@ -6005,10 +6005,10 @@ Your browser does not support the audio tag.
                                     </table>';
                             $subject = $businessUser->company_name . ' is like your photo in Aileensoul.';
 
-                            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $likepostid[0]['user_id']))->row();
+                            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $likepostid[0]['user_id']))->row();
 
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                            if($unsubscribeData->is_subscribe == 1)
+                            if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                             {
                                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                             }
@@ -6159,10 +6159,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $businessUser->company_name . ' is comment on your photo in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $buspostid[0]['user_id']))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $buspostid[0]['user_id']))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }
@@ -6387,10 +6387,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $businessUser->company_name . ' is comment on your photo in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $buspostid[0]['user_id']))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $buspostid[0]['user_id']))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }
@@ -6627,10 +6627,10 @@ Your browser does not support the audio tag.
                                     </table>';
                     $subject = $businessUser->company_name . ' is like your comment of photo in Aileensoul.';
 
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busimglike[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busimglike[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                    if($unsubscribeData->is_subscribe == 1)
+                    if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                     {
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                     }
@@ -6766,7 +6766,7 @@ Your browser does not support the audio tag.
                             $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id.,is_subscribe')->get_where('user', array('user_id' => $busimglike[0]['user_id']))->row();
 
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                            if($unsubscribeData->is_subscribe == 1)
+                            if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                             {
                                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                             }
@@ -6880,10 +6880,10 @@ Your browser does not support the audio tag.
                                     </table>';
                     $subject = $businessUser->company_name . ' is like your comment of photo in Aileensoul.';
 
-                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busimglike[0]['user_id']))->row();
+                    $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busimglike[0]['user_id']))->row();
 
                     $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                    if($unsubscribeData->is_subscribe == 1)
+                    if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                     {
                         $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                     }
@@ -7011,10 +7011,10 @@ Your browser does not support the audio tag.
                                     </table>';
                             $subject = $businessUser->company_name. ' is like your comment of photo in Aileensoul.';
 
-                            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $busimglike[0]['user_id']))->row();
+                            $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $busimglike[0]['user_id']))->row();
 
                             $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                            if($unsubscribeData->is_subscribe == 1)
+                            if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                             {
                                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                             }
@@ -8052,10 +8052,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $this->data['business_login_company_name'] . ' send contact request you in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $to_id))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_id))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }
@@ -8626,10 +8626,10 @@ Your browser does not support the audio tag.
                                     </table>';
                 $subject = $this->data['business_login_company_name'] . ' is approved your contact request in Aileensoul.';
 
-                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe')->get_where('user', array('user_id' => $toid))->row();
+                $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $toid))->row();
 
                 $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
-                if($unsubscribeData->is_subscribe == 1)
+                if($unsubscribeData->is_subscribe == 1 && $unsubscribeData->user_verify == 1)
                 {
                     $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
                 }

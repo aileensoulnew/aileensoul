@@ -26,7 +26,7 @@ if($browser == "Firefox")
         echo "<div class='update-browser'>For a better experience, update your browser.</div>";
     }
 }
-if($userData['user_verify'] == 0):
+/*if($userData['user_verify'] == 0):
 ?>
 <div class="profile-text1 animated fadeInDownBig" id="verifydiv" style="top: 79px;float: left;width: 100%;position: fixed;z-index: 9;">
     <div class="verify">
@@ -47,7 +47,7 @@ if($userData['user_verify'] == 0):
         </div>
     </div>
 </div>
-<?php endif; ?>
+<?php endif;*/ ?>
 <div ng-controller="headerCtrl" ng-app="headerApp">
 <div class="web-header">
 <header>
