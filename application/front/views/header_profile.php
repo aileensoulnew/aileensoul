@@ -26,7 +26,34 @@ if($browser == "Firefox")
         echo "<div class='update-browser'>For a better experience, update your browser.</div>";
     }
 }
+$first_segment = $this->uri->segment(1);
+if($first_segment != "basic-information")
+{
+    if($userData['user_verify'] == 0):
 ?>
+    <div class="profile-text1 animated fadeInDownBig" id="verifydiv" style="top: 44px;float: left;width: 100%;position: fixed;z-index: 9;">
+        <div class="verify" style="padding: 10px;background: #fcf8e3;">
+            <div class="email-verify">
+                <span class="email-img"><img src="<?php echo base_url(); ?>assets/images/email.png" alt="Email"></span>
+                <span class="main-txt">
+                    <span class="as-p">
+                        Please verify your email address! <?php if($userData['is_new'] == 1){
+                        echo "Check your inbox or spam folder in order to verify yourself.";
+                    } ?> 
+                    </span>
+                    <?php
+                    if($userData['is_new'] == 0){ ?>
+                    <span class="ves_c">
+                        <span class="fw-50"> <a class="vert_email " onclick="sendmail();" id="vert_email">Verify</a></span>
+                    </span>
+                <?php } ?>
+                </span>
+            </div>
+        </div>
+    </div>
+<?php endif;
+} ?>
+
 <div class="web-header">
     <header class="custom-header" ng-controller="headerCtrl" ng-app="headerApp">
     <div class="animated fadeInDownBig">
@@ -662,24 +689,27 @@ if($browser == "Firefox")
     <?php } ?>
 	<?php $this->load->view('mobile_side_slide'); ?>
 </div>
+<!-- Model Popup Start -->
+<div class="modal fade message-box biderror" id="mailsendmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content message">
+            <div class="modal-body">
+                <span class="mes">
+                    <div class="msg"></div>
+                    <div class="pop_content">
+                        <div class="model_ok_cancel">
+                            <a class="btn1" id="okbtn" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Model Popup End -->
 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <script>
-   /*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-    showRight = document.getElementById( 'showRight' ),
-    body = document.body;
-
-   showRight.onclick = function() {
-    classie.toggle( this, 'active' );
-    classie.toggle( menuRight, 'cbp-spmenu-open' );
-    disableOther( 'showRight' );
-   };
-  
-   function disableOther( button ) {
-    
-    if( button !== 'showRight' ) {
-     classie.toggle( showRight, 'disabled' );
-    }
-   }*/
+    var userid = "<?php echo $session_user['aileenuser']; ?>";
 
     $(function () {
         $('a[href="#search"]').on('click', function (event) {
@@ -820,6 +850,32 @@ if($browser == "Firefox")
     /*window.setInterval(function(){
       get_notification_unread_count();
     }, 5000);*/
+    function sendmail() {
+        $("#vert_email").attr("style","pointer-events: none;")
+        var post_data = {
+            'userid': userid,
+        }
+        $.ajax({
+            type: 'POST',
+            url: base_url + 'registration/sendmail',
+            data: post_data,
+            dataType:'json',
+            success: function (response)
+            {
+                if(response.success == '1')
+                {
+                    $("#mailsendmodal .msg").html('Please verify your email address!<br />Check your inbox or spam folder in order to verify yourself.');
+                    $("#mailsendmodal").modal("show");
+                }
+                else
+                {
+                    $("#mailsendmodal .msg").html('Please try again later.');
+                    $("#mailsendmodal").modal("show");
+                }
+                $("#vert_email").removeAttr("style");
+            }
+        });
+    }
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script>

@@ -37,18 +37,20 @@ class Registration extends CI_Controller {
     //Show main registratin page insert Start
     public function index() {
         if ($this->session->userdata('aileenuser')) {
-            redirect($this->session->userdata('aileenuser_slug')."/profiles", 'refresh');
+            redirect($this->session->userdata('aileenuser_slug'));
         }
         $this->load->view('registration/registration', $this->data);
     }
 
-    public function verify($id = " ") {
-
+    public function verify($id = "") {
+        $this->data['id'] = $id;
+        $this->load->view('registration/verifying', $this->data);
+        /*// echo $id;exit();
         $user = $this->common->select_data_by_id('user', 'user_id', $id, '*', '');
 
         $data = array(
             'user_verify' => '1',
-            'modified_date' => date('Y-m-d h:i:s', time())
+            'verify_date' => date('Y-m-d h:i:s', time())
         );
        
         $updatedata = $this->common->update_data($data, 'user', 'user_id', $id);
@@ -56,8 +58,33 @@ class Registration extends CI_Controller {
             $this->session->set_userdata('aileenuser', $id);
             $this->session->set_userdata('aileenuser_slug', $user[0]['user_slug']);
             $this->session->set_userdata('aileenuser_firstname', $user[0]['aileenuser_firstname']);
-            redirect('profiles/' . $this->session->userdata('aileenuser_slug'), 'refresh');
+            redirect($this->session->userdata('aileenuser_slug'));
+        }*/
+    }
+
+    public function verifying()
+    {
+        $id = $this->input->post('id');
+        $user = $this->common->select_data_by_id('user', 'user_id', $id, '*', '');
+
+        $data = array(
+            'user_verify' => '1',
+            'verify_date' => date('Y-m-d h:i:s', time())
+        );
+       
+        $updatedata = $this->common->update_data($data, 'user', 'user_id', $id);
+        if ($updatedata) {
+            $this->session->set_userdata('aileenuser', $id);
+            $this->session->set_userdata('aileenuser_slug', $user[0]['user_slug']);
+            $this->session->set_userdata('aileenuser_firstname', $user[0]['aileenuser_firstname']);
+            // redirect($this->session->userdata('aileenuser_slug'));
+            $ret_arr = array("success"=>1,"user_slug"=>$user[0]['user_slug']);
         }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
     public function reg_insert() {
@@ -180,40 +207,15 @@ class Registration extends CI_Controller {
     }
 
     public function sendmail() {
-        echo "1";exit();
-
-        $user_id = $_POST['userid'];//($_POST['userid'] != "" ? $_POST['userid'] : "23555");
+        $user_id = $this->input->post("userid");//($_POST['userid'] != "" ? $_POST['userid'] : "23555");
         if ($user_id) {
-            // $contition_array = array('user_id' => $user_id);
-            // $userdata = $this->common->select_data_by_condition('user', $contition_array, $data = 'user_email,first_name,last_name,user_id,user_gender,user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
-
             $userdata = $this->user_model->getUserData($user_id);
-            // print_r($userdata);exit();            
 
             $gender = $userdata['user_gender'];
             $toemail = $userdata['email'];
             $fname = $userdata['first_name'];
             $lname = $userdata['last_name'];
 
-            /*$msg = '<tr><td style="text-align:center; padding-top:15px;">';
-
-            if ($userdata['user_image'] != "") {
-                $msg .= '<img style="width:100px" src="' .USER_MAIN_UPLOAD_URL.$userdata['user_image'].'">';
-            } else {
-
-                if ($gender == 'F') {
-                    $msg .= '<img style="width:100px" src="'.base_url('assets/img/female-user.jpg').'">';
-                } else {
-                    $msg .= '<img style="width:100px" src="'.base_url('assets/img/man-user.jpg').'">';
-                }
-            }
-            $msg .= '</td>
-            </tr><tr><td style="text-align:center; padding:10px 0 30px; font-size:15px;">';
-            $msg .= '<p style="margin:0;">Hi,' . ucwords($fname) . ' ' . ucwords($lname) . '</p>
-                            <p style="padding:25px 0 ; margin:0;">Verify your email address.</p>
-                             <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_id . '">Verify</a></p>
-                              </td>
-                              </tr>';*/
             if ($userdata['user_image'] != "") {                
                 $login_user_img = USER_MAIN_UPLOAD_URL.$userdata['user_image'];
             } else {
@@ -225,31 +227,28 @@ class Registration extends CI_Controller {
             }
             $msg = "";
             $msg .= '<table width="100%" cellpadding="0" cellspacing="0">
-                            <tr>                                
-                                <td style="padding:5px;">
-                                    <p><b>Hi '.ucwords($fname). ' ' . ucwords($lname). ',</b> please verify your email address.</p>
-                                    <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
-                                </td>
-                                <td style="'.MAIL_TD_3.'">
-                                    <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_id . '">Verify</a></p>
-                                </td>
-                            </tr>
-                            </table>';
-            // echo "<pre>";
-            // print_r($msg);
-            // die();
-            // echo $msg;exit();
+                        <tr>                                
+                            <td style="padding:5px;">
+                                <p><b>Hi '.ucwords($fname). ' ' . ucwords($lname). ',</b> please verify your email address.</p>
+                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                            </td>
+                            <td style="'.MAIL_TD_3.'">
+                                <p><a style="color:#fff !important;" class="btn" href="' . base_url() . 'registration/verify/' . $user_id . '">Verify</a></p>
+                            </td>
+                        </tr>
+                    </table>';
 
             $subject = "Welcome to aileensoul";
 
-            // $mail = $this->email_model->sendEmail($app_name = '', $app_email = '', $toemail, $subject, $msg);
             $mail = $this->email_model->send_email($subject = $subject, $templ = $msg, $to_email = $toemail);
             //$mail = $this->email_model->do_email($msg, $subject, $toemail, $from);
+            $ret_arr = array("success"=>1);
         }
         else
         {
-            redirect(base_url(),"refresh");
+            $ret_arr = array("success"=>0);
         }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
     //Show main registratin page insert End
