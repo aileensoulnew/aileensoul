@@ -27,7 +27,7 @@ if($browser == "Firefox")
     }
 }
 $first_segment = $this->uri->segment(1);
-if($first_segment != "basic-information")
+if($first_segment == "")
 {
     if($userData['user_verify'] == 0):
 ?>
