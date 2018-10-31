@@ -39,15 +39,16 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Profile Overview</span><a href="#" data-target="#profile-overview" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edit-profile.png"><span>Profile Overview</span><a href="#" data-target="#profile-overview" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                         </div>
                         <div class="dtl-dis">
                             <div class="no-info" ng-if="user_bio == ''">
                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                 <span>Lorem ipsum its a dummy text and its user to for all.</span>
                             </div>
-                            <div class="no-info" ng-if="user_bio != ''">                                
-                                <span>{{user_bio}}</span>
+                            <div class="no-info" ng-if="user_bio != ''">
+                                <h4>Description</h4>
+                                <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
                             </div>
                         </div>
                     </div>
@@ -59,17 +60,46 @@
                         <div class="dtl-title">
                             <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>About {{details_data.first_name}}</span><a href="#" data-target="#detail-about" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                         </div>
-                        <div class="dtl-dis">
+                        <div class="dtl-dis about-detail">
                             <div class="no-info" ng-if="about_user_data.user_hobbies == '' && about_user_data.user_fav_quote_headline == '' && about_user_data.user_fav_artist == '' && about_user_data.user_fav_book == '' && about_user_data.user_fav_sport == ''">
                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                 <span>Lorem ipsum its a dummy text and its user to for all.</span>
                             </div>
-                            <div class="no-info" ng-if="about_user_data.user_hobbies != '' || about_user_data.user_fav_quote_headline != '' || about_user_data.user_fav_artist != '' || about_user_data.user_fav_book != '' || about_user_data.user_fav_sport != ''">
-                                {{about_user_data.user_hobbies}}
-                                {{about_user_data.user_fav_quote_headline}}
-                                {{about_user_data.user_fav_artist}}
-                                {{about_user_data.user_fav_book}}
-                                {{about_user_data.user_fav_sport}}
+                            <div ng-if="about_user_data.user_hobbies != '' || about_user_data.user_fav_quote_headline != '' || about_user_data.user_fav_artist != '' || about_user_data.user_fav_book != '' || about_user_data.user_fav_sport != ''">
+                                <div ng-if="user_languages.length > 0">
+                                    <h4>Language Known</h4>                                    
+                                    <ul class="known-language">
+                                        <li ng-repeat="user_lang in user_languages">
+                                            <span class="pr5">{{user_lang.language_name}}</span> - <span class="pl5">{{user_lang.proficiency}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="dis-list">
+                                    <li>
+                                        <span>Date of Birth</span>
+                                        {{details_data.DOB}}
+                                    </li>
+                                    <li ng-if="about_user_data.user_hobbies != ''">
+                                        <span>Hobbies</span>
+                                        {{about_user_data.user_hobbies}}
+                                    </li>
+                                    <li ng-if="about_user_data.user_fav_quote_headline != ''">
+                                        <span>Favourite Quotes, Headline</span>
+                                        {{about_user_data.user_fav_quote_headline}}
+                                    </li>
+                                    <li ng-if="about_user_data.user_fav_artist != ''">
+                                        <span>Favourite Artist</span>
+                                        {{about_user_data.user_fav_artist}}
+                                    </li>
+                                    <li ng-if="about_user_data.user_fav_book != ''">
+                                        <span>Favourite Book</span>
+                                        {{about_user_data.user_fav_book}}
+                                    </li>
+                                    <li ng-if="about_user_data.user_fav_sport != ''">
+                                        <span>Favourite Sport</span>
+                                        {{about_user_data.user_fav_sport}}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -78,7 +108,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Experience({{exp_years}}year {{exp_months}}month)</span><a href="#" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience({{exp_years}}year {{exp_months}}month)</span><a href="#" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div class="dtl-dis" ng-if="user_experience.length < 1">
                             <div class="no-info">
@@ -88,7 +118,7 @@
                         </div>
                         <div class="dtl-dis dis-accor" ng-if="user_experience.length > 1">
                             <div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default" ng-repeat="user_exp in user_experience" ng-if="$index <= view_more">
+                                <div class="panel panel-default" ng-repeat="user_exp in user_experience" ng-if="$index <= view_more_exp">
                                     <div class="panel-heading" role="tab" id="exp-{{$index}}">
                                         <div class="panel-title">
                                             <div class="dis-left">
@@ -134,7 +164,7 @@
                                                 </li>
                                                 <li ng-if="user_exp.exp_file != '' && user_exp.exp_file != null">
                                                     <span>Document</span>
-                                                    <p class="screen-shot" check-file-ext check-file="{{user_exp.exp_file}}">
+                                                    <p class="screen-shot" check-file-ext check-file="{{user_exp.exp_file}}" check-file-path="<?php echo "'".addslashes(USER_EXPERIENCE_UPLOAD_URL)."'"; ?>">
                                                         <!-- <img src="<?php echo base_url(); ?>assets/n-images/art-img.jpg"> -->
                                                     </p>
                                                 </li>
@@ -152,12 +182,71 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edution.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
-                        <div class="dtl-dis">
+                        <div class="dtl-dis" ng-if="user_education.length < 1">
                             <div class="no-info">
                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                 <span>Lorem ipsum its a dummy text and its user to for all.</span>
+                            </div>
+                        </div>
+                        <div class="dtl-dis dis-accor" ng-if="user_education.length > 1">
+                            <div class="panel-group" id="edu-accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" ng-repeat="user_edu in user_education" ng-if="$index <= view_more_edu">
+                                    <div class="panel-heading" role="tab" id="edu-{{$index}}">
+                                        <div class="panel-title">
+                                            <div class="dis-left">
+                                                <div class="dis-left-img">
+                                                    <span>{{user_edu.edu_school_college | limitTo:1 | uppercase}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="dis-middle">
+                                                <h4>{{user_edu.edu_school_college}}</h4>
+                                                <p ng-if="user_edu.edu_degree == '0'">{{user_edu.edu_other_degree}}</p>
+                                                <p ng-if="user_edu.edu_degree != '0'">{{user_edu.degree_name}}</p>
+                                            </div>
+                                            <div class="dis-right">
+                                                <span role="button" ng-click="edit_user_edu($index)" class="pr5">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                </span>
+                                                <span role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu{{$index}}" aria-expanded="true" aria-controls="exp1">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                </span>
+                                            </div>
+         
+                                        </div>
+                                    </div>
+                                    <div id="edu{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu-{{$index}}">
+                                        <div class="panel-body">
+                                            <ul class="dis-list">
+                                                <li>
+                                                    <span>Duration</span> 
+                                                    <label>{{user_edu.start_date_str}} to</label>
+                                                    <label ng-if="user_edu.end_date_str != '' && user_edu.end_date_str != null">{{user_edu.end_date_str}}</label> 
+                                                    <label ng-if="user_edu.end_date_str == '' || user_edu.end_date_str == null">Studying</label>
+                                                </li>
+                                                <li>
+                                                    <span>Board / University</span>
+                                                    <label ng-if="user_edu.edu_university == '0'">{{user_edu.edu_other_university}}</label>
+                                                    <label ng-if="user_edu.edu_university != '0'">{{user_edu.university_name}}</label>
+                                                </li>
+                                                <li>
+                                                    <span>Course / Field of Study / Stream</span>
+                                                    <label ng-if="user_edu.edu_stream == '0'">{{user_edu.edu_other_stream}}</label>
+                                                    <label ng-if="user_edu.edu_stream != '0'">{{user_edu.stream_name}}</label>
+                                                </li>
+                                                <li ng-if="user_edu.edu_file != '' && user_edu.edu_file != null">
+                                                    <span>Document</span>
+                                                    <p class="screen-shot" check-file-ext check-file="{{user_edu.edu_file}}" check-file-path="<?php echo "'".addslashes(USER_EDUCATION_UPLOAD_URL)."'"; ?>">
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-more">
+                                    <a href="#" ng-click="edu_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -165,12 +254,85 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Project</span><a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/project.png"><span>Project</span><a href="#" data-target="#dtl-project" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
-                        <div class="dtl-dis">
+                        <div class="dtl-dis" ng-if="user_projects.length < 1">
                             <div class="no-info">
                                 <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                 <span>Lorem ipsum its a dummy text and its user to for all.</span>
+                            </div>
+                        </div>
+                        <div class="dtl-dis dis-accor" ng-if="user_projects.length > 1">
+                            <div class="panel-group" id="project-accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" ng-repeat="user_proj in user_projects" ng-if="$index <= view_more_proj">
+                                    <div class="panel-heading" role="tab" id="project-{{$index}}">
+                                        <div class="panel-title">
+                                            <div class="dis-left">
+                                                <div class="dis-left-img">
+                                                    <span>{{user_proj.project_title | limitTo:1 | uppercase}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="dis-middle">
+                                                <h4>{{user_proj.project_title}}</h4>
+                                                <p ng-if="user_proj.project_field == '0'"> {{user_proj.project_other_field}}</p>
+                                                <p ng-if="user_proj.project_field != '0'"> {{user_proj.project_field_txt}}</p>
+                                            </div>
+                                            <div class="dis-right">
+                                                <span role="button" ng-click="edit_user_project($index)" class="pr5">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
+                                                </span>
+                                                <span role="button" data-toggle="collapse" data-parent="#project-accordion" href="#project{{$index}}" aria-expanded="true" aria-controls="exp1">
+                                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png">
+                                                </span>
+                                            </div>
+         
+                                        </div>
+                                    </div>
+                                    <div id="project{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="project-{{$index}}">
+                                        <div class="panel-body">
+                                            <ul class="dis-list">
+                                                <li ng-if="user_proj.project_url != ''">
+                                                    <span>Website</span> 
+                                                    <a href="{{user_proj.project_url}}" target="_self">{{user_proj.project_url}}</a>
+                                                </li>
+                                                <li>
+                                                    <span>Duration</span> 
+                                                    <label>{{user_proj.start_date_str}} to</label>
+                                                    <label ng-if="user_proj.end_date_str != '' && user_proj.end_date_str != null">{{user_proj.end_date_str}}</label> 
+                                                    <label ng-if="user_proj.end_date_str == '' || user_proj.end_date_str == null">Still Working</label>
+                                                </li>
+                                                <li>
+                                                    <span>Team Size</span>
+                                                    {{user_proj.project_team}}
+                                                </li>
+                                                <li>
+                                                    <span>Your Role</span>
+                                                    {{user_proj.project_role}}
+                                                </li>
+                                                <li ng-if="user_proj.project_partner_name != ''">
+                                                    <span>Project Partner</span>
+                                                    {{user_proj.project_partner_name}}
+                                                </li>
+                                                <li>
+                                                    <span>Skills Applied</span>
+                                                    {{user_proj.project_skills_txt}}
+                                                </li>
+                                                <li>
+                                                    <span>Description</span>
+                                                    <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_proj.project_desc}}" dd-text-collapse-cond="true">{{user_proj.project_desc}}</label>
+                                                </li>
+                                                <li ng-if="user_proj.project_file != '' && user_proj.project_file != null">
+                                                    <span>Project File</span>
+                                                    <p class="screen-shot" check-file-ext check-file="{{user_proj.project_file}}" check-file-path="<?php echo "'".addslashes(USER_PROJECT_UPLOAD_URL)."'"; ?>">
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-more">
+                                    <a href="#" ng-click="proj_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -266,25 +428,24 @@
         <div class="right-add">
             <div id="edit-profile-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Profile</span>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/e-profile.png"><span>Edit Profile</span>
                 </div>
                 <div class="dtl-dis">
                     <img src="<?php echo base_url(); ?>assets/n-images/detail/profile-progressbar.jpg">
-                    
                 </div>
             </div>
             <div id="skill-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/skill.png"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
                 <div class="dtl-dis">
                     <div class="no-info" ng-if="user_skills.length < '1'">
                         <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                         <span>Lorem ipsum its a dummy text.</span>
                     </div>
-                    <div class="no-info" ng-if="user_skills.length > '0'">                        
-                        <span ng-repeat="skills in user_skills">{{skills.name}}</span>
-                    </div>
+                    <ul class="skill-list" ng-if="user_skills.length > '0'">
+                        <li ng-repeat="skills in user_skills">{{skills.name}}</li>
+                    </ul>                    
                 </div>
             </div>
             
@@ -1681,4 +1842,4 @@
     </div>
 </div>
 
-<!-- All Model End -->
+<!-- All Model End 

@@ -852,7 +852,9 @@ if($first_segment == "")
       get_notification_unread_count();
     }, 5000);*/
     function sendmail() {
-        $("#vert_email").attr("style","pointer-events: none;")
+        $("#vert_email").attr("style","pointer-events: none;");
+        $("#mailsendmodal .msg").html('Please verify your email address!<br />Check your inbox or spam folder in order to verify yourself.');
+        $("#mailsendmodal").modal("show");
         var post_data = {
             'userid': userid,
         }
@@ -863,7 +865,7 @@ if($first_segment == "")
             dataType:'json',
             success: function (response)
             {
-                if(response.success == '1')
+                /*if(response.success == '1')
                 {
                     $("#mailsendmodal .msg").html('Please verify your email address!<br />Check your inbox or spam folder in order to verify yourself.');
                     $("#mailsendmodal").modal("show");
@@ -872,7 +874,7 @@ if($first_segment == "")
                 {
                     $("#mailsendmodal .msg").html('Please try again later.');
                     $("#mailsendmodal").modal("show");
-                }
+                }*/
                 $("#vert_email").removeAttr("style");
             }
         });

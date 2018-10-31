@@ -1891,4 +1891,24 @@ class Userprofile_page extends MY_Controller {
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_user_education()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        
+        $user_education = $this->userprofile_model->get_user_education($userid);        
+        $ret_arr = array("success"=>1,"user_education"=>$user_education);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_project()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        
+        $user_projects = $this->userprofile_model->get_user_project($userid);        
+        $ret_arr = array("success"=>1,"user_projects"=>$user_projects);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

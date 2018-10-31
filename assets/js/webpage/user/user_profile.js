@@ -8,16 +8,17 @@ app.directive('checkFileExt', ['$compile', function($compile) {
             attrs.$observe('checkFile', function(text) {
                 // console.log(text);
                 var filename_arr = text.split('.');
+                var upload_url = scope.$eval(attrs.checkFilePath);
                 // console.log(filename_arr);
                 //console.log(filename_arr[filename_arr.length - 1]);
                 var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
                 var allowed_doc_ext = ['pdf','PDF','docx','doc'];
                 var fileExt = filename_arr[filename_arr.length - 1];
                 if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
-                    var inner_html = $compile('<a href="'+user_experience_upload_url+text+'" target="_blank"><img src="'+user_experience_upload_url+text+'"></a>')(scope);
+                    var inner_html = $compile('<a href="'+upload_url+text+'" target="_blank"><img src="'+upload_url+text+'"></a>')(scope);
                 }
                 else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                    var inner_html = $compile('<a href="'+user_experience_upload_url+text+'" target="_blank"><img src="'+base_url+'assets/images/PDF.jpg"></a>')(scope);   
+                    var inner_html = $compile('<a href="'+upload_url+text+'" target="_blank"><img src="'+base_url+'assets/images/PDF.jpg"></a>')(scope);   
                 }
                 element.empty();
                 element.append(inner_html);
@@ -3580,6 +3581,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 about_user_data = result.data.about_user_data;
                 $scope.about_user_data = about_user_data;
                 var user_langs = result.data.user_languages;
+                $scope.user_languages = user_langs;
                 $scope.primari_lang = user_langs[0];
                 $scope.languageSet.language = user_langs.slice(1);
                 var user_hobbies = "";
@@ -5786,10 +5788,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_experience();
-    $scope.view_more = 1;
+    $scope.view_more_exp = 1;
     $scope.exp_view_more = function(){
-        $scope.view_more = $scope.user_experience.length;
-
+        $scope.view_more_exp = $scope.user_experience.length;
     };
     
     $scope.edit_user_exp = function(index){
@@ -6205,6 +6206,31 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             });
         }
     };
+
+    $scope.get_user_project = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_project',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_projects = result.data.user_projects;
+                $scope.user_projects = user_projects;                
+            }
+
+        });
+    }
+    $scope.get_user_project();
+    $scope.view_more_proj = 1;
+    $scope.proj_view_more = function(){
+        $scope.view_more_proj = $scope.user_projects.length;
+    };
     //Project End
 
     //Education Start
@@ -6512,6 +6538,31 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 }
             });
         }
+    };
+
+    $scope.get_user_education = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_education',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_education = result.data.user_education;
+                $scope.user_education = user_education;                
+            }
+
+        });
+    }
+    $scope.get_user_education();
+    $scope.view_more_edu = 1;
+    $scope.edu_view_more = function(){
+        $scope.view_more_edu = $scope.user_education.length;
     };
     //Education End
 

@@ -1381,10 +1381,10 @@ class Userprofile_model extends CI_Model {
         $this->db->join('states st', 'st.state_id = ue.exp_state', 'left');
         $this->db->join('cities ct', 'ct.city_id = ue.exp_city', 'left');
         // $this->db->join('job_title jt', 'jt.title_id = ue.exp_designation', 'left');
-        $this->db->where('user_id', $userid);
+        $this->db->where('ue.user_id', $userid);
         $this->db->where('FIND_IN_SET(jt.title_id, ue.exp_designation) !=', 0);
         $this->db->group_by('ue.exp_designation,ue.id_experience');
-        $this->db->order_by('created_date',"desc");
+        $this->db->order_by('ue.created_date',"desc");
         $query = $this->db->get();
         $user_data_exp = $query->result_array();        
         return $user_data_exp;
@@ -1416,9 +1416,12 @@ class Userprofile_model extends CI_Model {
 
     public function get_user_project($userid)
     {
-        $this->db->select("*")->from("user_projects");
-        $this->db->where('user_id', $userid);
-        $this->db->order_by('created_date',"desc");
+        $this->db->select("up.id_projects, up.user_id, up.project_title, up.project_team, up.project_role, up.project_skills, up.project_field, up.project_other_field, up.project_url, up.project_partner_name, up.project_start_date, up.project_end_date, up.project_desc, up.project_file, up.status, up.created_date, up.modify_date, DATE_FORMAT(CONCAT(up.project_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(up.project_end_date,'-1'),'%b %Y') as end_date_str,it.industry_name as project_field_txt, GROUP_CONCAT(DISTINCT(s.skill)) as project_skills_txt,")->from("user_projects up,skill s");
+        $this->db->join('industry_type it', 'it.industry_id = up.project_field', 'left');
+        $this->db->where('up.user_id', $userid);
+        $this->db->where('FIND_IN_SET(s.skill_id, up.project_skills) !=', 0);
+        $this->db->group_by('up.project_skills,up.id_projects');
+        $this->db->order_by('up.created_date',"desc");
         $query = $this->db->get();
         $user_data_exp = $query->result_array();        
         return $user_data_exp;
@@ -1449,9 +1452,12 @@ class Userprofile_model extends CI_Model {
 
     public function get_user_education($userid)
     {
-        $this->db->select("*")->from("user_education");
-        $this->db->where('user_id', $userid);
-        $this->db->order_by('created_date',"desc");
+        $this->db->select("ue.id_education, ue.user_id, ue.edu_school_college, ue.edu_university, ue.edu_other_university, ue.edu_degree, ue.edu_other_degree, ue.edu_stream, ue.edu_other_stream, ue.edu_start_date, ue.edu_end_date, ue.edu_nograduate, ue.edu_file, ue.status, ue.created_date, ue.modify_date, d.degree_name, s.stream_name, u.university_name, DATE_FORMAT(CONCAT(ue.edu_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(ue.edu_end_date,'-1'),'%b %Y') as end_date_str")->from("user_education ue");
+        $this->db->where('ue.user_id', $userid);
+        $this->db->join('degree d', 'd.degree_id = ue.edu_degree', 'left');
+        $this->db->join('stream s', 's.stream_id = ue.edu_stream', 'left');
+        $this->db->join('university u', 'u.university_id = ue.edu_university', 'left');
+        $this->db->order_by('ue.created_date',"desc");
         $query = $this->db->get();
         $user_data_exp = $query->result_array();        
         return $user_data_exp;
