@@ -710,6 +710,7 @@ if($first_segment != "basic-information")
 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
 <script>
     var userid = "<?php echo $session_user['aileenuser']; ?>";
+    var is_verify = "<?php echo $userData['user_verify']; ?>";
 
     $(function () {
         $('a[href="#search"]').on('click', function (event) {
@@ -875,6 +876,10 @@ if($first_segment != "basic-information")
                 $("#vert_email").removeAttr("style");
             }
         });
+    }
+    if(is_verify == 0)
+    {
+        $('body').addClass("verify-body");
     }
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>

@@ -708,6 +708,7 @@ if($userData['user_verify'] == 0):
 <!-- Model Popup End -->
 <script>
     var userid = "<?php echo $session_user['aileenuser']; ?>";
+    var is_verify = "<?php echo $userData['user_verify']; ?>";
 
     function Notificationheader() {
         getNotification();
@@ -850,6 +851,10 @@ if($userData['user_verify'] == 0):
                 $("#vert_email").removeAttr("style");
             }
         });
+    }
+    if(is_verify == 0)
+    {
+        $('body').addClass("verify-body");
     }
   </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
