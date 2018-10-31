@@ -5799,8 +5799,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         // $scope.exp_city_list = [];
         $scope.edit_exp = $scope.user_experience[index].id_experience;        
         $("#edit_exp").val($scope.user_experience[index].id_experience);
-        $scope.exp_company_name = $scope.user_experience[index].exp_company_name;
-
+        // $scope.exp_company_name = $scope.user_experience[index].exp_company_name;
+        var exp_company_name_txt = $scope.user_experience[index].exp_company_name;
+        $("#exp_company_name").val(exp_company_name_txt);
         var user_exp_desig = "";
         if($scope.user_experience[index].designation.trim() != "")
         {
@@ -5874,7 +5875,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#exp_e_month").val(exp_end_date[1]);
         },500);
         $scope.exp_isworking = (parseInt($scope.user_experience[index].exp_isworking) == 1 ? true : false);
-        $scope.exp_desc = $scope.user_experience[index].exp_desc;
+        
+        // $scope.exp_desc = $scope.user_experience[index].exp_desc;
+        var exp_desc_txt = $scope.user_experience[index].exp_desc;
+        $("#exp_desc").val(exp_desc_txt);
+        
         var exp_file_name = $scope.user_experience[index].exp_file;
         $scope.exp_file_old = exp_file_name;
         var filename_arr = exp_file_name.split('.');

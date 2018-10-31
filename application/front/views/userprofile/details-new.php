@@ -483,7 +483,7 @@
 <div style="display:none;" class="modal fade dtl-modal" id="experience" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <button type="button" class="modal-close" data-dismiss="modal">×</button>
+            <button type="button" ng-click="reset_exp_form()" class="modal-close" data-dismiss="modal">×</button>
             <div class="modal-body-cus"> 
                 <div class="dtl-title">
                     <span>Experience</span>
