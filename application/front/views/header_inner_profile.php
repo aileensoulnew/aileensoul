@@ -28,7 +28,7 @@ if($browser == "Firefox")
 }
 if($userData['user_verify'] == 0):
 ?>
-<div class="profile-text1 animated fadeInDownBig" id="verifydiv" style="top: 68px;float: left;width: 100%;position: fixed;z-index: 9;">
+<div class="profile-text1 animated fadeInDownBig" id="verifydiv" style="top: 79px;float: left;width: 100%;position: fixed;z-index: 9;">
     <div class="verify" style="padding: 10px;background: #fcf8e3;">
         <div class="email-verify">
             <span class="email-img"><img src="<?php echo base_url(); ?>assets/images/email.png" alt="Email"></span>
@@ -854,7 +854,7 @@ if($userData['user_verify'] == 0):
     }
     if(is_verify == 0)
     {
-        $('body').addClass("verify-body");
+        $('body').addClass("verify-body-inner");
     }
   </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
