@@ -2811,7 +2811,7 @@ max-width: 100%; max-height: 100%; transform: translate(-50%,-50%); left: 50%; m
 .total-rev-top .rating-star{display:inline-block; margin-top:-2px;}
 .total-rev-top span{margin-left:0; }
 .total-rev-top .rating-sm{font-size:20px;}
-.total-rev-top .rev-count{font-size:16px; color:#7b7b7b; padding-top:3px;}
+.total-rev-top .rev-count{font-size:14px; color:#7b7b7b; padding-top:3px;}
 .total-rev-top .empty-stars{vertical-align:top;}
 
 
