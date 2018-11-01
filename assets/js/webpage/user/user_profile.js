@@ -3605,6 +3605,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
         });
     }
+    $scope.view_more_about = function(){
+        $("#about-detail").removeClass("about-detail");
+        $("#view-more-about").hide();
+    };
     get_user_links();
     function get_user_links()
     {
@@ -3624,6 +3628,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.user_personal_links = result.data.user_personal_links_data;
                 $scope.social_linksset.social_links = result.data.user_social_links_data_edit;
                 $scope.personal_linksset.personal_links = result.data.user_personal_links_data_edit;
+                $("#social-link-loader").hide();
+                $("#social-link-body").show();
             }
 
         });
@@ -4058,6 +4064,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
             research_formdata.append('research_title', $('#research_title').val());
             research_formdata.append('research_desc', $('#research_desc').val());
+            research_formdata.append('research_field', $('#research_field option:selected').val());
+            research_formdata.append('research_other_field', $('#research_other_field').val());
             research_formdata.append('research_url', $('#research_url').val());
             
             research_formdata.append('research_month',$("#research_month option:selected").val());
@@ -4089,6 +4097,43 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             });
         }
     };
+
+    $scope.get_user_research = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_research',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.user_research = result.data.user_research;
+            }
+
+        });
+    };
+    $scope.get_user_research();
+
+    $scope.view_more_research = 1;
+    $scope.research_view_more = function(){
+        $scope.view_more_research = $scope.user_research.length;
+        $("#view-more-research").hide();
+    };
+    $scope.other_field_research = function()
+    {
+        if($scope.research_field == 0 && $scope.research_field != "")
+        {
+            $("#research_other_field_div").show();
+        }
+        else
+        {
+            $("#research_other_field_div").hide();
+        }
+    }
     //Research End
 
     //Socila Links Start
@@ -4327,6 +4372,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     result = result.data;
                     if(result.success == '1')
                     {
+                        $scope.user_idols = result.user_idols;
                         $("#user_idol_save").removeAttr("style");
                         $("#user_idol_loader").hide();
                         $("#idol_form")[0].reset();
@@ -4342,6 +4388,33 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 }
             });
         }
+    };
+    $scope.get_user_idol = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_idol',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                $scope.user_idols = result.data.user_idols;
+                $("#idol-loader").hide();
+                $("#idol-body").show();
+            }
+
+        });
+    };
+    $scope.get_user_idol();
+
+    $scope.view_more_idol = 1;
+    $scope.idol_view_more = function(){
+        $scope.view_more_idol = $scope.user_idols.length;
+        $("#view-more-idol").hide();
     };
     //User Idol End
 
@@ -4578,6 +4651,32 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             });
         }
     };
+
+    $scope.get_user_publication = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_publication',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_publication = result.data.user_publication;
+                $scope.user_publication = user_publication;                
+            }
+
+        });
+    }
+    $scope.get_user_publication();
+    $scope.view_more_publication = 1;
+    $scope.publication_view_more = function(){
+        $scope.view_more_publication = $scope.user_publication.length;
+        $("#view-more-publication").hide();
+    };
     // User Publication End
 
     //User Patent Start
@@ -4785,6 +4884,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            patent_formdata.append('edit_patent', $scope.edit_patent);
+            patent_formdata.append('patent_file_old', $scope.patent_file_old);
             patent_formdata.append('patent_title', $('#patent_title').val());
             patent_formdata.append('patent_creator', $('#patent_creator').val());
             patent_formdata.append('patent_number', $('#patent_number').val());
@@ -4808,6 +4909,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_patent_save").removeAttr("style");
                         $("#user_patent_loader").hide();
                         $("#patent_form")[0].reset();
+                        $scope.reset_patent_form();
+                        $scope.user_patent = result.user_patent;
                         // $("#publication").modal('hide');
                     }
                     else
@@ -4815,11 +4918,90 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_patent_save").removeAttr("style");
                         $("#user_patent_loader").hide();
                         $("#patent_form")[0].reset();
+                        $scope.reset_patent_form();
                         // $("#publication").modal('hide');
                     }
                 }
             });
         }
+    };
+
+    $scope.get_user_patent = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_patent',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_patent = result.data.user_patent;
+                $scope.user_patent = user_patent;                
+            }
+
+        });
+    }
+    $scope.get_user_patent();
+    $scope.view_more_patent = 1;
+    $scope.patent_view_more = function(){
+        $scope.view_more_patent = $scope.user_patent.length;
+        $("#view-more-patent").hide();
+    };
+    $scope.reset_patent_form = function(){
+        $scope.exp_designation_fnc();
+        $scope.edit_patent = 0;
+        $scope.patent_file_old = '';
+        $("#patent_day").html("");
+        $("#patent_year").html("");
+        $("#patent_doc_prev").remove();
+        $("#patent_form")[0].reset();
+    };
+    $scope.edit_user_patent = function(index){
+        $scope.reset_patent_form();        
+        var patent_arr = $scope.user_patent[index];
+        $scope.edit_patent = patent_arr.id_patent;
+        $("#patent_title").val(patent_arr.patent_title);
+        $("#patent_creator").val(patent_arr.patent_creator);
+        $("#patent_number").val(patent_arr.patent_number);        
+        var patent_date_arr = patent_arr.patent_date.split("-");
+        patent_day = patent_date_arr[2];
+        patent_month = patent_date_arr[1];
+        patent_year = patent_date_arr[0];
+        $("#patent_month").val(patent_month);
+        $scope.patent_date_fnc(patent_day,patent_month,patent_year);
+        $("#patent_office").val(patent_arr.patent_office);
+        $("#patent_url").val(patent_arr.patent_url);
+        $("#patent_desc").val(patent_arr.patent_desc);
+
+        var patent_file_name = patent_arr.patent_file;
+        $scope.patent_file_old = patent_file_name;
+        if(patent_file_name.trim() != "")
+        {            
+            var filename_arr = patent_file_name.split('.');
+
+            $("#patent_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_patent_upload_url+patent_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#patent_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.patent_form.validate();
+        },1000); 
+        $("#patent").modal("show");
     };
     //User Patent End
 
@@ -5043,6 +5225,32 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             });
         }
     };
+
+    $scope.get_user_award = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_award',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_award = result.data.user_award;
+                $scope.user_award = user_award;                
+            }
+
+        });
+    }
+    $scope.get_user_award();
+    $scope.view_more_award = 1;
+    $scope.award_view_more = function(){
+        $scope.view_more_award = $scope.user_award.length;
+        $("#view-more-award").hide();
+    };
     //User Achieve & Award End
 
     //Extracurricular Activity Start
@@ -5050,15 +5258,55 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#activitydateerror").html("");
         $("#activitydateerror").hide();
         var todaydate = new Date();
-        var yyyy = todaydate.getFullYear();        
-        var year_opt = "";
-        for (var i = yyyy; i >= $scope.activity_s_year; i--) {            
-            year_opt += "<option value='"+i+"'>"+i+"</option>";
+        var yyyy = todaydate.getFullYear();
+        if($scope.activity_s_year == yyyy)
+        {
+            var mm = todaydate.getMonth();
         }
-        var $el = $('#activity_e_year').html(year_opt);
-        $compile($el)($scope);
-        // $("#activity_e_year").html(year_opt);
+        else
+        {
+            var mm = 11;
+        }
+        var year_opt = "<option value=''>Year</option>";
+        if($scope.activity_s_year != "" && $scope.activity_s_year != 0)
+        {            
+            for (var i = yyyy; i >= $scope.activity_s_year; i--) {            
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }
+        }
+        var elyear = $('#activity_e_year');
+        elyear.html($compile(year_opt)($scope));
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        var elmonth = $('#activity_s_month');
+        elmonth.html($compile(month_opt)($scope));
     };
+
+    $(document).on('change','#activity_e_year', function(e){
+        $("#activitydateerror").html("");
+        $("#activitydateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+
+        // console.log($(this).val());
+        if($(this).val() == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        $('#activity_e_month').html(month_opt);
+    });
 
     var activity_formdata = new FormData();
     $(document).on('change','#activity_file', function(e){
@@ -5211,6 +5459,32 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             });
         }
     };
+
+    $scope.get_user_activity = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_activity',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_activity = result.data.user_activity;
+                $scope.user_activity = user_activity;                
+            }
+
+        });
+    }
+    $scope.get_user_activity();
+    $scope.view_more_activity = 1;
+    $scope.activity_view_more = function(){
+        $scope.view_more_activity = $scope.user_activity.length;
+        $("#view-more-activity").hide();
+    };
     //Extracurricular Activity End
 
     //Additional Course Start
@@ -5218,15 +5492,55 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#addicoursedateerror").html("");
         $("#addicoursedateerror").hide();
         var todaydate = new Date();
-        var yyyy = todaydate.getFullYear();        
-        var year_opt = "";
-        for (var i = yyyy; i >= $scope.addicourse_s_year; i--) {            
-            year_opt += "<option value='"+i+"'>"+i+"</option>";
+        var yyyy = todaydate.getFullYear();
+        if($scope.addicourse_s_year == yyyy)
+        {
+            var mm = todaydate.getMonth();
         }
-        var $el1 = $('#addicourse_e_year').html(year_opt);
-        $compile($el1)($scope);
-        // $("#addicourse_e_year").html(year_opt);
+        else
+        {
+            var mm = 11;
+        }
+        var year_opt = "<option value=''>Year</option>";
+        if($scope.addicourse_s_year != "" && $scope.addicourse_s_year != 0)
+        {            
+            for (var i = yyyy; i >= $scope.addicourse_s_year; i--) {            
+                year_opt += "<option value='"+i+"'>"+i+"</option>";
+            }
+        }
+        var elyear = $('#addicourse_e_year');
+        elyear.html($compile(year_opt)($scope));
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        var elmonth = $('#addicourse_s_month');
+        elmonth.html($compile(month_opt)($scope));
     };
+
+    $(document).on('change','#addicourse_e_year', function(e){
+        $("#addicoursedateerror").html("");
+        $("#addicoursedateerror").hide();
+        var todaydate = new Date();
+        var yyyy = todaydate.getFullYear();
+
+        // console.log($(this).val());
+        if($(this).val() == yyyy)
+        {
+            var mm = todaydate.getMonth();
+        }
+        else
+        {
+            var mm = 11;
+        }
+
+        var month_opt = "";
+        for (var j = 0; j <= mm; j++) {            
+            month_opt += "<option value='"+parseInt(j + 1)+"'>"+all_months[j]+"</option>";
+        }
+        $('#addicourse_e_month').html(month_opt);
+    });
 
     var addicourse_formdata = new FormData();
     $(document).on('change','#addicourse_file', function(e){
@@ -5376,6 +5690,32 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 }
             });
         }
+    };
+
+    $scope.get_user_addicourse = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_addicourse',
+            //data: 'u=' + user_id,
+            data: 'user_slug=' + user_slug,//Pratik
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            $('body').removeClass("body-loader");
+            success = result.data.success;
+            if(success == 1)
+            {
+                user_addicourse = result.data.user_addicourse;
+                $scope.user_addicourse = user_addicourse;                
+            }
+
+        });
+    }
+    $scope.get_user_addicourse();
+    $scope.view_more_ac = 1;
+    $scope.ac_view_more = function(){
+        $scope.view_more_ac = $scope.user_addicourse.length;
+        $("#view-more-addicourse").hide();
     };
     //Additional Course End
 
@@ -5773,6 +6113,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.user_experience = user_experience;
                 $scope.exp_years = result.data.exp_years;
                 $scope.exp_months = result.data.exp_months;
+                $("#exp-loader").hide();
+                $("#exp-body").show();
             }
 
         });
@@ -5781,12 +6123,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.view_more_exp = 1;
     $scope.exp_view_more = function(){
         $scope.view_more_exp = $scope.user_experience.length;
+        $("#view-more-exp").hide();
     };
     
     $scope.edit_user_exp = function(index){
 
         $scope.reset_exp_form();
-        console.log($scope.user_experience[index]);
         // $scope.exp_city_list = [];
         $scope.edit_exp = $scope.user_experience[index].id_experience;        
         $("#edit_exp").val($scope.user_experience[index].id_experience);
@@ -6220,6 +6562,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.view_more_proj = 1;
     $scope.proj_view_more = function(){
         $scope.view_more_proj = $scope.user_projects.length;
+        $("#view-more-proj").hide();
     };
     //Project End
 
@@ -6553,6 +6896,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.view_more_edu = 1;
     $scope.edu_view_more = function(){
         $scope.view_more_edu = $scope.user_education.length;
+        $("#view-more-edu").hide();
     };
     //Education End
 

@@ -258,6 +258,13 @@
             var user_experience_upload_url = '<?php echo USER_EXPERIENCE_UPLOAD_URL; ?>';
             var user_education_upload_url = '<?php echo USER_EDUCATION_UPLOAD_URL; ?>';
             var user_project_upload_url = '<?php echo USER_PROJECT_UPLOAD_URL; ?>';
+            var user_patent_upload_url = '<?php echo USER_PATENT_UPLOAD_URL; ?>';
+            var user_research_upload_url = '<?php echo USER_RESEARCH_UPLOAD_URL; ?>';
+            var user_idol_upload_url = '<?php echo USER_IDOL_UPLOAD_URL; ?>';
+            var user_publication_upload_url = '<?php echo USER_PUBLICATION_UPLOAD_URL; ?>';
+            var user_award_upload_url = '<?php echo USER_AWARD_UPLOAD_URL; ?>';
+            var user_activity_upload_url = '<?php echo USER_ACTIVITY_UPLOAD_URL; ?>';
+            var user_addicourse_upload_url = '<?php echo USER_ADDICOURSE_UPLOAD_URL; ?>';
             var app = angular.module("userProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>

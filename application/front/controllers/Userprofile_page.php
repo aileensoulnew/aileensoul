@@ -1107,12 +1107,18 @@ class Userprofile_page extends MY_Controller {
 
     public function save_research_user()
     {
-        // print_r($_POST);
-        // print_r($_FILES);
-        // exit();
-        
         $research_title = $this->input->post('research_title');
         $research_desc = $this->input->post('research_desc');
+        $research_field = $this->input->post('research_field');
+        if($research_field == 0)
+        {
+            $research_other_field = $this->input->post('research_other_field');
+        }
+        else
+        {
+            $research_other_field = "";
+        }
+            
         $research_url = $this->input->post('research_url');
         $research_published_date = $this->input->post('research_year').'-'.$this->input->post('research_month').'-'.$this->input->post('research_day');
         $fileName = "";
@@ -1145,7 +1151,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_research = $this->userprofile_model->set_user_research($user_id,$research_title,$research_desc,$research_url,$research_published_date,$fileName);
+            $user_research = $this->userprofile_model->set_user_research($user_id,$research_title,$research_desc,$research_field,$research_other_field,$research_url,$research_published_date,$fileName);
             $user_research = $this->userprofile_model->get_user_research($user_id);
             $ret_arr = array("success"=>1,"user_research"=>$user_research);
         }
@@ -1271,11 +1277,27 @@ class Userprofile_page extends MY_Controller {
             );
             $insert_id = $this->common->insert_data($data, 'user_idol');
             $user_idol = $this->userprofile_model->get_user_idols($userid);
-            $ret_arr = array("success"=>1,"user_idol"=>$user_idol);
+            $ret_arr = array("success"=>1,"user_idols"=>$user_idol);
         }
         else
         {
             $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_idol()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        $user_idols = $this->userprofile_model->get_user_idols($userid);
+        if(empty($user_idols))
+        {
+            $ret_arr = array("success"=>0);
+        }
+        else
+        {
+            $ret_arr = array("success"=>1,"user_idols"=>$user_idols);
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
@@ -1331,6 +1353,8 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_patent()
     {
+        $edit_patent = $this->input->post('edit_patent');
+        $patent_file_old = $this->input->post('patent_file_old');
         $patent_title = $this->input->post('patent_title');
         $patent_creator = $this->input->post('patent_creator');
         $patent_number = $this->input->post('patent_number');
@@ -1338,10 +1362,15 @@ class Userprofile_page extends MY_Controller {
         $patent_office = $this->input->post('patent_office');
         $patent_url = $this->input->post('patent_url');
         $patent_desc = $this->input->post('patent_desc');
-        $fileName = "";
+        // $fileName = "";
+        $fileName = $patent_file_old;
         if(isset($_FILES['patent_file']['name']) && $_FILES['patent_file']['name'] != "")
         {
             $user_patent_upload_path = $this->config->item('user_patent_upload_path');
+            $user_patent_file_old = $user_patent_upload_path . $patent_file_old;
+            if (isset($user_patent_file_old)) {
+                unlink($user_patent_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_patent_upload_path,
@@ -1368,7 +1397,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_patent_insert = $this->userprofile_model->set_user_patent($user_id,$patent_title,$patent_creator,$patent_number,$patent_date,$patent_office,$patent_url,$patent_desc,$fileName);
+            $user_patent_insert = $this->userprofile_model->set_user_patent($user_id,$patent_title,$patent_creator,$patent_number,$patent_date,$patent_office,$patent_url,$patent_desc,$fileName,$edit_patent);
             $user_patent = $this->userprofile_model->get_user_patent($user_id);
             $ret_arr = array("success"=>1,"user_patent"=>$user_patent);
         }
@@ -1909,6 +1938,60 @@ class Userprofile_page extends MY_Controller {
         
         $user_projects = $this->userprofile_model->get_user_project($userid);        
         $ret_arr = array("success"=>1,"user_projects"=>$user_projects);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_addicourse()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
+        $user_addicourse = $this->userprofile_model->get_user_addicourse($userid);        
+        $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_activity()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
+        $user_activity = $this->userprofile_model->get_user_activity($userid);
+        $ret_arr = array("success"=>1,"user_activity"=>$user_activity);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_award()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
+        $user_award = $this->userprofile_model->get_user_award($userid);
+        $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_publication()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
+        $user_publication = $this->userprofile_model->get_user_publication($userid);
+        $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_patent()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
+        $user_patent = $this->userprofile_model->get_user_patent($userid);
+        $ret_arr = array("success"=>1,"user_patent"=>$user_patent);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function get_user_research()
+    {
+        $user_slug = $this->input->post('user_slug');
+        $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');        
+        $user_research = $this->userprofile_model->get_user_research($userid);
+        $ret_arr = array("success"=>1,"user_research"=>$user_research);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

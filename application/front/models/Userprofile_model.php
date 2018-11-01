@@ -1111,12 +1111,14 @@ class Userprofile_model extends CI_Model {
         return $user_data_lang;
     }
 
-    public function set_user_research($userid,$research_title = "",$research_desc = "",$research_url = "",$research_published_date = "",$research_document = "")
+    public function set_user_research($userid,$research_title = "",$research_desc = "",$research_field = "",$research_other_field = "",$research_url = "",$research_published_date = "",$research_document = "")
     {
         $data = array(
             'user_id' => $userid,
             'research_title' => $research_title,
             'research_desc' => $research_desc,
+            'research_field' => $research_field,
+            'research_other_field' => $research_other_field,
             'research_url' => $research_url,
             'research_publish_date' => $research_published_date,
             'research_document' => $research_document,                
@@ -1130,8 +1132,9 @@ class Userprofile_model extends CI_Model {
 
     public function get_user_research($userid)
     {
-        $this->db->select("*")->from("user_research");
-        $this->db->where('user_id', $userid);
+        $this->db->select("ur.*,it.industry_name as research_field_txt,DATE_FORMAT(ur.research_publish_date,'%d %b %Y') as research_publish_date_str")->from("user_research ur");
+        $this->db->join('industry_type it', 'it.industry_id = ur.research_field', 'left');
+        $this->db->where('ur.user_id', $userid);
         $this->db->order_by('created_date',"desc");
         $query = $this->db->get();
         $user_data_lang = $query->result_array();        
@@ -1201,39 +1204,60 @@ class Userprofile_model extends CI_Model {
 
     public function get_user_publication($userid)
     {
-        $this->db->select("*")->from("user_publication");
-        $this->db->where('user_id', $userid);
-        $this->db->order_by('created_date',"desc");
+        $this->db->select("up.*,DATE_FORMAT(up.pub_date,'%d %b %Y') as pub_date_str")->from("user_publication up");
+        $this->db->where('up.user_id', $userid);
+        $this->db->order_by('up.created_date',"desc");
         $query = $this->db->get();
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
     }
 
-    public function set_user_patent($userid,$patent_title = "",$patent_creator = "",$patent_number = "",$patent_date = "",$patent_office = "",$patent_url = "",$patent_desc = "",$patent_document = "")
+    public function set_user_patent($userid,$patent_title = "",$patent_creator = "",$patent_number = "",$patent_date = "",$patent_office = "",$patent_url = "",$patent_desc = "",$patent_document = "",$edit_patent = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'patent_title' => $patent_title,
-            'patent_creator' => $patent_creator,
-            'patent_number' => $patent_number,
-            'patent_date' => $patent_date,
-            'patent_office' => $patent_office,
-            'patent_url' => $patent_url,
-            'patent_desc' => $patent_desc,
-            'patent_file' => $patent_document,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_patent');
-        return $insert_id;
+        if($edit_patent == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'patent_title' => $patent_title,
+                'patent_creator' => $patent_creator,
+                'patent_number' => $patent_number,
+                'patent_date' => $patent_date,
+                'patent_office' => $patent_office,
+                'patent_url' => $patent_url,
+                'patent_desc' => $patent_desc,
+                'patent_file' => $patent_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_patent');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'patent_title' => $patent_title,
+                'patent_creator' => $patent_creator,
+                'patent_number' => $patent_number,
+                'patent_date' => $patent_date,
+                'patent_office' => $patent_office,
+                'patent_url' => $patent_url,
+                'patent_desc' => $patent_desc,
+                'patent_file' => $patent_document,                  
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_patent', $edit_patent);
+            $this->db->update('user_patent', $data);
+            return true;
+        }
     }
 
     public function get_user_patent($userid)
     {
-        $this->db->select("*")->from("user_patent");
-        $this->db->where('user_id', $userid);
-        $this->db->order_by('created_date',"desc");
+        $this->db->select("up.*,DATE_FORMAT(up.patent_date,'%d %b %Y') as patent_date_str")->from("user_patent up");
+        $this->db->where('up.user_id', $userid);
+        $this->db->order_by('up.created_date',"desc");
         $query = $this->db->get();
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
@@ -1258,9 +1282,9 @@ class Userprofile_model extends CI_Model {
 
     public function get_user_award($userid)
     {
-        $this->db->select("*")->from("user_award");
-        $this->db->where('user_id', $userid);
-        $this->db->order_by('created_date',"desc");
+        $this->db->select("ua.*,DATE_FORMAT(ua.award_date,'%d %b %Y') as award_date_str")->from("user_award ua");
+        $this->db->where('ua.user_id', $userid);
+        $this->db->order_by('ua.created_date',"desc");
         $query = $this->db->get();
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
@@ -1286,9 +1310,9 @@ class Userprofile_model extends CI_Model {
 
     public function get_user_activity($userid)
     {
-        $this->db->select("*")->from("user_extra_activity");
-        $this->db->where('user_id', $userid);
-        $this->db->order_by('created_date',"desc");
+        $this->db->select("uea.*,DATE_FORMAT(CONCAT(uea.activity_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(uea.activity_end_date,'-1'),'%b %Y') as end_date_str")->from("user_extra_activity uea");
+        $this->db->where('uea.user_id', $userid);
+        $this->db->order_by('uea.created_date',"desc");
         $query = $this->db->get();
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
@@ -1314,9 +1338,9 @@ class Userprofile_model extends CI_Model {
 
     public function get_user_addicourse($userid)
     {
-        $this->db->select("*")->from("user_addicourse");
-        $this->db->where('user_id', $userid);
-        $this->db->order_by('created_date',"desc");
+        $this->db->select("*,DATE_FORMAT(CONCAT(ua.addicourse_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(ua.addicourse_end_date,'-1'),'%b %Y') as end_date_str")->from("user_addicourse ua");
+        $this->db->where('ua.user_id', $userid);
+        $this->db->order_by('ua.created_date',"desc");
         $query = $this->db->get();
         $user_data_lang = $query->result_array();        
         return $user_data_lang;
