@@ -1222,7 +1222,7 @@ class Userprofile_page extends MY_Controller {
         }
         else
         {
-            $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);   
+            $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data,"user_social_links_data_edit"=>$user_social_links_data,"user_personal_links_data_edit"=>$user_personal_links_data);
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }

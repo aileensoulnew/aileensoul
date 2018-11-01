@@ -451,12 +451,38 @@
             
             <div id="social-link-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>Social Links</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Website</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
                 <div class="dtl-dis">
-                    <div class="no-info">
+                    <div class="no-info" ng-if="user_social_links.length < '1' && user_personal_links.length < '1'">
                         <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                         <span>Lorem ipsum its a dummy text.</span>
+                    </div>
+                    <div class="social-links" ng-if="user_social_links.length > '0'">
+                        <h4>Social</h4>
+                        <ul class="social-link-list">
+                            <li ng-repeat="social_links in user_social_links">
+                                <a href="{{social_links.user_links_txt}}" target="_self">
+                                    <img ng-if="social_links.user_links_type == 'Facebook'" src="<?php echo base_url(); ?>assets/n-images/detail/fb.png">
+                                    <img ng-if="social_links.user_links_type == 'Google'" src="<?php echo base_url(); ?>assets/n-images/detail/g-plus.png">
+                                    <img ng-if="social_links.user_links_type == 'LinkedIn'" src="<?php echo base_url(); ?>assets/n-images/detail/in.png">
+                                    <img ng-if="social_links.user_links_type == 'Pinterest'" src="<?php echo base_url(); ?>assets/n-images/detail/pin.png">
+                                    <img ng-if="social_links.user_links_type == 'Instagram'" src="<?php echo base_url(); ?>assets/n-images/detail/insta.png">
+                                    <img ng-if="social_links.user_links_type == 'GitHub'" src="<?php echo base_url(); ?>assets/n-images/detail/git.png">
+                                    <img ng-if="social_links.user_links_type == 'Twitter'" src="<?php echo base_url(); ?>assets/n-images/detail/twt.png">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="social-links" ng-if="user_personal_links.length > '0'">
+                        <h4 class="pt20 fw">Personal</h4>
+                        <ul class="social-link-list">
+                            <li ng-repeat="user_p_links in user_personal_links">
+                                <a href="{{user_p_links.user_links_txt}}" target="_self">
+                                    <img src="<?php echo base_url(); ?>assets/n-images/detail/pr-web.png">
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1800,7 +1826,7 @@
                                 
                                 <div class="col-md-1 col-sm-1 pl0">
                                     <label></label>
-                                    <a href="#" class="pull-right" ng-click="removeSocialLinks()"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
+                                    <a href="#" class="pull-right" ng-click="removeSocialLinks($index)"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
                                 </div>
                                 </div>
                                 <div class="fw dtl-more-add" id="add-new-link">
@@ -1815,11 +1841,11 @@
                                 <div class="col-md-11 col-sm-11">
                                     <label>Add Personal Website</label>
                                     <input type="text" placeholder="Add Personal Website" id="personal_link_url{{$index}}" class="personal_link_url" name="personal_link_url" ng-keyup="check_personalurl($index)" ng-value="field.user_links_txt">
-                                    <span class="personal-link-info">Add http:// or https:// before link</span>
+                                    <span class="personal-link-info">URL must start with http:// or https://</span>
                                 </div>
                                 <div class="col-md-1 col-sm-1 pl0">
                                     <label></label>
-                                    <a href="#" class="pull-right" ng-click="removePersonalLinks()"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
+                                    <a href="#" class="pull-right" ng-click="removePersonalLinks($index)"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
                                 </div>
                             </div>
                         </div>

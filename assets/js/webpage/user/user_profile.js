@@ -3620,12 +3620,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             success = result.data.success;
             if(success == 1)
             {
-                user_social_links_data = result.data.user_social_links_data;
-                user_personal_links_data = result.data.user_personal_links_data;
-                // $scope.user_social_links_data = user_social_links_data;
-                // $scope.user_personal_links_data = user_personal_links_data;
-                $scope.social_linksset.social_links = user_social_links_data;
-                $scope.personal_linksset.personal_links = user_personal_links_data;                
+                $scope.user_social_links = result.data.user_social_links_data;
+                $scope.user_personal_links = result.data.user_personal_links_data;
+                $scope.social_linksset.social_links = result.data.user_social_links_data_edit;
+                $scope.personal_linksset.personal_links = result.data.user_personal_links_data_edit;
             }
 
         });
@@ -4125,7 +4123,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(link_type == "Facebook")
         {            
             if(/(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i.test(link_url)){
-                console.log('valid');
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4136,7 +4133,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(link_type == "Google")
         {            
             if(/\+[^/]+|\d{21}/i.test(link_url)){
-                console.log('valid');
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4147,7 +4143,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(link_type == "Instagram")
         {            
             if(/https?:\/\/(www\.)?instagram\.com\/([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)/i.test(link_url)){
-                console.log('valid');
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4158,7 +4153,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(link_type == "LinkedIn")
         {            
             if(/(ftp|http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i.test(link_url)){
-                console.log('valid');
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4169,7 +4163,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(link_type == "Pinterest")
         {            
             if(/^http(s)?:\/\/(in.)pinterest.com\/(.*)?$/i.test(link_url)){
-                console.log('valid');
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4180,7 +4173,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(link_type == "GitHub")
         {            
             if(/http(s)?:\/\/(www\.)?github\.(com|io)\/[A-z 0-9 _-]+\/?/i.test(link_url)){
-                console.log('valid');
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4191,7 +4183,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(link_type == "Twitter")
         {            
             if(/http(s)?:\/\/(.*\.)?twitter\.com\/[A-z 0-9 _]+\/?/i.test(link_url)){
-                console.log('valid');
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4231,7 +4222,6 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         var regexp =   /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
         if (regexp.test(personal_link_url))
         {
-            console.log('valid');
             $("#personal_link_url"+id).removeClass("error");
         }
         else
@@ -4260,8 +4250,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 user_social_links_data = result.data.user_social_links_data;
                 user_personal_links_data = result.data.user_personal_links_data;
-                // $scope.user_social_links_data = user_social_links_data;
-                // $scope.user_personal_links_data = user_personal_links_data;
+                $scope.user_social_links = user_social_links_data;
+                $scope.user_personal_links = user_personal_links_data;
                 $scope.social_linksset.social_links = user_social_links_data;
                 $scope.personal_linksset.personal_links = user_personal_links_data;
             }
