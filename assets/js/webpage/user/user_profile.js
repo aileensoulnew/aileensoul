@@ -3558,6 +3558,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             dob_year = dob[0];
             $scope.dob_fnc(dob_day,dob_month,dob_year); 
 
+            $("#skill-loader").hide();
+            $("#skill-body").show();
+
+            $("#profile-loader").hide();
+            $("#profile-body").show();
+
             load_add();
         });
         $('footer').show();
@@ -3600,7 +3606,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.user_fav_quote_headline = about_user_data.user_fav_quote_headline;
                 $scope.user_fav_artist = about_user_data.user_fav_artist;
                 $scope.user_fav_book = about_user_data.user_fav_book;
-                $scope.user_fav_sport = about_user_data.user_fav_sport;                
+                $scope.user_fav_sport = about_user_data.user_fav_sport;
+                $("#about-loader").hide();
+                $("#about-body").show();
             }
 
         });
@@ -3971,6 +3979,16 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 maxlength: 700,
                 minlength: 50
             },
+            research_field: {
+                required: true,
+            },
+            research_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#research_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
             research_url: {
                 url: true,
             },
@@ -3994,8 +4012,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             research_desc: {
                 required: "Please enter description",
             },
+            research_field: {
+                required: "Please select field",
+            },
             research_url: {                
-                url: "Enter valid URL",
+                url: "URL must start with http:// or https://",
             },            
             research_day: {
                 required: "Please enter research publishing date",
@@ -4017,14 +4038,24 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     var research_formdata = new FormData();
     $(document).on('change','#research_document', function(e){
-        var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','docx','doc','PDF'];
-        var ext = $(this).val().split('.');        
-        if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
-            research_formdata.append('file', $('#research_document')[0].files[0]);
-        }
-        else {
+        $("#research_file_error").hide();
+        if(this.files[0].size > 5242880)
+        {
+            $("#research_file_error").show();
             $(this).val("");
-        }         
+            return true;
+        }
+        else
+        {
+            var fileExtension = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF','pdf','docx','doc','PDF'];
+            var ext = $(this).val().split('.');        
+            if ($.inArray(ext[ext.length - 1].toLowerCase(), fileExtension) !== -1) {             
+                research_formdata.append('file', $('#research_document')[0].files[0]);
+            }
+            else {
+                $(this).val("");
+            }         
+        }
     });
     $scope.save_user_research = function(){
         if ($scope.research_form.validate()) {
@@ -4062,6 +4093,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            research_formdata.append('edit_research', $scope.edit_research);
+            research_formdata.append('research_document_old', $scope.research_document_old);
             research_formdata.append('research_title', $('#research_title').val());
             research_formdata.append('research_desc', $('#research_desc').val());
             research_formdata.append('research_field', $('#research_field option:selected').val());
@@ -4081,6 +4114,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     result = result.data;
                     if(result.success == '1')
                     {
+                        $scope.user_research = result.user_research;
                         $("#user_research_save").removeAttr("style");
                         $("#user_research_loader").hide();
                         $("#research_form")[0].reset();
@@ -4112,6 +4146,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 $scope.user_research = result.data.user_research;
+                $("#research-loader").hide();
+                $("#research-body").show();
             }
 
         });
@@ -4134,6 +4170,62 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#research_other_field_div").hide();
         }
     }
+
+    $scope.reset_research_form = function(){        
+        $scope.edit_research = 0;
+        $scope.research_file_old = '';
+        $("#research_day").html("");
+        $("#research_year").html("");
+        $("#research_file_error").hide();
+        $("#research_other_field_div").hide();
+        $("#research_doc_prev").remove();
+        $("#research_form")[0].reset();
+    };
+    $scope.edit_user_research = function(index){
+        $scope.reset_research_form();        
+        var research_arr = $scope.user_research[index];
+        $scope.edit_research = research_arr.id_research;
+        $("#research_title").val(research_arr.research_title);
+        $("#research_field").val(research_arr.research_field);
+        if(research_arr.research_field == 0)
+        {
+            $("#research_other_field_div").show();
+            $("#research_other_field").val(research_arr.research_other_field);
+        }
+        $("#research_url").val(research_arr.research_url);
+        $("#research_desc").val(research_arr.research_desc);        
+        var research_date_arr = research_arr.research_publish_date.split("-");
+        research_day = research_date_arr[2];
+        research_month = research_date_arr[1];
+        research_year = research_date_arr[0];
+        $("#research_month").val(research_month);
+        $scope.research_pub_fnc(research_day,research_month,research_year);
+
+        var research_file_name = research_arr.research_document;
+        $scope.research_document_old = research_file_name;
+        if(research_file_name.trim() != "")
+        {            
+            var filename_arr = research_file_name.split('.');
+            $("#research_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_research_upload_url+research_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#research_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.research_form.validate();
+        },1000); 
+        $("#research").modal("show");
+    };
     //Research End
 
     //Socila Links Start
@@ -4616,6 +4708,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            publication_formdata.append('edit_publication', $scope.edit_publication);
+            publication_formdata.append('pub_file_old', $scope.pub_file_old);
             publication_formdata.append('pub_title', $('#pub_title').val());
             publication_formdata.append('pub_author', $('#pub_author').val());
             publication_formdata.append('pub_url', $('#pub_url').val());
@@ -4638,6 +4732,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_publication_save").removeAttr("style");
                         $("#user_publication_loader").hide();
                         $("#publication_form")[0].reset();
+                        $scope.user_publication = result.user_publication;                         
                         // $("#publication").modal('hide');
                     }
                     else
@@ -4666,7 +4761,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 user_publication = result.data.user_publication;
-                $scope.user_publication = user_publication;                
+                $scope.user_publication = user_publication;
+                $("#publication-loader").hide();
+                $("#publication-body").show();
             }
 
         });
@@ -4676,6 +4773,59 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.publication_view_more = function(){
         $scope.view_more_publication = $scope.user_publication.length;
         $("#view-more-publication").hide();
+    };
+
+    $scope.reset_publication_form = function(){        
+        $scope.edit_publication = 0;
+        $scope.pub_file_old = '';
+        $("#publication_day").html("");
+        $("#publication_year").html("");
+        $("#pub_file_error").hide();        
+        $("#pub_file_prev").remove();
+        $("#publication_form")[0].reset();
+    };
+    $scope.edit_user_publication = function(index){
+        $scope.reset_publication_form();
+        console.log($scope.user_publication[index]);
+        var publication_arr = $scope.user_publication[index];
+        $scope.edit_publication = publication_arr.id_publication;
+        $("#pub_title").val(publication_arr.pub_title);
+        $("#pub_author").val(publication_arr.pub_author);        
+        $("#pub_url").val(publication_arr.pub_url);
+        $("#pub_publisher").val(publication_arr.pub_publisher);        
+        var publication_date_arr = publication_arr.pub_date.split("-");
+        publication_day = publication_date_arr[2];
+        publication_month = publication_date_arr[1];
+        publication_year = publication_date_arr[0];
+        $("#publication_month").val(publication_month);
+        $scope.publication_date_fnc(publication_day,publication_month,publication_year);
+
+        $("#pub_desc").val(publication_arr.pub_desc);
+
+        var publication_file_name = publication_arr.pub_file;
+        $scope.pub_file_old = publication_file_name;
+        if(publication_file_name.trim() != "")
+        {            
+            var filename_arr = publication_file_name.split('.');
+            $("#pub_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_publication_upload_url+publication_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#pub_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.publication_form.validate();
+        },1000); 
+        $("#publication").modal("show");
     };
     // User Publication End
 
@@ -4940,7 +5090,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 user_patent = result.data.user_patent;
-                $scope.user_patent = user_patent;                
+                $scope.user_patent = user_patent;
+                $("#patent-loader").hide();
+                $("#patent-body").show();
             }
 
         });
@@ -4951,8 +5103,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $scope.view_more_patent = $scope.user_patent.length;
         $("#view-more-patent").hide();
     };
-    $scope.reset_patent_form = function(){
-        $scope.exp_designation_fnc();
+    $scope.reset_patent_form = function(){        
         $scope.edit_patent = 0;
         $scope.patent_file_old = '';
         $("#patent_day").html("");
@@ -5192,6 +5343,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            award_formdata.append('edit_awards', $scope.edit_awards);
+            award_formdata.append('awards_file_old', $scope.awards_file_old);
             award_formdata.append('award_title', $('#award_title').val());
             award_formdata.append('award_org', $('#award_org').val());            
             award_formdata.append('award_day', award_day);
@@ -5212,6 +5365,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_award_save").removeAttr("style");
                         $("#user_award_loader").hide();
                         $("#award_form")[0].reset();
+                        $scope.reset_awards_form();
+                        $scope.user_award = result.user_award;
                         // $("#publication").modal('hide');
                     }
                     else
@@ -5240,7 +5395,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 user_award = result.data.user_award;
-                $scope.user_award = user_award;                
+                $scope.user_award = user_award;
+                $("#awards-loader").hide();
+                $("#awards-body").show();
             }
 
         });
@@ -5250,6 +5407,57 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.award_view_more = function(){
         $scope.view_more_award = $scope.user_award.length;
         $("#view-more-award").hide();
+    };
+
+    $scope.reset_awards_form = function(){        
+        $scope.edit_awards = 0;
+        $scope.awards_file_old = '';
+        $("#award_day").html("");
+        $("#award_year").html("");
+        $("#award_file_error").hide();        
+        $("#award_file_prev").remove();
+        $("#award_form")[0].reset();
+    };
+    $scope.edit_user_award = function(index){
+        $scope.reset_awards_form();
+        console.log($scope.user_award[index]);
+        var award_arr = $scope.user_award[index];
+        $scope.edit_awards = award_arr.id_award;
+        $("#award_title").val(award_arr.award_title);
+        $("#award_org").val(award_arr.award_org);        
+        var award_date_arr = award_arr.award_date.split("-");
+        award_day = award_date_arr[2];
+        award_month = award_date_arr[1];
+        award_year = award_date_arr[0];
+        $("#award_month").val(award_month);
+        $scope.award_date_fnc(award_day,award_month,award_year);
+
+        $("#award_desc").val(award_arr.award_desc);
+
+        var award_file_name = award_arr.award_file;
+        $scope.awards_file_old = award_file_name;
+        if(award_file_name.trim() != "")
+        {            
+            var filename_arr = award_file_name.split('.');
+            $("#award_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_award_upload_url+award_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#award_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.award_form.validate();
+        },1000); 
+        $("#Achiv-awards").modal("show");
     };
     //User Achieve & Award End
 
@@ -5396,6 +5604,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         },
     };
     $scope.save_user_activity = function(){
+        console.log("activity_file_old",$scope.activity_file_old);        
         $("#activitydateerror").html("");
         $("#activitydateerror").hide();
         if ($scope.activity_form.validate()) {
@@ -5425,6 +5634,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            activity_formdata.append('edit_activity', $scope.edit_activity);
+            activity_formdata.append('activity_file_old', $scope.activity_file_old);
             activity_formdata.append('activity_participate', $('#activity_participate').val());
             activity_formdata.append('activity_org', $('#activity_org').val());            
             activity_formdata.append('activity_s_year', activity_s_year);
@@ -5446,6 +5657,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_activity_save").removeAttr("style");
                         $("#user_activity_loader").hide();
                         $("#activity_form")[0].reset();
+                        $scope.reset_activity_form();
+                        $scope.user_activity = result.user_activity;                        
                         // $("#publication").modal('hide');
                     }
                     else
@@ -5453,6 +5666,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_activity_save").removeAttr("style");
                         $("#user_activity_loader").hide();
                         $("#activity_form")[0].reset();
+                        $scope.reset_activity_form();
                         // $("#publication").modal('hide');
                     }
                 }
@@ -5474,7 +5688,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 user_activity = result.data.user_activity;
-                $scope.user_activity = user_activity;                
+                $scope.user_activity = user_activity;
+                $("#activity-loader").hide();
+                $("#activity-body").show();
             }
 
         });
@@ -5484,6 +5700,67 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.activity_view_more = function(){
         $scope.view_more_activity = $scope.user_activity.length;
         $("#view-more-activity").hide();
+    };
+
+    $scope.reset_activity_form = function(){
+        $scope.edit_activity = 0;
+        $scope.activity_file_old = "";
+        $("#activity_s_month").html('');
+        $("#activity_e_year").html('');
+        $("#activity_e_month").html('');
+        $("#activity_file_error").hide();        
+        $("#activity_file_prev").remove();
+        $('#activity_file').val('');
+        $("#activity_form")[0].reset();
+        activity_formdata = new FormData();
+    };
+    $scope.edit_user_activity = function(index){
+        $scope.reset_activity_form();
+        var activity_arr = $scope.user_activity[index];
+        console.log(activity_arr);
+        $scope.edit_activity = activity_arr.id_extra_activity;
+        $("#activity_participate").val(activity_arr.activity_participate);
+        $("#activity_org").val(activity_arr.activity_org);
+        var activity_start_date = activity_arr.activity_start_date.split('-');
+        var activity_end_date = activity_arr.activity_end_date.split('-');        
+        $scope.activity_s_year = activity_start_date[0];
+        $scope.activity_start_year();
+        // $scope.exp_s_month = activity_start_date[1];
+        setTimeout(function(){
+            $("#activity_s_month").val(activity_start_date[1]);
+            $("#activity_e_year").val(activity_end_date[0]).change();
+            // $scope.exp_e_year = exp_end_date[0];
+        },500);
+        setTimeout(function(){
+            $("#activity_e_month").val(activity_end_date[1]);
+        },500);        
+
+        $("#activity_desc").val(activity_arr.activity_desc);
+
+        var activity_file_name = activity_arr.activity_file;
+        $scope.activity_file_old = activity_file_name;
+        if(activity_file_name.trim() != "")
+        {            
+            var filename_arr = activity_file_name.split('.');
+            $("#activity_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="activity_file_prev" class="screen-shot"><a href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_activity_upload_url+activity_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="activity_file_prev" class="screen-shot"><a href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#activity_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.activity_form.validate();
+        },1000); 
+        $("#extra-activity").modal("show");
     };
     //Extracurricular Activity End
 
@@ -5657,6 +5934,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+
+            addicourse_formdata.append('edit_addicourse', $scope.edit_addicourse);
+            addicourse_formdata.append('addicourse_file_old', $scope.addicourse_file_old);
             addicourse_formdata.append('addicourse_name', $('#addicourse_name').val());
             addicourse_formdata.append('addicourse_org', $('#addicourse_org').val());            
             addicourse_formdata.append('addicourse_s_year', addicourse_s_year);
@@ -5678,6 +5958,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_addicourse_save").removeAttr("style");
                         $("#user_addicourse_loader").hide();
                         $("#addicourse_form")[0].reset();
+                        $scope.user_addicourse = result.user_addicourse;
+                        $scope.reset_addicourse_form();
                         // $("#publication").modal('hide');
                     }
                     else
@@ -5706,7 +5988,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 user_addicourse = result.data.user_addicourse;
-                $scope.user_addicourse = user_addicourse;                
+                $scope.user_addicourse = user_addicourse;
+                $("#addicourse-loader").hide();
+                $("#addicourse-body").show();
             }
 
         });
@@ -5716,6 +6000,67 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.ac_view_more = function(){
         $scope.view_more_ac = $scope.user_addicourse.length;
         $("#view-more-addicourse").hide();
+    };
+
+    $scope.reset_addicourse_form = function(){
+        $scope.edit_addicourse = 0;
+        $scope.addicourse_file_old = "";
+        $("#addicourse_s_month").html('');
+        $("#addicourse_e_year").html('');
+        $("#addicourse_e_month").html('');
+        $("#addicourse_file_error").hide();        
+        $("#addicourse_file_prev").remove();
+        $('#addicourse_file').val('');
+        $("#addicourse_form")[0].reset();
+        addicourse_formdata = new FormData();
+    };
+    $scope.edit_user_addicourse = function(index){
+        $scope.reset_addicourse_form();
+        var addicourse_arr = $scope.user_addicourse[index];
+        console.log(addicourse_arr);
+        $scope.edit_addicourse = addicourse_arr.id_addicourse;
+        $("#addicourse_name").val(addicourse_arr.addicourse_name);
+        $("#addicourse_org").val(addicourse_arr.addicourse_org);
+        var addicourse_start_date = addicourse_arr.addicourse_start_date.split('-');
+        var addicourse_end_date = addicourse_arr.addicourse_end_date.split('-');        
+        $scope.addicourse_s_year = addicourse_start_date[0];
+        $scope.addicourse_start_year();
+        // $scope.exp_s_month = addicourse_start_date[1];
+        setTimeout(function(){
+            $("#addicourse_s_month").val(addicourse_start_date[1]);
+            $("#addicourse_e_year").val(addicourse_end_date[0]).change();
+            // $scope.exp_e_year = exp_end_date[0];
+        },500);
+        setTimeout(function(){
+            $("#addicourse_e_month").val(addicourse_end_date[1]);
+        },500);        
+
+        $("#addicourse_url").val(addicourse_arr.addicourse_url);
+
+        var addicourse_file_name = addicourse_arr.addicourse_file;
+        $scope.addicourse_file_old = addicourse_file_name;
+        if(addicourse_file_name.trim() != "")
+        {            
+            var filename_arr = addicourse_file_name.split('.');
+            $("#addicourse_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_addicourse_upload_url+addicourse_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#addicourse_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.addicourse_form.validate();
+        },1000); 
+        $("#additional-course").modal("show");
     };
     //Additional Course End
 
@@ -6496,6 +6841,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            project_formdata.append('edit_project', $scope.edit_project);
+            project_formdata.append('project_file_old', $scope.project_file_old);
             project_formdata.append('project_title', $('#project_title').val());
             project_formdata.append('project_team', $('#project_team').val());
             project_formdata.append('project_role', $('#project_role').val());
@@ -6525,6 +6872,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.project_skill_list = [];
                         $scope.project_partner = [];
                         $("#project_form")[0].reset();
+                        $scope.user_projects = result.user_projects;
+                        $scope.reset_project_form();
                         // $("#dtl-project").modal('hide');
                     }
                     else
@@ -6553,7 +6902,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 user_projects = result.data.user_projects;
-                $scope.user_projects = user_projects;                
+                $scope.user_projects = user_projects;
+                $("#project-loader").hide();
+                $("#project-body").show();
             }
 
         });
@@ -6563,6 +6914,112 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.proj_view_more = function(){
         $scope.view_more_proj = $scope.user_projects.length;
         $("#view-more-proj").hide();
+    };
+
+    $scope.reset_project_form = function(){
+        $scope.edit_project = 0;
+        $scope.project_file_old = "";
+        $("#other_project").hide();
+        $scope.project_skill_list = [];
+        $("#project_field").val('');
+        $scope.project_partner = [];
+        
+        $scope.project_s_year = "";
+        $("#project_s_month").html('');
+        $("#project_e_year").html('');
+        $("#project_e_month").html('');
+        $("#project_file_error").hide();        
+        $("#project_file_prev").remove();
+        $('#project_file').val('');
+        $("#project_form")[0].reset();
+        project_formdata = new FormData();
+    };
+    $scope.edit_user_project = function(index){
+        $scope.reset_project_form();
+        var projects_arr = $scope.user_projects[index];
+        console.log(projects_arr);
+
+        $scope.edit_project = projects_arr.id_projects;
+        $("#project_title").val(projects_arr.project_title);
+        $("#project_team").val(projects_arr.project_team);
+        $("#project_role").val(projects_arr.project_role);
+
+        var project_skill = "";
+        if(projects_arr.project_skills_txt.trim() != "")
+        {
+            var project_skill = projects_arr.project_skills_txt.split(',');
+        }
+        var edit_project_skill = [];
+        if(project_skill.length > 0)
+        {                    
+            project_skill.forEach(function(element,skillIndex) {
+              edit_project_skill[skillIndex] = {"name":element};
+            });
+        }
+        $scope.project_skill_list = edit_project_skill;
+
+        $("#project_field").val(projects_arr.project_field);        
+        if(projects_arr.project_field == 0)
+        {
+            $("#proj_other_field_div").show();
+            $("#project_other_field").val(projects_arr.project_other_field);
+        }
+        $("#project_url").val(projects_arr.project_url);
+
+        var project_partner_arr = "";
+        if(projects_arr.project_partner_name.trim() != "")
+        {
+            var project_partner_arr = projects_arr.project_partner_name.split(',');
+        }
+        var project_partner_list = [];
+        if(project_partner_arr.length > 0)
+        {                    
+            project_partner_arr.forEach(function(element,pIndex) {
+              project_partner_list[pIndex] = {"p_name":element};
+            });
+        }
+        $scope.project_partner = project_partner_list;
+        
+        var proj_start_date = projects_arr.project_start_date.split('-');
+        var proj_end_date = projects_arr.project_end_date.split('-');        
+        $scope.project_s_year = proj_start_date[0];
+        $scope.project_start_year();
+        // $scope.exp_s_month = proj_start_date[1];
+        setTimeout(function(){
+            $("#project_s_month").val(proj_start_date[1]);
+            $("#project_e_year").val(proj_end_date[0]).change();
+            // $scope.exp_e_year = exp_end_date[0];
+        },500);
+        setTimeout(function(){
+            $("#project_e_month").val(proj_end_date[1]);
+        },500);
+
+        $("#project_desc").val(projects_arr.project_desc);
+
+        var proj_file_name = projects_arr.project_file;
+        $scope.project_file_old = proj_file_name;
+        if(proj_file_name.trim() != "")
+        {            
+            var filename_arr = proj_file_name.split('.');
+            $("#project_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="project_file_prev" class="screen-shot"><a href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_project_upload_url+proj_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="project_file_prev" class="screen-shot"><a href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#project_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.edu_form.validate();
+        },1000); 
+        $("#dtl-project").modal("show");
     };
     //Project End
 
@@ -6830,6 +7287,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 return false;
             }
 
+            edu_formdata.append('edit_edu', $scope.edit_edu);
+            edu_formdata.append('edu_file_old', $scope.edu_file_old);
             edu_formdata.append('edu_school_college', $('#edu_school_college').val());
             edu_formdata.append('edu_university', $('#edu_university option:selected').val());
             edu_formdata.append('edu_other_university', $('#edu_other_university').val());
@@ -6859,6 +7318,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#edu_save").removeAttr("style");
                         $("#edu_loader").hide();
                         $("#edu_form")[0].reset();
+                        $scope.user_education = result.user_education;
+                        $scope.reset_edu_form();
                         // $("#educational-info").modal('hide');
                     }
                     else
@@ -6887,7 +7348,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 user_education = result.data.user_education;
-                $scope.user_education = user_education;                
+                $scope.user_education = user_education;
+                $("#edution-loader").hide();
+                $("#edution-body").show();
             }
 
         });
@@ -6897,6 +7360,93 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.edu_view_more = function(){
         $scope.view_more_edu = $scope.user_education.length;
         $("#view-more-edu").hide();
+    };
+    $scope.reset_edu_form = function(){
+        $scope.edit_edu = 0;
+        $scope.edu_file_old = "";
+        $("#other_edu").hide();
+        $scope.edu_university = "";
+        $scope.edu_degree = "";
+        $scope.edu_stream = "";
+        $scope.edu_s_year = "";
+        $("#edu_s_month").html('');
+        $("#edu_s_month").html('');
+        $("#edu_e_year").html('');
+        $("#edu_e_month").html('');
+        $("#edu_file_error").hide();        
+        $("#edu_file_prev").remove();
+        $('#edu_file').val('');
+        $("#edu_form")[0].reset();
+        edu_formdata = new FormData();
+    };
+    $scope.edit_user_edu = function(index){
+        $scope.reset_edu_form();
+        var edu_arr = $scope.user_education[index];
+        console.log(edu_arr);
+        $scope.edit_edu = edu_arr.id_education;
+        $("#edu_school_college").val(edu_arr.edu_school_college);
+        $scope.edu_university = edu_arr.edu_university;
+        if(edu_arr.edu_university == 0)
+        {
+            $("#other_university").show();
+            $("#edu_other_university").val(edu_arr.edu_other_university);
+        }
+
+        // $("#edu_degree").val(edu_arr.edu_degree).change();
+        $scope.edu_degree = edu_arr.edu_degree;
+        $scope.edu_degree_change();
+        if(edu_arr.edu_degree == 0)
+        {
+            $("#other_edu").show();
+            $("#edu_other_degree").val(edu_arr.edu_other_degree);            
+            $("#edu_other_stream").val(edu_arr.edu_other_stream);            
+        }
+        else
+        {            
+            // $("#edu_stream").val(edu_arr.edu_stream).change();
+            $scope.edu_stream = edu_arr.edu_stream;
+        }
+
+        var edu_start_date = edu_arr.edu_start_date.split('-');
+        var edu_end_date = edu_arr.edu_end_date.split('-');        
+        $scope.edu_s_year = edu_start_date[0];
+        $scope.edu_start_year();
+        // $scope.exp_s_month = edu_start_date[1];
+        setTimeout(function(){
+            $("#edu_s_month").val(edu_start_date[1]);
+            $("#edu_e_year").val(edu_end_date[0]).change();
+            // $scope.exp_e_year = exp_end_date[0];
+        },500);
+        setTimeout(function(){
+            $("#edu_e_month").val(edu_end_date[1]);
+        },500);
+
+        $scope.edu_nograduate = (parseInt(edu_arr.edu_nograduate) == 1 ? true : false);
+
+        var edu_file_name = edu_arr.edu_file;
+        $scope.edu_file_old = edu_file_name;
+        if(edu_file_name.trim() != "")
+        {            
+            var filename_arr = edu_file_name.split('.');
+            $("#edu_file_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="edu_file_prev" class="screen-shot"><a href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_education_upload_url+edu_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="edu_file_prev" class="screen-shot"><a href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#edu_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.edu_form.validate();
+        },1000); 
+        $("#educational-info").modal("show");
     };
     //Education End
 

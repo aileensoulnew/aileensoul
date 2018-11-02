@@ -1107,6 +1107,8 @@ class Userprofile_page extends MY_Controller {
 
     public function save_research_user()
     {
+        $edit_research = $this->input->post('edit_research');
+        $research_document_old = $this->input->post('research_document_old');
         $research_title = $this->input->post('research_title');
         $research_desc = $this->input->post('research_desc');
         $research_field = $this->input->post('research_field');
@@ -1121,10 +1123,14 @@ class Userprofile_page extends MY_Controller {
             
         $research_url = $this->input->post('research_url');
         $research_published_date = $this->input->post('research_year').'-'.$this->input->post('research_month').'-'.$this->input->post('research_day');
-        $fileName = "";
+        $fileName = $research_document_old;
         if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != "")
         {
             $user_research_upload_path = $this->config->item('user_research_upload_path');
+            $research_document_old = $user_research_upload_path . $research_document_old;
+            if (isset($research_document_old)) {
+                unlink($research_document_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_research_upload_path,
@@ -1151,7 +1157,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_research = $this->userprofile_model->set_user_research($user_id,$research_title,$research_desc,$research_field,$research_other_field,$research_url,$research_published_date,$fileName);
+            $user_research = $this->userprofile_model->set_user_research($user_id,$research_title,$research_desc,$research_field,$research_other_field,$research_url,$research_published_date,$fileName,$edit_research);
             $user_research = $this->userprofile_model->get_user_research($user_id);
             $ret_arr = array("success"=>1,"user_research"=>$user_research);
         }
@@ -1304,16 +1310,22 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_publication()
     {
+        $edit_publication = $this->input->post('edit_publication');
+        $pub_file_old = $this->input->post('pub_file_old');
         $pub_title = $this->input->post('pub_title');
         $pub_author = $this->input->post('pub_author');
         $pub_url = $this->input->post('pub_url');
         $pub_publisher = $this->input->post('pub_publisher');
         $pub_desc = $this->input->post('pub_desc');
         $publication_date = $this->input->post('pub_year_txt').'-'.$this->input->post('pub_month_txt').'-'.$this->input->post('pub_day_txt');
-        $fileName = "";
+        $fileName = $pub_file_old;
         if(isset($_FILES['pub_file']['name']) && $_FILES['pub_file']['name'] != "")
         {
             $user_publication_upload_path = $this->config->item('user_publication_upload_path');
+            $user_publication_file_old = $user_publication_upload_path . $pub_file_old;
+            if (isset($user_publication_file_old)) {
+                unlink($user_publication_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_publication_upload_path,
@@ -1340,7 +1352,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_publication = $this->userprofile_model->set_user_publication($user_id,$pub_title,$pub_author,$pub_url,$pub_publisher,$pub_desc,$publication_date,$fileName);
+            $user_publication = $this->userprofile_model->set_user_publication($user_id,$pub_title,$pub_author,$pub_url,$pub_publisher,$pub_desc,$publication_date,$fileName,$edit_publication);
             $user_publication = $this->userprofile_model->get_user_publication($user_id);
             $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
         }
@@ -1410,14 +1422,20 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_award()
     {
+        $edit_awards = $this->input->post('edit_awards');
+        $awards_file_old = $this->input->post('awards_file_old');
         $award_title = $this->input->post('award_title');
         $award_org = $this->input->post('award_org');        
         $award_date = $this->input->post('award_year').'-'.$this->input->post('award_month').'-'.$this->input->post('award_day');
         $award_desc = $this->input->post('award_desc');
-        $fileName = "";
+        $fileName = $awards_file_old;
         if(isset($_FILES['award_file']['name']) && $_FILES['award_file']['name'] != "")
         {
             $user_award_upload_path = $this->config->item('user_award_upload_path');
+            $user_award_file_old = $user_award_upload_path . $awards_file_old;
+            if (isset($user_award_file_old)) {
+                unlink($user_award_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_award_upload_path,
@@ -1444,7 +1462,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_award_insert = $this->userprofile_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName);
+            $user_award_insert = $this->userprofile_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName,$edit_awards);
             $user_award = $this->userprofile_model->get_user_award($user_id);
             $ret_arr = array("success"=>1,"user_award"=>$user_award);
         }
@@ -1457,15 +1475,21 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_activity()
     {
+        $edit_activity = $this->input->post('edit_activity');
+        $activity_file_old = $this->input->post('activity_file_old');
         $activity_participate = $this->input->post('activity_participate');
         $activity_org = $this->input->post('activity_org');        
         $award_start_date = $this->input->post('activity_s_year').'-'.$this->input->post('activity_s_month');
         $award_end_date = $this->input->post('activity_e_year').'-'.$this->input->post('activity_e_month');
         $activity_desc = $this->input->post('activity_desc');
-        $fileName = "";
+        $fileName = $activity_file_old;
         if(isset($_FILES['activity_file']['name']) && $_FILES['activity_file']['name'] != "")
         {
             $user_activity_upload_path = $this->config->item('user_activity_upload_path');
+            $user_activity_file_old = $user_activity_upload_path . $activity_file_old;
+            if (isset($user_activity_file_old)) {
+                unlink($user_activity_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_activity_upload_path,
@@ -1492,7 +1516,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_activity_insert = $this->userprofile_model->set_user_activity($user_id,$activity_participate,$activity_org,$award_start_date,$award_end_date,$activity_desc,$fileName);
+            $user_activity_insert = $this->userprofile_model->set_user_activity($user_id,$activity_participate,$activity_org,$award_start_date,$award_end_date,$activity_desc,$fileName,$edit_activity);
             $user_activity = $this->userprofile_model->get_user_activity($user_id);
             $ret_arr = array("success"=>1,"user_activity"=>$user_activity);
         }
@@ -1505,15 +1529,21 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_addicourse()
     {
+        $edit_addicourse = $this->input->post('edit_addicourse');
+        $addicourse_file_old = $this->input->post('addicourse_file_old');
         $addicourse_name = $this->input->post('addicourse_name');
         $addicourse_org = $this->input->post('addicourse_org');        
         $addicourse_start_date = $this->input->post('addicourse_s_year').'-'.$this->input->post('addicourse_s_month');
         $addicourse_end_date = $this->input->post('addicourse_e_year').'-'.$this->input->post('addicourse_e_month');
         $addicourse_url = $this->input->post('addicourse_url');
-        $fileName = "";
+        $fileName = $addicourse_file_old;
         if(isset($_FILES['addicourse_file']['name']) && $_FILES['addicourse_file']['name'] != "")
         {
             $user_addicourse_upload_path = $this->config->item('user_addicourse_upload_path');
+            $user_addicourse_file_old = $user_addicourse_upload_path . $addicourse_file_old;
+            if (isset($user_addicourse_file_old)) {
+                unlink($user_addicourse_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_addicourse_upload_path,
@@ -1540,7 +1570,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_activity_insert = $this->userprofile_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName);
+            $user_activity_insert = $this->userprofile_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName,$edit_addicourse);
             $user_addicourse = $this->userprofile_model->get_user_addicourse($user_id);
             $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
         }
@@ -1715,6 +1745,8 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_project()
     {
+        $edit_project = $this->input->post('edit_project');
+        $project_file_old = $this->input->post('project_file_old');
         $project_title = $this->input->post('project_title');
         $project_team = $this->input->post('project_team');
         $project_role = $this->input->post('project_role');
@@ -1725,7 +1757,7 @@ class Userprofile_page extends MY_Controller {
         $project_start_date = $this->input->post('project_s_year').'-'.$this->input->post('project_s_month');
         $project_end_date = $this->input->post('project_e_year').'-'.$this->input->post('project_e_month');
         $project_desc = $this->input->post('project_desc');
-        $fileName = "";        
+        
         if($project_field == 0)
         {
             $project_other_field = $this->input->post('project_other_field');
@@ -1770,14 +1802,20 @@ class Userprofile_page extends MY_Controller {
             foreach ($project_partner as $_project_partner) {
                 if(trim($_project_partner['p_name']) != "")
                 {
-                    $project_partner_name = $_project_partner['p_name'].",";
+                    $project_partner_name .= $_project_partner['p_name'].",";
                 }
             }
         }
         $project_partner_name = trim($project_partner_name, ',');
+
+        $fileName = $project_file_old;
         if(isset($_FILES['project_file']['name']) && $_FILES['project_file']['name'] != "")
         {
             $user_project_upload_path = $this->config->item('user_project_upload_path');
+            $user_proj_file_old = $user_project_upload_path . $project_file_old;
+            if (isset($user_proj_file_old)) {
+                unlink($user_proj_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_project_upload_path,
@@ -1804,9 +1842,9 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_project_insert = $this->userprofile_model->set_user_project($user_id,$project_title,$project_team,$project_role,$project_skill_ids,$project_field,$project_other_field,$project_url,$project_partner_name,$project_start_date,$project_end_date,$project_desc,$fileName);
-            $user_project = $this->userprofile_model->get_user_project($user_id);            
-            $ret_arr = array("success"=>1,"user_project"=>$user_project);
+            $user_project_insert = $this->userprofile_model->set_user_project($user_id,$project_title,$project_team,$project_role,$project_skill_ids,$project_field,$project_other_field,$project_url,$project_partner_name,$project_start_date,$project_end_date,$project_desc,$fileName,$edit_project);
+            $user_projects = $this->userprofile_model->get_user_project($user_id);            
+            $ret_arr = array("success"=>1,"user_projects"=>$user_projects);
         }
         else
         {
@@ -1850,6 +1888,8 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_education()
     {
+        $edit_edu = $this->input->post('edit_edu');
+        $edu_file_old = $this->input->post('edu_file_old');
         $edu_school_college = $this->input->post('edu_school_college');
         $edu_university = $this->input->post('edu_university');
         if($edu_university == 0)
@@ -1880,10 +1920,14 @@ class Userprofile_page extends MY_Controller {
             $edu_end_date = "";
         }
 
-        $fileName = "";
+        $fileName = $edu_file_old;
         if(isset($_FILES['edu_file']['name']) && $_FILES['edu_file']['name'] != "")
         {
             $user_education_upload_path = $this->config->item('user_education_upload_path');
+            $user_edu_file_old = $user_education_upload_path . $edu_file_old;
+            if (isset($user_edu_file_old)) {
+                unlink($user_edu_file_old);
+            }
             $config = array(
                 'image_library' => 'gd',
                 'upload_path'   => $user_education_upload_path,
@@ -1910,7 +1954,7 @@ class Userprofile_page extends MY_Controller {
         $user_id = $this->session->userdata('aileenuser');
         if($user_id != "")
         {
-            $user_project_insert = $this->userprofile_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName);
+            $user_project_insert = $this->userprofile_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName,$edit_edu);
             $user_education = $this->userprofile_model->get_user_education($user_id);            
             $ret_arr = array("success"=>1,"user_education"=>$user_education);
         }

@@ -1111,23 +1111,43 @@ class Userprofile_model extends CI_Model {
         return $user_data_lang;
     }
 
-    public function set_user_research($userid,$research_title = "",$research_desc = "",$research_field = "",$research_other_field = "",$research_url = "",$research_published_date = "",$research_document = "")
+    public function set_user_research($userid,$research_title = "",$research_desc = "",$research_field = "",$research_other_field = "",$research_url = "",$research_published_date = "",$research_document = "",$edit_research = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'research_title' => $research_title,
-            'research_desc' => $research_desc,
-            'research_field' => $research_field,
-            'research_other_field' => $research_other_field,
-            'research_url' => $research_url,
-            'research_publish_date' => $research_published_date,
-            'research_document' => $research_document,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_research');
-        return $insert_id;
+        if($edit_research == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'research_title' => $research_title,
+                'research_desc' => $research_desc,
+                'research_field' => $research_field,
+                'research_other_field' => $research_other_field,
+                'research_url' => $research_url,
+                'research_publish_date' => $research_published_date,
+                'research_document' => $research_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_research');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'research_title' => $research_title,
+                'research_desc' => $research_desc,
+                'research_field' => $research_field,
+                'research_other_field' => $research_other_field,
+                'research_url' => $research_url,
+                'research_publish_date' => $research_published_date,
+                'research_document' => $research_document,                 
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_research', $edit_research);
+            $this->db->update('user_research', $data);
+            return true;
+        }
     }
 
     public function get_user_research($userid)
@@ -1183,23 +1203,43 @@ class Userprofile_model extends CI_Model {
         return $user_idol_data;
     }
 
-    public function set_user_publication($userid,$pub_title = "",$pub_author = "",$pub_url = "",$pub_publisher = "",$pub_desc = "",$publication_date = "",$pub_document = "")
+    public function set_user_publication($userid,$pub_title = "",$pub_author = "",$pub_url = "",$pub_publisher = "",$pub_desc = "",$publication_date = "",$pub_document = "",$edit_publication = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'pub_title' => $pub_title,
-            'pub_author' => $pub_author,
-            'pub_url' => $pub_url,
-            'pub_publisher' => $pub_publisher,
-            'pub_desc' => $pub_desc,
-            'pub_date' => $publication_date,
-            'pub_file' => $pub_document,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_publication');
-        return $insert_id;
+        if($edit_publication == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'pub_title' => $pub_title,
+                'pub_author' => $pub_author,
+                'pub_url' => $pub_url,
+                'pub_publisher' => $pub_publisher,
+                'pub_desc' => $pub_desc,
+                'pub_date' => $publication_date,
+                'pub_file' => $pub_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_publication');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'pub_title' => $pub_title,
+                'pub_author' => $pub_author,
+                'pub_url' => $pub_url,
+                'pub_publisher' => $pub_publisher,
+                'pub_desc' => $pub_desc,
+                'pub_date' => $publication_date,
+                'pub_file' => $pub_document,                   
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_publication', $edit_publication);
+            $this->db->update('user_publication', $data);
+            return true;
+        }
     }
 
     public function get_user_publication($userid)
@@ -1263,21 +1303,39 @@ class Userprofile_model extends CI_Model {
         return $user_data_lang;
     }
 
-    public function set_user_award($userid,$award_title = "",$award_org = "",$award_date = "",$award_desc = "",$award_document = "")
+    public function set_user_award($userid,$award_title = "",$award_org = "",$award_date = "",$award_desc = "",$award_document = "",$edit_awards = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'award_title' => $award_title,
-            'award_org' => $award_org,
-            'award_date' => $award_date,
-            'award_desc' => $award_desc,
-            'award_file' => $award_document,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_award');
-        return $insert_id;
+        if($edit_awards == 0)
+        {
+            $data = array(
+                'user_id' => $userid,
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_award');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'award_title' => $award_title,
+                'award_org' => $award_org,
+                'award_date' => $award_date,
+                'award_desc' => $award_desc,
+                'award_file' => $award_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_award', $edit_awards);
+            $this->db->update('user_award', $data);
+            return true;
+        }
     }
 
     public function get_user_award($userid)
@@ -1290,22 +1348,41 @@ class Userprofile_model extends CI_Model {
         return $user_data_lang;
     }
 
-    public function set_user_activity($userid,$activity_participate = "",$activity_org = "",$activity_start_date = "",$activity_end_date = "",$activity_desc = "",$activity_document = "")
+    public function set_user_activity($userid,$activity_participate = "",$activity_org = "",$activity_start_date = "",$activity_end_date = "",$activity_desc = "",$activity_document = "",$edit_activity = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'activity_participate' => $activity_participate,
-            'activity_org' => $activity_org,
-            'activity_start_date' => $activity_start_date,
-            'activity_end_date' => $activity_end_date,
-            'activity_desc' => $activity_desc,
-            'activity_file' => $activity_document,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_extra_activity');
-        return $insert_id;
+        if($edit_activity == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'activity_participate' => $activity_participate,
+                'activity_org' => $activity_org,
+                'activity_start_date' => $activity_start_date,
+                'activity_end_date' => $activity_end_date,
+                'activity_desc' => $activity_desc,
+                'activity_file' => $activity_document,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_extra_activity');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'activity_participate' => $activity_participate,
+                'activity_org' => $activity_org,
+                'activity_start_date' => $activity_start_date,
+                'activity_end_date' => $activity_end_date,
+                'activity_desc' => $activity_desc,
+                'activity_file' => $activity_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_extra_activity', $edit_activity);
+            $this->db->update('user_extra_activity', $data);
+            return true;   
+        }
     }
 
     public function get_user_activity($userid)
@@ -1318,22 +1395,41 @@ class Userprofile_model extends CI_Model {
         return $user_data_lang;
     }
 
-    public function set_user_addicourse($userid,$addicourse_name = "",$addicourse_org = "",$addicourse_start_date = "",$addicourse_end_date = "",$addicourse_url = "",$addicourse_document = "")
+    public function set_user_addicourse($userid,$addicourse_name = "",$addicourse_org = "",$addicourse_start_date = "",$addicourse_end_date = "",$addicourse_url = "",$addicourse_document = "",$edit_addicourse = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'addicourse_name' => $addicourse_name,
-            'addicourse_org' => $addicourse_org,
-            'addicourse_start_date' => $addicourse_start_date,
-            'addicourse_end_date' => $addicourse_end_date,
-            'addicourse_url' => $addicourse_url,
-            'addicourse_file' => $addicourse_document,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_addicourse');
-        return $insert_id;
+        if($edit_addicourse == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_addicourse');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'addicourse_name' => $addicourse_name,
+                'addicourse_org' => $addicourse_org,
+                'addicourse_start_date' => $addicourse_start_date,
+                'addicourse_end_date' => $addicourse_end_date,
+                'addicourse_url' => $addicourse_url,
+                'addicourse_file' => $addicourse_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_addicourse', $edit_addicourse);
+            $this->db->update('user_addicourse', $data);
+            return true;
+        }
     }
 
     public function get_user_addicourse($userid)
@@ -1414,28 +1510,53 @@ class Userprofile_model extends CI_Model {
         return $user_data_exp;
     }
 
-    public function set_user_project($userid,$project_title = "",$project_team = "",$project_role = "",$project_skill_ids = "",$project_field = "",$project_other_field = "",$project_url = "",$project_partner_name = "",$project_start_date = "",$project_end_date = "",$project_desc = "",$project_file = "")
+    public function set_user_project($userid,$project_title = "",$project_team = "",$project_role = "",$project_skill_ids = "",$project_field = "",$project_other_field = "",$project_url = "",$project_partner_name = "",$project_start_date = "",$project_end_date = "",$project_desc = "",$project_file = "",$edit_project = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'project_title' => $project_title,
-            'project_team' => $project_team,
-            'project_role' => $project_role,
-            'project_skills' => $project_skill_ids,
-            'project_field' => $project_field,
-            'project_other_field' => $project_other_field,                
-            'project_url' => $project_url,                
-            'project_partner_name' => $project_partner_name,                
-            'project_start_date' => $project_start_date,                
-            'project_end_date' => $project_end_date,                
-            'project_desc' => $project_desc,        
-            'project_file' => $project_file,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_projects');
-        return $insert_id;
+        if($edit_project == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'project_title' => $project_title,
+                'project_team' => $project_team,
+                'project_role' => $project_role,
+                'project_skills' => $project_skill_ids,
+                'project_field' => $project_field,
+                'project_other_field' => $project_other_field,                
+                'project_url' => $project_url,                
+                'project_partner_name' => $project_partner_name,                
+                'project_start_date' => $project_start_date,                
+                'project_end_date' => $project_end_date,                
+                'project_desc' => $project_desc,        
+                'project_file' => $project_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_projects');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'project_title' => $project_title,
+                'project_team' => $project_team,
+                'project_role' => $project_role,
+                'project_skills' => $project_skill_ids,
+                'project_field' => $project_field,
+                'project_other_field' => $project_other_field,                
+                'project_url' => $project_url,                
+                'project_partner_name' => $project_partner_name,                
+                'project_start_date' => $project_start_date,                
+                'project_end_date' => $project_end_date,                
+                'project_desc' => $project_desc,        
+                'project_file' => $project_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_projects', $edit_project);
+            $this->db->update('user_projects', $data);
+            return true;
+        }
     }
 
     public function get_user_project($userid)
@@ -1451,27 +1572,51 @@ class Userprofile_model extends CI_Model {
         return $user_data_exp;
     }
 
-    public function set_user_education($userid,$edu_school_college = "",$edu_university = "",$edu_other_university = "",$edu_degree = "",$edu_stream = "",$edu_other_degree = "",$edu_other_stream = "",$edu_start_date = "",$edu_end_date = "",$edu_nograduate = "",$edu_file = "")
+    public function set_user_education($userid,$edu_school_college = "",$edu_university = "",$edu_other_university = "",$edu_degree = "",$edu_stream = "",$edu_other_degree = "",$edu_other_stream = "",$edu_start_date = "",$edu_end_date = "",$edu_nograduate = "",$edu_file = "",$edit_edu = 0)
     {
-        $data = array(
-            'user_id' => $userid,
-            'edu_school_college' => $edu_school_college,
-            'edu_university' => $edu_university,
-            'edu_other_university' => $edu_other_university,
-            'edu_degree' => $edu_degree,
-            'edu_other_degree' => $edu_other_degree,
-            'edu_stream' => $edu_stream,                
-            'edu_other_stream' => $edu_other_stream,                
-            'edu_start_date' => $edu_start_date,                
-            'edu_end_date' => $edu_end_date,                
-            'edu_nograduate' => $edu_nograduate,    
-            'edu_file' => $edu_file,                
-            'status' => '1',
-            'created_date' => date('Y-m-d H:i:s', time()),
-            'modify_date' => date('Y-m-d H:i:s', time()),
-        );
-        $insert_id = $this->common->insert_data($data, 'user_education');
-        return $insert_id;
+        if($edit_edu == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'user_education');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_education', $edit_edu);
+            $this->db->update('user_education', $data);
+            return true;
+        }
     }
 
     public function get_user_education($userid)

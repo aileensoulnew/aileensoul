@@ -240,7 +240,7 @@ class Email_model extends CI_Model {
         $email_html .= '<!DOCTYPE html><html><head><title>Aileensoul Notification Mail</title>
             <style>
             body{font-family:arial;}
-            p{margin:0;}h3{margin:0;}
+            h3{margin:0;}
             .post-img-div, .post-img-profile{color: #fff;
             width: 60px;
             background: -moz-linear-gradient(96deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%);
