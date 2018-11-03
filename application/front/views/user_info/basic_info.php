@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container form-radius-new">
 	<h2 class="basic-h2"> Let's Complete Your Profile to Get You More New Opportunities.</h2>
     <div class="form-box">
         <h2 class="text-center">Basic Information</h3>
@@ -55,7 +55,7 @@
                     <label ng-show="errorotherField" class="error">{{errorotherField}}</label>
                 </div>
                 <p class="text-center submit-btn">
-                    <button type="submit" id="submit" class="btn1">Submit<span class="ajax_load" id="basic_info_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                    <button type="submit" id="submit" class="btn-new-1">Submit<span class="ajax_load" id="basic_info_ajax_load"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                 </p>
             </form>
     </div>

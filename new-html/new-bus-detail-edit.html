@@ -680,7 +680,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="n-images/detail/about.png"><span>Business Portfolio</span><a href="#" data-target="#bus-portfolio" data-toggle="modal" class="pull-right"><img src="n-images/detail/edit.png"></a>
+									<img class="cus-width" src="n-images/detail/about.png"><span>Business Portfolio</span><a href="#" data-target="#bus-portfolio" data-toggle="modal" class="pull-right"><img src="n-images/detail/detail-add.png"></a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group" id="project-accordion" role="tablist" aria-multiselectable="true">
@@ -764,7 +764,7 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="n-images/detail/about.png"><span>Key Members Information</span><a href="#" data-target="#member-info" data-toggle="modal" class="pull-right"><img src="n-images/detail/edit.png"></a>
+									<img class="cus-width" src="n-images/detail/about.png"><span>Key Members Information</span><a href="#" data-target="#member-info" data-toggle="modal" class="pull-right"><img src="n-images/detail/detail-add.png"></a>
 								</div>
 								<div class="dtl-dis dis-accor">
 									<div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
@@ -1306,33 +1306,55 @@
 							<label>Business Name</label>
 							<input type="text" placeholder="Business Name">
 						</div>
-						<div class="form-group">
-							<label>Business Type </label>
-							<input type="text" placeholder="Business Type ">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Business Type </label>
+									<span class="span-select">
+										<select>
+											<option>Business Type </option>
+											<option>Business Type </option>
+											<option>Business Type </option>
+										</select>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Business Category / Industry </label>
+									<span class="span-select">
+										<select>
+											<option>Business Category</option>
+											<option>Business Category</option>
+											<option>Business Category</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							
 						</div>
+						
+						
 						<div class="form-group">
-							<label>Business Category / Industry </label>
-							<span class="span-select">
-								<select>
-									<option>Business Category</option>
-									<option>Business Category</option>
-									<option>Business Category</option>
-								</select>
-							</span>
-						</div>
-						<div class="form-group big-textarea">
 							<label>Business Description </label>
 							<textarea type="text" placeholder="Business Description" class="big-"></textarea>
 						</div>
 						
 						<div class="row">
-							<div class="col-md-6 col-sm-6">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
 									<label>Total Employees </label>
-									<input type="text" placeholder="Total Employees">
+									<span class="span-select">
+										<select>
+											<option>1 to 10</option>
+											<option>10 to 30</option>
+											<option>30 to 50</option>
+											<option>More than 50</option>
+										</select>
+									</span>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
 								<div class="form-group">
 									<label>Year Founded / Established</label>
 									<span class="span-select">
@@ -1346,13 +1368,26 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Specialties / Extra Benefits / Ambience / Facilities Tags </label>
-							<input type="text" placeholder="Extra Benefits-tags">
-						</div>
-						<div class="form-group">
-							<label>Payment Mode Accepted</label>
-							<input type="text" placeholder="Payment Mode Accepted">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Specialties / Extra Benefits / Facilities</label>
+									<input type="text" placeholder="Extra Benefits-tags">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Payment Mode Accepted</label>
+									<span class="span-select">
+										<select>
+											<option>Cash  </option>
+											<option>Online </option>
+											<option>Card </option>
+											<option>Wallate</option>
+										</select>
+									</span>
+								</div>
+							</div>
 						</div>
 						<div class="form-group">
 							<label>Business Keywords</label>
@@ -1442,20 +1477,32 @@
 							<label>Name</label>
 							<input type="text" placeholder="Name">
 						</div>
-						<div class="form-group">
-							<label>Gender </label>
-							<span class="span-select">
-								<select>
-									<option>Male</option>
-									<option>Female</option>
-									<option>Other</option>
-								</select>
-							</span>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Job Title</label>
+									<input type="text" placeholder="Job Title">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6 fw-479">
+								<div class="form-group">
+									<label>Gender </label>
+									<span class="span-select">
+										<select>
+											<option>Male</option>
+											<option>Female</option>
+											<option>Other</option>
+										</select>
+									</span>
+								</div>
+							</div>
+							
 						</div>
 						<div class="form-group">
-							<label>Job Title</label>
-							<input type="text" placeholder="Job Title">
+							<label>Biography</label>
+							<textarea type="text" placeholder="Biography"></textarea>
 						</div>
+						
 						<div class="row pb20">
 							<div class="">
 								<div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
@@ -1486,13 +1533,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group big-textarea">
-							<label>Biography</label>
-							<textarea type="text" placeholder="Biography"></textarea>
-						</div>
+						
 						<div class="form-group">
 							<label class="upload-file">
-								Upload File () <input type="file">
+								Upload Photo of key member <input type="file">
 							</label>
 						</div>
 					</div>
@@ -1629,21 +1673,7 @@
 							</div>
 							
 						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Fax Number</label>
-									<input type="text" placeholder="Fax Number">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Toll Free Number</label>
-									<input type="text" placeholder="Toll Free Number">
-								</div>
-							</div>
-							
-						</div>
+						
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
@@ -1655,6 +1685,21 @@
 								<div class="form-group">
 									<label>Website</label>
 									<input type="text" placeholder="Website">
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Fax Number</label>
+									<input type="text" placeholder="Fax Number">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Toll Free Number</label>
+									<input type="text" placeholder="Toll Free Number">
 								</div>
 							</div>
 							
@@ -1891,19 +1936,16 @@
 					<div class="dtl-dis">
 						<div class="form-group">
 							<label>Description</label>
-							<textarea type="text" placeholder="Business Description"></textarea>
-						</div>
-						<div class="form-group">
-							<label>Describe your business struggle story</label>
 							<textarea type="text" placeholder="Describe your business struggle story"></textarea>
 						</div>
-						<div class="form-group big-textarea">
+						
+						<div class="form-group">
 							<label>What differentiate you from your competitiors</label>
 							<textarea type="text" placeholder="What differentiate you from your competitiors"></textarea>
 						</div>
 						<div class="form-group">
 							<label class="upload-file">
-								Upload File () <input type="file">
+								Upload Photo<input type="file">
 							</label>
 						</div>
 						

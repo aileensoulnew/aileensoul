@@ -2911,7 +2911,24 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 .verify-body-inner .middle-section{padding-top:115px;}
 .verify{background:#f6f6f6; padding:10px;}
 .email-verify .email-img img{width:33px;}
-
+.common-form_border{border-radius:20px; border:0px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
+.all-edit-form .common-form h3{border-top-left-radius: 20px; border-top-right-radius: 20px; background:transparent;}
+.common-form form{background:transparent;}
+.form-radius-new .form-box{border-radius:20px; border:0px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
+.form-radius-new .form-box h2{color:#5c5c5c; -webkit-text-fill-color:inherit; background:inherit;}
+/***  new buttons  ***/
+.btn-new-1{border-radius: 20px; background:#fff; border:1px solid #5c5c5c; color: #5c5c5c; padding: 6px 25px; text-align: center; display: inline-block; font-weight: bold; font-family: Arial; margin: 0 5px;}
+.btn-new-1:hover{background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    background-color: #e9e9e9;
+    color: #5c5c5c;}
+.btn-new-1:focus{outline:none;}
+	
+/***  end new buttons  ***/
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 	.infeed {height: 450px;}
