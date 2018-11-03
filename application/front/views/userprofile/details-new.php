@@ -146,7 +146,7 @@
                                     <span>Lorem ipsum its a dummy text and its user to for all.</span>
                                 </div>
                             </div>
-                            <div class="dtl-dis dis-accor" ng-if="user_experience.length > 1">
+                            <div class="dtl-dis dis-accor" ng-if="user_experience.length > 0">
                                 <div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default" ng-repeat="user_exp in user_experience" ng-if="$index <= view_more_exp">
                                         <div class="panel-heading" role="tab" id="exp-{{$index}}">
@@ -202,7 +202,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-exp" class="about-more">
+                                    <div id="view-more-exp" class="about-more" ng-if="user_experience.length > 3">
                                         <a href="#" ng-click="exp_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -230,7 +230,7 @@
                                     <span>Lorem ipsum its a dummy text and its user to for all.</span>
                                 </div>
                             </div>
-                            <div class="dtl-dis dis-accor" ng-if="user_education.length > 1">
+                            <div class="dtl-dis dis-accor" ng-if="user_education.length > 0">
                                 <div class="panel-group" id="edu-accordion" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default" ng-repeat="user_edu in user_education" ng-if="$index <= view_more_edu">
                                         <div class="panel-heading" role="tab" id="edu-{{$index}}">
@@ -284,7 +284,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-edu" class="about-more">
+                                    <div id="view-more-edu" class="about-more" ng-if="user_education.length > 3">
                                         <a href="#" ng-click="edu_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -380,7 +380,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-proj" class="about-more">
+                                    <div id="view-more-proj" class="about-more" ng-if="user_projects.length > 3">
                                         <a href="#" ng-click="proj_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -455,7 +455,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-addicourse" class="about-more" ng-if="user_addicourse.length > '2'">
+                                    <div id="view-more-addicourse" class="about-more" ng-if="user_addicourse.length > '3'">
                                         <a href="#" ng-click="ac_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -530,7 +530,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-activity" class="about-more" ng-if="user_activity.length > '2'">
+                                    <div id="view-more-activity" class="about-more" ng-if="user_activity.length > '3'">
                                         <a href="#" ng-click="activity_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -603,7 +603,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-award" class="about-more" ng-if="user_activity.length > '2'">
+                                    <div id="view-more-award" class="about-more" ng-if="user_award.length > '3'">
                                         <a href="#" ng-click="award_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -684,7 +684,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-publication" class="about-more" ng-if="user_publication.length > '2'">
+                                    <div id="view-more-publication" class="about-more" ng-if="user_publication.length > '3'">
                                         <a href="#" ng-click="publication_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -769,7 +769,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-patent" class="about-more" ng-if="user_patent.length > '2'">
+                                    <div id="view-more-patent" class="about-more" ng-if="user_patent.length > '3'">
                                         <a href="#" ng-click="patent_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -847,7 +847,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-research" class="about-more" ng-if="user_patent.length > '2'">
+                                    <div id="view-more-research" class="about-more" ng-if="user_research.length > '3'">
                                         <a href="#" ng-click="research_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -952,7 +952,7 @@
             <!-- Idol Start -->
             <div id="idol-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/inspration.png"><span>Idol</span><a href="#" data-target="#inspiration" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/inspration.png"><span>Idol</span><a href="#" data-target="#inspiration" data-toggle="modal" ng-click="reset_user_idols();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
                 <div id="idol-loader">
                     <div class="text-center">
@@ -969,9 +969,9 @@
                     <div class="dtl-dis idol-box" ng-if="user_idols.length > '0'">
                         <ul>
                             <li ng-repeat="user_idol in user_idols" ng-if="$index <= view_more_idol">
-                                <img src="<?php echo USER_IDOL_UPLOAD_URL; ?>{{user_idol.user_links_pic}}">
-                                <span>{{user_idol.user_links_name}}</span>
-                                <a href="javascript:void(0);" role="button" ng-click="" class="pull-right">
+                                <img src="<?php echo USER_IDOL_UPLOAD_URL; ?>{{user_idol.user_idol_pic}}">
+                                <span>{{user_idol.user_idol_name}}</span>
+                                <a href="javascript:void(0);" role="button" ng-click="edit_user_idols($index)" class="pull-right">
                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                 </a>
                             </li>
@@ -1015,7 +1015,7 @@
 </div>
 
 <!---  model About  -->
-<div style="display:none;" class="modal fade dtl-modal" id="detail-about" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div style="display:none;" class="modal fade dtl-modal" id="detail-about" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <button type="button" class="modal-close" data-dismiss="modal">×</button>
@@ -1316,11 +1316,33 @@
                         </div>
                     </div>
                     <div class="dtl-btn">
-                        <!-- <a href="#" class="save"><span>Save</span></a> -->
                         <a id="save_user_exp" href="#" ng-click="save_user_exp()" class="save"><span>Save</span></a>
                         <img id="user_exp_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade message-box biderror" id="delete-exp-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete work experience ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="exp-delete-btn">
+                                <a id="delete_user_exp" href="#" ng-click="delete_user_exp()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_exp_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
@@ -1454,6 +1476,29 @@
                         <img id="edu_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade message-box biderror" id="delete-edu-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete educational information ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="edu-delete-btn">
+                                <a id="delete_user_edu" href="#" ng-click="delete_user_edu()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_edu_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
@@ -1610,7 +1655,29 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade message-box biderror" id="delete-project-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete project ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="project-delete-btn">
+                                <a id="delete_user_project" href="#" ng-click="delete_user_project()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_project_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!---  model Additional Course  -->
 <div style="display:none;" class="modal fade dtl-modal" id="additional-course" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1702,6 +1769,29 @@
             </div>  
 
 
+        </div>
+    </div>
+</div>
+<div class="modal fade message-box biderror" id="delete-addicourse-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete additional course ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="addicourse-delete-btn">
+                                <a id="delete_user_addicourse" href="#" ng-click="delete_user_addicourse()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_addicourse_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
+            </div>
         </div>
     </div>
 </div>
@@ -1798,6 +1888,29 @@
         </div>
     </div>
 </div>
+<div class="modal fade message-box biderror" id="delete-activity-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete extracurricular activity ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="activity-delete-btn">
+                                <a id="delete_user_activity" href="#" ng-click="delete_user_activity()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_activity_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!---  model Achievements & Awards  -->
 <div style="display:none;" class="modal fade dtl-modal" id="Achiv-awards" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1874,6 +1987,29 @@
                     <img id="user_award_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                 </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade message-box biderror" id="delete-award-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete achievement & award ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="award-delete-btn">
+                                <a id="delete_user_award" href="#" ng-click="delete_user_award()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_award_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
@@ -1963,6 +2099,29 @@
                     <img id="user_publication_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                 </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade message-box biderror" id="delete-publication-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete publication ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="publication-delete-btn">
+                                <a id="delete_user_publication" href="#" ng-click="delete_user_publication()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_publication_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
@@ -2066,6 +2225,29 @@
                         <img id="user_patent_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade message-box biderror" id="delete-patent-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete patent ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="patent-delete-btn">
+                                <a id="delete_user_patent" href="#" ng-click="delete_user_patent()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_patent_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
             </div>
         </div>
     </div>
@@ -2186,6 +2368,29 @@
         </div>
     </div>
 </div>
+<div class="modal fade message-box biderror" id="delete-research-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete research ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="research-delete-btn">
+                                <a id="delete_user_research" href="#" ng-click="delete_user_research()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_research_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!---  model Skills  -->
 <div style="display:none;" class="modal fade dtl-modal" id="skills" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -2250,6 +2455,29 @@
                         <img id="user_idol_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade message-box biderror" id="delete-idol-model" role="dialog">
+    <div class="modal-dialog modal-lm">
+        <div class="modal-content">
+            <button type="button" class="modal-close" data-dismiss="modal">&times;</button>         
+            <div class="modal-body">
+                <span class="mes">
+                    <div class='pop_content'>
+                        <span>Are you sure you want to delete idol ?</span>
+                        <p class='poppup-btns pt20'>
+                            <span id="idol-delete-btn">
+                                <a id="delete_user_idol" href="#" ng-click="delete_user_idol()" class="btn1">
+                                    <span>Delete</span>
+                                </a> 
+                                <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
+                            </span>
+                            <img id="user_idol_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        </p>
+                    </div>
+                </span>
             </div>
         </div>
     </div>

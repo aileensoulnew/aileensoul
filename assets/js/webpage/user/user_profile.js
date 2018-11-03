@@ -4154,7 +4154,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.get_user_research();
 
-    $scope.view_more_research = 1;
+    $scope.view_more_research = 2;
     $scope.research_view_more = function(){
         $scope.view_more_research = $scope.user_research.length;
         $("#view-more-research").hide();
@@ -4179,6 +4179,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#research_file_error").hide();
         $("#research_other_field_div").hide();
         $("#research_doc_prev").remove();
+        $("#delete_user_research_modal").remove();
         $("#research_form")[0].reset();
     };
     $scope.edit_user_research = function(index){
@@ -4223,8 +4224,51 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
         setTimeout(function(){  
             $scope.research_form.validate();
-        },1000); 
+        },1000);
+        var delete_btn = '<a id="delete_user_research_modal" href="#" data-target="#delete-research-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_research_loader"));
+        $compile(contentbtn)($scope);
         $("#research").modal("show");
+    };
+
+    $scope.delete_user_research = function(){
+        $("#delete_user_research").attr("style","pointer-events:none;display:none;");
+        $("#user_research_del_loader").show();
+        $("#research-delete-btn").hide();
+        if($scope.edit_research != 0)
+        {
+            var expdata = $.param({'research_id': $scope.edit_research});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_research',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_research = result.user_research;                        
+                        $("#delete-research-model").modal('hide');
+                        $("#research").modal('hide');
+                        $("#delete_user_research").removeAttr("style");
+                        $("#user_research_del_loader").hide();
+                        $("#research-delete-btn").show();                        
+                        $scope.reset_research_form();
+                    }
+                    else
+                    {
+                        $("#delete-research-model").modal('hide');
+                        $("#research").modal('hide');
+                        $("#delete_user_research").removeAttr("style");
+                        $("#user_research_del_loader").hide();
+                        $("#research-delete-btn").show();
+                        $scope.reset_research_form();
+                    }
+                }
+            });
+        }
     };
     //Research End
 
@@ -4424,7 +4468,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.idol_validate = {
         rules: {
             user_idol_file: {
-                required: true,
+                required: {
+                    depends: function(element) {
+                        return $scope.edit_idols == 0 ? true : false;
+                    }
+                },
             },
             user_idol_name: {
                 required: true,
@@ -4453,6 +4501,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#user_idol_loader").show();
             $("#user_idol_save").attr("style","pointer-events:none;display:none;");
 
+            idol_formdata.append('edit_idols', $scope.edit_idols);
+            idol_formdata.append('user_idol_pic_old', $scope.user_idol_pic_old);
             idol_formdata.append('user_idol_name', $('#user_idol_name').val());
             $http.post(base_url + 'userprofile_page/save_user_idol', idol_formdata,
             {
@@ -4468,7 +4518,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_idol_save").removeAttr("style");
                         $("#user_idol_loader").hide();
                         $("#idol_form")[0].reset();
-                        $("#inspiration").modal('hide');
+                        $("#inspiration").modal('hide');                        
                     }
                     else
                     {
@@ -4503,10 +4553,96 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.get_user_idol();
 
-    $scope.view_more_idol = 1;
+    $scope.view_more_idol = 2;
     $scope.idol_view_more = function(){
         $scope.view_more_idol = $scope.user_idols.length;
         $("#view-more-idol").hide();
+    };
+
+    $scope.reset_user_idols = function(){        
+        $scope.edit_idols = 0;
+        $scope.user_idol_pic_old = "";
+        idol_formdata = new FormData();
+        $("#research_doc_prev").remove();
+        $("#delete_user_idol_modal").remove();
+        $("#idol_form")[0].reset();
+    };
+
+    $scope.edit_user_idols = function(index){
+        $scope.reset_user_idols();
+        var idols_arr = $scope.user_idols[index];
+        console.log(idols_arr);
+        $scope.edit_idols = idols_arr.id_idol;
+        
+        $("#user_idol_name").val(idols_arr.user_idol_name);
+        
+        var idol_pic_name = idols_arr.user_idol_pic;
+        $scope.user_idol_pic_old = idol_pic_name;
+        if(idol_pic_name.trim() != "")
+        {            
+            var filename_arr = idol_pic_name.split('.');
+            $("#research_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img style="width: 100px;" src="'+user_idol_upload_url+idol_pic_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
+            }
+
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#user_idol_file_error"));
+            $compile(contentTr)($scope);
+        }
+        setTimeout(function(){  
+            $scope.research_form.validate();
+        },1000);
+        var delete_btn = '<a id="delete_user_idol_modal" href="#" data-target="#delete-idol-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_idol_loader"));
+        $compile(contentbtn)($scope);
+        $("#inspiration").modal("show");
+    };
+
+    $scope.delete_user_idol = function(){
+        $("#delete_user_idol").attr("style","pointer-events:none;display:none;");
+        $("#user_idol_del_loader").show();
+        $("#idol-delete-btn").hide();
+        if($scope.edit_idols != 0)
+        {
+            var expdata = $.param({'idol_id': $scope.edit_idols});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_idol',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_idols = result.user_idols;
+                        $("#delete-idol-model").modal('hide');
+                        $("#inspiration").modal('hide');
+                        $("#delete_user_idol").removeAttr("style");
+                        $("#user_idol_del_loader").hide();
+                        $("#idol-delete-btn").show();                        
+                        $scope.reset_user_idols();
+                    }
+                    else
+                    {
+                        $("#delete-idol-model").modal('hide');
+                        $("#inspiration").modal('hide');
+                        $("#delete_user_idol").removeAttr("style");
+                        $("#user_idol_del_loader").hide();
+                        $("#idol-delete-btn").show();
+                        $scope.reset_user_idols();
+                    }
+                }
+            });
+        }
     };
     //User Idol End
 
@@ -4769,7 +4905,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_publication();
-    $scope.view_more_publication = 1;
+    $scope.view_more_publication = 2;
     $scope.publication_view_more = function(){
         $scope.view_more_publication = $scope.user_publication.length;
         $("#view-more-publication").hide();
@@ -4782,11 +4918,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#publication_year").html("");
         $("#pub_file_error").hide();        
         $("#pub_file_prev").remove();
+        $("#delete_user_publication_modal").remove();
         $("#publication_form")[0].reset();
     };
     $scope.edit_user_publication = function(index){
-        $scope.reset_publication_form();
-        console.log($scope.user_publication[index]);
+        $scope.reset_publication_form();        
         var publication_arr = $scope.user_publication[index];
         $scope.edit_publication = publication_arr.id_publication;
         $("#pub_title").val(publication_arr.pub_title);
@@ -4824,8 +4960,51 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
         setTimeout(function(){  
             $scope.publication_form.validate();
-        },1000); 
+        },1000);
+        var delete_btn = '<a id="delete_user_publication_modal" href="#" data-target="#delete-publication-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_publication_loader"));
+        $compile(contentbtn)($scope);
         $("#publication").modal("show");
+    };
+
+    $scope.delete_user_publication = function(){
+        $("#delete_user_publication").attr("style","pointer-events:none;display:none;");
+        $("#user_publication_del_loader").show();
+        $("#publication-delete-btn").hide();
+        if($scope.edit_publication != 0)
+        {
+            var expdata = $.param({'publication_id': $scope.edit_publication});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_publication',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_publication = result.user_publication;
+                        $("#delete-publication-model").modal('hide');
+                        $("#publication").modal('hide');
+                        $("#delete_user_publication").removeAttr("style");
+                        $("#user_publication_del_loader").hide();
+                        $("#publication-delete-btn").show();                        
+                        $scope.reset_publication_form();
+                    }
+                    else
+                    {
+                        $("#delete-publication-model").modal('hide');
+                        $("#publication").modal('hide');
+                        $("#delete_user_publication").removeAttr("style");
+                        $("#user_publication_del_loader").hide();
+                        $("#publication-delete-btn").show();
+                        $scope.reset_publication_form();
+                    }
+                }
+            });
+        }
     };
     // User Publication End
 
@@ -5098,7 +5277,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_patent();
-    $scope.view_more_patent = 1;
+    $scope.view_more_patent = 2;
     $scope.patent_view_more = function(){
         $scope.view_more_patent = $scope.user_patent.length;
         $("#view-more-patent").hide();
@@ -5109,6 +5288,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#patent_day").html("");
         $("#patent_year").html("");
         $("#patent_doc_prev").remove();
+        $("#delete_user_patent_modal").remove();
         $("#patent_form")[0].reset();
     };
     $scope.edit_user_patent = function(index){
@@ -5151,8 +5331,52 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
         setTimeout(function(){  
             $scope.patent_form.validate();
-        },1000); 
+        },1000);
+
+        var delete_btn = '<a id="delete_user_patent_modal" href="#" data-target="#delete-patent-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_patent_loader"));
+        $compile(contentbtn)($scope);
         $("#patent").modal("show");
+    };
+
+    $scope.delete_user_patent = function(){
+        $("#delete_user_patent").attr("style","pointer-events:none;display:none;");
+        $("#user_patent_del_loader").show();
+        $("#patent-delete-btn").hide();
+        if($scope.edit_patent != 0)
+        {
+            var expdata = $.param({'patent_id': $scope.edit_patent});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_patent',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_patent = result.user_patent;
+                        $("#delete-patent-model").modal('hide');
+                        $("#patent").modal('hide');
+                        $("#delete_user_patent").removeAttr("style");
+                        $("#user_patent_del_loader").hide();
+                        $("#patent-delete-btn").show();                        
+                        $scope.reset_patent_form();
+                    }
+                    else
+                    {
+                        $("#delete-patent-model").modal('hide');
+                        $("#patent").modal('hide');
+                        $("#delete_user_patent").removeAttr("style");
+                        $("#user_patent_del_loader").hide();
+                        $("#patent-delete-btn").show();
+                        $scope.reset_patent_form();
+                    }
+                }
+            });
+        }
     };
     //User Patent End
 
@@ -5403,7 +5627,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_award();
-    $scope.view_more_award = 1;
+    $scope.view_more_award = 2;
     $scope.award_view_more = function(){
         $scope.view_more_award = $scope.user_award.length;
         $("#view-more-award").hide();
@@ -5416,11 +5640,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#award_year").html("");
         $("#award_file_error").hide();        
         $("#award_file_prev").remove();
+        $("#delete_user_award_modal").remove();
         $("#award_form")[0].reset();
     };
     $scope.edit_user_award = function(index){
         $scope.reset_awards_form();
-        console.log($scope.user_award[index]);
         var award_arr = $scope.user_award[index];
         $scope.edit_awards = award_arr.id_award;
         $("#award_title").val(award_arr.award_title);
@@ -5456,8 +5680,56 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
         setTimeout(function(){  
             $scope.award_form.validate();
-        },1000); 
+        },1000);
+
+        var delete_btn = '<a id="delete_user_award_modal" href="#" data-target="#delete-award-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_award_loader"));
+        $compile(contentbtn)($scope);
         $("#Achiv-awards").modal("show");
+    };
+
+    $scope.delete_user_award = function(){
+        $("#delete_user_award").attr("style","pointer-events:none;display:none;");
+        $("#user_award_del_loader").show();
+        $("#award-delete-btn").hide();
+        if($scope.edit_awards != 0)
+        {
+            var expdata = $.param({'award_id': $scope.edit_awards});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_award',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_award = result.user_award;
+                        $("#delete-award-model").modal('hide');
+                        $("#Achiv-awards").modal('hide');
+                        $("#delete_user_award").removeAttr("style");
+                        $("#user_award_del_loader").hide();
+                        $("#award-delete-btn").show();                        
+                        $scope.reset_awards_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-award-model").modal('hide');
+                        $("#Achiv-awards").modal('hide');
+                        $("#delete_user_award").removeAttr("style");
+                        $("#user_award_del_loader").hide();
+                        $("#award-delete-btn").show();
+                        $scope.reset_awards_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
     };
     //User Achieve & Award End
 
@@ -5696,7 +5968,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_activity();
-    $scope.view_more_activity = 1;
+    $scope.view_more_activity = 2;
     $scope.activity_view_more = function(){
         $scope.view_more_activity = $scope.user_activity.length;
         $("#view-more-activity").hide();
@@ -5710,14 +5982,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#activity_e_month").html('');
         $("#activity_file_error").hide();        
         $("#activity_file_prev").remove();
+        $("#delete_user_activity_modal").remove();
         $('#activity_file').val('');
         $("#activity_form")[0].reset();
         activity_formdata = new FormData();
     };
     $scope.edit_user_activity = function(index){
         $scope.reset_activity_form();
-        var activity_arr = $scope.user_activity[index];
-        console.log(activity_arr);
+        var activity_arr = $scope.user_activity[index];        
         $scope.edit_activity = activity_arr.id_extra_activity;
         $("#activity_participate").val(activity_arr.activity_participate);
         $("#activity_org").val(activity_arr.activity_org);
@@ -5759,8 +6031,55 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
         setTimeout(function(){  
             $scope.activity_form.validate();
-        },1000); 
+        },1000);
+        var delete_btn = '<a id="delete_user_activity_modal" href="#" data-target="#delete-activity-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_activity_loader"));
+        $compile(contentbtn)($scope);
         $("#extra-activity").modal("show");
+    };
+
+    $scope.delete_user_activity = function(){
+        $("#delete_user_activity").attr("style","pointer-events:none;display:none;");
+        $("#user_activity_del_loader").show();
+        $("#activity-delete-btn").hide();
+        if($scope.edit_activity != 0)
+        {
+            var expdata = $.param({'activity_id': $scope.edit_activity});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_activity',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_activity = result.user_activity;
+                        $("#delete-activity-model").modal('hide');
+                        $("#extra-activity").modal('hide');
+                        $("#delete_user_activity").removeAttr("style");
+                        $("#user_activity_del_loader").hide();
+                        $("#activity-delete-btn").show();                        
+                        $scope.reset_activity_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-activity-model").modal('hide');
+                        $("#extra-activity").modal('hide');
+                        $("#delete_user_activity").removeAttr("style");
+                        $("#user_activity_del_loader").hide();
+                        $("#activity-delete-btn").show();
+                        $scope.reset_activity_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
     };
     //Extracurricular Activity End
 
@@ -5996,7 +6315,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_addicourse();
-    $scope.view_more_ac = 1;
+    $scope.view_more_ac = 2;
     $scope.ac_view_more = function(){
         $scope.view_more_ac = $scope.user_addicourse.length;
         $("#view-more-addicourse").hide();
@@ -6010,14 +6329,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#addicourse_e_month").html('');
         $("#addicourse_file_error").hide();        
         $("#addicourse_file_prev").remove();
+        $("#delete_user_addicourse_modal").remove();
         $('#addicourse_file').val('');
         $("#addicourse_form")[0].reset();
         addicourse_formdata = new FormData();
     };
     $scope.edit_user_addicourse = function(index){
         $scope.reset_addicourse_form();
-        var addicourse_arr = $scope.user_addicourse[index];
-        console.log(addicourse_arr);
+        var addicourse_arr = $scope.user_addicourse[index];        
         $scope.edit_addicourse = addicourse_arr.id_addicourse;
         $("#addicourse_name").val(addicourse_arr.addicourse_name);
         $("#addicourse_org").val(addicourse_arr.addicourse_org);
@@ -6060,7 +6379,54 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.addicourse_form.validate();
         },1000); 
+        var delete_btn = '<a id="delete_user_addicourse_modal" href="#" data-target="#delete-addicourse-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_addicourse_loader"));
+        $compile(contentbtn)($scope);
         $("#additional-course").modal("show");
+    };
+
+    $scope.delete_user_addicourse = function(){
+        $("#delete_user_addicourse").attr("style","pointer-events:none;display:none;");
+        $("#user_addicourse_del_loader").show();
+        $("#addicourse-delete-btn").hide();
+        if($scope.edit_addicourse != 0)
+        {
+            var expdata = $.param({'addicourse_id': $scope.edit_addicourse});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_addicourse',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_addicourse = result.user_addicourse;                        
+                        $("#delete-addicourse-model").modal('hide');
+                        $("#additional-course").modal('hide');
+                        $("#delete_user_addicourse").removeAttr("style");
+                        $("#user_addicourse_del_loader").hide();
+                        $("#addicourse-delete-btn").show();                        
+                        $scope.reset_addicourse_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-addicourse-model").modal('hide');
+                        $("#additional-course").modal('hide');
+                        $("#delete_user_addicourse").removeAttr("style");
+                        $("#user_addicourse_del_loader").hide();
+                        $("#addicourse-delete-btn").show();
+                        $scope.reset_addicourse_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
     };
     //Additional Course End
 
@@ -6438,6 +6804,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         // $scope.exp_e_year = '';
         // $scope.exp_e_month = '';
         $scope.exp_isworking = '';
+        $("#delete_user_exp_modal").remove();
         $("#exp_doc_prev").remove();
         $("#experience_form")[0].reset();
     };
@@ -6465,7 +6832,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_experience();
-    $scope.view_more_exp = 1;
+    $scope.view_more_exp = 2;
     $scope.exp_view_more = function(){
         $scope.view_more_exp = $scope.user_experience.length;
         $("#view-more-exp").hide();
@@ -6579,8 +6946,58 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $compile(contentTr)($scope);
         setTimeout(function(){  
             $scope.experience_form.validate();
-        },1000); 
+        },1000);
+        var delete_btn = '<a id="delete_user_exp_modal" href="#" data-target="#delete-exp-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#user_exp_loader"));
+        $compile(contentbtn)($scope);
         $("#experience").modal("show");
+    };
+
+    $scope.delete_user_exp = function(){
+        $("#delete_user_exp").attr("style","pointer-events:none;display:none;");
+        $("#user_exp_del_loader").show();
+        $("#exp-delete-btn").hide();
+        if($scope.edit_exp != 0)
+        {
+            var expdata = $.param({'exp_id': $scope.edit_exp});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_experience',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        user_experience = result.user_experience;
+                        $scope.user_experience = user_experience;
+                        $scope.exp_years = result.exp_years;
+                        $scope.exp_months = result.exp_months;
+                        $("#delete-exp-model").modal('hide');
+                        $("#experience").modal('hide');
+                        $("#delete_user_exp").removeAttr("style");
+                        $("#user_exp_del_loader").hide();
+                        $("#exp-delete-btn").show();
+                        $scope.reset_exp_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-exp-model").modal('hide');
+                        $("#experience").modal('hide');
+                        $("#delete_user_exp").removeAttr("style");
+                        $("#user_exp_del_loader").hide();
+                        $("#exp-delete-btn").show();
+                        $scope.reset_exp_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
     };
     
     //Experience End
@@ -6910,7 +7327,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_project();
-    $scope.view_more_proj = 1;
+    $scope.view_more_proj = 2;
     $scope.proj_view_more = function(){
         $scope.view_more_proj = $scope.user_projects.length;
         $("#view-more-proj").hide();
@@ -6932,13 +7349,13 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#project_file_prev").remove();
         $('#project_file').val('');
         $("#project_form")[0].reset();
+        $("#delete_user_project_modal").remove();
         project_formdata = new FormData();
     };
     $scope.edit_user_project = function(index){
         $scope.reset_project_form();
         var projects_arr = $scope.user_projects[index];
-        console.log(projects_arr);
-
+        
         $scope.edit_project = projects_arr.id_projects;
         $("#project_title").val(projects_arr.project_title);
         $("#project_team").val(projects_arr.project_team);
@@ -7017,9 +7434,57 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $compile(contentTr)($scope);
         }
         setTimeout(function(){  
-            $scope.edu_form.validate();
-        },1000); 
+            $scope.project_form.validate();
+        },1000);
+
+        var delete_btn = '<a id="delete_user_project_modal" href="#" data-target="#delete-project-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#prject_loader"));
+        $compile(contentbtn)($scope);
         $("#dtl-project").modal("show");
+    };
+
+    $scope.delete_user_project = function(){
+        $("#delete_user_project").attr("style","pointer-events:none;display:none;");
+        $("#user_project_del_loader").show();
+        $("#project-delete-btn").hide();
+        if($scope.edit_project != 0)
+        {
+            var expdata = $.param({'project_id': $scope.edit_project});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_project',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_projects = result.user_projects;                        
+                        $("#delete-project-model").modal('hide');
+                        $("#dtl-project").modal('hide');
+                        $("#delete_user_project").removeAttr("style");
+                        $("#user_project_del_loader").hide();
+                        $("#project-delete-btn").show();                        
+                        $scope.reset_project_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-project-model").modal('hide');
+                        $("#dtl-project").modal('hide');
+                        $("#delete_user_project").removeAttr("style");
+                        $("#user_project_del_loader").hide();
+                        $("#project-delete-btn").show();
+                        $scope.reset_project_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
     };
     //Project End
 
@@ -7356,7 +7821,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         });
     }
     $scope.get_user_education();
-    $scope.view_more_edu = 1;
+    $scope.view_more_edu = 2;
     $scope.edu_view_more = function(){
         $scope.view_more_edu = $scope.user_education.length;
         $("#view-more-edu").hide();
@@ -7375,14 +7840,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#edu_e_month").html('');
         $("#edu_file_error").hide();        
         $("#edu_file_prev").remove();
+        $("#delete_user_edu_modal").remove();
         $('#edu_file').val('');
         $("#edu_form")[0].reset();
         edu_formdata = new FormData();
     };
     $scope.edit_user_edu = function(index){
         $scope.reset_edu_form();
-        var edu_arr = $scope.user_education[index];
-        console.log(edu_arr);
+        var edu_arr = $scope.user_education[index];        
         $scope.edit_edu = edu_arr.id_education;
         $("#edu_school_college").val(edu_arr.edu_school_college);
         $scope.edu_university = edu_arr.edu_university;
@@ -7446,7 +7911,55 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.edu_form.validate();
         },1000); 
+
+        var delete_btn = '<a id="delete_user_edu_modal" href="#" data-target="#delete-edu-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var contentbtn = angular.element(delete_btn);
+        contentbtn.insertAfter($("#edu_loader"));
+        $compile(contentbtn)($scope);
         $("#educational-info").modal("show");
+    };
+
+    $scope.delete_user_edu = function(){
+        $("#delete_user_edu").attr("style","pointer-events:none;display:none;");
+        $("#user_edu_del_loader").show();
+        $("#exp-delete-btn").hide();
+        if($scope.edit_edu != 0)
+        {
+            var expdata = $.param({'edu_id': $scope.edit_edu});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/delete_user_education',
+                data: expdata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (result) {
+                if (result) {
+                    result = result.data;
+                    if(result.success == '1')
+                    {
+                        $scope.user_education = result.user_education;
+                        $("#delete-edu-model").modal('hide');
+                        $("#educational-info").modal('hide');
+                        $("#delete_user_edu").removeAttr("style");
+                        $("#user_edu_del_loader").hide();
+                        $("#edu-delete-btn").show();                        
+                        $scope.reset_edu_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                    else
+                    {
+                        $("#delete-edu-model").modal('hide');
+                        $("#educational-info").modal('hide');
+                        $("#delete_user_edu").removeAttr("style");
+                        $("#user_edu_del_loader").hide();
+                        $("#edu-delete-btn").show();
+                        $scope.reset_edu_form();
+                        // $scope.exp_designation = [];
+                        // $("#experience_form")[0].reset();                        
+                    }
+                }
+            });
+        }
     };
     //Education End
 
@@ -7457,6 +7970,22 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $("#social-link-move").appendTo($(".social-link-move"));
             $("#idol-move").appendTo($(".idol-move"));
         }
+
+        $('.modal').on('hidden.bs.modal', function () {
+            //If there are any visible            
+            if($(".modal:visible").length > 0) {
+                //Slap the class on it (wait a moment for things to settle)
+                setTimeout(function() {
+                    $('body').addClass('modal-open');
+                },200);
+            }
+            else
+            {
+                setTimeout(function() {
+                    $('body').removeClass('modal-open');
+                },200);
+            }
+        });
 
         var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
           containerElem.classList.add('masonry-layout', 'columns-' + columns);
@@ -8571,4 +9100,3 @@ function setCursotToEnd(el)
         textRange.select();
     }
 }
-

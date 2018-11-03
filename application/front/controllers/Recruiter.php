@@ -2202,7 +2202,7 @@ class Recruiter extends MY_Controller {
 						} else {
 							$post_name = $post['post_name'];
 						}
-
+						
 						if ($post_name != '') {
 							$text = strtolower($this->common->clean($post_name));
 						} else {
@@ -2217,7 +2217,7 @@ class Recruiter extends MY_Controller {
 
 						$rec_post .= '<div class="post-img">
 						
-						<a href="' . base_url() . substr($text,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						<a href="' . base_url() . substr($text,0,200) . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						if ($cache_time_1) {
 
 							if (IMAGEPATHFROM == 'upload') {
@@ -2265,13 +2265,13 @@ class Recruiter extends MY_Controller {
 						$cityname = $this->db->get_where('cities', array('city_id' => $post['city']))->row()->city_name;
 						$countryname = $this->db->get_where('countries', array('country_id' => $post['country']))->row()->country_name;
 						$rec_post .= '<div class="job-top-detail">';
-						$rec_post .= '<h5><a href="' . base_url() . substr($text,200). '-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<h5><a href="' . base_url() . substr($text,0,200). '-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= $post_name;
 						$rec_post .= '</a></h5>';
-						$rec_post .= '<p><a href = "' . base_url() . substr($text,200) .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<p><a href = "' . base_url() . substr($text,0,200) .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= $cache_time1;
 						$rec_post .= '</a></p>';
-						$rec_post .= '<p><a href="' . base_url() . substr($text,200) .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
+						$rec_post .= '<p><a href="' . base_url() . substr($text,0,200) .'-job-vacancy-in-' . $cityname . '-' . $post['user_id'] . '-' . $post['post_id'] . '">';
 						$rec_post .= ucwords($cache_time2) . " " . ucfirst($cache_time3);
 						$rec_post .= '</a></p>
 						</div>

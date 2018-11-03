@@ -1168,6 +1168,23 @@ class Userprofile_page extends MY_Controller {
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
+    public function delete_user_research()
+    {
+        $research_id = $this->input->post('research_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_research_insert = $this->userprofile_model->delete_user_research($user_id,$research_id);
+            $user_research = $this->userprofile_model->get_user_research($user_id);
+            $ret_arr = array("success"=>1,"user_research"=>$user_research);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
     function save_user_links()
     {
         $userid = $this->session->userdata('aileenuser');
@@ -1241,48 +1258,98 @@ class Userprofile_page extends MY_Controller {
 
     public function save_user_idol()
     {
-        // print_r($_POST);
-        // print_r($_FILES);
-        // exit();
-        
-        if(isset($_FILES['user_idol_file']['name']) && $_FILES['user_idol_file']['name'] != "")
+        $edit_idols = $this->input->post('edit_idols');
+        if($edit_idols == 0)
+        {            
+            if(isset($_FILES['user_idol_file']['name']) && $_FILES['user_idol_file']['name'] != "")
+            {
+                $user_idol_name = $this->input->post('user_idol_name');
+                $fileName = "";
+                $user_idol_upload_path = $this->config->item('user_idol_upload_path');
+                $config = array(
+                    'image_library' => 'gd',
+                    'upload_path'   => $user_idol_upload_path,
+                    'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                    'overwrite'     => true,
+                    'remove_spaces' => true
+                );
+                $store = $_FILES['user_idol_file']['name'];
+                $store_ext = explode('.', $store);        
+                $store_ext = $store_ext[count($store_ext)-1];
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+                $config['file_name'] = $fileName;
+                $this->upload->initialize($config);
+                $imgdata = $this->upload->data();
+                if($this->upload->do_upload('user_idol_file')){
+                    $main_image = $user_idol_upload_path . $fileName;
+                    $s3 = new S3(awsAccessKey, awsSecretKey);
+                    $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                    if (IMAGEPATHFROM == 's3bucket') {
+                        $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                    }
+                }
+                $userid = $this->session->userdata('aileenuser');                
+                $user_idol = $this->userprofile_model->save_user_idol($userid,$user_idol_name,$fileName);
+
+                $user_idol = $this->userprofile_model->get_user_idols($userid);
+                $ret_arr = array("success"=>1,"user_idols"=>$user_idol);
+            }
+            else
+            {
+                $ret_arr = array("success"=>0);
+            }
+        }
+        else
         {
-            $user_idol_name = $this->input->post('user_idol_name');
-            $fileName = "";
-            $user_idol_upload_path = $this->config->item('user_idol_upload_path');
-            $config = array(
-                'image_library' => 'gd',
-                'upload_path'   => $user_idol_upload_path,
-                'allowed_types' => $this->config->item('user_post_main_allowed_types'),
-                'overwrite'     => true,
-                'remove_spaces' => true
-            );
-            $store = $_FILES['user_idol_file']['name'];
-            $store_ext = explode('.', $store);        
-            $store_ext = $store_ext[count($store_ext)-1];
-            $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
-            $config['file_name'] = $fileName;
-            $this->upload->initialize($config);
-            $imgdata = $this->upload->data();
-            if($this->upload->do_upload('user_idol_file')){
-                $main_image = $user_idol_upload_path . $fileName;
-                $s3 = new S3(awsAccessKey, awsSecretKey);
-                $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
-                if (IMAGEPATHFROM == 's3bucket') {
-                    $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+            $user_idol_name = $this->input->post('user_idol_name');            
+            $user_idol_pic_old = $this->input->post('user_idol_pic_old');
+            $fileName = $user_idol_pic_old;
+            if(isset($_FILES['user_idol_file']['name']) && $_FILES['user_idol_file']['name'] != "")
+            {
+                $user_idol_upload_path = $this->config->item('user_idol_upload_path');
+                $user_idol_file_old = $user_idol_upload_path . $user_idol_pic_old;
+                if (isset($user_idol_file_old)) {
+                    unlink($user_idol_file_old);
+                }
+                $config = array(
+                    'image_library' => 'gd',
+                    'upload_path'   => $user_idol_upload_path,
+                    'allowed_types' => $this->config->item('user_post_main_allowed_types'),
+                    'overwrite'     => true,
+                    'remove_spaces' => true
+                );
+                $store = $_FILES['user_idol_file']['name'];
+                $store_ext = explode('.', $store);        
+                $store_ext = $store_ext[count($store_ext)-1];
+                $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+                $config['file_name'] = $fileName;
+                $this->upload->initialize($config);
+                $imgdata = $this->upload->data();
+                if($this->upload->do_upload('user_idol_file')){
+                    $main_image = $user_idol_upload_path . $fileName;
+                    $s3 = new S3(awsAccessKey, awsSecretKey);
+                    $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+                    if (IMAGEPATHFROM == 's3bucket') {
+                        $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+                    }
                 }
             }
-            $userid = $this->session->userdata('aileenuser');
-            $data = array(
-                'user_id' => $userid,
-                'user_links_name' => $user_idol_name,
-                'user_links_pic' => $fileName,
-                'status' => '1',
-                'created_date' => date('Y-m-d H:i:s', time()),
-                'modify_date' => date('Y-m-d H:i:s', time()),
-            );
-            $insert_id = $this->common->insert_data($data, 'user_idol');
+            $userid = $this->session->userdata('aileenuser');                
+            $user_idol = $this->userprofile_model->save_user_idol($userid,$user_idol_name,$fileName,$edit_idols);
             $user_idol = $this->userprofile_model->get_user_idols($userid);
+            $ret_arr = array("success"=>1,"user_idols"=>$user_idol);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_idol()
+    {
+        $idol_id = $this->input->post('idol_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_idol_insert = $this->userprofile_model->delete_user_idol($user_id,$idol_id);
+            $user_idol = $this->userprofile_model->get_user_idols($user_id);
             $ret_arr = array("success"=>1,"user_idols"=>$user_idol);
         }
         else
@@ -1363,6 +1430,23 @@ class Userprofile_page extends MY_Controller {
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
+    public function delete_user_publication()
+    {
+        $publication_id = $this->input->post('publication_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_publication_insert = $this->userprofile_model->delete_user_publication($user_id,$publication_id);
+            $user_publication = $this->userprofile_model->get_user_publication($user_id);
+            $ret_arr = array("success"=>1,"user_publication"=>$user_publication);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
     public function save_user_patent()
     {
         $edit_patent = $this->input->post('edit_patent');
@@ -1420,6 +1504,23 @@ class Userprofile_page extends MY_Controller {
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
+    public function delete_user_patent()
+    {
+        $patent_id = $this->input->post('patent_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_patent_insert = $this->userprofile_model->delete_user_patent($user_id,$patent_id);
+            $user_patent = $this->userprofile_model->get_user_patent($user_id);
+            $ret_arr = array("success"=>1,"user_patent"=>$user_patent);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
     public function save_user_award()
     {
         $edit_awards = $this->input->post('edit_awards');
@@ -1463,6 +1564,23 @@ class Userprofile_page extends MY_Controller {
         if($user_id != "")
         {
             $user_award_insert = $this->userprofile_model->set_user_award($user_id,$award_title,$award_org,$award_date,$award_desc,$fileName,$edit_awards);
+            $user_award = $this->userprofile_model->get_user_award($user_id);
+            $ret_arr = array("success"=>1,"user_award"=>$user_award);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_award()
+    {
+        $award_id = $this->input->post('award_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->userprofile_model->delete_user_award($user_id,$award_id);
             $user_award = $this->userprofile_model->get_user_award($user_id);
             $ret_arr = array("success"=>1,"user_award"=>$user_award);
         }
@@ -1527,6 +1645,23 @@ class Userprofile_page extends MY_Controller {
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
+    public function delete_user_activity()
+    {
+        $activity_id = $this->input->post('activity_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->userprofile_model->delete_user_activity($user_id,$activity_id);
+            $user_activity = $this->userprofile_model->get_user_activity($user_id);
+            $ret_arr = array("success"=>1,"user_activity"=>$user_activity);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
     public function save_user_addicourse()
     {
         $edit_addicourse = $this->input->post('edit_addicourse');
@@ -1571,6 +1706,23 @@ class Userprofile_page extends MY_Controller {
         if($user_id != "")
         {
             $user_activity_insert = $this->userprofile_model->set_user_addicourse($user_id,$addicourse_name,$addicourse_org,$addicourse_start_date,$addicourse_end_date,$addicourse_url,$fileName,$edit_addicourse);
+            $user_addicourse = $this->userprofile_model->get_user_addicourse($user_id);
+            $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_addicourse()
+    {
+        $addicourse_id = $this->input->post('addicourse_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_addicourse_insert = $this->userprofile_model->delete_user_addicourse($user_id,$addicourse_id);
             $user_addicourse = $this->userprofile_model->get_user_addicourse($user_id);
             $ret_arr = array("success"=>1,"user_addicourse"=>$user_addicourse);
         }
@@ -1683,6 +1835,43 @@ class Userprofile_page extends MY_Controller {
         if($user_id != "")
         {
             $user_exp_insert = $this->userprofile_model->set_user_experience($user_id,$exp_company_name,$exp_designation_id,$exp_company_website,$exp_field,$exp_other_field,$exp_country,$exp_state,$exp_city,$exp_start_date,$exp_end_date,$exp_isworking,$exp_desc,$fileName,$edit_exp);
+            $user_experience = $this->userprofile_model->get_user_experience($user_id);
+            $year = array();
+            $month = array();
+            foreach ($user_experience as $_user_experience) {
+                $datetime1 = new DateTime($_user_experience['exp_start_date']."-1");
+                if($_user_experience['exp_isworking'] == 1)
+                {
+                    $datetime2 = new DateTime();
+                }
+                else
+                {
+                    $datetime2 = new DateTime($_user_experience['exp_end_date']."-1");
+                }
+                $interval = $datetime1->diff($datetime2);                
+                $year[] = $interval->format('%y');
+                $month[] = $interval->format('%m') + 1;
+            }
+            $years = array_sum($year);
+            $cal_years = array_sum($month);
+            $total_month = $cal_years % 12;
+            $years = $years + intval($cal_years / 12);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_experience()
+    {
+        $exp_id = $this->input->post('exp_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->userprofile_model->delete_user_experience($user_id,$exp_id);
             $user_experience = $this->userprofile_model->get_user_experience($user_id);
             $year = array();
             $month = array();
@@ -1853,6 +2042,23 @@ class Userprofile_page extends MY_Controller {
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
+    public function delete_user_project()
+    {
+        $project_id = $this->input->post('project_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->userprofile_model->delete_user_project($user_id,$project_id);
+            $user_projects = $this->userprofile_model->get_user_project($user_id);
+            $ret_arr = array("success"=>1,"user_projects"=>$user_projects);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
     public function get_edu_degree()
     {
         $contition_array = array('is_delete' => '0', 'is_other' => '0', 'degree_name !=' => '');
@@ -1956,6 +2162,23 @@ class Userprofile_page extends MY_Controller {
         {
             $user_project_insert = $this->userprofile_model->set_user_education($user_id,$edu_school_college,$edu_university,$edu_other_university,$edu_degree,$edu_stream,$edu_other_degree,$edu_other_stream,$edu_start_date,$edu_end_date,$edu_nograduate,$fileName,$edit_edu);
             $user_education = $this->userprofile_model->get_user_education($user_id);            
+            $ret_arr = array("success"=>1,"user_education"=>$user_education);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function delete_user_education()
+    {
+        $edu_id = $this->input->post('edu_id');
+        $user_id = $this->session->userdata('aileenuser');
+        if($user_id != "")
+        {
+            $user_exp_insert = $this->userprofile_model->delete_user_education($user_id,$edu_id);
+            $user_education = $this->userprofile_model->get_user_education($user_id);
             $ret_arr = array("success"=>1,"user_education"=>$user_education);
         }
         else
