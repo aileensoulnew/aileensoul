@@ -2397,7 +2397,7 @@ class Job extends MY_Controller {
         $imageName = time() . '.png';
         $data = base64_decode($data);
         $file = $user_bg_path . $imageName;
-        file_put_contents($user_bg_path . $imageName, $data);
+        file_put_contents($file, $data);
         $success = file_put_contents($file, $data);
         $main_image = $user_bg_path . $imageName;
         $main_image_size = filesize($main_image);
@@ -2427,12 +2427,14 @@ class Job extends MY_Controller {
         /* RESIZE */
 
         //S3 BUCKET ACCESS START
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-        $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
         //S3 BUCKET ACCESS END
-        //S3 BUCKET STORE MAIN IMAGE START
-        $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
-        //S3 BUCKET STORE MAIN IMAGE END
+        if (IMAGEPATHFROM == 's3bucket') {
+            $s3 = new S3(awsAccessKey, awsSecretKey);
+            $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
+            //S3 BUCKET STORE MAIN IMAGE START
+            $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
+            //S3 BUCKET STORE MAIN IMAGE END
+        }
 
         $user_thumb_path = $this->config->item('job_profile_thumb_upload_path');
         $user_thumb_width = $this->config->item('job_profile_thumb_width');
@@ -2444,7 +2446,9 @@ class Job extends MY_Controller {
 
         //S3 BUCKET STORE THUMB IMAGE START
         $thumb_image = $user_thumb_path . $imageName;
-        $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+        if (IMAGEPATHFROM == 's3bucket') {
+            $abc = $s3->putObjectFile($thumb_image, bucket, $thumb_image, S3::ACL_PUBLIC_READ);
+        }
         //S3 BUCKET STORE THUMB IMAGE END
 
         $data = array(
@@ -2456,9 +2460,9 @@ class Job extends MY_Controller {
 
         if ($update) {
             $contition_array = array('user_id' => $userid, 'status' => '1', 'is_delete' => '0');
-            $job_reg_data = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'job_user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+            $job_reg_data = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'job_user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
 
-            $userimage .= '<img src="' . JOB_PROFILE_THUMB_UPLOAD_URL . $job_reg_data[0]['job_user_image'] . '" alt="' . $job_reg_data[0]['job_user_image'] . '" >';
+            $userimage = '<img src="' . JOB_PROFILE_THUMB_UPLOAD_URL . $job_reg_data[0]['job_user_image'] . '" alt="' . $job_reg_data[0]['job_user_image'] . '" >';
             $userimage .= '<a href="javascript:void(0);" onclick="updateprofilepopup();" class="cusome_upload"><img  src="' . base_url('assets/img/cam.png') . '">';
             $userimage .= 'Update Profile Picture';
             $userimage .= '</a>';
@@ -3612,7 +3616,7 @@ class Job extends MY_Controller {
         $userid = $this->session->userdata('aileenuser');
         $contition_array = array('user_id' => $userid, 'status' => '0', 'is_delete' => '0');
 
-        $job_deactive = $this->data['job_deactive'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+        $job_deactive = $this->data['job_deactive'] = $this->common->select_data_by_condition('job_reg', $contition_array, $data = 'count(*) as total', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array());
 
         if ($job_deactive[0]['total'] != 0) {
             redirect('job-search');
@@ -5492,7 +5496,7 @@ class Job extends MY_Controller {
 
 //IF USER DEACTIVATE PROFILE THEN REDIRECT TO RECRUITER/INDEX UNTILL ACTIVE PROFILE START
         $contition_array = array('user_id' => $id, 're_status' => '0', 'is_delete' => '0');
-        $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+        $recruiter_deactive = $this->data['recruiter_deactive'] = $this->common->select_data_by_condition('recruiter', $contition_array, $data = 'rec_id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby);
         if ($recruiter_deactive) {
             redirect('recruiter/');
         }
