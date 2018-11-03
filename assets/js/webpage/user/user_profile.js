@@ -3541,6 +3541,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
+            profile_progress = success.data.profile_progress;
             details_data = success.data.detail_data;
             user_bio = success.data.user_bio;
             skills_data = success.data.skills_data;
@@ -3558,6 +3559,19 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             dob_year = dob[0];
             $scope.dob_fnc(dob_day,dob_month,dob_year); 
 
+            $scope.count_profile_value = profile_progress.user_process_value;
+            $scope.count_profile = profile_progress.user_process;            
+            if($scope.count_profile == 100)
+            {
+                $("#progress-txt").html("Successfully Completed!");
+                $("#edit-profile-move").hide();
+            }
+            else
+            {
+                $("#profile-progress").show();                
+                $("#progress-txt").html("Fill whole profile to reach 100%.");   
+            }
+            $scope.set_progress($scope.count_profile_value,$scope.count_profile);
             $("#skill-loader").hide();
             $("#skill-body").show();
 
@@ -3636,9 +3650,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.user_personal_links = result.data.user_personal_links_data;
                 $scope.social_linksset.social_links = result.data.user_social_links_data_edit;
                 $scope.personal_linksset.personal_links = result.data.user_personal_links_data_edit;
-                $("#social-link-loader").hide();
-                $("#social-link-body").show();
             }
+            else
+            {
+                $scope.user_social_links = [];
+                $scope.user_personal_links = [];
+            }
+            $("#social-link-loader").hide();
+            $("#social-link-body").show();
 
         });
     }
@@ -3651,7 +3670,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
     $scope.save_user_bio = function(){
         var user_bio = $("#user_bio").val();        
-        if(user_bio != "" && $scope.user_bio != user_bio)
+        // if(user_bio != "" && $scope.user_bio != user_bio)
         {
             $("#user_bio_loader").show();
             $("#user_bio_save").attr("style","pointer-events:none;display:none;");
@@ -7962,8 +7981,15 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     };
     //Education End
-
+    $scope.set_progress = function(count_profile_value,count_profile){
+        $('.second.circle-1').circleProgress({
+            value: count_profile_value //with decimal point
+        }).on('circle-animation-progress', function(event, progress) {
+            $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+        });
+    };
     angular.element(document).ready(function () {
+        
         if (screen.width <= 1199) {
             $("#edit-profile-move").appendTo($(".edit-profile-move"));
             $("#skill-move").appendTo($(".skill-move"));

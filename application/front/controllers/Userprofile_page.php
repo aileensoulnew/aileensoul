@@ -91,11 +91,102 @@ class Userprofile_page extends MY_Controller {
         }
         $user_bio = $this->db->select('user_bio')->get_where('user_info', array('user_id' => $userid))->row('user_bio');
         $skills_data = $this->userprofile_model->get_user_skills($userid);
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
         $ret_arr['detail_data'] = $detailsData;
         $ret_arr['user_bio'] = $user_bio;
         $ret_arr['skills_data'] = $skills_data;
         $ret_arr['skills_data_edit'] = $skills_data;
         echo json_encode($ret_arr);
+    }
+
+    public function progressbar($user_id)
+    {
+        $contition_array = array('user_id' => $user_id);
+
+        $user_data = $this->common->select_data_by_condition('user_info', $contition_array, $data = 'user_image, profile_background, user_bio, user_skills, user_hobbies, user_fav_quote_headline, user_fav_artist, user_fav_book, user_fav_sport,progressbar', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = array())[0];
+        $user_languages = $this->userprofile_model->get_user_languages($user_id);
+        $user_experience = $this->userprofile_model->get_user_experience($user_id);
+        $user_education = $this->userprofile_model->get_user_education($user_id);
+        $user_liks = $this->userprofile_model->get_user_links($user_id);
+        $user_idol = $this->userprofile_model->get_user_idols($user_id);
+        $count = 1;
+        if($user_data['user_image'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['profile_background'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['user_bio'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['user_skills'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['user_hobbies'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['user_fav_quote_headline'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['user_fav_artist'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['user_fav_book'] != '')
+        {
+            $count ++;
+        }
+        if($user_data['user_fav_sport'] != '')
+        {
+            $count ++;
+        }
+        if(isset($user_languages) && !empty($user_languages))
+        {
+            $count ++;   
+        }
+        if(isset($user_experience) && !empty($user_experience))
+        {
+            $count ++;   
+        }
+        if(isset($user_education) && !empty($user_education))
+        {
+            $count ++;   
+        }
+        if(isset($user_liks) && !empty($user_liks))
+        {
+            $count ++;   
+        }
+        if(isset($user_idol) && !empty($user_idol))
+        {
+            $count ++;   
+        }
+        // echo $count;exit();
+
+        $user_process = ($count * 100) / 15;        
+        $user_process_value = ($user_process / 100);
+
+        if ($user_process == 100) {
+            //if ($user_data['progressbar'] != 1) {
+                $data = array(
+                    'progressbar' => '1',
+                    'modify_date' => date('Y-m-d h:i:s', time())
+                );
+                $updatedata = $this->common->update_data($data, 'user_info', 'user_id', $user_id);
+            //}
+        } else {
+            $data = array(
+                'progressbar' => '0',
+                'modify_date' => date('Y-m-d h:i:s', time())
+            );
+            $updatedata = $this->common->update_data($data, 'user_info', 'user_id', $user_id);
+        }
+        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value);
     }
 
     public function profiles_data() {

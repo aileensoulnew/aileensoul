@@ -43,6 +43,56 @@
             .show-more-collapsed > .show-more-expand {
                 display: inherit;
             }
+            .edit_profile_progress {
+                width: 100%;
+            }
+            .edit_profile_progress {
+                float: right;
+                width: 100%;
+                background-color: #fff;
+                border: 1px solid #d9d9d9;
+                border-radius: 3px;
+                margin: 0 0 10px;
+                padding: 10px 0;
+            }
+            .progre_bar_text {
+                padding: 0 17px;
+            }
+            .circles {
+                padding-top: 5px;
+                text-align: center;
+            }
+            .circle-1 {
+                width: 175px;
+                margin: 0 6px 6px;
+                display: inline-block;
+                position: relative;
+                text-align: center;
+                line-height: 1.2;
+            }
+            .circle-1 canvas {
+                vertical-align: middle;
+                width: 175px;
+                height: 175px;
+                border: 1px solid transparent;
+                display: #000;
+            }
+            .circle-1 strong {
+                position: absolute;
+                top: 54px;
+                left: 5px;
+                width: 100%;
+                text-align: center;
+                line-height: 40px;
+                font-size: 30px;
+            }
+            #progress-txt{
+                position: absolute;
+                top: 94px;
+                width: 100%;
+                text-align: center;
+                left: 0;
+            }
         </style>
 
     <?php $this->load->view('adsense'); ?>
@@ -236,6 +286,8 @@
         <script src="<?php echo base_url('assets/js/angular-google-adsense.min.js'); ?>"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
         <script src="<?php echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script>
+        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/webpage/job/progressbar_common.js?ver=' . time()); ?>"></script> -->
         <script>
             var base_url = '<?php echo base_url(); ?>';
             //var user_slug = '<?php echo $this->uri->segment(2); ?>';
@@ -266,6 +318,8 @@
             var user_activity_upload_url = '<?php echo USER_ACTIVITY_UPLOAD_URL; ?>';
             var user_addicourse_upload_url = '<?php echo USER_ADDICOURSE_UPLOAD_URL; ?>';
             var app = angular.module("userProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','angular-google-adsense', 'ngValidate']);
+            // var count_profile_value = '';
+            // var count_profile = '';
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_profile.js?ver=' . time()) ?>"></script>
@@ -313,8 +367,6 @@
             });
         </script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
-        <script>
-        
-        </script>
+
     </body>
 </html>

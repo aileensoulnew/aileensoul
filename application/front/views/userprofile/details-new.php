@@ -873,7 +873,19 @@
                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/e-profile.png"><span>Edit Profile</span>
                 </div>
                 <div class="dtl-dis">
-                    <img src="<?php echo base_url(); ?>assets/n-images/detail/profile-progressbar.jpg">
+                    <!-- <img src="<?php echo base_url(); ?>assets/n-images/detail/profile-progressbar.jpg"> -->
+                    <div id="profile-progress" class="edit_profile_progress" style="display: none;">
+                        <div class="count_main_progress">
+                            <div class="circles">
+                                <div class="second circle-1">
+                                    <div>
+                                        <strong></strong>
+                                        <span id="progress-txt"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Edit Profile End -->
