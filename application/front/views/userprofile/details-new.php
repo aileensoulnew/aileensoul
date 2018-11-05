@@ -230,7 +230,7 @@
                                     <span>Add projects you have worked. Let it be an add-on to your experience.</span>
                                 </div>
                             </div>
-                            <div class="dtl-dis dis-accor" ng-if="user_projects.length > 1">
+                            <div class="dtl-dis dis-accor" ng-if="user_projects.length > 0">
                                 <div class="panel-group" id="project-accordion" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default" ng-repeat="user_proj in user_projects" ng-if="$index <= view_more_proj">
                                         <div class="panel-heading" role="tab" id="project-{{$index}}">
@@ -263,7 +263,7 @@
                                                         <span>Website</span> 
                                                         <a href="{{user_proj.project_url}}" target="_self">{{user_proj.project_url}}</a>
                                                     </li>
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Duration</span> 
                                                         <label>{{user_proj.start_date_str}} to</label>
                                                         <label ng-if="user_proj.end_date_str != '' && user_proj.end_date_str != null">{{user_proj.end_date_str}}</label> 
@@ -287,7 +287,7 @@
                                                     </li>
                                                     <li>
                                                         <span>Description</span>
-                                                        <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_proj.project_desc}}" dd-text-collapse-cond="true">{{user_proj.project_desc}}</label>
+                                                        <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_proj.project_desc}}" dd-text-collapse-cond="true">{{user_proj.project_desc}}</label>
                                                     </li>
                                                     <li ng-if="user_proj.project_file != '' && user_proj.project_file != null">
                                                         <span>Project File</span>
@@ -356,18 +356,18 @@
                                         <div id="edu{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu-{{$index}}">
                                             <div class="panel-body">
                                                 <ul class="dis-list">
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Duration</span> 
                                                         <label>{{user_edu.start_date_str}} to</label>
                                                         <label ng-if="user_edu.end_date_str != '' && user_edu.end_date_str != null">{{user_edu.end_date_str}}</label> 
                                                         <label ng-if="user_edu.end_date_str == '' || user_edu.end_date_str == null">Studying</label>
                                                     </li>
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Board / University</span>
                                                         <label ng-if="user_edu.edu_university == '0'">{{user_edu.edu_other_university}}</label>
                                                         <label ng-if="user_edu.edu_university != '0'">{{user_edu.university_name}}</label>
                                                     </li>
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Course / Field of Study / Stream</span>
                                                         <label ng-if="user_edu.edu_stream == '0'">{{user_edu.edu_other_stream}}</label>
                                                         <label ng-if="user_edu.edu_stream != '0'">{{user_edu.stream_name}}</label>
@@ -437,7 +437,7 @@
                                         <div id="activity{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="activity-{{$index}}">
                                             <div class="panel-body">
                                                 <ul class="dis-list">
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Duration</span> 
                                                         <label>{{user_ea.start_date_str}} to</label>
                                                         <label ng-if="user_ea.end_date_str != '' && user_ea.end_date_str != null">{{user_ea.end_date_str}}</label> 
@@ -445,7 +445,7 @@
                                                     </li>
                                                     <li>
                                                         <span>Description</span>
-                                                        <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_ea.activity_desc}}" dd-text-collapse-cond="true">{{user_ea.activity_desc}}</label>
+                                                        <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_ea.activity_desc}}" dd-text-collapse-cond="true">{{user_ea.activity_desc}}</label>
                                                     </li>
                                                     <li ng-if="user_ea.activity_file != '' && user_ea.activity_file != null">
                                                         <span>Document</span>
@@ -670,13 +670,13 @@
                                         <div id="award{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="award-{{$index}}">
                                             <div class="panel-body">
                                                 <ul class="dis-list">
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Date</span> 
                                                         <label>{{user_awrd.award_date_str}}</label>
                                                     </li>
                                                     <li>
                                                         <span>Description</span>
-                                                        <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_awrd.award_desc}}" dd-text-collapse-cond="true">{{user_awrd.award_desc}}</label>
+                                                        <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_awrd.award_desc}}" dd-text-collapse-cond="true">{{user_awrd.award_desc}}</label>
                                                     </li>
                                                     <li ng-if="user_awrd.award_file != '' && user_awrd.award_file != null">
                                                         <span>Document</span>

@@ -2784,10 +2784,11 @@ width: 80%; border-radius: 10px; z-index:9;}
 .custom-color{color:#555;}
 #about-detail h4{margin-bottom:2px;}
 #about-detail .dtl-dis .known-language{padding-bottom:17px;}
-.select-preview label{font-size:14px; font-weight:normal;}
+.select-preview label{font-size:14px; font-weight:normal; margin-bottom:0;}
 .edit-form-cus .dtl-btn .save{width:50%; display:inline-block; float:left;}
 .edit-form-cus .dtl-btn .save:hover{border-bottom-right-radius:0;}
 .edit-form-cus .dtl-btn .save.delete-edit:hover{border-bottom-right-radius:20px; border-bottom-left-radius:0px;}
+.edit-form-cus .dtl-btn .save.delete-edit{border-left:1px solid #d2d2d2;}
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
