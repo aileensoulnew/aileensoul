@@ -8109,6 +8109,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
         $scope.old_count_profile = count_profile;
     };
+
+
+    $(document).on('change','select', function(e){
+        $(this).addClass("custom-color");
+    });
     angular.element(document).ready(function () {
         
         if (screen.width <= 1199) {
