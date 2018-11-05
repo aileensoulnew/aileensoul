@@ -387,9 +387,50 @@ app.controller('userProfileController', function ($scope, $http) {
     }
     // $scope.basic_info_city();
 
-    
+    $scope.basic_info_validate = {
+        rules: {
+            basic_job_title: {
+                required: true,
+            },
+            basic_info_city: {
+                required: true,
+            },
+            basic_info_field: {
+                required: true,
+            }
+        },
+        messages: {
+            basic_job_title: {
+                required: "Job title is required.",
+            },
+            basic_info_city: {
+                required: "City is required.",
+            },
+            basic_info_field: {
+                required: "Field id is required.",
+            }
+        }
+    };
     $scope.save_user_basicinfo = function(){
-        alert(1);
+        if ($scope.basicinfo.validate()) {
+            $http({
+                method: 'POST',
+                url: base_url + 'user_info/ng_basic_info_insert',
+                data: $scope.user,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (success){
+            if (success.data.errors) {
+                if (success.data.is_success == '1') {
+                    
+                }
+                else {
+                return false;
+                }
+                } else {
+                
+                }
+            });
+        }
     };
 
     $scope.open_basicinfo = function()
@@ -3693,6 +3734,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var profile_progress = success.data.profile_progress;
             var count_profile_value = profile_progress.user_process_value;
             var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
             if(count_profile == 100)
             {
                 $("#edit-profile-move").hide();
@@ -3744,9 +3786,50 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 }
                 $scope.hobby_txt = edit_hobbies;
                 $scope.user_fav_quote_headline = about_user_data.user_fav_quote_headline;
-                $scope.user_fav_artist = about_user_data.user_fav_artist;
-                $scope.user_fav_book = about_user_data.user_fav_book;
-                $scope.user_fav_sport = about_user_data.user_fav_sport;
+
+                
+                var user_fav_artist = "";
+                if(about_user_data.user_fav_artist.trim() != "")
+                {
+                    var user_fav_artist = about_user_data.user_fav_artist.split(',');
+                }
+                var edit_fav_art = [];
+                if(user_fav_artist.length > 0)
+                {                    
+                    user_fav_artist.forEach(function(element,jobArrIndex) {
+                      edit_fav_art[jobArrIndex] = {"fav_artist":element};
+                    });
+                }
+                $scope.user_fav_artist_txt = edit_fav_art;
+
+                var user_fav_book = "";
+                if(about_user_data.user_fav_book.trim() != "")
+                {
+                    var user_fav_book = about_user_data.user_fav_book.split(',');
+                }
+                var edit_fav_book = [];
+                if(user_fav_book.length > 0)
+                {                    
+                    user_fav_book.forEach(function(element,jobArrIndex) {
+                      edit_fav_book[jobArrIndex] = {"fav_book":element};
+                    });
+                }
+                $scope.user_fav_book_txt = edit_fav_book;
+
+                var user_fav_sport = "";
+                if(about_user_data.user_fav_sport.trim() != "")
+                {
+                    var user_fav_sport = about_user_data.user_fav_sport.split(',');
+                }
+                var edit_fav_sport = [];
+                if(user_fav_sport.length > 0)
+                {                    
+                    user_fav_sport.forEach(function(element,jobArrIndex) {
+                      edit_fav_sport[jobArrIndex] = {"fav_sport":element};
+                    });
+                }
+                $scope.user_fav_sport_txt = edit_fav_sport;
+                
                 $("#about-loader").hide();
                 $("#about-body").show();
                 setTimeout(function(){
@@ -3828,6 +3911,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var profile_progress = result.data.profile_progress;
                 var count_profile_value = profile_progress.user_process_value;
                 var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
                 $scope.set_progress(count_profile_value,count_profile);
                 $("#user_bio_save").removeAttr("style");
                 $("#user_bio_loader").hide();
@@ -3865,6 +3949,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var profile_progress = result.data.profile_progress;
             var count_profile_value = profile_progress.user_process_value;
             var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
             $scope.set_progress(count_profile_value,count_profile);
             
             $("#user_skills_save").removeAttr("style");
@@ -4083,6 +4168,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var profile_progress = result.data.profile_progress;
                 var count_profile_value = profile_progress.user_process_value;
                 var count_profile = profile_progress.user_process;
+                $scope.progress_status = profile_progress.progress_status;
                 $scope.set_progress(count_profile_value,count_profile);
                 $("#save_about_user").removeAttr("style");
                 $("#about_user_loader").hide();
@@ -4192,7 +4278,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             research_title: {
                 required: true,
                 maxlength: 200,
-                minlength: 20
+                minlength: 3
             },
             research_desc: {
                 required: true,
@@ -4661,6 +4747,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var profile_progress = result.data.profile_progress;
             var count_profile_value = profile_progress.user_process_value;
             var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
             $scope.set_progress(count_profile_value,count_profile);
             $("#user_links_save").removeAttr("style");
             $("#user_links_loader").hide();
@@ -4756,6 +4843,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     var profile_progress = result.profile_progress;
                     var count_profile_value = profile_progress.user_process_value;
                     var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
                 }
             });
@@ -4803,7 +4891,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $scope.reset_user_idols();
         $("#inspiration").addClass("edit-form-cus");
         var idols_arr = $scope.user_idols[index];
-        console.log(idols_arr);
+        
         $scope.edit_idols = idols_arr.id_idol;
         
         $("#user_idol_name").val(idols_arr.user_idol_name);
@@ -4865,6 +4953,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         var profile_progress = result.profile_progress;
                         var count_profile_value = profile_progress.user_process_value;
                         var count_profile = profile_progress.user_process;
+                        $scope.progress_status = profile_progress.progress_status;
                         $scope.set_progress(count_profile_value,count_profile);
                     }
                     else
@@ -6217,7 +6306,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
     $scope.reset_activity_form = function(){
         $scope.edit_activity = 0;
-        $("#extra-activity").addClass("edit-form-cus");
+        $("#extra-activity").removeClass("edit-form-cus");
         $scope.activity_file_old = "";
         $("#activity_s_month").html('');
         $("#activity_e_year").html('');
@@ -6676,13 +6765,25 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     //Additional Course End
 
     //Experience Start
-    $scope.load_jobtitle = [];
+    /*$scope.load_jobtitle = [];
     $scope.loadJobtitle = function ($query) {
         return $http.get(base_url + 'user_post/get_jobtitle', {cache: true}).then(function (response) {
             var load_jobtitle = response.data;
             return load_jobtitle.filter(function (title) {
                 return title.name.toLowerCase().indexOf($query.toLowerCase()) != -1;
             });
+        });
+    };*/
+
+    $scope.exp_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.exp_designation,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
         });
     };
 
@@ -6980,7 +7081,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             exp_formdata.append('edit_exp', $scope.edit_exp);
             exp_formdata.append('exp_file_old', $scope.exp_file_old);
             exp_formdata.append('exp_company_name', $('#exp_company_name').val());
-            exp_formdata.append('exp_designation', JSON.stringify($scope.exp_designation));
+            exp_formdata.append('exp_designation', $('#exp_designation').val());
             exp_formdata.append('exp_company_website', $('#exp_company_website').val());
             exp_formdata.append('exp_field', $('#exp_field option:selected').val());
             exp_formdata.append('exp_other_field', $('#exp_other_field').val());
@@ -7027,6 +7128,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     var profile_progress = result.profile_progress;
                     var count_profile_value = profile_progress.user_process_value;
                     var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
                 }
             });
@@ -7098,19 +7200,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         // $scope.exp_company_name = $scope.user_experience[index].exp_company_name;
         var exp_company_name_txt = $scope.user_experience[index].exp_company_name;
         $("#exp_company_name").val(exp_company_name_txt);
-        var user_exp_desig = "";
-        if($scope.user_experience[index].designation.trim() != "")
-        {
-            var user_exp_desig = $scope.user_experience[index].designation.split(',');
-        }
-        var exp_desig = [];
-        if(user_exp_desig.length > 0)
-        {                    
-            user_exp_desig.forEach(function(element,jobArrIndex) {
-              exp_desig[jobArrIndex] = {"name":element};
-            });
-        }
-        $scope.exp_designation = exp_desig;
+        
+        $scope.exp_designation = $scope.user_experience[index].designation;
         $scope.exp_company_website = $scope.user_experience[index].exp_company_website;
         $scope.exp_field = $scope.user_experience[index].exp_field;
         if($scope.exp_field == 0)
@@ -7235,6 +7326,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         var profile_progress = result.profile_progress;
                         var count_profile_value = profile_progress.user_process_value;
                         var count_profile = profile_progress.user_process;
+                        $scope.progress_status = profile_progress.progress_status;
                         $scope.set_progress(count_profile_value,count_profile);
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();                        
@@ -8058,6 +8150,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     var profile_progress = result.profile_progress;
                     var count_profile_value = profile_progress.user_process_value;
                     var count_profile = profile_progress.user_process;
+                    $scope.progress_status = profile_progress.progress_status;
                     $scope.set_progress(count_profile_value,count_profile);
                 }
             });
@@ -8213,6 +8306,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         var profile_progress = result.profile_progress;
                         var count_profile_value = profile_progress.user_process_value;
                         var count_profile = profile_progress.user_process;
+                        $scope.progress_status = profile_progress.progress_status;
                         $scope.set_progress(count_profile_value,count_profile);
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();                        

@@ -205,6 +205,7 @@
                             <div class="dtl-title">
                                 <span>Basic Information</span>
                             </div>
+                            <form name="basicinfo" id="basicinfo" ng-validate="basic_info_validate">
                             <div class="dtl-dis">
                                 <div class="form-group">
                                     <p class="student-or-not">If Student then Make your Profile <a href="#" ng-click="open_student();"> Here!</a>
@@ -255,6 +256,7 @@
                             <div class="dtl-btn">
                                 <a href="#" class="save" ng-click="save_user_basicinfo()"><span>Save</span></a>
                             </div>
+                            </form>
                         </div>
                         <div id="user-student-info" style="display: none;">
                             <div class="dtl-title fw">

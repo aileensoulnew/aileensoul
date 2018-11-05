@@ -107,66 +107,109 @@ class Userprofile_page extends MY_Controller {
         $user_languages = $this->userprofile_model->get_user_languages($user_id);
         $user_experience = $this->userprofile_model->get_user_experience($user_id);
         $user_education = $this->userprofile_model->get_user_education($user_id);
-        $user_liks = $this->userprofile_model->get_user_links($user_id);
+        $user_links = $this->userprofile_model->get_user_links($user_id);
         $user_idol = $this->userprofile_model->get_user_idols($user_id);
         $count = 1;
+        $progress_status = array();
+        $user_image = 0;
         if($user_data['user_image'] != '')
         {
             $count ++;
+            $user_image = 1;
         }
+        $profile_background = 0;
         if($user_data['profile_background'] != '')
         {
             $count ++;
+            $profile_background = 1;
         }
+        $user_bio = 0;
         if($user_data['user_bio'] != '')
         {
             $count ++;
+            $user_bio = 1;
         }
+        $user_skills = 0;
         if($user_data['user_skills'] != '')
         {
             $count ++;
+            $user_skills = 1;
         }
+        $user_hobbies = 0;
         if($user_data['user_hobbies'] != '')
         {
             $count ++;
+            $user_hobbies = 1;
         }
+        $user_fav_quote_headline = 0;
         if($user_data['user_fav_quote_headline'] != '')
         {
             $count ++;
+            $user_fav_quote_headline = 1;
         }
+        $user_fav_artist = 0;
         if($user_data['user_fav_artist'] != '')
         {
             $count ++;
+            $user_fav_artist = 1;
         }
+        $user_fav_book = 0;
         if($user_data['user_fav_book'] != '')
         {
             $count ++;
+            $user_fav_book = 1;
         }
+        $user_fav_sport = 0;
         if($user_data['user_fav_sport'] != '')
         {
             $count ++;
+            $user_fav_sport = 1;
         }
+        $user_languages_status = 0;
         if(isset($user_languages) && !empty($user_languages))
         {
-            $count ++;   
+            $count ++;
+            $user_languages_status = 1;
         }
+        $user_experience_status = 0;
         if(isset($user_experience) && !empty($user_experience))
         {
-            $count ++;   
+            $count ++;
+            $user_experience_status = 1;
         }
+        $user_education_status = 0;
         if(isset($user_education) && !empty($user_education))
         {
-            $count ++;   
+            $count ++;
+            $user_education_status = 1;
         }
-        if(isset($user_liks) && !empty($user_liks))
+        $user_links_status = 0;
+        if(isset($user_links) && !empty($user_links))
         {
-            $count ++;   
+            $count ++;
+            $user_links_status = 1;
         }
+        $user_idol_status = 0;
         if(isset($user_idol) && !empty($user_idol))
         {
-            $count ++;   
+            $count ++;
+            $user_idol_status = 1;
         }
         // echo $count;exit();
+        $progress_status['user_image'] = $user_image;
+        $progress_status['profile_background'] = $profile_background;
+        $progress_status['user_bio'] = $user_bio;
+        $progress_status['user_skills'] = $user_skills;
+        $progress_status['user_hobbies'] = $user_hobbies;
+        $progress_status['user_fav_quote_headline'] = $user_fav_quote_headline;
+        $progress_status['user_fav_artist'] = $user_fav_artist;
+        $progress_status['user_fav_book'] = $user_fav_book;
+        $progress_status['user_fav_sport'] = $user_fav_sport;
+        $progress_status['user_languages_status'] = $user_languages_status;
+        $progress_status['user_experience_status'] = $user_experience_status;
+        $progress_status['user_education_status'] = $user_education_status;
+        $progress_status['user_links_status'] = $user_links_status;
+        $progress_status['user_idol_status'] = $user_idol_status;
 
         $user_process = ($count * 100) / 15;        
         $user_process_value = ($user_process / 100);
@@ -186,7 +229,7 @@ class Userprofile_page extends MY_Controller {
             );
             $updatedata = $this->common->update_data($data, 'user_info', 'user_id', $user_id);
         }
-        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value);
+        return array("user_process"=>$user_process,"user_process_value"=>$user_process_value,"progress_status"=>$progress_status);
     }
 
     public function profiles_data() {
@@ -1879,7 +1922,7 @@ class Userprofile_page extends MY_Controller {
         $edit_exp = $this->input->post('edit_exp');
         $exp_file_old = $this->input->post('exp_file_old');
         $exp_company_name = $this->input->post('exp_company_name');
-        $exp_designation = json_decode($this->input->post('exp_designation'),TRUE);
+        $exp_designation = $this->input->post('exp_designation');
         $exp_company_website = $this->input->post('exp_company_website');
         $exp_field = $this->input->post('exp_field');        
         $exp_country = $this->input->post('exp_country');
@@ -1903,8 +1946,8 @@ class Userprofile_page extends MY_Controller {
             $exp_other_field = "";
         }
         $exp_designation_id = "";
-        foreach ($exp_designation as $title) {
-            $designation = $this->data_model->findJobTitle($title['name']);
+        // foreach ($exp_designation as $title) {
+            $designation = $this->data_model->findJobTitle($exp_designation);
             if ($designation['title_id'] != '') {
                 $jobTitleId = $designation['title_id'];
             } else {
@@ -1916,9 +1959,8 @@ class Userprofile_page extends MY_Controller {
                 $data['slug'] = $this->common->clean($title['name']);
                 $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
             }
-            $exp_designation_id .= $jobTitleId . ',';
-        }
-        $exp_designation_id = trim($exp_designation_id, ',');
+            $exp_designation_id = $jobTitleId;
+        // }        
         $fileName = $exp_file_old;
         if(isset($_FILES['exp_file']['name']) && $_FILES['exp_file']['name'] != "")
         {            

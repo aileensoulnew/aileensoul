@@ -1628,15 +1628,15 @@ class Userprofile_model extends CI_Model {
     public function get_user_experience($userid)
     {
 
-        $this->db->select("ue.id_experience, ue.user_id, ue.exp_company_name, ue.exp_designation,GROUP_CONCAT(DISTINCT(jt.name)) as designation, ue.exp_company_website, ue.exp_field, ue.exp_other_field, ue.exp_country, ue.exp_state, ue.exp_city, ue.exp_start_date, ue.exp_end_date, DATE_FORMAT(CONCAT(ue.exp_start_date,'-1'),'%b %Y') as start_date_str,DATE_FORMAT(CONCAT(ue.exp_end_date,'-1'),'%b %Y') as end_date_str,ue.exp_isworking, ue.exp_desc, ue.exp_file, ue.status, ue.created_date, ue.modify_date,cr.country_name,st.state_name,ct.city_name")->from("user_experience ue, job_title jt");
+        $this->db->select("ue.id_experience, ue.user_id, ue.exp_company_name, ue.exp_designation,jt.name as designation, ue.exp_company_website, ue.exp_field, ue.exp_other_field, ue.exp_country, ue.exp_state, ue.exp_city, ue.exp_start_date, ue.exp_end_date, DATE_FORMAT(CONCAT(ue.exp_start_date,'-1'),'%b %Y') as start_date_str,DATE_FORMAT(CONCAT(ue.exp_end_date,'-1'),'%b %Y') as end_date_str,ue.exp_isworking, ue.exp_desc, ue.exp_file, ue.status, ue.created_date, ue.modify_date,cr.country_name,st.state_name,ct.city_name")->from("user_experience ue");
         $this->db->join('countries cr', 'cr.country_id = ue.exp_country', 'left');
         $this->db->join('states st', 'st.state_id = ue.exp_state', 'left');
         $this->db->join('cities ct', 'ct.city_id = ue.exp_city', 'left');
-        // $this->db->join('job_title jt', 'jt.title_id = ue.exp_designation', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = ue.exp_designation', 'left');
         $this->db->where('ue.user_id', $userid);
         $this->db->where('ue.status', '1');
-        $this->db->where('FIND_IN_SET(jt.title_id, ue.exp_designation) !=', 0);
-        $this->db->group_by('ue.exp_designation,ue.id_experience');
+        // $this->db->where('FIND_IN_SET(jt.title_id, ue.exp_designation) !=', 0);
+        // $this->db->group_by('ue.exp_designation,ue.id_experience');
         $this->db->order_by('ue.created_date',"desc");
         $query = $this->db->get();
         $user_data_exp = $query->result_array();        

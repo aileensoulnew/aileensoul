@@ -78,13 +78,13 @@
                             </div>
                         </div>
                         <div id="exp-body" style="display: none;">
-                            <div class="dtl-dis" ng-if="user_experience.length < 1">
+                            <div class="dtl-dis" ng-if="user_experience.length < '1'">
                                 <div class="no-info">
                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                     <span>Either you started working or already working somewhere or own a business. Add your experiences!</span>
                                 </div>
                             </div>
-                            <div class="dtl-dis dis-accor" ng-if="user_experience.length > 0">
+                            <div class="dtl-dis dis-accor" ng-if="user_experience.length > '0'">
                                 <div class="panel-group" id="exp-accordion" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default" ng-repeat="user_exp in user_experience" ng-if="$index <= view_more_exp">
                                         <div class="panel-heading" role="tab" id="exp-{{$index}}">
@@ -96,7 +96,7 @@
                                                 </div>
                                                 <div class="dis-middle">
                                                     <h4>{{user_exp.exp_company_name}}</h4>
-                                                    <p>Working as {{user_exp.designation}}</p>
+                                                    <p>{{user_exp.designation}}</p>
                                                 </div>
                                                 <div class="dis-right">
                                                     <span role="button" ng-click="edit_user_exp($index)" class="pr5">
@@ -140,7 +140,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="view-more-exp" class="about-more" ng-if="user_experience.length > 3">
+                                    <div id="view-more-exp" class="about-more" ng-if="user_experience.length > '3'">
                                         <a href="#" ng-click="exp_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                                     </div>
                                 </div>
@@ -881,20 +881,20 @@
 					<div class="dtl-edit-top"></div>
 					<div class="dtl-edit-bottom"></div>
 					<div class="profile-status">
-									<ul>
-										<li><span class=""></span>Profile pic</li>
-										<li class="pl20"><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
-										
-										<li><span class=""></span>Experience</li>
-										<li class="pl20"><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>About</li>
-										<li><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>skills</li>
-										
-										<li class="pl20"><span class=""></span>Social</li>
-										<li><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Idol</li>
-										<li class="fw"><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational info</li>
-										<li class="fw"><span class=""></span>Profile overview</li>
-									</ul>
-								</div>
+						<ul>
+							<li><span ng-if="progress_status.user_image == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
+							<li class="pl20"><span ng-if="progress_status.profile_background == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+							
+							<li><span ng-if="progress_status.user_experience_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Experience</li>
+							<li class="pl20"><span ng-if="progress_status.user_fav_artist == 1 && progress_status.user_fav_book == 1 && progress_status.user_fav_quote_headline == 1 && progress_status.user_fav_sport == 1 && progress_status.user_hobbies == 1 && progress_status.user_languages_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>About</li>
+							<li><span ng-if="progress_status.user_skills == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>skills</li>
+							
+							<li class="pl20"><span ng-if="progress_status.user_links_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Social</li>
+							<li><span ng-if="progress_status.user_idol_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Idol</li>
+							<li class="fw"><span ng-if="progress_status.user_education_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational info</li>
+							<li class="fw"><span ng-if="progress_status.user_bio == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile overview</li>
+						</ul>
+					</div>
                     <!-- <img src="<?php echo base_url(); ?>assets/n-images/detail/profile-progressbar.jpg"> -->
                     <div id="profile-progress" class="edit_profile_progress" style="display: none;">
                         <div class="count_main_progress">
@@ -1034,8 +1034,8 @@
                 </div>
                 <div class="dtl-dis">
                     <label>Enter Profile Details</label>
-                    <textarea name="user_bio" id="user_bio" ng-model="user_bio" type="text" placeholder="Enter Details" maxlength="1000">{{user_bio}}</textarea>
-                    
+                    <textarea name="user_bio" id="user_bio" ng-model="user_bio" type="text" placeholder="Enter Details" maxlength="700">{{user_bio}}</textarea>
+                    <span>{{700 - user_bio.length}}</span>                    
                 </div>
                 <div class="dtl-btn">
                     <a id="user_bio_save" href="#" ng-click="save_user_bio()" class="save"><span>Save</span></a>
@@ -1217,7 +1217,9 @@
                                 <div class="col-md-6 col-sm-6">
                                     <label>Designation / Role</label>
                                     <!-- <input type="text" placeholder="Enter Designation"> -->
-                                    <tags-input id="exp_designation" name="exp_designation" ng-model="exp_designation" display-property="name" placeholder="Enter Designation" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" min-length="1" ng-keyup="exp_designation_fnc()">
+                                    <input type="text" placeholder="Enter Designation" id="exp_designation" name="exp_designation" ng-model="exp_designation" ng-keyup="exp_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+
+                                    <!-- <tags-input id="exp_designation" name="exp_designation" ng-model="exp_designation" display-property="name" placeholder="Enter Designation" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" min-length="1" ng-keyup="exp_designation_fnc()">
                                         <auto-complete source="loadJobtitle($query)" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
                                     </tags-input>                        
                                     <script type="text/ng-template" id="title-template">
@@ -1225,7 +1227,7 @@
                                     </script>
                                     <script type="text/ng-template" id="title-autocomplete-template">
                                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
-                                    </script>
+                                    </script> -->
                                     <label id="exp_designation_err" for="exp_designation" class="error" style="display: none;">Please enter designation / role</label>
                                 </div>
                                 
@@ -1236,6 +1238,7 @@
                                 <div class="col-md-6 col-sm-6">
                                     <label>Company Website</label>
                                     <input type="text" placeholder="Enter Company Website" id="exp_company_website" name="exp_company_website" ng-model="exp_company_website">
+                                    <span class="personal-link-info">URL must start with http:// or https://</span>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <label>Field </label>
@@ -1620,6 +1623,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <label>Project URL</label>
                                 <input type="text" placeholder="Project URL" id="project_url" name="project_url">
+                                <span class="personal-link-info">URL must start with http:// or https://</span>
                             </div>
                         </div>
                         <div id="proj_other_field_div" class="row" style="display: none;">
@@ -1804,6 +1808,7 @@
                         <div class="form-group">
                             <label>URL</label>
                             <input type="text" placeholder="Enter URL" id="addicourse_url" name="addicourse_url">
+                            <span class="personal-link-info">URL must start with http:// or https://</span>
                         </div>
                         
                         <div class="form-group">
@@ -2095,6 +2100,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <label>URL</label>
                                 <input type="text" placeholder="URL" id="pub_url" name="pub_url" maxlength="200">
+                                <span class="personal-link-info">URL must start with http:// or https://</span>
                             </div>
                         </div>
                     </div>
@@ -2262,6 +2268,7 @@
                                 <div class="col-md-6 col-sm-6">
                                     <label>Patent URL</label>
                                     <input type="text" placeholder="Patent URL" id="patent_url" name="patent_url" ng-model="patent_url">
+                                    <span class="personal-link-info">URL must start with http:// or https://</span>
                                 </div>
                             </div>
                         </div>
@@ -2347,6 +2354,7 @@
                                     <div class="form-group">
                                         <label>URL</label>
                                         <input type="text" placeholder="URL" id="research_url" name="research_url" ng-model="research_url">
+                                        <span class="personal-link-info">URL must start with http:// or https://</span>
                                     </div>
                                 </div>
                             </div>
