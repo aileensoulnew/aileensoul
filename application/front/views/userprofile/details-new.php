@@ -53,9 +53,9 @@
                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                     <span>Highlight your details. (Let it be either personal or professional)</span>
                                 </div>
-                                <div class="no-info" ng-if="user_bio != ''">
+                                <div class="" ng-if="user_bio != ''">
                                     <h4>Description</h4>
-                                    <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
+                                    <p dd-text-collapse dd-text-collapse-max-length="350" dd-text-collapse-text="{{user_bio}}" dd-text-collapse-cond="true">{{user_bio}}</p>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience({{exp_years}}year {{exp_months}}month)</span><a href="#" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience ({{exp_years}}year {{exp_months}}month)</span><a href="#" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="exp-loader" class="dtl-dis">
                             <div class="text-center">
@@ -112,7 +112,7 @@
                                         <div id="exp{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="exp-{{$index}}">
                                             <div class="panel-body">
                                                 <ul class="dis-list">
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Time Period</span> 
                                                         <label>{{user_exp.start_date_str}} to</label>
                                                         <label ng-if="user_exp.end_date_str != '' && user_exp.end_date_str != null">{{user_exp.end_date_str}}</label> 
@@ -128,7 +128,7 @@
                                                     </li>
                                                     <li>
                                                         <span>Description</span>
-                                                        <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_exp.exp_desc}}" dd-text-collapse-cond="true">{{user_exp.exp_desc}}</label>
+                                                        <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_exp.exp_desc}}" dd-text-collapse-cond="true">{{user_exp.exp_desc}}</label>
                                                     </li>
                                                     <li ng-if="user_exp.exp_file != '' && user_exp.exp_file != null">
                                                         <span>Document</span>
@@ -877,7 +877,24 @@
                 <div class="dtl-title">
                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/e-profile.png"><span>Edit Profile</span>
                 </div>
-                <div class="dtl-dis">
+                <div class="dtl-dis dtl-edit-p">
+					<div class="dtl-edit-top"></div>
+					<div class="dtl-edit-bottom"></div>
+					<div class="profile-status">
+									<ul>
+										<li><span class=""></span>Profile pic</li>
+										<li class="pl20"><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+										
+										<li><span class=""></span>Experience</li>
+										<li class="pl20"><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>About</li>
+										<li><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>skills</li>
+										
+										<li class="pl20"><span class=""></span>Social</li>
+										<li><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Idol</li>
+										<li class="fw"><span class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational info</li>
+										<li class="fw"><span class=""></span>Profile overview</li>
+									</ul>
+								</div>
                     <!-- <img src="<?php echo base_url(); ?>assets/n-images/detail/profile-progressbar.jpg"> -->
                     <div id="profile-progress" class="edit_profile_progress" style="display: none;">
                         <div class="count_main_progress">
@@ -1017,7 +1034,7 @@
                 </div>
                 <div class="dtl-dis">
                     <label>Enter Profile Details</label>
-                    <textarea name="user_bio" id="user_bio" ng-model="user_bio" type="text" placeholder="Enter Details">{{user_bio}}</textarea>
+                    <textarea name="user_bio" id="user_bio" ng-model="user_bio" type="text" placeholder="Enter Details" maxlength="1000">{{user_bio}}</textarea>
                     
                 </div>
                 <div class="dtl-btn">
@@ -1057,6 +1074,7 @@
                                         <label>Proficiency</label>
                                         <span class="span-select">
                                             <select class="proficiency" name="proficiency">
+												<option value="" disabled>Select Proficiency</option>
                                                 <option value="Basic" ng-selected="primari_lang.proficiency == 'Basic'">Basic</option>
                                                 <option value="Intermediate" ng-selected="primari_lang.proficiency == 'Intermediate'">Intermediate</option>
                                                 <option value="Expert" ng-selected="primari_lang.proficiency == 'Expert'">Expert</option>
@@ -1078,6 +1096,7 @@
                                             <label>Proficiency</label>
                                             <span class="span-select">
                                                 <select class="proficiency" name="proficiency[]">
+													<option value="" disabled>Select Proficiency</option>
                                                     <option value="Basic" ng-selected="field.proficiency == 'Basic'">Basic</option>
                                                     <option value="Intermediate" ng-selected="field.proficiency == 'Intermediate'">Intermediate</option>
                                                     <option value="Expert" ng-selected="field.proficiency == 'Expert'">Expert</option>
@@ -2608,3 +2627,19 @@
 </div>
 
 <!-- All Model End -->
+<script>
+	$(document).ready(function () {
+				$('.dtl-edit-bottom').hover(function () {
+					$('.profile-status').addClass('hover-bottom');
+				}, function () {
+					$('.profile-status').removeClass('hover-bottom');
+				});
+				
+				$('.dtl-edit-top').hover(function () {
+					$('.profile-status').addClass('hover-top');
+				}, function () {
+					$('.profile-status').removeClass('hover-top');
+				});
+
+			});
+</script>

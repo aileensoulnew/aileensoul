@@ -1818,7 +1818,7 @@ box-shadow: 1px 1px 5px 0 #a2958a; padding: 6px; text-align: center; cursor: def
 .mob-comment button{background: none;}
 .mob-comment{display: none;}
 #fileCountQue{display: none;}
-.collapse-text-toggle {font-size: 13px; color: #5c5c5c; cursor: pointer; font-weight: bold;}
+.collapse-text-toggle {font-size: 13px; color: #7b7b7b; cursor: pointer; font-weight: bold;}
 .collapse-text-toggle:hover {color: #222222;}
 .collapse-text-toggle:before {/*content: '\00a0';*/}
 .collapse-text-toggle:after {/* content: '';*/}
@@ -2616,7 +2616,7 @@ padding: 4px;}
 .dtl-dis{padding:15px; width:100%; float:left;}
 .no-info{text-align:left;}
 .no-info img{width:50px; float:left; display:none;}
-.no-info span{width:100%; float:left; color:#7b7b7b;}
+.no-info span{width:100%; float:left; color:#7b7b7b; text-align:center; padding:12px 0;}
 .detail-right .no-info span{width:73%; padding:5px 0px 0 10px;}
 .dtl-modal .modal-content{border-radius:20px;}
 .dtl-modal .modal-close{font-size:30px; top:15px; right:17px;}
@@ -2694,6 +2694,8 @@ width: auto; height: 100%;
 -ms-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
 max-width: inherit;}
+.dis-list li .inner-dis span{font-weight:normal; display:inline; font-size:14px;}
+.dis-list li .inner-dis span.collapse-text-toggle{font-weight:bold; font-size:13px;}
 .dtl-dis .control__indicator{top:0;}
 .dis-accor .panel-group{width:100%; float:left; margin-bottom:5px;}
 .dtl-dis ul.skill-list{width:100%; float:left; padding-bottom:0; border-bottom:0; padding-top:2px;}
@@ -2769,7 +2771,7 @@ transform: translate(-50%, -50%); max-width: inherit;}
 .dtl-edit-top{position:absolute; width:100%; top:0; height:110px;}
 .dtl-edit-bottom{position:absolute; width:100%; top:111px; height:110px;}
 .profile-status {text-align: left; display: none; position: absolute; left: 35px; background: #f5f9fc; border: 1px solid #d2d2d2; padding: 20px 15px;
-width: 80%; border-radius: 10px;}
+width: 80%; border-radius: 10px; z-index:9;}
 .profile-status.hover-bottom{display:block; top: 110px;}
 .profile-status.hover-top{display:block; top: -95px;}
 .profile-status li span{width:15px; height:15px; display:inline-block;}
@@ -2778,6 +2780,14 @@ width: 80%; border-radius: 10px;}
 .dtl-edit-p li.fw{width:100%;}
 .dtl-edit-p li.pl20{padding-left:20px;}
 .edit-profile-move.masonry-item{--gap:0;}
+.dtl-modal .dropdown-menu::before{display:none;}
+.custom-color{color:#555;}
+#about-detail h4{margin-bottom:2px;}
+#about-detail .dtl-dis .known-language{padding-bottom:17px;}
+.select-preview label{font-size:14px; font-weight:normal;}
+.edit-form-cus .dtl-btn .save{width:50%; display:inline-block; float:left;}
+.edit-form-cus .dtl-btn .save:hover{border-bottom-right-radius:0;}
+.edit-form-cus .dtl-btn .save.delete-edit:hover{border-bottom-right-radius:20px; border-bottom-left-radius:0px;}
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
@@ -2866,6 +2876,7 @@ width: 80%; border-radius: 10px;}
 .dtl-modal .form-group textarea.error{color:#7b7b7b !important;}
 .upload-file .error{font-size:13px; position:absolute; left:0; bottom:-20px; width:100%;}
 .personal-link-info{font-size:12px; color:#7b7b7b;}
+#user_idol_file.error{position:inherit; border:0 !important; color:#ff0000 !important;}
 
 /**  ratings  **/
 .rating-container .rating-stars {position: relative; cursor: pointer; vertical-align: middle; overflow: hidden; white-space: nowrap; height:24px;}
