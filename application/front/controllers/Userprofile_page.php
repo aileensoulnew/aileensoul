@@ -2384,4 +2384,13 @@ class Userprofile_page extends MY_Controller {
         $ret_arr = array("success"=>1,"user_research"=>$user_research);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
+
+    public function get_user_data()
+    {
+        $userid = $this->session->userdata('aileenuser');
+        $professionData = $this->user_model->getUserProfessionData($userid,"*");        
+        $studentData = $this->user_model->getUserStudentData($userid,"*");
+        $ret_arr = array("success"=>1,"professionData"=>$professionData,"studentData"=>$studentData);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
 }

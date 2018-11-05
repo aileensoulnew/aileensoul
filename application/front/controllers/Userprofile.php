@@ -57,6 +57,9 @@ class Userprofile extends MY_Controller {
         }
         $this->data['title'] = "About ".ucwords($fullname)." | Aileensoul";
         $this->data['metadesc'] = "Connect with ".ucwords($fullname).", ".ucwords($desg)." and know more about him only at Aileensoul.com. Join Now!";
+
+        $this->data['professionData'] = $this->user_model->getUserProfessionData($userid,"*");        
+        $this->data['studentData'] = $this->user_model->getUserStudentData($userid,"*");
         
         $is_userContactInfo = $this->userprofile_model->userContactStatus($userid, $userdata['user_id']);
         $is_userFollowInfo = $this->userprofile_model->userFollowStatus($userid, $userdata['user_id']);

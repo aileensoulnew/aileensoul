@@ -321,6 +321,136 @@ app.controller('userProfileController', function ($scope, $http) {
     $scope.follow_status = follow_status;
     $scope.follow_id = follow_id;
 
+    $scope.get_user_detail = function(){
+        $http.get(base_url + "userprofile_page/get_user_data").then(function (success) {            
+            var professionData = success.data.professionData
+            var studentData = success.data.studentData;
+            if(professionData != null && professionData.length > 0)
+            {
+                $("#user-basic-info").show();
+                $("#user-student-info").hide();
+            }
+            if(studentData != null && studentData.length > 0)
+            {
+                $("#user-basic-info").hide();
+                $("#user-student-info").show();
+            }
+        }, function (error) {});
+    };
+    $scope.get_user_detail();
+    $scope.open_student = function()
+    {
+        $("#user-basic-info").hide();
+        $("#user-student-info").show();
+    };
+
+    $scope.other_basic_info = function(){
+        if($scope.basic_info_field != "" && $scope.basic_info_field == 0)
+        {
+            $("#basic_info_other_field_div").show();
+        }
+        else
+        {
+            $("#basic_info_other_field_div").hide();
+        }
+    };
+
+    $scope.get_field_list = function() {
+        $http.get(base_url + "general_data/getFieldList").then(function (success) {
+            $scope.fieldList = success.data;
+        }, function (error) {});
+    }
+    $scope.get_field_list();
+
+    $scope.basic_job_title_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitleStart',
+            data: 'q=' + $scope.basic_job_title,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    };
+
+    $scope.basic_info_city_list = function () {
+        $http({
+        method: 'POST',
+                url: base_url + 'general_data/searchCityList',
+                data: 'q=' + $scope.basic_info_city,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            data = success.data;
+            $scope.citySearchResult = data;
+        });
+    }
+    // $scope.basic_info_city();
+
+    
+    $scope.save_user_basicinfo = function(){
+        alert(1);
+    };
+
+    $scope.open_basicinfo = function()
+    {
+        $("#user-basic-info").show();
+        $("#user-student-info").hide();
+    };
+
+    $scope.other_stud_info = function(){
+        if($scope.stud_info_field != "" && $scope.stud_info_field == 0)
+        {
+            $("#stud_info_other_field_div").show();
+        }
+        else
+        {
+            $("#stud_info_other_field_div").hide();
+        }
+    };
+
+    $scope.stud_info_study_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/degreeList',
+            data: 'q=' + $scope.stud_info_study,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.degreeSearchResult = data;
+        });
+    }
+
+    $scope.stud_info_city_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchCityList',
+            data: 'q=' + $scope.stud_info_city,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.citySearchResult = data;
+        });
+    }
+
+    $scope.stud_info_university_list = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchUniversityList',
+            data: 'q=' + $scope.stud_info_university,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.universitySearchResult = data;
+        });
+    }
+
+    $scope.save_user_studinfo = function(){
+        alert(2);
+    };
 
     $scope.contact = function (id, status, to_id, confirm = 0) {
         // alert(status);
@@ -339,7 +469,7 @@ app.controller('userProfileController', function ($scope, $http) {
         .then(function (success) {                    
             $scope.contact_value = success.data.trim();
         });
-    }
+    };
 
     $scope.remove_contact = function (id, status, to_id) {
         $http({
@@ -351,7 +481,7 @@ app.controller('userProfileController', function ($scope, $http) {
         .then(function (success) {                    
             $scope.contact_value = success.data.trim();
         });
-    }
+    };
 
     $scope.confirmContactRequestInnerHeader = function (from_id) {
         $http({
@@ -362,7 +492,7 @@ app.controller('userProfileController', function ($scope, $http) {
         }).then(function (success) {
             $scope.contact_value = 'confirm';
         });
-    }
+    };
     $scope.follow = function (id, status, to_id) {
         $http({
             method: 'POST',
@@ -373,7 +503,7 @@ app.controller('userProfileController', function ($scope, $http) {
                 .then(function (success) {
                     $scope.follow_value = success.data;
                 });
-    }
+    };
 });
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -4264,6 +4394,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.reset_research_form = function(){        
         $scope.edit_research = 0;
         $scope.research_file_old = '';
+        $("#research").removeClass("edit-form-cus");
         $("#research_day").html("");
         $("#research_year").html("");
         $("#research_file_error").hide();
@@ -4273,7 +4404,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#research_form")[0].reset();
     };
     $scope.edit_user_research = function(index){
-        $scope.reset_research_form();        
+        $scope.reset_research_form();
+        $("#research").addClass("edit-form-cus");
         var research_arr = $scope.user_research[index];
         $scope.edit_research = research_arr.id_research;
         $("#research_title").val(research_arr.research_title);
@@ -4315,7 +4447,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.research_form.validate();
         },1000);
-        var delete_btn = '<a id="delete_user_research_modal" href="#" data-target="#delete-research-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_research_modal" href="#" data-target="#delete-research-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_research_loader"));
         $compile(contentbtn)($scope);
@@ -4660,6 +4792,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.reset_user_idols = function(){        
         $scope.edit_idols = 0;
         $scope.user_idol_pic_old = "";
+        $("#inspiration").removeClass("edit-form-cus");
         idol_formdata = new FormData();
         $("#research_doc_prev").remove();
         $("#delete_user_idol_modal").remove();
@@ -4668,6 +4801,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
     $scope.edit_user_idols = function(index){
         $scope.reset_user_idols();
+        $("#inspiration").addClass("edit-form-cus");
         var idols_arr = $scope.user_idols[index];
         console.log(idols_arr);
         $scope.edit_idols = idols_arr.id_idol;
@@ -4697,7 +4831,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.research_form.validate();
         },1000);
-        var delete_btn = '<a id="delete_user_idol_modal" href="#" data-target="#delete-idol-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_idol_modal" href="#" data-target="#delete-idol-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_idol_loader"));
         $compile(contentbtn)($scope);
@@ -5016,6 +5150,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.reset_publication_form = function(){        
         $scope.edit_publication = 0;
         $scope.pub_file_old = '';
+        $("#publication").removeClass("edit-form-cus");
         $("#publication_day").html("");
         $("#publication_year").html("");
         $("#pub_file_error").hide();        
@@ -5024,7 +5159,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#publication_form")[0].reset();
     };
     $scope.edit_user_publication = function(index){
-        $scope.reset_publication_form();        
+        $scope.reset_publication_form();
+        $("#publication").addClass("edit-form-cus");
         var publication_arr = $scope.user_publication[index];
         $scope.edit_publication = publication_arr.id_publication;
         $("#pub_title").val(publication_arr.pub_title);
@@ -5063,7 +5199,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.publication_form.validate();
         },1000);
-        var delete_btn = '<a id="delete_user_publication_modal" href="#" data-target="#delete-publication-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_publication_modal" href="#" data-target="#delete-publication-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_publication_loader"));
         $compile(contentbtn)($scope);
@@ -5387,6 +5523,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.reset_patent_form = function(){        
         $scope.edit_patent = 0;
         $scope.patent_file_old = '';
+        $("#patent").removeClass("edit-form-cus");
         $("#patent_day").html("");
         $("#patent_year").html("");
         $("#patent_doc_prev").remove();
@@ -5395,6 +5532,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.edit_user_patent = function(index){
         $scope.reset_patent_form();        
+        $("#patent").addClass("edit-form-cus");
         var patent_arr = $scope.user_patent[index];
         $scope.edit_patent = patent_arr.id_patent;
         $("#patent_title").val(patent_arr.patent_title);
@@ -5435,7 +5573,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $scope.patent_form.validate();
         },1000);
 
-        var delete_btn = '<a id="delete_user_patent_modal" href="#" data-target="#delete-patent-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_patent_modal" href="#" data-target="#delete-patent-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_patent_loader"));
         $compile(contentbtn)($scope);
@@ -5738,6 +5876,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.reset_awards_form = function(){        
         $scope.edit_awards = 0;
         $scope.awards_file_old = '';
+        $("#Achiv-awards").removeClass("edit-form-cus");
         $("#award_day").html("");
         $("#award_year").html("");
         $("#award_file_error").hide();        
@@ -5747,6 +5886,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.edit_user_award = function(index){
         $scope.reset_awards_form();
+        $("#Achiv-awards").addClass("edit-form-cus");
         var award_arr = $scope.user_award[index];
         $scope.edit_awards = award_arr.id_award;
         $("#award_title").val(award_arr.award_title);
@@ -5784,7 +5924,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $scope.award_form.validate();
         },1000);
 
-        var delete_btn = '<a id="delete_user_award_modal" href="#" data-target="#delete-award-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_award_modal" href="#" data-target="#delete-award-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_award_loader"));
         $compile(contentbtn)($scope);
@@ -6077,6 +6217,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
     $scope.reset_activity_form = function(){
         $scope.edit_activity = 0;
+        $("#extra-activity").addClass("edit-form-cus");
         $scope.activity_file_old = "";
         $("#activity_s_month").html('');
         $("#activity_e_year").html('');
@@ -6090,6 +6231,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.edit_user_activity = function(index){
         $scope.reset_activity_form();
+        $("#extra-activity").addClass("edit-form-cus");
         var activity_arr = $scope.user_activity[index];        
         $scope.edit_activity = activity_arr.id_extra_activity;
         $("#activity_participate").val(activity_arr.activity_participate);
@@ -6133,7 +6275,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.activity_form.validate();
         },1000);
-        var delete_btn = '<a id="delete_user_activity_modal" href="#" data-target="#delete-activity-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_activity_modal" href="#" data-target="#delete-activity-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_activity_loader"));
         $compile(contentbtn)($scope);
@@ -6425,6 +6567,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.reset_addicourse_form = function(){
         $scope.edit_addicourse = 0;
         $scope.addicourse_file_old = "";
+        $("#additional-course").removeClass("edit-form-cus");
         $("#addicourse_s_month").html('');
         $("#addicourse_e_year").html('');
         $("#addicourse_e_month").html('');
@@ -6437,6 +6580,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.edit_user_addicourse = function(index){
         $scope.reset_addicourse_form();
+        $("#additional-course").addClass("edit-form-cus");
         var addicourse_arr = $scope.user_addicourse[index];        
         $scope.edit_addicourse = addicourse_arr.id_addicourse;
         $("#addicourse_name").val(addicourse_arr.addicourse_name);
@@ -6480,7 +6624,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.addicourse_form.validate();
         },1000); 
-        var delete_btn = '<a id="delete_user_addicourse_modal" href="#" data-target="#delete-addicourse-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_addicourse_modal" href="#" data-target="#delete-addicourse-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_addicourse_loader"));
         $compile(contentbtn)($scope);
@@ -6889,6 +7033,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     };
     $scope.reset_exp_form = function(){
+        $("#experience").removeClass("edit-form-cus");
         $scope.exp_designation_fnc();
         $scope.edit_exp = 0;
         $scope.exp_file_old = '';
@@ -6946,6 +7091,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.edit_user_exp = function(index){
 
         $scope.reset_exp_form();
+        $("#experience").addClass("edit-form-cus");
         // $scope.exp_city_list = [];
         $scope.edit_exp = $scope.user_experience[index].id_experience;        
         $("#edit_exp").val($scope.user_experience[index].id_experience);
@@ -7052,7 +7198,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         setTimeout(function(){  
             $scope.experience_form.validate();
         },1000);
-        var delete_btn = '<a id="delete_user_exp_modal" href="#" data-target="#delete-exp-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_exp_modal" href="#" data-target="#delete-exp-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_exp_loader"));
         $compile(contentbtn)($scope);
@@ -7444,6 +7590,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
 
     $scope.reset_project_form = function(){
+        $("#dtl-project").removeClass("edit-form-cus");
         $scope.edit_project = 0;
         $scope.project_file_old = "";
         $("#other_project").hide();
@@ -7465,7 +7612,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.edit_user_project = function(index){
         $scope.reset_project_form();
         var projects_arr = $scope.user_projects[index];
-        
+        $("#dtl-project").addClass("edit-form-cus");
         $scope.edit_project = projects_arr.id_projects;
         $("#project_title").val(projects_arr.project_title);
         $("#project_team").val(projects_arr.project_team);
@@ -7547,7 +7694,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $scope.project_form.validate();
         },1000);
 
-        var delete_btn = '<a id="delete_user_project_modal" href="#" data-target="#delete-project-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_project_modal" href="#" data-target="#delete-project-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#prject_loader"));
         $compile(contentbtn)($scope);
@@ -7946,6 +8093,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.reset_edu_form = function(){
         $scope.edit_edu = 0;
+        $("#educational-info").removeClass("edit-form-cus");
         $scope.edu_file_old = "";
         $("#other_edu").hide();
         $scope.edu_university = "";
@@ -7965,6 +8113,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.edit_user_edu = function(index){
         $scope.reset_edu_form();
+        $("#educational-info").addClass("edit-form-cus");
         var edu_arr = $scope.user_education[index];        
         $scope.edit_edu = edu_arr.id_education;
         $("#edu_school_college").val(edu_arr.edu_school_college);
@@ -8030,7 +8179,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $scope.edu_form.validate();
         },1000); 
 
-        var delete_btn = '<a id="delete_user_edu_modal" href="#" data-target="#delete-edu-model" data-toggle="modal" class="save"><span>Delete</span></a>';
+        var delete_btn = '<a id="delete_user_edu_modal" href="#" data-target="#delete-edu-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#edu_loader"));
         $compile(contentbtn)($scope);
@@ -8088,7 +8237,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.set_progress = function(count_profile_value,count_profile){
         if(count_profile == 100)
         {
-            $("#progress-txt").html("Successfully Completed!");
+            $("#progress-txt").html("Hurray! Your profile is complete.");
             setTimeout(function(){
                 $("#edit-profile-move").hide();
             },5000);
@@ -8097,7 +8246,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         {
             $("#edit-profile-move").show();
             $("#profile-progress").show();                
-            $("#progress-txt").html("Fill whole profile to reach 100%.");   
+            $("#progress-txt").html("Complete your profile to get connected with more people.");   
         }
         // if($scope.old_count_profile < 100)
         {
