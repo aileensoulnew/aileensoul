@@ -2649,7 +2649,7 @@ padding: 4px;}
 .dtl-modal label{font-size:15px;}
 .dlt-img{margin-top:32px;}
 .dtl-modal select{padding-left:12px;}
-.form-group .upload-file input{border:0; padding:10px 0 0; height:auto;}
+.form-group .upload-file input{border:0; padding:0px; height:auto; width:auto;}
 .edit-user-info{position:absolute; right:25px; top:150px;}
 .edit-user-info a img{width:25px;}
 .dtl-dis ul{padding-left:0; margin-bottom:0;  padding-bottom:5px;}
@@ -2860,6 +2860,12 @@ width: 80%; border-radius: 10px;}
 .dtl-modal .form-group textarea[type="text"]:focus{border:1px solid #1b8ab9;}
 .dtl-modal .modal-content .post-field .form-group{padding:0; margin-bottom:15px;}
 .dtl-modal .modal-content .post-field label{margin-bottom:5px;}
+.dtl-modal .form-group label.error{display:none !important;}
+.dtl-modal .form-group input.error{color:#7b7b7b !important;}
+.dtl-modal .form-group select.error{color:#7b7b7b !important;}
+.dtl-modal .form-group textarea.error{color:#7b7b7b !important;}
+.upload-file .error{font-size:13px; position:absolute; left:0; bottom:-20px; width:100%;}
+.personal-link-info{font-size:12px; color:#7b7b7b;}
 
 /**  ratings  **/
 .rating-container .rating-stars {position: relative; cursor: pointer; vertical-align: middle; overflow: hidden; white-space: nowrap; height:24px;}
@@ -2955,7 +2961,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 .verify-body-inner .middle-section{padding-top:115px;}
 .verify{background:#f6f6f6; padding:10px;}
 .email-verify .email-img img{width:33px;}
-.common-form_border{border-radius:20px; border:0px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
+.business-profile .common-form_border{border-radius:20px; border:0px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
 .all-edit-form .common-form h3{border-top-left-radius: 20px; border-top-right-radius: 20px; background:transparent;}
 .common-form form{background:transparent;}
 .form-radius-new .form-box{border-radius:20px; border:0px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}

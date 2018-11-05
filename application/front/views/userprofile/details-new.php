@@ -1391,11 +1391,13 @@
                         </div>
                         <div class="form-group">
                             <label>Board / University</label>
-                            <select id="edu_university" name="edu_university" ng-model="edu_university" ng-change="edu_university_change();">
-                                <option value="">Board / University</option>    
-                                <option data-ng-repeat='university_item in university_data' value='{{university_item.university_id}}'>{{university_item.university_name}}</option>
-                                <option value="0">Other</option>    
-                            </select>
+							<span class="span-select">
+								<select id="edu_university" name="edu_university" ng-model="edu_university" ng-change="edu_university_change();">
+									<option value="">Board / University</option>    
+									<option data-ng-repeat='university_item in university_data' value='{{university_item.university_id}}'>{{university_item.university_name}}</option>
+									<option value="0">Other</option>    
+								</select>
+							</span>
                         </div>
                         <div id="other_university" class="form-group" style="display: none;">
                             <input type="text" placeholder="Other Board / University" id="edu_other_university" name="edu_other_university" maxlength="200" minlength="3">
@@ -1405,19 +1407,23 @@
                                 <div class="col-md-6 col-sm-6">
                                     <label>Degree / Qualification </label>
                                     <!-- <input type="text" placeholder="Degree / Qualification "> -->
+									<span class="span-select">
                                     <select id="edu_degree" name="edu_degree" ng-model="edu_degree" ng-change="edu_degree_change();">
                                         <option value="">Degree / Qualification</option>    
                                         <option data-ng-repeat='degree_item in degree_data' value='{{degree_item.degree_id}}'>{{degree_item.degree_name}}</option>
                                         <option value="0">Other</option>    
                                     </select>
+									</span>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <label>Course / Field of Study / Stream </label>
                                     <!-- <input type="text" placeholder="Course / Field of Study / Stream"> -->
+									<span class="span-select">
                                     <select id="edu_stream" name="edu_stream" ng-model="edu_stream" ng-change="edu_stream_change()" disabled = "disabled">
                                         <option value="">Course / Field of Study / Stream</option>
                                         <option data-ng-repeat='stream_item in stream_data' value='{{stream_item.stream_id}}'>{{stream_item.stream_name}}</option>
                                     </select>
+									</span>
                                     <img id="edu_stream_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 33px;right: 33px;display: none;">
                                 </div>
                             </div>
@@ -2472,6 +2478,10 @@
                 </div>
                 <form name="idol_form" id="idol_form" ng-validate="idol_validate">
                     <div class="dtl-dis">
+						<div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Enter Name" id="user_idol_name" name="user_idol_name">
+                        </div>
                         <div class="form-group">
                             <div class="upload-file">
                                 <label>Upload File (Photo of your inspiration)</label>
@@ -2479,10 +2489,7 @@
                                 <span id="user_idol_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" placeholder="Enter Name" id="user_idol_name" name="user_idol_name">
-                        </div>
+                        
                     </div>
                     <div class="dtl-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
