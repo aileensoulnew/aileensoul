@@ -969,7 +969,7 @@ a:focus{outline:none;}
 .circles {padding-top: 5px; text-align: center; }
 .circle-1 {width: 175px; margin: 0 6px 6px; display: inline-block; position: relative; text-align: center; line-height: 1.2;}
 .circle-1 canvas {vertical-align: middle; width: 175px; height: 175px; border: 1px solid transparent; display: #000;}
-.circle-1 strong {position: absolute; top: 54px; left: 5px; width: 100%; text-align: center; line-height: 40px; font-size: 30px;}
+.circle-1 strong {position: absolute; top: 54px; left: 5px; width: 100%; text-align: center; line-height: 40px; font-size: 28px;}
 #progress-txt{position: absolute; top: 94px; width: 100%; text-align: center; left: 0; font-size:12px; padding: 0 21px; font-weight:bold; color:#939393;}
 /***  end profile progress bar  ***/
 

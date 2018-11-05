@@ -37,7 +37,7 @@ if($first_segment == "")
                 <span class="email-img"><img src="<?php echo base_url(); ?>assets/images/email.png" alt="Email"></span>
                 <span class="main-txt">
                     <span class="as-p">
-                        Please verify your email address! <?php if($userData['is_new'] == 1){
+                        Please verify <span class="none-479">your</span> email address! <?php if($userData['is_new'] == 1){
                         echo "Check your inbox or spam folder in order to verify yourself.";
                     } ?> 
                     </span>

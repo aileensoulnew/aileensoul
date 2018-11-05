@@ -2629,6 +2629,7 @@ padding: 4px;}
 .dtl-dis p a b{color:#7b7b7b;}
 .dtl-btn{width:100%; float:left; text-align:center; border-top:1px solid #d2d2d2;}
 .dtl-btn .save, .dtl-btn .back{font-size:18px; font-weight:bold; letter-spacing:1px; width:100%; padding:16px 15px 15px; display:block;}
+.dtl-modal .dtl-btn .back{border:0; border-radius:0; border-bottom-left-radius:20px;}
 .dtl-btn .save span, .dtl-btn .back span{-webkit-text-fill-color: transparent; color: #1b8ab9;
 	background: -webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
     background-clip: border-box;
@@ -2708,7 +2709,7 @@ max-width: inherit;}
 .idol-box ul li{ float:left; width:100%; margin-bottom:15px; display:flex; align-items:center; padding-top:2px;} 
 .idol-box ul li:last-child{margin-bottom:0;}
 .idol-box ul li img{width:100%; border-radius:100%; width:50px; height:50px; margin-right:10px; float:left;}
-.idol-box ul li span{vertical-align:middle; float:left; width:66%;}
+.idol-box ul li span{vertical-align:middle; float:left; width:70%;}
 .modal-body-cus{width:100%; float:left;}
 .modal-body-cus .idol-box{width:100%; float:left;}
 .modal-body-cus .idol-box ul li span img{width:20px; height:auto; border-radius:0;}
@@ -2789,6 +2790,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .edit-form-cus .dtl-btn .save:hover{border-bottom-right-radius:0;}
 .edit-form-cus .dtl-btn .save.delete-edit:hover{border-bottom-right-radius:20px; border-bottom-left-radius:0px;}
 .edit-form-cus .dtl-btn .save.delete-edit{border-left:1px solid #d2d2d2;}
+.idol-box ul li a.pull-right img{width:20px; height:auto; border-radius:0; margin-right:0;}
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
@@ -3294,6 +3296,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dis-right{padding-top:0;}
 	.dis-right{width:40px;}
 	.all-detail-custom .right-add{display:block;}
+	.profile-text1{top:50px !important;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -4104,7 +4107,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dtl-modal .dtl-title{border-radius:0px;}
 	.dtl-modal .modal-close{top:15px;}
 	.dtl-btn .save:hover{border-radius:0;}
-	#profile-overview .dtl-btn{position:absolute; width:100%; bottom:0;}
+	#profile-overview .dtl-btn{/*position:absolute; width:100%; bottom:0;*/}
 	#skills .dtl-btn, .dtl-btn.bottom-btn {position:absolute; width:100%; bottom:0;}
 	.dtl-about-box .width-45{width:44%;}
 	.dtl-about-box .width-10{width:12%;}
@@ -4117,6 +4120,9 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	#social-link .span-select select{padding-left:1px;}
 	.job_reg_main{box-shadow:none; border-top:1px solid #d2d2d2; border-bottom:1px solid #d2d2d2; border-radius:0;}
 	.span-select .form-control{padding-left:5px;}
+	.dtl-modal .modal-dialog{padding:0 !important;}
+	.profile-text1 .as-p{padding-left:5px;}
+	.email-verify{padding-left:0;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
