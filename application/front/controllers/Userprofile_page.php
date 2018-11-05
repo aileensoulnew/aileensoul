@@ -1054,6 +1054,7 @@ class Userprofile_page extends MY_Controller {
         {
             $ret_arr = array("success"=>0);   
         }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));        
     }
 
@@ -1101,6 +1102,7 @@ class Userprofile_page extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -1193,6 +1195,7 @@ class Userprofile_page extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -1327,6 +1330,7 @@ class Userprofile_page extends MY_Controller {
         $user_social_links_data = $this->userprofile_model->get_user_social_links($userid);        
         $user_personal_links_data = $this->userprofile_model->get_user_personal_links($userid);        
         $ret_arr = array("success"=>1,"user_social_links_data"=>$user_social_links_data,"user_personal_links_data"=>$user_personal_links_data);
+        $ret_arr['profile_progress'] = $this->progressbar($userid);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -1383,7 +1387,8 @@ class Userprofile_page extends MY_Controller {
                 $user_idol = $this->userprofile_model->save_user_idol($userid,$user_idol_name,$fileName);
 
                 $user_idol = $this->userprofile_model->get_user_idols($userid);
-                $ret_arr = array("success"=>1,"user_idols"=>$user_idol);
+                $profile_progress = $this->progressbar($userid);
+                $ret_arr = array("success"=>1,"user_idols"=>$user_idol,"profile_progress"=>$profile_progress);
             }
             else
             {
@@ -1428,7 +1433,8 @@ class Userprofile_page extends MY_Controller {
             $userid = $this->session->userdata('aileenuser');                
             $user_idol = $this->userprofile_model->save_user_idol($userid,$user_idol_name,$fileName,$edit_idols);
             $user_idol = $this->userprofile_model->get_user_idols($userid);
-            $ret_arr = array("success"=>1,"user_idols"=>$user_idol);
+            $profile_progress = $this->progressbar($userid);                
+            $ret_arr = array("success"=>1,"user_idols"=>$user_idol,"profile_progress"=>$profile_progress);
         }
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
@@ -1441,7 +1447,8 @@ class Userprofile_page extends MY_Controller {
         {
             $user_idol_insert = $this->userprofile_model->delete_user_idol($user_id,$idol_id);
             $user_idol = $this->userprofile_model->get_user_idols($user_id);
-            $ret_arr = array("success"=>1,"user_idols"=>$user_idol);
+            $profile_progress = $this->progressbar($userid);  
+            $ret_arr = array("success"=>1,"user_idols"=>$user_idol,"profile_progress"=>$profile_progress);
         }
         else
         {
@@ -1455,14 +1462,7 @@ class Userprofile_page extends MY_Controller {
         $user_slug = $this->input->post('user_slug');
         $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
         $user_idols = $this->userprofile_model->get_user_idols($userid);
-        if(empty($user_idols))
-        {
-            $ret_arr = array("success"=>0);
-        }
-        else
-        {
-            $ret_arr = array("success"=>1,"user_idols"=>$user_idols);
-        }
+        $ret_arr = array("success"=>1,"user_idols"=>$user_idols);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -1953,6 +1953,7 @@ class Userprofile_page extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -1984,7 +1985,8 @@ class Userprofile_page extends MY_Controller {
             $cal_years = array_sum($month);
             $total_month = $cal_years % 12;
             $years = $years + intval($cal_years / 12);
-            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month);
+            $profile_progress = $this->progressbar($user_id);
+            $ret_arr = array("success"=>1,"user_experience"=>$user_experience,"exp_years"=>$years,"exp_months"=>$total_month,"profile_progress"=>$profile_progress);
         }
         else
         {
@@ -2259,6 +2261,7 @@ class Userprofile_page extends MY_Controller {
         {
             $ret_arr = array("success"=>0);
         }
+        $ret_arr['profile_progress'] = $this->progressbar($user_id);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 
@@ -2270,7 +2273,8 @@ class Userprofile_page extends MY_Controller {
         {
             $user_exp_insert = $this->userprofile_model->delete_user_education($user_id,$edu_id);
             $user_education = $this->userprofile_model->get_user_education($user_id);
-            $ret_arr = array("success"=>1,"user_education"=>$user_education);
+            $profile_progress = $this->progressbar($user_id);              
+            $ret_arr = array("success"=>1,"user_education"=>$user_education,"profile_progress"=>$profile_progress);
         }
         else
         {

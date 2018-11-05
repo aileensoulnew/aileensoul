@@ -79,11 +79,11 @@
                         </div>
                         <div id="about-body" style="display: none;">
                             <div id="about-detail" class="dtl-dis about-detail">
-                                <div class="no-info" ng-if="about_user_data.user_hobbies == '' && about_user_data.user_fav_quote_headline == '' && about_user_data.user_fav_artist == '' && about_user_data.user_fav_book == '' && about_user_data.user_fav_sport == ''">
+                                <div class="no-info" ng-if="about_user_data.user_hobbies == '' && about_user_data.user_fav_quote_headline == '' && about_user_data.user_fav_artist == '' && about_user_data.user_fav_book == '' && about_user_data.user_fav_sport == '' && user_languages.length < '1' && details_data.DOB == ''">
                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                     <span>Lorem ipsum its a dummy text and its user to for all.</span>
                                 </div>
-                                <div ng-if="about_user_data.user_hobbies != '' || about_user_data.user_fav_quote_headline != '' || about_user_data.user_fav_artist != '' || about_user_data.user_fav_book != '' || about_user_data.user_fav_sport != ''">
+                                <div ng-if="about_user_data.user_hobbies != '' || about_user_data.user_fav_quote_headline != '' || about_user_data.user_fav_artist != '' || about_user_data.user_fav_book != '' || about_user_data.user_fav_sport != '' || user_languages.length > 0 || details_data.DOB != ''">
                                     <div ng-if="user_languages.length > 0">
                                         <h4>Language Known</h4>                                    
                                         <ul class="known-language">
@@ -989,7 +989,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="view-more-idol" class="about-more">
+                    <div id="view-more-idol" class="about-more" ng-if="user_idols.length > '3'">
                         <a href="#" ng-click="idol_view_more()">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                     </div>
                 </div>

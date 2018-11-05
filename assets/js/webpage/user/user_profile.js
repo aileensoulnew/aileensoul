@@ -3510,6 +3510,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var all_months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     $scope.user = {};
     $scope.$parent.title = "Details | Aileensoul";
+    $scope.old_count_profile = 0;
     // PROFEETIONAL DATA
     getFieldList();
 
@@ -3541,7 +3542,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $('#main_loader').hide();
             // $('#main_page_load').show();
             $('body').removeClass("body-loader");
-            profile_progress = success.data.profile_progress;
+            
             details_data = success.data.detail_data;
             user_bio = success.data.user_bio;
             skills_data = success.data.skills_data;
@@ -3557,21 +3558,16 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             dob_month = dob[1];            
             dob_day = dob[2];            
             dob_year = dob[0];
-            $scope.dob_fnc(dob_day,dob_month,dob_year); 
+            $scope.dob_fnc(dob_day,dob_month,dob_year);
 
-            $scope.count_profile_value = profile_progress.user_process_value;
-            $scope.count_profile = profile_progress.user_process;            
-            if($scope.count_profile == 100)
+            var profile_progress = success.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            if(count_profile == 100)
             {
-                $("#progress-txt").html("Successfully Completed!");
                 $("#edit-profile-move").hide();
             }
-            else
-            {
-                $("#profile-progress").show();                
-                $("#progress-txt").html("Fill whole profile to reach 100%.");   
-            }
-            $scope.set_progress($scope.count_profile_value,$scope.count_profile);
+            $scope.set_progress(count_profile_value,count_profile);
             $("#skill-loader").hide();
             $("#skill-body").show();
 
@@ -3689,6 +3685,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     user_bio = result.data.user_bio;
                     $scope.user_bio = user_bio;                
                 }
+                var profile_progress = result.data.profile_progress;
+                var count_profile_value = profile_progress.user_process_value;
+                var count_profile = profile_progress.user_process;
+                $scope.set_progress(count_profile_value,count_profile);
                 $("#user_bio_save").removeAttr("style");
                 $("#user_bio_loader").hide();
                 $("#profile-overview").modal('hide');
@@ -3700,34 +3700,39 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#user_bio").val($scope.user_bio);
     });
     var close_skill = 0;
-    $scope.save_user_skills = function(){        
-        if($scope.edit_user_skills != "")
-        {
-            $("#user_skills_loader").show();
-            $("#user_skills_save").attr("style","pointer-events:none;display:none;");
-            var updatedata = $.param({"user_skills":$scope.edit_user_skills});
-            $http({
-                method: 'POST',
-                url: base_url + 'userprofile_page/save_user_skills',                
-                data: updatedata,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            })
-            .then(function (result) {
-                success = result.data.success;
-                if(success == 1)
-                {
-                    skills_data = result.data.skills_data;
-                    skills_data_edit = result.data.skills_data_edit;
-                    $scope.user_skills = skills_data;
-                    $scope.edit_user_skills = skills_data_edit;
-                }
-                close_skill = 1;
-                $("#user_skills_save").removeAttr("style");
-                $("#user_skills_loader").hide();
-                // $("#skills").modal('hide');
-                $("#skills .modal-close").click();
-            });
-        }
+    $scope.save_user_skills = function(){
+
+        $("#user_skills_loader").show();
+        $("#user_skills_save").attr("style","pointer-events:none;display:none;");
+        var updatedata = $.param({"user_skills":$scope.edit_user_skills});
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/save_user_skills',                
+            data: updatedata,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (result) {
+            success = result.data.success;
+            if(success == 1)
+            {
+                skills_data = result.data.skills_data;
+                skills_data_edit = result.data.skills_data_edit;
+                $scope.user_skills = skills_data;
+                $scope.edit_user_skills = skills_data_edit;
+            }
+            close_skill = 1;
+
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.set_progress(count_profile_value,count_profile);
+            
+            $("#user_skills_save").removeAttr("style");
+            $("#user_skills_loader").hide();
+            // $("#skills").modal('hide');
+            $("#skills .modal-close").click();
+        });
+        
     };
 
     $("#skills").on("hide.bs.modal", function () {
@@ -3884,6 +3889,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             {
                 $scope.about_user_data = result.data.about_user_data;
             }
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.set_progress(count_profile_value,count_profile);
             $("#save_about_user").removeAttr("style");
             $("#about_user_loader").hide();
             // $("#profile-overview").modal('hide');
@@ -4455,6 +4464,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.social_linksset.social_links = user_social_links_data;
                 $scope.personal_linksset.personal_links = user_personal_links_data;
             }
+            var profile_progress = result.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.set_progress(count_profile_value,count_profile);
             $("#user_links_save").removeAttr("style");
             $("#user_links_loader").hide();
             // $("#profile-overview").modal('hide');
@@ -4546,6 +4559,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#idol_form")[0].reset();
                         $("#inspiration").modal('hide');
                     }
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -4564,9 +4581,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             if(success == 1)
             {
                 $scope.user_idols = result.data.user_idols;
-                $("#idol-loader").hide();
-                $("#idol-body").show();
             }
+            $("#idol-loader").hide();
+            $("#idol-body").show();
 
         });
     };
@@ -4649,6 +4666,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_idol_del_loader").hide();
                         $("#idol-delete-btn").show();                        
                         $scope.reset_user_idols();
+                        var profile_progress = result.profile_progress;
+                        var count_profile_value = profile_progress.user_process_value;
+                        var count_profile = profile_progress.user_process;
+                        $scope.set_progress(count_profile_value,count_profile);
                     }
                     else
                     {
@@ -6798,6 +6819,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         // $("#experience_form")[0].reset();
                         // $("#experience").modal('hide');
                     }
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -7000,6 +7025,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_exp_del_loader").hide();
                         $("#exp-delete-btn").show();
                         $scope.reset_exp_form();
+                        var profile_progress = result.profile_progress;
+                        var count_profile_value = profile_progress.user_process_value;
+                        var count_profile = profile_progress.user_process;
+                        $scope.set_progress(count_profile_value,count_profile);
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();                        
                     }
@@ -7808,11 +7837,19 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                     }
                     else
                     {
-                        // $("#edu_save").removeAttr("style");
-                        // $("#edu_loader").hide();
-                        // $("#edu_form")[0].reset();
+                        $scope.edu_nograduate = 0;
+                        $("#other_university").hide(); 
+                        $("#other_edu").hide();
+                        $("#edu_save").removeAttr("style");
+                        $("#edu_loader").hide();
+                        $("#edu_form")[0].reset();
+                        $scope.reset_edu_form();
                         // $("#educational-info").modal('hide');
                     }
+                    var profile_progress = result.profile_progress;
+                    var count_profile_value = profile_progress.user_process_value;
+                    var count_profile = profile_progress.user_process;
+                    $scope.set_progress(count_profile_value,count_profile);
                 }
             });
         }
@@ -7941,7 +7978,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.delete_user_edu = function(){
         $("#delete_user_edu").attr("style","pointer-events:none;display:none;");
         $("#user_edu_del_loader").show();
-        $("#exp-delete-btn").hide();
+        $("#edu-delete-btn").hide();
         if($scope.edit_edu != 0)
         {
             var expdata = $.param({'edu_id': $scope.edit_edu});
@@ -7962,6 +7999,10 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_edu_del_loader").hide();
                         $("#edu-delete-btn").show();                        
                         $scope.reset_edu_form();
+                        var profile_progress = result.profile_progress;
+                        var count_profile_value = profile_progress.user_process_value;
+                        var count_profile = profile_progress.user_process;
+                        $scope.set_progress(count_profile_value,count_profile);
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();                        
                     }
@@ -7981,12 +8022,29 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
     };
     //Education End
+    
     $scope.set_progress = function(count_profile_value,count_profile){
-        $('.second.circle-1').circleProgress({
-            value: count_profile_value //with decimal point
-        }).on('circle-animation-progress', function(event, progress) {
-            $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
-        });
+        if(count_profile == 100)
+        {
+            $("#progress-txt").html("Successfully Completed!");
+            // $("#edit-profile-move").hide();
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("Fill whole profile to reach 100%.");   
+        }
+        //if($scope.old_count_profile < 100)
+        {
+            console.log(count_profile);
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
     };
     angular.element(document).ready(function () {
         
