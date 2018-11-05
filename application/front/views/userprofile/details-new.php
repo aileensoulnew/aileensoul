@@ -79,11 +79,11 @@
                         </div>
                         <div id="about-body" style="display: none;">
                             <div id="about-detail" class="dtl-dis about-detail">
-                                <div class="no-info" ng-if="about_user_data.user_hobbies == '' && about_user_data.user_fav_quote_headline == '' && about_user_data.user_fav_artist == '' && about_user_data.user_fav_book == '' && about_user_data.user_fav_sport == '' && user_languages.length < '1' && details_data.DOB == ''">
+                                <div class="no-info" ng-if="about_user_data.user_hobbies == '' && about_user_data.user_fav_quote_headline == '' && about_user_data.user_fav_artist == '' && about_user_data.user_fav_book == '' && about_user_data.user_fav_sport == '' && user_languages.length < '1'">
                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/about.png">
                                     <span>Lorem ipsum its a dummy text and its user to for all.</span>
                                 </div>
-                                <div ng-if="about_user_data.user_hobbies != '' || about_user_data.user_fav_quote_headline != '' || about_user_data.user_fav_artist != '' || about_user_data.user_fav_book != '' || about_user_data.user_fav_sport != '' || user_languages.length > 0 || details_data.DOB != ''">
+                                <div ng-if="about_user_data.user_hobbies != '' || about_user_data.user_fav_quote_headline != '' || about_user_data.user_fav_artist != '' || about_user_data.user_fav_book != '' || about_user_data.user_fav_sport != '' || user_languages.length > 0">
                                     <div ng-if="user_languages.length > 0">
                                         <h4>Language Known</h4>                                    
                                         <ul class="known-language">
@@ -93,10 +93,10 @@
                                         </ul>
                                     </div>
                                     <ul class="dis-list">
-                                        <li>
+                                        <!-- <li>
                                             <span>Date of Birth</span>
                                             {{details_data.DOB}}
-                                        </li>
+                                        </li> -->
                                         <li ng-if="about_user_data.user_hobbies != ''">
                                             <span>Hobbies</span>
                                             {{about_user_data.user_hobbies}}
@@ -120,7 +120,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div id="view-more-about" class="about-more">
+                            <div id="view-more-about" class="about-more" style="display: none;">
                                 <a href="#" ng-click="view_more_about();">View More <img src="<?php echo base_url(); ?>assets/n-images/detail/down-arrow.png"></a>
                             </div>
                         </div>
@@ -1035,6 +1035,7 @@
                 <div class="dtl-title">
                     <span>About {{details_data.first_name}}</span>
                 </div>
+                <form name="about_user_form" id="about_user_form" ng-validate="about_user_validate">
                 <div class="dtl-dis dtl-about-box post-field">
                     <div class="fw pb20">
                         <div class="row">
@@ -1043,7 +1044,7 @@
                                     <div class="form-group">
                                         <label>Language</label>
                                         <!-- <input type="text" placeholder="Language" class="language" name="language"> -->
-                                        <input type="text" name="language" ng-model="language[100].lngtxt" ng-keyup="get_languages(100)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue"  autocomplete="off" ng-value="primari_lang.language_name" value="{{primari_lang.language_name}}">
+                                        <input type="text" name="language[]" ng-model="language[100].lngtxt" ng-keyup="get_languages(100)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue"  autocomplete="off" ng-value="primari_lang.language_name" value="{{primari_lang.language_name}}">
                                     </div>
                                 </div>
                                 <div class="width-45">
@@ -1064,14 +1065,14 @@
                                         <div class="form-group">
                                             <label>Language</label>
                                             <!-- <input type="text" placeholder="Language" class="language" name="language"> -->
-                                            <input type="text" name="language" ng-model="language[$index].lngtxt" ng-keyup="get_languages($index)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue" autocomplete="off" ng-value="field.language_name" value="{{field.language_name}}">
+                                            <input type="text" name="language[]" ng-model="language[$index].lngtxt" ng-keyup="get_languages($index)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue" autocomplete="off" ng-value="field.language_name" value="{{field.language_name}}">
                                         </div>
                                     </div>
                                     <div class="width-45">
                                         <div class="form-group">
                                             <label>Proficiency</label>
                                             <span class="span-select">
-                                                <select class="proficiency" name="proficiency">
+                                                <select class="proficiency" name="proficiency[]">
                                                     <option value="Basic" ng-selected="field.proficiency == 'Basic'">Basic</option>
                                                     <option value="Intermediate" ng-selected="field.proficiency == 'Intermediate'">Intermediate</option>
                                                     <option value="Expert" ng-selected="field.proficiency == 'Expert'">Expert</option>
@@ -1091,12 +1092,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group dtl-dob">
+                    <!-- <div class="form-group dtl-dob hide">
                         <label>Date of Birth</label>
                         <div class="row">
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">
-                                    <select id="dob_month" name="month" ng-model="dob_month" ng-change="dob_fnc('','','')">
+                                    <select id="dob_month" name="dob_month" ng-model="dob_month" ng-change="dob_fnc('','','')">
                                         <option value="">Month</option>
                                         <option value="01">Jan</option>
                                         <option value="02">Feb</option>
@@ -1115,13 +1116,13 @@
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">                                    
-                                    <select id="dob_day" name="day" ng-model="dob_day" ng-click="dob_error()">
+                                    <select id="dob_day" name="dob_day" ng-model="dob_day" ng-click="dob_error()">
                                     </select>
                                 </span>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <span class="span-select">                                    
-                                    <select id="dob_year" name="year" ng-model="dob_year" ng-change="dob_fnc('','','')" ng-click="dob_error()">                                        
+                                    <select id="dob_year" name="dob_year" ng-model="dob_year" ng-change="dob_fnc('','','')" ng-click="dob_error()">                                        
                                     </select>
                                 </span>
                             </div>
@@ -1129,7 +1130,7 @@
                                 <span id="dateerror" class="error" style="display: none;"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label>Hobbies</label>
                         <!-- <input type="text" placeholder="Enter hobbies"> -->
@@ -1154,9 +1155,10 @@
                     </div>
                 </div>
                 <div class="dtl-btn">                        
-                        <a id="save_about_user" href="#" ng-click="save_about_user()" class="save"><span>Save</span></a>
-                        <img id="about_user_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
-                    </div>
+                    <a id="save_about_user" href="#" ng-click="save_about_user()" class="save"><span>Save</span></a>
+                    <img id="about_user_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                </div>
+                </form>
             </div>  
 
 

@@ -1160,7 +1160,7 @@ class Userprofile_page extends MY_Controller {
             }            
         }
         
-        $user_dob = $this->input->post('user_dob');
+        // $user_dob = $this->input->post('user_dob');
         $user_hobby = $this->input->post('user_hobby');
         $user_hobby_txt = "";
         if(isset($user_hobby) && !empty($user_hobby))
@@ -1175,8 +1175,8 @@ class Userprofile_page extends MY_Controller {
         $user_fav_book = $this->input->post('user_fav_book');
         $user_fav_sport = $this->input->post('user_fav_sport');
 
-        $data_dob = array("user_dob"=>$user_dob);
-        $udpate_data_dob = $this->common->update_data($data_dob, 'user', 'user_id', $userid);
+        // $data_dob = array("user_dob"=>$user_dob);
+        // $udpate_data_dob = $this->common->update_data($data_dob, 'user', 'user_id', $userid);
 
         $data = array(
             'user_hobbies' => $user_hobby_txt,
@@ -1186,10 +1186,11 @@ class Userprofile_page extends MY_Controller {
             'user_fav_sport' => $user_fav_sport,            
         );
         $udpate_data = $this->common->update_data($data, 'user_info', 'user_id', $userid);
-        if($udpate_data_dob && $udpate_data)
+        if($udpate_data)
         {
             $about_user_data = $this->userprofile_model->get_about_user($userid);
-            $ret_arr = array("success"=>1,"about_user_data"=>$about_user_data,"user_dob"=>$user_dob);
+            $user_languages = $this->userprofile_model->get_user_languages($userid);
+            $ret_arr = array("success"=>1,"about_user_data"=>$about_user_data,"user_languages"=>$user_languages);//,"user_dob"=>$user_dob);
         }
         else
         {
