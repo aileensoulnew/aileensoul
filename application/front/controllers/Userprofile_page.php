@@ -1170,20 +1170,47 @@ class Userprofile_page extends MY_Controller {
             }
         }
         $user_hobby_txt = trim($user_hobby_txt,",");
+        
         $user_fav_quote_headline = $this->input->post('user_fav_quote_headline');
-        $user_fav_artist = $this->input->post('user_fav_artist');
-        $user_fav_book = $this->input->post('user_fav_book');
-        $user_fav_sport = $this->input->post('user_fav_sport');
 
+        $user_fav_artist = $this->input->post('user_fav_artist');
+        $user_fav_artist_txt = "";
+        if(isset($user_fav_artist) && !empty($user_fav_artist))
+        {
+            foreach ($user_fav_artist as $key => $value) {
+                $user_fav_artist_txt .= $value['fav_artist'].",";
+            }
+        }
+        $user_fav_artist_txt = trim($user_fav_artist_txt,",");
+
+        $user_fav_book = $this->input->post('user_fav_book');
+        $user_fav_book_txt = "";
+        if(isset($user_fav_book) && !empty($user_fav_book))
+        {
+            foreach ($user_fav_book as $key => $value) {
+                $user_fav_book_txt .= $value['fav_book'].",";
+            }
+        }
+        $user_fav_book_txt = trim($user_fav_book_txt,",");
+
+        $user_fav_sport = $this->input->post('user_fav_sport');
+        $user_fav_sport_txt = "";
+        if(isset($user_fav_sport) && !empty($user_fav_sport))
+        {
+            foreach ($user_fav_sport as $key => $value) {
+                $user_fav_sport_txt .= $value['fav_sport'].",";
+            }
+        }
+        $user_fav_sport_txt = trim($user_fav_sport_txt,",");
         // $data_dob = array("user_dob"=>$user_dob);
         // $udpate_data_dob = $this->common->update_data($data_dob, 'user', 'user_id', $userid);
 
         $data = array(
             'user_hobbies' => $user_hobby_txt,
             'user_fav_quote_headline' => $user_fav_quote_headline,
-            'user_fav_artist' => $user_fav_artist,
-            'user_fav_book' => $user_fav_book,
-            'user_fav_sport' => $user_fav_sport,            
+            'user_fav_artist' => $user_fav_artist_txt,
+            'user_fav_book' => $user_fav_book_txt,
+            'user_fav_sport' => $user_fav_sport_txt,            
         );
         $udpate_data = $this->common->update_data($data, 'user_info', 'user_id', $userid);
         if($udpate_data)

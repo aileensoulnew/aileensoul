@@ -1148,15 +1148,21 @@
                     </div>
                     <div class="form-group">
                         <label>Favourite Artist</label>
-                        <input id="user_fav_artist" ng-model="user_fav_artist" name="user_fav_artist" type="text" placeholder="Enter artist" ng-value="about_user_data.user_fav_artist">
+                        <!-- <input id="user_fav_artist" ng-model="user_fav_artist" name="user_fav_artist" type="text" placeholder="Enter artist" ng-value="about_user_data.user_fav_artist"> -->
+                        <tags-input id="user_fav_artist" ng-model="user_fav_artist_txt" name="user_fav_artist" display-property="fav_artist" placeholder="Enter hobbies" replace-spaces-with-dashes="false" template="title-template">
+                        </tags-input>
                     </div>
                     <div class="form-group">
                         <label>Favourite Book</label>
-                        <input id="user_fav_book" ng-model="user_fav_book" name="user_fav_book" type="text" placeholder="Enter Book" ng-value="about_user_data.user_fav_book">
+                        <!-- <input id="user_fav_book" ng-model="user_fav_book" name="user_fav_book" type="text" placeholder="Enter Book" ng-value="about_user_data.user_fav_book"> -->
+                        <tags-input id="user_fav_book" ng-model="user_fav_book_txt" name="user_fav_book" display-property="fav_book" placeholder="Enter hobbies" replace-spaces-with-dashes="false" template="title-template">
+                        </tags-input>
                     </div>
                     <div class="form-group">
                         <label>Favourite Sports</label>
-                        <input id="user_fav_sport" ng-model="user_fav_sport" name="user_fav_sport" type="text" placeholder="Enter Sports" ng-value="about_user_data.user_fav_sport">
+                        <!-- <input id="user_fav_sport" ng-model="user_fav_sport" name="user_fav_sport" type="text" placeholder="Enter Sports" ng-value="about_user_data.user_fav_sport"> -->
+                        <tags-input id="user_fav_sport" ng-model="user_fav_sport_txt" name="user_fav_sport" display-property="fav_sport" placeholder="Enter hobbies" replace-spaces-with-dashes="false" template="title-template">
+                        </tags-input>
                     </div>
                 </div>
                 <div class="dtl-btn">                        

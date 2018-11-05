@@ -3922,7 +3922,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
             // var lang_prof = $('.lang_prof :selected').serialize();
             var dob = '';//dob_year_txt+'-'+dob_month_txt+'-'+dob_day_txt;        
-            var updatedata = $.param({'user_dob':dob,'user_hobby':$scope.hobby_txt,'user_fav_quote_headline':$scope.user_fav_quote_headline,'user_fav_artist':$scope.user_fav_artist,'user_fav_book':$scope.user_fav_book,'user_fav_sport':$scope.user_fav_sport,"language":languages,"proficiency":proficiency});
+            var updatedata = $.param({'user_dob':dob,'user_hobby':$scope.hobby_txt,'user_fav_quote_headline':$scope.user_fav_quote_headline,'user_fav_artist':$scope.user_fav_artist_txt,'user_fav_book':$scope.user_fav_book_txt,'user_fav_sport':$scope.user_fav_sport_txt,"language":languages,"proficiency":proficiency});
             $http({
                 method: 'POST',
                 url: base_url + 'userprofile_page/save_about_user',                
@@ -3956,8 +3956,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 $scope.set_progress(count_profile_value,count_profile);
                 $("#save_about_user").removeAttr("style");
                 $("#about_user_loader").hide();
-
-                // $("#profile-overview").modal('hide');
+                $("#detail-about").modal('hide');
             });
         }
     };
@@ -3996,9 +3995,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.research_pub_fnc = function(dob_day,dob_month,dob_year){
         $("#recdateerror").hide();
         $("#recdateerror").html('');
-        var kcyear = document.getElementsByName("year")[0],
-        kcmonth = document.getElementsByName("month")[0],
-        kcday = document.getElementsByName("day")[0];                
+        var kcyear = document.getElementsByName("research_year")[0],
+        kcmonth = document.getElementsByName("research_month")[0],
+        kcday = document.getElementsByName("research_day")[0];                
         
         var d = new Date();
         var n = d.getFullYear();
@@ -4533,7 +4532,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $scope.set_progress(count_profile_value,count_profile);
             $("#user_links_save").removeAttr("style");
             $("#user_links_loader").hide();
-            // $("#profile-overview").modal('hide');
+            $("#social-link").modal('hide');
         });
     };
     //Socila Links End
@@ -4972,14 +4971,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_publication_loader").hide();
                         $("#publication_form")[0].reset();
                         $scope.user_publication = result.user_publication;                         
-                        // $("#publication").modal('hide');
+                        $("#publication").modal('hide');
                     }
                     else
                     {
                         $("#user_publication_save").removeAttr("style");
                         $("#user_publication_loader").hide();
                         $("#publication_form")[0].reset();
-                        // $("#publication").modal('hide');
+                        $("#publication").modal('hide');
                     }
                 }
             });
@@ -5343,7 +5342,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#patent_form")[0].reset();
                         $scope.reset_patent_form();
                         $scope.user_patent = result.user_patent;
-                        // $("#publication").modal('hide');
+                        $("#patent").modal('hide');
                     }
                     else
                     {
@@ -5351,7 +5350,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_patent_loader").hide();
                         $("#patent_form")[0].reset();
                         $scope.reset_patent_form();
-                        // $("#publication").modal('hide');
+                        $("#patent").modal('hide');
                     }
                 }
             });
@@ -5694,14 +5693,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#award_form")[0].reset();
                         $scope.reset_awards_form();
                         $scope.user_award = result.user_award;
-                        // $("#publication").modal('hide');
+                        $("#Achiv-awards").modal('hide');
                     }
                     else
                     {
                         $("#user_award_save").removeAttr("style");
                         $("#user_award_loader").hide();
                         $("#award_form")[0].reset();
-                        // $("#publication").modal('hide');
+                        $("#Achiv-awards").modal('hide');
                     }
                 }
             });
@@ -5978,8 +5977,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             // }
         },
     };
-    $scope.save_user_activity = function(){
-        console.log("activity_file_old",$scope.activity_file_old);        
+    $scope.save_user_activity = function(){        
         $("#activitydateerror").html("");
         $("#activitydateerror").hide();
         if ($scope.activity_form.validate()) {
@@ -6034,7 +6032,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#activity_form")[0].reset();
                         $scope.reset_activity_form();
                         $scope.user_activity = result.user_activity;                        
-                        // $("#publication").modal('hide');
+                        $("#extra-activity").modal('hide');
                     }
                     else
                     {
@@ -6042,7 +6040,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#user_activity_loader").hide();
                         $("#activity_form")[0].reset();
                         $scope.reset_activity_form();
-                        // $("#publication").modal('hide');
+                        $("#extra-activity").modal('hide');
                     }
                 }
             });
@@ -6382,14 +6380,14 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#addicourse_form")[0].reset();
                         $scope.user_addicourse = result.user_addicourse;
                         $scope.reset_addicourse_form();
-                        // $("#publication").modal('hide');
+                        $("#additional-course").modal('hide');
                     }
                     else
                     {
                         $("#user_addicourse_save").removeAttr("style");
                         $("#user_addicourse_loader").hide();
                         $("#addicourse_form")[0].reset();
-                        // $("#publication").modal('hide');
+                        $("#additional-course").modal('hide');
                     }
                 }
             });
@@ -6871,7 +6869,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.reset_exp_form();
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();
-                        // $("#experience").modal('hide');
+                        $("#experience").modal('hide');
                     }
                     else
                     {
@@ -6880,7 +6878,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $scope.reset_exp_form();
                         // $scope.exp_designation = [];
                         // $("#experience_form")[0].reset();
-                        // $("#experience").modal('hide');
+                        $("#experience").modal('hide');
                     }
                     var profile_progress = result.profile_progress;
                     var count_profile_value = profile_progress.user_process_value;
@@ -7402,14 +7400,15 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#project_form")[0].reset();
                         $scope.user_projects = result.user_projects;
                         $scope.reset_project_form();
-                        // $("#dtl-project").modal('hide');
+                        $("#dtl-project").modal('hide');
                     }
                     else
                     {
                         // $("#project_save").removeAttr("style");
                         // $("#prject_loader").hide();
                         // $("#project_form")[0].reset();
-                        // $("#dtl-project").modal('hide');
+                        $scope.reset_project_form();
+                        $("#dtl-project").modal('hide');
                     }
                 }
             });
@@ -7896,7 +7895,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#edu_form")[0].reset();
                         $scope.user_education = result.user_education;
                         $scope.reset_edu_form();
-                        // $("#educational-info").modal('hide');
+                        $("#educational-info").modal('hide');
                     }
                     else
                     {
@@ -7907,7 +7906,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                         $("#edu_loader").hide();
                         $("#edu_form")[0].reset();
                         $scope.reset_edu_form();
-                        // $("#educational-info").modal('hide');
+                        $("#educational-info").modal('hide');
                     }
                     var profile_progress = result.profile_progress;
                     var count_profile_value = profile_progress.user_process_value;
