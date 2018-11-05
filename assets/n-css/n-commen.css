@@ -958,7 +958,20 @@ a:focus{outline:none;}
   .sub-header .dropdown.open .dropdown-menu{top:26px;}
   .sub-menu li.dropdown.open::before{height:10px;}
 }
-
+/***  profile progress bar  ***/
+.show-more-container {overflow: hidden;}
+.show-more-collapse, .show-more-expand {text-align: center;display: none;}
+.show-more-expanded > .show-more-collapse {display: inherit;}
+.show-more-collapsed > .show-more-expand {display: inherit;}
+.edit_profile_progress {width: 100%;}
+.edit_profile_progress {float: right; width: 100%; background-color: #fff; margin: 0 0 10px; padding: 10px 0;}
+.progre_bar_text {padding: 0 17px;}
+.circles {padding-top: 5px; text-align: center; }
+.circle-1 {width: 175px; margin: 0 6px 6px; display: inline-block; position: relative; text-align: center; line-height: 1.2;}
+.circle-1 canvas {vertical-align: middle; width: 175px; height: 175px; border: 1px solid transparent; display: #000;}
+.circle-1 strong {position: absolute; top: 54px; left: 5px; width: 100%; text-align: center; line-height: 40px; font-size: 30px;}
+#progress-txt{position: absolute; top: 94px; width: 100%; text-align: center; left: 0;}
+/***  end profile progress bar  ***/
 
 /***  media query  ***/
 @media screen and (min-width: 768px) {

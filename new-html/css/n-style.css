@@ -2711,7 +2711,7 @@ max-width: inherit;}
 .modal-body-cus .idol-box{width:100%; float:left;}
 .modal-body-cus .idol-box ul li span img{width:20px; height:auto; border-radius:0;}
 .modal-body-cus .idol-box ul li span.idol-name{width:95%;}
-.about-detail{height:156px; overflow:hidden;}
+.about-detail{max-height:156px; overflow:hidden;}
 .dtl-box-height{height:160px; overflow:hidden;}
 .about-detail ul{padding-bottom:0;}
 .dtl-box-height ul{padding-bottom:0;}
@@ -2893,6 +2893,19 @@ width: 80%; border-radius: 10px;}
 .img-cus{border:0;}
 .img-cus img{width:100%; border-radius:100%; }
 /***  end new job registration form  ***/
+/***  new buttons  ***/
+.btn-new-1{border-radius: 20px; background:#fff; border:1px solid #5c5c5c; color: #5c5c5c; padding: 6px 25px; text-align: center; display: inline-block; font-weight: bold; font-family: Arial; margin: 0 5px;}
+.btn-new-1:hover{background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+    background-color: #e9e9e9;
+    color: #5c5c5c;}
+.btn-new-1:focus{outline:none;}
+	
+/***  end new buttons  ***/
 body.body-loader{height:100vh; overflow:hidden;}
 #main_loader{display: block; height: 100vh; background: #fff; z-index: 9999999999;
 position: fixed;}
@@ -2939,19 +2952,8 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 .common-form form{background:transparent;}
 .form-radius-new .form-box{border-radius:20px; border:0px; box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);}
 .form-radius-new .form-box h2{color:#5c5c5c; -webkit-text-fill-color:inherit; background:inherit;}
-/***  new buttons  ***/
-.btn-new-1{border-radius: 20px; background:#fff; border:1px solid #5c5c5c; color: #5c5c5c; padding: 6px 25px; text-align: center; display: inline-block; font-weight: bold; font-family: Arial; margin: 0 5px;}
-.btn-new-1:hover{background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
-    background: -moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: -ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-    background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-    background-color: #e9e9e9;
-    color: #5c5c5c;}
-.btn-new-1:focus{outline:none;}
-	
-/***  end new buttons  ***/
+#edit-profile .common-form_border{box-shadow:none;}
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
 	.infeed {height: 450px;}
