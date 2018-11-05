@@ -1334,10 +1334,11 @@
                             <textarea row="4" type="text" placeholder="Description" id="exp_desc" name="exp_desc" ng-model="exp_desc"></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="upload-file">
-                                Upload File (work experience certificate) <input type="file" id="exp_file" name="exp_file">
-                            </label>
-                            <span id="exp_file_error" class="error" style="display: none;"></span>
+                            <div class="upload-file">
+                                <label>Upload File (work experience certificate)</label>
+                                <input type="file" id="exp_file" name="exp_file">
+                                <span id="exp_file_error" class="error" style="display: none;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="dtl-btn">
@@ -1489,10 +1490,11 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <label class="upload-file">
-                                Upload File (Educational Certificate)<input type="file" id="edu_file" name="edu_file">
-                            </label>
-                            <span id="edu_file_error" class="error" style="display: none;"></span>
+                            <div class="upload-file">
+                                <label>Upload File (Educational Certificate)</label>
+                                <input type="file" id="edu_file" name="edu_file">
+                                <span id="edu_file_error" class="error" style="display: none;"></span>
+                            </div>
                         </div>                    
                     </div>
                     <div class="dtl-btn">
@@ -1664,10 +1666,11 @@
                         <textarea type="text" placeholder="Description" id="project_desc" name="project_desc" minlength="50" maxlength="700"></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (Project certificate) <input type="file" id="project_file" name="project_file">
-                        </label>
-                        <span id="project_file_error" class="error" style="display: none;"></span>
+                        <div class="upload-file">
+                            <label>Upload File (Project certificate)</label>
+                            <input type="file" id="project_file" name="project_file">
+                            <span id="project_file_error" class="error" style="display: none;"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="dtl-btn">
@@ -1779,10 +1782,11 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class="upload-file">
-                                Upload File (Additional Course Certificate) <input type="file" id="addicourse_file" name="addicourse_file">
-                            </label>
-                            <span id="addicourse_file_error" class="error" style="display: none;"></span>
+                            <div class="upload-file">
+                                <label>Upload File (Additional Course Certificate)</label>
+                                <input type="file" id="addicourse_file" name="addicourse_file">
+                                <span id="addicourse_file_error" class="error" style="display: none;"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="dtl-btn">
@@ -1896,10 +1900,11 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (Extracurricular Activity Certificate) <input type="file" id="activity_file" name="activity_file">
-                        </label>
-                        <span id="activity_file_error" class="error" style="display: none;"></span>
+                        <div class="upload-file">
+                            <label>Upload File (Extracurricular Activity Certificate)</label>
+                            <input type="file" id="activity_file" name="activity_file">
+                            <span id="activity_file_error" class="error" style="display: none;"></span>
+                        </div>
                     </div>
                     
                 </div>
@@ -1999,10 +2004,11 @@
                         <textarea type="text" placeholder="Description" id="award_desc" name="award_desc"></textarea>
                     </div>                    
                     <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (Achievements & Awards Certificate) <input type="file" id="award_file" name="award_file">
+                        <div class="upload-file">
+                            <label>Upload File (Achievements & Awards Certificate)</label>
+                            <input type="file" id="award_file" name="award_file">
                             <span id="award_file_error" class="error" style="display: none;"></span>
-                        </label>
+                        </div>
                     </div>
                     
                 </div>
@@ -2112,10 +2118,11 @@
                         <textarea type="text" placeholder="Description" id="pub_desc" name="pub_desc" minlength="10" maxlength="700"></textarea>
                     </div>                    
                     <div class="form-group">
-                        <label class="upload-file">
-                            Upload File (Publication Certificate) <input type="file" id="pub_file" name="pub_file">
-                        </label>
-                        <span id="pub_file_error" class="error" style="display: none;">File size must be less than 5MB.</span>
+                        <div class="upload-file">
+                            <label>Upload File (Publication Certificate)</label>
+                            <input type="file" id="pub_file" name="pub_file">
+                            <span id="pub_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
+                        </div>
                     </div>                    
                 </div>
                 <div class="dtl-btn">
@@ -2238,10 +2245,11 @@
                             <textarea type="text" placeholder="Description" id="patent_desc" name="patent_desc" ng-model="patent_desc"></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="upload-file">
-                                Upload File <input type="file" id="patent_file" name="patent_file">
-                                <span id="patent_file_error" class="error" style="display: none;">File size must be less than 5MB.</span>
-                            </label>
+                            <div class="upload-file">
+                                <label>Upload File</label>
+                                <input type="file" id="patent_file" name="patent_file">
+                                <span id="patent_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
+                            </div>
                         </div>                        
                     </div>
                     <div class="dtl-btn">
@@ -2375,10 +2383,11 @@
                             </div>                    
                             
                             <div class="form-group">
-                                <label class="upload-file">
-                                    Upload File <input type="file" id="research_document" name="research_document">
-                                </label>
-                                <span id="research_file_error" class="error" style="display: none;">File size must be less than 5MB.</span>
+                                <div class="upload-file">
+                                    <label>Upload File</label>
+                                    <input type="file" id="research_document" name="research_document">
+                                    <span id="research_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
+                                </div>
                             </div>
                         </div>
                         <div class="dtl-btn">
@@ -2464,10 +2473,11 @@
                 <form name="idol_form" id="idol_form" ng-validate="idol_validate">
                     <div class="dtl-dis">
                         <div class="form-group">
-                            <label class="upload-file">
-                                Upload File (Photo of your inspiration)<input type="file" id="user_idol_file" name="user_idol_file">
-                            </label>
-                            <span id="user_idol_file_error" class="error" style="display: none;">File size must be less than 5MB.</span>
+                            <div class="upload-file">
+                                <label>Upload File (Photo of your inspiration)</label>
+                                <input type="file" id="user_idol_file" name="user_idol_file">
+                                <span id="user_idol_file_error" class="error" style="display: none;">File size must be less than 10MB.</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Name</label>

@@ -4129,7 +4129,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var research_formdata = new FormData();
     $(document).on('change','#research_document', function(e){
         $("#research_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
             $("#research_file_error").show();
             $(this).val("");
@@ -4541,7 +4541,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var idol_formdata = new FormData();
     $(document).on('change','#user_idol_file', function(e){
         $("#user_idol_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
             $("#user_idol_file_error").show();
             $(this).val("");
@@ -4818,7 +4818,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var publication_formdata = new FormData();
     $(document).on('change','#pub_file', function(e){
         $("#pub_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
             $("#pub_file_error").show();
             $(this).val("");
@@ -5180,7 +5180,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var patent_formdata = new FormData();
     $(document).on('change','#patent_file', function(e){
         $("#patent_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
             $("#patent_file_error").show();
             $(this).val("");
@@ -5552,9 +5552,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var award_formdata = new FormData();
     $(document).on('change','#award_file', function(e){
         $("#award_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
-            $("#award_file_error").html("File size must be less than 5MB.");
+            $("#award_file_error").html("File size must be less than 10MB.");
             $("#award_file_error").show();
             $(this).val("");
             return true;
@@ -5893,9 +5893,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var activity_formdata = new FormData();
     $(document).on('change','#activity_file', function(e){
         $("#activity_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
-            $("#activity_file_error").html("File size must be less than 5MB.");
+            $("#activity_file_error").html("File size must be less than 10MB.");
             $("#activity_file_error").show();
             $(this).val("");
             return true;
@@ -6242,9 +6242,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var addicourse_formdata = new FormData();
     $(document).on('change','#addicourse_file', function(e){
         $("#addicourse_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
-            $("#addicourse_file_error").html("File size must be less than 5MB.");
+            $("#addicourse_file_error").html("File size must be less than 10MB.");
             $("#addicourse_file_error").show();
             $(this).val("");
             return true;
@@ -6763,9 +6763,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var exp_formdata = new FormData();
     $(document).on('change','#exp_file', function(e){
         $("#exp_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
-            $("#exp_file_error").html("File size must be less than 5MB.");
+            $("#exp_file_error").html("File size must be less than 10MB.");
             $("#exp_file_error").show();
             $(this).val("");
             return true;
@@ -7300,9 +7300,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var project_formdata = new FormData();
     $(document).on('change','#project_file', function(e){
         $("#project_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
-            $("#project_file_error").html("File size must be less than 5MB.");
+            $("#project_file_error").html("File size must be less than 10MB.");
             $("#project_file_error").show();
             $(this).val("");
             return true;
@@ -7710,9 +7710,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     var edu_formdata = new FormData();
     $(document).on('change','#edu_file', function(e){
         $("#edu_file_error").hide();
-        if(this.files[0].size > 5242880)
+        if(this.files[0].size > 10485760)
         {
-            $("#edu_file_error").html("File size must be less than 5MB.");
+            $("#edu_file_error").html("File size must be less than 10MB.");
             $("#edu_file_error").show();
             $(this).val("");
             return true;
