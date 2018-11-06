@@ -2689,13 +2689,13 @@ overflow: hidden;}
 .dis-list li a:hover{color:#1b8ab9; text-decoration:none;}
 .dis-list li a.dis-more{color:#5c5c5c;}
 .dis-list li a.dis-more:hover{color:#5c5c5c;}
-.dis-list li .screen-shot{width:130px; height:130px; float: left; position: relative; overflow: hidden;}
-.dis-list li .screen-shot img{position: absolute; left: 50%; top: 50%;
+.dis-list li .screen-shot{width:130px; float: left; position: relative; overflow: hidden; padding-top:5px;}
+.dis-list li .screen-shot img{/*position: absolute; left: 50%; top: 50%;
 width: auto; height: 100%;
 -webkit-transform: translate(-50%,-50%);
 -ms-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
-max-width: inherit;}
+max-width: inherit;*/}
 .dis-list li label{font-size:14px;}
 .dis-list li .inner-dis span{font-weight:normal; display:inline; font-size:14px;}
 .dis-list li .inner-dis span.collapse-text-toggle{font-weight:bold; font-size:13px;}
@@ -4141,6 +4141,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dis-list li .inner-dis span{font-size:12px;}
 	.dis-list li .inner-dis span.collapse-text-toggle{font-size:12px;}
 	.dis-list li .dis-list-link{width:320px;}
+	.dtl-btn{border-bottom:1px solid #d2d2d2;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
