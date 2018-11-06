@@ -4140,6 +4140,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dis-list li label{font-size:12px;}
 	.dis-list li .inner-dis span{font-size:12px;}
 	.dis-list li .inner-dis span.collapse-text-toggle{font-size:12px;}
+	.dis-list li .dis-list-link{width:320px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
@@ -4184,6 +4185,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.other-profile-menu .profile-main-box-buis-menu .flw_msg_btn li a{font-size:13px;}
 	.sub-menu.rec-only li.dropdown.open:nth-child(2)::before{left:52.5%;}
 	.sub-menu.free-h-only li.dropdown.open:nth-child(2)::before{left:53%;}
+	.dis-list li .dis-list-link{width:300px;}
 }
 @media screen and (max-width: 320px) {
 	.reg-form-cus .login .form-group select{margin-right: 9px;}

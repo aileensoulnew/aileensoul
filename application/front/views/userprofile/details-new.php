@@ -1458,9 +1458,10 @@
                         <div id="other_university" class="form-group" style="display: none;">
                             <input type="text" placeholder="Other Board / University" id="edu_other_university" name="edu_other_university" maxlength="200" minlength="3">
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
+									<div class="form-group">
                                     <label>Degree / Qualification </label>
                                     <!-- <input type="text" placeholder="Degree / Qualification "> -->
 									<span class="span-select">
@@ -1470,8 +1471,10 @@
                                         <option value="0">Other</option>    
                                     </select>
 									</span>
+									</div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                     <label>Course / Field of Study / Stream </label>
                                     <!-- <input type="text" placeholder="Course / Field of Study / Stream"> -->
 									<span class="span-select">
@@ -1481,26 +1484,32 @@
                                     </select>
 									</span>
                                     <img id="edu_stream_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 33px;right: 33px;display: none;">
+								</div>
                                 </div>
                             </div>
 
                             <div id="other_edu" class="row" style="display: none;">
                                 <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                     <label>Other Degree / Qualification </label>
                                     <input type="text" placeholder="Degree / Qualification" id="edu_other_degree" name="edu_other_degree">
+								</div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                     <label>Other Course / Field of Study / Stream </label>
                                     <input type="text" placeholder="Course / Field of Study / Stream" id="edu_other_stream" name="edu_other_stream">
+								</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <label>Start Date</label>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                             <span class="span-select">
                                                 <select id="edu_s_year" name="edu_s_year" ng-model="edu_s_year" ng-change="edu_start_year();">
                                                     <option value="">Year</option>
@@ -1512,31 +1521,38 @@
                                                     } ?>
                                                 </select>
                                             </span>
+										</div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                             <span class="span-select">
                                                 <select id="edu_s_month" name="edu_s_month">
                                                     <option value="">Month</option>
                                                 </select>
                                             </span>
+										</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6" ng-show='!edu_nograduate'>
                                     <label>End Date</label>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                             <span class="span-select">
                                                 <select id="edu_e_year" name="edu_e_year" ng-model="edu_e_year">
                                                 </select>
                                             </span>
+										</div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                             <span class="span-select">
                                                 <select id="edu_e_month" name="edu_e_month">
                                                     <option value="">Month</option> 
                                                 </select>
                                             </span>
+										</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1604,26 +1620,33 @@
                 </div>
                 <form name="project_form" id="project_form" ng-validate="project_validate">
                 <div class="dtl-dis">
-                    <div class="form-group">
+                    <div class="">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                 <label>Project Name / Title</label>
                                 <input type="text" placeholder="Project Name / Title" id="project_title" name="project_title" maxlength="200">
+								</div>
                             </div>
                             <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                 <label>Team Size</label>
                                 <input type="text" placeholder="Enter Team size" id="project_team" name="project_team" maxlength="3">
+								</div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="">
                         <div class="row">                            
                             <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                 <label>Role</label>
                                 <input type="text" placeholder="Role" id="project_role" name="project_role" maxlength="200">
+								</div>
                             </div>
                             <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                 <label>Skills Applied</label>
                                 <tags-input id="project_skill_list" ng-model="project_skill_list" display-property="name" placeholder="Enter Skills" replace-spaces-with-dashes="false" template="title-template" on-tag-added="onKeyup()" ng-keyup="project_skills_fnc()">
                                     <auto-complete source="loadSkills($query)" min-length="0" load-on-focus="false" load-on-empty="false" max-results-to-show="32" template="title-autocomplete-template"></auto-complete>
@@ -1635,13 +1658,15 @@
                                     <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                 </script>
                                 <label id="project_skill_err" for="project_skill_list" class="error" style="display: none;">Please enter skills</label>
+								</div>
                             </div>
                         </div>
                     </div>                   
                     
-                    <div class="form-group">
+                    <div class="">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                 <label>Project Field</label>
                                 <span class="span-select">
                                     <?php $getFieldList = $this->data_model->getNewFieldList();?>
@@ -1653,17 +1678,21 @@
                                         <option value="0">Other</option>
                                     </select>
                                 </span>
+								</div>
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                <label>Project URL</label>
+								<div class="form-group">
+                                <label>Project URL <span class="link-must">(Must be http:// or https://)</span></label>
                                 <input type="text" placeholder="Project URL" id="project_url" name="project_url">
-                                <span class="personal-link-info">URL must start with http:// or https://</span>
+                                </div>
                             </div>
                         </div>
                         <div id="proj_other_field_div" class="row" style="display: none;">
                             <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                 <label>Other Field</label>
                                 <input type="text" placeholder="Enter Other Field" id="project_other_field" name="project_other_field" maxlength="200">
+								</div>
                             </div>
                             <div class="col-md-6 col-sm-6"></div>
                         </div>
@@ -1674,12 +1703,13 @@
                         <tags-input id="project_partner" ng-model="project_partner" display-property="p_name" placeholder="Tag Project Partner" replace-spaces-with-dashes="false" template="title-template" min-length="1">
                         </tags-input>
                     </div>
-                    <div class="form-group">
+                    <div class="">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <label>Start Date</label>
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                         <span class="span-select">
                                             <select id="project_s_year" name="project_s_year" ng-model="project_s_year" ng-change="project_start_year();">
                                                 <option value="">Year</option>
@@ -1691,31 +1721,38 @@
                                                 } ?>
                                             </select>
                                         </span>
+										</div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                         <span class="span-select">
                                             <select id="project_s_month" name="project_s_month">
                                                 <option value="">Month</option>
                                             </select>
                                         </span>
+										</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>End Date</label>
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                         <span class="span-select">
                                             <select id="project_e_year" name="project_e_year" ng-model="project_e_year">
                                             </select>
                                         </span>
+										</div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                         <span class="span-select">
                                             <select id="project_e_month" name="project_e_month">
                                                 <option value="">Month</option> 
                                             </select>
                                         </span>
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -1789,12 +1826,14 @@
                             <label>Organization</label>
                             <input type="text" placeholder="Organization" id="addicourse_org" name="addicourse_org">
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
+									
                                     <label>Start Date</label>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
                                             <span class="span-select">
                                                 <select id="addicourse_s_year" name="addicourse_s_year" ng-model="addicourse_s_year" ng-change="addicourse_start_year();">
                                                     <option value="">Year</option>
@@ -1806,31 +1845,38 @@
                                                     } ?>
                                                 </select>
                                             </span>
+											</div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
                                             <span class="span-select">
                                                 <select id="addicourse_s_month" name="addicourse_s_month">
                                                     <option value="">Month</option> 
                                                 </select>
                                             </span>
+											</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <label>End Date</label>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                             <span class="span-select">
                                                 <select id="addicourse_e_year" name="addicourse_e_year">
                                                 </select>
                                             </span>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="form-group">
                                             <span class="span-select">
                                                 <select id="addicourse_e_month" name="addicourse_e_month">
                                                     <option value="">Month</option>
                                                 </select>
                                             </span>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1840,9 +1886,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>URL</label>
+                            <label>URL <span class="link-must">(Must be http:// or https://)</span></label>
                             <input type="text" placeholder="Enter URL" id="addicourse_url" name="addicourse_url">
-                            <span class="personal-link-info">URL must start with http:// or https://</span>
+                            
                         </div>
                         
                         <div class="form-group">
@@ -1908,12 +1954,14 @@
                         <label>Organization</label>
                         <input type="text" placeholder="Organization" id="activity_org" name="activity_org">
                     </div>
-                    <div class="form-group">
+                    <div class="">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+								
                                 <label>Start Date</label>
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
                                         <span class="span-select">
                                             <select id="activity_s_year" name="activity_s_year" ng-model="activity_s_year" ng-change="activity_start_year();">
                                                 <option value="">Year</option>
@@ -1926,30 +1974,37 @@
                                             </select>
                                         </span>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
                                         <span class="span-select">
                                             <select id="activity_s_month" name="activity_s_month">
                                                 <option value="">Month</option>
                                             </select>
                                         </span>
                                     </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <label>End Date</label>
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
                                         <span class="span-select">
                                             <select id="activity_e_year" name="activity_e_year">
                                             </select>
                                         </span>
                                     </div>
-                                    <div class="col-md-6 col-sm-6">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
                                         <span class="span-select">
                                             <select id="activity_e_month" name="activity_e_month">
                                                 <option value="">Month</option>
                                             </select>
                                         </span>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -2025,10 +2080,11 @@
                         <label>Organization</label>
                         <input type="text" placeholder="Organization" id="award_org" name="award_org">
                     </div>
-                    <div class="form-group">
+                    <div class="">
                         <label>Achievements & Awards Date</label>
                         <div class="row">
-                            <div class="col-md-4 col-sm-4">
+                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+							<div class="form-group">
                                 <span class="span-select">
                                     <select id="award_month" name="award_month" ng-model="award_month" ng-change="award_date_fnc('','','')">
                                         <option value="">Month</option>
@@ -2047,16 +2103,21 @@
                                     </select>
                                 </span>
                             </div>
-                            <div class="col-md-4 col-sm-4">
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+							<div class="form-group">
                                 <span class="span-select">
                                     <select id="award_day" name="award_day" ng-model="award_day" ng-click="award_error()"></select>
                                 </span>
                             </div>
-                            <div class="col-md-4 col-sm-4">
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+							<div class="form-group">
                                 <span class="span-select">
                                     <select id="award_year" name="award_year" ng-model="award_year" ng-change="award_date_fnc('','','')" ng-click="award_error()">
                                     </select>
                                 </span>
+                            </div>
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <span id="awarddateerror" class="error" style="display: none;"></span>
@@ -2125,16 +2186,20 @@
                         <label>Title</label>
                         <input type="text" placeholder="Title" id="pub_title" name="pub_title" minlength="3" maxlength="200">
                     </div>
-                    <div class="form-group">
+                    <div class="">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                 <label>Author</label>
                                 <input type="text" placeholder="Author" id="pub_author" name="pub_author"  minlength="3" maxlength="200">
+								</div>
                             </div>
                             <div class="col-md-6 col-sm-6">
-                                <label>URL</label>
+							<div class="form-group">
+                                <label>URL <span class="link-must">(Must be http:// or https://)</span></label>
                                 <input type="text" placeholder="URL" id="pub_url" name="pub_url" maxlength="200">
-                                <span class="personal-link-info">URL must start with http:// or https://</span>
+                                
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -2146,7 +2211,8 @@
                     <div class="form-group">
                         <label>Publication Date</label>                            
                         <div class="row">                            
-                            <div class="col-md-4 col-sm-4">
+                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+							<div class="form-group">
                                 <span class="span-select">
                                     <select id="publication_month" name="publication_month" ng-model="publication_month" ng-change="publication_date_fnc('','','')">
                                         <option value="">Month</option>
@@ -2165,16 +2231,21 @@
                                     </select>
                                 </span>
                             </div>
-                            <div class="col-md-4 col-sm-4">
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+							<div class="form-group">
                                 <span class="span-select">
                                     <select id="publication_day" name="publication_day" ng-model="publication_day" ng-click="publication_error()"></select>
                                 </span>
                             </div>
-                            <div class="col-md-4 col-sm-4">
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+							<div class="form-group">
                                 <span class="span-select">
                                     <select id="publication_year" name="publication_year" ng-model="publication_year" ng-change="publication_date_fnc('','','')" ng-click="publication_error()">
                                     </select>
                                 </span>
+                            </div>                            
                             </div>                            
                         </div>
                     </div>                    
@@ -2243,22 +2314,27 @@
                                 </div>                                
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                     <label>Patent Creator / Innovator</label>
                                     <input type="text" placeholder="Patent Creator / Innovator" id="patent_creator" name="patent_creator" ng-model="patent_creator">
                                 </div>
+                                </div>
                                 <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                     <label>Patent Number</label>
                                     <input type="text" placeholder="Patent Number" id="patent_number" name="patent_number" ng-model="patent_number">
                                 </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label>Patent Date</label>
                             <div class="row">
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
                                     <span class="span-select">
                                         <select id="patent_month" name="patent_month" ng-model="patent_month" ng-change="patent_date_fnc('','','')">
                                             <option value="">Month</option>
@@ -2277,32 +2353,41 @@
                                         </select>
                                     </span>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
                                     <span class="span-select">
                                         <select id="patent_day" name="patent_day" ng-model="patent_day" ng-click="patent_date_error()"></select>
                                     </span>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+								<div class="form-group">
                                     <span class="span-select">
                                         <select id="patent_year" name="patent_year" ng-model="patent_year" ng-change="patent_date_fnc('','','')" ng-click="patent_date_error()">
                                         </select>
                                     </span>
+                                </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12">
                                     <span id="recdateerror" class="error" style="display: none;"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                     <label>Patent Office</label>
                                     <input type="text" placeholder="Patent Office" id="patent_office" name="patent_office" ng-model="patent_office">
                                 </div>
+                                </div>
                                 <div class="col-md-6 col-sm-6">
-                                    <label>Patent URL</label>
+								<div class="form-group">
+                                    <label>Patent URL <span class="link-must">(Must be http:// or https://)</span></label>
                                     <input type="text" placeholder="Patent URL" id="patent_url" name="patent_url" ng-model="patent_url">
-                                    <span class="personal-link-info">URL must start with http:// or https://</span>
+                                    
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -2386,9 +2471,9 @@
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
-                                        <label>URL</label>
+                                        <label>URL <span class="link-must">(Must be http:// or https://)</span></label>
                                         <input type="text" placeholder="URL" id="research_url" name="research_url" ng-model="research_url">
-                                        <span class="personal-link-info">URL must start with http:// or https://</span>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -2409,10 +2494,11 @@
                                 <textarea placeholder="Details" id="research_desc" name="research_desc" ng-model="research_desc" minlength="20" maxlength="700"></textarea>
                             </div>
                             
-                            <div class="form-group">
+                            <div class="">
                                 <label>Publishing Date</label>
                                 <div class="row">
-                                    <div class="col-md-4 col-sm-4">
+                                    <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
                                         <span class="span-select">
                                             <select id="research_month" name="research_month" ng-model="research_month" ng-change="research_pub_fnc('','','')">
                                                 <option value="">Month</option>
@@ -2431,17 +2517,22 @@
                                             </select>
                                         </span>
                                     </div>
-                                    <div class="col-md-4 col-sm-4">
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
                                         <span class="span-select">
                                             <select id="research_day" name="research_day" ng-model="research_day" ng-click="research_error()">
                                         </select>                                    
                                         </span>
                                     </div>
-                                    <div class="col-md-4 col-sm-4">
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
                                         <span class="span-select">                                            
                                             <select id="research_year" name="research_year" ng-model="research_year" ng-change="research_pub_fnc('','','')" ng-click="research_error()">
                                             </select>
                                         </span>
+                                    </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12">
                                         <span id="recdateerror" class="error" style="display: none;"></span>
@@ -2601,7 +2692,7 @@
                         <div class="row">
                             <div class="">
                                 <div class="" data-ng-repeat="field in social_linksset.social_links track by $index">
-                                <div class="col-md-3 col-sm-3">
+                                <div class="col-md-3 col-sm-3 col-xs-4 mob-pr0">
                                     <div class="form-group">
                                         <label>Website</label>
                                         <span class="span-select">
@@ -2617,15 +2708,15 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-md-8 col-sm-8">
+                                <div class="col-md-8 col-sm-8 col-xs-7">
                                     <div class="form-group">
                                         <label>URL</label>
                                         <input type="text" placeholder="URL" id="link_url{{$index}}" class="link_url" name="link_url" ng-keyup="check_socialurl($index)" ng-value="field.user_links_txt">
                                     </div>
                                 </div>
                                 
-                                <div class="col-md-1 col-sm-1 pl0">
-                                    <label></label>
+                                <div class="col-md-1 col-sm-1 col-xs-1 pl0">
+                                    
                                     <a href="#" class="pull-right" ng-click="removeSocialLinks($index)"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
                                 </div>
                                 </div>
@@ -2638,13 +2729,13 @@
                     <div class="row">
                         <div data-ng-repeat="field in personal_linksset.personal_links track by $index">
                             <div class="form-group">
-                                <div class="col-md-11 col-sm-11">
+                                <div class="col-md-11 col-sm-11 col-xs-11">
                                     <label>Add Personal Website</label>
                                     <input type="text" placeholder="Add Personal Website" id="personal_link_url{{$index}}" class="personal_link_url" name="personal_link_url" ng-keyup="check_personalurl($index)" ng-value="field.user_links_txt">
                                     <span class="personal-link-info">URL must start with http:// or https://</span>
                                 </div>
-                                <div class="col-md-1 col-sm-1 pl0">
-                                    <label></label>
+                                <div class="col-md-1 col-sm-1 col-xs-1 pl0">
+                                    
                                     <a href="#" class="pull-right" ng-click="removePersonalLinks($index)"><img class="dlt-img" src="<?php echo base_url(); ?>assets/n-images/detail/dtl-delet.png"></a>
                                 </div>
                             </div>
