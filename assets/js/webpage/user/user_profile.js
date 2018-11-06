@@ -4645,7 +4645,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_research_upload_url+research_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_research_upload_url+research_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -5031,7 +5031,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img style="width: 100px;" src="'+user_idol_upload_url+idol_pic_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -5400,7 +5400,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="pub_file_prev" class="screen-shot"><a href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_publication_upload_url+publication_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -5773,7 +5773,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_patent_upload_url+patent_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -6124,7 +6124,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_award_upload_url+award_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="award_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_award_upload_url+award_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -6476,7 +6476,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="activity_file_prev" class="screen-shot"><a href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_activity_upload_url+activity_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="activity_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="activity_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -6825,7 +6825,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_addicourse_upload_url+addicourse_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -7386,6 +7386,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $scope.exp_isworking = (parseInt($scope.user_experience[index].exp_isworking) == 1 ? true : false);
         
         // $scope.exp_desc = $scope.user_experience[index].exp_desc;
+        console.log($scope.user_experience[index]);
         var exp_desc_txt = $scope.user_experience[index].exp_desc;
         $("#exp_desc").val(exp_desc_txt);
         
@@ -7402,7 +7403,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_experience_upload_url+exp_file_name+'"></a></p>';
         }
         else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
         // }
 
         var contentTr = angular.element(inner_html);
@@ -7897,7 +7898,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="project_file_prev" class="screen-shot"><a href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_project_upload_url+proj_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="project_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="project_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
@@ -8383,7 +8384,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 var inner_html = '<p id="edu_file_prev" class="screen-shot"><a href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_education_upload_url+edu_file_name+'"></a></p>';
             }
             else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-                var inner_html = '<p id="edu_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+                var inner_html = '<p id="edu_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
             // }
 
             var contentTr = angular.element(inner_html);
