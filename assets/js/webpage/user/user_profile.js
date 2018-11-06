@@ -18,7 +18,7 @@ app.directive('checkFileExt', ['$compile', function($compile) {
                     var inner_html = $compile('<a href="'+upload_url+text+'" target="_blank"><img src="'+upload_url+text+'"></a>')(scope);
                 }
                 else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                    var inner_html = $compile('<a class="file-preview-cus" href="'+upload_url+text+'" target="_blank"><img src="'+base_url+'assets/images/file-up-cus.png"></a>')(scope);   
+                    var inner_html = $compile('<a class="file-preview-cus" href="'+upload_url+text+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a>')(scope);   
                 }
                 element.empty();
                 element.append(inner_html);
