@@ -1586,8 +1586,8 @@
                     <div class="dtl-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
                         <a id="edu_save" href="#" ng-click="save_user_education()" class="save"><span>Save</span></a>
-						<div class="dtl-popup-loader">
-                        <img id="edu_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;">
+						<div id="edu_loader" class="dtl-popup-loader" style="display: none;">
+                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
 						</div>
                     </div>
                 </form>
