@@ -2683,7 +2683,7 @@ overflow: hidden;}
 .dis-list li:last-child span{/*padding-bottom:5px;*/}
 .dis-list li span{display: block; font-size: 15px; font-weight:bold;}
 .dis-list li a.dis-more{color:#5c5c5c;}
-.dis-list li a{color:#7b7b7b;}
+.dis-list li a{color:#7b7b7b; float:left; word-break:break-all;}
 .dis-list li a b{color:#7b7b7b;}
 .dis-list li a:hover{color:#1b8ab9; text-decoration:none;}
 .dis-list li a.dis-more{color:#5c5c5c;}
