@@ -321,19 +321,48 @@ app.controller('userProfileController', function ($scope, $http) {
     $scope.follow_status = follow_status;
     $scope.follow_id = follow_id;
 
+    $scope.get_field_list = function() {
+        $http.get(base_url + "general_data/getFieldList").then(function (success) {
+            $scope.fieldList = success.data;
+        }, function (error) {});
+    }
+    $scope.get_field_list();
+
     $scope.get_user_detail = function(){
         $http.get(base_url + "userprofile_page/get_user_data").then(function (success) {            
             var professionData = success.data.professionData
             var studentData = success.data.studentData;
-            if(professionData != null && professionData.length > 0)
+            
+            if(professionData != null && professionData)
             {
                 $("#user-basic-info").show();
                 $("#user-student-info").hide();
+                setTimeout(function(){
+                    $("#basic_job_title").val(professionData.job_title);
+                    $("#basic_info_city").val(professionData.city_name);
+                    $("#basic_info_field").val(professionData.field);
+                    if(professionData.field == 0)
+                    {
+                        $("#basic_info_other_field_div").show();
+                        $("#basic_info_other_field").val(professionData.other_field);
+                    }
+                },500);
             }
-            if(studentData != null && studentData.length > 0)
+            if(studentData != null && studentData)
             {
                 $("#user-basic-info").hide();
                 $("#user-student-info").show();
+                setTimeout(function(){
+                    $("#stud_info_study").val(studentData.degree_name);
+                    $("#stud_info_city").val(studentData.city_name);
+                    $("#stud_info_university").val(studentData.university_name);
+                    $("#stud_info_field").val(studentData.interested_fields);
+                    if(studentData.interested_fields == 0)
+                    {
+                        $("#stud_info_other_field_div").show();
+                        $("#stud_info_other_field").val(studentData.other_interested_fields);
+                    }
+                },500);
             }
         }, function (error) {});
     };
@@ -354,13 +383,6 @@ app.controller('userProfileController', function ($scope, $http) {
             $("#basic_info_other_field_div").hide();
         }
     };
-
-    $scope.get_field_list = function() {
-        $http.get(base_url + "general_data/getFieldList").then(function (success) {
-            $scope.fieldList = success.data;
-        }, function (error) {});
-    }
-    $scope.get_field_list();
 
     $scope.basic_job_title_list = function () {
         $http({
@@ -397,7 +419,14 @@ app.controller('userProfileController', function ($scope, $http) {
             },
             basic_info_field: {
                 required: true,
-            }
+            },
+            basic_info_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#basic_info_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
         },
         messages: {
             basic_job_title: {
@@ -413,25 +442,36 @@ app.controller('userProfileController', function ($scope, $http) {
     };
     $scope.save_user_basicinfo = function(){
         if ($scope.basicinfo.validate()) {
+            $("#user_basicinfo_loader").show();
+            $("#user_basicinfo").attr("style","pointer-events:none;display:none;");
+            var basic_job_title = $('#basic_job_title').val();
+            var basic_info_city = $('#basic_info_city').val();
+            var basic_info_field = $('#basic_info_field option:selected').val();
+            var basic_info_other_field = $('#basic_info_other_field').val();
+            var updatedata = $.param({'basic_job_title':basic_job_title,'basic_info_city':basic_info_city,'basic_info_field':basic_info_field,'basic_info_other_field':basic_info_other_field});
             $http({
                 method: 'POST',
-                url: base_url + 'user_info/ng_basic_info_insert',
-                data: $scope.user,
+                url: base_url + 'userprofile_page/save_user_basicinfo',                
+                data: updatedata,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).then(function (success){
-            if (success.data.errors) {
-                if (success.data.is_success == '1') {
-                    
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                $("#basicinfo")[0].reset();
+                $("#studinfo")[0].reset();
+                if(success == 1)
+                {
+                    $("#hpd").html(basic_job_title);
+                    $("#hpc").html(basic_info_city);
+                    $scope.get_user_detail();
                 }
-                else {
-                return false;
-                }
-                } else {
-                
-                }
+                $("#user_basicinfo").removeAttr("style");
+                $("#user_basicinfo_loader").hide();
+                $("#user-info-edit").modal('hide');
             });
         }
-    };
+    };    
 
     $scope.open_basicinfo = function()
     {
@@ -489,8 +529,76 @@ app.controller('userProfileController', function ($scope, $http) {
         });
     }
 
+    $scope.stud_info_validate = {
+        rules: {
+            stud_info_study: {
+                required: true,
+            },
+            stud_info_city: {
+                required: true,
+            },
+            stud_info_university: {
+                required: true,
+            },            
+            stud_info_field: {
+                required: true,
+            },
+            stud_info_other_field: {
+                required: {
+                    depends: function(element) {
+                        return $("#stud_info_field option:selected").val() == 0 ? true : false;
+                    }
+                },
+            },
+        },
+        messages: {
+            stud_info_study: {
+                required: "Current study is required.",
+            },
+            stud_info_city: {
+                required: "City is required.",
+            },
+            stud_info_university: {
+                required: "University name is required.",
+            },
+            stud_info_field: {
+                required:  "Interested field is required.",
+            }
+        }
+    };
+
     $scope.save_user_studinfo = function(){
-        alert(2);
+        if ($scope.studinfo.validate()) {
+            $("#user_studinfo_loader").show();
+            $("#user_studinfo").attr("style","pointer-events:none;display:none;");
+            var stud_info_study = $('#stud_info_study').val();
+            var stud_info_city = $('#stud_info_city').val();
+            var stud_info_university = $('#stud_info_university').val();
+            var stud_info_field = $('#stud_info_field option:selected').val();
+            var stud_info_other_field = $('#stud_info_other_field').val();
+            var updatedata = $.param({'stud_info_study':stud_info_study,'stud_info_city':stud_info_city,'stud_info_university':stud_info_university,'stud_info_field':stud_info_field,'stud_info_other_field':stud_info_other_field});
+            $http({
+                method: 'POST',
+                url: base_url + 'userprofile_page/save_user_studinfo',                
+                data: updatedata,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function (result) {                
+                // $('#main_page_load').show();                
+                success = result.data.success;
+                $("#studinfo")[0].reset();
+                $("#basicinfo")[0].reset();
+                if(success == 1)
+                {
+                    $("#hpd").html(stud_info_study);
+                    $("#hpc").html(stud_info_city);
+                    $scope.get_user_detail();
+                }
+                $("#user_studinfo").removeAttr("style");
+                $("#user_studinfo_loader").hide();
+                $("#user-info-edit").modal('hide');
+            });
+        }
     };
 
     $scope.contact = function (id, status, to_id, confirm = 0) {

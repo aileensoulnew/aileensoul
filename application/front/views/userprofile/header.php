@@ -128,20 +128,20 @@
 
                 <h3><?php echo ucfirst($userdata['first_name']) . ' ' . ucfirst($userdata['last_name']); ?></h3>
                 <?php if (count($is_userSlugBasicInfo) != 0) { ?>	
-                    <p><?php echo $is_userSlugBasicInfo['Designation']; ?></p>
+                    <p id="hpd"><?php echo $is_userSlugBasicInfo['Designation']; ?></p>
                 <?php } else if (count($is_userSlugStudentInfo) != 0) { ?>
-                    <p><?php echo $is_userSlugStudentInfo['Degree']; ?></p>
+                    <p id="hpd"><?php echo $is_userSlugStudentInfo['Degree']; ?></p>
                 <?php } else { ?>
-                    <p>Current Work</p>
+                    <p id="hpd">Current Work</p>
                 <?php } ?>
 
                 <?php if (count($is_userSlugBasicInfo) != 0) { ?>	
-                    <p><?php echo $is_userSlugBasicInfo['City']; ?></p>
+                    <p id="hpc"><?php echo $is_userSlugBasicInfo['City']; ?></p>
                 <?php } else { ?>
-                    <p><?php echo $is_userSlugStudentInfo['City']; ?></p>
+                    <p id="hpc"><?php echo $is_userSlugStudentInfo['City']; ?></p>
                 <?php } ?>
                 <div class="edit-user-info">
-                    <a href="#" data-target="#user-info-edit" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/detail/main-edit1.png"></a>
+                    <a href="#" ng-click="get_user_detail();" data-target="#user-info-edit" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/detail/main-edit1.png"></a>
                 </div>
             </div>
             <div class="user-btns {{to_id}}" ng-if="live_slug != segment2" ng-init="from_id=<?php echo $from_id;?>">

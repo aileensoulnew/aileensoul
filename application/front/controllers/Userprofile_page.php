@@ -2430,9 +2430,186 @@ class Userprofile_page extends MY_Controller {
     public function get_user_data()
     {
         $userid = $this->session->userdata('aileenuser');
-        $professionData = $this->user_model->getUserProfessionData($userid,"*");        
-        $studentData = $this->user_model->getUserStudentData($userid,"*");
+        $professionData = $this->user_model->getUserProfessionData($userid,"jt.name as job_title,c.city_name,up.field,up.other_field");        
+        $studentData = $this->user_model->getUserStudentData($userid,"d.degree_name,c.city_name,u.university_name,us.interested_fields,us.other_interested_fields");
         $ret_arr = array("success"=>1,"professionData"=>$professionData,"studentData"=>$studentData);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_basicinfo()
+    {
+        // print_r($this->input->post());exit();
+        $basic_job_title = $this->input->post('basic_job_title');
+        $basic_info_city = $this->input->post('basic_info_city');
+        $basic_info_field = $this->input->post('basic_info_field');
+        if($basic_info_field == 0)
+        {
+            $basic_info_other_field = $this->input->post('basic_info_other_field');
+        }
+        else
+        {
+            $basic_info_other_field = ""   ;
+        }        
+
+        $designation = $this->data_model->findJobTitle($basic_job_title);
+        if ($designation['title_id'] != '') {
+            $jobTitleId = $designation['title_id'];
+        } else {
+            $data = array();
+            $data['name'] = $basic_job_title;
+            $data['created_date'] = date('Y-m-d H:i:s', time());
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $data['status'] = 'draft';
+            $data['slug'] = $this->common->clean($basic_job_title);
+            $jobTitleId = $this->common->insert_data_getid($data, 'job_title');
+        }
+
+        $city = $this->data_model->findCityList($basic_info_city);
+        if ($city['city_id'] != '') {
+            $cityId = $city['city_id'];
+        } else {
+            $data = array();
+            $data['city_name'] = $basic_info_city;
+            $data['state_id'] = '0';
+            $data['status'] = '2';
+            $data['group_id'] = '0';
+            $data['slug'] = $this->common->clean($basic_info_city);
+            $data['city_image'] = $this->common->clean($basic_info_city).".png";
+            $cityId = $this->common->insert_data_getid($data, 'cities');
+        }        
+
+        $userid = $this->session->userdata('aileenuser');
+        $professionData = $this->user_model->getUserProfessionData($userid,"*"); 
+
+        $data_user = array(
+            'is_student' => '0',
+        );
+        $updatdata_user = $this->common->update_data($data_user, 'user', 'user_id', $userid);
+
+        $data_up = array(
+            'designation' => $jobTitleId,
+            'field' => $basic_info_field,
+            'other_field' => $basic_info_other_field,
+            'city' => $cityId,
+        );
+
+        if(isset($professionData) && !empty($professionData))
+        {                
+            $updatdata_up = $this->common->update_data($data_up, 'user_profession', 'user_id', $userid);
+        }
+        else
+        {
+            $data_up['user_id'] = $userid;
+            $updatdata_up = $this->common->insert_data_getid($data_up, 'user_profession');
+        }
+        
+        if($updatdata_up)
+        {
+            $this->common->delete_data('user_student', 'user_id', $userid);
+            $ret_arr = array("success"=>1);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }
+        return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
+    }
+
+    public function save_user_studinfo()
+    {
+        // print_r($this->input->post());exit();
+        $stud_info_study = $this->input->post('stud_info_study');
+        $stud_info_city = $this->input->post('stud_info_city');
+        $stud_info_university = $this->input->post('stud_info_university');
+        $stud_info_field = $this->input->post('stud_info_field');
+        if($stud_info_field == 0)
+        {
+            $stud_info_other_field = $this->input->post('stud_info_other_field');
+        }
+        else
+        {
+            $stud_info_other_field = ""   ;
+        }
+
+        $contition_array = array('LOWER(degree_name)' => strtolower(trim($stud_info_study)));
+        $currentStudydata = $this->common->select_data_by_condition('degree', $contition_array, $data = 'degree_id,degree_name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
+        
+        if ($currentStudydata) {
+            $currentStudyId = $currentStudydata[0]['degree_id'];
+        } else {
+            $data = array();
+            $data['degree_name'] = $stud_info_study;
+            $data['created_date'] = date('Y-m-d H:i:s', time());
+            $data['modify_date'] = date('Y-m-d H:i:s', time());
+            $data['status'] = '2';
+            $data['is_delete'] = '0';
+            $data['is_other'] = '1';
+            $data['user_id'] = $userid;
+            $currentStudyId = $this->common->insert_data_getid($data, 'degree');
+        }
+
+        $city = $this->data_model->findCityList($stud_info_city);
+        if ($city['city_id'] != '') {
+            $cityId = $city['city_id'];
+        } else {
+            $data = array();
+            $data['city_name'] = $stud_info_city;
+            $data['state_id'] = '0';
+            $data['status'] = '2';
+            $data['group_id'] = '0';
+            $data['slug'] = $this->common->clean($stud_info_city);
+            $data['city_image'] = $this->common->clean($stud_info_city).".png";
+            $cityId = $this->common->insert_data_getid($data, 'cities');
+        }
+
+        $universityData = $this->data_model->findUniversityList($stud_info_university);
+        if ($universityData['university_id'] != '') {
+            $universityId = $universityData['university_id'];
+        } else {
+            $data = array();
+            $data['university_name'] = $stud_info_university;
+            $data['created_date'] = date('Y-m-d H:i:s',time());
+            $data['status'] = '2';
+            $data['is_delete'] = '0';
+            $data['is_other'] = '1';
+            $universityId = $this->common->insert_data_getid($data, 'university');
+        }
+
+        $userid = $this->session->userdata('aileenuser');
+        $studentData = $this->user_model->getUserStudentData($userid,"*");
+
+        $data_user = array(
+            'is_student' => '1',
+        );
+        $updatdata_user = $this->common->update_data($data_user, 'user', 'user_id', $userid);
+
+        $data_up = array(
+            'current_study' => $currentStudyId,
+            'city' => $cityId,
+            'university_name' => $universityId,
+            'interested_fields' => $stud_info_field,
+            'other_interested_fields' => $stud_info_other_field,
+        );
+
+        if(isset($studentData) && !empty($studentData))
+        {                
+            $id = $studentData['id'];
+            $updatdata_up = $this->common->update_data($data_up, 'user_student','user_id', $userid);
+        }
+        else
+        {
+            $data_up['user_id'] = $userid;
+            $updatdata_up = $this->common->insert_data_getid($data_up, 'user_student');
+        }
+        if($updatdata_up)
+        {
+            $this->common->delete_data('user_profession', 'user_id', $userid);    
+            $ret_arr = array("success"=>1);
+        }
+        else
+        {
+            $ret_arr = array("success"=>0);   
+        }        
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 }

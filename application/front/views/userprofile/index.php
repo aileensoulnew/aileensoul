@@ -206,104 +206,108 @@
                                 <span>Basic Information</span>
                             </div>
                             <form name="basicinfo" id="basicinfo" ng-validate="basic_info_validate">
-                            <div class="dtl-dis">
-                                <div class="form-group">
-                                    <p class="student-or-not">If Student then Make your Profile <a href="#" ng-click="open_student();"> Here!</a>
-                                    </p> 
-                                    <p class="student-info-popup">
-                                        <a href="#">
-                                            <svg viewBox="0 0 65 65" xml:space="preserve" width="17px" height="17px">
-                                                <g>
+                                <div class="dtl-dis">
+                                    <div class="form-group">
+                                        <p class="student-or-not">If Student then Make your Profile <a href="#" ng-click="open_student();"> Here!</a>
+                                        </p> 
+                                        <p class="student-info-popup">
+                                            <a href="#">
+                                                <svg viewBox="0 0 65 65" xml:space="preserve" width="17px" height="17px">
                                                     <g>
-                                                        <path d="M32.5,0C14.58,0,0,14.579,0,32.5S14.58,65,32.5,65S65,50.421,65,32.5S50.42,0,32.5,0z M32.5,61C16.785,61,4,48.215,4,32.5    S16.785,4,32.5,4S61,16.785,61,32.5S48.215,61,32.5,61z" fill="#5c5c5c"></path>
-                                                        <circle cx="33.018" cy="19.541" r="3.345" fill="#5c5c5c"></circle>
-                                                        <path d="M32.137,28.342c-1.104,0-2,0.896-2,2v17c0,1.104,0.896,2,2,2s2-0.896,2-2v-17C34.137,29.237,33.241,28.342,32.137,28.342z    " fill="#5c5c5c"></path>
+                                                        <g>
+                                                            <path d="M32.5,0C14.58,0,0,14.579,0,32.5S14.58,65,32.5,65S65,50.421,65,32.5S50.42,0,32.5,0z M32.5,61C16.785,61,4,48.215,4,32.5    S16.785,4,32.5,4S61,16.785,61,32.5S48.215,61,32.5,61z" fill="#5c5c5c"></path>
+                                                            <circle cx="33.018" cy="19.541" r="3.345" fill="#5c5c5c"></circle>
+                                                            <path d="M32.137,28.342c-1.104,0-2,0.896-2,2v17c0,1.104,0.896,2,2,2s2-0.896,2-2v-17C34.137,29.237,33.241,28.342,32.137,28.342z    " fill="#5c5c5c"></path>
+                                                        </g>
                                                     </g>
-                                                </g>
 
-                                            </svg>
-                                        </a>
-                                        <span class="student-info-box">
-                                            If you are a student then fill “Educational Information” form to get relevant opportunities based on your interest, or else if you have graduated/working then fill the following form to get appropriate opportunities.
+                                                </svg>
+                                            </a>
+                                            <span class="student-info-box">
+                                                If you are a student then fill “Educational Information” form to get relevant opportunities based on your interest, or else if you have graduated/working then fill the following form to get appropriate opportunities.
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>What's your current position?</label>
+                                        <input type="text" placeholder="Enter Job Title / Designation" id="basic_job_title" name="basic_job_title" ng-model="basic_job_title" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>What’s your current location?</label>
+                                        <input type="text" placeholder="Enter City Name" id="basic_info_city" name="basic_info_city" ng-model="basic_info_city" ng-keyup="basic_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>What is your field? </label>
+                                        <span class="span-select">
+                                            <select id="basic_info_field" name="basic_info_field" ng-model="basic_info_field" ng-change="other_basic_info();">
+                                                <option value="" selected="selected" disabled="disabled">Select field</option>
+                                                <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
+                                                <option value="0">Other</option>
+                                            </select>
                                         </span>
-                                    </p>
-                                </div>
-                                <div class="form-group">
-                                    <label>What's your current position?</label>
-                                    <input type="text" placeholder="Enter Job Title / Designation" id="basic_job_title" name="basic_job_title" ng-model="basic_job_title" ng-keyup="basic_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label>What’s your current location?</label>
-                                    <input type="text" placeholder="Enter City Name" id="basic_info_city" name="basic_info_city" ng-model="basic_info_city" ng-keyup="basic_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label>What is your field? </label>
-                                    <span class="span-select">
-                                        <select id="basic_info_field" name="basic_info_field" ng-model="basic_info_field" ng-change="other_basic_info();">
-                                            <option value="" selected="selected" disabled="disabled">Select field</option>
-                                            <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
-                                            <option value="0">Other</option>
-                                        </select>
-                                    </span>
-                                </div>
-                                <div id="basic_info_other_field_div" class="form-group" style="display: none;">
-                                    <label>Enter other field</label>
-                                    <input type="text" placeholder="Enter Other Field" id="basic_info_other_field" name="basic_info_other_field" ng-model="basic_info_other_field" ma>
+                                    </div>
+                                    <div id="basic_info_other_field_div" class="form-group" style="display: none;">
+                                        <label>Enter other field</label>
+                                        <input type="text" placeholder="Enter Other Field" id="basic_info_other_field" name="basic_info_other_field" ng-model="basic_info_other_field" ma>
+                                    </div>
+                                    
                                 </div>
                                 
-                            </div>
-                            
-                            <div class="dtl-btn">
-                                <a href="#" class="save" ng-click="save_user_basicinfo()"><span>Save</span></a>
-                            </div>
+                                <div class="dtl-btn">
+                                    <a id="user_basicinfo" href="#" class="save" ng-click="save_user_basicinfo()"><span>Save</span></a>
+                                    <img id="user_basicinfo_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                                </div>
                             </form>
                         </div>
                         <div id="user-student-info" style="display: none;">
                             <div class="dtl-title fw">
                                 <span>Educational Information</span>
                             </div>
-                            <div class="dtl-dis">
-                                <div class="form-group">
-                                    <label>What are you studying right now?</label>
-                                    <input type="text" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." id="stud_info_study" name="stud_info_study" ng-model="stud_info_study" ng-keyup="stud_info_study_list()" typeahead="item as item.degree_name for item in degreeSearchResult | filter:$viewValue" autocomplete="off">
+                            <form name="studinfo" id="studinfo" ng-validate="stud_info_validate">
+                                <div class="dtl-dis">
+                                    <div class="form-group">
+                                        <label>What are you studying right now?</label>
+                                        <input type="text" placeholder="Pursuing: Engineering, Medicine, Desiging, MBA, Accounting, BA, 5th, 10th, 12th .." id="stud_info_study" name="stud_info_study" ng-model="stud_info_study" ng-keyup="stud_info_study_list()" typeahead="item as item.degree_name for item in degreeSearchResult | filter:$viewValue" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Where are you from?</label>
+                                        <input type="text" placeholder="Enter City Name" id="stud_info_city" name="stud_info_city" ng-model="stud_info_city" ng-keyup="stud_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>University / College / School</label>
+                                        <input type="text" placeholder="Enter University / College / school " id="stud_info_university" name="stud_info_university" ng-model="stud_info_university" ng-keyup="stud_info_university_list()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Interested field </label>
+                                        <span class="span-select">
+                                            <select id="stud_info_field" name="stud_info_field" ng-model="stud_info_field" ng-change="other_stud_info();">
+                                                <option value="" selected="selected" disabled="disabled">Select field</option>
+                                                <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
+                                                <option value="0">Other</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    <div id="stud_info_other_field_div" class="form-group" style="display: none;">
+                                        <label>Enter other field</label>
+                                        <input type="text" placeholder="Enter Other Field" id="stud_info_other_field" name="stud_info_other_field" ng-model="stud_info_other_field" ma>
+                                    </div>
+                                    
                                 </div>
-                                <div class="form-group">
-                                    <label>Where are you from?</label>
-                                    <input type="text" placeholder="Enter City Name" id="stud_info_city" name="stud_info_city" ng-model="stud_info_city" ng-keyup="stud_info_city_list()" typeahead="item as item.city_name for item in citySearchResult | filter:$viewValue" autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label>University / College / School</label>
-                                    <input type="text" placeholder="Enter University / College / school " id="stud_info_university" name="stud_info_university" ng-model="stud_info_university" ng-keyup="stud_info_university_list()" typeahead="item as item.university_name for item in universitySearchResult | filter:$viewValue" autocomplete="off">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Interested field </label>
-                                    <span class="span-select">
-                                        <select id="stud_info_field" name="stud_info_field" ng-model="stud_info_field">
-                                            <option value="" selected="selected" disabled="disabled">Select field</option>
-                                            <option data-ng-repeat='fieldItem in fieldList' value='{{fieldItem.industry_id}}'>{{fieldItem.industry_name}}</option>             
-                                            <option value="0">Other</option>
-                                        </select>
-                                    </span>
-                                </div>
-                                <div id="stud_info_other_field_div" class="form-group" style="display: none;">
-                                    <label>Enter other field</label>
-                                    <input type="text" placeholder="Enter Other Field" id="stud_info_other_field" name="stud_info_other_field" ng-model="stud_info_other_field" ma>
-                                </div>
-                                
-                            </div>
-                            <div class="dtl-two-btn">
-                                <div class="col-md-6 col-sm-6 col-xs-6 p0">
-                                    <div class="dtl-btn">
-                                        <a href="#" class="back" ng-click="open_basicinfo();"><span>Back</span></a>
+                                <div class="dtl-two-btn">
+                                    <div class="col-md-6 col-sm-6 col-xs-6 p0">
+                                        <div class="dtl-btn">
+                                            <a href="#" class="back" ng-click="open_basicinfo();"><span>Back</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 p0">
+                                        <div class="dtl-btn">
+                                            <a id="user_studinfo" href="#" class="save" ng-click="save_user_studinfo();"><span>Save</span></a>
+                                            <img id="user_studinfo_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6 col-xs-6 p0">
-                                    <div class="dtl-btn">
-                                        <a href="#" class="save" ng-click="save_user_studinfo();"><span>Save</span></a>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
