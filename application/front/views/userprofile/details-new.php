@@ -1080,7 +1080,7 @@
                                     <div class="form-group">
                                         <label>Language</label>
                                         <!-- <input type="text" placeholder="Language" class="language" name="language"> -->
-                                        <input type="text" name="language[]" ng-model="language[100].lngtxt" ng-keyup="get_languages(100)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue"  autocomplete="off" ng-value="primari_lang.language_name" value="{{primari_lang.language_name}}">
+                                        <input type="text" name="language[]" ng-model="language[100].lngtxt" ng-keyup="get_languages(100)" class="form-control language" placeholder="Enter Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue"  autocomplete="off" ng-value="primari_lang.language_name" value="{{primari_lang.language_name}}">
                                     </div>
                                 </div>
                                 <div class="width-45">
@@ -1102,7 +1102,7 @@
                                         <div class="form-group">
                                             <label>Language</label>
                                             <!-- <input type="text" placeholder="Language" class="language" name="language"> -->
-                                            <input type="text" name="language[]" ng-model="language[$index].lngtxt" ng-keyup="get_languages($index)" class="form-control language" placeholder="Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue" autocomplete="off" ng-value="field.language_name" value="{{field.language_name}}">
+                                            <input type="text" name="language[]" ng-model="language[$index].lngtxt" ng-keyup="get_languages($index)" class="form-control language" placeholder="Enter Language"  id="language" typeahead="item as item.language_name for item in lang_search_result | filter:$viewValue" autocomplete="off" ng-value="field.language_name" value="{{field.language_name}}">
                                         </div>
                                     </div>
                                     <div class="width-45">
@@ -1177,7 +1177,7 @@
                     </div>
                     <div class="form-group">
                         <label>Favourite Quotes, Headline</label>
-                        <textarea id="user_fav_quote_headline" ng-model="user_fav_quote_headline" name="user_fav_quote_headline" placeholder="Description (Fav. Quotes, Headline)" ng-bind="about_user_data.user_fav_quote_headline"></textarea>
+                        <textarea id="user_fav_quote_headline" ng-model="user_fav_quote_headline" name="user_fav_quote_headline" placeholder="Enter Description (Fav. Quotes, Headline)" ng-bind="about_user_data.user_fav_quote_headline"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Favourite Artist</label>
@@ -1392,8 +1392,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Description/Roles and Responsibilities</label>
-                            <textarea row="4" type="text" placeholder="Description" id="exp_desc" name="exp_desc" ng-model="exp_desc"></textarea>
+                            <label>Description</label>
+                            <textarea row="4" type="text" placeholder="Enter Roles and Responsibility" id="exp_desc" name="exp_desc" ng-model="exp_desc"></textarea>
                         </div>
                         <div class="form-group">
                             <div class="upload-file">
@@ -1451,13 +1451,13 @@
                     <div class="dtl-dis">
                         <div class="form-group">
                             <label>School / College Name</label>
-                            <input type="text" placeholder="School / College Name" id="edu_school_college" name="edu_school_college" minlength="3" maxlength="200">
+                            <input type="text" placeholder="Enter School / College Name" id="edu_school_college" name="edu_school_college" minlength="3" maxlength="200">
                         </div>
                         <div class="form-group">
                             <label>Board / University</label>
 							<span class="span-select">
 								<select id="edu_university" name="edu_university" ng-model="edu_university" ng-change="edu_university_change();">
-									<option value="">Board / University</option>    
+									<option value="">Select Board / University</option>    
 									<option data-ng-repeat='university_item in university_data' value='{{university_item.university_id}}'>{{university_item.university_name}}</option>
 									<option value="0">Other</option>    
 								</select>
@@ -1474,7 +1474,7 @@
                                     <!-- <input type="text" placeholder="Degree / Qualification "> -->
 									<span class="span-select">
                                     <select id="edu_degree" name="edu_degree" ng-model="edu_degree" ng-change="edu_degree_change();">
-                                        <option value="">Degree / Qualification</option>    
+                                        <option value="">Select Degree / Qualification</option>    
                                         <option data-ng-repeat='degree_item in degree_data' value='{{degree_item.degree_id}}'>{{degree_item.degree_name}}</option>
                                         <option value="0">Other</option>    
                                     </select>
@@ -1487,7 +1487,7 @@
                                     <!-- <input type="text" placeholder="Course / Field of Study / Stream"> -->
 									<span class="span-select">
                                     <select id="edu_stream" name="edu_stream" ng-model="edu_stream" ng-change="edu_stream_change()" disabled = "disabled">
-                                        <option value="">Course / Field of Study / Stream</option>
+                                        <option value="">Select Course / Field of Study / Stream</option>
                                         <option data-ng-repeat='stream_item in stream_data' value='{{stream_item.stream_id}}'>{{stream_item.stream_name}}</option>
                                     </select>
 									</span>
@@ -1634,8 +1634,8 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
 								<div class="form-group">
-                                <label>Project Name / Title</label>
-                                <input type="text" placeholder="Project Name / Title" id="project_title" name="project_title" maxlength="200">
+                                <label>Project Title</label>
+                                <input type="text" placeholder="Enter Project Name" id="project_title" name="project_title" maxlength="200">
 								</div>
                             </div>
                             <div class="col-md-6 col-sm-6">
@@ -1652,7 +1652,7 @@
                             <div class="col-md-6 col-sm-6">
 								<div class="form-group">
                                 <label>Role</label>
-                                <input type="text" placeholder="Role" id="project_role" name="project_role" maxlength="200">
+                                <input type="text" placeholder="Enter Role" id="project_role" name="project_role" maxlength="200">
 								</div>
                             </div>
                             <div class="col-md-6 col-sm-6">
@@ -1693,7 +1693,7 @@
                             <div class="col-md-6 col-sm-6">
 								<div class="form-group">
                                 <label>Project URL <span class="link-must">(Must be http:// or https://)</span></label>
-                                <input type="text" placeholder="Project URL" id="project_url" name="project_url">
+                                <input type="text" placeholder="Enter Project URL" id="project_url" name="project_url">
                                 </div>
                             </div>
                         </div>
@@ -1772,8 +1772,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Project Details / Description</label>
-                        <textarea type="text" placeholder="Description" id="project_desc" name="project_desc" minlength="50" maxlength="700"></textarea>
+                        <label>Project Description</label>
+                        <textarea type="text" placeholder="Enter Project Details" id="project_desc" name="project_desc" minlength="50" maxlength="700"></textarea>
                     </div>
                     <div class="form-group">
                         <div class="upload-file">
@@ -1832,11 +1832,11 @@
                     <div class="dtl-dis">
                         <div class="form-group">
                             <label>Course Name</label>
-                            <input type="text" placeholder="Course Name" id="addicourse_name" name="addicourse_name">
+                            <input type="text" placeholder="Enter Course Name" id="addicourse_name" name="addicourse_name">
                         </div>
                         <div class="form-group">
                             <label>Organization</label>
-                            <input type="text" placeholder="Organization" id="addicourse_org" name="addicourse_org">
+                            <input type="text" placeholder="Enter Organization" id="addicourse_org" name="addicourse_org">
                         </div>
                         <div class="">
                             <div class="row">
@@ -1962,11 +1962,11 @@
                 <div class="dtl-dis">
                     <div class="form-group">
                         <label>Participated In</label>
-                        <input type="text" placeholder="Participated In" id="activity_participate" name="activity_participate">
+                        <input type="text" placeholder="Enter Title" id="activity_participate" name="activity_participate">
                     </div>
                     <div class="form-group">
                         <label>Organization</label>
-                        <input type="text" placeholder="Organization" id="activity_org" name="activity_org">
+                        <input type="text" placeholder="Enter Organization" id="activity_org" name="activity_org">
                     </div>
                     <div class="">
                         <div class="row">
@@ -2029,7 +2029,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea type="text" placeholder="Description" id="activity_desc" name="activity_desc"></textarea>
+                        <textarea type="text" placeholder="Enter Description" id="activity_desc" name="activity_desc"></textarea>
                     </div>
                     
                     <div class="form-group">
@@ -2090,14 +2090,14 @@
                 <div class="dtl-dis">
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" placeholder="Title" id="award_title" name="award_title">
+                        <input type="text" placeholder="Enter Title" id="award_title" name="award_title">
                     </div>
                     <div class="form-group">
                         <label>Organization</label>
-                        <input type="text" placeholder="Organization" id="award_org" name="award_org">
+                        <input type="text" placeholder="Enter Organization" id="award_org" name="award_org">
                     </div>
                     <div class="">
-                        <label>Achievements & Awards Date</label>
+                        <label>Date</label>
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
 							<div class="form-group">
@@ -2142,7 +2142,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea type="text" placeholder="Description" id="award_desc" name="award_desc"></textarea>
+                        <textarea type="text" placeholder="Enter Description" id="award_desc" name="award_desc"></textarea>
                     </div>                    
                     <div class="form-group">
                         <div class="upload-file">
@@ -2202,20 +2202,20 @@
                 <div class="dtl-dis">
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" placeholder="Title" id="pub_title" name="pub_title" minlength="3" maxlength="200">
+                        <input type="text" placeholder="Enter Title" id="pub_title" name="pub_title" minlength="3" maxlength="200">
                     </div>
                     <div class="">
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
 								<div class="form-group">
                                 <label>Author</label>
-                                <input type="text" placeholder="Author" id="pub_author" name="pub_author"  minlength="3" maxlength="200">
+                                <input type="text" placeholder="Enter Author" id="pub_author" name="pub_author"  minlength="3" maxlength="200">
 								</div>
                             </div>
                             <div class="col-md-6 col-sm-6">
 							<div class="form-group">
                                 <label>URL <span class="link-must">(Must be http:// or https://)</span></label>
-                                <input type="text" placeholder="URL" id="pub_url" name="pub_url" maxlength="200">
+                                <input type="text" placeholder="Enter URL" id="pub_url" name="pub_url" maxlength="200">
                                 
                             </div>
                             </div>
@@ -2223,7 +2223,7 @@
                     </div>
                     <div class="form-group">
                         <label>Publisher / Publication</label>
-                        <input type="text" placeholder="Publisher / Publication" id="pub_publisher" name="pub_publisher" minlength="3" maxlength="200">
+                        <input type="text" placeholder="Enter Publisher / Publication" id="pub_publisher" name="pub_publisher" minlength="3" maxlength="200">
                     </div>
                     
                     <div class="form-group">
@@ -2269,7 +2269,7 @@
                     </div>                    
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea type="text" placeholder="Description" id="pub_desc" name="pub_desc" minlength="10" maxlength="700"></textarea>
+                        <textarea type="text" placeholder="Enter Description" id="pub_desc" name="pub_desc" minlength="10" maxlength="700"></textarea>
                     </div>                    
                     <div class="form-group">
                         <div class="upload-file">
@@ -2330,7 +2330,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <label>Patent Title</label>
-                                    <input type="text" placeholder="Patent Title" id="patent_title" name="patent_title" ng-model="patent_title">
+                                    <input type="text" placeholder="Enter Title" id="patent_title" name="patent_title" ng-model="patent_title">
                                 </div>                                
                             </div>
                         </div>
@@ -2339,13 +2339,13 @@
                                 <div class="col-md-6 col-sm-6">
 								<div class="form-group">
                                     <label>Patent Creator / Innovator</label>
-                                    <input type="text" placeholder="Patent Creator / Innovator" id="patent_creator" name="patent_creator" ng-model="patent_creator">
+                                    <input type="text" placeholder="Enter Name" id="patent_creator" name="patent_creator" ng-model="patent_creator">
                                 </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
 								<div class="form-group">
                                     <label>Patent Number</label>
-                                    <input type="text" placeholder="Patent Number" id="patent_number" name="patent_number" ng-model="patent_number">
+                                    <input type="text" placeholder="Enter Number" id="patent_number" name="patent_number" ng-model="patent_number">
                                 </div>
                                 </div>
                             </div>
@@ -2399,13 +2399,13 @@
                                 <div class="col-md-6 col-sm-6">
 								<div class="form-group">
                                     <label>Patent Office</label>
-                                    <input type="text" placeholder="Patent Office" id="patent_office" name="patent_office" ng-model="patent_office">
+                                    <input type="text" placeholder="Enter Office Name" id="patent_office" name="patent_office" ng-model="patent_office">
                                 </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
 								<div class="form-group">
                                     <label>Patent URL <span class="link-must">(Must be http:// or https://)</span></label>
-                                    <input type="text" placeholder="Patent URL" id="patent_url" name="patent_url" ng-model="patent_url">
+                                    <input type="text" placeholder="Enter URL" id="patent_url" name="patent_url" ng-model="patent_url">
                                     
                                 </div>
                                 </div>
@@ -2413,7 +2413,7 @@
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea type="text" placeholder="Description" id="patent_desc" name="patent_desc" ng-model="patent_desc"></textarea>
+                            <textarea type="text" placeholder="Enter Description" id="patent_desc" name="patent_desc" ng-model="patent_desc"></textarea>
                         </div>
                         <div class="form-group">
                             <div class="upload-file">
@@ -2472,7 +2472,7 @@
                         <div class="dtl-dis">
                             <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" placeholder="Title" id="research_title" name="research_title" ng-model="research_title" minlength="20" maxlength="200">
+                                <input type="text" placeholder="Enter Title" id="research_title" name="research_title" ng-model="research_title" minlength="20" maxlength="200">
                             </div>
 
                             <div class="row">
@@ -2494,7 +2494,7 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>URL <span class="link-must">(Must be http:// or https://)</span></label>
-                                        <input type="text" placeholder="URL" id="research_url" name="research_url" ng-model="research_url">
+                                        <input type="text" placeholder="Enter URL" id="research_url" name="research_url" ng-model="research_url">
                                       
                                     </div>
                                 </div>
@@ -2513,7 +2513,7 @@
 
                             <div class="form-group">
                                 <label>Details</label>
-                                <textarea placeholder="Details" id="research_desc" name="research_desc" ng-model="research_desc" minlength="20" maxlength="700"></textarea>
+                                <textarea placeholder="Enter Details" id="research_desc" name="research_desc" ng-model="research_desc" minlength="20" maxlength="700"></textarea>
                             </div>
                             
                             <div class="">
@@ -2742,7 +2742,7 @@
                                 <div class="col-md-8 col-sm-8 col-xs-7">
                                     <div class="form-group">
                                         <label>URL</label>
-                                        <input type="text" placeholder="URL" id="link_url{{$index}}" class="link_url" name="link_url" ng-keyup="check_socialurl($index)" ng-value="field.user_links_txt">
+                                        <input type="text" placeholder="Enter URL" id="link_url{{$index}}" class="link_url" name="link_url" ng-keyup="check_socialurl($index)" ng-value="field.user_links_txt">
                                     </div>
                                 </div>
                                 
@@ -2762,7 +2762,7 @@
                             <div class="form-group">
                                 <div class="col-md-11 col-sm-11 col-xs-11">
                                     <label>Add Personal Website</label>
-                                    <input type="text" placeholder="Add Personal Website" id="personal_link_url{{$index}}" class="personal_link_url" name="personal_link_url" ng-keyup="check_personalurl($index)" ng-value="field.user_links_txt">
+                                    <input type="text" placeholder="Enter Website Link" id="personal_link_url{{$index}}" class="personal_link_url" name="personal_link_url" ng-keyup="check_personalurl($index)" ng-value="field.user_links_txt">
                                     <span class="personal-link-info">URL must start with http:// or https://</span>
                                 </div>
                                 <div class="col-md-1 col-sm-1 col-xs-1 pl0">

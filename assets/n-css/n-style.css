@@ -2627,7 +2627,7 @@ padding: 4px;}
 .dtl-dis h4{margin-top:0; font-size:15px; font-weight:bold; color:#7b7b7b;}
 .dtl-dis p{color:#7b7b7b; font-size:14px;}
 .dtl-dis p a b{color:#7b7b7b;}
-.dtl-btn{width:100%; float:left; text-align:center; border-top:1px solid #d2d2d2;}
+.dtl-btn{width:100%; float:left; text-align:center; border-top:1px solid #d2d2d2; position:relative;}
 .dtl-btn .save, .dtl-btn .back{font-size:18px; font-weight:bold; letter-spacing:1px; width:100%; padding:16px 15px 15px; display:block;}
 .dtl-modal .dtl-btn .back{border:0; border-radius:0; border-bottom-left-radius:20px;}
 .dtl-btn .save span, .dtl-btn .back span{-webkit-text-fill-color: transparent; color: #1b8ab9;
@@ -2791,11 +2791,13 @@ width: 80%; border-radius: 10px; z-index:9;}
 .edit-form-cus .dtl-btn .save{width:50%; display:inline-block; float:left;}
 .edit-form-cus .dtl-btn .save:hover{border-bottom-right-radius:0;}
 .edit-form-cus .dtl-btn .save.delete-edit:hover{border-bottom-right-radius:20px; border-bottom-left-radius:0px;}
-.edit-form-cus .dtl-btn .save.delete-edit{border-left:1px solid #d2d2d2;}
+.edit-form-cus .dtl-btn .save{border-right:1px solid #d2d2d2;}
+.edit-form-cus .dtl-btn .save.delete-edit{border-right:0px solid #d2d2d2;}
 .idol-box ul li a.pull-right img{width:20px; height:auto; border-radius:0; margin-right:0;}
 .screen-shot{padding-top:10px;}
 #activitydateerror.error{font-size:12px;}
 .inner-dis{word-break: break-all;}
+.dtl-popup-loader{position: absolute; width: 100%; top: 0; background: #fff; padding: 10px 0; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;}
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}
@@ -2868,7 +2870,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .modal-body-cus .total-rev-top .rating-sm{font-size:23px;}
 .modal-body-cus .rating-container .rating-stars{height:23px;}
 .modal-body-cus .total-rev-top h4{font-size:18px; font-weight:normal; padding-top:3px;}
-.dtl-modal .modal-dialog{margin-top:30px;}
+.dtl-modal .modal-dialog{margin:30px 0;}
 .dtl-modal .modal-content form{padding:0;}
 .dtl-modal .host{margin:0;}
 .dtl-modal tags-input .tags .input{padding-left:14px;}
@@ -3293,18 +3295,18 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dtl-dis.dis-accor .panel-heading{padding:15px;}
 	.dis-left{width:40px;}
 	.dis-left-img{width:40px; height:40px;}
-	.dis-middle{width:240px; padding-left:10px;}
+	.dis-middle{width:230px; padding-left:10px;}
 	.dis-left-img span{padding:8px 10px;}
 	.dis-middle{padding-top:0px;}
 	.dtl-dis.dis-accor .panel-heading{min-height:70px;}
 	.dis-right .pr5 img{width:18px;}
 	.dis-right img{width:15px;}
 	.dis-right{padding-top:0;}
-	.dis-right{width:40px;}
+	.dis-right{width:50px;}
 	.all-detail-custom .right-add{display:block;}
 	.profile-text1{top:50px !important;}
 	.dis-right{text-align:right;}
-	.dis-right span.pr5{padding-right:0;}
+	.dis-right span.pr5{padding-right:0; margin-right:5px;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -4095,7 +4097,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dis-left-img span{font-size:16px; padding:3px;}
 	.dis-middle h4{font-size:14px;}
 	.dtl-dis p{font-size:12px;}
-	.dis-middle{width:77%;}
+	.dis-middle{width:75%;}
 	.dis-list li span{font-size:14px;}
 	.dtl-dis ul li{font-size:12px; padding-bottom:10px;}
 	.dis-accor .panel-collapse{padding:0 10px;}
@@ -4107,7 +4109,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dis-middle h4{margin-bottom:0; line-height:1;}
 	.dis-right .pr5 img{width:16px;}
 	.dis-right img{width:13px;}
-	.dis-right{width:35px;}
+	.dis-right{width:40px;}
 	.edit-user-info a img{width:20px;}
 	.edit-user-info{top:85px; right:9px;}
 	.dtl-modal{background:#fff;}
