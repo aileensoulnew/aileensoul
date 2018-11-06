@@ -885,7 +885,7 @@
             <div class="dtl-box p10 dtl-adv">                
             </div>
             <!-- Edit Profile Start -->
-            <div id="edit-profile-move" class="dtl-box">
+            <div id="edit-profile-move" class="dtl-box" ng-if="live_slug == segment2">
                 <div class="dtl-title">
                     <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/e-profile.png"><span>Edit Profile</span>
                 </div>
@@ -894,17 +894,17 @@
 					<div class="dtl-edit-bottom"></div>
 					<div class="profile-status">
 						<ul>
-							<li><span ng-if="progress_status.user_image == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
-							<li class="pl20"><span ng-if="progress_status.profile_background == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
+							<li><span class=""><img ng-if="progress_status.user_image == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile pic</li>
+							<li class="pl20"><span class=""><img ng-if="progress_status.profile_background == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Cover pic</li>
 							
-							<li><span ng-if="progress_status.user_experience_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Experience</li>
-							<li class="pl20"><span ng-if="progress_status.user_fav_artist == 1 && progress_status.user_fav_book == 1 && progress_status.user_fav_quote_headline == 1 && progress_status.user_fav_sport == 1 && progress_status.user_hobbies == 1 && progress_status.user_languages_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>About</li>
-							<li><span ng-if="progress_status.user_skills == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>skills</li>
+							<li><span class=""><img ng-if="progress_status.user_experience_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Experience</li>
+							<li class="pl20"><span class=""><img ng-if="progress_status.user_fav_artist == 1 && progress_status.user_fav_book == 1 && progress_status.user_fav_quote_headline == 1 && progress_status.user_fav_sport == 1 && progress_status.user_hobbies == 1 && progress_status.user_languages_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>About</li>
+							<li><span class=""><img ng-if="progress_status.user_skills == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>skills</li>
 							
-							<li class="pl20"><span ng-if="progress_status.user_links_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Social</li>
-							<li><span ng-if="progress_status.user_idol_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Idol</li>
-							<li class="fw"><span ng-if="progress_status.user_education_status == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational info</li>
-							<li class="fw"><span ng-if="progress_status.user_bio == 1" class=""><img src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile overview</li>
+							<li class="pl20"><span class=""><img ng-if="progress_status.user_links_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Social</li>
+							<li><span class=""><img ng-if="progress_status.user_idol_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Idol</li>
+							<li class="fw"><span class=""><img ng-if="progress_status.user_education_status == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Educational info</li>
+							<li class="fw"><span class=""><img ng-if="progress_status.user_bio == 1" src="<?php echo base_url(); ?>assets/n-images/detail/c.png"></span>Profile overview</li>
 						</ul>
 					</div>
                     <!-- <img src="<?php echo base_url(); ?>assets/n-images/detail/profile-progressbar.jpg"> -->
