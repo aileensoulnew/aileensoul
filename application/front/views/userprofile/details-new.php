@@ -1051,7 +1051,9 @@
                 </div>
                 <div class="dtl-btn">
                     <a id="user_bio_save" href="#" ng-click="save_user_bio()" class="save"><span>Save</span></a>
-                    <img id="user_bio_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+					<div id="user_bio_loader" class="dtl-popup-loader" style="display: none;">
+                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+					</div>
                 </div>
             </div>  
 
@@ -1198,7 +1200,9 @@
                 </div>
                 <div class="dtl-btn">                        
                     <a id="save_about_user" href="#" ng-click="save_about_user()" class="save"><span>Save</span></a>
-                    <img id="about_user_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+					<div id="about_user_loader" class="dtl-popup-loader" style="display: none;">
+                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+					</div>
                 </div>
                 </form>
             </div>  
@@ -1243,7 +1247,7 @@
                                     <script type="text/ng-template" id="title-autocomplete-template">
                                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                     </script> -->
-                                    <label id="exp_designation_err" for="exp_designation" class="error" style="display: none;">Please enter designation / role</label>
+                                    
 									</div>
                                 </div>
                                 
@@ -1401,7 +1405,9 @@
                     </div>
                     <div class="dtl-btn">
                         <a id="save_user_exp" href="#" ng-click="save_user_exp()" class="save"><span>Save</span></a>
-                        <img id="user_exp_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+						<div id="user_exp_loader" class="dtl-popup-loader" style="display: none;">
+                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+						</div>
                     </div>
                 </form>
             </div>
@@ -1580,7 +1586,9 @@
                     <div class="dtl-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
                         <a id="edu_save" href="#" ng-click="save_user_education()" class="save"><span>Save</span></a>
-                        <img id="edu_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+						<div class="dtl-popup-loader">
+                        <img id="edu_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;">
+						</div>
                     </div>
                 </form>
             </div>
@@ -1778,7 +1786,9 @@
                 <div class="dtl-btn">
                     <!-- <a href="#" class="save"><span>Save</span></a> -->
                     <a id="project_save" href="#" ng-click="save_user_project()" class="save"><span>Save</span></a>
-                    <img id="prject_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+					<div id="prject_loader" style="display: none;" class="dtl-popup-loader">
+                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+					</div>
                 </div>
                 </form>
             </div>
@@ -1904,7 +1914,9 @@
                     <div class="dtl-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
                         <a id="user_addicourse_save" href="#" ng-click="save_user_addicourse()" class="save"><span>Save</span></a>
-                        <img id="user_addicourse_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+						<div id="user_addicourse_loader" class="dtl-popup-loader" style="display: none;">
+                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+						</div>
                     </div>
                 </form>
             </div>  
@@ -2032,7 +2044,9 @@
                 <div class="dtl-btn">
                     <!-- <a href="#" class="save"><span>Save</span></a> -->
                     <a id="user_activity_save" href="#" ng-click="save_user_activity()" class="save"><span>Save</span></a>
-                    <img id="user_activity_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+					<div id="user_activity_loader" class="dtl-popup-loader" style="display: none;">
+                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+					</div>
                 </div>
                 </form>
             </div>
@@ -2142,7 +2156,9 @@
                 <div class="dtl-btn">
                     <!-- <a href="#" class="save"><span>Save</span></a> -->
                     <a id="user_award_save" href="#" ng-click="save_user_award()" class="save"><span>Save</span></a>
-                    <img id="user_award_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+					<div id="user_award_loader"  class="dtl-popup-loader" style="display: none;">
+                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+					</div>
                 </div>
                 </form>
             </div>
@@ -2266,7 +2282,9 @@
                 <div class="dtl-btn">
                     <!-- <a href="#" class="save"><span>Save</span></a> -->
                     <a id="user_publication_save" href="#" ng-click="save_user_publication()" class="save"><span>Save</span></a>
-                    <img id="user_publication_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+					<div  id="user_publication_loader" class="dtl-popup-loader" style="display: none;">
+                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+					</div>
                 </div>
                 </form>
             </div>
@@ -2408,7 +2426,9 @@
                     <div class="dtl-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
                         <a id="user_patent_save" href="#" ng-click="save_user_patent()" class="save"><span>Save</span></a>
-                        <img id="user_patent_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+						<div id="user_patent_loader"  class="dtl-popup-loader" style="display: none;">
+                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+						</div>
                     </div>
                 </form>
             </div>
@@ -2553,7 +2573,8 @@
                         <div class="dtl-btn">
                             <!-- <a href="#" class="save"><span>Save</span></a> -->
                             <a id="user_research_save" href="#" ng-click="save_user_research()" class="save"><span>Save</span></a>
-                            <img id="user_research_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                            <div id="user_research_loader" class="dtl-popup-loader" style="display: none;"><img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+							</div>
                         </div>
                     </form>
             </div>  
@@ -2577,7 +2598,9 @@
                                 </a> 
                                 <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
                             </span>
-                            <img id="user_research_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+							<div id="user_research_del_loader" class="dtl-popup-loader" style="display: none;">
+                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+							</div>
                         </p>
                     </div>
                 </span>
@@ -2612,7 +2635,9 @@
                 </div>
                 <div class="dtl-btn">                        
                     <a id="user_skills_save" href="#" ng-click="save_user_skills()" class="save"><span>Save</span></a>
-                    <img id="user_skills_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+					<div id="user_skills_loader"  class="dtl-popup-loader" style="display: none;">
+                    <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+					</div>
                 </div>
             </div>  
 
@@ -2648,7 +2673,9 @@
                     <div class="dtl-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
                         <a id="user_idol_save" href="#" ng-click="save_user_idol()" class="save"><span>Save</span></a>
-                        <img id="user_idol_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+                        <div id="user_idol_loader" class="dtl-popup-loader" style="display: none;">
+						<img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+						</div>
                     </div>
                 </form>
             </div>
@@ -2670,7 +2697,9 @@
                                 </a> 
                                 <a class='btn1' href="#" data-dismiss="modal">Cancel</a>
                             </span>
-                            <img id="user_idol_del_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+							<div  id="user_idol_del_loader" class="dtl-popup-loader" style="display: none;">
+                            <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader">
+							</div>
                         </p>
                     </div>
                 </span>
@@ -2752,7 +2781,9 @@
                 <div class="dtl-btn">
                         <!-- <a href="#" class="save"><span>Save</span></a> -->
                         <a id="user_links_save" href="#" ng-click="save_user_links()" class="save"><span>Save</span></a>
-                        <img id="user_links_loader" src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" style="display: none;padding: 16px 15px 15px;">
+						<div id="user_links_loader" class="dtl-popup-loader" style="display: none;">
+                        <img src="<?php echo base_url(); ?>assets/images/loader.gif" alt="Loader" >
+						</div>
                     </div>
             </div>  
 
