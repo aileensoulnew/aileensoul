@@ -4733,7 +4733,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         var link_url = $("#link_url"+id).val();        
         if(link_type == "Facebook")
         {            
-            if(/(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i.test(link_url)){
+            if(/(http|https):\/\/?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4763,7 +4763,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         }
         if(link_type == "LinkedIn")
         {            
-            if(/(ftp|http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i.test(link_url)){
+            if(/(http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
             }
             else
@@ -4830,8 +4830,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     };
     $scope.check_personalurl = function(id){
         var personal_link_url = $("#personal_link_url"+id).val();
-        var regexp =   /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
-        if (regexp.test(personal_link_url))
+        //var regexp =   /^(https):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
+        var res = personal_link_url.match(/(http(s)?:\/\/.)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        if(res != null)// if (regexp.test(personal_link_url))
         {
             $("#personal_link_url"+id).removeClass("error");
         }
@@ -6340,10 +6341,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
             var activity_e_year = $("#activity_e_year option:selected").val();
             var activity_e_month = $("#activity_e_month option:selected").val();
+            console.log(activity_s_year,activity_s_month,activity_e_year,activity_e_month);
             var activity_date_error = false;
-            if(activity_e_year == activity_s_year)
+            if(parseInt(activity_e_year) == parseInt(activity_s_year))
             {
-                if(activity_e_month <= activity_s_month)
+                if(parseInt(activity_e_month) <= parseInt(activity_s_month))
                 {
                     activity_date_error = true;
                 }
@@ -6690,9 +6692,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var addicourse_e_year = $("#addicourse_e_year option:selected").val();
             var addicourse_e_month = $("#addicourse_e_month option:selected").val();
             var activity_date_error = false;
-            if(addicourse_e_year == addicourse_s_year)
+            if(parseInt(addicourse_e_year) == parseInt(addicourse_s_year))
             {
-                if(addicourse_e_month <= addicourse_s_month)
+                if(parseInt(addicourse_e_month) <= parseInt(addicourse_s_month))
                 {
                     activity_date_error = true;
                 }
@@ -7040,6 +7042,9 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 maxlength: 200,
                 minlength: 3
             },
+            exp_designation: {
+                required: true,
+            },
             exp_company_website: {
                 url: true,
             },
@@ -7336,8 +7341,8 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             $scope.exp_other_field = "";
             $("#exp_other_field_div").hide();   
         }
-        $scope.exp_country = $scope.user_experience[index].exp_country;        
-        
+        $scope.exp_country = $scope.user_experience[index].exp_country;
+        $("#exp_country").val($scope.user_experience[index].exp_country);
         // $scope.exp_country_change();
         var counrtydata = $.param({'country_id': $scope.exp_country});
         $http({
