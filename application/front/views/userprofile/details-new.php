@@ -881,8 +881,10 @@
                 
             </div>
         </div>
-        <div class="right-add">
-            <div class="dtl-box p10 dtl-adv">                
+        <div class="right-add add-detail">
+            <div class="right-add-box">                
+                <div class="dtl-box p10 dtl-adv">                
+                </div>
             </div>
             <!-- Edit Profile Start -->
             <div id="edit-profile-move" class="dtl-box" ng-if="live_slug == segment2">
