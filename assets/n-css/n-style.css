@@ -2771,8 +2771,8 @@ transform: translate(-50%, -50%); max-width: inherit;}
 .profile-status ul li{width:50%; float:left; padding-bottom:5px;}
 .profile-status.abc1 li{width:33.33%;}
 .dtl-edit-p{padding:0;}
-.dtl-edit-top{position:absolute; width:100%; top:0; height:110px;}
-.dtl-edit-bottom{position:absolute; width:100%; top:111px; height:110px;}
+.dtl-edit-top{position:absolute; width:100%; top:0; height:110px; z-index:999;}
+.dtl-edit-bottom{position:absolute; width:100%; top:111px; height:110px; z-index:999;}
 .profile-status {text-align: left; display: none; position: absolute; left: 35px; background: #f5f9fc; border: 1px solid #d2d2d2; padding: 20px 15px;
 width: 80%; border-radius: 10px; z-index:9;}
 .profile-status.hover-bottom{display:block; top: 110px;}
@@ -2793,6 +2793,9 @@ width: 80%; border-radius: 10px; z-index:9;}
 .edit-form-cus .dtl-btn .save.delete-edit:hover{border-bottom-right-radius:20px; border-bottom-left-radius:0px;}
 .edit-form-cus .dtl-btn .save.delete-edit{border-left:1px solid #d2d2d2;}
 .idol-box ul li a.pull-right img{width:20px; height:auto; border-radius:0; margin-right:0;}
+.screen-shot{padding-top:10px;}
+#activitydateerror.error{font-size:12px;}
+.inner-dis{word-break: break-all;}
 /***  end new details page  ***/
 /***  new job registration form  ***/
 .job_reg_page_fprm{width:640px; margin:0 auto;}

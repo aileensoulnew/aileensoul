@@ -2372,7 +2372,7 @@
                                 </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12">
-                                    <span id="recdateerror" class="error" style="display: none;"></span>
+                                    <span id="patentdateerror" class="error" style="display: none;"></span>
                                 </div>
                             </div>
                         </div>
