@@ -14,12 +14,12 @@ app.directive('checkFileExt', ['$compile', function($compile) {
                 var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
                 var allowed_doc_ext = ['pdf','PDF','docx','doc'];
                 var fileExt = filename_arr[filename_arr.length - 1];
-                if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                     var inner_html = $compile('<a href="'+upload_url+text+'" target="_blank"><img src="'+upload_url+text+'"></a>')(scope);
                 }
-                else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
+                else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
                     var inner_html = $compile('<a class="file-preview-cus" href="'+upload_url+text+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a>')(scope);   
-                }
+                // }
                 element.empty();
                 element.append(inner_html);
             });
@@ -4641,12 +4641,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_research_upload_url+research_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_research_upload_url+research_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#research_file_error"));
@@ -5027,12 +5027,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img style="width: 100px;" src="'+user_idol_upload_url+idol_pic_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="research_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_idol_upload_url+idol_pic_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#user_idol_file_error"));
@@ -5396,12 +5396,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="pub_file_prev" class="screen-shot"><a href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_publication_upload_url+publication_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="pub_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_publication_upload_url+publication_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#pub_file_error"));
@@ -5769,12 +5769,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_patent_upload_url+patent_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="patent_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_patent_upload_url+patent_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#patent_file_error"));
@@ -6120,12 +6120,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_award_upload_url+award_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="award_file_prev" class="screen-shot"><a href="'+user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="award_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_award_upload_url+award_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#award_file_error"));
@@ -6472,12 +6472,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="activity_file_prev" class="screen-shot"><a href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_activity_upload_url+activity_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="activity_file_prev" class="screen-shot"><a href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="activity_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_activity_upload_url+activity_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#activity_file_error"));
@@ -6821,12 +6821,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_addicourse_upload_url+addicourse_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="addicourse_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_addicourse_upload_url+addicourse_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#addicourse_file_error"));
@@ -7398,12 +7398,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
         var allowed_doc_ext = ['pdf','PDF','docx','doc'];
         var fileExt = filename_arr[filename_arr.length - 1];
-        if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+        /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
             var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_experience_upload_url+exp_file_name+'"></a></p>';
         }
-        else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-        }
+        else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+        // }
 
         var contentTr = angular.element(inner_html);
         contentTr.insertAfter($("#exp_file_error"));
@@ -7893,12 +7893,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="project_file_prev" class="screen-shot"><a href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_project_upload_url+proj_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="project_file_prev" class="screen-shot"><a href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="project_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_project_upload_url+proj_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#project_file_error"));
@@ -8379,12 +8379,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
             var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
             var allowed_doc_ext = ['pdf','PDF','docx','doc'];
             var fileExt = filename_arr[filename_arr.length - 1];
-            if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
                 var inner_html = '<p id="edu_file_prev" class="screen-shot"><a href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_education_upload_url+edu_file_name+'"></a></p>';
             }
-            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                var inner_html = '<p id="edu_file_prev" class="screen-shot"><a href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/images/PDF.jpg"></a></p>';   
-            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="edu_file_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_education_upload_url+edu_file_name+'" target="_blank"><img style="width: 100px;" src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
             var contentTr = angular.element(inner_html);
             contentTr.insertAfter($("#edu_file_error"));
