@@ -109,90 +109,90 @@ class Userprofile_page extends MY_Controller {
         $user_education = $this->userprofile_model->get_user_education($user_id);
         $user_links = $this->userprofile_model->get_user_links($user_id);
         $user_idol = $this->userprofile_model->get_user_idols($user_id);
-        $count = 1;
+        $count = 0;
         $progress_status = array();
         $user_image = 0;
         if($user_data['user_image'] != '')
         {
-            $count ++;
+            $count = $count + 2;
             $user_image = 1;
         }
         $profile_background = 0;
         if($user_data['profile_background'] != '')
         {
-            $count ++;
+            $count = $count + 2;
             $profile_background = 1;
         }
         $user_bio = 0;
         if($user_data['user_bio'] != '')
         {
-            $count ++;
+            $count = $count + 1;
             $user_bio = 1;
         }
         $user_skills = 0;
         if($user_data['user_skills'] != '')
         {
-            $count ++;
+            $count = $count + 1;
             $user_skills = 1;
         }
         $user_hobbies = 0;
         if($user_data['user_hobbies'] != '')
         {
-            $count ++;
+            $count = $count + 1;
             $user_hobbies = 1;
         }
         $user_fav_quote_headline = 0;
         if($user_data['user_fav_quote_headline'] != '')
         {
-            $count ++;
+            $count = $count + 1;
             $user_fav_quote_headline = 1;
         }
         $user_fav_artist = 0;
         if($user_data['user_fav_artist'] != '')
         {
-            $count ++;
+            $count = $count + 1;
             $user_fav_artist = 1;
         }
         $user_fav_book = 0;
         if($user_data['user_fav_book'] != '')
         {
-            $count ++;
+            $count = $count + 1;
             $user_fav_book = 1;
         }
         $user_fav_sport = 0;
         if($user_data['user_fav_sport'] != '')
         {
-            $count ++;
+            $count = $count + 1;
             $user_fav_sport = 1;
         }
         $user_languages_status = 0;
         if(isset($user_languages) && !empty($user_languages))
         {
-            $count ++;
+            $count = $count + 3;
             $user_languages_status = 1;
         }
         $user_experience_status = 0;
         if(isset($user_experience) && !empty($user_experience))
         {
-            $count ++;
+            $count = $count + 3;
             $user_experience_status = 1;
         }
         $user_education_status = 0;
         if(isset($user_education) && !empty($user_education))
         {
-            $count ++;
+            $count = $count + 3;
             $user_education_status = 1;
         }
         $user_links_status = 0;
         if(isset($user_links) && !empty($user_links))
         {
-            $count ++;
+            $count = $count + 3;
             $user_links_status = 1;
         }
         $user_idol_status = 0;
         if(isset($user_idol) && !empty($user_idol))
         {
-            $count ++;
+            $count = $count + 3;
             $user_idol_status = 1;
         }
         // echo $count;exit();
@@ -211,7 +211,7 @@ class Userprofile_page extends MY_Controller {
         $progress_status['user_links_status'] = $user_links_status;
         $progress_status['user_idol_status'] = $user_idol_status;
 
-        $user_process = ($count * 100) / 15;        
+        $user_process = ($count * 100) / 26;        
         $user_process_value = ($user_process / 100);
 
         if ($user_process == 100) {
