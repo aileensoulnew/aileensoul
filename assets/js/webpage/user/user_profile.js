@@ -3801,7 +3801,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     function load_add_detail()
     {
         setTimeout(function(){
-            var $el = $('<div class="dtl-box p10 dtl-adv"><adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense></div>').insertBefore("#edit-profile-move");
+            var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo(".dtl-adv");
             $compile($el)($scope);
         },1000);        
     }

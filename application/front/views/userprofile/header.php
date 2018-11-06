@@ -140,7 +140,7 @@
                 <?php } else { ?>
                     <p id="hpc"><?php echo $is_userSlugStudentInfo['City']; ?></p>
                 <?php } ?>
-                <div class="edit-user-info">
+                <div class="edit-user-info" ng-if="live_slug == segment2">
                     <a href="#" ng-click="get_user_detail();" data-target="#user-info-edit" data-toggle="modal"><img src="<?php echo base_url(); ?>assets/n-images/detail/main-edit1.png"></a>
                 </div>
             </div>

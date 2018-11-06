@@ -882,6 +882,8 @@
             </div>
         </div>
         <div class="right-add">
+            <div class="dtl-box p10 dtl-adv">                
+            </div>
             <!-- Edit Profile Start -->
             <div id="edit-profile-move" class="dtl-box">
                 <div class="dtl-title">
