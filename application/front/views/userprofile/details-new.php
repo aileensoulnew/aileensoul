@@ -40,7 +40,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edit-profile.png"><span>Profile Overview</span><a href="#" data-target="#profile-overview" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edit-profile.png"><span>Profile Overview</span><a ng-if="live_slug == segment2" href="#" data-target="#profile-overview" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                         </div>
                         <div id="profile-loader" class="dtl-dis">
                             <div class="text-center">
@@ -70,7 +70,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience ({{exp_years}}year {{exp_months}}month)</span><a href="#" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/exp.png"><span>Experience ({{exp_years}}year {{exp_months}}month)</span><a href="#" ng-if="live_slug == segment2" ng-click="reset_exp_form()" data-target="#experience" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="exp-loader" class="dtl-dis">
                             <div class="text-center">
@@ -99,7 +99,7 @@
                                                     <p>{{user_exp.designation}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_exp($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_exp($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#exp-accordion" href="#exp{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -154,7 +154,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>About {{details_data.first_name}}</span><a href="#" data-target="#detail-about" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/about.png"><span>About {{details_data.first_name}}</span><a href="#" data-target="#detail-about" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                         </div>
                         <div id="about-loader" class="dtl-dis">
                             <div class="text-center">
@@ -216,7 +216,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/project.png"><span>Project</span><a href="#" data-target="#dtl-project" data-toggle="modal" ng-click="reset_project_form();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/project.png"><span>Project</span><a href="#" data-target="#dtl-project" data-toggle="modal" ng-click="reset_project_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="project-loader" class="dtl-dis">
                             <div class="text-center">
@@ -246,7 +246,7 @@
                                                     <p ng-if="user_proj.project_field != '0'"> {{user_proj.project_field_txt}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_project($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_project($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#project-accordion" href="#project{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -315,7 +315,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edution.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" ng-click="reset_edu_form();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/edution.png"><span>Educational Info</span><a href="#" data-target="#educational-info" data-toggle="modal" ng-click="reset_edu_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="edution-loader" class="dtl-dis">
                             <div class="text-center">
@@ -345,7 +345,7 @@
                                                     <p ng-if="user_edu.edu_degree != '0'">{{user_edu.degree_name}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_edu($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_edu($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#edu-accordion" href="#edu{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -397,7 +397,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/extra-activity.png"><span>Extracurricular Activity</span><a href="#" data-target="#extra-activity" data-toggle="modal" ng-click="reset_activity_form();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/extra-activity.png"><span>Extracurricular Activity</span><a href="#" data-target="#extra-activity" data-toggle="modal" ng-click="reset_activity_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="activity-loader" class="dtl-dis">
                             <div class="text-center">
@@ -426,7 +426,7 @@
                                                     <p>{{user_ea.activity_org}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_activity($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_activity($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#activity-accordion" href="#activity{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -473,7 +473,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/add-course.png"><span>Additional Course</span><a href="#" data-target="#additional-course" data-toggle="modal" ng-click="reset_addicourse_form();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/add-course.png"><span>Additional Course</span><a href="#" data-target="#additional-course" data-toggle="modal" ng-click="reset_addicourse_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="addicourse-loader" class="dtl-dis">
                             <div class="text-center">
@@ -502,7 +502,7 @@
                                                     <p>{{user_course.addicourse_org}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_addicourse($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_addicourse($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#addicourse-accordion" href="#addicourse{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -550,7 +550,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/publication.png"><span>Publication</span><a href="#" data-target="#publication" data-toggle="modal" ng-click="reset_publication_form();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/publication.png"><span>Publication</span><a href="#" data-target="#publication" data-toggle="modal" ng-click="reset_publication_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="publication-loader" class="dtl-dis">
                             <div class="text-center">
@@ -579,7 +579,7 @@
                                                     <p>{{user_pub.pub_author}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_publication($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_publication($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#publication-accordion" href="#publication{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -634,7 +634,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/achi-awards.png"><span>Achievements & Awards</span><a href="#" data-target="#Achiv-awards" data-toggle="modal" ng-click="reset_awards_form();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="awards-loader" class="dtl-dis">
                             <div class="text-center">
@@ -663,7 +663,7 @@
                                                     <p>{{user_awrd.award_org}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_award($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_award($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#award-accordion" href="#award{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -707,7 +707,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/research.png"><span>Research</span><a href="#" ng-click="reset_research_form();" data-target="#research" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/research.png"><span>Research</span><a href="#" ng-click="reset_research_form();" data-target="#research" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="research-loader" class="dtl-dis">
                             <div class="text-center">
@@ -737,7 +737,7 @@
                                                     <p ng-if="u_research.research_field != '0'">{{u_research.research_field_txt}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_research($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_research($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#research-accordion" href="#research{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -787,7 +787,7 @@
                 <div class="gallery-item">
                     <div class="dtl-box">
                         <div class="dtl-title">
-                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/patent.png"><span>Patent</span><a href="#" data-target="#patent" data-toggle="modal" class="pull-right" ng-click="reset_patent_form();"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                            <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/patent.png"><span>Patent</span><a href="#" data-target="#patent" data-toggle="modal" class="pull-right" ng-click="reset_patent_form();" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                         </div>
                         <div id="patent-loader" class="dtl-dis">
                             <div class="text-center">
@@ -816,7 +816,7 @@
                                                     <p>{{user_ptn.patent_creator}}</p>
                                                 </div>
                                                 <div class="dis-right">
-                                                    <span role="button" ng-click="edit_user_patent($index)" class="pr5">
+                                                    <span role="button" ng-click="edit_user_patent($index)" class="pr5" ng-if="live_slug == segment2">
                                                         <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                                     </span>
                                                     <span role="button" data-toggle="collapse" data-parent="#patent-accordion" href="#patent{{$index}}" aria-expanded="true" aria-controls="exp1">
@@ -925,7 +925,7 @@
             <!-- Skill Start -->
             <div id="skill-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/skill.png"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/skill.png"><span>Skills</span><a href="#" data-target="#skills" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
                 <div id="skill-loader" class="dtl-dis">
                     <div class="text-center">
@@ -949,7 +949,7 @@
             <!-- Links Start -->
             <div id="social-link-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Website</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/website.png"><span>Website</span><a href="#" data-target="#social-link" data-toggle="modal" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
                 </div>
                 <div id="social-link-loader" class="dtl-dis">
                     <div class="text-center">
@@ -996,7 +996,7 @@
             <!-- Idol Start -->
             <div id="idol-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/inspration.png"><span>Idol</span><a href="#" data-target="#inspiration" data-toggle="modal" ng-click="reset_user_idols();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/inspration.png"><span>Idol</span><a href="#" data-target="#inspiration" data-toggle="modal" ng-click="reset_user_idols();" class="pull-right" ng-if="live_slug == segment2"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                 </div>
                 <div id="idol-loader">
                     <div class="text-center">
@@ -1015,7 +1015,7 @@
                             <li ng-repeat="user_idol in user_idols" ng-if="$index <= view_more_idol">
                                 <img src="<?php echo USER_IDOL_UPLOAD_URL; ?>{{user_idol.user_idol_pic}}">
                                 <span>{{user_idol.user_idol_name}}</span>
-                                <a href="javascript:void(0);" role="button" ng-click="edit_user_idols($index)" class="pull-right">
+                                <a href="javascript:void(0);" role="button" ng-click="edit_user_idols($index)" class="pull-right" ng-if="live_slug == segment2">
                                     <img src="<?php echo base_url(); ?>assets/n-images/detail/detial-edit.png">
                                 </a>
                             </li>

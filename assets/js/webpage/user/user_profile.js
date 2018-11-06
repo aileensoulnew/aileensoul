@@ -18,7 +18,7 @@ app.directive('checkFileExt', ['$compile', function($compile) {
                     var inner_html = $compile('<a href="'+upload_url+text+'" target="_blank"><img src="'+upload_url+text+'"></a>')(scope);
                 }
                 else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {
-                    var inner_html = $compile('<a href="'+upload_url+text+'" target="_blank"><img src="'+base_url+'assets/images/PDF.jpg"></a>')(scope);   
+                    var inner_html = $compile('<a class="file-preview-cus" href="'+upload_url+text+'" target="_blank"><img src="'+base_url+'assets/images/file-up-cus.png"></a>')(scope);   
                 }
                 element.empty();
                 element.append(inner_html);
@@ -3790,6 +3790,11 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
     $scope.user = {};
     $scope.$parent.title = "Details | Aileensoul";
     $scope.old_count_profile = 0;
+
+    /*if($scope.$parent.live_slug != $scope.$parent.segment2)
+    {
+        $( "body" ).find("a[data-target]").remove();
+    }*/
     // PROFEETIONAL DATA
     getFieldList();
 
