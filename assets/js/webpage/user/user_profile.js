@@ -7386,32 +7386,35 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $scope.exp_isworking = (parseInt($scope.user_experience[index].exp_isworking) == 1 ? true : false);
         
         // $scope.exp_desc = $scope.user_experience[index].exp_desc;
-        console.log($scope.user_experience[index]);
         var exp_desc_txt = $scope.user_experience[index].exp_desc;
         $("#exp_desc").val(exp_desc_txt);
         
         var exp_file_name = $scope.user_experience[index].exp_file;
         $scope.exp_file_old = exp_file_name;
-        var filename_arr = exp_file_name.split('.');
-        // console.log(filename_arr);
-        //console.log(filename_arr[filename_arr.length - 1]);
-        $("#exp_doc_prev").remove();
-        var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
-        var allowed_doc_ext = ['pdf','PDF','docx','doc'];
-        var fileExt = filename_arr[filename_arr.length - 1];
-        /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
-            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_experience_upload_url+exp_file_name+'"></a></p>';
-        }
-        else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
-            var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
-        // }
+        if(exp_file_name.trim() != "")
+        {
+            var filename_arr = exp_file_name.split('.');
+            // console.log(filename_arr);
+            //console.log(filename_arr[filename_arr.length - 1]);
+            $("#exp_doc_prev").remove();
+            var allowed_img_ext = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'gif', 'GIF'];
+            var allowed_doc_ext = ['pdf','PDF','docx','doc'];
+            var fileExt = filename_arr[filename_arr.length - 1];
+            /*if ($.inArray(fileExt.toLowerCase(), allowed_img_ext) !== -1) {
+                var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img style="width: 100px;" src="'+user_experience_upload_url+exp_file_name+'"></a></p>';
+            }
+            else if ($.inArray(fileExt.toLowerCase(), allowed_doc_ext) !== -1) {*/
+                var inner_html = '<p id="exp_doc_prev" class="screen-shot"><a class="file-preview-cus" href="'+user_experience_upload_url+exp_file_name+'" target="_blank"><img src="'+base_url+'assets/n-images/detail/file-up-cus.png"></a></p>';   
+            // }
 
-        var contentTr = angular.element(inner_html);
-        contentTr.insertAfter($("#exp_file_error"));
-        $compile(contentTr)($scope);
-        setTimeout(function(){  
-            $scope.experience_form.validate();
-        },1000);
+            var contentTr = angular.element(inner_html);
+            contentTr.insertAfter($("#exp_file_error"));
+            $compile(contentTr)($scope);
+            setTimeout(function(){  
+                $scope.experience_form.validate();
+            },1000);
+        }
+
         var delete_btn = '<a id="delete_user_exp_modal" href="#" data-target="#delete-exp-model" data-toggle="modal" class="save delete-edit"><span>Delete</span></a>';
         var contentbtn = angular.element(delete_btn);
         contentbtn.insertAfter($("#user_exp_loader"));
