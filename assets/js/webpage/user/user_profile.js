@@ -3806,7 +3806,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         },1000);        
     }
 
-    function load_add()
+    /*function load_add()
     {
         setTimeout(function(){        
         var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
@@ -3815,7 +3815,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
             $compile($el)($scope);
         },1000);        
-    }
+    }*/
 
     function getFieldList() {
         // $('#main_loader').hide();        
