@@ -261,7 +261,9 @@
                                                 <ul class="dis-list">
                                                     <li ng-if="user_proj.project_url != ''">
                                                         <span>Website</span> 
+														<div class="dis-list-link">
                                                         <a href="{{user_proj.project_url}}" target="_self">{{user_proj.project_url}}</a>
+														</div>
                                                     </li>
                                                     <li class="select-preview">
                                                         <span>Duration</span> 
@@ -521,7 +523,9 @@
                                                     </li>
                                                     <li ng-if="user_course.addicourse_url != ''">
                                                         <span>Website</span> 
+														<div class="dis-list-link">
                                                         <a href="{{user_course.addicourse_url}}" target="_self">{{user_course.addicourse_url}}</a>
+														</div>
                                                     </li>
                                                     <li ng-if="user_course.addicourse_file != '' && user_course.addicourse_file != null">
                                                         <span>Document</span>
@@ -588,21 +592,23 @@
                                         <div id="publication{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="publication-{{$index}}">
                                             <div class="panel-body">
                                                 <ul class="dis-list">
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Published Date</span> 
                                                         <label>{{user_pub.pub_date_str}}</label>
                                                     </li>
-                                                    <li>
+                                                    <li class="select-preview">
                                                         <span>Publisher / Publication</span>
                                                         <label>{{user_pub.pub_publisher}}</label>
                                                     </li>
                                                     <li ng-if="user_pub.pub_url != '' && user_pub.pub_url != null">
                                                         <span>Website</span>
+														<div class="dis-list-link">
                                                         <a href="{{user_pub.pub_url}}" target="_self">{{user_pub.pub_url}}</a>
+														</div>
                                                     </li>
                                                     <li>
                                                         <span>Description</span>
-                                                        <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_pub.pub_desc}}" dd-text-collapse-cond="true">{{user_pub.pub_desc}}</label>
+                                                        <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_pub.pub_desc}}" dd-text-collapse-cond="true">{{user_pub.pub_desc}}</label>
                                                     </li>
                                                     <li ng-if="user_pub.pub_file != '' && user_pub.pub_file != null">
                                                         <span>Document</span>
@@ -750,11 +756,13 @@
                                                     </li>                                                
                                                     <li ng-if="u_research.research_url != '' && u_research.research_url != null">
                                                         <span>Website</span>
+														<div class="dis-list-link">
                                                         <a href="{{u_research.research_url}}" target="_self">{{u_research.research_url}}</a>
+														</div>
                                                     </li>
                                                     <li>
                                                         <span>Description</span>
-                                                        <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{u_research.research_desc}}" dd-text-collapse-cond="true">{{u_research.research_desc}}</label>
+                                                        <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{u_research.research_desc}}" dd-text-collapse-cond="true">{{u_research.research_desc}}</label>
                                                     </li>
                                                     <li ng-if="u_research.research_document != '' && u_research.research_document != null">
                                                         <span>Document</span>
@@ -835,11 +843,13 @@
                                                     </li>
                                                     <li ng-if="user_ptn.patent_url != '' && user_ptn.patent_url != null">
                                                         <span>Patent link</span>
+														<div class="dis-list-link">
                                                         <a href="{{user_ptn.patent_url}}" target="_self">{{user_ptn.patent_url}}</a>
+														</div>
                                                     </li>
                                                     <li>
                                                         <span>Description</span>
-                                                        <label dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_ptn.patent_desc}}" dd-text-collapse-cond="true">{{user_ptn.patent_desc}}</label>
+                                                        <label class="inner-dis" dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{user_ptn.patent_desc}}" dd-text-collapse-cond="true">{{user_ptn.patent_desc}}</label>
                                                     </li>
                                                     <li ng-if="user_ptn.patent_file != '' && user_ptn.patent_file != null">
                                                         <span>Document</span>
@@ -986,7 +996,7 @@
             <!-- Idol Start -->
             <div id="idol-move" class="dtl-box">
                 <div class="dtl-title">
-                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/inspration.png"><span>Idol</span><a href="#" data-target="#inspiration" data-toggle="modal" ng-click="reset_user_idols();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/edit.png"></a>
+                    <img class="cus-width" src="<?php echo base_url(); ?>assets/n-images/detail/inspration.png"><span>Idol</span><a href="#" data-target="#inspiration" data-toggle="modal" ng-click="reset_user_idols();" class="pull-right"><img src="<?php echo base_url(); ?>assets/n-images/detail/detail-add.png"></a>
                 </div>
                 <div id="idol-loader">
                     <div class="text-center">
@@ -1035,7 +1045,7 @@
                 <div class="dtl-dis">
                     <label>Enter Profile Details</label>
                     <textarea name="user_bio" id="user_bio" ng-model="user_bio" type="text" placeholder="Enter Details" maxlength="700">{{user_bio}}</textarea>
-                    <span>{{700 - user_bio.length}}</span>                    
+                    <span class="pull-right">{{700 - user_bio.length}}</span>                    
                 </div>
                 <div class="dtl-btn">
                     <a id="user_bio_save" href="#" ng-click="save_user_bio()" class="save"><span>Save</span></a>
@@ -1208,13 +1218,16 @@
                 <form name="experience_form" id="experience_form" ng-validate="experience_validate">
                     <!-- <input type="hidden" name="edit_exp" id="edit_exp" ng-model="edit_exp" ng-value="0"> -->
                     <div class="dtl-dis">
-                        <div class="form-group">
+                        
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
+									<div class="form-group">
                                     <label>Company Name</label>
                                     <input type="text" placeholder="Enter Company Name" id="exp_company_name" name="exp_company_name" ng-model="exp_company_name">
+									</div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
+								<div class="form-group">
                                     <label>Designation / Role</label>
                                     <!-- <input type="text" placeholder="Enter Designation"> -->
                                     <input type="text" placeholder="Enter Designation" id="exp_designation" name="exp_designation" ng-model="exp_designation" ng-keyup="exp_job_title_list()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" autocomplete="off">
@@ -1229,18 +1242,22 @@
                                         <div class="autocomplete-template"><div class="right-panel"><span ng-bind-html="$highlight($getDisplayText())"></span></div></div>
                                     </script> -->
                                     <label id="exp_designation_err" for="exp_designation" class="error" style="display: none;">Please enter designation / role</label>
+									</div>
                                 </div>
                                 
                             </div>
-                        </div>
-                        <div class="form-group">
+                       
+                        <div class="">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
-                                    <label>Company Website</label>
+									<div class="form-group">
+                                    <label>Website <span class="link-must">(Must be http:// or https://)</span></label>
                                     <input type="text" placeholder="Enter Company Website" id="exp_company_website" name="exp_company_website" ng-model="exp_company_website">
-                                    <span class="personal-link-info">URL must start with http:// or https://</span>
+                                    
+									</div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
+									<div class="form-group">
                                     <label>Field </label>
                                     <span class="span-select">
                                         <?php $getFieldList = $this->data_model->getNewFieldList();?>
@@ -1252,54 +1269,64 @@
                                         <option value="0">Other</option>
                                     </select>
                                     </span>
+									</div>
                                 </div>
                             </div>
                             <div id="exp_other_field_div" class="row" style="display: none;">
                                 <div class="col-md-6 col-sm-6"></div>
                                 <div class="col-md-6 col-sm-6">
+									<div class="form-group">
                                     <label>Other Field</label>
                                     <input type="text" placeholder="Enter Other Field" id="exp_other_field" name="exp_other_field" ng-model="exp_other_field">
+									</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <label>Company Location</label>
                             <!-- <input type="text" placeholder="Enter Company Location"> -->
                             <div class="row">
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
                                     <span class="span-select">
                                         <select id="exp_country" name="exp_country" ng-model="exp_country" ng-change="exp_country_change()">
-                                            <option value="">Select Country</option>         
+                                            <option value="">Country</option>         
                                             <option data-ng-repeat='country_item in exp_country_list' value='{{country_item.country_id}}'>{{country_item.country_name}}</option>
                                         </select>
                                     </span>
+									</div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
                                     <span class="span-select">
                                         <select id="exp_state" name="exp_state" ng-model="exp_state" ng-change="exp_state_change()" disabled = "disabled">
-                                            <option value="">Select State</option>
+                                            <option value="">State</option>
                                             <option data-ng-repeat='state_item in exp_state_list' value='{{state_item.state_id}}'>{{state_item.state_name}}</option>
                                         </select>
                                         <img id="exp_state_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
                                     </span>
+									</div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-4 col-sm-4 col-xs-4 fw-479">
+									<div class="form-group">
                                     <span class="span-select">
                                         <select id="exp_city" name="exp_city" ng-model="exp_city" disabled = "disabled">
-                                            <option value="">Select City</option>
+                                            <option value="">City</option>
                                             <option data-ng-repeat='city_item in exp_city_list' value='{{city_item.city_id}}'>{{city_item.city_name}}</option>
                                         </select>
                                         <img id="exp_city_loader" src="<?php echo base_url('assets/img/spinner.gif') ?>" style="   width: 20px;position: absolute;top: 6px;right: 19px;display: none;">
                                     </span>
+									</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <label>Start Date</label>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
                                             <span class="span-select">
                                                 <select id="exp_s_year" name="exp_s_year" ng-model="exp_s_year" ng-change="exp_start_year();">
                                                     <option value="">Year</option>
@@ -1311,31 +1338,38 @@
                                                     } ?>
                                                 </select>
                                             </span>
+											</div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
                                             <span class="span-select">
                                                 <select id="exp_s_month" name="exp_s_month" ng-model="exp_s_month">
                                                     <option value="">Month</option>
                                                 </select>
                                             </span>
+											</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="exp_end_date" class="col-md-6 col-sm-6" ng-show='!exp_isworking'>
                                     <label>End Date</label>
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
                                             <span class="span-select">
                                                 <select id="exp_e_year" name="exp_e_year" ng-model="exp_e_year">
                                                 </select>
                                             </span>
+											</div>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+											<div class="form-group">
                                             <span class="span-select">
                                                 <select id="exp_e_month" name="exp_e_month" ng-model="exp_e_month">
                                                     <option value="">Month</option> 
                                                 </select>
                                             </span>
+											</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1343,9 +1377,9 @@
                                     <span id="expdateerror" class="error" style="display: none;"></span>
                                 </div>
                             </div>
-                            <div class="pt10">
+                            <div class="form-group">
                                 <label class="control control--checkbox">
-                                    <input type="checkbox" ng-model="exp_isworking" id="exp_isworking" class="exp_isworking">I currently working here.
+                                    <input type="checkbox" ng-model="exp_isworking" id="exp_isworking" class="exp_isworking">I currently work here.
                                     <div class="control__indicator">
                                     </div>
                                 </label>

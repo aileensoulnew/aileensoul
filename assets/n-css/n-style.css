@@ -2683,7 +2683,8 @@ overflow: hidden;}
 .dis-list li:last-child span{/*padding-bottom:5px;*/}
 .dis-list li span{display: block; font-size: 15px; font-weight:bold;}
 .dis-list li a.dis-more{color:#5c5c5c;}
-.dis-list li a{color:#7b7b7b; float:left; word-break:break-all;}
+.dis-list li a{color:#7b7b7b;}
+.dis-list li .dis-list-link{width: 400px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .dis-list li a b{color:#7b7b7b;}
 .dis-list li a:hover{color:#1b8ab9; text-decoration:none;}
 .dis-list li a.dis-more{color:#5c5c5c;}
@@ -2695,6 +2696,7 @@ width: auto; height: 100%;
 -ms-transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
 max-width: inherit;}
+.dis-list li label{font-size:14px;}
 .dis-list li .inner-dis span{font-weight:normal; display:inline; font-size:14px;}
 .dis-list li .inner-dis span.collapse-text-toggle{font-weight:bold; font-size:13px;}
 .dtl-dis .control__indicator{top:0;}
@@ -2920,6 +2922,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .rating-xs .caption {font-size: 12px;}
 .img-cus{border:0;}
 .img-cus img{width:100%; border-radius:100%; }
+.link-must{font-size:12px;}
 /***  end new job registration form  ***/
 /***  new buttons  ***/
 .btn-new-1{border-radius: 20px; background:#fff; border:1px solid #5c5c5c; color: #5c5c5c; padding: 6px 25px; text-align: center; display: inline-block; font-weight: bold; font-family: Arial; margin: 0 5px;}
@@ -3291,12 +3294,14 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dis-left-img span{padding:8px 10px;}
 	.dis-middle{padding-top:0px;}
 	.dtl-dis.dis-accor .panel-heading{min-height:70px;}
-	.dis-right a.pr5 img{width:18px;}
-	.dis-right a img{width:15px;}
+	.dis-right .pr5 img{width:18px;}
+	.dis-right img{width:15px;}
 	.dis-right{padding-top:0;}
 	.dis-right{width:40px;}
 	.all-detail-custom .right-add{display:block;}
 	.profile-text1{top:50px !important;}
+	.dis-right{text-align:right;}
+	.dis-right span.pr5{padding-right:0;}
 }
 @media screen and (max-width: 767px) {
 	.infeed {height: 250px;}
@@ -3722,6 +3727,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.job-reg-cus-new .form-group select{font-size:14px;}
 	.total-exp{font-size:14px;}
 	.rec-dtl .dtl-box{border-radius:0; border-left:0; border-right:0;}
+	.idol-box ul li span{width:85%;}
 }
 @media screen and (max-width: 639px) {
 	.hidden-639{display:none;}
@@ -4096,8 +4102,8 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dtl-box{border-radius:0;}
 	.dtl-dis.dis-accor .panel-heading{min-height:50px;}
 	.dis-middle h4{margin-bottom:0; line-height:1;}
-	.dis-right a.pr5 img{width:16px;}
-	.dis-right a img{width:13px;}
+	.dis-right .pr5 img{width:16px;}
+	.dis-right img{width:13px;}
 	.dis-right{width:35px;}
 	.edit-user-info a img{width:20px;}
 	.edit-user-info{top:85px; right:9px;}
@@ -4116,13 +4122,24 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 	.dtl-more-add a img{width:13px;}
 	.dtl-modal .dtl-title{padding:15px;}
 	.dtl-modal .dtl-dis{padding:15px;}
-	.dtl-modal .dlt-img{margin-top:15px; width:15px;}
+	.dtl-modal .dlt-img{margin-top:37px; width:15px;}
 	#social-link .span-select select{padding-left:1px;}
 	.job_reg_main{box-shadow:none; border-top:1px solid #d2d2d2; border-bottom:1px solid #d2d2d2; border-radius:0;}
 	.span-select .form-control{padding-left:5px;}
 	.dtl-modal .modal-dialog{padding:0 !important;}
 	.profile-text1 .as-p{padding-left:5px;}
 	.email-verify{padding-left:0;}
+	.dtl-modal .modal-content label{font-size:14px;}
+	.dtl-modal .modal-content .form-control{font-size:12px;}
+	.dtl-modal .modal-content .form-group textarea{font-size:12px;}
+	.dtl-modal .modal-content .form-group select{font-size:12px;}
+	.dtl-dis h4{font-size:14px;}
+	.dtl-dis .known-language{padding-bottom:10px;}
+	.about-more{font-size:15px;}
+	.about-more a img{width:12px;}
+	.dis-list li label{font-size:12px;}
+	.dis-list li .inner-dis span{font-size:12px;}
+	.dis-list li .inner-dis span.collapse-text-toggle{font-size:12px;}
 }
 @media screen and (max-width: 359px) {
 	.main-banner{max-height:170px;}
