@@ -114,13 +114,13 @@ class Userprofile_page extends MY_Controller {
         $user_image = 0;
         if($user_data['user_image'] != '')
         {
-            $count = $count + 2;
+            $count = $count + 3;
             $user_image = 1;
         }
         $profile_background = 0;
         if($user_data['profile_background'] != '')
         {
-            $count = $count + 2;
+            $count = $count + 3;
             $profile_background = 1;
         }
         $user_bio = 0;
@@ -132,7 +132,7 @@ class Userprofile_page extends MY_Controller {
         $user_skills = 0;
         if($user_data['user_skills'] != '')
         {
-            $count = $count + 1;
+            $count = $count + 3;
             $user_skills = 1;
         }
         $user_hobbies = 0;
@@ -168,7 +168,7 @@ class Userprofile_page extends MY_Controller {
         $user_languages_status = 0;
         if(isset($user_languages) && !empty($user_languages))
         {
-            $count = $count + 3;
+            $count = $count + 1;
             $user_languages_status = 1;
         }
         $user_experience_status = 0;
@@ -211,7 +211,7 @@ class Userprofile_page extends MY_Controller {
         $progress_status['user_links_status'] = $user_links_status;
         $progress_status['user_idol_status'] = $user_idol_status;
 
-        $user_process = ($count * 100) / 26;        
+        $user_process = ($count * 100) / 28;        
         $user_process_value = ($user_process / 100);
 
         if ($user_process == 100) {
