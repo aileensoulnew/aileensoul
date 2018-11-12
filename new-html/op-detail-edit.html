@@ -3152,6 +3152,7 @@
 	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>	
 	<script>
+if (screen.width > 768) {
 		var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
   containerElem.classList.add('masonry-layout', 'columns-' + columns);
   var columnsElements = [];
@@ -3174,7 +3175,7 @@
 
 masonryLayout(document.getElementById('gallery'),
 document.querySelectorAll('.gallery-item'), 2);
-
+}
 
 
 		// mcustom scroll bar

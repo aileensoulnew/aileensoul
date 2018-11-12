@@ -8512,7 +8512,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
                 },200);
             }
         });
-
+		if (screen.width > 768) {
         var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
           containerElem.classList.add('masonry-layout', 'columns-' + columns);
           var columnsElements = [];
@@ -8535,6 +8535,7 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
 
         masonryLayout(document.getElementById('gallery'),
         document.querySelectorAll('.gallery-item'), 2);
+		}
     });
 });
 app.controller('contactsController', function ($scope, $http, $location, $window,$compile) {
