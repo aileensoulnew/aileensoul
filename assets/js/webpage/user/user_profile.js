@@ -3267,7 +3267,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
             //var description = $("#editPostTexBox-"+post_id).val();//$scope.sim.description_edit;//document.getElementById("description").value;            
             description = description.trim();
-            /*if (description == '')
+            if (description == '')
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -3279,7 +3279,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 });
                 //event.preventDefault();
                 return false;
-            } else {*/
+            }/* else {*/
                 var form_data = new FormData();
                 form_data.append('description', description);
                 form_data.append('post_for', $scope.sim.post_for);
@@ -4735,70 +4735,84 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         {            
             if(/(http|https):\/\/?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
+                return true;
             }
             else
             {
                 $("#link_url"+id).addClass("error");
+                return false;
             }
         }
         if(link_type == "Google")
         {            
             if(/\+[^/]+|\d{21}/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
+                return true;
             }
             else
             {
                 $("#link_url"+id).addClass("error");
+                return false;
             }
         }
         if(link_type == "Instagram")
         {            
             if(/https?:\/\/(www\.)?instagram\.com\/([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
+                return true;
             }
             else
             {
                 $("#link_url"+id).addClass("error");
+                return false;
             }
         }
         if(link_type == "LinkedIn")
         {            
             if(/(http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
+               return true; 
             }
             else
             {
                 $("#link_url"+id).addClass("error");
+                return false;
             }
         }
         if(link_type == "Pinterest")
         {            
             if(/^http(s)?:\/\/(in.)pinterest.com\/(.*)?$/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
+                return true;
             }
             else
             {
                 $("#link_url"+id).addClass("error");
+                return false;
             }
         }
         if(link_type == "GitHub")
         {            
             if(/http(s)?:\/\/(www\.)?github\.(com|io)\/[A-z 0-9 _-]+\/?/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
+                return true;
             }
             else
             {
                 $("#link_url"+id).addClass("error");
+                return false;
             }
         }
         if(link_type == "Twitter")
         {            
             if(/http(s)?:\/\/(.*\.)?twitter\.com\/[A-z 0-9 _]+\/?/i.test(link_url)){
                 $("#link_url"+id).removeClass("error");
+                return true;
             }
             else
             {
                 $("#link_url"+id).addClass("error");
+                return false;
             }
         }
 
@@ -4835,10 +4849,12 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         if(res != null)// if (regexp.test(personal_link_url))
         {
             $("#personal_link_url"+id).removeClass("error");
+            return true;
         }
         else
         {
             $("#personal_link_url"+id).addClass("error");
+            return false;
         }
     };
 
@@ -4847,7 +4863,27 @@ app.controller('detailsController', function ($scope, $http, $location,$compile)
         $("#user_links_save").attr("style","pointer-events:none;display:none;");
         var link_type = $('.link_type').serializeArray();
         var link_url = $('.link_url').serializeArray();
+        var err_link = 0;
+        link_url.forEach(function(links,idx) {          
+          if($scope.check_socialurl(idx) === false)
+          {
+            err_link = 1;
+          }
+        });        
+
         var personal_link_url = $('.personal_link_url').serializeArray();
+        personal_link_url.forEach(function(links,idx) {          
+          if($scope.check_personalurl(idx) === false)
+          {
+            err_link = 1;
+          }
+        });
+        if(err_link == 1)
+        {
+            $("#user_links_save").removeAttr("style");
+            $("#user_links_loader").hide();
+            return;
+        }
         var updatedata = $.param({'link_type':link_type,'link_url':link_url,'personal_link_url':personal_link_url});
         $http({
             method: 'POST',
