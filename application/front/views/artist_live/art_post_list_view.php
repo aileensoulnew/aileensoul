@@ -460,7 +460,7 @@ if (count($total_record) > 0) {
 
                         <div class="likeduserlist<?php echo $row['art_post_id']; ?>">
                         <?php
-                        $contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1', 'is_delete' => '0');
+                        /*$contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1', 'is_delete' => '0');
                         $commnetcount = $this->common->select_data_by_condition('art_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
                         $likeuser = $commnetcount[0]['art_like_user'];
                         $countlike = $commnetcount[0]['art_likes_count'] - 1;
@@ -472,10 +472,10 @@ if (count($total_record) > 0) {
                         }
 
                         $contition_array = array('art_post_id' => $row['art_post_id'], 'status' => '1', 'is_delete' => '0');
-                        $commnetcount = $this->common->select_data_by_condition('art_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
+                        $commnetcount = $this->common->select_data_by_condition('art_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');*/
 
-                        $likeuser = $commnetcount[0]['art_like_user'];
-                        $countlike = $commnetcount[0]['art_likes_count'] - 1;
+                        $likeuser = $row['art_like_user'];
+                        $countlike = $row['art_likes_count'] - 1;
 
                         $likelistarray = explode(',', $likeuser);
                         $likelistarray = array_reverse($likelistarray);

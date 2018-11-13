@@ -290,9 +290,28 @@ class Artistic_model extends CI_Model {
 
             $query = $this->db->query($sql);
             $result_array = $query->result_array();
+            foreach ($result_array as $key => $value) {
+                $art_like_arr = $this->get_artist_like_count_user($value['art_like_user']);
+                $result_array[$key]['art_likes_count'] = $art_like_arr['art_like_count'];
+                $result_array[$key]['art_like_user'] = $art_like_arr['art_like_user'];
+            }
 
             return $result_array;
     } 
+
+    function get_artist_like_count_user($art_like_user)
+    {
+        $art_like_user_arr = explode(",", $art_like_user);
+        $ret_arr = array();
+        foreach ($art_like_user_arr as $key => $value) {
+            $art_user = $this->db->select('art_name')->get_where('art_reg', array('user_id' => $value, 'status' => '1'))->row();
+            if(isset($art_user) && !empty($art_user))
+            {
+                $ret_arr[] = $value;
+            }
+        }
+        return array("art_like_count"=>count($ret_arr),"art_like_user"=>implode(",", $ret_arr));
+    }
 
     // Get count of artistic post data 
     function get_artist_home_post_count($login_userid){

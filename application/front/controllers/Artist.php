@@ -9814,8 +9814,10 @@ class Artist extends MY_Controller {
         $contition_array = array('art_post_id' => $post_id, 'status' => '1', 'is_delete' => '0');
         $commnetcount = $this->common->select_data_by_condition('art_post', $contition_array, $data = '*', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
 
-        $likeuser = $commnetcount[0]['art_like_user'];
-        $countlike = $commnetcount[0]['art_likes_count'] - 1;
+        // $likeuser = $commnetcount[0]['art_like_user'];
+
+        $art_like_arr = $this->artistic_model->get_artist_like_count_user($commnetcount[0]['art_like_user']);
+        $likeuser = $art_like_arr['art_like_user'];
 
         $likelistarray = explode(',', $likeuser);
 
