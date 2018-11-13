@@ -10446,7 +10446,7 @@ Your browser does not support the audio tag.
         $join_str[2]['join_table_id'] = 'st.state_id';
         $join_str[2]['from_table_id'] = 'bp.state';
         $join_str[2]['join_type'] = 'left';
-        $data = "bp.business_user_image,bp.company_name,bp.industriyal,bp.other_industrial,business_profile_post.business_profile_post_id,business_profile_post.product_name,business_profile_post.product_description,business_profile_post.business_likes_count,business_profile_post.business_like_user,business_profile_post.created_date,business_profile_post.posted_user_id,bp.user_id,IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug";
+        $data = "bp.business_user_image,bp.company_name,bp.industriyal,bp.other_industrial,business_profile_post.business_profile_post_id,business_profile_post.product_name,business_profile_post.product_description,business_profile_post.business_likes_count,business_profile_post.business_like_user,business_profile_post.created_date,business_profile_post.posted_user_id,bp.user_id,,st.state_name,ct.city_name,bp.business_slug";/*IF (bp.city IS NULL, concat(bp.business_slug, '-', st.state_name) ,concat(bp.business_slug, '-', ct.city_name)) as business_slug*/
 
         $business_profile_post = $this->common->select_data_by_search('business_profile_post', $search_condition, $condition_array, $data, $sortby = 'business_profile_post_id', $orderby = 'DESC', $limit = $perpage, $offset = $start, $join_str, $groupby = '');
 
