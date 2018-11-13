@@ -403,6 +403,10 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                             if ($cityname) {
                                                                 echo $cityname . ', ';
                                                             }
+                                                            else if($statename)
+                                                            {
+                                                                echo $statename.", ";
+                                                            }
                                                             echo $countryname.' '.'(Location)';
                                                         }
                                                         ?>
@@ -546,9 +550,9 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                             $edu = $post['degree_name'];
                                                             $edu_nm = explode(',', $edu);
                                                             $edu_txt = "";
-                                                            if (!$post['degree_name']) {
+                                                            if ($post['other_education'] != '') {
                                                                 $edu_txt = $post['other_education'];
-                                                            } else if (!$post['other_education']) {
+                                                            } else if ($post['degree_name'] != '') {
                                                                 foreach ($edu_nm as $edun) {
                                                                     if ($k != 0) {
                                                                         $edu_txt .= $comma;
@@ -574,7 +578,7 @@ $other_industry = $this->common->select_data_by_search('job_industry', $search_c
                                                         }
                                                     ?>
                                                     <span>
-                                                        <?php echo $edu_txt; ?>
+                                                        <?php echo ($edu_txt != "" ? $edu_txt : JOBDATANA); ?>
                                                     </span>
                                                 </li>
                                                 <li><b>Salary</b>
