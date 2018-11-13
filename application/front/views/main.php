@@ -33,7 +33,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
         <?php
-        $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $actual_link = base_url();// "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
         <link rel="canonical" href="<?php echo $actual_link ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.mCustomScrollbar.css?ver=' . time()); ?>">
