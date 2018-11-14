@@ -8,7 +8,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="<?php echo base_url('assets/images/favicon.png?ver=' . time()); ?>">
-
+<style type="text/css">
+  .form-group {position: relative; margin-bottom: 1.5rem;}
+  .form-control-placeholder {position: absolute; top: 0; padding: 15px 0 0 0px; transition: all 200ms; opacity: 1; }
+  .form-control:focus + .form-control-placeholder{
+    font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
+	.form-control.valid-cus + .form-control-placeholder {
+    font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
+</style>
 <!-- Calender Css End-->
  
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css?ver=' . time()); ?>">
@@ -26,13 +33,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()) ?>">
 <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
-<style type="text/css">
-  .form-group {position: relative; margin-bottom: 1.5rem;}
-  .form-control-placeholder {position: absolute; top: 0; padding: 15px 0 0 0px; transition: all 200ms; opacity: 1; }
-  .form-control:focus + .form-control-placeholder,
-  .form-control:valid + .form-control-placeholder {
-    font-size: 75%; transform: translate3d(0, -60%, 0); opacity: 1;}
-</style>
+
 <?php $this->load->view('adsense'); ?>
 </head>
 <!-- END HEAD -->
@@ -90,7 +91,7 @@
                       <div class="col-md-6 mx-auto">
                         <div class="form-group">
                           <!-- <input type="text" id="name" class="form-control" required> -->
-                          <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control" style="text-transform: capitalize;" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value" value="<?php echo $userdata['first_name'];?>" maxlength="35">
+                          <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control valid1" style="text-transform: capitalize;" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value" value="<?php echo $userdata['first_name'];?>" maxlength="35">
                           <label class="form-control-placeholder" for="first_name">First Name</label>
                           <?php echo form_error('first_name'); ?>
                         </div>
@@ -98,7 +99,7 @@
                       <div class="col-md-6 mx-auto">
                         <div class="form-group">
                           <!-- <input type="text" id="password" class="form-control" required> -->
-                          <input type="text" name="last_name" id="last_name" tabindex="2" class="form-control" style="text-transform: capitalize;" onfocus="this.value = this.value;" value="<?php echo $userdata['last_name'];?>" maxlength="35">
+                          <input type="text" name="last_name" id="last_name" tabindex="2" class="form-control" style="text-transform: capitalize;" onfocus="this.value = this.value;" value="<?php echo $userdata['last_name'];?>" maxlength="35" required>
                           <label class="form-control-placeholder" for="last_name">Last Name</label>
                           <?php echo form_error('last_name'); ?>
                         </div>
@@ -579,6 +580,7 @@ function expmonth_click(){
         $('.right-header ul.dropdown-menu').hide();
     });
   </script>
+  
 <?php }?>
 </body>
 </html>
