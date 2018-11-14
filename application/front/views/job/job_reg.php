@@ -91,7 +91,7 @@
                       <div class="col-md-6 mx-auto">
                         <div class="form-group">
                           <!-- <input type="text" id="name" class="form-control" required> -->
-                          <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control valid1" style="text-transform: capitalize;" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value" value="<?php echo $userdata['first_name'];?>" maxlength="35">
+                          <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control valid-cus" style="text-transform: capitalize;" onfocus="var temp_value=this.value; this.value=''; this.value=temp_value" value="<?php echo $userdata['first_name'];?>" maxlength="35" onkeyup="check_value(this);">
                           <label class="form-control-placeholder" for="first_name">First Name</label>
                           <?php echo form_error('first_name'); ?>
                         </div>
@@ -99,7 +99,7 @@
                       <div class="col-md-6 mx-auto">
                         <div class="form-group">
                           <!-- <input type="text" id="password" class="form-control" required> -->
-                          <input type="text" name="last_name" id="last_name" tabindex="2" class="form-control" style="text-transform: capitalize;" onfocus="this.value = this.value;" value="<?php echo $userdata['last_name'];?>" maxlength="35" required>
+                          <input type="text" name="last_name" id="last_name" tabindex="2" class="form-control valid-cus" style="text-transform: capitalize;" onfocus="this.value = this.value;" value="<?php echo $userdata['last_name'];?>" maxlength="35" onkeyup="check_value(this);">
                           <label class="form-control-placeholder" for="last_name">Last Name</label>
                           <?php echo form_error('last_name'); ?>
                         </div>
@@ -109,14 +109,14 @@
                       <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                           <!-- <input type="text" class="form-control" required> -->
-                          <input type="email" name="email" id="email" class="form-control" tabindex="3" value="<?php echo $userdata['email'];?>" maxlength="255">
+                          <input type="email" name="email" id="email" class="form-control" tabindex="3" value="<?php echo $userdata['email'];?>" maxlength="255" onkeyup="check_value(this);">
                           <label class="form-control-placeholder" for="email">Email Address</label>
                           <?php echo form_error('email'); ?>
                         </div>
                       </div>
                       <div class="col-md-6 col-sm-6">
                         <div class="form-group">
-                          <input type="text" name="phone" id="phone" class="form-control" tabindex="4" value="<?php echo $userdata['phone'];?>" maxlength="15">
+                          <input type="text" name="phone" id="phone" class="form-control" tabindex="4" value="<?php echo $userdata['phone'];?>" maxlength="15" onkeyup="check_value(this);">
                           <label class="form-control-placeholder" for="phone">Phone Number</label>
                           <?php echo form_error('phone'); ?>
                         </div>
@@ -199,7 +199,7 @@
 
                     <div class="form-group">
                       <!-- <input type="text" class="form-control" required> -->
-                      <input type="search" tabindex="9" id="job_title" name="job_title" value=""  class="form-control" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255">
+                      <input type="search" tabindex="9" id="job_title" name="job_title" value=""  class="form-control" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" onkeyup="check_value(this);">
                       <label class="form-control-placeholder" for="job_title">Job Title</label>
                       <?php echo form_error('job_title'); ?>
                     </div>
@@ -226,7 +226,7 @@
 
                     <div class="form-group">
                       <!-- <input type="text" class="form-control" required> -->
-                      <input id="cities2" name="cities"  style="text-transform: capitalize;" size="90" tabindex="12" class="form-control">
+                      <input id="cities2" name="cities"  style="text-transform: capitalize;" size="90" tabindex="12" class="form-control" onkeyup="check_value(this);">
                       <label class="form-control-placeholder" for="cities2">Preferred location for job</label>
                       <?php echo form_error('cities'); ?>
                     </div>
@@ -576,6 +576,17 @@ function expmonth_click(){
                     $('.right-header ul.dropdown-menu').hide();
                 });
             });
+    function check_value(txt)
+    {
+      if(txt.value != "")
+      {
+        $("#"+txt.id).addClass("valid-cus")
+      }
+      else
+      {
+        $("#"+txt.id).removeClass("valid-cus") 
+      }
+    }
     $(document).click(function(){
         $('.right-header ul.dropdown-menu').hide();
     });
