@@ -2807,9 +2807,14 @@ width: 80%; border-radius: 10px; z-index:9;}
    padding:15px 0; text-align:center;}
 .job-reg-cus-new .form-group{padding-top:5px; }
 .job-reg-cus-new .form-group label{color:#7b7b7b;}
+.job-reg-cus-new .form-group label.error{right:0; left:inherit;}
+.job-reg-cus-new .form-group .span-select label.error{top:35px;}
+.job-reg-cus-new .fresher_radio label.error{right:0; top:15px;}
 .job-reg-cus-new .form-group input{padding-left:0; padding-right:0; border-width: 0 0 1px 0; border-radius: 0; border-color: #d2d2d2; font-size:16px; position:relative; z-index:9; background:transparent;}
-.job-reg-cus-new .form-group input:focus{box-shadow:none; border-bottom:1px solid #1b8ab9;}
-.job-reg-cus-new .form-group select:focus{border-bottom:1px solid #1b8ab9;}
+.job-reg-cus-new #jobseeker_regform .form-group input:focus{box-shadow:none; border:0px !important; border-bottom:1px solid #1b8ab9 !important;}
+.job-reg-cus-new #jobseeker_regform .form-group input.error{border:0px !important; border-bottom:1px solid #ff0000 !important;}
+.job-reg-cus-new #jobseeker_regform .form-group select.error{border:0px !important; border-bottom:1px solid #ff0000 !important;}
+.job-reg-cus-new #jobseeker_regform .form-group select:focus{border:0px !important; border-bottom:1px solid #1b8ab9 !important;}
 .job-reg-cus-new .fresher_radio label{display:inline-block; padding-left:0;}
 .main_raio{display:inline-block; }
 .fresher_radio label span{margin-top: -3px; display: inline-block; vertical-align: middle;}
