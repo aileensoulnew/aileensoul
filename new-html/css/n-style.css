@@ -2529,14 +2529,14 @@ label.cameraButton{min-height:43px;}
 #article_frm .mce-tinymce.mce-container{border-width:0 !important;}
 #article_frm .mce-tinymce{box-shadow:inherit !important;}
 #article_frm .mce-statusbar.mce-container{border-width: 0px 0px 1px !important;}
-.new-article .arti-profile-box{border:1px solid #d2d2d2; width:100%; border-radius:10px; float:left; margin-bottom:15px; overflow:hidden;}
-.new-article .arti-profile-box .user-cover-img{position:relative; width:100%; height:130px; overflow:hidden;}
-.new-article .arti-profile-box .user-cover-img img{position: absolute; left: 50%; top: 50%; width: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); max-width: inherit; height: 100%;}
-.new-article .arti-profile-box .user-pr-img{width:80px; height:80px; margin:-50px auto 0; border:3px solid #fff; position:relative; border-radius:100%;}
-.new-article .arti-profile-box .user-pr-img img{border-radius:100%; width:100%;}
-.new-article .arti-profile-box .user-info-text{padding:5px 10px 10px;}
-.new-article .arti-profile-box .user-info-text h3{font-size:22px; color:#1b8ab9;}
-.new-article .arti-profile-box .user-info-text p{font-size:18px; color:#1b8ab9;}
+.arti-profile-box{border:1px solid #d2d2d2; width:100%; border-radius:10px; float:left; margin-bottom:15px; overflow:hidden;}
+.arti-profile-box .user-cover-img{position:relative; width:100%; height:130px; overflow:hidden;}
+.arti-profile-box .user-cover-img img{position: absolute; left: 50%; top: 50%; width: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); max-width: inherit; height: 100%;}
+.arti-profile-box .user-pr-img{width:80px; height:80px; margin:-50px auto 0; border:3px solid #fff; position:relative; border-radius:100%;}
+.arti-profile-box .user-pr-img img{border-radius:100%; width:100%;}
+.arti-profile-box .user-info-text{padding:5px 10px 10px;}
+.arti-profile-box .user-info-text h3{font-size:22px; color:#1b8ab9;}
+.arti-profile-box .user-info-text p{font-size:18px; color:#1b8ab9;}
 .new-class-add{position: fixed; top: 46px; z-index: 9999; background: #fff;}
 .meta-detail-box{padding:15px 0; width:100%; float:left;}
 .meta-detail-box p{padding-bottom:7px; margin-bottom:15px; width:100%; float:left;}
