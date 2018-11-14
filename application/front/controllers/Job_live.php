@@ -886,7 +886,7 @@ class Job_live extends MY_Controller {
             }
             else
             {                
-                // redirect(base_url());
+                redirect(base_url());
             }
         }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
