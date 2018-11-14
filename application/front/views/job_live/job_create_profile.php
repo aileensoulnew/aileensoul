@@ -28,7 +28,7 @@
                                     <label ng-show="errorLname" class="error">{{errorLname}}</label>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input class="form-control" type="email" name="email" id="email" tabindex="3" placeholder="Enter your Email Address*" maxlength="255"  ng-model="user.email" ng-init="user.email ='<?php echo $job_data['email']; ?>'">
                                     <div id="emtooltip" class="tooltip-custom" style="display: none;">
@@ -37,16 +37,22 @@
                                     <label ng-show="errorEmail" class="error">{{errorEmail}}</label>
                                 </div>
                             </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="phone" id="phone" tabindex="4" placeholder="Enter contact number*" maxlength="15"  ng-model="user.phone" ng-init="user.phone ='<?php echo $job_data['phone']; ?>'">
+                                    <label ng-show="errorPhone" class="error">{{errorPhone}}</label>
+                                </div>
+                            </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group cus-radio-box">
                                     <label>Fresher <font color="red">*</font> : </label>
                                     <div class="main_raio">
-                                        <input ng-model="user.fresher" type="radio" value="Fresher" tabindex="4" id="test1" name="fresher" class="radio_job form-control" onclick="not_experience()">
+                                        <input ng-model="user.fresher" type="radio" value="Fresher" tabindex="5" id="test1" name="fresher" class="radio_job form-control" onclick="not_experience()">
                                         <label for="test1" class="point_radio">Yes</label>
                                     </div>
 
                                     <div class="main_raio">
-                                        <input ng-model="user.fresher" type="radio" value="Experience" tabindex="5" id="test2" class="radio_job form-control" name="fresher" onclick="experience()">
+                                        <input ng-model="user.fresher" type="radio" value="Experience" tabindex="6" id="test2" class="radio_job form-control" name="fresher" onclick="experience()">
                                         <label for="test2" class="point_radio">No</label>
                                     </div>
                                     <div class="fresher-error"></div>
@@ -58,7 +64,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="form-group fw">
                                             <span class="select-field-custom">
-                                            <select tabindex="6" ng-model="user.experience_year" autofocus="" name="experience_year" id="experience_year" class="experience_year keyskil" onchange="expyear_change();">
+                                            <select tabindex="7" ng-model="user.experience_year" autofocus="" name="experience_year" id="experience_year" class="experience_year keyskil" onchange="expyear_change();">
                                                 <option value="" selected="" option="" disabled="">Year</option>
                                                 <option value="0 year">0 year</option>
                                                 <option value="1 year">1 year</option>
@@ -88,7 +94,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="form-group fw"> 
                                             <span class="select-field-custom">
-                                            <select ng-model="user.experience_month" tabindex="7" id="experience_month" class="experience_month keyskil">
+                                            <select ng-model="user.experience_month" tabindex="8" id="experience_month" class="experience_month keyskil">
                                                 <option value="" selected="" option="" disabled="">Month</option>
                                                 <option>0 month</option>
                                                 <option>1 month</option>
@@ -111,7 +117,8 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="search" tabindex="8" id="job_title" name="job_title" placeholder="Enter Job Title*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobTitle" ng-keyup="jobTitle()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue" ng-init="user.jobTitle = '<?php echo $user_profession_data['name']; ?>'">
+                                    <input class="form-control" type="text" tabindex="9" id="job_title1" name="job_title" placeholder="Enter Job Title*" style="text-transform: capitalize;" onfocus="this.value = this.value;" maxlength="255" class="ui-autocomplete-input" autocomplete="off" ng-model="user.jobTitle" ng-keyup="jobTitle()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue"  autocomplete="off">
+                                    <!--ng-init="user.jobTitle = '<?php //echo $user_profession_data['name']; ?>'"  ng-keyup="jobTitle()" typeahead="item as item.name for item in titleSearchResult | filter:$viewValue"  -->
                                     <div id="jttooltip" class="tooltip-custom" style="display: none;">
                                         Ex:- Sr. Engineer, Jr. Engineer, Software Developer, Account Manager
                                     </div>
@@ -119,13 +126,13 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <input class="form-control" id="skills2" style="text-transform: capitalize;" name="skills" tabindex="9" size="90" placeholder="Enter SKills*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.skills">
+                                    <input class="form-control" id="skills2" style="text-transform: capitalize;" name="skills" tabindex="10" size="90" placeholder="Enter SKills*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.skills">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group fw">
                                     <span class="select-field-custom">
-                                        <select name="industry" id="industry" tabindex="10" ng-model="user.industry">
+                                        <select name="industry" id="industry" tabindex="11" ng-model="user.industry">
                                             <option value="" selected="selected" disabled="">Select industry</option>
                                             <?php foreach ($industry as $indu) { ?>
                                             <option value="<?php echo $indu['industry_id']; ?>"><?php echo $indu['industry_name']; ?></option>
@@ -143,7 +150,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">                                   
-                                   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="11" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.cities" autocomplete="off">
+                                   <input class="form-control" id="cities2" name="cities" style="text-transform: capitalize;" size="90" tabindex="12" placeholder="Enter Preferred Cites*" class="ui-autocomplete-input" autocomplete="off" ng-model="user.cities" autocomplete="off">
                                    <div id="lotooltip" class="tooltip-custom" style="display: none;">
                                         Enter the location where you want to work
                                     </div>
@@ -154,7 +161,7 @@
                                    <div class="job_reg text-center">
                                 
                                       <!-- <input title="Register" type="submit" id="submit" name="" value="Register" tabindex="12"> -->
-                                      <button id="submit" type="submit" name="" class="btn1" tabindex="12">Register<span class="ajax_load pl10" id="jobreg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
+                                      <button id="submit" type="submit" name="" class="btn1" tabindex="13">Register<span class="ajax_load pl10" id="jobreg_ajax_load" style="display: none;"><i aria-hidden="true" class="fa fa-spin fa-refresh"></i></span></button>
                                    </div>
                                 </div>
                             </div>

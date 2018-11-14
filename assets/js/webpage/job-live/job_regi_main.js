@@ -748,6 +748,9 @@ app.controller('jobCreateProfileController', function ($scope, $http, $location,
                     type: "post",
                 },
             },
+            phone: {
+                required: true,
+            },
             fresher: {
                 required: true,
             },
@@ -778,6 +781,9 @@ app.controller('jobCreateProfileController', function ($scope, $http, $location,
                 required: "Email address is required.",
                 email: "Please enter valid email id.",
                 remote: "Email already exists"
+            },
+            phone: {
+                required: "Enter contact number.",
             },
             fresher: {
                 required: "Fresher is required.",
@@ -837,6 +843,35 @@ app.controller('jobCreateProfileController', function ($scope, $http, $location,
             return false;
         }
     };
+
+    $scope.jobTitle = function () {
+        $http({
+            method: 'POST',
+            url: base_url + 'general_data/searchJobTitle',
+            data: 'q=' + $scope.user.jobTitle,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            data = success.data;
+            $scope.titleSearchResult = data;
+        });
+    }
+
+    $("#phone").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+             // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 
 });
 

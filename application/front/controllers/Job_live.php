@@ -886,7 +886,7 @@ class Job_live extends MY_Controller {
             }
             else
             {                
-                redirect(base_url());
+                // redirect(base_url());
             }
         }
         $this->data['professionData'] = (isset($ProfessionData) && !empty($ProfessionData) ? 1 : 0);
@@ -917,7 +917,8 @@ class Job_live extends MY_Controller {
         $this->data['job_data'] = $this->user_model->getUserSelectedData($userid, $select_data = 'u.first_name,u.last_name,ul.email');
         $contition_array = array('is_delete' => '0', 'status' => '1', 'industry_name !=' => "Others");
         if ($userid) {
-            $search_condition = "((is_other = '1' AND user_id = $userid) OR (is_other = '0'))";
+            // $search_condition = "((is_other = '1' AND user_id = $userid) OR (is_other = '0'))";
+            $search_condition = "(is_other = '0')";
         } else {
             $search_condition = "(is_other = '0')";
         }

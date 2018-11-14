@@ -3322,6 +3322,7 @@ class Job extends MY_Controller {
         $firstname = $this->input->post('first_name');
         $lastname = $this->input->post('last_name');
         $email = $this->input->post('email');
+        $phone = $this->input->post('phone');
         $fresher = $this->input->post('fresher');
         $expy = $this->input->post('experience_year');
         $expm = $this->input->post('experience_month');
@@ -3422,6 +3423,7 @@ class Job extends MY_Controller {
             'fname' => ucfirst($first_name),
             'lname' => ucfirst($last_name),
             'email' => $email_reg,
+            'phnno' => $phone,
             'keyskill' => $skills,
             'work_job_title' => $jobtitle,
             'work_job_industry' => $this->input->post('industry'),
@@ -3516,7 +3518,7 @@ class Job extends MY_Controller {
                 }
 
                 // print_r();
-                $this->db->insert('ailee_job_reg_search_tmp', $data1);
+                $this->db->insert('job_reg_search_tmp', $data1);
 
             }
         }
@@ -6579,6 +6581,9 @@ class Job extends MY_Controller {
         if (empty($_POST['email']))
             $errors['errorEmail'] = 'Email is required.';
 
+        if (empty($_POST['phone']))
+            $errors['errorPhone'] = 'Phone is required.';
+
         if ($_POST['industry'] == '288') {
             if (empty($_POST['other_industry'])) {
                 $errors['errorOtherIndustry'] = 'Please enter other industrial type.';
@@ -6593,6 +6598,7 @@ class Job extends MY_Controller {
             $firstname = $_POST['first_name'];
             $lastname = $_POST['last_name'];
             $email = $_POST['email'];
+            $phone = $_POST['phone'];
             $fresher = $_POST['fresher'];
             $expy = $_POST['experience_year'];
             $expm = $_POST['experience_month'];
@@ -6613,8 +6619,25 @@ class Job extends MY_Controller {
             $cities = $_POST['cities'];
             $cities = explode(',', $cities);
 
+            if (is_array($_POST['jobTitle'])) {
+                $jobtitle = $_POST['jobTitle']['title_id'];
+            } else {
+                $designation = $this->data_model->findJobTitle($_POST['jobTitle']);
+                if ($designation['title_id'] != '') {
+                    $jobtitle = $designation['title_id'];
+                } else {
+                    $data = array();
+                    $data['name'] = $_POST['jobTitle'];
+                    $data['created_date'] = date('Y-m-d H:i:s', time());
+                    $data['modify_date'] = date('Y-m-d H:i:s', time());
+                    $data['status'] = 'draft';
+                    $data['slug'] = $this->common->clean($_POST['jobTitle']);
+                    $jobtitle = $this->common->insert_data_getid($data, 'job_title');
+                }
+            }
+
             // job title start   
-            if ($jobtitle != " ") {
+            /*if ($jobtitle != " ") {
                 $contition_array = array('name' => $jobtitle);
                 $jobdata = $this->common->select_data_by_condition('job_title', $contition_array, $data = 'title_id,name', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str5 = '', $groupby = '');
                 if ($jobdata) {
@@ -6630,7 +6653,7 @@ class Job extends MY_Controller {
                         $jobtitle = $this->common->insert_data_getid($data, 'job_title');
                     }
                 }
-            }
+            }*/
 
             // skills  start   
 
@@ -6722,6 +6745,7 @@ class Job extends MY_Controller {
                 'fname' => ucfirst($firstname),
                 'lname' => ucfirst($lastname),
                 'email' => $email,
+                'phnno' => $phone,
                 'keyskill' => $skills,
                 'work_job_title' => $jobtitle,
                 'work_job_industry' => $industry,
