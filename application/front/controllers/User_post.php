@@ -829,6 +829,7 @@ class User_post extends MY_Controller {
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
+        $opptitle = (isset($_POST['opptitle'])  && $_POST['opptitle'] != "undefined" && $_POST['opptitle'] != "" ? $_POST['opptitle'] : "");
         $field = (isset($_POST['field'])  && $_POST['field'] != "undefined" && $_POST['field'] != "" ? $_POST['field'] : "");
         $job_title = (isset($_POST['job_title']) && $_POST['job_title'] != "undefined" && $_POST['job_title'] != "" ? json_decode($_POST['job_title'], TRUE) : "");
         $location = (isset($_POST['location']) && $_POST['location'] != "undefined" && $_POST['location'] != "" ? json_decode($_POST['location'], TRUE) : "");
@@ -952,7 +953,11 @@ class User_post extends MY_Controller {
 
             if ($post_for == 'opportunity') {
                 $insert_data = array();
+                $opptitle = substr($opptitle, 0,100);
+                $oppslug = $this->common->set_slug($opptitle, 'oppslug', 'user_opportunity');
                 $insert_data['post_id'] = $user_post_id;
+                $insert_data['opptitle'] = $opptitle;
+                $insert_data['oppslug'] = $oppslug;
                 $insert_data['opportunity_for'] = $job_title_id;
                 $insert_data['location'] = $city_id;
                 $insert_data['opportunity'] = $description == 'undefined' ? "" : trim($description);
@@ -1432,6 +1437,7 @@ class User_post extends MY_Controller {
         } else if ($post_for == 'opportunity') {
 
             $opp_desc = $_POST['description'];
+            $opptitle = $_POST['opptitle'];
             $opp_field = $_POST['field'];
             if($opp_field == 0)
                 $other_field = $_POST['other_field'];
@@ -1479,8 +1485,9 @@ class User_post extends MY_Controller {
             $opportunity_title = $this->user_post_model->GetJobTitleName($job_title_id);
             $opportunity_field = $this->user_post_model->GetIndustryFieldName($opp_field);
 
-
             $update_data = array();
+            $opptitle = substr($opptitle, 0,100);
+            $update_data['opptitle'] = $opptitle;
             $update_data['opportunity_for'] = $job_title_id;
             $update_data['location'] = $city_id;
             $update_data['opportunity'] = $opp_desc;
@@ -1531,14 +1538,17 @@ class User_post extends MY_Controller {
 
         if ($update_post_data) {
             if ($post_for == 'opportunity') {
-                $opp_desc = nl2br($this->common->make_links($opp_desc));
+                $opportunity_data = $this->user_post_model->getOpportunityDataFromId($post_id);
+                $opp_desc = nl2br($this->common->make_links($opportunity_data['opportunity']));
                 $updatedata = array(
                     'response' => 1,
                     'opp_location' => $opportunity_location['location'],
                     'opp_opportunity_for' => $opportunity_title['opportunity_for'],
                     'opp_field' => ($opp_field != 0 ? $opportunity_field['field'] : $other_field),
                     'field_id' => $opp_field,
-                    'opportunity' => $opp_desc
+                    'opportunity' => $opp_desc,
+                    'opptitle' => $opportunity_data['opptitle'],
+                    'oppslug' => $opportunity_data['oppslug'],
                 );                
             } else if ($post_for == 'simple') {
                 $description = nl2br($this->common->make_links($description));

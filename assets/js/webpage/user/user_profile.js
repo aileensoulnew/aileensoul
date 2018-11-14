@@ -2494,12 +2494,13 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             description = description.replace(/&gt;/gi, ">");
             description = description.replace(/&/g, "%26");            
             description = description.trim();
+            var opptitle = $scope.opp.opptitleedit;
             var job_title = $scope.opp.job_title_edit;
             var location = $scope.opp.location_edit;
             var fields = $("#field_edit"+post_id).val();            
             var otherField_edit = $("#otherField_edit"+post_id).val();//$scope.opp.otherField_edit;
 
-            if((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == ""))
+            if((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField_edit == ""))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -2517,6 +2518,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 var form_data = new FormData();
 
                 form_data.append('description', description);
+                form_data.append('opptitle', opptitle);
                 form_data.append('field', fields);
                 form_data.append('other_field', otherField_edit);
                 form_data.append('job_title', JSON.stringify(job_title));
@@ -2538,6 +2540,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                             $("#login_ajax_load"+post_id).hide();
                             $("#save_"+post_id).attr("style","pointer-events: all;");
                             if (success.data.response == 1) {
+                                $scope.postData[postIndex].opportunity_data.opptitle = success.data.opptitle;
                                 $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
                                 $scope.postData[postIndex].opportunity_data.field_id = success.data.field_id;
                                 $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
@@ -3611,6 +3614,9 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
               edit_jobtitle[jobArrIndex] = {"name":element};
             });
             $scope.opp.job_title_edit = edit_jobtitle;
+
+            // $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
+            $("#opptitleedit"+post_id).val($scope.postData[index].opportunity_data.opptitle);
 
             if(city_names.length > 0)
             {

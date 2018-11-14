@@ -279,6 +279,10 @@
                                     </div>                        
                                 </div>
                                 <div class="post-field">
+                                    <div class="form-group">
+                                        <label>Title of Opportunity</label>
+                                        <input id="opptitleedit{{post.post_data.id}}"  type="text" class="form-control" ng-model="opp.opptitleedit" placeholder="Enter Title of Opportunity" ng-required="true" autocomplete="off">
+                                    </div>
                                     <div id="content" class="form-group">
                                         <label>For whom this opportunity?<a href="#" data-toggle="tooltip" data-placement="left" title="Type the designation which best matches for given opportunity." class="pull-right"><img ng-src="<?php echo base_url('assets/n-images/tooltip.png') ?>" tooltips tooltip-append-to-body="true" tooltip-close-button="true" tooltip-side="right" tooltip-hide-trigger="click" tooltip-template="" alt="tooltip"></a></label>
     									
@@ -333,6 +337,7 @@
                         <!-- Edit Post Opportunity End -->
                         <div id="post-opp-detail-{{post.post_data.id}}">
                             <h5 class="post-title">
+                                <p ng-if="post.opportunity_data.opptitle"><b>Title of Opportunity:</b><span ng-bind="post.opportunity_data.opptitle" id="opp-title-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.opportunity_data.location"><b>Location:</b><span ng-bind="post.opportunity_data.location" id="opp-post-location-{{post.post_data.id}}"></span></p>
                                 <p ng-if="post.opportunity_data.field"><b>Field:</b><span ng-bind="post.opportunity_data.field" id="opp-post-field-{{post.post_data.id}}"></span></p>
@@ -977,6 +982,11 @@
                                 </div>
                             </div>
                             <div class="post-field">
+                                <div class="form-group">
+                                    <label>Title of Opportunity</label>
+                                    <input id="opptitle"  type="text" class="form-control" ng-model="opp.opptitle" placeholder="Enter Title of Opportunity" autocomplete="off" maxlength="100">
+                                    <div id="opptitletooltip" class="tooltip-custom" style="display: none;">Title of Opportunity.</div>
+                                </div>
                                 <div id="content" class="form-group">
                                     <label>For whom this opportunity?</label>
 									
