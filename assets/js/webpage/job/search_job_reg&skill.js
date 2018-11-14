@@ -52,6 +52,7 @@
               }
           })
           .autocomplete({
+              appendTo: "#cityautocomplete",
               minLength: 2,
               source: function( request, response ) { 
                   // delegate back to autocomplete, but extract the last term

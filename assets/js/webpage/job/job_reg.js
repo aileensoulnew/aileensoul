@@ -87,10 +87,10 @@ $(document).ready(function() {
             },
             phone: {
                 required: "Enter contact number.",
-            },
+            },/*
             fresher: {
                 required: "Fresher is required.",
-            },
+            },*/
             industry: {
                 required: "Industry is required.",
             },
@@ -104,12 +104,11 @@ $(document).ready(function() {
                 required: "Skill is required.",
             }
         },
-        errorPlacement: function(error, element) {
-            //console.log(element);
+        errorPlacement: function(error, element) {            
             if (element.attr("name") == "fresher" )
                 error.insertBefore(".fresher-error");            
             else
-                error.insertAfter(element);
+                error.insertBefore(element);
         },
     });
 

@@ -223,10 +223,11 @@
                        <?php echo form_error('industry'); ?>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group autocomplete-cus">
                       <!-- <input type="text" class="form-control" required> -->
                       <input id="cities2" name="cities"  style="text-transform: capitalize;" size="90" tabindex="12" class="form-control" onkeyup="check_value(this);">
                       <label class="form-control-placeholder" for="cities2">Preferred location for job</label>
+                      <div id="cityautocomplete"></div>
                       <?php echo form_error('cities'); ?>
                     </div>
                     
@@ -555,15 +556,15 @@ function expmonth_click(){
   <script src="<?php echo base_url('assets/js/backdetect.jquery.js?ver='.time()); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_reg.js?ver='.time()); ?>"></script>
 <?php
-        if (IS_JOB_JS_MINIFY == '0') {
+        // if (IS_JOB_JS_MINIFY == '0') {
             ?>
   <!--<script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/job_reg.js?ver='.time()); ?>"></script>-->
   <script type="text/javascript" src="<?php echo base_url('assets/js/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
-<?php }else{?>
+<?php /*}else{*/ ?>
 
 
- <!--<script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/job_reg.js?ver='.time()); ?>"></script>-->
-  <script type="text/javascript" src="<?php echo base_url('assets/js_min/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script>
+ <!--<script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/job/job_reg.js?ver='.time()); ?>"></script>-->
+  <!-- <script type="text/javascript" src="<?php //echo base_url('assets/js_min/webpage/job/search_job_reg&skill.js?ver='.time()); ?>"></script> -->
   <script type="text/javascript">
     jQuery(document).ready(function($) {
                 $("li.user-id label").click(function(e){
@@ -591,6 +592,6 @@ function expmonth_click(){
     });
   </script>
   
-<?php }?>
+<?php //} ?>
 </body>
 </html>
