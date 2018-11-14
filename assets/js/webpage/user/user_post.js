@@ -175,7 +175,7 @@ app.directive("owlCarousel", function () {
         link: function (scope) {
             scope.initCarousel = function (element) {
                 // provide any default options you want
-                var defaultOptions = {
+                /*var defaultOptions = {
                     loop: false,
                     nav: true,
                     lazyLoad: true,
@@ -192,6 +192,27 @@ app.directive("owlCarousel", function () {
                             items: 3,
                         },
 						1280: {
+                            items: 2
+                        }
+                    }
+                };*/
+                var defaultOptions = {
+                    loop: false,
+                    nav: true,
+                    lazyLoad: true,
+                    margin: 0,
+                    video: true,
+                    responsive: {
+                        0: {
+                            items: 2
+                        },
+                        480: {
+                            items: 3
+                        },
+                        768: {
+                            items: 3,
+                        },
+                        1280: {
                             items: 2
                         }
                     }

@@ -1653,4 +1653,9 @@ class User_post extends MY_Controller {
         echo json_encode($postDetailData);
     }
 
+    public function create_opp_slug()
+    {
+        $this->user_post_model->create_opp_slug();        
+    }
+
 }

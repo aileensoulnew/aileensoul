@@ -1754,4 +1754,29 @@ class User_post_model extends CI_Model {
         return $result_array;
     }
 
+    public function create_opp_slug()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+        echo "<pre>";
+        $sql = "SELECT * from ailee_user_opportunity ORDER BY post_id DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        // print_r($result_array);exit;
+        foreach ($result_array as $key => $value) {
+            $opportunity_for = explode(",", $value['opportunity_for']);
+            $opptitle = $this->db->get_where('job_title', array('title_id' => $opportunity_for[0]))->row()->name;            
+            $oppslug = $this->common->set_slug($opptitle, 'oppslug', 'user_opportunity');
+            $update_data = array(
+                "opptitle"=>trim($opptitle),
+                "oppslug"=>trim($oppslug)
+            );
+            // $value['opptitle'] = trim($opptitle);
+            // $value['oppslug'] = trim($oppslug);
+            // print_r($value);
+            $update_post = $this->common->update_data($update_data, 'user_opportunity', 'id', $value['id']);
+        }
+        echo "Done";
+    }
+
 }
