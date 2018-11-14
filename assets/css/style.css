@@ -617,7 +617,7 @@ fieldset.full-width{
     border-color:#000
 }
 .error-msg input,.error-msg select,.has-error input,.has-error textarea,input.error,select.error,textarea.error{
-    border:1px solid red !important;
+    border:1px solid red;
 }
 
 .no-login .modal .form-group .form-control.error,.no-login .modal select.error{
@@ -641,7 +641,7 @@ fieldset .add_post_btnc,fieldset .add_post_btns{
 }
 .error-msg p,label.error,label.error-other{
     background:0 0;
-    color:red!important;
+    color:red;
     padding:0 0 0 10px!important;
     position:absolute;
     right:8px;

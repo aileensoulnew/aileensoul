@@ -1195,8 +1195,8 @@ label.cameraButton:active{
     padding:10px
 }
 #industry:focus,#jobseeker_regform input:focus{
-    border:1px solid #1b8ab9!important;
-    color:#1b8ab9!important
+    border:1px solid #1b8ab9;
+    color:#1b8ab9;
 }
 #jobseeker_regform input#btnRemove:focus,#jobseeker_regform input[type=submit]:focus{
     color:#fff!important
@@ -1206,10 +1206,9 @@ label.cameraButton:active{
     opacity:.8
 }
 .job_reg_main{
-    border:1px solid #d9d9d9;
-    border-radius:3px;
-    -moz-box-shadow:0 0 10px -1px rgba(217,217,217,1);
-    box-shadow:0 0 10px -1px rgba(217,217,217,1)
+    border-radius:20px;
+    -moz-box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25);
+    box-shadow:0 0.2rem 0.3rem 0 rgba(44,43,63,.1), inset 0 0 0 0.1rem rgba(104,104,113,.25)
 }
 .job_reg_main h3{
     background:-webkit-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%)-webkit-background-clip: text;
@@ -2147,7 +2146,7 @@ label.cameraButton input[accept*=camera]{
     margin-left:0
 }
 .job_reg #submit:focus{
-    color:#fff!important
+    /*color:#fff!important*/
 }
 .modal.message-box span.mes{
     padding:0

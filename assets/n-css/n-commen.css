@@ -973,6 +973,8 @@ a:focus{outline:none;}
 #progress-txt{position: absolute; top: 94px; width: 100%; text-align: center; left: 0; font-size:12px; padding: 0 21px; font-weight:bold; color:#939393;}
 /***  end profile progress bar  ***/
 
+
+
 /***  media query  ***/
 @media screen and (min-width: 768px) {
     .container {width: 750px;}

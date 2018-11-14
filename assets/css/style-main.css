@@ -733,12 +733,12 @@ select{
 option:not(first-child) {
   color: #848484;
 }
-.form-group input[type=password]:focus+label,.form-group input[type=text]:focus+label,.form-group select:focus+label{
-    color:#1b8ab9!important;
+.form-group input:focus+label, .form-group select:focus+label{
+    color:#1b8ab9;
 }
 .form-group input[type=text]:focus{
     border-bottom:1px solid #1b8ab9;
-    color:#1b8ab9!important;
+    color:#1b8ab9;
 }
 .form-group input::-webkit-input-placeholder{
     color:#999;
@@ -1843,7 +1843,7 @@ input.form-control{
     margin:10px
 }
 #forgot_password .modal-body label.error,#selgen.error,.error,label.error{
-    color:red!important
+    color:red;
 }
 /*.job_reg_page_fprm #forgot_password .modal-body label.error, #selgen.error, .error, label.error{color: #acacac !important;}*/
 .email-verify{
@@ -2408,7 +2408,7 @@ header.profile-header .logo a{color:#5c5c5c}
     width:600px;
 }
 .main-login input.error, input[type="email"].error, input[type="password"].error{
-    border-bottom: 1px solid red !important;
+    border-bottom: 1px solid red;
 }
 .main-login input.error:focus, input[type="email"].error:focus, input[type="password"].error:focus{
     border-bottom: 1px solid #1b8ab9 !important;   
