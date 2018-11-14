@@ -478,7 +478,7 @@ hr{
 }
 #paddingtop_fixed{
     padding-top:83px!important;
-    overflow:hidden
+    /*overflow:hidden*/
 }
 #paddingtop_make_fixed{
     padding-top:50px!important;
