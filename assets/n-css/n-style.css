@@ -2996,6 +2996,7 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 .form-radius-new .form-box h2{color:#5c5c5c; -webkit-text-fill-color:inherit; background:inherit;}
 #edit-profile .common-form_border{box-shadow:none;}
 #basic_info_frm .student-or-not{padding-left:10px;}
+.autocomplete-cus{}
 /***  media query  ***/
 @media print {
     .rating-container .clear-rating {display: none;}
