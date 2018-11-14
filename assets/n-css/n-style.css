@@ -333,29 +333,33 @@ font-size: 14px;}
 .add-box{border:1px solid #d2d2d2; border-radius:4px; text-align:center; padding:6px 0; margin-bottom:10px; width:100%; float:left;}
 
 /***  all follow part  ***/
-.all-contact{border:1px solid #d2d2d2; border-radius:4px; margin-bottom:10px; width:100%; float:left;}
-.all-contact h4{border-bottom:1px solid #d2d2d2; padding:10px; margin:0; letter-spacing:1px;}
+.all-contact{width:100%; float:left;}
+.all-contact h4{border:1px solid #d2d2d2; border-radius:4px; padding:10px; margin:0; letter-spacing:1px; margin-bottom:10px; width:100%; float:left;}
 .all-contact h4 a{color:#5c5c5c;}
 .all-contact h4 a:hover{color:#1b8ab9; text-decoration:underline;}
-.all-user-list{padding:10px; width:100%; float:left;}
+.all-user-list{/*padding:10px;*/ width:100%; float:left;}
 .all-contact ul{padding:0; margin:0;}
 .all-contact ul li{list-style-type:none; padding:5px; width:50%; float:left; text-align:center;}
+.all-contact .all-user-list{border:1px solid #d2d2d2; border-radius:4px;}
 .all-contact .post-img{width:100%; height:100%; float:none; margin:0 auto; position:relative;}
 
 .user-list-detail{width:100%; float:left; min-height: 45px;}
 .user-list-detail .contact-name a{font-weight:bold; font-size:13px; color:#5c5c5c;}
 .user-list-detail .contact-designation{line-height:1; padding-bottom:5px;}
 .user-list-detail .contact-designation a{font-size:12px; color:#5c5c5c; text-transform: capitalize;}
-.all-contact .all-user-list .item{padding:0 3px; text-align:center;}
-.all-contact .all-user-list .owl-nav{position:relative; bottom: 155px; width:100%;cursor: pointer;}
+.all-contact .all-user-list .item{/*padding:0 3px;*/ text-align:center;}
+.all-contact .all-user-list .owl-nav{position:absolute; bottom: 155px; width:65px;cursor: pointer; top:-75px; right:0px;}
 .all-contact .all-user-list .owl-nav .owl-prev{font-size:0; position:relative; float: left;}
-.all-contact .all-user-list .owl-nav .owl-prev:before{content: ''; position:absolute; left:-7px; background: url('../images/left-arrow-contact.png?version=@{cache-version}');
-width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
+.all-contact .all-user-list .owl-nav .owl-prev:before{content: ''; position:absolute; left:10px; background: url('../images/left-arrow-contact.png?version=@{cache-version}');
+width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .all-contact .all-user-list .owl-nav .owl-next{float:right; font-size:0; position:relative;}
-.all-contact .all-user-list .owl-nav .owl-next:after{content: ''; position:absolute; right:-7px; background: url('../images/right-arrow-contact.png?version=@{cache-version}');
-width: 9px; height: 15px; opacity: 0.7; background-size: 100%;}
+.all-contact .all-user-list .owl-nav .owl-next:after{content: ''; position:absolute; right:10px; background: url('../images/right-arrow-contact.png?version=@{cache-version}');
+width: 9px; height: 15px; opacity: 0.7; background-size: 100%; top:35px;}
 .all-contact .all-user-list .owl-nav .owl-next:hover:after{opacity: 1;}
 .all-contact .all-user-list .owl-nav .owl-prev:hover:before{opacity: 1;}
+.all-contact .arti-profile-box .author-btn .user-btns a.btn3{padding:5px 2px; margin-bottom:10px;}
+.all-contact .arti-profile-box .user-info-text{padding:0px 10px 5px;}
+
 .post-head .post-img .post-img .post-img-mainuser{
     color:#fff;
     background:-moz-linear-gradient(96deg,#1b8ab9 0,#1b8ab9 44%,#3bb0ac 100%);
@@ -2529,8 +2533,8 @@ label.cameraButton{min-height:43px;}
 #article_frm .mce-tinymce.mce-container{border-width:0 !important;}
 #article_frm .mce-tinymce{box-shadow:inherit !important;}
 #article_frm .mce-statusbar.mce-container{border-width: 0px 0px 1px !important;}
-.arti-profile-box{border:1px solid #d2d2d2; width:100%; border-radius:10px; float:left; margin-bottom:15px; overflow:hidden;}
-.arti-profile-box .user-cover-img{position:relative; width:100%; height:130px; overflow:hidden;}
+.arti-profile-box{/*border:1px solid #d2d2d2;*/ width:100%; /*border-radius:10px;*/ float:left;/* margin-bottom:15px;*/ overflow:hidden;}
+.arti-profile-box .user-cover-img{position:relative; width:100%; height:130px; overflow:hidden; border-top-left-radius: 4px; border-top-right-radius: 4px;}
 .arti-profile-box .user-cover-img img{position: absolute; left: 50%; top: 50%; width: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); max-width: inherit; height: 100%;}
 .arti-profile-box .user-pr-img{width:80px; height:80px; margin:-50px auto 0; border:3px solid #fff; position:relative; border-radius:100%;}
 .arti-profile-box .user-pr-img img{border-radius:100%; width:100%;}
@@ -2998,6 +3002,15 @@ background: linear-gradient(354deg, #1b8ab9 0%, #1b8ab9 44%, #3bb0ac 100%); font
 #basic_info_frm .student-or-not{padding-left:10px;}
 .autocomplete-cus{position:relative;}
 .autocomplete-cus .ui-widget{position:absolute !important; top:35px !important; max-width:100% !important; width:100% !important; z-index:0 !important;}
+.item .arti-profile-box .user-info-text h3 a{font-size:16px; color:#5c5c5c; font-weight:bold; letter-spacing:1px;}
+.item .arti-profile-box .user-info-text p a{font-size:14px; color:#7b7b7b;}
+.item .arti-profile-box .author-btn .user-btns a.btn3{width:130px;}
+.item .user-btns{padding:0;}
+.arti-profile-box .user-info-text h3{max-width: 100%; white-space: nowrap;
+text-overflow: ellipsis; overflow: hidden;}
+.arti-profile-box .user-info-text p{max-width: 100%; white-space: nowrap;
+text-overflow: ellipsis; overflow: hidden;}
+
 /***  media query  ***/
 @media print {
     .rating-container .clear-rating {display: none;}
