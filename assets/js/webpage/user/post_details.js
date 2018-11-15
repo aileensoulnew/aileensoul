@@ -524,6 +524,9 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
             });
             $scope.opp.job_title_edit = edit_jobtitle;
 
+            $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
+            $("#opptitleedit"+post_id).val($scope.postData[index].opportunity_data.opptitle);
+
             if(city_names.length > 0)
             {
                 $('#location .input').attr('placeholder', '');
@@ -882,11 +885,13 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
 
     $scope.post_opportunity_check = function (event,postIndex = -1) {
 
+
         if (document.getElementById("opp_edit_post_id"+postIndex)) {
             var post_id = document.getElementById("opp_edit_post_id"+postIndex).value;
         } else {
             var post_id = 0;
         }        
+
         if (post_id == 0) {
 
         } else {
@@ -897,11 +902,12 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
             description = description.replace(/&gt;/gi, ">");
             description = description.replace(/&/g, "%26");            
             description = description.trim();
+            var opptitle = $scope.opp.opptitleedit;
             var job_title = $scope.opp.job_title_edit;
             var location = $scope.opp.location_edit;
-            var fields = $("#field_edit"+post_id).val();            
+            var fields = $("#field_edit"+post_id).val();
 
-            if((job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == ''))
+            if((opptitle == undefined || opptitle == '') || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == ''))
             {
                 $('#post .mes').html("<div class='pop_content'>This post appears to be blank. Please write to post.");
                 $('#post').modal('show');
@@ -919,6 +925,7 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
                 var form_data = new FormData();
 
                 form_data.append('description', description);
+                form_data.append('opptitle', opptitle);
                 form_data.append('field', fields);
                 form_data.append('job_title', JSON.stringify(job_title));
                 form_data.append('location', JSON.stringify(location));
@@ -938,6 +945,7 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
                         .then(function (success) {
 
                             if (success.data.response == 1) {
+                                $scope.postData[postIndex].opportunity_data.opptitle = success.data.opptitle;
                                 $scope.postData[postIndex].opportunity_data.field = success.data.opp_field;
                                 $scope.postData[postIndex].opportunity_data.location = success.data.opp_location;
                                 $scope.postData[postIndex].opportunity_data.opportunity_for = success.data.opp_opportunity_for;
@@ -960,6 +968,12 @@ app.controller('postDetailsController', function ($scope, $http,$window,$filter,
         //If DIV is visible it will be hidden and vice versa.
         $scope.IsVisible = $scope.IsVisible ? false : true;
     }
+
+    $scope.no_login_pop = function(){
+        
+            $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now!<p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
+            $('#bidmodal').modal('show');        
+    };
 });
 
 $(window).on("load", function () {
