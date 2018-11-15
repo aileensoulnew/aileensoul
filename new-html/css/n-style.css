@@ -2672,7 +2672,7 @@ padding: 4px;}
 .dis-right a:last-child{float:right;}
 .dis-left-img{width:50px; height:50px; border:1px solid #d2d2d2; text-align:center;}
 .dis-left-img span{font-size:28px; color:#1b8ab9; padding:13px 10px; display:inline-block;}
-.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.dis-middle h4{margin-bottom:2px; letter-spacing:0; font-size:15px; font-weight:bold; color:#7b7b7b; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; line-height:1.2;}
 .dtl-dis .dis-middle p{max-width: 100%; white-space: nowrap; text-overflow: ellipsis;
 overflow: hidden;}
 .dtl-dis.dis-accor{padding:0;}
