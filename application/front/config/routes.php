@@ -136,6 +136,10 @@ $route['sitemap/freelance-jobs'] = "sitemap/sitemap_freelance_jobs";
 $route['sitemap/freelance-jobs/(:any)'] = "sitemap/sitemap_freelance_jobs/$1";
 $route['sitemap/freelance-jobs/(:any)/(:num)'] = "sitemap/sitemap_freelance_jobs/$1";
 
+$route['sitemap/opportunities'] = "sitemap/sitemap_opportunities";
+$route['sitemap/opportunities/(:any)'] = "sitemap/sitemap_opportunities/$1";
+$route['sitemap/opportunities/(:any)/(:num)'] = "sitemap/sitemap_opportunities/$1";
+
 $route['sitemap/blogs'] = "sitemap/blogs";
 $route['sitemap/blogs/(:any)'] = "sitemap/blogs_category/$1";
 $route['sitemap/blogs/(:any)/(:num)'] = "sitemap/blogs_category/$1";

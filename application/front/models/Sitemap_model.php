@@ -297,7 +297,7 @@ class Sitemap_model extends CI_Model {
                 LEFT JOIN ailee_states s on s.state_id = rp.state
                 LEFT JOIN ailee_countries cn on cn.country_id = rp.country
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
-                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ORDER BY rp.post_id DESC";
+                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." AND DATEDIFF(rp.post_last_date,NOW()) >= 0 ORDER BY rp.post_id DESC";
         if($limit != ""){
             $sql .= " LIMIT $start, $limit";
         }
@@ -316,7 +316,7 @@ class Sitemap_model extends CI_Model {
                 FROM ailee_rec_post rp 
                 LEFT JOIN ailee_job_title jt on rp.post_name = jt.title_id
                 JOIN ailee_recruiter r ON rp.user_id = r.user_id 
-                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ORDER BY rp.post_id DESC";
+                WHERE rp.status = '1' AND rp.is_delete = '0'". $search_query ." AND DATEDIFF(rp.post_last_date,NOW()) >= 0 ORDER BY rp.post_id DESC";
         $query = $this->db->query($sql);
         //DATEDIFF(NOW(),fp.created_date) >= 0
 
@@ -358,6 +358,42 @@ class Sitemap_model extends CI_Model {
                 LEFT JOIN ailee_category c on fp.post_field_req = c.category_id 
                 WHERE fp.is_delete = '0' AND fp.status = '1'"
                 . $search_query ." ORDER BY post_id DESC";
+        $query = $this->db->query($sql);
+        
+        $result_array = $query->row_array();
+        return $result_array['total_rec'];
+    }
+
+    function get_opportunities_list($searchword = '',$page = 0, $limit = 100){
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND uo.opptitle like '". $searchword ."'";
+        }
+        
+        $sql = "SELECT uo.post_id, up.user_id, uo.opportunity, it.industry_name as field_txt,uo.field,uo.other_field, uo.opptitle, uo.oppslug FROM ailee_user_opportunity uo LEFT JOIN ailee_industry_type it ON it.industry_id = uo.field LEFT JOIN ailee_user_post up ON up.id = uo.post_id WHERE up.status = 'publish' ". $search_query ." ORDER BY uo.id DESC";
+
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_opportunities_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND uo.opptitle like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_rec 
+                FROM ailee_user_opportunity uo LEFT JOIN ailee_user_post up ON up.id = uo.post_id WHERE up.status = 'publish'".$search_query." ORDER BY uo.id DESC";
+                
         $query = $this->db->query($sql);
         
         $result_array = $query->row_array();

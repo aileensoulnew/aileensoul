@@ -2464,7 +2464,7 @@ app.controller('userOppoController', function ($scope, $http,$compile) {
             });
             $scope.opp.job_title_edit = edit_jobtitle;
 
-            // $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
+            $scope.opp.opptitleedit = $scope.postData[index].opportunity_data.opptitle;
             $("#opptitleedit"+post_id).val($scope.postData[index].opportunity_data.opptitle);
 
             if(city_names.length > 0)
