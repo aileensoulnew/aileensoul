@@ -1458,20 +1458,24 @@ class Sitemap extends CI_Controller {
         $all_link = array();
         foreach ($artistCity['art_loc'] as $key => $value) {
             foreach ($artCatData as $jck => $jcv) {
-                $txt .= '<url><loc>'.base_url().$jcv['category_slug']."-in-".$value['location_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>';
-                if($sitemap_counter == SITEMAP_LIMIT)
+                $total_artist = $this->artistic_model->artistListLocationCategoryTotalRec($jcv['category_id'],$value['location_id'],$art_category = array(),$art_location = array());
+                if($total_artist > 0)
                 {
-                    $sitemap_counter = 1;
-                    $sitemap_index++;
-                    $txt .= '</urlset>';
-                    fwrite($myfile, $txt);
-                    fclose($myfile);
-                    $art_file_arr[] = "artist-by-category-location-".$sitemap_index.".xml";
-                    $myfile = fopen("artist-by-category-location-".$sitemap_index.".xml", "w");
-                    $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                    $txt .= '<url><loc>'.base_url().$jcv['category_slug']."-in-".$value['location_slug'].'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>';
+                    if($sitemap_counter == SITEMAP_LIMIT)
+                    {
+                        $sitemap_counter = 1;
+                        $sitemap_index++;
+                        $txt .= '</urlset>';
+                        fwrite($myfile, $txt);
+                        fclose($myfile);
+                        $art_file_arr[] = "artist-by-category-location-".$sitemap_index.".xml";
+                        $myfile = fopen("artist-by-category-location-".$sitemap_index.".xml", "w");
+                        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+                    }
+                    $sitemap_counter++;
+                    $i++;
                 }
-                $sitemap_counter++;
-                $i++;
             }
         }
 

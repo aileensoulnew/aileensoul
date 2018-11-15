@@ -928,7 +928,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('rp.is_delete', '0');
         if($from_sitemap == 1)
         {
-            $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
+            $this->db->where('DATEDIFF(rp.post_last_date,NOW()) >= ','0');
         }
         $this->db->group_by('rp.city');        
         if($limit != '') {
@@ -970,7 +970,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $sql = "SELECT count(rp.post_id) as count, s.skill_id, s.skill, s.skill_slug, s.skill_image FROM ailee_skill s,ailee_rec_post rp WHERE FIND_IN_SET(s.skill_id,rp.post_skill) > 0 AND s.status = '1' AND s.type = '1' AND rp.status = '1' AND rp.is_delete = '0' ";
         if($from_sitemap == 1)
         {
-            $sql .= " AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ";
+            $sql .= " AND DATEDIFF(rp.post_last_date,NOW()) >= 0 ";
         }
         $sql .= "GROUP BY s.skill_id ORDER BY count DESC";
         if($limit != '') {
@@ -1014,7 +1014,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('rp.is_delete', '0');
         if($from_sitemap == 1)
         {
-            $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
+            $this->db->where('DATEDIFF(rp.post_last_date,NOW()) >= ','0');
         }
         $this->db->group_by('jt.title_id');
         $this->db->order_by('count', 'desc');
@@ -1102,7 +1102,7 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         $this->db->where('rp.is_delete', '0');
         if($from_sitemap == 1)
         {
-            $this->db->where('DATEDIFF(NOW(),rp.post_last_date) >= ','0');
+            $this->db->where('DATEDIFF(rp.post_last_date,NOW()) >= ','0');
         }
         $this->db->group_by('rp.industry_type');
         $this->db->order_by('count', 'desc');

@@ -670,10 +670,11 @@ class Sitemap_model extends CI_Model {
 
     function generate_sitemap_artist_by_category_listing()
     {
-        $sql = "SELECT ct.category_id, ct.art_category, ct.category_slug
-            FROM ailee_art_category ct,ailee_art_reg ar
-            WHERE ct.status = '1' AND ct.category_id != 26 AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
-            GROUP BY ct.category_id DESC";
+        $sql = "SELECT count(ar.art_id) as count, ct.category_id, ct.art_category, ct.category_slug
+                FROM ailee_art_category ct,ailee_art_reg ar
+                WHERE ct.category_id != 26 AND FIND_IN_SET(ct.category_id,ar.art_skill) > 0 AND ct.status = '1' 
+                AND ct.type = '1' AND ar.status = '1' AND ar.art_step = '4' AND ar.is_delete = '0'
+                GROUP BY ct.category_id ORDER BY count DESC";
 
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
