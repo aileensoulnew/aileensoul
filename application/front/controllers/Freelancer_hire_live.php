@@ -2268,84 +2268,93 @@ public function live_post($userid = '', $postid = '', $posttitle = '') {
 
 	$contition_array = array('post_id' => $postid, 'freelancer_post.is_delete' => '0', 'freelancer_hire_reg.user_id' => $userid, 'freelancer_hire_reg.status' => '1', 'freelancer_hire_reg.free_hire_step' => '3');
 	$data = 'freelancer_post.post_id,freelancer_post.post_name,freelancer_post.post_field_req,freelancer_post.post_est_time,freelancer_post.post_skill,freelancer_post.post_other_skill,freelancer_post.post_rate,freelancer_post.post_last_date,freelancer_post.post_description,freelancer_post.user_id,freelancer_post.created_date,freelancer_post.post_currency,freelancer_post.post_rating_type,freelancer_post.post_exp_month,freelancer_post.post_exp_year,freelancer_hire_reg.username,freelancer_hire_reg.fullname,freelancer_hire_reg.designation,freelancer_hire_reg.freelancer_hire_user_image,freelancer_hire_reg.country,freelancer_hire_reg.city';
-	$this->data['postdata'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data, $sortby = 'freelancer_post.post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-
-
-	$city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $userid))->row()->city;	
-	$cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $city))->row()->city_name;
-
-	$cache_time1 = $this->data['postdata'][0]['post_name'];
-	if ($cache_time1 != '') {
-		$text = strtolower($this->common->clean($cache_time1));
-	} else {
-		$text = '';
+	$this->data['postdata'] = $postdata = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data, $sortby = 'freelancer_post.post_id', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+	if(empty($postdata))
+	{
+		$this->data['title'] = '404 | Aileensoul';
+		$this->load->view('404', $this->data);
 	}
+	else
+	{
 
-	if ($cityname != '') {
-		$cityname1 = '';// '-vacancy-in-' . strtolower($this->common->clean($cityname));
-	} else {
-		$cityname1 = '';
-	}
+		$city = $this->db->select('city')->get_where('freelancer_hire_reg', array('user_id' => $userid))->row()->city;	
+		$cityname = $this->db->select('city_name')->get_where('cities', array('city_id' => $city))->row()->city_name;
 
-	$postname = $text . $cityname1;
-	
-	$segment3 = array_splice($segment3, 0, -2);
-	$original = implode('-', $segment3);
-	$category_name = $this->db->select('category_name')->get_where('category', array('category_id' => 
-            $this->data['postdata'][0]['post_field_req']))->row()->category_name;
-    
-    $url = base_url()."freelance-jobs/".$category_name."/".$text."-".$userid."-".$postid;
-	// $url = $postname . '-' . $userid . '-' . $postid;
-// echo $original."->".$postname;exit;
-
-
-
-	$contition_array = array('post_id !=' => $postid, 'freelancer_post.is_delete' => '0', 'freelancer_hire_reg.user_id' => $userid, 'freelancer_hire_reg.status' => '1', 'freelancer_hire_reg.free_hire_step' => '3', 'freelancer_post.post_name' => $this->data['postdata'][0]['post_name']);
-	$this->data['recommandedpost'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
-
-
-	/*$join_str = array(array(
-		'join_type' => '',
-		'table' => 'freelancer_apply',
-		'join_table_id' => 'freelancer_post_reg.user_id',
-		'from_table_id' => 'freelancer_apply.user_id'),
-	array(
-		'join_type' => '',
-		'table' => 'save',
-		'join_table_id' => 'freelancer_post_reg.user_id',
-		'from_table_id' => 'save.to_id')
-	);*/
-	$join_str[0]['table'] = 'save';
-	$join_str[0]['join_table_id'] = 'freelancer_post_reg.user_id';
-	$join_str[0]['from_table_id'] = 'save.to_id';
-	$join_str[0]['join_type'] = '';
-
-	$contition_array = array('save.post_id' => $postid, 'save.from_id' => $userid, 'save.save_type' => '2', 'save.status' => '2');
-	$data = 'freelancer_post_reg.user_id, freelancer_post_reg.freelancer_apply_slug, freelancer_post_reg.freelancer_post_fullname, freelancer_post_reg.freelancer_post_username, freelancer_post_reg.designation,freelancer_post_reg.freelancer_post_user_image,freelancer_post_reg.freelancer_apply_slug';
-	$shortlist = $this->data['shortlist'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data, $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
-
-	$segment3 = explode('-', $this->uri->segment(3));
-	$segment3 = array_splice($segment3, 0, -2);
-	$segment3 = implode(' ', $segment3);
-	$segment3 = ucfirst($segment3);
-	$skills = $this->freelancer_hire_model->getSkillsNames($this->data['postdata'][0]['post_skill']);
-	$this->data['title'] = "Online ".$segment3 . " Jobs | Aileensoul";
-	$this->data['metadesc'] = $segment3." Project for ".$this->data['postdata'][0]['post_exp_year'].($this->data['postdata'][0]['post_exp_month'] != '' ? '.'.$this->data['postdata'][0]['post_exp_month'] : '')." Years experience person. Required skills are: ".$skills.". Apply Now to get the work.";
-	$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
-	if ($this->session->userdata('aileenuser')) {
-		$this->load->view('freelancer_live/freelancer_post/hire_project', $this->data);
-	} else {
-		if (strtolower($postname) == strtolower($original)) {
-			$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);
+		$cache_time1 = $this->data['postdata'][0]['post_name'];
+		if ($cache_time1 != '') {
+			$text = strtolower($this->common->clean($cache_time1));
 		} else {
-			if ($this->data['postdata']) {
-				redirect($url, refresh);
-			} else {
-				$this->data['title'] = 'Content Not Avaible - Aileensoul';
+			$text = '';
+		}
+
+		if ($cityname != '') {
+			$cityname1 = '';// '-vacancy-in-' . strtolower($this->common->clean($cityname));
+		} else {
+			$cityname1 = '';
+		}
+
+		$postname = $text . $cityname1;
+		
+		$segment3 = array_splice($segment3, 0, -2);
+		$original = implode('-', $segment3);
+		$category_name = $this->db->select('category_name')->get_where('category', array('category_id' => 
+	            $this->data['postdata'][0]['post_field_req']))->row()->category_name;
+	    
+	    $url = base_url()."freelance-jobs/".$category_name."/".$text."-".$userid."-".$postid;
+		// $url = $postname . '-' . $userid . '-' . $postid;
+	// echo $original."->".$postname;exit;
+
+
+
+		$contition_array = array('post_id !=' => $postid, 'freelancer_post.is_delete' => '0', 'freelancer_hire_reg.user_id' => $userid, 'freelancer_hire_reg.status' => '1', 'freelancer_hire_reg.free_hire_step' => '3', 'freelancer_post.post_name' => $this->data['postdata'][0]['post_name']);
+		$this->data['recommandedpost'] = $this->common->select_data_by_condition('freelancer_post', $contition_array, $data, $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str, $groupby = '');
+
+
+		/*$join_str = array(array(
+			'join_type' => '',
+			'table' => 'freelancer_apply',
+			'join_table_id' => 'freelancer_post_reg.user_id',
+			'from_table_id' => 'freelancer_apply.user_id'),
+		array(
+			'join_type' => '',
+			'table' => 'save',
+			'join_table_id' => 'freelancer_post_reg.user_id',
+			'from_table_id' => 'save.to_id')
+		);*/
+		$join_str[0]['table'] = 'save';
+		$join_str[0]['join_table_id'] = 'freelancer_post_reg.user_id';
+		$join_str[0]['from_table_id'] = 'save.to_id';
+		$join_str[0]['join_type'] = '';
+
+		$contition_array = array('save.post_id' => $postid, 'save.from_id' => $userid, 'save.save_type' => '2', 'save.status' => '2');
+		$data = 'freelancer_post_reg.user_id, freelancer_post_reg.freelancer_apply_slug, freelancer_post_reg.freelancer_post_fullname, freelancer_post_reg.freelancer_post_username, freelancer_post_reg.designation,freelancer_post_reg.freelancer_post_user_image,freelancer_post_reg.freelancer_apply_slug';
+		$shortlist = $this->data['shortlist'] = $this->common->select_data_by_condition('freelancer_post_reg', $contition_array, $data, $sortby = '', $orderby = 'desc', $limit = '', $offset = '', $join_str, $groupby = '');
+
+		$segment3 = explode('-', $this->uri->segment(3));
+		$segment3 = array_splice($segment3, 0, -2);
+		$segment3 = implode(' ', $segment3);
+		$segment3 = ucfirst($segment3);
+		$skills = $this->freelancer_hire_model->getSkillsNames($this->data['postdata'][0]['post_skill']);
+		$this->data['title'] = "Online ".$segment3 . " Jobs | Aileensoul";
+		$this->data['metadesc'] = $segment3." Project for ".$this->data['postdata'][0]['post_exp_year'].($this->data['postdata'][0]['post_exp_month'] != '' ? '.'.$this->data['postdata'][0]['post_exp_month'] : '')." Years experience person. Required skills are: ".$skills.". Apply Now to get the work.";
+		$this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+		if ($this->session->userdata('aileenuser')) {
+			$this->load->view('freelancer_live/freelancer_post/hire_project', $this->data);
+		} else {
+			if (strtolower($postname) == strtolower($original)) {
 				$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);
+			} else {
+				if ($this->data['postdata']) {
+					redirect($url, refresh);
+				} else {
+					$this->data['title'] = 'Content Not Avaible - Aileensoul';
+					$this->load->view('freelancer_live/freelancer_post/hire_project_live', $this->data);
+				}
 			}
 		}
 	}
+
+
 }
 
 //FREELANCER HIRE POST LIVE LINK END
