@@ -475,7 +475,8 @@ class Sitemap_model extends CI_Model {
             LEFT JOIN ailee_states s on s.state_id = rp.state
             LEFT JOIN ailee_countries cn on cn.country_id = rp.country
             JOIN ailee_recruiter r ON rp.user_id = r.user_id 
-            WHERE rp.status = '1' AND rp.is_delete = '0' AND DATEDIFF(NOW(),rp.post_last_date) >= 0 ORDER BY rp.post_id DESC";
+            WHERE rp.status = '1' AND rp.is_delete = '0' AND DATEDIFF(rp.post_last_date,NOW()) >= 0 ORDER BY rp.post_id DESC";
+            // DATEDIFF(NOW(),rp.post_last_date) >= 0 
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         return $result_array;
