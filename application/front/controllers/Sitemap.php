@@ -1450,14 +1450,14 @@ class Sitemap extends CI_Controller {
         $myfile = fopen("artist-by-category-location-1.xml", "w");
         $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-        // $artistCat = $this->artistic_model->get_artist_by_categories($page,$limit);
-        $artCatData = $this->sitemap_model->generate_sitemap_artist_by_category_listing();
+        $artistCat = $this->artistic_model->get_artist_by_categories($page,$limit);
+        // $artCatData = $this->sitemap_model->generate_sitemap_artist_by_category_listing();
         // print_r($artistCat);
         // exit;
         $artistCity = $this->artistic_model->artistAllLocationList($page,$limit); 
         $all_link = array();
         foreach ($artistCity['art_loc'] as $key => $value) {
-            foreach ($artCatData as $jck => $jcv) {
+            foreach ($artistCat['art_cat'] as $jck => $jcv) {
                 $total_artist = $this->artistic_model->artistListLocationCategoryTotalRec($jcv['category_id'],$value['location_id'],$art_category = array(),$art_location = array());
                 if($total_artist > 0)
                 {
