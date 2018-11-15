@@ -722,5 +722,38 @@
                 });
             });
         </script>
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "JobPosting",
+            "title": "<?php echo $opp_data['opptitle']; ?>",
+            "description": "<?php echo $opp_data['opportunity']; ?>",
+            "industry": "<?php echo ($opp_data['field'] != "" ? ucwords($opp_data['field']) : ($opp_data['other_field'] != "" ? $opp_data['other_field'] : "Other")); ?>",
+            "datePosted": "<?php echo date('Y-m-d', strtotime($opp_data['created_date'])); ?>",
+            "jobLocation": [
+            <?php
+                foreach (explode(",",$opp_data['location']) as $key => $value)
+                {
+                    if($value != "")
+                    { ?>
+                        {
+                            "@type": "Place",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "<?php echo $value; ?>"
+                            }
+                        },
+                <?php
+                    }
+                }
+            ?>                
+            ],
+            "hiringOrganization": {
+                "@type": "Organization",
+                "name": "<?php echo ucwords($userdata['first_name']." ".$userdata['last_name']); ?>"  
+            }
+        }
+        </script>
+
     </body>
 </html>

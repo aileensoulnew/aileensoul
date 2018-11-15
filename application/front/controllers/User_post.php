@@ -1655,7 +1655,7 @@ class User_post extends MY_Controller {
 
     public function opprtunity_detail($slug = '') {
         $userid = $this->session->userdata('aileenuser');
-        $opp_data = $this->user_post_model->get_opportunity_from_slug($slug);        
+        $this->data['opp_data'] = $opp_data = $this->user_post_model->get_opportunity_from_slug($slug);        
         if($userid == "")
         {
             $userid = $opp_data['user_id'];

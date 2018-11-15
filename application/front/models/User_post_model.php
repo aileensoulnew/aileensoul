@@ -1781,7 +1781,7 @@ class User_post_model extends CI_Model {
 
     public function get_opportunity_from_slug($slug)
     {
-        $this->db->select("uo.post_id,up.user_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field,uo.opptitle,uo.oppslug")->from("user_opportunity uo, job_title jt, cities c");
+        $this->db->select("uo.post_id,up.user_id,GROUP_CONCAT(DISTINCT(jt.name)) as opportunity_for,GROUP_CONCAT(DISTINCT(c.city_name)) as location,uo.opportunity,it.industry_name as field,uo.other_field,uo.opptitle,uo.oppslug,up.created_date")->from("user_opportunity uo, job_title jt, cities c");
         $this->db->join('industry_type it', 'it.industry_id = uo.field', 'left');
         $this->db->join('user_post up', 'up.id = uo.post_id', 'left');
         $this->db->where('uo.oppslug', $slug);
