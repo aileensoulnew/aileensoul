@@ -400,6 +400,78 @@ class Sitemap_model extends CI_Model {
         return $result_array['total_rec'];
     }
 
+    function get_article_list($searchword = '',$page = 0, $limit = 100){
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND a.article_title like '". $searchword ."'";
+        }
+        
+        $sql = "SELECT a.article_title, a.article_featured_image, a.article_slug FROM ailee_post_article a LEFT JOIN ailee_user_post up ON up.post_id = a.id_post_article WHERE up.status = 'publish' AND up.is_delete = '0' AND up.post_for = 'article' ". $search_query ." ORDER BY up.post_id DESC";
+
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_article_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND a.article_title like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_rec 
+                FROM ailee_post_article a LEFT JOIN ailee_user_post up ON up.post_id = a.id_post_article WHERE up.status = 'publish' AND up.is_delete = '0' AND up.post_for = 'article' ".$search_query." ORDER BY up.post_id DESC";
+                
+        $query = $this->db->query($sql);
+        
+        $result_array = $query->row_array();
+        return $result_array['total_rec'];
+    }
+
+    function get_questions_list($searchword = '',$page = 0, $limit = 100){
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND uaq.question like '". $searchword ."'";
+        }
+        
+        $sql = "SELECT up.id,uaq.id as question_id,up.user_id, up.post_for, up.created_date, up.post_id, uaq.question, uaq.description FROM ailee_user_post up LEFT JOIN ailee_user_ask_question uaq ON uaq.post_id = up.id WHERE up.post_for = 'question' AND up.status = 'publish' AND up.is_delete = '0' ". $search_query ." ORDER BY up.id DESC";
+
+        if($limit != ""){
+            $sql .= " LIMIT $start, $limit";
+        }
+        $query = $this->db->query($sql);        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_questions_list_total($searchword = '') {
+        $search_query = "";
+        if($searchword != ""){
+            $searchword = $searchword. '%';
+            $search_query = " AND uaq.question like '". $searchword ."'";
+        }
+        $sql = "SELECT count(*) as total_rec 
+                FROM ailee_user_post up LEFT JOIN ailee_user_ask_question uaq ON uaq.post_id = up.id WHERE up.post_for = 'question' AND up.status = 'publish' AND up.is_delete = '0' ".$search_query." ORDER BY up.post_id DESC";
+                
+        $query = $this->db->query($sql);
+        
+        $result_array = $query->row_array();
+        return $result_array['total_rec'];
+    }
+
     function get_member_list($searchword = '',$page = 0, $limit = 100){
 
         $start = ($page - 1) * $limit;
@@ -700,6 +772,23 @@ class Sitemap_model extends CI_Model {
         
         $sql = "SELECT uo.post_id, up.user_id, uo.opportunity, it.industry_name as field_txt,uo.field,uo.other_field, uo.opptitle, uo.oppslug FROM ailee_user_opportunity uo LEFT JOIN ailee_industry_type it ON it.industry_id = uo.field LEFT JOIN ailee_user_post up ON up.id = uo.post_id WHERE up.status = 'publish' ORDER BY up.id DESC";
 
+        $query = $this->db->query($sql);        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_article_listing(){        
+        
+        $sql = "SELECT a.article_title, a.article_featured_image, a.article_slug FROM ailee_post_article a LEFT JOIN ailee_user_post up ON up.post_id = a.id_post_article WHERE up.status = 'publish' AND up.is_delete = '0' AND up.post_for = 'article' ORDER BY up.post_id DESC";
+
+        $query = $this->db->query($sql);        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    function generate_sitemap_questions_listing(){        
+        
+        $sql = "SELECT up.id,uaq.id as question_id,up.user_id, up.post_for, up.created_date, up.post_id, uaq.question, uaq.description FROM ailee_user_post up LEFT JOIN ailee_user_ask_question uaq ON uaq.post_id = up.id WHERE up.post_for = 'question' AND up.status = 'publish' AND up.is_delete = '0'";
         $query = $this->db->query($sql);        
         $result_array = $query->result_array();
         return $result_array;

@@ -912,6 +912,12 @@ class Userprofile_page extends MY_Controller {
 
     public function question_detail($question_id = '') {
         $userid = $this->session->userdata('aileenuser');
+        if($userid == "")
+        {
+            $this->data['question_data'] = $question_data = $this->userprofile_model->get_question_from_id($question_id);            
+            $userid = $question_data['user_id'];
+            $title = $question_data['question'];
+        }        
         $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($userid);
@@ -922,8 +928,15 @@ class Userprofile_page extends MY_Controller {
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
         $this->data['footer'] = $this->load->view('footer', $this->data, TRUE);
         $this->data['question_id'] = $question_id;
-        $this->data['title'] = "Question | Aileensoul";
-        $this->load->view('userprofile/question_details', $this->data);
+        $this->data['title'] = $title;
+        if($this->session->userdata('aileenuser') != "")
+        {
+            $this->load->view('userprofile/question_details', $this->data);
+        }
+        else
+        {
+            $this->load->view('userprofile/question_details_nologin', $this->data);   
+        }
     }
 
     public function question_data() {

@@ -991,6 +991,7 @@ class Userprofile_model extends CI_Model {
             $this->db->where('a.user_id', $user_id);
             $this->db->where('a.status != ', 'delete');   
         }
+        $this->db->where('up.is_delete', '0');
         $this->db->order_by('a.id_post_article', 'desc');
         if ($limit != '') {
             $this->db->limit($limit, $start);
@@ -1789,5 +1790,39 @@ class Userprofile_model extends CI_Model {
         $query = $this->db->get();
         $user_data_exp = $query->result_array();        
         return $user_data_exp;
+    }
+
+    public function get_question_from_id($question_id)
+    {
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,uaq.question,uaq.description")->from("user_post up");
+        $this->db->join('user_ask_question uaq', 'uaq.post_id = up.id', 'left');
+        $this->db->where('uaq.id', $question_id);
+        $this->db->where('up.status', 'publish');
+        $this->db->where('up.is_delete', '0');
+        $query = $this->db->get();
+        $return_arr = $query->row_array();
+        $return_arr['post_comment_count'] = $this->postCommentCount($return_arr['id']);
+        $return_arr['post_like_count'] = $this->likepost_count($return_arr['id']);
+        $post_comment_data = $this->postAllCommentData($return_arr['id']);
+        foreach ($post_comment_data as $key => $value) {
+            $post_comment_data[$key]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_comment_data[$key]['created_date'])));
+            $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
+            $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);
+        }
+        $return_arr['post_comment_data'] = $post_comment_data;
+        return $return_arr;
+    }
+
+    public function postAllCommentData($post_id = '') {
+        $this->db->select("u.user_slug,upc.user_id as commented_user_id,CONCAT(u.first_name,' ',u.last_name) as username, ui.user_image,upc.id as comment_id,upc.comment,upc.created_date,u.user_gender")->from("user_post_comment upc");//UNIX_TIMESTAMP(STR_TO_DATE(upc.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
+        $this->db->join('user u', 'u.user_id = upc.user_id', 'left');
+        $this->db->join('user_login ul', 'ul.user_id = upc.user_id', 'left');
+        $this->db->join('user_info ui', 'ui.user_id = upc.user_id', 'left');
+        $this->db->where('upc.post_id', $post_id);
+        $this->db->where('ul.status', '1');
+        $this->db->where('upc.is_delete', '0');
+        $this->db->order_by('upc.id', 'desc');        
+        $query = $this->db->get();
+        return $post_comment_data = $query->result_array();
     }
 }

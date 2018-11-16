@@ -637,7 +637,7 @@ class Sitemap extends CI_Controller {
     }
 
     public function sitemap_opportunities($searchword = "") {
-        $this->data['title'] = "Opportunities Sitemap | Aileensoul";
+        $this->data['title'] = "Opportunity Sitemap | Aileensoul";
         $this->data['metadesc'] = "";
         $this->data['searchword'] = $searchword;
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
@@ -690,6 +690,120 @@ class Sitemap extends CI_Controller {
         }
         // $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
         $this->load->view('sitemap/sitemap_opportunities', $this->data);
+    }
+
+    public function sitemap_article($searchword = "") {
+        $this->data['title'] = "Article Sitemap | Aileensoul";
+        $this->data['metadesc'] = "";
+        $this->data['searchword'] = $searchword;
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        if($searchword != "")
+        {
+            $this->data['title'] = "Article Listing Starting from ".strtoupper($searchword)." | Aileensoul";
+            $this->data['metadesc'] = "";
+
+            $limit = 100;
+            $config = array(); 
+            $config["base_url"] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3);
+            $config["total_rows"] = $this->sitemap_model->get_article_list_total($searchword);
+            $config["per_page"] = $limit;
+            $config["uri_segment"] = 4;
+            $choice = $config["total_rows"] / $config["per_page"];
+            $config["num_links"] = 1;//round($choice);
+
+            //styling
+            $config['full_tag_open']    = '<ul class="pagination pagination-button" id="pagination">';
+            $config['full_tag_close']   = '</ul>';            
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li>';
+            $config['last_tag_close'] = '</li>';
+            $config['use_page_numbers']  = TRUE;
+
+            $config['prev_link']        = 'Previous';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+
+            $config['next_link']        = 'Next';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+
+            $config['cur_tag_open'] = '<li class="active"><a>';
+            $config['cur_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            // $config['display_pages']    = TRUE; 
+            
+            // $config['suffix']           = '-1';
+            $this->pagination->initialize($config);
+
+            $this->data['page'] = $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $this->data['article_list'] = $this->sitemap_model->get_article_list($searchword,$page,$limit);
+            $this->data['links'] = $this->pagination->create_links();            
+        }
+
+        // $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
+        $this->load->view('sitemap/sitemap_article', $this->data);
+    }
+
+    public function sitemap_questions($searchword = "") {
+        $this->data['title'] = "Questions Sitemap | Aileensoul";
+        $this->data['metadesc'] = "";
+        $this->data['searchword'] = $searchword;
+        $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
+        if($searchword != "")
+        {
+            $this->data['title'] = "Questions Listing Starting from ".strtoupper($searchword)." | Aileensoul";
+            $this->data['metadesc'] = "";
+
+            $limit = 100;
+            $config = array(); 
+            $config["base_url"] = base_url().$this->uri->segment(1).'/'.$this->uri->segment(2).'/'.$this->uri->segment(3);
+            $config["total_rows"] = $this->sitemap_model->get_questions_list_total($searchword);
+            $config["per_page"] = $limit;
+            $config["uri_segment"] = 4;
+            $choice = $config["total_rows"] / $config["per_page"];
+            $config["num_links"] = 1;//round($choice);
+
+            //styling
+            $config['full_tag_open']    = '<ul class="pagination pagination-button" id="pagination">';
+            $config['full_tag_close']   = '</ul>';            
+            $config['first_link'] = 'First';
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['last_link'] = 'Last';
+            $config['last_tag_open'] = '<li>';
+            $config['last_tag_close'] = '</li>';
+            $config['use_page_numbers']  = TRUE;
+
+            $config['prev_link']        = 'Previous';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+
+            $config['next_link']        = 'Next';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+
+            $config['cur_tag_open'] = '<li class="active"><a>';
+            $config['cur_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            // $config['display_pages']    = TRUE; 
+            
+            // $config['suffix']           = '-1';
+            $this->pagination->initialize($config);
+
+            $this->data['page'] = $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $this->data['questions_list'] = $this->sitemap_model->get_questions_list($searchword,$page,$limit);
+            $this->data['links'] = $this->pagination->create_links();            
+        }
+
+        // $this->data['sitemap_header'] = $this->load->view('sitemap/sitemap_header', $this->data, TRUE);
+        $this->load->view('sitemap/sitemap_questions', $this->data);
     }
 
     public function sitemap_member_list() {
@@ -1602,6 +1716,100 @@ class Sitemap extends CI_Controller {
         fclose($myfile);
     }
 
+    public function generate_sitemap_article_listing()
+    {
+        $article_data = $this->sitemap_model->generate_sitemap_article_listing();
+        // print_r($opportunity_data);exit;
+        $art_file_arr = array('article-1.xml');
+        $myfile = fopen("article-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($article_data as $key => $value) {
+            $url = 'article/'.$value['article_slug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $art_file_arr[] = "article-".$sitemap_index.".xml";
+                $myfile = fopen("article-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        return $art_file_arr;
+    }
+
+    public function article_sitemap()
+    {
+        $article_ist = $this->generate_sitemap_article_listing();
+
+        $myfile = fopen("article.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($article_ist as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
+        }           
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
+
+    public function generate_sitemap_questions_listing()
+    {
+        $question_data = $this->sitemap_model->generate_sitemap_questions_listing();
+        // print_r($question_data);exit;
+        $art_file_arr = array('questions-1.xml');
+        $myfile = fopen("questions-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($question_data as $key => $value) {            
+            $url = 'questions/'.$value['question_id'].'/'.$this->common->create_slug($value['question']);
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $art_file_arr[] = "questions-".$sitemap_index.".xml";
+                $myfile = fopen("questions-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        return $art_file_arr;
+    }
+
+    public function questions_sitemap()
+    {
+        $questions_ist = $this->generate_sitemap_questions_listing();
+
+        $myfile = fopen("questions.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($questions_ist as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
+        }           
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
+
     public function main_sitemap()
     {
         $myfile = fopen("sitemap.xml", "w");
@@ -1634,6 +1842,14 @@ class Sitemap extends CI_Controller {
                 </url>
                 <url>
                 <loc>'.base_url().'opportunity.xml</loc>
+                <lastmod>'.$lastmod.'</lastmod>
+                </url>
+                <url>
+                <loc>'.base_url().'questions.xml</loc>
+                <lastmod>'.$lastmod.'</lastmod>
+                </url>
+                <url>
+                <loc>'.base_url().'article.xml</loc>
                 <lastmod>'.$lastmod.'</lastmod>
                 </url>
                 <url>
@@ -1892,6 +2108,8 @@ class Sitemap extends CI_Controller {
         $this->freelance_sitemap();
         $this->artist_sitemap();
         $this->opportunity_sitemap();
+        $this->article_sitemap();
+        $this->questions_sitemap();
         $this->generate_sitemap_blog_listing();
         echo "Done";
     }

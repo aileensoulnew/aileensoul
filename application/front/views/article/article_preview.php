@@ -410,11 +410,11 @@ else
 								} ?>
 								<div class="col-md-4">
 									<div class="rel-art-box<?php echo $default_img_cls; ?>">
-										<a href="<?php echo base_url().$_related_article_data['article_slug']; ?>">
+										<a href="<?php echo base_url().'article/'.$_related_article_data['article_slug']; ?>">
 											<img src="<?php echo $article_img; ?>" alt="<?php echo ucwords($_related_article_data['article_title']); ?>">
 										</a>
 										<div class="rel-art-name">
-											<a href="<?php echo base_url().$_related_article_data['article_slug']; ?>"><?php echo ucwords($_related_article_data['article_title']); ?></a>
+											<a href="<?php echo base_url().'article/'.$_related_article_data['article_slug']; ?>"><?php echo ucwords($_related_article_data['article_title']); ?></a>
 										</div>
 									</div>
 								</div>
@@ -594,6 +594,53 @@ else
 	var user_thumb_upload_url = "<?php echo USER_THUMB_UPLOAD_URL; ?>"
 	var like_usr_cnt = "<?php echo $like_usr_cnt; ?>"
 </script>
+<?php 
+if($article_data['article_featured_image'] != "")
+{
+	$img_url = base_url() . $article_featured_upload_path . $article_data['article_featured_image'];
+	list($width,$height) = getimagesize(base_url() . $article_featured_upload_path . $article_data['article_featured_image']);
+}
+else
+{
+	$img_url = base_url('assets/img/art-default.jpg');
+	list($width,$height) = getimagesize(base_url('assets/img/art-default.jpg'));
+}
+?>
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org",
+	"@type": "BlogPosting",
+	"mainEntityOfPage":{
+		"@type":"WebPage",
+		"@id":"<?php echo base_url().'article/'.$article_data['article_slug']; ?>"
+	},
+	"headline": "<?php echo ucwords($article_data['article_title']); ?>",
+	"image": {
+		"@type": "ImageObject",
+		"url": "<?php echo $img_url; ?>",
+		"height": <?php echo $height; ?>,
+		"width": <?php echo $width; ?>
+	},
+	"datePublished": "<?php echo date("Y-m-d",strtotime($article_data['created_date'])); ?>",
+	"dateModified": "<?php echo date("Y-m-d",strtotime($article_data['modify_date'])); ?>",
+	"author": {
+		"@type": "Person",
+		"name": "<?php echo ucwords($user_data['first_name']." ".$user_data['last_name']); ?>"
+	},
+	"publisher": {
+		"@type": "Organization",
+		"name": "Aileensoul",
+		"logo": {
+			"@type": "ImageObject",
+            "url": "<?php echo base_url(); ?>assets/img/aileensoul-logo.png",
+            "width": 60,
+            "height": 60
+		}
+	},
+	"description": "<?php echo $article_data['article_meta_description']; ?>"
+}
+</script>
+
 <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
 <script src="<?php echo base_url('assets/js/webpage/article/article_published.js?ver=' . time()) ?>"></script>
 </html>

@@ -719,6 +719,10 @@ app.controller('questionDetailsController', function ($scope, $http,$window,$fil
                     }
                 });
     }
+    $scope.no_login_pop = function(){        
+        $('.biderror .mes').html("<div class='pop_content pop-content-cus'><h2>Never miss out any opportunities, news, and updates.</h2>Join Now!<p class='poppup-btns'><a class='btn1' href='"+base_url+"login'>Login</a> or <a class='btn1' href='"+base_url+"job-profile/create-account'>Register</a></p></div>");
+        $('#bidmodal').modal('show');        
+    };
 });
 
 $(window).on("load", function () {

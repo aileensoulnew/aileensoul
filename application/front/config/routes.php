@@ -140,6 +140,14 @@ $route['sitemap/opportunities'] = "sitemap/sitemap_opportunities";
 $route['sitemap/opportunities/(:any)'] = "sitemap/sitemap_opportunities/$1";
 $route['sitemap/opportunities/(:any)/(:num)'] = "sitemap/sitemap_opportunities/$1";
 
+$route['sitemap/article'] = "sitemap/sitemap_article";
+$route['sitemap/article/(:any)'] = "sitemap/sitemap_article/$1";
+$route['sitemap/article/(:any)/(:num)'] = "sitemap/sitemap_article/$1";
+
+$route['sitemap/questions'] = "sitemap/sitemap_questions";
+$route['sitemap/questions/(:any)'] = "sitemap/sitemap_questions/$1";
+$route['sitemap/questions/(:any)/(:num)'] = "sitemap/sitemap_questions/$1";
+
 $route['sitemap/blogs'] = "sitemap/blogs";
 $route['sitemap/blogs/(:any)'] = "sitemap/blogs_category/$1";
 $route['sitemap/blogs/(:any)/(:num)'] = "sitemap/blogs_category/$1";
