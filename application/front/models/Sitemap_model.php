@@ -696,6 +696,15 @@ class Sitemap_model extends CI_Model {
         return $result_array;
     }
 
+    function generate_sitemap_opportunity_listing(){
+        
+        $sql = "SELECT uo.post_id, up.user_id, uo.opportunity, it.industry_name as field_txt,uo.field,uo.other_field, uo.opptitle, uo.oppslug FROM ailee_user_opportunity uo LEFT JOIN ailee_industry_type it ON it.industry_id = uo.field LEFT JOIN ailee_user_post up ON up.id = uo.post_id WHERE up.status = 'publish' ORDER BY up.id DESC";
+
+        $query = $this->db->query($sql);        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
     function generate_sitemap_blog_listing()
     {
         $sql = "SELECT id, title, blog_slug, status FROM ailee_blog WHERE status = 'publish' ORDER BY id DESC";

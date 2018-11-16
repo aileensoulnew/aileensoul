@@ -1555,6 +1555,53 @@ class Sitemap extends CI_Controller {
         fclose($myfile);
     }
 
+    public function generate_sitemap_opportunity_listing()
+    {
+        $opportunity_data = $this->sitemap_model->generate_sitemap_opportunity_listing();
+        // print_r($opportunity_data);exit;
+        $art_file_arr = array('opportunity-1.xml');
+        $myfile = fopen("opportunity-1.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($opportunity_data as $key => $value) {
+            $url = 'o/'.$value['oppslug'];
+            $txt .= '<url><loc>'.base_url().$url.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>';
+            if($sitemap_counter == SITEMAP_LIMIT)
+            {
+                $sitemap_counter = 1;
+                $sitemap_index++;
+                $txt .= '</urlset>';
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                $art_file_arr[] = "opportunity-".$sitemap_index.".xml";
+                $myfile = fopen("opportunity-".$sitemap_index.".xml", "w");                
+                $txt = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+            }
+            $sitemap_counter++;
+        }
+        $txt .= '</urlset>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        return $art_file_arr;
+    }
+
+    public function opportunity_sitemap()
+    {
+        $artList = $this->generate_sitemap_opportunity_listing();
+
+        $myfile = fopen("opportunity.xml", "w");
+        $sitemap_index = 1;
+        $sitemap_counter = 1;
+        $txt = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        foreach ($artList as $key => $value) {
+            $txt .='<sitemap><loc>'.base_url().$value.'</loc><lastmod>'.date('Y-m-d\TH:i:sP', time()).'</lastmod></sitemap>';
+        }           
+        $txt .= '</sitemapindex>';
+        fwrite($myfile, $txt);
+        fclose($myfile);
+    }
+
     public function main_sitemap()
     {
         $myfile = fopen("sitemap.xml", "w");
@@ -1583,6 +1630,10 @@ class Sitemap extends CI_Controller {
                 </url>
                 <url>
                 <loc>'.base_url().'artist.xml</loc>
+                <lastmod>'.$lastmod.'</lastmod>
+                </url>
+                <url>
+                <loc>'.base_url().'opportunity.xml</loc>
                 <lastmod>'.$lastmod.'</lastmod>
                 </url>
                 <url>
@@ -1840,6 +1891,7 @@ class Sitemap extends CI_Controller {
         $this->business_sitemap();
         $this->freelance_sitemap();
         $this->artist_sitemap();
+        $this->opportunity_sitemap();
         $this->generate_sitemap_blog_listing();
         echo "Done";
     }
