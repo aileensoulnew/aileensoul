@@ -18,6 +18,7 @@
 		<title><?php echo $title; ?></title>
         <meta name="description" content="<?php echo $metadesc; ?>" />
 		<meta charset="utf-8">
+		<meta name="robots" content="noindex, follow">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<?php $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
