@@ -1055,8 +1055,9 @@ class Userprofile_model extends CI_Model {
         else
         {
             $this->db->where('a.user_id', $user_id);
-            // $this->db->where('a.status != ', 'delete');   
+            $this->db->where('a.status != ', 'delete');
         }
+        $this->db->where('up.is_delete', '0');
         $this->db->order_by('a.id_post_article', 'desc');        
         $query = $this->db->get();
         // echo $this->db->last_query();exit();
