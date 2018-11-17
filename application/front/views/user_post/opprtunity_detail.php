@@ -727,12 +727,13 @@
             "@context": "http://schema.org",
             "@type": "JobPosting",
             "title": "<?php echo $opp_data['opptitle']; ?>",
-            "description": "<?php echo $opp_data['opportunity']; ?>",
+            "description": "<?php echo htmlentities($opp_data['opportunity']); ?>",
             "industry": "<?php echo ($opp_data['field'] != "" ? ucwords($opp_data['field']) : ($opp_data['other_field'] != "" ? $opp_data['other_field'] : "Other")); ?>",
             "datePosted": "<?php echo date('Y-m-d', strtotime($opp_data['created_date'])); ?>",
             "jobLocation": [
             <?php
-                foreach (explode(",",$opp_data['location']) as $key => $value)
+                $location_arr = explode(",",$opp_data['location']);
+                foreach ($location_arr as $key => $value)
                 {
                     if($value != "")
                     { ?>
@@ -742,8 +743,12 @@
                                 "@type": "PostalAddress",
                                 "addressLocality": "<?php echo $value; ?>"
                             }
-                        },
-                <?php
+                        }
+                    <?php
+                        if(count($location_arr) - 1 != $key)
+                        {
+                            echo ",";
+                        }
                     }
                 }
             ?>                
