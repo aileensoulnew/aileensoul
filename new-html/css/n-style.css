@@ -2618,6 +2618,7 @@ padding: 4px;}
 .dtl-title span{vertical-align:middle; margin-left:10px;}
 .dtl-title a{}
 .dtl-dis{padding:15px; width:100%; float:left;}
+.modal-body-cus .dtl-dis{background:#fff;}
 .no-info{text-align:left;}
 .no-info img{width:50px; float:left; display:none;}
 .no-info span{width:100%; float:left; color:#7b7b7b; text-align:center; padding:12px 0;}
@@ -2801,7 +2802,7 @@ width: 80%; border-radius: 10px; z-index:9;}
 .screen-shot{padding-top:10px;}
 #activitydateerror.error{font-size:12px;}
 .inner-dis{word-break: break-all;}
-.dtl-popup-loader{position: absolute; width: 100%; top: 0; background: #fff; padding: 10px 0; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;}
+.dtl-popup-loader{position: absolute; width: 100%; top: 0; background: #fff; padding: 11px 0; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;}
 .right-add.add-detail .right-add-box{border:0; padding:0; margin:0;}
 /***  end new details page  ***/
 /***  new job registration form  ***/

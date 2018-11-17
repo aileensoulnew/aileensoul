@@ -1396,26 +1396,42 @@
 						<div class="gallery-item">
 							<div class="dtl-box">
 								<div class="dtl-title">
-									<img class="cus-width" src="n-images/detail/edution.png"><span>Reviews</span><a href="#" data-target="#reviews" data-toggle="modal" class="pull-right"><img src="n-images/detail/edit.png"></a>
+									<img class="cus-width" src="n-images/detail/edution.png"><span>Reviews</span>
+									
+									<a href="#" data-target="#reviews" data-toggle="modal" class="pull-right write-review"><img src="n-images/detail/write.png"> <span>Write a review</span></a>
 								</div>
 								<div class="dtl-dis">
-									<div class="form-group">
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star checked"></span>
-										<span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
+									<div class="total-rev">
+										<span class="total-rat">4.8</span> <span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Four Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 80%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="4" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-primary badge-primary">Four Stars</span></div></div>
+												</span>
+												<span class="rev-count">59 Reviews</span>
+												
+												
 									</div>
-									<ul class="dis-list">
+									<ul class="review-list">
 										<li>
-											<span>Description</span>
-											Lorem ipsum its a dummy text and its user to for all.Lorem ipsum its a dummy text and its user to for all... <a href="#">Read More </a>
+											<div class="review-left">
+												<img src="n-images/detail/user-pic.jpg">
+											</div>
+											<div class="review-right">
+												<h4>Yatin Belani</h4>
+												<div class="rating-star-cus">
+													<span class="rating-star">
+			<div class="rating-container rating-sm rating-animate"><div class="clear-rating clear-rating-active" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-stars" title="Two Stars"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: 40%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span><input id="input-21b" value="2" type="text" class="rating rating-input" data-min="0" data-max="5" data-step="0.2" data-size="sm" required="" title=""></div><div class="caption"><span class="label label-warning badge-warning">Two Stars</span></div></div>
+												</span>
+												</div>
+												<div class="review-dis">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat turpis a erat sagittis pharetra. Etiam sapien nulla, tincidunt id libero non, iaculis elementum ex. Aenean commodo vitae felis ut dictum.
+												</div>
+											</div>
 										</li>
-										<li>
-											<span class="fw">Screenshot</span>
-											<img style="width:80px;" src="n-images/detail/pr-web.png">
-										</li>
+										
 									</ul>
+									<div class="form-group">
+										
+									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -2870,7 +2886,8 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>	
+<script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
+<script src="js/star-rating.js"></script>	
 	<script>
 		var masonryLayout = function masonryLayout(containerElem, itemsElems, columns) {
   containerElem.classList.add('masonry-layout', 'columns-' + columns);
@@ -2910,6 +2927,62 @@ document.querySelectorAll('.gallery-item'), 2);
 			})(jQuery);
 			
 			
+    </script>
+	<script>
+        jQuery(document).ready(function () {
+            $("#input-21f").rating({
+                starCaptions: function (val) {
+                    if (val < 3) {
+                        return val;
+                    } else {
+                        return 'high';
+                    }
+                },
+                starCaptionClasses: function (val) {
+                    if (val < 3) {
+                        return 'label label-danger';
+                    } else {
+                        return 'label label-success';
+                    }
+                },
+                hoverOnClear: false
+            });
+            var $inp = $('#rating-input');
+
+            $inp.rating({
+                min: 0,
+                max: 5,
+                step: 1,
+                size: 'lg',
+                showClear: false
+            });
+
+            $('#btn-rating-input').on('click', function () {
+                $inp.rating('refresh', {
+                    showClear: true,
+                    disabled: !$inp.attr('disabled')
+                });
+            });
+
+
+            $inp.on('rating.change', function () {
+                alert($('#rating-input').val());
+            });
+
+
+            $('.rb-rating').rating({
+                'showCaption': true,
+                'stars': '3',
+                'min': '0',
+                'max': '3',
+                'step': '1',
+                'size': 'xs',
+                'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
+            });
+            $("#input-21c").rating({
+                min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
+            });
+        });
     </script>
 
 </body>
