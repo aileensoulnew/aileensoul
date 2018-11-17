@@ -30,7 +30,7 @@
                 <div class="middle-part question-detail">
                     <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData">
                         <div class="all-post-top">
-                            <div class="post-head">
+                            <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                                 <div class="post-img" ng-if="post.post_data.post_for == 'question'">
                                     <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
                                     <span class="no-img-post"  ng-if="post.user_data.user_image == '' || post.question_data.is_anonymously == '1'">A</span>

@@ -1795,7 +1795,7 @@ class Userprofile_model extends CI_Model {
 
     public function get_question_from_id($question_id)
     {
-        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,uaq.question,uaq.description")->from("user_post up");
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,uaq.question,uaq.description,uaq.is_anonymously")->from("user_post up");
         $this->db->join('user_ask_question uaq', 'uaq.post_id = up.id', 'left');
         $this->db->where('uaq.id', $question_id);
         $this->db->where('up.status', 'publish');

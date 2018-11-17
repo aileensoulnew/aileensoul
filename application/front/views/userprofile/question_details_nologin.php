@@ -133,7 +133,7 @@
                 <div class="middle-part question-detail">
                     <div ng-if="postData.length != 0" class="all-post-box" ng-repeat="post in postData">
                         <div class="all-post-top">
-                            <div class="post-head">
+                            <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                                 <div class="post-img" ng-if="post.post_data.post_for == 'question'">
                                     <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
                                     <span class="no-img-post"  ng-if="post.user_data.user_image == '' || post.question_data.is_anonymously == '1'">A</span>
@@ -571,12 +571,12 @@
             "@context": "http://schema.org",
             "@type": "Question",
             "name": "<?php echo $question_data['question']; ?>",
-            "upvoteCount": "<?php echo $question_data['post_like_count']; ?>",
+            "upvoteCount": "<?php echo ($question_data['post_like_count'] != "" ? $question_data['post_like_count'] : 0); ?>",
             "text": "<?php echo $question_data['description']; ?>",
             "dateCreated": "<?php echo date('Y-m-d', strtotime($question_data['created_date'])); ?>",
             "author": {
                 "@type": "Person",
-                "name": "<?php echo ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name']) ?>"
+                "name": "<?php echo ($question_data['is_anonymously'] == 1 ? "Anonymous" :ucfirst($leftbox_data['first_name']) . ' ' . ucfirst($leftbox_data['last_name'])) ?>"
             },
             "answerCount": "<?php echo $question_data['post_comment_count']; ?>"
          }
@@ -587,7 +587,7 @@
             {
                 "@context": "http://schema.org",
                 "@type": "Answer",
-                "upvoteCount": "<?php echo $value['postCommentLikeCount']; ?>",
+                "upvoteCount": "<?php echo ($value['postCommentLikeCount'] != "" ? $value['postCommentLikeCount'] : 0); ?>",
                 "text": "<?php echo $value['comment']; ?>",
                 "dateCreated": "<?php echo date('Y-m-d', strtotime($value['created_date'])); ?>",
                 "author": {
