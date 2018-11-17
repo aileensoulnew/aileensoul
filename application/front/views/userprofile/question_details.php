@@ -438,7 +438,7 @@
             var base_url = '<?php echo base_url(); ?>';
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var question = '<?php echo $question_id ?>';
-            var title = '<?php echo $title ?>';
+            var title = '<?php echo addslashes($title) ?>';
             var app = angular.module("questionDetailsApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngLocationUpdate']);
         </script>
         <script src="<?php echo base_url('assets/js/webpage/user/user_header_profile.js?ver=' . time()) ?>"></script>
