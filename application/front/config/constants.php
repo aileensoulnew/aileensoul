@@ -374,6 +374,9 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('USER_EXPERIENCE_UPLOAD_URL', BUCKETLINK . 'uploads/user_experience/');
     define('USER_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/user_project/');
     define('USER_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/user_education/');
+    define('JOB_USER_EDUCATION_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_education/');
+    define('JOB_USER_PROJECT_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_project/');
+    define('JOB_USER_ACTIVITY_UPLOAD_URL', BUCKETLINK . 'uploads/job_user_activity/');
     
 } else {
     //USER PHOTO 
@@ -601,6 +604,9 @@ if (IMAGEPATHFROM == 's3bucket') {
     define('USER_EXPERIENCE_UPLOAD_URL', BASEURL . 'uploads/user_experience/');
     define('USER_PROJECT_UPLOAD_URL', BASEURL . 'uploads/user_project/');
     define('USER_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/user_education/');
+    define('JOB_USER_EDUCATION_UPLOAD_URL', BASEURL . 'uploads/job_user_education/');
+    define('JOB_USER_PROJECT_UPLOAD_URL', BASEURL . 'uploads/job_user_project/');
+    define('JOB_USER_ACTIVITY_UPLOAD_URL', BASEURL . 'uploads/job_user_activity/');
     
 }
 

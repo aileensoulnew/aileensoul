@@ -421,7 +421,7 @@
                 });
             });
         </script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js'></script>
+        <script src="<?php echo base_url('assets/js/masonry.pkgd.min.js?ver=' . time()); ?>"></script>
 
     </body>
 </html>

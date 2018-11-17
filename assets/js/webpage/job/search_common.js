@@ -7,7 +7,7 @@
            return split( term ).pop();
        }
        
-       $( ".tags" ).bind( "keydown", function( event ) {
+       $( "#job_keyword,#mob_job_keyword" ).bind( "keydown", function( event ) {
            if ( event.keyCode === $.ui.keyCode.TAB &&
                $( this ).autocomplete( "instance" ).menu.active ) {
                event.preventDefault();

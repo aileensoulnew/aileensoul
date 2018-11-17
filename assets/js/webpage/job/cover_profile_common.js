@@ -126,7 +126,21 @@ $('#upload').click(function(){
 
 
 //Update Profile Pic Start
-
+$(document).ready(function () {
+    $("#userimage").validate({
+        rules: {
+            profilepic: {
+                required: true,
+            },
+        },
+        messages: {
+            profilepic: {
+                required: "Photo required",
+            },
+        },
+      submitHandler: profile_pic
+    });
+});
 $uploadCrop1 = $('#upload-demo-one').croppie({
     enableExif: true,
     viewport: {

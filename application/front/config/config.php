@@ -957,3 +957,8 @@ $config['user_addicourse_upload_path'] = 'uploads/user_addicourse/';
 $config['user_experience_upload_path'] = 'uploads/user_experience/';
 $config['user_project_upload_path'] = 'uploads/user_project/';
 $config['user_education_upload_path'] = 'uploads/user_education/';
+
+
+$config['job_user_education_upload_path'] = 'uploads/job_user_education/';
+$config['job_user_project_upload_path'] = 'uploads/job_user_project/';
+$config['job_user_activity_upload_path'] = 'uploads/job_user_activity/';

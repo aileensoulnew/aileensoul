@@ -1815,4 +1815,212 @@ as string_post_name,rp.post_description,DATE_FORMAT(rp.created_date,'%d-%M-%Y') 
         }
         echo "Done";
     }
+
+    public function set_user_education($userid,$edu_school_college = "",$edu_university = "",$edu_other_university = "",$edu_degree = "",$edu_stream = "",$edu_other_degree = "",$edu_other_stream = "",$edu_start_date = "",$edu_end_date = "",$edu_nograduate = "",$edu_file = "",$edit_edu = 0)
+    {
+        if($edit_edu == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_education');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'edu_school_college' => $edu_school_college,
+                'edu_university' => $edu_university,
+                'edu_other_university' => $edu_other_university,
+                'edu_degree' => $edu_degree,
+                'edu_other_degree' => $edu_other_degree,
+                'edu_stream' => $edu_stream,
+                'edu_other_stream' => $edu_other_stream,
+                'edu_start_date' => $edu_start_date,
+                'edu_end_date' => $edu_end_date,
+                'edu_nograduate' => $edu_nograduate,
+                'edu_file' => $edu_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_education', $edit_edu);
+            $this->db->update('job_user_education', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_education($userid,$edu_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_education', $edu_id);
+            $this->db->update('job_user_education', $data);
+            return true;
+    }
+
+    public function get_user_education($userid)
+    {
+        $this->db->select("jue.id_education, jue.user_id, jue.edu_school_college, jue.edu_university, jue.edu_other_university, jue.edu_degree, jue.edu_other_degree, jue.edu_stream, jue.edu_other_stream, jue.edu_start_date, jue.edu_end_date, jue.edu_nograduate, jue.edu_file, jue.status, jue.created_date, jue.modify_date, d.degree_name, s.stream_name, u.university_name, DATE_FORMAT(CONCAT(jue.edu_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jue.edu_end_date,'-1'),'%b %Y') as end_date_str")->from("job_user_education jue");
+        $this->db->join('degree d', 'd.degree_id = jue.edu_degree', 'left');
+        $this->db->join('stream s', 's.stream_id = jue.edu_stream', 'left');
+        $this->db->join('university u', 'u.university_id = jue.edu_university', 'left');
+        $this->db->where('jue.user_id', $userid);
+        $this->db->where('jue.status', '1');
+        $this->db->order_by('jue.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function set_user_project($userid,$project_title = "",$project_team = "",$project_role = "",$project_skill_ids = "",$project_field = "",$project_other_field = "",$project_url = "",$project_partner_name = "",$project_start_date = "",$project_end_date = "",$project_desc = "",$project_file = "",$edit_project = 0)
+    {
+        if($edit_project == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'project_title' => $project_title,
+                'project_team' => $project_team,
+                'project_role' => $project_role,
+                'project_skills' => $project_skill_ids,
+                'project_field' => $project_field,
+                'project_other_field' => $project_other_field,                
+                'project_url' => $project_url,                
+                'project_partner_name' => $project_partner_name,                
+                'project_start_date' => $project_start_date,                
+                'project_end_date' => $project_end_date,                
+                'project_desc' => $project_desc,        
+                'project_file' => $project_file,                
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_projects');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'project_title' => $project_title,
+                'project_team' => $project_team,
+                'project_role' => $project_role,
+                'project_skills' => $project_skill_ids,
+                'project_field' => $project_field,
+                'project_other_field' => $project_other_field,                
+                'project_url' => $project_url,                
+                'project_partner_name' => $project_partner_name,                
+                'project_start_date' => $project_start_date,                
+                'project_end_date' => $project_end_date,                
+                'project_desc' => $project_desc,        
+                'project_file' => $project_file,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_projects', $edit_project);
+            $this->db->update('job_user_projects', $data);
+            return true;
+        }
+    }
+
+    public function delete_user_project($userid,$project_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_projects', $project_id);
+            $this->db->update('job_user_projects', $data);
+            return true;
+    }
+
+    public function get_user_project($userid)
+    {
+        $this->db->select("jup.id_projects, jup.user_id, jup.project_title, jup.project_team, jup.project_role, jup.project_skills, jup.project_field, jup.project_other_field, jup.project_url, jup.project_partner_name, jup.project_start_date, jup.project_end_date, jup.project_desc, jup.project_file, jup.status, jup.created_date, jup.modify_date, DATE_FORMAT(CONCAT(jup.project_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(jup.project_end_date,'-1'),'%b %Y') as end_date_str,it.industry_name as project_field_txt, GROUP_CONCAT(DISTINCT(s.skill)) as project_skills_txt,")->from("job_user_projects jup,skill s");
+        $this->db->join('industry_type it', 'it.industry_id = jup.project_field', 'left');
+        $this->db->where('FIND_IN_SET(s.skill_id, jup.project_skills) !=', 0);
+        $this->db->where('jup.user_id', $userid);
+        $this->db->where('jup.status', '1');
+        $this->db->group_by('jup.project_skills,jup.id_projects');
+        $this->db->order_by('jup.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_exp = $query->result_array();        
+        return $user_data_exp;
+    }
+
+    public function set_user_activity($userid,$activity_participate = "",$activity_org = "",$activity_start_date = "",$activity_end_date = "",$activity_desc = "",$activity_document = "",$edit_activity = 0)
+    {
+        if($edit_activity == 0)
+        {            
+            $data = array(
+                'user_id' => $userid,
+                'activity_participate' => $activity_participate,
+                'activity_org' => $activity_org,
+                'activity_start_date' => $activity_start_date,
+                'activity_end_date' => $activity_end_date,
+                'activity_desc' => $activity_desc,
+                'activity_file' => $activity_document,
+                'status' => '1',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $insert_id = $this->common->insert_data($data, 'job_user_extra_activity');
+            return $insert_id;
+        }
+        else
+        {
+            $data = array(
+                'activity_participate' => $activity_participate,
+                'activity_org' => $activity_org,
+                'activity_start_date' => $activity_start_date,
+                'activity_end_date' => $activity_end_date,
+                'activity_desc' => $activity_desc,
+                'activity_file' => $activity_document,
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_extra_activity', $edit_activity);
+            $this->db->update('job_user_extra_activity', $data);
+            return true;   
+        }
+    }
+
+    public function delete_user_activity($userid,$activity_id)    
+    {
+        $data = array(                
+                'status' => "0",
+                'modify_date' => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('user_id', $userid);
+            $this->db->where('id_extra_activity', $activity_id);
+            $this->db->update('job_user_extra_activity', $data);
+            return true;
+    }
+
+    public function get_user_activity($userid)
+    {
+        $this->db->select("juea.*,DATE_FORMAT(CONCAT(juea.activity_start_date,'-1'),'%b %Y') as start_date_str, DATE_FORMAT(CONCAT(juea.activity_end_date,'-1'),'%b %Y') as end_date_str")->from("job_user_extra_activity juea");
+        $this->db->where('juea.user_id', $userid);
+        $this->db->where('juea.status', '1');
+        $this->db->order_by('juea.created_date',"desc");
+        $query = $this->db->get();
+        $user_data_lang = $query->result_array();        
+        return $user_data_lang;
+    }
 }
