@@ -130,8 +130,9 @@
     </div>
 	<div class="all-contact-cus ">
 		<div class="all-contact">
-            <h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_self">All</a></h4>
+            
             <div class="all-user-list">
+			<h4>Contacts<a href="<?php echo base_url('contact-request') ?>" class="pull-right" target="_self">All</a></h4>
                 <data-owl-carousel class="owl-carousel" data-options="">
                     <div owl-carousel-item="" ng-repeat="contact in contactSuggetion" class="item">
                         <div class="item" id="item-{{contact.user_id}}">
